@@ -1,0 +1,37 @@
+{
+  "hero": {
+    "title": "UFC 324 Main Card Announced",
+    "subtitle": "Two major title fights headline the event.",
+    "image": "images/UFC-311.jpeg",
+    "link": "https://www.espn.com/mma/"
+  },
+  "trending": [
+    {
+      "id": 1,
+      "title": "Islam vs Arman 2 Official",
+      "source": "ESPN MMA",
+      "image": "images/Islam Arman.jpeg",
+      "link": "https://www.espn.com/mma/"
+    },
+    {
+      "id": 2,
+      "title": "Ilia vs Max Heats Up",
+      "source": "MMA Fighting",
+      "image": "images/Illia Max 308.jpeg",
+      "link": "https://www.espn.com/mma/"
+    },
+    {
+      "id": 3,
+      "title": "Gaethje Teases Retirement?",
+      "source": "The Athletic",
+      "image": "images/Justin Gaethje.jpeg",
+      "link": "https://www.espn.com/mma/"
+    }
+  ],
+  "today": [
+    "Gaethje hints at retirement",
+    "Ilia and Max go back and forth at UFC 308 presser",
+    "Islam calls out Usman for first defence",
+    "UFC 325 rumored for Perth, Australia"
+  ]
+}

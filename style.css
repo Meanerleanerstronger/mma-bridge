@@ -16,18 +16,18 @@ h1, h2, h3 {
 .navbar {
   width: 100%;
   background: #111;
-  padding: 26px 0;
+  padding: 30px 0;
   border-bottom: 1px solid #222;
 }
 
 .nav-container {
-  width: 1100px;
-  margin: 0 auto;
+  width: 100%;
+  padding: 0 32px;
   display: flex;
   align-items: center;
-  gap: 40px;
 }
 
+/* LOGO */
 .logo {
   display: flex;
   align-items: center;
@@ -52,50 +52,84 @@ h1, h2, h3 {
   color: cyan;
 }
 
+/* NAV LINKS */
 .nav-links {
+  margin: 0 auto;
   display: flex;
-  gap: 45px;
+  gap: 48px;
   list-style: none;
+  padding: 0;
 }
 
-.nav-links li {
-  cursor: pointer;
-  font-weight: 700;
-  letter-spacing: 0.3px;
-
+/* Make links NOT default blue/purple */
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 19px;
+  letter-spacing: 0.6px;
+  opacity: 0.9;
 }
 
-.nav-links li:hover {
+.nav-links li a:hover {
   color: cyan;
+  opacity: 1;
 }
 
-/* SEARCH */
+/* SEARCH (form-safe, clean icon) */
 .search-box {
-  margin-left: auto;
+  margin: 0;              /* kill form default spacing */
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .search-box input {
-  background: #1b1b1b;
-  border: 1px solid #333;
-  padding: 8px 35px 8px 12px;
-  border-radius: 8px;
-  color: white;
-  width: 180px;
+  width: 360px;
+  padding: 13px 48px 13px 20px;
+  border-radius: 999px;
+  border: 1px solid #2a2a2a;
+  background: #141414;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+}
+
+.search-box input::placeholder {
+  color: #777;
+}
+
+.search-box input:focus {
+  border-color: cyan;
+  box-shadow: 0 0 0 4px rgba(0, 255, 255, 0.18);
+  background: #161616;
 }
 
 .search-icon {
   position: absolute;
-  right: 10px;
+  right: 14px;
   top: 50%;
   transform: translateY(-50%);
-  color: #aaa;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-icon svg {
+  width: 19px;
+  height: 19px;
+  stroke: rgba(255,255,255,0.9);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 /* HERO */
 .hero {
-  height: 360px;
   background: url('images/UFC-311.jpeg') center/cover no-repeat;
+  height: 360px;
   display: flex;
   align-items: flex-end;
   padding: 30px;
@@ -126,11 +160,12 @@ h1, h2, h3 {
 
 /* MAIN CONTENT */
 .content-container {
-  width: 1100px;
+  width: min(1100px, 92%);
   margin: 40px auto;
   display: flex;
   gap: 30px;
 }
+
 
 .left-column {
   flex: 2;
@@ -199,7 +234,7 @@ h1, h2, h3 {
 }
 
 /* IMAGES */
-.story1 { background-image: url('images/Islam Arman.jpeg'); }
+.story1 { background-image: url('images/324 main event.jpeg'); }
 .story2 { background-image: url('images/Illia Max 308.jpeg'); }
 .story3 { background-image: url('images/Justin Gaethje.jpeg'); }
 
@@ -226,8 +261,9 @@ h1, h2, h3 {
 .sidebar li {
   margin-bottom: 12px;
   color: #ccc;
+}
 
-  /* ARTICLE PAGE */
+/* ARTICLE PAGE */
 .article-hero {
   width: 100%;
   padding: 80px 0 40px;
@@ -324,11 +360,13 @@ h1, h2, h3 {
 .back-link:hover {
   text-decoration: underline;
 }
+
 .card-link {
   text-decoration: none;
   color: inherit;
   flex: 1;
 }
+
 .section-title {
   font-family: 'Montserrat', sans-serif;
   font-size: 18px;
@@ -375,8 +413,4 @@ h1, h2, h3 {
 
 .event-card a:hover {
   text-decoration: underline;
-}
-
-
-
 }

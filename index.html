@@ -26,22 +26,30 @@
       </div>
 
       <ul class="nav-links">
-        <li>Trending</li>
+        <li><a href="index.html">Trending</a></li>
         <li><a href="events.html">Upcoming Events</a></li>
-     <li>Lucas Bot</li>
+        <li><a href="#">Lucas Bot</a></li>
       </ul>
 
-      <div class="search-box">
-        <input type="text" placeholder="Search fighters, events..." />
-        <span class="search-icon">🔍</span>
-      </div>
+      <!-- SEARCH (NOW A FORM so Enter works) -->
+      <form class="search-box" id="site-search-form" action="results.html" method="GET">
+        <input id="site-search" name="q" type="text" placeholder="Search fighters, events..." autocomplete="off" />
+        <span class="search-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M21 21l-4.3-4.3m1.8-5.2a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </span>
+      </form>
 
     </div>
   </nav>
+  
+  <div id="top-fighters"></div>
+
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-content">
+    <div class="hero-content" id="hero-content">
       <h1>UFC 324 Main Card Announced</h1>
       <p>Two major title fights headline the event.</p>
     </div>
@@ -54,33 +62,29 @@
     <div class="left-column">
 
       <h3 class="section-title">Trending Today</h3>
-  
-      <div class="card-row">
-  
 
-        <a href="https://www.espn.com/mma/" target="_blank" class="card-link">
+      <div class="card-row" id="trending-cards">
+
+        <a href="https://www.espn.com/mma/" target="_blank" class="card-link" data-title="Paddy vs Gaethje Official">
           <div class="medium-card">
             <div class="card-image story1"></div>
-            <h2>Islam vs Arman 2 Official</h2>
+            <h2>Paddy vs Gaethje Offical</h2>
           </div>
         </a>
-        
 
-        <a href="https://www.espn.com/mma/" target="_blank" class="card-link">
+        <a href="https://www.espn.com/mma/" target="_blank" class="card-link" data-title="Ilia vs Max Heats Up">
           <div class="medium-card">
             <div class="card-image story2"></div>
             <h2>Ilia vs Max Heats Up</h2>
           </div>
         </a>
-        
 
-        <a href="https://www.espn.com/mma/" target="_blank" class="card-link">
+        <a href="https://www.espn.com/mma/" target="_blank" class="card-link" data-title="Gaethje Teases Retirement">
           <div class="medium-card">
             <div class="card-image story3"></div>
             <h2>Gaethje Teases Retirement?</h2>
           </div>
         </a>
-        
 
       </div>
     </div>
@@ -88,7 +92,7 @@
     <!-- SIDEBAR -->
     <div class="sidebar">
       <h3>TODAY IN MMA</h3>
-      <ul>
+      <ul id="today-list">
         <li>Gaethje hints at retirement</li>
         <li>Ilia and Max go back and forth at UFC 308 Presser</li>
         <li>Islam calls out Usman for 1st defence</li>
@@ -97,6 +101,8 @@
     </div>
 
   </div>
+
+  <script src="script.js"></script>
 
 </body>
 </html>

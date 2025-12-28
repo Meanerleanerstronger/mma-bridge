@@ -1,0 +1,9 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer octagon frame -->
+  <path d="M7 2h10l5 5v10l-5 5H7l-5-5V7z" fill="none" stroke="black" stroke-width="2"></path>
+
+  <!-- Mesh lines -->
+  <path d="M4 8l16 0M4 12l16 0M4 16l16 0" stroke="black" stroke-width="1.4" stroke-linecap="round"></path>
+
+  <path d="M8 4l0 16M12 4l0 16M16 4l0 16" stroke="black" stroke-width="1.4" stroke-linecap="round"></path>
+</svg>

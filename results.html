@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MMA Bridge | Search</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body style="background:#0f0f0f; color:white;">
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+
+      <div class="logo">
+        <span class="logo-mma">MMA</span>
+        <img src="images/Cage.svg" class="logo-icon" alt="cage icon">
+        <span class="logo-bridge">Bridge</span>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="index.html">Trending</a></li>
+        <li><a href="events.html">Upcoming Events</a></li>
+        <li><a href="#">Lucas Bot</a></li>
+      </ul>
+
+      <form class="search-box" id="results-search-form" action="results.html" method="GET">
+        <input id="results-search" name="q" type="text" placeholder="Search fighters, events..." autocomplete="off" />
+        <span class="search-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M21 21l-4.3-4.3m1.8-5.2a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </span>
+      </form>
+
+    </div>
+  </nav>
+
+  <div class="content-container">
+    <div class="left-column">
+      <h3 class="section-title" id="results-title">Search Results</h3>
+
+      <div class="card-row" id="results-cards"></div>
+
+      <div style="margin-top: 30px;">
+        <h3 class="section-title">Today in MMA</h3>
+        <ul id="results-today" style="list-style:none; padding:0; color:#ccc;"></ul>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <h3>TIP</h3>
+      <ul>
+        <li>Try: “paddy”, “ilia”, “gaethje”, “ufc 325”</li>
+      </ul>
+      <a class="back-link" href="index.html">← Back to home</a>
+    </div>
+  </div>
+
+  <!-- IMPORTANT: this must match the filename exactly -->
+  <script defer src="./results.js"></script>
+
+</body>
+</html>
