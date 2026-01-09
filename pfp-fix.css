@@ -1,0 +1,59 @@
+/* =========================
+   PFP ONLY – SAFE OVERRIDES
+========================= */
+
+.pfp-page .last5-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pfp-page .bout {
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(0,0,0,0.35);
+}
+
+.pfp-page .bout.win {
+  background: rgba(0,255,140,0.10);
+  border-color: rgba(0,255,140,0.35);
+}
+
+.pfp-page .bout.loss {
+  background: rgba(255,70,70,0.10);
+  border-color: rgba(255,70,70,0.35);
+}
+
+.pfp-page .bout-top {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.pfp-page .wl {
+  width: 26px;
+  height: 22px;
+  border-radius: 8px;
+  font-weight: 900;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pfp-page .wl.win {
+  background: rgba(0,255,140,0.25);
+  color: #caffea;
+}
+
+.pfp-page .wl.loss {
+  background: rgba(255,70,70,0.25);
+  color: #ffdada;
+}
+
+.pfp-page .bout-date {
+  font-size: 12px;
+  opacity: 0.6;
+}

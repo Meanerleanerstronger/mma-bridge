@@ -1,58 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Upcoming Events | MMA Bridge</title>
+  <title>MMA Bridge | Upcoming Events</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Pacifico&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
-  <!-- NAVBAR -->
+  <!-- NAVBAR (MATCHES INDEX) -->
   <nav class="navbar">
     <div class="nav-container">
 
-      <div class="logo">
+      <a class="logo" href="index.html" style="text-decoration:none;">
         <span class="logo-mma">MMA</span>
         <img src="images/Cage.svg" class="logo-icon" alt="cage icon">
         <span class="logo-bridge">Bridge</span>
-      </div>
+      </a>
 
       <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html">Trending</a></li>
         <li><a href="events.html">Upcoming Events</a></li>
-         <li>Lucas Bot</li>
+        <li><a href="pfp.html" class="nav-pfp">PFP</a></li>
+        <li><a href="#">Lucas Bot</a></li>
       </ul>
+
+      <!-- SEARCH (SAME AS INDEX so spacing stays perfect) -->
+      <form class="search-box" id="site-search-form" action="results.html" method="GET">
+        <input id="site-search" name="q" type="text" placeholder="Search fighters, events..." autocomplete="off" />
+        <span class="search-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M21 21l-4.3-4.3m1.8-5.2a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </span>
+      </form>
 
     </div>
   </nav>
 
-  <!-- EVENTS -->
-  <main class="events-page">
+  <!-- PAGE -->
+  <main class="page">
+    <header class="page-header">
+      <h1 class="page-title">Upcoming Events</h1>
+      <p class="page-sub">Click an event. Expand main card or prelims.</p>
+    </header>
 
-    <h1 class="events-title">Upcoming Events</h1>
-
-    <div class="event-card">
-      <h2>UFC 324</h2>
-      <p class="event-meta">March 2025 · Las Vegas, NV</p>
-      <p><strong>Main Event:</strong> Islam Makhachev vs Arman Tsarukyan 2</p>
-      <p><strong>Co-Main:</strong> Leon Edwards vs Belal Muhammad</p>
-      <a href="https://www.espn.com/mma/" target="_blank">View on ESPN →</a>
-    </div>
-
-    <div class="event-card">
-      <h2>UFC Fight Night</h2>
-      <p class="event-meta">April 2025 · London, UK</p>
-      <p><strong>Main Event:</strong> Tom Aspinall vs Curtis Blaydes</p>
-      <p><strong>Co-Main:</strong> Molly McCann vs Taila Santos</p>
-      <a href="https://www.espn.com/mma/" target="_blank">View on ESPN →</a>
-    </div>
-
+    <section id="events-list" class="events-list">
+      <!-- JS injects events here -->
+    </section>
   </main>
 
+  <!-- Fighter Panel (drawer) -->
+  <div id="fightDrawer" class="drawer" aria-hidden="true">
+    <div class="drawer-backdrop" id="drawerClose"></div>
+
+    <aside class="drawer-panel">
+      <div class="drawer-top">
+        <div class="drawer-title" id="drawerTitle">Fight</div>
+        <button class="drawer-x" id="drawerX" aria-label="Close">✕</button>
+      </div>
+
+      <div class="drawer-content" id="drawerContent">
+        <!-- JS injects content -->
+      </div>
+    </aside>
+  </div>
+
+  <script src="events.js"></script>
 </body>
 </html>
