@@ -1,3 +1,11 @@
+// ==============================================
+// MMA BRIDGE - EVENTS PAGE (UPDATED)
+// ==============================================
+
+import CONFIG, { debugLog } from './config.js';
+import API from './api.js';
+import { showLoading, showError } from './loading.js';
+
 document.addEventListener("DOMContentLoaded", async () => {
   const wrap = document.getElementById("events-list");
 
@@ -36,6 +44,95 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (e.key === "Escape") closeDrawer();
   });
 
+  // -----------------------
+  // Fighters DB (read-only)
+  // -----------------------
+  let fightersDB = {};
+
+  function slugifyName(name) {
+    return (name || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/['']/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .replace(/-+/g, "-");
+  }
+
+  function getFighterByName(name) {
+    return fightersDB[slugifyName(name)] || null;
+  }
+
+  function methodIcon(method) {
+    const m = (method || "").toUpperCase();
+    if (m.includes("SUB")) return "⛓️";
+    if (m.includes("KO") || m.includes("TKO")) return "🥊";
+    if (m.includes("UD") || m.includes("SD") || m.includes("MD")) return "🧾";
+    return "•";
+  }
+
+  function renderFormColumn(name) {
+    const f = getFighterByName(name);
+
+    if (!f) {
+      return `
+        <div class="form-col">
+          <div class="form-head">
+            <div class="form-name">${escapeHtml(name)}</div>
+            <div class="form-record">—</div>
+          </div>
+          <div class="hint">No data yet</div>
+        </div>
+      `;
+    }
+
+    const fights = Array.isArray(f.last5) ? f.last5.slice(0, 5) : [];
+
+    return `
+      <div class="form-col">
+        <div class="form-head">
+          <div class="form-name">${escapeHtml(f.name)}</div>
+          <div class="form-record">${escapeHtml(f.record || "—")}</div>
+        </div>
+
+        <div class="form-list">
+          ${
+            fights.length
+              ? fights
+                  .map(
+                    (x) => `
+                  <div class="form-row">
+                    <span class="form-badge ${x.result === "W" ? "win" : "loss"}">${escapeHtml(x.result)}</span>
+                    <span class="form-icon">${methodIcon(x.method)}</span>
+                    <span class="form-opp">vs ${escapeHtml(x.opponent)}</span>
+                    <span class="form-date">${escapeHtml(x.date || "")}</span>
+                  </div>
+                `
+                  )
+                  .join("")
+              : `<div class="hint">No recent fights listed</div>`
+          }
+        </div>
+      </div>
+    `;
+  }
+
+  function renderRecentFormDual(a, b) {
+    return `
+      <div class="drawer-card">
+        <div class="drawer-card-title">Recent Form</div>
+        <div class="form-split">
+          ${renderFormColumn(a)}
+          ${renderFormColumn(b)}
+        </div>
+      </div>
+    `;
+  }
+
+  // -----------------------
+  // Existing events helpers
+  // -----------------------
   function iconRow(f) {
     const icons = [];
     if (f.titleFight) icons.push(`<span class="ico cup" title="Title fight">🏆</span>`);
@@ -43,7 +140,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     return icons.join("");
   }
 
-  // ONLY label if f.slot is explicitly set
   function slotLabel(f) {
     if (f.slot === "main") return `<div class="slot main-slot">MAIN EVENT</div>`;
     if (f.slot === "comain") return `<div class="slot comain-slot">CO-MAIN EVENT</div>`;
@@ -225,10 +321,12 @@ document.addEventListener("DOMContentLoaded", async () => {
               </div>
             </div>
 
+            ${renderRecentFormDual(f.a, f.b)}
+
             <div class="drawer-card">
               <div class="drawer-card-title">Prediction slot</div>
               <div class="hint">
-                Later: odds, “who wins”, and a tiny breakdown.
+                Later: odds, "who wins", and a tiny breakdown.
               </div>
             </div>
           </div>
@@ -239,24 +337,42 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  // ==============================================
+  // UPDATED LOADING SECTION
+  // ==============================================
   try {
-    const res = await fetch("events.json");
-    if (!res.ok) throw new Error(`events.json not found (${res.status})`);
-    const events = await res.json();
+    // Show loading state
+    showLoading(wrap, 'Loading events...');
+    
+    debugLog('Loading events page...');
+
+    // Load fighters DB first (safe if missing)
+
+    // Load fighters DB first (safe if missing)
+    try {
+      fightersDB = await API.getFighters();
+      debugLog('Fighters loaded:', Object.keys(fightersDB).length);
+    } catch (error) {
+      debugLog('Fighters DB failed to load (non-critical)');
+      fightersDB = {};
+    }
+
+    // Load events using new API
+    const events = await API.getUpcomingEvents();
+    debugLog('Events loaded:', events.length);
 
     if (!Array.isArray(events) || !events.length) {
-      wrap.innerHTML = `<div class="empty big">No events loaded. Your JSON is empty or broken.</div>`;
+      wrap.innerHTML = `<div class="empty big">No events loaded. Your data source is empty.</div>`;
       return;
     }
 
     wrap.innerHTML = events.map(eventAccordion).join("");
     bindFightClicks();
+    
+    debugLog('Events page ready!');
+
   } catch (err) {
-    console.error(err);
-    wrap.innerHTML = `
-      <div class="empty big">
-        Could not load events. Check that <code>events.json</code> is in the same folder as <code>events.html</code>.
-      </div>
-    `;
+    console.error('Error loading events:', err);
+    showError(wrap, 'Failed to load events. Please try again.');
   }
 });

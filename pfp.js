@@ -1,3 +1,11 @@
+// ==============================================
+// MMA BRIDGE - PFP PAGE (UPDATED)
+// ==============================================
+
+import CONFIG, { debugLog } from './config.js';
+import API from './api.js';
+import { showLoading, showError } from './loading.js';
+
 document.addEventListener("DOMContentLoaded", async () => {
   const drawer = document.getElementById("fightDrawer");
   const drawerClose = document.getElementById("drawerClose");
@@ -69,46 +77,61 @@ document.addEventListener("DOMContentLoaded", async () => {
     `;
   }
 
-  const fighters = await fetch("fighters.json").then(r => r.json());
+  // ==============================================
+  // UPDATED LOADING SECTION
+  // ==============================================
+  try {
+    debugLog('Loading PFP page...');
 
-  document.querySelectorAll("[data-fighter]").forEach(card => {
-    card.onclick = e => {
-      e.preventDefault();
-      const f = fighters[card.dataset.fighter];
-      if (!f) return;
+    const fighters = await API.getFighters();
+    debugLog('Fighters loaded:', Object.keys(fighters).length);
 
-      openDrawer(f.name, `
-        <div class="drawer-hero">
-          <div class="drawer-a">${escapeHtml(f.name)}</div>
-          <div class="drawer-pills">
-            <span class="pill">${escapeHtml(f.flag)} ${escapeHtml(f.country)}</span>
-            <span class="pill pill-dim">${escapeHtml(f.record)}</span>
-            <span class="pill">${escapeHtml(f.division)}</span>
-          </div>
-        </div>
+    document.querySelectorAll("[data-fighter]").forEach(card => {
+      card.onclick = e => {
+        e.preventDefault();
+        const f = fighters[card.dataset.fighter];
+        if (!f) return;
 
-        <div class="drawer-card">
-          ${renderLast5(f.last5)}
-        </div>
-
-        <div class="drawer-card">
-          <div class="drawer-card-title">Profile</div>
-          <div class="stats-grid">
-            <div class="stat-row">
-              <div class="stat-label">Stance</div><div>${escapeHtml(f.stance)}</div>
-            </div>
-            <div class="stat-row">
-              <div class="stat-label">Age</div><div>${escapeHtml(f.age)}</div>
-            </div>
-            <div class="stat-row">
-              <div class="stat-label">Height</div><div>${escapeHtml(f.height)}</div>
-            </div>
-            <div class="stat-row">
-              <div class="stat-label">Reach</div><div>${escapeHtml(f.reach)}</div>
+        openDrawer(f.name, `
+          <div class="drawer-hero">
+            <div class="drawer-a">${escapeHtml(f.name)}</div>
+            <div class="drawer-pills">
+              <span class="pill">${escapeHtml(f.flag)} ${escapeHtml(f.country)}</span>
+              <span class="pill pill-dim">${escapeHtml(f.record)}</span>
+              <span class="pill">${escapeHtml(f.division)}</span>
             </div>
           </div>
-        </div>
-      `);
-    };
-  });
+
+          <div class="drawer-card">
+            ${renderLast5(f.last5)}
+          </div>
+
+          <div class="drawer-card">
+            <div class="drawer-card-title">Profile</div>
+            <div class="stats-grid">
+              <div class="stat-row">
+                <div class="stat-label">Stance</div><div>${escapeHtml(f.stance)}</div>
+              </div>
+              <div class="stat-row">
+                <div class="stat-label">Age</div><div>${escapeHtml(f.age)}</div>
+              </div>
+              <div class="stat-row">
+                <div class="stat-label">Height</div><div>${escapeHtml(f.height)}</div>
+              </div>
+              <div class="stat-row">
+                <div class="stat-label">Reach</div><div>${escapeHtml(f.reach)}</div>
+              </div>
+            </div>
+          </div>
+        `);
+      };
+    });
+
+    debugLog('PFP page ready!');
+
+  } catch (error) {
+    console.error('Error loading fighters:', error);
+    const container = document.querySelector('.pfp-grid') || document.body;
+    showError(container, 'Failed to load fighters');
+  }
 });

@@ -1,0 +1,10 @@
+{
+  "type": "module",
+  "dependencies": {
+    "ajv": "^8.17.1"
+  },
+  "scripts": {
+    "validate": "node scripts/validate-json.js"
+  }
+}
+ 

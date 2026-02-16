@@ -18,6 +18,7 @@
       { "opponent": "Alexander Volkanovski", "result": "W", "method": "UD", "round": "5", "date": "2023-02-11" }
     ]
   },
+
   "ilia-topuria": {
     "name": "Ilia Topuria",
     "nickname": "El Matador",
@@ -30,13 +31,14 @@
     "reach": "69\"",
     "age": "28",
     "last5": [
-      { "opponent": "Charles Oliveira", "result": "W", "method": "KO/TKO", "round": "1", "date": "2025-05-xx" },
+      { "opponent": "Charles Oliveira", "result": "W", "method": "KO/TKO", "round": "1", "date": "2025-05-28" },
       { "opponent": "Alexander Volkanovski", "result": "W", "method": "KO/TKO", "round": "2", "date": "2024-02-17" },
       { "opponent": "Josh Emmett", "result": "W", "method": "UD", "round": "5", "date": "2023-06-24" },
       { "opponent": "Bryce Mitchell", "result": "W", "method": "SUB", "round": "2", "date": "2022-12-10" },
       { "opponent": "Jai Herbert", "result": "W", "method": "KO/TKO", "round": "2", "date": "2022-03-19" }
     ]
   },
+
   "khamzat-chimaev": {
     "name": "Khamzat Chimaev",
     "nickname": "",
@@ -56,6 +58,7 @@
       { "opponent": "Gerald Meerschaert", "result": "W", "method": "SUB", "round": "1", "date": "2020-09-19" }
     ]
   },
+
   "alex-pereira": {
     "name": "Alex Pereira",
     "nickname": "",
@@ -75,6 +78,7 @@
       { "opponent": "Jan Blachowicz", "result": "W", "method": "UD", "round": "3", "date": "2023-07-29" }
     ]
   },
+
   "alexander-volkanovski": {
     "name": "Alexander Volkanovski",
     "nickname": "",
@@ -94,6 +98,7 @@
       { "opponent": "Max Holloway", "result": "W", "method": "UD", "round": "5", "date": "2022-07-02" }
     ]
   },
+
   "petr-yan": {
     "name": "Petr Yan",
     "nickname": "",
@@ -103,6 +108,7 @@
     "division": "Bantamweight",
     "last5": []
   },
+
   "merab-dvalishvili": {
     "name": "Merab Dvalishvili",
     "nickname": "",
@@ -112,6 +118,7 @@
     "division": "Bantamweight",
     "last5": []
   },
+
   "tom-aspinall": {
     "name": "Tom Aspinall",
     "nickname": "",
@@ -121,6 +128,7 @@
     "division": "Heavyweight",
     "last5": []
   },
+
   "alexandre-pantoja": {
     "name": "Alexandre Pantoja",
     "nickname": "",
@@ -130,6 +138,7 @@
     "division": "Flyweight",
     "last5": []
   },
+
   "max-holloway": {
     "name": "Max Holloway",
     "nickname": "",
@@ -139,6 +148,7 @@
     "division": "Featherweight",
     "last5": []
   },
+
   "dricus-du-plessis": {
     "name": "Dricus Du Plessis",
     "nickname": "",
@@ -148,6 +158,7 @@
     "division": "Middleweight",
     "last5": []
   },
+
   "joshua-van": {
     "name": "Joshua Van",
     "nickname": "",
@@ -157,6 +168,7 @@
     "division": "Flyweight",
     "last5": []
   },
+
   "magomed-ankalaev": {
     "name": "Magomed Ankalaev",
     "nickname": "",
@@ -166,6 +178,7 @@
     "division": "Light Heavyweight",
     "last5": []
   },
+
   "jack-della-maddalena": {
     "name": "Jack Della Maddalena",
     "nickname": "",
@@ -175,6 +188,7 @@
     "division": "Welterweight",
     "last5": []
   },
+
   "arman-tsarukyan": {
     "name": "Arman Tsarukyan",
     "nickname": "",
@@ -183,5 +197,25 @@
     "record": "22-3",
     "division": "Lightweight",
     "last5": []
+  },
+
+  "paddy-pimblett": {
+    "name": "Paddy Pimblett",
+    "nickname": "The Baddy",
+    "country": "England",
+    "flag": "🇬🇧",
+    "record": "23-3",
+    "division": "Lightweight",
+    "stance": "Orthodox",
+    "height": "5'10\"",
+    "reach": "73\"",
+    "age": "30",
+    "last5": [
+      { "opponent": "Michael Chandler", "result": "W", "method": "TKO", "round": "3", "date": "2025-04-12" },
+      { "opponent": "Bobby Green", "result": "W", "method": "SUB", "round": "1", "date": "2024-07-27" },
+      { "opponent": "Tony Ferguson", "result": "W", "method": "DEC", "round": "3", "date": "2023-12-16" },
+      { "opponent": "Jared Gordon", "result": "W", "method": "DEC", "round": "3", "date": "2022-12-10" },
+      { "opponent": "Jordan Leavitt", "result": "W", "method": "SUB", "round": "2", "date": "2022-07-23" }
+    ]
   }
 }

@@ -1,38 +1,49 @@
+// ==============================================
+// MMA BRIDGE - MAIN SCRIPT (UPDATED)
+// ==============================================
+
+import CONFIG, { debugLog } from './config.js';
+import API from './api.js';
+import { showLoading, showError } from './loading.js';
+
 // ===== MAIN =====
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  debugLog('MMA Bridge loaded', `Environment: ${CONFIG.ENV}`);
+
   // ===== NEWS JSON =====
-  fetch("./data/news.json")
-    .then(response => response.json())
-    .then(data => {
-      console.log("NEWS JSON LOADED:", data);
-      // If you render news cards somewhere, do it here.
-    })
-    .catch(error => {
-      console.error("Error loading news:", error);
-    });
+  try {
+    const data = await API.getNews();
+    debugLog("NEWS JSON LOADED:", data);
+    // If you render news cards somewhere, do it here.
+  } catch (error) {
+    console.error("Error loading news:", error);
+  }
 
   // ===== TOP FIGHTERS RENDER =====
   const topFightersContainer = document.getElementById("top-fighters");
   if (topFightersContainer) {
-    fetch("./data/top_fighters.json")
-      .then(res => res.json())
-      .then(fighters => {
-        topFightersContainer.innerHTML = "";
-        fighters.forEach(f => {
-          const div = document.createElement("div");
-          div.className = "fighter-card";
-          div.innerHTML = `
-            <h3>${f.name}</h3>
-            <p>${f.weight}</p>
-            <p>${f.record}</p>
-            <p>Wins: ${f.wins}</p>
-          `;
-          topFightersContainer.appendChild(div);
-        });
-      })
-      .catch(err => {
-        console.error("Top fighters failed to load", err);
+    try {
+      // Show loading spinner
+      showLoading(topFightersContainer, 'Loading fighters...');
+      
+      const fighters = await API.getPFPRankings();
+      
+      topFightersContainer.innerHTML = "";
+      fighters.forEach(f => {
+        const div = document.createElement("div");
+        div.className = "fighter-card";
+        div.innerHTML = `
+          <h3>${f.name}</h3>
+          <p>${f.weight}</p>
+          <p>${f.record}</p>
+          <p>Wins: ${f.wins}</p>
+        `;
+        topFightersContainer.appendChild(div);
       });
+    } catch (err) {
+      console.error("Top fighters failed to load", err);
+      showError(topFightersContainer, 'Failed to load fighters');
+    }
   }
 
   // ===== SEARCH (LIVE FILTER + ENTER NAV) =====
@@ -41,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const cardsWrap = document.getElementById("trending-cards");
   const todayList = document.getElementById("today-list");
 
-  // If these are missing on this page, search doesn't run. That’s normal.
+  // If these are missing on this page, search doesn't run. That's normal.
   if (!form || !input) return;
 
   const cardLinks = cardsWrap
@@ -89,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const cleaned = input.value.trim();
 
     if (!cleaned) {
-      e.preventDefault(); // don’t go to results page with empty query
+      e.preventDefault(); // don't go to results page with empty query
       filterPage("");
       return;
     }
