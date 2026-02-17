@@ -27,7 +27,8 @@ export const CONFIG = {
     // Base URL - change this when you deploy your backend
     BASE_URL: isDevelopment 
       ? 'http://localhost:5001/api'  // Local backend
-      : 'https://mmabridge-backend.onrender.com',  // Production API (change this!)
+      : 'https://mmabridge-backend.onrender.com/api',
+  // Production API (change this!)
     
     // Use mock data (local JSON files) or real API
     USE_MOCK: false,  // true = use JSON files, false = use API
