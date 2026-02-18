@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&family=Pacifico&display=swap" rel="stylesheet">
     <style>
+        
         /* Lucas Bot Page Specific Styles */
         .lucas-page {
             min-height: 100vh;
@@ -275,24 +276,29 @@
     </style>
 </head>
 <body>
-    <nav>
+    <!-- NAVBAR (MATCHES INDEX) -->
+    <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">
-                <span class="mma-text">MMA</span>
-                <span class="bridge-text">Bridge</span>
-            </div>
-            <ul class="nav-links">
-                <li><a href="index.html">Trending</a></li>
-                <li><a href="events.html">Upcoming Events</a></li>
-                <li><a href="pfp.html">PFP</a></li>
-                <li><a href="lucas.html" class="active">Lucas Bot</a></li>
-            </ul>
-            <div class="search-container">
-                <input type="text" placeholder="Search fighters, events...">
-            </div>
+    
+          <div class="logo">
+            <span class="logo-mma">MMA</span>
+            <img src="images/Cage.svg" class="logo-icon" alt="cage icon">
+            <span class="logo-bridge">Bridge</span>
+          </div>
+    
+          <ul class="nav-links">
+            <li><a href="index.html">Trending</a></li>
+            <li><a href="events.html">Upcoming Events</a></li>
+            <li><a href="pfp.html" class="nav-pfp">PFP</a></li>
+            <li><a href="lucas.html" class="active">Lucas Bot</a></li>
+          </ul>
+    
+          <div class="search-container">
+            <input type="text" placeholder="Search fighters, events...">
+          </div>
+    
         </div>
-    </nav>
-
+  </nav>
     <div class="lucas-page">
         <div class="lucas-container">
             <div class="lucas-header">
@@ -481,6 +487,10 @@
     </script>
 
     <!-- Still load chat widget for other pages when navigating -->
-    <script src="chat.js"></script>
+    <script src="./script.js"></script>
+<script src="./results.js"></script>
+<script src="./chat.js"></script>
+    
+
 </body>
 </html>
