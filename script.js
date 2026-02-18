@@ -1,5 +1,5 @@
 // ==============================================
-// MMA BRIDGE - MAIN SCRIPT (UPDATED)
+// MMA BRIDGE - MAIN SCRIPT (UPDATED WITH NEWS)
 // ==============================================
 
 import CONFIG, { debugLog } from './config.js';
@@ -10,20 +10,13 @@ import { showLoading, showError } from './loading.js';
 document.addEventListener("DOMContentLoaded", async () => {
   debugLog('MMA Bridge loaded', `Environment: ${CONFIG.ENV}`);
 
-  // ===== NEWS JSON =====
-  try {
-    const data = await API.getNews();
-    debugLog("NEWS JSON LOADED:", data);
-    // If you render news cards somewhere, do it here.
-  } catch (error) {
-    console.error("Error loading news:", error);
-  }
+  // ===== RENDER NEWS =====
+  await renderNews();
 
   // ===== TOP FIGHTERS RENDER =====
   const topFightersContainer = document.getElementById("top-fighters");
   if (topFightersContainer) {
     try {
-      // Show loading spinner
       showLoading(topFightersContainer, 'Loading fighters...');
       
       const fighters = await API.getPFPRankings();
@@ -47,12 +40,95 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // ===== SEARCH (LIVE FILTER + ENTER NAV) =====
+  setupSearch();
+});
+
+// ==============================================
+// RENDER NEWS FROM API
+// ==============================================
+async function renderNews() {
+  try {
+    const news = await API.getNews();
+    debugLog("NEWS API RESPONSE:", news);
+    
+    // Extract trending array
+    const articles = news.trending || news || [];
+    
+    if (!articles || articles.length === 0) {
+      console.warn('No news articles found');
+      return;
+    }
+
+    // Render trending cards (first 3 articles)
+    renderTrendingCards(articles.slice(0, 3));
+    
+    // Render sidebar list (first 4 articles)
+    renderSidebarList(articles.slice(0, 4));
+    
+  } catch (error) {
+    console.error("Error loading news:", error);
+  }
+}
+
+// ==============================================
+// RENDER TRENDING CARDS
+// ==============================================
+function renderTrendingCards(articles) {
+  const cardsContainer = document.getElementById('trending-cards');
+  if (!cardsContainer) return;
+  
+  cardsContainer.innerHTML = '';
+  
+  articles.forEach((article, index) => {
+    const card = document.createElement('a');
+    card.href = article.url || '#';
+    card.target = '_blank';
+    card.className = 'card-link';
+    card.setAttribute('data-title', article.title);
+    
+    // Use article image or fallback to story image
+    const imageStyle = article.imageUrl 
+      ? `background-image: url('${article.imageUrl}')` 
+      : '';
+    
+    card.innerHTML = `
+      <div class="medium-card">
+        <div class="card-image ${!article.imageUrl ? `story${index + 1}` : ''}" 
+             style="${imageStyle}">
+        </div>
+        <h2>${article.title}</h2>
+      </div>
+    `;
+    
+    cardsContainer.appendChild(card);
+  });
+}
+
+// ==============================================
+// RENDER SIDEBAR LIST
+// ==============================================
+function renderSidebarList(articles) {
+  const listContainer = document.getElementById('today-list');
+  if (!listContainer) return;
+  
+  listContainer.innerHTML = '';
+  
+  articles.forEach(article => {
+    const li = document.createElement('li');
+    li.textContent = article.title;
+    listContainer.appendChild(li);
+  });
+}
+
+// ==============================================
+// SETUP SEARCH
+// ==============================================
+function setupSearch() {
   const form = document.getElementById("site-search-form");
   const input = document.getElementById("site-search");
   const cardsWrap = document.getElementById("trending-cards");
   const todayList = document.getElementById("today-list");
 
-  // If these are missing on this page, search doesn't run. That's normal.
   if (!form || !input) return;
 
   const cardLinks = cardsWrap
@@ -69,14 +145,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   function filterPage(queryRaw) {
     const q = normalize(queryRaw);
 
-    // If empty: show everything
     if (!q) {
       cardLinks.forEach(a => (a.style.display = ""));
       todayItems.forEach(li => (li.style.display = ""));
       return;
     }
 
-    // Filter cards (use data-title first, fallback to h2 text)
     cardLinks.forEach(a => {
       const title =
         normalize(a.getAttribute("data-title")) ||
@@ -85,27 +159,23 @@ document.addEventListener("DOMContentLoaded", async () => {
       a.style.display = title.includes(q) ? "" : "none";
     });
 
-    // Filter sidebar list
     todayItems.forEach(li => {
       const text = normalize(li.textContent);
       li.style.display = text.includes(q) ? "" : "none";
     });
   }
 
-  // Live filter while typing
   input.addEventListener("input", (e) => filterPage(e.target.value));
 
-  // Clean submit (Enter)
   form.addEventListener("submit", (e) => {
     const cleaned = input.value.trim();
 
     if (!cleaned) {
-      e.preventDefault(); // don't go to results page with empty query
+      e.preventDefault();
       filterPage("");
       return;
     }
 
     input.value = cleaned;
-    // Let the form submit normally to results.html?q=cleaned
   });
-});
+}
