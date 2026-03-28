@@ -31,7 +31,7 @@ export const CONFIG = {
   // Production API (change this!)
     
     // Use mock data (local JSON files) or real API
-    USE_MOCK: false,  // true = use JSON files, false = use API
+    USE_MOCK: true,  // true = use JSON files, false = use API
     
     // Timeout for API requests (milliseconds)
     TIMEOUT: 10000,

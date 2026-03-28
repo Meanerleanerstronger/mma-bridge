@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="/favicon.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MMA Bridge | Rate Event</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Pacifico&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    body { background: #0e0e0e; }
+
+    /* ── Breadcrumb ── */
+    .review-nav {
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.35);
+    }
+    .review-nav a { color: cyan; text-decoration: none; }
+    .review-nav a:hover { text-decoration: underline; }
+
+    /* ── Layout ── */
+    .er-layout {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 32px 80px;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    /* ── Poster column ── */
+    .er-poster-col {}
+    .er-poster {
+      width: 100%;
+      border-radius: 8px;
+      display: block;
+      border: 1px solid #222;
+    }
+    .er-poster-placeholder {
+      width: 100%;
+      aspect-ratio: 2/3;
+      background: linear-gradient(160deg, #1c1c1c 0%, #111 100%);
+      border-radius: 8px;
+      border: 1px solid #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+    }
+
+    /* Community rating pill */
+    .er-community-pill {
+      margin-top: 12px;
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 6px;
+      padding: 10px 14px;
+      text-align: center;
+    }
+    .er-community-pill .pill-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 4px;
+    }
+    .er-community-pill .pill-val {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: cyan;
+    }
+    .er-community-pill .pill-count {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.3);
+      margin-top: 2px;
+    }
+
+    /* ── Main column ── */
+    .er-main {}
+    .er-event-type {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: cyan;
+      margin-bottom: 8px;
+    }
+    .er-event-name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+    .er-event-meta {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 32px;
+    }
+    .er-event-meta span { margin-right: 10px; }
+
+    /* ── Rating card ── */
+    .er-card {
+      background: #141414;
+      border: 1px solid #222;
+      border-radius: 10px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .er-card-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 16px;
+    }
+
+    /* Star rating */
+    .star-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .star-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 2rem;
+      line-height: 1;
+      padding: 0;
+      color: #333;
+      transition: color 0.12s, transform 0.1s;
+    }
+    .star-btn:hover,
+    .star-btn.lit { color: #f5c518; }
+    .star-btn:hover { transform: scale(1.15); }
+
+    .hype-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.4);
+      min-height: 20px;
+      margin-top: 4px;
+    }
+
+    /* FOTN list */
+    .fotn-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .fotn-fight-btn {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 6px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      width: 100%;
+      text-align: left;
+    }
+    .fotn-fight-btn:hover { border-color: rgba(0,255,255,0.3); background: #1e1e1e; }
+    .fotn-fight-btn.selected {
+      border-color: cyan;
+      background: rgba(0,255,255,0.06);
+    }
+    .fotn-fight-names {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 0.82rem;
+      color: #fff;
+    }
+    .fotn-fight-meta {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.35);
+    }
+    .fotn-lock-icon {
+      font-size: 0.85rem;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    .fotn-fight-btn.selected .fotn-lock-icon { opacity: 1; }
+    .fotn-slot-badge {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: cyan;
+      margin-right: 8px;
+    }
+
+    /* Submit */
+    .er-submit {
+      width: 100%;
+      padding: 13px;
+      border-radius: 8px;
+      background: cyan;
+      color: #000;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+      margin-top: 4px;
+    }
+    .er-submit:hover { opacity: 0.9; transform: translateY(-1px); }
+    .er-submit:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+    /* Success toast */
+    .er-toast {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,255,255,0.1);
+      border: 1px solid rgba(0,255,255,0.3);
+      border-radius: 6px;
+      padding: 12px 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: cyan;
+      margin-top: 12px;
+    }
+    .er-toast.show { display: flex; }
+
+    /* Error state */
+    .er-error {
+      text-align: center;
+      padding: 80px 20px;
+      color: rgba(255,255,255,0.3);
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .er-layout {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .er-poster-col {
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+      }
+      .er-poster, .er-poster-placeholder {
+        width: 110px;
+        flex-shrink: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a class="logo" href="index.html" style="text-decoration:none;">
+        <span class="logo-mma">MMA</span>
+        <img src="images/Cage.svg" class="logo-icon" alt="cage icon">
+        <span class="logo-bridge">Bridge</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Trending</a></li>
+        <li><a href="events.html">Upcoming Events</a></li>
+        <li><a href="pfp.html" class="nav-pfp">PFP</a></li>
+        <li><a href="reviews.html" class="nav-review active-nav">Review</a></li>
+        <li><a href="lucas.html">Lucas Bot</a></li>
+      </ul>
+      <form class="search-box" id="site-search-form" action="results.html" method="GET">
+        <input id="site-search" name="q" type="text" placeholder="Search fighters, events..." autocomplete="off" />
+        <span class="search-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M21 21l-4.3-4.3m1.8-5.2a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </span>
+      </form>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="review-nav">
+    <a href="reviews.html">← Reviews</a>
+    <span>/</span>
+    <span id="breadcrumbName">Event</span>
+  </div>
+
+  <!-- Main content injected by JS -->
+  <div id="erRoot"></div>
+
+  <script type="module" src="event-review.js"></script>
+  <script src="chat.js"></script>
+</body>
+</html>

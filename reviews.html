@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="/favicon.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MMA Bridge | Reviews</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Pacifico&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    body { background: #0a0a0a; }
+
+    /* ── HERO ── */
+    .rv-hero {
+      padding: 48px 40px 36px;
+      text-align: center;
+    }
+    .rv-hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #fff;
+      margin: 0 0 6px;
+    }
+    .rv-hero h1 span { color: cyan; }
+    .rv-hero p {
+      color: rgba(255,255,255,0.38);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      margin: 0 0 28px;
+    }
+    .rv-search-wrap {
+      max-width: 480px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .rv-search-wrap input {
+      width: 100%;
+      background: #161616;
+      border: 1px solid #2a2a2a;
+      border-radius: 8px;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.92rem;
+      padding: 11px 40px 11px 16px;
+      outline: none;
+      box-sizing: border-box;
+      transition: border-color 0.18s;
+    }
+    .rv-search-wrap input:focus { border-color: cyan; }
+    .rv-search-wrap input::placeholder { color: rgba(255,255,255,0.25); }
+    .rv-search-icon {
+      position: absolute; right: 13px; top: 50%;
+      transform: translateY(-50%);
+      color: rgba(255,255,255,0.3); pointer-events: none;
+    }
+    .rv-search-icon svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ── ROWS ── */
+    .rv-rows { padding: 20px 0 80px; }
+    .rv-row { margin-bottom: 52px; }
+
+    .rv-row-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      margin-bottom: 18px;
+    }
+    .rv-row-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.9);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .row-accent {
+      display: inline-block;
+      width: 3px; height: 16px;
+      background: cyan;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .rv-row-count {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.25);
+    }
+
+    /* Scroll container */
+    .rv-scroll-outer { position: relative; }
+    .rv-scroll {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding: 8px 40px 20px;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .rv-scroll::-webkit-scrollbar { display: none; }
+
+    /* Arrow buttons */
+    .rv-arrow {
+      position: absolute;
+      top: 50%; transform: translateY(-60%);
+      z-index: 10;
+      background: rgba(0,0,0,0.8);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #fff;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      transition: all 0.15s;
+      backdrop-filter: blur(6px);
+      opacity: 0.6;
+    }
+    .rv-arrow:hover { background: rgba(0,255,255,0.15); border-color: cyan; color: cyan; opacity: 1; }
+    .rv-arrow.left { left: 6px; }
+    .rv-arrow.right { right: 6px; }
+
+    /* ── PPV CARD ── */
+    .rv-card {
+      flex-shrink: 0;
+      cursor: pointer;
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #141414;
+      border: 1px solid #1e1e1e;
+      transition: transform 0.25s cubic-bezier(.22,1,.36,1), border-color 0.18s, box-shadow 0.25s;
+    }
+    .rv-card.ppv { width: 260px; height: 340px; }
+    .rv-card.fn  { width: 220px; height: 290px; }
+
+    .rv-card:hover {
+      transform: translateY(-8px) scale(1.025);
+      border-color: rgba(0,255,255,0.5);
+      box-shadow: 0 24px 56px rgba(0,0,0,0.7), 0 0 0 1px rgba(0,255,255,0.12);
+    }
+
+    /* Full bleed image */
+    .rv-card .card-poster {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transition: transform 0.4s cubic-bezier(.22,1,.36,1);
+    }
+    .rv-card:hover .card-poster { transform: scale(1.07); }
+
+    .rv-card .card-placeholder {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, #1a1a1a 0%, #0e0e0e 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+    }
+
+    /* Dark gradient — stronger at bottom like news cards */
+    .rv-card .card-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.95) 0%,
+        rgba(0,0,0,0.6) 35%,
+        rgba(0,0,0,0.1) 65%,
+        transparent 100%
+      );
+      z-index: 1;
+    }
+
+    /* Text overlaid at bottom */
+    .rv-card .card-info {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 14px 16px 18px;
+      z-index: 2;
+    }
+    .rv-card .card-name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 5px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.9);
+    }
+    .rv-card.ppv .card-name { font-size: 1.1rem; }
+    .rv-card .card-matchup {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.6);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.9);
+    }
+
+    /* Type badge top-left */
+    .rv-card .card-badge {
+      position: absolute;
+      top: 12px; left: 12px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 0.52rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border-radius: 4px;
+      backdrop-filter: blur(8px);
+      z-index: 3;
+    }
+    .rv-card.ppv .card-badge {
+      background: rgba(0,0,0,0.65);
+      border: 1px solid rgba(255,210,0,0.5);
+      color: #ffd700;
+    }
+    .rv-card.fn .card-badge {
+      background: rgba(0,0,0,0.65);
+      border: 1px solid rgba(0,255,255,0.35);
+      color: cyan;
+    }
+
+    /* Community rating badge top-right */
+    .rv-card .card-rating {
+      position: absolute;
+      top: 12px; right: 12px;
+      background: rgba(0,0,0,0.72);
+      border: 1px solid rgba(0,255,255,0.35);
+      color: cyan;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 0.6rem;
+      padding: 4px 8px;
+      border-radius: 4px;
+      backdrop-filter: blur(6px);
+      z-index: 3;
+    }
+
+    /* Cyan bottom glow line on hover */
+    .rv-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, cyan, transparent);
+      opacity: 0;
+      transition: opacity 0.2s;
+      z-index: 4;
+    }
+    .rv-card:hover::after { opacity: 1; }
+
+    /* ── SKELETON ── */
+    .rv-skel {
+      flex-shrink: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #141414;
+      border: 1px solid #1a1a1a;
+    }
+    .rv-skel.ppv { width: 220px; }
+    .rv-skel.fn  { width: 190px; }
+    .rv-skel-poster {
+      width: 100%; aspect-ratio: 2/3;
+      background: linear-gradient(90deg, #161616 25%, #1e1e1e 50%, #161616 75%);
+      background-size: 200% 100%;
+      animation: rv-shimmer 1.4s infinite;
+    }
+    .rv-skel-info { padding: 10px 13px 13px; background: #111; }
+    .rv-skel-line {
+      height: 8px; border-radius: 4px; margin-bottom: 7px;
+      background: linear-gradient(90deg, #161616 25%, #1e1e1e 50%, #161616 75%);
+      background-size: 200% 100%;
+      animation: rv-shimmer 1.4s infinite;
+    }
+    .rv-skel-line.s { width: 55%; }
+    @keyframes rv-shimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* Search results */
+    #rvSearchPanel .rv-scroll {
+      flex-wrap: wrap;
+      overflow-x: visible;
+      padding: 0 40px 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a class="logo" href="index.html" style="text-decoration:none;">
+        <span class="logo-mma">MMA</span>
+        <img src="images/Cage.svg" class="logo-icon" alt="cage icon">
+        <span class="logo-bridge">Bridge</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Trending</a></li>
+        <li><a href="events.html">Upcoming Events</a></li>
+        <li><a href="pfp.html" class="nav-pfp">PFP</a></li>
+        <li><a href="reviews.html" class="nav-review active-nav">Review</a></li>
+        <li><a href="lucas.html">Lucas Bot</a></li>
+      </ul>
+      <form class="search-box" id="site-search-form" action="results.html" method="GET">
+        <input id="site-search" name="q" type="text" placeholder="Search fighters, events..." autocomplete="off" />
+        <span class="search-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M21 21l-4.3-4.3m1.8-5.2a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </span>
+      </form>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="rv-hero">
+    <h1>Event <span>Reviews</span></h1>
+    <p>Rate the event.</p>
+    <div class="rv-search-wrap">
+      <input type="text" id="rvSearch" placeholder="Search events…" autocomplete="off" />
+      <span class="rv-search-icon">
+        <svg viewBox="0 0 24 24"><path d="M21 21l-4.3-4.3m1.8-5.2a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      </span>
+    </div>
+  </div>
+
+  <!-- Main rows (shown when not searching) -->
+  <div class="rv-rows" id="rvRows">
+    <!-- PPV Row -->
+    <div class="rv-row" id="rowPPV">
+      <div class="rv-row-header">
+        <div class="rv-row-title"><span class="row-accent"></span>PPV Events</div>
+        <div class="rv-row-count" id="ppvCount"></div>
+      </div>
+      <div class="rv-scroll-outer">
+        <button class="rv-arrow left" data-target="scrollPPV">&#8592;</button>
+        <div class="rv-scroll" id="scrollPPV">
+          <div class="rv-skel ppv"><div class="rv-skel-poster"></div><div class="rv-skel-info"><div class="rv-skel-line"></div><div class="rv-skel-line s"></div></div></div>
+          <div class="rv-skel ppv"><div class="rv-skel-poster"></div><div class="rv-skel-info"><div class="rv-skel-line"></div><div class="rv-skel-line s"></div></div></div>
+          <div class="rv-skel ppv"><div class="rv-skel-poster"></div><div class="rv-skel-info"><div class="rv-skel-line"></div><div class="rv-skel-line s"></div></div></div>
+        </div>
+        <button class="rv-arrow right" data-target="scrollPPV">&#8594;</button>
+      </div>
+    </div>
+
+    <!-- Fight Night Row -->
+    <div class="rv-row" id="rowFN">
+      <div class="rv-row-header">
+        <div class="rv-row-title"><span class="row-accent"></span>Fight Nights</div>
+        <div class="rv-row-count" id="fnCount"></div>
+      </div>
+      <div class="rv-scroll-outer">
+        <button class="rv-arrow left" data-target="scrollFN">&#8592;</button>
+        <div class="rv-scroll" id="scrollFN">
+          <div class="rv-skel fn"><div class="rv-skel-poster"></div><div class="rv-skel-info"><div class="rv-skel-line"></div><div class="rv-skel-line s"></div></div></div>
+          <div class="rv-skel fn"><div class="rv-skel-poster"></div><div class="rv-skel-info"><div class="rv-skel-line"></div><div class="rv-skel-line s"></div></div></div>
+          <div class="rv-skel fn"><div class="rv-skel-poster"></div><div class="rv-skel-info"><div class="rv-skel-line"></div><div class="rv-skel-line s"></div></div></div>
+        </div>
+        <button class="rv-arrow right" data-target="scrollFN">&#8594;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search results panel -->
+  <div id="rvSearchPanel" style="display:none; padding:0 0 80px;">
+    <div class="rv-row-header" style="padding:0 40px 0; margin-bottom:16px;">
+      <div class="rv-row-title"><span class="row-accent"></span><span id="searchLabel">Results</span></div>
+    </div>
+    <div class="rv-scroll" id="searchGrid" style="flex-wrap:wrap; overflow-x:visible; padding:0 40px 20px;"></div>
+    <div id="searchEmpty" style="display:none; padding:20px 40px; color:rgba(255,255,255,0.25); font-family:'Inter',sans-serif; font-size:0.88rem;">No events found.</div>
+  </div>
+
+  <script type="module" src="reviews.js"></script>
+  <script src="chat.js"></script>
+</body>
+</html>

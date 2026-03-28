@@ -1517,3 +1517,623 @@ a, a:visited {
       padding: 3rem 1rem;
     }
   }
+  .hype-meter{
+    margin-bottom:16px;
+    }
+    
+    .hype-title{
+    font-weight:600;
+    margin-bottom:6px;
+    }
+    
+    .hype-stars{
+    font-size:22px;
+    cursor:pointer;
+    }
+    
+    .hype-star{
+    color:#444;
+    margin-right:4px;
+    }
+    
+    .hype-star.active{
+    color:gold;
+    }
+    
+    .fotn-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    cursor:pointer;
+    }
+    
+    .fotn-circle{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    border:2px solid #aaa;
+    }
+/* ── FOTN LOCK BUTTON (events.html fight rows) ── */
+.fotn-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 4px;
+  color: rgba(255,255,255,0.45);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+.fotn-btn:hover {
+  border-color: rgba(0,255,255,0.4);
+  color: cyan;
+  background: rgba(0,255,255,0.06);
+}
+.fotn-btn.fotn-locked {
+  border-color: rgba(0,255,255,0.5);
+  color: cyan;
+  background: rgba(0,255,255,0.08);
+}
+
+/* ── REVIEW nav link ── */
+.nav-review {
+  color: cyan !important;
+  font-weight: 700;
+}
+.nav-review.active-nav {
+  border-bottom: 2px solid cyan;
+  padding-bottom: 2px;
+}
+
+/* ── PRE-EVENT HYPE METER (events.html) ── */
+.hype-meter-wrap {
+  background: linear-gradient(135deg, #141414 0%, #111 100%);
+  border: 1px solid #2a2a2a;
+  border-left: 3px solid cyan;
+  border-radius: 8px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+}
+.hype-meter-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.hype-meter-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: cyan;
+}
+.hype-community {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.4);
+}
+.hype-stars {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.hype-star {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.6rem;
+  line-height: 1;
+  padding: 0;
+  color: #2a2a2a;
+  transition: color 0.1s, transform 0.1s;
+}
+.hype-star:hover,
+.hype-star-lit { color: #f5c518; }
+.hype-star:hover { transform: scale(1.2); }
+.hype-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.35);
+  min-height: 18px;
+}
+
+/* ============================================
+   EVENTS PAGE — CLEAN REDESIGN
+   ============================================ */
+
+/* Outer list */
+#events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ── Event card ── */
+.event-card {
+  border: 1px solid rgba(255,255,255,0.08);
+  background: #111;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 0.18s;
+}
+.event-card[open] {
+  border-color: rgba(255,255,255,0.15);
+}
+
+/* Summary row */
+.ev-summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  gap: 12px;
+  user-select: none;
+}
+.ev-summary::-webkit-details-marker { display: none; }
+.ev-summary:hover { background: rgba(255,255,255,0.02); }
+
+.ev-sum-left { flex: 1; min-width: 0; }
+
+.ev-name-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 5px;
+}
+.ev-name {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  color: #fff;
+}
+.ev-type-tag {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.14);
+  color: rgba(255,255,255,0.65);
+}
+.ev-status {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+.upcoming-pill {
+  background: rgba(0,255,255,0.1);
+  border: 1px solid rgba(0,255,255,0.3);
+  color: cyan;
+}
+.past-pill {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.4);
+}
+
+.ev-meta {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.45);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+.ev-dot { color: rgba(255,255,255,0.2); }
+
+.ev-sum-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.ev-chev {
+  color: rgba(255,255,255,0.4);
+  font-size: 1.1rem;
+  transition: transform 0.2s;
+}
+.event-card[open] .ev-chev { transform: rotate(180deg); }
+
+/* ── Expanded body ── */
+.ev-body {
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding: 16px 20px 20px;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 16px;
+}
+@media (max-width: 640px) {
+  .ev-body { grid-template-columns: 1fr; }
+}
+
+.ev-poster-wrap {
+  border-radius: 10px;
+  overflow: hidden;
+  background: #1a1a1a;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.ev-poster {
+  width: 100%; display: block;
+  object-fit: cover; min-height: 220px;
+}
+.ev-poster-ph {
+  min-height: 220px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.5rem; color: rgba(255,255,255,0.15);
+}
+
+.ev-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ── Section dropdowns ── */
+.drop {
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.02);
+}
+.drop[open] { border-color: rgba(255,255,255,0.12); }
+
+.drop-sum {
+  list-style: none;
+  cursor: pointer;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  user-select: none;
+}
+.drop-sum::-webkit-details-marker { display: none; }
+.drop-sum:hover { background: rgba(255,255,255,0.03); }
+
+.drop-right { display: flex; align-items: center; gap: 8px; }
+.count {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.14);
+  color: rgba(255,255,255,0.6);
+}
+.chev { color: rgba(255,255,255,0.4); font-size: 0.9rem; transition: transform 0.18s; }
+.drop[open] .chev { transform: rotate(180deg); }
+
+.drop-body {
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ── Fight row wrapper ── */
+.fr-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.fr-main  .fight-row { background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(0,0,0,0.5)); border-color: rgba(255,255,255,0.15); }
+.fr-comain .fight-row { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.12); }
+
+/* ── Fight row button ── */
+.fight-row {
+  width: 100%;
+  text-align: left;
+  padding: 12px 14px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  background: rgba(0,0,0,0.3);
+  cursor: pointer;
+  font-family: inherit;
+  color: inherit;
+  transition: border-color 0.15s, background 0.15s, transform 0.12s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.fight-row:hover {
+  border-color: rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.04);
+  transform: translateY(-1px);
+}
+
+.fr-left { flex: 1; min-width: 0; }
+.fr-right { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+
+/* Slot badges */
+.slot-badge {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 999px;
+  margin-bottom: 6px;
+}
+.main-badge  { background: rgba(0,255,255,0.1); border: 1px solid rgba(0,255,255,0.3); color: cyan; }
+.comain-badge { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.7); }
+
+/* Fighter names */
+.fr-names {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 0.92rem;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+.fr-a, .fr-b { color: #fff; }
+.fr-vs { color: rgba(255,255,255,0.35); font-size: 0.75rem; font-weight: 600; }
+
+.fr-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+.fight-ico { font-size: 0.9rem; }
+
+/* ── FOTN button ── */
+.fotn-btn {
+  align-self: flex-end;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 5px;
+  color: rgba(255,255,255,0.4);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  width: fit-content;
+}
+.fotn-btn:hover {
+  border-color: rgba(0,255,255,0.35);
+  color: cyan;
+  background: rgba(0,255,255,0.06);
+}
+.fotn-btn.fotn-locked {
+  border-color: rgba(0,255,255,0.5);
+  color: cyan;
+  background: rgba(0,255,255,0.1);
+}
+
+/* ── Hype meter ── */
+.hype-wrap {
+  background: linear-gradient(135deg, #141414, #0e0e0e);
+  border: 1px solid rgba(0,255,255,0.2);
+  border-left: 3px solid cyan;
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.hype-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.hype-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: cyan;
+}
+.hype-avg {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.4);
+}
+.hype-stars {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+.hype-star {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #2a2a2a;
+  padding: 0;
+  transition: color 0.1s, transform 0.1s;
+  line-height: 1;
+}
+.hype-star:hover, .hype-star-lit { color: #f5c518; }
+.hype-star:hover { transform: scale(1.2); }
+.hype-lbl {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.3);
+  min-height: 16px;
+}
+
+/* ============================================
+   EVENTS PAGE — PREMIUM EXPANDED CARDS v2
+   ============================================ */
+
+/* Tighter collapsed row */
+.event-card {
+  border-radius: 16px !important;
+  margin-bottom: 0;
+  transition: border-color 0.2s, box-shadow 0.2s !important;
+}
+.event-card[open] {
+  border-color: rgba(255,255,255,0.18) !important;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+}
+.ev-summary {
+  padding: 18px 24px !important;
+}
+.ev-name {
+  font-size: 1.05rem !important;
+}
+
+/* ── BIG cinematic expanded body ── */
+.ev-body {
+  padding: 0 !important;
+  display: block !important;
+  border-top: none !important;
+}
+
+/* Poster hero — full width image at top */
+.ev-poster-wrap {
+  position: relative;
+  border-radius: 0 !important;
+  overflow: hidden;
+  height: 260px;
+  border: none !important;
+  border-top: 1px solid rgba(255,255,255,0.08) !important;
+  border-bottom: none !important;
+}
+.ev-poster {
+  width: 100%;
+  height: 260px !important;
+  min-height: unset !important;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  filter: brightness(0.85) contrast(1.05);
+}
+.ev-poster-ph {
+  height: 260px !important;
+  min-height: unset !important;
+  background: linear-gradient(160deg, #1c1c1c, #0e0e0e);
+  font-size: 4rem !important;
+  color: rgba(255,255,255,0.08) !important;
+}
+/* Gradient overlay on poster */
+.ev-poster-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.85) 100%);
+  pointer-events: none;
+}
+
+/* Event info overlaid on poster bottom */
+.ev-poster-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 16px 24px;
+  z-index: 2;
+}
+.ev-poster-event-name {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #fff;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.8);
+  margin-bottom: 4px;
+}
+.ev-poster-meta {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.6);
+  text-shadow: 0 1px 6px rgba(0,0,0,0.8);
+}
+
+/* Content below the poster */
+.ev-content {
+  padding: 18px 24px 22px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+  background: #111;
+}
+
+/* ── Bigger section dropdowns ── */
+.drop {
+  border-radius: 12px !important;
+}
+.drop-sum {
+  padding: 14px 18px !important;
+  font-size: 0.82rem !important;
+}
+
+/* ── Bigger fight rows ── */
+.fight-row {
+  padding: 14px 18px !important;
+  border-radius: 12px !important;
+}
+.fr-names {
+  font-size: 1rem !important;
+  margin-bottom: 8px !important;
+  gap: 10px !important;
+}
+.fr-a, .fr-b {
+  font-size: 1rem;
+}
+.fr-main .fight-row {
+  padding: 18px 20px !important;
+  border-radius: 14px !important;
+}
+.fr-main .fr-names {
+  font-size: 1.15rem !important;
+}
+.fr-comain .fight-row {
+  padding: 16px 18px !important;
+}
+.fr-comain .fr-names {
+  font-size: 1.05rem !important;
+}
+
+/* FOTN button bigger */
+.fotn-btn {
+  padding: 5px 12px !important;
+  font-size: 0.62rem !important;
+}
+
+/* Hype meter bigger */
+.hype-wrap {
+  padding: 16px 20px !important;
+  border-radius: 12px !important;
+}
+.hype-star {
+  font-size: 1.75rem !important;
+}
+.hype-title {
+  font-size: 0.75rem !important;
+}
+
+/* Empty state */
+.empty.big {
+  padding: 40px 24px;
+  text-align: center;
+  font-size: 0.9rem;
+}

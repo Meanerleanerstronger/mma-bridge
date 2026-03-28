@@ -159,6 +159,16 @@ export const API = {
     return fetchData(CONFIG.ENDPOINTS.UPCOMING_EVENTS);
   },
 
+  async getPastEvents() {
+    if (CONFIG.API.USE_MOCK) {
+      // In mock mode filter locally by isoDate
+      const all = await fetchData(CONFIG.ENDPOINTS.EVENTS);
+      const today = new Date().toISOString().slice(0,10);
+      return all.filter(e => (e.isoDate || '9999') < today);
+    }
+    return fetchData('/events/past');
+  },
+
   async getEvent(id) {
     return fetchData(CONFIG.ENDPOINTS.EVENT_BY_ID(id));
   },
