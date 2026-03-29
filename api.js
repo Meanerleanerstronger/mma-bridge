@@ -156,17 +156,33 @@ export const API = {
   },
 
   async getUpcomingEvents() {
-    return fetchData(CONFIG.ENDPOINTS.UPCOMING_EVENTS);
+    const today = new Date().toISOString().slice(0,10);
+    if (CONFIG.API.USE_MOCK) {
+      const all = await fetchData(CONFIG.ENDPOINTS.EVENTS);
+      return all.filter(e => (e.isoDate || '9999') >= today);
+    }
+    try {
+      const events = await fetchData(CONFIG.ENDPOINTS.UPCOMING_EVENTS);
+      if (Array.isArray(events) && events.length) return events;
+    } catch {}
+    // Fallback to local JSON
+    const all = await fetchData(CONFIG.MOCK_DATA.EVENTS);
+    return all.filter(e => (e.isoDate || '9999') >= today);
   },
 
   async getPastEvents() {
+    const today = new Date().toISOString().slice(0,10);
     if (CONFIG.API.USE_MOCK) {
-      // In mock mode filter locally by isoDate
       const all = await fetchData(CONFIG.ENDPOINTS.EVENTS);
-      const today = new Date().toISOString().slice(0,10);
       return all.filter(e => (e.isoDate || '9999') < today);
     }
-    return fetchData('/events/past');
+    try {
+      const events = await fetchData('/events/past');
+      if (Array.isArray(events) && events.length) return events;
+    } catch {}
+    // Fallback to local JSON
+    const all = await fetchData(CONFIG.MOCK_DATA.EVENTS);
+    return all.filter(e => (e.isoDate || '9999') < today);
   },
 
   async getEvent(id) {
