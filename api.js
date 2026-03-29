@@ -165,8 +165,8 @@ export const API = {
       const events = await fetchData(CONFIG.ENDPOINTS.UPCOMING_EVENTS);
       if (Array.isArray(events) && events.length) return events;
     } catch {}
-    // Fallback to local JSON
-    const all = await fetchData(CONFIG.MOCK_DATA.EVENTS);
+    // Fallback — read directly from the JSON file
+    const all = await fetch('/events.json').then(r => r.json());
     return all.filter(e => (e.isoDate || '9999') >= today);
   },
 
@@ -180,8 +180,8 @@ export const API = {
       const events = await fetchData('/events/past');
       if (Array.isArray(events) && events.length) return events;
     } catch {}
-    // Fallback to local JSON
-    const all = await fetchData(CONFIG.MOCK_DATA.EVENTS);
+    // Fallback — read directly from the JSON file
+    const all = await fetch('/events.json').then(r => r.json());
     return all.filter(e => (e.isoDate || '9999') < today);
   },
 
