@@ -1,5 +1,588 @@
 [
   {
+    "id": "ufc-fight-night-usman-vs-buckley",
+    "name": "UFC Fight Night: Usman vs. Buckley",
+    "type": "FIGHT NIGHT",
+    "date": "Sat, Apr 26, 2025",
+    "isoDate": "2025-04-26",
+    "location": "Las Vegas, NV",
+    "venue": "Meta APEX",
+    "poster": "images/fn-usman.jpg",
+    "status": "completed",
+    "mainCard": [
+      {
+        "a": "Kamaru Usman",
+        "b": "Joaquin Buckley",
+        "weight": "Welterweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "main"
+      },
+      {
+        "a": "Rose Namajunas",
+        "b": "Mackenzie Dern",
+        "weight": "Women's Strawweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "comain"
+      },
+      {
+        "a": "Edmen Shahbazyan",
+        "b": "Andre Petroski",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Anthony Menifield",
+        "b": "Oumar Sy",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Ricky Simon",
+        "b": "Cameron Smotherman",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
+    ],
+    "prelims": [
+      {
+        "a": "Cody Brundage",
+        "b": "Mansur Abdul-Malik",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Paul Craig",
+        "b": "Roberto Bellato",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Mark Wellmaker",
+        "b": "Kris Moutinho",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
+    ],
+    "earlyPrelims": []
+  },
+  {
+    "id": "ufc-317-topuria-vs-oliveira",
+    "name": "UFC 317: Topuria vs. Oliveira",
+    "type": "PPV",
+    "date": "Sat, Jun 28, 2025",
+    "isoDate": "2025-06-28",
+    "location": "Las Vegas, NV",
+    "venue": "T-Mobile Arena",
+    "poster": "images/ufc-317.jpg",
+    "status": "completed",
+    "mainCard": [
+      {
+        "a": "Ilia Topuria",
+        "b": "Charles Oliveira",
+        "weight": "Lightweight",
+        "rounds": "5 Rds",
+        "titleFight": true,
+        "ranked": true,
+        "slot": "main"
+      },
+      {
+        "a": "Alexandre Pantoja",
+        "b": "Kai Kara-France",
+        "weight": "Flyweight",
+        "rounds": "5 Rds",
+        "titleFight": true,
+        "ranked": true,
+        "slot": "comain"
+      },
+      {
+        "a": "Joshua Van",
+        "b": "Brandon Royval",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Beneil Dariush",
+        "b": "Renato Moicano",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Payton Talbott",
+        "b": "Felipe Lima",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      }
+    ],
+    "prelims": [
+      {
+        "a": "Gregory Rodrigues",
+        "b": "Jack Hermansson",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Jose Delgado",
+        "b": "Hyder Amil",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Tracy Cortez",
+        "b": "Viviane Araujo",
+        "weight": "Women's Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Terrance McKinney",
+        "b": "Viacheslav Borshchev",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
+    ],
+    "earlyPrelims": [
+      {
+        "a": "Jacobe Smith",
+        "b": "Niko Price",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Jhonata Diniz",
+        "b": "Alvin Hines",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
+    ]
+  },
+  {
+    "id": "ufc-318-holloway-vs-poirier-3",
+    "name": "UFC 318: Holloway vs. Poirier 3",
+    "type": "PPV",
+    "date": "Sat, Jul 19, 2025",
+    "isoDate": "2025-07-19",
+    "location": "New Orleans, LA",
+    "venue": "Smoothie King Center",
+    "poster": "images/ufc-318.jpg",
+    "status": "completed",
+    "mainCard": [
+      {
+        "a": "Max Holloway",
+        "b": "Dustin Poirier",
+        "weight": "Lightweight",
+        "rounds": "5 Rds",
+        "titleFight": true,
+        "ranked": true,
+        "slot": "main"
+      },
+      {
+        "a": "Paulo Costa",
+        "b": "Roman Kopylov",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "comain"
+      },
+      {
+        "a": "Daniel Rodriguez",
+        "b": "Kevin Holland",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Patricio Pitbull",
+        "b": "Dan Ige",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Michael Johnson",
+        "b": "Daniel Zellhuber",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
+    ],
+    "prelims": [
+      {
+        "a": "Vinicius Oliveira",
+        "b": "Kyler Phillips",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Brendan Allen",
+        "b": "Marvin Vettori",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Nikolay Veretennikov",
+        "b": "Francisco Prado",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Ateba Gautier",
+        "b": "Robert Valentin",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
+    ],
+    "earlyPrelims": [
+      {
+        "a": "Islam Dulatov",
+        "b": "Adam Fugitt",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Jimmy Crute",
+        "b": "Marcin Prachnio",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Ryan Spann",
+        "b": "\u0141ukasz Brzeski",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Carli Judice",
+        "b": "Nicolle Caliari",
+        "weight": "Women's Strawweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
+    ]
+  },
+  {
+    "id": "ufc-319-du-plessis-vs-chimaev",
+    "name": "UFC 319: Du Plessis vs. Chimaev",
+    "type": "PPV",
+    "date": "Sat, Aug 16, 2025",
+    "isoDate": "2025-08-16",
+    "location": "Chicago, IL",
+    "venue": "United Center",
+    "poster": "images/ufc-319.jpg",
+    "status": "completed",
+    "mainCard": [
+      {
+        "a": "Khamzat Chimaev",
+        "b": "Dricus Du Plessis",
+        "weight": "Middleweight",
+        "rounds": "5 Rds",
+        "titleFight": true,
+        "ranked": true,
+        "slot": "main"
+      },
+      {
+        "a": "Lerone Murphy",
+        "b": "Aaron Pico",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "comain"
+      },
+      {
+        "a": "Carlos Prates",
+        "b": "Geoff Neal",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Michael Page",
+        "b": "Jared Cannonier",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Tim Elliott",
+        "b": "Kai Asakura",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
+    ],
+    "prelims": [
+      {
+        "a": "Baisangur Susurkaev",
+        "b": "Eric Nolan",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Micha\u0142 Oleksiejczuk",
+        "b": "Gerald Meerschaert",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Lupita Godinez",
+        "b": "Jessica Andrade",
+        "weight": "Women's Strawweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Alexander Hernandez",
+        "b": "Chase Hooper",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
+    ],
+    "earlyPrelims": [
+      {
+        "a": "Drakkar Klose",
+        "b": "Edson Barboza",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Joseph Morales",
+        "b": "Alibi Idiris",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
+    ]
+  },
+  {
+    "id": "ufc-fight-night-imavov-vs-borralho",
+    "name": "UFC Fight Night: Imavov vs. Borralho",
+    "type": "FIGHT NIGHT",
+    "date": "Sat, Sep 6, 2025",
+    "isoDate": "2025-09-06",
+    "location": "Paris, France",
+    "venue": "Accor Arena",
+    "poster": "images/fn-paris.jpg",
+    "status": "completed",
+    "mainCard": [
+      {
+        "a": "Nassourdine Imavov",
+        "b": "Caio Borralho",
+        "weight": "Middleweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "main"
+      },
+      {
+        "a": "Beno\u00eet Saint-Denis",
+        "b": "Mauricio Ruffy",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "comain"
+      },
+      {
+        "a": "Modestas Bukauskas",
+        "b": "Paul Craig",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Oumar Sy",
+        "b": "Bogdan Ribeiro",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Raulian Paiva",
+        "b": "Alessandro Fakhretdinov",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
+    ],
+    "prelims": [
+      {
+        "a": "Bolaji Oki",
+        "b": "Mason Jones",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "William Gomis",
+        "b": "Gabriel Santos",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Brad Tavares",
+        "b": "Kevin Jousset",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
+    ],
+    "earlyPrelims": []
+  },
+  {
+    "id": "ufc-fight-night-walker-vs-zhang",
+    "name": "UFC Fight Night: Walker vs. Zhang",
+    "type": "FIGHT NIGHT",
+    "date": "Sat, Sep 20, 2025",
+    "isoDate": "2025-09-20",
+    "location": "Las Vegas, NV",
+    "venue": "Meta APEX",
+    "poster": "images/fn-walker.jpg",
+    "status": "completed",
+    "mainCard": [
+      {
+        "a": "Johnny Walker",
+        "b": "Mingyang Zhang",
+        "weight": "Light Heavyweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "main"
+      },
+      {
+        "a": "Aljamain Sterling",
+        "b": "Brian Ortega",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "comain"
+      },
+      {
+        "a": "Sergei Pavlovich",
+        "b": "Waldo Cortes-Acosta",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Lone'er Kavanagh",
+        "b": "Charles Johnson",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Michel Pereira",
+        "b": "Kyle Daukaus",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
+    ],
+    "prelims": [
+      {
+        "a": "Uros Medic",
+        "b": "Muslim Salikhov",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Denise Gomes",
+        "b": "Tecia Torres",
+        "weight": "Women's Strawweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Javid Basharat",
+        "b": "Cody Stamann",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
+    ],
+    "earlyPrelims": []
+  },
+  {
     "id": "ufc-320-ankalaev-vs-pereira-2",
     "name": "UFC 320: Ankalaev vs. Pereira 2",
     "type": "PPV",
@@ -10,21 +593,100 @@
     "poster": "images/ufc-320.jpg",
     "status": "completed",
     "mainCard": [
-      {"a":"Alex Pereira","b":"Magomed Ankalaev","weight":"Light Heavyweight","rounds":"5 Rds","titleFight":true,"ranked":true,"slot":"main"},
-      {"a":"Merab Dvalishvili","b":"Cory Sandhagen","weight":"Bantamweight","rounds":"5 Rds","titleFight":true,"ranked":true,"slot":"comain"},
-      {"a":"Jiří Procházka","b":"Khalil Rountree Jr.","weight":"Light Heavyweight","rounds":"3 Rds","titleFight":false,"ranked":true},
-      {"a":"Youssef Zalal","b":"Josh Emmett","weight":"Featherweight","rounds":"3 Rds","titleFight":false,"ranked":true},
-      {"a":"Joe Pyfer","b":"Abus Magomedov","weight":"Middleweight","rounds":"3 Rds","titleFight":false,"ranked":false}
+      {
+        "a": "Alex Pereira",
+        "b": "Magomed Ankalaev",
+        "weight": "Light Heavyweight",
+        "rounds": "5 Rds",
+        "titleFight": true,
+        "ranked": true,
+        "slot": "main"
+      },
+      {
+        "a": "Merab Dvalishvili",
+        "b": "Cory Sandhagen",
+        "weight": "Bantamweight",
+        "rounds": "5 Rds",
+        "titleFight": true,
+        "ranked": true,
+        "slot": "comain"
+      },
+      {
+        "a": "Ji\u0159\u00ed Proch\u00e1zka",
+        "b": "Khalil Rountree Jr.",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Youssef Zalal",
+        "b": "Josh Emmett",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Joe Pyfer",
+        "b": "Abus Magomedov",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
     ],
     "prelims": [
-      {"a":"Edmen Shahbazyan","b":"Andre Muniz","weight":"Middleweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Punahele Soriano","b":"Nikolay Veretennikov","weight":"Middleweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Farid Basharat","b":"Chris Gutierrez","weight":"Bantamweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Jakub Wiklacz","b":"Patchy Mix","weight":"Bantamweight","rounds":"3 Rds","titleFight":false,"ranked":false}
+      {
+        "a": "Edmen Shahbazyan",
+        "b": "Andre Muniz",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Punahele Soriano",
+        "b": "Nikolay Veretennikov",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Farid Basharat",
+        "b": "Chris Gutierrez",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Jakub Wiklacz",
+        "b": "Patchy Mix",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
     ],
     "earlyPrelims": [
-      {"a":"Ateba Gautier","b":"Treston Vines","weight":"Middleweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Daniel Santos","b":"Yoo Joo-sang","weight":"Welterweight","rounds":"3 Rds","titleFight":false,"ranked":false}
+      {
+        "a": "Ateba Gautier",
+        "b": "Treston Vines",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Daniel Santos",
+        "b": "Yoo Joo-sang",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
     ]
   },
   {
@@ -38,23 +700,191 @@
     "poster": "images/ufc-321.jpg",
     "status": "completed",
     "mainCard": [
-      {"a":"Tom Aspinall","b":"Ciryl Gane","weight":"Heavyweight","rounds":"5 Rds","titleFight":true,"ranked":true,"slot":"main"},
-      {"a":"Mackenzie Dern","b":"Virna Jandiroba","weight":"Women's Strawweight","rounds":"5 Rds","titleFight":true,"ranked":true,"slot":"comain"},
-      {"a":"Umar Nurmagomedov","b":"Mario Bautista","weight":"Bantamweight","rounds":"3 Rds","titleFight":false,"ranked":true},
-      {"a":"Alexander Volkov","b":"Jailton Almeida","weight":"Heavyweight","rounds":"3 Rds","titleFight":false,"ranked":true},
-      {"a":"Azamat Murzakanov","b":"Aleksandar Rakić","weight":"Light Heavyweight","rounds":"3 Rds","titleFight":false,"ranked":true}
+      {
+        "a": "Tom Aspinall",
+        "b": "Ciryl Gane",
+        "weight": "Heavyweight",
+        "rounds": "5 Rds",
+        "titleFight": true,
+        "ranked": true,
+        "slot": "main"
+      },
+      {
+        "a": "Mackenzie Dern",
+        "b": "Virna Jandiroba",
+        "weight": "Women's Strawweight",
+        "rounds": "5 Rds",
+        "titleFight": true,
+        "ranked": true,
+        "slot": "comain"
+      },
+      {
+        "a": "Umar Nurmagomedov",
+        "b": "Mario Bautista",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Alexander Volkov",
+        "b": "Jailton Almeida",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Azamat Murzakanov",
+        "b": "Aleksandar Raki\u0107",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      }
     ],
     "prelims": [
-      {"a":"Quillan Salkilld","b":"Nasrat Haqparast","weight":"Lightweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Ikram Aliskerov","b":"Jun Yong Park","weight":"Middleweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Ľudovít Klein","b":"Mateusz Rębecki","weight":"Lightweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Valter Walker","b":"Louie Sutherland","weight":"Heavyweight","rounds":"3 Rds","titleFight":false,"ranked":false}
+      {
+        "a": "Quillan Salkilld",
+        "b": "Nasrat Haqparast",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Ikram Aliskerov",
+        "b": "Jun Yong Park",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "\u013dudov\u00edt Klein",
+        "b": "Mateusz R\u0119becki",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Valter Walker",
+        "b": "Louie Sutherland",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
     ],
     "earlyPrelims": [
-      {"a":"Nathaniel Wood","b":"Jose Delgado","weight":"Featherweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Hamdy Abdelwahab","b":"Chris Barnett","weight":"Heavyweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Mitch Raposo","b":"Azat Maksum","weight":"Bantamweight","rounds":"3 Rds","titleFight":false,"ranked":false}
+      {
+        "a": "Nathaniel Wood",
+        "b": "Jose Delgado",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Hamdy Abdelwahab",
+        "b": "Chris Barnett",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Mitch Raposo",
+        "b": "Azat Maksum",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
     ]
+  },
+  {
+    "id": "ufc-fight-night-bonfim-vs-brown",
+    "name": "UFC Fight Night: Bonfim vs. Brown",
+    "type": "FIGHT NIGHT",
+    "date": "Sat, Nov 8, 2025",
+    "isoDate": "2025-11-08",
+    "location": "Las Vegas, NV",
+    "venue": "Meta APEX",
+    "poster": "images/fn-bonfim.jpg",
+    "status": "completed",
+    "mainCard": [
+      {
+        "a": "Renato Moicano",
+        "b": "Drew Dober",
+        "weight": "Lightweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "main"
+      },
+      {
+        "a": "Uros Medic",
+        "b": "Marco Tulio",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "comain"
+      },
+      {
+        "a": "Jailton Almeida",
+        "b": "Marcelo Bueno Silva",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Denise Gomes",
+        "b": "Tecia Pennington",
+        "weight": "Women's Strawweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Chris Duncan",
+        "b": "Marco Tulio",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
+    ],
+    "prelims": [
+      {
+        "a": "Westin Wilson",
+        "b": "Cody Brundage",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Josh Quinlan",
+        "b": "Thibault Gouti",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Vinicius Salvador",
+        "b": "Ode Osbourne",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
+    ],
+    "earlyPrelims": []
   },
   {
     "id": "ufc-322-della-maddalena-vs-makhachev",
@@ -67,20 +897,92 @@
     "poster": "images/ufc-322.jpg",
     "status": "completed",
     "mainCard": [
-      {"a":"Islam Makhachev","b":"Jack Della Maddalena","weight":"Welterweight","rounds":"5 Rds","titleFight":true,"ranked":true,"slot":"main"},
-      {"a":"Valentina Shevchenko","b":"Zhang Weili","weight":"Women's Flyweight","rounds":"5 Rds","titleFight":true,"ranked":true,"slot":"comain"},
-      {"a":"Mario Morales","b":"Sean Brady","weight":"Welterweight","rounds":"3 Rds","titleFight":false,"ranked":true},
-      {"a":"Benoit Saint-Denis","b":"Beneil Dariush","weight":"Lightweight","rounds":"3 Rds","titleFight":false,"ranked":true},
-      {"a":"Gregory Rodrigues","b":"Roman Kopylov","weight":"Middleweight","rounds":"3 Rds","titleFight":false,"ranked":false}
+      {
+        "a": "Islam Makhachev",
+        "b": "Jack Della Maddalena",
+        "weight": "Welterweight",
+        "rounds": "5 Rds",
+        "titleFight": true,
+        "ranked": true,
+        "slot": "main"
+      },
+      {
+        "a": "Valentina Shevchenko",
+        "b": "Zhang Weili",
+        "weight": "Women's Flyweight",
+        "rounds": "5 Rds",
+        "titleFight": true,
+        "ranked": true,
+        "slot": "comain"
+      },
+      {
+        "a": "Mario Morales",
+        "b": "Sean Brady",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Benoit Saint-Denis",
+        "b": "Beneil Dariush",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Gregory Rodrigues",
+        "b": "Roman Kopylov",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
     ],
     "prelims": [
-      {"a":"Erin Blanchfield","b":"Tracy Cortez","weight":"Women's Flyweight","rounds":"3 Rds","titleFight":false,"ranked":true},
-      {"a":"Ethyn Ewing","b":"Mark Wellmaker","weight":"Welterweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Kyle Daukaus","b":"Gerald Meerschaert","weight":"Middleweight","rounds":"3 Rds","titleFight":false,"ranked":false}
+      {
+        "a": "Erin Blanchfield",
+        "b": "Tracy Cortez",
+        "weight": "Women's Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Ethyn Ewing",
+        "b": "Mark Wellmaker",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Kyle Daukaus",
+        "b": "Gerald Meerschaert",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
     ],
     "earlyPrelims": [
-      {"a":"Bekzod Nurmagomedov","b":"Eric McConico","weight":"Bantamweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Matheus Camilo","b":"Viacheslav Borshchev","weight":"Lightweight","rounds":"3 Rds","titleFight":false,"ranked":false}
+      {
+        "a": "Bekzod Nurmagomedov",
+        "b": "Eric McConico",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Matheus Camilo",
+        "b": "Viacheslav Borshchev",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
     ]
   },
   {
@@ -94,21 +996,100 @@
     "poster": "images/ufc-323.jpg",
     "status": "completed",
     "mainCard": [
-      {"a":"Petr Yan","b":"Merab Dvalishvili","weight":"Bantamweight","rounds":"5 Rds","titleFight":true,"ranked":true,"slot":"main"},
-      {"a":"Joshua Van","b":"Alexandre Pantoja","weight":"Flyweight","rounds":"5 Rds","titleFight":true,"ranked":true,"slot":"comain"},
-      {"a":"Tatsuro Taira","b":"Brandon Moreno","weight":"Flyweight","rounds":"3 Rds","titleFight":false,"ranked":true},
-      {"a":"Payton Talbott","b":"Henry Cejudo","weight":"Bantamweight","rounds":"3 Rds","titleFight":false,"ranked":true},
-      {"a":"Jan Błachowicz","b":"Bogdan Guskov","weight":"Light Heavyweight","rounds":"3 Rds","titleFight":false,"ranked":true}
+      {
+        "a": "Petr Yan",
+        "b": "Merab Dvalishvili",
+        "weight": "Bantamweight",
+        "rounds": "5 Rds",
+        "titleFight": true,
+        "ranked": true,
+        "slot": "main"
+      },
+      {
+        "a": "Joshua Van",
+        "b": "Alexandre Pantoja",
+        "weight": "Flyweight",
+        "rounds": "5 Rds",
+        "titleFight": true,
+        "ranked": true,
+        "slot": "comain"
+      },
+      {
+        "a": "Tatsuro Taira",
+        "b": "Brandon Moreno",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Payton Talbott",
+        "b": "Henry Cejudo",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Jan B\u0142achowicz",
+        "b": "Bogdan Guskov",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      }
     ],
     "prelims": [
-      {"a":"Manuel Torres","b":"Grant Dawson","weight":"Lightweight","rounds":"3 Rds","titleFight":false,"ranked":true},
-      {"a":"Chris Duncan","b":"Terrance McKinney","weight":"Lightweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Maycee Barber","b":"Karine Silva","weight":"Women's Flyweight","rounds":"3 Rds","titleFight":false,"ranked":true},
-      {"a":"Fares Ziam","b":"Esteban Ribovics","weight":"Lightweight","rounds":"3 Rds","titleFight":false,"ranked":false}
+      {
+        "a": "Manuel Torres",
+        "b": "Grant Dawson",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Chris Duncan",
+        "b": "Terrance McKinney",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Maycee Barber",
+        "b": "Karine Silva",
+        "weight": "Women's Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Fares Ziam",
+        "b": "Esteban Ribovics",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
     ],
     "earlyPrelims": [
-      {"a":"Mickey Gall","b":"Jared Gooden","weight":"Welterweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Rinat Fakhretdinov","b":"Alex Morono","weight":"Welterweight","rounds":"3 Rds","titleFight":false,"ranked":false}
+      {
+        "a": "Mickey Gall",
+        "b": "Jared Gooden",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Rinat Fakhretdinov",
+        "b": "Alex Morono",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
     ]
   },
   {
@@ -122,21 +1103,100 @@
     "poster": "images/ufc-324.jpg",
     "status": "completed",
     "mainCard": [
-      {"a":"Justin Gaethje","b":"Paddy Pimblett","weight":"Lightweight","rounds":"5 Rds","titleFight":true,"ranked":true,"slot":"main"},
-      {"a":"Sean O'Malley","b":"Song Yadong","weight":"Bantamweight","rounds":"5 Rds","titleFight":false,"ranked":true,"slot":"comain"},
-      {"a":"Waldo Cortes-Acosta","b":"Derrick Lewis","weight":"Heavyweight","rounds":"3 Rds","titleFight":false,"ranked":true},
-      {"a":"Jean Silva","b":"Arnold Allen","weight":"Featherweight","rounds":"3 Rds","titleFight":false,"ranked":true},
-      {"a":"Natália Silva","b":"Rose Namajunas","weight":"Women's Flyweight","rounds":"3 Rds","titleFight":false,"ranked":true}
+      {
+        "a": "Justin Gaethje",
+        "b": "Paddy Pimblett",
+        "weight": "Lightweight",
+        "rounds": "5 Rds",
+        "titleFight": true,
+        "ranked": true,
+        "slot": "main"
+      },
+      {
+        "a": "Sean O'Malley",
+        "b": "Song Yadong",
+        "weight": "Bantamweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "comain"
+      },
+      {
+        "a": "Waldo Cortes-Acosta",
+        "b": "Derrick Lewis",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Jean Silva",
+        "b": "Arnold Allen",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Nat\u00e1lia Silva",
+        "b": "Rose Namajunas",
+        "weight": "Women's Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      }
     ],
     "prelims": [
-      {"a":"Umar Nurmagomedov","b":"Deiveson Figueiredo","weight":"Bantamweight","rounds":"3 Rds","titleFight":false,"ranked":true},
-      {"a":"Nikita Krylov","b":"Modestas Bukauskas","weight":"Light Heavyweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Alex Perez","b":"Charles Johnson","weight":"Flyweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Ricky Turcios","b":"Cameron Smotherman","weight":"Bantamweight","rounds":"3 Rds","titleFight":false,"ranked":false}
+      {
+        "a": "Umar Nurmagomedov",
+        "b": "Deiveson Figueiredo",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Nikita Krylov",
+        "b": "Modestas Bukauskas",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Alex Perez",
+        "b": "Charles Johnson",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Ricky Turcios",
+        "b": "Cameron Smotherman",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
     ],
     "earlyPrelims": [
-      {"a":"Ateba Gautier","b":"Andrey Pulyaev","weight":"Middleweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Josh Hokit","b":"Denzel Freeman","weight":"Heavyweight","rounds":"3 Rds","titleFight":false,"ranked":false}
+      {
+        "a": "Ateba Gautier",
+        "b": "Andrey Pulyaev",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Josh Hokit",
+        "b": "Denzel Freeman",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
     ]
   },
   {
@@ -150,20 +1210,191 @@
     "poster": "images/ufc-325.jpg",
     "status": "completed",
     "mainCard": [
-      {"a":"Alexander Volkanovski","b":"Diego Lopes","weight":"Featherweight","rounds":"5 Rds","titleFight":true,"ranked":true,"slot":"main"},
-      {"a":"Benoît Saint-Denis","b":"Dan Hooker","weight":"Lightweight","rounds":"3 Rds","titleFight":false,"ranked":true,"slot":"comain"},
-      {"a":"Mauricio Ruffy","b":"Rafael Fiziev","weight":"Lightweight","rounds":"3 Rds","titleFight":false,"ranked":true},
-      {"a":"Tallison Teixeira","b":"Tai Tuivasa","weight":"Heavyweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Quillan Salkilld","b":"Jamie Mullarkey","weight":"Lightweight","rounds":"3 Rds","titleFight":false,"ranked":false}
+      {
+        "a": "Alexander Volkanovski",
+        "b": "Diego Lopes",
+        "weight": "Featherweight",
+        "rounds": "5 Rds",
+        "titleFight": true,
+        "ranked": true,
+        "slot": "main"
+      },
+      {
+        "a": "Beno\u00eet Saint-Denis",
+        "b": "Dan Hooker",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "comain"
+      },
+      {
+        "a": "Mauricio Ruffy",
+        "b": "Rafael Fiziev",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Tallison Teixeira",
+        "b": "Tai Tuivasa",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Quillan Salkilld",
+        "b": "Jamie Mullarkey",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
     ],
     "prelims": [
-      {"a":"Billy Elekana","b":"Junior Tafa","weight":"Heavyweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Cam Rowston","b":"Cody Brundage","weight":"Middleweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Jacob Malkoun","b":"Torrez Finney","weight":"Middleweight","rounds":"3 Rds","titleFight":false,"ranked":false}
+      {
+        "a": "Billy Elekana",
+        "b": "Junior Tafa",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Cam Rowston",
+        "b": "Cody Brundage",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Jacob Malkoun",
+        "b": "Torrez Finney",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
     ],
     "earlyPrelims": [
-      {"a":"Kiefer Crosbie","b":"Carlos Candelario","weight":"Welterweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Mingyang Zhang","b":"Josh Parisian","weight":"Heavyweight","rounds":"3 Rds","titleFight":false,"ranked":false}
+      {
+        "a": "Kiefer Crosbie",
+        "b": "Carlos Candelario",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Mingyang Zhang",
+        "b": "Josh Parisian",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
+    ]
+  },
+  {
+    "id": "ufc-fight-night-strickland-vs-hernandez",
+    "name": "UFC Fight Night: Strickland vs. Hernandez",
+    "type": "FIGHT NIGHT",
+    "date": "Sat, Feb 21, 2026",
+    "isoDate": "2026-02-21",
+    "location": "Houston, TX",
+    "venue": "Toyota Center",
+    "poster": "images/fn-strickland.jpg",
+    "status": "completed",
+    "mainCard": [
+      {
+        "a": "Sean Strickland",
+        "b": "Caio Borralho",
+        "weight": "Middleweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "main"
+      },
+      {
+        "a": "Renato Moicano",
+        "b": "Drew Dober",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "comain"
+      },
+      {
+        "a": "Aleksandr Hernandez",
+        "b": "Diego Lopes",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Kelvin Gastelum",
+        "b": "Dustin Stoltzfus",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Santiago Luna",
+        "b": "Quang Le",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
+    ],
+    "prelims": [
+      {
+        "a": "Dusko Todorovic",
+        "b": "Jose Medina",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Tatiana Suarez",
+        "b": "Amanda Lemos",
+        "weight": "Women's Strawweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Zach Reese",
+        "b": "Sedriques Dumas",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
+    ],
+    "earlyPrelims": [
+      {
+        "a": "Jesus Aguilar",
+        "b": "Luis Gurule",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Alden Coria",
+        "b": "Alessandro Costa",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
     ]
   },
   {
@@ -177,21 +1408,100 @@
     "poster": "images/ufc-326.jpg",
     "status": "completed",
     "mainCard": [
-      {"a":"Charles Oliveira","b":"Max Holloway","weight":"Lightweight","rounds":"5 Rds","titleFight":true,"ranked":true,"slot":"main"},
-      {"a":"Caio Borralho","b":"Reinier de Ridder","weight":"Middleweight","rounds":"3 Rds","titleFight":false,"ranked":true,"slot":"comain"},
-      {"a":"Raul Rosas Jr.","b":"Rob Font","weight":"Bantamweight","rounds":"3 Rds","titleFight":false,"ranked":true},
-      {"a":"Drew Dober","b":"Michael Johnson","weight":"Lightweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Gregory Rodrigues","b":"Brunno Ferreira","weight":"Middleweight","rounds":"3 Rds","titleFight":false,"ranked":false}
+      {
+        "a": "Charles Oliveira",
+        "b": "Max Holloway",
+        "weight": "Lightweight",
+        "rounds": "5 Rds",
+        "titleFight": true,
+        "ranked": true,
+        "slot": "main"
+      },
+      {
+        "a": "Caio Borralho",
+        "b": "Reinier de Ridder",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "comain"
+      },
+      {
+        "a": "Raul Rosas Jr.",
+        "b": "Rob Font",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Drew Dober",
+        "b": "Michael Johnson",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Gregory Rodrigues",
+        "b": "Brunno Ferreira",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
     ],
     "prelims": [
-      {"a":"Cody Garbrandt","b":"Long Xiao","weight":"Bantamweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Donte Johnson","b":"Cody Brundage","weight":"Middleweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Alberto Montes","b":"Ricky Turcios","weight":"Featherweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Niko Price","b":"Themba Gorimbo","weight":"Welterweight","rounds":"3 Rds","titleFight":false,"ranked":false}
+      {
+        "a": "Cody Garbrandt",
+        "b": "Long Xiao",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Donte Johnson",
+        "b": "Cody Brundage",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Alberto Montes",
+        "b": "Ricky Turcios",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Niko Price",
+        "b": "Themba Gorimbo",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
     ],
     "earlyPrelims": [
-      {"a":"Nikita Krylov","b":"Bogdan Guskov","weight":"Light Heavyweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Nurullo Aliev","b":"Cody Durden","weight":"Flyweight","rounds":"3 Rds","titleFight":false,"ranked":false}
+      {
+        "a": "Nikita Krylov",
+        "b": "Bogdan Guskov",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Nurullo Aliev",
+        "b": "Cody Durden",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
     ]
   },
   {
@@ -205,21 +1515,100 @@
     "poster": "images/fn-london.jpg",
     "status": "completed",
     "mainCard": [
-      {"a":"Movsar Evloev","b":"Lerone Murphy","weight":"Featherweight","rounds":"5 Rds","titleFight":false,"ranked":true,"slot":"main"},
-      {"a":"Tom Aspinall","b":"Ciryl Gane","weight":"Heavyweight","rounds":"5 Rds","titleFight":true,"ranked":true,"slot":"comain"},
-      {"a":"Arnold Allen","b":"Edson Barboza","weight":"Featherweight","rounds":"3 Rds","titleFight":false,"ranked":true},
-      {"a":"Marc Diakiese","b":"Damir Ismagulov","weight":"Lightweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Paddy Pimblett","b":"Jordan Leavitt","weight":"Lightweight","rounds":"3 Rds","titleFight":false,"ranked":false}
+      {
+        "a": "Movsar Evloev",
+        "b": "Lerone Murphy",
+        "weight": "Featherweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "main"
+      },
+      {
+        "a": "Tom Aspinall",
+        "b": "Ciryl Gane",
+        "weight": "Heavyweight",
+        "rounds": "5 Rds",
+        "titleFight": true,
+        "ranked": true,
+        "slot": "comain"
+      },
+      {
+        "a": "Arnold Allen",
+        "b": "Edson Barboza",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Marc Diakiese",
+        "b": "Damir Ismagulov",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Paddy Pimblett",
+        "b": "Jordan Leavitt",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
     ],
     "prelims": [
-      {"a":"Luke Riley","b":"Mike Aswell Jr.","weight":"Light Heavyweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Chris Duncan","b":"Roman Dolidze","weight":"Middleweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Danny Silva","b":"Kyle Campbell","weight":"Lightweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Shanelle Dyer","b":"Rossana Oliveira","weight":"Women's Flyweight","rounds":"3 Rds","titleFight":false,"ranked":false}
+      {
+        "a": "Luke Riley",
+        "b": "Mike Aswell Jr.",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Chris Duncan",
+        "b": "Roman Dolidze",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Danny Silva",
+        "b": "Kyle Campbell",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Shanelle Dyer",
+        "b": "Rossana Oliveira",
+        "weight": "Women's Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
     ],
     "earlyPrelims": [
-      {"a":"Manel Kape","b":"Tatsuro Taira","weight":"Flyweight","rounds":"3 Rds","titleFight":false,"ranked":true},
-      {"a":"Brando Pericic","b":"Liam Sutherland","weight":"Light Heavyweight","rounds":"3 Rds","titleFight":false,"ranked":false}
+      {
+        "a": "Manel Kape",
+        "b": "Tatsuro Taira",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Brando Pericic",
+        "b": "Liam Sutherland",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
     ]
   },
   {
@@ -233,21 +1622,100 @@
     "poster": "images/fn-seattle.jpg",
     "status": "completed",
     "mainCard": [
-      {"a":"Israel Adesanya","b":"Joe Pyfer","weight":"Middleweight","rounds":"5 Rds","titleFight":false,"ranked":true,"slot":"main"},
-      {"a":"Alexa Grasso","b":"Maycee Barber","weight":"Women's Flyweight","rounds":"5 Rds","titleFight":false,"ranked":true,"slot":"comain"},
-      {"a":"Michael Chiesa","b":"Niko Price","weight":"Welterweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Julian Erosa","b":"Lerryan Douglas","weight":"Featherweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Mansur Abdul-Malik","b":"Yousri Belgaroui","weight":"Middleweight","rounds":"3 Rds","titleFight":false,"ranked":false}
+      {
+        "a": "Israel Adesanya",
+        "b": "Joe Pyfer",
+        "weight": "Middleweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "main"
+      },
+      {
+        "a": "Alexa Grasso",
+        "b": "Maycee Barber",
+        "weight": "Women's Flyweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "comain"
+      },
+      {
+        "a": "Michael Chiesa",
+        "b": "Niko Price",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Julian Erosa",
+        "b": "Lerryan Douglas",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Mansur Abdul-Malik",
+        "b": "Yousri Belgaroui",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
     ],
     "prelims": [
-      {"a":"Terrance McKinney","b":"Kyle Nelson","weight":"Lightweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Ignacio Bahamondes","b":"Tofiq Musayev","weight":"Lightweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Chase Hooper","b":"Lance Gibson Jr.","weight":"Lightweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Marcin Tybura","b":"Tyrell Fortune","weight":"Heavyweight","rounds":"3 Rds","titleFight":false,"ranked":false}
+      {
+        "a": "Terrance McKinney",
+        "b": "Kyle Nelson",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Ignacio Bahamondes",
+        "b": "Tofiq Musayev",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Chase Hooper",
+        "b": "Lance Gibson Jr.",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Marcin Tybura",
+        "b": "Tyrell Fortune",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
     ],
     "earlyPrelims": [
-      {"a":"Casey O'Neill","b":"Gabriella Fernandes","weight":"Women's Flyweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Navajo Stirling","b":"Bruno Lopes","weight":"Welterweight","rounds":"3 Rds","titleFight":false,"ranked":false}
+      {
+        "a": "Casey O'Neill",
+        "b": "Gabriella Fernandes",
+        "weight": "Women's Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Navajo Stirling",
+        "b": "Bruno Lopes",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
     ]
   },
   {
@@ -261,14 +1729,22 @@
     "poster": "images/fn-texas.jpg",
     "status": "upcoming",
     "mainCard": [
-      {"a":"Renato Moicano","b":"Chris Duncan","weight":"Lightweight","rounds":"5 Rds","titleFight":false,"ranked":true,"slot":"main"}
+      {
+        "a": "Renato Moicano",
+        "b": "Chris Duncan",
+        "weight": "Lightweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "main"
+      }
     ],
     "prelims": [],
     "earlyPrelims": []
   },
   {
     "id": "ufc-327-prochazka-vs-ulberg",
-    "name": "UFC 327: Procházka vs. Ulberg",
+    "name": "UFC 327: Proch\u00e1zka vs. Ulberg",
     "type": "PPV",
     "date": "Sat, Apr 11, 2026",
     "isoDate": "2026-04-11",
@@ -277,23 +1753,116 @@
     "poster": "images/ufc-327.jpg",
     "status": "upcoming",
     "mainCard": [
-      {"a":"Jiří Procházka","b":"Carlos Ulberg","weight":"Light Heavyweight","rounds":"5 Rds","titleFight":true,"ranked":true,"slot":"main"},
-      {"a":"Joshua Van","b":"Tatsuro Taira","weight":"Flyweight","rounds":"5 Rds","titleFight":true,"ranked":true,"slot":"comain"},
-      {"a":"Curtis Blaydes","b":"Josh Hokit","weight":"Heavyweight","rounds":"3 Rds","titleFight":false,"ranked":true},
-      {"a":"Beneil Dariush","b":"Manuel Torres","weight":"Lightweight","rounds":"3 Rds","titleFight":false,"ranked":true},
-      {"a":"Dominick Reyes","b":"Johnny Walker","weight":"Light Heavyweight","rounds":"3 Rds","titleFight":false,"ranked":true}
+      {
+        "a": "Ji\u0159\u00ed Proch\u00e1zka",
+        "b": "Carlos Ulberg",
+        "weight": "Light Heavyweight",
+        "rounds": "5 Rds",
+        "titleFight": true,
+        "ranked": true,
+        "slot": "main"
+      },
+      {
+        "a": "Joshua Van",
+        "b": "Tatsuro Taira",
+        "weight": "Flyweight",
+        "rounds": "5 Rds",
+        "titleFight": true,
+        "ranked": true,
+        "slot": "comain"
+      },
+      {
+        "a": "Curtis Blaydes",
+        "b": "Josh Hokit",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Beneil Dariush",
+        "b": "Manuel Torres",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Dominick Reyes",
+        "b": "Johnny Walker",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      }
     ],
     "prelims": [
-      {"a":"Paulo Costa","b":"Azamat Murzakanov","weight":"Light Heavyweight","rounds":"3 Rds","titleFight":false,"ranked":true},
-      {"a":"Patricio Pitbull","b":"Aaron Pico","weight":"Featherweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Mateusz Gamrot","b":"Esteban Ribovics","weight":"Lightweight","rounds":"3 Rds","titleFight":false,"ranked":true},
-      {"a":"Tatiana Suarez","b":"Lupita Godinez","weight":"Women's Strawweight","rounds":"3 Rds","titleFight":false,"ranked":true},
-      {"a":"Cub Swanson","b":"Nate Landwehr","weight":"Featherweight","rounds":"3 Rds","titleFight":false,"ranked":false}
+      {
+        "a": "Paulo Costa",
+        "b": "Azamat Murzakanov",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Patricio Pitbull",
+        "b": "Aaron Pico",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Mateusz Gamrot",
+        "b": "Esteban Ribovics",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Tatiana Suarez",
+        "b": "Lupita Godinez",
+        "weight": "Women's Strawweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Cub Swanson",
+        "b": "Nate Landwehr",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
     ],
     "earlyPrelims": [
-      {"a":"Kevin Holland","b":"Randy Brown","weight":"Welterweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Kelvin Gastelum","b":"Vicente Luque","weight":"Welterweight","rounds":"3 Rds","titleFight":false,"ranked":false},
-      {"a":"Nazim Sadykhov","b":"MarQuel Mederos","weight":"Welterweight","rounds":"3 Rds","titleFight":false,"ranked":false}
+      {
+        "a": "Kevin Holland",
+        "b": "Randy Brown",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Kelvin Gastelum",
+        "b": "Vicente Luque",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Nazim Sadykhov",
+        "b": "MarQuel Mederos",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
     ]
   },
   {
@@ -307,8 +1876,24 @@
     "poster": "",
     "status": "upcoming",
     "mainCard": [
-      {"a":"Arnold Allen","b":"Paulo Costa","weight":"Featherweight","rounds":"5 Rds","titleFight":false,"ranked":true,"slot":"main"},
-      {"a":"Aljamain Sterling","b":"Youssef Zalal","weight":"Featherweight","rounds":"3 Rds","titleFight":false,"ranked":true,"slot":"comain"}
+      {
+        "a": "Arnold Allen",
+        "b": "Paulo Costa",
+        "weight": "Featherweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "main"
+      },
+      {
+        "a": "Aljamain Sterling",
+        "b": "Youssef Zalal",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "comain"
+      }
     ],
     "prelims": [],
     "earlyPrelims": []
@@ -324,7 +1909,15 @@
     "poster": "",
     "status": "upcoming",
     "mainCard": [
-      {"a":"Ilia Topuria","b":"Justin Gaethje","weight":"Lightweight","rounds":"5 Rds","titleFight":true,"ranked":true,"slot":"main"}
+      {
+        "a": "Ilia Topuria",
+        "b": "Justin Gaethje",
+        "weight": "Lightweight",
+        "rounds": "5 Rds",
+        "titleFight": true,
+        "ranked": true,
+        "slot": "main"
+      }
     ],
     "prelims": [],
     "earlyPrelims": []
@@ -340,7 +1933,15 @@
     "poster": "",
     "status": "upcoming",
     "mainCard": [
-      {"a":"Brunno Ferreira","b":"TBA","weight":"Middleweight","rounds":"5 Rds","titleFight":false,"ranked":true,"slot":"main"}
+      {
+        "a": "Brunno Ferreira",
+        "b": "TBA",
+        "weight": "Middleweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "main"
+      }
     ],
     "prelims": [],
     "earlyPrelims": []

@@ -80,23 +80,30 @@ function renderTrendingCards(articles) {
   cardsContainer.innerHTML = '';
   
   articles.forEach((article, index) => {
+    // Support both old format (link) and new NewsAPI format (url)
+    const articleUrl   = article.url || article.link || '#';
+    const articleImage = article.imageUrl || article.image || '';
+    const articleTitle = article.title || '';
+    const articleSource = article.source || '';
+
     const card = document.createElement('a');
-    card.href = article.url || '#';
+    card.href = articleUrl;
     card.target = '_blank';
+    card.rel = 'noopener noreferrer';
     card.className = 'card-link';
-    card.setAttribute('data-title', article.title);
+    card.setAttribute('data-title', articleTitle);
     
-    // Use article image or fallback to story image
-    const imageStyle = article.imageUrl 
-      ? `background-image: url('${article.imageUrl}')` 
+    const imageStyle = articleImage 
+      ? `background-image: url('${articleImage}'); background-size:cover; background-position:center;` 
       : '';
     
     card.innerHTML = `
       <div class="medium-card">
-        <div class="card-image ${!article.imageUrl ? `story${index + 1}` : ''}" 
+        <div class="card-image ${!articleImage ? `story${index + 1}` : ''}" 
              style="${imageStyle}">
         </div>
-        <h2>${article.title}</h2>
+        <h2>${articleTitle}</h2>
+        ${articleSource ? `<div class="card-source" style="font-size:0.7rem;color:rgba(255,255,255,0.4);margin-top:4px;font-family:'Inter',sans-serif;">${articleSource}</div>` : ''}
       </div>
     `;
     

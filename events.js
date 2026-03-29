@@ -259,7 +259,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       btn.addEventListener('click', () => {
         let f;
         try { f = JSON.parse(btn.dataset.fight); } catch { return; }
-        openDrawer(`${f.a} vs ${f.b}`, `
+
+        const drawerHtml = `
           <div class="drawer-hero">
             <div class="drawer-fightline">
               <div class="drawer-a">${esc(f.a)}</div>
@@ -267,33 +268,58 @@ document.addEventListener('DOMContentLoaded', async () => {
               <div class="drawer-b">${esc(f.b)}</div>
             </div>
             <div class="drawer-pills">
-              ${f.weight  ? `<span class="pill">${esc(f.weight)}</span>` : ''}
-              ${f.rounds  ? `<span class="pill pill-dim">${esc(f.rounds)}</span>` : ''}
-              ${f.titleFight ? `<span class="pill">🏆 Belt</span>` : ''}
-              ${f.ranked  ? `<span class="pill">⭐ Ranked</span>` : ''}
+              ${f.weight    ? `<span class="pill">${esc(f.weight)}</span>`    : ''}
+              ${f.rounds    ? `<span class="pill pill-dim">${esc(f.rounds)}</span>` : ''}
+              ${f.titleFight? `<span class="pill">🏆 Title Fight</span>`      : ''}
+              ${f.ranked    ? `<span class="pill">⭐ Ranked</span>`           : ''}
             </div>
             <div class="drawer-sub">
               <div class="drawer-event">${esc(f.eventName||'')}</div>
               <div class="drawer-meta">
                 ${esc(f.eventDate||'TBA')}
-                ${f.eventLocation ? ` • ${esc(f.eventLocation)}` : ''}
-                ${f.eventVenue ? ` • ${esc(f.eventVenue)}` : ''}
+                ${f.eventLocation ? ` · ${esc(f.eventLocation)}` : ''}
               </div>
             </div>
           </div>
+
           <div class="drawer-grid">
-            <div class="drawer-card">
-              <div class="drawer-card-title">Fight Info</div>
-              <div class="drawer-lines">
-                <div class="line">${f.titleFight ? '🏆 Belt on the line' : 'No title at stake'}</div>
-                <div class="line">${f.ranked ? '⭐ Ranked matchup' : 'Unranked matchup'}</div>
-              </div>
-            </div>
-            <div class="drawer-card">
-              <div class="drawer-card-title">Recent Form</div>
+            <div class="drawer-card" id="drawerFighterStats">
+              <div class="drawer-card-title">Fighter Info</div>
               <div class="form-split">${formCol(f.a)}${formCol(f.b)}</div>
             </div>
-          </div>`);
+
+            <div class="drawer-card" id="drawerNews">
+              <div class="drawer-card-title">📰 Related News</div>
+              <div id="drawerNewsContent" style="color:rgba(255,255,255,0.3);font-size:0.8rem;font-family:'Inter',sans-serif">
+                Loading news…
+              </div>
+            </div>
+          </div>`;
+
+        openDrawer(`${f.a} vs ${f.b}`, drawerHtml);
+
+        // Fetch related news in background
+        const query = `${f.a} ${f.b} UFC`;
+        const base = getApiBase();
+        fetch(`${base}/news/search?q=${encodeURIComponent(query)}`)
+          .then(r => r.ok ? r.json() : [])
+          .then(articles => {
+            const el = document.getElementById('drawerNewsContent');
+            if (!el) return;
+            if (!articles.length) {
+              el.textContent = 'No recent news found.';
+              return;
+            }
+            el.innerHTML = articles.map(a => `
+              <a href="${esc(a.url)}" target="_blank" rel="noopener" class="drawer-news-item">
+                <div class="drawer-news-source">${esc(a.source)}</div>
+                <div class="drawer-news-title">${esc(a.title)}</div>
+              </a>`).join('');
+          })
+          .catch(() => {
+            const el = document.getElementById('drawerNewsContent');
+            if (el) el.textContent = 'Could not load news.';
+          });
       });
     });
   }

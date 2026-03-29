@@ -1,55 +1,51 @@
 // ==============================================
-// MMA BRIDGE - EVENT REVIEW PAGE (PAST EVENTS)
-// Rate the card. That's it.
+// MMA BRIDGE — EVENT REVIEW PAGE
+// Layout: Poster → Stars → Text review → Full fight card
 // ==============================================
 
 import CONFIG, { debugLog } from './config.js';
 import API from './api.js';
 
-const root = document.getElementById('erRoot');
+const root       = document.getElementById('erRoot');
 const breadcrumb = document.getElementById('breadcrumbName');
 
 const RATING_LABELS = ['', 'Terrible card', 'Below average', 'Decent night', 'Great card', 'All-time classic 🔥'];
 
-function escHtml(str) {
-  return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
-function slugify(str) {
-  return (str||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+function slugify(s) {
+  return (s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
 }
 function getApiBase() {
-  return (CONFIG.API && CONFIG.API.BASE_URL)
-    ? CONFIG.API.BASE_URL
-    : 'https://mmabridge-backend.onrender.com/api';
+  return CONFIG?.API?.BASE_URL || 'https://mmabridge-backend.onrender.com/api';
 }
 
-// ── Load event data ───────────────────────────
+// ── Load event ────────────────────────────────
 async function resolveEvent(eventId) {
   try {
     const cached = sessionStorage.getItem('review_event');
     if (cached) {
       const ev = JSON.parse(cached);
-      const cachedId = ev.id || slugify(ev.name || ev.eventName || '');
-      if (cachedId === eventId) return ev;
+      if ((ev.id || slugify(ev.name || ev.eventName || '')) === eventId) return ev;
     }
   } catch {}
-  const events = await API.getUpcomingEvents();
-  return events.find(ev => (ev.id || slugify(ev.name || ev.eventName || '')) === eventId) || null;
+  const all = await API.getUpcomingEvents();
+  return all.find(ev => (ev.id || slugify(ev.name || ev.eventName || '')) === eventId) || null;
 }
 
-// ── Community rating ──────────────────────────
 async function fetchCommunityRating(eventId) {
   try {
-    const res = await fetch(`${getApiBase()}/ratings/${encodeURIComponent(eventId)}`);
-    if (!res.ok) return null;
-    return await res.json();
+    const r = await fetch(`${getApiBase()}/ratings/${encodeURIComponent(eventId)}`);
+    if (!r.ok) return null;
+    return await r.json();
   } catch { return null; }
 }
 
-async function submitRating(eventId, eventName, rating, reviewText = '') {
-  const res = await fetch(`${getApiBase()}/ratings`, {
+async function submitRating(eventId, eventName, rating, reviewText) {
+  const r = await fetch(`${getApiBase()}/ratings`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {'Content-Type':'application/json'},
     body: JSON.stringify({
       event_id: eventId,
       event_name: eventName,
@@ -58,112 +54,167 @@ async function submitRating(eventId, eventName, rating, reviewText = '') {
       review_text: reviewText || null
     })
   });
-  if (!res.ok) throw new Error('Submit failed');
-  return res.json();
+  if (!r.ok) throw new Error('Submit failed');
+  return r.json();
 }
 
-// ── Render ────────────────────────────────────
-function renderPage(ev, communityRating) {
-  const eventId    = ev.id || slugify(ev.name || ev.eventName || '');
-  const name       = ev.name || ev.eventName || 'Unnamed Event';
-  const date       = ev.date || '';
-  const type       = ev.type || '';
-  const loc        = ev.location || '';
-  const venue      = ev.venue || '';
-  const poster     = ev.poster || '';
+// ── Fight card section ────────────────────────
+function fightRow(f) {
+  const slotBadge = f.slot === 'main'
+    ? '<span class="er-slot-badge er-main-badge">MAIN EVENT</span>'
+    : f.slot === 'comain'
+      ? '<span class="er-slot-badge er-comain-badge">CO-MAIN</span>'
+      : '';
+  const icons = [
+    f.titleFight ? '🏆' : '',
+    f.ranked     ? '⭐' : '',
+  ].filter(Boolean).join(' ');
 
-  const avg         = communityRating?.avg_hype ?? null;
-  const totalRatings = communityRating?.total_ratings ?? 0;
+  return `
+    <div class="er-fight-row ${f.slot === 'main' ? 'er-fight-main' : f.slot === 'comain' ? 'er-fight-comain' : ''}">
+      ${slotBadge ? `<div>${slotBadge}</div>` : ''}
+      <div class="er-fight-names">
+        <span class="er-fa">${esc(f.a)}</span>
+        <span class="er-fvs">vs</span>
+        <span class="er-fb">${esc(f.b)}</span>
+        ${icons ? `<span class="er-ficons">${icons}</span>` : ''}
+      </div>
+      <div class="er-fight-meta">
+        ${f.weight ? `<span class="pill">${esc(f.weight)}</span>` : ''}
+        ${f.rounds ? `<span class="pill pill-dim">${esc(f.rounds)}</span>` : ''}
+      </div>
+    </div>`;
+}
+
+function fightSection(label, fights) {
+  if (!fights?.length) return '';
+  return `
+    <details class="er-drop">
+      <summary class="er-drop-sum">
+        <span>${esc(label)}</span>
+        <span class="er-drop-right">
+          <span class="count">${fights.length}</span>
+          <span class="chev">▾</span>
+        </span>
+      </summary>
+      <div class="er-drop-body">
+        ${fights.map(fightRow).join('')}
+      </div>
+    </details>`;
+}
+
+// ── Render page ───────────────────────────────
+function renderPage(ev, community) {
+  const eventId = ev.id || slugify(ev.name || ev.eventName || '');
+  const name    = ev.name || ev.eventName || 'Unnamed Event';
+  const poster  = ev.poster || '';
+  const avg     = community?.avg_hype ?? null;
+  const total   = community?.total_ratings ?? 0;
+
+  const hasCard = (ev.mainCard?.length || ev.prelims?.length || ev.earlyPrelims?.length);
 
   breadcrumb.textContent = name;
   document.title = `MMA Bridge | ${name}`;
 
   root.innerHTML = `
-    <div class="er-layout">
+    <div class="er-page">
 
-      <!-- LEFT: poster + community score -->
-      <div class="er-poster-col">
-        ${poster
-          ? `<img class="er-poster" src="${escHtml(poster)}" alt="${escHtml(name)}"
-               onerror="this.style.display='none';document.getElementById('erFallback').style.display='flex';">
-             <div class="er-poster-placeholder" id="erFallback" style="display:none;">🥊</div>`
-          : `<div class="er-poster-placeholder">🥊</div>`
-        }
-
-        <div class="er-community-pill">
-          <div class="pill-label">Community Rating</div>
-          <div class="pill-val" id="pillVal">${avg ? `★ ${avg}` : '—'}</div>
-          <div class="pill-count" id="pillCount">
-            ${totalRatings ? `${totalRatings} rating${totalRatings !== 1 ? 's' : ''}` : 'No ratings yet'}
+      <!-- POSTER -->
+      ${poster ? `
+        <div class="er-hero">
+          <img class="er-hero-img" src="${esc(poster)}" alt="${esc(name)}">
+          <div class="er-hero-overlay">
+            ${ev.type ? `<span class="er-event-type">${esc(ev.type)}</span>` : ''}
+            <div class="er-hero-name">${esc(name)}</div>
+            <div class="er-hero-meta">
+              ${ev.date ? esc(ev.date) : ''}
+              ${ev.location ? ` &nbsp;·&nbsp; ${esc(ev.location)}` : ''}
+              ${ev.venue ? ` &nbsp;·&nbsp; ${esc(ev.venue)}` : ''}
+            </div>
           </div>
-        </div>
-      </div>
+        </div>` : `
+        <div class="er-no-poster">
+          <div class="er-no-poster-inner">
+            ${ev.type ? `<span class="er-event-type">${esc(ev.type)}</span>` : ''}
+            <div class="er-hero-name">${esc(name)}</div>
+            <div class="er-hero-meta">
+              ${ev.date ? esc(ev.date) : ''}
+              ${ev.location ? ` · ${esc(ev.location)}` : ''}
+            </div>
+          </div>
+        </div>`
+      }
 
-      <!-- RIGHT: info + rating -->
-      <div class="er-main">
-        ${type ? `<div class="er-event-type">${escHtml(type)}</div>` : ''}
-        <div class="er-event-name">${escHtml(name)}</div>
-        <div class="er-event-meta">
-          ${date   ? `<span>${escHtml(date)}</span>`         : ''}
-          ${loc    ? `<span>📍 ${escHtml(loc)}</span>`       : ''}
-          ${venue  ? `<span>${escHtml(venue)}</span>`        : ''}
+      <div class="er-content">
+
+        <!-- COMMUNITY SCORE -->
+        <div class="er-community-bar">
+          <span class="er-comm-label">Community Rating</span>
+          <span class="er-comm-val" id="erCommVal">
+            ${avg ? `★ ${avg} &nbsp;·&nbsp; ${total} rating${total!==1?'s':''}` : 'No ratings yet — be first!'}
+          </span>
         </div>
 
-        <!-- RATING CARD -->
+        <!-- STAR RATING -->
         <div class="er-card">
           <div class="er-card-title">How was the card?</div>
-          <div class="star-row" id="starRow">
+          <div class="er-stars" id="erStars">
             ${[1,2,3,4,5].map(n =>
-              `<button class="star-btn" data-val="${n}" type="button">★</button>`
+              `<button class="er-star" data-val="${n}" type="button">★</button>`
             ).join('')}
           </div>
-          <div class="hype-label" id="ratingLabel">Tap a star to rate</div>
+          <div class="er-rating-lbl" id="erRatingLbl">Tap a star to rate</div>
         </div>
 
         <!-- TEXT REVIEW -->
         <div class="er-card">
-          <div class="er-card-title">Leave a review <span style="font-weight:400;color:rgba(255,255,255,0.3);text-transform:none;letter-spacing:0">(optional)</span></div>
-          <textarea id="reviewText" placeholder="Feel free to break down the card — standout fights, surprises, disappointments..." rows="4" style="
-            width:100%; box-sizing:border-box;
-            background:#0e0e0e; border:1px solid #2a2a2a; border-radius:6px;
-            color:#fff; font-family:'Inter',sans-serif; font-size:0.85rem;
-            padding:12px 14px; resize:vertical; outline:none;
-            transition:border-color 0.18s; line-height:1.55;
-          "></textarea>
+          <div class="er-card-title">Leave a review <span class="er-optional">(optional)</span></div>
+          <textarea id="erReviewText"
+            placeholder="Break down the card — standout fights, surprises, disappointments, what you'd give FOTN..."
+            rows="4"
+          ></textarea>
         </div>
 
+        <!-- SUBMIT -->
         <button class="er-submit" id="erSubmit" disabled>Submit Review</button>
         <div class="er-toast" id="erToast">✅ Review saved — thanks!</div>
-        <div id="erError" style="display:none; font-family:'Inter',sans-serif; font-size:0.8rem; color:#ff6b6b; margin-top:8px;"></div>
+        <div class="er-error-msg" id="erErr" style="display:none"></div>
+
+        <!-- FIGHT CARD -->
+        ${hasCard ? `
+          <div class="er-card er-card-fights">
+            <div class="er-card-title">Full Fight Card</div>
+            ${fightSection('Main Card',    ev.mainCard)}
+            ${fightSection('Prelims',      ev.prelims)}
+            ${fightSection('Early Prelims',ev.earlyPrelims)}
+          </div>` : ''}
+
       </div>
+    </div>`;
 
-    </div>
-  `;
-
-  // ── Star interaction ──────────────────────
+  // ── Stars ─────────────────────────────────
   let selected = 0;
-  const stars     = root.querySelectorAll('.star-btn');
-  const label     = root.querySelector('#ratingLabel');
+  const stars     = root.querySelectorAll('.er-star');
+  const ratingLbl = root.querySelector('#erRatingLbl');
   const submitBtn = root.querySelector('#erSubmit');
   const toast     = root.querySelector('#erToast');
-  const errEl     = root.querySelector('#erError');
-  const textarea  = root.querySelector('#reviewText');
+  const errEl     = root.querySelector('#erErr');
+  const textarea  = root.querySelector('#erReviewText');
 
-  // Textarea cyan focus
-  textarea.addEventListener('focus', () => textarea.style.borderColor = 'rgba(0,255,255,0.5)');
-  textarea.addEventListener('blur',  () => textarea.style.borderColor = '#2a2a2a');
+  textarea.addEventListener('focus', () => textarea.style.borderColor = 'rgba(0,255,255,0.45)');
+  textarea.addEventListener('blur',  () => textarea.style.borderColor = '#222');
 
   function lightStars(val) {
-    stars.forEach(s => s.classList.toggle('lit', parseInt(s.dataset.val) <= val));
+    stars.forEach(s => s.classList.toggle('er-star-lit', +s.dataset.val <= val));
   }
 
   stars.forEach(s => {
-    s.addEventListener('mouseenter', () => lightStars(parseInt(s.dataset.val)));
+    s.addEventListener('mouseenter', () => lightStars(+s.dataset.val));
     s.addEventListener('mouseleave', () => lightStars(selected));
     s.addEventListener('click', () => {
-      selected = parseInt(s.dataset.val);
+      selected = +s.dataset.val;
       lightStars(selected);
-      label.textContent = RATING_LABELS[selected];
+      ratingLbl.textContent = RATING_LABELS[selected];
       submitBtn.disabled = false;
     });
   });
@@ -180,14 +231,11 @@ function renderPage(ev, communityRating) {
       toast.classList.add('show');
       submitBtn.textContent = '✓ Submitted';
 
-      // Refresh community score
       const fresh = await fetchCommunityRating(eventId);
       if (fresh) {
-        const pv = root.querySelector('#pillVal');
-        const pc = root.querySelector('#pillCount');
-        if (pv) pv.textContent = fresh.avg_hype ? `★ ${fresh.avg_hype}` : '—';
-        if (pc) pc.textContent = fresh.total_ratings
-          ? `${fresh.total_ratings} rating${fresh.total_ratings !== 1 ? 's' : ''}`
+        const cv = root.querySelector('#erCommVal');
+        if (cv) cv.innerHTML = fresh.avg_hype
+          ? `★ ${fresh.avg_hype} &nbsp;·&nbsp; ${fresh.total_ratings} rating${fresh.total_ratings!==1?'s':''}`
           : 'No ratings yet';
       }
     } catch {
@@ -205,26 +253,25 @@ function renderPage(ev, communityRating) {
   const eventId = params.get('id');
 
   if (!eventId) {
-    root.innerHTML = `<div class="er-error">No event specified. <a href="reviews.html" style="color:cyan">← Back</a></div>`;
+    root.innerHTML = `<div class="er-empty">No event specified. <a href="reviews.html">← Back</a></div>`;
     return;
   }
 
-  root.innerHTML = `<div class="er-error" style="padding:60px 0; color:rgba(255,255,255,0.3)">Loading…</div>`;
+  root.innerHTML = `<div class="er-empty" style="padding:80px 0;color:rgba(255,255,255,0.2)">Loading…</div>`;
 
   try {
-    const [ev, communityRating] = await Promise.all([
+    const [ev, community] = await Promise.all([
       resolveEvent(eventId),
       fetchCommunityRating(eventId)
     ]);
 
     if (!ev) {
-      root.innerHTML = `<div class="er-error">Event not found. <a href="reviews.html" style="color:cyan">← Back</a></div>`;
+      root.innerHTML = `<div class="er-empty">Event not found. <a href="reviews.html">← Back</a></div>`;
       return;
     }
-
-    renderPage(ev, communityRating);
+    renderPage(ev, community);
   } catch (err) {
-    console.error('event-review:', err);
-    root.innerHTML = `<div class="er-error">Failed to load. <a href="reviews.html" style="color:cyan">← Back</a></div>`;
+    console.error(err);
+    root.innerHTML = `<div class="er-empty">Failed to load. <a href="reviews.html">← Back</a></div>`;
   }
 })();
