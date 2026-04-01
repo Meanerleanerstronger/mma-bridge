@@ -6,6 +6,9 @@ import CONFIG, { debugLog } from './config.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
 
+  // Keep Render backend awake
+  fetch('https://mmabridge-backend.onrender.com/api/health').catch(() => {});
+
   // Load events for hero + recent results
   try {
     const all = await fetch('/events.json').then(r => r.json());
@@ -147,11 +150,25 @@ async function renderNews() {
     }
 
     if (!articles.length) {
-      // Fallback static articles
       articles = [
-        {title:'UFC 327: Procházka vs. Ulberg Preview — Full Card Breakdown',url:'https://mmajunkie.usatoday.com/',imageUrl:'images/ufc-327.jpg',source:'MMA Junkie'},
-        {title:'Joe Pyfer Stuns Adesanya With Second Round TKO in Seattle',url:'https://www.espn.com/mma/',imageUrl:'images/fn-seattle.jpg',source:'ESPN MMA'},
-        {title:'Charles Oliveira Claims BMF Title Over Max Holloway at UFC 326',url:'https://www.cbssports.com/ufc/',imageUrl:'images/ufc-326.jpg',source:'CBS Sports'},
+        {
+          title: 'UFC 327: Procházka vs. Ulberg — Full Card Preview and Predictions',
+          url: 'https://mmajunkie.usatoday.com/category/ufc',
+          imageUrl: 'images/ufc-327.jpg',
+          source: 'MMA Junkie'
+        },
+        {
+          title: 'Joe Pyfer Stuns Adesanya With Second Round TKO in Seattle',
+          url: 'https://www.espn.com/mma/',
+          imageUrl: 'images/fn-seattle.jpg',
+          source: 'ESPN MMA'
+        },
+        {
+          title: 'Charles Oliveira Claims BMF Title Over Max Holloway at UFC 326',
+          url: 'https://www.cbssports.com/ufc/',
+          imageUrl: 'images/ufc-326.jpg',
+          source: 'CBS Sports'
+        },
       ];
     }
 
