@@ -108,8 +108,8 @@ async function renderNews() {
         <a href="${a.url||'#'}" target="_blank" rel="noopener noreferrer"
            class="card-link" data-title="${(a.title||'').replace(/"/g,'&quot;')}">
           <div class="medium-card">
-            <div class="card-image ${!a.imageUrl?`story${i+1}`:''}"
-                 style="${a.imageUrl?`background-image:url('${a.imageUrl}');background-size:cover;background-position:center;`:''}">
+            <div class="card-image"
+                 style="background-image:${a.imageUrl ? `url('${a.imageUrl}')` : 'none'};background-size:cover;background-position:center;${!a.imageUrl ? `background-color:#1a1a1a;` : ''}">
             </div>
             <h2>${a.title||''}</h2>
             ${a.source?`<div style="font-size:0.68rem;color:rgba(255,255,255,0.4);margin-top:4px;font-family:'Inter',sans-serif;">${a.source}</div>`:''}
