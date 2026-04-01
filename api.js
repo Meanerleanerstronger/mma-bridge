@@ -157,32 +157,14 @@ export const API = {
 
   async getUpcomingEvents() {
     const today = new Date().toISOString().slice(0,10);
-    if (CONFIG.API.USE_MOCK) {
-      const all = await fetchData(CONFIG.ENDPOINTS.EVENTS);
-      return all.filter(e => (e.isoDate || '9999') >= today);
-    }
-    try {
-      const events = await fetchData(CONFIG.ENDPOINTS.UPCOMING_EVENTS);
-      if (Array.isArray(events) && events.length) return events;
-    } catch {}
-    // Fallback — read directly from the JSON file
     const all = await fetch('/events.json').then(r => r.json());
     return all.filter(e => (e.isoDate || '9999') >= today);
   },
 
   async getPastEvents() {
     const today = new Date().toISOString().slice(0,10);
-    if (CONFIG.API.USE_MOCK) {
-      const all = await fetchData(CONFIG.ENDPOINTS.EVENTS);
-      return all.filter(e => (e.isoDate || '9999') < today);
-    }
-    try {
-      const events = await fetchData('/events/past');
-      if (Array.isArray(events) && events.length) return events;
-    } catch {}
-    // Fallback — read directly from the JSON file
     const all = await fetch('/events.json').then(r => r.json());
-    return all.filter(e => (e.isoDate || '9999') < today);
+    return all.filter(e => (e.isoDate || '9999') < today && e.status === 'completed');
   },
 
   async getEvent(id) {
