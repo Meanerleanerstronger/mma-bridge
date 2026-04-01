@@ -17,7 +17,11 @@
         "rounds": "5 Rds",
         "titleFight": false,
         "ranked": true,
-        "slot": "main"
+        "slot": "main",
+        "winner": "Kamaru Usman",
+        "method": "UD",
+        "round": 5,
+        "time": "5:00"
       },
       {
         "a": "Rose Namajunas",
@@ -26,7 +30,11 @@
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
-        "slot": "comain"
+        "slot": "comain",
+        "winner": "Rose Namajunas",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Edmen Shahbazyan",
@@ -34,7 +42,11 @@
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Edmen Shahbazyan",
+        "method": "KO",
+        "round": 1,
+        "time": "4:18"
       },
       {
         "a": "Anthony Menifield",
@@ -42,7 +54,11 @@
         "weight": "Light Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Anthony Menifield",
+        "method": "TKO",
+        "round": 2,
+        "time": "2:45"
       },
       {
         "a": "Ricky Simon",
@@ -50,7 +66,11 @@
         "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Ricky Simon",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "prelims": [
@@ -60,7 +80,11 @@
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Draw",
+        "method": "Draw",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Paul Craig",
@@ -68,7 +92,11 @@
         "weight": "Light Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "NC",
+        "method": "NC",
+        "round": 2,
+        "time": "2:30"
       },
       {
         "a": "Mark Wellmaker",
@@ -76,7 +104,11 @@
         "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Mark Wellmaker",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "earlyPrelims": []
@@ -99,7 +131,11 @@
         "rounds": "5 Rds",
         "titleFight": true,
         "ranked": true,
-        "slot": "main"
+        "slot": "main",
+        "winner": "Ilia Topuria",
+        "method": "KO",
+        "round": 1,
+        "time": "2:27"
       },
       {
         "a": "Alexandre Pantoja",
@@ -108,7 +144,11 @@
         "rounds": "5 Rds",
         "titleFight": true,
         "ranked": true,
-        "slot": "comain"
+        "slot": "comain",
+        "winner": "Alexandre Pantoja",
+        "method": "SUB",
+        "round": 3,
+        "time": "1:55"
       },
       {
         "a": "Joshua Van",
@@ -116,7 +156,11 @@
         "weight": "Flyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Joshua Van",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Beneil Dariush",
@@ -124,7 +168,11 @@
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Beneil Dariush",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Payton Talbott",
@@ -132,7 +180,11 @@
         "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Payton Talbott",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "prelims": [
@@ -142,7 +194,11 @@
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Gregory Rodrigues",
+        "method": "KO",
+        "round": 1,
+        "time": "4:21"
       },
       {
         "a": "Jose Delgado",
@@ -150,7 +206,11 @@
         "weight": "Featherweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Jose Delgado",
+        "method": "KO",
+        "round": 1,
+        "time": "0:26"
       },
       {
         "a": "Tracy Cortez",
@@ -158,7 +218,11 @@
         "weight": "Women's Flyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Tracy Cortez",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Terrance McKinney",
@@ -166,7 +230,11 @@
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Terrance McKinney",
+        "method": "SUB",
+        "round": 1,
+        "time": "0:55"
       }
     ],
     "earlyPrelims": [
@@ -176,7 +244,11 @@
         "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Jacobe Smith",
+        "method": "SUB",
+        "round": 2,
+        "time": "4:03"
       },
       {
         "a": "Jhonata Diniz",
@@ -184,7 +256,11 @@
         "weight": "Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Jhonata Diniz",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       }
     ]
   },
@@ -206,7 +282,11 @@
         "rounds": "5 Rds",
         "titleFight": true,
         "ranked": true,
-        "slot": "main"
+        "slot": "main",
+        "winner": "Max Holloway",
+        "method": "UD",
+        "round": 5,
+        "time": "5:00"
       },
       {
         "a": "Paulo Costa",
@@ -215,7 +295,11 @@
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
-        "slot": "comain"
+        "slot": "comain",
+        "winner": "Paulo Costa",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Daniel Rodriguez",
@@ -223,7 +307,11 @@
         "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Daniel Rodriguez",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Patricio Pitbull",
@@ -231,7 +319,11 @@
         "weight": "Featherweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Patricio Pitbull",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Michael Johnson",
@@ -239,7 +331,11 @@
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Michael Johnson",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "prelims": [
@@ -249,7 +345,11 @@
         "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Vinicius Oliveira",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Brendan Allen",
@@ -257,7 +357,11 @@
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Brendan Allen",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Nikolay Veretennikov",
@@ -265,7 +369,11 @@
         "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Nikolay Veretennikov",
+        "method": "SD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Ateba Gautier",
@@ -273,7 +381,11 @@
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Ateba Gautier",
+        "method": "TKO",
+        "round": 1,
+        "time": "1:10"
       }
     ],
     "earlyPrelims": [
@@ -283,7 +395,11 @@
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Islam Dulatov",
+        "method": "KO",
+        "round": 1,
+        "time": "0:55"
       },
       {
         "a": "Jimmy Crute",
@@ -291,7 +407,11 @@
         "weight": "Light Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Jimmy Crute",
+        "method": "SUB",
+        "round": 1,
+        "time": "2:44"
       },
       {
         "a": "Ryan Spann",
@@ -299,7 +419,11 @@
         "weight": "Light Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Ryan Spann",
+        "method": "SUB",
+        "round": 2,
+        "time": "3:10"
       },
       {
         "a": "Carli Judice",
@@ -307,7 +431,11 @@
         "weight": "Women's Strawweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Carli Judice",
+        "method": "TKO",
+        "round": 3,
+        "time": "4:20"
       }
     ]
   },
@@ -329,7 +457,11 @@
         "rounds": "5 Rds",
         "titleFight": true,
         "ranked": true,
-        "slot": "main"
+        "slot": "main",
+        "winner": "Khamzat Chimaev",
+        "method": "UD",
+        "round": 5,
+        "time": "5:00"
       },
       {
         "a": "Lerone Murphy",
@@ -338,7 +470,11 @@
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
-        "slot": "comain"
+        "slot": "comain",
+        "winner": "Lerone Murphy",
+        "method": "KO",
+        "round": 1,
+        "time": "3:21"
       },
       {
         "a": "Carlos Prates",
@@ -346,7 +482,11 @@
         "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Carlos Prates",
+        "method": "KO",
+        "round": 1,
+        "time": "4:59"
       },
       {
         "a": "Michael Page",
@@ -354,7 +494,11 @@
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Michael Page",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Tim Elliott",
@@ -362,7 +506,11 @@
         "weight": "Flyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Tim Elliott",
+        "method": "SUB",
+        "round": 2,
+        "time": "4:39"
       }
     ],
     "prelims": [
@@ -372,7 +520,11 @@
         "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Baisangur Susurkaev",
+        "method": "SUB",
+        "round": 2,
+        "time": "2:01"
       },
       {
         "a": "Micha\u0142 Oleksiejczuk",
@@ -380,7 +532,11 @@
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Micha\u0142 Oleksiejczuk",
+        "method": "TKO",
+        "round": 1,
+        "time": "2:15"
       },
       {
         "a": "Lupita Godinez",
@@ -388,7 +544,11 @@
         "weight": "Women's Strawweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Lupita Godinez",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Alexander Hernandez",
@@ -396,7 +556,11 @@
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Alexander Hernandez",
+        "method": "KO",
+        "round": 1,
+        "time": "1:33"
       }
     ],
     "earlyPrelims": [
@@ -406,7 +570,11 @@
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Drakkar Klose",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Joseph Morales",
@@ -414,7 +582,11 @@
         "weight": "Flyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Joseph Morales",
+        "method": "SUB",
+        "round": 2,
+        "time": "3:04"
       }
     ]
   },
@@ -436,7 +608,11 @@
         "rounds": "5 Rds",
         "titleFight": false,
         "ranked": true,
-        "slot": "main"
+        "slot": "main",
+        "winner": "Nassourdine Imavov",
+        "method": "UD",
+        "round": 5,
+        "time": "5:00"
       },
       {
         "a": "Beno\u00eet Saint-Denis",
@@ -445,7 +621,11 @@
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
-        "slot": "comain"
+        "slot": "comain",
+        "winner": "Beno\u00eet Saint-Denis",
+        "method": "KO",
+        "round": 1,
+        "time": "2:15"
       },
       {
         "a": "Modestas Bukauskas",
@@ -453,7 +633,11 @@
         "weight": "Light Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Modestas Bukauskas",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Oumar Sy",
@@ -461,7 +645,11 @@
         "weight": "Light Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Oumar Sy",
+        "method": "TKO",
+        "round": 2,
+        "time": "3:10"
       },
       {
         "a": "Raulian Paiva",
@@ -469,7 +657,11 @@
         "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Raulian Paiva",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "prelims": [
@@ -479,7 +671,11 @@
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Mason Jones",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "William Gomis",
@@ -487,7 +683,11 @@
         "weight": "Featherweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "William Gomis",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Brad Tavares",
@@ -495,7 +695,11 @@
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Brad Tavares",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "earlyPrelims": []
@@ -518,7 +722,11 @@
         "rounds": "5 Rds",
         "titleFight": false,
         "ranked": true,
-        "slot": "main"
+        "slot": "main",
+        "winner": "Johnny Walker",
+        "method": "KO",
+        "round": 1,
+        "time": "0:35"
       },
       {
         "a": "Aljamain Sterling",
@@ -527,7 +735,11 @@
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
-        "slot": "comain"
+        "slot": "comain",
+        "winner": "Aljamain Sterling",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Sergei Pavlovich",
@@ -535,7 +747,11 @@
         "weight": "Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Sergei Pavlovich",
+        "method": "TKO",
+        "round": 2,
+        "time": "1:22"
       },
       {
         "a": "Lone'er Kavanagh",
@@ -543,7 +759,11 @@
         "weight": "Flyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Charles Johnson",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Michel Pereira",
@@ -551,7 +771,11 @@
         "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Kyle Daukaus",
+        "method": "KO",
+        "round": 1,
+        "time": "4:58"
       }
     ],
     "prelims": [
@@ -561,7 +785,11 @@
         "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Uros Medic",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Denise Gomes",
@@ -569,7 +797,11 @@
         "weight": "Women's Strawweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Denise Gomes",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Javid Basharat",
@@ -577,7 +809,11 @@
         "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Javid Basharat",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "earlyPrelims": []
@@ -600,7 +836,11 @@
         "rounds": "5 Rds",
         "titleFight": true,
         "ranked": true,
-        "slot": "main"
+        "slot": "main",
+        "winner": "Alex Pereira",
+        "method": "TKO",
+        "round": 1,
+        "time": "1:20"
       },
       {
         "a": "Merab Dvalishvili",
@@ -609,7 +849,11 @@
         "rounds": "5 Rds",
         "titleFight": true,
         "ranked": true,
-        "slot": "comain"
+        "slot": "comain",
+        "winner": "Merab Dvalishvili",
+        "method": "UD",
+        "round": 5,
+        "time": "5:00"
       },
       {
         "a": "Ji\u0159\u00ed Proch\u00e1zka",
@@ -617,7 +861,11 @@
         "weight": "Light Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Ji\u0159\u00ed Proch\u00e1zka",
+        "method": "KO",
+        "round": 3,
+        "time": "3:04"
       },
       {
         "a": "Youssef Zalal",
@@ -625,7 +873,11 @@
         "weight": "Featherweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Youssef Zalal",
+        "method": "SUB",
+        "round": 1,
+        "time": "1:38"
       },
       {
         "a": "Joe Pyfer",
@@ -633,7 +885,11 @@
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Joe Pyfer",
+        "method": "SUB",
+        "round": 2,
+        "time": "1:44"
       }
     ],
     "prelims": [
@@ -643,7 +899,11 @@
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Edmen Shahbazyan",
+        "method": "KO",
+        "round": 1,
+        "time": "4:58"
       },
       {
         "a": "Punahele Soriano",
@@ -651,7 +911,11 @@
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Punahele Soriano",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Farid Basharat",
@@ -659,7 +923,11 @@
         "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Farid Basharat",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Jakub Wiklacz",
@@ -667,7 +935,11 @@
         "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Jakub Wiklacz",
+        "method": "SD",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "earlyPrelims": [
@@ -677,7 +949,11 @@
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Ateba Gautier",
+        "method": "TKO",
+        "round": 1,
+        "time": "1:41"
       },
       {
         "a": "Daniel Santos",
@@ -685,7 +961,11 @@
         "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Daniel Santos",
+        "method": "TKO",
+        "round": 2,
+        "time": "0:21"
       }
     ]
   },
@@ -707,7 +987,11 @@
         "rounds": "5 Rds",
         "titleFight": true,
         "ranked": true,
-        "slot": "main"
+        "slot": "main",
+        "winner": "NC",
+        "method": "NC",
+        "round": 1,
+        "time": "4:35"
       },
       {
         "a": "Mackenzie Dern",
@@ -716,7 +1000,11 @@
         "rounds": "5 Rds",
         "titleFight": true,
         "ranked": true,
-        "slot": "comain"
+        "slot": "comain",
+        "winner": "Mackenzie Dern",
+        "method": "UD",
+        "round": 5,
+        "time": "5:00"
       },
       {
         "a": "Umar Nurmagomedov",
@@ -724,7 +1012,11 @@
         "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Umar Nurmagomedov",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Alexander Volkov",
@@ -732,7 +1024,11 @@
         "weight": "Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Alexander Volkov",
+        "method": "SD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Azamat Murzakanov",
@@ -740,7 +1036,11 @@
         "weight": "Light Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Azamat Murzakanov",
+        "method": "TKO",
+        "round": 1,
+        "time": "3:11"
       }
     ],
     "prelims": [
@@ -750,7 +1050,11 @@
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Quillan Salkilld",
+        "method": "KO",
+        "round": 1,
+        "time": "2:22"
       },
       {
         "a": "Ikram Aliskerov",
@@ -758,7 +1062,11 @@
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Ikram Aliskerov",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "\u013dudov\u00edt Klein",
@@ -766,7 +1074,11 @@
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "\u013dudov\u00edt Klein",
+        "method": "MD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Valter Walker",
@@ -774,7 +1086,11 @@
         "weight": "Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Valter Walker",
+        "method": "SUB",
+        "round": 1,
+        "time": "3:44"
       }
     ],
     "earlyPrelims": [
@@ -784,7 +1100,11 @@
         "weight": "Featherweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Nathaniel Wood",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Hamdy Abdelwahab",
@@ -792,7 +1112,11 @@
         "weight": "Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Hamdy Abdelwahab",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Mitch Raposo",
@@ -800,7 +1124,11 @@
         "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Mitch Raposo",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       }
     ]
   },
@@ -822,7 +1150,11 @@
         "rounds": "5 Rds",
         "titleFight": false,
         "ranked": true,
-        "slot": "main"
+        "slot": "main",
+        "winner": "Renato Moicano",
+        "method": "SUB",
+        "round": 1,
+        "time": "4:22"
       },
       {
         "a": "Uros Medic",
@@ -831,7 +1163,11 @@
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
-        "slot": "comain"
+        "slot": "comain",
+        "winner": "Uros Medic",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Jailton Almeida",
@@ -839,7 +1175,11 @@
         "weight": "Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Jailton Almeida",
+        "method": "SUB",
+        "round": 1,
+        "time": "2:10"
       },
       {
         "a": "Denise Gomes",
@@ -847,7 +1187,11 @@
         "weight": "Women's Strawweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Denise Gomes",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Chris Duncan",
@@ -855,7 +1199,11 @@
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Chris Duncan",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "prelims": [
@@ -865,7 +1213,11 @@
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Westin Wilson",
+        "method": "KO",
+        "round": 2,
+        "time": "3:44"
       },
       {
         "a": "Josh Quinlan",
@@ -873,7 +1225,11 @@
         "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Josh Quinlan",
+        "method": "TKO",
+        "round": 1,
+        "time": "1:55"
       },
       {
         "a": "Vinicius Salvador",
@@ -881,7 +1237,11 @@
         "weight": "Flyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Vinicius Salvador",
+        "method": "KO",
+        "round": 2,
+        "time": "4:11"
       }
     ],
     "earlyPrelims": []
@@ -904,7 +1264,11 @@
         "rounds": "5 Rds",
         "titleFight": true,
         "ranked": true,
-        "slot": "main"
+        "slot": "main",
+        "winner": "Islam Makhachev",
+        "method": "UD",
+        "round": 5,
+        "time": "5:00"
       },
       {
         "a": "Valentina Shevchenko",
@@ -913,7 +1277,11 @@
         "rounds": "5 Rds",
         "titleFight": true,
         "ranked": true,
-        "slot": "comain"
+        "slot": "comain",
+        "winner": "Valentina Shevchenko",
+        "method": "UD",
+        "round": 5,
+        "time": "5:00"
       },
       {
         "a": "Mario Morales",
@@ -921,7 +1289,11 @@
         "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Mario Morales",
+        "method": "TKO",
+        "round": 3,
+        "time": "3:44"
       },
       {
         "a": "Benoit Saint-Denis",
@@ -929,7 +1301,11 @@
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Beno\u00eet Saint-Denis",
+        "method": "KO",
+        "round": 2,
+        "time": "2:10"
       },
       {
         "a": "Gregory Rodrigues",
@@ -937,7 +1313,11 @@
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Gregory Rodrigues",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "prelims": [
@@ -947,7 +1327,11 @@
         "weight": "Women's Flyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Erin Blanchfield",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Ethyn Ewing",
@@ -955,7 +1339,11 @@
         "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Ethyn Ewing",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Kyle Daukaus",
@@ -963,7 +1351,11 @@
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Kyle Daukaus",
+        "method": "SUB",
+        "round": 2,
+        "time": "3:15"
       }
     ],
     "earlyPrelims": [
@@ -973,7 +1365,11 @@
         "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Bekzod Nurmagomedov",
+        "method": "SUB",
+        "round": 1,
+        "time": "1:45"
       },
       {
         "a": "Matheus Camilo",
@@ -981,7 +1377,11 @@
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Matheus Camilo",
+        "method": "KO",
+        "round": 1,
+        "time": "0:55"
       }
     ]
   },
@@ -1003,7 +1403,11 @@
         "rounds": "5 Rds",
         "titleFight": true,
         "ranked": true,
-        "slot": "main"
+        "slot": "main",
+        "winner": "Petr Yan",
+        "method": "UD",
+        "round": 5,
+        "time": "5:00"
       },
       {
         "a": "Joshua Van",
@@ -1012,7 +1416,11 @@
         "rounds": "5 Rds",
         "titleFight": true,
         "ranked": true,
-        "slot": "comain"
+        "slot": "comain",
+        "winner": "Joshua Van",
+        "method": "SUB",
+        "round": 4,
+        "time": "3:22"
       },
       {
         "a": "Tatsuro Taira",
@@ -1020,7 +1428,11 @@
         "weight": "Flyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Tatsuro Taira",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Payton Talbott",
@@ -1028,7 +1440,11 @@
         "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Payton Talbott",
+        "method": "TKO",
+        "round": 2,
+        "time": "4:55"
       },
       {
         "a": "Jan B\u0142achowicz",
@@ -1036,7 +1452,11 @@
         "weight": "Light Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Jan B\u0142achowicz",
+        "method": "Draw",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "prelims": [
@@ -1046,7 +1466,11 @@
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Manuel Torres",
+        "method": "KO",
+        "round": 1,
+        "time": "0:44"
       },
       {
         "a": "Chris Duncan",
@@ -1054,7 +1478,11 @@
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Chris Duncan",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Maycee Barber",
@@ -1062,7 +1490,11 @@
         "weight": "Women's Flyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Maycee Barber",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Fares Ziam",
@@ -1070,7 +1502,11 @@
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Fares Ziam",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "earlyPrelims": [
@@ -1080,7 +1516,11 @@
         "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Mickey Gall",
+        "method": "SUB",
+        "round": 1,
+        "time": "2:11"
       },
       {
         "a": "Rinat Fakhretdinov",
@@ -1088,7 +1528,11 @@
         "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Rinat Fakhretdinov",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       }
     ]
   },
@@ -1110,7 +1554,11 @@
         "rounds": "5 Rds",
         "titleFight": true,
         "ranked": true,
-        "slot": "main"
+        "slot": "main",
+        "winner": "Justin Gaethje",
+        "method": "TKO",
+        "round": 3,
+        "time": "2:14"
       },
       {
         "a": "Sean O'Malley",
@@ -1119,7 +1567,11 @@
         "rounds": "5 Rds",
         "titleFight": false,
         "ranked": true,
-        "slot": "comain"
+        "slot": "comain",
+        "winner": "Song Yadong",
+        "method": "UD",
+        "round": 5,
+        "time": "5:00"
       },
       {
         "a": "Waldo Cortes-Acosta",
@@ -1127,7 +1579,11 @@
         "weight": "Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Waldo Cortes-Acosta",
+        "method": "TKO",
+        "round": 2,
+        "time": "3:33"
       },
       {
         "a": "Jean Silva",
@@ -1135,7 +1591,11 @@
         "weight": "Featherweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Jean Silva",
+        "method": "KO",
+        "round": 1,
+        "time": "1:44"
       },
       {
         "a": "Nat\u00e1lia Silva",
@@ -1143,7 +1603,11 @@
         "weight": "Women's Flyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Nat\u00e1lia Silva",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "prelims": [
@@ -1153,7 +1617,11 @@
         "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Umar Nurmagomedov",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Nikita Krylov",
@@ -1161,7 +1629,11 @@
         "weight": "Light Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Nikita Krylov",
+        "method": "KO",
+        "round": 1,
+        "time": "2:10"
       },
       {
         "a": "Alex Perez",
@@ -1169,7 +1641,11 @@
         "weight": "Flyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Alex Perez",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Ricky Turcios",
@@ -1177,7 +1653,11 @@
         "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Ricky Turcios",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "earlyPrelims": [
@@ -1187,7 +1667,11 @@
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Ateba Gautier",
+        "method": "TKO",
+        "round": 1,
+        "time": "1:41"
       },
       {
         "a": "Josh Hokit",
@@ -1195,7 +1679,11 @@
         "weight": "Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Josh Hokit",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       }
     ]
   },
@@ -1217,7 +1705,11 @@
         "rounds": "5 Rds",
         "titleFight": true,
         "ranked": true,
-        "slot": "main"
+        "slot": "main",
+        "winner": "Alexander Volkanovski",
+        "method": "UD",
+        "round": 5,
+        "time": "5:00"
       },
       {
         "a": "Beno\u00eet Saint-Denis",
@@ -1226,7 +1718,11 @@
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
-        "slot": "comain"
+        "slot": "comain",
+        "winner": "Beno\u00eet Saint-Denis",
+        "method": "TKO",
+        "round": 2,
+        "time": "3:45"
       },
       {
         "a": "Mauricio Ruffy",
@@ -1234,7 +1730,11 @@
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Mauricio Ruffy",
+        "method": "KO",
+        "round": 1,
+        "time": "2:10"
       },
       {
         "a": "Tallison Teixeira",
@@ -1242,7 +1742,11 @@
         "weight": "Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Tallison Teixeira",
+        "method": "TKO",
+        "round": 2,
+        "time": "4:22"
       },
       {
         "a": "Quillan Salkilld",
@@ -1250,7 +1754,11 @@
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Quillan Salkilld",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "prelims": [
@@ -1260,7 +1768,11 @@
         "weight": "Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Billy Elekana",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Cam Rowston",
@@ -1268,7 +1780,11 @@
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Cam Rowston",
+        "method": "SUB",
+        "round": 2,
+        "time": "2:33"
       },
       {
         "a": "Jacob Malkoun",
@@ -1276,7 +1792,11 @@
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Jacob Malkoun",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "earlyPrelims": [
@@ -1286,7 +1806,11 @@
         "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Kiefer Crosbie",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Mingyang Zhang",
@@ -1294,7 +1818,11 @@
         "weight": "Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Mingyang Zhang",
+        "method": "KO",
+        "round": 1,
+        "time": "1:05"
       }
     ]
   },
@@ -1316,7 +1844,11 @@
         "rounds": "5 Rds",
         "titleFight": false,
         "ranked": true,
-        "slot": "main"
+        "slot": "main",
+        "winner": "Sean Strickland",
+        "method": "UD",
+        "round": 5,
+        "time": "5:00"
       },
       {
         "a": "Renato Moicano",
@@ -1325,7 +1857,11 @@
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
-        "slot": "comain"
+        "slot": "comain",
+        "winner": "Renato Moicano",
+        "method": "SUB",
+        "round": 2,
+        "time": "3:10"
       },
       {
         "a": "Aleksandr Hernandez",
@@ -1333,7 +1869,11 @@
         "weight": "Featherweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Diego Lopes",
+        "method": "KO",
+        "round": 1,
+        "time": "2:45"
       },
       {
         "a": "Kelvin Gastelum",
@@ -1341,7 +1881,11 @@
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Kelvin Gastelum",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Santiago Luna",
@@ -1349,7 +1893,11 @@
         "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Santiago Luna",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "prelims": [
@@ -1359,7 +1907,11 @@
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Dusko Todorovic",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Tatiana Suarez",
@@ -1367,7 +1919,11 @@
         "weight": "Women's Strawweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Tatiana Suarez",
+        "method": "TKO",
+        "round": 2,
+        "time": "4:10"
       },
       {
         "a": "Zach Reese",
@@ -1375,7 +1931,11 @@
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Zach Reese",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "earlyPrelims": [
@@ -1385,7 +1945,11 @@
         "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Jesus Aguilar",
+        "method": "KO",
+        "round": 1,
+        "time": "1:23"
       },
       {
         "a": "Alden Coria",
@@ -1393,7 +1957,11 @@
         "weight": "Featherweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Alden Coria",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       }
     ]
   },
@@ -1415,7 +1983,11 @@
         "rounds": "5 Rds",
         "titleFight": true,
         "ranked": true,
-        "slot": "main"
+        "slot": "main",
+        "winner": "Charles Oliveira",
+        "method": "UD",
+        "round": 5,
+        "time": "5:00"
       },
       {
         "a": "Caio Borralho",
@@ -1424,7 +1996,11 @@
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
-        "slot": "comain"
+        "slot": "comain",
+        "winner": "Caio Borralho",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Raul Rosas Jr.",
@@ -1432,7 +2008,11 @@
         "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Raul Rosas Jr.",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Drew Dober",
@@ -1440,7 +2020,11 @@
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Drew Dober",
+        "method": "KO",
+        "round": 2,
+        "time": "1:53"
       },
       {
         "a": "Gregory Rodrigues",
@@ -1448,7 +2032,11 @@
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Gregory Rodrigues",
+        "method": "KO",
+        "round": 1,
+        "time": "1:47"
       }
     ],
     "prelims": [
@@ -1458,7 +2046,11 @@
         "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Cody Garbrandt",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Donte Johnson",
@@ -1466,7 +2058,11 @@
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Donte Johnson",
+        "method": "SD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Alberto Montes",
@@ -1474,7 +2070,11 @@
         "weight": "Featherweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Alberto Montes",
+        "method": "SUB",
+        "round": 2,
+        "time": "0:40"
       },
       {
         "a": "Niko Price",
@@ -1482,7 +2082,11 @@
         "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Nyamjargal Tumendemberel",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "earlyPrelims": [
@@ -1492,7 +2096,11 @@
         "weight": "Light Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Rodolfo Bellato",
+        "method": "TKO",
+        "round": 1,
+        "time": "2:42"
       },
       {
         "a": "Nurullo Aliev",
@@ -1500,7 +2108,11 @@
         "weight": "Flyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Diyar Nurgozhay",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       }
     ]
   },
@@ -1522,7 +2134,11 @@
         "rounds": "5 Rds",
         "titleFight": false,
         "ranked": true,
-        "slot": "main"
+        "slot": "main",
+        "winner": "Movsar Evloev",
+        "method": "MD",
+        "round": 5,
+        "time": "5:00"
       },
       {
         "a": "Tom Aspinall",
@@ -1531,7 +2147,11 @@
         "rounds": "5 Rds",
         "titleFight": true,
         "ranked": true,
-        "slot": "comain"
+        "slot": "comain",
+        "winner": "Tom Aspinall",
+        "method": "TKO",
+        "round": 1,
+        "time": "3:02"
       },
       {
         "a": "Arnold Allen",
@@ -1539,7 +2159,11 @@
         "weight": "Featherweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Arnold Allen",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Marc Diakiese",
@@ -1547,7 +2171,11 @@
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Marc Diakiese",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Paddy Pimblett",
@@ -1555,7 +2183,11 @@
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Paddy Pimblett",
+        "method": "SUB",
+        "round": 2,
+        "time": "3:14"
       }
     ],
     "prelims": [
@@ -1565,7 +2197,11 @@
         "weight": "Light Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Luke Riley",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Chris Duncan",
@@ -1573,7 +2209,11 @@
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Chris Duncan",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Danny Silva",
@@ -1581,7 +2221,11 @@
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Danny Silva",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Shanelle Dyer",
@@ -1589,7 +2233,11 @@
         "weight": "Women's Flyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Shanelle Dyer",
+        "method": "TKO",
+        "round": 2,
+        "time": "1:17"
       }
     ],
     "earlyPrelims": [
@@ -1599,7 +2247,11 @@
         "weight": "Flyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "winner": "Tatsuro Taira",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Brando Pericic",
@@ -1607,7 +2259,11 @@
         "weight": "Light Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Brando Pericic",
+        "method": "TKO",
+        "round": 1,
+        "time": "1:48"
       }
     ]
   },
@@ -1629,7 +2285,11 @@
         "rounds": "5 Rds",
         "titleFight": false,
         "ranked": true,
-        "slot": "main"
+        "slot": "main",
+        "winner": "Joe Pyfer",
+        "method": "TKO",
+        "round": 2,
+        "time": "4:18"
       },
       {
         "a": "Alexa Grasso",
@@ -1638,7 +2298,11 @@
         "rounds": "5 Rds",
         "titleFight": false,
         "ranked": true,
-        "slot": "comain"
+        "slot": "comain",
+        "winner": "Alexa Grasso",
+        "method": "KO",
+        "round": 1,
+        "time": "2:42"
       },
       {
         "a": "Michael Chiesa",
@@ -1646,7 +2310,11 @@
         "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Michael Chiesa",
+        "method": "SUB",
+        "round": 1,
+        "time": "1:03"
       },
       {
         "a": "Julian Erosa",
@@ -1654,7 +2322,11 @@
         "weight": "Featherweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Lerryan Douglas",
+        "method": "KO",
+        "round": 1,
+        "time": "3:33"
       },
       {
         "a": "Mansur Abdul-Malik",
@@ -1662,7 +2334,11 @@
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Yousri Belgaroui",
+        "method": "TKO",
+        "round": 3,
+        "time": "3:39"
       }
     ],
     "prelims": [
@@ -1672,7 +2348,11 @@
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Terrance McKinney",
+        "method": "TKO",
+        "round": 1,
+        "time": "0:24"
       },
       {
         "a": "Ignacio Bahamondes",
@@ -1680,7 +2360,11 @@
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Tofiq Musayev",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Chase Hooper",
@@ -1688,7 +2372,11 @@
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Lance Gibson Jr.",
+        "method": "TKO",
+        "round": 1,
+        "time": "2:56"
       },
       {
         "a": "Marcin Tybura",
@@ -1696,7 +2384,11 @@
         "weight": "Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Tyrell Fortune",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "earlyPrelims": [
@@ -1706,7 +2398,11 @@
         "weight": "Women's Flyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Casey O'Neill",
+        "method": "KO",
+        "round": 1,
+        "time": "3:11"
       },
       {
         "a": "Navajo Stirling",
@@ -1714,7 +2410,11 @@
         "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "winner": "Navajo Stirling",
+        "method": "TKO",
+        "round": 2,
+        "time": "4:05"
       }
     ]
   },

@@ -23,6 +23,7 @@ function getApiBase() {
 
 // ── Load event ────────────────────────────────
 async function resolveEvent(eventId) {
+  // Try sessionStorage first
   try {
     const cached = sessionStorage.getItem('review_event');
     if (cached) {
@@ -30,8 +31,12 @@ async function resolveEvent(eventId) {
       if ((ev.id || slugify(ev.name || ev.eventName || '')) === eventId) return ev;
     }
   } catch {}
-  const all = await API.getUpcomingEvents();
-  return all.find(ev => (ev.id || slugify(ev.name || ev.eventName || '')) === eventId) || null;
+  // Load directly from events.json by ID
+  try {
+    const all = await fetch('/events.json').then(r => r.json());
+    return all.find(ev => ev.id === eventId || slugify(ev.name || '') === eventId) || null;
+  } catch {}
+  return null;
 }
 
 async function fetchCommunityRating(eventId) {
@@ -70,19 +75,44 @@ function fightRow(f) {
     f.ranked     ? '⭐' : '',
   ].filter(Boolean).join(' ');
 
+  // Result display
+  const METHOD_LABELS = {
+    'KO':'🥊 KO','TKO':'🥊 TKO','SUB':'⛓️ Sub',
+    'UD':'📋 UD','SD':'📋 SD','MD':'📋 MD',
+    'NC':'🚫 NC','Draw':'🤝 Draw'
+  };
+  let resultHtml = '';
+  if (f.winner) {
+    const loser = f.winner === f.a ? f.b : f.a;
+    const isNC = f.winner === 'NC' || f.winner === 'Draw';
+    const methodLabel = METHOD_LABELS[f.method] || f.method;
+    const roundInfo = f.round ? ` · R${f.round} ${f.time || ''}` : '';
+    resultHtml = `
+      <div class="er-result">
+        ${isNC
+          ? `<span class="er-result-nc">${methodLabel}</span>`
+          : `<span class="er-result-winner">${esc(f.winner)}</span>
+             <span class="er-result-def">def.</span>
+             <span class="er-result-loser">${esc(loser)}</span>`
+        }
+        <span class="er-result-method">${methodLabel}${roundInfo}</span>
+      </div>`;
+  }
+
   return `
     <div class="er-fight-row ${f.slot === 'main' ? 'er-fight-main' : f.slot === 'comain' ? 'er-fight-comain' : ''}">
       ${slotBadge ? `<div>${slotBadge}</div>` : ''}
       <div class="er-fight-names">
-        <span class="er-fa">${esc(f.a)}</span>
+        <span class="er-fa ${f.winner === f.a ? 'er-won' : f.winner && f.winner !== 'NC' && f.winner !== 'Draw' ? 'er-lost' : ''}">${esc(f.a)}</span>
         <span class="er-fvs">vs</span>
-        <span class="er-fb">${esc(f.b)}</span>
+        <span class="er-fb ${f.winner === f.b ? 'er-won' : f.winner && f.winner !== 'NC' && f.winner !== 'Draw' ? 'er-lost' : ''}">${esc(f.b)}</span>
         ${icons ? `<span class="er-ficons">${icons}</span>` : ''}
       </div>
       <div class="er-fight-meta">
         ${f.weight ? `<span class="pill">${esc(f.weight)}</span>` : ''}
         ${f.rounds ? `<span class="pill pill-dim">${esc(f.rounds)}</span>` : ''}
       </div>
+      ${resultHtml}
     </div>`;
 }
 

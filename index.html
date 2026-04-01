@@ -50,62 +50,36 @@
   
 
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-content" id="hero-content">
-      <h1>UFC 324 Main Card Announced</h1>
-      <p>Two major title fights headline the event.</p>
+    <!-- HERO — auto-updates to next upcoming event -->
+  <section class="hero" id="heroSection" style="position:relative;overflow:hidden;min-height:420px;background:#111;">
+    <div id="heroImg" style="position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(0.55) contrast(1.05);transition:opacity 0.5s;"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.85) 100%);"></div>
+    <div id="hero-content" style="position:relative;z-index:2;padding:60px 48px 48px;">
+      <div id="heroType" style="font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:cyan;margin-bottom:12px;"></div>
+      <h1 id="heroTitle" style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:2.4rem;text-transform:uppercase;letter-spacing:0.04em;color:#fff;margin:0 0 10px;text-shadow:0 2px 20px rgba(0,0,0,0.8);max-width:700px;"></h1>
+      <div id="heroMeta" style="font-family:'Inter',sans-serif;font-size:0.9rem;color:rgba(255,255,255,0.6);margin-bottom:28px;"></div>
+      <a id="heroBtn" href="events.html" style="display:inline-block;background:cyan;color:#000;font-family:'Montserrat',sans-serif;font-weight:800;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;padding:12px 28px;border-radius:6px;text-decoration:none;">View Full Card →</a>
     </div>
   </section>
 
+  <!-- RECENT RESULTS -->
+  <div style="padding:36px 48px 0;max-width:1200px;margin:0 auto;">
+    <h3 style="font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin:0 0 18px;">Recent Results</h3>
+    <div id="recentResults" style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;"></div>
+  </div>
+
   <!-- MAIN CONTENT -->
   <div class="content-container">
-
-    <!-- LEFT COLUMN -->
     <div class="left-column">
-
       <h3 class="section-title">Trending Today</h3>
-
-      <div class="card-row" id="trending-cards">
-
-        <a href="https://www.espn.com/mma/" target="_blank" class="card-link" data-title="Paddy vs Gaethje Official">
-          <div class="medium-card">
-            <div class="card-image story1"></div>
-            <h2>Paddy vs Gaethje Offical</h2>
-          </div>
-        </a>
-
-        <a href="https://www.espn.com/mma/" target="_blank" class="card-link" data-title="Ilia vs Max Heats Up">
-          <div class="medium-card">
-            <div class="card-image story2"></div>
-            <h2>Ilia vs Max Heats Up</h2>
-          </div>
-        </a>
-
-        <a href="https://www.espn.com/mma/" target="_blank" class="card-link" data-title="Gaethje Teases Retirement">
-          <div class="medium-card">
-            <div class="card-image story3"></div>
-            <h2>Gaethje Teases Retirement?</h2>
-          </div>
-        </a>
-
-      </div>
+      <div class="card-row" id="trending-cards"></div>
     </div>
-
-    <!-- SIDEBAR -->
     <div class="sidebar">
       <h3>TODAY IN MMA</h3>
-      <ul id="today-list">
-        <li>Gaethje hints at retirement</li>
-        <li>Ilia and Max go back and forth at UFC 308 Presser</li>
-        <li>Islam calls out Usman for 1st defence</li>
-        <li>UFC 325 rumored for Perth, Australia</li>
-      </ul>
+      <ul id="today-list"></ul>
     </div>
-
   </div>
 
   <script type="module" src="script.js"></script>
-
 </body>
 </html>

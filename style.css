@@ -2159,7 +2159,7 @@ a, a:visited {
 .er-hero-img {
   width: 100%; height: 100%;
   object-fit: cover;
-  object-position: center center;
+  object-position: center top;
   filter: brightness(0.75) contrast(1.05);
   display: block;
 }
@@ -2400,4 +2400,54 @@ a, a:visited {
   font-family: 'Inter', sans-serif;
   font-size: 0.82rem; color: rgba(255,255,255,0.8);
   line-height: 1.4;
+}
+
+/* ── Fight result display ── */
+.er-result {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.er-result-winner {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 0.82rem;
+  color: #4ade80;
+}
+.er-result-def {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.35);
+}
+.er-result-loser {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.45);
+}
+.er-result-method {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.3);
+  margin-left: 4px;
+}
+.er-result-nc {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.4);
+}
+.er-won {
+  color: #4ade80 !important;
+}
+.er-lost {
+  color: rgba(255,255,255,0.35) !important;
+  text-decoration: line-through;
+  text-decoration-color: rgba(255,255,255,0.2);
+}
+
+/* Recent results responsive */
+@media (max-width: 640px) {
+  #recentResults { grid-template-columns: 1fr !important; }
 }
