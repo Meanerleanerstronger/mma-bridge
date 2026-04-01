@@ -108,11 +108,11 @@ async function renderNews() {
         <a href="${a.url||'#'}" target="_blank" rel="noopener noreferrer"
            class="card-link" data-title="${(a.title||'').replace(/"/g,'&quot;')}">
           <div class="medium-card">
-            <div class="card-image"
-                 style="background-image:${a.imageUrl ? `url('${a.imageUrl}')` : 'none'};background-size:cover;background-position:center;${!a.imageUrl ? `background-color:#1a1a1a;` : ''}">
+            <div style="height:200px;background-image:${a.imageUrl ? `url('${a.imageUrl}')` : 'none'};background-size:cover;background-position:center;background-color:#1a1a1a;border-radius:10px 10px 0 0;flex-shrink:0;"></div>
+            <div style="padding:14px 4px 8px;">
+              <div style="font-family:'Inter',sans-serif;font-size:0.88rem;font-weight:600;color:#fff;line-height:1.4;margin-bottom:6px;">${a.title||''}</div>
+              <div style="font-family:'Inter',sans-serif;font-size:0.68rem;color:rgba(255,255,255,0.35);">${a.source||''}</div>
             </div>
-            <h2>${a.title||''}</h2>
-            ${a.source?`<div style="font-size:0.68rem;color:rgba(255,255,255,0.4);margin-top:4px;font-family:'Inter',sans-serif;">${a.source}</div>`:''}
           </div>
         </a>`).join('');
     }
