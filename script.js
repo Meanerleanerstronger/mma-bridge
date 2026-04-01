@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const upcoming = all.filter(e => (e.isoDate||'9999') >= today).sort((a,b) => a.isoDate.localeCompare(b.isoDate));
     const past     = all.filter(e => (e.isoDate||'9999') < today && e.status === 'completed').sort((a,b) => b.isoDate.localeCompare(a.isoDate));
     renderHero(upcoming[0] || past[0]);
-    renderRecentResults(past.slice(0, 3));
+    renderRecentResults(past.slice(0, 8));
   } catch(e) { debugLog('Events error:', e); }
 
   // Load real news
@@ -36,40 +36,89 @@ function renderHero(ev) {
   if (btn && ev.id) btn.href = `events.html#ev-${ev.id}`;
 }
 
-// ── Recent Results ────────────────────────────
+// ── Recent Results Infinite Scroll ───────────
 function renderRecentResults(events) {
-  const container = document.getElementById('recentResults');
-  if (!container || !events.length) return;
+  const track = document.getElementById('resultsTrack');
+  const inner = document.getElementById('resultsInner');
+  if (!inner || !events.length) return;
 
-  container.innerHTML = events.map(ev => {
+  const METHOD = {'KO':'🥊 KO','TKO':'🥊 TKO','SUB':'⛓️ Sub','UD':'📋 UD','SD':'📋 SD','MD':'📋 MD','NC':'🚫 NC','Draw':'🤝 Draw'};
+
+  function buildCard(ev) {
     const me     = ev.mainCard?.[0];
     const winner = me?.winner || '';
     const method = me?.method || '';
     const loser  = winner === me?.a ? me?.b : me?.a;
     const slug   = ev.id || '';
-    const METHOD = {'KO':'🥊 KO','TKO':'🥊 TKO','SUB':'⛓️ Sub','UD':'📋 UD','SD':'📋 SD','MD':'📋 MD','NC':'🚫 NC','Draw':'🤝 Draw'};
     const methodLabel = METHOD[method] || method;
 
-    return `
-      <a href="event-review.html?id=${encodeURIComponent(slug)}"
-         style="display:block;text-decoration:none;background:#111;border:1px solid rgba(255,255,255,0.08);border-radius:12px;overflow:hidden;transition:border-color 0.15s,transform 0.12s;"
-         onmouseover="this.style.borderColor='rgba(255,255,255,0.2)';this.style.transform='translateY(-2px)'"
-         onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.transform='none'">
-        ${ev.poster
-          ? `<div style="height:130px;background-image:url('${ev.poster}');background-size:cover;background-position:center top;filter:brightness(0.7);"></div>`
-          : `<div style="height:130px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:2rem;color:rgba(255,255,255,0.1);">🥊</div>`
-        }
-        <div style="padding:14px 16px;">
-          <div style="font-family:'Montserrat',sans-serif;font-size:0.6rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:6px;">${ev.date||''}</div>
-          <div style="font-family:'Montserrat',sans-serif;font-size:0.82rem;font-weight:800;color:#fff;margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${ev.name||''}</div>
-          ${winner ? `
-            <div style="font-family:'Inter',sans-serif;font-size:0.78rem;color:cyan;font-weight:600;">${winner} def. ${loser}</div>
-            <div style="font-family:'Inter',sans-serif;font-size:0.7rem;color:rgba(255,255,255,0.35);margin-top:3px;">${methodLabel} · R${me?.round||''}</div>
-          ` : ''}
-        </div>
-      </a>`;
-  }).join('');
+    const card = document.createElement('a');
+    card.href  = `event-review.html?id=${encodeURIComponent(slug)}`;
+    card.style.cssText = `display:block;text-decoration:none;flex-shrink:0;width:280px;background:#111;border:1px solid rgba(255,255,255,0.07);border-radius:12px;overflow:hidden;transition:border-color 0.2s,transform 0.2s;`;
+    card.onmouseenter = () => { card.style.borderColor='rgba(0,255,255,0.3)'; card.style.transform='translateY(-3px)'; };
+    card.onmouseleave = () => { card.style.borderColor='rgba(255,255,255,0.07)'; card.style.transform='none'; };
+    card.innerHTML = `
+      <div style="height:160px;background-image:url('${ev.poster||''}');background-size:cover;background-position:center top;filter:brightness(0.75);"></div>
+      <div style="padding:14px 16px;">
+        <div style="font-family:'Montserrat',sans-serif;font-size:0.58rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:5px;">${ev.date||''}</div>
+        <div style="font-family:'Montserrat',sans-serif;font-size:0.8rem;font-weight:800;color:#fff;margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${ev.name||''}</div>
+        ${winner ? `
+          <div style="font-family:'Inter',sans-serif;font-size:0.76rem;color:cyan;font-weight:600;">${winner} def. ${loser}</div>
+          <div style="font-family:'Inter',sans-serif;font-size:0.68rem;color:rgba(255,255,255,0.3);margin-top:3px;">${methodLabel} · R${me?.round||''}</div>
+        ` : ''}
+      </div>`;
+    return card;
+  }
+
+  // Build cards + duplicate for seamless infinite loop
+  [...events, ...events].forEach(ev => inner.appendChild(buildCard(ev)));
+
+  // ── Auto scroll ──
+  let x = 0;
+  let paused = false;
+  let dragging = false;
+  let dragStartX = 0;
+  let dragScrollX = 0;
+  const speed = 0.4;
+
+  track.addEventListener('mouseenter', () => paused = true);
+  track.addEventListener('mouseleave', () => { if (!dragging) paused = false; });
+
+  track.addEventListener('mousedown', e => {
+    dragging = true; paused = true;
+    dragStartX = e.clientX; dragScrollX = x;
+    track.style.cursor = 'grabbing';
+    e.preventDefault();
+  });
+  window.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    x = dragScrollX - (e.clientX - dragStartX);
+  });
+  window.addEventListener('mouseup', () => {
+    if (!dragging) return;
+    dragging = false; paused = false;
+    track.style.cursor = 'grab';
+  });
+
+  track.addEventListener('touchstart', e => {
+    paused = true; dragStartX = e.touches[0].clientX; dragScrollX = x;
+  }, {passive:true});
+  track.addEventListener('touchmove', e => {
+    x = dragScrollX - (e.touches[0].clientX - dragStartX);
+  }, {passive:true});
+  track.addEventListener('touchend', () => paused = false);
+
+  function animate() {
+    if (!paused) x += speed;
+    const halfWidth = inner.scrollWidth / 2;
+    if (x >= halfWidth) x -= halfWidth;
+    if (x < 0) x = 0;
+    inner.style.transform = `translateX(-${x}px)`;
+    requestAnimationFrame(animate);
+  }
+  animate();
 }
+
 
 // ── News ──────────────────────────────────────
 async function renderNews() {
