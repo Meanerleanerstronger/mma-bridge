@@ -143,7 +143,7 @@ export function clearCache() {
 export const API = {
   // Fighters
   async getFighters() {
-    return fetchData(CONFIG.ENDPOINTS.FIGHTERS);
+    return fetch('/fighters.json').then(r => r.json());
   },
 
   async getFighter(id) {
