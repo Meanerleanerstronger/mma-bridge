@@ -65,8 +65,14 @@
   <!-- RECENT RESULTS - Infinite auto-scroll -->
   <div style="padding:36px 0 0;">
     <h3 style="font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin:0 0 18px;padding:0 48px;">Recent Results</h3>
-    <div id="resultsTrack" style="overflow:hidden;position:relative;width:100%;cursor:grab;-webkit-mask:linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);mask:linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);">
-      <div id="resultsInner" style="display:flex;gap:16px;width:max-content;will-change:transform;padding:0 48px 16px;"></div>
+    <div style="position:relative;">
+      <!-- fade left -->
+      <div style="position:absolute;left:0;top:0;bottom:16px;width:120px;background:linear-gradient(to right,#0f0f0f 0%,transparent 100%);z-index:2;pointer-events:none;"></div>
+      <!-- fade right -->
+      <div style="position:absolute;right:0;top:0;bottom:16px;width:120px;background:linear-gradient(to left,#0f0f0f 0%,transparent 100%);z-index:2;pointer-events:none;"></div>
+      <div id="resultsTrack" style="overflow:hidden;width:100%;cursor:grab;">
+        <div id="resultsInner" style="display:flex;gap:16px;width:max-content;will-change:transform;padding:0 120px 16px;"></div>
+      </div>
     </div>
   </div>
 
