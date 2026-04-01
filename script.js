@@ -140,3 +140,107 @@ function setupSearch() {
     if (q) window.location.href = `results.html?q=${encodeURIComponent(q)}`;
   });
 }
+
+// ── Live Activity Feed ────────────────────────
+function startLiveFeed() {
+  const feed = document.getElementById('liveFeed');
+  if (!feed) return;
+
+  const locations = [
+    ['🇺🇸','someone from New York'],['🇧🇷','someone from São Paulo'],
+    ['🇬🇧','someone from London'],['🇦🇺','someone from Sydney'],
+    ['🇨🇦','someone from Toronto'],['🇲🇽','someone from Mexico City'],
+    ['🇩🇪','someone from Berlin'],['🇯🇵','someone from Tokyo'],
+    ['🇿🇦','someone from Johannesburg'],['🇦🇪','someone from Dubai'],
+    ['🇫🇷','someone from Paris'],['🇳🇱','someone from Amsterdam'],
+    ['🇮🇪','someone from Dublin'],['🇰🇿','someone from Almaty'],
+    ['🇷🇺','someone from Moscow'],['🇵🇹','someone from Lisbon'],
+    ['🇳🇿','someone from Auckland'],['🇸🇪','someone from Stockholm'],
+    ['🇵🇭','someone from Manila'],['🇺🇸','someone from Las Vegas'],
+    ['🇺🇸','someone from Houston'],['🇺🇸','someone from Chicago'],
+    ['🇺🇸','someone from Los Angeles'],['🇧🇷','someone from Rio'],
+    ['🇬🇧','someone from Manchester'],
+  ];
+
+  const events = [
+    'UFC 319: Chimaev vs. Du Plessis','UFC 326: Holloway vs. Oliveira 2',
+    'UFC 322: Makhachev vs. Della Maddalena','UFC 320: Pereira vs. Ankalaev 2',
+    'UFC 317: Topuria vs. Oliveira','UFC 318: Holloway vs. Poirier 3',
+    'UFC FN: Adesanya vs. Pyfer','UFC FN: Evloev vs. Murphy',
+    'UFC 323: Yan vs. Dvalishvili','UFC 325: Volkanovski vs. Lopes 2',
+    'UFC 324: Gaethje vs. Pimblett','UFC 321: Aspinall vs. Gane',
+  ];
+
+  const fighters = [
+    'Khamzat Chimaev','Ilia Topuria','Islam Makhachev','Alex Pereira',
+    'Joe Pyfer','Movsar Evloev','Joshua Van','Carlos Prates',
+    'Max Holloway','Charles Oliveira','Volkanovski','Tom Aspinall',
+  ];
+
+  const actions = [
+    (loc, ev, f) => ({
+      text: `<strong>${loc}</strong> rated <span class="feed-highlight">${ev}</span>`,
+      suffix: `<span class="feed-stars">${'★'.repeat(Math.floor(Math.random()*2)+4)}</span>`,
+      action: 'RATED'
+    }),
+    (loc, ev, f) => ({
+      text: `<strong>${loc}</strong> picked <span class="feed-highlight">${f}</span> for FOTN`,
+      suffix: '🔥',
+      action: 'FOTN PICK'
+    }),
+    (loc, ev, f) => ({
+      text: `<strong>${loc}</strong> left a review on <span class="feed-highlight">${ev}</span>`,
+      suffix: '✍️',
+      action: 'REVIEW'
+    }),
+    (loc, ev, f) => ({
+      text: `<strong>${loc}</strong> is browsing <span class="feed-highlight">${ev}</span>`,
+      suffix: '👀',
+      action: 'VIEWING'
+    }),
+    (loc, ev, f) => ({
+      text: `<strong>${loc}</strong> hyped <span class="feed-highlight">UFC 327</span>`,
+      suffix: `<span class="feed-stars">${'⚡'.repeat(Math.floor(Math.random()*3)+3)}</span>`,
+      action: 'HYPE'
+    }),
+  ];
+
+  const MAX_ENTRIES = 5;
+  const entries = [];
+
+  function rand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+  function addEntry() {
+    const [flag, loc] = rand(locations);
+    const ev = rand(events);
+    const f  = rand(fighters);
+    const actionFn = rand(actions);
+    const { text, suffix, action } = actionFn(loc, ev, f);
+
+    const div = document.createElement('div');
+    div.className = 'feed-entry';
+    div.innerHTML = `
+      <div class="feed-flag">${flag}</div>
+      <div class="feed-text">${text} ${suffix}</div>
+      <div class="feed-action">${action}</div>`;
+
+    entries.unshift(div);
+    if (entries.length > MAX_ENTRIES) {
+      const old = entries.pop();
+      old.style.transition = 'opacity 0.3s';
+      old.style.opacity = '0';
+      setTimeout(() => old.remove(), 300);
+    }
+
+    feed.innerHTML = '';
+    entries.forEach(e => feed.appendChild(e));
+  }
+
+  // Seed with initial entries
+  for (let i = 0; i < MAX_ENTRIES; i++) addEntry();
+
+  // Add new entry every 2.5 seconds
+  setInterval(addEntry, 2500);
+}
+
+startLiveFeed();

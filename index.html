@@ -71,13 +71,32 @@
   <!-- MAIN CONTENT -->
   <div class="content-container">
     <div class="left-column">
-      <h3 class="section-title">Trending Today</h3>
+      <h3 class="section-title" style="text-align:center;font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:20px;">Trending Today</h3>
       <div class="card-row" id="trending-cards"></div>
     </div>
     <div class="sidebar">
       <h3>TODAY IN MMA</h3>
       <ul id="today-list"></ul>
     </div>
+  </div>
+
+  <!-- LIVE ACTIVITY FEED -->
+  <div style="max-width:1200px;margin:0 auto;padding:32px 48px 60px;">
+    <h3 style="font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin:0 0 16px;">
+      <span style="display:inline-block;width:7px;height:7px;background:cyan;border-radius:50%;margin-right:8px;animation:pulse 1.5s infinite;"></span>
+      Live on MMA Bridge
+    </h3>
+    <div id="liveFeed" style="
+      background:#0d0d0d;
+      border:1px solid rgba(255,255,255,0.07);
+      border-radius:14px;
+      overflow:hidden;
+      height:260px;
+      display:flex;
+      flex-direction:column;
+      gap:0;
+      position:relative;
+    "></div>
   </div>
 
   <script type="module" src="script.js"></script>
