@@ -11,9 +11,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     const all = await fetch('/events.json').then(r => r.json());
     const today = new Date().toISOString().slice(0, 10);
     const upcoming = all.filter(e => (e.isoDate||'9999') >= today).sort((a,b) => a.isoDate.localeCompare(b.isoDate));
-    const past     = all.filter(e => (e.isoDate||'9999') < today && e.status === 'completed').sort((a,b) => b.isoDate.localeCompare(a.isoDate));
+    const past = all
+      .filter(e => (e.isoDate||'9999') < today && e.status === 'completed' && e.poster)
+      .sort((a, b) => b.isoDate.localeCompare(a.isoDate));
     renderHero(upcoming[0] || past[0]);
-    renderRecentResults(past.slice(0, 8));
+    renderRecentResults(past);
   } catch(e) { debugLog('Events error:', e); }
 
   // Load real news
@@ -79,7 +81,7 @@ function renderRecentResults(events) {
   let dragging = false;
   let dragStartX = 0;
   let dragScrollX = 0;
-  const speed = 0.4;
+  const speed = 0.25;
 
   track.addEventListener('mouseenter', () => paused = true);
   track.addEventListener('mouseleave', () => { if (!dragging) paused = false; });
