@@ -444,6 +444,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     bindFightClicks();
     bindHypeMeters();
 
+    // Auto-open event if URL has a hash like #ev-ufc-327-prochazka-vs-ulberg
+    if (location.hash) {
+      const target = document.querySelector(location.hash);
+      if (target) {
+        target.open = true;
+        setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+      }
+    }
+
   } catch (err) {
     console.error('Events load error:', err);
     showError(wrap, 'Failed to load events. Please try again.');

@@ -32,6 +32,8 @@ function renderHero(ev) {
   type.textContent  = ev.type === 'PPV' ? '🔥 Next PPV Event' : '⚡ Next Event';
   title.textContent = ev.name || '';
   meta.textContent  = [ev.date, ev.location, ev.venue].filter(Boolean).join('  ·  ');
+  const btn = document.getElementById('heroBtn');
+  if (btn && ev.id) btn.href = `events.html#ev-${ev.id}`;
 }
 
 // ── Recent Results ────────────────────────────
