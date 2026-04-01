@@ -2645,3 +2645,50 @@ body.light-mode .feed-action {
 .theme-toggle:hover {
   border-color: cyan;
 }
+
+/* ── Theme toggle switch ── */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+.toggle-track {
+  width: 44px;
+  height: 24px;
+  background: #333;
+  border-radius: 12px;
+  position: relative;
+  transition: background 0.25s;
+}
+.toggle-thumb {
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  transition: transform 0.25s, background 0.25s;
+}
+body.light-mode .toggle-track {
+  background: cyan;
+}
+body.light-mode .toggle-thumb {
+  transform: translateX(20px);
+  background: #000;
+}
+.toggle-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.05em;
+}
+body.light-mode .toggle-label {
+  color: rgba(0,0,0,0.45);
+}

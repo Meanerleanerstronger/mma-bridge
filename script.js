@@ -8,12 +8,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // ── Theme toggle ──
   const toggle = document.getElementById('themeToggle');
-  const saved  = localStorage.getItem('theme');
-  if (saved === 'light') { document.body.classList.add('light-mode'); if (toggle) toggle.textContent = '☀️'; }
+  if (localStorage.getItem('theme') === 'light') document.body.classList.add('light-mode');
   if (toggle) {
     toggle.addEventListener('click', () => {
       const isLight = document.body.classList.toggle('light-mode');
-      toggle.textContent = isLight ? '☀️' : '🌙';
       localStorage.setItem('theme', isLight ? 'light' : 'dark');
     });
   }
