@@ -43,6 +43,7 @@
           </svg>
         </span>
       </form>
+      <button class="theme-toggle" id="themeToggle" title="Toggle light/dark mode">🌙</button>
 
     </div>
   </nav>
@@ -67,9 +68,9 @@
     <h3 style="font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin:0 0 18px;padding:0 48px;">Recent Results</h3>
     <div style="position:relative;">
       <!-- fade left -->
-      <div style="position:absolute;left:0;top:0;bottom:16px;width:120px;background:linear-gradient(to right,#0f0f0f 0%,transparent 100%);z-index:2;pointer-events:none;"></div>
+      <div style="position:absolute;left:0;top:0;bottom:16px;width:80px;background:linear-gradient(to right,#0f0f0f 0%,transparent 100%);z-index:2;pointer-events:none;"></div>
       <!-- fade right -->
-      <div style="position:absolute;right:0;top:0;bottom:16px;width:120px;background:linear-gradient(to left,#0f0f0f 0%,transparent 100%);z-index:2;pointer-events:none;"></div>
+      <div style="position:absolute;right:0;top:0;bottom:16px;width:80px;background:linear-gradient(to left,#0f0f0f 0%,transparent 100%);z-index:2;pointer-events:none;"></div>
       <div id="resultsTrack" style="overflow:hidden;width:100%;cursor:grab;">
         <div id="resultsInner" style="display:flex;gap:16px;width:max-content;will-change:transform;padding:0 120px 16px;"></div>
       </div>
@@ -107,6 +108,18 @@
     "></div>
   </div>
 
+  <script>
+    (function() {
+      const t = document.getElementById('themeToggle');
+      const s = localStorage.getItem('theme');
+      if (s === 'light') { document.body.classList.add('light-mode'); if(t) t.textContent='☀️'; }
+      if (t) t.addEventListener('click', function() {
+        const l = document.body.classList.toggle('light-mode');
+        t.textContent = l ? '☀️' : '🌙';
+        localStorage.setItem('theme', l ? 'light' : 'dark');
+      });
+    })();
+  </script>
   <script type="module" src="script.js"></script>
 </body>
 </html>

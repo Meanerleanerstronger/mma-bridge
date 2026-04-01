@@ -2538,3 +2538,110 @@ a, a:visited {
 }
 .feed-highlight { color: cyan; }
 .feed-stars { color: #facc15; letter-spacing: -1px; }
+
+/* ── Light / Dark mode ── */
+:root {
+  --bg:        #0f0f0f;
+  --bg2:       #111;
+  --bg3:       #141414;
+  --border:    rgba(255,255,255,0.08);
+  --text:      #ffffff;
+  --text2:     rgba(255,255,255,0.6);
+  --text3:     rgba(255,255,255,0.35);
+  --accent:    cyan;
+  --card-bg:   #111;
+  --sidebar-bg:#111;
+  --nav-bg:    #111;
+}
+
+body.light-mode {
+  --bg:        #f4f4f4;
+  --bg2:       #ffffff;
+  --bg3:       #efefef;
+  --border:    rgba(0,0,0,0.1);
+  --text:      #0a0a0a;
+  --text2:     rgba(0,0,0,0.6);
+  --text3:     rgba(0,0,0,0.4);
+  --accent:    #0088aa;
+  --card-bg:   #ffffff;
+  --sidebar-bg:#ffffff;
+  --nav-bg:    #ffffff;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
+}
+
+body.light-mode .navbar {
+  background: var(--nav-bg);
+  border-bottom-color: var(--border);
+}
+
+body.light-mode .nav-links li a {
+  color: var(--text);
+}
+
+body.light-mode .search-box input {
+  background: #ebebeb;
+  color: var(--text);
+  border-color: var(--border);
+}
+
+body.light-mode .search-box input::placeholder {
+  color: var(--text3);
+}
+
+body.light-mode .sidebar {
+  background: var(--sidebar-bg);
+  border-color: var(--accent);
+}
+
+body.light-mode .sidebar li,
+body.light-mode .sidebar h3 {
+  color: var(--text);
+}
+
+body.light-mode .medium-card {
+  background: var(--card-bg);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+body.light-mode .medium-card h2 {
+  color: var(--text);
+}
+
+body.light-mode #liveFeed {
+  background: #ffffff;
+  border-color: var(--border);
+}
+
+body.light-mode .feed-text {
+  color: rgba(0,0,0,0.7);
+}
+
+body.light-mode .feed-text strong {
+  color: #000;
+}
+
+body.light-mode .feed-action {
+  color: rgba(0,0,0,0.25);
+}
+
+/* Toggle button */
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--text);
+  transition: all 0.2s;
+  margin-left: 12px;
+  flex-shrink: 0;
+}
+.theme-toggle:hover {
+  border-color: cyan;
+}
