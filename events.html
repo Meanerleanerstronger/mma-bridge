@@ -11,6 +11,7 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
+  <script src="theme.js"></script>
 </head>
 
 <body>
@@ -80,15 +81,5 @@
 
   <script type="module" src="events.js"></script>
   <script src="chat.js"></script>
-  <script>
-    (function() {
-      const t = document.getElementById('themeToggle');
-      if (localStorage.getItem('theme') === 'light') document.body.classList.add('light-mode');
-      if (t) t.addEventListener('click', function() {
-        const l = document.body.classList.toggle('light-mode');
-        localStorage.setItem('theme', l ? 'light' : 'dark');
-      });
-    })();
-  </script>
 </body>
 </html>

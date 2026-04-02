@@ -275,6 +275,7 @@
             }
         }
     </style>
+  <script src="theme.js"></script>
 </head>
 <body>
     <!-- NAVBAR (MATCHES INDEX) -->
@@ -492,15 +493,5 @@
     <script src="./script.js"></script>
 <script src="./results.js"></script>
 <script src="./chat.js"></script>
-  <script>
-    (function() {
-      const t = document.getElementById('themeToggle');
-      if (localStorage.getItem('theme') === 'light') document.body.classList.add('light-mode');
-      if (t) t.addEventListener('click', function() {
-        const l = document.body.classList.toggle('light-mode');
-        localStorage.setItem('theme', l ? 'light' : 'dark');
-      });
-    })();
-  </script>
 </body>
 </html>

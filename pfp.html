@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Pacifico&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css" />
+  <script src="theme.js"></script>
 </head>
 
 <body class="pfp-page">
@@ -187,15 +188,5 @@
 
   <script type="module" src="pfp.js"></script>
   <script src="chat.js"></script>
-  <script>
-    (function() {
-      const t = document.getElementById('themeToggle');
-      if (localStorage.getItem('theme') === 'light') document.body.classList.add('light-mode');
-      if (t) t.addEventListener('click', function() {
-        const l = document.body.classList.toggle('light-mode');
-        localStorage.setItem('theme', l ? 'light' : 'dark');
-      });
-    })();
-  </script>
 </body>
 </html>

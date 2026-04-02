@@ -12,6 +12,7 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
+  <script src="theme.js"></script>
 </head>
 
 <body>
@@ -110,17 +111,6 @@
       position:relative;
     "></div>
   </div>
-
-    <script>
-    (function() {
-      const t = document.getElementById('themeToggle');
-      if (localStorage.getItem('theme') === 'light') document.body.classList.add('light-mode');
-      if (t) t.addEventListener('click', function() {
-        const l = document.body.classList.toggle('light-mode');
-        localStorage.setItem('theme', l ? 'light' : 'dark');
-      });
-    })();
-  </script>
   <script type="module" src="script.js"></script>
 </body>
 </html>
