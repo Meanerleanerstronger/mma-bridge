@@ -229,19 +229,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         </summary>
 
         <div class="ev-body">
-          <div class="ev-poster-wrap">
-            ${ev.poster
-              ? `<img class="ev-poster" src="${esc(ev.poster)}" alt="${esc(ev.name)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-                 <div class="ev-poster-ph" style="display:none"></div>`
-              : `<div class="ev-poster-ph"></div>`}
-            <div class="ev-poster-overlay">
-              <div class="ev-poster-event-name">${esc(ev.name||'')}</div>
-              <div class="ev-poster-meta">
-                ${ev.date ? esc(ev.date) : ''}
-                ${ev.location ? ` &nbsp;·&nbsp; ${esc(ev.location)}` : ''}
-                ${ev.venue ? ` &nbsp;·&nbsp; ${esc(ev.venue)}` : ''}
-              </div>
-            </div>
+          <div class="ev-body-header">
+            <div class="ev-body-title">${esc(ev.name||'')}</div>
+            <div class="ev-body-meta">${ev.date||''} &nbsp;·&nbsp; ${ev.location||''} &nbsp;·&nbsp; ${ev.venue||''}</div>
           </div>
           <div class="ev-content">
             ${upcoming ? hypeMeter(ev) : ''}

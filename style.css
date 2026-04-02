@@ -2030,22 +2030,22 @@ a, a:visited {
   position: relative;
   border-radius: 0 !important;
   overflow: hidden;
-  height: 260px;
+  height: 380px;
   border: none !important;
   border-top: 1px solid rgba(255,255,255,0.08) !important;
   border-bottom: none !important;
 }
 .ev-poster {
   width: 100%;
-  height: 260px !important;
+  height: 380px !important;
   min-height: unset !important;
   object-fit: cover;
-  object-position: center center;
+  object-position: center 20%;
   display: block;
   filter: brightness(0.85) contrast(1.05);
 }
 .ev-poster-ph {
-  height: 260px !important;
+  height: 380px !important;
   min-height: unset !important;
   background: linear-gradient(160deg, #1c1c1c, #0e0e0e);
   font-size: 4rem !important;
@@ -2657,4 +2657,29 @@ body.light-mode .feed-action { color: rgba(0,0,0,0.2) !important; }
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.12);
   color: rgba(255,255,255,0.4);
+}
+
+/* ── Event body header (replaces poster hero) ── */
+.ev-body-header {
+  padding: 20px 24px 16px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+}
+.ev-body-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #fff;
+  margin-bottom: 6px;
+}
+.ev-body-meta {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.4);
+}
+.event-card.is-ppv .ev-body-header {
+  background: rgba(0,255,255,0.03);
+  border-top-color: rgba(0,255,255,0.15);
 }

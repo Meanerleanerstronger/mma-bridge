@@ -2437,10 +2437,109 @@
         "titleFight": false,
         "ranked": true,
         "slot": "main"
+      },
+      {
+        "a": "Virna Jandiroba",
+        "b": "Tabatha Ricci",
+        "weight": "Women's Strawweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "comain"
+      },
+      {
+        "a": "Abdul-Rakhman Yakhyaev",
+        "b": "Brendson Ribeiro",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Ethyn Ewing",
+        "b": "Rafael Estevam",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Tommy McMillen",
+        "b": "Manolo Zecchini",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
       }
     ],
-    "prelims": [],
-    "earlyPrelims": []
+    "prelims": [
+      {
+        "a": "Guilherme Pat",
+        "b": "Thomas Petersen",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Jose Delano",
+        "b": "Robert Ruchala",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Alessandro Costa",
+        "b": "Stewart Nicoll",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Lando Vannata",
+        "b": "Darrius Flowers",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Alice Pereira",
+        "b": "Hailey Cowan",
+        "weight": "Women's Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
+    ],
+    "earlyPrelims": [
+      {
+        "a": "Azamat Bekoev",
+        "b": "Tresean Gore",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Dione Barbosa",
+        "b": "Melissa Gatto",
+        "weight": "Women's Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Kai Kamaka III",
+        "b": "Dakota Hope",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
+    ]
   },
   {
     "id": "ufc-327-prochazka-vs-ulberg",
