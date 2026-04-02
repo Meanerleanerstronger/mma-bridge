@@ -189,48 +189,51 @@ document.addEventListener('DOMContentLoaded', async () => {
   function eventCard(ev, idx) {
     const id       = ev.id || slugify(ev.name||'') || String(idx);
     const upcoming = isUpcoming(ev);
-    const meta = {
-      name: ev.name, date: ev.date,
-      location: ev.location, venue: ev.venue,
-      eventId: id
-    };
+    const isPPV    = ev.type === 'PPV';
+    const meta = { name: ev.name, date: ev.date, location: ev.location, venue: ev.venue, eventId: id };
 
-    const poster = ev.poster
-      ? `<img class="ev-poster" src="${esc(ev.poster)}" alt="${esc(ev.name)}" onerror="this.style.display='none'">`
-      : `<div class="ev-poster-ph">🥊</div>`;
+    // Countdown
+    let countdownHtml = '';
+    if (upcoming && ev.isoDate) {
+      const days = Math.ceil((new Date(ev.isoDate) - new Date()) / 86400000);
+      let label = days <= 0 ? 'TODAY' : days === 1 ? 'TOMORROW' : `IN ${days} DAYS`;
+      let cls   = days <= 7 ? 'soon' : 'upcoming';
+      countdownHtml = `<span class="ev-countdown ${cls}">${label}</span>`;
+    }
 
-    // Status pill removed — this page is upcoming only
-    const statusPill = '';
+    // Thumbnail
+    const thumbHtml = ev.poster
+      ? `<img class="ev-thumb" src="${esc(ev.poster)}" alt="" onerror="this.style.display='none'">`
+      : `<div class="ev-thumb"></div>`;
 
     return `
-      <details class="event-card" id="ev-${esc(id)}">
+      <details class="event-card ${isPPV ? 'is-ppv' : ''}" id="ev-${esc(id)}">
         <summary class="ev-summary">
+          ${thumbHtml}
           <div class="ev-sum-left">
             <div class="ev-name-row">
               <span class="ev-name">${esc(ev.name||'')}</span>
               ${ev.type ? `<span class="ev-type-tag">${esc(ev.type)}</span>` : ''}
             </div>
             <div class="ev-meta">
-              ${ev.date     ? `<span>${esc(ev.date)}</span>`                           : ''}
+              ${ev.date     ? `<span>${esc(ev.date)}</span>` : ''}
               ${ev.location ? `<span class="ev-dot">•</span><span>${esc(ev.location)}</span>` : ''}
-              ${ev.venue    ? `<span class="ev-dot">•</span><span>${esc(ev.venue)}</span>`    : ''}
+              ${ev.venue    ? `<span class="ev-dot">•</span><span>${esc(ev.venue)}</span>` : ''}
             </div>
           </div>
           <div class="ev-sum-right">
+            ${countdownHtml}
             <span class="view-chip">VIEW</span>
             <span class="ev-chev">▾</span>
           </div>
         </summary>
 
         <div class="ev-body">
-
-          <!-- Full-width poster hero -->
           <div class="ev-poster-wrap">
             ${ev.poster
               ? `<img class="ev-poster" src="${esc(ev.poster)}" alt="${esc(ev.name)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
                  <div class="ev-poster-ph" style="display:none"></div>`
-              : `<div class="ev-poster-ph"></div>`
-            }
+              : `<div class="ev-poster-ph"></div>`}
             <div class="ev-poster-overlay">
               <div class="ev-poster-event-name">${esc(ev.name||'')}</div>
               <div class="ev-poster-meta">
@@ -240,15 +243,12 @@ document.addEventListener('DOMContentLoaded', async () => {
               </div>
             </div>
           </div>
-
-          <!-- Fights + hype meter -->
           <div class="ev-content">
             ${upcoming ? hypeMeter(ev) : ''}
             ${section('Main Card',     ev.mainCard,     meta, upcoming, true)}
             ${section('Prelims',       ev.prelims,      meta, upcoming, false)}
             ${section('Early Prelims', ev.earlyPrelims, meta, upcoming, false)}
           </div>
-
         </div>
       </details>`;
   }

@@ -2566,6 +2566,105 @@
     ]
   },
   {
+    "id": "ufc-328-chimaev-vs-strickland",
+    "name": "UFC 328: Chimaev vs. Strickland",
+    "type": "PPV",
+    "date": "Sat, May 9, 2026",
+    "isoDate": "2026-05-09",
+    "location": "Newark, NJ",
+    "venue": "Prudential Center",
+    "poster": "images/ufc-328.jpg",
+    "status": "upcoming",
+    "mainCard": [
+      {
+        "a": "Khamzat Chimaev",
+        "b": "Sean Strickland",
+        "weight": "Middleweight",
+        "rounds": "5 Rds",
+        "titleFight": true,
+        "ranked": true,
+        "slot": "main"
+      },
+      {
+        "a": "Alexander Volkov",
+        "b": "Waldo Cortes-Acosta",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "comain"
+      },
+      {
+        "a": "Sean Brady",
+        "b": "Joaquin Buckley",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Jan Blachowicz",
+        "b": "Bogdan Guskov",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "King Green",
+        "b": "Jeremy Stephens",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
+    ],
+    "prelims": [
+      {
+        "a": "Ateba Gautier",
+        "b": "Osman Diaz",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Clayton Carpenter",
+        "b": "Jose Ochoa",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Roman Kopylov",
+        "b": "Marco Tulio",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Baisangur Susurkaev",
+        "b": "Djorden Santos",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
+    ],
+    "earlyPrelims": [
+      {
+        "a": "Joel Alvarez",
+        "b": "Yaroslav Amosov",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
+    ]
+  },
+  {
     "id": "ufc-fight-night-allen-vs-costa",
     "name": "UFC Fight Night: Allen vs. Costa",
     "type": "FIGHT NIGHT",
@@ -2573,7 +2672,7 @@
     "isoDate": "2026-05-16",
     "location": "Las Vegas, NV",
     "venue": "Meta APEX",
-    "poster": "",
+    "poster": "images/fn-allen.jpg",
     "status": "upcoming",
     "mainCard": [
       {
@@ -2606,7 +2705,7 @@
     "isoDate": "2026-06-14",
     "location": "Washington, D.C.",
     "venue": "White House South Lawn",
-    "poster": "",
+    "poster": "images/ufc-freedom-250.jpg",
     "status": "upcoming",
     "mainCard": [
       {
@@ -2617,9 +2716,51 @@
         "titleFight": true,
         "ranked": true,
         "slot": "main"
+      },
+      {
+        "a": "Alex Pereira",
+        "b": "Ciryl Gane",
+        "weight": "Heavyweight",
+        "rounds": "5 Rds",
+        "titleFight": true,
+        "ranked": true,
+        "slot": "comain"
+      },
+      {
+        "a": "Sean O'Malley",
+        "b": "Aiemann Zahabi",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Mauricio Ruffy",
+        "b": "Michael Chandler",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Bo Nickal",
+        "b": "Kyle Daukaus",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
       }
     ],
-    "prelims": [],
+    "prelims": [
+      {
+        "a": "Diego Lopes",
+        "b": "Steve Garcia",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      }
+    ],
     "earlyPrelims": []
   },
   {
