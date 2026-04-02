@@ -2683,3 +2683,61 @@ body.light-mode .feed-action { color: rgba(0,0,0,0.2) !important; }
   background: rgba(0,255,255,0.03);
   border-top-color: rgba(0,255,255,0.15);
 }
+
+/* ── Light mode PFP drawer fix ── */
+body.light-mode .pfp-page .drawer .bout,
+body.light-mode .pfp-page .drawer .bout-opp,
+body.light-mode .pfp-page .drawer .bout-date,
+body.light-mode .pfp-page .drawer .wl,
+body.light-mode .pfp-page .drawer .last5-list,
+body.light-mode .drawer-a,
+body.light-mode .drawer-b,
+body.light-mode .drawer-vs,
+body.light-mode .drawer-card-title,
+body.light-mode .drawer-hero,
+body.light-mode .pill {
+  color: #fff !important;
+}
+body.light-mode .pfp-page .drawer .bout.win {
+  background: rgba(0,180,0,0.15) !important;
+}
+body.light-mode .pfp-page .drawer .bout.loss {
+  background: rgba(180,0,0,0.1) !important;
+}
+body.light-mode .drawer {
+  background: #1a1a1a !important;
+  color: #fff !important;
+}
+
+/* ── Light mode - live feed fix ── */
+body.light-mode #liveFeed {
+  background: #1a1a1a !important;
+  border-color: rgba(0,0,0,0.1) !important;
+}
+body.light-mode .feed-entry {
+  border-bottom-color: rgba(255,255,255,0.06) !important;
+}
+body.light-mode .feed-text {
+  color: rgba(255,255,255,0.75) !important;
+}
+body.light-mode .feed-text strong {
+  color: #fff !important;
+}
+body.light-mode .feed-action {
+  color: rgba(255,255,255,0.25) !important;
+}
+
+/* ── Light mode - news cards fix ── */
+body.light-mode .medium-card h2 {
+  color: #111 !important;
+  text-shadow: none !important;
+}
+body.light-mode .medium-card {
+  background: #fff !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1) !important;
+}
+
+/* ── Light mode - recent results fix ── */
+body.light-mode #resultsTrack a div[style*="padding"] {
+  background: #fff !important;
+}
