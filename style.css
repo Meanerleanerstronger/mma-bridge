@@ -760,6 +760,9 @@ a, a:visited {
   inset: 0;
   background: rgba(0,0,0,0.62);
 }
+body.light-mode .drawer-backdrop {
+  background: rgba(0,0,0,0.35);
+}
 
 .drawer-panel {
   position: absolute;
@@ -2740,4 +2743,43 @@ body.light-mode .medium-card {
 /* ── Light mode - recent results fix ── */
 body.light-mode #resultsTrack a div[style*="padding"] {
   background: #fff !important;
+}
+
+/* ── Light mode reviews page text fix ── */
+body.light-mode .rv-card .card-name,
+body.light-mode .rv-card .card-matchup,
+body.light-mode .rv-card,
+body.light-mode .rv-header h1,
+body.light-mode .rv-header p,
+body.light-mode .rv-section-title,
+body.light-mode .rv-search input {
+  color: #111 !important;
+}
+body.light-mode .rv-hero h1,
+body.light-mode .rv-hero p {
+  color: #111 !important;
+}
+/* Page titles in light mode */
+body.light-mode h1, 
+body.light-mode h2,
+body.light-mode h3 {
+  color: #111 !important;
+}
+body.light-mode p {
+  color: #333 !important;
+}
+
+/* ── PFP drawer - don't blacken background in light mode ── */
+body.light-mode .drawer-backdrop,
+body.light-mode .pfp-page .drawer-backdrop {
+  background: rgba(0,0,0,0.4) !important;
+}
+body.light-mode .pfp-page .card-image {
+  opacity: 1 !important;
+}
+/* Keep PFP grid visible when drawer open in light mode */
+body.light-mode .pfp-page.drawer-open .pfp-grid,
+body.light-mode .pfp-page.drawer-open .card-row {
+  opacity: 0.4 !important;
+  filter: none !important;
 }

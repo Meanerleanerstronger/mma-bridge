@@ -102,7 +102,7 @@
     "nickname": "",
     "country": "Sweden",
     "flag": "\ud83c\uddf8\ud83c\uddea",
-    "record": "13-0",
+    "record": "15-0",
     "division": "Middleweight / Welterweight",
     "stance": "Orthodox",
     "height": "6'2\"",
@@ -110,39 +110,34 @@
     "age": "31",
     "last5": [
       {
+        "opponent": "Robert Whittaker",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC 328"
+      },
+      {
+        "opponent": "Dricus Du Plessis",
+        "result": "W",
+        "method": "UD",
+        "event": "UFC 319"
+      },
+      {
         "opponent": "Kamaru Usman",
         "result": "W",
         "method": "MD",
-        "round": "3",
-        "date": "2023-10-21"
+        "event": "UFC 294"
       },
       {
         "opponent": "Kevin Holland",
         "result": "W",
-        "method": "SUB",
-        "round": "1",
-        "date": "2022-09-10"
+        "method": "Sub",
+        "event": "UFC 279"
       },
       {
         "opponent": "Gilbert Burns",
         "result": "W",
         "method": "UD",
-        "round": "3",
-        "date": "2022-04-09"
-      },
-      {
-        "opponent": "Li Jingliang",
-        "result": "W",
-        "method": "SUB",
-        "round": "1",
-        "date": "2021-10-30"
-      },
-      {
-        "opponent": "Gerald Meerschaert",
-        "result": "W",
-        "method": "SUB",
-        "round": "1",
-        "date": "2020-09-19"
+        "event": "UFC 273"
       }
     ]
   },
