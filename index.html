@@ -59,9 +59,9 @@
 
 
     <!-- HERO — auto-updates to next upcoming event -->
-  <section class="hero" id="heroSection" style="position:relative;overflow:hidden;min-height:420px;background:#111;">
-    <div id="heroImg" style="position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(0.55) contrast(1.05);transition:opacity 0.5s;"></div>
-    <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.85) 100%);"></div>
+  <section class="hero" id="heroSection" style="position:relative;overflow:hidden;min-height:520px;background:#111;">
+    <div id="heroImg" style="position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(0.85) contrast(1.08) saturate(1.1);transition:opacity 0.5s;"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(to right, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0.1) 100%), linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 100%);"></div>
     <div id="hero-content" style="position:relative;z-index:2;padding:60px 48px 48px;">
       <div id="heroType" style="font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:cyan;margin-bottom:12px;"></div>
       <h1 id="heroTitle" style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:2.4rem;text-transform:uppercase;letter-spacing:0.04em;color:#fff;margin:0 0 10px;text-shadow:0 2px 20px rgba(0,0,0,0.8);max-width:700px;"></h1>
@@ -174,22 +174,24 @@
             const days = Math.floor(diff / 86400000);
             const hrs = Math.floor((diff % 86400000) / 3600000);
             const mins = Math.floor((diff % 3600000) / 60000);
-            const countStr = days > 0 ? `${days}d ${hrs}h ${mins}m` : `${hrs}h ${mins}m`;
+            const secs = Math.floor((diff % 60000) / 1000);
+            const countStr = days > 0
+              ? `${days}d ${hrs}h ${mins}m ${secs}s`
+              : `${hrs}h ${mins}m ${secs}s`;
             
             const mainFight = upcoming.mainCard ? upcoming.mainCard[0] : null;
             const fightTeaser = mainFight ? `<span class="banner-fight-item"><strong style="color:#fff">${mainFight.a}</strong> <span>vs</span> <strong style="color:#fff">${mainFight.b}</strong></span>` : '';
 
             banner.innerHTML = `
-              <span class="next-event-badge"><span class="next-event-badge-text">Next Event</span></span>
               <span class="banner-event-name">${upcoming.name}</span>
               <div class="banner-fights">${fightTeaser}</div>
-              <span class="banner-countdown">⏱ ${countStr}</span>
-              <a href="events.html" class="banner-event-link">View Card →</a>
+              <span class="banner-countdown">${countStr}</span>
+              <a href="events.html#ev-${upcoming.id}" class="banner-event-link">View Card →</a>
             `;
             banner.classList.remove('hidden');
           }
           updateCountdown();
-          setInterval(updateCountdown, 60000);
+          setInterval(updateCountdown, 1000);
         }
       } catch(e) { /* silent fail */ }
     })();
