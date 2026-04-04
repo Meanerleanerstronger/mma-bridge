@@ -24,9 +24,19 @@ a, a:visited {
 ========================= */
 .navbar {
   width: 100%;
-  background: #111;
-  padding: 30px 0;
+  background: rgba(17, 17, 17, 0.96);
+  padding: 20px 0;
   border-bottom: 1px solid #222;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: box-shadow 0.2s;
+}
+
+.navbar.scrolled {
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
 }
 
 .nav-container {
@@ -185,13 +195,13 @@ a, a:visited {
 }
 
 .card-row {
-  display: flex;
-  gap: 36px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
 }
 
-/* Make anchor behave as flex item */
+/* Make anchor behave as grid item */
 .card-row > a {
-  flex: 1;
   display: block;
   text-decoration: none;
   color: inherit;
@@ -218,9 +228,10 @@ a, a:visited {
 
 .card-image {
   width: 100%;
-  height: 100%;
+  height: 180px;
   background-size: cover;
   background-position: center;
+  flex-shrink: 0;
 }
 
 .medium-card h2 {
@@ -2782,4 +2793,179 @@ body.light-mode .pfp-page.drawer-open .pfp-grid,
 body.light-mode .pfp-page.drawer-open .card-row {
   opacity: 0.4 !important;
   filter: none !important;
+}
+
+/* ── Live Event Tracker Banner ── */
+.live-event-banner {
+  background: linear-gradient(90deg, #0a0a0a 0%, #111 50%, #0a0a0a 100%);
+  border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+  border-top: 1px solid rgba(0, 255, 255, 0.1);
+  padding: 10px 48px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+.live-event-banner.hidden {
+  display: none;
+}
+
+.live-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 30, 30, 0.15);
+  border: 1px solid rgba(255, 60, 60, 0.4);
+  border-radius: 4px;
+  padding: 3px 10px;
+  flex-shrink: 0;
+}
+
+.live-dot {
+  width: 7px;
+  height: 7px;
+  background: #ff3c3c;
+  border-radius: 50%;
+  animation: pulse 1.2s infinite;
+}
+
+.live-badge-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: #ff5c5c;
+  text-transform: uppercase;
+}
+
+.next-event-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 255, 255, 0.08);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 4px;
+  padding: 3px 10px;
+  flex-shrink: 0;
+}
+
+.next-event-badge-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: cyan;
+  text-transform: uppercase;
+}
+
+.banner-event-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.banner-fights {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex: 1;
+  overflow: hidden;
+}
+
+.banner-fight-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.65);
+  flex-shrink: 0;
+}
+
+.banner-fight-item .winner {
+  color: #00ff88;
+  font-weight: 600;
+}
+
+.banner-fight-item .method-badge {
+  background: rgba(0,255,255,0.1);
+  border: 1px solid rgba(0,255,255,0.2);
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: cyan;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.05em;
+}
+
+.banner-sep {
+  color: rgba(255,255,255,0.2);
+  font-size: 0.7rem;
+}
+
+.banner-countdown {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: cyan;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.banner-event-link {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #000;
+  background: cyan;
+  border-radius: 4px;
+  padding: 4px 10px;
+  text-decoration: none;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  transition: opacity 0.15s;
+}
+
+.banner-event-link:hover {
+  opacity: 0.85;
+}
+
+/* Light mode banner */
+body.light-mode .live-event-banner {
+  background: linear-gradient(90deg, #f0f0f0 0%, #fafafa 50%, #f0f0f0 100%);
+  border-color: rgba(0, 150, 150, 0.2);
+}
+
+body.light-mode .banner-event-name { color: #111; }
+body.light-mode .banner-fight-item { color: rgba(0,0,0,0.6); }
+
+/* Light mode sticky navbar */
+body.light-mode .navbar {
+  background: rgba(255, 255, 255, 0.97) !important;
+}
+
+/* Responsive card grid */
+@media (max-width: 900px) {
+  .card-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 580px) {
+  .card-row {
+    grid-template-columns: 1fr;
+  }
+  .live-event-banner {
+    padding: 10px 16px;
+    flex-wrap: wrap;
+  }
 }

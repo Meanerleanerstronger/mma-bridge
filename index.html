@@ -52,7 +52,10 @@
     </div>
   </nav>
   
-  
+  <!-- LIVE EVENT TRACKER BANNER -->
+  <div class="live-event-banner hidden" id="liveEventBanner">
+    <!-- populated by JS -->
+  </div>
 
 
     <!-- HERO — auto-updates to next upcoming event -->
@@ -112,5 +115,84 @@
     "></div>
   </div>
   <script type="module" src="script.js"></script>
+
+  <script>
+    // ── Sticky navbar scroll shadow ──
+    window.addEventListener('scroll', () => {
+      document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    // ── Live Event Tracker Banner ──
+    (async function() {
+      try {
+        const res = await fetch('events.json');
+        const events = await res.json();
+        const now = new Date();
+        const banner = document.getElementById('liveEventBanner');
+
+        // Find the most recently completed event OR next upcoming event
+        const completed = events.filter(e => e.status === 'completed').slice(-1)[0];
+        const upcoming = events.find(e => {
+          const d = new Date(e.isoDate);
+          return d >= now;
+        });
+
+        // Show last completed results if within 3 days, else show next upcoming countdown
+        const lastCompletedDate = completed ? new Date(completed.isoDate) : null;
+        const daysSince = lastCompletedDate ? (now - lastCompletedDate) / 86400000 : 999;
+
+        if (daysSince < 3 && completed) {
+          // Show results banner
+          const mainFights = (completed.mainCard || []).slice(0, 3).filter(f => f.winner);
+          if (mainFights.length === 0) return;
+
+          const fightHTML = mainFights.map((f, i) => `
+            <span class="banner-fight-item">
+              <span class="winner">${f.winner}</span>
+              <span>def.</span>
+              <span>${f.winner === f.a ? f.b : f.a}</span>
+              <span class="method-badge">${f.method}</span>
+            </span>
+            ${i < mainFights.length - 1 ? '<span class="banner-sep">·</span>' : ''}
+          `).join('');
+
+          banner.innerHTML = `
+            <span class="live-badge"><span class="live-dot"></span><span class="live-badge-text">Results</span></span>
+            <span class="banner-event-name">${completed.name}</span>
+            <div class="banner-fights">${fightHTML}</div>
+            <a href="event-review.html?event=${completed.id}" class="banner-event-link">Full Results →</a>
+          `;
+          banner.classList.remove('hidden');
+
+        } else if (upcoming) {
+          // Show countdown to next event
+          const eventDate = new Date(upcoming.isoDate + 'T22:00:00');
+          
+          function updateCountdown() {
+            const diff = eventDate - new Date();
+            if (diff <= 0) { banner.classList.add('hidden'); return; }
+            const days = Math.floor(diff / 86400000);
+            const hrs = Math.floor((diff % 86400000) / 3600000);
+            const mins = Math.floor((diff % 3600000) / 60000);
+            const countStr = days > 0 ? `${days}d ${hrs}h ${mins}m` : `${hrs}h ${mins}m`;
+            
+            const mainFight = upcoming.mainCard ? upcoming.mainCard[0] : null;
+            const fightTeaser = mainFight ? `<span class="banner-fight-item"><strong style="color:#fff">${mainFight.a}</strong> <span>vs</span> <strong style="color:#fff">${mainFight.b}</strong></span>` : '';
+
+            banner.innerHTML = `
+              <span class="next-event-badge"><span class="next-event-badge-text">Next Event</span></span>
+              <span class="banner-event-name">${upcoming.name}</span>
+              <div class="banner-fights">${fightTeaser}</div>
+              <span class="banner-countdown">⏱ ${countStr}</span>
+              <a href="events.html" class="banner-event-link">View Card →</a>
+            `;
+            banner.classList.remove('hidden');
+          }
+          updateCountdown();
+          setInterval(updateCountdown, 60000);
+        }
+      } catch(e) { /* silent fail */ }
+    })();
+  </script>
 </body>
 </html>

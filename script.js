@@ -22,12 +22,29 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Load events for hero + recent results
   try {
     const all = await fetch('/events.json').then(r => r.json());
-    const today = new Date().toISOString().slice(0, 10);
-    const upcoming = all.filter(e => (e.isoDate||'9999') >= today).sort((a,b) => a.isoDate.localeCompare(b.isoDate));
+    const now = new Date();
+
+    // Returns true once an event's start time (ET) has passed
+    function hasStarted(ev) {
+      if (!ev.isoDate) return false;
+      const t = ev.startTime || '22:00';
+      const evStart = new Date(`${ev.isoDate}T${t}:00-04:00`);
+      return now >= evStart;
+    }
+
     const past = all
-      .filter(e => (e.isoDate||'9999') < today && e.status === 'completed' && e.poster)
+      .filter(e => e.status === 'completed' && e.poster)
       .sort((a, b) => b.isoDate.localeCompare(a.isoDate));
-    renderHero(upcoming[0] || past[0]);
+
+    // Upcoming events that haven't started yet
+    const upcoming = all
+      .filter(e => e.status === 'upcoming' && !hasStarted(e))
+      .sort((a, b) => a.isoDate.localeCompare(b.isoDate));
+
+    // An upcoming event whose start time just passed = live now, show as hero
+    const liveNow = all.find(e => e.status === 'upcoming' && hasStarted(e));
+
+    renderHero(liveNow || upcoming[0] || past[0]);
     renderRecentResults(past);
   } catch(e) { debugLog('Events error:', e); }
 
