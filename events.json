@@ -2433,10 +2433,15 @@
         "a": "Renato Moicano",
         "b": "Chris Duncan",
         "weight": "Lightweight",
-        "rounds": "5 Rds",
+        "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
-        "slot": "main"
+        "slot": "main",
+        "winner": "Renato Moicano",
+        "method": "SUB",
+        "round": 2,
+        "time": "1:47",
+        "detail": "Rear Naked Choke"
       },
       {
         "a": "Virna Jandiroba",
@@ -2445,15 +2450,25 @@
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
-        "slot": "comain"
+        "slot": "comain",
+        "winner": "Virna Jandiroba",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
-        "a": "Abdul-Rakhman Yakhyaev",
+        "a": "Abdul Rakhman Yakhyaev",
         "b": "Brendson Ribeiro",
-        "weight": "Light Heavyweight",
+        "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "slot": "main3",
+        "winner": "Abdul Rakhman Yakhyaev",
+        "method": "SUB",
+        "round": 1,
+        "time": "3:00",
+        "detail": "Guillotine Choke"
       },
       {
         "a": "Ethyn Ewing",
@@ -2461,7 +2476,12 @@
         "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "slot": "main4",
+        "winner": "Ethyn Ewing",
+        "method": "KO",
+        "round": 3,
+        "time": "1:44"
       },
       {
         "a": "Tommy McMillen",
@@ -2469,7 +2489,25 @@
         "weight": "Featherweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "slot": "main5",
+        "winner": "Tommy McMillen",
+        "method": "TKO",
+        "round": 1,
+        "time": "5:00"
+      },
+      {
+        "a": "Jose Delano",
+        "b": "Robert Ruchala",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "main6",
+        "winner": "Jose Delano",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "prelims": [
@@ -2540,7 +2578,96 @@
         "ranked": false
       }
     ],
-    "startTime": "22:00"
+    "startTime": "22:00",
+    "prelimCard": [
+      {
+        "a": "Tresean Gore",
+        "b": "Azamat Bekoev",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "winner": "Tresean Gore",
+        "method": "SUB",
+        "round": 3,
+        "time": "3:27",
+        "detail": "Guillotine Choke"
+      },
+      {
+        "a": "Alice Pereira",
+        "b": "Hailey Cowan",
+        "weight": "Women's Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "winner": "Alice Pereira",
+        "method": "KO",
+        "round": 2,
+        "time": "5:00",
+        "detail": "Knee"
+      },
+      {
+        "a": "Darrius Flowers",
+        "b": "Lando Vannata",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "winner": "Darrius Flowers",
+        "method": "TKO",
+        "round": 2,
+        "time": "5:00"
+      },
+      {
+        "a": "Dione Barbosa",
+        "b": "Melissa Gatto",
+        "weight": "Women's Strawweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "winner": "Dione Barbosa",
+        "method": "MD",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "a": "Kai Kamaka III",
+        "b": "Dakota Hope",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "winner": "Kai Kamaka III",
+        "method": "SD",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "a": "Alessandro Costa",
+        "b": "Stewart Nicoll",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "winner": "Alessandro Costa",
+        "method": "KO",
+        "round": 2,
+        "time": "5:00",
+        "detail": "Left Hook"
+      },
+      {
+        "a": "Thomas Petersen",
+        "b": "Guilherme Pat",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "winner": "Thomas Petersen",
+        "method": "MD",
+        "round": 3,
+        "time": "5:00"
+      }
+    ]
   },
   {
     "id": "ufc-327-prochazka-vs-ulberg",
