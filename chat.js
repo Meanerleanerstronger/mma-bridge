@@ -143,7 +143,10 @@ function getCurrentPage() {
 // Send message to backend
 async function sendMessage(message) {
     try {
-        const response = await fetch('http://localhost:5001/api/chat', {
+        const backendUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+            ? 'http://localhost:5001/api/chat'
+            : 'https://mmabridge-backend.onrender.com/api/chat';
+        const response = await fetch(backendUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
