@@ -5,25 +5,268 @@
   <link rel="icon" href="/favicon.png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MMA Bridge | PFP</title>
-
-  <!-- Google Fonts (match the rest of the site) -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Pacifico&display=swap" rel="stylesheet">
-
+  <title>MMA Bridge | PFP Rankings</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&family=Pacifico&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <style>
+    :root {
+      --cyan: #00e5ff;
+      --cyan-dim: rgba(0,229,255,0.08);
+      --cyan-border: rgba(0,229,255,0.2);
+      --card-radius: 12px;
+    }
+
+    .pfp-page { background: #080808; min-height: 100vh; }
+
+    .pfp-wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 40px 40px 80px;
+    }
+
+    .pfp-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .pfp-header h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .pfp-header-sub {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+    }
+
+    /* ── HERO CARD (#1) ── */
+    .pfp-hero {
+      position: relative;
+      height: 420px;
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .pfp-hero:hover { transform: scale(1.005); }
+
+    .pfp-hero-img {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center top;
+      transition: transform 0.4s ease;
+    }
+
+    .pfp-hero:hover .pfp-hero-img { transform: scale(1.04); }
+
+    .pfp-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        105deg,
+        rgba(0,0,0,0.92) 0%,
+        rgba(0,0,0,0.7) 40%,
+        rgba(0,0,0,0.15) 70%,
+        rgba(0,0,0,0) 100%
+      );
+    }
+
+    .pfp-hero-content {
+      position: absolute;
+      bottom: 0; left: 0;
+      padding: 36px 40px;
+      z-index: 2;
+    }
+
+    .pfp-rank-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--cyan);
+      color: #000;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+
+    .pfp-hero-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+    }
+
+    .pfp-hero-meta {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .pfp-hero-record {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .pfp-hero-div {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .pfp-hero-flag { font-size: 1.2rem; }
+
+    /* ── ROW OF 4 (#2-5) ── */
+    .pfp-row-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    /* ── ROW OF 5 (#6-10, #11-15) ── */
+    .pfp-row-5 {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    /* ── GENERIC CARD ── */
+    .pfp-card {
+      position: relative;
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .pfp-card:hover { transform: translateY(-4px); }
+
+    .pfp-card-img {
+      width: 100%;
+      background-size: cover;
+      background-position: center top;
+      transition: transform 0.4s ease;
+    }
+
+    .pfp-row-4 .pfp-card-img { height: 240px; }
+    .pfp-row-5 .pfp-card-img { height: 180px; }
+
+    .pfp-card:hover .pfp-card-img { transform: scale(1.06); }
+
+    .pfp-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%);
+    }
+
+    .pfp-card-content {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 12px 14px;
+      z-index: 2;
+    }
+
+    .pfp-card-rank {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.58rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      color: var(--cyan);
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+
+    .pfp-card-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .pfp-row-5 .pfp-card-name { font-size: 0.7rem; }
+
+    .pfp-card-detail {
+      font-size: 0.6rem;
+      color: rgba(255,255,255,0.4);
+      margin-top: 2px;
+    }
+
+    /* ── SECTION DIVIDER ── */
+    .pfp-section-label {
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.2);
+      margin: 20px 0 10px;
+    }
+
+    /* light mode adjustments */
+    body.light-mode .pfp-page { background: #f2f2f2; }
+    body.light-mode .pfp-hero-overlay {
+      background: linear-gradient(105deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0.1) 70%, transparent 100%);
+    }
+
+    @media (max-width: 1100px) {
+      .pfp-row-4 { grid-template-columns: repeat(2, 1fr); }
+      .pfp-row-5 { grid-template-columns: repeat(3, 1fr); }
+      .pfp-hero { height: 340px; }
+      .pfp-hero-name { font-size: 2.2rem; }
+    }
+
+    @media (max-width: 680px) {
+      .pfp-wrap { padding: 20px 16px 60px; }
+      .pfp-row-4 { grid-template-columns: repeat(2, 1fr); }
+      .pfp-row-5 { grid-template-columns: repeat(2, 1fr); }
+      .pfp-hero { height: 280px; }
+      .pfp-hero-name { font-size: 1.6rem; }
+      .pfp-hero-content { padding: 20px 20px; }
+    }
+  </style>
 </head>
 
 <body class="pfp-page">
 
   <nav class="navbar">
     <div class="nav-container">
-
       <a class="logo" href="index.html">
         <span class="logo-mma">MMA</span>
         <img src="images/Cage.svg" class="logo-icon" alt="cage icon">
         <span class="logo-bridge">Bridge</span>
       </a>
-
       <ul class="nav-links">
         <li><a href="index.html">Trending</a></li>
         <li><a href="events.html">Upcoming Events</a></li>
@@ -31,158 +274,207 @@
         <li><a href="reviews.html">Review</a></li>
         <li><a href="lucas.html">Lucas Bot</a></li>
       </ul>
-
       <button class="theme-toggle" id="themeToggle" title="Toggle light/dark mode">
-          <div class="toggle-track"><div class="toggle-thumb"></div></div>
-          <span class="toggle-label">LIGHT</span>
-        </button>
+        <div class="toggle-track"><div class="toggle-thumb"></div></div>
+        <span class="toggle-label">LIGHT</span>
+      </button>
       <form class="search-box" id="site-search-form" action="results.html" method="GET">
         <input id="site-search" name="q" type="text" placeholder="Search fighters, events..." autocomplete="off" />
         <span class="search-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <path d="M21 21l-4.3-4.3m1.8-5.2a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M21 21l-4.3-4.3m1.8-5.2a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
         </span>
       </form>
-
     </div>
   </nav>
 
-  <main class="content-container">
-    <div class="left-column">
+  <div class="pfp-wrap">
 
-      <h1 class="pfp-title">Men’s Pound-for-Pound</h1>
-
-      <!-- Row 1 -->
-      <div class="card-row">
-        <a href="#" class="card-link" data-fighter="islam-makhachev">
-          <div class="medium-card">
-            <div class="card-image" style="background-image:url('images/Islam.jpeg');"></div>
-            <h2><span style="color:cyan;margin-right:4px">#1</span>Islam Makhachev</h2>
-          </div>
-        </a>
-
-        <a href="#" class="card-link" data-fighter="ilia-topuria">
-          <div class="medium-card">
-            <div class="card-image" style="background-image:url('images/Ilia.jpeg');"></div>
-            <h2><span style="color:cyan;margin-right:4px">#2</span>Ilia Topuria</h2>
-          </div>
-        </a>
-
-        <a href="#" class="card-link" data-fighter="khamzat-chimaev">
-          <div class="medium-card">
-            <div class="card-image" style="background-image:url('images/Khamzat .jpeg');"></div>
-            <h2><span style="color:cyan;margin-right:4px">#3</span>Khamzat Chimaev</h2>
-          </div>
-        </a>
-
-        <a href="#" class="card-link" data-fighter="alex-pereira">
-          <div class="medium-card">
-            <div class="card-image" style="background-image:url('images/Alex.jpeg');"></div>
-            <h2><span style="color:cyan;margin-right:4px">#4</span>Alex Pereira</h2>
-          </div>
-        </a>
-
-        <a href="#" class="card-link" data-fighter="alexander-volkanovski">
-          <div class="medium-card">
-            <div class="card-image" style="background-image:url('images/Volk.jpeg');"></div>
-            <h2><span style="color:cyan;margin-right:4px">#5</span>Alexander Volkanovski</h2>
-          </div>
-        </a>
-      </div>
-
-      <!-- Row 2 -->
-      <div class="card-row">
-        <a href="#" class="card-link" data-fighter="petr-yan">
-          <div class="medium-card">
-            <div class="card-image" style="background-image:url('images/Petr.jpeg');"></div>
-            <h2><span style="color:cyan;margin-right:4px">#6</span>Petr Yan</h2>
-          </div>
-        </a>
-
-        <a href="#" class="card-link" data-fighter="merab-dvalishvili">
-          <div class="medium-card">
-            <div class="card-image" style="background-image:url('images/Merab.jpeg');"></div>
-            <h2><span style="color:cyan;margin-right:4px">#7</span>Merab Dvalishvili</h2>
-          </div>
-        </a>
-
-        <a href="#" class="card-link" data-fighter="tom-aspinall">
-          <div class="medium-card">
-            <div class="card-image" style="background-image:url('images/Tom.jpeg');"></div>
-            <h2><span style="color:cyan;margin-right:4px">#8</span>Tom Aspinall</h2>
-          </div>
-        </a>
-
-        <a href="#" class="card-link" data-fighter="alexandre-pantoja">
-          <div class="medium-card">
-            <div class="card-image" style="background-image:url('images/Pantoja.jpeg');"></div>
-            <h2><span style="color:cyan;margin-right:4px">#9</span>Alexandre Pantoja</h2>
-          </div>
-        </a>
-
-        <a href="#" class="card-link" data-fighter="max-holloway">
-          <div class="medium-card">
-            <div class="card-image" style="background-image:url('images/Max.jpeg');"></div>
-            <h2><span style="color:cyan;margin-right:4px">#10</span>Max Holloway</h2>
-          </div>
-        </a>
-      </div>
-
-      <!-- Row 3 -->
-      <div class="card-row">
-        <a href="#" class="card-link" data-fighter="dricus-du-plessis">
-          <div class="medium-card">
-            <div class="card-image" style="background-image:url('images/Dricus.jpeg');"></div>
-            <h2><span style="color:cyan;margin-right:4px">#11</span>Dricus Du Plessis</h2>
-          </div>
-        </a>
-
-        <a href="#" class="card-link" data-fighter="joshua-van">
-          <div class="medium-card">
-            <div class="card-image" style="background-image:url('images/Josh.jpeg');"></div>
-            <h2><span style="color:cyan;margin-right:4px">#12</span>Joshua Van</h2>
-          </div>
-        </a>
-
-        <a href="#" class="card-link" data-fighter="magomed-ankalaev">
-          <div class="medium-card">
-            <div class="card-image" style="background-image:url('images/Ank.jpeg');"></div>
-            <h2><span style="color:cyan;margin-right:4px">#13</span>Magomed Ankalaev</h2>
-          </div>
-        </a>
-
-        <a href="#" class="card-link" data-fighter="jack-della-maddalena">
-          <div class="medium-card">
-            <div class="card-image" style="background-image:url('images/JDM.jpeg');"></div>
-            <h2><span style="color:cyan;margin-right:4px">#14</span>Jack Della Maddalena</h2>
-          </div>
-        </a>
-
-        <a href="#" class="card-link" data-fighter="arman-tsarukyan">
-          <div class="medium-card">
-            <div class="card-image" style="background-image:url('images/Arman.jpeg');"></div>
-            <h2><span style="color:cyan;margin-right:4px">#15</span>Arman Tsarukyan</h2>
-          </div>
-        </a>
-      </div>
-
+    <div class="pfp-header">
+      <h1>Men's Pound-for-Pound</h1>
+      <span class="pfp-header-sub">Top 16 · Updated Apr 2026</span>
     </div>
-  </main>
 
-  <!-- Fighter Drawer (same system as Events) -->
+    <!-- #1 Hero -->
+    <div class="pfp-hero" data-fighter="islam-makhachev">
+      <div class="pfp-hero-img" style="background-image:url('images/Islam.jpeg');"></div>
+      <div class="pfp-hero-overlay"></div>
+      <div class="pfp-hero-content">
+        <div class="pfp-rank-badge">#1 · Pound for Pound</div>
+        <div class="pfp-hero-name">Islam Makhachev</div>
+        <div class="pfp-hero-meta">
+          <span class="pfp-hero-record">28–1</span>
+          <span class="pfp-hero-div">Lightweight</span>
+          <span class="pfp-hero-flag">🇷🇺</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- #2-5 -->
+    <div class="pfp-section-label">Contenders</div>
+    <div class="pfp-row-4">
+      <div class="pfp-card" data-fighter="ilia-topuria">
+        <div class="pfp-card-img" style="background-image:url('images/Ilia.jpeg');"></div>
+        <div class="pfp-card-overlay"></div>
+        <div class="pfp-card-content">
+          <div class="pfp-card-rank">#2</div>
+          <div class="pfp-card-name">Ilia Topuria</div>
+          <div class="pfp-card-detail">17–0 · Lightweight</div>
+        </div>
+      </div>
+      <div class="pfp-card" data-fighter="khamzat-chimaev">
+        <div class="pfp-card-img" style="background-image:url('images/Khamzat .jpeg');"></div>
+        <div class="pfp-card-overlay"></div>
+        <div class="pfp-card-content">
+          <div class="pfp-card-rank">#3</div>
+          <div class="pfp-card-name">Khamzat Chimaev</div>
+          <div class="pfp-card-detail">15–0 · Welterweight</div>
+        </div>
+      </div>
+      <div class="pfp-card" data-fighter="alex-pereira">
+        <div class="pfp-card-img" style="background-image:url('images/Alex.jpeg');"></div>
+        <div class="pfp-card-overlay"></div>
+        <div class="pfp-card-content">
+          <div class="pfp-card-rank">#4</div>
+          <div class="pfp-card-name">Alex Pereira</div>
+          <div class="pfp-card-detail">11–2 · Light Heavyweight</div>
+        </div>
+      </div>
+      <div class="pfp-card" data-fighter="alexander-volkanovski">
+        <div class="pfp-card-img" style="background-image:url('images/Volk.jpeg');"></div>
+        <div class="pfp-card-overlay"></div>
+        <div class="pfp-card-content">
+          <div class="pfp-card-rank">#5</div>
+          <div class="pfp-card-name">Alexander Volkanovski</div>
+          <div class="pfp-card-detail">27–4 · Featherweight</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- #6-10 -->
+    <div class="pfp-section-label">Top 10</div>
+    <div class="pfp-row-5">
+      <div class="pfp-card" data-fighter="petr-yan">
+        <div class="pfp-card-img" style="background-image:url('images/Petr.jpeg');"></div>
+        <div class="pfp-card-overlay"></div>
+        <div class="pfp-card-content">
+          <div class="pfp-card-rank">#6</div>
+          <div class="pfp-card-name">Petr Yan</div>
+          <div class="pfp-card-detail">17–5 · Bantamweight</div>
+        </div>
+      </div>
+      <div class="pfp-card" data-fighter="merab-dvalishvili">
+        <div class="pfp-card-img" style="background-image:url('images/Merab.jpeg');"></div>
+        <div class="pfp-card-overlay"></div>
+        <div class="pfp-card-content">
+          <div class="pfp-card-rank">#7</div>
+          <div class="pfp-card-name">Merab Dvalishvili</div>
+          <div class="pfp-card-detail">17–4 · Bantamweight</div>
+        </div>
+      </div>
+      <div class="pfp-card" data-fighter="tom-aspinall">
+        <div class="pfp-card-img" style="background-image:url('images/Tom.jpeg');"></div>
+        <div class="pfp-card-overlay"></div>
+        <div class="pfp-card-content">
+          <div class="pfp-card-rank">#8</div>
+          <div class="pfp-card-name">Tom Aspinall</div>
+          <div class="pfp-card-detail">14–3 · Heavyweight</div>
+        </div>
+      </div>
+      <div class="pfp-card" data-fighter="alexandre-pantoja">
+        <div class="pfp-card-img" style="background-image:url('images/Pantoja.jpeg');"></div>
+        <div class="pfp-card-overlay"></div>
+        <div class="pfp-card-content">
+          <div class="pfp-card-rank">#9</div>
+          <div class="pfp-card-name">Alexandre Pantoja</div>
+          <div class="pfp-card-detail">28–5 · Flyweight</div>
+        </div>
+      </div>
+      <div class="pfp-card" data-fighter="max-holloway">
+        <div class="pfp-card-img" style="background-image:url('images/Max.jpeg');"></div>
+        <div class="pfp-card-overlay"></div>
+        <div class="pfp-card-content">
+          <div class="pfp-card-rank">#10</div>
+          <div class="pfp-card-name">Max Holloway</div>
+          <div class="pfp-card-detail">26–8 · Featherweight</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- #11-15 -->
+    <div class="pfp-section-label">Ranked</div>
+    <div class="pfp-row-5">
+      <div class="pfp-card" data-fighter="dricus-du-plessis">
+        <div class="pfp-card-img" style="background-image:url('images/Dricus.jpeg');"></div>
+        <div class="pfp-card-overlay"></div>
+        <div class="pfp-card-content">
+          <div class="pfp-card-rank">#11</div>
+          <div class="pfp-card-name">Dricus Du Plessis</div>
+          <div class="pfp-card-detail">21–2 · Middleweight</div>
+        </div>
+      </div>
+      <div class="pfp-card" data-fighter="joshua-van">
+        <div class="pfp-card-img" style="background-image:url('images/Josh.jpeg');"></div>
+        <div class="pfp-card-overlay"></div>
+        <div class="pfp-card-content">
+          <div class="pfp-card-rank">#12</div>
+          <div class="pfp-card-name">Joshua Van</div>
+          <div class="pfp-card-detail">11–1 · Flyweight</div>
+        </div>
+      </div>
+      <div class="pfp-card" data-fighter="magomed-ankalaev">
+        <div class="pfp-card-img" style="background-image:url('images/Ank.jpeg');"></div>
+        <div class="pfp-card-overlay"></div>
+        <div class="pfp-card-content">
+          <div class="pfp-card-rank">#13</div>
+          <div class="pfp-card-name">Magomed Ankalaev</div>
+          <div class="pfp-card-detail">19–1–1 · Light Heavyweight</div>
+        </div>
+      </div>
+      <div class="pfp-card" data-fighter="jack-della-maddalena">
+        <div class="pfp-card-img" style="background-image:url('images/JDM.jpeg');"></div>
+        <div class="pfp-card-overlay"></div>
+        <div class="pfp-card-content">
+          <div class="pfp-card-rank">#14</div>
+          <div class="pfp-card-name">Jack Della Maddalena</div>
+          <div class="pfp-card-detail">18–3 · Welterweight</div>
+        </div>
+      </div>
+      <div class="pfp-card" data-fighter="arman-tsarukyan">
+        <div class="pfp-card-img" style="background-image:url('images/Arman.jpeg');"></div>
+        <div class="pfp-card-overlay"></div>
+        <div class="pfp-card-content">
+          <div class="pfp-card-rank">#15</div>
+          <div class="pfp-card-name">Arman Tsarukyan</div>
+          <div class="pfp-card-detail">22–3 · Lightweight</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- #16 -->
+    <div class="pfp-section-label">Also Ranked</div>
+    <div class="pfp-row-5">
+      <div class="pfp-card" data-fighter="paddy-pimblett">
+        <div class="pfp-card-img" style="background-image:url('images/Pantoja.jpeg');"></div>
+        <div class="pfp-card-overlay"></div>
+        <div class="pfp-card-content">
+          <div class="pfp-card-rank">#16</div>
+          <div class="pfp-card-name">Paddy Pimblett</div>
+          <div class="pfp-card-detail">23–3 · Lightweight</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Fighter Drawer -->
   <div id="fightDrawer" class="drawer" aria-hidden="true">
     <div class="drawer-backdrop" id="drawerClose"></div>
-
     <aside class="drawer-panel">
       <div class="drawer-top">
         <div class="drawer-title" id="drawerTitle">Fighter</div>
         <button class="drawer-x" id="drawerX" aria-label="Close">✕</button>
       </div>
-
-      <div class="drawer-content" id="drawerContent">
-        <!-- JS injects content -->
-      </div>
+      <div class="drawer-content" id="drawerContent"></div>
     </aside>
   </div>
 
