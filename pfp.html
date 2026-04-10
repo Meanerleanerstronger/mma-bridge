@@ -6,254 +6,161 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MMA Bridge | PFP Rankings</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Pacifico&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <style>
-    :root {
-      --cyan: #00e5ff;
-      --cyan-dim: rgba(0,229,255,0.08);
-      --cyan-border: rgba(0,229,255,0.2);
-      --card-radius: 12px;
-    }
-
     .pfp-page { background: #080808; min-height: 100vh; }
 
-    .pfp-wrap {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 40px 40px 80px;
-    }
+    .pfp-wrap { padding: 40px 0 60px; }
 
     .pfp-header {
-      display: flex;
-      align-items: baseline;
-      gap: 16px;
-      margin-bottom: 32px;
+      display: flex; align-items: baseline; gap: 14px;
+      padding: 0 36px; margin-bottom: 32px;
     }
 
-    .pfp-header h1 {
+    .pfp-title {
       font-family: 'Montserrat', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 800;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.9);
+      font-size: 0.72rem; font-weight: 800;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
     }
 
-    .pfp-header-sub {
-      font-size: 0.68rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.25);
+    .pfp-sub {
+      font-size: 0.62rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(255,255,255,0.18);
     }
 
-    /* ── HERO CARD (#1) ── */
-    .pfp-hero {
-      position: relative;
-      height: 420px;
-      border-radius: var(--card-radius);
-      overflow: hidden;
-      margin-bottom: 12px;
+    .shelf-section { margin-bottom: 10px; }
+
+    .shelf-label {
+      font-size: 0.58rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,0.13);
+      padding: 0 36px; margin-bottom: 10px;
+    }
+
+    .shelf {
+      display: flex; gap: 10px;
+      overflow-x: auto;
+      padding: 6px 36px 16px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      cursor: grab;
+    }
+
+    .shelf:active { cursor: grabbing; }
+    .shelf::-webkit-scrollbar { height: 2px; }
+    .shelf::-webkit-scrollbar-track { background: rgba(255,255,255,0.03); }
+    .shelf::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 2px; }
+
+    /* ── Card ── */
+    .pcard {
+      flex-shrink: 0;
+      width: 180px;
+      scroll-snap-align: start;
       cursor: pointer;
-      transition: transform 0.2s;
+      position: relative;
     }
 
-    .pfp-hero:hover { transform: scale(1.005); }
+    .pcard-img {
+      width: 180px; height: 270px;
+      border-radius: 12px;
+      position: relative; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: transform 0.2s, border-color 0.2s;
+    }
 
-    .pfp-hero-img {
-      position: absolute;
-      inset: 0;
+    .pcard:hover .pcard-img {
+      transform: scale(1.03);
+      border-color: rgba(0,229,255,0.25);
+    }
+
+    .pcard-photo {
+      position: absolute; inset: 0;
       background-size: cover;
       background-position: center top;
-      transition: transform 0.4s ease;
     }
 
-    .pfp-hero:hover .pfp-hero-img { transform: scale(1.04); }
-
-    .pfp-hero-overlay {
-      position: absolute;
-      inset: 0;
+    .pcard-overlay {
+      position: absolute; inset: 0;
       background: linear-gradient(
-        105deg,
-        rgba(0,0,0,0.92) 0%,
-        rgba(0,0,0,0.7) 40%,
-        rgba(0,0,0,0.15) 70%,
-        rgba(0,0,0,0) 100%
+        to top,
+        rgba(0,0,0,0.97) 0%,
+        rgba(0,0,0,0.45) 45%,
+        rgba(0,0,0,0.05) 100%
       );
     }
 
-    .pfp-hero-content {
-      position: absolute;
-      bottom: 0; left: 0;
-      padding: 36px 40px;
-      z-index: 2;
+    .pcard-top {
+      position: absolute; top: 0; left: 0; right: 0;
+      padding: 11px 13px;
+      display: flex; justify-content: space-between; align-items: flex-start;
     }
 
-    .pfp-rank-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--cyan);
-      color: #000;
+    .pcard-rank {
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.6rem;
-      font-weight: 900;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 4px;
-      margin-bottom: 12px;
-    }
-
-    .pfp-hero-name {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 3rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: #fff;
-      line-height: 1;
-      margin-bottom: 10px;
-      text-shadow: 0 2px 20px rgba(0,0,0,0.5);
-    }
-
-    .pfp-hero-meta {
-      display: flex;
-      gap: 20px;
-      align-items: center;
-    }
-
-    .pfp-hero-record {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: rgba(255,255,255,0.9);
-    }
-
-    .pfp-hero-div {
-      font-size: 0.72rem;
-      font-weight: 500;
+      font-size: 0.7rem; font-weight: 900;
       color: rgba(255,255,255,0.45);
       letter-spacing: 0.06em;
-      text-transform: uppercase;
     }
 
-    .pfp-hero-flag { font-size: 1.2rem; }
+    .pcard-rank.gold { color: #c8a84b; }
 
-    /* ── ROW OF 4 (#2-5) ── */
-    .pfp-row-4 {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-bottom: 12px;
+    .pcard-badge {
+      font-size: 0.5rem; font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #c8a84b;
+      background: rgba(200,168,75,0.15);
+      border: 1px solid rgba(200,168,75,0.28);
+      border-radius: 3px; padding: 2px 5px;
     }
 
-    /* ── ROW OF 5 (#6-10, #11-15) ── */
-    .pfp-row-5 {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 12px;
-      margin-bottom: 12px;
+    .pcard-bot {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 13px 14px;
     }
 
-    /* ── GENERIC CARD ── */
-    .pfp-card {
-      position: relative;
-      border-radius: var(--card-radius);
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    .pfp-card:hover { transform: translateY(-4px); }
-
-    .pfp-card-img {
-      width: 100%;
-      background-size: cover;
-      background-position: center top;
-      transition: transform 0.4s ease;
-    }
-
-    .pfp-row-4 .pfp-card-img { height: 240px; }
-    .pfp-row-5 .pfp-card-img { height: 180px; }
-
-    .pfp-card:hover .pfp-card-img { transform: scale(1.06); }
-
-    .pfp-card-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%);
-    }
-
-    .pfp-card-content {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 12px 14px;
-      z-index: 2;
-    }
-
-    .pfp-card-rank {
+    .pcard-name {
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.58rem;
-      font-weight: 800;
-      letter-spacing: 0.14em;
-      color: var(--cyan);
-      text-transform: uppercase;
-      margin-bottom: 3px;
+      font-size: 0.8rem; font-weight: 800;
+      color: #fff; text-transform: uppercase;
+      letter-spacing: 0.03em; line-height: 1.2;
     }
 
-    .pfp-card-name {
+    .pcard-div {
+      font-size: 0.58rem; color: rgba(255,255,255,0.32);
+      text-transform: uppercase; letter-spacing: 0.08em;
+      margin-top: 4px;
+    }
+
+    .pcard-record {
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 800;
-      color: #fff;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-      line-height: 1.2;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font-size: 0.68rem; font-weight: 700;
+      color: rgba(255,255,255,0.5); margin-top: 5px;
     }
 
-    .pfp-row-5 .pfp-card-name { font-size: 0.7rem; }
-
-    .pfp-card-detail {
-      font-size: 0.6rem;
-      color: rgba(255,255,255,0.4);
-      margin-top: 2px;
+    .pcard-ghost {
+      position: absolute; bottom: -2px; right: -3px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 5.5rem; font-weight: 900;
+      line-height: 1; pointer-events: none;
+      letter-spacing: -0.04em;
+      color: rgba(255,255,255,0.04);
     }
 
-    /* ── SECTION DIVIDER ── */
-    .pfp-section-label {
-      font-size: 0.6rem;
-      font-weight: 800;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.2);
-      margin: 20px 0 10px;
-    }
+    .pcard-ghost.gold { color: rgba(200,168,75,0.07); }
 
-    /* light mode adjustments */
-    body.light-mode .pfp-page { background: #f2f2f2; }
-    body.light-mode .pfp-hero-overlay {
-      background: linear-gradient(105deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0.1) 70%, transparent 100%);
-    }
+    /* light mode */
+    body.light-mode .pfp-page { background: #f0f0f0; }
+    body.light-mode .pcard-img { border-color: rgba(0,0,0,0.08); }
 
-    @media (max-width: 1100px) {
-      .pfp-row-4 { grid-template-columns: repeat(2, 1fr); }
-      .pfp-row-5 { grid-template-columns: repeat(3, 1fr); }
-      .pfp-hero { height: 340px; }
-      .pfp-hero-name { font-size: 2.2rem; }
-    }
-
-    @media (max-width: 680px) {
-      .pfp-wrap { padding: 20px 16px 60px; }
-      .pfp-row-4 { grid-template-columns: repeat(2, 1fr); }
-      .pfp-row-5 { grid-template-columns: repeat(2, 1fr); }
-      .pfp-hero { height: 280px; }
-      .pfp-hero-name { font-size: 1.6rem; }
-      .pfp-hero-content { padding: 20px 20px; }
+    @media (max-width: 640px) {
+      .pfp-header { padding: 0 20px; }
+      .shelf { padding: 6px 20px 14px; }
+      .shelf-label { padding: 0 20px; }
+      .pcard { width: 150px; }
+      .pcard-img { width: 150px; height: 230px; }
     }
   </style>
 </head>
@@ -290,177 +197,259 @@
   <div class="pfp-wrap">
 
     <div class="pfp-header">
-      <h1>Men's Pound-for-Pound</h1>
-      <span class="pfp-header-sub">Top 16 · Updated Apr 2026</span>
+      <span class="pfp-title">Men's Pound-for-Pound</span>
+      <span class="pfp-sub">Top 15 · April 2026</span>
     </div>
 
-    <!-- #1 Hero -->
-    <div class="pfp-hero" data-fighter="islam-makhachev">
-      <div class="pfp-hero-img" style="background-image:url('images/Islam.jpeg');"></div>
-      <div class="pfp-hero-overlay"></div>
-      <div class="pfp-hero-content">
-        <div class="pfp-rank-badge">#1 · Pound for Pound</div>
-        <div class="pfp-hero-name">Islam Makhachev</div>
-        <div class="pfp-hero-meta">
-          <span class="pfp-hero-record">28–1</span>
-          <span class="pfp-hero-div">Lightweight</span>
-          <span class="pfp-hero-flag">🇷🇺</span>
-        </div>
-      </div>
-    </div>
+    <!-- Row 1: #1-8 -->
+    <div class="shelf-section">
+      <div class="shelf-label">Top 8</div>
+      <div class="shelf">
 
-    <!-- #2-5 -->
-    <div class="pfp-section-label">Contenders</div>
-    <div class="pfp-row-4">
-      <div class="pfp-card" data-fighter="ilia-topuria">
-        <div class="pfp-card-img" style="background-image:url('images/Ilia.jpeg');"></div>
-        <div class="pfp-card-overlay"></div>
-        <div class="pfp-card-content">
-          <div class="pfp-card-rank">#2</div>
-          <div class="pfp-card-name">Ilia Topuria</div>
-          <div class="pfp-card-detail">17–0 · Lightweight</div>
+        <div class="pcard" data-fighter="islam-makhachev">
+          <div class="pcard-ghost gold">1</div>
+          <div class="pcard-img">
+            <div class="pcard-photo" style="background-image:url('images/Islam.jpeg');"></div>
+            <div class="pcard-overlay"></div>
+            <div class="pcard-top">
+              <span class="pcard-rank gold">#1</span>
+              <span class="pcard-badge">WW Champ</span>
+            </div>
+            <div class="pcard-bot">
+              <div class="pcard-name">Islam Makhachev</div>
+              <div class="pcard-div">Welterweight · 🇷🇺</div>
+              <div class="pcard-record">28–1</div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="pfp-card" data-fighter="khamzat-chimaev">
-        <div class="pfp-card-img" style="background-image:url('images/Khamzat .jpeg');"></div>
-        <div class="pfp-card-overlay"></div>
-        <div class="pfp-card-content">
-          <div class="pfp-card-rank">#3</div>
-          <div class="pfp-card-name">Khamzat Chimaev</div>
-          <div class="pfp-card-detail">15–0 · Welterweight</div>
-        </div>
-      </div>
-      <div class="pfp-card" data-fighter="alex-pereira">
-        <div class="pfp-card-img" style="background-image:url('images/Alex.jpeg');"></div>
-        <div class="pfp-card-overlay"></div>
-        <div class="pfp-card-content">
-          <div class="pfp-card-rank">#4</div>
-          <div class="pfp-card-name">Alex Pereira</div>
-          <div class="pfp-card-detail">11–2 · Light Heavyweight</div>
-        </div>
-      </div>
-      <div class="pfp-card" data-fighter="alexander-volkanovski">
-        <div class="pfp-card-img" style="background-image:url('images/Volk.jpeg');"></div>
-        <div class="pfp-card-overlay"></div>
-        <div class="pfp-card-content">
-          <div class="pfp-card-rank">#5</div>
-          <div class="pfp-card-name">Alexander Volkanovski</div>
-          <div class="pfp-card-detail">27–4 · Featherweight</div>
-        </div>
-      </div>
-    </div>
 
-    <!-- #6-10 -->
-    <div class="pfp-section-label">Top 10</div>
-    <div class="pfp-row-5">
-      <div class="pfp-card" data-fighter="petr-yan">
-        <div class="pfp-card-img" style="background-image:url('images/Petr.jpeg');"></div>
-        <div class="pfp-card-overlay"></div>
-        <div class="pfp-card-content">
-          <div class="pfp-card-rank">#6</div>
-          <div class="pfp-card-name">Petr Yan</div>
-          <div class="pfp-card-detail">17–5 · Bantamweight</div>
+        <div class="pcard" data-fighter="ilia-topuria">
+          <div class="pcard-ghost">2</div>
+          <div class="pcard-img">
+            <div class="pcard-photo" style="background-image:url('images/Ilia.jpeg');"></div>
+            <div class="pcard-overlay"></div>
+            <div class="pcard-top">
+              <span class="pcard-rank">#2</span>
+              <span class="pcard-badge">LW Champ</span>
+            </div>
+            <div class="pcard-bot">
+              <div class="pcard-name">Ilia Topuria</div>
+              <div class="pcard-div">Lightweight · 🇬🇪</div>
+              <div class="pcard-record">17–0</div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="pfp-card" data-fighter="merab-dvalishvili">
-        <div class="pfp-card-img" style="background-image:url('images/Merab.jpeg');"></div>
-        <div class="pfp-card-overlay"></div>
-        <div class="pfp-card-content">
-          <div class="pfp-card-rank">#7</div>
-          <div class="pfp-card-name">Merab Dvalishvili</div>
-          <div class="pfp-card-detail">17–4 · Bantamweight</div>
-        </div>
-      </div>
-      <div class="pfp-card" data-fighter="tom-aspinall">
-        <div class="pfp-card-img" style="background-image:url('images/Tom.jpeg');"></div>
-        <div class="pfp-card-overlay"></div>
-        <div class="pfp-card-content">
-          <div class="pfp-card-rank">#8</div>
-          <div class="pfp-card-name">Tom Aspinall</div>
-          <div class="pfp-card-detail">14–3 · Heavyweight</div>
-        </div>
-      </div>
-      <div class="pfp-card" data-fighter="alexandre-pantoja">
-        <div class="pfp-card-img" style="background-image:url('images/Pantoja.jpeg');"></div>
-        <div class="pfp-card-overlay"></div>
-        <div class="pfp-card-content">
-          <div class="pfp-card-rank">#9</div>
-          <div class="pfp-card-name">Alexandre Pantoja</div>
-          <div class="pfp-card-detail">28–5 · Flyweight</div>
-        </div>
-      </div>
-      <div class="pfp-card" data-fighter="max-holloway">
-        <div class="pfp-card-img" style="background-image:url('images/Max.jpeg');"></div>
-        <div class="pfp-card-overlay"></div>
-        <div class="pfp-card-content">
-          <div class="pfp-card-rank">#10</div>
-          <div class="pfp-card-name">Max Holloway</div>
-          <div class="pfp-card-detail">26–8 · Featherweight</div>
-        </div>
-      </div>
-    </div>
 
-    <!-- #11-15 -->
-    <div class="pfp-section-label">Ranked</div>
-    <div class="pfp-row-5">
-      <div class="pfp-card" data-fighter="dricus-du-plessis">
-        <div class="pfp-card-img" style="background-image:url('images/Dricus.jpeg');"></div>
-        <div class="pfp-card-overlay"></div>
-        <div class="pfp-card-content">
-          <div class="pfp-card-rank">#11</div>
-          <div class="pfp-card-name">Dricus Du Plessis</div>
-          <div class="pfp-card-detail">21–2 · Middleweight</div>
+        <div class="pcard" data-fighter="khamzat-chimaev">
+          <div class="pcard-ghost">3</div>
+          <div class="pcard-img">
+            <div class="pcard-photo" style="background-image:url('images/Khamzat .jpeg');"></div>
+            <div class="pcard-overlay"></div>
+            <div class="pcard-top">
+              <span class="pcard-rank">#3</span>
+              <span class="pcard-badge">MW Champ</span>
+            </div>
+            <div class="pcard-bot">
+              <div class="pcard-name">Khamzat Chimaev</div>
+              <div class="pcard-div">Middleweight · 🇸🇪</div>
+              <div class="pcard-record">15–0</div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="pfp-card" data-fighter="joshua-van">
-        <div class="pfp-card-img" style="background-image:url('images/Josh.jpeg');"></div>
-        <div class="pfp-card-overlay"></div>
-        <div class="pfp-card-content">
-          <div class="pfp-card-rank">#12</div>
-          <div class="pfp-card-name">Joshua Van</div>
-          <div class="pfp-card-detail">11–1 · Flyweight</div>
+
+        <div class="pcard" data-fighter="alex-pereira">
+          <div class="pcard-ghost">4</div>
+          <div class="pcard-img">
+            <div class="pcard-photo" style="background-image:url('images/Alex.jpeg');"></div>
+            <div class="pcard-overlay"></div>
+            <div class="pcard-top">
+              <span class="pcard-rank">#4</span>
+              <span class="pcard-badge">LHW Champ</span>
+            </div>
+            <div class="pcard-bot">
+              <div class="pcard-name">Alex Pereira</div>
+              <div class="pcard-div">Light HW · 🇧🇷</div>
+              <div class="pcard-record">11–2</div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="pfp-card" data-fighter="magomed-ankalaev">
-        <div class="pfp-card-img" style="background-image:url('images/Ank.jpeg');"></div>
-        <div class="pfp-card-overlay"></div>
-        <div class="pfp-card-content">
-          <div class="pfp-card-rank">#13</div>
-          <div class="pfp-card-name">Magomed Ankalaev</div>
-          <div class="pfp-card-detail">19–1–1 · Light Heavyweight</div>
+
+        <div class="pcard" data-fighter="alexander-volkanovski">
+          <div class="pcard-ghost">5</div>
+          <div class="pcard-img">
+            <div class="pcard-photo" style="background-image:url('images/Volk.jpeg');"></div>
+            <div class="pcard-overlay"></div>
+            <div class="pcard-top">
+              <span class="pcard-rank">#5</span>
+              <span class="pcard-badge">FW Champ</span>
+            </div>
+            <div class="pcard-bot">
+              <div class="pcard-name">Alexander Volkanovski</div>
+              <div class="pcard-div">Featherweight · 🇦🇺</div>
+              <div class="pcard-record">27–4</div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="pfp-card" data-fighter="jack-della-maddalena">
-        <div class="pfp-card-img" style="background-image:url('images/JDM.jpeg');"></div>
-        <div class="pfp-card-overlay"></div>
-        <div class="pfp-card-content">
-          <div class="pfp-card-rank">#14</div>
-          <div class="pfp-card-name">Jack Della Maddalena</div>
-          <div class="pfp-card-detail">18–3 · Welterweight</div>
+
+        <div class="pcard" data-fighter="petr-yan">
+          <div class="pcard-ghost">6</div>
+          <div class="pcard-img">
+            <div class="pcard-photo" style="background-image:url('images/Petr.jpeg');"></div>
+            <div class="pcard-overlay"></div>
+            <div class="pcard-top">
+              <span class="pcard-rank">#6</span>
+              <span class="pcard-badge">BW Champ</span>
+            </div>
+            <div class="pcard-bot">
+              <div class="pcard-name">Petr Yan</div>
+              <div class="pcard-div">Bantamweight · 🇷🇺</div>
+              <div class="pcard-record">17–5</div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="pfp-card" data-fighter="arman-tsarukyan">
-        <div class="pfp-card-img" style="background-image:url('images/Arman.jpeg');"></div>
-        <div class="pfp-card-overlay"></div>
-        <div class="pfp-card-content">
-          <div class="pfp-card-rank">#15</div>
-          <div class="pfp-card-name">Arman Tsarukyan</div>
-          <div class="pfp-card-detail">22–3 · Lightweight</div>
+
+        <div class="pcard" data-fighter="merab-dvalishvili">
+          <div class="pcard-ghost">7</div>
+          <div class="pcard-img">
+            <div class="pcard-photo" style="background-image:url('images/Merab.jpeg');"></div>
+            <div class="pcard-overlay"></div>
+            <div class="pcard-top">
+              <span class="pcard-rank">#7</span>
+            </div>
+            <div class="pcard-bot">
+              <div class="pcard-name">Merab Dvalishvili</div>
+              <div class="pcard-div">Bantamweight · 🇬🇪</div>
+              <div class="pcard-record">17–4</div>
+            </div>
+          </div>
         </div>
+
+        <div class="pcard" data-fighter="tom-aspinall">
+          <div class="pcard-ghost">8</div>
+          <div class="pcard-img">
+            <div class="pcard-photo" style="background-image:url('images/Tom.jpeg');"></div>
+            <div class="pcard-overlay"></div>
+            <div class="pcard-top">
+              <span class="pcard-rank">#8</span>
+              <span class="pcard-badge">HW Champ</span>
+            </div>
+            <div class="pcard-bot">
+              <div class="pcard-name">Tom Aspinall</div>
+              <div class="pcard-div">Heavyweight · 🇬🇧</div>
+              <div class="pcard-record">14–3</div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
-    <!-- #16 -->
-    <div class="pfp-section-label">Also Ranked</div>
-    <div class="pfp-row-5">
-      <div class="pfp-card" data-fighter="paddy-pimblett">
-        <div class="pfp-card-img" style="background-image:url('images/Pantoja.jpeg');"></div>
-        <div class="pfp-card-overlay"></div>
-        <div class="pfp-card-content">
-          <div class="pfp-card-rank">#16</div>
-          <div class="pfp-card-name">Paddy Pimblett</div>
-          <div class="pfp-card-detail">23–3 · Lightweight</div>
+    <!-- Row 2: #9-15 -->
+    <div class="shelf-section">
+      <div class="shelf-label">9 – 15</div>
+      <div class="shelf">
+
+        <div class="pcard" data-fighter="alexandre-pantoja">
+          <div class="pcard-ghost">9</div>
+          <div class="pcard-img">
+            <div class="pcard-photo" style="background-image:url('images/Pantoja.jpeg');"></div>
+            <div class="pcard-overlay"></div>
+            <div class="pcard-top"><span class="pcard-rank">#9</span></div>
+            <div class="pcard-bot">
+              <div class="pcard-name">Alexandre Pantoja</div>
+              <div class="pcard-div">Flyweight · 🇧🇷</div>
+              <div class="pcard-record">28–5</div>
+            </div>
+          </div>
         </div>
+
+        <div class="pcard" data-fighter="max-holloway">
+          <div class="pcard-ghost">10</div>
+          <div class="pcard-img">
+            <div class="pcard-photo" style="background-image:url('images/Max.jpeg');"></div>
+            <div class="pcard-overlay"></div>
+            <div class="pcard-top"><span class="pcard-rank">#10</span></div>
+            <div class="pcard-bot">
+              <div class="pcard-name">Max Holloway</div>
+              <div class="pcard-div">Featherweight · 🇺🇸</div>
+              <div class="pcard-record">26–8</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard" data-fighter="dricus-du-plessis">
+          <div class="pcard-ghost">11</div>
+          <div class="pcard-img">
+            <div class="pcard-photo" style="background-image:url('images/Dricus.jpeg');"></div>
+            <div class="pcard-overlay"></div>
+            <div class="pcard-top"><span class="pcard-rank">#11</span></div>
+            <div class="pcard-bot">
+              <div class="pcard-name">Dricus Du Plessis</div>
+              <div class="pcard-div">Middleweight · 🇿🇦</div>
+              <div class="pcard-record">21–2</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard" data-fighter="joshua-van">
+          <div class="pcard-ghost">12</div>
+          <div class="pcard-img">
+            <div class="pcard-photo" style="background-image:url('images/Josh.jpeg');"></div>
+            <div class="pcard-overlay"></div>
+            <div class="pcard-top">
+              <span class="pcard-rank">#12</span>
+              <span class="pcard-badge">FLY Champ</span>
+            </div>
+            <div class="pcard-bot">
+              <div class="pcard-name">Joshua Van</div>
+              <div class="pcard-div">Flyweight · 🇨🇦</div>
+              <div class="pcard-record">11–1</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard" data-fighter="magomed-ankalaev">
+          <div class="pcard-ghost">13</div>
+          <div class="pcard-img">
+            <div class="pcard-photo" style="background-image:url('images/Ank.jpeg');"></div>
+            <div class="pcard-overlay"></div>
+            <div class="pcard-top"><span class="pcard-rank">#13</span></div>
+            <div class="pcard-bot">
+              <div class="pcard-name">Magomed Ankalaev</div>
+              <div class="pcard-div">Light HW · 🇷🇺</div>
+              <div class="pcard-record">19–1–1</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard" data-fighter="jack-della-maddalena">
+          <div class="pcard-ghost">14</div>
+          <div class="pcard-img">
+            <div class="pcard-photo" style="background-image:url('images/JDM.jpeg');"></div>
+            <div class="pcard-overlay"></div>
+            <div class="pcard-top"><span class="pcard-rank">#14</span></div>
+            <div class="pcard-bot">
+              <div class="pcard-name">Jack Della Maddalena</div>
+              <div class="pcard-div">Welterweight · 🇦🇺</div>
+              <div class="pcard-record">18–3</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard" data-fighter="arman-tsarukyan">
+          <div class="pcard-ghost">15</div>
+          <div class="pcard-img">
+            <div class="pcard-photo" style="background-image:url('images/Arman.jpeg');"></div>
+            <div class="pcard-overlay"></div>
+            <div class="pcard-top"><span class="pcard-rank">#15</span></div>
+            <div class="pcard-bot">
+              <div class="pcard-name">Arman Tsarukyan</div>
+              <div class="pcard-div">Lightweight · 🇦🇲</div>
+              <div class="pcard-record">22–3</div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -480,5 +469,26 @@
 
   <script type="module" src="pfp.js"></script>
   <script src="chat.js"></script>
+
+  <script>
+    // Drag to scroll on shelves
+    document.querySelectorAll('.shelf').forEach(shelf => {
+      let isDown = false, startX, scrollLeft;
+      shelf.addEventListener('mousedown', e => {
+        isDown = true;
+        startX = e.pageX - shelf.offsetLeft;
+        scrollLeft = shelf.scrollLeft;
+      });
+      shelf.addEventListener('mouseleave', () => isDown = false);
+      shelf.addEventListener('mouseup', () => isDown = false);
+      shelf.addEventListener('mousemove', e => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - shelf.offsetLeft;
+        shelf.scrollLeft = scrollLeft - (x - startX) * 1.5;
+      });
+    });
+  </script>
+
 </body>
 </html>
