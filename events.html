@@ -301,17 +301,28 @@
       const drawer = document.getElementById('fightDrawer');
       document.getElementById('drawerTitle').textContent = ev.name;
 
-      function fightRow(f) {
-        const isComain = f.slot === 'comain';
+      function fightRow(f, sectionType) {
         const isMain = f.slot === 'main';
+        const isComain = f.slot === 'comain';
+        const isPrelimMain = sectionType === 'prelims' && f.slot === 'main';
+        const isPrelimComain = sectionType === 'prelims' && f.slot === 'comain';
+
+        const fontSize = isMain ? '1.35rem' : isComain ? '1.1rem' : isPrelimMain ? '1rem' : isPrelimComain ? '0.9rem' : '0.82rem';
+        const fontWeight = (isMain || isComain || isPrelimMain) ? '900' : '700';
+        const padding = isMain ? '28px 0' : isComain ? '22px 0' : '16px 0';
+        const borderColor = isMain ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.04)';
+        const nameColor = (isMain || isComain) ? '#fff' : 'rgba(255,255,255,0.85)';
+        const weightSize = isMain ? '0.65rem' : isComain ? '0.6rem' : '0.55rem';
+        const weightColor = isMain ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.22)';
+
         return `
-          <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
-            <span style="font-family:'Montserrat',sans-serif;font-weight:${isMain || isComain ? '800' : '600'};font-size:${isMain ? '0.9rem' : '0.78rem'};color:#fff;flex:1;">${f.a}</span>
-            <div style="text-align:center;flex-shrink:0;padding:0 12px;">
-              <div style="font-size:0.55rem;color:rgba(255,255,255,0.25);text-transform:uppercase;letter-spacing:0.08em;">${f.weight}</div>
-              <div style="font-size:0.5rem;color:rgba(255,255,255,0.18);text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;">${f.titleFight ? '🏆 Title Fight' : f.rounds}</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:${padding};border-bottom:1px solid ${borderColor};">
+            <span style="font-family:'Montserrat',sans-serif;font-weight:${fontWeight};font-size:${fontSize};color:${nameColor};flex:1;letter-spacing:0.02em;">${f.a}</span>
+            <div style="text-align:center;flex-shrink:0;padding:0 20px;">
+              <div style="font-size:${weightSize};color:${weightColor};text-transform:uppercase;letter-spacing:0.1em;font-weight:600;">${f.weight}</div>
+              <div style="font-size:0.5rem;color:rgba(255,255,255,0.18);text-transform:uppercase;letter-spacing:0.08em;margin-top:3px;">${f.titleFight ? '🏆 TITLE' : f.rounds}</div>
             </div>
-            <span style="font-family:'Montserrat',sans-serif;font-weight:${isMain || isComain ? '800' : '600'};font-size:${isMain ? '0.9rem' : '0.78rem'};color:#fff;flex:1;text-align:right;">${f.b}</span>
+            <span style="font-family:'Montserrat',sans-serif;font-weight:${fontWeight};font-size:${fontSize};color:${nameColor};flex:1;text-align:right;letter-spacing:0.02em;">${f.b}</span>
           </div>`;
       }
 
@@ -319,18 +330,18 @@
       const prelims = ev.prelims || [];
       const early = ev.earlyPrelims || [];
 
-      function section(label, fights) {
+      function section(label, fights, type) {
         if (!fights.length) return '';
         return `
-          <div style="font-size:0.56rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin:18px 0 6px;">${label}</div>
-          ${fights.map(fightRow).join('')}`;
+          <div style="font-size:0.58rem;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin:28px 0 8px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.06);">${label}</div>
+          ${fights.map(f => fightRow(f, type)).join('')}`;
       }
 
       document.getElementById('drawerContent').innerHTML = `
-        <div style="padding:8px 0;">
-          ${section('Main Card', main)}
-          ${section('Prelims', prelims)}
-          ${section('Early Prelims', early)}
+        <div style="padding:0 4px;">
+          ${section('Main Card', main, 'main')}
+          ${section('Prelims', prelims, 'prelims')}
+          ${section('Early Prelims', early, 'early')}
         </div>`;
 
       drawer.setAttribute('aria-hidden', 'false');

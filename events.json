@@ -2690,20 +2690,22 @@
         "slot": "main"
       },
       {
+        "a": "Cub Swanson",
+        "b": "Nate Landwehr",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": ""
+      },
+      {
         "a": "Curtis Blaydes",
         "b": "Josh Hokit",
         "weight": "Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
-      },
-      {
-        "a": "Beneil Dariush",
-        "b": "Manuel Torres",
-        "weight": "Lightweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "slot": ""
       },
       {
         "a": "Dominick Reyes",
@@ -2711,7 +2713,26 @@
         "weight": "Light Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "slot": ""
+      },
+      {
+        "a": "Tatiana Suarez",
+        "b": "Lupita Godinez",
+        "weight": "Women's Strawweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": ""
+      },
+      {
+        "a": "Mateusz Gamrot",
+        "b": "Esteban Ribovics",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": ""
       }
     ],
     "prelims": [
@@ -2721,7 +2742,8 @@
         "weight": "Light Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "slot": "comain"
       },
       {
         "a": "Patricio Pitbull",
@@ -2729,31 +2751,8 @@
         "weight": "Featherweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
-      },
-      {
-        "a": "Mateusz Gamrot",
-        "b": "Esteban Ribovics",
-        "weight": "Lightweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": true
-      },
-      {
-        "a": "Tatiana Suarez",
-        "b": "Lupita Godinez",
-        "weight": "Women's Strawweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": true
-      },
-      {
-        "a": "Cub Swanson",
-        "b": "Nate Landwehr",
-        "weight": "Featherweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "slot": "main"
       }
     ],
     "earlyPrelims": [
@@ -3038,49 +3037,16 @@
         "slot": "main"
       },
       {
-        "a": "Alex Pereira",
-        "b": "Ciryl Gane",
-        "weight": "Heavyweight",
-        "rounds": "5 Rds",
-        "titleFight": true,
-        "ranked": true,
-        "slot": "comain"
-      },
-      {
-        "a": "Sean O'Malley",
-        "b": "Aiemann Zahabi",
-        "weight": "Bantamweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": true
-      },
-      {
-        "a": "Mauricio Ruffy",
-        "b": "Michael Chandler",
-        "weight": "Lightweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": true
-      },
-      {
-        "a": "Bo Nickal",
-        "b": "Kyle Daukaus",
-        "weight": "Middleweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": true
-      }
-    ],
-    "prelims": [
-      {
         "a": "Diego Lopes",
-        "b": "Steve Garcia",
+        "b": "Lerone Garcia",
         "weight": "Featherweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "slot": "comain"
       }
     ],
+    "prelims": [],
     "earlyPrelims": [],
     "startTime": "22:00"
   },
