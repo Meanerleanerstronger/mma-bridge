@@ -52,10 +52,8 @@
     </div>
   </nav>
   
-  <!-- LIVE EVENT TRACKER BANNER -->
-  <div class="live-event-banner hidden" id="liveEventBanner">
-    <!-- populated by JS -->
-  </div>
+  <!-- EVENT BANNER -->
+  <div class="live-event-banner hidden" id="liveEventBanner"></div>
 
 
     <!-- HERO — auto-updates to next upcoming event -->
@@ -141,30 +139,7 @@
         const lastCompletedDate = completed ? new Date(completed.isoDate) : null;
         const daysSince = lastCompletedDate ? (now - lastCompletedDate) / 86400000 : 999;
 
-        if (daysSince < 3 && completed) {
-          // Show results banner
-          const mainFights = (completed.mainCard || []).slice(0, 3).filter(f => f.winner);
-          if (mainFights.length === 0) return;
-
-          const fightHTML = mainFights.map((f, i) => `
-            <span class="banner-fight-item">
-              <span class="winner">${f.winner}</span>
-              <span>def.</span>
-              <span>${f.winner === f.a ? f.b : f.a}</span>
-              <span class="method-badge">${f.method}</span>
-            </span>
-            ${i < mainFights.length - 1 ? '<span class="banner-sep">·</span>' : ''}
-          `).join('');
-
-          banner.innerHTML = `
-            <span class="live-badge"><span class="live-dot"></span><span class="live-badge-text">Results</span></span>
-            <span class="banner-event-name">${completed.name}</span>
-            <div class="banner-fights">${fightHTML}</div>
-            <a href="event-review.html?event=${completed.id}" class="banner-event-link">Full Results →</a>
-          `;
-          banner.classList.remove('hidden');
-
-        } else if (upcoming) {
+        if (upcoming) {
           // Show countdown to next event
           const eventDate = new Date(upcoming.isoDate + 'T22:00:00');
           
@@ -196,5 +171,6 @@
       } catch(e) { /* silent fail */ }
     })();
   </script>
+  <script src="chat.js"></script>
 </body>
 </html>
