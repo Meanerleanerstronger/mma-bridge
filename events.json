@@ -3037,13 +3037,49 @@
         "slot": "main"
       },
       {
+        "a": "Alex Pereira",
+        "b": "Ciryl Gane",
+        "weight": "Heavyweight",
+        "rounds": "5 Rds",
+        "titleFight": true,
+        "ranked": true,
+        "slot": "comain"
+      },
+      {
+        "a": "Sean O'Malley",
+        "b": "Aiemann Zahabi",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": ""
+      },
+      {
+        "a": "Mauricio Ruffy",
+        "b": "Michael Chandler",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": ""
+      },
+      {
+        "a": "Bo Nickal",
+        "b": "Kyle Daukaus",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": ""
+      },
+      {
         "a": "Diego Lopes",
-        "b": "Lerone Garcia",
+        "b": "Steve Garcia",
         "weight": "Featherweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
-        "slot": "comain"
+        "slot": "opener"
       }
     ],
     "prelims": [],

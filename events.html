@@ -304,14 +304,13 @@
       function fightRow(f, sectionType) {
         const isMain = f.slot === 'main';
         const isComain = f.slot === 'comain';
-        const isPrelimMain = sectionType === 'prelims' && f.slot === 'main';
-        const isPrelimComain = sectionType === 'prelims' && f.slot === 'comain';
+        const isOpener = f.slot === 'opener';
 
-        const fontSize = isMain ? '1.35rem' : isComain ? '1.1rem' : isPrelimMain ? '1rem' : isPrelimComain ? '0.9rem' : '0.82rem';
-        const fontWeight = (isMain || isComain || isPrelimMain) ? '900' : '700';
-        const padding = isMain ? '28px 0' : isComain ? '22px 0' : '16px 0';
+        const fontSize = isMain ? '1.35rem' : isComain ? '1.1rem' : isOpener ? '0.88rem' : '0.95rem';
+        const fontWeight = (isMain || isComain) ? '900' : '700';
+        const padding = isMain ? '28px 0' : isComain ? '22px 0' : isOpener ? '14px 0' : '18px 0';
         const borderColor = isMain ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.04)';
-        const nameColor = (isMain || isComain) ? '#fff' : 'rgba(255,255,255,0.85)';
+        const nameColor = (isMain || isComain) ? '#fff' : isOpener ? 'rgba(255,255,255,0.6)' : 'rgba(255,255,255,0.85)';
         const weightSize = isMain ? '0.65rem' : isComain ? '0.6rem' : '0.55rem';
         const weightColor = isMain ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.22)';
 
