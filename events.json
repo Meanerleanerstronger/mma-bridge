@@ -2785,6 +2785,97 @@
     "startTime": "22:00"
   },
   {
+    "id": "ufc-fight-night-burns-vs-malott",
+    "name": "UFC Fight Night: Burns vs. Malott",
+    "type": "FIGHT NIGHT",
+    "date": "Sat, Apr 18, 2026",
+    "isoDate": "2026-04-18",
+    "location": "Winnipeg, Canada",
+    "venue": "Canada Life Centre",
+    "poster": "images/Burns fn.jpeg",
+    "status": "upcoming",
+    "startTime": "22:00",
+    "mainCard": [
+      {
+        "a": "Gilbert Burns",
+        "b": "Mike Malott",
+        "weight": "Welterweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "main"
+      },
+      {
+        "a": "JJ Aldrich",
+        "b": "Jamey-Lyn Horth",
+        "weight": "Women's Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "comain"
+      },
+      {
+        "a": "Jasmine Jasudavicius",
+        "b": "Karine Silva",
+        "weight": "Women's Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Tanner Boser",
+        "b": "Gokhan Saricam",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Choi Dong-hun",
+        "b": "André Lima",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      }
+    ],
+    "prelims": [
+      {
+        "a": "John Castañeda",
+        "b": "Mark Vologdin",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Mitch Raposo",
+        "b": "Allan Nascimento",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Julien Leblanc",
+        "b": "Robert Valentin",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Melissa Croden",
+        "b": "Daria Zheleznyakova",
+        "weight": "Women's Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      }
+    ],
+    "earlyPrelims": []
+  },
+  {
     "id": "ufc-328-chimaev-vs-strickland",
     "name": "UFC 328: Chimaev vs. Strickland",
     "type": "PPV",
@@ -3001,7 +3092,7 @@
     "isoDate": "2026-06-27",
     "location": "Baku, Azerbaijan",
     "venue": "Baku Crystal Hall",
-    "poster": "",
+    "poster": "images/Burns fn.jpeg",
     "status": "upcoming",
     "mainCard": [
       {

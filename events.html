@@ -14,12 +14,12 @@
     .ev-page {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 44px 40px 80px;
+      padding: 48px 44px 100px;
     }
 
     .ev-header {
       display: flex; align-items: baseline; gap: 14px;
-      margin-bottom: 36px;
+      margin-bottom: 44px;
       padding-bottom: 18px;
       border-bottom: 1px solid rgba(255,255,255,0.06);
     }
@@ -38,12 +38,12 @@
     }
 
     /* ── Cinematic row ── */
-    .ev-list { display: flex; flex-direction: column; gap: 6px; }
+    .ev-list { display: flex; flex-direction: column; gap: 8px; }
 
     .ev-row {
       display: grid;
-      grid-template-columns: 220px 1fr auto;
-      height: 140px;
+      grid-template-columns: 240px 1fr auto;
+      height: 160px;
       border-radius: 14px;
       overflow: hidden;
       cursor: pointer;
@@ -92,7 +92,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 0 28px;
+      padding: 0 32px;
       gap: 7px;
       min-width: 0;
     }
@@ -107,16 +107,16 @@
 
     .ev-name {
       font-family: 'Montserrat', sans-serif;
-      font-size: 1.15rem; font-weight: 900;
+      font-size: 1.25rem; font-weight: 900;
       color: #fff; text-transform: uppercase;
       letter-spacing: 0.02em;
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
 
-    .ev-row.ppv .ev-name { font-size: 1.3rem; }
+    .ev-row.ppv .ev-name { font-size: 1.45rem; }
 
     .ev-meta {
-      font-size: 0.65rem;
+      font-size: 0.68rem;
       color: rgba(255,255,255,0.3);
       text-transform: uppercase;
       letter-spacing: 0.07em;
@@ -136,14 +136,14 @@
       flex-direction: column;
       align-items: flex-end;
       justify-content: center;
-      padding: 0 28px;
-      gap: 6px;
+      padding: 0 32px;
+      gap: 8px;
       flex-shrink: 0;
     }
 
     .ev-days-num {
       font-family: 'Montserrat', sans-serif;
-      font-size: 2rem; font-weight: 900;
+      font-size: 2.2rem; font-weight: 900;
       line-height: 1;
       color: rgba(255,255,255,0.12);
     }
@@ -170,7 +170,7 @@
     /* section divider */
     .ev-divider {
       display: flex; align-items: center; gap: 14px;
-      margin: 20px 0 8px;
+      margin: 32px 0 12px;
     }
 
     .ev-divider-label {
@@ -214,10 +214,6 @@
         <li><a href="reviews.html">Review</a></li>
         <li><a href="lucas.html">Lucas Bot</a></li>
       </ul>
-      <button class="theme-toggle" id="themeToggle" title="Toggle light/dark mode">
-        <div class="toggle-track"><div class="toggle-thumb"></div></div>
-        <span class="toggle-label">LIGHT</span>
-      </button>
       <form class="search-box" id="site-search-form" action="results.html" method="GET">
         <input id="site-search" name="q" type="text" placeholder="Search fighters, events..." autocomplete="off" />
         <span class="search-icon" aria-hidden="true">
@@ -261,12 +257,6 @@
 
       const list = document.getElementById('ev-list');
 
-      // Group: next = first, then PPVs, then Fight Nights
-      const next = upcoming[0];
-      const rest = upcoming.slice(1);
-      const ppvs = rest.filter(e => e.type === 'PPV');
-      const fns = rest.filter(e => e.type !== 'PPV');
-
       function makeRow(e, isFirst) {
         const days = daysUntil(e.isoDate);
         const isPPV = e.type === 'PPV';
@@ -303,27 +293,8 @@
         return row;
       }
 
-      function addDivider(label) {
-        const d = document.createElement('div');
-        d.className = 'ev-divider';
-        d.innerHTML = `<span class="ev-divider-label">${label}</span><div class="ev-divider-line"></div>`;
-        list.appendChild(d);
-      }
-
-      // Next event
-      if (next) list.appendChild(makeRow(next, true));
-
-      // PPVs
-      if (ppvs.length) {
-        addDivider('PPV Events');
-        ppvs.forEach(e => list.appendChild(makeRow(e, false)));
-      }
-
-      // Fight Nights
-      if (fns.length) {
-        addDivider('Fight Nights');
-        fns.forEach(e => list.appendChild(makeRow(e, false)));
-      }
+      // Chronological — no grouping
+      upcoming.forEach((e, i) => list.appendChild(makeRow(e, i === 0)));
     }
 
     function openDrawer(ev, all) {
