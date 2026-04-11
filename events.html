@@ -269,7 +269,7 @@
         row.dataset.event = e.id;
         row.innerHTML = `
           <div class="ev-poster">
-            <div class="ev-poster-img" style="background-image:url('${e.poster}');"></div>
+            <div class="ev-poster-img" style="background-image:url('${e.poster}');${e.id === 'ufc-freedom-250-topuria-vs-gaethje' ? 'background-size: 85%; background-position: center;' : ''}"></div>
             <div class="ev-poster-fade"></div>
           </div>
           <div class="ev-body">
