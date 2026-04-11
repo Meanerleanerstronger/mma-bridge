@@ -204,21 +204,43 @@ async function renderNews() {
       ];
     }
 
-    // Render cards
+    // Render cards — keep extras in queue, swap on broken image
+    window._newsQueue = articles.slice(3);
+
+    function buildCard(a, idx) {
+      return '<a href="' + (a.url||'#') + '" target="_blank" rel="noopener noreferrer" class="card-link" id="news-card-' + idx + '">' +
+        '<div class="medium-card">' +
+          '<div style="height:200px;background-color:#111;border-radius:10px 10px 0 0;flex-shrink:0;overflow:hidden;">' +
+            '<img src="' + (a.imageUrl||'') + '" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="replaceNewsCard(' + idx + ')" />' +
+          '</div>' +
+          '<div style="padding:14px 4px 8px;">' +
+            '<div class="nc-title-' + idx + '" style="font-family:Inter,sans-serif;font-size:0.88rem;font-weight:600;color:#fff;line-height:1.4;margin-bottom:6px;">' + (a.title||'') + '</div>' +
+            '<div class="nc-source-' + idx + '" style="font-family:Inter,sans-serif;font-size:0.68rem;color:rgba(255,255,255,0.35);">' + (a.source||'') + '</div>' +
+          '</div>' +
+        '</div>' +
+      '</a>';
+    }
+
+    window.replaceNewsCard = function(idx) {
+      if (!window._newsQueue || !window._newsQueue.length) {
+        var card = document.getElementById('news-card-' + idx);
+        if (card) card.style.display = 'none';
+        return;
+      }
+      var next = window._newsQueue.shift();
+      var card = document.getElementById('news-card-' + idx);
+      if (!card) return;
+      card.href = next.url || '#';
+      var img = card.querySelector('img');
+      if (img) img.src = next.imageUrl || '';
+      var t = card.querySelector('.nc-title-' + idx);
+      var s = card.querySelector('.nc-source-' + idx);
+      if (t) t.textContent = next.title || '';
+      if (s) s.textContent = next.source || '';
+    };
+
     if (container) {
-      container.innerHTML = articles.slice(0, 3).map((a, i) => `
-        <a href="${a.url||'#'}" target="_blank" rel="noopener noreferrer"
-           class="card-link" data-title="${(a.title||'').replace(/"/g,'&quot;')}">
-          <div class="medium-card">
-            <div style="height:200px;background-color:#111;border-radius:10px 10px 0 0;flex-shrink:0;overflow:hidden;position:relative;">
-              ${a.imageUrl ? `<img src="${a.imageUrl}" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#111;\'><span style=\'font-family:Montserrat,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.15);\'>MMA Bridge</span></div>'" />` : '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;"><span style="font-family:Montserrat,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.15);">MMA Bridge</span></div>'}
-            </div>
-            <div style="padding:14px 4px 8px;">
-              <div style="font-family:'Inter',sans-serif;font-size:0.88rem;font-weight:600;color:#fff;line-height:1.4;margin-bottom:6px;">${a.title||''}</div>
-              <div style="font-family:'Inter',sans-serif;font-size:0.68rem;color:rgba(255,255,255,0.35);">${a.source||''}</div>
-            </div>
-          </div>
-        </a>`).join('');
+      container.innerHTML = articles.slice(0, 3).map(function(a, i) { return buildCard(a, i); }).join('');
     }
 
     // Sidebar
