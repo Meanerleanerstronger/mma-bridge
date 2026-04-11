@@ -11,204 +11,189 @@
   <style>
     body { background: #080808; }
 
-    .ev-page { max-width: 1280px; margin: 0 auto; padding: 40px 36px 80px; }
-
-    .ev-page-header {
-      display: flex; align-items: baseline; gap: 14px;
-      margin-bottom: 32px;
+    .ev-page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 44px 40px 80px;
     }
-    .ev-page-title {
+
+    .ev-header {
+      display: flex; align-items: baseline; gap: 14px;
+      margin-bottom: 36px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .ev-header-title {
       font-family: 'Montserrat', sans-serif;
       font-size: 0.72rem; font-weight: 800;
       letter-spacing: 0.2em; text-transform: uppercase;
       color: rgba(255,255,255,0.85);
     }
-    .ev-page-sub {
+
+    .ev-header-sub {
       font-size: 0.62rem; font-weight: 600;
       letter-spacing: 0.12em; text-transform: uppercase;
       color: rgba(255,255,255,0.18);
     }
 
-    /* ── HERO (next event) ── */
-    .ev-hero {
-      position: relative;
-      height: 460px;
-      border-radius: 16px;
+    /* ── Cinematic row ── */
+    .ev-list { display: flex; flex-direction: column; gap: 6px; }
+
+    .ev-row {
+      display: grid;
+      grid-template-columns: 220px 1fr auto;
+      height: 140px;
+      border-radius: 14px;
       overflow: hidden;
       cursor: pointer;
-      margin-bottom: 12px;
-      transition: transform 0.2s;
+      background: #0f0f0f;
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: border-color 0.18s, transform 0.18s;
+      position: relative;
     }
-    .ev-hero:hover { transform: scale(1.005); }
 
-    .ev-hero-bg {
+    .ev-row:hover {
+      border-color: rgba(255,255,255,0.12);
+      transform: translateX(4px);
+    }
+
+    .ev-row.ppv {
+      border-color: rgba(200,168,75,0.12);
+    }
+
+    .ev-row.ppv:hover {
+      border-color: rgba(200,168,75,0.3);
+    }
+
+    /* poster left */
+    .ev-poster {
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .ev-poster-img {
       position: absolute; inset: 0;
       background-size: cover;
-      background-position: center;
+      background-position: center top;
       transition: transform 0.4s;
     }
-    .ev-hero:hover .ev-hero-bg { transform: scale(1.04); }
 
-    .ev-hero-overlay {
+    .ev-row:hover .ev-poster-img { transform: scale(1.06); }
+
+    .ev-poster-fade {
       position: absolute; inset: 0;
-      background: linear-gradient(
-        105deg,
-        rgba(0,0,0,0.93) 0%,
-        rgba(0,0,0,0.65) 40%,
-        rgba(0,0,0,0.15) 70%,
-        rgba(0,0,0,0) 100%
-      ), linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 40%);
+      background: linear-gradient(to right, transparent 50%, #0f0f0f 100%);
     }
 
-    .ev-hero-content {
-      position: absolute; bottom: 0; left: 0;
-      padding: 44px 48px;
-      max-width: 600px;
+    /* body */
+    .ev-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 28px;
+      gap: 7px;
+      min-width: 0;
     }
 
-    .ev-hero-coming {
+    .ev-type {
       font-size: 0.58rem; font-weight: 800;
-      letter-spacing: 0.24em; text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
-      margin-bottom: 6px;
+      letter-spacing: 0.18em; text-transform: uppercase;
     }
 
-    .ev-hero-tag {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 0.6rem; font-weight: 800;
-      letter-spacing: 0.16em; text-transform: uppercase;
-      color: #c8a84b; margin-bottom: 12px;
-    }
+    .ev-type.ppv { color: #c8a84b; }
+    .ev-type.fn { color: #00e5ff; }
 
-    .ev-hero-tag.fn-tag { color: #00e5ff; }
-
-    .ev-hero-name {
+    .ev-name {
       font-family: 'Montserrat', sans-serif;
-      font-size: 3rem; font-weight: 900;
-      text-transform: uppercase; color: #fff;
-      line-height: 0.95; letter-spacing: 0.02em;
-      margin-bottom: 14px;
+      font-size: 1.15rem; font-weight: 900;
+      color: #fff; text-transform: uppercase;
+      letter-spacing: 0.02em;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
 
-    .ev-hero-meta {
-      display: flex; gap: 20px; align-items: center;
-      flex-wrap: wrap;
-    }
-    .ev-hero-date { font-size: 0.75rem; font-weight: 600; color: rgba(255,255,255,0.7); }
-    .ev-hero-loc { font-size: 0.65rem; font-weight: 500; color: rgba(255,255,255,0.3); letter-spacing: 0.06em; text-transform: uppercase; }
+    .ev-row.ppv .ev-name { font-size: 1.3rem; }
 
-    .ev-hero-countdown {
-      position: absolute; top: 28px; right: 28px;
-      background: rgba(0,0,0,0.55);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 10px; padding: 14px 20px;
-      text-align: center; backdrop-filter: blur(8px);
+    .ev-meta {
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      display: flex; gap: 12px; align-items: center;
     }
-    .ev-hero-days { font-family: 'Montserrat', sans-serif; font-size: 2.2rem; font-weight: 900; color: #fff; line-height: 1; }
-    .ev-hero-days-label { font-size: 0.55rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-top: 3px; }
 
-    .ev-hero-view {
-      position: absolute; bottom: 44px; right: 28px;
-      font-size: 0.62rem; font-weight: 700;
+    .ev-next-badge {
+      font-size: 0.5rem; font-weight: 800;
       letter-spacing: 0.12em; text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 6px; padding: 8px 16px;
-      transition: all 0.15s;
-    }
-    .ev-hero:hover .ev-hero-view { color: #fff; background: rgba(255,255,255,0.1); }
-
-    /* ── Section label ── */
-    .ev-section {
-      display: flex; align-items: center; gap: 16px;
-      margin: 28px 0 14px;
-    }
-    .ev-section-label {
-      font-size: 0.58rem; font-weight: 800;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: rgba(255,255,255,0.15); white-space: nowrap;
-    }
-    .ev-section-line { flex: 1; height: 1px; background: rgba(255,255,255,0.05); }
-
-    /* ── 2-column poster grid ── */
-    .ev-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      background: #00e5ff; color: #000;
+      padding: 2px 7px; border-radius: 3px;
     }
 
-    .ev-card {
-      position: relative; height: 240px;
-      border-radius: 14px; overflow: hidden;
-      cursor: pointer;
-      border: 1px solid rgba(255,255,255,0.06);
-      transition: transform 0.2s, border-color 0.2s;
-    }
-    .ev-card:hover { transform: translateY(-3px); border-color: rgba(255,255,255,0.14); }
-    .ev-card.ppv-card { border-color: rgba(200,168,75,0.15); }
-    .ev-card.ppv-card:hover { border-color: rgba(200,168,75,0.35); }
-
-    .ev-card-bg {
-      position: absolute; inset: 0;
-      background-size: cover; background-position: center;
-      transition: transform 0.4s;
-    }
-    .ev-card:hover .ev-card-bg { transform: scale(1.05); }
-
-    .ev-card-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(
-        to right,
-        rgba(0,0,0,0.9) 0%,
-        rgba(0,0,0,0.55) 45%,
-        rgba(0,0,0,0.1) 100%
-      ), linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
+    /* right side */
+    .ev-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 0 28px;
+      gap: 6px;
+      flex-shrink: 0;
     }
 
-    .ev-card-content {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 20px 22px;
-    }
-
-    .ev-card-tag {
-      font-size: 0.55rem; font-weight: 800;
-      letter-spacing: 0.16em; text-transform: uppercase;
-      color: #00e5ff; margin-bottom: 6px;
-    }
-    .ev-card-tag.ppv { color: #c8a84b; }
-
-    .ev-card-name {
+    .ev-days-num {
       font-family: 'Montserrat', sans-serif;
-      font-size: 1rem; font-weight: 900;
-      text-transform: uppercase; color: #fff;
-      letter-spacing: 0.02em; line-height: 1.15;
-      margin-bottom: 6px;
+      font-size: 2rem; font-weight: 900;
+      line-height: 1;
+      color: rgba(255,255,255,0.12);
     }
 
-    .ev-card-meta {
-      font-size: 0.6rem; color: rgba(255,255,255,0.35);
-      text-transform: uppercase; letter-spacing: 0.06em;
+    .ev-row.ppv .ev-days-num { color: rgba(200,168,75,0.35); }
+
+    .ev-row:first-child .ev-days-num { color: rgba(255,255,255,0.5); }
+
+    .ev-days-label {
+      font-size: 0.55rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(255,255,255,0.18);
     }
 
-    .ev-card-days {
-      position: absolute; top: 14px; right: 14px;
-      background: rgba(0,0,0,0.5);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 6px; padding: 6px 10px;
-      text-align: center;
+    .ev-view {
+      font-size: 0.58rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.2);
+      transition: color 0.15s;
     }
-    .ev-card-days-num { font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 900; color: #fff; line-height: 1; }
-    .ev-card-days-label { font-size: 0.48rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+
+    .ev-row:hover .ev-view { color: rgba(255,255,255,0.6); }
+
+    /* section divider */
+    .ev-divider {
+      display: flex; align-items: center; gap: 14px;
+      margin: 20px 0 8px;
+    }
+
+    .ev-divider-label {
+      font-size: 0.56rem; font-weight: 800;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,0.13); white-space: nowrap;
+    }
+
+    .ev-divider-line { flex: 1; height: 1px; background: rgba(255,255,255,0.05); }
 
     /* light mode */
     body.light-mode { background: #f0f0f0; }
+    body.light-mode .ev-row { background: #fff; border-color: rgba(0,0,0,0.06); }
+    body.light-mode .ev-name { color: #111; }
+    body.light-mode .ev-poster-fade { background: linear-gradient(to right, transparent 50%, #fff 100%); }
 
-    @media (max-width: 860px) {
-      .ev-grid { grid-template-columns: 1fr; }
-      .ev-hero { height: 340px; }
-      .ev-hero-name { font-size: 2rem; }
-      .ev-hero-content { padding: 28px 24px; }
+    @media (max-width: 700px) {
+      .ev-row { grid-template-columns: 120px 1fr auto; height: 110px; }
+      .ev-name { font-size: 0.88rem; }
+      .ev-row.ppv .ev-name { font-size: 0.95rem; }
+      .ev-body { padding: 0 16px; }
+      .ev-right { padding: 0 16px; }
+      .ev-days-num { font-size: 1.4rem; }
       .ev-page { padding: 24px 16px 60px; }
     }
   </style>
@@ -243,13 +228,11 @@
   </nav>
 
   <div class="ev-page">
-    <div class="ev-page-header">
-      <span class="ev-page-title">Upcoming Events</span>
-      <span class="ev-page-sub">Click any event to see the full card</span>
+    <div class="ev-header">
+      <span class="ev-header-title">Upcoming Events</span>
+      <span class="ev-header-sub">Click any event to see the full card</span>
     </div>
-
-    <!-- Hero + grid injected by JS -->
-    <div id="events-root"></div>
+    <div class="ev-list" id="ev-list"></div>
   </div>
 
   <!-- Fighter Drawer -->
@@ -265,117 +248,119 @@
   </div>
 
   <script>
-    // Countdown helper
-    function daysUntil(isoDate) {
-      const now = new Date();
-      const target = new Date(isoDate + 'T00:00:00');
-      return Math.max(0, Math.ceil((target - now) / 86400000));
+    function daysUntil(iso) {
+      return Math.max(0, Math.ceil((new Date(iso + 'T00:00:00') - new Date()) / 86400000));
     }
 
     async function loadEvents() {
       const res = await fetch('events.json');
       const all = await res.json();
-      const upcoming = all.filter(e => e.status === 'upcoming')
-                          .sort((a, b) => new Date(a.isoDate) - new Date(b.isoDate));
+      const upcoming = all
+        .filter(e => e.status === 'upcoming')
+        .sort((a, b) => new Date(a.isoDate) - new Date(b.isoDate));
 
-      if (!upcoming.length) return;
+      const list = document.getElementById('ev-list');
 
-      const root = document.getElementById('events-root');
-      const hero = upcoming[0];
+      // Group: next = first, then PPVs, then Fight Nights
+      const next = upcoming[0];
       const rest = upcoming.slice(1);
-      const heroIsPPV = hero.type === 'PPV';
-      const heroDays = daysUntil(hero.isoDate);
+      const ppvs = rest.filter(e => e.type === 'PPV');
+      const fns = rest.filter(e => e.type !== 'PPV');
 
-      // Hero
-      root.innerHTML = `
-        <div class="ev-hero" data-event="${hero.id}">
-          <div class="ev-hero-bg" style="background-image:url('${hero.poster}');"></div>
-          <div class="ev-hero-overlay"></div>
-          <div class="ev-hero-content">
-            <div class="ev-hero-coming">Coming Up</div>
-            <div class="ev-hero-tag ${heroIsPPV ? '' : 'fn-tag'}">${heroIsPPV ? '⚡ PPV Event' : '🥊 Fight Night'} · ${hero.location}</div>
-            <div class="ev-hero-name">${hero.name.replace('UFC ', '').replace(': ', '<br>')}</div>
-            <div class="ev-hero-meta">
-              <span class="ev-hero-date">${hero.date}</span>
-              <span class="ev-hero-loc">${hero.venue}</span>
+      function makeRow(e, isFirst) {
+        const days = daysUntil(e.isoDate);
+        const isPPV = e.type === 'PPV';
+        const shortName = e.name
+          .replace('UFC Fight Night: ', '')
+          .replace('UFC Freedom ', 'Freedom ');
+
+        const row = document.createElement('div');
+        row.className = 'ev-row' + (isPPV ? ' ppv' : '');
+        row.dataset.event = e.id;
+        row.innerHTML = `
+          <div class="ev-poster">
+            <div class="ev-poster-img" style="background-image:url('${e.poster}');"></div>
+            <div class="ev-poster-fade"></div>
+          </div>
+          <div class="ev-body">
+            <div class="ev-type ${isPPV ? 'ppv' : 'fn'}">
+              ${isPPV ? '⚡ PPV' : '🥊 Fight Night'} · ${e.location}
+            </div>
+            <div class="ev-name">${shortName}</div>
+            <div class="ev-meta">
+              <span>${e.date}</span>
+              <span>${e.venue}</span>
+              ${isFirst ? '<span class="ev-next-badge">Next Up</span>' : ''}
             </div>
           </div>
-          <div class="ev-hero-countdown">
-            <div class="ev-hero-days">${heroDays}</div>
-            <div class="ev-hero-days-label">Days Away</div>
+          <div class="ev-right">
+            <div class="ev-days-num">${days}</div>
+            <div class="ev-days-label">Days Away</div>
+            <div class="ev-view">View Card →</div>
           </div>
-          <div class="ev-hero-view">View Full Card →</div>
-        </div>
-      `;
-
-      if (rest.length) {
-        // Section label
-        const section = document.createElement('div');
-        section.className = 'ev-section';
-        section.innerHTML = '<span class="ev-section-label">More Events</span><div class="ev-section-line"></div>';
-        root.appendChild(section);
-
-        // Grid
-        const grid = document.createElement('div');
-        grid.className = 'ev-grid';
-        grid.innerHTML = rest.map(e => {
-          const isPPV = e.type === 'PPV';
-          const days = daysUntil(e.isoDate);
-          const shortName = e.name.replace('UFC Fight Night: ', '').replace('UFC ', '').replace('UFC Freedom ', 'Freedom ');
-          return `
-            <div class="ev-card ${isPPV ? 'ppv-card' : ''}" data-event="${e.id}">
-              <div class="ev-card-bg" style="background-image:url('${e.poster}');"></div>
-              <div class="ev-card-overlay"></div>
-              <div class="ev-card-days">
-                <div class="ev-card-days-num">${days}</div>
-                <div class="ev-card-days-label">Days</div>
-              </div>
-              <div class="ev-card-content">
-                <div class="ev-card-tag ${isPPV ? 'ppv' : ''}">${isPPV ? '⚡ PPV' : '🥊 Fight Night'} · ${e.location}</div>
-                <div class="ev-card-name">${shortName}</div>
-                <div class="ev-card-meta">${e.date} · ${e.venue}</div>
-              </div>
-            </div>
-          `;
-        }).join('');
-        root.appendChild(grid);
+        `;
+        row.addEventListener('click', () => openDrawer(e, all));
+        return row;
       }
 
-      // Click handlers — open drawer
-      root.querySelectorAll('[data-event]').forEach(el => {
-        el.addEventListener('click', () => {
-          const ev = all.find(e => e.id === el.dataset.event);
-          if (ev) openEventDrawer(ev);
-        });
-      });
+      function addDivider(label) {
+        const d = document.createElement('div');
+        d.className = 'ev-divider';
+        d.innerHTML = `<span class="ev-divider-label">${label}</span><div class="ev-divider-line"></div>`;
+        list.appendChild(d);
+      }
+
+      // Next event
+      if (next) list.appendChild(makeRow(next, true));
+
+      // PPVs
+      if (ppvs.length) {
+        addDivider('PPV Events');
+        ppvs.forEach(e => list.appendChild(makeRow(e, false)));
+      }
+
+      // Fight Nights
+      if (fns.length) {
+        addDivider('Fight Nights');
+        fns.forEach(e => list.appendChild(makeRow(e, false)));
+      }
     }
 
-    function openEventDrawer(ev) {
+    function openDrawer(ev, all) {
       const drawer = document.getElementById('fightDrawer');
-      const title = document.getElementById('drawerTitle');
-      const content = document.getElementById('drawerContent');
-      title.textContent = ev.name;
+      document.getElementById('drawerTitle').textContent = ev.name;
 
       function fightRow(f) {
-        return `<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
-          <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.8rem;color:#fff;">${f.a}</span>
-          <span style="font-size:0.65rem;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.06em;">${f.weight} · ${f.rounds}</span>
-          <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.8rem;color:#fff;">${f.b}</span>
-        </div>`;
+        const isComain = f.slot === 'comain';
+        const isMain = f.slot === 'main';
+        return `
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(255,255,255,0.05);">
+            <span style="font-family:'Montserrat',sans-serif;font-weight:${isMain || isComain ? '800' : '600'};font-size:${isMain ? '0.9rem' : '0.78rem'};color:#fff;flex:1;">${f.a}</span>
+            <div style="text-align:center;flex-shrink:0;padding:0 12px;">
+              <div style="font-size:0.55rem;color:rgba(255,255,255,0.25);text-transform:uppercase;letter-spacing:0.08em;">${f.weight}</div>
+              <div style="font-size:0.5rem;color:rgba(255,255,255,0.18);text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;">${f.titleFight ? '🏆 Title Fight' : f.rounds}</div>
+            </div>
+            <span style="font-family:'Montserrat',sans-serif;font-weight:${isMain || isComain ? '800' : '600'};font-size:${isMain ? '0.9rem' : '0.78rem'};color:#fff;flex:1;text-align:right;">${f.b}</span>
+          </div>`;
       }
 
       const main = ev.mainCard || [];
       const prelims = ev.prelims || [];
       const early = ev.earlyPrelims || [];
 
-      content.innerHTML = `
-        <div style="padding:16px 0;">
-          <div style="font-size:0.58rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:10px;">Main Card</div>
-          ${main.map(fightRow).join('')}
-          ${prelims.length ? `<div style="font-size:0.58rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin:18px 0 10px;">Prelims</div>${prelims.map(fightRow).join('')}` : ''}
-          ${early.length ? `<div style="font-size:0.58rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin:18px 0 10px;">Early Prelims</div>${early.map(fightRow).join('')}` : ''}
-        </div>
-      `;
+      function section(label, fights) {
+        if (!fights.length) return '';
+        return `
+          <div style="font-size:0.56rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin:18px 0 6px;">${label}</div>
+          ${fights.map(fightRow).join('')}`;
+      }
+
+      document.getElementById('drawerContent').innerHTML = `
+        <div style="padding:8px 0;">
+          ${section('Main Card', main)}
+          ${section('Prelims', prelims)}
+          ${section('Early Prelims', early)}
+        </div>`;
 
       drawer.setAttribute('aria-hidden', 'false');
       drawer.classList.add('drawer--open');
@@ -383,6 +368,8 @@
 
     document.getElementById('drawerClose').addEventListener('click', closeDrawer);
     document.getElementById('drawerX').addEventListener('click', closeDrawer);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+
     function closeDrawer() {
       const drawer = document.getElementById('fightDrawer');
       drawer.setAttribute('aria-hidden', 'true');
