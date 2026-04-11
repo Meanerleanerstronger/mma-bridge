@@ -60,7 +60,12 @@ function renderHero(ev) {
   const type  = document.getElementById('heroType');
   const title = document.getElementById('heroTitle');
   const meta  = document.getElementById('heroMeta');
-  if (ev.poster) img.style.backgroundImage = `url('${ev.poster}')`;
+  if (ev.poster) {
+    img.style.backgroundImage = `url('${ev.poster}')`;
+    // Portrait posters (event cards) need different positioning
+    img.style.backgroundPosition = 'center top';
+    img.style.backgroundSize = 'cover';
+  }
   type.textContent  = ev.type === 'PPV' ? '🔥 Next PPV Event' : '⚡ Next Event';
   title.textContent = ev.name || '';
   meta.textContent  = [ev.date, ev.location, ev.venue].filter(Boolean).join('  ·  ');
@@ -205,7 +210,9 @@ async function renderNews() {
         <a href="${a.url||'#'}" target="_blank" rel="noopener noreferrer"
            class="card-link" data-title="${(a.title||'').replace(/"/g,'&quot;')}">
           <div class="medium-card">
-            <div style="height:200px;background-image:${a.imageUrl ? `url('${a.imageUrl}')` : 'none'};background-size:cover;background-position:center;background-color:#1a1a1a;border-radius:10px 10px 0 0;flex-shrink:0;"></div>
+            <div style="height:200px;background-color:#111;border-radius:10px 10px 0 0;flex-shrink:0;overflow:hidden;position:relative;">
+              ${a.imageUrl ? `<img src="${a.imageUrl}" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#111;\'><span style=\'font-family:Montserrat,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.15);\'>MMA Bridge</span></div>'" />` : '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;"><span style="font-family:Montserrat,sans-serif;font-size:0.6rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.15);">MMA Bridge</span></div>'}
+            </div>
             <div style="padding:14px 4px 8px;">
               <div style="font-family:'Inter',sans-serif;font-size:0.88rem;font-weight:600;color:#fff;line-height:1.4;margin-bottom:6px;">${a.title||''}</div>
               <div style="font-family:'Inter',sans-serif;font-size:0.68rem;color:rgba(255,255,255,0.35);">${a.source||''}</div>
