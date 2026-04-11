@@ -223,3 +223,8 @@ if (document.readyState === 'loading') {
 } else {
     initChat();
 }
+
+// Wake up Render backend on page load
+if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+    fetch('https://mmabridge-backend.onrender.com/api/health').catch(() => {});
+}

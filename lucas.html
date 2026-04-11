@@ -388,6 +388,10 @@
       ? 'http://localhost:5001/api/chat'
       : 'https://mmabridge-backend.onrender.com/api/chat';
 
+    // Wake up Render backend on page load (free tier spins down)
+    const PING_URL = 'https://mmabridge-backend.onrender.com/api/health';
+    fetch(PING_URL).catch(() => {});
+
     let history = [], busy = false;
     const messagesEl = document.getElementById('messages');
     const inputEl    = document.getElementById('chat-input');
