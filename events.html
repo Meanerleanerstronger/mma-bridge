@@ -305,43 +305,53 @@
         const isMain = f.slot === 'main';
         const isComain = f.slot === 'comain';
         const isOpener = f.slot === 'opener';
+        const isPrelimMain = sectionType === 'prelims' && f.slot === 'main';
 
-        const fontSize = isMain ? '1.35rem' : isComain ? '1.1rem' : isOpener ? '0.88rem' : '0.95rem';
-        const fontWeight = (isMain || isComain) ? '900' : '700';
-        const padding = isMain ? '28px 0' : isComain ? '22px 0' : isOpener ? '14px 0' : '18px 0';
-        const borderColor = isMain ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.04)';
-        const nameColor = (isMain || isComain) ? '#fff' : isOpener ? 'rgba(255,255,255,0.6)' : 'rgba(255,255,255,0.85)';
-        const weightSize = isMain ? '0.65rem' : isComain ? '0.6rem' : '0.55rem';
-        const weightColor = isMain ? 'rgba(255,255,255,0.4)' : 'rgba(255,255,255,0.22)';
+        const fontSize = isMain ? '1.4rem' : isComain ? '1.15rem' : isPrelimMain ? '1rem' : isOpener ? '0.82rem' : '0.9rem';
+        const fontWeight = (isMain || isComain || isPrelimMain) ? '900' : '700';
+        const paddingTop = isMain ? '30px' : isComain ? '24px' : isPrelimMain ? '18px' : isOpener ? '12px' : '16px';
+        const nameColor = (isMain || isComain) ? '#fff' : isOpener ? 'rgba(255,255,255,0.45)' : 'rgba(255,255,255,0.8)';
+        const accentColor = isMain ? '#c8a84b' : isComain ? '#00e5ff' : 'rgba(255,255,255,0.08)';
+        const bgColor = isMain ? 'rgba(200,168,75,0.04)' : isComain ? 'rgba(0,229,255,0.03)' : 'transparent';
 
-        return `
-          <div style="display:flex;align-items:center;justify-content:space-between;padding:${padding};border-bottom:1px solid ${borderColor};">
-            <span style="font-family:'Montserrat',sans-serif;font-weight:${fontWeight};font-size:${fontSize};color:${nameColor};flex:1;letter-spacing:0.02em;">${f.a}</span>
-            <div style="text-align:center;flex-shrink:0;padding:0 20px;">
-              <div style="font-size:${weightSize};color:${weightColor};text-transform:uppercase;letter-spacing:0.1em;font-weight:600;">${f.weight}</div>
-              <div style="font-size:0.5rem;color:rgba(255,255,255,0.18);text-transform:uppercase;letter-spacing:0.08em;margin-top:3px;">${f.titleFight ? '🏆 TITLE' : f.rounds}</div>
-            </div>
-            <span style="font-family:'Montserrat',sans-serif;font-weight:${fontWeight};font-size:${fontSize};color:${nameColor};flex:1;text-align:right;letter-spacing:0.02em;">${f.b}</span>
-          </div>`;
+        const titleBadge = f.titleFight ? '<div style="font-size:0.5rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#c8a84b;margin-bottom:4px;">&#127942; Title Fight</div>' : '';
+        const midHtml = '<div style="text-align:center;flex-shrink:0;padding:0 16px;">' + titleBadge +
+          '<div style="font-size:0.52rem;font-weight:700;color:rgba(255,255,255,0.22);text-transform:uppercase;letter-spacing:0.1em;">' + f.weight + '</div>' +
+          '<div style="font-size:0.44rem;font-weight:600;color:rgba(255,255,255,0.12);text-transform:uppercase;letter-spacing:0.08em;margin-top:2px;">' + f.rounds + '</div>' +
+          '</div>';
+
+        const rowStyle = 'display:flex;align-items:center;justify-content:space-between;' +
+          'padding:' + paddingTop + ' 12px;' +
+          'border-bottom:1px solid rgba(255,255,255,0.05);' +
+          'background:' + bgColor + ';' +
+          'border-left:2px solid ' + accentColor + ';' +
+          'margin-bottom:2px;border-radius:0 6px 6px 0;';
+
+        const nameStyle = 'font-family:Montserrat,sans-serif;font-weight:' + fontWeight + ';font-size:' + fontSize + ';color:' + nameColor + ';flex:1;letter-spacing:0.02em;';
+
+        return '<div style="' + rowStyle + '">' +
+          '<span style="' + nameStyle + '">' + f.a + '</span>' +
+          midHtml +
+          '<span style="' + nameStyle + 'text-align:right;">' + f.b + '</span>' +
+          '</div>';
       }
 
       const main = ev.mainCard || [];
       const prelims = ev.prelims || [];
       const early = ev.earlyPrelims || [];
 
-      function section(label, fights, type) {
+      function section(label, fights, type, accent) {
         if (!fights.length) return '';
-        return `
-          <div style="font-size:0.58rem;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin:28px 0 8px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.06);">${label}</div>
-          ${fights.map(f => fightRow(f, type)).join('')}`;
+        const labelHtml = '<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">' +
+          '<span style="font-size:0.56rem;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:' + accent + ';">' + label + '</span>' +
+          '<div style="flex:1;height:1px;background:rgba(255,255,255,0.06);"></div></div>';
+        return '<div style="margin-top:24px;">' + labelHtml + fights.map(function(f) { return fightRow(f, type); }).join('') + '</div>';
       }
 
-      document.getElementById('drawerContent').innerHTML = `
-        <div style="padding:0 4px;">
-          ${section('Main Card', main, 'main')}
-          ${section('Prelims', prelims, 'prelims')}
-          ${section('Early Prelims', early, 'early')}
-        </div>`;
+      document.getElementById('drawerContent').innerHTML =
+        section('Main Card', main, 'main', '#c8a84b') +
+        section('Prelims', prelims, 'prelims', '#00e5ff') +
+        section('Early Prelims', early, 'early', 'rgba(255,255,255,0.25)');
 
       drawer.setAttribute('aria-hidden', 'false');
       drawer.classList.add('open');

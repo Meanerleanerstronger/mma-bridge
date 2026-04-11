@@ -2690,13 +2690,13 @@
         "slot": "main"
       },
       {
-        "a": "Cub Swanson",
-        "b": "Nate Landwehr",
-        "weight": "Featherweight",
+        "a": "Azamat Murzakanov",
+        "b": "Paulo Costa",
+        "weight": "Light Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
-        "slot": ""
+        "ranked": true,
+        "slot": "comain"
       },
       {
         "a": "Curtis Blaydes",
@@ -2717,13 +2717,24 @@
         "slot": ""
       },
       {
-        "a": "Tatiana Suarez",
-        "b": "Lupita Godinez",
-        "weight": "Women's Strawweight",
+        "a": "Cub Swanson",
+        "b": "Nate Landwehr",
+        "weight": "Featherweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true,
-        "slot": ""
+        "ranked": false,
+        "slot": "opener"
+      }
+    ],
+    "prelims": [
+      {
+        "a": "Patricio Pitbull",
+        "b": "Aaron Pico",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "main"
       },
       {
         "a": "Mateusz Gamrot",
@@ -2733,36 +2744,26 @@
         "titleFight": false,
         "ranked": true,
         "slot": ""
-      }
-    ],
-    "prelims": [
-      {
-        "a": "Paulo Costa",
-        "b": "Azamat Murzakanov",
-        "weight": "Light Heavyweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": true,
-        "slot": "comain"
       },
-      {
-        "a": "Patricio Pitbull",
-        "b": "Aaron Pico",
-        "weight": "Featherweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "main"
-      }
-    ],
-    "earlyPrelims": [
       {
         "a": "Kevin Holland",
         "b": "Randy Brown",
         "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "slot": ""
+      }
+    ],
+    "earlyPrelims": [
+      {
+        "a": "Tatiana Suarez",
+        "b": "Lupita Godinez",
+        "weight": "Women's Strawweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": ""
       },
       {
         "a": "Kelvin Gastelum",
@@ -2770,7 +2771,8 @@
         "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "slot": ""
       },
       {
         "a": "Nazim Sadykhov",
@@ -2778,7 +2780,8 @@
         "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "slot": ""
       }
     ],
     "startTime": "22:00"
@@ -2920,23 +2923,25 @@
         "ranked": true
       },
       {
-        "a": "Jan Blachowicz",
-        "b": "Bogdan Guskov",
-        "weight": "Light Heavyweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": true
-      },
-      {
         "a": "King Green",
         "b": "Jeremy Stephens",
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "slot": "opener"
       }
     ],
     "prelims": [
+      {
+        "a": "Jan Blachowicz",
+        "b": "Bogdan Guskov",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": ""
+      },
       {
         "a": "Ateba Gautier",
         "b": "Osman Diaz",
