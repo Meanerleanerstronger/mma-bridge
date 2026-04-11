@@ -100,7 +100,7 @@ function renderRow(container, countEl, events, type) {
     container.innerHTML = `<div style="padding:20px;color:rgba(255,255,255,0.25);font-family:'Inter',sans-serif;font-size:0.85rem;">None scheduled yet.</div>`;
     return;
   }
-  countEl.textContent = `${events.length} event${events.length !== 1 ? 's' : ''}`;
+  countEl.textContent = '';
   events.forEach(ev => container.appendChild(buildCard(ev, type)));
 }
 
