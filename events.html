@@ -334,7 +334,7 @@
         </div>`;
 
       drawer.setAttribute('aria-hidden', 'false');
-      drawer.classList.add('drawer--open');
+      drawer.classList.add('open');
     }
 
     document.getElementById('drawerClose').addEventListener('click', closeDrawer);
@@ -344,7 +344,7 @@
     function closeDrawer() {
       const drawer = document.getElementById('fightDrawer');
       drawer.setAttribute('aria-hidden', 'true');
-      drawer.classList.remove('drawer--open');
+      drawer.classList.remove('open');
     }
 
     loadEvents();
