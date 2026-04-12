@@ -62,9 +62,12 @@ function renderHero(ev) {
   const meta  = document.getElementById('heroMeta');
   if (ev.poster) {
     img.style.backgroundImage = `url('${ev.poster}')`;
-    // Portrait posters (event cards) need different positioning
-    img.style.backgroundPosition = 'center top';
     img.style.backgroundSize = 'cover';
+    // Per-event positioning to show faces
+    const positions = {
+      'ufc-fight-night-burns-vs-malott': 'center 20%',
+    };
+    img.style.backgroundPosition = positions[ev.id] || 'center top';
   }
   type.textContent  = ev.type === 'PPV' ? '🔥 Next PPV Event' : '⚡ Next Event';
   title.textContent = ev.name || '';
