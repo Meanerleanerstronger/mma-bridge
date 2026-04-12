@@ -2678,34 +2678,46 @@
     "location": "Miami, FL",
     "venue": "Kaseya Center",
     "poster": "images/ufc-327.jpg",
-    "status": "upcoming",
+    "status": "completed",
     "mainCard": [
       {
-        "a": "Jiří Procházka",
-        "b": "Carlos Ulberg",
+        "a": "Carlos Ulberg",
+        "b": "Jiří Procházka",
         "weight": "Light Heavyweight",
         "rounds": "5 Rds",
         "titleFight": true,
         "ranked": true,
-        "slot": "main"
+        "slot": "main",
+        "winner": "Carlos Ulberg",
+        "method": "KO",
+        "round": 1,
+        "time": "3:45"
       },
       {
-        "a": "Azamat Murzakanov",
-        "b": "Paulo Costa",
+        "a": "Paulo Costa",
+        "b": "Azamat Murzakanov",
         "weight": "Light Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
-        "slot": "comain"
+        "slot": "comain",
+        "winner": "Paulo Costa",
+        "method": "TKO",
+        "round": 3,
+        "time": "1:23"
       },
       {
-        "a": "Curtis Blaydes",
-        "b": "Josh Hokit",
+        "a": "Josh Hokit",
+        "b": "Curtis Blaydes",
         "weight": "Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
-        "slot": ""
+        "slot": "",
+        "winner": "Josh Hokit",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Dominick Reyes",
@@ -2714,7 +2726,11 @@
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
-        "slot": ""
+        "slot": "",
+        "winner": "Dominick Reyes",
+        "method": "SD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Cub Swanson",
@@ -2723,27 +2739,26 @@
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
-        "slot": "opener"
+        "slot": "opener",
+        "winner": "Cub Swanson",
+        "method": "TKO",
+        "round": 1,
+        "time": "4:06"
       }
     ],
     "prelims": [
       {
-        "a": "Patricio Pitbull",
-        "b": "Aaron Pico",
+        "a": "Aaron Pico",
+        "b": "Patricio Pitbull",
         "weight": "Featherweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
-        "slot": "main"
-      },
-      {
-        "a": "Mateusz Gamrot",
-        "b": "Esteban Ribovics",
-        "weight": "Lightweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": true,
-        "slot": ""
+        "slot": "main",
+        "winner": "Aaron Pico",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Kevin Holland",
@@ -2752,10 +2767,25 @@
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
-        "slot": ""
-      }
-    ],
-    "earlyPrelims": [
+        "slot": "",
+        "winner": "Kevin Holland",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "a": "Mateusz Gamrot",
+        "b": "Esteban Ribovics",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "winner": "Mateusz Gamrot",
+        "method": "Sub (Arm Triangle)",
+        "round": 2,
+        "time": "4:19"
+      },
       {
         "a": "Tatiana Suarez",
         "b": "Lupita Godinez",
@@ -2763,25 +2793,52 @@
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
-        "slot": ""
-      },
+        "slot": "",
+        "winner": "Tatiana Suarez",
+        "method": "Sub (RNC)",
+        "round": 2,
+        "time": "2:29"
+      }
+    ],
+    "earlyPrelims": [
       {
-        "a": "Kelvin Gastelum",
-        "b": "Vicente Luque",
-        "weight": "Welterweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": ""
-      },
-      {
-        "a": "Nazim Sadykhov",
+        "a": "Chris Padilla",
         "b": "MarQuel Mederos",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "winner": null,
+        "method": "Majority Draw",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "a": "Vicente Luque",
+        "b": "Kelvin Gastelum",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "winner": "Vicente Luque",
+        "method": "Sub (D'Arce)",
+        "round": 1,
+        "time": "4:08"
+      },
+      {
+        "a": "Charles Radtke",
+        "b": "Francisco Prado",
         "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
-        "slot": ""
+        "slot": "",
+        "winner": "Charles Radtke",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "startTime": "22:00"
