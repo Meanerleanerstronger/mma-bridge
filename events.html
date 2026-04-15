@@ -12,14 +12,14 @@
     body { background: #080808; }
 
     .ev-page {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 48px 44px 100px;
+      padding: 48px 40px 100px;
     }
 
     .ev-header {
       display: flex; align-items: baseline; gap: 14px;
-      margin-bottom: 44px;
+      margin-bottom: 40px;
       padding-bottom: 18px;
       border-bottom: 1px solid rgba(255,255,255,0.06);
     }
@@ -37,163 +37,222 @@
       color: rgba(255,255,255,0.18);
     }
 
-    /* ── Cinematic row ── */
-    .ev-list { display: flex; flex-direction: column; gap: 8px; }
-
-    .ev-row {
+    /* Card Grid */
+    .ev-grid {
       display: grid;
-      grid-template-columns: 240px 1fr auto;
-      height: 160px;
-      border-radius: 14px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .ev-card {
+      border-radius: 16px;
       overflow: hidden;
       cursor: pointer;
-      background: #0f0f0f;
-      border: 1px solid rgba(255,255,255,0.05);
-      transition: border-color 0.18s, transform 0.18s;
-      position: relative;
+      background: #111;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
     }
 
-    .ev-row:hover {
-      border-color: rgba(255,255,255,0.12);
-      transform: translateX(4px);
+    .ev-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,0.14);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
     }
 
-    .ev-row.ppv {
-      border-color: rgba(200,168,75,0.12);
+    .ev-card.ppv {
+      border-color: rgba(200,168,75,0.15);
     }
 
-    .ev-row.ppv:hover {
-      border-color: rgba(200,168,75,0.3);
+    .ev-card.ppv:hover {
+      border-color: rgba(200,168,75,0.35);
+      box-shadow: 0 12px 40px rgba(200,168,75,0.08);
     }
 
-    /* poster left */
+    /* Next event spans full row as wide horizontal card */
+    .ev-card.next-up {
+      grid-column: span 3;
+      flex-direction: row;
+      height: 280px;
+    }
+
+    .ev-card.next-up .ev-poster {
+      width: 420px;
+      padding-top: 0;
+      flex-shrink: 0;
+    }
+
+    .ev-card.next-up .ev-info {
+      padding: 36px 48px;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .ev-card.next-up .ev-name {
+      font-size: 2.2rem;
+    }
+
+    .ev-card.next-up .ev-days-num {
+      font-size: 2.8rem;
+      color: rgba(255,255,255,0.55);
+    }
+
+    /* Poster */
     .ev-poster {
       position: relative;
+      width: 100%;
+      padding-top: 65%;
       overflow: hidden;
+      background: #0a0a0a;
       flex-shrink: 0;
     }
 
     .ev-poster-img {
-      position: absolute; inset: 0;
+      position: absolute;
+      inset: 0;
       background-size: cover;
       background-position: center top;
+      background-repeat: no-repeat;
       transition: transform 0.4s;
     }
 
-    .ev-row:hover .ev-poster-img { transform: scale(1.06); }
-
-    .ev-poster-fade {
-      position: absolute; inset: 0;
-      background: linear-gradient(to right, transparent 50%, #0f0f0f 100%);
+    .ev-card:hover .ev-poster-img {
+      transform: scale(1.04);
     }
 
-    /* body */
-    .ev-body {
+    .ev-poster-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.55) 100%);
+    }
+
+    .ev-card.next-up .ev-poster-overlay {
+      background: linear-gradient(to right, transparent 60%, #111 100%);
+    }
+
+    .ev-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-size: 0.48rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 4px 9px;
+      border-radius: 4px;
+    }
+
+    .ev-badge.ppv {
+      background: rgba(200,168,75,0.18);
+      color: #c8a84b;
+      border: 1px solid rgba(200,168,75,0.3);
+    }
+
+    .ev-badge.fn {
+      background: rgba(0,229,255,0.12);
+      color: #00e5ff;
+      border: 1px solid rgba(0,229,255,0.2);
+    }
+
+    .ev-badge.next {
+      left: auto;
+      right: 12px;
+      background: #00e5ff;
+      color: #000;
+    }
+
+    /* Info */
+    .ev-info {
+      padding: 18px 20px 20px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      padding: 0 32px;
       gap: 7px;
-      min-width: 0;
+      flex: 1;
     }
 
-    .ev-type {
-      font-size: 0.58rem; font-weight: 800;
-      letter-spacing: 0.18em; text-transform: uppercase;
+    .ev-location {
+      font-size: 0.54rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.22);
     }
-
-    .ev-type.ppv { color: #c8a84b; }
-    .ev-type.fn { color: #00e5ff; }
 
     .ev-name {
       font-family: 'Montserrat', sans-serif;
-      font-size: 1.25rem; font-weight: 900;
-      color: #fff; text-transform: uppercase;
-      letter-spacing: 0.02em;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-
-    .ev-row.ppv .ev-name { font-size: 1.45rem; }
-
-    .ev-meta {
-      font-size: 0.68rem;
-      color: rgba(255,255,255,0.3);
+      font-size: 1.08rem;
+      font-weight: 900;
+      color: #fff;
       text-transform: uppercase;
-      letter-spacing: 0.07em;
-      display: flex; gap: 12px; align-items: center;
+      letter-spacing: 0.02em;
+      line-height: 1.2;
     }
 
-    .ev-next-badge {
-      font-size: 0.5rem; font-weight: 800;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      background: #00e5ff; color: #000;
-      padding: 2px 7px; border-radius: 3px;
+    .ev-card.ppv .ev-name { font-size: 1.2rem; }
+
+    .ev-venue {
+      font-size: 0.58rem;
+      color: rgba(255,255,255,0.18);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
 
-    /* right side */
-    .ev-right {
+    .ev-meta-row {
       display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      justify-content: center;
-      padding: 0 32px;
-      gap: 8px;
-      flex-shrink: 0;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .ev-date {
+      font-size: 0.63rem;
+      color: rgba(255,255,255,0.28);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .ev-days {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
     }
 
     .ev-days-num {
       font-family: 'Montserrat', sans-serif;
-      font-size: 2.2rem; font-weight: 900;
+      font-size: 1.5rem;
+      font-weight: 900;
       line-height: 1;
-      color: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.13);
     }
 
-    .ev-row.ppv .ev-days-num { color: rgba(200,168,75,0.35); }
-
-    .ev-row:first-child .ev-days-num { color: rgba(255,255,255,0.5); }
+    .ev-card.ppv .ev-days-num { color: rgba(200,168,75,0.4); }
 
     .ev-days-label {
-      font-size: 0.55rem; font-weight: 700;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      color: rgba(255,255,255,0.18);
+      font-size: 0.46rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.13);
     }
 
-    .ev-view {
-      font-size: 0.58rem; font-weight: 700;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: rgba(255,255,255,0.2);
-      transition: color 0.15s;
-    }
-
-    .ev-row:hover .ev-view { color: rgba(255,255,255,0.6); }
-
-    /* section divider */
-    .ev-divider {
-      display: flex; align-items: center; gap: 14px;
-      margin: 32px 0 12px;
-    }
-
-    .ev-divider-label {
-      font-size: 0.56rem; font-weight: 800;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: rgba(255,255,255,0.13); white-space: nowrap;
-    }
-
-    .ev-divider-line { flex: 1; height: 1px; background: rgba(255,255,255,0.05); }
-
-    /* light mode */
     body.light-mode { background: #f0f0f0; }
-    body.light-mode .ev-row { background: #fff; border-color: rgba(0,0,0,0.06); }
+    body.light-mode .ev-card { background: #fff; border-color: rgba(0,0,0,0.07); }
     body.light-mode .ev-name { color: #111; }
-    body.light-mode .ev-poster-fade { background: linear-gradient(to right, transparent 50%, #fff 100%); }
 
-    @media (max-width: 700px) {
-      .ev-row { grid-template-columns: 120px 1fr auto; height: 110px; }
-      .ev-name { font-size: 0.88rem; }
-      .ev-row.ppv .ev-name { font-size: 0.95rem; }
-      .ev-body { padding: 0 16px; }
-      .ev-right { padding: 0 16px; }
-      .ev-days-num { font-size: 1.4rem; }
+    @media (max-width: 900px) {
+      .ev-grid { grid-template-columns: repeat(2, 1fr); }
+      .ev-card.next-up { grid-column: span 2; height: 220px; }
+      .ev-card.next-up .ev-poster { width: 280px; }
+      .ev-card.next-up .ev-name { font-size: 1.5rem; }
+    }
+
+    @media (max-width: 600px) {
+      .ev-grid { grid-template-columns: 1fr; }
+      .ev-card.next-up { grid-column: span 1; flex-direction: column; height: auto; }
+      .ev-card.next-up .ev-poster { width: 100%; padding-top: 65%; }
       .ev-page { padding: 24px 16px 60px; }
     }
   </style>
@@ -228,7 +287,7 @@
       <span class="ev-header-title">Upcoming Events</span>
       <span class="ev-header-sub">Click any event to see the full card</span>
     </div>
-    <div class="ev-list" id="ev-list"></div>
+    <div class="ev-grid" id="ev-grid"></div>
   </div>
 
   <!-- Fighter Drawer -->
@@ -255,51 +314,43 @@
         .filter(e => e.status === 'upcoming')
         .sort((a, b) => new Date(a.isoDate) - new Date(b.isoDate));
 
-      const list = document.getElementById('ev-list');
+      const grid = document.getElementById('ev-grid');
 
-      function makeRow(e, isFirst) {
+      upcoming.forEach((e, i) => {
+        const isFirst = i === 0;
         const days = daysUntil(e.isoDate);
         const isPPV = e.type === 'PPV';
         const shortName = e.name
           .replace('UFC Fight Night: ', '')
           .replace('UFC Freedom ', 'Freedom ');
 
-        const row = document.createElement('div');
-        row.className = 'ev-row' + (isPPV ? ' ppv' : '');
-        row.dataset.event = e.id;
-        row.innerHTML = `
+        const card = document.createElement('div');
+        card.className = 'ev-card' + (isPPV ? ' ppv' : '') + (isFirst ? ' next-up' : '');
+
+        card.innerHTML = `
           <div class="ev-poster">
-            <div class="ev-poster-img" style="background-image:url('${e.poster}');${
-              e.id === 'ufc-freedom-250-topuria-vs-gaethje' ? 'background-size: 85%; background-position: center;' :
-              e.id === 'ufc-fight-night-della-maddalena-vs-prates' ? 'background-position: center 10%;' :
-              e.id === 'ufc-fight-night-sterling-vs-zalal' ? 'background-size: cover; background-position: center 15%; background-repeat: no-repeat;' :
-              ''
-            }"></div>
-            <div class="ev-poster-fade"></div>
+            <div class="ev-poster-img" style="background-image:url('${e.poster}');"></div>
+            <div class="ev-poster-overlay"></div>
+            <span class="ev-badge ${isPPV ? 'ppv' : 'fn'}">${isPPV ? '⚡ PPV' : '🥊 Fight Night'}</span>
+            ${isFirst ? '<span class="ev-badge next">Next Up</span>' : ''}
           </div>
-          <div class="ev-body">
-            <div class="ev-type ${isPPV ? 'ppv' : 'fn'}">
-              ${isPPV ? '⚡ PPV' : '🥊 Fight Night'} · ${e.location}
-            </div>
+          <div class="ev-info">
+            <div class="ev-location">${e.location}</div>
             <div class="ev-name">${shortName}</div>
-            <div class="ev-meta">
-              <span>${e.date}</span>
-              <span>${e.venue}</span>
-              ${isFirst ? '<span class="ev-next-badge">Next Up</span>' : ''}
+            <div class="ev-venue">${e.venue}</div>
+            <div class="ev-meta-row">
+              <div class="ev-date">${e.date}</div>
+              <div class="ev-days">
+                <span class="ev-days-num">${days}</span>
+                <span class="ev-days-label">&nbsp;days</span>
+              </div>
             </div>
-          </div>
-          <div class="ev-right">
-            <div class="ev-days-num">${days}</div>
-            <div class="ev-days-label">Days Away</div>
-            <div class="ev-view">View Card →</div>
           </div>
         `;
-        row.addEventListener('click', () => openDrawer(e, all));
-        return row;
-      }
 
-      // Chronological — no grouping
-      upcoming.forEach((e, i) => list.appendChild(makeRow(e, i === 0)));
+        card.addEventListener('click', () => openDrawer(e, all));
+        grid.appendChild(card);
+      });
     }
 
     function openDrawer(ev, all) {
@@ -311,34 +362,20 @@
         const isComain = f.slot === 'comain';
         const isOpener = f.slot === 'opener';
         const isPrelimMain = sectionType === 'prelims' && f.slot === 'main';
-
         const fontSize = isMain ? '1.4rem' : isComain ? '1.15rem' : isPrelimMain ? '1rem' : isOpener ? '0.82rem' : '0.9rem';
         const fontWeight = (isMain || isComain || isPrelimMain) ? '900' : '700';
         const paddingTop = isMain ? '30px' : isComain ? '24px' : isPrelimMain ? '18px' : isOpener ? '12px' : '16px';
         const nameColor = (isMain || isComain) ? '#fff' : isOpener ? 'rgba(255,255,255,0.45)' : 'rgba(255,255,255,0.8)';
         const accentColor = isMain ? '#c8a84b' : isComain ? '#00e5ff' : 'rgba(255,255,255,0.08)';
         const bgColor = isMain ? 'rgba(200,168,75,0.04)' : isComain ? 'rgba(0,229,255,0.03)' : 'transparent';
-
         const titleBadge = f.titleFight ? '<div style="font-size:0.5rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#c8a84b;margin-bottom:4px;">&#127942; Title Fight</div>' : '';
         const midHtml = '<div style="text-align:center;flex-shrink:0;padding:0 16px;">' + titleBadge +
           '<div style="font-size:0.52rem;font-weight:700;color:rgba(255,255,255,0.22);text-transform:uppercase;letter-spacing:0.1em;">' + f.weight + '</div>' +
           '<div style="font-size:0.44rem;font-weight:600;color:rgba(255,255,255,0.12);text-transform:uppercase;letter-spacing:0.08em;margin-top:2px;">' + f.rounds + '</div>' +
           '</div>';
-
-        const rowStyle = 'display:flex;align-items:center;justify-content:space-between;' +
-          'padding:' + paddingTop + ' 12px;' +
-          'border-bottom:1px solid rgba(255,255,255,0.05);' +
-          'background:' + bgColor + ';' +
-          'border-left:2px solid ' + accentColor + ';' +
-          'margin-bottom:2px;border-radius:0 6px 6px 0;';
-
+        const rowStyle = 'display:flex;align-items:center;justify-content:space-between;padding:' + paddingTop + ' 12px;border-bottom:1px solid rgba(255,255,255,0.05);background:' + bgColor + ';border-left:2px solid ' + accentColor + ';margin-bottom:2px;border-radius:0 6px 6px 0;';
         const nameStyle = 'font-family:Montserrat,sans-serif;font-weight:' + fontWeight + ';font-size:' + fontSize + ';color:' + nameColor + ';flex:1;letter-spacing:0.02em;';
-
-        return '<div style="' + rowStyle + '">' +
-          '<span style="' + nameStyle + '">' + f.a + '</span>' +
-          midHtml +
-          '<span style="' + nameStyle + 'text-align:right;">' + f.b + '</span>' +
-          '</div>';
+        return '<div style="' + rowStyle + '"><span style="' + nameStyle + '">' + f.a + '</span>' + midHtml + '<span style="' + nameStyle + 'text-align:right;">' + f.b + '</span></div>';
       }
 
       const main = ev.mainCard || [];
@@ -347,9 +384,7 @@
 
       function section(label, fights, type, accent) {
         if (!fights.length) return '';
-        const labelHtml = '<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">' +
-          '<span style="font-size:0.56rem;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:' + accent + ';">' + label + '</span>' +
-          '<div style="flex:1;height:1px;background:rgba(255,255,255,0.06);"></div></div>';
+        const labelHtml = '<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;"><span style="font-size:0.56rem;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:' + accent + ';">' + label + '</span><div style="flex:1;height:1px;background:rgba(255,255,255,0.06);"></div></div>';
         return '<div style="margin-top:24px;">' + labelHtml + fights.map(function(f) { return fightRow(f, type); }).join('') + '</div>';
       }
 
