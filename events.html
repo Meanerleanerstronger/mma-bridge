@@ -63,11 +63,7 @@
     .ev-card.ppv { border-color: rgba(200,168,75,0.2); }
     .ev-card.ppv:hover { box-shadow: 0 14px 44px rgba(200,168,75,0.1); }
 
-    /* Next event — wider landscape spanning full row */
-    .ev-card.next-up {
-      grid-column: span 3;
-      aspect-ratio: 21/8;
-    }
+    
 
     /* Poster fills everything */
     .ev-poster-img {
@@ -145,7 +141,7 @@
       margin-bottom: 5px;
     }
 
-    .ev-card.next-up .ev-name { font-size: 1.6rem; margin-bottom: 8px; }
+    
     .ev-card.ppv .ev-name { color: #f0d580; }
 
     .ev-sub {
@@ -157,12 +153,12 @@
 
     @media (max-width: 900px) {
       .ev-grid { grid-template-columns: repeat(2, 1fr); }
-      .ev-card.next-up { grid-column: span 2; aspect-ratio: 16/7; }
+      
     }
 
     @media (max-width: 580px) {
       .ev-grid { grid-template-columns: 1fr; }
-      .ev-card.next-up { grid-column: span 1; aspect-ratio: 3/4; }
+      
       .ev-page { padding: 24px 16px 60px; }
     }
   </style>
@@ -234,13 +230,13 @@
           .replace('UFC Freedom ', 'Freedom ');
 
         const card = document.createElement('div');
-        card.className = 'ev-card' + (isPPV ? ' ppv' : '') + (isFirst ? ' next-up' : '');
+        card.className = 'ev-card' + (isPPV ? ' ppv' : '');
 
         card.innerHTML = `
           <div class="ev-poster-img" style="background-image:url('${e.poster}');"></div>
           <div class="ev-gradient"></div>
           <span class="ev-badge ${isPPV ? 'ppv-b' : 'fn'}">${isPPV ? '⚡ PPV' : '🥊 Fight Night'}</span>
-          ${isFirst ? '<span class="ev-badge next">Next Up</span>' : ''}
+          
           <div class="ev-info">
             <div class="ev-name">${shortName}</div>
             <div class="ev-sub">${e.date} &nbsp;·&nbsp; ${e.location}</div>
