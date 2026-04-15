@@ -2935,6 +2935,266 @@
     "earlyPrelims": []
   },
   {
+    "id": "ufc-fight-night-sterling-vs-zalal",
+    "name": "UFC Fight Night: Sterling vs. Zalal",
+    "type": "FIGHT NIGHT",
+    "date": "Sat, Apr 25, 2026",
+    "isoDate": "2026-04-25",
+    "location": "Las Vegas, NV",
+    "venue": "Meta APEX",
+    "poster": "images/Sterling-fn.jpeg",
+    "status": "upcoming",
+    "startTime": "22:00",
+    "mainCard": [
+      {
+        "a": "Aljamain Sterling",
+        "b": "Youssef Zalal",
+        "weight": "Featherweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "main"
+      },
+      {
+        "a": "Rafa Garcia",
+        "b": "Alexander Hernandez",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "comain"
+      },
+      {
+        "a": "Davey Grant",
+        "b": "Adrian Martinetti",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": ""
+      },
+      {
+        "a": "Montel Jackson",
+        "b": "Raoni Barcelos",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": ""
+      },
+      {
+        "a": "Norma Dumont",
+        "b": "Joselyne Edwards",
+        "weight": "Women's Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": ""
+      },
+      {
+        "a": "Marcus Buchecha",
+        "b": "Ryan Spann",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "opener"
+      }
+    ],
+    "prelims": [
+      {
+        "a": "Rodolfo Vieira",
+        "b": "Eric McConico",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": ""
+      },
+      {
+        "a": "Sedriques Dumas",
+        "b": "Jackson McVey",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": ""
+      },
+      {
+        "a": "Mayra Bueno Silva",
+        "b": "Michelle Montague",
+        "weight": "Women's Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": ""
+      },
+      {
+        "a": "Jafel Filho",
+        "b": "Lucas Rocha",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": ""
+      },
+      {
+        "a": "Talita Alencar",
+        "b": "Julia Polastri",
+        "weight": "Women's Strawweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": ""
+      },
+      {
+        "a": "Max Griffin",
+        "b": "Victor Valenzuela",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": ""
+      }
+    ],
+    "earlyPrelims": []
+  },
+  {
+    "id": "ufc-fight-night-della-maddalena-vs-prates",
+    "name": "UFC Fight Night: Della Maddalena vs. Prates",
+    "type": "FIGHT NIGHT",
+    "date": "Sat, May 2, 2026",
+    "isoDate": "2026-05-02",
+    "location": "Perth, Australia",
+    "venue": "RAC Arena",
+    "poster": "images/JDM-fn.jpeg",
+    "status": "upcoming",
+    "startTime": "07:00",
+    "mainCard": [
+      {
+        "a": "Jack Della Maddalena",
+        "b": "Carlos Prates",
+        "weight": "Welterweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "main"
+      },
+      {
+        "a": "Beneil Dariush",
+        "b": "Quillan Salkilld",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "comain"
+      },
+      {
+        "a": "Tai Tuivasa",
+        "b": "Sean Sharaf",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": ""
+      },
+      {
+        "a": "Tim Elliott",
+        "b": "Steve Erceg",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": ""
+      },
+      {
+        "a": "Jacob Malkoun",
+        "b": "Gerald Meerschaert",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": ""
+      }
+    ],
+    "prelims": [
+      {
+        "a": "Junior Tafa",
+        "b": "Kevin Christian",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": ""
+      },
+      {
+        "a": "Cam Rowston",
+        "b": "Robert Bryczek",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": ""
+      },
+      {
+        "a": "Shamil Gaziev",
+        "b": "Brando Pericic",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": ""
+      },
+      {
+        "a": "Jonathan Micallef",
+        "b": "Themba Gorimbo",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": ""
+      },
+      {
+        "a": "Kody Steele",
+        "b": "Dom Mar Fan",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": ""
+      },
+      {
+        "a": "Colby Thicknesse",
+        "b": "Vince Morales",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": ""
+      }
+    ],
+    "earlyPrelims": [
+      {
+        "a": "Wes Schultz",
+        "b": "Ben Johnston",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": ""
+      },
+      {
+        "a": "Jack Jenkins",
+        "b": "Marwan Rahiki",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": ""
+      }
+    ]
+  },
+  {
     "id": "ufc-328-chimaev-vs-strickland",
     "name": "UFC 328: Chimaev vs. Strickland",
     "type": "PPV",
