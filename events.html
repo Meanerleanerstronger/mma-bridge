@@ -37,77 +37,47 @@
       color: rgba(255,255,255,0.18);
     }
 
-    /* Card Grid */
+    /* ── Grid ── */
     .ev-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      gap: 16px;
     }
 
+    /* ── Card ── */
     .ev-card {
-      border-radius: 16px;
+      position: relative;
+      border-radius: 14px;
       overflow: hidden;
       cursor: pointer;
-      background: #111;
-      border: 1px solid rgba(255,255,255,0.06);
-      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
-      display: flex;
-      flex-direction: column;
+      aspect-ratio: 3/4;
+      background: #0d0d0d;
+      border: 1px solid rgba(255,255,255,0.07);
+      transition: transform 0.22s, border-color 0.22s, box-shadow 0.22s;
     }
 
     .ev-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(255,255,255,0.14);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+      transform: translateY(-5px);
+      border-color: rgba(255,255,255,0.16);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.6);
     }
 
     .ev-card.ppv {
-      border-color: rgba(200,168,75,0.15);
+      border-color: rgba(200,168,75,0.18);
     }
 
     .ev-card.ppv:hover {
-      border-color: rgba(200,168,75,0.35);
-      box-shadow: 0 12px 40px rgba(200,168,75,0.08);
+      border-color: rgba(200,168,75,0.4);
+      box-shadow: 0 16px 48px rgba(200,168,75,0.1);
     }
 
-    /* Next event spans full row as wide horizontal card */
+    /* Next event — wider, landscape */
     .ev-card.next-up {
       grid-column: span 3;
-      flex-direction: row;
-      height: 280px;
+      aspect-ratio: 16/6;
     }
 
-    .ev-card.next-up .ev-poster {
-      width: 420px;
-      padding-top: 0;
-      flex-shrink: 0;
-    }
-
-    .ev-card.next-up .ev-info {
-      padding: 36px 48px;
-      justify-content: center;
-      gap: 14px;
-    }
-
-    .ev-card.next-up .ev-name {
-      font-size: 2.2rem;
-    }
-
-    .ev-card.next-up .ev-days-num {
-      font-size: 2.8rem;
-      color: rgba(255,255,255,0.55);
-    }
-
-    /* Poster */
-    .ev-poster {
-      position: relative;
-      width: 100%;
-      padding-top: 65%;
-      overflow: hidden;
-      background: #0a0a0a;
-      flex-shrink: 0;
-    }
-
+    /* ── Poster fills entire card ── */
     .ev-poster-img {
       position: absolute;
       inset: 0;
@@ -121,26 +91,45 @@
       transform: scale(1.04);
     }
 
-    .ev-poster-overlay {
+    /* Gradient overlay — info lives at bottom */
+    .ev-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.55) 100%);
+      background: linear-gradient(
+        to bottom,
+        transparent 30%,
+        rgba(0,0,0,0.5) 60%,
+        rgba(0,0,0,0.92) 100%
+      );
     }
 
-    .ev-card.next-up .ev-poster-overlay {
-      background: linear-gradient(to right, transparent 60%, #111 100%);
+    .ev-card.next-up .ev-overlay {
+      background: linear-gradient(
+        to right,
+        transparent 35%,
+        rgba(0,0,0,0.75) 65%,
+        rgba(0,0,0,0.95) 100%
+      );
     }
 
+    /* Badge top-left */
     .ev-badge {
       position: absolute;
-      top: 12px;
-      left: 12px;
-      font-size: 0.48rem;
+      top: 14px;
+      left: 14px;
+      font-size: 0.46rem;
       font-weight: 800;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       padding: 4px 9px;
       border-radius: 4px;
+      z-index: 2;
+    }
+
+    .ev-badge.fn {
+      background: rgba(0,229,255,0.15);
+      color: #00e5ff;
+      border: 1px solid rgba(0,229,255,0.25);
     }
 
     .ev-badge.ppv {
@@ -149,110 +138,117 @@
       border: 1px solid rgba(200,168,75,0.3);
     }
 
-    .ev-badge.fn {
-      background: rgba(0,229,255,0.12);
-      color: #00e5ff;
-      border: 1px solid rgba(0,229,255,0.2);
-    }
-
     .ev-badge.next {
       left: auto;
-      right: 12px;
+      right: 14px;
       background: #00e5ff;
       color: #000;
     }
 
-    /* Info */
+    /* Info overlaid at bottom */
     .ev-info {
-      padding: 18px 20px 20px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 20px 18px 18px;
+      z-index: 2;
+    }
+
+    .ev-card.next-up .ev-info {
+      top: 0;
+      left: auto;
+      width: 52%;
       display: flex;
       flex-direction: column;
-      gap: 7px;
-      flex: 1;
+      justify-content: center;
+      padding: 32px 48px;
     }
 
     .ev-location {
-      font-size: 0.54rem;
+      font-size: 0.5rem;
       font-weight: 700;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.22);
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 6px;
     }
 
     .ev-name {
       font-family: 'Montserrat', sans-serif;
-      font-size: 1.08rem;
+      font-size: 1.1rem;
       font-weight: 900;
       color: #fff;
       text-transform: uppercase;
       letter-spacing: 0.02em;
       line-height: 1.2;
+      margin-bottom: 10px;
     }
 
     .ev-card.ppv .ev-name { font-size: 1.2rem; }
 
-    .ev-venue {
-      font-size: 0.58rem;
-      color: rgba(255,255,255,0.18);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+    .ev-card.next-up .ev-name {
+      font-size: 2rem;
+      margin-bottom: 12px;
     }
 
     .ev-meta-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: auto;
-      padding-top: 12px;
-      border-top: 1px solid rgba(255,255,255,0.05);
     }
 
     .ev-date {
-      font-size: 0.63rem;
-      color: rgba(255,255,255,0.28);
+      font-size: 0.6rem;
+      color: rgba(255,255,255,0.35);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    .ev-venue {
+      font-size: 0.55rem;
+      color: rgba(255,255,255,0.22);
       text-transform: uppercase;
       letter-spacing: 0.06em;
+      margin-bottom: 8px;
     }
 
     .ev-days {
       display: flex;
       align-items: baseline;
-      gap: 4px;
+      gap: 3px;
     }
 
     .ev-days-num {
       font-family: 'Montserrat', sans-serif;
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       font-weight: 900;
       line-height: 1;
-      color: rgba(255,255,255,0.13);
+      color: rgba(255,255,255,0.18);
     }
 
-    .ev-card.ppv .ev-days-num { color: rgba(200,168,75,0.4); }
+    .ev-card.ppv .ev-days-num { color: rgba(200,168,75,0.5); }
+    .ev-card.next-up .ev-days-num { font-size: 2.4rem; color: rgba(255,255,255,0.55); }
 
     .ev-days-label {
-      font-size: 0.46rem;
+      font-size: 0.44rem;
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.13);
+      color: rgba(255,255,255,0.2);
     }
-
-    body.light-mode { background: #f0f0f0; }
-    body.light-mode .ev-card { background: #fff; border-color: rgba(0,0,0,0.07); }
-    body.light-mode .ev-name { color: #111; }
 
     @media (max-width: 900px) {
       .ev-grid { grid-template-columns: repeat(2, 1fr); }
-      .ev-card.next-up { grid-column: span 2; height: 220px; }
-      .ev-card.next-up .ev-poster { width: 280px; }
-      .ev-card.next-up .ev-name { font-size: 1.5rem; }
+      .ev-card.next-up { grid-column: span 2; aspect-ratio: 16/7; }
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 580px) {
       .ev-grid { grid-template-columns: 1fr; }
-      .ev-card.next-up { grid-column: span 1; flex-direction: column; height: auto; }
-      .ev-card.next-up .ev-poster { width: 100%; padding-top: 65%; }
+      .ev-card.next-up { grid-column: span 1; aspect-ratio: 3/4; }
+      .ev-card.next-up .ev-overlay { background: linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.92) 100%); }
+      .ev-card.next-up .ev-info { top: auto; left: 0; width: 100%; padding: 20px 18px 18px; justify-content: flex-end; }
+      .ev-card.next-up .ev-name { font-size: 1.4rem; }
       .ev-page { padding: 24px 16px 60px; }
     }
   </style>
@@ -290,7 +286,7 @@
     <div class="ev-grid" id="ev-grid"></div>
   </div>
 
-  <!-- Fighter Drawer -->
+  <!-- Drawer -->
   <div id="fightDrawer" class="drawer" aria-hidden="true">
     <div class="drawer-backdrop" id="drawerClose"></div>
     <aside class="drawer-panel">
@@ -328,12 +324,10 @@
         card.className = 'ev-card' + (isPPV ? ' ppv' : '') + (isFirst ? ' next-up' : '');
 
         card.innerHTML = `
-          <div class="ev-poster">
-            <div class="ev-poster-img" style="background-image:url('${e.poster}');"></div>
-            <div class="ev-poster-overlay"></div>
-            <span class="ev-badge ${isPPV ? 'ppv' : 'fn'}">${isPPV ? '⚡ PPV' : '🥊 Fight Night'}</span>
-            ${isFirst ? '<span class="ev-badge next">Next Up</span>' : ''}
-          </div>
+          <div class="ev-poster-img" style="background-image:url('${e.poster}');"></div>
+          <div class="ev-overlay"></div>
+          <span class="ev-badge ${isPPV ? 'ppv' : 'fn'}">${isPPV ? '⚡ PPV' : '🥊 Fight Night'}</span>
+          ${isFirst ? '<span class="ev-badge next">Next Up</span>' : ''}
           <div class="ev-info">
             <div class="ev-location">${e.location}</div>
             <div class="ev-name">${shortName}</div>
