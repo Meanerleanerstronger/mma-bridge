@@ -6,195 +6,413 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MMA Bridge | Upcoming Events</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+
   <style>
     body { background: #080808; }
 
+    /* ── PAGE ── */
     .ev-page {
-      max-width: 1200px;
+      max-width: 960px;
       margin: 0 auto;
-      padding: 48px 32px 100px;
+      padding: 56px 32px 120px;
     }
 
-    .ev-header {
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column; gap: 6px;
-      margin-bottom: 44px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+    /* ── HERO ── */
+    .ev-hero {
       text-align: center;
+      margin-bottom: 56px;
     }
-
-    .ev-header-title {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.1rem; font-weight: 900;
-      letter-spacing: 0.22em; text-transform: uppercase;
-      color: #fff;
-    }
-
-    .ev-header-sub {
-      font-size: 0.6rem; font-weight: 600;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      color: rgba(255,255,255,0.25);
-    }
-
-    /* Grid */
-    .ev-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      justify-content: center;
-    }
-
-    /* Card — same size as reviews PPV card */
-    .ev-card {
-      flex-shrink: 0;
-      cursor: pointer;
-      position: relative;
-      border-radius: 14px;
-      overflow: hidden;
-      width: 220px;
-      height: 290px;
-      background: #141414;
-      border: 1px solid rgba(255,255,255,0.07);
-      transition: transform 0.25s cubic-bezier(.22,1,.36,1), border-color 0.18s, box-shadow 0.25s;
-    }
-
-    .ev-card:hover {
-      transform: translateY(-8px) scale(1.025);
-      border-color: rgba(200,168,75,0.4);
-      box-shadow: 0 24px 56px rgba(0,0,0,0.7), 0 0 0 1px rgba(200,168,75,0.1);
-    }
-
-    .ev-card.fn:hover {
-      border-color: rgba(0,229,255,0.4);
-      box-shadow: 0 24px 56px rgba(0,0,0,0.7), 0 0 0 1px rgba(0,229,255,0.1);
-    }
-
-    /* Full bleed poster */
-    .ev-poster {
-      position: absolute;
-      inset: 0;
-      width: 100%; height: 100%;
-      background-size: cover;
-      background-position: center top;
-      background-repeat: no-repeat;
-      transition: transform 0.4s cubic-bezier(.22,1,.36,1);
-    }
-
-    .ev-card:hover .ev-poster { transform: scale(1.07); }
-
-    /* Gold gradient for PPV, cyan for FN */
-    .ev-gradient {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to top,
-        rgba(0,0,0,0.96) 0%,
-        rgba(0,0,0,0.6) 38%,
-        rgba(0,0,0,0.08) 65%,
-        transparent 100%
-      );
-      z-index: 1;
-    }
-
-    /* Text at bottom */
-    .ev-info {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 14px 16px 18px;
-      z-index: 2;
-    }
-
-    .ev-name {
+    .ev-hero h1 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 900;
-      font-size: 1rem;
+      font-size: clamp(2rem, 5vw, 3.4rem);
       text-transform: uppercase;
-      letter-spacing: 0.03em;
-      color: #fff;
-      line-height: 1.2;
-      margin-bottom: 5px;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.9);
-    }
-
-    .ev-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.65rem;
-      color: rgba(255,255,255,0.5);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      text-shadow: 0 1px 6px rgba(0,0,0,0.9);
-    }
-
-    /* Badge top-left */
-    .ev-badge {
-      position: absolute;
-      top: 12px; left: 12px;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      font-size: 0.48rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      padding: 4px 8px;
-      border-radius: 4px;
-      backdrop-filter: blur(8px);
-      z-index: 3;
-    }
-
-    .ev-badge.ppv-b {
-      background: rgba(0,0,0,0.65);
-      border: 1px solid rgba(200,168,75,0.5);
-      color: #c8a84b;
-    }
-
-    .ev-badge.fn-b {
-      background: rgba(0,0,0,0.65);
-      border: 1px solid rgba(0,229,255,0.35);
-      color: #00e5ff;
-    }
-
-    /* Days badge top-right */
-    .ev-days {
-      position: absolute;
-      top: 12px; right: 12px;
-      background: rgba(0,0,0,0.72);
-      border: 1px solid rgba(255,255,255,0.12);
-      color: rgba(255,255,255,0.7);
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      font-size: 0.55rem;
-      padding: 4px 8px;
-      border-radius: 4px;
-      backdrop-filter: blur(6px);
-      z-index: 3;
       letter-spacing: 0.06em;
+      color: #fff;
+      margin: 0 0 8px;
+    }
+    .ev-hero h1 span { color: cyan; }
+    .ev-hero p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.25);
+      margin: 0;
     }
 
-    /* Gold bottom glow on hover for PPV */
-    .ev-card::after {
+    /* ── SECTION HEADER ── */
+    .ev-section { margin-bottom: 52px; }
+    .ev-section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .ev-section-accent {
+      width: 3px; height: 16px;
+      border-radius: 2px; flex-shrink: 0;
+    }
+    .ev-section-accent.ppv { background: #c8a84b; }
+    .ev-section-accent.fn  { background: cyan; }
+    .ev-section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+    }
+    .ev-section-count {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.18);
+      margin-left: auto;
+    }
+
+
+    /* ── EVENT LABEL ── */
+    .duel-event-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 22px 16px 25px;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      background: rgba(255,255,255,0.025);
+    }
+    .duel-card.ppv .duel-event-label { background: rgba(200,168,75,0.06); border-bottom-color: rgba(200,168,75,0.15); }
+    .duel-card.fn  .duel-event-label { background: rgba(0,255,255,0.03); border-bottom-color: rgba(0,255,255,0.1); }
+    .duel-event-label-text {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1.6rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #fff;
+      line-height: 1;
+    }
+    .duel-card.ppv .duel-event-label-text { color: #c8a84b; }
+    .duel-card.fn  .duel-event-label-text { color: #fff; }
+    .duel-event-label-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 3px;
+      flex-shrink: 0;
+    }
+    .duel-event-label-venue {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.3);
+      text-align: right;
+    }
+    .duel-event-label-days {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.2);
+    }
+    .duel-event-label-days.soon { color: cyan; }
+    .duel-event-label-days.today { color: #c8a84b; }
+
+    /* ── DUEL CARDS LIST ── */
+    .duel-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* ── DUEL CARD ── */
+    .duel-card {
+      position: relative;
+      background: #0d0d0d;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .duel-card:hover {
+      transform: translateX(5px);
+      box-shadow: -5px 0 32px rgba(0,0,0,0.5);
+    }
+    .duel-card.fn:hover  { border-color: rgba(0,255,255,0.2); }
+    .duel-card.ppv:hover { border-color: rgba(200,168,75,0.25); }
+
+    /* Left accent bar */
+    .duel-bar {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+    }
+    .duel-card.fn  .duel-bar { background: linear-gradient(to bottom, cyan, rgba(0,255,255,0.1)); }
+    .duel-card.ppv .duel-bar { background: linear-gradient(to bottom, #c8a84b, rgba(200,168,75,0.1)); }
+
+    /* Title fight gold top border */
+    .duel-card.title-fight::before {
       content: '';
       position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, #c8a84b, transparent);
-      opacity: 0;
-      transition: opacity 0.2s;
-      z-index: 4;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #c8a84b 30%, #c8a84b 70%, transparent);
     }
 
-    .ev-card.fn::after {
-      background: linear-gradient(90deg, transparent, #00e5ff, transparent);
+    /* ── MAIN MATCHUP ROW ── */
+    .duel-main {
+      display: flex;
+      align-items: stretch;
+      padding-left: 3px;
     }
 
-    .ev-card:hover::after { opacity: 1; }
+    .duel-fighter {
+      flex: 1;
+      padding: 22px 22px 16px;
+      min-width: 0;
+    }
+    .duel-fighter.right {
+      text-align: right;
+    }
 
-    @media (max-width: 680px) {
-      .ev-card { width: 160px; height: 210px; }
-      .ev-name { font-size: 0.72rem; }
-      .ev-page { padding: 24px 16px 60px; }
+    .duel-fname {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: #fff;
+      line-height: 1.05;
+      margin-bottom: 6px;
+    }
+    .duel-card.ppv .duel-fname { font-size: 1.7rem; }
+
+    .duel-record {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.04em;
+    }
+
+    /* Center divider */
+    .duel-center {
+      flex-shrink: 0;
+      width: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 0;
+      border-left: 1px solid rgba(255,255,255,0.04);
+      border-right: 1px solid rgba(255,255,255,0.04);
+      background: rgba(255,255,255,0.01);
+      gap: 5px;
+    }
+
+    .duel-vs {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      color: rgba(255,255,255,0.12);
+    }
+    .duel-card.fn:hover  .duel-vs { color: rgba(0,255,255,0.3); }
+    .duel-card.ppv:hover .duel-vs { color: rgba(200,168,75,0.4); }
+
+    .duel-weight {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.6rem;
+      color: rgba(255,255,255,0.12);
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    .duel-title-icon {
+      font-size: 0.75rem;
+    }
+
+    /* ── FOOTER ROW ── */
+    .duel-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 22px 14px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      padding-left: 25px;
+    }
+
+    .duel-footer-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .duel-badge {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 0.46rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+    .duel-card.fn  .duel-badge { background: rgba(0,255,255,0.07);    border: 1px solid rgba(0,255,255,0.2);    color: cyan; }
+    .duel-card.ppv .duel-badge { background: rgba(200,168,75,0.07);   border: 1px solid rgba(200,168,75,0.25);  color: #c8a84b; }
+
+    .duel-event-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .duel-footer-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .duel-location {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.18);
+      text-align: right;
+    }
+
+    .duel-days {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.2);
+      white-space: nowrap;
+    }
+    .duel-days.soon { color: cyan; }
+    .duel-days.today { color: #c8a84b; }
+
+    /* ── ALSO ON CARD / PRELIM PEEK ── */
+    .duel-also {
+      padding: 8px 25px 12px;
+      display: flex;
+      gap: 16px;
+      border-top: 1px solid rgba(255,255,255,0.03);
+    }
+    .duel-also-item {
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.15);
+      font-family: 'Inter', sans-serif;
+    }
+    .duel-also-item:first-child { color: rgba(255,255,255,0.22); }
+
+    /* ── TITLE FIGHT LABEL ── */
+    .title-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.46rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #c8a84b;
+      margin-bottom: 5px;
+    }
+
+    /* ── DRAWER ── */
+    .dr-event-header {
+      padding-bottom: 20px;
+      margin-bottom: 4px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .dr-event-name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1.05rem;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 5px;
+    }
+    .dr-event-meta {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.3);
+      font-family: 'Inter', sans-serif;
+    }
+    .dr-section { margin-top: 22px; }
+    .dr-section-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .dr-section-label::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.06); }
+    .dr-fight-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      border-left: 2px solid rgba(255,255,255,0.05);
+      margin-bottom: 2px;
+      border-radius: 0 6px 6px 0;
+      transition: background 0.15s;
+    }
+    .dr-fight-row:hover { background: rgba(255,255,255,0.02); }
+    .dr-fight-row.is-main   { border-left-color: #c8a84b; background: rgba(200,168,75,0.025); }
+    .dr-fight-row.is-comain { border-left-color: rgba(0,229,255,0.5); background: rgba(0,229,255,0.015); }
+    .dr-fighter {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      color: #fff;
+      flex: 1;
+    }
+    .dr-mid {
+      text-align: center;
+      padding: 0 12px;
+      flex-shrink: 0;
+    }
+    .dr-title-badge {
+      font-size: 0.46rem; font-weight: 800;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: #c8a84b; margin-bottom: 3px;
+    }
+    .dr-weight { font-size: 0.5rem; font-weight: 700; color: rgba(255,255,255,0.18); text-transform: uppercase; letter-spacing: 0.08em; }
+    .dr-rounds { font-size: 0.42rem; font-weight: 600; color: rgba(255,255,255,0.1); text-transform: uppercase; margin-top: 2px; }
+
+    /* ── LIGHT MODE ── */
+    body.light-mode { background: #f2f2f2; }
+    body.light-mode .duel-card { background: #fff; border-color: rgba(0,0,0,0.07); }
+    body.light-mode .duel-card:hover { box-shadow: -5px 0 24px rgba(0,0,0,0.1); }
+    body.light-mode .duel-fname { color: #111; }
+    body.light-mode .duel-record { color: rgba(0,0,0,0.3); }
+    body.light-mode .duel-center { background: rgba(0,0,0,0.015); border-color: rgba(0,0,0,0.05); }
+    body.light-mode .duel-vs { color: rgba(0,0,0,0.1); }
+    body.light-mode .duel-weight { color: rgba(0,0,0,0.2); }
+    body.light-mode .duel-footer { border-color: rgba(0,0,0,0.05); }
+    body.light-mode .duel-event-name { color: rgba(0,0,0,0.4); }
+    body.light-mode .duel-location { color: rgba(0,0,0,0.25); }
+    body.light-mode .duel-days { color: rgba(0,0,0,0.25); }
+    body.light-mode .duel-event-label { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.08); }
+    body.light-mode .duel-card.ppv .duel-event-label { background: rgba(200,168,75,0.08); border-color: rgba(200,168,75,0.2); }
+    body.light-mode .duel-card.fn  .duel-event-label { background: rgba(0,200,220,0.05); border-color: rgba(0,200,220,0.15); }
+    body.light-mode .duel-event-label-text { color: #111; }
+    body.light-mode .duel-card.ppv .duel-event-label-text { color: #8a6a10; }
+    body.light-mode .duel-event-label-venue { color: rgba(0,0,0,0.35); }
+    body.light-mode .duel-event-label-days { color: rgba(0,0,0,0.3); }
+    body.light-mode .duel-also { border-color: rgba(0,0,0,0.04); }
+    body.light-mode .duel-also-item { color: rgba(0,0,0,0.2); }
+    body.light-mode .duel-also-item:first-child { color: rgba(0,0,0,0.35); }
+    body.light-mode .ev-hero h1 { color: #111; }
+    body.light-mode .ev-section-title { color: rgba(0,0,0,0.65); }
+    body.light-mode .ev-section-header { border-color: rgba(0,0,0,0.07); }
+
+    @media (max-width: 640px) {
+      .ev-page { padding: 28px 14px 80px; }
+      .duel-fname { font-size: 1.1rem !important; }
+      .duel-center { width: 58px; }
+      .duel-location { display: none; }
     }
   </style>
 </head>
@@ -224,18 +442,36 @@
   </nav>
 
   <div class="ev-page">
-    <div class="ev-header">
-      <span class="ev-header-title">Upcoming Events</span>
-      <span class="ev-header-sub">Click any event to see the full card</span>
+    <div class="ev-hero">
+      <h1>Upcoming <span>Events</span></h1>
+      <p>Click any card to see the full fight card</p>
     </div>
-    <div class="ev-grid" id="ev-grid"></div>
+
+    <div class="ev-section" id="sectionPPV">
+      <div class="ev-section-header">
+        <div class="ev-section-accent ppv"></div>
+        <div class="ev-section-title">PPV Events</div>
+        <div class="ev-section-count" id="ppvCount"></div>
+      </div>
+      <div class="duel-list" id="listPPV"></div>
+    </div>
+
+    <div class="ev-section" id="sectionFN">
+      <div class="ev-section-header">
+        <div class="ev-section-accent fn"></div>
+        <div class="ev-section-title">Fight Nights</div>
+        <div class="ev-section-count" id="fnCount"></div>
+      </div>
+      <div class="duel-list" id="listFN"></div>
+    </div>
   </div>
 
+  <!-- Drawer -->
   <div id="fightDrawer" class="drawer" aria-hidden="true">
     <div class="drawer-backdrop" id="drawerClose"></div>
     <aside class="drawer-panel">
       <div class="drawer-top">
-        <div class="drawer-title" id="drawerTitle">Fight</div>
+        <div class="drawer-title" id="drawerTitle">Event</div>
         <button class="drawer-x" id="drawerX" aria-label="Close">✕</button>
       </div>
       <div class="drawer-content" id="drawerContent"></div>
@@ -243,97 +479,234 @@
   </div>
 
   <script>
+    function esc(s) {
+      return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+    function slugify(s) {
+      return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/['']/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+    }
     function daysUntil(iso) {
       return Math.max(0, Math.ceil((new Date(iso + 'T00:00:00') - new Date()) / 86400000));
     }
-
-    async function loadEvents() {
-      const res = await fetch('events.json');
-      const all = await res.json();
-      const upcoming = all
-        .filter(e => e.status === 'upcoming')
-        .sort((a, b) => new Date(a.isoDate) - new Date(b.isoDate));
-
-      const grid = document.getElementById('ev-grid');
-
-      upcoming.forEach((e) => {
-        const isPPV = e.type === 'PPV';
-        const days = daysUntil(e.isoDate);
-        const shortName = e.name
-          .replace('UFC Fight Night: ', '')
-          .replace('UFC Freedom ', 'Freedom ');
-
-        const card = document.createElement('div');
-        card.className = 'ev-card' + (isPPV ? '' : ' fn');
-
-        card.innerHTML = `
-          <div class="ev-poster" style="background-image:url('${e.poster}');"></div>
-          <div class="ev-gradient"></div>
-          <span class="ev-badge ${isPPV ? 'ppv-b' : 'fn-b'}">${isPPV ? '⚡ PPV' : '🥊 Fight Night'}</span>
-          <span class="ev-days">${days}d away</span>
-          <div class="ev-info">
-            <div class="ev-name">${shortName}</div>
-            <div class="ev-sub">${e.date} · ${e.location}</div>
-          </div>
-        `;
-
-        card.addEventListener('click', () => openDrawer(e, all));
-        grid.appendChild(card);
-      });
+    function getMainFight(ev) {
+      const mc = ev.mainCard || [];
+      return mc.find(f => f.slot === 'main') || mc[0] || null;
+    }
+    function getCoMain(ev) {
+      const mc = ev.mainCard || [];
+      return mc.find(f => f.slot === 'comain') || null;
+    }
+    function splitName(full) {
+      const parts = (full||'').trim().split(' ');
+      if (parts.length <= 1) return { first: '', last: full };
+      const last = parts.pop();
+      return { first: parts.join(' '), last };
     }
 
-    function openDrawer(ev, all) {
-      const drawer = document.getElementById('fightDrawer');
-      document.getElementById('drawerTitle').textContent = ev.name;
+    let fightersDB = {};
 
-      function fightRow(f, sectionType) {
-        const isMain = f.slot === 'main';
-        const isComain = f.slot === 'comain';
-        const isOpener = f.slot === 'opener';
-        const isPrelimMain = sectionType === 'prelims' && f.slot === 'main';
-        const fontSize = isMain ? '1.4rem' : isComain ? '1.15rem' : isPrelimMain ? '1rem' : isOpener ? '0.82rem' : '0.9rem';
-        const fontWeight = (isMain || isComain || isPrelimMain) ? '900' : '700';
-        const paddingTop = isMain ? '30px' : isComain ? '24px' : isPrelimMain ? '18px' : isOpener ? '12px' : '16px';
-        const nameColor = (isMain || isComain) ? '#fff' : isOpener ? 'rgba(255,255,255,0.45)' : 'rgba(255,255,255,0.8)';
-        const accentColor = isMain ? '#c8a84b' : isComain ? '#00e5ff' : 'rgba(255,255,255,0.08)';
-        const bgColor = isMain ? 'rgba(200,168,75,0.04)' : isComain ? 'rgba(0,229,255,0.03)' : 'transparent';
-        const titleBadge = f.titleFight ? '<div style="font-size:0.5rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#c8a84b;margin-bottom:4px;">&#127942; Title Fight</div>' : '';
-        const midHtml = '<div style="text-align:center;flex-shrink:0;padding:0 16px;">' + titleBadge +
-          '<div style="font-size:0.52rem;font-weight:700;color:rgba(255,255,255,0.22);text-transform:uppercase;letter-spacing:0.1em;">' + f.weight + '</div>' +
-          '<div style="font-size:0.44rem;font-weight:600;color:rgba(255,255,255,0.12);text-transform:uppercase;letter-spacing:0.08em;margin-top:2px;">' + f.rounds + '</div>' +
-          '</div>';
-        const rowStyle = 'display:flex;align-items:center;justify-content:space-between;padding:' + paddingTop + ' 12px;border-bottom:1px solid rgba(255,255,255,0.05);background:' + bgColor + ';border-left:2px solid ' + accentColor + ';margin-bottom:2px;border-radius:0 6px 6px 0;';
-        const nameStyle = 'font-family:Montserrat,sans-serif;font-weight:' + fontWeight + ';font-size:' + fontSize + ';color:' + nameColor + ';flex:1;letter-spacing:0.02em;';
-        return '<div style="' + rowStyle + '"><span style="' + nameStyle + '">' + f.a + '</span>' + midHtml + '<span style="' + nameStyle + 'text-align:right;">' + f.b + '</span></div>';
-      }
+    function getRecord(name) {
+      const slug = slugify(name);
+      return fightersDB[slug]?.record || '';
+    }
 
-      const main = ev.mainCard || [];
+    function buildDuelCard(ev, type) {
+      const isPPV   = type === 'ppv';
+      const cls     = isPPV ? 'ppv' : 'fn';
+      const main    = getMainFight(ev);
+      const coMain  = getCoMain(ev);
+      if (!main) return null;
+
+      const days    = ev.isoDate ? daysUntil(ev.isoDate) : null;
+      const dayLabel = days === null ? '' : days === 0 ? 'TODAY' : days === 1 ? 'TOMORROW' : `${days}d away`;
+      const soon    = days !== null && days <= 7;
+      const isTitle = !!main.titleFight;
+
+      const aName  = splitName(main.a);
+      const bName  = splitName(main.b);
+      const aRec   = getRecord(main.a);
+      const bRec   = getRecord(main.b);
+
+      // Also on card — co-main + prelim count
       const prelims = ev.prelims || [];
-      const early = ev.earlyPrelims || [];
+      const early   = ev.earlyPrelims || [];
+      const totalFights = (ev.mainCard||[]).length + prelims.length + early.length;
 
-      function section(label, fights, type, accent) {
-        if (!fights.length) return '';
-        const labelHtml = '<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;"><span style="font-size:0.56rem;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:' + accent + ';">' + label + '</span><div style="flex:1;height:1px;background:rgba(255,255,255,0.06);"></div></div>';
-        return '<div style="margin-top:24px;">' + labelHtml + fights.map(function(f) { return fightRow(f, type); }).join('') + '</div>';
+      const card = document.createElement('div');
+      card.className = `duel-card ${cls}${isTitle ? ' title-fight' : ''}`;
+
+      // Build short event label — just the event identifier, no fighter names
+      const rawName = ev.name || '';
+      let eventLabel = rawName;
+      // "UFC Fight Night: Burns vs. Malott" -> "Fight Night"  (fighter names already shown in card)
+      if (rawName.includes('UFC Fight Night:')) {
+        // Extract location hint if available
+        const loc = ev.location ? ev.location.split(',')[0] : '';
+        eventLabel = loc ? `Fight Night — ${loc}` : 'UFC Fight Night';
+      } else if (rawName.startsWith('UFC Freedom ')) {
+        // "UFC Freedom 250: Topuria vs. Gaethje" -> "UFC Freedom 250"
+        const match = rawName.match(/UFC Freedom \d+/);
+        eventLabel = match ? match[0] : 'UFC Freedom';
+      } else {
+        // "UFC 328: Chimaev vs. Strickland" -> "UFC 328"
+        const match = rawName.match(/UFC \d+/);
+        eventLabel = match ? match[0] : rawName.split(':')[0].trim();
       }
 
-      document.getElementById('drawerContent').innerHTML =
-        section('Main Card', main, 'main', '#c8a84b') +
-        section('Prelims', prelims, 'prelims', '#00e5ff') +
-        section('Early Prelims', early, 'early', 'rgba(255,255,255,0.25)');
+      card.innerHTML = `
+        <div class="duel-bar"></div>
+        <div class="duel-event-label">
+          <span class="duel-event-label-text">${esc(eventLabel)}</span>
+          <div class="duel-event-label-right">
+            ${dayLabel ? `<span class="duel-event-label-days${soon ? ' soon' : days===0 ? ' today' : ''}">${dayLabel}</span>` : ''}
+            ${ev.venue ? `<span class="duel-event-label-venue">${esc(ev.venue)}</span>` : ev.location ? `<span class="duel-event-label-venue">${esc(ev.location)}</span>` : ''}
+          </div>
+        </div>
+        <div class="duel-main">
+          <div class="duel-fighter">
+            ${isTitle ? `<div class="title-label">🏆 ${esc(main.weight)} Title</div>` : ''}
+            <div class="duel-fname">
+              ${aName.first ? `<span style="font-size:0.6em;font-weight:700;letter-spacing:0.04em;color:rgba(255,255,255,0.45);display:block;margin-bottom:1px;">${esc(aName.first)}</span>` : ''}
+              ${esc(aName.last)}
+            </div>
+            ${aRec ? `<div class="duel-record">${esc(aRec)}</div>` : ''}
+          </div>
+
+          <div class="duel-center">
+            <div class="duel-vs">VS</div>
+            <div class="duel-weight">${esc(main.weight||'')}</div>
+            ${main.rounds ? `<div class="duel-weight" style="margin-top:2px;opacity:0.7;">${esc(main.rounds)}</div>` : ''}
+          </div>
+
+          <div class="duel-fighter right">
+            ${isTitle ? `<div class="title-label" style="text-align:right;">🏆 ${esc(main.weight)} Title</div>` : ''}
+            <div class="duel-fname">
+              ${bName.first ? `<span style="font-size:0.6em;font-weight:700;letter-spacing:0.04em;color:rgba(255,255,255,0.45);display:block;margin-bottom:1px;text-align:right;">${esc(bName.first)}</span>` : ''}
+              ${esc(bName.last)}
+            </div>
+            ${bRec ? `<div class="duel-record">${esc(bRec)}</div>` : ''}
+          </div>
+        </div>
+
+        ${coMain ? `
+        <div class="duel-also">
+          <div class="duel-also-item">Co-Main: ${esc(coMain.a)} vs ${esc(coMain.b)}</div>
+          ${totalFights > 2 ? `<div class="duel-also-item">+${totalFights - 1} more fights</div>` : ''}
+        </div>` : totalFights > 1 ? `
+        <div class="duel-also">
+          <div class="duel-also-item">${totalFights} fights total on the card</div>
+        </div>` : ''}
+
+        <div class="duel-footer">
+          <div class="duel-footer-left">
+            <div class="duel-badge">${isPPV ? 'PPV' : 'Fight Night'}</div>
+            <div class="duel-event-name">${esc(ev.date||'')}</div>
+          </div>
+          <div class="duel-footer-right">
+            <div class="duel-location">${esc(ev.location||'')}</div>
+
+          </div>
+        </div>
+      `;
+
+      card.addEventListener('click', () => openDrawer(ev));
+      return card;
+    }
+
+    function openDrawer(ev) {
+      const drawer = document.getElementById('fightDrawer');
+      document.getElementById('drawerTitle').textContent = ev.name || 'Event';
+
+      function fightRow(f) {
+        const isMain   = f.slot === 'main';
+        const isComain = f.slot === 'comain';
+        const cls = isMain ? 'is-main' : isComain ? 'is-comain' : '';
+        const size = isMain ? '1.25rem' : isComain ? '1rem' : '0.85rem';
+        const col  = (isMain || isComain) ? '#fff' : 'rgba(255,255,255,0.65)';
+        return `
+          <div class="dr-fight-row ${cls}" style="padding:${isMain?'18px':isComain?'14px':'11px'} 12px;">
+            <span class="dr-fighter" style="font-size:${size};color:${col};">${esc(f.a)}</span>
+            <div class="dr-mid">
+              ${f.titleFight ? `<div class="dr-title-badge">🏆 Title</div>` : ''}
+              <div class="dr-weight">${esc(f.weight||'')}</div>
+              <div class="dr-rounds">${esc(f.rounds||'')}</div>
+            </div>
+            <span class="dr-fighter" style="font-size:${size};color:${col};text-align:right;">${esc(f.b)}</span>
+          </div>`;
+      }
+
+      function section(label, fights, color) {
+        if (!fights || !fights.length) return '';
+        return `
+          <div class="dr-section">
+            <div class="dr-section-label" style="color:${color};">${label}</div>
+            ${fights.map(fightRow).join('')}
+          </div>`;
+      }
+
+      document.getElementById('drawerContent').innerHTML = `
+        <div class="dr-event-header">
+          <div class="dr-event-name">${esc(ev.name||'')}</div>
+          <div class="dr-event-meta">${esc(ev.date||'')}${ev.location ? ' · ' + esc(ev.location) : ''}${ev.venue ? ' · ' + esc(ev.venue) : ''}</div>
+        </div>
+        ${section('Main Card',     ev.mainCard,     '#c8a84b')}
+        ${section('Prelims',       ev.prelims,      '#00e5ff')}
+        ${section('Early Prelims', ev.earlyPrelims, 'rgba(255,255,255,0.25)')}
+      `;
 
       drawer.setAttribute('aria-hidden', 'false');
       drawer.classList.add('open');
+      document.body.classList.add('no-scroll');
+    }
+
+    function closeDrawer() {
+      const drawer = document.getElementById('fightDrawer');
+      drawer.setAttribute('aria-hidden', 'true');
+      drawer.classList.remove('open');
+      document.body.classList.remove('no-scroll');
     }
 
     document.getElementById('drawerClose').addEventListener('click', closeDrawer);
     document.getElementById('drawerX').addEventListener('click', closeDrawer);
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
 
-    function closeDrawer() {
-      const drawer = document.getElementById('fightDrawer');
-      drawer.setAttribute('aria-hidden', 'true');
-      drawer.classList.remove('open');
+    async function loadEvents() {
+      const [evRes, fRes] = await Promise.all([
+        fetch('events.json'),
+        fetch('fighters.json').catch(() => ({ json: () => ({}) }))
+      ]);
+      const all = await evRes.json();
+      fightersDB = await fRes.json().catch(() => ({}));
+
+      const upcoming = all
+        .filter(e => e.status === 'upcoming')
+        .sort((a, b) => new Date(a.isoDate) - new Date(b.isoDate));
+
+      const ppv = upcoming.filter(e => e.type === 'PPV');
+      const fn  = upcoming.filter(e => e.type !== 'PPV');
+
+      const listPPV = document.getElementById('listPPV');
+      const listFN  = document.getElementById('listFN');
+
+      if (ppv.length) {
+        ppv.forEach(e => {
+          const card = buildDuelCard(e, 'ppv');
+          if (card) listPPV.appendChild(card);
+        });
+        document.getElementById('ppvCount').textContent = `${ppv.length} event${ppv.length !== 1 ? 's' : ''}`;
+      } else {
+        document.getElementById('sectionPPV').style.display = 'none';
+      }
+
+      if (fn.length) {
+        fn.forEach(e => {
+          const card = buildDuelCard(e, 'fn');
+          if (card) listFN.appendChild(card);
+        });
+        document.getElementById('fnCount').textContent = `${fn.length} event${fn.length !== 1 ? 's' : ''}`;
+      } else {
+        document.getElementById('sectionFN').style.display = 'none';
+      }
     }
 
     loadEvents();
