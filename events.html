@@ -52,7 +52,7 @@
       background: #111;
       border: 1px solid rgba(255,255,255,0.07);
       transition: transform 0.2s, box-shadow 0.2s;
-      aspect-ratio: 3/4;
+      aspect-ratio: 4/4.2;
     }
 
     .ev-card:hover {
@@ -126,29 +126,29 @@
     .ev-info {
       position: absolute;
       bottom: 0; left: 0; right: 0;
-      padding: 16px 18px 18px;
+      padding: 12px 14px 14px;
       z-index: 2;
     }
 
     .ev-name {
       font-family: 'Montserrat', sans-serif;
-      font-size: 1rem;
+      font-size: 0.82rem;
       font-weight: 900;
       color: #fff;
       text-transform: uppercase;
       letter-spacing: 0.02em;
       line-height: 1.2;
-      margin-bottom: 5px;
+      margin-bottom: 4px;
     }
 
     
     .ev-card.ppv .ev-name { color: #f0d580; }
 
     .ev-sub {
-      font-size: 0.56rem;
-      color: rgba(255,255,255,0.45);
+      font-size: 0.48rem;
+      color: rgba(255,255,255,0.4);
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.07em;
     }
 
     @media (max-width: 900px) {
@@ -233,7 +233,7 @@
         card.className = 'ev-card' + (isPPV ? ' ppv' : '');
 
         card.innerHTML = `
-          <div class="ev-poster-img" style="background-image:url('${e.poster}');"></div>
+          <div class="ev-poster-img" style="background-image:url('${e.poster}'); ${e.id === 'ufc-fight-night-sterling-vs-zalal' ? 'background-position: center 20%;' : 'background-position: center top;'}"></div>
           <div class="ev-gradient"></div>
           <span class="ev-badge ${isPPV ? 'ppv-b' : 'fn'}">${isPPV ? '⚡ PPV' : '🥊 Fight Night'}</span>
           
