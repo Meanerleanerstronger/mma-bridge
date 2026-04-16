@@ -2851,7 +2851,7 @@
     "isoDate": "2026-04-18",
     "location": "Winnipeg, Canada",
     "venue": "Canada Life Centre",
-    "poster": "images/Burns fn.jpeg",
+    "poster": "images/Burns fn.jpeg?v=2",
     "status": "upcoming",
     "startTime": "22:00",
     "mainCard": [
@@ -2942,7 +2942,7 @@
     "isoDate": "2026-04-25",
     "location": "Las Vegas, NV",
     "venue": "Meta APEX",
-    "poster": "images/Sterling-fn.jpeg",
+    "poster": "images/Sterling-fn.jpeg?v=2",
     "status": "upcoming",
     "startTime": "22:00",
     "mainCard": [
@@ -3407,30 +3407,5 @@
     "prelims": [],
     "earlyPrelims": [],
     "startTime": "22:00"
-  },
-  {
-    "id": "ufc-fight-night-baku",
-    "name": "UFC Fight Night: Baku",
-    "type": "FIGHT NIGHT",
-    "date": "Sat, Jun 27, 2026",
-    "isoDate": "2026-06-27",
-    "location": "Baku, Azerbaijan",
-    "venue": "Baku Crystal Hall",
-    "poster": "",
-    "status": "upcoming",
-    "mainCard": [
-      {
-        "a": "Brunno Ferreira",
-        "b": "TBA",
-        "weight": "Middleweight",
-        "rounds": "5 Rds",
-        "titleFight": false,
-        "ranked": true,
-        "slot": "main"
-      }
-    ],
-    "prelims": [],
-    "earlyPrelims": [],
-    "startTime": "14:00"
   }
 ]
