@@ -106,7 +106,7 @@
     .duel-event-label-venue {
       font-family: 'Inter', sans-serif;
       font-size: 0.72rem;
-      color: rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.6);
       text-align: right;
     }
     .duel-event-label-days {
@@ -447,22 +447,13 @@
       <p>Click any card to see the full fight card</p>
     </div>
 
-    <div class="ev-section" id="sectionPPV">
-      <div class="ev-section-header">
-        <div class="ev-section-accent ppv"></div>
-        <div class="ev-section-title">PPV Events</div>
-        <div class="ev-section-count" id="ppvCount"></div>
-      </div>
-      <div class="duel-list" id="listPPV"></div>
-    </div>
-
-    <div class="ev-section" id="sectionFN">
+    <div class="ev-section" id="sectionAll">
       <div class="ev-section-header">
         <div class="ev-section-accent fn"></div>
-        <div class="ev-section-title">Fight Nights</div>
-        <div class="ev-section-count" id="fnCount"></div>
+        <div class="ev-section-title">All Events</div>
+        <div class="ev-section-count" id="evCount"></div>
       </div>
-      <div class="duel-list" id="listFN"></div>
+      <div class="duel-list" id="listAll"></div>
     </div>
   </div>
 
@@ -682,31 +673,14 @@
         .filter(e => e.status === 'upcoming')
         .sort((a, b) => new Date(a.isoDate) - new Date(b.isoDate));
 
-      const ppv = upcoming.filter(e => e.type === 'PPV');
-      const fn  = upcoming.filter(e => e.type !== 'PPV');
-
-      const listPPV = document.getElementById('listPPV');
-      const listFN  = document.getElementById('listFN');
-
-      if (ppv.length) {
-        ppv.forEach(e => {
-          const card = buildDuelCard(e, 'ppv');
-          if (card) listPPV.appendChild(card);
-        });
-        document.getElementById('ppvCount').textContent = `${ppv.length} event${ppv.length !== 1 ? 's' : ''}`;
-      } else {
-        document.getElementById('sectionPPV').style.display = 'none';
-      }
-
-      if (fn.length) {
-        fn.forEach(e => {
-          const card = buildDuelCard(e, 'fn');
-          if (card) listFN.appendChild(card);
-        });
-        document.getElementById('fnCount').textContent = `${fn.length} event${fn.length !== 1 ? 's' : ''}`;
-      } else {
-        document.getElementById('sectionFN').style.display = 'none';
-      }
+      // Single chronological list — no PPV/FN split
+      const list = document.getElementById('listAll');
+      upcoming.forEach(e => {
+        const type = e.type === 'PPV' ? 'ppv' : 'fn';
+        const card = buildDuelCard(e, type);
+        if (card) list.appendChild(card);
+      });
+      document.getElementById('evCount').textContent = `${upcoming.length} event${upcoming.length !== 1 ? 's' : ''}`;
     }
 
     loadEvents();

@@ -415,7 +415,7 @@
       },
       {
         "a": "Ryan Spann",
-        "b": "Łukasz Brzeski",
+        "b": "\u0141ukasz Brzeski",
         "weight": "Light Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
@@ -527,13 +527,13 @@
         "time": "2:01"
       },
       {
-        "a": "Michał Oleksiejczuk",
+        "a": "Micha\u0142 Oleksiejczuk",
         "b": "Gerald Meerschaert",
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
-        "winner": "Michał Oleksiejczuk",
+        "winner": "Micha\u0142 Oleksiejczuk",
         "method": "TKO",
         "round": 1,
         "time": "2:15"
@@ -615,14 +615,14 @@
         "time": "5:00"
       },
       {
-        "a": "Benoît Saint-Denis",
+        "a": "Beno\u00eet Saint-Denis",
         "b": "Mauricio Ruffy",
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
         "slot": "comain",
-        "winner": "Benoît Saint-Denis",
+        "winner": "Beno\u00eet Saint-Denis",
         "method": "KO",
         "round": 1,
         "time": "2:15"
@@ -856,13 +856,13 @@
         "time": "5:00"
       },
       {
-        "a": "Jiří Procházka",
+        "a": "Ji\u0159\u00ed Proch\u00e1zka",
         "b": "Khalil Rountree Jr.",
         "weight": "Light Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
-        "winner": "Jiří Procházka",
+        "winner": "Ji\u0159\u00ed Proch\u00e1zka",
         "method": "KO",
         "round": 3,
         "time": "3:04"
@@ -1032,7 +1032,7 @@
       },
       {
         "a": "Azamat Murzakanov",
-        "b": "Aleksandar Rakić",
+        "b": "Aleksandar Raki\u0107",
         "weight": "Light Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
@@ -1069,13 +1069,13 @@
         "time": "5:00"
       },
       {
-        "a": "Ľudovít Klein",
-        "b": "Mateusz Rębecki",
+        "a": "\u013dudov\u00edt Klein",
+        "b": "Mateusz R\u0119becki",
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
-        "winner": "Ľudovít Klein",
+        "winner": "\u013dudov\u00edt Klein",
         "method": "MD",
         "round": 3,
         "time": "5:00"
@@ -1302,7 +1302,7 @@
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
-        "winner": "Benoît Saint-Denis",
+        "winner": "Beno\u00eet Saint-Denis",
         "method": "KO",
         "round": 2,
         "time": "2:10"
@@ -1447,13 +1447,13 @@
         "time": "4:55"
       },
       {
-        "a": "Jan Błachowicz",
+        "a": "Jan B\u0142achowicz",
         "b": "Bogdan Guskov",
         "weight": "Light Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
-        "winner": "Jan Błachowicz",
+        "winner": "Jan B\u0142achowicz",
         "method": "Draw",
         "round": 3,
         "time": "5:00"
@@ -1598,13 +1598,13 @@
         "time": "1:44"
       },
       {
-        "a": "Natália Silva",
+        "a": "Nat\u00e1lia Silva",
         "b": "Rose Namajunas",
         "weight": "Women's Flyweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
-        "winner": "Natália Silva",
+        "winner": "Nat\u00e1lia Silva",
         "method": "UD",
         "round": 3,
         "time": "5:00"
@@ -1712,14 +1712,14 @@
         "time": "5:00"
       },
       {
-        "a": "Benoît Saint-Denis",
+        "a": "Beno\u00eet Saint-Denis",
         "b": "Dan Hooker",
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
         "slot": "comain",
-        "winner": "Benoît Saint-Denis",
+        "winner": "Beno\u00eet Saint-Denis",
         "method": "TKO",
         "round": 2,
         "time": "3:45"
@@ -2671,7 +2671,7 @@
   },
   {
     "id": "ufc-327-prochazka-vs-ulberg",
-    "name": "UFC 327: Procházka vs. Ulberg",
+    "name": "UFC 327: Proch\u00e1zka vs. Ulberg",
     "type": "PPV",
     "date": "Sat, Apr 11, 2026",
     "isoDate": "2026-04-11",
@@ -2682,7 +2682,7 @@
     "mainCard": [
       {
         "a": "Carlos Ulberg",
-        "b": "Jiří Procházka",
+        "b": "Ji\u0159\u00ed Proch\u00e1zka",
         "weight": "Light Heavyweight",
         "rounds": "5 Rds",
         "titleFight": true,
@@ -2891,7 +2891,7 @@
       },
       {
         "a": "Choi Dong-hun",
-        "b": "André Lima",
+        "b": "Andr\u00e9 Lima",
         "weight": "Flyweight",
         "rounds": "3 Rds",
         "titleFight": false,
@@ -2900,7 +2900,7 @@
     ],
     "prelims": [
       {
-        "a": "John Castañeda",
+        "a": "John Casta\u00f1eda",
         "b": "Mark Vologdin",
         "weight": "Bantamweight",
         "rounds": "3 Rds",
@@ -3317,7 +3317,7 @@
     "mainCard": [
       {
         "a": "Arnold Allen",
-        "b": "Paulo Costa",
+        "b": "Melquizael Costa",
         "weight": "Featherweight",
         "rounds": "5 Rds",
         "titleFight": false,
