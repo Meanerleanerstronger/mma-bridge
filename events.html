@@ -12,95 +12,93 @@
     body { background: #0d0d0d; }
 
     .ev-page {
-      max-width: 1300px;
+      max-width: 1180px;
       margin: 0 auto;
       padding: 48px 32px 100px;
     }
 
     .ev-header {
-      display: flex; align-items: baseline; gap: 22px;
-      margin-bottom: 32px;
-      padding-bottom: 16px;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 6px;
+      margin-bottom: 36px;
+      padding-bottom: 20px;
       border-bottom: 1px solid rgba(255,255,255,0.06);
+      text-align: center;
     }
 
     .ev-header-title {
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.72rem; font-weight: 800;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: rgba(255,255,255,0.85);
+      font-size: 1.1rem; font-weight: 900;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: #fff;
     }
 
     .ev-header-sub {
-      font-size: 0.62rem; font-weight: 600;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: rgba(255,255,255,0.18);
+      font-size: 0.6rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
     }
 
+    /* 4-col grid, portrait cards */
     .ev-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
     }
 
-    /* Card — full poster, text at bottom inside */
+    /* Card — portrait shape, image top, info below */
     .ev-card {
-      position: relative;
-      border-radius: 14px;
+      border-radius: 12px;
       overflow: hidden;
       cursor: pointer;
-      background: #111;
+      background: #1a1a1a;
       border: 1px solid rgba(255,255,255,0.07);
-      transition: transform 0.2s, box-shadow 0.2s;
-      aspect-ratio: 4/4.2;
+      transition: transform 0.18s, box-shadow 0.18s;
+      display: flex;
+      flex-direction: column;
     }
 
     .ev-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 14px 44px rgba(0,0,0,0.65);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.6);
     }
 
     .ev-card.ppv { border-color: rgba(200,168,75,0.2); }
-    .ev-card.ppv:hover { box-shadow: 0 14px 44px rgba(200,168,75,0.1); }
+    .ev-card.ppv:hover { box-shadow: 0 12px 36px rgba(200,168,75,0.1); }
 
-    
+    /* Portrait image — tall like review cards */
+    .ev-thumb {
+      width: 100%;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      position: relative;
+      background: #111;
+      flex-shrink: 0;
+    }
 
-    /* Poster fills everything */
-    .ev-poster-img {
+    .ev-thumb-img {
       position: absolute;
       inset: 0;
       background-size: cover;
       background-position: center top;
       background-repeat: no-repeat;
-      transition: transform 0.4s;
+      transition: transform 0.35s;
     }
 
-    .ev-card:hover .ev-poster-img { transform: scale(1.04); }
+    .ev-card:hover .ev-thumb-img { transform: scale(1.04); }
 
-    /* Gradient only at very bottom for text legibility */
-    .ev-gradient {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to bottom,
-        transparent 45%,
-        rgba(0,0,0,0.65) 75%,
-        rgba(0,0,0,0.92) 100%
-      );
-    }
-
-    /* Badge top-left */
+    /* Badge */
     .ev-badge {
       position: absolute;
-      top: 12px;
-      left: 12px;
+      top: 10px;
+      left: 10px;
       font-size: 0.44rem;
       font-weight: 800;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       padding: 3px 8px;
       border-radius: 4px;
-      z-index: 3;
+      z-index: 2;
     }
 
     .ev-badge.fn {
@@ -115,50 +113,44 @@
       border: 1px solid rgba(200,168,75,0.35);
     }
 
-    .ev-badge.next {
-      left: auto; right: 12px;
-      background: #00e5ff;
-      color: #000;
-      font-weight: 900;
-    }
-
-    /* Text block — bottom of card, inside */
+    /* Info below image — like review cards */
     .ev-info {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 12px 14px 14px;
-      z-index: 2;
+      padding: 11px 13px 13px;
+      border-top: 1px solid rgba(255,255,255,0.05);
     }
 
     .ev-name {
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 900;
+      font-size: 0.78rem;
+      font-weight: 800;
       color: #fff;
       text-transform: uppercase;
       letter-spacing: 0.02em;
-      line-height: 1.2;
+      line-height: 1.25;
       margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    
-    .ev-card.ppv .ev-name { color: #f0d580; }
+    .ev-card.ppv .ev-name { color: #e8c86a; }
 
     .ev-sub {
-      font-size: 0.48rem;
-      color: rgba(255,255,255,0.4);
+      font-size: 0.5rem;
+      color: rgba(255,255,255,0.28);
       text-transform: uppercase;
-      letter-spacing: 0.07em;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     @media (max-width: 1000px) {
       .ev-grid { grid-template-columns: repeat(3, 1fr); }
-      
     }
 
-    @media (max-width: 580px) {
-      .ev-grid { grid-template-columns: 1fr; }
-      
+    @media (max-width: 680px) {
+      .ev-grid { grid-template-columns: repeat(2, 1fr); }
       .ev-page { padding: 24px 16px 60px; }
     }
   </style>
@@ -208,10 +200,6 @@
   </div>
 
   <script>
-    function daysUntil(iso) {
-      return Math.max(0, Math.ceil((new Date(iso + 'T00:00:00') - new Date()) / 86400000));
-    }
-
     async function loadEvents() {
       const res = await fetch('events.json');
       const all = await res.json();
@@ -221,9 +209,7 @@
 
       const grid = document.getElementById('ev-grid');
 
-      upcoming.forEach((e, i) => {
-        const isFirst = i === 0;
-        const days = daysUntil(e.isoDate);
+      upcoming.forEach((e) => {
         const isPPV = e.type === 'PPV';
         const shortName = e.name
           .replace('UFC Fight Night: ', '')
@@ -233,10 +219,10 @@
         card.className = 'ev-card' + (isPPV ? ' ppv' : '');
 
         card.innerHTML = `
-          <div class="ev-poster-img" style="background-image:url('${e.poster}'); ${e.id === 'ufc-fight-night-sterling-vs-zalal' ? 'background-position: center 20%;' : 'background-position: center top;'}"></div>
-          <div class="ev-gradient"></div>
-          <span class="ev-badge ${isPPV ? 'ppv-b' : 'fn'}">${isPPV ? '⚡ PPV' : '🥊 Fight Night'}</span>
-          
+          <div class="ev-thumb">
+            <div class="ev-thumb-img" style="background-image:url('${e.poster}');"></div>
+            <span class="ev-badge ${isPPV ? 'ppv-b' : 'fn'}">${isPPV ? '⚡ PPV' : '🥊 Fight Night'}</span>
+          </div>
           <div class="ev-info">
             <div class="ev-name">${shortName}</div>
             <div class="ev-sub">${e.date} &nbsp;·&nbsp; ${e.location}</div>
