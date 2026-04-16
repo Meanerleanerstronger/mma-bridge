@@ -12,13 +12,13 @@
     body { background: #0d0d0d; }
 
     .ev-page {
-      max-width: 1180px;
+      max-width: 1300px;
       margin: 0 auto;
       padding: 48px 32px 100px;
     }
 
     .ev-header {
-      display: flex; align-items: baseline; gap: 14px;
+      display: flex; align-items: baseline; gap: 16px;
       margin-bottom: 32px;
       padding-bottom: 16px;
       border-bottom: 1px solid rgba(255,255,255,0.06);
@@ -39,8 +39,8 @@
 
     .ev-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
     }
 
     /* Card — full poster, text at bottom inside */
@@ -151,8 +151,8 @@
       letter-spacing: 0.07em;
     }
 
-    @media (max-width: 900px) {
-      .ev-grid { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 1000px) {
+      .ev-grid { grid-template-columns: repeat(3, 1fr); }
       
     }
 
