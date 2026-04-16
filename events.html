@@ -622,21 +622,19 @@
       function fightRow(f) {
         const isMain   = f.slot === 'main';
         const isComain = f.slot === 'comain';
-        const size  = isMain ? '1.05rem' : isComain ? '0.92rem' : '0.8rem';
-        const weight = isMain ? '900' : isComain ? '800' : '700';
-        const col   = '#fff';
-        const lb    = isMain ? accent : isComain ? 'rgba(0,229,255,0.5)' : 'rgba(255,255,255,0.07)';
-        const bg    = isMain ? (isPPV ? 'rgba(200,168,75,0.05)' : 'rgba(0,255,255,0.03)') : isComain ? 'rgba(0,229,255,0.015)' : 'transparent';
-        const pad   = isMain ? '15px' : isComain ? '12px' : '10px';
-        const italic = (!isMain && !isComain) ? 'font-style:italic;' : '';
-        return `<div style="display:flex;align-items:center;justify-content:space-between;padding:${pad} 14px;border-bottom:1px solid rgba(255,255,255,0.04);border-left:2px solid ${lb};background:${bg};margin-bottom:2px;border-radius:0 6px 6px 0;">
-          <span style="font-family:'Montserrat',sans-serif;font-weight:${weight};font-size:${size};color:${col};flex:1;${italic}">${esc(f.a)}</span>
+        const size   = isMain ? '1.05rem' : isComain ? '0.92rem' : '0.82rem';
+        const fw     = isMain ? '900' : isComain ? '800' : '700';
+        const lb     = isMain ? accent : isComain ? 'rgba(0,229,255,0.5)' : 'rgba(255,255,255,0.07)';
+        const bg     = isMain ? (isPPV ? 'rgba(200,168,75,0.05)' : 'rgba(0,255,255,0.03)') : isComain ? 'rgba(0,229,255,0.015)' : 'transparent';
+        const pad    = isMain ? '15px' : isComain ? '12px' : '10px';
+        return `<div style="display:flex;align-items:center;justify-content:space-between;padding:${pad} 14px;border-bottom:1px solid rgba(255,255,255,0.05);border-left:2px solid ${lb};background:${bg};margin-bottom:2px;border-radius:0 6px 6px 0;">
+          <span style="font-family:'Montserrat',sans-serif;font-weight:${fw};font-size:${size};color:#fff;flex:1;">${esc(f.a)}</span>
           <div style="text-align:center;padding:0 10px;flex-shrink:0;">
             ${f.titleFight ? `<div style="font-size:0.42rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#c8a84b;margin-bottom:2px;">🏆 Title</div>` : ''}
-            <div style="font-size:0.46rem;font-weight:700;color:rgba(255,255,255,0.25);text-transform:uppercase;letter-spacing:0.08em;">${esc(f.weight||'')}</div>
-            <div style="font-size:0.4rem;color:rgba(255,255,255,0.15);margin-top:1px;">${esc(f.rounds||'')}</div>
+            <div style="font-size:0.46rem;font-weight:700;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.08em;">${esc(f.weight||'')}</div>
+            <div style="font-size:0.4rem;color:rgba(255,255,255,0.2);margin-top:1px;">${esc(f.rounds||'')}</div>
           </div>
-          <span style="font-family:'Montserrat',sans-serif;font-weight:${weight};font-size:${size};color:${col};flex:1;text-align:right;${italic}">${esc(f.b)}</span>
+          <span style="font-family:'Montserrat',sans-serif;font-weight:${fw};font-size:${size};color:#fff;flex:1;text-align:right;">${esc(f.b)}</span>
         </div>`;
       }
 
@@ -662,16 +660,7 @@
           </div>
         </div>` : '') +
 
-        (mainFight ? `
-        <div style="padding:20px 18px 16px;border-bottom:1px solid rgba(255,255,255,0.06);">
-          ${mainFight.titleFight ? `<div style="font-family:'Montserrat',sans-serif;font-size:0.46rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:${accent};margin-bottom:8px;">🏆 ${esc(mainFight.weight)} Title Fight</div>` : ''}
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
-            <div style="flex:1;font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.4rem;text-transform:uppercase;letter-spacing:0.02em;color:#fff;line-height:1.1;">${esc(mainFight.a)}</div>
-            <div style="flex-shrink:0;font-family:'Montserrat',sans-serif;font-size:0.52rem;font-weight:900;letter-spacing:0.2em;color:rgba(255,255,255,0.15);padding:0 10px;">VS</div>
-            <div style="flex:1;font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.4rem;text-transform:uppercase;letter-spacing:0.02em;color:#fff;line-height:1.1;text-align:right;">${esc(mainFight.b)}</div>
-          </div>
-          <div style="margin-top:7px;font-family:'Inter',sans-serif;font-size:0.68rem;color:rgba(255,255,255,0.22);">${esc(mainFight.weight||'')}${mainFight.rounds ? ' · ' + esc(mainFight.rounds) : ''}</div>
-        </div>` : '') +
+        '' +
 
         `<div style="padding:0 4px 24px;">
           ${section('Main Card',     ev.mainCard,     accent)}
