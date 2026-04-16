@@ -606,50 +606,81 @@
 
     function openDrawer(ev) {
       const drawer = document.getElementById('fightDrawer');
-      document.getElementById('drawerTitle').textContent = ev.name || 'Event';
+      const isPPV  = ev.type === 'PPV';
+      const accent = isPPV ? '#c8a84b' : 'cyan';
+
+      let shortTitle = ev.name || '';
+      if (shortTitle.includes('UFC Fight Night:')) {
+        shortTitle = ev.location ? 'Fight Night — ' + ev.location.split(',')[0] : 'UFC Fight Night';
+      } else {
+        shortTitle = shortTitle.split(':')[0].trim();
+      }
+      document.getElementById('drawerTitle').textContent = shortTitle;
+
+      const mainFight = (ev.mainCard || []).find(f => f.slot === 'main') || (ev.mainCard||[])[0];
 
       function fightRow(f) {
         const isMain   = f.slot === 'main';
         const isComain = f.slot === 'comain';
-        const cls = isMain ? 'is-main' : isComain ? 'is-comain' : '';
-        const size = isMain ? '1.25rem' : isComain ? '1rem' : '0.85rem';
-        const col  = (isMain || isComain) ? '#fff' : 'rgba(255,255,255,0.65)';
-        return `
-          <div class="dr-fight-row ${cls}" style="padding:${isMain?'18px':isComain?'14px':'11px'} 12px;">
-            <span class="dr-fighter" style="font-size:${size};color:${col};">${esc(f.a)}</span>
-            <div class="dr-mid">
-              ${f.titleFight ? `<div class="dr-title-badge">🏆 Title</div>` : ''}
-              <div class="dr-weight">${esc(f.weight||'')}</div>
-              <div class="dr-rounds">${esc(f.rounds||'')}</div>
-            </div>
-            <span class="dr-fighter" style="font-size:${size};color:${col};text-align:right;">${esc(f.b)}</span>
-          </div>`;
+        const size  = isMain ? '1.1rem' : isComain ? '0.95rem' : '0.82rem';
+        const col   = isMain ? '#fff' : isComain ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.55)';
+        const lb    = isMain ? accent : isComain ? 'rgba(0,229,255,0.4)' : 'rgba(255,255,255,0.06)';
+        const bg    = isMain ? (isPPV ? 'rgba(200,168,75,0.04)' : 'rgba(0,255,255,0.02)') : 'transparent';
+        const pad   = isMain ? '16px' : isComain ? '13px' : '10px';
+        return `<div style="display:flex;align-items:center;justify-content:space-between;padding:${pad} 14px;border-bottom:1px solid rgba(255,255,255,0.04);border-left:2px solid ${lb};background:${bg};margin-bottom:2px;border-radius:0 6px 6px 0;">
+          <span style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:${size};color:${col};flex:1;">${esc(f.a)}</span>
+          <div style="text-align:center;padding:0 10px;flex-shrink:0;">
+            ${f.titleFight ? `<div style="font-size:0.42rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#c8a84b;margin-bottom:2px;">🏆 Title</div>` : ''}
+            <div style="font-size:0.48rem;font-weight:700;color:rgba(255,255,255,0.2);text-transform:uppercase;letter-spacing:0.08em;">${esc(f.weight||'')}</div>
+            <div style="font-size:0.42rem;color:rgba(255,255,255,0.12);margin-top:1px;">${esc(f.rounds||'')}</div>
+          </div>
+          <span style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:${size};color:${col};flex:1;text-align:right;">${esc(f.b)}</span>
+        </div>`;
       }
 
       function section(label, fights, color) {
         if (!fights || !fights.length) return '';
-        return `
-          <div class="dr-section">
-            <div class="dr-section-label" style="color:${color};">${label}</div>
-            ${fights.map(fightRow).join('')}
-          </div>`;
+        return `<div style="margin-top:20px;">
+          <div style="font-family:'Montserrat',sans-serif;font-size:0.54rem;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:${color};margin-bottom:10px;display:flex;align-items:center;gap:10px;">${label}<div style="flex:1;height:1px;background:rgba(255,255,255,0.06);"></div></div>
+          ${fights.map(fightRow).join('')}
+        </div>`;
       }
 
-      document.getElementById('drawerContent').innerHTML = `
-        <div class="dr-event-header">
-          <div class="dr-event-name">${esc(ev.name||'')}</div>
-          <div class="dr-event-meta">${esc(ev.date||'')}${ev.location ? ' · ' + esc(ev.location) : ''}${ev.venue ? ' · ' + esc(ev.venue) : ''}</div>
-        </div>
-        ${section('Main Card',     ev.mainCard,     '#c8a84b')}
-        ${section('Prelims',       ev.prelims,      '#00e5ff')}
-        ${section('Early Prelims', ev.earlyPrelims, 'rgba(255,255,255,0.25)')}
-      `;
+      document.getElementById('drawerContent').innerHTML =
+
+        (ev.poster ? `
+        <div style="width:100%;height:200px;overflow:hidden;position:relative;flex-shrink:0;">
+          <img src="${esc(ev.poster)}" alt=""
+            style="width:100%;height:100%;object-fit:cover;object-position:center 18%;display:block;"
+            onerror="this.parentElement.style.display='none'">
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.92) 0%,rgba(0,0,0,0.15) 55%,transparent 100%);"></div>
+          <div style="position:absolute;bottom:14px;left:18px;right:18px;">
+            <div style="font-family:'Montserrat',sans-serif;font-size:0.52rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:${accent};margin-bottom:4px;">${isPPV ? '⚡ PPV' : '🥊 Fight Night'}</div>
+            <div style="font-family:'Inter',sans-serif;font-size:0.72rem;color:rgba(255,255,255,0.5);">${esc(ev.date||'')}${ev.location ? ' · ' + esc(ev.location) : ''}${ev.venue ? ' · ' + esc(ev.venue) : ''}</div>
+          </div>
+        </div>` : '') +
+
+        (mainFight ? `
+        <div style="padding:20px 18px 16px;border-bottom:1px solid rgba(255,255,255,0.06);">
+          ${mainFight.titleFight ? `<div style="font-family:'Montserrat',sans-serif;font-size:0.46rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:${accent};margin-bottom:8px;">🏆 ${esc(mainFight.weight)} Title Fight</div>` : ''}
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+            <div style="flex:1;font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.55rem;text-transform:uppercase;letter-spacing:0.02em;color:#fff;line-height:1;">${esc(mainFight.a)}</div>
+            <div style="flex-shrink:0;font-family:'Montserrat',sans-serif;font-size:0.55rem;font-weight:900;letter-spacing:0.2em;color:rgba(255,255,255,0.15);padding:0 10px;">VS</div>
+            <div style="flex:1;font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.55rem;text-transform:uppercase;letter-spacing:0.02em;color:#fff;line-height:1;text-align:right;">${esc(mainFight.b)}</div>
+          </div>
+          <div style="margin-top:7px;font-family:'Inter',sans-serif;font-size:0.68rem;color:rgba(255,255,255,0.22);">${esc(mainFight.weight||'')}${mainFight.rounds ? ' · ' + esc(mainFight.rounds) : ''}</div>
+        </div>` : '') +
+
+        `<div style="padding:0 4px 24px;">
+          ${section('Main Card',     ev.mainCard,     accent)}
+          ${section('Prelims',       ev.prelims,      '#00e5ff')}
+          ${section('Early Prelims', ev.earlyPrelims, 'rgba(255,255,255,0.3)')}
+        </div>`;
 
       drawer.setAttribute('aria-hidden', 'false');
       drawer.classList.add('open');
       document.body.classList.add('no-scroll');
     }
-
     function closeDrawer() {
       const drawer = document.getElementById('fightDrawer');
       drawer.setAttribute('aria-hidden', 'true');
