@@ -472,6 +472,23 @@ function renderPage(ev, community) {
     lockForm();
   }
 
+  // Fetch from backend (authoritative, works cross-device)
+  if (isLoggedIn) {
+    fetch(`${getApiBase()}/ratings/my/${encodeURIComponent(eventId)}`, {
+      headers: authHeaders()
+    }).then(async r => {
+      if (!r.ok) return;
+      const data = await r.json();
+      savedData = { rating_id: data.rating_id, hype_rating: data.hype_rating, review_text: data.review_text };
+      saveStoredRating(eventId, savedData);
+      selected = data.hype_rating;
+      updateStars(selected);
+      numEl.textContent = `${selected}`;
+      textarea.value = data.review_text || '';
+      lockForm();
+    }).catch(() => {});
+  }
+
   textarea.addEventListener('focus', () => { if (!textarea.disabled) textarea.style.borderColor = 'rgba(0,255,255,0.45)'; });
   textarea.addEventListener('blur',  () => textarea.style.borderColor = '#222');
 
