@@ -3205,16 +3205,19 @@ body.light-mode .navbar {
   height: 30px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid rgba(0,229,255,0.5);
+  border: 2px solid #00e5ff;
+  box-shadow: 0 0 8px rgba(0,229,255,0.45), 0 0 2px rgba(0,229,255,0.3);
   flex-shrink: 0;
 }
 
 .nav-username {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: rgba(255,255,255,0.85);
-  max-width: 120px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #fff;
+  max-width: 110px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
