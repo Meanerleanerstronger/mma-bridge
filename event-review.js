@@ -250,8 +250,10 @@ function renderPage(ev, community) {
             <div class="er-stars" id="erStars">
               ${[1,2,3,4,5].map(n => `
                 <span class="er-star-wrap" data-n="${n}">
-                  <span class="er-star-char er-star-bg">★</span>
-                  <span class="er-star-char er-star-fill" style="width:0%">★</span>
+                  <span class="er-star-bg">★</span>
+                  <span class="er-star-fill">★</span>
+                  <span class="er-half-l" data-val="${n - 0.5 < 1 ? 1 : n - 0.5}"></span>
+                  <span class="er-half-r" data-val="${n}"></span>
                 </span>`).join('')}
               <span class="er-rating-num" id="erRatingNum"></span>
             </div>
@@ -312,38 +314,31 @@ function renderPage(ev, community) {
     starsEl.querySelectorAll('.er-star-wrap').forEach(w => {
       const n = +w.dataset.n;
       const fill = w.querySelector('.er-star-fill');
-      if (val >= n)           fill.style.width = '100%';
+      if (val >= n)            fill.style.width = '100%';
       else if (val >= n - 0.5) fill.style.width = '50%';
-      else                    fill.style.width = '0%';
+      else                     fill.style.width = '0%';
     });
   }
 
-  function halfVal(e, wrap) {
-    const rect = wrap.getBoundingClientRect();
-    const isLeft = (e.clientX - rect.left) < rect.width / 2;
-    const n = +wrap.dataset.n;
-    return isLeft ? Math.max(1, n - 0.5) : n;
-  }
-
-  starsEl.addEventListener('mousemove', e => {
-    const wrap = e.target.closest('.er-star-wrap');
-    if (!wrap) return;
-    const v = halfVal(e, wrap);
+  starsEl.addEventListener('mouseover', e => {
+    const zone = e.target.closest('.er-half-l, .er-half-r');
+    if (!zone) return;
+    const v = +zone.dataset.val;
     updateStars(v);
-    numEl.textContent = `${v} / 5`;
+    numEl.textContent = v % 1 ? `${v}` : `${v}`;
   });
 
   starsEl.addEventListener('mouseleave', () => {
     updateStars(selected);
-    numEl.textContent = selected ? `${selected} / 5` : '';
+    numEl.textContent = selected ? `${selected}` : '';
   });
 
   starsEl.addEventListener('click', e => {
-    const wrap = e.target.closest('.er-star-wrap');
-    if (!wrap) return;
-    selected = halfVal(e, wrap);
+    const zone = e.target.closest('.er-half-l, .er-half-r');
+    if (!zone) return;
+    selected = +zone.dataset.val;
     updateStars(selected);
-    numEl.textContent = `${selected} / 5`;
+    numEl.textContent = `${selected}`;
     submitBtn.disabled = false;
   });
 
