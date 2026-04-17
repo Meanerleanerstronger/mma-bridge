@@ -52,10 +52,17 @@ async function fetchCommunityRating(eventId) {
 
 async function fetchReviews(eventId) {
   try {
-    const r = await fetch(`${getApiBase()}/reviews/${encodeURIComponent(eventId)}`);
+    const r = await fetch(`${getApiBase()}/reviews/${encodeURIComponent(eventId)}`, {
+      headers: authHeaders()
+    });
     if (!r.ok) return [];
     return await r.json();
   } catch { return []; }
+}
+
+function requireAuth() {
+  sessionStorage.setItem('auth_return_to', location.href);
+  location.href = 'auth.html';
 }
 
 function timeAgo(isoStr) {
@@ -80,7 +87,26 @@ function revStars(rating) {
   }).join('');
 }
 
+function replyItemHtml(rp, isLoggedIn, currentUserId) {
+  const isOwnReply = !!(currentUserId && +rp.user_id === currentUserId);
+  return `
+    <div class="er-reply-meta">
+      <span class="er-reply-author">${esc(rp.display_name)}</span>
+      <span class="er-reply-time">${timeAgo(rp.created_at)}</span>
+    </div>
+    <div class="er-reply-text">${esc(rp.reply_text)}</div>
+    ${!isOwnReply && isLoggedIn ? `
+      <button class="er-reply-like-btn${rp.user_liked ? ' liked' : ''}"
+              data-reply-id="${rp.id}" data-liked="${rp.user_liked ? '1' : '0'}">
+        <span class="er-like-icon">♥</span>
+        <span class="er-reply-like-count">${rp.like_count || 0}</span>
+      </button>` : (rp.like_count ? `<span style="font-size:0.67rem;color:rgba(255,255,255,0.2)">♥ ${rp.like_count}</span>` : '')}`;
+}
+
 function renderReviews(reviews, container) {
+  const isLoggedIn   = !!window.MMABridgeAuth?.getToken();
+  const currentUserId = window.MMABridgeAuth?.getUser()?.id ? +window.MMABridgeAuth.getUser().id : null;
+
   if (!reviews.length) {
     container.innerHTML = `
       <div class="er-reviews-empty">
@@ -92,23 +118,52 @@ function renderReviews(reviews, container) {
 
   const SHOW_INIT = 3;
   const cards = reviews.map((rv, i) => {
-    const hidden = i >= SHOW_INIT ? ' hidden' : '';
+    const hidden   = i >= SHOW_INIT ? ' hidden' : '';
+    const isOwn    = !!(currentUserId && rv.user_id && +rv.user_id === currentUserId);
     const textHtml = rv.review_text ? `
       <div class="er-rev-text-wrap">
         <div class="er-rev-text">${esc(rv.review_text)}</div>
         <button class="er-read-more" type="button">Read more</button>
       </div>` : '';
     const author = rv.display_name && rv.display_name !== 'Anonymous'
-      ? `<span class="er-rev-author">${esc(rv.display_name)}</span>`
-      : '';
+      ? `<span class="er-rev-author">${esc(rv.display_name)}</span>` : '';
+
+    const likeHtml = !isOwn ? `
+      <button class="er-like-btn${rv.user_liked ? ' liked' : ''}"
+              data-review-id="${rv.id}" data-liked="${rv.user_liked ? '1' : '0'}">
+        <span class="er-like-icon">♥</span>
+        <span class="er-like-count">${rv.like_count || 0}</span>
+      </button>` : '';
+
+    const actionHtml = isOwn
+      ? `<button class="er-edit-own-btn">Edit</button>`
+      : `<button class="er-reply-btn" data-review-id="${rv.id}">Reply</button>`;
+
+    const repliesToggle = (rv.reply_count > 0) ? `
+      <button class="er-replies-toggle" data-review-id="${rv.id}" data-count="${rv.reply_count}">
+        ↳ ${rv.reply_count} ${rv.reply_count === 1 ? 'reply' : 'replies'}
+      </button>` : '';
+
     return `
-      <div class="er-rev-card${hidden}" data-idx="${i}">
+      <div class="er-rev-card${hidden}" data-review-id="${rv.id}">
         <div class="er-rev-header">
           <div class="er-rev-stars">${revStars(rv.hype_rating)}</div>
           ${author}
         </div>
         ${textHtml}
         <div class="er-rev-time">${timeAgo(rv.created_at)}</div>
+        <div class="er-rev-social">${likeHtml}${actionHtml}</div>
+        <div class="er-replies-section" data-review-id="${rv.id}">
+          <div class="er-replies-toggle-wrap">${repliesToggle}</div>
+          <div class="er-replies-wrap" data-review-id="${rv.id}"></div>
+          <div class="er-reply-input-wrap" data-review-id="${rv.id}">
+            <textarea class="er-reply-textarea" placeholder="Add a reply…" rows="2"></textarea>
+            <div class="er-reply-actions">
+              <button class="er-reply-cancel">Cancel</button>
+              <button class="er-reply-submit">Post</button>
+            </div>
+          </div>
+        </div>
       </div>`;
   });
 
@@ -121,15 +176,12 @@ function renderReviews(reviews, container) {
 
   container.innerHTML = cards.join('') + moreBtn;
 
-  // Wire "Read more" toggles
+  // Read more toggles
   container.querySelectorAll('.er-rev-text-wrap').forEach(wrap => {
     const textEl = wrap.querySelector('.er-rev-text');
     const btn    = wrap.querySelector('.er-read-more');
-    // Only show button if content is actually clamped
     requestAnimationFrame(() => {
-      if (textEl.scrollHeight > textEl.clientHeight + 2) {
-        btn.classList.add('visible');
-      }
+      if (textEl.scrollHeight > textEl.clientHeight + 2) btn.classList.add('visible');
     });
     btn.addEventListener('click', () => {
       const expanded = textEl.classList.toggle('expanded');
@@ -137,18 +189,178 @@ function renderReviews(reviews, container) {
     });
   });
 
-  // Wire "Show more reviews"
-  const showMoreBtn = container.querySelector('#erShowMore');
-  if (showMoreBtn) {
-    showMoreBtn.addEventListener('click', () => {
-      container.querySelectorAll('.er-rev-card.hidden').forEach((card, i) => {
-        card.classList.remove('hidden');
-        card.classList.add('reveal');
-        card.style.animationDelay = `${i * 60}ms`;
-      });
-      container.querySelector('#erShowMoreWrap').remove();
+  // Show more reviews
+  container.querySelector('#erShowMore')?.addEventListener('click', () => {
+    container.querySelectorAll('.er-rev-card.hidden').forEach((card, i) => {
+      card.classList.remove('hidden');
+      card.classList.add('reveal');
+      card.style.animationDelay = `${i * 60}ms`;
     });
-  }
+    container.querySelector('#erShowMoreWrap')?.remove();
+  });
+
+  // ── Like buttons ─────────────────────────────
+  container.querySelectorAll('.er-like-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      if (!isLoggedIn) { requireAuth(); return; }
+      const reviewId = btn.dataset.reviewId;
+      const countEl  = btn.querySelector('.er-like-count');
+      btn.disabled = true;
+      try {
+        const res = await fetch(`${getApiBase()}/reviews/${reviewId}/like`, {
+          method: 'POST', headers: authHeaders()
+        });
+        if (!res.ok) throw new Error();
+        const { liked, like_count } = await res.json();
+        btn.dataset.liked = liked ? '1' : '0';
+        btn.classList.toggle('liked', liked);
+        countEl.textContent = like_count;
+      } catch {} finally { btn.disabled = false; }
+    });
+  });
+
+  // ── Reply buttons ─────────────────────────────
+  container.querySelectorAll('.er-reply-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (!isLoggedIn) { requireAuth(); return; }
+      const reviewId  = btn.dataset.reviewId;
+      const inputWrap = container.querySelector(`.er-reply-input-wrap[data-review-id="${reviewId}"]`);
+      const visible   = inputWrap.classList.toggle('visible');
+      if (visible) inputWrap.querySelector('.er-reply-textarea').focus();
+    });
+  });
+
+  // ── Edit own review button ────────────────────
+  container.querySelectorAll('.er-edit-own-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const submitBtn = document.querySelector('#erSubmit');
+      if (submitBtn?.dataset.mode === 'locked') submitBtn.click();
+      document.querySelector('#erSubmit')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  });
+
+  // ── Replies toggle ────────────────────────────
+  container.querySelectorAll('.er-replies-toggle').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const reviewId = btn.dataset.reviewId;
+      const wrap     = container.querySelector(`.er-replies-wrap[data-review-id="${reviewId}"]`);
+      const isOpen   = wrap.classList.contains('open');
+      if (!isOpen) {
+        if (!wrap.dataset.loaded) {
+          wrap.innerHTML = `<div style="padding:6px 0 6px 13px;font-size:0.72rem;color:rgba(255,255,255,0.18);">Loading…</div>`;
+          wrap.classList.add('open');
+          try {
+            const res = await fetch(`${getApiBase()}/reviews/${reviewId}/replies`, { headers: authHeaders() });
+            const replies = res.ok ? await res.json() : [];
+            if (replies.length) {
+              wrap.innerHTML = replies.map(rp =>
+                `<div class="er-reply-item" data-reply-id="${rp.id}">${replyItemHtml(rp, isLoggedIn, currentUserId)}</div>`
+              ).join('');
+              wireReplyLikes(wrap, isLoggedIn);
+            } else {
+              wrap.innerHTML = '';
+            }
+          } catch { wrap.innerHTML = ''; }
+          wrap.dataset.loaded = '1';
+        } else {
+          wrap.classList.add('open');
+        }
+        btn.textContent = btn.textContent.replace('↳', '↑');
+      } else {
+        wrap.classList.remove('open');
+        btn.textContent = btn.textContent.replace('↑', '↳');
+      }
+    });
+  });
+
+  // ── Reply submit/cancel ───────────────────────
+  container.querySelectorAll('.er-reply-input-wrap').forEach(inputWrap => {
+    const reviewId  = inputWrap.dataset.reviewId;
+    const textarea  = inputWrap.querySelector('.er-reply-textarea');
+    const cancelBtn = inputWrap.querySelector('.er-reply-cancel');
+    const submitBtn = inputWrap.querySelector('.er-reply-submit');
+    const section   = container.querySelector(`.er-replies-section[data-review-id="${reviewId}"]`);
+
+    cancelBtn.addEventListener('click', () => {
+      inputWrap.classList.remove('visible');
+      textarea.value = '';
+    });
+
+    submitBtn.addEventListener('click', async () => {
+      const text = textarea.value.trim();
+      if (!text) return;
+      submitBtn.disabled = true;
+      try {
+        const res = await fetch(`${getApiBase()}/reviews/${reviewId}/reply`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', ...authHeaders() },
+          body: JSON.stringify({ reply_text: text })
+        });
+        if (!res.ok) throw new Error();
+        const data = await res.json();
+
+        textarea.value = '';
+        inputWrap.classList.remove('visible');
+
+        // Append reply to the replies wrap
+        const wrap = container.querySelector(`.er-replies-wrap[data-review-id="${reviewId}"]`);
+        const newItem = document.createElement('div');
+        newItem.className = 'er-reply-item';
+        newItem.dataset.replyId = data.reply_id;
+        newItem.innerHTML = replyItemHtml({
+          id: data.reply_id, user_id: currentUserId,
+          display_name: data.display_name, reply_text: text,
+          created_at: data.created_at, like_count: 0, user_liked: false
+        }, isLoggedIn, currentUserId);
+        wrap.appendChild(newItem);
+        wrap.dataset.loaded = '1';
+
+        // Show & open replies wrap
+        if (!wrap.classList.contains('open')) wrap.classList.add('open');
+
+        // Update or create the toggle button
+        let toggle = section.querySelector('.er-replies-toggle');
+        const toggleWrap = section.querySelector('.er-replies-toggle-wrap');
+        const newCount = (toggle ? (+toggle.dataset.count || 0) : 0) + 1;
+        if (!toggle) {
+          toggle = document.createElement('button');
+          toggle.className = 'er-replies-toggle';
+          toggle.dataset.reviewId = reviewId;
+          toggleWrap.appendChild(toggle);
+          toggle.addEventListener('click', async () => {
+            const isOpen2 = wrap.classList.contains('open');
+            wrap.classList.toggle('open', !isOpen2);
+            toggle.textContent = `${isOpen2 ? '↳' : '↑'} ${toggle.dataset.count} ${+toggle.dataset.count === 1 ? 'reply' : 'replies'}`;
+          });
+        }
+        toggle.dataset.count = newCount;
+        toggle.textContent = `↑ ${newCount} ${newCount === 1 ? 'reply' : 'replies'}`;
+
+      } catch {
+        submitBtn.disabled = false;
+      }
+    });
+  });
+}
+
+function wireReplyLikes(wrap, isLoggedIn) {
+  wrap.querySelectorAll('.er-reply-like-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      if (!isLoggedIn) { requireAuth(); return; }
+      const replyId  = btn.dataset.replyId;
+      const countEl  = btn.querySelector('.er-reply-like-count');
+      btn.disabled = true;
+      try {
+        const res = await fetch(`${getApiBase()}/replies/${replyId}/like`, {
+          method: 'POST', headers: authHeaders()
+        });
+        if (!res.ok) throw new Error();
+        const { liked, like_count } = await res.json();
+        btn.classList.toggle('liked', liked);
+        countEl.textContent = like_count;
+      } catch {} finally { btn.disabled = false; }
+    });
+  });
 }
 
 async function loadAndRenderReviews(eventId) {
@@ -385,11 +597,6 @@ function renderPage(ev, community) {
   const textarea  = root.querySelector('#erReviewText');
 
   const isLoggedIn = !!window.MMABridgeAuth?.getToken();
-
-  function requireAuth() {
-    sessionStorage.setItem('auth_return_to', location.href);
-    location.href = 'auth.html';
-  }
 
   function updateStars(val) {
     starsEl.querySelectorAll('.er-star-wrap').forEach(w => {

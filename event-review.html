@@ -490,6 +490,147 @@
       margin-bottom: 6px;
     }
 
+    /* ── Social layer ── */
+    .er-rev-social {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 12px;
+      padding-top: 11px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .er-like-btn, .er-reply-btn, .er-edit-own-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.74rem;
+      color: rgba(255,255,255,0.25);
+      transition: color 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .er-like-btn:hover  { color: rgba(0,229,255,0.65); }
+    .er-like-btn.liked  { color: #00e5ff; }
+    .er-like-icon { font-size: 0.8rem; display: inline-block; transition: transform 0.12s; }
+    .er-like-btn.liked .er-like-icon { transform: scale(1.25); }
+    .er-reply-btn:hover, .er-edit-own-btn:hover { color: rgba(255,255,255,0.55); }
+
+    /* Replies section */
+    .er-replies-section { margin-top: 8px; }
+    .er-replies-toggle {
+      background: none;
+      border: none;
+      padding: 2px 0;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      color: rgba(0,229,255,0.5);
+      transition: color 0.15s;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .er-replies-toggle:hover { color: #00e5ff; }
+
+    .er-replies-wrap {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+    .er-replies-wrap.open { max-height: 3000px; }
+
+    .er-reply-item {
+      padding: 9px 0 9px 13px;
+      border-left: 2px solid rgba(255,255,255,0.06);
+      margin-bottom: 8px;
+    }
+    .er-reply-item:last-child { margin-bottom: 2px; }
+    .er-reply-meta {
+      display: flex;
+      align-items: baseline;
+      gap: 7px;
+      margin-bottom: 4px;
+    }
+    .er-reply-author {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.7);
+    }
+    .er-reply-time {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.67rem;
+      color: rgba(255,255,255,0.2);
+    }
+    .er-reply-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.79rem;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.55);
+      word-break: break-word;
+      margin-bottom: 5px;
+    }
+    .er-reply-like-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.67rem;
+      color: rgba(255,255,255,0.2);
+      transition: color 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .er-reply-like-btn:hover { color: rgba(0,229,255,0.6); }
+    .er-reply-like-btn.liked { color: #00e5ff; }
+
+    /* Reply input */
+    .er-reply-input-wrap { margin-top: 10px; display: none; }
+    .er-reply-input-wrap.visible { display: block; }
+    .er-reply-textarea {
+      width: 100%;
+      box-sizing: border-box;
+      background: #0a0a0a;
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 7px;
+      color: rgba(255,255,255,0.82);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      padding: 9px 11px;
+      resize: none;
+      outline: none;
+      min-height: 64px;
+      transition: border-color 0.15s;
+    }
+    .er-reply-textarea:focus { border-color: rgba(0,229,255,0.35); }
+    .er-reply-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 7px;
+    }
+    .er-reply-cancel {
+      background: none; border: none; cursor: pointer;
+      font-family: 'Montserrat', sans-serif; font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.05em; color: rgba(255,255,255,0.28); padding: 4px 8px;
+      transition: color 0.15s;
+    }
+    .er-reply-cancel:hover { color: rgba(255,255,255,0.55); }
+    .er-reply-submit {
+      background: rgba(0,229,255,0.1);
+      border: 1px solid rgba(0,229,255,0.28);
+      border-radius: 5px; cursor: pointer;
+      font-family: 'Montserrat', sans-serif; font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.05em; color: #00e5ff; padding: 4px 14px;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .er-reply-submit:hover { background: rgba(0,229,255,0.18); border-color: rgba(0,229,255,0.5); }
+    .er-reply-submit:disabled { opacity: 0.38; cursor: not-allowed; }
+
     /* Responsive */
     @media (max-width: 640px) {
       .er-layout {
