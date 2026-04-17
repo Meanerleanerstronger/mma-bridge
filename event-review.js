@@ -98,9 +98,15 @@ function renderReviews(reviews, container) {
         <div class="er-rev-text">${esc(rv.review_text)}</div>
         <button class="er-read-more" type="button">Read more</button>
       </div>` : '';
+    const author = rv.display_name && rv.display_name !== 'Anonymous'
+      ? `<span class="er-rev-author">${esc(rv.display_name)}</span>`
+      : '';
     return `
       <div class="er-rev-card${hidden}" data-idx="${i}">
-        <div class="er-rev-stars">${revStars(rv.hype_rating)}</div>
+        <div class="er-rev-header">
+          <div class="er-rev-stars">${revStars(rv.hype_rating)}</div>
+          ${author}
+        </div>
         ${textHtml}
         <div class="er-rev-time">${timeAgo(rv.created_at)}</div>
       </div>`;
@@ -152,10 +158,14 @@ async function loadAndRenderReviews(eventId) {
   renderReviews(reviews, feed);
 }
 
+function authHeaders() {
+  return window.MMABridgeAuth?.authHeaders() || {};
+}
+
 async function submitRating(eventId, eventName, rating, reviewText) {
   const r = await fetch(`${getApiBase()}/ratings`, {
     method: 'POST',
-    headers: {'Content-Type':'application/json'},
+    headers: {'Content-Type':'application/json', ...authHeaders()},
     body: JSON.stringify({
       event_id: eventId,
       event_name: eventName,
@@ -171,7 +181,7 @@ async function submitRating(eventId, eventName, rating, reviewText) {
 async function updateRating(ratingId, rating, reviewText) {
   const r = await fetch(`${getApiBase()}/ratings/${ratingId}`, {
     method: 'PUT',
-    headers: {'Content-Type':'application/json'},
+    headers: {'Content-Type':'application/json', ...authHeaders()},
     body: JSON.stringify({ hype_rating: rating, review_text: reviewText || null })
   });
   if (!r.ok) throw new Error('Update failed');
