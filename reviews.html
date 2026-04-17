@@ -11,28 +11,60 @@
   <link rel="stylesheet" href="style.css" />
 
   <style>
-    body { background: #0a0a0a; }
+    /* ── KEYFRAMES ── */
+    @keyframes shimmerSlide {
+      0%   { background-position: -300% center; }
+      100% { background-position: 300% center; }
+    }
+    @keyframes heroIn {
+      from { opacity: 0; transform: translateY(-14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes rv-shimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    @keyframes accentGrow {
+      from { transform: scaleY(0); opacity: 0; }
+      to   { transform: scaleY(1); opacity: 1; }
+    }
+
+    body {
+      background: #060608;
+      background-image:
+        radial-gradient(ellipse 60% 35% at 100% 0%, rgba(0,229,255,0.04) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 30% at 0% 100%, rgba(200,168,75,0.03) 0%, transparent 50%);
+    }
 
     /* ── HERO ── */
     .rv-hero {
-      padding: 48px 40px 36px;
+      padding: 52px 40px 40px;
       text-align: center;
+      animation: heroIn 0.5s ease both;
     }
     .rv-hero h1 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 900;
       font-size: clamp(2.2rem, 5vw, 3.6rem);
       text-transform: uppercase;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.07em;
       color: #fff;
-      margin: 0 0 6px;
+      margin: 0 0 8px;
     }
-    .rv-hero h1 span { color: cyan; }
+    .rv-hero h1 span {
+      background: linear-gradient(120deg, #00e5ff 0%, #80ffea 40%, #00b8d4 70%, #00e5ff 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmerSlide 4s linear infinite;
+    }
     .rv-hero p {
-      color: rgba(255,255,255,0.38);
+      color: rgba(255,255,255,0.3);
       font-family: 'Inter', sans-serif;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       margin: 0 0 28px;
+      letter-spacing: 0.02em;
     }
     .rv-search-wrap {
       max-width: 480px;
@@ -41,24 +73,29 @@
     }
     .rv-search-wrap input {
       width: 100%;
-      background: #161616;
-      border: 1px solid #2a2a2a;
-      border-radius: 8px;
+      background: #0e0e12;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
       color: #fff;
       font-family: 'Inter', sans-serif;
       font-size: 0.92rem;
-      padding: 11px 40px 11px 16px;
+      padding: 13px 42px 13px 18px;
       outline: none;
       box-sizing: border-box;
-      transition: border-color 0.18s;
+      transition: border-color 0.25s, box-shadow 0.25s;
     }
-    .rv-search-wrap input:focus { border-color: cyan; }
-    .rv-search-wrap input::placeholder { color: rgba(255,255,255,0.25); }
+    .rv-search-wrap input:focus {
+      border-color: rgba(0,229,255,0.45);
+      box-shadow: 0 0 0 3px rgba(0,229,255,0.08), 0 0 24px rgba(0,229,255,0.06);
+    }
+    .rv-search-wrap input::placeholder { color: rgba(255,255,255,0.2); }
     .rv-search-icon {
-      position: absolute; right: 13px; top: 50%;
+      position: absolute; right: 14px; top: 50%;
       transform: translateY(-50%);
-      color: rgba(255,255,255,0.3); pointer-events: none;
+      color: rgba(255,255,255,0.25); pointer-events: none;
+      transition: color 0.2s;
     }
+    .rv-search-wrap input:focus + .rv-search-icon { color: rgba(0,229,255,0.5); }
     .rv-search-icon svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
     /* ── ROWS ── */
@@ -75,10 +112,10 @@
     .rv-row-title {
       font-family: 'Montserrat', sans-serif;
       font-weight: 900;
-      font-size: 0.75rem;
-      letter-spacing: 0.18em;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.9);
+      color: rgba(255,255,255,0.85);
       display: flex;
       align-items: center;
       gap: 10px;
@@ -86,14 +123,20 @@
     .row-accent {
       display: inline-block;
       width: 3px; height: 16px;
-      background: cyan;
+      background: linear-gradient(to bottom, #00e5ff, rgba(0,229,255,0.3));
       border-radius: 2px;
       flex-shrink: 0;
+      transform-origin: top;
+      animation: accentGrow 0.4s 0.2s ease both;
     }
     .rv-row-count {
       font-family: 'Inter', sans-serif;
-      font-size: 0.72rem;
-      color: rgba(255,255,255,0.25);
+      font-size: 0.66rem;
+      color: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px;
+      padding: 2px 10px;
     }
 
     /* Scroll container */
@@ -114,19 +157,26 @@
       position: absolute;
       top: 50%; transform: translateY(-60%);
       z-index: 10;
-      background: rgba(0,0,0,0.8);
-      border: 1px solid rgba(255,255,255,0.12);
-      color: #fff;
+      background: rgba(6,6,8,0.85);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.6);
       width: 40px; height: 40px;
       border-radius: 50%;
       cursor: pointer;
       display: flex; align-items: center; justify-content: center;
       font-size: 1rem;
-      transition: all 0.15s;
-      backdrop-filter: blur(6px);
-      opacity: 0.6;
+      transition: background 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+      backdrop-filter: blur(8px);
+      opacity: 0.7;
     }
-    .rv-arrow:hover { background: rgba(0,255,255,0.15); border-color: cyan; color: cyan; opacity: 1; }
+    .rv-arrow:hover {
+      background: rgba(0,229,255,0.1);
+      border-color: rgba(0,229,255,0.4);
+      color: #00e5ff;
+      opacity: 1;
+      transform: translateY(-60%) scale(1.1);
+      box-shadow: 0 0 18px rgba(0,229,255,0.2);
+    }
     .rv-arrow.left { left: 6px; }
     .rv-arrow.right { right: 6px; }
 
@@ -135,19 +185,19 @@
       flex-shrink: 0;
       cursor: pointer;
       position: relative;
-      border-radius: 14px;
+      border-radius: 16px;
       overflow: hidden;
-      background: #141414;
-      border: 1px solid #1e1e1e;
-      transition: transform 0.25s cubic-bezier(.22,1,.36,1), border-color 0.18s, box-shadow 0.25s;
+      background: #0e0e12;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), border-color 0.25s, box-shadow 0.3s;
     }
     .rv-card.ppv { width: 260px; height: 340px; }
     .rv-card.fn  { width: 220px; height: 290px; }
 
     .rv-card:hover {
-      transform: translateY(-8px) scale(1.025);
-      border-color: rgba(0,255,255,0.5);
-      box-shadow: 0 24px 56px rgba(0,0,0,0.7), 0 0 0 1px rgba(0,255,255,0.12);
+      transform: translateY(-10px) scale(1.02);
+      border-color: rgba(0,229,255,0.4);
+      box-shadow: 0 28px 60px rgba(0,0,0,0.75), 0 0 0 1px rgba(0,229,255,0.08), 0 0 40px rgba(0,229,255,0.06);
     }
 
     /* Full bleed image */
@@ -157,26 +207,25 @@
       width: 100%; height: 100%;
       object-fit: cover;
       object-position: top center;
-      transition: transform 0.4s cubic-bezier(.22,1,.36,1);
+      transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
     }
-    .rv-card:hover .card-poster { transform: scale(1.07); }
+    .rv-card:hover .card-poster { transform: scale(1.08); }
 
     .rv-card .card-placeholder {
       position: absolute;
       inset: 0;
-      background: linear-gradient(160deg, #1a1a1a 0%, #0e0e0e 100%);
+      background: linear-gradient(160deg, #141418 0%, #0a0a0e 100%);
       display: flex; align-items: center; justify-content: center;
       font-size: 3rem;
     }
 
-    /* Dark gradient — stronger at bottom like news cards */
     .rv-card .card-gradient {
       position: absolute;
       inset: 0;
       background: linear-gradient(
         to top,
-        rgba(0,0,0,0.95) 0%,
-        rgba(0,0,0,0.6) 35%,
+        rgba(0,0,0,0.96) 0%,
+        rgba(0,0,0,0.62) 35%,
         rgba(0,0,0,0.1) 65%,
         transparent 100%
       );
@@ -204,8 +253,8 @@
     .rv-card.ppv .card-name { font-size: 1.1rem; }
     .rv-card .card-matchup {
       font-family: 'Inter', sans-serif;
-      font-size: 0.72rem;
-      color: rgba(255,255,255,0.6);
+      font-size: 0.71rem;
+      color: rgba(255,255,255,0.58);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -218,50 +267,52 @@
       top: 12px; left: 12px;
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
-      font-size: 0.52rem;
-      letter-spacing: 0.14em;
+      font-size: 0.5rem;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      padding: 4px 8px;
+      padding: 4px 9px;
       border-radius: 4px;
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(10px);
       z-index: 3;
     }
     .rv-card.ppv .card-badge {
-      background: rgba(0,0,0,0.65);
-      border: 1px solid rgba(255,210,0,0.5);
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,210,0,0.45);
       color: #ffd700;
     }
     .rv-card.fn .card-badge {
-      background: rgba(0,0,0,0.65);
-      border: 1px solid rgba(0,255,255,0.35);
-      color: cyan;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid rgba(0,229,255,0.35);
+      color: #00e5ff;
     }
 
     /* Community rating badge top-right */
     .rv-card .card-rating {
       position: absolute;
       top: 12px; right: 12px;
-      background: rgba(0,0,0,0.72);
-      border: 1px solid rgba(0,255,255,0.35);
-      color: cyan;
+      background: rgba(0,0,0,0.7);
+      border: 1px solid rgba(0,229,255,0.3);
+      color: #00e5ff;
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
-      font-size: 0.6rem;
-      padding: 4px 8px;
+      font-size: 0.58rem;
+      padding: 4px 9px;
       border-radius: 4px;
-      backdrop-filter: blur(6px);
+      backdrop-filter: blur(8px);
       z-index: 3;
     }
 
-    /* Cyan bottom glow line on hover */
+    /* Bottom glow line on hover — slides in */
     .rv-card::after {
       content: '';
       position: absolute;
       bottom: 0; left: 0; right: 0;
       height: 3px;
-      background: linear-gradient(90deg, transparent, cyan, transparent);
+      background: linear-gradient(90deg, transparent, #00e5ff 30%, #80ffea 50%, #00e5ff 70%, transparent);
+      background-size: 200% auto;
       opacity: 0;
-      transition: opacity 0.2s;
+      transition: opacity 0.25s;
+      animation: shimmerSlide 3s linear infinite;
       z-index: 4;
     }
     .rv-card:hover::after { opacity: 1; }
@@ -269,31 +320,27 @@
     /* ── SKELETON ── */
     .rv-skel {
       flex-shrink: 0;
-      border-radius: 10px;
+      border-radius: 12px;
       overflow: hidden;
-      background: #141414;
-      border: 1px solid #1a1a1a;
+      background: #0e0e12;
+      border: 1px solid rgba(255,255,255,0.05);
     }
     .rv-skel.ppv { width: 220px; }
     .rv-skel.fn  { width: 190px; }
     .rv-skel-poster {
       width: 100%; aspect-ratio: 2/3;
-      background: linear-gradient(90deg, #161616 25%, #1e1e1e 50%, #161616 75%);
+      background: linear-gradient(90deg, #121216 25%, #1a1a20 50%, #121216 75%);
       background-size: 200% 100%;
       animation: rv-shimmer 1.4s infinite;
     }
-    .rv-skel-info { padding: 10px 13px 13px; background: #111; }
+    .rv-skel-info { padding: 10px 13px 13px; background: #0e0e12; }
     .rv-skel-line {
       height: 8px; border-radius: 4px; margin-bottom: 7px;
-      background: linear-gradient(90deg, #161616 25%, #1e1e1e 50%, #161616 75%);
+      background: linear-gradient(90deg, #121216 25%, #1a1a20 50%, #121216 75%);
       background-size: 200% 100%;
       animation: rv-shimmer 1.4s infinite;
     }
     .rv-skel-line.s { width: 55%; }
-    @keyframes rv-shimmer {
-      0%   { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
-    }
 
     /* Search results */
     #rvSearchPanel .rv-scroll {

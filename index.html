@@ -13,6 +13,102 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* ── KEYFRAMES ── */
+    @keyframes shimmerSlide {
+      0%   { background-position: -300% center; }
+      100% { background-position: 300% center; }
+    }
+    @keyframes heroContentIn {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes heroBtnPulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(0,229,255,0.45); }
+      55%      { box-shadow: 0 0 0 12px rgba(0,229,255,0); }
+    }
+    @keyframes sectionFadeIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: 0.5; transform: scale(0.85); }
+    }
+    @keyframes liveDot {
+      0%,100% { box-shadow: 0 0 0 0 rgba(0,229,255,0.6); }
+      50%      { box-shadow: 0 0 0 6px rgba(0,229,255,0); }
+    }
+
+    /* ── BODY ── */
+    body {
+      background: #060608;
+      background-image:
+        radial-gradient(ellipse 70% 40% at 50% -5%, rgba(0,229,255,0.035) 0%, transparent 60%);
+    }
+
+    /* ── HERO ── */
+    #hero-content { animation: heroContentIn 0.65s 0.15s ease both; }
+
+    #heroBtn {
+      animation: heroBtnPulse 3s 1.2s ease infinite !important;
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1) !important;
+    }
+    #heroBtn:hover {
+      transform: translateY(-3px) scale(1.04) !important;
+    }
+
+    /* ── SECTION TITLES ── */
+    .section-title {
+      position: relative;
+      animation: sectionFadeIn 0.5s 0.3s ease both;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px; left: 50%;
+      transform: translateX(-50%);
+      width: 36px; height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(0,229,255,0.5), transparent);
+      border-radius: 2px;
+    }
+
+    /* ── RESULTS TRACK FADES ── */
+    #resultsTrack {
+      mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    }
+
+    /* ── LIVE FEED ── */
+    #liveFeed {
+      box-shadow:
+        0 0 40px rgba(0,229,255,0.04),
+        inset 0 1px 0 rgba(255,255,255,0.04),
+        inset 0 -1px 0 rgba(0,0,0,0.3) !important;
+    }
+
+    /* Animate the live dot */
+    span[style*="animation:pulse"] {
+      animation: liveDot 2s infinite !important;
+      box-shadow: 0 0 6px rgba(0,229,255,0.6);
+    }
+
+    /* ── TODAY IN MMA SIDEBAR ── */
+    .sidebar h3 {
+      background: linear-gradient(120deg, #00e5ff 0%, #80ffea 50%, #00e5ff 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmerSlide 5s linear infinite;
+    }
+
+    /* ── CONTENT SECTION ── */
+    .content-container {
+      animation: sectionFadeIn 0.5s 0.4s ease both;
+    }
+  </style>
 </head>
 
 <body>
