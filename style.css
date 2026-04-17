@@ -3256,45 +3256,66 @@ body.light-mode .navbar {
 
 /* Mobile overlay auth */
 .nav-auth-mobile {
-  padding: 16px 32px;
+  padding: 20px 28px 24px;
   border-top: 1px solid rgba(255,255,255,0.07);
   margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
-.nav-auth-mobile .nav-signin-link,
+.nav-auth-mobile .nav-signin-link {
+  display: block;
+  text-align: center;
+  font-size: 0.78rem;
+  padding: 11px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  color: rgba(255,255,255,0.6);
+}
+.nav-auth-mobile .nav-signin-link:hover { color: #fff; border-color: rgba(255,255,255,0.22); }
 .nav-auth-mobile .nav-signup-btn {
   display: block;
   text-align: center;
-  font-size: 0.82rem;
-  padding: 12px;
+  font-size: 0.78rem;
+  padding: 11px;
+  border-radius: 8px;
 }
 .nav-mobile-user {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
-  color: rgba(255,255,255,0.8);
-  font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
+  gap: 12px;
+  margin-bottom: 4px;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 .nav-mobile-signout {
   background: none;
   border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 6px;
+  border-radius: 8px;
   color: rgba(255,255,255,0.45);
   font-family: 'Montserrat', sans-serif;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 9px 16px;
+  padding: 10px 16px;
   cursor: pointer;
   width: 100%;
+  transition: color 0.15s, border-color 0.15s;
 }
 .nav-mobile-signout:hover { color: #fff; border-color: rgba(255,255,255,0.3); }
 
 @media (max-width: 768px) {
+  /* On mobile show avatar only (no username text) in top navbar */
   .nav-username { display: none; }
-  .nav-auth { margin-left: 8px; }
+  .nav-auth { margin-left: 6px; gap: 7px; }
+  /* Shrink Sign In / Sign Up in top bar to fit */
+  .nav-signin-link { font-size: 0.68rem; }
+  .nav-signup-btn  { font-size: 0.62rem; padding: 5px 11px; }
 }
 
 /* ── Live Visitor Feed ── */
