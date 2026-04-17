@@ -9,7 +9,6 @@ import API from './api.js';
 const root       = document.getElementById('erRoot');
 const breadcrumb = document.getElementById('breadcrumbName');
 
-const RATING_LABELS = ['', 'Terrible card', 'Below average', 'Decent night', 'Great card', 'All-time classic 🔥'];
 
 function esc(s) {
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -245,11 +244,13 @@ function renderPage(ev, community) {
           <div class="er-card">
             <div class="er-card-title">How was the card?</div>
             <div class="er-stars" id="erStars">
-              ${[1,2,3,4,5].map(n =>
-                `<button class="er-star" data-val="${n}" type="button">★</button>`
-              ).join('')}
+              ${[1,2,3,4,5].map(n => `
+                <span class="er-star-wrap" data-n="${n}">
+                  <span class="er-star-char er-star-bg">★</span>
+                  <span class="er-star-char er-star-fill" style="width:0%">★</span>
+                </span>`).join('')}
+              <span class="er-rating-num" id="erRatingNum"></span>
             </div>
-            <div class="er-rating-lbl" id="erRatingLbl">Tap a star to rate</div>
           </div>
 
           <!-- TEXT REVIEW -->
@@ -293,8 +294,8 @@ function renderPage(ev, community) {
 
   // ── Stars ─────────────────────────────────
   let selected = 0;
-  const stars     = root.querySelectorAll('.er-star');
-  const ratingLbl = root.querySelector('#erRatingLbl');
+  const starsEl   = root.querySelector('#erStars');
+  const numEl     = root.querySelector('#erRatingNum');
   const submitBtn = root.querySelector('#erSubmit');
   const toast     = root.querySelector('#erToast');
   const errEl     = root.querySelector('#erErr');
@@ -303,19 +304,43 @@ function renderPage(ev, community) {
   textarea.addEventListener('focus', () => textarea.style.borderColor = 'rgba(0,255,255,0.45)');
   textarea.addEventListener('blur',  () => textarea.style.borderColor = '#222');
 
-  function lightStars(val) {
-    stars.forEach(s => s.classList.toggle('er-star-lit', +s.dataset.val <= val));
+  function updateStars(val) {
+    starsEl.querySelectorAll('.er-star-wrap').forEach(w => {
+      const n = +w.dataset.n;
+      const fill = w.querySelector('.er-star-fill');
+      if (val >= n)           fill.style.width = '100%';
+      else if (val >= n - 0.5) fill.style.width = '50%';
+      else                    fill.style.width = '0%';
+    });
   }
 
-  stars.forEach(s => {
-    s.addEventListener('mouseenter', () => lightStars(+s.dataset.val));
-    s.addEventListener('mouseleave', () => lightStars(selected));
-    s.addEventListener('click', () => {
-      selected = +s.dataset.val;
-      lightStars(selected);
-      ratingLbl.textContent = RATING_LABELS[selected];
-      submitBtn.disabled = false;
-    });
+  function halfVal(e, wrap) {
+    const rect = wrap.getBoundingClientRect();
+    const isLeft = (e.clientX - rect.left) < rect.width / 2;
+    const n = +wrap.dataset.n;
+    return isLeft ? Math.max(1, n - 0.5) : n;
+  }
+
+  starsEl.addEventListener('mousemove', e => {
+    const wrap = e.target.closest('.er-star-wrap');
+    if (!wrap) return;
+    const v = halfVal(e, wrap);
+    updateStars(v);
+    numEl.textContent = `${v} / 5`;
+  });
+
+  starsEl.addEventListener('mouseleave', () => {
+    updateStars(selected);
+    numEl.textContent = selected ? `${selected} / 5` : '';
+  });
+
+  starsEl.addEventListener('click', e => {
+    const wrap = e.target.closest('.er-star-wrap');
+    if (!wrap) return;
+    selected = halfVal(e, wrap);
+    updateStars(selected);
+    numEl.textContent = `${selected} / 5`;
+    submitBtn.disabled = false;
   });
 
   // ── Submit ────────────────────────────────
@@ -340,11 +365,12 @@ function renderPage(ev, community) {
           ? `★ ${fresh.avg_hype} &nbsp;·&nbsp; ${fresh.total_ratings} rating${fresh.total_ratings!==1?'s':''}`
           : 'No ratings yet';
       }
-    } catch {
+    } catch (err) {
+      console.error('Submit error:', err);
       submitBtn.disabled = false;
       submitBtn.textContent = 'Submit Review';
       errEl.style.display = 'block';
-      errEl.textContent = 'Could not save — check your connection.';
+      errEl.textContent = 'Could not save — the backend may be waking up, try again in a moment.';
     }
   });
 

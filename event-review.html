@@ -162,32 +162,41 @@
       margin-bottom: 16px;
     }
 
-    /* Star rating */
-    .star-row {
+    /* Half-star rating */
+    .er-stars {
       display: flex;
-      gap: 8px;
-      margin-bottom: 8px;
+      align-items: center;
+      gap: 2px;
+      margin-bottom: 4px;
     }
-    .star-btn {
-      background: none;
-      border: none;
+    .er-star-wrap {
+      position: relative;
+      display: inline-block;
       cursor: pointer;
       font-size: 2rem;
       line-height: 1;
-      padding: 0;
-      color: #333;
-      transition: color 0.12s, transform 0.1s;
     }
-    .star-btn:hover,
-    .star-btn.lit { color: #f5c518; }
-    .star-btn:hover { transform: scale(1.15); }
-
-    .hype-label {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.4);
-      min-height: 20px;
-      margin-top: 4px;
+    .er-star-char {
+      display: block;
+      user-select: none;
+    }
+    .er-star-bg { color: #2a2a2a; }
+    .er-star-fill {
+      position: absolute;
+      top: 0; left: 0;
+      overflow: hidden;
+      color: #f5c518;
+      pointer-events: none;
+      white-space: nowrap;
+      transition: width 0.07s;
+    }
+    .er-rating-num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #f5c518;
+      margin-left: 10px;
+      min-width: 52px;
     }
 
     /* FOTN list */
