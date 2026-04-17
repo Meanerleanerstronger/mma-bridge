@@ -3278,3 +3278,22 @@ body.light-mode .navbar {
   .nav-username { display: none; }
   .nav-auth { margin-left: 8px; }
 }
+
+/* ── Live Visitor Feed ── */
+.feed-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.2);
+}
+
+@keyframes feedSlideIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.feed-entry-new {
+  animation: feedSlideIn 0.35s ease both;
+}

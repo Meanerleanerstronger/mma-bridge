@@ -384,6 +384,13 @@ function renderPage(ev, community) {
   const errEl     = root.querySelector('#erErr');
   const textarea  = root.querySelector('#erReviewText');
 
+  const isLoggedIn = !!window.MMABridgeAuth?.getToken();
+
+  function showAuthGate() {
+    const gate = document.getElementById('authGate');
+    if (gate) gate.style.display = 'flex';
+  }
+
   function updateStars(val) {
     starsEl.querySelectorAll('.er-star-wrap').forEach(w => {
       const n = +w.dataset.n;
@@ -395,6 +402,7 @@ function renderPage(ev, community) {
   }
 
   starsEl.addEventListener('mouseover', e => {
+    if (!isLoggedIn) return;
     const zone = e.target.closest('.er-half-l, .er-half-r');
     if (!zone) return;
     const v = +zone.dataset.val;
@@ -403,11 +411,13 @@ function renderPage(ev, community) {
   });
 
   starsEl.addEventListener('mouseleave', () => {
+    if (!isLoggedIn) return;
     updateStars(selected);
     numEl.textContent = selected ? `${selected}` : '';
   });
 
   starsEl.addEventListener('click', e => {
+    if (!isLoggedIn) { showAuthGate(); return; }
     const zone = e.target.closest('.er-half-l, .er-half-r');
     if (!zone) return;
     selected = +zone.dataset.val;
@@ -415,6 +425,10 @@ function renderPage(ev, community) {
     numEl.textContent = `${selected}`;
     submitBtn.disabled = false;
   });
+
+  textarea.addEventListener('focus', () => {
+    if (!isLoggedIn) { textarea.blur(); showAuthGate(); }
+  }, true);
 
   // ── Lock/unlock helpers ───────────────────
   function lockForm() {

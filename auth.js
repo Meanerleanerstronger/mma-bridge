@@ -88,8 +88,9 @@
         if (r.ok) {
           const user = await r.json();
           setAuth(token, user);
-          // Clean URL then go to index
-          location.replace('index.html');
+          const returnTo = sessionStorage.getItem('auth_return_to') || 'index.html';
+          sessionStorage.removeItem('auth_return_to');
+          location.replace(returnTo);
           return;
         }
       } catch {}
