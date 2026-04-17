@@ -168,6 +168,24 @@ async function submitRating(eventId, eventName, rating, reviewText) {
   return r.json();
 }
 
+async function updateRating(ratingId, rating, reviewText) {
+  const r = await fetch(`${getApiBase()}/ratings/${ratingId}`, {
+    method: 'PUT',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({ hype_rating: rating, review_text: reviewText || null })
+  });
+  if (!r.ok) throw new Error('Update failed');
+  return r.json();
+}
+
+function getStoredRating(eventId) {
+  try { return JSON.parse(localStorage.getItem(`er_rated_${eventId}`)) || null; }
+  catch { return null; }
+}
+function saveStoredRating(eventId, data) {
+  try { localStorage.setItem(`er_rated_${eventId}`, JSON.stringify(data)); } catch {}
+}
+
 // ── Fight card section ────────────────────────
 function fightRow(f) {
   const slotBadge = f.slot === 'main'
@@ -356,9 +374,6 @@ function renderPage(ev, community) {
   const errEl     = root.querySelector('#erErr');
   const textarea  = root.querySelector('#erReviewText');
 
-  textarea.addEventListener('focus', () => textarea.style.borderColor = 'rgba(0,255,255,0.45)');
-  textarea.addEventListener('blur',  () => textarea.style.borderColor = '#222');
-
   function updateStars(val) {
     starsEl.querySelectorAll('.er-star-wrap').forEach(w => {
       const n = +w.dataset.n;
@@ -374,7 +389,7 @@ function renderPage(ev, community) {
     if (!zone) return;
     const v = +zone.dataset.val;
     updateStars(v);
-    numEl.textContent = v % 1 ? `${v}` : `${v}`;
+    numEl.textContent = `${v}`;
   });
 
   starsEl.addEventListener('mouseleave', () => {
@@ -391,32 +406,88 @@ function renderPage(ev, community) {
     submitBtn.disabled = false;
   });
 
-  // ── Submit ────────────────────────────────
+  // ── Lock/unlock helpers ───────────────────
+  function lockForm() {
+    starsEl.style.pointerEvents = 'none';
+    textarea.disabled = true;
+    textarea.style.opacity = '0.45';
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Edit your review';
+    submitBtn.dataset.mode = 'locked';
+  }
+
+  function unlockForm() {
+    starsEl.style.pointerEvents = '';
+    textarea.disabled = false;
+    textarea.style.opacity = '';
+    textarea.focus();
+    submitBtn.textContent = 'Update Review';
+    submitBtn.dataset.mode = 'editing';
+  }
+
+  async function refreshCommunity() {
+    const [fresh] = await Promise.all([
+      fetchCommunityRating(eventId),
+      loadAndRenderReviews(eventId)
+    ]);
+    if (fresh) {
+      const cv = root.querySelector('#erCommVal');
+      if (cv) cv.innerHTML = fresh.avg_hype
+        ? `★ ${fresh.avg_hype} &nbsp;·&nbsp; ${fresh.total_ratings} rating${fresh.total_ratings!==1?'s':''}`
+        : 'No ratings yet';
+    }
+  }
+
+  // ── Pre-fill if already rated ─────────────
+  let savedData = getStoredRating(eventId);
+  if (savedData) {
+    selected = savedData.hype_rating;
+    updateStars(selected);
+    numEl.textContent = `${selected}`;
+    if (savedData.review_text) textarea.value = savedData.review_text;
+    lockForm();
+  }
+
+  textarea.addEventListener('focus', () => { if (!textarea.disabled) textarea.style.borderColor = 'rgba(0,255,255,0.45)'; });
+  textarea.addEventListener('blur',  () => textarea.style.borderColor = '#222');
+
+  // ── Submit / Edit ─────────────────────────
   submitBtn.addEventListener('click', async () => {
+    // Unlock for editing
+    if (submitBtn.dataset.mode === 'locked') {
+      unlockForm();
+      return;
+    }
+
     if (!selected) return;
+    const reviewText = textarea.value.trim();
+    const isEdit = submitBtn.dataset.mode === 'editing';
+
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Submitting…';
+    submitBtn.textContent = isEdit ? 'Updating…' : 'Submitting…';
     errEl.style.display = 'none';
 
     try {
-      await submitRating(eventId, name, selected, textarea.value.trim());
-      toast.classList.add('show');
-      submitBtn.textContent = '✓ Submitted';
+      let ratingId = savedData?.rating_id;
 
-      const [fresh] = await Promise.all([
-        fetchCommunityRating(eventId),
-        loadAndRenderReviews(eventId)
-      ]);
-      if (fresh) {
-        const cv = root.querySelector('#erCommVal');
-        if (cv) cv.innerHTML = fresh.avg_hype
-          ? `★ ${fresh.avg_hype} &nbsp;·&nbsp; ${fresh.total_ratings} rating${fresh.total_ratings!==1?'s':''}`
-          : 'No ratings yet';
+      if (isEdit && ratingId) {
+        await updateRating(ratingId, selected, reviewText);
+      } else {
+        const res = await submitRating(eventId, name, selected, reviewText);
+        ratingId = res.rating_id;
       }
+
+      savedData = { rating_id: ratingId, hype_rating: selected, review_text: reviewText };
+      saveStoredRating(eventId, savedData);
+
+      toast.classList.add('show');
+      lockForm();
+      refreshCommunity();
+
     } catch (err) {
       console.error('Submit error:', err);
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Submit Review';
+      submitBtn.textContent = isEdit ? 'Update Review' : 'Submit Review';
       errEl.style.display = 'block';
       errEl.textContent = 'Could not save — the backend may be waking up, try again in a moment.';
     }
