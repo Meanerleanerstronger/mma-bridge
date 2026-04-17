@@ -38,6 +38,10 @@ async function resolveEvent(eventId) {
   return null;
 }
 
+function pingBackend() {
+  fetch(`${getApiBase()}/health`).catch(() => {});
+}
+
 async function fetchCommunityRating(eventId) {
   try {
     const r = await fetch(`${getApiBase()}/ratings/${encodeURIComponent(eventId)}`);
@@ -380,6 +384,8 @@ function renderPage(ev, community) {
 
 // ── Init ──────────────────────────────────────
 (async () => {
+  pingBackend(); // wake Render free tier before user hits submit
+
   const params  = new URLSearchParams(window.location.search);
   const eventId = params.get('id');
 
