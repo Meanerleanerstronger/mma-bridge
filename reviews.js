@@ -54,10 +54,17 @@ function buildCard(ev, type) {
   const card = document.createElement('div');
   card.className = `rv-card ${isPPV ? 'ppv' : 'fn'}`;
 
+  // Per-image object-position overrides for posters with awkward crops
+  const posterPositions = {
+    'images/fn-texas.jpg': 'center 12%',
+  };
+  const objPos = poster ? (posterPositions[poster] || 'top center') : '';
+
   card.innerHTML = `
     <div class="card-badge">${isPPV ? 'PPV' : 'Fight Night'}</div>
     ${poster
       ? `<img class="card-poster" src="${escHtml(poster)}" alt="${escHtml(name)}" loading="lazy"
+           style="object-position:${objPos}"
            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
          <div class="card-placeholder" style="display:none;">🥊</div>`
       : `<div class="card-placeholder">🥊</div>`
@@ -288,8 +295,9 @@ function isUpcomingEvent(ev) {
       return;
     }
 
-    renderRow(scrollPPV, ppvCount, ppvPast, 'ppv');
-    renderRow(scrollFN,  fnCount,  fnPast,  'fn');
+    // Render with default sort (latest first)
+    applySortRow(scrollPPV, ppvCount, ppvPast, 'ppv', 'latest');
+    applySortRow(scrollFN,  fnCount,  fnPast,  'fn',  'latest');
 
     // Hide a row section entirely if empty
     if (!ppvPast.length) document.getElementById('rowPPV').style.display = 'none';
