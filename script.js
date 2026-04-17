@@ -275,37 +275,33 @@ function startLiveFeed() {
   const feed = document.getElementById('liveFeed');
   if (!feed) return;
 
-  const API = (() => {
-    const local = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-    return local ? 'http://localhost:5001/api' : 'https://mmabridge-backend.onrender.com/api';
-  })();
+  const API = location.hostname === 'localhost' || location.hostname === '127.0.0.1'
+    ? 'http://localhost:5001/api'
+    : 'https://mmabridge-backend.onrender.com/api';
 
-  // Ping backend with our visit (fire-and-forget)
-  fetch(`${API}/visitors/ping`, { method: 'POST' }).catch(() => {});
-
-  let lastIds = new Set();   // track rendered entries to avoid flicker
+  let lastIds = new Set();
 
   function timeAgo(ts) {
     const s = Math.floor(Date.now() / 1000) - ts;
-    if (s < 60)  return 'just now';
+    if (s < 60)   return 'just now';
     if (s < 3600) return `${Math.floor(s / 60)}m ago`;
     return `${Math.floor(s / 3600)}h ago`;
   }
 
   function render(visitors) {
-    if (!visitors.length) {
+    if (!Array.isArray(visitors) || !visitors.length) {
       feed.innerHTML = `<div class="feed-empty">Waiting for visitors…</div>`;
       return;
     }
     feed.innerHTML = '';
-    visitors.forEach((v, i) => {
+    visitors.forEach(v => {
       const key = `${v.city}-${v.country}-${v.ts}`;
       const div = document.createElement('div');
       div.className = 'feed-entry';
       if (!lastIds.has(key)) div.classList.add('feed-entry-new');
       div.innerHTML = `
-        <div class="feed-flag">${v.flag}</div>
-        <div class="feed-text"><strong>Someone from ${v.city}, ${v.country}</strong> visited MMA Bridge</div>
+        <div class="feed-flag">${v.flag || '🌍'}</div>
+        <div class="feed-text"><strong>Someone from ${v.city || 'Unknown'}, ${v.country || 'Unknown'}</strong> visited MMA Bridge</div>
         <div class="feed-action">${timeAgo(v.ts)}</div>`;
       feed.appendChild(div);
     });
@@ -319,7 +315,14 @@ function startLiveFeed() {
     } catch {}
   }
 
-  poll();
+  // Ping records current visitor synchronously and returns updated list immediately
+  fetch(`${API}/visitors/ping`, { method: 'POST' })
+    .then(r => r.ok ? r.json() : null)
+    .then(data => { if (data) render(data); })
+    .catch(() => {});
+
+  // Also poll independently (catches the ping result if slightly delayed)
+  setTimeout(poll, 3000);
   setInterval(poll, 30000);
 }
 
