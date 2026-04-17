@@ -71,6 +71,15 @@ function timeAgo(isoStr) {
   return new Date(isoStr).toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
 }
 
+function revStars(rating) {
+  return [1,2,3,4,5].map(n => {
+    let cls = 'dim';
+    if (rating >= n)            cls = 'full';
+    else if (rating >= n - 0.5) cls = 'half';
+    return `<span class="er-rev-star ${cls}">★</span>`;
+  }).join('');
+}
+
 function renderReviews(reviews, container) {
   if (!reviews.length) {
     container.innerHTML = `
@@ -80,20 +89,60 @@ function renderReviews(reviews, container) {
       </div>`;
     return;
   }
-  container.innerHTML = reviews.map(rv => {
-    const stars = [1,2,3,4,5].map(n =>
-      `<span class="er-rev-star${n > rv.hype_rating ? ' dim' : ''}">★</span>`
-    ).join('');
-    const text = rv.review_text
-      ? `<div class="er-rev-text">${esc(rv.review_text)}</div>`
-      : '';
+
+  const SHOW_INIT = 3;
+  const cards = reviews.map((rv, i) => {
+    const hidden = i >= SHOW_INIT ? ' hidden' : '';
+    const textHtml = rv.review_text ? `
+      <div class="er-rev-text-wrap">
+        <div class="er-rev-text">${esc(rv.review_text)}</div>
+        <button class="er-read-more" type="button">Read more</button>
+      </div>` : '';
     return `
-      <div class="er-rev-card">
-        <div class="er-rev-stars">${stars}</div>
-        ${text}
+      <div class="er-rev-card${hidden}" data-idx="${i}">
+        <div class="er-rev-stars">${revStars(rv.hype_rating)}</div>
+        ${textHtml}
         <div class="er-rev-time">${timeAgo(rv.created_at)}</div>
       </div>`;
-  }).join('');
+  });
+
+  const moreBtn = reviews.length > SHOW_INIT ? `
+    <div class="er-show-more-wrap" id="erShowMoreWrap">
+      <button class="er-show-more-btn" id="erShowMore">
+        Show ${reviews.length - SHOW_INIT} more review${reviews.length - SHOW_INIT !== 1 ? 's' : ''}
+      </button>
+    </div>` : '';
+
+  container.innerHTML = cards.join('') + moreBtn;
+
+  // Wire "Read more" toggles
+  container.querySelectorAll('.er-rev-text-wrap').forEach(wrap => {
+    const textEl = wrap.querySelector('.er-rev-text');
+    const btn    = wrap.querySelector('.er-read-more');
+    // Only show button if content is actually clamped
+    requestAnimationFrame(() => {
+      if (textEl.scrollHeight > textEl.clientHeight + 2) {
+        btn.classList.add('visible');
+      }
+    });
+    btn.addEventListener('click', () => {
+      const expanded = textEl.classList.toggle('expanded');
+      btn.textContent = expanded ? 'Show less' : 'Read more';
+    });
+  });
+
+  // Wire "Show more reviews"
+  const showMoreBtn = container.querySelector('#erShowMore');
+  if (showMoreBtn) {
+    showMoreBtn.addEventListener('click', () => {
+      container.querySelectorAll('.er-rev-card.hidden').forEach((card, i) => {
+        card.classList.remove('hidden');
+        card.classList.add('reveal');
+        card.style.animationDelay = `${i * 60}ms`;
+      });
+      container.querySelector('#erShowMoreWrap').remove();
+    });
+  }
 }
 
 async function loadAndRenderReviews(eventId) {
@@ -314,9 +363,9 @@ function renderPage(ev, community) {
     starsEl.querySelectorAll('.er-star-wrap').forEach(w => {
       const n = +w.dataset.n;
       const fill = w.querySelector('.er-star-fill');
-      if (val >= n)            fill.style.width = '100%';
-      else if (val >= n - 0.5) fill.style.width = '50%';
-      else                     fill.style.width = '0%';
+      fill.classList.remove('full', 'half');
+      if (val >= n)            fill.classList.add('full');
+      else if (val >= n - 0.5) fill.classList.add('half');
     });
   }
 

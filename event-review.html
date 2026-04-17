@@ -162,52 +162,128 @@
       margin-bottom: 16px;
     }
 
-    /* Half-star rating */
+    /* ── Half-star rating ── */
     .er-stars {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 6px;
       margin-bottom: 4px;
     }
     .er-star-wrap {
       position: relative;
       display: inline-block;
-      font-size: 2.6rem;
+      font-size: 3rem;
       line-height: 1;
       cursor: pointer;
+      /* extra padding makes hit zones easier on mobile */
+      padding: 4px 2px;
     }
-    /* bg star (empty grey) */
     .er-star-bg {
       display: block;
       color: #2e2e2e;
       user-select: none;
       pointer-events: none;
     }
-    /* gold fill — clipped by width */
+    /* gold fill — clip-path cuts to left half or full */
     .er-star-fill {
       position: absolute;
       inset: 0;
-      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      line-height: 1;
       color: #f5c518;
       pointer-events: none;
-      white-space: nowrap;
-      width: 0%;
+      clip-path: inset(0 100% 0 0); /* default: nothing shown */
+      padding: 4px 2px;
     }
-    /* invisible hit zones — left = half, right = full */
+    .er-star-fill.full  { clip-path: inset(0 0% 0 0); }
+    .er-star-fill.half  { clip-path: inset(0 50% 0 0); }
+    /* invisible hit zones */
     .er-half-l, .er-half-r {
       position: absolute;
       top: 0; bottom: 0;
       width: 50%;
+      z-index: 1;
     }
     .er-half-l { left: 0; }
     .er-half-r { right: 0; }
     .er-rating-num {
       font-family: 'Montserrat', sans-serif;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 700;
       color: #f5c518;
-      margin-left: 12px;
-      min-width: 44px;
+      margin-left: 10px;
+      min-width: 36px;
+      line-height: 1;
+    }
+
+    /* ── Review cards (feed) ── */
+    .er-rev-text-wrap {
+      position: relative;
+      margin-bottom: 10px;
+    }
+    .er-rev-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.84rem;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.72);
+      white-space: pre-wrap;
+      word-break: break-word;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+    .er-rev-text.expanded {
+      display: block;
+      -webkit-line-clamp: unset;
+    }
+    .er-read-more {
+      background: none;
+      border: none;
+      padding: 4px 0 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      color: rgba(0,229,255,0.7);
+      cursor: pointer;
+      display: none;
+    }
+    .er-read-more.visible { display: block; }
+
+    /* ── Show more reviews ── */
+    .er-show-more-wrap {
+      text-align: center;
+      margin-top: 16px;
+    }
+    .er-show-more-btn {
+      background: none;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 6px;
+      padding: 9px 20px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .er-show-more-btn:hover {
+      border-color: rgba(0,229,255,0.35);
+      color: rgba(0,229,255,0.8);
+    }
+    .er-rev-card.hidden {
+      display: none;
+    }
+    .er-rev-card.reveal {
+      animation: revealCard 0.3s ease both;
+    }
+    @keyframes revealCard {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     /* FOTN list */
@@ -354,16 +430,27 @@
 
     .er-rev-stars {
       display: flex;
-      gap: 3px;
+      gap: 2px;
       margin-bottom: 10px;
     }
     .er-rev-star {
+      position: relative;
+      display: inline-block;
       font-size: 1rem;
-      color: #f5c518;
       line-height: 1;
+      color: #2a2a2a;
     }
-    .er-rev-star.dim { color: #2a2a2a; }
+    .er-rev-star::after {
+      content: '★';
+      position: absolute;
+      inset: 0;
+      color: #f5c518;
+      clip-path: inset(0 100% 0 0);
+    }
+    .er-rev-star.full::after  { clip-path: inset(0 0% 0 0); }
+    .er-rev-star.half::after  { clip-path: inset(0 50% 0 0); }
 
+    /* review text now lives in .er-rev-text-wrap — legacy selector kept for safety */
     .er-rev-text {
       font-family: 'Inter', sans-serif;
       font-size: 0.85rem;
