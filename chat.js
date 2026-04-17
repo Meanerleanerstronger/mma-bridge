@@ -3,6 +3,7 @@
 let chatOpen = false;
 let chatHistory = [];
 let chatBusy = false;
+let lucasLiveData = null; // holds { events, fighters } fetched at startup
 
 const BACKEND = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
   ? 'http://localhost:5001/api/chat'
@@ -11,6 +12,25 @@ const BACKEND = (window.location.hostname === 'localhost' || window.location.hos
 // Wake up Render on every page load
 if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
   fetch('https://mmabridge-backend.onrender.com/api/health').catch(() => {});
+}
+
+// Fetch events.json + fighters.json at startup and cache as live data for Lucas
+async function loadLiveData() {
+  try {
+    const [evRes, fRes] = await Promise.all([
+      fetch('events.json'),
+      fetch('fighters.json')
+    ]);
+    const [events, fighters] = await Promise.all([
+      evRes.ok  ? evRes.json()  : null,
+      fRes.ok   ? fRes.json()   : null
+    ]);
+    if (events || fighters) {
+      lucasLiveData = { events: events || [], fighters: fighters || {} };
+    }
+  } catch (e) {
+    // silently fail — backend will use its own disk copies as fallback
+  }
 }
 
 function initWidget() {
@@ -272,7 +292,7 @@ async function sendMsg(text) {
     const res = await fetch(BACKEND, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: text, history: chatHistory, page: 'widget' })
+      body: JSON.stringify({ message: text, history: chatHistory, page: 'widget', live_data: lucasLiveData })
     });
     const data = await res.json();
     removeTyping();
@@ -293,4 +313,7 @@ async function sendMsg(text) {
   document.getElementById('lw-input').focus();
 }
 
-document.addEventListener('DOMContentLoaded', initWidget);
+document.addEventListener('DOMContentLoaded', () => {
+  initWidget();
+  loadLiveData();
+});
