@@ -386,9 +386,9 @@ function renderPage(ev, community) {
 
   const isLoggedIn = !!window.MMABridgeAuth?.getToken();
 
-  function showAuthGate() {
-    const gate = document.getElementById('authGate');
-    if (gate) gate.style.display = 'flex';
+  function requireAuth() {
+    sessionStorage.setItem('auth_return_to', location.href);
+    location.href = 'auth.html';
   }
 
   function updateStars(val) {
@@ -417,7 +417,7 @@ function renderPage(ev, community) {
   });
 
   starsEl.addEventListener('click', e => {
-    if (!isLoggedIn) { showAuthGate(); return; }
+    if (!isLoggedIn) { requireAuth(); return; }
     const zone = e.target.closest('.er-half-l, .er-half-r');
     if (!zone) return;
     selected = +zone.dataset.val;
@@ -427,7 +427,7 @@ function renderPage(ev, community) {
   });
 
   textarea.addEventListener('focus', () => {
-    if (!isLoggedIn) { textarea.blur(); showAuthGate(); }
+    if (!isLoggedIn) { textarea.blur(); requireAuth(); }
   }, true);
 
   // ── Lock/unlock helpers ───────────────────

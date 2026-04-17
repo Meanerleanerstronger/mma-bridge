@@ -198,8 +198,8 @@
         <span class="logo-bridge">Bridge</span>
       </a>
 
-      <div class="auth-title">Welcome back</div>
-      <div class="auth-sub">Sign in to rate events, leave reviews,<br>and join the community.</div>
+      <div class="auth-title" id="authTitle">Welcome back</div>
+      <div class="auth-sub" id="authSub">Sign in to rate events, leave reviews,<br>and join the community.</div>
 
       <div id="auth-error-msg"></div>
 
@@ -224,11 +224,17 @@
   </div>
 
   <script>
-    // Set the Google sign-in URL dynamically using the same API base as the rest of the site
     (function () {
       const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
       const apiBase = isLocal ? 'http://localhost:5001/api' : 'https://mmabridge-backend.onrender.com/api';
       document.getElementById('googleSignInBtn').href = `${apiBase}/auth/google`;
+
+      // If coming from an event-review page, update the messaging
+      const returnTo = sessionStorage.getItem('auth_return_to') || '';
+      if (returnTo.includes('event-review')) {
+        document.getElementById('authTitle').textContent = 'Sign in to leave a review';
+        document.getElementById('authSub').textContent = 'You\'ll be brought straight back to the event after signing in.';
+      }
     })();
   </script>
   <script src="auth.js"></script>
