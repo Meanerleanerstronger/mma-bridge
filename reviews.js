@@ -150,29 +150,56 @@ function renderRow(container, countEl, events, type) {
 }
 
 // ── Sort dropdowns ────────────────────────────
-function initSortDropdown(btnId, dropId, onSelect) {
-  const btn  = document.getElementById(btnId);
-  const drop = document.getElementById(dropId);
-  if (!btn || !drop) return;
+function initSortDropdown(wrapId, btnId, dropId, onSelect) {
+  const wrap  = document.getElementById(wrapId);
+  const btn   = document.getElementById(btnId);
+  const drop  = document.getElementById(dropId);
+  if (!wrap || !btn || !drop) return;
+
+  const labelEl = btn.querySelector('.rv-sort-label');
 
   btn.addEventListener('click', e => {
     e.stopPropagation();
-    drop.classList.toggle('open');
+    const isOpen = drop.classList.contains('open');
+    // Close all other dropdowns first
+    document.querySelectorAll('.rv-sort-drop.open').forEach(d => {
+      d.classList.remove('open');
+      d.closest('.rv-sort-wrap')?.classList.remove('open');
+    });
+    if (!isOpen) {
+      drop.classList.add('open');
+      wrap.classList.add('open');
+    }
   });
 
   drop.querySelectorAll('button').forEach(opt => {
-    opt.addEventListener('click', () => {
+    opt.addEventListener('click', e => {
+      e.stopPropagation();
       drop.querySelectorAll('button').forEach(o => o.classList.remove('active'));
       opt.classList.add('active');
-      btn.textContent = opt.textContent + ' ↓';
+      if (labelEl) labelEl.textContent = opt.textContent;
       drop.classList.remove('open');
+      wrap.classList.remove('open');
       onSelect(opt.dataset.sort);
     });
   });
 }
 
 document.addEventListener('click', () => {
-  document.querySelectorAll('.rv-sort-drop.open').forEach(d => d.classList.remove('open'));
+  document.querySelectorAll('.rv-sort-drop.open').forEach(d => {
+    d.classList.remove('open');
+    d.closest('.rv-sort-wrap')?.classList.remove('open');
+  });
+});
+
+// Init sort dropdowns immediately — elements are in HTML, data will be set when loaded
+initSortDropdown('ppvSortWrap', 'ppvSortBtn', 'ppvSortDrop', mode => {
+  ppvSort = mode;
+  if (ppvPast.length) applySortRow(scrollPPV, ppvCount, ppvPast, 'ppv', mode);
+});
+initSortDropdown('fnSortWrap', 'fnSortBtn', 'fnSortDrop', mode => {
+  fnSort = mode;
+  if (fnPast.length) applySortRow(scrollFN, fnCount, fnPast, 'fn', mode);
 });
 
 // ── Arrow scroll ──────────────────────────────
@@ -268,14 +295,6 @@ function isUpcomingEvent(ev) {
     if (!ppvPast.length) document.getElementById('rowPPV').style.display = 'none';
     if (!fnPast.length)  document.getElementById('rowFN').style.display = 'none';
 
-    initSortDropdown('ppvSortBtn', 'ppvSortDrop', mode => {
-      ppvSort = mode;
-      applySortRow(scrollPPV, ppvCount, ppvPast, 'ppv', mode);
-    });
-    initSortDropdown('fnSortBtn', 'fnSortDrop', mode => {
-      fnSort = mode;
-      applySortRow(scrollFN, fnCount, fnPast, 'fn', mode);
-    });
 
   } catch (err) {
     console.error('Reviews load error:', err);
