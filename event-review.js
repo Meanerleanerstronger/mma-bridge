@@ -47,6 +47,59 @@ async function fetchCommunityRating(eventId) {
   } catch { return null; }
 }
 
+async function fetchReviews(eventId) {
+  try {
+    const r = await fetch(`${getApiBase()}/reviews/${encodeURIComponent(eventId)}`);
+    if (!r.ok) return [];
+    return await r.json();
+  } catch { return []; }
+}
+
+function timeAgo(isoStr) {
+  if (!isoStr) return '';
+  const diff = Date.now() - new Date(isoStr).getTime();
+  const mins  = Math.floor(diff / 60000);
+  const hours = Math.floor(mins / 60);
+  const days  = Math.floor(hours / 24);
+  if (mins < 2)   return 'just now';
+  if (mins < 60)  return `${mins}m ago`;
+  if (hours < 24) return `${hours}h ago`;
+  if (days < 30)  return `${days}d ago`;
+  return new Date(isoStr).toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
+}
+
+function renderReviews(reviews, container) {
+  if (!reviews.length) {
+    container.innerHTML = `
+      <div class="er-reviews-empty">
+        <strong>No reviews yet.</strong>
+        Be the first to share your take on this card.
+      </div>`;
+    return;
+  }
+  container.innerHTML = reviews.map(rv => {
+    const stars = [1,2,3,4,5].map(n =>
+      `<span class="er-rev-star${n > rv.hype_rating ? ' dim' : ''}">★</span>`
+    ).join('');
+    const text = rv.review_text
+      ? `<div class="er-rev-text">${esc(rv.review_text)}</div>`
+      : '';
+    return `
+      <div class="er-rev-card">
+        <div class="er-rev-stars">${stars}</div>
+        ${text}
+        <div class="er-rev-time">${timeAgo(rv.created_at)}</div>
+      </div>`;
+  }).join('');
+}
+
+async function loadAndRenderReviews(eventId) {
+  const feed = document.getElementById('erReviewsFeed');
+  if (!feed) return;
+  const reviews = await fetchReviews(eventId);
+  renderReviews(reviews, feed);
+}
+
 async function submitRating(eventId, eventName, rating, reviewText) {
   const r = await fetch(`${getApiBase()}/ratings`, {
     method: 'POST',
@@ -175,49 +228,65 @@ function renderPage(ev, community) {
         </div>`
       }
 
-      <div class="er-content">
+      <div class="er-two-col">
 
-        <!-- COMMUNITY SCORE -->
-        <div class="er-community-bar">
-          <span class="er-comm-label">Community Rating</span>
-          <span class="er-comm-val" id="erCommVal">
-            ${avg ? `★ ${avg} &nbsp;·&nbsp; ${total} rating${total!==1?'s':''}` : 'No ratings yet — be first!'}
-          </span>
-        </div>
+        <!-- LEFT: rating form + fight card -->
+        <div class="er-content">
 
-        <!-- STAR RATING -->
-        <div class="er-card">
-          <div class="er-card-title">How was the card?</div>
-          <div class="er-stars" id="erStars">
-            ${[1,2,3,4,5].map(n =>
-              `<button class="er-star" data-val="${n}" type="button">★</button>`
-            ).join('')}
+          <!-- COMMUNITY SCORE -->
+          <div class="er-community-bar">
+            <span class="er-comm-label">Community Rating</span>
+            <span class="er-comm-val" id="erCommVal">
+              ${avg ? `★ ${avg} &nbsp;·&nbsp; ${total} rating${total!==1?'s':''}` : 'No ratings yet — be first!'}
+            </span>
           </div>
-          <div class="er-rating-lbl" id="erRatingLbl">Tap a star to rate</div>
+
+          <!-- STAR RATING -->
+          <div class="er-card">
+            <div class="er-card-title">How was the card?</div>
+            <div class="er-stars" id="erStars">
+              ${[1,2,3,4,5].map(n =>
+                `<button class="er-star" data-val="${n}" type="button">★</button>`
+              ).join('')}
+            </div>
+            <div class="er-rating-lbl" id="erRatingLbl">Tap a star to rate</div>
+          </div>
+
+          <!-- TEXT REVIEW -->
+          <div class="er-card">
+            <div class="er-card-title">Leave a review <span class="er-optional">(optional)</span></div>
+            <textarea id="erReviewText"
+              placeholder="Break down the card — standout fights, surprises, disappointments, what you'd give FOTN..."
+              rows="4"
+            ></textarea>
+          </div>
+
+          <!-- SUBMIT -->
+          <button class="er-submit" id="erSubmit" disabled>Submit Review</button>
+          <div class="er-toast" id="erToast">✅ Review saved — thanks!</div>
+          <div class="er-error-msg" id="erErr" style="display:none"></div>
+
+          <!-- FIGHT CARD -->
+          ${hasCard ? `
+            <div class="er-card er-card-fights">
+              <div class="er-card-title">Full Fight Card</div>
+              ${fightSection('Main Card',    ev.mainCard)}
+              ${fightSection('Prelims',      ev.prelims)}
+              ${fightSection('Early Prelims',ev.earlyPrelims)}
+            </div>` : ''}
+
         </div>
 
-        <!-- TEXT REVIEW -->
-        <div class="er-card">
-          <div class="er-card-title">Leave a review <span class="er-optional">(optional)</span></div>
-          <textarea id="erReviewText"
-            placeholder="Break down the card — standout fights, surprises, disappointments, what you'd give FOTN..."
-            rows="4"
-          ></textarea>
+        <!-- RIGHT: fan reviews feed -->
+        <div class="er-reviews-col">
+          <div class="er-reviews-heading">Fan Reviews</div>
+          <div id="erReviewsFeed">
+            <div class="er-reviews-empty">
+              <strong>No reviews yet.</strong>
+              Be the first to share your take on this card.
+            </div>
+          </div>
         </div>
-
-        <!-- SUBMIT -->
-        <button class="er-submit" id="erSubmit" disabled>Submit Review</button>
-        <div class="er-toast" id="erToast">✅ Review saved — thanks!</div>
-        <div class="er-error-msg" id="erErr" style="display:none"></div>
-
-        <!-- FIGHT CARD -->
-        ${hasCard ? `
-          <div class="er-card er-card-fights">
-            <div class="er-card-title">Full Fight Card</div>
-            ${fightSection('Main Card',    ev.mainCard)}
-            ${fightSection('Prelims',      ev.prelims)}
-            ${fightSection('Early Prelims',ev.earlyPrelims)}
-          </div>` : ''}
 
       </div>
     </div>`;
@@ -261,7 +330,10 @@ function renderPage(ev, community) {
       toast.classList.add('show');
       submitBtn.textContent = '✓ Submitted';
 
-      const fresh = await fetchCommunityRating(eventId);
+      const [fresh] = await Promise.all([
+        fetchCommunityRating(eventId),
+        loadAndRenderReviews(eventId)
+      ]);
       if (fresh) {
         const cv = root.querySelector('#erCommVal');
         if (cv) cv.innerHTML = fresh.avg_hype
@@ -275,6 +347,9 @@ function renderPage(ev, community) {
       errEl.textContent = 'Could not save — check your connection.';
     }
   });
+
+  // ── Load initial reviews ──────────────────
+  loadAndRenderReviews(eventId);
 }
 
 // ── Init ──────────────────────────────────────

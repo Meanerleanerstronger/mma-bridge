@@ -285,6 +285,101 @@
       font-family: 'Inter', sans-serif;
     }
 
+    /* ── Two-column layout ── */
+    .er-two-col {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 32px;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 32px 80px;
+      align-items: start;
+    }
+
+    /* ── Reviews column ── */
+    .er-reviews-col {
+      position: sticky;
+      top: 80px;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.08) transparent;
+    }
+    .er-reviews-col::-webkit-scrollbar { width: 4px; }
+    .er-reviews-col::-webkit-scrollbar-track { background: transparent; }
+    .er-reviews-col::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+
+    .er-reviews-heading {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    /* ── Review card ── */
+    .er-rev-card {
+      background: #121212;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+      padding: 20px 22px;
+      margin-bottom: 14px;
+      transition: border-color 0.2s;
+    }
+    .er-rev-card:hover { border-color: rgba(255,255,255,0.13); }
+
+    .er-rev-stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 10px;
+    }
+    .er-rev-star {
+      font-size: 1rem;
+      color: #f5c518;
+      line-height: 1;
+    }
+    .er-rev-star.dim { color: #2a2a2a; }
+
+    .er-rev-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 14px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .er-rev-time {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.22);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Empty state ── */
+    .er-reviews-empty {
+      text-align: center;
+      padding: 48px 20px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.2);
+      line-height: 1.7;
+    }
+    .er-reviews-empty strong {
+      display: block;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.28);
+      margin-bottom: 6px;
+    }
+
     /* Responsive */
     @media (max-width: 640px) {
       .er-layout {
@@ -299,6 +394,19 @@
       .er-poster, .er-poster-placeholder {
         width: 110px;
         flex-shrink: 0;
+      }
+      .er-two-col {
+        grid-template-columns: 1fr;
+        padding: 0 16px 60px;
+        gap: 0;
+      }
+      .er-reviews-col {
+        position: static;
+        max-height: none;
+        overflow: visible;
+        border-top: 1px solid rgba(255,255,255,0.07);
+        padding-top: 32px;
+        margin-top: 8px;
       }
     }
   </style>
