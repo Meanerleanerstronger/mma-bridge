@@ -18,6 +18,9 @@ const searchLabel  = document.getElementById('searchLabel');
 const rvSearch     = document.getElementById('rvSearch');
 
 let allEvents = [];
+let ppvPast = [], fnPast = [];
+const ratingsCache = {};
+let ppvSort = 'latest', fnSort = 'latest';
 
 // ── Helpers ───────────────────────────────────
 function escHtml(s) {
@@ -93,6 +96,48 @@ async function fetchRating(eventId) {
   } catch { return null; }
 }
 
+// ── Sort helpers ──────────────────────────────
+async function ensureRatings(events) {
+  await Promise.all(events.map(async ev => {
+    const id = getEventId(ev);
+    if (id in ratingsCache) return;
+    const r = await fetchRating(id);
+    ratingsCache[id] = r?.avg_hype ? parseFloat(r.avg_hype) : null;
+  }));
+}
+
+function sortedEvents(events, mode) {
+  const arr = [...events];
+  if (mode === 'latest') {
+    return arr.sort((a, b) => new Date(b.isoDate || 0) - new Date(a.isoDate || 0));
+  }
+  const getR = ev => ratingsCache[getEventId(ev)];
+  if (mode === 'highest') {
+    return arr.sort((a, b) => {
+      const ra = getR(a), rb = getR(b);
+      if (ra == null && rb == null) return 0;
+      if (ra == null) return 1;
+      if (rb == null) return -1;
+      return rb - ra;
+    });
+  }
+  if (mode === 'lowest') {
+    return arr.sort((a, b) => {
+      const ra = getR(a), rb = getR(b);
+      if (ra == null && rb == null) return 0;
+      if (ra == null) return 1;
+      if (rb == null) return -1;
+      return ra - rb;
+    });
+  }
+  return arr;
+}
+
+async function applySortRow(scrollEl, countEl, events, type, mode) {
+  if (mode !== 'latest') await ensureRatings(events);
+  renderRow(scrollEl, countEl, sortedEvents(events, mode), type);
+}
+
 // ── Render a row ──────────────────────────────
 function renderRow(container, countEl, events, type) {
   container.innerHTML = '';
@@ -103,6 +148,32 @@ function renderRow(container, countEl, events, type) {
   countEl.textContent = '';
   events.forEach(ev => container.appendChild(buildCard(ev, type)));
 }
+
+// ── Sort dropdowns ────────────────────────────
+function initSortDropdown(btnId, dropId, onSelect) {
+  const btn  = document.getElementById(btnId);
+  const drop = document.getElementById(dropId);
+  if (!btn || !drop) return;
+
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    drop.classList.toggle('open');
+  });
+
+  drop.querySelectorAll('button').forEach(opt => {
+    opt.addEventListener('click', () => {
+      drop.querySelectorAll('button').forEach(o => o.classList.remove('active'));
+      opt.classList.add('active');
+      btn.textContent = opt.textContent + ' ↓';
+      drop.classList.remove('open');
+      onSelect(opt.dataset.sort);
+    });
+  });
+}
+
+document.addEventListener('click', () => {
+  document.querySelectorAll('.rv-sort-drop.open').forEach(d => d.classList.remove('open'));
+});
 
 // ── Arrow scroll ──────────────────────────────
 document.querySelectorAll('.rv-arrow').forEach(btn => {
@@ -169,8 +240,8 @@ function isUpcomingEvent(ev) {
     allEvents = await API.getPastEvents();
     debugLog('Reviews: loaded', allEvents.length, 'past events');
 
-    const ppvPast = allEvents.filter(ev => (ev.type||'').toUpperCase().includes('PPV'));
-    const fnPast  = allEvents.filter(ev => !(ev.type||'').toUpperCase().includes('PPV'));
+    ppvPast = allEvents.filter(ev => (ev.type||'').toUpperCase().includes('PPV'));
+    fnPast  = allEvents.filter(ev => !(ev.type||'').toUpperCase().includes('PPV'));
 
     if (!allEvents.length) {
       document.getElementById('rvRows').innerHTML = `
@@ -196,6 +267,15 @@ function isUpcomingEvent(ev) {
     // Hide a row section entirely if empty
     if (!ppvPast.length) document.getElementById('rowPPV').style.display = 'none';
     if (!fnPast.length)  document.getElementById('rowFN').style.display = 'none';
+
+    initSortDropdown('ppvSortBtn', 'ppvSortDrop', mode => {
+      ppvSort = mode;
+      applySortRow(scrollPPV, ppvCount, ppvPast, 'ppv', mode);
+    });
+    initSortDropdown('fnSortBtn', 'fnSortDrop', mode => {
+      fnSort = mode;
+      applySortRow(scrollFN, fnCount, fnPast, 'fn', mode);
+    });
 
   } catch (err) {
     console.error('Reviews load error:', err);

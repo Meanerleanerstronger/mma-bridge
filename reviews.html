@@ -103,7 +103,7 @@
 
     /* ── ROWS ── */
     .rv-rows { padding: 20px 0 80px; }
-    .rv-row { margin-bottom: 52px; }
+    .rv-row { margin-bottom: 72px; }
 
     .rv-row-header {
       display: flex;
@@ -345,6 +345,59 @@
     }
     .rv-skel-line.s { width: 55%; }
 
+    /* ── SORT ── */
+    .rv-row-right { display: flex; align-items: center; gap: 10px; }
+    .rv-sort-wrap { position: relative; }
+    .rv-sort-btn {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      color: #00e5ff;
+      background: rgba(0,229,255,0.05);
+      border: 1px solid rgba(0,229,255,0.22);
+      border-radius: 20px;
+      padding: 4px 11px;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+      white-space: nowrap;
+    }
+    .rv-sort-btn:hover {
+      background: rgba(0,229,255,0.1);
+      border-color: rgba(0,229,255,0.45);
+    }
+    .rv-sort-drop {
+      display: none;
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      background: #0e0e12;
+      border: 1px solid rgba(0,229,255,0.2);
+      border-radius: 10px;
+      min-width: 138px;
+      z-index: 50;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.55);
+    }
+    .rv-sort-drop.open { display: block; }
+    .rv-sort-drop button {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 9px 14px;
+      background: none;
+      border: none;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 0.68rem;
+      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.5);
+      cursor: pointer;
+      transition: background 0.12s, color 0.12s;
+    }
+    .rv-sort-drop button:hover { background: rgba(0,229,255,0.07); color: #00e5ff; }
+    .rv-sort-drop button.active { color: #00e5ff; }
+
     /* Search results */
     #rvSearchPanel .rv-scroll {
       flex-wrap: wrap;
@@ -437,7 +490,17 @@
     <div class="rv-row" id="rowPPV">
       <div class="rv-row-header">
         <div class="rv-row-title"><span class="row-accent"></span>PPV Events</div>
-        <div class="rv-row-count" id="ppvCount"></div>
+        <div class="rv-row-right">
+          <div class="rv-row-count" id="ppvCount"></div>
+          <div class="rv-sort-wrap">
+            <button class="rv-sort-btn" id="ppvSortBtn">Sort ↓</button>
+            <div class="rv-sort-drop" id="ppvSortDrop">
+              <button data-sort="latest" class="active">Latest First</button>
+              <button data-sort="highest">Highest Rated</button>
+              <button data-sort="lowest">Lowest Rated</button>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="rv-scroll-outer">
         <button class="rv-arrow left" data-target="scrollPPV">&#8592;</button>
@@ -454,7 +517,17 @@
     <div class="rv-row" id="rowFN">
       <div class="rv-row-header">
         <div class="rv-row-title"><span class="row-accent"></span>Fight Nights</div>
-        <div class="rv-row-count" id="fnCount"></div>
+        <div class="rv-row-right">
+          <div class="rv-row-count" id="fnCount"></div>
+          <div class="rv-sort-wrap">
+            <button class="rv-sort-btn" id="fnSortBtn">Sort ↓</button>
+            <div class="rv-sort-drop" id="fnSortDrop">
+              <button data-sort="latest" class="active">Latest First</button>
+              <button data-sort="highest">Highest Rated</button>
+              <button data-sort="lowest">Lowest Rated</button>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="rv-scroll-outer">
         <button class="rv-arrow left" data-target="scrollFN">&#8592;</button>
