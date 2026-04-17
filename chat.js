@@ -313,7 +313,40 @@ async function sendMsg(text) {
   document.getElementById('lw-input').focus();
 }
 
+// ── Mobile hamburger nav ──────────────────────
+function initHamburger() {
+  const btn = document.getElementById('nav-hamburger');
+  const overlay = document.getElementById('nav-mobile-overlay');
+  if (!btn || !overlay) return;
+
+  btn.addEventListener('click', () => {
+    const open = overlay.classList.toggle('open');
+    btn.classList.toggle('open', open);
+    document.body.classList.toggle('no-scroll', open);
+  });
+
+  // close on link click
+  overlay.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      overlay.classList.remove('open');
+      btn.classList.remove('open');
+      document.body.classList.remove('no-scroll');
+    });
+  });
+
+  // close on mobile search submit
+  const mobileSearch = overlay.querySelector('form');
+  if (mobileSearch) {
+    mobileSearch.addEventListener('submit', () => {
+      overlay.classList.remove('open');
+      btn.classList.remove('open');
+      document.body.classList.remove('no-scroll');
+    });
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initWidget();
   loadLiveData();
+  initHamburger();
 });

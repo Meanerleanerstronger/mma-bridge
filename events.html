@@ -559,11 +559,24 @@
     body.light-mode .ev-section-count { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.08); color: rgba(0,0,0,0.3); }
     body.light-mode .ev-hero-divider { background: linear-gradient(90deg, transparent, rgba(0,150,180,0.3), transparent); }
 
-    @media (max-width: 640px) {
-      .ev-page { padding: 28px 14px 80px; }
+    @media (max-width: 768px) {
+      .ev-page { padding: 24px 12px 80px; }
+      .ev-hero h1 { font-size: clamp(1.6rem, 7vw, 2.4rem); }
+      .duel-list { gap: 12px; }
+      .duel-card { border-radius: 12px; }
+      .duel-event-label { padding: 13px 14px 12px 18px; }
+      .duel-event-label-text { font-size: 1.2rem; }
       .duel-fname { font-size: 1.1rem !important; }
-      .duel-center { width: 58px; }
+      .duel-center { width: 54px; }
       .duel-location { display: none; }
+      .duel-fighter { padding: 16px 14px 12px; }
+      .duel-footer { padding: 8px 14px 12px 18px; }
+      .duel-also { padding: 6px 18px 10px; gap: 10px; }
+    }
+    @media (max-width: 400px) {
+      .duel-event-label-text { font-size: 1rem; }
+      .duel-fname { font-size: 0.95rem !important; }
+      .duel-center { width: 46px; }
     }
   </style>
 </head>
@@ -589,8 +602,27 @@
           <svg viewBox="0 0 24 24"><path d="M21 21l-4.3-4.3m1.8-5.2a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
         </span>
       </form>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
+
+  <div class="nav-mobile-overlay" id="nav-mobile-overlay">
+    <button class="nav-mobile-close" onclick="document.getElementById('nav-mobile-overlay').classList.remove('open');document.getElementById('nav-hamburger').classList.remove('open');document.body.classList.remove('no-scroll')">✕</button>
+    <nav class="nav-mobile-links">
+      <a href="index.html">Trending</a>
+      <a href="events.html" class="active">Upcoming Events</a>
+      <a href="pfp.html">PFP</a>
+      <a href="reviews.html">Review</a>
+      <a href="lucas.html">Lucas Bot</a>
+    </nav>
+    <div class="nav-mobile-search">
+      <form action="results.html" method="GET">
+        <input name="q" type="text" placeholder="Search fighters, events..." autocomplete="off" />
+      </form>
+    </div>
+  </div>
 
   <div class="ev-page">
     <div class="ev-hero">

@@ -15,6 +15,21 @@
   <link rel="stylesheet" href="style.css" />
 
   <style>
+    @media (max-width: 768px) {
+      /* Results track */
+      #resultsTrack { padding: 0; }
+      #resultsInner { padding: 0 16px 14px; gap: 10px; }
+      /* Live feed */
+      #liveFeed { margin: 0 16px; border-radius: 10px; height: 220px; }
+      /* Section headers */
+      .section-title { font-size: 0.82rem !important; margin-bottom: 16px !important; }
+      /* Today in MMA sidebar — full width below cards on mobile */
+      .content-container { flex-direction: column; }
+      .sidebar { width: 100%; box-sizing: border-box; margin-left: 0; }
+    }
+  </style>
+
+  <style>
     /* ── KEYFRAMES ── */
     @keyframes shimmerSlide {
       0%   { background-position: -300% center; }
@@ -140,9 +155,27 @@
           </svg>
         </span>
       </form>
-
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
+
+  <div class="nav-mobile-overlay" id="nav-mobile-overlay">
+    <button class="nav-mobile-close" onclick="document.getElementById('nav-mobile-overlay').classList.remove('open');document.getElementById('nav-hamburger').classList.remove('open');document.body.classList.remove('no-scroll')">✕</button>
+    <nav class="nav-mobile-links">
+      <a href="index.html" class="active">Trending</a>
+      <a href="events.html">Upcoming Events</a>
+      <a href="pfp.html">PFP</a>
+      <a href="reviews.html">Review</a>
+      <a href="lucas.html">Lucas Bot</a>
+    </nav>
+    <div class="nav-mobile-search">
+      <form action="results.html" method="GET">
+        <input name="q" type="text" placeholder="Search fighters, events..." autocomplete="off" />
+      </form>
+    </div>
+  </div>
   
   <!-- EVENT BANNER -->
 

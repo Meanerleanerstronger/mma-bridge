@@ -269,9 +269,23 @@
       .pfp-list-wrap { padding: 32px 24px 60px; }
     }
 
-    @media (max-width: 560px) {
+    @media (max-width: 768px) {
       .pfp-hero { height: 300px; }
-      .pfp-hero-name { font-size: 1.8rem; }
+      .pfp-hero-name { font-size: 1.75rem; }
+      .pfp-hero-content { padding: 24px 20px; }
+      .pfp-hero-tag { font-size: 0.52rem; padding: 4px 10px; }
+      .pfp-hero-meta { gap: 12px; flex-wrap: wrap; }
+      .pfp-list-wrap { padding: 24px 16px 60px; }
+      .pfp-list-header { margin-bottom: 16px; padding-bottom: 12px; }
+      .pfp-row { padding: 12px 6px 12px 0; }
+      .pfp-row-photo { width: 46px; height: 46px; border-radius: 8px; }
+      .pfp-row-name { font-size: 0.8rem; }
+      .pfp-row-rec { font-size: 0.72rem; }
+    }
+
+    @media (max-width: 400px) {
+      .pfp-hero { height: 260px; }
+      .pfp-hero-name { font-size: 1.45rem; }
     }
   </style>
 </head>
@@ -298,8 +312,27 @@
           <svg viewBox="0 0 24 24"><path d="M21 21l-4.3-4.3m1.8-5.2a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
         </span>
       </form>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
+
+  <div class="nav-mobile-overlay" id="nav-mobile-overlay">
+    <button class="nav-mobile-close" onclick="document.getElementById('nav-mobile-overlay').classList.remove('open');document.getElementById('nav-hamburger').classList.remove('open');document.body.classList.remove('no-scroll')">✕</button>
+    <nav class="nav-mobile-links">
+      <a href="index.html">Trending</a>
+      <a href="events.html">Upcoming Events</a>
+      <a href="pfp.html" class="active">PFP</a>
+      <a href="reviews.html">Review</a>
+      <a href="lucas.html">Lucas Bot</a>
+    </nav>
+    <div class="nav-mobile-search">
+      <form action="results.html" method="GET">
+        <input name="q" type="text" placeholder="Search fighters, events..." autocomplete="off" />
+      </form>
+    </div>
+  </div>
 
   <!-- #1 Hero -->
   <div class="pfp-hero" data-fighter="islam-makhachev">

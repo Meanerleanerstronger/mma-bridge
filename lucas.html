@@ -373,6 +373,18 @@
       .lucas-sidebar { display: none; }
       .lucas-main { height: calc(100vh - 120px); }
     }
+
+    @media (max-width: 768px) {
+      .lucas-page { padding: 10px 10px 0; gap: 0; min-height: calc(100vh - 60px); }
+      .lucas-main { height: calc(100vh - 80px); min-height: unset; }
+      .chat-box { border-radius: 12px 12px 0 0; border-bottom: none; }
+      .chat-topbar { padding: 11px 16px; }
+      .messages { padding: 16px 14px 10px; gap: 12px; }
+      .msg-bub { font-size: 0.83rem; padding: 10px 13px; max-width: 85%; }
+      .input-area { padding: 10px 12px 14px; }
+      .chat-input { font-size: 0.82rem; padding: 10px 13px; border-radius: 10px; }
+      .send-btn { width: 40px; height: 40px; border-radius: 10px; }
+    }
   </style>
 </head>
 <body>
@@ -397,8 +409,27 @@
           <svg viewBox="0 0 24 24"><path d="M21 21l-4.3-4.3m1.8-5.2a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
         </span>
       </form>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
+
+  <div class="nav-mobile-overlay" id="nav-mobile-overlay">
+    <button class="nav-mobile-close" onclick="document.getElementById('nav-mobile-overlay').classList.remove('open');document.getElementById('nav-hamburger').classList.remove('open');document.body.classList.remove('no-scroll')">✕</button>
+    <nav class="nav-mobile-links">
+      <a href="index.html">Trending</a>
+      <a href="events.html">Upcoming Events</a>
+      <a href="pfp.html">PFP</a>
+      <a href="reviews.html">Review</a>
+      <a href="lucas.html" class="active">Lucas Bot</a>
+    </nav>
+    <div class="nav-mobile-search">
+      <form action="results.html" method="GET">
+        <input name="q" type="text" placeholder="Search fighters, events..." autocomplete="off" />
+      </form>
+    </div>
+  </div>
 
   <div class="lucas-page">
 
