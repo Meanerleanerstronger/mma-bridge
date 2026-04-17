@@ -45,7 +45,9 @@
             </div>
           </div>`;
       } else {
-        el.innerHTML = `<a class="nav-signin-btn" href="auth.html">Sign In</a>`;
+        el.innerHTML = `
+          <a class="nav-signin-link" href="auth.html">Sign In</a>
+          <a class="nav-signup-btn" href="auth.html">Sign Up</a>`;
       }
     });
 
@@ -59,7 +61,9 @@
           </div>
           <button class="nav-mobile-signout" onclick="window.MMABridgeAuth.signOut()">Sign out</button>`;
       } else {
-        el.innerHTML = `<a class="nav-signin-btn" href="auth.html">Sign In with Google</a>`;
+        el.innerHTML = `
+          <a class="nav-signin-link" href="auth.html" style="display:block;margin-bottom:10px;">Sign In</a>
+          <a class="nav-signup-btn" href="auth.html" style="display:block;text-align:center;">Sign Up</a>`;
       }
     });
   }

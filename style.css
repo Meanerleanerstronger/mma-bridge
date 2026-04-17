@@ -3155,26 +3155,40 @@ body.light-mode .navbar {
 .nav-auth {
   display: flex;
   align-items: center;
+  gap: 10px;
   margin-left: 12px;
   flex-shrink: 0;
 }
 
-/* Sign In button */
-.nav-signin-btn {
+/* Plain "Sign In" text link */
+.nav-signin-link {
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.65);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+.nav-signin-link:hover { color: #fff; }
+
+/* Cyan pill "Sign Up" button */
+.nav-signup-btn {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #000;
-  background: cyan;
-  border-radius: 5px;
-  padding: 7px 14px;
+  background: #00e5ff;
+  border-radius: 20px;
+  padding: 6px 15px;
   text-decoration: none;
-  transition: opacity 0.15s, transform 0.15s;
   white-space: nowrap;
+  transition: opacity 0.15s, transform 0.15s;
 }
-.nav-signin-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+.nav-signup-btn:hover { opacity: 0.85; transform: translateY(-1px); }
 
 /* Logged-in user widget */
 .nav-user {
@@ -3243,11 +3257,12 @@ body.light-mode .navbar {
   border-top: 1px solid rgba(255,255,255,0.07);
   margin-top: 8px;
 }
-.nav-auth-mobile .nav-signin-btn {
+.nav-auth-mobile .nav-signin-link,
+.nav-auth-mobile .nav-signup-btn {
   display: block;
   text-align: center;
-  padding: 12px;
   font-size: 0.82rem;
+  padding: 12px;
 }
 .nav-mobile-user {
   display: flex;
