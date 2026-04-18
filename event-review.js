@@ -50,14 +50,20 @@ async function fetchCommunityRating(eventId) {
   } catch { return null; }
 }
 
-async function fetchReviews(eventId) {
+async function fetchReviews(eventId, attempt = 0) {
   try {
     const r = await fetch(`${getApiBase()}/reviews/${encodeURIComponent(eventId)}`, {
       headers: authHeaders()
     });
-    if (!r.ok) return [];
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
     return await r.json();
-  } catch { return []; }
+  } catch (e) {
+    if (attempt < 2) {
+      await new Promise(res => setTimeout(res, 3000 * (attempt + 1)));
+      return fetchReviews(eventId, attempt + 1);
+    }
+    return null; // null = failed, [] = genuinely empty
+  }
 }
 
 function requireAuth() {
@@ -366,7 +372,17 @@ function wireReplyLikes(wrap, isLoggedIn) {
 async function loadAndRenderReviews(eventId) {
   const feed = document.getElementById('erReviewsFeed');
   if (!feed) return;
+  feed.innerHTML = `<div class="er-reviews-empty" style="opacity:0.5">Loading reviews…</div>`;
   const reviews = await fetchReviews(eventId);
+  if (reviews === null) {
+    feed.innerHTML = `
+      <div class="er-reviews-empty">
+        <div>Couldn't load reviews — backend may be waking up.</div>
+        <button class="er-retry-btn" style="margin-top:10px;background:none;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.5);border-radius:6px;padding:6px 14px;cursor:pointer;font-size:0.78rem">Retry</button>
+      </div>`;
+    feed.querySelector('.er-retry-btn')?.addEventListener('click', () => loadAndRenderReviews(eventId));
+    return;
+  }
   renderReviews(reviews, feed);
 }
 
