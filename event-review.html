@@ -687,8 +687,28 @@
         </span>
       </form>
       <div class="nav-auth"></div>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
+
+  <div class="nav-mobile-overlay" id="nav-mobile-overlay">
+    <button class="nav-mobile-close" onclick="document.getElementById('nav-mobile-overlay').classList.remove('open');document.getElementById('nav-hamburger').classList.remove('open');document.body.classList.remove('no-scroll')">✕</button>
+    <nav class="nav-mobile-links">
+      <a href="index.html">Trending</a>
+      <a href="events.html">Upcoming Events</a>
+      <a href="pfp.html">PFP</a>
+      <a href="reviews.html" class="active">Review</a>
+      <a href="lucas.html">Lucas Bot</a>
+    </nav>
+    <div class="nav-mobile-search">
+      <form action="results.html" method="GET">
+        <input name="q" type="text" placeholder="Search fighters, events..." autocomplete="off" />
+      </form>
+    </div>
+    <div class="nav-auth-mobile"></div>
+  </div>
 
   <!-- Breadcrumb -->
   <div class="review-nav">

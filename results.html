@@ -1,66 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <script src="theme.js?v=2.1"></script>
+  <link rel="icon" href="/favicon.png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MMA Bridge | Search</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=2.1" />
+  <style>
+    body { background: #060608; }
 
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Pacifico&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+    .results-page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 32px 80px;
+    }
+
+    .results-header {
+      margin-bottom: 32px;
+    }
+    .results-query-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 8px;
+      letter-spacing: 0.04em;
+    }
+    .results-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      color: #fff;
+      letter-spacing: 0.02em;
+      margin: 0;
+    }
+    .results-title span {
+      color: #00e5ff;
+    }
+    .results-count {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.3);
+      margin-top: 6px;
+    }
+
+    /* Re-search bar */
+    .results-search-wrap {
+      max-width: 520px;
+      margin-bottom: 40px;
+      position: relative;
+    }
+    .results-search-wrap input {
+      width: 100%;
+      box-sizing: border-box;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      padding: 13px 44px 13px 18px;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .results-search-wrap input:focus {
+      border-color: rgba(0,229,255,0.4);
+      background: rgba(255,255,255,0.07);
+    }
+    .results-search-wrap input::placeholder { color: rgba(255,255,255,0.25); }
+    .results-search-icon {
+      position: absolute; right: 14px; top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none; color: rgba(255,255,255,0.3);
+    }
+    .results-search-icon svg {
+      width: 17px; height: 17px; stroke: currentColor;
+      fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    /* Cards grid */
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .results-card {
+      background: #0e0e11;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .results-card:hover {
+      border-color: rgba(0,229,255,0.3);
+      transform: translateY(-3px);
+    }
+    .results-card-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      background: #1a1a1e;
+      display: block;
+    }
+    .results-card-img-placeholder {
+      width: 100%; aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #141418 0%, #0e0e12 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+    }
+    .results-card-body {
+      padding: 14px 16px 16px;
+      flex: 1;
+    }
+    .results-card-type {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #00e5ff;
+      margin-bottom: 6px;
+    }
+    .results-card-name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: #fff;
+      line-height: 1.4;
+    }
+    .results-card-meta {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
+      margin-top: 6px;
+    }
+
+    /* Empty state */
+    .results-empty {
+      text-align: center;
+      padding: 80px 20px;
+      font-family: 'Inter', sans-serif;
+    }
+    .results-empty-icon { font-size: 3rem; margin-bottom: 16px; }
+    .results-empty-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 8px;
+    }
+    .results-empty-sub {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.2);
+      max-width: 340px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .results-tip {
+      margin-top: 40px;
+      padding: 16px 20px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.3);
+      line-height: 1.6;
+    }
+    .results-tip strong { color: rgba(255,255,255,0.5); }
+
+    @media (max-width: 768px) {
+      .results-page { padding: 28px 16px 60px; }
+      .results-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    }
+    @media (max-width: 480px) {
+      .results-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 
-<body style="background:#0f0f0f; color:white;">
-  <!-- NAVBAR -->
+<body>
   <nav class="navbar">
     <div class="nav-container">
-
-      <div class="logo">
+      <a class="logo" href="index.html" style="text-decoration:none;">
         <span class="logo-mma">MMA</span>
         <img src="images/Cage.svg" class="logo-icon" alt="cage icon">
         <span class="logo-bridge">Bridge</span>
-      </div>
-
+      </a>
       <ul class="nav-links">
         <li><a href="index.html">Trending</a></li>
         <li><a href="events.html">Upcoming Events</a></li>
-        <li><a href="#">Lucas Bot</a></li>
+        <li><a href="pfp.html">PFP</a></li>
+        <li><a href="reviews.html">Review</a></li>
+        <li><a href="lucas.html">Lucas Bot</a></li>
       </ul>
-
-      <form class="search-box" id="results-search-form" action="results.html" method="GET">
-        <input id="results-search" name="q" type="text" placeholder="Search fighters, events..." autocomplete="off" />
+      <form class="search-box" id="site-search-form" action="results.html" method="GET">
+        <input id="site-search" name="q" type="text" placeholder="Search fighters, events..." autocomplete="off" />
         <span class="search-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <path d="M21 21l-4.3-4.3m1.8-5.2a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M21 21l-4.3-4.3m1.8-5.2a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
         </span>
       </form>
-
+      <div class="nav-auth"></div>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
 
-  <div class="content-container">
-    <div class="left-column">
-      <h3 class="section-title" id="results-title">Search Results</h3>
+  <div class="nav-mobile-overlay" id="nav-mobile-overlay">
+    <button class="nav-mobile-close" onclick="document.getElementById('nav-mobile-overlay').classList.remove('open');document.getElementById('nav-hamburger').classList.remove('open');document.body.classList.remove('no-scroll')">✕</button>
+    <nav class="nav-mobile-links">
+      <a href="index.html">Trending</a>
+      <a href="events.html">Upcoming Events</a>
+      <a href="pfp.html">PFP</a>
+      <a href="reviews.html">Review</a>
+      <a href="lucas.html">Lucas Bot</a>
+    </nav>
+    <div class="nav-mobile-search">
+      <form action="results.html" method="GET">
+        <input name="q" type="text" placeholder="Search fighters, events..." autocomplete="off" />
+      </form>
+    </div>
+    <div class="nav-auth-mobile"></div>
+  </div>
 
-      <div class="card-row" id="results-cards"></div>
-
-      <div style="margin-top: 30px;">
-        <h3 class="section-title">Today in MMA</h3>
-        <ul id="results-today" style="list-style:none; padding:0; color:#ccc;"></ul>
-      </div>
+  <div class="results-page">
+    <div class="results-header">
+      <div class="results-query-label">Search results for</div>
+      <h1 class="results-title" id="results-title">—</h1>
+      <div class="results-count" id="results-count"></div>
     </div>
 
-    <div class="sidebar">
-      <h3>TIP</h3>
-      <ul>
-        <li>Try: “paddy”, “ilia”, “gaethje”, “ufc 325”</li>
-      </ul>
-      <a class="back-link" href="index.html">← Back to home</a>
+    <div class="results-search-wrap">
+      <input id="results-search" name="q" type="text" placeholder="Try: paddy, ilia, gaethje, ufc 325…" autocomplete="off" />
+      <span class="results-search-icon">
+        <svg viewBox="0 0 24 24"><path d="M21 21l-4.3-4.3m1.8-5.2a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      </span>
+    </div>
+
+    <div id="results-cards" class="results-grid"></div>
+
+    <div class="results-tip">
+      <strong>Search tips:</strong> Try fighter first names like "paddy", "ilia", "khamzat" — or event names like "UFC 300", "Fight Night Vegas".
     </div>
   </div>
 
-  <!-- IMPORTANT: this must match the filename exactly -->
-  <script defer src="./results.js"></script>
-
+  <script defer src="./resuts.js"></script>
+  <script src="auth.js?v=2.1"></script>
+  <script src="chat.js?v=2.1"></script>
 </body>
 </html>

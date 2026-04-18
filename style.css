@@ -24,14 +24,14 @@ a, a:visited {
 ========================= */
 .navbar {
   width: 100%;
-  background: rgba(17, 17, 17, 0.96);
-  padding: 20px 0;
-  border-bottom: 1px solid #222;
+  background: rgba(10, 10, 12, 0.96);
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
   position: sticky;
   top: 0;
   z-index: 1000;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   transition: box-shadow 0.2s;
 }
 
@@ -63,7 +63,7 @@ a, a:visited {
 .logo-icon {
   width: 22px;
   height: 26px;
-  filter: brightness(0.6);
+  filter: brightness(0.9);
 }
 
 .logo-bridge {
@@ -76,24 +76,28 @@ a, a:visited {
 .nav-links {
   margin: 0 auto;
   display: flex;
-  gap: 48px;
+  gap: 32px;
   list-style: none;
   padding: 0;
 }
 
 .nav-links li a,
 .nav-links li a:visited {
-  color: white;
+  color: rgba(255,255,255,0.7);
   text-decoration: none;
-  font-weight: 800;
-  font-size: 19px;
-  letter-spacing: 0.6px;
-  opacity: 0.9;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  transition: color 0.15s;
 }
 
 .nav-links li a:hover {
-  color: cyan;
-  opacity: 1;
+  color: #fff;
+}
+
+.nav-links li a.active {
+  color: #00e5ff;
 }
 
 /* SEARCH */
@@ -105,24 +109,26 @@ a, a:visited {
 }
 
 .search-box input {
-  width: 360px;
-  padding: 13px 48px 13px 20px;
-  border-radius: 999px;
-  border: 1px solid #2a2a2a;
-  background: #141414;
+  width: 260px;
+  padding: 9px 40px 9px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
   color: #fff;
-  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
   outline: none;
+  transition: border-color 0.2s, background 0.2s;
 }
 
 .search-box input::placeholder {
-  color: #777;
+  color: rgba(255,255,255,0.3);
 }
 
 .search-box input:focus {
-  border-color: cyan;
-  box-shadow: 0 0 0 4px rgba(0, 255, 255, 0.18);
-  background: #161616;
+  border-color: rgba(0,229,255,0.45);
+  background: rgba(255,255,255,0.07);
+  box-shadow: 0 0 0 3px rgba(0,229,255,0.08);
 }
 
 .search-icon {
@@ -238,9 +244,9 @@ a, a:visited {
   font-size: 0.88rem;
   font-weight: 600;
   margin: 0;
-  padding: 14px 4px 4px;
+  padding: 14px 16px 16px;
   color: #fff;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 /* IMAGES */
@@ -1634,9 +1640,9 @@ body.light-mode .drawer-backdrop {
 .nav-review {
   color: inherit;
 }
-.nav-active, a.active {
-  color: cyan !important;
-  font-weight: 700;
+.nav-links li a.active,
+.nav-mobile-links a.active {
+  color: #00e5ff;
 }
 
 /* ── PRE-EVENT HYPE METER (events.html) ── */
@@ -3026,10 +3032,9 @@ body.light-mode .navbar {
 
 /* ── Mobile overlay menu ── */
 .nav-mobile-overlay {
-  display: none;
   position: fixed;
   inset: 0;
-  background: rgba(6,6,8,0.97);
+  background: rgba(6,6,8,0.98);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   z-index: 10000;
@@ -3038,12 +3043,14 @@ body.light-mode .navbar {
   justify-content: center;
   gap: 0;
   opacity: 0;
-  transition: opacity 0.25s ease;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
   padding: 80px 0 40px;
+  display: flex;
 }
 .nav-mobile-overlay.open {
-  display: flex;
   opacity: 1;
+  pointer-events: all;
 }
 .nav-mobile-links {
   display: flex;

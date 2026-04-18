@@ -9,9 +9,10 @@ const BACKEND = (window.location.hostname === 'localhost' || window.location.hos
   ? 'http://localhost:5001/api/chat'
   : 'https://mmabridge-backend.onrender.com/api/chat';
 
-// Wake up Render on every page load
+// Wake up Render + record visitor on every page load
 if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
   fetch('https://mmabridge-backend.onrender.com/api/health').catch(() => {});
+  fetch('https://mmabridge-backend.onrender.com/api/visitors/ping', { method: 'POST' }).catch(() => {});
 }
 
 // Fetch events.json + fighters.json at startup and cache as live data for Lucas
