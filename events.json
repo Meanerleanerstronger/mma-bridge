@@ -5,7 +5,7 @@
     "type": "FIGHT NIGHT",
     "date": "Sat, Nov 4, 2023",
     "isoDate": "2023-11-04",
-    "location": "São Paulo, Brazil",
+    "location": "S\u00e3o Paulo, Brazil",
     "venue": "Ibirapuera Arena",
     "poster": "https://ufc.com/images/styles/background_image_xl_2x/s3/2023-10/110423-ufc-fight-night-almeida-vs-lewis-EVENT-ART.jpg",
     "status": "completed",
@@ -2389,7 +2389,7 @@
       },
       {
         "a": "Raquel Pennington",
-        "b": "Julianna Peña",
+        "b": "Julianna Pe\u00f1a",
         "weight": "Women's Bantamweight",
         "rounds": "5 Rds",
         "titleFight": true,
@@ -4524,7 +4524,7 @@
         "time": "5:00"
       },
       {
-        "a": "Julianna Peña",
+        "a": "Julianna Pe\u00f1a",
         "b": "Kayla Harrison",
         "weight": "Women's Bantamweight",
         "rounds": "5 Rds",
@@ -5179,7 +5179,7 @@
       },
       {
         "a": "Ryan Spann",
-        "b": "Łukasz Brzeski",
+        "b": "\u0141ukasz Brzeski",
         "weight": "Light Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
@@ -5531,13 +5531,13 @@
         "time": "2:01"
       },
       {
-        "a": "Michał Oleksiejczuk",
+        "a": "Micha\u0142 Oleksiejczuk",
         "b": "Gerald Meerschaert",
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
-        "winner": "Michał Oleksiejczuk",
+        "winner": "Micha\u0142 Oleksiejczuk",
         "method": "TKO",
         "round": 1,
         "time": "2:15"
@@ -5619,14 +5619,14 @@
         "time": "5:00"
       },
       {
-        "a": "Benoît Saint-Denis",
+        "a": "Beno\u00eet Saint-Denis",
         "b": "Mauricio Ruffy",
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
         "slot": "comain",
-        "winner": "Benoît Saint-Denis",
+        "winner": "Beno\u00eet Saint-Denis",
         "method": "KO",
         "round": 1,
         "time": "2:15"
@@ -6037,7 +6037,7 @@
       },
       {
         "a": "Blake Bilder",
-        "b": "Landon Quiñones",
+        "b": "Landon Qui\u00f1ones",
         "weight": "Featherweight",
         "rounds": "3 Rds",
         "titleFight": false,
@@ -6088,13 +6088,13 @@
         "time": "5:00"
       },
       {
-        "a": "Jiří Procházka",
+        "a": "Ji\u0159\u00ed Proch\u00e1zka",
         "b": "Khalil Rountree Jr.",
         "weight": "Light Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
-        "winner": "Jiří Procházka",
+        "winner": "Ji\u0159\u00ed Proch\u00e1zka",
         "method": "KO",
         "round": 3,
         "time": "3:04"
@@ -6504,7 +6504,7 @@
       },
       {
         "a": "Azamat Murzakanov",
-        "b": "Aleksandar Rakić",
+        "b": "Aleksandar Raki\u0107",
         "weight": "Light Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
@@ -6541,13 +6541,13 @@
         "time": "5:00"
       },
       {
-        "a": "Ľudovít Klein",
-        "b": "Mateusz Rębecki",
+        "a": "\u013dudov\u00edt Klein",
+        "b": "Mateusz R\u0119becki",
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
-        "winner": "Ľudovít Klein",
+        "winner": "\u013dudov\u00edt Klein",
         "method": "MD",
         "round": 3,
         "time": "5:00"
@@ -6900,7 +6900,7 @@
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
-        "winner": "Benoît Saint-Denis",
+        "winner": "Beno\u00eet Saint-Denis",
         "method": "KO",
         "round": 2,
         "time": "2:10"
@@ -6991,7 +6991,7 @@
     "isoDate": "2025-11-22",
     "location": "Doha, Qatar",
     "venue": "ABHA Arena",
-    "poster": "images/Arman.jpeg",
+    "poster": "images/UFC Qatar.jpeg",
     "status": "completed",
     "mainCard": [
       {
@@ -7011,8 +7011,8 @@
         "a": "Belal Muhammad",
         "b": "Ian Machado Garry",
         "weight": "Welterweight",
-        "rounds": "5 Rds",
-        "titleFight": true,
+        "rounds": "3 Rds",
+        "titleFight": false,
         "ranked": true,
         "slot": "comain",
         "winner": "Ian Machado Garry",
@@ -7171,13 +7171,13 @@
         "time": "4:55"
       },
       {
-        "a": "Jan Błachowicz",
+        "a": "Jan B\u0142achowicz",
         "b": "Bogdan Guskov",
         "weight": "Light Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
-        "winner": "Jan Błachowicz",
+        "winner": "Jan B\u0142achowicz",
         "method": "Draw",
         "round": 3,
         "time": "5:00"
@@ -7448,13 +7448,13 @@
         "time": "1:44"
       },
       {
-        "a": "Natália Silva",
+        "a": "Nat\u00e1lia Silva",
         "b": "Rose Namajunas",
         "weight": "Women's Flyweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
-        "winner": "Natália Silva",
+        "winner": "Nat\u00e1lia Silva",
         "method": "UD",
         "round": 3,
         "time": "5:00"
@@ -7562,14 +7562,14 @@
         "time": "5:00"
       },
       {
-        "a": "Benoît Saint-Denis",
+        "a": "Beno\u00eet Saint-Denis",
         "b": "Dan Hooker",
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
         "slot": "comain",
-        "winner": "Benoît Saint-Denis",
+        "winner": "Beno\u00eet Saint-Denis",
         "method": "TKO",
         "round": 2,
         "time": "3:45"
@@ -8647,7 +8647,7 @@
   },
   {
     "id": "ufc-327-prochazka-vs-ulberg",
-    "name": "UFC 327: Procházka vs. Ulberg",
+    "name": "UFC 327: Proch\u00e1zka vs. Ulberg",
     "type": "PPV",
     "date": "Sat, Apr 11, 2026",
     "isoDate": "2026-04-11",
@@ -8658,7 +8658,7 @@
     "mainCard": [
       {
         "a": "Carlos Ulberg",
-        "b": "Jiří Procházka",
+        "b": "Ji\u0159\u00ed Proch\u00e1zka",
         "weight": "Light Heavyweight",
         "rounds": "5 Rds",
         "titleFight": true,
@@ -8827,7 +8827,7 @@
     "isoDate": "2026-04-18",
     "location": "Winnipeg, Canada",
     "venue": "Canada Life Centre",
-    "poster": "images/Burns fn.jpeg?v=2",
+    "poster": "https://ufc.com/images/styles/background_image_xl_2x/s3/2026-03/041826-ufc-fight-night-burns-vs-malott-EVENT-ART.jpg",
     "status": "upcoming",
     "startTime": "22:00",
     "mainCard": [
@@ -8867,7 +8867,7 @@
       },
       {
         "a": "Choi Dong-hun",
-        "b": "André Lima",
+        "b": "Andr\u00e9 Lima",
         "weight": "Flyweight",
         "rounds": "3 Rds",
         "titleFight": false,
@@ -8876,7 +8876,7 @@
     ],
     "prelims": [
       {
-        "a": "John Castañeda",
+        "a": "John Casta\u00f1eda",
         "b": "Mark Vologdin",
         "weight": "Bantamweight",
         "rounds": "3 Rds",
@@ -8918,7 +8918,7 @@
     "isoDate": "2026-04-25",
     "location": "Las Vegas, NV",
     "venue": "Meta APEX",
-    "poster": "images/Sterling-fn.jpeg?v=2",
+    "poster": "https://ufc.com/images/styles/background_image_xl_2x/s3/2026-04/042526-ufc-fight-night-sterling-vs-zalal-EVENT-ART.jpg",
     "status": "upcoming",
     "startTime": "22:00",
     "mainCard": [
@@ -9043,7 +9043,7 @@
     "isoDate": "2026-05-02",
     "location": "Perth, Australia",
     "venue": "RAC Arena",
-    "poster": "images/JDM-fn.jpeg",
+    "poster": "https://ufc.com/images/styles/background_image_xl_2x/s3/2026-04/050226-ufc-fight-night-della-maddalena-vs-prates-EVENT-ART.jpg",
     "status": "upcoming",
     "startTime": "07:00",
     "mainCard": [
@@ -9178,7 +9178,7 @@
     "isoDate": "2026-05-09",
     "location": "Newark, NJ",
     "venue": "Prudential Center",
-    "poster": "images/UFC 328.jpeg",
+    "poster": "https://ufc.com/images/styles/background_image_xl_2x/s3/2026-04/050926-ufc-329-chimaev-vs-strickland-EVENT-ART.jpg",
     "status": "upcoming",
     "mainCard": [
       {
@@ -9288,7 +9288,7 @@
     "isoDate": "2026-05-16",
     "location": "Las Vegas, NV",
     "venue": "Meta APEX",
-    "poster": "images/fn-allen.jpg",
+    "poster": "https://ufc.com/images/styles/background_image_xl_2x/s3/2026-04/051626-ufc-fight-night-allen-vs-costa-EVENT-ART.jpg",
     "status": "upcoming",
     "mainCard": [
       {
