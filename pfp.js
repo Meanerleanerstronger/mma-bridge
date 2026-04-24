@@ -7,21 +7,21 @@ import API from './api.js';
 import { showLoading, showError } from './loading.js';
 
 const FIGHTER_PHOTOS = {
-  'islam-makhachev':      'images/Islam.jpeg',
-  'ilia-topuria':         'images/Ilia.jpeg',
-  'khamzat-chimaev':      'images/Khamzat .jpeg',
-  'alex-pereira':         'images/Alex.jpeg',
-  'alexander-volkanovski':'images/Volk.jpeg',
-  'petr-yan':             'images/Petr.jpeg',
-  'merab-dvalishvili':    'images/Merab.jpeg',
-  'tom-aspinall':         'images/Tom.jpeg',
-  'alexandre-pantoja':    'images/Pantoja.jpeg',
-  'max-holloway':         'images/Max.jpeg',
-  'dricus-du-plessis':    'images/Dricus.jpeg',
-  'joshua-van':           'images/Josh.jpeg',
-  'magomed-ankalaev':     'images/Ank.jpeg',
-  'jack-della-maddalena': 'images/JDM.jpeg',
-  'arman-tsarukyan':      'images/Arman.jpeg',
+  'islam-makhachev':      'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/7/MAKHACHEV_ISLAM_L_BELT_01-18.png',
+  'ilia-topuria':         'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/TOPURIA_ILIA_L_BELT_10-26.png',
+  'khamzat-chimaev':      'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/CHIMAEV_KHAMZAT_L_BELTMOCK.png',
+  'alex-pereira':         'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/PEREIRA_ALEX_L.png',
+  'alexander-volkanovski':'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/VOLKANOVSKI_ALEXANDER_L_BELT_01-31.png',
+  'petr-yan':             'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/YAN_PETR_L_BELT_04-09.png',
+  'merab-dvalishvili':    'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2022-08/DVALISHVILI_MERAB_L_08-20.png',
+  'tom-aspinall':         'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/ASPINALL_TOM_L_BELT_10-25.png',
+  'alexandre-pantoja':    'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/PANTOJA_ALEXANDRE_L_07-08.png',
+  'max-holloway':         'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-04/HOLLOWAY_MAX_L_04-13.png',
+  'dricus-du-plessis':    'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/DU_PLESSIS_DRICUS_L_01-20.png',
+  'joshua-van':           'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/VAN_JOSHUA_L_BELTMOCK.png',
+  'magomed-ankalaev':     'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/ANKALAEV_MAGOMED_L_10-26.png',
+  'jack-della-maddalena': 'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/5/DELLA_MADDALENA_JACK_L_09-16.png',
+  'arman-tsarukyan':      'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/TSARUKYAN_ARMAN_L_11-22.png',
 };
 
 document.addEventListener("DOMContentLoaded", async () => {

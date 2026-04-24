@@ -156,7 +156,7 @@ a, a:visited {
    HERO
 ========================= */
 .hero {
-  background: url("images/UFC-311.jpeg") center/cover no-repeat;
+  background: url("https://www.ufc.com/images/styles/background_image_xl_2x/s3/2025-01/011825-ufc-311-makhachev-vs-moicano-EVENT-ART.jpg") center/cover no-repeat;
   height: 360px;
   display: flex;
   align-items: flex-end;
@@ -250,9 +250,9 @@ a, a:visited {
 }
 
 /* IMAGES */
-.story1 { background-image: url("images/324 main event.jpeg"); }
-.story2 { background-image: url("images/Illia Max 308.jpeg"); }
-.story3 { background-image: url("images/Justin Gaethje.jpeg"); }
+.story1 { background-image: url("https://www.ufc.com/images/styles/background_image_xl_2x/s3/2025-12/012426-ufc-324-gaethje-vs-pimblett-EVENT-ART.jpg"); }
+.story2 { background-image: url("https://www.ufc.com/images/styles/background_image_xl_2x/s3/2024-09/102624-ufc-308-topuria-vs-holloway-EVENT-ART.jpg"); }
+.story3 { background-image: url("https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/GAETHJE_JUSTIN_L_BELTMOCK.png"); }
 
 /* =========================
    SIDEBAR

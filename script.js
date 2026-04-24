@@ -189,19 +189,19 @@ async function renderNews() {
         {
           title: 'UFC 327: Procházka vs. Ulberg — Full Card Preview and Predictions',
           url: 'https://mmajunkie.usatoday.com/category/ufc',
-          imageUrl: 'images/ufc-327.jpg',
+          imageUrl: 'https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-04/041126-ufc-327-prochazka-vs-ulberg-EVENT-ART.jpg',
           source: 'MMA Junkie'
         },
         {
           title: 'Joe Pyfer Stuns Adesanya With Second Round TKO in Seattle',
           url: 'https://www.espn.com/mma/',
-          imageUrl: 'images/fn-seattle.jpg',
+          imageUrl: 'https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-02/032826-ufc-fight-night-adesanyva-vs-pyfer-EVENT-ART.jpg',
           source: 'ESPN MMA'
         },
         {
           title: 'Charles Oliveira Claims BMF Title Over Max Holloway at UFC 326',
           url: 'https://www.cbssports.com/ufc/',
-          imageUrl: 'images/ufc-326.jpg',
+          imageUrl: 'https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-01/030726-ufc-326-holloway-vs-oliveira-2-EVENT-ART.jpg',
           source: 'CBS Sports'
         },
       ];

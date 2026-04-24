@@ -16,9 +16,9 @@
 
   // Static story data — replace with API data when available
   const stories = [
-    { title: 'Paddy vs Gaethje Official', type: 'Breaking', img: 'images/324 main event.jpeg', href: '#' },
-    { title: 'Ilia vs Max Heats Up', type: 'News', img: 'images/Illia Max 308.jpeg', href: '#' },
-    { title: 'Gaethje Teases Retirement', type: 'Feature', img: 'images/Justin Gaethje.jpeg', href: '#' },
+    { title: 'Paddy vs Gaethje Official', type: 'Breaking', img: 'https://www.ufc.com/images/styles/background_image_xl_2x/s3/2025-12/012426-ufc-324-gaethje-vs-pimblett-EVENT-ART.jpg', href: '#' },
+    { title: 'Ilia vs Max Heats Up', type: 'News', img: 'https://www.ufc.com/images/styles/background_image_xl_2x/s3/2024-09/102624-ufc-308-topuria-vs-holloway-EVENT-ART.jpg', href: '#' },
+    { title: 'Gaethje Teases Retirement', type: 'Feature', img: 'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/GAETHJE_JUSTIN_L_BELTMOCK.png', href: '#' },
     { title: 'UFC 325 Rumored for Perth', type: 'News', img: '', href: '#' },
     { title: 'Islam Calls Out Usman', type: 'Breaking', img: '', href: '#' },
   ];
