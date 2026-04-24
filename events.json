@@ -9040,13 +9040,22 @@
         "slot": "main"
       },
       {
+        "a": "Norma Dumont",
+        "b": "Joselyne Edwards",
+        "weight": "Women's Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "comain"
+      },
+      {
         "a": "Rafa Garcia",
         "b": "Alexander Hernandez",
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true,
-        "slot": "comain"
+        "ranked": false,
+        "slot": ""
       },
       {
         "a": "Davey Grant",
@@ -9063,16 +9072,7 @@
         "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true,
-        "slot": ""
-      },
-      {
-        "a": "Norma Dumont",
-        "b": "Joselyne Edwards",
-        "weight": "Women's Bantamweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": true,
+        "ranked": false,
         "slot": ""
       },
       {
@@ -9096,8 +9096,8 @@
         "slot": ""
       },
       {
-        "a": "Sedriques Dumas",
-        "b": "Jackson McVey",
+        "a": "Jackson McVey",
+        "b": "Sedriques Dumas",
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
@@ -9110,22 +9110,22 @@
         "weight": "Women's Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": ""
       },
       {
         "a": "Jafel Filho",
-        "b": "Lucas Rocha",
-        "weight": "Flyweight",
+        "b": "Cody Durden",
+        "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
         "slot": ""
       },
       {
-        "a": "Talita Alencar",
-        "b": "Julia Polastri",
-        "weight": "Women's Strawweight",
+        "a": "Francis Marshall",
+        "b": "Lucas Brennan",
+        "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
@@ -9135,6 +9135,15 @@
         "a": "Max Griffin",
         "b": "Victor Valenzuela",
         "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": ""
+      },
+      {
+        "a": "Talita Alencar",
+        "b": "Julia Polastri",
+        "weight": "Women's Strawweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
@@ -9174,15 +9183,6 @@
         "slot": "comain"
       },
       {
-        "a": "Tai Tuivasa",
-        "b": "Sean Sharaf",
-        "weight": "Heavyweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": ""
-      },
-      {
         "a": "Tim Elliott",
         "b": "Steve Erceg",
         "weight": "Flyweight",
@@ -9192,25 +9192,25 @@
         "slot": ""
       },
       {
-        "a": "Jacob Malkoun",
-        "b": "Gerald Meerschaert",
-        "weight": "Middleweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": ""
-      }
-    ],
-    "prelims": [
-      {
-        "a": "Junior Tafa",
-        "b": "Kevin Christian",
-        "weight": "Light Heavyweight",
+        "a": "Shamil Gaziev",
+        "b": "Brando Pericic",
+        "weight": "Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
         "slot": ""
       },
+      {
+        "a": "Tai Tuivasa",
+        "b": "Louie Sutherland",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "opener"
+      }
+    ],
+    "prelims": [
       {
         "a": "Cam Rowston",
         "b": "Robert Bryczek",
@@ -9221,9 +9221,36 @@
         "slot": ""
       },
       {
-        "a": "Shamil Gaziev",
-        "b": "Brando Pericic",
-        "weight": "Heavyweight",
+        "a": "Junior Tafa",
+        "b": "Kevin Christian",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": ""
+      },
+      {
+        "a": "Jacob Malkoun",
+        "b": "Gerald Meerschaert",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": ""
+      },
+      {
+        "a": "Colby Thicknesse",
+        "b": "Vince Morales",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": ""
+      },
+      {
+        "a": "Ben Johnston",
+        "b": "Wes Schultz",
+        "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
@@ -9239,18 +9266,9 @@
         "slot": ""
       },
       {
-        "a": "Kody Steele",
-        "b": "Dom Mar Fan",
+        "a": "Dom Mar Fan",
+        "b": "Kody Steele",
         "weight": "Lightweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": ""
-      },
-      {
-        "a": "Colby Thicknesse",
-        "b": "Vince Morales",
-        "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
@@ -9258,15 +9276,6 @@
       }
     ],
     "earlyPrelims": [
-      {
-        "a": "Wes Schultz",
-        "b": "Ben Johnston",
-        "weight": "Middleweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": ""
-      },
       {
         "a": "Jack Jenkins",
         "b": "Marwan Rahiki",
@@ -9313,7 +9322,8 @@
         "weight": "Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "slot": ""
       },
       {
         "a": "Sean Brady",
@@ -9321,7 +9331,8 @@
         "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true
+        "ranked": true,
+        "slot": ""
       },
       {
         "a": "King Green",
@@ -9335,37 +9346,51 @@
     ],
     "prelims": [
       {
-        "a": "Jan Blachowicz",
-        "b": "Bogdan Guskov",
-        "weight": "Light Heavyweight",
+        "a": "Ateba Gautier",
+        "b": "Ozzy Diaz",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": ""
+      },
+      {
+        "a": "Grant Dawson",
+        "b": "Mateusz Rebecki",
+        "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
         "slot": ""
       },
       {
-        "a": "Ateba Gautier",
-        "b": "Osman Diaz",
-        "weight": "Middleweight",
+        "a": "Joel Alvarez",
+        "b": "Yaroslav Amosov",
+        "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
-      },
-      {
-        "a": "Clayton Carpenter",
-        "b": "Jose Ochoa",
-        "weight": "Flyweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false
-      },
+        "ranked": true,
+        "slot": ""
+      }
+    ],
+    "earlyPrelims": [
       {
         "a": "Roman Kopylov",
         "b": "Marco Tulio",
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "slot": ""
+      },
+      {
+        "a": "Pat Sabatini",
+        "b": "William Gomis",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": ""
       },
       {
         "a": "Baisangur Susurkaev",
@@ -9373,17 +9398,17 @@
         "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
-      }
-    ],
-    "earlyPrelims": [
+        "ranked": false,
+        "slot": ""
+      },
       {
-        "a": "Joel Alvarez",
-        "b": "Yaroslav Amosov",
-        "weight": "Welterweight",
+        "a": "Clayton Carpenter",
+        "b": "Jose Ochoa",
+        "weight": "Flyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false
+        "ranked": false,
+        "slot": ""
       }
     ],
     "startTime": "22:00"
@@ -9485,6 +9510,15 @@
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
+        "slot": ""
+      },
+      {
+        "a": "Josh Hokit",
+        "b": "Derrick Lewis",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
         "slot": "opener"
       }
     ],

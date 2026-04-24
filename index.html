@@ -126,6 +126,19 @@
     .content-container {
       animation: sectionFadeIn 0.5s 0.4s ease both;
     }
+
+    /* ── LIGHT MODE overrides for inline-style body bg ── */
+    body.light-mode {
+      background: #f0f0f4 !important;
+      background-image: radial-gradient(ellipse 70% 40% at 50% -5%, rgba(0,100,200,0.04) 0%, transparent 60%) !important;
+    }
+    body.light-mode .sidebar h3 {
+      background: linear-gradient(120deg, #009bb5 0%, #00c6d8 50%, #009bb5 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
   </style>
 </head>
 
@@ -147,6 +160,7 @@
         <li><a href="lucas.html">Lucas Bot</a></li>
       </ul>
 
+      <button class="theme-toggle" id="themeToggle" aria-label="Switch to light mode" title="Switch to light mode"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
       <!-- SEARCH (NOW A FORM so Enter works) -->
       <form class="search-box" id="site-search-form" action="results.html" method="GET">
         <input id="site-search" name="q" type="text" placeholder="Search fighters, events..." autocomplete="off" />
@@ -157,7 +171,6 @@
         </span>
       </form>
       <div class="nav-auth"></div>
-      <button class="theme-toggle" id="themeToggle"></button>
       <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
         <span></span><span></span><span></span>
       </button>

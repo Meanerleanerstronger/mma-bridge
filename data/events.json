@@ -1727,7 +1727,7 @@
     "location": "Las Vegas, NV",
     "venue": "Meta APEX",
     "poster": "https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-03/040426-ufc-fight-night-moicano-vs-duncan-EVENT-ART.jpg",
-    "status": "upcoming",
+    "status": "completed",
     "mainCard": [
       {
         "a": "Renato Moicano",
@@ -1751,7 +1751,7 @@
     "location": "Miami, FL",
     "venue": "Kaseya Center",
     "poster": "https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-04/041126-ufc-327-prochazka-vs-ulberg-EVENT-ART.jpg",
-    "status": "upcoming",
+    "status": "completed",
     "mainCard": [
       {
         "a": "Jiří Procházka",
@@ -1917,6 +1917,60 @@
         "titleFight": true,
         "ranked": true,
         "slot": "main"
+      },
+      {
+        "a": "Alex Pereira",
+        "b": "Ciryl Gane",
+        "weight": "Heavyweight",
+        "rounds": "5 Rds",
+        "titleFight": true,
+        "ranked": true,
+        "slot": "comain"
+      },
+      {
+        "a": "Sean O'Malley",
+        "b": "Aiemann Zahabi",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": ""
+      },
+      {
+        "a": "Mauricio Ruffy",
+        "b": "Michael Chandler",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": ""
+      },
+      {
+        "a": "Bo Nickal",
+        "b": "Kyle Daukaus",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": ""
+      },
+      {
+        "a": "Diego Lopes",
+        "b": "Steve Garcia",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": ""
+      },
+      {
+        "a": "Josh Hokit",
+        "b": "Derrick Lewis",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "opener"
       }
     ],
     "prelims": [],
