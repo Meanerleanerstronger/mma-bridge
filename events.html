@@ -4,1155 +4,359 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <script src="theme.js?v=2.1"></script>
+  <script src="theme.js?v=2.2"></script>
   <link rel="icon" href="images/mma-bridge-logo.png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MMA Bridge | Upcoming Events</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Pacifico&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=2.1" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=2.2" />
 
   <style>
-    /* ── BASE ── */
-    body {
-      background: #060608;
-      background-image:
-        radial-gradient(ellipse 80% 40% at 15% -5%, rgba(0,229,255,0.03) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 35% at 85% 105%, rgba(200,168,75,0.03) 0%, transparent 55%);
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes heroIn {
-      from { opacity: 0; transform: translateY(-10px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes shimmer {
-      0%   { background-position: -200% center; }
-      100% { background-position: 200% center; }
-    }
-    @keyframes pulseGlow {
-      0%,100% { opacity: 1; }
-      50%      { opacity: 0.5; }
-    }
-    @keyframes overlayIn {
-      from { opacity: 0; transform: scale(0.97); }
-      to   { opacity: 1; transform: scale(1); }
-    }
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes hypeGlow {
-      0%,100% { box-shadow: 0 0 0 0 rgba(0,229,255,0); }
-      50%      { box-shadow: 0 0 30px 4px rgba(0,229,255,0.18); }
-    }
+    /* ── KEYFRAMES ── */
+    @keyframes fadeUp   { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes heroIn   { from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes shimmer  { 0%{background-position:-200% center} 100%{background-position:200% center} }
+    @keyframes pulse    { 0%,100%{opacity:1} 50%{opacity:.45} }
+    @keyframes ovIn     { from{opacity:0;transform:scale(.97) translateY(12px)} to{opacity:1;transform:scale(1) translateY(0)} }
+    @keyframes glowPop  { 0%{box-shadow:none} 50%{box-shadow:0 0 32px 4px var(--glow-c,rgba(0,229,255,.25))} 100%{box-shadow:none} }
 
     /* ── PAGE ── */
-    .ev-page {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 52px 28px 120px;
-    }
+    .ev-page { max-width:980px; margin:0 auto; padding:52px 28px 120px; }
 
-    /* ── HERO ── */
-    .ev-hero {
-      text-align: center;
-      margin-bottom: 48px;
-      animation: heroIn 0.45s ease both;
-    }
+    /* ── HERO TITLE ── */
+    .ev-hero { text-align:center; margin-bottom:44px; animation:heroIn .4s ease both; }
     .ev-hero h1 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
-      font-size: clamp(2rem, 5vw, 3.4rem);
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      color: #fff;
-      margin: 0 0 10px;
+      font-family:'Montserrat',sans-serif; font-weight:900;
+      font-size:clamp(2rem,5vw,3.4rem); text-transform:uppercase;
+      letter-spacing:.07em; color:#fff; margin:0 0 10px;
     }
     .ev-hero h1 span {
-      background: linear-gradient(120deg, #00e5ff 0%, #80ffea 45%, #00b8d4 70%, #00e5ff 100%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: shimmer 4s linear infinite;
+      background:linear-gradient(120deg,#00e5ff 0%,#80ffea 45%,#00b8d4 70%,#00e5ff 100%);
+      background-size:200% auto; -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent; background-clip:text;
+      animation:shimmer 4s linear infinite;
     }
-    .ev-hero-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.2);
-      letter-spacing: 0.04em;
-    }
-    .ev-hero-divider {
-      width: 44px; height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(0,229,255,0.35), transparent);
-      margin: 12px auto 0; border-radius: 2px;
-    }
+    .ev-hero-sub { font-family:'Inter',sans-serif; font-size:.78rem; color:rgba(255,255,255,.2); letter-spacing:.04em; }
+    .ev-hero-divider { width:44px;height:2px;background:linear-gradient(90deg,transparent,rgba(0,229,255,.35),transparent);margin:12px auto 0;border-radius:2px; }
 
     /* ── COUNT BAR ── */
-    .ev-count-bar {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 20px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      animation: fadeUp 0.4s 0.1s ease both;
-    }
-    .ev-count-accent {
-      width: 3px; height: 14px; border-radius: 2px;
-      background: linear-gradient(to bottom, #00e5ff, rgba(0,229,255,0.2));
-    }
-    .ev-count-label {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
-      font-size: 0.62rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.55);
-    }
-    .ev-count-pill {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.65rem;
-      color: rgba(255,255,255,0.18);
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.07);
-      padding: 2px 10px;
-      border-radius: 20px;
-      margin-left: auto;
-    }
+    .ev-count-bar { display:flex;align-items:center;gap:10px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.05);animation:fadeUp .4s .08s ease both; }
+    .ev-count-accent { width:3px;height:14px;border-radius:2px;background:linear-gradient(to bottom,#00e5ff,rgba(0,229,255,.2)); }
+    .ev-count-label { font-family:'Montserrat',sans-serif;font-weight:900;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5); }
+    .ev-count-pill  { font-family:'Inter',sans-serif;font-size:.62rem;color:rgba(255,255,255,.18);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:2px 10px;border-radius:20px;margin-left:auto; }
 
-    /* ── EVENT LIST ── */
-    .ev-list {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
+    /* ── EVENT CARDS ── */
+    .ev-list { display:flex;flex-direction:column;gap:14px; }
 
-    /* ── BANNER CARD ── */
     .ev-card {
-      position: relative;
-      width: 100%;
-      height: 160px;
-      border-radius: 16px;
-      overflow: hidden;
-      cursor: pointer;
-      border: 1px solid rgba(255,255,255,0.07);
-      animation: fadeUp 0.4s ease both;
-      transition: border-color 0.25s, transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
-      text-decoration: none;
-      display: block;
+      position:relative; width:100%; height:160px; border-radius:16px;
+      overflow:hidden; cursor:pointer; border:1px solid rgba(255,255,255,.07);
+      animation:fadeUp .4s ease both; text-decoration:none; display:block;
+      transition:border-color .25s, transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s;
     }
-    .ev-card:nth-child(1)  { animation-delay: 0.05s; }
-    .ev-card:nth-child(2)  { animation-delay: 0.10s; }
-    .ev-card:nth-child(3)  { animation-delay: 0.15s; }
-    .ev-card:nth-child(4)  { animation-delay: 0.20s; }
-    .ev-card:nth-child(5)  { animation-delay: 0.25s; }
-    .ev-card:nth-child(n+6){ animation-delay: 0.30s; }
+    .ev-card:nth-child(1){animation-delay:.04s}.ev-card:nth-child(2){animation-delay:.08s}
+    .ev-card:nth-child(3){animation-delay:.12s}.ev-card:nth-child(4){animation-delay:.16s}
+    .ev-card:nth-child(5){animation-delay:.20s}.ev-card:nth-child(n+6){animation-delay:.24s}
+    .ev-card.fn:hover  { border-color:rgba(0,229,255,.3);transform:translateY(-3px);box-shadow:0 16px 50px rgba(0,0,0,.7),0 0 0 1px rgba(0,229,255,.06); }
+    .ev-card.ppv:hover { border-color:rgba(200,168,75,.35);transform:translateY(-3px);box-shadow:0 16px 50px rgba(0,0,0,.7),0 0 0 1px rgba(200,168,75,.08); }
+    .ev-card.ppv::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 0%,#8a6a10 15%,#c8a84b 35%,#fff8c0 50%,#c8a84b 65%,#8a6a10 85%,transparent 100%);background-size:250% auto;animation:shimmer 4s linear infinite;z-index:5; }
 
-    .ev-card.fn:hover  {
-      border-color: rgba(0,229,255,0.3);
-      transform: translateY(-3px);
-      box-shadow: 0 16px 50px rgba(0,0,0,0.7), 0 0 0 1px rgba(0,229,255,0.06);
-    }
-    .ev-card.ppv:hover {
-      border-color: rgba(200,168,75,0.35);
-      transform: translateY(-3px);
-      box-shadow: 0 16px 50px rgba(0,0,0,0.7), 0 0 0 1px rgba(200,168,75,0.08);
-    }
+    .ev-card-poster { position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;display:block;transition:transform .5s cubic-bezier(.22,1,.36,1); }
+    .ev-card:hover .ev-card-poster { transform:scale(1.04); }
+    .ev-card-placeholder { position:absolute;inset:0;background:linear-gradient(135deg,#141418,#0c0c10);display:flex;align-items:center;justify-content:center;font-size:3rem; }
+    .ev-card-overlay { position:absolute;inset:0;background:linear-gradient(to right,rgba(4,4,6,.95) 0%,rgba(4,4,6,.82) 30%,rgba(4,4,6,.45) 58%,rgba(4,4,6,.15) 78%,transparent 100%);z-index:2; }
+    .ev-card-bar { position:absolute;left:0;top:0;bottom:0;width:4px;z-index:4; }
+    .ev-card.fn  .ev-card-bar { background:linear-gradient(to bottom,#00e5ff,rgba(0,229,255,.3),transparent); }
+    .ev-card.ppv .ev-card-bar { background:linear-gradient(to bottom,#c8a84b,rgba(200,168,75,.3),transparent); }
 
-    .ev-card.ppv::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg,
-        transparent 0%, #8a6a10 15%, #c8a84b 35%, #fff8c0 50%,
-        #c8a84b 65%, #8a6a10 85%, transparent 100%);
-      background-size: 250% auto;
-      animation: shimmer 4s linear infinite;
-      z-index: 5;
-    }
+    .ev-card-content { position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;justify-content:center;padding:0 22px;max-width:62%; }
+    .ev-card-top { display:flex;align-items:center;gap:9px;margin-bottom:8px; }
+    .ev-card-badge { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.42rem;letter-spacing:.18em;text-transform:uppercase;padding:3px 9px;border-radius:4px;backdrop-filter:blur(6px); }
+    .ev-card.fn  .ev-card-badge { background:rgba(0,229,255,.12);border:1px solid rgba(0,229,255,.3);color:#00e5ff; }
+    .ev-card.ppv .ev-card-badge { background:rgba(200,168,75,.12);border:1px solid rgba(200,168,75,.35);color:#c8a84b; }
+    .ev-card-name    { font-family:'Montserrat',sans-serif;font-weight:900;font-size:.86rem;color:rgba(255,255,255,.6);letter-spacing:.05em;text-transform:uppercase; }
+    .ev-card.ppv .ev-card-name { color:rgba(232,200,90,.7); }
+    .ev-card-matchup { font-family:'Barlow Condensed','Montserrat',sans-serif;font-weight:900;font-size:clamp(1.25rem,2.6vw,1.75rem);color:#fff;letter-spacing:.03em;text-transform:uppercase;line-height:1.1;margin-bottom:8px;text-shadow:0 2px 16px rgba(0,0,0,.9); }
+    .ev-card.ppv .ev-card-matchup { font-size:clamp(1.35rem,2.9vw,1.95rem); }
+    .ev-card-sub   { font-family:'Inter',sans-serif;font-size:.7rem;color:rgba(255,255,255,.35);letter-spacing:.02em; }
 
-    .ev-card-poster {
-      position: absolute;
-      inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: center center;
-      display: block;
-      transition: transform 0.5s cubic-bezier(0.22,1,0.36,1);
-    }
-    .ev-card:hover .ev-card-poster { transform: scale(1.04); }
+    .ev-card-meta   { position:absolute;right:22px;top:50%;transform:translateY(-50%);z-index:3;text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:5px; }
+    .ev-card-days   { font-family:'Montserrat',sans-serif;font-weight:900;font-size:.82rem;letter-spacing:.07em;color:rgba(255,255,255,.3); }
+    .ev-card-days.soon  { color:#00e5ff;animation:pulse 2.2s ease infinite; }
+    .ev-card-days.today { color:#c8a84b;animation:pulse 2s ease infinite; }
+    .ev-card-date   { font-family:'Inter',sans-serif;font-size:.68rem;color:rgba(255,255,255,.2); }
+    .ev-card-location { font-family:'Inter',sans-serif;font-size:.6rem;color:rgba(255,255,255,.13);max-width:120px;text-align:right; }
+    .ev-card-cta    { position:absolute;bottom:14px;right:22px;z-index:3;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.48rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.2);display:flex;align-items:center;gap:5px;transition:color .2s; }
+    .ev-card.fn:hover  .ev-card-cta { color:rgba(0,229,255,.6); }
+    .ev-card.ppv:hover .ev-card-cta { color:rgba(200,168,75,.6); }
+    .ev-card-cta svg { width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round; }
 
-    .ev-card-placeholder {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, #141418 0%, #0c0c10 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-    }
+    /* ══════════════════════════════════
+       CINEMATIC OVERLAY
+    ══════════════════════════════════ */
+    .ev-overlay { position:fixed;inset:0;z-index:2000;visibility:hidden;pointer-events:none;overflow:hidden; }
+    .ev-overlay.open { visibility:visible;pointer-events:all; }
 
-    .ev-card-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to right,
-        rgba(4,4,6,0.95) 0%,
-        rgba(4,4,6,0.82) 30%,
-        rgba(4,4,6,0.45) 58%,
-        rgba(4,4,6,0.15) 78%,
-        transparent 100%
-      );
-      z-index: 2;
-    }
-    .ev-card-overlay::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0; height: 50%;
-      background: linear-gradient(to top, rgba(4,4,6,0.5), transparent);
-    }
+    .ov-backdrop { position:absolute;inset:0;background:rgba(0,0,0,0);transition:background .4s ease; }
+    .ev-overlay.open .ov-backdrop { background:rgba(0,0,0,0.92); }
 
-    .ev-card-bar {
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 4px;
-      z-index: 4;
-    }
-    .ev-card.fn  .ev-card-bar { background: linear-gradient(to bottom, #00e5ff, rgba(0,229,255,0.3), transparent); }
-    .ev-card.ppv .ev-card-bar { background: linear-gradient(to bottom, #c8a84b, rgba(200,168,75,0.3), transparent); }
-
-    .ev-card-content {
-      position: absolute;
-      inset: 0;
-      z-index: 3;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 0 22px 0 22px;
-      max-width: 62%;
-    }
-
-    .ev-card-top {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      margin-bottom: 8px;
-    }
-
-    .ev-card-badge {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      font-size: 0.42rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      padding: 3px 9px;
-      border-radius: 4px;
-      backdrop-filter: blur(6px);
-    }
-    .ev-card.fn  .ev-card-badge {
-      background: rgba(0,229,255,0.12);
-      border: 1px solid rgba(0,229,255,0.3);
-      color: #00e5ff;
-    }
-    .ev-card.ppv .ev-card-badge {
-      background: rgba(200,168,75,0.12);
-      border: 1px solid rgba(200,168,75,0.35);
-      color: #c8a84b;
-    }
-
-    .ev-card-name {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
-      font-size: 0.88rem;
-      color: rgba(255,255,255,0.6);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-    .ev-card.ppv .ev-card-name { color: rgba(232,200,90,0.7); }
-
-    .ev-card-matchup {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
-      font-size: clamp(1.2rem, 2.5vw, 1.7rem);
-      color: #fff;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      line-height: 1.1;
-      margin-bottom: 8px;
-      text-shadow: 0 2px 16px rgba(0,0,0,0.9);
-    }
-    .ev-card.ppv .ev-card-matchup { font-size: clamp(1.3rem, 2.8vw, 1.9rem); }
-
-    .ev-card-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.72rem;
-      color: rgba(255,255,255,0.35);
-      letter-spacing: 0.02em;
-    }
-
-    .ev-card-meta {
-      position: absolute;
-      right: 22px;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 3;
-      text-align: right;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 5px;
-    }
-    .ev-card-days {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
-      font-size: 0.82rem;
-      letter-spacing: 0.07em;
-      color: rgba(255,255,255,0.3);
-    }
-    .ev-card-days.soon  { color: #00e5ff; animation: pulseGlow 2.2s ease infinite; }
-    .ev-card-days.today { color: #c8a84b; animation: pulseGlow 2s ease infinite; }
-    .ev-card-date {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.7rem;
-      color: rgba(255,255,255,0.2);
-      text-align: right;
-    }
-    .ev-card-location {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.62rem;
-      color: rgba(255,255,255,0.13);
-      text-align: right;
-      max-width: 120px;
-    }
-
-    .ev-card-cta {
-      position: absolute;
-      bottom: 14px;
-      right: 22px;
-      z-index: 3;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 0.5rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.2);
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      transition: color 0.2s;
-    }
-    .ev-card.fn:hover  .ev-card-cta { color: rgba(0,229,255,0.6); }
-    .ev-card.ppv:hover .ev-card-cta { color: rgba(200,168,75,0.6); }
-    .ev-card-cta svg {
-      width: 12px; height: 12px;
-      fill: none; stroke: currentColor;
-      stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round;
-    }
-
-    /* ══════════════════════════════════════
-       CINEMATIC FULL-SCREEN OVERLAY
-    ══════════════════════════════════════ */
-    .ev-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 2000;
-      visibility: hidden;
-      pointer-events: none;
-      overflow: hidden;
-    }
-    .ev-overlay.open {
-      visibility: visible;
-      pointer-events: all;
-    }
-
-    /* Backdrop */
-    .ov-backdrop {
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0);
-      transition: background 0.4s ease;
-    }
-    .ev-overlay.open .ov-backdrop {
-      background: rgba(0,0,0,0.92);
-    }
-
-    /* Main panel */
     .ov-panel {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      opacity: 0;
-      transform: scale(0.97);
-      transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.22,1,0.36,1);
-      overflow: hidden;
-      background: #07070a;
+      position:absolute;inset:0;display:flex;flex-direction:column;
+      opacity:0;transform:scale(.97) translateY(12px);
+      transition:opacity .35s ease,transform .35s cubic-bezier(.22,1,.36,1);
+      overflow:hidden;background:#07070a;
     }
-    .ev-overlay.open .ov-panel {
-      opacity: 1;
-      transform: scale(1);
-    }
+    .ev-overlay.open .ov-panel { opacity:1;transform:scale(1) translateY(0); }
 
-    /* ── HERO POSTER AREA ── */
-    .ov-hero {
-      position: relative;
-      height: 55vh;
-      min-height: 320px;
-      max-height: 520px;
-      flex-shrink: 0;
-      overflow: hidden;
-    }
-
-    /* Poster fills full hero */
-    .ov-poster {
-      position: absolute;
-      inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: center 20%;
-      display: block;
-    }
-
-    /* Dark gradient layers */
+    /* ── HERO ── */
+    .ov-hero { position:relative;height:52vh;min-height:300px;max-height:500px;flex-shrink:0;overflow:hidden; }
+    .ov-poster { position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block; }
     .ov-poster-gradient {
-      position: absolute;
-      inset: 0;
+      position:absolute;inset:0;
       background:
-        linear-gradient(to bottom, rgba(7,7,10,0.2) 0%, transparent 30%, rgba(7,7,10,0.6) 70%, rgba(7,7,10,1) 100%),
-        linear-gradient(to right, rgba(7,7,10,0.7) 0%, transparent 50%);
-      z-index: 2;
+        linear-gradient(to bottom,rgba(7,7,10,.15) 0%,transparent 25%,rgba(7,7,10,.65) 70%,rgba(7,7,10,1) 100%),
+        linear-gradient(to right,rgba(7,7,10,.65) 0%,transparent 55%);
+      z-index:2;
     }
+    .ov-poster-placeholder { position:absolute;inset:0;background:linear-gradient(135deg,#0d0d12,#080810);display:flex;align-items:center;justify-content:center; }
+    .ov-poster-placeholder-inner { font-family:'Barlow Condensed','Montserrat',sans-serif;font-weight:900;font-size:7rem;color:rgba(255,255,255,.03);text-transform:uppercase;letter-spacing:.05em;text-align:center;line-height:.9;user-select:none;white-space:pre-line; }
 
-    /* Placeholder when no poster */
-    .ov-poster-placeholder {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, #0d0d12 0%, #080810 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .ov-poster-placeholder-inner {
-      font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
-      font-weight: 900;
-      font-size: 8rem;
-      color: rgba(255,255,255,0.03);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      text-align: center;
-      line-height: 0.9;
-      user-select: none;
-    }
+    .ov-hero.is-ppv::after { content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#8a6a10,#c8a84b,#fff8c0,#c8a84b,#8a6a10,transparent);background-size:250% auto;animation:shimmer 3.5s linear infinite;z-index:6; }
 
-    /* PPV gold shimmer top strip */
-    .ov-hero.is-ppv::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, transparent, #8a6a10, #c8a84b, #fff8c0, #c8a84b, #8a6a10, transparent);
-      background-size: 250% auto;
-      animation: shimmer 3.5s linear infinite;
-      z-index: 6;
-    }
+    .ov-topbar { position:absolute;top:0;left:0;right:0;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;z-index:10; }
+    .ov-badge-row { display:flex;align-items:center;gap:10px; }
+    .ov-badge { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;padding:4px 12px;border-radius:4px;backdrop-filter:blur(10px); }
+    .ov-badge.fn  { background:rgba(0,229,255,.15);border:1px solid rgba(0,229,255,.35);color:#00e5ff; }
+    .ov-badge.ppv { background:rgba(200,168,75,.15);border:1px solid rgba(200,168,75,.4);color:#c8a84b; }
+    .ov-live-dot  { display:flex;align-items:center;gap:5px;font-family:'Montserrat',sans-serif;font-size:.46rem;font-weight:800;letter-spacing:.15em;color:#ff4444; }
+    .ov-live-dot::before { content:'';width:6px;height:6px;border-radius:50%;background:#ff4444;animation:pulse 1.2s ease infinite; }
+    .ov-close { width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);font-size:.95rem;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(10px);transition:background .2s,border-color .2s,color .2s; }
+    .ov-close:hover { background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.3);color:#fff; }
 
-    /* Topbar: close + badge */
-    .ov-topbar {
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      padding: 20px 28px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      z-index: 10;
-    }
-    .ov-badge {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      font-size: 0.5rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      padding: 4px 12px;
-      border-radius: 4px;
-      backdrop-filter: blur(10px);
-    }
-    .ov-badge.fn  { background: rgba(0,229,255,0.15); border: 1px solid rgba(0,229,255,0.35); color: #00e5ff; }
-    .ov-badge.ppv { background: rgba(200,168,75,0.15); border: 1px solid rgba(200,168,75,0.4); color: #c8a84b; }
-    .ov-badge-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .ov-live-dot {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.48rem;
-      font-weight: 800;
-      letter-spacing: 0.15em;
-      color: #ff4444;
-    }
-    .ov-live-dot::before {
-      content: '';
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: #ff4444;
-      animation: pulseGlow 1.2s ease infinite;
-    }
-
-    .ov-close {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      background: rgba(0,0,0,0.6);
-      border: 1px solid rgba(255,255,255,0.15);
-      color: rgba(255,255,255,0.7);
-      font-size: 1rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      backdrop-filter: blur(10px);
-      transition: background 0.2s, border-color 0.2s, color 0.2s;
-    }
-    .ov-close:hover {
-      background: rgba(255,255,255,0.12);
-      border-color: rgba(255,255,255,0.3);
-      color: #fff;
-    }
-
-    /* Hero bottom: event title + matchup */
-    .ov-hero-bottom {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 0 36px 28px;
-      z-index: 5;
-    }
-    .ov-event-label {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 0.6rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
-      margin-bottom: 6px;
-    }
+    .ov-hero-bottom { position:absolute;bottom:0;left:0;right:0;padding:0 36px 22px;z-index:5; }
+    .ov-event-label { font-family:'Montserrat',sans-serif;font-weight:700;font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.32);margin-bottom:6px; }
     .ov-matchup {
-      font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
-      font-weight: 900;
-      font-size: clamp(2.8rem, 6vw, 5rem);
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
-      color: #fff;
-      line-height: 0.92;
-      text-shadow: 0 4px 32px rgba(0,0,0,0.8);
-      margin-bottom: 10px;
+      font-family:'Barlow Condensed','Montserrat',sans-serif;font-weight:900;
+      font-size:clamp(2.6rem,5.5vw,4.8rem);text-transform:uppercase;
+      letter-spacing:.02em;color:#fff;line-height:.92;
+      text-shadow:0 4px 32px rgba(0,0,0,.8);margin-bottom:10px;
     }
-    .ov-matchup .vs-sep {
-      font-size: 0.4em;
-      color: rgba(255,255,255,0.3);
-      letter-spacing: 0.15em;
-      vertical-align: middle;
-      font-weight: 700;
-      padding: 0 0.4em;
-    }
-    .ov-meta-row {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .ov-meta-item {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.72rem;
-      color: rgba(255,255,255,0.4);
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .ov-meta-item svg {
-      width: 11px; height: 11px;
-      fill: none; stroke: currentColor; stroke-width: 2;
-      stroke-linecap: round; stroke-linejoin: round;
-      opacity: 0.5;
-    }
+    .ov-matchup .vs-sep { font-size:.38em;color:rgba(255,255,255,.28);letter-spacing:.15em;vertical-align:middle;font-weight:700;padding:0 .4em; }
+    .ov-meta-row { display:flex;align-items:center;gap:14px;flex-wrap:wrap; }
+    .ov-meta-item { font-family:'Inter',sans-serif;font-size:.7rem;color:rgba(255,255,255,.38);display:flex;align-items:center;gap:5px; }
 
-    /* ── HYPE STRIP (full width, sits right below hero) ── */
-    .ov-hype-strip {
-      flex-shrink: 0;
-      padding: 18px 36px 16px;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      background: rgba(0,0,0,0.25);
-      display: flex;
-      align-items: center;
-      gap: 28px;
+    /* ── COMPACT HYPE BAR ── */
+    .ov-hype-bar {
+      flex-shrink:0;display:flex;align-items:center;gap:16px;
+      padding:10px 36px;border-bottom:1px solid rgba(255,255,255,.05);
+      background:rgba(0,0,0,.18);
     }
-    .ov-hype-strip-left {
-      flex-shrink: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 2px;
-    }
-    .ov-hype-strip-label {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
-      font-size: 0.44rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.28);
-    }
-    .ov-hype-strip-score {
-      display: flex;
-      align-items: baseline;
-      gap: 3px;
-      line-height: 1;
-    }
-    .ov-hype-strip-num {
-      font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
-      font-weight: 900;
-      font-size: 2.6rem;
-      color: rgba(255,255,255,0.2);
-      transition: color 0.25s;
-      line-height: 1;
-    }
-    .ov-hype-strip-denom {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.15);
-    }
-    .ov-hype-strip-word {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      font-size: 0.55rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.2);
-      transition: color 0.25s;
-      min-height: 1em;
-    }
-    .ov-hype-strip-right {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    /* Tick labels row */
-    .ov-hype-ticks {
-      display: flex;
-      justify-content: space-between;
-      padding: 0 2px;
-    }
-    .ov-hype-tick {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 0.55rem;
-      color: rgba(255,255,255,0.2);
-      cursor: pointer;
-      transition: color 0.15s;
-      user-select: none;
-      min-width: 14px;
-      text-align: center;
-    }
-    .ov-hype-tick:hover { color: rgba(255,255,255,0.5); }
-    .ov-hype-tick.active { font-weight: 900; }
-    /* Draggable track */
-    .ov-hype-track-wrap {
-      position: relative;
-      height: 28px;
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-    }
-    .ov-hype-track {
-      position: absolute;
-      left: 0; right: 0;
-      height: 6px;
-      background: rgba(255,255,255,0.08);
-      border-radius: 3px;
-      overflow: visible;
-    }
-    .ov-hype-fill {
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      border-radius: 3px;
-      background: rgba(255,255,255,0.25);
-      transition: width 0.12s ease, background 0.25s;
-      width: 0%;
-    }
-    /* Draggable circle thumb */
+    .ov-hype-label-txt { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.42rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.25);white-space:nowrap; }
+    .ov-hype-score-inline { display:flex;align-items:baseline;gap:2px;min-width:44px; }
+    .ov-hype-num { font-family:'Barlow Condensed','Montserrat',sans-serif;font-weight:900;font-size:1.6rem;line-height:1;color:rgba(255,255,255,.18);transition:color .25s; }
+    .ov-hype-denom { font-family:'Inter',sans-serif;font-size:.7rem;color:rgba(255,255,255,.15); }
+    .ov-hype-word { font-family:'Montserrat',sans-serif;font-weight:700;font-size:.46rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.18);transition:color .25s;min-width:70px; }
+
+    /* Track + draggable thumb */
+    .ov-hype-track-wrap { position:relative;flex:1;height:22px;display:flex;align-items:center;cursor:pointer; }
+    .ov-hype-track { position:absolute;left:0;right:0;height:5px;background:rgba(255,255,255,.08);border-radius:3px; }
+    .ov-hype-fill  { position:absolute;left:0;top:0;bottom:0;border-radius:3px;background:rgba(255,255,255,.2);transition:width .12s ease,background .25s;width:0%; }
     .ov-hype-thumb {
-      position: absolute;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: #fff;
-      border: 3px solid rgba(255,255,255,0.9);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-      cursor: grab;
-      transition: background 0.25s, border-color 0.25s, transform 0.1s, box-shadow 0.2s;
-      z-index: 2;
-      left: 0%;
-      will-change: left;
+      position:absolute;top:50%;left:0%;transform:translate(-50%,-50%);
+      width:18px;height:18px;border-radius:50%;background:#fff;
+      border:2.5px solid rgba(255,255,255,.9);
+      box-shadow:0 2px 8px rgba(0,0,0,.5);cursor:grab;
+      transition:background .25s,border-color .25s,transform .1s,box-shadow .2s;
+      z-index:2;will-change:left;
     }
-    .ov-hype-thumb:hover {
-      transform: translate(-50%, -50%) scale(1.15);
-      box-shadow: 0 2px 16px rgba(0,0,0,0.6);
-    }
-    .ov-hype-thumb.dragging {
-      cursor: grabbing;
-      transform: translate(-50%, -50%) scale(1.2);
-      transition: background 0.25s, border-color 0.25s, box-shadow 0.2s;
-    }
-    .ov-hype-hint-strip {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.5rem;
-      color: rgba(255,255,255,0.12);
-      text-align: right;
-      letter-spacing: 0.04em;
-    }
+    .ov-hype-thumb:hover { transform:translate(-50%,-50%) scale(1.18);box-shadow:0 2px 14px rgba(0,0,0,.6); }
+    .ov-hype-thumb.dragging { cursor:grabbing;transform:translate(-50%,-50%) scale(1.22);transition:background .25s,border-color .25s,box-shadow .2s; }
 
-    /* ── BODY: 2-col layout ── */
-    .ov-body {
-      flex: 1;
-      display: grid;
-      grid-template-columns: 1fr 340px;
-      overflow: hidden;
-      min-height: 0;
-    }
+    /* Tick numbers */
+    .ov-hype-ticks { display:flex;justify-content:space-between;position:absolute;left:0;right:0;top:calc(50% + 10px); }
+    .ov-hype-tick  { font-family:'Montserrat',sans-serif;font-size:.44rem;font-weight:700;color:rgba(255,255,255,.18);cursor:pointer;user-select:none;transition:color .15s;min-width:10px;text-align:center; }
+    .ov-hype-tick:hover { color:rgba(255,255,255,.45); }
+    .ov-hype-tick.active { font-weight:900; }
 
-    /* ── LEFT: Fight Card ── */
+    /* ── BODY 2-COL ── */
+    .ov-body { flex:1;display:grid;grid-template-columns:1fr 300px;overflow:hidden;min-height:0; }
+
+    /* ── LEFT: fight col ── */
     .ov-fight-col {
-      overflow-y: auto;
-      padding: 0 0 40px;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(255,255,255,0.08) transparent;
-      border-right: 1px solid rgba(255,255,255,0.05);
+      overflow-y:auto;padding:0 0 40px;
+      scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.07) transparent;
+      border-right:1px solid rgba(255,255,255,.05);
     }
-    .ov-fight-col::-webkit-scrollbar { width: 4px; }
-    .ov-fight-col::-webkit-scrollbar-track { background: transparent; }
-    .ov-fight-col::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
+    .ov-fight-col::-webkit-scrollbar { width:3px; }
+    .ov-fight-col::-webkit-scrollbar-thumb { background:rgba(255,255,255,.08);border-radius:2px; }
 
     .ov-section-header {
-      padding: 18px 28px 10px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      position: sticky;
-      top: 0;
-      background: rgba(7,7,10,0.95);
-      backdrop-filter: blur(10px);
-      z-index: 5;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
+      padding:16px 28px 10px;display:flex;align-items:center;gap:10px;
+      position:sticky;top:0;background:rgba(7,7,10,.96);backdrop-filter:blur(10px);
+      z-index:5;border-bottom:1px solid rgba(255,255,255,.04);
     }
-    .ov-section-label {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
-      font-size: 0.5rem;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-    }
-    .ov-section-line {
-      flex: 1;
-      height: 1px;
-      background: rgba(255,255,255,0.05);
-    }
-    .ov-section-key {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.58rem;
-      color: rgba(255,255,255,0.2);
-    }
-    .ov-key-item {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .ov-key-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-    }
+    .ov-section-label { font-family:'Montserrat',sans-serif;font-weight:900;font-size:.48rem;letter-spacing:.24em;text-transform:uppercase; }
+    .ov-section-line  { flex:1;height:1px;background:rgba(255,255,255,.05); }
 
-    /* Fight row */
+    /* Fight row — NO picks UI, hover glow + FOTN reveal */
     .ov-fight {
-      display: grid;
-      grid-template-columns: 1fr 100px 1fr;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 28px;
-      border-bottom: 1px solid rgba(255,255,255,0.03);
-      transition: background 0.15s;
+      position:relative;
+      display:grid;grid-template-columns:1fr 96px 1fr;
+      align-items:center;gap:8px;
+      padding:14px 28px;
+      border-bottom:1px solid rgba(255,255,255,.03);
+      cursor:default;
+      transition:background .18s;
+      overflow:hidden;
     }
-    .ov-fight:hover { background: rgba(255,255,255,0.02); }
+    .ov-fight::before {
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(90deg,rgba(0,229,255,.0),rgba(0,229,255,.04),rgba(0,229,255,.0));
+      opacity:0;transition:opacity .2s;
+    }
+    .ov-fight:hover::before { opacity:1; }
+    .ov-fight:hover { background:rgba(255,255,255,.025); }
 
-    .ov-fight.is-main {
-      padding: 16px 28px;
-      background: rgba(200,168,75,0.03);
-      border-bottom: 1px solid rgba(200,168,75,0.06);
-    }
-    .ov-fight.is-main.fn-main {
-      background: rgba(0,229,255,0.025);
-      border-bottom: 1px solid rgba(0,229,255,0.05);
-    }
-    .ov-fight.is-comain {
-      background: rgba(0,229,255,0.015);
-    }
+    .ov-fight.is-main    { padding:18px 28px;background:rgba(0,229,255,.02);border-bottom:1px solid rgba(0,229,255,.06); }
+    .ov-fight.is-main.ppv-main { background:rgba(200,168,75,.02);border-bottom:1px solid rgba(200,168,75,.06); }
+    .ov-fight.is-main::before { background:linear-gradient(90deg,rgba(0,229,255,.0),rgba(0,229,255,.06),rgba(0,229,255,.0)); }
+    .ov-fight.is-main.ppv-main::before { background:linear-gradient(90deg,rgba(200,168,75,.0),rgba(200,168,75,.07),rgba(200,168,75,.0)); }
+    .ov-fight.is-comain  { background:rgba(0,229,255,.01); }
 
+    /* Fighter names — LARGE, cinematic, glossy */
     .ov-fighter {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      font-size: 0.88rem;
-      color: #fff;
-      line-height: 1.2;
+      font-family:'Barlow Condensed','Montserrat',sans-serif;
+      font-weight:900;font-size:1.15rem;
+      color:#fff;line-height:1.1;
+      letter-spacing:.02em;text-transform:uppercase;
+      transition:color .2s,text-shadow .2s;
+      position:relative;z-index:1;
     }
-    .ov-fight.is-main .ov-fighter {
-      font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
-      font-size: 1.15rem;
-      font-weight: 900;
-    }
-    .ov-fighter.right { text-align: right; }
-    .ov-fighter.dim { color: rgba(255,255,255,0.55); }
+    .ov-fight.is-main .ov-fighter { font-size:1.45rem; }
+    .ov-fighter.right { text-align:right; }
+    .ov-fighter.dim   { color:rgba(255,255,255,.55);font-size:.98rem; }
+    .ov-fight.is-main .ov-fighter.dim { font-size:1.45rem;color:rgba(255,255,255,.6); }
 
-    .ov-fight-mid {
-      text-align: center;
+    /* Hover name glow */
+    .ov-fight:hover .ov-fighter:not(.dim) {
+      color:#fff;
+      text-shadow:0 0 20px rgba(0,229,255,.18);
     }
-    .ov-title-badge {
-      font-size: 0.42rem;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #c8a84b;
-      margin-bottom: 3px;
-    }
-    .ov-weight {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.48rem;
-      font-weight: 600;
-      color: rgba(255,255,255,0.28);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-    .ov-rounds {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.42rem;
-      color: rgba(255,255,255,0.14);
-      margin-top: 2px;
-    }
-    .ov-slot-tag {
-      font-size: 0.38rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-top: 3px;
+    .ov-fight.ppv-main:hover .ov-fighter:not(.dim) {
+      text-shadow:0 0 20px rgba(200,168,75,.22);
     }
 
-    /* Picks row under each fight */
-    .ov-picks-row {
-      display: flex;
-      align-items: center;
-      padding: 6px 28px 10px;
-      gap: 0;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
+    .ov-fight-mid { text-align:center;position:relative;z-index:1; }
+    .ov-title-badge { font-size:.42rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#c8a84b;margin-bottom:3px; }
+    .ov-weight  { font-family:'Inter',sans-serif;font-size:.46rem;font-weight:600;color:rgba(255,255,255,.26);text-transform:uppercase;letter-spacing:.08em; }
+    .ov-rounds  { font-family:'Inter',sans-serif;font-size:.4rem;color:rgba(255,255,255,.13);margin-top:2px; }
+    .ov-slot-tag { font-size:.38rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-top:4px; }
+
+    /* FOTN hover pill — appears on hover, centered in fight row */
+    .ov-fotn-hover {
+      position:absolute;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);
+      font-family:'Montserrat',sans-serif;font-weight:800;font-size:.44rem;
+      letter-spacing:.14em;text-transform:uppercase;
+      background:rgba(200,168,75,.12);
+      border:1px solid rgba(200,168,75,.4);
+      color:#c8a84b;padding:4px 14px;border-radius:4px;
+      white-space:nowrap;pointer-events:none;
+      opacity:0;transition:opacity .18s,transform .18s;z-index:3;
     }
-    .ov-picks-left, .ov-picks-right {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      flex: 1;
-    }
-    .ov-picks-right { align-items: flex-end; }
-    .ov-pick-label {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.38rem;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: rgba(0,229,255,0.45);
-    }
-    .ov-pick-label.gold { color: rgba(200,168,75,0.5); }
-    .ov-pick-btns {
-      display: flex;
-      gap: 5px;
-    }
-    .ov-picks-right .ov-pick-btns { justify-content: flex-end; }
-    .ov-picks-divider {
-      width: 100px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      padding: 0 8px;
-    }
-    .ov-picks-div-line {
-      width: 1px;
-      height: 28px;
-      background: rgba(255,255,255,0.06);
+    .ov-fight:hover .ov-fotn-hover {
+      opacity:1;transform:translateX(-50%) translateY(calc(-50% - 2px));
     }
 
-    .opb {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.5rem;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 5px;
-      border: 1px solid rgba(255,255,255,0.1);
-      background: transparent;
-      color: rgba(255,255,255,0.35);
-      cursor: pointer;
-      letter-spacing: 0.06em;
-      transition: all 0.15s;
-      white-space: nowrap;
-    }
-    .opb:hover {
-      border-color: rgba(0,229,255,0.4);
-      color: #00e5ff;
-      background: rgba(0,229,255,0.06);
-    }
-    .opb.picked {
-      background: rgba(0,229,255,0.12);
-      border-color: rgba(0,229,255,0.5);
-      color: #00e5ff;
-    }
-    .opb.fotn-btn {
-      border-color: rgba(200,168,75,0.2);
-      color: rgba(200,168,75,0.5);
-    }
-    .opb.fotn-btn:hover {
-      border-color: rgba(200,168,75,0.6);
-      color: #c8a84b;
-      background: rgba(200,168,75,0.08);
-    }
-    .opb.fotn-picked {
-      background: rgba(200,168,75,0.12);
-      border-color: rgba(200,168,75,0.55);
-      color: #c8a84b;
-    }
+    /* ── RIGHT: sidebar ── */
+    .ov-sidebar { display:flex;flex-direction:column;overflow-y:auto;scrollbar-width:none; }
+    .ov-sidebar::-webkit-scrollbar { display:none; }
 
-    /* ── RIGHT: Sidebar ── */
-    .ov-sidebar {
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto;
-      scrollbar-width: none;
-    }
-    .ov-sidebar::-webkit-scrollbar { display: none; }
+    .ov-sb-section { padding:14px 16px;border-top:1px solid rgba(255,255,255,.04); }
+    .ov-sb-label   { font-family:'Montserrat',sans-serif;font-weight:900;font-size:.44rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:10px; }
 
+    /* Community */
+    .ov-community-bar { height:22px;border-radius:5px;overflow:hidden;display:flex;margin-top:6px;background:rgba(255,255,255,.04); }
+    .ov-comm-left  { background:rgba(0,229,255,.15);display:flex;align-items:center;padding:0 9px;font-family:'Montserrat',sans-serif;font-size:.54rem;font-weight:800;color:#00e5ff;transition:width .5s ease; }
+    .ov-comm-right { flex:1;display:flex;align-items:center;justify-content:flex-end;padding:0 9px;font-family:'Montserrat',sans-serif;font-size:.54rem;font-weight:800;color:rgba(200,168,75,.75); }
+    .ov-comm-fighters { display:flex;justify-content:space-between;font-family:'Inter',sans-serif;font-size:.58rem;color:rgba(255,255,255,.28);margin-top:5px; }
 
-
-    /* ── SIDEBAR SECTIONS ── */
-    .ov-sb-section {
-      padding: 14px 16px;
-      border-top: 1px solid rgba(255,255,255,0.04);
-    }
-    .ov-sb-label {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
-      font-size: 0.45rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.25);
-      margin-bottom: 10px;
-    }
-
-    /* Picks summary */
-    .ov-chips {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      min-height: 24px;
-      margin-bottom: 10px;
-    }
-    .ov-chip {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.65rem;
-      color: rgba(255,255,255,0.55);
-      line-height: 1;
-    }
-    .ov-chip-dot {
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .ov-chip-dot.cyan { background: #00e5ff; }
-    .ov-chip-dot.gold { background: #c8a84b; }
-    .ov-no-picks {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.62rem;
-      font-style: italic;
-      color: rgba(255,255,255,0.18);
-    }
-
-    .ov-lock-btn {
-      width: 100%;
-      padding: 12px;
-      background: linear-gradient(135deg, #00e5ff, #00b8d4);
-      color: #000;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
-      font-size: 0.6rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: opacity 0.2s, transform 0.15s;
-    }
-    .ov-lock-btn:hover { opacity: 0.9; transform: translateY(-1px); }
-    .ov-lock-btn:active { transform: scale(0.98); }
-
-    .ov-confirm {
-      display: none;
-      background: rgba(0,229,255,0.06);
-      border: 1px solid rgba(0,229,255,0.2);
-      border-radius: 8px;
-      padding: 10px;
-      text-align: center;
-      margin-top: 8px;
-    }
-    .ov-confirm p {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      font-size: 0.6rem;
-      letter-spacing: 0.1em;
-      color: #00e5ff;
-      margin-bottom: 3px;
-    }
-    .ov-confirm span {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.58rem;
-      color: rgba(255,255,255,0.3);
-    }
-
-    /* Community bar */
-    .ov-community-bar {
-      height: 24px;
-      border-radius: 6px;
-      overflow: hidden;
-      display: flex;
-      margin-top: 6px;
-      background: rgba(255,255,255,0.04);
-    }
-    .ov-comm-left {
-      background: rgba(0,229,255,0.15);
-      display: flex;
-      align-items: center;
-      padding: 0 9px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.55rem;
-      font-weight: 800;
-      color: #00e5ff;
-      transition: width 0.5s ease;
-    }
-    .ov-comm-right {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      padding: 0 9px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.55rem;
-      font-weight: 800;
-      color: rgba(200,168,75,0.7);
-    }
-    .ov-comm-fighters {
-      display: flex;
-      justify-content: space-between;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.58rem;
-      color: rgba(255,255,255,0.28);
-      margin-top: 5px;
-    }
+    /* Quick stats in sidebar */
+    .ov-stat-row { display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04); }
+    .ov-stat-label { font-family:'Inter',sans-serif;font-size:.6rem;color:rgba(255,255,255,.3); }
+    .ov-stat-val   { font-family:'Montserrat',sans-serif;font-weight:700;font-size:.65rem;color:rgba(255,255,255,.65); }
 
     /* ── LIGHT MODE ── */
-    body.light-mode .ev-overlay .ov-panel { background: #f0f0f4; }
-    body.light-mode .ev-overlay .ov-section-header { background: rgba(240,240,244,0.95); }
-    body.light-mode .ev-overlay .ov-fighter { color: #111; }
-    body.light-mode .ev-overlay .ov-fight { border-bottom-color: rgba(0,0,0,0.05); }
-    body.light-mode .ev-overlay .ov-hype-strip { background: rgba(0,0,0,0.05); border-bottom-color: rgba(0,0,0,0.07); }
-    body.light-mode .ev-overlay .ov-hype-strip-label { color: rgba(0,0,0,0.35); }
-    body.light-mode .ev-overlay .ov-hype-strip-num { color: rgba(0,0,0,0.2); }
-    body.light-mode .ev-overlay .ov-hype-strip-denom { color: rgba(0,0,0,0.2); }
-    body.light-mode .ev-overlay .ov-hype-strip-word { color: rgba(0,0,0,0.25); }
-    body.light-mode .ev-overlay .ov-hype-tick { color: rgba(0,0,0,0.25); }
-    body.light-mode .ev-overlay .ov-hype-track { background: rgba(0,0,0,0.08); }
-    body.light-mode .ev-overlay .ov-hype-thumb { background: #333; border-color: #444; }
-    body.light-mode .ev-overlay .ov-hype-hint-strip { color: rgba(0,0,0,0.2); }
-    body.light-mode .ev-overlay .ov-sb-label { color: rgba(0,0,0,0.35); }
-    body.light-mode .ev-overlay .ov-no-picks { color: rgba(0,0,0,0.25); }
-    body.light-mode .ev-overlay .ov-chip { color: rgba(0,0,0,0.6); }
-    body.light-mode .ev-overlay .ov-matchup { color: #111; text-shadow: none; }
-    body.light-mode .ev-overlay .ov-poster-gradient {
-      background:
-        linear-gradient(to bottom, rgba(240,240,244,0.1) 0%, transparent 30%, rgba(240,240,244,0.8) 70%, rgba(240,240,244,1) 100%),
-        linear-gradient(to right, rgba(240,240,244,0.7) 0%, transparent 50%);
-    }
-    body.light-mode .ev-overlay .ov-event-label { color: rgba(0,0,0,0.4); }
-    body.light-mode .ev-overlay .ov-meta-item { color: rgba(0,0,0,0.4); }
-    body.light-mode .ev-overlay .ov-section-line { background: rgba(0,0,0,0.07); }
-    body.light-mode .ev-overlay .ov-picks-div-line { background: rgba(0,0,0,0.08); }
-    body.light-mode .ev-overlay .ov-weight { color: rgba(0,0,0,0.35); }
-    body.light-mode .ev-overlay .ov-rounds { color: rgba(0,0,0,0.2); }
-    body.light-mode .ev-overlay .ov-sb-section { border-top-color: rgba(0,0,0,0.07); }
-    body.light-mode .ev-overlay .ov-community-bar { background: rgba(0,0,0,0.06); }
-    body.light-mode .ev-overlay .ov-comm-fighters { color: rgba(0,0,0,0.35); }
-    body.light-mode .ev-overlay .opb { border-color: rgba(0,0,0,0.12); color: rgba(0,0,0,0.4); }
-    body.light-mode .ev-overlay .ov-hype-btn { border-color: rgba(0,0,0,0.1); color: rgba(0,0,0,0.35); background: rgba(0,0,0,0.03); }
-    body.light-mode .ev-overlay .ov-key-item { color: rgba(0,0,0,0.4); }
-    body.light-mode .ev-overlay .ov-section-key { color: rgba(0,0,0,0.35); }
+    body.light-mode .ev-overlay .ov-panel { background:#f0f0f4; }
+    body.light-mode .ev-overlay .ov-section-header { background:rgba(240,240,244,.96); }
+    body.light-mode .ev-overlay .ov-fighter { color:#111; }
+    body.light-mode .ev-overlay .ov-fighter.dim { color:#555; }
+    body.light-mode .ev-overlay .ov-fight::before { background:linear-gradient(90deg,rgba(0,0,200,.0),rgba(0,150,200,.04),rgba(0,0,200,.0)); }
+    body.light-mode .ev-overlay .ov-fight { border-bottom-color:rgba(0,0,0,.05); }
+    body.light-mode .ev-overlay .ov-fight:hover { background:rgba(0,0,0,.025); }
+    body.light-mode .ev-overlay .ov-fight:hover .ov-fighter:not(.dim) { color:#000;text-shadow:0 0 20px rgba(0,150,200,.2); }
+    body.light-mode .ev-overlay .ov-poster-gradient { background:linear-gradient(to bottom,rgba(240,240,244,.1) 0%,transparent 25%,rgba(240,240,244,.8) 70%,rgba(240,240,244,1) 100%),linear-gradient(to right,rgba(240,240,244,.65) 0%,transparent 55%); }
+    body.light-mode .ev-overlay .ov-matchup { color:#111;text-shadow:none; }
+    body.light-mode .ev-overlay .ov-event-label { color:rgba(0,0,0,.4); }
+    body.light-mode .ev-overlay .ov-meta-item { color:rgba(0,0,0,.4); }
+    body.light-mode .ev-overlay .ov-hype-bar { background:rgba(0,0,0,.05);border-bottom-color:rgba(0,0,0,.07); }
+    body.light-mode .ev-overlay .ov-hype-label-txt { color:rgba(0,0,0,.3); }
+    body.light-mode .ev-overlay .ov-hype-num { color:rgba(0,0,0,.2); }
+    body.light-mode .ev-overlay .ov-hype-denom { color:rgba(0,0,0,.2); }
+    body.light-mode .ev-overlay .ov-hype-word { color:rgba(0,0,0,.25); }
+    body.light-mode .ev-overlay .ov-hype-track { background:rgba(0,0,0,.09); }
+    body.light-mode .ev-overlay .ov-hype-thumb { background:#333;border-color:#555; }
+    body.light-mode .ev-overlay .ov-hype-tick { color:rgba(0,0,0,.22); }
+    body.light-mode .ev-overlay .ov-section-line { background:rgba(0,0,0,.08); }
+    body.light-mode .ev-overlay .ov-weight { color:rgba(0,0,0,.35); }
+    body.light-mode .ev-overlay .ov-rounds { color:rgba(0,0,0,.2); }
+    body.light-mode .ev-overlay .ov-sb-section { border-top-color:rgba(0,0,0,.07); }
+    body.light-mode .ev-overlay .ov-sb-label { color:rgba(0,0,0,.32); }
+    body.light-mode .ev-overlay .ov-community-bar { background:rgba(0,0,0,.06); }
+    body.light-mode .ev-overlay .ov-comm-fighters { color:rgba(0,0,0,.35); }
+    body.light-mode .ev-overlay .ov-stat-label { color:rgba(0,0,0,.4); }
+    body.light-mode .ev-overlay .ov-stat-val { color:rgba(0,0,0,.7); }
+    body.light-mode .ev-overlay .ov-backdrop { background:rgba(0,0,0,.75) !important; }
 
-    /* Light mode cards */
-    body.light-mode .ev-card-overlay {
-      background: linear-gradient(to right, rgba(240,240,243,0.95) 0%, rgba(240,240,243,0.82) 30%, rgba(240,240,243,0.45) 58%, rgba(240,240,243,0.1) 78%, transparent 100%);
-    }
-    body.light-mode .ev-card-matchup { color: #111; text-shadow: none; }
-    body.light-mode .ev-card-name { color: rgba(0,0,0,0.55); }
-    body.light-mode .ev-card.ppv .ev-card-name { color: rgba(110,80,0,0.7); }
-    body.light-mode .ev-card-sub { color: rgba(0,0,0,0.35); }
-    body.light-mode .ev-card-days { color: rgba(0,0,0,0.3); }
-    body.light-mode .ev-card-date { color: rgba(0,0,0,0.3); }
-    body.light-mode .ev-card-location { color: rgba(0,0,0,0.2); }
-    body.light-mode .ev-card { border-color: rgba(0,0,0,0.1); }
-    body.light-mode .ev-hero h1 { color: #111; }
-    body.light-mode .ev-hero-sub { color: rgba(0,0,0,0.3); }
-    body.light-mode .ev-count-label { color: rgba(0,0,0,0.5); }
-    body.light-mode .ev-count-bar { border-color: rgba(0,0,0,0.07); }
-    body.light-mode .ev-count-pill { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.07); color: rgba(0,0,0,0.3); }
-    body.light-mode .ov-backdrop { background: rgba(0,0,0,0.75) !important; }
+    /* light mode event list cards */
+    body.light-mode .ev-card-overlay { background:linear-gradient(to right,rgba(240,240,243,.95) 0%,rgba(240,240,243,.82) 30%,rgba(240,240,243,.45) 58%,rgba(240,240,243,.1) 78%,transparent 100%); }
+    body.light-mode .ev-card-matchup { color:#111;text-shadow:none; }
+    body.light-mode .ev-card-name    { color:rgba(0,0,0,.55); }
+    body.light-mode .ev-card.ppv .ev-card-name { color:rgba(110,80,0,.7); }
+    body.light-mode .ev-card-sub     { color:rgba(0,0,0,.35); }
+    body.light-mode .ev-card-days    { color:rgba(0,0,0,.3); }
+    body.light-mode .ev-card-date    { color:rgba(0,0,0,.3); }
+    body.light-mode .ev-card         { border-color:rgba(0,0,0,.1); }
+    body.light-mode .ev-hero h1      { color:#111; }
+    body.light-mode .ev-hero-sub     { color:rgba(0,0,0,.3); }
+    body.light-mode .ev-count-label  { color:rgba(0,0,0,.45); }
+    body.light-mode .ev-count-bar    { border-color:rgba(0,0,0,.07); }
+    body.light-mode .ev-count-pill   { background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.07);color:rgba(0,0,0,.3); }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      .ov-body { grid-template-columns: 1fr; }
-      .ov-sidebar { border-top: 1px solid rgba(255,255,255,0.05); }
-      .ov-fight-col { max-height: 50vh; }
+    @media(max-width:900px) {
+      .ov-body { grid-template-columns:1fr; }
+      .ov-sidebar { border-top:1px solid rgba(255,255,255,.05); max-height:260px; }
+      .ov-fight-col { max-height:50vh; }
     }
-    @media (max-width: 768px) {
-      .ev-page { padding: 28px 12px 80px; }
-      .ev-card { height: 140px; }
-      .ev-card-content { max-width: 72%; padding: 0 14px; }
-      .ev-card-matchup { font-size: clamp(1.05rem, 4vw, 1.4rem); }
-      .ev-card-meta { right: 14px; }
-      .ev-card-location { display: none; }
-      .ov-hero { height: 40vh; min-height: 240px; }
-      .ov-matchup { font-size: clamp(2rem, 7vw, 3rem); }
-      .ov-hero-bottom { padding: 0 20px 20px; }
-      .ov-topbar { padding: 14px 20px; }
+    @media(max-width:768px) {
+      .ev-page { padding:28px 12px 80px; }
+      .ev-card { height:140px; }
+      .ev-card-content { max-width:74%;padding:0 14px; }
+      .ev-card-matchup { font-size:clamp(1.05rem,4vw,1.4rem); }
+      .ev-card-meta { right:14px; }
+      .ev-card-location { display:none; }
+      .ov-hero { height:38vh;min-height:220px; }
+      .ov-matchup { font-size:clamp(1.9rem,6.5vw,2.8rem); }
+      .ov-hero-bottom { padding:0 20px 18px; }
+      .ov-hype-bar { padding:10px 20px;gap:12px; }
+      .ov-fighter { font-size:.95rem; }
+      .ov-fight.is-main .ov-fighter { font-size:1.1rem; }
     }
-    @media (max-width: 480px) {
-      .ev-card { height: 130px; }
-      .ev-card-meta { display: none; }
-      .ev-card-cta { display: none; }
-      .ov-matchup { font-size: clamp(1.6rem, 7vw, 2.4rem); }
+    @media(max-width:480px) {
+      .ev-card { height:130px; }
+      .ev-card-meta,.ev-card-cta { display:none; }
+      .ov-matchup { font-size:clamp(1.5rem,7vw,2.2rem); }
     }
   </style>
 </head>
@@ -1204,32 +408,28 @@
   <div class="ev-page">
     <div class="ev-hero">
       <h1>Upcoming <span>Events</span></h1>
-      <div class="ev-hero-sub">Click any event to see the full fight card</div>
+      <div class="ev-hero-sub">Click any event to open the full fight card</div>
       <div class="ev-hero-divider"></div>
     </div>
-
     <div class="ev-count-bar">
       <div class="ev-count-accent"></div>
       <div class="ev-count-label">All Events</div>
       <div class="ev-count-pill" id="evCount"></div>
     </div>
-
     <div class="ev-list" id="listAll"></div>
   </div>
 
-  <!-- ══ CINEMATIC FULL-SCREEN OVERLAY ══ -->
+  <!-- CINEMATIC OVERLAY -->
   <div class="ev-overlay" id="evOverlay" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="ov-backdrop" id="ovBackdrop"></div>
     <div class="ov-panel" id="ovPanel">
 
-      <!-- HERO -->
+      <!-- HERO POSTER -->
       <div class="ov-hero" id="ovHero">
-        <!-- poster injected here -->
         <div class="ov-poster-placeholder" id="ovPlaceholder">
           <div class="ov-poster-placeholder-inner" id="ovPlaceholderText"></div>
         </div>
         <div class="ov-poster-gradient"></div>
-
         <div class="ov-topbar">
           <div class="ov-badge-row">
             <span class="ov-badge" id="ovBadge"></span>
@@ -1237,7 +437,6 @@
           </div>
           <button class="ov-close" id="ovClose" aria-label="Close">✕</button>
         </div>
-
         <div class="ov-hero-bottom">
           <div class="ov-event-label" id="ovEventLabel"></div>
           <div class="ov-matchup" id="ovMatchup"></div>
@@ -1245,57 +444,31 @@
         </div>
       </div>
 
-      <!-- HYPE STRIP (full width, right below hero) -->
-      <div class="ov-hype-strip" id="ovHypeStrip">
-        <div class="ov-hype-strip-left">
-          <div class="ov-hype-strip-label">Hype Meter</div>
-          <div class="ov-hype-strip-score">
-            <span class="ov-hype-strip-num" id="ovHypeNum">—</span>
-            <span class="ov-hype-strip-denom">/10</span>
-          </div>
-          <div class="ov-hype-strip-word" id="ovHypeWord">drag to rate</div>
+      <!-- COMPACT HYPE BAR -->
+      <div class="ov-hype-bar">
+        <div class="ov-hype-label-txt">Hype</div>
+        <div class="ov-hype-score-inline">
+          <span class="ov-hype-num" id="ovHypeNum">—</span>
+          <span class="ov-hype-denom">/10</span>
         </div>
-        <div class="ov-hype-strip-right">
-          <div class="ov-hype-ticks" id="ovHypeTicks">
-            <!-- 1-10 labels injected by JS -->
+        <span class="ov-hype-word" id="ovHypeWord">rate it</span>
+        <div class="ov-hype-track-wrap" id="ovHypeTrackWrap">
+          <div class="ov-hype-track">
+            <div class="ov-hype-fill" id="ovHypeFill"></div>
+            <div class="ov-hype-thumb" id="ovHypeThumb"></div>
           </div>
-          <div class="ov-hype-track-wrap" id="ovHypeTrackWrap">
-            <div class="ov-hype-track">
-              <div class="ov-hype-fill" id="ovHypeFill"></div>
-              <div class="ov-hype-thumb" id="ovHypeThumb"></div>
-            </div>
-          </div>
-          <div class="ov-hype-hint-strip">Drag the circle · or tap a number</div>
+          <div class="ov-hype-ticks" id="ovHypeTicks"></div>
         </div>
       </div>
 
       <!-- BODY -->
       <div class="ov-body">
+        <div class="ov-fight-col" id="ovFightCol"></div>
 
-        <!-- LEFT: fight card -->
-        <div class="ov-fight-col" id="ovFightCol">
-          <!-- injected by JS -->
-        </div>
-
-        <!-- RIGHT: sidebar -->
         <div class="ov-sidebar">
 
-          <!-- PICKS SUMMARY -->
-          <div class="ov-sb-section">
-            <div class="ov-sb-label">Your Picks</div>
-            <div class="ov-chips" id="ovChips">
-              <div class="ov-no-picks" id="ovNoPicks">No picks yet — pick winners in the card</div>
-            </div>
-            <button class="ov-lock-btn" id="ovLockBtn">🔒 Lock in my picks</button>
-            <div class="ov-confirm" id="ovConfirm">
-              <p>Picks locked!</p>
-              <span>Enjoy the fights tonight</span>
-            </div>
-          </div>
-
-          <!-- COMMUNITY -->
           <div class="ov-sb-section" id="ovCommunitySection">
-            <div class="ov-sb-label">Community · Main Event</div>
+            <div class="ov-sb-label">Community Picks · Main Event</div>
             <div class="ov-comm-fighters" id="ovCommFighters"></div>
             <div class="ov-community-bar">
               <div class="ov-comm-left" id="ovCommLeft"></div>
@@ -1303,530 +476,309 @@
             </div>
           </div>
 
-        </div><!-- /sidebar -->
-      </div><!-- /body -->
-    </div><!-- /panel -->
-  </div><!-- /overlay -->
+          <div class="ov-sb-section" id="ovEventStats">
+            <div class="ov-sb-label">Event Info</div>
+            <div id="ovStatsList"></div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
 
   <script>
     /* ── HELPERS ── */
-    function esc(s) {
-      return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-    }
-    function daysUntil(iso) {
-      return Math.ceil((new Date(iso + 'T00:00:00') - new Date()) / 86400000);
-    }
-    function getMainFight(ev) {
-      const mc = ev.mainCard || [];
-      return mc.find(f => f.slot === 'main') || mc[0] || null;
-    }
-    function lastName(full) {
-      const parts = (full || '').trim().split(' ');
-      return parts.length > 1 ? parts[parts.length - 1] : full;
-    }
-    function shortLabel(ev) {
-      const raw = ev.name || '';
-      if (raw.toLowerCase().includes('fight night')) {
-        const loc = ev.location ? ev.location.split(',')[0] : '';
-        return loc ? `FIGHT NIGHT — ${loc.toUpperCase()}` : 'UFC FIGHT NIGHT';
-      }
-      const m = raw.match(/UFC (\d+)/);
-      if (m) return `UFC ${m[1]}`;
-      if (raw.toLowerCase().includes('freedom')) {
-        const n = raw.match(/Freedom (\d+)/i);
-        return n ? `UFC FREEDOM ${n[1]}` : 'UFC FREEDOM';
-      }
-      return raw.split(':')[0].trim().toUpperCase();
+    function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+    function daysUntil(iso){ return Math.ceil((new Date(iso+'T00:00:00')-new Date())/86400000); }
+    function getMainFight(ev){ const mc=ev.mainCard||[]; return mc.find(f=>f.slot==='main')||mc[0]||null; }
+    function lastName(full){ const p=(full||'').trim().split(' '); return p.length>1?p[p.length-1]:full; }
+    function shortLabel(ev){
+      const r=ev.name||'';
+      if(r.toLowerCase().includes('fight night')){ const l=ev.location?ev.location.split(',')[0]:''; return l?`FIGHT NIGHT — ${l.toUpperCase()}`:'UFC FIGHT NIGHT'; }
+      const m=r.match(/UFC (\d+)/); if(m) return `UFC ${m[1]}`;
+      if(r.toLowerCase().includes('freedom')){ const n=r.match(/Freedom (\d+)/i); return n?`UFC FREEDOM ${n[1]}`:'UFC FREEDOM'; }
+      return r.split(':')[0].trim().toUpperCase();
     }
 
     /* ── BUILD EVENT LIST CARD ── */
-    function buildCard(ev) {
-      const isPPV = ev.type === 'PPV';
-      const cls   = isPPV ? 'ppv' : 'fn';
-      const main  = getMainFight(ev);
-      if (!main) return null;
+    function buildCard(ev){
+      const isPPV=ev.type==='PPV', cls=isPPV?'ppv':'fn';
+      const main=getMainFight(ev); if(!main) return null;
+      const days=ev.isoDate?daysUntil(ev.isoDate):null;
+      const dayLabel=days===null?'':days<=0?'TODAY':days===1?'TOMORROW':`${days}D AWAY`;
+      const soon=days!==null&&days>0&&days<=7, isToday=days!==null&&days<=0;
+      const label=shortLabel(ev);
+      const matchup=`${lastName(main.a).toUpperCase()}  vs  ${lastName(main.b).toUpperCase()}`;
+      const weightSub=main.titleFight
+        ?`${main.weight} Title  ·  ${ev.date||''}${ev.location?'  ·  '+ev.location.split(',')[0]:''}`
+        :`${main.weight||''}  ·  ${ev.date||''}${ev.location?'  ·  '+ev.location.split(',')[0]:''}`;
 
-      const days     = ev.isoDate ? daysUntil(ev.isoDate) : null;
-      const dayLabel = days === null ? '' : days <= 0 ? 'TODAY' : days === 1 ? 'TOMORROW' : `${days}D AWAY`;
-      const soon     = days !== null && days > 0 && days <= 7;
-      const isToday  = days !== null && days <= 0;
-      const label    = shortLabel(ev);
-      const matchup  = `${lastName(main.a).toUpperCase()}  vs  ${lastName(main.b).toUpperCase()}`;
-      const weightSub = main.titleFight
-        ? `${main.weight} Title  ·  ${ev.date || ''}${ev.location ? '  ·  ' + ev.location.split(',')[0] : ''}`
-        : `${main.weight || ''}  ·  ${ev.date || ''}${ev.location ? '  ·  ' + ev.location.split(',')[0] : ''}`;
+      const card=document.createElement('a');
+      card.href=`events.html?id=${encodeURIComponent(ev.id)}`;
+      card.className=`ev-card ${cls}`;
+      card.setAttribute('aria-label',`Open ${ev.name}`);
 
-      /* Wrap in a real <a> so right-click/cmd+click work */
-      const card = document.createElement('a');
-      card.href = `events.html?id=${encodeURIComponent(ev.id)}`;
-      card.className = `ev-card ${cls}`;
-      card.setAttribute('aria-label', `Open ${ev.name}`);
+      const posterEl=ev.poster
+        ?`<img class="ev-card-poster" src="${esc(ev.poster)}" alt="${esc(ev.name)}" loading="lazy" onerror="this.style.display='none'">`
+        :`<div class="ev-card-placeholder">🥊</div>`;
 
-      const posterEl = ev.poster
-        ? `<img class="ev-card-poster" src="${esc(ev.poster)}" alt="${esc(ev.name)}" loading="lazy" onerror="this.style.display='none'">`
-        : `<div class="ev-card-placeholder">🥊</div>`;
-
-      card.innerHTML = `
+      card.innerHTML=`
         ${posterEl}
         <div class="ev-card-overlay"></div>
         <div class="ev-card-bar"></div>
         <div class="ev-card-content">
           <div class="ev-card-top">
-            <span class="ev-card-badge">${isPPV ? 'PPV' : 'Fight Night'}</span>
+            <span class="ev-card-badge">${isPPV?'PPV':'Fight Night'}</span>
             <span class="ev-card-name">${esc(label)}</span>
-            ${main.titleFight ? `<span style="font-size:0.8rem;opacity:0.85;">🏆</span>` : ''}
+            ${main.titleFight?'<span style="font-size:.8rem;opacity:.85;">🏆</span>':''}
           </div>
           <div class="ev-card-matchup">${matchup}</div>
           <div class="ev-card-sub">${esc(weightSub)}</div>
         </div>
         <div class="ev-card-meta">
-          ${dayLabel ? `<div class="ev-card-days${soon ? ' soon' : isToday ? ' today' : ''}">${dayLabel}</div>` : ''}
-          <div class="ev-card-date">${esc(ev.date || '')}</div>
-          ${ev.location ? `<div class="ev-card-location">${esc(ev.location)}</div>` : ''}
+          ${dayLabel?`<div class="ev-card-days${soon?' soon':isToday?' today':''}">${dayLabel}</div>`:''}
+          <div class="ev-card-date">${esc(ev.date||'')}</div>
+          ${ev.location?`<div class="ev-card-location">${esc(ev.location)}</div>`:''}
         </div>
-        <div class="ev-card-cta">
-          View Card
-          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-        </div>
-      `;
+        <div class="ev-card-cta">View Card<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>`;
 
-      /* Left-click → overlay. Right/cmd/ctrl/middle → normal link behaviour */
-      card.addEventListener('click', function(e) {
-        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
-        e.preventDefault();
-        openOverlay(ev);
+      card.addEventListener('click',function(e){
+        if(e.metaKey||e.ctrlKey||e.shiftKey||e.button===1) return;
+        e.preventDefault(); openOverlay(ev);
       });
-
       return card;
     }
 
-    /* ── HYPE METER ── */
-    const HYPE_WORDS  = ['','Sleeper','Low Key','Building','Decent','Solid','Good','Hyped','Very Hyped','NUCLEAR','🔥 GOAT CARD'];
-    const HYPE_COLORS = ['','#666','#888','#b8b832','#b8b832','#c8a84b','#c8a84b','#00e5ff','#00e5ff','#ff6030','#ff3300'];
+    /* ── HYPE ── */
+    const HYPE_W=['','Sleeper','Low Key','Building','Decent','Solid','Good','Hyped','Very Hyped','NUCLEAR','🔥 GOAT CARD'];
+    const HYPE_C=['','#666','#888','#b8b832','#b8b832','#c8a84b','#c8a84b','#00e5ff','#00e5ff','#ff6030','#ff3300'];
+    let currentHype=null;
 
-    function buildHypeGrid() {
-      /* Build tick labels */
-      const ticks = document.getElementById('ovHypeTicks');
-      ticks.innerHTML = '';
-      for (let v = 1; v <= 10; v++) {
-        const t = document.createElement('span');
-        t.className = 'ov-hype-tick';
-        t.textContent = v;
-        t.dataset.v = v;
-        t.addEventListener('click', () => setHype(v));
+    function buildHypeTicks(){
+      const ticks=document.getElementById('ovHypeTicks');
+      ticks.innerHTML='';
+      for(let v=1;v<=10;v++){
+        const t=document.createElement('span');
+        t.className='ov-hype-tick'; t.textContent=v; t.dataset.v=v;
+        t.addEventListener('click',()=>setHype(v));
         ticks.appendChild(t);
       }
     }
-
-    function setHype(v) {
-      currentHype = v;
-      const pct = ((v - 1) / 9) * 100;
-
-      /* Number + word */
-      const numEl  = document.getElementById('ovHypeNum');
-      const wordEl = document.getElementById('ovHypeWord');
-      numEl.textContent  = v;
-      numEl.style.color  = HYPE_COLORS[v];
-      wordEl.textContent = HYPE_WORDS[v];
-      wordEl.style.color = HYPE_COLORS[v];
-
-      /* Fill + thumb */
-      document.getElementById('ovHypeFill').style.width      = pct + '%';
-      document.getElementById('ovHypeFill').style.background = HYPE_COLORS[v];
-      document.getElementById('ovHypeThumb').style.left      = pct + '%';
-      document.getElementById('ovHypeThumb').style.background = HYPE_COLORS[v];
-      document.getElementById('ovHypeThumb').style.borderColor = HYPE_COLORS[v];
-
-      /* Active tick */
-      document.querySelectorAll('.ov-hype-tick').forEach(t => {
-        t.classList.toggle('active', parseInt(t.dataset.v) === v);
-        t.style.color = parseInt(t.dataset.v) === v ? HYPE_COLORS[v] : '';
-        t.style.fontWeight = parseInt(t.dataset.v) === v ? '900' : '';
+    function setHype(v){
+      currentHype=v;
+      const pct=((v-1)/9)*100;
+      const numEl=document.getElementById('ovHypeNum');
+      const wordEl=document.getElementById('ovHypeWord');
+      numEl.textContent=v; numEl.style.color=HYPE_C[v];
+      wordEl.textContent=HYPE_W[v]; wordEl.style.color=HYPE_C[v];
+      document.getElementById('ovHypeFill').style.width=pct+'%';
+      document.getElementById('ovHypeFill').style.background=HYPE_C[v];
+      document.getElementById('ovHypeThumb').style.left=pct+'%';
+      document.getElementById('ovHypeThumb').style.background=HYPE_C[v];
+      document.getElementById('ovHypeThumb').style.borderColor=HYPE_C[v];
+      document.querySelectorAll('.ov-hype-tick').forEach(t=>{
+        const active=parseInt(t.dataset.v)===v;
+        t.classList.toggle('active',active);
+        t.style.color=active?HYPE_C[v]:'';
+        t.style.fontWeight=active?'900':'';
       });
     }
-
-    function resetHype() {
-      currentHype = null;
-      const numEl  = document.getElementById('ovHypeNum');
-      const wordEl = document.getElementById('ovHypeWord');
-      numEl.textContent  = '—';
-      numEl.style.color  = 'rgba(255,255,255,0.2)';
-      wordEl.textContent = 'drag to rate';
-      wordEl.style.color = 'rgba(255,255,255,0.2)';
-      document.getElementById('ovHypeFill').style.width = '0%';
-      document.getElementById('ovHypeThumb').style.left = '0%';
-      document.getElementById('ovHypeThumb').style.background = '#fff';
-      document.getElementById('ovHypeThumb').style.borderColor = 'rgba(255,255,255,0.9)';
-      document.querySelectorAll('.ov-hype-tick').forEach(t => {
-        t.classList.remove('active');
-        t.style.color = '';
-        t.style.fontWeight = '';
-      });
+    function resetHype(){
+      currentHype=null;
+      document.getElementById('ovHypeNum').textContent='—';
+      document.getElementById('ovHypeNum').style.color='rgba(255,255,255,.18)';
+      document.getElementById('ovHypeWord').textContent='rate it';
+      document.getElementById('ovHypeWord').style.color='rgba(255,255,255,.18)';
+      document.getElementById('ovHypeFill').style.width='0%';
+      document.getElementById('ovHypeThumb').style.left='0%';
+      document.getElementById('ovHypeThumb').style.background='#fff';
+      document.getElementById('ovHypeThumb').style.borderColor='rgba(255,255,255,.9)';
+      document.querySelectorAll('.ov-hype-tick').forEach(t=>{ t.classList.remove('active'); t.style.color=''; t.style.fontWeight=''; });
     }
-
-    /* Draggable slider logic */
-    function initHypeDrag() {
-      const wrap  = document.getElementById('ovHypeTrackWrap');
-      const thumb = document.getElementById('ovHypeThumb');
-      let dragging = false;
-
-      function pctFromEvent(e) {
-        const rect = wrap.getBoundingClientRect();
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-        const raw = (clientX - rect.left) / rect.width;
-        return Math.max(0, Math.min(1, raw));
-      }
-
-      function pctToValue(pct) {
-        return Math.round(pct * 9) + 1; /* maps 0–1 → 1–10 */
-      }
-
-      function onMove(e) {
-        if (!dragging) return;
-        e.preventDefault();
-        const pct = pctFromEvent(e);
-        const v   = pctToValue(pct);
-        setHype(v);
-      }
-
-      function onUp() {
-        if (!dragging) return;
-        dragging = false;
-        thumb.classList.remove('dragging');
-        document.removeEventListener('mousemove', onMove);
-        document.removeEventListener('mouseup',   onUp);
-        document.removeEventListener('touchmove', onMove);
-        document.removeEventListener('touchend',  onUp);
-      }
-
-      thumb.addEventListener('mousedown', e => {
-        dragging = true;
-        thumb.classList.add('dragging');
-        document.addEventListener('mousemove', onMove);
-        document.addEventListener('mouseup',   onUp);
-        e.preventDefault();
-      });
-
-      thumb.addEventListener('touchstart', e => {
-        dragging = true;
-        thumb.classList.add('dragging');
-        document.addEventListener('touchmove', onMove, { passive: false });
-        document.addEventListener('touchend',  onUp);
-      }, { passive: true });
-
-      /* Click anywhere on track to jump */
-      wrap.addEventListener('click', e => {
-        if (e.target === thumb) return;
-        const pct = pctFromEvent(e);
-        setHype(pctToValue(pct));
-      });
+    function initHypeDrag(){
+      const wrap=document.getElementById('ovHypeTrackWrap');
+      const thumb=document.getElementById('ovHypeThumb');
+      let dragging=false;
+      function pctFrom(e){ const r=wrap.getBoundingClientRect(),cx=e.touches?e.touches[0].clientX:e.clientX; return Math.max(0,Math.min(1,(cx-r.left)/r.width)); }
+      function pctToV(p){ return Math.round(p*9)+1; }
+      function onMove(e){ if(!dragging)return; e.preventDefault(); setHype(pctToV(pctFrom(e))); }
+      function onUp(){ if(!dragging)return; dragging=false; thumb.classList.remove('dragging'); document.removeEventListener('mousemove',onMove); document.removeEventListener('mouseup',onUp); document.removeEventListener('touchmove',onMove); document.removeEventListener('touchend',onUp); }
+      thumb.addEventListener('mousedown',e=>{ dragging=true; thumb.classList.add('dragging'); document.addEventListener('mousemove',onMove); document.addEventListener('mouseup',onUp); e.preventDefault(); });
+      thumb.addEventListener('touchstart',e=>{ dragging=true; thumb.classList.add('dragging'); document.addEventListener('touchmove',onMove,{passive:false}); document.addEventListener('touchend',onUp); },{passive:true});
+      wrap.addEventListener('click',e=>{ if(e.target===thumb)return; setHype(pctToV(pctFrom(e))); });
     }
-
+    buildHypeTicks();
     initHypeDrag();
-    let currentEvent = null;
-    let wPicks       = {};   // { fightIdx: { side:'L'|'R', name } }
-    let fotnIdx      = null;
-    let currentHype  = null;
 
-    const overlay    = document.getElementById('evOverlay');
-    const ovClose    = document.getElementById('ovClose');
-    const ovBackdrop = document.getElementById('ovBackdrop');
+    /* ── OVERLAY ── */
+    const overlay=document.getElementById('evOverlay');
+    const ovClose=document.getElementById('ovClose');
+    const ovBackdrop=document.getElementById('ovBackdrop');
+    let currentEvent=null;
 
-    /* ── OPEN OVERLAY ── */
-    function openOverlay(ev) {
-      currentEvent = ev;
-      wPicks       = {};
-      fotnIdx      = null;
-      currentHype  = null;
+    function openOverlay(ev){
+      currentEvent=ev;
+      const isPPV=ev.type==='PPV', cls=isPPV?'ppv':'fn';
+      const accent=isPPV?'#c8a84b':'#00e5ff';
+      const main=getMainFight(ev);
+      const days=ev.isoDate?daysUntil(ev.isoDate):null;
+      const isToday=days!==null&&days<=0;
 
-      const isPPV  = ev.type === 'PPV';
-      const cls    = isPPV ? 'ppv' : 'fn';
-      const accent = isPPV ? '#c8a84b' : '#00e5ff';
-      const main   = getMainFight(ev);
-      const days   = ev.isoDate ? daysUntil(ev.isoDate) : null;
-      const isToday = days !== null && days <= 0;
-
-      /* Hero class */
-      const hero = document.getElementById('ovHero');
-      hero.className = `ov-hero${isPPV ? ' is-ppv' : ''}`;
-
-      /* Remove old poster */
-      const oldImg = hero.querySelector('.ov-poster');
-      if (oldImg) oldImg.remove();
-
-      /* Inject poster */
-      const placeholder = document.getElementById('ovPlaceholder');
-      if (ev.poster) {
-        const img = document.createElement('img');
-        img.className = 'ov-poster';
-        img.src = ev.poster;
-        img.alt = ev.name || '';
-        img.onerror = () => { img.remove(); placeholder.style.display = 'flex'; };
-        img.onload  = () => { placeholder.style.display = 'none'; };
-        placeholder.style.display = 'none';
-        hero.insertBefore(img, hero.firstChild);
+      /* Hero */
+      const hero=document.getElementById('ovHero');
+      hero.className=`ov-hero${isPPV?' is-ppv':''}`;
+      const oldImg=hero.querySelector('.ov-poster'); if(oldImg) oldImg.remove();
+      const placeholder=document.getElementById('ovPlaceholder');
+      if(ev.poster){
+        const img=document.createElement('img');
+        img.className='ov-poster'; img.src=ev.poster; img.alt=ev.name||'';
+        img.onerror=()=>{ img.remove(); placeholder.style.display='flex'; };
+        img.onload=()=>{ placeholder.style.display='none'; };
+        placeholder.style.display='none';
+        hero.insertBefore(img,hero.firstChild);
       } else {
-        placeholder.style.display = 'flex';
-        document.getElementById('ovPlaceholderText').textContent =
-          main ? `${lastName(main.a)}\nvs\n${lastName(main.b)}` : (ev.name || '').split(':')[0];
+        placeholder.style.display='flex';
+        document.getElementById('ovPlaceholderText').textContent=main?`${lastName(main.a)}\nvs\n${lastName(main.b)}`:(ev.name||'').split(':')[0];
       }
 
-      /* Badge */
-      const badge = document.getElementById('ovBadge');
-      badge.textContent  = isPPV ? 'PPV' : 'Fight Night';
-      badge.className    = `ov-badge ${cls}`;
+      /* Badge + live */
+      const badge=document.getElementById('ovBadge');
+      badge.textContent=isPPV?'PPV':'Fight Night'; badge.className=`ov-badge ${cls}`;
+      document.getElementById('ovLiveDot').style.display=isToday?'flex':'none';
 
-      /* Tonight dot */
-      document.getElementById('ovLiveDot').style.display = isToday ? 'flex' : 'none';
+      /* Text */
+      document.getElementById('ovEventLabel').textContent=[ev.date,ev.venue,ev.location].filter(Boolean).join('  ·  ');
+      const matchupEl=document.getElementById('ovMatchup');
+      if(main){ matchupEl.innerHTML=`${esc(main.a)} <span class="vs-sep">VS</span> ${esc(main.b)}`; }
+      else { matchupEl.textContent=(ev.name||'').split(':').slice(1).join(':').trim()||ev.name; }
 
-      /* Event label */
-      document.getElementById('ovEventLabel').textContent = [ev.date, ev.venue, ev.location].filter(Boolean).join('  ·  ');
+      /* Meta */
+      const metas=[];
+      if(main&&main.weight) metas.push(`<div class="ov-meta-item">${esc(main.weight)}${main.titleFight?' · 🏆 Title Fight':''}</div>`);
+      if(main&&main.rounds) metas.push(`<div class="ov-meta-item">${esc(main.rounds)}</div>`);
+      const total=[...(ev.mainCard||[]),...(ev.prelims||[]),...(ev.earlyPrelims||[])].length;
+      if(total>1) metas.push(`<div class="ov-meta-item">${total} fights</div>`);
+      document.getElementById('ovMetaRow').innerHTML=metas.join('');
 
-      /* Matchup */
-      const matchupEl = document.getElementById('ovMatchup');
-      if (main) {
-        matchupEl.innerHTML = `${esc(main.a)} <span class="vs-sep">VS</span> ${esc(main.b)}`;
-      } else {
-        matchupEl.textContent = (ev.name || '').split(':').slice(1).join(':').trim() || ev.name;
-      }
-
-      /* Meta row */
-      const metaRow = document.getElementById('ovMetaRow');
-      const metas = [];
-      if (main && main.weight) metas.push(`<div class="ov-meta-item"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zm0 10l-10-5m10 5l10-5m-10 5v9"/></svg>${esc(main.weight)}${main.titleFight ? ' · 🏆 Title Fight' : ''}</div>`);
-      if (main && main.rounds)  metas.push(`<div class="ov-meta-item">${esc(main.rounds)}</div>`);
-      const allFights = [...(ev.mainCard||[]), ...(ev.prelims||[]), ...(ev.earlyPrelims||[])];
-      if (allFights.length > 1) metas.push(`<div class="ov-meta-item">${allFights.length} fights</div>`);
-      metaRow.innerHTML = metas.join('');
-
-      /* Build fight card */
-      buildFightCard(ev, isPPV, accent);
+      /* Fight card */
+      buildFightCard(ev,isPPV,accent);
 
       /* Reset hype */
       resetHype();
 
-      /* Reset picks summary */
-      refreshPicksSummary();
+      /* Community */
+      buildCommunity(ev,main);
 
-      /* Community mock */
-      buildCommunity(ev, main);
+      /* Event stats sidebar */
+      buildStats(ev,main);
 
       /* Open */
-      overlay.setAttribute('aria-hidden', 'false');
+      overlay.setAttribute('aria-hidden','false');
       overlay.classList.add('open');
       document.body.classList.add('no-scroll');
-      document.getElementById('ovFightCol').scrollTop = 0;
+      document.getElementById('ovFightCol').scrollTop=0;
     }
 
     /* ── FIGHT CARD ── */
-    function buildFightCard(ev, isPPV, accent) {
-      const col = document.getElementById('ovFightCol');
-      col.innerHTML = '';
+    function buildFightCard(ev,isPPV,accent){
+      const col=document.getElementById('ovFightCol');
+      col.innerHTML='';
 
-      function fightSection(sectionLabel, fights, sectionColor) {
-        if (!fights || !fights.length) return;
-
-        /* Section header */
-        const hdr = document.createElement('div');
-        hdr.className = 'ov-section-header';
-        hdr.innerHTML = `
-          <span class="ov-section-label" style="color:${sectionColor}">${sectionLabel}</span>
-          <div class="ov-section-line"></div>
-          ${sectionLabel === 'Main Card' ? `
-            <div class="ov-section-key">
-              <div class="ov-key-item"><div class="ov-key-dot cyan" style="background:#00e5ff"></div>Winner</div>
-              <div class="ov-key-item"><div class="ov-key-dot gold" style="background:#c8a84b"></div>FOTN</div>
-            </div>` : ''}
-        `;
+      function section(label,fights,color){
+        if(!fights||!fights.length) return;
+        const hdr=document.createElement('div');
+        hdr.className='ov-section-header';
+        hdr.innerHTML=`<span class="ov-section-label" style="color:${color}">${label}</span><div class="ov-section-line"></div>`;
         col.appendChild(hdr);
 
-        fights.forEach((f, localIdx) => {
-          const globalIdx = [
-            ...(ev.mainCard||[]),
-            ...(ev.prelims||[]),
-            ...(ev.earlyPrelims||[])
-          ].indexOf(f);
+        fights.forEach(f=>{
+          const isMain=f.slot==='main', isComain=f.slot==='comain';
+          const mainCls=isMain?(isPPV?'is-main ppv-main':'is-main'):isComain?'is-comain':'';
+          const dimCls=(!isMain&&!isComain)?'dim':'';
 
-          const isMain   = f.slot === 'main';
-          const isComain = f.slot === 'comain';
-          const mainCls  = isMain ? (isPPV ? 'is-main' : 'is-main fn-main') : isComain ? 'is-comain' : '';
-          const dimCls   = (!isMain && !isComain) ? 'dim' : '';
-          const isMC     = sectionLabel === 'Main Card';
+          const row=document.createElement('div');
+          row.className=`ov-fight ${mainCls}`;
 
-          /* Fight row */
-          const row = document.createElement('div');
-          row.className = `ov-fight ${mainCls}`;
-          row.id = `fight-row-${globalIdx}`;
-          row.innerHTML = `
+          /* FOTN pill text */
+          const fotnText=`⭐ Predict as FOTN: ${lastName(f.a)} vs ${lastName(f.b)}`;
+
+          row.innerHTML=`
             <div class="ov-fighter ${dimCls}">${esc(f.a)}</div>
             <div class="ov-fight-mid">
-              ${f.titleFight ? `<div class="ov-title-badge">🏆 Title</div>` : ''}
-              <div class="ov-weight">${esc(f.weight || '')}</div>
-              ${f.rounds ? `<div class="ov-rounds">${esc(f.rounds)}</div>` : ''}
-              ${isMain ? `<div class="ov-slot-tag" style="color:${accent}">MAIN EVENT</div>` : isComain ? `<div class="ov-slot-tag" style="color:rgba(0,229,255,0.5)">CO-MAIN</div>` : ''}
+              ${f.titleFight?`<div class="ov-title-badge">🏆 Title</div>`:''}
+              <div class="ov-weight">${esc(f.weight||'')}</div>
+              ${f.rounds?`<div class="ov-rounds">${esc(f.rounds)}</div>`:''}
+              ${isMain?`<div class="ov-slot-tag" style="color:${accent}">MAIN EVENT</div>`:isComain?`<div class="ov-slot-tag" style="color:rgba(0,229,255,.5)">CO-MAIN</div>`:''}
             </div>
             <div class="ov-fighter right ${dimCls}">${esc(f.b)}</div>
+            <div class="ov-fotn-hover">${esc(fotnText)}</div>
           `;
           col.appendChild(row);
-
-          /* Picks row (only main card) */
-          if (isMC) {
-            const pr = document.createElement('div');
-            pr.className = 'ov-picks-row';
-            pr.id = `picks-row-${globalIdx}`;
-            pr.innerHTML = `
-              <div class="ov-picks-left">
-                <div class="ov-pick-label">WINNER PICK</div>
-                <div class="ov-pick-btns">
-                  <button class="opb" id="pb-${globalIdx}-L" data-idx="${globalIdx}" data-side="L" data-name="${esc(f.a)}">Pick ${lastName(f.a)}</button>
-                </div>
-              </div>
-              <div class="ov-picks-divider">
-                <div class="ov-picks-div-line"></div>
-                <div class="ov-pick-label gold" style="font-size:0.34rem;letter-spacing:0.1em;">FOTN?</div>
-                <div class="ov-picks-div-line"></div>
-              </div>
-              <div class="ov-picks-right">
-                <div class="ov-pick-label" style="text-align:right;">WINNER PICK</div>
-                <div class="ov-pick-btns">
-                  <button class="opb" id="pb-${globalIdx}-R" data-idx="${globalIdx}" data-side="R" data-name="${esc(f.b)}">Pick ${lastName(f.b)}</button>
-                </div>
-                <button class="opb fotn-btn" id="fotn-${globalIdx}" data-idx="${globalIdx}" style="margin-top:4px;">★ FOTN</button>
-              </div>
-            `;
-            col.appendChild(pr);
-
-            /* Bind pick buttons */
-            pr.querySelector(`#pb-${globalIdx}-L`).addEventListener('click', () => doPick(globalIdx, 'L', f.a, f.b));
-            pr.querySelector(`#pb-${globalIdx}-R`).addEventListener('click', () => doPick(globalIdx, 'R', f.a, f.b));
-            pr.querySelector(`#fotn-${globalIdx}`).addEventListener('click', (e) => doFOTN(globalIdx, f.a, f.b, e.currentTarget));
-          }
         });
       }
 
-      const mc = ev.mainCard || [];
-      const pr = ev.prelims || [];
-      const ep = ev.earlyPrelims || [];
-
-      fightSection('Main Card',    mc, accent);
-      fightSection('Prelims',      pr, '#00e5ff');
-      fightSection('Early Prelims',ep, 'rgba(255,255,255,0.3)');
+      section('Main Card',   ev.mainCard||[],   accent);
+      section('Prelims',     ev.prelims||[],    '#00e5ff');
+      section('Early Prelims',ev.earlyPrelims||[],'rgba(255,255,255,.3)');
     }
 
-    /* ── PICK LOGIC ── */
-    function doPick(idx, side, fa, fb) {
-      wPicks[idx] = { side, name: side === 'L' ? fa : fb };
-      const Lb = document.getElementById(`pb-${idx}-L`);
-      const Rb = document.getElementById(`pb-${idx}-R`);
-      if (Lb) { Lb.className = `opb${side==='L' ? ' picked' : ''}`; Lb.textContent = side==='L' ? `✓ ${lastName(fa)}` : `Pick ${lastName(fa)}`; }
-      if (Rb) { Rb.className = `opb${side==='R' ? ' picked' : ''}`; Rb.textContent = side==='R' ? `✓ ${lastName(fb)}` : `Pick ${lastName(fb)}`; }
-      refreshPicksSummary();
+    /* ── COMMUNITY ── */
+    function buildCommunity(ev,main){
+      const sec=document.getElementById('ovCommunitySection');
+      if(!main){ sec.style.display='none'; return; }
+      sec.style.display='';
+      const seed=(ev.id||'').split('').reduce((a,c)=>a+c.charCodeAt(0),0);
+      const lp=40+(seed%41), rp=100-lp;
+      document.getElementById('ovCommFighters').innerHTML=`
+        <span style="color:#00e5ff;font-weight:700;">${esc(lastName(main.a))} ${lp}%</span>
+        <span style="color:rgba(200,168,75,.75);font-weight:700;">${rp}% ${esc(lastName(main.b))}</span>`;
+      document.getElementById('ovCommLeft').style.width=lp+'%';
+      document.getElementById('ovCommLeft').textContent=lp+'%';
+      document.getElementById('ovCommRight').textContent=rp+'%';
     }
 
-    function doFOTN(idx, fa, fb, btn) {
-      /* Deselect all FOTN btns first */
-      document.querySelectorAll('.opb.fotn-picked').forEach(b => {
-        b.className = 'opb fotn-btn';
-        b.textContent = '★ FOTN';
-      });
-      if (fotnIdx === idx) { fotnIdx = null; refreshPicksSummary(); return; }
-      fotnIdx = idx;
-      btn.className = 'opb fotn-picked';
-      btn.textContent = '★ FOTN ✓';
-      refreshPicksSummary();
-    }
-
-    function refreshPicksSummary() {
-      const chips   = document.getElementById('ovChips');
-      const noPicks = document.getElementById('ovNoPicks');
-      const keys    = Object.keys(wPicks);
-      const hasFOTN = fotnIdx !== null;
-
-      if (keys.length === 0 && !hasFOTN) {
-        chips.innerHTML = '';
-        chips.appendChild(noPicks);
-        noPicks.style.display = '';
-        return;
-      }
-      noPicks.style.display = 'none';
-
-      let html = '';
-      keys.forEach(k => {
-        html += `<div class="ov-chip"><div class="ov-chip-dot cyan"></div>${esc(wPicks[k].name)}</div>`;
-      });
-      if (hasFOTN) {
-        const allFights = [...(currentEvent.mainCard||[])];
-        const f = allFights[fotnIdx] || allFights.find((_, i) => i === fotnIdx);
-        const label = f ? `${lastName(f.a)} vs ${lastName(f.b)}` : `Fight ${fotnIdx + 1}`;
-        html += `<div class="ov-chip"><div class="ov-chip-dot gold"></div>FOTN: ${esc(label)}</div>`;
-      }
-      chips.innerHTML = html;
-    }
-
-    /* ── COMMUNITY (MOCK) ── */
-    function buildCommunity(ev, main) {
-      if (!main) { document.getElementById('ovCommunitySection').style.display = 'none'; return; }
-      document.getElementById('ovCommunitySection').style.display = '';
-      /* Deterministic mock % based on event id string */
-      const seed = (ev.id || '').split('').reduce((a, c) => a + c.charCodeAt(0), 0);
-      const leftPct = 40 + (seed % 41);
-      const rightPct = 100 - leftPct;
-      document.getElementById('ovCommFighters').innerHTML = `
-        <span style="color:#00e5ff;font-weight:700;">${esc(lastName(main.a))} ${leftPct}%</span>
-        <span style="color:rgba(200,168,75,0.7);font-weight:700;">${rightPct}% ${esc(lastName(main.b))}</span>
-      `;
-      document.getElementById('ovCommLeft').style.width = leftPct + '%';
-      document.getElementById('ovCommLeft').textContent = leftPct + '%';
-      document.getElementById('ovCommRight').textContent = rightPct + '%';
+    /* ── EVENT STATS ── */
+    function buildStats(ev,main){
+      const list=document.getElementById('ovStatsList');
+      const rows=[];
+      if(ev.venue)    rows.push(['Venue',ev.venue]);
+      if(ev.location) rows.push(['Location',ev.location]);
+      if(ev.date)     rows.push(['Date',ev.date]);
+      if(main&&main.weight) rows.push(['Main Weight',main.weight]);
+      const total=[...(ev.mainCard||[]),...(ev.prelims||[]),...(ev.earlyPrelims||[])].length;
+      if(total) rows.push(['Total Fights',total]);
+      list.innerHTML=rows.map(([l,v])=>`
+        <div class="ov-stat-row">
+          <span class="ov-stat-label">${esc(l)}</span>
+          <span class="ov-stat-val">${esc(String(v))}</span>
+        </div>`).join('');
     }
 
     /* ── CLOSE ── */
-    function closeOverlay() {
-      overlay.setAttribute('aria-hidden', 'true');
+    function closeOverlay(){
+      overlay.setAttribute('aria-hidden','true');
       overlay.classList.remove('open');
       document.body.classList.remove('no-scroll');
     }
+    ovClose.addEventListener('click',closeOverlay);
+    ovBackdrop.addEventListener('click',closeOverlay);
+    document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeOverlay(); });
 
-    ovClose.addEventListener('click', closeOverlay);
-    ovBackdrop.addEventListener('click', closeOverlay);
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeOverlay(); });
-
-    /* Lock picks */
-    document.getElementById('ovLockBtn').addEventListener('click', () => {
-      const conf = document.getElementById('ovConfirm');
-      conf.style.display = 'block';
-      setTimeout(() => conf.style.display = 'none', 3500);
-    });
-
-    /* ── LOAD EVENTS ── */
-    async function loadEvents() {
-      const res  = await fetch('data/events.json').catch(() => fetch('events.json'));
-      const all  = await res.json();
-      const upcoming = all
-        .filter(e => e.status === 'upcoming')
-        .sort((a, b) => new Date(a.isoDate) - new Date(b.isoDate));
-
-      const list = document.getElementById('listAll');
-      upcoming.forEach(e => {
-        const card = buildCard(e);
-        if (card) list.appendChild(card);
-      });
-
-      document.getElementById('evCount').textContent =
-        `${upcoming.length} event${upcoming.length !== 1 ? 's' : ''}`;
-
-      /* Auto-open from URL param */
-      const params = new URLSearchParams(location.search);
-      const reqId  = params.get('id');
-      if (reqId) {
-        const target = upcoming.find(e => e.id === reqId);
-        if (target) setTimeout(() => openOverlay(target), 200);
-      }
+    /* ── LOAD ── */
+    async function loadEvents(){
+      const res=await fetch('data/events.json').catch(()=>fetch('events.json'));
+      const all=await res.json();
+      const upcoming=all.filter(e=>e.status==='upcoming').sort((a,b)=>new Date(a.isoDate)-new Date(b.isoDate));
+      const list=document.getElementById('listAll');
+      upcoming.forEach(e=>{ const c=buildCard(e); if(c) list.appendChild(c); });
+      document.getElementById('evCount').textContent=`${upcoming.length} event${upcoming.length!==1?'s':''}`;
+      const p=new URLSearchParams(location.search), id=p.get('id');
+      if(id){ const t=upcoming.find(e=>e.id===id); if(t) setTimeout(()=>openOverlay(t),200); }
     }
-
     loadEvents();
   </script>
-  <script src="auth.js?v=2.1"></script>
-  <script src="chat.js?v=2.1"></script>
+  <script src="auth.js?v=2.2"></script>
+  <script src="chat.js?v=2.2"></script>
 </body>
 </html>
