@@ -6,7 +6,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <script src="theme.js?v=2.1"></script>
-  <link rel="icon" href="/favicon.png">
+  <link rel="icon" href="images/mma-bridge-logo.png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MMA Bridge</title>
@@ -135,11 +135,9 @@
   <nav class="navbar">
     <div class="nav-container">
 
-      <div class="logo">
-        <span class="logo-mma">MMA</span>
-        <img src="images/Cage.svg" class="logo-icon" alt="cage icon">
-        <span class="logo-bridge">Bridge</span>
-      </div>
+      <a class="logo" href="index.html">
+        <img src="images/mma-bridge-logo.png" class="nav-logo-img" alt="MMA Bridge">
+      </a>
 
       <ul class="nav-links">
         <li><a href="index.html" class="active">Trending</a></li>
@@ -159,6 +157,7 @@
         </span>
       </form>
       <div class="nav-auth"></div>
+      <button class="theme-toggle" id="themeToggle"></button>
       <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
         <span></span><span></span><span></span>
       </button>
@@ -200,12 +199,12 @@
 
   <!-- RECENT RESULTS - Infinite auto-scroll -->
   <div style="padding:36px 0 0;">
-    <h3 style="font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin:0 0 18px;padding:0 48px;">Recent Results</h3>
+    <h3 class="results-section-label" style="font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin:0 0 18px;padding:0 48px;">Recent Results</h3>
     <div style="position:relative;">
       <!-- fade left -->
-      <div style="position:absolute;left:0;top:0;bottom:16px;width:80px;background:linear-gradient(to right,#0f0f0f 0%,transparent 100%);z-index:2;pointer-events:none;"></div>
+      <div class="results-fade-l" style="position:absolute;left:0;top:0;bottom:16px;width:80px;background:linear-gradient(to right,#0f0f0f 0%,transparent 100%);z-index:2;pointer-events:none;"></div>
       <!-- fade right -->
-      <div style="position:absolute;right:0;top:0;bottom:16px;width:80px;background:linear-gradient(to left,#0f0f0f 0%,transparent 100%);z-index:2;pointer-events:none;"></div>
+      <div class="results-fade-r" style="position:absolute;right:0;top:0;bottom:16px;width:80px;background:linear-gradient(to left,#0f0f0f 0%,transparent 100%);z-index:2;pointer-events:none;"></div>
       <div id="resultsTrack" style="overflow:hidden;width:100%;cursor:grab;">
         <div id="resultsInner" style="display:flex;gap:16px;width:max-content;will-change:transform;padding:0 120px 16px;"></div>
       </div>
@@ -226,7 +225,7 @@
 
   <!-- LIVE ACTIVITY FEED -->
   <div style="max-width:1200px;margin:0 auto;padding:32px 48px 60px;">
-    <h3 style="font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin:0 0 16px;">
+    <h3 class="results-section-label" style="font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin:0 0 16px;">
       <span style="display:inline-block;width:7px;height:7px;background:cyan;border-radius:50%;margin-right:8px;animation:pulse 1.5s infinite;"></span>
       Live on MMA Bridge
     </h3>
