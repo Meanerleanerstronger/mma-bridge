@@ -2725,7 +2725,7 @@
     "isoDate": "2024-10-26",
     "location": "Abu Dhabi, UAE",
     "venue": "Etihad Arena",
-    "poster": "images/UFC 308.jpeg",
+    "poster": "images/ufc-308.jpg",
     "status": "completed",
     "mainCard": [
       {
@@ -2839,7 +2839,7 @@
     "isoDate": "2024-11-16",
     "location": "New York, NY",
     "venue": "Madison Square Garden",
-    "poster": "images/UFC Qatar.jpeg",
+    "poster": "images/ufc-qatar.jpg",
     "status": "completed",
     "mainCard": [
       {
@@ -3457,7 +3457,7 @@
     "isoDate": "2025-01-18",
     "location": "Inglewood, CA",
     "venue": "Intuit Dome",
-    "poster": "images/UFC 311.jpeg",
+    "poster": "images/ufc-311.jpg",
     "status": "completed",
     "mainCard": [
       {
@@ -8409,14 +8409,15 @@
         "a": "Renato Moicano",
         "b": "Chris Duncan",
         "weight": "Lightweight",
-        "rounds": "5 Rds",
+        "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
         "slot": "main",
         "winner": "Renato Moicano",
-        "method": "Sub (RNC)",
+        "method": "SUB",
         "round": 2,
-        "time": "3:14"
+        "time": "1:47",
+        "detail": "Rear Naked Choke"
       },
       {
         "a": "Virna Jandiroba",
@@ -8434,26 +8435,27 @@
       {
         "a": "Abdul Rakhman Yakhyaev",
         "b": "Brendson Ribeiro",
-        "weight": "Light Heavyweight",
+        "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
-        "slot": "",
+        "slot": "main3",
         "winner": "Abdul Rakhman Yakhyaev",
-        "method": "Sub (RNC)",
+        "method": "SUB",
         "round": 1,
-        "time": "2:52"
+        "time": "3:00",
+        "detail": "Guillotine Choke"
       },
       {
         "a": "Ethyn Ewing",
         "b": "Rafael Estevam",
-        "weight": "Featherweight",
+        "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
-        "slot": "",
+        "slot": "main4",
         "winner": "Ethyn Ewing",
-        "method": "TKO",
+        "method": "KO",
         "round": 3,
         "time": "1:44"
       },
@@ -8464,11 +8466,11 @@
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
-        "slot": "",
+        "slot": "main5",
         "winner": "Tommy McMillen",
         "method": "TKO",
         "round": 1,
-        "time": "3:57"
+        "time": "5:00"
       },
       {
         "a": "Jose Delano",
@@ -8477,7 +8479,7 @@
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
-        "slot": "",
+        "slot": "main6",
         "winner": "Jose Delano",
         "method": "UD",
         "round": 3,
@@ -8486,85 +8488,72 @@
     ],
     "prelims": [
       {
-        "a": "Thomas Petersen",
-        "b": "Guilherme Pat",
+        "a": "Guilherme Pat",
+        "b": "Thomas Petersen",
         "weight": "Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "winner": "Thomas Petersen",
-        "method": "MD",
-        "round": 3,
-        "time": "5:00"
+        "ranked": false
+      },
+      {
+        "a": "Jose Delano",
+        "b": "Robert Ruchala",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
       },
       {
         "a": "Alessandro Costa",
         "b": "Stewart Nicoll",
-        "weight": "Featherweight",
+        "weight": "Flyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "winner": "Alessandro Costa",
-        "method": "TKO",
-        "round": 2,
-        "time": "4:56"
+        "ranked": false
       },
       {
-        "a": "Darrius Flowers",
-        "b": "Lando Vannata",
+        "a": "Lando Vannata",
+        "b": "Darrius Flowers",
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "winner": "Darrius Flowers",
-        "method": "TKO",
-        "round": 2,
-        "time": "0:52"
+        "ranked": false
       },
       {
         "a": "Alice Pereira",
         "b": "Hailey Cowan",
-        "weight": "Women's Strawweight",
+        "weight": "Women's Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "winner": "Alice Pereira",
-        "method": "KO",
-        "round": 2,
-        "time": "4:24"
-      },
+        "ranked": false
+      }
+    ],
+    "earlyPrelims": [
       {
-        "a": "Tresean Gore",
-        "b": "Azamat Bekoev",
+        "a": "Azamat Bekoev",
+        "b": "Tresean Gore",
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "winner": "Tresean Gore",
-        "method": "Sub (Guillotine)",
-        "round": 3,
-        "time": "3:27"
+        "ranked": false
       },
       {
         "a": "Dione Barbosa",
         "b": "Melissa Gatto",
-        "weight": "Women's Strawweight",
+        "weight": "Women's Flyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "winner": "Dione Barbosa",
-        "method": "UD",
-        "round": 3,
-        "time": "5:00"
+        "ranked": false
+      },
+      {
+        "a": "Kai Kamaka III",
+        "b": "Dakota Hope",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
       }
     ],
-    "earlyPrelims": [],
     "startTime": "22:00",
     "prelimCard": [
       {
@@ -8654,14 +8643,7 @@
         "round": 3,
         "time": "5:00"
       }
-    ],
-    "results": {
-      "fotn": "Tommy McMillen vs Manolo Zecchini",
-      "potn": [
-        "Alice Pereira",
-        "Alessandro Costa"
-      ]
-    }
+    ]
   },
   {
     "id": "ufc-327-prochazka-vs-ulberg",
@@ -8845,7 +8827,7 @@
     "isoDate": "2026-04-18",
     "location": "Winnipeg, Canada",
     "venue": "Canada Life Centre",
-    "poster": "images/Burns fn.jpeg",
+    "poster": "images/fn-burns.jpg",
     "status": "completed",
     "startTime": "22:00",
     "mainCard": [
@@ -8856,117 +8838,7 @@
         "rounds": "5 Rds",
         "titleFight": false,
         "ranked": true,
-        "slot": "main",
-        "winner": "Mike Malott",
-        "method": "TKO (Punches)",
-        "round": 3,
-        "time": "2:08"
-      },
-      {
-        "a": "Charles Jourdain",
-        "b": "Kyler Phillips",
-        "weight": "Bantamweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": true,
-        "slot": "comain",
-        "winner": "Charles Jourdain",
-        "method": "UD",
-        "round": 3,
-        "time": "5:00"
-      },
-      {
-        "a": "Jai Herbert",
-        "b": "Mandel Nallo",
-        "weight": "Lightweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "winner": "Jai Herbert",
-        "method": "TKO (Punches)",
-        "round": 1,
-        "time": "2:05"
-      },
-      {
-        "a": "Jasmine Jasudavicius",
-        "b": "Karine Silva",
-        "weight": "Women's Flyweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": true,
-        "slot": "",
-        "winner": "Jasmine Jasudavicius",
-        "method": "UD",
-        "round": 3,
-        "time": "5:00"
-      },
-      {
-        "a": "Gauge Young",
-        "b": "Thiago Moisés",
-        "weight": "Lightweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "winner": "Gauge Young",
-        "method": "SD",
-        "round": 3,
-        "time": "5:00"
-      }
-    ],
-    "prelims": [
-      {
-        "a": "Marcio Barbosa",
-        "b": "Dennis Buzukja",
-        "weight": "Featherweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "winner": "Marcio Barbosa",
-        "method": "KO (Punch)",
-        "round": 1,
-        "time": "1:20"
-      },
-      {
-        "a": "Robert Valentin",
-        "b": "Julien Leblanc",
-        "weight": "Middleweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "winner": "Robert Valentin",
-        "method": "Sub (RNC)",
-        "round": 1,
-        "time": "2:22"
-      },
-      {
-        "a": "Gokhan Saricam",
-        "b": "Tanner Boser",
-        "weight": "Heavyweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "winner": "Gokhan Saricam",
-        "method": "TKO (Punches)",
-        "round": 2,
-        "time": "4:43"
-      },
-      {
-        "a": "Melissa Croden",
-        "b": "Daria Zheleznyakova",
-        "weight": "Women's Bantamweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "winner": "Melissa Croden",
-        "method": "UD",
-        "round": 3,
-        "time": "5:00"
+        "slot": "main"
       },
       {
         "a": "JJ Aldrich",
@@ -8975,48 +8847,68 @@
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
-        "slot": "",
-        "winner": "JJ Aldrich",
-        "method": "UD",
-        "round": 3,
-        "time": "5:00"
+        "slot": "comain"
       },
       {
-        "a": "John Castaneda",
+        "a": "Jasmine Jasudavicius",
+        "b": "Karine Silva",
+        "weight": "Women's Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      },
+      {
+        "a": "Tanner Boser",
+        "b": "Gokhan Saricam",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Choi Dong-hun",
+        "b": "André Lima",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true
+      }
+    ],
+    "prelims": [
+      {
+        "a": "John Castañeda",
         "b": "Mark Vologdin",
         "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "winner": null,
-        "method": "MD (Draw)",
-        "round": 3,
-        "time": "5:00"
-      }
-    ],
-    "earlyPrelims": [
+        "ranked": false
+      },
       {
-        "a": "John Yannis",
-        "b": "Jamie Siraj",
-        "weight": "Bantamweight",
+        "a": "Mitch Raposo",
+        "b": "Allan Nascimento",
+        "weight": "Flyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "winner": "John Yannis",
-        "method": "TKO (Elbows)",
-        "round": 1,
-        "time": "2:43"
+        "ranked": false
+      },
+      {
+        "a": "Julien Leblanc",
+        "b": "Robert Valentin",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
+      },
+      {
+        "a": "Melissa Croden",
+        "b": "Daria Zheleznyakova",
+        "weight": "Women's Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false
       }
     ],
-    "results": {
-      "fotn": "Charles Jourdain vs Kyler Phillips",
-      "potn": [
-        "Mike Malott",
-        "Marcio Barbosa"
-      ]
-    }
+    "earlyPrelims": []
   },
   {
     "id": "ufc-fight-night-sterling-vs-zalal",
@@ -9026,7 +8918,7 @@
     "isoDate": "2026-04-25",
     "location": "Las Vegas, NV",
     "venue": "Meta APEX",
-    "poster": "images/Sterling-fn.jpeg",
+    "poster": "images/fn-sterling.jpg",
     "status": "upcoming",
     "startTime": "22:00",
     "mainCard": [
@@ -9151,7 +9043,7 @@
     "isoDate": "2026-05-02",
     "location": "Perth, Australia",
     "venue": "RAC Arena",
-    "poster": "images/JDM-fn.jpeg",
+    "poster": "images/fn-jdm.jpg",
     "status": "upcoming",
     "startTime": "07:00",
     "mainCard": [
@@ -9430,7 +9322,7 @@
     "isoDate": "2026-06-14",
     "location": "Washington, D.C.",
     "venue": "White House South Lawn",
-    "poster": "images/White house.jpeg",
+    "poster": "images/fn-whitehouse.jpg",
     "status": "upcoming",
     "mainCard": [
       {
