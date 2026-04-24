@@ -3639,3 +3639,99 @@ body.light-mode .navbar {
 .feed-entry-new {
   animation: feedSlideIn 0.35s ease both;
 }
+
+/* ═══════════════════════════════════════════════════════════
+   PREMIUM POLISH — Page transitions, scroll, micro interactions
+═══════════════════════════════════════════════════════════ */
+
+/* Smooth page fade base */
+body {
+  transition: opacity 0.28s ease;
+}
+
+/* Cursor glow light mode fix */
+body.light-mode #cursor-glow {
+  background: radial-gradient(circle, rgba(0,100,180,0.05) 0%, transparent 70%);
+}
+
+/* Nav logo bigger + crisp */
+.nav-logo-img {
+  height: 52px !important;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+@media (max-width: 768px) {
+  .nav-logo-img { height: 38px !important; }
+}
+
+/* Nav link active — no more double underline */
+.nav-links a.active::after {
+  width: 100% !important;
+}
+
+/* Cards — hardware accelerated */
+.ev-card, .review-card, .result-card, .pfp-card {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Smoother navbar transition */
+.navbar {
+  transition: background 0.25s ease, box-shadow 0.25s ease, backdrop-filter 0.25s ease !important;
+}
+
+/* Search box transition */
+.search-box {
+  transition: box-shadow 0.2s ease !important;
+}
+
+/* Theme toggle smoother */
+.theme-toggle {
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.12s cubic-bezier(0.34,1.56,0.64,1) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hero content entrance */
+.hero #hero-content {
+  animation: heroSlideUp 0.7s cubic-bezier(0.22,1,0.36,1) both;
+}
+@keyframes heroSlideUp {
+  from { opacity:0; transform: translateY(28px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+/* Section labels entrance */
+.results-section-label, .section-title {
+  animation: fadeInLabel 0.5s cubic-bezier(0.22,1,0.36,1) both;
+  animation-delay: 0.2s;
+}
+@keyframes fadeInLabel {
+  from { opacity:0; letter-spacing: 0.3em; }
+  to   { opacity:1; }
+}
+
+/* Live feed entrance */
+#liveFeed {
+  animation: fadeUp 0.6s 0.3s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+/* Results track cards */
+#resultsInner > * {
+  transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.22s ease !important;
+}
+#resultsInner > *:hover {
+  transform: translateY(-4px) scale(1.02) !important;
+  box-shadow: 0 14px 36px rgba(0,0,0,0.65) !important;
+}
+
+/* Light mode — cursor glow invisible */
+body.light-mode #cursor-glow { display: none; }
+
+/* Scroll animation base (fallback if premium.js loads late) */
+@media (prefers-reduced-motion: reduce) {
+  .sa-ready { opacity: 1 !important; transform: none !important; }
+  body { transition: none !important; }
+  #cursor-glow { display: none !important; }
+}
