@@ -3000,6 +3000,11 @@ body.light-mode h1,
 body.light-mode h2,
 body.light-mode h3 { color: #111 !important; }
 body.light-mode p { color: rgba(0,0,0,0.65) !important; }
+/* Sidebar links */
+body.light-mode .sidebar a { color: rgba(0,0,0,0.65) !important; }
+body.light-mode .sidebar a:hover { color: #009bb5 !important; }
+/* Ensure any span/label text inside known sections is readable */
+body.light-mode .sidebar span { color: rgba(0,0,0,0.65) !important; }
 
 /* ── Scrollbar ── */
 body.light-mode ::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); }

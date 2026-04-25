@@ -6,16 +6,6 @@ import CONFIG, { debugLog } from './config.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
 
-  // ── Theme toggle ──
-  const toggle = document.getElementById('themeToggle');
-  if (localStorage.getItem('theme') === 'light') document.body.classList.add('light-mode');
-  if (toggle) {
-    toggle.addEventListener('click', () => {
-      const isLight = document.body.classList.toggle('light-mode');
-      localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    });
-  }
-
   // Keep Render backend awake
   fetch('https://mmabridge-backend.onrender.com/api/health').catch(() => {});
 
