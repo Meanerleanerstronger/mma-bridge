@@ -13,6 +13,8 @@
     { flag: '🇧🇷', city: 'São Paulo',   ts: Date.now()/1000 - 740 },
   ];
 
+  const POS_KEY = 'mmabridge-widget-pos';
+
   function timeAgo(ts) {
     const s = Math.floor(Date.now() / 1000) - ts;
     if (s < 60)   return 'just now';
@@ -25,9 +27,6 @@
   style.textContent = `
     #lw-widget {
       position: fixed;
-      left: 20px;
-      top: 50%;
-      transform: translateY(-50%) translateY(12px);
       width: 210px;
       z-index: 8000;
       background: rgba(6,6,8,0.88);
@@ -37,29 +36,23 @@
       border-radius: 10px;
       box-shadow: 0 8px 32px rgba(0,0,0,0.55);
       opacity: 0;
-      transition: opacity 0.4s ease, transform 0.4s ease;
+      transition: opacity 0.4s ease, box-shadow 0.2s ease;
       pointer-events: all;
+      user-select: none;
+      -webkit-user-select: none;
     }
-    #lw-widget.lw-visible {
-      opacity: 1;
-      transform: translateY(-50%) translateY(0);
-    }
+    #lw-widget.lw-visible { opacity: 1; }
     #lw-widget.lw-hidden {
       opacity: 0 !important;
       pointer-events: none !important;
-      transform: translateY(-50%) translateY(12px) !important;
+    }
+    #lw-widget.lw-dragging {
+      cursor: grabbing !important;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.75), 0 0 0 1px rgba(0,229,255,0.12) !important;
+      transition: box-shadow 0.2s ease !important;
     }
     @media (max-width: 768px) {
       #lw-widget { display: none !important; }
-    }
-    @media (max-height: 600px) {
-      #lw-widget {
-        top: auto;
-        bottom: 16px;
-        transform: none;
-      }
-      #lw-widget.lw-visible { transform: none; }
-      #lw-widget.lw-hidden  { transform: translateY(8px) !important; }
     }
     #lw-header {
       display: flex;
@@ -67,7 +60,9 @@
       justify-content: space-between;
       padding: 9px 10px 7px 12px;
       border-bottom: 1px solid rgba(255,255,255,0.06);
+      cursor: grab;
     }
+    #lw-header:active { cursor: grabbing; }
     #lw-title {
       display: flex;
       align-items: center;
@@ -78,6 +73,7 @@
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: rgba(0,229,255,0.8);
+      pointer-events: none;
     }
     #lw-dot {
       width: 6px;
@@ -97,14 +93,18 @@
       color: rgba(255,255,255,0.25);
       font-size: 0.75rem;
       cursor: pointer;
-      padding: 0 2px;
+      padding: 2px 4px;
       line-height: 1;
       transition: color 0.15s;
+      position: relative;
+      z-index: 1;
     }
     #lw-close:hover { color: rgba(255,255,255,0.6); }
     #lw-list {
       padding: 6px 0 8px;
+      cursor: grab;
     }
+    #lw-list:active { cursor: grabbing; }
     .lw-entry {
       display: flex;
       align-items: baseline;
@@ -114,10 +114,9 @@
       font-size: 0.62rem;
       color: rgba(255,255,255,0.5);
       line-height: 1.4;
+      pointer-events: none;
     }
-    .lw-entry.lw-new {
-      animation: lwFadeIn 0.4s ease both;
-    }
+    .lw-entry.lw-new { animation: lwFadeIn 0.4s ease both; }
     @keyframes lwFadeIn {
       from { opacity:0; transform: translateX(-4px); }
       to   { opacity:1; transform: translateX(0); }
@@ -139,6 +138,129 @@
     <div id="lw-list"></div>
   `;
   document.body.appendChild(widget);
+
+  /* ── Position helpers ── */
+  function clampPos(x, y) {
+    const W = widget.offsetWidth  || 210;
+    const H = widget.offsetHeight || 120;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    return {
+      x: Math.max(0, Math.min(x, vw - W)),
+      y: Math.max(0, Math.min(y, vh - H)),
+    };
+  }
+
+  function applyPos(x, y) {
+    widget.style.left      = x + 'px';
+    widget.style.top       = y + 'px';
+    widget.style.transform = 'none';
+  }
+
+  function defaultPos() {
+    const H = widget.offsetHeight || 120;
+    return { x: 20, y: Math.round((window.innerHeight - H) / 2) };
+  }
+
+  function savePos(x, y) {
+    try { localStorage.setItem(POS_KEY, JSON.stringify({ x, y })); } catch {}
+  }
+
+  function loadPos() {
+    try {
+      const raw = localStorage.getItem(POS_KEY);
+      if (!raw) return null;
+      const { x, y } = JSON.parse(raw);
+      if (typeof x !== 'number' || typeof y !== 'number') return null;
+      // Validate: still on screen
+      const W = widget.offsetWidth  || 210;
+      const H = widget.offsetHeight || 120;
+      if (x < 0 || y < 0 || x + W > window.innerWidth + 10 || y + H > window.innerHeight + 10) {
+        localStorage.removeItem(POS_KEY);
+        return null;
+      }
+      return { x, y };
+    } catch { return null; }
+  }
+
+  /* ── Apply initial position ── */
+  function initPosition() {
+    const saved = loadPos();
+    if (saved) {
+      applyPos(saved.x, saved.y);
+    } else {
+      // Default: middle-left via CSS (transform approach)
+      widget.style.left      = '20px';
+      widget.style.top       = '50%';
+      widget.style.transform = 'translateY(-50%)';
+    }
+  }
+
+  /* ── Drag logic ── */
+  let dragging = false;
+  let dragOffX = 0, dragOffY = 0;
+
+  function startDrag(clientX, clientY) {
+    dragging = true;
+    const rect = widget.getBoundingClientRect();
+    dragOffX = clientX - rect.left;
+    dragOffY = clientY - rect.top;
+    // Switch from transform-based to absolute coords immediately
+    applyPos(rect.left, rect.top);
+    widget.classList.add('lw-dragging');
+    document.body.style.userSelect = 'none';
+  }
+
+  function moveDrag(clientX, clientY) {
+    if (!dragging) return;
+    const raw = clampPos(clientX - dragOffX, clientY - dragOffY);
+    applyPos(raw.x, raw.y);
+  }
+
+  function endDrag() {
+    if (!dragging) return;
+    dragging = false;
+    widget.classList.remove('lw-dragging');
+    document.body.style.userSelect = '';
+    const rect = widget.getBoundingClientRect();
+    const clamped = clampPos(rect.left, rect.top);
+    applyPos(clamped.x, clamped.y);
+    savePos(clamped.x, clamped.y);
+  }
+
+  // Mouse
+  widget.addEventListener('mousedown', e => {
+    if (e.target.id === 'lw-close') return;
+    e.preventDefault();
+    startDrag(e.clientX, e.clientY);
+  });
+  document.addEventListener('mousemove', e => { if (dragging) moveDrag(e.clientX, e.clientY); });
+  document.addEventListener('mouseup', endDrag);
+
+  // Touch
+  widget.addEventListener('touchstart', e => {
+    if (e.target.id === 'lw-close') return;
+    const t = e.touches[0];
+    startDrag(t.clientX, t.clientY);
+  }, { passive: true });
+  document.addEventListener('touchmove', e => {
+    if (!dragging) return;
+    e.preventDefault();
+    const t = e.touches[0];
+    moveDrag(t.clientX, t.clientY);
+  }, { passive: false });
+  document.addEventListener('touchend', endDrag);
+
+  /* ── Resize: re-clamp if window shrinks ── */
+  window.addEventListener('resize', () => {
+    const rect = widget.getBoundingClientRect();
+    const clamped = clampPos(rect.left, rect.top);
+    // Only move if actually out of bounds
+    if (clamped.x !== rect.left || clamped.y !== rect.top) {
+      applyPos(clamped.x, clamped.y);
+      savePos(clamped.x, clamped.y);
+    }
+  });
 
   /* ── Render entries ── */
   let lastKeys = new Set();
@@ -169,10 +291,11 @@
     } catch { render(null); }
   }
 
-  /* ── Show widget after short delay ── */
+  /* ── Show widget ── */
   setTimeout(() => {
+    initPosition();
     widget.classList.add('lw-visible');
-    render(null); // placeholders immediately
+    render(null);
     fetch(`${API}/visitors/ping`, { method: 'POST' })
       .then(r => r.ok ? r.json() : null)
       .then(d => { if (d) render(d); })
@@ -189,7 +312,7 @@
     setTimeout(() => widget.remove(), 500);
   });
 
-  /* ── Hide when overlay/modal open (no-scroll on body) ── */
+  /* ── Hide when overlay open ── */
   const observer = new MutationObserver(() => {
     const hidden = document.body.classList.contains('no-scroll') ||
                    document.body.classList.contains('overlay-open');
