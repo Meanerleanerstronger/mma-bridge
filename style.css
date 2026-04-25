@@ -2267,20 +2267,23 @@ body.light-mode .drawer-backdrop {
 .er-community-bar {
   display: flex; align-items: center;
   justify-content: space-between;
-  padding: 12px 18px;
+  padding: 16px 22px;
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 10px;
+  border-radius: 12px;
+  margin-bottom: 16px;
 }
 .er-comm-label {
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.68rem; font-weight: 800;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  color: rgba(255,255,255,0.4);
+  font-size: 0.72rem; font-weight: 800;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
 }
 .er-comm-val {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.82rem; color: rgba(255,255,255,0.7);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.1rem; font-weight: 800;
+  color: #00e5ff;
+  text-shadow: 0 0 14px rgba(0,229,255,0.3);
 }
 
 /* Cards */
@@ -2367,13 +2370,13 @@ body.light-mode .drawer-backdrop {
 .er-drop[open] { border-color: rgba(255,255,255,0.14); }
 .er-drop-sum {
   list-style: none; cursor: pointer;
-  padding: 12px 16px;
+  padding: 14px 18px;
   display: flex; align-items: center;
   justify-content: space-between;
   font-family: 'Montserrat', sans-serif;
-  font-weight: 700; font-size: 0.75rem;
-  letter-spacing: 0.08em; text-transform: uppercase;
-  color: rgba(255,255,255,0.65);
+  font-weight: 800; font-size: 0.82rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
   user-select: none;
 }
 .er-drop-sum::-webkit-details-marker { display: none; }
@@ -2385,47 +2388,60 @@ body.light-mode .drawer-backdrop {
 
 /* Fight rows inside review */
 .er-fight-row {
-  padding: 12px 14px;
+  padding: 16px 18px;
   background: rgba(0,0,0,0.3);
-  border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
 }
 .er-fight-main {
-  background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(0,0,0,0.5));
-  border-color: rgba(255,255,255,0.14);
-  padding: 16px 16px;
+  background: linear-gradient(135deg, rgba(0,229,255,0.06), rgba(0,0,0,0.5));
+  border-color: rgba(0,229,255,0.18);
+  padding: 20px 20px;
 }
 .er-fight-comain {
   background: rgba(255,255,255,0.04);
-  border-color: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.12);
+  padding: 18px 18px;
 }
 .er-slot-badge {
   display: inline-block;
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.55rem; font-weight: 800;
+  font-size: 0.6rem; font-weight: 800;
   letter-spacing: 0.14em; text-transform: uppercase;
-  padding: 3px 8px; border-radius: 999px;
-  margin-bottom: 6px;
+  padding: 4px 10px; border-radius: 999px;
+  margin-bottom: 8px;
 }
 .er-main-badge {
-  background: rgba(0,255,255,0.1);
-  border: 1px solid rgba(0,255,255,0.3); color: cyan;
+  background: rgba(0,255,255,0.12);
+  border: 1px solid rgba(0,255,255,0.4); color: cyan;
 }
 .er-comain-badge {
   background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.18);
-  color: rgba(255,255,255,0.7);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.75);
 }
 .er-fight-names {
-  display: flex; align-items: baseline; gap: 8px;
+  display: flex; align-items: baseline; gap: 10px;
   flex-wrap: wrap;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 800; font-size: 0.95rem;
-  color: #fff; margin-bottom: 7px;
+  font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
+  font-weight: 900; font-size: 1.25rem;
+  text-transform: uppercase; letter-spacing: 0.02em;
+  color: #fff; margin-bottom: 8px;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.6), 0 0 1px rgba(255,255,255,0.1);
 }
-.er-fight-main .er-fight-names { font-size: 1.1rem; }
-.er-fvs { color: rgba(255,255,255,0.35); font-size: 0.75rem; }
-.er-ficons { font-size: 0.85rem; }
+.er-fight-main .er-fight-names {
+  font-size: 1.7rem;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.8), 0 0 2px rgba(255,255,255,0.1);
+}
+.er-fight-comain .er-fight-names { font-size: 1.4rem; }
+.er-fvs {
+  color: rgba(255,255,255,0.3);
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  text-shadow: none;
+}
+.er-ficons { font-size: 1rem; }
 .er-fight-meta { display: flex; gap: 6px; flex-wrap: wrap; }
 
 .er-empty {
@@ -2459,47 +2475,61 @@ body.light-mode .drawer-backdrop {
 
 /* ── Fight result display ── */
 .er-result {
-  margin-top: 8px;
+  margin-top: 10px;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 .er-result-winner {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 800;
-  font-size: 0.82rem;
+  font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
   color: #4ade80;
+  text-shadow: 0 0 16px rgba(74,222,128,0.4);
 }
 .er-result-def {
   font-family: 'Inter', sans-serif;
-  font-size: 0.72rem;
-  color: rgba(255,255,255,0.35);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.4);
 }
 .er-result-loser {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.78rem;
-  color: rgba(255,255,255,0.45);
+  font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
 }
 .er-result-method {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.7rem;
-  color: rgba(255,255,255,0.3);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.75);
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 4px;
+  padding: 3px 9px;
   margin-left: 4px;
 }
 .er-result-nc {
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: rgba(255,255,255,0.4);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: rgba(255,255,255,0.55);
 }
 .er-won {
   color: #4ade80 !important;
+  text-shadow: 0 0 12px rgba(74,222,128,0.3);
 }
 .er-lost {
-  color: rgba(255,255,255,0.35) !important;
+  color: rgba(255,255,255,0.3) !important;
   text-decoration: line-through;
-  text-decoration-color: rgba(255,255,255,0.2);
+  text-decoration-color: rgba(255,255,255,0.15);
 }
 
 /* Recent results responsive */

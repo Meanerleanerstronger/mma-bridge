@@ -4,13 +4,13 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <script src="theme.js?v=2.2"></script>
+  <script src="theme.js?v=2.3"></script>
   <link rel="icon" href="images/mma-bridge-logo.png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MMA Bridge | Upcoming Events</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=2.2" />
+  <link rel="stylesheet" href="style.css?v=2.3" />
 
   <style>
     /* ── KEYFRAMES ── */
@@ -110,7 +110,7 @@
     .ev-overlay.open .ov-panel { opacity:1;transform:scale(1) translateY(0); }
 
     /* ── HERO ── */
-    .ov-hero { position:relative;height:52vh;min-height:300px;max-height:500px;flex-shrink:0;overflow:hidden; }
+    .ov-hero { position:relative;height:36vh;min-height:210px;max-height:320px;flex-shrink:0;overflow:hidden; }
     .ov-poster { position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block; }
     .ov-poster-gradient {
       position:absolute;inset:0;
@@ -148,24 +148,24 @@
 
     /* ── COMPACT HYPE BAR ── */
     .ov-hype-bar {
-      flex-shrink:0;display:flex;align-items:center;gap:16px;
-      padding:10px 36px;border-bottom:1px solid rgba(255,255,255,.05);
+      flex-shrink:0;display:flex;align-items:center;gap:12px;
+      padding:8px 28px;border-bottom:1px solid rgba(255,255,255,.05);
       background:rgba(0,0,0,.18);
     }
-    .ov-hype-label-txt { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.42rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.25);white-space:nowrap; }
-    .ov-hype-score-inline { display:flex;align-items:baseline;gap:2px;min-width:44px; }
-    .ov-hype-num { font-family:'Barlow Condensed','Montserrat',sans-serif;font-weight:900;font-size:1.6rem;line-height:1;color:rgba(255,255,255,.18);transition:color .25s; }
-    .ov-hype-denom { font-family:'Inter',sans-serif;font-size:.7rem;color:rgba(255,255,255,.15); }
-    .ov-hype-word { font-family:'Montserrat',sans-serif;font-weight:700;font-size:.46rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.18);transition:color .25s;min-width:70px; }
+    .ov-hype-label-txt { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);white-space:nowrap; }
+    .ov-hype-score-inline { display:flex;align-items:baseline;gap:2px;min-width:36px; }
+    .ov-hype-num { font-family:'Barlow Condensed','Montserrat',sans-serif;font-weight:900;font-size:1.2rem;line-height:1;color:rgba(255,255,255,.2);transition:color .25s; }
+    .ov-hype-denom { font-family:'Inter',sans-serif;font-size:.6rem;color:rgba(255,255,255,.15); }
+    .ov-hype-word { font-family:'Montserrat',sans-serif;font-weight:700;font-size:.48rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.2);transition:color .25s;min-width:60px; }
 
     /* Track + draggable thumb */
-    .ov-hype-track-wrap { position:relative;flex:1;height:22px;display:flex;align-items:center;cursor:pointer; }
-    .ov-hype-track { position:absolute;left:0;right:0;height:5px;background:rgba(255,255,255,.08);border-radius:3px; }
+    .ov-hype-track-wrap { position:relative;width:200px;max-width:200px;flex-shrink:0;height:20px;display:flex;align-items:center;cursor:pointer; }
+    .ov-hype-track { position:absolute;left:0;right:0;height:4px;background:rgba(255,255,255,.08);border-radius:3px; }
     .ov-hype-fill  { position:absolute;left:0;top:0;bottom:0;border-radius:3px;background:rgba(255,255,255,.2);transition:width .12s ease,background .25s;width:0%; }
     .ov-hype-thumb {
       position:absolute;top:50%;left:0%;transform:translate(-50%,-50%);
-      width:18px;height:18px;border-radius:50%;background:#fff;
-      border:2.5px solid rgba(255,255,255,.9);
+      width:15px;height:15px;border-radius:50%;background:#fff;
+      border:2px solid rgba(255,255,255,.9);
       box-shadow:0 2px 8px rgba(0,0,0,.5);cursor:grab;
       transition:background .25s,border-color .25s,transform .1s,box-shadow .2s;
       z-index:2;will-change:left;
@@ -174,8 +174,8 @@
     .ov-hype-thumb.dragging { cursor:grabbing;transform:translate(-50%,-50%) scale(1.22);transition:background .25s,border-color .25s,box-shadow .2s; }
 
     /* Tick numbers */
-    .ov-hype-ticks { display:flex;justify-content:space-between;position:absolute;left:0;right:0;top:calc(50% + 10px); }
-    .ov-hype-tick  { font-family:'Montserrat',sans-serif;font-size:.44rem;font-weight:700;color:rgba(255,255,255,.18);cursor:pointer;user-select:none;transition:color .15s;min-width:10px;text-align:center; }
+    .ov-hype-ticks { display:flex;justify-content:space-between;position:absolute;left:0;right:0;top:calc(50% + 9px); }
+    .ov-hype-tick  { font-family:'Montserrat',sans-serif;font-size:.42rem;font-weight:700;color:rgba(255,255,255,.18);cursor:pointer;user-select:none;transition:color .15s;min-width:10px;text-align:center; }
     .ov-hype-tick:hover { color:rgba(255,255,255,.45); }
     .ov-hype-tick.active { font-weight:900; }
 
@@ -202,10 +202,10 @@
     /* Fight row — NO picks UI, hover glow + FOTN reveal */
     .ov-fight {
       position:relative;
-      display:grid;grid-template-columns:1fr 96px 1fr;
+      display:grid;grid-template-columns:1fr 110px 1fr;
       align-items:center;gap:8px;
-      padding:14px 28px;
-      border-bottom:1px solid rgba(255,255,255,.03);
+      padding:18px 28px;
+      border-bottom:1px solid rgba(255,255,255,.04);
       cursor:default;
       transition:background .18s;
       overflow:hidden;
@@ -227,31 +227,32 @@
     /* Fighter names — LARGE, cinematic, glossy */
     .ov-fighter {
       font-family:'Barlow Condensed','Montserrat',sans-serif;
-      font-weight:900;font-size:1.15rem;
+      font-weight:900;font-size:1.35rem;
       color:#fff;line-height:1.1;
       letter-spacing:.02em;text-transform:uppercase;
+      text-shadow:0 1px 8px rgba(0,0,0,.7),0 0 1px rgba(255,255,255,.15);
       transition:color .2s,text-shadow .2s;
       position:relative;z-index:1;
     }
-    .ov-fight.is-main .ov-fighter { font-size:1.45rem; }
+    .ov-fight.is-main .ov-fighter { font-size:1.85rem; }
     .ov-fighter.right { text-align:right; }
-    .ov-fighter.dim   { color:rgba(255,255,255,.55);font-size:.98rem; }
-    .ov-fight.is-main .ov-fighter.dim { font-size:1.45rem;color:rgba(255,255,255,.6); }
+    .ov-fighter.dim   { color:rgba(255,255,255,.6);font-size:1.15rem; }
+    .ov-fight.is-main .ov-fighter.dim { font-size:1.85rem;color:rgba(255,255,255,.65); }
 
     /* Hover name glow */
     .ov-fight:hover .ov-fighter:not(.dim) {
       color:#fff;
-      text-shadow:0 0 20px rgba(0,229,255,.18);
+      text-shadow:0 0 28px rgba(0,229,255,.35),0 1px 8px rgba(0,0,0,.7);
     }
     .ov-fight.ppv-main:hover .ov-fighter:not(.dim) {
-      text-shadow:0 0 20px rgba(200,168,75,.22);
+      text-shadow:0 0 28px rgba(200,168,75,.4),0 1px 8px rgba(0,0,0,.7);
     }
 
     .ov-fight-mid { text-align:center;position:relative;z-index:1; }
-    .ov-title-badge { font-size:.42rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#c8a84b;margin-bottom:3px; }
-    .ov-weight  { font-family:'Inter',sans-serif;font-size:.46rem;font-weight:600;color:rgba(255,255,255,.26);text-transform:uppercase;letter-spacing:.08em; }
-    .ov-rounds  { font-family:'Inter',sans-serif;font-size:.4rem;color:rgba(255,255,255,.13);margin-top:2px; }
-    .ov-slot-tag { font-size:.38rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-top:4px; }
+    .ov-title-badge { font-size:.5rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#c8a84b;margin-bottom:4px; }
+    .ov-weight  { font-family:'Inter',sans-serif;font-size:.58rem;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.08em; }
+    .ov-rounds  { font-family:'Inter',sans-serif;font-size:.5rem;color:rgba(255,255,255,.2);margin-top:3px; }
+    .ov-slot-tag { font-size:.44rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-top:4px; }
 
     /* FOTN hover pill — appears on hover, centered in fight row */
     .ov-fotn-hover {
@@ -346,12 +347,14 @@
       .ev-card-matchup { font-size:clamp(1.05rem,4vw,1.4rem); }
       .ev-card-meta { right:14px; }
       .ev-card-location { display:none; }
-      .ov-hero { height:38vh;min-height:220px; }
+      .ov-hero { height:30vh;min-height:180px; }
       .ov-matchup { font-size:clamp(1.9rem,6.5vw,2.8rem); }
       .ov-hero-bottom { padding:0 20px 18px; }
-      .ov-hype-bar { padding:10px 20px;gap:12px; }
-      .ov-fighter { font-size:.95rem; }
-      .ov-fight.is-main .ov-fighter { font-size:1.1rem; }
+      .ov-hype-bar { padding:7px 16px;gap:10px; }
+      .ov-hype-track-wrap { width:140px;max-width:140px; }
+      .ov-fighter { font-size:1.1rem; }
+      .ov-fight.is-main .ov-fighter { font-size:1.35rem; }
+      .ov-fight { padding:15px 18px; }
     }
     @media(max-width:480px) {
       .ev-card { height:130px; }
@@ -778,8 +781,8 @@
     }
     loadEvents();
   </script>
-  <script src="auth.js?v=2.2"></script>
-  <script src="chat.js?v=2.2"></script>
+  <script src="auth.js?v=2.3"></script>
+  <script src="chat.js?v=2.3"></script>
   <script src="premium.js?v=3.0"></script>
 </body>
 </html>
