@@ -237,7 +237,7 @@ a, a:visited {
 
 .card-image {
   width: 100%;
-  height: 220px;
+  height: 195px;
   background-size: cover;
   background-position: center;
   flex-shrink: 0;
@@ -2705,6 +2705,11 @@ body.light-mode {
   background: #f2f2f2 !important;
   color: #0a0a0a !important;
 }
+/* Zero-flash cross-page: html.light-mode is set by IIFE before body renders */
+html.light-mode body {
+  background: #f2f2f2 !important;
+  color: #0a0a0a !important;
+}
 
 /* ── Navbar ── */
 body.light-mode .navbar { background: rgba(255,255,255,0.97) !important; border-bottom-color: rgba(0,0,0,0.1) !important; }
@@ -2746,6 +2751,12 @@ body.light-mode #heroBtn { background: #009bb5 !important; color: #fff !importan
 body.light-mode #resultsTrack { background: transparent; }
 body.light-mode .results-fade-l { background: linear-gradient(to right, #f2f2f2, transparent) !important; }
 body.light-mode .results-fade-r { background: linear-gradient(to left, #f2f2f2, transparent) !important; }
+/* Result track cards (built with inline styles in script.js) */
+body.light-mode #resultsInner > a { background: #fff !important; border-color: rgba(0,0,0,0.08) !important; }
+body.light-mode #resultsInner > a > div:last-child > div:nth-child(1) { color: rgba(0,0,0,0.35) !important; }
+body.light-mode #resultsInner > a > div:last-child > div:nth-child(2) { color: #111 !important; }
+body.light-mode #resultsInner > a > div:last-child > div:nth-child(3) { color: #009bb5 !important; }
+body.light-mode #resultsInner > a > div:last-child > div:nth-child(4) { color: rgba(0,0,0,0.4) !important; }
 
 /* ── Index section headers ── */
 body.light-mode .section-title { color: #111 !important; }
@@ -2757,8 +2768,12 @@ body.light-mode .sidebar h3 { -webkit-text-fill-color: transparent; }
 body.light-mode .sidebar li { color: rgba(0,0,0,0.65) !important; border-bottom-color: rgba(0,0,0,0.06) !important; }
 
 /* ── Story cards ── */
-body.light-mode .medium-card { background: #fff !important; box-shadow: 0 2px 12px rgba(0,0,0,0.1) !important; }
+body.light-mode .medium-card { background: #fff !important; box-shadow: 0 2px 12px rgba(0,0,0,0.1) !important; border-color: rgba(0,0,0,0.07) !important; }
 body.light-mode .medium-card h2 { color: #111 !important; text-shadow: none !important; }
+body.light-mode .medium-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.14) !important; border-color: rgba(0,153,170,0.25) !important; }
+/* News card inner text (inline-styled in script.js) */
+body.light-mode .medium-card > div > div:first-child { color: #111 !important; }
+body.light-mode .medium-card > div > div:last-child { color: rgba(0,0,0,0.4) !important; }
 
 /* ── Live feed ── */
 body.light-mode #liveFeed { background: #fff !important; border-color: rgba(0,0,0,0.08) !important; box-shadow: 0 0 0 0 !important; }
@@ -2818,33 +2833,11 @@ body.light-mode .pfp-row-photo { background-color: #ddd; border-color: rgba(0,0,
 body.light-mode .pfp-hero-tag { background: rgba(200,168,75,0.1); border-color: rgba(200,168,75,0.3); }
 body.light-mode .pfp-hero-record { color: rgba(0,0,0,0.75); }
 body.light-mode .pfp-hero-div { color: rgba(0,0,0,0.35); }
-/* PFP drawer in light mode - keep dark (overlays look better) */
-body.light-mode .pfp-page .drawer-panel { background: rgba(20,20,20,0.97) !important; color: #fff !important; }
-body.light-mode .pfp-page .drawer-top { border-bottom-color: rgba(255,255,255,0.08) !important; }
-body.light-mode .pfp-page .drawer-title { color: rgba(255,255,255,0.8) !important; }
-body.light-mode .pfp-page .drawer-x { background: rgba(0,0,0,0.35) !important; border-color: rgba(255,255,255,0.12) !important; color: rgba(255,255,255,0.7) !important; }
-body.light-mode .pfp-page .drawer-hero { background: rgba(0,0,0,0.45) !important; border-color: rgba(255,255,255,0.12) !important; }
-body.light-mode .pfp-page .drawer-a,
-body.light-mode .pfp-page .drawer-b { color: #fff !important; }
-body.light-mode .pfp-page .drawer-vs { color: rgba(255,255,255,0.45) !important; }
-body.light-mode .pfp-page .drawer-sub,
-body.light-mode .pfp-page .drawer-meta { color: rgba(255,255,255,0.6) !important; }
-body.light-mode .pfp-page .drawer-card { background: rgba(0,0,0,0.35) !important; border-color: rgba(255,255,255,0.1) !important; }
-body.light-mode .pfp-page .drawer-card-title { color: #fff !important; }
-body.light-mode .pfp-page .hint { color: rgba(255,255,255,0.5) !important; }
-body.light-mode .pfp-page .pill { color: rgba(255,255,255,0.8) !important; background: rgba(0,0,0,0.2) !important; border-color: rgba(255,255,255,0.12) !important; }
-body.light-mode .pfp-page .stat { background: rgba(0,0,0,0.35) !important; border-color: rgba(255,255,255,0.1) !important; }
-body.light-mode .pfp-page .stat-label { color: rgba(255,255,255,0.55) !important; }
-body.light-mode .pfp-page .stat-val,
-body.light-mode .pfp-page .stat-value { color: rgba(255,255,255,0.88) !important; }
-body.light-mode .pfp-page .fighter-name { color: #fff !important; }
-body.light-mode .pfp-page .bout-opp { color: #fff !important; }
-body.light-mode .pfp-page .bout-date { color: rgba(255,255,255,0.55) !important; }
-body.light-mode .pfp-page .bout.win { background: rgba(0,255,140,0.12) !important; border-color: rgba(0,255,140,0.35) !important; }
-body.light-mode .pfp-page .bout.loss { background: rgba(255,80,80,0.12) !important; border-color: rgba(255,80,80,0.35) !important; }
-body.light-mode .pfp-page .wl-w { color: rgba(150,255,180,0.95) !important; }
-body.light-mode .pfp-page .wl-l { color: rgba(255,150,150,0.95) !important; }
-body.light-mode .pfp-page .drawer-lines .line { color: rgba(255,255,255,0.65) !important; border-top-color: rgba(255,255,255,0.08) !important; }
+/* PFP drawer in light mode — use light panel */
+body.light-mode .pfp-page .bout.win { background: rgba(0,180,90,0.08) !important; border-color: rgba(0,180,90,0.25) !important; }
+body.light-mode .pfp-page .bout.loss { background: rgba(220,50,50,0.07) !important; border-color: rgba(220,50,50,0.2) !important; }
+body.light-mode .pfp-page .wl-w { color: #1a9e52 !important; }
+body.light-mode .pfp-page .wl-l { color: #c23030 !important; }
 
 /* ── Reviews page ── */
 body.light-mode .rv-hero h1 { color: #111 !important; }

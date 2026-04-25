@@ -5,7 +5,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <script src="theme.js?v=2.1"></script>
+  <script src="theme.js?v=2.4"></script>
   <link rel="icon" href="images/mma-bridge-logo.png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,7 +15,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Pacifico&display=swap" rel="stylesheet">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="style.css?v=2.1" />
+  <link rel="stylesheet" href="style.css?v=2.4" />
 
   <style>
     @media (max-width: 768px) {
@@ -127,11 +127,14 @@
       animation: sectionFadeIn 0.5s 0.4s ease both;
     }
 
-    /* ── LIGHT MODE overrides for inline-style body bg ── */
+    /* ── LIGHT MODE overrides ── */
     body.light-mode {
       background: #f0f0f4 !important;
       background-image: radial-gradient(ellipse 70% 40% at 50% -5%, rgba(0,100,200,0.04) 0%, transparent 60%) !important;
     }
+    body.light-mode #heroSection { background: #e8e8ed !important; }
+    body.light-mode .results-fade-l { background: linear-gradient(to right, #f0f0f4, transparent) !important; }
+    body.light-mode .results-fade-r { background: linear-gradient(to left, #f0f0f4, transparent) !important; }
     body.light-mode .sidebar h3 {
       background: linear-gradient(120deg, #009bb5 0%, #00c6d8 50%, #009bb5 100%);
       background-size: 200% auto;
@@ -236,7 +239,7 @@
     </div>
   </div>
 
-  <script type="module" src="script.js?v=2.1"></script>
+  <script type="module" src="script.js?v=2.4"></script>
 
   <script>
     // ── Sticky navbar scroll shadow ──
@@ -245,9 +248,9 @@
     });
 
   </script>
-  <script src="auth.js?v=2.1"></script>
-  <script src="chat.js?v=2.1"></script>
-  <script src="premium.js?v=3.0"></script>
+  <script src="auth.js?v=2.4"></script>
+  <script src="chat.js?v=2.4"></script>
+  <script src="premium.js?v=3.1"></script>
   <script src="widget.js"></script>
 </body>
 </html>
