@@ -1,9 +1,10 @@
 (function () {
-  if (sessionStorage.getItem('lw_dismissed') === '1') return;
-
   const API = location.hostname === 'localhost' || location.hostname === '127.0.0.1'
     ? 'http://localhost:5001/api'
     : 'https://mmabridge-backend.onrender.com/api';
+
+  const POS_KEY  = 'mmabridge-widget-pos';
+  const DISMISSED_KEY = 'lw_dismissed';
 
   const PLACEHOLDERS = [
     { flag: '🇺🇸', city: 'New York',    ts: Date.now()/1000 - 40  },
@@ -13,8 +14,6 @@
     { flag: '🇧🇷', city: 'São Paulo',   ts: Date.now()/1000 - 740 },
   ];
 
-  const POS_KEY = 'mmabridge-widget-pos';
-
   function timeAgo(ts) {
     const s = Math.floor(Date.now() / 1000) - ts;
     if (s < 60)   return 'just now';
@@ -22,7 +21,7 @@
     return `${Math.floor(s / 3600)}h ago`;
   }
 
-  /* ── Inject CSS ── */
+  /* ── CSS ── */
   const style = document.createElement('style');
   style.textContent = `
     #lw-widget {
@@ -36,24 +35,81 @@
       border-radius: 10px;
       box-shadow: 0 8px 32px rgba(0,0,0,0.55);
       opacity: 0;
-      transition: opacity 0.4s ease, box-shadow 0.2s ease;
+      transition: opacity 0.35s ease, box-shadow 0.2s ease;
       pointer-events: all;
       user-select: none;
       -webkit-user-select: none;
     }
     #lw-widget.lw-visible { opacity: 1; }
-    #lw-widget.lw-hidden {
-      opacity: 0 !important;
-      pointer-events: none !important;
-    }
+    #lw-widget.lw-hidden  { opacity: 0 !important; pointer-events: none !important; }
     #lw-widget.lw-dragging {
       cursor: grabbing !important;
       box-shadow: 0 16px 48px rgba(0,0,0,0.75), 0 0 0 1px rgba(0,229,255,0.12) !important;
-      transition: box-shadow 0.2s ease !important;
     }
+
+    /* ── Collapsed tab ── */
+    #lw-tab {
+      position: fixed;
+      left: 0;
+      width: 28px;
+      height: 70px;
+      z-index: 8000;
+      background: rgba(6,6,8,0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-left: none;
+      border-radius: 0 8px 8px 0;
+      box-shadow: 4px 0 20px rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, background 0.15s ease;
+    }
+    #lw-tab.lw-tab-visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+    #lw-tab:hover {
+      background: rgba(0,229,255,0.08);
+      border-color: rgba(0,229,255,0.2);
+    }
+    #lw-tab-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #00e5ff;
+      animation: lwPulse 2s ease infinite;
+    }
+    #lw-tab-tooltip {
+      position: absolute;
+      left: 36px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(6,6,8,0.95);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 5px;
+      padding: 4px 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.15s ease;
+    }
+    #lw-tab:hover #lw-tab-tooltip { opacity: 1; }
+
     @media (max-width: 768px) {
-      #lw-widget { display: none !important; }
+      #lw-widget, #lw-tab { display: none !important; }
     }
+
     #lw-header {
       display: flex;
       align-items: center;
@@ -122,12 +178,12 @@
       to   { opacity:1; transform: translateX(0); }
     }
     .lw-flag { flex-shrink:0; font-size: 0.78rem; }
-    .lw-city { flex:1; color: rgba(255,255,255,0.65); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .lw-city { flex:1; color: rgba(255,255,255,0.65); font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
     .lw-time { flex-shrink:0; color: rgba(255,255,255,0.25); font-size: 0.58rem; }
   `;
   document.head.appendChild(style);
 
-  /* ── Inject HTML ── */
+  /* ── Widget HTML ── */
   const widget = document.createElement('div');
   widget.id = 'lw-widget';
   widget.innerHTML = `
@@ -139,27 +195,26 @@
   `;
   document.body.appendChild(widget);
 
+  /* ── Tab HTML ── */
+  const tab = document.createElement('div');
+  tab.id = 'lw-tab';
+  tab.innerHTML = `<span id="lw-tab-dot"></span><span id="lw-tab-tooltip">Live Feed</span>`;
+  document.body.appendChild(tab);
+
   /* ── Position helpers ── */
-  function clampPos(x, y) {
-    const W = widget.offsetWidth  || 210;
-    const H = widget.offsetHeight || 120;
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
+  function clampPos(x, y, el) {
+    const W  = el.offsetWidth  || (el === widget ? 210 : 28);
+    const H  = el.offsetHeight || (el === widget ? 120 : 70);
     return {
-      x: Math.max(0, Math.min(x, vw - W)),
-      y: Math.max(0, Math.min(y, vh - H)),
+      x: Math.max(0, Math.min(x, window.innerWidth  - W)),
+      y: Math.max(0, Math.min(y, window.innerHeight - H)),
     };
   }
 
-  function applyPos(x, y) {
-    widget.style.left      = x + 'px';
-    widget.style.top       = y + 'px';
-    widget.style.transform = 'none';
-  }
-
-  function defaultPos() {
-    const H = widget.offsetHeight || 120;
-    return { x: 20, y: Math.round((window.innerHeight - H) / 2) };
+  function applyPos(el, x, y) {
+    el.style.left      = x + 'px';
+    el.style.top       = y + 'px';
+    el.style.transform = 'none';
   }
 
   function savePos(x, y) {
@@ -172,8 +227,7 @@
       if (!raw) return null;
       const { x, y } = JSON.parse(raw);
       if (typeof x !== 'number' || typeof y !== 'number') return null;
-      // Validate: still on screen
-      const W = widget.offsetWidth  || 210;
+      const W = widget.offsetWidth || 210;
       const H = widget.offsetHeight || 120;
       if (x < 0 || y < 0 || x + W > window.innerWidth + 10 || y + H > window.innerHeight + 10) {
         localStorage.removeItem(POS_KEY);
@@ -183,38 +237,47 @@
     } catch { return null; }
   }
 
-  /* ── Apply initial position ── */
-  function initPosition() {
+  function defaultCenterY() {
+    return Math.round((window.innerHeight - (widget.offsetHeight || 120)) / 2);
+  }
+
+  function initWidgetPosition() {
     const saved = loadPos();
     if (saved) {
-      applyPos(saved.x, saved.y);
+      applyPos(widget, saved.x, saved.y);
     } else {
-      // Default: middle-left via CSS (transform approach)
       widget.style.left      = '20px';
       widget.style.top       = '50%';
       widget.style.transform = 'translateY(-50%)';
     }
   }
 
-  /* ── Drag logic ── */
-  let dragging = false;
-  let dragOffX = 0, dragOffY = 0;
+  function syncTabToWidget() {
+    const rect = widget.getBoundingClientRect();
+    const tabH = tab.offsetHeight || 70;
+    const cy   = rect.top + rect.height / 2;
+    const ty   = Math.max(0, Math.min(cy - tabH / 2, window.innerHeight - tabH));
+    tab.style.top       = ty + 'px';
+    tab.style.transform = 'none';
+  }
+
+  /* ── Drag logic (shared for widget) ── */
+  let dragging = false, dragOffX = 0, dragOffY = 0;
 
   function startDrag(clientX, clientY) {
     dragging = true;
     const rect = widget.getBoundingClientRect();
     dragOffX = clientX - rect.left;
     dragOffY = clientY - rect.top;
-    // Switch from transform-based to absolute coords immediately
-    applyPos(rect.left, rect.top);
+    applyPos(widget, rect.left, rect.top);
     widget.classList.add('lw-dragging');
     document.body.style.userSelect = 'none';
   }
 
   function moveDrag(clientX, clientY) {
     if (!dragging) return;
-    const raw = clampPos(clientX - dragOffX, clientY - dragOffY);
-    applyPos(raw.x, raw.y);
+    const p = clampPos(clientX - dragOffX, clientY - dragOffY, widget);
+    applyPos(widget, p.x, p.y);
   }
 
   function endDrag() {
@@ -223,12 +286,12 @@
     widget.classList.remove('lw-dragging');
     document.body.style.userSelect = '';
     const rect = widget.getBoundingClientRect();
-    const clamped = clampPos(rect.left, rect.top);
-    applyPos(clamped.x, clamped.y);
-    savePos(clamped.x, clamped.y);
+    const p = clampPos(rect.left, rect.top, widget);
+    applyPos(widget, p.x, p.y);
+    savePos(p.x, p.y);
+    syncTabToWidget();
   }
 
-  // Mouse
   widget.addEventListener('mousedown', e => {
     if (e.target.id === 'lw-close') return;
     e.preventDefault();
@@ -237,7 +300,6 @@
   document.addEventListener('mousemove', e => { if (dragging) moveDrag(e.clientX, e.clientY); });
   document.addEventListener('mouseup', endDrag);
 
-  // Touch
   widget.addEventListener('touchstart', e => {
     if (e.target.id === 'lw-close') return;
     const t = e.touches[0];
@@ -251,15 +313,14 @@
   }, { passive: false });
   document.addEventListener('touchend', endDrag);
 
-  /* ── Resize: re-clamp if window shrinks ── */
   window.addEventListener('resize', () => {
     const rect = widget.getBoundingClientRect();
-    const clamped = clampPos(rect.left, rect.top);
-    // Only move if actually out of bounds
-    if (clamped.x !== rect.left || clamped.y !== rect.top) {
-      applyPos(clamped.x, clamped.y);
-      savePos(clamped.x, clamped.y);
+    const p = clampPos(rect.left, rect.top, widget);
+    if (Math.abs(p.x - rect.left) > 1 || Math.abs(p.y - rect.top) > 1) {
+      applyPos(widget, p.x, p.y);
+      savePos(p.x, p.y);
     }
+    syncTabToWidget();
   });
 
   /* ── Render entries ── */
@@ -273,17 +334,12 @@
       const key = `${v.city}-${v.ts}`;
       const row = document.createElement('div');
       row.className = 'lw-entry' + (lastKeys.size && !lastKeys.has(key) ? ' lw-new' : '');
-      row.innerHTML = `
-        <span class="lw-flag">${v.flag || '🌍'}</span>
-        <span class="lw-city">${v.city || 'Someone'}</span>
-        <span class="lw-time">${timeAgo(v.ts)}</span>
-      `;
+      row.innerHTML = `<span class="lw-flag">${v.flag||'🌍'}</span><span class="lw-city">${v.city||'Someone'}</span><span class="lw-time">${timeAgo(v.ts)}</span>`;
       list.appendChild(row);
     });
     lastKeys = new Set(items.map(v => `${v.city}-${v.ts}`));
   }
 
-  /* ── Fetch visitors ── */
   async function poll() {
     try {
       const r = await fetch(`${API}/visitors`);
@@ -291,33 +347,60 @@
     } catch { render(null); }
   }
 
-  /* ── Show widget ── */
+  /* ── Show or restore collapsed state ── */
+  const isDismissed = sessionStorage.getItem(DISMISSED_KEY) === '1';
+
   setTimeout(() => {
-    initPosition();
-    widget.classList.add('lw-visible');
+    initWidgetPosition();
+    syncTabToWidget();
+
+    if (isDismissed) {
+      tab.classList.add('lw-tab-visible');
+    } else {
+      widget.classList.add('lw-visible');
+      render(null);
+      fetch(`${API}/visitors/ping`, { method: 'POST' })
+        .then(r => r.ok ? r.json() : null)
+        .then(d => { if (d) render(d); })
+        .catch(() => {});
+      setTimeout(poll, 4000);
+      setInterval(poll, 30000);
+    }
+  }, 1800);
+
+  /* ── Dismiss → show tab ── */
+  document.getElementById('lw-close').addEventListener('click', () => {
+    sessionStorage.setItem(DISMISSED_KEY, '1');
+    syncTabToWidget();
+    widget.classList.remove('lw-visible');
+    widget.classList.add('lw-hidden');
+    setTimeout(() => {
+      widget.classList.add('lw-hidden');
+      tab.classList.add('lw-tab-visible');
+    }, 350);
+  });
+
+  /* ── Tab click → reopen widget ── */
+  tab.addEventListener('click', () => {
+    sessionStorage.removeItem(DISMISSED_KEY);
+    tab.classList.remove('lw-tab-visible');
+    widget.classList.remove('lw-hidden');
+    setTimeout(() => widget.classList.add('lw-visible'), 20);
     render(null);
     fetch(`${API}/visitors/ping`, { method: 'POST' })
       .then(r => r.ok ? r.json() : null)
       .then(d => { if (d) render(d); })
       .catch(() => {});
-    setTimeout(poll, 4000);
-    setInterval(poll, 30000);
-  }, 1800);
-
-  /* ── Dismiss ── */
-  document.getElementById('lw-close').addEventListener('click', () => {
-    sessionStorage.setItem('lw_dismissed', '1');
-    widget.classList.remove('lw-visible');
-    widget.classList.add('lw-hidden');
-    setTimeout(() => widget.remove(), 500);
   });
 
-  /* ── Hide when overlay open ── */
+  /* ── Hide on overlay open ── */
   const observer = new MutationObserver(() => {
-    const hidden = document.body.classList.contains('no-scroll') ||
-                   document.body.classList.contains('overlay-open');
-    widget.classList.toggle('lw-hidden', hidden);
-    if (!hidden) widget.classList.add('lw-visible');
+    const hide = document.body.classList.contains('no-scroll') ||
+                 document.body.classList.contains('overlay-open');
+    widget.classList.toggle('lw-hidden', hide);
+    tab.style.opacity = hide ? '0' : '';
+    tab.style.pointerEvents = hide ? 'none' : '';
+    if (!hide && !sessionStorage.getItem(DISMISSED_KEY)) widget.classList.add('lw-visible');
   });
   observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
 })();

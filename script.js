@@ -213,12 +213,12 @@ async function renderNews() {
     function buildCard(a, idx) {
       return '<a href="' + (a.url||'#') + '" target="_blank" rel="noopener noreferrer" class="card-link" id="news-card-' + idx + '">' +
         '<div class="medium-card">' +
-          '<div style="height:200px;background-color:#111;border-radius:10px 10px 0 0;flex-shrink:0;overflow:hidden;">' +
+          '<div class="card-image" style="background-color:#111;overflow:hidden;">' +
             '<img src="' + (a.imageUrl||'') + '" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="replaceNewsCard(' + idx + ')" />' +
           '</div>' +
-          '<div style="padding:14px 4px 8px;">' +
-            '<div class="nc-title-' + idx + '" style="font-family:Inter,sans-serif;font-size:0.88rem;font-weight:600;color:#fff;line-height:1.4;margin-bottom:6px;">' + (a.title||'') + '</div>' +
-            '<div class="nc-source-' + idx + '" style="font-family:Inter,sans-serif;font-size:0.68rem;color:rgba(255,255,255,0.35);">' + (a.source||'') + '</div>' +
+          '<div style="padding:16px 18px 18px;">' +
+            '<div class="nc-title-' + idx + '" style="font-family:Montserrat,sans-serif;font-size:1.02rem;font-weight:700;color:#fff;line-height:1.4;margin-bottom:10px;">' + (a.title||'') + '</div>' +
+            '<div class="nc-source-' + idx + '" style="font-family:Montserrat,sans-serif;font-size:0.58rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.3);">· ' + (a.source||'') + '</div>' +
           '</div>' +
         '</div>' +
       '</a>';
