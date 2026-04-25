@@ -22,6 +22,7 @@ const FIGHTER_PHOTOS = {
   'magomed-ankalaev':     'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/ANKALAEV_MAGOMED_L_10-26.png',
   'jack-della-maddalena': 'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/5/DELLA_MADDALENA_JACK_L_09-16.png',
   'arman-tsarukyan':      'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/TSARUKYAN_ARMAN_L_11-22.png',
+  'justin-gaethje':       'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/GAETHJE_JUSTIN_L_BELTMOCK.png',
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -86,78 +87,37 @@ document.addEventListener("DOMContentLoaded", async () => {
     return method;
   }
 
-  function renderLast5(fights, slug) {
-    if (!fights?.length) return `<p style="color:rgba(255,255,255,0.4);padding:16px 0;">No recent fights on record</p>`;
+  function renderLast5(fights) {
+    if (!fights?.length) return `<p style="color:rgba(255,255,255,0.4);padding:16px 0;font-family:'Montserrat',sans-serif;font-size:0.82rem;">No recent fights on record</p>`;
 
     const streak = fights.slice(0, 5).map(f => (f.result || '').toUpperCase());
 
-    // Streak bar
     const streakHtml = `
-      <div style="display:flex;gap:6px;margin-bottom:24px;">
+      <div class="pfp-streak-bar">
         ${streak.map(r => {
-          const bg = r === 'W' ? '#16a34a' : r === 'L' ? '#dc2626' : '#555';
-          return `<div style="
-            flex:1;height:36px;border-radius:6px;background:${bg};
-            display:flex;align-items:center;justify-content:center;
-            font-family:Montserrat,sans-serif;font-weight:900;font-size:0.85rem;
-            color:#fff;letter-spacing:0.06em;
-          ">${r}</div>`;
+          const bg = r === 'W' ? '#16a34a' : r === 'L' ? '#dc2626' : '#444';
+          return `<div class="pfp-streak-pill" style="background:${bg};">${r}</div>`;
         }).join('')}
       </div>`;
 
-    // Fight cards
-    const cardsHtml = fights.slice(0, 5).map((f, i) => {
-      const r     = (f.result || '').toUpperCase();
-      const color = r === 'W' ? '#16a34a' : r === 'L' ? '#dc2626' : '#6b7280';
-      const bgTint = r === 'W' ? 'rgba(22,163,74,0.06)' : r === 'L' ? 'rgba(220,38,38,0.06)' : 'rgba(255,255,255,0.03)';
+    const cardsHtml = fights.slice(0, 5).map(f => {
+      const r      = (f.result || '').toUpperCase();
+      const cls    = r === 'W' ? 'win' : r === 'L' ? 'loss' : 'nc';
+      const resBg  = r === 'W' ? '#16a34a' : r === 'L' ? '#dc2626' : '#555';
       const mColor = methodColor(f.method);
       const mLabel = methodLabel(f.method);
-
       return `
-        <div class="bout-card" style="
-          background:${bgTint};
-          border:1px solid rgba(255,255,255,0.06);
-          border-left:3px solid ${color};
-          border-radius:8px;
-          padding:14px 16px;
-          margin-bottom:8px;
-        ">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-            <div style="
-              width:28px;height:28px;border-radius:6px;
-              background:${color};
-              display:flex;align-items:center;justify-content:center;
-              font-family:Montserrat,sans-serif;font-weight:900;font-size:0.75rem;
-              color:#fff;flex-shrink:0;
-            ">${r}</div>
-            <div style="font-family:Montserrat,sans-serif;font-weight:800;font-size:1rem;color:#fff;flex:1;">
-              vs ${esc(f.opponent)}
-            </div>
+        <div class="pfp-fight-card ${cls}">
+          <div class="pfp-fight-top">
+            <div class="pfp-fight-result-badge" style="background:${resBg};">${r}</div>
+            <div class="pfp-fight-opponent">vs ${esc(f.opponent)}</div>
           </div>
-
-          <div style="font-size:0.62rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;
-            color:rgba(255,255,255,0.3);margin-bottom:8px;">
-            ${esc(f.event || '')}
+          <div class="pfp-fight-details">
+            <span class="pfp-fight-method" style="background:${mColor}20;border:1px solid ${mColor}50;color:${mColor};">${esc(mLabel)}</span>
+            ${f.method && mLabel !== f.method ? `<span class="pfp-fight-info">${esc(f.method)}</span>` : ''}
+            <span class="pfp-fight-info" style="margin-left:auto;">R${esc(String(f.round))} · ${esc(f.time||'')}</span>
           </div>
-
-          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-            <div style="
-              padding:3px 10px;border-radius:4px;
-              background:${mColor}22;border:1px solid ${mColor}55;
-              font-size:0.65rem;font-weight:800;letter-spacing:0.1em;
-              text-transform:uppercase;color:${mColor};
-            ">${esc(mLabel)}</div>
-
-            ${f.method && mLabel !== esc(f.method) ? `<div style="
-              font-size:0.62rem;color:rgba(255,255,255,0.4);
-            ">${esc(f.method)}</div>` : ''}
-
-            <div style="
-              margin-left:auto;
-              font-family:monospace;font-size:0.72rem;
-              color:rgba(255,255,255,0.35);letter-spacing:0.04em;
-            ">R${esc(String(f.round))} · ${esc(f.time || '')}</div>
-          </div>
+          ${f.event ? `<div class="pfp-fight-event-name">${esc(f.event)}</div>` : ''}
         </div>`;
     }).join('');
 
@@ -179,83 +139,64 @@ document.addEventListener("DOMContentLoaded", async () => {
         const f = fighters[slug];
         if (!f) return;
 
-        const photo = FIGHTER_PHOTOS[slug];
+        const photo = FIGHTER_PHOTOS[slug] || '';
+        const panel = document.querySelector('#fightDrawer .drawer-panel');
+
         const champBadge = f.champion
-          ? `<div style="display:inline-block;padding:3px 10px;border-radius:4px;background:rgba(200,168,75,0.15);border:1px solid rgba(200,168,75,0.4);font-size:0.6rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#c8a84b;margin-top:6px;">⚡ Champion</div>`
+          ? `<span class="pfp-modal-champ-badge">⚡ ${esc(f.champion)}</span>`
           : '';
 
-        drawerTitle.textContent = f.name;
-        drawerContent.innerHTML = `
-
-          ${photo ? `
-          <div style="
-            position:relative;width:calc(100% + 48px);margin:-24px -24px 0 -24px;
-            height:200px;overflow:hidden;border-radius:0;
-          ">
-            <img src="${photo}" style="
-              width:100%;height:100%;object-fit:cover;object-position:center top;
-              display:block;filter:brightness(0.7);
-            " onerror="this.parentElement.style.display='none'"/>
-            <div style="
-              position:absolute;bottom:0;left:0;right:0;height:120px;
-              background:linear-gradient(transparent, #111);
-            "></div>
-            <div style="
-              position:absolute;bottom:16px;left:20px;
-              font-family:Montserrat,sans-serif;font-weight:900;
-              font-size:1.5rem;color:#fff;letter-spacing:0.02em;
-              text-shadow:0 2px 8px rgba(0,0,0,0.8);
-            ">${esc(f.name)}</div>
-          </div>` : ''}
-
-          <div style="padding-top:${photo ? '16px' : '0'};margin-bottom:20px;">
-            <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
-              <span style="font-size:0.75rem;color:rgba(255,255,255,0.5);">${esc(f.flag)} ${esc(f.country)}</span>
-              <span style="width:1px;height:12px;background:rgba(255,255,255,0.15);"></span>
-              <span style="font-size:0.75rem;color:rgba(255,255,255,0.5);">${esc(f.record)}</span>
-              <span style="width:1px;height:12px;background:rgba(255,255,255,0.15);"></span>
-              <span style="font-size:0.75rem;color:rgba(255,255,255,0.5);">${esc(f.division)}</span>
-            </div>
-            ${champBadge}
-          </div>
-
-          <div style="font-size:0.56rem;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;
-            color:rgba(255,255,255,0.25);margin-bottom:14px;display:flex;align-items:center;gap:10px;">
-            <span>Last 5 Fights</span>
-            <div style="flex:1;height:1px;background:rgba(255,255,255,0.07);"></div>
-          </div>
-
-          ${renderLast5(f.last5, slug)}
-
-          <div style="font-size:0.56rem;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;
-            color:rgba(255,255,255,0.25);margin:20px 0 14px;display:flex;align-items:center;gap:10px;">
-            <span>Profile</span>
-            <div style="flex:1;height:1px;background:rgba(255,255,255,0.07);"></div>
-          </div>
-
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-            ${[['Stance',f.stance],['Age',f.age],['Height',f.height],['Reach',f.reach]].map(([label,val]) => `
-              <div style="background:rgba(255,255,255,0.04);border-radius:6px;padding:10px 12px;">
-                <div style="font-size:0.58rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
-                  color:rgba(255,255,255,0.3);margin-bottom:4px;">${label}</div>
-                <div style="font-size:0.9rem;font-weight:700;color:#fff;">${esc(val)}</div>
+        const statsHtml = `
+          <div class="pfp-stats-grid">
+            ${[['Record',f.record],['Stance',f.stance],['Height',f.height],['Reach',f.reach]].map(([lbl,val]) => `
+              <div class="pfp-stat-box">
+                <div class="pfp-stat-val">${esc(val||'—')}</div>
+                <div class="pfp-stat-lbl">${lbl}</div>
               </div>`).join('')}
+          </div>`;
+
+        panel.innerHTML = `
+          <div class="pfp-photo-col">
+            ${photo ? `<img class="pfp-photo-col-img" src="${photo}" onerror="this.style.display='none'">` : ''}
+            <div class="pfp-photo-col-grad"></div>
+            <div class="pfp-photo-col-info">
+              <div class="pfp-modal-rank-tag">#${f.rank || '?'} P4P</div>
+              <div class="pfp-modal-fighter-name">${esc(f.name)}</div>
+              <div class="pfp-modal-meta-row">
+                <span class="pfp-modal-record">${esc(f.record)}</span>
+                <span class="pfp-modal-sep"></span>
+                <span class="pfp-modal-div">${esc(f.division)}</span>
+                ${champBadge}
+              </div>
+            </div>
           </div>
-        `;
+          <div class="pfp-info-col">
+            <div class="pfp-info-topbar">
+              <span class="pfp-info-country">${esc(f.flag||'')} ${esc(f.country||'')}</span>
+              <button class="drawer-x" id="pfpModalX" aria-label="Close">✕</button>
+            </div>
+            <div class="pfp-info-scroll">
+              <div class="pfp-section-lbl">Profile</div>
+              ${statsHtml}
+              <div class="pfp-section-lbl">Last 5 Fights</div>
+              ${renderLast5(f.last5)}
+            </div>
+          </div>`;
+
+        document.getElementById('pfpModalX').onclick = closeDrawer;
 
         drawer.classList.add("open");
         document.body.classList.add("no-scroll");
 
-        // Stagger animation
         requestAnimationFrame(() => {
-          drawerContent.querySelectorAll('.bout-card').forEach((el, i) => {
+          panel.querySelectorAll('.pfp-fight-card').forEach((el, i) => {
             el.style.opacity = '0';
-            el.style.transform = 'translateY(14px)';
+            el.style.transform = 'translateY(12px)';
             setTimeout(() => {
-              el.style.transition = 'opacity 0.28s ease, transform 0.28s ease';
+              el.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
               el.style.opacity = '1';
               el.style.transform = 'translateY(0)';
-            }, 120 + i * 70);
+            }, 180 + i * 55);
           });
         });
       };
