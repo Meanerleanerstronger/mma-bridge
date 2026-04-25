@@ -3096,10 +3096,12 @@ body.light-mode .rv-row-title { color: rgba(0,0,0,0.75) !important; }
 body.light-mode .rv-row-count { background: rgba(0,0,0,0.04) !important; border-color: rgba(0,0,0,0.07) !important; color: rgba(0,0,0,0.35) !important; }
 body.light-mode .rv-arrow { background: rgba(255,255,255,0.9) !important; border-color: rgba(0,0,0,0.1) !important; color: rgba(0,0,0,0.5) !important; }
 body.light-mode .rv-arrow:hover { background: rgba(0,153,170,0.08) !important; border-color: rgba(0,153,170,0.35) !important; color: #009bb5 !important; }
-body.light-mode .rv-card { background: #fff !important; border-color: rgba(0,0,0,0.09) !important; }
+/* rv-cards are cinematic poster cards — always stay dark regardless of light/dark mode */
+body.light-mode .rv-card { background: #0e0e12 !important; border-color: rgba(255,255,255,0.1) !important; }
 body.light-mode .rv-card .card-name { color: #fff !important; }
-body.light-mode .rv-card .card-matchup { color: rgba(255,255,255,0.6) !important; }
-body.light-mode .rv-card .card-rating { background: rgba(0,0,0,0.65) !important; border-color: rgba(0,153,170,0.3) !important; color: #009bb5 !important; }
+body.light-mode .rv-card .card-matchup { color: rgba(255,255,255,0.58) !important; }
+body.light-mode .rv-card .card-rating { background: rgba(0,0,0,0.7) !important; border-color: rgba(0,229,255,0.3) !important; color: #00e5ff !important; }
+body.light-mode .rv-card .card-badge { background: rgba(0,0,0,0.6) !important; }
 body.light-mode .rv-sort-btn { color: #009bb5 !important; background: rgba(0,153,170,0.07) !important; border-color: rgba(0,153,170,0.28) !important; }
 body.light-mode .rv-sort-drop { background: #fff !important; border-color: rgba(0,153,170,0.2) !important; box-shadow: 0 12px 40px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,153,170,0.04) !important; }
 body.light-mode .rv-sort-drop button { color: rgba(0,0,0,0.5) !important; }
@@ -3386,10 +3388,7 @@ body.light-mode #resultsTrack a div[style*="padding"] {
   background: #fff !important;
 }
 
-/* ── Light mode reviews page text fix ── */
-body.light-mode .rv-card .card-name,
-body.light-mode .rv-card .card-matchup,
-body.light-mode .rv-card,
+/* ── Light mode reviews page text fix (cards stay cinematic/dark) ── */
 body.light-mode .rv-header h1,
 body.light-mode .rv-header p,
 body.light-mode .rv-section-title,

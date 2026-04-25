@@ -9444,6 +9444,35 @@
     "startTime": "19:00"
   },
   {
+    "id": "ufc-fight-night-song-vs-figueiredo",
+    "name": "UFC Fight Night: Song vs. Figueiredo",
+    "type": "FIGHT NIGHT",
+    "date": "Sat, May 30, 2026",
+    "isoDate": "2026-05-30",
+    "location": "Macau, China",
+    "venue": "Galaxy Arena",
+    "poster": "https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-04/053026-ufc-fight-night-song-vs-figueiredo-EVENT-ART.jpg",
+    "status": "upcoming",
+    "mainCard": [
+      { "a": "Song Yadong", "b": "Deiveson Figueiredo", "weight": "Bantamweight", "rounds": "5 Rds", "titleFight": false, "ranked": true, "slot": "main" },
+      { "a": "Alonzo Menifield", "b": "Zhang Mingyang", "weight": "Light Heavyweight", "rounds": "3 Rds", "titleFight": false, "ranked": true, "slot": "comain" },
+      { "a": "Sergei Pavlovich", "b": "Tallison Teixeira", "weight": "Heavyweight", "rounds": "3 Rds", "titleFight": false, "ranked": true, "slot": "" },
+      { "a": "Kai Asakura", "b": "Cameron Smotherman", "weight": "Bantamweight", "rounds": "3 Rds", "titleFight": false, "ranked": false, "slot": "" },
+      { "a": "Alex Perez", "b": "Sumudaerji", "weight": "Flyweight", "rounds": "3 Rds", "titleFight": false, "ranked": true, "slot": "" }
+    ],
+    "prelims": [
+      { "a": "Muslim Salikhov", "b": "Jake Matthews", "weight": "Welterweight", "rounds": "3 Rds", "titleFight": false, "ranked": false, "slot": "" },
+      { "a": "Angela Hill", "b": "Xiong Jingnan", "weight": "Women's Strawweight", "rounds": "3 Rds", "titleFight": false, "ranked": true, "slot": "" },
+      { "a": "Luis Felipe Dias", "b": "Yi Sak Lee", "weight": "Middleweight", "rounds": "3 Rds", "titleFight": false, "ranked": false, "slot": "" },
+      { "a": "Rei Tsuruya", "b": "Jesus Aguilar", "weight": "Flyweight", "rounds": "3 Rds", "titleFight": false, "ranked": false, "slot": "" },
+      { "a": "Loma Lookboonmee", "b": "Jaqueline Amorim", "weight": "Women's Strawweight", "rounds": "3 Rds", "titleFight": false, "ranked": false, "slot": "" },
+      { "a": "Aoriqileng", "b": "Cody Haddon", "weight": "Bantamweight", "rounds": "3 Rds", "titleFight": false, "ranked": false, "slot": "" },
+      { "a": "Meng Ding", "b": "Jose Henrique Souza", "weight": "Welterweight", "rounds": "3 Rds", "titleFight": false, "ranked": false, "slot": "" }
+    ],
+    "earlyPrelims": [],
+    "startTime": "07:00"
+  },
+  {
     "id": "ufc-fight-night-muhammad-vs-bonfim",
     "name": "UFC Fight Night: Muhammad vs. Bonfim",
     "type": "FIGHT NIGHT",
