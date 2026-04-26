@@ -33,15 +33,21 @@
       await sb.auth.signOut();
       location.reload();
     },
-    signInWithEmail:  (email, password) =>
+    signInWithEmail: (email, password) =>
       sb.auth.signInWithPassword({ email, password }),
-    signUpWithEmail:  (email, password, displayName) =>
+    signUpWithEmail: (email, password, displayName) =>
       sb.auth.signUp({ email, password, options: { data: { full_name: displayName } } }),
     signInWithGoogle: () =>
       sb.auth.signInWithOAuth({
         provider: 'google',
         options: { redirectTo: location.origin + '/auth.html' }
       }),
+    resetPassword: (email) =>
+      sb.auth.resetPasswordForEmail(email, {
+        redirectTo: location.origin + '/auth.html'
+      }),
+    updatePassword: (newPassword) =>
+      sb.auth.updateUser({ password: newPassword }),
     getSupabase: () => sb
   };
 
@@ -102,6 +108,14 @@
 
   // ── Auth state listener ───────────────────────
   sb.auth.onAuthStateChange(async (event, session) => {
+    // PASSWORD_RECOVERY: user clicked the reset link in their email
+    // Keep the session so updateUser works, but don't redirect — auth.html handles the UI
+    if (event === 'PASSWORD_RECOVERY') {
+      _session = session;
+      window.dispatchEvent(new CustomEvent('auth:passwordRecovery'));
+      return;
+    }
+
     _session = session;
     if (session?.user) {
       _profile = await ensureProfile(session);

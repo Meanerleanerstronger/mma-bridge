@@ -19,7 +19,6 @@
       display: flex;
       flex-direction: column;
     }
-
     .auth-wrap {
       flex: 1;
       display: flex;
@@ -27,7 +26,6 @@
       justify-content: center;
       padding: 40px 20px;
     }
-
     .auth-card {
       background: #0f0f0f;
       border: 1px solid rgba(255,255,255,0.08);
@@ -38,7 +36,6 @@
       text-align: center;
       box-shadow: 0 0 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,229,255,0.03);
     }
-
     .auth-logo {
       display: flex;
       align-items: center;
@@ -51,7 +48,6 @@
     /* ── Tabs ── */
     .auth-tabs {
       display: flex;
-      gap: 0;
       background: rgba(255,255,255,0.04);
       border-radius: 8px;
       padding: 3px;
@@ -120,13 +116,56 @@
       margin-top: 4px;
       transition: background 0.15s, border-color 0.15s;
     }
-    .auth-submit-btn:hover {
-      background: rgba(0,229,255,0.2);
-      border-color: rgba(0,229,255,0.5);
+    .auth-submit-btn:hover { background: rgba(0,229,255,0.2); border-color: rgba(0,229,255,0.5); }
+    .auth-submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* ── Forgot password link ── */
+    .auth-forgot-link {
+      display: block;
+      text-align: right;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.3);
+      text-decoration: none;
+      margin-top: -6px;
+      margin-bottom: 14px;
+      cursor: pointer;
+      transition: color 0.15s;
     }
-    .auth-submit-btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
+    .auth-forgot-link:hover { color: rgba(0,229,255,0.7); }
+
+    /* ── Back link ── */
+    .auth-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.3);
+      cursor: pointer;
+      margin-bottom: 20px;
+      transition: color 0.15s;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+    .auth-back-link:hover { color: rgba(255,255,255,0.6); }
+
+    /* ── Panel title ── */
+    .auth-panel-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: #fff;
+      margin-bottom: 6px;
+      letter-spacing: 0.02em;
+    }
+    .auth-panel-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 24px;
+      line-height: 1.5;
     }
 
     /* ── Google button ── */
@@ -146,16 +185,11 @@
       font-size: 0.88rem;
       letter-spacing: 0.04em;
       cursor: pointer;
-      text-decoration: none;
       transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
       box-shadow: 0 2px 12px rgba(0,0,0,0.3);
       box-sizing: border-box;
     }
-    .auth-google-btn:hover {
-      background: #f0f0f0;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-    }
+    .auth-google-btn:hover { background: #f0f0f0; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
     .auth-google-btn:active { transform: none; }
     .auth-google-icon { width: 20px; height: 20px; flex-shrink: 0; }
 
@@ -166,10 +200,7 @@
       margin: 20px 0;
     }
     .auth-divider::before, .auth-divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: rgba(255,255,255,0.07);
+      content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.07);
     }
     .auth-divider span {
       font-family: 'Inter', sans-serif;
@@ -198,7 +229,6 @@
       line-height: 1.6;
       text-align: center;
     }
-
     .auth-guest-btn {
       display: block;
       width: 100%;
@@ -216,10 +246,7 @@
       text-align: center;
       box-sizing: border-box;
     }
-    .auth-guest-btn:hover {
-      border-color: rgba(255,255,255,0.2);
-      color: rgba(255,255,255,0.6);
-    }
+    .auth-guest-btn:hover { border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.6); }
 
     @media (max-width: 480px) {
       .auth-card { padding: 32px 20px 28px; }
@@ -250,8 +277,8 @@
         <img src="images/mma-bridge-logo.png" class="nav-logo-img" alt="MMA Bridge" style="height:42px;width:auto;">
       </a>
 
-      <!-- Tabs -->
-      <div class="auth-tabs">
+      <!-- Tabs (hidden when showing forgot/reset panels) -->
+      <div class="auth-tabs" id="authTabs">
         <button class="auth-tab active" id="tabSignIn">Sign In</button>
         <button class="auth-tab" id="tabSignUp">Create Account</button>
       </div>
@@ -259,7 +286,7 @@
       <!-- Feedback -->
       <div class="auth-msg" id="authMsg"></div>
 
-      <!-- Sign In form -->
+      <!-- ── Sign In form ── -->
       <div id="formSignIn">
         <div class="auth-form">
           <div class="auth-field">
@@ -270,6 +297,7 @@
             <label>Password</label>
             <input type="password" id="siPassword" placeholder="••••••••" autocomplete="current-password" />
           </div>
+          <button class="auth-forgot-link" id="forgotLink">Forgot password?</button>
           <button class="auth-submit-btn" id="siBtn">Sign In</button>
         </div>
 
@@ -290,7 +318,7 @@
         </div>
       </div>
 
-      <!-- Sign Up form -->
+      <!-- ── Sign Up form ── -->
       <div id="formSignUp" style="display:none;">
         <div class="auth-form">
           <div class="auth-field">
@@ -321,7 +349,38 @@
         </button>
       </div>
 
-      <div class="auth-fine-print">
+      <!-- ── Forgot password panel ── -->
+      <div id="formForgot" style="display:none;">
+        <button class="auth-back-link" id="forgotBack">← Back to sign in</button>
+        <div class="auth-panel-title">Reset your password</div>
+        <div class="auth-panel-sub">Enter your email and we'll send you a reset link.</div>
+        <div class="auth-form">
+          <div class="auth-field">
+            <label>Email</label>
+            <input type="email" id="fpEmail" placeholder="your@email.com" autocomplete="email" />
+          </div>
+          <button class="auth-submit-btn" id="fpBtn">Send Reset Link</button>
+        </div>
+      </div>
+
+      <!-- ── Reset password panel (shown after clicking email link) ── -->
+      <div id="formReset" style="display:none;">
+        <div class="auth-panel-title">Set new password</div>
+        <div class="auth-panel-sub">Choose a strong password for your account.</div>
+        <div class="auth-form">
+          <div class="auth-field">
+            <label>New Password</label>
+            <input type="password" id="rpPassword" placeholder="At least 6 characters" autocomplete="new-password" />
+          </div>
+          <div class="auth-field">
+            <label>Confirm Password</label>
+            <input type="password" id="rpConfirm" placeholder="Repeat your new password" autocomplete="new-password" />
+          </div>
+          <button class="auth-submit-btn" id="rpBtn">Update Password</button>
+        </div>
+      </div>
+
+      <div class="auth-fine-print" id="authFinePrint">
         By signing in you agree to our terms. We store only your display name and profile picture.
       </div>
 
@@ -330,38 +389,71 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase.js"></script>
-  <script src="auth.js?v=3.0"></script>
+  <script src="auth.js?v=3.1"></script>
   <script>
     (function () {
       const msgEl      = document.getElementById('authMsg');
+      const authTabs   = document.getElementById('authTabs');
       const tabSignIn  = document.getElementById('tabSignIn');
       const tabSignUp  = document.getElementById('tabSignUp');
       const formSignIn = document.getElementById('formSignIn');
       const formSignUp = document.getElementById('formSignUp');
+      const formForgot = document.getElementById('formForgot');
+      const formReset  = document.getElementById('formReset');
+      const finePrint  = document.getElementById('authFinePrint');
 
       function showMsg(text, type) {
         msgEl.textContent = text;
         msgEl.className   = 'auth-msg ' + (type || '');
       }
 
+      function hideAll() {
+        formSignIn.style.display = 'none';
+        formSignUp.style.display = 'none';
+        formForgot.style.display = 'none';
+        formReset.style.display  = 'none';
+      }
+
       function setTab(tab) {
+        authTabs.style.display = '';
         const isSignIn = tab === 'signin';
         tabSignIn.classList.toggle('active',  isSignIn);
         tabSignUp.classList.toggle('active', !isSignIn);
+        hideAll();
         formSignIn.style.display = isSignIn ? '' : 'none';
         formSignUp.style.display = isSignIn ? 'none' : '';
+        finePrint.style.display  = '';
         showMsg('');
       }
 
+      function showForgot() {
+        authTabs.style.display = 'none';
+        hideAll();
+        formForgot.style.display = '';
+        finePrint.style.display  = 'none';
+        showMsg('');
+        document.getElementById('fpEmail').focus();
+      }
+
+      function showReset() {
+        authTabs.style.display = 'none';
+        hideAll();
+        formReset.style.display = '';
+        finePrint.style.display = 'none';
+        showMsg('');
+        document.getElementById('rpPassword').focus();
+      }
+
+      // ── Tabs ─────────────────────────────────
       tabSignIn.addEventListener('click', () => setTab('signin'));
       tabSignUp.addEventListener('click', () => setTab('signup'));
 
-      // Customise heading if coming from a review page
+      // ── Context hint ─────────────────────────
       if ((sessionStorage.getItem('auth_return_to') || '').includes('event-review')) {
         showMsg('Sign in to leave a review and be brought straight back.', '');
       }
 
-      // ── Sign In ──────────────────────────────
+      // ── Sign In ───────────────────────────────
       document.getElementById('siBtn').addEventListener('click', async () => {
         const email    = document.getElementById('siEmail').value.trim();
         const password = document.getElementById('siPassword').value;
@@ -374,17 +466,14 @@
           showMsg(error.message || 'Sign-in failed. Check your credentials.', 'error');
           btn.disabled = false; btn.textContent = 'Sign In';
         }
-        // On success, onAuthStateChange in auth.js handles the redirect
       });
-
-      // Enter key on sign-in fields
       ['siEmail','siPassword'].forEach(id => {
         document.getElementById(id).addEventListener('keydown', e => {
           if (e.key === 'Enter') document.getElementById('siBtn').click();
         });
       });
 
-      // ── Sign Up ──────────────────────────────
+      // ── Sign Up ───────────────────────────────
       document.getElementById('suBtn').addEventListener('click', async () => {
         const name     = document.getElementById('suName').value.trim();
         const email    = document.getElementById('suEmail').value.trim();
@@ -404,21 +493,71 @@
           setTab('signin');
         }
       });
-
-      // Enter key on sign-up fields
       ['suName','suEmail','suPassword'].forEach(id => {
         document.getElementById(id).addEventListener('keydown', e => {
           if (e.key === 'Enter') document.getElementById('suBtn').click();
         });
       });
 
-      // ── Google OAuth ─────────────────────────
+      // ── Forgot password ───────────────────────
+      document.getElementById('forgotLink').addEventListener('click', showForgot);
+      document.getElementById('forgotBack').addEventListener('click', () => setTab('signin'));
+
+      document.getElementById('fpBtn').addEventListener('click', async () => {
+        const email = document.getElementById('fpEmail').value.trim();
+        if (!email) { showMsg('Please enter your email.', 'error'); return; }
+        const btn = document.getElementById('fpBtn');
+        btn.disabled = true; btn.textContent = 'Sending…';
+        showMsg('');
+        const { error } = await window.MMABridgeAuth.resetPassword(email);
+        if (error) {
+          showMsg(error.message || 'Could not send reset email.', 'error');
+          btn.disabled = false; btn.textContent = 'Send Reset Link';
+        } else {
+          showMsg('Reset link sent! Check your inbox (and spam folder).', 'success');
+          btn.disabled = false; btn.textContent = 'Send Reset Link';
+        }
+      });
+      document.getElementById('fpEmail').addEventListener('keydown', e => {
+        if (e.key === 'Enter') document.getElementById('fpBtn').click();
+      });
+
+      // ── Set new password (after clicking email link) ──
+      document.getElementById('rpBtn').addEventListener('click', async () => {
+        const password = document.getElementById('rpPassword').value;
+        const confirm  = document.getElementById('rpConfirm').value;
+        if (!password || !confirm) { showMsg('Please fill in both fields.', 'error'); return; }
+        if (password.length < 6)   { showMsg('Password must be at least 6 characters.', 'error'); return; }
+        if (password !== confirm)  { showMsg('Passwords do not match.', 'error'); return; }
+        const btn = document.getElementById('rpBtn');
+        btn.disabled = true; btn.textContent = 'Updating…';
+        showMsg('');
+        const { error } = await window.MMABridgeAuth.updatePassword(password);
+        if (error) {
+          showMsg(error.message || 'Could not update password.', 'error');
+          btn.disabled = false; btn.textContent = 'Update Password';
+        } else {
+          showMsg('Password updated! Redirecting…', 'success');
+          setTimeout(() => location.replace('index.html'), 2000);
+        }
+      });
+      ['rpPassword','rpConfirm'].forEach(id => {
+        document.getElementById(id).addEventListener('keydown', e => {
+          if (e.key === 'Enter') document.getElementById('rpBtn').click();
+        });
+      });
+
+      // ── Google OAuth ──────────────────────────
       document.getElementById('googleSignInBtn').addEventListener('click', () => {
         window.MMABridgeAuth.signInWithGoogle();
       });
       document.getElementById('googleSignUpBtn').addEventListener('click', () => {
         window.MMABridgeAuth.signInWithGoogle();
       });
+
+      // ── PASSWORD_RECOVERY event from auth.js ──
+      // Fires when user arrives via the reset email link
+      window.addEventListener('auth:passwordRecovery', showReset);
     })();
   </script>
   <script src="chat.js?v=2.1"></script>
