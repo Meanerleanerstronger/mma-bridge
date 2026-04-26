@@ -265,6 +265,34 @@
     .ov-rounds  { font-family:'Inter',sans-serif;font-size:.5rem;color:rgba(255,255,255,.2);margin-top:3px; }
     .ov-slot-tag { font-size:.44rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-top:4px; }
 
+    /* ── RESULT ROWS (completed events) ── */
+    .ov-fighter.won {
+      color:#fff;
+      text-shadow:0 0 24px rgba(255,255,255,.18),0 1px 8px rgba(0,0,0,.7);
+    }
+    .ov-fighter.lost {
+      color:rgba(255,255,255,.28);
+      text-shadow:none;
+      font-weight:700;
+    }
+    .ov-fight.is-main .ov-fighter.lost { font-size:1.85rem; }
+    .ov-result-method {
+      font-family:'Montserrat',sans-serif;
+      font-weight:900;font-size:.82rem;
+      letter-spacing:.14em;text-transform:uppercase;
+      margin-bottom:3px;
+    }
+    .ov-result-detail {
+      font-family:'Inter',sans-serif;
+      font-size:.52rem;font-weight:600;
+      color:rgba(255,255,255,.32);
+      letter-spacing:.1em;text-transform:uppercase;
+    }
+    .ov-win-pip {
+      display:inline-block;width:5px;height:5px;border-radius:50%;
+      margin-right:7px;vertical-align:middle;flex-shrink:0;
+    }
+
     /* FOTN hover pill — appears on hover, centered in fight row */
     .ov-fotn-hover {
       position:absolute;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);
@@ -703,6 +731,21 @@
       col.innerHTML='';
       const isUpcoming=ev.status==='upcoming';
 
+      /* map method string to display label + colour */
+      function methodStyle(m){
+        if(!m) return {label:'',color:'rgba(255,255,255,.35)'};
+        const u=m.toUpperCase();
+        if(u==='KO'||u.startsWith('KO '))   return {label:'KO',  color:'#e53935'};
+        if(u.includes('TKO'))                return {label:'TKO', color:'#e53935'};
+        if(u==='NC'||u.includes('NO CONT')) return {label:'NC',  color:'rgba(255,255,255,.3)'};
+        if(u.includes('SUB')||u.includes('CHOKE')||u.includes('CRANK')||u.includes('TRIANGLE')||u.includes('RNC'))
+                                              return {label:'SUB', color:'#8b5cf6'};
+        if(u==='UD')  return {label:'UD',  color:'rgba(0,229,255,.75)'};
+        if(u==='MD')  return {label:'MD',  color:'rgba(0,229,255,.65)'};
+        if(u==='SD')  return {label:'SD',  color:'rgba(0,229,255,.55)'};
+        return {label:m, color:'rgba(255,255,255,.45)'};
+      }
+
       function headCell(url,flip){
         if(!isUpcoming) return '';
         const img=url?`<img class="ov-headshot" src="${url}" alt="" onerror="this.style.display='none'">`:'';
@@ -720,26 +763,43 @@
           const isMain=f.slot==='main', isComain=f.slot==='comain';
           const mainCls=isMain?(isPPV?'is-main ppv-main':'is-main'):isComain?'is-comain':'';
           const dimCls=(!isMain&&!isComain)?'dim':'';
+          const hasResult=!isUpcoming&&f.winner;
 
           const row=document.createElement('div');
           row.className=`ov-fight ${mainCls}${isUpcoming?' has-shots':''}`;
 
-          /* FOTN pill text */
-          const fotnText=`⭐ Predict as FOTN: ${lastName(f.a)} vs ${lastName(f.b)}`;
-
-          row.innerHTML=`
-            ${headCell(f.imgA,false)}
-            <div class="ov-fighter ${dimCls}">${esc(f.a)}</div>
-            <div class="ov-fight-mid">
-              ${f.titleFight?`<div class="ov-title-badge">🏆 Title</div>`:''}
-              <div class="ov-weight">${esc(f.weight||'')}</div>
-              ${f.rounds?`<div class="ov-rounds">${esc(f.rounds)}</div>`:''}
-              ${isMain?`<div class="ov-slot-tag" style="color:${accent}">MAIN EVENT</div>`:isComain?`<div class="ov-slot-tag" style="color:rgba(0,229,255,.5)">CO-MAIN</div>`:''}
-            </div>
-            <div class="ov-fighter right ${dimCls}">${esc(f.b)}</div>
-            ${headCell(f.imgB,true)}
-            <div class="ov-fotn-hover">${esc(fotnText)}</div>
-          `;
+          if(hasResult){
+            /* ── RESULT ROW ── */
+            const aWon=f.winner===f.a;
+            const ms=methodStyle(f.method);
+            const pip=`<span class="ov-win-pip" style="background:${ms.color};box-shadow:0 0 6px ${ms.color};"></span>`;
+            row.innerHTML=`
+              <div class="ov-fighter ${dimCls} ${aWon?'won':'lost'}">${aWon?pip:''}${esc(f.a)}</div>
+              <div class="ov-fight-mid">
+                ${f.titleFight?`<div class="ov-title-badge">🏆 Title</div>`:''}
+                <div class="ov-weight">${esc(f.weight||'')}</div>
+                <div class="ov-result-method" style="color:${ms.color}">${esc(ms.label)}</div>
+                <div class="ov-result-detail">Rd ${esc(String(f.round))} · ${esc(f.time||'')}</div>
+              </div>
+              <div class="ov-fighter right ${dimCls} ${aWon?'lost':'won'}">${esc(f.b)}${!aWon?`&thinsp;${pip}`:''}</div>
+            `;
+          } else {
+            /* ── UPCOMING / NO RESULT ROW ── */
+            const fotnText=`⭐ Predict as FOTN: ${lastName(f.a)} vs ${lastName(f.b)}`;
+            row.innerHTML=`
+              ${headCell(f.imgA,false)}
+              <div class="ov-fighter ${dimCls}">${esc(f.a)}</div>
+              <div class="ov-fight-mid">
+                ${f.titleFight?`<div class="ov-title-badge">🏆 Title</div>`:''}
+                <div class="ov-weight">${esc(f.weight||'')}</div>
+                ${f.rounds?`<div class="ov-rounds">${esc(f.rounds)}</div>`:''}
+                ${isMain?`<div class="ov-slot-tag" style="color:${accent}">MAIN EVENT</div>`:isComain?`<div class="ov-slot-tag" style="color:rgba(0,229,255,.5)">CO-MAIN</div>`:''}
+              </div>
+              <div class="ov-fighter right ${dimCls}">${esc(f.b)}</div>
+              ${headCell(f.imgB,true)}
+              <div class="ov-fotn-hover">${esc(fotnText)}</div>
+            `;
+          }
           col.appendChild(row);
         });
       }

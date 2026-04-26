@@ -1383,10 +1383,41 @@ body.light-mode .drawer-backdrop {
 }
 .pfp-info-country {
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.58rem; font-weight: 800;
-  letter-spacing: 0.16em; text-transform: uppercase;
-  color: rgba(255,255,255,0.22);
+  font-size: 1.05rem; font-weight: 800;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.72);
   margin-right: auto;
+  display: flex; align-items: center; gap: 10px;
+}
+.pfp-info-country .pfp-country-flag {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+.pfp-info-country .pfp-country-name {
+  font-size: 0.78rem; font-weight: 800;
+  letter-spacing: 0.16em;
+  color: rgba(255,255,255,0.55);
+}
+.pfp-division-header {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.48rem; font-weight: 800;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  margin-bottom: 10px;
+  display: flex; align-items: center; gap: 10px;
+}
+.pfp-division-header::before,
+.pfp-division-header::after {
+  content: ''; flex: 1; height: 1px;
+  background: rgba(255,255,255,0.07);
+}
+.pfp-division-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.7rem; font-weight: 900;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  text-align: center;
+  margin-bottom: 14px;
 }
 .pfp-info-scroll {
   flex: 1; overflow-y: auto;
@@ -1509,7 +1540,11 @@ body.light-mode .pfp-photo-col-grad {
 }
 body.light-mode .pfp-info-col { background: #f2f2f5; border-left-color: rgba(0,0,0,0.07); }
 body.light-mode .pfp-info-topbar { border-bottom-color: rgba(0,0,0,0.07); }
-body.light-mode .pfp-info-country { color: rgba(0,0,0,0.3); }
+body.light-mode .pfp-info-country { color: rgba(0,0,0,0.55); }
+body.light-mode .pfp-info-country .pfp-country-name { color: rgba(0,0,0,0.45); }
+body.light-mode .pfp-division-header { color: rgba(0,0,0,0.25); }
+body.light-mode .pfp-division-header::before,
+body.light-mode .pfp-division-header::after { background: rgba(0,0,0,0.08); }
 body.light-mode .pfp-modal-fighter-name { color: #fff; }
 body.light-mode .pfp-stat-box { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.08); }
 body.light-mode .pfp-stat-val { color: #111; }

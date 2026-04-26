@@ -147,6 +147,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           : '';
 
         const statsHtml = `
+          <div class="pfp-division-header">${esc(f.division||'')}</div>
           <div class="pfp-stats-grid">
             ${[['Record',f.record],['Stance',f.stance],['Height',f.height],['Reach',f.reach]].map(([lbl,val]) => `
               <div class="pfp-stat-box">
@@ -164,19 +165,19 @@ document.addEventListener("DOMContentLoaded", async () => {
               <div class="pfp-modal-fighter-name">${esc(f.name)}</div>
               <div class="pfp-modal-meta-row">
                 <span class="pfp-modal-record">${esc(f.record)}</span>
-                <span class="pfp-modal-sep"></span>
-                <span class="pfp-modal-div">${esc(f.division)}</span>
-                ${champBadge}
+                ${champBadge ? `<span class="pfp-modal-sep"></span>${champBadge}` : ''}
               </div>
             </div>
           </div>
           <div class="pfp-info-col">
             <div class="pfp-info-topbar">
-              <span class="pfp-info-country">${esc(f.flag||'')} ${esc(f.country||'')}</span>
+              <span class="pfp-info-country">
+                <span class="pfp-country-flag">${esc(f.flag||'')}</span>
+                <span class="pfp-country-name">${esc(f.country||'')}</span>
+              </span>
               <button class="drawer-x" id="pfpModalX" aria-label="Close">✕</button>
             </div>
             <div class="pfp-info-scroll">
-              <div class="pfp-section-lbl">Profile</div>
               ${statsHtml}
               <div class="pfp-section-lbl">Last 5 Fights</div>
               ${renderLast5(f.last5)}
