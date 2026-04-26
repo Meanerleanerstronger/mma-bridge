@@ -3,60 +3,10 @@
 // ==============================================
 
 (function () {
-  const sb = window._sb;
-
-  // Guard: if Supabase CDN failed to load, still render Sign In/Sign Up
-  if (!sb) {
-    document.addEventListener('DOMContentLoaded', () => renderNavAuth(null));
-    return;
-  }
-
-  let _session = null;
-  let _profile = null;
-
-  function apiBase() {
-    const local = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-    return local ? 'http://localhost:5001/api' : 'https://mmabridge-backend.onrender.com/api';
-  }
-
-  function getToken() { return _session?.access_token || null; }
-  function getUser()  { return _profile || null; }
-
   function escHtml(s) {
     return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
-  window.MMABridgeAuth = {
-    getToken,
-    getUser,
-    apiBase,
-    authHeaders: () => {
-      const t = getToken();
-      return t ? { 'Authorization': `Bearer ${t}` } : {};
-    },
-    signOut: async () => {
-      await sb.auth.signOut();
-      location.reload();
-    },
-    signInWithEmail: (email, password) =>
-      sb.auth.signInWithPassword({ email, password }),
-    signUpWithEmail: (email, password, displayName) =>
-      sb.auth.signUp({ email, password, options: { data: { full_name: displayName } } }),
-    signInWithGoogle: () =>
-      sb.auth.signInWithOAuth({
-        provider: 'google',
-        options: { redirectTo: location.origin + '/auth.html' }
-      }),
-    resetPassword: (email) =>
-      sb.auth.resetPasswordForEmail(email, {
-        redirectTo: location.origin + '/auth.html'
-      }),
-    updatePassword: (newPassword) =>
-      sb.auth.updateUser({ password: newPassword }),
-    getSupabase: () => sb
-  };
-
-  // ── Navbar rendering ──────────────────────────
   function renderNavAuth(user) {
     document.querySelectorAll('.nav-auth').forEach(el => {
       if (user) {
@@ -65,7 +15,7 @@
             <img class="nav-avatar" src="${escHtml(user.avatar_url || '')}" alt="${escHtml(user.display_name || '')}" onerror="this.style.display='none'">
             <span class="nav-username">${escHtml(user.display_name || 'Fighter')}</span>
             <div class="nav-user-drop">
-              <button class="nav-signout-btn" onclick="window.MMABridgeAuth.signOut()">Sign out</button>
+              <button type="button" class="nav-signout-btn" onclick="window.MMABridgeAuth.signOut()">Sign out</button>
             </div>
           </div>`;
       } else {
@@ -82,7 +32,7 @@
             <img class="nav-avatar" src="${escHtml(user.avatar_url || '')}" alt="${escHtml(user.display_name || '')}" onerror="this.style.display='none'">
             <span>${escHtml(user.display_name || 'Fighter')}</span>
           </div>
-          <button class="nav-mobile-signout" onclick="window.MMABridgeAuth.signOut()">Sign out</button>`;
+          <button type="button" class="nav-mobile-signout" onclick="window.MMABridgeAuth.signOut()">Sign out</button>`;
       } else {
         el.innerHTML = `
           <a class="nav-signin-link" href="auth.html" style="display:block;margin-bottom:10px;">Sign In</a>
@@ -90,6 +40,65 @@
       }
     });
   }
+
+  // Scripts load at bottom of body — DOM is already parsed, render immediately
+  renderNavAuth(null);
+
+  const sb = window._sb;
+
+  // Always expose MMABridgeAuth so other scripts never throw on missing methods
+  function apiBase() {
+    const local = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+    return local ? 'http://localhost:5001/api' : 'https://mmabridge-backend.onrender.com/api';
+  }
+
+  // Stub (overwritten below if Supabase is available)
+  window.MMABridgeAuth = {
+    getToken:       () => null,
+    getUser:        () => null,
+    apiBase,
+    authHeaders:    () => ({}),
+    signOut:        () => location.reload(),
+    signInWithEmail:  () => Promise.resolve({ error: { message: 'Auth service unavailable' } }),
+    signUpWithEmail:  () => Promise.resolve({ error: { message: 'Auth service unavailable' } }),
+    signInWithGoogle: () => {},
+    resetPassword:    () => Promise.resolve({ error: { message: 'Auth service unavailable' } }),
+    updatePassword:   () => Promise.resolve({ error: { message: 'Auth service unavailable' } }),
+    getSupabase:      () => null,
+  };
+
+  if (!sb) return; // buttons already shown; Supabase CDN failed to load
+
+  let _session = null;
+  let _profile  = null;
+
+  // Override stubs with real implementations
+  window.MMABridgeAuth = {
+    getToken:    () => _session?.access_token || null,
+    getUser:     () => _profile || null,
+    apiBase,
+    authHeaders: () => {
+      const t = _session?.access_token || null;
+      return t ? { 'Authorization': `Bearer ${t}` } : {};
+    },
+    signOut: async () => {
+      await sb.auth.signOut();
+      location.reload();
+    },
+    signInWithEmail: (email, password) =>
+      sb.auth.signInWithPassword({ email, password }),
+    signUpWithEmail: (email, password, displayName) =>
+      sb.auth.signUp({ email, password, options: { data: { full_name: displayName } } }),
+    signInWithGoogle: () =>
+      sb.auth.signInWithOAuth({
+        provider: 'google',
+        options: { redirectTo: location.origin + '/auth.html' }
+      }),
+    resetPassword: (email) =>
+      sb.auth.resetPasswordForEmail(email, { redirectTo: location.origin + '/auth.html' }),
+    updatePassword: (newPassword) => sb.auth.updateUser({ password: newPassword }),
+    getSupabase: () => sb,
+  };
 
   // ── Profile helpers ───────────────────────────
   async function loadProfile(userId) {
@@ -111,9 +120,25 @@
     return profile;
   }
 
+  // ── Helper: redirect away from auth.html ──────
+  function redirectFromAuth(label) {
+    const returnTo = sessionStorage.getItem('auth_return_to') || 'index.html';
+    sessionStorage.removeItem('auth_return_to');
+    if (label === 'signed_in') {
+      // Give auth.html a moment to show welcome message
+      window.dispatchEvent(new CustomEvent('auth:signedIn'));
+      setTimeout(() => location.replace(returnTo), 1200);
+    } else {
+      location.replace(returnTo);
+    }
+  }
+
+  function onAuthHtml() {
+    return location.pathname.endsWith('auth.html');
+  }
+
   // ── Auth state listener ───────────────────────
   sb.auth.onAuthStateChange(async (event, session) => {
-    // Password reset link — let auth.html handle the UI
     if (event === 'PASSWORD_RECOVERY') {
       _session = session;
       window.dispatchEvent(new CustomEvent('auth:passwordRecovery'));
@@ -122,45 +147,22 @@
 
     _session = session;
 
-    // ── Redirect logic (runs BEFORE awaiting profile) ────
-    // This prevents ensureProfile DB latency from delaying the redirect
-    if (event === 'SIGNED_IN' && location.pathname.endsWith('auth.html')) {
-      const returnTo = sessionStorage.getItem('auth_return_to') || 'index.html';
-      sessionStorage.removeItem('auth_return_to');
-      // Signal auth.html to show welcome message
-      window.dispatchEvent(new CustomEvent('auth:signedIn'));
-      // Load profile in background, then redirect after brief welcome
+    // Handle auth.html: both SIGNED_IN (email) and INITIAL_SESSION (Google OAuth callback)
+    if (onAuthHtml() && session?.user &&
+        (event === 'SIGNED_IN' || event === 'INITIAL_SESSION')) {
       if (session?.user) {
         ensureProfile(session).then(p => { _profile = p; });
       }
-      setTimeout(() => location.replace(returnTo), 1200);
+      redirectFromAuth(event === 'SIGNED_IN' ? 'signed_in' : 'immediate');
       return;
     }
 
-    // ── Normal session update (other pages) ─────
+    // Normal pages — update navbar
     if (session?.user) {
       _profile = await ensureProfile(session);
     } else {
       _profile = null;
     }
     renderNavAuth(_profile);
-  });
-
-  // ── Initial render ────────────────────────────
-  document.addEventListener('DOMContentLoaded', async () => {
-    // Show Sign In/Sign Up immediately — no async gap
-    renderNavAuth(null);
-
-    const { data: { session } } = await sb.auth.getSession();
-
-    // Already signed in and visiting auth.html → redirect away immediately
-    if (session && location.pathname.endsWith('auth.html')) {
-      const returnTo = sessionStorage.getItem('auth_return_to') || 'index.html';
-      sessionStorage.removeItem('auth_return_to');
-      location.replace(returnTo);
-      return;
-    }
-
-    // onAuthStateChange handles updating the navbar when session exists
   });
 })();
