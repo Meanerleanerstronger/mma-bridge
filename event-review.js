@@ -1,6 +1,5 @@
 // ==============================================
-// MMA BRIDGE — EVENT REVIEW PAGE
-// Layout: Poster → Stars → Text review → Full fight card
+// MMA BRIDGE — EVENT REVIEW PAGE (Supabase)
 // ==============================================
 
 import CONFIG, { debugLog } from './config.js';
@@ -9,20 +8,20 @@ import API from './api.js';
 const root       = document.getElementById('erRoot');
 const breadcrumb = document.getElementById('breadcrumbName');
 
-
 function esc(s) {
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 function slugify(s) {
   return (s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
 }
-function getApiBase() {
-  return CONFIG?.API?.BASE_URL || 'https://mmabridge-backend.onrender.com/api';
-}
+
+// ── Supabase helpers ──────────────────────────
+function sb() { return window._sb; }
+function currentUserId() { return window.MMABridgeAuth?.getUser()?.id || null; }
+function isLoggedIn() { return !!window.MMABridgeAuth?.getToken(); }
 
 // ── Load event ────────────────────────────────
 async function resolveEvent(eventId) {
-  // Try sessionStorage first
   try {
     const cached = sessionStorage.getItem('review_event');
     if (cached) {
@@ -30,40 +29,11 @@ async function resolveEvent(eventId) {
       if ((ev.id || slugify(ev.name || ev.eventName || '')) === eventId) return ev;
     }
   } catch {}
-  // Load directly from events.json by ID
   try {
     const all = await fetch('/events.json').then(r => r.json());
     return all.find(ev => ev.id === eventId || slugify(ev.name || '') === eventId) || null;
   } catch {}
   return null;
-}
-
-function pingBackend() {
-  fetch(`${getApiBase()}/health`).catch(() => {});
-}
-
-async function fetchCommunityRating(eventId) {
-  try {
-    const r = await fetch(`${getApiBase()}/ratings/${encodeURIComponent(eventId)}`);
-    if (!r.ok) return null;
-    return await r.json();
-  } catch { return null; }
-}
-
-async function fetchReviews(eventId, attempt = 0) {
-  try {
-    const r = await fetch(`${getApiBase()}/reviews/${encodeURIComponent(eventId)}`, {
-      headers: authHeaders()
-    });
-    if (!r.ok) throw new Error(`HTTP ${r.status}`);
-    return await r.json();
-  } catch (e) {
-    if (attempt < 2) {
-      await new Promise(res => setTimeout(res, 3000 * (attempt + 1)));
-      return fetchReviews(eventId, attempt + 1);
-    }
-    return null; // null = failed, [] = genuinely empty
-  }
 }
 
 function requireAuth() {
@@ -93,15 +63,109 @@ function revStars(rating) {
   }).join('');
 }
 
-function replyItemHtml(rp, isLoggedIn, currentUserId) {
-  const isOwnReply = !!(currentUserId && +rp.user_id === currentUserId);
+// ── Community rating ──────────────────────────
+async function fetchCommunityRating(eventId) {
+  try {
+    const { data, error } = await sb()
+      .from('ratings')
+      .select('hype_rating')
+      .eq('event_id', eventId);
+    if (error || !data?.length) return null;
+    const avg = (data.reduce((s, r) => s + Number(r.hype_rating), 0) / data.length).toFixed(1);
+    return { avg_hype: avg, total_ratings: data.length };
+  } catch { return null; }
+}
+
+// ── Reviews feed ──────────────────────────────
+async function fetchReviews(eventId) {
+  try {
+    const { data: reviews, error } = await sb()
+      .from('ratings')
+      .select('*, profiles(display_name, avatar_url)')
+      .eq('event_id', eventId)
+      .order('created_at', { ascending: false });
+    if (error) throw error;
+    if (!reviews?.length) return [];
+
+    const reviewIds = reviews.map(r => r.id);
+    const uid = currentUserId();
+
+    const [{ data: likes }, { data: replyCounts }] = await Promise.all([
+      sb().from('review_likes').select('rating_id, user_id').in('rating_id', reviewIds),
+      sb().from('review_replies').select('rating_id').in('rating_id', reviewIds)
+    ]);
+
+    return reviews.map(r => ({
+      id:           r.id,
+      user_id:      r.user_id,
+      display_name: r.profiles?.display_name || 'Anonymous',
+      hype_rating:  r.hype_rating,
+      review_text:  r.review_text,
+      created_at:   r.created_at,
+      like_count:   likes?.filter(l => l.rating_id === r.id).length || 0,
+      user_liked:   uid ? !!(likes?.find(l => l.rating_id === r.id && l.user_id === uid)) : false,
+      reply_count:  replyCounts?.filter(rc => rc.rating_id === r.id).length || 0
+    }));
+  } catch (e) {
+    debugLog('fetchReviews error', e);
+    return null;
+  }
+}
+
+// ── Submit / update rating ────────────────────
+async function submitRating(eventId, eventName, rating, reviewText) {
+  const uid = currentUserId();
+  if (!uid) throw new Error('Not logged in');
+  const { data, error } = await sb().from('ratings').insert({
+    user_id: uid, event_id: eventId, event_name: eventName,
+    hype_rating: rating, review_text: reviewText || null
+  }).select().single();
+  if (error) throw error;
+  return { rating_id: data.id };
+}
+
+async function updateRating(ratingId, rating, reviewText) {
+  const { error } = await sb().from('ratings').update({
+    hype_rating: rating, review_text: reviewText || null,
+    updated_at: new Date().toISOString()
+  }).eq('id', ratingId);
+  if (error) throw error;
+}
+
+// ── Get user's own existing rating ────────────
+async function fetchMyRating(eventId) {
+  const uid = currentUserId();
+  if (!uid) return null;
+  try {
+    const { data } = await sb().from('ratings')
+      .select('id, hype_rating, review_text')
+      .eq('user_id', uid)
+      .eq('event_id', eventId)
+      .maybeSingle();
+    return data ? { rating_id: data.id, hype_rating: data.hype_rating, review_text: data.review_text } : null;
+  } catch { return null; }
+}
+
+// ── Stored rating (localStorage cache) ────────
+function getStoredRating(eventId) {
+  try { return JSON.parse(localStorage.getItem(`er_rated_${eventId}`)) || null; }
+  catch { return null; }
+}
+function saveStoredRating(eventId, data) {
+  try { localStorage.setItem(`er_rated_${eventId}`, JSON.stringify(data)); } catch {}
+}
+
+// ── Reply item HTML ───────────────────────────
+function replyItemHtml(rp, uid) {
+  const loggedIn   = isLoggedIn();
+  const isOwnReply = !!(uid && rp.user_id === uid);
   return `
     <div class="er-reply-meta">
       <span class="er-reply-author">${esc(rp.display_name)}</span>
       <span class="er-reply-time">${timeAgo(rp.created_at)}</span>
     </div>
-    <div class="er-reply-text">${esc(rp.reply_text)}</div>
-    ${!isOwnReply && isLoggedIn ? `
+    <div class="er-reply-text">${esc(rp.reply_text || rp.text || '')}</div>
+    ${!isOwnReply && loggedIn ? `
       <button class="er-reply-like-btn${rp.user_liked ? ' liked' : ''}"
               data-reply-id="${rp.id}" data-liked="${rp.user_liked ? '1' : '0'}">
         <span class="er-like-icon">♥</span>
@@ -109,9 +173,10 @@ function replyItemHtml(rp, isLoggedIn, currentUserId) {
       </button>` : (rp.like_count ? `<span style="font-size:0.67rem;color:rgba(255,255,255,0.2)">♥ ${rp.like_count}</span>` : '')}`;
 }
 
+// ── Render reviews list ───────────────────────
 function renderReviews(reviews, container) {
-  const isLoggedIn   = !!window.MMABridgeAuth?.getToken();
-  const currentUserId = window.MMABridgeAuth?.getUser()?.id ? +window.MMABridgeAuth.getUser().id : null;
+  const uid = currentUserId();
+  const loggedIn = isLoggedIn();
 
   if (!reviews.length) {
     container.innerHTML = `
@@ -124,8 +189,8 @@ function renderReviews(reviews, container) {
 
   const SHOW_INIT = 3;
   const cards = reviews.map((rv, i) => {
-    const hidden   = i >= SHOW_INIT ? ' hidden' : '';
-    const isOwn    = !!(currentUserId && rv.user_id && +rv.user_id === currentUserId);
+    const hidden  = i >= SHOW_INIT ? ' hidden' : '';
+    const isOwn   = !!(uid && rv.user_id === uid);
     const textHtml = rv.review_text ? `
       <div class="er-rev-text-wrap">
         <div class="er-rev-text">${esc(rv.review_text)}</div>
@@ -205,22 +270,30 @@ function renderReviews(reviews, container) {
     container.querySelector('#erShowMoreWrap')?.remove();
   });
 
-  // ── Like buttons ─────────────────────────────
+  // ── Review like buttons ───────────────────────
   container.querySelectorAll('.er-like-btn').forEach(btn => {
     btn.addEventListener('click', async () => {
-      if (!isLoggedIn) { requireAuth(); return; }
+      if (!isLoggedIn()) { requireAuth(); return; }
       const reviewId = btn.dataset.reviewId;
       const countEl  = btn.querySelector('.er-like-count');
       btn.disabled = true;
       try {
-        const res = await fetch(`${getApiBase()}/reviews/${reviewId}/like`, {
-          method: 'POST', headers: authHeaders()
-        });
-        if (!res.ok) throw new Error();
-        const { liked, like_count } = await res.json();
+        const uid = currentUserId();
+        const { data: existing } = await sb()
+          .from('review_likes').select('id').eq('user_id', uid).eq('rating_id', reviewId).maybeSingle();
+        let liked;
+        if (existing) {
+          await sb().from('review_likes').delete().eq('id', existing.id);
+          liked = false;
+        } else {
+          await sb().from('review_likes').insert({ user_id: uid, rating_id: reviewId });
+          liked = true;
+        }
+        const { count } = await sb().from('review_likes')
+          .select('*', { count: 'exact', head: true }).eq('rating_id', reviewId);
         btn.dataset.liked = liked ? '1' : '0';
         btn.classList.toggle('liked', liked);
-        countEl.textContent = like_count;
+        countEl.textContent = count ?? 0;
       } catch {} finally { btn.disabled = false; }
     });
   });
@@ -228,7 +301,7 @@ function renderReviews(reviews, container) {
   // ── Reply buttons ─────────────────────────────
   container.querySelectorAll('.er-reply-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      if (!isLoggedIn) { requireAuth(); return; }
+      if (!isLoggedIn()) { requireAuth(); return; }
       const reviewId  = btn.dataset.reviewId;
       const inputWrap = container.querySelector(`.er-reply-input-wrap[data-review-id="${reviewId}"]`);
       const visible   = inputWrap.classList.toggle('visible');
@@ -236,7 +309,7 @@ function renderReviews(reviews, container) {
     });
   });
 
-  // ── Edit own review button ────────────────────
+  // ── Edit own review ───────────────────────────
   container.querySelectorAll('.er-edit-own-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const submitBtn = document.querySelector('#erSubmit');
@@ -251,18 +324,38 @@ function renderReviews(reviews, container) {
       const reviewId = btn.dataset.reviewId;
       const wrap     = container.querySelector(`.er-replies-wrap[data-review-id="${reviewId}"]`);
       const isOpen   = wrap.classList.contains('open');
+
       if (!isOpen) {
         if (!wrap.dataset.loaded) {
           wrap.innerHTML = `<div style="padding:6px 0 6px 13px;font-size:0.72rem;color:rgba(255,255,255,0.18);">Loading…</div>`;
           wrap.classList.add('open');
           try {
-            const res = await fetch(`${getApiBase()}/reviews/${reviewId}/replies`, { headers: authHeaders() });
-            const replies = res.ok ? await res.json() : [];
-            if (replies.length) {
-              wrap.innerHTML = replies.map(rp =>
-                `<div class="er-reply-item" data-reply-id="${rp.id}">${replyItemHtml(rp, isLoggedIn, currentUserId)}</div>`
+            const uid = currentUserId();
+            const { data: replies } = await sb()
+              .from('review_replies')
+              .select('*, profiles(display_name)')
+              .eq('rating_id', reviewId)
+              .order('created_at', { ascending: true });
+
+            const replyIds = (replies || []).map(r => r.id);
+            const { data: replyLikes } = replyIds.length
+              ? await sb().from('reply_likes').select('reply_id, user_id').in('reply_id', replyIds)
+              : { data: [] };
+
+            if (replies?.length) {
+              const mapped = replies.map(r => ({
+                id:           r.id,
+                user_id:      r.user_id,
+                display_name: r.profiles?.display_name || 'Anonymous',
+                text:         r.text,
+                created_at:   r.created_at,
+                like_count:   replyLikes?.filter(l => l.reply_id === r.id).length || 0,
+                user_liked:   uid ? !!(replyLikes?.find(l => l.reply_id === r.id && l.user_id === uid)) : false
+              }));
+              wrap.innerHTML = mapped.map(r =>
+                `<div class="er-reply-item" data-reply-id="${r.id}">${replyItemHtml(r, uid)}</div>`
               ).join('');
-              wireReplyLikes(wrap, isLoggedIn);
+              wireReplyLikes(wrap);
             } else {
               wrap.innerHTML = '';
             }
@@ -297,34 +390,34 @@ function renderReviews(reviews, container) {
       if (!text) return;
       submitBtn.disabled = true;
       try {
-        const res = await fetch(`${getApiBase()}/reviews/${reviewId}/reply`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', ...authHeaders() },
-          body: JSON.stringify({ reply_text: text })
-        });
-        if (!res.ok) throw new Error();
-        const data = await res.json();
+        const uid = currentUserId();
+        const { data: newReply, error } = await sb()
+          .from('review_replies')
+          .insert({ user_id: uid, rating_id: reviewId, text })
+          .select().single();
+        if (error) throw error;
 
         textarea.value = '';
         inputWrap.classList.remove('visible');
 
-        // Append reply to the replies wrap
         const wrap = container.querySelector(`.er-replies-wrap[data-review-id="${reviewId}"]`);
-        const newItem = document.createElement('div');
-        newItem.className = 'er-reply-item';
-        newItem.dataset.replyId = data.reply_id;
-        newItem.innerHTML = replyItemHtml({
-          id: data.reply_id, user_id: currentUserId,
-          display_name: data.display_name, reply_text: text,
-          created_at: data.created_at, like_count: 0, user_liked: false
-        }, isLoggedIn, currentUserId);
-        wrap.appendChild(newItem);
+        const profile = window.MMABridgeAuth?.getUser();
+        const item = document.createElement('div');
+        item.className = 'er-reply-item';
+        item.dataset.replyId = newReply.id;
+        item.innerHTML = replyItemHtml({
+          id:           newReply.id,
+          user_id:      uid,
+          display_name: profile?.display_name || 'You',
+          text,
+          created_at:   newReply.created_at,
+          like_count:   0,
+          user_liked:   false
+        }, uid);
+        wrap.appendChild(item);
         wrap.dataset.loaded = '1';
-
-        // Show & open replies wrap
         if (!wrap.classList.contains('open')) wrap.classList.add('open');
 
-        // Update or create the toggle button
         let toggle = section.querySelector('.er-replies-toggle');
         const toggleWrap = section.querySelector('.er-replies-toggle-wrap');
         const newCount = (toggle ? (+toggle.dataset.count || 0) : 0) + 1;
@@ -333,7 +426,7 @@ function renderReviews(reviews, container) {
           toggle.className = 'er-replies-toggle';
           toggle.dataset.reviewId = reviewId;
           toggleWrap.appendChild(toggle);
-          toggle.addEventListener('click', async () => {
+          toggle.addEventListener('click', () => {
             const isOpen2 = wrap.classList.contains('open');
             wrap.classList.toggle('open', !isOpen2);
             toggle.textContent = `${isOpen2 ? '↳' : '↑'} ${toggle.dataset.count} ${+toggle.dataset.count === 1 ? 'reply' : 'replies'}`;
@@ -349,21 +442,29 @@ function renderReviews(reviews, container) {
   });
 }
 
-function wireReplyLikes(wrap, isLoggedIn) {
+function wireReplyLikes(wrap) {
   wrap.querySelectorAll('.er-reply-like-btn').forEach(btn => {
     btn.addEventListener('click', async () => {
-      if (!isLoggedIn) { requireAuth(); return; }
-      const replyId  = btn.dataset.replyId;
-      const countEl  = btn.querySelector('.er-reply-like-count');
+      if (!isLoggedIn()) { requireAuth(); return; }
+      const replyId = btn.dataset.replyId;
+      const countEl = btn.querySelector('.er-reply-like-count');
       btn.disabled = true;
       try {
-        const res = await fetch(`${getApiBase()}/replies/${replyId}/like`, {
-          method: 'POST', headers: authHeaders()
-        });
-        if (!res.ok) throw new Error();
-        const { liked, like_count } = await res.json();
+        const uid = currentUserId();
+        const { data: existing } = await sb()
+          .from('reply_likes').select('id').eq('user_id', uid).eq('reply_id', replyId).maybeSingle();
+        let liked;
+        if (existing) {
+          await sb().from('reply_likes').delete().eq('id', existing.id);
+          liked = false;
+        } else {
+          await sb().from('reply_likes').insert({ user_id: uid, reply_id: replyId });
+          liked = true;
+        }
+        const { count } = await sb().from('reply_likes')
+          .select('*', { count: 'exact', head: true }).eq('reply_id', replyId);
         btn.classList.toggle('liked', liked);
-        countEl.textContent = like_count;
+        countEl.textContent = count ?? 0;
       } catch {} finally { btn.disabled = false; }
     });
   });
@@ -377,51 +478,13 @@ async function loadAndRenderReviews(eventId) {
   if (reviews === null) {
     feed.innerHTML = `
       <div class="er-reviews-empty">
-        <div>Couldn't load reviews — backend may be waking up.</div>
+        <div>Couldn't load reviews.</div>
         <button class="er-retry-btn" style="margin-top:10px;background:none;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.5);border-radius:6px;padding:6px 14px;cursor:pointer;font-size:0.78rem">Retry</button>
       </div>`;
     feed.querySelector('.er-retry-btn')?.addEventListener('click', () => loadAndRenderReviews(eventId));
     return;
   }
   renderReviews(reviews, feed);
-}
-
-function authHeaders() {
-  return window.MMABridgeAuth?.authHeaders() || {};
-}
-
-async function submitRating(eventId, eventName, rating, reviewText) {
-  const r = await fetch(`${getApiBase()}/ratings`, {
-    method: 'POST',
-    headers: {'Content-Type':'application/json', ...authHeaders()},
-    body: JSON.stringify({
-      event_id: eventId,
-      event_name: eventName,
-      hype_rating: rating,
-      fotn_prediction: null,
-      review_text: reviewText || null
-    })
-  });
-  if (!r.ok) throw new Error('Submit failed');
-  return r.json();
-}
-
-async function updateRating(ratingId, rating, reviewText) {
-  const r = await fetch(`${getApiBase()}/ratings/${ratingId}`, {
-    method: 'PUT',
-    headers: {'Content-Type':'application/json', ...authHeaders()},
-    body: JSON.stringify({ hype_rating: rating, review_text: reviewText || null })
-  });
-  if (!r.ok) throw new Error('Update failed');
-  return r.json();
-}
-
-function getStoredRating(eventId) {
-  try { return JSON.parse(localStorage.getItem(`er_rated_${eventId}`)) || null; }
-  catch { return null; }
-}
-function saveStoredRating(eventId, data) {
-  try { localStorage.setItem(`er_rated_${eventId}`, JSON.stringify(data)); } catch {}
 }
 
 // ── Fight card section ────────────────────────
@@ -436,7 +499,6 @@ function fightRow(f) {
     f.ranked     ? '⭐' : '',
   ].filter(Boolean).join(' ');
 
-  // Result display
   const METHOD_LABELS = {
     'KO':'🥊 KO','TKO':'🥊 TKO','SUB':'⛓️ Sub',
     'UD':'📋 UD','SD':'📋 SD','MD':'📋 MD',
@@ -510,7 +572,6 @@ function renderPage(ev, community) {
   root.innerHTML = `
     <div class="er-page">
 
-      <!-- POSTER -->
       ${poster ? `
         <div class="er-hero">
           <img class="er-hero-img" src="${esc(poster)}" alt="${esc(name)}">
@@ -538,10 +599,8 @@ function renderPage(ev, community) {
 
       <div class="er-two-col">
 
-        <!-- LEFT: rating form + fight card -->
         <div class="er-content">
 
-          <!-- COMMUNITY SCORE -->
           <div class="er-community-bar">
             <span class="er-comm-label">Community Rating</span>
             <span class="er-comm-val" id="erCommVal">
@@ -549,7 +608,6 @@ function renderPage(ev, community) {
             </span>
           </div>
 
-          <!-- STAR RATING -->
           <div class="er-card">
             <div class="er-card-title">How was the card?</div>
             <div class="er-stars" id="erStars">
@@ -564,7 +622,6 @@ function renderPage(ev, community) {
             </div>
           </div>
 
-          <!-- TEXT REVIEW -->
           <div class="er-card">
             <div class="er-card-title">Leave a review <span class="er-optional">(optional)</span></div>
             <textarea id="erReviewText"
@@ -573,23 +630,20 @@ function renderPage(ev, community) {
             ></textarea>
           </div>
 
-          <!-- SUBMIT -->
           <button class="er-submit" id="erSubmit" disabled>Submit Review</button>
           <div class="er-toast" id="erToast">✅ Review saved — thanks!</div>
           <div class="er-error-msg" id="erErr" style="display:none"></div>
 
-          <!-- FIGHT CARD -->
           ${hasCard ? `
             <div class="er-card er-card-fights">
               <div class="er-card-title">Full Fight Card</div>
-              ${fightSection('Main Card',    ev.mainCard)}
-              ${fightSection('Prelims',      ev.prelims)}
-              ${fightSection('Early Prelims',ev.earlyPrelims)}
+              ${fightSection('Main Card',     ev.mainCard)}
+              ${fightSection('Prelims',       ev.prelims)}
+              ${fightSection('Early Prelims', ev.earlyPrelims)}
             </div>` : ''}
 
         </div>
 
-        <!-- RIGHT: fan reviews feed -->
         <div class="er-reviews-col">
           <div class="er-reviews-heading">Fan Reviews</div>
           <div id="erReviewsFeed">
@@ -603,7 +657,7 @@ function renderPage(ev, community) {
       </div>
     </div>`;
 
-  // ── Stars ─────────────────────────────────
+  // ── Stars ──────────────────────────────────
   let selected = 0;
   const starsEl   = root.querySelector('#erStars');
   const numEl     = root.querySelector('#erRatingNum');
@@ -611,8 +665,6 @@ function renderPage(ev, community) {
   const toast     = root.querySelector('#erToast');
   const errEl     = root.querySelector('#erErr');
   const textarea  = root.querySelector('#erReviewText');
-
-  const isLoggedIn = !!window.MMABridgeAuth?.getToken();
 
   function updateStars(val) {
     starsEl.querySelectorAll('.er-star-wrap').forEach(w => {
@@ -625,22 +677,19 @@ function renderPage(ev, community) {
   }
 
   starsEl.addEventListener('mouseover', e => {
-    if (!isLoggedIn) return;
+    if (!isLoggedIn()) return;
     const zone = e.target.closest('.er-half-l, .er-half-r');
     if (!zone) return;
-    const v = +zone.dataset.val;
-    updateStars(v);
-    numEl.textContent = `${v}`;
+    updateStars(+zone.dataset.val);
+    numEl.textContent = zone.dataset.val;
   });
-
   starsEl.addEventListener('mouseleave', () => {
-    if (!isLoggedIn) return;
+    if (!isLoggedIn()) return;
     updateStars(selected);
     numEl.textContent = selected ? `${selected}` : '';
   });
-
   starsEl.addEventListener('click', e => {
-    if (!isLoggedIn) { requireAuth(); return; }
+    if (!isLoggedIn()) { requireAuth(); return; }
     const zone = e.target.closest('.er-half-l, .er-half-r');
     if (!zone) return;
     selected = +zone.dataset.val;
@@ -650,10 +699,9 @@ function renderPage(ev, community) {
   });
 
   textarea.addEventListener('focus', () => {
-    if (!isLoggedIn) { textarea.blur(); requireAuth(); }
+    if (!isLoggedIn()) { textarea.blur(); requireAuth(); }
   }, true);
 
-  // ── Lock/unlock helpers ───────────────────
   function lockForm() {
     starsEl.style.pointerEvents = 'none';
     textarea.disabled = true;
@@ -662,7 +710,6 @@ function renderPage(ev, community) {
     submitBtn.textContent = 'Edit your review';
     submitBtn.dataset.mode = 'locked';
   }
-
   function unlockForm() {
     starsEl.style.pointerEvents = '';
     textarea.disabled = false;
@@ -685,7 +732,7 @@ function renderPage(ev, community) {
     }
   }
 
-  // ── Pre-fill if already rated ─────────────
+  // ── Pre-fill from localStorage cache ─────────
   let savedData = getStoredRating(eventId);
   if (savedData) {
     selected = savedData.hype_rating;
@@ -695,35 +742,28 @@ function renderPage(ev, community) {
     lockForm();
   }
 
-  // Fetch from backend (authoritative, works cross-device)
-  if (isLoggedIn) {
-    fetch(`${getApiBase()}/ratings/my/${encodeURIComponent(eventId)}`, {
-      headers: authHeaders()
-    }).then(async r => {
-      if (!r.ok) return;
-      const data = await r.json();
-      savedData = { rating_id: data.rating_id, hype_rating: data.hype_rating, review_text: data.review_text };
+  // Fetch authoritative data from Supabase
+  if (isLoggedIn()) {
+    fetchMyRating(eventId).then(data => {
+      if (!data) return;
+      savedData = data;
       saveStoredRating(eventId, savedData);
       selected = data.hype_rating;
       updateStars(selected);
       numEl.textContent = `${selected}`;
       textarea.value = data.review_text || '';
       lockForm();
-    }).catch(() => {});
+    });
   }
 
   textarea.addEventListener('focus', () => { if (!textarea.disabled) textarea.style.borderColor = 'rgba(0,255,255,0.45)'; });
   textarea.addEventListener('blur',  () => textarea.style.borderColor = '#222');
 
-  // ── Submit / Edit ─────────────────────────
+  // ── Submit / Edit ─────────────────────────────
   submitBtn.addEventListener('click', async () => {
-    // Unlock for editing
-    if (submitBtn.dataset.mode === 'locked') {
-      unlockForm();
-      return;
-    }
-
+    if (submitBtn.dataset.mode === 'locked') { unlockForm(); return; }
     if (!selected) return;
+
     const reviewText = textarea.value.trim();
     const isEdit = submitBtn.dataset.mode === 'editing';
 
@@ -733,38 +773,31 @@ function renderPage(ev, community) {
 
     try {
       let ratingId = savedData?.rating_id;
-
       if (isEdit && ratingId) {
         await updateRating(ratingId, selected, reviewText);
       } else {
         const res = await submitRating(eventId, name, selected, reviewText);
         ratingId = res.rating_id;
       }
-
       savedData = { rating_id: ratingId, hype_rating: selected, review_text: reviewText };
       saveStoredRating(eventId, savedData);
-
       toast.classList.add('show');
       lockForm();
       refreshCommunity();
-
     } catch (err) {
-      console.error('Submit error:', err);
+      debugLog('Submit error:', err);
       submitBtn.disabled = false;
       submitBtn.textContent = isEdit ? 'Update Review' : 'Submit Review';
       errEl.style.display = 'block';
-      errEl.textContent = 'Could not save — the backend may be waking up, try again in a moment.';
+      errEl.textContent = 'Could not save — please try again.';
     }
   });
 
-  // ── Load initial reviews ──────────────────
   loadAndRenderReviews(eventId);
 }
 
 // ── Init ──────────────────────────────────────
 (async () => {
-  pingBackend(); // wake Render free tier before user hits submit
-
   const params  = new URLSearchParams(window.location.search);
   const eventId = params.get('id');
 
@@ -780,14 +813,13 @@ function renderPage(ev, community) {
       resolveEvent(eventId),
       fetchCommunityRating(eventId)
     ]);
-
     if (!ev) {
       root.innerHTML = `<div class="er-empty">Event not found. <a href="reviews.html">← Back</a></div>`;
       return;
     }
     renderPage(ev, community);
   } catch (err) {
-    console.error(err);
+    debugLog(err);
     root.innerHTML = `<div class="er-empty">Failed to load. <a href="reviews.html">← Back</a></div>`;
   }
 })();

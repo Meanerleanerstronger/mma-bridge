@@ -1,27 +1,26 @@
 // ==============================================
-// MMA BRIDGE — AUTH MODULE
-// Manages Google OAuth JWT, user state, navbar
+// MMA BRIDGE — AUTH MODULE (Supabase)
 // ==============================================
 
 (function () {
-  const TOKEN_KEY = 'mma_bridge_token';
-  const USER_KEY  = 'mma_bridge_user';
+  const sb = window._sb;
+
+  let _session = null;
+  let _profile = null;
 
   function apiBase() {
     const local = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
     return local ? 'http://localhost:5001/api' : 'https://mmabridge-backend.onrender.com/api';
   }
 
-  function getToken()  { return localStorage.getItem(TOKEN_KEY); }
-  function getUser()   { try { return JSON.parse(localStorage.getItem(USER_KEY)); } catch { return null; } }
-  function clearAuth() { localStorage.removeItem(TOKEN_KEY); localStorage.removeItem(USER_KEY); }
+  function getToken() { return _session?.access_token || null; }
+  function getUser()  { return _profile || null; }
 
-  function setAuth(token, user) {
-    localStorage.setItem(TOKEN_KEY, token);
-    localStorage.setItem(USER_KEY, JSON.stringify(user));
+  function escHtml(s) {
+    return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
-  // Exposed on window for other scripts (event-review.js etc.)
+  // Exposed on window — API-compatible with old auth.js
   window.MMABridgeAuth = {
     getToken,
     getUser,
@@ -29,17 +28,31 @@
     authHeaders: () => {
       const t = getToken();
       return t ? { 'Authorization': `Bearer ${t}` } : {};
-    }
+    },
+    signOut: async () => {
+      await sb.auth.signOut();
+      location.reload();
+    },
+    signInWithEmail:  (email, password) =>
+      sb.auth.signInWithPassword({ email, password }),
+    signUpWithEmail:  (email, password, displayName) =>
+      sb.auth.signUp({ email, password, options: { data: { full_name: displayName } } }),
+    signInWithGoogle: () =>
+      sb.auth.signInWithOAuth({
+        provider: 'google',
+        options: { redirectTo: location.origin + '/auth.html' }
+      }),
+    getSupabase: () => sb
   };
 
-  // ── Render navbar auth slot ──────────────────
+  // ── Navbar rendering ──────────────────────────
   function renderNavAuth(user) {
     document.querySelectorAll('.nav-auth').forEach(el => {
       if (user) {
         el.innerHTML = `
           <div class="nav-user" id="navUser_${Math.random().toString(36).slice(2)}">
-            <img class="nav-avatar" src="${escHtml(user.avatar_url || '')}" alt="${escHtml(user.display_name)}" onerror="this.style.display='none'">
-            <span class="nav-username">${escHtml(user.display_name)}</span>
+            <img class="nav-avatar" src="${escHtml(user.avatar_url || '')}" alt="${escHtml(user.display_name || '')}" onerror="this.style.display='none'">
+            <span class="nav-username">${escHtml(user.display_name || 'Fighter')}</span>
             <div class="nav-user-drop">
               <button class="nav-signout-btn" onclick="window.MMABridgeAuth.signOut()">Sign out</button>
             </div>
@@ -51,13 +64,12 @@
       }
     });
 
-    // Mobile overlay sign-in slot
     document.querySelectorAll('.nav-auth-mobile').forEach(el => {
       if (user) {
         el.innerHTML = `
           <div class="nav-mobile-user">
-            <img class="nav-avatar" src="${escHtml(user.avatar_url || '')}" alt="${escHtml(user.display_name)}" onerror="this.style.display='none'">
-            <span>${escHtml(user.display_name)}</span>
+            <img class="nav-avatar" src="${escHtml(user.avatar_url || '')}" alt="${escHtml(user.display_name || '')}" onerror="this.style.display='none'">
+            <span>${escHtml(user.display_name || 'Fighter')}</span>
           </div>
           <button class="nav-mobile-signout" onclick="window.MMABridgeAuth.signOut()">Sign out</button>`;
       } else {
@@ -68,69 +80,55 @@
     });
   }
 
-  window.MMABridgeAuth.signOut = function () {
-    clearAuth();
-    location.reload();
-  };
-
-  function escHtml(s) {
-    return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  // ── Profile helpers ───────────────────────────
+  async function loadProfile(userId) {
+    try {
+      const { data } = await sb.from('profiles').select('*').eq('id', userId).single();
+      return data || null;
+    } catch { return null; }
   }
 
-  // ── Init ─────────────────────────────────────
+  async function ensureProfile(session) {
+    let profile = await loadProfile(session.user.id);
+    if (!profile) {
+      const meta   = session.user.user_metadata || {};
+      const name   = meta.full_name || meta.name || session.user.email?.split('@')[0] || 'Fighter';
+      const avatar = meta.avatar_url || meta.picture || '';
+      await sb.from('profiles').upsert({ id: session.user.id, display_name: name, avatar_url: avatar });
+      profile = { id: session.user.id, display_name: name, avatar_url: avatar };
+    }
+    return profile;
+  }
+
+  // ── Auth state listener ───────────────────────
+  sb.auth.onAuthStateChange(async (event, session) => {
+    _session = session;
+    if (session?.user) {
+      _profile = await ensureProfile(session);
+    } else {
+      _profile = null;
+    }
+    renderNavAuth(_profile);
+
+    // After successful sign-in on auth.html, redirect back
+    if (event === 'SIGNED_IN' && location.pathname.endsWith('auth.html')) {
+      const returnTo = sessionStorage.getItem('auth_return_to') || 'index.html';
+      sessionStorage.removeItem('auth_return_to');
+      location.replace(returnTo);
+    }
+  });
+
+  // Initial render (before onAuthStateChange fires)
   document.addEventListener('DOMContentLoaded', async () => {
-    const params = new URLSearchParams(location.search);
-    const token  = params.get('token');
-    const error  = params.get('error');
-
-    // Handle post-OAuth redirect: ?token=<jwt>
-    if (token) {
-      try {
-        const r = await fetch(`${apiBase()}/auth/me`, {
-          headers: { 'Authorization': `Bearer ${token}` }
-        });
-        if (r.ok) {
-          const user = await r.json();
-          setAuth(token, user);
-          const returnTo = sessionStorage.getItem('auth_return_to') || 'index.html';
-          sessionStorage.removeItem('auth_return_to');
-          location.replace(returnTo);
-          return;
-        }
-      } catch {}
-      // Token bad — stay on auth page
-      clearAuth();
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session) {
+      renderNavAuth(null);
     }
-
-    if (error) {
-      const msg = document.getElementById('auth-error-msg');
-      if (msg) msg.textContent = 'Sign-in failed. Please try again.';
-    }
-
-    // Already logged in and on auth.html — redirect home
-    const existingToken = getToken();
-    if (existingToken && location.pathname.endsWith('auth.html')) {
-      location.replace('index.html');
-      return;
-    }
-
-    // Render navbar
-    const user = getUser();
-    renderNavAuth(user);
-
-    // Silently refresh user data in background
-    if (existingToken && user) {
-      fetch(`${apiBase()}/auth/me`, {
-        headers: { 'Authorization': `Bearer ${existingToken}` }
-      }).then(r => {
-        if (!r.ok) { clearAuth(); renderNavAuth(null); return; }
-        return r.json();
-      }).then(fresh => {
-        if (fresh) {
-          localStorage.setItem(USER_KEY, JSON.stringify(fresh));
-          renderNavAuth(fresh);
-        }
-      }).catch(() => {});
+    // If already signed in and on auth.html, redirect away
+    if (session && location.pathname.endsWith('auth.html')) {
+      const returnTo = sessionStorage.getItem('auth_return_to') || 'index.html';
+      sessionStorage.removeItem('auth_return_to');
+      location.replace(returnTo);
     }
   });
 })();

@@ -32,7 +32,7 @@
       background: #0f0f0f;
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 16px;
-      padding: 48px 44px 44px;
+      padding: 44px 44px 40px;
       width: 100%;
       max-width: 400px;
       text-align: center;
@@ -44,47 +44,99 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
       text-decoration: none;
     }
-    .auth-logo .logo-mma {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
-      font-size: 1.3rem;
-      letter-spacing: 0.08em;
-      color: #fff;
-    }
-    .auth-logo .logo-icon { width: 28px; height: 28px; }
-    .auth-logo .logo-bridge {
-      font-family: 'Pacifico', cursive;
-      font-size: 1.3rem;
-      color: #fff;
-    }
 
-    .auth-title {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      font-size: 1.35rem;
-      color: #fff;
-      margin-bottom: 8px;
-      letter-spacing: 0.02em;
+    /* ── Tabs ── */
+    .auth-tabs {
+      display: flex;
+      gap: 0;
+      background: rgba(255,255,255,0.04);
+      border-radius: 8px;
+      padding: 3px;
+      margin-bottom: 28px;
     }
-
-    .auth-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.85rem;
+    .auth-tab {
+      flex: 1;
+      padding: 9px;
+      background: none;
+      border: none;
+      border-radius: 6px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
       color: rgba(255,255,255,0.38);
-      margin-bottom: 36px;
-      line-height: 1.5;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .auth-tab.active {
+      background: rgba(255,255,255,0.09);
+      color: #fff;
     }
 
+    /* ── Form fields ── */
+    .auth-form { text-align: left; }
+    .auth-field { margin-bottom: 14px; }
+    .auth-field label {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .auth-field input {
+      width: 100%;
+      box-sizing: border-box;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      color: #fff;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .auth-field input::placeholder { color: rgba(255,255,255,0.2); }
+    .auth-field input:focus { border-color: rgba(0,229,255,0.5); }
+
+    .auth-submit-btn {
+      width: 100%;
+      padding: 13px;
+      background: rgba(0,229,255,0.12);
+      border: 1px solid rgba(0,229,255,0.3);
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      color: #00e5ff;
+      cursor: pointer;
+      margin-top: 4px;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .auth-submit-btn:hover {
+      background: rgba(0,229,255,0.2);
+      border-color: rgba(0,229,255,0.5);
+    }
+    .auth-submit-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* ── Google button ── */
     .auth-google-btn {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 12px;
       width: 100%;
-      padding: 14px 20px;
+      padding: 13px 20px;
       background: #fff;
       color: #1a1a1a;
       border: none;
@@ -97,6 +149,7 @@
       text-decoration: none;
       transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
       box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+      box-sizing: border-box;
     }
     .auth-google-btn:hover {
       background: #f0f0f0;
@@ -104,18 +157,13 @@
       box-shadow: 0 4px 20px rgba(0,0,0,0.4);
     }
     .auth-google-btn:active { transform: none; }
-
-    .auth-google-icon {
-      width: 20px;
-      height: 20px;
-      flex-shrink: 0;
-    }
+    .auth-google-icon { width: 20px; height: 20px; flex-shrink: 0; }
 
     .auth-divider {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin: 28px 0 20px;
+      margin: 20px 0;
     }
     .auth-divider::before, .auth-divider::after {
       content: '';
@@ -131,10 +179,30 @@
       text-transform: uppercase;
     }
 
+    /* ── Feedback ── */
+    .auth-msg {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      min-height: 20px;
+      margin-bottom: 14px;
+      text-align: center;
+    }
+    .auth-msg.error   { color: #ff6b6b; }
+    .auth-msg.success { color: #00e5ff; }
+
+    .auth-fine-print {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.2);
+      margin-top: 20px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
     .auth-guest-btn {
       display: block;
       width: 100%;
-      padding: 12px;
+      padding: 11px;
       background: none;
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 8px;
@@ -145,36 +213,21 @@
       cursor: pointer;
       text-decoration: none;
       transition: border-color 0.15s, color 0.15s;
+      text-align: center;
+      box-sizing: border-box;
     }
     .auth-guest-btn:hover {
       border-color: rgba(255,255,255,0.2);
       color: rgba(255,255,255,0.6);
     }
 
-    .auth-fine-print {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.72rem;
-      color: rgba(255,255,255,0.2);
-      margin-top: 24px;
-      line-height: 1.6;
-    }
-
-    #auth-error-msg {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.82rem;
-      color: #ff6b6b;
-      margin-bottom: 16px;
-      min-height: 18px;
-    }
-
     @media (max-width: 480px) {
-      .auth-card { padding: 36px 24px 32px; }
+      .auth-card { padding: 32px 20px 28px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Minimal navbar -->
   <nav class="navbar">
     <div class="nav-container">
       <a class="logo" href="index.html">
@@ -197,46 +250,177 @@
         <img src="images/mma-bridge-logo.png" class="nav-logo-img" alt="MMA Bridge" style="height:42px;width:auto;">
       </a>
 
-      <div class="auth-title" id="authTitle">Welcome back</div>
-      <div class="auth-sub" id="authSub">Sign in to rate events, leave reviews,<br>and join the community.</div>
+      <!-- Tabs -->
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tabSignIn">Sign In</button>
+        <button class="auth-tab" id="tabSignUp">Create Account</button>
+      </div>
 
-      <div id="auth-error-msg"></div>
+      <!-- Feedback -->
+      <div class="auth-msg" id="authMsg"></div>
 
-      <a id="googleSignInBtn" class="auth-google-btn" href="#">
-        <svg class="auth-google-icon" viewBox="0 0 24 24">
-          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/>
-          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-        </svg>
-        Continue with Google
-      </a>
+      <!-- Sign In form -->
+      <div id="formSignIn">
+        <div class="auth-form">
+          <div class="auth-field">
+            <label>Email</label>
+            <input type="email" id="siEmail" placeholder="your@email.com" autocomplete="email" />
+          </div>
+          <div class="auth-field">
+            <label>Password</label>
+            <input type="password" id="siPassword" placeholder="••••••••" autocomplete="current-password" />
+          </div>
+          <button class="auth-submit-btn" id="siBtn">Sign In</button>
+        </div>
 
-      <div class="auth-divider"><span>or</span></div>
+        <div class="auth-divider"><span>or</span></div>
 
-      <a href="index.html" class="auth-guest-btn">Continue as guest</a>
+        <button class="auth-google-btn" id="googleSignInBtn">
+          <svg class="auth-google-icon" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+          </svg>
+          Continue with Google
+        </button>
+
+        <div style="margin-top:16px;">
+          <a href="index.html" class="auth-guest-btn">Continue as guest</a>
+        </div>
+      </div>
+
+      <!-- Sign Up form -->
+      <div id="formSignUp" style="display:none;">
+        <div class="auth-form">
+          <div class="auth-field">
+            <label>Display Name</label>
+            <input type="text" id="suName" placeholder="Your fight name" autocomplete="nickname" />
+          </div>
+          <div class="auth-field">
+            <label>Email</label>
+            <input type="email" id="suEmail" placeholder="your@email.com" autocomplete="email" />
+          </div>
+          <div class="auth-field">
+            <label>Password</label>
+            <input type="password" id="suPassword" placeholder="At least 6 characters" autocomplete="new-password" />
+          </div>
+          <button class="auth-submit-btn" id="suBtn">Create Account</button>
+        </div>
+
+        <div class="auth-divider"><span>or</span></div>
+
+        <button class="auth-google-btn" id="googleSignUpBtn">
+          <svg class="auth-google-icon" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+          </svg>
+          Sign up with Google
+        </button>
+      </div>
 
       <div class="auth-fine-print">
-        By signing in you agree to our terms. We only store your Google display name and profile picture.
+        By signing in you agree to our terms. We store only your display name and profile picture.
       </div>
+
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
+  <script src="auth.js?v=3.0"></script>
   <script>
     (function () {
-      const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-      const apiBase = isLocal ? 'http://localhost:5001/api' : 'https://mmabridge-backend.onrender.com/api';
-      document.getElementById('googleSignInBtn').href = `${apiBase}/auth/google`;
+      const msgEl      = document.getElementById('authMsg');
+      const tabSignIn  = document.getElementById('tabSignIn');
+      const tabSignUp  = document.getElementById('tabSignUp');
+      const formSignIn = document.getElementById('formSignIn');
+      const formSignUp = document.getElementById('formSignUp');
 
-      // If coming from an event-review page, update the messaging
-      const returnTo = sessionStorage.getItem('auth_return_to') || '';
-      if (returnTo.includes('event-review')) {
-        document.getElementById('authTitle').textContent = 'Sign in to leave a review';
-        document.getElementById('authSub').textContent = 'You\'ll be brought straight back to the event after signing in.';
+      function showMsg(text, type) {
+        msgEl.textContent = text;
+        msgEl.className   = 'auth-msg ' + (type || '');
       }
+
+      function setTab(tab) {
+        const isSignIn = tab === 'signin';
+        tabSignIn.classList.toggle('active',  isSignIn);
+        tabSignUp.classList.toggle('active', !isSignIn);
+        formSignIn.style.display = isSignIn ? '' : 'none';
+        formSignUp.style.display = isSignIn ? 'none' : '';
+        showMsg('');
+      }
+
+      tabSignIn.addEventListener('click', () => setTab('signin'));
+      tabSignUp.addEventListener('click', () => setTab('signup'));
+
+      // Customise heading if coming from a review page
+      if ((sessionStorage.getItem('auth_return_to') || '').includes('event-review')) {
+        showMsg('Sign in to leave a review and be brought straight back.', '');
+      }
+
+      // ── Sign In ──────────────────────────────
+      document.getElementById('siBtn').addEventListener('click', async () => {
+        const email    = document.getElementById('siEmail').value.trim();
+        const password = document.getElementById('siPassword').value;
+        if (!email || !password) { showMsg('Please fill in all fields.', 'error'); return; }
+        const btn = document.getElementById('siBtn');
+        btn.disabled = true; btn.textContent = 'Signing in…';
+        showMsg('');
+        const { error } = await window.MMABridgeAuth.signInWithEmail(email, password);
+        if (error) {
+          showMsg(error.message || 'Sign-in failed. Check your credentials.', 'error');
+          btn.disabled = false; btn.textContent = 'Sign In';
+        }
+        // On success, onAuthStateChange in auth.js handles the redirect
+      });
+
+      // Enter key on sign-in fields
+      ['siEmail','siPassword'].forEach(id => {
+        document.getElementById(id).addEventListener('keydown', e => {
+          if (e.key === 'Enter') document.getElementById('siBtn').click();
+        });
+      });
+
+      // ── Sign Up ──────────────────────────────
+      document.getElementById('suBtn').addEventListener('click', async () => {
+        const name     = document.getElementById('suName').value.trim();
+        const email    = document.getElementById('suEmail').value.trim();
+        const password = document.getElementById('suPassword').value;
+        if (!name || !email || !password) { showMsg('Please fill in all fields.', 'error'); return; }
+        if (password.length < 6) { showMsg('Password must be at least 6 characters.', 'error'); return; }
+        const btn = document.getElementById('suBtn');
+        btn.disabled = true; btn.textContent = 'Creating account…';
+        showMsg('');
+        const { error } = await window.MMABridgeAuth.signUpWithEmail(email, password, name);
+        if (error) {
+          showMsg(error.message || 'Sign-up failed. Please try again.', 'error');
+          btn.disabled = false; btn.textContent = 'Create Account';
+        } else {
+          showMsg('Account created! Check your email to confirm, then sign in.', 'success');
+          btn.disabled = false; btn.textContent = 'Create Account';
+          setTab('signin');
+        }
+      });
+
+      // Enter key on sign-up fields
+      ['suName','suEmail','suPassword'].forEach(id => {
+        document.getElementById(id).addEventListener('keydown', e => {
+          if (e.key === 'Enter') document.getElementById('suBtn').click();
+        });
+      });
+
+      // ── Google OAuth ─────────────────────────
+      document.getElementById('googleSignInBtn').addEventListener('click', () => {
+        window.MMABridgeAuth.signInWithGoogle();
+      });
+      document.getElementById('googleSignUpBtn').addEventListener('click', () => {
+        window.MMABridgeAuth.signInWithGoogle();
+      });
     })();
   </script>
-  <script src="auth.js?v=2.1"></script>
   <script src="chat.js?v=2.1"></script>
 </body>
 </html>
