@@ -90,10 +90,7 @@
     signUpWithEmail: (email, password, displayName) =>
       sb.auth.signUp({ email, password, options: { data: { full_name: displayName } } }),
     signInWithGoogle: () =>
-      sb.auth.signInWithOAuth({
-        provider: 'google',
-        options: { redirectTo: location.origin + '/auth.html' }
-      }),
+      sb.auth.signInWithOAuth({ provider: 'google' }),
     resetPassword: (email) =>
       sb.auth.resetPasswordForEmail(email, { redirectTo: location.origin + '/auth.html' }),
     updatePassword: (newPassword) => sb.auth.updateUser({ password: newPassword }),

@@ -551,11 +551,30 @@
       });
 
       // ── Google OAuth ──────────────────────────
-      document.getElementById('googleSignInBtn').addEventListener('click', () => {
-        window.MMABridgeAuth.signInWithGoogle();
+      async function handleGoogleAuth(btn) {
+        btn.disabled = true;
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = btn.innerHTML.replace(/Continue with Google|Sign up with Google/, 'Redirecting to Google…');
+        showMsg('');
+        try {
+          const { error } = await window.MMABridgeAuth.signInWithGoogle();
+          if (error) {
+            showMsg(error.message || 'Google sign-in failed. Please try again.', 'error');
+            btn.disabled = false;
+            btn.innerHTML = originalHTML;
+          }
+          // On success the browser navigates away — no further action needed
+        } catch (err) {
+          showMsg('Google sign-in failed. Please try again.', 'error');
+          btn.disabled = false;
+          btn.innerHTML = originalHTML;
+        }
+      }
+      document.getElementById('googleSignInBtn').addEventListener('click', function() {
+        handleGoogleAuth(this);
       });
-      document.getElementById('googleSignUpBtn').addEventListener('click', () => {
-        window.MMABridgeAuth.signInWithGoogle();
+      document.getElementById('googleSignUpBtn').addEventListener('click', function() {
+        handleGoogleAuth(this);
       });
 
       // ── auth:signedIn — show welcome then auth.js redirects ──
