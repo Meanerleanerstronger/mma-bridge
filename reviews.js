@@ -94,12 +94,19 @@ function buildCard(ev, type) {
   return card;
 }
 
-// ── Fetch community rating (silent fail) ──────
+// ── Fetch community rating from Supabase ──────
 async function fetchRating(eventId) {
   try {
-    const res = await fetch(`${getApiBase()}/ratings/${encodeURIComponent(eventId)}`);
-    if (!res.ok) return null;
-    return await res.json();
+    const sb = window._sb;
+    if (!sb) return null;
+    const { data } = await sb
+      .from('ratings')
+      .select('hype_rating')
+      .eq('event_id', eventId)
+      .not('hype_rating', 'is', null);
+    if (!data || !data.length) return null;
+    const avg = (data.reduce((s, r) => s + parseFloat(r.hype_rating), 0) / data.length).toFixed(1);
+    return { avg_hype: avg, total_ratings: data.length };
   } catch { return null; }
 }
 

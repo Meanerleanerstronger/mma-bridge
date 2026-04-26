@@ -3008,6 +3008,8 @@ body.light-mode .nav-username { color: #111; }
 body.light-mode .nav-user-drop { background: #fff; border-color: rgba(0,0,0,0.1); }
 body.light-mode .nav-signout-btn { color: rgba(0,0,0,0.55); }
 body.light-mode .nav-signout-btn:hover { background: rgba(0,0,0,0.05); color: #111; }
+body.light-mode .nav-logout-btn { color: rgba(0,0,0,0.5); border-color: rgba(0,0,0,0.12); background: rgba(0,0,0,0.04); }
+body.light-mode .nav-logout-btn:hover { background: rgba(220,50,50,0.08); border-color: rgba(220,50,50,0.3); color: #c0392b; }
 body.light-mode .nav-signin-link { color: rgba(0,0,0,0.55); }
 body.light-mode .nav-signin-link:hover { color: #000; }
 
@@ -3901,6 +3903,28 @@ body.light-mode .navbar {
 }
 .nav-signout-btn:hover { background: rgba(255,255,255,0.06); color: #fff; }
 
+.nav-logout-btn {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 6px;
+  color: rgba(255,255,255,0.55);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav-logout-btn:hover {
+  background: rgba(255,80,80,0.15);
+  border-color: rgba(255,80,80,0.35);
+  color: #ff6b6b;
+}
+
 /* Mobile overlay auth */
 .nav-auth-mobile {
   padding: 20px 28px 24px;
@@ -3957,12 +3981,13 @@ body.light-mode .navbar {
 .nav-mobile-signout:hover { color: #fff; border-color: rgba(255,255,255,0.3); }
 
 @media (max-width: 768px) {
-  /* On mobile show avatar only (no username text) in top navbar */
+  /* On mobile show avatar + logout only (no username text) in top navbar */
   .nav-username { display: none; }
   .nav-auth { margin-left: 6px; gap: 7px; }
   /* Shrink Sign In / Sign Up in top bar to fit */
   .nav-signin-link { font-size: 0.68rem; }
   .nav-signup-btn  { font-size: 0.62rem; padding: 5px 11px; }
+  .nav-logout-btn  { font-size: 0.55rem; padding: 4px 8px; }
 }
 
 /* ── Live Visitor Feed ── */

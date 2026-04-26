@@ -11,12 +11,10 @@
     document.querySelectorAll('.nav-auth').forEach(el => {
       if (user) {
         el.innerHTML = `
-          <div class="nav-user" id="navUser_${Math.random().toString(36).slice(2)}">
+          <div class="nav-user">
             <img class="nav-avatar" src="${escHtml(user.avatar_url || '')}" alt="${escHtml(user.display_name || '')}" onerror="this.style.display='none'">
             <span class="nav-username">${escHtml(user.display_name || 'Fighter')}</span>
-            <div class="nav-user-drop">
-              <button type="button" class="nav-signout-btn" onclick="window.MMABridgeAuth.signOut()">Sign out</button>
-            </div>
+            <button type="button" class="nav-logout-btn" onclick="window.MMABridgeAuth.signOut()">Sign Out</button>
           </div>`;
       } else {
         el.innerHTML = `
