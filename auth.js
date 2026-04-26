@@ -5,6 +5,12 @@
 (function () {
   const sb = window._sb;
 
+  // Guard: if Supabase CDN failed to load, still render Sign In/Sign Up
+  if (!sb) {
+    document.addEventListener('DOMContentLoaded', () => renderNavAuth(null));
+    return;
+  }
+
   let _session = null;
   let _profile = null;
 
@@ -132,17 +138,18 @@
     }
   });
 
-  // Initial render (before onAuthStateChange fires)
+  // Initial render — show Sign In/Sign Up immediately, then update once session is known
   document.addEventListener('DOMContentLoaded', async () => {
+    renderNavAuth(null); // instant — no async gap, buttons always appear
+
     const { data: { session } } = await sb.auth.getSession();
-    if (!session) {
-      renderNavAuth(null);
-    }
+
     // If already signed in and on auth.html, redirect away
     if (session && location.pathname.endsWith('auth.html')) {
       const returnTo = sessionStorage.getItem('auth_return_to') || 'index.html';
       sessionStorage.removeItem('auth_return_to');
       location.replace(returnTo);
     }
+    // onAuthStateChange will fire and update the navbar if there is an active session
   });
 })();
