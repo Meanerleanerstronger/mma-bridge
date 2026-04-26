@@ -210,6 +210,17 @@
       transition:background .18s;
       overflow:hidden;
     }
+    .ov-fight.has-shots { grid-template-columns:36px 1fr 110px 1fr 36px; }
+    .ov-fight.has-shots.is-main { grid-template-columns:44px 1fr 110px 1fr 44px; }
+    .ov-head-cell { display:flex;align-items:center;justify-content:center;position:relative;z-index:1; }
+    .ov-headshot {
+      width:36px;height:36px;border-radius:50%;
+      object-fit:cover;object-position:top center;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.04);
+      flex-shrink:0;display:block;
+    }
+    .ov-fight.is-main .ov-headshot { width:44px;height:44px; }
     .ov-fight::before {
       content:'';position:absolute;inset:0;
       background:linear-gradient(90deg,rgba(0,229,255,.0),rgba(0,229,255,.04),rgba(0,229,255,.0));
@@ -355,6 +366,9 @@
       .ov-fighter { font-size:1.1rem; }
       .ov-fight.is-main .ov-fighter { font-size:1.35rem; }
       .ov-fight { padding:15px 18px; }
+      .ov-head-cell { display:none !important; }
+      .ov-fight.has-shots { grid-template-columns:1fr 110px 1fr !important; }
+      .ov-fight.has-shots.is-main { grid-template-columns:1fr 110px 1fr !important; }
     }
     @media(max-width:480px) {
       .ev-card { height:130px; }
@@ -687,6 +701,13 @@
     function buildFightCard(ev,isPPV,accent){
       const col=document.getElementById('ovFightCol');
       col.innerHTML='';
+      const isUpcoming=ev.status==='upcoming';
+
+      function headCell(url,flip){
+        if(!isUpcoming) return '';
+        const img=url?`<img class="ov-headshot" src="${url}" alt="" onerror="this.style.display='none'">`:'';
+        return `<div class="ov-head-cell${flip?' ov-head-r':''}">${img}</div>`;
+      }
 
       function section(label,fights,color){
         if(!fights||!fights.length) return;
@@ -701,12 +722,13 @@
           const dimCls=(!isMain&&!isComain)?'dim':'';
 
           const row=document.createElement('div');
-          row.className=`ov-fight ${mainCls}`;
+          row.className=`ov-fight ${mainCls}${isUpcoming?' has-shots':''}`;
 
           /* FOTN pill text */
           const fotnText=`⭐ Predict as FOTN: ${lastName(f.a)} vs ${lastName(f.b)}`;
 
           row.innerHTML=`
+            ${headCell(f.imgA,false)}
             <div class="ov-fighter ${dimCls}">${esc(f.a)}</div>
             <div class="ov-fight-mid">
               ${f.titleFight?`<div class="ov-title-badge">🏆 Title</div>`:''}
@@ -715,6 +737,7 @@
               ${isMain?`<div class="ov-slot-tag" style="color:${accent}">MAIN EVENT</div>`:isComain?`<div class="ov-slot-tag" style="color:rgba(0,229,255,.5)">CO-MAIN</div>`:''}
             </div>
             <div class="ov-fighter right ${dimCls}">${esc(f.b)}</div>
+            ${headCell(f.imgB,true)}
             <div class="ov-fotn-hover">${esc(fotnText)}</div>
           `;
           col.appendChild(row);
