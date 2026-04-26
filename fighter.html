@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <script src="theme.js?v=2.4"></script>
+  <link rel="icon" href="images/mma-bridge-logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="images/mma-bridge-logo.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fighter Profile — MMA Bridge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=2.5" />
+</head>
+<body class="fp-page">
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a class="logo" href="index.html">
+        <img src="images/mma-bridge-logo.png" class="nav-logo-img" alt="MMA Bridge">
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Trending</a></li>
+        <li><a href="events.html">Upcoming Events</a></li>
+        <li><a href="pfp.html">PFP</a></li>
+        <li><a href="reviews.html">Review</a></li>
+        <li><a href="lucas.html">Lucas Bot</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Switch to light mode" title="Switch to light mode">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <form class="search-box" id="site-search-form" action="results.html" method="GET">
+        <input id="site-search" name="q" type="text" placeholder="Search fighters, events..." autocomplete="off" />
+        <span class="search-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M21 21l-4.3-4.3m1.8-5.2a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </span>
+      </form>
+      <div class="nav-auth"></div>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-mobile-overlay" id="nav-mobile-overlay">
+    <button class="nav-mobile-close" onclick="document.getElementById('nav-mobile-overlay').classList.remove('open');document.getElementById('nav-hamburger').classList.remove('open');document.body.classList.remove('no-scroll')">✕</button>
+    <nav class="nav-mobile-links">
+      <a href="index.html">Trending</a>
+      <a href="events.html">Upcoming Events</a>
+      <a href="pfp.html">PFP</a>
+      <a href="reviews.html">Review</a>
+      <a href="lucas.html">Lucas Bot</a>
+    </nav>
+    <div class="nav-mobile-search">
+      <form action="results.html" method="GET">
+        <input name="q" type="text" placeholder="Search fighters, events..." autocomplete="off" />
+      </form>
+    </div>
+    <div class="nav-auth-mobile"></div>
+  </div>
+
+  <!-- FIGHTER PROFILE (rendered by fighter.js) -->
+  <div id="fp-root"></div>
+
+  <script>
+    window.addEventListener('scroll', () => {
+      document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 10);
+    });
+    const navHamburger = document.getElementById('nav-hamburger');
+    const navOverlay = document.getElementById('nav-mobile-overlay');
+    if (navHamburger) navHamburger.addEventListener('click', () => {
+      navHamburger.classList.toggle('open');
+      navOverlay.classList.toggle('open');
+      document.body.classList.toggle('no-scroll');
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
+  <script src="auth.js?v=3.2"></script>
+  <script src="search.js"></script>
+  <script src="fighter.js"></script>
+</body>
+</html>
