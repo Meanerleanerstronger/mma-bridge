@@ -16,6 +16,44 @@
   <style>
     body { background: #0e0e0e; }
 
+    /* ── Sticky community rating badge ── */
+    #erCommBadge {
+      position: fixed;
+      top: 72px;
+      right: 20px;
+      z-index: 50;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(10,10,12,0.88);
+      border: 1px solid rgba(0,229,255,0.22);
+      border-radius: 10px;
+      padding: 7px 12px 6px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,229,255,0.05);
+      pointer-events: none;
+    }
+    #erCommBadge.visible { display: flex; }
+    #erCommBadge .badge-val {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: cyan;
+      letter-spacing: 0.01em;
+      line-height: 1;
+    }
+    #erCommBadge .badge-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.56rem;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 3px;
+    }
+    @media (max-width: 600px) {
+      #erCommBadge { top: 60px; right: 12px; }
+    }
+
     /* ── Breadcrumb ── */
     .review-nav {
       padding: 20px 32px;
@@ -714,6 +752,12 @@
     <a href="reviews.html">Reviews</a>
     <span>/</span>
     <span id="breadcrumbName">Event</span>
+  </div>
+
+  <!-- Sticky community rating badge (top-right) -->
+  <div id="erCommBadge">
+    <span class="badge-val" id="erCommBadgeVal">—</span>
+    <span class="badge-label">Community</span>
   </div>
 
   <!-- Main content injected by JS -->

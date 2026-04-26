@@ -63,6 +63,19 @@ function revStars(rating) {
   }).join('');
 }
 
+// ── Community badge (sticky top-right) ───────
+function updateCommBadge(community) {
+  const badge = document.getElementById('erCommBadge');
+  const valEl = document.getElementById('erCommBadgeVal');
+  if (!badge || !valEl) return;
+  if (community?.avg_hype) {
+    valEl.textContent = `★ ${community.avg_hype}`;
+    badge.classList.add('visible');
+  } else {
+    badge.classList.remove('visible');
+  }
+}
+
 // ── Community rating ──────────────────────────
 async function fetchCommunityRating(eventId) {
   try {
@@ -729,6 +742,7 @@ function renderPage(ev, community) {
       if (cv) cv.innerHTML = fresh.avg_hype
         ? `★ ${fresh.avg_hype} &nbsp;·&nbsp; ${fresh.total_ratings} rating${fresh.total_ratings!==1?'s':''}`
         : 'No ratings yet';
+      updateCommBadge(fresh);
     }
   }
 
@@ -817,6 +831,7 @@ function renderPage(ev, community) {
       root.innerHTML = `<div class="er-empty">Event not found. <a href="reviews.html">← Back</a></div>`;
       return;
     }
+    updateCommBadge(community);
     renderPage(ev, community);
   } catch (err) {
     debugLog(err);

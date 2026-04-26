@@ -63,7 +63,7 @@ function renderHero(ev) {
   title.textContent = ev.name || '';
   meta.textContent  = [ev.date, ev.location, ev.venue].filter(Boolean).join('  ·  ');
   const btn = document.getElementById('heroBtn');
-  if (btn && ev.id) btn.href = `events.html#ev-${ev.id}`;
+  if (btn && ev.id) btn.href = `events.html?id=${encodeURIComponent(ev.id)}`;
 }
 
 // ── Recent Results Infinite Scroll ───────────
