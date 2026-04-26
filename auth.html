@@ -279,8 +279,8 @@
 
       <!-- Tabs (hidden when showing forgot/reset panels) -->
       <div class="auth-tabs" id="authTabs">
-        <button class="auth-tab active" id="tabSignIn">Sign In</button>
-        <button class="auth-tab" id="tabSignUp">Create Account</button>
+        <button type="button" class="auth-tab active" id="tabSignIn">Sign In</button>
+        <button type="button" class="auth-tab" id="tabSignUp">Create Account</button>
       </div>
 
       <!-- Feedback -->
@@ -297,13 +297,13 @@
             <label>Password</label>
             <input type="password" id="siPassword" placeholder="••••••••" autocomplete="current-password" />
           </div>
-          <button class="auth-forgot-link" id="forgotLink">Forgot password?</button>
-          <button class="auth-submit-btn" id="siBtn">Sign In</button>
+          <button type="button" class="auth-forgot-link" id="forgotLink">Forgot password?</button>
+          <button type="button" class="auth-submit-btn" id="siBtn">Sign In</button>
         </div>
 
         <div class="auth-divider"><span>or</span></div>
 
-        <button class="auth-google-btn" id="googleSignInBtn">
+        <button type="button" class="auth-google-btn" id="googleSignInBtn">
           <svg class="auth-google-icon" viewBox="0 0 24 24">
             <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
             <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -333,12 +333,12 @@
             <label>Password</label>
             <input type="password" id="suPassword" placeholder="At least 6 characters" autocomplete="new-password" />
           </div>
-          <button class="auth-submit-btn" id="suBtn">Create Account</button>
+          <button type="button" class="auth-submit-btn" id="suBtn">Create Account</button>
         </div>
 
         <div class="auth-divider"><span>or</span></div>
 
-        <button class="auth-google-btn" id="googleSignUpBtn">
+        <button type="button" class="auth-google-btn" id="googleSignUpBtn">
           <svg class="auth-google-icon" viewBox="0 0 24 24">
             <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
             <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -351,7 +351,7 @@
 
       <!-- ── Forgot password panel ── -->
       <div id="formForgot" style="display:none;">
-        <button class="auth-back-link" id="forgotBack">← Back to sign in</button>
+        <button type="button" class="auth-back-link" id="forgotBack">← Back to sign in</button>
         <div class="auth-panel-title">Reset your password</div>
         <div class="auth-panel-sub">Enter your email and we'll send you a reset link.</div>
         <div class="auth-form">
@@ -359,7 +359,7 @@
             <label>Email</label>
             <input type="email" id="fpEmail" placeholder="your@email.com" autocomplete="email" />
           </div>
-          <button class="auth-submit-btn" id="fpBtn">Send Reset Link</button>
+          <button type="button" class="auth-submit-btn" id="fpBtn">Send Reset Link</button>
         </div>
       </div>
 
@@ -376,7 +376,7 @@
             <label>Confirm Password</label>
             <input type="password" id="rpConfirm" placeholder="Repeat your new password" autocomplete="new-password" />
           </div>
-          <button class="auth-submit-btn" id="rpBtn">Update Password</button>
+          <button type="button" class="auth-submit-btn" id="rpBtn">Update Password</button>
         </div>
       </div>
 
@@ -483,14 +483,16 @@
         const btn = document.getElementById('suBtn');
         btn.disabled = true; btn.textContent = 'Creating account…';
         showMsg('');
-        const { error } = await window.MMABridgeAuth.signUpWithEmail(email, password, name);
+        const { data, error } = await window.MMABridgeAuth.signUpWithEmail(email, password, name);
         if (error) {
           showMsg(error.message || 'Sign-up failed. Please try again.', 'error');
           btn.disabled = false; btn.textContent = 'Create Account';
+        } else if (data?.session) {
+          showMsg('Welcome! Redirecting…', 'success');
+          setTimeout(() => location.replace(sessionStorage.getItem('auth_return_to') || 'index.html'), 1200);
         } else {
           showMsg('Account created! Check your email to confirm, then sign in.', 'success');
           btn.disabled = false; btn.textContent = 'Create Account';
-          setTab('signin');
         }
       });
       ['suName','suEmail','suPassword'].forEach(id => {
@@ -553,6 +555,11 @@
       });
       document.getElementById('googleSignUpBtn').addEventListener('click', () => {
         window.MMABridgeAuth.signInWithGoogle();
+      });
+
+      // ── auth:signedIn — show welcome then auth.js redirects ──
+      window.addEventListener('auth:signedIn', () => {
+        showMsg('Welcome back! Redirecting…', 'success');
       });
 
       // ── PASSWORD_RECOVERY event from auth.js ──

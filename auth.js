@@ -26,7 +26,6 @@
     return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
-  // Exposed on window — API-compatible with old auth.js
   window.MMABridgeAuth = {
     getToken,
     getUser,
@@ -114,8 +113,7 @@
 
   // ── Auth state listener ───────────────────────
   sb.auth.onAuthStateChange(async (event, session) => {
-    // PASSWORD_RECOVERY: user clicked the reset link in their email
-    // Keep the session so updateUser works, but don't redirect — auth.html handles the UI
+    // Password reset link — let auth.html handle the UI
     if (event === 'PASSWORD_RECOVERY') {
       _session = session;
       window.dispatchEvent(new CustomEvent('auth:passwordRecovery'));
@@ -123,33 +121,46 @@
     }
 
     _session = session;
+
+    // ── Redirect logic (runs BEFORE awaiting profile) ────
+    // This prevents ensureProfile DB latency from delaying the redirect
+    if (event === 'SIGNED_IN' && location.pathname.endsWith('auth.html')) {
+      const returnTo = sessionStorage.getItem('auth_return_to') || 'index.html';
+      sessionStorage.removeItem('auth_return_to');
+      // Signal auth.html to show welcome message
+      window.dispatchEvent(new CustomEvent('auth:signedIn'));
+      // Load profile in background, then redirect after brief welcome
+      if (session?.user) {
+        ensureProfile(session).then(p => { _profile = p; });
+      }
+      setTimeout(() => location.replace(returnTo), 1200);
+      return;
+    }
+
+    // ── Normal session update (other pages) ─────
     if (session?.user) {
       _profile = await ensureProfile(session);
     } else {
       _profile = null;
     }
     renderNavAuth(_profile);
-
-    // After successful sign-in on auth.html, redirect back
-    if (event === 'SIGNED_IN' && location.pathname.endsWith('auth.html')) {
-      const returnTo = sessionStorage.getItem('auth_return_to') || 'index.html';
-      sessionStorage.removeItem('auth_return_to');
-      location.replace(returnTo);
-    }
   });
 
-  // Initial render — show Sign In/Sign Up immediately, then update once session is known
+  // ── Initial render ────────────────────────────
   document.addEventListener('DOMContentLoaded', async () => {
-    renderNavAuth(null); // instant — no async gap, buttons always appear
+    // Show Sign In/Sign Up immediately — no async gap
+    renderNavAuth(null);
 
     const { data: { session } } = await sb.auth.getSession();
 
-    // If already signed in and on auth.html, redirect away
+    // Already signed in and visiting auth.html → redirect away immediately
     if (session && location.pathname.endsWith('auth.html')) {
       const returnTo = sessionStorage.getItem('auth_return_to') || 'index.html';
       sessionStorage.removeItem('auth_return_to');
       location.replace(returnTo);
+      return;
     }
-    // onAuthStateChange will fire and update the navbar if there is an active session
+
+    // onAuthStateChange handles updating the navbar when session exists
   });
 })();
