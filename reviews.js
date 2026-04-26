@@ -209,13 +209,29 @@ initSortDropdown('fnSortWrap', 'fnSortBtn', 'fnSortDrop', mode => {
   if (fnPast.length) applySortRow(scrollFN, fnCount, fnPast, 'fn', mode);
 });
 
-// ── Arrow scroll ──────────────────────────────
+// ── Arrow scroll + show/hide at edges ─────────
+function syncArrows(scrollEl) {
+  const max = scrollEl.scrollWidth - scrollEl.clientWidth;
+  const id  = scrollEl.id;
+  document.querySelectorAll(`.rv-arrow[data-target="${id}"]`).forEach(btn => {
+    const isLeft = btn.classList.contains('left');
+    btn.classList.toggle('hidden', isLeft ? scrollEl.scrollLeft <= 2 : scrollEl.scrollLeft >= max - 2);
+  });
+}
+
+document.querySelectorAll('.rv-scroll').forEach(scrollEl => {
+  if (!scrollEl.id) return;
+  scrollEl.addEventListener('scroll', () => syncArrows(scrollEl), { passive: true });
+  /* initial state — after content renders */
+  requestAnimationFrame(() => syncArrows(scrollEl));
+});
+
 document.querySelectorAll('.rv-arrow').forEach(btn => {
   btn.addEventListener('click', () => {
     const target = document.getElementById(btn.dataset.target);
     if (!target) return;
     const dir = btn.classList.contains('left') ? -1 : 1;
-    target.scrollBy({ left: dir * 500, behavior: 'smooth' });
+    target.scrollBy({ left: dir * 400, behavior: 'smooth' });
   });
 });
 

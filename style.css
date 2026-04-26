@@ -4079,3 +4079,32 @@ body.light-mode #cursor-glow { display: none; }
   body { transition: none !important; }
   #cursor-glow { display: none !important; }
 }
+
+/* ── CAROUSEL ARROW BUTTONS ── */
+.carousel-arrow {
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+  z-index: 12;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: rgba(6,6,8,0.85);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.85);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, opacity 0.18s;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  outline: none;
+  flex-shrink: 0;
+  padding: 0;
+}
+.carousel-arrow:hover {
+  border-color: rgba(0,229,255,0.5);
+  background: rgba(15,15,22,0.95);
+  box-shadow: 0 0 18px rgba(0,229,255,0.18);
+}
+.carousel-arrow.arrow-left  { left: 10px; }
+.carousel-arrow.arrow-right { right: 10px; }
+.carousel-arrow.hidden { opacity: 0; pointer-events: none; }
+@media (max-width: 768px) { .carousel-arrow { display: none !important; } }

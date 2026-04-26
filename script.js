@@ -138,6 +138,22 @@ function renderRecentResults(events) {
   }, {passive:true});
   track.addEventListener('touchend', () => paused = false);
 
+  /* Arrow buttons — pause auto-scroll, shift x, resume after 1.5s */
+  const prevBtn = document.getElementById('resultsPrev');
+  const nextBtn = document.getElementById('resultsNext');
+  if (prevBtn) prevBtn.addEventListener('click', () => {
+    x = Math.max(0, x - 400);
+    paused = true;
+    clearTimeout(prevBtn._t);
+    prevBtn._t = setTimeout(() => { paused = false; }, 1500);
+  });
+  if (nextBtn) nextBtn.addEventListener('click', () => {
+    x += 400;
+    paused = true;
+    clearTimeout(nextBtn._t);
+    nextBtn._t = setTimeout(() => { paused = false; }, 1500);
+  });
+
   function animate() {
     if (!paused) x += speed;
     const halfWidth = inner.scrollWidth / 2;

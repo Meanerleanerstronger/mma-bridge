@@ -221,6 +221,13 @@
       <div class="results-fade-l" style="position:absolute;left:0;top:0;bottom:16px;width:80px;background:linear-gradient(to right,#0f0f0f 0%,transparent 100%);z-index:2;pointer-events:none;"></div>
       <!-- fade right -->
       <div class="results-fade-r" style="position:absolute;right:0;top:0;bottom:16px;width:80px;background:linear-gradient(to left,#0f0f0f 0%,transparent 100%);z-index:2;pointer-events:none;"></div>
+      <!-- carousel arrows -->
+      <button class="carousel-arrow arrow-left" id="resultsPrev" aria-label="Previous results">
+        <svg width="10" height="16" viewBox="0 0 10 16" fill="none"><polyline points="8,1 2,8 8,15" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="carousel-arrow arrow-right" id="resultsNext" aria-label="Next results">
+        <svg width="10" height="16" viewBox="0 0 10 16" fill="none"><polyline points="2,1 8,8 2,15" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
       <div id="resultsTrack" style="overflow:hidden;width:100%;cursor:grab;">
         <div id="resultsInner" style="display:flex;gap:16px;width:max-content;will-change:transform;padding:0 120px 16px;"></div>
       </div>
