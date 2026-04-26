@@ -41,38 +41,36 @@
     });
   }
 
-  // Scripts load at bottom of body — DOM is already parsed, render immediately
+  // Render Sign In/Sign Up immediately — scripts at bottom of body, DOM already parsed
   renderNavAuth(null);
 
   const sb = window._sb;
 
-  // Always expose MMABridgeAuth so other scripts never throw on missing methods
   function apiBase() {
     const local = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
     return local ? 'http://localhost:5001/api' : 'https://mmabridge-backend.onrender.com/api';
   }
 
-  // Stub (overwritten below if Supabase is available)
+  // Always expose MMABridgeAuth — stubs so other scripts never throw
   window.MMABridgeAuth = {
-    getToken:       () => null,
-    getUser:        () => null,
+    getToken:         () => null,
+    getUser:          () => null,
     apiBase,
-    authHeaders:    () => ({}),
-    signOut:        () => location.reload(),
-    signInWithEmail:  () => Promise.resolve({ error: { message: 'Auth service unavailable' } }),
-    signUpWithEmail:  () => Promise.resolve({ error: { message: 'Auth service unavailable' } }),
-    signInWithGoogle: () => {},
-    resetPassword:    () => Promise.resolve({ error: { message: 'Auth service unavailable' } }),
-    updatePassword:   () => Promise.resolve({ error: { message: 'Auth service unavailable' } }),
+    authHeaders:      () => ({}),
+    signOut:          () => location.reload(),
+    signInWithEmail:  () => Promise.resolve({ error: { message: 'Auth unavailable' } }),
+    signUpWithEmail:  () => Promise.resolve({ error: { message: 'Auth unavailable' } }),
+    signInWithGoogle: () => Promise.resolve({ error: { message: 'Auth unavailable' } }),
+    resetPassword:    () => Promise.resolve({ error: { message: 'Auth unavailable' } }),
+    updatePassword:   () => Promise.resolve({ error: { message: 'Auth unavailable' } }),
     getSupabase:      () => null,
   };
 
-  if (!sb) return; // buttons already shown; Supabase CDN failed to load
+  if (!sb) return;
 
   let _session = null;
   let _profile  = null;
 
-  // Override stubs with real implementations
   window.MMABridgeAuth = {
     getToken:    () => _session?.access_token || null,
     getUser:     () => _profile || null,
@@ -97,69 +95,86 @@
     getSupabase: () => sb,
   };
 
-  // ── Profile helpers ───────────────────────────
-  async function loadProfile(userId) {
+  // ── Build profile from session metadata (instant, no DB needed) ──
+  function profileFromMeta(session) {
+    const meta = session.user.user_metadata || {};
+    return {
+      id:           session.user.id,
+      display_name: meta.full_name || meta.name || session.user.email?.split('@')[0] || 'Fighter',
+      avatar_url:   meta.avatar_url || meta.picture || '',
+    };
+  }
+
+  // ── Persist profile to DB (best-effort, non-blocking) ────────────
+  async function syncProfile(session) {
     try {
-      const { data } = await sb.from('profiles').select('*').eq('id', userId).single();
-      return data || null;
-    } catch { return null; }
-  }
-
-  async function ensureProfile(session) {
-    let profile = await loadProfile(session.user.id);
-    if (!profile) {
-      const meta   = session.user.user_metadata || {};
-      const name   = meta.full_name || meta.name || session.user.email?.split('@')[0] || 'Fighter';
-      const avatar = meta.avatar_url || meta.picture || '';
-      await sb.from('profiles').upsert({ id: session.user.id, display_name: name, avatar_url: avatar });
-      profile = { id: session.user.id, display_name: name, avatar_url: avatar };
+      const { data } = await sb.from('profiles').select('*').eq('id', session.user.id).single();
+      if (data) return data;
+      // New user — create profile
+      const p = profileFromMeta(session);
+      await sb.from('profiles').upsert({ id: p.id, display_name: p.display_name, avatar_url: p.avatar_url });
+      return p;
+    } catch {
+      return null;
     }
-    return profile;
   }
 
-  // ── Helper: redirect away from auth.html ──────
-  function redirectFromAuth(label) {
-    const returnTo = sessionStorage.getItem('auth_return_to') || 'index.html';
-    sessionStorage.removeItem('auth_return_to');
-    if (label === 'signed_in') {
-      // Give auth.html a moment to show welcome message
-      window.dispatchEvent(new CustomEvent('auth:signedIn'));
-      setTimeout(() => location.replace(returnTo), 1200);
+  // ── Apply a session: update navbar immediately, sync DB in background ──
+  function applySession(session) {
+    _session = session;
+    if (session?.user) {
+      // Show user immediately from metadata — zero latency
+      _profile = profileFromMeta(session);
+      renderNavAuth(_profile);
+      // Then update with DB profile (may have a custom display name)
+      syncProfile(session).then(p => {
+        if (p && p.display_name !== _profile.display_name) {
+          _profile = p;
+          renderNavAuth(_profile);
+        }
+      });
     } else {
-      location.replace(returnTo);
+      _profile = null;
+      renderNavAuth(null);
     }
-  }
-
-  function onAuthHtml() {
-    return location.pathname.endsWith('auth.html');
   }
 
   // ── Auth state listener ───────────────────────
-  sb.auth.onAuthStateChange(async (event, session) => {
+  sb.auth.onAuthStateChange((event, session) => {
     if (event === 'PASSWORD_RECOVERY') {
       _session = session;
       window.dispatchEvent(new CustomEvent('auth:passwordRecovery'));
       return;
     }
 
-    _session = session;
-
-    // Handle auth.html: both SIGNED_IN (email) and INITIAL_SESSION (Google OAuth callback)
-    if (onAuthHtml() && session?.user &&
+    // Handle auth.html: redirect away after successful sign-in
+    if (location.pathname.endsWith('auth.html') && session?.user &&
         (event === 'SIGNED_IN' || event === 'INITIAL_SESSION')) {
-      if (session?.user) {
-        ensureProfile(session).then(p => { _profile = p; });
-      }
-      redirectFromAuth(event === 'SIGNED_IN' ? 'signed_in' : 'immediate');
+      _session = session;
+      syncProfile(session).then(p => { if (p) _profile = p; });
+      window.dispatchEvent(new CustomEvent('auth:signedIn'));
+      setTimeout(() => {
+        const returnTo = sessionStorage.getItem('auth_return_to') || 'index.html';
+        sessionStorage.removeItem('auth_return_to');
+        location.replace(returnTo);
+      }, 1200);
       return;
     }
 
-    // Normal pages — update navbar
-    if (session?.user) {
-      _profile = await ensureProfile(session);
-    } else {
-      _profile = null;
+    applySession(session);
+  });
+
+  // ── Check existing session on load (catches Google OAuth redirect) ──
+  // onAuthStateChange also fires but getSession() is a reliable safety net
+  sb.auth.getSession().then(({ data: { session } }) => {
+    if (session?.user && !_profile) {
+      applySession(session);
     }
-    renderNavAuth(_profile);
+    // Already logged in + visiting auth.html → redirect immediately
+    if (session?.user && location.pathname.endsWith('auth.html')) {
+      const returnTo = sessionStorage.getItem('auth_return_to') || 'index.html';
+      sessionStorage.removeItem('auth_return_to');
+      location.replace(returnTo);
+    }
   });
 })();
