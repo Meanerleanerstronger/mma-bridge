@@ -31,6 +31,19 @@
   function getParam(k) { return new URLSearchParams(location.search).get(k) || ''; }
   function slugify(s) { return (s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''); }
 
+  // Parse "KO/TKO R2" → { base:"KO/TKO", round:"2" }
+  function parseMethod(m) {
+    if (!m) return { base: '', round: '' };
+    const match = m.match(/^(.+?)\s*R(\d+)$/);
+    if (match) return { base: match[1].trim(), round: match[2] };
+    return { base: m.trim(), round: '' };
+  }
+  function combineMethod(base, round) {
+    if (!base) return null;
+    if (round && (base === 'KO/TKO' || base === 'SUB')) return `${base} R${round}`;
+    return base;
+  }
+
   const root    = document.getElementById('pkRoot');
   const toast   = document.getElementById('pkToast');
   const sb      = window._sb;
@@ -101,6 +114,12 @@
     return `${wins}-${losses}${draws ? `-${draws}` : ''}`;
   }
 
+  // Parse max rounds from "5 Rds" / "3 Rds"
+  function maxRounds(roundsStr) {
+    const m = String(roundsStr || '').match(/(\d+)/);
+    return m ? parseInt(m[1]) : 3;
+  }
+
   const event = eventsData.find(e => e.id === eventId || slugify(e.name || '') === eventId);
   if (!event) { root.innerHTML = `<div class="pk-error">Event not found.</div>`; return; }
 
@@ -108,30 +127,57 @@
   const myId = user?.id || null;
 
   // ── Load user's existing picks ────────────────
-  let myPicks = {}; // fight_key → { pick, method }
+  let myPicks = {}; // fight_key → { pick, method (combined), base, round }
   if (myId && sb) {
     try {
       const { data } = await sb.from('picks')
         .select('fight_key, pick, method')
         .eq('user_id', myId)
         .eq('event_id', eventId);
-      (data || []).forEach(p => { myPicks[p.fight_key] = { pick: p.pick, method: p.method }; });
+      (data || []).forEach(p => {
+        const { base, round } = parseMethod(p.method);
+        myPicks[p.fight_key] = { pick: p.pick, method: p.method, base, round };
+      });
     } catch {}
   }
 
   // ── Save a single pick ────────────────────────
-  async function savePick(fightKey, fighterA, fighterB, pick, method) {
+  async function savePick(fightKey, fighterA, fighterB, pick, methodBase, round) {
     if (!myId || !sb) return;
+    const combined = combineMethod(methodBase, round);
     try {
       await sb.from('picks').upsert({
         user_id: myId, event_id: eventId,
         event_name: event.name || '', fight_key: fightKey,
         fighter_a: fighterA, fighter_b: fighterB,
-        pick, method: method || null,
+        pick, method: combined || null,
       }, { onConflict: 'user_id,event_id,fight_key' });
-      myPicks[fightKey] = { pick, method };
+      myPicks[fightKey] = { pick, method: combined, base: methodBase || '', round: round || '' };
+      updateSaveBar();
       showToast('Pick saved ✓');
     } catch { showToast('Could not save pick', 'err'); }
+  }
+
+  // ── Update save bar ───────────────────────────
+  function updateSaveBar() {
+    const totalFights = (event.mainCard||[]).length + (event.prelims||[]).length + (event.earlyPrelims||[]).length;
+    const pickedCount = Object.keys(myPicks).length;
+    const bar = document.getElementById('pkSaveBar');
+    if (!bar) return;
+    const info = bar.querySelector('.pk-save-info');
+    const btn  = bar.querySelector('.pk-save-btn');
+    const pBar = root.querySelector('.pk-progress-bar');
+    const pLbl = root.querySelector('.pk-progress-label');
+    if (info) info.innerHTML = `<strong>${pickedCount}</strong> of <strong>${totalFights}</strong> fights picked`;
+    if (pBar) pBar.style.width = `${totalFights ? Math.round((pickedCount/totalFights)*100) : 0}%`;
+    if (pLbl) pLbl.textContent = `${pickedCount} of ${totalFights} fights picked`;
+    if (btn && pickedCount > 0) {
+      btn.classList.add('saved');
+      btn.textContent = `✓ ${pickedCount} Picks Saved`;
+    } else if (btn) {
+      btn.classList.remove('saved');
+      btn.textContent = 'Save Picks';
+    }
   }
 
   // ── Compute score if completed ────────────────
@@ -159,11 +205,10 @@
   }
 
   // ── Fighter photo — 3-level fallback chain ────
-  // 1. events.json imgA/imgB  2. fighters.json CloudFront  3. silhouette
   function fighterPhoto(evImg, name, side) {
     const fd = lookupFighter(name);
     const primary  = evImg || fd?.img || '';
-    const fallback = evImg && fd?.img ? fd.img : '';   // only set if primary ≠ fallback
+    const fallback = evImg && fd?.img ? fd.img : '';
     if (!primary) return `<div class="pk-sil-wrap">${SILHOUETTE}</div>`;
     return `<img class="pk-fighter-img pk-fighter-img-${side}"
       src="${esc(primary)}" alt="${esc(name)}" loading="lazy"
@@ -178,7 +223,9 @@
     const saved  = myPicks[key] || {};
     const pickedA = saved.pick === f.a;
     const pickedB = saved.pick === f.b;
-    const method  = saved.method || '';
+    const savedBase  = saved.base  || '';
+    const savedRound = saved.round || '';
+    const rounds = maxRounds(f.rounds);
 
     // Completed: show result
     const winner = f.winner || null;
@@ -189,8 +236,21 @@
     const wrongA   = isCompleted && pickedA && resultA === 'loss';
     const wrongB   = isCompleted && pickedB && resultB === 'loss';
 
-    const methodBtns = ['KO/TKO', 'SUB', 'DEC'].map(m => `
-      <button class="pk-method-btn${method === m ? ' active' : ''}" data-method="${esc(m)}" data-key="${esc(key)}">${esc(m)}</button>
+    const methodBtns = [
+      { id: 'KO/TKO', cls: 'ko', label: 'KO / TKO' },
+      { id: 'SUB',    cls: 'sub', label: 'Submission' },
+      { id: 'DEC',    cls: 'dec', label: 'Decision' },
+    ].map(m => `
+      <button class="pk-method-btn ${m.cls}${savedBase === m.id ? ` active ${m.cls}` : ''}"
+        data-method="${esc(m.id)}" data-key="${esc(key)}">${esc(m.label)}</button>
+    `).join('');
+
+    const needsRound = (savedBase === 'KO/TKO' || savedBase === 'SUB');
+    const roundCls   = savedBase === 'KO/TKO' ? 'ko' : 'sub';
+    const roundBtns  = Array.from({length: rounds}, (_,i) => i+1).map(r => `
+      <button class="pk-round-btn${savedRound === String(r) ? ` active ${roundCls}` : ''}"
+        data-round="${r}" data-key="${esc(key)}"
+        data-method-cls="${roundCls}">R${r}</button>
     `).join('');
 
     const titleBadge = f.titleFight
@@ -225,7 +285,14 @@
             <div class="pk-weight">${esc(f.weight || '')}</div>
             <div class="pk-rounds">${esc(f.rounds || '')}</div>
             ${resultBadge}
-            ${!isCompleted ? `<div class="pk-methods">${methodBtns}</div>` : ''}
+            ${!isCompleted ? `
+              <div class="pk-methods">
+                <div class="pk-method-row">${methodBtns}</div>
+                <div class="pk-round-row" id="pkRounds-${esc(key)}" style="${needsRound ? '' : 'display:none'}">
+                  <span class="pk-round-label">Rd</span>
+                  ${roundBtns}
+                </div>
+              </div>` : ''}
           </div>
 
           <!-- FIGHTER B -->
@@ -276,9 +343,9 @@
 
     root.innerHTML = `
       <div class="pk-header">
-        <a href="events.html" class="pk-back">
+        <a href="events.html?id=${encodeURIComponent(eventId)}" class="pk-back">
           <svg width="9" height="14" viewBox="0 0 9 14" fill="none"><polyline points="7,1 2,7 7,13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Events
+          Back to Event
         </a>
         <div class="pk-header-info">
           <div class="pk-event-type">${esc(event.type || 'UFC')}</div>
@@ -311,12 +378,31 @@
         ${mainSection}${prelimSection}${earlySection}
       </div>`;
 
+    // Sticky save bar (only for upcoming + logged-in users)
+    if (!isCompleted && myId) {
+      const saveBar = document.createElement('div');
+      saveBar.id = 'pkSaveBar';
+      saveBar.className = 'pk-save-bar';
+      const isSaved = pickedCount > 0;
+      saveBar.innerHTML = `
+        <div class="pk-save-info"><strong>${pickedCount}</strong> of <strong>${totalFights}</strong> fights picked</div>
+        <button class="pk-save-btn${isSaved ? ' saved' : ''}" id="pkSaveBtn">
+          ${isSaved ? `✓ ${pickedCount} Picks Saved` : 'Save Picks'}
+        </button>`;
+      document.body.appendChild(saveBar);
+
+      document.getElementById('pkSaveBtn').addEventListener('click', () => {
+        showToast('All picks saved ✓');
+        setTimeout(() => { window.location.href = `events.html?id=${encodeURIComponent(eventId)}`; }, 800);
+      });
+    }
+
     bindInteractions();
   }
 
   // ── Bind click interactions ───────────────────
   function bindInteractions() {
-    if (isCompleted) return; // no picking on completed events
+    if (isCompleted) return;
 
     // Fighter side clicks
     root.querySelectorAll('.pk-side').forEach(side => {
@@ -328,10 +414,8 @@
         const fight = root.querySelector(`.pk-fight[data-key="${key}"]`);
         if (!fight) return;
 
-        // Toggle: clicking same side de-selects
         const wasSelected = side.classList.contains('selected');
 
-        // Update UI
         fight.querySelectorAll('.pk-side').forEach(s => {
           s.classList.remove('selected');
           s.querySelector('.pk-pick-label')?.remove();
@@ -346,23 +430,15 @@
 
           if (!myId) { showToast('Sign in to save picks', 'err'); return; }
 
-          const method = myPicks[key]?.method || null;
-          await savePick(key, fa, fb, pick, method);
-
-          // Update progress bar
-          const totalFights = (event.mainCard||[]).length + (event.prelims||[]).length + (event.earlyPrelims||[]).length;
-          const pickedCount = Object.keys(myPicks).length;
-          const bar = root.querySelector('.pk-progress-bar');
-          const lbl2 = root.querySelector('.pk-progress-label');
-          if (bar) bar.style.width = `${Math.round((pickedCount/totalFights)*100)}%`;
-          if (lbl2) lbl2.textContent = `${pickedCount} of ${totalFights} fights picked`;
+          const saved = myPicks[key] || {};
+          await savePick(key, fa, fb, pick, saved.base || null, saved.round || null);
         } else {
-          // Deselected — delete pick
           if (myId && sb) {
             try {
               await sb.from('picks').delete()
                 .eq('user_id', myId).eq('event_id', eventId).eq('fight_key', key);
               delete myPicks[key];
+              updateSaveBar();
             } catch {}
           }
         }
@@ -382,20 +458,69 @@
         if (!fight) return;
 
         const saved = myPicks[key];
-        if (!saved) return; // must pick a fighter first
+        if (!saved) { showToast('Pick a fighter first', 'err'); return; }
 
         const alreadyActive = btn.classList.contains('active');
-        fight.querySelectorAll('.pk-method-btn').forEach(b => b.classList.remove('active'));
+
+        // Clear all method btns
+        fight.querySelectorAll('.pk-method-btn').forEach(b => {
+          b.classList.remove('active', 'ko', 'sub', 'dec');
+        });
+
+        const roundRow = document.getElementById(`pkRounds-${key}`);
+        const newBase = alreadyActive ? '' : method;
+        const newRound = alreadyActive ? '' : (saved.round || '');
+        const methodCls = method === 'KO/TKO' ? 'ko' : method === 'SUB' ? 'sub' : 'dec';
+
         if (!alreadyActive) {
-          btn.classList.add('active');
-          await savePick(key, saved.pick === event.mainCard?.[0]?.a ? event.mainCard[0].a : btn.closest('.pk-fight').querySelector('.pk-side-a').dataset.fa,
-            btn.closest('.pk-fight').querySelector('.pk-side-a').dataset.fb,
-            saved.pick, method);
-        } else {
-          await savePick(key, btn.closest('.pk-fight').querySelector('.pk-side-a').dataset.fa,
-            btn.closest('.pk-fight').querySelector('.pk-side-a').dataset.fb,
-            saved.pick, null);
+          btn.classList.add('active', methodCls);
         }
+
+        // Show/hide round row
+        if (roundRow) {
+          const showRound = !alreadyActive && (method === 'KO/TKO' || method === 'SUB');
+          roundRow.style.display = showRound ? '' : 'none';
+          // Update round button classes
+          if (showRound) {
+            fight.querySelectorAll('.pk-round-btn').forEach(rb => {
+              rb.classList.remove('active', 'ko', 'sub');
+              if (rb.dataset.round === saved.round) rb.classList.add('active', methodCls);
+              rb.dataset.methodCls = methodCls;
+            });
+          } else {
+            fight.querySelectorAll('.pk-round-btn').forEach(rb => rb.classList.remove('active','ko','sub'));
+          }
+        }
+
+        const fa = fight.querySelector('.pk-side-a')?.dataset?.fa || '';
+        const fb = fight.querySelector('.pk-side-a')?.dataset?.fb || '';
+        await savePick(key, fa, fb, saved.pick, newBase || null, showRound ? newRound : null);
+      });
+    });
+
+    // Round buttons
+    root.querySelectorAll('.pk-round-btn').forEach(btn => {
+      btn.addEventListener('click', async e => {
+        e.stopPropagation();
+        const key   = btn.dataset.key;
+        const round = btn.dataset.round;
+        const fight = root.querySelector(`.pk-fight[data-key="${key}"]`);
+        if (!fight) return;
+
+        const saved = myPicks[key];
+        if (!saved || !saved.base) { showToast('Pick a method first', 'err'); return; }
+
+        const alreadyActive = btn.classList.contains('active');
+        const methodCls = saved.base === 'KO/TKO' ? 'ko' : 'sub';
+
+        fight.querySelectorAll('.pk-round-btn').forEach(rb => rb.classList.remove('active','ko','sub'));
+
+        const newRound = alreadyActive ? '' : round;
+        if (!alreadyActive) btn.classList.add('active', methodCls);
+
+        const fa = fight.querySelector('.pk-side-a')?.dataset?.fa || '';
+        const fb = fight.querySelector('.pk-side-a')?.dataset?.fb || '';
+        await savePick(key, fa, fb, saved.pick, saved.base, newRound || null);
       });
     });
   }

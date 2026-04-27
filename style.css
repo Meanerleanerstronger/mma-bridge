@@ -5200,24 +5200,26 @@ body.light-mode .ev-cal-opt + .ev-cal-opt { border-top-color: rgba(0,0,0,0.07) !
   display: flex; align-items: center; gap: 8px; flex-shrink: 0; flex-wrap: wrap;
 }
 .ev-picks-btn {
-  display: inline-flex; align-items: center;
-  background: linear-gradient(135deg, rgba(0,229,255,0.15) 0%, rgba(0,180,200,0.1) 100%);
-  border: 1px solid rgba(0,229,255,0.4);
-  border-radius: 6px;
+  display: inline-flex; align-items: center; gap: 6px;
+  background: linear-gradient(135deg, rgba(0,229,255,0.22) 0%, rgba(0,160,190,0.14) 100%);
+  border: 1.5px solid rgba(0,229,255,0.65);
+  border-radius: 8px;
   color: #00e5ff;
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.65rem; font-weight: 800;
+  font-size: 0.72rem; font-weight: 800;
   letter-spacing: 0.1em; text-transform: uppercase;
-  padding: 9px 16px; text-decoration: none;
+  padding: 11px 22px; text-decoration: none;
   white-space: nowrap;
-  transition: background 0.15s, border-color 0.15s, transform 0.15s;
+  box-shadow: 0 0 18px rgba(0,229,255,0.2), inset 0 1px 0 rgba(255,255,255,0.08);
+  transition: background 0.15s, border-color 0.15s, transform 0.15s, box-shadow 0.15s;
 }
 .ev-picks-btn:hover {
-  background: linear-gradient(135deg, rgba(0,229,255,0.25) 0%, rgba(0,180,200,0.18) 100%);
-  border-color: rgba(0,229,255,0.65);
+  background: linear-gradient(135deg, rgba(0,229,255,0.34) 0%, rgba(0,180,200,0.25) 100%);
+  border-color: #00e5ff;
+  box-shadow: 0 0 28px rgba(0,229,255,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
   transform: translateY(-1px);
 }
-body.light-mode .ev-picks-btn { background: rgba(0,150,180,0.1) !important; border-color: rgba(0,150,180,0.35) !important; color: #006680 !important; }
+body.light-mode .ev-picks-btn { background: rgba(0,150,180,0.1) !important; border-color: rgba(0,150,180,0.35) !important; color: #006680 !important; box-shadow: none !important; }
 body.light-mode .ev-picks-btn:hover { background: rgba(0,150,180,0.18) !important; }
 
 /* ══════════════════════════════════════════════════
@@ -5518,27 +5520,107 @@ body.light-mode .ev-picks-btn:hover { background: rgba(0,150,180,0.18) !importan
 
 /* method buttons */
 .pk-methods {
-  display: flex; flex-direction: column; gap: 4px;
-  margin-top: 4px; width: 100%;
+  display: flex; flex-direction: column; gap: 6px;
+  margin-top: 8px; width: 100%;
+}
+.pk-method-row {
+  display: flex; gap: 5px; width: 100%;
 }
 .pk-method-btn {
-  width: 100%;
+  flex: 1;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.68rem; font-weight: 800;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  padding: 9px 6px; cursor: pointer;
+  transition: background 0.12s, color 0.12s, border-color 0.12s, box-shadow 0.12s;
+  white-space: nowrap;
+}
+.pk-method-btn:hover { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); }
+.pk-method-btn.active.ko {
+  background: rgba(255,60,60,0.12);
+  border-color: rgba(255,80,80,0.45);
+  color: #ff6b6b;
+  box-shadow: 0 0 12px rgba(255,60,60,0.2);
+}
+.pk-method-btn.active.sub {
+  background: rgba(160,80,255,0.12);
+  border-color: rgba(160,80,255,0.45);
+  color: #c47fff;
+  box-shadow: 0 0 12px rgba(160,80,255,0.2);
+}
+.pk-method-btn.active.dec {
+  background: rgba(0,229,255,0.1);
+  border-color: rgba(0,229,255,0.35);
+  color: #00e5ff;
+  box-shadow: 0 0 12px rgba(0,229,255,0.15);
+}
+
+/* round selector */
+.pk-round-row {
+  display: flex; align-items: center; gap: 5px;
+  padding: 6px 0 2px;
+  animation: pk-round-in 0.18s ease;
+}
+@keyframes pk-round-in { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
+.pk-round-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.52rem; font-weight: 800;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.25); white-space: nowrap;
+  margin-right: 2px;
+}
+.pk-round-btn {
+  flex: 1;
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.09);
-  border-radius: 5px;
+  border-radius: 6px;
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.55rem; font-weight: 800;
+  font-size: 0.6rem; font-weight: 800;
+  letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.3);
+  padding: 7px 4px; cursor: pointer;
+  transition: background 0.1s, color 0.1s, border-color 0.1s;
+}
+.pk-round-btn:hover { background: rgba(255,255,255,0.09); color: rgba(255,255,255,0.6); }
+.pk-round-btn.active.ko { background: rgba(255,60,60,0.14); border-color: rgba(255,80,80,0.5); color: #ff6b6b; }
+.pk-round-btn.active.sub { background: rgba(160,80,255,0.14); border-color: rgba(160,80,255,0.5); color: #c47fff; }
+
+/* save bar */
+.pk-save-bar {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; padding: 14px 28px;
+  background: rgba(6,6,8,0.92);
+  border-top: 1px solid rgba(255,255,255,0.07);
+  backdrop-filter: blur(12px);
+}
+.pk-save-info {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem; color: rgba(255,255,255,0.4);
+}
+.pk-save-info strong { color: rgba(255,255,255,0.75); font-weight: 600; }
+.pk-save-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: linear-gradient(135deg, rgba(0,229,255,0.22) 0%, rgba(0,160,190,0.14) 100%);
+  border: 1.5px solid rgba(0,229,255,0.6);
+  border-radius: 8px; cursor: pointer;
+  color: #00e5ff;
+  font-family: 'Montserrat', sans-serif; font-size: 0.72rem; font-weight: 800;
   letter-spacing: 0.1em; text-transform: uppercase;
-  color: rgba(255,255,255,0.28);
-  padding: 5px 4px; cursor: pointer;
-  transition: background 0.12s, color 0.12s, border-color 0.12s;
+  padding: 11px 24px; white-space: nowrap;
+  box-shadow: 0 0 18px rgba(0,229,255,0.2);
+  transition: background 0.15s, border-color 0.15s, box-shadow 0.15s, transform 0.15s;
 }
-.pk-method-btn:hover { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.55); }
-.pk-method-btn.active {
-  background: rgba(0,229,255,0.08);
-  border-color: rgba(0,229,255,0.25);
-  color: rgba(0,229,255,0.8);
+.pk-save-btn:hover {
+  background: linear-gradient(135deg, rgba(0,229,255,0.34) 0%, rgba(0,180,200,0.25) 100%);
+  border-color: #00e5ff; box-shadow: 0 0 28px rgba(0,229,255,0.4);
+  transform: translateY(-1px);
 }
+.pk-save-btn.saved { border-color: rgba(0,200,80,0.5); color: #00cc55; background: rgba(0,200,80,0.1); box-shadow: 0 0 14px rgba(0,200,80,0.15); }
 
 /* toast */
 .pk-toast {
@@ -5587,7 +5669,14 @@ body.light-mode .pk-weight { color: rgba(0,0,0,0.3) !important; }
 body.light-mode .pk-rounds { color: rgba(0,0,0,0.22) !important; }
 body.light-mode .pk-center { border-color: rgba(0,0,0,0.06) !important; }
 body.light-mode .pk-method-btn { background: rgba(0,0,0,0.04) !important; border-color: rgba(0,0,0,0.09) !important; color: rgba(0,0,0,0.35) !important; }
-body.light-mode .pk-method-btn.active { background: rgba(0,150,180,0.08) !important; border-color: rgba(0,150,180,0.25) !important; color: #006680 !important; }
+body.light-mode .pk-method-btn.active.ko { background: rgba(200,0,0,0.07) !important; border-color: rgba(200,0,0,0.3) !important; color: #cc2200 !important; box-shadow: none !important; }
+body.light-mode .pk-method-btn.active.sub { background: rgba(120,0,200,0.06) !important; border-color: rgba(120,0,200,0.25) !important; color: #7700cc !important; box-shadow: none !important; }
+body.light-mode .pk-method-btn.active.dec { background: rgba(0,150,180,0.08) !important; border-color: rgba(0,150,180,0.25) !important; color: #006680 !important; box-shadow: none !important; }
+body.light-mode .pk-round-btn { background: rgba(0,0,0,0.04) !important; border-color: rgba(0,0,0,0.09) !important; color: rgba(0,0,0,0.35) !important; }
+body.light-mode .pk-save-bar { background: rgba(240,240,244,0.95) !important; border-top-color: rgba(0,0,0,0.08) !important; }
+body.light-mode .pk-save-info { color: rgba(0,0,0,0.4) !important; }
+body.light-mode .pk-save-info strong { color: rgba(0,0,0,0.65) !important; }
+body.light-mode .pk-save-btn { background: rgba(0,150,180,0.1) !important; border-color: rgba(0,150,180,0.4) !important; color: #006680 !important; box-shadow: none !important; }
 body.light-mode .pk-side:hover { background: rgba(0,0,0,0.025) !important; }
 body.light-mode .pk-side.selected { background: rgba(0,150,180,0.07) !important; }
 body.light-mode .pk-side.selected::after { border-color: rgba(0,150,180,0.35) !important; }
