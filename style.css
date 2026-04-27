@@ -2250,7 +2250,7 @@ body.light-mode .pfp-fight-info { color: rgba(0,0,0,0.4); }
 .fr-pills { display: flex; gap: 6px; flex-wrap: wrap; }
 .fight-ico { font-size: 0.9rem; }
 
-/* ── FOTN button ── */
+/* ── FOTN button — appears on fight row hover ── */
 .fotn-btn {
   align-self: flex-end;
   background: transparent;
@@ -2264,8 +2264,16 @@ body.light-mode .pfp-fight-info { color: rgba(0,0,0,0.4); }
   text-transform: uppercase;
   padding: 4px 10px;
   cursor: pointer;
-  transition: all 0.15s;
   width: fit-content;
+  opacity: 0;
+  transform: translateY(-3px);
+  transition: opacity 0.15s, transform 0.15s, border-color 0.15s, color 0.15s, background 0.15s;
+  pointer-events: none;
+}
+.fr-wrap:hover .fotn-btn {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 .fotn-btn:hover {
   border-color: rgba(0,255,255,0.35);
@@ -2273,6 +2281,9 @@ body.light-mode .pfp-fight-info { color: rgba(0,0,0,0.4); }
   background: rgba(0,255,255,0.06);
 }
 .fotn-btn.fotn-locked {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  pointer-events: auto !important;
   border-color: rgba(0,255,255,0.5);
   color: cyan;
   background: rgba(0,255,255,0.1);
@@ -2280,55 +2291,73 @@ body.light-mode .pfp-fight-info { color: rgba(0,0,0,0.4); }
 
 /* ── Hype meter ── */
 .hype-wrap {
-  background: linear-gradient(135deg, #141414, #0e0e0e);
-  border: 1px solid rgba(0,255,255,0.2);
+  background: linear-gradient(135deg, rgba(0,255,255,0.04), rgba(0,0,0,0.4));
+  border: 1px solid rgba(0,255,255,0.25);
   border-left: 3px solid cyan;
-  border-radius: 10px;
-  padding: 14px 16px;
+  border-radius: 12px;
+  padding: 20px 20px 16px;
+  margin-top: 16px;
 }
 .hype-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 4px;
   flex-wrap: wrap;
   gap: 4px;
 }
 .hype-title {
   font-family: 'Montserrat', sans-serif;
-  font-weight: 800;
-  font-size: 0.7rem;
-  letter-spacing: 0.12em;
+  font-weight: 900;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: cyan;
+  text-shadow: 0 0 12px rgba(0,255,255,0.4);
+}
+.hype-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 14px;
 }
 .hype-avg {
   font-family: 'Inter', sans-serif;
-  font-size: 0.72rem;
-  color: rgba(255,255,255,0.4);
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.5);
 }
 .hype-stars {
   display: flex;
-  gap: 4px;
-  margin-bottom: 6px;
+  gap: 6px;
+  margin-bottom: 8px;
 }
 .hype-star {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 1.5rem;
-  color: #2a2a2a;
+  font-size: 2rem;
+  color: rgba(255,255,255,0.15);
   padding: 0;
   transition: color 0.1s, transform 0.1s;
   line-height: 1;
 }
 .hype-star:hover, .hype-star-lit { color: #f5c518; }
-.hype-star:hover { transform: scale(1.2); }
+.hype-star:hover { transform: scale(1.25); }
 .hype-lbl {
   font-family: 'Inter', sans-serif;
-  font-size: 0.72rem;
-  color: rgba(255,255,255,0.3);
-  min-height: 16px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.45);
+  min-height: 18px;
+  margin-bottom: 10px;
+}
+.hype-fotn-hint {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  color: rgba(0,255,255,0.4);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 10px;
+  margin-top: 4px;
 }
 
 /* ============================================
@@ -3273,11 +3302,13 @@ body.light-mode .fight-row:hover { background: rgba(0,0,0,0.07) !important; bord
 body.light-mode .fr-a, body.light-mode .fr-b { color: #111 !important; }
 body.light-mode .fr-vs { color: rgba(0,0,0,0.3) !important; }
 body.light-mode .hype-wrap { background: linear-gradient(135deg, #f0f0f3, #e8e8eb) !important; border-color: rgba(0,153,170,0.2) !important; }
-body.light-mode .hype-title { color: #009bb5 !important; }
+body.light-mode .hype-title { color: #009bb5 !important; text-shadow: none !important; }
+body.light-mode .hype-desc { color: rgba(0,0,0,0.5) !important; }
 body.light-mode .hype-avg { color: rgba(0,0,0,0.4) !important; }
 body.light-mode .hype-star { color: #ccc !important; }
 body.light-mode .hype-star-lit, body.light-mode .hype-star:hover { color: #f5c518 !important; }
 body.light-mode .hype-lbl { color: rgba(0,0,0,0.38) !important; }
+body.light-mode .hype-fotn-hint { color: rgba(0,153,170,0.55) !important; border-top-color: rgba(0,0,0,0.08) !important; }
 body.light-mode .empty { color: rgba(0,0,0,0.45) !important; }
 body.light-mode .empty.big { border-color: rgba(0,0,0,0.1) !important; background: rgba(0,0,0,0.02) !important; }
 

@@ -133,7 +133,6 @@ document.addEventListener('DOMContentLoaded', async () => {
               <span class="fr-b">${esc(f.b)}</span>
             </div>
             <div class="fr-pills">
-              ${f.weight ? `<span class="pill">${esc(f.weight)}</span>` : ''}
               ${f.rounds ? `<span class="pill pill-dim">${esc(f.rounds)}</span>` : ''}
             </div>
           </div>
@@ -173,15 +172,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     return `
       <div class="hype-wrap" data-event-id="${id}" data-event-name="${name}">
         <div class="hype-header">
-          <span class="hype-title">⚡ Pre-Event Hype</span>
+          <span class="hype-title">⚡ Hype Meter</span>
           <span class="hype-avg" id="havg-${id}"></span>
         </div>
+        <div class="hype-desc">Rate how hyped you are for this event</div>
         <div class="hype-stars">
           ${[1,2,3,4,5].map(n=>`
             <button class="hype-star" data-val="${n}" type="button">★</button>
           `).join('')}
         </div>
-        <div class="hype-lbl" id="hlbl-${id}">Tap to rate the hype</div>
+        <div class="hype-lbl" id="hlbl-${id}">Tap a star to rate</div>
+        <div class="hype-fotn-hint">Hover over any fight above and click to lock as your predicted Fight of the Night</div>
       </div>`;
   }
 
@@ -256,10 +257,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             </div>
           </div>
           <div class="ev-content">
-            ${upcoming ? hypeMeter(ev) : ''}
             ${section('Main Card',     ev.mainCard,     meta, upcoming, true)}
             ${section('Prelims',       ev.prelims,      meta, upcoming, false)}
             ${section('Early Prelims', ev.earlyPrelims, meta, upcoming, false)}
+            ${upcoming ? hypeMeter(ev) : ''}
           </div>
         </div>
       </details>`;
