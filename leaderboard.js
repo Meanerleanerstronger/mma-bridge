@@ -1,133 +1,311 @@
 // ==============================================
-// MMA BRIDGE — LEADERBOARD
+// MMA BRIDGE — LEADERBOARD + GROUPS
+// Requires Supabase `profiles` table to have:
+//   group_code TEXT (nullable)
+// Add via Supabase SQL editor:
+//   ALTER TABLE profiles ADD COLUMN IF NOT EXISTS group_code TEXT;
 // ==============================================
 (async function () {
 
   function esc(s) {
     return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
+  function randCode() {
+    return Math.random().toString(36).slice(2, 8).toUpperCase();
+  }
 
   const root = document.getElementById('lbRoot');
   const sb   = window._sb;
 
+  // ── Wait for auth ────────────────────────────
+  function waitForAuth(ms = 4000) {
+    return new Promise(res => {
+      const t0 = Date.now();
+      const tick = () => {
+        const u = window.MMABridgeAuth?.getUser?.();
+        if (u || Date.now() - t0 > ms) res(u || null);
+        else setTimeout(tick, 80);
+      };
+      tick();
+    });
+  }
+
+  // ── Initial skeleton ──────────────────────────
   root.innerHTML = `
     <div class="lb-hero">
       <h1 class="lb-title">Community<br><span>Leaderboard</span></h1>
-      <p class="lb-subtitle">Most active reviewers in the MMA Bridge community</p>
+      <p class="lb-subtitle">Who's reviewed the most events on MMA Bridge</p>
     </div>
     <div class="lb-wrap">
-      <div class="lb-tabs">
-        <button class="lb-tab active" data-tab="rated">Most Active</button>
-        <button class="lb-tab" data-tab="avg">Highest Avg Rating</button>
+
+      <!-- GROUPS -->
+      <div class="lb-groups" id="lbGroups">
+        <div class="lb-groups-header">
+          <div class="lb-groups-title">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Groups
+          </div>
+          <div class="lb-group-btns">
+            <button class="lb-group-btn" id="btnCreateGroup">Create Group</button>
+            <button class="lb-group-btn lb-group-btn-sec" id="btnJoinGroup">Join Group</button>
+          </div>
+        </div>
+        <div id="lbGroupStatus"></div>
       </div>
+
+      <!-- LEADERBOARD -->
+      <div class="lb-section-label" id="lbSectionLabel">Global Rankings</div>
       <div class="lb-table-wrap" id="lbTableWrap">
         <div class="lb-loading">
           <div class="lb-spinner"></div>
-          Loading community stats…
+          Loading…
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CREATE MODAL -->
+    <div class="lb-modal-backdrop" id="modalCreate" style="display:none">
+      <div class="lb-modal">
+        <div class="lb-modal-header">
+          <span class="lb-modal-title">Create a Group</span>
+          <button class="lb-modal-close" id="closeCreate">✕</button>
+        </div>
+        <div class="lb-modal-body">
+          <p class="lb-modal-desc">Give your group a name. We'll generate a join code you can share with friends.</p>
+          <input class="lb-modal-input" id="groupNameInput" type="text" placeholder="e.g. Team Contenders, Cage Rats…" maxlength="40" autocomplete="off" />
+          <button class="lb-modal-submit" id="submitCreate">Create Group</button>
+          <div class="lb-modal-err" id="createErr"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JOIN MODAL -->
+    <div class="lb-modal-backdrop" id="modalJoin" style="display:none">
+      <div class="lb-modal">
+        <div class="lb-modal-header">
+          <span class="lb-modal-title">Join a Group</span>
+          <button class="lb-modal-close" id="closeJoin">✕</button>
+        </div>
+        <div class="lb-modal-body">
+          <p class="lb-modal-desc">Enter the 6-character code your friend shared with you.</p>
+          <input class="lb-modal-input lb-modal-input-code" id="joinCodeInput" type="text" placeholder="ABC123" maxlength="6" autocomplete="off" />
+          <button class="lb-modal-submit" id="submitJoin">Join Group</button>
+          <div class="lb-modal-err" id="joinErr"></div>
         </div>
       </div>
     </div>`;
 
-  if (!sb) {
-    document.getElementById('lbTableWrap').innerHTML =
-      `<div class="lb-error">Community data unavailable.</div>`;
-    return;
-  }
+  const [user, ratingsRes] = await Promise.all([
+    waitForAuth(),
+    sb ? sb.from('ratings').select('user_id, hype_rating, profiles(display_name, avatar_url, group_code, group_name)') : Promise.resolve({ data: null }),
+  ]);
 
-  // ── Fetch all ratings with joined profile ─────
-  const { data, error } = await sb
-    .from('ratings')
-    .select('user_id, hype_rating, profiles(display_name, avatar_url)');
+  const myId = user?.id || null;
 
-  if (error || !data) {
+  if (!sb || !ratingsRes.data) {
     document.getElementById('lbTableWrap').innerHTML =
       `<div class="lb-error">Could not load leaderboard data.</div>`;
     return;
   }
 
-  // ── Aggregate by user ─────────────────────────
+  // ── Aggregate users ────────────────────────────
   const userMap = {};
-  data.forEach(r => {
+  ratingsRes.data.forEach(r => {
     if (!r.user_id) return;
     if (!userMap[r.user_id]) {
       userMap[r.user_id] = {
-        user_id:      r.user_id,
-        display_name: r.profiles?.display_name || 'Anonymous',
-        avatar_url:   r.profiles?.avatar_url   || '',
-        count:        0,
-        total:        0,
+        user_id:    r.user_id,
+        name:       r.profiles?.display_name || 'Anonymous',
+        avatar:     r.profiles?.avatar_url   || '',
+        group_code: r.profiles?.group_code   || null,
+        group_name: r.profiles?.group_name   || null,
+        count:      0,
       };
     }
     userMap[r.user_id].count++;
-    userMap[r.user_id].total += Number(r.hype_rating) || 0;
   });
+  const allUsers = Object.values(userMap).sort((a, b) => b.count - a.count);
 
-  const users = Object.values(userMap).map(u => ({
-    ...u,
-    avg: u.count > 0 ? (u.total / u.count).toFixed(1) : '—',
-  }));
+  // ── My group state ─────────────────────────────
+  let myGroupCode = allUsers.find(u => u.user_id === myId)?.group_code || null;
+  let myGroupName = allUsers.find(u => u.user_id === myId)?.group_name || null;
 
-  // ── Current user id for highlight ────────────
-  const myId = window.MMABridgeAuth?.getUser()?.id || null;
+  // ── Render leaderboard ─────────────────────────
+  function renderTable(users, label) {
+    document.getElementById('lbSectionLabel').textContent = label || 'Global Rankings';
 
-  let activeTab = 'rated';
-
-  function renderTable(tab) {
-    activeTab = tab;
-    const sorted = [...users].sort((a, b) =>
-      tab === 'rated'
-        ? b.count - a.count
-        : parseFloat(b.avg) - parseFloat(a.avg)
-    );
-
-    if (!sorted.length) {
+    if (!users.length) {
       document.getElementById('lbTableWrap').innerHTML =
-        `<div class="lb-error">No ratings yet — be the first to review an event!</div>`;
+        `<div class="lb-error">No members yet — share your group code!</div>`;
       return;
     }
 
-    const rows = sorted.map((u, i) => {
+    const rows = users.map((u, i) => {
       const pos   = i + 1;
       const isMe  = u.user_id === myId;
       const medal = pos === 1 ? '🥇' : pos === 2 ? '🥈' : pos === 3 ? '🥉' : `${pos}`;
-      const initials = (u.display_name || 'A').split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
-
-      const avatarHtml = u.avatar_url
-        ? `<img class="lb-avatar" src="${esc(u.avatar_url)}" alt="${esc(u.display_name)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-           <div class="lb-avatar lb-avatar-init" style="display:none">${esc(initials)}</div>`
-        : `<div class="lb-avatar lb-avatar-init">${esc(initials)}</div>`;
+      const init  = (u.name || 'A').split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+      const avatarHtml = u.avatar
+        ? `<img class="lb-avatar" src="${esc(u.avatar)}" alt="${esc(u.name)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+           <div class="lb-avatar lb-avatar-init" style="display:none">${esc(init)}</div>`
+        : `<div class="lb-avatar lb-avatar-init">${esc(init)}</div>`;
 
       return `
         <div class="lb-row${isMe ? ' lb-row-me' : ''}${pos <= 3 ? ' lb-row-top' : ''}">
           <div class="lb-pos">${medal}</div>
           <div class="lb-user">
             <div class="lb-avatar-wrap">${avatarHtml}</div>
-            <div class="lb-name">${esc(u.display_name)}${isMe ? ' <span class="lb-you">you</span>' : ''}</div>
+            <div class="lb-name">${esc(u.name)}${isMe ? ' <span class="lb-you">you</span>' : ''}</div>
           </div>
           <div class="lb-stat">
             <div class="lb-stat-val">${u.count}</div>
             <div class="lb-stat-lbl">reviewed</div>
           </div>
-          <div class="lb-stat">
-            <div class="lb-stat-val lb-avg">★ ${u.avg}</div>
-            <div class="lb-stat-lbl">avg score</div>
-          </div>
         </div>`;
     }).join('');
 
-    document.getElementById('lbTableWrap').innerHTML =
-      `<div class="lb-table">${rows}</div>`;
+    document.getElementById('lbTableWrap').innerHTML = `<div class="lb-table">${rows}</div>`;
   }
 
-  // ── Tab switching ─────────────────────────────
-  document.querySelectorAll('.lb-tab').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.lb-tab').forEach(t => t.classList.remove('active'));
-      btn.classList.add('active');
-      renderTable(btn.dataset.tab);
+  // ── Render group status bar ────────────────────
+  function renderGroupStatus() {
+    const el = document.getElementById('lbGroupStatus');
+    if (!myGroupCode) { el.innerHTML = ''; return; }
+
+    // Filter leaderboard to group members
+    const groupUsers = allUsers.filter(u => u.group_code === myGroupCode);
+
+    el.innerHTML = `
+      <div class="lb-group-active">
+        <div class="lb-group-active-info">
+          <span class="lb-group-active-name">${esc(myGroupName || 'My Group')}</span>
+          <span class="lb-group-active-meta">${groupUsers.length} member${groupUsers.length !== 1 ? 's' : ''}</span>
+        </div>
+        <div class="lb-group-code-wrap">
+          <span class="lb-group-code-label">Code</span>
+          <span class="lb-group-code" id="groupCodeDisplay">${esc(myGroupCode)}</span>
+          <button class="lb-group-copy" id="btnCopyCode" title="Copy code">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          </button>
+        </div>
+        <div class="lb-group-active-btns">
+          <button class="lb-group-toggle" id="btnToggleGroup">Group</button>
+          <button class="lb-group-leave" id="btnLeaveGroup">Leave</button>
+        </div>
+      </div>`;
+
+    // Default to group view if in a group
+    renderTable(groupUsers, `Group: ${myGroupName || myGroupCode}`);
+
+    document.getElementById('btnCopyCode')?.addEventListener('click', () => {
+      navigator.clipboard?.writeText(myGroupCode).catch(() => {});
+      const btn = document.getElementById('btnCopyCode');
+      btn.innerHTML = '✓';
+      setTimeout(() => { btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>'; }, 1500);
     });
+
+    let showingGroup = true;
+    document.getElementById('btnToggleGroup')?.addEventListener('click', () => {
+      showingGroup = !showingGroup;
+      const btn = document.getElementById('btnToggleGroup');
+      if (showingGroup) {
+        renderTable(groupUsers, `Group: ${myGroupName || myGroupCode}`);
+        btn.textContent = 'Group';
+      } else {
+        renderTable(allUsers, 'Global Rankings');
+        btn.textContent = 'Global';
+      }
+    });
+
+    document.getElementById('btnLeaveGroup')?.addEventListener('click', async () => {
+      if (!confirm('Leave this group?')) return;
+      try {
+        await sb.from('profiles').update({ group_code: null, group_name: null }).eq('id', myId);
+        myGroupCode = null; myGroupName = null;
+        allUsers.forEach(u => { if (u.user_id === myId) { u.group_code = null; u.group_name = null; } });
+        renderGroupStatus();
+        renderTable(allUsers, 'Global Rankings');
+      } catch { alert('Could not leave group. Try again.'); }
+    });
+  }
+
+  // ── Handle scroll-to-groups from homepage link ─
+  if (location.hash === '#groups') {
+    setTimeout(() => document.getElementById('lbGroups')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
+  }
+
+  // ── Initial render ─────────────────────────────
+  renderTable(allUsers, 'Global Rankings');
+  renderGroupStatus();
+
+  // ── Create group modal ─────────────────────────
+  function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+  function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+  document.getElementById('btnCreateGroup').addEventListener('click', () => {
+    if (!myId) { alert('Sign in to create a group.'); return; }
+    openModal('modalCreate');
+    setTimeout(() => document.getElementById('groupNameInput')?.focus(), 60);
+  });
+  document.getElementById('closeCreate').addEventListener('click', () => closeModal('modalCreate'));
+  document.getElementById('modalCreate').addEventListener('click', e => { if (e.target.id === 'modalCreate') closeModal('modalCreate'); });
+
+  document.getElementById('submitCreate').addEventListener('click', async () => {
+    const name = document.getElementById('groupNameInput').value.trim();
+    const errEl = document.getElementById('createErr');
+    if (!name) { errEl.textContent = 'Enter a group name.'; return; }
+    if (!myId) { errEl.textContent = 'Sign in to create a group.'; return; }
+    errEl.textContent = '';
+    const btn = document.getElementById('submitCreate');
+    btn.textContent = 'Creating…'; btn.disabled = true;
+    try {
+      const code = randCode();
+      await sb.from('profiles').upsert({ id: myId, group_code: code, group_name: name });
+      myGroupCode = code; myGroupName = name;
+      allUsers.forEach(u => { if (u.user_id === myId) { u.group_code = code; u.group_name = name; } });
+      closeModal('modalCreate');
+      document.getElementById('groupNameInput').value = '';
+      renderGroupStatus();
+    } catch (err) {
+      errEl.textContent = 'Could not create group. Make sure you are signed in.';
+    } finally { btn.textContent = 'Create Group'; btn.disabled = false; }
   });
 
-  renderTable('rated');
+  // ── Join group modal ───────────────────────────
+  document.getElementById('btnJoinGroup').addEventListener('click', () => {
+    if (!myId) { alert('Sign in to join a group.'); return; }
+    openModal('modalJoin');
+    setTimeout(() => document.getElementById('joinCodeInput')?.focus(), 60);
+  });
+  document.getElementById('closeJoin').addEventListener('click', () => closeModal('modalJoin'));
+  document.getElementById('modalJoin').addEventListener('click', e => { if (e.target.id === 'modalJoin') closeModal('modalJoin'); });
+
+  document.getElementById('submitJoin').addEventListener('click', async () => {
+    const code = document.getElementById('joinCodeInput').value.trim().toUpperCase();
+    const errEl = document.getElementById('joinErr');
+    if (code.length < 4) { errEl.textContent = 'Enter a valid group code.'; return; }
+    if (!myId) { errEl.textContent = 'Sign in to join a group.'; return; }
+    errEl.textContent = '';
+    const btn = document.getElementById('submitJoin');
+    btn.textContent = 'Joining…'; btn.disabled = true;
+    try {
+      // Find a matching group name from existing members
+      const match = allUsers.find(u => u.group_code === code);
+      const name = match?.group_name || null;
+      await sb.from('profiles').upsert({ id: myId, group_code: code, group_name: name });
+      myGroupCode = code; myGroupName = name;
+      allUsers.forEach(u => { if (u.user_id === myId) { u.group_code = code; u.group_name = name; } });
+      closeModal('modalJoin');
+      document.getElementById('joinCodeInput').value = '';
+      renderGroupStatus();
+    } catch {
+      errEl.textContent = 'Could not join group. Check the code and try again.';
+    } finally { btn.textContent = 'Join Group'; btn.disabled = false; }
+  });
+
+  // Enter key on inputs
+  document.getElementById('groupNameInput').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('submitCreate').click(); });
+  document.getElementById('joinCodeInput').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('submitJoin').click(); });
 
 })();

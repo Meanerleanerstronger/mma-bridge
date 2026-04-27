@@ -161,8 +161,6 @@
         <li><a href="events.html">Upcoming Events</a></li>
         <li><a href="pfp.html">PFP</a></li>
         <li><a href="reviews.html">Review</a></li>
-        <li><a href="leaderboard.html">Leaderboard</a></li>
-        <li><a href="leaderboard.html">Leaderboard</a>
       <a href="lucas.html">Lucas Bot</a></li>
       </ul>
 
@@ -190,7 +188,6 @@
       <a href="events.html">Upcoming Events</a>
       <a href="pfp.html">PFP</a>
       <a href="reviews.html">Review</a>
-      <a href="leaderboard.html">Leaderboard</a>
       <a href="lucas.html">Lucas Bot</a>
     </nav>
     <div class="nav-mobile-search">
@@ -247,17 +244,61 @@
     <div class="sidebar">
       <h3>TODAY IN MMA</h3>
       <ul id="today-list"></ul>
+
+      <!-- Community leaderboard widget -->
+      <div class="community-widget">
+        <div class="cw-header">
+          <span class="cw-icon">🏆</span>
+          <span class="cw-title">Leaderboard</span>
+        </div>
+        <div class="cw-rows" id="cwRows">
+          <div class="cw-loading">Loading…</div>
+        </div>
+        <div class="cw-actions">
+          <a href="leaderboard.html" class="cw-btn cw-btn-primary">Full Leaderboard</a>
+          <a href="leaderboard.html#groups" class="cw-btn cw-btn-secondary">Create / Join Group</a>
+        </div>
+      </div>
     </div>
   </div>
 
   <script type="module" src="script.js?v=2.5"></script>
 
   <script>
-    // ── Sticky navbar scroll shadow ──
     window.addEventListener('scroll', () => {
       document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 10);
     });
-
+  </script>
+  <script>
+    // ── Community widget: load top 3 from Supabase ──
+    (async function loadCommunityWidget() {
+      const cwRows = document.getElementById('cwRows');
+      if (!cwRows) return;
+      // Wait for _sb to be ready
+      let attempts = 0;
+      while (!window._sb && attempts++ < 30) await new Promise(r => setTimeout(r, 100));
+      const sb = window._sb;
+      if (!sb) { cwRows.innerHTML = '<div class="cw-loading">—</div>'; return; }
+      try {
+        const { data } = await sb.from('ratings').select('user_id, profiles(display_name, avatar_url)');
+        if (!data || !data.length) { cwRows.innerHTML = '<div class="cw-loading">No reviews yet</div>'; return; }
+        const map = {};
+        data.forEach(r => {
+          if (!r.user_id) return;
+          if (!map[r.user_id]) map[r.user_id] = { name: r.profiles?.display_name || 'Anonymous', avatar: r.profiles?.avatar_url || '', count: 0 };
+          map[r.user_id].count++;
+        });
+        const top3 = Object.values(map).sort((a,b) => b.count - a.count).slice(0, 3);
+        const medals = ['🥇','🥈','🥉'];
+        cwRows.innerHTML = top3.map((u, i) => {
+          const init = (u.name||'A').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+          const avatarHtml = u.avatar
+            ? `<img class="cw-avatar" src="${u.avatar.replace(/"/g,'')}" onerror="this.style.display='none'">`
+            : `<div class="cw-avatar cw-avatar-init">${init}</div>`;
+          return `<div class="cw-row">${avatarHtml}<span class="cw-name">${u.name.replace(/</g,'&lt;')}</span><span class="cw-count">${medals[i]} ${u.count}</span></div>`;
+        }).join('');
+      } catch { cwRows.innerHTML = '<div class="cw-loading">—</div>'; }
+    })();
   </script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase.js"></script>
