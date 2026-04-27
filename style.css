@@ -5386,15 +5386,15 @@ body.light-mode .ev-picks-btn:hover { background: rgba(0,150,180,0.18) !importan
 
 .pk-fight-inner {
   display: grid;
-  grid-template-columns: 1fr 120px 1fr;
-  min-height: 180px;
+  grid-template-columns: 1fr 110px 1fr;
+  min-height: 260px;
 }
-.pk-fight-main .pk-fight-inner { min-height: 240px; }
+.pk-fight-main .pk-fight-inner { min-height: 340px; }
 
 /* ── Fighter side ── */
 .pk-side {
   display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
-  padding: 24px 16px 20px;
+  padding: 28px 20px 22px;
   cursor: pointer; position: relative;
   transition: background 0.18s;
   user-select: none;
@@ -5422,36 +5422,50 @@ body.light-mode .ev-picks-btn:hover { background: rgba(0,150,180,0.18) !importan
 
 /* fighter photo */
 .pk-fighter-photo {
-  width: 100%; max-width: 140px;
+  width: 100%; max-width: 180px;
   flex: 1; display: flex; align-items: flex-end; justify-content: center;
   position: relative; overflow: hidden;
 }
-.pk-fight-main .pk-fighter-photo { max-width: 180px; }
+.pk-fight-main .pk-fighter-photo { max-width: 240px; }
 .pk-fighter-img-a, .pk-fighter-img-b {
-  width: 100%; height: 100%; max-height: 160px;
+  width: 100%; height: 100%; max-height: 220px;
   object-fit: contain; object-position: bottom center;
   display: block;
+  filter: drop-shadow(0 4px 16px rgba(0,0,0,0.6));
+  transition: transform 0.2s;
 }
+.pk-side:hover .pk-fighter-img-a,
+.pk-side:hover .pk-fighter-img-b { transform: scale(1.04) translateY(-4px); }
 .pk-fight-main .pk-fighter-img-a,
-.pk-fight-main .pk-fighter-img-b { max-height: 210px; }
+.pk-fight-main .pk-fighter-img-b { max-height: 290px; }
 .pk-sil-wrap {
-  width: 80px; height: 100px;
+  width: 100px; height: 130px;
   display: flex; align-items: flex-end; justify-content: center;
 }
-.pk-fight-main .pk-sil-wrap { width: 110px; height: 140px; }
+.pk-fight-main .pk-sil-wrap { width: 140px; height: 180px; }
 .pk-silhouette { width: 100%; height: 100%; }
 
 /* fighter name */
 .pk-fighter-name {
   font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
-  font-weight: 800; font-size: 1.05rem;
+  font-weight: 900; font-size: 1.15rem;
   text-transform: uppercase; letter-spacing: 0.04em;
   color: #fff; text-align: center;
-  margin-top: 10px; line-height: 1.1;
+  margin-top: 12px; line-height: 1.1;
 }
-.pk-fight-main .pk-fighter-name { font-size: 1.3rem; }
+.pk-fight-main .pk-fighter-name { font-size: 1.5rem; }
 .pk-fighter-name-a { text-align: center; }
 .pk-fighter-name-b { text-align: center; }
+
+/* record */
+.pk-record {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem; font-weight: 500;
+  color: rgba(255,255,255,0.35);
+  text-align: center;
+  margin-top: 3px; letter-spacing: 0.04em;
+}
+.pk-fight-main .pk-record { font-size: 0.8rem; }
 
 /* pick label */
 .pk-pick-label {
@@ -5543,15 +5557,19 @@ body.light-mode .ev-picks-btn:hover { background: rgba(0,150,180,0.18) !importan
 @media (max-width: 640px) {
   .pk-header { grid-template-columns: auto 1fr; grid-template-rows: auto auto; gap: 12px; padding: 24px 16px 20px; }
   .pk-header-right { grid-column: 1 / -1; align-items: flex-start; }
-  .pk-body { padding: 0 12px 80px; }
-  .pk-fight-inner { grid-template-columns: 1fr 80px 1fr; }
-  .pk-fighter-name { font-size: 0.85rem; }
-  .pk-fight-main .pk-fighter-name { font-size: 1rem; }
+  .pk-body { padding: 0 10px 80px; }
+  .pk-fight-inner { grid-template-columns: 1fr 72px 1fr; min-height: 200px; }
+  .pk-fight-main .pk-fight-inner { min-height: 260px; }
+  .pk-fighter-name { font-size: 0.9rem; }
+  .pk-fight-main .pk-fighter-name { font-size: 1.15rem; }
   .pk-vs { font-size: 1.1rem; }
-  .pk-fighter-img-a, .pk-fighter-img-b { max-height: 110px; }
-  .pk-fight-main .pk-fighter-img-a, .pk-fight-main .pk-fighter-img-b { max-height: 140px; }
+  .pk-fighter-img-a, .pk-fighter-img-b { max-height: 150px; }
+  .pk-fight-main .pk-fighter-img-a, .pk-fight-main .pk-fighter-img-b { max-height: 200px; }
+  .pk-fighter-photo { max-width: 130px; }
+  .pk-fight-main .pk-fighter-photo { max-width: 160px; }
   .pk-event-name { font-size: 1.6rem; }
   .pk-progress-wrap { width: 120px; }
+  .pk-record { font-size: 0.65rem; }
 }
 
 /* light mode */

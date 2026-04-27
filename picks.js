@@ -71,10 +71,35 @@
 
   root.innerHTML = `<div class="pk-loading"><div class="pk-spinner"></div>Loading card…</div>`;
 
-  const [eventsData, user] = await Promise.all([
+  const [eventsData, fightersData, user] = await Promise.all([
     fetch('./events.json').then(r => r.ok ? r.json() : []).catch(() => []),
+    fetch('./data/fighters.json').then(r => r.ok ? r.json() : []).catch(() => []),
     waitForAuth(),
   ]);
+
+  // Build fighter lookup: slugified name → { img, record }
+  const fighterDB = {};
+  (Array.isArray(fightersData) ? fightersData : []).forEach(f => {
+    if (f.id) fighterDB[f.id] = f;
+    if (f.name) fighterDB[slugify(f.name)] = f;
+  });
+
+  function lookupFighter(name) {
+    return fighterDB[slugify(name)] || fighterDB[name?.toLowerCase()] || null;
+  }
+
+  function fighterImg(evImg, name) {
+    if (evImg) return evImg;
+    const fd = lookupFighter(name);
+    return fd?.img || '';
+  }
+
+  function fighterRecord(name) {
+    const fd = lookupFighter(name);
+    if (!fd?.record) return '';
+    const { wins = 0, losses = 0, draws = 0 } = fd.record;
+    return `${wins}-${losses}${draws ? `-${draws}` : ''}`;
+  }
 
   const event = eventsData.find(e => e.id === eventId || slugify(e.name || '') === eventId);
   if (!event) { root.innerHTML = `<div class="pk-error">Event not found.</div>`; return; }
@@ -134,7 +159,8 @@
   }
 
   // ── Fighter photo ──────────────────────────────
-  function fighterPhoto(imgUrl, name, side) {
+  function fighterPhoto(evImg, name, side) {
+    const imgUrl = fighterImg(evImg, name);
     if (imgUrl) {
       return `<img class="pk-fighter-img pk-fighter-img-${side}"
         src="${esc(imgUrl)}" alt="${esc(name)}" loading="lazy"
@@ -185,6 +211,7 @@
               ${fighterPhoto(f.imgA || '', f.a, 'a')}
             </div>
             <div class="pk-fighter-name pk-fighter-name-a">${esc(f.a)}</div>
+            ${fighterRecord(f.a) ? `<div class="pk-record">${esc(fighterRecord(f.a))}</div>` : ''}
             ${pickedA ? `<div class="pk-pick-label">Your pick</div>` : ''}
             ${correctA ? `<div class="pk-pick-result correct">✓ Correct</div>` : ''}
             ${wrongA   ? `<div class="pk-pick-result wrong">✗ Wrong</div>` : ''}
@@ -206,6 +233,7 @@
               ${fighterPhoto(f.imgB || '', f.b, 'b')}
             </div>
             <div class="pk-fighter-name pk-fighter-name-b">${esc(f.b)}</div>
+            ${fighterRecord(f.b) ? `<div class="pk-record">${esc(fighterRecord(f.b))}</div>` : ''}
             ${pickedB ? `<div class="pk-pick-label">Your pick</div>` : ''}
             ${correctB ? `<div class="pk-pick-result correct">✓ Correct</div>` : ''}
             ${wrongB   ? `<div class="pk-pick-result wrong">✗ Wrong</div>` : ''}
