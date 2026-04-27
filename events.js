@@ -201,6 +201,20 @@ document.addEventListener('DOMContentLoaded', async () => {
       countdownHtml = `<span class="ev-countdown ${cls}">${label}</span>`;
     }
 
+    // Calendar button (upcoming only)
+    const calBtnHtml = upcoming && ev.isoDate
+      ? `<div class="ev-cal-wrap" data-ev-id="${esc(id)}">
+           <button class="ev-cal-btn" data-name="${esc(ev.name||'')}" data-iso="${esc(ev.isoDate)}" data-location="${esc((ev.venue ? ev.venue + ', ' : '') + (ev.location||''))}" title="Add to calendar">
+             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+             Add to Calendar
+           </button>
+           <div class="ev-cal-drop" id="caldrop-${esc(id)}" style="display:none">
+             <a class="ev-cal-opt" data-action="google" href="#">Google Calendar</a>
+             <a class="ev-cal-opt" data-action="ics" href="#">Apple / iCal (.ics)</a>
+           </div>
+         </div>`
+      : '';
+
     // Thumbnail
     const thumbHtml = ev.poster
       ? `<img class="ev-thumb" src="${esc(ev.poster)}" alt="" onerror="this.style.display='none'">`
@@ -230,8 +244,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         <div class="ev-body">
           <div class="ev-body-header">
-            <div class="ev-body-title">${esc(ev.name||'')}</div>
-            <div class="ev-body-meta">${ev.date||''} &nbsp;·&nbsp; ${ev.location||''} &nbsp;·&nbsp; ${ev.venue||''}</div>
+            <div class="ev-body-header-top">
+              <div>
+                <div class="ev-body-title">${esc(ev.name||'')}</div>
+                <div class="ev-body-meta">${ev.date||''} &nbsp;·&nbsp; ${ev.location||''} &nbsp;·&nbsp; ${ev.venue||''}</div>
+              </div>
+              ${calBtnHtml}
+            </div>
           </div>
           <div class="ev-content">
             ${upcoming ? hypeMeter(ev) : ''}
@@ -409,6 +428,72 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch(e) { debugLog('FOTN save failed', e); }
   };
 
+  // ── Calendar button logic ─────────────────
+  function bindCalendarButtons() {
+    wrap.querySelectorAll('.ev-cal-btn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const wrap2 = btn.closest('.ev-cal-wrap');
+        const dropId = 'caldrop-' + wrap2.dataset.evId;
+        const drop   = document.getElementById(dropId);
+        if (!drop) return;
+        const isOpen = drop.style.display !== 'none';
+        document.querySelectorAll('.ev-cal-drop').forEach(d => { d.style.display = 'none'; });
+        drop.style.display = isOpen ? 'none' : 'block';
+      });
+    });
+
+    wrap.querySelectorAll('.ev-cal-opt').forEach(opt => {
+      opt.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+        const btn  = opt.closest('.ev-cal-wrap').querySelector('.ev-cal-btn');
+        const name = btn.dataset.name;
+        const iso  = btn.dataset.iso;
+        const loc  = btn.dataset.location;
+        const action = opt.dataset.action;
+
+        // Event runs at 10pm ET on the date — approximate start
+        const dateStr = iso.replace(/-/g, '');
+        const startDT = dateStr + 'T030000Z'; // 10pm ET = 3am UTC next day approx
+        const endDT   = dateStr + 'T060000Z';
+
+        if (action === 'google') {
+          const url = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
+            + `&text=${encodeURIComponent(name)}`
+            + `&dates=${startDT}/${endDT}`
+            + `&details=${encodeURIComponent('Watch live on ESPN+ / PPV\nmmabridge.com')}`
+            + `&location=${encodeURIComponent(loc)}`;
+          window.open(url, '_blank');
+        } else {
+          const ics = [
+            'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//MMA Bridge//EN',
+            'BEGIN:VEVENT',
+            `DTSTART:${startDT}`,
+            `DTEND:${endDT}`,
+            `SUMMARY:${name}`,
+            `LOCATION:${loc}`,
+            `DESCRIPTION:Watch live on ESPN+ / PPV\\nmmabridge.com`,
+            `STATUS:CONFIRMED`,
+            'END:VEVENT', 'END:VCALENDAR'
+          ].join('\r\n');
+          const blob = new Blob([ics], { type: 'text/calendar' });
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = name.replace(/[^a-z0-9]+/gi, '-') + '.ics';
+          a.click();
+          URL.revokeObjectURL(a.href);
+        }
+
+        opt.closest('.ev-cal-drop').style.display = 'none';
+      });
+    });
+
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.ev-cal-drop').forEach(d => { d.style.display = 'none'; });
+    }, { capture: true });
+  }
+
   // ── Load ──────────────────────────────────
   try {
     showLoading(wrap, 'Loading events...');
@@ -433,6 +518,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     wrap.innerHTML = events.map(eventCard).join('');
     bindFightClicks();
     bindHypeMeters();
+    bindCalendarButtons();
 
     // Auto-open event if URL has a hash like #ev-ufc-327-prochazka-vs-ulberg
     if (location.hash) {

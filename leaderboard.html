@@ -9,11 +9,11 @@
   <link rel="apple-touch-icon" href="images/mma-bridge-logo.png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fighter Profile — MMA Bridge</title>
+  <title>Leaderboard — MMA Bridge</title>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=2.5" />
 </head>
-<body class="fp-page">
+<body class="lb-page">
 
   <!-- NAVBAR -->
   <nav class="navbar">
@@ -26,9 +26,8 @@
         <li><a href="events.html">Upcoming Events</a></li>
         <li><a href="pfp.html">PFP</a></li>
         <li><a href="reviews.html">Review</a></li>
-        <li><a href="leaderboard.html">Leaderboard</a></li>
-        <li><a href="leaderboard.html">Leaderboard</a>
-      <a href="lucas.html">Lucas Bot</a></li>
+        <li><a href="leaderboard.html" class="active">Leaderboard</a></li>
+        <li><a href="lucas.html">Lucas Bot</a></li>
       </ul>
       <button class="theme-toggle" id="themeToggle" aria-label="Switch to light mode" title="Switch to light mode">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -64,15 +63,15 @@
     <div class="nav-auth-mobile"></div>
   </div>
 
-  <!-- FIGHTER PROFILE (rendered by fighter.js) -->
-  <div id="fp-root"></div>
+  <!-- PAGE ROOT -->
+  <div id="lbRoot"></div>
 
   <script>
     window.addEventListener('scroll', () => {
       document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 10);
     });
     const navHamburger = document.getElementById('nav-hamburger');
-    const navOverlay = document.getElementById('nav-mobile-overlay');
+    const navOverlay   = document.getElementById('nav-mobile-overlay');
     if (navHamburger) navHamburger.addEventListener('click', () => {
       navHamburger.classList.toggle('open');
       navOverlay.classList.toggle('open');
@@ -84,6 +83,6 @@
   <script src="auth.js?v=3.2"></script>
   <script src="search.js"></script>
   <script src="premium.js?v=3.1"></script>
-  <script src="fighter.js"></script>
+  <script src="leaderboard.js"></script>
 </body>
 </html>
