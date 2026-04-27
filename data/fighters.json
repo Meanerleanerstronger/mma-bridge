@@ -7,22 +7,22 @@
     "flag": "🇬🇧",
     "weightClass": "Heavyweight",
     "ranking": "Champion",
-    "record": {"wins": 14, "losses": 3, "draws": 0},
+    "record": {"wins": 15, "losses": 3, "draws": 0},
     "height": "6'5\"",
     "reach": "78\"",
     "stance": "Orthodox",
     "age": 31,
     "fightingOut": "Manchester, England",
     "style": "All-Around",
-    "titleFights": 3,
+    "pfp": true,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/ASPINALL_TOM_L_BELT_10-25.png",
-    "bio": "Tom Aspinall is the UFC Heavyweight Champion, a rare combination of elite grappling and explosive striking who has finished every title fight opponent in the first round. After capturing the interim belt at UFC 295 with a 27-second TKO of Sergei Pavlovich, Aspinall became undisputed champion in 2025. The Manchester native is widely regarded as the most well-rounded heavyweight in UFC history.",
+    "bio": "Tom Aspinall is the UFC Heavyweight Champion and pound-for-pound one of the best fighters on the planet. A rare combination of elite grappling, explosive striking and genuine heavyweight power, Aspinall has finished every title fight opponent in the first round. The Manchester native captures the interim belt with a 27-second TKO of Pavlovich and became undisputed champion in 2025.",
     "last5": [
+      {"opponent": "Ciryl Gane", "result": "NC", "method": "NC", "event": "UFC 321", "round": 1, "time": "4:35"},
       {"opponent": "Curtis Blaydes", "result": "W", "method": "TKO", "event": "UFC 304", "round": 1, "time": "0:17"},
       {"opponent": "Sergei Pavlovich", "result": "W", "method": "TKO", "event": "UFC 295", "round": 1, "time": "0:27"},
       {"opponent": "Marcin Tybura", "result": "W", "method": "TKO", "event": "UFC Fight Night", "round": 1, "time": "2:59"},
-      {"opponent": "Alexander Volkov", "result": "W", "method": "Sub", "event": "UFC Fight Night", "round": 3, "time": "4:44"},
-      {"opponent": "Andrei Arlovski", "result": "W", "method": "Sub", "event": "UFC Fight Night", "round": 1, "time": "1:17"}
+      {"opponent": "Alexander Volkov", "result": "W", "method": "Sub", "event": "UFC Fight Night", "round": 3, "time": "4:44"}
     ]
   },
   {
@@ -32,23 +32,22 @@
     "nationality": "American",
     "flag": "🇺🇸",
     "weightClass": "Heavyweight",
-    "ranking": "#1",
-    "record": {"wins": 18, "losses": 5, "draws": 0},
+    "ranking": "#2",
+    "record": {"wins": 19, "losses": 6, "draws": 0},
     "height": "6'4\"",
     "reach": "79\"",
     "stance": "Southpaw",
     "age": 33,
     "fightingOut": "Chicago, Illinois",
     "style": "Wrestler",
-    "titleFights": 0,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-06/BLAYDES_CURTIS_L_06-01.png",
-    "bio": "Curtis Blaydes is one of the top heavyweight grapplers in the world, using his Division I wrestling background to suffocate opponents with relentless top pressure and ground-and-pound. A former title challenger, he has defeated multiple top-ten heavyweights. Blaydes recently rebounded from a first-round TKO loss to Aspinall to remain the division's top contender.",
+    "bio": "Curtis Blaydes is one of the UFC's most durable heavyweights, a Division I wrestler who uses suffocating top pressure and relentless ground-and-pound to grind down opponents. He has beaten multiple ranked heavyweights and has faced the very best the division has to offer, though recent losses to Aspinall and Hokit have kept the title just out of reach.",
     "last5": [
+      {"opponent": "Josh Hokit", "result": "L", "method": "Dec", "event": "UFC 327", "round": 3, "time": "5:00"},
+      {"opponent": "Rizvan Kuniev", "result": "W", "method": "Dec", "event": "UFC on ABC 8", "round": 3, "time": "5:00"},
       {"opponent": "Tom Aspinall", "result": "L", "method": "TKO", "event": "UFC 304", "round": 1, "time": "0:17"},
-      {"opponent": "Jailton Almeida", "result": "W", "method": "Dec", "event": "UFC Fight Night", "round": 3, "time": "5:00"},
-      {"opponent": "Sergei Pavlovich", "result": "L", "method": "KO", "event": "UFC 295", "round": 1, "time": "2:35"},
-      {"opponent": "Chris Daukaus", "result": "W", "method": "TKO", "event": "UFC Fight Night", "round": 1, "time": "0:39"},
-      {"opponent": "Tom Aspinall", "result": "L", "method": "Sub", "event": "UFC Fight Night", "round": 3, "time": "4:44"}
+      {"opponent": "Jailton Almeida", "result": "W", "method": "TKO", "event": "UFC 299", "round": 2, "time": "0:36"},
+      {"opponent": "Sergei Pavlovich", "result": "L", "method": "KO", "event": "UFC Fight Night", "round": 1, "time": "3:08"}
     ]
   },
   {
@@ -58,23 +57,22 @@
     "nationality": "Russian",
     "flag": "🇷🇺",
     "weightClass": "Heavyweight",
-    "ranking": "#2",
-    "record": {"wins": 18, "losses": 2, "draws": 0},
+    "ranking": "#3",
+    "record": {"wins": 20, "losses": 3, "draws": 0},
     "height": "6'4\"",
     "reach": "74\"",
     "stance": "Orthodox",
-    "age": 31,
+    "age": 32,
     "fightingOut": "Ulyanovsk, Russia",
     "style": "Striker",
-    "titleFights": 1,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-10/PAVLOVICH_SERGEI_L_10-28.png",
-    "bio": "Sergei Pavlovich is a devastating knockout artist who ran off nine first-round finishes before his title shot at UFC 295. The Russian powerhouse owns the fastest-ever KO in heavyweight history and has finished most of his opponents inside one round. His surgical straight right hand makes him one of the most feared strikers in the heavyweight division.",
+    "bio": "Sergei Pavlovich is one of the most feared knockout artists in heavyweight history, with nine first-round finishes in a row before his title shot at UFC 295. His straight right hand is one of the most dangerous weapons in the division and he owns the fastest KO in heavyweight history. Back on form with consecutive wins in 2025.",
     "last5": [
+      {"opponent": "Waldo Cortes-Acosta", "result": "W", "method": "Dec", "event": "UFC Fight Night", "round": 3, "time": "5:00"},
+      {"opponent": "Jairzinho Rozenstruik", "result": "W", "method": "Dec", "event": "UFC Fight Night", "round": 3, "time": "5:00"},
+      {"opponent": "Alexander Volkov", "result": "L", "method": "Dec", "event": "UFC Fight Night", "round": 3, "time": "5:00"},
       {"opponent": "Tom Aspinall", "result": "L", "method": "TKO", "event": "UFC 295", "round": 1, "time": "0:27"},
-      {"opponent": "Ciryl Gane", "result": "W", "method": "KO", "event": "UFC 295", "round": 1, "time": "2:00"},
-      {"opponent": "Tai Tuivasa", "result": "W", "method": "KO", "event": "UFC Fight Night", "round": 1, "time": "2:04"},
-      {"opponent": "Derrick Lewis", "result": "W", "method": "KO", "event": "UFC Fight Night", "round": 1, "time": "0:55"},
-      {"opponent": "Alistair Overeem", "result": "W", "method": "KO", "event": "UFC Fight Night", "round": 1, "time": "3:49"}
+      {"opponent": "Ciryl Gane", "result": "W", "method": "KO", "event": "UFC 295", "round": 1, "time": "2:00"}
     ]
   },
   {
@@ -84,23 +82,22 @@
     "nationality": "French",
     "flag": "🇫🇷",
     "weightClass": "Heavyweight",
-    "ranking": "#3",
-    "record": {"wins": 12, "losses": 2, "draws": 0},
+    "ranking": "#1",
+    "record": {"wins": 13, "losses": 2, "draws": 0},
     "height": "6'4\"",
     "reach": "81\"",
     "stance": "Unorthodox",
     "age": 34,
     "fightingOut": "Paris, France",
     "style": "Striker",
-    "titleFights": 2,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-03/GANE_CIRYL_L_03-04.png",
-    "bio": "Ciryl Gane is the most technical heavyweight in MMA history, combining kickboxing precision with extraordinary athletic movement that belies his 250-pound frame. An interim champion and two-time title challenger, Bon Gamin has losses only to Ngannou and Aspinall — both undisputed champions. His footwork and combination striking are elite at any weight class.",
+    "bio": "Ciryl Gane is the most technically gifted heavyweight in MMA, combining elite kickboxing footwork with extraordinary movement that belies his 250-pound frame. A former interim champion, Bon Gamin's only UFC losses are to Ngannou and Pavlovich. His UFC 321 fight with Aspinall was ruled a No Contest after an accidental eye poke, with the rematch now a must-see.",
     "last5": [
-      {"opponent": "Alexander Volkov", "result": "W", "method": "Dec", "event": "UFC Fight Night", "round": 3, "time": "5:00"},
-      {"opponent": "Sergei Pavlovich", "result": "L", "method": "KO", "event": "UFC 295", "round": 1, "time": "2:00"},
-      {"opponent": "Jon Ngannou", "result": "L", "method": "TKO", "event": "UFC 270", "round": 3, "time": "2:31"},
-      {"opponent": "Derrick Lewis", "result": "W", "method": "TKO", "event": "UFC 265", "round": 3, "time": "4:01"},
-      {"opponent": "Junior Dos Santos", "result": "W", "method": "TKO", "event": "UFC Fight Night", "round": 3, "time": "4:01"}
+      {"opponent": "Tom Aspinall", "result": "NC", "method": "NC", "event": "UFC 321", "round": 1, "time": "4:35"},
+      {"opponent": "Alexander Volkov", "result": "W", "method": "Dec", "event": "UFC 310", "round": 3, "time": "5:00"},
+      {"opponent": "Sergei Pavlovich", "result": "L", "method": "KO", "event": "UFC Fight Night", "round": 1, "time": "2:00"},
+      {"opponent": "Francis Ngannou", "result": "L", "method": "TKO", "event": "UFC 270", "round": 3, "time": "2:31"},
+      {"opponent": "Derrick Lewis", "result": "W", "method": "TKO", "event": "UFC 265", "round": 3, "time": "4:01"}
     ]
   },
   {
@@ -110,23 +107,22 @@
     "nationality": "Brazilian",
     "flag": "🇧🇷",
     "weightClass": "Heavyweight",
-    "ranking": "#4",
-    "record": {"wins": 21, "losses": 2, "draws": 0},
+    "ranking": "Former Top 5",
+    "record": {"wins": 22, "losses": 5, "draws": 0},
     "height": "6'3\"",
     "reach": "76\"",
     "stance": "Orthodox",
     "age": 31,
     "fightingOut": "Recife, Brazil",
     "style": "Grappler",
-    "titleFights": 0,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-02/ALMEIDA_JAILTON_L_02-17.png",
-    "bio": "Jailton Almeida is a submission grappling specialist who brings BJJ black belt technique to the heavyweight division with a 90% finish rate. The Brazilian has 17 submission victories and consistently drags big heavyweights to the mat where they are helpless. His rapid rise through the UFC ranks marks him as a genuine future title threat.",
+    "bio": "Jailton Almeida is a submission grappling specialist whose BJJ black belt technique and relentless top control made him one of the most feared heavyweights in the world. With a 90% finish rate and 17 submissions, his rapid rise through the UFC ranks was electrifying. Released by the UFC after consecutive losses to Volkov and Kuniev in 2025-2026.",
     "last5": [
-      {"opponent": "Curtis Blaydes", "result": "L", "method": "Dec", "event": "UFC Fight Night", "round": 3, "time": "5:00"},
-      {"opponent": "Alexandr Romanov", "result": "W", "method": "Sub", "event": "UFC Fight Night", "round": 1, "time": "3:39"},
-      {"opponent": "Shamil Gaziev", "result": "W", "method": "TKO", "event": "UFC 300", "round": 1, "time": "1:54"},
-      {"opponent": "Derrick Lewis", "result": "W", "method": "TKO", "event": "UFC Fight Night", "round": 2, "time": "3:38"},
-      {"opponent": "Serghei Spivac", "result": "W", "method": "Sub", "event": "UFC Fight Night", "round": 1, "time": "4:59"}
+      {"opponent": "Rizvan Kuniev", "result": "L", "method": "Dec", "event": "UFC Fight Night", "round": 3, "time": "5:00"},
+      {"opponent": "Alexander Volkov", "result": "L", "method": "Dec", "event": "UFC 321", "round": 3, "time": "5:00"},
+      {"opponent": "Serghei Spivac", "result": "W", "method": "TKO", "event": "UFC 311", "round": 1, "time": "4:53"},
+      {"opponent": "Alexandr Romanov", "result": "W", "method": "Sub", "event": "UFC 302", "round": 1, "time": "3:39"},
+      {"opponent": "Curtis Blaydes", "result": "L", "method": "TKO", "event": "UFC 299", "round": 2, "time": "0:36"}
     ]
   },
   {
@@ -137,22 +133,22 @@
     "flag": "🇧🇷",
     "weightClass": "Light Heavyweight",
     "ranking": "Champion",
-    "record": {"wins": 12, "losses": 2, "draws": 0},
+    "record": {"wins": 13, "losses": 3, "draws": 0},
     "height": "6'4\"",
     "reach": "79\"",
     "stance": "Orthodox",
     "age": 37,
     "fightingOut": "São Paulo, Brazil",
     "style": "Striker",
-    "titleFights": 6,
+    "pfp": true,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/PEREIRA_ALEX_L.png",
-    "bio": "Alex Pereira is one of the most exciting champions in UFC history, having captured belts in two weight classes. A former Glory Kickboxing world champion, Poatan's power is considered generational — he has five first-round knockouts in his last seven UFC fights. His willingness to take short notice fights and face all comers has made him the face of the sport.",
+    "bio": "Alex Pereira is one of the most exciting champions in combat sports history, a two-division UFC champion and former Glory Kickboxing world champion whose generational power has produced five first-round knockouts in his last nine UFC fights. He lost the LHW title to Ankalaev at UFC 313 only to immediately reclaim it with a TKO in round one at UFC 320, cementing his status as the face of the sport.",
     "last5": [
-      {"opponent": "Khalil Rountree Jr.", "result": "W", "method": "TKO", "event": "UFC 307", "round": 4, "time": "1:10"},
+      {"opponent": "Magomed Ankalaev", "result": "W", "method": "TKO", "event": "UFC 320", "round": 1, "time": ""},
+      {"opponent": "Magomed Ankalaev", "result": "L", "method": "Dec", "event": "UFC 313", "round": 5, "time": "5:00"},
+      {"opponent": "Khalil Rountree Jr.", "result": "W", "method": "KO", "event": "UFC 307", "round": 4, "time": "1:10"},
       {"opponent": "Jiří Procházka", "result": "W", "method": "KO", "event": "UFC 303", "round": 3, "time": "1:02"},
-      {"opponent": "Jamahal Hill", "result": "W", "method": "KO", "event": "UFC 300", "round": 1, "time": "1:19"},
-      {"opponent": "Alex Poatan", "result": "W", "method": "Sub", "event": "UFC 295", "round": 1, "time": "0:32"},
-      {"opponent": "Jiří Procházka", "result": "W", "method": "TKO", "event": "UFC 295", "round": 3, "time": "4:04"}
+      {"opponent": "Jamahal Hill", "result": "W", "method": "KO", "event": "UFC 300", "round": 1, "time": "1:19"}
     ]
   },
   {
@@ -163,22 +159,22 @@
     "flag": "🇷🇺",
     "weightClass": "Light Heavyweight",
     "ranking": "#1",
-    "record": {"wins": 19, "losses": 1, "draws": 1},
+    "record": {"wins": 20, "losses": 2, "draws": 1},
     "height": "6'3\"",
     "reach": "75.5\"",
     "stance": "Southpaw",
     "age": 32,
     "fightingOut": "Makhachkala, Russia",
     "style": "All-Around",
-    "titleFights": 0,
+    "pfp": true,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/ANKALAEV_MAGOMED_L_10-26.png",
-    "bio": "Magomed Ankalaev is one of the most underrated fighters on the roster, a technically precise striker with world-class wrestling who has steamrolled through the light heavyweight division. His lone non-win is a controversial split draw against Jan Blachowicz. With seven straight victories, Ankalaev is the division's most credible title challenger.",
+    "bio": "Magomed Ankalaev is one of the most technically precise fighters in the UFC, a Dagestani with world-class wrestling and sharp technical striking who became LHW champion by defeating Alex Pereira at UFC 313. Although Pereira reclaimed the belt via TKO at UFC 320, Ankalaev proved he belongs at the very top and is the division's most credible long-term threat.",
     "last5": [
+      {"opponent": "Alex Pereira", "result": "L", "method": "TKO", "event": "UFC 320", "round": 1, "time": ""},
+      {"opponent": "Alex Pereira", "result": "W", "method": "Dec", "event": "UFC 313", "round": 5, "time": "5:00"},
       {"opponent": "Johnny Walker", "result": "W", "method": "TKO", "event": "UFC Fight Night", "round": 1, "time": "1:08"},
       {"opponent": "Aleksandar Rakić", "result": "W", "method": "TKO", "event": "UFC 282", "round": 3, "time": "3:18"},
-      {"opponent": "Jan Blachowicz", "result": "Draw", "method": "Split Draw", "event": "UFC 282", "round": 5, "time": "5:00"},
-      {"opponent": "Anthony Smith", "result": "W", "method": "TKO", "event": "UFC 277", "round": 3, "time": "4:32"},
-      {"opponent": "Volkan Oezdemir", "result": "W", "method": "KO", "event": "UFC Fight Night", "round": 1, "time": "0:56"}
+      {"opponent": "Jan Blachowicz", "result": "D", "method": "Split Draw", "event": "UFC 282", "round": 5, "time": "5:00"}
     ]
   },
   {
@@ -196,9 +192,8 @@
     "age": 32,
     "fightingOut": "Hostěradice, Czech Republic",
     "style": "Striker",
-    "titleFights": 3,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-06/PROCHAZKA_JIRI_L_06-29.png",
-    "bio": "Jiří Procházka is the most unconventional fighter in the UFC, combining samurai philosophy with unpredictable wild striking that has produced some of the most memorable finishes in light heavyweight history. A former champion who submitted Glover Teixeira to win the title, Procházka fights without fear and has never turned down a bout.",
+    "bio": "Jiří Procházka is the most unconventional fighter in the UFC, combining samurai philosophy with unorthodox wild striking that has produced some of the most memorable finishes in LHW history. A former champion who submitted Glover Teixeira to win the title, Procházka fights without fear and never backs down from a challenge.",
     "last5": [
       {"opponent": "Alex Pereira", "result": "L", "method": "KO", "event": "UFC 303", "round": 3, "time": "1:02"},
       {"opponent": "Alex Pereira", "result": "L", "method": "TKO", "event": "UFC 295", "round": 3, "time": "4:04"},
@@ -215,18 +210,17 @@
     "flag": "🇺🇸",
     "weightClass": "Light Heavyweight",
     "ranking": "#3",
-    "record": {"wins": 12, "losses": 5, "draws": 1},
+    "record": {"wins": 12, "losses": 6, "draws": 1},
     "height": "6'1\"",
     "reach": "73\"",
     "stance": "Unorthodox",
     "age": 35,
     "fightingOut": "Las Vegas, Nevada",
     "style": "Striker",
-    "titleFights": 1,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/ROUNTREE_KHALIL_L_10-05.png",
-    "bio": "Khalil Rountree Jr. is one of the most improved fighters in the UFC, transforming from a prospect into a legitimate title challenger through relentless work ethic. He went on a stunning six-fight knockout streak before earning a shot at Alex Pereira at UFC 307. His powerful and creative striking style makes him dangerous against anyone in the division.",
+    "bio": "Khalil Rountree Jr. is one of the UFC's most improved fighters, transforming from an inconsistent prospect into a legitimate title challenger through relentless work ethic and a six-fight knockout streak. His creative, powerful striking style makes him dangerous against anyone in the division. He challenged Pereira for the LHW title at UFC 307 in a war before falling in round 4.",
     "last5": [
-      {"opponent": "Alex Pereira", "result": "L", "method": "TKO", "event": "UFC 307", "round": 4, "time": "1:10"},
+      {"opponent": "Alex Pereira", "result": "L", "method": "KO", "event": "UFC 307", "round": 4, "time": "1:10"},
       {"opponent": "Carlos Ulberg", "result": "W", "method": "KO", "event": "UFC 304", "round": 2, "time": "1:15"},
       {"opponent": "Anthony Smith", "result": "W", "method": "TKO", "event": "UFC Fight Night", "round": 2, "time": "4:53"},
       {"opponent": "Chris Daukaus", "result": "W", "method": "KO", "event": "UFC Fight Night", "round": 1, "time": "2:25"},
@@ -240,23 +234,23 @@
     "nationality": "South African",
     "flag": "🇿🇦",
     "weightClass": "Middleweight",
-    "ranking": "Champion",
-    "record": {"wins": 22, "losses": 3, "draws": 0},
+    "ranking": "#1",
+    "record": {"wins": 23, "losses": 3, "draws": 0},
     "height": "6'0\"",
     "reach": "76\"",
     "stance": "Orthodox",
     "age": 31,
     "fightingOut": "Pretoria, South Africa",
     "style": "Striker",
-    "titleFights": 3,
+    "pfp": true,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/DU_PLESSIS_DRICUS_L_01-20.png",
-    "bio": "Dricus du Plessis made history as the first South African UFC champion, stopping two all-time greats in Israel Adesanya and Sean Strickland to prove he belongs among the elite. His relentless forward pressure and ability to take punishment while remaining dangerous makes him one of the toughest fighters on the roster. Du Plessis is now cementing his legacy with defences against the division's best.",
+    "bio": "Dricus du Plessis made history as the first South African UFC champion, stopping all-time greats Strickland, Whittaker, and Adesanya on his way to and in defence of the belt. His relentless forward pressure and ability to take punishment while remaining dangerous is elite. He lost the belt to Chimaev at UFC 319 and is building back toward another title run.",
     "last5": [
+      {"opponent": "Khamzat Chimaev", "result": "L", "method": "Dec", "event": "UFC 319", "round": 5, "time": "5:00"},
+      {"opponent": "Sean Strickland", "result": "W", "method": "Dec", "event": "UFC 312", "round": 5, "time": "5:00"},
       {"opponent": "Israel Adesanya", "result": "W", "method": "Sub", "event": "UFC 305", "round": 4, "time": "4:26"},
       {"opponent": "Sean Strickland", "result": "W", "method": "Split Dec", "event": "UFC 297", "round": 5, "time": "5:00"},
-      {"opponent": "Robert Whittaker", "result": "W", "method": "TKO", "event": "UFC 290", "round": 2, "time": "2:26"},
-      {"opponent": "Darren Till", "result": "W", "method": "TKO", "event": "UFC Fight Night", "round": 3, "time": "4:59"},
-      {"opponent": "Brad Tavares", "result": "W", "method": "KO", "event": "UFC Fight Night", "round": 2, "time": "4:09"}
+      {"opponent": "Robert Whittaker", "result": "W", "method": "TKO", "event": "UFC 290", "round": 2, "time": "2:26"}
     ]
   },
   {
@@ -266,7 +260,7 @@
     "nationality": "Australian",
     "flag": "🇦🇺",
     "weightClass": "Middleweight",
-    "ranking": "#1",
+    "ranking": "#2",
     "record": {"wins": 25, "losses": 7, "draws": 0},
     "height": "6'0\"",
     "reach": "76\"",
@@ -274,15 +268,14 @@
     "age": 33,
     "fightingOut": "Sydney, Australia",
     "style": "Striker",
-    "titleFights": 4,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-02/WHITTAKER_ROBERT_L_02-17.png",
-    "bio": "Robert Whittaker is a former UFC Middleweight Champion and one of the most technically gifted strikers in the division's history. With crisp combinations, elite footwork, and iron chin, The Reaper has beaten nearly every top contender. His rivalry with Israel Adesanya defined an era of middleweight competition, and he remains the division's top challenger.",
+    "bio": "Robert Whittaker is a former UFC Middleweight Champion and one of the most technically gifted strikers in the division's history. Crisp combinations, elite footwork and an iron chin have allowed him to beat nearly every top contender. His rivalry with Adesanya defined an era of middleweight MMA and he remains one of the most dangerous fighters at 185.",
     "last5": [
+      {"opponent": "Khamzat Chimaev", "result": "L", "method": "Sub", "event": "UFC 308", "round": 1, "time": ""},
       {"opponent": "Khamzat Chimaev", "result": "L", "method": "Dec", "event": "UFC 308", "round": 5, "time": "5:00"},
       {"opponent": "Paulo Costa", "result": "W", "method": "Dec", "event": "UFC 298", "round": 3, "time": "5:00"},
       {"opponent": "Dricus du Plessis", "result": "L", "method": "TKO", "event": "UFC 290", "round": 2, "time": "2:26"},
-      {"opponent": "Paulo Costa", "result": "W", "method": "Dec", "event": "UFC 284", "round": 5, "time": "5:00"},
-      {"opponent": "Israel Adesanya", "result": "L", "method": "Dec", "event": "UFC 271", "round": 5, "time": "5:00"}
+      {"opponent": "Paulo Costa", "result": "W", "method": "Dec", "event": "UFC 284", "round": 5, "time": "5:00"}
     ]
   },
   {
@@ -292,23 +285,23 @@
     "nationality": "Swedish-Chechen",
     "flag": "🇸🇪",
     "weightClass": "Middleweight",
-    "ranking": "#2",
-    "record": {"wins": 13, "losses": 0, "draws": 0},
+    "ranking": "Champion",
+    "record": {"wins": 15, "losses": 0, "draws": 0},
     "height": "6'1\"",
     "reach": "75\"",
     "stance": "Orthodox",
     "age": 30,
     "fightingOut": "Grozny, Chechnya",
     "style": "All-Around",
-    "titleFights": 0,
+    "pfp": true,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/CHIMAEV_KHAMZAT_L_BELTMOCK.png",
-    "bio": "Khamzat Chimaev is the UFC's most dominant undefeated prospect-turned-contender, overwhelming opponents with elite wrestling, smothering grappling, and powerful striking. Borz has not yet been taken to a decision by a UFC opponent who wasn't at the absolute top of the sport. His unbeaten record and willingness to fight anyone make him the division's most feared threat.",
+    "bio": "Khamzat Chimaev is the UFC Middleweight Champion and one of the most dominant undefeated fighters in MMA history. His elite wrestling, smothering grappling and explosive striking have dismantled everyone placed in front of him. He submitted Whittaker in round one at UFC 308 and then defeated du Plessis by unanimous decision at UFC 319 to claim the belt he was always destined to hold.",
     "last5": [
-      {"opponent": "Robert Whittaker", "result": "W", "method": "Dec", "event": "UFC 308", "round": 5, "time": "5:00"},
+      {"opponent": "Dricus du Plessis", "result": "W", "method": "Dec", "event": "UFC 319", "round": 5, "time": "5:00"},
+      {"opponent": "Robert Whittaker", "result": "W", "method": "Sub", "event": "UFC 308", "round": 1, "time": ""},
       {"opponent": "Kamaru Usman", "result": "W", "method": "Dec", "event": "UFC 294", "round": 3, "time": "5:00"},
-      {"opponent": "Gilbert Burns", "result": "W", "method": "Dec", "event": "UFC 273", "round": 3, "time": "5:00"},
       {"opponent": "Nate Diaz", "result": "W", "method": "Dec", "event": "UFC 279", "round": 4, "time": "5:00"},
-      {"opponent": "Li Jingliang", "result": "W", "method": "TKO", "event": "UFC 267", "round": 1, "time": "3:16"}
+      {"opponent": "Gilbert Burns", "result": "W", "method": "Dec", "event": "UFC 273", "round": 3, "time": "5:00"}
     ]
   },
   {
@@ -319,22 +312,21 @@
     "flag": "🇺🇸",
     "weightClass": "Middleweight",
     "ranking": "#3",
-    "record": {"wins": 28, "losses": 6, "draws": 0},
+    "record": {"wins": 28, "losses": 7, "draws": 0},
     "height": "6'0\"",
     "reach": "77\"",
     "stance": "Orthodox",
     "age": 33,
     "fightingOut": "Anaheim, California",
     "style": "Striker",
-    "titleFights": 2,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-01/STRICKLAND_SEAN_L_01-20.png",
-    "bio": "Sean Strickland is one of MMA's most polarizing and unpredictable champions, pulling off one of the biggest upsets in UFC history when he dominated Israel Adesanya for the middleweight title. His boxing-first style prioritizes volume and pressure over power, and his ability to ignore damage while landing clean punches makes him uniquely difficult to fight.",
+    "bio": "Sean Strickland pulled off one of the biggest upsets in UFC history when he dominated Adesanya for the middleweight belt. His boxing-first style prioritises volume and relentless pressure over power, and his ability to ignore damage while landing clean combinations makes him uniquely difficult to fight. A two-time title challenger who always shows up.",
     "last5": [
+      {"opponent": "Dricus du Plessis", "result": "L", "method": "Dec", "event": "UFC 312", "round": 5, "time": "5:00"},
       {"opponent": "Dricus du Plessis", "result": "L", "method": "Split Dec", "event": "UFC 297", "round": 5, "time": "5:00"},
       {"opponent": "Israel Adesanya", "result": "W", "method": "Dec", "event": "UFC 293", "round": 5, "time": "5:00"},
       {"opponent": "Abus Magomedov", "result": "W", "method": "TKO", "event": "UFC Fight Night", "round": 2, "time": "1:40"},
-      {"opponent": "Nassourdine Imavov", "result": "W", "method": "Dec", "event": "UFC Fight Night", "round": 5, "time": "5:00"},
-      {"opponent": "Alex Pereira", "result": "L", "method": "KO", "event": "UFC 276", "round": 1, "time": "2:04"}
+      {"opponent": "Nassourdine Imavov", "result": "W", "method": "Dec", "event": "UFC Fight Night", "round": 5, "time": "5:00"}
     ]
   },
   {
@@ -352,9 +344,8 @@
     "age": 35,
     "fightingOut": "Auckland, New Zealand",
     "style": "Striker",
-    "titleFights": 7,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-09/ADESANYA_ISRAEL_L_09-28.png",
-    "bio": "Israel Adesanya is a generational striking talent and three-time UFC Middleweight Champion whose anime-influenced style and culture-shifting presence made him one of the most iconic figures in combat sports. A kickboxing world champion turned MMA superstar, Izzy's footwork and counter-striking are among the most technically sophisticated ever seen in the UFC.",
+    "bio": "Israel Adesanya is a generational striking talent and three-time UFC Middleweight Champion whose anime-influenced style and culture-shifting presence made him one of the most iconic figures in combat sports. A kickboxing world champion turned MMA superstar, Izzy's footwork, timing and counter-striking are among the most technically sophisticated seen in any weight class.",
     "last5": [
       {"opponent": "Dricus du Plessis", "result": "L", "method": "Sub", "event": "UFC 305", "round": 4, "time": "4:26"},
       {"opponent": "Sean Strickland", "result": "L", "method": "Dec", "event": "UFC 293", "round": 5, "time": "5:00"},
@@ -370,23 +361,22 @@
     "nationality": "American",
     "flag": "🇺🇸",
     "weightClass": "Welterweight",
-    "ranking": "Champion",
-    "record": {"wins": 24, "losses": 3, "draws": 0},
+    "ranking": "#2",
+    "record": {"wins": 24, "losses": 4, "draws": 0},
     "height": "5'11\"",
     "reach": "74\"",
     "stance": "Orthodox",
     "age": 36,
     "fightingOut": "Chicago, Illinois",
     "style": "Wrestler",
-    "titleFights": 1,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-07/MUHAMMAD_BELAL_L_BELT_07-27.png",
-    "bio": "Belal Muhammad is the UFC Welterweight Champion, a relentless wrestler and pressure fighter who stole the belt from Leon Edwards with an unstoppable performance at UFC 304. Known for his suffocating top control and constant forward pressure, Muhammad has wins over multiple top-five welterweights and continues to improve with each fight.",
+    "bio": "Belal Muhammad is a former UFC Welterweight Champion who captured the belt from Leon Edwards with an unstoppable performance at UFC 304. A relentless wrestler and pressure fighter known for suffocating top control, Muhammad has wins over multiple top-five welterweights. He lost the title to Jack Della Maddalena at UFC 315 in a hard-fought decision.",
     "last5": [
+      {"opponent": "Jack Della Maddalena", "result": "L", "method": "Dec", "event": "UFC 315", "round": 5, "time": "5:00"},
       {"opponent": "Leon Edwards", "result": "W", "method": "Dec", "event": "UFC 304", "round": 5, "time": "5:00"},
       {"opponent": "Gilbert Burns", "result": "W", "method": "Dec", "event": "UFC 288", "round": 5, "time": "5:00"},
       {"opponent": "Sean Brady", "result": "W", "method": "Dec", "event": "UFC Fight Night", "round": 3, "time": "5:00"},
-      {"opponent": "Vicente Luque", "result": "W", "method": "Dec", "event": "UFC 280", "round": 3, "time": "5:00"},
-      {"opponent": "Leon Edwards", "result": "NC", "method": "NC", "event": "UFC Fight Night", "round": 2, "time": "3:06"}
+      {"opponent": "Vicente Luque", "result": "W", "method": "Dec", "event": "UFC 280", "round": 3, "time": "5:00"}
     ]
   },
   {
@@ -397,22 +387,22 @@
     "flag": "🇦🇺",
     "weightClass": "Welterweight",
     "ranking": "#1",
-    "record": {"wins": 17, "losses": 2, "draws": 0},
+    "record": {"wins": 18, "losses": 3, "draws": 0},
     "height": "6'1\"",
     "reach": "77\"",
     "stance": "Orthodox",
     "age": 28,
     "fightingOut": "Perth, Australia",
     "style": "Striker",
-    "titleFights": 0,
+    "pfp": true,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/5/DELLA_MADDALENA_JACK_L_09-16.png",
-    "bio": "Jack Della Maddalena is the most exciting welterweight prospect in years, a powerful puncher with elite timing and finishing instinct who has stopped seven of his eight UFC opponents. JDM's rise through the division has been meteoric — he turned down a walkout fight offer to land his spot as the number one contender. At just 28, he looks destined for gold.",
+    "bio": "Jack Della Maddalena is one of the most exciting welterweights in the world, a precision boxer with great timing, elite footwork and devastating finishing power who won the UFC welterweight title at UFC 315 by defeating Belal Muhammad. His clean boxing — crisp jabs, snapping right hands and sharp combinations — is the best in the division. Dropped the belt to Islam Makhachev who moved up in weight.",
     "last5": [
-      {"opponent": "Gilbert Burns", "result": "W", "method": "KO", "event": "UFC 312", "round": 2, "time": "1:45"},
-      {"opponent": "Kevin Holland", "result": "W", "method": "TKO", "event": "UFC 299", "round": 2, "time": "3:59"},
-      {"opponent": "Randy Brown", "result": "W", "method": "KO", "event": "UFC 294", "round": 2, "time": "3:45"},
-      {"opponent": "Bassil Hafez", "result": "W", "method": "KO", "event": "UFC Fight Night", "round": 1, "time": "1:35"},
-      {"opponent": "Pete Rodriguez", "result": "W", "method": "TKO", "event": "UFC Fight Night", "round": 1, "time": "1:54"}
+      {"opponent": "Islam Makhachev", "result": "L", "method": "Dec", "event": "UFC 322", "round": 5, "time": "5:00"},
+      {"opponent": "Belal Muhammad", "result": "W", "method": "Dec", "event": "UFC 315", "round": 5, "time": "5:00"},
+      {"opponent": "Gilbert Burns", "result": "W", "method": "KO", "event": "UFC 299", "round": 3, "time": "3:43"},
+      {"opponent": "Kevin Holland", "result": "W", "method": "Dec", "event": "Noche UFC", "round": 3, "time": "5:00"},
+      {"opponent": "Randy Brown", "result": "W", "method": "KO", "event": "UFC 294", "round": 2, "time": "3:45"}
     ]
   },
   {
@@ -430,9 +420,8 @@
     "age": 29,
     "fightingOut": "Shymkent, Kazakhstan",
     "style": "All-Around",
-    "titleFights": 0,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-09/RAKHMONOV_SHAVKAT_L_09-28.png",
-    "bio": "Shavkat Rakhmonov is one of the last undefeated elite fighters in the UFC, combining Sambist grappling with diverse striking to finish all eighteen of his professional opponents. The Kazakh Nomad's blend of creativity and raw power makes him dangerous everywhere, and a title shot feels inevitable after demolishing Vicente Luque and Ian Machado Garry.",
+    "bio": "Shavkat Rakhmonov is one of the last perfectly undefeated elite fighters in the sport, finishing all 18 professional opponents with Sambist grappling and diverse striking. The Kazakh Nomad's blend of creativity and raw power makes him dangerous everywhere. A title shot is inevitable.",
     "last5": [
       {"opponent": "Ian Machado Garry", "result": "W", "method": "Sub", "event": "UFC 310", "round": 3, "time": "4:16"},
       {"opponent": "Stephen Thompson", "result": "W", "method": "Sub", "event": "UFC 296", "round": 3, "time": "3:55"},
@@ -456,9 +445,8 @@
     "age": 33,
     "fightingOut": "Birmingham, England",
     "style": "Striker",
-    "titleFights": 3,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-07/EDWARDS_LEON_L_07-27.png",
-    "bio": "Leon Edwards is a former UFC Welterweight Champion who delivered one of the most dramatic moments in MMA history — a walk-off head kick KO in the fifth round at UFC 278 to become champion. Rocky's clean boxing and disciplined gameplan made him a two-time champion, and he is rebuilding for another title run following his loss to Belal Muhammad.",
+    "bio": "Leon Edwards is a former two-time UFC Welterweight Champion who delivered one of the most iconic moments in MMA history — a walk-off head kick KO in round 5 at UFC 278. Rocky's disciplined boxing and tight gameplan made him champion twice, and he is rebuilding for another run at 170 pounds.",
     "last5": [
       {"opponent": "Belal Muhammad", "result": "L", "method": "Dec", "event": "UFC 304", "round": 5, "time": "5:00"},
       {"opponent": "Colby Covington", "result": "W", "method": "Dec", "event": "UFC 296", "round": 5, "time": "5:00"},
@@ -473,24 +461,24 @@
     "nickname": "The Problem",
     "nationality": "Russian",
     "flag": "🇷🇺",
-    "weightClass": "Lightweight",
+    "weightClass": "Welterweight",
     "ranking": "Champion",
-    "record": {"wins": 26, "losses": 1, "draws": 0},
+    "record": {"wins": 28, "losses": 1, "draws": 0},
     "height": "5'10\"",
     "reach": "70\"",
     "stance": "Orthodox",
     "age": 33,
     "fightingOut": "Makhachkala, Russia",
     "style": "Grappler",
-    "titleFights": 4,
+    "pfp": true,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/7/MAKHACHEV_ISLAM_L_BELT_01-18.png",
-    "bio": "Islam Makhachev is the UFC Lightweight Champion and pound-for-pound number one fighter in the world, an elite Dagestani wrestler whose top control and submission threat make him nearly impossible to beat. Trained by Khabib Nurmagomedov, Makhachev has successfully defended his title against Volkanovski twice and Dustin Poirier, cementing his status as the division's dominant force.",
+    "bio": "Islam Makhachev is the UFC Welterweight Champion and the pound-for-pound number one fighter in the world. A dominant Dagestani wrestler trained by Khabib Nurmagomedov, his top control and submission threat make him nearly impossible to beat. After successfully defending the lightweight title multiple times, he moved up to welterweight and knocked out JDM at UFC 322 to become the 11th double-champion in UFC history.",
     "last5": [
-      {"opponent": "Arman Tsarukyan", "result": "W", "method": "Dec", "event": "UFC 311", "round": 5, "time": "5:00"},
+      {"opponent": "Jack Della Maddalena", "result": "W", "method": "Dec", "event": "UFC 322", "round": 5, "time": "5:00"},
+      {"opponent": "Renato Moicano", "result": "W", "method": "Sub", "event": "UFC 311", "round": 1, "time": "4:05"},
       {"opponent": "Dustin Poirier", "result": "W", "method": "Sub", "event": "UFC 302", "round": 5, "time": "4:06"},
       {"opponent": "Alexander Volkanovski", "result": "W", "method": "TKO", "event": "UFC 294", "round": 1, "time": "4:02"},
-      {"opponent": "Alexander Volkanovski", "result": "W", "method": "Dec", "event": "UFC 284", "round": 5, "time": "5:00"},
-      {"opponent": "Charles Oliveira", "result": "W", "method": "Sub", "event": "UFC 280", "round": 2, "time": "3:16"}
+      {"opponent": "Alexander Volkanovski", "result": "W", "method": "Dec", "event": "UFC 284", "round": 5, "time": "5:00"}
     ]
   },
   {
@@ -508,15 +496,15 @@
     "age": 28,
     "fightingOut": "Yerevan, Armenia",
     "style": "All-Around",
-    "titleFights": 1,
+    "pfp": true,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/TSARUKYAN_ARMAN_L_11-22.png",
-    "bio": "Arman Tsarukyan is the most complete lightweight challenger in recent memory, combining world-class wrestling with powerful boxing that earned him a title shot at UFC 311. Although he fell short against Makhachev, his exceptional performance — going the distance and rocking the champion — confirmed his elite status. At 28, another title shot is all but guaranteed.",
+    "bio": "Arman Tsarukyan is the most complete lightweight in the world, combining world-class wrestling with powerful boxing, some of the best athleticism in the division, and brutal ground-and-pound from top position. His elbows from top are among the most damaging in the lightweight division. He was scheduled to fight Islam at UFC 311 but pulled out injured — his five-fight win streak, capped with a submission of Dan Hooker, keeps him firmly next in line.",
     "last5": [
-      {"opponent": "Islam Makhachev", "result": "L", "method": "Dec", "event": "UFC 311", "round": 5, "time": "5:00"},
-      {"opponent": "Beneil Dariush", "result": "W", "method": "TKO", "event": "UFC 300", "round": 3, "time": "1:00"},
+      {"opponent": "Dan Hooker", "result": "W", "method": "Sub", "event": "UFC Fight Night", "round": 2, "time": ""},
       {"opponent": "Charles Oliveira", "result": "W", "method": "Dec", "event": "UFC 300", "round": 3, "time": "5:00"},
-      {"opponent": "Mateusz Gamrot", "result": "W", "method": "Dec", "event": "UFC Fight Night", "round": 3, "time": "5:00"},
-      {"opponent": "Islam Makhachev", "result": "L", "method": "Dec", "event": "UFC Fight Night", "round": 3, "time": "5:00"}
+      {"opponent": "Beneil Dariush", "result": "W", "method": "KO", "event": "UFC Fight Night", "round": 1, "time": ""},
+      {"opponent": "Joaquim Silva", "result": "W", "method": "KO", "event": "UFC Fight Night", "round": 3, "time": ""},
+      {"opponent": "Mateusz Gamrot", "result": "W", "method": "Dec", "event": "UFC Fight Night", "round": 3, "time": "5:00"}
     ]
   },
   {
@@ -527,22 +515,21 @@
     "flag": "🇧🇷",
     "weightClass": "Lightweight",
     "ranking": "#2",
-    "record": {"wins": 34, "losses": 10, "draws": 0},
+    "record": {"wins": 37, "losses": 11, "draws": 0},
     "height": "5'10\"",
     "reach": "74\"",
     "stance": "Orthodox",
-    "age": 34,
+    "age": 35,
     "fightingOut": "Guarujá, Brazil",
     "style": "Grappler",
-    "titleFights": 4,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-06/OLIVEIRA_CHARLES_L_06-01.png",
-    "bio": "Charles Oliveira is the all-time UFC record holder for most finishes and most submission victories, a late-bloomer who found his elite form after years of promise to become a two-time title contender. Do Bronx's resilience is legendary — he has been finished or hurt badly and come back to win multiple times. His BJJ and submission game remain world-class.",
+    "bio": "Charles Oliveira holds the all-time UFC records for most finishes, most submission victories, and most post-fight bonuses — a relentless BJJ wizard who has become one of the most decorated fighters in the organisation's history. He recently dominated Max Holloway over five rounds to capture the BMF title at UFC 326, adding to a legacy that places him among the all-time greats at 155.",
     "last5": [
+      {"opponent": "Max Holloway", "result": "W", "method": "Dec", "event": "UFC 326", "round": 5, "time": "5:00"},
+      {"opponent": "Mateusz Gamrot", "result": "W", "method": "Sub", "event": "UFC Fight Night", "round": 2, "time": "2:48"},
+      {"opponent": "Ilia Topuria", "result": "L", "method": "KO", "event": "UFC 317", "round": 1, "time": "2:27"},
       {"opponent": "Arman Tsarukyan", "result": "L", "method": "Dec", "event": "UFC 300", "round": 3, "time": "5:00"},
-      {"opponent": "Islam Makhachev", "result": "L", "method": "Sub", "event": "UFC 280", "round": 2, "time": "3:16"},
-      {"opponent": "Justin Gaethje", "result": "W", "method": "Sub", "event": "UFC 274", "round": 3, "time": "3:22"},
-      {"opponent": "Dustin Poirier", "result": "W", "method": "TKO", "event": "UFC 269", "round": 3, "time": "3:22"},
-      {"opponent": "Michael Chandler", "result": "W", "method": "TKO", "event": "UFC 262", "round": 2, "time": "4:44"}
+      {"opponent": "Benoît Saint-Denis", "result": "W", "method": "Sub", "event": "UFC 300", "round": 2, "time": ""}
     ]
   },
   {
@@ -560,15 +547,39 @@
     "age": 35,
     "fightingOut": "Globe, Arizona",
     "style": "Striker",
-    "titleFights": 2,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/GAETHJE_JUSTIN_L_BELTMOCK.png",
-    "bio": "Justin Gaethje is the embodiment of action-packed MMA, a relentless pressure fighter whose willingness to trade with anyone has produced some of the most memorable lightweight battles in UFC history. A former interim champion and BMF title holder, The Highlight always moves forward and has earned Fight of the Night bonuses in almost every appearance.",
+    "bio": "Justin Gaethje is the embodiment of action-packed MMA, a relentless pressure fighter whose willingness to trade with anyone has produced some of the most memorable lightweight wars in UFC history. A former interim champion and BMF holder, The Highlight always moves forward. His BMF title run ended in stunning fashion when Holloway KO'd him in round 5 at UFC 300.",
     "last5": [
       {"opponent": "Max Holloway", "result": "L", "method": "KO", "event": "UFC 300", "round": 5, "time": "4:59"},
       {"opponent": "Dustin Poirier", "result": "W", "method": "KO", "event": "UFC 291", "round": 3, "time": "3:45"},
       {"opponent": "Islam Makhachev", "result": "L", "method": "Sub", "event": "UFC 302", "round": 5, "time": "4:06"},
       {"opponent": "Rafael Fiziev", "result": "W", "method": "KO", "event": "UFC Fight Night", "round": 5, "time": "3:39"},
       {"opponent": "Charles Oliveira", "result": "L", "method": "Sub", "event": "UFC 274", "round": 3, "time": "3:22"}
+    ]
+  },
+  {
+    "id": "ilia-topuria",
+    "name": "Ilia Topuria",
+    "nickname": "El Matador",
+    "nationality": "Georgian-Spanish",
+    "flag": "🇬🇪",
+    "weightClass": "Lightweight",
+    "ranking": "Champion",
+    "record": {"wins": 17, "losses": 0, "draws": 0},
+    "height": "5'10\"",
+    "reach": "71\"",
+    "stance": "Orthodox",
+    "age": 28,
+    "fightingOut": "Tbilisi, Georgia",
+    "style": "Striker",
+    "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/TOPURIA_ILIA_L_BELT_10-26.png",
+    "bio": "Ilia Topuria is the UFC Lightweight Champion and the most explosive knockout artist in the sport — undefeated at 17-0 and the first fighter in UFC history to become a two-division champion while remaining unbeaten. El Matador dethroned Volkanovski at FW, stopped Holloway in the rematch, then moved to lightweight and knocked out Oliveira in round one at UFC 317 to add a second belt.",
+    "last5": [
+      {"opponent": "Charles Oliveira", "result": "W", "method": "KO", "event": "UFC 317", "round": 1, "time": "2:27"},
+      {"opponent": "Max Holloway", "result": "W", "method": "KO", "event": "UFC 308", "round": 2, "time": "4:29"},
+      {"opponent": "Josh Emmett", "result": "W", "method": "Dec", "event": "UFC Fight Night", "round": 3, "time": "5:00"},
+      {"opponent": "Bryce Mitchell", "result": "W", "method": "Sub", "event": "UFC Fight Night", "round": 2, "time": "3:19"},
+      {"opponent": "Jai Herbert", "result": "W", "method": "KO", "event": "UFC Fight Night", "round": 2, "time": "3:59"}
     ]
   },
   {
@@ -579,48 +590,22 @@
     "flag": "🇺🇸",
     "weightClass": "Featherweight",
     "ranking": "#1",
-    "record": {"wins": 25, "losses": 7, "draws": 0},
+    "record": {"wins": 27, "losses": 9, "draws": 0},
     "height": "5'11\"",
     "reach": "69\"",
     "stance": "Southpaw",
     "age": 32,
     "fightingOut": "Waianae, Hawaii",
     "style": "Striker",
-    "titleFights": 6,
+    "pfp": true,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-04/HOLLOWAY_MAX_L_04-13.png",
-    "bio": "Max Holloway is one of the greatest featherweights in UFC history and a former three-time champion, a tireless volume striker who threw the most punches in the final round in UFC history against Gaethje at UFC 300. Blessed combines elite cardio, high fight IQ and an ever-evolving technical game into one of the most complete packages in combat sports.",
+    "bio": "Max Holloway is one of the greatest featherweights in UFC history and a former three-time champion. He won the BMF title at UFC 300 with a stunning last-second KO of Gaethje, then lost it to Charles Oliveira at UFC 326 after a dominant five-round performance from Do Bronx. Blessed's relentless output and elite cardio have made him a fan favourite for a decade.",
     "last5": [
-      {"opponent": "Justin Gaethje", "result": "W", "method": "KO", "event": "UFC 300", "round": 5, "time": "4:59"},
-      {"opponent": "Yair Rodriguez", "result": "W", "method": "Dec", "event": "UFC Fight Night", "round": 5, "time": "5:00"},
-      {"opponent": "Arnold Allen", "result": "W", "method": "Dec", "event": "UFC Fight Night", "round": 5, "time": "5:00"},
+      {"opponent": "Charles Oliveira", "result": "L", "method": "Dec", "event": "UFC 326", "round": 5, "time": "5:00"},
+      {"opponent": "Dustin Poirier", "result": "W", "method": "Dec", "event": "UFC 318", "round": 5, "time": "5:00"},
       {"opponent": "Ilia Topuria", "result": "L", "method": "KO", "event": "UFC 308", "round": 2, "time": "4:29"},
-      {"opponent": "Alexander Volkanovski", "result": "L", "method": "Dec", "event": "UFC 276", "round": 5, "time": "5:00"}
-    ]
-  },
-  {
-    "id": "ilia-topuria",
-    "name": "Ilia Topuria",
-    "nickname": "El Matador",
-    "nationality": "Georgian-Spanish",
-    "flag": "🇬🇪",
-    "weightClass": "Featherweight",
-    "ranking": "Champion",
-    "record": {"wins": 15, "losses": 0, "draws": 0},
-    "height": "5'10\"",
-    "reach": "71\"",
-    "stance": "Orthodox",
-    "age": 27,
-    "fightingOut": "Tbilisi, Georgia",
-    "style": "Striker",
-    "titleFights": 2,
-    "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/TOPURIA_ILIA_L_BELT_10-26.png",
-    "bio": "Ilia Topuria is the UFC Featherweight Champion and one of the most explosive knockout artists in the sport, the first Georgian-born fighter to become a UFC champion. El Matador dethroned the greatest featherweight of all time in Alexander Volkanovski and followed it by stopping Max Holloway, cementing his status as the new face of the 145-pound division at just 27.",
-    "last5": [
-      {"opponent": "Max Holloway", "result": "W", "method": "KO", "event": "UFC 308", "round": 2, "time": "4:29"},
-      {"opponent": "Alexander Volkanovski", "result": "W", "method": "KO", "event": "UFC 298", "round": 2, "time": "3:00"},
-      {"opponent": "Josh Emmett", "result": "W", "method": "Dec", "event": "UFC Fight Night", "round": 3, "time": "5:00"},
-      {"opponent": "Bryce Mitchell", "result": "W", "method": "Sub", "event": "UFC Fight Night", "round": 2, "time": "3:19"},
-      {"opponent": "Jai Herbert", "result": "W", "method": "KO", "event": "UFC Fight Night", "round": 2, "time": "3:59"}
+      {"opponent": "Justin Gaethje", "result": "W", "method": "KO", "event": "UFC 300", "round": 5, "time": "4:59"},
+      {"opponent": "Chan Sung Jung", "result": "W", "method": "KO", "event": "UFC Fight Night", "round": 3, "time": "0:23"}
     ]
   },
   {
@@ -638,9 +623,9 @@
     "age": 35,
     "fightingOut": "Shellharbour, Australia",
     "style": "All-Around",
-    "titleFights": 6,
+    "pfp": true,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/VOLKANOVSKI_ALEXANDER_L_BELT_01-31.png",
-    "bio": "Alexander Volkanovski was the longest-reigning UFC Featherweight Champion in history at three years, a former rugby player who built himself into a three-time champion through sheer work rate and technical improvement. Despite losing to Topuria and Makhachev, The Great's legacy as arguably the most complete featherweight champion ever is secure.",
+    "bio": "Alexander Volkanovski was the longest-reigning UFC Featherweight Champion in history at three years, a former rugby player who built himself into a complete three-time champion through relentless improvement and elite cardio. Despite losses to Topuria and Makhachev, The Great's legacy as arguably the most well-rounded featherweight champion ever is secure.",
     "last5": [
       {"opponent": "Ilia Topuria", "result": "L", "method": "KO", "event": "UFC 298", "round": 2, "time": "3:00"},
       {"opponent": "Islam Makhachev", "result": "L", "method": "TKO", "event": "UFC 294", "round": 1, "time": "4:02"},
@@ -664,9 +649,8 @@
     "age": 30,
     "fightingOut": "Ingushetia, Russia",
     "style": "Grappler",
-    "titleFights": 0,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-09/EVLOEV_MOVSAR_L_09-28.png",
-    "bio": "Movsar Evloev is one of the UFC's most underrated unbeaten fighters, a complete mixed martial artist from Ingushetia, Russia who uses precise wrestling and clean technical striking to control fights from start to finish. His consistency and efficiency have made him the featherweight division's most dangerous under-the-radar contender.",
+    "bio": "Movsar Evloev is one of the UFC's most underrated unbeaten fighters, a complete martial artist from Ingushetia who uses precise wrestling and technical striking to control fights from start to finish. Unbeaten at 18-0 in professional MMA, his consistency and efficiency make him the featherweight division's most dangerous under-the-radar contender.",
     "last5": [
       {"opponent": "Lerone Murphy", "result": "W", "method": "Dec", "event": "UFC Fight Night", "round": 3, "time": "5:00"},
       {"opponent": "Arnold Allen", "result": "W", "method": "Dec", "event": "UFC Fight Night", "round": 3, "time": "5:00"},
@@ -676,29 +660,54 @@
     ]
   },
   {
+    "id": "jean-silva",
+    "name": "Jean Silva",
+    "nickname": "Lord",
+    "nationality": "Brazilian",
+    "flag": "🇧🇷",
+    "weightClass": "Featherweight",
+    "ranking": "#6",
+    "record": {"wins": 17, "losses": 3, "draws": 0},
+    "height": "5'11\"",
+    "reach": "74\"",
+    "stance": "Orthodox",
+    "age": 28,
+    "fightingOut": "Rio de Janeiro, Brazil",
+    "style": "Striker",
+    "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-04/SILVA_JEAN_L_04-12.png",
+    "bio": "Jean Silva is one of the most ferocious strikers in the featherweight division, a Brazilian finisher with a 71% finish rate built on explosive combinations, devastating power and relentless aggression. His striking variety — from sharp punches to spinning attacks — makes him a nightmare stylistically. Won Performance of the Night for a ninja choke finish of Bryce Mitchell and continues to climb toward the title.",
+    "last5": [
+      {"opponent": "Arnold Allen", "result": "W", "method": "Dec", "event": "UFC 324", "round": 3, "time": "5:00"},
+      {"opponent": "Diego Lopes", "result": "L", "method": "KO", "event": "Noche UFC", "round": 2, "time": "4:48"},
+      {"opponent": "Bryce Mitchell", "result": "W", "method": "Sub", "event": "UFC 314", "round": 2, "time": "3:52"},
+      {"opponent": "Melsik Baghdasaryan", "result": "W", "method": "TKO", "event": "UFC Fight Night", "round": 1, "time": ""},
+      {"opponent": "Drew Dober", "result": "W", "method": "KO", "event": "UFC Fight Night", "round": 3, "time": ""}
+    ]
+  },
+  {
     "id": "merab-dvalishvili",
     "name": "Merab Dvalishvili",
     "nickname": "The Machine",
     "nationality": "Georgian",
     "flag": "🇬🇪",
     "weightClass": "Bantamweight",
-    "ranking": "Champion",
-    "record": {"wins": 17, "losses": 4, "draws": 0},
+    "ranking": "#1",
+    "record": {"wins": 21, "losses": 5, "draws": 0},
     "height": "5'9\"",
     "reach": "67\"",
     "stance": "Orthodox",
     "age": 33,
     "fightingOut": "Tbilisi, Georgia",
     "style": "Wrestler",
-    "titleFights": 1,
+    "pfp": true,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2022-08/DVALISHVILI_MERAB_L_08-20.png",
-    "bio": "Merab Dvalishvili is the UFC Bantamweight Champion and the most relentless wrestler in the division, recording an average of ten takedown attempts per fight with non-stop cardio that breaks every opponent he faces. The Machine's victory over Sean O'Malley at UFC 306 was one of the year's most dominant title-winning performances.",
+    "bio": "Merab Dvalishvili is a former UFC Bantamweight Champion and the most relentless wrestler in the division, averaging over ten takedown attempts per fight with non-stop cardio that breaks every opponent. He won the belt from O'Malley and made three successful defences before losing a one-sided decision to Petr Yan at UFC 323.",
     "last5": [
-      {"opponent": "Sean O'Malley", "result": "W", "method": "Dec", "event": "UFC 306", "round": 5, "time": "5:00"},
-      {"opponent": "Henry Cejudo", "result": "W", "method": "Dec", "event": "UFC 298", "round": 3, "time": "5:00"},
-      {"opponent": "Marlon Vera", "result": "W", "method": "Dec", "event": "UFC 307", "round": 3, "time": "5:00"},
-      {"opponent": "Jose Aldo", "result": "W", "method": "Dec", "event": "UFC Fight Night", "round": 3, "time": "5:00"},
-      {"opponent": "Petr Yan", "result": "W", "method": "Dec", "event": "UFC 280", "round": 3, "time": "5:00"}
+      {"opponent": "Petr Yan", "result": "L", "method": "Dec", "event": "UFC 323", "round": 5, "time": "5:00"},
+      {"opponent": "Cory Sandhagen", "result": "W", "method": "Dec", "event": "UFC 320", "round": 5, "time": "5:00"},
+      {"opponent": "Sean O'Malley", "result": "W", "method": "Sub", "event": "UFC 316", "round": 3, "time": ""},
+      {"opponent": "Umar Nurmagomedov", "result": "W", "method": "Dec", "event": "UFC 311", "round": 5, "time": "5:00"},
+      {"opponent": "Sean O'Malley", "result": "W", "method": "Dec", "event": "UFC 306", "round": 5, "time": "5:00"}
     ]
   },
   {
@@ -708,23 +717,23 @@
     "nationality": "Russian",
     "flag": "🇷🇺",
     "weightClass": "Bantamweight",
-    "ranking": "#1",
-    "record": {"wins": 17, "losses": 5, "draws": 0},
+    "ranking": "Champion",
+    "record": {"wins": 18, "losses": 5, "draws": 0},
     "height": "5'8\"",
     "reach": "67\"",
     "stance": "Orthodox",
     "age": 31,
     "fightingOut": "Tashkent, Uzbekistan",
     "style": "Striker",
-    "titleFights": 3,
+    "pfp": true,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/YAN_PETR_L_BELT_04-09.png",
-    "bio": "Petr Yan is a former UFC Bantamweight Champion and one of the most technically polished strikers in the division's history, with elite boxing technique and relentless pressure that have made him champion and perennial contender. No Mercy has shared the cage with every elite bantamweight of the last five years and remains one of the most dangerous fighters at 135.",
+    "bio": "Petr Yan is the UFC Bantamweight Champion and one of the most technically polished strikers in the division's history, with elite boxing precision and relentless pressure that have made him a two-time champion. His demolition of Merab Dvalishvili at UFC 323 — dominating the former champion on the feet and in the clinch — proved he is operating at a different level.",
     "last5": [
+      {"opponent": "Merab Dvalishvili", "result": "W", "method": "Dec", "event": "UFC 323", "round": 5, "time": "5:00"},
       {"opponent": "Deiveson Figueiredo", "result": "W", "method": "TKO", "event": "UFC Fight Night", "round": 2, "time": "1:18"},
       {"opponent": "Merab Dvalishvili", "result": "L", "method": "Dec", "event": "UFC 280", "round": 3, "time": "5:00"},
       {"opponent": "Aljamain Sterling", "result": "L", "method": "Dec", "event": "UFC 273", "round": 5, "time": "5:00"},
-      {"opponent": "Sean O'Malley", "result": "L", "method": "Dec", "event": "UFC 280", "round": 3, "time": "5:00"},
-      {"opponent": "Cory Sandhagen", "result": "W", "method": "Dec", "event": "UFC Fight Night", "round": 5, "time": "5:00"}
+      {"opponent": "Sean O'Malley", "result": "L", "method": "Dec", "event": "UFC 280", "round": 3, "time": "5:00"}
     ]
   },
   {
@@ -735,48 +744,45 @@
     "flag": "🇺🇸",
     "weightClass": "Bantamweight",
     "ranking": "#2",
-    "record": {"wins": 17, "losses": 5, "draws": 0},
+    "record": {"wins": 17, "losses": 6, "draws": 0},
     "height": "5'11\"",
     "reach": "69\"",
     "stance": "Orthodox",
     "age": 32,
     "fightingOut": "Denver, Colorado",
     "style": "Striker",
-    "titleFights": 1,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-06/SANDHAGEN_CORY_L_06-29.png",
-    "bio": "Cory Sandhagen is one of the most creative strikers in the UFC, a lanky bantamweight whose long reach and unorthodox attack angles produce spectacular knockouts. The Sandman's spinning techniques and flying knees are matched by a strong wrestling base that makes him dangerous in all phases. He consistently ranks among the best 135-pound fighters in the world.",
+    "bio": "Cory Sandhagen is one of the most creative strikers at bantamweight, a long rangy fighter whose unorthodox attack angles and spinning techniques produce spectacular knockouts. His flying knees and creative striking are matched by a solid wrestling base. He lost a title challenge to Merab at UFC 320 but remains one of the most dangerous fighters at 135.",
     "last5": [
+      {"opponent": "Merab Dvalishvili", "result": "L", "method": "Dec", "event": "UFC 320", "round": 5, "time": "5:00"},
       {"opponent": "Umar Nurmagomedov", "result": "L", "method": "Dec", "event": "UFC Fight Night", "round": 5, "time": "5:00"},
       {"opponent": "Rob Font", "result": "W", "method": "Dec", "event": "UFC Fight Night", "round": 5, "time": "5:00"},
       {"opponent": "Song Yadong", "result": "W", "method": "KO", "event": "UFC Fight Night", "round": 3, "time": "0:28"},
-      {"opponent": "Marlon Vera", "result": "L", "method": "Dec", "event": "UFC Fight Night", "round": 5, "time": "5:00"},
-      {"opponent": "Frankie Edgar", "result": "W", "method": "KO", "event": "UFC Fight Night", "round": 1, "time": "0:28"}
+      {"opponent": "Marlon Vera", "result": "L", "method": "Dec", "event": "UFC Fight Night", "round": 5, "time": "5:00"}
     ]
   },
   {
     "id": "umar-nurmagomedov",
     "name": "Umar Nurmagomedov",
-    "nickname": "",
     "nationality": "Russian",
     "flag": "🇷🇺",
     "weightClass": "Bantamweight",
     "ranking": "#3",
-    "record": {"wins": 17, "losses": 0, "draws": 0},
+    "record": {"wins": 18, "losses": 1, "draws": 0},
     "height": "5'10\"",
     "reach": "68\"",
     "stance": "Orthodox",
     "age": 27,
     "fightingOut": "Kaspiysk, Russia",
     "style": "All-Around",
-    "titleFights": 0,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-09/NURMAGOMEDOV_UMAR_L_09-28.png",
-    "bio": "Umar Nurmagomedov is the most dominant undefeated prospect at bantamweight, combining his cousin Khabib's suffocating wrestling with sharper boxing and submission skills. The Dagestani powerhouse has dominated every opponent and recently defeated Cory Sandhagen in a performance that showed he's ready to challenge for the title.",
+    "bio": "Umar Nurmagomedov is the most dominant young fighter at bantamweight, combining Khabib-style suffocating wrestling with sharper boxing and polished submission game. The Dagestani powerhouse lost for the first time — a close decision to Merab Dvalishvili defending his belt — but remains the division's most exciting prospect for future gold.",
     "last5": [
+      {"opponent": "Merab Dvalishvili", "result": "L", "method": "Dec", "event": "UFC 311", "round": 5, "time": "5:00"},
       {"opponent": "Cory Sandhagen", "result": "W", "method": "Dec", "event": "UFC Fight Night", "round": 5, "time": "5:00"},
       {"opponent": "Kyler Phillips", "result": "W", "method": "TKO", "event": "UFC 294", "round": 3, "time": "4:30"},
       {"opponent": "Brian Kelleher", "result": "W", "method": "Sub", "event": "UFC Fight Night", "round": 1, "time": "2:34"},
-      {"opponent": "Raoni Barcelos", "result": "W", "method": "Dec", "event": "UFC Fight Night", "round": 3, "time": "5:00"},
-      {"opponent": "Nate Maness", "result": "W", "method": "TKO", "event": "UFC Fight Night", "round": 2, "time": "4:57"}
+      {"opponent": "Raoni Barcelos", "result": "W", "method": "Dec", "event": "UFC Fight Night", "round": 3, "time": "5:00"}
     ]
   },
   {
@@ -794,9 +800,9 @@
     "age": 34,
     "fightingOut": "Nova União, Brazil",
     "style": "Grappler",
-    "titleFights": 3,
+    "pfp": true,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/PANTOJA_ALEXANDRE_L_07-08.png",
-    "bio": "Alexandre Pantoja is the UFC Flyweight Champion and one of the most active BJJ practitioners in the division, constantly threatening submissions from any position. The Cannibal has successfully unified the title and made multiple defences, beating Brandon Moreno twice in the process. His relentless submission hunting and world-class wrestling make him the complete flyweight package.",
+    "bio": "Alexandre Pantoja is the UFC Flyweight Champion and one of the most active BJJ practitioners in the division, constantly threatening submissions from every position. The Cannibal has made multiple title defences, defeating Brandon Moreno twice and Steve Erceg, cementing his status as the best flyweight in the world.",
     "last5": [
       {"opponent": "Steve Erceg", "result": "W", "method": "Dec", "event": "UFC 310", "round": 5, "time": "5:00"},
       {"opponent": "Brandon Royval", "result": "W", "method": "Sub", "event": "UFC 296", "round": 2, "time": "4:39"},
@@ -820,9 +826,8 @@
     "age": 30,
     "fightingOut": "Tijuana, Mexico",
     "style": "All-Around",
-    "titleFights": 5,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-02/MORENO_BRANDON_L_02-17.png",
-    "bio": "Brandon Moreno is a former UFC Flyweight Champion and one of the most beloved fighters in the sport, a high-octane fan favourite from Tijuana who won the title by submitting Deiveson Figueiredo in one of the most anticipated rematches in UFC history. Moreno and Pantoja's rivalry has defined the flyweight division of the 2020s.",
+    "bio": "Brandon Moreno is a former UFC Flyweight Champion and one of the most beloved fighters in the sport, a high-energy fan favourite from Tijuana who won the title by submitting Deiveson Figueiredo. Moreno and Pantoja's rivalry has defined the flyweight division of the 2020s and his entertaining, aggressive style always delivers for the fans.",
     "last5": [
       {"opponent": "Alexandre Pantoja", "result": "L", "method": "Dec", "event": "UFC 290", "round": 5, "time": "5:00"},
       {"opponent": "Alexandre Pantoja", "result": "L", "method": "Dec", "event": "UFC 283", "round": 5, "time": "5:00"},
@@ -846,12 +851,11 @@
     "age": 36,
     "fightingOut": "Bishkek, Kyrgyzstan",
     "style": "Striker",
-    "titleFights": 10,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-09/SHEVCHENKO_VALENTINA_L_BELT_09-14.png",
-    "bio": "Valentina Shevchenko is one of the greatest female fighters in MMA history, a seven-time UFC Women's Flyweight Champion whose technical mastery, elite striking and championship composure make her the gold standard for women's combat sports. The Bullet has defeated eight former or future champions during her reign and remains the greatest fighter the division has ever seen.",
+    "bio": "Valentina Shevchenko is one of the greatest female fighters in MMA history, a seven-time UFC Women's Flyweight Champion whose technical mastery, elite striking and championship composure make her the gold standard for women's combat sports. The Bullet has beaten eight former or future champions and remains the greatest flyweight the division has ever produced.",
     "last5": [
       {"opponent": "Alexa Grasso", "result": "W", "method": "Dec", "event": "UFC 306", "round": 5, "time": "5:00"},
-      {"opponent": "Alexa Grasso", "result": "Draw", "method": "Draw", "event": "Noche UFC", "round": 5, "time": "5:00"},
+      {"opponent": "Alexa Grasso", "result": "D", "method": "Draw", "event": "Noche UFC", "round": 5, "time": "5:00"},
       {"opponent": "Alexa Grasso", "result": "L", "method": "Sub", "event": "UFC 285", "round": 4, "time": "3:53"},
       {"opponent": "Taila Santos", "result": "W", "method": "Dec", "event": "UFC 275", "round": 5, "time": "5:00"},
       {"opponent": "Lauren Murphy", "result": "W", "method": "TKO", "event": "UFC 266", "round": 4, "time": "3:09"}
@@ -872,12 +876,11 @@
     "age": 31,
     "fightingOut": "Guadalajara, Mexico",
     "style": "All-Around",
-    "titleFights": 3,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-09/GRASSO_ALEXA_L_09-16.png",
-    "bio": "Alexa Grasso is a former UFC Women's Flyweight Champion who became a national hero in Mexico when she submitted Valentina Shevchenko at UFC 285 to win the belt. Tigresa's slick striking and underrated grappling make her a genuine threat to any champion, and her rivalry with Shevchenko has been the defining narrative in women's flyweight MMA.",
+    "bio": "Alexa Grasso is a former UFC Women's Flyweight Champion who became a national hero in Mexico when she submitted Valentina Shevchenko at UFC 285. Her slick striking and underrated grappling make her a genuine threat to any champion, and her trilogy with Shevchenko is one of the great rivalries in women's MMA.",
     "last5": [
       {"opponent": "Valentina Shevchenko", "result": "L", "method": "Dec", "event": "UFC 306", "round": 5, "time": "5:00"},
-      {"opponent": "Valentina Shevchenko", "result": "Draw", "method": "Draw", "event": "Noche UFC", "round": 5, "time": "5:00"},
+      {"opponent": "Valentina Shevchenko", "result": "D", "method": "Draw", "event": "Noche UFC", "round": 5, "time": "5:00"},
       {"opponent": "Valentina Shevchenko", "result": "W", "method": "Sub", "event": "UFC 285", "round": 4, "time": "3:53"},
       {"opponent": "Viviane Araujo", "result": "W", "method": "Dec", "event": "UFC Fight Night", "round": 3, "time": "5:00"},
       {"opponent": "Maycee Barber", "result": "L", "method": "Dec", "event": "UFC Fight Night", "round": 3, "time": "5:00"}
@@ -898,9 +901,8 @@
     "age": 35,
     "fightingOut": "Hebei, China",
     "style": "All-Around",
-    "titleFights": 5,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-11/ZHANG_WEILI_L_BELT_11-16.png",
-    "bio": "Zhang Weili is a two-time UFC Women's Strawweight Champion and China's biggest MMA superstar, a relentless pressure fighter with elite wrestling, powerful striking and an iron will that allows her to overcome any adversity. Magnum has fought the best in the world and currently holds the longest active title reign in the women's strawweight division.",
+    "bio": "Zhang Weili is a two-time UFC Women's Strawweight Champion and China's biggest MMA superstar, a relentless pressure fighter with elite wrestling, powerful striking and an iron will. Magnum holds the division's longest active title reign and has defeated virtually every elite strawweight of her era.",
     "last5": [
       {"opponent": "Tatiana Suarez", "result": "W", "method": "TKO", "event": "UFC 312", "round": 4, "time": "3:18"},
       {"opponent": "Yan Xiaonan", "result": "W", "method": "TKO", "event": "UFC 300", "round": 3, "time": "4:13"},
@@ -924,9 +926,8 @@
     "age": 32,
     "fightingOut": "Milwaukee, Wisconsin",
     "style": "Striker",
-    "titleFights": 6,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-04/NAMAJUNAS_ROSE_L_04-08.png",
-    "bio": "Rose Namajunas is a two-time UFC Women's Strawweight Champion and one of the most technically gifted strikers in women's MMA, a patient counterpuncher with explosive power who has twice knocked out Joanna Jędrzejczyk. Thug Rose's cerebral approach and fight IQ give her the ability to dismantle any opponent on a given night.",
+    "bio": "Rose Namajunas is a two-time UFC Women's Strawweight Champion and one of the most technically gifted strikers in women's MMA — a patient counterpuncher with explosive power who has twice knocked out Joanna Jędrzejczyk. Thug Rose's cerebral approach and elite fight IQ give her the ability to dismantle any opponent on a given night.",
     "last5": [
       {"opponent": "Amanda Lemos", "result": "L", "method": "Dec", "event": "UFC Fight Night", "round": 3, "time": "5:00"},
       {"opponent": "Manon Fiorot", "result": "L", "method": "Dec", "event": "UFC Fight Night", "round": 5, "time": "5:00"},
@@ -950,9 +951,8 @@
     "age": 33,
     "fightingOut": "Colorado Springs, Colorado",
     "style": "All-Around",
-    "titleFights": 2,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-05/PENNINGTON_RAQUEL_L_BELT_05-04.png",
-    "bio": "Raquel Pennington is the UFC Women's Bantamweight Champion, finally achieving championship gold after over a decade of competing at the elite level. Rocky is a durable, well-rounded fighter whose heart and resilience have been on display in some of the division's toughest fights. Her championship victory was the culmination of years of perseverance in one of MMA's deepest divisions.",
+    "bio": "Raquel Pennington is the UFC Women's Bantamweight Champion, achieving gold after over a decade competing at the elite level. Rocky is a durable, well-rounded fighter whose heart and resilience have been on display in the division's toughest fights. Her championship victory was the culmination of years of perseverance.",
     "last5": [
       {"opponent": "Mayra Bueno Silva", "result": "W", "method": "Dec", "event": "UFC 297", "round": 5, "time": "5:00"},
       {"opponent": "Julianna Peña", "result": "W", "method": "Dec", "event": "UFC 297", "round": 5, "time": "5:00"},
@@ -976,9 +976,8 @@
     "age": 35,
     "fightingOut": "Spokane, Washington",
     "style": "Grappler",
-    "titleFights": 3,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2022-10/PENA_JULIANNA_L_10-22.png",
-    "bio": "Julianna Peña is a former UFC Women's Bantamweight Champion who pulled off one of the greatest upsets in UFC history when she submitted Amanda Nunes at UFC 269. A relentless grappler with elite submission game and a cast-iron will, The Venezuelan Vixen is always dangerous and brings intensity and aggression that has made her one of the division's most exciting fighters.",
+    "bio": "Julianna Peña is a former UFC Women's Bantamweight Champion who pulled off one of the greatest upsets in UFC history when she submitted Amanda Nunes. A relentless grappler with elite submission game and cast-iron will, The Venezuelan Vixen brings intensity and aggression that has made her one of the division's most exciting fighters.",
     "last5": [
       {"opponent": "Raquel Pennington", "result": "L", "method": "Dec", "event": "UFC 297", "round": 5, "time": "5:00"},
       {"opponent": "Amanda Nunes", "result": "L", "method": "TKO", "event": "UFC 277", "round": 1, "time": "3:26"},
@@ -986,5 +985,31 @@
       {"opponent": "Sara McMann", "result": "W", "method": "TKO", "event": "UFC Fight Night", "round": 2, "time": "2:52"},
       {"opponent": "Nicco Montaño", "result": "W", "method": "TKO", "event": "UFC Fight Night", "round": 4, "time": "2:44"}
     ]
-  }
+  },
+
+  {"id":"jon-jones","name":"Jon Jones","nickname":"Bones","nationality":"American","flag":"🇺🇸","weightClass":"Heavyweight","ranking":"Former Champion","record":{"wins":28,"losses":1,"draws":0},"height":"6'4\"","reach":"84.5\"","stance":"Orthodox","age":37,"fightingOut":"Endicott, New York","style":"All-Around","legend":true,"img":"https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-11/JONES_JON_L_BELT_11-18.png","bio":"Jon Jones is widely regarded as the greatest MMA fighter of all time. A two-time UFC Light Heavyweight Champion and UFC Heavyweight Champion, Bones dominated the LHW division for over a decade with a combination of elite wrestling, vicious elbows, creative kicks and the highest MMA IQ ever seen. His only professional loss came via disqualification against Matt Hamill in 2009. Vacated the HW title in 2025.","last5":[{"opponent":"Stipe Miocic","result":"W","method":"TKO","event":"UFC 309","round":3,"time":""},{"opponent":"Ciryl Gane","result":"W","method":"Sub","event":"UFC 285","round":3,"time":"3:31"},{"opponent":"Stipe Miocic","result":"W","method":"TKO","event":"UFC 285","round":3,"time":""},{"opponent":"Dominick Reyes","result":"W","method":"Dec","event":"UFC 247","round":5,"time":"5:00"},{"opponent":"Thiago Santos","result":"W","method":"Dec","event":"UFC 239","round":5,"time":"5:00"}]},
+
+  {"id":"stipe-miocic","name":"Stipe Miocic","nickname":"The Baddest Man","nationality":"American","flag":"🇺🇸","weightClass":"Heavyweight","ranking":"Former Champion","record":{"wins":20,"losses":5,"draws":0},"height":"6'4\"","reach":"79\"","stance":"Orthodox","age":41,"fightingOut":"Euclid, Ohio","style":"Striker","legend":true,"img":"https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-11/MIOCIC_STIPE_L_11-16.png","bio":"Stipe Miocic is the greatest UFC Heavyweight Champion in history, holding the record for most consecutive heavyweight title defences with four. A firefighter from Ohio who became the most decorated heavyweight the UFC has ever produced, Stipe's clean boxing and wrestling allowed him to defeat Overeem, dos Santos, Cormier (x2) and Ngannou. Retired after a TKO loss to Jon Jones at UFC 309.","last5":[{"opponent":"Jon Jones","result":"L","method":"TKO","event":"UFC 309","round":3,"time":""},{"opponent":"Francis Ngannou","result":"L","method":"TKO","event":"UFC 260","round":2,"time":"0:52"},{"opponent":"Daniel Cormier","result":"W","method":"TKO","event":"UFC 252","round":4,"time":"3:08"},{"opponent":"Daniel Cormier","result":"W","method":"TKO","event":"UFC 241","round":2,"time":"4:13"},{"opponent":"Daniel Cormier","result":"L","method":"KO","event":"UFC 226","round":1,"time":"4:33"}]},
+
+  {"id":"anderson-silva","name":"Anderson Silva","nickname":"The Spider","nationality":"Brazilian","flag":"🇧🇷","weightClass":"Middleweight","ranking":"Former Champion","record":{"wins":34,"losses":11,"draws":0},"height":"6'2\"","reach":"77.5\"","stance":"Orthodox","age":49,"fightingOut":"São Paulo, Brazil","style":"Striker","legend":true,"img":"https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2020-10/SILVA_ANDERSON_L_10-31.png","bio":"Anderson Silva is the greatest UFC Middleweight Champion of all time and one of the most gifted martial artists the sport has ever seen. His 16-fight UFC win streak and 2,457-day reign as champion remain UFC records. The Spider's combination of Muay Thai precision, clinical front kicks, and almost supernatural ring generalship made him untouchable for nearly a decade. UFC Hall of Fame inductee, 2023.","last5":[{"opponent":"Uriah Hall","result":"L","method":"KO","event":"UFC Fight Night","round":4,"time":"1:21"},{"opponent":"Jared Cannonier","result":"L","method":"TKO","event":"UFC 237","round":1,"time":"1:21"},{"opponent":"Israel Adesanya","result":"L","method":"Dec","event":"UFC 234","round":5,"time":"5:00"},{"opponent":"Derek Brunson","result":"L","method":"TKO","event":"UFC Fight Night","round":1,"time":"1:21"},{"opponent":"Daniel Cormier","result":"L","method":"Dec","event":"UFC 200","round":3,"time":"5:00"}]},
+
+  {"id":"daniel-cormier","name":"Daniel Cormier","nickname":"DC","nationality":"American","flag":"🇺🇸","weightClass":"Light Heavyweight","ranking":"Former Champion","record":{"wins":22,"losses":3,"draws":0},"height":"5'11\"","reach":"73\"","stance":"Orthodox","age":45,"fightingOut":"San Jose, California","style":"Wrestler","legend":true,"img":"https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2020-08/CORMIER_DANIEL_L_08-15.png","bio":"Daniel Cormier is the only active simultaneous two-division champion in UFC history, holding the LHW and HW titles at the same time. A two-time Olympic wrestling alternate who became a combat sports legend, DC's elite grappling and relentless pressure brought him championship gold in two weight classes. All three of his losses came to Jon Jones (twice) and Stipe Miocic.","last5":[{"opponent":"Stipe Miocic","result":"L","method":"Dec","event":"UFC 252","round":5,"time":"5:00"},{"opponent":"Stipe Miocic","result":"W","method":"KO","event":"UFC 226","round":1,"time":"4:33"},{"opponent":"Derrick Lewis","result":"W","method":"Sub","event":"UFC 230","round":2,"time":"0:35"},{"opponent":"Volkan Oezdemir","result":"W","method":"TKO","event":"UFC 220","round":3,"time":"3:00"},{"opponent":"Jon Jones","result":"NC","method":"NC","event":"UFC 214","round":3,"time":"3:01"}]},
+
+  {"id":"khabib-nurmagomedov","name":"Khabib Nurmagomedov","nickname":"The Eagle","nationality":"Russian","flag":"🇷🇺","weightClass":"Lightweight","ranking":"Former Champion","record":{"wins":29,"losses":0,"draws":0},"height":"5'10\"","reach":"70\"","stance":"Orthodox","age":36,"fightingOut":"Makhachkala, Russia","style":"Grappler","legend":true,"img":"https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2020-10/NURMAGOMEDOV_KHABIB_L_10-24.png","bio":"Khabib Nurmagomedov retired undefeated at 29-0 as the most dominant wrestler in UFC Lightweight history. The Eagle's smothering top control, relentless pressure and ground-and-pound made him impossible to beat — nobody could survive his grappling. He submitted Conor McGregor, Dustin Poirier and Justin Gaethje before retiring in 2020 to honour a promise to his late father.","last5":[{"opponent":"Justin Gaethje","result":"W","method":"Sub","event":"UFC 254","round":2,"time":"1:34"},{"opponent":"Dustin Poirier","result":"W","method":"Sub","event":"UFC 242","round":3,"time":"2:00"},{"opponent":"Conor McGregor","result":"W","method":"Sub","event":"UFC 229","round":4,"time":"3:03"},{"opponent":"Al Iaquinta","result":"W","method":"Dec","event":"UFC 223","round":5,"time":"5:00"},{"opponent":"Edson Barboza","result":"W","method":"Dec","event":"UFC Fight Night","round":3,"time":"5:00"}]},
+
+  {"id":"jose-aldo","name":"José Aldo","nickname":"Junior","nationality":"Brazilian","flag":"🇧🇷","weightClass":"Featherweight","ranking":"Former Champion","record":{"wins":32,"losses":10,"draws":0},"height":"5'7\"","reach":"70\"","stance":"Orthodox","age":38,"fightingOut":"Rio de Janeiro, Brazil","style":"Striker","legend":true,"img":"https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2020-07/ALDO_JOSE_L_07-11.png","bio":"José Aldo is the greatest WEC/UFC Featherweight Champion of all time, holding the 145-pound title for nearly a decade and defending it ten times across two promotions. His devastating leg kicks and ferocious pressure made him one of the most feared strikers in MMA history. A legend of the sport who finally retired following UFC 315 in May 2025.","last5":[{"opponent":"Aiemann Zahabi","result":"L","method":"Dec","event":"UFC 315","round":3,"time":"5:00"},{"opponent":"Henry Cejudo","result":"W","method":"Dec","event":"UFC Fight Night","round":3,"time":"5:00"},{"opponent":"Merab Dvalishvili","result":"L","method":"Dec","event":"UFC Fight Night","round":3,"time":"5:00"},{"opponent":"Jonathan Martinez","result":"W","method":"KO","event":"UFC Fight Night","round":1,"time":"0:47"},{"opponent":"Rob Font","result":"W","method":"Dec","event":"UFC Fight Night","round":5,"time":"5:00"}]},
+
+  {"id":"conor-mcgregor","name":"Conor McGregor","nickname":"The Notorious","nationality":"Irish","flag":"🇮🇪","weightClass":"Lightweight","ranking":"Former Champion","record":{"wins":22,"losses":6,"draws":0},"height":"5'9\"","reach":"74\"","stance":"Southpaw","age":37,"fightingOut":"Dublin, Ireland","style":"Striker","legend":true,"img":"https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2021-07/MCGREGOR_CONOR_L_07-10.png","bio":"Conor McGregor is the biggest star in UFC history and the first fighter to hold two UFC titles simultaneously, capturing the featherweight and lightweight championships in breathtaking fashion. The Notorious's precision left hand, elite timing and unmatched charisma made him a global phenomenon. Currently planning a return to the octagon after nearly five years away.","last5":[{"opponent":"Dustin Poirier","result":"L","method":"TKO","event":"UFC 264","round":1,"time":"4:59"},{"opponent":"Dustin Poirier","result":"L","method":"TKO","event":"UFC 257","round":2,"time":"2:32"},{"opponent":"Donald Cerrone","result":"W","method":"TKO","event":"UFC 246","round":1,"time":"0:40"},{"opponent":"Khabib Nurmagomedov","result":"L","method":"Sub","event":"UFC 229","round":4,"time":"3:03"},{"opponent":"Nate Diaz","result":"W","method":"TKO","event":"UFC 202","round":4,"time":"4:11"}]},
+
+  {"id":"demetrious-johnson","name":"Demetrious Johnson","nickname":"Mighty Mouse","nationality":"American","flag":"🇺🇸","weightClass":"Flyweight","ranking":"Former Champion","record":{"wins":27,"losses":3,"draws":1},"height":"5'3\"","reach":"66.5\"","stance":"Orthodox","age":38,"fightingOut":"Parkland, Washington","style":"All-Around","legend":true,"img":"https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2018-08/JOHNSON_DEMETRIOUS_L_08-04.png","bio":"Demetrious Johnson is the greatest pound-for-pound flyweight in MMA history, holding the UFC record for most consecutive title defences at 11. His combination of elite wrestling, fluid transitions, creative striking and supernatural athleticism made him one of the most complete martial artists the sport has ever produced. Retired in 2024 and will be inducted into the UFC Hall of Fame in 2026.","last5":[{"opponent":"Adriano Moraes","result":"W","method":"Dec","event":"ONE Championship","round":5,"time":"5:00"},{"opponent":"Rodtang Jitmuangnon","result":"W","method":"Sub","event":"ONE X","round":1,"time":"4:23"},{"opponent":"Adriano Moraes","result":"L","method":"KO","event":"ONE Championship","round":2,"time":"4:54"},{"opponent":"Danny Kingad","result":"W","method":"Sub","event":"ONE Championship","round":2,"time":"3:22"},{"opponent":"Tatsumitsu Wada","result":"W","method":"Sub","event":"ONE Championship","round":2,"time":"3:38"}]},
+
+  {"id":"georges-st-pierre","name":"Georges St-Pierre","nickname":"Rush","nationality":"Canadian","flag":"🇨🇦","weightClass":"Welterweight","ranking":"Former Champion","record":{"wins":26,"losses":2,"draws":0},"height":"5'11\"","reach":"76\"","stance":"Orthodox","age":43,"fightingOut":"Montreal, Canada","style":"All-Around","legend":true,"img":"https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2017-11/ST_PIERRE_GEORGES_L_11-04.png","bio":"Georges St-Pierre is the most complete welterweight in MMA history and arguably the greatest UFC champion of all time alongside Jon Jones. Rush held the WW title for nine consecutive defences — a UFC record — and returned from four years away to also capture the Middleweight Championship. His wrestling, boxing, karate and elite conditioning created a game plan-based monster that won fights on every front.","last5":[{"opponent":"Michael Bisping","result":"W","method":"Sub","event":"UFC 217","round":3,"time":"4:58"},{"opponent":"Johnny Hendricks","result":"W","method":"Dec","event":"UFC 167","round":5,"time":"5:00"},{"opponent":"Carlos Condit","result":"W","method":"Dec","event":"UFC 154","round":5,"time":"5:00"},{"opponent":"Nick Diaz","result":"W","method":"Dec","event":"UFC 158","round":5,"time":"5:00"},{"opponent":"Jake Shields","result":"W","method":"Dec","event":"UFC 129","round":5,"time":"5:00"}]},
+
+  {"id":"rampage-jackson","name":"Quinton Jackson","nickname":"Rampage","nationality":"American","flag":"🇺🇸","weightClass":"Light Heavyweight","ranking":"Former Champion","record":{"wins":37,"losses":14,"draws":0},"height":"6'1\"","reach":"76\"","stance":"Orthodox","age":46,"fightingOut":"Memphis, Tennessee","style":"Striker","legend":true,"img":"https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2013-09/JACKSON_QUINTON_L_09-21.png","bio":"Quinton 'Rampage' Jackson is one of the most entertaining and powerful fighters in MMA history, a former UFC and PRIDE Light Heavyweight Champion whose devastating slam KOs and raw knockout power made him one of the sport's most beloved figures. Rampage's charisma, trash talk and warrior mentality made him a superstar in both Japan and America.","last5":[{"opponent":"Fedor Emelianenko","result":"L","method":"KO","event":"Bellator 237","round":1,"time":"2:44"},{"opponent":"Wanderlei Silva","result":"W","method":"TKO","event":"Bellator 180","round":2,"time":"4:56"},{"opponent":"King Mo","result":"W","method":"Dec","event":"Bellator 164","round":5,"time":"5:00"},{"opponent":"Fabio Maldonado","result":"W","method":"Dec","event":"UFC Fight Night","round":3,"time":"5:00"},{"opponent":"Glover Teixeira","result":"L","method":"TKO","event":"UFC Fight Night","round":3,"time":"4:02"}]},
+
+  {"id":"randy-couture","name":"Randy Couture","nickname":"The Natural","nationality":"American","flag":"🇺🇸","weightClass":"Heavyweight","ranking":"Former Champion","record":{"wins":19,"losses":11,"draws":0},"height":"6'2\"","reach":"72\"","stance":"Orthodox","age":61,"fightingOut":"Portland, Oregon","style":"Wrestler","legend":true,"img":"https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2011-04/COUTURE_RANDY_L_04-30.png","bio":"Randy Couture is a five-time UFC champion (3x Heavyweight, 2x Light Heavyweight) and one of the founding legends of the sport, proving that technique and heart could overcome physical disadvantages at any age. The Natural won his final championship at 43 years old and was one of the four original inductees into the UFC Hall of Fame. His wrestling-based dirty boxing defined an era.","last5":[{"opponent":"Lyoto Machida","result":"L","method":"KO","event":"UFC 129","round":2,"time":"3:27"},{"opponent":"James Toney","result":"W","method":"Sub","event":"UFC 118","round":1,"time":"3:19"},{"opponent":"Brandon Vera","result":"W","method":"TKO","event":"UFC Fight Night","round":3,"time":"4:14"},{"opponent":"Antonio Rodrigo Nogueira","result":"L","method":"TKO","event":"UFC 102","round":3,"time":"3:02"},{"opponent":"Brock Lesnar","result":"L","method":"TKO","event":"UFC 91","round":2,"time":"4:37"}]},
+
+  {"id":"brock-lesnar","name":"Brock Lesnar","nationality":"American","flag":"🇺🇸","weightClass":"Heavyweight","ranking":"Former Champion","record":{"wins":5,"losses":3,"draws":0},"height":"6'3\"","reach":"81\"","stance":"Orthodox","age":48,"fightingOut":"Alexandria, South Dakota","style":"Wrestler","legend":true,"img":"https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2016-07/LESNAR_BROCK_L_07-09.png","bio":"Brock Lesnar is one of the most physically imposing champions in UFC history, an NCAA champion wrestler who became Heavyweight Champion in only his fourth professional fight. His combination of size, power and elite wrestling shocked the world when he knocked out Randy Couture to win the belt. His UFC career was defined by his battles with Cain Velasquez and Junior dos Santos, and he retired after the UFC 200 win over Hunt was overturned.","last5":[{"opponent":"Mark Hunt","result":"NC","method":"NC","event":"UFC 200","round":3,"time":"5:00"},{"opponent":"Frank Mir","result":"W","method":"Dec","event":"UFC 100","round":3,"time":"5:00"},{"opponent":"Shane Carwin","result":"W","method":"Sub","event":"UFC 116","round":2,"time":"2:19"},{"opponent":"Cain Velasquez","result":"L","method":"TKO","event":"UFC 121","round":1,"time":"4:12"},{"opponent":"Frank Mir","result":"L","method":"Sub","event":"UFC 98","round":1,"time":"1:01"}]},
+
+  {"id":"francis-ngannou","name":"Francis Ngannou","nickname":"The Predator","nationality":"Cameroonian-French","flag":"🇨🇲","weightClass":"Heavyweight","ranking":"Former Champion","record":{"wins":18,"losses":3,"draws":0},"height":"6'4\"","reach":"83\"","stance":"Orthodox","age":38,"fightingOut":"Paris, France","style":"Striker","legend":true,"img":"https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2021-03/NGANNOU_FRANCIS_L_03-27.png","bio":"Francis Ngannou is the hardest-hitting MMA fighter in recorded history, the man who dethroned Stipe Miocic with an otherworldly display of power at UFC 260. The Predator's journey from poverty in Cameroon to UFC Heavyweight Champion is one of the most inspiring stories in sports. After leaving the UFC he won the PFL Super Fight HW Championship in 2024 and continues to compete as a free agent.","last5":[{"opponent":"Renan Ferreira","result":"W","method":"KO","event":"PFL Super Fights","round":1,"time":""},{"opponent":"Anthony Joshua","result":"L","method":"KO","event":"Boxing","round":2,"time":""},{"opponent":"Tyson Fury","result":"L","method":"Split Dec","event":"Boxing","round":10,"time":""},{"opponent":"Ciryl Gane","result":"W","method":"TKO","event":"UFC 270","round":3,"time":"2:31"},{"opponent":"Stipe Miocic","result":"W","method":"TKO","event":"UFC 260","round":2,"time":"0:52"}]}
 ]

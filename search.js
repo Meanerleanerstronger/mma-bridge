@@ -88,11 +88,18 @@
     if (fResults.length) {
       drop.appendChild(Object.assign(document.createElement('div'), { className: 'sd-section', textContent: 'Fighters' }));
       fResults.forEach(f => {
+        const isChamp = (f.ranking || '').toLowerCase().includes('champ');
+        const badges = [
+          isChamp ? `<span class="sd-badge sd-badge-champ">🏆 Champ</span>` : '',
+          f.pfp   ? `<span class="sd-badge sd-badge-pfp">★ P4P</span>` : '',
+        ].filter(Boolean).join('');
         const row = buildRow(`
           <img class="sd-avatar" src="${escHtml(f.img || '')}" alt="${escHtml(f.name)}" onerror="this.style.visibility='hidden'">
           <div class="sd-info">
-            <span class="sd-name">${escHtml(f.name)}</span>
-            <span class="sd-sub">${escHtml(f.weightClass)}${f.ranking ? ' · ' + f.ranking : ''}</span>
+            <div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap;">
+              <span class="sd-name">${escHtml(f.name)}</span>${badges}
+            </div>
+            <span class="sd-sub">${escHtml(f.weightClass)}${f.ranking && !isChamp ? ' · ' + f.ranking : ''}</span>
           </div>
         `, () => {
           input.value = '';
