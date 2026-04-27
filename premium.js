@@ -550,4 +550,15 @@ document.addEventListener('DOMContentLoaded',function(){
   if(strip)strip.remove();
 });
 
+/* ══════════════════════════════════════════════════
+   SITE DISCLAIMER FOOTER
+══════════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded',function(){
+  if(document.getElementById('site-disclaimer'))return;
+  var d=document.createElement('footer');
+  d.id='site-disclaimer';
+  d.innerHTML='MMA Bridge is an independent fan-made site and is not affiliated with, endorsed by, or associated with the UFC, Zuffa LLC, or any related organisations. Fighter images, event posters, and all UFC-related media remain the sole property of their respective copyright holders. Fighter records and event data are sourced from publicly available information. No copyright infringement is intended.';
+  document.body.appendChild(d);
+});
+
 })();

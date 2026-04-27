@@ -158,16 +158,18 @@
     return { correct, total };
   }
 
-  // ── Fighter photo ──────────────────────────────
+  // ── Fighter photo — 3-level fallback chain ────
+  // 1. events.json imgA/imgB  2. fighters.json CloudFront  3. silhouette
   function fighterPhoto(evImg, name, side) {
-    const imgUrl = fighterImg(evImg, name);
-    if (imgUrl) {
-      return `<img class="pk-fighter-img pk-fighter-img-${side}"
-        src="${esc(imgUrl)}" alt="${esc(name)}" loading="lazy"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="pk-sil-wrap" style="display:none">${SILHOUETTE}</div>`;
-    }
-    return `<div class="pk-sil-wrap">${SILHOUETTE}</div>`;
+    const fd = lookupFighter(name);
+    const primary  = evImg || fd?.img || '';
+    const fallback = evImg && fd?.img ? fd.img : '';   // only set if primary ≠ fallback
+    if (!primary) return `<div class="pk-sil-wrap">${SILHOUETTE}</div>`;
+    return `<img class="pk-fighter-img pk-fighter-img-${side}"
+      src="${esc(primary)}" alt="${esc(name)}" loading="lazy"
+      ${fallback ? `data-fallback="${esc(fallback)}"` : ''}
+      onerror="var fb=this.dataset.fallback;if(fb){this.removeAttribute('data-fallback');this.src=fb}else{this.style.display='none';this.nextElementSibling.style.display='flex'}">
+      <div class="pk-sil-wrap" style="display:none">${SILHOUETTE}</div>`;
   }
 
   // ── Build one fight card ──────────────────────
