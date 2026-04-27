@@ -66,7 +66,7 @@
   // ── Load data in parallel ─────────────────────
   const [ratingsResult, eventsResult, fightersResult] = await Promise.all([
     sb.from('ratings')
-      .select('id, event_id, event_name, hype_rating, fotn_prediction, review_text, created_at')
+      .select('id, event_id, event_name, hype_rating, review_text, created_at')
       .eq('user_id', user.id)
       .order('created_at', { ascending: false }),
     fetch('./events.json').then(r => r.ok ? r.json() : []).catch(() => []),
@@ -99,41 +99,6 @@
     ? (ratings.reduce((s, r) => s + Number(r.hype_rating), 0) / totalRatings).toFixed(1)
     : '—';
 
-  // Pick accuracy: check if fotn_prediction fighter name appears as winner in that event
-  const picksWithResults = ratings.filter(r => r.fotn_prediction && eventMap[r.event_id]);
-  let hits = 0;
-  const pickResults = {}; // event_id → 'hit' | 'miss' | 'pending'
-
-  picksWithResults.forEach(r => {
-    const ev = eventMap[r.event_id];
-    if (!ev || ev.status !== 'completed') {
-      pickResults[r.event_id] = 'pending';
-      return;
-    }
-    const pred = r.fotn_prediction.toLowerCase();
-    // Check if any fighter matching the prediction won a fight at this event
-    const allFights = [
-      ...(ev.mainCard || []),
-      ...(ev.prelims || []),
-      ...(ev.earlyPrelims || []),
-    ];
-    const isHit = allFights.some(f => {
-      if (!f.winner || f.winner === 'NC' || f.winner === 'Draw') return false;
-      const winnerName = f.winner.toLowerCase();
-      const aName = (f.a || '').toLowerCase();
-      const bName = (f.b || '').toLowerCase();
-      // Match if prediction contains winner's first or last name
-      return winnerName.split(' ').some(part => part.length > 2 && pred.includes(part))
-          || pred.split(' ').some(part => part.length > 2 && winnerName.includes(part))
-          || aName.split(' ').some(part => part.length > 2 && pred.includes(part))
-          || bName.split(' ').some(part => part.length > 2 && pred.includes(part));
-    });
-    if (isHit) hits++;
-    pickResults[r.event_id] = isHit ? 'hit' : 'miss';
-  });
-
-  const completedPicks = picksWithResults.filter(r => pickResults[r.event_id] !== 'pending').length;
-  const accuracy = completedPicks > 0 ? Math.round((hits / completedPicks) * 100) : null;
 
   // ── Stars HTML ────────────────────────────────
   function starsHtml(rating) {
@@ -188,16 +153,11 @@
             <div class="pr-stat-num" id="statAvg">—</div>
             <div class="pr-stat-lbl">Avg Rating</div>
           </div>
-          <div class="pr-stat">
-            <div class="pr-stat-num" id="statAcc">${accuracy !== null ? accuracy + '%' : '—'}</div>
-            <div class="pr-stat-lbl">Pick Accuracy</div>
-          </div>
         </div>
       </div>
 
       <!-- BODY -->
       <div class="pr-body">
-        ${buildAccuracySection()}
         ${buildRatingsSection()}
         ${buildFavsSection()}
       </div>
@@ -207,42 +167,6 @@
 
     animateStats();
     attachEvents();
-  }
-
-  function buildAccuracySection() {
-    if (accuracy === null) return '';
-    const circ = 2 * Math.PI * 30; // r=30
-    const filled = (accuracy / 100) * circ;
-    const color = accuracy >= 70 ? '#00e5ff' : accuracy >= 50 ? '#ffd700' : '#ff6060';
-
-    return `
-      <div class="pr-section" style="animation-delay:0.05s">
-        <div class="pr-section-title">Pick Accuracy</div>
-        <div class="pr-accuracy-card">
-          <div class="pr-accuracy-ring-wrap">
-            <div class="pr-accuracy-ring">
-              <svg viewBox="0 0 80 80">
-                <circle class="pr-accuracy-ring-bg" cx="40" cy="40" r="30"/>
-                <circle class="pr-accuracy-ring-fill" cx="40" cy="40" r="30"
-                  stroke="${color}"
-                  stroke-dasharray="${circ}"
-                  stroke-dashoffset="${circ}"
-                  id="accRingFill"/>
-              </svg>
-              <div class="pr-accuracy-pct">${accuracy}%</div>
-            </div>
-          </div>
-          <div class="pr-accuracy-desc">
-            <div class="pr-accuracy-title">FOTN Pick Record</div>
-            <div class="pr-accuracy-detail">
-              You got <strong>${hits} of ${completedPicks}</strong> Fight of the Night picks right.
-              ${picksWithResults.length - completedPicks > 0
-                ? ` <br><span style="color:rgba(255,200,0,0.5)">${picksWithResults.length - completedPicks} pick${picksWithResults.length - completedPicks !== 1 ? 's' : ''} still pending results.</span>`
-                : ''}
-            </div>
-          </div>
-        </div>
-      </div>`;
   }
 
   function buildRatingsSection() {
@@ -262,15 +186,6 @@
       const name   = r.event_name || ev?.name || 'Unknown Event';
       const poster  = ev?.poster || '';
       const eventId = r.event_id || slugify(name);
-      const pick    = r.fotn_prediction;
-      const pResult = pickResults[r.event_id];
-
-      let pickBadge = '';
-      if (pick && pResult) {
-        if (pResult === 'hit')     pickBadge = `<span class="pr-rc-pick-badge hit">✓ Correct pick</span>`;
-        else if (pResult === 'miss') pickBadge = `<span class="pr-rc-pick-badge miss">✗ Missed</span>`;
-        else                        pickBadge = `<span class="pr-rc-pick-badge pending">⏳ Pending</span>`;
-      }
 
       return `
         <a class="pr-rating-card" href="event-review.html?id=${encodeURIComponent(eventId)}">
@@ -285,9 +200,7 @@
             <div class="pr-rc-name">${esc(name)}</div>
             <div class="pr-rc-meta">
               <span>${timeAgo(r.created_at)}</span>
-              ${pickBadge}
             </div>
-            ${pick ? `<div class="pr-rc-fotn">⚡ FOTN pick: ${esc(pick)}</div>` : ''}
             ${r.review_text ? `<div class="pr-rc-text">${esc(r.review_text)}</div>` : ''}
           </div>
         </a>`;
@@ -367,7 +280,6 @@
   function animateStats() {
     const ratingEl = document.getElementById('statRatings');
     const avgEl    = document.getElementById('statAvg');
-    const fillEl   = document.getElementById('accRingFill');
 
     if (ratingEl) {
       let cur = 0;
@@ -385,13 +297,6 @@
 
     if (avgEl) {
       avgEl.textContent = avgRating;
-    }
-
-    if (fillEl && accuracy !== null) {
-      setTimeout(() => {
-        const circ = 2 * Math.PI * 30;
-        fillEl.style.strokeDashoffset = circ - (accuracy / 100) * circ;
-      }, 300);
     }
   }
 
