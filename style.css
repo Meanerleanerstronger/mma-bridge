@@ -3849,6 +3849,18 @@ body.light-mode .navbar {
 }
 .nav-user:hover .nav-user-drop { opacity: 1; pointer-events: auto; transform: translateY(0); }
 
+.nav-user-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 2px 4px;
+  transition: background 0.15s;
+}
+.nav-user-link:hover { background: rgba(0,229,255,0.08); }
+.nav-user-link:hover .nav-username { color: #00e5ff; }
+
 .nav-avatar {
   width: 30px;
   height: 30px;

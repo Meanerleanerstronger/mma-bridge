@@ -12,8 +12,10 @@
       if (user) {
         el.innerHTML = `
           <div class="nav-user">
-            <img class="nav-avatar" src="${escHtml(user.avatar_url || '')}" alt="${escHtml(user.display_name || '')}" onerror="this.style.display='none'">
-            <span class="nav-username">${escHtml(user.display_name || 'Fighter')}</span>
+            <a href="profile.html" class="nav-user-link" title="View your profile">
+              <img class="nav-avatar" src="${escHtml(user.avatar_url || '')}" alt="${escHtml(user.display_name || '')}" onerror="this.style.display='none'">
+              <span class="nav-username">${escHtml(user.display_name || 'Fighter')}</span>
+            </a>
             <button type="button" class="nav-logout-btn" onclick="window.MMABridgeAuth.signOut()">Sign Out</button>
           </div>`;
       } else {

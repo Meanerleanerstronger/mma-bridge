@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <script src="theme.js?v=2.4"></script>
+  <link rel="icon" href="images/mma-bridge-logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="images/mma-bridge-logo.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Profile — MMA Bridge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=2.5" />
+
+  <style>
+    /* ── KEYFRAMES ── */
+    @keyframes fadeUp   { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes shimmer  { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+    @keyframes spin     { to { transform: rotate(360deg); } }
+    @keyframes pulse    { 0%,100%{opacity:.5} 50%{opacity:1} }
+    @keyframes countUp  { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes ringPop  { 0%{transform:scale(0.85);opacity:0} 60%{transform:scale(1.04)} 100%{transform:scale(1);opacity:1} }
+
+    body { background: #060608; }
+
+    /* ── PROFILE HERO ── */
+    .pr-hero {
+      position: relative;
+      padding: 0 0 0;
+      overflow: hidden;
+    }
+    .pr-hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 30% -10%, rgba(0,229,255,0.07) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 40% at 80% 110%, rgba(200,168,75,0.04) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .pr-hero-inner {
+      position: relative;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 52px 40px 40px;
+      display: flex;
+      align-items: flex-end;
+      gap: 32px;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    /* Avatar */
+    .pr-avatar-wrap { position: relative; flex-shrink: 0; animation: ringPop 0.6s 0.1s ease both; }
+    .pr-avatar-ring {
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #00e5ff 0%, #0080ff 50%, #00e5ff 100%);
+      background-size: 200% 200%;
+      animation: shimmer 3s linear infinite;
+      padding: 3px;
+      box-shadow: 0 0 32px rgba(0,229,255,0.25), 0 8px 40px rgba(0,0,0,0.6);
+    }
+    .pr-avatar-img {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #141418;
+      display: block;
+    }
+    .pr-avatar-initials {
+      width: 104px; height: 104px;
+      border-radius: 50%;
+      background: #141418;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 2.2rem;
+      color: #00e5ff;
+      letter-spacing: -0.02em;
+    }
+
+    /* Name / meta */
+    .pr-info { flex: 1; min-width: 0; padding-bottom: 4px; }
+    .pr-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(0,229,255,0.6);
+      margin-bottom: 6px;
+    }
+    .pr-name {
+      font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2rem, 5vw, 3rem);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: #fff;
+      line-height: 1;
+      margin: 0 0 10px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+    }
+    .pr-meta-row {
+      display: flex; align-items: center; gap: 14px;
+      flex-wrap: wrap;
+    }
+    .pr-meta-item {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.35);
+      display: flex; align-items: center; gap: 5px;
+    }
+    .pr-meta-item svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    /* ── STATS STRIP ── */
+    .pr-stats {
+      background: rgba(255,255,255,0.02);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .pr-stats-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+    }
+    .pr-stat {
+      flex: 1;
+      padding: 22px 0;
+      text-align: center;
+      position: relative;
+      animation: countUp 0.5s ease both;
+    }
+    .pr-stat + .pr-stat::before {
+      content: '';
+      position: absolute; left: 0; top: 20%; bottom: 20%;
+      width: 1px;
+      background: rgba(255,255,255,0.07);
+    }
+    .pr-stat-num {
+      font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 2rem;
+      color: #00e5ff;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .pr-stat-lbl {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ── SECTION WRAPPER ── */
+    .pr-body {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 40px 100px;
+    }
+    .pr-section { margin-bottom: 56px; animation: fadeUp 0.5s ease both; }
+    .pr-section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin: 0 0 20px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .pr-section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, rgba(255,255,255,0.08), transparent);
+    }
+    .pr-section-count {
+      font-size: 0.6rem;
+      background: rgba(0,229,255,0.08);
+      border: 1px solid rgba(0,229,255,0.15);
+      color: rgba(0,229,255,0.6);
+      border-radius: 20px;
+      padding: 2px 8px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── RATING CARDS (review history) ── */
+    .pr-ratings-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .pr-rating-card {
+      background: #0e0e12;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s, transform 0.25s, box-shadow 0.25s;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .pr-rating-card:hover {
+      border-color: rgba(0,229,255,0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.6), 0 0 24px rgba(0,229,255,0.06);
+    }
+    .pr-rc-poster-wrap {
+      position: relative;
+      height: 120px;
+      overflow: hidden;
+      background: #141418;
+      flex-shrink: 0;
+    }
+    .pr-rc-poster {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transition: transform 0.5s ease;
+    }
+    .pr-rating-card:hover .pr-rc-poster { transform: scale(1.06); }
+    .pr-rc-grad {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(14,14,18,0.98) 0%, rgba(14,14,18,0.3) 60%, transparent 100%);
+    }
+    .pr-rc-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+      background: linear-gradient(145deg, #141418, #0a0a0e);
+    }
+    .pr-rc-stars {
+      position: absolute;
+      bottom: 8px; left: 10px;
+      display: flex; gap: 2px;
+      z-index: 2;
+    }
+    .pr-star { color: rgba(255,200,0,0.3); font-size: 0.85rem; }
+    .pr-star.lit { color: #ffd700; }
+    .pr-rc-body { padding: 12px 14px 14px; flex: 1; display: flex; flex-direction: column; gap: 6px; }
+    .pr-rc-name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 0.75rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: #fff;
+      line-height: 1.25;
+    }
+    .pr-rc-meta {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.67rem;
+      color: rgba(255,255,255,0.3);
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    }
+    .pr-rc-fotn {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.67rem;
+      color: rgba(0,229,255,0.65);
+      margin-top: 2px;
+    }
+    .pr-rc-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-top: 2px;
+    }
+    .pr-rc-pick-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.52rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 3px;
+    }
+    .pr-rc-pick-badge.hit  { background: rgba(0,200,100,0.12); border: 1px solid rgba(0,200,100,0.3); color: #00c864; }
+    .pr-rc-pick-badge.miss { background: rgba(255,80,80,0.08);  border: 1px solid rgba(255,80,80,0.2);  color: rgba(255,100,100,0.7); }
+    .pr-rc-pick-badge.pending { background: rgba(255,200,0,0.08); border: 1px solid rgba(255,200,0,0.2); color: rgba(255,200,0,0.6); }
+
+    /* ── PICK ACCURACY CARD ── */
+    .pr-accuracy-card {
+      background: linear-gradient(135deg, rgba(0,229,255,0.04) 0%, rgba(0,0,0,0) 60%);
+      border: 1px solid rgba(0,229,255,0.12);
+      border-radius: 14px;
+      padding: 20px 24px;
+      display: flex; align-items: center; gap: 24px;
+    }
+    .pr-accuracy-ring-wrap { flex-shrink: 0; }
+    .pr-accuracy-ring { position: relative; width: 80px; height: 80px; }
+    .pr-accuracy-ring svg { width: 80px; height: 80px; transform: rotate(-90deg); }
+    .pr-accuracy-ring-bg  { fill: none; stroke: rgba(255,255,255,0.07); stroke-width: 6; }
+    .pr-accuracy-ring-fill { fill: none; stroke: #00e5ff; stroke-width: 6; stroke-linecap: round; transition: stroke-dashoffset 1s ease; }
+    .pr-accuracy-pct {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900; font-size: 1.1rem;
+      color: #fff;
+    }
+    .pr-accuracy-desc { flex: 1; }
+    .pr-accuracy-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800; font-size: 0.72rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 6px;
+    }
+    .pr-accuracy-detail {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.3);
+      line-height: 1.5;
+    }
+    .pr-accuracy-detail strong { color: rgba(0,229,255,0.8); }
+
+    /* ── FIGHTER FAVS ── */
+    .pr-favs-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .pr-fav-card {
+      width: 90px;
+      display: flex; flex-direction: column; align-items: center; gap: 7px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s;
+    }
+    .pr-fav-card:hover { transform: translateY(-4px); }
+    .pr-fav-img-wrap {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid rgba(0,229,255,0.2);
+      background: #141418;
+      position: relative;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .pr-fav-card:hover .pr-fav-img-wrap {
+      border-color: rgba(0,229,255,0.5);
+      box-shadow: 0 0 16px rgba(0,229,255,0.2);
+    }
+    .pr-fav-img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: top center;
+    }
+    .pr-fav-initial {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900; font-size: 1.4rem;
+      color: rgba(0,229,255,0.5);
+    }
+    .pr-fav-remove {
+      position: absolute; top: 0; right: 0;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: #1a1a20;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.4);
+      display: none; align-items: center; justify-content: center;
+      font-size: 0.55rem; cursor: pointer;
+      z-index: 2;
+      line-height: 1;
+    }
+    .pr-fav-card:hover .pr-fav-remove { display: flex; }
+    .pr-fav-name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700; font-size: 0.6rem;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      line-height: 1.25;
+      max-width: 80px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .pr-fav-add {
+      width: 90px; display: flex; flex-direction: column; align-items: center; gap: 7px;
+      cursor: pointer;
+    }
+    .pr-fav-add-circle {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      border: 2px dashed rgba(0,229,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(0,229,255,0.4);
+      font-size: 1.4rem;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .pr-fav-add:hover .pr-fav-add-circle {
+      border-color: rgba(0,229,255,0.5);
+      color: #00e5ff;
+      background: rgba(0,229,255,0.06);
+    }
+    .pr-fav-add-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.6rem;
+      color: rgba(255,255,255,0.25);
+      text-align: center;
+    }
+
+    /* ── FIGHTER PICKER MODAL ── */
+    .pr-modal-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+      display: flex; align-items: center; justify-content: center;
+      animation: fadeUp 0.2s ease;
+    }
+    .pr-modal {
+      background: #0d0d10;
+      border: 1px solid rgba(0,229,255,0.2);
+      border-radius: 20px;
+      width: 480px; max-width: calc(100vw - 32px);
+      max-height: 80vh;
+      display: flex; flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(0,229,255,0.06);
+    }
+    .pr-modal-header {
+      padding: 20px 24px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .pr-modal-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800; font-size: 0.78rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: #fff;
+    }
+    .pr-modal-close {
+      background: none; border: none; color: rgba(255,255,255,0.3);
+      cursor: pointer; font-size: 1.2rem; line-height: 1;
+      padding: 4px; border-radius: 6px; transition: color 0.15s;
+    }
+    .pr-modal-close:hover { color: #fff; }
+    .pr-modal-search {
+      padding: 12px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .pr-modal-search input {
+      width: 100%; background: #141418;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px; padding: 10px 14px;
+      color: #fff; font-family: 'Inter', sans-serif; font-size: 0.85rem;
+      outline: none; box-sizing: border-box;
+      transition: border-color 0.2s;
+    }
+    .pr-modal-search input:focus { border-color: rgba(0,229,255,0.4); }
+    .pr-modal-search input::placeholder { color: rgba(255,255,255,0.2); }
+    .pr-modal-list {
+      overflow-y: auto;
+      flex: 1;
+      padding: 8px 0;
+    }
+    .pr-modal-list::-webkit-scrollbar { width: 3px; }
+    .pr-modal-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+    .pr-modal-row {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background 0.12s;
+    }
+    .pr-modal-row:hover { background: rgba(0,229,255,0.05); }
+    .pr-modal-row.selected { background: rgba(0,229,255,0.08); }
+    .pr-modal-row img {
+      width: 38px; height: 38px;
+      border-radius: 50%; object-fit: cover; object-position: top;
+      background: #1c1c1c;
+      flex-shrink: 0;
+    }
+    .pr-modal-row-info { flex: 1; min-width: 0; }
+    .pr-modal-row-name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700; font-size: 0.78rem;
+      color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .pr-modal-row-meta {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.3);
+    }
+    .pr-modal-row-check {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      border: 2px solid rgba(0,229,255,0.3);
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      font-size: 0.6rem; color: #00e5ff;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .pr-modal-row.selected .pr-modal-row-check {
+      background: rgba(0,229,255,0.15);
+      border-color: #00e5ff;
+    }
+    .pr-modal-done {
+      padding: 14px 20px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .pr-modal-done button {
+      width: 100%;
+      background: rgba(0,229,255,0.12);
+      border: 1px solid rgba(0,229,255,0.35);
+      color: #00e5ff;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700; font-size: 0.72rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .pr-modal-done button:hover {
+      background: rgba(0,229,255,0.2);
+      border-color: rgba(0,229,255,0.6);
+    }
+
+    /* ── EMPTY / LOADING STATES ── */
+    .pr-empty {
+      text-align: center; padding: 32px 16px;
+      font-family: 'Inter', sans-serif; font-size: 0.85rem;
+      color: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 14px;
+    }
+    .pr-empty strong { display: block; color: rgba(255,255,255,0.4); margin-bottom: 6px; }
+    .pr-loading {
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      padding: 80px 0;
+      font-family: 'Inter', sans-serif; font-size: 0.82rem;
+      color: rgba(255,255,255,0.25);
+    }
+    .pr-spinner {
+      width: 18px; height: 18px;
+      border: 2px solid rgba(0,229,255,0.2);
+      border-top-color: #00e5ff;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    .pr-sign-in-prompt {
+      max-width: 400px; margin: 100px auto; text-align: center; padding: 0 20px;
+    }
+    .pr-sign-in-prompt .pr-icon { font-size: 3rem; margin-bottom: 16px; }
+    .pr-sign-in-prompt h2 {
+      font-family: 'Montserrat', sans-serif; font-weight: 900;
+      font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.08em;
+      color: #fff; margin: 0 0 10px;
+    }
+    .pr-sign-in-prompt p {
+      font-family: 'Inter', sans-serif; font-size: 0.82rem;
+      color: rgba(255,255,255,0.3); margin: 0 0 24px;
+    }
+    .pr-sign-in-btn {
+      display: inline-block;
+      background: rgba(0,229,255,0.1);
+      border: 1px solid rgba(0,229,255,0.35);
+      color: #00e5ff;
+      font-family: 'Montserrat', sans-serif; font-weight: 700;
+      font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 12px 28px; border-radius: 10px; text-decoration: none;
+      transition: background 0.15s;
+    }
+    .pr-sign-in-btn:hover { background: rgba(0,229,255,0.18); }
+
+    /* ── BACK BUTTON ── */
+    .pr-back {
+      position: absolute; top: 20px; left: 40px;
+      display: flex; align-items: center; gap: 7px;
+      color: rgba(255,255,255,0.4);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .pr-back:hover { color: #00e5ff; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .pr-hero-inner { flex-direction: column; align-items: flex-start; padding: 44px 20px 28px; gap: 18px; }
+      .pr-back { left: 20px; }
+      .pr-stats-inner { padding: 0 10px; }
+      .pr-stat-num { font-size: 1.5rem; }
+      .pr-body { padding: 28px 20px 80px; }
+      .pr-ratings-grid { grid-template-columns: 1fr; }
+      .pr-accuracy-card { flex-direction: column; gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a class="logo" href="index.html">
+        <img src="images/mma-bridge-logo.png" class="nav-logo-img" alt="MMA Bridge">
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Trending</a></li>
+        <li><a href="events.html">Upcoming Events</a></li>
+        <li><a href="pfp.html">PFP</a></li>
+        <li><a href="reviews.html">Review</a></li>
+        <li><a href="lucas.html">Lucas Bot</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Switch to light mode" title="Switch to light mode">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <form class="search-box" id="site-search-form" action="results.html" method="GET">
+        <input id="site-search" name="q" type="text" placeholder="Search fighters, events..." autocomplete="off" />
+        <span class="search-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M21 21l-4.3-4.3m1.8-5.2a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </span>
+      </form>
+      <div class="nav-auth"></div>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-mobile-overlay" id="nav-mobile-overlay">
+    <button class="nav-mobile-close" onclick="document.getElementById('nav-mobile-overlay').classList.remove('open');document.getElementById('nav-hamburger').classList.remove('open');document.body.classList.remove('no-scroll')">✕</button>
+    <nav class="nav-mobile-links">
+      <a href="index.html">Trending</a>
+      <a href="events.html">Upcoming Events</a>
+      <a href="pfp.html">PFP</a>
+      <a href="reviews.html">Review</a>
+      <a href="lucas.html">Lucas Bot</a>
+    </nav>
+    <div class="nav-mobile-search">
+      <form action="results.html" method="GET">
+        <input name="q" type="text" placeholder="Search fighters, events..." autocomplete="off" />
+      </form>
+    </div>
+    <div class="nav-auth-mobile"></div>
+  </div>
+
+  <!-- PROFILE ROOT -->
+  <div id="profileRoot">
+    <div class="pr-loading">
+      <div class="pr-spinner"></div>
+      Loading your profile…
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('scroll', () => {
+      document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 10);
+    });
+    const navHamburger = document.getElementById('nav-hamburger');
+    const navOverlay   = document.getElementById('nav-mobile-overlay');
+    if (navHamburger) navHamburger.addEventListener('click', () => {
+      navHamburger.classList.toggle('open');
+      navOverlay.classList.toggle('open');
+      document.body.classList.toggle('no-scroll');
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
+  <script src="auth.js?v=3.2"></script>
+  <script src="search.js"></script>
+  <script src="premium.js?v=3.1"></script>
+  <script type="module" src="profile.js?v=1.0"></script>
+</body>
+</html>

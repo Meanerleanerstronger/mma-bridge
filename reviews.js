@@ -82,8 +82,9 @@ function buildCard(ev, type) {
     window.location.href = `event-review.html?id=${encodeURIComponent(eventId)}`;
   });
 
-  // Async inject community rating badge
+  // Async inject community rating badge — also pre-populates ratingsCache for sort
   fetchRating(eventId).then(r => {
+    ratingsCache[eventId] = r?.avg_hype ? parseFloat(r.avg_hype) : null;
     if (!r || !r.avg_hype) return;
     const badge = document.createElement('div');
     badge.className = 'card-rating';
@@ -147,8 +148,16 @@ function sortedEvents(events, mode) {
   return arr;
 }
 
-async function applySortRow(scrollEl, countEl, events, type, mode) {
-  if (mode !== 'latest') await ensureRatings(events);
+async function applySortRow(scrollEl, countEl, events, type, mode, sortBtn) {
+  if (mode !== 'latest') {
+    // Check if any ratings are still missing from cache
+    const needsFetch = events.some(ev => !(getEventId(ev) in ratingsCache));
+    if (needsFetch) {
+      if (sortBtn) { sortBtn.style.opacity = '0.5'; sortBtn.style.pointerEvents = 'none'; }
+      await ensureRatings(events);
+      if (sortBtn) { sortBtn.style.opacity = ''; sortBtn.style.pointerEvents = ''; }
+    }
+  }
   renderRow(scrollEl, countEl, sortedEvents(events, mode), type);
 }
 
@@ -194,7 +203,7 @@ function initSortDropdown(wrapId, btnId, dropId, onSelect) {
       if (labelEl) labelEl.textContent = opt.textContent;
       drop.classList.remove('open');
       wrap.classList.remove('open');
-      onSelect(opt.dataset.sort);
+      onSelect(opt.dataset.sort, btn);
     });
   });
 }
@@ -207,13 +216,13 @@ document.addEventListener('click', () => {
 });
 
 // Init sort dropdowns immediately — elements are in HTML, data will be set when loaded
-initSortDropdown('ppvSortWrap', 'ppvSortBtn', 'ppvSortDrop', mode => {
+initSortDropdown('ppvSortWrap', 'ppvSortBtn', 'ppvSortDrop', (mode, btn) => {
   ppvSort = mode;
-  if (ppvPast.length) applySortRow(scrollPPV, ppvCount, ppvPast, 'ppv', mode);
+  if (ppvPast.length) applySortRow(scrollPPV, ppvCount, ppvPast, 'ppv', mode, btn);
 });
-initSortDropdown('fnSortWrap', 'fnSortBtn', 'fnSortDrop', mode => {
+initSortDropdown('fnSortWrap', 'fnSortBtn', 'fnSortDrop', (mode, btn) => {
   fnSort = mode;
-  if (fnPast.length) applySortRow(scrollFN, fnCount, fnPast, 'fn', mode);
+  if (fnPast.length) applySortRow(scrollFN, fnCount, fnPast, 'fn', mode, btn);
 });
 
 // ── Arrow scroll + show/hide at edges ─────────
@@ -319,8 +328,8 @@ function isUpcomingEvent(ev) {
     }
 
     // Render with default sort (latest first)
-    applySortRow(scrollPPV, ppvCount, ppvPast, 'ppv', 'latest');
-    applySortRow(scrollFN,  fnCount,  fnPast,  'fn',  'latest');
+    applySortRow(scrollPPV, ppvCount, ppvPast, 'ppv', 'latest', null);
+    applySortRow(scrollFN,  fnCount,  fnPast,  'fn',  'latest', null);
 
     // Hide a row section entirely if empty
     if (!ppvPast.length) document.getElementById('rowPPV').style.display = 'none';
