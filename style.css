@@ -4747,10 +4747,22 @@ body.light-mode .cw-avatar-init { background: rgba(0,150,180,0.07) !important; b
 }
 
 .lb-wrap {
-  max-width: 680px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 20px 100px;
 }
+
+/* side-by-side boards */
+.lb-boards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  margin-top: 32px;
+}
+.lb-boards:has(#lbGroupCol:not([style*="display:none"])) {
+  grid-template-columns: 1fr 1fr;
+}
+.lb-board-col { min-width: 0; }
 
 /* section label */
 .lb-section-label {

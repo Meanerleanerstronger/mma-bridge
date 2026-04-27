@@ -1,9 +1,11 @@
 // ==============================================
 // MMA BRIDGE — LEADERBOARD + GROUPS
-// Requires Supabase `profiles` table to have:
-//   group_code TEXT (nullable)
-// Add via Supabase SQL editor:
+// Ranked by total picks made (picks table)
+// Requires Supabase profiles table columns:
+//   group_code TEXT, group_name TEXT
+// Run in Supabase SQL editor if missing:
 //   ALTER TABLE profiles ADD COLUMN IF NOT EXISTS group_code TEXT;
+//   ALTER TABLE profiles ADD COLUMN IF NOT EXISTS group_name TEXT;
 // ==============================================
 (async function () {
 
@@ -17,7 +19,6 @@
   const root = document.getElementById('lbRoot');
   const sb   = window._sb;
 
-  // ── Wait for auth ────────────────────────────
   function waitForAuth(ms = 4000) {
     return new Promise(res => {
       const t0 = Date.now();
@@ -30,11 +31,10 @@
     });
   }
 
-  // ── Initial skeleton ──────────────────────────
   root.innerHTML = `
     <div class="lb-hero">
       <h1 class="lb-title">Community<br><span>Leaderboard</span></h1>
-      <p class="lb-subtitle">Who's reviewed the most events on MMA Bridge</p>
+      <p class="lb-subtitle">Who's made the most fight picks on MMA Bridge</p>
     </div>
     <div class="lb-wrap">
 
@@ -53,12 +53,19 @@
         <div id="lbGroupStatus"></div>
       </div>
 
-      <!-- LEADERBOARD -->
-      <div class="lb-section-label" id="lbSectionLabel">Global Rankings</div>
-      <div class="lb-table-wrap" id="lbTableWrap">
-        <div class="lb-loading">
-          <div class="lb-spinner"></div>
-          Loading…
+      <!-- BOARDS -->
+      <div class="lb-boards" id="lbBoards">
+        <!-- Global -->
+        <div class="lb-board-col">
+          <div class="lb-section-label">Global Rankings</div>
+          <div class="lb-table-wrap" id="lbGlobalWrap">
+            <div class="lb-loading"><div class="lb-spinner"></div>Loading…</div>
+          </div>
+        </div>
+        <!-- Group (hidden until in a group) -->
+        <div class="lb-board-col" id="lbGroupCol" style="display:none">
+          <div class="lb-section-label" id="lbGroupLabel">My Group</div>
+          <div class="lb-table-wrap" id="lbGroupWrap"></div>
         </div>
       </div>
 
@@ -96,22 +103,22 @@
       </div>
     </div>`;
 
-  const [user, ratingsRes] = await Promise.all([
+  const [user, picksRes] = await Promise.all([
     waitForAuth(),
-    sb ? sb.from('ratings').select('user_id, hype_rating, profiles(display_name, avatar_url, group_code, group_name)') : Promise.resolve({ data: null }),
+    sb ? sb.from('picks').select('user_id, profiles(display_name, avatar_url, group_code, group_name)') : Promise.resolve({ data: null }),
   ]);
 
   const myId = user?.id || null;
 
-  if (!sb || !ratingsRes.data) {
-    document.getElementById('lbTableWrap').innerHTML =
+  if (!sb || !picksRes.data) {
+    document.getElementById('lbGlobalWrap').innerHTML =
       `<div class="lb-error">Could not load leaderboard data.</div>`;
     return;
   }
 
-  // ── Aggregate users ────────────────────────────
+  // ── Aggregate by picks count ───────────────────
   const userMap = {};
-  ratingsRes.data.forEach(r => {
+  picksRes.data.forEach(r => {
     if (!r.user_id) return;
     if (!userMap[r.user_id]) {
       userMap[r.user_id] = {
@@ -127,17 +134,16 @@
   });
   const allUsers = Object.values(userMap).sort((a, b) => b.count - a.count);
 
-  // ── My group state ─────────────────────────────
   let myGroupCode = allUsers.find(u => u.user_id === myId)?.group_code || null;
   let myGroupName = allUsers.find(u => u.user_id === myId)?.group_name || null;
 
-  // ── Render leaderboard ─────────────────────────
-  function renderTable(users, label) {
-    document.getElementById('lbSectionLabel').textContent = label || 'Global Rankings';
+  // ── Render a leaderboard table ─────────────────
+  function renderTable(users, wrapId, emptyMsg) {
+    const wrap = document.getElementById(wrapId);
+    if (!wrap) return;
 
     if (!users.length) {
-      document.getElementById('lbTableWrap').innerHTML =
-        `<div class="lb-error">No members yet — share your group code!</div>`;
+      wrap.innerHTML = `<div class="lb-error">${emptyMsg || 'No data yet.'}</div>`;
       return;
     }
 
@@ -160,20 +166,26 @@
           </div>
           <div class="lb-stat">
             <div class="lb-stat-val">${u.count}</div>
-            <div class="lb-stat-lbl">reviewed</div>
+            <div class="lb-stat-lbl">picks</div>
           </div>
         </div>`;
     }).join('');
 
-    document.getElementById('lbTableWrap').innerHTML = `<div class="lb-table">${rows}</div>`;
+    wrap.innerHTML = `<div class="lb-table">${rows}</div>`;
   }
 
-  // ── Render group status bar ────────────────────
+  // ── Render group status + group board ─────────
   function renderGroupStatus() {
     const el = document.getElementById('lbGroupStatus');
-    if (!myGroupCode) { el.innerHTML = ''; return; }
+    const groupCol = document.getElementById('lbGroupCol');
+    const groupLabel = document.getElementById('lbGroupLabel');
 
-    // Filter leaderboard to group members
+    if (!myGroupCode) {
+      el.innerHTML = '';
+      if (groupCol) groupCol.style.display = 'none';
+      return;
+    }
+
     const groupUsers = allUsers.filter(u => u.group_code === myGroupCode);
 
     el.innerHTML = `
@@ -190,32 +202,20 @@
           </button>
         </div>
         <div class="lb-group-active-btns">
-          <button class="lb-group-toggle" id="btnToggleGroup">Group</button>
-          <button class="lb-group-leave" id="btnLeaveGroup">Leave</button>
+          <button class="lb-group-leave" id="btnLeaveGroup">Leave Group</button>
         </div>
       </div>`;
 
-    // Default to group view if in a group
-    renderTable(groupUsers, `Group: ${myGroupName || myGroupCode}`);
+    // Show group column
+    if (groupCol) groupCol.style.display = '';
+    if (groupLabel) groupLabel.textContent = myGroupName || myGroupCode;
+    renderTable(groupUsers, 'lbGroupWrap', 'No picks yet — share your code!');
 
     document.getElementById('btnCopyCode')?.addEventListener('click', () => {
       navigator.clipboard?.writeText(myGroupCode).catch(() => {});
       const btn = document.getElementById('btnCopyCode');
       btn.innerHTML = '✓';
       setTimeout(() => { btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>'; }, 1500);
-    });
-
-    let showingGroup = true;
-    document.getElementById('btnToggleGroup')?.addEventListener('click', () => {
-      showingGroup = !showingGroup;
-      const btn = document.getElementById('btnToggleGroup');
-      if (showingGroup) {
-        renderTable(groupUsers, `Group: ${myGroupName || myGroupCode}`);
-        btn.textContent = 'Group';
-      } else {
-        renderTable(allUsers, 'Global Rankings');
-        btn.textContent = 'Global';
-      }
     });
 
     document.getElementById('btnLeaveGroup')?.addEventListener('click', async () => {
@@ -225,21 +225,19 @@
         myGroupCode = null; myGroupName = null;
         allUsers.forEach(u => { if (u.user_id === myId) { u.group_code = null; u.group_name = null; } });
         renderGroupStatus();
-        renderTable(allUsers, 'Global Rankings');
       } catch { alert('Could not leave group. Try again.'); }
     });
   }
 
-  // ── Handle scroll-to-groups from homepage link ─
   if (location.hash === '#groups') {
     setTimeout(() => document.getElementById('lbGroups')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
   }
 
   // ── Initial render ─────────────────────────────
-  renderTable(allUsers, 'Global Rankings');
+  renderTable(allUsers, 'lbGlobalWrap', 'No picks yet — be the first!');
   renderGroupStatus();
 
-  // ── Create group modal ─────────────────────────
+  // ── Modals ─────────────────────────────────────
   function openModal(id) { document.getElementById(id).style.display = 'flex'; }
   function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
@@ -267,12 +265,11 @@
       closeModal('modalCreate');
       document.getElementById('groupNameInput').value = '';
       renderGroupStatus();
-    } catch (err) {
+    } catch {
       errEl.textContent = 'Could not create group. Make sure you are signed in.';
     } finally { btn.textContent = 'Create Group'; btn.disabled = false; }
   });
 
-  // ── Join group modal ───────────────────────────
   document.getElementById('btnJoinGroup').addEventListener('click', () => {
     if (!myId) { alert('Sign in to join a group.'); return; }
     openModal('modalJoin');
@@ -290,7 +287,6 @@
     const btn = document.getElementById('submitJoin');
     btn.textContent = 'Joining…'; btn.disabled = true;
     try {
-      // Find a matching group name from existing members
       const match = allUsers.find(u => u.group_code === code);
       const name = match?.group_name || null;
       await sb.from('profiles').upsert({ id: myId, group_code: code, group_name: name });
@@ -304,7 +300,6 @@
     } finally { btn.textContent = 'Join Group'; btn.disabled = false; }
   });
 
-  // Enter key on inputs
   document.getElementById('groupNameInput').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('submitCreate').click(); });
   document.getElementById('joinCodeInput').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('submitJoin').click(); });
 
