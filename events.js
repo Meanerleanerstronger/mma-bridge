@@ -249,7 +249,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <div class="ev-body-title">${esc(ev.name||'')}</div>
                 <div class="ev-body-meta">${ev.date||''} &nbsp;·&nbsp; ${ev.location||''} &nbsp;·&nbsp; ${ev.venue||''}</div>
               </div>
-              ${calBtnHtml}
+              <div class="ev-header-actions">
+                ${upcoming ? `<a class="ev-picks-btn" href="picks.html?id=${esc(id)}">Pick Fights →</a>` : ''}
+                ${calBtnHtml}
+              </div>
             </div>
           </div>
           <div class="ev-content">
