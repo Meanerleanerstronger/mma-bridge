@@ -11,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MMA Bridge | Upcoming Events</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=2.4" />
+  <link rel="stylesheet" href="style.css?v=2.8" />
 
   <style>
     /* ── KEYFRAMES ── */
@@ -126,6 +126,9 @@
     .ov-hero.is-ppv::after { content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#8a6a10,#c8a84b,#fff8c0,#c8a84b,#8a6a10,transparent);background-size:250% auto;animation:shimmer 3.5s linear infinite;z-index:6; }
 
     .ov-topbar { position:absolute;top:0;left:0;right:0;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;z-index:10; }
+    .ov-topbar-right { display:flex;align-items:center;gap:12px; }
+    .ov-pick-btn { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;padding:7px 16px;border-radius:6px;background:rgba(0,229,255,.15);border:1px solid rgba(0,229,255,.5);color:#00e5ff;text-decoration:none;white-space:nowrap;backdrop-filter:blur(10px);transition:background .2s,border-color .2s; }
+    .ov-pick-btn:hover { background:rgba(0,229,255,.28);border-color:rgba(0,229,255,.8); }
     .ov-badge-row { display:flex;align-items:center;gap:10px; }
     .ov-badge { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;padding:4px 12px;border-radius:4px;backdrop-filter:blur(10px); }
     .ov-badge.fn  { background:rgba(0,229,255,.15);border:1px solid rgba(0,229,255,.35);color:#00e5ff; }
@@ -149,15 +152,17 @@
 
     /* ── COMPACT HYPE BAR ── */
     .ov-hype-bar {
-      flex-shrink:0;display:flex;align-items:center;gap:12px;
-      padding:8px 28px;border-bottom:1px solid rgba(255,255,255,.05);
-      background:rgba(0,0,0,.18);
+      flex-shrink:0;display:flex;flex-direction:column;gap:8px;
+      padding:12px 28px 10px;border-bottom:1px solid rgba(255,255,255,.07);
+      background:linear-gradient(135deg,rgba(0,229,255,.06) 0%,rgba(0,0,0,.25) 100%);
     }
-    .ov-hype-label-txt { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);white-space:nowrap; }
+    .ov-hype-header { display:flex;align-items:center;gap:12px; }
+    .ov-hype-label-txt { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.78rem;letter-spacing:.04em;text-transform:none;color:rgba(255,255,255,.9);white-space:nowrap;text-shadow:0 0 14px rgba(0,229,255,.5); }
     .ov-hype-score-inline { display:flex;align-items:baseline;gap:2px;min-width:36px; }
     .ov-hype-num { font-family:'Barlow Condensed','Montserrat',sans-serif;font-weight:900;font-size:1.2rem;line-height:1;color:rgba(255,255,255,.2);transition:color .25s; }
     .ov-hype-denom { font-family:'Inter',sans-serif;font-size:.6rem;color:rgba(255,255,255,.15); }
-    .ov-hype-word { font-family:'Montserrat',sans-serif;font-weight:700;font-size:.48rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.2);transition:color .25s;min-width:60px; }
+    .ov-hype-word { font-family:'Montserrat',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:#00e5ff;transition:color .25s;min-width:60px; }
+    .ov-hype-fotn-hint { font-family:'Inter',sans-serif;font-size:.68rem;color:rgba(0,229,255,.55);padding-top:4px;border-top:1px solid rgba(255,255,255,.05); }
 
     /* Track + draggable thumb */
     .ov-hype-track-wrap { position:relative;width:200px;max-width:200px;flex-shrink:0;height:20px;display:flex;align-items:center;cursor:pointer; }
@@ -390,7 +395,9 @@
       .ov-hero { height:38vh;min-height:220px; }
       .ov-matchup { font-size:clamp(1.9rem,6.5vw,2.8rem); }
       .ov-hero-bottom { padding:0 20px 18px; }
-      .ov-hype-bar { padding:7px 16px;gap:10px; }
+      .ov-hype-bar { padding:8px 16px;gap:6px; }
+      .ov-hype-label-txt { font-size:.7rem; }
+      .ov-hype-fotn-hint { font-size:.62rem; }
       .ov-hype-track-wrap { width:140px;max-width:140px; }
       .ov-fighter { font-size:1.1rem; }
       .ov-fight.is-main .ov-fighter { font-size:1.35rem; }
@@ -483,7 +490,10 @@
             <span class="ov-badge" id="ovBadge"></span>
             <span class="ov-live-dot" id="ovLiveDot" style="display:none;">TONIGHT</span>
           </div>
-          <button class="ov-close" id="ovClose" aria-label="Close">✕</button>
+          <div class="ov-topbar-right">
+            <a class="ov-pick-btn" id="ovPickBtn" href="#">Pick Fights →</a>
+            <button class="ov-close" id="ovClose" aria-label="Close">✕</button>
+          </div>
         </div>
         <div class="ov-hero-bottom">
           <div class="ov-event-label" id="ovEventLabel"></div>
@@ -494,12 +504,14 @@
 
       <!-- COMPACT HYPE BAR -->
       <div class="ov-hype-bar">
-        <div class="ov-hype-label-txt">Hype</div>
-        <div class="ov-hype-score-inline">
-          <span class="ov-hype-num" id="ovHypeNum">—</span>
-          <span class="ov-hype-denom">/10</span>
+        <div class="ov-hype-header">
+          <div class="ov-hype-label-txt">⚡ Rate how hyped you are for this event</div>
+          <div class="ov-hype-score-inline">
+            <span class="ov-hype-num" id="ovHypeNum">—</span>
+            <span class="ov-hype-denom">/10</span>
+          </div>
+          <span class="ov-hype-word" id="ovHypeWord">rate it</span>
         </div>
-        <span class="ov-hype-word" id="ovHypeWord">rate it</span>
         <div class="ov-hype-track-wrap" id="ovHypeTrackWrap">
           <div class="ov-hype-track">
             <div class="ov-hype-fill" id="ovHypeFill"></div>
@@ -507,6 +519,7 @@
           </div>
           <div class="ov-hype-ticks" id="ovHypeTicks"></div>
         </div>
+        <div class="ov-hype-fotn-hint">⭐ Hover over any fight below to predict your Fight of the Night</div>
       </div>
 
       <!-- BODY -->
@@ -514,15 +527,6 @@
         <div class="ov-fight-col" id="ovFightCol"></div>
 
         <div class="ov-sidebar">
-
-          <div class="ov-sb-section" id="ovCommunitySection">
-            <div class="ov-sb-label">Community Picks · Main Event</div>
-            <div class="ov-comm-fighters" id="ovCommFighters"></div>
-            <div class="ov-community-bar">
-              <div class="ov-comm-left" id="ovCommLeft"></div>
-              <div class="ov-comm-right" id="ovCommRight"></div>
-            </div>
-          </div>
 
           <div class="ov-sb-section" id="ovEventStats">
             <div class="ov-sb-label">Event Info</div>
@@ -709,14 +713,15 @@
       if(total>1) metas.push(`<div class="ov-meta-item">${total} fights</div>`);
       document.getElementById('ovMetaRow').innerHTML=metas.join('');
 
+      /* Pick Fights button */
+      const pickBtn=document.getElementById('ovPickBtn');
+      if(pickBtn) pickBtn.href=`picks.html?id=${encodeURIComponent(ev.id)}`;
+
       /* Fight card */
       buildFightCard(ev,isPPV,accent);
 
       /* Reset hype */
       resetHype();
-
-      /* Community */
-      buildCommunity(ev,main);
 
       /* Event stats sidebar */
       buildStats(ev,main);
@@ -794,7 +799,6 @@
               <div class="ov-fighter ${dimCls}">${esc(f.a)}</div>
               <div class="ov-fight-mid">
                 ${f.titleFight?`<div class="ov-title-badge">🏆 Title</div>`:''}
-                <div class="ov-weight">${esc(f.weight||'')}</div>
                 ${f.rounds?`<div class="ov-rounds">${esc(f.rounds)}</div>`:''}
                 ${isMain?`<div class="ov-slot-tag" style="color:${accent}">MAIN EVENT</div>`:isComain?`<div class="ov-slot-tag" style="color:rgba(0,229,255,.5)">CO-MAIN</div>`:''}
               </div>
@@ -872,7 +876,7 @@
   <script src="auth.js?v=3.2"></script>
   <script src="search.js"></script>
   <script src="chat.js?v=2.3"></script>
-  <script src="premium.js?v=3.0"></script>
+  <script src="premium.js?v=3.2"></script>
   <script src="widget.js"></script>
 </body>
 </html>
