@@ -1,0 +1,19 @@
+# Environment variables — never commit secrets
+.env
+.env.local
+.env.*.local
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node (for build tools / validators)
+node_modules/
+
+# Logs
+*.log
