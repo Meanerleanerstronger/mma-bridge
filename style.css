@@ -4255,8 +4255,6 @@ body.light-mode #cursor-glow { display: none; }
   object-position: bottom center;
   display: block;
   user-select: none;
-  mask-image: linear-gradient(to left, rgba(0,0,0,0.95) 30%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0) 85%);
-  -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.95) 30%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0) 85%);
 }
 
 .fp-hero-grad {
@@ -4553,4 +4551,56 @@ body.light-mode #cursor-glow { display: none; }
   .fp-rec-num { font-size: 2.2rem; }
   .fp-content { padding: 36px 20px 80px; }
   .search-dropdown { min-width: 260px; }
+}
+
+/* ── FIGHTER PROFILE — LIGHT MODE ── */
+body.light-mode .fp-page { background: #f0f0f4 !important; color: #111 !important; }
+body.light-mode .fp-hero { background: #e6e6ec !important; }
+body.light-mode .fp-hero-bg { filter: blur(60px) brightness(0.6) saturate(0.8) !important; }
+body.light-mode .fp-hero-grad {
+  background: linear-gradient(
+    to right,
+    rgba(230,230,236,1) 0%,
+    rgba(230,230,236,0.92) 20%,
+    rgba(230,230,236,0.7) 40%,
+    rgba(230,230,236,0.2) 60%,
+    rgba(230,230,236,0) 80%
+  ) !important;
+}
+body.light-mode .fp-name { color: #0a0a0f !important; text-shadow: none !important; }
+body.light-mode .fp-nickname { color: rgba(0,0,0,0.45) !important; }
+body.light-mode .fp-rec-num { color: #0a0a0f !important; }
+body.light-mode .fp-rec-lbl { color: rgba(0,0,0,0.4) !important; }
+body.light-mode .fp-rec-sep { color: rgba(0,0,0,0.2) !important; }
+body.light-mode .fp-meta { color: rgba(0,0,0,0.45) !important; }
+body.light-mode .fp-back { color: rgba(0,0,0,0.35) !important; }
+body.light-mode .fp-back:hover { color: #0088aa !important; }
+body.light-mode .fp-stats-strip { background: rgba(0,0,0,0.05) !important; border-top-color: rgba(0,0,0,0.06) !important; border-bottom-color: rgba(0,0,0,0.06) !important; }
+body.light-mode .fp-stat-val { color: #111 !important; }
+body.light-mode .fp-stat-lbl { color: rgba(0,0,0,0.4) !important; }
+body.light-mode .fp-stat-item + .fp-stat-item::before { background: rgba(0,0,0,0.1) !important; }
+body.light-mode .fp-content { background: transparent !important; }
+body.light-mode .fp-bio { color: rgba(0,0,0,0.6) !important; }
+body.light-mode .fp-section-label { color: rgba(0,0,0,0.3) !important; border-bottom-color: rgba(0,0,0,0.07) !important; }
+body.light-mode .fp-fight-card { background: #fff !important; border-color: rgba(0,0,0,0.08) !important; }
+body.light-mode .fp-fight-card:hover { background: rgba(0,0,0,0.03) !important; }
+body.light-mode .fp-fight-opp { color: #111 !important; }
+body.light-mode .fp-fight-event { color: rgba(0,0,0,0.3) !important; }
+body.light-mode .fp-fight-detail { color: rgba(0,0,0,0.35) !important; }
+body.light-mode .fp-wl-w { background: #dcfce7 !important; color: #166534 !important; }
+body.light-mode .fp-wl-l { background: #fee2e2 !important; color: #991b1b !important; }
+body.light-mode .fp-wl-d { background: rgba(0,0,0,0.06) !important; color: rgba(0,0,0,0.45) !important; }
+body.light-mode .fp-badge-rank { background: rgba(0,0,0,0.06) !important; color: rgba(0,0,0,0.5) !important; border: 1px solid rgba(0,0,0,0.1) !important; }
+body.light-mode .fp-badge-champ { background: rgba(200,168,75,0.15) !important; color: #8a6c10 !important; border: 1px solid rgba(200,168,75,0.3) !important; }
+body.light-mode .fp-badge-pfp { background: rgba(200,168,75,0.12) !important; color: #7a5e0e !important; border: 1px solid rgba(200,168,75,0.25) !important; }
+body.light-mode .fp-badge-division { background: rgba(0,0,0,0.06) !important; color: rgba(0,0,0,0.45) !important; border: 1px solid rgba(0,0,0,0.1) !important; }
+body.light-mode .fp-badge-legend { background: rgba(0,100,160,0.1) !important; color: #005080 !important; border: 1px solid rgba(0,100,160,0.2) !important; }
+body.light-mode .fp-style-pill { background: rgba(0,0,0,0.06) !important; color: rgba(0,0,0,0.45) !important; border-color: rgba(0,0,0,0.1) !important; }
+body.light-mode .fp-not-found { color: #111 !important; }
+body.light-mode .fp-not-found p { color: rgba(0,0,0,0.5) !important; }
+
+@media (max-width: 900px) {
+  body.light-mode .fp-hero-grad {
+    background: linear-gradient(to top, rgba(230,230,236,1) 0%, rgba(230,230,236,0.85) 40%, rgba(230,230,236,0.3) 70%, rgba(230,230,236,0) 100%) !important;
+  }
 }
