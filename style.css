@@ -2296,7 +2296,7 @@ body.light-mode .pfp-fight-info { color: rgba(0,0,0,0.4); }
   border-left: 3px solid cyan;
   border-radius: 12px;
   padding: 20px 20px 16px;
-  margin-top: 16px;
+  margin-bottom: 16px;
 }
 .hype-header {
   display: flex;
@@ -3386,12 +3386,12 @@ body.light-mode ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.28); 
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: #fff;
-  margin-bottom: 6px;
 }
 .ev-body-meta {
   font-family: 'Inter', sans-serif;
-  font-size: 0.78rem;
-  color: rgba(255,255,255,0.4);
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.35);
+  text-align: right;
 }
 .event-card.is-ppv .ev-body-header {
   background: rgba(0,255,255,0.03);
@@ -5125,6 +5125,13 @@ body.light-mode .lb-error { color: rgba(0,0,0,0.3) !important; }
   justify-content: space-between;
   gap: 16px;
 }
+.ev-header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+}
 
 .ev-cal-wrap { position: relative; flex-shrink: 0; }
 
@@ -5181,6 +5188,8 @@ body.light-mode .ev-cal-opt + .ev-cal-opt { border-top-color: rgba(0,0,0,0.07) !
 
 @media (max-width: 600px) {
   .ev-body-header-top { flex-direction: column; gap: 12px; }
+  .ev-header-right { align-items: flex-start; }
+  .ev-body-meta { text-align: left; }
   .ev-cal-wrap { align-self: flex-start; }
 }
 
