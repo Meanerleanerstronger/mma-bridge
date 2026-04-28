@@ -365,6 +365,19 @@
         </div>
       </div>
 
+      <!-- ── Profile setup panel (shown when display name needs to be set) ── -->
+      <div id="formSetup" style="display:none;">
+        <div class="auth-panel-title" style="font-size:1.3rem;">One last step</div>
+        <div class="auth-panel-sub">You're in. Choose a display name — this is how other fans see you on picks and the leaderboard.</div>
+        <div class="auth-form">
+          <div class="auth-field">
+            <label>Display Name</label>
+            <input type="text" id="setupName" placeholder="Your fight name" autocomplete="nickname" maxlength="32" />
+          </div>
+          <button type="button" class="auth-submit-btn" id="setupBtn" style="background:rgba(0,229,255,0.18);border-color:rgba(0,229,255,0.5);">Let's Go →</button>
+        </div>
+      </div>
+
       <!-- ── Reset password panel (shown after clicking email link) ── -->
       <div id="formReset" style="display:none;">
         <div class="auth-panel-title">Set new password</div>
@@ -403,6 +416,7 @@
       const formSignUp = document.getElementById('formSignUp');
       const formForgot = document.getElementById('formForgot');
       const formReset  = document.getElementById('formReset');
+      const formSetup  = document.getElementById('formSetup');
       const finePrint  = document.getElementById('authFinePrint');
 
       function showMsg(text, type) {
@@ -415,6 +429,19 @@
         formSignUp.style.display = 'none';
         formForgot.style.display = 'none';
         formReset.style.display  = 'none';
+        formSetup.style.display  = 'none';
+      }
+
+      function showSetup(suggestedName) {
+        authTabs.style.display = 'none';
+        hideAll();
+        formSetup.style.display = '';
+        finePrint.style.display = 'none';
+        showMsg('');
+        const nameInput = document.getElementById('setupName');
+        nameInput.value = suggestedName || '';
+        nameInput.focus();
+        nameInput.select();
       }
 
       function setTab(tab) {
@@ -466,7 +493,14 @@
         showMsg('');
         const { error } = await window.MMABridgeAuth.signInWithEmail(email, password);
         if (error) {
-          showMsg(error.message || 'Sign-in failed. Check your credentials.', 'error');
+          const msg = (error.message || '').toLowerCase();
+          if (msg.includes('invalid login credentials') || msg.includes('invalid credentials') || msg.includes('no user')) {
+            showMsg('No account found with those details. Did you mean to create an account?', 'error');
+            // Highlight Sign Up tab
+            setTimeout(() => setTab('signup'), 2200);
+          } else {
+            showMsg(error.message || 'Sign-in failed. Check your credentials.', 'error');
+          }
           btn.disabled = false; btn.textContent = 'Sign In';
         }
       });
@@ -579,13 +613,64 @@
         handleGoogleAuth(this);
       });
 
+      // ── Profile setup handler ─────────────────
+      document.getElementById('setupBtn').addEventListener('click', async () => {
+        const name = document.getElementById('setupName').value.trim();
+        if (!name) { showMsg('Please enter a display name.', 'error'); return; }
+        if (name.length < 2) { showMsg('Display name must be at least 2 characters.', 'error'); return; }
+        const btn = document.getElementById('setupBtn');
+        btn.disabled = true; btn.textContent = 'Saving…';
+        showMsg('');
+        const sb = window._sb;
+        if (!sb) { showMsg('Connection unavailable. Please try again.', 'error'); btn.disabled = false; btn.textContent = 'Let\'s Go →'; return; }
+        try {
+          const { data: { session } } = await sb.auth.getSession();
+          if (!session?.user) { showMsg('Session expired. Please sign in again.', 'error'); btn.disabled = false; btn.textContent = 'Let\'s Go →'; return; }
+          const { error } = await sb.from('profiles').upsert({ id: session.user.id, display_name: name }, { onConflict: 'id' });
+          if (error) throw error;
+          showMsg('Welcome to MMA Bridge! Redirecting…', 'success');
+          setTimeout(() => {
+            const returnTo = sessionStorage.getItem('auth_return_to') || 'index.html';
+            sessionStorage.removeItem('auth_return_to');
+            location.replace(returnTo);
+          }, 1000);
+        } catch {
+          showMsg('Could not save your name. Please try again.', 'error');
+          btn.disabled = false; btn.textContent = 'Let\'s Go →';
+        }
+      });
+      document.getElementById('setupName').addEventListener('keydown', e => {
+        if (e.key === 'Enter') document.getElementById('setupBtn').click();
+      });
+
+      // ── If URL has ?setup=1, wait for auth then show setup ────────
+      if (new URLSearchParams(location.search).has('setup')) {
+        (async () => {
+          const sb = window._sb;
+          if (!sb) return;
+          const { data: { session } } = await sb.auth.getSession();
+          if (session?.user) {
+            const meta = session.user.user_metadata || {};
+            const suggested = meta.full_name || meta.name || session.user.email?.split('@')[0] || '';
+            showSetup(suggested);
+          } else {
+            // Not signed in — send to sign in
+            setTab('signin');
+          }
+        })();
+      }
+
       // ── auth:signedIn — show welcome then auth.js redirects ──
       window.addEventListener('auth:signedIn', () => {
         showMsg('Welcome back! Redirecting…', 'success');
       });
 
+      // ── auth:needsSetup — show the profile setup panel ──────────
+      window.addEventListener('auth:needsSetup', e => {
+        showSetup(e.detail?.suggestedName || '');
+      });
+
       // ── PASSWORD_RECOVERY event from auth.js ──
-      // Fires when user arrives via the reset email link
       window.addEventListener('auth:passwordRecovery', showReset);
     })();
   </script>
