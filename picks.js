@@ -49,17 +49,13 @@
   const sb      = window._sb;
   const eventId = getParam('id');
 
-  // ── Wait for auth ─────────────────────────────
-  function waitForAuth(ms = 4000) {
-    return new Promise(res => {
-      const t0 = Date.now();
-      const tick = () => {
-        const u = window.MMABridgeAuth?.getUser?.();
-        if (u || Date.now() - t0 > ms) res(u || null);
-        else setTimeout(tick, 80);
-      };
-      tick();
-    });
+  // ── Get auth user — direct session read, no polling ──────────────
+  async function getAuthUser() {
+    if (!sb) return null;
+    try {
+      const { data: { session } } = await sb.auth.getSession();
+      return session?.user || null;
+    } catch { return null; }
   }
 
   // ── Silhouette SVG ────────────────────────────
@@ -87,7 +83,7 @@
   const [eventsData, fightersData, user] = await Promise.all([
     fetch('./events.json').then(r => r.ok ? r.json() : []).catch(() => []),
     fetch('./data/fighters.json').then(r => r.ok ? r.json() : []).catch(() => []),
-    waitForAuth(),
+    getAuthUser(),
   ]);
 
   // Build fighter lookup: slugified name → { img, record }
@@ -124,22 +120,28 @@
   if (!event) { root.innerHTML = `<div class="pk-error">Event not found.</div>`; return; }
 
   const isCompleted = event.status === 'completed';
-  const myId = user?.id || null;
+  let myId = user?.id || null;
 
   // ── Load user's existing picks ────────────────
-  let myPicks = {}; // fight_key → { pick, method (combined), base, round }
-  if (myId && sb) {
+  let myPicks = {};
+
+  async function loadPicks() {
+    if (!myId || !sb) return;
     try {
-      const { data } = await sb.from('picks')
+      const { data, error } = await sb.from('picks')
         .select('fight_key, pick, method')
         .eq('user_id', myId)
         .eq('event_id', eventId);
+      if (error) throw error;
+      myPicks = {};
       (data || []).forEach(p => {
         const { base, round } = parseMethod(p.method);
         myPicks[p.fight_key] = { pick: p.pick, method: p.method, base, round };
       });
     } catch {}
   }
+
+  await loadPicks();
 
   // ── Save a single pick ────────────────────────
   async function savePick(fightKey, fighterA, fighterB, pick, methodBase, round) {
@@ -525,5 +527,17 @@
   }
 
   render();
+
+  // ── Auth late-arrival: re-load picks if user signs in after initial render ──
+  if (sb && !isCompleted) {
+    sb.auth.onAuthStateChange(async (event, session) => {
+      const uid = session?.user?.id;
+      if ((event === 'SIGNED_IN' || event === 'INITIAL_SESSION') && uid && uid !== myId) {
+        myId = uid;
+        await loadPicks();
+        render();
+      }
+    });
+  }
 
 })();
