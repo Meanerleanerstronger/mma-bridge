@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="images/mma-bridge-logo.png">
+  <link rel="shortcut icon" type="image/png" href="images/mma-bridge-logo.png">
+  <link rel="apple-touch-icon" href="images/mma-bridge-logo.png">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <script src="theme.js?v=2.4"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — MMA Bridge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=2.9" />
+  <style>
+    .about-page {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 72px 28px 120px;
+    }
+
+    .about-eyebrow {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.6rem; font-weight: 800;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(0,229,255,0.7);
+      margin-bottom: 14px;
+    }
+
+    .about-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2rem, 5vw, 3rem);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #fff;
+      line-height: 1.1;
+      margin: 0 0 32px;
+    }
+    .about-title span { color: #00e5ff; }
+
+    .about-divider {
+      width: 40px; height: 2px;
+      background: linear-gradient(90deg, #00e5ff, transparent);
+      border-radius: 2px;
+      margin-bottom: 36px;
+    }
+
+    .about-body {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.65);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .about-body p { margin: 0; }
+
+    .about-contact {
+      margin-top: 56px;
+      padding: 28px 32px;
+      background: rgba(0,229,255,0.04);
+      border: 1px solid rgba(0,229,255,0.15);
+      border-radius: 14px;
+    }
+    .about-contact-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.6rem; font-weight: 800;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(0,229,255,0.6);
+      margin-bottom: 10px;
+    }
+    .about-contact-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.6;
+    }
+    .about-contact-text a {
+      color: #00e5ff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .about-contact-text a:hover { text-decoration: underline; }
+
+    body.light-mode .about-title { color: #0a0a0f; }
+    body.light-mode .about-title span { color: #007a99; }
+    body.light-mode .about-eyebrow { color: #007a99; }
+    body.light-mode .about-body { color: rgba(0,0,0,0.6); }
+    body.light-mode .about-contact { background: rgba(0,150,180,0.05); border-color: rgba(0,150,180,0.2); }
+    body.light-mode .about-contact-label { color: rgba(0,120,150,0.7); }
+    body.light-mode .about-contact-text { color: rgba(0,0,0,0.45); }
+    body.light-mode .about-contact-text a { color: #006680; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <a class="logo" href="index.html">
+        <img src="images/mma-bridge-logo.png" class="nav-logo-img" alt="MMA Bridge">
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Trending</a></li>
+        <li><a href="events.html">Upcoming Events</a></li>
+        <li><a href="pfp.html">PFP</a></li>
+        <li><a href="reviews.html">Review</a></li>
+        <li><a href="lucas.html">Lucas Bot</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Switch to light mode" title="Switch to light mode">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <form class="search-box" id="site-search-form" action="results.html" method="GET">
+        <input id="site-search" name="q" type="text" placeholder="Search fighters, events..." autocomplete="off" />
+        <span class="search-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M21 21l-4.3-4.3m1.8-5.2a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </span>
+      </form>
+      <div class="nav-auth"></div>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-mobile-overlay" id="nav-mobile-overlay">
+    <button class="nav-mobile-close" onclick="document.getElementById('nav-mobile-overlay').classList.remove('open');document.getElementById('nav-hamburger').classList.remove('open');document.body.classList.remove('no-scroll')">✕</button>
+    <nav class="nav-mobile-links">
+      <a href="index.html">Trending</a>
+      <a href="events.html">Upcoming Events</a>
+      <a href="pfp.html">PFP</a>
+      <a href="reviews.html">Review</a>
+      <a href="lucas.html">Lucas Bot</a>
+      <a href="leaderboard.html">Leaderboard</a>
+    </nav>
+    <div class="nav-mobile-search">
+      <form action="results.html" method="GET">
+        <input name="q" type="text" placeholder="Search fighters, events..." autocomplete="off" />
+      </form>
+    </div>
+    <div class="nav-auth-mobile"></div>
+  </div>
+
+  <div class="about-page">
+    <div class="about-eyebrow">About</div>
+    <h1 class="about-title">MMA <span>Bridge</span></h1>
+    <div class="about-divider"></div>
+
+    <div class="about-body">
+      <p>MMA Bridge connects the fan. One place to follow upcoming events, pick fights, rate cards, and see how your predictions stack up against the community.</p>
+      <p>Whether you're tracking the next title fight or debating prelim sleepers with friends, this is where fans come to stay close to the sport.</p>
+    </div>
+
+    <div class="about-contact">
+      <div class="about-contact-label">Contact</div>
+      <div class="about-contact-text">
+        Any issues or questions — reach us at
+        <a href="mailto:contact@mmabridge.com">contact@mmabridge.com</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('scroll', () => {
+      document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 10);
+    });
+    const navHamburger = document.getElementById('nav-hamburger');
+    const navOverlay   = document.getElementById('nav-mobile-overlay');
+    if (navHamburger) navHamburger.addEventListener('click', () => {
+      navHamburger.classList.toggle('open');
+      navOverlay.classList.toggle('open');
+      document.body.classList.toggle('no-scroll');
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
+  <script src="auth.js?v=3.2"></script>
+  <script src="search.js"></script>
+  <script src="premium.js?v=3.2"></script>
+  <script src="widget.js"></script>
+</body>
+</html>
