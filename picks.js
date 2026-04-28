@@ -265,7 +265,16 @@
       <div class="pk-fight${isMain ? ' pk-fight-main' : ''}" data-key="${esc(key)}">
         ${titleBadge}${rankedBadge}
 
-        <div class="pk-fight-inner">
+        <!-- Weight / rounds meta -->
+        ${(f.weight || f.rounds) ? `
+        <div class="pk-fight-meta">
+          ${f.weight ? `<span>${esc(f.weight)}</span>` : ''}
+          ${f.weight && f.rounds ? `<span class="pk-fight-meta-dot">·</span>` : ''}
+          ${f.rounds ? `<span>${esc(f.rounds)}</span>` : ''}
+        </div>` : ''}
+
+        <!-- Fighters row -->
+        <div class="pk-fight-fighters">
           <!-- FIGHTER A -->
           <div class="pk-side pk-side-a${pickedA ? ' selected' : ''}${resultA ? ` result-${resultA}` : ''}${correctA ? ' correct' : ''}${wrongA ? ' wrong' : ''}"
                data-key="${esc(key)}" data-pick="${esc(f.a)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
@@ -274,25 +283,15 @@
             </div>
             <div class="pk-fighter-name pk-fighter-name-a">${esc(f.a)}</div>
             ${fighterRecord(f.a) ? `<div class="pk-record">${esc(fighterRecord(f.a))}</div>` : ''}
-            ${pickedA ? `<div class="pk-pick-label">Your pick</div>` : ''}
+            ${pickedA ? `<div class="pk-pick-label">Your pick ✓</div>` : ''}
             ${correctA ? `<div class="pk-pick-result correct">✓ Correct</div>` : ''}
             ${wrongA   ? `<div class="pk-pick-result wrong">✗ Wrong</div>` : ''}
           </div>
 
-          <!-- CENTER INFO -->
-          <div class="pk-center">
+          <!-- VS -->
+          <div class="pk-fight-vs">
             <div class="pk-vs">VS</div>
-            <div class="pk-weight">${esc(f.weight || '')}</div>
-            <div class="pk-rounds">${esc(f.rounds || '')}</div>
             ${resultBadge}
-            ${!isCompleted ? `
-              <div class="pk-methods">
-                <div class="pk-method-row">${methodBtns}</div>
-                <div class="pk-round-row" id="pkRounds-${esc(key)}" style="${needsRound ? '' : 'display:none'}">
-                  <span class="pk-round-label">Rd</span>
-                  ${roundBtns}
-                </div>
-              </div>` : ''}
           </div>
 
           <!-- FIGHTER B -->
@@ -303,11 +302,22 @@
             </div>
             <div class="pk-fighter-name pk-fighter-name-b">${esc(f.b)}</div>
             ${fighterRecord(f.b) ? `<div class="pk-record">${esc(fighterRecord(f.b))}</div>` : ''}
-            ${pickedB ? `<div class="pk-pick-label">Your pick</div>` : ''}
+            ${pickedB ? `<div class="pk-pick-label">Your pick ✓</div>` : ''}
             ${correctB ? `<div class="pk-pick-result correct">✓ Correct</div>` : ''}
             ${wrongB   ? `<div class="pk-pick-result wrong">✗ Wrong</div>` : ''}
           </div>
         </div>
+
+        <!-- Methods section — fully separate from fighter images -->
+        ${!isCompleted ? `
+        <div class="pk-methods-section">
+          <div class="pk-method-label">Pick Method</div>
+          <div class="pk-method-row">${methodBtns}</div>
+          <div class="pk-round-row" id="pkRounds-${esc(key)}" style="${needsRound ? '' : 'display:none'}">
+            <span class="pk-round-label">Round</span>
+            ${roundBtns}
+          </div>
+        </div>` : ''}
       </div>`;
   }
 

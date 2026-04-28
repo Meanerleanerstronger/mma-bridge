@@ -5339,13 +5339,13 @@ body.light-mode .ev-picks-btn:hover { background: rgba(0,150,180,0.18) !importan
 
 /* ── Body ── */
 .pk-body {
-  max-width: 960px; margin: 0 auto;
-  padding: 0 28px 120px;
-  display: flex; flex-direction: column; gap: 48px;
+  max-width: 1020px; margin: 0 auto;
+  padding: 0 32px 120px;
+  display: flex; flex-direction: column; gap: 60px;
 }
 
 /* ── Section ── */
-.pk-section { display: flex; flex-direction: column; gap: 12px; }
+.pk-section { display: flex; flex-direction: column; gap: 20px; }
 .pk-section-label {
   font-family: 'Montserrat', sans-serif;
   font-size: 0.6rem; font-weight: 800;
@@ -5358,15 +5358,19 @@ body.light-mode .ev-picks-btn:hover { background: rgba(0,150,180,0.18) !importan
 /* ── Fight card ── */
 .pk-fight {
   position: relative;
-  background: rgba(255,255,255,0.03);
+  background: rgba(255,255,255,0.025);
   border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 16px;
+  border-radius: 20px;
   overflow: hidden;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.pk-fight:has(.pk-side.selected) {
+  border-color: rgba(0,229,255,0.2);
 }
 .pk-fight-main {
-  background: rgba(255,255,255,0.04);
-  border-color: rgba(255,255,255,0.1);
+  background: rgba(8,8,18,0.65);
+  border-color: rgba(255,255,255,0.11);
+  box-shadow: 0 4px 40px rgba(0,0,0,0.35);
 }
 .pk-title-badge {
   position: absolute; top: 0; left: 50%; transform: translateX(-50%);
@@ -5375,7 +5379,7 @@ body.light-mode .ev-picks-btn:hover { background: rgba(0,150,180,0.18) !importan
   border-radius: 0 0 8px 8px;
   font-family: 'Montserrat', sans-serif; font-size: 0.58rem; font-weight: 800;
   letter-spacing: 0.12em; text-transform: uppercase; color: rgba(200,168,75,0.9);
-  padding: 3px 12px; z-index: 2;
+  padding: 4px 14px; z-index: 2;
 }
 .pk-ranked-badge {
   position: absolute; top: 0; left: 50%; transform: translateX(-50%);
@@ -5383,39 +5387,49 @@ body.light-mode .ev-picks-btn:hover { background: rgba(0,150,180,0.18) !importan
   border-radius: 0 0 8px 8px;
   font-family: 'Montserrat', sans-serif; font-size: 0.55rem; font-weight: 800;
   letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3);
-  padding: 3px 12px; z-index: 2;
+  padding: 4px 14px; z-index: 2;
 }
 
-.pk-fight-inner {
+/* fight meta row — weight/rounds */
+.pk-fight-meta {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 20px 24px 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.6rem; font-weight: 800;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(255,255,255,0.22);
+}
+.pk-fight-meta-dot { color: rgba(255,255,255,0.1); }
+
+/* fighters row — full width, two sides with VS centre */
+.pk-fight-fighters {
   display: grid;
-  grid-template-columns: 1fr 110px 1fr;
+  grid-template-columns: 1fr 56px 1fr;
   min-height: 260px;
 }
-.pk-fight-main .pk-fight-inner { min-height: 340px; }
+.pk-fight-main .pk-fight-fighters { min-height: 340px; }
 
 /* ── Fighter side ── */
 .pk-side {
   display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
-  padding: 28px 20px 22px;
+  padding: 20px 24px 26px;
   cursor: pointer; position: relative;
   transition: background 0.18s;
   user-select: none;
 }
 .pk-side:hover { background: rgba(255,255,255,0.04); }
-.pk-side.selected {
-  background: rgba(0,229,255,0.08);
-}
+.pk-side.selected { background: rgba(0,229,255,0.07); }
 .pk-side.selected::after {
   content: '';
   position: absolute; inset: 0;
-  border: 2px solid rgba(0,229,255,0.4);
+  border: 2px solid rgba(0,229,255,0.38);
   border-radius: inherit; pointer-events: none;
 }
-.pk-side-a { border-radius: 16px 0 0 16px; }
-.pk-side-b { border-radius: 0 16px 16px 0; }
+.pk-side-a { border-radius: 0; }
+.pk-side-b { border-radius: 0; }
 
 /* result states */
-.pk-side.result-win  { background: rgba(0,200,80,0.06);  }
+.pk-side.result-win  { background: rgba(0,200,80,0.06); }
 .pk-side.result-loss { background: rgba(0,0,0,0.1); opacity: 0.65; }
 .pk-side.correct     { background: rgba(0,200,80,0.1) !important; }
 .pk-side.correct::after { content: ''; position: absolute; inset: 0; border: 2px solid rgba(0,200,80,0.45); border-radius: inherit; pointer-events: none; }
@@ -5424,22 +5438,22 @@ body.light-mode .ev-picks-btn:hover { background: rgba(0,150,180,0.18) !importan
 
 /* fighter photo */
 .pk-fighter-photo {
-  width: 100%; max-width: 180px;
+  width: 100%; max-width: 200px;
   flex: 1; display: flex; align-items: flex-end; justify-content: center;
   position: relative; overflow: hidden;
 }
-.pk-fight-main .pk-fighter-photo { max-width: 240px; }
+.pk-fight-main .pk-fighter-photo { max-width: 260px; }
 .pk-fighter-img-a, .pk-fighter-img-b {
-  width: 100%; height: 100%; max-height: 220px;
+  width: 100%; height: 100%; max-height: 230px;
   object-fit: contain; object-position: bottom center;
   display: block;
-  filter: drop-shadow(0 4px 16px rgba(0,0,0,0.6));
-  transition: transform 0.2s;
+  filter: drop-shadow(0 4px 20px rgba(0,0,0,0.7));
+  transition: transform 0.22s;
 }
 .pk-side:hover .pk-fighter-img-a,
-.pk-side:hover .pk-fighter-img-b { transform: scale(1.04) translateY(-4px); }
+.pk-side:hover .pk-fighter-img-b { transform: scale(1.05) translateY(-5px); }
 .pk-fight-main .pk-fighter-img-a,
-.pk-fight-main .pk-fighter-img-b { max-height: 290px; }
+.pk-fight-main .pk-fighter-img-b { max-height: 310px; }
 .pk-sil-wrap {
   width: 100px; height: 130px;
   display: flex; align-items: flex-end; justify-content: center;
@@ -5450,12 +5464,12 @@ body.light-mode .ev-picks-btn:hover { background: rgba(0,150,180,0.18) !importan
 /* fighter name */
 .pk-fighter-name {
   font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
-  font-weight: 900; font-size: 1.15rem;
+  font-weight: 900; font-size: 1.2rem;
   text-transform: uppercase; letter-spacing: 0.04em;
   color: #fff; text-align: center;
-  margin-top: 12px; line-height: 1.1;
+  margin-top: 14px; line-height: 1.1;
 }
-.pk-fight-main .pk-fighter-name { font-size: 1.5rem; }
+.pk-fight-main .pk-fighter-name { font-size: 1.55rem; }
 .pk-fighter-name-a { text-align: center; }
 .pk-fighter-name-b { text-align: center; }
 
@@ -5463,131 +5477,137 @@ body.light-mode .ev-picks-btn:hover { background: rgba(0,150,180,0.18) !importan
 .pk-record {
   font-family: 'Inter', sans-serif;
   font-size: 0.72rem; font-weight: 500;
-  color: rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.32);
   text-align: center;
-  margin-top: 3px; letter-spacing: 0.04em;
+  margin-top: 4px; letter-spacing: 0.04em;
 }
 .pk-fight-main .pk-record { font-size: 0.8rem; }
 
 /* pick label */
 .pk-pick-label {
+  display: inline-flex; align-items: center; gap: 5px;
   font-family: 'Montserrat', sans-serif;
   font-size: 0.58rem; font-weight: 800;
   letter-spacing: 0.12em; text-transform: uppercase;
-  color: rgba(0,229,255,0.8);
-  margin-top: 5px;
+  color: rgba(0,229,255,0.85);
+  background: rgba(0,229,255,0.08);
+  border: 1px solid rgba(0,229,255,0.25);
+  border-radius: 20px; padding: 3px 10px;
+  margin-top: 8px;
 }
 .pk-pick-result {
   font-family: 'Montserrat', sans-serif;
   font-size: 0.6rem; font-weight: 800;
   letter-spacing: 0.1em; text-transform: uppercase;
-  margin-top: 5px;
+  margin-top: 6px;
 }
 .pk-pick-result.correct { color: #00cc55; }
 .pk-pick-result.wrong   { color: #ff6060; }
 
-/* center */
-.pk-center {
+/* VS centre column */
+.pk-fight-vs {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  padding: 20px 8px; gap: 6px;
+  gap: 8px;
   border-left: 1px solid rgba(255,255,255,0.05);
   border-right: 1px solid rgba(255,255,255,0.05);
 }
 .pk-vs {
   font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
-  font-weight: 900; font-size: 1.5rem;
-  color: rgba(255,255,255,0.15);
-  letter-spacing: 0.05em;
-}
-.pk-weight {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.58rem; font-weight: 700;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  color: rgba(255,255,255,0.28); text-align: center;
-}
-.pk-rounds {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.65rem; color: rgba(255,255,255,0.2);
-  text-align: center;
+  font-weight: 900; font-size: 1.1rem;
+  color: rgba(255,255,255,0.1);
+  letter-spacing: 0.06em;
 }
 .pk-result-label {
   font-family: 'Inter', sans-serif;
-  font-size: 0.62rem; color: rgba(255,255,255,0.35);
-  text-align: center; line-height: 1.4;
+  font-size: 0.58rem; color: rgba(255,255,255,0.32);
+  text-align: center; line-height: 1.5;
   background: rgba(255,255,255,0.04);
-  border-radius: 4px; padding: 4px 8px;
+  border-radius: 4px; padding: 5px 6px;
+  writing-mode: vertical-rl; text-orientation: mixed;
 }
 
-/* method buttons */
-.pk-methods {
-  display: flex; flex-direction: column; gap: 6px;
-  margin-top: 8px; width: 100%;
+/* ── Methods section — own row below fighters ── */
+.pk-methods-section {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 24px 32px 28px;
+  display: flex; flex-direction: column; gap: 14px;
+  background: rgba(0,0,0,0.15);
+}
+.pk-method-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.52rem; font-weight: 800;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(255,255,255,0.16);
+  text-align: center;
 }
 .pk-method-row {
-  display: flex; gap: 5px; width: 100%;
+  display: flex; gap: 12px; width: 100%;
 }
 .pk-method-btn {
   flex: 1;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 8px;
+  background: rgba(255,255,255,0.04);
+  border: 1.5px solid rgba(255,255,255,0.09);
+  border-radius: 14px;
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.68rem; font-weight: 800;
+  font-size: 0.88rem; font-weight: 800;
   letter-spacing: 0.06em; text-transform: uppercase;
-  color: rgba(255,255,255,0.35);
-  padding: 9px 6px; cursor: pointer;
-  transition: background 0.12s, color 0.12s, border-color 0.12s, box-shadow 0.12s;
+  color: rgba(255,255,255,0.28);
+  padding: 20px 12px; cursor: pointer;
+  transition: all 0.15s;
   white-space: nowrap;
 }
-.pk-method-btn:hover { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); }
+.pk-method-btn:hover {
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.65);
+  border-color: rgba(255,255,255,0.18);
+}
 .pk-method-btn.active.ko {
-  background: rgba(255,60,60,0.12);
-  border-color: rgba(255,80,80,0.45);
+  background: rgba(220,48,48,0.14);
+  border-color: rgba(255,80,80,0.5);
   color: #ff6b6b;
-  box-shadow: 0 0 12px rgba(255,60,60,0.2);
+  box-shadow: 0 0 24px rgba(220,48,48,0.22), inset 0 0 24px rgba(220,48,48,0.05);
 }
 .pk-method-btn.active.sub {
-  background: rgba(160,80,255,0.12);
-  border-color: rgba(160,80,255,0.45);
+  background: rgba(140,55,255,0.12);
+  border-color: rgba(160,80,255,0.5);
   color: #c47fff;
-  box-shadow: 0 0 12px rgba(160,80,255,0.2);
+  box-shadow: 0 0 24px rgba(140,55,255,0.22), inset 0 0 24px rgba(140,55,255,0.05);
 }
 .pk-method-btn.active.dec {
-  background: rgba(0,229,255,0.1);
-  border-color: rgba(0,229,255,0.35);
+  background: rgba(0,200,220,0.1);
+  border-color: rgba(0,229,255,0.4);
   color: #00e5ff;
-  box-shadow: 0 0 12px rgba(0,229,255,0.15);
+  box-shadow: 0 0 24px rgba(0,229,255,0.2), inset 0 0 24px rgba(0,229,255,0.04);
 }
 
-/* round selector */
+/* round row */
 .pk-round-row {
-  display: flex; align-items: center; gap: 5px;
-  padding: 6px 0 2px;
-  animation: pk-round-in 0.18s ease;
+  display: flex; align-items: center; gap: 8px;
+  animation: pk-round-in 0.2s ease;
 }
-@keyframes pk-round-in { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
+@keyframes pk-round-in { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:translateY(0); } }
 .pk-round-label {
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.52rem; font-weight: 800;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  color: rgba(255,255,255,0.25); white-space: nowrap;
-  margin-right: 2px;
+  font-size: 0.54rem; font-weight: 800;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.2); white-space: nowrap;
+  min-width: 36px;
 }
 .pk-round-btn {
   flex: 1;
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.09);
-  border-radius: 6px;
+  border-radius: 10px;
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.6rem; font-weight: 800;
-  letter-spacing: 0.04em;
-  color: rgba(255,255,255,0.3);
-  padding: 7px 4px; cursor: pointer;
-  transition: background 0.1s, color 0.1s, border-color 0.1s;
+  font-size: 0.75rem; font-weight: 800;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.28);
+  padding: 14px 6px; cursor: pointer;
+  transition: all 0.12s;
 }
-.pk-round-btn:hover { background: rgba(255,255,255,0.09); color: rgba(255,255,255,0.6); }
-.pk-round-btn.active.ko { background: rgba(255,60,60,0.14); border-color: rgba(255,80,80,0.5); color: #ff6b6b; }
-.pk-round-btn.active.sub { background: rgba(160,80,255,0.14); border-color: rgba(160,80,255,0.5); color: #c47fff; }
+.pk-round-btn:hover { background: rgba(255,255,255,0.09); color: rgba(255,255,255,0.65); }
+.pk-round-btn.active.ko  { background: rgba(220,48,48,0.14); border-color: rgba(255,80,80,0.5); color: #ff6b6b; box-shadow: 0 0 12px rgba(220,48,48,0.2); }
+.pk-round-btn.active.sub { background: rgba(140,55,255,0.12); border-color: rgba(160,80,255,0.5); color: #c47fff; box-shadow: 0 0 12px rgba(140,55,255,0.2); }
 
 /* save bar */
 .pk-save-bar {
@@ -5639,19 +5659,24 @@ body.light-mode .ev-picks-btn:hover { background: rgba(0,150,180,0.18) !importan
 @media (max-width: 640px) {
   .pk-header { grid-template-columns: auto 1fr; grid-template-rows: auto auto; gap: 12px; padding: 24px 16px 20px; }
   .pk-header-right { grid-column: 1 / -1; align-items: flex-start; }
-  .pk-body { padding: 0 10px 80px; }
-  .pk-fight-inner { grid-template-columns: 1fr 72px 1fr; min-height: 200px; }
-  .pk-fight-main .pk-fight-inner { min-height: 260px; }
-  .pk-fighter-name { font-size: 0.9rem; }
-  .pk-fight-main .pk-fighter-name { font-size: 1.15rem; }
-  .pk-vs { font-size: 1.1rem; }
-  .pk-fighter-img-a, .pk-fighter-img-b { max-height: 150px; }
-  .pk-fight-main .pk-fighter-img-a, .pk-fight-main .pk-fighter-img-b { max-height: 200px; }
+  .pk-body { padding: 0 12px 80px; gap: 32px; }
+  .pk-section { gap: 14px; }
+  .pk-fight-fighters { grid-template-columns: 1fr 40px 1fr; min-height: 200px; }
+  .pk-fight-main .pk-fight-fighters { min-height: 260px; }
+  .pk-fighter-name { font-size: 0.95rem; }
+  .pk-fight-main .pk-fighter-name { font-size: 1.2rem; }
+  .pk-fighter-img-a, .pk-fighter-img-b { max-height: 160px; }
+  .pk-fight-main .pk-fighter-img-a, .pk-fight-main .pk-fighter-img-b { max-height: 220px; }
   .pk-fighter-photo { max-width: 130px; }
-  .pk-fight-main .pk-fighter-photo { max-width: 160px; }
+  .pk-fight-main .pk-fighter-photo { max-width: 170px; }
   .pk-event-name { font-size: 1.6rem; }
   .pk-progress-wrap { width: 120px; }
   .pk-record { font-size: 0.65rem; }
+  .pk-methods-section { padding: 18px 16px 22px; gap: 12px; }
+  .pk-method-btn { font-size: 0.72rem; padding: 16px 6px; }
+  .pk-method-row { gap: 8px; }
+  .pk-round-btn { padding: 11px 4px; font-size: 0.68rem; }
+  .pk-side { padding: 16px 12px 20px; }
 }
 
 /* light mode */
@@ -5664,11 +5689,14 @@ body.light-mode .pk-fight { background: #fff !important; border-color: rgba(0,0,
 body.light-mode .pk-fight-main { background: #fafafa !important; border-color: rgba(0,0,0,0.1) !important; }
 body.light-mode .pk-section-label { color: rgba(0,0,0,0.28) !important; border-bottom-color: rgba(0,0,0,0.07) !important; }
 body.light-mode .pk-fighter-name { color: #111 !important; }
-body.light-mode .pk-vs { color: rgba(0,0,0,0.15) !important; }
-body.light-mode .pk-weight { color: rgba(0,0,0,0.3) !important; }
-body.light-mode .pk-rounds { color: rgba(0,0,0,0.22) !important; }
-body.light-mode .pk-center { border-color: rgba(0,0,0,0.06) !important; }
-body.light-mode .pk-method-btn { background: rgba(0,0,0,0.04) !important; border-color: rgba(0,0,0,0.09) !important; color: rgba(0,0,0,0.35) !important; }
+body.light-mode .pk-vs { color: rgba(0,0,0,0.12) !important; }
+body.light-mode .pk-fight-meta { color: rgba(0,0,0,0.3) !important; }
+body.light-mode .pk-fight-vs { border-color: rgba(0,0,0,0.06) !important; }
+body.light-mode .pk-methods-section { background: rgba(0,0,0,0.02) !important; border-top-color: rgba(0,0,0,0.07) !important; }
+body.light-mode .pk-method-label { color: rgba(0,0,0,0.2) !important; }
+body.light-mode .pk-method-btn { background: rgba(0,0,0,0.03) !important; border-color: rgba(0,0,0,0.09) !important; color: rgba(0,0,0,0.35) !important; }
+body.light-mode .pk-round-btn { background: rgba(0,0,0,0.03) !important; border-color: rgba(0,0,0,0.08) !important; color: rgba(0,0,0,0.3) !important; }
+body.light-mode .pk-round-label { color: rgba(0,0,0,0.25) !important; }
 body.light-mode .pk-method-btn.active.ko { background: rgba(200,0,0,0.07) !important; border-color: rgba(200,0,0,0.3) !important; color: #cc2200 !important; box-shadow: none !important; }
 body.light-mode .pk-method-btn.active.sub { background: rgba(120,0,200,0.06) !important; border-color: rgba(120,0,200,0.25) !important; color: #7700cc !important; box-shadow: none !important; }
 body.light-mode .pk-method-btn.active.dec { background: rgba(0,150,180,0.08) !important; border-color: rgba(0,150,180,0.25) !important; color: #006680 !important; box-shadow: none !important; }
