@@ -143,6 +143,53 @@
 
   await loadPicks();
 
+  // ── Load head-to-head challenge ───────────────
+  let challenge    = null;
+  let oppPicks     = {};
+  let oppName      = '';
+  let oppPickCount = 0;
+
+  async function loadChallenge() {
+    if (!myId || !sb) return;
+    try {
+      const { data } = await sb.from('challenges')
+        .select('id, challenger_id, opponent_id, status')
+        .eq('event_id', eventId)
+        .or(`challenger_id.eq.${myId},opponent_id.eq.${myId}`)
+        .in('status', ['pending', 'active'])
+        .limit(1);
+      if (!data?.length) return;
+      challenge = data[0];
+
+      const oppId = challenge.challenger_id === myId
+        ? challenge.opponent_id
+        : challenge.challenger_id;
+
+      const { data: prof } = await sb.from('profiles')
+        .select('display_name')
+        .eq('id', oppId)
+        .single();
+      oppName = prof?.display_name || 'Opponent';
+
+      const { data: oppData } = await sb.from('picks')
+        .select('fight_key, pick, method')
+        .eq('user_id', oppId)
+        .eq('event_id', eventId);
+      oppPicks = {};
+      (oppData || []).forEach(p => {
+        oppPicks[p.fight_key] = { pick: p.pick };
+      });
+      oppPickCount = Object.keys(oppPicks).length;
+
+      // Mark challenge active when opponent first opens it
+      if (challenge.opponent_id === myId && challenge.status === 'pending') {
+        await sb.from('challenges').update({ status: 'active' }).eq('id', challenge.id);
+      }
+    } catch {}
+  }
+
+  await loadChallenge();
+
   // ── Save a single pick ────────────────────────
   async function savePick(fightKey, fighterA, fighterB, pick, methodBase, round) {
     if (!myId || !sb) return;
@@ -223,6 +270,9 @@
   function buildFight(f, sectionKey, idx, isMain) {
     const key    = `${sectionKey}-${idx}`;
     const saved  = myPicks[key] || {};
+    const opp    = oppPicks[key] || {};
+    const oppPickedA = challenge && opp.pick === f.a;
+    const oppPickedB = challenge && opp.pick === f.b;
     const pickedA = saved.pick === f.a;
     const pickedB = saved.pick === f.b;
     const savedBase  = saved.base  || '';
@@ -286,6 +336,7 @@
             <div class="pk-fighter-name pk-fighter-name-a">${esc(f.a)}</div>
             ${fighterRecord(f.a) ? `<div class="pk-record">${esc(fighterRecord(f.a))}</div>` : ''}
             ${pickedA ? `<div class="pk-pick-label">Your pick ✓</div>` : ''}
+            ${oppPickedA ? `<div class="pk-opp-label">${esc(oppName)} ✓</div>` : ''}
             ${correctA ? `<div class="pk-pick-result correct">✓ Correct</div>` : ''}
             ${wrongA   ? `<div class="pk-pick-result wrong">✗ Wrong</div>` : ''}
           </div>
@@ -305,6 +356,7 @@
             <div class="pk-fighter-name pk-fighter-name-b">${esc(f.b)}</div>
             ${fighterRecord(f.b) ? `<div class="pk-record">${esc(fighterRecord(f.b))}</div>` : ''}
             ${pickedB ? `<div class="pk-pick-label">Your pick ✓</div>` : ''}
+            ${oppPickedB ? `<div class="pk-opp-label">${esc(oppName)} ✓</div>` : ''}
             ${correctB ? `<div class="pk-pick-result correct">✓ Correct</div>` : ''}
             ${wrongB   ? `<div class="pk-pick-result wrong">✗ Wrong</div>` : ''}
           </div>
@@ -385,6 +437,15 @@
         </div>` : ''}
 
       ${isCompleted ? `<div class="pk-completed-banner">This event has completed — showing your pick results</div>` : ''}
+
+      ${challenge ? `
+      <div class="pk-challenge-banner">
+        <div class="pk-ch-sword">⚔</div>
+        <div class="pk-ch-info">
+          <div class="pk-ch-vs">Head-to-Head vs <strong>${esc(oppName)}</strong></div>
+          <div class="pk-ch-tally">You: ${pickedCount} picks &nbsp;·&nbsp; ${esc(oppName)}: ${oppPickCount} picks</div>
+        </div>
+      </div>` : ''}
 
       <div class="pk-body">
         ${mainSection}${prelimSection}${earlySection}
@@ -535,6 +596,7 @@
       if ((event === 'SIGNED_IN' || event === 'INITIAL_SESSION') && uid && uid !== myId) {
         myId = uid;
         await loadPicks();
+        await loadChallenge();
         render();
       }
     });

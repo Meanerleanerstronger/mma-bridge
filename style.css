@@ -5715,6 +5715,276 @@ body.light-mode .pk-progress-wrap { background: rgba(0,0,0,0.08) !important; }
 body.light-mode .pk-progress-label { color: rgba(0,0,0,0.35) !important; }
 body.light-mode .pk-result-label { background: rgba(0,0,0,0.04) !important; color: rgba(0,0,0,0.4) !important; }
 
+/* ═══════════════════════════════════════════
+   CHALLENGE SYSTEM
+   ═══════════════════════════════════════════ */
+
+/* ── Nav badge ── */
+.ch-nav-badge {
+  position: absolute; top: -6px; right: -10px;
+  min-width: 16px; height: 16px;
+  background: #ff4444;
+  border-radius: 8px;
+  border: 1.5px solid #030304;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.52rem; font-weight: 800;
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 4px;
+  cursor: pointer;
+  z-index: 10;
+  animation: ch-badge-pop 0.3s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes ch-badge-pop {
+  from { transform: scale(0); }
+  to   { transform: scale(1); }
+}
+
+/* ── Challenge popover (pending list) ── */
+.ch-popover {
+  position: absolute; top: calc(100% + 12px); right: -12px;
+  min-width: 280px;
+  background: #111118;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px;
+  padding: 6px 0;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+  z-index: 9999;
+  animation: ch-pop-in 0.18s ease both;
+}
+@keyframes ch-pop-in {
+  from { opacity:0; transform:translateY(-6px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.ch-pop-header {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.58rem; font-weight: 800;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  padding: 10px 16px 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.ch-pop-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 16px;
+}
+.ch-pop-row + .ch-pop-row { border-top: 1px solid rgba(255,255,255,0.04); }
+.ch-pop-info { flex: 1; }
+.ch-pop-event {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.75rem; font-weight: 700;
+  color: #fff; line-height: 1.3;
+}
+.ch-pop-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem; color: rgba(255,255,255,0.35);
+  margin-top: 2px;
+}
+.ch-pop-btn {
+  background: rgba(0,229,255,0.1);
+  border: 1px solid rgba(0,229,255,0.3);
+  border-radius: 6px; color: #00e5ff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.6rem; font-weight: 800;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 6px 12px; text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+.ch-pop-btn:hover { background: rgba(0,229,255,0.18); }
+
+/* ── Search: People section challenge button ── */
+.sd-user-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: rgba(0,229,255,0.12);
+  border: 1px solid rgba(0,229,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  background-size: cover; background-position: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.6rem; font-weight: 800;
+  color: rgba(0,229,255,0.7);
+}
+.sd-challenge-btn {
+  background: rgba(255,80,80,0.1);
+  border: 1px solid rgba(255,80,80,0.3);
+  border-radius: 6px; cursor: pointer;
+  color: #ff6b6b;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.6rem; font-weight: 800;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 5px 10px; white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 0.12s;
+}
+.sd-challenge-btn:hover { background: rgba(255,80,80,0.2); }
+
+/* ── Challenge modal backdrop + panel ── */
+.ch-backdrop {
+  position: fixed; inset: 0; z-index: 9000;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  animation: ch-fade-in 0.2s ease;
+}
+@keyframes ch-fade-in { from { opacity:0; } to { opacity:1; } }
+.ch-panel {
+  position: relative;
+  background: #0d0d14;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 22px;
+  padding: 36px 36px 32px;
+  max-width: 520px; width: 100%;
+  max-height: 80vh;
+  display: flex; flex-direction: column;
+  gap: 0;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.7);
+  animation: ch-panel-in 0.25s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes ch-panel-in {
+  from { opacity:0; transform:scale(0.94) translateY(10px); }
+  to   { opacity:1; transform:scale(1) translateY(0); }
+}
+.ch-close {
+  position: absolute; top: 16px; right: 16px;
+  width: 30px; height: 30px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 50%; cursor: pointer;
+  color: rgba(255,255,255,0.5);
+  font-size: 0.75rem; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s;
+}
+.ch-close:hover { background: rgba(255,255,255,0.12); color: #fff; }
+.ch-eyebrow {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.58rem; font-weight: 800;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(0,229,255,0.6); margin-bottom: 10px;
+}
+.ch-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900; font-size: clamp(1.4rem, 4vw, 1.9rem);
+  text-transform: uppercase; letter-spacing: 0.03em;
+  color: #fff; margin: 0 0 8px; line-height: 1.1;
+}
+.ch-title span { color: #00e5ff; }
+.ch-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem; color: rgba(255,255,255,0.38);
+  line-height: 1.6; margin: 0 0 24px;
+}
+.ch-events {
+  flex: 1; overflow-y: auto;
+  display: flex; flex-direction: column; gap: 10px;
+  padding-right: 4px;
+}
+.ch-events::-webkit-scrollbar { width: 4px; }
+.ch-events::-webkit-scrollbar-track { background: transparent; }
+.ch-events::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+.ch-no-events {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem; color: rgba(255,255,255,0.25);
+  text-align: center; padding: 32px 0;
+}
+.ch-ev-btn {
+  display: flex; align-items: center; gap: 14px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px; padding: 12px 14px;
+  cursor: pointer; text-align: left; width: 100%;
+  transition: background 0.15s, border-color 0.15s;
+}
+.ch-ev-btn:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(0,229,255,0.25);
+}
+.ch-ev-btn:disabled { opacity: 0.4; cursor: default; }
+.ch-ev-img {
+  width: 64px; height: 42px;
+  object-fit: cover; border-radius: 8px;
+  background: rgba(255,255,255,0.05);
+  flex-shrink: 0;
+}
+.ch-ev-img-ph {
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+}
+.ch-ev-info { flex: 1; }
+.ch-ev-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.82rem; font-weight: 700;
+  color: #fff; line-height: 1.3; text-transform: uppercase; letter-spacing: 0.02em;
+}
+.ch-ev-date {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem; color: rgba(255,255,255,0.35);
+  margin-top: 3px;
+}
+.ch-ev-arrow { color: rgba(255,255,255,0.2); flex-shrink: 0; }
+.ch-status {
+  margin-top: 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem; text-align: center;
+  color: rgba(255,255,255,0.5); padding: 10px;
+  border-radius: 8px;
+}
+.ch-ok  { background: rgba(0,200,80,0.08);  color: #00cc55; border: 1px solid rgba(0,200,80,0.2); }
+.ch-err { background: rgba(255,60,60,0.08); color: #ff6060; border: 1px solid rgba(255,60,60,0.2); }
+
+/* ── Picks: challenge banner ── */
+.pk-challenge-banner {
+  display: flex; align-items: center; gap: 16px;
+  max-width: 1020px; margin: 0 auto 0;
+  padding: 14px 32px;
+  background: rgba(255,140,0,0.06);
+  border-top: 1px solid rgba(255,140,0,0.15);
+  border-bottom: 1px solid rgba(255,140,0,0.1);
+}
+.pk-ch-sword {
+  font-size: 1.1rem; flex-shrink: 0;
+}
+.pk-ch-info { flex: 1; }
+.pk-ch-vs {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.78rem; font-weight: 800;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: rgba(255,160,0,0.85);
+}
+.pk-ch-vs strong { color: #ffaa00; }
+.pk-ch-tally {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem; color: rgba(255,255,255,0.35);
+  margin-top: 3px;
+}
+
+/* ── Picks: opponent pick indicator ── */
+.pk-opp-label {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.58rem; font-weight: 800;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,160,0,0.9);
+  background: rgba(255,140,0,0.1);
+  border: 1px solid rgba(255,140,0,0.3);
+  border-radius: 20px; padding: 3px 10px;
+  margin-top: 6px;
+}
+
+/* light mode adjustments */
+body.light-mode .ch-panel { background: #fff; border-color: rgba(0,0,0,0.1); }
+body.light-mode .ch-title { color: #0a0a0f; }
+body.light-mode .ch-sub { color: rgba(0,0,0,0.4); }
+body.light-mode .ch-ev-btn { background: rgba(0,0,0,0.02); border-color: rgba(0,0,0,0.08); }
+body.light-mode .ch-ev-btn:hover { background: rgba(0,0,0,0.05); border-color: rgba(0,150,180,0.3); }
+body.light-mode .ch-ev-name { color: #111; }
+body.light-mode .ch-ev-date { color: rgba(0,0,0,0.4); }
+body.light-mode .pk-challenge-banner { background: rgba(255,140,0,0.04); }
+body.light-mode .pk-opp-label { color: rgba(180,80,0,0.9); background: rgba(255,140,0,0.07); border-color: rgba(180,80,0,0.25); }
+body.light-mode .ch-nav-badge { border-color: #f0f0f4; }
+
 /* ── Site disclaimer footer ── */
 #site-disclaimer {
   display: block;

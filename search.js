@@ -72,16 +72,62 @@
     return el;
   }
 
-  function showDrop(fResults, eResults) {
+  // ── User search via Supabase ──────────────────
+  async function searchUsers(q) {
+    const sb = window._sb;
+    if (!sb || q.length < 2) return [];
+    try {
+      const { data } = await sb.from('profiles')
+        .select('id, display_name, avatar_url')
+        .ilike('display_name', `%${q}%`)
+        .limit(4);
+      return data || [];
+    } catch { return []; }
+  }
+
+  function showDrop(fResults, eResults, uResults = []) {
     const drop = getOrCreateDrop();
     drop.innerHTML = '';
 
-    const total = fResults.length + eResults.length;
+    const total = fResults.length + eResults.length + uResults.length;
     if (!total) {
       drop.innerHTML = '<div class="sd-empty">No results</div>';
       drop.style.display = 'block';
       activeIdx = -1;
       return;
+    }
+
+    // People section
+    if (uResults.length) {
+      drop.appendChild(Object.assign(document.createElement('div'), { className: 'sd-section', textContent: 'People' }));
+      uResults.forEach(u => {
+        const initials = (u.display_name || '?').slice(0, 2).toUpperCase();
+        const row = buildRow(`
+          <div class="sd-user-avatar" ${u.avatar_url ? `style="background-image:url('${escHtml(u.avatar_url)}')"` : ''}>
+            ${u.avatar_url ? '' : `<span>${escHtml(initials)}</span>`}
+          </div>
+          <div class="sd-info">
+            <span class="sd-name">${escHtml(u.display_name || 'Fighter')}</span>
+            <span class="sd-sub">MMA Bridge member</span>
+          </div>
+          <button class="sd-challenge-btn" data-uid="${escHtml(u.id)}" data-uname="${escHtml(u.display_name || 'Fighter')}">⚔ Challenge</button>
+        `, () => {
+          input.value = '';
+          hideDrop();
+        });
+        // Challenge button — mousedown to fire before row blur
+        const chBtn = row.querySelector('.sd-challenge-btn');
+        if (chBtn) {
+          chBtn.addEventListener('mousedown', e => {
+            e.stopPropagation();
+            e.preventDefault();
+            input.value = '';
+            hideDrop();
+            window.openChallengeModal?.(u.id, u.display_name || 'Fighter');
+          });
+        }
+        drop.appendChild(row);
+      });
     }
 
     // Fighters section
@@ -182,7 +228,8 @@
         .filter(ev => (ev.name || ev.eventName || '').toLowerCase().includes(q))
         .sort((a, b) => new Date(b.isoDate || 0) - new Date(a.isoDate || 0))
         .slice(0, 5);
-      showDrop(fRes, eRes);
+      const uRes = await searchUsers(q);
+      showDrop(fRes, eRes, uRes);
     }, 120);
   });
 
