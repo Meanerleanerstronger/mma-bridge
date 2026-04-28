@@ -939,11 +939,18 @@
     function closeOverlay(){
       overlay.setAttribute('aria-hidden','true');
       overlay.classList.remove('open');
-      document.body.classList.remove('no-scroll');
+      // only remove no-scroll if picks hub isn't also open
+      if(!document.getElementById('phOverlay')?.classList.contains('open'))
+        document.body.classList.remove('no-scroll');
     }
     ovClose.addEventListener('click',closeOverlay);
     ovBackdrop.addEventListener('click',closeOverlay);
-    document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closePicksHub(); closeOverlay(); } });
+    document.addEventListener('keydown',e=>{
+      if(e.key==='Escape'){
+        if(document.getElementById('phOverlay')?.classList.contains('open')) closePicksHub();
+        else closeOverlay();
+      }
+    });
 
     /* ── PICKS HUB ── */
     const phOverlay = document.getElementById('phOverlay');

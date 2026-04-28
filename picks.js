@@ -379,6 +379,7 @@
       </div>`;
 
     // Sticky save bar (only for upcoming + logged-in users)
+    document.getElementById('pkSaveBar')?.remove(); // clear any prior instance
     if (!isCompleted && myId) {
       const saveBar = document.createElement('div');
       saveBar.id = 'pkSaveBar';
@@ -461,35 +462,23 @@
         if (!saved) { showToast('Pick a fighter first', 'err'); return; }
 
         const alreadyActive = btn.classList.contains('active');
-
-        // Clear all method btns
-        fight.querySelectorAll('.pk-method-btn').forEach(b => {
-          b.classList.remove('active', 'ko', 'sub', 'dec');
-        });
-
-        const roundRow = document.getElementById(`pkRounds-${key}`);
-        const newBase = alreadyActive ? '' : method;
-        const newRound = alreadyActive ? '' : (saved.round || '');
         const methodCls = method === 'KO/TKO' ? 'ko' : method === 'SUB' ? 'sub' : 'dec';
+        const newBase   = alreadyActive ? '' : method;
+        const newRound  = alreadyActive ? '' : (saved.round || '');
+        const showRound = !alreadyActive && (method === 'KO/TKO' || method === 'SUB');
 
-        if (!alreadyActive) {
-          btn.classList.add('active', methodCls);
-        }
+        // Clear all method btns, re-apply active to clicked one
+        fight.querySelectorAll('.pk-method-btn').forEach(b => b.classList.remove('active', 'ko', 'sub', 'dec'));
+        if (!alreadyActive) btn.classList.add('active', methodCls);
 
         // Show/hide round row
+        const roundRow = document.getElementById(`pkRounds-${key}`);
         if (roundRow) {
-          const showRound = !alreadyActive && (method === 'KO/TKO' || method === 'SUB');
           roundRow.style.display = showRound ? '' : 'none';
-          // Update round button classes
-          if (showRound) {
-            fight.querySelectorAll('.pk-round-btn').forEach(rb => {
-              rb.classList.remove('active', 'ko', 'sub');
-              if (rb.dataset.round === saved.round) rb.classList.add('active', methodCls);
-              rb.dataset.methodCls = methodCls;
-            });
-          } else {
-            fight.querySelectorAll('.pk-round-btn').forEach(rb => rb.classList.remove('active','ko','sub'));
-          }
+          fight.querySelectorAll('.pk-round-btn').forEach(rb => {
+            rb.classList.remove('active', 'ko', 'sub');
+            if (showRound && rb.dataset.round === saved.round) rb.classList.add('active', methodCls);
+          });
         }
 
         const fa = fight.querySelector('.pk-side-a')?.dataset?.fa || '';
