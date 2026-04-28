@@ -19,7 +19,7 @@
   const root = document.getElementById('lbRoot');
   const sb   = window._sb;
 
-  function waitForAuth(ms = 4000) {
+  function waitForAuth(ms = 5000) {
     return new Promise(res => {
       const t0 = Date.now();
       const tick = () => {
@@ -103,39 +103,66 @@
       </div>
     </div>`;
 
-  const [user, picksRes] = await Promise.all([
-    waitForAuth(),
-    sb ? sb.from('picks').select('user_id, profiles(display_name, avatar_url, group_code, group_name)') : Promise.resolve({ data: null }),
-  ]);
-
+  // Wait for auth, then load data with two simple queries (no fragile FK joins)
+  const user = await waitForAuth();
   const myId = user?.id || null;
 
-  if (!sb || !picksRes.data) {
+  if (!sb) {
     document.getElementById('lbGlobalWrap').innerHTML =
-      `<div class="lb-error">Could not load leaderboard data.</div>`;
+      `<div class="lb-error">Could not connect to database.</div>`;
+    wireModals(null, null, null);
     return;
   }
 
-  // ── Aggregate by picks count ───────────────────
-  const userMap = {};
-  picksRes.data.forEach(r => {
-    if (!r.user_id) return;
-    if (!userMap[r.user_id]) {
-      userMap[r.user_id] = {
-        user_id:    r.user_id,
-        name:       r.profiles?.display_name || 'Anonymous',
-        avatar:     r.profiles?.avatar_url   || '',
-        group_code: r.profiles?.group_code   || null,
-        group_name: r.profiles?.group_name   || null,
-        count:      0,
-      };
-    }
-    userMap[r.user_id].count++;
-  });
-  const allUsers = Object.values(userMap).sort((a, b) => b.count - a.count);
+  // Query 1: all picks (just user_id, no joins)
+  const { data: picksData, error: picksErr } = await sb.from('picks').select('user_id');
 
-  let myGroupCode = allUsers.find(u => u.user_id === myId)?.group_code || null;
-  let myGroupName = allUsers.find(u => u.user_id === myId)?.group_name || null;
+  if (picksErr || !picksData) {
+    document.getElementById('lbGlobalWrap').innerHTML =
+      `<div class="lb-error">Could not load picks data.</div>`;
+    wireModals(null, null, null);
+    return;
+  }
+
+  // Count picks per user
+  const countMap = {};
+  picksData.forEach(r => {
+    if (r.user_id) countMap[r.user_id] = (countMap[r.user_id] || 0) + 1;
+  });
+  const rankedIds = Object.keys(countMap);
+
+  // Query 2: profiles for users who have picks (plus current user even if 0 picks)
+  const profileIds = myId && !rankedIds.includes(myId) ? [...rankedIds, myId] : rankedIds;
+
+  let profilesData = [];
+  if (profileIds.length > 0) {
+    const { data: pData } = await sb
+      .from('profiles')
+      .select('id, display_name, avatar_url, group_code, group_name')
+      .in('id', profileIds);
+    profilesData = pData || [];
+  }
+
+  // Build profile lookup
+  const profileMap = {};
+  profilesData.forEach(p => { profileMap[p.id] = p; });
+
+  // Build sorted user list
+  const allUsers = rankedIds.map(uid => {
+    const p = profileMap[uid] || {};
+    return {
+      user_id:    uid,
+      name:       p.display_name || 'Anonymous',
+      avatar:     p.avatar_url   || '',
+      group_code: p.group_code   || null,
+      group_name: p.group_name   || null,
+      count:      countMap[uid]  || 0,
+    };
+  }).sort((a, b) => b.count - a.count);
+
+  const myProfile    = myId ? (profileMap[myId] || {}) : {};
+  let myGroupCode    = myProfile.group_code || null;
+  let myGroupName    = myProfile.group_name || null;
 
   // ── Render a leaderboard table ─────────────────
   function renderTable(users, wrapId, emptyMsg) {
@@ -143,7 +170,7 @@
     if (!wrap) return;
 
     if (!users.length) {
-      wrap.innerHTML = `<div class="lb-error">${emptyMsg || 'No data yet.'}</div>`;
+      wrap.innerHTML = `<div class="lb-error">${esc(emptyMsg || 'No picks yet.')}</div>`;
       return;
     }
 
@@ -176,8 +203,8 @@
 
   // ── Render group status + group board ─────────
   function renderGroupStatus() {
-    const el = document.getElementById('lbGroupStatus');
-    const groupCol = document.getElementById('lbGroupCol');
+    const el         = document.getElementById('lbGroupStatus');
+    const groupCol   = document.getElementById('lbGroupCol');
     const groupLabel = document.getElementById('lbGroupLabel');
 
     if (!myGroupCode) {
@@ -206,10 +233,9 @@
         </div>
       </div>`;
 
-    // Show group column
     if (groupCol) groupCol.style.display = '';
     if (groupLabel) groupLabel.textContent = myGroupName || myGroupCode;
-    renderTable(groupUsers, 'lbGroupWrap', 'No picks yet — share your code!');
+    renderTable(groupUsers, 'lbGroupWrap', 'No picks yet in your group — share your code!');
 
     document.getElementById('btnCopyCode')?.addEventListener('click', () => {
       navigator.clipboard?.writeText(myGroupCode).catch(() => {});
@@ -233,74 +259,84 @@
     setTimeout(() => document.getElementById('lbGroups')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
   }
 
-  // ── Initial render ─────────────────────────────
   renderTable(allUsers, 'lbGlobalWrap', 'No picks yet — be the first!');
   renderGroupStatus();
 
   // ── Modals ─────────────────────────────────────
-  function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-  function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+  wireModals(myId, allUsers, profileMap);
 
-  document.getElementById('btnCreateGroup').addEventListener('click', () => {
-    if (!myId) { alert('Sign in to create a group.'); return; }
-    openModal('modalCreate');
-    setTimeout(() => document.getElementById('groupNameInput')?.focus(), 60);
-  });
-  document.getElementById('closeCreate').addEventListener('click', () => closeModal('modalCreate'));
-  document.getElementById('modalCreate').addEventListener('click', e => { if (e.target.id === 'modalCreate') closeModal('modalCreate'); });
+  function wireModals(myId, allUsers, profileMap) {
+    function openModal(id) { const el = document.getElementById(id); if (el) el.style.display = 'flex'; }
+    function closeModal(id) { const el = document.getElementById(id); if (el) el.style.display = 'none'; }
 
-  document.getElementById('submitCreate').addEventListener('click', async () => {
-    const name = document.getElementById('groupNameInput').value.trim();
-    const errEl = document.getElementById('createErr');
-    if (!name) { errEl.textContent = 'Enter a group name.'; return; }
-    if (!myId) { errEl.textContent = 'Sign in to create a group.'; return; }
-    errEl.textContent = '';
-    const btn = document.getElementById('submitCreate');
-    btn.textContent = 'Creating…'; btn.disabled = true;
-    try {
-      const code = randCode();
-      await sb.from('profiles').upsert({ id: myId, group_code: code, group_name: name });
-      myGroupCode = code; myGroupName = name;
-      allUsers.forEach(u => { if (u.user_id === myId) { u.group_code = code; u.group_name = name; } });
-      closeModal('modalCreate');
-      document.getElementById('groupNameInput').value = '';
-      renderGroupStatus();
-    } catch {
-      errEl.textContent = 'Could not create group. Make sure you are signed in.';
-    } finally { btn.textContent = 'Create Group'; btn.disabled = false; }
-  });
+    document.getElementById('btnCreateGroup')?.addEventListener('click', () => {
+      if (!myId) { alert('Sign in to create a group.'); return; }
+      openModal('modalCreate');
+      setTimeout(() => document.getElementById('groupNameInput')?.focus(), 60);
+    });
+    document.getElementById('closeCreate')?.addEventListener('click', () => closeModal('modalCreate'));
+    document.getElementById('modalCreate')?.addEventListener('click', e => { if (e.target.id === 'modalCreate') closeModal('modalCreate'); });
 
-  document.getElementById('btnJoinGroup').addEventListener('click', () => {
-    if (!myId) { alert('Sign in to join a group.'); return; }
-    openModal('modalJoin');
-    setTimeout(() => document.getElementById('joinCodeInput')?.focus(), 60);
-  });
-  document.getElementById('closeJoin').addEventListener('click', () => closeModal('modalJoin'));
-  document.getElementById('modalJoin').addEventListener('click', e => { if (e.target.id === 'modalJoin') closeModal('modalJoin'); });
+    document.getElementById('submitCreate')?.addEventListener('click', async () => {
+      const nameEl = document.getElementById('groupNameInput');
+      const errEl  = document.getElementById('createErr');
+      const name   = nameEl?.value.trim() || '';
+      if (!name) { if (errEl) errEl.textContent = 'Enter a group name.'; return; }
+      if (!myId) { if (errEl) errEl.textContent = 'Sign in to create a group.'; return; }
+      if (errEl) errEl.textContent = '';
+      const btn = document.getElementById('submitCreate');
+      if (btn) { btn.textContent = 'Creating…'; btn.disabled = true; }
+      try {
+        const code = randCode();
+        const { error } = await sb.from('profiles').update({ group_code: code, group_name: name }).eq('id', myId);
+        if (error) throw error;
+        myGroupCode = code; myGroupName = name;
+        if (allUsers) allUsers.forEach(u => { if (u.user_id === myId) { u.group_code = code; u.group_name = name; } });
+        closeModal('modalCreate');
+        if (nameEl) nameEl.value = '';
+        renderGroupStatus();
+      } catch (err) {
+        if (errEl) errEl.textContent = err?.message?.includes('column')
+          ? 'DB missing group columns — run SQL migration from leaderboard.js header.'
+          : 'Could not create group. Make sure you are signed in.';
+      } finally { if (btn) { btn.textContent = 'Create Group'; btn.disabled = false; } }
+    });
 
-  document.getElementById('submitJoin').addEventListener('click', async () => {
-    const code = document.getElementById('joinCodeInput').value.trim().toUpperCase();
-    const errEl = document.getElementById('joinErr');
-    if (code.length < 4) { errEl.textContent = 'Enter a valid group code.'; return; }
-    if (!myId) { errEl.textContent = 'Sign in to join a group.'; return; }
-    errEl.textContent = '';
-    const btn = document.getElementById('submitJoin');
-    btn.textContent = 'Joining…'; btn.disabled = true;
-    try {
-      const match = allUsers.find(u => u.group_code === code);
-      const name = match?.group_name || null;
-      await sb.from('profiles').upsert({ id: myId, group_code: code, group_name: name });
-      myGroupCode = code; myGroupName = name;
-      allUsers.forEach(u => { if (u.user_id === myId) { u.group_code = code; u.group_name = name; } });
-      closeModal('modalJoin');
-      document.getElementById('joinCodeInput').value = '';
-      renderGroupStatus();
-    } catch {
-      errEl.textContent = 'Could not join group. Check the code and try again.';
-    } finally { btn.textContent = 'Join Group'; btn.disabled = false; }
-  });
+    document.getElementById('btnJoinGroup')?.addEventListener('click', () => {
+      if (!myId) { alert('Sign in to join a group.'); return; }
+      openModal('modalJoin');
+      setTimeout(() => document.getElementById('joinCodeInput')?.focus(), 60);
+    });
+    document.getElementById('closeJoin')?.addEventListener('click', () => closeModal('modalJoin'));
+    document.getElementById('modalJoin')?.addEventListener('click', e => { if (e.target.id === 'modalJoin') closeModal('modalJoin'); });
 
-  document.getElementById('groupNameInput').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('submitCreate').click(); });
-  document.getElementById('joinCodeInput').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('submitJoin').click(); });
+    document.getElementById('submitJoin')?.addEventListener('click', async () => {
+      const codeEl = document.getElementById('joinCodeInput');
+      const errEl  = document.getElementById('joinErr');
+      const code   = (codeEl?.value.trim() || '').toUpperCase();
+      if (code.length < 4) { if (errEl) errEl.textContent = 'Enter a valid group code.'; return; }
+      if (!myId) { if (errEl) errEl.textContent = 'Sign in to join a group.'; return; }
+      if (errEl) errEl.textContent = '';
+      const btn = document.getElementById('submitJoin');
+      if (btn) { btn.textContent = 'Joining…'; btn.disabled = true; }
+      try {
+        // Look up group name from any member with that code
+        const { data: groupData } = await sb.from('profiles').select('group_name').eq('group_code', code).limit(1);
+        const groupName = groupData?.[0]?.group_name || null;
+        const { error } = await sb.from('profiles').update({ group_code: code, group_name: groupName }).eq('id', myId);
+        if (error) throw error;
+        myGroupCode = code; myGroupName = groupName;
+        if (allUsers) allUsers.forEach(u => { if (u.user_id === myId) { u.group_code = code; u.group_name = groupName; } });
+        closeModal('modalJoin');
+        if (codeEl) codeEl.value = '';
+        renderGroupStatus();
+      } catch (err) {
+        if (errEl) errEl.textContent = 'Could not join group. Check the code and try again.';
+      } finally { if (btn) { btn.textContent = 'Join Group'; btn.disabled = false; } }
+    });
+
+    document.getElementById('groupNameInput')?.addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('submitCreate')?.click(); });
+    document.getElementById('joinCodeInput')?.addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('submitJoin')?.click(); });
+  }
 
 })();
