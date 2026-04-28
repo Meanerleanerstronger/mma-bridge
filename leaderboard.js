@@ -71,6 +71,19 @@
 
     </div>
 
+    <!-- CHALLENGES SECTION -->
+    <div class="lb-ch-section" id="lbChallengesSection" style="display:none">
+      <div class="lb-ch-section-header">
+        <div class="lb-section-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6"/><path d="M2 21l9-9"/><path d="M9.5 6.5L14 11"/></svg>
+          Head-to-Head Challenges
+        </div>
+      </div>
+      <div id="lbChallengesWrap" class="lb-ch-list">
+        <div class="lb-loading"><div class="lb-spinner"></div>Loading…</div>
+      </div>
+    </div>
+
     <!-- CREATE MODAL -->
     <div class="lb-modal-backdrop" id="modalCreate" style="display:none">
       <div class="lb-modal">
@@ -338,5 +351,104 @@
     document.getElementById('groupNameInput')?.addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('submitCreate')?.click(); });
     document.getElementById('joinCodeInput')?.addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('submitJoin')?.click(); });
   }
+
+  // ── Challenges Hub ────────────────────────────
+  async function loadAndRenderChallenges() {
+    if (!myId || !sb) return;
+    const section = document.getElementById('lbChallengesSection');
+    const wrap    = document.getElementById('lbChallengesWrap');
+    if (!section || !wrap) return;
+
+    const { data: challenges, error } = await sb
+      .from('challenges')
+      .select('*')
+      .or(`challenger_id.eq.${myId},opponent_id.eq.${myId}`)
+      .order('created_at', { ascending: false });
+
+    if (error || !challenges?.length) {
+      section.style.display = 'none';
+      return;
+    }
+
+    section.style.display = '';
+
+    // Batch-load opponent profiles
+    const oppIds = [...new Set(challenges.map(c => c.challenger_id === myId ? c.opponent_id : c.challenger_id))];
+    const { data: oppProfiles } = await sb.from('profiles').select('id, display_name, avatar_url').in('id', oppIds);
+    const oppMap = {};
+    (oppProfiles || []).forEach(p => { oppMap[p.id] = p; });
+
+    // Load pick counts per user per event
+    const eventIds = [...new Set(challenges.map(c => c.event_id))];
+    const { data: picksRows } = await sb.from('picks').select('user_id, event_id').in('event_id', eventIds);
+    const pickCountMap = {};
+    (picksRows || []).forEach(r => {
+      const k = `${r.user_id}:${r.event_id}`;
+      pickCountMap[k] = (pickCountMap[k] || 0) + 1;
+    });
+
+    const cards = challenges.map(c => {
+      const isChallenger = c.challenger_id === myId;
+      const oppId   = isChallenger ? c.opponent_id : c.challenger_id;
+      const opp     = oppMap[oppId] || {};
+      const oppName = opp.display_name || 'Fighter';
+      const status  = c.status || 'pending';
+
+      const myPicks  = pickCountMap[`${myId}:${c.event_id}`] || 0;
+      const oppPicks = pickCountMap[`${oppId}:${c.event_id}`] || 0;
+
+      const badgeClass = status === 'pending' ? 'lb-ch-badge-pending'
+                       : status === 'active'  ? 'lb-ch-badge-active'
+                       :                        'lb-ch-badge-done';
+      const badgeLabel = status === 'pending' ? 'Pending'
+                       : status === 'active'  ? 'Active'
+                       :                        'Completed';
+
+      const initOpp = (oppName || 'F').split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+      const avatarHtml = opp.avatar_url
+        ? `<img class="lb-ch-avatar" src="${esc(opp.avatar_url)}" alt="${esc(oppName)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+           <div class="lb-ch-avatar lb-ch-avatar-init" style="display:none">${esc(initOpp)}</div>`
+        : `<div class="lb-ch-avatar lb-ch-avatar-init">${esc(initOpp)}</div>`;
+
+      const picksLine = (myPicks || oppPicks)
+        ? `<div class="lb-ch-picks">You: <strong>${myPicks}</strong> picks &nbsp;·&nbsp; ${esc(oppName)}: <strong>${oppPicks}</strong> picks</div>`
+        : '';
+
+      let actionBtn = '';
+      const href = `picks.html?event=${encodeURIComponent(c.event_id)}&challenge=${encodeURIComponent(c.id)}`;
+      if (status === 'pending' && !isChallenger) {
+        actionBtn = `<a href="${href}" class="lb-ch-btn lb-ch-btn-accept">Accept &amp; Pick →</a>`;
+      } else if (status === 'completed') {
+        actionBtn = `<a href="${href}" class="lb-ch-btn lb-ch-btn-result">See Result →</a>`;
+      } else {
+        actionBtn = `<a href="${href}" class="lb-ch-btn lb-ch-btn-view">View Picks →</a>`;
+      }
+
+      const roleLabel = isChallenger ? 'You challenged' : 'Challenge received';
+
+      return `
+        <div class="lb-ch-card">
+          <div class="lb-ch-card-left">
+            <div class="lb-ch-avatar-wrap">${avatarHtml}</div>
+          </div>
+          <div class="lb-ch-card-body">
+            <div class="lb-ch-card-top">
+              <div class="lb-ch-opp-name">${esc(oppName)}</div>
+              <span class="lb-ch-badge ${badgeClass}">${badgeLabel}</span>
+            </div>
+            <div class="lb-ch-event-name">${esc(c.event_name || c.event_id || 'Unknown Event')}</div>
+            ${picksLine}
+            <div class="lb-ch-card-foot">
+              <span class="lb-ch-role">${roleLabel}</span>
+              ${actionBtn}
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+
+    wrap.innerHTML = cards || '<div class="lb-error">No challenges yet.</div>';
+  }
+
+  loadAndRenderChallenges();
 
 })();
