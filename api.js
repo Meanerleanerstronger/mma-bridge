@@ -164,7 +164,7 @@ export const API = {
   async getPastEvents() {
     const today = new Date().toISOString().slice(0,10);
     const all = await fetch('./events.json', { cache: 'no-cache' }).then(r => r.json());
-    return all.filter(e => (e.isoDate || '9999') < today && e.status === 'completed');
+    return all.filter(e => (e.isoDate || '9999') <= today && e.status === 'completed');
   },
 
   async getEvent(id) {
