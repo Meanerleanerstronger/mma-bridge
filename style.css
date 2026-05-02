@@ -5641,6 +5641,183 @@ body.light-mode .ev-picks-btn:hover { background: rgba(0,150,180,0.18) !importan
   transform: translateY(-1px);
 }
 .pk-save-btn.saved { border-color: rgba(0,200,80,0.5); color: #00cc55; background: rgba(0,200,80,0.1); box-shadow: 0 0 14px rgba(0,200,80,0.15); }
+.pk-save-btn.dirty {
+  background: linear-gradient(135deg, #00e5ff 0%, #00b8d4 100%);
+  border-color: #00e5ff; color: #000;
+  box-shadow: 0 0 28px rgba(0,229,255,0.55);
+  animation: pk-dirty-pulse 1.8s ease-in-out infinite;
+}
+@keyframes pk-dirty-pulse {
+  0%, 100% { box-shadow: 0 0 24px rgba(0,229,255,0.45); }
+  50%       { box-shadow: 0 0 42px rgba(0,229,255,0.75), 0 0 80px rgba(0,229,255,0.25); }
+}
+
+/* unsaved pick label (amber dot) */
+.pk-pick-unsaved {
+  color: rgba(255,170,0,0.9) !important;
+  background: rgba(255,140,0,0.1) !important;
+  border-color: rgba(255,150,0,0.3) !important;
+}
+
+/* ── Event poster bg ── */
+.pk-poster-bg {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image: var(--poster);
+  background-size: cover; background-position: center top;
+  filter: blur(60px) saturate(0.4);
+  opacity: 0.06;
+  transform: scale(1.1);
+}
+.pk-page { position: relative; }
+.pk-header, .pk-body { position: relative; z-index: 1; }
+
+/* ── Fight card aesthetic upgrades ── */
+.pk-fight {
+  backdrop-filter: blur(4px);
+}
+.pk-fight-main {
+  border-image: linear-gradient(180deg, rgba(200,168,75,0.35) 0%, rgba(255,255,255,0.06) 60%) 1;
+  border-radius: 20px !important;
+  background: radial-gradient(ellipse at 50% 0%, rgba(200,168,75,0.05) 0%, rgba(8,8,18,0.7) 55%) !important;
+}
+.pk-fight:has(.pk-side.selected) {
+  box-shadow: 0 0 40px rgba(0,229,255,0.08);
+}
+.pk-side.selected {
+  background: rgba(0,229,255,0.08) !important;
+}
+.pk-side.selected::after {
+  border: 2px solid rgba(0,229,255,0.55) !important;
+  box-shadow: inset 0 0 30px rgba(0,229,255,0.06);
+}
+.pk-section-label {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+}
+.pk-section-label::before {
+  content: '';
+  display: block; width: 3px; height: 14px;
+  background: linear-gradient(180deg, #00e5ff, transparent);
+  border-radius: 2px; flex-shrink: 0;
+  margin-right: -4px;
+}
+
+/* ── Hype widget on picks page ── */
+.pk-hype-widget {
+  display: flex; flex-direction: column; align-items: flex-end; gap: 4px;
+  margin-top: 2px;
+}
+.pk-hype-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.52rem; font-weight: 800;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.22);
+}
+.pk-hype-flames {
+  display: flex; gap: 4px;
+}
+.pk-hype-flame {
+  background: none; border: none; cursor: pointer;
+  font-size: 1.1rem; padding: 2px; opacity: 0.25;
+  transition: opacity 0.12s, transform 0.12s;
+  filter: grayscale(1);
+}
+.pk-hype-flame.lit, .pk-hype-flame:hover {
+  opacity: 1; filter: grayscale(0);
+  transform: scale(1.2);
+}
+.pk-hype-avg {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem; color: rgba(255,255,255,0.3);
+  text-align: right;
+}
+
+/* ── FOTN section ── */
+.pk-fotn-section {
+  margin-top: -20px;
+  padding: 28px 0 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.pk-fotn-title {
+  margin-bottom: 18px !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 4px !important;
+}
+.pk-fotn-title::before { display: none !important; }
+.pk-fotn-hint {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem; font-weight: 400;
+  color: rgba(255,255,255,0.22);
+  letter-spacing: 0; text-transform: none;
+}
+.pk-fotn-fights {
+  display: flex; flex-wrap: wrap; gap: 10px;
+}
+.pk-fotn-fight {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.03);
+  border: 1.5px solid rgba(255,255,255,0.08);
+  border-radius: 10px; padding: 10px 16px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem; color: rgba(255,255,255,0.45);
+  transition: all 0.15s;
+}
+.pk-fotn-fight:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,200,0,0.3);
+  color: rgba(255,255,255,0.75);
+}
+.pk-fotn-fight.selected {
+  background: rgba(255,170,0,0.1);
+  border-color: rgba(255,170,0,0.5);
+  color: rgba(255,200,0,0.9);
+  box-shadow: 0 0 20px rgba(255,150,0,0.18);
+}
+.pk-fotn-fight.selected.saved {
+  border-color: rgba(255,200,0,0.7);
+}
+.pk-fotn-crown-icon {
+  font-size: 0.9rem; opacity: 0.4;
+  transition: opacity 0.15s;
+}
+.pk-fotn-fight.selected .pk-fotn-crown-icon { opacity: 1; }
+.pk-fotn-fight-name { font-weight: 500; }
+.pk-fotn-selected-lbl {
+  margin-top: 14px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem; color: rgba(255,200,0,0.75);
+  display: flex; align-items: center; gap: 6px;
+}
+.pk-fotn-crown { font-size: 1rem; }
+.pk-fotn-saved-tick { color: rgba(0,200,80,0.8); font-size: 0.85rem; }
+.pk-fotn-unsaved-dot { color: rgba(255,170,0,0.7); }
+
+/* ── Avg hype badge on events cards ── */
+.ev-hype-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.58rem; font-weight: 800;
+  color: rgba(255,200,0,0.8);
+  background: rgba(255,170,0,0.08);
+  border: 1px solid rgba(255,170,0,0.2);
+  border-radius: 20px; padding: 3px 9px;
+  white-space: nowrap;
+}
+
+/* light mode picks additions */
+body.light-mode .pk-pick-unsaved { color: rgba(180,80,0,0.9) !important; background: rgba(255,140,0,0.07) !important; border-color: rgba(200,100,0,0.25) !important; }
+body.light-mode .pk-hype-widget .pk-hype-label { color: rgba(0,0,0,0.25) !important; }
+body.light-mode .pk-hype-avg { color: rgba(0,0,0,0.35) !important; }
+body.light-mode .pk-fotn-fight { background: rgba(0,0,0,0.025); border-color: rgba(0,0,0,0.08); color: rgba(0,0,0,0.45); }
+body.light-mode .pk-fotn-fight:hover { border-color: rgba(180,120,0,0.3); }
+body.light-mode .pk-fotn-fight.selected { background: rgba(200,140,0,0.08); border-color: rgba(200,140,0,0.4); color: rgba(160,100,0,0.9); }
+body.light-mode .pk-fotn-hint { color: rgba(0,0,0,0.28) !important; }
+body.light-mode .pk-fotn-selected-lbl { color: rgba(160,100,0,0.8) !important; }
+body.light-mode .pk-fotn-section { border-top-color: rgba(0,0,0,0.07) !important; }
+body.light-mode .pk-save-btn.dirty { color: #fff !important; }
+body.light-mode .ev-hype-badge { color: rgba(140,80,0,0.85); background: rgba(200,130,0,0.07); border-color: rgba(180,110,0,0.2); }
 
 /* toast */
 .pk-toast {

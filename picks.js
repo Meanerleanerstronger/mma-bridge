@@ -1,27 +1,6 @@
 // ==============================================
-// MMA BRIDGE — FIGHT PICKS
-// Supabase table needed (run in SQL editor):
-//
-// CREATE TABLE IF NOT EXISTS public.picks (
-//   id         uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-//   user_id    uuid REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
-//   event_id   text NOT NULL,
-//   event_name text,
-//   fight_key  text NOT NULL,
-//   fighter_a  text NOT NULL,
-//   fighter_b  text NOT NULL,
-//   pick       text NOT NULL,
-//   method     text,
-//   created_at timestamptz DEFAULT now(),
-//   UNIQUE(user_id, event_id, fight_key)
-// );
-// ALTER TABLE public.picks ENABLE ROW LEVEL SECURITY;
-// CREATE POLICY "picks_select" ON public.picks FOR SELECT USING (true);
-// CREATE POLICY "picks_insert" ON public.picks FOR INSERT WITH CHECK (auth.uid() = user_id);
-// CREATE POLICY "picks_update" ON public.picks FOR UPDATE USING (auth.uid() = user_id);
-// CREATE POLICY "picks_delete" ON public.picks FOR DELETE USING (auth.uid() = user_id);
+// MMA BRIDGE — FIGHT PICKS (manual save + hype + FOTN)
 // ==============================================
-
 (async function () {
   'use strict';
 
@@ -31,7 +10,6 @@
   function getParam(k) { return new URLSearchParams(location.search).get(k) || ''; }
   function slugify(s) { return (s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''); }
 
-  // Parse "KO/TKO R2" → { base:"KO/TKO", round:"2" }
   function parseMethod(m) {
     if (!m) return { base: '', round: '' };
     const match = m.match(/^(.+?)\s*R(\d+)$/);
@@ -49,7 +27,11 @@
   const sb      = window._sb;
   const eventId = getParam('id');
 
-  // ── Get auth user — direct session read, no polling ──────────────
+  function apiBase() {
+    const local = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+    return local ? 'http://localhost:5001/api' : 'https://mmabridge-backend.onrender.com/api';
+  }
+
   async function getAuthUser() {
     if (!sb) return null;
     try {
@@ -58,26 +40,22 @@
     } catch { return null; }
   }
 
-  // ── Silhouette SVG ────────────────────────────
   const SILHOUETTE = `
     <svg class="pk-silhouette" viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg">
       <circle cx="40" cy="30" r="20" fill="rgba(255,255,255,0.07)"/>
       <path d="M4 105 C4 72 20 62 40 62 C60 62 76 72 76 105Z" fill="rgba(255,255,255,0.07)"/>
     </svg>`;
 
-  // ── Show toast ────────────────────────────────
   let toastTimer;
   function showToast(msg, type = 'ok') {
     toast.textContent = msg;
     toast.className = `pk-toast pk-toast-${type}`;
     toast.style.display = 'block';
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => { toast.style.display = 'none'; }, 2400);
+    toastTimer = setTimeout(() => { toast.style.display = 'none'; }, 2800);
   }
 
-  // ── Load event ────────────────────────────────
   if (!eventId) { root.innerHTML = `<div class="pk-error">No event specified.</div>`; return; }
-
   root.innerHTML = `<div class="pk-loading"><div class="pk-spinner"></div>Loading card…</div>`;
 
   const [eventsData, fightersData, user] = await Promise.all([
@@ -86,31 +64,20 @@
     getAuthUser(),
   ]);
 
-  // Build fighter lookup: slugified name → { img, record }
   const fighterDB = {};
   (Array.isArray(fightersData) ? fightersData : []).forEach(f => {
     if (f.id) fighterDB[f.id] = f;
     if (f.name) fighterDB[slugify(f.name)] = f;
   });
-
   function lookupFighter(name) {
     return fighterDB[slugify(name)] || fighterDB[name?.toLowerCase()] || null;
   }
-
-  function fighterImg(evImg, name) {
-    if (evImg) return evImg;
-    const fd = lookupFighter(name);
-    return fd?.img || '';
-  }
-
   function fighterRecord(name) {
     const fd = lookupFighter(name);
     if (!fd?.record) return '';
     const { wins = 0, losses = 0, draws = 0 } = fd.record;
     return `${wins}-${losses}${draws ? `-${draws}` : ''}`;
   }
-
-  // Parse max rounds from "5 Rds" / "3 Rds"
   function maxRounds(roundsStr) {
     const m = String(roundsStr || '').match(/(\d+)/);
     return m ? parseInt(m[1]) : 3;
@@ -122,9 +89,14 @@
   const isCompleted = event.status === 'completed';
   let myId = user?.id || null;
 
-  // ── Load user's existing picks ────────────────
-  let myPicks = {};
+  // ── State ─────────────────────────────────────
+  let myPicks    = {};   // confirmed DB state
+  let localPicks = {};   // pending local state (includes 'fotn' key)
+  let hypeAvg    = 0;
+  let hypeCount  = 0;
+  let localHype  = 0;   // user's hype rating (0 = not rated)
 
+  // ── Load picks from DB ────────────────────────
   async function loadPicks() {
     if (!myId || !sb) return;
     try {
@@ -138,12 +110,43 @@
         const { base, round } = parseMethod(p.method);
         myPicks[p.fight_key] = { pick: p.pick, method: p.method, base, round };
       });
-    } catch {}
+    } catch (e) { console.error('loadPicks:', e); }
+    localPicks = {};
+    Object.entries(myPicks).forEach(([k, v]) => {
+      localPicks[k] = { pick: v.pick, base: v.base || '', round: v.round || '' };
+    });
   }
 
   await loadPicks();
 
-  // ── Load head-to-head challenge ───────────────
+  // ── Load community hype avg from backend ──────
+  async function loadEventExtras() {
+    try {
+      const res = await fetch(`${apiBase()}/ratings/${encodeURIComponent(eventId)}`);
+      if (res.ok) {
+        const d = await res.json();
+        hypeAvg   = parseFloat(d.avg_hype || 0);
+        hypeCount = parseInt(d.total_ratings || 0);
+      }
+    } catch {}
+  }
+
+  // ── Save hype rating (instant) ────────────────
+  async function saveHype(val) {
+    localHype = val;
+    updateHypeWidget();
+    try {
+      await fetch(`${apiBase()}/ratings`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ event_id: eventId, event_name: event.name || '', hype_rating: val, fotn_prediction: null }),
+      });
+      await loadEventExtras();
+      updateHypeWidget();
+    } catch {}
+  }
+
+  // ── Challenge ──────────────────────────────────
   let challenge    = null;
   let oppPicks     = {};
   let oppName      = '';
@@ -160,76 +163,164 @@
         .limit(1);
       if (!data?.length) return;
       challenge = data[0];
-
-      const oppId = challenge.challenger_id === myId
-        ? challenge.opponent_id
-        : challenge.challenger_id;
-
-      const { data: prof } = await sb.from('profiles')
-        .select('display_name')
-        .eq('id', oppId)
-        .single();
+      const oppId = challenge.challenger_id === myId ? challenge.opponent_id : challenge.challenger_id;
+      const { data: prof } = await sb.from('profiles').select('display_name').eq('id', oppId).single();
       oppName = prof?.display_name || 'Opponent';
-
-      const { data: oppData } = await sb.from('picks')
-        .select('fight_key, pick, method')
-        .eq('user_id', oppId)
-        .eq('event_id', eventId);
+      const { data: oppData } = await sb.from('picks').select('fight_key, pick, method').eq('user_id', oppId).eq('event_id', eventId);
       oppPicks = {};
-      (oppData || []).forEach(p => {
-        oppPicks[p.fight_key] = { pick: p.pick };
-      });
+      (oppData || []).forEach(p => { oppPicks[p.fight_key] = { pick: p.pick }; });
       oppPickCount = Object.keys(oppPicks).length;
-
-      // Mark challenge active when opponent first opens it
       if (challenge.opponent_id === myId && challenge.status === 'pending') {
         await sb.from('challenges').update({ status: 'active' }).eq('id', challenge.id);
       }
     } catch {}
   }
 
-  await loadChallenge();
+  await Promise.all([loadChallenge(), loadEventExtras()]);
 
-  // ── Save a single pick ────────────────────────
-  async function savePick(fightKey, fighterA, fighterB, pick, methodBase, round) {
-    if (!myId || !sb) return;
-    const combined = combineMethod(methodBase, round);
-    try {
-      await sb.from('picks').upsert({
-        user_id: myId, event_id: eventId,
-        event_name: event.name || '', fight_key: fightKey,
-        fighter_a: fighterA, fighter_b: fighterB,
-        pick, method: combined || null,
-      }, { onConflict: 'user_id,event_id,fight_key' });
-      myPicks[fightKey] = { pick, method: combined, base: methodBase || '', round: round || '' };
-      updateSaveBar();
-      showToast('Pick saved ✓');
-    } catch { showToast('Could not save pick', 'err'); }
+  // ── Get fight data from key ───────────────────
+  function getFightData(key) {
+    if (key === 'fotn') return null;
+    const dash = key.lastIndexOf('-');
+    const section = key.slice(0, dash);
+    const idx = parseInt(key.slice(dash + 1));
+    const arr = section === 'main' ? (event.mainCard || [])
+      : section === 'prelims' ? (event.prelims || [])
+      : (event.earlyPrelims || []);
+    return arr[idx] || null;
   }
 
-  // ── Update save bar ───────────────────────────
+  // Count real picks (exclude fotn key)
+  function pickCount() { return Object.keys(localPicks).filter(k => k !== 'fotn').length; }
+  function savedPickCount() { return Object.keys(myPicks).filter(k => k !== 'fotn').length; }
+
+  // ── Unsaved changes? ──────────────────────────
+  function hasUnsavedChanges() {
+    const lKeys = Object.keys(localPicks);
+    const mKeys = Object.keys(myPicks);
+    if (lKeys.length !== mKeys.length) return true;
+    for (const k of lKeys) {
+      const l = localPicks[k], m = myPicks[k];
+      if (!m || l.pick !== m.pick || (l.base||'') !== (m.base||'') || (l.round||'') !== (m.round||'')) return true;
+    }
+    return false;
+  }
+
+  // ── Bulk save all picks to DB ─────────────────
+  async function saveAllPicks() {
+    if (!myId || !sb) { showToast('Sign in to save picks', 'err'); return; }
+    const btn = document.getElementById('pkSaveBtn');
+    if (btn) { btn.disabled = true; btn.textContent = 'Saving…'; }
+    try {
+      const toDelete = Object.keys(myPicks).filter(k => !localPicks[k]);
+      if (toDelete.length > 0) {
+        await sb.from('picks').delete()
+          .eq('user_id', myId).eq('event_id', eventId)
+          .in('fight_key', toDelete);
+      }
+      const toSave = Object.entries(localPicks).map(([fightKey, p]) => {
+        const fd = getFightData(fightKey);
+        return {
+          user_id: myId, event_id: eventId,
+          event_name: event.name || '',
+          fight_key: fightKey,
+          fighter_a: fd?.a || fightKey,
+          fighter_b: fd?.b || fightKey,
+          pick: p.pick,
+          method: combineMethod(p.base, p.round) || null,
+        };
+      });
+      if (toSave.length > 0) {
+        const { error } = await sb.from('picks').upsert(toSave, { onConflict: 'user_id,event_id,fight_key' });
+        if (error) throw error;
+      }
+      myPicks = {};
+      Object.entries(localPicks).forEach(([k, v]) => {
+        myPicks[k] = { pick: v.pick, base: v.base, round: v.round, method: combineMethod(v.base, v.round) };
+      });
+      const n = pickCount();
+      showToast(`${n} pick${n !== 1 ? 's' : ''} saved ✓`);
+      updateSaveBar();
+      updateFotnSection();
+    } catch (e) {
+      console.error('saveAllPicks:', e);
+      showToast('Could not save — check connection', 'err');
+    } finally {
+      if (btn) btn.disabled = false;
+    }
+  }
+
+  // ── Save bar ──────────────────────────────────
   function updateSaveBar() {
-    const totalFights = (event.mainCard||[]).length + (event.prelims||[]).length + (event.earlyPrelims||[]).length;
-    const pickedCount = Object.keys(myPicks).length;
+    const total = (event.mainCard||[]).length + (event.prelims||[]).length + (event.earlyPrelims||[]).length;
+    const picked = pickCount();
     const bar = document.getElementById('pkSaveBar');
     if (!bar) return;
     const info = bar.querySelector('.pk-save-info');
     const btn  = bar.querySelector('.pk-save-btn');
     const pBar = root.querySelector('.pk-progress-bar');
     const pLbl = root.querySelector('.pk-progress-label');
-    if (info) info.innerHTML = `<strong>${pickedCount}</strong> of <strong>${totalFights}</strong> fights picked`;
-    if (pBar) pBar.style.width = `${totalFights ? Math.round((pickedCount/totalFights)*100) : 0}%`;
-    if (pLbl) pLbl.textContent = `${pickedCount} of ${totalFights} fights picked`;
-    if (btn && pickedCount > 0) {
-      btn.classList.add('saved');
-      btn.textContent = `✓ ${pickedCount} Picks Saved`;
-    } else if (btn) {
-      btn.classList.remove('saved');
-      btn.textContent = 'Save Picks';
+    if (info) info.innerHTML = `<strong>${picked}</strong> of <strong>${total}</strong> fights picked`;
+    if (pBar) pBar.style.width = `${total ? Math.round((picked/total)*100) : 0}%`;
+    if (pLbl) pLbl.textContent = `${picked} of ${total} fights picked`;
+    if (btn) {
+      const dirty = hasUnsavedChanges();
+      if (dirty && picked > 0) {
+        btn.classList.remove('saved'); btn.classList.add('dirty');
+        btn.textContent = `Save ${picked} Pick${picked !== 1 ? 's' : ''}`;
+      } else if (!dirty && picked > 0) {
+        btn.classList.add('saved'); btn.classList.remove('dirty');
+        btn.textContent = `✓ ${picked} Picks Saved`;
+      } else {
+        btn.classList.remove('saved', 'dirty');
+        btn.textContent = 'Save Picks';
+      }
+      btn.disabled = false;
     }
   }
 
-  // ── Compute score if completed ────────────────
+  // ── Update hype widget ────────────────────────
+  function updateHypeWidget() {
+    const widget = document.getElementById('pkHypeWidget');
+    if (!widget) return;
+    const flames = widget.querySelectorAll('.pk-hype-flame');
+    flames.forEach(f => f.classList.toggle('lit', +f.dataset.val <= localHype));
+    const avgEl = widget.querySelector('.pk-hype-avg');
+    if (avgEl) {
+      if (hypeCount > 0) {
+        avgEl.textContent = `${hypeAvg.toFixed(1)} avg · ${hypeCount} rating${hypeCount !== 1 ? 's' : ''}`;
+      } else {
+        avgEl.textContent = 'Be the first to rate';
+      }
+    }
+  }
+
+  // ── Update FOTN section ───────────────────────
+  function updateFotnSection() {
+    const section = document.getElementById('pkFotnSection');
+    if (!section) return;
+    const savedFotn = myPicks['fotn']?.pick || null;
+    const localFotn = localPicks['fotn']?.pick || null;
+    section.querySelectorAll('.pk-fotn-fight').forEach(el => {
+      const name = el.dataset.fight;
+      const isSelected = name === localFotn;
+      const isSaved = name === savedFotn;
+      el.classList.toggle('selected', isSelected);
+      el.classList.toggle('saved', isSaved && isSelected);
+    });
+    const lbl = section.querySelector('.pk-fotn-selected-lbl');
+    if (lbl) {
+      if (localFotn) {
+        const isSaved = localFotn === savedFotn;
+        lbl.innerHTML = `<span class="pk-fotn-crown">🔥</span> FOTN pick: <strong>${esc(localFotn)}</strong>${isSaved ? ' <span class="pk-fotn-saved-tick">✓</span>' : ' <span class="pk-fotn-unsaved-dot">•</span>'}`;
+        lbl.style.display = '';
+      } else {
+        lbl.style.display = 'none';
+      }
+    }
+  }
+
+  // ── Score if completed ────────────────────────
   function computeScore() {
     const all = [
       ...(event.mainCard || []),
@@ -253,7 +344,7 @@
     return { correct, total };
   }
 
-  // ── Fighter photo — 3-level fallback chain ────
+  // ── Fighter photo ─────────────────────────────
   function fighterPhoto(evImg, name, side) {
     const fd = lookupFighter(name);
     const primary  = evImg || fd?.img || '';
@@ -269,17 +360,18 @@
   // ── Build one fight card ──────────────────────
   function buildFight(f, sectionKey, idx, isMain) {
     const key    = `${sectionKey}-${idx}`;
-    const saved  = myPicks[key] || {};
+    const saved  = localPicks[key] || {};
     const opp    = oppPicks[key] || {};
     const oppPickedA = challenge && opp.pick === f.a;
     const oppPickedB = challenge && opp.pick === f.b;
     const pickedA = saved.pick === f.a;
     const pickedB = saved.pick === f.b;
+    const isSavedA = myPicks[key]?.pick === f.a;
+    const isSavedB = myPicks[key]?.pick === f.b;
     const savedBase  = saved.base  || '';
     const savedRound = saved.round || '';
     const rounds = maxRounds(f.rounds);
 
-    // Completed: show result
     const winner = f.winner || null;
     const resultA = isCompleted && winner ? (winner === f.a ? 'win' : 'loss') : '';
     const resultB = isCompleted && winner ? (winner === f.b ? 'win' : 'loss') : '';
@@ -301,68 +393,54 @@
     const roundCls   = savedBase === 'KO/TKO' ? 'ko' : 'sub';
     const roundBtns  = Array.from({length: rounds}, (_,i) => i+1).map(r => `
       <button class="pk-round-btn${savedRound === String(r) ? ` active ${roundCls}` : ''}"
-        data-round="${r}" data-key="${esc(key)}"
-        data-method-cls="${roundCls}">R${r}</button>
+        data-round="${r}" data-key="${esc(key)}" data-method-cls="${roundCls}">R${r}</button>
     `).join('');
 
-    const titleBadge = f.titleFight
-      ? `<div class="pk-title-badge">🏆 Title Fight</div>` : '';
-    const rankedBadge = f.ranked && !f.titleFight
-      ? `<div class="pk-ranked-badge">⭐ Ranked</div>` : '';
-
+    const titleBadge  = f.titleFight ? `<div class="pk-title-badge">🏆 Title Fight</div>` : '';
+    const rankedBadge = f.ranked && !f.titleFight ? `<div class="pk-ranked-badge">⭐ Ranked</div>` : '';
     const resultBadge = isCompleted && winner
       ? `<div class="pk-result-label">${esc(winner)} by ${esc(f.method || '—')}</div>` : '';
+
+    const pickLabelA = pickedA
+      ? `<div class="pk-pick-label${isSavedA ? '' : ' pk-pick-unsaved'}">Your pick${isSavedA ? ' ✓' : ' •'}</div>` : '';
+    const pickLabelB = pickedB
+      ? `<div class="pk-pick-label${isSavedB ? '' : ' pk-pick-unsaved'}">Your pick${isSavedB ? ' ✓' : ' •'}</div>` : '';
 
     return `
       <div class="pk-fight${isMain ? ' pk-fight-main' : ''}" data-key="${esc(key)}">
         ${titleBadge}${rankedBadge}
-
-        <!-- Weight / rounds meta -->
         ${(f.weight || f.rounds) ? `
         <div class="pk-fight-meta">
           ${f.weight ? `<span>${esc(f.weight)}</span>` : ''}
           ${f.weight && f.rounds ? `<span class="pk-fight-meta-dot">·</span>` : ''}
           ${f.rounds ? `<span>${esc(f.rounds)}</span>` : ''}
         </div>` : ''}
-
-        <!-- Fighters row -->
         <div class="pk-fight-fighters">
-          <!-- FIGHTER A -->
           <div class="pk-side pk-side-a${pickedA ? ' selected' : ''}${resultA ? ` result-${resultA}` : ''}${correctA ? ' correct' : ''}${wrongA ? ' wrong' : ''}"
                data-key="${esc(key)}" data-pick="${esc(f.a)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
-            <div class="pk-fighter-photo">
-              ${fighterPhoto(f.imgA || '', f.a, 'a')}
-            </div>
+            <div class="pk-fighter-photo">${fighterPhoto(f.imgA || '', f.a, 'a')}</div>
             <div class="pk-fighter-name pk-fighter-name-a">${esc(f.a)}</div>
             ${fighterRecord(f.a) ? `<div class="pk-record">${esc(fighterRecord(f.a))}</div>` : ''}
-            ${pickedA ? `<div class="pk-pick-label">Your pick ✓</div>` : ''}
+            ${pickLabelA}
             ${oppPickedA ? `<div class="pk-opp-label">${esc(oppName)} ✓</div>` : ''}
             ${correctA ? `<div class="pk-pick-result correct">✓ Correct</div>` : ''}
             ${wrongA   ? `<div class="pk-pick-result wrong">✗ Wrong</div>` : ''}
           </div>
-
-          <!-- VS -->
           <div class="pk-fight-vs">
             <div class="pk-vs">VS</div>
             ${resultBadge}
           </div>
-
-          <!-- FIGHTER B -->
           <div class="pk-side pk-side-b${pickedB ? ' selected' : ''}${resultB ? ` result-${resultB}` : ''}${correctB ? ' correct' : ''}${wrongB ? ' wrong' : ''}"
                data-key="${esc(key)}" data-pick="${esc(f.b)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
-            <div class="pk-fighter-photo">
-              ${fighterPhoto(f.imgB || '', f.b, 'b')}
-            </div>
+            <div class="pk-fighter-photo">${fighterPhoto(f.imgB || '', f.b, 'b')}</div>
             <div class="pk-fighter-name pk-fighter-name-b">${esc(f.b)}</div>
             ${fighterRecord(f.b) ? `<div class="pk-record">${esc(fighterRecord(f.b))}</div>` : ''}
-            ${pickedB ? `<div class="pk-pick-label">Your pick ✓</div>` : ''}
+            ${pickLabelB}
             ${oppPickedB ? `<div class="pk-opp-label">${esc(oppName)} ✓</div>` : ''}
             ${correctB ? `<div class="pk-pick-result correct">✓ Correct</div>` : ''}
             ${wrongB   ? `<div class="pk-pick-result wrong">✗ Wrong</div>` : ''}
           </div>
         </div>
-
-        <!-- Methods section — fully separate from fighter images -->
         ${!isCompleted ? `
         <div class="pk-methods-section">
           <div class="pk-method-label">Pick Method</div>
@@ -375,18 +453,12 @@
       </div>`;
   }
 
-  // ── Build section ──────────────────────────────
   function buildSection(title, fights, sectionKey, isMainCard) {
     if (!fights || !fights.length) return '';
     const cards = fights.map((f, i) => buildFight(f, sectionKey, i, isMainCard && i === 0)).join('');
-    return `
-      <div class="pk-section">
-        <div class="pk-section-label">${esc(title)}</div>
-        ${cards}
-      </div>`;
+    return `<div class="pk-section"><div class="pk-section-label">${esc(title)}</div>${cards}</div>`;
   }
 
-  // ── Score badge ───────────────────────────────
   function scoreBadge() {
     if (!isCompleted) return '';
     const { correct, total } = computeScore();
@@ -396,23 +468,70 @@
     return `<div class="pk-score pk-score-${cls}">${correct}/${total} correct <span>${pct}%</span></div>`;
   }
 
-  // ── Render page ───────────────────────────────
-  function render() {
-    const mainSection    = buildSection('Main Card',     event.mainCard,     'main',   true);
-    const prelimSection  = buildSection('Prelims',       event.prelims,      'prelims',false);
-    const earlySection   = buildSection('Early Prelims', event.earlyPrelims, 'early',  false);
+  // ── Hype widget HTML ──────────────────────────
+  function hypeWidgetHtml() {
+    if (isCompleted) return '';
+    const avgStr = hypeCount > 0 ? `${hypeAvg.toFixed(1)} avg · ${hypeCount} rating${hypeCount !== 1 ? 's' : ''}` : 'Be the first to rate';
+    const flames = [1,2,3,4,5].map(n =>
+      `<button class="pk-hype-flame${localHype >= n ? ' lit' : ''}" data-val="${n}" type="button" title="Rate ${n}/5">🔥</button>`
+    ).join('');
+    return `
+      <div class="pk-hype-widget" id="pkHypeWidget">
+        <div class="pk-hype-label">Event Hype</div>
+        <div class="pk-hype-flames">${flames}</div>
+        <div class="pk-hype-avg">${avgStr}</div>
+      </div>`;
+  }
 
-    const pickedCount = Object.keys(myPicks).length;
-    const totalFights = (event.mainCard||[]).length + (event.prelims||[]).length + (event.earlyPrelims||[]).length;
+  // ── FOTN section HTML ─────────────────────────
+  function fotnSectionHtml() {
+    if (isCompleted) return '';
+    const allFights = [
+      ...(event.mainCard || []).map((f, i) => ({ name: `${f.a} vs ${f.b}`, key: `main-${i}` })),
+      ...(event.prelims || []).map((f, i) => ({ name: `${f.a} vs ${f.b}`, key: `prelims-${i}` })),
+    ];
+    if (!allFights.length) return '';
+    const localFotn = localPicks['fotn']?.pick || null;
+    const savedFotn = myPicks['fotn']?.pick || null;
+    const fotnCards = allFights.map(f => {
+      const isSelected = f.name === localFotn;
+      const isSaved = f.name === savedFotn;
+      return `<button class="pk-fotn-fight${isSelected ? ' selected' : ''}${isSelected && isSaved ? ' saved' : ''}" data-fight="${esc(f.name)}" type="button">
+        <span class="pk-fotn-crown-icon">🔥</span>
+        <span class="pk-fotn-fight-name">${esc(f.name)}</span>
+      </button>`;
+    }).join('');
+    return `
+      <div class="pk-fotn-section" id="pkFotnSection">
+        <div class="pk-section-label pk-fotn-title">
+          <span>🔥 Fight of the Night Prediction</span>
+          <span class="pk-fotn-hint">Pick a fight from the main card. Correct = bonus points.</span>
+        </div>
+        <div class="pk-fotn-fights">${fotnCards}</div>
+        <div class="pk-fotn-selected-lbl" style="display:none"></div>
+      </div>`;
+  }
+
+  // ── Render ────────────────────────────────────
+  function render() {
+    const mainSection   = buildSection('Main Card',     event.mainCard,     'main',    true);
+    const prelimSection = buildSection('Prelims',       event.prelims,      'prelims', false);
+    const earlySection  = buildSection('Early Prelims', event.earlyPrelims, 'early',   false);
+
+    const picked = pickCount();
+    const total  = (event.mainCard||[]).length + (event.prelims||[]).length + (event.earlyPrelims||[]).length;
+    const dirty  = hasUnsavedChanges();
+    const hasPoster = !!event.poster;
 
     root.innerHTML = `
+      ${hasPoster ? `<div class="pk-poster-bg" style="--poster:url('${esc(event.poster)}')"></div>` : ''}
       <div class="pk-header">
         <a href="events.html?id=${encodeURIComponent(eventId)}" class="pk-back">
           <svg width="9" height="14" viewBox="0 0 9 14" fill="none"><polyline points="7,1 2,7 7,13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Back to Event
+          Back
         </a>
         <div class="pk-header-info">
-          <div class="pk-event-type">${esc(event.type || 'UFC')}</div>
+          <div class="pk-event-type">${esc(event.type || 'UFC')} · Pick Your Fights</div>
           <h1 class="pk-event-name">${esc(event.name || '')}</h1>
           <div class="pk-event-meta">
             ${event.date ? `<span>${esc(event.date)}</span>` : ''}
@@ -421,11 +540,12 @@
         </div>
         <div class="pk-header-right">
           ${scoreBadge()}
+          ${hypeWidgetHtml()}
           ${!isCompleted && myId ? `
             <div class="pk-progress-wrap">
-              <div class="pk-progress-bar" style="width:${totalFights ? Math.round((pickedCount/totalFights)*100) : 0}%"></div>
+              <div class="pk-progress-bar" style="width:${total ? Math.round((picked/total)*100) : 0}%"></div>
             </div>
-            <div class="pk-progress-label">${pickedCount} of ${totalFights} fights picked</div>
+            <div class="pk-progress-label">${picked} of ${total} picked</div>
           ` : ''}
         </div>
       </div>
@@ -433,63 +553,91 @@
       ${!myId ? `
         <div class="pk-signin-banner">
           <span>Sign in to save your picks and track your record</span>
-          <a href="auth.html" class="pk-signin-link">Sign In</a>
+          <a href="auth.html" class="pk-signin-link">Sign In →</a>
         </div>` : ''}
 
-      ${isCompleted ? `<div class="pk-completed-banner">This event has completed — showing your pick results</div>` : ''}
+      ${isCompleted ? `<div class="pk-completed-banner">Event complete — showing your results</div>` : ''}
 
       ${challenge ? `
       <div class="pk-challenge-banner">
         <div class="pk-ch-sword">⚔</div>
         <div class="pk-ch-info">
           <div class="pk-ch-vs">Head-to-Head vs <strong>${esc(oppName)}</strong></div>
-          <div class="pk-ch-tally">You: ${pickedCount} picks &nbsp;·&nbsp; ${esc(oppName)}: ${oppPickCount} picks</div>
+          <div class="pk-ch-tally">You: ${picked} picks &nbsp;·&nbsp; ${esc(oppName)}: ${oppPickCount} picks</div>
         </div>
       </div>` : ''}
 
       <div class="pk-body">
         ${mainSection}${prelimSection}${earlySection}
+        ${fotnSectionHtml()}
       </div>`;
 
-    // Sticky save bar (only for upcoming + logged-in users)
-    document.getElementById('pkSaveBar')?.remove(); // clear any prior instance
+    // Sticky save bar
+    document.getElementById('pkSaveBar')?.remove();
     if (!isCompleted && myId) {
       const saveBar = document.createElement('div');
       saveBar.id = 'pkSaveBar';
       saveBar.className = 'pk-save-bar';
-      const isSaved = pickedCount > 0;
+      let btnLabel = 'Save Picks', btnCls = '';
+      if (dirty && picked > 0) { btnLabel = `Save ${picked} Pick${picked !== 1 ? 's' : ''}`; btnCls = 'dirty'; }
+      else if (!dirty && picked > 0) { btnLabel = `✓ ${picked} Picks Saved`; btnCls = 'saved'; }
       saveBar.innerHTML = `
-        <div class="pk-save-info"><strong>${pickedCount}</strong> of <strong>${totalFights}</strong> fights picked</div>
-        <button class="pk-save-btn${isSaved ? ' saved' : ''}" id="pkSaveBtn">
-          ${isSaved ? `✓ ${pickedCount} Picks Saved` : 'Save Picks'}
-        </button>`;
+        <div class="pk-save-info"><strong>${picked}</strong> of <strong>${total}</strong> fights picked</div>
+        <button class="pk-save-btn${btnCls ? ' '+btnCls : ''}" id="pkSaveBtn">${btnLabel}</button>`;
       document.body.appendChild(saveBar);
-
-      document.getElementById('pkSaveBtn').addEventListener('click', () => {
-        showToast('All picks saved ✓');
-        setTimeout(() => { window.location.href = `events.html?id=${encodeURIComponent(eventId)}`; }, 800);
-      });
+      document.getElementById('pkSaveBtn').addEventListener('click', saveAllPicks);
     }
 
     bindInteractions();
+    bindHype();
+    bindFotn();
+    updateFotnSection();
   }
 
-  // ── Bind click interactions ───────────────────
+  // ── Bind hype flames ──────────────────────────
+  function bindHype() {
+    const widget = document.getElementById('pkHypeWidget');
+    if (!widget) return;
+    const flames = widget.querySelectorAll('.pk-hype-flame');
+    flames.forEach(f => {
+      f.addEventListener('mouseenter', () => flames.forEach(x => x.classList.toggle('lit', +x.dataset.val <= +f.dataset.val)));
+      f.addEventListener('mouseleave', () => flames.forEach(x => x.classList.toggle('lit', +x.dataset.val <= localHype)));
+      f.addEventListener('click', () => saveHype(+f.dataset.val));
+    });
+  }
+
+  // ── Bind FOTN section ─────────────────────────
+  function bindFotn() {
+    const section = document.getElementById('pkFotnSection');
+    if (!section) return;
+    section.querySelectorAll('.pk-fotn-fight').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const name = btn.dataset.fight;
+        const alreadySelected = localPicks['fotn']?.pick === name;
+        if (alreadySelected) {
+          delete localPicks['fotn'];
+        } else {
+          localPicks['fotn'] = { pick: name, base: '', round: '' };
+        }
+        updateFotnSection();
+        updateSaveBar();
+      });
+    });
+  }
+
+  // ── Bind fighter/method/round clicks ──────────
   function bindInteractions() {
     if (isCompleted) return;
 
-    // Fighter side clicks
     root.querySelectorAll('.pk-side').forEach(side => {
-      const activate = async () => {
-        const key   = side.dataset.key;
-        const pick  = side.dataset.pick;
-        const fa    = side.dataset.fa;
-        const fb    = side.dataset.fb;
+      const activate = () => {
+        const key  = side.dataset.key;
+        const pick = side.dataset.pick;
         const fight = root.querySelector(`.pk-fight[data-key="${key}"]`);
         if (!fight) return;
+        if (!myId) { showToast('Sign in to save picks', 'err'); return; }
 
         const wasSelected = side.classList.contains('selected');
-
         fight.querySelectorAll('.pk-side').forEach(s => {
           s.classList.remove('selected');
           s.querySelector('.pk-pick-label')?.remove();
@@ -498,102 +646,81 @@
         if (!wasSelected) {
           side.classList.add('selected');
           const lbl = document.createElement('div');
-          lbl.className = 'pk-pick-label';
-          lbl.textContent = 'Your pick';
+          lbl.className = 'pk-pick-label pk-pick-unsaved';
+          lbl.textContent = 'Your pick •';
           side.appendChild(lbl);
-
-          if (!myId) { showToast('Sign in to save picks', 'err'); return; }
-
-          const saved = myPicks[key] || {};
-          await savePick(key, fa, fb, pick, saved.base || null, saved.round || null);
+          const cur = localPicks[key] || {};
+          localPicks[key] = { pick, base: cur.base || '', round: cur.round || '' };
         } else {
-          if (myId && sb) {
-            try {
-              await sb.from('picks').delete()
-                .eq('user_id', myId).eq('event_id', eventId).eq('fight_key', key);
-              delete myPicks[key];
-              updateSaveBar();
-            } catch {}
-          }
+          delete localPicks[key];
+          fight.querySelectorAll('.pk-method-btn').forEach(b => b.classList.remove('active', 'ko', 'sub', 'dec'));
+          const roundRow = fight.querySelector(`[id^="pkRounds-"]`);
+          if (roundRow) roundRow.style.display = 'none';
         }
+        updateSaveBar();
       };
-
       side.addEventListener('click', activate);
       side.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); } });
     });
 
-    // Method buttons
     root.querySelectorAll('.pk-method-btn').forEach(btn => {
-      btn.addEventListener('click', async e => {
+      btn.addEventListener('click', e => {
         e.stopPropagation();
         const key    = btn.dataset.key;
         const method = btn.dataset.method;
         const fight  = root.querySelector(`.pk-fight[data-key="${key}"]`);
         if (!fight) return;
-
-        const saved = myPicks[key];
-        if (!saved) { showToast('Pick a fighter first', 'err'); return; }
+        if (!localPicks[key]) { showToast('Pick a fighter first', 'err'); return; }
 
         const alreadyActive = btn.classList.contains('active');
         const methodCls = method === 'KO/TKO' ? 'ko' : method === 'SUB' ? 'sub' : 'dec';
         const newBase   = alreadyActive ? '' : method;
-        const newRound  = alreadyActive ? '' : (saved.round || '');
         const showRound = !alreadyActive && (method === 'KO/TKO' || method === 'SUB');
+        const newRound  = showRound ? (localPicks[key].round || '') : '';
 
-        // Clear all method btns, re-apply active to clicked one
         fight.querySelectorAll('.pk-method-btn').forEach(b => b.classList.remove('active', 'ko', 'sub', 'dec'));
         if (!alreadyActive) btn.classList.add('active', methodCls);
 
-        // Show/hide round row
         const roundRow = document.getElementById(`pkRounds-${key}`);
         if (roundRow) {
           roundRow.style.display = showRound ? '' : 'none';
           fight.querySelectorAll('.pk-round-btn').forEach(rb => {
             rb.classList.remove('active', 'ko', 'sub');
-            if (showRound && rb.dataset.round === saved.round) rb.classList.add('active', methodCls);
+            if (showRound && rb.dataset.round === localPicks[key].round) rb.classList.add('active', methodCls);
           });
         }
-
-        const fa = fight.querySelector('.pk-side-a')?.dataset?.fa || '';
-        const fb = fight.querySelector('.pk-side-a')?.dataset?.fb || '';
-        await savePick(key, fa, fb, saved.pick, newBase || null, showRound ? newRound : null);
+        localPicks[key] = { ...localPicks[key], base: newBase, round: showRound ? newRound : '' };
+        updateSaveBar();
       });
     });
 
-    // Round buttons
     root.querySelectorAll('.pk-round-btn').forEach(btn => {
-      btn.addEventListener('click', async e => {
+      btn.addEventListener('click', e => {
         e.stopPropagation();
         const key   = btn.dataset.key;
         const round = btn.dataset.round;
         const fight = root.querySelector(`.pk-fight[data-key="${key}"]`);
         if (!fight) return;
-
-        const saved = myPicks[key];
-        if (!saved || !saved.base) { showToast('Pick a method first', 'err'); return; }
+        if (!localPicks[key]?.base) { showToast('Pick a method first', 'err'); return; }
 
         const alreadyActive = btn.classList.contains('active');
-        const methodCls = saved.base === 'KO/TKO' ? 'ko' : 'sub';
-
+        const methodCls = localPicks[key].base === 'KO/TKO' ? 'ko' : 'sub';
         fight.querySelectorAll('.pk-round-btn').forEach(rb => rb.classList.remove('active','ko','sub'));
-
         const newRound = alreadyActive ? '' : round;
         if (!alreadyActive) btn.classList.add('active', methodCls);
-
-        const fa = fight.querySelector('.pk-side-a')?.dataset?.fa || '';
-        const fb = fight.querySelector('.pk-side-a')?.dataset?.fb || '';
-        await savePick(key, fa, fb, saved.pick, saved.base, newRound || null);
+        localPicks[key] = { ...localPicks[key], round: newRound };
+        updateSaveBar();
       });
     });
   }
 
   render();
 
-  // ── Auth late-arrival: re-load picks if user signs in after initial render ──
+  // ── Auth late-arrival ─────────────────────────
   if (sb && !isCompleted) {
-    sb.auth.onAuthStateChange(async (event, session) => {
+    sb.auth.onAuthStateChange(async (ev, session) => {
       const uid = session?.user?.id;
-      if ((event === 'SIGNED_IN' || event === 'INITIAL_SESSION') && uid && uid !== myId) {
+      if ((ev === 'SIGNED_IN' || ev === 'INITIAL_SESSION') && uid && uid !== myId) {
         myId = uid;
         await loadPicks();
         await loadChallenge();

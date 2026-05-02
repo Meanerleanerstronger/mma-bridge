@@ -12,7 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MMA Bridge | Sign In</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Pacifico&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=2.8" />
+  <link rel="stylesheet" href="style.css?v=3.0" />
   <style>
     body {
       background: #060608;
@@ -672,6 +672,35 @@
 
       // ── PASSWORD_RECOVERY event from auth.js ──
       window.addEventListener('auth:passwordRecovery', showReset);
+
+      // ── Direct check: if already signed in, handle profile setup or redirect ──
+      // This bypasses the event-timing race condition where auth:needsSetup
+      // could fire before listeners are registered.
+      (async function() {
+        const sb = window._sb;
+        if (!sb) return;
+        try {
+          const { data: { session } } = await sb.auth.getSession();
+          if (!session?.user) return;
+          // User is already signed in — check if profile is complete
+          const { data: prof } = await sb.from('profiles')
+            .select('id, display_name')
+            .eq('id', session.user.id)
+            .maybeSingle();
+          const emailPfx = (session.user.email || '').split('@')[0].toLowerCase();
+          const dn = (prof?.display_name || '').trim();
+          const needsSetup = !dn || dn.toLowerCase() === emailPfx;
+          if (needsSetup) {
+            const meta = session.user.user_metadata || {};
+            showSetup(meta.full_name || meta.name || emailPfx || '');
+          } else {
+            // Profile is good — redirect away from auth page
+            const returnTo = sessionStorage.getItem('auth_return_to') || 'index.html';
+            sessionStorage.removeItem('auth_return_to');
+            location.replace(returnTo);
+          }
+        } catch {}
+      })();
     })();
   </script>
   <script src="chat.js?v=2.1"></script>

@@ -238,6 +238,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           </div>
           <div class="ev-sum-right">
             ${countdownHtml}
+            ${upcoming ? `<span class="ev-hype-badge" id="ehype-${esc(id)}"></span>` : ''}
             <span class="view-chip">VIEW</span>
             <span class="ev-chev">▾</span>
           </div>
@@ -350,13 +351,16 @@ document.addEventListener('DOMContentLoaded', async () => {
       const lblEl     = document.getElementById(`hlbl-${eventId}`);
       let selected = 0;
 
+      const summaryBadge = document.getElementById(`ehype-${eventId}`);
       fetch(`${base}/ratings/${encodeURIComponent(eventId)}`)
         .then(r => r.ok ? r.json() : null)
         .then(d => {
           if (d?.avg_hype) {
             avgEl.textContent = `★ ${d.avg_hype} · ${d.total_ratings} vote${d.total_ratings!==1?'s':''}`;
+            if (summaryBadge) summaryBadge.textContent = `🔥 ${d.avg_hype}`;
           } else {
             avgEl.textContent = 'Be first to rate!';
+            if (summaryBadge) summaryBadge.textContent = '';
           }
         }).catch(()=>{});
 
