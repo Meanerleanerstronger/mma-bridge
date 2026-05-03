@@ -832,5 +832,61 @@
         "date": "2022-07-23"
       }
     ]
+  },
+  "carlos-ulberg": {
+    "name": "Carlos Ulberg",
+    "nickname": "Black Jag",
+    "country": "New Zealand",
+    "flag": "🇳🇿",
+    "record": "14-1",
+    "division": "Light Heavyweight",
+    "stance": "Orthodox",
+    "height": "6'4\"",
+    "reach": "77\"",
+    "age": "35",
+    "champion": true,
+    "rank": 15,
+    "last5": [
+      {
+        "opponent": "Jiří Procházka",
+        "result": "W",
+        "method": "KO",
+        "round": "1",
+        "time": "3:45",
+        "event": "UFC 327"
+      },
+      {
+        "opponent": "Dominick Reyes",
+        "result": "W",
+        "method": "KO",
+        "round": "1",
+        "time": "1:12",
+        "event": "UFC Fight Night 260"
+      },
+      {
+        "opponent": "Jan Blachowicz",
+        "result": "W",
+        "method": "UD",
+        "round": "3",
+        "time": "5:00",
+        "event": "UFC Fight Night 255"
+      },
+      {
+        "opponent": "Volkan Oezdemir",
+        "result": "W",
+        "method": "UD",
+        "round": "3",
+        "time": "5:00",
+        "event": "UFC Fight Night 248"
+      },
+      {
+        "opponent": "Alonzo Menifield",
+        "result": "W",
+        "method": "KO",
+        "round": "1",
+        "time": "0:12",
+        "event": "UFC on ESPN 56"
+      }
+    ]
   }
 }
