@@ -5264,9 +5264,9 @@ body.light-mode .ev-picks-btn:hover { background: rgba(0,150,180,0.18) !importan
 .pk-back:hover { color: rgba(255,255,255,0.65); }
 .pk-event-type {
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.6rem; font-weight: 800;
+  font-size: 0.65rem; font-weight: 800;
   letter-spacing: 0.18em; text-transform: uppercase;
-  color: rgba(0,229,255,0.7); margin-bottom: 6px;
+  color: rgba(0,229,255,0.85); margin-bottom: 6px;
 }
 .pk-event-name {
   font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
@@ -5277,9 +5277,9 @@ body.light-mode .ev-picks-btn:hover { background: rgba(0,150,180,0.18) !importan
 .pk-event-meta {
   display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
   font-family: 'Inter', sans-serif;
-  font-size: 0.8rem; color: rgba(255,255,255,0.4);
+  font-size: 0.85rem; color: rgba(255,255,255,0.65);
 }
-.pk-meta-dot { color: rgba(255,255,255,0.18); }
+.pk-meta-dot { color: rgba(255,255,255,0.25); }
 .pk-header-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; padding-top: 4px; }
 
 /* score */
@@ -5330,11 +5330,12 @@ body.light-mode .ev-picks-btn:hover { background: rgba(0,150,180,0.18) !importan
 .pk-signin-link:hover { background: rgba(255,200,0,0.2); }
 
 .pk-completed-banner {
-  text-align: center; padding: 10px 20px;
-  font-family: 'Inter', sans-serif; font-size: 0.78rem;
-  color: rgba(255,255,255,0.3);
-  background: rgba(255,255,255,0.02);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  text-align: center; padding: 14px 20px;
+  font-family: 'Montserrat', sans-serif; font-size: 0.65rem; font-weight: 800;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(0,229,255,0.75);
+  background: rgba(0,229,255,0.04);
+  border-bottom: 1px solid rgba(0,229,255,0.12);
 }
 
 /* ── Body ── */
@@ -5348,11 +5349,11 @@ body.light-mode .ev-picks-btn:hover { background: rgba(0,150,180,0.18) !importan
 .pk-section { display: flex; flex-direction: column; gap: 20px; }
 .pk-section-label {
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.6rem; font-weight: 800;
+  font-size: 0.7rem; font-weight: 800;
   letter-spacing: 0.2em; text-transform: uppercase;
-  color: rgba(255,255,255,0.22);
-  padding-bottom: 10px;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.55);
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
 /* ── Fight card ── */
@@ -5374,20 +5375,21 @@ body.light-mode .ev-picks-btn:hover { background: rgba(0,150,180,0.18) !importan
 }
 .pk-title-badge {
   position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-  background: linear-gradient(135deg, rgba(200,168,75,0.25), rgba(200,168,75,0.12));
-  border: 1px solid rgba(200,168,75,0.4); border-top: none;
+  background: linear-gradient(135deg, rgba(200,168,75,0.22), rgba(200,168,75,0.1));
+  border: 1px solid rgba(200,168,75,0.45); border-top: none;
   border-radius: 0 0 8px 8px;
-  font-family: 'Montserrat', sans-serif; font-size: 0.58rem; font-weight: 800;
-  letter-spacing: 0.12em; text-transform: uppercase; color: rgba(200,168,75,0.9);
-  padding: 4px 14px; z-index: 2;
+  font-family: 'Montserrat', sans-serif; font-size: 0.6rem; font-weight: 800;
+  letter-spacing: 0.14em; text-transform: uppercase; color: rgba(220,188,100,0.95);
+  padding: 5px 16px; z-index: 2;
+  text-shadow: 0 0 14px rgba(200,168,75,0.4);
 }
 .pk-ranked-badge {
   position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-top: none;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); border-top: none;
   border-radius: 0 0 8px 8px;
-  font-family: 'Montserrat', sans-serif; font-size: 0.55rem; font-weight: 800;
-  letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3);
-  padding: 4px 14px; z-index: 2;
+  font-family: 'Montserrat', sans-serif; font-size: 0.58rem; font-weight: 800;
+  letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.5);
+  padding: 5px 16px; z-index: 2;
 }
 
 /* fight meta row — weight/rounds */
@@ -5395,11 +5397,11 @@ body.light-mode .ev-picks-btn:hover { background: rgba(0,150,180,0.18) !importan
   display: flex; align-items: center; justify-content: center; gap: 10px;
   padding: 20px 24px 0;
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.6rem; font-weight: 800;
+  font-size: 0.68rem; font-weight: 800;
   letter-spacing: 0.16em; text-transform: uppercase;
-  color: rgba(255,255,255,0.22);
+  color: rgba(255,255,255,0.5);
 }
-.pk-fight-meta-dot { color: rgba(255,255,255,0.1); }
+.pk-fight-meta-dot { color: rgba(255,255,255,0.2); }
 
 /* fighters row — full width, two sides with VS centre */
 .pk-fight-fighters {
@@ -5429,20 +5431,36 @@ body.light-mode .ev-picks-btn:hover { background: rgba(0,150,180,0.18) !importan
 .pk-side-b { border-radius: 0; }
 
 /* result states */
-.pk-side.result-win  { background: rgba(0,200,80,0.06); }
-.pk-side.result-loss { background: rgba(0,0,0,0.1); opacity: 0.65; }
-.pk-side.correct     { background: rgba(0,200,80,0.1) !important; }
-.pk-side.correct::after { content: ''; position: absolute; inset: 0; border: 2px solid rgba(0,200,80,0.45); border-radius: inherit; pointer-events: none; }
-.pk-side.wrong       { background: rgba(255,60,60,0.07) !important; opacity: 0.8; }
-.pk-side.wrong::after { content: ''; position: absolute; inset: 0; border: 2px solid rgba(255,60,60,0.35); border-radius: inherit; pointer-events: none; }
+.pk-side.result-win  { background: rgba(0,255,100,0.07); }
+.pk-side.result-loss { background: rgba(0,0,0,0.2) !important; opacity: 0.42; }
+.pk-side.correct     { background: rgba(0,255,100,0.1) !important; }
+.pk-side.correct::after { content: ''; position: absolute; inset: 0; border: 2px solid rgba(0,255,100,0.5); border-radius: inherit; pointer-events: none; }
+.pk-side.wrong       { background: rgba(255,60,60,0.06) !important; }
+.pk-side.wrong::after { content: ''; position: absolute; inset: 0; border: 1px solid rgba(255,60,60,0.25); border-radius: inherit; pointer-events: none; }
 
 /* fighter photo */
 .pk-fighter-photo {
   width: 100%; max-width: 200px;
   flex: 1; display: flex; align-items: flex-end; justify-content: center;
-  position: relative; overflow: hidden;
+  position: relative; overflow: visible;
 }
 .pk-fight-main .pk-fighter-photo { max-width: 260px; }
+
+/* method of victory banner — floats above winner's head */
+.pk-method-banner {
+  position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+  background: rgba(0,255,136,0.08);
+  border: 1.5px solid rgba(0,255,136,0.45);
+  border-radius: 8px; padding: 6px 18px;
+  font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
+  font-size: 1.25rem; font-weight: 900;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: #00ff88;
+  text-shadow: 0 0 18px rgba(0,255,136,0.7);
+  white-space: nowrap; z-index: 5;
+  backdrop-filter: blur(6px);
+  pointer-events: none;
+}
 .pk-fighter-img-a, .pk-fighter-img-b {
   width: 100%; height: 100%; max-height: 230px;
   object-fit: contain; object-position: bottom center;
@@ -5464,44 +5482,49 @@ body.light-mode .ev-picks-btn:hover { background: rgba(0,150,180,0.18) !importan
 /* fighter name */
 .pk-fighter-name {
   font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
-  font-weight: 900; font-size: 1.2rem;
+  font-weight: 900; font-size: 1.35rem;
   text-transform: uppercase; letter-spacing: 0.04em;
   color: #fff; text-align: center;
   margin-top: 14px; line-height: 1.1;
+  transition: color 0.2s, text-shadow 0.2s;
 }
-.pk-fight-main .pk-fighter-name { font-size: 1.55rem; }
+.pk-fight-main .pk-fighter-name { font-size: 1.75rem; }
 .pk-fighter-name-a { text-align: center; }
 .pk-fighter-name-b { text-align: center; }
+.pk-winner-name {
+  color: #00ff88 !important;
+  text-shadow: 0 0 28px rgba(0,255,136,0.65), 0 0 60px rgba(0,255,136,0.25);
+}
 
 /* record */
 .pk-record {
   font-family: 'Inter', sans-serif;
-  font-size: 0.72rem; font-weight: 500;
-  color: rgba(255,255,255,0.32);
+  font-size: 0.78rem; font-weight: 600;
+  color: rgba(255,255,255,0.55);
   text-align: center;
-  margin-top: 4px; letter-spacing: 0.04em;
+  margin-top: 4px; letter-spacing: 0.05em;
 }
-.pk-fight-main .pk-record { font-size: 0.8rem; }
+.pk-fight-main .pk-record { font-size: 0.88rem; }
 
 /* pick label */
 .pk-pick-label {
   display: inline-flex; align-items: center; gap: 5px;
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.58rem; font-weight: 800;
+  font-size: 0.6rem; font-weight: 800;
   letter-spacing: 0.12em; text-transform: uppercase;
-  color: rgba(0,229,255,0.85);
-  background: rgba(0,229,255,0.08);
-  border: 1px solid rgba(0,229,255,0.25);
-  border-radius: 20px; padding: 3px 10px;
+  color: rgba(0,229,255,0.9);
+  background: rgba(0,229,255,0.1);
+  border: 1px solid rgba(0,229,255,0.3);
+  border-radius: 20px; padding: 4px 12px;
   margin-top: 8px;
 }
 .pk-pick-result {
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.6rem; font-weight: 800;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  margin-top: 6px;
+  font-size: 0.68rem; font-weight: 800;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  margin-top: 8px;
 }
-.pk-pick-result.correct { color: #00cc55; }
+.pk-pick-result.correct { color: #00ff88; text-shadow: 0 0 14px rgba(0,255,136,0.5); }
 .pk-pick-result.wrong   { color: #ff6060; }
 
 /* VS centre column */
@@ -5513,17 +5536,9 @@ body.light-mode .ev-picks-btn:hover { background: rgba(0,150,180,0.18) !importan
 }
 .pk-vs {
   font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
-  font-weight: 900; font-size: 1.1rem;
-  color: rgba(255,255,255,0.1);
+  font-weight: 900; font-size: 1.3rem;
+  color: rgba(255,255,255,0.2);
   letter-spacing: 0.06em;
-}
-.pk-result-label {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.58rem; color: rgba(255,255,255,0.32);
-  text-align: center; line-height: 1.5;
-  background: rgba(255,255,255,0.04);
-  border-radius: 4px; padding: 5px 6px;
-  writing-mode: vertical-rl; text-orientation: mixed;
 }
 
 /* ── Methods section — own row below fighters ── */

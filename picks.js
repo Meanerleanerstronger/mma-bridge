@@ -312,7 +312,7 @@
     if (lbl) {
       if (localFotn) {
         const isSaved = localFotn === savedFotn;
-        lbl.innerHTML = `<span class="pk-fotn-crown">🔥</span> FOTN pick: <strong>${esc(localFotn)}</strong>${isSaved ? ' <span class="pk-fotn-saved-tick">✓</span>' : ' <span class="pk-fotn-unsaved-dot">•</span>'}`;
+        lbl.innerHTML = `FOTN: <strong>${esc(localFotn)}</strong>${isSaved ? ' <span class="pk-fotn-saved-tick">saved</span>' : ' <span class="pk-fotn-unsaved-dot">unsaved</span>'}`;
         lbl.style.display = '';
       } else {
         lbl.style.display = 'none';
@@ -396,10 +396,13 @@
         data-round="${r}" data-key="${esc(key)}" data-method-cls="${roundCls}">R${r}</button>
     `).join('');
 
-    const titleBadge  = f.titleFight ? `<div class="pk-title-badge">🏆 Title Fight</div>` : '';
-    const rankedBadge = f.ranked && !f.titleFight ? `<div class="pk-ranked-badge">⭐ Ranked</div>` : '';
-    const resultBadge = isCompleted && winner
-      ? `<div class="pk-result-label">${esc(winner)} by ${esc(f.method || '—')}</div>` : '';
+    const titleBadge  = f.titleFight ? `<div class="pk-title-badge">Title Fight</div>` : '';
+    const rankedBadge = f.ranked && !f.titleFight ? `<div class="pk-ranked-badge">Ranked</div>` : '';
+
+    const methodBannerA = isCompleted && winner === f.a && f.method
+      ? `<div class="pk-method-banner">${esc(f.method)}</div>` : '';
+    const methodBannerB = isCompleted && winner === f.b && f.method
+      ? `<div class="pk-method-banner">${esc(f.method)}</div>` : '';
 
     const pickLabelA = pickedA
       ? `<div class="pk-pick-label${isSavedA ? '' : ' pk-pick-unsaved'}">Your pick${isSavedA ? ' ✓' : ' •'}</div>` : '';
@@ -418,27 +421,32 @@
         <div class="pk-fight-fighters">
           <div class="pk-side pk-side-a${pickedA ? ' selected' : ''}${resultA ? ` result-${resultA}` : ''}${correctA ? ' correct' : ''}${wrongA ? ' wrong' : ''}"
                data-key="${esc(key)}" data-pick="${esc(f.a)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
-            <div class="pk-fighter-photo">${fighterPhoto(f.imgA || '', f.a, 'a')}</div>
-            <div class="pk-fighter-name pk-fighter-name-a">${esc(f.a)}</div>
+            <div class="pk-fighter-photo">
+              ${methodBannerA}
+              ${fighterPhoto(f.imgA || '', f.a, 'a')}
+            </div>
+            <div class="pk-fighter-name pk-fighter-name-a${resultA === 'win' ? ' pk-winner-name' : ''}">${esc(f.a)}</div>
             ${fighterRecord(f.a) ? `<div class="pk-record">${esc(fighterRecord(f.a))}</div>` : ''}
             ${pickLabelA}
-            ${oppPickedA ? `<div class="pk-opp-label">${esc(oppName)} ✓</div>` : ''}
-            ${correctA ? `<div class="pk-pick-result correct">✓ Correct</div>` : ''}
-            ${wrongA   ? `<div class="pk-pick-result wrong">✗ Wrong</div>` : ''}
+            ${oppPickedA ? `<div class="pk-opp-label">${esc(oppName)}</div>` : ''}
+            ${correctA ? `<div class="pk-pick-result correct">Correct</div>` : ''}
+            ${wrongA   ? `<div class="pk-pick-result wrong">Wrong</div>` : ''}
           </div>
           <div class="pk-fight-vs">
             <div class="pk-vs">VS</div>
-            ${resultBadge}
           </div>
           <div class="pk-side pk-side-b${pickedB ? ' selected' : ''}${resultB ? ` result-${resultB}` : ''}${correctB ? ' correct' : ''}${wrongB ? ' wrong' : ''}"
                data-key="${esc(key)}" data-pick="${esc(f.b)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
-            <div class="pk-fighter-photo">${fighterPhoto(f.imgB || '', f.b, 'b')}</div>
-            <div class="pk-fighter-name pk-fighter-name-b">${esc(f.b)}</div>
+            <div class="pk-fighter-photo">
+              ${methodBannerB}
+              ${fighterPhoto(f.imgB || '', f.b, 'b')}
+            </div>
+            <div class="pk-fighter-name pk-fighter-name-b${resultB === 'win' ? ' pk-winner-name' : ''}">${esc(f.b)}</div>
             ${fighterRecord(f.b) ? `<div class="pk-record">${esc(fighterRecord(f.b))}</div>` : ''}
             ${pickLabelB}
-            ${oppPickedB ? `<div class="pk-opp-label">${esc(oppName)} ✓</div>` : ''}
-            ${correctB ? `<div class="pk-pick-result correct">✓ Correct</div>` : ''}
-            ${wrongB   ? `<div class="pk-pick-result wrong">✗ Wrong</div>` : ''}
+            ${oppPickedB ? `<div class="pk-opp-label">${esc(oppName)}</div>` : ''}
+            ${correctB ? `<div class="pk-pick-result correct">Correct</div>` : ''}
+            ${wrongB   ? `<div class="pk-pick-result wrong">Wrong</div>` : ''}
           </div>
         </div>
         ${!isCompleted ? `
@@ -497,14 +505,13 @@
       const isSelected = f.name === localFotn;
       const isSaved = f.name === savedFotn;
       return `<button class="pk-fotn-fight${isSelected ? ' selected' : ''}${isSelected && isSaved ? ' saved' : ''}" data-fight="${esc(f.name)}" type="button">
-        <span class="pk-fotn-crown-icon">🔥</span>
         <span class="pk-fotn-fight-name">${esc(f.name)}</span>
       </button>`;
     }).join('');
     return `
       <div class="pk-fotn-section" id="pkFotnSection">
         <div class="pk-section-label pk-fotn-title">
-          <span>🔥 Fight of the Night Prediction</span>
+          <span>Fight of the Night Prediction</span>
           <span class="pk-fotn-hint">Pick a fight from the main card. Correct = bonus points.</span>
         </div>
         <div class="pk-fotn-fights">${fotnCards}</div>
@@ -556,14 +563,13 @@
           <a href="auth.html" class="pk-signin-link">Sign In →</a>
         </div>` : ''}
 
-      ${isCompleted ? `<div class="pk-completed-banner">Event complete — showing your results</div>` : ''}
+      ${isCompleted ? `<div class="pk-completed-banner">Event Complete — Results</div>` : ''}
 
       ${challenge ? `
       <div class="pk-challenge-banner">
-        <div class="pk-ch-sword">⚔</div>
         <div class="pk-ch-info">
-          <div class="pk-ch-vs">Head-to-Head vs <strong>${esc(oppName)}</strong></div>
-          <div class="pk-ch-tally">You: ${picked} picks &nbsp;·&nbsp; ${esc(oppName)}: ${oppPickCount} picks</div>
+          <div class="pk-ch-vs">H2H vs <strong>${esc(oppName)}</strong></div>
+          <div class="pk-ch-tally">You: ${picked} picks · ${esc(oppName)}: ${oppPickCount} picks</div>
         </div>
       </div>` : ''}
 
