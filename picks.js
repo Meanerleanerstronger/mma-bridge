@@ -146,6 +146,36 @@
     } catch {}
   }
 
+  // ── Community picks ───────────────────────────
+  let communityPicks = {}; // { 'main-0': { 'Fighter A': 5, 'Fighter B': 3 } }
+
+  async function loadCommunityPicks() {
+    if (!sb) return;
+    try {
+      const { data } = await sb.from('picks')
+        .select('fight_key, pick')
+        .eq('event_id', eventId)
+        .neq('fight_key', 'fotn');
+      communityPicks = {};
+      (data || []).forEach(p => {
+        if (!communityPicks[p.fight_key]) communityPicks[p.fight_key] = {};
+        communityPicks[p.fight_key][p.pick] = (communityPicks[p.fight_key][p.pick] || 0) + 1;
+      });
+    } catch {}
+  }
+
+  // ── Next upcoming event ────────────────────────
+  let nextEventData = null;
+
+  async function prefetchNextEvent() {
+    if (!isCompleted) return;
+    try {
+      const all  = await fetch('./events.json').then(r => r.json());
+      const today = new Date().toISOString().slice(0, 10);
+      nextEventData = all.find(e => e.status === 'upcoming' && (e.isoDate || '') > today) || null;
+    } catch {}
+  }
+
   // ── Challenge ──────────────────────────────────
   let challenge    = null;
   let oppPicks     = {};
@@ -176,7 +206,7 @@
     } catch {}
   }
 
-  await Promise.all([loadChallenge(), loadEventExtras()]);
+  await Promise.all([loadChallenge(), loadEventExtras(), loadCommunityPicks(), prefetchNextEvent()]);
 
   // ── Get fight data from key ───────────────────
   function getFightData(key) {
@@ -408,6 +438,13 @@
     const methodBannerB = isCompleted && winner === f.b && f.method
       ? `<div class="pk-method-banner">${esc(f.method)}</div>` : '';
 
+    // Community pick % — shown on completed, or upcoming only after user picked this fight
+    const comm = communityPicks[key] || {};
+    const commTotal = Object.values(comm).reduce((s, v) => s + v, 0);
+    const showComm = commTotal > 0 && (isCompleted || pickedA || pickedB);
+    const commPctA = showComm ? Math.round(((comm[f.a] || 0) / commTotal) * 100) : null;
+    const commPctB = showComm ? Math.round(((comm[f.b] || 0) / commTotal) * 100) : null;
+
     const pickLabelA = pickedA
       ? `<div class="pk-pick-label${isSavedA ? '' : ' pk-pick-unsaved'}">Your pick${isSavedA ? ' ✓' : ' •'}</div>` : '';
     const pickLabelB = pickedB
@@ -438,6 +475,14 @@
           </div>
           <div class="pk-fight-vs">
             <div class="pk-vs">VS</div>
+            ${showComm ? `
+              <div class="pk-comm-split">
+                <div class="pk-comm-split-fill" style="width:${commPctA}%"></div>
+              </div>
+              <div class="pk-comm-nums">
+                <span>${commPctA}%</span>
+                <span>${commPctB}%</span>
+              </div>` : ''}
           </div>
           <div class="pk-side pk-side-b${pickedB ? ' selected' : ''}${resultB ? ` result-${resultB}` : ''}${correctB ? ' correct' : ''}${wrongB ? ' wrong' : ''}"
                data-key="${esc(key)}" data-pick="${esc(f.b)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
@@ -590,6 +635,13 @@
       <div class="pk-body">
         ${mainSection}${prelimSection}${earlySection}
         ${fotnSectionHtml()}
+        ${isCompleted && nextEventData ? `
+        <div class="pk-next-event">
+          <div class="pk-next-label">Up Next</div>
+          <div class="pk-next-name">${esc(nextEventData.name)}</div>
+          <div class="pk-next-meta">${esc(nextEventData.date || '')}${nextEventData.location ? ' · ' + esc(nextEventData.location) : ''}</div>
+          <a class="pk-next-btn" href="picks.html?id=${encodeURIComponent(nextEventData.id)}">Make Your Picks</a>
+        </div>` : ''}
       </div>`;
 
     // Sticky save bar
@@ -739,8 +791,7 @@
       const uid = session?.user?.id;
       if ((ev === 'SIGNED_IN' || ev === 'INITIAL_SESSION') && uid && uid !== myId) {
         myId = uid;
-        await loadPicks();
-        await loadChallenge();
+        await Promise.all([loadPicks(), loadChallenge(), loadCommunityPicks()]);
         render();
       }
     });

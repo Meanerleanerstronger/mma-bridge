@@ -34,7 +34,7 @@
   root.innerHTML = `
     <div class="lb-hero">
       <h1 class="lb-title">Community<br><span>Leaderboard</span></h1>
-      <p class="lb-subtitle">Who's made the most fight picks on MMA Bridge</p>
+      <p class="lb-subtitle">Ranked by prediction accuracy across completed events</p>
     </div>
     <div class="lb-wrap">
 
@@ -116,7 +116,7 @@
       </div>
     </div>`;
 
-  // Wait for auth, then load data with two simple queries (no fragile FK joins)
+  // Wait for auth, then load data
   const user = await waitForAuth();
   const myId = user?.id || null;
 
@@ -127,8 +127,23 @@
     return;
   }
 
-  // Query 1: all picks (just user_id, no joins)
-  const { data: picksData, error: picksErr } = await sb.from('picks').select('user_id');
+  // Load events.json to build winner lookup for accuracy scoring
+  const allEventsRaw = await fetch('./events.json', { cache: 'no-cache' }).then(r => r.json()).catch(() => []);
+  const winnerMap = {}; // 'eventId:fightKey' -> 'winner lowercase'
+  allEventsRaw.filter(e => e.status === 'completed').forEach(ev => {
+    [
+      ...(ev.mainCard     || []).map((f, i) => ({ f, key: `main-${i}` })),
+      ...(ev.prelims      || []).map((f, i) => ({ f, key: `prelims-${i}` })),
+      ...(ev.earlyPrelims || []).map((f, i) => ({ f, key: `early-${i}` })),
+    ].forEach(({ f, key }) => {
+      if (f.winner) winnerMap[`${ev.id}:${key}`] = f.winner.toLowerCase();
+    });
+  });
+
+  // Query: all picks with fight data (excluding fotn)
+  const { data: picksData, error: picksErr } = await sb.from('picks')
+    .select('user_id, event_id, fight_key, pick')
+    .neq('fight_key', 'fotn');
 
   if (picksErr || !picksData) {
     document.getElementById('lbGlobalWrap').innerHTML =
@@ -137,16 +152,22 @@
     return;
   }
 
-  // Count picks per user
-  const countMap = {};
+  // Calculate per-user stats: total picks, judged (have a known result), correct
+  const statsMap = {};
   picksData.forEach(r => {
-    if (r.user_id) countMap[r.user_id] = (countMap[r.user_id] || 0) + 1;
+    if (!r.user_id) return;
+    if (!statsMap[r.user_id]) statsMap[r.user_id] = { total: 0, judged: 0, correct: 0 };
+    statsMap[r.user_id].total++;
+    const wKey = `${r.event_id}:${r.fight_key}`;
+    if (winnerMap[wKey] !== undefined) {
+      statsMap[r.user_id].judged++;
+      if (r.pick?.toLowerCase() === winnerMap[wKey]) statsMap[r.user_id].correct++;
+    }
   });
-  const rankedIds = Object.keys(countMap);
+  const rankedIds = Object.keys(statsMap);
 
-  // Query 2: profiles for users who have picks (plus current user even if 0 picks)
+  // Load profiles
   const profileIds = myId && !rankedIds.includes(myId) ? [...rankedIds, myId] : rankedIds;
-
   let profilesData = [];
   if (profileIds.length > 0) {
     const { data: pData } = await sb
@@ -156,26 +177,38 @@
     profilesData = pData || [];
   }
 
-  // Build profile lookup
   const profileMap = {};
   profilesData.forEach(p => { profileMap[p.id] = p; });
 
-  // Build sorted user list
+  // Build user list with accuracy stats
   const allUsers = rankedIds.map(uid => {
-    const p = profileMap[uid] || {};
+    const p   = profileMap[uid] || {};
+    const s   = statsMap[uid] || { total: 0, judged: 0, correct: 0 };
+    const pct = s.judged > 0 ? Math.round((s.correct / s.judged) * 100) : null;
     return {
       user_id:    uid,
       name:       p.display_name || 'Anonymous',
       avatar:     p.avatar_url   || '',
       group_code: p.group_code   || null,
       group_name: p.group_name   || null,
-      count:      countMap[uid]  || 0,
+      count:      s.total,
+      judged:     s.judged,
+      correct:    s.correct,
+      pct,
     };
-  }).sort((a, b) => b.count - a.count);
+  }).sort((a, b) => {
+    // Sort by accuracy % (judged >= 3), then by judged count, then by total
+    const aHas = a.pct !== null && a.judged >= 3;
+    const bHas = b.pct !== null && b.judged >= 3;
+    if (aHas && bHas) return b.pct - a.pct || b.judged - a.judged;
+    if (aHas) return -1;
+    if (bHas) return 1;
+    return b.count - a.count;
+  });
 
-  const myProfile    = myId ? (profileMap[myId] || {}) : {};
-  let myGroupCode    = myProfile.group_code || null;
-  let myGroupName    = myProfile.group_name || null;
+  const myProfile = myId ? (profileMap[myId] || {}) : {};
+  let myGroupCode = myProfile.group_code || null;
+  let myGroupName = myProfile.group_name || null;
 
   // ── Render a leaderboard table ─────────────────
   function renderTable(users, wrapId, emptyMsg) {
@@ -188,26 +221,37 @@
     }
 
     const rows = users.map((u, i) => {
-      const pos   = i + 1;
-      const isMe  = u.user_id === myId;
-      const medal = pos === 1 ? '🥇' : pos === 2 ? '🥈' : pos === 3 ? '🥉' : `${pos}`;
-      const init  = (u.name || 'A').split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+      const pos  = i + 1;
+      const isMe = u.user_id === myId;
+      const posCls = pos === 1 ? ' lb-pos-gold' : pos === 2 ? ' lb-pos-silver' : pos === 3 ? ' lb-pos-bronze' : '';
+      const init = (u.name || 'A').split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
       const avatarHtml = u.avatar
         ? `<img class="lb-avatar" src="${esc(u.avatar)}" alt="${esc(u.name)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
            <div class="lb-avatar lb-avatar-init" style="display:none">${esc(init)}</div>`
         : `<div class="lb-avatar lb-avatar-init">${esc(init)}</div>`;
 
+      const hasAccuracy = u.pct !== null && u.judged >= 3;
+      const statHtml = hasAccuracy
+        ? `<div class="lb-stat lb-stat-accuracy">
+             <div class="lb-stat-val">${u.pct}<span class="lb-stat-pct-sym">%</span></div>
+             <div class="lb-stat-lbl">${u.correct}/${u.judged} correct</div>
+           </div>`
+        : `<div class="lb-stat">
+             <div class="lb-stat-val">${u.count}</div>
+             <div class="lb-stat-lbl">${u.judged > 0 ? `${u.judged} judged` : 'picks'}</div>
+           </div>`;
+
       return `
         <div class="lb-row${isMe ? ' lb-row-me' : ''}${pos <= 3 ? ' lb-row-top' : ''}">
-          <div class="lb-pos">${medal}</div>
+          <div class="lb-pos${posCls}">${pos}</div>
           <div class="lb-user">
             <div class="lb-avatar-wrap">${avatarHtml}</div>
-            <div class="lb-name">${esc(u.name)}${isMe ? ' <span class="lb-you">you</span>' : ''}</div>
+            <div class="lb-user-info">
+              <div class="lb-name">${esc(u.name)}${isMe ? ' <span class="lb-you">you</span>' : ''}</div>
+              <div class="lb-picks-sub">${u.count} total picks</div>
+            </div>
           </div>
-          <div class="lb-stat">
-            <div class="lb-stat-val">${u.count}</div>
-            <div class="lb-stat-lbl">picks</div>
-          </div>
+          ${statHtml}
         </div>`;
     }).join('');
 
