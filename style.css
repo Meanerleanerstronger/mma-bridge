@@ -6451,23 +6451,27 @@ button:focus:not(:focus-visible), a:focus:not(:focus-visible) { outline: none; }
 /* ══════════════════════════════════════════════
    COMMUNITY PICKS SPLIT — picks.html
 ══════════════════════════════════════════════ */
-.pk-comm-split {
-  width: 3px; height: 60px; border-radius: 2px;
+.pk-comm-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 0 20px 14px;
+}
+.pk-comm-bar {
+  flex: 1; height: 4px; border-radius: 2px;
   background: rgba(255,255,255,0.07); overflow: hidden;
-  position: relative; flex-shrink: 0;
+  position: relative;
 }
-.pk-comm-split-fill {
-  position: absolute; top: 0; left: 0; width: 100%;
-  background: linear-gradient(180deg, #00e5ff, rgba(0,229,255,0.4));
-  transition: height 0.4s ease;
+.pk-comm-bar-fill {
+  position: absolute; top: 0; left: 0; height: 100%;
+  background: linear-gradient(90deg, #00e5ff, rgba(0,229,255,0.55));
+  transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
 }
-.pk-comm-nums {
-  display: flex; flex-direction: column;
-  justify-content: space-between; height: 60px;
+.pk-comm-pct {
   font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
-  font-size: 0.72rem; font-weight: 900;
-  color: rgba(255,255,255,0.35); text-align: center;
+  font-size: 0.75rem; font-weight: 900;
+  min-width: 34px;
 }
+.pk-comm-pct-a { text-align: right; color: rgba(0,229,255,0.65); }
+.pk-comm-pct-b { text-align: left;  color: rgba(255,255,255,0.3); }
 
 /* ══════════════════════════════════════════════
    NEXT EVENT CTA — picks.html

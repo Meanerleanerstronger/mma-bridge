@@ -475,14 +475,6 @@
           </div>
           <div class="pk-fight-vs">
             <div class="pk-vs">VS</div>
-            ${showComm ? `
-              <div class="pk-comm-split">
-                <div class="pk-comm-split-fill" style="width:${commPctA}%"></div>
-              </div>
-              <div class="pk-comm-nums">
-                <span>${commPctA}%</span>
-                <span>${commPctB}%</span>
-              </div>` : ''}
           </div>
           <div class="pk-side pk-side-b${pickedB ? ' selected' : ''}${resultB ? ` result-${resultB}` : ''}${correctB ? ' correct' : ''}${wrongB ? ' wrong' : ''}"
                data-key="${esc(key)}" data-pick="${esc(f.b)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
@@ -498,6 +490,12 @@
             ${wrongB   ? `<div class="pk-pick-result wrong">Wrong</div>` : ''}
           </div>
         </div>
+        ${showComm ? `
+        <div class="pk-comm-row">
+          <span class="pk-comm-pct pk-comm-pct-a">${commPctA}%</span>
+          <div class="pk-comm-bar"><div class="pk-comm-bar-fill" style="width:${commPctA}%"></div></div>
+          <span class="pk-comm-pct pk-comm-pct-b">${commPctB}%</span>
+        </div>` : ''}
         ${!isCompleted ? `
         <div class="pk-methods-section">
           <div class="pk-method-label">Pick Method</div>

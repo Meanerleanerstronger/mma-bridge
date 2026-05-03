@@ -459,7 +459,7 @@
         : '';
 
       let actionBtn = '';
-      const href = `picks.html?event=${encodeURIComponent(c.event_id)}&challenge=${encodeURIComponent(c.id)}`;
+      const href = `picks.html?id=${encodeURIComponent(c.event_id)}&challenge=${encodeURIComponent(c.id)}`;
       if (status === 'pending' && !isChallenger) {
         actionBtn = `<a href="${href}" class="lb-ch-btn lb-ch-btn-accept">Accept &amp; Pick →</a>`;
       } else if (status === 'completed') {
