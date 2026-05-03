@@ -283,8 +283,12 @@
   function updateHypeWidget() {
     const widget = document.getElementById('pkHypeWidget');
     if (!widget) return;
-    const flames = widget.querySelectorAll('.pk-hype-flame');
-    flames.forEach(f => f.classList.toggle('lit', +f.dataset.val <= localHype));
+    widget.querySelectorAll('.pk-hype-num-btn').forEach(b => {
+      const v = +b.dataset.val;
+      b.classList.toggle('active', v === localHype);
+      b.classList.toggle('lit', v < localHype);
+      b.classList.remove(v === localHype ? 'lit' : '');
+    });
     const avgEl = widget.querySelector('.pk-hype-avg');
     if (avgEl) {
       if (hypeCount > 0) {
@@ -489,14 +493,14 @@
   // ── Hype widget HTML ──────────────────────────
   function hypeWidgetHtml() {
     if (isCompleted) return '';
-    const avgStr = hypeCount > 0 ? `${hypeAvg.toFixed(1)} avg · ${hypeCount} rating${hypeCount !== 1 ? 's' : ''}` : 'Be the first to rate';
-    const flames = [1,2,3,4,5].map(n =>
-      `<button class="pk-hype-flame${localHype >= n ? ' lit' : ''}" data-val="${n}" type="button" title="Rate ${n}/5">🔥</button>`
+    const avgStr = hypeCount > 0 ? `${hypeAvg.toFixed(1)} avg · ${hypeCount} rating${hypeCount !== 1 ? 's' : ''}` : 'Be first to rate';
+    const btns = [1,2,3,4,5].map(n =>
+      `<button class="pk-hype-num-btn${localHype === n ? ' active' : localHype > n ? ' lit' : ''}" data-val="${n}" type="button">${n}</button>`
     ).join('');
     return `
       <div class="pk-hype-widget" id="pkHypeWidget">
-        <div class="pk-hype-label">Event Hype</div>
-        <div class="pk-hype-flames">${flames}</div>
+        <div class="pk-hype-label">Hype</div>
+        <div class="pk-hype-nums">${btns}</div>
         <div class="pk-hype-avg">${avgStr}</div>
       </div>`;
   }
@@ -614,11 +618,8 @@
   function bindHype() {
     const widget = document.getElementById('pkHypeWidget');
     if (!widget) return;
-    const flames = widget.querySelectorAll('.pk-hype-flame');
-    flames.forEach(f => {
-      f.addEventListener('mouseenter', () => flames.forEach(x => x.classList.toggle('lit', +x.dataset.val <= +f.dataset.val)));
-      f.addEventListener('mouseleave', () => flames.forEach(x => x.classList.toggle('lit', +x.dataset.val <= localHype)));
-      f.addEventListener('click', () => saveHype(+f.dataset.val));
+    widget.querySelectorAll('.pk-hype-num-btn').forEach(b => {
+      b.addEventListener('click', () => saveHype(+b.dataset.val));
     });
   }
 

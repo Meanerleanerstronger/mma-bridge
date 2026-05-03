@@ -12,7 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MMA Bridge | Upcoming Events</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=3.2" />
+  <link rel="stylesheet" href="style.css?v=3.3" />
 
   <style>
     /* ── KEYFRAMES ── */
@@ -223,9 +223,12 @@
     .ov-hype-header { display:flex;align-items:center;gap:12px; }
     .ov-hype-label-txt { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.78rem;letter-spacing:.04em;text-transform:none;color:rgba(255,255,255,.9);white-space:nowrap;text-shadow:0 0 14px rgba(0,229,255,.5); }
     .ov-hype-score-inline { display:flex;align-items:baseline;gap:2px;min-width:36px; }
-    .ov-hype-num { font-family:'Barlow Condensed','Montserrat',sans-serif;font-weight:900;font-size:1.2rem;line-height:1;color:rgba(255,255,255,.2);transition:color .25s; }
+    .ov-hype-num { font-family:'Barlow Condensed','Montserrat',sans-serif;font-weight:900;font-size:1.4rem;line-height:1;color:rgba(255,255,255,.2);transition:font-size .25s cubic-bezier(0.34,1.56,0.64,1), color .2s; }
+    .ov-hype-num.has-value { font-size:3rem; }
+    .ov-hype-denom { transition: opacity .2s; }
+    .ov-hype-num.has-value ~ #ovHypeDenom, #ovHypeDenom { font-size:.85rem; opacity:.35; align-self:flex-end; padding-bottom:.4rem; }
     .ov-hype-denom { font-family:'Inter',sans-serif;font-size:.6rem;color:rgba(255,255,255,.15); }
-    .ov-hype-word { font-family:'Montserrat',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:#00e5ff;transition:color .25s;min-width:60px; }
+    .ov-hype-word { display:none; }
     .ov-hype-fotn-hint { font-family:'Inter',sans-serif;font-size:.68rem;color:rgba(0,229,255,.55);padding-top:4px;border-top:1px solid rgba(255,255,255,.05); }
 
     /* Track + draggable thumb */
@@ -597,9 +600,8 @@
           <div class="ov-hype-label-txt">Rate this event</div>
           <div class="ov-hype-score-inline">
             <span class="ov-hype-num" id="ovHypeNum">—</span>
-            <span class="ov-hype-denom">/10</span>
+            <span class="ov-hype-denom" id="ovHypeDenom">/10</span>
           </div>
-          <span class="ov-hype-word" id="ovHypeWord">rate it</span>
         </div>
         <div class="ov-hype-track-wrap" id="ovHypeTrackWrap">
           <div class="ov-hype-track">
@@ -710,9 +712,7 @@
       currentHype=v;
       const pct=((v-1)/9)*100;
       const numEl=document.getElementById('ovHypeNum');
-      const wordEl=document.getElementById('ovHypeWord');
-      numEl.textContent=v; numEl.style.color=HYPE_C[v];
-      wordEl.textContent=HYPE_W[v]; wordEl.style.color=HYPE_C[v];
+      numEl.textContent=v; numEl.style.color=HYPE_C[v]; numEl.classList.add('has-value');
       document.getElementById('ovHypeFill').style.width=pct+'%';
       document.getElementById('ovHypeFill').style.background=HYPE_C[v];
       document.getElementById('ovHypeThumb').style.left=pct+'%';
@@ -727,10 +727,8 @@
     }
     function resetHype(){
       currentHype=null;
-      document.getElementById('ovHypeNum').textContent='—';
-      document.getElementById('ovHypeNum').style.color='rgba(255,255,255,.18)';
-      document.getElementById('ovHypeWord').textContent='rate it';
-      document.getElementById('ovHypeWord').style.color='rgba(255,255,255,.18)';
+      const numEl=document.getElementById('ovHypeNum');
+      numEl.textContent='—'; numEl.style.color='rgba(255,255,255,.18)'; numEl.classList.remove('has-value');
       document.getElementById('ovHypeFill').style.width='0%';
       document.getElementById('ovHypeThumb').style.left='0%';
       document.getElementById('ovHypeThumb').style.background='#fff';

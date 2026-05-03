@@ -59,10 +59,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     const fights = f?.last5?.slice(0,5) || [];
     const iconM = m => {
       const u = (m||'').toUpperCase();
-      if (u.includes('SUB')) return 'Sub';
-      if (u.includes('KO') || u.includes('TKO')) return 'KO';
-      if (u.includes('UD')||u.includes('SD')||u.includes('MD')) return 'Dec';
-      return '—';
+      if (u.includes('SUB')) return '<span class="form-m sub">Sub</span>';
+      if (u.includes('KO') || u.includes('TKO')) return '<span class="form-m ko">KO</span>';
+      if (u.includes('UD')||u.includes('SD')||u.includes('MD')) return '<span class="form-m dec">Dec</span>';
+      return '<span class="form-m">—</span>';
     };
     return `
       <div class="form-col">
