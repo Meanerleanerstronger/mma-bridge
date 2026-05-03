@@ -6532,3 +6532,132 @@ button:focus:not(:focus-visible), a:focus:not(:focus-visible) { outline: none; }
 .lb-pos-gold   { color: #d4a843; font-weight: 900; }
 .lb-pos-silver { color: #a8a8b8; font-weight: 900; }
 .lb-pos-bronze { color: #b07040; font-weight: 900; }
+
+/* ══════════════════════════════════════════════
+   PICKS v2.4 — SCORE HERO, FORM DOTS, CAREER
+══════════════════════════════════════════════ */
+
+/* Countdown pill */
+.pk-countdown {
+  display: inline-flex; align-items: center;
+  background: rgba(0,229,255,0.08); border: 1px solid rgba(0,229,255,0.2);
+  border-radius: 100px; padding: 2px 10px;
+  font-family: 'Montserrat', sans-serif; font-size: 0.6rem; font-weight: 800;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(0,229,255,0.75);
+}
+
+/* Career badge (upcoming events) */
+.pk-career-badge {
+  display: inline-flex; align-items: center;
+  margin-top: 10px;
+  font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600;
+  color: rgba(255,255,255,0.35);
+}
+.pk-career-badge-great { color: rgba(0,255,136,0.65); }
+.pk-career-badge-ok    { color: rgba(255,215,0,0.6); }
+.pk-career-badge-poor  { color: rgba(255,80,80,0.55); }
+
+/* Score hero — completed events */
+.pk-score-hero {
+  border-radius: 16px; padding: 28px 32px;
+  display: flex; flex-direction: column; gap: 12px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+}
+.pk-score-hero-great { border-color: rgba(0,255,136,0.22); background: rgba(0,255,136,0.04); }
+.pk-score-hero-ok    { border-color: rgba(255,215,0,0.2);  background: rgba(255,215,0,0.03); }
+.pk-score-hero-poor  { border-color: rgba(255,80,80,0.18); background: rgba(255,80,80,0.03); }
+.pk-score-hero-empty, .pk-score-hero-anon {
+  text-align: center;
+  background: rgba(255,255,255,0.015); border-color: rgba(255,255,255,0.06);
+}
+.pk-score-hero-inner {
+  display: flex; align-items: center; gap: 20px;
+}
+.pk-score-hero-nums {
+  display: flex; align-items: baseline; gap: 2px;
+  line-height: 1;
+}
+.pk-score-hero-n {
+  font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
+  font-weight: 900; font-size: 4.5rem;
+  color: #fff; letter-spacing: -0.02em;
+}
+.pk-score-hero-great .pk-score-hero-n { color: #00ff88; text-shadow: 0 0 40px rgba(0,255,136,0.5); }
+.pk-score-hero-ok    .pk-score-hero-n { color: #ffd700; text-shadow: 0 0 40px rgba(255,215,0,0.4); }
+.pk-score-hero-poor  .pk-score-hero-n { color: #ff6060; text-shadow: 0 0 40px rgba(255,80,80,0.4); }
+.pk-score-hero-of {
+  font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
+  font-weight: 700; font-size: 2rem; color: rgba(255,255,255,0.25);
+}
+.pk-score-hero-right { display: flex; flex-direction: column; gap: 3px; }
+.pk-score-hero-pct {
+  font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
+  font-weight: 900; font-size: 1.8rem;
+  color: rgba(255,255,255,0.75); letter-spacing: 0.02em;
+}
+.pk-score-hero-verdict {
+  font-family: 'Montserrat', sans-serif; font-size: 0.62rem; font-weight: 800;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+.pk-score-hero-career {
+  font-family: 'Inter', sans-serif; font-size: 0.72rem;
+  color: rgba(255,255,255,0.22); border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 12px; margin-top: 2px;
+}
+.pk-score-hero-empty-title, .pk-score-hero-anon-title {
+  font-family: 'Montserrat', sans-serif; font-size: 0.85rem; font-weight: 700;
+  color: rgba(255,255,255,0.4);
+}
+.pk-score-hero-empty-sub {
+  font-family: 'Inter', sans-serif; font-size: 0.75rem;
+  color: rgba(255,255,255,0.2); margin-top: 4px;
+}
+.pk-score-hero-anon-link {
+  display: inline-flex; align-items: center; margin-top: 14px;
+  background: rgba(0,229,255,0.1); border: 1px solid rgba(0,229,255,0.3);
+  color: #00e5ff; text-decoration: none; border-radius: 6px;
+  padding: 8px 20px; font-family: 'Montserrat', sans-serif;
+  font-size: 0.65rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+}
+
+/* Fighter form dots */
+.pk-form-strip {
+  display: flex; justify-content: center; gap: 3px; margin-top: 5px;
+}
+.pk-form-dot {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 18px; height: 18px; border-radius: 4px;
+  font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
+  font-size: 0.6rem; font-weight: 900; letter-spacing: 0;
+}
+.pk-form-dot-w  { background: rgba(0,255,136,0.12); color: #00ff88; border: 1px solid rgba(0,255,136,0.25); }
+.pk-form-dot-l  { background: rgba(255,60,60,0.1);  color: rgba(255,80,80,0.7); border: 1px solid rgba(255,60,60,0.2); }
+.pk-form-dot-nc { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.25); border: 1px solid rgba(255,255,255,0.1); }
+
+/* Crowd fave / underdog badges */
+.pk-crowd-fave, .pk-crowd-dog {
+  display: inline-flex; align-items: center;
+  margin-top: 4px;
+  font-family: 'Montserrat', sans-serif; font-size: 0.5rem; font-weight: 800;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  border-radius: 100px; padding: 2px 8px;
+}
+.pk-crowd-fave { background: rgba(0,229,255,0.07); color: rgba(0,229,255,0.6); border: 1px solid rgba(0,229,255,0.18); }
+.pk-crowd-dog  { background: rgba(255,200,0,0.07);  color: rgba(255,200,0,0.6);  border: 1px solid rgba(255,200,0,0.18); }
+
+/* Save bar locked glow */
+.pk-save-bar-locked {
+  box-shadow: 0 -2px 30px rgba(0,229,255,0.25) !important;
+  border-top-color: rgba(0,229,255,0.3) !important;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease !important;
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .pk-score-hero { padding: 20px 16px; }
+  .pk-score-hero-n { font-size: 3.2rem; }
+  .pk-score-hero-pct { font-size: 1.4rem; }
+}

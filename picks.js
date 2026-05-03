@@ -82,6 +82,16 @@
     const m = String(roundsStr || '').match(/(\d+)/);
     return m ? parseInt(m[1]) : 3;
   }
+  function fighterForm(name) {
+    const fd = lookupFighter(name);
+    if (!fd?.last5?.length) return '';
+    const dots = fd.last5.slice(0, 5).map(f => {
+      const r = (f.result || '').toUpperCase();
+      const cls = r === 'W' ? 'w' : r === 'L' ? 'l' : 'nc';
+      return `<span class="pk-form-dot pk-form-dot-${cls}">${r}</span>`;
+    }).join('');
+    return `<div class="pk-form-strip">${dots}</div>`;
+  }
 
   const event = eventsData.find(e => e.id === eventId || slugify(e.name || '') === eventId);
   if (!event) { root.innerHTML = `<div class="pk-error">Event not found.</div>`; return; }
@@ -95,6 +105,8 @@
   let hypeAvg    = 0;
   let hypeCount  = 0;
   let localHype  = 0;   // user's hype rating (0 = not rated)
+  let careerCorrect = 0;
+  let careerJudged  = 0;
 
   // ── Load picks from DB ────────────────────────
   async function loadPicks() {
@@ -176,6 +188,34 @@
     } catch {}
   }
 
+  // ── Career accuracy ──────────────────────────
+  async function loadCareerStats() {
+    if (!myId || !sb) return;
+    try {
+      const { data } = await sb.from('picks')
+        .select('event_id, fight_key, pick')
+        .eq('user_id', myId)
+        .neq('fight_key', 'fotn');
+      const wMap = {};
+      eventsData.filter(e => e.status === 'completed').forEach(ev => {
+        [
+          ...(ev.mainCard     || []).map((f, i) => ({ f, k: `main-${i}` })),
+          ...(ev.prelims      || []).map((f, i) => ({ f, k: `prelims-${i}` })),
+          ...(ev.earlyPrelims || []).map((f, i) => ({ f, k: `early-${i}` })),
+        ].forEach(({ f, k }) => { if (f.winner) wMap[`${ev.id}:${k}`] = f.winner.toLowerCase(); });
+      });
+      let correct = 0, judged = 0;
+      (data || []).forEach(p => {
+        const w = wMap[`${p.event_id}:${p.fight_key}`];
+        if (w === undefined) return;
+        judged++;
+        if (p.pick?.toLowerCase() === w) correct++;
+      });
+      careerCorrect = correct;
+      careerJudged  = judged;
+    } catch {}
+  }
+
   // ── Challenge ──────────────────────────────────
   let challenge    = null;
   let oppPicks     = {};
@@ -206,7 +246,7 @@
     } catch {}
   }
 
-  await Promise.all([loadChallenge(), loadEventExtras(), loadCommunityPicks(), prefetchNextEvent()]);
+  await Promise.all([loadChallenge(), loadEventExtras(), loadCommunityPicks(), prefetchNextEvent(), loadCareerStats()]);
 
   // ── Get fight data from key ───────────────────
   function getFightData(key) {
@@ -269,7 +309,23 @@
         myPicks[k] = { pick: v.pick, base: v.base, round: v.round, method: combineMethod(v.base, v.round) };
       });
       const n = pickCount();
-      showToast(`${n} pick${n !== 1 ? 's' : ''} saved ✓`);
+      // Crowd alignment summary
+      let withCrowd = 0, upsets = 0;
+      Object.entries(localPicks).forEach(([k, p]) => {
+        if (k === 'fotn') return;
+        const comm = communityPicks[k] || {};
+        const ct = Object.values(comm).reduce((s, v) => s + v, 0);
+        if (ct < 5) return;
+        const myPct = Math.round(((comm[p.pick] || 0) / ct) * 100);
+        if (myPct >= 60) withCrowd++;
+        else if (myPct <= 40) upsets++;
+      });
+      let toastMsg = `${n} pick${n !== 1 ? 's' : ''} locked in`;
+      if (withCrowd + upsets >= 3) toastMsg += ` · ${upsets} upset${upsets !== 1 ? 's' : ''}`;
+      showToast(toastMsg);
+      // Brief locked glow on save bar
+      const bar = document.getElementById('pkSaveBar');
+      if (bar) { bar.classList.add('pk-save-bar-locked'); setTimeout(() => bar.classList.remove('pk-save-bar-locked'), 1400); }
       updateSaveBar();
       updateFotnSection();
     } catch (e) {
@@ -445,6 +501,16 @@
     const commPctA = showComm ? Math.round(((comm[f.a] || 0) / commTotal) * 100) : null;
     const commPctB = showComm ? Math.round(((comm[f.b] || 0) / commTotal) * 100) : null;
 
+    // Crowd labels — show after picking on upcoming, always on completed
+    const crowdFaveA = showComm && commPctA !== null && commPctA >= 65;
+    const crowdFaveB = showComm && commPctB !== null && commPctB >= 65;
+    const underdogA  = showComm && commPctA !== null && commPctA > 0 && commPctA <= 35;
+    const underdogB  = showComm && commPctB !== null && commPctB > 0 && commPctB <= 35;
+    const crowdLabelA = crowdFaveA ? `<div class="pk-crowd-fave">Crowd Fave</div>`
+                       : underdogA  ? `<div class="pk-crowd-dog">Underdog</div>` : '';
+    const crowdLabelB = crowdFaveB ? `<div class="pk-crowd-fave">Crowd Fave</div>`
+                       : underdogB  ? `<div class="pk-crowd-dog">Underdog</div>` : '';
+
     const pickLabelA = pickedA
       ? `<div class="pk-pick-label${isSavedA ? '' : ' pk-pick-unsaved'}">Your pick${isSavedA ? ' ✓' : ' •'}</div>` : '';
     const pickLabelB = pickedB
@@ -468,6 +534,8 @@
             </div>
             <div class="pk-fighter-name pk-fighter-name-a${resultA === 'win' ? ' pk-winner-name' : ''}">${esc(f.a)}</div>
             ${fighterRecord(f.a) ? `<div class="pk-record">${esc(fighterRecord(f.a))}</div>` : ''}
+            ${fighterForm(f.a)}
+            ${crowdLabelA}
             ${pickLabelA}
             ${oppPickedA ? `<div class="pk-opp-label">${esc(oppName)}</div>` : ''}
             ${correctA ? `<div class="pk-pick-result correct">Correct</div>` : ''}
@@ -484,6 +552,8 @@
             </div>
             <div class="pk-fighter-name pk-fighter-name-b${resultB === 'win' ? ' pk-winner-name' : ''}">${esc(f.b)}</div>
             ${fighterRecord(f.b) ? `<div class="pk-record">${esc(fighterRecord(f.b))}</div>` : ''}
+            ${fighterForm(f.b)}
+            ${crowdLabelB}
             ${pickLabelB}
             ${oppPickedB ? `<div class="pk-opp-label">${esc(oppName)}</div>` : ''}
             ${correctB ? `<div class="pk-pick-result correct">Correct</div>` : ''}
@@ -514,23 +584,45 @@
     return `<div class="pk-section"><div class="pk-section-label">${esc(title)}</div>${cards}</div>`;
   }
 
-  function scoreBadge() {
+  // Small header badge — for upcoming events showing career record
+  function careerBadgeHtml() {
+    if (!myId || careerJudged < 3) return '';
+    const pct = Math.round((careerCorrect / careerJudged) * 100);
+    const cls = pct >= 65 ? 'great' : pct >= 50 ? 'ok' : 'poor';
+    return `<div class="pk-career-badge pk-career-badge-${cls}">${careerCorrect}/${careerJudged} all-time · ${pct}%</div>`;
+  }
+
+  // Full score hero for completed events — shown at top of body
+  function scoreHero() {
     if (!isCompleted) return '';
     const { correct, total } = computeScore();
-    if (total === 0) return `<div class="pk-score-wrap"><div class="pk-score-empty">Make picks before events to track your record</div></div>`;
+    if (!myId) return `<div class="pk-score-hero pk-score-hero-anon"><div class="pk-score-hero-anon-title">Sign in to track your picks</div><a href="auth.html" class="pk-score-hero-anon-link">Sign In →</a></div>`;
+    if (total === 0) return `<div class="pk-score-hero pk-score-hero-empty"><div class="pk-score-hero-empty-title">No picks recorded</div><div class="pk-score-hero-empty-sub">Make picks on upcoming events to track your accuracy</div></div>`;
     const pct = Math.round((correct / total) * 100);
     const cls = pct >= 70 ? 'great' : pct >= 50 ? 'ok' : 'poor';
-    const label = pct >= 70 ? 'Solid Call' : pct >= 50 ? 'Average' : 'Rough Night';
+    const verdict = pct >= 70 ? 'Sharp' : pct >= 50 ? 'Solid' : 'Rough Night';
+    const careerPct = careerJudged >= 3 ? Math.round((careerCorrect / careerJudged) * 100) : null;
     return `
-      <div class="pk-score-wrap">
-        <div class="pk-score pk-score-${cls}">
-          <span class="pk-score-fraction">${correct}<span class="pk-score-denom">/${total}</span></span>
-          <div class="pk-score-right">
-            <div class="pk-score-pct">${pct}%</div>
-            <div class="pk-score-label">${label}</div>
+      <div class="pk-score-hero pk-score-hero-${cls}">
+        <div class="pk-score-hero-inner">
+          <div class="pk-score-hero-nums">
+            <span class="pk-score-hero-n">${correct}</span><span class="pk-score-hero-of">/${total}</span>
+          </div>
+          <div class="pk-score-hero-right">
+            <div class="pk-score-hero-pct">${pct}%</div>
+            <div class="pk-score-hero-verdict">${verdict}</div>
           </div>
         </div>
+        ${careerPct !== null ? `<div class="pk-score-hero-career">All-time record: ${careerCorrect}/${careerJudged} picks · ${careerPct}% accuracy</div>` : ''}
       </div>`;
+  }
+
+  // Countdown pill for upcoming events
+  function countdownHtml() {
+    if (isCompleted || !event.isoDate) return '';
+    const diff = Math.ceil((new Date(event.isoDate + 'T00:00:00') - new Date()) / 86400000);
+    const label = diff <= 0 ? 'Tonight' : diff === 1 ? 'Tomorrow' : `In ${diff} days`;
+    return `<span class="pk-countdown">${label}</span>`;
   }
 
   // ── Hype widget HTML ──────────────────────────
@@ -595,15 +687,16 @@
           Back
         </a>
         <div class="pk-header-info">
-          <div class="pk-event-type">${esc(event.type || 'UFC')} · Pick Your Fights</div>
+          <div class="pk-event-type">${esc(event.type || 'UFC')} · ${isCompleted ? 'Results' : 'Pick Your Fights'}</div>
           <h1 class="pk-event-name">${esc(event.name || '')}</h1>
           <div class="pk-event-meta">
             ${event.date ? `<span>${esc(event.date)}</span>` : ''}
             ${event.location ? `<span class="pk-meta-dot">·</span><span>${esc(event.location)}</span>` : ''}
+            ${countdownHtml()}
           </div>
+          ${!isCompleted ? careerBadgeHtml() : ''}
         </div>
         <div class="pk-header-right">
-          ${scoreBadge()}
           ${hypeWidgetHtml()}
           ${!isCompleted && myId ? `
             <div class="pk-progress-wrap">
@@ -614,13 +707,11 @@
         </div>
       </div>
 
-      ${!myId ? `
+      ${!myId && !isCompleted ? `
         <div class="pk-signin-banner">
           <span>Sign in to save your picks and track your record</span>
           <a href="auth.html" class="pk-signin-link">Sign In →</a>
         </div>` : ''}
-
-      ${isCompleted ? `<div class="pk-completed-banner">Event Complete — Results</div>` : ''}
 
       ${challenge ? `
       <div class="pk-challenge-banner">
@@ -631,6 +722,7 @@
       </div>` : ''}
 
       <div class="pk-body">
+        ${scoreHero()}
         ${mainSection}${prelimSection}${earlySection}
         ${fotnSectionHtml()}
         ${isCompleted && nextEventData ? `
