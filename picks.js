@@ -470,10 +470,20 @@
   function scoreBadge() {
     if (!isCompleted) return '';
     const { correct, total } = computeScore();
-    if (total === 0) return '';
+    if (total === 0) return `<div class="pk-score-wrap"><div class="pk-score-empty">Make picks before events to track your record</div></div>`;
     const pct = Math.round((correct / total) * 100);
     const cls = pct >= 70 ? 'great' : pct >= 50 ? 'ok' : 'poor';
-    return `<div class="pk-score pk-score-${cls}">${correct}/${total} correct <span>${pct}%</span></div>`;
+    const label = pct >= 70 ? 'Solid Call' : pct >= 50 ? 'Average' : 'Rough Night';
+    return `
+      <div class="pk-score-wrap">
+        <div class="pk-score pk-score-${cls}">
+          <span class="pk-score-fraction">${correct}<span class="pk-score-denom">/${total}</span></span>
+          <div class="pk-score-right">
+            <div class="pk-score-pct">${pct}%</div>
+            <div class="pk-score-label">${label}</div>
+          </div>
+        </div>
+      </div>`;
   }
 
   // ── Hype widget HTML ──────────────────────────

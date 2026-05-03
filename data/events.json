@@ -9224,7 +9224,7 @@
     "location": "Perth, Australia",
     "venue": "RAC Arena",
     "poster": "https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-04/050226-ufc-fight-night-della-maddalena-vs-prates-EVENT-ART.jpg",
-    "status": "upcoming",
+    "status": "completed",
     "startTime": "07:00",
     "mainCard": [
       {
@@ -9236,7 +9236,9 @@
         "ranked": true,
         "slot": "main",
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-05/DELLA_MADDALENA_JACK_05-10.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-11/PRATES_CARLOS_11-15.png"
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-11/PRATES_CARLOS_11-15.png",
+        "winner": "Carlos Prates",
+        "method": "TKO R3 3:17"
       },
       {
         "a": "Beneil Dariush",
@@ -9247,7 +9249,9 @@
         "ranked": true,
         "slot": "comain",
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-11/DARIUSH_BENEIL_11-15.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-01/SALKILLD_QUILLAN_01-31.png"
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-01/SALKILLD_QUILLAN_01-31.png",
+        "winner": "Quillan Salkilld",
+        "method": "TKO R1"
       },
       {
         "a": "Tim Elliott",
@@ -9258,7 +9262,9 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-08/ELLIOTT_TIM_08-16.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-08/ERCEG_STEVE_08-09.png"
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-08/ERCEG_STEVE_08-09.png",
+        "winner": "Steve Erceg",
+        "method": "UD"
       },
       {
         "a": "Shamil Gaziev",
@@ -9269,7 +9275,9 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-11/GAZIEV_SHAMIL_11-22.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-03/PERICIC_BRANDO_03-21.png"
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-03/PERICIC_BRANDO_03-21.png",
+        "winner": "Brando Pericic",
+        "method": "KO"
       },
       {
         "a": "Tai Tuivasa",
@@ -9280,7 +9288,9 @@
         "ranked": false,
         "slot": "opener",
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-01/TUIVASA_TAI_01-31.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-03/SUTHERLAND_LOUIE_03-21.png"
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-03/SUTHERLAND_LOUIE_03-21.png",
+        "winner": "Louie Sutherland",
+        "method": "UD"
       }
     ],
     "prelims": [
@@ -9293,7 +9303,9 @@
         "ranked": false,
         "slot": "",
         "imgA": "",
-        "imgB": ""
+        "imgB": "",
+        "winner": "Cam Rowston",
+        "method": "TKO"
       },
       {
         "a": "Junior Tafa",
@@ -9304,7 +9316,9 @@
         "ranked": false,
         "slot": "",
         "imgA": "",
-        "imgB": ""
+        "imgB": "",
+        "winner": "Junior Tafa",
+        "method": "KO"
       },
       {
         "a": "Jacob Malkoun",
@@ -9315,7 +9329,9 @@
         "ranked": false,
         "slot": "",
         "imgA": "",
-        "imgB": ""
+        "imgB": "",
+        "winner": "Jacob Malkoun",
+        "method": "UD"
       },
       {
         "a": "Colby Thicknesse",
@@ -9326,7 +9342,9 @@
         "ranked": false,
         "slot": "",
         "imgA": "",
-        "imgB": ""
+        "imgB": "",
+        "winner": "Colby Thicknesse",
+        "method": "UD"
       },
       {
         "a": "Ben Johnston",
@@ -9337,7 +9355,9 @@
         "ranked": false,
         "slot": "",
         "imgA": "",
-        "imgB": ""
+        "imgB": "",
+        "winner": "Wes Schultz",
+        "method": "Sub R3"
       },
       {
         "a": "Jonathan Micallef",
@@ -9348,7 +9368,9 @@
         "ranked": false,
         "slot": "",
         "imgA": "",
-        "imgB": ""
+        "imgB": "",
+        "winner": "Jonathan Micallef",
+        "method": "Split Dec"
       },
       {
         "a": "Dom Mar Fan",
@@ -9359,12 +9381,14 @@
         "ranked": false,
         "slot": "",
         "imgA": "",
-        "imgB": ""
+        "imgB": "",
+        "winner": "Kody Steele",
+        "method": "Sub R1"
       }
     ],
     "earlyPrelims": [
       {
-        "a": "Jack Jenkins",
+        "a": "Ollie Schmid",
         "b": "Marwan Rahiki",
         "weight": "Featherweight",
         "rounds": "3 Rds",
@@ -9372,7 +9396,9 @@
         "ranked": false,
         "slot": "",
         "imgA": "",
-        "imgB": ""
+        "imgB": "",
+        "winner": "Marwan Rahiki",
+        "method": "KO"
       }
     ]
   },

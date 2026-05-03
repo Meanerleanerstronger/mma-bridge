@@ -5283,16 +5283,32 @@ body.light-mode .ev-picks-btn:hover { background: rgba(0,150,180,0.18) !importan
 .pk-header-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; padding-top: 4px; }
 
 /* score */
-.pk-score {
-  display: flex; align-items: center; gap: 8px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.9rem; font-weight: 800;
-  padding: 8px 16px; border-radius: 8px;
+.pk-score-wrap { display: flex; justify-content: flex-end; }
+.pk-score-empty {
+  font-family: 'Inter', sans-serif; font-size: 0.75rem;
+  color: rgba(255,255,255,0.3); text-align: right; max-width: 180px; line-height: 1.4;
 }
-.pk-score span { font-size: 1.1rem; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; }
-.pk-score-great { background: rgba(0,200,80,0.12); border: 1px solid rgba(0,200,80,0.3); color: #00cc55; }
-.pk-score-ok    { background: rgba(255,200,0,0.1);  border: 1px solid rgba(255,200,0,0.3);  color: #ffd700; }
-.pk-score-poor  { background: rgba(255,60,60,0.1);  border: 1px solid rgba(255,60,60,0.3);  color: #ff6060; }
+.pk-score {
+  display: flex; align-items: center; gap: 16px;
+  padding: 14px 20px; border-radius: 12px;
+  min-width: 140px;
+}
+.pk-score-fraction {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 2.8rem; font-weight: 900; line-height: 1;
+}
+.pk-score-denom { font-size: 1.6rem; opacity: 0.6; }
+.pk-score-right { display: flex; flex-direction: column; gap: 2px; }
+.pk-score-pct {
+  font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 800;
+}
+.pk-score-label {
+  font-family: 'Inter', sans-serif; font-size: 0.65rem; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.65;
+}
+.pk-score-great { background: rgba(0,255,100,0.08); border: 1px solid rgba(0,255,100,0.25); color: #00ff88; }
+.pk-score-ok    { background: rgba(255,200,0,0.08);  border: 1px solid rgba(255,200,0,0.25);  color: #ffd700; }
+.pk-score-poor  { background: rgba(255,60,60,0.08);  border: 1px solid rgba(255,60,60,0.25);  color: #ff6060; }
 
 /* progress */
 .pk-progress-wrap {

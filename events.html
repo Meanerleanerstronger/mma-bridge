@@ -12,7 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MMA Bridge | Upcoming Events</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=3.0" />
+  <link rel="stylesheet" href="style.css?v=3.2" />
 
   <style>
     /* ── KEYFRAMES ── */
@@ -594,7 +594,7 @@
       <!-- COMPACT HYPE BAR -->
       <div class="ov-hype-bar">
         <div class="ov-hype-header">
-          <div class="ov-hype-label-txt">⚡ Rate how hyped you are for this event</div>
+          <div class="ov-hype-label-txt">Rate this event</div>
           <div class="ov-hype-score-inline">
             <span class="ov-hype-num" id="ovHypeNum">—</span>
             <span class="ov-hype-denom">/10</span>
@@ -608,7 +608,7 @@
           </div>
           <div class="ov-hype-ticks" id="ovHypeTicks"></div>
         </div>
-        <div class="ov-hype-fotn-hint">⭐ Hover over any fight below to predict your Fight of the Night</div>
+        <div class="ov-hype-fotn-hint">Hover over any fight below to predict Fight of the Night</div>
       </div>
 
       <!-- BODY -->
@@ -662,7 +662,7 @@
 
       const posterEl=ev.poster
         ?`<img class="ev-card-poster" src="${esc(ev.poster)}" alt="${esc(ev.name)}" loading="lazy" onerror="this.style.display='none'">`
-        :`<div class="ev-card-placeholder">🥊</div>`;
+        :`<div class="ev-card-placeholder"></div>`;
 
       card.innerHTML=`
         ${posterEl}
@@ -672,7 +672,7 @@
           <div class="ev-card-top">
             <span class="ev-card-badge">${isPPV?'PPV':'Fight Night'}</span>
             <span class="ev-card-name">${esc(label)}</span>
-            ${main.titleFight?'<span style="font-size:.8rem;opacity:.85;">🏆</span>':''}
+            ${main.titleFight?'<span class="ev-card-title-badge">Title</span>':''}
           </div>
           <div class="ev-card-matchup">${matchup}</div>
           <div class="ev-card-sub">${esc(weightSub)}</div>
@@ -692,7 +692,7 @@
     }
 
     /* ── HYPE ── */
-    const HYPE_W=['','Sleeper','Low Key','Building','Decent','Solid','Good','Hyped','Very Hyped','NUCLEAR','🔥 GOAT CARD'];
+    const HYPE_W=['','Sleeper','Low Key','Building','Decent','Solid','Good','Hyped','Very Hyped','Elite Card','All-Time Card'];
     const HYPE_C=['','#666','#888','#b8b832','#b8b832','#c8a84b','#c8a84b','#00e5ff','#00e5ff','#ff6030','#ff3300'];
     let currentHype=null;
 
@@ -796,7 +796,7 @@
 
       /* Meta */
       const metas=[];
-      if(main&&main.weight) metas.push(`<div class="ov-meta-item">${esc(main.weight)}${main.titleFight?' · 🏆 Title Fight':''}</div>`);
+      if(main&&main.weight) metas.push(`<div class="ov-meta-item">${esc(main.weight)}${main.titleFight?' · Title Fight':''}</div>`);
       if(main&&main.rounds) metas.push(`<div class="ov-meta-item">${esc(main.rounds)}</div>`);
       const total=[...(ev.mainCard||[]),...(ev.prelims||[]),...(ev.earlyPrelims||[])].length;
       if(total>1) metas.push(`<div class="ov-meta-item">${total} fights</div>`);
@@ -873,7 +873,7 @@
             row.innerHTML=`
               <div class="ov-fighter ${dimCls} ${aWon?'won':'lost'}">${aWon?pip:''}${esc(f.a)}</div>
               <div class="ov-fight-mid">
-                ${f.titleFight?`<div class="ov-title-badge">🏆 Title</div>`:''}
+                ${f.titleFight?`<div class="ov-title-badge">Title</div>`:''}
                 <div class="ov-weight">${esc(f.weight||'')}</div>
                 <div class="ov-result-method" style="color:${ms.color}">${esc(ms.label)}</div>
                 <div class="ov-result-detail">Rd ${esc(String(f.round))} · ${esc(f.time||'')}</div>
@@ -882,12 +882,12 @@
             `;
           } else {
             /* ── UPCOMING / NO RESULT ROW ── */
-            const fotnText=`⭐ Predict as FOTN: ${lastName(f.a)} vs ${lastName(f.b)}`;
+            const fotnText=`FOTN: ${lastName(f.a)} vs ${lastName(f.b)}`;
             row.innerHTML=`
               ${headCell(f.imgA,false)}
               <div class="ov-fighter ${dimCls}">${esc(f.a)}</div>
               <div class="ov-fight-mid">
-                ${f.titleFight?`<div class="ov-title-badge">🏆 Title</div>`:''}
+                ${f.titleFight?`<div class="ov-title-badge">Title</div>`:''}
                 ${f.rounds?`<div class="ov-rounds">${esc(f.rounds)}</div>`:''}
                 ${isMain?`<div class="ov-slot-tag" style="color:${accent}">MAIN EVENT</div>`:isComain?`<div class="ov-slot-tag" style="color:rgba(0,229,255,.5)">CO-MAIN</div>`:''}
               </div>

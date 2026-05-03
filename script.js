@@ -59,7 +59,7 @@ function renderHero(ev) {
     };
     img.style.backgroundPosition = positions[ev.id] || 'center top';
   }
-  type.textContent  = ev.type === 'PPV' ? '🔥 Next PPV Event' : '⚡ Next Event';
+  type.textContent  = ev.type === 'PPV' ? 'Next PPV Event' : 'Next Event';
   title.textContent = ev.name || '';
   meta.textContent  = [ev.date, ev.location, ev.venue].filter(Boolean).join('  ·  ');
   const btn = document.getElementById('heroBtn');
@@ -72,7 +72,7 @@ function renderRecentResults(events) {
   const inner = document.getElementById('resultsInner');
   if (!inner || !events.length) return;
 
-  const METHOD = {'KO':'🥊 KO','TKO':'🥊 TKO','SUB':'⛓️ Sub','UD':'📋 UD','SD':'📋 SD','MD':'📋 MD','NC':'🚫 NC','Draw':'🤝 Draw'};
+  const METHOD = {'KO':'KO','TKO':'TKO','SUB':'Sub','UD':'UD','SD':'SD','MD':'MD','NC':'NC','Draw':'Draw'};
 
   function buildCard(ev) {
     const me     = ev.mainCard?.[0];

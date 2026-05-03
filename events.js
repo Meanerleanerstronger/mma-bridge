@@ -59,10 +59,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     const fights = f?.last5?.slice(0,5) || [];
     const iconM = m => {
       const u = (m||'').toUpperCase();
-      if (u.includes('SUB')) return '⛓️';
-      if (u.includes('KO') || u.includes('TKO')) return '🥊';
-      if (u.includes('UD')||u.includes('SD')||u.includes('MD')) return '🧾';
-      return '•';
+      if (u.includes('SUB')) return 'Sub';
+      if (u.includes('KO') || u.includes('TKO')) return 'KO';
+      if (u.includes('UD')||u.includes('SD')||u.includes('MD')) return 'Dec';
+      return '—';
     };
     return `
       <div class="form-col">
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       data-event-name="${esc(eventMeta.name)}"
       onclick="event.stopPropagation();window.lockFotn(this)"
       title="Pick as Fight of the Night"
-    >🔒 FOTN?</button>`;
+    >FOTN</button>`;
   }
 
   // ── Single fight row ──────────────────────
@@ -110,8 +110,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         : '';
 
     const icons = [
-      f.titleFight ? '<span class="fight-ico" title="Title fight">🏆</span>' : '',
-      f.ranked     ? '<span class="fight-ico" title="Ranked">⭐</span>'      : '',
+      f.titleFight ? '<span class="fight-ico fight-ico-title" title="Title fight">Title</span>' : '',
+      f.ranked     ? '<span class="fight-ico fight-ico-ranked" title="Ranked">Ranked</span>'   : '',
     ].join('');
 
     const payload = esc(JSON.stringify({
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     return `
       <div class="hype-wrap" data-event-id="${id}" data-event-name="${name}">
         <div class="hype-header">
-          <span class="hype-title">⚡ Hype Meter</span>
+          <span class="hype-title">Hype Meter</span>
           <span class="hype-avg" id="havg-${id}"></span>
         </div>
         <div class="hype-desc">Rate how hyped you are for this event</div>
@@ -339,7 +339,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   // ── Hype meter logic ──────────────────────
-  const HYPE_LABELS = ['','Meh','Mild interest','Solid card','Hyped 🔥','MUST WATCH 🔥🔥'];
+  const HYPE_LABELS = ['','Meh','Mild','Solid','Hyped','Must Watch'];
 
   function bindHypeMeters() {
     const base = getApiBase();
@@ -357,7 +357,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         .then(d => {
           if (d?.avg_hype) {
             avgEl.textContent = `★ ${d.avg_hype} · ${d.total_ratings} vote${d.total_ratings!==1?'s':''}`;
-            if (summaryBadge) summaryBadge.textContent = `🔥 ${d.avg_hype}`;
+            if (summaryBadge) summaryBadge.textContent = `${d.avg_hype} hype`;
           } else {
             avgEl.textContent = 'Be first to rate!';
             if (summaryBadge) summaryBadge.textContent = '';
