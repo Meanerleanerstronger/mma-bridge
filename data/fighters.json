@@ -781,7 +781,7 @@
     "weightClass": "Middleweight",
     "ranking": "#3",
     "record": {
-      "wins": 28,
+      "wins": 30,
       "losses": 7,
       "draws": 0
     },
@@ -834,7 +834,8 @@
         "round": 5,
         "time": "5:00"
       }
-    ]
+    ],
+    "pfp": true
   },
   {
     "id": "israel-adesanya",
@@ -983,7 +984,7 @@
     "age": 28,
     "fightingOut": "Perth, Australia",
     "style": "Striker",
-    "pfp": true,
+    "pfp": false,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/5/DELLA_MADDALENA_JACK_L_09-16.png",
     "bio": "Jack Della Maddalena is one of the most exciting welterweights in the world, a precision boxer with great timing, elite footwork and devastating finishing power who won the UFC welterweight title at UFC 315 by defeating Belal Muhammad. His clean boxing — crisp jabs, snapping right hands and sharp combinations — is the best in the division. Dropped the belt to Islam Makhachev who moved up in weight.",
     "last5": [
@@ -1686,11 +1687,11 @@
       "losses": 3,
       "draws": 0
     },
-    "height": "5'11\"",
-    "reach": "74\"",
+    "height": "5'7\"",
+    "reach": "69\"",
     "stance": "Orthodox",
     "age": 28,
-    "fightingOut": "Rio de Janeiro, Brazil",
+    "fightingOut": "Foz do Iguaçu, Paraná, Brazil",
     "style": "Striker",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-02/SILVA_JEAN_L_02-22.png",
     "bio": "Jean Silva is one of the most ferocious strikers in the featherweight division, a Brazilian finisher with a 71% finish rate built on explosive combinations, devastating power and relentless aggression. His striking variety — from sharp punches to spinning attacks — makes him a nightmare stylistically. Won Performance of the Night for a ninja choke finish of Bryce Mitchell and continues to climb toward the title.",
@@ -4713,6 +4714,260 @@
         "event": "UFC Fight Night",
         "round": 1,
         "time": "2:26"
+      }
+    ]
+  },
+  {
+    "id": "carlos-ulberg",
+    "name": "Carlos Ulberg",
+    "nickname": "Black Jag",
+    "nationality": "New Zealander",
+    "flag": "🇳🇿",
+    "weightClass": "Light Heavyweight",
+    "ranking": "Champion",
+    "record": {
+      "wins": 14,
+      "losses": 1,
+      "draws": 0
+    },
+    "height": "6'4\"",
+    "reach": "77\"",
+    "stance": "Orthodox",
+    "age": 35,
+    "fightingOut": "Auckland, New Zealand",
+    "style": "Kickboxer",
+    "pfp": true,
+    "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/ULBERG_CARLOS_L_BELT_04-11.png",
+    "bio": "Carlos Ulberg is the UFC Light Heavyweight Champion — a decorated kickboxer turned MMA destroyer with an elite 19-2 kickboxing record before transitioning to MMA. The Auckland-born Black Jag brings textbook Muay Thai timing, explosive knockout power, and ice-cold composure. He claimed the vacant LHW title with a first-round KO of Jiří Procházka at UFC 327, putting the entire division on notice. Trained alongside Israel Adesanya at City Kickboxing, Ulberg is the ultimate expression of striker's precision fused with relentless finishing instinct.",
+    "last5": [
+      {
+        "opponent": "Jiří Procházka",
+        "result": "W",
+        "method": "KO",
+        "event": "UFC 327",
+        "round": 1,
+        "time": "3:45"
+      },
+      {
+        "opponent": "Dominick Reyes",
+        "result": "W",
+        "method": "KO",
+        "event": "UFC Fight Night 260",
+        "round": 1,
+        "time": ""
+      },
+      {
+        "opponent": "Jan Blachowicz",
+        "result": "W",
+        "method": "Dec",
+        "event": "UFC Fight Night 255",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Volkan Oezdemir",
+        "result": "W",
+        "method": "Dec",
+        "event": "UFC Fight Night 248",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Alonzo Menifield",
+        "result": "W",
+        "method": "KO",
+        "event": "UFC ESPN 56",
+        "round": 1,
+        "time": "0:12"
+      }
+    ]
+  },
+  {
+    "id": "carlos-prates",
+    "name": "Carlos Prates",
+    "nickname": "The Nightmare",
+    "nationality": "Brazilian",
+    "flag": "🇧🇷",
+    "weightClass": "Welterweight",
+    "ranking": "#3",
+    "record": {
+      "wins": 24,
+      "losses": 7,
+      "draws": 0
+    },
+    "height": "6'1\"",
+    "reach": "76\"",
+    "stance": "Orthodox",
+    "age": 33,
+    "fightingOut": "São Paulo, Brazil",
+    "style": "Muay Thai / Kickboxer",
+    "bio": "Carlos Prates is the most dangerous finisher in the welterweight division — a Brazilian Muay Thai nightmare who uses every single limb as a weapon. Knees at the clinch, spinning back kicks, vicious elbows, and heavy overhand rights all flow out of the same terrifying combination sequences. Prates fights in a flow state — his offense reads like improvised jazz, unpredictable and relentless. He holds the most knockdowns in UFC Welterweight history and the most KO/TKOs of any fighter in the promotion since 2024. At 6'1\" with elite reach, he creates and closes distance at will. His TKO of Jack Della Maddalena at UFC Perth cemented him as a title contender.",
+    "last5": [
+      {
+        "opponent": "Jack Della Maddalena",
+        "result": "W",
+        "method": "TKO",
+        "event": "UFC Fight Night Perth",
+        "round": 3,
+        "time": "3:17"
+      },
+      {
+        "opponent": "Neil Magny",
+        "result": "W",
+        "method": "TKO",
+        "event": "UFC Fight Night",
+        "round": 1,
+        "time": "2:44"
+      },
+      {
+        "opponent": "Muslim Salikhov",
+        "result": "W",
+        "method": "KO",
+        "event": "UFC Fight Night",
+        "round": 1,
+        "time": "0:49"
+      },
+      {
+        "opponent": "Nicolas Dalby",
+        "result": "W",
+        "method": "TKO",
+        "event": "UFC Fight Night",
+        "round": 2,
+        "time": ""
+      },
+      {
+        "opponent": "Preston Parsons",
+        "result": "W",
+        "method": "TKO",
+        "event": "UFC Fight Night",
+        "round": 1,
+        "time": ""
+      }
+    ]
+  },
+  {
+    "id": "mauricio-ruffy",
+    "name": "Mauricio Ruffy",
+    "nickname": "One Shot",
+    "nationality": "Brazilian",
+    "flag": "🇧🇷",
+    "weightClass": "Lightweight",
+    "ranking": "#10",
+    "record": {
+      "wins": 13,
+      "losses": 2,
+      "draws": 0
+    },
+    "height": "5'11\"",
+    "reach": "75\"",
+    "stance": "Orthodox",
+    "age": 27,
+    "fightingOut": "São Paulo, Brazil",
+    "style": "Striker / Power Puncher",
+    "bio": "Mauricio Ruffy is the most electric knockout artist in the lightweight division — a Brazilian one-punch destroyer who turns fights off with surgical precision. Named after Monkey D. Luffy from One Piece by his late brother before his first pro fight, Ruffy carries that tribute into every performance. With 12 knockouts in 13 wins, his KO rate is extraordinary for any division. His signature spinning wheel kick has ended multiple fights, earning back-to-back Performance of the Night bonuses on his UFC debut run. At just 27 years old, 'One Shot' Ruffy is already being talked about as a future lightweight champion.",
+    "last5": [
+      {
+        "opponent": "Jalin Turner",
+        "result": "W",
+        "method": "KO",
+        "event": "UFC Fight Night",
+        "round": 1,
+        "time": ""
+      },
+      {
+        "opponent": "Drakkar Klose",
+        "result": "W",
+        "method": "KO",
+        "event": "UFC Fight Night",
+        "round": 1,
+        "time": ""
+      },
+      {
+        "opponent": "Drew Dober",
+        "result": "W",
+        "method": "TKO",
+        "event": "UFC Fight Night",
+        "round": 1,
+        "time": ""
+      },
+      {
+        "opponent": "Francisco Prado",
+        "result": "W",
+        "method": "KO",
+        "event": "UFC Fight Night",
+        "round": 1,
+        "time": ""
+      },
+      {
+        "opponent": "Ricky Glenn",
+        "result": "L",
+        "method": "Dec",
+        "event": "UFC Fight Night",
+        "round": 3,
+        "time": "5:00"
+      }
+    ]
+  },
+  {
+    "id": "caio-borralho",
+    "name": "Caio Borralho",
+    "nickname": "The Natural",
+    "nationality": "Brazilian",
+    "flag": "🇧🇷",
+    "weightClass": "Middleweight",
+    "ranking": "#5",
+    "record": {
+      "wins": 18,
+      "losses": 2,
+      "draws": 0
+    },
+    "height": "6'2\"",
+    "reach": "75\"",
+    "stance": "Orthodox",
+    "age": 31,
+    "fightingOut": "Brasília, Brazil",
+    "style": "All-Around / Grappler",
+    "bio": "Caio Borralho is one of the most technically complete middleweights on the roster — a Brazilian prodigy who holds a BJJ black belt, Muay Thai black belt, and Judo brown belt, and actually knows how to use all of them. Borralho is a 'fighting nerd' in the best sense: he studies opponents obsessively and fights with chess-match precision, mixing elite wrestling defense with guillotine traps, pressure striking, and takedowns at exactly the right moment. A relentless competitor who was robbed in his fight against Imavov, Borralho bounced back immediately with a dominant win over Reinier de Ridder. He's quietly building a top-5 résumé that screams future champion.",
+    "last5": [
+      {
+        "opponent": "Reinier de Ridder",
+        "result": "W",
+        "method": "Dec",
+        "event": "UFC 326",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Nassourdine Imavov",
+        "result": "L",
+        "method": "Dec",
+        "event": "UFC Fight Night 258",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Jared Cannonier",
+        "result": "W",
+        "method": "Dec",
+        "event": "UFC ESPN 62",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Paul Craig",
+        "result": "W",
+        "method": "KO",
+        "event": "UFC 301",
+        "round": 2,
+        "time": ""
+      },
+      {
+        "opponent": "Abusupiyan Magomedov",
+        "result": "W",
+        "method": "Dec",
+        "event": "UFC Fight Night",
+        "round": 3,
+        "time": "5:00"
       }
     ]
   }
