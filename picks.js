@@ -621,8 +621,16 @@
     const pickLabelB = pickedB
       ? `<div class="pk-pick-label${isSavedB ? '' : ' pk-pick-unsaved'}">Your pick${isSavedB ? ' ✓' : ' •'}</div>` : '';
 
+    const hasPick = pickedA || pickedB;
+    const avatarA = f.imgA
+      ? `<div class="pk-avatar${isMain ? ' pk-avatar-main' : ''}"><img src="${esc(f.imgA)}" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></div>`
+      : `<div class="pk-avatar${isMain ? ' pk-avatar-main' : ''} pk-avatar-empty"></div>`;
+    const avatarB = f.imgB
+      ? `<div class="pk-avatar${isMain ? ' pk-avatar-main' : ''}"><img src="${esc(f.imgB)}" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></div>`
+      : `<div class="pk-avatar${isMain ? ' pk-avatar-main' : ''} pk-avatar-empty"></div>`;
+
     return `
-      <div class="pk-fight${isMain ? ' pk-fight-main' : ''}" data-key="${esc(key)}">
+      <div class="pk-fight${isMain ? ' pk-fight-main' : ''}${hasPick ? ' pk-fight-picked' : ''}" data-key="${esc(key)}">
         <div class="pk-fight-header">
           <div class="pk-fight-badges">${titleBadge}${rankedBadge}</div>
           <div class="pk-fight-meta-inline">
@@ -635,9 +643,9 @@
         <div class="pk-fight-row">
           <div class="pk-side pk-side-a${pickedA ? ' selected' : ''}${resultA ? ` result-${resultA}` : ''}${correctA ? ' correct' : ''}${wrongA ? ' wrong' : ''}"
                data-key="${esc(key)}" data-pick="${esc(f.a)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
+            ${avatarA}
             ${methodBannerA}
             <div class="pk-fighter-name pk-fighter-name-a${resultA === 'win' ? ' pk-winner-name' : ''}">${esc(f.a)}</div>
-            <div class="pk-name-underline pk-name-underline-a"></div>
             ${fighterRecord(f.a) ? `<div class="pk-record">${esc(fighterRecord(f.a))}</div>` : ''}
             ${fighterForm(f.a)}
             ${crowdLabelA}
@@ -649,9 +657,9 @@
 
           <div class="pk-vs-col">
             <div class="pk-verdict-zone" id="pkVerdict-${esc(key)}">
-              <div class="pk-vs${(pickedA || pickedB) && !isCompleted ? ' pk-vs-faded' : ''}">VS</div>
-              <div class="pk-verdict-name${pickedA ? ' pk-verdict-a' : pickedB ? ' pk-verdict-b' : ''}"
-                   style="opacity:${(pickedA || pickedB) && !isCompleted ? '1' : '0'}">
+              <div class="pk-vs${hasPick && !isCompleted ? ' pk-vs-faded' : ''}">VS</div>
+              <div class="pk-verdict-name"
+                   style="opacity:${hasPick && !isCompleted ? '1' : '0'}">
                 ${pickedA ? esc(f.a.trim().split(' ').pop().toUpperCase()) : pickedB ? esc(f.b.trim().split(' ').pop().toUpperCase()) : ''}
               </div>
             </div>
@@ -659,9 +667,9 @@
 
           <div class="pk-side pk-side-b${pickedB ? ' selected' : ''}${resultB ? ` result-${resultB}` : ''}${correctB ? ' correct' : ''}${wrongB ? ' wrong' : ''}"
                data-key="${esc(key)}" data-pick="${esc(f.b)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
+            ${avatarB}
             ${methodBannerB}
             <div class="pk-fighter-name pk-fighter-name-b${resultB === 'win' ? ' pk-winner-name' : ''}">${esc(f.b)}</div>
-            <div class="pk-name-underline pk-name-underline-b"></div>
             ${fighterRecord(f.b) ? `<div class="pk-record">${esc(fighterRecord(f.b))}</div>` : ''}
             ${fighterForm(f.b)}
             ${crowdLabelB}
@@ -682,17 +690,16 @@
         ${!isCompleted ? `
         <div class="pk-methods-section">
           ${drumHtml}
-          <div class="pk-round-row" id="pkRounds-${esc(key)}" style="${needsRound ? '' : 'display:none'}">
+          <div class="pk-round-row${needsRound ? ' pk-round-row-visible' : ''}" id="pkRounds-${esc(key)}">
             <span class="pk-round-label">Round</span>
             ${roundBtns}
           </div>
         </div>
-        <div class="pk-swipe-row" id="pkSwipeRow-${esc(key)}" style="${(pickedA || pickedB) ? '' : 'display:none'}">
+        <div class="pk-swipe-row" id="pkSwipeRow-${esc(key)}" style="${hasPick ? '' : 'display:none'}">
           <div class="pk-swipe-track" id="pkSwipeTrack-${esc(key)}"
-               data-key="${esc(key)}" data-color="${pickedA ? 'gold' : 'cyan'}">
+               data-key="${esc(key)}" data-color="cyan">
             <div class="pk-swipe-fill" id="pkSwipeFill-${esc(key)}"></div>
-            <div class="pk-swipe-thumb" id="pkSwipeThumb-${esc(key)}"
-                 style="background:${pickedA ? '#c9a227' : '#00d9c0'}">
+            <div class="pk-swipe-thumb" id="pkSwipeThumb-${esc(key)}">
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
                 <polyline points="3,2 7,5 3,8" stroke="#07070a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
@@ -970,6 +977,7 @@
 
         if (!wasSelected) {
           side.classList.add('selected');
+          fight.classList.add('pk-fight-picked');
           const lbl = document.createElement('div');
           lbl.className = 'pk-pick-label pk-pick-unsaved';
           lbl.textContent = 'Your pick •';
@@ -984,41 +992,30 @@
             const vn = vz.querySelector('.pk-verdict-name');
             if (vs) vs.classList.add('pk-vs-faded');
             if (vn) {
-              const lastName = pick.trim().split(' ').pop().toUpperCase();
-              vn.textContent = lastName;
-              vn.className = `pk-verdict-name ${isA ? 'pk-verdict-a' : 'pk-verdict-b'}`;
-              vn.style.letterSpacing = '0.32em';
+              vn.textContent = pick.trim().split(' ').pop().toUpperCase();
               vn.style.opacity = '0';
-              setTimeout(() => {
-                vn.style.opacity = '1';
-                vn.style.letterSpacing = '0.08em';
-              }, 180);
+              requestAnimationFrame(() => { vn.style.opacity = '1'; });
             }
           }
 
           // Show swipe track
           const swipeRow = document.getElementById(`pkSwipeRow-${key}`);
-          if (swipeRow) {
-            swipeRow.style.display = '';
-            const thumb = document.getElementById(`pkSwipeThumb-${key}`);
-            if (thumb) thumb.style.background = isA ? '#c9a227' : '#00d9c0';
-            const tr = document.getElementById(`pkSwipeTrack-${key}`);
-            if (tr) tr.dataset.color = isA ? 'gold' : 'cyan';
-          }
+          if (swipeRow) swipeRow.style.display = '';
         } else {
           delete localPicks[key];
+          fight.classList.remove('pk-fight-picked');
           // Reset drum
           const strip = document.getElementById(`pkDrumStrip-${key}`);
           if (strip) { strip.style.transition = 'none'; strip.style.transform = 'translateY(0)'; }
-          const roundRow = fight.querySelector(`[id^="pkRounds-"]`);
-          if (roundRow) roundRow.style.display = 'none';
+          const roundRow = document.getElementById(`pkRounds-${key}`);
+          if (roundRow) roundRow.classList.remove('pk-round-row-visible');
           // Reset VS
           const vz = document.getElementById(`pkVerdict-${key}`);
           if (vz) {
             const vs = vz.querySelector('.pk-vs');
             const vn = vz.querySelector('.pk-verdict-name');
             if (vs) vs.classList.remove('pk-vs-faded');
-            if (vn) { vn.style.opacity = '0'; vn.style.letterSpacing = '0.32em'; }
+            if (vn) vn.style.opacity = '0';
           }
           // Hide swipe track
           const swipeRow = document.getElementById(`pkSwipeRow-${key}`);
@@ -1052,7 +1049,7 @@
 
         const showRound = newBase === 'KO/TKO' || newBase === 'SUB';
         const roundRow  = document.getElementById(`pkRounds-${key}`);
-        if (roundRow) roundRow.style.display = showRound ? '' : 'none';
+        if (roundRow) roundRow.classList.toggle('pk-round-row-visible', showRound);
         localPicks[key] = { ...localPicks[key], base: newBase, round: showRound ? (localPicks[key].round || '') : '' };
         updateSaveBar();
       });
