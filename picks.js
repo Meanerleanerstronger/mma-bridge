@@ -107,6 +107,8 @@
   let localHype  = 0;   // user's hype rating (0 = not rated)
   let careerCorrect = 0;
   let careerJudged  = 0;
+  let fotnPickMode  = false;  // cursor-mode FOTN selection active
+  let fotnCursorEl  = null;
 
   // ── Load picks from DB ────────────────────────
   async function loadPicks() {
@@ -385,24 +387,121 @@
     }
   }
 
-  // ── Update FOTN section ───────────────────────
-  function updateFotnSection() {
-    const section = document.getElementById('pkFotnSection');
-    if (!section) return;
-    const savedFotn = myPicks['fotn']?.pick || null;
+  // ── FOTN mode helpers ─────────────────────────
+  function fotnLastNames(fightName) {
+    const parts = (fightName || '').split(' vs ');
+    const last = n => (n||'').trim().split(' ').pop().toUpperCase();
+    return `${last(parts[0])} vs ${last(parts[1])}`;
+  }
+
+  function fotnBarInnerHtml() {
     const localFotn = localPicks['fotn']?.pick || null;
-    section.querySelectorAll('.pk-fotn-tile').forEach(el => {
-      const name = el.dataset.fight;
-      const isSelected = name === localFotn;
-      const isSaved = name === savedFotn;
-      el.classList.toggle('selected', isSelected);
-      el.classList.toggle('saved', isSaved && isSelected);
-      const badge = el.querySelector('.pk-fotn-tile-badge');
-      if (badge) {
-        badge.textContent = isSelected ? (isSaved ? 'FOTN PICK ✓' : 'FOTN PICK') : '';
-        badge.style.display = isSelected ? '' : 'none';
-      }
-    });
+    const savedFotn = myPicks['fotn']?.pick || null;
+    if (fotnPickMode) {
+      return {
+        cls: 'pk-fotn-bar pk-fotn-bar-picking',
+        html: `
+          <div class="pk-fotn-bar-left">
+            <div class="pk-fotn-bar-badge pk-fotn-bar-badge-live">FOTN</div>
+            <div class="pk-fotn-pick-hint">Click any fight card</div>
+          </div>
+          <button class="pk-fotn-cancel-btn" id="pkFotnPickBtn" type="button">✕ Cancel</button>`,
+      };
+    }
+    if (localFotn) {
+      const isSaved = localFotn === savedFotn;
+      return {
+        cls: `pk-fotn-bar pk-fotn-bar-has-pick${isSaved ? ' saved' : ''}`,
+        html: `
+          <div class="pk-fotn-bar-left">
+            <div class="pk-fotn-bar-badge">FOTN</div>
+            <div class="pk-fotn-bar-names">${esc(fotnLastNames(localFotn))}</div>
+            ${!isSaved ? '<span class="pk-fotn-bar-dot">unsaved</span>' : ''}
+          </div>
+          <button class="pk-fotn-change-btn" id="pkFotnPickBtn" type="button">Change</button>`,
+      };
+    }
+    return {
+      cls: 'pk-fotn-bar pk-fotn-bar-empty',
+      html: `
+        <div class="pk-fotn-bar-left">
+          <div class="pk-fotn-bar-badge">FOTN</div>
+          <div class="pk-fotn-bar-hint">Which fight steals the show?</div>
+        </div>
+        <button class="pk-fotn-pick-btn" id="pkFotnPickBtn" type="button">Pick Fight of the Night</button>`,
+    };
+  }
+
+  function updateFotnBar() {
+    const bar = document.getElementById('pkFotnBar');
+    if (!bar) return;
+    const { cls, html } = fotnBarInnerHtml();
+    bar.className = cls;
+    bar.innerHTML = html;
+    const btn = document.getElementById('pkFotnPickBtn');
+    if (btn) btn.onclick = fotnPickMode ? exitFotnMode : enterFotnMode;
+  }
+
+  // Legacy alias so saveAllPicks → updateFotnSection still works
+  function updateFotnSection() { updateFotnBar(); }
+
+  function enterFotnMode() {
+    if (isCompleted) return;
+    fotnPickMode = true;
+    root.classList.add('pk-fotn-picking');
+    document.body.classList.add('pk-fotn-picking-body');
+    if (!fotnCursorEl) {
+      fotnCursorEl = document.createElement('div');
+      fotnCursorEl.id = 'pkFotnCursor';
+      fotnCursorEl.className = 'pk-fotn-cursor';
+      document.body.appendChild(fotnCursorEl);
+      document.addEventListener('mousemove', e => {
+        if (!fotnCursorEl) return;
+        fotnCursorEl.style.left = e.clientX + 'px';
+        fotnCursorEl.style.top  = e.clientY + 'px';
+      });
+    }
+    fotnCursorEl.style.display = 'block';
+    updateFotnBar();
+  }
+
+  function exitFotnMode() {
+    fotnPickMode = false;
+    root.classList.remove('pk-fotn-picking');
+    document.body.classList.remove('pk-fotn-picking-body');
+    if (fotnCursorEl) fotnCursorEl.style.display = 'none';
+    hideFotnConfirm();
+    updateFotnBar();
+  }
+
+  function showFotnConfirm(fightName) {
+    let el = document.getElementById('pkFotnConfirmBar');
+    if (!el) {
+      el = document.createElement('div');
+      el.id = 'pkFotnConfirmBar';
+      el.className = 'pk-fotn-confirm-bar';
+      document.body.appendChild(el);
+    }
+    el.innerHTML = `
+      <div class="pk-fotn-confirm-name">${esc(fotnLastNames(fightName))}</div>
+      <div class="pk-fotn-confirm-q">Save as your Fight of the Night pick?</div>
+      <div class="pk-fotn-confirm-btns">
+        <button class="pk-fotn-confirm-yes" id="pkFotnYes" type="button">Yes, that's my pick</button>
+        <button class="pk-fotn-confirm-no" id="pkFotnNo" type="button">Cancel</button>
+      </div>`;
+    el.style.display = 'flex';
+    document.getElementById('pkFotnYes').onclick = () => {
+      localPicks['fotn'] = { pick: fightName, base: '', round: '' };
+      exitFotnMode();
+      updateSaveBar();
+      showToast('FOTN pick set — save to lock it in');
+    };
+    document.getElementById('pkFotnNo').onclick = hideFotnConfirm;
+  }
+
+  function hideFotnConfirm() {
+    const el = document.getElementById('pkFotnConfirmBar');
+    if (el) el.style.display = 'none';
   }
 
   // ── Score if completed ────────────────────────
@@ -638,46 +737,11 @@
       </div>`;
   }
 
-  // ── FOTN section HTML ─────────────────────────
-  function fotnSectionHtml() {
+  // ── FOTN bar at top of body ────────────────────
+  function fotnBarHtml() {
     if (isCompleted) return '';
-    const allFights = [
-      ...(event.mainCard || []).map((f, i) => ({ f, key: `main-${i}` })),
-      ...(event.prelims || []).map((f, i) => ({ f, key: `prelims-${i}` })),
-    ];
-    if (!allFights.length) return '';
-    const localFotn = localPicks['fotn']?.pick || null;
-    const savedFotn = myPicks['fotn']?.pick || null;
-
-    function lastName(name) {
-      const parts = (name || '').trim().split(' ');
-      return parts[parts.length - 1].toUpperCase();
-    }
-
-    const fotnTiles = allFights.map(({ f, key }) => {
-      const name = `${f.a} vs ${f.b}`;
-      const isSelected = name === localFotn;
-      const isSaved = name === savedFotn;
-      return `
-        <button class="pk-fotn-tile${isSelected ? ' selected' : ''}${isSelected && isSaved ? ' saved' : ''}"
-          data-fight="${esc(name)}" type="button">
-          <div class="pk-fotn-tile-badge" style="${isSelected ? '' : 'display:none'}">${isSelected ? (isSaved ? 'FOTN PICK ✓' : 'FOTN PICK') : ''}</div>
-          <div class="pk-fotn-tile-inner">
-            <div class="pk-fotn-tile-name">${esc(lastName(f.a))}</div>
-            <div class="pk-fotn-tile-vs">VS</div>
-            <div class="pk-fotn-tile-name">${esc(lastName(f.b))}</div>
-          </div>
-        </button>`;
-    }).join('');
-
-    return `
-      <div class="pk-fotn-section" id="pkFotnSection">
-        <div class="pk-section-label pk-fotn-title">
-          <span>Fight of the Night</span>
-          <span class="pk-fotn-hint">Predict the standout fight — correct pick = bonus points</span>
-        </div>
-        <div class="pk-fotn-grid">${fotnTiles}</div>
-      </div>`;
+    const { cls, html } = fotnBarInnerHtml();
+    return `<div class="${cls}" id="pkFotnBar">${html}</div>`;
   }
 
   // ── Render ────────────────────────────────────
@@ -735,8 +799,8 @@
 
       <div class="pk-body">
         ${scoreHero()}
+        ${fotnBarHtml()}
         ${mainSection}${prelimSection}${earlySection}
-        ${fotnSectionHtml()}
         ${isCompleted && nextEventData ? `
         <div class="pk-next-event">
           <div class="pk-next-label">Up Next</div>
@@ -765,7 +829,7 @@
     bindInteractions();
     bindHype();
     bindFotn();
-    updateFotnSection();
+    updateFotnBar();
   }
 
   // ── Bind hype flames ──────────────────────────
@@ -777,22 +841,22 @@
     });
   }
 
-  // ── Bind FOTN section ─────────────────────────
+  // ── Bind FOTN ─────────────────────────────────
   function bindFotn() {
-    const section = document.getElementById('pkFotnSection');
-    if (!section) return;
-    section.querySelectorAll('.pk-fotn-tile').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const name = btn.dataset.fight;
-        const alreadySelected = localPicks['fotn']?.pick === name;
-        if (alreadySelected) {
-          delete localPicks['fotn'];
-        } else {
-          localPicks['fotn'] = { pick: name, base: '', round: '' };
-        }
-        updateFotnSection();
-        updateSaveBar();
-      });
+    // Wire up the top bar button
+    const btn = document.getElementById('pkFotnPickBtn');
+    if (btn) btn.onclick = fotnPickMode ? exitFotnMode : enterFotnMode;
+
+    // Fight cards become FOTN targets in picking mode
+    root.querySelectorAll('.pk-fight[data-key]').forEach(card => {
+      card.addEventListener('click', e => {
+        if (!fotnPickMode) return;
+        const key = card.dataset.key;
+        const fd = getFightData(key);
+        if (!fd) return;
+        e.stopPropagation();
+        showFotnConfirm(`${fd.a} vs ${fd.b}`);
+      }, true); // capture so it fires before pk-side handlers
     });
   }
 
@@ -802,6 +866,7 @@
 
     root.querySelectorAll('.pk-side').forEach(side => {
       const activate = () => {
+        if (fotnPickMode) return; // FOTN mode intercepts at fight card level
         const key  = side.dataset.key;
         const pick = side.dataset.pick;
         const fight = root.querySelector(`.pk-fight[data-key="${key}"]`);
