@@ -391,23 +391,18 @@
     if (!section) return;
     const savedFotn = myPicks['fotn']?.pick || null;
     const localFotn = localPicks['fotn']?.pick || null;
-    section.querySelectorAll('.pk-fotn-fight').forEach(el => {
+    section.querySelectorAll('.pk-fotn-tile').forEach(el => {
       const name = el.dataset.fight;
       const isSelected = name === localFotn;
       const isSaved = name === savedFotn;
       el.classList.toggle('selected', isSelected);
       el.classList.toggle('saved', isSaved && isSelected);
-    });
-    const lbl = section.querySelector('.pk-fotn-selected-lbl');
-    if (lbl) {
-      if (localFotn) {
-        const isSaved = localFotn === savedFotn;
-        lbl.innerHTML = `FOTN: <strong>${esc(localFotn)}</strong>${isSaved ? ' <span class="pk-fotn-saved-tick">saved</span>' : ' <span class="pk-fotn-unsaved-dot">unsaved</span>'}`;
-        lbl.style.display = '';
-      } else {
-        lbl.style.display = 'none';
+      const badge = el.querySelector('.pk-fotn-tile-badge');
+      if (badge) {
+        badge.textContent = isSelected ? (isSaved ? 'FOTN PICK ✓' : 'FOTN PICK') : '';
+        badge.style.display = isSelected ? '' : 'none';
       }
-    }
+    });
   }
 
   // ── Score if completed ────────────────────────
@@ -471,12 +466,15 @@
     const wrongB   = isCompleted && pickedB && resultB === 'loss';
 
     const methodBtns = [
-      { id: 'KO/TKO', cls: 'ko', label: 'KO / TKO' },
-      { id: 'SUB',    cls: 'sub', label: 'Submission' },
-      { id: 'DEC',    cls: 'dec', label: 'Decision' },
+      { id: 'KO/TKO', cls: 'ko', letter: 'KO', label: 'Knockout' },
+      { id: 'SUB',    cls: 'sub', letter: 'SUB', label: 'Submission' },
+      { id: 'DEC',    cls: 'dec', letter: 'DEC', label: 'Decision' },
     ].map(m => `
       <button class="pk-method-btn ${m.cls}${savedBase === m.id ? ` active ${m.cls}` : ''}"
-        data-method="${esc(m.id)}" data-key="${esc(key)}">${esc(m.label)}</button>
+        data-method="${esc(m.id)}" data-key="${esc(key)}">
+        <span class="pk-method-letter">${esc(m.letter)}</span>
+        <span class="pk-method-name">${esc(m.label)}</span>
+      </button>
     `).join('');
 
     const needsRound = (savedBase === 'KO/TKO' || savedBase === 'SUB');
@@ -644,27 +642,41 @@
   function fotnSectionHtml() {
     if (isCompleted) return '';
     const allFights = [
-      ...(event.mainCard || []).map((f, i) => ({ name: `${f.a} vs ${f.b}`, key: `main-${i}` })),
-      ...(event.prelims || []).map((f, i) => ({ name: `${f.a} vs ${f.b}`, key: `prelims-${i}` })),
+      ...(event.mainCard || []).map((f, i) => ({ f, key: `main-${i}` })),
+      ...(event.prelims || []).map((f, i) => ({ f, key: `prelims-${i}` })),
     ];
     if (!allFights.length) return '';
     const localFotn = localPicks['fotn']?.pick || null;
     const savedFotn = myPicks['fotn']?.pick || null;
-    const fotnCards = allFights.map(f => {
-      const isSelected = f.name === localFotn;
-      const isSaved = f.name === savedFotn;
-      return `<button class="pk-fotn-fight${isSelected ? ' selected' : ''}${isSelected && isSaved ? ' saved' : ''}" data-fight="${esc(f.name)}" type="button">
-        <span class="pk-fotn-fight-name">${esc(f.name)}</span>
-      </button>`;
+
+    function lastName(name) {
+      const parts = (name || '').trim().split(' ');
+      return parts[parts.length - 1].toUpperCase();
+    }
+
+    const fotnTiles = allFights.map(({ f, key }) => {
+      const name = `${f.a} vs ${f.b}`;
+      const isSelected = name === localFotn;
+      const isSaved = name === savedFotn;
+      return `
+        <button class="pk-fotn-tile${isSelected ? ' selected' : ''}${isSelected && isSaved ? ' saved' : ''}"
+          data-fight="${esc(name)}" type="button">
+          <div class="pk-fotn-tile-badge" style="${isSelected ? '' : 'display:none'}">${isSelected ? (isSaved ? 'FOTN PICK ✓' : 'FOTN PICK') : ''}</div>
+          <div class="pk-fotn-tile-inner">
+            <div class="pk-fotn-tile-name">${esc(lastName(f.a))}</div>
+            <div class="pk-fotn-tile-vs">VS</div>
+            <div class="pk-fotn-tile-name">${esc(lastName(f.b))}</div>
+          </div>
+        </button>`;
     }).join('');
+
     return `
       <div class="pk-fotn-section" id="pkFotnSection">
         <div class="pk-section-label pk-fotn-title">
-          <span>Fight of the Night Prediction</span>
-          <span class="pk-fotn-hint">Pick a fight from the main card. Correct = bonus points.</span>
+          <span>Fight of the Night</span>
+          <span class="pk-fotn-hint">Predict the standout fight — correct pick = bonus points</span>
         </div>
-        <div class="pk-fotn-fights">${fotnCards}</div>
-        <div class="pk-fotn-selected-lbl" style="display:none"></div>
+        <div class="pk-fotn-grid">${fotnTiles}</div>
       </div>`;
   }
 
@@ -769,7 +781,7 @@
   function bindFotn() {
     const section = document.getElementById('pkFotnSection');
     if (!section) return;
-    section.querySelectorAll('.pk-fotn-fight').forEach(btn => {
+    section.querySelectorAll('.pk-fotn-tile').forEach(btn => {
       btn.addEventListener('click', () => {
         const name = btn.dataset.fight;
         const alreadySelected = localPicks['fotn']?.pick === name;
