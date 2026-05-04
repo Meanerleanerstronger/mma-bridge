@@ -110,6 +110,15 @@
   let fotnPickMode  = false;  // cursor-mode FOTN selection active
   let fotnCursorEl  = null;
 
+  // ── Method drum constants ─────────────────────
+  const DRUM_ITEMS = [
+    { method: '', label: 'Method' },
+    { method: 'KO/TKO', label: 'KO / TKO' },
+    { method: 'SUB', label: 'Submission' },
+    { method: 'DEC', label: 'Decision' },
+  ];
+  const DRUM_H = 44;
+
   // ── Load picks from DB ────────────────────────
   async function loadPicks() {
     if (!myId || !sb) return;
@@ -329,6 +338,7 @@
       const bar = document.getElementById('pkSaveBar');
       if (bar) { bar.classList.add('pk-save-bar-locked'); setTimeout(() => bar.classList.remove('pk-save-bar-locked'), 1400); }
       updateSaveBar();
+      updateSpine();
       updateFotnSection();
     } catch (e) {
       console.error('saveAllPicks:', e);
@@ -564,17 +574,19 @@
     const wrongA   = isCompleted && pickedA && resultA === 'loss';
     const wrongB   = isCompleted && pickedB && resultB === 'loss';
 
-    const methodBtns = [
-      { id: 'KO/TKO', cls: 'ko', letter: 'KO', label: 'Knockout' },
-      { id: 'SUB',    cls: 'sub', letter: 'SUB', label: 'Submission' },
-      { id: 'DEC',    cls: 'dec', letter: 'DEC', label: 'Decision' },
-    ].map(m => `
-      <button class="pk-method-btn ${m.cls}${savedBase === m.id ? ` active ${m.cls}` : ''}"
-        data-method="${esc(m.id)}" data-key="${esc(key)}">
-        <span class="pk-method-letter">${esc(m.letter)}</span>
-        <span class="pk-method-name">${esc(m.label)}</span>
-      </button>
-    `).join('');
+    // Drum: compute current index from savedBase
+    const drumIdx = savedBase ? Math.max(0, DRUM_ITEMS.findIndex(d => d.method === savedBase)) : 0;
+    const drumOffset = -(drumIdx * DRUM_H);
+    const drumHtml = `
+      <div class="pk-method-drum" id="pkDrum-${esc(key)}" data-key="${esc(key)}">
+        <div class="pk-drum-window">
+          <div class="pk-drum-strip" id="pkDrumStrip-${esc(key)}"
+               style="transform:translateY(${drumOffset}px)">
+            ${DRUM_ITEMS.map(d => `<div class="pk-drum-item pk-drum-${(d.method||'none').replace('/','-').toLowerCase()}">${esc(d.label)}</div>`).join('')}
+          </div>
+        </div>
+        <div class="pk-drum-hint">↕ tap to cycle</div>
+      </div>`;
 
     const needsRound = (savedBase === 'KO/TKO' || savedBase === 'SUB');
     const roundCls   = savedBase === 'KO/TKO' ? 'ko' : 'sub';
@@ -630,6 +642,7 @@
               ${fighterPhoto(f.imgA || '', f.a, 'a')}
             </div>
             <div class="pk-fighter-name pk-fighter-name-a${resultA === 'win' ? ' pk-winner-name' : ''}">${esc(f.a)}</div>
+            <div class="pk-name-underline pk-name-underline-a"></div>
             ${fighterRecord(f.a) ? `<div class="pk-record">${esc(fighterRecord(f.a))}</div>` : ''}
             ${fighterForm(f.a)}
             ${crowdLabelA}
@@ -639,7 +652,13 @@
             ${wrongA   ? `<div class="pk-pick-result wrong">Wrong</div>` : ''}
           </div>
           <div class="pk-fight-vs">
-            <div class="pk-vs">VS</div>
+            <div class="pk-verdict-zone" id="pkVerdict-${esc(key)}">
+              <div class="pk-vs${(pickedA||pickedB)&&!isCompleted ? ' pk-vs-faded' : ''}">VS</div>
+              <div class="pk-verdict-name${pickedA ? ' pk-verdict-a' : pickedB ? ' pk-verdict-b' : ''}"
+                   style="opacity:${(pickedA||pickedB)&&!isCompleted ? '1' : '0'};letter-spacing:0.08em">
+                ${pickedA ? esc(f.a.trim().split(' ').pop().toUpperCase()) : pickedB ? esc(f.b.trim().split(' ').pop().toUpperCase()) : ''}
+              </div>
+            </div>
           </div>
           <div class="pk-side pk-side-b${pickedB ? ' selected' : ''}${resultB ? ` result-${resultB}` : ''}${correctB ? ' correct' : ''}${wrongB ? ' wrong' : ''}"
                data-key="${esc(key)}" data-pick="${esc(f.b)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
@@ -648,6 +667,7 @@
               ${fighterPhoto(f.imgB || '', f.b, 'b')}
             </div>
             <div class="pk-fighter-name pk-fighter-name-b${resultB === 'win' ? ' pk-winner-name' : ''}">${esc(f.b)}</div>
+            <div class="pk-name-underline pk-name-underline-b"></div>
             ${fighterRecord(f.b) ? `<div class="pk-record">${esc(fighterRecord(f.b))}</div>` : ''}
             ${fighterForm(f.b)}
             ${crowdLabelB}
@@ -665,12 +685,25 @@
         </div>` : ''}
         ${!isCompleted ? `
         <div class="pk-methods-section">
-          <div class="pk-method-label">Pick Method</div>
-          <div class="pk-method-row">${methodBtns}</div>
+          ${drumHtml}
           <div class="pk-round-row" id="pkRounds-${esc(key)}" style="${needsRound ? '' : 'display:none'}">
             <span class="pk-round-label">Round</span>
             ${roundBtns}
           </div>
+        </div>
+        <div class="pk-swipe-row" id="pkSwipeRow-${esc(key)}"
+             style="${(pickedA||pickedB) ? '' : 'display:none'}">
+          <div class="pk-swipe-track" id="pkSwipeTrack-${esc(key)}"
+               data-key="${esc(key)}" data-color="${pickedA ? 'gold' : 'cyan'}">
+            <div class="pk-swipe-fill" id="pkSwipeFill-${esc(key)}"></div>
+            <div class="pk-swipe-thumb" id="pkSwipeThumb-${esc(key)}"
+                 style="background:${pickedA ? '#c9a227' : '#00d9c0'}">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                <polyline points="3,2 7,5 3,8" stroke="#07070a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+          <div class="pk-swipe-hint-txt">Swipe to lock pick</div>
         </div>` : ''}
       </div>`;
   }
@@ -722,18 +755,24 @@
     return `<span class="pk-countdown">${label}</span>`;
   }
 
-  // ── Hype widget HTML ──────────────────────────
+  // ── Hype widget HTML — draggable slider ──────
   function hypeWidgetHtml() {
     if (isCompleted) return '';
-    const avgStr = hypeCount > 0 ? `${hypeAvg.toFixed(1)} avg · ${hypeCount} rating${hypeCount !== 1 ? 's' : ''}` : 'Be first to rate';
-    const btns = [1,2,3,4,5].map(n =>
-      `<button class="pk-hype-num-btn${localHype === n ? ' active' : localHype > n ? ' lit' : ''}" data-val="${n}" type="button">${n}</button>`
-    ).join('');
+    const pct   = localHype ? ((localHype - 1) / 4) * 100 : 0;
+    const avgStr = hypeCount > 0 ? `${hypeAvg.toFixed(1)} avg · ${hypeCount}` : 'Be first';
     return `
       <div class="pk-hype-widget" id="pkHypeWidget">
         <div class="pk-hype-label">Hype</div>
-        <div class="pk-hype-nums">${btns}</div>
-        <div class="pk-hype-avg">${avgStr}</div>
+        <div class="pk-hype-slider-wrap">
+          <div class="pk-hype-slider-track" id="pkHypeTrack">
+            <div class="pk-hype-slider-fill" id="pkHypeFill" style="width:${pct}%"></div>
+            <div class="pk-hype-slider-thumb" id="pkHypeThumb" style="left:${pct}%"></div>
+          </div>
+          <div class="pk-hype-ticks">
+            ${[1,2,3,4,5].map(n => `<div class="pk-hype-tick${localHype >= n ? ' active' : ''}" data-val="${n}">${n}</div>`).join('')}
+          </div>
+        </div>
+        <div class="pk-hype-avg" id="pkHypeAvg">${avgStr}</div>
       </div>`;
   }
 
@@ -830,14 +869,67 @@
     bindHype();
     bindFotn();
     updateFotnBar();
+    requestAnimationFrame(() => {
+      initSpine();
+      animateFightEntrance();
+    });
   }
 
-  // ── Bind hype flames ──────────────────────────
+  // ── Bind hype slider ──────────────────────────
   function bindHype() {
-    const widget = document.getElementById('pkHypeWidget');
-    if (!widget) return;
-    widget.querySelectorAll('.pk-hype-num-btn').forEach(b => {
-      b.addEventListener('click', () => saveHype(+b.dataset.val));
+    const track = document.getElementById('pkHypeTrack');
+    if (!track) return;
+    let dragging = false;
+    let pendingVal = localHype;
+
+    function getValFromX(clientX) {
+      const rect = track.getBoundingClientRect();
+      const pct  = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+      return Math.max(1, Math.min(5, Math.round(pct * 4) + 1));
+    }
+    function applyVal(val) {
+      pendingVal = val;
+      const pct  = ((val - 1) / 4) * 100;
+      const fill  = document.getElementById('pkHypeFill');
+      const thumb = document.getElementById('pkHypeThumb');
+      if (fill)  fill.style.width = pct + '%';
+      if (thumb) thumb.style.left  = pct + '%';
+      document.querySelectorAll('.pk-hype-tick').forEach(t => {
+        t.classList.toggle('active', +t.dataset.val <= val);
+      });
+    }
+
+    track.addEventListener('mousedown', e => {
+      dragging = true;
+      track.classList.add('dragging');
+      applyVal(getValFromX(e.clientX));
+    });
+    document.addEventListener('mousemove', e => {
+      if (!dragging) return;
+      applyVal(getValFromX(e.clientX));
+    });
+    document.addEventListener('mouseup', () => {
+      if (!dragging) return;
+      dragging = false;
+      track.classList.remove('dragging');
+      saveHype(pendingVal);
+    });
+    track.addEventListener('touchstart', e => {
+      dragging = true;
+      applyVal(getValFromX(e.touches[0].clientX));
+    }, { passive: true });
+    document.addEventListener('touchmove', e => {
+      if (!dragging) return;
+      applyVal(getValFromX(e.touches[0].clientX));
+    }, { passive: true });
+    document.addEventListener('touchend', () => {
+      if (!dragging) return;
+      dragging = false;
+      saveHype(pendingVal);
+    });
+    // Tick clicks
+    document.querySelectorAll('.pk-hype-tick').forEach(t => {
+      t.addEventListener('click', () => { applyVal(+t.dataset.val); saveHype(+t.dataset.val); });
     });
   }
 
@@ -879,6 +971,8 @@
           s.querySelector('.pk-pick-label')?.remove();
         });
 
+        const isA = pick === side.dataset.fa;
+
         if (!wasSelected) {
           side.classList.add('selected');
           const lbl = document.createElement('div');
@@ -887,45 +981,84 @@
           side.appendChild(lbl);
           const cur = localPicks[key] || {};
           localPicks[key] = { pick, base: cur.base || '', round: cur.round || '' };
+
+          // VS → verdict
+          const vz = document.getElementById(`pkVerdict-${key}`);
+          if (vz) {
+            const vs = vz.querySelector('.pk-vs');
+            const vn = vz.querySelector('.pk-verdict-name');
+            if (vs) vs.classList.add('pk-vs-faded');
+            if (vn) {
+              const lastName = pick.trim().split(' ').pop().toUpperCase();
+              vn.textContent = lastName;
+              vn.className = `pk-verdict-name ${isA ? 'pk-verdict-a' : 'pk-verdict-b'}`;
+              vn.style.letterSpacing = '0.32em';
+              vn.style.opacity = '0';
+              setTimeout(() => {
+                vn.style.opacity = '1';
+                vn.style.letterSpacing = '0.08em';
+              }, 180);
+            }
+          }
+
+          // Show swipe track
+          const swipeRow = document.getElementById(`pkSwipeRow-${key}`);
+          if (swipeRow) {
+            swipeRow.style.display = '';
+            const thumb = document.getElementById(`pkSwipeThumb-${key}`);
+            if (thumb) thumb.style.background = isA ? '#c9a227' : '#00d9c0';
+            const tr = document.getElementById(`pkSwipeTrack-${key}`);
+            if (tr) tr.dataset.color = isA ? 'gold' : 'cyan';
+          }
         } else {
           delete localPicks[key];
-          fight.querySelectorAll('.pk-method-btn').forEach(b => b.classList.remove('active', 'ko', 'sub', 'dec'));
+          // Reset drum
+          const strip = document.getElementById(`pkDrumStrip-${key}`);
+          if (strip) { strip.style.transition = 'none'; strip.style.transform = 'translateY(0)'; }
           const roundRow = fight.querySelector(`[id^="pkRounds-"]`);
           if (roundRow) roundRow.style.display = 'none';
+          // Reset VS
+          const vz = document.getElementById(`pkVerdict-${key}`);
+          if (vz) {
+            const vs = vz.querySelector('.pk-vs');
+            const vn = vz.querySelector('.pk-verdict-name');
+            if (vs) vs.classList.remove('pk-vs-faded');
+            if (vn) { vn.style.opacity = '0'; vn.style.letterSpacing = '0.32em'; }
+          }
+          // Hide swipe track
+          const swipeRow = document.getElementById(`pkSwipeRow-${key}`);
+          if (swipeRow) swipeRow.style.display = 'none';
         }
         updateSaveBar();
+        updateSpine();
       };
       side.addEventListener('click', activate);
       side.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); } });
     });
 
-    root.querySelectorAll('.pk-method-btn').forEach(btn => {
-      btn.addEventListener('click', e => {
+    // ── Drum click ───────────────────────────────
+    root.querySelectorAll('.pk-method-drum').forEach(drum => {
+      drum.addEventListener('click', e => {
         e.stopPropagation();
-        const key    = btn.dataset.key;
-        const method = btn.dataset.method;
-        const fight  = root.querySelector(`.pk-fight[data-key="${key}"]`);
-        if (!fight) return;
+        const key = drum.dataset.key;
         if (!localPicks[key]) { showToast('Pick a fighter first', 'err'); return; }
 
-        const alreadyActive = btn.classList.contains('active');
-        const methodCls = method === 'KO/TKO' ? 'ko' : method === 'SUB' ? 'sub' : 'dec';
-        const newBase   = alreadyActive ? '' : method;
-        const showRound = !alreadyActive && (method === 'KO/TKO' || method === 'SUB');
-        const newRound  = showRound ? (localPicks[key].round || '') : '';
+        const strip = document.getElementById(`pkDrumStrip-${key}`);
+        const curIdx = DRUM_ITEMS.findIndex(d => d.method === (localPicks[key].base || ''));
+        const nextIdx = (curIdx + 1) % DRUM_ITEMS.length;
+        const newBase = DRUM_ITEMS[nextIdx].method;
+        const newOffset = -(nextIdx * DRUM_H);
 
-        fight.querySelectorAll('.pk-method-btn').forEach(b => b.classList.remove('active', 'ko', 'sub', 'dec'));
-        if (!alreadyActive) btn.classList.add('active', methodCls);
+        // Blur mid-spin then clear
+        drum.classList.add('blurring');
+        strip.style.transition = `transform 0.22s cubic-bezier(0.22, 1, 0.36, 1)`;
+        strip.style.transform  = `translateY(${newOffset}px)`;
+        setTimeout(() => drum.classList.remove('blurring'), 120);
 
-        const roundRow = document.getElementById(`pkRounds-${key}`);
-        if (roundRow) {
-          roundRow.style.display = showRound ? '' : 'none';
-          fight.querySelectorAll('.pk-round-btn').forEach(rb => {
-            rb.classList.remove('active', 'ko', 'sub');
-            if (showRound && rb.dataset.round === localPicks[key].round) rb.classList.add('active', methodCls);
-          });
-        }
-        localPicks[key] = { ...localPicks[key], base: newBase, round: showRound ? newRound : '' };
+        const showRound = newBase === 'KO/TKO' || newBase === 'SUB';
+        const roundRow  = document.getElementById(`pkRounds-${key}`);
+        if (roundRow) roundRow.style.display = showRound ? '' : 'none';
+        localPicks[key] = { ...localPicks[key], base: newBase, round: showRound ? (localPicks[key].round || '') : '' };
         updateSaveBar();
       });
     });
@@ -946,6 +1079,137 @@
         if (!alreadyActive) btn.classList.add('active', methodCls);
         localPicks[key] = { ...localPicks[key], round: newRound };
         updateSaveBar();
+      });
+    });
+
+    // ── Swipe-to-lock ────────────────────────────
+    root.querySelectorAll('.pk-swipe-track').forEach(track => {
+      const key    = track.dataset.key;
+      const thumb  = document.getElementById(`pkSwipeThumb-${key}`);
+      const fill   = document.getElementById(`pkSwipeFill-${key}`);
+      let dragging = false, startX = 0, thumbLeft = 0;
+
+      function getTrackW() { return track.offsetWidth - (thumb?.offsetWidth || 36) - 6; }
+      function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+
+      function lockFight() {
+        const fight  = root.querySelector(`.pk-fight[data-key="${key}"]`);
+        const swipeRow = document.getElementById(`pkSwipeRow-${key}`);
+        if (!fight || !swipeRow) return;
+        const color = track.dataset.color;
+        // Flash row
+        fight.classList.add('pk-fight-locked');
+        fight.style.setProperty('--lock-color', color === 'gold' ? 'rgba(201,162,39,0.12)' : 'rgba(0,217,192,0.1)');
+        fight.style.setProperty('--lock-border', color === 'gold' ? '#c9a227' : '#00d9c0');
+        // Replace swipe row with locked badge
+        const winner = localPicks[key]?.pick || '';
+        swipeRow.innerHTML = `<div class="pk-locked-badge">
+          <div class="pk-locked-check">✓</div>
+          <div class="pk-locked-txt">LOCKED · ${esc(winner.trim().split(' ').pop().toUpperCase())}</div>
+        </div>`;
+        updateSpine();
+        showToast('Pick locked in — save when ready');
+      }
+
+      function onMove(clientX) {
+        if (!dragging) return;
+        const dx = clamp(clientX - startX + thumbLeft, 0, getTrackW());
+        thumb.style.transition = 'none';
+        thumb.style.left = dx + 'px';
+        if (fill) fill.style.width = (dx + (thumb?.offsetWidth||36)/2) + 'px';
+      }
+
+      function onUp(clientX) {
+        if (!dragging) return;
+        dragging = false;
+        const pct = (parseFloat(thumb.style.left) || 0) / getTrackW();
+        if (pct >= 0.82) {
+          lockFight();
+        } else {
+          thumb.style.transition = 'left 0.42s cubic-bezier(0.34, 1.45, 0.64, 1)';
+          thumb.style.left = '3px';
+          if (fill) { fill.style.transition = 'width 0.4s ease'; fill.style.width = '0'; }
+        }
+        setTimeout(() => { if (fill) fill.style.transition = ''; }, 450);
+      }
+
+      track.addEventListener('mousedown', e => {
+        if (e.target.closest('.pk-method-drum')) return;
+        dragging = true; startX = e.clientX;
+        thumbLeft = parseFloat(thumb?.style.left || '3') || 3;
+        document.addEventListener('mousemove', mv => onMove(mv.clientX));
+        document.addEventListener('mouseup', mu => { onUp(mu.clientX); }, { once: true });
+      });
+      track.addEventListener('touchstart', e => {
+        dragging = true; startX = e.touches[0].clientX;
+        thumbLeft = parseFloat(thumb?.style.left || '3') || 3;
+      }, { passive: true });
+      track.addEventListener('touchmove', e => onMove(e.touches[0].clientX), { passive: true });
+      track.addEventListener('touchend',  e => onUp(e.changedTouches[0].clientX));
+      // Click fallback
+      track.addEventListener('click', e => {
+        if (dragging) return;
+        lockFight();
+      });
+    });
+  }
+
+  // ── Spine ─────────────────────────────────────
+  function initSpine() {
+    const body = root.querySelector('.pk-body');
+    if (!body) return;
+    let spine = document.getElementById('pkSpine');
+    if (!spine) {
+      spine = document.createElement('div');
+      spine.id = 'pkSpine';
+      spine.className = 'pk-spine';
+      spine.innerHTML = `<div class="pk-spine-track"></div><div class="pk-spine-fill" id="pkSpineFill"></div>`;
+      body.style.position = 'relative';
+      body.insertBefore(spine, body.firstChild);
+    }
+    // Remove old nodes
+    spine.querySelectorAll('.pk-spine-node').forEach(n => n.remove());
+    // Measure fight card positions relative to body
+    const bodyTop = body.getBoundingClientRect().top + window.scrollY;
+    root.querySelectorAll('.pk-fight[data-key]').forEach(card => {
+      const cardMid = card.getBoundingClientRect().top + window.scrollY + card.offsetHeight / 2;
+      const relTop  = cardMid - bodyTop;
+      const node = document.createElement('div');
+      node.className = 'pk-spine-node';
+      node.style.top = relTop + 'px';
+      node.dataset.key = card.dataset.key;
+      spine.appendChild(node);
+    });
+    updateSpine();
+  }
+
+  function updateSpine() {
+    const fill = document.getElementById('pkSpineFill');
+    if (!fill) return;
+    const total = root.querySelectorAll('.pk-fight[data-key]').length;
+    const picked = Object.keys(localPicks).filter(k => k !== 'fotn').length;
+    fill.style.height = total ? `${(picked / total) * 100}%` : '0%';
+    root.querySelectorAll('.pk-spine-node').forEach(node => {
+      const hasPick = !!localPicks[node.dataset.key];
+      const wasPickedAlready = node.classList.contains('picked');
+      node.classList.toggle('picked', hasPick);
+      if (hasPick && !wasPickedAlready) {
+        node.classList.add('pop');
+        setTimeout(() => node.classList.remove('pop'), 500);
+      }
+    });
+  }
+
+  // ── Cascade entrance animation ────────────────
+  function animateFightEntrance() {
+    root.querySelectorAll('.pk-fight').forEach((card, i) => {
+      card.style.clipPath = 'inset(0 100% 0 0)';
+      card.style.transition = 'none';
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          card.style.transition = `clip-path 0.6s cubic-bezier(0.22, 1, 0.36, 1) ${i * 80}ms`;
+          card.style.clipPath = 'inset(0 0% 0 0)';
+        }, 30);
       });
     });
   }
