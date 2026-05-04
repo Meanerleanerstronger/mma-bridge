@@ -566,7 +566,7 @@
     const savedRound = saved.round || '';
     const rounds = maxRounds(f.rounds);
 
-    const winner = f.winner || null;
+    const winner  = f.winner || null;
     const resultA = isCompleted && winner ? (winner === f.a ? 'win' : 'loss') : '';
     const resultB = isCompleted && winner ? (winner === f.b ? 'win' : 'loss') : '';
     const correctA = isCompleted && pickedA && resultA === 'win';
@@ -574,47 +574,43 @@
     const wrongA   = isCompleted && pickedA && resultA === 'loss';
     const wrongB   = isCompleted && pickedB && resultB === 'loss';
 
-    // Drum: compute current index from savedBase
-    const drumIdx = savedBase ? Math.max(0, DRUM_ITEMS.findIndex(d => d.method === savedBase)) : 0;
+    // Drum
+    const drumIdx    = savedBase ? Math.max(0, DRUM_ITEMS.findIndex(d => d.method === savedBase)) : 0;
     const drumOffset = -(drumIdx * DRUM_H);
-    const drumHtml = `
+    const drumHtml   = `
       <div class="pk-method-drum" id="pkDrum-${esc(key)}" data-key="${esc(key)}">
         <div class="pk-drum-window">
-          <div class="pk-drum-strip" id="pkDrumStrip-${esc(key)}"
-               style="transform:translateY(${drumOffset}px)">
+          <div class="pk-drum-strip" id="pkDrumStrip-${esc(key)}" style="transform:translateY(${drumOffset}px)">
             ${DRUM_ITEMS.map(d => `<div class="pk-drum-item pk-drum-${(d.method||'none').replace('/','-').toLowerCase()}">${esc(d.label)}</div>`).join('')}
           </div>
         </div>
         <div class="pk-drum-hint">↕ tap to cycle</div>
       </div>`;
 
-    const needsRound = (savedBase === 'KO/TKO' || savedBase === 'SUB');
+    const needsRound = savedBase === 'KO/TKO' || savedBase === 'SUB';
     const roundCls   = savedBase === 'KO/TKO' ? 'ko' : 'sub';
-    const roundBtns  = Array.from({length: rounds}, (_,i) => i+1).map(r => `
+    const roundBtns  = Array.from({length: rounds}, (_, i) => i + 1).map(r => `
       <button class="pk-round-btn${savedRound === String(r) ? ` active ${roundCls}` : ''}"
-        data-round="${r}" data-key="${esc(key)}" data-method-cls="${roundCls}">R${r}</button>
-    `).join('');
+        data-round="${r}" data-key="${esc(key)}" data-method-cls="${roundCls}">R${r}</button>`).join('');
 
-    const titleBadge  = f.titleFight ? `<div class="pk-title-badge">Title Fight</div>` : '';
-    const rankedBadge = f.ranked && !f.titleFight ? `<div class="pk-ranked-badge">Ranked</div>` : '';
+    const titleBadge  = f.titleFight ? `<span class="pk-title-badge">🏆 Title Fight</span>` : '';
+    const rankedBadge = f.ranked && !f.titleFight ? `<span class="pk-ranked-badge">Ranked</span>` : '';
 
     const methodBannerA = isCompleted && winner === f.a && f.method
       ? `<div class="pk-method-banner">${esc(f.method)}</div>` : '';
     const methodBannerB = isCompleted && winner === f.b && f.method
       ? `<div class="pk-method-banner">${esc(f.method)}</div>` : '';
 
-    // Community pick % — shown on completed, or upcoming only after user picked this fight
-    const comm = communityPicks[key] || {};
+    const comm      = communityPicks[key] || {};
     const commTotal = Object.values(comm).reduce((s, v) => s + v, 0);
-    const showComm = commTotal > 0 && (isCompleted || pickedA || pickedB);
-    const commPctA = showComm ? Math.round(((comm[f.a] || 0) / commTotal) * 100) : null;
-    const commPctB = showComm ? Math.round(((comm[f.b] || 0) / commTotal) * 100) : null;
+    const showComm  = commTotal > 0 && (isCompleted || pickedA || pickedB);
+    const commPctA  = showComm ? Math.round(((comm[f.a] || 0) / commTotal) * 100) : null;
+    const commPctB  = showComm ? Math.round(((comm[f.b] || 0) / commTotal) * 100) : null;
 
-    // Crowd labels — show after picking on upcoming, always on completed
-    const crowdFaveA = showComm && commPctA !== null && commPctA >= 65;
-    const crowdFaveB = showComm && commPctB !== null && commPctB >= 65;
-    const underdogA  = showComm && commPctA !== null && commPctA > 0 && commPctA <= 35;
-    const underdogB  = showComm && commPctB !== null && commPctB > 0 && commPctB <= 35;
+    const crowdFaveA = showComm && commPctA >= 65;
+    const crowdFaveB = showComm && commPctB >= 65;
+    const underdogA  = showComm && commPctA > 0 && commPctA <= 35;
+    const underdogB  = showComm && commPctB > 0 && commPctB <= 35;
     const crowdLabelA = crowdFaveA ? `<div class="pk-crowd-fave">Crowd Fave</div>`
                        : underdogA  ? `<div class="pk-crowd-dog">Underdog</div>` : '';
     const crowdLabelB = crowdFaveB ? `<div class="pk-crowd-fave">Crowd Fave</div>`
@@ -627,20 +623,19 @@
 
     return `
       <div class="pk-fight${isMain ? ' pk-fight-main' : ''}" data-key="${esc(key)}">
-        ${titleBadge}${rankedBadge}
-        ${(f.weight || f.rounds) ? `
-        <div class="pk-fight-meta">
-          ${f.weight ? `<span>${esc(f.weight)}</span>` : ''}
-          ${f.weight && f.rounds ? `<span class="pk-fight-meta-dot">·</span>` : ''}
-          ${f.rounds ? `<span>${esc(f.rounds)}</span>` : ''}
-        </div>` : ''}
-        <div class="pk-fight-fighters">
+        <div class="pk-fight-header">
+          <div class="pk-fight-badges">${titleBadge}${rankedBadge}</div>
+          <div class="pk-fight-meta-inline">
+            ${f.weight ? `<span class="pk-fight-wt-lbl">${esc(f.weight)}</span>` : ''}
+            ${f.weight && f.rounds ? `<span class="pk-fight-meta-sep">·</span>` : ''}
+            ${f.rounds ? `<span class="pk-fight-rds-lbl">${esc(f.rounds)}</span>` : ''}
+          </div>
+        </div>
+
+        <div class="pk-fight-row">
           <div class="pk-side pk-side-a${pickedA ? ' selected' : ''}${resultA ? ` result-${resultA}` : ''}${correctA ? ' correct' : ''}${wrongA ? ' wrong' : ''}"
                data-key="${esc(key)}" data-pick="${esc(f.a)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
-            <div class="pk-fighter-photo">
-              ${methodBannerA}
-              ${fighterPhoto(f.imgA || '', f.a, 'a')}
-            </div>
+            ${methodBannerA}
             <div class="pk-fighter-name pk-fighter-name-a${resultA === 'win' ? ' pk-winner-name' : ''}">${esc(f.a)}</div>
             <div class="pk-name-underline pk-name-underline-a"></div>
             ${fighterRecord(f.a) ? `<div class="pk-record">${esc(fighterRecord(f.a))}</div>` : ''}
@@ -648,24 +643,23 @@
             ${crowdLabelA}
             ${pickLabelA}
             ${oppPickedA ? `<div class="pk-opp-label">${esc(oppName)}</div>` : ''}
-            ${correctA ? `<div class="pk-pick-result correct">Correct</div>` : ''}
-            ${wrongA   ? `<div class="pk-pick-result wrong">Wrong</div>` : ''}
+            ${correctA ? `<div class="pk-pick-result correct">✓ Correct</div>` : ''}
+            ${wrongA   ? `<div class="pk-pick-result wrong">✗ Wrong</div>` : ''}
           </div>
-          <div class="pk-fight-vs">
+
+          <div class="pk-vs-col">
             <div class="pk-verdict-zone" id="pkVerdict-${esc(key)}">
-              <div class="pk-vs${(pickedA||pickedB)&&!isCompleted ? ' pk-vs-faded' : ''}">VS</div>
+              <div class="pk-vs${(pickedA || pickedB) && !isCompleted ? ' pk-vs-faded' : ''}">VS</div>
               <div class="pk-verdict-name${pickedA ? ' pk-verdict-a' : pickedB ? ' pk-verdict-b' : ''}"
-                   style="opacity:${(pickedA||pickedB)&&!isCompleted ? '1' : '0'};letter-spacing:0.08em">
+                   style="opacity:${(pickedA || pickedB) && !isCompleted ? '1' : '0'}">
                 ${pickedA ? esc(f.a.trim().split(' ').pop().toUpperCase()) : pickedB ? esc(f.b.trim().split(' ').pop().toUpperCase()) : ''}
               </div>
             </div>
           </div>
+
           <div class="pk-side pk-side-b${pickedB ? ' selected' : ''}${resultB ? ` result-${resultB}` : ''}${correctB ? ' correct' : ''}${wrongB ? ' wrong' : ''}"
                data-key="${esc(key)}" data-pick="${esc(f.b)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
-            <div class="pk-fighter-photo">
-              ${methodBannerB}
-              ${fighterPhoto(f.imgB || '', f.b, 'b')}
-            </div>
+            ${methodBannerB}
             <div class="pk-fighter-name pk-fighter-name-b${resultB === 'win' ? ' pk-winner-name' : ''}">${esc(f.b)}</div>
             <div class="pk-name-underline pk-name-underline-b"></div>
             ${fighterRecord(f.b) ? `<div class="pk-record">${esc(fighterRecord(f.b))}</div>` : ''}
@@ -673,16 +667,18 @@
             ${crowdLabelB}
             ${pickLabelB}
             ${oppPickedB ? `<div class="pk-opp-label">${esc(oppName)}</div>` : ''}
-            ${correctB ? `<div class="pk-pick-result correct">Correct</div>` : ''}
-            ${wrongB   ? `<div class="pk-pick-result wrong">Wrong</div>` : ''}
+            ${correctB ? `<div class="pk-pick-result correct">✓ Correct</div>` : ''}
+            ${wrongB   ? `<div class="pk-pick-result wrong">✗ Wrong</div>` : ''}
           </div>
         </div>
+
         ${showComm ? `
         <div class="pk-comm-row">
           <span class="pk-comm-pct pk-comm-pct-a">${commPctA}%</span>
           <div class="pk-comm-bar"><div class="pk-comm-bar-fill" style="width:${commPctA}%"></div></div>
           <span class="pk-comm-pct pk-comm-pct-b">${commPctB}%</span>
         </div>` : ''}
+
         ${!isCompleted ? `
         <div class="pk-methods-section">
           ${drumHtml}
@@ -691,8 +687,7 @@
             ${roundBtns}
           </div>
         </div>
-        <div class="pk-swipe-row" id="pkSwipeRow-${esc(key)}"
-             style="${(pickedA||pickedB) ? '' : 'display:none'}">
+        <div class="pk-swipe-row" id="pkSwipeRow-${esc(key)}" style="${(pickedA || pickedB) ? '' : 'display:none'}">
           <div class="pk-swipe-track" id="pkSwipeTrack-${esc(key)}"
                data-key="${esc(key)}" data-color="${pickedA ? 'gold' : 'cyan'}">
             <div class="pk-swipe-fill" id="pkSwipeFill-${esc(key)}"></div>
