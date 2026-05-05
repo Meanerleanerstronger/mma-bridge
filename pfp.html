@@ -255,11 +255,11 @@
     .pfp-row-rec {
       font-family: 'Montserrat', sans-serif;
       font-size: 0.76rem; font-weight: 600;
-      color: rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.55);
       flex-shrink: 0; padding-left: 8px;
       transition: color 0.2s;
     }
-    .pfp-row:hover .pfp-row-rec { color: rgba(255,255,255,0.5); }
+    .pfp-row:hover .pfp-row-rec { color: rgba(255,255,255,0.85); }
 
     /* light mode */
     body.light-mode .pfp-page { background: #f2f2f2; }
@@ -294,54 +294,60 @@
     }
 
     /* ── Debate Button ── */
-    .pfp-row { position: relative; }
+    .pfp-row {
+      position: relative;
+      /* reserve space on the right so button never overlaps the record */
+      padding-right: 100px;
+    }
 
     .pfp-debate-btn {
       position: absolute;
-      right: 6px;
+      /* sits just right of the record text — record ends ~8px from edge of old padding,
+         button starts at right:4px of the 100px reserved zone */
+      right: 4px;
       top: 50%;
-      transform: translateY(-50%) translateX(12px);
+      transform: translateY(-50%) translateX(14px);
       opacity: 0;
       pointer-events: none;
       display: flex;
       align-items: center;
       gap: 5px;
-      background: rgba(6,6,8,0.88);
-      border: 1px solid rgba(0,229,255,0.38);
+      background: rgba(12,7,3,0.9);
+      border: 1px solid rgba(255,120,30,0.45);
       border-radius: 20px;
-      padding: 5px 12px 5px 9px;
+      padding: 5px 13px 5px 10px;
       font-family: 'Inter', sans-serif;
       font-size: 0.59rem;
       font-weight: 700;
       letter-spacing: 0.09em;
       text-transform: uppercase;
-      color: #00e5ff;
+      color: #ff7a1a;
       cursor: pointer;
       white-space: nowrap;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       z-index: 20;
       transition: opacity 0.18s ease,
-                  transform 0.24s cubic-bezier(0.34,1.56,0.64,1),
+                  transform 0.26s cubic-bezier(0.34,1.56,0.64,1),
                   border-color 0.15s, background 0.15s, box-shadow 0.15s;
     }
     .pfp-debate-btn-icon {
-      font-size: 0.72rem;
+      font-size: 0.74rem;
       line-height: 1;
     }
     .pfp-row:hover .pfp-debate-btn {
       opacity: 1;
       pointer-events: all;
       transform: translateY(-50%) translateX(0);
-      box-shadow: 0 0 18px rgba(0,229,255,0.12), 0 4px 14px rgba(0,0,0,0.45);
+      box-shadow: 0 0 20px rgba(255,120,30,0.18), 0 4px 14px rgba(0,0,0,0.5);
     }
     .pfp-debate-btn:hover {
-      background: rgba(0,229,255,0.1);
-      border-color: rgba(0,229,255,0.65);
-      box-shadow: 0 0 28px rgba(0,229,255,0.25), 0 4px 18px rgba(0,0,0,0.55) !important;
+      background: rgba(255,120,30,0.1);
+      border-color: rgba(255,120,30,0.7);
+      box-shadow: 0 0 28px rgba(255,120,30,0.28), 0 4px 18px rgba(0,0,0,0.55) !important;
     }
     .pfp-debate-btn:active {
-      transform: translateY(-50%) scale(0.95) !important;
+      transform: translateY(-50%) scale(0.94) !important;
     }
 
     /* Hero debate button */
@@ -352,8 +358,8 @@
       display: flex;
       align-items: center;
       gap: 7px;
-      background: rgba(6,6,8,0.72);
-      border: 1px solid rgba(0,229,255,0.45);
+      background: rgba(12,7,3,0.78);
+      border: 1px solid rgba(255,120,30,0.5);
       border-radius: 22px;
       padding: 8px 18px 8px 14px;
       font-family: 'Inter', sans-serif;
@@ -361,7 +367,7 @@
       font-weight: 700;
       letter-spacing: 0.09em;
       text-transform: uppercase;
-      color: #00e5ff;
+      color: #ff7a1a;
       cursor: pointer;
       white-space: nowrap;
       backdrop-filter: blur(14px);
@@ -377,16 +383,17 @@
     .pfp-hero:hover .pfp-hero-debate-btn {
       opacity: 1;
       transform: translateY(0);
-      box-shadow: 0 0 24px rgba(0,229,255,0.18), 0 6px 22px rgba(0,0,0,0.55);
+      box-shadow: 0 0 28px rgba(255,120,30,0.22), 0 6px 22px rgba(0,0,0,0.55);
     }
     .pfp-hero-debate-btn:hover {
-      background: rgba(0,229,255,0.12);
-      border-color: rgba(0,229,255,0.75);
-      box-shadow: 0 0 36px rgba(0,229,255,0.3), 0 6px 28px rgba(0,0,0,0.6) !important;
+      background: rgba(255,120,30,0.12);
+      border-color: rgba(255,120,30,0.78);
+      box-shadow: 0 0 40px rgba(255,120,30,0.32), 0 6px 28px rgba(0,0,0,0.6) !important;
     }
     .pfp-hero-debate-btn:active { transform: scale(0.96) !important; }
 
     @media (max-width: 768px) {
+      .pfp-row { padding-right: 8px; }
       .pfp-debate-btn { display: none; }
       .pfp-hero-debate-btn { display: none; }
     }
