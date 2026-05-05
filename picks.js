@@ -630,7 +630,7 @@
       : `<div class="pk-avatar${isMain ? ' pk-avatar-main' : ''} pk-avatar-empty"></div>`;
 
     return `
-      <div class="pk-fight${isMain ? ' pk-fight-main' : ''}${hasPick ? ' pk-fight-picked' : ''}" data-key="${esc(key)}">
+      <div class="pk-fight${isMain ? ' pk-fight-main' : ''}" data-key="${esc(key)}">
         <div class="pk-fight-header">
           <div class="pk-fight-badges">${titleBadge}${rankedBadge}</div>
           <div class="pk-fight-meta-inline">
@@ -680,13 +680,6 @@
           </div>
         </div>
 
-        ${showComm ? `
-        <div class="pk-comm-row">
-          <span class="pk-comm-pct pk-comm-pct-a">${commPctA}%</span>
-          <div class="pk-comm-bar"><div class="pk-comm-bar-fill" style="width:${commPctA}%"></div></div>
-          <span class="pk-comm-pct pk-comm-pct-b">${commPctB}%</span>
-        </div>` : ''}
-
         ${!isCompleted ? `
         <div class="pk-methods-section">
           ${drumHtml}
@@ -694,18 +687,6 @@
             <span class="pk-round-label">Round</span>
             ${roundBtns}
           </div>
-        </div>
-        <div class="pk-swipe-row" id="pkSwipeRow-${esc(key)}" style="${hasPick ? '' : 'display:none'}">
-          <div class="pk-swipe-track" id="pkSwipeTrack-${esc(key)}"
-               data-key="${esc(key)}" data-color="cyan">
-            <div class="pk-swipe-fill" id="pkSwipeFill-${esc(key)}"></div>
-            <div class="pk-swipe-thumb" id="pkSwipeThumb-${esc(key)}">
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                <polyline points="3,2 7,5 3,8" stroke="#07070a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-          </div>
-          <div class="pk-swipe-hint-txt">Swipe to lock pick</div>
         </div>` : ''}
       </div>`;
   }
@@ -977,7 +958,6 @@
 
         if (!wasSelected) {
           side.classList.add('selected');
-          fight.classList.add('pk-fight-picked');
           const lbl = document.createElement('div');
           lbl.className = 'pk-pick-label pk-pick-unsaved';
           lbl.textContent = 'Your pick •';
@@ -997,13 +977,8 @@
               requestAnimationFrame(() => { vn.style.opacity = '1'; });
             }
           }
-
-          // Show swipe track
-          const swipeRow = document.getElementById(`pkSwipeRow-${key}`);
-          if (swipeRow) swipeRow.style.display = '';
         } else {
           delete localPicks[key];
-          fight.classList.remove('pk-fight-picked');
           // Reset drum
           const strip = document.getElementById(`pkDrumStrip-${key}`);
           if (strip) { strip.style.transition = 'none'; strip.style.transform = 'translateY(0)'; }
@@ -1017,9 +992,6 @@
             if (vs) vs.classList.remove('pk-vs-faded');
             if (vn) vn.style.opacity = '0';
           }
-          // Hide swipe track
-          const swipeRow = document.getElementById(`pkSwipeRow-${key}`);
-          if (swipeRow) swipeRow.style.display = 'none';
         }
         updateSaveBar();
         updateSpine();
@@ -1074,76 +1046,6 @@
       });
     });
 
-    // ── Swipe-to-lock ────────────────────────────
-    root.querySelectorAll('.pk-swipe-track').forEach(track => {
-      const key    = track.dataset.key;
-      const thumb  = document.getElementById(`pkSwipeThumb-${key}`);
-      const fill   = document.getElementById(`pkSwipeFill-${key}`);
-      let dragging = false, startX = 0, thumbLeft = 0;
-
-      function getTrackW() { return track.offsetWidth - (thumb?.offsetWidth || 36) - 6; }
-      function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
-
-      function lockFight() {
-        const fight  = root.querySelector(`.pk-fight[data-key="${key}"]`);
-        const swipeRow = document.getElementById(`pkSwipeRow-${key}`);
-        if (!fight || !swipeRow) return;
-        const color = track.dataset.color;
-        // Flash row
-        fight.classList.add('pk-fight-locked');
-        fight.style.setProperty('--lock-color', color === 'gold' ? 'rgba(201,162,39,0.12)' : 'rgba(0,217,192,0.1)');
-        fight.style.setProperty('--lock-border', color === 'gold' ? '#c9a227' : '#00d9c0');
-        // Replace swipe row with locked badge
-        const winner = localPicks[key]?.pick || '';
-        swipeRow.innerHTML = `<div class="pk-locked-badge">
-          <div class="pk-locked-check">✓</div>
-          <div class="pk-locked-txt">LOCKED · ${esc(winner.trim().split(' ').pop().toUpperCase())}</div>
-        </div>`;
-        updateSpine();
-        showToast('Pick locked in — save when ready');
-      }
-
-      function onMove(clientX) {
-        if (!dragging) return;
-        const dx = clamp(clientX - startX + thumbLeft, 0, getTrackW());
-        thumb.style.transition = 'none';
-        thumb.style.left = dx + 'px';
-        if (fill) fill.style.width = (dx + (thumb?.offsetWidth||36)/2) + 'px';
-      }
-
-      function onUp(clientX) {
-        if (!dragging) return;
-        dragging = false;
-        const pct = (parseFloat(thumb.style.left) || 0) / getTrackW();
-        if (pct >= 0.82) {
-          lockFight();
-        } else {
-          thumb.style.transition = 'left 0.42s cubic-bezier(0.34, 1.45, 0.64, 1)';
-          thumb.style.left = '3px';
-          if (fill) { fill.style.transition = 'width 0.4s ease'; fill.style.width = '0'; }
-        }
-        setTimeout(() => { if (fill) fill.style.transition = ''; }, 450);
-      }
-
-      track.addEventListener('mousedown', e => {
-        if (e.target.closest('.pk-method-drum')) return;
-        dragging = true; startX = e.clientX;
-        thumbLeft = parseFloat(thumb?.style.left || '3') || 3;
-        document.addEventListener('mousemove', mv => onMove(mv.clientX));
-        document.addEventListener('mouseup', mu => { onUp(mu.clientX); }, { once: true });
-      });
-      track.addEventListener('touchstart', e => {
-        dragging = true; startX = e.touches[0].clientX;
-        thumbLeft = parseFloat(thumb?.style.left || '3') || 3;
-      }, { passive: true });
-      track.addEventListener('touchmove', e => onMove(e.touches[0].clientX), { passive: true });
-      track.addEventListener('touchend',  e => onUp(e.changedTouches[0].clientX));
-      // Click fallback
-      track.addEventListener('click', e => {
-        if (dragging) return;
-        lockFight();
-      });
-    });
   }
 
   // ── Spine ─────────────────────────────────────

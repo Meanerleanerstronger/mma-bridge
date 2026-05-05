@@ -5479,35 +5479,35 @@ body.light-mode .ev-picks-btn:hover { background: rgba(0,150,180,0.18) !importan
 
 /* ── Fighter avatar ── */
 .pk-avatar {
-  width: 38px; height: 38px; border-radius: 50%;
-  overflow: hidden; flex-shrink: 0; margin-bottom: 9px;
+  width: 44px; height: 44px; border-radius: 50%;
+  overflow: hidden; flex-shrink: 0; margin-bottom: 10px;
   border: 1.5px solid rgba(255,255,255,0.1);
   background: rgba(255,255,255,0.04);
   transition: border-color 0.2s;
 }
 .pk-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
 .pk-avatar-empty { background: rgba(255,255,255,0.03); }
-.pk-avatar-main { width: 46px; height: 46px; }
-.pk-side.selected .pk-avatar { border-color: rgba(0,229,255,0.45); }
+.pk-avatar-main { width: 54px; height: 54px; }
+.pk-side.selected .pk-avatar { border-color: rgba(0,229,255,0.5); }
 
 /* ── Sportsbook fight row ── */
 .pk-fight-row {
   display: grid;
   grid-template-columns: 1fr 52px 1fr;
-  min-height: 118px;
+  min-height: 148px;
 }
-.pk-fight-main .pk-fight-row { min-height: 150px; }
+.pk-fight-main .pk-fight-row { min-height: 180px; }
 
 /* ── Fighter side ── */
 .pk-side {
   display: flex; flex-direction: column; justify-content: center;
-  padding: 12px 18px 16px;
+  padding: 18px 20px 20px;
   cursor: pointer; position: relative;
   transition: background 0.18s, opacity 0.18s, filter 0.18s;
   user-select: none;
 }
-.pk-side-a { align-items: flex-start; padding-left: 18px; }
-.pk-side-b { align-items: flex-end;   padding-right: 18px; }
+.pk-side-a { align-items: flex-start; padding-left: 22px; }
+.pk-side-b { align-items: flex-end;   padding-right: 22px; }
 .pk-side:hover { background: rgba(255,255,255,0.03); }
 
 /* Both sides use cyan */
@@ -5599,18 +5599,12 @@ body.light-mode .ev-picks-btn:hover { background: rgba(0,150,180,0.18) !importan
 .pk-vs-faded { opacity: 0.05 !important; }
 .pk-fight:has(.pk-side.selected) .pk-vs { color: rgba(0,229,255,0.35); }
 
-/* ── Methods section — animates in after pick ── */
+/* ── Methods section — always visible ── */
 .pk-methods-section {
   border-top: 1px solid rgba(255,255,255,0.04);
-  padding: 0 20px;
+  padding: 14px 20px 18px;
   display: flex; flex-direction: column; gap: 10px;
-  background: rgba(0,0,0,0.18);
-  max-height: 0; overflow: hidden; opacity: 0;
-  transition: max-height 0.38s cubic-bezier(0.34,1.1,0.64,1), opacity 0.3s ease, padding 0.3s ease;
-}
-.pk-fight-picked .pk-methods-section {
-  max-height: 180px; opacity: 1;
-  padding: 16px 20px 18px;
+  background: rgba(0,0,0,0.15);
 }
 
 /* round row — hidden until KO/SUB selected */
