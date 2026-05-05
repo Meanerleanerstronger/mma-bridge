@@ -1792,10 +1792,13 @@ body.light-mode .pfp-fight-info { color: rgba(0,0,0,0.4); }
     font-size: 1.5rem;
   }
   
-  .error-container p {
-    color: #999;
+  .error-container p,
+  .error-container .error-msg {
+    color: rgba(255,255,255,0.35);
     margin-bottom: 2rem;
     max-width: 400px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
   }
   
   .retry-button {

@@ -66,8 +66,8 @@ function buildCard(ev, type) {
       ? `<img class="card-poster" src="${escHtml(poster)}" alt="${escHtml(name)}" loading="lazy"
            style="object-position:${objPos}"
            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-         <div class="card-placeholder" style="display:none;">🥊</div>`
-      : `<div class="card-placeholder">🥊</div>`
+         <div class="card-placeholder" style="display:none;"></div>`
+      : `<div class="card-placeholder"></div>`
     }
     <div class="card-gradient"></div>
     <div class="card-info">
@@ -338,7 +338,7 @@ function isUpcomingEvent(ev) {
 
   } catch (err) {
     console.error('Reviews load error:', err);
-    scrollPPV.innerHTML = `<div style="padding:20px;color:rgba(255,255,255,0.25);font-family:'Inter',sans-serif;font-size:0.85rem;">Could not load events.</div>`;
+    scrollPPV.innerHTML = `<div style="padding:20px;color:rgba(255,255,255,0.2);font-family:'Inter',sans-serif;font-size:0.82rem;text-align:center;">No events to display right now.</div>`;
     scrollFN.innerHTML  = '';
   }
 })();

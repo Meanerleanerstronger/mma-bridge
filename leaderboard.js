@@ -122,7 +122,7 @@
 
   if (!sb) {
     document.getElementById('lbGlobalWrap').innerHTML =
-      `<div class="lb-error">Could not connect to database.</div>`;
+      `<div class="lb-error">Sign in to see the full leaderboard.</div>`;
     wireModals(null, null, null);
     return;
   }
@@ -171,7 +171,7 @@
 
   if (picksErr || !picksData) {
     document.getElementById('lbGlobalWrap').innerHTML =
-      `<div class="lb-error">Could not load picks data.</div>`;
+      `<div class="lb-error">No rankings data yet — be the first to make picks!</div>`;
     wireModals(null, null, null);
     return;
   }
@@ -359,13 +359,21 @@
     });
 
     document.getElementById('btnLeaveGroup')?.addEventListener('click', async () => {
-      if (!confirm('Leave this group?')) return;
+      const btn = document.getElementById('btnLeaveGroup');
+      if (!btn) return;
+      if (btn.dataset.confirm !== '1') {
+        btn.dataset.confirm = '1';
+        btn.textContent = 'Tap again to confirm';
+        setTimeout(() => { if (btn) { btn.dataset.confirm = ''; btn.textContent = 'Leave Group'; } }, 3000);
+        return;
+      }
+      btn.disabled = true;
       try {
         await sb.from('profiles').update({ group_code: null, group_name: null }).eq('id', myId);
         myGroupCode = null; myGroupName = null;
         allUsers.forEach(u => { if (u.user_id === myId) { u.group_code = null; u.group_name = null; } });
         renderGroupStatus();
-      } catch { alert('Could not leave group. Try again.'); }
+      } catch { btn.disabled = false; }
     });
   }
 
@@ -384,7 +392,7 @@
     function closeModal(id) { const el = document.getElementById(id); if (el) el.style.display = 'none'; }
 
     document.getElementById('btnCreateGroup')?.addEventListener('click', () => {
-      if (!myId) { alert('Sign in to create a group.'); return; }
+      if (!myId) { const e = document.getElementById('createErr'); if (e) { openModal('modalCreate'); e.textContent = 'Sign in first to create a group.'; } return; }
       openModal('modalCreate');
       setTimeout(() => document.getElementById('groupNameInput')?.focus(), 60);
     });
@@ -409,15 +417,13 @@
         closeModal('modalCreate');
         if (nameEl) nameEl.value = '';
         renderGroupStatus();
-      } catch (err) {
-        if (errEl) errEl.textContent = err?.message?.includes('column')
-          ? 'DB missing group columns — run SQL migration from leaderboard.js header.'
-          : 'Could not create group. Make sure you are signed in.';
+      } catch {
+        if (errEl) errEl.textContent = 'Something went wrong — please try again.';
       } finally { if (btn) { btn.textContent = 'Create Group'; btn.disabled = false; } }
     });
 
     document.getElementById('btnJoinGroup')?.addEventListener('click', () => {
-      if (!myId) { alert('Sign in to join a group.'); return; }
+      if (!myId) { const e = document.getElementById('joinErr'); if (e) { openModal('modalJoin'); e.textContent = 'Sign in first to join a group.'; } return; }
       openModal('modalJoin');
       setTimeout(() => document.getElementById('joinCodeInput')?.focus(), 60);
     });

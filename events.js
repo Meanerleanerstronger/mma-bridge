@@ -332,7 +332,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           })
           .catch(() => {
             const el = document.getElementById('drawerNewsContent');
-            if (el) el.textContent = 'Could not load news.';
+            if (el) el.textContent = '';
           });
       });
     });
@@ -539,6 +539,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   } catch (err) {
     console.error('Events load error:', err);
-    showError(wrap, 'Failed to load events. Please try again.');
+    showError(wrap, 'Unable to load events right now. Please try again.');
   }
 });

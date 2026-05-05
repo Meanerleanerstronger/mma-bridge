@@ -193,7 +193,7 @@
             ${poster
               ? `<img class="pr-rc-poster" src="${esc(poster)}" alt="${esc(name)}" loading="lazy" onerror="this.style.display='none'">
                  <div class="pr-rc-grad"></div>`
-              : `<div class="pr-rc-placeholder">🥊</div>`}
+              : `<div class="pr-rc-placeholder"></div>`}
             <div class="pr-rc-stars">${starsHtml(r.hype_rating)}</div>
           </div>
           <div class="pr-rc-body">

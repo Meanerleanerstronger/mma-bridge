@@ -139,14 +139,8 @@ export function showError(target, message = 'Something went wrong', showRetry = 
   
   container.innerHTML = `
     <div class="error-container">
-      <div class="error-icon">⚠️</div>
-      <h3>Oops!</h3>
-      <p>${message}</p>
-      ${showRetry ? `
-        <button class="retry-button" onclick="location.reload()">
-          Try Again
-        </button>
-      ` : ''}
+      <p class="error-msg">${message}</p>
+      ${showRetry ? `<button class="retry-button" onclick="location.reload()">Try Again</button>` : ''}
     </div>
   `;
 }

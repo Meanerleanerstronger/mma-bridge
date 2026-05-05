@@ -207,6 +207,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (error) {
     console.error('Error loading fighters:', error);
     const container = document.querySelector('.pfp-grid') || document.body;
-    showError(container, 'Failed to load fighters');
+    showError(container, 'Unable to load rankings right now. Please try again.');
   }
 });

@@ -65,7 +65,7 @@
     toastTimer = setTimeout(() => { toast.style.display = 'none'; }, 2800);
   }
 
-  if (!eventId) { root.innerHTML = `<div class="pk-error">No event specified.</div>`; return; }
+  if (!eventId) { root.innerHTML = `<div class="pk-error">No event selected. <a href="events.html" style="color:#00e5ff;text-decoration:none;">Browse events →</a></div>`; return; }
   root.innerHTML = `<div class="pk-loading"><div class="pk-spinner"></div>Loading card…</div>`;
 
   const [eventsData, fightersData, user] = await Promise.all([
@@ -104,7 +104,7 @@
   }
 
   const event = eventsData.find(e => e.id === eventId || slugify(e.name || '') === eventId);
-  if (!event) { root.innerHTML = `<div class="pk-error">Event not found.</div>`; return; }
+  if (!event) { root.innerHTML = `<div class="pk-error">Event not found. <a href="events.html" style="color:#00e5ff;text-decoration:none;">Browse events →</a></div>`; return; }
 
   const isCompleted = event.status === 'completed';
   let myId = user?.id || null;
@@ -406,7 +406,7 @@
       updateFotnSection();
     } catch (e) {
       console.error('saveAllPicks:', e);
-      showToast('Could not save — check connection', 'err');
+      showToast('Could not save picks — please try again', 'err');
     } finally {
       if (btn) btn.disabled = false;
     }
