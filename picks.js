@@ -22,10 +22,20 @@
     return base;
   }
 
-  const root    = document.getElementById('pkRoot');
-  const toast   = document.getElementById('pkToast');
-  const sb      = window._sb;
-  const eventId = getParam('id');
+  const root  = document.getElementById('pkRoot');
+  const toast = document.getElementById('pkToast');
+  const sb    = window._sb;
+
+  // Persist event ID so refresh / direct navigation works
+  let eventId = getParam('id');
+  if (!eventId) {
+    const stored = sessionStorage.getItem('pk_last_event');
+    if (stored) {
+      history.replaceState(null, '', location.pathname + '?id=' + encodeURIComponent(stored));
+      eventId = stored;
+    }
+  }
+  if (eventId) sessionStorage.setItem('pk_last_event', eventId);
 
   function apiBase() {
     const local = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
@@ -119,6 +129,51 @@
   ];
   const DRUM_H = 44;
 
+  // ── Points system ─────────────────────────────
+  const POINTS = { WINNER: 10, METHOD: 5, ROUND: 5, FOTN: 15 };
+
+  function normalizeMethodBase(m) {
+    if (!m) return '';
+    const u = m.toUpperCase();
+    if (u.includes('KO') || u.includes('TKO')) return 'KO/TKO';
+    if (u.includes('SUB') || u.includes('CHOKE') || u.includes('RNC') ||
+        u.includes('TRIANGLE') || u.includes('ARMBAR') || u.includes('GUILLOTINE') ||
+        u.includes('KIMURA') || u.includes('REAR NAKED')) return 'SUB';
+    if (u.includes('DECISION') || u === 'DEC' || u === 'UD' || u === 'SD' || u === 'MD' ||
+        u.endsWith(' UD') || u.endsWith(' SD') || u.endsWith(' MD')) return 'DEC';
+    return '';
+  }
+
+  function extractRoundNum(m) {
+    const match = String(m || '').match(/R\s*(\d)/i);
+    return match ? match[1] : '';
+  }
+
+  function computePickPoints(fightKey, fightData) {
+    const p = myPicks[fightKey];
+    if (!p || !fightData?.winner) return { pts: 0, breakdown: [] };
+    if ((p.pick || '').toLowerCase() !== fightData.winner.toLowerCase()) return { pts: 0, breakdown: [] };
+    let pts = POINTS.WINNER;
+    const breakdown = ['+10 winner'];
+    if (p.method && fightData.method) {
+      const pickedBase = normalizeMethodBase(p.method);
+      const actualBase = normalizeMethodBase(fightData.method);
+      if (pickedBase && actualBase && pickedBase === actualBase) {
+        pts += POINTS.METHOD;
+        breakdown.push('+5 method');
+        if (pickedBase === 'KO/TKO' || pickedBase === 'SUB') {
+          const pr = extractRoundNum(p.method);
+          const ar = extractRoundNum(fightData.method);
+          if (pr && ar && pr === ar) {
+            pts += POINTS.ROUND;
+            breakdown.push('+5 round');
+          }
+        }
+      }
+    }
+    return { pts, breakdown };
+  }
+
   // ── Load picks from DB ────────────────────────
   async function loadPicks() {
     if (!myId || !sb) return;
@@ -138,6 +193,14 @@
     Object.entries(myPicks).forEach(([k, v]) => {
       localPicks[k] = { pick: v.pick, base: v.base || '', round: v.round || '' };
     });
+    // Overlay any unsaved draft changes from sessionStorage
+    try {
+      const draft = sessionStorage.getItem(`pk_draft_${eventId}`);
+      if (draft) {
+        const d = JSON.parse(draft);
+        Object.entries(d).forEach(([k, v]) => { localPicks[k] = v; });
+      }
+    } catch {}
   }
 
   await loadPicks();
@@ -319,6 +382,7 @@
       Object.entries(localPicks).forEach(([k, v]) => {
         myPicks[k] = { pick: v.pick, base: v.base, round: v.round, method: combineMethod(v.base, v.round) };
       });
+      sessionStorage.removeItem(`pk_draft_${eventId}`);
       const n = pickCount();
       // Crowd alignment summary
       let withCrowd = 0, upsets = 0;
@@ -516,26 +580,27 @@
 
   // ── Score if completed ────────────────────────
   function computeScore() {
-    const all = [
-      ...(event.mainCard || []),
-      ...(event.prelims || []),
-      ...(event.earlyPrelims || []),
+    const allFights = [
+      ...(event.mainCard     || []).map((f, i) => ({ f, key: `main-${i}` })),
+      ...(event.prelims      || []).map((f, i) => ({ f, key: `prelims-${i}` })),
+      ...(event.earlyPrelims || []).map((f, i) => ({ f, key: `early-${i}` })),
     ];
-    let correct = 0, total = 0;
-    all.forEach((f, i) => {
-      const section = i < (event.mainCard||[]).length ? 'main'
-        : i < (event.mainCard||[]).length + (event.prelims||[]).length ? 'prelims'
-        : 'early';
-      const idx = section === 'main' ? i
-        : section === 'prelims' ? i - (event.mainCard||[]).length
-        : i - (event.mainCard||[]).length - (event.prelims||[]).length;
-      const key = `${section}-${idx}`;
-      const p = myPicks[key];
-      if (!p || !f.winner) return;
-      total++;
-      if (p.pick.toLowerCase() === f.winner.toLowerCase()) correct++;
+    let correct = 0, judged = 0, totalPts = 0;
+    allFights.forEach(({ f, key }) => {
+      if (!myPicks[key] || !f.winner) return;
+      judged++;
+      const { pts } = computePickPoints(key, f);
+      totalPts += pts;
+      if (pts >= POINTS.WINNER) correct++;
     });
-    return { correct, total };
+    // FOTN bonus
+    let fotnPts = 0;
+    const fotnPick = myPicks['fotn']?.pick;
+    if (fotnPick && event.fotn && fotnPick.toLowerCase() === event.fotn.toLowerCase()) {
+      fotnPts = POINTS.FOTN;
+      totalPts += fotnPts;
+    }
+    return { correct, total: judged, totalPts, fotnPts };
   }
 
   // ── Fighter photo ─────────────────────────────
@@ -573,6 +638,8 @@
     const correctB = isCompleted && pickedB && resultB === 'win';
     const wrongA   = isCompleted && pickedA && resultA === 'loss';
     const wrongB   = isCompleted && pickedB && resultB === 'loss';
+    const { pts: ptsA, breakdown: bdA } = (isCompleted && pickedA) ? computePickPoints(key, f) : { pts: 0, breakdown: [] };
+    const { pts: ptsB, breakdown: bdB } = (isCompleted && pickedB) ? computePickPoints(key, f) : { pts: 0, breakdown: [] };
 
     // Drum
     const drumIdx    = savedBase ? Math.max(0, DRUM_ITEMS.findIndex(d => d.method === savedBase)) : 0;
@@ -651,8 +718,8 @@
             ${crowdLabelA}
             ${pickLabelA}
             ${oppPickedA ? `<div class="pk-opp-label">${esc(oppName)}</div>` : ''}
-            ${correctA ? `<div class="pk-pick-result correct">✓ Correct</div>` : ''}
-            ${wrongA   ? `<div class="pk-pick-result wrong">✗ Wrong</div>` : ''}
+            ${correctA ? `<div class="pk-pick-result correct">✓ +${ptsA}pts${bdA.length > 1 ? ` <span class="pk-pts-bd">${bdA.slice(1).join(' · ')}</span>` : ''}</div>` : ''}
+            ${wrongA   ? `<div class="pk-pick-result wrong">✗ 0pts</div>` : ''}
           </div>
 
           <div class="pk-vs-col">
@@ -675,8 +742,8 @@
             ${crowdLabelB}
             ${pickLabelB}
             ${oppPickedB ? `<div class="pk-opp-label">${esc(oppName)}</div>` : ''}
-            ${correctB ? `<div class="pk-pick-result correct">✓ Correct</div>` : ''}
-            ${wrongB   ? `<div class="pk-pick-result wrong">✗ Wrong</div>` : ''}
+            ${correctB ? `<div class="pk-pick-result correct">✓ +${ptsB}pts${bdB.length > 1 ? ` <span class="pk-pts-bd">${bdB.slice(1).join(' · ')}</span>` : ''}</div>` : ''}
+            ${wrongB   ? `<div class="pk-pick-result wrong">✗ 0pts</div>` : ''}
           </div>
         </div>
 
@@ -705,10 +772,10 @@
     return `<div class="pk-career-badge pk-career-badge-${cls}">${careerCorrect}/${careerJudged} all-time · ${pct}%</div>`;
   }
 
-  // Full score hero for completed events — shown at top of body
+  // Full score hero for completed events
   function scoreHero() {
     if (!isCompleted) return '';
-    const { correct, total } = computeScore();
+    const { correct, total, totalPts, fotnPts } = computeScore();
     if (!myId) return `<div class="pk-score-hero pk-score-hero-anon"><div class="pk-score-hero-anon-title">Sign in to track your picks</div><a href="auth.html" class="pk-score-hero-anon-link">Sign In →</a></div>`;
     if (total === 0) return `<div class="pk-score-hero pk-score-hero-empty"><div class="pk-score-hero-empty-title">No picks recorded</div><div class="pk-score-hero-empty-sub">Make picks on upcoming events to track your accuracy</div></div>`;
     const pct = Math.round((correct / total) * 100);
@@ -718,6 +785,11 @@
     return `
       <div class="pk-score-hero pk-score-hero-${cls}">
         <div class="pk-score-hero-inner">
+          <div class="pk-score-hero-pts-block">
+            <div class="pk-score-hero-pts">${totalPts}</div>
+            <div class="pk-score-hero-pts-lbl">PTS</div>
+          </div>
+          <div class="pk-score-hero-divider"></div>
           <div class="pk-score-hero-nums">
             <span class="pk-score-hero-n">${correct}</span><span class="pk-score-hero-of">/${total}</span>
           </div>
@@ -726,7 +798,8 @@
             <div class="pk-score-hero-verdict">${verdict}</div>
           </div>
         </div>
-        ${careerPct !== null ? `<div class="pk-score-hero-career">All-time record: ${careerCorrect}/${careerJudged} picks · ${careerPct}% accuracy</div>` : ''}
+        ${fotnPts > 0 ? `<div class="pk-score-hero-fotn-bonus">⚡ +${fotnPts} FOTN Bonus</div>` : ''}
+        ${careerPct !== null ? `<div class="pk-score-hero-career">All-time: ${careerCorrect}/${careerJudged} picks · ${careerPct}%</div>` : ''}
       </div>`;
   }
 
@@ -964,6 +1037,7 @@
           side.appendChild(lbl);
           const cur = localPicks[key] || {};
           localPicks[key] = { pick, base: cur.base || '', round: cur.round || '' };
+          sessionStorage.setItem(`pk_draft_${eventId}`, JSON.stringify(localPicks));
 
           // VS → verdict
           const vz = document.getElementById(`pkVerdict-${key}`);
@@ -979,6 +1053,7 @@
           }
         } else {
           delete localPicks[key];
+          sessionStorage.setItem(`pk_draft_${eventId}`, JSON.stringify(localPicks));
           // Reset drum
           const strip = document.getElementById(`pkDrumStrip-${key}`);
           if (strip) { strip.style.transition = 'none'; strip.style.transform = 'translateY(0)'; }

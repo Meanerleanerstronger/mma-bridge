@@ -6936,12 +6936,15 @@ button:focus:not(:focus-visible), a:focus:not(:focus-visible) { outline: none; }
   font-family: 'Inter', sans-serif; font-size: 0.62rem;
   color: rgba(255,255,255,0.28); font-weight: 400;
 }
-.lb-stat-accuracy .lb-stat-val {
+.lb-stat-accuracy .lb-stat-val,
+.lb-stat-points .lb-stat-val {
   color: #00e5ff;
   text-shadow: 0 0 12px rgba(0,229,255,0.4);
 }
-.lb-stat-pct-sym {
-  font-size: 0.65em; opacity: 0.7; margin-left: 1px;
+.lb-stat-pct-sym,
+.lb-stat-pts-sym {
+  font-size: 0.55em; opacity: 0.6; margin-left: 2px;
+  font-weight: 700; letter-spacing: 0.05em;
 }
 .lb-pos-gold   { color: #d4a843; font-weight: 900; }
 .lb-pos-silver { color: #a8a8b8; font-weight: 900; }
@@ -6989,37 +6992,63 @@ button:focus:not(:focus-visible), a:focus:not(:focus-visible) { outline: none; }
 .pk-score-hero-inner {
   display: flex; align-items: center; gap: 20px;
 }
-.pk-score-hero-nums {
-  display: flex; align-items: baseline; gap: 2px;
-  line-height: 1;
+/* Points block — primary stat */
+.pk-score-hero-pts-block {
+  display: flex; flex-direction: column; align-items: flex-start; line-height: 1;
 }
-.pk-score-hero-n {
+.pk-score-hero-pts {
   font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
   font-weight: 900; font-size: 4.5rem;
   color: #fff; letter-spacing: -0.02em;
 }
-.pk-score-hero-great .pk-score-hero-n { color: #00ff88; text-shadow: 0 0 40px rgba(0,255,136,0.5); }
-.pk-score-hero-ok    .pk-score-hero-n { color: #ffd700; text-shadow: 0 0 40px rgba(255,215,0,0.4); }
-.pk-score-hero-poor  .pk-score-hero-n { color: #ff6060; text-shadow: 0 0 40px rgba(255,80,80,0.4); }
+.pk-score-hero-pts-lbl {
+  font-family: 'Montserrat', sans-serif; font-size: 0.6rem; font-weight: 800;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.3); margin-top: -2px;
+}
+.pk-score-hero-great .pk-score-hero-pts { color: #00ff88; text-shadow: 0 0 40px rgba(0,255,136,0.5); }
+.pk-score-hero-ok    .pk-score-hero-pts { color: #ffd700; text-shadow: 0 0 40px rgba(255,215,0,0.4); }
+.pk-score-hero-poor  .pk-score-hero-pts { color: #ff6060; text-shadow: 0 0 40px rgba(255,80,80,0.4); }
+/* Divider between pts and picks */
+.pk-score-hero-divider {
+  width: 1px; height: 52px; background: rgba(255,255,255,0.08); flex-shrink: 0;
+}
+.pk-score-hero-nums {
+  display: flex; align-items: baseline; gap: 2px; line-height: 1;
+}
+.pk-score-hero-n {
+  font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
+  font-weight: 900; font-size: 3rem;
+  color: rgba(255,255,255,0.7); letter-spacing: -0.02em;
+}
 .pk-score-hero-of {
   font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
-  font-weight: 700; font-size: 2rem; color: rgba(255,255,255,0.25);
+  font-weight: 700; font-size: 1.6rem; color: rgba(255,255,255,0.2);
 }
 .pk-score-hero-right { display: flex; flex-direction: column; gap: 3px; }
 .pk-score-hero-pct {
   font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
   font-weight: 900; font-size: 1.8rem;
-  color: rgba(255,255,255,0.75); letter-spacing: 0.02em;
+  color: rgba(255,255,255,0.55); letter-spacing: 0.02em;
 }
 .pk-score-hero-verdict {
   font-family: 'Montserrat', sans-serif; font-size: 0.62rem; font-weight: 800;
   letter-spacing: 0.18em; text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.25);
+}
+.pk-score-hero-fotn-bonus {
+  font-family: 'Montserrat', sans-serif; font-size: 0.72rem; font-weight: 700;
+  color: rgba(0,229,255,0.7); letter-spacing: 0.06em;
+  border-top: 1px solid rgba(0,229,255,0.12); padding-top: 10px;
 }
 .pk-score-hero-career {
   font-family: 'Inter', sans-serif; font-size: 0.72rem;
   color: rgba(255,255,255,0.22); border-top: 1px solid rgba(255,255,255,0.06);
   padding-top: 12px; margin-top: 2px;
+}
+/* Per-fight points breakdown */
+.pk-pts-bd {
+  font-size: 0.6em; opacity: 0.65; font-weight: 500;
 }
 .pk-score-hero-empty-title, .pk-score-hero-anon-title {
   font-family: 'Montserrat', sans-serif; font-size: 0.85rem; font-weight: 700;

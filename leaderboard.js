@@ -127,9 +127,32 @@
     return;
   }
 
-  // Load events.json to build winner lookup for accuracy scoring
+  // Points system
+  const POINTS = { WINNER: 10, METHOD: 5, ROUND: 5, FOTN: 15 };
+
+  function normalizeMethodBase(m) {
+    if (!m) return '';
+    const u = m.toUpperCase();
+    if (u.includes('KO') || u.includes('TKO')) return 'KO/TKO';
+    if (u.includes('SUB') || u.includes('CHOKE') || u.includes('RNC') ||
+        u.includes('TRIANGLE') || u.includes('ARMBAR') || u.includes('GUILLOTINE') ||
+        u.includes('KIMURA') || u.includes('REAR NAKED')) return 'SUB';
+    if (u.includes('DECISION') || u === 'DEC' || u === 'UD' || u === 'SD' || u === 'MD' ||
+        u.endsWith(' UD') || u.endsWith(' SD') || u.endsWith(' MD')) return 'DEC';
+    return '';
+  }
+
+  function extractRoundNum(m) {
+    const match = String(m || '').match(/R\s*(\d)/i);
+    return match ? match[1] : '';
+  }
+
+  // Load events.json to build winner, method, and FOTN lookups
   const allEventsRaw = await fetch('./events.json', { cache: 'no-cache' }).then(r => r.json()).catch(() => []);
   const winnerMap = {}; // 'eventId:fightKey' -> 'winner lowercase'
+  const methodMap = {}; // 'eventId:fightKey' -> 'method string'
+  const fotnMap   = {}; // 'eventId' -> 'fotn fight name lowercase'
+
   allEventsRaw.filter(e => e.status === 'completed').forEach(ev => {
     [
       ...(ev.mainCard     || []).map((f, i) => ({ f, key: `main-${i}` })),
@@ -137,13 +160,14 @@
       ...(ev.earlyPrelims || []).map((f, i) => ({ f, key: `early-${i}` })),
     ].forEach(({ f, key }) => {
       if (f.winner) winnerMap[`${ev.id}:${key}`] = f.winner.toLowerCase();
+      if (f.method) methodMap[`${ev.id}:${key}`] = f.method;
     });
+    if (ev.fotn) fotnMap[ev.id] = ev.fotn.toLowerCase();
   });
 
-  // Query: all picks with fight data (excluding fotn)
+  // Query: all picks including fotn
   const { data: picksData, error: picksErr } = await sb.from('picks')
-    .select('user_id, event_id, fight_key, pick')
-    .neq('fight_key', 'fotn');
+    .select('user_id, event_id, fight_key, pick, method');
 
   if (picksErr || !picksData) {
     document.getElementById('lbGlobalWrap').innerHTML =
@@ -152,17 +176,47 @@
     return;
   }
 
-  // Calculate per-user stats: total picks, judged (have a known result), correct
+  // Calculate per-user stats with full points system
   const statsMap = {};
   picksData.forEach(r => {
     if (!r.user_id) return;
-    if (!statsMap[r.user_id]) statsMap[r.user_id] = { total: 0, judged: 0, correct: 0 };
+    if (!statsMap[r.user_id]) statsMap[r.user_id] = { total: 0, judged: 0, correct: 0, points: 0 };
+
+    // FOTN picks
+    if (r.fight_key === 'fotn') {
+      const actualFotn = fotnMap[r.event_id];
+      if (actualFotn && r.pick?.toLowerCase() === actualFotn) {
+        statsMap[r.user_id].points += POINTS.FOTN;
+      }
+      return;
+    }
+
     statsMap[r.user_id].total++;
     const wKey = `${r.event_id}:${r.fight_key}`;
-    if (winnerMap[wKey] !== undefined) {
-      statsMap[r.user_id].judged++;
-      if (r.pick?.toLowerCase() === winnerMap[wKey]) statsMap[r.user_id].correct++;
+    const winner = winnerMap[wKey];
+    if (winner === undefined) return;
+
+    statsMap[r.user_id].judged++;
+    const isCorrect = r.pick?.toLowerCase() === winner;
+    if (!isCorrect) return;
+
+    statsMap[r.user_id].correct++;
+    let pts = POINTS.WINNER;
+
+    const actualMethod = methodMap[wKey];
+    if (r.method && actualMethod) {
+      const pickedBase = normalizeMethodBase(r.method);
+      const actualBase = normalizeMethodBase(actualMethod);
+      if (pickedBase && actualBase && pickedBase === actualBase) {
+        pts += POINTS.METHOD;
+        if (pickedBase === 'KO/TKO' || pickedBase === 'SUB') {
+          const pr = extractRoundNum(r.method);
+          const ar = extractRoundNum(actualMethod);
+          if (pr && ar && pr === ar) pts += POINTS.ROUND;
+        }
+      }
     }
+    statsMap[r.user_id].points += pts;
   });
   const rankedIds = Object.keys(statsMap);
 
@@ -180,10 +234,10 @@
   const profileMap = {};
   profilesData.forEach(p => { profileMap[p.id] = p; });
 
-  // Build user list with accuracy stats
+  // Build user list with full stats
   const allUsers = rankedIds.map(uid => {
     const p   = profileMap[uid] || {};
-    const s   = statsMap[uid] || { total: 0, judged: 0, correct: 0 };
+    const s   = statsMap[uid] || { total: 0, judged: 0, correct: 0, points: 0 };
     const pct = s.judged > 0 ? Math.round((s.correct / s.judged) * 100) : null;
     return {
       user_id:    uid,
@@ -195,12 +249,14 @@
       judged:     s.judged,
       correct:    s.correct,
       pct,
+      points:     s.points || 0,
     };
   }).sort((a, b) => {
-    // Sort by accuracy % (judged >= 3), then by judged count, then by total
+    // Primary: total points; secondary: accuracy %; tertiary: total picks
+    if (b.points !== a.points) return b.points - a.points;
     const aHas = a.pct !== null && a.judged >= 3;
     const bHas = b.pct !== null && b.judged >= 3;
-    if (aHas && bHas) return b.pct - a.pct || b.judged - a.judged;
+    if (aHas && bHas) return b.pct - a.pct;
     if (aHas) return -1;
     if (bHas) return 1;
     return b.count - a.count;
@@ -230,11 +286,12 @@
            <div class="lb-avatar lb-avatar-init" style="display:none">${esc(init)}</div>`
         : `<div class="lb-avatar lb-avatar-init">${esc(init)}</div>`;
 
+      const hasPoints  = u.points > 0;
       const hasAccuracy = u.pct !== null && u.judged >= 3;
-      const statHtml = hasAccuracy
-        ? `<div class="lb-stat lb-stat-accuracy">
-             <div class="lb-stat-val">${u.pct}<span class="lb-stat-pct-sym">%</span></div>
-             <div class="lb-stat-lbl">${u.correct}/${u.judged} correct</div>
+      const statHtml = hasPoints
+        ? `<div class="lb-stat lb-stat-points">
+             <div class="lb-stat-val">${u.points}<span class="lb-stat-pts-sym">pts</span></div>
+             <div class="lb-stat-lbl">${hasAccuracy ? `${u.pct}% · ${u.correct}/${u.judged}` : `${u.count} picks`}</div>
            </div>`
         : `<div class="lb-stat">
              <div class="lb-stat-val">${u.count}</div>
