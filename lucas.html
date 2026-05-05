@@ -373,6 +373,283 @@
     .send-btn:active { transform: scale(0.94); box-shadow: 0 2px 8px rgba(0,229,255,0.2); }
     .send-btn:disabled { opacity: 0.3; cursor: not-allowed; transform: none; box-shadow: none; }
 
+    /* ── Widget Cards ── */
+    .widget-wrap {
+      width: 100%;
+      margin-top: 10px;
+      animation: fadeUp 0.3s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+
+    /* Prediction card */
+    .wgt-prediction {
+      background: linear-gradient(135deg, #0d0f14 0%, #111318 100%);
+      border: 1px solid rgba(0,229,255,0.22);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,229,255,0.04);
+    }
+    .wgt-pred-header {
+      background: rgba(0,229,255,0.07);
+      border-bottom: 1px solid rgba(0,229,255,0.14);
+      padding: 10px 16px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .wgt-pred-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.56rem; font-weight: 800;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--cyan);
+    }
+    .wgt-pred-event {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem; color: var(--text-dim);
+    }
+    .wgt-pred-body { padding: 16px; }
+    .wgt-pred-fight {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.78rem; font-weight: 700;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 10px;
+      letter-spacing: 0.02em;
+    }
+    .wgt-pred-pick {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.15rem; font-weight: 900;
+      color: #fff; letter-spacing: 0.02em;
+      margin-bottom: 8px;
+    }
+    .wgt-pred-details {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .wgt-pred-tag {
+      background: rgba(0,229,255,0.08);
+      border: 1px solid rgba(0,229,255,0.18);
+      border-radius: 20px; padding: 3px 10px;
+      font-size: 0.65rem; font-weight: 600;
+      color: var(--cyan); letter-spacing: 0.06em;
+      font-family: 'Inter', sans-serif;
+    }
+    .wgt-pred-conf {
+      display: flex; align-items: center; gap: 8px;
+      margin-top: 8px;
+    }
+    .wgt-pred-conf-bar {
+      flex: 1; height: 3px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 2px; overflow: hidden;
+    }
+    .wgt-pred-conf-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--cyan) 0%, #80ffea 100%);
+      border-radius: 2px;
+      transition: width 0.8s cubic-bezier(0.25,1,0.5,1);
+    }
+    .wgt-pred-conf-pct {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem; font-weight: 800;
+      color: var(--cyan); min-width: 32px; text-align: right;
+    }
+    .wgt-pred-reasoning {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.73rem; line-height: 1.55;
+      color: var(--text-dim); margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      font-style: italic;
+    }
+
+    /* Parlay card */
+    .wgt-parlay {
+      background: linear-gradient(135deg, #0f0e14 0%, #111318 100%);
+      border: 1px solid rgba(201,162,39,0.3);
+      border-radius: 14px; overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4), 0 0 0 1px rgba(201,162,39,0.05);
+    }
+    .wgt-parlay-header {
+      background: rgba(201,162,39,0.08);
+      border-bottom: 1px solid rgba(201,162,39,0.15);
+      padding: 10px 16px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .wgt-parlay-icon { font-size: 0.85rem; }
+    .wgt-parlay-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.6rem; font-weight: 800;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: #c9a227;
+    }
+    .wgt-parlay-picks { padding: 12px 16px 16px; display: flex; flex-direction: column; gap: 8px; }
+    .wgt-parlay-pick {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+    }
+    .wgt-parlay-num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.6rem; font-weight: 800;
+      color: #c9a227; min-width: 16px;
+    }
+    .wgt-parlay-fighter {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem; font-weight: 700;
+      color: #fff; flex: 1;
+    }
+    .wgt-parlay-method {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem; color: var(--text-dim);
+    }
+    .wgt-parlay-check { color: var(--cyan); font-size: 0.75rem; }
+
+    /* Comparison card */
+    .wgt-comparison {
+      background: #0d0f14;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px; overflow: hidden;
+    }
+    .wgt-comp-header {
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 10px 16px;
+    }
+    .wgt-comp-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.56rem; font-weight: 800;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+    .wgt-comp-fighters {
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      gap: 12px; padding: 16px; align-items: start;
+    }
+    .wgt-comp-fighter { text-align: center; }
+    .wgt-comp-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.85rem; font-weight: 800;
+      color: #fff; margin-bottom: 4px;
+    }
+    .wgt-comp-record {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem; color: var(--text-dim);
+      margin-bottom: 8px;
+    }
+    .wgt-comp-edge {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem; line-height: 1.5;
+      color: rgba(255,255,255,0.45);
+    }
+    .wgt-comp-vs {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem; font-weight: 900;
+      color: rgba(255,255,255,0.2); padding-top: 8px;
+    }
+    .wgt-comp-verdict {
+      margin: 0 16px 16px;
+      padding: 10px 14px;
+      background: rgba(0,229,255,0.06);
+      border: 1px solid rgba(0,229,255,0.15);
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.73rem; font-weight: 600;
+      color: var(--cyan); text-align: center;
+    }
+
+    /* Fight card widget */
+    .wgt-card {
+      background: #0d0f14;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px; overflow: hidden;
+    }
+    .wgt-card-header {
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 10px 16px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .wgt-card-event {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem; font-weight: 800;
+      letter-spacing: 0.1em; color: #fff;
+    }
+    .wgt-card-date {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.62rem; color: var(--text-dim);
+    }
+    .wgt-card-fights { padding: 10px 16px 14px; display: flex; flex-direction: column; gap: 6px; }
+    .wgt-card-fight {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 10px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 8px;
+    }
+    .wgt-card-weight {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.55rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text-dim); min-width: 26px;
+    }
+    .wgt-card-matchup {
+      flex: 1;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.73rem; color: rgba(255,255,255,0.6);
+    }
+    .wgt-card-matchup strong {
+      color: #fff; font-weight: 600;
+    }
+    .wgt-card-method-tag {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.58rem; font-weight: 600;
+      color: var(--cyan);
+      background: rgba(0,229,255,0.07);
+      border: 1px solid rgba(0,229,255,0.14);
+      border-radius: 4px; padding: 2px 7px;
+    }
+
+    /* Upset alert */
+    .wgt-upset {
+      background: linear-gradient(135deg, #140a0a 0%, #110d0d 100%);
+      border: 1px solid rgba(255,60,60,0.3);
+      border-radius: 14px; overflow: hidden;
+      box-shadow: 0 4px 24px rgba(255,30,30,0.08);
+    }
+    .wgt-upset-header {
+      background: rgba(255,60,60,0.08);
+      border-bottom: 1px solid rgba(255,60,60,0.15);
+      padding: 10px 16px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .wgt-upset-alert {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.56rem; font-weight: 800;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: #ff4444;
+    }
+    .wgt-upset-body { padding: 16px; }
+    .wgt-upset-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem; font-weight: 900;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: #ff6666; margin-bottom: 10px;
+    }
+    .wgt-upset-result {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem; font-weight: 900; color: #fff;
+      margin-bottom: 4px;
+    }
+    .wgt-upset-method {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem; color: rgba(255,255,255,0.4);
+      margin-bottom: 12px;
+    }
+    .wgt-upset-hype {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.73rem; line-height: 1.55;
+      color: rgba(255,255,255,0.55); font-style: italic;
+    }
+
     @media (max-width: 860px) {
       .lucas-page { grid-template-columns: 1fr; padding: 16px; }
       .lucas-sidebar { display: none; }
@@ -457,13 +734,14 @@
 
       <div class="sidebar-label">Try asking</div>
       <div class="quick-chips">
-        <div class="qchip" onclick="sendQuick('Who won Moicano vs Duncan and how?')">🥊 Who won Moicano vs Duncan?</div>
-        <div class="qchip" onclick="sendQuick('When is UFC 327 and what is the full card?')">📅 When is UFC 327?</div>
-        <div class="qchip" onclick="sendQuick('Who is the lightweight champion right now?')">🏆 Who is the LW champ?</div>
-        <div class="qchip" onclick="sendQuick('Is Jon Jones the GOAT?')">🐐 Is Jon Jones the GOAT?</div>
-        <div class="qchip" onclick="sendQuick('Give me your UFC 327 Prochazka vs Ulberg prediction')">🔮 UFC 327 prediction</div>
+        <div class="qchip" onclick="sendQuick('Show me around MMA Bridge')">🏠 Show me around</div>
+        <div class="qchip" onclick="sendQuick('Hype me up for the next event')">🔥 Hype me up</div>
+        <div class="qchip" onclick="sendQuick('GOAT debate — who is the MMA GOAT?')">🐐 GOAT debate</div>
+        <div class="qchip" onclick="sendQuick('Give me a hot take')">💥 Hot take</div>
+        <div class="qchip" onclick="sendQuick('Who wins the next main event? Give me your prediction')">🔮 Next event prediction</div>
+        <div class="qchip" onclick="sendQuick('Compare Islam Makhachev vs Khabib Nurmagomedov')">⚖️ Islam vs Khabib</div>
         <div class="qchip" onclick="sendQuick('Tell me everything about Khamzat Chimaev')">👊 Tell me about Khamzat</div>
-        <div class="qchip" onclick="sendQuick('What are the funniest MMA memes right now?')">😂 MMA memes</div>
+        <div class="qchip" onclick="sendQuick('Give me a parlay for this weekend')">🎰 Build me a parlay</div>
       </div>
     </aside>
 
@@ -484,7 +762,7 @@
         <div class="messages" id="messages">
           <div class="msg-row">
             <div class="msg-av">🥊</div>
-            <div class="msg-bub">Yo, I'm Lucas — MMA Bridge's fight analyst. I know every event, every result, every fighter on this site. Ask me anything. Predictions, results, history, memes — I got you.</div>
+            <div class="msg-bub">Yo, I'm Lucas — the official ambassador of MMA Bridge. I know every fighter, every result, every event on this site. Ask me for predictions, fight card breakdowns, parlays, hot takes, or just vibe. Try "show me around", "hype me up", or "GOAT debate" to get started.</div>
           </div>
         </div>
 
@@ -509,7 +787,6 @@
       ? 'http://localhost:5001/api/chat'
       : 'https://mmabridge-backend.onrender.com/api/chat';
 
-    // Wake up Render backend on page load (free tier spins down)
     const PING_URL = 'https://mmabridge-backend.onrender.com/api/health';
     fetch(PING_URL).catch(() => {});
 
@@ -518,14 +795,201 @@
     const inputEl    = document.getElementById('chat-input');
     const sendBtnEl  = document.getElementById('send-btn');
 
-    function esc(t) { return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+    function esc(t) { return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
+    // ── Widget renderers ──────────────────────────
+    function renderWidget(wData) {
+      try {
+        const d = wData.data || {};
+        switch (wData.type) {
+          case 'prediction': return renderPrediction(d);
+          case 'parlay':     return renderParlay(d);
+          case 'comparison': return renderComparison(d);
+          case 'card':       return renderCard(d);
+          case 'upset':      return renderUpset(d);
+          default: return null;
+        }
+      } catch(e) { return null; }
+    }
+
+    function renderPrediction(d) {
+      const conf = Math.min(100, Math.max(0, parseInt(d.confidence) || 75));
+      const el = document.createElement('div');
+      el.className = 'widget-wrap';
+      el.innerHTML = `
+        <div class="wgt-prediction">
+          <div class="wgt-pred-header">
+            <span class="wgt-pred-label">Lucas's Pick</span>
+            <span class="wgt-pred-event">${esc(d.event || '')}</span>
+          </div>
+          <div class="wgt-pred-body">
+            ${d.fight ? `<div class="wgt-pred-fight">${esc(d.fight)}</div>` : ''}
+            <div class="wgt-pred-pick">${esc(d.pick || '')}</div>
+            <div class="wgt-pred-details">
+              ${d.method ? `<span class="wgt-pred-tag">${esc(d.method)}</span>` : ''}
+              ${d.round  ? `<span class="wgt-pred-tag">R${esc(d.round)}</span>` : ''}
+            </div>
+            <div class="wgt-pred-conf">
+              <div class="wgt-pred-conf-bar"><div class="wgt-pred-conf-fill" style="width:${conf}%"></div></div>
+              <span class="wgt-pred-conf-pct">${conf}%</span>
+            </div>
+            ${d.reasoning ? `<div class="wgt-pred-reasoning">${esc(d.reasoning)}</div>` : ''}
+          </div>
+        </div>`;
+      return el;
+    }
+
+    function renderParlay(d) {
+      const picks = d.picks || [];
+      const el = document.createElement('div');
+      el.className = 'widget-wrap';
+      el.innerHTML = `
+        <div class="wgt-parlay">
+          <div class="wgt-parlay-header">
+            <span class="wgt-parlay-icon">🎰</span>
+            <span class="wgt-parlay-title">${esc(d.title || "Lucas's Parlay")}</span>
+          </div>
+          <div class="wgt-parlay-picks">
+            ${picks.map((p, i) => `
+              <div class="wgt-parlay-pick">
+                <span class="wgt-parlay-num">${i + 1}</span>
+                <span class="wgt-parlay-fighter">${esc(p.fighter || '')}</span>
+                ${p.method ? `<span class="wgt-parlay-method">${esc(p.method)}</span>` : ''}
+                <span class="wgt-parlay-check">✓</span>
+              </div>`).join('')}
+          </div>
+        </div>`;
+      return el;
+    }
+
+    function renderComparison(d) {
+      const a = d.fighterA || {}, b = d.fighterB || {};
+      const el = document.createElement('div');
+      el.className = 'widget-wrap';
+      el.innerHTML = `
+        <div class="wgt-comparison">
+          <div class="wgt-comp-header">
+            <span class="wgt-comp-label">Fighter Comparison</span>
+          </div>
+          <div class="wgt-comp-fighters">
+            <div class="wgt-comp-fighter">
+              <div class="wgt-comp-name">${esc(a.name || '')}</div>
+              ${a.record ? `<div class="wgt-comp-record">${esc(a.record)}</div>` : ''}
+              ${a.edge   ? `<div class="wgt-comp-edge">${esc(a.edge)}</div>` : ''}
+            </div>
+            <div class="wgt-comp-vs">VS</div>
+            <div class="wgt-comp-fighter">
+              <div class="wgt-comp-name">${esc(b.name || '')}</div>
+              ${b.record ? `<div class="wgt-comp-record">${esc(b.record)}</div>` : ''}
+              ${b.edge   ? `<div class="wgt-comp-edge">${esc(b.edge)}</div>` : ''}
+            </div>
+          </div>
+          ${d.verdict ? `<div class="wgt-comp-verdict">${esc(d.verdict)}</div>` : ''}
+        </div>`;
+      return el;
+    }
+
+    function renderCard(d) {
+      const fights = d.fights || [];
+      const el = document.createElement('div');
+      el.className = 'widget-wrap';
+      el.innerHTML = `
+        <div class="wgt-card">
+          <div class="wgt-card-header">
+            <span class="wgt-card-event">${esc(d.event || 'Fight Card')}</span>
+            ${d.date ? `<span class="wgt-card-date">${esc(d.date)}</span>` : ''}
+          </div>
+          <div class="wgt-card-fights">
+            ${fights.map(f => `
+              <div class="wgt-card-fight">
+                ${f.weight ? `<span class="wgt-card-weight">${esc(f.weight)}</span>` : ''}
+                <span class="wgt-card-matchup">${esc(f.a || '')} <strong>vs</strong> ${esc(f.b || '')}</span>
+                ${f.pick   ? `<span class="wgt-card-matchup" style="color:rgba(255,255,255,0.85);font-weight:600;flex:none;">→ ${esc(f.pick)}</span>` : ''}
+                ${f.method ? `<span class="wgt-card-method-tag">${esc(f.method)}</span>` : ''}
+              </div>`).join('')}
+          </div>
+        </div>`;
+      return el;
+    }
+
+    function renderUpset(d) {
+      const el = document.createElement('div');
+      el.className = 'widget-wrap';
+      el.innerHTML = `
+        <div class="wgt-upset">
+          <div class="wgt-upset-header">
+            <span>🚨</span>
+            <span class="wgt-upset-alert">Upset Alert — ${esc(d.event || '')}</span>
+          </div>
+          <div class="wgt-upset-body">
+            ${d.label ? `<div class="wgt-upset-label">${esc(d.label)}</div>` : ''}
+            <div class="wgt-upset-result">${esc(d.fighter || '')} def. ${esc(d.victim || '')}</div>
+            ${d.method ? `<div class="wgt-upset-method">${esc(d.method)}</div>` : ''}
+            ${d.hype   ? `<div class="wgt-upset-hype">${esc(d.hype)}</div>` : ''}
+          </div>
+        </div>`;
+      return el;
+    }
+
+    // ── Parse response: split text and <widget> tags ──
+    function parseAndRender(rawText, container) {
+      const parts = rawText.split(/(<widget>[\s\S]*?<\/widget>)/g);
+      let hasText = false;
+      let bubEl = null;
+
+      parts.forEach(part => {
+        const wgtMatch = part.match(/^<widget>([\s\S]*?)<\/widget>$/);
+        if (wgtMatch) {
+          try {
+            const parsed = JSON.parse(wgtMatch[1].trim());
+            const wEl = renderWidget(parsed);
+            if (wEl) container.appendChild(wEl);
+          } catch(e) { /* skip malformed widget */ }
+        } else {
+          const txt = part.trim();
+          if (txt) {
+            if (!bubEl) {
+              bubEl = document.createElement('div');
+              bubEl.className = 'msg-bub';
+              container.insertBefore(bubEl, container.firstChild);
+              hasText = true;
+            }
+            bubEl.textContent += (bubEl.textContent ? '\n' : '') + txt;
+          }
+        }
+      });
+
+      if (!hasText && !bubEl) {
+        bubEl = document.createElement('div');
+        bubEl.className = 'msg-bub';
+        bubEl.textContent = rawText.trim();
+        container.insertBefore(bubEl, container.firstChild);
+      }
+    }
+
+    // ── Message rendering ──────────────────────────
     function addMsg(text, isUser = false) {
       const row = document.createElement('div');
       row.className = 'msg-row' + (isUser ? ' user' : '');
-      row.innerHTML = isUser
-        ? `<div class="msg-bub">${esc(text)}</div>`
-        : `<div class="msg-av">🥊</div><div class="msg-bub">${esc(text)}</div>`;
+
+      if (isUser) {
+        const bub = document.createElement('div');
+        bub.className = 'msg-bub';
+        bub.textContent = text;
+        row.appendChild(bub);
+      } else {
+        const av = document.createElement('div');
+        av.className = 'msg-av';
+        av.textContent = '🥊';
+        row.appendChild(av);
+
+        const inner = document.createElement('div');
+        inner.style.cssText = 'display:flex;flex-direction:column;gap:8px;flex:1;min-width:0;';
+        row.appendChild(inner);
+
+        parseAndRender(text, inner);
+      }
+
       messagesEl.appendChild(row);
       messagesEl.scrollTop = messagesEl.scrollHeight;
     }

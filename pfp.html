@@ -292,6 +292,104 @@
       .pfp-hero { height: 260px; }
       .pfp-hero-name { font-size: 1.45rem; }
     }
+
+    /* ── Debate Button ── */
+    .pfp-row { position: relative; }
+
+    .pfp-debate-btn {
+      position: absolute;
+      right: 6px;
+      top: 50%;
+      transform: translateY(-50%) translateX(12px);
+      opacity: 0;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(6,6,8,0.88);
+      border: 1px solid rgba(0,229,255,0.38);
+      border-radius: 20px;
+      padding: 5px 12px 5px 9px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.59rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: #00e5ff;
+      cursor: pointer;
+      white-space: nowrap;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 20;
+      transition: opacity 0.18s ease,
+                  transform 0.24s cubic-bezier(0.34,1.56,0.64,1),
+                  border-color 0.15s, background 0.15s, box-shadow 0.15s;
+    }
+    .pfp-debate-btn-icon {
+      font-size: 0.72rem;
+      line-height: 1;
+    }
+    .pfp-row:hover .pfp-debate-btn {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateY(-50%) translateX(0);
+      box-shadow: 0 0 18px rgba(0,229,255,0.12), 0 4px 14px rgba(0,0,0,0.45);
+    }
+    .pfp-debate-btn:hover {
+      background: rgba(0,229,255,0.1);
+      border-color: rgba(0,229,255,0.65);
+      box-shadow: 0 0 28px rgba(0,229,255,0.25), 0 4px 18px rgba(0,0,0,0.55) !important;
+    }
+    .pfp-debate-btn:active {
+      transform: translateY(-50%) scale(0.95) !important;
+    }
+
+    /* Hero debate button */
+    .pfp-hero-debate-btn {
+      position: absolute;
+      bottom: 28px;
+      right: 28px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(6,6,8,0.72);
+      border: 1px solid rgba(0,229,255,0.45);
+      border-radius: 22px;
+      padding: 8px 18px 8px 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: #00e5ff;
+      cursor: pointer;
+      white-space: nowrap;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      z-index: 20;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.2s ease,
+                  transform 0.26s cubic-bezier(0.34,1.56,0.64,1),
+                  border-color 0.15s, background 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+    .pfp-hero:hover .pfp-hero-debate-btn {
+      opacity: 1;
+      transform: translateY(0);
+      box-shadow: 0 0 24px rgba(0,229,255,0.18), 0 6px 22px rgba(0,0,0,0.55);
+    }
+    .pfp-hero-debate-btn:hover {
+      background: rgba(0,229,255,0.12);
+      border-color: rgba(0,229,255,0.75);
+      box-shadow: 0 0 36px rgba(0,229,255,0.3), 0 6px 28px rgba(0,0,0,0.6) !important;
+    }
+    .pfp-hero-debate-btn:active { transform: scale(0.96) !important; }
+
+    @media (max-width: 768px) {
+      .pfp-debate-btn { display: none; }
+      .pfp-hero-debate-btn { display: none; }
+    }
   </style>
 </head>
 
@@ -537,5 +635,59 @@
   <script src="chat.js?v=2.1"></script>
   <script src="premium.js?v=3.2"></script>
   <script src="widget.js"></script>
+
+  <script>
+  // ── PFP Debate Button Injector ──────────────────
+  document.addEventListener('DOMContentLoaded', function () {
+
+    function openDebate(fighterName, rank) {
+      const msg = rank === 1
+        ? `I think you've got ${fighterName} at #1 but I'm not sure he deserves the top spot — debate me`
+        : `I disagree with ${fighterName} being ranked #${rank} on the MMA Bridge P4P list — debate me`;
+
+      // Open Lucas widget then fire the message
+      if (typeof toggleChat === 'function' && !chatOpen) toggleChat();
+      setTimeout(function () {
+        if (typeof sendMsg === 'function') sendMsg(msg);
+      }, chatOpen ? 50 : 320);
+    }
+
+    // Inject into all pfp-row cards
+    document.querySelectorAll('.pfp-row[data-fighter]').forEach(function (row) {
+      const nameEl = row.querySelector('.pfp-row-name');
+      const numEl  = row.querySelector('.pfp-row-num');
+      if (!nameEl || !numEl) return;
+      const name = nameEl.textContent.trim();
+      const rank = parseInt(numEl.textContent.trim()) || 0;
+
+      const btn = document.createElement('button');
+      btn.className = 'pfp-debate-btn';
+      btn.setAttribute('aria-label', 'Debate this ranking with Lucas');
+      btn.innerHTML = '<span class="pfp-debate-btn-icon">⚡</span>Debate';
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation(); // don't open fighter modal
+        openDebate(name, rank);
+      });
+      row.appendChild(btn);
+    });
+
+    // Inject into hero (#1 card)
+    const hero = document.querySelector('.pfp-hero[data-fighter]');
+    if (hero) {
+      const heroNameEl = hero.querySelector('.pfp-hero-name');
+      const name = heroNameEl ? heroNameEl.textContent.trim() : 'Islam Makhachev';
+
+      const heroBtn = document.createElement('button');
+      heroBtn.className = 'pfp-hero-debate-btn';
+      heroBtn.setAttribute('aria-label', 'Debate this ranking with Lucas');
+      heroBtn.innerHTML = '<span style="font-size:0.8rem;">⚡</span>Debate with Lucas';
+      heroBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        openDebate(name, 1);
+      });
+      hero.appendChild(heroBtn);
+    }
+  });
+  </script>
 </body>
 </html>

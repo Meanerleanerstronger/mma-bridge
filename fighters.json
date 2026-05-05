@@ -888,5 +888,118 @@
         "event": "UFC on ESPN 56"
       }
     ]
+  },
+  "charles-oliveira": {
+    "name": "Charles Oliveira",
+    "nickname": "Do Bronx",
+    "country": "Brazil",
+    "flag": "🇧🇷",
+    "record": "34-10",
+    "division": "Lightweight",
+    "stance": "Orthodox",
+    "height": "5'10\"",
+    "reach": "74\"",
+    "age": "35",
+    "champion": false,
+    "rank": null,
+    "last5": [
+      {
+        "opponent": "Max Holloway",
+        "result": "W",
+        "method": "UD",
+        "round": "5",
+        "time": "5:00",
+        "event": "UFC 326"
+      },
+      {
+        "opponent": "Ilia Topuria",
+        "result": "L",
+        "method": "KO",
+        "round": "1",
+        "time": "2:47",
+        "event": "UFC 317"
+      },
+      {
+        "opponent": "Arman Tsarukyan",
+        "result": "L",
+        "method": "UD",
+        "round": "5",
+        "time": "5:00",
+        "event": "UFC Fight Night 231"
+      },
+      {
+        "opponent": "Beneil Dariush",
+        "result": "W",
+        "method": "Sub",
+        "round": "2",
+        "time": "3:11",
+        "event": "UFC Fight Night 224"
+      },
+      {
+        "opponent": "Islam Makhachev",
+        "result": "L",
+        "method": "Sub",
+        "round": "2",
+        "time": "3:16",
+        "event": "UFC 280"
+      }
+    ]
+  },
+  "dustin-poirier": {
+    "name": "Dustin Poirier",
+    "nickname": "The Diamond",
+    "country": "USA",
+    "flag": "🇺🇸",
+    "record": "30-9",
+    "division": "Lightweight",
+    "stance": "Southpaw",
+    "height": "5'9\"",
+    "reach": "72\"",
+    "age": "35",
+    "champion": false,
+    "rank": null,
+    "retired": true,
+    "last5": [
+      {
+        "opponent": "Islam Makhachev",
+        "result": "L",
+        "method": "D'Arce Choke",
+        "round": "5",
+        "time": "2:42",
+        "event": "UFC 302"
+      },
+      {
+        "opponent": "Beneil Dariush",
+        "result": "W",
+        "method": "TKO",
+        "round": "2",
+        "time": "4:51",
+        "event": "UFC 299"
+      },
+      {
+        "opponent": "Justin Gaethje",
+        "result": "L",
+        "method": "KO",
+        "round": "3",
+        "time": "2:07",
+        "event": "UFC 291"
+      },
+      {
+        "opponent": "Michael Chandler",
+        "result": "W",
+        "method": "TKO",
+        "round": "2",
+        "time": "4:05",
+        "event": "UFC 281"
+      },
+      {
+        "opponent": "Conor McGregor",
+        "result": "W",
+        "method": "TKO",
+        "round": "2",
+        "time": "2:32",
+        "event": "UFC 264"
+      }
+    ]
   }
 }

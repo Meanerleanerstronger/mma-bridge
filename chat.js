@@ -280,6 +280,18 @@ function showTyping() {
 
 function removeTyping() { document.getElementById('lw-typing')?.remove(); }
 
+function getPageContext() {
+  const file = window.location.pathname.split('/').pop().toLowerCase().replace(/\?.*$/, '');
+  if (file === 'pfp.html')          return 'pfp';
+  if (file === 'events.html')       return 'events';
+  if (file === 'leaderboard.html')  return 'leaderboard';
+  if (file === 'picks.html')        return 'picks';
+  if (file === 'reviews.html')      return 'review';
+  if (file === 'event-review.html') return 'review';
+  if (file === 'index.html' || file === '') return 'home';
+  return 'widget';
+}
+
 async function sendMsg(text) {
   if (!text.trim() || chatBusy) return;
   chatBusy = true;
@@ -293,7 +305,7 @@ async function sendMsg(text) {
     const res = await fetch(BACKEND, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: text, history: chatHistory, page: 'widget', live_data: lucasLiveData })
+      body: JSON.stringify({ message: text, history: chatHistory, page: getPageContext(), live_data: lucasLiveData })
     });
     const data = await res.json();
     removeTyping();
