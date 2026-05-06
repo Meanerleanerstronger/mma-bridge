@@ -486,10 +486,48 @@
       .ev-card-meta,.ev-card-cta { display:none; }
       .ov-matchup { font-size:clamp(1.5rem,7vw,2.2rem); }
     }
+
+    /* ── COUNTDOWN FLOATING CARD ── */
+    #evCdCard {
+      position:fixed; top:68px; left:20px; width:280px;
+      background:#0d0d10; border:1px solid rgba(255,255,255,.1);
+      border-radius:14px; padding:14px 16px; z-index:3000;
+      box-shadow:0 8px 40px rgba(0,0,0,.72);
+      opacity:0; transform:translateX(-14px) scale(.97);
+      pointer-events:none;
+      transition:opacity .22s ease,transform .26s cubic-bezier(.34,1.56,.64,1);
+    }
+    #evCdCard.open { opacity:1; transform:none; pointer-events:all; }
+    .ev-cd-top { display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:10px; }
+    #evCdName { font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#fff;line-height:1.3;flex:1; }
+    #evCdX { background:none;border:none;color:rgba(255,255,255,.28);font-size:.72rem;cursor:pointer;padding:0 2px;line-height:1;flex-shrink:0;transition:color .15s; }
+    #evCdX:hover { color:#fff; }
+    #evCdTimer { font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.55rem;color:#00e5ff;letter-spacing:.02em;margin-bottom:8px;min-height:1.8rem; }
+    #evCdLocal { font-family:'Inter',sans-serif;font-size:.63rem;color:rgba(255,255,255,.32);line-height:1.5; }
+    /* shared cd-* classes used by countdown.js */
+    .cd-n { font-family:'Montserrat',sans-serif;font-weight:900;color:#00e5ff; }
+    .cd-u { font-family:'Montserrat',sans-serif;font-size:.58em;font-weight:700;color:rgba(0,229,255,.5);margin-left:1px; }
+    .cd-urgent.cd-n { color:#c8a84b!important; }
+    .cd-urgent.cd-u { color:rgba(200,168,75,.65)!important; }
+    .cd-live { display:inline-flex;align-items:center;gap:7px;font-family:'Montserrat',sans-serif;font-weight:900;font-size:1rem;color:#00e5ff;animation:pulse 1.8s ease infinite; }
+    .cd-live-dot { width:9px;height:9px;border-radius:50%;background:#00e5ff;flex-shrink:0; }
+    .cd-ended { color:rgba(255,255,255,.2);font-size:.8rem; }
+    @media(max-width:640px) { #evCdCard { left:10px; right:10px; width:auto; } }
   </style>
 </head>
 
 <body>
+
+  <!-- COUNTDOWN FLOATING CARD -->
+  <div id="evCdCard">
+    <div class="ev-cd-top">
+      <span id="evCdName">—</span>
+      <button id="evCdX" aria-label="Close countdown">✕</button>
+    </div>
+    <div id="evCdTimer">—</div>
+    <div id="evCdLocal">—</div>
+  </div>
+
   <nav class="navbar">
     <div class="nav-container">
       <a class="logo" href="index.html">
@@ -758,6 +796,7 @@
 
     function openOverlay(ev){
       currentEvent=ev;
+      if (typeof showCountdownCard === 'function') showCountdownCard(ev);
       const isPPV=ev.type==='PPV', cls=isPPV?'ppv':'fn';
       const accent=isPPV?'#c8a84b':'#00e5ff';
       const main=getMainFight(ev);
@@ -1016,8 +1055,26 @@
   <script src="auth.js?v=3.2"></script>
   <script src="challenge.js?v=1.0"></script>
   <script src="search.js"></script>
+  <script src="countdown.js?v=1.0"></script>
   <script src="chat.js?v=2.3"></script>
   <script src="premium.js?v=3.2"></script>
   <script src="widget.js"></script>
+  <script>
+    // ── Countdown floating card ──
+    var _cdStop = null;
+    function showCountdownCard(ev) {
+      if (!ev.start_time) return;
+      document.getElementById('evCdName').textContent = ev.name || 'UFC Event';
+      document.getElementById('evCdLocal').textContent = 'Main Card · ' + (window.formatLocalTime(ev.start_time) || ev.date || '');
+      if (_cdStop) { _cdStop(); _cdStop = null; }
+      _cdStop = window.initCountdown(document.getElementById('evCdTimer'), ev.start_time);
+      document.getElementById('evCdCard').classList.add('open');
+    }
+    function closeCountdownCard() {
+      document.getElementById('evCdCard').classList.remove('open');
+      if (_cdStop) { _cdStop(); _cdStop = null; }
+    }
+    document.getElementById('evCdX').addEventListener('click', closeCountdownCard);
+  </script>
 </body>
 </html>

@@ -1040,6 +1040,44 @@
 
     sendBtnEl.addEventListener('click', () => send(inputEl.value));
     inputEl.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); send(inputEl.value); } });
+
+    // ── Restore context transferred from floating widget ──
+    (function restoreTransfer() {
+      try {
+        const raw = sessionStorage.getItem('lucas_transfer');
+        if (!raw) return;
+        sessionStorage.removeItem('lucas_transfer');
+        const transferred = JSON.parse(raw);
+        if (!Array.isArray(transferred) || transferred.length === 0) return;
+        history = transferred.slice(-20);
+        // Replay messages into the UI
+        messagesEl.innerHTML = '';
+        for (let i = 0; i < history.length; i++) {
+          const entry = history[i];
+          const isUser = entry.role === 'user';
+          const row = document.createElement('div');
+          row.className = 'msg-row' + (isUser ? ' user' : '');
+          if (isUser) {
+            row.innerHTML = `<div class="msg-bub">${esc(entry.content)}</div>`;
+          } else {
+            const av = document.createElement('div');
+            av.className = 'msg-av'; av.textContent = '🥊';
+            row.appendChild(av);
+            const inner = document.createElement('div');
+            inner.style.cssText = 'display:flex;flex-direction:column;gap:8px;flex:1;min-width:0;';
+            row.appendChild(inner);
+            parseAndRender(entry.content, inner);
+          }
+          messagesEl.appendChild(row);
+        }
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+        // Add a subtle continuation note
+        const note = document.createElement('div');
+        note.className = 'msg-row';
+        note.innerHTML = `<div class="msg-av">🥊</div><div class="msg-bub" style="font-size:0.75rem;opacity:0.6;font-style:italic;">— Continued from widget —</div>`;
+        messagesEl.insertBefore(note, messagesEl.firstChild);
+      } catch(e) {}
+    })();
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

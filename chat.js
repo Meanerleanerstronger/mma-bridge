@@ -51,11 +51,16 @@ function initWidget() {
             <div id="lw-status"><span id="lw-dot"></span>Online</div>
           </div>
         </div>
-        <button id="lw-close" onclick="toggleChat()">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-          </svg>
-        </button>
+        <div id="lw-header-right">
+          <button id="lw-expand" title="Open full Lucas interface">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+          </button>
+          <button id="lw-close" onclick="toggleChat()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
       </div>
       <div id="lw-msgs">
         <div class="lw-msg lw-bot">
@@ -140,6 +145,14 @@ function initWidget() {
       0%,100% { box-shadow: 0 0 0 0 rgba(0,230,118,0.5); }
       50% { box-shadow: 0 0 0 4px rgba(0,230,118,0); }
     }
+    #lw-header-right { display: flex; align-items: center; gap: 2px; }
+    #lw-expand {
+      background: none; border: none; color: rgba(255,255,255,0.25);
+      cursor: pointer; padding: 5px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 6px; transition: color 0.15s;
+    }
+    #lw-expand:hover { color: rgba(0,229,255,0.9); }
     #lw-close {
       background: none; border: none; color: rgba(255,255,255,0.3);
       cursor: pointer; padding: 4px;
@@ -242,6 +255,12 @@ function initWidget() {
   });
   document.getElementById('lw-send').addEventListener('click', () => {
     sendMsg(document.getElementById('lw-input').value);
+  });
+  document.getElementById('lw-expand').addEventListener('click', () => {
+    if (chatHistory.length > 0) {
+      try { sessionStorage.setItem('lucas_transfer', JSON.stringify(chatHistory)); } catch(e) {}
+    }
+    window.location.href = 'lucas.html';
   });
 }
 

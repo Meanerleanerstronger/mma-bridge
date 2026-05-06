@@ -805,10 +805,17 @@
 
   // Countdown pill for upcoming events
   function countdownHtml() {
-    if (isCompleted || !event.isoDate) return '';
-    const diff = Math.ceil((new Date(event.isoDate + 'T00:00:00') - new Date()) / 86400000);
-    const label = diff <= 0 ? 'Tonight' : diff === 1 ? 'Tomorrow' : `In ${diff} days`;
-    return `<span class="pk-countdown">${label}</span>`;
+    if (isCompleted || !event.start_time) return '';
+    return `<span class="pk-countdown" id="pkCountdown"></span>`;
+  }
+
+  var _pkCdStop = null;
+  function initPkCountdown() {
+    if (isCompleted || !event.start_time) return;
+    var el = document.getElementById('pkCountdown');
+    if (!el) return;
+    if (_pkCdStop) { _pkCdStop(); _pkCdStop = null; }
+    _pkCdStop = window.initCountdown ? window.initCountdown(el, event.start_time) : null;
   }
 
   // ── Hype widget HTML — draggable slider ──────
@@ -1184,6 +1191,7 @@
   }
 
   render();
+  initPkCountdown();
 
   // ── Auth late-arrival ─────────────────────────
   if (sb && !isCompleted) {
@@ -1193,6 +1201,7 @@
         myId = uid;
         await Promise.all([loadPicks(), loadChallenge(), loadCommunityPicks()]);
         render();
+        initPkCountdown();
       }
     });
   }
