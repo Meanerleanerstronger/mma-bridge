@@ -247,6 +247,68 @@ function initWidget() {
       #lw-window { width: calc(100vw - 24px); right: 12px; bottom: 88px; }
       #lw-btn { right: 16px; bottom: 20px; }
     }
+
+    /* ── Widget cards inside floating chat ── */
+    .lw-bot-inner { display:flex;flex-direction:column;gap:6px;flex:1;min-width:0; }
+    @keyframes lwWidgetIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+    .lw-bot-inner .widget-wrap { width:100%;margin-top:4px;animation:lwWidgetIn 0.25s cubic-bezier(0.34,1.56,0.64,1) both; }
+
+    .wgt-prediction { background:linear-gradient(135deg,#0d0f14,#111318);border:1px solid rgba(0,229,255,0.22);border-radius:12px;overflow:hidden; }
+    .wgt-pred-header { background:rgba(0,229,255,0.07);border-bottom:1px solid rgba(0,229,255,0.14);padding:8px 13px;display:flex;align-items:center;justify-content:space-between; }
+    .wgt-pred-label { font-family:'Montserrat',sans-serif;font-size:0.52rem;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:#00e5ff; }
+    .wgt-pred-event { font-family:'Inter',sans-serif;font-size:0.62rem;color:rgba(255,255,255,0.38); }
+    .wgt-pred-body { padding:13px; }
+    .wgt-pred-fight { font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:700;color:rgba(255,255,255,0.5);margin-bottom:8px; }
+    .wgt-pred-pick { font-family:'Montserrat',sans-serif;font-size:1.05rem;font-weight:900;color:#fff;margin-bottom:7px; }
+    .wgt-pred-details { display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px; }
+    .wgt-pred-tag { background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.18);border-radius:20px;padding:2px 9px;font-size:0.62rem;font-weight:600;color:#00e5ff;font-family:'Inter',sans-serif; }
+    .wgt-pred-conf { display:flex;align-items:center;gap:7px;margin-top:6px; }
+    .wgt-pred-conf-bar { flex:1;height:3px;background:rgba(255,255,255,0.07);border-radius:2px;overflow:hidden; }
+    .wgt-pred-conf-fill { height:100%;background:linear-gradient(90deg,#00e5ff,#80ffea);border-radius:2px; }
+    .wgt-pred-conf-pct { font-family:'Montserrat',sans-serif;font-size:0.62rem;font-weight:800;color:#00e5ff;min-width:28px;text-align:right; }
+    .wgt-pred-reasoning { font-family:'Inter',sans-serif;font-size:0.7rem;line-height:1.5;color:rgba(255,255,255,0.38);margin-top:9px;padding-top:9px;border-top:1px solid rgba(255,255,255,0.05);font-style:italic; }
+
+    .wgt-parlay { background:linear-gradient(135deg,#0f0e14,#111318);border:1px solid rgba(201,162,39,0.3);border-radius:12px;overflow:hidden; }
+    .wgt-parlay-header { background:rgba(201,162,39,0.08);border-bottom:1px solid rgba(201,162,39,0.15);padding:8px 13px;display:flex;align-items:center;gap:7px; }
+    .wgt-parlay-icon { font-size:0.8rem; }
+    .wgt-parlay-title { font-family:'Montserrat',sans-serif;font-size:0.56rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:#c9a227; }
+    .wgt-parlay-picks { padding:10px 13px 13px;display:flex;flex-direction:column;gap:6px; }
+    .wgt-parlay-pick { display:flex;align-items:center;gap:8px;padding:8px 10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:7px; }
+    .wgt-parlay-num { font-family:'Montserrat',sans-serif;font-size:0.58rem;font-weight:800;color:#c9a227;min-width:14px; }
+    .wgt-parlay-fighter { font-family:'Montserrat',sans-serif;font-size:0.76rem;font-weight:700;color:#fff;flex:1; }
+    .wgt-parlay-method { font-family:'Inter',sans-serif;font-size:0.62rem;color:rgba(255,255,255,0.38); }
+    .wgt-parlay-check { color:#00e5ff;font-size:0.72rem; }
+
+    .wgt-comparison { background:#0d0f14;border:1px solid rgba(255,255,255,0.1);border-radius:12px;overflow:hidden; }
+    .wgt-comp-header { background:rgba(255,255,255,0.03);border-bottom:1px solid rgba(255,255,255,0.06);padding:8px 13px; }
+    .wgt-comp-label { font-family:'Montserrat',sans-serif;font-size:0.52rem;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.3); }
+    .wgt-comp-fighters { display:grid;grid-template-columns:1fr auto 1fr;gap:10px;padding:13px;align-items:start; }
+    .wgt-comp-fighter { text-align:center; }
+    .wgt-comp-name { font-family:'Montserrat',sans-serif;font-size:0.78rem;font-weight:800;color:#fff;margin-bottom:3px; }
+    .wgt-comp-record { font-family:'Inter',sans-serif;font-size:0.62rem;color:rgba(255,255,255,0.38);margin-bottom:6px; }
+    .wgt-comp-edge { font-family:'Inter',sans-serif;font-size:0.62rem;line-height:1.45;color:rgba(255,255,255,0.42); }
+    .wgt-comp-vs { font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:900;color:rgba(255,255,255,0.2);padding-top:6px; }
+    .wgt-comp-verdict { margin:0 13px 13px;padding:9px 12px;background:rgba(0,229,255,0.06);border:1px solid rgba(0,229,255,0.15);border-radius:7px;font-family:'Inter',sans-serif;font-size:0.7rem;font-weight:600;color:#00e5ff;text-align:center; }
+
+    .wgt-card { background:#0d0f14;border:1px solid rgba(255,255,255,0.08);border-radius:12px;overflow:hidden; }
+    .wgt-card-header { background:rgba(255,255,255,0.03);border-bottom:1px solid rgba(255,255,255,0.06);padding:8px 13px;display:flex;align-items:center;justify-content:space-between; }
+    .wgt-card-event { font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:800;letter-spacing:0.1em;color:#fff; }
+    .wgt-card-date { font-family:'Inter',sans-serif;font-size:0.6rem;color:rgba(255,255,255,0.38); }
+    .wgt-card-fights { padding:8px 13px 12px;display:flex;flex-direction:column;gap:5px; }
+    .wgt-card-fight { display:flex;align-items:center;gap:8px;padding:7px 9px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:7px; }
+    .wgt-card-weight { font-family:'Inter',sans-serif;font-size:0.52rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.35);min-width:22px; }
+    .wgt-card-matchup { flex:1;font-family:'Inter',sans-serif;font-size:0.69rem;color:rgba(255,255,255,0.6); }
+    .wgt-card-matchup strong { color:#fff;font-weight:600; }
+    .wgt-card-method-tag { font-family:'Inter',sans-serif;font-size:0.55rem;font-weight:600;color:#00e5ff;background:rgba(0,229,255,0.07);border:1px solid rgba(0,229,255,0.14);border-radius:4px;padding:2px 6px; }
+
+    .wgt-upset { background:linear-gradient(135deg,#140a0a,#110d0d);border:1px solid rgba(255,60,60,0.3);border-radius:12px;overflow:hidden; }
+    .wgt-upset-header { background:rgba(255,60,60,0.08);border-bottom:1px solid rgba(255,60,60,0.15);padding:8px 13px;display:flex;align-items:center;gap:7px; }
+    .wgt-upset-alert { font-family:'Montserrat',sans-serif;font-size:0.52rem;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:#ff4444; }
+    .wgt-upset-body { padding:13px; }
+    .wgt-upset-label { font-family:'Montserrat',sans-serif;font-size:0.66rem;font-weight:900;letter-spacing:0.06em;text-transform:uppercase;color:#ff6666;margin-bottom:8px; }
+    .wgt-upset-result { font-family:'Montserrat',sans-serif;font-size:0.92rem;font-weight:900;color:#fff;margin-bottom:3px; }
+    .wgt-upset-method { font-family:'Inter',sans-serif;font-size:0.68rem;color:rgba(255,255,255,0.4);margin-bottom:10px; }
+    .wgt-upset-hype { font-family:'Inter',sans-serif;font-size:0.7rem;line-height:1.5;color:rgba(255,255,255,0.52);font-style:italic; }
   `;
   document.head.appendChild(style);
 
@@ -275,13 +337,88 @@ function toggleChat() {
   }
 }
 
+// ── Widget renderers (floating widget) ──────────────
+function lwRenderWidget(wData) {
+  try {
+    const d = wData.data || {};
+    switch (wData.type) {
+      case 'prediction': return lwRenderPrediction(d);
+      case 'parlay':     return lwRenderParlay(d);
+      case 'comparison': return lwRenderComparison(d);
+      case 'card':       return lwRenderCard(d);
+      case 'upset':      return lwRenderUpset(d);
+      default: return null;
+    }
+  } catch(e) { return null; }
+}
+function lwRenderPrediction(d) {
+  const conf = Math.min(100, Math.max(0, parseInt(d.confidence) || 75));
+  const el = document.createElement('div'); el.className = 'widget-wrap';
+  el.innerHTML = `<div class="wgt-prediction"><div class="wgt-pred-header"><span class="wgt-pred-label">Lucas's Pick</span><span class="wgt-pred-event">${esc(d.event||'')}</span></div><div class="wgt-pred-body">${d.fight?`<div class="wgt-pred-fight">${esc(d.fight)}</div>`:''}<div class="wgt-pred-pick">${esc(d.pick||'')}</div><div class="wgt-pred-details">${d.method?`<span class="wgt-pred-tag">${esc(d.method)}</span>`:''}${d.round?`<span class="wgt-pred-tag">R${esc(d.round)}</span>`:''}</div><div class="wgt-pred-conf"><div class="wgt-pred-conf-bar"><div class="wgt-pred-conf-fill" style="width:${conf}%"></div></div><span class="wgt-pred-conf-pct">${conf}%</span></div>${d.reasoning?`<div class="wgt-pred-reasoning">${esc(d.reasoning)}</div>`:''}</div></div>`;
+  return el;
+}
+function lwRenderParlay(d) {
+  const picks = d.picks || [];
+  const el = document.createElement('div'); el.className = 'widget-wrap';
+  el.innerHTML = `<div class="wgt-parlay"><div class="wgt-parlay-header"><span class="wgt-parlay-icon">🎰</span><span class="wgt-parlay-title">${esc(d.title||"Lucas's Parlay")}</span></div><div class="wgt-parlay-picks">${picks.map((p,i)=>`<div class="wgt-parlay-pick"><span class="wgt-parlay-num">${i+1}</span><span class="wgt-parlay-fighter">${esc(p.fighter||'')}</span>${p.method?`<span class="wgt-parlay-method">${esc(p.method)}</span>`:''}<span class="wgt-parlay-check">✓</span></div>`).join('')}</div></div>`;
+  return el;
+}
+function lwRenderComparison(d) {
+  const a = d.fighterA||{}, b = d.fighterB||{};
+  const el = document.createElement('div'); el.className = 'widget-wrap';
+  el.innerHTML = `<div class="wgt-comparison"><div class="wgt-comp-header"><span class="wgt-comp-label">Fighter Comparison</span></div><div class="wgt-comp-fighters"><div class="wgt-comp-fighter"><div class="wgt-comp-name">${esc(a.name||'')}</div>${a.record?`<div class="wgt-comp-record">${esc(a.record)}</div>`:''}${a.edge?`<div class="wgt-comp-edge">${esc(a.edge)}</div>`:''}</div><div class="wgt-comp-vs">VS</div><div class="wgt-comp-fighter"><div class="wgt-comp-name">${esc(b.name||'')}</div>${b.record?`<div class="wgt-comp-record">${esc(b.record)}</div>`:''}${b.edge?`<div class="wgt-comp-edge">${esc(b.edge)}</div>`:''}</div></div>${d.verdict?`<div class="wgt-comp-verdict">${esc(d.verdict)}</div>`:''}</div>`;
+  return el;
+}
+function lwRenderCard(d) {
+  const fights = d.fights||[];
+  const el = document.createElement('div'); el.className = 'widget-wrap';
+  el.innerHTML = `<div class="wgt-card"><div class="wgt-card-header"><span class="wgt-card-event">${esc(d.event||'Fight Card')}</span>${d.date?`<span class="wgt-card-date">${esc(d.date)}</span>`:''}</div><div class="wgt-card-fights">${fights.map(f=>`<div class="wgt-card-fight">${f.weight?`<span class="wgt-card-weight">${esc(f.weight)}</span>`:''}<span class="wgt-card-matchup">${esc(f.a||'')} <strong>vs</strong> ${esc(f.b||'')}</span>${f.pick?`<span class="wgt-card-matchup" style="color:rgba(255,255,255,0.85);font-weight:600;flex:none;">→ ${esc(f.pick)}</span>`:''}${f.method?`<span class="wgt-card-method-tag">${esc(f.method)}</span>`:''}</div>`).join('')}</div></div>`;
+  return el;
+}
+function lwRenderUpset(d) {
+  const el = document.createElement('div'); el.className = 'widget-wrap';
+  el.innerHTML = `<div class="wgt-upset"><div class="wgt-upset-header"><span>🚨</span><span class="wgt-upset-alert">Upset Alert — ${esc(d.event||'')}</span></div><div class="wgt-upset-body">${d.label?`<div class="wgt-upset-label">${esc(d.label)}</div>`:''}<div class="wgt-upset-result">${esc(d.fighter||'')} def. ${esc(d.victim||'')}</div>${d.method?`<div class="wgt-upset-method">${esc(d.method)}</div>`:''}${d.hype?`<div class="wgt-upset-hype">${esc(d.hype)}</div>`:''}</div></div>`;
+  return el;
+}
+function lwParseAndRender(rawText, container) {
+  const parts = rawText.split(/(<widget>[\s\S]*?<\/widget>)/g);
+  let bubEl = null;
+  parts.forEach(part => {
+    const m = part.match(/^<widget>([\s\S]*?)<\/widget>$/);
+    if (m) {
+      try {
+        const wEl = lwRenderWidget(JSON.parse(m[1].trim()));
+        if (wEl) container.appendChild(wEl);
+      } catch(e) {}
+    } else {
+      const txt = part.trim();
+      if (txt) {
+        if (!bubEl) {
+          bubEl = document.createElement('div');
+          bubEl.className = 'lw-msg-bub';
+          container.insertBefore(bubEl, container.firstChild);
+        }
+        bubEl.textContent += (bubEl.textContent ? '\n' : '') + txt;
+      }
+    }
+  });
+}
+
 function addMsg(text, isUser) {
   const msgs = document.getElementById('lw-msgs');
   const row = document.createElement('div');
   row.className = 'lw-msg' + (isUser ? ' lw-user' : ' lw-bot');
-  row.innerHTML = isUser
-    ? `<div class="lw-msg-bub">${esc(text)}</div>`
-    : `<div class="lw-msg-av">🥊</div><div class="lw-msg-bub">${esc(text)}</div>`;
+  if (isUser) {
+    row.innerHTML = `<div class="lw-msg-bub">${esc(text)}</div>`;
+  } else {
+    const av = document.createElement('div');
+    av.className = 'lw-msg-av'; av.textContent = '🥊';
+    row.appendChild(av);
+    const inner = document.createElement('div');
+    inner.className = 'lw-bot-inner';
+    row.appendChild(inner);
+    lwParseAndRender(text, inner);
+  }
   msgs.appendChild(row);
   msgs.scrollTop = msgs.scrollHeight;
 }
