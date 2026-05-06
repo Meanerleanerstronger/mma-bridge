@@ -794,6 +794,11 @@
     const messagesEl = document.getElementById('messages');
     const inputEl    = document.getElementById('chat-input');
     const sendBtnEl  = document.getElementById('send-btn');
+    const STORAGE_KEY = 'lucas_chat_history';
+
+    function saveHistory() {
+      try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(history)); } catch(e) {}
+    }
 
     function esc(t) { return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
@@ -1021,6 +1026,7 @@
         if (data.success) {
           history.push({ role: 'user', content: text }, { role: 'assistant', content: data.response });
           if (history.length > 20) history = history.slice(-20);
+          saveHistory();
           addMsg(data.response);
         } else {
           addMsg('Something went wrong. Try again in a sec.');
@@ -1035,22 +1041,30 @@
     function sendQuick(q) { send(q); }
     function clearChat() {
       history = [];
+      try { sessionStorage.removeItem(STORAGE_KEY); } catch(e) {}
       messagesEl.innerHTML = `<div class="msg-row"><div class="msg-av">🥊</div><div class="msg-bub">Chat cleared. What do you want to know?</div></div>`;
     }
 
     sendBtnEl.addEventListener('click', () => send(inputEl.value));
     inputEl.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); send(inputEl.value); } });
 
-    // ── Restore context transferred from floating widget ──
-    (function restoreTransfer() {
+    // ── Restore chat on load (transfer from widget OR page refresh) ──
+    (function restoreOnLoad() {
       try {
-        const raw = sessionStorage.getItem('lucas_transfer');
+        // Widget transfer takes priority
+        const transferRaw = sessionStorage.getItem('lucas_transfer');
+        const savedRaw    = sessionStorage.getItem(STORAGE_KEY);
+        const raw         = transferRaw || savedRaw;
         if (!raw) return;
-        sessionStorage.removeItem('lucas_transfer');
-        const transferred = JSON.parse(raw);
-        if (!Array.isArray(transferred) || transferred.length === 0) return;
-        history = transferred.slice(-20);
-        // Replay messages into the UI
+
+        if (transferRaw) sessionStorage.removeItem('lucas_transfer');
+
+        const restored = JSON.parse(raw);
+        if (!Array.isArray(restored) || restored.length === 0) return;
+
+        history = restored.slice(-20);
+        saveHistory();
+
         messagesEl.innerHTML = '';
         for (let i = 0; i < history.length; i++) {
           const entry = history[i];
@@ -1071,11 +1085,13 @@
           messagesEl.appendChild(row);
         }
         messagesEl.scrollTop = messagesEl.scrollHeight;
-        // Add a subtle continuation note
-        const note = document.createElement('div');
-        note.className = 'msg-row';
-        note.innerHTML = `<div class="msg-av">🥊</div><div class="msg-bub" style="font-size:0.75rem;opacity:0.6;font-style:italic;">— Continued from widget —</div>`;
-        messagesEl.insertBefore(note, messagesEl.firstChild);
+
+        if (transferRaw) {
+          const note = document.createElement('div');
+          note.className = 'msg-row';
+          note.innerHTML = `<div class="msg-av">🥊</div><div class="msg-bub" style="font-size:0.75rem;opacity:0.6;font-style:italic;">— Continued from widget —</div>`;
+          messagesEl.insertBefore(note, messagesEl.firstChild);
+        }
       } catch(e) {}
     })();
   </script>
