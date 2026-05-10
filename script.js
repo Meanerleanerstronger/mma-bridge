@@ -77,13 +77,13 @@ function renderHero(ev) {
     if (isCompleted) {
       btn.textContent = 'Review the Card →';
       btn.href = `event-review.html?id=${encodeURIComponent(ev.id)}`;
-      btn.style.background = '#FFD700';
-      btn.style.color = '#000';
+      btn.style.setProperty('background', '#FFD700', 'important');
+      btn.style.setProperty('color', '#000', 'important');
     } else {
       btn.textContent = 'View Full Card →';
       btn.href = `events.html?id=${encodeURIComponent(ev.id)}`;
-      btn.style.background = 'cyan';
-      btn.style.color = '#000';
+      btn.style.setProperty('background', 'cyan', 'important');
+      btn.style.setProperty('color', '#000', 'important');
     }
   }
 }
