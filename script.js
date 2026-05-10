@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Show most recently completed event in hero for 2 days after it ends
     const recentCompleted = past[0];
     const isVeryRecent = recentCompleted &&
-      (now - new Date(recentCompleted.isoDate)) < 2 * 24 * 60 * 60 * 1000;
+      (now - new Date(recentCompleted.isoDate)) < 4 * 24 * 60 * 60 * 1000;
 
     renderHero(liveNow || (isVeryRecent ? recentCompleted : null) || upcoming[0] || past[0]);
     renderRecentResults(past);
