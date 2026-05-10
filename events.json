@@ -9555,7 +9555,7 @@
     "location": "Newark, NJ",
     "venue": "Prudential Center",
     "poster": "https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-04/050926-ufc-329-chimaev-vs-strickland-EVENT-ART.jpg",
-    "status": "upcoming",
+    "status": "completed",
     "mainCard": [
       {
         "a": "Khamzat Chimaev",
@@ -9566,7 +9566,11 @@
         "ranked": true,
         "slot": "main",
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-08/CHIMAEV_KHAMZAT_BELTMOCK.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-02/STRICKLAND_SEAN_02-21.png"
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-02/STRICKLAND_SEAN_02-21.png",
+        "winner": "Sean Strickland",
+        "method": "SD",
+        "round": 5,
+        "time": "5:00"
       },
       {
         "a": "Joshua Van",
@@ -9577,7 +9581,11 @@
         "ranked": true,
         "slot": "comain",
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-12/VAN_JOSHUA_BELT.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-12/TAIRA_TATSURO_12-06.png"
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-12/TAIRA_TATSURO_12-06.png",
+        "winner": "Joshua Van",
+        "method": "TKO",
+        "round": 5,
+        "time": "1:32"
       },
       {
         "a": "Alexander Volkov",
@@ -9588,7 +9596,11 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-10/VOLKOV_ALEXANDER_10-25.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-01/CORTES_ACOSTA_WALDO_01-24.png"
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-01/CORTES_ACOSTA_WALDO_01-24.png",
+        "winner": "Alexander Volkov",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Sean Brady",
@@ -9599,7 +9611,11 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-11/BRADY_SEAN_11-15.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-06/BUCKLEY_JOAQUIN_06-14.png"
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-06/BUCKLEY_JOAQUIN_06-14.png",
+        "winner": "Sean Brady",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "King Green",
@@ -9610,7 +9626,11 @@
         "ranked": false,
         "slot": "opener",
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-02/GREEN_KING_02-28.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-05/STEPHENS_JEREMY_05-03.png"
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-05/STEPHENS_JEREMY_05-03.png",
+        "winner": "King Green",
+        "method": "SUB",
+        "round": 1,
+        "time": "4:20"
       }
     ],
     "prelims": [
@@ -9623,7 +9643,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-01/GAUTIER_ATEBA_01-24.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-03/DIAZ_OZZY_03-08.png"
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-03/DIAZ_OZZY_03-08.png",
+        "winner": "Ateba Gautier",
+        "method": "KO",
+        "round": 2,
+        "time": "1:30"
       },
       {
         "a": "Grant Dawson",
@@ -9634,7 +9658,11 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-12/DAWSON_GRANT_12-06.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-10/REBECKI_MATEUSZ_10-25.png"
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-10/REBECKI_MATEUSZ_10-25.png",
+        "winner": "Grant Dawson",
+        "method": "SUB",
+        "round": 3,
+        "time": "4:42"
       },
       {
         "a": "Joel Alvarez",
@@ -9645,7 +9673,11 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-10/ALVAREZ_JOEL_10-11.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-12/AMOSOV_YAROSLAV_12-13.png"
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-12/AMOSOV_YAROSLAV_12-13.png",
+        "winner": "Yaroslav Amosov",
+        "method": "SUB",
+        "round": 2,
+        "time": "4:12"
       },
       {
         "a": "Jim Miller",
@@ -9656,7 +9688,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-04/MILLER_JIM_04-12.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-09/GORDON_JARED_09-13.png"
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-09/GORDON_JARED_09-13.png",
+        "winner": "Jim Miller",
+        "method": "SUB",
+        "round": 1,
+        "time": "3:29"
       }
     ],
     "earlyPrelims": [
@@ -9669,7 +9705,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-11/KOPYLOV_ROMAN_11-15.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-11/TULIO_MARCO_11-08.png"
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-11/TULIO_MARCO_11-08.png",
+        "winner": "Roman Kopylov",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Pat Sabatini",
@@ -9680,7 +9720,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-11/SABATINI_PAT_11-15.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-09/GOMIS_WILLIAM_09-06.png"
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-09/GOMIS_WILLIAM_09-06.png",
+        "winner": "Pat Sabatini",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Baisangur Susurkaev",
@@ -9691,7 +9735,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-11/SUSURKAEV_BAISANGUR_11-15.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-10/SANTOS_DJORDEN_10-18.png"
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-10/SANTOS_DJORDEN_10-18.png",
+        "winner": "Baisangur Susurkaev",
+        "method": "SUB",
+        "round": 3,
+        "time": "4:12"
       },
       {
         "a": "Clayton Carpenter",
@@ -9702,7 +9750,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-10/CARPENTER_CLAYTON_10-11.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-07/OCHOA_JOSE_07-26.png"
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-07/OCHOA_JOSE_07-26.png",
+        "winner": "Jose Ochoa",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "startTime": "22:00",

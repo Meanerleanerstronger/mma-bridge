@@ -34,7 +34,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     // An upcoming event whose start time just passed = live now, show as hero
     const liveNow = all.find(e => e.status === 'upcoming' && hasStarted(e));
 
-    renderHero(liveNow || upcoming[0] || past[0]);
+    // Show most recently completed event in hero for 2 days after it ends
+    const recentCompleted = past[0];
+    const isVeryRecent = recentCompleted &&
+      (now - new Date(recentCompleted.isoDate)) < 2 * 24 * 60 * 60 * 1000;
+
+    renderHero(liveNow || (isVeryRecent ? recentCompleted : null) || upcoming[0] || past[0]);
     renderRecentResults(past);
   } catch(e) { debugLog('Events error:', e); }
 
@@ -59,11 +64,28 @@ function renderHero(ev) {
     };
     img.style.backgroundPosition = positions[ev.id] || 'center top';
   }
-  type.textContent  = ev.type === 'PPV' ? 'Next PPV Event' : 'Next Event';
+  const isCompleted = ev.status === 'completed';
+  if (isCompleted) {
+    type.textContent = ev.type === 'PPV' ? 'PPV Event — Results' : 'Event — Results';
+  } else {
+    type.textContent = ev.type === 'PPV' ? 'Next PPV Event' : 'Next Event';
+  }
   title.textContent = ev.name || '';
   meta.textContent  = [ev.date, ev.location, ev.venue].filter(Boolean).join('  ·  ');
   const btn = document.getElementById('heroBtn');
-  if (btn && ev.id) btn.href = `events.html?id=${encodeURIComponent(ev.id)}`;
+  if (btn && ev.id) {
+    if (isCompleted) {
+      btn.textContent = 'Review the Card →';
+      btn.href = `event-review.html?id=${encodeURIComponent(ev.id)}`;
+      btn.style.background = '#FFD700';
+      btn.style.color = '#000';
+    } else {
+      btn.textContent = 'View Full Card →';
+      btn.href = `events.html?id=${encodeURIComponent(ev.id)}`;
+      btn.style.background = 'cyan';
+      btn.style.color = '#000';
+    }
+  }
 }
 
 // ── Recent Results Infinite Scroll ───────────
