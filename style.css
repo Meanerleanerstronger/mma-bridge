@@ -2605,37 +2605,40 @@ body.light-mode .pfp-fight-info { color: rgba(0,0,0,0.4); }
   display: flex; align-items: center;
   justify-content: space-between;
   padding: 16px 22px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(0,229,255,0.04) 0%, rgba(255,255,255,0.02) 100%);
+  border: 1px solid rgba(0,229,255,0.12);
+  border-radius: 14px;
   margin-bottom: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.25);
 }
 .er-comm-label {
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.72rem; font-weight: 800;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  color: rgba(255,255,255,0.45);
+  font-size: 0.6rem; font-weight: 800;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
 }
 .er-comm-val {
   font-family: 'Montserrat', sans-serif;
-  font-size: 1.1rem; font-weight: 800;
+  font-size: 1.05rem; font-weight: 800;
   color: #00e5ff;
-  text-shadow: 0 0 14px rgba(0,229,255,0.3);
+  text-shadow: 0 0 18px rgba(0,229,255,0.35);
+  letter-spacing: 0.02em;
 }
 
 /* Cards */
 .er-card {
-  background: #111;
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 12px;
-  padding: 18px 20px;
+  background: linear-gradient(145deg, #13161e 0%, #0d0f15 100%);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px;
+  padding: 22px 24px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.3);
 }
 .er-card-title {
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.72rem; font-weight: 800;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  color: rgba(255,255,255,0.55);
-  margin-bottom: 14px;
+  font-size: 0.62rem; font-weight: 800;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 16px;
 }
 .er-optional {
   font-weight: 400; text-transform: none;

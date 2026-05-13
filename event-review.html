@@ -189,20 +189,21 @@
 
     /* ── Rating card ── */
     .er-card {
-      background: #141414;
-      border: 1px solid #222;
-      border-radius: 10px;
+      background: linear-gradient(145deg, #13161e 0%, #0d0f15 100%);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
       padding: 24px;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.3);
     }
     .er-card-title {
       font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 0.72rem;
-      letter-spacing: 0.14em;
+      font-weight: 800;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.45);
-      margin-bottom: 16px;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 18px;
     }
 
     /* ── Half-star rating ── */
@@ -450,38 +451,62 @@
 
     .er-reviews-heading {
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.68rem;
+      font-size: 0.62rem;
       font-weight: 800;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
-      margin-bottom: 20px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.28);
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .er-reviews-heading::before {
+      content: '';
+      display: inline-block;
+      width: 3px;
+      height: 13px;
+      background: linear-gradient(to bottom, #00e5ff, rgba(0,229,255,0.2));
+      border-radius: 2px;
+      flex-shrink: 0;
     }
 
     /* ── Review card ── */
     .er-rev-card {
-      background: #121212;
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 10px;
-      padding: 20px 22px;
-      margin-bottom: 14px;
-      transition: border-color 0.2s;
+      background: linear-gradient(145deg, #13161e 0%, #0d0f15 100%);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 20px 22px 16px;
+      margin-bottom: 12px;
+      transition: border-color 0.25s, box-shadow 0.25s, transform 0.2s;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.35);
     }
-    .er-rev-card:hover { border-color: rgba(255,255,255,0.13); }
+    .er-rev-card:hover {
+      border-color: rgba(0,229,255,0.18);
+      box-shadow: 0 6px 28px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,229,255,0.06);
+      transform: translateY(-1px);
+    }
+
+    .er-rev-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      gap: 10px;
+    }
 
     .er-rev-stars {
       display: flex;
       gap: 2px;
-      margin-bottom: 10px;
     }
     .er-rev-star {
       position: relative;
       display: inline-block;
       font-size: 1rem;
       line-height: 1;
-      color: #2a2a2a;
+      color: #252830;
     }
     .er-rev-star::after {
       content: '★';
@@ -493,22 +518,42 @@
     .er-rev-star.full::after  { clip-path: inset(0 0% 0 0); }
     .er-rev-star.half::after  { clip-path: inset(0 50% 0 0); }
 
+    .er-rev-author {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.55);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 3px 10px;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 140px;
+    }
+
     /* review text now lives in .er-rev-text-wrap — legacy selector kept for safety */
     .er-rev-text {
       font-family: 'Inter', sans-serif;
-      font-size: 0.85rem;
-      line-height: 1.65;
-      color: rgba(255,255,255,0.75);
+      font-size: 0.875rem;
+      font-weight: 400;
+      line-height: 1.72;
+      color: rgba(255,255,255,0.78);
       margin-bottom: 14px;
       white-space: pre-wrap;
       word-break: break-word;
+      letter-spacing: 0.01em;
     }
 
     .er-rev-time {
       font-family: 'Inter', sans-serif;
-      font-size: 0.72rem;
-      color: rgba(255,255,255,0.22);
-      letter-spacing: 0.02em;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.28);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
 
     /* ── Empty state ── */
@@ -516,47 +561,94 @@
       text-align: center;
       padding: 48px 20px;
       font-family: 'Inter', sans-serif;
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.2);
-      line-height: 1.7;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.18);
+      line-height: 1.75;
+      background: linear-gradient(145deg, #13161e 0%, #0d0f15 100%);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
     }
     .er-reviews-empty strong {
       display: block;
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      color: rgba(255,255,255,0.28);
-      margin-bottom: 6px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      margin-bottom: 8px;
+    }
+
+    /* ── Rating card & textarea polish ── */
+    .er-card {
+      background: linear-gradient(145deg, #13161e 0%, #0d0f15 100%);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+    }
+    .er-card-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.38);
+      margin-bottom: 18px;
+    }
+    #erReviewText {
+      width: 100%;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 10px;
+      color: rgba(255,255,255,0.82);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      line-height: 1.7;
+      padding: 14px 16px;
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      box-sizing: border-box;
+      letter-spacing: 0.01em;
+    }
+    #erReviewText::placeholder { color: rgba(255,255,255,0.2); }
+    #erReviewText:focus {
+      border-color: rgba(0,229,255,0.35);
+      box-shadow: 0 0 0 3px rgba(0,229,255,0.06);
     }
 
     /* ── Social layer ── */
     .er-rev-social {
       display: flex;
       align-items: center;
-      gap: 16px;
-      margin-top: 12px;
-      padding-top: 11px;
+      gap: 14px;
+      margin-top: 14px;
+      padding-top: 12px;
       border-top: 1px solid rgba(255,255,255,0.05);
     }
     .er-like-btn, .er-reply-btn, .er-edit-own-btn {
       background: none;
       border: none;
-      padding: 0;
+      padding: 4px 10px;
+      border-radius: 20px;
       cursor: pointer;
       font-family: 'Inter', sans-serif;
-      font-size: 0.74rem;
-      color: rgba(255,255,255,0.25);
-      transition: color 0.15s;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.3);
+      transition: color 0.15s, background 0.15s;
       display: flex;
       align-items: center;
       gap: 5px;
     }
-    .er-like-btn:hover  { color: rgba(0,229,255,0.65); }
-    .er-like-btn.liked  { color: #00e5ff; }
+    .er-like-btn:hover  { color: rgba(0,229,255,0.75); background: rgba(0,229,255,0.06); }
+    .er-like-btn.liked  { color: #00e5ff; background: rgba(0,229,255,0.08); }
     .er-like-icon { font-size: 0.8rem; display: inline-block; transition: transform 0.12s; }
     .er-like-btn.liked .er-like-icon { transform: scale(1.25); }
-    .er-reply-btn:hover, .er-edit-own-btn:hover { color: rgba(255,255,255,0.55); }
+    .er-reply-btn:hover { color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.05); }
+    .er-edit-own-btn:hover { color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.05); }
 
     /* Replies section */
     .er-replies-section { margin-top: 8px; }
