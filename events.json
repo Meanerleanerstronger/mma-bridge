@@ -10082,7 +10082,7 @@
     "isoDate": "2026-06-06",
     "location": "Las Vegas, NV",
     "venue": "Meta APEX",
-    "poster": "https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-04/060626-ufc-fight-night-muhammad-vs-bonfim-EVENT-ART.jpg",
+    "poster": "https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-05/060626-ufc-fight-night-muhammad-vs-bonfim-EVENT-ART.jpg",
     "status": "upcoming",
     "mainCard": [
       {
@@ -10319,5 +10319,314 @@
     "startTime": "22:00",
     "start_time": "2026-06-15T02:00:00Z",
     "prelims_time": "2026-06-15T00:00:00Z"
+  },
+  {
+    "id": "ufc-fight-night-kape-vs-horiguchi",
+    "name": "UFC Fight Night: Kape vs. Horiguchi",
+    "type": "FIGHT NIGHT",
+    "date": "Sat, Jun 20, 2026",
+    "isoDate": "2026-06-20",
+    "location": "Las Vegas, NV",
+    "venue": "Meta APEX",
+    "poster": "https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-04/062026-ufc-fight-night-kape-vs-horiguchi-TEMP-HERO.jpg",
+    "status": "upcoming",
+    "startTime": "20:00",
+    "mainCard": [
+      {
+        "a": "Manel Kape",
+        "b": "Kyoji Horiguchi",
+        "weight": "Flyweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "main",
+        "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-12/KAPE_MANEL_12-13.png",
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-11/HORIGUCHI_KYOJI_11-08.png"
+      },
+      {
+        "a": "Giga Chikadze",
+        "b": "Vinicius Oliveira",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "comain",
+        "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-10/CHIKADZE_GIGA_10-11.png",
+        "imgB": ""
+      },
+      {
+        "a": "Jhonata Diniz",
+        "b": "Jose Luiz Rodrigues",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Karol Rosa",
+        "b": "Luana Santos",
+        "weight": "Women's Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Ion Cutelaba",
+        "b": "Navajo Stirling",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
+    "prelims": [
+      {
+        "a": "Farid Basharat",
+        "b": "Ethyn Ewing",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Allan Nascimento",
+        "b": "Mitch Raposo",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Bia Mesquita",
+        "b": "Melissa Mullins",
+        "weight": "Women's Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Andre Lima",
+        "b": "Kevin Borjas",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Hyder Amil",
+        "b": "Christian Rodriguez",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Melsik Baghdasaryan",
+        "b": "Murtazali Magomedov",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Michael Aswell Jr.",
+        "b": "Gaston Bolanos",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
+    "earlyPrelims": []
+  },
+  {
+    "id": "ufc-fight-night-fiziev-vs-torres",
+    "name": "UFC Fight Night: Fiziev vs. Torres",
+    "type": "FIGHT NIGHT",
+    "date": "Sat, Jun 27, 2026",
+    "isoDate": "2026-06-27",
+    "location": "Baku, Azerbaijan",
+    "venue": "National Gymnastics Arena",
+    "poster": "https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-05/062726-ufc-fight-night-fiziev-vs-torres-TEMP-HERO.jpg",
+    "status": "upcoming",
+    "startTime": "15:00",
+    "mainCard": [
+      {
+        "a": "Rafael Fiziev",
+        "b": "Manuel Torres",
+        "weight": "Lightweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "main",
+        "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-10/FIZIEV_RAFAEL_10-18.png",
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-09/TORRES_MANUEL_09-27.png"
+      },
+      {
+        "a": "Shara Magomedov",
+        "b": "Michel Pereira",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "comain",
+        "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-09/MAGOMEDOV_SHARA_09-27.png",
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-10/PEREIRA_MICHEL_10-18.png"
+      },
+      {
+        "a": "Marvin Vettori",
+        "b": "Ismail Naurdiev",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-10/VETTORI_MARVIN_10-18.png",
+        "imgB": ""
+      },
+      {
+        "a": "Ikram Aliskerov",
+        "b": "Brunno Ferreira",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Asu Almabayev",
+        "b": "Charles Johnson",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Abusupiyan Magomedov",
+        "b": "Michal Oleksiejczuk",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
+    "prelims": [
+      {
+        "a": "Rizvan Kuniev",
+        "b": "Tyrell Fortune",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Nursulton Ruziboev",
+        "b": "Andrey Pulyaev",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Julius Walker",
+        "b": "Abdul-Rakhman Yakhyaev",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Bekzat Almakhan",
+        "b": "Jean Matsumoto",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Daniil Donchenko",
+        "b": "Andreas Gustafsson",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Nazim Sadykhov",
+        "b": "Matheus Camilo",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Farman Hasanov",
+        "b": "Eric Nolan",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
+    "earlyPrelims": []
   }
 ]
