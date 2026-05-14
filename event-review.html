@@ -763,6 +763,141 @@
     .er-reply-submit:hover { background: rgba(0,229,255,0.18); border-color: rgba(0,229,255,0.5); }
     .er-reply-submit:disabled { opacity: 0.38; cursor: not-allowed; }
 
+    /* ── Fighter profile links ── */
+    .er-fighter-link {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .er-fighter-link:hover { color: cyan; text-decoration: underline; text-decoration-color: rgba(0,229,255,0.4); }
+
+    /* ── Community pick % bars ── */
+    .er-pick-bars { margin: 8px 0 4px; }
+    .er-pick-bar-row { display: flex; align-items: center; gap: 8px; }
+    .er-pick-pct-a, .er-pick-pct-b {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.66rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.4);
+      min-width: 32px;
+    }
+    .er-pick-pct-b { text-align: right; }
+    .er-pick-bar-track {
+      flex: 1;
+      height: 4px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .er-pick-bar-a {
+      height: 100%;
+      background: linear-gradient(90deg, rgba(0,229,255,0.55), rgba(0,229,255,0.2));
+      border-radius: 4px;
+    }
+    .er-pick-bar-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.6rem;
+      color: rgba(255,255,255,0.18);
+      margin-top: 5px;
+      text-align: center;
+    }
+
+    /* ── Login CTA ── */
+    .er-login-cta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(0,229,255,0.03);
+      border: 1px solid rgba(0,229,255,0.1);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+    }
+    .er-login-cta-stars { font-size: 1.15rem; color: rgba(255,255,255,0.12); letter-spacing: 3px; flex-shrink: 0; }
+    .er-login-cta-title { font-family: 'Montserrat', sans-serif; font-size: 0.82rem; font-weight: 700; color: rgba(255,255,255,0.6); margin-bottom: 2px; }
+    .er-login-cta-sub { font-family: 'Inter', sans-serif; font-size: 0.72rem; color: rgba(255,255,255,0.28); }
+    .er-login-cta-btn {
+      flex-shrink: 0;
+      background: rgba(0,229,255,0.09);
+      border: 1px solid rgba(0,229,255,0.25);
+      color: cyan;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+    .er-login-cta-btn:hover { background: rgba(0,229,255,0.16); }
+
+    /* ── Your Picks summary card ── */
+    .er-picks-stats { display: flex; gap: 0; margin-bottom: 14px; }
+    .er-picks-stat { text-align: center; flex: 1; padding: 8px 0; }
+    .er-picks-stat + .er-picks-stat { border-left: 1px solid rgba(255,255,255,0.05); }
+    .er-picks-stat-num {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1.7rem;
+      color: cyan;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .er-picks-stat-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.6rem;
+      color: rgba(255,255,255,0.28);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .er-picks-link {
+      display: block;
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(0,229,255,0.55);
+      text-decoration: none;
+      padding: 9px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      margin-top: 2px;
+      transition: color 0.15s;
+    }
+    .er-picks-link:hover { color: cyan; }
+
+    /* ── FOTN vote reveal ── */
+    .er-fotn-vote-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .er-fotn-vote-rank { font-family: 'Montserrat', sans-serif; font-size: 0.58rem; font-weight: 800; color: rgba(255,255,255,0.22); width: 20px; flex-shrink: 0; }
+    .er-fotn-vote-fight { font-family: 'Inter', sans-serif; font-size: 0.76rem; color: rgba(255,255,255,0.65); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .er-fotn-vote-bar-wrap { width: 70px; height: 4px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden; flex-shrink: 0; }
+    .er-fotn-vote-bar { height: 100%; background: linear-gradient(90deg, #f5c518, rgba(245,197,24,0.35)); border-radius: 4px; }
+    .er-fotn-vote-pct { font-family: 'Montserrat', sans-serif; font-size: 0.66rem; font-weight: 700; color: rgba(255,255,255,0.3); width: 30px; text-align: right; flex-shrink: 0; }
+    .er-fotn-vote-total { font-family: 'Inter', sans-serif; font-size: 0.62rem; color: rgba(255,255,255,0.18); margin-top: 6px; }
+
+    /* ── Share on X ── */
+    .er-share-x {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-left: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: cyan;
+      text-decoration: none;
+      padding: 3px 9px;
+      border: 1px solid rgba(0,229,255,0.28);
+      border-radius: 4px;
+      transition: background 0.15s;
+    }
+    .er-share-x:hover { background: rgba(0,229,255,0.08); }
+
     /* Responsive */
     @media (max-width: 640px) {
       .er-layout {
@@ -847,7 +982,7 @@
 
   <!-- Breadcrumb -->
   <div class="review-nav">
-    <a href="reviews.html">Reviews</a>
+    <a href="reviews.html" id="breadcrumbLink">Reviews</a>
     <span>/</span>
     <span id="breadcrumbName">Event</span>
   </div>

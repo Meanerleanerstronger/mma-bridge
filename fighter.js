@@ -12,14 +12,27 @@
   const root = document.getElementById('fp-root');
   if (!root) return;
 
-  const fighterId = getParam('id');
-  if (!fighterId) { renderNotFound('No fighter specified.'); return; }
+  const fighterId   = getParam('id');
+  const fighterName = getParam('name');
+  if (!fighterId && !fighterName) { renderNotFound('No fighter specified.'); return; }
+
+  function slugify(s) {
+    return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .replace(/['']/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  }
 
   fetch('data/fighters.json')
     .then(r => r.ok ? r.json() : [])
     .then(fighters => {
-      const f = fighters.find(x => x.id === fighterId);
-      if (!f) { renderNotFound('Fighter not found.'); return; }
+      let f;
+      if (fighterId) {
+        f = fighters.find(x => x.id === fighterId);
+      } else {
+        const slug = slugify(fighterName);
+        f = fighters.find(x => slugify(x.name) === slug)
+          || fighters.find(x => slugify(x.id) === slug);
+      }
+      if (!f) { renderNotFound(`Fighter "${escHtml(fighterName || fighterId)}" not found.`); return; }
       document.title = `${f.name} — MMA Bridge`;
       renderProfile(f);
     })

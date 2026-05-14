@@ -483,6 +483,82 @@ function wireReplyLikes(wrap) {
   });
 }
 
+// ── Picks helpers ─────────────────────────────
+async function fetchMyEventPicks(eventId) {
+  const uid = currentUserId();
+  if (!uid) return [];
+  try {
+    const { data } = await sb()
+      .from('picks')
+      .select('fight_key, pick_winner, pick_method, pick_round, fotn_pick')
+      .eq('event_id', eventId)
+      .eq('user_id', uid);
+    return data || [];
+  } catch { return []; }
+}
+
+function getFightByKey(ev, key) {
+  const parts = (key || '').split('-');
+  const section = parts[0];
+  const idx = parseInt(parts[1], 10);
+  if (isNaN(idx)) return null;
+  if (section === 'main')         return ev.mainCard?.[idx]     || null;
+  if (section === 'prelims')      return ev.prelims?.[idx]      || null;
+  if (section === 'earlyPrelims') return ev.earlyPrelims?.[idx] || null;
+  return null;
+}
+
+function gradePicks(ev, picks) {
+  let correct = 0, total = 0, points = 0;
+  picks.forEach(pick => {
+    const fight = getFightByKey(ev, pick.fight_key);
+    if (!fight?.winner) return;
+    total++;
+    const winnerOk = pick.pick_winner === fight.winner;
+    if (winnerOk) {
+      correct++;
+      points += 10;
+      if (pick.pick_method && pick.pick_method === fight.method) points += 5;
+      if (pick.pick_round && +pick.pick_round === +fight.round) points += 5;
+    }
+  });
+  return { correct, total, points };
+}
+
+async function fetchFotnVotes(eventId) {
+  try {
+    const { data } = await sb()
+      .from('picks')
+      .select('fotn_pick')
+      .eq('event_id', eventId)
+      .not('fotn_pick', 'is', null);
+    if (!data?.length) return null;
+    const tally = {};
+    data.forEach(p => { if (p.fotn_pick) tally[p.fotn_pick] = (tally[p.fotn_pick] || 0) + 1; });
+    const sorted = Object.entries(tally)
+      .sort((a, b) => b[1] - a[1])
+      .map(([fight, count]) => ({ fight, count, pct: Math.round(count / data.length * 100) }));
+    return { total: data.length, votes: sorted.slice(0, 5) };
+  } catch { return null; }
+}
+
+async function fetchCommunityPicks(eventId) {
+  try {
+    const { data } = await sb()
+      .from('picks')
+      .select('fight_key, pick_winner')
+      .eq('event_id', eventId);
+    if (!data?.length) return {};
+    const byFight = {};
+    data.forEach(p => {
+      if (!p.fight_key || !p.pick_winner) return;
+      if (!byFight[p.fight_key]) byFight[p.fight_key] = {};
+      byFight[p.fight_key][p.pick_winner] = (byFight[p.fight_key][p.pick_winner] || 0) + 1;
+    });
+    return byFight;
+  } catch { return {}; }
+}
+
 async function loadAndRenderReviews(eventId) {
   const feed = document.getElementById('erReviewsFeed');
   if (!feed) return;
@@ -501,7 +577,7 @@ async function loadAndRenderReviews(eventId) {
 }
 
 // ── Fight card section ────────────────────────
-function fightRow(f) {
+function fightRow(f, communityData) {
   const slotBadge = f.slot === 'main'
     ? '<span class="er-slot-badge er-main-badge">MAIN EVENT</span>'
     : f.slot === 'comain'
@@ -517,6 +593,30 @@ function fightRow(f) {
     'UD':'📋 UD','SD':'📋 SD','MD':'📋 MD',
     'NC':'🚫 NC','Draw':'🤝 Draw'
   };
+
+  const clsA = f.winner === f.a ? 'er-won' : f.winner && f.winner !== 'NC' && f.winner !== 'Draw' ? 'er-lost' : '';
+  const clsB = f.winner === f.b ? 'er-won' : f.winner && f.winner !== 'NC' && f.winner !== 'Draw' ? 'er-lost' : '';
+
+  const nameA = `<a class="er-fa er-fighter-link ${clsA}" href="fighter.html?name=${encodeURIComponent(f.a)}">${esc(f.a)}</a>`;
+  const nameB = `<a class="er-fb er-fighter-link ${clsB}" href="fighter.html?name=${encodeURIComponent(f.b)}">${esc(f.b)}</a>`;
+
+  let pickBarsHtml = '';
+  if (communityData && Object.keys(communityData).length) {
+    const total = Object.values(communityData).reduce((s, n) => s + n, 0);
+    const cntA  = communityData[f.a] || 0;
+    const pctA  = total ? Math.round(cntA / total * 100) : 50;
+    const pctB  = 100 - pctA;
+    pickBarsHtml = `
+      <div class="er-pick-bars">
+        <div class="er-pick-bar-row">
+          <span class="er-pick-pct-a">${pctA}%</span>
+          <div class="er-pick-bar-track"><div class="er-pick-bar-a" style="width:${pctA}%"></div></div>
+          <span class="er-pick-pct-b">${pctB}%</span>
+        </div>
+        <div class="er-pick-bar-label">Community picks · ${total} vote${total !== 1 ? 's' : ''}</div>
+      </div>`;
+  }
+
   let resultHtml = '';
   if (f.winner) {
     const loser = f.winner === f.a ? f.b : f.a;
@@ -539,21 +639,23 @@ function fightRow(f) {
     <div class="er-fight-row ${f.slot === 'main' ? 'er-fight-main' : f.slot === 'comain' ? 'er-fight-comain' : ''}">
       ${slotBadge ? `<div>${slotBadge}</div>` : ''}
       <div class="er-fight-names">
-        <span class="er-fa ${f.winner === f.a ? 'er-won' : f.winner && f.winner !== 'NC' && f.winner !== 'Draw' ? 'er-lost' : ''}">${esc(f.a)}</span>
+        ${nameA}
         <span class="er-fvs">vs</span>
-        <span class="er-fb ${f.winner === f.b ? 'er-won' : f.winner && f.winner !== 'NC' && f.winner !== 'Draw' ? 'er-lost' : ''}">${esc(f.b)}</span>
+        ${nameB}
         ${icons ? `<span class="er-ficons">${icons}</span>` : ''}
       </div>
       <div class="er-fight-meta">
         ${f.weight ? `<span class="pill">${esc(f.weight)}</span>` : ''}
         ${f.rounds ? `<span class="pill pill-dim">${esc(f.rounds)}</span>` : ''}
       </div>
+      ${pickBarsHtml}
       ${resultHtml}
     </div>`;
 }
 
-function fightSection(label, fights) {
+function fightSection(label, fights, communityPicksByKey) {
   if (!fights?.length) return '';
+  const sectionKey = label === 'Main Card' ? 'main' : label === 'Prelims' ? 'prelims' : 'earlyPrelims';
   return `
     <details class="er-drop">
       <summary class="er-drop-sum">
@@ -564,13 +666,14 @@ function fightSection(label, fights) {
         </span>
       </summary>
       <div class="er-drop-body">
-        ${fights.map(fightRow).join('')}
+        ${fights.map((f, i) => fightRow(f, communityPicksByKey?.[`${sectionKey}-${i}`])).join('')}
       </div>
     </details>`;
 }
 
 // ── Render page ───────────────────────────────
-function renderPage(ev, community) {
+function renderPage(ev, community, extra = {}) {
+  const { communityPicks = {}, fotnVotes = null, myPicks = [] } = extra;
   const eventId = ev.id || slugify(ev.name || ev.eventName || '');
   const name    = ev.name || ev.eventName || 'Unnamed Event';
   const poster  = ev.poster || '';
@@ -578,6 +681,55 @@ function renderPage(ev, community) {
   const total   = community?.total_ratings ?? 0;
 
   const hasCard = (ev.mainCard?.length || ev.prelims?.length || ev.earlyPrelims?.length);
+
+  // Login CTA for non-logged-in users
+  const loginCta = !isLoggedIn() ? `
+    <div class="er-login-cta">
+      <div class="er-login-cta-stars">★★★★★</div>
+      <div style="flex:1;">
+        <div class="er-login-cta-title">Rate this card</div>
+        <div class="er-login-cta-sub">Sign in to share your take with the community</div>
+      </div>
+      <a href="auth.html" class="er-login-cta-btn" onclick="sessionStorage.setItem('auth_return_to',location.href)">Sign In →</a>
+    </div>` : '';
+
+  // Your Picks accuracy card (completed events only)
+  const picksGrade = myPicks?.length && ev.status === 'completed' ? gradePicks(ev, myPicks) : null;
+  const myPicksHtml = picksGrade && picksGrade.total > 0 ? `
+    <div class="er-card er-picks-summary">
+      <div class="er-card-title">Your Picks</div>
+      <div class="er-picks-stats">
+        <div class="er-picks-stat">
+          <div class="er-picks-stat-num">${picksGrade.correct}/${picksGrade.total}</div>
+          <div class="er-picks-stat-label">Correct</div>
+        </div>
+        <div class="er-picks-stat">
+          <div class="er-picks-stat-num">${picksGrade.points}</div>
+          <div class="er-picks-stat-label">Points</div>
+        </div>
+        <div class="er-picks-stat">
+          <div class="er-picks-stat-num">${picksGrade.total ? Math.round(picksGrade.correct / picksGrade.total * 100) : 0}%</div>
+          <div class="er-picks-stat-label">Accuracy</div>
+        </div>
+      </div>
+      <a class="er-picks-link" href="picks.html?id=${encodeURIComponent(eventId)}">See all picks →</a>
+    </div>` : '';
+
+  // FOTN community vote reveal (completed events)
+  const fotnHtml = fotnVotes?.votes?.length ? `
+    <div class="er-card">
+      <div class="er-card-title">FOTN Predictions — Community Vote</div>
+      <div class="er-fotn-votes">
+        ${fotnVotes.votes.map((v, i) => `
+          <div class="er-fotn-vote-row">
+            <div class="er-fotn-vote-rank">#${i + 1}</div>
+            <div class="er-fotn-vote-fight">${esc(v.fight)}</div>
+            <div class="er-fotn-vote-bar-wrap"><div class="er-fotn-vote-bar" style="width:${v.pct}%"></div></div>
+            <div class="er-fotn-vote-pct">${v.pct}%</div>
+          </div>`).join('')}
+        <div class="er-fotn-vote-total">${fotnVotes.total} prediction${fotnVotes.total !== 1 ? 's' : ''} total</div>
+      </div>
+    </div>` : '';
 
   breadcrumb.textContent = name;
   document.title = `MMA Bridge | ${name}`;
@@ -621,6 +773,8 @@ function renderPage(ev, community) {
             </span>
           </div>
 
+          ${loginCta}
+
           <div class="er-card">
             <div class="er-card-title">How was the card?</div>
             <div class="er-stars" id="erStars">
@@ -644,15 +798,18 @@ function renderPage(ev, community) {
           </div>
 
           <button class="er-submit" id="erSubmit" disabled>Submit Review</button>
-          <div class="er-toast" id="erToast">✅ Review saved — thanks!</div>
+          <div class="er-toast" id="erToast"></div>
           <div class="er-error-msg" id="erErr" style="display:none"></div>
+
+          ${myPicksHtml}
+          ${fotnHtml}
 
           ${hasCard ? `
             <div class="er-card er-card-fights">
               <div class="er-card-title">Full Fight Card</div>
-              ${fightSection('Main Card',     ev.mainCard)}
-              ${fightSection('Prelims',       ev.prelims)}
-              ${fightSection('Early Prelims', ev.earlyPrelims)}
+              ${fightSection('Main Card',     ev.mainCard,     communityPicks)}
+              ${fightSection('Prelims',       ev.prelims,      communityPicks)}
+              ${fightSection('Early Prelims', ev.earlyPrelims, communityPicks)}
             </div>` : ''}
 
         </div>
@@ -795,6 +952,9 @@ function renderPage(ev, community) {
       }
       savedData = { rating_id: ratingId, hype_rating: selected, review_text: reviewText };
       saveStoredRating(eventId, savedData);
+      const tweetText = encodeURIComponent(`Just rated ${name} ${selected}/5 on MMA Bridge!`);
+      const tweetUrl  = encodeURIComponent(location.href);
+      toast.innerHTML = `✅ Review saved! <a class="er-share-x" href="https://twitter.com/intent/tweet?text=${tweetText}&url=${tweetUrl}" target="_blank" rel="noopener">Share on X →</a>`;
       toast.classList.add('show');
       lockForm();
       refreshCommunity();
@@ -815,6 +975,20 @@ function renderPage(ev, community) {
   const params  = new URLSearchParams(window.location.search);
   const eventId = params.get('id');
 
+  // Back navigation — set breadcrumb link based on referrer
+  const breadcrumbLink = document.getElementById('breadcrumbLink');
+  if (breadcrumbLink) {
+    const ref = document.referrer || '';
+    if (ref.includes('events.html')) {
+      breadcrumbLink.href = 'events.html';
+      breadcrumbLink.textContent = 'Events';
+    } else if (ref.includes('index.html') || ref.endsWith('/') || ref.endsWith('mmabridge.com')) {
+      breadcrumbLink.href = 'index.html';
+      breadcrumbLink.textContent = 'Home';
+    }
+    // default stays reviews.html
+  }
+
   if (!eventId) {
     root.innerHTML = `<div class="er-empty">No event specified. <a href="reviews.html">← Back</a></div>`;
     return;
@@ -831,8 +1005,16 @@ function renderPage(ev, community) {
       root.innerHTML = `<div class="er-empty">Event not found. <a href="reviews.html">← Back</a></div>`;
       return;
     }
+
+    const isCompleted = ev.status === 'completed';
+    const [communityPicks, fotnVotes, myPicks] = await Promise.all([
+      isCompleted ? fetchCommunityPicks(eventId) : Promise.resolve({}),
+      isCompleted ? fetchFotnVotes(eventId)      : Promise.resolve(null),
+      isLoggedIn() && isCompleted ? fetchMyEventPicks(eventId) : Promise.resolve([])
+    ]);
+
     updateCommBadge(community);
-    renderPage(ev, community);
+    renderPage(ev, community, { communityPicks, fotnVotes, myPicks });
   } catch (err) {
     debugLog(err);
     root.innerHTML = `<div class="er-empty">Failed to load. <a href="reviews.html">← Back</a></div>`;

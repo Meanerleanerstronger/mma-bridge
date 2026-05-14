@@ -33,13 +33,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // An upcoming event whose start time just passed = live now, show as hero
     const liveNow = all.find(e => e.status === 'upcoming' && hasStarted(e));
+    if (liveNow) liveNow._isLive = true;
 
-    // Show most recently completed event in hero for 2 days after it ends
+    // Show most recently completed event in hero for 4 days after it ends
     const recentCompleted = past[0];
     const isVeryRecent = recentCompleted &&
       (now - new Date(recentCompleted.isoDate)) < 4 * 24 * 60 * 60 * 1000;
 
     renderHero(liveNow || (isVeryRecent ? recentCompleted : null) || upcoming[0] || past[0]);
+
+    // ── Notification banner check ─────────────
+    checkEventNotifications(all);
     renderRecentResults(past);
   } catch(e) { debugLog('Events error:', e); }
 
@@ -64,19 +68,35 @@ function renderHero(ev) {
     };
     img.style.backgroundPosition = positions[ev.id] || 'center top';
   }
+  const isLive      = !!ev._isLive;
   const isCompleted = ev.status === 'completed';
-  if (isCompleted) {
+
+  if (isLive) {
+    type.innerHTML = '<span style="display:inline-flex;align-items:center;gap:7px;"><span style="width:8px;height:8px;background:#ff2020;border-radius:50%;box-shadow:0 0 8px 2px rgba(255,30,30,0.7);animation:pulse 1.5s infinite;flex-shrink:0;"></span>LIVE NOW</span>';
+  } else if (isCompleted) {
     type.textContent = ev.type === 'PPV' ? 'PPV Event — Results' : 'Event — Results';
   } else {
     type.textContent = ev.type === 'PPV' ? 'Next PPV Event' : 'Next Event';
   }
+
   title.textContent = ev.name || '';
   meta.textContent  = [ev.date, ev.location, ev.venue].filter(Boolean).join('  ·  ');
   const btn = document.getElementById('heroBtn');
   if (btn && ev.id) {
-    if (isCompleted) {
+    if (isLive) {
+      btn.textContent = 'Watch Live →';
+      btn.href = 'https://www.paramountplus.com/sports/ufc/';
+      btn.target = '_blank';
+      btn.rel = 'noopener noreferrer';
+      btn.style.setProperty('background', 'linear-gradient(135deg, #8b0000 0%, #cc0000 55%, #ff3030 100%)', 'important');
+      btn.style.setProperty('color', '#fff', 'important');
+      btn.style.setProperty('text-shadow', '0 1px 4px rgba(0,0,0,0.5)', 'important');
+      btn.style.setProperty('box-shadow', '0 0 28px rgba(255,30,30,0.45), inset 0 1px 0 rgba(255,120,120,0.2)', 'important');
+      btn.style.setProperty('border', '1px solid rgba(255,60,60,0.4)', 'important');
+    } else if (isCompleted) {
       btn.textContent = 'Review the Card →';
       btn.href = `event-review.html?id=${encodeURIComponent(ev.id)}`;
+      btn.target = '';
       btn.style.setProperty('background', 'linear-gradient(135deg, #4a2c00 0%, #8B6010 25%, #C9960A 45%, #A07020 65%, #5C3800 100%)', 'important');
       btn.style.setProperty('color', '#f5e6c8', 'important');
       btn.style.setProperty('text-shadow', '0 1px 3px rgba(0,0,0,0.6)', 'important');
@@ -85,6 +105,7 @@ function renderHero(ev) {
     } else {
       btn.textContent = 'View Full Card →';
       btn.href = `events.html?id=${encodeURIComponent(ev.id)}`;
+      btn.target = '';
       btn.style.setProperty('background', 'cyan', 'important');
       btn.style.setProperty('color', '#000', 'important');
       btn.style.setProperty('text-shadow', 'none', 'important');
@@ -92,6 +113,36 @@ function renderHero(ev) {
       btn.style.setProperty('border', 'none', 'important');
     }
   }
+}
+
+// ── Event Notifications ───────────────────────
+function checkEventNotifications(events) {
+  try {
+    const subs = JSON.parse(localStorage.getItem('mma_notif_subs') || '[]');
+    if (!subs.length) return;
+    const now = new Date();
+    const soon = events.filter(ev => {
+      if (!subs.includes(ev.id) || ev.status !== 'upcoming') return false;
+      const t = ev.startTime || '22:00';
+      const start = new Date(`${ev.isoDate}T${t}:00-04:00`);
+      const hrs = (start - now) / 3600000;
+      return hrs >= 0 && hrs <= 24;
+    });
+    if (!soon.length) return;
+    const target = soon[0];
+    const banner = document.createElement('div');
+    banner.style.cssText = 'position:fixed;top:70px;left:50%;transform:translateX(-50%);z-index:9998;background:linear-gradient(135deg,#0a1820,#0d2538);border:1px solid rgba(0,229,255,0.28);border-radius:12px;padding:14px 18px;max-width:380px;width:calc(100% - 40px);box-shadow:0 8px 40px rgba(0,0,0,0.6);display:flex;align-items:center;gap:12px;animation:sectionFadeIn 0.4s ease both;';
+    banner.innerHTML = `
+      <span style="font-size:1.5rem;flex-shrink:0;">🔔</span>
+      <div style="flex:1;min-width:0;">
+        <div style="font-family:Montserrat,sans-serif;font-size:0.78rem;font-weight:700;color:#fff;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${target.name} is today!</div>
+        <div style="font-family:Inter,sans-serif;font-size:0.68rem;color:rgba(255,255,255,0.38);">Starts ${target.startTime || '10PM'} ET · ${target.venue || target.location || ''}</div>
+      </div>
+      <a href="events.html?id=${encodeURIComponent(target.id)}" style="flex-shrink:0;background:rgba(0,229,255,0.09);border:1px solid rgba(0,229,255,0.28);color:cyan;font-family:Montserrat,sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:7px 12px;border-radius:6px;text-decoration:none;">View</a>
+      <button onclick="this.parentElement.remove()" style="flex-shrink:0;background:none;border:none;color:rgba(255,255,255,0.22);cursor:pointer;font-size:1.1rem;padding:4px;line-height:1;">✕</button>`;
+    document.body.appendChild(banner);
+    setTimeout(() => { if (banner.parentElement) banner.remove(); }, 10000);
+  } catch {}
 }
 
 // ── Recent Results Infinite Scroll ───────────

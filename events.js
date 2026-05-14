@@ -202,6 +202,13 @@ document.addEventListener('DOMContentLoaded', async () => {
       countdownHtml = `<span class="ev-countdown ${cls}">${label}</span>`;
     }
 
+    // Notification bell (upcoming only)
+    function getNotifSubs() { try { return JSON.parse(localStorage.getItem('mma_notif_subs') || '[]'); } catch { return []; } }
+    const subbed = getNotifSubs().includes(id);
+    const bellHtml = upcoming
+      ? `<button class="ev-notif-bell${subbed ? ' active' : ''}" data-ev-id="${esc(id)}" title="${subbed ? 'Notification on — click to cancel' : 'Notify me 24h before this event'}" onclick="event.stopPropagation()">${subbed ? '🔔' : '🔕'}</button>`
+      : '';
+
     // Calendar button (upcoming only)
     const calBtnHtml = upcoming && ev.isoDate
       ? `<div class="ev-cal-wrap" data-ev-id="${esc(id)}">
@@ -253,6 +260,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <div class="ev-header-actions">
                   ${upcoming ? `<a class="ev-picks-btn" href="picks.html?id=${esc(id)}">Pick Fights →</a>` : ''}
                   ${calBtnHtml}
+                  ${bellHtml}
                 </div>
               </div>
             </div>
@@ -436,6 +444,54 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch(e) { debugLog('FOTN save failed', e); }
   };
 
+  // ── Notification bell logic ───────────────
+  function bindNotifBells() {
+    function getSubs() { try { return JSON.parse(localStorage.getItem('mma_notif_subs') || '[]'); } catch { return []; } }
+    function setSubs(arr) { try { localStorage.setItem('mma_notif_subs', JSON.stringify(arr)); } catch {} }
+
+    wrap.querySelectorAll('.ev-notif-bell').forEach(bell => {
+      const evId = bell.dataset.evId;
+      bell.addEventListener('click', e => {
+        e.stopPropagation();
+        const subs = getSubs();
+        const idx  = subs.indexOf(evId);
+        if (idx >= 0) {
+          subs.splice(idx, 1);
+          setSubs(subs);
+          bell.classList.remove('active');
+          bell.innerHTML = '🔕';
+          bell.title = 'Notify me 24h before this event';
+          showNotifToast('Notification cancelled');
+        } else {
+          subs.push(evId);
+          setSubs(subs);
+          bell.classList.add('active');
+          bell.innerHTML = '🔔';
+          bell.title = 'Notification on — click to cancel';
+          showNotifToast("You'll be notified 24h before this event");
+        }
+      });
+    });
+  }
+
+  function showNotifToast(msg) {
+    let toast = document.getElementById('ev-notif-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'ev-notif-toast';
+      toast.style.cssText = `position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+        background:rgba(0,229,255,0.1);border:1px solid rgba(0,229,255,0.35);
+        color:cyan;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.72rem;
+        letter-spacing:0.06em;padding:9px 20px;border-radius:6px;z-index:9999;
+        backdrop-filter:blur(8px);opacity:0;transition:opacity 0.2s;pointer-events:none;`;
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.style.opacity = '1';
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => { toast.style.opacity = '0'; }, 3000);
+  }
+
   // ── Calendar button logic ─────────────────
   function bindCalendarButtons() {
     wrap.querySelectorAll('.ev-cal-btn').forEach(btn => {
@@ -527,6 +583,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     bindFightClicks();
     bindHypeMeters();
     bindCalendarButtons();
+    bindNotifBells();
 
     // Auto-open event if URL has a hash like #ev-ufc-327-prochazka-vs-ulberg
     if (location.hash) {
