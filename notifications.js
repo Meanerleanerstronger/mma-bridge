@@ -1,13 +1,22 @@
 // ==============================================
-// MMA BRIDGE — FAVORITE FIGHTER NOTIFICATION SYSTEM
+// MMA BRIDGE — NOTIFICATION SYSTEM v2
+// Clean YouTube-style bell. Only real future events.
 // ==============================================
 (function () {
   'use strict';
 
-  const NOTIF_KEY  = 'mma_notifications';
-  const FAV_KEY    = 'mma_fav_fighter';
-  const SEEN_KEY   = 'mma_notif_seen_ids';
-  const MAX_NOTIFS = 30;
+  // Version bump clears stale data from old implementation
+  const V            = '2';
+  const NOTIF_KEY    = 'mma_notifs_v' + V;
+  const SEEN_KEY     = 'mma_seen_v' + V;
+  const FAV_KEY      = 'mma_fav_fighter';
+  const KNOWN_EV_KEY = 'mma_known_events';
+  const MAX_NOTIFS   = 25;
+
+  // Clear stale keys from v1
+  ['mma_notifications','mma_notif_seen_ids','mma_notif_seen_v1','mma_notifs_v1'].forEach(k => {
+    try { localStorage.removeItem(k); } catch {}
+  });
 
   function slugify(s) {
     return (s || '').toLowerCase().normalize('NFD')
@@ -17,31 +26,44 @@
   function esc(s) {
     return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
+  function daysUntil(isoDate) {
+    if (!isoDate) return null;
+    const diff = new Date(isoDate) - new Date();
+    return Math.ceil(diff / 86400000);
+  }
 
   // ── Storage ──────────────────────────────────
   function getNotifs()  { try { return JSON.parse(localStorage.getItem(NOTIF_KEY) || '[]'); } catch { return []; } }
   function saveNotifs(a){ try { localStorage.setItem(NOTIF_KEY, JSON.stringify(a.slice(0, MAX_NOTIFS))); } catch {} }
-  function getSeenSet() { try { return new Set(JSON.parse(localStorage.getItem(SEEN_KEY) || '[]')); } catch { return new Set(); } }
+  function getSeen()    { try { return new Set(JSON.parse(localStorage.getItem(SEEN_KEY) || '[]')); } catch { return new Set(); } }
   function addSeen(id)  {
-    const s = getSeenSet(); s.add(id);
-    try { localStorage.setItem(SEEN_KEY, JSON.stringify([...s].slice(-300))); } catch {}
+    const s = getSeen(); s.add(id);
+    try { localStorage.setItem(SEEN_KEY, JSON.stringify([...s].slice(-500))); } catch {}
+  }
+  function getKnownEvents() { try { return new Set(JSON.parse(localStorage.getItem(KNOWN_EV_KEY) || '[]')); } catch { return new Set(); } }
+  function saveKnownEvents(s){ try { localStorage.setItem(KNOWN_EV_KEY, JSON.stringify([...s])); } catch {} }
+
+  // ── Fav fighter ───────────────────────────────
+  function getFav()  { try { return JSON.parse(localStorage.getItem(FAV_KEY) || 'null'); } catch { return null; } }
+  function setFav(name) {
+    if (!name || !name.trim()) {
+      localStorage.removeItem(FAV_KEY);
+    } else {
+      const n = name.trim();
+      localStorage.setItem(FAV_KEY, JSON.stringify({ name: n, slug: slugify(n) }));
+    }
+    // Clear old fight notifications so we re-scan for new fighter
+    const notifs = getNotifs().filter(n => n.type === 'new_event');
+    saveNotifs(notifs);
+    const seen = getSeen();
+    [...seen].filter(id => id.includes('_fight')).forEach(id => seen.delete(id));
+    try { localStorage.setItem(SEEN_KEY, JSON.stringify([...seen])); } catch {}
   }
 
-  // ── Core API ─────────────────────────────────
+  // ── Public API ────────────────────────────────
   const MMANotif = {
-
-    getFav() { try { return JSON.parse(localStorage.getItem(FAV_KEY) || 'null'); } catch { return null; } },
-
-    setFav(name) {
-      if (!name || !name.trim()) {
-        localStorage.removeItem(FAV_KEY);
-      } else {
-        const n = name.trim();
-        localStorage.setItem(FAV_KEY, JSON.stringify({ name: n, slug: slugify(n) }));
-      }
-      saveNotifs([]); // reset notifications for new fighter
-      this.updateBadge();
-    },
+    getFav,
+    setFav(name) { setFav(name); this.updateBadge(); renderSidebarWidget(); },
 
     getUnread() { return getNotifs().filter(n => !n.read).length; },
 
@@ -52,8 +74,7 @@
 
     markRead(id) {
       const a = getNotifs(); const n = a.find(x => x.id === id);
-      if (n) { n.read = true; saveNotifs(a); }
-      this.updateBadge();
+      if (n) { n.read = true; saveNotifs(a); } this.updateBadge();
     },
 
     updateBadge() {
@@ -66,117 +87,122 @@
       btn.classList.toggle('has-notifs', count > 0);
     },
 
-    // ── Scan events & generate notifications ──
+    // ── Scan events — only upcoming, only real ──
     checkEvents(events) {
-      const fav = this.getFav();
       window._cachedEvents = events;
-      if (!fav) return;
+      const now    = new Date();
+      const seen   = getSeen();
+      const arr    = getNotifs();
+      const fav    = getFav();
+      let changed  = false;
 
-      const now  = new Date();
-      const seen = getSeenSet();
-      const arr  = getNotifs();
-      let changed = false;
+      // Only truly future events (upcoming status + date not passed)
+      const upcoming = events.filter(ev => {
+        if (ev.status !== 'upcoming' || !ev.isoDate) return false;
+        return new Date(ev.isoDate) >= now;
+      });
 
-      function findFighter(ev) {
-        for (const sec of ['mainCard', 'prelims', 'earlyPrelims']) {
-          const fights = ev[sec] || [];
-          for (let i = 0; i < fights.length; i++) {
-            const f = fights[i];
-            if (slugify(f.a) === fav.slug || slugify(f.b) === fav.slug) {
-              return {
-                fight: f,
-                opponent: slugify(f.a) === fav.slug ? f.b : f.a
-              };
-            }
-          }
-        }
-        return null;
-      }
-
-      function push(notif) {
-        if (seen.has(notif.id)) return;
-        arr.unshift(notif);
-        addSeen(notif.id);
-        changed = true;
-      }
-
-      events.forEach(ev => {
-        const hit = findFighter(ev);
-        if (!hit) return;
-        const { fight, opponent } = hit;
-        const evId   = ev.id || slugify(ev.name || '');
-        const evName = ev.name || 'an event';
-
-        if (ev.status === 'upcoming' && ev.isoDate) {
-          const t = ev.startTime || '22:00';
-          const start = new Date(`${ev.isoDate}T${t}:00-04:00`);
-          const hrs = (start - now) / 3600000;
-
-          // Announced (any future fight = generate once)
-          push({
-            id: `${fav.slug}_${evId}_announced`, type: 'announced', read: false,
-            title: `${fav.name} is booked!`,
-            body: `${fav.name} vs ${opponent} — ${evName}`,
-            href: `events.html?id=${encodeURIComponent(evId)}`,
-            timestamp: now.toISOString()
-          });
-
-          // Week-of (≤168h, >24h from now)
-          if (hrs > 24 && hrs <= 168) {
-            push({
-              id: `${fav.slug}_${evId}_week`, type: 'week', read: false,
-              title: `${fav.name} fights this week!`,
-              body: `${fav.name} vs ${opponent} at ${evName} · ${ev.date || ''}`,
-              href: `events.html?id=${encodeURIComponent(evId)}`,
+      // ── 1. New event announcements (everyone) ──
+      const knownIds  = getKnownEvents();
+      const allIds    = new Set(events.map(e => e.id || slugify(e.name || '')).filter(Boolean));
+      const isFirst   = knownIds.size === 0; // first ever load → don't spam
+      upcoming.forEach(ev => {
+        const evId = ev.id || slugify(ev.name || '');
+        if (!evId) return;
+        if (!knownIds.has(evId) && !isFirst) {
+          // Newly added event
+          const notifId = `new_event_${evId}`;
+          if (!seen.has(notifId)) {
+            const main = ev.mainCard?.[0];
+            const headline = main ? `${main.a} vs ${main.b}` : '';
+            arr.unshift({
+              id: notifId, type: 'new_event', read: false,
+              title: `New event announced: ${ev.name}`,
+              body: [headline, ev.date, ev.location].filter(Boolean).join(' · '),
+              eventId: evId,
+              eventDate: ev.isoDate,
+              href: `events.html#ev-${evId}`,
               timestamp: now.toISOString()
             });
+            addSeen(notifId);
+            changed = true;
           }
-
-          // Day-of (≤24h, >0h)
-          if (hrs > 0 && hrs <= 24) {
-            push({
-              id: `${fav.slug}_${evId}_day`, type: 'day', read: false,
-              title: `${fav.name} fights TONIGHT!`,
-              body: `${fav.name} vs ${opponent} — make your picks before it starts`,
-              href: `picks.html?id=${encodeURIComponent(evId)}`,
-              timestamp: now.toISOString()
-            });
-          }
-        }
-
-        if (ev.status === 'completed' && fight.winner) {
-          const isWin = fight.winner === fight.a
-            ? slugify(fight.a) === fav.slug
-            : slugify(fight.b) === fav.slug;
-          const methStr  = fight.method ? ` by ${fight.method}` : '';
-          const roundStr = fight.round  ? ` R${fight.round}`    : '';
-          push({
-            id: `${fav.slug}_${evId}_result`, type: 'result', win: isWin, read: false,
-            title: isWin
-              ? `🥊 ${fav.name} WON at ${evName}!`
-              : `${fav.name} lost at ${evName}`,
-            body: isWin
-              ? `${fav.name} def. ${opponent}${methStr}${roundStr} — check the full card`
-              : `${fav.name} lost to ${opponent}${methStr}${roundStr} — check the full card`,
-            href: `event-review.html?id=${encodeURIComponent(evId)}`,
-            timestamp: now.toISOString()
-          });
         }
       });
+      // Update known events set
+      allIds.forEach(id => knownIds.add(id));
+      saveKnownEvents(knownIds);
+
+      // ── 2. Fav fighter upcoming fight ──────────
+      if (fav) {
+        upcoming.forEach(ev => {
+          const evId = ev.id || slugify(ev.name || '');
+          if (!evId) return;
+
+          // Find fighter in any section
+          let opponent = null;
+          for (const sec of ['mainCard', 'prelims', 'earlyPrelims']) {
+            for (const f of (ev[sec] || [])) {
+              if (slugify(f.a) === fav.slug) { opponent = f.b; break; }
+              if (slugify(f.b) === fav.slug) { opponent = f.a; break; }
+            }
+            if (opponent !== null) break;
+          }
+          if (opponent === null) return; // fav fighter not on this card
+
+          const days = daysUntil(ev.isoDate);
+          if (days === null || days < 0) return;
+
+          // One notification per fighter+event, with dynamic content stored as metadata
+          // We use tiered IDs so we can generate a "day-of" update on top of the initial one
+          const baseId = `${fav.slug}_${evId}_fight`;
+          const dayId  = `${fav.slug}_${evId}_dayof`;
+
+          // Day-of notification (≤1 day, separate high-priority notification)
+          if (days <= 1 && !seen.has(dayId)) {
+            arr.unshift({
+              id: dayId, type: 'fight_day', read: false,
+              fighter: fav.name, opponent, eventId: evId,
+              title: `${fav.name} fights ${days === 0 ? 'TODAY' : 'TOMORROW'}!`,
+              body: `vs ${opponent} · ${ev.name}${ev.venue ? ' · ' + ev.venue : ''}`,
+              href: `events.html#ev-${evId}`,
+              eventDate: ev.isoDate,
+              timestamp: now.toISOString()
+            });
+            addSeen(dayId);
+            // Also mark base as seen so we don't double up
+            addSeen(baseId);
+            changed = true;
+          } else if (!seen.has(baseId)) {
+            const venue = ev.venue || ev.location || '';
+            arr.unshift({
+              id: baseId, type: 'fight_upcoming', read: false,
+              fighter: fav.name, opponent, eventId: evId,
+              title: `${fav.name} is fighting in ${days} day${days !== 1 ? 's' : ''}!`,
+              body: `vs ${opponent} · ${ev.name}${venue ? ' · ' + venue : ''}`,
+              href: `events.html#ev-${evId}`,
+              eventDate: ev.isoDate,
+              timestamp: now.toISOString()
+            });
+            addSeen(baseId);
+            changed = true;
+          }
+        });
+      }
 
       if (changed) saveNotifs(arr);
       this.updateBadge();
     },
 
-    // ── Mount bell into navbar ────────────────
+    // ── Bell mount ────────────────────────────
     init() {
       const mount = document.getElementById('notifBellMount');
       if (!mount) return;
 
       mount.innerHTML = `
         <div class="notif-wrap" id="notifWrap">
-          <button class="notif-bell-btn" id="notifBellBtn" aria-label="Notifications" title="Notifications">
-            <svg class="notif-bell-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <button class="notif-bell-btn" id="notifBellBtn" aria-label="Notifications">
+            <svg class="notif-bell-svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
               <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
             </svg>
@@ -188,7 +214,7 @@
               <button class="notif-mark-all-btn" id="notifMarkAll">Mark all read</button>
             </div>
             <div class="notif-list" id="notifList"></div>
-            <div class="notif-fav-zone" id="notifFavZone"></div>
+            <div class="notif-drop-footer" id="notifDropFooter"></div>
           </div>
         </div>`;
 
@@ -201,11 +227,10 @@
         dropdown.classList.toggle('open', willOpen);
         dropdown.setAttribute('aria-hidden', String(!willOpen));
         if (willOpen) {
-          this._renderDropdown();
+          this._renderList();
           this.markAllRead();
         }
       });
-
       document.addEventListener('click', () => {
         dropdown.classList.remove('open');
         dropdown.setAttribute('aria-hidden', 'true');
@@ -215,30 +240,37 @@
       this.updateBadge();
     },
 
-    _renderDropdown() {
-      const listEl  = document.getElementById('notifList');
-      const favEl   = document.getElementById('notifFavZone');
-      const markBtn = document.getElementById('notifMarkAll');
-      if (!listEl || !favEl) return;
+    _renderList() {
+      const listEl   = document.getElementById('notifList');
+      const footerEl = document.getElementById('notifDropFooter');
+      const markBtn  = document.getElementById('notifMarkAll');
+      if (!listEl) return;
 
       const notifs = getNotifs();
-      const typeIcon = { announced: '📣', week: '📅', day: '⚡' };
+      const fav    = getFav();
 
       if (!notifs.length) {
         listEl.innerHTML = `
           <div class="notif-empty">
-            <div class="notif-empty-icon">🔕</div>
+            <div class="notif-empty-icon">🔔</div>
             <div>No notifications yet</div>
-            <div class="notif-empty-sub">Set your favorite fighter below</div>
           </div>`;
       } else {
-        listEl.innerHTML = notifs.slice(0, 10).map(n => {
-          const icon = n.type === 'result' ? (n.win ? '🏆' : '💔') : (typeIcon[n.type] || '🔔');
+        const icon = { fight_upcoming: '🥊', fight_day: '⚡', new_event: '📣' };
+        listEl.innerHTML = notifs.slice(0, 12).map(n => {
+          // Compute live days-until for fight notifications
+          let title = esc(n.title);
+          if ((n.type === 'fight_upcoming') && n.eventDate) {
+            const d = daysUntil(n.eventDate);
+            if (d !== null && d >= 0) {
+              title = esc(`${n.fighter} is fighting in ${d} day${d !== 1 ? 's' : ''}!`);
+            }
+          }
           return `
             <a class="notif-item${n.read ? ' read' : ''}" href="${esc(n.href || '#')}" data-id="${esc(n.id)}">
-              <span class="notif-item-icon">${icon}</span>
+              <span class="notif-item-icon">${icon[n.type] || '🔔'}</span>
               <div class="notif-item-body">
-                <div class="notif-item-title">${esc(n.title)}</div>
+                <div class="notif-item-title">${title}</div>
                 <div class="notif-item-sub">${esc(n.body)}</div>
               </div>
               ${!n.read ? '<span class="notif-unread-dot"></span>' : ''}
@@ -249,81 +281,132 @@
         });
       }
 
+      // Footer: fav fighter chip (not a search box, just a link to open the modal)
+      if (footerEl) {
+        footerEl.innerHTML = fav
+          ? `<button class="notif-fav-chip" id="notifFavChip">⭐ ${esc(fav.name)} <span class="notif-fav-change">change</span></button>`
+          : `<button class="notif-fav-chip notif-fav-chip-empty" id="notifFavChip">⭐ Set favorite fighter</button>`;
+        document.getElementById('notifFavChip')?.addEventListener('click', () => {
+          dropdown.classList.remove('open');
+          this.openModal();
+        });
+      }
+
       markBtn?.addEventListener('click', () => {
         this.markAllRead();
         listEl.querySelectorAll('.notif-item').forEach(el => el.classList.add('read'));
         listEl.querySelectorAll('.notif-unread-dot').forEach(el => el.remove());
       });
-
-      this._renderFavZone(favEl);
     },
 
-    _renderFavZone(favEl) {
-      const fav = this.getFav();
-      if (fav) {
-        favEl.innerHTML = `
-          <div class="notif-fav-head">⭐ Favorite Fighter</div>
-          <div class="notif-fav-row">
-            <span class="notif-fav-name">${esc(fav.name)}</span>
-            <button class="notif-fav-change-btn" id="notifChangeFav">Change</button>
-          </div>`;
-        document.getElementById('notifChangeFav')?.addEventListener('click', () => {
-          this.setFav(null);
-          this._renderFavZone(favEl);
-        });
-      } else {
-        favEl.innerHTML = `
-          <div class="notif-fav-head">⭐ Favorite Fighter</div>
-          <div class="notif-fav-desc">Get notified when they're announced, fight week, day-of, and after results</div>
-          <div class="notif-fav-input-row">
-            <input class="notif-fav-input" id="notifFavInput" placeholder="Fighter name…" autocomplete="off" spellcheck="false">
-            <button class="notif-fav-save-btn" id="notifFavSave">Save</button>
-          </div>
-          <div class="notif-fav-sugg" id="notifFavSugg"></div>`;
-        this._wireInput(favEl);
-      }
+    // ── Fav Fighter Modal ─────────────────────
+    openModal() {
+      const bg = document.getElementById('favModalBg');
+      if (!bg) return;
+      bg.style.display = 'flex';
+      setTimeout(() => bg.classList.add('open'), 10);
+      _renderModal();
+      document.getElementById('favModalInput')?.focus();
     },
 
-    _wireInput(favEl) {
-      const input   = document.getElementById('notifFavInput');
-      const saveBtn = document.getElementById('notifFavSave');
-      const sugg    = document.getElementById('notifFavSugg');
-      if (!input || !saveBtn) return;
-
-      let fighters = [];
-      fetch('data/fighters.json').then(r => r.ok ? r.json() : []).then(d => { fighters = d; }).catch(() => {});
-
-      input.addEventListener('input', () => {
-        const q = input.value.trim().toLowerCase();
-        if (!q || q.length < 2) { sugg.innerHTML = ''; return; }
-        const matches = fighters.filter(f => f.name?.toLowerCase().includes(q)).slice(0, 6);
-        sugg.innerHTML = matches.map(f =>
-          `<button class="notif-sugg-item" data-name="${esc(f.name)}">${esc(f.name)}</button>`
-        ).join('');
-        sugg.querySelectorAll('.notif-sugg-item').forEach(btn => {
-          btn.addEventListener('click', () => { input.value = btn.dataset.name; sugg.innerHTML = ''; input.focus(); });
-        });
-      });
-
-      const save = () => {
-        const name = input.value.trim();
-        if (!name) return;
-        this.setFav(name);
-        this._renderFavZone(favEl);
-        const listEl = document.getElementById('notifList');
-        if (listEl) listEl.innerHTML = `<div class="notif-empty"><div class="notif-empty-icon">✅</div><div>Saved! Checking events…</div></div>`;
-        if (window._cachedEvents) {
-          this.checkEvents(window._cachedEvents);
-          setTimeout(() => this._renderDropdown(), 400);
-        }
-      };
-
-      saveBtn.addEventListener('click', save);
-      input.addEventListener('keydown', e => { if (e.key === 'Enter') save(); });
-      setTimeout(() => input.focus(), 50);
+    closeModal() {
+      const bg = document.getElementById('favModalBg');
+      if (!bg) return;
+      bg.classList.remove('open');
+      setTimeout(() => { bg.style.display = 'none'; }, 250);
     }
   };
 
+  // ── Modal renderer ────────────────────────────
+  function _renderModal() {
+    const input   = document.getElementById('favModalInput');
+    const saveBtn = document.getElementById('favModalSave');
+    const sugg    = document.getElementById('favModalSugg');
+    const current = document.getElementById('favModalCurrent');
+    const removeBtn = document.getElementById('favModalRemove');
+    if (!input) return;
+
+    const fav = getFav();
+    input.value = fav ? fav.name : '';
+
+    if (current) {
+      current.innerHTML = fav
+        ? `<span class="fav-modal-current-label">Current: <strong>${esc(fav.name)}</strong></span>`
+        : '';
+    }
+    if (removeBtn) {
+      removeBtn.style.display = fav ? 'inline-flex' : 'none';
+      removeBtn.onclick = () => {
+        MMANotif.setFav(null);
+        input.value = '';
+        if (current) current.innerHTML = '';
+        removeBtn.style.display = 'none';
+        sugg.innerHTML = '';
+      };
+    }
+
+    let fighters = [];
+    fetch('data/fighters.json').then(r => r.ok ? r.json() : []).then(d => { fighters = d; }).catch(() => {});
+
+    input.oninput = () => {
+      const q = input.value.trim().toLowerCase();
+      if (!q || q.length < 2) { sugg.innerHTML = ''; return; }
+      const hits = fighters.filter(f => f.name?.toLowerCase().includes(q)).slice(0, 6);
+      sugg.innerHTML = hits.map(f =>
+        `<button class="fav-sugg-item" data-name="${esc(f.name)}">${esc(f.name)}</button>`
+      ).join('');
+      sugg.querySelectorAll('.fav-sugg-item').forEach(btn => {
+        btn.addEventListener('click', () => {
+          input.value = btn.dataset.name;
+          sugg.innerHTML = '';
+          input.focus();
+        });
+      });
+    };
+
+    const save = () => {
+      const name = input.value.trim();
+      if (!name) return;
+      MMANotif.setFav(name);
+      if (window._cachedEvents) MMANotif.checkEvents(window._cachedEvents);
+      MMANotif.closeModal();
+      renderSidebarWidget();
+    };
+
+    if (saveBtn) { saveBtn.onclick = null; saveBtn.addEventListener('click', save); }
+    input.onkeydown = e => { if (e.key === 'Enter') save(); if (e.key === 'Escape') MMANotif.closeModal(); };
+  }
+
+  // ── Sidebar widget ────────────────────────────
+  function renderSidebarWidget() {
+    const el = document.getElementById('favFighterWidget');
+    if (!el) return;
+    const fav = getFav();
+    el.innerHTML = fav
+      ? `<div class="fav-widget-set">
+           <div class="fav-widget-label">⭐ Your Fighter</div>
+           <div class="fav-widget-name">${esc(fav.name)}</div>
+           <button class="fav-widget-change" onclick="MMANotif.openModal()">Change →</button>
+         </div>`
+      : `<div class="fav-widget-empty">
+           <div class="fav-widget-label">⭐ Favorite Fighter</div>
+           <div class="fav-widget-hint">Get notified about your fighter's upcoming bouts</div>
+           <button class="fav-widget-set-btn" onclick="MMANotif.openModal()">Set Fighter →</button>
+         </div>`;
+  }
+
   window.MMANotif = MMANotif;
-  document.addEventListener('DOMContentLoaded', () => MMANotif.init());
+
+  document.addEventListener('DOMContentLoaded', () => {
+    MMANotif.init();
+    renderSidebarWidget();
+
+    // Modal close on backdrop click
+    document.getElementById('favModalBg')?.addEventListener('click', e => {
+      if (e.target === e.currentTarget) MMANotif.closeModal();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') MMANotif.closeModal();
+    });
+  });
 })();

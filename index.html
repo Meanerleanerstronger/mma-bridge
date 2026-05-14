@@ -248,13 +248,31 @@
       <div class="card-row" id="trending-cards"></div>
     </div>
     <div class="sidebar">
+      <div id="favFighterWidget"></div>
       <h3>TODAY IN MMA</h3>
       <ul id="today-list"></ul>
-
     </div>
   </div>
 
-  <script src="notifications.js?v=1.0"></script>
+  <!-- Favorite Fighter Modal -->
+  <div class="fav-modal-bg" id="favModalBg" style="display:none" aria-modal="true" role="dialog">
+    <div class="fav-modal">
+      <div class="fav-modal-hd">
+        <div class="fav-modal-ttl">⭐ Favorite Fighter</div>
+        <button class="fav-modal-x" onclick="MMANotif.closeModal()" aria-label="Close">✕</button>
+      </div>
+      <div class="fav-modal-desc">Get notified when they're announced on a card, the week of the fight, and day-of</div>
+      <input class="fav-modal-input" id="favModalInput" placeholder="Start typing a fighter name…" autocomplete="off" spellcheck="false">
+      <div class="fav-modal-sugg" id="favModalSugg"></div>
+      <div class="fav-modal-current" id="favModalCurrent"></div>
+      <div class="fav-modal-actions">
+        <button class="fav-modal-remove" id="favModalRemove" style="display:none">Remove</button>
+        <button class="fav-modal-save" id="favModalSave">Save Fighter</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="notifications.js?v=2.0"></script>
   <script type="module" src="script.js?v=2.5"></script>
 
   <script>
