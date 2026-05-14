@@ -7130,3 +7130,345 @@ button:focus:not(:focus-visible), a:focus:not(:focus-visible) { outline: none; }
   .pk-score-hero-n { font-size: 3.2rem; }
   .pk-score-hero-pct { font-size: 1.4rem; }
 }
+
+/* ══════════════════════════════════════════════════
+   NOTIFICATION BELL + FAVORITE FIGHTER SYSTEM
+══════════════════════════════════════════════════ */
+
+/* Bell wrapper (relative so dropdown can position absolute) */
+.notif-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Bell button */
+.notif-bell-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 8px;
+  color: rgba(255,255,255,0.45);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+.notif-bell-btn:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.18);
+  color: rgba(255,255,255,0.75);
+}
+.notif-bell-btn.has-notifs {
+  color: cyan;
+  border-color: rgba(0,229,255,0.3);
+  background: rgba(0,229,255,0.06);
+  box-shadow: 0 0 12px rgba(0,229,255,0.12);
+}
+
+/* Cyan badge */
+.notif-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 99px;
+  background: cyan;
+  color: #000;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 8px rgba(0,229,255,0.7), 0 0 0 2px #060608;
+  pointer-events: none;
+  animation: notifPop 0.3s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes notifPop {
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+/* Dropdown panel */
+.notif-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 340px;
+  background: linear-gradient(160deg, #13161e 0%, #0c0e14 100%);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(0,229,255,0.05);
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(-8px) scale(0.97);
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  overflow: hidden;
+}
+.notif-dropdown.open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* Dropdown header */
+.notif-drop-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.notif-drop-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+.notif-mark-all-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  color: rgba(0,229,255,0.5);
+  padding: 0;
+  transition: color 0.15s;
+}
+.notif-mark-all-btn:hover { color: cyan; }
+
+/* Notifications list */
+.notif-list {
+  max-height: 280px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.07) transparent;
+}
+.notif-list::-webkit-scrollbar { width: 3px; }
+.notif-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+
+/* Individual notification item */
+.notif-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 16px;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: background 0.12s;
+  position: relative;
+}
+.notif-item:last-child { border-bottom: none; }
+.notif-item:hover { background: rgba(255,255,255,0.035); }
+.notif-item.read { opacity: 0.55; }
+
+.notif-item-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+  line-height: 1;
+}
+.notif-item-body { flex: 1; min-width: 0; }
+.notif-item-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 2px;
+  line-height: 1.3;
+}
+.notif-item-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.38);
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.notif-unread-dot {
+  width: 7px;
+  height: 7px;
+  background: cyan;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 5px;
+  box-shadow: 0 0 6px rgba(0,229,255,0.6);
+}
+
+/* Empty state */
+.notif-empty {
+  padding: 32px 16px;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.28);
+  line-height: 1.6;
+}
+.notif-empty-icon { font-size: 1.8rem; margin-bottom: 8px; }
+.notif-empty-sub { font-size: 0.68rem; color: rgba(255,255,255,0.18); margin-top: 4px; }
+
+/* ── Favorite fighter section ── */
+.notif-fav-zone {
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding: 14px 16px 16px;
+  background: rgba(0,229,255,0.02);
+}
+.notif-fav-head {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.28);
+  margin-bottom: 10px;
+}
+.notif-fav-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.25);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+/* Fav set — row with current fighter */
+.notif-fav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: rgba(0,229,255,0.05);
+  border: 1px solid rgba(0,229,255,0.15);
+  border-radius: 8px;
+  padding: 9px 12px;
+}
+.notif-fav-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #fff;
+}
+.notif-fav-change-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(0,229,255,0.55);
+  padding: 0;
+  flex-shrink: 0;
+  transition: color 0.15s;
+}
+.notif-fav-change-btn:hover { color: cyan; }
+
+/* Fav input row */
+.notif-fav-input-row {
+  display: flex;
+  gap: 8px;
+}
+.notif-fav-input {
+  flex: 1;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 7px;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  padding: 8px 11px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.notif-fav-input::placeholder { color: rgba(255,255,255,0.22); }
+.notif-fav-input:focus { border-color: rgba(0,229,255,0.4); }
+.notif-fav-save-btn {
+  background: rgba(0,229,255,0.12);
+  border: 1px solid rgba(0,229,255,0.28);
+  border-radius: 7px;
+  color: cyan;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.notif-fav-save-btn:hover { background: rgba(0,229,255,0.2); }
+
+/* Autocomplete suggestions */
+.notif-fav-sugg {
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 140px;
+  overflow-y: auto;
+}
+.notif-sugg-item {
+  text-align: left;
+  background: none;
+  border: none;
+  border-radius: 5px;
+  padding: 7px 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.76rem;
+  color: rgba(255,255,255,0.6);
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+.notif-sugg-item:hover { background: rgba(0,229,255,0.07); color: #fff; }
+
+/* Mount point in navbar */
+#notifBellMount {
+  display: flex;
+  align-items: center;
+}
+
+/* Light mode overrides */
+body.light-mode .notif-bell-btn {
+  background: rgba(0,0,0,0.04) !important;
+  border-color: rgba(0,0,0,0.12) !important;
+  color: rgba(0,0,0,0.45) !important;
+}
+body.light-mode .notif-bell-btn.has-notifs {
+  color: #007a8c !important;
+  border-color: rgba(0,150,180,0.4) !important;
+  background: rgba(0,150,180,0.08) !important;
+}
+body.light-mode .notif-badge {
+  background: #007a8c !important;
+  color: #fff !important;
+  box-shadow: 0 0 8px rgba(0,150,180,0.5), 0 0 0 2px #f0f0f4 !important;
+}
+body.light-mode .notif-dropdown {
+  background: linear-gradient(160deg, #ffffff 0%, #f4f4f8 100%) !important;
+  border-color: rgba(0,0,0,0.1) !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15) !important;
+}
+body.light-mode .notif-drop-title { color: rgba(0,0,0,0.45) !important; }
+body.light-mode .notif-item-title { color: #111 !important; }
+body.light-mode .notif-item-sub   { color: rgba(0,0,0,0.4) !important; }
+body.light-mode .notif-fav-zone   { background: rgba(0,150,180,0.04) !important; }
+
+/* Responsive */
+@media (max-width: 600px) {
+  .notif-dropdown {
+    width: calc(100vw - 24px);
+    right: -50px;
+  }
+}

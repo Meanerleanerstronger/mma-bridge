@@ -44,6 +44,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // ── Notification banner check ─────────────
     checkEventNotifications(all);
+
+    // ── Favorite fighter notifications ────────
+    if (window.MMANotif) window.MMANotif.checkEvents(all);
+
     renderRecentResults(past);
   } catch(e) { debugLog('Events error:', e); }
 
