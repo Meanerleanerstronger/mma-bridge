@@ -243,7 +243,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     return `
       <div class="ev-card-wrap">
-      ${starBtnHtml}
       <details class="event-card ${isPPV ? 'is-ppv' : ''}" id="ev-${esc(id)}">
         <summary class="ev-summary">
           ${thumbHtml}
@@ -288,6 +287,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           </div>
         </div>
       </details>
+      ${starBtnHtml}
       </div>`;
   }
 
