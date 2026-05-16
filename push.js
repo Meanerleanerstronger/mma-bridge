@@ -5,7 +5,7 @@
   'use strict';
 
   // ── VAPID public key (matches private key on the backend) ──
-  const VAPID_PUBLIC_KEY = 'BE2r4AU2Z-g48i3Bjg3CFIsFSBjtktzkR_rV2LQyv7hO2jJCLFrv2FBQ-M_oztS26G3Efrw6CMkpkgYo416Fwb4';
+  const VAPID_PUBLIC_KEY = 'BMCcRUYcboxYuMQd4peCA_etuBlfgeN8C9o26rVxfpUUxov_1ICWJOm5AiLHmmqJlNjNtoQSsVj0rPayM35H-7c';
   const STARS_KEY        = 'mma_starred_events_v1';
   const BROWSER_ID_KEY   = 'mma_browser_id';
 
