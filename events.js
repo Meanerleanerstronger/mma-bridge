@@ -8,6 +8,9 @@ import CONFIG, { debugLog } from './config.js';
 import API from './api.js';
 import { showLoading, showError } from './loading.js';
 
+const BELL_OFF_SVG = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`;
+const BELL_ON_SVG  = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>`;
+
 document.addEventListener('DOMContentLoaded', async () => {
   const wrap = document.getElementById('events-list');
 
@@ -206,7 +209,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     function getNotifSubs() { try { return JSON.parse(localStorage.getItem('mma_notif_subs') || '[]'); } catch { return []; } }
     const subbed = getNotifSubs().includes(id);
     const bellHtml = upcoming
-      ? `<button class="ev-notif-bell${subbed ? ' active' : ''}" data-ev-id="${esc(id)}" title="${subbed ? 'Notification on — click to cancel' : 'Notify me 24h before this event'}" onclick="event.stopPropagation()">${subbed ? '🔔' : '🔕'}</button>`
+      ? `<button class="ev-notif-bell${subbed ? ' active' : ''}" data-ev-id="${esc(id)}" title="${subbed ? 'Notification on — click to cancel' : 'Notify me 24h before'}" onclick="event.stopPropagation()">${subbed ? BELL_ON_SVG : BELL_OFF_SVG}</button>`
       : '';
 
     // Star button — real browser push (1 week + day-before), rendered OUTSIDE <details>
@@ -216,7 +219,7 @@ document.addEventListener('DOMContentLoaded', async () => {
            data-ev-name="${esc(ev.name||'')}" data-ev-iso="${esc(ev.isoDate||'')}"
            data-ev-start="${esc(ev.start_time||'')}"
            title="${starredNow ? 'Starred — click to remove' : 'Star for push alerts 1 week & day before'}">
-           <svg width="15" height="15" viewBox="0 0 24 24" fill="${starredNow ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+           <svg width="18" height="18" viewBox="0 0 24 24" fill="${starredNow ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
            </svg>
          </button>`
@@ -475,14 +478,14 @@ document.addEventListener('DOMContentLoaded', async () => {
           subs.splice(idx, 1);
           setSubs(subs);
           bell.classList.remove('active');
-          bell.innerHTML = '🔕';
+          bell.innerHTML = BELL_OFF_SVG;
           bell.title = 'Notify me 24h before this event';
           showNotifToast('Notification cancelled');
         } else {
           subs.push(evId);
           setSubs(subs);
           bell.classList.add('active');
-          bell.innerHTML = '🔔';
+          bell.innerHTML = BELL_ON_SVG;
           bell.title = 'Notification on — click to cancel';
           showNotifToast("You'll be notified 24h before this event");
         }
@@ -530,10 +533,12 @@ document.addEventListener('DOMContentLoaded', async () => {
           showNotifToast('Removed from starred events');
         } else {
           btn.disabled = true;
+          btn.classList.add('loading');
           const result = await window.MMABridgePush.starEvent({
             id: evId, name: evName, isoDate: evIso, start_time: evStart || null
           });
           btn.disabled = false;
+          btn.classList.remove('loading');
 
           if (result === 'ok') {
             btn.classList.add('starred');
