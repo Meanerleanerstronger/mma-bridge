@@ -2107,6 +2107,7 @@ body.light-mode .pfp-fight-info { color: rgba(0,0,0,0.4); }
   align-items: center;
   gap: 10px;
   flex-shrink: 0;
+  padding-right: 44px; /* space so VIEW chip never overlaps the star button */
 }
 .ev-chev {
   color: rgba(255,255,255,0.4);
@@ -5256,32 +5257,52 @@ body.light-mode .ev-picks-btn:hover { background: rgba(0,150,180,0.18) !importan
   border-color: rgba(0,229,255,0.28);
 }
 
-/* ── Star event button (push notification) ── */
+/* ── Event card wrapper (needed for absolute star positioning) ── */
+.ev-card-wrap {
+  position: relative;
+}
+
+/* ── Star button — pinned top-right of card, never inside summary ── */
 .ev-star-btn {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 30px; height: 30px; flex-shrink: 0;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 6px;
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 10;
+  display: flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px;
+  background: rgba(20, 20, 20, 0.85);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
   cursor: pointer;
-  color: rgba(255,255,255,0.4);
-  transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.1s;
+  color: rgba(255,255,255,0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.12s;
 }
 .ev-star-btn:hover {
-  background: rgba(255,210,0,0.1);
-  border-color: rgba(255,210,0,0.3);
+  background: rgba(255,210,0,0.15);
+  border-color: rgba(255,210,0,0.45);
   color: #ffd700;
+  transform: scale(1.08);
 }
 .ev-star-btn.starred {
-  background: rgba(255,210,0,0.12);
-  border-color: rgba(255,210,0,0.35);
+  background: rgba(255,210,0,0.14);
+  border-color: rgba(255,210,0,0.5);
   color: #ffd700;
 }
-.ev-star-btn:active { transform: scale(0.88); }
-.ev-star-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-body.light-mode .ev-star-btn { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.1); color: rgba(0,0,0,0.35); }
+.ev-star-btn:active { transform: scale(0.9); }
+.ev-star-btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+body.light-mode .ev-star-btn {
+  background: rgba(255,255,255,0.9);
+  border-color: rgba(0,0,0,0.12);
+  color: rgba(0,0,0,0.35);
+}
 body.light-mode .ev-star-btn:hover,
-body.light-mode .ev-star-btn.starred { background: rgba(200,150,0,0.1); border-color: rgba(200,150,0,0.35); color: #b8860b; }
+body.light-mode .ev-star-btn.starred {
+  background: rgba(255,210,0,0.15);
+  border-color: rgba(200,150,0,0.4);
+  color: #b8860b;
+}
 
 /* ══════════════════════════════════════════════════
    PICK FIGHTS PAGE

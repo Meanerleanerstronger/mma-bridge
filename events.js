@@ -209,15 +209,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       ? `<button class="ev-notif-bell${subbed ? ' active' : ''}" data-ev-id="${esc(id)}" title="${subbed ? 'Notification on — click to cancel' : 'Notify me 24h before this event'}" onclick="event.stopPropagation()">${subbed ? '🔔' : '🔕'}</button>`
       : '';
 
-    // Star button — real browser push (1 week + day-before)
+    // Star button — real browser push (1 week + day-before), rendered OUTSIDE <details>
     const starredNow = window.MMABridgePush?.isStarred(id) || false;
     const starBtnHtml = upcoming
       ? `<button class="ev-star-btn${starredNow ? ' starred' : ''}" data-ev-id="${esc(id)}"
            data-ev-name="${esc(ev.name||'')}" data-ev-iso="${esc(ev.isoDate||'')}"
            data-ev-start="${esc(ev.start_time||'')}"
-           title="${starredNow ? 'Starred — click to remove' : 'Star to get push alerts 1 week & day before'}"
-           onclick="event.stopPropagation()">
-           <svg width="14" height="14" viewBox="0 0 24 24" fill="${starredNow ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+           title="${starredNow ? 'Starred — click to remove' : 'Star for push alerts 1 week & day before'}">
+           <svg width="15" height="15" viewBox="0 0 24 24" fill="${starredNow ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
            </svg>
          </button>`
@@ -243,6 +242,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       : `<div class="ev-thumb"></div>`;
 
     return `
+      <div class="ev-card-wrap">
+      ${starBtnHtml}
       <details class="event-card ${isPPV ? 'is-ppv' : ''}" id="ev-${esc(id)}">
         <summary class="ev-summary">
           ${thumbHtml}
@@ -260,7 +261,6 @@ document.addEventListener('DOMContentLoaded', async () => {
           <div class="ev-sum-right">
             ${countdownHtml}
             ${upcoming ? `<span class="ev-hype-badge" id="ehype-${esc(id)}"></span>` : ''}
-            ${starBtnHtml}
             <span class="view-chip">VIEW</span>
             <span class="ev-chev">▾</span>
           </div>
@@ -287,7 +287,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             ${section('Early Prelims', ev.earlyPrelims, meta, upcoming, false)}
           </div>
         </div>
-      </details>`;
+      </details>
+      </div>`;
   }
 
   // ── Bind fight row clicks → drawer ────────
