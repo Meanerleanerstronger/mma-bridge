@@ -5290,7 +5290,8 @@ body.light-mode .ev-picks-btn:hover { background: rgba(0,150,180,0.18) !importan
   align-items: flex-start;
   gap: 10px;
 }
-.ev-card-wrap .event-card {
+.ev-card-wrap .event-card,
+.ev-card-wrap .ev-card {
   flex: 1;
   min-width: 0;
 }
