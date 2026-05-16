@@ -5256,6 +5256,33 @@ body.light-mode .ev-picks-btn:hover { background: rgba(0,150,180,0.18) !importan
   border-color: rgba(0,229,255,0.28);
 }
 
+/* ── Star event button (push notification) ── */
+.ev-star-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; flex-shrink: 0;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  cursor: pointer;
+  color: rgba(255,255,255,0.4);
+  transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.1s;
+}
+.ev-star-btn:hover {
+  background: rgba(255,210,0,0.1);
+  border-color: rgba(255,210,0,0.3);
+  color: #ffd700;
+}
+.ev-star-btn.starred {
+  background: rgba(255,210,0,0.12);
+  border-color: rgba(255,210,0,0.35);
+  color: #ffd700;
+}
+.ev-star-btn:active { transform: scale(0.88); }
+.ev-star-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+body.light-mode .ev-star-btn { background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.1); color: rgba(0,0,0,0.35); }
+body.light-mode .ev-star-btn:hover,
+body.light-mode .ev-star-btn.starred { background: rgba(200,150,0,0.1); border-color: rgba(200,150,0,0.35); color: #b8860b; }
+
 /* ══════════════════════════════════════════════════
    PICK FIGHTS PAGE
 ══════════════════════════════════════════════════ */

@@ -209,6 +209,20 @@ document.addEventListener('DOMContentLoaded', async () => {
       ? `<button class="ev-notif-bell${subbed ? ' active' : ''}" data-ev-id="${esc(id)}" title="${subbed ? 'Notification on — click to cancel' : 'Notify me 24h before this event'}" onclick="event.stopPropagation()">${subbed ? '🔔' : '🔕'}</button>`
       : '';
 
+    // Star button — real browser push (1 week + day-before)
+    const starredNow = window.MMABridgePush?.isStarred(id) || false;
+    const starBtnHtml = upcoming
+      ? `<button class="ev-star-btn${starredNow ? ' starred' : ''}" data-ev-id="${esc(id)}"
+           data-ev-name="${esc(ev.name||'')}" data-ev-iso="${esc(ev.isoDate||'')}"
+           data-ev-start="${esc(ev.start_time||'')}"
+           title="${starredNow ? 'Starred — click to remove' : 'Star to get push alerts 1 week & day before'}"
+           onclick="event.stopPropagation()">
+           <svg width="14" height="14" viewBox="0 0 24 24" fill="${starredNow ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+             <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+           </svg>
+         </button>`
+      : '';
+
     // Calendar button (upcoming only)
     const calBtnHtml = upcoming && ev.isoDate
       ? `<div class="ev-cal-wrap" data-ev-id="${esc(id)}">
@@ -246,6 +260,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           <div class="ev-sum-right">
             ${countdownHtml}
             ${upcoming ? `<span class="ev-hype-badge" id="ehype-${esc(id)}"></span>` : ''}
+            ${starBtnHtml}
             <span class="view-chip">VIEW</span>
             <span class="ev-chev">▾</span>
           </div>
@@ -492,6 +507,48 @@ document.addEventListener('DOMContentLoaded', async () => {
     toast._t = setTimeout(() => { toast.style.opacity = '0'; }, 3000);
   }
 
+  // ── Star button — real browser push alerts ──
+  function bindStarButtons() {
+    wrap.querySelectorAll('.ev-star-btn').forEach(btn => {
+      btn.addEventListener('click', async e => {
+        e.stopPropagation();
+        if (!window.MMABridgePush) return;
+
+        const evId    = btn.dataset.evId;
+        const evName  = btn.dataset.evName;
+        const evIso   = btn.dataset.evIso;
+        const evStart = btn.dataset.evStart;
+
+        const alreadyStarred = btn.classList.contains('starred');
+
+        if (alreadyStarred) {
+          await window.MMABridgePush.unstarEvent(evId);
+          btn.classList.remove('starred');
+          btn.title = 'Star to get push alerts 1 week & day before';
+          btn.querySelector('svg').setAttribute('fill', 'none');
+          showNotifToast('Removed from starred events');
+        } else {
+          btn.disabled = true;
+          const result = await window.MMABridgePush.starEvent({
+            id: evId, name: evName, isoDate: evIso, start_time: evStart || null
+          });
+          btn.disabled = false;
+
+          if (result === 'ok') {
+            btn.classList.add('starred');
+            btn.title = 'Starred — click to remove';
+            btn.querySelector('svg').setAttribute('fill', 'currentColor');
+            showNotifToast(`Starred! You'll get alerts 1 week & day before ${evName}`);
+          } else if (result === 'already') {
+            btn.classList.add('starred');
+          } else {
+            showNotifToast('Enable notifications in browser settings to star events');
+          }
+        }
+      });
+    });
+  }
+
   // ── Calendar button logic ─────────────────
   function bindCalendarButtons() {
     wrap.querySelectorAll('.ev-cal-btn').forEach(btn => {
@@ -584,6 +641,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     bindHypeMeters();
     bindCalendarButtons();
     bindNotifBells();
+    bindStarButtons();
 
     // Auto-open event if URL has a hash like #ev-ufc-327-prochazka-vs-ulberg
     if (location.hash) {

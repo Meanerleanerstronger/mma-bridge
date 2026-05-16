@@ -89,8 +89,15 @@
   function getFavs() {
     try { return JSON.parse(localStorage.getItem(FAVS_KEY)) || []; } catch { return []; }
   }
+
+  // Build a quick id → fighter lookup for the push module
+  const fighterById = {};
+  fighters.forEach(f => { if (f.id) fighterById[f.id] = f; });
+
   function saveFavs(ids) {
     try { localStorage.setItem(FAVS_KEY, JSON.stringify(ids)); } catch {}
+    // Keep push subscription in sync with current fav list
+    window.MMABridgePush?.updateFavFighters(ids, fighterById).catch?.(() => {});
   }
 
   // ── Compute stats ─────────────────────────────
