@@ -107,6 +107,8 @@
   if (!event) { root.innerHTML = `<div class="pk-error">Event not found. <a href="events.html" style="color:#00e5ff;text-decoration:none;">Browse events →</a></div>`; return; }
 
   const isCompleted = event.status === 'completed';
+  // Picks lock the moment the event start time passes (even before UFC marks it completed)
+  const isLocked = !isCompleted && !!event.start_time && new Date() >= new Date(event.start_time);
   let myId = user?.id || null;
 
   // ── State ─────────────────────────────────────
@@ -520,7 +522,7 @@
   function updateFotnSection() { updateFotnBar(); }
 
   function enterFotnMode() {
-    if (isCompleted) return;
+    if (isCompleted || isLocked) return;
     fotnPickMode = true;
     root.classList.add('pk-fotn-picking');
     document.body.classList.add('pk-fotn-picking-body');
@@ -820,7 +822,7 @@
 
   // ── Hype widget HTML — draggable slider ──────
   function hypeWidgetHtml() {
-    if (isCompleted) return '';
+    if (isCompleted || isLocked) return '';
     const pct   = localHype ? ((localHype - 1) / 4) * 100 : 0;
     const avgStr = hypeCount > 0 ? `${hypeAvg.toFixed(1)} avg · ${hypeCount}` : 'Be first';
     return `
@@ -841,7 +843,7 @@
 
   // ── FOTN bar at top of body ────────────────────
   function fotnBarHtml() {
-    if (isCompleted) return '';
+    if (isCompleted || isLocked) return '';
     const { cls, html } = fotnBarInnerHtml();
     return `<div class="${cls}" id="pkFotnBar">${html}</div>`;
   }
@@ -865,18 +867,18 @@
           Back
         </a>
         <div class="pk-header-info">
-          <div class="pk-event-type">${esc(event.type || 'UFC')} · ${isCompleted ? 'Results' : 'Pick Your Fights'}</div>
+          <div class="pk-event-type">${esc(event.type || 'UFC')} · ${isCompleted ? 'Results' : isLocked ? 'Picks Locked' : 'Pick Your Fights'}</div>
           <h1 class="pk-event-name">${esc(event.name || '')}</h1>
           <div class="pk-event-meta">
             ${event.date ? `<span>${esc(event.date)}</span>` : ''}
             ${event.location ? `<span class="pk-meta-dot">·</span><span>${esc(event.location)}</span>` : ''}
             ${countdownHtml()}
           </div>
-          ${!isCompleted ? careerBadgeHtml() : ''}
+          ${!isCompleted && !isLocked ? careerBadgeHtml() : ''}
         </div>
         <div class="pk-header-right">
           ${hypeWidgetHtml()}
-          ${!isCompleted && myId ? `
+          ${!isCompleted && !isLocked && myId ? `
             <div class="pk-progress-wrap">
               <div class="pk-progress-bar" style="width:${total ? Math.round((picked/total)*100) : 0}%"></div>
             </div>
@@ -885,7 +887,12 @@
         </div>
       </div>
 
-      ${!myId && !isCompleted ? `
+      ${isLocked ? `
+        <div class="pk-locked-banner">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Picks are locked — the event has started
+        </div>` : ''}
+      ${!myId && !isCompleted && !isLocked ? `
         <div class="pk-signin-banner">
           <span>Sign in to save your picks and track your record</span>
           <a href="auth.html" class="pk-signin-link">Sign In →</a>
@@ -914,7 +921,7 @@
 
     // Sticky save bar
     document.getElementById('pkSaveBar')?.remove();
-    if (!isCompleted && myId) {
+    if (!isCompleted && !isLocked && myId) {
       const saveBar = document.createElement('div');
       saveBar.id = 'pkSaveBar';
       saveBar.className = 'pk-save-bar';
@@ -1017,7 +1024,7 @@
 
   // ── Bind fighter/method/round clicks ──────────
   function bindInteractions() {
-    if (isCompleted) return;
+    if (isCompleted || isLocked) return;
 
     root.querySelectorAll('.pk-side').forEach(side => {
       const activate = () => {

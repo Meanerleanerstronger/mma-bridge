@@ -15,20 +15,47 @@ if (window.location.hostname !== 'localhost' && window.location.hostname !== '12
   fetch('https://mmabridge-backend.onrender.com/api/visitors/ping', { method: 'POST' }).catch(() => {});
 }
 
-// Fetch events.json + fighters.json at startup and cache as live data for Lucas
+// Fetch events + fighters at startup and build a structured context for Lucas
 async function loadLiveData() {
   try {
     const [evRes, fRes] = await Promise.all([
       fetch('events.json'),
-      fetch('fighters.json')
+      fetch('data/fighters.json')   // richer fighter data with full records
     ]);
     const [events, fighters] = await Promise.all([
       evRes.ok  ? evRes.json()  : null,
       fRes.ok   ? fRes.json()   : null
     ]);
-    if (events || fighters) {
-      lucasLiveData = { events: events || [], fighters: fighters || {} };
-    }
+    if (!events && !fighters) return;
+
+    const now = new Date();
+    const allEvents = events || [];
+
+    // Build a compact context summary Lucas can use to ground answers
+    const upcoming = allEvents
+      .filter(e => e.status === 'upcoming')
+      .slice(0, 5)
+      .map(e => ({
+        name: e.name,
+        date: e.date,
+        location: e.location || '',
+        mainCard: (e.mainCard || []).slice(0, 5).map(f => `${f.a} vs ${f.b}`)
+      }));
+
+    const recent = allEvents
+      .filter(e => e.status === 'completed')
+      .slice(-3)
+      .map(e => ({
+        name: e.name,
+        date: e.date,
+        results: (e.mainCard || []).slice(0, 3).map(f => f.winner ? `${f.winner} def. ${f.a === f.winner ? f.b : f.a} (${f.method || 'DEC'})` : `${f.a} vs ${f.b}`)
+      }));
+
+    lucasLiveData = {
+      events: allEvents,
+      fighters: fighters || [],
+      context: { upcoming, recent, generatedAt: now.toISOString() }
+    };
   } catch (e) {
     // silently fail — backend will use its own disk copies as fallback
   }

@@ -739,7 +739,7 @@ function renderPage(ev, community, extra = {}) {
 
       ${poster ? `
         <div class="er-hero">
-          <img class="er-hero-img" src="${esc(poster)}" alt="${esc(name)}">
+          <img class="er-hero-img" src="${esc(poster)}" alt="${esc(name)}" onerror="this.onerror=null;this.style.display='none'">
           <div class="er-hero-overlay">
             ${ev.type ? `<span class="er-event-type">${esc(ev.type)}</span>` : ''}
             <div class="er-hero-name">${esc(name)}</div>

@@ -344,6 +344,17 @@ async function renderNews() {
 
   } catch(e) {
     debugLog('News error:', e);
+    const container = document.getElementById('trending-cards');
+    const list = document.getElementById('today-list');
+    if (container && !container.innerHTML.trim()) {
+      container.innerHTML = `<div style="text-align:center;padding:40px 20px;color:rgba(255,255,255,0.3);font-family:'Inter',sans-serif;font-size:0.85rem;">
+        <div style="font-size:1.5rem;margin-bottom:10px;">📡</div>
+        Couldn't load news right now. Check back shortly.
+      </div>`;
+    }
+    if (list && !list.innerHTML.trim()) {
+      list.innerHTML = `<li style="color:rgba(255,255,255,0.3);font-size:0.8rem;list-style:none;">Unable to load headlines</li>`;
+    }
   }
 }
 
