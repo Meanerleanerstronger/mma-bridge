@@ -401,18 +401,12 @@ function formatOdds(n) {
           .eq('user_id', myId).eq('event_id', eventId)
           .in('fight_key', toDelete);
       }
-      const toSave = Object.entries(localPicks).map(([fightKey, p]) => {
-        const fd = getFightData(fightKey);
-        return {
-          user_id: myId, event_id: eventId,
-          event_name: event.name || '',
-          fight_key: fightKey,
-          fighter_a: fd?.a || fightKey,
-          fighter_b: fd?.b || fightKey,
-          pick: p.pick,
-          method: combineMethod(p.base, p.round) || null,
-        };
-      });
+      const toSave = Object.entries(localPicks).map(([fightKey, p]) => ({
+        user_id: myId, event_id: eventId,
+        fight_key: fightKey,
+        pick: p.pick,
+        method: combineMethod(p.base, p.round) || null,
+      }));
       if (toSave.length > 0) {
         const { error } = await sb.from('picks').upsert(toSave, { onConflict: 'user_id,event_id,fight_key' });
         if (error) throw error;
@@ -1058,6 +1052,21 @@ function formatOdds(n) {
     if (!isCompleted && !isLocked) {
       // ── Fighter side click → pick ──
       root.querySelectorAll('.sb-side[data-key]').forEach(side => {
+        const applyPick = (key, pick, fight, side) => {
+          fight.querySelectorAll('.pk-change-confirm').forEach(el => el.remove());
+          fight.querySelectorAll('.sb-side').forEach(s => s.classList.remove('selected', 'dimmed'));
+          side.classList.add('selected');
+          fight.querySelectorAll('.sb-side').forEach(s => { if (s !== side) s.classList.add('dimmed'); });
+          const cur = localPicks[key] || {};
+          localPicks[key] = { pick, base: cur.base || '', round: cur.round || '' };
+          sessionStorage.setItem(`pk_draft_${eventId}`, JSON.stringify(localPicks));
+          const methodWrap = document.getElementById(`pkMethod-${key}`);
+          if (methodWrap) methodWrap.classList.add('visible');
+          fight.classList.toggle('has-pick', true);
+          updateSaveBar();
+          updateSpine();
+        };
+
         const activate = () => {
           if (fotnPickMode) return;
           const key  = side.dataset.key;
@@ -1067,29 +1076,54 @@ function formatOdds(n) {
           if (!myId) { showToast('Sign in to save picks', 'err'); return; }
 
           const wasSelected = side.classList.contains('selected');
-          fight.querySelectorAll('.sb-side').forEach(s => s.classList.remove('selected', 'dimmed'));
 
-          if (!wasSelected) {
-            side.classList.add('selected');
-            fight.querySelectorAll('.sb-side').forEach(s => { if (s !== side) s.classList.add('dimmed'); });
-            const cur = localPicks[key] || {};
-            localPicks[key] = { pick, base: cur.base || '', round: cur.round || '' };
-            sessionStorage.setItem(`pk_draft_${eventId}`, JSON.stringify(localPicks));
-            const methodWrap = document.getElementById(`pkMethod-${key}`);
-            if (methodWrap) methodWrap.classList.add('visible');
-          } else {
+          // Dismiss any existing confirm on this fight
+          if (wasSelected) {
+            // Tap selected fighter again → deselect
+            fight.querySelectorAll('.pk-change-confirm').forEach(el => el.remove());
+            fight.querySelectorAll('.sb-side').forEach(s => s.classList.remove('selected', 'dimmed'));
             delete localPicks[key];
             sessionStorage.setItem(`pk_draft_${eventId}`, JSON.stringify(localPicks));
             const methodWrap = document.getElementById(`pkMethod-${key}`);
             if (methodWrap) methodWrap.classList.remove('visible');
             const strip = document.getElementById(`pkDrumStrip-${key}`);
             if (strip) { strip.style.transition = 'none'; strip.style.transform = 'translateY(0)'; }
-            const roundRow = document.getElementById(`pkRounds-${key}`);
-            if (roundRow) roundRow.classList.remove('pk-round-row-visible');
+            document.getElementById(`pkRounds-${key}`)?.classList.remove('pk-round-row-visible');
+            fight.classList.toggle('has-pick', false);
+            updateSaveBar(); updateSpine();
+            return;
           }
-          fight.classList.toggle('has-pick', !!localPicks[key]);
-          updateSaveBar();
-          updateSpine();
+
+          const currentPick = localPicks[key]?.pick;
+
+          if (currentPick && currentPick !== pick) {
+            // Switching to a different fighter — show confirmation
+            fight.querySelectorAll('.pk-change-confirm').forEach(el => el.remove());
+            const confirm = document.createElement('div');
+            confirm.className = 'pk-change-confirm';
+            confirm.innerHTML = `
+              <div class="pk-change-msg">Switch to <strong>${esc(pick)}</strong>?</div>
+              <div class="pk-change-btns">
+                <button class="pk-change-yes">Switch</button>
+                <button class="pk-change-no">Keep ${esc(currentPick)}</button>
+              </div>`;
+            fight.appendChild(confirm);
+            const t = setTimeout(() => confirm.remove(), 5000);
+            confirm.querySelector('.pk-change-yes').addEventListener('click', e => {
+              e.stopPropagation();
+              clearTimeout(t);
+              confirm.remove();
+              applyPick(key, pick, fight, side);
+            });
+            confirm.querySelector('.pk-change-no').addEventListener('click', e => {
+              e.stopPropagation();
+              clearTimeout(t);
+              confirm.remove();
+            });
+            return;
+          }
+
+          applyPick(key, pick, fight, side);
         };
         side.addEventListener('click', activate);
         side.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); } });
