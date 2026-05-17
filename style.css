@@ -5574,18 +5574,20 @@ body.light-mode .ev-star-btn.starred {
 
 /* ── Fight Card ── */
 .sb-fight {
-  border: 2px solid rgba(255,255,255,0.09);
+  border: 1.5px solid rgba(255,255,255,0.08);
   border-radius: 14px; overflow: hidden; position: relative;
-  background: rgba(255,255,255,0.018);
+  background: linear-gradient(165deg, #1c1c22 0%, #0d0d11 100%);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
 }
 .sb-fight.is-main {
-  border-color: rgba(255,255,255,0.18);
-  background: rgba(255,255,255,0.03);
-  box-shadow: 0 8px 48px rgba(0,0,0,0.35);
+  border-color: rgba(255,255,255,0.12);
+  background: linear-gradient(165deg, #1e1e26 0%, #0e0e14 100%);
+  box-shadow: 0 8px 48px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.07);
 }
 .sb-fight.is-main-card {
-  border-color: rgba(255,255,255,0.13);
-  background: rgba(255,255,255,0.024);
+  border-color: rgba(255,255,255,0.1);
+  background: linear-gradient(165deg, #1d1d24 0%, #0d0d12 100%);
+  box-shadow: 0 6px 32px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.06);
 }
 .sb-fight-row {
   display: grid;
@@ -5695,6 +5697,15 @@ body.light-mode .ev-star-btn.starred {
   color: rgba(255,255,255,0.2);
 }
 .sb-odds-sep { color: rgba(255,255,255,0.08); }
+.sb-odds-tag {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.58rem; font-weight: 700;
+  letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.28);
+  margin-top: 2px;
+}
+.sb-odds-tag.fav { color: rgba(255,215,0,0.75); }
+.sb-odds-tag.dog { color: rgba(255,255,255,0.22); }
 .sb-comm-bar {
   width: 52px; height: 2px; border-radius: 1px;
   background: rgba(255,255,255,0.06); overflow: hidden; position: relative;
@@ -6610,36 +6621,37 @@ body.light-mode .pk-hm-right { color: rgba(0,0,0,0.35) !important; }
 body.light-mode .sb-section-label { color: rgba(0,0,0,0.25) !important; }
 body.light-mode .sb-section-line { background: rgba(0,0,0,0.08) !important; }
 
-body.light-mode .sb-fight { background: #fff !important; border-color: rgba(0,0,0,0.1) !important; box-shadow: 0 2px 12px rgba(0,0,0,0.07) !important; }
-body.light-mode .sb-fight.is-main { background: #f9f9fa !important; border-color: rgba(0,0,0,0.15) !important; box-shadow: 0 4px 24px rgba(0,0,0,0.1) !important; }
-body.light-mode .sb-fight.is-main-card { background: #fdfdfe !important; border-color: rgba(0,0,0,0.12) !important; }
+/* sb-fight cards stay glossy black in light mode — immersive contrast look */
+body.light-mode .sb-fight { background: linear-gradient(165deg, #1c1c22 0%, #0d0d11 100%) !important; border-color: rgba(255,255,255,0.1) !important; box-shadow: 0 6px 30px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.07) !important; }
+body.light-mode .sb-fight.is-main { background: linear-gradient(165deg, #1e1e26 0%, #0e0e14 100%) !important; border-color: rgba(255,255,255,0.14) !important; box-shadow: 0 10px 50px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.08) !important; }
+body.light-mode .sb-fight.is-main-card { background: linear-gradient(165deg, #1d1d24 0%, #0d0d12 100%) !important; border-color: rgba(255,255,255,0.12) !important; }
 
-body.light-mode .sb-name { color: #111 !important; }
-body.light-mode .sb-fight.is-main-card .sb-name { color: #0a0a0a !important; }
-body.light-mode .sb-fight.is-main .sb-name { color: #000 !important; }
-body.light-mode .sb-side.selected .sb-name { color: #000 !important; }
+body.light-mode .sb-name { color: rgba(255,255,255,0.88) !important; }
+body.light-mode .sb-fight.is-main-card .sb-name { color: rgba(255,255,255,0.92) !important; }
+body.light-mode .sb-fight.is-main .sb-name { color: #fff !important; }
+body.light-mode .sb-side.selected .sb-name { color: #fff !important; }
 
-body.light-mode .sb-record { color: rgba(0,0,0,0.38) !important; }
-body.light-mode .sb-method-result { color: rgba(0,0,0,0.32) !important; }
+body.light-mode .sb-record { color: rgba(255,255,255,0.3) !important; }
+body.light-mode .sb-method-result { color: rgba(255,255,255,0.28) !important; }
 
-body.light-mode .sb-center { border-left-color: rgba(0,0,0,0.07) !important; border-right-color: rgba(0,0,0,0.07) !important; }
-body.light-mode .sb-vs { color: rgba(0,0,0,0.14) !important; }
-body.light-mode .sb-weight-tag { color: rgba(0,0,0,0.25) !important; }
-body.light-mode .sb-odds { color: rgba(0,0,0,0.25) !important; }
-body.light-mode .sb-odds-sep { color: rgba(0,0,0,0.1) !important; }
-body.light-mode .sb-comm-bar { background: rgba(0,0,0,0.1) !important; }
-body.light-mode .sb-comm-fill { background: rgba(0,0,0,0.28) !important; }
-body.light-mode .sb-comm-pcts { color: rgba(0,0,0,0.28) !important; }
+body.light-mode .sb-center { border-left-color: rgba(255,255,255,0.06) !important; border-right-color: rgba(255,255,255,0.06) !important; }
+body.light-mode .sb-vs { color: rgba(255,255,255,0.12) !important; }
+body.light-mode .sb-weight-tag { color: rgba(255,255,255,0.22) !important; }
+body.light-mode .sb-odds { color: rgba(255,255,255,0.22) !important; }
+body.light-mode .sb-odds-sep { color: rgba(255,255,255,0.08) !important; }
+body.light-mode .sb-comm-bar { background: rgba(255,255,255,0.08) !important; }
+body.light-mode .sb-comm-fill { background: rgba(255,255,255,0.3) !important; }
+body.light-mode .sb-comm-pcts { color: rgba(255,255,255,0.3) !important; }
 
-body.light-mode .sb-photo { background: rgba(0,0,0,0.04) !important; border-color: rgba(0,0,0,0.1) !important; }
-body.light-mode .sb-side.selected .sb-photo { border-color: rgba(170,130,0,0.5) !important; }
+body.light-mode .sb-photo { background: rgba(255,255,255,0.04) !important; border-color: rgba(255,255,255,0.08) !important; }
+body.light-mode .sb-side.selected .sb-photo { border-color: rgba(201,150,10,0.6) !important; }
 
-body.light-mode .sb-side:hover { background: rgba(0,0,0,0.025) !important; }
-body.light-mode .sb-side.selected { background: rgba(200,160,0,0.06) !important; }
+body.light-mode .sb-side:hover { background: rgba(255,255,255,0.03) !important; }
+body.light-mode .sb-side.selected { background: rgba(201,150,10,0.07) !important; }
 body.light-mode .sb-side.dimmed { opacity: 0.35 !important; }
 body.light-mode .sb-side.result-loss { opacity: 0.3 !important; }
 
-body.light-mode .sb-method-wrap { background: rgba(0,0,0,0.025) !important; border-top-color: rgba(0,0,0,0.07) !important; }
+body.light-mode .sb-method-wrap { background: rgba(255,255,255,0.03) !important; border-top-color: rgba(255,255,255,0.06) !important; }
 body.light-mode .pk-method-drum { background: rgba(0,0,0,0.04) !important; border-color: rgba(0,0,0,0.1) !important; }
 body.light-mode .pk-drum-window { background: #f5f5f8 !important; border-color: rgba(0,0,0,0.1) !important; }
 body.light-mode .pk-drum-item { color: rgba(0,0,0,0.6) !important; border-bottom-color: rgba(0,0,0,0.06) !important; }

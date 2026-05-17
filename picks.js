@@ -711,18 +711,18 @@ function formatOdds(n) {
       : (isCompleted && pickedB ? `<div class="sb-wrong-badge">✗ 0pts</div>` : '')
       + (!isCompleted && pickedB ? `<div class="sb-pick-badge${isSavedB ? '' : ' unsaved'}">${isSavedB ? 'YOUR PICK ✓' : 'YOUR PICK •'}</div>` : '');
 
+    // Per-fighter inline odds tags (moved out of center column)
+    let oddsTagA = '', oddsTagB = '';
+    if (odds) {
+      const aFav = odds.odds_a < odds.odds_b;
+      oddsTagA = `<div class="sb-odds-tag${aFav ? ' fav' : ' dog'}">${formatOdds(odds.odds_a)}</div>`;
+      oddsTagB = `<div class="sb-odds-tag${!aFav ? ' fav' : ' dog'}">${formatOdds(odds.odds_b)}</div>`;
+    }
+
     // Center column
     let centerHtml = `<div class="sb-vs">VS</div>`;
     if (f.titleFight) centerHtml += `<div class="sb-title-pip">TITLE</div>`;
     if (f.weight) centerHtml += `<div class="sb-weight-tag">${esc(f.weight)}</div>`;
-    if (odds) {
-      const aFav = odds.odds_a < odds.odds_b;
-      centerHtml += `<div class="sb-odds">
-        <span class="sb-odds-a${aFav ? ' fav' : ''}">${formatOdds(odds.odds_a)}</span>
-        <span class="sb-odds-sep">/</span>
-        <span class="sb-odds-b${!aFav ? ' fav' : ''}">${formatOdds(odds.odds_b)}</span>
-      </div>`;
-    }
     if (isCompleted && winner) {
       centerHtml += `<div class="sb-method-result">${esc(f.method || '')}</div>`;
     }
@@ -757,6 +757,7 @@ function formatOdds(n) {
             ${photoA}
             <div class="sb-info">
               <div class="sb-name">${esc(f.a)}</div>
+              ${oddsTagA}
               ${recA ? `<div class="sb-record">${esc(recA)}</div>` : ''}
               ${badgeA}
               ${oppPickedA ? `<div class="sb-opp-badge">${esc(oppName)}'s pick</div>` : ''}
@@ -767,6 +768,7 @@ function formatOdds(n) {
             ${photoB}
             <div class="sb-info">
               <div class="sb-name">${esc(f.b)}</div>
+              ${oddsTagB}
               ${recB ? `<div class="sb-record">${esc(recB)}</div>` : ''}
               ${badgeB}
               ${oppPickedB ? `<div class="sb-opp-badge">${esc(oppName)}'s pick</div>` : ''}
