@@ -51,8 +51,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderRecentResults(past);
   } catch(e) { debugLog('Events error:', e); }
 
-  // Load real news
-  await renderNews();
+  // Load news — don't await so it doesn't block the page
+  renderNews();
   setupSearch();
 });
 
@@ -252,46 +252,54 @@ async function renderNews() {
   const container = document.getElementById('trending-cards');
   const list      = document.getElementById('today-list');
 
-  try {
-    // On prod hit the real API, locally use cached file
-    let articles = [];
+  const FALLBACK = [
+    {
+      title: 'UFC 328: Chimaev vs. Strickland — What Happened and What\'s Next',
+      url: 'https://mmajunkie.usatoday.com/category/ufc',
+      imageUrl: 'https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-04/050926-ufc-329-chimaev-vs-strickland-EVENT-ART.jpg',
+      source: 'MMA Junkie'
+    },
+    {
+      title: 'McGregor vs. Holloway 2: Everything You Need to Know About UFC 329',
+      url: 'https://www.espn.com/mma/',
+      imageUrl: 'https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-05/071126-ufc-329-mcgregor-vs-holloway-2-EVENT-ART.jpg',
+      source: 'ESPN MMA'
+    },
+    {
+      title: 'UFC Freedom 250: Topuria vs. Gaethje Preview — Title Fight Preview',
+      url: 'https://www.cbssports.com/ufc/',
+      imageUrl: 'https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-04/061426-ufc-250-topuria-vs-gaethje-EVENT-ART.jpg',
+      source: 'CBS Sports'
+    },
+  ];
 
+  try {
+    // Show fallback articles immediately — no network wait
+    let articles = FALLBACK;
+
+    // Render immediately with fallbacks
+    paintNews(articles, container, list);
+
+    // Fetch real news in background; update if we get something better
     if (CONFIG.IS_DEV) {
-      // Local: read from data/news.json
       try {
         const d = await fetch('/data/news.json').then(r => r.json());
-        articles = d.trending || [];
+        if (d.trending?.length) paintNews(d.trending, container, list);
       } catch {}
     } else {
-      // Prod: hit Render backend which calls GNews
       try {
         const d = await fetch(CONFIG.API.BASE_URL + '/news').then(r => r.json());
-        articles = d.trending || [];
+        if (d.trending?.length) paintNews(d.trending, container, list);
       } catch {}
     }
 
-    if (!articles.length) {
-      articles = [
-        {
-          title: 'UFC 327: Procházka vs. Ulberg — Full Card Preview and Predictions',
-          url: 'https://mmajunkie.usatoday.com/category/ufc',
-          imageUrl: 'https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-04/041126-ufc-327-prochazka-vs-ulberg-EVENT-ART.jpg',
-          source: 'MMA Junkie'
-        },
-        {
-          title: 'Joe Pyfer Stuns Adesanya With Second Round TKO in Seattle',
-          url: 'https://www.espn.com/mma/',
-          imageUrl: 'https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-02/032826-ufc-fight-night-adesanyva-vs-pyfer-EVENT-ART.jpg',
-          source: 'ESPN MMA'
-        },
-        {
-          title: 'Charles Oliveira Claims BMF Title Over Max Holloway at UFC 326',
-          url: 'https://www.cbssports.com/ufc/',
-          imageUrl: 'https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-01/030726-ufc-326-holloway-vs-oliveira-2-EVENT-ART.jpg',
-          source: 'CBS Sports'
-        },
-      ];
-    }
+  } catch(e) {
+    debugLog('News error:', e);
+  }
+}
+
+function paintNews(articles, container, list) {
+  try {
 
     // Render cards — keep extras in queue, swap on broken image
     window._newsQueue = articles.slice(3);
