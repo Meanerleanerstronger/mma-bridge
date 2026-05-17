@@ -385,6 +385,13 @@ function formatOdds(n) {
   // ── Bulk save all picks to DB ─────────────────
   async function saveAllPicks() {
     if (!myId || !sb) { showToast('Sign in to save picks', 'err'); return; }
+    if (!localHype) {
+      showToast('Rate the hype before saving', 'err');
+      document.getElementById('pkHypeTrack')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      document.getElementById('pkHypeWidget')?.classList.add('pk-hype-shake');
+      setTimeout(() => document.getElementById('pkHypeWidget')?.classList.remove('pk-hype-shake'), 600);
+      return;
+    }
     const btn = document.getElementById('pkSaveBtn');
     if (btn) { btn.disabled = true; btn.textContent = 'Saving…'; }
     try {
@@ -1183,49 +1190,8 @@ function formatOdds(n) {
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSwitcher(); });
   }
 
-  // ── Spine ─────────────────────────────────────
-  function initSpine() {
-    const body = root.querySelector('.pk-body');
-    if (!body) return;
-    let spine = document.getElementById('pkSpine');
-    if (!spine) {
-      spine = document.createElement('div');
-      spine.id = 'pkSpine';
-      spine.className = 'pk-spine';
-      spine.innerHTML = `<div class="pk-spine-track"></div><div class="pk-spine-fill" id="pkSpineFill"></div>`;
-      body.style.position = 'relative';
-      body.insertBefore(spine, body.firstChild);
-    }
-    spine.querySelectorAll('.pk-spine-node').forEach(n => n.remove());
-    const bodyTop = body.getBoundingClientRect().top + window.scrollY;
-    root.querySelectorAll('.sb-fight[data-key]').forEach(card => {
-      const cardMid = card.getBoundingClientRect().top + window.scrollY + card.offsetHeight / 2;
-      const relTop  = cardMid - bodyTop;
-      const node = document.createElement('div');
-      node.className = 'pk-spine-node';
-      node.style.top = relTop + 'px';
-      node.dataset.key = card.dataset.key;
-      spine.appendChild(node);
-    });
-    updateSpine();
-  }
-
-  function updateSpine() {
-    const fill = document.getElementById('pkSpineFill');
-    if (!fill) return;
-    const total  = root.querySelectorAll('.sb-fight[data-key]').length;
-    const picked = Object.keys(localPicks).filter(k => k !== 'fotn').length;
-    fill.style.height = total ? `${(picked / total) * 100}%` : '0%';
-    root.querySelectorAll('.pk-spine-node').forEach(node => {
-      const hasPick = !!localPicks[node.dataset.key];
-      const wasPickedAlready = node.classList.contains('picked');
-      node.classList.toggle('picked', hasPick);
-      if (hasPick && !wasPickedAlready) {
-        node.classList.add('pop');
-        setTimeout(() => node.classList.remove('pop'), 500);
-      }
-    });
-  }
+  function initSpine() {}
+  function updateSpine() {}
 
   // ── Cascade entrance animation ────────────────
   function animateFightEntrance() {
