@@ -5491,36 +5491,230 @@ body.light-mode .ev-star-btn.starred {
   border-bottom: 1px solid rgba(0,229,255,0.12);
 }
 
-/* ── PICKS PAGE DOSSIER REDESIGN ── */
+/* ── PICKS PAGE — BROADCAST SCOREBOARD ── */
 
 /* Body */
 .pk-body {
-  max-width: 860px; margin: 0 auto;
-  padding: 0 28px 140px;
-  display: flex; flex-direction: column; gap: 56px;
+  max-width: 900px; margin: 0 auto;
+  padding: 0 0 140px;
+  display: flex; flex-direction: column; gap: 0;
 }
 
-/* Card Rating — grand hype widget */
-.pk-card-rating {
-  text-align: center;
-  padding: 48px 32px 40px;
-  background: linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
-  border: 1px solid rgba(255,255,255,0.07);
-  border-top: 1px solid rgba(200,168,75,0.3);
-  border-radius: 18px;
-  position: relative; overflow: hidden;
+/* ── Hype Meter — horizontal amber drag bar ── */
+.pk-hype-meter {
+  display: flex; align-items: center; gap: 18px;
+  padding: 14px 28px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.012);
 }
-.pk-card-rating::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(200,168,75,0.5) 50%, transparent);
-}
-.pk-cr-eyebrow {
+.pk-hm-label {
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.52rem; font-weight: 800;
-  letter-spacing: 0.28em; text-transform: uppercase;
-  color: rgba(255,255,255,0.25); margin-bottom: 16px;
+  font-size: 0.5rem; font-weight: 900;
+  letter-spacing: 0.24em; text-transform: uppercase;
+  color: rgba(255,255,255,0.22); white-space: nowrap; min-width: 76px;
 }
+.pk-hm-track {
+  flex: 1; height: 6px; border-radius: 3px;
+  background: rgba(255,255,255,0.07); cursor: pointer;
+  position: relative; user-select: none;
+}
+.pk-hm-track.dragging { cursor: grabbing; }
+.pk-hm-fill {
+  position: absolute; left: 0; top: 0; height: 100%;
+  background: linear-gradient(90deg, rgba(200,140,0,0.55), #ffd700);
+  border-radius: 3px; pointer-events: none;
+  transition: width 0.08s ease;
+}
+.pk-hm-thumb {
+  position: absolute; top: 50%; transform: translate(-50%, -50%);
+  width: 18px; height: 18px; border-radius: 50%;
+  background: #ffd700; border: 2px solid rgba(180,120,0,0.8);
+  box-shadow: 0 0 14px rgba(255,215,0,0.4), 0 2px 6px rgba(0,0,0,0.5);
+  pointer-events: none; cursor: grab;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+.pk-hm-track.dragging .pk-hm-thumb {
+  transform: translate(-50%, -50%) scale(1.2);
+  box-shadow: 0 0 22px rgba(255,215,0,0.6), 0 2px 8px rgba(0,0,0,0.5);
+}
+.pk-hm-right {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem; color: rgba(255,255,255,0.28);
+  white-space: nowrap; min-width: 120px; text-align: right;
+}
+.pk-hm-score {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800; font-size: 0.92rem; color: #ffd700;
+}
+
+/* ── Scoreboard Section ── */
+.sb-section { display: flex; flex-direction: column; }
+.sb-section-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 22px 28px 10px;
+}
+.sb-section-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.5rem; font-weight: 900;
+  letter-spacing: 0.26em; text-transform: uppercase;
+  color: rgba(255,255,255,0.25); white-space: nowrap;
+}
+.sb-section-line {
+  flex: 1; height: 1px; background: rgba(255,255,255,0.06);
+}
+.sb-section-fights { display: flex; flex-direction: column; }
+
+/* ── Scoreboard Fight Row ── */
+.sb-fight {
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  position: relative;
+}
+.sb-fight:first-child { border-top: 1px solid rgba(255,255,255,0.05); }
+.sb-fight.is-main {
+  border-top: 1px solid rgba(200,168,75,0.18);
+  border-bottom: 1px solid rgba(200,168,75,0.1);
+  background: rgba(200,168,75,0.015);
+}
+.sb-fight-row {
+  display: grid;
+  grid-template-columns: 1fr 96px 1fr;
+  min-height: 88px;
+}
+.sb-fight.is-main .sb-fight-row { min-height: 116px; }
+
+/* Fighter Side */
+.sb-side {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 20px; cursor: pointer; user-select: none;
+  transition: background 0.15s;
+}
+.sb-side-a { flex-direction: row; }
+.sb-side-b { flex-direction: row-reverse; text-align: right; }
+.sb-side:hover { background: rgba(255,255,255,0.022); }
+.sb-side.selected { background: rgba(255,215,0,0.04); }
+.sb-side.dimmed { opacity: 0.28; filter: grayscale(0.15); pointer-events: none; }
+.sb-side.result-win { background: rgba(255,255,255,0.02); }
+.sb-side.result-loss { opacity: 0.22; filter: grayscale(0.3); pointer-events: none; }
+
+/* Photo */
+.sb-photo {
+  width: 50px; height: 50px; border-radius: 50%; overflow: hidden;
+  border: 1.5px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04);
+  flex-shrink: 0; transition: border-color 0.2s;
+}
+.sb-fight.is-main .sb-photo { width: 66px; height: 66px; }
+.sb-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+.sb-photo-empty { display: flex; align-items: center; justify-content: center; }
+.sb-side.selected .sb-photo { border-color: rgba(255,215,0,0.5); }
+
+/* Info */
+.sb-info { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
+.sb-side-b .sb-info { align-items: flex-end; }
+.sb-name {
+  font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
+  font-weight: 900; font-size: 1.75rem; line-height: 1;
+  text-transform: uppercase; letter-spacing: 0.02em;
+  color: rgba(255,255,255,0.72);
+  transition: color 0.2s, text-shadow 0.2s;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.sb-fight.is-main .sb-name { font-size: 2.3rem; }
+.sb-side.selected .sb-name { color: #ffd700; text-shadow: 0 0 28px rgba(255,215,0,0.28); }
+.sb-side.result-win .sb-name { color: rgba(255,255,255,0.85); }
+.sb-details {
+  display: flex; align-items: center; gap: 7px; flex-wrap: nowrap;
+  font-family: 'Inter', sans-serif; font-size: 0.65rem; color: rgba(255,255,255,0.28);
+}
+.sb-side-b .sb-details { flex-direction: row-reverse; }
+.sb-method-result {
+  font-family: 'Montserrat', sans-serif; font-size: 0.5rem; font-weight: 800;
+  letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-top: 2px;
+}
+.sb-pick-badge {
+  font-family: 'Montserrat', sans-serif; font-size: 0.48rem; font-weight: 900;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,215,0,0.85); background: rgba(255,215,0,0.09);
+  border: 1px solid rgba(255,215,0,0.28); border-radius: 20px; padding: 3px 9px;
+  white-space: nowrap; margin-top: 2px; display: inline-block;
+}
+.sb-pick-badge.unsaved {
+  color: rgba(255,170,0,0.9); background: rgba(255,140,0,0.08); border-color: rgba(255,150,0,0.28);
+}
+.sb-correct-badge {
+  font-family: 'Montserrat', sans-serif; font-size: 0.5rem; font-weight: 800;
+  color: rgba(0,200,80,0.85); margin-top: 2px; display: inline-block;
+}
+.sb-wrong-badge {
+  font-family: 'Montserrat', sans-serif; font-size: 0.5rem; font-weight: 800;
+  color: rgba(255,255,255,0.25); margin-top: 2px; display: inline-block;
+}
+.sb-opp-badge {
+  font-family: 'Inter', sans-serif; font-size: 0.55rem;
+  color: rgba(255,170,0,0.6); margin-top: 2px; display: inline-block;
+}
+
+/* Center Column */
+.sb-center {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 5px; padding: 12px 6px;
+  border-left: 1px solid rgba(255,255,255,0.04);
+  border-right: 1px solid rgba(255,255,255,0.04);
+}
+.sb-vs {
+  font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
+  font-weight: 900; font-size: 0.85rem; letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.1); text-align: center;
+  transition: color 0.2s;
+}
+.sb-fight.has-pick .sb-vs { color: rgba(255,215,0,0.55); font-size: 0.65rem; letter-spacing: 0.06em; }
+.sb-weight-tag {
+  font-family: 'Inter', sans-serif; font-size: 0.54rem; font-weight: 600;
+  color: rgba(255,255,255,0.17); text-align: center; line-height: 1.4;
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+.sb-title-pip {
+  font-family: 'Montserrat', sans-serif; font-size: 0.42rem; font-weight: 900;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(200,168,75,0.8); background: rgba(200,168,75,0.1);
+  border: 1px solid rgba(200,168,75,0.25); border-radius: 3px; padding: 2px 5px;
+}
+.sb-odds {
+  display: flex; align-items: center; gap: 3px;
+  font-family: 'Montserrat', sans-serif; font-size: 0.52rem; font-weight: 800;
+  color: rgba(255,255,255,0.25);
+}
+.sb-odds-a.fav, .sb-odds-b.fav { color: rgba(255,215,0,0.65); }
+.sb-odds-sep { color: rgba(255,255,255,0.1); font-weight: 400; }
+.sb-comm-bar {
+  width: 60px; height: 3px; border-radius: 2px;
+  background: rgba(255,255,255,0.06); overflow: hidden; position: relative;
+}
+.sb-comm-fill {
+  position: absolute; left: 0; top: 0; height: 100%;
+  background: rgba(255,215,0,0.35); border-radius: 2px;
+}
+.sb-comm-pcts {
+  display: flex; justify-content: space-between; width: 60px;
+  font-family: 'Montserrat', sans-serif; font-size: 0.44rem; font-weight: 700;
+  color: rgba(255,255,255,0.22);
+}
+
+/* Method row — slides in below fight row when picked */
+.sb-method-wrap {
+  max-height: 0; overflow: hidden; padding: 0 24px;
+  border-top: 0px solid rgba(255,255,255,0.04);
+  transition: max-height 0.28s cubic-bezier(0.34,1.2,0.64,1), padding 0.28s, border-top-width 0.1s;
+  display: flex; flex-direction: column; gap: 10px;
+  background: rgba(0,0,0,0.12);
+}
+.sb-method-wrap.visible {
+  max-height: 130px; padding: 14px 24px 18px;
+  border-top-width: 1px;
+}
+
+/* FOTN picking mode */
+.pk-fotn-picking .sb-fight { cursor: none; }
+.pk-fotn-picking .sb-fight:hover { background: rgba(255,200,0,0.04); outline: 1px solid rgba(255,200,0,0.3); }
 .pk-cr-score-row {
   display: flex; align-items: baseline; justify-content: center; gap: 4px;
   margin-bottom: 8px;

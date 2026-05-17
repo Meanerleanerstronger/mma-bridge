@@ -470,34 +470,19 @@ function formatOdds(n) {
   const HYPE_LABELS = ['', 'SLEEPER', 'LOW KEY', 'BUILDING', 'HYPED', 'MUST-SEE'];
 
   function updateHypeWidget() {
-    const widget = document.getElementById('pkHypeWidget');
-    if (!widget) return;
-    widget.querySelectorAll('.pk-cr-bar').forEach(b => {
-      const v = +b.dataset.val;
-      b.classList.remove('lit', 'active');
-      if (localHype) {
-        if (v < localHype) b.classList.add('lit');
-        else if (v === localHype) b.classList.add('active');
-      }
-    });
-    const numEl = document.getElementById('pkHypeNum');
-    if (numEl) {
-      numEl.textContent = localHype || '—';
-      numEl.classList.toggle('has-value', !!localHype);
-      const denom = numEl.nextElementSibling;
-      if (denom) denom.textContent = localHype ? '/5' : '';
-    }
+    const pct = localHype ? localHype * 20 : 0;
+    const fill = document.getElementById('pkHypeFill');
+    const thumb = document.getElementById('pkHypeThumb');
     const labelEl = document.getElementById('pkHypeLabel');
-    if (labelEl) {
-      labelEl.textContent = localHype ? (HYPE_LABELS[localHype] || '') : 'Rate the hype';
-      labelEl.classList.toggle('pk-cr-label-empty', !localHype);
-    }
     const avgEl = document.getElementById('pkHypeAvg');
+    if (fill) fill.style.width = pct + '%';
+    if (thumb) thumb.style.left = pct + '%';
+    if (labelEl) labelEl.textContent = localHype ? (HYPE_LABELS[localHype] || '') : 'Rate the hype';
     if (avgEl) {
       if (hypeCount > 0) {
-        avgEl.innerHTML = `<span class="pk-cr-avg-num">${hypeAvg.toFixed(1)}</span> avg · <span class="pk-cr-avg-count">${hypeCount}</span> ${hypeCount === 1 ? 'rating' : 'ratings'}`;
+        avgEl.innerHTML = `<span class="pk-hm-score">${hypeAvg.toFixed(1)}</span> avg · ${hypeCount} ${hypeCount === 1 ? 'rating' : 'ratings'}`;
       } else {
-        avgEl.textContent = 'Be the first to rate this card';
+        avgEl.textContent = 'Be the first to rate';
       }
     }
   }
@@ -657,164 +642,136 @@ function formatOdds(n) {
       <div class="pk-sil-wrap" style="display:none">${SILHOUETTE}</div>`;
   }
 
-  // ── Build one fight card (dossier style) ─────
+  // ── Build one fight row (broadcast scoreboard) ─
   function buildFight(f, sectionKey, idx, isMain) {
-    const key    = `${sectionKey}-${idx}`;
-    const saved  = localPicks[key] || {};
-    const opp    = oppPicks[key] || {};
-    const pickedA = saved.pick === f.a;
-    const pickedB = saved.pick === f.b;
+    const key      = `${sectionKey}-${idx}`;
+    const saved    = localPicks[key] || {};
+    const opp      = oppPicks[key] || {};
+    const pickedA  = saved.pick === f.a;
+    const pickedB  = saved.pick === f.b;
     const isSavedA = myPicks[key]?.pick === f.a;
     const isSavedB = myPicks[key]?.pick === f.b;
     const savedBase  = saved.base  || '';
     const savedRound = saved.round || '';
-    const rounds = maxRounds(f.rounds);
-    const winner  = f.winner || null;
-    const resultA = isCompleted && winner ? (winner === f.a ? 'win' : 'loss') : '';
-    const resultB = isCompleted && winner ? (winner === f.b ? 'win' : 'loss') : '';
+    const rounds   = maxRounds(f.rounds);
+    const winner   = f.winner || null;
+    const resultA  = isCompleted && winner ? (winner === f.a ? 'win' : 'loss') : '';
+    const resultB  = isCompleted && winner ? (winner === f.b ? 'win' : 'loss') : '';
     const correctA = isCompleted && pickedA && resultA === 'win';
     const correctB = isCompleted && pickedB && resultB === 'win';
-    const wrongA   = isCompleted && pickedA && resultA === 'loss';
-    const wrongB   = isCompleted && pickedB && resultB === 'loss';
-    const { pts: ptsA } = (isCompleted && pickedA) ? computePickPoints(key, f) : { pts: 0, breakdown: [] };
-    const { pts: ptsB } = (isCompleted && pickedB) ? computePickPoints(key, f) : { pts: 0, breakdown: [] };
-    const drumIdx  = savedBase ? Math.max(0, DRUM_ITEMS.findIndex(d => d.method === savedBase)) : 0;
+    const { pts: ptsA } = (isCompleted && pickedA) ? computePickPoints(key, f) : { pts: 0 };
+    const { pts: ptsB } = (isCompleted && pickedB) ? computePickPoints(key, f) : { pts: 0 };
+    const comm      = communityPicks[key] || {};
+    const commTotal = Object.values(comm).reduce((s, v) => s + v, 0);
+    const hasPick   = pickedA || pickedB;
+    const showComm  = commTotal > 0 && (isCompleted || hasPick);
+    const commPctA  = showComm ? Math.round(((comm[f.a] || 0) / commTotal) * 100) : null;
+    const commPctB  = showComm ? Math.round(((comm[f.b] || 0) / commTotal) * 100) : null;
+    const oppPickedA = challenge && opp.pick === f.a;
+    const oppPickedB = challenge && opp.pick === f.b;
+    const drumIdx    = savedBase ? Math.max(0, DRUM_ITEMS.findIndex(d => d.method === savedBase)) : 0;
     const drumOffset = -(drumIdx * DRUM_H);
     const needsRound = savedBase === 'KO/TKO' || savedBase === 'SUB';
     const roundCls   = savedBase === 'KO/TKO' ? 'ko' : 'sub';
-    const roundBtns  = Array.from({length: rounds}, (_, i) => i + 1).map(r => `
-      <button class="pk-round-btn${savedRound === String(r) ? ` active ${roundCls}` : ''}"
-        data-round="${r}" data-key="${esc(key)}" data-method-cls="${roundCls}">R${r}</button>`).join('');
+    const roundBtns  = Array.from({length: rounds}, (_, i) => i + 1).map(r =>
+      `<button class="pk-round-btn${savedRound === String(r) ? ` active ${roundCls}` : ''}" data-round="${r}" data-key="${esc(key)}" data-method-cls="${roundCls}">R${r}</button>`
+    ).join('');
     const odds = getOddsForFight(f.a, f.b);
-    const oddsHtml = odds ? (() => {
+
+    // Side A classes
+    const sideACls = ['sb-side sb-side-a', pickedA ? 'selected' : '', pickedB ? 'dimmed' : '', resultA ? `result-${resultA}` : ''].filter(Boolean).join(' ');
+    // Side B classes
+    const sideBCls = ['sb-side sb-side-b', pickedB ? 'selected' : '', pickedA ? 'dimmed' : '', resultB ? `result-${resultB}` : ''].filter(Boolean).join(' ');
+
+    // Photos
+    const photoA = f.imgA
+      ? `<div class="sb-photo"><img src="${esc(f.imgA)}" alt="${esc(f.a)}" loading="lazy" onerror="this.parentNode.innerHTML='${SILHOUETTE}'"></div>`
+      : `<div class="sb-photo sb-photo-empty">${SILHOUETTE}</div>`;
+    const photoB = f.imgB
+      ? `<div class="sb-photo"><img src="${esc(f.imgB)}" alt="${esc(f.b)}" loading="lazy" onerror="this.parentNode.innerHTML='${SILHOUETTE}'"></div>`
+      : `<div class="sb-photo sb-photo-empty">${SILHOUETTE}</div>`;
+
+    const recA = fighterRecord(f.a);
+    const recB = fighterRecord(f.b);
+
+    // Pick/result badges
+    const badgeA = correctA
+      ? `<div class="sb-correct-badge">✓ +${ptsA}pts</div>`
+      : (isCompleted && pickedA ? `<div class="sb-wrong-badge">✗ 0pts</div>` : '')
+      + (!isCompleted && pickedA ? `<div class="sb-pick-badge${isSavedA ? '' : ' unsaved'}">${isSavedA ? 'YOUR PICK ✓' : 'YOUR PICK •'}</div>` : '');
+    const badgeB = correctB
+      ? `<div class="sb-correct-badge">✓ +${ptsB}pts</div>`
+      : (isCompleted && pickedB ? `<div class="sb-wrong-badge">✗ 0pts</div>` : '')
+      + (!isCompleted && pickedB ? `<div class="sb-pick-badge${isSavedB ? '' : ' unsaved'}">${isSavedB ? 'YOUR PICK ✓' : 'YOUR PICK •'}</div>` : '');
+
+    // Center column
+    let centerHtml = `<div class="sb-vs">VS</div>`;
+    if (f.titleFight) centerHtml += `<div class="sb-title-pip">TITLE</div>`;
+    if (f.weight) centerHtml += `<div class="sb-weight-tag">${esc(f.weight)}</div>`;
+    if (odds) {
       const aFav = odds.odds_a < odds.odds_b;
-      const shortA = f.a.trim().split(' ').pop().toUpperCase();
-      const shortB = f.b.trim().split(' ').pop().toUpperCase();
-      return `<div class="odds-block">
-        <div class="odds-label">LIVE ODDS</div>
-        <div class="odds-row">
-          <div class="odds-side ${aFav ? 'odds-fav' : 'odds-dog'}">
-            <span class="odds-name">${shortA}</span>
-            <span class="odds-num">${formatOdds(odds.odds_a)}</span>
-            ${aFav ? '<span class="odds-tag">FAV</span>' : ''}
-          </div>
-          <div class="odds-divider"></div>
-          <div class="odds-side ${!aFav ? 'odds-fav' : 'odds-dog'}">
-            <span class="odds-name">${shortB}</span>
-            <span class="odds-num">${formatOdds(odds.odds_b)}</span>
-            ${!aFav ? '<span class="odds-tag">FAV</span>' : ''}
-          </div>
-        </div>
+      centerHtml += `<div class="sb-odds">
+        <span class="sb-odds-a${aFav ? ' fav' : ''}">${formatOdds(odds.odds_a)}</span>
+        <span class="sb-odds-sep">/</span>
+        <span class="sb-odds-b${!aFav ? ' fav' : ''}">${formatOdds(odds.odds_b)}</span>
       </div>`;
-    })() : '';
-    const comm      = communityPicks[key] || {};
-    const commTotal = Object.values(comm).reduce((s, v) => s + v, 0);
-    const hasPick = pickedA || pickedB;
-    const showComm = commTotal > 0 && (isCompleted || hasPick);
-    const commPctA = showComm ? Math.round(((comm[f.a] || 0) / commTotal) * 100) : null;
-    const commPctB = showComm ? Math.round(((comm[f.b] || 0) / commTotal) * 100) : null;
-    const oppPickedA = challenge && opp.pick === f.a;
-    const oppPickedB = challenge && opp.pick === f.b;
-    const lastA = f.a.trim().split(' ').pop().toUpperCase();
-    const lastB = f.b.trim().split(' ').pop().toUpperCase();
-    const isSaved = pickedA ? isSavedA : pickedB ? isSavedB : false;
-    const pickedName = pickedA ? lastA : pickedB ? lastB : '';
-    const numStr = String(idx + 1).padStart(2, '0');
+    }
+    if (isCompleted && winner) {
+      centerHtml += `<div class="sb-method-result">${esc(f.method || '')}</div>`;
+    }
+    if (showComm && commPctA !== null) {
+      centerHtml += `
+        <div class="sb-comm-bar"><div class="sb-comm-fill" style="width:${commPctA}%"></div></div>
+        <div class="sb-comm-pcts"><span>${commPctA}%</span><span>${commPctB}%</span></div>`;
+    }
 
-    // Closed row
-    const closedRow = `
-      <div class="pk-dossier-row" data-key="${esc(key)}" role="button" tabindex="0" aria-expanded="false">
-        <div class="pk-dossier-row-num">${numStr}</div>
-        <div class="pk-dossier-row-center">
-          <div class="pk-dossier-row-names">
-            <span class="pk-dossier-row-name${pickedA ? ' picked' : ''}${resultA === 'win' ? ' won' : resultA === 'loss' ? ' lost' : ''}">${esc(lastA)}</span>
-            <span class="pk-dossier-row-sep">vs</span>
-            <span class="pk-dossier-row-name${pickedB ? ' picked' : ''}${resultB === 'win' ? ' won' : resultB === 'loss' ? ' lost' : ''}">${esc(lastB)}</span>
-          </div>
-          <div class="pk-dossier-row-sub">
-            ${f.titleFight ? '<span class="pk-dossier-title-pip">TITLE</span>' : ''}
-            ${f.weight ? esc(f.weight) : ''}${f.rounds ? ` · ${esc(f.rounds)}` : ''}
-          </div>
-        </div>
-        <div class="pk-dossier-row-right">
-          ${hasPick ? `<span class="pk-dossier-pick-tag${isSaved ? '' : ' unsaved'}">${esc(pickedName)}${isSaved ? ' ✓' : ' •'}</span>` : ''}
-          ${isCompleted && winner ? `<span class="pk-dossier-result-tag">${esc(winner.trim().split(' ').pop().toUpperCase())}${f.method ? ' · '+esc(f.method) : ''}</span>` : ''}
-          ${(correctA || correctB) ? `<span class="pk-dossier-pts-tag">+${ptsA || ptsB}pts</span>` : ''}
-          <svg class="pk-dossier-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </div>
-      </div>`;
-
-    // Expanded panel
-    const fightPanel = `
-      <div class="pk-dossier-panel" id="pkPanel-${esc(key)}" aria-hidden="true">
-        <div class="pk-dossier-panel-inner">
-          <div class="pk-dossier-fighters-row">
-
-            <div class="pk-dossier-fighter pk-dossier-fighter-a${pickedA ? ' selected' : ''}${resultA ? ' result-'+resultA : ''}"
-                 data-key="${esc(key)}" data-pick="${esc(f.a)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
-              ${f.imgA ? `<div class="pk-dossier-photo"><img src="${esc(f.imgA)}" alt="${esc(f.a)}" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : `<div class="pk-dossier-photo pk-dossier-photo-empty">${SILHOUETTE}</div>`}
-              <div class="pk-dossier-fighter-detail">
-                <div class="pk-dossier-fighter-fullname">${esc(f.a)}</div>
-                ${fighterRecord(f.a) ? `<div class="pk-dossier-record">${esc(fighterRecord(f.a))}</div>` : ''}
-                ${fighterForm(f.a)}
-              </div>
-              ${pickedA ? `<div class="pk-dossier-your-pick${isSavedA ? '' : ' unsaved'}">Your pick${isSavedA ? ' ✓' : ' •'}</div>` : ''}
-              ${correctA ? `<div class="pk-dossier-correct">✓ +${ptsA}pts</div>` : ''}
-              ${wrongA   ? `<div class="pk-dossier-wrong">✗ 0pts</div>` : ''}
-              ${oppPickedA ? `<div class="pk-dossier-opp">${esc(oppName)}'s pick</div>` : ''}
-            </div>
-
-            <div class="pk-dossier-vs-col">
-              <div class="pk-dossier-vs">VS</div>
-              ${oddsHtml}
-              ${showComm && commPctA !== null ? `
-                <div class="pk-dossier-comm">
-                  <div class="pk-dossier-comm-track">
-                    <div class="pk-dossier-comm-fill" style="width:${commPctA}%"></div>
-                  </div>
-                  <div class="pk-dossier-comm-labels">
-                    <span>${commPctA}%</span><span>${commPctB}%</span>
-                  </div>
-                </div>` : ''}
-            </div>
-
-            <div class="pk-dossier-fighter pk-dossier-fighter-b${pickedB ? ' selected' : ''}${resultB ? ' result-'+resultB : ''}"
-                 data-key="${esc(key)}" data-pick="${esc(f.b)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
-              ${f.imgB ? `<div class="pk-dossier-photo"><img src="${esc(f.imgB)}" alt="${esc(f.b)}" loading="lazy" onerror="this.parentNode.style.display='none'"></div>` : `<div class="pk-dossier-photo pk-dossier-photo-empty">${SILHOUETTE}</div>`}
-              <div class="pk-dossier-fighter-detail">
-                <div class="pk-dossier-fighter-fullname">${esc(f.b)}</div>
-                ${fighterRecord(f.b) ? `<div class="pk-dossier-record">${esc(fighterRecord(f.b))}</div>` : ''}
-                ${fighterForm(f.b)}
-              </div>
-              ${pickedB ? `<div class="pk-dossier-your-pick${isSavedB ? '' : ' unsaved'}">Your pick${isSavedB ? ' ✓' : ' •'}</div>` : ''}
-              ${correctB ? `<div class="pk-dossier-correct">✓ +${ptsB}pts</div>` : ''}
-              ${wrongB   ? `<div class="pk-dossier-wrong">✗ 0pts</div>` : ''}
-              ${oppPickedB ? `<div class="pk-dossier-opp">${esc(oppName)}'s pick</div>` : ''}
+    // Method row (slides in when picked)
+    const methodWrap = !isCompleted ? `
+      <div class="sb-method-wrap${hasPick ? ' visible' : ''}" id="pkMethod-${esc(key)}">
+        <div class="pk-method-drum" id="pkDrum-${esc(key)}" data-key="${esc(key)}">
+          <div class="pk-drum-window">
+            <div class="pk-drum-strip" id="pkDrumStrip-${esc(key)}" style="transform:translateY(${drumOffset}px)">
+              ${DRUM_ITEMS.map(d => `<div class="pk-drum-item pk-drum-${(d.method||'none').replace('/','-').toLowerCase()}">${esc(d.label)}</div>`).join('')}
             </div>
           </div>
-
-          ${!isCompleted ? `
-          <div class="pk-dossier-method-row">
-            <div class="pk-method-drum" id="pkDrum-${esc(key)}" data-key="${esc(key)}">
-              <div class="pk-drum-window">
-                <div class="pk-drum-strip" id="pkDrumStrip-${esc(key)}" style="transform:translateY(${drumOffset}px)">
-                  ${DRUM_ITEMS.map(d => `<div class="pk-drum-item pk-drum-${(d.method||'none').replace('/','-').toLowerCase()}">${esc(d.label)}</div>`).join('')}
-                </div>
-              </div>
-              <div class="pk-drum-hint">↕ tap to cycle</div>
-            </div>
-            <div class="pk-round-row${needsRound ? ' pk-round-row-visible' : ''}" id="pkRounds-${esc(key)}">
-              <span class="pk-round-label">Round</span>
-              ${roundBtns}
-            </div>
-          </div>` : ''}
+          <div class="pk-drum-hint">↕ tap to cycle</div>
         </div>
-      </div>`;
+        <div class="pk-round-row${needsRound ? ' pk-round-row-visible' : ''}" id="pkRounds-${esc(key)}">
+          <span class="pk-round-label">Round</span>
+          ${roundBtns}
+        </div>
+      </div>` : '';
 
     return `
-      <div class="pk-dossier-fight${hasPick ? ' has-pick' : ''}${isMain ? ' is-main' : ''}${isCompleted ? ' is-completed' : ''}" data-key="${esc(key)}">
-        ${closedRow}
-        ${fightPanel}
+      <div class="sb-fight${hasPick ? ' has-pick' : ''}${isMain ? ' is-main' : ''}${isCompleted ? ' is-completed' : ''}" data-key="${esc(key)}">
+        <div class="sb-fight-row">
+          <div class="${sideACls}" data-key="${esc(key)}" data-pick="${esc(f.a)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
+            ${photoA}
+            <div class="sb-info">
+              <div class="sb-name">${esc(f.a)}</div>
+              <div class="sb-details">
+                ${recA ? `<span>${esc(recA)}</span>` : ''}
+                ${fighterForm(f.a)}
+              </div>
+              ${badgeA}
+              ${oppPickedA ? `<div class="sb-opp-badge">${esc(oppName)}'s pick</div>` : ''}
+            </div>
+          </div>
+          <div class="sb-center">${centerHtml}</div>
+          <div class="${sideBCls}" data-key="${esc(key)}" data-pick="${esc(f.b)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
+            <div class="sb-info">
+              <div class="sb-name">${esc(f.b)}</div>
+              <div class="sb-details">
+                ${recB ? `<span>${esc(recB)}</span>` : ''}
+                ${fighterForm(f.b)}
+              </div>
+              ${badgeB}
+              ${oppPickedB ? `<div class="sb-opp-badge">${esc(oppName)}'s pick</div>` : ''}
+            </div>
+            ${photoB}
+          </div>
+        </div>
+        ${methodWrap}
       </div>`;
   }
 
@@ -822,13 +779,13 @@ function formatOdds(n) {
     if (!fights || !fights.length) return '';
     const cards = fights.map((f, i) => buildFight(f, sectionKey, i, isMainCard && i === 0)).join('');
     return `
-      <div class="pk-dossier-section">
-        <div class="pk-dossier-section-header">
-          <div class="pk-dossier-section-line"></div>
-          <div class="pk-dossier-section-label">${esc(title)}</div>
-          <div class="pk-dossier-section-line"></div>
+      <div class="sb-section">
+        <div class="sb-section-header">
+          <div class="sb-section-line"></div>
+          <div class="sb-section-label">${esc(title)}</div>
+          <div class="sb-section-line"></div>
         </div>
-        <div class="pk-dossier-fights">${cards}</div>
+        <div class="sb-section-fights">${cards}</div>
       </div>`;
   }
 
@@ -886,30 +843,25 @@ function formatOdds(n) {
     _pkCdStop = window.initCountdown ? window.initCountdown(el, event.start_time) : null;
   }
 
-  // ── Hype widget — removed from header-right ──
-  function hypeWidgetHtml() { return ''; }
-
-  // ── Card Rating — grand full-width rating widget ──
-  function cardRatingHtml() {
+  // ── Hype meter — horizontal amber drag bar ──
+  function hypeMeterHtml() {
     if (isCompleted || isLocked) return '';
-    const label = localHype ? HYPE_LABELS[localHype] : '';
+    const pct = localHype ? localHype * 20 : 0;
+    const label = localHype ? (HYPE_LABELS[localHype] || '') : 'Rate the hype';
     const avgStr = hypeCount > 0
-      ? `<span class="pk-cr-avg-num">${hypeAvg.toFixed(1)}</span> avg · <span class="pk-cr-avg-count">${hypeCount}</span> ${hypeCount === 1 ? 'rating' : 'ratings'}`
-      : 'Be the first to rate this card';
-    const barBtns = [1,2,3,4,5].map(n => {
-      const cls = localHype ? (n < localHype ? 'lit' : n === localHype ? 'active' : '') : '';
-      return `<button class="pk-cr-bar${cls ? ' '+cls : ''}" data-val="${n}" type="button" aria-label="Rate ${n}/5"></button>`;
-    }).join('');
+      ? `<span class="pk-hm-score">${hypeAvg.toFixed(1)}</span> avg · ${hypeCount} ${hypeCount === 1 ? 'rating' : 'ratings'}`
+      : 'Be the first to rate';
     return `
-      <div class="pk-card-rating" id="pkHypeWidget">
-        <div class="pk-cr-eyebrow">Card Rating</div>
-        <div class="pk-cr-score-row">
-          <span class="pk-cr-num${localHype ? ' has-value' : ''}" id="pkHypeNum">${localHype || '—'}</span>
-          <span class="pk-cr-denom">${localHype ? '/5' : ''}</span>
+      <div class="pk-hype-meter" id="pkHypeWidget">
+        <div class="pk-hm-label">HYPE</div>
+        <div class="pk-hm-track" id="pkHypeTrack">
+          <div class="pk-hm-fill" id="pkHypeFill" style="width:${pct}%"></div>
+          <div class="pk-hm-thumb" id="pkHypeThumb" style="left:${pct}%"></div>
         </div>
-        ${label ? `<div class="pk-cr-label" id="pkHypeLabel">${label}</div>` : `<div class="pk-cr-label pk-cr-label-empty" id="pkHypeLabel">Rate the hype</div>`}
-        <div class="pk-cr-bars" id="pkHypeTrack">${barBtns}</div>
-        <div class="pk-cr-community" id="pkHypeAvg">${avgStr}</div>
+        <div class="pk-hm-right">
+          <div id="pkHypeLabel">${label}</div>
+          <div id="pkHypeAvg">${avgStr}</div>
+        </div>
       </div>`;
   }
 
@@ -981,7 +933,7 @@ function formatOdds(n) {
       <div class="pk-body">
         ${scoreHero()}
         ${fotnBarHtml()}
-        ${cardRatingHtml()}
+        ${hypeMeterHtml()}
         ${mainSection}${prelimSection}${earlySection}
         ${isCompleted && nextEventData ? `
         <div class="pk-next-event">
@@ -1029,33 +981,63 @@ function formatOdds(n) {
     });
   }
 
-  // ── Bind hype rating buttons ──────────────────
+  // ── Bind hype drag bar ────────────────────────
   function bindHype() {
     const track = document.getElementById('pkHypeTrack');
     if (!track) return;
-    track.querySelectorAll('.pk-cr-bar').forEach(btn => {
-      btn.addEventListener('mouseenter', () => {
-        const hv = +btn.dataset.val;
-        track.querySelectorAll('.pk-cr-bar').forEach(b => {
-          const v = +b.dataset.val;
-          b.classList.remove('lit', 'active');
-          if (v < hv) b.classList.add('lit');
-          else if (v === hv) b.classList.add('active');
-        });
-      });
-      btn.addEventListener('click', () => saveHype(+btn.dataset.val));
+
+    function valFromX(clientX) {
+      const rect = track.getBoundingClientRect();
+      const pct  = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+      return Math.max(1, Math.min(5, Math.round(pct * 5)));
+    }
+
+    let dragging = false;
+
+    track.addEventListener('mousedown', e => {
+      dragging = true;
+      track.classList.add('dragging');
+      localHype = valFromX(e.clientX);
+      updateHypeWidget();
+      e.preventDefault();
     });
-    track.addEventListener('mouseleave', updateHypeWidget);
+
+    document.addEventListener('mousemove', e => {
+      if (!dragging) return;
+      localHype = valFromX(e.clientX);
+      updateHypeWidget();
+    });
+
+    document.addEventListener('mouseup', () => {
+      if (!dragging) return;
+      dragging = false;
+      track.classList.remove('dragging');
+      if (localHype) saveHype(localHype);
+    });
+
+    track.addEventListener('touchstart', e => {
+      localHype = valFromX(e.touches[0].clientX);
+      updateHypeWidget();
+      e.preventDefault();
+    }, { passive: false });
+
+    track.addEventListener('touchmove', e => {
+      localHype = valFromX(e.touches[0].clientX);
+      updateHypeWidget();
+      e.preventDefault();
+    }, { passive: false });
+
+    track.addEventListener('touchend', () => {
+      if (localHype) saveHype(localHype);
+    });
   }
 
   // ── Bind FOTN ─────────────────────────────────
   function bindFotn() {
-    // Wire up the top bar button
     const btn = document.getElementById('pkFotnPickBtn');
     if (btn) btn.onclick = fotnPickMode ? exitFotnMode : enterFotnMode;
 
-    // Fight cards become FOTN targets in picking mode
-    root.querySelectorAll('.pk-dossier-fight[data-key]').forEach(card => {
+    root.querySelectorAll('.sb-fight[data-key]').forEach(card => {
       card.addEventListener('click', e => {
         if (!fotnPickMode) return;
         const key = card.dataset.key;
@@ -1063,153 +1045,94 @@ function formatOdds(n) {
         if (!fd) return;
         e.stopPropagation();
         showFotnConfirm(`${fd.a} vs ${fd.b}`);
-      }, true); // capture so it fires before pk-dossier-fighter handlers
+      }, true);
     });
   }
 
   // ── Bind fighter/method/round clicks ──────────
   function bindInteractions() {
-    // ── Dossier expand/collapse ──
-    root.querySelectorAll('.pk-dossier-row[data-key]').forEach(row => {
-      row.addEventListener('click', e => {
-        if (e.target.closest('.pk-dossier-fighter, .pk-round-btn, .pk-method-drum')) return;
-        const key = row.dataset.key;
-        const fight = root.querySelector(`.pk-dossier-fight[data-key="${key}"]`);
-        const panel = document.getElementById(`pkPanel-${key}`);
-        if (!fight || !panel) return;
-        const isOpen = fight.classList.contains('open');
-        // Close all others
-        root.querySelectorAll('.pk-dossier-fight.open').forEach(f => {
-          f.classList.remove('open');
-          f.querySelector('.pk-dossier-row')?.setAttribute('aria-expanded', 'false');
-          const p = f.querySelector('.pk-dossier-panel');
-          if (p) { p.style.maxHeight = '0'; p.setAttribute('aria-hidden', 'true'); }
-        });
-        if (!isOpen) {
-          fight.classList.add('open');
-          row.setAttribute('aria-expanded', 'true');
-          panel.setAttribute('aria-hidden', 'false');
-          panel.style.maxHeight = panel.scrollHeight + 'px';
-          setTimeout(() => fight.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
-        }
-      });
-      row.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); row.click(); }
-      });
-    });
+    if (!isCompleted && !isLocked) {
+      // ── Fighter side click → pick ──
+      root.querySelectorAll('.sb-side[data-key]').forEach(side => {
+        const activate = () => {
+          if (fotnPickMode) return;
+          const key  = side.dataset.key;
+          const pick = side.dataset.pick;
+          const fight = root.querySelector(`.sb-fight[data-key="${key}"]`);
+          if (!fight) return;
+          if (!myId) { showToast('Sign in to save picks', 'err'); return; }
 
-    if (isCompleted || isLocked) return;
+          const wasSelected = side.classList.contains('selected');
+          fight.querySelectorAll('.sb-side').forEach(s => s.classList.remove('selected', 'dimmed'));
 
-    root.querySelectorAll('.pk-dossier-fighter').forEach(side => {
-      const activate = () => {
-        if (fotnPickMode) return; // FOTN mode intercepts at fight card level
-        const key  = side.dataset.key;
-        const pick = side.dataset.pick;
-        const fight = root.querySelector(`.pk-dossier-fight[data-key="${key}"]`);
-        if (!fight) return;
-        if (!myId) { showToast('Sign in to save picks', 'err'); return; }
-
-        const wasSelected = side.classList.contains('selected');
-        fight.querySelectorAll('.pk-dossier-fighter').forEach(s => {
-          s.classList.remove('selected');
-          s.querySelector('.pk-dossier-your-pick')?.remove();
-        });
-
-        if (!wasSelected) {
-          side.classList.add('selected');
-          const lbl = document.createElement('div');
-          lbl.className = 'pk-dossier-your-pick unsaved';
-          lbl.textContent = 'Your pick •';
-          side.appendChild(lbl);
-          const cur = localPicks[key] || {};
-          localPicks[key] = { pick, base: cur.base || '', round: cur.round || '' };
-          sessionStorage.setItem(`pk_draft_${eventId}`, JSON.stringify(localPicks));
-          // Update closed row pick tag
-          const rowEl = fight.querySelector('.pk-dossier-row');
-          if (rowEl) {
-            let tag = rowEl.querySelector('.pk-dossier-pick-tag');
-            const lastName = pick.trim().split(' ').pop().toUpperCase();
-            if (!tag) {
-              tag = document.createElement('span');
-              tag.className = 'pk-dossier-pick-tag unsaved';
-              rowEl.querySelector('.pk-dossier-row-right').prepend(tag);
-            }
-            tag.textContent = `${lastName} •`;
-            tag.classList.add('unsaved');
+          if (!wasSelected) {
+            side.classList.add('selected');
+            fight.querySelectorAll('.sb-side').forEach(s => { if (s !== side) s.classList.add('dimmed'); });
+            const cur = localPicks[key] || {};
+            localPicks[key] = { pick, base: cur.base || '', round: cur.round || '' };
+            sessionStorage.setItem(`pk_draft_${eventId}`, JSON.stringify(localPicks));
+            const methodWrap = document.getElementById(`pkMethod-${key}`);
+            if (methodWrap) methodWrap.classList.add('visible');
+          } else {
+            delete localPicks[key];
+            sessionStorage.setItem(`pk_draft_${eventId}`, JSON.stringify(localPicks));
+            const methodWrap = document.getElementById(`pkMethod-${key}`);
+            if (methodWrap) methodWrap.classList.remove('visible');
+            const strip = document.getElementById(`pkDrumStrip-${key}`);
+            if (strip) { strip.style.transition = 'none'; strip.style.transform = 'translateY(0)'; }
+            const roundRow = document.getElementById(`pkRounds-${key}`);
+            if (roundRow) roundRow.classList.remove('pk-round-row-visible');
           }
-          // Update name highlight in closed row
-          const names = fight.querySelectorAll('.pk-dossier-row-name');
-          names.forEach(n => n.classList.remove('picked'));
-          const isA = pick === side.dataset.fa;
-          if (names[isA ? 0 : 1]) names[isA ? 0 : 1].classList.add('picked');
-        } else {
-          delete localPicks[key];
-          sessionStorage.setItem(`pk_draft_${eventId}`, JSON.stringify(localPicks));
-          // Reset drum
+          fight.classList.toggle('has-pick', !!localPicks[key]);
+          updateSaveBar();
+          updateSpine();
+        };
+        side.addEventListener('click', activate);
+        side.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); } });
+      });
+
+      // ── Drum click ─────────────────────────────
+      root.querySelectorAll('.pk-method-drum').forEach(drum => {
+        drum.addEventListener('click', e => {
+          e.stopPropagation();
+          const key = drum.dataset.key;
+          if (!localPicks[key]) { showToast('Pick a fighter first', 'err'); return; }
           const strip = document.getElementById(`pkDrumStrip-${key}`);
-          if (strip) { strip.style.transition = 'none'; strip.style.transform = 'translateY(0)'; }
-          const roundRow = document.getElementById(`pkRounds-${key}`);
-          if (roundRow) roundRow.classList.remove('pk-round-row-visible');
-          // Remove pick tag from closed row
-          const rowEl = fight.querySelector('.pk-dossier-row');
-          if (rowEl) rowEl.querySelector('.pk-dossier-pick-tag')?.remove();
-          // Remove name highlight
-          fight.querySelectorAll('.pk-dossier-row-name').forEach(n => n.classList.remove('picked'));
-        }
-        updateSaveBar();
-        updateSpine();
-      };
-      side.addEventListener('click', activate);
-      side.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); } });
-    });
-
-    // ── Drum click ───────────────────────────────
-    root.querySelectorAll('.pk-method-drum').forEach(drum => {
-      drum.addEventListener('click', e => {
-        e.stopPropagation();
-        const key = drum.dataset.key;
-        if (!localPicks[key]) { showToast('Pick a fighter first', 'err'); return; }
-
-        const strip = document.getElementById(`pkDrumStrip-${key}`);
-        const curIdx = DRUM_ITEMS.findIndex(d => d.method === (localPicks[key].base || ''));
-        const nextIdx = (curIdx + 1) % DRUM_ITEMS.length;
-        const newBase = DRUM_ITEMS[nextIdx].method;
-        const newOffset = -(nextIdx * DRUM_H);
-
-        // Blur mid-spin then clear
-        drum.classList.add('blurring');
-        strip.style.transition = `transform 0.22s cubic-bezier(0.22, 1, 0.36, 1)`;
-        strip.style.transform  = `translateY(${newOffset}px)`;
-        setTimeout(() => drum.classList.remove('blurring'), 120);
-
-        const showRound = newBase === 'KO/TKO' || newBase === 'SUB';
-        const roundRow  = document.getElementById(`pkRounds-${key}`);
-        if (roundRow) roundRow.classList.toggle('pk-round-row-visible', showRound);
-        localPicks[key] = { ...localPicks[key], base: newBase, round: showRound ? (localPicks[key].round || '') : '' };
-        updateSaveBar();
+          const curIdx = DRUM_ITEMS.findIndex(d => d.method === (localPicks[key].base || ''));
+          const nextIdx = (curIdx + 1) % DRUM_ITEMS.length;
+          const newBase = DRUM_ITEMS[nextIdx].method;
+          const newOffset = -(nextIdx * DRUM_H);
+          drum.classList.add('blurring');
+          strip.style.transition = `transform 0.22s cubic-bezier(0.22, 1, 0.36, 1)`;
+          strip.style.transform  = `translateY(${newOffset}px)`;
+          setTimeout(() => drum.classList.remove('blurring'), 120);
+          const showRound = newBase === 'KO/TKO' || newBase === 'SUB';
+          const roundRow  = document.getElementById(`pkRounds-${key}`);
+          if (roundRow) roundRow.classList.toggle('pk-round-row-visible', showRound);
+          localPicks[key] = { ...localPicks[key], base: newBase, round: showRound ? (localPicks[key].round || '') : '' };
+          updateSaveBar();
+        });
       });
-    });
 
-    root.querySelectorAll('.pk-round-btn').forEach(btn => {
-      btn.addEventListener('click', e => {
-        e.stopPropagation();
-        const key   = btn.dataset.key;
-        const round = btn.dataset.round;
-        const fight = root.querySelector(`.pk-dossier-fight[data-key="${key}"]`);
-        if (!fight) return;
-        if (!localPicks[key]?.base) { showToast('Pick a method first', 'err'); return; }
-
-        const alreadyActive = btn.classList.contains('active');
-        const methodCls = localPicks[key].base === 'KO/TKO' ? 'ko' : 'sub';
-        fight.querySelectorAll('.pk-round-btn').forEach(rb => rb.classList.remove('active','ko','sub'));
-        const newRound = alreadyActive ? '' : round;
-        if (!alreadyActive) btn.classList.add('active', methodCls);
-        localPicks[key] = { ...localPicks[key], round: newRound };
-        updateSaveBar();
+      root.querySelectorAll('.pk-round-btn').forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          const key   = btn.dataset.key;
+          const round = btn.dataset.round;
+          const fight = root.querySelector(`.sb-fight[data-key="${key}"]`);
+          if (!fight) return;
+          if (!localPicks[key]?.base) { showToast('Pick a method first', 'err'); return; }
+          const alreadyActive = btn.classList.contains('active');
+          const methodCls = localPicks[key].base === 'KO/TKO' ? 'ko' : 'sub';
+          fight.querySelectorAll('.pk-round-btn').forEach(rb => rb.classList.remove('active', 'ko', 'sub'));
+          if (!alreadyActive) btn.classList.add('active', methodCls);
+          localPicks[key] = { ...localPicks[key], round: alreadyActive ? '' : round };
+          updateSaveBar();
+        });
       });
-    });
+    }
 
-    // ── Event switcher ────────────────────────
+    // ── Event switcher ────────────────────────────
     const switchBtn      = document.getElementById('pkSwitchBtn');
     const switchOverlay  = document.getElementById('pkSwitcherOverlay');
     const switchClose    = document.getElementById('pkSwitcherClose');
@@ -1217,11 +1140,9 @@ function formatOdds(n) {
     const switchList     = document.getElementById('pkSwitcherList');
 
     function openSwitcher() {
-      // Build the event list from eventsData
       const upcoming = eventsData
         .filter(e => e.status === 'upcoming' && e.id)
         .sort((a, b) => new Date(a.isoDate || 0) - new Date(b.isoDate || 0));
-
       if (!upcoming.length) {
         switchList.innerHTML = `<div class="pk-switcher-empty">No upcoming events found</div>`;
       } else {
@@ -1245,7 +1166,6 @@ function formatOdds(n) {
             </a>`;
         }).join('');
       }
-
       switchOverlay.classList.add('open');
       switchOverlay.setAttribute('aria-hidden', 'false');
       document.body.classList.add('no-scroll');
@@ -1261,7 +1181,6 @@ function formatOdds(n) {
     switchClose?.addEventListener('click', closeSwitcher);
     switchBackdrop?.addEventListener('click', closeSwitcher);
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSwitcher(); });
-
   }
 
   // ── Spine ─────────────────────────────────────
@@ -1277,11 +1196,9 @@ function formatOdds(n) {
       body.style.position = 'relative';
       body.insertBefore(spine, body.firstChild);
     }
-    // Remove old nodes
     spine.querySelectorAll('.pk-spine-node').forEach(n => n.remove());
-    // Measure fight card positions relative to body
     const bodyTop = body.getBoundingClientRect().top + window.scrollY;
-    root.querySelectorAll('.pk-dossier-fight[data-key]').forEach(card => {
+    root.querySelectorAll('.sb-fight[data-key]').forEach(card => {
       const cardMid = card.getBoundingClientRect().top + window.scrollY + card.offsetHeight / 2;
       const relTop  = cardMid - bodyTop;
       const node = document.createElement('div');
@@ -1296,7 +1213,7 @@ function formatOdds(n) {
   function updateSpine() {
     const fill = document.getElementById('pkSpineFill');
     if (!fill) return;
-    const total = root.querySelectorAll('.pk-dossier-fight[data-key]').length;
+    const total  = root.querySelectorAll('.sb-fight[data-key]').length;
     const picked = Object.keys(localPicks).filter(k => k !== 'fotn').length;
     fill.style.height = total ? `${(picked / total) * 100}%` : '0%';
     root.querySelectorAll('.pk-spine-node').forEach(node => {
@@ -1312,7 +1229,7 @@ function formatOdds(n) {
 
   // ── Cascade entrance animation ────────────────
   function animateFightEntrance() {
-    root.querySelectorAll('.pk-dossier-fight').forEach((card, i) => {
+    root.querySelectorAll('.sb-fight').forEach((card, i) => {
       card.style.clipPath = 'inset(0 100% 0 0)';
       card.style.transition = 'none';
       requestAnimationFrame(() => {
