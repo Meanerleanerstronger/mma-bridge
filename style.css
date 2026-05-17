@@ -5559,7 +5559,7 @@ body.light-mode .ev-star-btn.starred {
 .sb-section { display: flex; flex-direction: column; }
 .sb-section-header {
   display: flex; align-items: center; gap: 12px;
-  padding: 22px 28px 10px;
+  padding: 32px 20px 14px;
 }
 .sb-section-label {
   font-family: 'Montserrat', sans-serif;
@@ -5570,7 +5570,7 @@ body.light-mode .ev-star-btn.starred {
 .sb-section-line {
   flex: 1; height: 1px; background: rgba(255,255,255,0.06);
 }
-.sb-section-fights { display: flex; flex-direction: column; gap: 8px; padding: 0 16px 16px; }
+.sb-section-fights { display: flex; flex-direction: column; gap: 16px; padding: 0 20px 24px; }
 
 /* ── Fight Card ── */
 .sb-fight {
@@ -5585,9 +5585,9 @@ body.light-mode .ev-star-btn.starred {
 .sb-fight-row {
   display: grid;
   grid-template-columns: 1fr 86px 1fr;
-  min-height: 94px;
+  min-height: 110px;
 }
-.sb-fight.is-main .sb-fight-row { min-height: 120px; }
+.sb-fight.is-main .sb-fight-row { min-height: 140px; }
 
 /* Fighter Side */
 .sb-side {
@@ -5605,18 +5605,18 @@ body.light-mode .ev-star-btn.starred {
 
 /* Photo — tall rectangle flush to edge */
 .sb-photo {
-  width: 72px; height: 94px; flex-shrink: 0;
+  width: 80px; height: 110px; flex-shrink: 0;
   overflow: hidden; background: rgba(255,255,255,0.04);
   border-right: 2px solid rgba(255,255,255,0.07);
 }
 .sb-side-b .sb-photo { border-right: none; border-left: 2px solid rgba(255,255,255,0.07); }
-.sb-fight.is-main .sb-photo { width: 88px; height: 120px; }
+.sb-fight.is-main .sb-photo { width: 100px; height: 140px; }
 .sb-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
 .sb-photo-empty { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
 .sb-side.selected .sb-photo { border-color: rgba(255,215,0,0.35); }
 
 /* Info */
-.sb-info { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; padding: 12px 14px; }
+.sb-info { display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 0; padding: 16px 18px; }
 .sb-side-b .sb-info { align-items: flex-end; }
 .sb-name {
   font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
