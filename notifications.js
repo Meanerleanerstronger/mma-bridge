@@ -1,11 +1,10 @@
 // ==============================================
-// MMA BRIDGE — NOTIFICATION SYSTEM v2
-// Clean YouTube-style bell. Only real future events.
+// MMA BRIDGE — NOTIFICATION SYSTEM v2.1
+// Clean YouTube-style bell. SVG icons. Push toggle.
 // ==============================================
 (function () {
   'use strict';
 
-  // Version bump clears stale data from old implementation
   const V            = '2';
   const NOTIF_KEY    = 'mma_notifs_v' + V;
   const SEEN_KEY     = 'mma_seen_v' + V;
@@ -17,6 +16,15 @@
   ['mma_notifications','mma_notif_seen_ids','mma_notif_seen_v1','mma_notifs_v1'].forEach(k => {
     try { localStorage.removeItem(k); } catch {}
   });
+
+  // ── SVG icon set (no emojis) ──────────────────
+  const SVG = {
+    fight: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>`,
+    dayof: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+    event: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>`,
+    bell:  `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>`,
+    star:  `<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+  };
 
   function slugify(s) {
     return (s || '').toLowerCase().normalize('NFD')
@@ -52,7 +60,6 @@
       const n = name.trim();
       localStorage.setItem(FAV_KEY, JSON.stringify({ name: n, slug: slugify(n) }));
     }
-    // Clear old fight notifications so we re-scan for new fighter
     const notifs = getNotifs().filter(n => n.type === 'new_event');
     saveNotifs(notifs);
     const seen = getSeen();
@@ -87,7 +94,6 @@
       btn.classList.toggle('has-notifs', count > 0);
     },
 
-    // ── Scan events — only upcoming, only real ──
     checkEvents(events) {
       window._cachedEvents = events;
       const now    = new Date();
@@ -96,21 +102,18 @@
       const fav    = getFav();
       let changed  = false;
 
-      // Only truly future events (upcoming status + date not passed)
       const upcoming = events.filter(ev => {
         if (ev.status !== 'upcoming' || !ev.isoDate) return false;
         return new Date(ev.isoDate) >= now;
       });
 
-      // ── 1. New event announcements (everyone) ──
       const knownIds  = getKnownEvents();
       const allIds    = new Set(events.map(e => e.id || slugify(e.name || '')).filter(Boolean));
-      const isFirst   = knownIds.size === 0; // first ever load → don't spam
+      const isFirst   = knownIds.size === 0;
       upcoming.forEach(ev => {
         const evId = ev.id || slugify(ev.name || '');
         if (!evId) return;
         if (!knownIds.has(evId) && !isFirst) {
-          // Newly added event
           const notifId = `new_event_${evId}`;
           if (!seen.has(notifId)) {
             const main = ev.mainCard?.[0];
@@ -119,8 +122,7 @@
               id: notifId, type: 'new_event', read: false,
               title: `New event announced: ${ev.name}`,
               body: [headline, ev.date, ev.location].filter(Boolean).join(' · '),
-              eventId: evId,
-              eventDate: ev.isoDate,
+              eventId: evId, eventDate: ev.isoDate,
               href: `events.html#ev-${evId}`,
               timestamp: now.toISOString()
             });
@@ -129,17 +131,13 @@
           }
         }
       });
-      // Update known events set
       allIds.forEach(id => knownIds.add(id));
       saveKnownEvents(knownIds);
 
-      // ── 2. Fav fighter upcoming fight ──────────
       if (fav) {
         upcoming.forEach(ev => {
           const evId = ev.id || slugify(ev.name || '');
           if (!evId) return;
-
-          // Find fighter in any section
           let opponent = null;
           for (const sec of ['mainCard', 'prelims', 'earlyPrelims']) {
             for (const f of (ev[sec] || [])) {
@@ -148,17 +146,11 @@
             }
             if (opponent !== null) break;
           }
-          if (opponent === null) return; // fav fighter not on this card
-
+          if (opponent === null) return;
           const days = daysUntil(ev.isoDate);
           if (days === null || days < 0) return;
-
-          // One notification per fighter+event, with dynamic content stored as metadata
-          // We use tiered IDs so we can generate a "day-of" update on top of the initial one
           const baseId = `${fav.slug}_${evId}_fight`;
           const dayId  = `${fav.slug}_${evId}_dayof`;
-
-          // Day-of notification (≤1 day, separate high-priority notification)
           if (days <= 1 && !seen.has(dayId)) {
             arr.unshift({
               id: dayId, type: 'fight_day', read: false,
@@ -166,26 +158,19 @@
               title: `${fav.name} fights ${days === 0 ? 'TODAY' : 'TOMORROW'}!`,
               body: `vs ${opponent} · ${ev.name}${ev.venue ? ' · ' + ev.venue : ''}`,
               href: `events.html#ev-${evId}`,
-              eventDate: ev.isoDate,
-              timestamp: now.toISOString()
+              eventDate: ev.isoDate, timestamp: now.toISOString()
             });
-            addSeen(dayId);
-            // Also mark base as seen so we don't double up
-            addSeen(baseId);
-            changed = true;
+            addSeen(dayId); addSeen(baseId); changed = true;
           } else if (!seen.has(baseId)) {
-            const venue = ev.venue || ev.location || '';
             arr.unshift({
               id: baseId, type: 'fight_upcoming', read: false,
               fighter: fav.name, opponent, eventId: evId,
               title: `${fav.name} is fighting in ${days} day${days !== 1 ? 's' : ''}!`,
-              body: `vs ${opponent} · ${ev.name}${venue ? ' · ' + venue : ''}`,
+              body: `vs ${opponent} · ${ev.name}${ev.venue ? ' · ' + ev.venue : ''}`,
               href: `events.html#ev-${evId}`,
-              eventDate: ev.isoDate,
-              timestamp: now.toISOString()
+              eventDate: ev.isoDate, timestamp: now.toISOString()
             });
-            addSeen(baseId);
-            changed = true;
+            addSeen(baseId); changed = true;
           }
         });
       }
@@ -194,7 +179,6 @@
       this.updateBadge();
     },
 
-    // ── Bell mount ────────────────────────────
     init() {
       const mount = document.getElementById('notifBellMount');
       if (!mount) return;
@@ -226,17 +210,13 @@
         const willOpen = !dropdown.classList.contains('open');
         dropdown.classList.toggle('open', willOpen);
         dropdown.setAttribute('aria-hidden', String(!willOpen));
-        if (willOpen) {
-          this._renderList();
-          this.markAllRead();
-        }
+        if (willOpen) { this._renderList(); this.markAllRead(); }
       });
       document.addEventListener('click', () => {
         dropdown.classList.remove('open');
         dropdown.setAttribute('aria-hidden', 'true');
       });
       dropdown.addEventListener('click', e => e.stopPropagation());
-
       this.updateBadge();
     },
 
@@ -252,23 +232,22 @@
       if (!notifs.length) {
         listEl.innerHTML = `
           <div class="notif-empty">
-            <div class="notif-empty-icon">🔔</div>
+            <div class="notif-empty-icon">${SVG.bell}</div>
             <div>No notifications yet</div>
+            <div class="notif-empty-hint">Star events or set a favorite fighter to get alerts</div>
           </div>`;
       } else {
-        const icon = { fight_upcoming: '🥊', fight_day: '⚡', new_event: '📣' };
+        const iconMap = { fight_upcoming: SVG.fight, fight_day: SVG.dayof, new_event: SVG.event };
         listEl.innerHTML = notifs.slice(0, 12).map(n => {
-          // Compute live days-until for fight notifications
           let title = esc(n.title);
-          if ((n.type === 'fight_upcoming') && n.eventDate) {
+          if (n.type === 'fight_upcoming' && n.eventDate) {
             const d = daysUntil(n.eventDate);
-            if (d !== null && d >= 0) {
-              title = esc(`${n.fighter} is fighting in ${d} day${d !== 1 ? 's' : ''}!`);
-            }
+            if (d !== null && d >= 0) title = esc(`${n.fighter} is fighting in ${d} day${d !== 1 ? 's' : ''}!`);
           }
+          const icon = iconMap[n.type] || SVG.bell;
           return `
             <a class="notif-item${n.read ? ' read' : ''}" href="${esc(n.href || '#')}" data-id="${esc(n.id)}">
-              <span class="notif-item-icon">${icon[n.type] || '🔔'}</span>
+              <span class="notif-item-icon">${icon}</span>
               <div class="notif-item-body">
                 <div class="notif-item-title">${title}</div>
                 <div class="notif-item-sub">${esc(n.body)}</div>
@@ -281,15 +260,43 @@
         });
       }
 
-      // Footer: fav fighter chip (not a search box, just a link to open the modal)
       if (footerEl) {
-        footerEl.innerHTML = fav
-          ? `<button class="notif-fav-chip" id="notifFavChip">⭐ ${esc(fav.name)} <span class="notif-fav-change">change</span></button>`
-          : `<button class="notif-fav-chip notif-fav-chip-empty" id="notifFavChip">⭐ Set favorite fighter</button>`;
+        // Push subscribe toggle
+        const pushSupported = 'serviceWorker' in navigator && 'PushManager' in window;
+        const pushLabel = pushSupported ? _getPushLabel() : '';
+        const pushRow = pushSupported ? `
+          <button class="notif-push-row" id="notifPushToggle">
+            <span class="notif-push-icon">${SVG.bell}</span>
+            <span class="notif-push-text">${pushLabel}</span>
+            <span class="notif-push-status" id="notifPushStatus"></span>
+          </button>` : '';
+
+        footerEl.innerHTML = `
+          ${pushRow}
+          <button class="notif-fav-chip" id="notifFavChip">
+            <span class="notif-fav-star">${SVG.star}</span>
+            ${fav ? `<span>${esc(fav.name)}</span><span class="notif-fav-change">change</span>` : `<span>Set favorite fighter</span>`}
+          </button>`;
+
         document.getElementById('notifFavChip')?.addEventListener('click', () => {
-          dropdown.classList.remove('open');
+          document.getElementById('notifDropdown')?.classList.remove('open');
           this.openModal();
         });
+
+        if (pushSupported) {
+          _updatePushStatus();
+          document.getElementById('notifPushToggle')?.addEventListener('click', async () => {
+            if (!window.MMABridgePush) return;
+            const perm = Notification.permission;
+            if (perm === 'denied') {
+              alert('Push notifications are blocked. Please enable them in your browser settings, then try again.');
+              return;
+            }
+            await window.MMABridgePush.subscribeToPush();
+            _updatePushStatus();
+            document.getElementById('notifPushText') && (document.getElementById('notifPushText').textContent = _getPushLabel());
+          });
+        }
       }
 
       markBtn?.addEventListener('click', () => {
@@ -299,7 +306,6 @@
       });
     },
 
-    // ── Fav Fighter Modal ─────────────────────
     openModal() {
       const bg = document.getElementById('favModalBg');
       if (!bg) return;
@@ -317,12 +323,26 @@
     }
   };
 
-  // ── Modal renderer ────────────────────────────
+  function _getPushLabel() {
+    const perm = Notification.permission;
+    if (perm === 'granted') return 'Push alerts on';
+    if (perm === 'denied') return 'Push blocked in browser';
+    return 'Enable push alerts';
+  }
+
+  function _updatePushStatus() {
+    const el = document.getElementById('notifPushStatus');
+    if (!el) return;
+    const perm = Notification.permission;
+    el.className = 'notif-push-status ' + (perm === 'granted' ? 'on' : perm === 'denied' ? 'blocked' : '');
+    el.textContent = perm === 'granted' ? 'ON' : perm === 'denied' ? 'Blocked' : '';
+  }
+
   function _renderModal() {
-    const input   = document.getElementById('favModalInput');
-    const saveBtn = document.getElementById('favModalSave');
-    const sugg    = document.getElementById('favModalSugg');
-    const current = document.getElementById('favModalCurrent');
+    const input     = document.getElementById('favModalInput');
+    const saveBtn   = document.getElementById('favModalSave');
+    const sugg      = document.getElementById('favModalSugg');
+    const current   = document.getElementById('favModalCurrent');
     const removeBtn = document.getElementById('favModalRemove');
     if (!input) return;
 
@@ -331,8 +351,7 @@
 
     if (current) {
       current.innerHTML = fav
-        ? `<span class="fav-modal-current-label">Current: <strong>${esc(fav.name)}</strong></span>`
-        : '';
+        ? `<span class="fav-modal-current-label">Current: <strong>${esc(fav.name)}</strong></span>` : '';
     }
     if (removeBtn) {
       removeBtn.style.display = fav ? 'inline-flex' : 'none';
@@ -357,9 +376,7 @@
       ).join('');
       sugg.querySelectorAll('.fav-sugg-item').forEach(btn => {
         btn.addEventListener('click', () => {
-          input.value = btn.dataset.name;
-          sugg.innerHTML = '';
-          input.focus();
+          input.value = btn.dataset.name; sugg.innerHTML = ''; input.focus();
         });
       });
     };
@@ -377,19 +394,18 @@
     input.onkeydown = e => { if (e.key === 'Enter') save(); if (e.key === 'Escape') MMANotif.closeModal(); };
   }
 
-  // ── Sidebar widget ────────────────────────────
   function renderSidebarWidget() {
     const el = document.getElementById('favFighterWidget');
     if (!el) return;
     const fav = getFav();
     el.innerHTML = fav
       ? `<div class="fav-widget-set">
-           <div class="fav-widget-label">⭐ Your Fighter</div>
+           <div class="fav-widget-label">${SVG.star} Your Fighter</div>
            <div class="fav-widget-name">${esc(fav.name)}</div>
            <button class="fav-widget-change" onclick="MMANotif.openModal()">Change →</button>
          </div>`
       : `<div class="fav-widget-empty">
-           <div class="fav-widget-label">⭐ Favorite Fighter</div>
+           <div class="fav-widget-label">${SVG.star} Favorite Fighter</div>
            <div class="fav-widget-hint">Get notified about your fighter's upcoming bouts</div>
            <button class="fav-widget-set-btn" onclick="MMANotif.openModal()">Set Fighter →</button>
          </div>`;
@@ -400,8 +416,6 @@
   document.addEventListener('DOMContentLoaded', () => {
     MMANotif.init();
     renderSidebarWidget();
-
-    // Modal close on backdrop click
     document.getElementById('favModalBg')?.addEventListener('click', e => {
       if (e.target === e.currentTarget) MMANotif.closeModal();
     });

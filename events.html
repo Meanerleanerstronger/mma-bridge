@@ -17,7 +17,7 @@
   <meta property="og:image" content="https://meanerleanerstronger.github.io/mma-bridge/images/mma-bridge-logo.png">
   <meta name="description" content="Browse upcoming UFC events, make fight picks, and track the hype meter.">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=4.3" />
+  <link rel="stylesheet" href="style.css?v=4.4" />
 
   <style>
     /* ── KEYFRAMES ── */
@@ -542,6 +542,7 @@
       <a class="logo" href="index.html">
         <img src="images/mma-bridge-logo.png" class="nav-logo-img" alt="MMA Bridge">
       </a>
+      <div id="notifBellMount"></div>
       <ul class="nav-links">
         <li><a href="index.html">Trending</a></li>
         <li><a href="events.html" class="active">Upcoming Events</a></li>
@@ -1115,6 +1116,7 @@
     }
     document.getElementById('evCdX').addEventListener('click', closeCountdownCard);
   </script>
+<script src="notifications.js?v=2.1"></script>
 <script src="push.js?v=1.1"></script>
 <script type="module" src="events.js?v=3.1"></script>
 </body>
