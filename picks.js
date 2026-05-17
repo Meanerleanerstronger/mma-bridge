@@ -917,10 +917,16 @@ function formatOdds(n) {
     root.innerHTML = `
       ${hasPoster ? `<div class="pk-poster-bg" style="--poster:url('${esc(event.poster)}')"></div>` : ''}
       <div class="pk-header">
-        <a href="events.html?id=${encodeURIComponent(eventId)}" class="pk-back">
-          <svg width="9" height="14" viewBox="0 0 9 14" fill="none"><polyline points="7,1 2,7 7,13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Back
-        </a>
+        <div class="pk-nav-row">
+          <a href="events.html?id=${encodeURIComponent(eventId)}" class="pk-back">
+            <svg width="9" height="14" viewBox="0 0 9 14" fill="none"><polyline points="7,1 2,7 7,13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Events
+          </a>
+          <button class="pk-switch-btn" id="pkSwitchBtn" type="button">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            Switch Event
+          </button>
+        </div>
         <div class="pk-header-info">
           <div class="pk-event-type">${esc(event.type || 'UFC')} · ${isCompleted ? 'Results' : isLocked ? 'Picks Locked' : 'Pick Your Fights'}</div>
           <h1 class="pk-event-name">${esc(event.name || '')}</h1>
@@ -972,6 +978,19 @@ function formatOdds(n) {
           <div class="pk-next-meta">${esc(nextEventData.date || '')}${nextEventData.location ? ' · ' + esc(nextEventData.location) : ''}</div>
           <a class="pk-next-btn" href="picks.html?id=${encodeURIComponent(nextEventData.id)}">Make Your Picks</a>
         </div>` : ''}
+      </div>
+
+      <div class="pk-switcher-overlay" id="pkSwitcherOverlay" aria-hidden="true">
+        <div class="pk-switcher-backdrop" id="pkSwitcherBackdrop"></div>
+        <div class="pk-switcher-panel">
+          <div class="pk-switcher-head">
+            <div class="pk-switcher-title">Pick Another Event</div>
+            <button class="pk-switcher-close" id="pkSwitcherClose" type="button">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+          <div class="pk-switcher-list" id="pkSwitcherList"></div>
+        </div>
       </div>`;
 
     // Sticky save bar
@@ -1189,6 +1208,59 @@ function formatOdds(n) {
         updateSaveBar();
       });
     });
+
+    // ── Event switcher ────────────────────────
+    const switchBtn      = document.getElementById('pkSwitchBtn');
+    const switchOverlay  = document.getElementById('pkSwitcherOverlay');
+    const switchClose    = document.getElementById('pkSwitcherClose');
+    const switchBackdrop = document.getElementById('pkSwitcherBackdrop');
+    const switchList     = document.getElementById('pkSwitcherList');
+
+    function openSwitcher() {
+      // Build the event list from eventsData
+      const upcoming = eventsData
+        .filter(e => e.status === 'upcoming' && e.id)
+        .sort((a, b) => new Date(a.isoDate || 0) - new Date(b.isoDate || 0));
+
+      if (!upcoming.length) {
+        switchList.innerHTML = `<div class="pk-switcher-empty">No upcoming events found</div>`;
+      } else {
+        switchList.innerHTML = upcoming.map(e => {
+          const isCurrent = e.id === eventId;
+          const main = e.mainCard?.[0];
+          const matchup = main ? `${main.a.split(' ').pop()} vs ${main.b.split(' ').pop()}` : '';
+          const days = e.isoDate ? Math.ceil((new Date(e.isoDate) - new Date()) / 86400000) : null;
+          const dayLabel = days === null ? '' : days <= 0 ? 'TODAY' : days === 1 ? 'TOMORROW' : `${days}d away`;
+          return `
+            <a class="pk-switcher-item${isCurrent ? ' current' : ''}" href="picks.html?id=${encodeURIComponent(e.id)}">
+              ${e.poster ? `<img class="pk-switcher-thumb" src="${esc(e.poster)}" alt="" onerror="this.style.display='none'">` : `<div class="pk-switcher-thumb pk-switcher-thumb-empty"></div>`}
+              <div class="pk-switcher-info">
+                <div class="pk-switcher-name">${esc(e.name || '')}</div>
+                <div class="pk-switcher-sub">${matchup ? esc(matchup) + (e.date ? ' · ' : '') : ''}${esc(e.date || '')}</div>
+              </div>
+              <div class="pk-switcher-right">
+                ${dayLabel ? `<span class="pk-switcher-days${days <= 1 ? ' soon' : ''}">${dayLabel}</span>` : ''}
+                ${isCurrent ? `<span class="pk-switcher-cur">Current</span>` : `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>`}
+              </div>
+            </a>`;
+        }).join('');
+      }
+
+      switchOverlay.classList.add('open');
+      switchOverlay.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('no-scroll');
+    }
+
+    function closeSwitcher() {
+      switchOverlay.classList.remove('open');
+      switchOverlay.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('no-scroll');
+    }
+
+    switchBtn?.addEventListener('click', openSwitcher);
+    switchClose?.addEventListener('click', closeSwitcher);
+    switchBackdrop?.addEventListener('click', closeSwitcher);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSwitcher(); });
 
   }
 

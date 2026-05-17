@@ -5396,7 +5396,7 @@ body.light-mode .ev-star-btn.starred {
 }
 .pk-event-name {
   font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
-  font-weight: 900; font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 900; font-size: clamp(2.2rem, 5vw, 3.6rem);
   text-transform: uppercase; letter-spacing: 0.02em;
   line-height: 1; color: #fff; margin: 0 0 10px;
 }
@@ -5494,33 +5494,33 @@ body.light-mode .ev-star-btn.starred {
 /* ── Body ── */
 .pk-body {
   max-width: 1020px; margin: 0 auto;
-  padding: 0 32px 120px;
-  display: flex; flex-direction: column; gap: 60px;
+  padding: 0 32px 140px;
+  display: flex; flex-direction: column; gap: 70px;
 }
 
 /* ── Section ── */
-.pk-section { display: flex; flex-direction: column; gap: 20px; }
+.pk-section { display: flex; flex-direction: column; gap: 24px; }
 .pk-section-label {
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.7rem; font-weight: 800;
-  letter-spacing: 0.2em; text-transform: uppercase;
-  color: rgba(255,255,255,0.55);
-  padding-bottom: 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-size: 0.78rem; font-weight: 900;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(255,255,255,0.65);
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
 /* ── Fight card ── */
 .pk-fight {
   position: relative;
-  background: linear-gradient(160deg, rgba(255,255,255,0.045) 0%, rgba(255,255,255,0.015) 100%);
-  border: 1px solid rgba(255,255,255,0.09);
-  border-radius: 14px;
+  background: linear-gradient(160deg, rgba(255,255,255,0.055) 0%, rgba(255,255,255,0.018) 100%);
+  border: 1px solid rgba(255,255,255,0.11);
+  border-radius: 18px;
   overflow: hidden;
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.07),
-    0 4px 24px rgba(0,0,0,0.35);
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    0 8px 32px rgba(0,0,0,0.45);
   transition: transform 0.22s cubic-bezier(0.34,1.2,0.64,1), border-color 0.22s, box-shadow 0.22s;
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(8px);
 }
 .pk-fight:hover {
   transform: translateY(-4px);
@@ -5550,11 +5550,12 @@ body.light-mode .ev-star-btn.starred {
 }
 .pk-fight-main {
   background: linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(6,6,16,0.85) 100%);
-  border-color: rgba(255,255,255,0.11);
+  border-color: rgba(255,255,255,0.16);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.09),
-    0 12px 70px rgba(0,0,0,0.55);
-  border-radius: 18px;
+    inset 0 1px 0 rgba(255,255,255,0.12),
+    0 16px 60px rgba(0,0,0,0.6),
+    0 0 0 1px rgba(255,255,255,0.06);
+  border-radius: 22px;
 }
 .pk-fight-main:hover {
   transform: translateY(-5px);
@@ -5624,7 +5625,7 @@ body.light-mode .ev-star-btn.starred {
   grid-template-columns: 1fr 52px 1fr;
   min-height: 148px;
 }
-.pk-fight-main .pk-fight-row { min-height: 180px; }
+.pk-fight-main .pk-fight-row { min-height: 200px; }
 
 /* ── Fighter side ── */
 .pk-side {
@@ -5670,12 +5671,12 @@ body.light-mode .ev-star-btn.starred {
 /* fighter name */
 .pk-fighter-name {
   font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
-  font-weight: 900; font-size: 1.55rem;
+  font-weight: 900; font-size: 1.75rem;
   text-transform: uppercase; letter-spacing: 0.03em;
   color: rgba(255,255,255,0.92); line-height: 1.05;
   transition: color 0.18s, text-shadow 0.18s;
 }
-.pk-fight-main .pk-fighter-name { font-size: 2rem; }
+.pk-fight-main .pk-fighter-name { font-size: 2.4rem; }
 .pk-fighter-name-a { text-align: left; }
 .pk-fighter-name-b { text-align: right; }
 .pk-side.selected .pk-fighter-name { color: #fff; text-shadow: 0 0 22px rgba(0,229,255,0.2); }
@@ -5683,8 +5684,8 @@ body.light-mode .ev-star-btn.starred {
 
 /* record */
 .pk-record {
-  font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 500;
-  color: rgba(255,255,255,0.32); margin-top: 2px; letter-spacing: 0.03em;
+  font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 500;
+  color: rgba(255,255,255,0.45); margin-top: 2px; letter-spacing: 0.03em;
 }
 .pk-side-b .pk-record { text-align: right; }
 .pk-fight-main .pk-record { font-size: 0.78rem; }
@@ -7766,3 +7767,128 @@ body.light-mode .odds-block { background: rgba(0,0,0,0.04); border-color: rgba(0
 body.light-mode .odds-side.odds-fav { background: rgba(0,150,180,0.06); }
 body.light-mode .odds-side.odds-fav .odds-num { color: #007a8c; }
 body.light-mode .odds-tag { color: #007a8c; background: rgba(0,150,180,0.1); }
+
+/* ══════════════════════════════════════════════
+   EVENT SWITCHER OVERLAY
+══════════════════════════════════════════════ */
+.pk-nav-row {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
+  margin-top: 4px;
+}
+.pk-switch-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(0,229,255,0.08);
+  border: 1px solid rgba(0,229,255,0.28);
+  border-radius: 8px; padding: 7px 14px;
+  color: rgba(0,229,255,0.8);
+  font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.62rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  cursor: pointer; transition: all 0.15s; white-space: nowrap;
+}
+.pk-switch-btn:hover { background: rgba(0,229,255,0.16); border-color: #00e5ff; color: #00e5ff; }
+
+.pk-switcher-overlay {
+  position: fixed; inset: 0; z-index: 1300;
+  display: flex; align-items: flex-end;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.22s ease;
+}
+.pk-switcher-overlay.open { opacity: 1; pointer-events: auto; }
+.pk-switcher-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.72); backdrop-filter: blur(8px);
+}
+.pk-switcher-panel {
+  position: relative; width: 100%; max-width: 580px;
+  margin: 0 auto 0;
+  background: linear-gradient(160deg, #13141a 0%, #0c0d11 100%);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-bottom: none;
+  border-radius: 20px 20px 0 0;
+  max-height: 82vh; display: flex; flex-direction: column;
+  box-shadow: 0 -20px 80px rgba(0,0,0,0.8);
+  transform: translateY(40px);
+  transition: transform 0.28s cubic-bezier(0.34,1.1,0.64,1);
+}
+.pk-switcher-overlay.open .pk-switcher-panel { transform: translateY(0); }
+
+.pk-switcher-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 22px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  flex-shrink: 0;
+}
+.pk-switcher-title {
+  font-family: 'Montserrat', sans-serif; font-weight: 900;
+  font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+.pk-switcher-close {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.4); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s;
+}
+.pk-switcher-close:hover { background: rgba(255,255,255,0.12); color: #fff; }
+
+.pk-switcher-list {
+  overflow-y: auto; padding: 12px 14px 24px;
+  display: flex; flex-direction: column; gap: 6px;
+  scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.08) transparent;
+}
+.pk-switcher-item {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 14px; border-radius: 12px;
+  border: 1px solid transparent;
+  text-decoration: none; color: inherit;
+  transition: background 0.15s, border-color 0.15s;
+  cursor: pointer;
+}
+.pk-switcher-item:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.08); }
+.pk-switcher-item.current { background: rgba(0,229,255,0.06); border-color: rgba(0,229,255,0.2); }
+
+.pk-switcher-thumb {
+  width: 54px; height: 36px; border-radius: 6px;
+  object-fit: cover; flex-shrink: 0;
+  background: rgba(255,255,255,0.06);
+}
+.pk-switcher-thumb-empty { width: 54px; height: 36px; border-radius: 6px; background: rgba(255,255,255,0.05); }
+
+.pk-switcher-info { flex: 1; min-width: 0; }
+.pk-switcher-name {
+  font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.82rem;
+  color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.pk-switcher-sub {
+  font-family: 'Inter', sans-serif; font-size: 0.68rem;
+  color: rgba(255,255,255,0.32); margin-top: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.pk-switcher-right {
+  display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0;
+  color: rgba(255,255,255,0.25);
+}
+.pk-switcher-days {
+  font-family: 'Montserrat', sans-serif; font-size: 0.6rem; font-weight: 800;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+.pk-switcher-days.soon { color: #00e5ff; }
+.pk-switcher-cur {
+  font-family: 'Montserrat', sans-serif; font-size: 0.55rem; font-weight: 800;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(0,229,255,0.6);
+  background: rgba(0,229,255,0.08); border-radius: 4px; padding: 2px 6px;
+}
+.pk-switcher-empty {
+  text-align: center; padding: 40px 20px;
+  font-family: 'Inter', sans-serif; font-size: 0.8rem;
+  color: rgba(255,255,255,0.2);
+}
+
+/* Light mode */
+body.light-mode .pk-switcher-panel { background: linear-gradient(160deg, #fff, #f4f4f8) !important; border-color: rgba(0,0,0,0.1) !important; }
+body.light-mode .pk-switcher-item:hover { background: rgba(0,0,0,0.04) !important; }
+body.light-mode .pk-switcher-name { color: #111 !important; }
+body.light-mode .pk-switcher-sub { color: rgba(0,0,0,0.4) !important; }
