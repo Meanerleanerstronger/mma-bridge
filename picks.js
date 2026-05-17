@@ -477,18 +477,27 @@ function formatOdds(n) {
   function updateHypeWidget() {
     const widget = document.getElementById('pkHypeWidget');
     if (!widget) return;
-    widget.querySelectorAll('.pk-hype-num-btn').forEach(b => {
+    widget.querySelectorAll('.pk-hype-bar-btn').forEach(b => {
       const v = +b.dataset.val;
-      b.classList.toggle('active', v === localHype);
-      b.classList.toggle('lit', v < localHype);
-      b.classList.remove(v === localHype ? 'lit' : '');
+      b.classList.remove('lit', 'active');
+      if (localHype) {
+        if (v < localHype) b.classList.add('lit');
+        else if (v === localHype) b.classList.add('active');
+      }
     });
-    const avgEl = widget.querySelector('.pk-hype-avg');
+    const numEl = document.getElementById('pkHypeNum');
+    if (numEl) {
+      numEl.textContent = localHype || '—';
+      numEl.classList.toggle('has-value', !!localHype);
+      const denom = numEl.nextElementSibling;
+      if (denom) denom.textContent = localHype ? '/5' : '';
+    }
+    const avgEl = document.getElementById('pkHypeAvg');
     if (avgEl) {
       if (hypeCount > 0) {
-        avgEl.textContent = `${hypeAvg.toFixed(1)} avg · ${hypeCount} rating${hypeCount !== 1 ? 's' : ''}`;
+        avgEl.innerHTML = `<span class="pk-hype-hero-avg-num">${hypeAvg.toFixed(1)}</span> community avg · <span class="pk-hype-hero-avg-count">${hypeCount}</span> ${hypeCount === 1 ? 'rating' : 'ratings'}`;
       } else {
-        avgEl.textContent = 'Be the first to rate';
+        avgEl.textContent = 'Be the first to rate this card';
       }
     }
   }
@@ -875,24 +884,36 @@ function formatOdds(n) {
     _pkCdStop = window.initCountdown ? window.initCountdown(el, event.start_time) : null;
   }
 
-  // ── Hype widget HTML — draggable slider ──────
-  function hypeWidgetHtml() {
+  // ── Hype widget — removed from header-right ──
+  function hypeWidgetHtml() { return ''; }
+
+  // ── Hype Hero — grand full-width rating widget ──
+  function hypeHeroHtml() {
     if (isCompleted || isLocked) return '';
-    const pct   = localHype ? ((localHype - 1) / 4) * 100 : 0;
-    const avgStr = hypeCount > 0 ? `${hypeAvg.toFixed(1)} avg · ${hypeCount}` : 'Be first';
+    const avgStr = hypeCount > 0
+      ? `<span class="pk-hype-hero-avg-num">${hypeAvg.toFixed(1)}</span> community avg · <span class="pk-hype-hero-avg-count">${hypeCount}</span> ${hypeCount === 1 ? 'rating' : 'ratings'}`
+      : 'Be the first to rate this card';
+    const barBtns = [1,2,3,4,5].map(n => {
+      const cls = localHype
+        ? (n < localHype ? 'lit' : n === localHype ? 'active' : '')
+        : '';
+      return `<button class="pk-hype-bar-btn${cls ? ' '+cls : ''}" data-val="${n}" type="button" aria-label="Rate ${n} out of 5"></button>`;
+    }).join('');
     return `
-      <div class="pk-hype-widget" id="pkHypeWidget">
-        <div class="pk-hype-label">Hype</div>
-        <div class="pk-hype-slider-wrap">
-          <div class="pk-hype-slider-track" id="pkHypeTrack">
-            <div class="pk-hype-slider-fill" id="pkHypeFill" style="width:${pct}%"></div>
-            <div class="pk-hype-slider-thumb" id="pkHypeThumb" style="left:${pct}%"></div>
+      <div class="pk-hype-hero" id="pkHypeWidget">
+        <div class="pk-hype-hero-inner">
+          <div class="pk-hype-hero-label-col">
+            <div class="pk-hype-hero-eyebrow">Event Hype</div>
+            <div class="pk-hype-hero-score-wrap">
+              <span class="pk-hype-hero-num${localHype ? ' has-value' : ''}" id="pkHypeNum">${localHype || '—'}</span>
+              <span class="pk-hype-hero-denom">${localHype ? '/5' : ''}</span>
+            </div>
           </div>
-          <div class="pk-hype-ticks">
-            ${[1,2,3,4,5].map(n => `<div class="pk-hype-tick${localHype >= n ? ' active' : ''}" data-val="${n}">${n}</div>`).join('')}
+          <div class="pk-hype-hero-bars" id="pkHypeTrack">${barBtns}</div>
+          <div class="pk-hype-hero-right">
+            <div class="pk-hype-hero-community" id="pkHypeAvg">${avgStr}</div>
           </div>
         </div>
-        <div class="pk-hype-avg" id="pkHypeAvg">${avgStr}</div>
       </div>`;
   }
 
@@ -970,6 +991,7 @@ function formatOdds(n) {
       <div class="pk-body">
         ${scoreHero()}
         ${fotnBarHtml()}
+        ${hypeHeroHtml()}
         ${mainSection}${prelimSection}${earlySection}
         ${isCompleted && nextEventData ? `
         <div class="pk-next-event">
@@ -1019,62 +1041,29 @@ function formatOdds(n) {
     });
   }
 
-  // ── Bind hype slider ──────────────────────────
+  // ── Bind hype rating buttons ──────────────────
   function bindHype() {
     const track = document.getElementById('pkHypeTrack');
     if (!track) return;
-    let dragging = false;
-    let pendingVal = localHype;
 
-    function getValFromX(clientX) {
-      const rect = track.getBoundingClientRect();
-      const pct  = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
-      return Math.max(1, Math.min(5, Math.round(pct * 4) + 1));
-    }
-    function applyVal(val) {
-      pendingVal = val;
-      const pct  = ((val - 1) / 4) * 100;
-      const fill  = document.getElementById('pkHypeFill');
-      const thumb = document.getElementById('pkHypeThumb');
-      if (fill)  fill.style.width = pct + '%';
-      if (thumb) thumb.style.left  = pct + '%';
-      document.querySelectorAll('.pk-hype-tick').forEach(t => {
-        t.classList.toggle('active', +t.dataset.val <= val);
+    // Hover preview
+    track.querySelectorAll('.pk-hype-bar-btn').forEach(btn => {
+      btn.addEventListener('mouseenter', () => {
+        const hoverVal = +btn.dataset.val;
+        track.querySelectorAll('.pk-hype-bar-btn').forEach(b => {
+          const v = +b.dataset.val;
+          b.classList.remove('lit', 'active');
+          if (v < hoverVal) b.classList.add('lit');
+          else if (v === hoverVal) b.classList.add('active');
+        });
       });
-    }
+      btn.addEventListener('click', () => {
+        saveHype(+btn.dataset.val);
+      });
+    });
 
-    track.addEventListener('mousedown', e => {
-      dragging = true;
-      track.classList.add('dragging');
-      applyVal(getValFromX(e.clientX));
-    });
-    document.addEventListener('mousemove', e => {
-      if (!dragging) return;
-      applyVal(getValFromX(e.clientX));
-    });
-    document.addEventListener('mouseup', () => {
-      if (!dragging) return;
-      dragging = false;
-      track.classList.remove('dragging');
-      saveHype(pendingVal);
-    });
-    track.addEventListener('touchstart', e => {
-      dragging = true;
-      applyVal(getValFromX(e.touches[0].clientX));
-    }, { passive: true });
-    document.addEventListener('touchmove', e => {
-      if (!dragging) return;
-      applyVal(getValFromX(e.touches[0].clientX));
-    }, { passive: true });
-    document.addEventListener('touchend', () => {
-      if (!dragging) return;
-      dragging = false;
-      saveHype(pendingVal);
-    });
-    // Tick clicks
-    document.querySelectorAll('.pk-hype-tick').forEach(t => {
-      t.addEventListener('click', () => { applyVal(+t.dataset.val); saveHype(+t.dataset.val); });
-    });
+    // Restore actual state on mouse leave
+    track.addEventListener('mouseleave', updateHypeWidget);
   }
 
   // ── Bind FOTN ─────────────────────────────────

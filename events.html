@@ -711,6 +711,7 @@
       card.href=`events.html?id=${encodeURIComponent(ev.id)}`;
       card.className=`ev-card ${cls}`;
       card.setAttribute('aria-label',`Open ${ev.name}`);
+      card.dataset.eventId=ev.id;
 
       const posterEl=ev.poster
         ?`<img class="ev-card-poster" src="${esc(ev.poster)}" alt="${esc(ev.name)}" loading="lazy" onerror="this.style.display='none'">`
@@ -1076,6 +1077,29 @@
     document.getElementById('phClose').addEventListener('click', closePicksHub);
     document.getElementById('phBackdrop').addEventListener('click', closePicksHub);
 
+    /* ── HYPE BADGES ON EVENT CARDS ── */
+    async function loadHypeBadges(events) {
+      const API = 'https://mmabridge-backend.onrender.com/api';
+      await Promise.all(events.map(async ev => {
+        try {
+          const res = await fetch(`${API}/ratings/${encodeURIComponent(ev.id)}`);
+          if (!res.ok) return;
+          const d = await res.json();
+          const avg = parseFloat(d.avg_hype || 0);
+          const count = parseInt(d.total_ratings || 0);
+          if (count < 1) return;
+          const card = document.querySelector(`.ev-card[data-event-id="${CSS.escape(ev.id)}"]`);
+          if (!card) return;
+          const badge = document.createElement('div');
+          badge.className = 'ev-hype-badge';
+          badge.innerHTML = `&#9733; ${avg.toFixed(1)}`;
+          badge.title = `${count} rating${count !== 1 ? 's' : ''}`;
+          badge.style.cssText = 'position:absolute;top:10px;right:48px;z-index:10';
+          card.appendChild(badge);
+        } catch {}
+      }));
+    }
+
     /* ── LOAD ── */
     async function loadEvents(){
       try {
@@ -1091,6 +1115,9 @@
 
         const p=new URLSearchParams(location.search), id=p.get('id');
         if(id){ const t=upcoming.find(e=>e.id===id); if(t) setTimeout(()=>openOverlay(t),200); }
+
+        // Load hype ratings badges after cards render
+        loadHypeBadges(upcoming);
       } catch(err) {
         const list = document.getElementById('listAll');
         if (list) list.innerHTML = `
