@@ -376,6 +376,60 @@
     ],
     "champion": false
   },
+  "sean-omalley": {
+    "name": "Sean O'Malley",
+    "nickname": "Sugar",
+    "country": "United States",
+    "flag": "🇺🇸",
+    "record": "17-2",
+    "division": "Bantamweight",
+    "height": "5'11\"",
+    "reach": "72\"",
+    "stance": "Southpaw",
+    "last5": [
+      {
+        "opponent": "Merab Dvalishvili",
+        "result": "L",
+        "method": "Sub (Ninja Choke)",
+        "round": "3",
+        "time": "4:42",
+        "event": "UFC 316"
+      },
+      {
+        "opponent": "Merab Dvalishvili",
+        "result": "W",
+        "method": "UD",
+        "round": "5",
+        "time": "5:00",
+        "event": "UFC 306"
+      },
+      {
+        "opponent": "Aljamain Sterling",
+        "result": "W",
+        "method": "TKO",
+        "round": "2",
+        "time": "4:06",
+        "event": "UFC 292"
+      },
+      {
+        "opponent": "Chito Vera",
+        "result": "W",
+        "method": "UD",
+        "round": "5",
+        "time": "5:00",
+        "event": "UFC 280"
+      },
+      {
+        "opponent": "Pedro Munhoz",
+        "result": "W",
+        "method": "TKO",
+        "round": "1",
+        "time": "0:53",
+        "event": "UFC 276"
+      }
+    ],
+    "champion": false
+  },
   "tom-aspinall": {
     "name": "Tom Aspinall",
     "nickname": "",
@@ -735,11 +789,14 @@
   },
   "arman-tsarukyan": {
     "name": "Arman Tsarukyan",
-    "nickname": "",
+    "nickname": "Ahalkalakets",
     "country": "Armenia",
     "flag": "🇦🇲",
     "record": "23-3",
     "division": "Lightweight",
+    "height": "5'7\"",
+    "reach": "68\"",
+    "stance": "Orthodox",
     "last5": [
       {
         "opponent": "Dan Hooker",

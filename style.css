@@ -5155,6 +5155,13 @@ body.light-mode .lb-avatar-init { background: rgba(0,150,180,0.08) !important; b
 body.light-mode .lb-you { background: rgba(0,150,180,0.08) !important; border-color: rgba(0,150,180,0.25) !important; color: #006680 !important; }
 body.light-mode .lb-loading,
 body.light-mode .lb-error { color: rgba(0,0,0,0.3) !important; }
+body.light-mode .lb-tab { background: rgba(0,0,0,0.05) !important; border-color: rgba(0,0,0,0.12) !important; color: rgba(0,0,0,0.55) !important; }
+body.light-mode .lb-tab.active, body.light-mode .lb-tab:hover { background: rgba(0,150,180,0.1) !important; border-color: rgba(0,150,180,0.35) !important; color: #006680 !important; }
+body.light-mode .lb-row-top { border-color: rgba(0,150,180,0.18) !important; }
+body.light-mode .lb-row-me { background: rgba(0,150,180,0.06) !important; border-color: rgba(0,150,180,0.2) !important; }
+body.light-mode .lb-group-leave { color: rgba(0,0,0,0.4) !important; }
+body.light-mode .lb-group-copy { color: rgba(0,0,0,0.4) !important; }
+body.light-mode .lb-group-leave:hover { background: rgba(200,0,0,0.06) !important; color: #cc2200 !important; }
 
 /* ══════════════════════════════════════════════════
    ADD TO CALENDAR — events page

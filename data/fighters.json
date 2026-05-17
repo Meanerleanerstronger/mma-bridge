@@ -1236,7 +1236,7 @@
       "losses": 3,
       "draws": 0
     },
-    "height": "5'10\"",
+    "height": "5'7\"",
     "reach": "68\"",
     "stance": "Orthodox",
     "age": 28,
@@ -1279,10 +1279,10 @@
         "time": ""
       },
       {
-        "opponent": "Mateusz Gamrot",
+        "opponent": "Damir Ismagulov",
         "result": "W",
-        "method": "Dec",
-        "event": "UFC Fight Night",
+        "method": "UD",
+        "event": "UFC Vegas 66",
         "round": 3,
         "time": "5:00"
       }
@@ -4968,6 +4968,71 @@
         "event": "UFC Fight Night",
         "round": 3,
         "time": "5:00"
+      }
+    ]
+  },
+  {
+    "id": "sean-omalley",
+    "name": "Sean O'Malley",
+    "nickname": "Sugar",
+    "nationality": "American",
+    "flag": "🇺🇸",
+    "weightClass": "Bantamweight",
+    "ranking": "#7",
+    "record": {
+      "wins": 17,
+      "losses": 2,
+      "draws": 0
+    },
+    "height": "5'11\"",
+    "reach": "72\"",
+    "stance": "Southpaw",
+    "age": 30,
+    "fightingOut": "Phoenix, Arizona",
+    "style": "Striker",
+    "pfp": false,
+    "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/OMALLEY_SEAN_L_01-24.png",
+    "bio": "Sean 'Sugar' O'Malley is one of the most entertaining bantamweights in UFC history — an elite striker with flashy footwork, pinpoint accuracy, and a highlight-reel finish rate that makes him a must-watch every fight. He captured the UFC Bantamweight Championship at UFC 292 by stopping Aljamain Sterling, defended it against Merab Dvalishvili at UFC 306, but then lost the rematch via submission at UFC 316. At just 30, he remains a top-5 bantamweight and one of the biggest stars in the sport.",
+    "last5": [
+      {
+        "opponent": "Merab Dvalishvili",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC 316",
+        "round": 3,
+        "time": "4:42"
+      },
+      {
+        "opponent": "Merab Dvalishvili",
+        "result": "W",
+        "method": "Dec",
+        "event": "UFC 306",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Aljamain Sterling",
+        "result": "W",
+        "method": "TKO",
+        "event": "UFC 292",
+        "round": 2,
+        "time": "4:06"
+      },
+      {
+        "opponent": "Chito Vera",
+        "result": "W",
+        "method": "Dec",
+        "event": "UFC 280",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Pedro Munhoz",
+        "result": "W",
+        "method": "TKO",
+        "event": "UFC 276",
+        "round": 1,
+        "time": "0:53"
       }
     ]
   }
