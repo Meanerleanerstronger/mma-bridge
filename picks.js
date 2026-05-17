@@ -643,7 +643,7 @@ function formatOdds(n) {
       <div class="pk-sil-wrap" style="display:none">${SILHOUETTE}</div>`;
   }
 
-  // ── Build one fight row (broadcast scoreboard) ─
+  // ── Build one fight card (prediction slip design) ─
   function buildFight(f, sectionKey, idx, isMain, isMainCard) {
     const key      = `${sectionKey}-${idx}`;
     const saved    = localPicks[key] || {};
@@ -678,57 +678,91 @@ function formatOdds(n) {
       `<button class="pk-round-btn${savedRound === String(r) ? ` active ${roundCls}` : ''}" data-round="${r}" data-key="${esc(key)}" data-method-cls="${roundCls}">R${r}</button>`
     ).join('');
     const odds = getOddsForFight(f.a, f.b);
-
-    // Side A classes
-    const sideACls = ['sb-side sb-side-a', pickedA ? 'selected' : '', pickedB ? 'dimmed' : '', resultA ? `result-${resultA}` : ''].filter(Boolean).join(' ');
-    // Side B classes
-    const sideBCls = ['sb-side sb-side-b', pickedB ? 'selected' : '', pickedA ? 'dimmed' : '', resultB ? `result-${resultB}` : ''].filter(Boolean).join(' ');
-
-    // Photos
-    const photoA = f.imgA
-      ? `<div class="sb-photo"><img src="${esc(f.imgA)}" alt="${esc(f.a)}" loading="lazy" onerror="this.parentNode.innerHTML='${SILHOUETTE}'"></div>`
-      : `<div class="sb-photo sb-photo-empty">${SILHOUETTE}</div>`;
-    const photoB = f.imgB
-      ? `<div class="sb-photo"><img src="${esc(f.imgB)}" alt="${esc(f.b)}" loading="lazy" onerror="this.parentNode.innerHTML='${SILHOUETTE}'"></div>`
-      : `<div class="sb-photo sb-photo-empty">${SILHOUETTE}</div>`;
-
     const recA = fighterRecord(f.a);
     const recB = fighterRecord(f.b);
 
-    // Pick/result badges
-    const badgeA = correctA
-      ? `<div class="sb-correct-badge">✓ +${ptsA}pts</div>`
-      : (isCompleted && pickedA ? `<div class="sb-wrong-badge">✗ 0pts</div>` : '')
-      + (!isCompleted && pickedA ? `<div class="sb-pick-badge${isSavedA ? '' : ' unsaved'}">${isSavedA ? 'YOUR PICK ✓' : 'YOUR PICK •'}</div>` : '');
-    const badgeB = correctB
-      ? `<div class="sb-correct-badge">✓ +${ptsB}pts</div>`
-      : (isCompleted && pickedB ? `<div class="sb-wrong-badge">✗ 0pts</div>` : '')
-      + (!isCompleted && pickedB ? `<div class="sb-pick-badge${isSavedB ? '' : ' unsaved'}">${isSavedB ? 'YOUR PICK ✓' : 'YOUR PICK •'}</div>` : '');
+    // Card-level classes
+    const cardCls = ['sb-fight fc-card',
+      isMain ? 'fc-main' : isMainCard ? 'fc-maincrd' : '',
+      hasPick ? 'has-pick' : '',
+      isCompleted ? 'is-completed' : '',
+      isMain ? 'is-main' : isMainCard ? 'is-main-card' : '',
+    ].filter(Boolean).join(' ');
 
-    // Per-fighter inline odds tags (moved out of center column)
+    // Fighter side A classes
+    const sideACls = ['sb-side sb-side-a fc-fighter',
+      pickedA ? 'selected' : '',
+      pickedB ? 'fc-other' : '',
+      resultA ? `result-${resultA}` : '',
+    ].filter(Boolean).join(' ');
+
+    // Fighter side B classes
+    const sideBCls = ['sb-side sb-side-b fc-fighter fc-fighter-b',
+      pickedB ? 'selected' : '',
+      pickedA ? 'fc-other' : '',
+      resultB ? `result-${resultB}` : '',
+    ].filter(Boolean).join(' ');
+
+    // Photos — fc-photo wrapper with img + sil fallback
+    const photoA = `<div class="fc-photo">${
+      f.imgA
+        ? `<img src="${esc(f.imgA)}" alt="${esc(f.a)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fc-sil" style="display:none">${SILHOUETTE}</div>`
+        : `<div class="fc-sil">${SILHOUETTE}</div>`
+    }</div>`;
+    const photoB = `<div class="fc-photo">${
+      f.imgB
+        ? `<img src="${esc(f.imgB)}" alt="${esc(f.b)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fc-sil" style="display:none">${SILHOUETTE}</div>`
+        : `<div class="fc-sil">${SILHOUETTE}</div>`
+    }</div>`;
+
+    // Odds tags
     let oddsTagA = '', oddsTagB = '';
     if (odds) {
       const aFav = odds.odds_a < odds.odds_b;
-      oddsTagA = `<div class="sb-odds-tag${aFav ? ' fav' : ' dog'}">${formatOdds(odds.odds_a)}</div>`;
-      oddsTagB = `<div class="sb-odds-tag${!aFav ? ' fav' : ' dog'}">${formatOdds(odds.odds_b)}</div>`;
+      oddsTagA = `<span class="fc-odds${aFav ? ' fc-fav' : ' fc-dog'}">${formatOdds(odds.odds_a)}</span>`;
+      oddsTagB = `<span class="fc-odds${!aFav ? ' fc-fav' : ' fc-dog'}">${formatOdds(odds.odds_b)}</span>`;
     }
 
-    // Center column
-    let centerHtml = `<div class="sb-vs">VS</div>`;
-    if (f.titleFight) centerHtml += `<div class="sb-title-pip">TITLE</div>`;
-    if (f.weight) centerHtml += `<div class="sb-weight-tag">${esc(f.weight)}</div>`;
-    if (isCompleted && winner) {
-      centerHtml += `<div class="sb-method-result">${esc(f.method || '')}</div>`;
-    }
+    // Badges
+    const badgeA = correctA
+      ? `<div class="fc-badge fc-badge-correct">✓ +${ptsA}pts</div>`
+      : (isCompleted && pickedA ? `<div class="fc-badge fc-badge-wrong">✗ 0pts</div>` : '')
+      + (!isCompleted && pickedA ? `<div class="fc-badge fc-badge-pick${isSavedA ? '' : ' unsaved'}">${isSavedA ? 'YOUR PICK ✓' : 'YOUR PICK •'}</div>` : '');
+    const badgeB = correctB
+      ? `<div class="fc-badge fc-badge-correct">✓ +${ptsB}pts</div>`
+      : (isCompleted && pickedB ? `<div class="fc-badge fc-badge-wrong">✗ 0pts</div>` : '')
+      + (!isCompleted && pickedB ? `<div class="fc-badge fc-badge-pick${isSavedB ? '' : ' unsaved'}">${isSavedB ? 'YOUR PICK ✓' : 'YOUR PICK •'}</div>` : '');
+
+    // Opponent badges
+    const oppBadgeA = oppPickedA ? `<div class="fc-opp">${esc(oppName)}'s pick</div>` : '';
+    const oppBadgeB = oppPickedB ? `<div class="fc-opp">${esc(oppName)}'s pick</div>` : '';
+
+    // Head strip — weight, rounds, title pip, card label
+    const cardLblTxt = isMain ? 'MAIN EVENT' : (isMainCard && idx === 0 ? 'CO-MAIN' : '');
+    const headHtml = `
+      <div class="fc-head">
+        <div class="fc-head-left">
+          ${f.weight ? `<span class="fc-weight">${esc(f.weight)}</span>` : ''}
+          ${f.rounds ? `<span class="fc-rds">· ${esc(f.rounds)}</span>` : ''}
+          ${f.titleFight ? `<span class="fc-title-pip">TITLE FIGHT</span>` : ''}
+        </div>
+        ${cardLblTxt ? `<span class="fc-card-lbl">${cardLblTxt}</span>` : ''}
+      </div>`;
+
+    // VS center column
+    let vsColHtml = `<span class="fc-vs">VS</span>`;
     if (showComm && commPctA !== null) {
-      centerHtml += `
+      vsColHtml += `
         <div class="sb-comm-bar"><div class="sb-comm-fill" style="width:${commPctA}%"></div></div>
         <div class="sb-comm-pcts"><span>${commPctA}%</span><span>${commPctB}%</span></div>`;
     }
+    if (isCompleted && winner) {
+      vsColHtml += `<div class="fc-result-method">${esc(f.method || '')}</div>`;
+    }
 
-    // Method row (slides in when picked) — segmented buttons
+    // Method row (slides in when picked) — keep sb-method-wrap + add fc-method-row
     const methodWrap = !isCompleted ? `
-      <div class="sb-method-wrap${hasPick ? ' visible' : ''}" id="pkMethod-${esc(key)}">
+      <div class="sb-method-wrap fc-method-row${hasPick ? ' visible' : ''}" id="pkMethod-${esc(key)}">
         <div class="pk-seg-row">
           <button class="pk-seg-btn pk-seg-ko${savedBase === 'KO/TKO' ? ' active' : ''}" data-key="${esc(key)}" data-method="KO/TKO" type="button">KO / TKO</button>
           <button class="pk-seg-btn pk-seg-sub${savedBase === 'SUB' ? ' active' : ''}" data-key="${esc(key)}" data-method="SUB" type="button">Submission</button>
@@ -740,30 +774,36 @@ function formatOdds(n) {
         </div>
       </div>` : '';
 
-    const cardCls = isMain ? ' is-main' : isMainCard ? ' is-main-card' : '';
     return `
-      <div class="sb-fight${hasPick ? ' has-pick' : ''}${cardCls}${isCompleted ? ' is-completed' : ''}" data-key="${esc(key)}">
-        <div class="sb-fight-row">
+      <div class="${cardCls}" data-key="${esc(key)}">
+        ${headHtml}
+        <div class="fc-matchup">
           <div class="${sideACls}" data-key="${esc(key)}" data-pick="${esc(f.a)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
             ${photoA}
-            <div class="sb-info">
-              <div class="sb-name">${esc(f.a)}</div>
-              ${oddsTagA}
-              ${recA ? `<div class="sb-record">${esc(recA)}</div>` : ''}
+            <div class="fc-info">
+              <div class="fc-name">${esc(f.a)}</div>
+              <div class="fc-sub-row">
+                ${recA ? `<span class="fc-record">${esc(recA)}</span>` : ''}
+                ${oddsTagA}
+              </div>
               ${badgeA}
-              ${oppPickedA ? `<div class="sb-opp-badge">${esc(oppName)}'s pick</div>` : ''}
+              ${oppBadgeA}
             </div>
           </div>
-          <div class="sb-center">${centerHtml}</div>
+          <div class="fc-vs-col">
+            ${vsColHtml}
+          </div>
           <div class="${sideBCls}" data-key="${esc(key)}" data-pick="${esc(f.b)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
-            ${photoB}
-            <div class="sb-info">
-              <div class="sb-name">${esc(f.b)}</div>
-              ${oddsTagB}
-              ${recB ? `<div class="sb-record">${esc(recB)}</div>` : ''}
+            <div class="fc-info fc-info-b">
+              <div class="fc-name">${esc(f.b)}</div>
+              <div class="fc-sub-row fc-sub-row-b">
+                ${oddsTagB}
+                ${recB ? `<span class="fc-record">${esc(recB)}</span>` : ''}
+              </div>
               ${badgeB}
-              ${oppPickedB ? `<div class="sb-opp-badge">${esc(oppName)}'s pick</div>` : ''}
+              ${oppBadgeB}
             </div>
+            ${photoB}
           </div>
         </div>
         ${methodWrap}
@@ -774,13 +814,9 @@ function formatOdds(n) {
     if (!fights || !fights.length) return '';
     const cards = fights.map((f, i) => buildFight(f, sectionKey, i, isMainCard && i === 0, isMainCard)).join('');
     return `
-      <div class="sb-section">
-        <div class="sb-section-header">
-          <div class="sb-section-line"></div>
-          <div class="sb-section-label">${esc(title)}</div>
-          <div class="sb-section-line"></div>
-        </div>
-        <div class="sb-section-fights">${cards}</div>
+      <div class="fc-section">
+        <div class="fc-section-lbl">${esc(title)}</div>
+        ${cards}
       </div>`;
   }
 
@@ -878,10 +914,27 @@ function formatOdds(n) {
     const dirty  = hasUnsavedChanges();
     const hasPoster = !!event.poster;
 
+    // Save bar button label/class (inline in ctrl panel)
+    let saveBtnLabel = 'Save Picks', saveBtnCls = '';
+    if (dirty && picked > 0) { saveBtnLabel = `Save ${picked} Pick${picked !== 1 ? 's' : ''}`; saveBtnCls = 'dirty'; }
+    else if (!dirty && picked > 0) { saveBtnLabel = `✓ ${picked} Picks Saved`; saveBtnCls = 'saved'; }
+
+    // Control panel (hype + fotn + save) — only for upcoming unlocked signed-in
+    const showCtrl = !isCompleted && !isLocked;
+    const ctrlHtml = showCtrl ? `
+      <div class="pk-ctrl">
+        ${hypeMeterHtml()}
+        ${fotnBarHtml()}
+        ${myId ? `
+        <div class="pk-ctrl-save pk-save-bar" id="pkSaveBar">
+          <button class="pk-save-btn${saveBtnCls ? ' '+saveBtnCls : ''}" id="pkSaveBtn" type="button">${saveBtnLabel}</button>
+        </div>` : ''}
+      </div>` : '';
+
     root.innerHTML = `
       ${hasPoster ? `<div class="pk-poster-bg" style="--poster:url('${esc(event.poster)}')"></div>` : ''}
-      <div class="pk-header">
-        <div class="pk-nav-row">
+      <div class="pk-shell">
+        <div class="pk-nav">
           <a href="events.html?id=${encodeURIComponent(eventId)}" class="pk-back">
             <svg width="9" height="14" viewBox="0 0 9 14" fill="none"><polyline points="7,1 2,7 7,13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Events
@@ -891,43 +944,45 @@ function formatOdds(n) {
             Switch Event
           </button>
         </div>
-        <div class="pk-header-body">
-          ${!isCompleted && !isLocked ? `<div class="pk-page-eyebrow">${esc(event.type || 'UFC')} · Make Your Picks</div>` : `<div class="pk-page-eyebrow">${esc(event.type || 'UFC')} · ${isCompleted ? 'Results' : 'Picks Locked'}</div>`}
-          <h1 class="pk-event-name">${esc(event.name || '')}</h1>
-          <div class="pk-event-meta">
+
+        <div class="pk-hd">
+          <div class="pk-hd-eyebrow">${!isCompleted && !isLocked ? 'Make Your Picks' : (isCompleted ? 'Results' : 'Picks Locked')}</div>
+          <h1 class="pk-hd-title">${esc(event.name || '')}</h1>
+          <div class="pk-hd-meta">
             ${event.date ? `<span>${esc(event.date)}</span>` : ''}
             ${event.location ? `<span class="pk-meta-dot">·</span><span>${esc(event.location)}</span>` : ''}
             ${countdownHtml()}
           </div>
-          ${!isCompleted && !isLocked ? `<div class="pk-page-sub">Predict winners, methods, rounds — and pick Fight of the Night.</div>` : ''}
+          ${!isCompleted && !isLocked ? `<div class="pk-hd-sub">Predict winners · methods · rounds · Fight of the Night</div>` : ''}
           ${careerBadgeHtml()}
         </div>
-      </div>
 
-      ${isLocked ? `
-        <div class="pk-locked-banner">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          Picks are locked — the event has started
-        </div>` : ''}
-      ${!myId && !isCompleted && !isLocked ? `
-        <div class="pk-signin-banner">
-          <span>Sign in to save your picks and track your record</span>
-          <a href="auth.html" class="pk-signin-link">Sign In →</a>
-        </div>` : ''}
+        ${isLocked ? `
+          <div class="pk-banner pk-locked-banner">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Picks are locked — the event has started
+          </div>` : ''}
+        ${!myId && !isCompleted && !isLocked ? `
+          <div class="pk-banner pk-signin-banner">
+            <span>Sign in to save your picks and track your record</span>
+            <a href="auth.html" class="pk-signin-link">Sign In →</a>
+          </div>` : ''}
+        ${challenge ? `
+          <div class="pk-banner pk-challenge-banner">
+            <div class="pk-ch-info">
+              <div class="pk-ch-vs">H2H vs <strong>${esc(oppName)}</strong></div>
+              <div class="pk-ch-tally">You: ${picked} picks · ${esc(oppName)}: ${oppPickCount} picks</div>
+            </div>
+          </div>` : ''}
 
-      ${challenge ? `
-      <div class="pk-challenge-banner">
-        <div class="pk-ch-info">
-          <div class="pk-ch-vs">H2H vs <strong>${esc(oppName)}</strong></div>
-          <div class="pk-ch-tally">You: ${picked} picks · ${esc(oppName)}: ${oppPickCount} picks</div>
-        </div>
-      </div>` : ''}
-
-      <div class="pk-body">
         ${scoreHero()}
-        ${fotnBarHtml()}
-        ${hypeMeterHtml()}
-        ${mainSection}${prelimSection}${earlySection}
+
+        ${ctrlHtml}
+
+        <div class="pk-fights">
+          ${mainSection}${prelimSection}${earlySection}
+        </div>
+
         ${isCompleted && nextEventData ? `
         <div class="pk-next-event">
           <div class="pk-next-label">Up Next</div>
@@ -950,19 +1005,8 @@ function formatOdds(n) {
         </div>
       </div>`;
 
-    // Sticky save bar
-    document.getElementById('pkSaveBar')?.remove();
-    if (!isCompleted && !isLocked && myId) {
-      const saveBar = document.createElement('div');
-      saveBar.id = 'pkSaveBar';
-      saveBar.className = 'pk-save-bar';
-      let btnLabel = 'Save Picks', btnCls = '';
-      if (dirty && picked > 0) { btnLabel = `Save ${picked} Pick${picked !== 1 ? 's' : ''}`; btnCls = 'dirty'; }
-      else if (!dirty && picked > 0) { btnLabel = `✓ ${picked} Picks Saved`; btnCls = 'saved'; }
-      saveBar.innerHTML = `<button class="pk-save-btn${btnCls ? ' '+btnCls : ''}" id="pkSaveBtn">${btnLabel}</button>`;
-      document.body.appendChild(saveBar);
-      document.getElementById('pkSaveBtn').addEventListener('click', saveAllPicks);
-    }
+    // Bind save button (inline in ctrl panel)
+    document.getElementById('pkSaveBtn')?.addEventListener('click', saveAllPicks);
 
     bindInteractions();
     bindHype();
