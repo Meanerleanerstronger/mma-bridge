@@ -102,6 +102,8 @@ function renderHero(ev) {
       btn.href = `event-review.html?id=${encodeURIComponent(ev.id)}`;
       btn.target = '';
       btn.className = 'hero-review-btn';
+      // Random start point in the 4s cycle so each load shows a different color first
+      btn.style.animationDelay = '-' + (Math.random() * 4).toFixed(2) + 's';
     } else {
       btn.textContent = 'View Full Card →';
       btn.href = `events.html?id=${encodeURIComponent(ev.id)}`;

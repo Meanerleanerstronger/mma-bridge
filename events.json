@@ -9781,7 +9781,11 @@
         "ranked": true,
         "slot": "main",
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-01/ALLEN_ARNOLD_01-24.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-02/COSTA_MELQUIZAEL_02-21.png"
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-02/COSTA_MELQUIZAEL_02-21.png",
+        "winner": "Arnold Allen",
+        "method": "UD",
+        "round": 5,
+        "time": "5:00"
       },
       {
         "a": "Dooho Choi",
@@ -9792,7 +9796,11 @@
         "ranked": false,
         "slot": "comain",
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2024-12/CHOI_DOOHO_12-07.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2024-06/SANTOS_DANIEL_06-29.png"
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2024-06/SANTOS_DANIEL_06-29.png",
+        "winner": "Dooho Choi",
+        "method": "TKO",
+        "round": 2,
+        "time": "4:29"
       },
       {
         "a": "Malcolm Wellmaker",
@@ -9803,7 +9811,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "",
-        "imgB": ""
+        "imgB": "",
+        "winner": "Juan Diaz",
+        "method": "SUB",
+        "round": 2,
+        "time": "4:08"
       },
       {
         "a": "Modestas Bukauskas",
@@ -9814,7 +9826,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2024-04/BUKAUSKAS_MODESTAS_04-13.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2024-10/BELLATO_RODOLFO_10-26.png"
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2024-10/BELLATO_RODOLFO_10-26.png",
+        "winner": "Modestas Bukauskas",
+        "method": "SD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Timmy Cuamba",
@@ -9825,7 +9841,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "",
-        "imgB": ""
+        "imgB": "",
+        "winner": "Bernardo Sopaj",
+        "method": "SUB",
+        "round": 2,
+        "time": "2:25"
       }
     ],
     "prelims": [
@@ -9849,7 +9869,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "",
-        "imgB": ""
+        "imgB": "",
+        "winner": "Ivan Erslan",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Trey Ogden",
@@ -9860,7 +9884,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "",
-        "imgB": ""
+        "imgB": "",
+        "winner": "Thomas Gantt",
+        "method": "TKO",
+        "round": 2,
+        "time": "2:51"
       },
       {
         "a": "Ketlen Vieira",
@@ -9871,7 +9899,11 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-10/VIEIRA_KETLEN_11-01.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-05/CAVALCANTI_JACQUELINE_05-16.png"
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-05/CAVALCANTI_JACQUELINE_05-16.png",
+        "winner": "Ketlen Vieira",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Cody Brundage",
@@ -9882,7 +9914,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "",
-        "imgB": ""
+        "imgB": "",
+        "winner": "Cody Brundage",
+        "method": "TKO",
+        "round": 2,
+        "time": "0:44"
       },
       {
         "a": "Alice Ardelean",
@@ -9893,7 +9929,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "",
-        "imgB": ""
+        "imgB": "",
+        "winner": "Alice Ardelean",
+        "method": "SUB",
+        "round": 2,
+        "time": "4:36"
       },
       {
         "a": "Daniel Barez",
@@ -9904,7 +9944,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "",
-        "imgB": ""
+        "imgB": "",
+        "winner": "Luis Gurule",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Shauna Bannon",
@@ -9915,7 +9959,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "",
-        "imgB": ""
+        "imgB": "",
+        "winner": "Nicolle Caliari",
+        "method": "SUB",
+        "round": 3,
+        "time": "3:08"
       }
     ],
     "earlyPrelims": [],
