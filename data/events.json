@@ -10474,5 +10474,144 @@
       }
     ],
     "earlyPrelims": []
+  },
+  {
+    "id": "ufc-329-mcgregor-vs-holloway-2",
+    "name": "UFC 329: McGregor vs. Holloway 2",
+    "type": "PPV",
+    "date": "Sat, Jul 11, 2026",
+    "isoDate": "2026-07-11",
+    "location": "Las Vegas, NV",
+    "venue": "T-Mobile Arena",
+    "poster": "https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-05/071126-ufc-329-mcgregor-vs-holloway-2-EVENT-ART.jpg",
+    "status": "upcoming",
+    "startTime": "22:00",
+    "mainCard": [
+      {
+        "a": "Conor McGregor",
+        "b": "Max Holloway",
+        "weight": "Welterweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "main",
+        "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2021-07/MCGREGOR_CONOR_07-10.png",
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2024-10/HOLLOWAY_MAX_10-26.png"
+      },
+      {
+        "a": "Paddy Pimblett",
+        "b": "Benoît Saint-Denis",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "comain",
+        "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2024-07/PIMBLETT_PADDY_07-27.png",
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2024-06/SAINTDENIS_BENOIT_06-01.png"
+      },
+      {
+        "a": "Robert Whittaker",
+        "b": "Nikita Krylov",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-09/WHITTAKER_ROBERT_09-27.png",
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-09/KRYLOV_NIKITA_09-27.png"
+      },
+      {
+        "a": "Cory Sandhagen",
+        "b": "Mario Bautista",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-05/SANDHAGEN_CORY_05-03.png",
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-05/BAUTISTA_MARIO_05-03.png"
+      },
+      {
+        "a": "Brandon Royval",
+        "b": "Lone'er Kavanagh",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-01/ROYVAL_BRANDON_01-18.png",
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-03/KAVANAGH_LOANER_03-22.png"
+      }
+    ],
+    "prelims": [
+      {
+        "a": "Gable Steveson",
+        "b": "Ferreira",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Cody Garbrandt",
+        "b": "Adrian Yanez",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2024-10/GARBRANDT_CODY_10-26.png",
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-04/YANEZ_ADRIAN_04-19.png"
+      },
+      {
+        "a": "Tracy Cortez",
+        "b": "Wang Cong",
+        "weight": "Women's Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-02/CORTEZ_TRACY_02-22.png",
+        "imgB": ""
+      },
+      {
+        "a": "Kai Kamaka III",
+        "b": "Luke Riley",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
+    "earlyPrelims": [
+      {
+        "a": "Damian Pinas",
+        "b": "Cesar Almeida",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Cody Durden",
+        "b": "Ode' Osbourne",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ]
   }
 ]
