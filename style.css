@@ -2819,6 +2819,26 @@ body.light-mode .pfp-fight-info { color: rgba(0,0,0,0.4); }
 }
 .er-empty a { color: rgba(255,255,255,0.55); }
 
+/* ── Event review skeleton loader ── */
+@keyframes er-skel-pulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.7; }
+}
+.er-skeleton { width: 100%; max-width: 860px; margin: 0 auto; padding: 0 24px 80px; }
+.er-skel-hero {
+  height: 340px; border-radius: 16px; margin-bottom: 32px;
+  background: linear-gradient(135deg, #1a1a22, #111116);
+  animation: er-skel-pulse 1.4s ease-in-out infinite;
+}
+.er-skel-body { display: flex; flex-direction: column; gap: 16px; }
+.er-skel-block {
+  height: 120px; border-radius: 12px;
+  background: linear-gradient(135deg, #15151c, #0e0e12);
+  animation: er-skel-pulse 1.4s ease-in-out infinite;
+}
+.er-skel-block.er-skel-tall { height: 200px; animation-delay: 0.15s; }
+.er-skel-body .er-skel-block:last-child { animation-delay: 0.3s; }
+
 /* ── Drawer news items ── */
 .drawer-news-item {
   display: block;

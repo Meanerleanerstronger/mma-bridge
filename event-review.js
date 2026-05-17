@@ -994,27 +994,49 @@ function renderPage(ev, community, extra = {}) {
     return;
   }
 
-  root.innerHTML = `<div class="er-empty" style="padding:80px 0;color:rgba(255,255,255,0.2)">Loading…</div>`;
+  root.innerHTML = `
+    <div class="er-skeleton">
+      <div class="er-skel-hero"></div>
+      <div class="er-skel-body">
+        <div class="er-skel-block er-skel-tall"></div>
+        <div class="er-skel-block"></div>
+        <div class="er-skel-block"></div>
+      </div>
+    </div>`;
+
+  // Pull event from sessionStorage immediately so we can fire all queries in parallel
+  let evFromCache = null;
+  try {
+    const cached = sessionStorage.getItem('review_event');
+    if (cached) {
+      const p = JSON.parse(cached);
+      if ((p.id || slugify(p.name || p.eventName || '')) === eventId) evFromCache = p;
+    }
+  } catch {}
 
   try {
-    const [ev, community] = await Promise.all([
-      resolveEvent(eventId),
-      fetchCommunityRating(eventId)
+    // Fire everything in one parallel batch — no sequential waits
+    const loggedIn = isLoggedIn();
+    const [ev, community, communityPicks, fotnVotes, myPicks] = await Promise.all([
+      evFromCache ? Promise.resolve(evFromCache) : resolveEvent(eventId),
+      fetchCommunityRating(eventId),
+      fetchCommunityPicks(eventId),
+      fetchFotnVotes(eventId),
+      loggedIn ? fetchMyEventPicks(eventId) : Promise.resolve([])
     ]);
+
     if (!ev) {
       root.innerHTML = `<div class="er-empty">Event not found. <a href="reviews.html">← Back</a></div>`;
       return;
     }
 
     const isCompleted = ev.status === 'completed';
-    const [communityPicks, fotnVotes, myPicks] = await Promise.all([
-      isCompleted ? fetchCommunityPicks(eventId) : Promise.resolve({}),
-      isCompleted ? fetchFotnVotes(eventId)      : Promise.resolve(null),
-      isLoggedIn() && isCompleted ? fetchMyEventPicks(eventId) : Promise.resolve([])
-    ]);
-
     updateCommBadge(community);
-    renderPage(ev, community, { communityPicks, fotnVotes, myPicks });
+    renderPage(ev, community, {
+      communityPicks: isCompleted ? (communityPicks || {}) : {},
+      fotnVotes:      isCompleted ? fotnVotes : null,
+      myPicks:        isCompleted ? (myPicks || []) : []
+    });
   } catch (err) {
     debugLog(err);
     root.innerHTML = `<div class="er-empty">Failed to load. <a href="reviews.html">← Back</a></div>`;

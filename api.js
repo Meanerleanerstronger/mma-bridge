@@ -158,6 +158,14 @@ export async function fetchWithRetry(url, options = {}, retries = 2) {
 /**
  * Specific API methods for common endpoints
  */
+// In-memory cache for events.json (valid for the browser session)
+let _eventsCache = null;
+async function fetchEventsJson() {
+  if (_eventsCache) return _eventsCache;
+  _eventsCache = await fetch('./events.json').then(r => r.json());
+  return _eventsCache;
+}
+
 export const API = {
   // Fighters
   async getFighters() {
@@ -175,13 +183,13 @@ export const API = {
 
   async getUpcomingEvents() {
     const today = new Date().toISOString().slice(0,10);
-    const all = await fetch('./events.json', { cache: 'no-cache' }).then(r => r.json());
+    const all = await fetchEventsJson();
     return all.filter(e => (e.isoDate || '9999') >= today && e.status !== 'completed');
   },
 
   async getPastEvents() {
     const today = new Date().toISOString().slice(0,10);
-    const all = await fetch('./events.json', { cache: 'no-cache' }).then(r => r.json());
+    const all = await fetchEventsJson();
     return all.filter(e => (e.isoDate || '9999') <= today && e.status === 'completed');
   },
 
