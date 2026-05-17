@@ -145,6 +145,7 @@
                 Member since ${memberSince(user.created_at || new Date().toISOString())}
               </span>
             </div>
+            ${buildFollowRow()}
           </div>
         </div>
       </div>
@@ -167,6 +168,7 @@
       <div class="pr-body">
         ${buildRatingsSection()}
         ${buildFavsSection()}
+        ${buildNotifPrefsCard()}
       </div>
 
       ${buildModal()}
@@ -229,6 +231,49 @@
         <div class="pr-section-title">Favourite Fighters</div>
         <div class="pr-favs-grid" id="favsGrid"></div>
       </div>`;
+  }
+
+  function buildNotifPrefsCard() {
+    return `
+      <div class="pr-section" style="animation-delay:0.2s">
+        <div class="profile-card notif-prefs-card">
+          <div class="profile-card-title">Notification Preferences</div>
+          <div class="notif-pref-list">
+            <label class="notif-pref-row">
+              <div class="notif-pref-info">
+                <span class="notif-pref-label">New event announcements</span>
+                <span class="notif-pref-hint">When a new UFC event is added</span>
+              </div>
+              <input type="checkbox" class="notif-pref-toggle" data-pref="new_event" checked>
+            </label>
+            <label class="notif-pref-row">
+              <div class="notif-pref-info">
+                <span class="notif-pref-label">Favorite fighter alerts</span>
+                <span class="notif-pref-hint">When your favorite fighter is announced</span>
+              </div>
+              <input type="checkbox" class="notif-pref-toggle" data-pref="fight_upcoming" checked>
+            </label>
+            <label class="notif-pref-row">
+              <div class="notif-pref-info">
+                <span class="notif-pref-label">Starred event reminders</span>
+                <span class="notif-pref-hint">1 week and 1 day before starred events</span>
+              </div>
+              <input type="checkbox" class="notif-pref-toggle" data-pref="starred_events" checked>
+            </label>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  function buildFollowRow() {
+    return `
+      <div class="profile-follow-row" id="profileFollowRow" style="display:none">
+        <div class="profile-follow-counts">
+          <span><strong id="profileFollowersCount">0</strong> followers</span>
+          <span><strong id="profileFollowingCount">0</strong> following</span>
+        </div>
+        <button class="profile-follow-btn" id="profileFollowBtn" style="display:none">Follow</button>
+      </div>`
   }
 
   function buildModal() {
@@ -307,9 +352,48 @@
     }
   }
 
+  // ── Notification preferences ──────────────────
+  function loadNotifPrefs() {
+    try {
+      const prefs = JSON.parse(localStorage.getItem('mma_notif_prefs') || '{}');
+      document.querySelectorAll('.notif-pref-toggle').forEach(toggle => {
+        const key = toggle.dataset.pref;
+        toggle.checked = prefs[key] !== false; // default true
+        toggle.addEventListener('change', () => {
+          const current = JSON.parse(localStorage.getItem('mma_notif_prefs') || '{}');
+          current[toggle.dataset.pref] = toggle.checked;
+          localStorage.setItem('mma_notif_prefs', JSON.stringify(current));
+        });
+      });
+    } catch {}
+  }
+
+  // ── Follow system ─────────────────────────────
+  const API_BASE = 'https://mmabridge.onrender.com';
+
+  async function loadFollowData() {
+    const followRow = document.getElementById('profileFollowRow');
+    if (!followRow) return;
+
+    // Always show follower/following counts for own profile
+    try {
+      const res = await fetch(`${API_BASE}/api/follow/counts/${user.id}`);
+      if (res.ok) {
+        const data = await res.json();
+        const followersEl = document.getElementById('profileFollowersCount');
+        const followingEl = document.getElementById('profileFollowingCount');
+        if (followersEl) followersEl.textContent = data.followers ?? 0;
+        if (followingEl) followingEl.textContent = data.following ?? 0;
+        followRow.style.display = 'flex';
+      }
+    } catch {}
+  }
+
   // ── Events ────────────────────────────────────
   function attachEvents() {
     renderFavs();
+    loadNotifPrefs();
+    loadFollowData();
 
     // Remove fav
     document.getElementById('favsGrid')?.addEventListener('click', e => {

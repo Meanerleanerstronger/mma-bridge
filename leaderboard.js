@@ -38,6 +38,13 @@
     </div>
     <div class="lb-wrap">
 
+      <!-- PERIOD TABS -->
+      <div class="lb-period-tabs" id="lbPeriodTabs">
+        <button class="lb-tab active" data-period="all">All Time</button>
+        <button class="lb-tab" data-period="month">This Month</button>
+        <button class="lb-tab" data-period="week">This Week</button>
+      </div>
+
       <!-- GROUPS -->
       <div class="lb-groups" id="lbGroups">
         <div class="lb-groups-header">
@@ -557,5 +564,101 @@
   }
 
   loadAndRenderChallenges();
+
+  // ── Period tab switching ───────────────────
+  function filterPicksByPeriod(picks, period) {
+    if (!period || period === 'all') return picks;
+    const days = period === 'week' ? 7 : 30;
+    const cutoff = Date.now() - days * 86400000;
+    return picks.filter(r => {
+      if (!r.created_at) return true; // keep if no timestamp
+      return new Date(r.created_at).getTime() >= cutoff;
+    });
+  }
+
+  function recomputeAndRender(period) {
+    const filtered = filterPicksByPeriod(picksData, period);
+
+    // Recompute stats for filtered picks
+    const filteredStatsMap = {};
+    filtered.forEach(r => {
+      if (!r.user_id) return;
+      if (!filteredStatsMap[r.user_id]) filteredStatsMap[r.user_id] = { total: 0, judged: 0, correct: 0, points: 0 };
+
+      if (r.fight_key === 'fotn') {
+        const actualFotn = fotnMap[r.event_id];
+        if (actualFotn && r.pick?.toLowerCase() === actualFotn) {
+          filteredStatsMap[r.user_id].points += POINTS.FOTN;
+        }
+        return;
+      }
+
+      filteredStatsMap[r.user_id].total++;
+      const wKey = `${r.event_id}:${r.fight_key}`;
+      const winner = winnerMap[wKey];
+      if (winner === undefined) return;
+
+      filteredStatsMap[r.user_id].judged++;
+      const isCorrect = r.pick?.toLowerCase() === winner;
+      if (!isCorrect) return;
+
+      filteredStatsMap[r.user_id].correct++;
+      let pts = POINTS.WINNER;
+      const actualMethod = methodMap[wKey];
+      if (r.method && actualMethod) {
+        const pickedBase = normalizeMethodBase(r.method);
+        const actualBase = normalizeMethodBase(actualMethod);
+        if (pickedBase && actualBase && pickedBase === actualBase) {
+          pts += POINTS.METHOD;
+          if (pickedBase === 'KO/TKO' || pickedBase === 'SUB') {
+            const pr = extractRoundNum(r.method);
+            const ar = extractRoundNum(actualMethod);
+            if (pr && ar && pr === ar) pts += POINTS.ROUND;
+          }
+        }
+      }
+      filteredStatsMap[r.user_id].points += pts;
+    });
+
+    const filteredUsers = Object.keys(filteredStatsMap).map(uid => {
+      const p   = profileMap[uid] || {};
+      const s   = filteredStatsMap[uid] || { total: 0, judged: 0, correct: 0, points: 0 };
+      const pct = s.judged > 0 ? Math.round((s.correct / s.judged) * 100) : null;
+      return {
+        user_id:    uid,
+        name:       p.display_name || 'Anonymous',
+        avatar:     p.avatar_url   || '',
+        group_code: p.group_code   || null,
+        group_name: p.group_name   || null,
+        count:      s.total,
+        judged:     s.judged,
+        correct:    s.correct,
+        pct,
+        points:     s.points || 0,
+      };
+    }).sort((a, b) => {
+      if (b.points !== a.points) return b.points - a.points;
+      const aHas = a.pct !== null && a.judged >= 3;
+      const bHas = b.pct !== null && b.judged >= 3;
+      if (aHas && bHas) return b.pct - a.pct;
+      if (aHas) return -1;
+      if (bHas) return 1;
+      return b.count - a.count;
+    });
+
+    const label = period === 'week' ? 'this week' : period === 'month' ? 'this month' : '';
+    const emptyMsg = label
+      ? `No picks ${label} yet — be the first!`
+      : 'No picks yet — be the first!';
+    renderTable(filteredUsers, 'lbGlobalWrap', emptyMsg);
+  }
+
+  document.getElementById('lbPeriodTabs')?.addEventListener('click', e => {
+    const btn = e.target.closest('.lb-tab');
+    if (!btn) return;
+    document.querySelectorAll('.lb-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    recomputeAndRender(btn.dataset.period);
+  });
 
 })();

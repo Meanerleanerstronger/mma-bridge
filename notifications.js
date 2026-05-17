@@ -102,6 +102,11 @@
       const fav    = getFav();
       let changed  = false;
 
+      // Read user notification preferences (default all true)
+      let notifPrefs = {};
+      try { notifPrefs = JSON.parse(localStorage.getItem('mma_notif_prefs') || '{}'); } catch {}
+      const prefEnabled = (key) => notifPrefs[key] !== false;
+
       const upcoming = events.filter(ev => {
         if (ev.status !== 'upcoming' || !ev.isoDate) return false;
         return new Date(ev.isoDate) >= now;
@@ -110,31 +115,33 @@
       const knownIds  = getKnownEvents();
       const allIds    = new Set(events.map(e => e.id || slugify(e.name || '')).filter(Boolean));
       const isFirst   = knownIds.size === 0;
-      upcoming.forEach(ev => {
-        const evId = ev.id || slugify(ev.name || '');
-        if (!evId) return;
-        if (!knownIds.has(evId) && !isFirst) {
-          const notifId = `new_event_${evId}`;
-          if (!seen.has(notifId)) {
-            const main = ev.mainCard?.[0];
-            const headline = main ? `${main.a} vs ${main.b}` : '';
-            arr.unshift({
-              id: notifId, type: 'new_event', read: false,
-              title: `New event announced: ${ev.name}`,
-              body: [headline, ev.date, ev.location].filter(Boolean).join(' · '),
-              eventId: evId, eventDate: ev.isoDate,
-              href: `events.html#ev-${evId}`,
-              timestamp: now.toISOString()
-            });
-            addSeen(notifId);
-            changed = true;
+      if (prefEnabled('new_event')) {
+        upcoming.forEach(ev => {
+          const evId = ev.id || slugify(ev.name || '');
+          if (!evId) return;
+          if (!knownIds.has(evId) && !isFirst) {
+            const notifId = `new_event_${evId}`;
+            if (!seen.has(notifId)) {
+              const main = ev.mainCard?.[0];
+              const headline = main ? `${main.a} vs ${main.b}` : '';
+              arr.unshift({
+                id: notifId, type: 'new_event', read: false,
+                title: `New event announced: ${ev.name}`,
+                body: [headline, ev.date, ev.location].filter(Boolean).join(' · '),
+                eventId: evId, eventDate: ev.isoDate,
+                href: `events.html#ev-${evId}`,
+                timestamp: now.toISOString()
+              });
+              addSeen(notifId);
+              changed = true;
+            }
           }
-        }
-      });
+        });
+      }
       allIds.forEach(id => knownIds.add(id));
       saveKnownEvents(knownIds);
 
-      if (fav) {
+      if (fav && prefEnabled('fight_upcoming')) {
         upcoming.forEach(ev => {
           const evId = ev.id || slugify(ev.name || '');
           if (!evId) return;

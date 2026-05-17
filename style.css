@@ -7575,3 +7575,107 @@ body.light-mode .notif-item-sub { color: rgba(0,0,0,0.38) !important; }
   .notif-dropdown { width: calc(100vw - 24px); right: -40px; }
   .fav-modal { padding: 22px 20px 20px; }
 }
+
+/* ══════════════════════════════════════════════
+   LEADERBOARD PERIOD TABS
+══════════════════════════════════════════════ */
+.lb-period-tabs {
+  display: flex; gap: 6px; margin-bottom: 20px;
+}
+.lb-tab {
+  padding: 7px 18px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 20px;
+  color: rgba(255,255,255,0.45);
+  font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.68rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  cursor: pointer; transition: all 0.15s;
+}
+.lb-tab.active, .lb-tab:hover {
+  background: rgba(0,229,255,0.1);
+  border-color: rgba(0,229,255,0.4);
+  color: #00e5ff;
+}
+
+/* ══════════════════════════════════════════════
+   NOTIFICATION PREFERENCES (profile page)
+══════════════════════════════════════════════ */
+.notif-prefs-card { margin-top: 20px; }
+.notif-pref-list { display: flex; flex-direction: column; gap: 0; }
+.notif-pref-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+  cursor: pointer; gap: 16px;
+}
+.notif-pref-row:last-child { border-bottom: none; }
+.notif-pref-info { flex: 1; }
+.notif-pref-label { display: block; font-family: 'Inter', sans-serif; font-size: 0.82rem; color: rgba(255,255,255,0.75); }
+.notif-pref-hint { display: block; font-family: 'Inter', sans-serif; font-size: 0.68rem; color: rgba(255,255,255,0.3); margin-top: 2px; }
+.notif-pref-toggle {
+  width: 40px; height: 22px;
+  appearance: none; -webkit-appearance: none;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 11px;
+  cursor: pointer; position: relative; flex-shrink: 0;
+  transition: background 0.2s, border-color 0.2s;
+}
+.notif-pref-toggle::after {
+  content: ''; position: absolute;
+  width: 16px; height: 16px;
+  background: rgba(255,255,255,0.4);
+  border-radius: 50%; top: 2px; left: 2px;
+  transition: transform 0.2s, background 0.2s;
+}
+.notif-pref-toggle:checked {
+  background: rgba(0,229,255,0.2);
+  border-color: rgba(0,229,255,0.5);
+}
+.notif-pref-toggle:checked::after {
+  transform: translateX(18px);
+  background: #00e5ff;
+}
+
+/* ══════════════════════════════════════════════
+   PROFILE FOLLOW SYSTEM
+══════════════════════════════════════════════ */
+.profile-follow-row {
+  display: flex; align-items: center; gap: 20px; margin-top: 10px; flex-wrap: wrap;
+}
+.profile-follow-counts {
+  display: flex; gap: 16px;
+  font-family: 'Inter', sans-serif; font-size: 0.8rem; color: rgba(255,255,255,0.5);
+}
+.profile-follow-counts strong { color: #fff; }
+.profile-follow-btn {
+  padding: 7px 20px;
+  background: rgba(0,229,255,0.1);
+  border: 1px solid rgba(0,229,255,0.35);
+  border-radius: 20px;
+  color: #00e5ff;
+  font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.68rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  cursor: pointer; transition: all 0.15s;
+}
+.profile-follow-btn:hover { background: rgba(0,229,255,0.2); border-color: #00e5ff; }
+.profile-follow-btn.following {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.4);
+}
+
+/* Profile card shared style (used by notif prefs card) */
+.profile-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px;
+  padding: 20px 22px;
+}
+.profile-card-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800; font-size: 0.72rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 14px;
+}
