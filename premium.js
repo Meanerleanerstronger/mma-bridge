@@ -58,10 +58,9 @@ h1,h2,.ev-card-matchup,.ov-matchup,#heroTitle,.ev-hero h1{
 }
 
 /* ── DEEP BACKGROUND ── */
-html,body{ background:#030304 !important; }
+html,body{ background:#030304 !important; overflow-x:hidden !important; }
 body{
   background-image:
-    radial-gradient(ellipse 90% 50% at 50% -5%, rgba(0,229,255,0.025) 0%,transparent 65%),
     radial-gradient(ellipse 60% 35% at 85% 100%,rgba(200,168,75,0.02) 0%,transparent 55%)
     !important;
 }
@@ -70,7 +69,8 @@ body{
 #mb-progress{
   position:fixed;top:0;left:0;height:2px;width:0%;z-index:99999;pointer-events:none;
   background:linear-gradient(90deg,#00e5ff,#00b8d4,#00e5ff);background-size:200% auto;
-  box-shadow:0 0 10px rgba(0,229,255,0.7),0 0 20px rgba(0,229,255,0.3);
+  box-shadow:0 2px 10px rgba(0,229,255,0.4);
+  clip-path:inset(0 0 -14px 0);
   transition:width 0.08s linear;
 }
 
@@ -106,7 +106,7 @@ body::before{
 }
 .navbar.scrolled{
   background:rgba(3,3,4,0.94) !important;
-  box-shadow:0 1px 0 rgba(0,229,255,0.06),0 8px 40px rgba(0,0,0,0.7) !important;
+  box-shadow:0 8px 40px rgba(0,0,0,0.7) !important;
 }
 
 /* ── NAV LINKS UNDERLINE ── */
@@ -137,8 +137,8 @@ body::before{
   text-shadow:0 0 80px rgba(0,0,0,0.95),0 2px 4px rgba(0,0,0,1) !important;
 }
 #heroSection::after{
-  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:radial-gradient(ellipse 55% 45% at 75% 50%,rgba(0,229,255,0.035) 0%,transparent 70%);
+  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;
+  background:radial-gradient(ellipse 45% 45% at 65% 50%,rgba(0,229,255,0.025) 0%,transparent 70%);
 }
 #heroBtn{
   transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.25s !important;
