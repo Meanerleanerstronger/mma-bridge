@@ -5567,21 +5567,15 @@ body.light-mode .ev-star-btn.starred {
 
 /* ── Fight Card ── */
 .sb-fight {
-  border: 1.5px solid rgba(255,255,255,0.08);
-  border-radius: 14px; overflow: hidden; position: relative;
-  background: linear-gradient(165deg, #1c1c22 0%, #0d0d11 100%);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+  border: none;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  border-radius: 0; overflow: hidden; position: relative;
+  background: transparent;
+  box-shadow: none;
 }
-.sb-fight.is-main {
-  border-color: rgba(255,255,255,0.12);
-  background: linear-gradient(165deg, #1e1e26 0%, #0e0e14 100%);
-  box-shadow: 0 8px 48px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.07);
-}
-.sb-fight.is-main-card {
-  border-color: rgba(255,255,255,0.1);
-  background: linear-gradient(165deg, #1d1d24 0%, #0d0d12 100%);
-  box-shadow: 0 6px 32px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.06);
-}
+.sb-fight:last-child { border-bottom: none; }
+.sb-fight.is-main { border-bottom: 1px solid rgba(255,255,255,0.06); }
+.sb-fight.is-main-card { border-bottom: 1px solid rgba(255,255,255,0.06); }
 .sb-fight-row {
   display: grid;
   grid-template-columns: 1fr 72px 1fr;
@@ -6614,37 +6608,36 @@ body.light-mode .pk-hm-right { color: rgba(0,0,0,0.35) !important; }
 body.light-mode .sb-section-label { color: rgba(0,0,0,0.25) !important; }
 body.light-mode .sb-section-line { background: rgba(0,0,0,0.08) !important; }
 
-/* sb-fight cards stay glossy black in light mode — immersive contrast look */
-body.light-mode .sb-fight { background: linear-gradient(165deg, #1c1c22 0%, #0d0d11 100%) !important; border-color: rgba(255,255,255,0.1) !important; box-shadow: 0 6px 30px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.07) !important; }
-body.light-mode .sb-fight.is-main { background: linear-gradient(165deg, #1e1e26 0%, #0e0e14 100%) !important; border-color: rgba(255,255,255,0.14) !important; box-shadow: 0 10px 50px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.08) !important; }
-body.light-mode .sb-fight.is-main-card { background: linear-gradient(165deg, #1d1d24 0%, #0d0d12 100%) !important; border-color: rgba(255,255,255,0.12) !important; }
+body.light-mode .sb-fight { background: transparent !important; border-color: rgba(0,0,0,0.08) !important; box-shadow: none !important; }
+body.light-mode .sb-fight.is-main { background: transparent !important; border-color: rgba(0,0,0,0.08) !important; box-shadow: none !important; }
+body.light-mode .sb-fight.is-main-card { background: transparent !important; border-color: rgba(0,0,0,0.08) !important; box-shadow: none !important; }
 
-body.light-mode .sb-name { color: rgba(255,255,255,0.88) !important; }
-body.light-mode .sb-fight.is-main-card .sb-name { color: rgba(255,255,255,0.92) !important; }
-body.light-mode .sb-fight.is-main .sb-name { color: #fff !important; }
-body.light-mode .sb-side.selected .sb-name { color: #fff !important; }
+body.light-mode .sb-name { color: #111 !important; }
+body.light-mode .sb-fight.is-main-card .sb-name { color: #0a0a0a !important; }
+body.light-mode .sb-fight.is-main .sb-name { color: #000 !important; }
+body.light-mode .sb-side.selected .sb-name { color: #000 !important; }
 
-body.light-mode .sb-record { color: rgba(255,255,255,0.3) !important; }
-body.light-mode .sb-method-result { color: rgba(255,255,255,0.28) !important; }
+body.light-mode .sb-record { color: rgba(0,0,0,0.4) !important; }
+body.light-mode .sb-method-result { color: rgba(0,0,0,0.35) !important; }
 
-body.light-mode .sb-center { border-left-color: rgba(255,255,255,0.06) !important; border-right-color: rgba(255,255,255,0.06) !important; }
-body.light-mode .sb-vs { color: rgba(255,255,255,0.12) !important; }
-body.light-mode .sb-weight-tag { color: rgba(255,255,255,0.22) !important; }
-body.light-mode .sb-odds { color: rgba(255,255,255,0.22) !important; }
-body.light-mode .sb-odds-sep { color: rgba(255,255,255,0.08) !important; }
-body.light-mode .sb-comm-bar { background: rgba(255,255,255,0.08) !important; }
-body.light-mode .sb-comm-fill { background: rgba(255,255,255,0.3) !important; }
-body.light-mode .sb-comm-pcts { color: rgba(255,255,255,0.3) !important; }
+body.light-mode .sb-center { border-left-color: rgba(0,0,0,0.08) !important; border-right-color: rgba(0,0,0,0.08) !important; }
+body.light-mode .sb-vs { color: rgba(0,0,0,0.18) !important; }
+body.light-mode .sb-weight-tag { color: rgba(0,0,0,0.35) !important; }
+body.light-mode .sb-odds { color: rgba(0,0,0,0.35) !important; }
+body.light-mode .sb-odds-sep { color: rgba(0,0,0,0.15) !important; }
+body.light-mode .sb-comm-bar { background: rgba(0,0,0,0.1) !important; }
+body.light-mode .sb-comm-fill { background: rgba(0,150,180,0.35) !important; }
+body.light-mode .sb-comm-pcts { color: rgba(0,0,0,0.45) !important; }
 
-body.light-mode .sb-photo { background: rgba(255,255,255,0.04) !important; border-color: rgba(255,255,255,0.08) !important; }
+body.light-mode .sb-photo { background: rgba(0,0,0,0.06) !important; border-color: rgba(0,0,0,0.1) !important; }
 body.light-mode .sb-side.selected .sb-photo { border-color: rgba(201,150,10,0.6) !important; }
 
-body.light-mode .sb-side:hover { background: rgba(255,255,255,0.03) !important; }
+body.light-mode .sb-side:hover { background: rgba(0,0,0,0.03) !important; }
 body.light-mode .sb-side.selected { background: rgba(201,150,10,0.07) !important; }
 body.light-mode .sb-side.dimmed { opacity: 0.35 !important; }
 body.light-mode .sb-side.result-loss { opacity: 0.3 !important; }
 
-body.light-mode .sb-method-wrap { background: rgba(255,255,255,0.03) !important; border-top-color: rgba(255,255,255,0.06) !important; }
+body.light-mode .sb-method-wrap { background: rgba(0,0,0,0.03) !important; border-top-color: rgba(0,0,0,0.07) !important; }
 body.light-mode .pk-method-drum { background: rgba(0,0,0,0.04) !important; border-color: rgba(0,0,0,0.1) !important; }
 body.light-mode .pk-drum-window { background: #f5f5f8 !important; border-color: rgba(0,0,0,0.1) !important; }
 body.light-mode .pk-drum-item { color: rgba(0,0,0,0.6) !important; border-bottom-color: rgba(0,0,0,0.06) !important; }
