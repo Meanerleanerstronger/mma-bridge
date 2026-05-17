@@ -5563,7 +5563,7 @@ body.light-mode .ev-star-btn.starred {
   color: rgba(255,255,255,0.18); white-space: nowrap;
 }
 .sb-section-line { flex: 1; height: 1px; background: rgba(255,255,255,0.05); }
-.sb-section-fights { display: flex; flex-direction: column; gap: 20px; padding: 0 20px 40px; }
+.sb-section-fights { display: flex; flex-direction: column; gap: 0; padding: 0 20px 40px; }
 
 /* ── Fight Card ── */
 .sb-fight {
