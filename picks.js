@@ -650,7 +650,7 @@ function formatOdds(n) {
   }
 
   // ── Build one fight row (broadcast scoreboard) ─
-  function buildFight(f, sectionKey, idx, isMain) {
+  function buildFight(f, sectionKey, idx, isMain, isMainCard) {
     const key      = `${sectionKey}-${idx}`;
     const saved    = localPicks[key] || {};
     const opp      = oppPicks[key] || {};
@@ -749,8 +749,9 @@ function formatOdds(n) {
         </div>
       </div>` : '';
 
+    const cardCls = isMain ? ' is-main' : isMainCard ? ' is-main-card' : '';
     return `
-      <div class="sb-fight${hasPick ? ' has-pick' : ''}${isMain ? ' is-main' : ''}${isCompleted ? ' is-completed' : ''}" data-key="${esc(key)}">
+      <div class="sb-fight${hasPick ? ' has-pick' : ''}${cardCls}${isCompleted ? ' is-completed' : ''}" data-key="${esc(key)}">
         <div class="sb-fight-row">
           <div class="${sideACls}" data-key="${esc(key)}" data-pick="${esc(f.a)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
             ${photoA}
@@ -778,7 +779,7 @@ function formatOdds(n) {
 
   function buildSection(title, fights, sectionKey, isMainCard) {
     if (!fights || !fights.length) return '';
-    const cards = fights.map((f, i) => buildFight(f, sectionKey, i, isMainCard && i === 0)).join('');
+    const cards = fights.map((f, i) => buildFight(f, sectionKey, i, isMainCard && i === 0, isMainCard)).join('');
     return `
       <div class="sb-section">
         <div class="sb-section-header">
