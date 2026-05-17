@@ -729,12 +729,28 @@ function formatOdds(n) {
       : `<div class="pk-avatar${isMain ? ' pk-avatar-main' : ''} pk-avatar-empty"></div>`;
 
     const odds = getOddsForFight(f.a, f.b);
-    const oddsHtml = odds ? `
-      <div class="fight-odds-row">
-        <span class="odds-chip ${odds.odds_a < 0 ? 'fav' : 'dog'}">${formatOdds(odds.odds_a)}</span>
-        <span class="odds-vs">vs</span>
-        <span class="odds-chip ${odds.odds_b < 0 ? 'fav' : 'dog'}">${formatOdds(odds.odds_b)}</span>
-      </div>` : '';
+    const oddsHtml = odds ? (() => {
+      const aFav = odds.odds_a < odds.odds_b;
+      const shortA = f.a.trim().split(' ').pop().toUpperCase();
+      const shortB = f.b.trim().split(' ').pop().toUpperCase();
+      return `
+        <div class="odds-block">
+          <div class="odds-label">LIVE ODDS</div>
+          <div class="odds-row">
+            <div class="odds-side ${aFav ? 'odds-fav' : 'odds-dog'}">
+              <span class="odds-name">${shortA}</span>
+              <span class="odds-num">${formatOdds(odds.odds_a)}</span>
+              ${aFav ? '<span class="odds-tag">FAV</span>' : ''}
+            </div>
+            <div class="odds-divider"></div>
+            <div class="odds-side ${!aFav ? 'odds-fav' : 'odds-dog'}">
+              <span class="odds-name">${shortB}</span>
+              <span class="odds-num">${formatOdds(odds.odds_b)}</span>
+              ${!aFav ? '<span class="odds-tag">FAV</span>' : ''}
+            </div>
+          </div>
+        </div>`;
+    })() : '';
 
     return `
       <div class="pk-fight${isMain ? ' pk-fight-main' : ''}" data-key="${esc(key)}">
