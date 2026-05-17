@@ -1,11 +1,10 @@
 // MMA Bridge Service Worker — Push + Offline Cache
-const CACHE_NAME = 'mma-bridge-v1';
+// v3 — JS/CSS always network-fresh, only images cached
+const CACHE_NAME = 'mma-bridge-v3';
 const STATIC_ASSETS = [
   '/mma-bridge/',
   '/mma-bridge/index.html',
   '/mma-bridge/events.html',
-  '/mma-bridge/style.css',
-  '/mma-bridge/notifications.js',
   '/mma-bridge/images/mma-bridge-logo.png',
 ];
 
@@ -17,7 +16,7 @@ self.addEventListener('install', event => {
   self.skipWaiting();
 });
 
-// ── Activate: clean old caches ──
+// ── Activate: nuke ALL old caches ──
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys =>
@@ -27,31 +26,39 @@ self.addEventListener('activate', event => {
   self.clients.claim();
 });
 
-// ── Fetch: network-first for API, cache-first for static ──
+// ── Fetch ──────────────────────────────────────────────────────────────────
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
 
-  // Skip non-GET and cross-origin (except our backend)
   if (event.request.method !== 'GET') return;
-  if (url.hostname === 'mmabridge-backend.onrender.com') return; // always network for API
+  if (url.hostname === 'mmabridge-backend.onrender.com') return;
 
-  // Cache-first for static assets
+  // JS and CSS always go to network — version strings handle cache busting
+  const path = url.pathname;
+  if (path.endsWith('.js') || path.endsWith('.css')) {
+    event.respondWith(fetch(event.request));
+    return;
+  }
+
+  // HTML always network-first so you never get a stale page shell
+  if (event.request.headers.get('accept')?.includes('text/html')) {
+    event.respondWith(
+      fetch(event.request).catch(() => caches.match('/mma-bridge/index.html'))
+    );
+    return;
+  }
+
+  // Images and other static: cache-first
   event.respondWith(
     caches.match(event.request).then(cached => {
       if (cached) return cached;
       return fetch(event.request).then(res => {
-        // Only cache successful same-origin responses
         if (res.ok && url.origin === self.location.origin) {
           const clone = res.clone();
           caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
         }
         return res;
-      }).catch(() => {
-        // Offline fallback for HTML pages
-        if (event.request.headers.get('accept')?.includes('text/html')) {
-          return caches.match('/mma-bridge/index.html');
-        }
-      });
+      }).catch(() => caches.match('/mma-bridge/index.html'));
     })
   );
 });
