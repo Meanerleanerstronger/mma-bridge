@@ -43,6 +43,16 @@ function getEventId(ev) {
   return ev.id || slugify(ev.name || ev.eventName || '');
 }
 
+const CARD_PLACEHOLDER_GRADIENTS = [
+  'linear-gradient(140deg,#f97316 0%,#ea580c 100%)',
+  'linear-gradient(140deg,#ea580c 0%,#b45309 100%)',
+  'linear-gradient(140deg,#d97706 0%,#92400e 100%)',
+  'linear-gradient(140deg,#fbbf24 0%,#f59e0b 100%)',
+  'linear-gradient(140deg,#94a3b8 0%,#64748b 100%)',
+  'linear-gradient(140deg,#475569 0%,#334155 100%)',
+  'linear-gradient(140deg,#22c55e 0%,#16a34a 100%)',
+];
+
 // ── Build a card element ──────────────────────
 function buildCard(ev, type) {
   const eventId  = getEventId(ev);
@@ -59,6 +69,7 @@ function buildCard(ev, type) {
     'https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-03/040426-ufc-fight-night-moicano-vs-duncan-EVENT-ART.jpg': 'center 12%',
   };
   const objPos = poster ? (posterPositions[poster] || 'top center') : '';
+  const placeholderGrad = CARD_PLACEHOLDER_GRADIENTS[Math.floor(Math.random() * CARD_PLACEHOLDER_GRADIENTS.length)];
 
   card.innerHTML = `
     <div class="card-badge">${isPPV ? 'PPV' : 'Fight Night'}</div>
@@ -66,8 +77,8 @@ function buildCard(ev, type) {
       ? `<img class="card-poster" src="${escHtml(poster)}" alt="${escHtml(name)}" loading="lazy"
            style="object-position:${objPos}"
            onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-         <div class="card-placeholder" style="display:none;"></div>`
-      : `<div class="card-placeholder"></div>`
+         <div class="card-placeholder" style="display:none;background:${placeholderGrad}"></div>`
+      : `<div class="card-placeholder" style="background:${placeholderGrad}"></div>`
     }
     <div class="card-gradient"></div>
     <div class="card-info">

@@ -726,19 +726,16 @@ function formatOdds(n) {
         <div class="sb-comm-pcts"><span>${commPctA}%</span><span>${commPctB}%</span></div>`;
     }
 
-    // Method row (slides in when picked)
+    // Method row (slides in when picked) — segmented buttons
     const methodWrap = !isCompleted ? `
       <div class="sb-method-wrap${hasPick ? ' visible' : ''}" id="pkMethod-${esc(key)}">
-        <div class="pk-method-drum" id="pkDrum-${esc(key)}" data-key="${esc(key)}">
-          <div class="pk-drum-window">
-            <div class="pk-drum-strip" id="pkDrumStrip-${esc(key)}" style="transform:translateY(${drumOffset}px)">
-              ${DRUM_ITEMS.map(d => `<div class="pk-drum-item pk-drum-${(d.method||'none').replace('/','-').toLowerCase()}">${esc(d.label)}</div>`).join('')}
-            </div>
-          </div>
-          <div class="pk-drum-hint">↕ tap to cycle</div>
+        <div class="pk-seg-row">
+          <button class="pk-seg-btn pk-seg-ko${savedBase === 'KO/TKO' ? ' active' : ''}" data-key="${esc(key)}" data-method="KO/TKO" type="button">KO / TKO</button>
+          <button class="pk-seg-btn pk-seg-sub${savedBase === 'SUB' ? ' active' : ''}" data-key="${esc(key)}" data-method="SUB" type="button">Submission</button>
+          <button class="pk-seg-btn pk-seg-dec${savedBase === 'DEC' ? ' active' : ''}" data-key="${esc(key)}" data-method="DEC" type="button">Decision</button>
         </div>
         <div class="pk-round-row${needsRound ? ' pk-round-row-visible' : ''}" id="pkRounds-${esc(key)}">
-          <span class="pk-round-label">Round</span>
+          <span class="pk-round-label">Rd</span>
           ${roundBtns}
         </div>
       </div>` : '';
@@ -894,18 +891,16 @@ function formatOdds(n) {
             Switch Event
           </button>
         </div>
-        <div class="pk-header-info">
-          <div class="pk-event-type">${esc(event.type || 'UFC')} · ${isCompleted ? 'Results' : isLocked ? 'Picks Locked' : 'Pick Your Fights'}</div>
+        <div class="pk-header-body">
+          ${!isCompleted && !isLocked ? `<div class="pk-page-eyebrow">${esc(event.type || 'UFC')} · Make Your Picks</div>` : `<div class="pk-page-eyebrow">${esc(event.type || 'UFC')} · ${isCompleted ? 'Results' : 'Picks Locked'}</div>`}
           <h1 class="pk-event-name">${esc(event.name || '')}</h1>
           <div class="pk-event-meta">
             ${event.date ? `<span>${esc(event.date)}</span>` : ''}
             ${event.location ? `<span class="pk-meta-dot">·</span><span>${esc(event.location)}</span>` : ''}
             ${countdownHtml()}
           </div>
-          ${!isCompleted && !isLocked ? careerBadgeHtml() : ''}
-        </div>
-        <div class="pk-header-right">
-          ${!isCompleted && !isLocked && myId && careerJudged >= 3 ? careerBadgeHtml() : ''}
+          ${!isCompleted && !isLocked ? `<div class="pk-page-sub">Predict winners, methods, rounds — and pick Fight of the Night.</div>` : ''}
+          ${careerBadgeHtml()}
         </div>
       </div>
 
@@ -1129,23 +1124,20 @@ function formatOdds(n) {
         side.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); } });
       });
 
-      // ── Drum click ─────────────────────────────
-      root.querySelectorAll('.pk-method-drum').forEach(drum => {
-        drum.addEventListener('click', e => {
+      // ── Segmented method buttons ────────────────
+      root.querySelectorAll('.pk-seg-btn').forEach(btn => {
+        btn.addEventListener('click', e => {
           e.stopPropagation();
-          const key = drum.dataset.key;
+          const key = btn.dataset.key;
+          const method = btn.dataset.method;
           if (!localPicks[key]) { showToast('Pick a fighter first', 'err'); return; }
-          const strip = document.getElementById(`pkDrumStrip-${key}`);
-          const curIdx = DRUM_ITEMS.findIndex(d => d.method === (localPicks[key].base || ''));
-          const nextIdx = (curIdx + 1) % DRUM_ITEMS.length;
-          const newBase = DRUM_ITEMS[nextIdx].method;
-          const newOffset = -(nextIdx * DRUM_H);
-          drum.classList.add('blurring');
-          strip.style.transition = `transform 0.22s cubic-bezier(0.22, 1, 0.36, 1)`;
-          strip.style.transform  = `translateY(${newOffset}px)`;
-          setTimeout(() => drum.classList.remove('blurring'), 120);
-          const showRound = newBase === 'KO/TKO' || newBase === 'SUB';
-          const roundRow  = document.getElementById(`pkRounds-${key}`);
+          const methodWrap = document.getElementById(`pkMethod-${key}`);
+          const alreadyActive = btn.classList.contains('active');
+          methodWrap?.querySelectorAll('.pk-seg-btn').forEach(b => b.classList.remove('active'));
+          const newBase = alreadyActive ? '' : method;
+          if (!alreadyActive) btn.classList.add('active');
+          const showRound = !alreadyActive && (method === 'KO/TKO' || method === 'SUB');
+          const roundRow = document.getElementById(`pkRounds-${key}`);
           if (roundRow) roundRow.classList.toggle('pk-round-row-visible', showRound);
           localPicks[key] = { ...localPicks[key], base: newBase, round: showRound ? (localPicks[key].round || '') : '' };
           updateSaveBar();
