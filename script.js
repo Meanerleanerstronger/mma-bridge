@@ -35,10 +35,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     const liveNow = all.find(e => e.status === 'upcoming' && hasStarted(e));
     if (liveNow) liveNow._isLive = true;
 
-    // Show most recently completed event in hero for 4 days after it ends
+    // Show most recently completed event in hero for 7 days after it ends
     const recentCompleted = past[0];
     const isVeryRecent = recentCompleted &&
-      (now - new Date(recentCompleted.isoDate)) < 4 * 24 * 60 * 60 * 1000;
+      (now - new Date(recentCompleted.isoDate)) < 7 * 24 * 60 * 60 * 1000;
 
     renderHero(liveNow || (isVeryRecent ? recentCompleted : null) || upcoming[0] || past[0]);
 
@@ -101,20 +101,16 @@ function renderHero(ev) {
       btn.textContent = 'Review the Card →';
       btn.href = `event-review.html?id=${encodeURIComponent(ev.id)}`;
       btn.target = '';
-      btn.style.setProperty('background', 'linear-gradient(135deg, #4a2c00 0%, #8B6010 25%, #C9960A 45%, #A07020 65%, #5C3800 100%)', 'important');
-      btn.style.setProperty('color', '#f5e6c8', 'important');
-      btn.style.setProperty('text-shadow', '0 1px 3px rgba(0,0,0,0.6)', 'important');
-      btn.style.setProperty('box-shadow', '0 2px 14px rgba(160,100,0,0.45), inset 0 1px 0 rgba(255,210,80,0.25), inset 0 -1px 0 rgba(0,0,0,0.3)', 'important');
-      btn.style.setProperty('border', '1px solid #6B4800', 'important');
+      btn.className = 'hero-review-btn';
     } else {
       btn.textContent = 'View Full Card →';
       btn.href = `events.html?id=${encodeURIComponent(ev.id)}`;
       btn.target = '';
-      btn.style.setProperty('background', 'cyan', 'important');
-      btn.style.setProperty('color', '#000', 'important');
+      btn.style.setProperty('background', 'rgba(255,255,255,0.12)', 'important');
+      btn.style.setProperty('color', '#fff', 'important');
       btn.style.setProperty('text-shadow', 'none', 'important');
-      btn.style.setProperty('box-shadow', 'none', 'important');
-      btn.style.setProperty('border', 'none', 'important');
+      btn.style.setProperty('box-shadow', '0 4px 20px rgba(0,0,0,0.4)', 'important');
+      btn.style.setProperty('border', '1.5px solid rgba(255,255,255,0.25)', 'important');
     }
   }
 }

@@ -764,13 +764,13 @@ function formatOdds(n) {
           </div>
           <div class="sb-center">${centerHtml}</div>
           <div class="${sideBCls}" data-key="${esc(key)}" data-pick="${esc(f.b)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
+            ${photoB}
             <div class="sb-info">
               <div class="sb-name">${esc(f.b)}</div>
               ${recB ? `<div class="sb-record">${esc(recB)}</div>` : ''}
               ${badgeB}
               ${oppPickedB ? `<div class="sb-opp-badge">${esc(oppName)}'s pick</div>` : ''}
             </div>
-            ${photoB}
           </div>
         </div>
         ${methodWrap}
