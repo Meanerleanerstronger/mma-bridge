@@ -261,41 +261,28 @@
       }
 
       if (footerEl) {
-        // Push subscribe toggle
         const pushSupported = 'serviceWorker' in navigator && 'PushManager' in window;
-        const pushLabel = pushSupported ? _getPushLabel() : '';
-        const pushRow = pushSupported ? `
-          <button class="notif-push-row" id="notifPushToggle">
-            <span class="notif-push-icon">${SVG.bell}</span>
-            <span class="notif-push-text">${pushLabel}</span>
-            <span class="notif-push-status" id="notifPushStatus"></span>
-          </button>` : '';
-
-        footerEl.innerHTML = `
-          ${pushRow}
-          <button class="notif-fav-chip" id="notifFavChip">
-            <span class="notif-fav-star">${SVG.star}</span>
-            ${fav ? `<span>${esc(fav.name)}</span><span class="notif-fav-change">change</span>` : `<span>Set favorite fighter</span>`}
-          </button>`;
-
-        document.getElementById('notifFavChip')?.addEventListener('click', () => {
-          document.getElementById('notifDropdown')?.classList.remove('open');
-          this.openModal();
-        });
-
         if (pushSupported) {
+          footerEl.innerHTML = `
+            <button class="notif-push-row" id="notifPushToggle">
+              <span class="notif-push-icon">${SVG.bell}</span>
+              <span class="notif-push-text">${_getPushLabel()}</span>
+              <span class="notif-push-status" id="notifPushStatus"></span>
+            </button>`;
           _updatePushStatus();
           document.getElementById('notifPushToggle')?.addEventListener('click', async () => {
             if (!window.MMABridgePush) return;
-            const perm = Notification.permission;
-            if (perm === 'denied') {
-              alert('Push notifications are blocked. Please enable them in your browser settings, then try again.');
+            if (Notification.permission === 'denied') {
+              alert('Push notifications are blocked. Enable them in your browser settings, then try again.');
               return;
             }
             await window.MMABridgePush.subscribeToPush();
             _updatePushStatus();
-            document.getElementById('notifPushText') && (document.getElementById('notifPushText').textContent = _getPushLabel());
+            const t = document.querySelector('#notifPushToggle .notif-push-text');
+            if (t) t.textContent = _getPushLabel();
           });
+        } else {
+          footerEl.innerHTML = '';
         }
       }
 
