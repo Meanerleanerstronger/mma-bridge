@@ -1,6 +1,35 @@
 // ==============================================
 // MMA BRIDGE — FIGHT PICKS (manual save + hype + FOTN)
 // ==============================================
+
+// ── Betting odds helpers ──────────────────────
+let _oddsCache = [];
+async function loadOdds(eventId) {
+  try {
+    const API_BASE = (typeof CONFIG !== 'undefined' && CONFIG?.API?.BASE_URL) || 'https://mmabridge-backend.onrender.com/api';
+    const res = await fetch(`${API_BASE}/odds/${eventId}`);
+    if (res.ok) {
+      const data = await res.json();
+      _oddsCache = data.odds || [];
+    }
+  } catch {}
+}
+
+function getOddsForFight(nameA, nameB) {
+  const norm = s => s.toLowerCase().replace(/[^a-z]/g, '');
+  const match = _oddsCache.find(o =>
+    (norm(o.a).includes(norm(nameA)) || norm(nameA).includes(norm(o.a))) ||
+    (norm(o.b).includes(norm(nameB)) || norm(nameB).includes(norm(o.b)))
+  );
+  if (!match) return null;
+  return match;
+}
+
+function formatOdds(n) {
+  if (!n) return '';
+  return n > 0 ? `+${n}` : `${n}`;
+}
+
 (async function () {
   'use strict';
 
@@ -38,6 +67,7 @@
   if (eventId) sessionStorage.setItem('pk_last_event', eventId);
 
   function apiBase() {
+    if (window.CONFIG && window.CONFIG.API && window.CONFIG.API.BASE_URL) return window.CONFIG.API.BASE_URL;
     const local = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
     return local ? 'http://localhost:5001/api' : 'https://mmabridge-backend.onrender.com/api';
   }
@@ -322,7 +352,7 @@
     } catch {}
   }
 
-  await Promise.all([loadChallenge(), loadEventExtras(), loadCommunityPicks(), prefetchNextEvent(), loadCareerStats()]);
+  await Promise.all([loadChallenge(), loadEventExtras(), loadCommunityPicks(), prefetchNextEvent(), loadCareerStats(), loadOdds(eventId)]);
 
   // ── Get fight data from key ───────────────────
   function getFightData(key) {
@@ -698,6 +728,14 @@
       ? `<div class="pk-avatar${isMain ? ' pk-avatar-main' : ''}"><img src="${esc(f.imgB)}" alt="" loading="lazy" onerror="this.parentNode.style.display='none'"></div>`
       : `<div class="pk-avatar${isMain ? ' pk-avatar-main' : ''} pk-avatar-empty"></div>`;
 
+    const odds = getOddsForFight(f.a, f.b);
+    const oddsHtml = odds ? `
+      <div class="fight-odds-row">
+        <span class="odds-chip ${odds.odds_a < 0 ? 'fav' : 'dog'}">${formatOdds(odds.odds_a)}</span>
+        <span class="odds-vs">vs</span>
+        <span class="odds-chip ${odds.odds_b < 0 ? 'fav' : 'dog'}">${formatOdds(odds.odds_b)}</span>
+      </div>` : '';
+
     return `
       <div class="pk-fight${isMain ? ' pk-fight-main' : ''}" data-key="${esc(key)}">
         <div class="pk-fight-header">
@@ -732,6 +770,7 @@
                 ${pickedA ? esc(f.a.trim().split(' ').pop().toUpperCase()) : pickedB ? esc(f.b.trim().split(' ').pop().toUpperCase()) : ''}
               </div>
             </div>
+            ${oddsHtml}
           </div>
 
           <div class="pk-side pk-side-b${pickedB ? ' selected' : ''}${resultB ? ` result-${resultB}` : ''}${correctB ? ' correct' : ''}${wrongB ? ' wrong' : ''}"

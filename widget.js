@@ -1,7 +1,9 @@
 (function () {
-  const API = location.hostname === 'localhost' || location.hostname === '127.0.0.1'
-    ? 'http://localhost:5001/api'
-    : 'https://mmabridge-backend.onrender.com/api';
+  const API = (window.CONFIG && window.CONFIG.API && window.CONFIG.API.BASE_URL)
+    ? window.CONFIG.API.BASE_URL
+    : (location.hostname === 'localhost' || location.hostname === '127.0.0.1'
+      ? 'http://localhost:5001/api'
+      : 'https://mmabridge-backend.onrender.com/api');
 
   const POS_KEY  = 'mmabridge-widget-pos';
   const DISMISSED_KEY = 'lw_dismissed';

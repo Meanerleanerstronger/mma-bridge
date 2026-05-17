@@ -1,46 +1,89 @@
-// MMA Bridge — Service Worker
-// Handles browser push notifications and notification click routing
+// MMA Bridge Service Worker — Push + Offline Cache
+const CACHE_NAME = 'mma-bridge-v1';
+const STATIC_ASSETS = [
+  '/mma-bridge/',
+  '/mma-bridge/index.html',
+  '/mma-bridge/events.html',
+  '/mma-bridge/style.css',
+  '/mma-bridge/notifications.js',
+  '/mma-bridge/images/mma-bridge-logo.png',
+];
 
-const CACHE_VERSION = 'mmabridge-sw-v1';
-
-self.addEventListener('install', () => self.skipWaiting());
-self.addEventListener('activate', e => e.waitUntil(clients.claim()));
-
-// ── Receive push from server ──────────────────
-self.addEventListener('push', event => {
-  let data = {};
-  try { data = event.data ? event.data.json() : {}; } catch {}
-
-  const title = data.title || 'MMA Bridge';
-  const options = {
-    body:             data.body    || '',
-    icon:             data.icon    || '/images/icon-192.png',
-    badge:            data.badge   || '/images/badge-72.png',
-    data:             { url: data.url || '/events.html' },
-    tag:              data.tag     || 'mmabridge',
-    renotify:         !!data.renotify,
-    requireInteraction: !!data.requireInteraction,
-    vibrate:          [180, 80, 180],
-  };
-
-  event.waitUntil(self.registration.showNotification(title, options));
+// ── Install: cache static assets ──
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => cache.addAll(STATIC_ASSETS).catch(() => {}))
+  );
+  self.skipWaiting();
 });
 
-// ── Notification click → open the right page ─
+// ── Activate: clean old caches ──
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
+    )
+  );
+  self.clients.claim();
+});
+
+// ── Fetch: network-first for API, cache-first for static ──
+self.addEventListener('fetch', event => {
+  const url = new URL(event.request.url);
+
+  // Skip non-GET and cross-origin (except our backend)
+  if (event.request.method !== 'GET') return;
+  if (url.hostname === 'mmabridge-backend.onrender.com') return; // always network for API
+
+  // Cache-first for static assets
+  event.respondWith(
+    caches.match(event.request).then(cached => {
+      if (cached) return cached;
+      return fetch(event.request).then(res => {
+        // Only cache successful same-origin responses
+        if (res.ok && url.origin === self.location.origin) {
+          const clone = res.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+        }
+        return res;
+      }).catch(() => {
+        // Offline fallback for HTML pages
+        if (event.request.headers.get('accept')?.includes('text/html')) {
+          return caches.match('/mma-bridge/index.html');
+        }
+      });
+    })
+  );
+});
+
+// ── Push notification handler ──
+self.addEventListener('push', event => {
+  const data = event.data ? event.data.json() : {};
+  event.waitUntil(
+    self.registration.showNotification(data.title || 'MMA Bridge', {
+      body: data.body || '',
+      icon: '/mma-bridge/images/mma-bridge-logo.png',
+      badge: '/mma-bridge/images/mma-bridge-logo.png',
+      tag: data.tag || 'mma-bridge',
+      requireInteraction: data.requireInteraction || false,
+      data: { url: data.url || '/mma-bridge/events.html' }
+    })
+  );
+});
+
+// ── Notification click handler ──
 self.addEventListener('notificationclick', event => {
   event.notification.close();
-  const url = event.notification.data?.url || '/events.html';
-
+  const target = event.notification.data?.url || '/mma-bridge/events.html';
   event.waitUntil(
     clients.matchAll({ type: 'window', includeUncontrolled: true }).then(list => {
-      // Focus existing window if possible
-      for (const c of list) {
-        if (c.url.startsWith(self.location.origin) && 'focus' in c) {
-          c.navigate(url);
-          return c.focus();
+      for (const client of list) {
+        if (client.url.includes('mma-bridge') && 'focus' in client) {
+          client.navigate(target);
+          return client.focus();
         }
       }
-      return clients.openWindow(url);
+      return clients.openWindow(target);
     })
   );
 });

@@ -47,6 +47,7 @@
   const sb = window._sb;
 
   function apiBase() {
+    if (window.CONFIG && window.CONFIG.API && window.CONFIG.API.BASE_URL) return window.CONFIG.API.BASE_URL;
     const local = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
     return local ? 'http://localhost:5001/api' : 'https://mmabridge-backend.onrender.com/api';
   }

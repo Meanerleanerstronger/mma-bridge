@@ -7,7 +7,7 @@ import CONFIG, { debugLog } from './config.js';
 document.addEventListener('DOMContentLoaded', async () => {
 
   // Keep Render backend awake
-  fetch('https://mmabridge-backend.onrender.com/api/health').catch(() => {});
+  fetch(CONFIG.API.BASE_URL + '/health').catch(() => {});
 
   // Load events for hero + recent results
   try {
@@ -256,10 +256,9 @@ async function renderNews() {
 
   try {
     // On prod hit the real API, locally use cached file
-    const isDev = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
     let articles = [];
 
-    if (isDev) {
+    if (CONFIG.IS_DEV) {
       // Local: read from data/news.json
       try {
         const d = await fetch('/data/news.json').then(r => r.json());
@@ -268,7 +267,7 @@ async function renderNews() {
     } else {
       // Prod: hit Render backend which calls GNews
       try {
-        const d = await fetch('https://mmabridge-backend.onrender.com/api/news').then(r => r.json());
+        const d = await fetch(CONFIG.API.BASE_URL + '/news').then(r => r.json());
         articles = d.trending || [];
       } catch {}
     }
@@ -375,9 +374,7 @@ function startLiveFeed() {
   const feed = document.getElementById('liveFeed');
   if (!feed) return;
 
-  const API = location.hostname === 'localhost' || location.hostname === '127.0.0.1'
-    ? 'http://localhost:5001/api'
-    : 'https://mmabridge-backend.onrender.com/api';
+  const API = CONFIG.API.BASE_URL;
 
   let lastIds = new Set();
 

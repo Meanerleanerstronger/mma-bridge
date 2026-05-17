@@ -5,14 +5,17 @@ let chatHistory = [];
 let chatBusy = false;
 let lucasLiveData = null; // holds { events, fighters } fetched at startup
 
-const BACKEND = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-  ? 'http://localhost:5001/api/chat'
-  : 'https://mmabridge-backend.onrender.com/api/chat';
+const _chatApiBase = (window.CONFIG && window.CONFIG.API && window.CONFIG.API.BASE_URL)
+  ? window.CONFIG.API.BASE_URL
+  : (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:5001/api'
+    : 'https://mmabridge-backend.onrender.com/api');
+const BACKEND = _chatApiBase + '/chat';
 
 // Wake up Render + record visitor on every page load
 if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-  fetch('https://mmabridge-backend.onrender.com/api/health').catch(() => {});
-  fetch('https://mmabridge-backend.onrender.com/api/visitors/ping', { method: 'POST' }).catch(() => {});
+  fetch(_chatApiBase + '/health').catch(() => {});
+  fetch(_chatApiBase + '/visitors/ping', { method: 'POST' }).catch(() => {});
 }
 
 // Fetch events + fighters at startup and build a structured context for Lucas

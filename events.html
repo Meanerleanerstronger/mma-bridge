@@ -4,6 +4,8 @@
   <link rel="icon" type="image/png" href="images/mma-bridge-logo.png">
   <link rel="shortcut icon" type="image/png" href="images/mma-bridge-logo.png">
   <link rel="apple-touch-icon" href="images/mma-bridge-logo.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#00e5ff">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -17,7 +19,7 @@
   <meta property="og:image" content="https://meanerleanerstronger.github.io/mma-bridge/images/mma-bridge-logo.png">
   <meta name="description" content="Browse upcoming UFC events, make fight picks, and track the hype meter.">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=4.4" />
+  <link rel="stylesheet" href="style.css?v=4.5" />
 
   <style>
     /* ── KEYFRAMES ── */
@@ -1076,17 +1078,29 @@
 
     /* ── LOAD ── */
     async function loadEvents(){
-      const res=await fetch('data/events.json').catch(()=>fetch('events.json'));
-      const all=await res.json();
-      const upcoming=all.filter(e=>e.status==='upcoming').sort((a,b)=>new Date(a.isoDate)-new Date(b.isoDate));
-      const list=document.getElementById('listAll');
-      upcoming.forEach(e=>{ const c=buildCard(e); if(c) list.appendChild(c); });
-      document.getElementById('evCount').textContent=`${upcoming.length} event${upcoming.length!==1?'s':''}`;
+      try {
+        const res = await fetch('data/events.json').catch(()=>fetch('events.json'));
+        if (!res || !res.ok) throw new Error('Could not load events');
+        const all=await res.json();
+        const upcoming=all.filter(e=>e.status==='upcoming').sort((a,b)=>new Date(a.isoDate)-new Date(b.isoDate));
+        const list=document.getElementById('listAll');
+        upcoming.forEach(e=>{ const c=buildCard(e); if(c) list.appendChild(c); });
+        document.getElementById('evCount').textContent=`${upcoming.length} event${upcoming.length!==1?'s':''}`;
 
-      document.getElementById('evReviewBtn').addEventListener('click', () => openPicksHub(upcoming));
+        document.getElementById('evReviewBtn').addEventListener('click', () => openPicksHub(upcoming));
 
-      const p=new URLSearchParams(location.search), id=p.get('id');
-      if(id){ const t=upcoming.find(e=>e.id===id); if(t) setTimeout(()=>openOverlay(t),200); }
+        const p=new URLSearchParams(location.search), id=p.get('id');
+        if(id){ const t=upcoming.find(e=>e.id===id); if(t) setTimeout(()=>openOverlay(t),200); }
+      } catch(err) {
+        const list = document.getElementById('listAll');
+        if (list) list.innerHTML = `
+          <div style="text-align:center;padding:60px 20px;font-family:'Inter',sans-serif;color:rgba(255,255,255,0.3)">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-bottom:12px;display:block;margin-left:auto;margin-right:auto;opacity:0.4"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <div style="font-size:.9rem;margin-bottom:8px">Could not load events</div>
+            <div style="font-size:.75rem;margin-bottom:20px;opacity:.6">Check your connection and try again</div>
+            <button onclick="loadEvents()" style="background:rgba(0,229,255,0.1);border:1px solid rgba(0,229,255,0.3);color:#00e5ff;border-radius:8px;padding:8px 20px;cursor:pointer;font-family:'Inter',sans-serif;font-size:.8rem">Retry</button>
+          </div>`;
+      }
     }
     loadEvents();
   </script>

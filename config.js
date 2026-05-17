@@ -75,7 +75,7 @@ export const CONFIG = {
 
   // Feature Flags
   FEATURES: {
-    CHATBOT_ENABLED: false,  // Enable AI chatbot when ready
+    CHATBOT_ENABLED: true,   // Enable AI chatbot when ready
     SEARCH_ENABLED: true,
     LIVE_UPDATES: false,     // WebSocket updates
     OFFLINE_MODE: false,     // Service worker caching

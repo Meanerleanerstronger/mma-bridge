@@ -138,6 +138,24 @@ export function clearCache() {
 }
 
 /**
+ * Fetch with retry — retries up to `retries` times on network error or 5xx.
+ * Does NOT retry on 4xx responses.
+ */
+export async function fetchWithRetry(url, options = {}, retries = 2) {
+  for (let i = 0; i <= retries; i++) {
+    try {
+      const res = await fetch(url, options);
+      if (res.ok || res.status < 500) return res; // don't retry 4xx
+      if (i === retries) return res;
+      await new Promise(r => setTimeout(r, 800 * (i + 1)));
+    } catch (err) {
+      if (i === retries) throw err;
+      await new Promise(r => setTimeout(r, 800 * (i + 1)));
+    }
+  }
+}
+
+/**
  * Specific API methods for common endpoints
  */
 export const API = {
@@ -193,6 +211,9 @@ export const API = {
   async search(query) {
     return fetchData(`${CONFIG.ENDPOINTS.SEARCH}?q=${encodeURIComponent(query)}`);
   },
+
+  // Retry-aware fetch utility
+  fetchWithRetry,
 };
 
 export default API;

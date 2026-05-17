@@ -47,6 +47,15 @@ a, a:visited {
   color: inherit;
 }
 
+/*
+ * ── Z-INDEX SCALE ────────────────────────────────
+ * 1000  Navbar / sticky elements
+ * 1100  Dropdowns / tooltips / search overlays
+ * 1200  Drawers / sidebars / save bars / mobile nav
+ * 1300  Modals / overlays / confirm bars
+ * 1400  Toasts / alerts (always on top)
+ * ──────────────────────────────────────────────── */
+
 /* =========================
    NAVBAR
 ========================= */
@@ -833,7 +842,7 @@ a, a:visited {
   pointer-events: none;
   opacity: 0;
   transition: opacity 160ms ease;
-  z-index: 9999;
+  z-index: 1200;
 }
 
 .drawer.open {
@@ -1867,7 +1876,7 @@ body.light-mode .pfp-fight-info { color: rgba(0,0,0,0.4); }
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 9999;
+    z-index: 1300;
     animation: fadeIn 0.2s;
   }
   
@@ -3729,7 +3738,7 @@ body.light-mode .navbar {
   cursor: pointer;
   padding: 0;
   margin-left: auto;
-  z-index: 10001;
+  z-index: 1200;
   position: relative;
   flex-shrink: 0;
 }
@@ -3753,7 +3762,7 @@ body.light-mode .navbar {
   background: rgba(6,6,8,0.98);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  z-index: 10000;
+  z-index: 1200;
   flex-direction: column;
   align-items: center;
   justify-content: center;
