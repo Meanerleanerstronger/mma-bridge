@@ -756,10 +756,7 @@ function formatOdds(n) {
             ${photoA}
             <div class="sb-info">
               <div class="sb-name">${esc(f.a)}</div>
-              <div class="sb-details">
-                ${recA ? `<span>${esc(recA)}</span>` : ''}
-                ${fighterForm(f.a)}
-              </div>
+              ${recA ? `<div class="sb-record">${esc(recA)}</div>` : ''}
               ${badgeA}
               ${oppPickedA ? `<div class="sb-opp-badge">${esc(oppName)}'s pick</div>` : ''}
             </div>
@@ -768,10 +765,7 @@ function formatOdds(n) {
           <div class="${sideBCls}" data-key="${esc(key)}" data-pick="${esc(f.b)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
             <div class="sb-info">
               <div class="sb-name">${esc(f.b)}</div>
-              <div class="sb-details">
-                ${recB ? `<span>${esc(recB)}</span>` : ''}
-                ${fighterForm(f.b)}
-              </div>
+              ${recB ? `<div class="sb-record">${esc(recB)}</div>` : ''}
               ${badgeB}
               ${oppPickedB ? `<div class="sb-opp-badge">${esc(oppName)}'s pick</div>` : ''}
             </div>
