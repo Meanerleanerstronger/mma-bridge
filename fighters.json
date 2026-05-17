@@ -111,16 +111,24 @@
   },
   "khamzat-chimaev": {
     "name": "Khamzat Chimaev",
-    "nickname": "",
+    "nickname": "Borz",
     "country": "Sweden",
     "flag": "🇸🇪",
-    "record": "15-0",
+    "record": "15-1",
     "division": "Middleweight",
     "stance": "Orthodox",
-    "height": "6'2\"",
-    "reach": "78\"",
+    "height": "6'1\"",
+    "reach": "75\"",
     "age": "31",
     "last5": [
+      {
+        "opponent": "Sean Strickland",
+        "result": "L",
+        "method": "SD",
+        "round": "5",
+        "time": "5:00",
+        "event": "UFC 328"
+      },
       {
         "opponent": "Dricus Du Plessis",
         "result": "W",
@@ -160,6 +168,60 @@
         "round": "5",
         "time": "5:00",
         "event": "UFC 273"
+      }
+    ],
+    "champion": false
+  },
+  "sean-strickland": {
+    "name": "Sean Strickland",
+    "nickname": "Tarzan",
+    "country": "United States",
+    "flag": "🇺🇸",
+    "record": "31-7",
+    "division": "Middleweight",
+    "height": "6'1\"",
+    "reach": "76\"",
+    "stance": "Orthodox",
+    "last5": [
+      {
+        "opponent": "Khamzat Chimaev",
+        "result": "W",
+        "method": "SD",
+        "round": "5",
+        "time": "5:00",
+        "event": "UFC 328"
+      },
+      {
+        "opponent": "Anthony Hernandez",
+        "result": "W",
+        "method": "TKO",
+        "round": "3",
+        "time": "2:23",
+        "event": "UFC Fight Night 267"
+      },
+      {
+        "opponent": "Dricus du Plessis",
+        "result": "L",
+        "method": "UD",
+        "round": "5",
+        "time": "5:00",
+        "event": "UFC 312"
+      },
+      {
+        "opponent": "Paulo Costa",
+        "result": "W",
+        "method": "SD",
+        "round": "5",
+        "time": "5:00",
+        "event": "UFC Fight Night"
+      },
+      {
+        "opponent": "Dricus du Plessis",
+        "result": "L",
+        "method": "SD",
+        "round": "5",
+        "time": "5:00",
+        "event": "UFC 297"
       }
     ],
     "champion": true

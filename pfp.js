@@ -24,6 +24,7 @@ const FIGHTER_PHOTOS = {
   'carlos-ulberg':        'https://www.ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/ULBERG_CARLOS_L_BELTMOCK.png',
   'justin-gaethje':       'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/GAETHJE_JUSTIN_L_BELTMOCK.png',
   'sean-omalley':         'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/OMALLEY_SEAN_L_01-24.png',
+  'sean-strickland':      'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-01/STRICKLAND_SEAN_L_BELT_01-20.png',
 };
 
 document.addEventListener("DOMContentLoaded", async () => {

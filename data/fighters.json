@@ -714,22 +714,30 @@
     "nationality": "Swedish-Chechen",
     "flag": "🇸🇪",
     "weightClass": "Middleweight",
-    "ranking": "Champion",
+    "ranking": "#1",
     "record": {
       "wins": 15,
-      "losses": 0,
+      "losses": 1,
       "draws": 0
     },
     "height": "6'1\"",
     "reach": "75\"",
     "stance": "Orthodox",
-    "age": 30,
+    "age": 31,
     "fightingOut": "Grozny, Chechnya",
     "style": "All-Around",
     "pfp": true,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/CHIMAEV_KHAMZAT_L_BELTMOCK.png",
-    "bio": "Khamzat Chimaev is the UFC Middleweight Champion and one of the most dominant undefeated fighters in MMA history. His elite wrestling, smothering grappling and explosive striking have dismantled everyone placed in front of him. He submitted Whittaker in round one at UFC 308 and then defeated du Plessis by unanimous decision at UFC 319 to claim the belt he was always destined to hold.",
+    "bio": "Khamzat Chimaev was the most dominant undefeated fighter in UFC history — until Sean Strickland handed him his first career loss via split decision at UFC 328. The loss does nothing to diminish his elite standing: he still possesses championship-level wrestling, smothering grappling, and explosive striking. The Borz will be back.",
     "last5": [
+      {
+        "opponent": "Sean Strickland",
+        "result": "L",
+        "method": "SD",
+        "event": "UFC 328",
+        "round": 5,
+        "time": "5:00"
+      },
       {
         "opponent": "Dricus du Plessis",
         "result": "W",
@@ -761,14 +769,6 @@
         "event": "UFC 279",
         "round": 4,
         "time": "5:00"
-      },
-      {
-        "opponent": "Gilbert Burns",
-        "result": "W",
-        "method": "Dec",
-        "event": "UFC 273",
-        "round": 3,
-        "time": "5:00"
       }
     ]
   },
@@ -779,58 +779,59 @@
     "nationality": "American",
     "flag": "🇺🇸",
     "weightClass": "Middleweight",
-    "ranking": "#3",
+    "ranking": "Champion",
     "record": {
-      "wins": 30,
+      "wins": 31,
       "losses": 7,
       "draws": 0
     },
-    "height": "6'0\"",
-    "reach": "77\"",
+    "height": "6'1\"",
+    "reach": "76\"",
     "stance": "Orthodox",
-    "age": 33,
+    "age": 35,
     "fightingOut": "Anaheim, California",
     "style": "Striker",
-    "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-01/STRICKLAND_SEAN_L_01-20.png",
-    "bio": "Sean Strickland pulled off one of the biggest upsets in UFC history when he dominated Adesanya for the middleweight belt. His boxing-first style prioritises volume and relentless pressure over power, and his ability to ignore damage while landing clean combinations makes him uniquely difficult to fight. A two-time title challenger who always shows up.",
+    "pfp": true,
+    "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-01/STRICKLAND_SEAN_L_BELT_01-20.png",
+    "bio": "Sean Strickland is a two-time UFC Middleweight Champion and one of the most polarising figures in the sport. After his shock upset of Adesanya, he lost the belt twice to du Plessis before turning the tables on everyone — he knocked out Hernandez at UFC Fight Night and then stunned the undefeated Khamzat Chimaev via split decision at UFC 328 to reclaim the title. His volume boxing, iron chin, and relentless pressure make him uniquely difficult to finish.",
     "last5": [
+      {
+        "opponent": "Khamzat Chimaev",
+        "result": "W",
+        "method": "SD",
+        "event": "UFC 328",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Anthony Hernandez",
+        "result": "W",
+        "method": "TKO",
+        "event": "UFC Fight Night 267",
+        "round": 3,
+        "time": "2:23"
+      },
       {
         "opponent": "Dricus du Plessis",
         "result": "L",
-        "method": "Dec",
+        "method": "UD",
         "event": "UFC 312",
         "round": 5,
         "time": "5:00"
       },
       {
+        "opponent": "Paulo Costa",
+        "result": "W",
+        "method": "SD",
+        "event": "UFC Fight Night",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
         "opponent": "Dricus du Plessis",
         "result": "L",
-        "method": "Split Dec",
+        "method": "SD",
         "event": "UFC 297",
-        "round": 5,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Israel Adesanya",
-        "result": "W",
-        "method": "Dec",
-        "event": "UFC 293",
-        "round": 5,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Abus Magomedov",
-        "result": "W",
-        "method": "TKO",
-        "event": "UFC Fight Night",
-        "round": 2,
-        "time": "1:40"
-      },
-      {
-        "opponent": "Nassourdine Imavov",
-        "result": "W",
-        "method": "Dec",
-        "event": "UFC Fight Night",
         "round": 5,
         "time": "5:00"
       }
