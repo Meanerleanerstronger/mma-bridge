@@ -61,7 +61,7 @@
   if (isOwnProfile && !loggedInUser) {
     root.innerHTML = `
       <div class="pr-sign-in-prompt">
-        <div class="pr-icon">🥊</div>
+        <div class="pr-icon"></div>
         <h2>Sign in to see your profile</h2>
         <p>Track your ratings, predict Fight of the Night, and build your fighter favourites list.</p>
         <a href="auth.html" class="pr-sign-in-btn">Sign In / Sign Up</a>
@@ -87,7 +87,7 @@
     if (!profileData) {
       root.innerHTML = `
         <div class="pr-sign-in-prompt">
-          <div class="pr-icon">👤</div>
+          <div class="pr-icon"></div>
           <h2>Profile not found</h2>
           <p>This user's profile doesn't exist or is not public.</p>
           <a href="javascript:history.back()" class="pr-sign-in-btn">Go Back</a>
@@ -307,12 +307,12 @@
 
   // ── Compute badges ────────────────────────────
   const BADGES = [
-    { id: 'sharp',   icon: '🎯', name: 'Sharp',        desc: '70%+ accuracy on any event',       check: () => pickHistory.some(e => e.pct >= 70) },
-    { id: 'perfect', icon: '💎', name: 'Perfect Card', desc: '100% correct on an event',          check: () => pickHistory.some(e => e.pct === 100) },
-    { id: 'veteran', icon: '🥋', name: 'Veteran',      desc: 'Picked 5+ events',                  check: () => pickHistory.length >= 5 },
-    { id: 'rater',   icon: '⭐', name: 'Critic',       desc: 'Rated 5+ events',                   check: () => ratings.length >= 5 },
-    { id: 'dayone',  icon: '🏅', name: 'Day One',      desc: 'Early adopter (joined before 2026)', check: () => new Date(user.created_at) < new Date('2026-01-01') },
-    { id: 'picker',  icon: '🔥', name: 'Pick Master',  desc: '30+ total picks across all events', check: () => totalPicksAll >= 30 },
+    { id: 'sharp',   icon: 'S', name: 'Sharp',        desc: '70%+ accuracy on any event',       check: () => pickHistory.some(e => e.pct >= 70) },
+    { id: 'perfect', icon: 'P', name: 'Perfect Card', desc: '100% correct on an event',          check: () => pickHistory.some(e => e.pct === 100) },
+    { id: 'veteran', icon: 'V', name: 'Veteran',      desc: 'Picked 5+ events',                  check: () => pickHistory.length >= 5 },
+    { id: 'rater',   icon: 'C', name: 'Critic',       desc: 'Rated 5+ events',                   check: () => ratings.length >= 5 },
+    { id: 'dayone',  icon: 'D', name: 'Day One',      desc: 'Early adopter (joined before 2026)', check: () => new Date(user.created_at) < new Date('2026-01-01') },
+    { id: 'picker',  icon: 'M', name: 'Pick Master',  desc: '30+ total picks across all events', check: () => totalPicksAll >= 30 },
   ];
   const earnedBadges = BADGES.filter(b => b.check());
 

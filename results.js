@@ -59,7 +59,7 @@
     } else {
       cardsEl.innerHTML = `
         <div class="results-empty" style="grid-column:1/-1">
-          <div class="results-empty-icon">🔍</div>
+          
           <div class="results-empty-title">No results found</div>
           <div class="results-empty-sub">Try a fighter name like "paddy" or "ilia", or an event like "UFC 300".</div>
         </div>`;

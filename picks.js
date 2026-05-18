@@ -854,7 +854,7 @@ function formatOdds(n) {
             <div class="pk-score-hero-verdict">${verdict}</div>
           </div>
         </div>
-        ${fotnPts > 0 ? `<div class="pk-score-hero-fotn-bonus">⚡ +${fotnPts} FOTN Bonus</div>` : ''}
+        ${fotnPts > 0 ? `<div class="pk-score-hero-fotn-bonus">+${fotnPts} FOTN Bonus</div>` : ''}
         ${careerPct !== null ? `<div class="pk-score-hero-career">All-time: ${careerCorrect}/${careerJudged} picks · ${careerPct}%</div>` : ''}
         <button class="pk-share-hero-btn" id="pkShareHeroBtn">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
@@ -876,8 +876,7 @@ function formatOdds(n) {
   }
 
   function triggerShare(evName, correct, total, pct, verdict, totalPts, evId) {
-    const emoji  = pct >= 70 ? '🔥' : pct >= 50 ? '💪' : '😤';
-    const text   = `${emoji} I went ${correct}/${total} on ${evName} (${pct}% · ${verdict})\nCan you beat me?`;
+    const text   = `I went ${correct}/${total} on ${evName} (${pct}% · ${verdict})\nCan you beat me?`;
     const url    = `https://mmabridge.com/picks.html?id=${evId}`;
     try {
       const canvas = buildShareCanvas(evName, correct, total, pct, verdict, totalPts);

@@ -110,7 +110,7 @@
             <span class="sd-name">${escHtml(u.display_name || 'Fighter')}</span>
             <span class="sd-sub">MMA Bridge member</span>
           </div>
-          <button class="sd-challenge-btn" data-uid="${escHtml(u.id)}" data-uname="${escHtml(u.display_name || 'Fighter')}">⚔ Challenge</button>
+          <button class="sd-challenge-btn" data-uid="${escHtml(u.id)}" data-uname="${escHtml(u.display_name || 'Fighter')}">Challenge</button>
         `, () => {
           input.value = '';
           hideDrop();
@@ -167,7 +167,7 @@
           : `events.html?id=${encodeURIComponent(id)}`;
 
         const row = buildRow(`
-          <div class="sd-event-icon">🥊</div>
+          
           <div class="sd-info">
             <span class="sd-name">${escHtml(name)}</span>
             <span class="sd-sub">${fmtDate(ev.isoDate)}${ev.location ? ' · ' + ev.location : ''}</span>

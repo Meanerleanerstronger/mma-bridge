@@ -135,7 +135,7 @@ function checkEventNotifications(events) {
     const banner = document.createElement('div');
     banner.style.cssText = 'position:fixed;top:70px;left:50%;transform:translateX(-50%);z-index:9998;background:linear-gradient(135deg,#0a1820,#0d2538);border:1px solid rgba(0,229,255,0.28);border-radius:12px;padding:14px 18px;max-width:380px;width:calc(100% - 40px);box-shadow:0 8px 40px rgba(0,0,0,0.6);display:flex;align-items:center;gap:12px;animation:sectionFadeIn 0.4s ease both;';
     banner.innerHTML = `
-      <span style="font-size:1.5rem;flex-shrink:0;">🔔</span>
+      <span style="flex-shrink:0;display:flex;align-items:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(0,229,255,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></span>
       <div style="flex:1;min-width:0;">
         <div style="font-family:Montserrat,sans-serif;font-size:0.78rem;font-weight:700;color:#fff;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${target.name} is today!</div>
         <div style="font-family:Inter,sans-serif;font-size:0.68rem;color:rgba(255,255,255,0.38);">Starts ${target.startTime || '10PM'} ET · ${target.venue || target.location || ''}</div>
@@ -353,7 +353,6 @@ function paintNews(articles, container, list) {
     const list = document.getElementById('today-list');
     if (container && !container.innerHTML.trim()) {
       container.innerHTML = `<div style="text-align:center;padding:40px 20px;color:rgba(255,255,255,0.3);font-family:'Inter',sans-serif;font-size:0.85rem;">
-        <div style="font-size:1.5rem;margin-bottom:10px;">📡</div>
         Couldn't load news right now. Check back shortly.
       </div>`;
     }
@@ -403,7 +402,7 @@ function startLiveFeed() {
       div.className = 'feed-entry';
       if (!lastIds.has(key)) div.classList.add('feed-entry-new');
       div.innerHTML = `
-        <div class="feed-flag">${v.flag || '🌍'}</div>
+        <div class="feed-flag">${v.flag || ''}</div>
         <div class="feed-text"><strong>Someone from ${v.city || 'Unknown'}, ${v.country || 'Unknown'}</strong> visited MMA Bridge</div>
         <div class="feed-action">${timeAgo(v.ts)}</div>`;
       feed.appendChild(div);

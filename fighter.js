@@ -42,7 +42,6 @@
   function renderNotFound(msg) {
     root.innerHTML = `
       <div class="fp-not-found">
-        <div style="font-size:3rem;margin-bottom:20px;">🥊</div>
         <h2>Fighter Not Found</h2>
         <p>${escHtml(msg)}</p>
         <a href="javascript:history.back()" style="display:inline-block;margin-top:28px;background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.2);color:cyan;font-family:'Montserrat',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:10px 22px;border-radius:6px;text-decoration:none;">← Back</a>

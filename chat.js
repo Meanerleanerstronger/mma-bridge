@@ -75,7 +75,7 @@ function initWidget() {
     <div id="lw-window">
       <div id="lw-header">
         <div id="lw-header-left">
-          <div id="lw-avatar">🥊</div>
+          <div id="lw-avatar">L</div>
           <div>
             <div id="lw-name">Lucas</div>
             <div id="lw-status"><span id="lw-dot"></span>Online</div>
@@ -94,7 +94,7 @@ function initWidget() {
       </div>
       <div id="lw-msgs">
         <div class="lw-msg lw-bot">
-          <div class="lw-msg-av">🥊</div>
+          <div class="lw-msg-av">L</div>
           <div class="lw-msg-bub">Yo — ask me anything about fighters, events, results, predictions. I got you.</div>
         </div>
       </div>
@@ -390,7 +390,7 @@ function lwRenderPrediction(d) {
 function lwRenderParlay(d) {
   const picks = d.picks || [];
   const el = document.createElement('div'); el.className = 'widget-wrap';
-  el.innerHTML = `<div class="wgt-parlay"><div class="wgt-parlay-header"><span class="wgt-parlay-icon">🎰</span><span class="wgt-parlay-title">${esc(d.title||"Lucas's Parlay")}</span></div><div class="wgt-parlay-picks">${picks.map((p,i)=>`<div class="wgt-parlay-pick"><span class="wgt-parlay-num">${i+1}</span><span class="wgt-parlay-fighter">${esc(p.fighter||'')}</span>${p.method?`<span class="wgt-parlay-method">${esc(p.method)}</span>`:''}<span class="wgt-parlay-check">✓</span></div>`).join('')}</div></div>`;
+  el.innerHTML = `<div class="wgt-parlay"><div class="wgt-parlay-header"><span class="wgt-parlay-title">${esc(d.title||"Lucas's Parlay")}</span></div><div class="wgt-parlay-picks">${picks.map((p,i)=>`<div class="wgt-parlay-pick"><span class="wgt-parlay-num">${i+1}</span><span class="wgt-parlay-fighter">${esc(p.fighter||'')}</span>${p.method?`<span class="wgt-parlay-method">${esc(p.method)}</span>`:''}<span class="wgt-parlay-check">✓</span></div>`).join('')}</div></div>`;
   return el;
 }
 function lwRenderComparison(d) {
@@ -407,7 +407,7 @@ function lwRenderCard(d) {
 }
 function lwRenderUpset(d) {
   const el = document.createElement('div'); el.className = 'widget-wrap';
-  el.innerHTML = `<div class="wgt-upset"><div class="wgt-upset-header"><span>🚨</span><span class="wgt-upset-alert">Upset Alert — ${esc(d.event||'')}</span></div><div class="wgt-upset-body">${d.label?`<div class="wgt-upset-label">${esc(d.label)}</div>`:''}<div class="wgt-upset-result">${esc(d.fighter||'')} def. ${esc(d.victim||'')}</div>${d.method?`<div class="wgt-upset-method">${esc(d.method)}</div>`:''}${d.hype?`<div class="wgt-upset-hype">${esc(d.hype)}</div>`:''}</div></div>`;
+  el.innerHTML = `<div class="wgt-upset"><div class="wgt-upset-header"><span class="wgt-upset-alert">Upset Alert — ${esc(d.event||'')}</span></div><div class="wgt-upset-body">${d.label?`<div class="wgt-upset-label">${esc(d.label)}</div>`:''}<div class="wgt-upset-result">${esc(d.fighter||'')} def. ${esc(d.victim||'')}</div>${d.method?`<div class="wgt-upset-method">${esc(d.method)}</div>`:''}${d.hype?`<div class="wgt-upset-hype">${esc(d.hype)}</div>`:''}</div></div>`;
   return el;
 }
 function lwParseAndRender(rawText, container) {
@@ -442,7 +442,7 @@ function addMsg(text, isUser) {
     row.innerHTML = `<div class="lw-msg-bub">${esc(text)}</div>`;
   } else {
     const av = document.createElement('div');
-    av.className = 'lw-msg-av'; av.textContent = '🥊';
+    av.className = 'lw-msg-av'; av.textContent = 'L';
     row.appendChild(av);
     const inner = document.createElement('div');
     inner.className = 'lw-bot-inner';
@@ -459,7 +459,7 @@ function showTyping() {
   const msgs = document.getElementById('lw-msgs');
   const row = document.createElement('div');
   row.className = 'lw-msg lw-bot'; row.id = 'lw-typing';
-  row.innerHTML = `<div class="lw-msg-av">🥊</div><div class="lw-typing"><span></span><span></span><span></span></div>`;
+  row.innerHTML = `<div class="lw-msg-av">L</div><div class="lw-typing"><span></span><span></span><span></span></div>`;
   msgs.appendChild(row);
   msgs.scrollTop = msgs.scrollHeight;
 }

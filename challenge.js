@@ -126,7 +126,7 @@
     modal.innerHTML = `
       <div class="ch-panel">
         <button class="ch-close" id="ch-close">✕</button>
-        <div class="ch-eyebrow">⚔ Head-to-Head</div>
+        <div class="ch-eyebrow">Head-to-Head</div>
         <h2 class="ch-title">Challenge <span>${esc(opponentName)}</span></h2>
         <p class="ch-sub">Pick an upcoming event to go head-to-head on. You'll both make your picks and see who called it better.</p>
         <div class="ch-events" id="ch-events">
@@ -148,7 +148,7 @@
       btn.innerHTML = `
         ${ev.poster
           ? `<img class="ch-ev-img" src="${esc(ev.poster)}" alt="" loading="lazy">`
-          : `<div class="ch-ev-img ch-ev-img-ph">🥊</div>`}
+          : `<div class="ch-ev-img ch-ev-img-ph"></div>`}
         <div class="ch-ev-info">
           <div class="ch-ev-name">${esc(ev.name || ev.eventName || '')}</div>
           <div class="ch-ev-date">${dateStr}${ev.location ? ' · ' + ev.location : ''}</div>

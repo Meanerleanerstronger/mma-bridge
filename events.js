@@ -276,7 +276,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <div class="ev-body-meta">${ev.date||''} &nbsp;·&nbsp; ${ev.location||''} &nbsp;·&nbsp; ${ev.venue||''}</div>
                 <div class="ev-header-actions">
                   ${upcoming ? `<a class="ev-picks-btn" href="picks.html?id=${esc(id)}">Pick Fights →</a>` : ''}
-                  ${upcoming ? `<button class="ev-consensus-btn" data-ev-id="${esc(id)}" data-ev-name="${esc(ev.name||'')}" data-main-card="${esc(JSON.stringify(ev.mainCard||[]))}" title="Share community pick consensus" onclick="event.stopPropagation()">📊 Share Consensus</button>` : ''}
+                  ${upcoming ? `<button class="ev-consensus-btn" data-ev-id="${esc(id)}" data-ev-name="${esc(ev.name||'')}" data-main-card="${esc(JSON.stringify(ev.mainCard||[]))}" title="Share community pick consensus" onclick="event.stopPropagation()">Share Consensus</button>` : ''}
                   ${calBtnHtml}
                   ${bellHtml}
                 </div>
@@ -312,7 +312,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             <div class="drawer-pills">
               ${f.weight    ? `<span class="pill">${esc(f.weight)}</span>`    : ''}
               ${f.rounds    ? `<span class="pill pill-dim">${esc(f.rounds)}</span>` : ''}
-              ${f.titleFight? `<span class="pill">🏆 Title Fight</span>`      : ''}
+              ${f.titleFight? `<span class="pill">Title Fight</span>`      : ''}
               ${f.ranked    ? `<span class="pill">⭐ Ranked</span>`           : ''}
             </div>
             <div class="drawer-sub">
@@ -331,7 +331,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             </div>
 
             <div class="drawer-card" id="drawerNews">
-              <div class="drawer-card-title">📰 Related News</div>
+              <div class="drawer-card-title">Related News</div>
               <div id="drawerNewsContent" style="color:rgba(255,255,255,0.3);font-size:0.8rem;font-family:'Inter',sans-serif">
                 Loading news…
               </div>
@@ -431,12 +431,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     const already = btn.classList.contains('fotn-locked');
     wrap.querySelectorAll(`.fotn-btn[data-event-id="${eventId}"]`).forEach(b => {
       b.classList.remove('fotn-locked');
-      b.innerHTML = '🔒 FOTN?';
+      b.innerHTML = 'FOTN?';
     });
     if (already) return;
 
     btn.classList.add('fotn-locked');
-    btn.innerHTML = '✅ FOTN';
+    btn.innerHTML = 'FOTN ✓';
 
     // Toast
     let toast = document.getElementById('fotn-toast');
@@ -450,7 +450,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         backdrop-filter:blur(8px);opacity:0;transition:opacity 0.2s;pointer-events:none;`;
       document.body.appendChild(toast);
     }
-    toast.textContent = `🔒 FOTN locked: ${fight}`;
+    toast.textContent = `FOTN locked: ${fight}`;
     toast.style.opacity = '1';
     clearTimeout(toast._t);
     toast._t = setTimeout(() => { toast.style.opacity = '0'; }, 3000);
@@ -692,7 +692,7 @@ document.addEventListener('click', async e => {
       .eq('event_id', evId)
       .neq('fight_key', 'fotn');
 
-    btn.textContent = '📊 Share Consensus';
+    btn.textContent = 'Share Consensus';
     btn.disabled = false;
 
     // Group by fight_key
@@ -851,7 +851,7 @@ document.addEventListener('click', async e => {
     }, 'image/png');
 
   } catch (err) {
-    btn.textContent = '📊 Share Consensus';
+    btn.textContent = 'Share Consensus';
     btn.disabled = false;
     console.error('Consensus error:', err);
   }
@@ -870,7 +870,7 @@ function showConsensusModal(imageUrl, fileName, evName) {
       <img src="${imageUrl}" style="width:100%;border-radius:10px;margin-bottom:18px;display:block;" alt="Community picks card">
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
         <a href="${imageUrl}" download="${fileName}" style="display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,#c8960c,#a87a0a);color:#000;font-family:Montserrat,sans-serif;font-weight:800;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;padding:11px 22px;border-radius:8px;text-decoration:none;">⬇ Download</a>
-        <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(`Community picks for ${evName} 👊 mmabridge.com`)}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18);color:#fff;font-family:Montserrat,sans-serif;font-weight:700;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;padding:11px 22px;border-radius:8px;text-decoration:none;">𝕏 Tweet</a>
+        <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(`Community picks for ${evName} mmabridge.com`)}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18);color:#fff;font-family:Montserrat,sans-serif;font-weight:700;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;padding:11px 22px;border-radius:8px;text-decoration:none;">𝕏 Tweet</a>
         <button onclick="document.getElementById('consensusModal').remove()" style="background:none;border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.4);font-family:Inter,sans-serif;font-size:0.78rem;padding:11px 18px;border-radius:8px;cursor:pointer;">Close</button>
       </div>
     </div>`;

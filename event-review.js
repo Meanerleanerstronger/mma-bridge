@@ -589,9 +589,9 @@ function fightRow(f, communityData) {
   ].filter(Boolean).join(' ');
 
   const METHOD_LABELS = {
-    'KO':'🥊 KO','TKO':'🥊 TKO','SUB':'⛓️ Sub',
-    'UD':'📋 UD','SD':'📋 SD','MD':'📋 MD',
-    'NC':'🚫 NC','Draw':'🤝 Draw'
+    'KO':'KO','TKO':'TKO','SUB':'Sub',
+    'UD':'UD','SD':'SD','MD':'MD',
+    'NC':'NC','Draw':'Draw'
   };
 
   const clsA = f.winner === f.a ? 'er-won' : f.winner && f.winner !== 'NC' && f.winner !== 'Draw' ? 'er-lost' : '';
@@ -954,7 +954,7 @@ function renderPage(ev, community, extra = {}) {
       saveStoredRating(eventId, savedData);
       const tweetText = encodeURIComponent(`Just rated ${name} ${selected}/5 on MMA Bridge!`);
       const tweetUrl  = encodeURIComponent(location.href);
-      toast.innerHTML = `✅ Review saved! <a class="er-share-x" href="https://twitter.com/intent/tweet?text=${tweetText}&url=${tweetUrl}" target="_blank" rel="noopener">Share on X →</a>`;
+      toast.innerHTML = `Review saved! <a class="er-share-x" href="https://twitter.com/intent/tweet?text=${tweetText}&url=${tweetUrl}" target="_blank" rel="noopener">Share on X →</a>`;
       toast.classList.add('show');
       lockForm();
       refreshCommunity();
