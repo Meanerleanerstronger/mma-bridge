@@ -9317,7 +9317,7 @@ body.light-mode .pk-drum-wrap::after {
   margin-left: 7px; vertical-align: middle; flex-shrink: 0;
 }
 .lb-my-tier {
-  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  display: flex; align-items: center; gap: 8px 12px; flex-wrap: wrap;
   background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08);
   border-radius: 12px; padding: 14px 18px; margin-bottom: 14px;
 }
@@ -9414,4 +9414,144 @@ body.light-mode .pk-comments-toggle:hover { color: rgba(0,0,0,.7) !important; }
 body.light-mode .pk-comment-avatar { background: rgba(0,0,0,.08) !important; color: rgba(0,0,0,.4) !important; }
 body.light-mode .pk-comment-name { color: rgba(0,0,0,.8) !important; }
 body.light-mode .pk-comment-text { color: rgba(0,0,0,.6) !important; }
+
+/* ======= SCROLL REVEAL ANIMATIONS ======= */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.5s cubic-bezier(.22,1,.36,1), transform 0.5s cubic-bezier(.22,1,.36,1);
+}
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+
+/* ======= TIER PROGRESS BAR ======= */
+.lb-my-tier-progress-wrap {
+  width: 100%;
+  margin-top: 6px;
+}
+.lb-my-tier-progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.64rem;
+  color: rgba(255,255,255,.3);
+  margin-bottom: 5px;
+}
+.lb-my-tier-progress-bar {
+  height: 5px;
+  background: rgba(255,255,255,.08);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.lb-my-tier-progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.8s cubic-bezier(.22,1,.36,1);
+}
+.lb-my-tier-req {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  color: rgba(0,229,255,.5);
+  margin-top: 5px;
+}
+body.light-mode .lb-my-tier-progress-bar { background: rgba(0,0,0,.08) !important; }
+
+/* ======= FANTASY SCORING GUIDE ======= */
+.fant-guide {
+  background: rgba(255,255,255,.025);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 14px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+}
+.fant-guide-toggle {
+  display: flex; align-items: center; justify-content: space-between;
+  cursor: pointer; background: none; border: none; width: 100%; padding: 0;
+  color: rgba(255,255,255,.5);
+  font-family: 'Montserrat', sans-serif; font-weight: 800;
+  font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;
+}
+.fant-guide-toggle svg { transition: transform .2s; flex-shrink: 0; }
+.fant-guide-toggle.open svg { transform: rotate(180deg); }
+.fant-guide-body {
+  display: none;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,.06);
+  margin-top: 12px;
+}
+.fant-guide-body.open { display: block; }
+.fant-score-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+.fant-score-item {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,.02);
+  border-radius: 8px; padding: 9px 11px;
+}
+.fant-score-pts {
+  font-family: 'Montserrat', sans-serif; font-weight: 900;
+  font-size: .9rem; min-width: 36px; flex-shrink: 0;
+}
+.fant-score-pts.pos { color: #c8960c; }
+.fant-score-pts.neg { color: rgba(255,90,90,.7); }
+.fant-score-label { font-family: 'Inter', sans-serif; font-size: .72rem; color: rgba(255,255,255,.45); }
+@media (max-width: 480px) { .fant-score-grid { grid-template-columns: 1fr; } }
+
+/* ======= FANTASY WELCOME STATE ======= */
+.fant-welcome {
+  text-align: center;
+  padding: 28px 20px 20px;
+}
+.fant-welcome-icon { font-size: 2.4rem; margin-bottom: 12px; }
+.fant-welcome-title {
+  font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.1rem;
+  color: #fff; margin: 0 0 6px;
+}
+.fant-welcome-sub {
+  font-family: 'Inter', sans-serif; font-size: .82rem;
+  color: rgba(255,255,255,.35); margin: 0 0 24px; line-height: 1.6;
+}
+.fant-steps {
+  display: flex; gap: 0;
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 12px; overflow: hidden;
+  margin-bottom: 24px; text-align: left;
+}
+.fant-step {
+  flex: 1;
+  padding: 14px 12px;
+  border-right: 1px solid rgba(255,255,255,.06);
+  position: relative;
+}
+.fant-step:last-child { border-right: none; }
+.fant-step-num {
+  font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: .6rem;
+  letter-spacing: .1em; color: rgba(0,229,255,.5); text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.fant-step-text {
+  font-family: 'Inter', sans-serif; font-size: .72rem; color: rgba(255,255,255,.5);
+  line-height: 1.4;
+}
+@media (max-width: 480px) {
+  .fant-steps { flex-direction: column; }
+  .fant-step { border-right: none; border-bottom: 1px solid rgba(255,255,255,.06); }
+  .fant-step:last-child { border-bottom: none; }
+}
+
+/* ======= SKELETON LOADING (global) ======= */
+.skel {
+  background: linear-gradient(90deg, rgba(255,255,255,.05) 25%, rgba(255,255,255,.09) 50%, rgba(255,255,255,.05) 75%);
+  background-size: 200% 100%;
+  animation: skel-shimmer 1.4s infinite;
+  border-radius: 6px;
+}
+@keyframes skel-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
 body.light-mode .pk-comment-input { background: rgba(0,0,0,.04) !important; border-color: rgba(0,0,0,.12) !important; color: #000 !important; }

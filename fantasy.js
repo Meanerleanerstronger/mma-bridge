@@ -50,7 +50,7 @@
       root.innerHTML = `<div class="fant-empty">Sign in to build your fantasy team.<br><a href="auth.html">Sign In &rarr;</a></div>`;
       return;
     }
-    root.innerHTML = '<div class="fant-loading">Loading…</div>';
+    root.innerHTML = '<div class="fant-loading"><div class="skel" style="height:18px;width:120px;margin:0 auto 10px"></div><div class="skel" style="height:14px;width:180px;margin:0 auto"></div></div>';
 
     const [{ data: rosterRows }, { data: scoreRows }] = await Promise.all([
       sb.from('fantasy_rosters').select('fighter_id,fighter_name').eq('user_id',user.id).eq('season',SEASON),
@@ -79,9 +79,47 @@
         </div>`;
     }).join('');
 
+    const isNew = roster.length === 0;
     root.innerHTML = `
+      ${isNew ? `
+      <div class="fant-welcome">
+        <div class="fant-welcome-icon">🥊</div>
+        <div class="fant-welcome-title">Build Your Fantasy Team</div>
+        <div class="fant-welcome-sub">Pick up to 5 UFC fighters. Earn points every time they win. Compete with friends.</div>
+        <div class="fant-steps">
+          <div class="fant-step">
+            <div class="fant-step-num">Step 1</div>
+            <div class="fant-step-text">Pick 5 fighters you believe in</div>
+          </div>
+          <div class="fant-step">
+            <div class="fant-step-num">Step 2</div>
+            <div class="fant-step-text">Earn points when they win fights</div>
+          </div>
+          <div class="fant-step">
+            <div class="fant-step-num">Step 3</div>
+            <div class="fant-step-text">Climb the global leaderboard</div>
+          </div>
+        </div>
+      </div>` : `
       <div class="fant-season-chip">Season ${SEASON}</div>
-      <div class="fant-slot-info">${roster.length}/${MAX_FIGHTERS} fighters &middot; <strong>${totalPts >= 0 ? '+' : ''}${totalPts} pts</strong> this season</div>
+      <div class="fant-slot-info">${roster.length}/${MAX_FIGHTERS} fighters &middot; <strong>${totalPts >= 0 ? '+' : ''}${totalPts} pts</strong> this season</div>`}
+
+      <div class="fant-guide">
+        <button class="fant-guide-toggle" id="fantGuideToggle">
+          How Scoring Works
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="fant-guide-body" id="fantGuideBody">
+          <div class="fant-score-grid">
+            <div class="fant-score-item"><span class="fant-score-pts pos">+4</span><span class="fant-score-label">KO / TKO win</span></div>
+            <div class="fant-score-item"><span class="fant-score-pts pos">+3</span><span class="fant-score-label">Submission win</span></div>
+            <div class="fant-score-item"><span class="fant-score-pts pos">+2</span><span class="fant-score-label">Decision win</span></div>
+            <div class="fant-score-item"><span class="fant-score-pts neg">−1</span><span class="fant-score-label">Loss (any method)</span></div>
+            <div class="fant-score-item"><span class="fant-score-pts" style="color:rgba(255,255,255,.3)">0</span><span class="fant-score-label">No contest / DQ</span></div>
+          </div>
+        </div>
+      </div>
+
       <div class="fant-roster-grid">${slotsHtml}</div>
       <div class="fant-btns-row">
         ${roster.length < MAX_FIGHTERS ? `<button class="fant-add-btn" id="fantAddBtn">+ Add Fighter</button>` : ''}
@@ -91,6 +129,20 @@
         <input class="fant-search" id="fantSearch" placeholder="Search fighters&hellip;" autocomplete="off">
         <div class="fant-picker-grid" id="fantPickerGrid"></div>
       </div>`;
+
+    // Scoring guide toggle
+    document.getElementById('fantGuideToggle')?.addEventListener('click', () => {
+      const btn = document.getElementById('fantGuideToggle');
+      const body = document.getElementById('fantGuideBody');
+      btn.classList.toggle('open');
+      body.classList.toggle('open');
+    });
+    // Auto-open scoring guide for new users
+    if (isNew) {
+      document.getElementById('fantGuideToggle')?.classList.add('open');
+      document.getElementById('fantGuideBody')?.classList.add('open');
+    }
+    window.mmabReveal?.();
 
     // Remove
     root.querySelectorAll('.fant-remove-btn').forEach(btn => {
@@ -144,7 +196,7 @@
   // ── MY LEAGUE ──────────────────────────────────
   async function renderMyLeague() {
     if (!user) { root.innerHTML='<div class="fant-empty">Sign in to join a league.</div>'; return; }
-    root.innerHTML='<div class="fant-loading">Loading…</div>';
+    root.innerHTML='<div class="fant-loading"><div class="skel" style="height:18px;width:120px;margin:0 auto 10px"></div><div class="skel" style="height:14px;width:180px;margin:0 auto"></div></div>';
 
     // Get user's league via any roster row with a league_id
     const { data: rosterRow } = await sb.from('fantasy_rosters')
@@ -153,13 +205,28 @@
     const leagueId = rosterRow?.league_id;
     if (!leagueId) {
       root.innerHTML=`
-        <div class="fant-group-box">
-          <div class="fant-group-name">No League Yet</div>
-          <div class="fant-group-meta" style="margin-top:6px">Create a private league and share the code with friends, or join one.</div>
-          <div class="fant-btns-row">
-            <button class="fant-add-btn" id="fantCreateLeague">Create League</button>
-            <button class="fant-secondary-btn" id="fantJoinLeague">Join with Code</button>
+        <div class="fant-welcome" style="padding-top:20px">
+          <div class="fant-welcome-icon">🏆</div>
+          <div class="fant-welcome-title">Compete with Friends</div>
+          <div class="fant-welcome-sub">Create a private league or join one with a code. Your points from fights automatically count.</div>
+          <div class="fant-steps">
+            <div class="fant-step">
+              <div class="fant-step-num">Step 1</div>
+              <div class="fant-step-text">Build your team on the My Team tab first</div>
+            </div>
+            <div class="fant-step">
+              <div class="fant-step-num">Step 2</div>
+              <div class="fant-step-text">Create a league &amp; share the code</div>
+            </div>
+            <div class="fant-step">
+              <div class="fant-step-num">Step 3</div>
+              <div class="fant-step-text">Watch your ranking update after each event</div>
+            </div>
           </div>
+        </div>
+        <div class="fant-btns-row" style="justify-content:center">
+          <button class="fant-add-btn" id="fantCreateLeague">+ Create League</button>
+          <button class="fant-secondary-btn" id="fantJoinLeague">Join with Code</button>
         </div>`;
       document.getElementById('fantCreateLeague')?.addEventListener('click',()=>showLeagueModal('create'));
       document.getElementById('fantJoinLeague')?.addEventListener('click',()=>showLeagueModal('join'));
@@ -262,7 +329,7 @@
 
   // ── GLOBAL BOARD ───────────────────────────────
   async function renderGlobal() {
-    root.innerHTML='<div class="fant-loading">Loading…</div>';
+    root.innerHTML='<div class="fant-loading"><div class="skel" style="height:18px;width:120px;margin:0 auto 10px"></div><div class="skel" style="height:14px;width:180px;margin:0 auto"></div></div>';
     if(!sb){root.innerHTML='<div class="fant-empty">Sign in to see global rankings.</div>';return;}
 
     const [{data:rosters},{data:scores},{data:profiles}]=await Promise.all([

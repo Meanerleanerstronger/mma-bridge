@@ -444,11 +444,39 @@
     const tierEl = document.createElement('div');
     tierEl.className = 'lb-my-tier';
     const t = myUser.tier;
+    const judged = myUser.judged;
+    const pct = myUser.pct !== null ? myUser.pct : 0;
+    const rank = myUser.tierRank;
+
+    // Progress bar logic: how far to next tier
+    const tierNames = ['Rookie','Candidate','Iron','Bronze','Silver','Gold','Platinum','Diamond','Legend'];
+    let barFill = 0, barColor = t.color, reqText = '';
+    if (rank === 0) { barFill = 0; reqText = 'Make your first pick to advance'; }
+    else if (rank === 1) { barFill = Math.min(judged / 10, 1); reqText = `${Math.max(10 - judged, 0)} more judged picks to Iron`; }
+    else if (rank === 2) { barFill = Math.min(pct / 40, 1); reqText = pct < 40 ? `${(40 - pct).toFixed(1)}% accuracy needed for Bronze` : 'Almost there!'; }
+    else if (rank === 3) { barFill = Math.min((pct - 40) / 10, 1); reqText = `${Math.max(50 - pct, 0).toFixed(1)}% more accuracy for Silver`; }
+    else if (rank === 4) { barFill = Math.min((pct - 50) / 5, 1); reqText = `${Math.max(55 - pct, 0).toFixed(1)}% more accuracy for Gold`; }
+    else if (rank === 5) { barFill = Math.min(Math.min((pct - 55) / 5, 1) * 0.5 + Math.min(judged / 30, 1) * 0.5, 1); reqText = pct < 60 ? `${Math.max(60 - pct, 0).toFixed(1)}% accuracy + ${Math.max(30 - judged, 0)} picks for Platinum` : `${Math.max(30 - judged, 0)} more judged picks for Platinum`; }
+    else if (rank === 6) { barFill = Math.min(Math.min((pct - 60) / 5, 1) * 0.5 + Math.min(judged / 60, 1) * 0.5, 1); reqText = pct < 65 ? `${Math.max(65 - pct, 0).toFixed(1)}% accuracy + ${Math.max(60 - judged, 0)} picks for Diamond` : `${Math.max(60 - judged, 0)} more judged picks for Diamond`; }
+    else if (rank === 7) { barFill = Math.min(Math.min((pct - 65) / 5, 1) * 0.5 + Math.min(judged / 60, 1) * 0.5, 1); reqText = pct < 70 ? `${Math.max(70 - pct, 0).toFixed(1)}% accuracy for Legend` : `${Math.max(60 - judged, 0)} more judged picks for Legend`; }
+    else { barFill = 1; reqText = 'Maximum tier achieved! 🏆'; barColor = '#c8960c'; }
+
+    barFill = Math.max(0, Math.min(1, barFill));
+
     tierEl.innerHTML = `
       <span class="lb-my-tier-label">Your Tier</span>
       <span class="lb-my-tier-badge" style="color:${t.color};border-color:${t.color}44">${t.name}</span>
-      <span class="lb-my-tier-sub">${myUser.judged} judged · ${myUser.pct !== null ? myUser.pct+'%' : '—'} accuracy</span>
-      ${myUser.tierRank < 8 ? `<span class="lb-my-tier-next">Next: ${['Candidate','Iron','Bronze','Silver','Gold','Platinum','Diamond','Legend'][myUser.tierRank]}</span>` : '<span class="lb-my-tier-next">Maximum tier achieved!</span>'}
+      <span class="lb-my-tier-sub">${judged} judged · ${myUser.pct !== null ? myUser.pct + '%' : '—'} accuracy</span>
+      <div class="lb-my-tier-progress-wrap">
+        <div class="lb-my-tier-progress-labels">
+          <span>${t.name}</span>
+          ${rank < 8 ? `<span>${tierNames[rank + 1]}</span>` : ''}
+        </div>
+        <div class="lb-my-tier-progress-bar">
+          <div class="lb-my-tier-progress-fill" style="width:${Math.round(barFill * 100)}%;background:${barColor}"></div>
+        </div>
+        <div class="lb-my-tier-req">${reqText}</div>
+      </div>
     `;
     const wrap = document.getElementById('lbGlobalWrap');
     if (wrap) wrap.insertAdjacentElement('beforebegin', tierEl);
