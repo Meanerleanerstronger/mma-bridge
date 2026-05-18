@@ -856,7 +856,147 @@ function formatOdds(n) {
         </div>
         ${fotnPts > 0 ? `<div class="pk-score-hero-fotn-bonus">⚡ +${fotnPts} FOTN Bonus</div>` : ''}
         ${careerPct !== null ? `<div class="pk-score-hero-career">All-time: ${careerCorrect}/${careerJudged} picks · ${careerPct}%</div>` : ''}
+        <button class="pk-share-hero-btn" id="pkShareHeroBtn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          Share Result
+        </button>
       </div>`;
+  }
+
+  // ── Share picks card ──────────────────────────────────────────────
+  function initShareBtn() {
+    document.getElementById('pkShareHeroBtn')?.addEventListener('click', () => {
+      const { correct, total, totalPts, fotnPts } = computeScore();
+      const pct = Math.round((correct / total) * 100);
+      const verdict = pct >= 70 ? 'Sharp' : pct >= 50 ? 'Solid' : 'Rough Night';
+      const evName = event.name || 'UFC Event';
+      const evId   = event.id || eventId;
+      triggerShare(evName, correct, total, pct, verdict, totalPts, evId);
+    });
+  }
+
+  function triggerShare(evName, correct, total, pct, verdict, totalPts, evId) {
+    const emoji  = pct >= 70 ? '🔥' : pct >= 50 ? '💪' : '😤';
+    const text   = `${emoji} I went ${correct}/${total} on ${evName} (${pct}% · ${verdict})\nCan you beat me?`;
+    const url    = `https://mmabridge.com/picks.html?id=${evId}`;
+    try {
+      const canvas = buildShareCanvas(evName, correct, total, pct, verdict, totalPts);
+      canvas.toBlob(blob => {
+        const file = new File([blob], 'mmabridge-picks.png', { type: 'image/png' });
+        if (navigator.canShare?.({ files: [file] })) {
+          navigator.share({ title: `MMA Bridge — ${evName}`, text, files: [file] }).catch(() => {});
+        } else {
+          showShareModal(canvas.toDataURL(), text, url);
+        }
+      });
+    } catch {
+      if (navigator.share) navigator.share({ title: 'MMA Bridge', text, url }).catch(() => {});
+      else showShareModal(null, text, url);
+    }
+  }
+
+  function buildShareCanvas(evName, correct, total, pct, verdict, totalPts) {
+    const W = 800, H = 420;
+    const c = document.createElement('canvas');
+    c.width = W; c.height = H;
+    const ctx = c.getContext('2d');
+
+    // Background
+    ctx.fillStyle = '#0a0a0d';
+    ctx.fillRect(0, 0, W, H);
+
+    // Subtle grid
+    ctx.strokeStyle = 'rgba(255,255,255,0.025)';
+    ctx.lineWidth = 1;
+    for (let x = 0; x < W; x += 60) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+    for (let y = 0; y < H; y += 60) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+
+    // Gold top bar
+    const bar = ctx.createLinearGradient(0, 0, W, 0);
+    bar.addColorStop(0, '#c8960c'); bar.addColorStop(1, 'rgba(200,150,12,0.2)');
+    ctx.fillStyle = bar; ctx.fillRect(0, 0, W, 4);
+
+    // Brand label
+    ctx.font = '800 12px sans-serif';
+    ctx.fillStyle = 'rgba(200,150,12,0.55)';
+    ctx.fillText('MMA BRIDGE', 48, 58);
+
+    // Event name
+    const short = evName.length > 40 ? evName.slice(0, 38) + '…' : evName;
+    ctx.font = '900 26px sans-serif';
+    ctx.fillStyle = 'rgba(255,255,255,0.88)';
+    ctx.fillText(short.toUpperCase(), 48, 100);
+
+    // Divider
+    ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+    ctx.beginPath(); ctx.moveTo(48, 124); ctx.lineTo(W - 48, 124); ctx.stroke();
+
+    // Big correct count
+    ctx.font = '900 100px sans-serif';
+    ctx.fillStyle = '#c8960c';
+    ctx.fillText(`${correct}`, 48, 258);
+    const cw = ctx.measureText(`${correct}`).width;
+    ctx.font = '900 52px sans-serif';
+    ctx.fillStyle = 'rgba(255,255,255,0.22)';
+    ctx.fillText(`/ ${total}`, 48 + cw + 6, 248);
+
+    // PCT right-aligned
+    ctx.textAlign = 'right';
+    ctx.font = '900 68px sans-serif';
+    ctx.fillStyle = pct >= 70 ? '#c8960c' : pct >= 50 ? 'rgba(200,150,12,0.7)' : 'rgba(255,100,100,0.8)';
+    ctx.fillText(`${pct}%`, W - 48, 228);
+    ctx.font = '700 18px sans-serif';
+    ctx.fillStyle = 'rgba(255,255,255,0.38)';
+    ctx.fillText(verdict.toUpperCase(), W - 48, 258);
+    ctx.textAlign = 'left';
+
+    // Points
+    ctx.font = '500 13px sans-serif';
+    ctx.fillStyle = 'rgba(255,255,255,0.28)';
+    ctx.fillText(`${totalPts} PTS`, 48, 296);
+
+    // Bottom divider + CTA
+    ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+    ctx.beginPath(); ctx.moveTo(48, 336); ctx.lineTo(W - 48, 336); ctx.stroke();
+    ctx.font = '500 13px sans-serif';
+    ctx.fillStyle = 'rgba(255,255,255,0.22)';
+    ctx.fillText('Can you beat me?', 48, 374);
+    ctx.textAlign = 'right';
+    ctx.font = '700 13px sans-serif';
+    ctx.fillStyle = 'rgba(200,150,12,0.65)';
+    ctx.fillText('mmabridge.com', W - 48, 374);
+    ctx.textAlign = 'left';
+
+    return c;
+  }
+
+  function showShareModal(imgDataUrl, text, url) {
+    document.getElementById('pkShareModal')?.remove();
+    const tweetHref = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+    const el = document.createElement('div');
+    el.id = 'pkShareModal';
+    el.className = 'pk-shr-overlay';
+    el.innerHTML = `
+      <div class="pk-shr-panel">
+        <button class="pk-shr-close" id="pkShrClose">✕</button>
+        <div class="pk-shr-title">Share Your Result</div>
+        ${imgDataUrl ? `<img class="pk-shr-img" src="${imgDataUrl}" alt="My picks card">` : ''}
+        <div class="pk-shr-actions">
+          ${imgDataUrl ? `<a class="pk-shr-btn pk-shr-save" href="${imgDataUrl}" download="mmabridge-picks.png">⬇ Save Image</a>` : ''}
+          <a class="pk-shr-btn pk-shr-tweet" href="${tweetHref}" target="_blank" rel="noopener">Post on X</a>
+          <button class="pk-shr-btn pk-shr-copy" id="pkShrCopy">Copy Link</button>
+        </div>
+      </div>`;
+    document.body.appendChild(el);
+    const close = () => el.remove();
+    el.addEventListener('click', e => { if (e.target === el) close(); });
+    document.getElementById('pkShrClose')?.addEventListener('click', close);
+    document.getElementById('pkShrCopy')?.addEventListener('click', () => {
+      navigator.clipboard?.writeText(url).then(() => {
+        const btn = document.getElementById('pkShrCopy');
+        if (btn) { btn.textContent = 'Copied! ✓'; setTimeout(() => { if (btn) btn.textContent = 'Copy Link'; }, 2000); }
+      }).catch(() => {});
+    });
   }
 
   // Countdown pill for upcoming events
@@ -1012,6 +1152,7 @@ function formatOdds(n) {
     bindHype();
     bindFotn();
     updateFotnBar();
+    initShareBtn();
     requestAnimationFrame(() => {
       initSpine();
       animateFightEntrance();

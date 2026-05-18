@@ -39,7 +39,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Pacifico&display=swap" rel="stylesheet">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="style.css?v=6.8" />
+  <link rel="stylesheet" href="style.css?v=6.9" />
 
   <style>
     @media (max-width: 768px) {
@@ -186,6 +186,40 @@
 </head>
 
 <body>
+
+  <!-- WELCOME MODAL — first-visit onboarding -->
+  <div id="welcomeModal" class="wlc-overlay" aria-modal="true" role="dialog" aria-label="Welcome to MMA Bridge" style="display:none">
+    <div class="wlc-modal">
+      <button class="wlc-close" id="wlcClose" aria-label="Close">✕</button>
+      <div class="wlc-eyebrow">YOUR UFC HUB</div>
+      <h2 class="wlc-title">Welcome to<br><span>MMA Bridge</span></h2>
+      <div class="wlc-features">
+        <div class="wlc-feat">
+          <span class="wlc-feat-icon">🥊</span>
+          <div>
+            <div class="wlc-feat-title">Pick Every Fight</div>
+            <div class="wlc-feat-sub">Predict winners, methods & rounds for every UFC event</div>
+          </div>
+        </div>
+        <div class="wlc-feat">
+          <span class="wlc-feat-icon">🏆</span>
+          <div>
+            <div class="wlc-feat-title">Compete on the Leaderboard</div>
+            <div class="wlc-feat-sub">Track your pick accuracy and rank against the community</div>
+          </div>
+        </div>
+        <div class="wlc-feat">
+          <span class="wlc-feat-icon">⭐</span>
+          <div>
+            <div class="wlc-feat-title">Rate & Review Events</div>
+            <div class="wlc-feat-sub">Score cards, vote FOTN, and see what the community thinks</div>
+          </div>
+        </div>
+      </div>
+      <a href="auth.html" class="wlc-cta">Create Free Account →</a>
+      <button class="wlc-skip" id="wlcSkip">Browse as guest</button>
+    </div>
+  </div>
 
   <!-- NAVBAR -->
   <nav class="navbar">

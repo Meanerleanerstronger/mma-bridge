@@ -430,3 +430,20 @@ function startLiveFeed() {
 }
 
 startLiveFeed();
+
+// ── Welcome modal — first-visit onboarding ────────────────────────
+(function initWelcome() {
+  if (localStorage.getItem('mma_bridge_welcomed')) return;
+  const modal = document.getElementById('welcomeModal');
+  if (!modal) return;
+  setTimeout(() => { modal.style.display = 'flex'; }, 1400);
+  function dismiss() {
+    modal.style.opacity = '0';
+    setTimeout(() => { modal.style.display = 'none'; }, 220);
+    localStorage.setItem('mma_bridge_welcomed', '1');
+  }
+  modal.addEventListener('click', e => { if (e.target === modal) dismiss(); });
+  document.getElementById('wlcClose')?.addEventListener('click', dismiss);
+  document.getElementById('wlcSkip')?.addEventListener('click', dismiss);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.style.display !== 'none') dismiss(); });
+})();
