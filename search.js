@@ -108,7 +108,7 @@
           </div>
           <div class="sd-info">
             <span class="sd-name">${escHtml(u.display_name || 'Fighter')}</span>
-            <span class="sd-sub">MMA Bridge member</span>
+            <span class="sd-sub sd-view-profile">View profile →</span>
           </div>
           <button class="sd-challenge-btn" data-uid="${escHtml(u.id)}" data-uname="${escHtml(u.display_name || 'Fighter')}">Challenge</button>
         `, () => {

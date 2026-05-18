@@ -95,13 +95,14 @@
       return;
     }
 
-    // Load their ratings, picks, favs, and events in parallel (public)
-    const [ratingsResult, eventsResult, fightersResult, picksResult, profileExtResult] = await Promise.all([
+    // Load their ratings, picks, favs, events, and fight_results in parallel (public)
+    const [ratingsResult, eventsResult, fightersResult, picksResult, profileExtResult, resultsResult] = await Promise.all([
       sb.from('ratings').select('id, event_id, event_name, hype_rating, review_text, created_at').eq('user_id', viewedUserId).order('created_at', { ascending: false }),
       fetch('./events.json').then(r => r.ok ? r.json() : []).catch(() => []),
       fetch('./data/fighters.json').then(r => r.ok ? r.json() : []).catch(() => []),
       sb.from('picks').select('event_id, fight_key, pick').eq('user_id', viewedUserId).neq('fight_key', 'fotn'),
       sb.from('profiles').select('fav_fighters').eq('id', viewedUserId).single(),
+      sb.from('fight_results').select('event_id, fight_key, winner').neq('fight_key', '__fotn__'),
     ]);
 
     const ratings = ratingsResult.data || [];
@@ -114,14 +115,34 @@
       eventMap[id] = ev;
     });
 
+    // Build winner lookup (fight_results DB rows + events.json completed fights)
+    const winnerMap = {};
+    (resultsResult.data || []).forEach(r => {
+      if (r.winner) winnerMap[`${r.event_id}:${r.fight_key}`] = r.winner.toLowerCase();
+    });
+    events.forEach(ev => {
+      const evId = ev.id || slugify(ev.name || '');
+      [['main', ev.mainCard || []], ['prelims', ev.prelims || []], ['early', ev.earlyPrelims || []]].forEach(([key, fights]) => {
+        fights.forEach((f, i) => {
+          if (f.winner) winnerMap[`${evId}:${key}-${i}`] = f.winner.toLowerCase();
+        });
+      });
+    });
+
     const picks = picksResult.data || [];
-    const pickEventMap = {};
+    let correctPicks = 0, scoredPicks = 0;
+    const pickEventSet = new Set();
     picks.forEach(p => {
-      if (!pickEventMap[p.event_id]) pickEventMap[p.event_id] = { total: 0, correct: 0 };
-      pickEventMap[p.event_id].total++;
+      pickEventSet.add(p.event_id);
+      const actual = winnerMap[`${p.event_id}:${p.fight_key}`];
+      if (actual) {
+        scoredPicks++;
+        if (p.pick && p.pick.toLowerCase() === actual) correctPicks++;
+      }
     });
     const totalPicks = picks.length;
-    const eventsPickedCount = Object.keys(pickEventMap).length;
+    const eventsPickedCount = pickEventSet.size;
+    const accuracy = scoredPicks > 0 ? Math.round((correctPicks / scoredPicks) * 100) : null;
 
     const totalRatings = ratings.length;
     const avgRating = totalRatings
@@ -206,25 +227,22 @@
       <div class="pr-stats">
         <div class="pr-stats-inner">
           <div class="pr-stat">
-            <div class="pr-stat-num">${totalRatings}</div>
-            <div class="pr-stat-lbl">Events Rated</div>
-          </div>
-          <div class="pr-stat">
-            <div class="pr-stat-num">${avgRating}</div>
-            <div class="pr-stat-lbl">Avg Rating</div>
-          </div>
-          <div class="pr-stat">
-            <div class="pr-stat-num">${eventsPickedCount}</div>
+            <div class="pr-stat-num">${eventsPickedCount || '—'}</div>
             <div class="pr-stat-lbl">Events Picked</div>
           </div>
           <div class="pr-stat">
-            <div class="pr-stat-num">${totalPicks || '—'}</div>
-            <div class="pr-stat-lbl">Total Picks</div>
+            <div class="pr-stat-num">${accuracy !== null ? accuracy + '%' : '—'}</div>
+            <div class="pr-stat-lbl">Pick Accuracy</div>
+          </div>
+          <div class="pr-stat">
+            <div class="pr-stat-num">${totalRatings || '—'}</div>
+            <div class="pr-stat-lbl">Events Rated</div>
           </div>
         </div>
       </div>
 
       <div class="pr-body">
+        ${buildOtherPickHistorySection(picks, pickEventSet, winnerMap, eventMap)}
         ${buildOtherRatingsSection(ratings, eventMap)}
         ${favsHtml}
       </div>
@@ -924,6 +942,61 @@
   }
 
   // ── Helpers for OTHER user profile ───────────────────────────────────────
+
+  function buildOtherPickHistorySection(picks, pickEventSet, winnerMap, eventMap) {
+    if (!picks.length) {
+      return `
+        <div class="pr-section" style="animation-delay:0.08s">
+          <div class="pr-section-title">Pick History</div>
+          <div class="pr-empty-premium">
+            <div class="pr-empty-title">No Picks Yet</div>
+            <div class="pr-empty-sub">This user hasn't made any fight picks</div>
+          </div>
+        </div>`;
+    }
+
+    // Group picks by event and compute per-event accuracy
+    const evStats = {};
+    picks.forEach(p => {
+      if (!evStats[p.event_id]) evStats[p.event_id] = { total: 0, correct: 0, scored: 0 };
+      evStats[p.event_id].total++;
+      const actual = winnerMap[`${p.event_id}:${p.fight_key}`];
+      if (actual) {
+        evStats[p.event_id].scored++;
+        if (p.pick && p.pick.toLowerCase() === actual) evStats[p.event_id].correct++;
+      }
+    });
+
+    // Sort events by date descending
+    const evIds = [...pickEventSet].sort((a, b) => {
+      const da = eventMap[a]?.isoDate || '0';
+      const db = eventMap[b]?.isoDate || '0';
+      return db.localeCompare(da);
+    });
+
+    const rows = evIds.map(evId => {
+      const ev = eventMap[evId];
+      const name = ev?.name || evId;
+      const s = evStats[evId];
+      const pct = s.scored > 0 ? Math.round((s.correct / s.scored) * 100) : null;
+      const verdict = pct === null ? 'Pending' : pct >= 75 ? 'Sharp' : pct >= 50 ? 'Solid' : 'Rough';
+      const verdictClass = pct === null ? '' : pct >= 75 ? 'sharp' : pct >= 50 ? 'solid' : 'rough';
+      return `
+        <div class="pr-ph-row">
+          <div class="pr-ph-event">${esc(name)}</div>
+          <div class="pr-ph-score">${s.correct}<span>/${s.scored || s.total}</span></div>
+          <div class="pr-ph-pct">${pct !== null ? pct + '%' : '—'}</div>
+          <div class="pr-ph-bar"><div class="pr-ph-fill" style="width:${pct ?? 0}%"></div></div>
+          <div class="pr-ph-verdict ${verdictClass}">${verdict}</div>
+        </div>`;
+    }).join('');
+
+    return `
+      <div class="pr-section" style="animation-delay:0.08s">
+        <div class="pr-section-title">Pick History <span class="pr-section-count">${evIds.length}</span></div>
+        <div class="pr-ph-table">${rows}</div>
+      </div>`;
+  }
 
   function buildOtherRatingsSection(ratings, eventMap) {
     if (!ratings.length) {
