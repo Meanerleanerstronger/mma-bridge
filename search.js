@@ -114,6 +114,7 @@
         `, () => {
           input.value = '';
           hideDrop();
+          window.location.href = `profile.html?user=${encodeURIComponent(u.id)}`;
         });
         // Challenge button — mousedown to fire before row blur
         const chBtn = row.querySelector('.sd-challenge-btn');

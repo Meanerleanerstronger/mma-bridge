@@ -24,6 +24,7 @@
     event: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>`,
     bell:  `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>`,
     star:  `<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+    challenge: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
   };
 
   function slugify(s) {
@@ -227,16 +228,34 @@
       this.updateBadge();
     },
 
-    _renderList() {
+    async _renderList() {
       const listEl   = document.getElementById('notifList');
       const footerEl = document.getElementById('notifDropFooter');
       const markBtn  = document.getElementById('notifMarkAll');
       if (!listEl) return;
 
+      // Load challenges from Supabase
+      let pendingChallenges = [];
+      const sb = window._sb;
+      if (sb) {
+        try {
+          const { data: { session } } = await sb.auth.getSession();
+          const me = session?.user;
+          if (me) {
+            const { data } = await sb.from('challenges')
+              .select('id, challenger_id, event_id, event_name, created_at, profiles!challenger_id(display_name)')
+              .eq('opponent_id', me.id)
+              .eq('status', 'pending')
+              .order('created_at', { ascending: false });
+            pendingChallenges = data || [];
+          }
+        } catch {}
+      }
+
       const notifs = getNotifs();
       const fav    = getFav();
 
-      if (!notifs.length) {
+      if (!notifs.length && !pendingChallenges.length) {
         listEl.innerHTML = `
           <div class="notif-empty">
             <div class="notif-empty-icon">${SVG.bell}</div>
@@ -244,8 +263,25 @@
             <div class="notif-empty-hint">Star events or set a favorite fighter to get alerts</div>
           </div>`;
       } else {
+        const challengeHtml = pendingChallenges.map(c => {
+          const from = c.profiles?.display_name || 'Someone';
+          const evName = c.event_name || c.event_id || 'an event';
+          return `
+            <div class="notif-item notif-challenge" data-ch-id="${esc(c.id)}" data-ev-id="${esc(c.event_id)}">
+              <span class="notif-item-icon">${SVG.challenge}</span>
+              <div class="notif-item-body">
+                <div class="notif-item-title"><strong>${esc(from)}</strong> challenged you!</div>
+                <div class="notif-item-sub">${esc(evName)}</div>
+              </div>
+              <div class="notif-ch-actions">
+                <button class="notif-ch-accept" data-ch-id="${esc(c.id)}" data-ev-id="${esc(c.event_id)}" title="Accept">✓</button>
+                <button class="notif-ch-decline" data-ch-id="${esc(c.id)}" title="Decline">✕</button>
+              </div>
+            </div>`;
+        }).join('');
+
         const iconMap = { fight_upcoming: SVG.fight, fight_day: SVG.dayof, new_event: SVG.event };
-        listEl.innerHTML = notifs.slice(0, 12).map(n => {
+        const regularHtml = notifs.slice(0, 12).map(n => {
           let title = esc(n.title);
           if (n.type === 'fight_upcoming' && n.eventDate) {
             const d = daysUntil(n.eventDate);
@@ -262,8 +298,34 @@
               ${!n.read ? '<span class="notif-unread-dot"></span>' : ''}
             </a>`;
         }).join('');
+
+        listEl.innerHTML = challengeHtml + regularHtml;
+
         listEl.querySelectorAll('.notif-item[data-id]').forEach(el => {
           el.addEventListener('click', () => this.markRead(el.dataset.id));
+        });
+
+        listEl.querySelectorAll('.notif-ch-accept').forEach(btn => {
+          btn.addEventListener('click', async e => {
+            e.preventDefault(); e.stopPropagation();
+            const chId = btn.dataset.chId;
+            const evId = btn.dataset.evId;
+            try {
+              await sb.from('challenges').update({ status: 'accepted' }).eq('id', chId);
+              btn.closest('.notif-challenge').remove();
+              window.location.href = `picks.html?id=${encodeURIComponent(evId)}`;
+            } catch { btn.textContent = '!'; }
+          });
+        });
+
+        listEl.querySelectorAll('.notif-ch-decline').forEach(btn => {
+          btn.addEventListener('click', async e => {
+            e.preventDefault(); e.stopPropagation();
+            try {
+              await sb.from('challenges').update({ status: 'declined' }).eq('id', btn.dataset.chId);
+              btn.closest('.notif-challenge').remove();
+            } catch { btn.textContent = '!'; }
+          });
         });
       }
 
@@ -410,6 +472,28 @@
   document.addEventListener('DOMContentLoaded', () => {
     MMANotif.init();
     renderSidebarWidget();
+
+    // Load challenge count for badge
+    if (window._sb) {
+      window._sb.auth.getSession().then(({ data: { session } }) => {
+        if (!session?.user) return;
+        window._sb.from('challenges')
+          .select('id', { count: 'exact' })
+          .eq('opponent_id', session.user.id)
+          .eq('status', 'pending')
+          .then(({ count }) => {
+            if (count > 0) {
+              const badge = document.getElementById('notifBadge');
+              if (badge) {
+                const current = parseInt(badge.textContent) || 0;
+                badge.textContent = current + count > 9 ? '9+' : String(current + count);
+                badge.style.display = 'flex';
+                document.getElementById('notifBellBtn')?.classList.add('has-notifs');
+              }
+            }
+          }).catch(() => {});
+      }).catch(() => {});
+    }
     document.getElementById('favModalBg')?.addEventListener('click', e => {
       if (e.target === e.currentTarget) MMANotif.closeModal();
     });

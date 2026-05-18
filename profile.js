@@ -95,27 +95,69 @@
       return;
     }
 
-    // Load their ratings (public)
-    const [ratingsResult, eventsResult] = await Promise.all([
-      sb.from('ratings')
-        .select('id, event_id, event_name, hype_rating, review_text, created_at')
-        .eq('user_id', viewedUserId)
-        .order('created_at', { ascending: false }),
+    // Load their ratings, picks, favs, and events in parallel (public)
+    const [ratingsResult, eventsResult, fightersResult, picksResult, profileExtResult] = await Promise.all([
+      sb.from('ratings').select('id, event_id, event_name, hype_rating, review_text, created_at').eq('user_id', viewedUserId).order('created_at', { ascending: false }),
       fetch('./events.json').then(r => r.ok ? r.json() : []).catch(() => []),
+      fetch('./data/fighters.json').then(r => r.ok ? r.json() : []).catch(() => []),
+      sb.from('picks').select('event_id, fight_key, pick').eq('user_id', viewedUserId).neq('fight_key', 'fotn'),
+      sb.from('profiles').select('fav_fighters').eq('id', viewedUserId).single(),
     ]);
 
     const ratings = ratingsResult.data || [];
     const events  = Array.isArray(eventsResult) ? eventsResult : [];
+    const fighters = Array.isArray(fightersResult) ? fightersResult : [];
+    const favFighterIds = profileExtResult.data?.fav_fighters || [];
     const eventMap = {};
     events.forEach(ev => {
       const id = ev.id || slugify(ev.name || '');
       eventMap[id] = ev;
     });
 
+    const picks = picksResult.data || [];
+    const pickEventMap = {};
+    picks.forEach(p => {
+      if (!pickEventMap[p.event_id]) pickEventMap[p.event_id] = { total: 0, correct: 0 };
+      pickEventMap[p.event_id].total++;
+    });
+    const totalPicks = picks.length;
+    const eventsPickedCount = Object.keys(pickEventMap).length;
+
     const totalRatings = ratings.length;
     const avgRating = totalRatings
       ? (ratings.reduce((s, r) => s + Number(r.hype_rating), 0) / totalRatings).toFixed(1)
       : '—';
+
+    // Build fav fighters HTML
+    let favsHtml = '';
+    if (favFighterIds.length) {
+      const favCards = favFighterIds.map(fid => {
+        const f = fighters.find(x => x.id === fid);
+        if (!f) return '';
+        const initials = f.name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+        const record = f.record ? `${f.record.wins||0}-${f.record.losses||0}` : '';
+        return `
+          <a class="pr-fav-card" href="fighter.html?id=${encodeURIComponent(f.id)}">
+            <div class="pr-fav-photo-wrap">
+              ${f.img ? `<img class="pr-fav-photo" src="${esc(f.img)}" alt="${esc(f.name)}">` : ''}
+              <div class="pr-fav-initial-lg" style="${f.img ? 'display:none' : ''}">${esc(initials)}</div>
+              <div class="pr-fav-photo-grad"></div>
+            </div>
+            <div class="pr-fav-body">
+              <div class="pr-fav-name">${esc(f.name)}</div>
+              <div class="pr-fav-meta">${record ? `<span class="pr-fav-record">${esc(record)}</span>` : ''}${f.flag ? `<span>${esc(f.flag)}</span>` : ''}</div>
+            </div>
+          </a>`;
+      }).filter(Boolean).join('');
+
+      if (favCards) {
+        favsHtml = `
+          <div class="pr-section" style="animation-delay:0.15s">
+            <div class="pr-section-title">Their Corner</div>
+            <div class="pr-favs-grid">${favCards}</div>
+          </div>`;
+      }
+    }
 
     // Build other-user profile UI
     const initials = (profileData.display_name || 'U').split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
@@ -154,6 +196,9 @@
                 : `<a class="profile-follow-btn" href="auth.html">Sign in to Follow</a>`
               }
             </div>
+            ${loggedInUser && loggedInUser.id !== viewedUserId
+              ? `<button class="pr-challenge-btn" id="prChallengeBtn" data-uid="${esc(viewedUserId)}" data-uname="${esc(profileData.display_name || 'Fighter')}">Challenge</button>`
+              : ''}
           </div>
         </div>
       </div>
@@ -168,13 +213,27 @@
             <div class="pr-stat-num">${avgRating}</div>
             <div class="pr-stat-lbl">Avg Rating</div>
           </div>
+          <div class="pr-stat">
+            <div class="pr-stat-num">${eventsPickedCount}</div>
+            <div class="pr-stat-lbl">Events Picked</div>
+          </div>
+          <div class="pr-stat">
+            <div class="pr-stat-num">${totalPicks || '—'}</div>
+            <div class="pr-stat-lbl">Total Picks</div>
+          </div>
         </div>
       </div>
 
       <div class="pr-body">
         ${buildOtherRatingsSection(ratings, eventMap)}
+        ${favsHtml}
       </div>
     `;
+
+    // Wire challenge button
+    document.getElementById('prChallengeBtn')?.addEventListener('click', () => {
+      window.openChallengeModal?.(viewedUserId, profileData.display_name || 'Fighter');
+    });
 
     // Load follow data
     loadOtherUserFollowData(viewedUserId, loggedInUser);
@@ -297,6 +356,9 @@
   function saveFavs(ids) {
     try { localStorage.setItem(FAVS_KEY, JSON.stringify(ids)); } catch {}
     window.MMABridgePush?.updateFavFighters(ids, fighterById).catch?.(() => {});
+    if (sb && user?.id) {
+      sb.from('profiles').update({ fav_fighters: ids }).eq('id', user.id).then(() => {}).catch(() => {});
+    }
   }
 
   // ── Compute stats ─────────────────────────────
