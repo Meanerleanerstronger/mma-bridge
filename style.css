@@ -9037,6 +9037,56 @@ button { min-height: 44px; }
   .pk-seg-btn { min-height: 44px; }
 }
 
+/* ======= FIGHTER PROFILE ENHANCEMENTS ======= */
+.fp-rank-up {
+  color: #00c864; font-size: 0.6rem; font-weight: 900;
+  font-family: 'Montserrat', sans-serif; margin-left: 4px;
+}
+.fp-rank-down {
+  color: rgba(255,80,80,.8); font-size: 0.6rem; font-weight: 900;
+  font-family: 'Montserrat', sans-serif; margin-left: 4px;
+}
+.fp-rank-same {
+  color: rgba(255,255,255,.3); font-size: 0.6rem; margin-left: 4px;
+}
+.fp-fight-date {
+  font-family: 'Inter', sans-serif; font-size: 0.65rem;
+  color: rgba(255,255,255,.25); margin-left: 4px;
+}
+.fp-upcoming-banner {
+  background: linear-gradient(135deg, rgba(200,150,12,.12), rgba(200,150,12,.06));
+  border: 1px solid rgba(200,150,12,.35); border-radius: 14px;
+  padding: 18px 22px; margin: 16px 20px; text-align: center;
+  animation: fadeUp 0.4s ease both;
+}
+.fp-upcoming-label {
+  font-family: 'Montserrat', sans-serif; font-weight: 900;
+  font-size: 0.55rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: #c8960c; margin-bottom: 6px;
+}
+.fp-upcoming-matchup {
+  font-family: 'Montserrat', sans-serif; font-weight: 900;
+  font-size: 1.1rem; color: #fff; margin-bottom: 4px;
+}
+.fp-upcoming-matchup strong { color: #c8960c; }
+.fp-upcoming-event {
+  font-family: 'Inter', sans-serif; font-size: 0.75rem;
+  color: rgba(255,255,255,.45); margin-bottom: 12px;
+}
+.fp-upcoming-link {
+  display: inline-block; background: rgba(200,150,12,.2);
+  border: 1px solid rgba(200,150,12,.5); border-radius: 7px;
+  color: #c8960c; font-family: 'Montserrat', sans-serif;
+  font-weight: 800; font-size: 0.65rem; letter-spacing: 0.1em;
+  text-transform: uppercase; padding: 8px 16px; text-decoration: none;
+  transition: background 0.15s;
+}
+.fp-upcoming-link:hover { background: rgba(200,150,12,.35); }
+/* Light mode */
+body.light-mode .fp-upcoming-banner { background: rgba(200,150,12,.08) !important; }
+body.light-mode .fp-upcoming-matchup { color: #111 !important; }
+body.light-mode .fp-fight-date { color: rgba(0,0,0,.3) !important; }
+
 /* ── Profile page mobile ─────────────────────────────────────────── */
 @media (max-width: 640px) {
   .pr-hero-inner {

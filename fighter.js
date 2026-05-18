@@ -35,6 +35,45 @@
       if (!f) { renderNotFound(`Fighter "${escHtml(fighterName || fighterId)}" not found.`); return; }
       document.title = `${f.name} — MMA Bridge`;
       renderProfile(f);
+
+      // ── Upcoming fight banner ─────────────────
+      fetch('events.json')
+        .then(r => r.ok ? r.json() : [])
+        .then(events => {
+          const now = new Date();
+          let foundFight = null, foundEvent = null;
+          for (const ev of events) {
+            if (ev.status !== 'upcoming' || !ev.isoDate) continue;
+            if (new Date(ev.isoDate) < now) continue;
+            const allFights = [...(ev.mainCard || []), ...(ev.prelims || []), ...(ev.earlyPrelims || [])];
+            for (const fight of allFights) {
+              const fSlug = slugify(f.name);
+              if (slugify(fight.a || '') === fSlug || slugify(fight.b || '') === fSlug) {
+                foundFight = fight;
+                foundEvent = ev;
+                break;
+              }
+            }
+            if (foundFight) break;
+          }
+          if (foundFight && foundEvent) {
+            const opponent = slugify(foundFight.a) === slugify(f.name) ? foundFight.b : foundFight.a;
+            const evDate = foundEvent.isoDate
+              ? new Date(foundEvent.isoDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+              : foundEvent.date || '';
+            const banner = document.createElement('div');
+            banner.className = 'fp-upcoming-banner';
+            banner.innerHTML = `
+              <div class="fp-upcoming-label">UPCOMING FIGHT</div>
+              <div class="fp-upcoming-matchup">vs <strong>${escHtml(opponent)}</strong></div>
+              <div class="fp-upcoming-event">${escHtml(foundEvent.name || '')} · ${escHtml(evDate)}</div>
+              <a class="fp-upcoming-link" href="picks.html?id=${encodeURIComponent(foundEvent.id || '')}">Make Your Picks →</a>
+            `;
+            const hero = root.querySelector('.fp-hero');
+            if (hero) root.insertBefore(banner, hero);
+          }
+        })
+        .catch(() => {});
     })
     .catch(() => renderNotFound('Could not load fighter data.'));
 
@@ -67,7 +106,7 @@
     return 'fp-wl-nc';
   }
 
-  // ── Last 5 fights ─────────────────────────
+  // ── Recent fights ─────────────────────────
   function buildFights(last5) {
     if (!last5 || !last5.length) return '';
     const cards = last5.map(fight => {
@@ -76,6 +115,9 @@
       const rd   = fight.round ? `Rd ${fight.round}` : '';
       const tm   = fight.time  || '';
       const detail = [rd, tm].filter(Boolean).join(' · ');
+      const dateStr = fight.date
+        ? new Date(fight.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+        : '';
       return `
         <div class="fp-fight-card">
           <div class="fp-wl ${wlClass(r)}">${escHtml(r)}</div>
@@ -84,13 +126,14 @@
             <div class="fp-fight-meta">
               <span class="fp-method-badge ${methodClass(meth)}">${escHtml(meth)}</span>
               ${detail ? `<span class="fp-fight-detail">${escHtml(detail)}</span>` : ''}
+              ${dateStr ? `<span class="fp-fight-date">${escHtml(dateStr)}</span>` : ''}
             </div>
           </div>
           <div class="fp-fight-event">${escHtml(fight.event || '')}</div>
         </div>`;
     }).join('');
     return `
-      <div class="fp-section-label">Last 5 Fights</div>
+      <div class="fp-section-label">Recent Fights</div>
       ${cards}`;
   }
 
@@ -127,7 +170,15 @@
     if (isChamp) {
       badgesHtml += `<span class="fp-badge fp-badge-champ">🏆 ${escHtml(f.ranking)}</span>`;
     } else if (f.ranking) {
-      badgesHtml += `<span class="fp-badge fp-badge-rank">${escHtml(f.ranking)}</span>`;
+      let changeHtml = '';
+      if (typeof f.ranking_change === 'number' && f.ranking_change > 0) {
+        changeHtml = `<span class="fp-rank-up" title="Rose ${f.ranking_change} spot${Math.abs(f.ranking_change) !== 1 ? 's' : ''}">▲${f.ranking_change}</span>`;
+      } else if (typeof f.ranking_change === 'number' && f.ranking_change < 0) {
+        changeHtml = `<span class="fp-rank-down" title="Fell ${Math.abs(f.ranking_change)} spot${Math.abs(f.ranking_change) !== 1 ? 's' : ''}">▼${Math.abs(f.ranking_change)}</span>`;
+      } else if (typeof f.ranking_change === 'number' && f.ranking_change === 0) {
+        changeHtml = `<span class="fp-rank-same">—</span>`;
+      }
+      badgesHtml += `<span class="fp-badge fp-badge-rank">${escHtml(f.ranking)}${changeHtml}</span>`;
     }
     if (f.pfp) {
       badgesHtml += `<span class="fp-badge fp-badge-pfp">★ P4P</span>`;

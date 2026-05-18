@@ -72,6 +72,7 @@
     "flag": "🇺🇸",
     "weightClass": "Heavyweight",
     "ranking": "#2",
+    "ranking_change": 1,
     "record": {
       "wins": 19,
       "losses": 6,
@@ -136,6 +137,7 @@
     "flag": "🇷🇺",
     "weightClass": "Heavyweight",
     "ranking": "#3",
+    "ranking_change": -1,
     "record": {
       "wins": 20,
       "losses": 3,
@@ -200,6 +202,7 @@
     "flag": "🇫🇷",
     "weightClass": "Heavyweight",
     "ranking": "#1",
+    "ranking_change": 0,
     "record": {
       "wins": 13,
       "losses": 2,
@@ -393,6 +396,7 @@
     "flag": "🇷🇺",
     "weightClass": "Light Heavyweight",
     "ranking": "#1",
+    "ranking_change": 1,
     "record": {
       "wins": 20,
       "losses": 2,
@@ -458,6 +462,7 @@
     "flag": "🇨🇿",
     "weightClass": "Light Heavyweight",
     "ranking": "#2",
+    "ranking_change": -1,
     "record": {
       "wins": 30,
       "losses": 5,
@@ -522,6 +527,7 @@
     "flag": "🇺🇸",
     "weightClass": "Light Heavyweight",
     "ranking": "#3",
+    "ranking_change": 2,
     "record": {
       "wins": 12,
       "losses": 6,
@@ -586,6 +592,7 @@
     "flag": "🇿🇦",
     "weightClass": "Middleweight",
     "ranking": "#1",
+    "ranking_change": 1,
     "record": {
       "wins": 23,
       "losses": 3,
@@ -651,6 +658,7 @@
     "flag": "🇦🇺",
     "weightClass": "Middleweight",
     "ranking": "#2",
+    "ranking_change": 0,
     "record": {
       "wins": 25,
       "losses": 7,
@@ -715,6 +723,7 @@
     "flag": "🇸🇪",
     "weightClass": "Middleweight",
     "ranking": "#1",
+    "ranking_change": 1,
     "record": {
       "wins": 15,
       "losses": 1,
@@ -846,6 +855,7 @@
     "flag": "🇳🇿",
     "weightClass": "Middleweight",
     "ranking": "#4",
+    "ranking_change": -1,
     "record": {
       "wins": 24,
       "losses": 4,
@@ -910,6 +920,7 @@
     "flag": "🇺🇸",
     "weightClass": "Welterweight",
     "ranking": "#2",
+    "ranking_change": 1,
     "record": {
       "wins": 24,
       "losses": 4,
@@ -974,6 +985,7 @@
     "flag": "🇦🇺",
     "weightClass": "Welterweight",
     "ranking": "#1",
+    "ranking_change": 2,
     "record": {
       "wins": 18,
       "losses": 3,
@@ -1039,6 +1051,7 @@
     "flag": "🇰🇿",
     "weightClass": "Welterweight",
     "ranking": "#2",
+    "ranking_change": -1,
     "record": {
       "wins": 18,
       "losses": 0,
@@ -1103,6 +1116,7 @@
     "flag": "🇬🇧",
     "weightClass": "Welterweight",
     "ranking": "#3",
+    "ranking_change": -2,
     "record": {
       "wins": 22,
       "losses": 4,
@@ -1232,6 +1246,7 @@
     "flag": "🇦🇲",
     "weightClass": "Lightweight",
     "ranking": "#1",
+    "ranking_change": 1,
     "record": {
       "wins": 23,
       "losses": 3,
@@ -1297,6 +1312,7 @@
     "flag": "🇧🇷",
     "weightClass": "Lightweight",
     "ranking": "#2",
+    "ranking_change": 0,
     "record": {
       "wins": 37,
       "losses": 11,
@@ -1361,6 +1377,7 @@
     "flag": "🇺🇸",
     "weightClass": "Lightweight",
     "ranking": "#3",
+    "ranking_change": -1,
     "record": {
       "wins": 25,
       "losses": 5,
@@ -1489,6 +1506,7 @@
     "flag": "🇺🇸",
     "weightClass": "Featherweight",
     "ranking": "#1",
+    "ranking_change": 0,
     "record": {
       "wins": 27,
       "losses": 9,
@@ -1554,6 +1572,7 @@
     "flag": "🇦🇺",
     "weightClass": "Featherweight",
     "ranking": "#2",
+    "ranking_change": -1,
     "record": {
       "wins": 27,
       "losses": 4,
@@ -1619,6 +1638,7 @@
     "flag": "🇷🇺",
     "weightClass": "Featherweight",
     "ranking": "#3",
+    "ranking_change": 1,
     "record": {
       "wins": 18,
       "losses": 0,
@@ -1683,6 +1703,7 @@
     "flag": "🇧🇷",
     "weightClass": "Featherweight",
     "ranking": "#6",
+    "ranking_change": 2,
     "record": {
       "wins": 17,
       "losses": 3,
@@ -1747,6 +1768,7 @@
     "flag": "🇬🇪",
     "weightClass": "Bantamweight",
     "ranking": "#1",
+    "ranking_change": 1,
     "record": {
       "wins": 21,
       "losses": 5,
@@ -1877,6 +1899,7 @@
     "flag": "🇺🇸",
     "weightClass": "Bantamweight",
     "ranking": "#2",
+    "ranking_change": 0,
     "record": {
       "wins": 17,
       "losses": 6,
@@ -1940,6 +1963,7 @@
     "flag": "🇷🇺",
     "weightClass": "Bantamweight",
     "ranking": "#3",
+    "ranking_change": 1,
     "record": {
       "wins": 18,
       "losses": 1,
@@ -2069,6 +2093,7 @@
     "flag": "🇲🇽",
     "weightClass": "Flyweight",
     "ranking": "#1",
+    "ranking_change": 1,
     "record": {
       "wins": 21,
       "losses": 8,
@@ -2197,6 +2222,7 @@
     "flag": "🇲🇽",
     "weightClass": "Women's Flyweight",
     "ranking": "#1",
+    "ranking_change": 0,
     "record": {
       "wins": 16,
       "losses": 3,
@@ -2325,6 +2351,7 @@
     "flag": "🇺🇸",
     "weightClass": "Women's Strawweight",
     "ranking": "#1",
+    "ranking_change": 1,
     "record": {
       "wins": 12,
       "losses": 7,
@@ -2453,6 +2480,7 @@
     "flag": "🇺🇸",
     "weightClass": "Women's Bantamweight",
     "ranking": "#1",
+    "ranking_change": -1,
     "record": {
       "wins": 12,
       "losses": 5,
@@ -4791,6 +4819,7 @@
     "flag": "🇧🇷",
     "weightClass": "Welterweight",
     "ranking": "#3",
+    "ranking_change": 2,
     "record": {
       "wins": 24,
       "losses": 7,
@@ -4854,6 +4883,7 @@
     "flag": "🇧🇷",
     "weightClass": "Lightweight",
     "ranking": "#10",
+    "ranking_change": 3,
     "record": {
       "wins": 13,
       "losses": 2,
@@ -4917,6 +4947,7 @@
     "flag": "🇧🇷",
     "weightClass": "Middleweight",
     "ranking": "#5",
+    "ranking_change": 1,
     "record": {
       "wins": 18,
       "losses": 2,
@@ -4980,6 +5011,7 @@
     "flag": "🇺🇸",
     "weightClass": "Bantamweight",
     "ranking": "#7",
+    "ranking_change": 1,
     "record": {
       "wins": 17,
       "losses": 2,
