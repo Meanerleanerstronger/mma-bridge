@@ -401,9 +401,9 @@
       return `
         <div class="pr-section" style="animation-delay:0.1s">
           <div class="pr-section-title">My Reviews</div>
-          <div class="pr-empty">
-            <strong>No reviews yet</strong>
-            Go rate an event on the <a href="reviews.html" style="color:rgba(0,229,255,0.7);text-decoration:none">Reviews page</a>
+          <div class="pr-empty-premium">
+            <div class="pr-empty-title">No Reviews Yet</div>
+            <div class="pr-empty-sub">Go rate an event on the <a href="reviews.html">Reviews page</a></div>
           </div>
         </div>`;
     }
@@ -448,9 +448,9 @@
       return `
         <div class="pr-section" id="prPickHistory" style="animation-delay:0.15s">
           <div class="pr-section-title">Pick History</div>
-          <div class="pr-empty">
-            <strong>No completed picks yet</strong>
-            Make your fight picks on the <a href="events.html" style="color:rgba(0,229,255,0.7);text-decoration:none">Events page</a>
+          <div class="pr-empty-premium">
+            <div class="pr-empty-title">No Completed Picks Yet</div>
+            <div class="pr-empty-sub">Make your fight picks on the <a href="events.html">Events page</a></div>
           </div>
         </div>`;
     }
@@ -509,7 +509,7 @@
   function buildFavsSection() {
     return `
       <div class="pr-section" style="animation-delay:0.2s" id="favsSection">
-        <div class="pr-section-title">Your Corner</div>
+        <div class="pr-section-title">Your Corner <span class="pr-section-sub">(Your Favourite Fighters)</span></div>
         <div class="pr-favs-grid" id="favsGrid"></div>
       </div>`;
   }
