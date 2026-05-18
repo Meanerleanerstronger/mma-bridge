@@ -127,3 +127,49 @@ ALTER TABLE fight_comments ENABLE ROW LEVEL SECURITY;
 CREATE POLICY IF NOT EXISTS "Anyone can read fight comments" ON fight_comments FOR SELECT USING (true);
 CREATE POLICY IF NOT EXISTS "Auth users can insert" ON fight_comments FOR INSERT WITH CHECK (auth.uid() = user_id);
 CREATE POLICY IF NOT EXISTS "Users can delete own comments" ON fight_comments FOR DELETE USING (auth.uid() = user_id);
+
+-- ============================================
+-- FANTASY MMA LEAGUES
+-- ============================================
+CREATE TABLE IF NOT EXISTS fantasy_leagues (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  name text NOT NULL,
+  code text UNIQUE NOT NULL,
+  owner_id uuid REFERENCES auth.users(id) ON DELETE SET NULL,
+  season text NOT NULL DEFAULT '2026-Q2',
+  created_at timestamptz DEFAULT now()
+);
+ALTER TABLE fantasy_leagues ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Anyone can read fantasy leagues" ON fantasy_leagues FOR SELECT USING (true);
+CREATE POLICY "Auth users can create fantasy leagues" ON fantasy_leagues FOR INSERT WITH CHECK (auth.uid() = owner_id);
+
+CREATE TABLE IF NOT EXISTS fantasy_rosters (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id uuid REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
+  league_id uuid REFERENCES fantasy_leagues(id) ON DELETE SET NULL,
+  fighter_id text NOT NULL,
+  fighter_name text NOT NULL,
+  season text NOT NULL DEFAULT '2026-Q2',
+  created_at timestamptz DEFAULT now(),
+  UNIQUE(user_id, fighter_id, season)
+);
+ALTER TABLE fantasy_rosters ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Anyone can read fantasy rosters" ON fantasy_rosters FOR SELECT USING (true);
+CREATE POLICY "Users manage own roster" ON fantasy_rosters FOR ALL USING (auth.uid() = user_id);
+
+CREATE TABLE IF NOT EXISTS fantasy_scores (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id uuid REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
+  fighter_id text NOT NULL,
+  fighter_name text NOT NULL,
+  event_id text NOT NULL,
+  event_name text,
+  points integer NOT NULL DEFAULT 0,
+  result text,
+  season text NOT NULL DEFAULT '2026-Q2',
+  created_at timestamptz DEFAULT now(),
+  UNIQUE(user_id, fighter_id, event_id, season)
+);
+ALTER TABLE fantasy_scores ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Anyone can read fantasy scores" ON fantasy_scores FOR SELECT USING (true);
+CREATE POLICY "Users manage own fantasy scores" ON fantasy_scores FOR ALL USING (auth.uid() = user_id);
