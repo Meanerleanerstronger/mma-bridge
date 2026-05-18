@@ -125,7 +125,7 @@ function formatOdds(n) {
             }
           });
         });
-        if (r.fotn) ev.fotn = r.fotn;
+        if (r.fight_key === '__fotn__' && r.fotn) ev.fotn = r.fotn;
       });
     } catch {}
   }

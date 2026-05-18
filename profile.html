@@ -18,11 +18,11 @@
   <meta property="og:title" content="Your MMA Bridge Profile — Fight Pick History &amp; Stats">
   <meta property="og:description" content="View your UFC fight pick history, accuracy stats, favourite fighters, and community reputation on MMA Bridge.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://mmabridge.com/images/mma-bridge-logo.png">
+  <meta property="og:image" content="https://mmabridge.com/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Your MMA Bridge Profile — Fight Pick History &amp; Stats">
   <meta name="twitter:description" content="View your UFC fight pick history, accuracy stats, favourite fighters, and community reputation on MMA Bridge.">
-  <meta name="twitter:image" content="https://mmabridge.com/images/mma-bridge-logo.png">
+  <meta name="twitter:image" content="https://mmabridge.com/og-image.png">
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=6.9" />
 
@@ -95,7 +95,7 @@
     .pr-info { flex: 1; min-width: 0; padding-bottom: 4px; }
     .pr-label {
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.6rem;
+      font-size: 0.68rem;
       font-weight: 700;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -119,7 +119,7 @@
     }
     .pr-meta-item {
       font-family: 'Inter', sans-serif;
-      font-size: 0.78rem;
+      font-size: 0.88rem;
       color: rgba(255,255,255,0.35);
       display: flex; align-items: center; gap: 5px;
     }
@@ -153,7 +153,7 @@
     .pr-stat-num {
       font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
       font-weight: 900;
-      font-size: 2rem;
+      font-size: 2.5rem;
       color: #00e5ff;
       letter-spacing: -0.02em;
       line-height: 1;
@@ -161,7 +161,7 @@
     }
     .pr-stat-lbl {
       font-family: 'Inter', sans-serif;
-      font-size: 0.65rem;
+      font-size: 0.72rem;
       font-weight: 500;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -178,10 +178,10 @@
     .pr-section-title {
       font-family: 'Montserrat', sans-serif;
       font-weight: 900;
-      font-size: 0.68rem;
-      letter-spacing: 0.22em;
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
+      color: rgba(255,255,255,0.55);
       margin: 0 0 20px;
       display: flex; align-items: center; gap: 10px;
     }
@@ -260,7 +260,7 @@
     .pr-rc-name {
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
-      font-size: 0.75rem;
+      font-size: 0.84rem;
       letter-spacing: 0.03em;
       text-transform: uppercase;
       color: #fff;
@@ -339,93 +339,140 @@
     }
     .pr-accuracy-detail strong { color: rgba(0,229,255,0.8); }
 
-    /* ── FIGHTER FAVS ── */
+    /* ── YOUR CORNER (fighter favs) ── */
+    @keyframes favCardIn { from{opacity:0;transform:scale(0.88) translateY(10px)} to{opacity:1;transform:scale(1) translateY(0)} }
+
     .pr-favs-grid {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 14px;
     }
     .pr-fav-card {
-      width: 90px;
-      display: flex; flex-direction: column; align-items: center; gap: 7px;
+      width: 140px;
+      background: #0e0e12;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      overflow: hidden;
       cursor: pointer;
       text-decoration: none;
-      transition: transform 0.2s;
+      transition: transform 0.22s, border-color 0.22s, box-shadow 0.22s;
+      position: relative;
+      animation: favCardIn 0.35s ease both;
+      flex-shrink: 0;
     }
-    .pr-fav-card:hover { transform: translateY(-4px); }
-    .pr-fav-img-wrap {
-      width: 72px; height: 72px;
-      border-radius: 50%;
+    .pr-fav-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(0,229,255,0.3);
+      box-shadow: 0 14px 36px rgba(0,0,0,0.6), 0 0 20px rgba(0,229,255,0.06);
+    }
+    .pr-fav-photo-wrap {
+      height: 160px;
       overflow: hidden;
-      border: 2px solid rgba(0,229,255,0.2);
       background: #141418;
       position: relative;
-      transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .pr-fav-card:hover .pr-fav-img-wrap {
-      border-color: rgba(0,229,255,0.5);
-      box-shadow: 0 0 16px rgba(0,229,255,0.2);
-    }
-    .pr-fav-img {
+    .pr-fav-photo {
       width: 100%; height: 100%;
       object-fit: cover;
       object-position: top center;
+      transition: transform 0.4s ease;
     }
-    .pr-fav-initial {
+    .pr-fav-card:hover .pr-fav-photo { transform: scale(1.05); }
+    .pr-fav-photo-grad {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 70%;
+      background: linear-gradient(to top, #0e0e12 10%, transparent 100%);
+    }
+    .pr-fav-initial-lg {
       width: 100%; height: 100%;
       display: flex; align-items: center; justify-content: center;
+      font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
+      font-weight: 900; font-size: 3.2rem;
+      color: rgba(0,229,255,0.25);
+      background: linear-gradient(145deg, #141418, #0a0a0e);
+    }
+    .pr-fav-next-badge {
+      position: absolute; bottom: 8px; left: 8px;
+      background: rgba(0,229,255,0.12);
+      border: 1px solid rgba(0,229,255,0.28);
+      color: #00e5ff;
       font-family: 'Montserrat', sans-serif;
-      font-weight: 900; font-size: 1.4rem;
-      color: rgba(0,229,255,0.5);
+      font-size: 0.5rem; font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 3px 7px; border-radius: 4px;
+      white-space: nowrap;
     }
-    .pr-fav-remove {
-      position: absolute; top: 0; right: 0;
-      width: 20px; height: 20px;
-      border-radius: 50%;
-      background: #1a1a20;
-      border: 1px solid rgba(255,255,255,0.15);
-      color: rgba(255,255,255,0.4);
-      display: none; align-items: center; justify-content: center;
-      font-size: 0.55rem; cursor: pointer;
-      z-index: 2;
-      line-height: 1;
+    .pr-fav-body {
+      padding: 10px 11px 12px;
     }
-    .pr-fav-card:hover .pr-fav-remove { display: flex; }
     .pr-fav-name {
       font-family: 'Montserrat', sans-serif;
-      font-weight: 700; font-size: 0.6rem;
+      font-weight: 800; font-size: 0.7rem;
       letter-spacing: 0.04em; text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-      text-align: center;
-      line-height: 1.25;
-      max-width: 80px;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 4px;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
-    .pr-fav-add {
-      width: 90px; display: flex; flex-direction: column; align-items: center; gap: 7px;
-      cursor: pointer;
+    .pr-fav-meta {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.62rem;
+      color: rgba(255,255,255,0.3);
+      display: flex; align-items: center; gap: 5px; flex-wrap: wrap;
     }
-    .pr-fav-add-circle {
-      width: 72px; height: 72px;
+    .pr-fav-record {
+      color: rgba(0,229,255,0.65);
+      font-weight: 600;
+    }
+    .pr-fav-remove {
+      position: absolute; top: 7px; right: 7px;
+      width: 22px; height: 22px;
       border-radius: 50%;
-      border: 2px dashed rgba(0,229,255,0.2);
+      background: rgba(14,14,18,0.85);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.45);
+      display: none; align-items: center; justify-content: center;
+      font-size: 0.6rem; cursor: pointer;
+      z-index: 3;
+      backdrop-filter: blur(4px);
+      transition: background 0.15s, color 0.15s;
+    }
+    .pr-fav-remove:hover { background: rgba(255,60,60,0.15); color: #ff6060; border-color: rgba(255,60,60,0.3); }
+    .pr-fav-card:hover .pr-fav-remove { display: flex; }
+
+    .pr-fav-add {
+      width: 140px; height: 160px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 10px; cursor: pointer;
+      background: rgba(255,255,255,0.02);
+      border: 1px dashed rgba(0,229,255,0.15);
+      border-radius: 14px;
+      transition: border-color 0.2s, background 0.2s;
+      flex-shrink: 0;
+    }
+    .pr-fav-add:hover {
+      border-color: rgba(0,229,255,0.35);
+      background: rgba(0,229,255,0.03);
+    }
+    .pr-fav-add-icon {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      border: 2px dashed rgba(0,229,255,0.25);
       display: flex; align-items: center; justify-content: center;
       color: rgba(0,229,255,0.4);
-      font-size: 1.4rem;
-      transition: border-color 0.2s, color 0.2s, background 0.2s;
+      font-size: 1.3rem;
+      transition: border-color 0.2s, color 0.2s;
     }
-    .pr-fav-add:hover .pr-fav-add-circle {
+    .pr-fav-add:hover .pr-fav-add-icon {
       border-color: rgba(0,229,255,0.5);
       color: #00e5ff;
-      background: rgba(0,229,255,0.06);
     }
     .pr-fav-add-label {
       font-family: 'Inter', sans-serif;
-      font-size: 0.6rem;
-      color: rgba(255,255,255,0.25);
+      font-size: 0.62rem;
+      color: rgba(255,255,255,0.22);
       text-align: center;
     }
 
@@ -606,17 +653,59 @@
     }
     .pr-back:hover { color: #00e5ff; }
 
+    /* ── DANGER ZONE ── */
+    .pr-danger-zone {
+      margin-top: 8px;
+      border: 1px solid rgba(255,60,60,0.15);
+      border-radius: 14px;
+      padding: 20px 24px;
+      background: rgba(255,40,40,0.03);
+    }
+    .pr-danger-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800; font-size: 0.68rem;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: rgba(255,100,100,0.6);
+      margin: 0 0 6px;
+    }
+    .pr-danger-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.25);
+      margin: 0 0 16px;
+      line-height: 1.5;
+    }
+    .pr-delete-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px;
+      background: rgba(255,40,40,0.08);
+      border: 1px solid rgba(255,60,60,0.25);
+      color: rgba(255,100,100,0.7);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700; font-size: 0.68rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      border-radius: 8px; cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+    }
+    .pr-delete-btn:hover {
+      background: rgba(255,40,40,0.15);
+      border-color: rgba(255,60,60,0.45);
+      color: #ff6060;
+    }
+    .pr-delete-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
       .pr-hero-inner { flex-direction: column; align-items: flex-start; padding: 44px 20px 28px; gap: 18px; }
       .pr-back { left: 20px; }
       .pr-stats-inner { padding: 0 10px; }
-      .pr-stat-num { font-size: 1.5rem; }
+      .pr-stat-num { font-size: 1.9rem; }
       .pr-body { padding: 28px 20px 80px; }
       .pr-ratings-grid { grid-template-columns: 1fr; }
       .pr-accuracy-card { flex-direction: column; gap: 16px; }
     }
   </style>
+  <script defer data-domain="mmabridge.com" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
 

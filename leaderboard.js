@@ -179,7 +179,7 @@
       const k = `${r.event_id}:${r.fight_key}`;
       if (r.winner) winnerMap[k] = r.winner.toLowerCase();
       if (r.method) methodMap[k] = r.method;
-      if (r.fotn)   fotnMap[r.event_id] = r.fotn.toLowerCase();
+      if (r.fight_key === '__fotn__' && r.fotn) fotnMap[r.event_id] = r.fotn.toLowerCase();
     });
   } catch {}
 

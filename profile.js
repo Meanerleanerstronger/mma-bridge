@@ -384,6 +384,7 @@
         ${buildPickHistorySection()}
         ${buildFavsSection()}
         ${buildNotifPrefsCard()}
+        ${buildDangerZone()}
       </div>
 
       ${buildModal()}
@@ -508,7 +509,7 @@
   function buildFavsSection() {
     return `
       <div class="pr-section" style="animation-delay:0.2s" id="favsSection">
-        <div class="pr-section-title">Favourite Fighters</div>
+        <div class="pr-section-title">Your Corner</div>
         <div class="pr-favs-grid" id="favsGrid"></div>
       </div>`;
   }
@@ -579,6 +580,18 @@
       </div>`
   }
 
+  function buildDangerZone() {
+    return `
+      <div class="pr-section" style="animation-delay:0.3s">
+        <div class="pr-section-title">Account</div>
+        <div class="pr-danger-zone">
+          <div class="pr-danger-title">Danger Zone</div>
+          <p class="pr-danger-desc">Permanently delete your account and all associated data — picks, ratings, and profile. This cannot be undone.</p>
+          <button class="pr-delete-btn" id="deleteAccountBtn">Delete My Account</button>
+        </div>
+      </div>`;
+  }
+
   function buildModal() {
     return `
       <div class="pr-modal-backdrop" id="fighterPickerModal" style="display:none">
@@ -602,22 +615,52 @@
     if (!grid) return;
     grid.innerHTML = '';
 
-    favIds.forEach(fid => {
+    const now = Date.now();
+
+    favIds.forEach((fid, idx) => {
       const f = fighters.find(x => x.id === fid);
       if (!f) return;
       const initials = f.name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+
+      // Find next upcoming event this fighter appears in
+      let nextEvent = null;
+      for (const ev of events) {
+        if (ev.isoDate && new Date(ev.isoDate).getTime() > now) {
+          const allFights = [...(ev.mainCard || []), ...(ev.prelims || []), ...(ev.earlyPrelims || [])];
+          const inEvent = allFights.some(fight =>
+            (fight.a || '').toLowerCase().includes(f.name.toLowerCase()) ||
+            (fight.b || '').toLowerCase().includes(f.name.toLowerCase())
+          );
+          if (inEvent) { nextEvent = ev; break; }
+        }
+      }
+
+      const record = f.record
+        ? `${f.record.wins || 0}-${f.record.losses || 0}${f.record.draws ? `-${f.record.draws}` : ''}`
+        : null;
+
       const card = document.createElement('a');
       card.className = 'pr-fav-card';
       card.href = `fighter.html?id=${encodeURIComponent(f.id)}`;
+      card.style.animationDelay = `${idx * 0.06}s`;
       card.innerHTML = `
-        <div class="pr-fav-img-wrap">
+        <div class="pr-fav-photo-wrap">
           ${f.img
-            ? `<img class="pr-fav-img" src="${esc(f.img)}" alt="${esc(f.name)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-               <div class="pr-fav-initial" style="display:none">${esc(initials)}</div>`
-            : `<div class="pr-fav-initial">${esc(initials)}</div>`}
-          <button class="pr-fav-remove" data-id="${esc(f.id)}" title="Remove">✕</button>
+            ? `<img class="pr-fav-photo" src="${esc(f.img)}" alt="${esc(f.name)}" onerror="this.closest('.pr-fav-photo-wrap').querySelector('.pr-fav-initial-lg').style.display='flex';this.style.display='none'">`
+            : ''}
+          <div class="pr-fav-initial-lg" style="${f.img ? 'display:none' : ''}">${esc(initials)}</div>
+          <div class="pr-fav-photo-grad"></div>
+          ${nextEvent ? `<div class="pr-fav-next-badge">NEXT FIGHT</div>` : ''}
         </div>
-        <div class="pr-fav-name">${esc(f.name)}</div>`;
+        <div class="pr-fav-body">
+          <div class="pr-fav-name">${esc(f.name)}</div>
+          <div class="pr-fav-meta">
+            ${record ? `<span class="pr-fav-record">${esc(record)}</span>` : ''}
+            ${f.flag ? `<span>${esc(f.flag)}</span>` : ''}
+            ${f.weightClass ? `<span>${esc(f.weightClass)}</span>` : ''}
+          </div>
+        </div>
+        <button class="pr-fav-remove" data-id="${esc(f.id)}" title="Remove">✕</button>`;
       grid.appendChild(card);
     });
 
@@ -626,7 +669,7 @@
     addBtn.className = 'pr-fav-add';
     addBtn.id = 'favsAddBtn';
     addBtn.innerHTML = `
-      <div class="pr-fav-add-circle">+</div>
+      <div class="pr-fav-add-icon">+</div>
       <div class="pr-fav-add-label">Add fighter</div>`;
     grid.appendChild(addBtn);
   }
@@ -724,6 +767,36 @@
     // Modal search
     document.getElementById('modalSearch')?.addEventListener('input', e => {
       renderModalList(e.target.value.toLowerCase());
+    });
+
+    // Delete account
+    document.getElementById('deleteAccountBtn')?.addEventListener('click', async () => {
+      const confirmed = window.confirm(
+        'Are you sure you want to permanently delete your account?\n\nThis will erase all your picks, ratings, and profile data. This cannot be undone.'
+      );
+      if (!confirmed) return;
+
+      const btn = document.getElementById('deleteAccountBtn');
+      if (btn) { btn.disabled = true; btn.textContent = 'Deleting…'; }
+
+      try {
+        const session = await sb.auth.getSession();
+        const accessToken = session?.data?.session?.access_token;
+        if (!accessToken) throw new Error('No session');
+
+        const res = await fetch(`${API_BASE}/api/account/delete`, {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${accessToken}` },
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Delete failed');
+
+        await sb.auth.signOut();
+        window.location.href = 'index.html';
+      } catch (err) {
+        if (btn) { btn.disabled = false; btn.textContent = 'Delete My Account'; }
+        alert('Failed to delete account: ' + err.message);
+      }
     });
   }
 

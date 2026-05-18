@@ -710,7 +710,12 @@
             let existingResults = {};
             try {
               const r = await fetch(`${API_BASE}/api/admin/results?event_id=${encodeURIComponent(ev.id)}&token=${encodeURIComponent(token())}`);
-              if (r.ok) existingResults = await r.json();
+              if (r.ok) {
+                const json = await r.json();
+                (json.results || []).forEach(row => {
+                  existingResults[row.fight_key] = row;
+                });
+              }
             } catch (_) {}
             body.innerHTML = '';
             populateEventBody(body, ev, existingResults);
@@ -725,7 +730,7 @@
         // FOTN row
         const fotnRow = document.createElement('div');
         fotnRow.className = 'fotn-row';
-        const fotnVal = existingResults.fotn || '';
+        const fotnVal = (existingResults['__fotn__'] || {}).fotn || '';
         fotnRow.innerHTML = `
           <span class="fotn-label">Fight of the Night:</span>
           <input class="fotn-input" type="text" id="fotn-${escAttr(ev.id)}" placeholder="e.g. Poirier vs Gaethje" value="${escAttr(fotnVal)}" />
@@ -874,7 +879,7 @@
           const res = await fetch(`${API_BASE}/api/admin/set-result`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ token: token(), event_id: eventId, fotn })
+            body: JSON.stringify({ token: token(), event_id: eventId, fight_key: '__fotn__', fotn })
           });
           const data = await res.json();
           if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);

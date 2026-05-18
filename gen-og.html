@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex">
+  <title>MMA Bridge OG Image Generator</title>
+  <style>
+    body { background: #111; color: #fff; font-family: monospace; padding: 24px; }
+    canvas { display: block; border: 1px solid #333; margin: 16px 0; }
+    button { background: #00e5ff; color: #000; border: none; padding: 10px 24px; font-size: 1rem; font-weight: 700; border-radius: 6px; cursor: pointer; }
+    p { color: rgba(255,255,255,0.5); font-size: 0.85rem; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <h2 style="color:#00e5ff;font-family:sans-serif;margin:0 0 12px">MMA Bridge OG Image Generator</h2>
+  <canvas id="og" width="1200" height="630"></canvas>
+  <button onclick="download()">Download og-image.png</button>
+  <p>Save as <code>og-image.png</code> in the root of your GitHub Pages repo.</p>
+
+  <script>
+    const canvas = document.getElementById('og');
+    const ctx = canvas.getContext('2d');
+    const W = 1200, H = 630;
+
+    function draw() {
+      // Background
+      ctx.fillStyle = '#060608';
+      ctx.fillRect(0, 0, W, H);
+
+      // Radial glow top-left
+      const glow = ctx.createRadialGradient(300, 0, 0, 300, 0, 700);
+      glow.addColorStop(0, 'rgba(0,229,255,0.12)');
+      glow.addColorStop(1, 'transparent');
+      ctx.fillStyle = glow;
+      ctx.fillRect(0, 0, W, H);
+
+      // Bottom right gold glow
+      const glow2 = ctx.createRadialGradient(W, H, 0, W, H, 600);
+      glow2.addColorStop(0, 'rgba(200,150,12,0.07)');
+      glow2.addColorStop(1, 'transparent');
+      ctx.fillStyle = glow2;
+      ctx.fillRect(0, 0, W, H);
+
+      // Thin top cyan line
+      ctx.fillStyle = '#00e5ff';
+      ctx.fillRect(0, 0, W, 3);
+
+      // Logo placeholder (octagon)
+      drawOctagon(ctx, 96, H / 2, 52);
+
+      // Site name
+      ctx.font = '900 72px "Arial Black", Impact, sans-serif';
+      ctx.fillStyle = '#ffffff';
+      ctx.letterSpacing = '2px';
+      ctx.fillText('MMA BRIDGE', 170, H / 2 - 28);
+
+      // Tagline
+      ctx.font = '400 26px Arial, sans-serif';
+      ctx.fillStyle = 'rgba(255,255,255,0.45)';
+      ctx.fillText('Rate. Pick. Follow the Fight.', 170, H / 2 + 20);
+
+      // Divider
+      ctx.fillStyle = 'rgba(0,229,255,0.15)';
+      ctx.fillRect(170, H / 2 + 44, 560, 1);
+
+      // Feature pills
+      const features = ['UFC Event Picks', 'Community Ratings', 'Fighter Profiles', 'Weekly Digest'];
+      features.forEach((label, i) => {
+        const x = 170 + i * 148;
+        const y = H / 2 + 70;
+        ctx.strokeStyle = 'rgba(0,229,255,0.25)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        roundRect(ctx, x, y, 134, 32, 6);
+        ctx.stroke();
+        ctx.font = '600 11px Arial, sans-serif';
+        ctx.fillStyle = 'rgba(0,229,255,0.7)';
+        ctx.textAlign = 'center';
+        ctx.fillText(label.toUpperCase(), x + 67, y + 21);
+        ctx.textAlign = 'left';
+      });
+
+      // Domain
+      ctx.font = '700 20px Arial, sans-serif';
+      ctx.fillStyle = 'rgba(255,255,255,0.2)';
+      ctx.fillText('mmabridge.com', W - 220, H - 36);
+    }
+
+    function drawOctagon(ctx, cx, cy, r) {
+      ctx.beginPath();
+      for (let i = 0; i < 8; i++) {
+        const angle = (Math.PI / 4) * i - Math.PI / 8;
+        const x = cx + r * Math.cos(angle);
+        const y = cy + r * Math.sin(angle);
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+      ctx.strokeStyle = 'rgba(0,229,255,0.6)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      const inner = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+      inner.addColorStop(0, 'rgba(0,229,255,0.1)');
+      inner.addColorStop(1, 'transparent');
+      ctx.fillStyle = inner;
+      ctx.fill();
+      // B letter
+      ctx.font = '900 48px "Arial Black", Impact, sans-serif';
+      ctx.fillStyle = '#00e5ff';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('M', cx, cy);
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'alphabetic';
+    }
+
+    function roundRect(ctx, x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h - r);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      ctx.lineTo(x + r, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+      ctx.lineTo(x, y + r);
+      ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.closePath();
+    }
+
+    function download() {
+      const a = document.createElement('a');
+      a.download = 'og-image.png';
+      a.href = canvas.toDataURL('image/png');
+      a.click();
+    }
+
+    draw();
+  </script>
+</body>
+</html>
