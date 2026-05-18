@@ -362,10 +362,26 @@
     return db - da;
   });
 
-  // ── Favourite fighters (localStorage) ─────────
+  // ── Favourite fighters (localStorage + Supabase) ─────────
   const FAVS_KEY = 'mmab_favs';
   function getFavs() {
     try { return JSON.parse(localStorage.getItem(FAVS_KEY)) || []; } catch { return []; }
+  }
+
+  // Sync fav_fighters from Supabase into localStorage (handles cross-device)
+  if (sb && user?.id) {
+    sb.from('profiles').select('fav_fighters').eq('id', user.id).single().then(({ data }) => {
+      if (data?.fav_fighters?.length) {
+        const local = getFavs();
+        // Merge: union of Supabase + local, Supabase wins as source of truth if local empty
+        const merged = local.length
+          ? [...new Set([...local, ...data.fav_fighters])]
+          : data.fav_fighters;
+        try { localStorage.setItem(FAVS_KEY, JSON.stringify(merged)); } catch {}
+        const grid = document.getElementById('favsGrid');
+        if (grid) renderFavs();
+      }
+    }).catch(() => {});
   }
 
   const fighterById = {};
