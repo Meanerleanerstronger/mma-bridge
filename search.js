@@ -102,24 +102,27 @@
       drop.appendChild(Object.assign(document.createElement('div'), { className: 'sd-section', textContent: 'People' }));
       uResults.forEach(u => {
         const initials = (u.display_name || '?').slice(0, 2).toUpperCase();
-        const row = buildRow(`
+        const profileUrl = `profile.html?user=${encodeURIComponent(u.id)}`;
+
+        // Use a real <a> tag so clicking anywhere on the row navigates to the profile
+        const row = document.createElement('a');
+        row.className = 'sd-row sd-user-row';
+        row.href = profileUrl;
+        row.innerHTML = `
           <div class="sd-user-avatar" ${u.avatar_url ? `style="background-image:url('${escHtml(u.avatar_url)}')"` : ''}>
             ${u.avatar_url ? '' : `<span>${escHtml(initials)}</span>`}
           </div>
           <div class="sd-info">
             <span class="sd-name">${escHtml(u.display_name || 'Fighter')}</span>
-            <span class="sd-sub sd-view-profile">View profile →</span>
+            <span class="sd-sub">View profile →</span>
           </div>
           <button class="sd-challenge-btn" data-uid="${escHtml(u.id)}" data-uname="${escHtml(u.display_name || 'Fighter')}">Challenge</button>
-        `, () => {
-          input.value = '';
-          hideDrop();
-          window.location.href = `profile.html?user=${encodeURIComponent(u.id)}`;
-        });
-        // Challenge button — mousedown to fire before row blur
+        `;
+
+        // Challenge button stops propagation so it doesn't trigger the <a> navigation
         const chBtn = row.querySelector('.sd-challenge-btn');
         if (chBtn) {
-          chBtn.addEventListener('mousedown', e => {
+          chBtn.addEventListener('click', e => {
             e.stopPropagation();
             e.preventDefault();
             input.value = '';
@@ -127,6 +130,14 @@
             window.openChallengeModal?.(u.id, u.display_name || 'Fighter');
           });
         }
+
+        // Close dropdown when navigating
+        row.addEventListener('click', e => {
+          if (e.target.closest('.sd-challenge-btn')) return;
+          input.value = '';
+          hideDrop();
+        });
+
         drop.appendChild(row);
       });
     }
