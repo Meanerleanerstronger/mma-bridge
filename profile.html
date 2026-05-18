@@ -773,6 +773,37 @@
     }
     .pr-delete-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
+    /* ── AVATAR UPLOAD BUTTON ── */
+    .pr-avatar-upload-btn {
+      position: absolute; bottom: -2px; right: -2px;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: #141418;
+      border: 2px solid rgba(0,229,255,0.4);
+      color: rgba(255,255,255,0.8);
+      font-size: 0.75rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 4;
+      transition: background 0.15s, border-color 0.15s;
+      line-height: 1;
+      padding: 0;
+    }
+    .pr-avatar-upload-btn:hover { background: rgba(0,229,255,0.15); border-color: #00e5ff; }
+    .pr-avatar-upload-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* ── SHARE BUTTON ── */
+    .pr-share-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12);
+      border-radius: 8px; color: rgba(255,255,255,.7);
+      font-family: 'Montserrat', sans-serif; font-weight: 700;
+      font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 8px 14px; cursor: pointer; transition: all 0.15s;
+      margin-top: 12px;
+    }
+    .pr-share-btn:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.25); color: #fff; }
+    .pr-share-btn.copied { border-color: rgba(0,200,100,.5); color: #00c864; background: rgba(0,200,100,.08); }
+
     /* ── CHALLENGE BUTTON ── */
     .pr-challenge-btn {
       display: inline-flex; align-items: center; gap: 7px;

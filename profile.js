@@ -220,6 +220,10 @@
             ${loggedInUser && loggedInUser.id !== viewedUserId
               ? `<button class="pr-challenge-btn" id="prChallengeBtn" data-uid="${esc(viewedUserId)}" data-uname="${esc(profileData.display_name || 'Fighter')}">Challenge</button>`
               : ''}
+            <button class="pr-share-btn" id="prShareBtn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+              Share Profile
+            </button>
           </div>
         </div>
       </div>
@@ -253,6 +257,32 @@
       window.openChallengeModal?.(viewedUserId, profileData.display_name || 'Fighter');
     });
 
+    // Wire share button
+    const otherShareBtn = document.getElementById('prShareBtn');
+    if (otherShareBtn) {
+      otherShareBtn.addEventListener('click', async () => {
+        const profileUrl = location.href;
+        const shareData = {
+          title: 'MMA Bridge Profile',
+          text: `Check out ${profileData.display_name || 'this fighter'}'s UFC picks on MMA Bridge!`,
+          url: profileUrl,
+        };
+        if (navigator.share && navigator.canShare?.(shareData)) {
+          try { await navigator.share(shareData); } catch {}
+        } else {
+          try {
+            await navigator.clipboard.writeText(profileUrl);
+            otherShareBtn.textContent = '✓ Copied!';
+            otherShareBtn.classList.add('copied');
+            setTimeout(() => {
+              otherShareBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg> Share Profile`;
+              otherShareBtn.classList.remove('copied');
+            }, 2000);
+          } catch {}
+        }
+      });
+    }
+
     // Load follow data
     loadOtherUserFollowData(viewedUserId, loggedInUser);
     return;
@@ -262,7 +292,7 @@
   const user = loggedInUser;
 
   // ── Load data in parallel ─────────────────────
-  const [ratingsResult, eventsResult, fightersResult, picksResult] = await Promise.all([
+  const [ratingsResult, eventsResult, fightersResult, picksResult, profileResult] = await Promise.all([
     sb.from('ratings')
       .select('id, event_id, event_name, hype_rating, review_text, created_at')
       .eq('user_id', user.id)
@@ -273,7 +303,10 @@
       .select('event_id, fight_key, pick, method, round')
       .eq('user_id', user.id)
       .neq('fight_key', 'fotn'),
+    sb.from('profiles').select('avatar_url, display_name').eq('id', user.id).single(),
   ]);
+
+  const profileAvatarUrl = profileResult.data?.avatar_url || user.avatar_url || null;
 
   const ratings  = ratingsResult.data || [];
   const events   = Array.isArray(eventsResult) ? eventsResult : [];
@@ -424,8 +457,8 @@
 
   function renderProfile() {
     const initials = (user.display_name || 'U').split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
-    const avatarHtml = user.avatar_url
-      ? `<img class="pr-avatar-img" src="${esc(user.avatar_url)}" alt="${esc(user.display_name)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+    const avatarHtml = profileAvatarUrl
+      ? `<img class="pr-avatar-img" src="${esc(profileAvatarUrl)}" alt="${esc(user.display_name)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
         + `<div class="pr-avatar-initials" style="display:none">${esc(initials)}</div>`
       : `<div class="pr-avatar-initials">${esc(initials)}</div>`;
 
@@ -440,6 +473,8 @@
         <div class="pr-hero-inner">
           <div class="pr-avatar-wrap">
             <div class="pr-avatar-ring">${avatarHtml}</div>
+            <button class="pr-avatar-upload-btn" id="prAvatarUploadBtn" title="Change photo">📷</button>
+            <input type="file" id="prAvatarInput" accept="image/*" style="display:none">
           </div>
           <div class="pr-info">
             <div class="pr-label">Fighter Profile</div>
@@ -451,6 +486,10 @@
               </span>
             </div>
             ${buildFollowRow()}
+            <button class="pr-share-btn" id="prShareBtn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+              Share Profile
+            </button>
           </div>
         </div>
       </div>
@@ -488,6 +527,38 @@
 
     animateStats();
     attachEvents();
+
+    const avatarBtn = document.getElementById('prAvatarUploadBtn');
+    const avatarInput = document.getElementById('prAvatarInput');
+    if (avatarBtn && avatarInput && sb && user?.id) {
+      avatarBtn.addEventListener('click', () => avatarInput.click());
+      avatarInput.addEventListener('change', async () => {
+        const file = avatarInput.files?.[0];
+        if (!file) return;
+        if (file.size > 5 * 1024 * 1024) { alert('Image must be under 5MB'); return; }
+        avatarBtn.textContent = '⏳';
+        avatarBtn.disabled = true;
+        try {
+          const ext = file.name.split('.').pop() || 'jpg';
+          const path = `${user.id}/avatar.${ext}`;
+          const { error: upErr } = await sb.storage.from('avatars').upload(path, file, { upsert: true });
+          if (upErr) throw upErr;
+          const { data: { publicUrl } } = sb.storage.from('avatars').getPublicUrl(path);
+          await sb.from('profiles').update({ avatar_url: publicUrl }).eq('id', user.id);
+          const img = document.querySelector('.pr-avatar-img');
+          if (img) { img.src = publicUrl; img.style.display = 'block'; }
+          const initEl = document.querySelector('.pr-avatar-initials');
+          if (initEl) initEl.style.display = 'none';
+          avatarBtn.textContent = '✓';
+          setTimeout(() => { avatarBtn.textContent = '📷'; avatarBtn.disabled = false; }, 2000);
+        } catch(e) {
+          console.error(e);
+          avatarBtn.textContent = '📷';
+          avatarBtn.disabled = false;
+          alert('Upload failed. Make sure the avatars storage bucket exists in Supabase.');
+        }
+      });
+    }
   }
 
   // ── Build sections ────────────────────────────
@@ -868,6 +939,31 @@
     document.getElementById('modalSearch')?.addEventListener('input', e => {
       renderModalList(e.target.value.toLowerCase());
     });
+
+    const shareBtn = document.getElementById('prShareBtn');
+    if (shareBtn) {
+      shareBtn.addEventListener('click', async () => {
+        const profileUrl = `${location.origin}/profile.html?user=${encodeURIComponent(user.id)}`;
+        const shareData = {
+          title: 'MMA Bridge Profile',
+          text: `Check out my UFC picks on MMA Bridge!`,
+          url: profileUrl,
+        };
+        if (navigator.share && navigator.canShare?.(shareData)) {
+          try { await navigator.share(shareData); } catch {}
+        } else {
+          try {
+            await navigator.clipboard.writeText(profileUrl);
+            shareBtn.textContent = '✓ Copied!';
+            shareBtn.classList.add('copied');
+            setTimeout(() => {
+              shareBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg> Share Profile`;
+              shareBtn.classList.remove('copied');
+            }, 2000);
+          } catch {}
+        }
+      });
+    }
 
     // Delete account
     document.getElementById('deleteAccountBtn')?.addEventListener('click', async () => {

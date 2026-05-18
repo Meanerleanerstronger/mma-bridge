@@ -1370,6 +1370,131 @@ function formatOdds(n) {
           updateSaveBar();
         });
       });
+
+      // ── Drum window touch events (scroll drum) ──────────────────────────
+      // Handles .pk-drum-window elements: touchstart/move/end for iOS-style snap scroll
+      root.querySelectorAll('.pk-drum-window[data-key]').forEach(win => {
+        const key   = win.dataset.key;
+        const strip = win.querySelector('.pk-drum-strip');
+        if (!strip) return;
+
+        // Disable native scroll on the drum so we own all touch events
+        win.style.touchAction = 'none';
+
+        let touchStartY    = 0;
+        let currentOffset  = 0;   // translateY value in px at touch start
+        let activeOffset   = 0;   // live offset during drag
+
+        function getOffsetFromTransform() {
+          const t = strip.style.transform;
+          const m = t ? t.match(/translateY\((-?[\d.]+)px\)/) : null;
+          return m ? parseFloat(m[1]) : 0;
+        }
+
+        function clampOffset(offset) {
+          const min = -((DRUM_ITEMS.length - 1) * DRUM_H);
+          return Math.max(min, Math.min(0, offset));
+        }
+
+        function snapToNearest(offset) {
+          const idx   = Math.round(-offset / DRUM_H);
+          const snapped = -(Math.max(0, Math.min(DRUM_ITEMS.length - 1, idx)) * DRUM_H);
+          strip.style.transition = 'transform 0.22s cubic-bezier(0.22,1,0.36,1)';
+          strip.style.transform  = `translateY(${snapped}px)`;
+          // Update pick state
+          const item = DRUM_ITEMS[Math.max(0, Math.min(DRUM_ITEMS.length - 1, idx))];
+          if (!item || !localPicks[key]) return;
+          const newBase  = item.method;
+          const showRound = newBase === 'KO/TKO' || newBase === 'SUB';
+          const roundRow  = document.getElementById(`pkRounds-${key}`);
+          if (roundRow) roundRow.classList.toggle('pk-round-row-visible', showRound);
+          // Sync active state on any seg buttons
+          const methodWrap = document.getElementById(`pkMethod-${key}`);
+          if (methodWrap) {
+            methodWrap.querySelectorAll('.pk-seg-btn').forEach(b => {
+              b.classList.toggle('active', b.dataset.method === newBase);
+            });
+          }
+          localPicks[key] = { ...localPicks[key], base: newBase, round: showRound ? (localPicks[key].round || '') : '' };
+          updateSaveBar();
+        }
+
+        win.addEventListener('touchstart', e => {
+          if (e.touches.length !== 1) return;
+          touchStartY   = e.touches[0].clientY;
+          currentOffset = getOffsetFromTransform();
+          strip.style.transition = 'none';
+          e.preventDefault();
+        }, { passive: false });
+
+        win.addEventListener('touchmove', e => {
+          if (e.touches.length !== 1) return;
+          const deltaY  = e.touches[0].clientY - touchStartY;
+          activeOffset  = clampOffset(currentOffset + deltaY);
+          strip.style.transform = `translateY(${activeOffset}px)`;
+          e.preventDefault();
+        }, { passive: false });
+
+        win.addEventListener('touchend', () => {
+          snapToNearest(activeOffset);
+        });
+
+        win.addEventListener('touchcancel', () => {
+          snapToNearest(activeOffset);
+        });
+      });
+
+      // ── Seg-row horizontal swipe → cycle method on mobile ───────────────
+      // Swipe left/right on the method segment row to cycle KO/SUB/DEC
+      root.querySelectorAll('.pk-seg-row').forEach(row => {
+        let swipeStartX = 0;
+        let swipeStartY = 0;
+        let swipeLocked = false;
+
+        const METHODS = ['KO/TKO', 'SUB', 'DEC'];
+
+        row.addEventListener('touchstart', e => {
+          swipeStartX = e.touches[0].clientX;
+          swipeStartY = e.touches[0].clientY;
+          swipeLocked = false;
+        }, { passive: true });
+
+        row.addEventListener('touchmove', e => {
+          if (swipeLocked) return;
+          const dx = e.touches[0].clientX - swipeStartX;
+          const dy = Math.abs(e.touches[0].clientY - swipeStartY);
+          // Only lock as horizontal swipe if dx dominates
+          if (Math.abs(dx) > 10 && Math.abs(dx) > dy * 1.5) {
+            swipeLocked = true;
+            e.preventDefault();
+          }
+        }, { passive: false });
+
+        row.addEventListener('touchend', e => {
+          if (!swipeLocked) return;
+          const dx = e.changedTouches[0].clientX - swipeStartX;
+          if (Math.abs(dx) < 30) return; // too short
+          // Find which fight card this belongs to
+          const fight = row.closest('.sb-fight[data-key]');
+          if (!fight) return;
+          const key = fight.dataset.key;
+          if (!localPicks[key]) return;
+          const curBase    = localPicks[key].base || '';
+          const curIdx     = METHODS.indexOf(curBase);
+          const nextIdx    = dx < 0
+            ? (curIdx + 1) % METHODS.length          // swipe left → next
+            : (curIdx - 1 + METHODS.length) % METHODS.length; // swipe right → prev
+          const newBase    = METHODS[nextIdx];
+          const showRound  = newBase === 'KO/TKO' || newBase === 'SUB';
+          row.querySelectorAll('.pk-seg-btn').forEach(b => {
+            b.classList.toggle('active', b.dataset.method === newBase);
+          });
+          const roundRow = document.getElementById(`pkRounds-${key}`);
+          if (roundRow) roundRow.classList.toggle('pk-round-row-visible', showRound);
+          localPicks[key] = { ...localPicks[key], base: newBase, round: showRound ? (localPicks[key].round || '') : '' };
+          updateSaveBar();
+        });
+      });
     }
 
     // ── Event switcher ────────────────────────────
