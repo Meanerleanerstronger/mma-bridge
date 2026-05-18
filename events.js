@@ -654,7 +654,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       const target = document.querySelector(location.hash);
       if (target) {
         target.open = true;
-        setTimeout(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+        setTimeout(() => {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          target.classList.add('ev-hash-highlight');
+          setTimeout(() => target.classList.remove('ev-hash-highlight'), 2800);
+        }, 320);
       }
     }
 
