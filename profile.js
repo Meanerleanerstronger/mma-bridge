@@ -540,9 +540,33 @@
               </div>
               <input type="checkbox" class="notif-pref-toggle" data-pref="starred_events" checked>
             </label>
+            <label class="notif-pref-row" id="emailDigestRow">
+              <div class="notif-pref-info">
+                <span class="notif-pref-label">Weekly email digest</span>
+                <span class="notif-pref-hint">Upcoming events and your stats, every Monday</span>
+              </div>
+              <input type="checkbox" class="notif-pref-toggle" id="emailOptOutToggle" checked>
+            </label>
           </div>
         </div>
       </div>`;
+  }
+
+  async function initEmailOptOut() {
+    try {
+      const { data } = await sb.from('profiles').select('email_opt_out').eq('id', user.id).single();
+      const toggle = document.getElementById('emailOptOutToggle');
+      if (!toggle) return;
+      toggle.checked = !(data?.email_opt_out);
+      toggle.addEventListener('change', async () => {
+        const optOut = !toggle.checked;
+        try {
+          await sb.from('profiles').update({ email_opt_out: optOut }).eq('id', user.id);
+        } catch {
+          toggle.checked = !optOut;
+        }
+      });
+    } catch {}
   }
 
   function buildFollowRow() {
@@ -670,6 +694,7 @@
     renderFavs();
     loadNotifPrefs();
     loadFollowData();
+    initEmailOptOut();
 
     // Remove fav
     document.getElementById('favsGrid')?.addEventListener('click', e => {

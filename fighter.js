@@ -218,6 +218,10 @@
       <div class="fp-content">
         ${f.bio ? `<p class="fp-bio">${escHtml(f.bio)}</p>` : ''}
         ${buildFights(f.last5)}
+        <div class="fp-news-section" id="fpNews">
+          <div class="fp-news-label">Recent News</div>
+          <div class="fp-news-list" id="fpNewsList"><div class="fp-news-loading">Loading…</div></div>
+        </div>
       </div>
     `;
 
@@ -226,6 +230,9 @@
       const bg = document.getElementById('fpBg');
       if (bg) bg.style.backgroundImage = `url('${f.img.replace(/'/g, "\\'")}')`;
     }
+
+    // Load fighter news
+    loadFighterNews(f.name);
 
     // Countup on stats when strip is visible
     const strip = root.querySelector('.fp-stats-strip');
@@ -241,4 +248,31 @@
       obs.observe(strip);
     }
   }
+
+  function loadFighterNews(name) {
+    const list = document.getElementById('fpNewsList');
+    if (!list) return;
+    const API_BASE = 'https://mmabridge.onrender.com';
+    fetch(`${API_BASE}/api/news/fighter?name=${encodeURIComponent(name)}`)
+      .then(r => r.ok ? r.json() : { articles: [] })
+      .then(data => {
+        const articles = data.articles || [];
+        if (!articles.length) {
+          list.innerHTML = '<div class="fp-news-empty">No recent news found.</div>';
+          return;
+        }
+        list.innerHTML = articles.map(a => {
+          const domain = a.source || '';
+          const date   = a.date ? new Date(a.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
+          return `<a class="fp-news-item" href="${escHtml(a.url)}" target="_blank" rel="noopener">
+            <div class="fp-news-item-title">${escHtml(a.title)}</div>
+            <div class="fp-news-item-meta">${escHtml(domain)}${date ? ' · ' + date : ''}</div>
+          </a>`;
+        }).join('');
+      })
+      .catch(() => {
+        list.innerHTML = '<div class="fp-news-empty">Could not load news.</div>';
+      });
+  }
+
 })();

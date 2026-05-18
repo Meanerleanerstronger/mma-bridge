@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="images/mma-bridge-logo.png">
+  <link rel="shortcut icon" type="image/png" href="images/mma-bridge-logo.png">
+  <link rel="apple-touch-icon" href="images/mma-bridge-logo.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#c8960c">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <script src="theme.js?v=2.4"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel — MMA Bridge</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=6.9" />
+  <style>
+    /* ── Layout ───────────────────────────────────────────── */
+    .admin-page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 72px 20px 120px;
+    }
+
+    /* ── Login screen ─────────────────────────────────────── */
+    #login-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 60vh;
+      gap: 0;
+    }
+    .login-card {
+      background: #16161c;
+      border: 1px solid rgba(200,150,12,0.2);
+      border-radius: 16px;
+      padding: 40px 36px;
+      width: 100%;
+      max-width: 380px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .login-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #fff;
+      margin: 0 0 4px;
+    }
+    .login-title span { color: #c8960c; }
+    .login-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.4);
+      margin: 0;
+    }
+    .login-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .login-field label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+    .login-field input {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      color: #fff;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .login-field input:focus {
+      border-color: rgba(200,150,12,0.5);
+    }
+    .btn-login {
+      background: #c8960c;
+      color: #0d0d10;
+      border: none;
+      border-radius: 8px;
+      padding: 13px 20px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .btn-login:hover { opacity: 0.85; }
+    .btn-login:disabled { opacity: 0.4; cursor: not-allowed; }
+    .login-error {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      color: #e05555;
+      text-align: center;
+      min-height: 18px;
+    }
+
+    /* ── Admin header bar ─────────────────────────────────── */
+    #admin-screen { display: none; }
+    .admin-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .admin-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #fff;
+      margin: 0;
+    }
+    .admin-title span { color: #c8960c; }
+    .admin-status {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .admin-badge {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: rgba(200,150,12,0.9);
+      background: rgba(200,150,12,0.08);
+      border: 1px solid rgba(200,150,12,0.2);
+      border-radius: 20px;
+      padding: 5px 14px;
+    }
+    .btn-logout {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 7px;
+      padding: 7px 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-logout:hover {
+      border-color: rgba(255,255,255,0.35);
+      color: #fff;
+    }
+
+    /* ── Section headings ─────────────────────────────────── */
+    .section-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.58rem;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(200,150,12,0.7);
+      margin: 0 0 14px;
+    }
+
+    /* ── Event card ───────────────────────────────────────── */
+    .event-group { margin-bottom: 40px; }
+    .event-card {
+      background: #16161c;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .event-card:hover { border-color: rgba(200,150,12,0.25); }
+
+    .event-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      cursor: pointer;
+      user-select: none;
+      gap: 12px;
+    }
+    .event-header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+      min-width: 0;
+    }
+    .event-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .event-meta {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.74rem;
+      color: rgba(255,255,255,0.35);
+    }
+    .event-chevron {
+      width: 18px;
+      height: 18px;
+      color: rgba(255,255,255,0.3);
+      flex-shrink: 0;
+      transition: transform 0.25s;
+    }
+    .event-card.open .event-chevron { transform: rotate(180deg); }
+
+    .event-body {
+      display: none;
+      padding: 0 20px 20px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .event-card.open .event-body { display: block; }
+
+    /* ── FOTN field ───────────────────────────────────────── */
+    .fotn-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 16px 0 20px;
+      flex-wrap: wrap;
+    }
+    .fotn-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.73rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      white-space: nowrap;
+    }
+    .fotn-input {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 7px;
+      padding: 7px 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: #fff;
+      outline: none;
+      flex: 1;
+      min-width: 160px;
+      transition: border-color 0.2s;
+    }
+    .fotn-input:focus { border-color: rgba(200,150,12,0.4); }
+    .btn-fotn {
+      background: rgba(200,150,12,0.12);
+      border: 1px solid rgba(200,150,12,0.3);
+      border-radius: 7px;
+      padding: 7px 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #c8960c;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .btn-fotn:hover { background: rgba(200,150,12,0.2); }
+
+    /* ── Card section dividers ────────────────────────────── */
+    .card-section-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.2);
+      margin: 18px 0 10px;
+    }
+
+    /* ── Fight row ────────────────────────────────────────── */
+    .fight-row {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .fight-row.saved {
+      border-color: rgba(40,190,100,0.25);
+      background: rgba(40,190,100,0.03);
+    }
+
+    .fight-matchup {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .fight-weight {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.28);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .fight-vs {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.25);
+    }
+    .fight-saved-mark {
+      margin-left: auto;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #28be64;
+      display: none;
+    }
+    .fight-row.saved .fight-saved-mark { display: block; }
+
+    .fight-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    /* Fighter winner buttons */
+    .btn-fighter {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 7px;
+      padding: 7px 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+      cursor: pointer;
+      transition: all 0.18s;
+      white-space: nowrap;
+      max-width: 180px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .btn-fighter:hover {
+      border-color: rgba(200,150,12,0.45);
+      color: #fff;
+    }
+    .btn-fighter.selected {
+      background: rgba(200,150,12,0.15);
+      border-color: #c8960c;
+      color: #c8960c;
+      font-weight: 600;
+    }
+
+    /* Method select */
+    .fight-method {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 7px;
+      padding: 7px 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: #fff;
+      outline: none;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .fight-method:focus { border-color: rgba(200,150,12,0.4); }
+
+    /* Round input */
+    .fight-round {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 7px;
+      padding: 7px 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: #fff;
+      outline: none;
+      width: 70px;
+      transition: border-color 0.2s;
+    }
+    .fight-round:focus { border-color: rgba(200,150,12,0.4); }
+    .fight-round.hidden { display: none; }
+
+    /* Save button */
+    .btn-save {
+      background: #c8960c;
+      border: none;
+      border-radius: 7px;
+      padding: 7px 18px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #0d0d10;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+      margin-left: auto;
+    }
+    .btn-save:hover { opacity: 0.85; }
+    .btn-save:disabled { opacity: 0.35; cursor: not-allowed; }
+
+    .fight-save-msg {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.74rem;
+      color: rgba(255,255,255,0.35);
+      min-height: 16px;
+    }
+    .fight-save-msg.ok { color: #28be64; }
+    .fight-save-msg.err { color: #e05555; }
+
+    /* ── Loading / empty states ───────────────────────────── */
+    .admin-loading {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.3);
+      padding: 40px 0;
+      text-align: center;
+    }
+
+    /* ── Light mode overrides ─────────────────────────────── */
+    body.light-mode .login-card { background: #f0f0f4; border-color: rgba(200,150,12,0.25); }
+    body.light-mode .login-title { color: #0a0a0f; }
+    body.light-mode .login-field input {
+      background: rgba(0,0,0,0.04);
+      border-color: rgba(0,0,0,0.12);
+      color: #0a0a0f;
+    }
+    body.light-mode .event-card { background: #f5f5f8; border-color: rgba(0,0,0,0.08); }
+    body.light-mode .event-name { color: #0a0a0f; }
+    body.light-mode .event-meta { color: rgba(0,0,0,0.4); }
+    body.light-mode .fight-row { background: rgba(0,0,0,0.025); border-color: rgba(0,0,0,0.07); }
+    body.light-mode .btn-fighter {
+      background: rgba(0,0,0,0.04);
+      border-color: rgba(0,0,0,0.12);
+      color: rgba(0,0,0,0.7);
+    }
+    body.light-mode .fight-method,
+    body.light-mode .fight-round,
+    body.light-mode .fotn-input {
+      background: rgba(0,0,0,0.04);
+      border-color: rgba(0,0,0,0.12);
+      color: #0a0a0f;
+    }
+    body.light-mode .admin-title { color: #0a0a0f; }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navbar ───────────────────────────────────────────── -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a class="logo" href="index.html">
+        <img src="images/mma-bridge-logo.png" class="nav-logo-img" alt="MMA Bridge">
+      </a>
+      <div id="notifBellMount"></div>
+      <ul class="nav-links">
+        <li><a href="index.html">Trending</a></li>
+        <li><a href="events.html">Upcoming Events</a></li>
+        <li><a href="pfp.html">P4P</a></li>
+        <li><a href="reviews.html">Review</a></li>
+        <li><a href="lucas.html">Lucas Bot</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+        <li><a href="about.html">About</a></li>
+        <li></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Switch to light mode" title="Switch to light mode">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <form class="search-box" id="site-search-form" action="results.html" method="GET">
+        <input id="site-search" name="q" type="text" placeholder="Search fighters, events..." autocomplete="off" />
+        <span class="search-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M21 21l-4.3-4.3m1.8-5.2a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </span>
+      </form>
+      <div class="nav-auth"></div>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-mobile-overlay" id="nav-mobile-overlay">
+    <button class="nav-mobile-close" onclick="document.getElementById('nav-mobile-overlay').classList.remove('open');document.getElementById('nav-hamburger').classList.remove('open');document.body.classList.remove('no-scroll')">x</button>
+    <nav class="nav-mobile-links">
+      <a href="index.html">Trending</a>
+      <a href="events.html">Upcoming Events</a>
+      <a href="pfp.html">P4P</a>
+      <a href="reviews.html">Review</a>
+      <a href="lucas.html">Lucas Bot</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="nav-mobile-search">
+      <form action="results.html" method="GET">
+        <input name="q" type="text" placeholder="Search fighters, events..." autocomplete="off" />
+      </form>
+    </div>
+    <div class="nav-auth-mobile"></div>
+  </div>
+
+  <!-- ── Page ─────────────────────────────────────────────── -->
+  <div class="admin-page">
+
+    <!-- Login screen -->
+    <div id="login-screen">
+      <div class="login-card">
+        <div>
+          <div class="login-title">Admin <span>Panel</span></div>
+          <div class="login-sub">MMA Bridge — restricted access</div>
+        </div>
+        <div class="login-field">
+          <label for="admin-pw">Password</label>
+          <input type="password" id="admin-pw" placeholder="Enter admin password" autocomplete="current-password" />
+        </div>
+        <button class="btn-login" id="btn-login">Sign In</button>
+        <div class="login-error" id="login-error"></div>
+      </div>
+    </div>
+
+    <!-- Admin main screen -->
+    <div id="admin-screen">
+      <div class="admin-header">
+        <h1 class="admin-title">Admin <span>Panel</span></h1>
+        <div class="admin-status">
+          <div class="admin-badge">Logged in as Admin</div>
+          <button class="btn-logout" id="btn-logout">Logout</button>
+        </div>
+      </div>
+
+      <div id="events-container">
+        <div class="admin-loading">Loading events...</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── Scripts ──────────────────────────────────────────── -->
+  <script>
+    window.addEventListener('scroll', () => {
+      document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 10);
+    });
+    const navHamburger = document.getElementById('nav-hamburger');
+    const navOverlay   = document.getElementById('nav-mobile-overlay');
+    if (navHamburger) navHamburger.addEventListener('click', () => {
+      navHamburger.classList.toggle('open');
+      navOverlay.classList.toggle('open');
+      document.body.classList.toggle('no-scroll');
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
+  <script src="auth.js?v=3.2"></script>
+  <script src="search.js"></script>
+  <script src="premium.js?v=3.3"></script>
+  <script src="notifications.js?v=2.1"></script>
+  <script src="push.js?v=1.1"></script>
+
+  <script>
+    (() => {
+      'use strict';
+
+      const API_BASE = 'https://mmabridge.onrender.com';
+      const TOKEN_KEY = 'admin_token';
+
+      // ── Helpers ──────────────────────────────────────────
+      const $ = id => document.getElementById(id);
+      const token = () => sessionStorage.getItem(TOKEN_KEY);
+
+      function showScreen(name) {
+        $('login-screen').style.display  = name === 'login'  ? '' : 'none';
+        $('admin-screen').style.display  = name === 'admin'  ? '' : 'none';
+      }
+
+      // ── Auth ─────────────────────────────────────────────
+      async function doLogin() {
+        const pw = $('admin-pw').value.trim();
+        if (!pw) return;
+        const btn = $('btn-login');
+        btn.disabled = true;
+        btn.textContent = 'Signing in...';
+        $('login-error').textContent = '';
+        try {
+          const res = await fetch(`${API_BASE}/api/admin/auth`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password: pw })
+          });
+          const data = await res.json();
+          if (!res.ok || !data.token) throw new Error(data.error || 'Invalid password');
+          sessionStorage.setItem(TOKEN_KEY, data.token);
+          enterAdmin();
+        } catch (e) {
+          $('login-error').textContent = e.message || 'Authentication failed';
+          btn.disabled = false;
+          btn.textContent = 'Sign In';
+        }
+      }
+
+      function doLogout() {
+        sessionStorage.removeItem(TOKEN_KEY);
+        $('admin-pw').value = '';
+        $('login-error').textContent = '';
+        showScreen('login');
+      }
+
+      $('btn-login').addEventListener('click', doLogin);
+      $('admin-pw').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+      $('btn-logout').addEventListener('click', doLogout);
+
+      // ── Bootstrap ────────────────────────────────────────
+      if (token()) {
+        enterAdmin();
+      } else {
+        showScreen('login');
+      }
+
+      async function enterAdmin() {
+        showScreen('admin');
+        await loadEvents();
+      }
+
+      // ── Load events.json and existing results ─────────────
+      async function loadEvents() {
+        const container = $('events-container');
+        container.innerHTML = '<div class="admin-loading">Loading events...</div>';
+        let events;
+        try {
+          const r = await fetch('./events.json?_=' + Date.now());
+          events = await r.json();
+        } catch (e) {
+          container.innerHTML = '<div class="admin-loading">Failed to load events.json</div>';
+          return;
+        }
+
+        const completed = events.filter(ev => ev.status === 'completed');
+        const upcoming  = events.filter(ev => ev.status !== 'completed');
+
+        container.innerHTML = '';
+
+        if (upcoming.length) {
+          const grp = document.createElement('div');
+          grp.className = 'event-group';
+          grp.innerHTML = '<div class="section-label">Upcoming Events</div>';
+          upcoming.forEach(ev => grp.appendChild(buildEventCard(ev)));
+          container.appendChild(grp);
+        }
+
+        if (completed.length) {
+          const grp = document.createElement('div');
+          grp.className = 'event-group';
+          grp.innerHTML = '<div class="section-label">Completed Events</div>';
+          // Most recent first
+          [...completed].reverse().forEach(ev => grp.appendChild(buildEventCard(ev)));
+          container.appendChild(grp);
+        }
+      }
+
+      // ── Build event card ──────────────────────────────────
+      function buildEventCard(ev) {
+        const card = document.createElement('div');
+        card.className = 'event-card';
+        card.dataset.eventId = ev.id;
+
+        // Header
+        const header = document.createElement('div');
+        header.className = 'event-header';
+        header.innerHTML = `
+          <div class="event-header-left">
+            <div class="event-name">${escHtml(ev.name)}</div>
+            <div class="event-meta">${escHtml(ev.date || '')}${ev.location ? ' &mdash; ' + escHtml(ev.location) : ''}</div>
+          </div>
+          <svg class="event-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>`;
+        card.appendChild(header);
+
+        // Body
+        const body = document.createElement('div');
+        body.className = 'event-body';
+        body.innerHTML = '<div class="admin-loading" style="padding:20px 0 8px">Loading results...</div>';
+        card.appendChild(body);
+
+        // Toggle open/close
+        let loaded = false;
+        header.addEventListener('click', async () => {
+          const isOpen = card.classList.toggle('open');
+          if (isOpen && !loaded) {
+            loaded = true;
+            let existingResults = {};
+            try {
+              const r = await fetch(`${API_BASE}/api/admin/results?event_id=${encodeURIComponent(ev.id)}&token=${encodeURIComponent(token())}`);
+              if (r.ok) existingResults = await r.json();
+            } catch (_) {}
+            body.innerHTML = '';
+            populateEventBody(body, ev, existingResults);
+          }
+        });
+
+        return card;
+      }
+
+      // ── Populate event body ───────────────────────────────
+      function populateEventBody(body, ev, existingResults) {
+        // FOTN row
+        const fotnRow = document.createElement('div');
+        fotnRow.className = 'fotn-row';
+        const fotnVal = existingResults.fotn || '';
+        fotnRow.innerHTML = `
+          <span class="fotn-label">Fight of the Night:</span>
+          <input class="fotn-input" type="text" id="fotn-${escAttr(ev.id)}" placeholder="e.g. Poirier vs Gaethje" value="${escAttr(fotnVal)}" />
+          <button class="btn-fotn" data-event-id="${escAttr(ev.id)}">Save FOTN</button>`;
+        body.appendChild(fotnRow);
+
+        fotnRow.querySelector('.btn-fotn').addEventListener('click', () => saveFotn(ev.id));
+
+        // Fight sections
+        const sections = [
+          { label: 'Main Card',     key: 'main',  fights: ev.mainCard     || [] },
+          { label: 'Prelims',       key: 'pre',   fights: ev.prelims      || [] },
+          { label: 'Early Prelims', key: 'early', fights: ev.earlyPrelims || [] },
+        ];
+
+        sections.forEach(({ label, key, fights }) => {
+          if (!fights.length) return;
+          const sectionLabel = document.createElement('div');
+          sectionLabel.className = 'card-section-label';
+          sectionLabel.textContent = label;
+          body.appendChild(sectionLabel);
+
+          fights.forEach((fight, idx) => {
+            const fightKey = `${key}-${idx}`;
+            const saved    = existingResults[fightKey] || null;
+            body.appendChild(buildFightRow(ev.id, fightKey, fight, saved));
+          });
+        });
+      }
+
+      // ── Build fight row ───────────────────────────────────
+      function buildFightRow(eventId, fightKey, fight, saved) {
+        const row = document.createElement('div');
+        row.className = 'fight-row' + (saved ? ' saved' : '');
+        row.dataset.fightKey = fightKey;
+
+        const fighterA = fight.a || 'Fighter A';
+        const fighterB = fight.b || 'Fighter B';
+        const needsRound = m => m === 'KO/TKO' || m === 'Sub';
+
+        // Determine pre-selected state
+        const selWinner = saved ? saved.winner : null;
+        const selMethod = saved ? saved.method : 'Decision (UD)';
+        const selRound  = saved ? (saved.round || '') : '';
+
+        row.innerHTML = `
+          <div class="fight-matchup">
+            <span class="fight-weight">${escHtml(fight.weight || '')}</span>
+            <span class="fight-vs">${escHtml(fighterA)} vs ${escHtml(fighterB)}</span>
+            <span class="fight-saved-mark">Saved</span>
+          </div>
+          <div class="fight-controls">
+            <button class="btn-fighter${selWinner === fighterA ? ' selected' : ''}" data-fighter="${escAttr(fighterA)}">${escHtml(fighterA)}</button>
+            <button class="btn-fighter${selWinner === fighterB ? ' selected' : ''}" data-fighter="${escAttr(fighterB)}">${escHtml(fighterB)}</button>
+
+            <select class="fight-method">
+              ${['KO/TKO','Sub','Decision (UD)','Decision (SD)','Decision (MD)','NC','Draw'].map(m =>
+                `<option value="${escAttr(m)}"${m === selMethod ? ' selected' : ''}>${escHtml(m)}</option>`
+              ).join('')}
+            </select>
+
+            <input class="fight-round${needsRound(selMethod) ? '' : ' hidden'}" type="number" min="1" max="5" placeholder="Rnd" value="${escAttr(String(selRound))}" title="Round" />
+
+            <button class="btn-save" data-event-id="${escAttr(eventId)}" data-fight-key="${escAttr(fightKey)}">Save</button>
+          </div>
+          <div class="fight-save-msg"></div>`;
+
+        // Fighter selection
+        row.querySelectorAll('.btn-fighter').forEach(btn => {
+          btn.addEventListener('click', () => {
+            row.querySelectorAll('.btn-fighter').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+          });
+        });
+
+        // Method change — toggle round visibility
+        const methodSel = row.querySelector('.fight-method');
+        const roundInp  = row.querySelector('.fight-round');
+        methodSel.addEventListener('change', () => {
+          roundInp.classList.toggle('hidden', !needsRound(methodSel.value));
+        });
+
+        // Save button
+        row.querySelector('.btn-save').addEventListener('click', () => saveFight(row, eventId, fightKey));
+
+        return row;
+      }
+
+      // ── Save fight result ─────────────────────────────────
+      async function saveFight(row, eventId, fightKey) {
+        const btn     = row.querySelector('.btn-save');
+        const msg     = row.querySelector('.fight-save-msg');
+        const selBtn  = row.querySelector('.btn-fighter.selected');
+        const method  = row.querySelector('.fight-method').value;
+        const roundEl = row.querySelector('.fight-round');
+        const fotnEl  = document.getElementById(`fotn-${eventId}`);
+
+        if (!selBtn) { msg.className = 'fight-save-msg err'; msg.textContent = 'Select a winner first.'; return; }
+
+        const winner = selBtn.dataset.fighter;
+        const round  = roundEl.classList.contains('hidden') ? null : (parseInt(roundEl.value, 10) || null);
+        const fotn   = fotnEl ? fotnEl.value.trim() : undefined;
+
+        const payload = { token: token(), event_id: eventId, fight_key: fightKey, winner, method };
+        if (round !== null) payload.round = round;
+        if (fotn)           payload.fotn  = fotn;
+
+        btn.disabled = true;
+        btn.textContent = 'Saving...';
+        msg.className = 'fight-save-msg';
+        msg.textContent = '';
+
+        try {
+          const res = await fetch(`${API_BASE}/api/admin/set-result`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+          msg.className = 'fight-save-msg ok';
+          msg.textContent = 'Saved successfully.';
+          row.classList.add('saved');
+        } catch (e) {
+          msg.className = 'fight-save-msg err';
+          msg.textContent = e.message || 'Save failed.';
+        } finally {
+          btn.disabled = false;
+          btn.textContent = 'Save';
+        }
+      }
+
+      // ── Save FOTN ─────────────────────────────────────────
+      async function saveFotn(eventId) {
+        const inp = document.getElementById(`fotn-${eventId}`);
+        const btn = inp ? inp.closest('.fotn-row').querySelector('.btn-fotn') : null;
+        if (!inp || !btn) return;
+
+        const fotn = inp.value.trim();
+        if (!fotn) return;
+
+        btn.disabled = true;
+        btn.textContent = 'Saving...';
+
+        try {
+          const res = await fetch(`${API_BASE}/api/admin/set-result`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token: token(), event_id: eventId, fotn })
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+          btn.textContent = 'Saved';
+          setTimeout(() => { btn.textContent = 'Save FOTN'; btn.disabled = false; }, 2000);
+        } catch (e) {
+          btn.textContent = 'Error';
+          setTimeout(() => { btn.textContent = 'Save FOTN'; btn.disabled = false; }, 2000);
+        }
+      }
+
+      // ── Escaping ──────────────────────────────────────────
+      function escHtml(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      }
+      function escAttr(str) { return escHtml(str); }
+
+    })();
+  </script>
+
+</body>
+</html>

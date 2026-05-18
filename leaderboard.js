@@ -172,9 +172,20 @@
     if (ev.fotn) fotnMap[ev.id] = ev.fotn.toLowerCase();
   });
 
-  // Query: all picks including fotn
+  // Also merge fight_results from Supabase (set by admin panel) into winner/method maps
+  try {
+    const { data: dbResults } = await sb.from('fight_results').select('event_id, fight_key, winner, method, fotn');
+    (dbResults || []).forEach(r => {
+      const k = `${r.event_id}:${r.fight_key}`;
+      if (r.winner) winnerMap[k] = r.winner.toLowerCase();
+      if (r.method) methodMap[k] = r.method;
+      if (r.fotn)   fotnMap[r.event_id] = r.fotn.toLowerCase();
+    });
+  } catch {}
+
+  // Query: all picks including fotn, with created_at for period filtering
   const { data: picksData, error: picksErr } = await sb.from('picks')
-    .select('user_id, event_id, fight_key, pick, method');
+    .select('user_id, event_id, fight_key, pick, method, created_at');
 
   if (picksErr || !picksData) {
     document.getElementById('lbGlobalWrap').innerHTML =
@@ -183,52 +194,83 @@
     return;
   }
 
-  // Calculate per-user stats with full points system
-  const statsMap = {};
-  picksData.forEach(r => {
-    if (!r.user_id) return;
-    if (!statsMap[r.user_id]) statsMap[r.user_id] = { total: 0, judged: 0, correct: 0, points: 0 };
+  // ── Period filter helper ────────────────────
+  function getPeriodCutoff(period) {
+    if (period === 'week')  return new Date(Date.now() - 7  * 86400000).toISOString();
+    if (period === 'month') return new Date(Date.now() - 30 * 86400000).toISOString();
+    return null;
+  }
 
-    // FOTN picks
-    if (r.fight_key === 'fotn') {
-      const actualFotn = fotnMap[r.event_id];
-      if (actualFotn && r.pick?.toLowerCase() === actualFotn) {
-        statsMap[r.user_id].points += POINTS.FOTN;
+  function buildStatsMap(picks, cutoff) {
+    const map = {};
+    picks.forEach(r => {
+      if (!r.user_id) return;
+      if (cutoff && r.created_at && r.created_at < cutoff) return;
+      if (!map[r.user_id]) map[r.user_id] = { total: 0, judged: 0, correct: 0, points: 0 };
+
+      // FOTN picks
+      if (r.fight_key === 'fotn') {
+        const actualFotn = fotnMap[r.event_id];
+        if (actualFotn && r.pick?.toLowerCase() === actualFotn) {
+          map[r.user_id].points += POINTS.FOTN;
+        }
+        return;
       }
-      return;
-    }
 
-    statsMap[r.user_id].total++;
-    const wKey = `${r.event_id}:${r.fight_key}`;
-    const winner = winnerMap[wKey];
-    if (winner === undefined) return;
-
-    statsMap[r.user_id].judged++;
-    const isCorrect = r.pick?.toLowerCase() === winner;
-    if (!isCorrect) return;
-
-    statsMap[r.user_id].correct++;
-    let pts = POINTS.WINNER;
-
-    const actualMethod = methodMap[wKey];
-    if (r.method && actualMethod) {
-      const pickedBase = normalizeMethodBase(r.method);
-      const actualBase = normalizeMethodBase(actualMethod);
-      if (pickedBase && actualBase && pickedBase === actualBase) {
-        pts += POINTS.METHOD;
-        if (pickedBase === 'KO/TKO' || pickedBase === 'SUB') {
-          const pr = extractRoundNum(r.method);
-          const ar = extractRoundNum(actualMethod);
-          if (pr && ar && pr === ar) pts += POINTS.ROUND;
+      map[r.user_id].total++;
+      const wKey   = `${r.event_id}:${r.fight_key}`;
+      const winner = winnerMap[wKey];
+      if (winner === undefined) return;
+      map[r.user_id].judged++;
+      const isCorrect = r.pick?.toLowerCase() === winner;
+      if (!isCorrect) return;
+      map[r.user_id].correct++;
+      let pts = POINTS.WINNER;
+      const actualMethod = methodMap[wKey];
+      if (r.method && actualMethod) {
+        const pb = normalizeMethodBase(r.method);
+        const ab = normalizeMethodBase(actualMethod);
+        if (pb && ab && pb === ab) {
+          pts += POINTS.METHOD;
+          if (pb === 'KO/TKO' || pb === 'SUB') {
+            const pr = extractRoundNum(r.method);
+            const ar = extractRoundNum(actualMethod);
+            if (pr && ar && pr === ar) pts += POINTS.ROUND;
+          }
         }
       }
-    }
-    statsMap[r.user_id].points += pts;
-  });
-  const rankedIds = Object.keys(statsMap);
+      map[r.user_id].points += pts;
+    });
+    return map;
+  }
 
-  // Load profiles
-  const profileIds = myId && !rankedIds.includes(myId) ? [...rankedIds, myId] : rankedIds;
+  function buildRankedUsers(statsMap) {
+    const ids = Object.keys(statsMap);
+    return ids.map(uid => {
+      const p   = profileMap[uid] || {};
+      const s   = statsMap[uid]   || { total: 0, judged: 0, correct: 0, points: 0 };
+      const pct = s.judged > 0 ? Math.round((s.correct / s.judged) * 100) : null;
+      return {
+        user_id: uid, name: p.display_name || 'Anonymous', avatar: p.avatar_url || '',
+        group_code: p.group_code || null, group_name: p.group_name || null,
+        count: s.total, judged: s.judged, correct: s.correct, pct, points: s.points || 0,
+      };
+    }).sort((a, b) => {
+      if (b.points !== a.points) return b.points - a.points;
+      const aH = a.pct !== null && a.judged >= 3;
+      const bH = b.pct !== null && b.judged >= 3;
+      if (aH && bH) return b.pct - a.pct;
+      if (aH) return -1; if (bH) return 1;
+      return b.count - a.count;
+    });
+  }
+
+  // Build initial all-time stats
+  let currentStatsMap = buildStatsMap(picksData, null);
+  const allUids       = [...new Set(picksData.map(r => r.user_id).filter(Boolean))];
+
+  // Load profiles for everyone
+  const profileIds = (myId && !allUids.includes(myId)) ? [...allUids, myId] : allUids;
   let profilesData = [];
   if (profileIds.length > 0) {
     const { data: pData } = await sb
@@ -241,33 +283,7 @@
   const profileMap = {};
   profilesData.forEach(p => { profileMap[p.id] = p; });
 
-  // Build user list with full stats
-  const allUsers = rankedIds.map(uid => {
-    const p   = profileMap[uid] || {};
-    const s   = statsMap[uid] || { total: 0, judged: 0, correct: 0, points: 0 };
-    const pct = s.judged > 0 ? Math.round((s.correct / s.judged) * 100) : null;
-    return {
-      user_id:    uid,
-      name:       p.display_name || 'Anonymous',
-      avatar:     p.avatar_url   || '',
-      group_code: p.group_code   || null,
-      group_name: p.group_name   || null,
-      count:      s.total,
-      judged:     s.judged,
-      correct:    s.correct,
-      pct,
-      points:     s.points || 0,
-    };
-  }).sort((a, b) => {
-    // Primary: total points; secondary: accuracy %; tertiary: total picks
-    if (b.points !== a.points) return b.points - a.points;
-    const aHas = a.pct !== null && a.judged >= 3;
-    const bHas = b.pct !== null && b.judged >= 3;
-    if (aHas && bHas) return b.pct - a.pct;
-    if (aHas) return -1;
-    if (bHas) return 1;
-    return b.count - a.count;
-  });
+  let allUsers = buildRankedUsers(currentStatsMap);
 
   const myProfile = myId ? (profileMap[myId] || {}) : {};
   let myGroupCode = myProfile.group_code || null;
@@ -390,6 +406,24 @@
 
   renderTable(allUsers, 'lbGlobalWrap', 'No picks yet — be the first!');
   renderGroupStatus();
+
+  // ── Period tab wiring ──────────────────────────
+  document.getElementById('lbPeriodTabs')?.addEventListener('click', e => {
+    const btn = e.target.closest('.lb-tab');
+    if (!btn) return;
+    document.querySelectorAll('#lbPeriodTabs .lb-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const period = btn.dataset.period || 'all';
+    const cutoff = getPeriodCutoff(period);
+    currentStatsMap = buildStatsMap(picksData, cutoff);
+    allUsers = buildRankedUsers(currentStatsMap);
+    const wrap = document.getElementById('lbGlobalWrap');
+    if (wrap) wrap.innerHTML = '<div class="lb-loading"><div class="lb-spinner"></div>Updating…</div>';
+    setTimeout(() => {
+      renderTable(allUsers, 'lbGlobalWrap', 'No picks in this period yet.');
+      renderGroupStatus();
+    }, 80);
+  });
 
   // ── Modals ─────────────────────────────────────
   wireModals(myId, allUsers, profileMap);

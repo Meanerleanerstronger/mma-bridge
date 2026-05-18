@@ -4556,6 +4556,44 @@ body.light-mode #cursor-glow { display: none; }
   margin-bottom: 52px;
 }
 
+/* fighter news feed */
+.fp-news-section { margin-top: 48px; }
+.fp-news-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.62rem; font-weight: 800;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.28);
+  margin-bottom: 14px;
+}
+.fp-news-list { display: flex; flex-direction: column; gap: 1px; }
+.fp-news-item {
+  display: block;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+.fp-news-item:last-child { border-bottom: none; }
+.fp-news-item:hover { opacity: 0.78; }
+.fp-news-item-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem; font-weight: 500;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+.fp-news-item-meta {
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.28);
+  font-family: 'Inter', sans-serif;
+}
+.fp-news-loading, .fp-news-empty {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.25);
+  font-family: 'Inter', sans-serif;
+  padding: 12px 0;
+}
+
 /* fight history */
 .fp-section-label {
   font-family: 'Montserrat', sans-serif;
