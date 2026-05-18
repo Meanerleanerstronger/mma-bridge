@@ -75,7 +75,7 @@
   // ── User search via Supabase ──────────────────
   async function searchUsers(q) {
     const sb = window._sb;
-    if (!sb || q.length < 2) return [];
+    if (!sb || q.length < 1) return [];
     try {
       const { data } = await sb.from('profiles')
         .select('id, display_name, avatar_url')
@@ -229,7 +229,7 @@
   input.addEventListener('input', () => {
     clearTimeout(debounce);
     const q = input.value.trim().toLowerCase();
-    if (q.length < 2) { hideDrop(); return; }
+    if (q.length < 1) { hideDrop(); return; }
 
     debounce = setTimeout(async () => {
       await loadData();
