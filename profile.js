@@ -149,6 +149,40 @@
       ? (ratings.reduce((s, r) => s + Number(r.hype_rating), 0) / totalRatings).toFixed(1)
       : '—';
 
+    // ── Streak computation for other user ────────────────────
+    // Build per-event pct array sorted newest-first
+    const otherEvStats = {};
+    picks.forEach(p => {
+      if (!otherEvStats[p.event_id]) otherEvStats[p.event_id] = { correct: 0, scored: 0 };
+      const actual = winnerMap[`${p.event_id}:${p.fight_key}`];
+      if (actual) {
+        otherEvStats[p.event_id].scored++;
+        if (p.pick && p.pick.toLowerCase() === actual) otherEvStats[p.event_id].correct++;
+      }
+    });
+    const otherEvList = Object.keys(otherEvStats)
+      .filter(evId => otherEvStats[evId].scored > 0)
+      .sort((a, b) => {
+        const da = eventMap[a]?.isoDate || '0';
+        const db = eventMap[b]?.isoDate || '0';
+        return db.localeCompare(da); // newest first
+      })
+      .map(evId => {
+        const s = otherEvStats[evId];
+        return Math.round((s.correct / s.scored) * 100);
+      });
+
+    let otherCurrentStreak = 0;
+    for (const pct of otherEvList) {
+      if (pct >= 50) otherCurrentStreak++;
+      else break;
+    }
+    let otherBestStreak = 0, otherRunning = 0;
+    for (const pct of [...otherEvList].reverse()) {
+      if (pct >= 50) { otherRunning++; otherBestStreak = Math.max(otherBestStreak, otherRunning); }
+      else otherRunning = 0;
+    }
+
     // Build fav fighters HTML
     let favsHtml = '';
     if (favFighterIds.length) {
@@ -241,6 +275,14 @@
           <div class="pr-stat">
             <div class="pr-stat-num">${totalRatings || '—'}</div>
             <div class="pr-stat-lbl">Events Rated</div>
+          </div>
+          <div class="pr-stat">
+            <div class="pr-stat-num">${otherCurrentStreak}</div>
+            <div class="pr-stat-lbl">🔥 Current Streak</div>
+          </div>
+          <div class="pr-stat">
+            <div class="pr-stat-num">${otherBestStreak}</div>
+            <div class="pr-stat-lbl">Best Streak</div>
           </div>
         </div>
       </div>
@@ -395,6 +437,37 @@
     return db - da;
   });
 
+  // ── Streak computation (event-level: pct >= 50%) ──────────
+  // pickHistory is already sorted newest-first
+  let currentStreak = 0;
+  for (const ev of pickHistory) {
+    if (ev.pct >= 50) currentStreak++;
+    else break;
+  }
+  let bestStreak = 0, runningStreak = 0;
+  for (const ev of [...pickHistory].reverse()) { // oldest first for best streak
+    if (ev.pct >= 50) { runningStreak++; bestStreak = Math.max(bestStreak, runningStreak); }
+    else runningStreak = 0;
+  }
+
+  // ── Overall accuracy across all completed events ──────────
+  let totalJudged = 0, totalCorrect = 0;
+  pickHistory.forEach(ev => { totalJudged += ev.total; totalCorrect += ev.correct; });
+  const overallAccuracy = totalJudged > 0 ? Math.round((totalCorrect / totalJudged) * 100) : null;
+
+  // ── Tier computation ──────────────────────────────────────
+  function computeTier(judgedPicks, accuracy) {
+    if (judgedPicks === 0) return 'Rookie';
+    if (judgedPicks < 10)  return 'Candidate';
+    if (accuracy === null || accuracy < 40) return 'Iron';
+    if (accuracy < 50) return 'Bronze';
+    if (accuracy < 55) return 'Silver';
+    if (accuracy < 60) return 'Gold';
+    if (accuracy < 65 || judgedPicks < 30) return 'Platinum';
+    if (accuracy < 70 || judgedPicks < 60) return 'Diamond';
+    return 'Legend';
+  }
+
   // ── Favourite fighters (localStorage + Supabase) ─────────
   const FAVS_KEY = 'mmab_favs';
   function getFavs() {
@@ -479,6 +552,7 @@
           <div class="pr-info">
             <div class="pr-label">Fighter Profile</div>
             <h1 class="pr-name">${esc(user.display_name || 'Fighter')}</h1>
+            <span class="pr-tier-badge">${computeTier(totalJudged, overallAccuracy)}</span>
             <div class="pr-meta-row">
               <span class="pr-meta-item">
                 <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
@@ -508,6 +582,14 @@
           <div class="pr-stat">
             <div class="pr-stat-num" id="statPicks">0</div>
             <div class="pr-stat-lbl">Picks Made</div>
+          </div>
+          <div class="pr-stat">
+            <div class="pr-stat-num" id="statStreak">${currentStreak}</div>
+            <div class="pr-stat-lbl">🔥 Current Streak</div>
+          </div>
+          <div class="pr-stat">
+            <div class="pr-stat-num" id="statBestStreak">${bestStreak}</div>
+            <div class="pr-stat-lbl">Best Streak</div>
           </div>
         </div>
       </div>

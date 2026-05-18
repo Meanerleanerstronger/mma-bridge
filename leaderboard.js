@@ -16,6 +16,24 @@
     return Math.random().toString(36).slice(2, 8).toUpperCase();
   }
 
+  // ── Tier Progression System ──────────────────
+  function getTier(judged, pct) {
+    if (judged === 0) return { name: 'Rookie',    color: '#666',    rank: 0 };
+    if (judged < 10)  return { name: 'Candidate', color: '#888',    rank: 1 };
+    if (pct === null || pct < 40) return { name: 'Iron',      color: '#8a7560', rank: 2 };
+    if (pct < 50)     return { name: 'Bronze',    color: '#cd7f32', rank: 3 };
+    if (pct < 55)     return { name: 'Silver',    color: '#aaa',    rank: 4 };
+    if (pct < 60)     return { name: 'Gold',      color: '#c8960c', rank: 5 };
+    if (pct < 65 || judged < 30) return { name: 'Platinum', color: '#00d4e8', rank: 6 };
+    if (pct < 70 || judged < 60) return { name: 'Diamond',  color: '#a0e4ff', rank: 7 };
+    return { name: 'Legend',   color: '#c8960c', rank: 8 };
+  }
+
+  function tierBadgeHtml(judged, pct) {
+    const t = getTier(judged, pct);
+    return `<span class="lb-tier" style="color:${t.color};border-color:${t.color}22">${t.name}</span>`;
+  }
+
   const root = document.getElementById('lbRoot');
   const sb   = window._sb;
 
@@ -43,6 +61,7 @@
         <button class="lb-tab active" data-period="all">All Time</button>
         <button class="lb-tab" data-period="month">This Month</button>
         <button class="lb-tab" data-period="week">This Week</button>
+        <button class="lb-tab" data-period="last10">Last 10 Events</button>
       </div>
 
       <!-- GROUPS -->
@@ -201,11 +220,20 @@
     return null;
   }
 
-  function buildStatsMap(picks, cutoff) {
+  function getLast10EventIds() {
+    const completed = allEventsRaw
+      .filter(e => e.status === 'completed' && e.isoDate)
+      .sort((a, b) => new Date(b.isoDate) - new Date(a.isoDate))
+      .slice(0, 10);
+    return new Set(completed.map(e => e.id).filter(Boolean));
+  }
+
+  function buildStatsMap(picks, cutoff, allowedEventIds = null) {
     const map = {};
     picks.forEach(r => {
       if (!r.user_id) return;
       if (cutoff && r.created_at && r.created_at < cutoff) return;
+      if (allowedEventIds && !allowedEventIds.has(r.event_id)) return;
       if (!map[r.user_id]) map[r.user_id] = { total: 0, judged: 0, correct: 0, points: 0 };
 
       // FOTN picks
@@ -250,12 +278,15 @@
       const p   = profileMap[uid] || {};
       const s   = statsMap[uid]   || { total: 0, judged: 0, correct: 0, points: 0 };
       const pct = s.judged > 0 ? Math.round((s.correct / s.judged) * 100) : null;
+      const tier = getTier(s.judged, pct);
       return {
         user_id: uid, name: p.display_name || 'Anonymous', avatar: p.avatar_url || '',
         group_code: p.group_code || null, group_name: p.group_name || null,
         count: s.total, judged: s.judged, correct: s.correct, pct, points: s.points || 0,
+        tier, tierName: tier.name, tierRank: tier.rank,
       };
     }).sort((a, b) => {
+      if (b.tierRank !== a.tierRank) return b.tierRank - a.tierRank;
       if (b.points !== a.points) return b.points - a.points;
       const aH = a.pct !== null && a.judged >= 3;
       const bH = b.pct !== null && b.judged >= 3;
@@ -328,6 +359,7 @@
             <div class="lb-avatar-wrap">${avatarHtml}</div>
             <div class="lb-user-info">
               <div class="lb-name">${esc(u.name)}${isMe ? ' <span class="lb-you">you</span>' : ''}</div>
+              ${tierBadgeHtml(u.judged, u.pct)}
               <div class="lb-picks-sub">${u.count} total picks</div>
             </div>
           </div>
@@ -405,6 +437,23 @@
   }
 
   renderTable(allUsers, 'lbGlobalWrap', 'No picks yet — be the first!');
+
+  // Inject user's own tier below the header
+  const myUser = allUsers.find(u => u.user_id === myId);
+  if (myUser && myId) {
+    const tierEl = document.createElement('div');
+    tierEl.className = 'lb-my-tier';
+    const t = myUser.tier;
+    tierEl.innerHTML = `
+      <span class="lb-my-tier-label">Your Tier</span>
+      <span class="lb-my-tier-badge" style="color:${t.color};border-color:${t.color}44">${t.name}</span>
+      <span class="lb-my-tier-sub">${myUser.judged} judged · ${myUser.pct !== null ? myUser.pct+'%' : '—'} accuracy</span>
+      ${myUser.tierRank < 8 ? `<span class="lb-my-tier-next">Next: ${['Candidate','Iron','Bronze','Silver','Gold','Platinum','Diamond','Legend'][myUser.tierRank]}</span>` : '<span class="lb-my-tier-next">Maximum tier achieved!</span>'}
+    `;
+    const wrap = document.getElementById('lbGlobalWrap');
+    if (wrap) wrap.insertAdjacentElement('beforebegin', tierEl);
+  }
+
   renderGroupStatus();
 
   // ── Period tab wiring ──────────────────────────
@@ -414,8 +463,12 @@
     document.querySelectorAll('#lbPeriodTabs .lb-tab').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     const period = btn.dataset.period || 'all';
-    const cutoff = getPeriodCutoff(period);
-    currentStatsMap = buildStatsMap(picksData, cutoff);
+    if (period === 'last10') {
+      const last10Ids = getLast10EventIds();
+      currentStatsMap = buildStatsMap(picksData, null, last10Ids);
+    } else {
+      currentStatsMap = buildStatsMap(picksData, getPeriodCutoff(period));
+    }
     allUsers = buildRankedUsers(currentStatsMap);
     const wrap = document.getElementById('lbGlobalWrap');
     if (wrap) wrap.innerHTML = '<div class="lb-loading"><div class="lb-spinner"></div>Updating…</div>';
@@ -611,6 +664,10 @@
   }
 
   function recomputeAndRender(period) {
+    if (period === 'last10') {
+      // Handled by the primary period tab handler above
+      return;
+    }
     const filtered = filterPicksByPeriod(picksData, period);
 
     // Recompute stats for filtered picks
@@ -687,6 +744,8 @@
     renderTable(filteredUsers, 'lbGlobalWrap', emptyMsg);
   }
 
+  // Note: primary period tab handler above handles all rendering; this is kept for compatibility
+  // recomputeAndRender handles last10 via the period string passed in
   document.getElementById('lbPeriodTabs')?.addEventListener('click', e => {
     const btn = e.target.closest('.lb-tab');
     if (!btn) return;

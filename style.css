@@ -9257,3 +9257,111 @@ body.light-mode .pk-drum-wrap::before {
 body.light-mode .pk-drum-wrap::after {
   background: linear-gradient(to top, rgba(245,247,250,0.92), transparent) !important;
 }
+
+/* ======= TIER PROGRESSION SYSTEM ======= */
+.lb-tier {
+  display: inline-flex; align-items: center;
+  font-family: 'Montserrat', sans-serif; font-weight: 800;
+  font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 4px; border: 1px solid;
+  margin-left: 7px; vertical-align: middle; flex-shrink: 0;
+}
+.lb-my-tier {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px; padding: 14px 18px; margin-bottom: 14px;
+}
+.lb-my-tier-label {
+  font-family: 'Inter', sans-serif; font-size: 0.72rem;
+  color: rgba(255,255,255,.4); flex-shrink: 0;
+}
+.lb-my-tier-badge {
+  font-family: 'Montserrat', sans-serif; font-weight: 900;
+  font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 4px 12px; border-radius: 6px; border: 1px solid; flex-shrink: 0;
+}
+.lb-my-tier-sub {
+  font-family: 'Inter', sans-serif; font-size: 0.72rem;
+  color: rgba(255,255,255,.35);
+}
+.lb-my-tier-next {
+  font-family: 'Inter', sans-serif; font-size: 0.68rem;
+  color: rgba(0,229,255,.5); margin-left: auto;
+}
+/* Light mode */
+body.light-mode .lb-tier { opacity: 0.85; }
+body.light-mode .lb-my-tier { background: rgba(0,0,0,.03) !important; border-color: rgba(0,0,0,.08) !important; }
+body.light-mode .lb-my-tier-label { color: rgba(0,0,0,.5) !important; }
+body.light-mode .lb-my-tier-sub { color: rgba(0,0,0,.45) !important; }
+
+/* ======= PER-FIGHT COMMENTS ======= */
+.pk-comments-wrap {
+  border-top: 1px solid rgba(255,255,255,.06);
+  margin-top: 12px; padding-top: 10px;
+}
+.pk-comments-toggle {
+  display: flex; align-items: center; gap: 6px;
+  background: none; border: none; cursor: pointer;
+  font-family: 'Inter', sans-serif; font-size: 0.72rem;
+  color: rgba(255,255,255,.35); padding: 4px 0;
+  transition: color 0.15s;
+}
+.pk-comments-toggle:hover { color: rgba(255,255,255,.65); }
+.pk-comments-toggle svg { flex-shrink: 0; }
+.pk-comments-body { margin-top: 10px; }
+.pk-comments-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px; }
+.pk-comments-loading, .pk-comments-empty {
+  font-family: 'Inter', sans-serif; font-size: 0.75rem;
+  color: rgba(255,255,255,.25); padding: 8px 0;
+}
+.pk-comment {
+  display: flex; gap: 10px; align-items: flex-start;
+}
+.pk-comment-avatar {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  background: rgba(255,255,255,.08); display: flex; align-items: center; justify-content: center;
+  font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.6rem;
+  color: rgba(255,255,255,.5); overflow: hidden;
+}
+.pk-comment-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.pk-comment-body { flex: 1; min-width: 0; }
+.pk-comment-header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px; }
+.pk-comment-name {
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  font-size: 0.72rem; color: rgba(255,255,255,.8);
+}
+.pk-comment-time {
+  font-family: 'Inter', sans-serif; font-size: 0.65rem;
+  color: rgba(255,255,255,.25);
+}
+.pk-comment-text {
+  font-family: 'Inter', sans-serif; font-size: 0.78rem;
+  color: rgba(255,255,255,.6); line-height: 1.4;
+  word-break: break-word;
+}
+.pk-comment-form { display: flex; gap: 8px; align-items: flex-end; margin-top: 8px; }
+.pk-comment-input {
+  flex: 1; background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.1); border-radius: 8px;
+  color: #fff; font-family: 'Inter', sans-serif; font-size: 0.78rem;
+  padding: 8px 12px; resize: none; min-height: 36px;
+  transition: border-color 0.15s;
+}
+.pk-comment-input:focus { outline: none; border-color: rgba(0,229,255,.4); }
+.pk-comment-input::placeholder { color: rgba(255,255,255,.25); }
+.pk-comment-submit {
+  background: rgba(0,229,255,.12); border: 1px solid rgba(0,229,255,.3);
+  color: #00e5ff; font-family: 'Montserrat', sans-serif; font-weight: 800;
+  font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 8px 14px; border-radius: 8px; cursor: pointer; white-space: nowrap;
+  min-height: 36px; transition: background 0.15s, border-color 0.15s;
+}
+.pk-comment-submit:hover { background: rgba(0,229,255,.22); border-color: rgba(0,229,255,.55); }
+.pk-comment-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+/* Light mode */
+body.light-mode .pk-comments-toggle { color: rgba(0,0,0,.4) !important; }
+body.light-mode .pk-comments-toggle:hover { color: rgba(0,0,0,.7) !important; }
+body.light-mode .pk-comment-avatar { background: rgba(0,0,0,.08) !important; color: rgba(0,0,0,.4) !important; }
+body.light-mode .pk-comment-name { color: rgba(0,0,0,.8) !important; }
+body.light-mode .pk-comment-text { color: rgba(0,0,0,.6) !important; }
+body.light-mode .pk-comment-input { background: rgba(0,0,0,.04) !important; border-color: rgba(0,0,0,.12) !important; color: #000 !important; }

@@ -111,3 +111,19 @@ create policy "replies_delete" on public.review_replies for delete using (auth.u
 create policy "reply_likes_select" on public.reply_likes for select using (true);
 create policy "reply_likes_insert" on public.reply_likes for insert with check (auth.uid() = user_id);
 create policy "reply_likes_delete" on public.reply_likes for delete using (auth.uid() = user_id);
+
+-- ── Fight comments (per-fight discussion threads) ────────────
+-- Fight comments (per-fight discussion threads)
+CREATE TABLE IF NOT EXISTS fight_comments (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  event_id text NOT NULL,
+  fight_key text NOT NULL,
+  user_id uuid REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
+  content text NOT NULL CHECK (char_length(content) <= 500),
+  created_at timestamptz DEFAULT now() NOT NULL
+);
+CREATE INDEX IF NOT EXISTS fight_comments_event_fight ON fight_comments(event_id, fight_key);
+ALTER TABLE fight_comments ENABLE ROW LEVEL SECURITY;
+CREATE POLICY IF NOT EXISTS "Anyone can read fight comments" ON fight_comments FOR SELECT USING (true);
+CREATE POLICY IF NOT EXISTS "Auth users can insert" ON fight_comments FOR INSERT WITH CHECK (auth.uid() = user_id);
+CREATE POLICY IF NOT EXISTS "Users can delete own comments" ON fight_comments FOR DELETE USING (auth.uid() = user_id);

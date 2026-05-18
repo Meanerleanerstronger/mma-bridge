@@ -833,6 +833,7 @@ function formatOdds(n) {
           </div>
         </div>
         ${methodWrap}
+        ${buildCommentSection(key)}
       </div>`;
   }
 
@@ -844,6 +845,162 @@ function formatOdds(n) {
         <div class="fc-section-lbl">${esc(title)}</div>
         ${cards}
       </div>`;
+  }
+
+  // ── Per-fight comment section ─────────────────
+  function buildCommentSection(fightKey) {
+    return `
+      <div class="pk-comments-wrap" id="pkComments-${esc(fightKey)}">
+        <button class="pk-comments-toggle" data-key="${esc(fightKey)}" data-open="0">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span class="pk-comments-count" data-key="${esc(fightKey)}">Comments</span>
+        </button>
+        <div class="pk-comments-body" id="pkCommentsBody-${esc(fightKey)}" style="display:none">
+          <div class="pk-comments-list" id="pkCommentsList-${esc(fightKey)}"></div>
+          <div class="pk-comment-form" id="pkCommentForm-${esc(fightKey)}">
+            <textarea class="pk-comment-input" placeholder="Add a comment…" maxlength="500" rows="2"></textarea>
+            <button class="pk-comment-submit" data-key="${esc(fightKey)}">Post</button>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  function getAllFightKeys() {
+    const keys = [];
+    ['mainCard', 'prelims', 'earlyPrelims'].forEach(sec => {
+      const sKey = sec === 'mainCard' ? 'main' : sec === 'prelims' ? 'prelims' : 'early';
+      (event[sec] || []).forEach((_, i) => keys.push(`${sKey}-${i}`));
+    });
+    return keys;
+  }
+
+  function pkTimeAgo(iso) {
+    if (!iso) return '';
+    const diff = Date.now() - new Date(iso).getTime();
+    const mins = Math.floor(diff / 60000);
+    if (mins < 2) return 'just now';
+    if (mins < 60) return `${mins}m ago`;
+    const hours = Math.floor(mins / 60);
+    if (hours < 24) return `${hours}h ago`;
+    return `${Math.floor(hours / 24)}d ago`;
+  }
+
+  async function loadComments(fightKey) {
+    const listEl = document.getElementById(`pkCommentsList-${fightKey}`);
+    if (!listEl || !sb) return;
+
+    listEl.innerHTML = '<div class="pk-comments-loading">Loading…</div>';
+
+    try {
+      const { data } = await sb.from('fight_comments')
+        .select('id, content, created_at, profiles!user_id(display_name, avatar_url)')
+        .eq('event_id', eventId)
+        .eq('fight_key', fightKey)
+        .order('created_at', { ascending: true })
+        .limit(50);
+
+      if (!data?.length) {
+        listEl.innerHTML = '<div class="pk-comments-empty">No comments yet. Be first!</div>';
+        return;
+      }
+
+      listEl.innerHTML = data.map(c => {
+        const name = esc(c.profiles?.display_name || 'Fan');
+        const initials = name.slice(0, 2).toUpperCase();
+        const timeStr = pkTimeAgo(c.created_at);
+        return `
+          <div class="pk-comment">
+            <div class="pk-comment-avatar">${c.profiles?.avatar_url ? `<img src="${esc(c.profiles.avatar_url)}" onerror="this.style.display='none'">` : initials}</div>
+            <div class="pk-comment-body">
+              <div class="pk-comment-header">
+                <span class="pk-comment-name">${name}</span>
+                <span class="pk-comment-time">${timeStr}</span>
+              </div>
+              <div class="pk-comment-text">${esc(c.content)}</div>
+            </div>
+          </div>`;
+      }).join('');
+    } catch { listEl.innerHTML = '<div class="pk-comments-empty">Could not load comments.</div>'; }
+  }
+
+  // Called once after render — pre-loads counts, wires toggle + submit
+  let _commentsSetup = false;
+  async function setupComments() {
+    if (_commentsSetup) return;
+    _commentsSetup = true;
+    if (!sb) return;
+
+    const allFightKeys = getAllFightKeys();
+    if (!allFightKeys.length) return;
+
+    // Pre-load comment counts
+    try {
+      const { data: countRows } = await sb.from('fight_comments')
+        .select('fight_key')
+        .eq('event_id', eventId)
+        .in('fight_key', allFightKeys);
+
+      const counts = {};
+      (countRows || []).forEach(r => { counts[r.fight_key] = (counts[r.fight_key] || 0) + 1; });
+
+      allFightKeys.forEach(key => {
+        const countEl = document.querySelector(`.pk-comments-count[data-key="${key}"]`);
+        if (countEl) {
+          const n = counts[key] || 0;
+          countEl.textContent = n > 0 ? `${n} Comment${n !== 1 ? 's' : ''}` : 'Comments';
+        }
+      });
+    } catch {}
+
+    // Toggle handler (event delegation)
+    document.addEventListener('click', async e => {
+      const toggleBtn = e.target.closest('.pk-comments-toggle');
+      if (toggleBtn) {
+        e.stopPropagation();
+        const key = toggleBtn.dataset.key;
+        const body = document.getElementById(`pkCommentsBody-${key}`);
+        const isOpen = toggleBtn.dataset.open === '1';
+        if (!isOpen) {
+          toggleBtn.dataset.open = '1';
+          body.style.display = 'block';
+          await loadComments(key);
+        } else {
+          toggleBtn.dataset.open = '0';
+          body.style.display = 'none';
+        }
+        return;
+      }
+
+      const submitBtn = e.target.closest('.pk-comment-submit');
+      if (submitBtn) {
+        const key = submitBtn.dataset.key;
+        const form = document.getElementById(`pkCommentForm-${key}`);
+        const input = form?.querySelector('.pk-comment-input');
+        const content = input?.value.trim();
+        if (!content) return;
+
+        const { data: { session } } = await sb.auth.getSession();
+        if (!session?.user) { alert('Sign in to comment'); return; }
+
+        submitBtn.disabled = true;
+        try {
+          await sb.from('fight_comments').insert({
+            event_id: eventId, fight_key: key,
+            user_id: session.user.id, content,
+          });
+          input.value = '';
+          await loadComments(key);
+          // Update count label
+          const countEl = document.querySelector(`.pk-comments-count[data-key="${key}"]`);
+          if (countEl) {
+            const listEl = document.getElementById(`pkCommentsList-${key}`);
+            const n = listEl?.querySelectorAll('.pk-comment').length || 0;
+            countEl.textContent = `${n} Comment${n !== 1 ? 's' : ''}`;
+          }
+        } catch(err) { console.error(err); }
+        submitBtn.disabled = false;
+      }
+    });
   }
 
   // Small header badge — for upcoming events showing career record
@@ -1567,6 +1724,7 @@ function formatOdds(n) {
 
   render();
   initPkCountdown();
+  setupComments();
 
   // ── Auth late-arrival ─────────────────────────
   if (sb && !isCompleted) {
