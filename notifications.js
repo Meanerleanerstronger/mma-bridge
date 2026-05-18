@@ -130,7 +130,7 @@
                 title: `New event announced: ${ev.name}`,
                 body: [headline, ev.date, ev.location].filter(Boolean).join(' · '),
                 eventId: evId, eventDate: ev.isoDate,
-                href: `events.html#ev-${evId}`,
+                href: `events.html?id=${evId}`,
                 timestamp: now.toISOString()
               });
               addSeen(notifId);
@@ -165,7 +165,7 @@
               fighter: fav.name, opponent, eventId: evId,
               title: `${fav.name} fights ${days === 0 ? 'TODAY' : 'TOMORROW'}!`,
               body: `vs ${opponent} · ${ev.name}${ev.venue ? ' · ' + ev.venue : ''}`,
-              href: `events.html#ev-${evId}`,
+              href: `events.html?id=${evId}`,
               eventDate: ev.isoDate, timestamp: now.toISOString()
             });
             addSeen(dayId); addSeen(baseId); changed = true;
@@ -175,7 +175,7 @@
               fighter: fav.name, opponent, eventId: evId,
               title: `${fav.name} is fighting in ${days} day${days !== 1 ? 's' : ''}!`,
               body: `vs ${opponent} · ${ev.name}${ev.venue ? ' · ' + ev.venue : ''}`,
-              href: `events.html#ev-${evId}`,
+              href: `events.html?id=${evId}`,
               eventDate: ev.isoDate, timestamp: now.toISOString()
             });
             addSeen(baseId); changed = true;
