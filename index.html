@@ -183,6 +183,112 @@
       background-clip: text;
     }
   </style>
+
+  <style>
+    /* Onboarding modal */
+    .ob-overlay {
+      position: fixed; inset: 0; z-index: 9998;
+      background: rgba(0,0,0,0.85); backdrop-filter: blur(10px);
+      display: flex !important; align-items: center; justify-content: center; padding: 20px;
+    }
+    .ob-modal {
+      background: linear-gradient(160deg, #0d1117, #111318);
+      border: 1px solid rgba(200,150,12,0.3);
+      border-radius: 20px; padding: 36px 28px 24px;
+      max-width: 400px; width: 100%; text-align: center;
+      animation: obIn 0.4s cubic-bezier(.22,1,.36,1) both;
+    }
+    @keyframes obIn { from { transform: translateY(24px) scale(0.97); opacity: 0; } to { transform: none; opacity: 1; } }
+    .ob-logo { font-size: 2rem; margin-bottom: 8px; }
+    .ob-title {
+      font-family: 'Montserrat', sans-serif; font-weight: 900;
+      font-size: clamp(1.3rem, 5vw, 1.7rem); color: #fff;
+      margin: 0 0 8px; text-transform: uppercase; letter-spacing: 0.02em;
+    }
+    .ob-title span { color: #c8960c; }
+    .ob-sub {
+      font-family: 'Inter', sans-serif; font-size: 0.82rem;
+      color: rgba(255,255,255,.45); margin: 0 0 20px; line-height: 1.5;
+    }
+    .ob-steps { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; text-align: left; }
+    .ob-step {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 11px 13px; border-radius: 11px;
+      background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06);
+    }
+    .ob-step-num {
+      width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(200,150,12,.2); border: 1px solid rgba(200,150,12,.5);
+      color: #c8960c; font-family: 'Montserrat', sans-serif; font-weight: 900;
+      font-size: 0.78rem; display: flex; align-items: center; justify-content: center;
+    }
+    .ob-step-text { font-family: 'Inter', sans-serif; font-size: 0.78rem; color: rgba(255,255,255,.65); line-height: 1.4; }
+    .ob-step-text strong { color: #fff; }
+    .ob-cta {
+      display: block; width: 100%; box-sizing: border-box;
+      background: linear-gradient(135deg, #c8960c, #a87a0a);
+      color: #000; font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem; font-weight: 900; letter-spacing: 0.1em;
+      text-transform: uppercase; text-decoration: none;
+      padding: 14px 24px; border-radius: 12px; margin-bottom: 10px;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+    .ob-cta:hover { opacity: 0.9; transform: translateY(-1px); }
+    .ob-skip {
+      background: none; border: none; cursor: pointer;
+      font-family: 'Inter', sans-serif; font-size: 0.75rem;
+      color: rgba(255,255,255,.28); padding: 4px; transition: color 0.15s;
+    }
+    .ob-skip:hover { color: rgba(255,255,255,.5); }
+    /* Light mode */
+    body.light-mode .ob-modal { background: #fff !important; border-color: rgba(200,150,12,.3) !important; }
+    body.light-mode .ob-title { color: #111 !important; }
+    body.light-mode .ob-sub { color: rgba(0,0,0,.5) !important; }
+    body.light-mode .ob-step { background: rgba(0,0,0,.03) !important; border-color: rgba(0,0,0,.08) !important; }
+    body.light-mode .ob-step-text { color: rgba(0,0,0,.65) !important; }
+    body.light-mode .ob-step-text strong { color: #000 !important; }
+    body.light-mode .ob-skip { color: rgba(0,0,0,.35) !important; }
+
+    /* How it works */
+    .hiw-section {
+      max-width: 860px; margin: 0 auto 48px; padding: 0 20px;
+    }
+    .hiw-title {
+      font-family: 'Montserrat', sans-serif; font-weight: 900;
+      font-size: clamp(1rem, 3vw, 1.3rem); text-transform: uppercase;
+      letter-spacing: 0.08em; color: #fff; margin: 0 0 18px;
+      text-align: center;
+    }
+    .hiw-title span { color: #00e5ff; }
+    .hiw-steps {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+    }
+    @media (max-width: 600px) { .hiw-steps { grid-template-columns: 1fr; } }
+    .hiw-step {
+      background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07);
+      border-radius: 14px; padding: 20px 16px; text-align: center;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .hiw-step:hover { border-color: rgba(0,229,255,.2); background: rgba(0,229,255,.03); }
+    .hiw-step-icon { font-size: 1.6rem; margin-bottom: 8px; }
+    .hiw-step-num {
+      font-family: 'Montserrat', sans-serif; font-weight: 900;
+      font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: #00e5ff; margin-bottom: 5px;
+    }
+    .hiw-step-title {
+      font-family: 'Montserrat', sans-serif; font-weight: 800;
+      font-size: 0.88rem; color: #fff; margin-bottom: 6px;
+    }
+    .hiw-step-body {
+      font-family: 'Inter', sans-serif; font-size: 0.75rem;
+      color: rgba(255,255,255,.4); line-height: 1.5;
+    }
+    /* Light mode */
+    body.light-mode .hiw-step { background: rgba(0,0,0,.03) !important; border-color: rgba(0,0,0,.08) !important; }
+    body.light-mode .hiw-step-title { color: #111 !important; }
+    body.light-mode .hiw-step-body { color: rgba(0,0,0,.5) !important; }
+  </style>
 </head>
 
 <body>
@@ -313,6 +419,31 @@
     </div>
   </div>
 
+  <!-- How It Works -->
+  <section class="hiw-section" id="howItWorks">
+    <h2 class="hiw-title">How It <span>Works</span></h2>
+    <div class="hiw-steps">
+      <div class="hiw-step">
+        <div class="hiw-step-icon">📅</div>
+        <div class="hiw-step-num">Step 1</div>
+        <div class="hiw-step-title">Pick Your Fights</div>
+        <div class="hiw-step-body">Before every UFC event, predict winners, finishes, and rounds. The closer you are, the more points you earn.</div>
+      </div>
+      <div class="hiw-step">
+        <div class="hiw-step-icon">⚡</div>
+        <div class="hiw-step-num">Step 2</div>
+        <div class="hiw-step-title">Watch &amp; Rate</div>
+        <div class="hiw-step-body">After each event, rate how it delivered. Your reviews shape the community's consensus and your reputation.</div>
+      </div>
+      <div class="hiw-step">
+        <div class="hiw-step-icon">🏆</div>
+        <div class="hiw-step-num">Step 3</div>
+        <div class="hiw-step-title">Climb the Board</div>
+        <div class="hiw-step-body">Your pick accuracy is tracked across every event. Compete with the community and challenge friends head-to-head.</div>
+      </div>
+    </div>
+  </section>
+
   <!-- MAIN CONTENT -->
   <div class="content-container">
     <div class="left-column">
@@ -342,5 +473,57 @@
   <script src="premium.js?v=3.3"></script>
   <script src="widget.js"></script>
 <script src="push.js?v=1.1"></script>
+
+  <!-- Onboarding Modal -->
+  <div class="ob-overlay" id="obOverlay" style="display:none" role="dialog" aria-modal="true" aria-label="Welcome to MMA Bridge">
+    <div class="ob-modal">
+      <div class="ob-logo">🥊</div>
+      <h2 class="ob-title">Welcome to <span>MMA Bridge</span></h2>
+      <p class="ob-sub">The UFC community where fans make picks, rate events, and track their accuracy.</p>
+      <div class="ob-steps">
+        <div class="ob-step">
+          <div class="ob-step-num">1</div>
+          <div class="ob-step-text"><strong>Browse Events</strong> — See upcoming UFC cards and make your fight predictions before the bell rings.</div>
+        </div>
+        <div class="ob-step">
+          <div class="ob-step-num">2</div>
+          <div class="ob-step-text"><strong>Make Picks</strong> — Predict winners, methods, and rounds. Earn points for accuracy.</div>
+        </div>
+        <div class="ob-step">
+          <div class="ob-step-num">3</div>
+          <div class="ob-step-text"><strong>Beat the Community</strong> — Track your pick accuracy on the leaderboard and challenge other fans.</div>
+        </div>
+      </div>
+      <a href="events.html" class="ob-cta" id="obCta">Make My First Picks →</a>
+      <button class="ob-skip" id="obSkip">I'll explore on my own</button>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // Only show if never seen before AND not logged in (logged-in users know the site)
+      if (localStorage.getItem('mmab_welcomed')) return;
+      // Small delay so the page renders first
+      setTimeout(function() {
+        // Check if user is logged in — skip modal for returning users
+        const user = window.MMABridgeAuth?.getUser?.();
+        if (user) { localStorage.setItem('mmab_welcomed', '1'); return; }
+        const overlay = document.getElementById('obOverlay');
+        if (overlay) overlay.style.display = 'flex';
+        function dismiss() {
+          overlay.style.display = 'none';
+          localStorage.setItem('mmab_welcomed', '1');
+        }
+        document.getElementById('obSkip')?.addEventListener('click', dismiss);
+        document.getElementById('obCta')?.addEventListener('click', function() {
+          localStorage.setItem('mmab_welcomed', '1');
+          // Let the <a> navigate
+        });
+        overlay.addEventListener('click', function(e) {
+          if (e.target === overlay) dismiss();
+        });
+      }, 800);
+    })();
+  </script>
 </body>
 </html>
