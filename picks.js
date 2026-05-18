@@ -104,6 +104,32 @@ function formatOdds(n) {
     getAuthUser(),
   ]);
 
+  // Merge admin-entered fight results from Supabase into events data
+  if (sb) {
+    try {
+      const { data: dbResults } = await sb.from('fight_results')
+        .select('event_id, fight_key, winner, method, fotn');
+      (dbResults || []).forEach(r => {
+        const ev = eventsData.find(e => e.id === r.event_id);
+        if (!ev) return;
+        const sections = [
+          { key: 'main',    fights: ev.mainCard     || [] },
+          { key: 'prelims', fights: ev.prelims      || [] },
+          { key: 'early',   fights: ev.earlyPrelims || [] },
+        ];
+        sections.forEach(({ key, fights }) => {
+          fights.forEach((f, i) => {
+            if (`${key}-${i}` === r.fight_key) {
+              if (r.winner) f.winner = r.winner;
+              if (r.method) f.method = r.method;
+            }
+          });
+        });
+        if (r.fotn) ev.fotn = r.fotn;
+      });
+    } catch {}
+  }
+
   const fighterDB = {};
   (Array.isArray(fightersData) ? fightersData : []).forEach(f => {
     if (f.id) fighterDB[f.id] = f;
