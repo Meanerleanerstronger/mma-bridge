@@ -825,9 +825,13 @@
       if (removeBtn) {
         e.preventDefault(); e.stopPropagation();
         const id = removeBtn.dataset.id;
-        const favs = getFavs().filter(x => x !== id);
-        saveFavs(favs);
-        renderFavs();
+        const fighter = fighters.find(x => x.id === id);
+        const name = fighter?.name || 'this fighter';
+        showRemoveConfirm(name, () => {
+          const favs = getFavs().filter(x => x !== id);
+          saveFavs(favs);
+          renderFavs();
+        });
         return;
       }
     });
@@ -881,6 +885,26 @@
   }
 
   let modalOpen = false;
+
+  function showRemoveConfirm(name, onConfirm) {
+    document.getElementById('pr-remove-confirm')?.remove();
+    const el = document.createElement('div');
+    el.id = 'pr-remove-confirm';
+    el.className = 'pr-modal-backdrop';
+    el.innerHTML = `
+      <div class="pr-confirm-box">
+        <div class="pr-confirm-title">Remove Fighter?</div>
+        <div class="pr-confirm-body">Remove <strong>${esc(name)}</strong> from your corner?</div>
+        <div class="pr-confirm-actions">
+          <button class="pr-confirm-cancel">Keep</button>
+          <button class="pr-confirm-yes">Remove</button>
+        </div>
+      </div>`;
+    document.body.appendChild(el);
+    el.querySelector('.pr-confirm-yes').addEventListener('click', () => { el.remove(); onConfirm(); });
+    el.querySelector('.pr-confirm-cancel').addEventListener('click', () => el.remove());
+    el.addEventListener('click', e => { if (e.target === el) el.remove(); });
+  }
 
   function openModal() {
     const modal = document.getElementById('fighterPickerModal');
