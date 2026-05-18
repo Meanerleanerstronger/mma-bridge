@@ -276,6 +276,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <div class="ev-body-meta">${ev.date||''} &nbsp;·&nbsp; ${ev.location||''} &nbsp;·&nbsp; ${ev.venue||''}</div>
                 <div class="ev-header-actions">
                   ${upcoming ? `<a class="ev-picks-btn" href="picks.html?id=${esc(id)}">Pick Fights →</a>` : ''}
+                  ${upcoming ? `<button class="ev-consensus-btn" data-ev-id="${esc(id)}" data-ev-name="${esc(ev.name||'')}" data-main-card="${esc(JSON.stringify(ev.mainCard||[]))}" title="Share community pick consensus" onclick="event.stopPropagation()">📊 Share Consensus</button>` : ''}
                   ${calBtnHtml}
                   ${bellHtml}
                 </div>
@@ -667,3 +668,213 @@ document.addEventListener('DOMContentLoaded', async () => {
     showError(wrap, 'Unable to load events right now. Please try again.');
   }
 });
+
+// ── Community Consensus (Share Picks Card) ────────────────────────────────
+document.addEventListener('click', async e => {
+  const btn = e.target.closest('.ev-consensus-btn');
+  if (!btn) return;
+  e.stopPropagation();
+
+  const evId     = btn.dataset.evId;
+  const evName   = btn.dataset.evName;
+  let mainCard   = [];
+  try { mainCard = JSON.parse(btn.dataset.mainCard || '[]'); } catch {}
+
+  if (!window._sb) { alert('Not connected'); return; }
+
+  btn.textContent = '⏳ Loading…';
+  btn.disabled = true;
+
+  try {
+    const { data: picksData } = await window._sb
+      .from('picks')
+      .select('fight_key, pick')
+      .eq('event_id', evId)
+      .neq('fight_key', 'fotn');
+
+    btn.textContent = '📊 Share Consensus';
+    btn.disabled = false;
+
+    // Group by fight_key
+    const grouped = {};
+    (picksData || []).forEach(p => {
+      if (!grouped[p.fight_key]) grouped[p.fight_key] = {};
+      grouped[p.fight_key][p.pick] = (grouped[p.fight_key][p.pick] || 0) + 1;
+    });
+
+    const totalPickers = new Set((picksData || []).map(p => p.pick)).size;
+    const totalPickRows = (picksData || []).length;
+
+    // Polyfill roundRect for older browsers
+    if (!CanvasRenderingContext2D.prototype.roundRect) {
+      CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+        r = Math.min(r, w/2, h/2);
+        this.beginPath();
+        this.moveTo(x+r, y);
+        this.lineTo(x+w-r, y);
+        this.quadraticCurveTo(x+w, y, x+w, y+r);
+        this.lineTo(x+w, y+h-r);
+        this.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+        this.lineTo(x+r, y+h);
+        this.quadraticCurveTo(x, y+h, x, y+h-r);
+        this.lineTo(x, y+r);
+        this.quadraticCurveTo(x, y, x+r, y);
+        this.closePath();
+        return this;
+      };
+    }
+
+    // Build canvas image
+    const canvas = document.createElement('canvas');
+    canvas.width  = 800;
+    canvas.height = Math.max(500, 160 + mainCard.length * 68 + 80);
+    const ctx = canvas.getContext('2d');
+
+    // Background
+    ctx.fillStyle = '#0d0d10';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Top bar
+    const barGrad = ctx.createLinearGradient(0, 0, canvas.width, 0);
+    barGrad.addColorStop(0, '#c8960c');
+    barGrad.addColorStop(1, '#a87a0a');
+    ctx.fillStyle = barGrad;
+    ctx.fillRect(0, 0, canvas.width, 64);
+
+    // Title
+    ctx.fillStyle = '#000';
+    ctx.font = 'bold 22px Montserrat, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('COMMUNITY PICKS', canvas.width / 2, 28);
+    ctx.font = '15px Montserrat, sans-serif';
+    ctx.fillText(evName.toUpperCase(), canvas.width / 2, 50);
+
+    // Fights
+    let y = 100;
+    mainCard.slice(0, 8).forEach(fight => {
+      const fA = fight.a || '';
+      const fB = fight.b || '';
+      const fKey = fA.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-vs-' + fB.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+
+      const counts = grouped[fKey] || {};
+      const totalVotes = Object.values(counts).reduce((s, n) => s + n, 0);
+      const countA = counts[fA] || counts[fA.toLowerCase()] || 0;
+      const countB = counts[fB] || counts[fB.toLowerCase()] || 0;
+      const total2 = countA + countB || 1;
+      const pctA = Math.round((countA / total2) * 100);
+      const pctB = 100 - pctA;
+
+      // Row bg
+      ctx.fillStyle = 'rgba(255,255,255,0.03)';
+      ctx.beginPath();
+      ctx.roundRect(24, y - 24, canvas.width - 48, 60, 8);
+      ctx.fill();
+
+      // Fighter A name
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 16px Montserrat, sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText(fA.toUpperCase(), 40, y + 4);
+
+      // Fighter A pct
+      ctx.fillStyle = pctA >= 50 ? '#c8960c' : 'rgba(255,255,255,0.5)';
+      ctx.font = 'bold 20px Montserrat, sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText(`${pctA}%`, 40, y + 26);
+
+      // Fighter B name
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 16px Montserrat, sans-serif';
+      ctx.textAlign = 'right';
+      ctx.fillText(fB.toUpperCase(), canvas.width - 40, y + 4);
+
+      // Fighter B pct
+      ctx.fillStyle = pctB >= 50 ? '#c8960c' : 'rgba(255,255,255,0.5)';
+      ctx.font = 'bold 20px Montserrat, sans-serif';
+      ctx.textAlign = 'right';
+      ctx.fillText(`${pctB}%`, canvas.width - 40, y + 26);
+
+      // Progress bar background
+      const barX = 180;
+      const barW = canvas.width - 360;
+      ctx.fillStyle = 'rgba(255,255,255,0.08)';
+      ctx.beginPath();
+      ctx.roundRect(barX, y + 2, barW, 12, 6);
+      ctx.fill();
+
+      // Progress bar fill (A side)
+      if (pctA > 0) {
+        const fillGrad = ctx.createLinearGradient(barX, 0, barX + barW, 0);
+        fillGrad.addColorStop(0, '#c8960c');
+        fillGrad.addColorStop(1, '#a87a0a');
+        ctx.fillStyle = fillGrad;
+        ctx.beginPath();
+        ctx.roundRect(barX, y + 2, (barW * pctA) / 100, 12, 6);
+        ctx.fill();
+      }
+
+      // vs label
+      ctx.fillStyle = 'rgba(255,255,255,0.25)';
+      ctx.font = '11px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('vs', canvas.width / 2, y + 12);
+
+      y += 68;
+    });
+
+    // Footer
+    ctx.fillStyle = 'rgba(255,255,255,0.15)';
+    ctx.font = '13px Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(`${totalPickRows} picks recorded · mmabridge.com`, canvas.width / 2, canvas.height - 24);
+
+    // Convert to blob and share/download
+    canvas.toBlob(async blob => {
+      if (!blob) return;
+      const url = URL.createObjectURL(blob);
+      const fileName = `${evName.replace(/[^a-z0-9]+/gi, '-').toLowerCase()}-community-picks.png`;
+
+      if (navigator.share && navigator.canShare && navigator.canShare({ files: [new File([blob], fileName, { type: 'image/png' })] })) {
+        try {
+          await navigator.share({
+            title: `Community Picks — ${evName}`,
+            text: `See how the MMA Bridge community picked ${evName}`,
+            files: [new File([blob], fileName, { type: 'image/png' })],
+          });
+          URL.revokeObjectURL(url);
+          return;
+        } catch {}
+      }
+
+      // Fallback: show modal
+      showConsensusModal(url, fileName, evName);
+    }, 'image/png');
+
+  } catch (err) {
+    btn.textContent = '📊 Share Consensus';
+    btn.disabled = false;
+    console.error('Consensus error:', err);
+  }
+});
+
+function showConsensusModal(imageUrl, fileName, evName) {
+  // Remove existing modal
+  document.getElementById('consensusModal')?.remove();
+
+  const modal = document.createElement('div');
+  modal.id = 'consensusModal';
+  modal.style.cssText = `position:fixed;inset:0;z-index:9900;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.82);backdrop-filter:blur(6px);`;
+  modal.innerHTML = `
+    <div style="background:#111;border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:24px;max-width:520px;width:92%;text-align:center;box-shadow:0 32px 80px rgba(0,0,0,0.8);">
+      <div style="font-family:Montserrat,sans-serif;font-weight:800;font-size:1rem;color:#fff;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.06em;">Community Picks — ${evName}</div>
+      <img src="${imageUrl}" style="width:100%;border-radius:10px;margin-bottom:18px;display:block;" alt="Community picks card">
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a href="${imageUrl}" download="${fileName}" style="display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,#c8960c,#a87a0a);color:#000;font-family:Montserrat,sans-serif;font-weight:800;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;padding:11px 22px;border-radius:8px;text-decoration:none;">⬇ Download</a>
+        <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(`Community picks for ${evName} 👊 mmabridge.com`)}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18);color:#fff;font-family:Montserrat,sans-serif;font-weight:700;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;padding:11px 22px;border-radius:8px;text-decoration:none;">𝕏 Tweet</a>
+        <button onclick="document.getElementById('consensusModal').remove()" style="background:none;border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.4);font-family:Inter,sans-serif;font-size:0.78rem;padding:11px 18px;border-radius:8px;cursor:pointer;">Close</button>
+      </div>
+    </div>`;
+
+  modal.addEventListener('click', e => { if (e.target === modal) { modal.remove(); URL.revokeObjectURL(imageUrl); } });
+  document.body.appendChild(modal);
+}

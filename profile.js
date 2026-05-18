@@ -31,6 +31,10 @@
 
   const root = document.getElementById('profileRoot');
 
+  // ── Check for ?user= URL param (viewing another user's profile) ─────────
+  const urlParams = new URLSearchParams(location.search);
+  const viewedUserId = urlParams.get('user');
+
   // ── Wait for auth to be ready ─────────────────
   function waitForAuth(timeout = 4000) {
     return new Promise(resolve => {
@@ -48,9 +52,13 @@
     });
   }
 
-  const user = await waitForAuth();
+  const loggedInUser = await waitForAuth();
 
-  if (!user) {
+  // Determine if viewing own profile or another user's
+  const isOwnProfile = !viewedUserId || (loggedInUser && viewedUserId === loggedInUser.id);
+
+  // For own profile, require login
+  if (isOwnProfile && !loggedInUser) {
     root.innerHTML = `
       <div class="pr-sign-in-prompt">
         <div class="pr-icon">🥊</div>
@@ -62,20 +70,138 @@
   }
 
   const sb = window._sb;
+  const API_BASE = 'https://mmabridge.onrender.com';
+
+  // ── VIEWING ANOTHER USER'S PROFILE ────────────
+  if (!isOwnProfile) {
+    // Load other user's public data
+    let profileData = null;
+    try {
+      const { data } = await sb.from('profiles')
+        .select('id, display_name, avatar_url, created_at')
+        .eq('id', viewedUserId)
+        .single();
+      profileData = data;
+    } catch {}
+
+    if (!profileData) {
+      root.innerHTML = `
+        <div class="pr-sign-in-prompt">
+          <div class="pr-icon">👤</div>
+          <h2>Profile not found</h2>
+          <p>This user's profile doesn't exist or is not public.</p>
+          <a href="javascript:history.back()" class="pr-sign-in-btn">Go Back</a>
+        </div>`;
+      return;
+    }
+
+    // Load their ratings (public)
+    const [ratingsResult, eventsResult] = await Promise.all([
+      sb.from('ratings')
+        .select('id, event_id, event_name, hype_rating, review_text, created_at')
+        .eq('user_id', viewedUserId)
+        .order('created_at', { ascending: false }),
+      fetch('./events.json').then(r => r.ok ? r.json() : []).catch(() => []),
+    ]);
+
+    const ratings = ratingsResult.data || [];
+    const events  = Array.isArray(eventsResult) ? eventsResult : [];
+    const eventMap = {};
+    events.forEach(ev => {
+      const id = ev.id || slugify(ev.name || '');
+      eventMap[id] = ev;
+    });
+
+    const totalRatings = ratings.length;
+    const avgRating = totalRatings
+      ? (ratings.reduce((s, r) => s + Number(r.hype_rating), 0) / totalRatings).toFixed(1)
+      : '—';
+
+    // Build other-user profile UI
+    const initials = (profileData.display_name || 'U').split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+    const avatarHtml = profileData.avatar_url
+      ? `<img class="pr-avatar-img" src="${esc(profileData.avatar_url)}" alt="${esc(profileData.display_name)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+        + `<div class="pr-avatar-initials" style="display:none">${esc(initials)}</div>`
+      : `<div class="pr-avatar-initials">${esc(initials)}</div>`;
+
+    root.innerHTML = `
+      <div class="pr-hero">
+        <div class="pr-hero-bg"></div>
+        <a href="javascript:history.back()" class="pr-back">
+          <svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="6,1 1,6 6,11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back
+        </a>
+        <div class="pr-hero-inner">
+          <div class="pr-avatar-wrap">
+            <div class="pr-avatar-ring">${avatarHtml}</div>
+          </div>
+          <div class="pr-info">
+            <div class="pr-label">Fighter Profile</div>
+            <h1 class="pr-name">${esc(profileData.display_name || 'Fighter')}</h1>
+            <div class="pr-meta-row">
+              <span class="pr-meta-item">
+                <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                Member since ${memberSince(profileData.created_at)}
+              </span>
+            </div>
+            <div class="profile-follow-row" id="profileFollowRow" style="display:none">
+              <div class="profile-follow-counts">
+                <span><strong id="profileFollowersCount">0</strong> followers</span>
+                <span><strong id="profileFollowingCount">0</strong> following</span>
+              </div>
+              ${loggedInUser
+                ? `<button class="profile-follow-btn" id="profileFollowBtn">Follow</button>`
+                : `<a class="profile-follow-btn" href="auth.html">Sign in to Follow</a>`
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pr-stats">
+        <div class="pr-stats-inner">
+          <div class="pr-stat">
+            <div class="pr-stat-num">${totalRatings}</div>
+            <div class="pr-stat-lbl">Events Rated</div>
+          </div>
+          <div class="pr-stat">
+            <div class="pr-stat-num">${avgRating}</div>
+            <div class="pr-stat-lbl">Avg Rating</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pr-body">
+        ${buildOtherRatingsSection(ratings, eventMap)}
+      </div>
+    `;
+
+    // Load follow data
+    loadOtherUserFollowData(viewedUserId, loggedInUser);
+    return;
+  }
+
+  // ── OWN PROFILE ───────────────────────────────
+  const user = loggedInUser;
 
   // ── Load data in parallel ─────────────────────
-  const [ratingsResult, eventsResult, fightersResult] = await Promise.all([
+  const [ratingsResult, eventsResult, fightersResult, picksResult] = await Promise.all([
     sb.from('ratings')
       .select('id, event_id, event_name, hype_rating, review_text, created_at')
       .eq('user_id', user.id)
       .order('created_at', { ascending: false }),
     fetch('./events.json').then(r => r.ok ? r.json() : []).catch(() => []),
     fetch('./data/fighters.json').then(r => r.ok ? r.json() : []).catch(() => []),
+    sb.from('picks')
+      .select('event_id, fight_key, pick, method, round')
+      .eq('user_id', user.id)
+      .neq('fight_key', 'fotn'),
   ]);
 
   const ratings  = ratingsResult.data || [];
   const events   = Array.isArray(eventsResult) ? eventsResult : [];
   const fighters = Array.isArray(fightersResult) ? fightersResult : [];
+  const allPicks = picksResult.data || [];
 
   // ── Build event lookup by id ──────────────────
   const eventMap = {};
@@ -84,19 +210,92 @@
     eventMap[id] = ev;
   });
 
+  // ── Compute Pick History ──────────────────────
+  // Group user's picks by event_id
+  const picksByEvent = {};
+  allPicks.forEach(p => {
+    if (!picksByEvent[p.event_id]) picksByEvent[p.event_id] = [];
+    picksByEvent[p.event_id].push(p);
+  });
+
+  const pickHistory = [];
+  // Total picks across ALL events (for Pick Master badge)
+  const totalPicksAll = allPicks.length;
+
+  Object.keys(picksByEvent).forEach(evId => {
+    const ev = eventMap[evId];
+    if (!ev || ev.status !== 'completed') return;
+
+    const userPicksForEv = picksByEvent[evId];
+
+    // Build a map: fight_key → winner
+    // fight_key format matches picks.js: "main-0", "main-1", "prelims-0", "early-0"
+    const winnerMap = {};
+    const sections = [
+      { key: 'main',    fights: ev.mainCard || [] },
+      { key: 'prelims', fights: ev.prelims || [] },
+      { key: 'early',   fights: ev.earlyPrelims || [] },
+    ];
+    sections.forEach(({ key, fights }) => {
+      fights.forEach((f, i) => {
+        if (f.winner) {
+          winnerMap[`${key}-${i}`] = (f.winner || '').toLowerCase();
+        }
+      });
+    });
+
+    let correct = 0;
+    let total = 0;
+    userPicksForEv.forEach(p => {
+      const winner = winnerMap[p.fight_key];
+      if (!winner) return; // fight not yet decided
+      total++;
+      if ((p.pick || '').toLowerCase() === winner) correct++;
+    });
+
+    if (total === 0) return;
+
+    const pct = Math.round((correct / total) * 100);
+
+    const evDate = ev.isoDate
+      ? new Date(ev.isoDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+      : ev.date || '';
+
+    let verdict = 'Rough Night';
+    if (pct >= 70) verdict = 'Sharp';
+    else if (pct >= 50) verdict = 'Solid';
+
+    pickHistory.push({
+      eventId: evId,
+      name: ev.name || evId,
+      date: evDate,
+      correct,
+      total,
+      pct,
+      verdict,
+    });
+  });
+
+  // Sort by event date descending
+  pickHistory.sort((a, b) => {
+    const ea = eventMap[a.eventId];
+    const eb = eventMap[b.eventId];
+    const da = ea?.isoDate ? new Date(ea.isoDate) : 0;
+    const db = eb?.isoDate ? new Date(eb.isoDate) : 0;
+    return db - da;
+  });
+
   // ── Favourite fighters (localStorage) ─────────
   const FAVS_KEY = 'mmab_favs';
   function getFavs() {
     try { return JSON.parse(localStorage.getItem(FAVS_KEY)) || []; } catch { return []; }
   }
 
-  // Build a quick id → fighter lookup for the push module
   const fighterById = {};
   fighters.forEach(f => { if (f.id) fighterById[f.id] = f; });
 
   function saveFavs(ids) {
     try { localStorage.setItem(FAVS_KEY, JSON.stringify(ids)); } catch {}
-    // Keep push subscription in sync with current fav list
     window.MMABridgePush?.updateFavFighters(ids, fighterById).catch?.(() => {});
   }
 
@@ -106,6 +305,16 @@
     ? (ratings.reduce((s, r) => s + Number(r.hype_rating), 0) / totalRatings).toFixed(1)
     : '—';
 
+  // ── Compute badges ────────────────────────────
+  const BADGES = [
+    { id: 'sharp',   icon: '🎯', name: 'Sharp',        desc: '70%+ accuracy on any event',       check: () => pickHistory.some(e => e.pct >= 70) },
+    { id: 'perfect', icon: '💎', name: 'Perfect Card', desc: '100% correct on an event',          check: () => pickHistory.some(e => e.pct === 100) },
+    { id: 'veteran', icon: '🥋', name: 'Veteran',      desc: 'Picked 5+ events',                  check: () => pickHistory.length >= 5 },
+    { id: 'rater',   icon: '⭐', name: 'Critic',       desc: 'Rated 5+ events',                   check: () => ratings.length >= 5 },
+    { id: 'dayone',  icon: '🏅', name: 'Day One',      desc: 'Early adopter (joined before 2026)', check: () => new Date(user.created_at) < new Date('2026-01-01') },
+    { id: 'picker',  icon: '🔥', name: 'Pick Master',  desc: '30+ total picks across all events', check: () => totalPicksAll >= 30 },
+  ];
+  const earnedBadges = BADGES.filter(b => b.check());
 
   // ── Stars HTML ────────────────────────────────
   function starsHtml(rating) {
@@ -161,12 +370,18 @@
             <div class="pr-stat-num" id="statAvg">—</div>
             <div class="pr-stat-lbl">Avg Rating</div>
           </div>
+          <div class="pr-stat">
+            <div class="pr-stat-num" id="statPicks">0</div>
+            <div class="pr-stat-lbl">Picks Made</div>
+          </div>
         </div>
       </div>
 
       <!-- BODY -->
       <div class="pr-body">
+        ${buildBadgesSection()}
         ${buildRatingsSection()}
+        ${buildPickHistorySection()}
         ${buildFavsSection()}
         ${buildNotifPrefsCard()}
       </div>
@@ -177,6 +392,8 @@
     animateStats();
     attachEvents();
   }
+
+  // ── Build sections ────────────────────────────
 
   function buildRatingsSection() {
     if (!ratings.length) {
@@ -225,9 +442,72 @@
       </div>`;
   }
 
+  function buildPickHistorySection() {
+    if (!pickHistory.length) {
+      return `
+        <div class="pr-section" id="prPickHistory" style="animation-delay:0.15s">
+          <div class="pr-section-title">Pick History</div>
+          <div class="pr-empty">
+            <strong>No completed picks yet</strong>
+            Make your fight picks on the <a href="events.html" style="color:rgba(0,229,255,0.7);text-decoration:none">Events page</a>
+          </div>
+        </div>`;
+    }
+
+    const allCorrect = pickHistory.reduce((s, e) => s + e.correct, 0);
+    const allTotal   = pickHistory.reduce((s, e) => s + e.total, 0);
+    const allPct     = allTotal ? Math.round((allCorrect / allTotal) * 100) : 0;
+
+    const rows = pickHistory.map(e => {
+      const verdictClass = e.verdict === 'Sharp' ? 'sharp' : e.verdict === 'Solid' ? 'solid' : 'rough';
+      return `
+        <div class="pr-ph-row">
+          <div class="pr-ph-event">${esc(e.name)}</div>
+          <div class="pr-ph-date">${esc(e.date)}</div>
+          <div class="pr-ph-score">${e.correct}<span>/${e.total}</span></div>
+          <div class="pr-ph-pct">${e.pct}%</div>
+          <div class="pr-ph-bar"><div class="pr-ph-fill" style="width:${e.pct}%"></div></div>
+          <div class="pr-ph-verdict ${verdictClass}">${esc(e.verdict)}</div>
+        </div>`;
+    }).join('');
+
+    return `
+      <div class="pr-section" id="prPickHistory" style="animation-delay:0.15s">
+        <div class="pr-section-title">
+          Pick History
+          <span class="pr-section-count">${pickHistory.length}</span>
+        </div>
+        <div class="pr-ph-list">
+          ${rows}
+        </div>
+        <div class="pr-ph-summary">
+          <span>All-time: <strong>${allCorrect}/${allTotal} picks</strong> · <strong>${allPct}%</strong></span>
+        </div>
+      </div>`;
+  }
+
+  function buildBadgesSection() {
+    const badgesHtml = earnedBadges.length
+      ? earnedBadges.map(b => `
+          <div class="pr-badge-chip earned" title="${esc(b.desc)}">
+            <span class="pr-badge-icon">${b.icon}</span>
+            <span class="pr-badge-name">${esc(b.name)}</span>
+            <div class="pr-badge-tooltip">${esc(b.desc)}</div>
+          </div>`).join('')
+      : `<div class="pr-badge-empty">Keep picking and rating to earn badges!</div>`;
+
+    return `
+      <div class="pr-section" style="animation-delay:0.05s">
+        <div class="pr-section-title">Badges</div>
+        <div class="pr-badges-row">
+          ${badgesHtml}
+        </div>
+      </div>`;
+  }
+
   function buildFavsSection() {
     return `
-      <div class="pr-section" style="animation-delay:0.15s" id="favsSection">
+      <div class="pr-section" style="animation-delay:0.2s" id="favsSection">
         <div class="pr-section-title">Favourite Fighters</div>
         <div class="pr-favs-grid" id="favsGrid"></div>
       </div>`;
@@ -235,7 +515,7 @@
 
   function buildNotifPrefsCard() {
     return `
-      <div class="pr-section" style="animation-delay:0.2s">
+      <div class="pr-section" style="animation-delay:0.25s">
         <div class="profile-card notif-prefs-card">
           <div class="profile-card-title">Notification Preferences</div>
           <div class="notif-pref-list">
@@ -272,7 +552,6 @@
           <span><strong id="profileFollowersCount">0</strong> followers</span>
           <span><strong id="profileFollowingCount">0</strong> following</span>
         </div>
-        <button class="profile-follow-btn" id="profileFollowBtn" style="display:none">Follow</button>
       </div>`
   }
 
@@ -332,6 +611,7 @@
   function animateStats() {
     const ratingEl = document.getElementById('statRatings');
     const avgEl    = document.getElementById('statAvg');
+    const picksEl  = document.getElementById('statPicks');
 
     if (ratingEl) {
       let cur = 0;
@@ -347,9 +627,9 @@
       }
     }
 
-    if (avgEl) {
-      avgEl.textContent = avgRating;
-    }
+    if (avgEl) { avgEl.textContent = avgRating; }
+
+    if (picksEl) { picksEl.textContent = totalPicksAll; }
   }
 
   // ── Notification preferences ──────────────────
@@ -358,7 +638,7 @@
       const prefs = JSON.parse(localStorage.getItem('mma_notif_prefs') || '{}');
       document.querySelectorAll('.notif-pref-toggle').forEach(toggle => {
         const key = toggle.dataset.pref;
-        toggle.checked = prefs[key] !== false; // default true
+        toggle.checked = prefs[key] !== false;
         toggle.addEventListener('change', () => {
           const current = JSON.parse(localStorage.getItem('mma_notif_prefs') || '{}');
           current[toggle.dataset.pref] = toggle.checked;
@@ -368,14 +648,10 @@
     } catch {}
   }
 
-  // ── Follow system ─────────────────────────────
-  const API_BASE = 'https://mmabridge.onrender.com';
-
+  // ── Follow system (own profile — show counts only) ─────────────────────────
   async function loadFollowData() {
     const followRow = document.getElementById('profileFollowRow');
     if (!followRow) return;
-
-    // Always show follower/following counts for own profile
     try {
       const res = await fetch(`${API_BASE}/api/follow/counts/${user.id}`);
       if (res.ok) {
@@ -485,6 +761,114 @@
         row.querySelector('.pr-modal-row-check').textContent = isSelected ? '' : '✓';
       });
     });
+  }
+
+  // ── Helpers for OTHER user profile ───────────────────────────────────────
+
+  function buildOtherRatingsSection(ratings, eventMap) {
+    if (!ratings.length) {
+      return `
+        <div class="pr-section" style="animation-delay:0.1s">
+          <div class="pr-section-title">Reviews</div>
+          <div class="pr-empty"><strong>No reviews yet</strong></div>
+        </div>`;
+    }
+
+    const cards = ratings.map(r => {
+      const ev = eventMap[r.event_id];
+      const name   = r.event_name || ev?.name || 'Unknown Event';
+      const poster  = ev?.poster || '';
+      const eventId = r.event_id || slugify(name);
+      return `
+        <a class="pr-rating-card" href="event-review.html?id=${encodeURIComponent(eventId)}">
+          <div class="pr-rc-poster-wrap">
+            ${poster
+              ? `<img class="pr-rc-poster" src="${esc(poster)}" alt="${esc(name)}" loading="lazy" onerror="this.style.display='none'">
+                 <div class="pr-rc-grad"></div>`
+              : `<div class="pr-rc-placeholder"></div>`}
+            <div class="pr-rc-stars">${[1,2,3,4,5].map(n=>`<span class="pr-star${r.hype_rating>=n?' lit':''}">★</span>`).join('')}</div>
+          </div>
+          <div class="pr-rc-body">
+            <div class="pr-rc-name">${esc(name)}</div>
+            <div class="pr-rc-meta"><span>${timeAgo(r.created_at)}</span></div>
+            ${r.review_text ? `<div class="pr-rc-text">${esc(r.review_text)}</div>` : ''}
+          </div>
+        </a>`;
+    }).join('');
+
+    return `
+      <div class="pr-section" style="animation-delay:0.1s">
+        <div class="pr-section-title">Reviews <span class="pr-section-count">${ratings.length}</span></div>
+        <div class="pr-ratings-grid">${cards}</div>
+      </div>`;
+  }
+
+  async function loadOtherUserFollowData(targetId, currentUser) {
+    const followRow = document.getElementById('profileFollowRow');
+    if (!followRow) return;
+
+    // Load follower/following counts
+    try {
+      const res = await fetch(`${API_BASE}/api/follow/counts/${targetId}`);
+      if (res.ok) {
+        const data = await res.json();
+        const followersEl = document.getElementById('profileFollowersCount');
+        const followingEl = document.getElementById('profileFollowingCount');
+        if (followersEl) followersEl.textContent = data.followers ?? 0;
+        if (followingEl) followingEl.textContent = data.following ?? 0;
+        followRow.style.display = 'flex';
+      }
+    } catch {}
+
+    if (!currentUser) return;
+
+    // Check if current user is already following
+    const btn = document.getElementById('profileFollowBtn');
+    if (!btn) return;
+
+    let isFollowing = false;
+    try {
+      const session = await window._sb.auth.getSession();
+      const token = session?.data?.session?.access_token;
+      if (!token) return;
+
+      const statusRes = await fetch(`${API_BASE}/api/follow/status/${targetId}`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (statusRes.ok) {
+        const statusData = await statusRes.json();
+        isFollowing = statusData.is_following === true;
+      }
+
+      btn.textContent = isFollowing ? 'Following ✓' : 'Follow';
+      btn.classList.toggle('following', isFollowing);
+
+      btn.addEventListener('click', async () => {
+        const session2 = await window._sb.auth.getSession();
+        const tok = session2?.data?.session?.access_token;
+        if (!tok) return;
+
+        try {
+          const method = isFollowing ? 'DELETE' : 'POST';
+          const r = await fetch(`${API_BASE}/api/follow/${targetId}`, {
+            method,
+            headers: { 'Authorization': `Bearer ${tok}` }
+          });
+          if (r.ok) {
+            isFollowing = !isFollowing;
+            btn.textContent = isFollowing ? 'Following ✓' : 'Follow';
+            btn.classList.toggle('following', isFollowing);
+
+            // Optimistic count update
+            const followersEl = document.getElementById('profileFollowersCount');
+            if (followersEl) {
+              const current = parseInt(followersEl.textContent) || 0;
+              followersEl.textContent = isFollowing ? current + 1 : Math.max(0, current - 1);
+            }
+          }
+        } catch {}
+      });
+    } catch {}
   }
 
 })();
