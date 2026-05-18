@@ -8936,3 +8936,324 @@ body.light-mode .pr-ph-row:hover { background: rgba(0,0,0,.04) !important; }
 body.light-mode .pr-badge-chip.earned { background: rgba(200,150,12,.12) !important; }
 body.light-mode .pr-badge-name { color: #a87a0a !important; }
 body.light-mode .ev-consensus-btn { background: rgba(200,150,12,.1) !important; }
+
+/* ======= MOBILE UX OVERHAUL ======= */
+
+/* ── Global touch improvements ───────────────────────────────────── */
+* { -webkit-overflow-scrolling: touch; }
+button, a, [role="button"] { -webkit-tap-highlight-color: transparent; }
+button { min-height: 44px; }
+
+/* ── Nav bar mobile ──────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .nav-bar {
+    height: 56px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .site-search {
+    font-size: 16px; /* prevents iOS zoom on focus */
+    border-radius: 10px;
+    max-width: calc(100vw - 120px);
+  }
+  .nav-links .nav-link-text { display: none; }
+}
+
+/* ── Search dropdown mobile — bottom sheet ───────────────────────── */
+@media (max-width: 640px) {
+  .search-dropdown {
+    position: fixed !important;
+    top: auto !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    border-radius: 16px 16px 0 0 !important;
+    max-height: 60vh !important;
+    overflow-y: auto !important;
+    box-shadow: 0 -8px 40px rgba(0,0,0,.6) !important;
+  }
+  .sd-row    { padding: 14px 16px; min-height: 54px; }
+  .sd-user-row { padding: 14px 16px; }
+}
+
+/* ── Events page mobile ──────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .ev-card { border-radius: 12px; margin: 0 0 12px; }
+  .ev-fights-list { font-size: 0.8rem; }
+  .ev-fighter-name {
+    font-size: 0.82rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 140px;
+  }
+}
+
+/* ── Picks page mobile ───────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .pk-card { border-radius: 12px; padding: 14px 14px; }
+  .pk-fighter-a, .pk-fighter-b { min-width: 0; flex: 1; }
+  .pk-vs { font-size: 0.75rem; padding: 0 6px; }
+  .pk-fighter-name {
+    font-size: 0.82rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 120px;
+  }
+  .pk-fighter-btn {
+    min-height: 52px;
+    border-radius: 10px;
+    padding: 10px 12px;
+  }
+  /* Drum picker mobile */
+  .pk-method-drum { height: 180px; }
+  .pk-drum-item   { height: 44px; font-size: 0.85rem; padding: 0 10px; }
+  .pk-drum-slot   { touch-action: pan-y; }
+  /* iOS-style drum wrap with top/bottom fade masks */
+  .pk-drum-wrap {
+    background: rgba(255,255,255,0.04);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+  }
+  .pk-drum-wrap::before,
+  .pk-drum-wrap::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    height: 48px;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .pk-drum-wrap::before {
+    top: 0;
+    background: linear-gradient(to bottom, rgba(11,13,18,0.92), transparent);
+  }
+  .pk-drum-wrap::after {
+    bottom: 0;
+    background: linear-gradient(to top, rgba(11,13,18,0.92), transparent);
+  }
+  /* Seg buttons — larger tap targets */
+  .pk-seg-btn { min-height: 44px; }
+}
+
+/* ── Profile page mobile ─────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .pr-hero-inner {
+    padding: 32px 16px 28px;
+    flex-direction: row;
+    align-items: center;
+  }
+  .pr-avatar-ring { width: 80px; height: 80px; }
+  .pr-stat-num    { font-size: 1.8rem; }
+  .pr-body        { padding: 0 12px 40px; }
+  .pr-section     { padding: 18px 14px; border-radius: 12px; }
+  .pr-fav-card    { width: 120px; }
+  .pr-fav-photo-wrap { height: 130px; }
+}
+
+/* ── Leaderboard mobile ──────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .lb-table-wrap { border-radius: 12px; }
+  .lb-row        { padding: 10px 12px; font-size: 0.8rem; }
+}
+@media (max-width: 900px) {
+  .lb-boards { flex-direction: column; }
+}
+
+/* ── Bottom safe area (notch/home-indicator phones) ──────────────── */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .nav-bar { padding-bottom: env(safe-area-inset-bottom); }
+}
+
+/* ── Share modal ─────────────────────────────────────────────────── */
+.share-modal-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0,0,0,0.7); backdrop-filter: blur(8px);
+  display: flex; align-items: flex-end; justify-content: center;
+}
+.share-modal {
+  background: #111318; border: 1px solid rgba(255,255,255,.1);
+  border-radius: 20px 20px 0 0; padding: 28px 24px 32px;
+  width: 100%; max-width: 500px;
+  animation: slideUp 0.3s cubic-bezier(.22,1,.36,1) both;
+}
+.share-modal-title {
+  font-family: 'Montserrat', sans-serif; font-weight: 900;
+  font-size: 1rem; color: #fff; margin: 0 0 20px; text-align: center;
+}
+.share-options { display: flex; flex-direction: column; gap: 10px; }
+.share-option {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 18px; border-radius: 12px;
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+  cursor: pointer; transition: background 0.15s;
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  font-size: 0.82rem; color: #fff; width: 100%; text-align: left;
+}
+.share-option:hover, .share-option:active { background: rgba(255,255,255,.1); }
+.share-option-icon { font-size: 1.2rem; width: 28px; text-align: center; flex-shrink: 0; }
+.share-cancel {
+  margin-top: 12px; width: 100%; padding: 14px;
+  background: none; border: 1px solid rgba(255,255,255,.1);
+  border-radius: 12px; color: rgba(255,255,255,.5);
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  font-size: 0.8rem; cursor: pointer; transition: background 0.15s;
+}
+.share-cancel:hover { background: rgba(255,255,255,.04); }
+/* @keyframes slideUp defined earlier in the file (line ~2970) */
+
+/* ── Avatar upload button ─────────────────────────────────────────── */
+.pr-avatar-upload-btn {
+  position: absolute; bottom: -2px; right: -2px;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: #c8960c; border: 2px solid #060608;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 13px; transition: transform 0.15s, background 0.15s;
+  z-index: 2;
+}
+.pr-avatar-upload-btn:hover { transform: scale(1.1); background: #a87a0a; }
+
+/* ── Onboarding welcome modal ─────────────────────────────────────── */
+.ob-overlay {
+  position: fixed; inset: 0; z-index: 9998;
+  background: rgba(0,0,0,0.85); backdrop-filter: blur(10px);
+  display: flex; align-items: center; justify-content: center; padding: 20px;
+}
+.ob-modal {
+  background: linear-gradient(160deg, #0d1117, #111318);
+  border: 1px solid rgba(200,150,12,0.3);
+  border-radius: 20px; padding: 36px 32px 28px;
+  max-width: 420px; width: 100%; text-align: center;
+  animation: slideUp 0.4s cubic-bezier(.22,1,.36,1) both;
+}
+.ob-logo  { font-size: 2.2rem; margin-bottom: 8px; }
+.ob-title {
+  font-family: 'Montserrat', sans-serif; font-weight: 900;
+  font-size: clamp(1.4rem, 5vw, 1.8rem); color: #fff;
+  margin: 0 0 6px; text-transform: uppercase; letter-spacing: 0.02em;
+}
+.ob-title span { color: #c8960c; }
+.ob-sub {
+  font-family: 'Inter', sans-serif; font-size: 0.85rem;
+  color: rgba(255,255,255,.45); margin: 0 0 24px; line-height: 1.5;
+}
+.ob-steps { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+.ob-step {
+  display: flex; align-items: center; gap: 14px; text-align: left;
+  padding: 12px 14px; border-radius: 12px;
+  background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06);
+}
+.ob-step-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: rgba(200,150,12,.2); border: 1px solid rgba(200,150,12,.5);
+  color: #c8960c; font-family: 'Montserrat', sans-serif; font-weight: 900;
+  font-size: 0.8rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.ob-step-text { font-family: 'Inter', sans-serif; font-size: 0.8rem; color: rgba(255,255,255,.7); line-height: 1.4; }
+.ob-step-text strong { color: #fff; font-weight: 600; }
+.ob-cta {
+  display: block; width: 100%; box-sizing: border-box;
+  background: linear-gradient(135deg, #c8960c, #a87a0a);
+  color: #000; font-family: 'Montserrat', sans-serif;
+  font-size: 0.78rem; font-weight: 900; letter-spacing: 0.1em;
+  text-transform: uppercase; text-decoration: none;
+  padding: 15px 24px; border-radius: 12px; border: none; cursor: pointer;
+  margin-bottom: 10px; transition: opacity 0.15s, transform 0.15s;
+}
+.ob-cta:hover { opacity: 0.9; transform: translateY(-1px); }
+.ob-skip {
+  background: none; border: none; cursor: pointer;
+  font-family: 'Inter', sans-serif; font-size: 0.78rem;
+  color: rgba(255,255,255,.28); padding: 4px; transition: color 0.15s;
+}
+.ob-skip:hover { color: rgba(255,255,255,.55); }
+
+/* ── How It Works section ─────────────────────────────────────────── */
+.hiw-section {
+  max-width: 860px; margin: 0 auto 48px; padding: 0 20px;
+}
+.hiw-title {
+  font-family: 'Montserrat', sans-serif; font-weight: 900;
+  font-size: clamp(1.1rem, 3vw, 1.4rem); text-transform: uppercase;
+  letter-spacing: 0.08em; color: #fff; margin: 0 0 20px; text-align: center;
+}
+.hiw-title span { color: #00e5ff; }
+.hiw-steps {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+}
+@media (max-width: 640px) {
+  .hiw-steps { grid-template-columns: 1fr; }
+}
+.hiw-step {
+  background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07);
+  border-radius: 16px; padding: 22px 18px;
+  text-align: center; transition: border-color 0.15s;
+}
+.hiw-step:hover { border-color: rgba(0,229,255,.2); }
+.hiw-step-icon  { font-size: 1.8rem; margin-bottom: 10px; }
+.hiw-step-num {
+  font-family: 'Montserrat', sans-serif; font-weight: 900;
+  font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: #00e5ff; margin-bottom: 6px;
+}
+.hiw-step-title {
+  font-family: 'Montserrat', sans-serif; font-weight: 800;
+  font-size: 0.9rem; color: #fff; margin-bottom: 6px;
+}
+.hiw-step-body {
+  font-family: 'Inter', sans-serif; font-size: 0.78rem;
+  color: rgba(255,255,255,.42); line-height: 1.5;
+}
+
+/* ── Light-mode overrides for new mobile/modal classes ───────────── */
+body.light-mode .share-modal {
+  background: #ffffff !important;
+  border-color: rgba(0,0,0,.1) !important;
+}
+body.light-mode .share-modal-title { color: #111 !important; }
+body.light-mode .share-option {
+  background: rgba(0,0,0,.03) !important;
+  border-color: rgba(0,0,0,.08) !important;
+  color: #111 !important;
+}
+body.light-mode .share-option:hover,
+body.light-mode .share-option:active { background: rgba(0,0,0,.07) !important; }
+body.light-mode .share-cancel {
+  border-color: rgba(0,0,0,.12) !important;
+  color: rgba(0,0,0,.4) !important;
+}
+body.light-mode .share-cancel:hover { background: rgba(0,0,0,.04) !important; }
+body.light-mode .ob-modal {
+  background: linear-gradient(160deg, #f5f7fa, #ffffff) !important;
+  border-color: rgba(200,150,12,0.25) !important;
+}
+body.light-mode .ob-title { color: #111 !important; }
+body.light-mode .ob-sub   { color: rgba(0,0,0,.45) !important; }
+body.light-mode .ob-step  {
+  background: rgba(0,0,0,.02) !important;
+  border-color: rgba(0,0,0,.06) !important;
+}
+body.light-mode .ob-step-text  { color: rgba(0,0,0,.6) !important; }
+body.light-mode .ob-step-text strong { color: #111 !important; }
+body.light-mode .ob-skip { color: rgba(0,0,0,.28) !important; }
+body.light-mode .ob-skip:hover { color: rgba(0,0,0,.55) !important; }
+body.light-mode .hiw-step {
+  background: rgba(0,0,0,.02) !important;
+  border-color: rgba(0,0,0,.06) !important;
+}
+body.light-mode .hiw-step:hover { border-color: rgba(0,180,220,.25) !important; }
+body.light-mode .hiw-title { color: #111 !important; }
+body.light-mode .hiw-title span { color: #0099bb !important; }
+body.light-mode .hiw-step-num  { color: #0099bb !important; }
+body.light-mode .hiw-step-title { color: #111 !important; }
+body.light-mode .hiw-step-body  { color: rgba(0,0,0,.42) !important; }
+body.light-mode .pk-drum-wrap {
+  background: rgba(0,0,0,.04) !important;
+}
+body.light-mode .pk-drum-wrap::before {
+  background: linear-gradient(to bottom, rgba(245,247,250,0.92), transparent) !important;
+}
+body.light-mode .pk-drum-wrap::after {
+  background: linear-gradient(to top, rgba(245,247,250,0.92), transparent) !important;
+}
