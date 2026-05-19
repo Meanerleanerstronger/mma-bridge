@@ -189,7 +189,7 @@
     .ob-overlay {
       position: fixed; inset: 0; z-index: 9998;
       background: rgba(0,0,0,0.85); backdrop-filter: blur(10px);
-      display: flex !important; align-items: center; justify-content: center; padding: 20px;
+      display: flex; align-items: center; justify-content: center; padding: 20px;
     }
     .ob-modal {
       background: linear-gradient(160deg, #0d1117, #111318);
@@ -229,8 +229,11 @@
       color: #c8960c; font-family: 'Montserrat', sans-serif; font-weight: 900;
       font-size: 0.78rem; display: flex; align-items: center; justify-content: center;
     }
-    .ob-step-text { font-family: 'Inter', sans-serif; font-size: 0.78rem; color: rgba(255,255,255,.65); line-height: 1.4; }
+    .ob-step-text { font-family: 'Inter', sans-serif; font-size: 0.78rem; color: rgba(255,255,255,.65); line-height: 1.4; flex: 1; }
     .ob-step-text strong { color: #fff; }
+    .ob-step-link { text-decoration: none; cursor: pointer; }
+    .ob-step-link:hover { border-color: rgba(200,150,12,.35); background: rgba(200,150,12,.06); }
+    .ob-step-arrow { color: rgba(200,150,12,.6); font-size: 0.85rem; flex-shrink: 0; align-self: center; }
     .ob-cta {
       display: block; width: 100%; box-sizing: border-box;
       background: linear-gradient(135deg, #c8960c, #a87a0a);
@@ -489,14 +492,16 @@
       <h2 class="ob-title">MMA <span>Bridge</span></h2>
       <p class="ob-sub">Pick fights. Track your accuracy. Climb the leaderboard.</p>
       <div class="ob-steps">
-        <div class="ob-step">
+        <a class="ob-step ob-step-link" href="events.html" id="obStep1">
           <div class="ob-step-num">1</div>
-          <div class="ob-step-text"><strong>Pick fights</strong> — predict winners before each UFC event locks</div>
-        </div>
-        <div class="ob-step">
+          <div class="ob-step-text"><strong>Pick fights</strong> — predict winners before each event locks</div>
+          <div class="ob-step-arrow">→</div>
+        </a>
+        <a class="ob-step ob-step-link" href="reviews.html" id="obStep2">
           <div class="ob-step-num">2</div>
           <div class="ob-step-text"><strong>Rate events</strong> — score cards and leave reviews after</div>
-        </div>
+          <div class="ob-step-arrow">→</div>
+        </a>
         <div class="ob-step">
           <div class="ob-step-num">3</div>
           <div class="ob-step-text"><strong>Climb the board</strong> — accuracy earns you a tier from Rookie to Legend</div>
@@ -522,6 +527,8 @@
         }
         document.getElementById('obClose')?.addEventListener('click', dismiss);
         document.getElementById('obSkip')?.addEventListener('click', dismiss);
+        document.getElementById('obStep1')?.addEventListener('click', function() { localStorage.setItem(SEEN_KEY, '1'); });
+        document.getElementById('obStep2')?.addEventListener('click', function() { localStorage.setItem(SEEN_KEY, '1'); });
         overlay.addEventListener('click', function(e) { if (e.target === overlay) dismiss(); });
       }, 600);
     })();
