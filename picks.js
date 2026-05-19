@@ -95,7 +95,6 @@ function formatOdds(n) {
     toastTimer = setTimeout(() => { toast.style.display = 'none'; }, 2800);
   }
 
-  if (!eventId) { root.innerHTML = `<div class="pk-error">No event selected. <a href="events.html" style="color:#00e5ff;text-decoration:none;">Browse events →</a></div>`; return; }
   root.innerHTML = `<div class="pk-loading"><div class="pk-spinner"></div>Loading card…</div>`;
 
   const [eventsData, fightersData, user] = await Promise.all([
@@ -157,6 +156,16 @@ function formatOdds(n) {
       return `<span class="pk-form-dot pk-form-dot-${cls}">${r}</span>`;
     }).join('');
     return `<div class="pk-form-strip">${dots}</div>`;
+  }
+
+  // Auto-redirect to next upcoming event when no event specified
+  if (!eventId) {
+    const today = new Date().toISOString().slice(0, 10);
+    const next = eventsData.find(e => e.status !== 'completed' && (e.isoDate || '') >= today)
+                 || eventsData.find(e => e.status !== 'completed');
+    if (next) { window.location.replace(`picks.html?id=${encodeURIComponent(next.id)}`); return; }
+    root.innerHTML = `<div class="pk-error">No upcoming events. <a href="events.html" style="color:#00e5ff;text-decoration:none;">Browse events →</a></div>`;
+    return;
   }
 
   const event = eventsData.find(e => e.id === eventId || slugify(e.name || '') === eventId);
