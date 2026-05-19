@@ -183,6 +183,21 @@
       else otherRunning = 0;
     }
 
+    // H2H challenge record for viewed user
+    let chWins = 0, chLosses = 0, chTies = 0;
+    try {
+      const { data: chRows } = await sb.from('challenges')
+        .select('challenger_id, opponent_id, winner_id, status')
+        .or(`challenger_id.eq.${viewedUserId},opponent_id.eq.${viewedUserId}`)
+        .eq('status', 'completed');
+      (chRows || []).forEach(c => {
+        if (!c.winner_id) { chTies++; return; }
+        if (c.winner_id === viewedUserId) chWins++;
+        else chLosses++;
+      });
+    } catch {}
+    const chTotal = chWins + chLosses + chTies;
+
     // Build fav fighters HTML
     let favsHtml = '';
     if (favFighterIds.length) {
@@ -282,10 +297,10 @@
             <div class="pr-stat-num">${otherCurrentStreak}</div>
             <div class="pr-stat-lbl">Current Streak</div>
           </div>
-          <div class="pr-stat">
-            <div class="pr-stat-num">${otherBestStreak}</div>
-            <div class="pr-stat-lbl">Best Streak</div>
-          </div>
+          ${chTotal > 0 ? `<div class="pr-stat">
+            <div class="pr-stat-num pr-stat-h2h">${chWins}<span class="pr-stat-h2h-sep">-</span>${chLosses}${chTies > 0 ? `<span class="pr-stat-h2h-sep">-</span>${chTies}` : ''}</div>
+            <div class="pr-stat-lbl">H2H Record</div>
+          </div>` : ''}
         </div>
       </div>
 
@@ -457,6 +472,21 @@
   pickHistory.forEach(ev => { totalJudged += ev.total; totalCorrect += ev.correct; });
   const overallAccuracy = totalJudged > 0 ? Math.round((totalCorrect / totalJudged) * 100) : null;
 
+  // ── H2H challenge record (own profile) ───────────────────
+  let myChWins = 0, myChLosses = 0, myChTies = 0;
+  try {
+    const { data: myChRows } = await sb.from('challenges')
+      .select('challenger_id, opponent_id, winner_id, status')
+      .or(`challenger_id.eq.${user.id},opponent_id.eq.${user.id}`)
+      .eq('status', 'completed');
+    (myChRows || []).forEach(c => {
+      if (!c.winner_id) { myChTies++; return; }
+      if (c.winner_id === user.id) myChWins++;
+      else myChLosses++;
+    });
+  } catch {}
+  const myChTotal = myChWins + myChLosses + myChTies;
+
   // ── Tier computation ──────────────────────────────────────
   function computeTier(judgedPicks, accuracy) {
     if (judgedPicks === 0) return 'Rookie';
@@ -468,6 +498,38 @@
     if (accuracy < 65 || judgedPicks < 30) return 'Platinum';
     if (accuracy < 70 || judgedPicks < 60) return 'Diamond';
     return 'Legend';
+  }
+
+  function buildTierProgress(judgedPicks, accuracy) {
+    const TIER_STEPS = [
+      { name: 'Rookie',    minJudged: 0,  minAcc: 0  },
+      { name: 'Candidate', minJudged: 1,  minAcc: 0  },
+      { name: 'Iron',      minJudged: 10, minAcc: 0  },
+      { name: 'Bronze',    minJudged: 10, minAcc: 40 },
+      { name: 'Silver',    minJudged: 10, minAcc: 50 },
+      { name: 'Gold',      minJudged: 10, minAcc: 55 },
+      { name: 'Platinum',  minJudged: 30, minAcc: 60 },
+      { name: 'Diamond',   minJudged: 60, minAcc: 65 },
+      { name: 'Legend',    minJudged: 60, minAcc: 70 },
+    ];
+    const current = computeTier(judgedPicks, accuracy);
+    const currentIdx = TIER_STEPS.findIndex(t => t.name === current);
+    if (current === 'Legend') {
+      return `<div class="pr-tier-progress"><div class="pr-tier-progress-label"><span>MAX TIER</span><span>Legend</span></div><div class="pr-tier-bar-track"><div class="pr-tier-bar-fill" style="width:100%"></div></div></div>`;
+    }
+    const next = TIER_STEPS[currentIdx + 1];
+    const acc = accuracy || 0;
+    const judgePct = next.minJudged > 0 ? Math.min(100, Math.round((judgedPicks / next.minJudged) * 100)) : 100;
+    const accPct   = next.minAcc > 0 ? Math.min(100, Math.round((acc / next.minAcc) * 100)) : 100;
+    const pct = Math.round((judgePct + accPct) / 2);
+    const needs = [];
+    if (judgedPicks < next.minJudged) needs.push(`${next.minJudged - judgedPicks} more judged picks`);
+    if (acc < next.minAcc) needs.push(`${next.minAcc}%+ accuracy`);
+    const hint = needs.length ? needs.join(' · ') : 'Almost there!';
+    return `<div class="pr-tier-progress">
+      <div class="pr-tier-progress-label"><span>→ ${next.name}</span><span>${hint}</span></div>
+      <div class="pr-tier-bar-track"><div class="pr-tier-bar-fill" style="width:${pct}%"></div></div>
+    </div>`;
   }
 
   // ── Favourite fighters (localStorage + Supabase) ─────────
@@ -559,6 +621,7 @@
             <div class="pr-label">Fighter Profile</div>
             <h1 class="pr-name">${esc(user.display_name || 'Fighter')}</h1>
             <span class="pr-tier-badge">${computeTier(totalJudged, overallAccuracy)}</span>
+            ${buildTierProgress(totalJudged, overallAccuracy)}
             <div class="pr-meta-row">
               <span class="pr-meta-item">
                 <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
@@ -603,6 +666,10 @@
             <div class="pr-stat-num" id="statBestStreak">${bestStreak}</div>
             <div class="pr-stat-lbl">Best Streak</div>
           </div>
+          ${myChTotal > 0 ? `<div class="pr-stat">
+            <div class="pr-stat-num pr-stat-h2h">${myChWins}<span class="pr-stat-h2h-sep">-</span>${myChLosses}${myChTies > 0 ? `<span class="pr-stat-h2h-sep">-</span>${myChTies}` : ''}</div>
+            <div class="pr-stat-lbl">H2H Record</div>
+          </div>` : ''}
         </div>
       </div>
 

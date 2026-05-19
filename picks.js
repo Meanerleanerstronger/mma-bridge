@@ -707,7 +707,7 @@ function formatOdds(n) {
     const comm      = communityPicks[key] || {};
     const commTotal = Object.values(comm).reduce((s, v) => s + v, 0);
     const hasPick   = pickedA || pickedB;
-    const showComm  = commTotal > 0 && (isCompleted || hasPick);
+    const showComm  = commTotal > 0 && (isCompleted || isLocked || hasPick);
     const isDD      = (isCompleted ? myPicks['__dd__']?.pick : localPicks['__dd__']?.pick) === key;
     const commPctA  = showComm ? Math.round(((comm[f.a] || 0) / commTotal) * 100) : null;
     const commPctB  = showComm ? Math.round(((comm[f.b] || 0) / commTotal) * 100) : null;
@@ -1304,6 +1304,10 @@ function formatOdds(n) {
             ${hypeCount > 0 ? `<span class="pk-meta-dot">·</span><span class="pk-hype-pill"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>${hypeAvg.toFixed(1)} hype · ${hypeCount}</span>` : ''}
           </div>
           ${!isCompleted && !isLocked ? `<div class="pk-hd-sub">Predict winners · methods · rounds · Fight of the Night</div>` : ''}
+          ${!isCompleted && !isLocked ? `<div class="pk-fotn-reminder">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Pick Fight of the Night at the bottom for +15 pts
+          </div>` : ''}
           <button class="pk-hiw-btn" id="pkHowItWorks" type="button">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>
             How It Works
@@ -1440,6 +1444,11 @@ function formatOdds(n) {
     bindFotn();
     updateFotnBar();
     initShareBtn();
+
+    // FOTN reminder pill scrolls to FOTN section
+    document.querySelector('.pk-fotn-reminder')?.addEventListener('click', () => {
+      document.getElementById('pkFotnBar')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
     requestAnimationFrame(() => {
       initSpine();
       animateFightEntrance();
@@ -1867,6 +1876,11 @@ function formatOdds(n) {
   render();
   initPkCountdown();
   setupComments();
+
+  // ── Unsaved picks warning ─────────────────────
+  window.addEventListener('beforeunload', e => {
+    if (hasUnsavedChanges()) { e.preventDefault(); e.returnValue = ''; }
+  });
 
   // ── Auth late-arrival ─────────────────────────
   if (sb && !isCompleted) {
