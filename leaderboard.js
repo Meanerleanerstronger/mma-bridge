@@ -53,6 +53,10 @@
     <div class="lb-hero">
       <h1 class="lb-title">Community<br><span>Leaderboard</span></h1>
       <p class="lb-subtitle">Ranked by prediction accuracy across completed events</p>
+      <button class="pk-hiw-btn lb-hiw-btn" id="lbHowItWorks" type="button">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>
+        How It Works
+      </button>
     </div>
     <div class="lb-wrap">
 
@@ -719,6 +723,65 @@
   function wireModals(myId, allUsers, profileMap) {
     function openModal(id) { const el = document.getElementById(id); if (el) el.style.display = 'flex'; }
     function closeModal(id) { const el = document.getElementById(id); if (el) el.style.display = 'none'; }
+
+    // ── Leaderboard How It Works modal ──
+    document.getElementById('lbHowItWorks')?.addEventListener('click', () => {
+      const el = document.createElement('div');
+      el.className = 'lb-modal-backdrop';
+      el.id = 'lbHiwModal';
+      el.innerHTML = `
+        <div class="lb-modal pk-hiw-modal">
+          <div class="lb-modal-header">
+            <span class="lb-modal-title">How The Leaderboard Works</span>
+            <button class="lb-modal-close" id="lbHiwClose">✕</button>
+          </div>
+          <div class="lb-modal-body pk-hiw-body">
+            <div class="pk-hiw-rows">
+              <div class="pk-hiw-row">
+                <span class="pk-hiw-icon pk-hiw-cyan">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                </span>
+                <div>
+                  <div class="pk-hiw-label">Global</div>
+                  <div class="pk-hiw-sub">Every pick ever made — all-time accuracy &amp; points</div>
+                </div>
+              </div>
+              <div class="pk-hiw-row">
+                <span class="pk-hiw-icon pk-hiw-amber">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                </span>
+                <div>
+                  <div class="pk-hiw-label">This Month / This Week</div>
+                  <div class="pk-hiw-sub">Rolling window — great for hot streaks</div>
+                </div>
+              </div>
+              <div class="pk-hiw-row">
+                <span class="pk-hiw-icon pk-hiw-amber">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                </span>
+                <div>
+                  <div class="pk-hiw-label">Last 10 Events</div>
+                  <div class="pk-hiw-sub">Recency matters — who's been sharpest lately</div>
+                </div>
+              </div>
+              <div class="pk-hiw-divider"></div>
+              <div class="pk-hiw-row">
+                <span class="pk-hiw-icon pk-hiw-gold">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </span>
+                <div>
+                  <div class="pk-hiw-label">My Group &amp; H2H</div>
+                  <div class="pk-hiw-sub">Your private group standings + head-to-head challenge scores per event</div>
+                </div>
+              </div>
+            </div>
+            <div class="pk-hiw-max">Points: <strong>+10</strong> winner · <strong>+5</strong> method · <strong>+5</strong> round · <strong>+15</strong> FOTN &nbsp;·&nbsp; Double Down = <strong>×2</strong> or <strong>−10</strong></div>
+          </div>
+        </div>`;
+      document.body.appendChild(el);
+      el.addEventListener('click', e => { if (e.target === el) el.remove(); });
+      document.getElementById('lbHiwClose').addEventListener('click', () => el.remove());
+    });
 
     document.getElementById('btnCreateGroup')?.addEventListener('click', () => {
       if (!myId) { const e = document.getElementById('createErr'); if (e) { openModal('modalCreate'); e.textContent = 'Sign in first to create a group.'; } return; }

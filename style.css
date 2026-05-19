@@ -7459,6 +7459,66 @@ body.light-mode #site-disclaimer {
 .lb-h2h-picks-count { font-family: 'Inter', sans-serif; font-size: 0.72rem; color: rgba(255,255,255,0.4); margin: 8px 0; }
 .lb-h2h-card { border-color: rgba(0,229,255,0.08) !important; }
 
+/* ── How It Works button (shared picks + leaderboard) ── */
+.pk-hiw-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 500;
+  color: rgba(255,255,255,0.45);
+  cursor: pointer; transition: all 0.18s ease;
+  margin-top: 10px;
+}
+.pk-hiw-btn:hover { background: rgba(255,255,255,0.09); color: rgba(255,255,255,0.75); border-color: rgba(255,255,255,0.2); }
+.lb-hiw-btn { margin: 10px auto 0; display: flex; }
+
+/* ── How It Works modal content ── */
+.pk-hiw-modal { max-width: 400px !important; }
+.pk-hiw-body { padding-top: 8px !important; }
+.pk-hiw-rows { display: flex; flex-direction: column; gap: 0; }
+.pk-hiw-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.pk-hiw-row:last-child { border-bottom: none; }
+.pk-hiw-icon {
+  width: 30px; height: 30px; border-radius: 8px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.pk-hiw-cyan  { background: rgba(0,229,255,0.1);  color: #00e5ff; }
+.pk-hiw-amber { background: rgba(255,170,0,0.1);  color: #ffaa00; }
+.pk-hiw-red   { background: rgba(255,60,60,0.1);  color: #ff6060; }
+.pk-hiw-gold  { background: rgba(200,150,12,0.15); color: #c8960c; }
+.pk-hiw-label { font-family: 'Montserrat', sans-serif; font-size: 0.82rem; font-weight: 700; color: rgba(255,255,255,0.85); }
+.pk-hiw-sub   { font-family: 'Inter', sans-serif; font-size: 0.72rem; color: rgba(255,255,255,0.35); margin-top: 2px; }
+.pk-hiw-pts {
+  margin-left: auto; flex-shrink: 0;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 900;
+  color: rgba(255,255,255,0.5);
+}
+.pk-hiw-pts-gold { color: #c8960c; }
+.pk-hiw-dd-row { background: rgba(200,150,12,0.04); border-radius: 8px; padding: 11px 8px; margin: 4px -8px; border-bottom: none !important; }
+.pk-hiw-divider { height: 1px; background: rgba(255,255,255,0.07); margin: 4px 0; }
+.pk-hiw-max {
+  margin-top: 14px; padding: 10px 14px;
+  background: rgba(0,229,255,0.04); border-radius: 8px;
+  border: 1px solid rgba(0,229,255,0.08);
+  font-family: 'Inter', sans-serif; font-size: 0.72rem;
+  color: rgba(255,255,255,0.35); text-align: center; line-height: 1.6;
+}
+.pk-hiw-max strong { color: rgba(255,255,255,0.65); }
+body.light-mode .pk-hiw-btn { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.12); color: rgba(0,0,0,0.4); }
+body.light-mode .pk-hiw-btn:hover { background: rgba(0,0,0,0.09); color: rgba(0,0,0,0.7); }
+body.light-mode .pk-hiw-label { color: rgba(0,0,0,0.8); }
+body.light-mode .pk-hiw-sub { color: rgba(0,0,0,0.4); }
+body.light-mode .pk-hiw-max { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.08); color: rgba(0,0,0,0.4); }
+body.light-mode .pk-hiw-max strong { color: rgba(0,0,0,0.65); }
+body.light-mode .pk-hiw-row { border-color: rgba(0,0,0,0.07); }
+body.light-mode .pk-hiw-divider { background: rgba(0,0,0,0.08); }
+
 /* ── Leaderboard — Challenges Hub ── */
 .lb-ch-section {
   max-width: 820px;

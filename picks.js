@@ -1304,6 +1304,10 @@ function formatOdds(n) {
             ${hypeCount > 0 ? `<span class="pk-meta-dot">·</span><span class="pk-hype-pill"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>${hypeAvg.toFixed(1)} hype · ${hypeCount}</span>` : ''}
           </div>
           ${!isCompleted && !isLocked ? `<div class="pk-hd-sub">Predict winners · methods · rounds · Fight of the Night</div>` : ''}
+          <button class="pk-hiw-btn" id="pkHowItWorks" type="button">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>
+            How It Works
+          </button>
           ${careerBadgeHtml()}
         </div>
 
@@ -1357,6 +1361,79 @@ function formatOdds(n) {
 
     // Bind save button (inline in ctrl panel)
     document.getElementById('pkSaveBtn')?.addEventListener('click', saveAllPicks);
+
+    // ── How It Works modal ──
+    document.getElementById('pkHowItWorks')?.addEventListener('click', () => {
+      const el = document.createElement('div');
+      el.className = 'lb-modal-backdrop';
+      el.id = 'pkHiwModal';
+      el.innerHTML = `
+        <div class="lb-modal pk-hiw-modal">
+          <div class="lb-modal-header">
+            <span class="lb-modal-title">How Scoring Works</span>
+            <button class="lb-modal-close" id="pkHiwClose">✕</button>
+          </div>
+          <div class="lb-modal-body pk-hiw-body">
+            <div class="pk-hiw-rows">
+              <div class="pk-hiw-row">
+                <span class="pk-hiw-icon pk-hiw-cyan">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+                <div>
+                  <div class="pk-hiw-label">Pick the Winner</div>
+                  <div class="pk-hiw-sub">Correct fighter — +10 pts</div>
+                </div>
+                <span class="pk-hiw-pts">+10</span>
+              </div>
+              <div class="pk-hiw-row">
+                <span class="pk-hiw-icon pk-hiw-amber">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                </span>
+                <div>
+                  <div class="pk-hiw-label">Method Bonus</div>
+                  <div class="pk-hiw-sub">KO · Sub · Decision — +5 pts</div>
+                </div>
+                <span class="pk-hiw-pts">+5</span>
+              </div>
+              <div class="pk-hiw-row">
+                <span class="pk-hiw-icon pk-hiw-amber">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2v20M2 12h20"/></svg>
+                </span>
+                <div>
+                  <div class="pk-hiw-label">Round Bonus</div>
+                  <div class="pk-hiw-sub">Exact round (needs correct method) — +5 pts</div>
+                </div>
+                <span class="pk-hiw-pts">+5</span>
+              </div>
+              <div class="pk-hiw-row">
+                <span class="pk-hiw-icon pk-hiw-red">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </span>
+                <div>
+                  <div class="pk-hiw-label">Fight of the Night</div>
+                  <div class="pk-hiw-sub">Pick which fight earns FOTN — +15 pts</div>
+                </div>
+                <span class="pk-hiw-pts">+15</span>
+              </div>
+              <div class="pk-hiw-divider"></div>
+              <div class="pk-hiw-row pk-hiw-dd-row">
+                <span class="pk-hiw-icon pk-hiw-gold">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                </span>
+                <div>
+                  <div class="pk-hiw-label">Double Down</div>
+                  <div class="pk-hiw-sub">One per event · correct = ×2 pts · wrong = −10 pts</div>
+                </div>
+                <span class="pk-hiw-pts pk-hiw-pts-gold">×2</span>
+              </div>
+            </div>
+            <div class="pk-hiw-max">Perfect pick: winner + method + round = <strong>20 pts</strong> &nbsp;·&nbsp; with Double Down = <strong>40 pts</strong></div>
+          </div>
+        </div>`;
+      document.body.appendChild(el);
+      el.addEventListener('click', e => { if (e.target === el) el.remove(); });
+      document.getElementById('pkHiwClose').addEventListener('click', () => el.remove());
+    });
 
     bindInteractions();
     bindHype();
