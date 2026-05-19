@@ -7427,6 +7427,38 @@ body.light-mode #site-disclaimer {
   border-top-color: rgba(0,0,0,0.07);
 }
 
+/* My Group & H2H tab view */
+.lb-tab-mygroup { border-color: rgba(0,229,255,0.15) !important; }
+.lb-tab-mygroup.active { background: rgba(0,229,255,0.08) !important; border-color: rgba(0,229,255,0.3) !important; color: #00e5ff !important; }
+.lb-mg-group { margin-bottom: 24px; }
+.lb-mg-empty {
+  text-align: center; padding: 40px 20px;
+  background: rgba(255,255,255,0.025); border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.07); margin-bottom: 20px;
+}
+.lb-mg-empty-title { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-bottom: 6px; }
+.lb-mg-empty-sub { font-family: 'Inter', sans-serif; font-size: 0.75rem; color: rgba(255,255,255,0.35); }
+/* H2H score display */
+.lb-h2h-score {
+  display: flex; align-items: center; gap: 8px;
+  background: rgba(0,0,0,0.2); border-radius: 8px;
+  padding: 12px 16px; margin: 8px 0;
+}
+.lb-h2h-side { flex: 1; text-align: center; }
+.lb-h2h-name { font-family: 'Inter', sans-serif; font-size: 0.65rem; color: rgba(255,255,255,0.4); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
+.lb-h2h-pts { font-family: 'Barlow Condensed', sans-serif; font-size: 1.8rem; font-weight: 900; color: rgba(255,255,255,0.6); line-height: 1; }
+.lb-h2h-pts.lb-h2h-pts-lead { color: #c8960c; }
+.lb-h2h-pts-sym { font-size: 0.8rem; font-weight: 700; margin-left: 2px; color: inherit; opacity: 0.6; }
+.lb-h2h-acc { font-size: 0.65rem; color: rgba(255,255,255,0.3); margin-top: 2px; font-family: 'Inter', sans-serif; }
+.lb-h2h-vs-col { flex: 0 0 auto; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.lb-h2h-verdict { font-family: 'Montserrat', sans-serif; font-size: 0.55rem; font-weight: 900; letter-spacing: 0.1em; padding: 3px 8px; border-radius: 4px; }
+.lb-h2h-win  { color: rgba(80,210,120,0.9); background: rgba(80,210,120,0.1); border: 1px solid rgba(80,210,120,0.2); }
+.lb-h2h-loss { color: rgba(255,80,80,0.8);  background: rgba(255,80,80,0.07);  border: 1px solid rgba(255,80,80,0.15); }
+.lb-h2h-tie  { color: rgba(255,200,0,0.8);  background: rgba(255,200,0,0.07);  border: 1px solid rgba(255,200,0,0.15); }
+.lb-h2h-vs-label { font-size: 0.65rem; color: rgba(255,255,255,0.2); font-family: 'Montserrat', sans-serif; font-weight: 700; }
+.lb-h2h-picks-count { font-family: 'Inter', sans-serif; font-size: 0.72rem; color: rgba(255,255,255,0.4); margin: 8px 0; }
+.lb-h2h-card { border-color: rgba(0,229,255,0.08) !important; }
+
 /* ── Leaderboard — Challenges Hub ── */
 .lb-ch-section {
   max-width: 820px;

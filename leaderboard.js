@@ -62,6 +62,13 @@
         <button class="lb-tab" data-period="month">This Month</button>
         <button class="lb-tab" data-period="week">This Week</button>
         <button class="lb-tab" data-period="last10">Last 10 Events</button>
+        <button class="lb-tab lb-tab-mygroup" data-period="mygroup">My Group &amp; H2H</button>
+      </div>
+
+      <!-- MY GROUP & H2H VIEW (hidden by default) -->
+      <div id="lbMyGroupView" style="display:none">
+        <div id="lbMgGroupSection"></div>
+        <div id="lbMgChallengeSection"></div>
       </div>
 
       <!-- GROUPS -->
@@ -229,14 +236,21 @@
   }
 
   function buildStatsMap(picks, cutoff, allowedEventIds = null) {
+    const ddMap = {}; // 'userId:eventId' -> fightKey to double down on
+    picks.forEach(r => {
+      if (r.fight_key === '__dd__' && r.user_id && r.pick) {
+        ddMap[`${r.user_id}:${r.event_id}`] = r.pick;
+      }
+    });
+
     const map = {};
     picks.forEach(r => {
       if (!r.user_id) return;
+      if (r.fight_key === '__dd__') return; // handled via ddMap
       if (cutoff && r.created_at && r.created_at < cutoff) return;
       if (allowedEventIds && !allowedEventIds.has(r.event_id)) return;
       if (!map[r.user_id]) map[r.user_id] = { total: 0, judged: 0, correct: 0, points: 0 };
 
-      // FOTN picks
       if (r.fight_key === 'fotn') {
         const actualFotn = fotnMap[r.event_id];
         if (actualFotn && r.pick?.toLowerCase() === actualFotn) {
@@ -250,8 +264,12 @@
       const winner = winnerMap[wKey];
       if (winner === undefined) return;
       map[r.user_id].judged++;
+      const isDD      = ddMap[`${r.user_id}:${r.event_id}`] === r.fight_key;
       const isCorrect = r.pick?.toLowerCase() === winner;
-      if (!isCorrect) return;
+      if (!isCorrect) {
+        if (isDD) map[r.user_id].points -= 10;
+        return;
+      }
       map[r.user_id].correct++;
       let pts = POINTS.WINNER;
       const actualMethod = methodMap[wKey];
@@ -267,6 +285,7 @@
           }
         }
       }
+      if (isDD) pts *= 2;
       map[r.user_id].points += pts;
     });
     return map;
@@ -491,6 +510,27 @@
     document.querySelectorAll('#lbPeriodTabs .lb-tab').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     const period = btn.dataset.period || 'all';
+
+    const boards     = document.getElementById('lbBoards');
+    const groupSec   = document.getElementById('lbGroups');
+    const challSec   = document.getElementById('lbChallengesSection');
+    const myGroupView = document.getElementById('lbMyGroupView');
+
+    if (period === 'mygroup') {
+      if (boards)     boards.style.display     = 'none';
+      if (groupSec)   groupSec.style.display   = 'none';
+      if (challSec)   challSec.style.display   = 'none';
+      if (myGroupView) myGroupView.style.display = '';
+      renderMyGroupView();
+      return;
+    }
+
+    // Restore normal view
+    if (boards)      boards.style.display     = '';
+    if (groupSec)    groupSec.style.display   = '';
+    if (myGroupView) myGroupView.style.display = 'none';
+    // challenges section visibility controlled by loadAndRenderChallenges
+
     if (period === 'last10') {
       const last10Ids = getLast10EventIds();
       currentStatsMap = buildStatsMap(picksData, null, last10Ids);
@@ -505,6 +545,173 @@
       renderGroupStatus();
     }, 80);
   });
+
+  // ── My Group & H2H view ───────────────────────
+  function scoreUserForEvent(userId, eventId) {
+    const userPicks = picksData.filter(p => p.user_id === userId && p.event_id === eventId);
+    const ddPick    = userPicks.find(p => p.fight_key === '__dd__');
+    const ddKey     = ddPick?.pick || null;
+    let pts = 0, correct = 0, judged = 0;
+    userPicks.forEach(r => {
+      if (r.fight_key === 'fotn') {
+        const actualFotn = fotnMap[r.event_id];
+        if (actualFotn && r.pick?.toLowerCase() === actualFotn) pts += POINTS.FOTN;
+        return;
+      }
+      if (r.fight_key === '__dd__') return;
+      const wKey   = `${eventId}:${r.fight_key}`;
+      const winner = winnerMap[wKey];
+      if (winner === undefined) return;
+      judged++;
+      const isDD      = ddKey === r.fight_key;
+      const isCorrect = r.pick?.toLowerCase() === winner;
+      if (!isCorrect) { if (isDD) pts -= 10; return; }
+      correct++;
+      let p = POINTS.WINNER;
+      const am = methodMap[wKey];
+      if (r.method && am) {
+        const pb = normalizeMethodBase(r.method);
+        const ab = normalizeMethodBase(am);
+        if (pb && ab && pb === ab) {
+          p += POINTS.METHOD;
+          if (pb === 'KO/TKO' || pb === 'SUB') {
+            const pr = extractRoundNum(r.method);
+            const ar = extractRoundNum(am);
+            if (pr && ar && pr === ar) p += POINTS.ROUND;
+          }
+        }
+      }
+      if (isDD) p *= 2;
+      pts += p;
+    });
+    return { pts, correct, judged };
+  }
+
+  function renderMyGroupView() {
+    const groupEl  = document.getElementById('lbMgGroupSection');
+    const challEl  = document.getElementById('lbMgChallengeSection');
+
+    // ── Group leaderboard ──
+    if (groupEl) {
+      if (myGroupCode) {
+        const groupUsers = allUsers.filter(u => u.group_code === myGroupCode);
+        const nameHtml   = `<div class="lb-section-label" style="margin-bottom:12px">${esc(myGroupName || myGroupCode)} — ${groupUsers.length} member${groupUsers.length !== 1 ? 's' : ''}</div>`;
+        const tableWrapId = 'lbMgGroupTable';
+        groupEl.innerHTML = `<div class="lb-mg-group">${nameHtml}<div id="${tableWrapId}"></div></div>`;
+        renderTable(groupUsers, tableWrapId, 'No picks yet in your group — share your code!');
+      } else {
+        groupEl.innerHTML = `<div class="lb-mg-empty">
+          <div class="lb-mg-empty-title">No group yet</div>
+          <div class="lb-mg-empty-sub">Create or join a group to see your private standings here</div>
+          <div style="display:flex;gap:10px;margin-top:12px;justify-content:center">
+            <button class="lb-group-btn" id="btnMgCreate">Create Group</button>
+            <button class="lb-group-btn lb-group-btn-sec" id="btnMgJoin">Join Group</button>
+          </div>
+        </div>`;
+        document.getElementById('btnMgCreate')?.addEventListener('click', () => { document.getElementById('btnCreateGroup')?.click(); });
+        document.getElementById('btnMgJoin')?.addEventListener('click',   () => { document.getElementById('btnJoinGroup')?.click(); });
+      }
+    }
+
+    // ── Challenge H2H boards ──
+    if (!challEl) return;
+    if (!myId) {
+      challEl.innerHTML = `<div class="lb-mg-empty"><div class="lb-mg-empty-title">Sign in to see your H2H challenges</div></div>`;
+      return;
+    }
+
+    challEl.innerHTML = `<div class="lb-loading"><div class="lb-spinner"></div>Loading challenges…</div>`;
+
+    sb.from('challenges')
+      .select('*')
+      .or(`challenger_id.eq.${myId},opponent_id.eq.${myId}`)
+      .order('created_at', { ascending: false })
+      .then(async ({ data: challenges, error }) => {
+        if (error || !challenges?.length) {
+          challEl.innerHTML = `<div class="lb-mg-empty">
+            <div class="lb-mg-empty-title">No H2H challenges yet</div>
+            <div class="lb-mg-empty-sub">Challenge a friend from their profile page</div>
+          </div>`;
+          return;
+        }
+
+        const oppIds = [...new Set(challenges.map(c => c.challenger_id === myId ? c.opponent_id : c.challenger_id))];
+        const { data: oppProfiles } = await sb.from('profiles').select('id, display_name, avatar_url').in('id', oppIds);
+        const oppMap2 = {};
+        (oppProfiles || []).forEach(p => { oppMap2[p.id] = p; });
+
+        // Group challenges by event for scoring
+        const eventsWithResults = new Set(Object.keys(winnerMap).map(k => k.split(':')[0]));
+
+        const cards = challenges.map(c => {
+          const isChallenger = c.challenger_id === myId;
+          const oppId   = isChallenger ? c.opponent_id : c.challenger_id;
+          const opp     = oppMap2[oppId] || {};
+          const oppName = opp.display_name || 'Opponent';
+          const status  = c.status || 'pending';
+          const evFinished = eventsWithResults.has(c.event_id);
+
+          const initOpp  = (oppName || 'F').split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+          const avatarHtml = opp.avatar_url
+            ? `<img class="lb-ch-avatar" src="${esc(opp.avatar_url)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="lb-ch-avatar lb-ch-avatar-init" style="display:none">${esc(initOpp)}</div>`
+            : `<div class="lb-ch-avatar lb-ch-avatar-init">${esc(initOpp)}</div>`;
+
+          let scoreHtml = '';
+          if (evFinished) {
+            const myScore  = scoreUserForEvent(myId, c.event_id);
+            const oppScore = scoreUserForEvent(oppId, c.event_id);
+            const myWin    = myScore.pts > oppScore.pts;
+            const tie      = myScore.pts === oppScore.pts;
+            const verdict  = tie ? 'TIE' : myWin ? 'YOU WIN' : 'YOU LOSE';
+            const verdictCls = tie ? 'lb-h2h-tie' : myWin ? 'lb-h2h-win' : 'lb-h2h-loss';
+            scoreHtml = `
+              <div class="lb-h2h-score">
+                <div class="lb-h2h-side">
+                  <div class="lb-h2h-name">You</div>
+                  <div class="lb-h2h-pts${myWin ? ' lb-h2h-pts-lead' : ''}">${myScore.pts}<span class="lb-h2h-pts-sym">pts</span></div>
+                  <div class="lb-h2h-acc">${myScore.correct}/${myScore.judged}</div>
+                </div>
+                <div class="lb-h2h-vs-col">
+                  <div class="lb-h2h-verdict ${verdictCls}">${verdict}</div>
+                  <div class="lb-h2h-vs-label">vs</div>
+                </div>
+                <div class="lb-h2h-side">
+                  <div class="lb-h2h-name">${esc(oppName)}</div>
+                  <div class="lb-h2h-pts${!myWin && !tie ? ' lb-h2h-pts-lead' : ''}">${oppScore.pts}<span class="lb-h2h-pts-sym">pts</span></div>
+                  <div class="lb-h2h-acc">${oppScore.correct}/${oppScore.judged}</div>
+                </div>
+              </div>`;
+          } else {
+            const myPickCount  = picksData.filter(p => p.user_id === myId  && p.event_id === c.event_id && p.fight_key !== '__dd__' && p.fight_key !== 'fotn').length;
+            const oppPickCount = picksData.filter(p => p.user_id === oppId && p.event_id === c.event_id && p.fight_key !== '__dd__' && p.fight_key !== 'fotn').length;
+            scoreHtml = `<div class="lb-h2h-picks-count">You: <strong>${myPickCount}</strong> picks locked · ${esc(oppName)}: <strong>${oppPickCount}</strong> picks locked</div>`;
+          }
+
+          const badgeClass = status === 'pending' ? 'lb-ch-badge-pending' : status === 'completed' ? 'lb-ch-badge-done' : 'lb-ch-badge-active';
+          const badgeLabel = status === 'pending' ? 'Pending' : status === 'completed' ? 'Completed' : 'Active';
+          const href = `picks.html?id=${encodeURIComponent(c.event_id)}`;
+          const actionBtn = `<a href="${href}" class="lb-ch-btn lb-ch-btn-view">View Picks →</a>`;
+
+          return `
+            <div class="lb-ch-card lb-h2h-card">
+              <div class="lb-ch-card-left"><div class="lb-ch-avatar-wrap">${avatarHtml}</div></div>
+              <div class="lb-ch-card-body">
+                <div class="lb-ch-card-top">
+                  <div class="lb-ch-opp-name">${esc(oppName)}</div>
+                  <span class="lb-ch-badge ${badgeClass}">${badgeLabel}</span>
+                </div>
+                <div class="lb-ch-event-name">${esc(c.event_name || c.event_id || 'Event')}</div>
+                ${scoreHtml}
+                <div class="lb-ch-card-foot">${actionBtn}</div>
+              </div>
+            </div>`;
+        }).join('');
+
+        challEl.innerHTML = `
+          <div class="lb-section-label" style="margin-top:24px;margin-bottom:12px">Head-to-Head Challenges</div>
+          <div class="lb-ch-list">${cards}</div>`;
+      });
+  }
 
   // ── Modals ─────────────────────────────────────
   wireModals(myId, allUsers, profileMap);
@@ -771,15 +978,5 @@
       : 'No picks yet — be the first!';
     renderTable(filteredUsers, 'lbGlobalWrap', emptyMsg);
   }
-
-  // Note: primary period tab handler above handles all rendering; this is kept for compatibility
-  // recomputeAndRender handles last10 via the period string passed in
-  document.getElementById('lbPeriodTabs')?.addEventListener('click', e => {
-    const btn = e.target.closest('.lb-tab');
-    if (!btn) return;
-    document.querySelectorAll('.lb-tab').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    recomputeAndRender(btn.dataset.period);
-  });
 
 })();

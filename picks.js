@@ -181,7 +181,7 @@ function formatOdds(n) {
   let localPicks = {};   // pending local state (includes 'fotn' key)
   let hypeAvg    = 0;
   let hypeCount  = 0;
-  let localHype  = 0;   // user's hype rating (0 = not rated)
+  let localHype  = parseInt(localStorage.getItem(`hype_${eventId}`) || '0', 10);
   let careerCorrect = 0;
   let careerJudged  = 0;
   let fotnPickMode  = false;  // cursor-mode FOTN selection active
@@ -293,6 +293,7 @@ function formatOdds(n) {
   // ── Save hype rating (instant) ────────────────
   async function saveHype(val) {
     localHype = val;
+    localStorage.setItem(`hype_${eventId}`, String(val));
     updateHypeWidget();
     try {
       await fetch(`${apiBase()}/ratings`, {
