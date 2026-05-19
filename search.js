@@ -11,6 +11,7 @@
   let loadPromise = null;
   let activeIdx = -1;
   let dropEl    = null;
+  let hideTimer = null;
 
   // ── Helpers ──────────────────────────────────
   function escHtml(s) {
@@ -27,13 +28,15 @@
   function isPast(ev) {
     return ev.isoDate && new Date(ev.isoDate) < new Date();
   }
+  function isMobile() {
+    return window.matchMedia('(max-width: 640px)').matches;
+  }
 
   // ── Load data once ────────────────────────────
   async function loadData() {
     if (fighters && events) return;
     if (loadPromise) return loadPromise;
     loadPromise = (async () => {
-      const base = document.querySelector('base')?.href || location.origin + '/';
       try {
         const [fRes, eRes] = await Promise.all([
           fetch('data/fighters.json'),
@@ -55,20 +58,44 @@
     dropEl = document.createElement('div');
     dropEl.id = 'search-dropdown';
     dropEl.className = 'search-dropdown';
-    form.appendChild(dropEl);
+    // On mobile append to body so fixed positioning works correctly
+    if (isMobile()) {
+      document.body.appendChild(dropEl);
+    } else {
+      form.appendChild(dropEl);
+    }
     return dropEl;
   }
 
   function hideDrop() {
+    clearTimeout(hideTimer);
     if (dropEl) dropEl.style.display = 'none';
     activeIdx = -1;
   }
 
+  // Navigate and clean up
+  function navigateTo(url) {
+    input.value = '';
+    hideDrop();
+    input.blur();
+    window.location.href = url;
+  }
+
+  // Build a clickable row that works on both desktop and mobile
   function buildRow(html, onClick) {
     const el = document.createElement('div');
     el.className = 'sd-row';
     el.innerHTML = html;
+
+    // Desktop: mousedown prevents blur before click
     el.addEventListener('mousedown', e => { e.preventDefault(); onClick(); });
+
+    // Mobile: touchstart fires immediately, no 300ms delay
+    el.addEventListener('touchstart', e => {
+      e.preventDefault();
+      onClick();
+    }, { passive: false });
+
     return el;
   }
 
@@ -104,10 +131,9 @@
         const initials = (u.display_name || '?').slice(0, 2).toUpperCase();
         const profileUrl = `profile.html?user=${encodeURIComponent(u.id)}`;
 
-        // Use a real <a> tag so clicking anywhere on the row navigates to the profile
-        const row = document.createElement('a');
+        const row = document.createElement('div');
         row.className = 'sd-row sd-user-row';
-        row.href = profileUrl;
+        row.setAttribute('role', 'button');
         row.innerHTML = `
           <div class="sd-user-avatar" ${u.avatar_url ? `style="background-image:url('${escHtml(u.avatar_url)}')"` : ''}>
             ${u.avatar_url ? '' : `<span>${escHtml(initials)}</span>`}
@@ -119,24 +145,29 @@
           <button class="sd-challenge-btn" data-uid="${escHtml(u.id)}" data-uname="${escHtml(u.display_name || 'Fighter')}">Challenge</button>
         `;
 
-        // Challenge button stops propagation so it doesn't trigger the <a> navigation
+        const goToProfile = (e) => {
+          const isChallenge = e.target.closest('.sd-challenge-btn');
+          if (isChallenge) return;
+          e.preventDefault();
+          navigateTo(profileUrl);
+        };
+
+        // Challenge button
         const chBtn = row.querySelector('.sd-challenge-btn');
         if (chBtn) {
-          chBtn.addEventListener('click', e => {
+          const doChallenge = (e) => {
             e.stopPropagation();
             e.preventDefault();
             input.value = '';
             hideDrop();
             window.openChallengeModal?.(u.id, u.display_name || 'Fighter');
-          });
+          };
+          chBtn.addEventListener('mousedown', e => { e.preventDefault(); doChallenge(e); });
+          chBtn.addEventListener('touchstart', e => doChallenge(e), { passive: false });
         }
 
-        // Close dropdown when navigating
-        row.addEventListener('click', e => {
-          if (e.target.closest('.sd-challenge-btn')) return;
-          input.value = '';
-          hideDrop();
-        });
+        row.addEventListener('mousedown', e => { e.preventDefault(); goToProfile(e); });
+        row.addEventListener('touchstart', e => goToProfile(e), { passive: false });
 
         drop.appendChild(row);
       });
@@ -159,11 +190,7 @@
             </div>
             <span class="sd-sub">${escHtml(f.weightClass)}${f.ranking && !isChamp ? ' · ' + f.ranking : ''}</span>
           </div>
-        `, () => {
-          input.value = '';
-          hideDrop();
-          window.location.href = `fighter.html?id=${encodeURIComponent(f.id)}`;
-        });
+        `, () => navigateTo(`fighter.html?id=${encodeURIComponent(f.id)}`));
         drop.appendChild(row);
       });
     }
@@ -179,16 +206,11 @@
           : `events.html?id=${encodeURIComponent(id)}`;
 
         const row = buildRow(`
-          
           <div class="sd-info">
             <span class="sd-name">${escHtml(name)}</span>
             <span class="sd-sub">${fmtDate(ev.isoDate)}${ev.location ? ' · ' + ev.location : ''}</span>
           </div>
-        `, () => {
-          input.value = '';
-          hideDrop();
-          window.location.href = dest;
-        });
+        `, () => navigateTo(dest));
         drop.appendChild(row);
       });
     }
@@ -245,6 +267,14 @@
     }, 120);
   });
 
+  // ── Hide on blur (with delay so touch events fire first) ─────────────────
+  input.addEventListener('blur', () => {
+    hideTimer = setTimeout(hideDrop, 200);
+  });
+  input.addEventListener('focus', () => {
+    clearTimeout(hideTimer);
+  });
+
   // ── Prevent form submit when dropdown open ─────
   form.addEventListener('submit', e => {
     if (dropEl && dropEl.style.display === 'block') {
@@ -252,8 +282,10 @@
     }
   });
 
-  // ── Close on outside click ─────────────────────
+  // ── Close on outside click (desktop only) ─────
   document.addEventListener('click', e => {
-    if (!form.contains(e.target)) hideDrop();
+    if (dropEl && !form.contains(e.target) && e.target !== dropEl && !dropEl.contains(e.target)) {
+      hideDrop();
+    }
   });
 })();

@@ -479,14 +479,18 @@
     sb.from('profiles').select('fav_fighters').eq('id', user.id).single().then(({ data }) => {
       if (data?.fav_fighters?.length) {
         const local = getFavs();
-        // Merge: union of Supabase + local, Supabase wins as source of truth if local empty
+        // Merge: union of Supabase + local; always use Supabase if local is empty
         const merged = local.length
           ? [...new Set([...local, ...data.fav_fighters])]
           : data.fav_fighters;
         try { localStorage.setItem(FAVS_KEY, JSON.stringify(merged)); } catch {}
-        const grid = document.getElementById('favsGrid');
-        if (grid) renderFavs();
+      } else if (getFavs().length) {
+        // Local has data but Supabase doesn't — push local up to Supabase
+        sb.from('profiles').update({ fav_fighters: getFavs() }).eq('id', user.id).catch(() => {});
       }
+      // Always re-render after Supabase check so cross-device data appears
+      const grid = document.getElementById('favsGrid');
+      if (grid) renderFavs();
     }).catch(() => {});
   }
 
@@ -912,6 +916,14 @@
         <button class="pr-fav-remove" data-id="${esc(f.id)}" title="Remove">✕</button>`;
       grid.appendChild(card);
     });
+
+    // Empty state hint
+    if (favIds.length === 0) {
+      const hint = document.createElement('div');
+      hint.style.cssText = 'width:100%;padding:0 0 10px;font-family:Inter,sans-serif;font-size:.78rem;color:rgba(255,255,255,.28);line-height:1.5';
+      hint.textContent = 'Add your favourite fighters to track their next fights here.';
+      grid.appendChild(hint);
+    }
 
     // Add button
     const addBtn = document.createElement('div');

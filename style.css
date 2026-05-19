@@ -8959,19 +8959,22 @@ button { min-height: 44px; }
   .nav-links .nav-link-text { display: none; }
 }
 
-/* ── Search dropdown mobile — bottom sheet ───────────────────────── */
+/* ── Search dropdown mobile — anchored below nav, above keyboard ──── */
 @media (max-width: 640px) {
   .search-dropdown {
     position: fixed !important;
-    top: auto !important;
-    bottom: 0 !important;
+    top: 56px !important;
+    bottom: auto !important;
     left: 0 !important;
     right: 0 !important;
     width: 100% !important;
-    border-radius: 16px 16px 0 0 !important;
-    max-height: 60vh !important;
+    border-radius: 0 0 16px 16px !important;
+    max-height: 55vh !important;
     overflow-y: auto !important;
-    box-shadow: 0 -8px 40px rgba(0,0,0,.6) !important;
+    -webkit-overflow-scrolling: touch;
+    box-shadow: 0 8px 40px rgba(0,0,0,.8) !important;
+    z-index: 99999 !important;
+    min-width: unset !important;
   }
   .sd-row    { padding: 14px 16px; min-height: 54px; }
   .sd-user-row { padding: 14px 16px; }
