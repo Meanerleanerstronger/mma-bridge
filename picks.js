@@ -822,7 +822,7 @@ function formatOdds(n) {
     const ddBtnHtml = (!isCompleted && !isLocked) ? `
       <button class="pk-dd-btn${isDD ? ' pk-dd-active' : ''}" data-key="${esc(key)}" type="button">
         <svg class="pk-dd-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        <span class="pk-dd-label">${isDD ? 'DOUBLED' : 'DOUBLE DOWN'}</span>
+        <span class="pk-dd-label">${isDD ? 'UNDO DOUBLE DOWN' : 'DOUBLE DOWN'}</span>
         <span class="pk-dd-mult">×2</span>
       </button>` : '';
 
@@ -1518,14 +1518,17 @@ function formatOdds(n) {
   function updateDDState() {
     const currentDD = localPicks['__dd__']?.pick || null;
     root.querySelectorAll('.sb-fight[data-key]').forEach(card => {
-      const key   = card.dataset.key;
-      const btn   = card.querySelector('.pk-dd-btn');
-      const isDD  = currentDD === key;
+      const key     = card.dataset.key;
+      const btn     = card.querySelector('.pk-dd-btn');
+      const isDD    = currentDD === key;
+      const blocked = currentDD && !isDD; // another fight is doubled
       card.classList.toggle('pk-dd-card', isDD);
       if (btn) {
         btn.classList.toggle('pk-dd-active', isDD);
+        btn.classList.toggle('pk-dd-blocked', blocked);
+        btn.disabled = blocked;
         const lbl = btn.querySelector('.pk-dd-label');
-        if (lbl) lbl.textContent = isDD ? 'DOUBLED' : 'DOUBLE DOWN';
+        if (lbl) lbl.textContent = isDD ? 'UNDO DOUBLE DOWN' : 'DOUBLE DOWN';
       }
     });
     updateSaveBar();
