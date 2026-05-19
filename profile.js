@@ -897,23 +897,25 @@
       card.href = `fighter.html?id=${encodeURIComponent(f.id)}`;
       card.style.animationDelay = `${idx * 0.06}s`;
       card.innerHTML = `
-        <div class="pr-fav-photo-wrap">
-          ${f.img
-            ? `<img class="pr-fav-photo" src="${esc(f.img)}" alt="${esc(f.name)}" onerror="this.closest('.pr-fav-photo-wrap').querySelector('.pr-fav-initial-lg').style.display='flex';this.style.display='none'">`
-            : ''}
-          <div class="pr-fav-initial-lg" style="${f.img ? 'display:none' : ''}">${esc(initials)}</div>
-          <div class="pr-fav-photo-grad"></div>
-          ${nextEvent ? `<div class="pr-fav-next-badge">NEXT FIGHT</div>` : ''}
-        </div>
-        <div class="pr-fav-body">
-          <div class="pr-fav-name">${esc(f.name)}</div>
-          <div class="pr-fav-meta">
-            ${record ? `<span class="pr-fav-record">${esc(record)}</span>` : ''}
-            ${f.flag ? `<span>${esc(f.flag)}</span>` : ''}
-            ${f.weightClass ? `<span>${esc(f.weightClass)}</span>` : ''}
+        <button class="pr-fav-remove" data-id="${esc(f.id)}" title="Remove">✕</button>
+        <div class="pr-fav-card-inner">
+          <div class="pr-fav-photo-wrap">
+            ${f.img
+              ? `<img class="pr-fav-photo" src="${esc(f.img)}" alt="${esc(f.name)}" onerror="this.closest('.pr-fav-photo-wrap').querySelector('.pr-fav-initial-lg').style.display='flex';this.style.display='none'">`
+              : ''}
+            <div class="pr-fav-initial-lg" style="${f.img ? 'display:none' : ''}">${esc(initials)}</div>
+            <div class="pr-fav-photo-grad"></div>
+            ${nextEvent ? `<div class="pr-fav-next-badge">NEXT FIGHT</div>` : ''}
           </div>
-        </div>
-        <button class="pr-fav-remove" data-id="${esc(f.id)}" title="Remove">✕</button>`;
+          <div class="pr-fav-body">
+            <div class="pr-fav-name">${esc(f.name)}</div>
+            <div class="pr-fav-meta">
+              ${record ? `<span class="pr-fav-record">${esc(record)}</span>` : ''}
+              ${f.flag ? `<span>${esc(f.flag)}</span>` : ''}
+              ${f.weightClass ? `<span>${esc(f.weightClass)}</span>` : ''}
+            </div>
+          </div>
+        </div>`;
       grid.appendChild(card);
     });
 

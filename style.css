@@ -4110,6 +4110,13 @@ body.light-mode .navbar {
   .nav-signup-btn  { font-size: 0.62rem; padding: 5px 11px; }
   .nav-logout-btn  { font-size: 0.55rem; padding: 4px 8px; }
 }
+/* On small phones hide the "Sign In" text link — Sign Up button only in nav,
+   Sign In is accessible from the mobile menu overlay */
+@media (max-width: 480px) {
+  .nav-signin-link { display: none; }
+  .nav-signup-btn  { font-size: 0.7rem; padding: 7px 14px; letter-spacing: 0.04em; }
+  .nav-auth { margin-left: 4px; }
+}
 
 /* ── Live Visitor Feed ── */
 .feed-empty {
