@@ -1,6 +1,6 @@
 // MMA Bridge Service Worker — Push + Offline Cache
 // v3 — JS/CSS always network-fresh, only images cached
-const CACHE_NAME = 'mma-bridge-v3';
+const CACHE_NAME = 'mma-bridge-v4';
 const STATIC_ASSETS = [
   '/mma-bridge/',
   '/mma-bridge/index.html',
@@ -33,22 +33,21 @@ self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
   if (url.hostname === 'mmabridge-backend.onrender.com') return;
 
-  // JS and CSS always go to network — version strings handle cache busting
   const path = url.pathname;
-  if (path.endsWith('.js') || path.endsWith('.css')) {
-    event.respondWith(fetch(event.request));
-    return;
-  }
 
-  // HTML always network-first so you never get a stale page shell
-  if (event.request.headers.get('accept')?.includes('text/html')) {
+  // HTML, JS, CSS — always fetch fresh from network, never serve stale
+  if (
+    path.endsWith('.js') || path.endsWith('.css') ||
+    path.endsWith('.html') || path === '/' ||
+    event.request.headers.get('accept')?.includes('text/html')
+  ) {
     event.respondWith(
-      fetch(event.request).catch(() => caches.match('/mma-bridge/index.html'))
+      fetch(event.request).catch(() => caches.match(event.request))
     );
     return;
   }
 
-  // Images and other static: cache-first
+  // Images only: cache-first (they rarely change)
   event.respondWith(
     caches.match(event.request).then(cached => {
       if (cached) return cached;
@@ -58,7 +57,7 @@ self.addEventListener('fetch', event => {
           caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
         }
         return res;
-      }).catch(() => caches.match('/mma-bridge/index.html'));
+      }).catch(() => new Response('', { status: 404 }));
     })
   );
 });
