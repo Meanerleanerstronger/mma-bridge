@@ -844,8 +844,7 @@
         "round": 5,
         "time": "5:00"
       }
-    ],
-    "pfp": true
+    ]
   },
   {
     "id": "israel-adesanya",
@@ -1911,7 +1910,7 @@
     "age": 32,
     "fightingOut": "Denver, Colorado",
     "style": "Striker",
-    "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-06/SANDHAGEN_CORY_L_06-29.png",
+    "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/SANDHAGEN_CORY_L_05-03.png",
     "bio": "Cory Sandhagen is one of the most creative strikers at bantamweight, a long rangy fighter whose unorthodox attack angles and spinning techniques produce spectacular knockouts. His flying knees and creative striking are matched by a solid wrestling base. He lost a title challenge to Merab at UFC 320 but remains one of the most dangerous fighters at 135.",
     "last5": [
       {
@@ -5068,5 +5067,117 @@
         "time": "0:53"
       }
     ]
+  },
+  {
+    "id": "benoit-saint-denis",
+    "name": "Benoît Saint-Denis",
+    "nickname": "God of War",
+    "nationality": "French",
+    "flag": "🇫🇷",
+    "weightClass": "Lightweight",
+    "ranking": "#12",
+    "record": {
+      "wins": 13,
+      "losses": 3,
+      "draws": 0
+    },
+    "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-09/SAINT_DENIS_BENOIT_L_09-06.png",
+    "last5": [
+      {
+        "result": "L"
+      },
+      {
+        "result": "W"
+      },
+      {
+        "result": "W"
+      },
+      {
+        "result": "W"
+      },
+      {
+        "result": "W"
+      }
+    ]
+  },
+  {
+    "id": "nikita-krylov",
+    "name": "Nikita Krylov",
+    "nickname": "Miner",
+    "nationality": "Ukrainian",
+    "flag": "🇺🇦",
+    "weightClass": "Light Heavyweight",
+    "ranking": "#7",
+    "record": {
+      "wins": 29,
+      "losses": 10,
+      "draws": 0
+    },
+    "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/KRYLOV_NIKITA_L_01-24.png",
+    "last5": [
+      {
+        "result": "W"
+      },
+      {
+        "result": "L"
+      },
+      {
+        "result": "W"
+      },
+      {
+        "result": "W"
+      },
+      {
+        "result": "W"
+      }
+    ]
+  },
+  {
+    "id": "mario-bautista",
+    "name": "Mario Bautista",
+    "nickname": "El Matador",
+    "nationality": "American",
+    "flag": "🇺🇸",
+    "weightClass": "Bantamweight",
+    "ranking": "#5",
+    "record": {
+      "wins": 12,
+      "losses": 2,
+      "draws": 0
+    },
+    "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/BAUTISTA_MARIO_L_02-07.png",
+    "last5": [
+      {
+        "result": "W"
+      },
+      {
+        "result": "W"
+      },
+      {
+        "result": "W"
+      },
+      {
+        "result": "W"
+      },
+      {
+        "result": "L"
+      }
+    ]
+  },
+  {
+    "id": "gable-steveson",
+    "name": "Gable Steveson",
+    "nickname": "The Olympic Gold Medalist",
+    "nationality": "American",
+    "flag": "🇺🇸",
+    "weightClass": "Heavyweight",
+    "ranking": "Unranked",
+    "record": {
+      "wins": 0,
+      "losses": 0,
+      "draws": 0
+    },
+    "img": "",
+    "last5": []
   }
 ]
