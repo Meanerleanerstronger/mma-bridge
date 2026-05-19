@@ -193,25 +193,27 @@
         const record = f.record ? `${f.record.wins||0}-${f.record.losses||0}` : '';
         return `
           <a class="pr-fav-card" href="fighter.html?id=${encodeURIComponent(f.id)}">
-            <div class="pr-fav-photo-wrap">
-              ${f.img ? `<img class="pr-fav-photo" src="${esc(f.img)}" alt="${esc(f.name)}">` : ''}
-              <div class="pr-fav-initial-lg" style="${f.img ? 'display:none' : ''}">${esc(initials)}</div>
-              <div class="pr-fav-photo-grad"></div>
-            </div>
-            <div class="pr-fav-body">
-              <div class="pr-fav-name">${esc(f.name)}</div>
-              <div class="pr-fav-meta">${record ? `<span class="pr-fav-record">${esc(record)}</span>` : ''}${f.flag ? `<span>${esc(f.flag)}</span>` : ''}</div>
+            <div class="pr-fav-card-inner">
+              <div class="pr-fav-photo-wrap">
+                ${f.img ? `<img class="pr-fav-photo" src="${esc(f.img)}" alt="${esc(f.name)}">` : ''}
+                <div class="pr-fav-initial-lg" style="${f.img ? 'display:none' : ''}">${esc(initials)}</div>
+                <div class="pr-fav-photo-grad"></div>
+              </div>
+              <div class="pr-fav-body">
+                <div class="pr-fav-name">${esc(f.name)}</div>
+                <div class="pr-fav-meta">${record ? `<span class="pr-fav-record">${esc(record)}</span>` : ''}${f.flag ? `<span>${esc(f.flag)}</span>` : ''}${f.weightClass ? `<span>${esc(f.weightClass)}</span>` : ''}</div>
+              </div>
             </div>
           </a>`;
       }).filter(Boolean).join('');
 
-      if (favCards) {
-        favsHtml = `
-          <div class="pr-section" style="animation-delay:0.15s">
-            <div class="pr-section-title">Their Corner</div>
-            <div class="pr-favs-grid">${favCards}</div>
-          </div>`;
-      }
+      favsHtml = `
+        <div class="pr-section" style="animation-delay:0.15s">
+          <div class="pr-section-title">Their Corner</div>
+          ${favCards
+            ? `<div class="pr-favs-grid">${favCards}</div>`
+            : `<div style="font-family:Inter,sans-serif;font-size:.8rem;color:rgba(255,255,255,.25);padding:8px 0">No favourite fighters added yet.</div>`}
+        </div>`;
     }
 
     // Build other-user profile UI

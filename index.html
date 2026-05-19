@@ -199,7 +199,14 @@
       animation: obIn 0.4s cubic-bezier(.22,1,.36,1) both;
     }
     @keyframes obIn { from { transform: translateY(24px) scale(0.97); opacity: 0; } to { transform: none; opacity: 1; } }
-    .ob-logo { font-size: 2rem; margin-bottom: 8px; }
+    .ob-close {
+      position: absolute; top: 14px; right: 16px;
+      background: none; border: none; cursor: pointer;
+      color: rgba(255,255,255,.3); font-size: 1.1rem; padding: 4px 8px;
+      line-height: 1; transition: color 0.15s;
+    }
+    .ob-close:hover { color: rgba(255,255,255,.7); }
+    .ob-modal { position: relative; }
     .ob-title {
       font-family: 'Montserrat', sans-serif; font-weight: 900;
       font-size: clamp(1.3rem, 5vw, 1.7rem); color: #fff;
@@ -478,52 +485,45 @@
   <!-- Onboarding Modal -->
   <div class="ob-overlay" id="obOverlay" style="display:none" role="dialog" aria-modal="true" aria-label="Welcome to MMA Bridge">
     <div class="ob-modal">
-      <div class="ob-logo">🥊</div>
-      <h2 class="ob-title">Welcome to <span>MMA Bridge</span></h2>
-      <p class="ob-sub">The UFC community where fans make picks, rate events, and track their accuracy.</p>
+      <button class="ob-close" id="obClose" aria-label="Close">✕</button>
+      <h2 class="ob-title">MMA <span>Bridge</span></h2>
+      <p class="ob-sub">Pick fights. Track your accuracy. Climb the leaderboard.</p>
       <div class="ob-steps">
         <div class="ob-step">
           <div class="ob-step-num">1</div>
-          <div class="ob-step-text"><strong>Browse Events</strong> — See upcoming UFC cards and make your fight predictions before the bell rings.</div>
+          <div class="ob-step-text"><strong>Pick fights</strong> — predict winners before each UFC event locks</div>
         </div>
         <div class="ob-step">
           <div class="ob-step-num">2</div>
-          <div class="ob-step-text"><strong>Make Picks</strong> — Predict winners, methods, and rounds. Earn points for accuracy.</div>
+          <div class="ob-step-text"><strong>Rate events</strong> — score cards and leave reviews after</div>
         </div>
         <div class="ob-step">
           <div class="ob-step-num">3</div>
-          <div class="ob-step-text"><strong>Beat the Community</strong> — Track your pick accuracy on the leaderboard and challenge other fans.</div>
+          <div class="ob-step-text"><strong>Climb the board</strong> — accuracy earns you a tier from Rookie to Legend</div>
         </div>
       </div>
-      <a href="events.html" class="ob-cta" id="obCta">Make My First Picks →</a>
-      <button class="ob-skip" id="obSkip">I'll explore on my own</button>
+      <button class="ob-skip" id="obSkip">Got it, let me look around</button>
     </div>
   </div>
 
   <script>
     (function() {
-      // Only show if never seen before AND not logged in (logged-in users know the site)
-      if (localStorage.getItem('mmab_welcomed')) return;
-      // Small delay so the page renders first
+      var SEEN_KEY = 'mmab_welcomed_v2';
+      if (localStorage.getItem(SEEN_KEY)) return;
       setTimeout(function() {
-        // Check if user is logged in — skip modal for returning users
-        const user = window.MMABridgeAuth?.getUser?.();
-        if (user) { localStorage.setItem('mmab_welcomed', '1'); return; }
-        const overlay = document.getElementById('obOverlay');
-        if (overlay) overlay.style.display = 'flex';
+        var user = window.MMABridgeAuth?.getUser?.();
+        if (user) { localStorage.setItem(SEEN_KEY, '1'); return; }
+        var overlay = document.getElementById('obOverlay');
+        if (!overlay) return;
+        overlay.style.display = 'flex';
         function dismiss() {
           overlay.style.display = 'none';
-          localStorage.setItem('mmab_welcomed', '1');
+          localStorage.setItem(SEEN_KEY, '1');
         }
+        document.getElementById('obClose')?.addEventListener('click', dismiss);
         document.getElementById('obSkip')?.addEventListener('click', dismiss);
-        document.getElementById('obCta')?.addEventListener('click', function() {
-          localStorage.setItem('mmab_welcomed', '1');
-          // Let the <a> navigate
-        });
-        overlay.addEventListener('click', function(e) {
-          if (e.target === overlay) dismiss();
-        });
-      }, 800);
+        overlay.addEventListener('click', function(e) { if (e.target === overlay) dismiss(); });
+      }, 600);
     })();
   </script>
 <script src="animations.js?v=1.0"></script>
