@@ -566,10 +566,16 @@
               </span>
             </div>
             ${buildFollowRow()}
-            <button class="pr-share-btn" id="prShareBtn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-              Share Profile
-            </button>
+            <div class="pr-action-row">
+              <button class="pr-challenge-btn pr-challenge-find-btn" id="prFindChallengeBtn">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="23" y1="11" x2="17" y2="11"/><line x1="20" y1="8" x2="20" y2="14"/></svg>
+                Challenge Someone
+              </button>
+              <button class="pr-share-btn" id="prShareBtn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                Share Profile
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -861,6 +867,26 @@
           <div class="pr-modal-list" id="modalList"></div>
           <div class="pr-modal-done"><button id="modalDone">Done</button></div>
         </div>
+      </div>
+
+      <!-- Challenge user search overlay -->
+      <div class="pr-modal-backdrop" id="challengeSearchModal" style="display:none">
+        <div class="pr-modal pr-ch-search-modal">
+          <div class="pr-modal-header">
+            <div class="pr-modal-title">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px;opacity:0.6"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="23" y1="11" x2="17" y2="11"/><line x1="20" y1="8" x2="20" y2="14"/></svg>
+              Challenge Someone
+            </div>
+            <button class="pr-modal-close" id="chSearchClose">✕</button>
+          </div>
+          <div class="pr-modal-search">
+            <input type="text" id="chUserSearch" placeholder="Search by username…" autocomplete="off" />
+          </div>
+          <div class="pr-ch-search-hint">Or pick from top community pickers</div>
+          <div class="pr-modal-list" id="chUserList">
+            <div class="pr-ch-loading">Loading…</div>
+          </div>
+        </div>
       </div>`;
   }
 
@@ -1036,6 +1062,83 @@
     // Modal search
     document.getElementById('modalSearch')?.addEventListener('input', e => {
       renderModalList(e.target.value.toLowerCase());
+    });
+
+    // ── Challenge someone: user search overlay ──
+    let allCommunityUsers = [];
+
+    async function openChallengeSearch() {
+      const modal = document.getElementById('challengeSearchModal');
+      if (!modal) return;
+      modal.style.display = 'flex';
+      document.body.classList.add('no-scroll');
+      document.getElementById('chUserSearch').value = '';
+
+      if (!allCommunityUsers.length) {
+        try {
+          const sb = window._sb;
+          const myId = user.id;
+          const { data } = await sb.from('profiles')
+            .select('id, display_name, avatar_url')
+            .neq('id', myId)
+            .limit(50);
+          allCommunityUsers = (data || []).filter(u => u.display_name);
+        } catch {}
+      }
+      renderChallengeUserList('');
+    }
+
+    function closeChallengeSearch() {
+      const modal = document.getElementById('challengeSearchModal');
+      if (modal) modal.style.display = 'none';
+      document.body.classList.remove('no-scroll');
+    }
+
+    function renderChallengeUserList(query) {
+      const list = document.getElementById('chUserList');
+      if (!list) return;
+      const filtered = query
+        ? allCommunityUsers.filter(u => (u.display_name || '').toLowerCase().includes(query))
+        : allCommunityUsers;
+
+      if (!filtered.length) {
+        list.innerHTML = `<div class="pr-ch-empty">No users found</div>`;
+        return;
+      }
+      list.innerHTML = filtered.map(u => {
+        const initials = (u.display_name || '?').slice(0, 2).toUpperCase();
+        const avatarHtml = u.avatar_url
+          ? `<img src="${esc(u.avatar_url)}" class="pr-ch-avatar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+          : '';
+        return `
+          <div class="pr-ch-user-row" data-uid="${esc(u.id)}" data-uname="${esc(u.display_name || 'Fighter')}">
+            <div class="pr-ch-avatar-wrap">
+              ${avatarHtml}
+              <div class="pr-ch-avatar pr-ch-avatar-init" style="${u.avatar_url ? 'display:none' : ''}">${initials}</div>
+            </div>
+            <div class="pr-ch-user-name">${esc(u.display_name || 'Fighter')}</div>
+            <button class="pr-ch-send-btn">Challenge</button>
+          </div>`;
+      }).join('');
+
+      list.querySelectorAll('.pr-ch-user-row').forEach(row => {
+        row.querySelector('.pr-ch-send-btn').addEventListener('click', e => {
+          e.stopPropagation();
+          const uid = row.dataset.uid;
+          const uname = row.dataset.uname;
+          closeChallengeSearch();
+          window.openChallengeModal?.(uid, uname);
+        });
+      });
+    }
+
+    document.getElementById('prFindChallengeBtn')?.addEventListener('click', openChallengeSearch);
+    document.getElementById('chSearchClose')?.addEventListener('click', closeChallengeSearch);
+    document.getElementById('challengeSearchModal')?.addEventListener('click', e => {
+      if (e.target === document.getElementById('challengeSearchModal')) closeChallengeSearch();
+    });
+    document.getElementById('chUserSearch')?.addEventListener('input', e => {
+      renderChallengeUserList(e.target.value.toLowerCase().trim());
     });
 
     const shareBtn = document.getElementById('prShareBtn');
