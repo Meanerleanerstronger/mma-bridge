@@ -5842,6 +5842,11 @@ body.light-mode .ev-star-btn.starred {
 .fc-badge-wrong {
   color: rgba(255,255,255,0.25); background: transparent; border: none;
 }
+.pk-dd-badge-tag {
+  display: inline-block; margin-left: 4px;
+  font-size: 0.5rem; font-weight: 900;
+  color: #ffaa00; vertical-align: middle;
+}
 .fc-opp {
   font-family: 'Inter', sans-serif; font-size: 0.55rem;
   color: rgba(255,255,255,0.28); margin-top: 3px; display: inline-block;
@@ -5910,6 +5915,57 @@ body.light-mode .ev-star-btn.starred {
   max-height: 120px; padding: 14px 16px 18px;
   border-top-width: 1px;
 }
+
+/* ── Double Down button ───────────────────────── */
+.pk-dd-btn {
+  display: none;
+  width: 100%; padding: 9px 16px;
+  background: transparent; border: none;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.22);
+  font-family: 'Montserrat', sans-serif; font-size: 0.58rem;
+  font-weight: 800; letter-spacing: 0.13em; text-transform: uppercase;
+  cursor: pointer; align-items: center; justify-content: center; gap: 7px;
+  transition: all 0.18s ease;
+}
+.has-pick .pk-dd-btn { display: flex; }
+.pk-dd-icon { flex-shrink: 0; color: rgba(255,255,255,0.2); transition: color 0.18s; }
+.pk-dd-label { transition: color 0.18s; }
+.pk-dd-mult {
+  font-size: 0.72rem; font-weight: 900;
+  color: rgba(255,255,255,0.15); transition: color 0.18s;
+  margin-left: 2px;
+}
+.pk-dd-btn:hover { color: rgba(255,170,0,0.75); background: rgba(255,170,0,0.04); border-top-color: rgba(255,170,0,0.12); }
+.pk-dd-btn:hover .pk-dd-icon,
+.pk-dd-btn:hover .pk-dd-mult { color: rgba(255,170,0,0.65); }
+.pk-dd-btn.pk-dd-active {
+  color: #ffaa00; background: rgba(255,170,0,0.07);
+  border-top-color: rgba(255,170,0,0.2);
+}
+.pk-dd-btn.pk-dd-active .pk-dd-icon,
+.pk-dd-btn.pk-dd-active .pk-dd-mult { color: #ffaa00; }
+.pk-dd-btn.pk-dd-active .pk-dd-mult {
+  background: rgba(255,170,0,0.15); border-radius: 4px;
+  padding: 1px 5px; font-size: 0.65rem;
+}
+
+/* Card golden glow when DD is active */
+.pk-dd-card {
+  border-color: rgba(255,170,0,0.32) !important;
+  box-shadow: 0 0 32px rgba(255,170,0,0.09), 0 2px 14px rgba(0,0,0,0.4) !important;
+}
+
+/* Hype pill in picks header */
+.pk-hype-pill {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 9px; border-radius: 20px;
+  background: rgba(255,170,0,0.09); border: 1px solid rgba(255,170,0,0.2);
+  color: rgba(255,170,0,0.85);
+  font-family: 'Montserrat', sans-serif; font-size: 0.6rem;
+  font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+}
+.pk-hype-pill svg { flex-shrink: 0; }
 
 /* Segmented method buttons */
 .pk-seg-row {

@@ -218,8 +218,13 @@ function formatOdds(n) {
 
   function computePickPoints(fightKey, fightData) {
     const p = myPicks[fightKey];
-    if (!p || !fightData?.winner) return { pts: 0, breakdown: [] };
-    if ((p.pick || '').toLowerCase() !== fightData.winner.toLowerCase()) return { pts: 0, breakdown: [] };
+    const isDD = myPicks['__dd__']?.pick === fightKey;
+    if (!p || !fightData?.winner) return { pts: 0, breakdown: [], isDD };
+    const correct = (p.pick || '').toLowerCase() === fightData.winner.toLowerCase();
+    if (!correct) {
+      if (isDD) return { pts: -10, breakdown: ['-10 double down miss'], isDD };
+      return { pts: 0, breakdown: [], isDD };
+    }
     let pts = POINTS.WINNER;
     const breakdown = ['+10 winner'];
     if (p.method && fightData.method) {
@@ -238,7 +243,8 @@ function formatOdds(n) {
         }
       }
     }
-    return { pts, breakdown };
+    if (isDD) { pts *= 2; breakdown.push('×2 double down'); }
+    return { pts, breakdown, isDD };
   }
 
   // ── Load picks from DB ────────────────────────
@@ -401,9 +407,9 @@ function formatOdds(n) {
     return arr[idx] || null;
   }
 
-  // Count real picks (exclude fotn key)
-  function pickCount() { return Object.keys(localPicks).filter(k => k !== 'fotn').length; }
-  function savedPickCount() { return Object.keys(myPicks).filter(k => k !== 'fotn').length; }
+  // Count real picks (exclude fotn and __dd__ keys)
+  function pickCount() { return Object.keys(localPicks).filter(k => k !== 'fotn' && k !== '__dd__').length; }
+  function savedPickCount() { return Object.keys(myPicks).filter(k => k !== 'fotn' && k !== '__dd__').length; }
 
   // ── Unsaved changes? ──────────────────────────
   function hasUnsavedChanges() {
@@ -701,6 +707,7 @@ function formatOdds(n) {
     const commTotal = Object.values(comm).reduce((s, v) => s + v, 0);
     const hasPick   = pickedA || pickedB;
     const showComm  = commTotal > 0 && (isCompleted || hasPick);
+    const isDD      = (isCompleted ? myPicks['__dd__']?.pick : localPicks['__dd__']?.pick) === key;
     const commPctA  = showComm ? Math.round(((comm[f.a] || 0) / commTotal) * 100) : null;
     const commPctB  = showComm ? Math.round(((comm[f.b] || 0) / commTotal) * 100) : null;
     const oppPickedA = challenge && opp.pick === f.a;
@@ -720,6 +727,7 @@ function formatOdds(n) {
     const cardCls = ['sb-fight fc-card',
       isMain ? 'fc-main' : isMainCard ? 'fc-maincrd' : '',
       hasPick ? 'has-pick' : '',
+      isDD ? 'pk-dd-card' : '',
       isCompleted ? 'is-completed' : '',
       isMain ? 'is-main' : isMainCard ? 'is-main-card' : '',
     ].filter(Boolean).join(' ');
@@ -759,14 +767,15 @@ function formatOdds(n) {
     }
 
     // Badges
+    const ddTag = isDD ? ' <span class="pk-dd-badge-tag">⚡×2</span>' : '';
     const badgeA = correctA
-      ? `<div class="fc-badge fc-badge-correct">✓ +${ptsA}pts</div>`
-      : (isCompleted && pickedA ? `<div class="fc-badge fc-badge-wrong">✗ 0pts</div>` : '')
-      + (!isCompleted && pickedA ? `<div class="fc-badge fc-badge-pick${isSavedA ? '' : ' unsaved'}">${isSavedA ? 'YOUR PICK ✓' : 'YOUR PICK •'}</div>` : '');
+      ? `<div class="fc-badge fc-badge-correct">✓ +${ptsA}pts${isDD ? ' ⚡' : ''}</div>`
+      : (isCompleted && pickedA ? `<div class="fc-badge fc-badge-wrong">✗ ${ptsA < 0 ? ptsA + 'pts ⚡' : '0pts'}</div>` : '')
+      + (!isCompleted && pickedA ? `<div class="fc-badge fc-badge-pick${isSavedA ? '' : ' unsaved'}">${isSavedA ? 'YOUR PICK ✓' : 'YOUR PICK •'}${ddTag}</div>` : '');
     const badgeB = correctB
-      ? `<div class="fc-badge fc-badge-correct">✓ +${ptsB}pts</div>`
-      : (isCompleted && pickedB ? `<div class="fc-badge fc-badge-wrong">✗ 0pts</div>` : '')
-      + (!isCompleted && pickedB ? `<div class="fc-badge fc-badge-pick${isSavedB ? '' : ' unsaved'}">${isSavedB ? 'YOUR PICK ✓' : 'YOUR PICK •'}</div>` : '');
+      ? `<div class="fc-badge fc-badge-correct">✓ +${ptsB}pts${isDD ? ' ⚡' : ''}</div>`
+      : (isCompleted && pickedB ? `<div class="fc-badge fc-badge-wrong">✗ ${ptsB < 0 ? ptsB + 'pts ⚡' : '0pts'}</div>` : '')
+      + (!isCompleted && pickedB ? `<div class="fc-badge fc-badge-pick${isSavedB ? '' : ' unsaved'}">${isSavedB ? 'YOUR PICK ✓' : 'YOUR PICK •'}${ddTag}</div>` : '');
 
     // Opponent badges
     const oppBadgeA = oppPickedA ? `<div class="fc-opp">${esc(oppName)}'s pick</div>` : '';
@@ -809,6 +818,13 @@ function formatOdds(n) {
         </div>
       </div>` : '';
 
+    const ddBtnHtml = (!isCompleted && !isLocked) ? `
+      <button class="pk-dd-btn${isDD ? ' pk-dd-active' : ''}" data-key="${esc(key)}" type="button">
+        <svg class="pk-dd-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        <span class="pk-dd-label">${isDD ? 'DOUBLED' : 'DOUBLE DOWN'}</span>
+        <span class="pk-dd-mult">×2</span>
+      </button>` : '';
+
     return `
       <div class="${cardCls}" data-key="${esc(key)}">
         ${headHtml}
@@ -842,6 +858,7 @@ function formatOdds(n) {
           </div>
         </div>
         ${methodWrap}
+        ${ddBtnHtml}
         ${buildCommentSection(key)}
       </div>`;
   }
@@ -1283,6 +1300,7 @@ function formatOdds(n) {
             ${event.date ? `<span>${esc(event.date)}</span>` : ''}
             ${event.location ? `<span class="pk-meta-dot">·</span><span>${esc(event.location)}</span>` : ''}
             ${countdownHtml()}
+            ${hypeCount > 0 ? `<span class="pk-meta-dot">·</span><span class="pk-hype-pill"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>${hypeAvg.toFixed(1)} hype · ${hypeCount}</span>` : ''}
           </div>
           ${!isCompleted && !isLocked ? `<div class="pk-hd-sub">Predict winners · methods · rounds · Fight of the Night</div>` : ''}
           ${careerBadgeHtml()}
@@ -1418,6 +1436,23 @@ function formatOdds(n) {
     });
   }
 
+  // ── Update Double Down state across all cards ──
+  function updateDDState() {
+    const currentDD = localPicks['__dd__']?.pick || null;
+    root.querySelectorAll('.sb-fight[data-key]').forEach(card => {
+      const key   = card.dataset.key;
+      const btn   = card.querySelector('.pk-dd-btn');
+      const isDD  = currentDD === key;
+      card.classList.toggle('pk-dd-card', isDD);
+      if (btn) {
+        btn.classList.toggle('pk-dd-active', isDD);
+        const lbl = btn.querySelector('.pk-dd-label');
+        if (lbl) lbl.textContent = isDD ? 'DOUBLED' : 'DOUBLE DOWN';
+      }
+    });
+    updateSaveBar();
+  }
+
   // ── Bind fighter/method/round clicks ──────────
   function bindInteractions() {
     if (!isCompleted && !isLocked) {
@@ -1454,6 +1489,7 @@ function formatOdds(n) {
             fight.querySelectorAll('.pk-change-confirm').forEach(el => el.remove());
             fight.querySelectorAll('.sb-side').forEach(s => s.classList.remove('selected', 'dimmed'));
             delete localPicks[key];
+            if (localPicks['__dd__']?.pick === key) { delete localPicks['__dd__']; updateDDState(); }
             sessionStorage.setItem(`pk_draft_${eventId}`, JSON.stringify(localPicks));
             const methodWrap = document.getElementById(`pkMethod-${key}`);
             if (methodWrap) methodWrap.classList.remove('visible');
@@ -1659,6 +1695,22 @@ function formatOdds(n) {
           if (roundRow) roundRow.classList.toggle('pk-round-row-visible', showRound);
           localPicks[key] = { ...localPicks[key], base: newBase, round: showRound ? (localPicks[key].round || '') : '' };
           updateSaveBar();
+        });
+      });
+
+      // ── Double Down toggle ────────────────────────
+      root.querySelectorAll('.pk-dd-btn').forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          const key = btn.dataset.key;
+          if (!localPicks[key]?.pick) return;
+          if (localPicks['__dd__']?.pick === key) {
+            delete localPicks['__dd__'];
+          } else {
+            localPicks['__dd__'] = { pick: key, base: '', round: '' };
+          }
+          sessionStorage.setItem(`pk_draft_${eventId}`, JSON.stringify(localPicks));
+          updateDDState();
         });
       });
     }
