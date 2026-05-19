@@ -278,7 +278,7 @@
           </div>
           <div class="pr-stat">
             <div class="pr-stat-num">${otherCurrentStreak}</div>
-            <div class="pr-stat-lbl">🔥 Current Streak</div>
+            <div class="pr-stat-lbl">Current Streak</div>
           </div>
           <div class="pr-stat">
             <div class="pr-stat-num">${otherBestStreak}</div>
@@ -589,7 +589,7 @@
           </div>
           <div class="pr-stat">
             <div class="pr-stat-num" id="statStreak">${currentStreak}</div>
-            <div class="pr-stat-lbl">🔥 Current Streak</div>
+            <div class="pr-stat-lbl">Current Streak</div>
           </div>
           <div class="pr-stat">
             <div class="pr-stat-num" id="statBestStreak">${bestStreak}</div>
