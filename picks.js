@@ -1409,7 +1409,7 @@ function formatOdds(n) {
         <div class="pk-switcher-backdrop" id="pkSwitcherBackdrop"></div>
         <div class="pk-switcher-panel">
           <div class="pk-switcher-head">
-            <div class="pk-switcher-title">Pick Another Event</div>
+            <div class="pk-switcher-title" id="pkSwitcherTitle">Pick Another Event</div>
             <button class="pk-switcher-close" id="pkSwitcherClose" type="button">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
@@ -1994,6 +1994,15 @@ function formatOdds(n) {
   render();
   initPkCountdown();
   setupComments();
+
+  // ── Auto-open event switcher if ?picker=1 ────
+  if (new URLSearchParams(location.search).get('picker') === '1') {
+    setTimeout(() => {
+      const title = document.getElementById('pkSwitcherTitle');
+      if (title) title.textContent = 'Choose an Event';
+      document.getElementById('pkSwitchBtn')?.click();
+    }, 400);
+  }
 
   // ── Unsaved picks warning ─────────────────────
   window.addEventListener('beforeunload', e => {
