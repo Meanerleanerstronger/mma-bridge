@@ -266,20 +266,27 @@
     .online-badge-text { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); }
 
     .clear-btn {
-      background: none;
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 6px; color: var(--text-dim);
-      font-size: 0.6rem; font-weight: 600;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      padding: 5px 10px; cursor: pointer;
+      display: flex; align-items: center; gap: 5px;
+      background: rgba(255,60,60,0.08);
+      border: 1px solid rgba(255,60,60,0.25);
+      border-radius: 8px; color: rgba(255,100,100,0.85);
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 7px 14px; cursor: pointer;
       font-family: 'Inter', sans-serif;
-      transition: border-color 0.2s, color 0.2s, box-shadow 0.2s;
+      transition: background 0.18s, border-color 0.18s, color 0.18s, box-shadow 0.18s, transform 0.12s;
     }
 
     .clear-btn:hover {
-      border-color: var(--red);
-      color: var(--red);
-      box-shadow: 0 0 12px rgba(255,60,60,0.2);
+      background: rgba(255,60,60,0.18);
+      border-color: rgba(255,60,60,0.55);
+      color: #ff6464;
+      box-shadow: 0 0 16px rgba(255,60,60,0.25);
+      transform: scale(1.04);
+    }
+
+    .clear-btn:active {
+      transform: scale(0.97);
     }
 
     .messages {
@@ -771,7 +778,12 @@
               <span class="online-badge-text">Online</span>
             </div>
           </div>
-          <button class="clear-btn" onclick="clearChat()">Clear</button>
+          <button class="clear-btn" onclick="clearChat()">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/>
+            </svg>
+            Clear
+          </button>
         </div>
 
         <div class="messages" id="messages">

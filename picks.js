@@ -1101,29 +1101,30 @@ function formatOdds(n) {
   function initReplayBtn() {
     document.getElementById('pkReplayBtn')?.addEventListener('click', () => {
       const cards = root.querySelectorAll('.sb-fight[data-key]');
-      // First reset all badge visibility
+      // Reset all badges to pre-flip state
       cards.forEach(card => {
         card.querySelectorAll('.fc-badge').forEach(b => {
           b.style.opacity = '0';
-          b.style.transform = 'scale(0.7)';
+          b.style.transform = 'perspective(500px) rotateY(-90deg)';
           b.style.transition = 'none';
         });
+        card.style.boxShadow = '';
       });
-      // Then reveal staggered
+      // Staggered 3D flip reveal per card
       cards.forEach((card, i) => {
         setTimeout(() => {
           card.querySelectorAll('.fc-badge').forEach(b => {
-            b.style.transition = 'opacity 0.35s ease, transform 0.35s cubic-bezier(0.22,1,0.36,1)';
+            b.style.transition = 'opacity 0.15s ease, transform 0.42s cubic-bezier(0.22,1,0.36,1)';
             b.style.opacity = '1';
-            b.style.transform = 'scale(1)';
+            b.style.transform = 'perspective(500px) rotateY(0deg)';
           });
           card.style.transition = 'box-shadow 0.3s ease';
           const isCorrect = card.querySelector('.fc-badge-correct');
           card.style.boxShadow = isCorrect
-            ? '0 0 0 1px rgba(80,210,120,0.3), 0 4px 20px rgba(80,210,120,0.1)'
-            : '0 0 0 1px rgba(255,80,80,0.2), 0 4px 20px rgba(255,80,80,0.07)';
-          setTimeout(() => { card.style.boxShadow = ''; }, 1200);
-        }, i * 350);
+            ? '0 0 0 1px rgba(80,210,120,0.35), 0 4px 24px rgba(80,210,120,0.12)'
+            : '0 0 0 1px rgba(255,80,80,0.25), 0 4px 24px rgba(255,80,80,0.08)';
+          setTimeout(() => { card.style.boxShadow = ''; }, 1400);
+        }, i * 320);
       });
     });
   }
