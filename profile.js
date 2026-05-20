@@ -206,13 +206,54 @@
     let chWins = 0, chLosses = 0, chTies = 0;
     try {
       const { data: chRows } = await sb.from('challenges')
-        .select('challenger_id, opponent_id, winner_id, status')
-        .or(`challenger_id.eq.${viewedUserId},opponent_id.eq.${viewedUserId}`)
-        .eq('status', 'completed');
+        .select('id, challenger_id, opponent_id, winner_id, status, event_id')
+        .or(`challenger_id.eq.${viewedUserId},opponent_id.eq.${viewedUserId}`);
+
+      const pendingResolvable = (chRows || []).filter(c =>
+        c.status !== 'completed' && eventMap[c.event_id]?.status === 'completed'
+      );
+
+      let oppPicksByEvKey = {};
+      if (pendingResolvable.length) {
+        const oppIds = [...new Set(pendingResolvable.map(c => c.challenger_id === viewedUserId ? c.opponent_id : c.challenger_id))];
+        const evIds  = [...new Set(pendingResolvable.map(c => c.event_id))];
+        const { data: oppP } = await sb.from('picks').select('user_id, event_id, fight_key, pick')
+          .in('user_id', oppIds).in('event_id', evIds).neq('fight_key', '__dd__').neq('fight_key', 'fotn');
+        (oppP || []).forEach(p => {
+          const k = `${p.user_id}:${p.event_id}`;
+          (oppPicksByEvKey[k] = oppPicksByEvKey[k] || []).push(p);
+        });
+      }
+
+      const toComplete = [];
       (chRows || []).forEach(c => {
-        if (!c.winner_id) { chTies++; return; }
-        if (c.winner_id === viewedUserId) chWins++;
-        else chLosses++;
+        if (c.status === 'completed') {
+          if (!c.winner_id) chTies++;
+          else if (c.winner_id === viewedUserId) chWins++;
+          else chLosses++;
+          return;
+        }
+        if (!eventMap[c.event_id] || eventMap[c.event_id].status !== 'completed') return;
+        const oppId = c.challenger_id === viewedUserId ? c.opponent_id : c.challenger_id;
+        const vPicks = picks.filter(p => p.event_id === c.event_id && p.fight_key !== '__dd__' && p.fight_key !== 'fotn');
+        const vPts = vPicks.filter(p => {
+          const w = winnerMap[`${p.event_id}:${p.fight_key}`];
+          return w && p.pick?.toLowerCase() === w;
+        }).length;
+        const oppEvPicks = oppPicksByEvKey[`${oppId}:${c.event_id}`] || [];
+        if (!vPicks.length && !oppEvPicks.length) return;
+        const oPts = oppEvPicks.filter(p => {
+          const w = winnerMap[`${p.event_id}:${p.fight_key}`];
+          return w && p.pick?.toLowerCase() === w;
+        }).length;
+        if (vPts > oPts) chWins++;
+        else if (oPts > vPts) chLosses++;
+        else chTies++;
+        const winner_id = vPts > oPts ? viewedUserId : oPts > vPts ? oppId : null;
+        toComplete.push({ id: c.id, winner_id });
+      });
+      toComplete.forEach(({ id, winner_id }) => {
+        sb.from('challenges').update({ status: 'completed', winner_id }).eq('id', id).then(() => {}).catch(() => {});
       });
     } catch {}
     const chTotal = chWins + chLosses + chTies;
@@ -507,13 +548,58 @@
   let myChWins = 0, myChLosses = 0, myChTies = 0;
   try {
     const { data: myChRows } = await sb.from('challenges')
-      .select('challenger_id, opponent_id, winner_id, status')
-      .or(`challenger_id.eq.${user.id},opponent_id.eq.${user.id}`)
-      .eq('status', 'completed');
+      .select('id, challenger_id, opponent_id, winner_id, status, event_id')
+      .or(`challenger_id.eq.${user.id},opponent_id.eq.${user.id}`);
+
+    const pendingResolvable = (myChRows || []).filter(c =>
+      c.status !== 'completed' && eventMap[c.event_id]?.status === 'completed'
+    );
+
+    let oppPicksByEvKey = {};
+    if (pendingResolvable.length) {
+      const oppIds = [...new Set(pendingResolvable.map(c => c.challenger_id === user.id ? c.opponent_id : c.challenger_id))];
+      const evIds  = [...new Set(pendingResolvable.map(c => c.event_id))];
+      const { data: oppP } = await sb.from('picks').select('user_id, event_id, fight_key, pick')
+        .in('user_id', oppIds).in('event_id', evIds).neq('fight_key', '__dd__').neq('fight_key', 'fotn');
+      (oppP || []).forEach(p => {
+        const k = `${p.user_id}:${p.event_id}`;
+        (oppPicksByEvKey[k] = oppPicksByEvKey[k] || []).push(p);
+      });
+    }
+
+    const toComplete = [];
     (myChRows || []).forEach(c => {
-      if (!c.winner_id) { myChTies++; return; }
-      if (c.winner_id === user.id) myChWins++;
-      else myChLosses++;
+      if (c.status === 'completed') {
+        if (!c.winner_id) myChTies++;
+        else if (c.winner_id === user.id) myChWins++;
+        else myChLosses++;
+        return;
+      }
+      const ev = eventMap[c.event_id];
+      if (!ev || ev.status !== 'completed') return;
+      const oppId = c.challenger_id === user.id ? c.opponent_id : c.challenger_id;
+
+      // Build winnerMap for this event
+      const wMap = {};
+      [['main', ev.mainCard || []], ['prelims', ev.prelims || []], ['early', ev.earlyPrelims || []]].forEach(([key, fights]) => {
+        fights.forEach((f, i) => { if (f.winner) wMap[`${key}-${i}`] = f.winner.toLowerCase(); });
+      });
+
+      const myEvPicks = allPicks.filter(p => p.event_id === c.event_id && p.fight_key !== '__dd__' && p.fight_key !== 'fotn');
+      const myPts = myEvPicks.filter(p => wMap[p.fight_key] && p.pick?.toLowerCase() === wMap[p.fight_key]).length;
+      const oppEvPicks = oppPicksByEvKey[`${oppId}:${c.event_id}`] || [];
+      if (!myEvPicks.length && !oppEvPicks.length) return;
+      const oPts = oppEvPicks.filter(p => wMap[p.fight_key] && p.pick?.toLowerCase() === wMap[p.fight_key]).length;
+
+      if (myPts > oPts) myChWins++;
+      else if (oPts > myPts) myChLosses++;
+      else myChTies++;
+
+      const winner_id = myPts > oPts ? user.id : oPts > myPts ? oppId : null;
+      toComplete.push({ id: c.id, winner_id });
+    });
+    toComplete.forEach(({ id, winner_id }) => {
+      sb.from('challenges').update({ status: 'completed', winner_id }).eq('id', id).then(() => {}).catch(() => {});
     });
   } catch {}
   const myChTotal = myChWins + myChLosses + myChTies;

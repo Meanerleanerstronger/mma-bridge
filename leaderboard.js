@@ -647,6 +647,8 @@
         // Group challenges by event for scoring
         const eventsWithResults = new Set(Object.keys(winnerMap).map(k => k.split(':')[0]));
 
+        const toComplete = [];
+
         const cards = challenges.map(c => {
           const isChallenger = c.challenger_id === myId;
           const oppId   = isChallenger ? c.opponent_id : c.challenger_id;
@@ -685,14 +687,21 @@
                   <div class="lb-h2h-acc">${oppScore.correct}/${oppScore.judged}</div>
                 </div>
               </div>`;
+
+            // Queue DB update if challenge is still pending
+            if (status === 'pending') {
+              const winner_id = tie ? null : myWin ? myId : oppId;
+              toComplete.push({ id: c.id, winner_id });
+            }
           } else {
             const myPickCount  = picksData.filter(p => p.user_id === myId  && p.event_id === c.event_id && p.fight_key !== '__dd__' && p.fight_key !== 'fotn').length;
             const oppPickCount = picksData.filter(p => p.user_id === oppId && p.event_id === c.event_id && p.fight_key !== '__dd__' && p.fight_key !== 'fotn').length;
             scoreHtml = `<div class="lb-h2h-picks-count">You: <strong>${myPickCount}</strong> picks locked · ${esc(oppName)}: <strong>${oppPickCount}</strong> picks locked</div>`;
           }
 
-          const badgeClass = status === 'pending' ? 'lb-ch-badge-pending' : status === 'completed' ? 'lb-ch-badge-done' : 'lb-ch-badge-active';
-          const badgeLabel = status === 'pending' ? 'Pending' : status === 'completed' ? 'Completed' : 'Active';
+          const resolvedStatus = evFinished && status === 'pending' ? 'completed' : status;
+          const badgeClass = resolvedStatus === 'pending' ? 'lb-ch-badge-pending' : resolvedStatus === 'completed' ? 'lb-ch-badge-done' : 'lb-ch-badge-active';
+          const badgeLabel = resolvedStatus === 'pending' ? 'Pending' : resolvedStatus === 'completed' ? 'Completed' : 'Active';
           const href = `picks.html?id=${encodeURIComponent(c.event_id)}`;
           const actionBtn = `<a href="${href}" class="lb-ch-btn lb-ch-btn-view">View Picks →</a>`;
 
@@ -714,6 +723,11 @@
         challEl.innerHTML = `
           <div class="lb-section-label" style="margin-top:24px;margin-bottom:12px">Head-to-Head Challenges</div>
           <div class="lb-ch-list">${cards}</div>`;
+
+        // Write completed status to DB for resolved challenges (fire-and-forget)
+        toComplete.forEach(({ id, winner_id }) => {
+          sb.from('challenges').update({ status: 'completed', winner_id }).eq('id', id).then(() => {}).catch(() => {});
+        });
       });
   }
 

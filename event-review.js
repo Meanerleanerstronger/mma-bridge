@@ -490,9 +490,11 @@ async function fetchMyEventPicks(eventId) {
   try {
     const { data } = await sb()
       .from('picks')
-      .select('fight_key, pick_winner, pick_method, pick_round, fotn_pick')
+      .select('fight_key, pick, method')
       .eq('event_id', eventId)
-      .eq('user_id', uid);
+      .eq('user_id', uid)
+      .neq('fight_key', '__dd__')
+      .neq('fight_key', 'fotn');
     return data || [];
   } catch { return []; }
 }
@@ -514,12 +516,11 @@ function gradePicks(ev, picks) {
     const fight = getFightByKey(ev, pick.fight_key);
     if (!fight?.winner) return;
     total++;
-    const winnerOk = pick.pick_winner === fight.winner;
+    const winnerOk = pick.pick?.toLowerCase() === fight.winner?.toLowerCase();
     if (winnerOk) {
       correct++;
       points += 10;
-      if (pick.pick_method && pick.pick_method === fight.method) points += 5;
-      if (pick.pick_round && +pick.pick_round === +fight.round) points += 5;
+      if (pick.method && fight.method && pick.method.split(' ')[0].toUpperCase() === fight.method.split(' ')[0].toUpperCase()) points += 5;
     }
   });
   return { correct, total, points };
@@ -529,16 +530,17 @@ async function fetchFotnVotes(eventId) {
   try {
     const { data } = await sb()
       .from('picks')
-      .select('fotn_pick')
+      .select('pick')
       .eq('event_id', eventId)
-      .not('fotn_pick', 'is', null);
+      .eq('fight_key', 'fotn');
     if (!data?.length) return null;
     const tally = {};
-    data.forEach(p => { if (p.fotn_pick) tally[p.fotn_pick] = (tally[p.fotn_pick] || 0) + 1; });
+    data.forEach(p => { if (p.pick) tally[p.pick] = (tally[p.pick] || 0) + 1; });
+    const total = data.length;
     const sorted = Object.entries(tally)
       .sort((a, b) => b[1] - a[1])
-      .map(([fight, count]) => ({ fight, count, pct: Math.round(count / data.length * 100) }));
-    return { total: data.length, votes: sorted.slice(0, 5) };
+      .map(([fight, count]) => ({ fight, count, pct: Math.round(count / total * 100) }));
+    return { total, votes: sorted.slice(0, 5) };
   } catch { return null; }
 }
 
@@ -546,14 +548,16 @@ async function fetchCommunityPicks(eventId) {
   try {
     const { data } = await sb()
       .from('picks')
-      .select('fight_key, pick_winner')
-      .eq('event_id', eventId);
+      .select('fight_key, pick')
+      .eq('event_id', eventId)
+      .neq('fight_key', '__dd__')
+      .neq('fight_key', 'fotn');
     if (!data?.length) return {};
     const byFight = {};
     data.forEach(p => {
-      if (!p.fight_key || !p.pick_winner) return;
+      if (!p.fight_key || !p.pick) return;
       if (!byFight[p.fight_key]) byFight[p.fight_key] = {};
-      byFight[p.fight_key][p.pick_winner] = (byFight[p.fight_key][p.pick_winner] || 0) + 1;
+      byFight[p.fight_key][p.pick] = (byFight[p.fight_key][p.pick] || 0) + 1;
     });
     return byFight;
   } catch { return {}; }
@@ -603,7 +607,7 @@ function fightRow(f, communityData) {
   let pickBarsHtml = '';
   if (communityData && Object.keys(communityData).length) {
     const total = Object.values(communityData).reduce((s, n) => s + n, 0);
-    const cntA  = communityData[f.a] || 0;
+    const cntA  = communityData['a'] || 0;
     const pctA  = total ? Math.round(cntA / total * 100) : 50;
     const pctB  = 100 - pctA;
     pickBarsHtml = `
