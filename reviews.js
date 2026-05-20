@@ -93,6 +93,9 @@ function buildCard(ev, type) {
     window.location.href = `event-review.html?id=${encodeURIComponent(eventId)}`;
   });
 
+  // 3D tilt on hover
+  if (window.applyTilt) window.applyTilt([card]);
+
   // Async inject community rating badge — also pre-populates ratingsCache for sort
   fetchRating(eventId).then(r => {
     ratingsCache[eventId] = r?.avg_hype ? parseFloat(r.avg_hype) : null;

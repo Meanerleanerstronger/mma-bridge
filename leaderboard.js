@@ -376,7 +376,7 @@
            </div>`;
 
       return `
-        <div class="lb-row${isMe ? ' lb-row-me' : ''}${pos <= 3 ? ' lb-row-top' : ''}">
+        <div class="lb-row${isMe ? ' lb-row-me' : ''}${pos <= 3 ? ' lb-row-top' : ''}" style="animation-delay:${i * 38}ms">
           <div class="lb-pos${posCls}">${pos}</div>
           <div class="lb-user">
             <div class="lb-avatar-wrap">${avatarHtml}</div>

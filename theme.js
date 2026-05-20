@@ -48,6 +48,32 @@ if (document.readyState !== 'loading') {
   requestAnimationFrame(_syncThemeBtn);
 }
 
+// ── Mouse-tracking 3D tilt utility ────────────
+// Usage: window.applyTilt(arrayOfElements)
+// Attaches a smooth cursor-following 3D tilt to each element.
+window.applyTilt = (function() {
+  var MAX = 9;
+  return function(els) {
+    Array.from(els).forEach(function(el) {
+      el.addEventListener('mousemove', function(e) {
+        var r  = el.getBoundingClientRect();
+        var x  = ((e.clientX - r.left)  / r.width  - 0.5) * 2;  // -1 → 1
+        var y  = ((e.clientY - r.top)   / r.height - 0.5) * 2;
+        el.style.transform  = 'perspective(700px) rotateY(' + (x * MAX) + 'deg) rotateX(' + (-y * MAX * 0.55) + 'deg) scale(1.03) translateZ(8px)';
+        el.style.transition = 'transform 0.07s linear';
+        el.style.willChange = 'transform';
+        el.style.zIndex     = '2';
+      });
+      el.addEventListener('mouseleave', function() {
+        el.style.transition = 'transform 0.5s cubic-bezier(0.22,1,0.36,1)';
+        el.style.transform  = '';
+        el.style.zIndex     = '';
+        setTimeout(function() { el.style.willChange = 'auto'; }, 550);
+      });
+    });
+  };
+})();
+
 // ── Page transition crossfade ──────────────────
 (function() {
   // Inject overlay element
