@@ -71,11 +71,14 @@ a, a:visited {
   z-index: 1000;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  transition: box-shadow 0.2s;
+  transition: box-shadow 0.2s, backdrop-filter 0.3s ease;
 }
 
 .navbar.scrolled {
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(8,8,12,0.85) !important;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.06);
 }
 
 .nav-container {
@@ -9833,3 +9836,61 @@ body.light-mode .pr-tier-bar-track { background: rgba(0,0,0,0.08); }
   display: flex; align-items: baseline; gap: 2px;
 }
 .pr-stat-h2h-sep { font-size: 0.8rem; opacity: 0.4; }
+
+/* ── Tap/press active states (mobile feel) ── */
+button:active, [role="button"]:active, .lb-tab:active, .pk-seg-btn:active,
+.hiw-card:active, .pr-challenge-btn:active, .pr-share-btn:active,
+.ev-card-wrap:active, .pk-dd-btn:active {
+  transform: scale(0.97) !important;
+  transition: transform 0.08s ease !important;
+}
+
+/* ── Picks skeleton loader ── */
+.pk-skeleton-wrap { max-width: 680px; margin: 60px auto; padding: 0 20px; }
+.pk-skel-hd { text-align: center; margin-bottom: 32px; }
+.pk-skel {
+  background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
+  background-size: 200% 100%;
+  animation: skel-shimmer 1.4s infinite;
+  border-radius: 6px;
+}
+.pk-skel-eyebrow { height: 10px; width: 100px; margin: 0 auto 12px; border-radius: 20px; }
+.pk-skel-title { height: 28px; width: 260px; margin: 0 auto 10px; border-radius: 8px; }
+.pk-skel-meta { height: 10px; width: 180px; margin: 0 auto; border-radius: 20px; }
+.pk-skel-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 16px; margin-bottom: 12px; }
+.pk-skel-card-head { height: 10px; width: 80px; margin-bottom: 14px; border-radius: 4px; }
+.pk-skel-matchup { display: flex; gap: 12px; align-items: center; }
+.pk-skel-fighter { flex: 1; height: 80px; border-radius: 10px; }
+.pk-skel-vs { width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0; }
+
+/* ── Weight class accuracy bars (profile) ── */
+.pr-wc-list { display: flex; flex-direction: column; gap: 10px; }
+.pr-wc-row { display: flex; align-items: center; gap: 10px; }
+.pr-wc-name { font-family: 'Inter', sans-serif; font-size: 0.72rem; color: rgba(255,255,255,0.5); width: 90px; flex-shrink: 0; }
+.pr-wc-bar-wrap { flex: 1; height: 4px; background: rgba(255,255,255,0.07); border-radius: 2px; overflow: hidden; }
+.pr-wc-bar { height: 100%; background: linear-gradient(90deg, #00e5ff, rgba(0,229,255,0.5)); border-radius: 2px; transition: width 0.8s cubic-bezier(0.22,1,0.36,1); }
+.pr-wc-pct { font-family: 'Montserrat', sans-serif; font-size: 0.72rem; font-weight: 800; color: rgba(255,255,255,0.7); width: 34px; text-align: right; flex-shrink: 0; }
+.pr-wc-total { font-family: 'Inter', sans-serif; font-size: 0.65rem; color: rgba(255,255,255,0.25); flex-shrink: 0; }
+
+/* ── Follow feed (picks page) ── */
+.pk-follow-feed { max-width: 680px; margin: 24px auto; padding: 0 20px; }
+.pk-follow-feed-title { display: flex; align-items: center; gap: 7px; font-family: 'Montserrat', sans-serif; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 12px; }
+.pk-follow-list { display: flex; flex-direction: column; gap: 8px; }
+.pk-follow-row { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; }
+.pk-follow-av { width: 32px; height: 32px; border-radius: 50%; overflow: hidden; flex-shrink: 0; background: rgba(255,255,255,0.07); position: relative; }
+.pk-follow-av img { width: 100%; height: 100%; object-fit: cover; }
+.pk-follow-av-init { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-size: 0.6rem; font-weight: 800; color: rgba(255,255,255,0.4); }
+.pk-follow-name { flex: 1; font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.7); }
+.pk-follow-count { font-family: 'Inter', sans-serif; font-size: 0.7rem; color: rgba(255,255,255,0.25); flex-shrink: 0; }
+
+/* ── Picks replay button ── */
+.pk-replay-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 16px; border-radius: 8px;
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.45);
+  font-family: 'Montserrat', sans-serif; font-size: 0.65rem; font-weight: 800;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  cursor: pointer; transition: all 0.18s ease;
+}
+.pk-replay-btn:hover { background: rgba(255,255,255,0.09); color: rgba(255,255,255,0.8); }

@@ -47,3 +47,29 @@ document.addEventListener('DOMContentLoaded', function () {
 if (document.readyState !== 'loading') {
   requestAnimationFrame(_syncThemeBtn);
 }
+
+// ── Page transition crossfade ──────────────────
+(function() {
+  // Inject overlay element
+  var overlay = document.createElement('div');
+  overlay.id = 'pg-transition';
+  overlay.style.cssText = 'position:fixed;inset:0;background:#08080c;z-index:99999;pointer-events:none;opacity:1;transition:opacity 0.22s ease;';
+  document.documentElement.appendChild(overlay);
+
+  // Fade in on load (page arrives faded black, fades to transparent)
+  document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() { overlay.style.opacity = '0'; }, 50);
+  });
+
+  // On internal link click, fade to black then navigate
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest('a[href]');
+    if (!a) return;
+    var href = a.getAttribute('href');
+    // Only internal same-origin links, not hash links, not new-tab
+    if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto') || a.target === '_blank') return;
+    e.preventDefault();
+    overlay.style.opacity = '1';
+    setTimeout(function() { window.location.href = href; }, 200);
+  });
+})();

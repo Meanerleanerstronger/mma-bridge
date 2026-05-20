@@ -95,7 +95,23 @@ function formatOdds(n) {
     toastTimer = setTimeout(() => { toast.style.display = 'none'; }, 2800);
   }
 
-  root.innerHTML = `<div class="pk-loading"><div class="pk-spinner"></div>Loading card…</div>`;
+  root.innerHTML = `
+  <div class="pk-skeleton-wrap">
+    <div class="pk-skel-hd">
+      <div class="pk-skel pk-skel-eyebrow"></div>
+      <div class="pk-skel pk-skel-title"></div>
+      <div class="pk-skel pk-skel-meta"></div>
+    </div>
+    ${Array(5).fill(0).map(() => `
+      <div class="pk-skel-card">
+        <div class="pk-skel pk-skel-card-head"></div>
+        <div class="pk-skel-matchup">
+          <div class="pk-skel pk-skel-fighter"></div>
+          <div class="pk-skel pk-skel-vs"></div>
+          <div class="pk-skel pk-skel-fighter"></div>
+        </div>
+      </div>`).join('')}
+  </div>`;
 
   const [eventsData, fightersData, user] = await Promise.all([
     fetch('./events.json').then(r => r.ok ? r.json() : []).catch(() => []),
@@ -186,6 +202,7 @@ function formatOdds(n) {
   let careerJudged  = 0;
   let fotnPickMode  = false;  // cursor-mode FOTN selection active
   let fotnCursorEl  = null;
+  let followFeedData = {};
 
   // ── Method drum constants ─────────────────────
   const DRUM_ITEMS = [
@@ -395,6 +412,7 @@ function formatOdds(n) {
   }
 
   await Promise.all([loadChallenge(), loadEventExtras(), loadCommunityPicks(), prefetchNextEvent(), loadCareerStats(), loadOdds(eventId)]);
+  loadFollowFeed();
 
   // ── Get fight data from key ───────────────────
   function getFightData(key) {
@@ -1066,11 +1084,48 @@ function formatOdds(n) {
         </div>
         ${fotnPts > 0 ? `<div class="pk-score-hero-fotn-bonus">+${fotnPts} FOTN Bonus</div>` : ''}
         ${careerPct !== null ? `<div class="pk-score-hero-career">All-time: ${careerCorrect}/${careerJudged} picks · ${careerPct}%</div>` : ''}
-        <button class="pk-share-hero-btn" id="pkShareHeroBtn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-          Share Result
-        </button>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center">
+          <button class="pk-share-hero-btn" id="pkShareHeroBtn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            Share Result
+          </button>
+          <button class="pk-replay-btn" id="pkReplayBtn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.36"/></svg>
+            Replay
+          </button>
+        </div>
       </div>`;
+  }
+
+  // ── Replay results animation ──────────────────────────────────────
+  function initReplayBtn() {
+    document.getElementById('pkReplayBtn')?.addEventListener('click', () => {
+      const cards = root.querySelectorAll('.sb-fight[data-key]');
+      // First reset all badge visibility
+      cards.forEach(card => {
+        card.querySelectorAll('.fc-badge').forEach(b => {
+          b.style.opacity = '0';
+          b.style.transform = 'scale(0.7)';
+          b.style.transition = 'none';
+        });
+      });
+      // Then reveal staggered
+      cards.forEach((card, i) => {
+        setTimeout(() => {
+          card.querySelectorAll('.fc-badge').forEach(b => {
+            b.style.transition = 'opacity 0.35s ease, transform 0.35s cubic-bezier(0.22,1,0.36,1)';
+            b.style.opacity = '1';
+            b.style.transform = 'scale(1)';
+          });
+          card.style.transition = 'box-shadow 0.3s ease';
+          const isCorrect = card.querySelector('.fc-badge-correct');
+          card.style.boxShadow = isCorrect
+            ? '0 0 0 1px rgba(80,210,120,0.3), 0 4px 20px rgba(80,210,120,0.1)'
+            : '0 0 0 1px rgba(255,80,80,0.2), 0 4px 20px rgba(255,80,80,0.07)';
+          setTimeout(() => { card.style.boxShadow = ''; }, 1200);
+        }, i * 350);
+      });
+    });
   }
 
   // ── Share picks card ──────────────────────────────────────────────
@@ -1444,6 +1499,7 @@ function formatOdds(n) {
     bindFotn();
     updateFotnBar();
     initShareBtn();
+    initReplayBtn();
 
     // FOTN reminder pill scrolls to FOTN section
     document.querySelector('.pk-fotn-reminder')?.addEventListener('click', () => {
@@ -1858,6 +1914,68 @@ function formatOdds(n) {
 
   function initSpine() {}
   function updateSpine() {}
+
+  // ── Follow feed ───────────────────────────────
+  async function loadFollowFeed() {
+    if (!myId || isCompleted || isLocked) return;
+    try {
+      // Get who the current user follows
+      const { data: followData } = await sb.from('follows').select('following_id').eq('follower_id', myId);
+      if (!followData?.length) return;
+      const followingIds = followData.map(f => f.following_id);
+
+      // Get their picks for this event
+      const { data: friendPicks } = await sb.from('picks')
+        .select('user_id, fight_key, pick, profiles(display_name, avatar_url)')
+        .eq('event_id', eventId)
+        .in('user_id', followingIds)
+        .neq('fight_key', 'fotn')
+        .neq('fight_key', '__dd__');
+
+      if (!friendPicks?.length) return;
+
+      // Group by user
+      const byUser = {};
+      friendPicks.forEach(p => {
+        if (!byUser[p.user_id]) byUser[p.user_id] = { name: p.profiles?.display_name || 'Fighter', avatar: p.profiles?.avatar_url, picks: {} };
+        byUser[p.user_id].picks[p.fight_key] = p.pick;
+      });
+
+      followFeedData = byUser;
+      renderFollowFeed();
+    } catch {}
+  }
+
+  function renderFollowFeed() {
+    const existing = document.getElementById('pkFollowFeed');
+    if (existing) existing.remove();
+    if (!Object.keys(followFeedData).length) return;
+
+    const section = document.createElement('div');
+    section.id = 'pkFollowFeed';
+    section.className = 'pk-follow-feed';
+    section.innerHTML = `
+      <div class="pk-follow-feed-title">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        From Your Circle
+      </div>
+      <div class="pk-follow-list">
+        ${Object.values(followFeedData).slice(0, 5).map(u => {
+          const initials = (u.name||'?').slice(0,2).toUpperCase();
+          const pickCount = Object.keys(u.picks).length;
+          return `<div class="pk-follow-row">
+            <div class="pk-follow-av">${u.avatar ? `<img src="${esc(u.avatar)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div style="display:none" class="pk-follow-av-init">${initials}</div>` : `<div class="pk-follow-av-init">${initials}</div>`}</div>
+            <div class="pk-follow-name">${esc(u.name)}</div>
+            <div class="pk-follow-count">${pickCount} pick${pickCount !== 1 ? 's' : ''} in</div>
+          </div>`;
+        }).join('')}
+      </div>`;
+
+    // Insert before the save bar area or after fights
+    const saveBar = document.getElementById('pkSaveBar');
+    if (saveBar?.parentElement) saveBar.parentElement.insertBefore(section, saveBar);
+    else root.appendChild(section);
+  }
 
   // ── Cascade entrance animation ────────────────
   function animateFightEntrance() {

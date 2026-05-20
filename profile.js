@@ -183,6 +183,25 @@
       else otherRunning = 0;
     }
 
+    // ── Dark horse badge for other user ──────────────────────
+    let otherHasDarkHorse = false;
+    picks.forEach(p => {
+      const ev = eventMap[p.event_id];
+      if (!ev) return;
+      [['main', ev.mainCard||[]], ['prelims', ev.prelims||[]], ['early', ev.earlyPrelims||[]]].forEach(([key, fights]) => {
+        fights.forEach((f, i) => {
+          if (`${key}-${i}` !== p.fight_key) return;
+          if (!f.winner) return;
+          const isCorrect = p.pick?.toLowerCase() === (f.winner||'').toLowerCase();
+          const pickedB = p.pick?.toLowerCase() === (f.b||'').toLowerCase();
+          if (isCorrect && pickedB) otherHasDarkHorse = true;
+        });
+      });
+    });
+    const otherBadges = [];
+    if (otherHasDarkHorse) otherBadges.push({ icon: '⚡', name: 'Dark Horse', desc: 'Called an underdog win' });
+    if (otherBestStreak >= 3) otherBadges.push({ icon: '🔥', name: 'On a Run', desc: `${otherBestStreak}-event best streak` });
+
     // H2H challenge record for viewed user
     let chWins = 0, chLosses = 0, chTies = 0;
     try {
@@ -305,6 +324,18 @@
       </div>
 
       <div class="pr-body">
+        ${otherBadges.length ? `
+          <div class="pr-section" style="animation-delay:0.05s">
+            <div class="pr-section-title">Badges</div>
+            <div class="pr-badges-row">
+              ${otherBadges.map(b => `
+                <div class="pr-badge-chip earned" title="${esc(b.desc)}">
+                  <span class="pr-badge-icon">${b.icon}</span>
+                  <span class="pr-badge-name">${esc(b.name)}</span>
+                  <div class="pr-badge-tooltip">${esc(b.desc)}</div>
+                </div>`).join('')}
+            </div>
+          </div>` : ''}
         ${buildOtherPickHistorySection(picks, pickEventSet, winnerMap, eventMap)}
         ${buildOtherRatingsSection(ratings, eventMap)}
         ${favsHtml}
@@ -575,14 +606,53 @@
     ? (ratings.reduce((s, r) => s + Number(r.hype_rating), 0) / totalRatings).toFixed(1)
     : '—';
 
+  // ── Dark horse: correctly picked the "b" fighter (typically underdog/second-listed) ──
+  let hasDarkHorse = false;
+  allPicks.forEach(p => {
+    const ev = eventMap[p.event_id];
+    if (!ev) return;
+    const sections = [['main', ev.mainCard||[]], ['prelims', ev.prelims||[]], ['early', ev.earlyPrelims||[]]];
+    sections.forEach(([key, fights]) => {
+      fights.forEach((f, i) => {
+        if (`${key}-${i}` !== p.fight_key) return;
+        if (!f.winner) return;
+        const isCorrect = p.pick?.toLowerCase() === (f.winner||'').toLowerCase();
+        const pickedB = p.pick?.toLowerCase() === (f.b||'').toLowerCase();
+        if (isCorrect && pickedB) hasDarkHorse = true;
+      });
+    });
+  });
+
+  // ── Weight class accuracy ─────────────────────
+  const wcStats = {};
+  allPicks.forEach(p => {
+    const ev = eventMap[p.event_id];
+    if (!ev) return;
+    [['main', ev.mainCard||[]], ['prelims', ev.prelims||[]], ['early', ev.earlyPrelims||[]]].forEach(([key, fights]) => {
+      fights.forEach((f, i) => {
+        if (`${key}-${i}` !== p.fight_key) return;
+        const wc = f.weight || 'Unknown';
+        if (!wcStats[wc]) wcStats[wc] = { correct: 0, total: 0 };
+        wcStats[wc].total++;
+        const winner = (f.winner||'').toLowerCase();
+        if (winner && p.pick?.toLowerCase() === winner) wcStats[wc].correct++;
+      });
+    });
+  });
+  const wcList = Object.entries(wcStats)
+    .filter(([,v]) => v.total >= 3)
+    .map(([wc, v]) => ({ wc, pct: Math.round(v.correct/v.total*100), total: v.total }))
+    .sort((a,b) => b.pct - a.pct);
+
   // ── Compute badges ────────────────────────────
   const BADGES = [
-    { id: 'sharp',   icon: 'S', name: 'Sharp',        desc: '70%+ accuracy on any event',       check: () => pickHistory.some(e => e.pct >= 70) },
-    { id: 'perfect', icon: 'P', name: 'Perfect Card', desc: '100% correct on an event',          check: () => pickHistory.some(e => e.pct === 100) },
-    { id: 'veteran', icon: 'V', name: 'Veteran',      desc: 'Picked 5+ events',                  check: () => pickHistory.length >= 5 },
-    { id: 'rater',   icon: 'C', name: 'Critic',       desc: 'Rated 5+ events',                   check: () => ratings.length >= 5 },
-    { id: 'dayone',  icon: 'D', name: 'Day One',      desc: 'Early adopter (joined before 2026)', check: () => new Date(user.created_at) < new Date('2026-01-01') },
-    { id: 'picker',  icon: 'M', name: 'Pick Master',  desc: '30+ total picks across all events', check: () => totalPicksAll >= 30 },
+    { id: 'sharp',     icon: 'S', name: 'Sharp',        desc: '70%+ accuracy on any event',       check: () => pickHistory.some(e => e.pct >= 70) },
+    { id: 'perfect',   icon: 'P', name: 'Perfect Card', desc: '100% correct on an event',          check: () => pickHistory.some(e => e.pct === 100) },
+    { id: 'veteran',   icon: 'V', name: 'Veteran',      desc: 'Picked 5+ events',                  check: () => pickHistory.length >= 5 },
+    { id: 'rater',     icon: 'C', name: 'Critic',       desc: 'Rated 5+ events',                   check: () => ratings.length >= 5 },
+    { id: 'dayone',    icon: 'D', name: 'Day One',      desc: 'Early adopter (joined before 2026)', check: () => new Date(user.created_at) < new Date('2026-01-01') },
+    { id: 'picker',    icon: 'M', name: 'Pick Master',  desc: '30+ total picks across all events', check: () => totalPicksAll >= 30 },
+    { id: 'darkhorse', icon: '⚡', name: 'Dark Horse',  desc: 'Correctly called an underdog win',  check: () => hasDarkHorse },
   ];
   const earnedBadges = BADGES.filter(b => b.check());
 
@@ -678,6 +748,7 @@
         ${buildBadgesSection()}
         ${buildRatingsSection()}
         ${buildPickHistorySection()}
+        ${buildWcSection()}
         ${buildFavsSection()}
         ${buildNotifPrefsCard()}
         ${buildDangerZone()}
@@ -830,6 +901,25 @@
         <div class="pr-section-title">Badges</div>
         <div class="pr-badges-row">
           ${badgesHtml}
+        </div>
+      </div>`;
+  }
+
+  function buildWcSection() {
+    if (wcList.length < 2) return '';
+    return `
+      <div class="pr-section" style="animation-delay:0.2s">
+        <div class="pr-section-title">Accuracy by Weight Class</div>
+        <div class="pr-wc-list">
+          ${wcList.slice(0, 5).map(({wc, pct, total}) => `
+            <div class="pr-wc-row">
+              <div class="pr-wc-name">${esc(wc)}</div>
+              <div class="pr-wc-bar-wrap">
+                <div class="pr-wc-bar" style="width:${pct}%"></div>
+              </div>
+              <div class="pr-wc-pct">${pct}%</div>
+              <div class="pr-wc-total">${total} picks</div>
+            </div>`).join('')}
         </div>
       </div>`;
   }
