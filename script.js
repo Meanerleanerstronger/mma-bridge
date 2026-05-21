@@ -399,8 +399,8 @@ function startLiveFeed() {
   }
 
   function render(visitors) {
-    const real = Array.isArray(visitors) && visitors.length ? visitors : [];
-    const list = real.length >= 5 ? real.slice(0, 5) : [...real, ...FEED_PLACEHOLDERS].slice(0, 5);
+    const real = Array.isArray(visitors) && visitors.length ? visitors : FEED_PLACEHOLDERS;
+    const list = real.slice(0, 5);
     feed.innerHTML = '';
     list.forEach(v => {
       const key = `${v.city}-${v.country}-${v.ts}`;

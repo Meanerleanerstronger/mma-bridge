@@ -330,8 +330,8 @@
   function render(visitors) {
     const list = document.getElementById('lw-list');
     if (!list) return;
-    const real = Array.isArray(visitors) && visitors.length ? visitors : [];
-    const items = real.length >= 5 ? real.slice(0, 5) : [...real, ...PLACEHOLDERS].slice(0, 5);
+    const real = Array.isArray(visitors) && visitors.length ? visitors : PLACEHOLDERS;
+    const items = real.slice(0, 5);
     list.innerHTML = '';
     items.forEach(v => {
       const key = `${v.city}-${v.ts}`;
