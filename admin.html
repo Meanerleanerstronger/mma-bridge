@@ -692,13 +692,25 @@
     .mkt-post-status.err { color: #e05555; }
 
     .mkt-result-body {
+      display: block;
+      width: 100%;
       padding: 14px 16px;
       font-family: 'Inter', sans-serif;
       font-size: 0.85rem;
-      color: rgba(255,255,255,0.8);
+      color: rgba(255,255,255,0.88);
       line-height: 1.55;
       white-space: pre-wrap;
       word-break: break-word;
+      background: transparent;
+      border: none;
+      resize: vertical;
+      outline: none;
+      box-sizing: border-box;
+      min-height: 80px;
+    }
+    .mkt-result-body:focus {
+      background: rgba(255,255,255,0.03);
+      border-radius: 0 0 12px 12px;
     }
 
     /* ── Analytics tab ────────────────────────────────────── */
@@ -1452,12 +1464,13 @@
                 </div>
               </div>
               ${redditRow}
-              <div class="mkt-result-body">${escHtml(content)}</div>
+              <textarea class="mkt-result-body">${escHtml(content)}</textarea>
               <div class="mkt-post-status"></div>`;
             resultsEl.appendChild(card);
 
             card.querySelector('.btn-copy').addEventListener('click', function() {
-              navigator.clipboard.writeText(content).then(() => {
+              const txt = card.querySelector('.mkt-result-body').value;
+              navigator.clipboard.writeText(txt).then(() => {
                 this.textContent = 'Copied!';
                 this.classList.add('copied');
                 setTimeout(() => { this.textContent = 'Copy'; this.classList.remove('copied'); }, 2000);
@@ -1479,7 +1492,7 @@
                   const res = await fetch(`${API_BASE}/api/admin/marketing/post`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ token: token(), platform, content, ...(subreddit ? { subreddit } : {}) }),
+                    body: JSON.stringify({ token: token(), platform, content: card.querySelector('.mkt-result-body').value, ...(subreddit ? { subreddit } : {}) }),
                   });
                   const result = await res.json();
                   if (result.ok) {
