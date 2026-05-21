@@ -311,42 +311,42 @@
     .ov-meta-row { display:flex;align-items:center;gap:14px;flex-wrap:wrap; }
     .ov-meta-item { font-family:'Inter',sans-serif;font-size:.7rem;color:rgba(255,255,255,.38);display:flex;align-items:center;gap:5px; }
 
-    /* ── COMPACT HYPE BAR ── */
+    /* ── HYPE BAR ── */
     .ov-hype-bar {
-      flex-shrink:0;display:flex;flex-direction:column;gap:8px;
-      padding:12px 28px 10px;border-bottom:1px solid rgba(255,255,255,.07);
-      background:linear-gradient(135deg,rgba(0,229,255,.06) 0%,rgba(0,0,0,.25) 100%);
+      flex-shrink:0;display:flex;flex-direction:column;gap:12px;
+      padding:18px 28px 16px;border-bottom:1px solid rgba(255,255,255,.07);
+      background:rgba(0,0,0,.2);
     }
-    .ov-hype-header { display:flex;align-items:center;gap:12px; }
-    .ov-hype-label-txt { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.78rem;letter-spacing:.04em;text-transform:none;color:rgba(255,255,255,.9);white-space:nowrap;text-shadow:0 0 14px rgba(0,229,255,.5); }
-    .ov-hype-score-inline { display:flex;align-items:baseline;gap:2px;min-width:36px; }
-    .ov-hype-num { font-family:'Barlow Condensed','Montserrat',sans-serif;font-weight:900;font-size:1.4rem;line-height:1;color:rgba(255,255,255,.2);transition:font-size .25s cubic-bezier(0.34,1.56,0.64,1), color .2s; }
-    .ov-hype-num.has-value { font-size:3rem; }
-    .ov-hype-denom { transition: opacity .2s; }
-    .ov-hype-num.has-value ~ #ovHypeDenom, #ovHypeDenom { font-size:.85rem; opacity:.35; align-self:flex-end; padding-bottom:.4rem; }
-    .ov-hype-denom { font-family:'Inter',sans-serif;font-size:.6rem;color:rgba(255,255,255,.15); }
+    .ov-hype-header { display:flex;align-items:center;gap:16px; }
+    .ov-hype-label-txt { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.9rem;letter-spacing:.04em;text-transform:none;color:rgba(255,255,255,.95);white-space:nowrap; }
+    .ov-hype-score-inline { display:flex;align-items:baseline;gap:2px;min-width:44px; }
+    .ov-hype-num { font-family:'Barlow Condensed','Montserrat',sans-serif;font-weight:900;font-size:2rem;line-height:1;color:rgba(255,255,255,.18);transition:font-size .3s cubic-bezier(0.34,1.56,0.64,1), color .25s; }
+    .ov-hype-num.has-value { font-size:3.6rem; }
+    .ov-hype-denom { transition:opacity .2s; }
+    .ov-hype-num.has-value ~ #ovHypeDenom, #ovHypeDenom { font-size:.9rem;opacity:.3;align-self:flex-end;padding-bottom:.5rem; }
+    .ov-hype-denom { font-family:'Inter',sans-serif;font-size:.7rem;color:rgba(255,255,255,.12); }
     .ov-hype-word { display:none; }
-    .ov-hype-fotn-hint { font-family:'Inter',sans-serif;font-size:.68rem;color:rgba(0,229,255,.55);padding-top:4px;border-top:1px solid rgba(255,255,255,.05); }
+    .ov-hype-fotn-hint { display:none; }
 
     /* Track + draggable thumb */
-    .ov-hype-track-wrap { position:relative;width:200px;max-width:200px;flex-shrink:0;height:20px;display:flex;align-items:center;cursor:pointer; }
-    .ov-hype-track { position:absolute;left:0;right:0;height:4px;background:rgba(255,255,255,.08);border-radius:3px; }
-    .ov-hype-fill  { position:absolute;left:0;top:0;bottom:0;border-radius:3px;background:rgba(255,255,255,.2);transition:width .12s ease,background .25s;width:0%; }
+    .ov-hype-track-wrap { position:relative;flex:1;max-width:320px;height:28px;display:flex;align-items:center;cursor:pointer; }
+    .ov-hype-track { position:absolute;left:0;right:0;height:6px;background:rgba(255,255,255,.09);border-radius:4px; }
+    .ov-hype-fill  { position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:rgba(255,255,255,.22);transition:width .1s ease,background .25s;width:0%; }
     .ov-hype-thumb {
       position:absolute;top:50%;left:0%;transform:translate(-50%,-50%);
-      width:15px;height:15px;border-radius:50%;background:#fff;
-      border:2px solid rgba(255,255,255,.9);
-      box-shadow:0 2px 8px rgba(0,0,0,.5);cursor:grab;
-      transition:background .25s,border-color .25s,transform .1s,box-shadow .2s;
+      width:22px;height:22px;border-radius:50%;background:#fff;
+      border:2.5px solid rgba(255,255,255,.95);
+      box-shadow:0 2px 12px rgba(0,0,0,.6);cursor:grab;
+      transition:background .25s,border-color .25s,transform .12s,box-shadow .2s;
       z-index:2;will-change:left;
     }
-    .ov-hype-thumb:hover { transform:translate(-50%,-50%) scale(1.18);box-shadow:0 2px 14px rgba(0,0,0,.6); }
-    .ov-hype-thumb.dragging { cursor:grabbing;transform:translate(-50%,-50%) scale(1.22);transition:background .25s,border-color .25s,box-shadow .2s; }
+    .ov-hype-thumb:hover { transform:translate(-50%,-50%) scale(1.2);box-shadow:0 2px 18px rgba(0,0,0,.7); }
+    .ov-hype-thumb.dragging { cursor:grabbing;transform:translate(-50%,-50%) scale(1.25);transition:background .25s,border-color .25s,box-shadow .2s; }
 
     /* Tick numbers */
-    .ov-hype-ticks { display:flex;justify-content:space-between;position:absolute;left:0;right:0;top:calc(50% + 9px); }
-    .ov-hype-tick  { font-family:'Montserrat',sans-serif;font-size:.42rem;font-weight:700;color:rgba(255,255,255,.18);cursor:pointer;user-select:none;transition:color .15s;min-width:10px;text-align:center; }
-    .ov-hype-tick:hover { color:rgba(255,255,255,.45); }
+    .ov-hype-ticks { display:flex;justify-content:space-between;position:absolute;left:0;right:0;top:calc(50% + 13px); }
+    .ov-hype-tick  { font-family:'Montserrat',sans-serif;font-size:.48rem;font-weight:700;color:rgba(255,255,255,.2);cursor:pointer;user-select:none;transition:color .15s;min-width:12px;text-align:center; }
+    .ov-hype-tick:hover { color:rgba(255,255,255,.5); }
     .ov-hype-tick.active { font-weight:900; }
 
     /* ── BODY 2-COL ── */
@@ -463,20 +463,7 @@
       margin-right:7px;vertical-align:middle;flex-shrink:0;
     }
 
-    /* FOTN hover pill — appears on hover, centered in fight row */
-    .ov-fotn-hover {
-      position:absolute;bottom:0;left:50%;transform:translateX(-50%) translateY(100%);
-      font-family:'Montserrat',sans-serif;font-weight:800;font-size:.44rem;
-      letter-spacing:.14em;text-transform:uppercase;
-      background:rgba(200,168,75,.12);
-      border:1px solid rgba(200,168,75,.4);
-      color:#c8a84b;padding:4px 14px;border-radius:4px;
-      white-space:nowrap;pointer-events:none;
-      opacity:0;transition:opacity .18s,transform .18s;z-index:3;
-    }
-    .ov-fight:hover .ov-fotn-hover {
-      opacity:1;transform:translateX(-50%) translateY(calc(-50% - 2px));
-    }
+    .ov-fotn-hover { display:none; }
 
     /* ── RIGHT: sidebar ── */
     .ov-sidebar { display:flex;flex-direction:column;overflow-y:auto;scrollbar-width:none; }
@@ -805,7 +792,6 @@
           </div>
           <div class="ov-hype-ticks" id="ovHypeTicks"></div>
         </div>
-        <div class="ov-hype-fotn-hint">Hover over any fight below to predict Fight of the Night</div>
       </div>
 
       <!-- BODY -->
@@ -1136,7 +1122,6 @@
             `;
           } else {
             /* ── UPCOMING / NO RESULT ROW ── */
-            const fotnText=`FOTN: ${lastName(f.a)} vs ${lastName(f.b)}`;
             row.innerHTML=`
               ${headCell(f.imgA,false)}
               <div class="ov-fighter ${dimCls}">${esc(f.a)}</div>
@@ -1147,7 +1132,6 @@
               </div>
               <div class="ov-fighter right ${dimCls}">${esc(f.b)}</div>
               ${headCell(f.imgB,true)}
-              <div class="ov-fotn-hover">${esc(fotnText)}</div>
             `;
           }
           col.appendChild(row);
