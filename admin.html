@@ -117,7 +117,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 36px;
+      margin-bottom: 24px;
       flex-wrap: wrap;
       gap: 12px;
     }
@@ -162,6 +162,37 @@
       border-color: rgba(255,255,255,0.35);
       color: #fff;
     }
+
+    /* ── Tab bar ──────────────────────────────────────────── */
+    .admin-tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 28px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding-bottom: 0;
+    }
+    .admin-tab {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border: none;
+      background: transparent;
+      color: rgba(255,255,255,0.38);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: color 0.18s, border-color 0.18s;
+    }
+    .admin-tab:hover { color: rgba(255,255,255,0.7); }
+    .admin-tab.active {
+      color: #c8960c;
+      border-bottom-color: #c8960c;
+    }
+    .admin-tab-content { display: none; }
+    .admin-tab-content.active { display: block; }
 
     /* ── Section headings ─────────────────────────────────── */
     .section-label {
@@ -438,6 +469,246 @@
       text-align: center;
     }
 
+    /* ── Marketing tab ────────────────────────────────────── */
+    .mkt-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 560px) { .mkt-grid { grid-template-columns: 1fr; } }
+
+    .mkt-field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .mkt-field label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+    .mkt-select {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 9px 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: #fff;
+      outline: none;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .mkt-select:focus { border-color: rgba(200,150,12,0.4); }
+
+    .mkt-platforms {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .mkt-platform-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: transparent;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+    .mkt-platform-btn:hover { border-color: rgba(255,255,255,0.35); color: #fff; }
+    .mkt-platform-btn.on {
+      background: rgba(200,150,12,0.12);
+      border-color: rgba(200,150,12,0.5);
+      color: #c8960c;
+    }
+
+    .mkt-context {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      color: #fff;
+      outline: none;
+      resize: vertical;
+      min-height: 80px;
+      width: 100%;
+      box-sizing: border-box;
+      transition: border-color 0.2s;
+    }
+    .mkt-context:focus { border-color: rgba(200,150,12,0.4); }
+
+    .btn-generate {
+      background: #c8960c;
+      border: none;
+      border-radius: 9px;
+      padding: 12px 28px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #0d0d10;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.14s;
+      margin-top: 12px;
+    }
+    .btn-generate:hover { opacity: 0.88; }
+    .btn-generate:active { transform: scale(0.97); }
+    .btn-generate:disabled { opacity: 0.35; cursor: not-allowed; }
+
+    .mkt-results { margin-top: 24px; display: flex; flex-direction: column; gap: 16px; }
+
+    .mkt-result-card {
+      background: #16161c;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .mkt-result-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .mkt-result-platform {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #c8960c;
+    }
+    .btn-copy {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.6);
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+    .btn-copy:hover { background: rgba(255,255,255,0.11); color: #fff; }
+    .btn-copy.copied { color: #28be64; border-color: rgba(40,190,100,0.4); }
+
+    .mkt-result-body {
+      padding: 14px 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.55;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    /* ── Analytics tab ────────────────────────────────────── */
+    .analytics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    @media (max-width: 600px) { .analytics-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .stat-card {
+      background: #16161c;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px;
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .stat-value {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.9rem;
+      font-weight: 900;
+      color: #c8960c;
+      line-height: 1;
+    }
+    .stat-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .analytics-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 600px) { .analytics-two-col { grid-template-columns: 1fr; } }
+
+    .analytics-block {
+      background: #16161c;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px;
+      padding: 18px;
+    }
+    .analytics-block-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(200,150,12,0.7);
+      margin: 0 0 14px;
+    }
+    .analytics-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+    }
+    .analytics-row:last-child { border-bottom: none; }
+    .analytics-row-name { color: rgba(255,255,255,0.75); }
+    .analytics-row-val {
+      font-weight: 600;
+      color: #c8960c;
+    }
+    .analytics-row-sub {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.3);
+      margin-top: 2px;
+    }
+
+    .btn-refresh {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 7px;
+      padding: 7px 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.45);
+      cursor: pointer;
+      transition: all 0.18s;
+      margin-bottom: 20px;
+    }
+    .btn-refresh:hover { border-color: rgba(200,150,12,0.4); color: #c8960c; }
+
     /* ── Light mode overrides ─────────────────────────────── */
     body.light-mode .login-card { background: #f0f0f4; border-color: rgba(200,150,12,0.25); }
     body.light-mode .login-title { color: #0a0a0f; }
@@ -446,8 +717,12 @@
       border-color: rgba(0,0,0,0.12);
       color: #0a0a0f;
     }
-    body.light-mode .event-card { background: #f5f5f8; border-color: rgba(0,0,0,0.08); }
-    body.light-mode .event-name { color: #0a0a0f; }
+    body.light-mode .event-card,
+    body.light-mode .mkt-result-card,
+    body.light-mode .analytics-block,
+    body.light-mode .stat-card { background: #f5f5f8; border-color: rgba(0,0,0,0.08); }
+    body.light-mode .event-name,
+    body.light-mode .mkt-result-body { color: #0a0a0f; }
     body.light-mode .event-meta { color: rgba(0,0,0,0.4); }
     body.light-mode .fight-row { background: rgba(0,0,0,0.025); border-color: rgba(0,0,0,0.07); }
     body.light-mode .btn-fighter {
@@ -457,12 +732,17 @@
     }
     body.light-mode .fight-method,
     body.light-mode .fight-round,
-    body.light-mode .fotn-input {
+    body.light-mode .fotn-input,
+    body.light-mode .mkt-select,
+    body.light-mode .mkt-context {
       background: rgba(0,0,0,0.04);
       border-color: rgba(0,0,0,0.12);
       color: #0a0a0f;
     }
     body.light-mode .admin-title { color: #0a0a0f; }
+    body.light-mode .admin-tabs { border-bottom-color: rgba(0,0,0,0.1); }
+    body.light-mode .admin-tab { color: rgba(0,0,0,0.4); }
+    body.light-mode .analytics-row-name { color: rgba(0,0,0,0.7); }
   </style>
 </head>
 <body>
@@ -548,9 +828,95 @@
         </div>
       </div>
 
-      <div id="events-container">
-        <div class="admin-loading">Loading events...</div>
+      <!-- Tab bar -->
+      <div class="admin-tabs">
+        <button class="admin-tab active" data-tab="events">Events & Results</button>
+        <button class="admin-tab" data-tab="marketing">Marketing Buddy</button>
+        <button class="admin-tab" data-tab="analytics">Analytics</button>
       </div>
+
+      <!-- Tab: Events -->
+      <div id="tab-events" class="admin-tab-content active">
+        <div id="events-container">
+          <div class="admin-loading">Loading events...</div>
+        </div>
+      </div>
+
+      <!-- Tab: Marketing -->
+      <div id="tab-marketing" class="admin-tab-content">
+
+        <div class="section-label" style="margin-bottom:18px">Content Generator</div>
+
+        <!-- Platform toggles -->
+        <div style="margin-bottom:12px">
+          <div style="font-family:'Inter',sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:10px;">Platforms</div>
+          <div class="mkt-platforms" id="mkt-platforms">
+            <button class="mkt-platform-btn on" data-platform="twitter">𝕏 Twitter</button>
+            <button class="mkt-platform-btn on" data-platform="instagram">📸 Instagram</button>
+            <button class="mkt-platform-btn on" data-platform="reddit">🤖 Reddit</button>
+            <button class="mkt-platform-btn on" data-platform="tiktok">🎵 TikTok</button>
+            <button class="mkt-platform-btn" data-platform="email">✉️ Email</button>
+          </div>
+        </div>
+
+        <!-- Content type -->
+        <div class="mkt-grid">
+          <div class="mkt-field">
+            <label for="mkt-type">Content Type</label>
+            <select class="mkt-select" id="mkt-type">
+              <option value="event_promo">Event Promo</option>
+              <option value="fight_highlight">Fight Highlight / Result</option>
+              <option value="pick_prediction">Pick / Prediction Tease</option>
+              <option value="weekly_recap">Weekly Recap</option>
+              <option value="platform_cta">Platform CTA (grow audience)</option>
+            </select>
+          </div>
+          <div class="mkt-field">
+            <label>Tone</label>
+            <select class="mkt-select" id="mkt-tone">
+              <option value="hype">Hype / Excited</option>
+              <option value="analytical">Analytical / Expert</option>
+              <option value="casual">Casual / Banter</option>
+              <option value="breaking">Breaking News</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Context -->
+        <div class="mkt-field" style="margin-bottom:4px">
+          <label for="mkt-context">What to write about</label>
+          <textarea class="mkt-context" id="mkt-context" placeholder="e.g. Islam Makhachev vs Dustin Poirier — UFC 311, Jan 18. Talk about Makhachev's wrestling vs Poirier's durability. Drive picks on mmabridge.com"></textarea>
+        </div>
+
+        <button class="btn-generate" id="btn-generate">Generate Content</button>
+        <div id="mkt-error" style="font-family:'Inter',sans-serif;font-size:0.8rem;color:#e05555;margin-top:10px;min-height:18px;"></div>
+
+        <div class="mkt-results" id="mkt-results"></div>
+      </div>
+
+      <!-- Tab: Analytics -->
+      <div id="tab-analytics" class="admin-tab-content">
+        <button class="btn-refresh" id="btn-refresh-analytics">↻ Refresh</button>
+
+        <div class="analytics-grid" id="analytics-stats">
+          <div class="stat-card"><div class="stat-value" id="stat-users">—</div><div class="stat-label">Total Users</div></div>
+          <div class="stat-card"><div class="stat-value" id="stat-picks">—</div><div class="stat-label">Total Picks</div></div>
+          <div class="stat-card"><div class="stat-value" id="stat-reviews">—</div><div class="stat-label">Reviews Written</div></div>
+          <div class="stat-card"><div class="stat-value" id="stat-active">—</div><div class="stat-label">Active This Week</div></div>
+        </div>
+
+        <div class="analytics-two-col">
+          <div class="analytics-block">
+            <div class="analytics-block-title">Recent Signups</div>
+            <div id="analytics-recent-users"><div class="admin-loading" style="padding:12px 0">Loading...</div></div>
+          </div>
+          <div class="analytics-block">
+            <div class="analytics-block-title">Top Pickers</div>
+            <div id="analytics-top-pickers"><div class="admin-loading" style="padding:12px 0">Loading...</div></div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
   </div>
@@ -627,6 +993,22 @@
       $('btn-login').addEventListener('click', doLogin);
       $('admin-pw').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
       $('btn-logout').addEventListener('click', doLogout);
+
+      // ── Tab switching ─────────────────────────────────────
+      document.querySelectorAll('.admin-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+          document.querySelectorAll('.admin-tab-content').forEach(c => c.classList.remove('active'));
+          tab.classList.add('active');
+          const id = 'tab-' + tab.dataset.tab;
+          document.getElementById(id).classList.add('active');
+          if (tab.dataset.tab === 'analytics' && !_analyticsLoaded) {
+            _analyticsLoaded = true;
+            loadAnalytics();
+          }
+        });
+      });
+      let _analyticsLoaded = false;
 
       // ── Bootstrap ────────────────────────────────────────
       if (token()) {
@@ -900,6 +1282,126 @@
           .replace(/"/g, '&quot;');
       }
       function escAttr(str) { return escHtml(str); }
+
+      // ── Marketing platform toggles ────────────────────────
+      document.querySelectorAll('.mkt-platform-btn').forEach(btn => {
+        btn.addEventListener('click', () => btn.classList.toggle('on'));
+      });
+
+      // ── Marketing generate ────────────────────────────────
+      $('btn-generate').addEventListener('click', async () => {
+        const context = $('mkt-context').value.trim();
+        const platforms = [...document.querySelectorAll('.mkt-platform-btn.on')].map(b => b.dataset.platform);
+        const errEl = $('mkt-error');
+        errEl.textContent = '';
+
+        if (!context) { errEl.textContent = 'Add a description of what to write about.'; return; }
+        if (!platforms.length) { errEl.textContent = 'Select at least one platform.'; return; }
+
+        const btn = $('btn-generate');
+        btn.disabled = true;
+        btn.textContent = 'Generating...';
+        $('mkt-results').innerHTML = '';
+
+        try {
+          const res = await fetch(`${API_BASE}/api/admin/marketing/generate`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              token: token(),
+              platforms,
+              content_type: $('mkt-type').value,
+              tone: $('mkt-tone').value,
+              context,
+            }),
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+
+          const platformLabels = {
+            twitter: '𝕏 Twitter', instagram: '📸 Instagram',
+            reddit: '🤖 Reddit', tiktok: '🎵 TikTok', email: '✉️ Email',
+          };
+
+          const resultsEl = $('mkt-results');
+          for (const [platform, content] of Object.entries(data.results || {})) {
+            const card = document.createElement('div');
+            card.className = 'mkt-result-card';
+            card.innerHTML = `
+              <div class="mkt-result-header">
+                <span class="mkt-result-platform">${platformLabels[platform] || platform}</span>
+                <button class="btn-copy" data-platform="${escAttr(platform)}">Copy</button>
+              </div>
+              <div class="mkt-result-body">${escHtml(content)}</div>`;
+            resultsEl.appendChild(card);
+
+            card.querySelector('.btn-copy').addEventListener('click', function() {
+              navigator.clipboard.writeText(content).then(() => {
+                this.textContent = 'Copied!';
+                this.classList.add('copied');
+                setTimeout(() => { this.textContent = 'Copy'; this.classList.remove('copied'); }, 2000);
+              });
+            });
+          }
+        } catch (e) {
+          errEl.textContent = e.message || 'Generation failed.';
+        } finally {
+          btn.disabled = false;
+          btn.textContent = 'Generate Content';
+        }
+      });
+
+      // ── Analytics ─────────────────────────────────────────
+      $('btn-refresh-analytics').addEventListener('click', () => {
+        _analyticsLoaded = false;
+        loadAnalytics();
+        _analyticsLoaded = true;
+      });
+
+      async function loadAnalytics() {
+        ['stat-users','stat-picks','stat-reviews','stat-active'].forEach(id => { $(id).textContent = '…'; });
+        $('analytics-recent-users').innerHTML = '<div class="admin-loading" style="padding:12px 0">Loading...</div>';
+        $('analytics-top-pickers').innerHTML  = '<div class="admin-loading" style="padding:12px 0">Loading...</div>';
+
+        try {
+          const res = await fetch(`${API_BASE}/api/admin/analytics?token=${encodeURIComponent(token())}`);
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+
+          $('stat-users').textContent   = data.total_users   ?? '—';
+          $('stat-picks').textContent   = data.total_picks   ?? '—';
+          $('stat-reviews').textContent = data.total_reviews ?? '—';
+          $('stat-active').textContent  = data.active_week   ?? '—';
+
+          const recentEl = $('analytics-recent-users');
+          recentEl.innerHTML = '';
+          (data.recent_users || []).forEach(u => {
+            const row = document.createElement('div');
+            row.className = 'analytics-row';
+            const name = u.username || u.id?.slice(0, 8) || '—';
+            const date = u.created_at ? new Date(u.created_at).toLocaleDateString('en-US', {month:'short',day:'numeric'}) : '';
+            row.innerHTML = `<div><div class="analytics-row-name">${escHtml(name)}</div><div class="analytics-row-sub">${escHtml(date)}</div></div>`;
+            recentEl.appendChild(row);
+          });
+          if (!data.recent_users?.length) recentEl.innerHTML = '<div class="admin-loading" style="padding:8px 0">No data yet</div>';
+
+          const topEl = $('analytics-top-pickers');
+          topEl.innerHTML = '';
+          (data.top_pickers || []).forEach((p, i) => {
+            const row = document.createElement('div');
+            row.className = 'analytics-row';
+            row.innerHTML = `
+              <div class="analytics-row-name">${i + 1}. ${escHtml(p.name)}</div>
+              <div class="analytics-row-val">${p.picks} picks</div>`;
+            topEl.appendChild(row);
+          });
+          if (!data.top_pickers?.length) topEl.innerHTML = '<div class="admin-loading" style="padding:8px 0">No data yet</div>';
+
+        } catch (e) {
+          $('stat-users').textContent = '!';
+          $('analytics-recent-users').innerHTML = `<div class="admin-loading" style="padding:8px 0;color:#e05555">${escHtml(e.message)}</div>`;
+        }
+      }
 
     })();
   </script>
