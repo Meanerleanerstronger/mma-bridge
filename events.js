@@ -12,13 +12,25 @@ const BELL_OFF_SVG = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none
 const BELL_ON_SVG  = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>`;
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const wrap = document.getElementById('events-list');
+  const wrap = document.getElementById('listAll');
 
-  // ── Drawer ────────────────────────────────
-  const drawer      = document.getElementById('fightDrawer');
-  const drawerClose = document.getElementById('drawerClose');
-  const drawerX     = document.getElementById('drawerX');
-  const drawerTitle = document.getElementById('drawerTitle');
+  // ── Drawer (created dynamically) ─────────
+  const drawer = document.createElement('div');
+  drawer.id = 'fightDrawer';
+  drawer.className = 'drawer';
+  drawer.setAttribute('aria-hidden', 'true');
+  drawer.innerHTML = `
+    <div class="drawer-backdrop" id="drawerBackdrop"></div>
+    <div class="drawer-panel">
+      <div class="drawer-top">
+        <div class="drawer-title" id="drawerTitle"></div>
+        <button class="drawer-x" id="drawerClose" aria-label="Close">✕</button>
+      </div>
+      <div class="drawer-content" id="drawerContent"></div>
+    </div>`;
+  document.body.appendChild(drawer);
+
+  const drawerTitle   = document.getElementById('drawerTitle');
   const drawerContent = document.getElementById('drawerContent');
 
   function openDrawer(title, html) {
@@ -33,8 +45,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     drawer.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('no-scroll');
   }
-  drawerClose?.addEventListener('click', closeDrawer);
-  drawerX?.addEventListener('click', closeDrawer);
+  document.getElementById('drawerClose').addEventListener('click', closeDrawer);
+  document.getElementById('drawerBackdrop').addEventListener('click', closeDrawer);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
 
   // ── Helpers ───────────────────────────────
