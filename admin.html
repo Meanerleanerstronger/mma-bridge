@@ -571,6 +571,43 @@
 
     .mkt-results { margin-top: 24px; display: flex; flex-direction: column; gap: 16px; }
 
+    /* ── Platform status dots ─────────────────────────────── */
+    .mkt-platform-status {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+    }
+    .mkt-status-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      margin-right: 4px;
+    }
+    .mkt-status-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.4);
+    }
+    .mkt-status-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      flex-shrink: 0;
+    }
+    .mkt-status-item.ready { color: rgba(255,255,255,0.75); }
+    .mkt-status-item.ready .mkt-status-dot { background: #28be64; box-shadow: 0 0 6px rgba(40,190,100,0.5); }
+
     .mkt-result-card {
       background: #16161c;
       border: 1px solid rgba(255,255,255,0.08);
@@ -592,6 +629,7 @@
       text-transform: uppercase;
       color: #c8960c;
     }
+    .mkt-result-actions { display: flex; align-items: center; gap: 8px; }
     .btn-copy {
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.12);
@@ -606,6 +644,52 @@
     }
     .btn-copy:hover { background: rgba(255,255,255,0.11); color: #fff; }
     .btn-copy.copied { color: #28be64; border-color: rgba(40,190,100,0.4); }
+
+    .btn-post {
+      background: rgba(200,150,12,0.12);
+      border: 1px solid rgba(200,150,12,0.35);
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #c8960c;
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+    .btn-post:hover { background: rgba(200,150,12,0.22); border-color: #c8960c; }
+    .btn-post:disabled { opacity: 0.35; cursor: not-allowed; }
+    .btn-post.posted { color: #28be64; border-color: rgba(40,190,100,0.4); background: rgba(40,190,100,0.08); }
+    .btn-post.error  { color: #e05555; border-color: rgba(224,85,85,0.4); background: rgba(224,85,85,0.08); }
+
+    /* Reddit subreddit input */
+    .mkt-reddit-row {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 16px;
+      background: rgba(255,255,255,0.02);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .mkt-reddit-prefix {
+      font-family: 'Inter', sans-serif; font-size: 0.8rem;
+      color: rgba(255,255,255,0.3); font-weight: 600;
+    }
+    .mkt-reddit-input {
+      background: transparent; border: none; outline: none;
+      font-family: 'Inter', sans-serif; font-size: 0.8rem;
+      color: rgba(255,255,255,0.75); flex: 1;
+    }
+
+    .mkt-post-status {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.35);
+      padding: 0 16px 10px;
+      min-height: 16px;
+    }
+    .mkt-post-status.ok  { color: #28be64; }
+    .mkt-post-status.err { color: #e05555; }
 
     .mkt-result-body {
       padding: 14px 16px;
@@ -845,7 +929,15 @@
       <!-- Tab: Marketing -->
       <div id="tab-marketing" class="admin-tab-content">
 
-        <div class="section-label" style="margin-bottom:18px">Content Generator</div>
+        <div class="section-label" style="margin-bottom:14px">Content Generator</div>
+
+        <!-- Platform connection status -->
+        <div class="mkt-platform-status" id="mkt-status-bar">
+          <span class="mkt-status-label">Connected</span>
+          <span class="mkt-status-item" id="mkt-st-twitter"><span class="mkt-status-dot"></span>Twitter</span>
+          <span class="mkt-status-item" id="mkt-st-reddit"><span class="mkt-status-dot"></span>Reddit</span>
+          <span class="mkt-status-item" id="mkt-st-instagram"><span class="mkt-status-dot"></span>Instagram</span>
+        </div>
 
         <!-- Platform toggles -->
         <div style="margin-bottom:12px">
@@ -1020,6 +1112,21 @@
       async function enterAdmin() {
         showScreen('admin');
         await loadEvents();
+        loadPlatformStatus();
+      }
+
+      // ── Platform status ───────────────────────────────────
+      let _platformStatus = {};
+      async function loadPlatformStatus() {
+        try {
+          const res = await fetch(`${API_BASE}/api/admin/marketing/status?token=${encodeURIComponent(token())}`);
+          if (!res.ok) return;
+          _platformStatus = await res.json();
+          ['twitter','reddit','instagram'].forEach(p => {
+            const el = $(`mkt-st-${p}`);
+            if (el) el.classList.toggle('ready', !!_platformStatus[p]);
+          });
+        } catch (_) {}
       }
 
       // ── Load events.json and existing results ─────────────
@@ -1325,14 +1432,28 @@
 
           const resultsEl = $('mkt-results');
           for (const [platform, content] of Object.entries(data.results || {})) {
+            const isReady = !!_platformStatus[platform];
             const card = document.createElement('div');
             card.className = 'mkt-result-card';
+
+            const redditRow = platform === 'reddit' ? `
+              <div class="mkt-reddit-row">
+                <span class="mkt-reddit-prefix">r/</span>
+                <input class="mkt-reddit-input" placeholder="MMA" value="MMA" maxlength="50" />
+              </div>` : '';
+
             card.innerHTML = `
               <div class="mkt-result-header">
                 <span class="mkt-result-platform">${platformLabels[platform] || platform}</span>
-                <button class="btn-copy" data-platform="${escAttr(platform)}">Copy</button>
+                <div class="mkt-result-actions">
+                  <button class="btn-copy">Copy</button>
+                  ${(isReady && platform !== 'instagram' && platform !== 'email') ? `<button class="btn-post">Post Now</button>` : ''}
+                  ${(!isReady && platform !== 'email') ? `<button class="btn-post" disabled title="Add API keys in Render to enable">Not connected</button>` : ''}
+                </div>
               </div>
-              <div class="mkt-result-body">${escHtml(content)}</div>`;
+              ${redditRow}
+              <div class="mkt-result-body">${escHtml(content)}</div>
+              <div class="mkt-post-status"></div>`;
             resultsEl.appendChild(card);
 
             card.querySelector('.btn-copy').addEventListener('click', function() {
@@ -1342,6 +1463,46 @@
                 setTimeout(() => { this.textContent = 'Copy'; this.classList.remove('copied'); }, 2000);
               });
             });
+
+            const postBtn = card.querySelector('.btn-post:not([disabled])');
+            if (postBtn && isReady) {
+              postBtn.addEventListener('click', async () => {
+                const statusEl = card.querySelector('.mkt-post-status');
+                postBtn.disabled = true;
+                postBtn.textContent = 'Posting...';
+                statusEl.className = 'mkt-post-status';
+                statusEl.textContent = '';
+                const subreddit = platform === 'reddit'
+                  ? (card.querySelector('.mkt-reddit-input')?.value.trim() || 'MMA')
+                  : undefined;
+                try {
+                  const res = await fetch(`${API_BASE}/api/admin/marketing/post`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token: token(), platform, content, ...(subreddit ? { subreddit } : {}) }),
+                  });
+                  const result = await res.json();
+                  if (result.ok) {
+                    postBtn.textContent = 'Posted!';
+                    postBtn.classList.add('posted');
+                    statusEl.className = 'mkt-post-status ok';
+                    statusEl.textContent = result.url ? `Live: ${result.url}` : 'Posted successfully';
+                  } else {
+                    throw new Error(result.error || 'Post failed');
+                  }
+                } catch (e) {
+                  postBtn.textContent = 'Failed';
+                  postBtn.classList.add('error');
+                  statusEl.className = 'mkt-post-status err';
+                  statusEl.textContent = e.message;
+                  setTimeout(() => {
+                    postBtn.disabled = false;
+                    postBtn.textContent = 'Post Now';
+                    postBtn.classList.remove('error');
+                  }, 3000);
+                }
+              });
+            }
           }
         } catch (e) {
           errEl.textContent = e.message || 'Generation failed.';
