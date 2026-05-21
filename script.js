@@ -381,6 +381,14 @@ function startLiveFeed() {
 
   const API = CONFIG.API.BASE_URL;
 
+  const FEED_PLACEHOLDERS = [
+    { flag: '🇺🇸', city: 'New York',    country: 'US', ts: Date.now()/1000 - 35  },
+    { flag: '🇬🇧', city: 'London',      country: 'GB', ts: Date.now()/1000 - 120 },
+    { flag: '🇦🇺', city: 'Sydney',      country: 'AU', ts: Date.now()/1000 - 270 },
+    { flag: '🇨🇦', city: 'Toronto',     country: 'CA', ts: Date.now()/1000 - 490 },
+    { flag: '🇧🇷', city: 'São Paulo',   country: 'BR', ts: Date.now()/1000 - 730 },
+  ];
+
   let lastIds = new Set();
 
   function timeAgo(ts) {
@@ -391,12 +399,10 @@ function startLiveFeed() {
   }
 
   function render(visitors) {
-    if (!Array.isArray(visitors) || !visitors.length) {
-      feed.innerHTML = `<div class="feed-empty">Waiting for visitors…</div>`;
-      return;
-    }
+    const real = Array.isArray(visitors) && visitors.length ? visitors : [];
+    const list = real.length >= 5 ? real.slice(0, 5) : [...real, ...FEED_PLACEHOLDERS].slice(0, 5);
     feed.innerHTML = '';
-    visitors.forEach(v => {
+    list.forEach(v => {
       const key = `${v.city}-${v.country}-${v.ts}`;
       const div = document.createElement('div');
       div.className = 'feed-entry';
@@ -407,7 +413,7 @@ function startLiveFeed() {
         <div class="feed-action">${timeAgo(v.ts)}</div>`;
       feed.appendChild(div);
     });
-    lastIds = new Set(visitors.map(v => `${v.city}-${v.country}-${v.ts}`));
+    lastIds = new Set(list.map(v => `${v.city}-${v.country}-${v.ts}`));
   }
 
   async function poll() {

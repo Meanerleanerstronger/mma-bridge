@@ -1464,8 +1464,13 @@
                 </div>
               </div>
               ${redditRow}
-              <textarea class="mkt-result-body">${escHtml(content)}</textarea>
               <div class="mkt-post-status"></div>`;
+
+            // Insert textarea properly so .value is set directly (not via innerHTML)
+            const ta = document.createElement('textarea');
+            ta.className = 'mkt-result-body';
+            ta.value = content;
+            card.insertBefore(ta, card.querySelector('.mkt-post-status'));
             resultsEl.appendChild(card);
 
             card.querySelector('.btn-copy').addEventListener('click', function() {
