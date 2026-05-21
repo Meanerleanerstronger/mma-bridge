@@ -114,7 +114,7 @@ function formatOdds(n) {
   </div>`;
 
   const [eventsData, fightersData, user] = await Promise.all([
-    fetch('./events.json').then(r => r.ok ? r.json() : []).catch(() => []),
+    fetch('./events.json?v=' + Date.now()).then(r => r.ok ? r.json() : []).catch(() => []),
     fetch('./data/fighters.json').then(r => r.ok ? r.json() : []).catch(() => []),
     getAuthUser(),
   ]);
@@ -347,7 +347,7 @@ function formatOdds(n) {
   async function prefetchNextEvent() {
     if (!isCompleted) return;
     try {
-      const all  = await fetch('./events.json').then(r => r.json());
+      const all  = await fetch('./events.json?v=' + Date.now()).then(r => r.json());
       const today = new Date().toISOString().slice(0, 10);
       nextEventData = all.find(e => e.status === 'upcoming' && (e.isoDate || '') > today) || null;
     } catch {}

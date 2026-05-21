@@ -1271,7 +1271,8 @@
     /* ── LOAD ── */
     async function loadEvents(){
       try {
-        const res = await fetch('data/events.json').catch(()=>fetch('events.json'));
+        const _cv = '?v=' + Date.now();
+        const res = await fetch('data/events.json' + _cv).catch(()=>fetch('events.json' + _cv));
         if (!res || !res.ok) throw new Error('Could not load events');
         const all=await res.json();
         const upcoming=all.filter(e=>e.status==='upcoming').sort((a,b)=>new Date(a.isoDate)-new Date(b.isoDate));
