@@ -1046,8 +1046,8 @@
       const token = () => sessionStorage.getItem(TOKEN_KEY);
 
       function showScreen(name) {
-        $('login-screen').style.display  = name === 'login'  ? '' : 'none';
-        $('admin-screen').style.display  = name === 'admin'  ? '' : 'none';
+        $('login-screen').style.display  = name === 'login'  ? 'flex' : 'none';
+        $('admin-screen').style.display  = name === 'admin'  ? 'block' : 'none';
       }
 
       // ── Auth ─────────────────────────────────────────────
