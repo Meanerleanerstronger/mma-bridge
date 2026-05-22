@@ -4566,6 +4566,29 @@ body.light-mode #cursor-glow { display: none; }
   margin-bottom: 52px;
 }
 
+.fp-share-card-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0,229,255,0.08);
+  border: 1px solid rgba(0,229,255,0.22);
+  color: #00e5ff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  margin-bottom: 40px;
+  transition: background 0.15s, border-color 0.15s;
+}
+.fp-share-card-btn:hover {
+  background: rgba(0,229,255,0.15);
+  border-color: rgba(0,229,255,0.45);
+}
+
 /* fighter news feed */
 .fp-news-section { margin-top: 48px; }
 .fp-news-label {

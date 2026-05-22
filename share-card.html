@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Share Fighter Card — MMA Bridge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #060608;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 16px 48px;
+    }
+
+    .top-bar {
+      width: 100%;
+      max-width: 560px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+
+    .back-link {
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.15s;
+    }
+    .back-link:hover { color: #fff; }
+
+    .logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      color: #00e5ff;
+    }
+
+    .format-toggle {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .fmt-btn {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.5);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 7px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .fmt-btn.active {
+      background: rgba(0,229,255,0.1);
+      border-color: rgba(0,229,255,0.4);
+      color: #00e5ff;
+    }
+    .fmt-btn:hover:not(.active) { color: #fff; border-color: rgba(255,255,255,0.25); }
+
+    .canvas-wrap {
+      width: 100%;
+      max-width: 560px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.06);
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      width: 100%;
+      max-width: 560px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      flex: 1;
+      min-width: 120px;
+      padding: 13px 20px;
+      border-radius: 8px;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-download {
+      background: #00e5ff;
+      color: #060608;
+    }
+    .btn-download:hover { background: #33ecff; }
+
+    .btn-twitter {
+      background: #000;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .btn-twitter:hover { border-color: rgba(255,255,255,0.35); }
+
+    .btn-copy {
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.7);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .btn-copy:hover { background: rgba(255,255,255,0.12); color: #fff; }
+
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: rgba(0,229,255,0.15);
+      border: 1px solid rgba(0,229,255,0.3);
+      color: #00e5ff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: transform 0.25s ease;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    #error-msg {
+      color: rgba(255,255,255,0.4);
+      font-size: 0.85rem;
+      margin-top: 24px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <a class="back-link" href="javascript:history.back()">
+      <svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="6,1 1,6 6,11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back
+    </a>
+    <div class="logo">MMA BRIDGE</div>
+    <div style="width:48px"></div>
+  </div>
+
+  <div class="format-toggle">
+    <button class="fmt-btn active" data-fmt="square">1:1 Square</button>
+    <button class="fmt-btn" data-fmt="wide">16:9 Wide</button>
+  </div>
+
+  <div class="canvas-wrap">
+    <canvas id="card"></canvas>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-download" id="btn-download">⬇ Download PNG</button>
+    <button class="btn btn-twitter" id="btn-twitter">𝕏 Share on X</button>
+    <button class="btn btn-copy" id="btn-copy">📋 Copy Image</button>
+  </div>
+
+  <div id="error-msg"></div>
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const params  = new URLSearchParams(location.search);
+    const fighterId = params.get('id');
+    let currentFmt = 'square';
+    let currentFighter = null;
+
+    // ── Format toggle ──────────────────────────────────────
+    document.querySelectorAll('.fmt-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.fmt-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFmt = btn.dataset.fmt;
+        if (currentFighter) renderCard(currentFighter);
+      });
+    });
+
+    // ── Load fighter data ──────────────────────────────────
+    async function init() {
+      if (!fighterId) {
+        document.getElementById('error-msg').textContent = 'No fighter specified. Open this page from a fighter profile.';
+        return;
+      }
+      const res = await fetch('./fighters.json?_=' + Date.now());
+      const fighters = await res.json();
+      const fighter = fighters.find(f => f.id === fighterId);
+      if (!fighter) {
+        document.getElementById('error-msg').textContent = `Fighter "${fighterId}" not found.`;
+        return;
+      }
+      currentFighter = fighter;
+      renderCard(fighter);
+
+      // Wire buttons
+      document.getElementById('btn-download').addEventListener('click', () => downloadCard(fighter));
+      document.getElementById('btn-twitter').addEventListener('click', () => shareTwitter(fighter));
+      document.getElementById('btn-copy').addEventListener('click', () => copyCard());
+    }
+
+    // ── Render card ────────────────────────────────────────
+    async function renderCard(f) {
+      const isWide  = currentFmt === 'wide';
+      const W = isWide ? 1200 : 1080;
+      const H = isWide ? 630  : 1080;
+
+      const canvas = document.getElementById('card');
+      canvas.width  = W;
+      canvas.height = H;
+      const ctx = canvas.getContext('2d');
+
+      // Load fighter image (best-effort CORS)
+      let fighterImg = null;
+      if (f.img) {
+        fighterImg = await loadImage(f.img).catch(() => null);
+      }
+
+      draw(ctx, f, fighterImg, W, H, isWide);
+    }
+
+    function loadImage(src) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload  = () => resolve(img);
+        img.onerror = reject;
+        img.src = src;
+      });
+    }
+
+    // ── Core draw ──────────────────────────────────────────
+    function draw(ctx, f, img, W, H, isWide) {
+      const wins   = f.record?.wins   ?? 0;
+      const losses = f.record?.losses ?? 0;
+      const isChamp = (f.ranking || '').toLowerCase().includes('champ');
+
+      // ── Background ──
+      ctx.fillStyle = '#060608';
+      ctx.fillRect(0, 0, W, H);
+
+      // Subtle radial glow top-left (cyan)
+      const gl1 = ctx.createRadialGradient(isWide ? 340 : W * 0.3, 0, 0, isWide ? 340 : W * 0.3, 0, isWide ? 500 : 800);
+      gl1.addColorStop(0, 'rgba(0,229,255,0.09)');
+      gl1.addColorStop(1, 'transparent');
+      ctx.fillStyle = gl1;
+      ctx.fillRect(0, 0, W, H);
+
+      // Subtle glow bottom-right (gold)
+      const gl2 = ctx.createRadialGradient(W, H, 0, W, H, isWide ? 420 : 640);
+      gl2.addColorStop(0, 'rgba(200,150,12,0.08)');
+      gl2.addColorStop(1, 'transparent');
+      ctx.fillStyle = gl2;
+      ctx.fillRect(0, 0, W, H);
+
+      // ── Fighter image ──
+      if (img) {
+        const imgCol = isWide ? Math.round(W * 0.48) : Math.round(W * 0.46);
+        const imgW   = W - imgCol;
+
+        // Draw image clipped to right column, bottom-anchored
+        ctx.save();
+        ctx.beginPath();
+        ctx.rect(imgCol, 0, imgW, H);
+        ctx.clip();
+
+        const scale  = H / img.naturalHeight;
+        const dw     = img.naturalWidth  * scale;
+        const dh     = H;
+        const dx     = W - dw - (isWide ? 0 : 20);
+        const dy     = 0;
+        ctx.drawImage(img, dx, dy, dw, dh);
+        ctx.restore();
+
+        // Horizontal fade: image fades into bg on the left edge
+        const fadeW = isWide ? 260 : 320;
+        const fade  = ctx.createLinearGradient(imgCol, 0, imgCol + fadeW, 0);
+        fade.addColorStop(0, '#060608');
+        fade.addColorStop(1, 'transparent');
+        ctx.fillStyle = fade;
+        ctx.fillRect(imgCol, 0, fadeW, H);
+
+        // Bottom fade
+        const botFade = ctx.createLinearGradient(0, H - (isWide ? 160 : 200), 0, H);
+        botFade.addColorStop(0, 'transparent');
+        botFade.addColorStop(1, '#060608');
+        ctx.fillStyle = botFade;
+        ctx.fillRect(imgCol, 0, imgW, H);
+      }
+
+      // ── Top cyan bar ──
+      ctx.fillStyle = '#00e5ff';
+      ctx.fillRect(0, 0, W, 4);
+
+      const pad = isWide ? 52 : 64;
+
+      // ── MMA BRIDGE logo ──
+      ctx.font = `900 ${isWide ? 13 : 14}px Montserrat, Arial Black, sans-serif`;
+      ctx.letterSpacing = '3px';
+      ctx.fillStyle = '#00e5ff';
+      ctx.textBaseline = 'top';
+      ctx.fillText('MMA BRIDGE', pad, isWide ? 32 : 40);
+      ctx.letterSpacing = '0px';
+
+      // ── Ranking / champ badge ──
+      const rankY    = isWide ? 78 : 100;
+      const rankText = isChamp
+        ? '🏆  ' + f.ranking.toUpperCase()
+        : f.ranking
+        ? f.ranking.toUpperCase() + '  ' + (f.weightClass || '').toUpperCase()
+        : (f.weightClass || '').toUpperCase();
+
+      const badgePad = 12;
+      ctx.font = `700 ${isWide ? 11 : 12}px Inter, Arial, sans-serif`;
+      ctx.letterSpacing = '1.5px';
+      const tw = ctx.measureText(rankText).width;
+      const bx = pad, by = rankY, bw = tw + badgePad * 2, bh = isWide ? 26 : 28;
+
+      ctx.fillStyle = isChamp ? 'rgba(200,150,12,0.18)' : 'rgba(0,229,255,0.12)';
+      roundRect(ctx, bx, by, bw, bh, 5);
+      ctx.fill();
+      ctx.strokeStyle = isChamp ? 'rgba(200,150,12,0.5)' : 'rgba(0,229,255,0.35)';
+      ctx.lineWidth = 1;
+      roundRect(ctx, bx, by, bw, bh, 5);
+      ctx.stroke();
+
+      ctx.fillStyle = isChamp ? '#c8960c' : '#00e5ff';
+      ctx.textBaseline = 'middle';
+      ctx.textAlign = 'left';
+      ctx.fillText(rankText, bx + badgePad, by + bh / 2);
+      ctx.letterSpacing = '0px';
+
+      // ── Fighter name ──
+      const nameY  = rankY + bh + (isWide ? 22 : 28);
+      const nameSz = isWide ? 62 : 76;
+      ctx.font      = `900 ${nameSz}px Montserrat, Arial Black, Impact, sans-serif`;
+      ctx.fillStyle = '#ffffff';
+      ctx.textBaseline = 'top';
+      ctx.textAlign    = 'left';
+
+      // Wrap name if needed
+      const maxNameW = isWide ? W * 0.42 : W * 0.52;
+      const nameLines = wrapText(ctx, f.name.toUpperCase(), maxNameW);
+      const lineH = nameSz * 1.1;
+      nameLines.forEach((line, i) => ctx.fillText(line, pad, nameY + i * lineH));
+
+      const afterName = nameY + nameLines.length * lineH;
+
+      // ── Nickname ──
+      let afterNick = afterName + (isWide ? 10 : 14);
+      if (f.nickname) {
+        ctx.font      = `400 ${isWide ? 17 : 20}px Inter, Arial, sans-serif`;
+        ctx.fillStyle = 'rgba(255,255,255,0.4)';
+        ctx.fillText(`"${f.nickname}"`, pad, afterNick);
+        afterNick += isWide ? 32 : 38;
+      }
+
+      // ── Record ──
+      const recY    = afterNick + (isWide ? 18 : 28);
+      const numSize = isWide ? 72 : 90;
+      const lblSize = isWide ? 12 : 13;
+      const sepSize = isWide ? 48 : 60;
+
+      ctx.textBaseline = 'top';
+
+      // Wins
+      ctx.font      = `900 ${numSize}px Montserrat, Arial Black, sans-serif`;
+      ctx.fillStyle = '#28be64';
+      ctx.fillText(String(wins), pad, recY);
+      const winsW = ctx.measureText(String(wins)).width;
+
+      ctx.font      = `700 ${lblSize}px Inter, Arial, sans-serif`;
+      ctx.fillStyle = 'rgba(255,255,255,0.35)';
+      ctx.letterSpacing = '2px';
+      ctx.fillText('WINS', pad, recY + numSize + 4);
+      ctx.letterSpacing = '0px';
+
+      // Separator
+      const sepX = pad + winsW + (isWide ? 20 : 26);
+      ctx.font      = `900 ${sepSize}px Montserrat, Arial Black, sans-serif`;
+      ctx.fillStyle = 'rgba(255,255,255,0.12)';
+      ctx.fillText('–', sepX, recY + (numSize - sepSize) / 2);
+      const sepW = ctx.measureText('–').width;
+
+      // Losses
+      const lossX = sepX + sepW + (isWide ? 20 : 26);
+      ctx.font      = `900 ${numSize}px Montserrat, Arial Black, sans-serif`;
+      ctx.fillStyle = '#e05555';
+      ctx.fillText(String(losses), lossX, recY);
+
+      ctx.font      = `700 ${lblSize}px Inter, Arial, sans-serif`;
+      ctx.fillStyle = 'rgba(255,255,255,0.35)';
+      ctx.letterSpacing = '2px';
+      ctx.fillText('LOSSES', lossX, recY + numSize + 4);
+      ctx.letterSpacing = '0px';
+
+      // ── Last 5 ──
+      const last5 = (f.last5 || []).slice(0, 5);
+      if (last5.length) {
+        const l5Y    = recY + numSize + (isWide ? 38 : 52);
+        const dotR   = isWide ? 9 : 11;
+        const dotGap = isWide ? 10 : 12;
+        const dotStep = dotR * 2 + dotGap;
+
+        ctx.font      = `700 ${isWide ? 10 : 11}px Inter, Arial, sans-serif`;
+        ctx.fillStyle = 'rgba(255,255,255,0.3)';
+        ctx.letterSpacing = '2px';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('LAST 5', pad, l5Y + dotR);
+        ctx.letterSpacing = '0px';
+
+        const labW = ctx.measureText('LAST 5').width + (isWide ? 18 : 22);
+
+        last5.forEach((fight, i) => {
+          const cx = pad + labW + i * dotStep + dotR;
+          const cy = l5Y + dotR;
+          const result = (fight.result || '').toUpperCase();
+          const col = result === 'W' ? '#28be64' : result === 'L' ? '#e05555' : '#888';
+
+          ctx.beginPath();
+          ctx.arc(cx, cy, dotR, 0, Math.PI * 2);
+          ctx.fillStyle = col + '28';
+          ctx.fill();
+          ctx.strokeStyle = col;
+          ctx.lineWidth = 2;
+          ctx.stroke();
+
+          ctx.font         = `700 ${isWide ? 9 : 10}px Inter, Arial, sans-serif`;
+          ctx.fillStyle    = col;
+          ctx.textAlign    = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(result === 'NC' ? 'NC' : result, cx, cy);
+          ctx.textAlign = 'left';
+        });
+      }
+
+      // ── Divider ──
+      const divY = H - (isWide ? 72 : 88);
+      ctx.fillStyle = 'rgba(255,255,255,0.06)';
+      ctx.fillRect(pad, divY, isWide ? 400 : 460, 1);
+
+      // ── mmabridge.com ──
+      ctx.font         = `700 ${isWide ? 13 : 14}px Inter, Arial, sans-serif`;
+      ctx.fillStyle    = 'rgba(255,255,255,0.22)';
+      ctx.textBaseline = 'bottom';
+      ctx.textAlign    = 'left';
+      ctx.letterSpacing = '1px';
+      ctx.fillText('mmabridge.com', pad, H - (isWide ? 30 : 36));
+      ctx.letterSpacing = '0px';
+    }
+
+    // ── Helpers ────────────────────────────────────────────
+    function roundRect(ctx, x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h - r);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      ctx.lineTo(x + r, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+      ctx.lineTo(x, y + r);
+      ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.closePath();
+    }
+
+    function wrapText(ctx, text, maxW) {
+      const words = text.split(' ');
+      const lines = [];
+      let current = '';
+      for (const word of words) {
+        const test = current ? current + ' ' + word : word;
+        if (ctx.measureText(test).width > maxW && current) {
+          lines.push(current);
+          current = word;
+        } else {
+          current = test;
+        }
+      }
+      if (current) lines.push(current);
+      return lines;
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2200);
+    }
+
+    // ── Download ───────────────────────────────────────────
+    function downloadCard(f) {
+      const canvas = document.getElementById('card');
+      const a      = document.createElement('a');
+      a.download   = `mmabridge-${f.id}-card.png`;
+      a.href       = canvas.toDataURL('image/png');
+      a.click();
+      showToast('Card downloaded!');
+    }
+
+    // ── Copy to clipboard ──────────────────────────────────
+    async function copyCard() {
+      const canvas = document.getElementById('card');
+      canvas.toBlob(async blob => {
+        try {
+          await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+          showToast('Copied to clipboard!');
+        } catch {
+          showToast('Copy not supported — use Download instead');
+        }
+      }, 'image/png');
+    }
+
+    // ── Twitter / X share ──────────────────────────────────
+    function shareTwitter(f) {
+      const isChamp = (f.ranking || '').toLowerCase().includes('champ');
+      const rankStr = isChamp ? 'UFC Champion' : (f.ranking ? `${f.ranking} ranked` : '');
+      const text = `${f.flag || ''} ${f.name} — ${f.record?.wins}-${f.record?.losses} ${rankStr ? '| ' + rankStr : ''} ${f.weightClass || ''}\n\nSee full profile + picks 👇\nmmabridge.com/fighter.html?id=${f.id}`;
+      window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text), '_blank');
+      showToast('Download the image and attach it to your tweet!');
+    }
+
+    init();
+  </script>
+</body>
+</html>
