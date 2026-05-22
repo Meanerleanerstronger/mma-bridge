@@ -996,6 +996,21 @@
         <div id="mkt-error" style="font-family:'Inter',sans-serif;font-size:0.8rem;color:#e05555;margin-top:10px;min-height:18px;"></div>
 
         <div class="mkt-results" id="mkt-results"></div>
+
+        <!-- Fight Night Mode -->
+        <div style="margin-top:32px;border-top:1px solid rgba(255,255,255,0.07);padding-top:24px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+            <div class="section-label" style="margin:0">🥊 Fight Night Mode</div>
+            <button id="fn-toggle" style="background:rgba(0,229,255,0.1);border:1px solid rgba(0,229,255,0.25);color:#00e5ff;font-family:'Inter',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:6px 14px;border-radius:6px;cursor:pointer;">Open</button>
+          </div>
+          <div id="fn-panel" style="display:none;">
+            <div style="font-family:'Inter',sans-serif;font-size:0.75rem;color:rgba(255,255,255,0.4);margin-bottom:12px;">Select an event then post results live as fights finish. Tweet is auto-generated and posted via your connected Twitter.</div>
+            <select id="fn-event-select" class="mkt-select" style="margin-bottom:14px;width:100%;">
+              <option value="">— Select event —</option>
+            </select>
+            <div id="fn-fight-list"></div>
+          </div>
+        </div>
       </div>
 
       <!-- Tab: Analytics -->
@@ -1529,6 +1544,132 @@
           btn.textContent = 'Generate Content';
         }
       });
+
+      // ── Fight Night Mode ──────────────────────────────────
+      let fnEvents = [];
+      $('fn-toggle').addEventListener('click', async () => {
+        const panel = $('fn-panel');
+        const isOpen = panel.style.display !== 'none';
+        panel.style.display = isOpen ? 'none' : '';
+        $('fn-toggle').textContent = isOpen ? 'Open' : 'Close';
+        if (!isOpen && fnEvents.length === 0) await fnLoadEvents();
+      });
+
+      async function fnLoadEvents() {
+        const r = await fetch('./events.json?_=' + Date.now());
+        fnEvents = await r.json();
+        const sel = $('fn-event-select');
+        sel.innerHTML = '<option value="">— Select event —</option>';
+        const sorted = [...fnEvents].sort((a, b) => {
+          if (a.status !== 'completed' && b.status === 'completed') return -1;
+          if (a.status === 'completed' && b.status !== 'completed') return 1;
+          return (b.isoDate || '').localeCompare(a.isoDate || '');
+        }).slice(0, 12);
+        sorted.forEach(ev => {
+          const o = document.createElement('option');
+          o.value = ev.id;
+          o.textContent = ev.name + (ev.date ? ' · ' + ev.date : '');
+          sel.appendChild(o);
+        });
+      }
+
+      $('fn-event-select').addEventListener('change', () => {
+        const ev = fnEvents.find(e => e.id === $('fn-event-select').value);
+        if (!ev) { $('fn-fight-list').innerHTML = ''; return; }
+        fnRenderFights(ev);
+      });
+
+      function fnRenderFights(ev) {
+        const all = [...(ev.mainCard || []), ...(ev.prelims || [])];
+        const container = $('fn-fight-list');
+        container.innerHTML = '';
+
+        all.forEach(fight => {
+          const row = document.createElement('div');
+          row.style.cssText = 'border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:14px 16px;margin-bottom:8px;background:rgba(255,255,255,0.02);';
+
+          const matchup = document.createElement('div');
+          matchup.style.cssText = 'font-family:"Inter",sans-serif;font-size:0.85rem;font-weight:700;color:#fff;margin-bottom:10px;';
+          matchup.textContent = `${fight.a} vs ${fight.b}`;
+
+          const sub = document.createElement('div');
+          sub.style.cssText = 'font-size:0.65rem;color:rgba(255,255,255,0.3);margin-bottom:10px;font-family:"Inter",sans-serif;letter-spacing:0.06em;text-transform:uppercase;';
+          sub.textContent = fight.weight || '';
+
+          const btns = document.createElement('div');
+          btns.style.cssText = 'display:flex;gap:8px;flex-wrap:wrap;';
+
+          [fight.a, fight.b].forEach(fighter => {
+            const btn = document.createElement('button');
+            btn.textContent = `🏆 ${fighter.split(' ').pop()} wins`;
+            btn.style.cssText = 'flex:1;min-width:120px;background:rgba(200,150,12,0.08);border:1px solid rgba(200,150,12,0.2);color:rgba(200,150,12,0.75);font-family:"Inter",sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.06em;padding:8px 12px;border-radius:6px;cursor:pointer;transition:all 0.15s;text-transform:uppercase;';
+            btn.addEventListener('mouseenter', () => { btn.style.background = 'rgba(200,150,12,0.18)'; btn.style.borderColor = '#c8960c'; btn.style.color = '#c8960c'; });
+            btn.addEventListener('mouseleave', () => { if (!btn.dataset.selected) { btn.style.background = 'rgba(200,150,12,0.08)'; btn.style.borderColor = 'rgba(200,150,12,0.2)'; btn.style.color = 'rgba(200,150,12,0.75)'; } });
+            btn.addEventListener('click', () => fnSelectWinner(ev, fight, fighter, row, btns));
+            btns.appendChild(btn);
+          });
+
+          row.appendChild(matchup);
+          row.appendChild(sub);
+          row.appendChild(btns);
+          container.appendChild(row);
+        });
+      }
+
+      function fnSelectWinner(ev, fight, winner, row, btnsEl) {
+        const loser = winner === fight.a ? fight.b : fight.a;
+        const tweetText = `🚨 RESULT: ${winner} defeats ${loser}\n${fight.weight || ''} | ${ev.name}\n\nFull results + picks 👇\nmmabridge.com/picks.html?id=${ev.id}`;
+
+        // Show preview + post button
+        let preview = row.querySelector('.fn-preview');
+        if (!preview) {
+          preview = document.createElement('div');
+          preview.className = 'fn-preview';
+          preview.style.cssText = 'margin-top:12px;';
+          row.appendChild(preview);
+        }
+
+        const isReady = !!(_platformStatus?.twitter);
+        preview.innerHTML = `
+          <textarea style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:#fff;font-family:'Inter',sans-serif;font-size:0.78rem;padding:10px;border-radius:6px;resize:vertical;min-height:90px;" id="fn-tweet-${fight.a.replace(/\s+/g,'-')}">${tweetText}</textarea>
+          <div style="display:flex;gap:8px;margin-top:8px;">
+            ${isReady
+              ? `<button class="btn-post fn-post-btn" style="flex:1;" data-winner="${escHtml(winner)}" data-loser="${escHtml(loser)}" data-fight="${escHtml(fight.a + '-vs-' + fight.b)}">Post on 𝕏 Twitter</button>`
+              : `<button class="btn-post" disabled style="flex:1;">Twitter not connected</button>`
+            }
+            <button class="btn-post fn-copy-btn" style="flex:0;padding:8px 14px;" data-target="fn-tweet-${fight.a.replace(/\s+/g,'-')}">Copy</button>
+          </div>
+          <div class="mkt-post-status fn-status"></div>`;
+
+        preview.querySelector('.fn-copy-btn')?.addEventListener('click', e => {
+          const ta = document.getElementById(e.currentTarget.dataset.target);
+          if (ta) { navigator.clipboard.writeText(ta.value); e.currentTarget.textContent = 'Copied!'; setTimeout(() => { e.currentTarget.textContent = 'Copy'; }, 1500); }
+        });
+
+        preview.querySelector('.fn-post-btn')?.addEventListener('click', async e => {
+          const btn = e.currentTarget;
+          const ta  = preview.querySelector('textarea');
+          const statusEl = preview.querySelector('.fn-status');
+          btn.disabled = true; btn.textContent = 'Posting…';
+          try {
+            const res = await fetch(`${API_BASE}/api/admin/marketing/post`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ token: token(), platform: 'twitter', content: ta.value }),
+            });
+            const data = await res.json();
+            if (data.success) {
+              btn.textContent = 'Posted ✓'; btn.classList.add('posted');
+              statusEl.textContent = 'Posted successfully!'; statusEl.className = 'mkt-post-status fn-status ok';
+            } else {
+              throw new Error(data.error || 'Post failed');
+            }
+          } catch (err) {
+            btn.disabled = false; btn.textContent = 'Post on 𝕏 Twitter';
+            statusEl.textContent = err.message; statusEl.className = 'mkt-post-status fn-status err';
+          }
+        });
+      }
 
       // ── Analytics ─────────────────────────────────────────
       $('btn-refresh-analytics').addEventListener('click', () => {

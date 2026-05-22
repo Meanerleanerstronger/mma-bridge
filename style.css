@@ -5889,6 +5889,25 @@ body.light-mode .ev-star-btn.starred {
 .fc-badge-wrong {
   color: rgba(255,255,255,0.25); background: transparent; border: none;
 }
+.fc-win-share {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 8px;
+  padding: 2px 8px;
+  background: rgba(200,150,12,0.15);
+  border: 1px solid rgba(200,150,12,0.3);
+  border-radius: 4px;
+  color: #c8960c;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background 0.15s;
+  vertical-align: middle;
+}
+.fc-win-share:hover { background: rgba(200,150,12,0.28); }
 .pk-dd-badge-tag {
   display: inline-block; margin-left: 4px;
   font-size: 0.5rem; font-weight: 900;

@@ -787,12 +787,14 @@ function formatOdds(n) {
 
     // Badges
     const ddTag = isDD ? ' <span class="pk-dd-badge-tag">⚡×2</span>' : '';
+    const winShareBtn = (winner, loser, pts, commPct) =>
+      `<button class="fc-win-share" data-winner="${esc(winner)}" data-loser="${esc(loser)}" data-pts="${pts}" data-comm="${commPct ?? ''}" data-event="${esc(event?.name || '')}" title="Share your win">🎉 Share</button>`;
     const badgeA = correctA
-      ? `<div class="fc-badge fc-badge-correct">✓ +${ptsA}pts${isDD ? ' ⚡' : ''}</div>`
+      ? `<div class="fc-badge fc-badge-correct">✓ +${ptsA}pts${isDD ? ' ⚡' : ''}${winShareBtn(f.a, f.b, ptsA, commPctA)}</div>`
       : (isCompleted && pickedA ? `<div class="fc-badge fc-badge-wrong">✗ ${ptsA < 0 ? ptsA + 'pts ⚡' : '0pts'}</div>` : '')
       + (!isCompleted && pickedA ? `<div class="fc-badge fc-badge-pick${isSavedA ? '' : ' unsaved'}">${isSavedA ? 'YOUR PICK ✓' : 'YOUR PICK •'}${ddTag}</div>` : '');
     const badgeB = correctB
-      ? `<div class="fc-badge fc-badge-correct">✓ +${ptsB}pts${isDD ? ' ⚡' : ''}</div>`
+      ? `<div class="fc-badge fc-badge-correct">✓ +${ptsB}pts${isDD ? ' ⚡' : ''}${winShareBtn(f.b, f.a, ptsB, commPctB)}</div>`
       : (isCompleted && pickedB ? `<div class="fc-badge fc-badge-wrong">✗ ${ptsB < 0 ? ptsB + 'pts ⚡' : '0pts'}</div>` : '')
       + (!isCompleted && pickedB ? `<div class="fc-badge fc-badge-pick${isSavedB ? '' : ' unsaved'}">${isSavedB ? 'YOUR PICK ✓' : 'YOUR PICK •'}${ddTag}</div>` : '');
 
@@ -999,6 +1001,14 @@ function formatOdds(n) {
 
     // Toggle handler (event delegation)
     document.addEventListener('click', async e => {
+      const winShare = e.target.closest('.fc-win-share');
+      if (winShare) {
+        e.stopPropagation();
+        const { winner, loser, pts, comm, event: evName } = winShare.dataset;
+        showWinCard(winner, loser, pts, comm, evName);
+        return;
+      }
+
       const toggleBtn = e.target.closest('.pk-comments-toggle');
       if (toggleBtn) {
         e.stopPropagation();
@@ -1233,6 +1243,87 @@ function formatOdds(n) {
     ctx.textAlign = 'left';
 
     return c;
+  }
+
+  function showWinCard(winner, loser, pts, commPct, evName) {
+    const W = 800, H = 440;
+    const c = document.createElement('canvas');
+    c.width = W; c.height = H;
+    const ctx = c.getContext('2d');
+
+    // Background
+    ctx.fillStyle = '#07070a';
+    ctx.fillRect(0, 0, W, H);
+
+    // Gold glow top-left
+    const g1 = ctx.createRadialGradient(0, 0, 0, 0, 0, 480);
+    g1.addColorStop(0, 'rgba(200,150,12,0.15)'); g1.addColorStop(1, 'transparent');
+    ctx.fillStyle = g1; ctx.fillRect(0, 0, W, H);
+
+    // Gold top bar
+    const bar = ctx.createLinearGradient(0, 0, W, 0);
+    bar.addColorStop(0, '#c8960c'); bar.addColorStop(1, 'rgba(200,150,12,0.15)');
+    ctx.fillStyle = bar; ctx.fillRect(0, 0, W, 4);
+
+    // "I CALLED IT ✓"
+    ctx.font = '900 13px sans-serif';
+    ctx.fillStyle = 'rgba(200,150,12,0.6)';
+    ctx.letterSpacing = '4px';
+    ctx.textBaseline = 'top';
+    ctx.fillText('MMA BRIDGE', 48, 32);
+    ctx.letterSpacing = '0px';
+
+    ctx.font = '900 48px sans-serif';
+    ctx.fillStyle = '#c8960c';
+    ctx.fillText('I CALLED IT ✓', 48, 72);
+
+    // Winner name
+    ctx.font = '900 80px sans-serif';
+    ctx.fillStyle = '#ffffff';
+    const winShort = winner.length > 18 ? winner.split(' ').pop() : winner;
+    ctx.fillText(winShort.toUpperCase(), 48, 140);
+
+    // "defeated loser"
+    ctx.font = '500 22px sans-serif';
+    ctx.fillStyle = 'rgba(255,255,255,0.38)';
+    const loserShort = loser.length > 22 ? loser.split(' ').pop() : loser;
+    ctx.fillText(`defeated ${loserShort}`, 48, 250);
+
+    // Event name
+    ctx.font = '700 16px sans-serif';
+    ctx.fillStyle = 'rgba(255,255,255,0.25)';
+    ctx.fillText((evName || '').toUpperCase(), 48, 284);
+
+    // Points badge
+    if (pts && parseInt(pts) > 0) {
+      ctx.font = '900 40px sans-serif';
+      ctx.fillStyle = '#c8960c';
+      ctx.textAlign = 'right';
+      ctx.fillText(`+${pts}pts`, W - 48, 200);
+      if (commPct) {
+        ctx.font = '600 16px sans-serif';
+        ctx.fillStyle = 'rgba(255,255,255,0.3)';
+        ctx.fillText(`${commPct}% of fans picked ${winner.split(' ').pop()}`, W - 48, 248);
+      }
+      ctx.textAlign = 'left';
+    }
+
+    // Divider + CTA
+    ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+    ctx.beginPath(); ctx.moveTo(48, 334); ctx.lineTo(W - 48, 334); ctx.stroke();
+    ctx.font = '500 13px sans-serif';
+    ctx.fillStyle = 'rgba(255,255,255,0.2)';
+    ctx.fillText('Think you can do better?', 48, 376);
+    ctx.font = '700 13px sans-serif';
+    ctx.fillStyle = 'rgba(200,150,12,0.6)';
+    ctx.textAlign = 'right';
+    ctx.fillText('mmabridge.com', W - 48, 376);
+    ctx.textAlign = 'left';
+
+    const imgUrl = c.toDataURL('image/png');
+    const tweetText = `I called it — ${winner} wins 🥊\n${evName ? evName + '\n' : ''}Can you beat my picks?\nmmabridge.com/picks.html?id=${eventId}`;
+
+    showShareModal(imgUrl, tweetText, `https://mmabridge.com/picks.html?id=${eventId}`);
   }
 
   function showShareModal(imgDataUrl, text, url) {

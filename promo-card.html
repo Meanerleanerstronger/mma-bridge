@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Event Promo Card — MMA Bridge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #060608;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 16px 48px;
+    }
+    .top-bar {
+      width: 100%;
+      max-width: 560px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .back-link {
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.15s;
+    }
+    .back-link:hover { color: #fff; }
+    .logo { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 0.85rem; letter-spacing: 0.15em; color: #00e5ff; }
+
+    .fight-select {
+      width: 100%;
+      max-width: 560px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      appearance: none;
+      cursor: pointer;
+    }
+    .fight-select:focus { outline: none; border-color: rgba(0,229,255,0.35); }
+    .fight-select option { background: #111; }
+
+    .fight-picker {
+      width: 100%;
+      max-width: 560px;
+      margin-bottom: 18px;
+    }
+    .fight-picker-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 8px;
+    }
+    .fight-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .fight-row {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 10px 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.65);
+      transition: all 0.15s;
+    }
+    .fight-row:hover, .fight-row.active {
+      border-color: rgba(0,229,255,0.35);
+      color: #fff;
+      background: rgba(0,229,255,0.07);
+    }
+    .fight-row .fw { font-size: 0.65rem; color: rgba(255,255,255,0.3); }
+    .fight-row .badge {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: rgba(200,150,12,0.15);
+      color: #c8960c;
+      border: 1px solid rgba(200,150,12,0.3);
+    }
+
+    .canvas-wrap {
+      width: 100%;
+      max-width: 560px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.06);
+    }
+    canvas { display: block; width: 100%; height: auto; }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+      width: 100%;
+      max-width: 560px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      flex: 1;
+      min-width: 120px;
+      padding: 13px 20px;
+      border-radius: 8px;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn-download { background: #00e5ff; color: #060608; }
+    .btn-download:hover { background: #33ecff; }
+    .btn-twitter { background: #000; color: #fff; border: 1px solid rgba(255,255,255,0.15); }
+    .btn-twitter:hover { border-color: rgba(255,255,255,0.35); }
+    .btn-copy { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.1); }
+    .btn-copy:hover { background: rgba(255,255,255,0.12); color: #fff; }
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: rgba(0,229,255,0.15);
+      border: 1px solid rgba(0,229,255,0.3);
+      color: #00e5ff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: transform 0.25s ease;
+      pointer-events: none;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+    #empty-state { color: rgba(255,255,255,0.3); font-size: 0.85rem; margin-top: 32px; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <a class="back-link" href="javascript:history.back()">
+      <svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="6,1 1,6 6,11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back
+    </a>
+    <div class="logo">MMA BRIDGE</div>
+    <div style="width:48px"></div>
+  </div>
+
+  <select class="fight-select" id="event-select"><option value="">Loading events…</option></select>
+
+  <div class="fight-picker" id="fight-picker" style="display:none">
+    <div class="fight-picker-label">Select Fight</div>
+    <div class="fight-list" id="fight-list"></div>
+  </div>
+
+  <div class="canvas-wrap" id="canvas-wrap" style="display:none">
+    <canvas id="card"></canvas>
+  </div>
+
+  <div class="actions" id="actions" style="display:none">
+    <button class="btn btn-download" id="btn-download">⬇ Download PNG</button>
+    <button class="btn btn-twitter" id="btn-twitter">𝕏 Share on X</button>
+    <button class="btn btn-copy" id="btn-copy">📋 Copy</button>
+  </div>
+
+  <div id="empty-state"></div>
+  <div class="toast" id="toast"></div>
+
+  <script>
+    let events = [], currentEvent = null, currentFight = null;
+
+    const $ = id => document.getElementById(id);
+
+    async function init() {
+      const res = await fetch('./events.json?_=' + Date.now());
+      events = await res.json();
+
+      const upcoming = events.filter(e => e.status !== 'completed');
+      const completed = events.filter(e => e.status === 'completed').reverse().slice(0, 5);
+      const all = [...upcoming, ...completed];
+
+      const sel = $('event-select');
+      sel.innerHTML = '<option value="">— Select an event —</option>';
+      all.forEach(ev => {
+        const opt = document.createElement('option');
+        opt.value = ev.id;
+        opt.textContent = ev.name + (ev.date ? ' · ' + ev.date : '');
+        sel.appendChild(opt);
+      });
+
+      // Auto-select from URL param
+      const params = new URLSearchParams(location.search);
+      const evId = params.get('id');
+      if (evId) { sel.value = evId; loadEvent(evId); }
+
+      sel.addEventListener('change', () => { if (sel.value) loadEvent(sel.value); });
+
+      $('btn-download').addEventListener('click', downloadCard);
+      $('btn-twitter').addEventListener('click', shareTwitter);
+      $('btn-copy').addEventListener('click', copyCard);
+    }
+
+    function loadEvent(evId) {
+      currentEvent = events.find(e => e.id === evId);
+      if (!currentEvent) return;
+
+      const allFights = [
+        ...(currentEvent.mainCard || []),
+        ...(currentEvent.prelims || [])
+      ];
+
+      const list = $('fight-list');
+      list.innerHTML = '';
+      allFights.forEach((fight, i) => {
+        const row = document.createElement('div');
+        row.className = 'fight-row';
+        const isMain  = fight.slot === 'main';
+        const isCo    = fight.slot === 'comain';
+        const badgeHtml = isMain ? '<span class="badge">Main</span>' : isCo ? '<span class="badge">Co-Main</span>' : '';
+        row.innerHTML = `<span>${fight.a} <span style="color:rgba(255,255,255,0.3)">vs</span> ${fight.b}</span><span style="display:flex;align-items:center;gap:8px"><span class="fw">${fight.weight || ''}</span>${badgeHtml}</span>`;
+        row.addEventListener('click', () => {
+          document.querySelectorAll('.fight-row').forEach(r => r.classList.remove('active'));
+          row.classList.add('active');
+          selectFight(fight);
+        });
+        list.appendChild(row);
+      });
+
+      $('fight-picker').style.display = '';
+      // Auto-select main event
+      const mainFight = allFights.find(f => f.slot === 'main') || allFights[0];
+      if (mainFight) {
+        list.children[allFights.indexOf(mainFight)]?.classList.add('active');
+        selectFight(mainFight);
+      }
+    }
+
+    async function selectFight(fight) {
+      currentFight = fight;
+      $('canvas-wrap').style.display = '';
+      $('actions').style.display = '';
+
+      const imgA = fight.imgA ? await loadImage(fight.imgA).catch(() => null) : null;
+      const imgB = fight.imgB ? await loadImage(fight.imgB).catch(() => null) : null;
+
+      renderCard(fight, imgA, imgB);
+    }
+
+    function loadImage(src) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload  = () => resolve(img);
+        img.onerror = reject;
+        img.src = src;
+      });
+    }
+
+    function renderCard(fight, imgA, imgB) {
+      const W = 1080, H = 1080;
+      const canvas = $('card');
+      canvas.width = W; canvas.height = H;
+      const ctx = canvas.getContext('2d');
+      const ev = currentEvent;
+      const isTitle = fight.titleFight;
+
+      // ── Background ──
+      ctx.fillStyle = '#060608';
+      ctx.fillRect(0, 0, W, H);
+
+      // Cyan glow left
+      const gl1 = ctx.createRadialGradient(0, H * 0.45, 0, 0, H * 0.45, 600);
+      gl1.addColorStop(0, 'rgba(0,229,255,0.1)');
+      gl1.addColorStop(1, 'transparent');
+      ctx.fillStyle = gl1; ctx.fillRect(0, 0, W, H);
+
+      // Gold glow right
+      const gl2 = ctx.createRadialGradient(W, H * 0.45, 0, W, H * 0.45, 600);
+      gl2.addColorStop(0, 'rgba(200,150,12,0.09)');
+      gl2.addColorStop(1, 'transparent');
+      ctx.fillStyle = gl2; ctx.fillRect(0, 0, W, H);
+
+      // Centre vertical divider glow
+      const cg = ctx.createLinearGradient(W/2 - 80, 0, W/2 + 80, 0);
+      cg.addColorStop(0, 'transparent');
+      cg.addColorStop(0.5, 'rgba(255,255,255,0.04)');
+      cg.addColorStop(1, 'transparent');
+      ctx.fillStyle = cg; ctx.fillRect(0, 0, W, H);
+
+      // ── Fighter images ──
+      const photoH = 600, photoY = 270;
+
+      if (imgA) {
+        const aspect = imgA.naturalWidth / imgA.naturalHeight;
+        const ph = photoH, pw = ph * aspect;
+        ctx.save();
+        ctx.beginPath(); ctx.rect(0, photoY, W / 2 - 10, H);
+        ctx.clip();
+        ctx.drawImage(imgA, W / 2 - 10 - pw, photoY, pw, ph);
+        // Fade right edge into center
+        const fade = ctx.createLinearGradient(W / 2 - 160, 0, W / 2 - 10, 0);
+        fade.addColorStop(0, 'transparent'); fade.addColorStop(1, '#060608');
+        ctx.fillStyle = fade; ctx.fillRect(0, 0, W, H);
+        // Bottom fade
+        const bf = ctx.createLinearGradient(0, H - 260, 0, H);
+        bf.addColorStop(0, 'transparent'); bf.addColorStop(1, '#060608');
+        ctx.fillStyle = bf; ctx.fillRect(0, 0, W / 2, H);
+        ctx.restore();
+      }
+
+      if (imgB) {
+        const aspect = imgB.naturalWidth / imgB.naturalHeight;
+        const ph = photoH, pw = ph * aspect;
+        ctx.save();
+        ctx.beginPath(); ctx.rect(W / 2 + 10, photoY, W / 2, H);
+        ctx.clip();
+        // Mirror fighter B to face inward
+        ctx.translate(W, 0); ctx.scale(-1, 1);
+        ctx.drawImage(imgB, W / 2 - 10 - pw, photoY, pw, ph);
+        ctx.scale(-1, 1); ctx.translate(-W, 0);
+        // Fade left edge
+        const fade = ctx.createLinearGradient(W / 2 + 10, 0, W / 2 + 160, 0);
+        fade.addColorStop(0, '#060608'); fade.addColorStop(1, 'transparent');
+        ctx.fillStyle = fade; ctx.fillRect(0, 0, W, H);
+        // Bottom fade
+        const bf = ctx.createLinearGradient(0, H - 260, 0, H);
+        bf.addColorStop(0, 'transparent'); bf.addColorStop(1, '#060608');
+        ctx.fillStyle = bf; ctx.fillRect(W / 2, 0, W / 2, H);
+        ctx.restore();
+      }
+
+      // ── Top bar ──
+      if (isTitle) {
+        const bar = ctx.createLinearGradient(0, 0, W, 0);
+        bar.addColorStop(0, '#c8960c'); bar.addColorStop(1, 'rgba(200,150,12,0.3)');
+        ctx.fillStyle = bar;
+      } else {
+        ctx.fillStyle = '#00e5ff';
+      }
+      ctx.fillRect(0, 0, W, 4);
+
+      // ── Event header ──
+      const pad = 60;
+      ctx.font = '900 14px Montserrat, Arial Black, sans-serif';
+      ctx.letterSpacing = '4px';
+      ctx.fillStyle = isTitle ? '#c8960c' : '#00e5ff';
+      ctx.textBaseline = 'top';
+      ctx.textAlign = 'left';
+      ctx.fillText('MMA BRIDGE', pad, 36);
+      ctx.letterSpacing = '0px';
+
+      ctx.font = '900 13px Montserrat, Arial Black, sans-serif';
+      ctx.letterSpacing = '3px';
+      ctx.fillStyle = isTitle ? 'rgba(200,150,12,0.65)' : 'rgba(255,255,255,0.35)';
+      ctx.textAlign = 'right';
+      ctx.fillText((ev?.type || 'UFC EVENT').toUpperCase(), W - pad, 36);
+      ctx.letterSpacing = '0px';
+
+      // Event name
+      ctx.font = '700 28px Montserrat, Arial Black, sans-serif';
+      ctx.fillStyle = '#fff';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+      const evShort = (ev?.name || '').replace(/^UFC\s+(Fight Night:\s*)?/i, '').trim();
+      ctx.fillText(evShort.toUpperCase() || (ev?.name || '').toUpperCase(), W / 2, 36);
+
+      // Date + location
+      ctx.font = '600 16px Inter, Arial, sans-serif';
+      ctx.fillStyle = 'rgba(255,255,255,0.38)';
+      ctx.textAlign = 'center';
+      const meta = [ev?.date, ev?.location].filter(Boolean).join('  ·  ');
+      ctx.fillText(meta, W / 2, 76);
+
+      // ── VS centre ──
+      const vsY = 500;
+      ctx.font = '900 96px Montserrat, Arial Black, sans-serif';
+      ctx.letterSpacing = '-2px';
+      ctx.fillStyle = isTitle ? 'rgba(200,150,12,0.7)' : 'rgba(0,229,255,0.7)';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('VS', W / 2, vsY);
+      ctx.letterSpacing = '0px';
+
+      // Weight class pill under VS
+      ctx.font = '700 13px Inter, Arial, sans-serif';
+      ctx.letterSpacing = '2px';
+      ctx.fillStyle = 'rgba(255,255,255,0.28)';
+      ctx.fillText((fight.weight || '').toUpperCase(), W / 2, vsY + 58);
+      ctx.letterSpacing = '0px';
+
+      if (fight.titleFight) {
+        ctx.font = '700 11px Inter, Arial, sans-serif';
+        ctx.letterSpacing = '2px';
+        ctx.fillStyle = '#c8960c';
+        ctx.fillText('🏆 TITLE FIGHT', W / 2, vsY + 84);
+        ctx.letterSpacing = '0px';
+      }
+
+      // ── Fighter names ──
+      const nameY = H - 200;
+      const nameMaxW = W * 0.42;
+
+      // Fighter A name (left)
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'top';
+      const nameAparts = fight.a.toUpperCase().split(' ');
+      if (nameAparts.length >= 2) {
+        ctx.font = `700 16px Inter, Arial, sans-serif`;
+        ctx.fillStyle = 'rgba(255,255,255,0.4)';
+        ctx.letterSpacing = '2px';
+        ctx.fillText(nameAparts.slice(0, -1).join(' '), pad, nameY);
+        ctx.letterSpacing = '0px';
+        ctx.font = '900 44px Montserrat, Arial Black, sans-serif';
+        ctx.fillStyle = '#fff';
+        const lastName = nameAparts[nameAparts.length - 1];
+        ctx.fillText(lastName.length > 12 ? lastName.slice(0, 11) + '…' : lastName, pad, nameY + 24);
+      } else {
+        ctx.font = '900 40px Montserrat, Arial Black, sans-serif';
+        ctx.fillStyle = '#fff';
+        ctx.fillText(fight.a.toUpperCase(), pad, nameY);
+      }
+
+      // Fighter B name (right)
+      ctx.textAlign = 'right';
+      const nameBparts = fight.b.toUpperCase().split(' ');
+      if (nameBparts.length >= 2) {
+        ctx.font = '700 16px Inter, Arial, sans-serif';
+        ctx.fillStyle = 'rgba(255,255,255,0.4)';
+        ctx.letterSpacing = '2px';
+        ctx.fillText(nameBparts.slice(0, -1).join(' '), W - pad, nameY);
+        ctx.letterSpacing = '0px';
+        ctx.font = '900 44px Montserrat, Arial Black, sans-serif';
+        ctx.fillStyle = '#fff';
+        const lastName = nameBparts[nameBparts.length - 1];
+        ctx.fillText(lastName.length > 12 ? lastName.slice(0, 11) + '…' : lastName, W - pad, nameY + 24);
+      } else {
+        ctx.font = '900 40px Montserrat, Arial Black, sans-serif';
+        ctx.fillStyle = '#fff';
+        ctx.fillText(fight.b.toUpperCase(), W - pad, nameY);
+      }
+
+      // ── Bottom CTA ──
+      ctx.textAlign = 'center';
+      ctx.font = '700 15px Inter, Arial, sans-serif';
+      ctx.fillStyle = isTitle ? 'rgba(200,150,12,0.6)' : 'rgba(0,229,255,0.6)';
+      ctx.letterSpacing = '2px';
+      ctx.textBaseline = 'bottom';
+      ctx.fillText('MAKE YOUR PICKS AT MMABRIDGE.COM', W / 2, H - 48);
+      ctx.letterSpacing = '0px';
+    }
+
+    function downloadCard() {
+      if (!currentFight) return;
+      const a = document.createElement('a');
+      a.download = `mmabridge-promo-${(currentFight.a + '-vs-' + currentFight.b).toLowerCase().replace(/[^a-z0-9]+/g, '-')}.png`;
+      a.href = $('card').toDataURL('image/png');
+      a.click();
+      showToast('Card downloaded!');
+    }
+
+    function shareTwitter() {
+      if (!currentFight || !currentEvent) return;
+      const text = `${currentFight.a} vs ${currentFight.b}\n${currentEvent.name} · ${currentEvent.date || ''}\n\nMake your picks 👇\nmmabridge.com/picks.html?id=${currentEvent.id}`;
+      window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text), '_blank');
+      showToast('Download and attach the card to your tweet!');
+    }
+
+    async function copyCard() {
+      $('card').toBlob(async blob => {
+        try {
+          await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+          showToast('Copied to clipboard!');
+        } catch { showToast('Use Download instead'); }
+      }, 'image/png');
+    }
+
+    function showToast(msg) {
+      const t = $('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2200);
+    }
+
+    init();
+  </script>
+</body>
+</html>
