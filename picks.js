@@ -665,18 +665,22 @@ function formatOdds(n) {
 
   function updateHypeWidget() {
     const pct = localHype ? localHype * 20 : 0;
-    const fill = document.getElementById('pkHypeFill');
+    const fill  = document.getElementById('pkHypeFill');
     const thumb = document.getElementById('pkHypeThumb');
     const labelEl = document.getElementById('pkHypeLabel');
-    const avgEl = document.getElementById('pkHypeAvg');
-    if (fill) fill.style.width = pct + '%';
-    if (thumb) thumb.style.left = pct + '%';
-    if (labelEl) labelEl.textContent = localHype ? (HYPE_LABELS[localHype] || '') : 'Rate the hype';
-    if (avgEl) {
+    const avgBadge = document.getElementById('pkHypeAvgBadge');
+    if (fill)  fill.style.width = pct + '%';
+    if (thumb) { thumb.style.left = pct + '%'; thumb.style.display = pct > 0 ? 'block' : 'none'; }
+    if (labelEl) {
+      labelEl.textContent = localHype ? (HYPE_LABELS[localHype] || '') : 'Drag to rate';
+      labelEl.style.color = pct > 0 ? 'rgba(255,255,255,0.55)' : 'rgba(255,255,255,0.28)';
+    }
+    if (avgBadge) {
       if (hypeCount > 0) {
-        avgEl.innerHTML = `<span class="pk-hm-score">${hypeAvg.toFixed(1)}</span> avg · ${hypeCount} ${hypeCount === 1 ? 'rating' : 'ratings'}`;
+        avgBadge.style.opacity = '1';
+        avgBadge.innerHTML = `${hypeAvg.toFixed(1)}<span>${hypeCount} rating${hypeCount !== 1 ? 's' : ''}</span>`;
       } else {
-        avgEl.textContent = 'Be the first to rate';
+        avgBadge.style.opacity = '0';
       }
     }
   }
@@ -1621,21 +1625,16 @@ function formatOdds(n) {
   function hypeMeterHtml() {
     if (isCompleted || isLocked) return '';
     const pct = localHype ? localHype * 20 : 0;
-    const label = localHype ? (HYPE_LABELS[localHype] || '') : 'Rate the hype';
-    const avgStr = hypeCount > 0
-      ? `<span class="pk-hm-score">${hypeAvg.toFixed(1)}</span> avg · ${hypeCount} ${hypeCount === 1 ? 'rating' : 'ratings'}`
-      : 'Be the first to rate';
+    const label = localHype ? (HYPE_LABELS[localHype] || '') : 'Drag to rate';
     return `
       <div class="pk-hype-meter" id="pkHypeWidget">
         <div class="pk-hm-label">HYPE</div>
         <div class="pk-hm-track" id="pkHypeTrack">
           <div class="pk-hm-fill" id="pkHypeFill" style="width:${pct}%"></div>
-          <div class="pk-hm-thumb" id="pkHypeThumb" style="left:${pct}%"></div>
+          <div class="pk-hm-thumb" id="pkHypeThumb" style="left:${pct}%;display:${pct > 0 ? 'block' : 'none'}"></div>
+          <div class="pk-hm-track-label" id="pkHypeLabel" style="position:absolute;left:50%;transform:translateX(-50%);pointer-events:none;font-family:'Inter',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:${pct > 0 ? 'rgba(255,255,255,0.55)' : 'rgba(255,255,255,0.28)'};white-space:nowrap;">${label}</div>
         </div>
-        <div class="pk-hm-right">
-          <div id="pkHypeLabel">${label}</div>
-          <div id="pkHypeAvg">${avgStr}</div>
-        </div>
+        ${hypeCount > 0 ? `<div class="pk-hype-avg-badge" id="pkHypeAvgBadge">${hypeAvg.toFixed(1)}<span>${hypeCount} rating${hypeCount !== 1 ? 's' : ''}</span></div>` : `<div class="pk-hype-avg-badge" id="pkHypeAvgBadge" style="opacity:0"></div>`}
       </div>`;
   }
 

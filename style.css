@@ -5666,7 +5666,7 @@ body.light-mode .ev-star-btn.starred {
 
 /* ── Hype Meter — horizontal amber drag bar ── */
 .pk-hype-meter {
-  display: flex; align-items: center; gap: 18px;
+  display: flex; align-items: center; gap: 14px;
   padding: 14px 20px;
   border-bottom: 1px solid rgba(255,255,255,0.06);
   background: rgba(255,255,255,0.012);
@@ -5675,31 +5675,47 @@ body.light-mode .ev-star-btn.starred {
   font-family: 'Montserrat', sans-serif;
   font-size: 0.5rem; font-weight: 900;
   letter-spacing: 0.24em; text-transform: uppercase;
-  color: rgba(255,255,255,0.22); white-space: nowrap; min-width: 50px;
+  color: rgba(255,255,255,0.22); white-space: nowrap; min-width: 44px;
+}
+.pk-hype-avg-badge {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem; font-weight: 900;
+  color: #c8960c; white-space: nowrap;
+  letter-spacing: 0.02em; line-height: 1;
+}
+.pk-hype-avg-badge span {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem; font-weight: 600;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.06em; text-transform: uppercase;
+  display: block; margin-top: 2px;
 }
 .pk-hm-track {
-  flex: 1; height: 6px; border-radius: 3px;
-  background: rgba(255,255,255,0.07); cursor: pointer;
+  flex: 1; height: 44px; border-radius: 8px;
+  background: rgba(255,255,255,0.04); cursor: pointer;
   position: relative; user-select: none;
+  display: flex; align-items: center;
+  border: 1px solid rgba(255,255,255,0.07);
+  transition: border-color 0.15s, background 0.15s;
 }
-.pk-hm-track.dragging { cursor: grabbing; }
+.pk-hm-track:hover { background: rgba(255,255,255,0.06); border-color: rgba(200,150,12,0.2); }
+.pk-hm-track.dragging { cursor: grabbing; background: rgba(200,150,12,0.06); border-color: rgba(200,150,12,0.35); }
 .pk-hm-fill {
   position: absolute; left: 0; top: 0; height: 100%;
-  background: linear-gradient(90deg, rgba(170,110,10,0.55), #c8960c);
-  border-radius: 3px; pointer-events: none;
-  transition: width 0.08s ease;
+  background: linear-gradient(90deg, rgba(170,110,10,0.35), rgba(200,150,12,0.55));
+  border-radius: 8px; pointer-events: none;
 }
 .pk-hm-thumb {
   position: absolute; top: 50%; transform: translate(-50%, -50%);
-  width: 16px; height: 16px; border-radius: 50%;
-  background: #c8960c; border: 2px solid rgba(160,100,8,0.7);
-  box-shadow: 0 1px 4px rgba(0,0,0,0.4);
-  pointer-events: none; cursor: grab;
-  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: #c8960c; border: 3px solid rgba(255,255,255,0.15);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  pointer-events: none;
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
 }
 .pk-hm-track.dragging .pk-hm-thumb {
-  transform: translate(-50%, -50%) scale(1.15);
-  box-shadow: 0 0 12px rgba(200,150,12,0.35), 0 2px 6px rgba(0,0,0,0.4);
+  transform: translate(-50%, -50%) scale(1.18);
+  box-shadow: 0 0 16px rgba(200,150,12,0.5), 0 2px 8px rgba(0,0,0,0.5);
 }
 .pk-hm-right {
   font-family: 'Inter', sans-serif;
@@ -7196,9 +7212,9 @@ body.light-mode .pk-round-btn.active.sub { background: rgba(200,150,12,0.07) !im
 /* Hype meter */
 body.light-mode .pk-hype-meter { background: rgba(0,0,0,0.018) !important; border-bottom-color: rgba(0,0,0,0.07) !important; }
 body.light-mode .pk-hm-label { color: rgba(0,0,0,0.28) !important; }
-body.light-mode .pk-hm-track { background: rgba(0,0,0,0.1) !important; }
-body.light-mode .pk-hm-right { color: rgba(0,0,0,0.35) !important; }
+body.light-mode .pk-hm-track { background: rgba(0,0,0,0.06) !important; border-color: rgba(0,0,0,0.1) !important; }
 body.light-mode .pk-hm-score { color: #7a5500 !important; }
+body.light-mode .pk-hype-avg-badge { color: #7a5500 !important; }
 body.light-mode .pk-hm-thumb { box-shadow: 0 1px 3px rgba(0,0,0,0.25) !important; }
 
 /* Progress */
