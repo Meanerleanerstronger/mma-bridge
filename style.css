@@ -5519,6 +5519,30 @@ body.light-mode .ev-star-btn.starred {
   padding: 0 20px 24px;
   border-bottom: 1px solid rgba(255,255,255,0.06);
   margin-bottom: 0;
+  position: relative;
+}
+.pk-hd-hype-badge {
+  position: absolute;
+  top: 0; right: 20px;
+  display: flex; flex-direction: column; align-items: flex-end;
+  gap: 1px;
+}
+.pk-hd-hype-badge .pk-hdb-num {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem; font-weight: 900; line-height: 1;
+  color: #c8960c; letter-spacing: 0.01em;
+}
+.pk-hd-hype-badge .pk-hdb-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.55rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(200,150,12,0.5); text-align: right;
+}
+.pk-hd-hype-badge .pk-hdb-count {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.52rem; font-weight: 500;
+  color: rgba(255,255,255,0.22); text-align: right;
+  letter-spacing: 0.04em;
 }
 .pk-hd-eyebrow {
   font-family: 'Montserrat', sans-serif;
@@ -6894,14 +6918,24 @@ body.pk-fotn-picking-body .pk-dossier-fight:hover ~ #pkFotnCursor,
 
 /* ── Avg hype badge on events cards ── */
 .ev-hype-badge {
-  display: inline-flex; align-items: center; gap: 4px;
+  display: flex; flex-direction: column; align-items: flex-end;
+  gap: 1px; white-space: nowrap;
+}
+.ev-hype-badge .ehb-num {
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.58rem; font-weight: 800;
-  color: rgba(200,150,12,0.8);
-  background: rgba(255,170,0,0.08);
-  border: 1px solid rgba(255,170,0,0.2);
-  border-radius: 20px; padding: 3px 9px;
-  white-space: nowrap;
+  font-size: 1.5rem; font-weight: 900; line-height: 1;
+  color: #c8960c; letter-spacing: 0.01em;
+}
+.ev-hype-badge .ehb-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.5rem; font-weight: 700;
+  letter-spacing: 0.13em; text-transform: uppercase;
+  color: rgba(200,150,12,0.5);
+}
+.ev-hype-badge .ehb-count {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.48rem; font-weight: 500;
+  color: rgba(255,255,255,0.2); letter-spacing: 0.04em;
 }
 
 /* light mode picks additions */

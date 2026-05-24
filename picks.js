@@ -665,10 +665,12 @@ function formatOdds(n) {
 
   function updateHypeWidget() {
     const pct = localHype ? localHype * 20 : 0;
-    const fill  = document.getElementById('pkHypeFill');
-    const thumb = document.getElementById('pkHypeThumb');
-    const labelEl = document.getElementById('pkHypeLabel');
+    const fill     = document.getElementById('pkHypeFill');
+    const thumb    = document.getElementById('pkHypeThumb');
+    const labelEl  = document.getElementById('pkHypeLabel');
     const avgBadge = document.getElementById('pkHypeAvgBadge');
+    const hdBadge  = document.getElementById('pkHdHypeBadge');
+
     if (fill)  fill.style.width = pct + '%';
     if (thumb) { thumb.style.left = pct + '%'; thumb.style.display = pct > 0 ? 'block' : 'none'; }
     if (labelEl) {
@@ -676,11 +678,18 @@ function formatOdds(n) {
       labelEl.style.color = pct > 0 ? 'rgba(255,255,255,0.55)' : 'rgba(255,255,255,0.28)';
     }
     if (avgBadge) {
+      avgBadge.style.opacity = hypeCount > 0 ? '1' : '0';
+      if (hypeCount > 0) avgBadge.innerHTML = `${hypeAvg.toFixed(1)}<span>${hypeCount} rating${hypeCount !== 1 ? 's' : ''}</span>`;
+    }
+    if (hdBadge) {
       if (hypeCount > 0) {
-        avgBadge.style.opacity = '1';
-        avgBadge.innerHTML = `${hypeAvg.toFixed(1)}<span>${hypeCount} rating${hypeCount !== 1 ? 's' : ''}</span>`;
+        hdBadge.style.display = '';
+        hdBadge.innerHTML = `
+          <div class="pk-hdb-num">${hypeAvg.toFixed(1)}</div>
+          <div class="pk-hdb-label">Community Hype</div>
+          <div class="pk-hdb-count">${hypeCount} rating${hypeCount !== 1 ? 's' : ''}</div>`;
       } else {
-        avgBadge.style.opacity = '0';
+        hdBadge.style.display = 'none';
       }
     }
   }
@@ -1688,13 +1697,18 @@ function formatOdds(n) {
         </div>
 
         <div class="pk-hd">
+          ${hypeCount > 0 ? `
+          <div class="pk-hd-hype-badge" id="pkHdHypeBadge">
+            <div class="pk-hdb-num">${hypeAvg.toFixed(1)}</div>
+            <div class="pk-hdb-label">Community Hype</div>
+            <div class="pk-hdb-count">${hypeCount} rating${hypeCount !== 1 ? 's' : ''}</div>
+          </div>` : `<div class="pk-hd-hype-badge" id="pkHdHypeBadge" style="display:none"></div>`}
           <div class="pk-hd-eyebrow">${!isCompleted && !isLocked ? 'Make Your Picks' : (isCompleted ? 'Results' : 'Picks Locked')}</div>
           <h1 class="pk-hd-title">${esc(event.name || '')}</h1>
           <div class="pk-hd-meta">
             ${event.date ? `<span>${esc(event.date)}</span>` : ''}
             ${event.location ? `<span class="pk-meta-dot">·</span><span>${esc(event.location)}</span>` : ''}
             ${countdownHtml()}
-            ${hypeCount > 0 ? `<span class="pk-meta-dot">·</span><span class="pk-hype-pill"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>${hypeAvg.toFixed(1)} hype · ${hypeCount}</span>` : ''}
           </div>
           ${!isCompleted && !isLocked ? `<div class="pk-hd-sub">Predict winners · methods · rounds · Fight of the Night</div>` : ''}
           ${!isCompleted && !isLocked ? `<div class="pk-fotn-reminder">

@@ -397,7 +397,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         .then(d => {
           if (d?.avg_hype) {
             avgEl.textContent = `★ ${d.avg_hype} · ${d.total_ratings} vote${d.total_ratings!==1?'s':''}`;
-            if (summaryBadge) summaryBadge.textContent = `${d.avg_hype} hype`;
+            if (summaryBadge) summaryBadge.innerHTML = `<div class="ehb-num">${parseFloat(d.avg_hype).toFixed(1)}</div><div class="ehb-label">Community Hype</div><div class="ehb-count">${d.total_ratings} rating${d.total_ratings!==1?'s':''}</div>`;
           } else {
             avgEl.textContent = 'Be first to rate!';
             if (summaryBadge) summaryBadge.textContent = '';
