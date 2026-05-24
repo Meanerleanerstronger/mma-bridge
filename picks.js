@@ -525,11 +525,11 @@ function formatOdds(n) {
       btn.textContent = btnLabel;
       btn.disabled = false;
     }
-    // Show Share Your Picks button once all main card picks are saved
+    // Show Share Your Picks button as soon as all main card picks are selected (localPicks)
     const mainCount = (event.mainCard || []).length;
-    const savedMainCount = (event.mainCard || []).map((_, i) => myPicks[`main-${i}`]).filter(Boolean).length;
+    const localMainCount = (event.mainCard || []).map((_, i) => localPicks[`main-${i}`]).filter(Boolean).length;
     let shareBtn = bar.querySelector('.pk-share-picks-btn');
-    if (!dirty && savedMainCount >= mainCount && mainCount > 0) {
+    if (localMainCount >= mainCount && mainCount > 0) {
       if (!shareBtn) {
         shareBtn = document.createElement('button');
         shareBtn.className = 'pk-share-picks-btn';
@@ -590,7 +590,7 @@ function formatOdds(n) {
     ctx.fillText('MY PICKS — ' + evShort.toUpperCase(), 40, 48);
 
     mainCard.forEach((fight, i) => {
-      const p = myPicks[`main-${i}`];
+      const p = localPicks[`main-${i}`] || myPicks[`main-${i}`];
       const y = headerH + i * rowH;
       const isMain = i === 0;
 
