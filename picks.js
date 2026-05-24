@@ -814,16 +814,17 @@ function formatOdds(n) {
         ${cardLblTxt ? `<span class="fc-card-lbl">${cardLblTxt}</span>` : ''}
       </div>`;
 
-    // VS center column
+    // VS center column — just VS + result method, comm % moved to fighter sides
     let vsColHtml = `<span class="fc-vs">VS</span>`;
-    if (showComm && commPctA !== null) {
-      vsColHtml += `
-        <div class="sb-comm-bar"><div class="sb-comm-fill" style="width:${commPctA}%"></div></div>
-        <div class="sb-comm-pcts"><span>${commPctA}%</span><span>${commPctB}%</span></div>`;
-    }
     if (isCompleted && winner) {
       vsColHtml += `<div class="fc-result-method">${esc(f.method || '')}</div>`;
     }
+
+    // Community % labels for each side
+    const commLabelA = (showComm && commPctA !== null)
+      ? `<div class="fc-comm-pct${commPctA >= 50 ? ' fc-comm-majority' : ''}">${commPctA}%</div>` : '';
+    const commLabelB = (showComm && commPctB !== null)
+      ? `<div class="fc-comm-pct${commPctB >= 50 ? ' fc-comm-majority' : ''}">${commPctB}%</div>` : '';
 
     // Method row (slides in when picked) — keep sb-method-wrap + add fc-method-row
     const methodWrap = !isCompleted ? `
@@ -858,6 +859,7 @@ function formatOdds(n) {
                 ${recA ? `<span class="fc-record">${esc(recA)}</span>` : ''}
                 ${oddsTagA}
               </div>
+              ${commLabelA}
               ${badgeA}
               ${oppBadgeA}
             </div>
@@ -872,6 +874,7 @@ function formatOdds(n) {
                 ${oddsTagB}
                 ${recB ? `<span class="fc-record">${esc(recB)}</span>` : ''}
               </div>
+              ${commLabelB}
               ${badgeB}
               ${oppBadgeB}
             </div>
@@ -1149,6 +1152,117 @@ function formatOdds(n) {
       const evId   = event.id || eventId;
       triggerShare(evName, correct, total, pct, verdict, totalPts, evId);
     });
+  }
+
+  function initConsensusBtn() {
+    const btn = document.getElementById('pkConsensusBtn');
+    if (!btn) return;
+    const hasComm = Object.keys(communityPicks).length > 0;
+    if (hasComm) btn.style.display = '';
+    btn.addEventListener('click', () => {
+      const canvas = buildConsensusCanvas(event.name || '', event.mainCard || [], communityPicks);
+      const url = `https://mmabridge.com/picks.html?id=${eventId}`;
+      const text = `Community picks for ${event.name || 'UFC'} — see how MMA Bridge fans voted 👇\n${url}`;
+      canvas.toBlob(blob => {
+        const file = new File([blob], 'community-picks.png', { type: 'image/png' });
+        if (navigator.canShare?.({ files: [file] })) {
+          navigator.share({ title: `Community Picks — ${event.name}`, text, files: [file] }).catch(() => {
+            showShareModal(canvas.toDataURL(), text, url);
+          });
+        } else {
+          showShareModal(canvas.toDataURL(), text, url);
+        }
+      }, 'image/png');
+    });
+  }
+
+  function buildConsensusCanvas(evName, mainCard, picks) {
+    const W = 700, rowH = 68, headerH = 80, footerH = 48;
+    const fights = mainCard.slice(0, 8);
+    const H = headerH + fights.length * rowH + footerH;
+    const c = document.createElement('canvas');
+    c.width = W; c.height = H;
+    const ctx = c.getContext('2d');
+
+    ctx.fillStyle = '#07070a';
+    ctx.fillRect(0, 0, W, H);
+
+    // Subtle grid
+    ctx.strokeStyle = 'rgba(255,255,255,0.02)';
+    ctx.lineWidth = 1;
+    for (let x = 0; x < W; x += 60) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke(); }
+
+    // Gold top bar
+    const bar = ctx.createLinearGradient(0,0,W,0);
+    bar.addColorStop(0,'#c8960c'); bar.addColorStop(1,'rgba(200,150,12,0.15)');
+    ctx.fillStyle = bar; ctx.fillRect(0,0,W,4);
+
+    // Header
+    ctx.font = '900 13px sans-serif'; ctx.fillStyle = 'rgba(200,150,12,0.55)';
+    ctx.letterSpacing = '3px'; ctx.fillText('MMA BRIDGE', 40, 30); ctx.letterSpacing = '0px';
+    ctx.font = '900 22px sans-serif'; ctx.fillStyle = 'rgba(255,255,255,0.88)';
+    const short = evName.length > 36 ? evName.slice(0,34)+'…' : evName;
+    ctx.fillText('COMMUNITY PICKS — ' + short.toUpperCase(), 40, 62);
+
+    let totalPickRows = 0;
+
+    fights.forEach((fight, i) => {
+      const y = headerH + i * rowH;
+      const fKey = `main-${i}`;
+      const comm = picks[fKey] || {};
+      const countA = comm[fight.a] || 0;
+      const countB = comm[fight.b] || 0;
+      const total2 = countA + countB || 1;
+      const pctA = Math.round((countA / total2) * 100);
+      const pctB = 100 - pctA;
+      totalPickRows += countA + countB;
+
+      // Row bg
+      ctx.fillStyle = i % 2 === 0 ? 'rgba(255,255,255,0.02)' : 'transparent';
+      ctx.fillRect(0, y, W, rowH);
+
+      const midY = y + rowH / 2;
+      const barX = 200, barW = W - 400;
+
+      // Fighter A name
+      ctx.font = 'bold 14px sans-serif'; ctx.fillStyle = '#fff';
+      ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+      const nameA = fight.a.split(' ').pop();
+      ctx.fillText(nameA.toUpperCase(), 28, midY - 8);
+      // pct A
+      ctx.font = `bold 18px sans-serif`;
+      ctx.fillStyle = pctA >= 50 ? '#c8960c' : 'rgba(255,255,255,0.35)';
+      ctx.fillText(`${pctA}%`, 28, midY + 12);
+
+      // Fighter B name
+      ctx.textAlign = 'right';
+      ctx.font = 'bold 14px sans-serif'; ctx.fillStyle = '#fff';
+      const nameB = fight.b.split(' ').pop();
+      ctx.fillText(nameB.toUpperCase(), W - 28, midY - 8);
+      ctx.font = 'bold 18px sans-serif';
+      ctx.fillStyle = pctB >= 50 ? '#c8960c' : 'rgba(255,255,255,0.35)';
+      ctx.fillText(`${pctB}%`, W - 28, midY + 12);
+
+      // Progress bar
+      ctx.fillStyle = 'rgba(255,255,255,0.06)';
+      ctx.beginPath(); ctx.roundRect(barX, midY - 5, barW, 10, 5); ctx.fill();
+      if (pctA > 0) {
+        const fillGrad = ctx.createLinearGradient(barX,0,barX+barW,0);
+        fillGrad.addColorStop(0,'#c8960c'); fillGrad.addColorStop(1,'rgba(200,150,12,0.3)');
+        ctx.fillStyle = fillGrad;
+        ctx.beginPath(); ctx.roundRect(barX, midY - 5, (barW * pctA) / 100, 10, 5); ctx.fill();
+      }
+      // Divider
+      ctx.fillStyle = 'rgba(255,255,255,0.04)';
+      ctx.fillRect(0, y + rowH - 1, W, 1);
+    });
+
+    // Footer
+    ctx.font = '13px sans-serif'; ctx.fillStyle = 'rgba(255,255,255,0.18)';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(`${totalPickRows} picks recorded · mmabridge.com`, W/2, H - footerH/2);
+
+    return c;
   }
 
   function triggerShare(evName, correct, total, pct, verdict, totalPts, evId) {
@@ -1455,10 +1569,16 @@ function formatOdds(n) {
             <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
             Pick Fight of the Night at the bottom for +15 pts
           </div>` : ''}
-          <button class="pk-hiw-btn" id="pkHowItWorks" type="button">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>
-            How It Works
-          </button>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+            <button class="pk-hiw-btn" id="pkHowItWorks" type="button">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>
+              How It Works
+            </button>
+            <button class="pk-consensus-btn" id="pkConsensusBtn" type="button" style="display:none">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+              Share Consensus
+            </button>
+          </div>
           ${careerBadgeHtml()}
         </div>
 
@@ -2085,6 +2205,7 @@ function formatOdds(n) {
 
   render();
   initPkCountdown();
+  initConsensusBtn();
   setupComments();
 
   // ── Auto-open event switcher if ?picker=1 ────

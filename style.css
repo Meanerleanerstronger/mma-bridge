@@ -5864,11 +5864,22 @@ body.light-mode .ev-star-btn.starred {
   color: rgba(255,255,255,0.25); letter-spacing: 0.02em;
 }
 .fc-odds {
-  font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; font-weight: 700;
-  letter-spacing: 0.02em;
+  font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
+  font-size: 1.25rem; font-weight: 900; letter-spacing: 0.01em;
 }
-.fc-fav { color: rgba(200,150,12,0.9); }
-.fc-dog { color: rgba(255,255,255,0.38); }
+.fc-fav { color: #c8960c; }
+.fc-dog { color: rgba(255,255,255,0.45); }
+
+.fc-comm-pct {
+  font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
+  font-size: 1.6rem; font-weight: 900; line-height: 1;
+  color: rgba(255,255,255,0.22);
+  margin-top: 4px; letter-spacing: 0.01em;
+}
+.fc-card.fc-maincrd .fc-comm-pct { font-size: 1.8rem; }
+.fc-card.fc-main .fc-comm-pct    { font-size: 2.2rem; }
+.fc-comm-pct.fc-comm-majority    { color: #c8960c; }
+.fc-info-b .fc-comm-pct          { text-align: right; }
 
 /* Badges */
 .fc-badge {
@@ -7117,9 +7128,11 @@ body.light-mode .fc-card.fc-maincrd .fc-name { color: rgba(0,0,0,0.88) !importan
 body.light-mode .fc-card.fc-main .fc-name { color: #000 !important; }
 body.light-mode .fc-fighter.selected .fc-name { color: #7a5500 !important; }
 body.light-mode .fc-record { color: rgba(0,0,0,0.35) !important; }
-body.light-mode .fc-odds { color: rgba(0,0,0,0.4) !important; }
-body.light-mode .fc-fav { color: rgba(150,90,8,0.8) !important; }
-body.light-mode .fc-dog { color: rgba(0,0,0,0.28) !important; }
+body.light-mode .fc-odds { color: rgba(0,0,0,0.5) !important; }
+body.light-mode .fc-fav { color: rgba(150,90,8,0.9) !important; }
+body.light-mode .fc-dog { color: rgba(0,0,0,0.35) !important; }
+body.light-mode .fc-comm-pct { color: rgba(0,0,0,0.18) !important; }
+body.light-mode .fc-comm-pct.fc-comm-majority { color: rgba(150,90,8,0.85) !important; }
 
 /* VS column */
 body.light-mode .fc-vs-col { border-color: rgba(0,0,0,0.05) !important; }
@@ -7543,6 +7556,20 @@ body.light-mode #site-disclaimer {
   margin-top: 10px;
 }
 .pk-hiw-btn:hover { background: rgba(255,255,255,0.09); color: rgba(255,255,255,0.75); border-color: rgba(255,255,255,0.2); }
+
+.pk-consensus-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: rgba(200,150,12,0.1);
+  border: 1px solid rgba(200,150,12,0.25);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600;
+  color: rgba(200,150,12,0.8);
+  cursor: pointer; transition: all 0.18s ease;
+  margin-top: 10px;
+}
+.pk-consensus-btn:hover { background: rgba(200,150,12,0.2); color: #c8960c; border-color: rgba(200,150,12,0.5); }
+
 .lb-hiw-btn { margin: 10px auto 0; display: flex; }
 
 /* ── How It Works modal content ── */
