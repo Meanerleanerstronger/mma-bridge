@@ -2347,6 +2347,14 @@ function formatOdds(n) {
   initPkCountdown();
   setupComments();
 
+  // Retry hype fetch in background (handles Render cold-start delay)
+  if (hypeCount === 0) {
+    setTimeout(async () => {
+      await loadEventExtras();
+      updateHypeWidget();
+    }, 3000);
+  }
+
   // ── Auto-open event switcher if ?picker=1 ────
   if (new URLSearchParams(location.search).get('picker') === '1') {
     setTimeout(() => {

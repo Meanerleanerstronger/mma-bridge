@@ -349,6 +349,12 @@
     .ov-hype-tick:hover { color:rgba(255,255,255,.5); }
     .ov-hype-tick.active { font-weight:900; }
 
+    /* Community avg in overlay */
+    .ov-comm-hype { margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:1px;white-space:nowrap; }
+    .ov-comm-num { font-family:'Montserrat',sans-serif;font-size:1.8rem;font-weight:900;line-height:1;color:#c8960c;letter-spacing:.01em; }
+    .ov-comm-label { font-family:'Inter',sans-serif;font-size:.48rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(200,150,12,.5); }
+    .ov-comm-count { font-family:'Inter',sans-serif;font-size:.46rem;font-weight:500;color:rgba(255,255,255,.22);letter-spacing:.04em; }
+
     /* ── BODY 2-COL ── */
     .ov-body { flex:1;display:grid;grid-template-columns:1fr 300px;overflow:hidden;min-height:0; }
 
@@ -784,6 +790,11 @@
             <span class="ov-hype-num" id="ovHypeNum">—</span>
             <span class="ov-hype-denom" id="ovHypeDenom">/10</span>
           </div>
+          <div class="ov-comm-hype" id="ovCommHype" style="display:none">
+            <div class="ov-comm-num" id="ovCommNum"></div>
+            <div class="ov-comm-label">Community Hype</div>
+            <div class="ov-comm-count" id="ovCommCount"></div>
+          </div>
         </div>
         <div class="ov-hype-track-wrap" id="ovHypeTrackWrap">
           <div class="ov-hype-track">
@@ -1051,6 +1062,18 @@
 
       /* Reset hype */
       resetHype();
+      const commHype = document.getElementById('ovCommHype');
+      if (commHype) commHype.style.display = 'none';
+      fetch(`https://mmabridge-backend.onrender.com/api/ratings/${encodeURIComponent(ev.id)}`)
+        .then(r => r.ok ? r.json() : null)
+        .then(d => {
+          if (!d || !d.avg_hype || parseInt(d.total_ratings || 0) < 1) return;
+          const avg = parseFloat(d.avg_hype).toFixed(1);
+          const cnt = parseInt(d.total_ratings);
+          document.getElementById('ovCommNum').textContent = avg;
+          document.getElementById('ovCommCount').textContent = `${cnt} rating${cnt !== 1 ? 's' : ''}`;
+          if (commHype) commHype.style.display = '';
+        }).catch(() => {});
 
       /* Event stats sidebar */
       buildStats(ev,main);
@@ -1260,9 +1283,8 @@
           if (!card) return;
           const badge = document.createElement('div');
           badge.className = 'ev-hype-badge';
-          badge.innerHTML = `&#9733; ${avg.toFixed(1)}`;
-          badge.title = `${count} rating${count !== 1 ? 's' : ''}`;
-          badge.style.cssText = 'position:absolute;top:10px;right:48px;z-index:10';
+          badge.innerHTML = `<div class="ehb-num">${avg.toFixed(1)}</div><div class="ehb-label">Community Hype</div><div class="ehb-count">${count} rating${count !== 1 ? 's' : ''}</div>`;
+          badge.style.cssText = 'position:absolute;top:12px;right:56px;z-index:10';
           card.appendChild(badge);
         } catch {}
       }));
