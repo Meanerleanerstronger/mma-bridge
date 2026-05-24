@@ -511,8 +511,8 @@ function formatOdds(n) {
     const bar = document.getElementById('pkSaveBar');
     if (!bar) return;
     const btn  = bar.querySelector('.pk-save-btn');
+    const dirty = hasUnsavedChanges();
     if (btn) {
-      const dirty = hasUnsavedChanges();
       let btnLabel = 'Save Picks', btnCls = '';
       if (dirty && picked > 0) {
         btnLabel = `Save ${picked} Pick${picked !== 1 ? 's' : ''}`;
@@ -525,6 +525,139 @@ function formatOdds(n) {
       btn.textContent = btnLabel;
       btn.disabled = false;
     }
+    // Show Share Your Picks button once all main card picks are saved
+    const mainCount = (event.mainCard || []).length;
+    const savedMainCount = (event.mainCard || []).map((_, i) => myPicks[`main-${i}`]).filter(Boolean).length;
+    let shareBtn = bar.querySelector('.pk-share-picks-btn');
+    if (!dirty && savedMainCount >= mainCount && mainCount > 0) {
+      if (!shareBtn) {
+        shareBtn = document.createElement('button');
+        shareBtn.className = 'pk-share-picks-btn';
+        shareBtn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg> Share Your Picks`;
+        shareBtn.type = 'button';
+        shareBtn.addEventListener('click', shareMyPicks);
+        bar.appendChild(shareBtn);
+      }
+    } else if (shareBtn) {
+      shareBtn.remove();
+    }
+  }
+
+  function shareMyPicks() {
+    const canvas = buildMyPicksCanvas();
+    const url  = `https://mmabridge.com/picks.html?id=${eventId}`;
+    const text = `My picks for ${event.name || 'UFC'} 🥊\nCan you beat me?\n${url}`;
+    canvas.toBlob(blob => {
+      const file = new File([blob], 'my-picks.png', { type: 'image/png' });
+      if (navigator.canShare?.({ files: [file] })) {
+        navigator.share({ title: `My Picks — ${event.name}`, text, files: [file] }).catch(() => {
+          showShareModal(canvas.toDataURL(), text, url);
+        });
+      } else {
+        showShareModal(canvas.toDataURL(), text, url);
+      }
+    }, 'image/png');
+  }
+
+  function buildMyPicksCanvas() {
+    const mainCard = event.mainCard || [];
+    const W = 700;
+    const headerH = 88, footerH = 52, rowH = 72;
+    const H = headerH + mainCard.length * rowH + footerH;
+    const c = document.createElement('canvas');
+    c.width = W; c.height = H;
+    const ctx = c.getContext('2d');
+
+    ctx.fillStyle = '#07070a';
+    ctx.fillRect(0, 0, W, H);
+
+    // Subtle grid lines
+    ctx.strokeStyle = 'rgba(255,255,255,0.02)';
+    ctx.lineWidth = 1;
+    for (let x = 0; x < W; x += 60) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke(); }
+
+    // Gold top bar
+    const bar = ctx.createLinearGradient(0,0,W,0);
+    bar.addColorStop(0,'#c8960c'); bar.addColorStop(1,'rgba(200,150,12,0.15)');
+    ctx.fillStyle = bar; ctx.fillRect(0,0,W,4);
+
+    // Header
+    ctx.font = '900 12px sans-serif'; ctx.fillStyle = 'rgba(200,150,12,0.55)';
+    ctx.letterSpacing = '3px'; ctx.textBaseline = 'top';
+    ctx.fillText('MMA BRIDGE', 40, 22); ctx.letterSpacing = '0px';
+    ctx.font = '900 26px sans-serif'; ctx.fillStyle = '#fff';
+    const evShort = (event.name || '').length > 38 ? (event.name||'').slice(0,36)+'…' : (event.name || '');
+    ctx.fillText('MY PICKS — ' + evShort.toUpperCase(), 40, 48);
+
+    mainCard.forEach((fight, i) => {
+      const p = myPicks[`main-${i}`];
+      const y = headerH + i * rowH;
+      const isMain = i === 0;
+
+      // Alternating row bg
+      ctx.fillStyle = i % 2 === 0 ? 'rgba(255,255,255,0.025)' : 'transparent';
+      ctx.fillRect(0, y, W, rowH);
+
+      const midY = y + rowH / 2;
+
+      // Tick
+      ctx.font = `bold ${isMain ? 20 : 16}px sans-serif`;
+      ctx.fillStyle = p ? '#c8960c' : 'rgba(255,255,255,0.12)';
+      ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+      ctx.fillText(p ? '✓' : '·', 28, midY);
+
+      if (p) {
+        // Picked fighter name
+        const pickedName = p.pick || '';
+        const lastName = pickedName.split(' ').pop();
+        ctx.font = `900 ${isMain ? 28 : 22}px sans-serif`;
+        ctx.fillStyle = '#fff';
+        ctx.fillText(lastName.toUpperCase(), 56, midY - 8);
+
+        // "vs other"
+        const other = (pickedName === fight.a ? fight.b : fight.a).split(' ').pop();
+        ctx.font = '500 13px sans-serif';
+        ctx.fillStyle = 'rgba(255,255,255,0.28)';
+        ctx.fillText(`vs ${other}`, 56, midY + 14);
+
+        // Method + Round (right side)
+        if (p.method) {
+          ctx.textAlign = 'right';
+          ctx.font = `bold ${isMain ? 20 : 16}px sans-serif`;
+          ctx.fillStyle = '#c8960c';
+          ctx.fillText(p.method, W - 36, midY - 6);
+          ctx.font = '500 11px sans-serif';
+          ctx.fillStyle = 'rgba(255,255,255,0.25)';
+          ctx.fillText(fight.weight || '', W - 36, midY + 12);
+          ctx.textAlign = 'left';
+        } else {
+          ctx.textAlign = 'right';
+          ctx.font = '500 11px sans-serif';
+          ctx.fillStyle = 'rgba(255,255,255,0.25)';
+          ctx.fillText(fight.weight || '', W - 36, midY + 4);
+          ctx.textAlign = 'left';
+        }
+      } else {
+        // No pick
+        ctx.font = '500 14px sans-serif';
+        ctx.fillStyle = 'rgba(255,255,255,0.18)';
+        ctx.fillText(`${fight.a.split(' ').pop()} vs ${fight.b.split(' ').pop()}`, 56, midY);
+        ctx.textAlign = 'right';
+        ctx.fillText('no pick', W - 36, midY);
+        ctx.textAlign = 'left';
+      }
+
+      // Row divider
+      ctx.fillStyle = 'rgba(255,255,255,0.04)';
+      ctx.fillRect(0, y + rowH - 1, W, 1);
+    });
+
+    // Footer
+    ctx.font = '700 13px sans-serif'; ctx.fillStyle = 'rgba(200,150,12,0.5)';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText('mmabridge.com', W/2, H - footerH/2);
+
+    return c;
   }
 
   // ── Update hype widget ────────────────────────
@@ -822,9 +955,9 @@ function formatOdds(n) {
 
     // Community % labels for each side
     const commLabelA = (showComm && commPctA !== null)
-      ? `<div class="fc-comm-pct${commPctA >= 50 ? ' fc-comm-majority' : ''}">${commPctA}%</div>` : '';
+      ? `<div class="fc-comm-pct${commPctA >= 50 ? ' fc-comm-majority' : ''}"><span class="fc-comm-lbl">COMMUNITY</span><span class="fc-comm-num">${commPctA}%</span><span class="fc-comm-sub">picked this</span></div>` : '';
     const commLabelB = (showComm && commPctB !== null)
-      ? `<div class="fc-comm-pct${commPctB >= 50 ? ' fc-comm-majority' : ''}">${commPctB}%</div>` : '';
+      ? `<div class="fc-comm-pct${commPctB >= 50 ? ' fc-comm-majority' : ''}"><span class="fc-comm-lbl">COMMUNITY</span><span class="fc-comm-num">${commPctB}%</span><span class="fc-comm-sub">picked this</span></div>` : '';
 
     // Method row (slides in when picked) — keep sb-method-wrap + add fc-method-row
     const methodWrap = !isCompleted ? `
@@ -1569,16 +1702,10 @@ function formatOdds(n) {
             <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
             Pick Fight of the Night at the bottom for +15 pts
           </div>` : ''}
-          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-            <button class="pk-hiw-btn" id="pkHowItWorks" type="button">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>
-              How It Works
-            </button>
-            <button class="pk-consensus-btn" id="pkConsensusBtn" type="button" style="display:none">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-              Share Consensus
-            </button>
-          </div>
+          <button class="pk-hiw-btn" id="pkHowItWorks" type="button">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>
+            How It Works
+          </button>
           ${careerBadgeHtml()}
         </div>
 
@@ -2205,7 +2332,6 @@ function formatOdds(n) {
 
   render();
   initPkCountdown();
-  initConsensusBtn();
   setupComments();
 
   // ── Auto-open event switcher if ?picker=1 ────

@@ -5871,15 +5871,31 @@ body.light-mode .ev-star-btn.starred {
 .fc-dog { color: rgba(255,255,255,0.45); }
 
 .fc-comm-pct {
-  font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
-  font-size: 1.6rem; font-weight: 900; line-height: 1;
+  display: flex; flex-direction: column;
+  margin-top: 6px; gap: 0;
   color: rgba(255,255,255,0.22);
-  margin-top: 4px; letter-spacing: 0.01em;
 }
-.fc-card.fc-maincrd .fc-comm-pct { font-size: 1.8rem; }
-.fc-card.fc-main .fc-comm-pct    { font-size: 2.2rem; }
-.fc-comm-pct.fc-comm-majority    { color: #c8960c; }
-.fc-info-b .fc-comm-pct          { text-align: right; }
+.fc-comm-lbl {
+  font-family: 'Inter', sans-serif; font-size: 0.52rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.28); line-height: 1;
+}
+.fc-comm-num {
+  font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
+  font-size: 1.7rem; font-weight: 900; line-height: 1;
+  letter-spacing: 0.01em;
+}
+.fc-comm-sub {
+  font-family: 'Inter', sans-serif; font-size: 0.55rem; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: rgba(255,255,255,0.25); line-height: 1; margin-top: 1px;
+}
+.fc-card.fc-maincrd .fc-comm-num { font-size: 2rem; }
+.fc-card.fc-main .fc-comm-num    { font-size: 2.4rem; }
+.fc-comm-pct.fc-comm-majority .fc-comm-num  { color: #c8960c; }
+.fc-comm-pct.fc-comm-majority .fc-comm-lbl  { color: rgba(200,150,12,0.6); }
+.fc-comm-pct.fc-comm-majority .fc-comm-sub  { color: rgba(200,150,12,0.5); }
+.fc-info-b .fc-comm-pct { align-items: flex-end; }
 
 /* Badges */
 .fc-badge {
@@ -6395,10 +6411,23 @@ body.light-mode .ev-star-btn.starred {
 /* save bar — inline in ctrl panel */
 .pk-save-bar {
   display: flex; justify-content: center; align-items: center;
+  gap: 10px; flex-wrap: wrap;
   padding: 12px 20px 16px;
   background: rgba(255,255,255,0.008);
   border-top: 1px solid rgba(255,255,255,0.05);
 }
+.pk-share-picks-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(200,150,12,0.12);
+  border: 1px solid rgba(200,150,12,0.4);
+  border-radius: 6px; cursor: pointer;
+  color: #c8960c;
+  font-family: 'Montserrat', sans-serif; font-size: 0.65rem; font-weight: 800;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 10px 22px; white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s;
+}
+.pk-share-picks-btn:hover { background: rgba(200,150,12,0.22); border-color: #c8960c; }
 .pk-save-btn {
   display: inline-flex; align-items: center; gap: 8px;
   background: rgba(255,255,255,0.05);
@@ -7131,8 +7160,12 @@ body.light-mode .fc-record { color: rgba(0,0,0,0.35) !important; }
 body.light-mode .fc-odds { color: rgba(0,0,0,0.5) !important; }
 body.light-mode .fc-fav { color: rgba(150,90,8,0.9) !important; }
 body.light-mode .fc-dog { color: rgba(0,0,0,0.35) !important; }
-body.light-mode .fc-comm-pct { color: rgba(0,0,0,0.18) !important; }
-body.light-mode .fc-comm-pct.fc-comm-majority { color: rgba(150,90,8,0.85) !important; }
+body.light-mode .fc-comm-lbl { color: rgba(0,0,0,0.3) !important; }
+body.light-mode .fc-comm-num { color: rgba(0,0,0,0.2) !important; }
+body.light-mode .fc-comm-sub { color: rgba(0,0,0,0.22) !important; }
+body.light-mode .fc-comm-pct.fc-comm-majority .fc-comm-num { color: rgba(150,90,8,0.85) !important; }
+body.light-mode .fc-comm-pct.fc-comm-majority .fc-comm-lbl,
+body.light-mode .fc-comm-pct.fc-comm-majority .fc-comm-sub { color: rgba(150,90,8,0.55) !important; }
 
 /* VS column */
 body.light-mode .fc-vs-col { border-color: rgba(0,0,0,0.05) !important; }
