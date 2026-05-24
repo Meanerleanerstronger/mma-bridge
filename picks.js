@@ -661,10 +661,10 @@ function formatOdds(n) {
   }
 
   // ── Update hype widget ────────────────────────
-  const HYPE_LABELS = ['', 'SLEEPER', 'LOW KEY', 'BUILDING', 'HYPED', 'MUST-SEE'];
+  const HYPE_LABELS = ['', 'MEH', 'SLEEPER', 'LOW KEY', 'BUILDING', 'DECENT', 'SOLID', 'HYPED', 'VERY HYPED', 'ELITE', 'MUST-SEE'];
 
   function updateHypeWidget() {
-    const pct = localHype ? localHype * 20 : 0;
+    const pct = localHype ? ((localHype - 1) / 9) * 100 : 0;
     const fill     = document.getElementById('pkHypeFill');
     const thumb    = document.getElementById('pkHypeThumb');
     const labelEl  = document.getElementById('pkHypeLabel');
@@ -679,13 +679,13 @@ function formatOdds(n) {
     }
     if (avgBadge) {
       avgBadge.style.opacity = hypeCount > 0 ? '1' : '0';
-      if (hypeCount > 0) avgBadge.innerHTML = `${hypeAvg.toFixed(1)}<span>${hypeCount} rating${hypeCount !== 1 ? 's' : ''}</span>`;
+      if (hypeCount > 0) avgBadge.innerHTML = `${hypeAvg.toFixed(1)}<span class="pk-hype-denom">/10</span><span>${hypeCount} rating${hypeCount !== 1 ? 's' : ''}</span>`;
     }
     if (hdBadge) {
       if (hypeCount > 0) {
         hdBadge.style.display = '';
         hdBadge.innerHTML = `
-          <div class="pk-hdb-num">${hypeAvg.toFixed(1)}</div>
+          <div class="pk-hdb-num">${hypeAvg.toFixed(1)}<span class="pk-hdb-denom">/10</span></div>
           <div class="pk-hdb-label">Community Hype</div>
           <div class="pk-hdb-count">${hypeCount} rating${hypeCount !== 1 ? 's' : ''}</div>`;
       } else {
@@ -1633,7 +1633,7 @@ function formatOdds(n) {
   // ── Hype meter — horizontal amber drag bar ──
   function hypeMeterHtml() {
     if (isCompleted || isLocked) return '';
-    const pct = localHype ? localHype * 20 : 0;
+    const pct = localHype ? ((localHype - 1) / 9) * 100 : 0;
     const label = localHype ? (HYPE_LABELS[localHype] || '') : 'Drag to rate';
     return `
       <div class="pk-hype-meter" id="pkHypeWidget">
@@ -1643,7 +1643,7 @@ function formatOdds(n) {
           <div class="pk-hm-thumb" id="pkHypeThumb" style="left:${pct}%;display:${pct > 0 ? 'block' : 'none'}"></div>
           <div class="pk-hm-track-label" id="pkHypeLabel" style="position:absolute;left:50%;transform:translateX(-50%);pointer-events:none;font-family:'Inter',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:${pct > 0 ? 'rgba(255,255,255,0.55)' : 'rgba(255,255,255,0.28)'};white-space:nowrap;">${label}</div>
         </div>
-        ${hypeCount > 0 ? `<div class="pk-hype-avg-badge" id="pkHypeAvgBadge">${hypeAvg.toFixed(1)}<span>${hypeCount} rating${hypeCount !== 1 ? 's' : ''}</span></div>` : `<div class="pk-hype-avg-badge" id="pkHypeAvgBadge" style="opacity:0"></div>`}
+        ${hypeCount > 0 ? `<div class="pk-hype-avg-badge" id="pkHypeAvgBadge">${hypeAvg.toFixed(1)}<span class="pk-hype-denom">/10</span><span>${hypeCount} rating${hypeCount !== 1 ? 's' : ''}</span></div>` : `<div class="pk-hype-avg-badge" id="pkHypeAvgBadge" style="opacity:0"></div>`}
       </div>`;
   }
 
@@ -1699,7 +1699,7 @@ function formatOdds(n) {
         <div class="pk-hd">
           ${hypeCount > 0 ? `
           <div class="pk-hd-hype-badge" id="pkHdHypeBadge">
-            <div class="pk-hdb-num">${hypeAvg.toFixed(1)}</div>
+            <div class="pk-hdb-num">${hypeAvg.toFixed(1)}<span class="pk-hdb-denom">/10</span></div>
             <div class="pk-hdb-label">Community Hype</div>
             <div class="pk-hdb-count">${hypeCount} rating${hypeCount !== 1 ? 's' : ''}</div>
           </div>` : `<div class="pk-hd-hype-badge" id="pkHdHypeBadge" style="display:none"></div>`}
@@ -1871,7 +1871,7 @@ function formatOdds(n) {
     function valFromX(clientX) {
       const rect = track.getBoundingClientRect();
       const pct  = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
-      return Math.max(1, Math.min(5, Math.round(pct * 5)));
+      return Math.max(1, Math.min(10, Math.round(pct * 9) + 1));
     }
 
     let dragging = false;

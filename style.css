@@ -5532,6 +5532,8 @@ body.light-mode .ev-star-btn.starred {
   font-size: 2rem; font-weight: 900; line-height: 1;
   color: #c8960c; letter-spacing: 0.01em;
 }
+.pk-hdb-denom { font-size: 0.85rem; font-weight: 600; color: rgba(200,150,12,0.4); vertical-align: baseline; }
+.pk-hype-denom { font-size: 0.7em; font-weight: 600; color: rgba(200,150,12,0.45); vertical-align: baseline; }
 .pk-hd-hype-badge .pk-hdb-label {
   font-family: 'Inter', sans-serif;
   font-size: 0.55rem; font-weight: 700;

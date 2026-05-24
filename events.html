@@ -225,6 +225,11 @@
     .ev-card.fn:hover  { border-color:rgba(255,255,255,.18);transform:translateY(-3px);box-shadow:0 16px 50px rgba(0,0,0,.7); }
     .ev-card.ppv:hover { border-color:rgba(200,168,75,.3);transform:translateY(-3px);box-shadow:0 16px 50px rgba(0,0,0,.7); }
     .ev-card.ppv::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 0%,#8a6a10 15%,#c8a84b 35%,#fff8c0 50%,#c8a84b 65%,#8a6a10 85%,transparent 100%);background-size:250% auto;animation:shimmer 4s linear infinite;z-index:5; }
+    .ev-card.special-purple:hover { border-color:rgba(139,92,246,.35);transform:translateY(-3px);box-shadow:0 16px 50px rgba(139,92,246,.18); }
+    .ev-card.special-purple::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 0%,#5b21b6 15%,#8b5cf6 35%,#c4b5fd 50%,#8b5cf6 65%,#5b21b6 85%,transparent 100%);background-size:250% auto;animation:shimmer 4s linear infinite;z-index:5; }
+    .ev-card.special-purple .ev-card-badge { background:rgba(139,92,246,.14);border:1px solid rgba(139,92,246,.35);color:#a78bfa; }
+    .ev-card.special-purple .ev-card-name { color:rgba(196,181,253,.65); }
+    .ev-card.special-purple:hover .ev-card-cta { color:rgba(139,92,246,.7); }
 
     .ev-card-poster { position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;display:block;transition:transform .5s cubic-bezier(.22,1,.36,1); }
     .ev-card:hover .ev-card-poster { transform:scale(1.04); }
@@ -285,6 +290,7 @@
     .ov-poster-placeholder-inner { font-family:'Barlow Condensed','Montserrat',sans-serif;font-weight:900;font-size:7rem;color:rgba(255,255,255,.03);text-transform:uppercase;letter-spacing:.05em;text-align:center;line-height:.9;user-select:none;white-space:pre-line; }
 
     .ov-hero.is-ppv::after { content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#8a6a10,#c8a84b,#fff8c0,#c8a84b,#8a6a10,transparent);background-size:250% auto;animation:shimmer 3.5s linear infinite;z-index:6; }
+    .ov-hero.is-special-purple::after { content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#5b21b6,#8b5cf6,#c4b5fd,#8b5cf6,#5b21b6,transparent);background-size:250% auto;animation:shimmer 3.5s linear infinite;z-index:6; }
 
     .ov-topbar { position:absolute;top:0;left:0;right:0;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;z-index:10; }
     .ov-topbar-right { display:flex;align-items:center;gap:12px; }
@@ -294,6 +300,7 @@
     .ov-badge { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;padding:4px 12px;border-radius:4px;backdrop-filter:blur(10px); }
     .ov-badge.fn  { background:rgba(0,229,255,.15);border:1px solid rgba(0,229,255,.35);color:#00e5ff; }
     .ov-badge.ppv { background:rgba(200,168,75,.15);border:1px solid rgba(200,168,75,.4);color:#c8a84b; }
+    .ov-badge.special-purple { background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.4);color:#a78bfa; }
     .ov-live-dot  { display:flex;align-items:center;gap:5px;font-family:'Montserrat',sans-serif;font-size:.46rem;font-weight:800;letter-spacing:.15em;color:#ff4444; }
     .ov-live-dot::before { content:'';width:6px;height:6px;border-radius:50%;background:#ff4444;animation:pulse 1.2s ease infinite; }
     .ov-close { width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);font-size:.95rem;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(10px);transition:background .2s,border-color .2s,color .2s; }
@@ -837,13 +844,16 @@
     }
 
     /* ── BUILD EVENT LIST CARD ── */
+    const SPECIAL_EVENTS = { 'ufc-fight-night-song-vs-figueiredo': { cls:'special-purple', accent:'#8b5cf6', label:'FIGHT NIGHT' } };
+
     function buildCard(ev){
-      const isPPV=ev.type==='PPV', cls=isPPV?'ppv':'fn';
+      const special = SPECIAL_EVENTS[ev.id];
+      const isPPV=ev.type==='PPV', cls=special?special.cls:(isPPV?'ppv':'fn');
       const main=getMainFight(ev); if(!main) return null;
       const days=ev.isoDate?daysUntil(ev.isoDate):null;
       const dayLabel=days===null?'':days<=0?'TODAY':days===1?'TOMORROW':`${days}D AWAY`;
       const soon=days!==null&&days>0&&days<=7, isToday=days!==null&&days<=0;
-      const label=shortLabel(ev);
+      const label=special?special.label:shortLabel(ev);
       const matchup=`${lastName(main.a).toUpperCase()}  vs  ${lastName(main.b).toUpperCase()}`;
       const weightSub=main.titleFight
         ?`${main.weight} Title  ·  ${ev.date||''}${ev.location?'  ·  '+ev.location.split(',')[0]:''}`
@@ -865,7 +875,7 @@
         <div class="ev-card-bar"></div>
         <div class="ev-card-content">
           <div class="ev-card-top">
-            <span class="ev-card-badge">${isPPV?'PPV':'Fight Night'}</span>
+            <span class="ev-card-badge">${special?special.label:(isPPV?'PPV':'Fight Night')}</span>
             <span class="ev-card-name">${esc(label)}</span>
             ${main.titleFight?'<span class="ev-card-title-badge">Title</span>':''}
           </div>
@@ -982,15 +992,16 @@
     function openOverlay(ev){
       currentEvent=ev;
       if (typeof showCountdownCard === 'function') showCountdownCard(ev);
-      const isPPV=ev.type==='PPV', cls=isPPV?'ppv':'fn';
-      const accent=isPPV?'#c8a84b':'#00e5ff';
+      const special=SPECIAL_EVENTS[ev.id];
+      const isPPV=ev.type==='PPV', cls=special?special.cls:(isPPV?'ppv':'fn');
+      const accent=special?special.accent:(isPPV?'#c8a84b':'#00e5ff');
       const main=getMainFight(ev);
       const days=ev.isoDate?daysUntil(ev.isoDate):null;
       const isToday=days!==null&&days<=0;
 
       /* Hero */
       const hero=document.getElementById('ovHero');
-      hero.className=`ov-hero${isPPV?' is-ppv':''}`;
+      hero.className=`ov-hero${isPPV?' is-ppv':''}${special?' is-special-purple':''}`;
       const oldImg=hero.querySelector('.ov-poster'); if(oldImg) oldImg.remove();
       const placeholder=document.getElementById('ovPlaceholder');
       if(ev.poster){
@@ -1007,7 +1018,7 @@
 
       /* Badge + live */
       const badge=document.getElementById('ovBadge');
-      badge.textContent=isPPV?'PPV':'Fight Night'; badge.className=`ov-badge ${cls}`;
+      badge.textContent=special?special.label:(isPPV?'PPV':'Fight Night'); badge.className=`ov-badge ${cls}`;
       document.getElementById('ovLiveDot').style.display=isToday?'flex':'none';
 
       /* Text */
@@ -1070,7 +1081,7 @@
           if (!d || !d.avg_hype || parseInt(d.total_ratings || 0) < 1) return;
           const avg = parseFloat(d.avg_hype).toFixed(1);
           const cnt = parseInt(d.total_ratings);
-          document.getElementById('ovCommNum').textContent = avg;
+          document.getElementById('ovCommNum').innerHTML = avg + '<span style="font-size:.8rem;font-weight:600;color:rgba(200,150,12,.4);vertical-align:baseline">/10</span>';
           document.getElementById('ovCommCount').textContent = `${cnt} rating${cnt !== 1 ? 's' : ''}`;
           if (commHype) commHype.style.display = '';
         }).catch(() => {});
@@ -1283,7 +1294,7 @@
           if (!card) return;
           const badge = document.createElement('div');
           badge.className = 'ev-hype-badge';
-          badge.innerHTML = `<div class="ehb-num">${avg.toFixed(1)}</div><div class="ehb-label">Community Hype</div><div class="ehb-count">${count} rating${count !== 1 ? 's' : ''}</div>`;
+          badge.innerHTML = `<div class="ehb-num">${avg.toFixed(1)}<span style="font-size:.75rem;font-weight:600;color:rgba(200,150,12,.4);vertical-align:baseline">/10</span></div><div class="ehb-label">Community Hype</div><div class="ehb-count">${count} rating${count !== 1 ? 's' : ''}</div>`;
           badge.style.cssText = 'position:absolute;top:12px;right:56px;z-index:10';
           card.appendChild(badge);
         } catch {}
