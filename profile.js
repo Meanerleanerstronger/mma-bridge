@@ -108,7 +108,9 @@
     const ratings = ratingsResult.data || [];
     const events  = Array.isArray(eventsResult) ? eventsResult : [];
     const fighters = Array.isArray(fightersResult) ? fightersResult : [];
-    const favFighterIds = profileExtResult.data?.fav_fighters || [];
+    const _rawFavs = profileExtResult.data?.fav_fighters;
+    const favFighterIds = Array.isArray(_rawFavs) ? _rawFavs
+      : (typeof _rawFavs === 'string' ? (() => { try { return JSON.parse(_rawFavs); } catch { return []; } })() : []);
     const eventMap = {};
     events.forEach(ev => {
       const id = ev.id || slugify(ev.name || '');
@@ -666,8 +668,8 @@
           : data.fav_fighters;
         try { localStorage.setItem(FAVS_KEY, JSON.stringify(merged)); } catch {}
       } else if (getFavs().length) {
-        // Local has data but Supabase doesn't — push local up to Supabase
-        sb.from('profiles').update({ fav_fighters: getFavs() }).eq('id', user.id).catch(() => {});
+        // Local has data but Supabase doesn't — upsert so missing profile rows get created too
+        sb.from('profiles').upsert({ id: user.id, fav_fighters: getFavs() }).catch(() => {});
       }
       // Always re-render after Supabase check so cross-device data appears
       const grid = document.getElementById('favsGrid');
@@ -682,7 +684,7 @@
     try { localStorage.setItem(FAVS_KEY, JSON.stringify(ids)); } catch {}
     window.MMABridgePush?.updateFavFighters(ids, fighterById).catch?.(() => {});
     if (sb && user?.id) {
-      sb.from('profiles').update({ fav_fighters: ids }).eq('id', user.id).then(() => {}).catch(() => {});
+      sb.from('profiles').upsert({ id: user.id, fav_fighters: ids }).catch(() => {});
     }
   }
 
