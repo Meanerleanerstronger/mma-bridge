@@ -2,10 +2,12 @@
 // MMA BRIDGE — LEADERBOARD + GROUPS
 // Ranked by total picks made (picks table)
 // Requires Supabase profiles table columns:
-//   group_code TEXT, group_name TEXT
+//   group_code TEXT, group_name TEXT, group_is_owner BOOLEAN, group_season_start TEXT
 // Run in Supabase SQL editor if missing:
 //   ALTER TABLE profiles ADD COLUMN IF NOT EXISTS group_code TEXT;
 //   ALTER TABLE profiles ADD COLUMN IF NOT EXISTS group_name TEXT;
+//   ALTER TABLE profiles ADD COLUMN IF NOT EXISTS group_is_owner BOOLEAN DEFAULT FALSE;
+//   ALTER TABLE profiles ADD COLUMN IF NOT EXISTS group_season_start TEXT;
 // ==============================================
 (async function () {
 
@@ -305,6 +307,8 @@
       return {
         user_id: uid, name: p.display_name || 'Anonymous', avatar: p.avatar_url || '',
         group_code: p.group_code || null, group_name: p.group_name || null,
+        group_is_owner: p.group_is_owner || false,
+        group_season_start: p.group_season_start || null,
         count: s.total, judged: s.judged, correct: s.correct, pct, points: s.points || 0,
         tier, tierName: tier.name, tierRank: tier.rank,
       };
@@ -329,7 +333,7 @@
   if (profileIds.length > 0) {
     const { data: pData } = await sb
       .from('profiles')
-      .select('id, display_name, avatar_url, group_code, group_name')
+      .select('id, display_name, avatar_url, group_code, group_name, group_is_owner, group_season_start')
       .in('id', profileIds);
     profilesData = pData || [];
   }
@@ -342,11 +346,14 @@
   const myProfile = myId ? (profileMap[myId] || {}) : {};
   let myGroupCode = myProfile.group_code || null;
   let myGroupName = myProfile.group_name || null;
+  let myGroupIsOwner = myProfile.group_is_owner === true;
+  let myGroupSeasonStart = myProfile.group_season_start || null;
 
   // ── Render a leaderboard table ─────────────────
   function renderTable(users, wrapId, emptyMsg) {
     const wrap = document.getElementById(wrapId);
     if (!wrap) return;
+    const currentEventId = new URLSearchParams(location.search).get('event') || '';
 
     if (!users.length) {
       wrap.innerHTML = `<div class="lb-error">${esc(emptyMsg || 'No picks yet.')}</div>`;
@@ -384,6 +391,10 @@
               <div class="lb-name">${esc(u.name)}${isMe ? ' <span class="lb-you">you</span>' : ''}</div>
               ${tierBadgeHtml(u.judged, u.pct)}
               <div class="lb-picks-sub">${u.count} total picks</div>
+              <div class="lb-row-actions">
+                <a class="lb-action-btn" href="profile.html?id=${esc(u.user_id)}">View Profile</a>
+                ${currentEventId ? `<button class="lb-action-btn lb-action-picks" data-uid="${esc(u.user_id)}" data-uname="${esc(u.name)}">View Picks</button>` : ''}
+              </div>
             </div>
           </div>
           ${statHtml}
@@ -391,12 +402,75 @@
     }).join('');
 
     wrap.innerHTML = `<div class="lb-table">${rows}</div>`;
+
+    // Wire View Picks buttons
+    wrap.querySelectorAll('.lb-action-picks').forEach(btn => {
+      btn.addEventListener('click', () => {
+        showUserPicks(btn.dataset.uid, btn.dataset.uname);
+      });
+    });
+  }
+
+  // ── Show a user's picks for a specific event in a modal ──
+  async function showUserPicks(uid, uname) {
+    const eventId = new URLSearchParams(location.search).get('event') || '';
+    if (!eventId) return;
+    // Find event name
+    const ev = allEventsRaw.find(e => e.id === eventId);
+    const evName = ev ? ev.name : eventId;
+    // Get picks for this user+event
+    const { data: upicks } = await sb.from('picks').select('fight_key, pick, method').eq('user_id', uid).eq('event_id', eventId);
+    const picks = (upicks || []).filter(p => p.fight_key !== 'fotn' && p.fight_key !== '__dd__' && p.fight_key !== '__fotn__');
+    // Build fight display
+    function fightLabel(fk) {
+      const dash = fk.lastIndexOf('-');
+      const section = fk.slice(0, dash);
+      const idx = parseInt(fk.slice(dash + 1));
+      const arr = section === 'main' ? ev?.mainCard : section === 'prelims' ? ev?.prelims : ev?.earlyPrelims;
+      const fight = arr?.[idx];
+      if (!fight) return fk;
+      return `${fight.a} vs ${fight.b}`;
+    }
+    const rows = picks.length ? picks.map(p => {
+      const wKey = `${eventId}:${p.fight_key}`;
+      const winner = winnerMap[wKey];
+      const correct = winner && p.pick?.toLowerCase() === winner;
+      const pending = !winner;
+      const cls = pending ? '' : (correct ? ' lb-pick-correct' : ' lb-pick-wrong');
+      const icon = pending ? '' : (correct ? '✓' : '✗');
+      return `<div class="lb-pick-row${cls}">
+        <span class="lb-pick-fight">${esc(fightLabel(p.fight_key))}</span>
+        <span class="lb-pick-val">${esc(p.pick || '—')}${p.method ? ` · ${esc(p.method)}` : ''}</span>
+        ${icon ? `<span class="lb-pick-icon">${icon}</span>` : ''}
+      </div>`;
+    }).join('') : '<div class="lb-pick-empty">No picks submitted for this event</div>';
+
+    // Show modal
+    let modal = document.getElementById('lbPicksModal');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = 'lbPicksModal';
+      modal.className = 'lb-modal-overlay';
+      document.body.appendChild(modal);
+    }
+    modal.innerHTML = `
+      <div class="lb-modal lb-picks-modal-inner">
+        <div class="lb-modal-header">
+          <div class="lb-modal-title">${esc(uname)}'s Picks</div>
+          <div class="lb-modal-sub">${esc(evName)}</div>
+        </div>
+        <div class="lb-picks-list">${rows}</div>
+        <button class="lb-modal-close-btn" id="lbPicksClose">Close</button>
+      </div>`;
+    modal.style.display = 'flex';
+    document.getElementById('lbPicksClose')?.addEventListener('click', () => { modal.style.display = 'none'; });
+    modal.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
   }
 
   // ── Render group status + group board ─────────
   function renderGroupStatus() {
-    const el         = document.getElementById('lbGroupStatus');
-    const groupCol   = document.getElementById('lbGroupCol');
+    const el       = document.getElementById('lbGroupStatus');
+    const groupCol = document.getElementById('lbGroupCol');
     const groupLabel = document.getElementById('lbGroupLabel');
 
     if (!myGroupCode) {
@@ -406,49 +480,131 @@
     }
 
     const groupUsers = allUsers.filter(u => u.group_code === myGroupCode);
+    const inviteUrl  = `${location.origin}/leaderboard.html?join=${myGroupCode}`;
+
+    let seasonHtml = '';
+    if (myGroupSeasonStart) {
+      const d = new Date(myGroupSeasonStart).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+      seasonHtml = `<div class="lb-group-season-info">📅 Season from <strong>${esc(d)}</strong></div>`;
+    }
+
+    let manageHtml = '';
+    if (myGroupIsOwner) {
+      const memberRows = groupUsers.filter(u => u.user_id !== myId).map(u => `
+        <div class="lb-manage-row" data-uid="${esc(u.user_id)}">
+          <span class="lb-manage-name">${esc(u.name)}</span>
+          <button class="lb-manage-remove" data-uid="${esc(u.user_id)}" data-name="${esc(u.name)}">Remove</button>
+        </div>`).join('') || '<div style="font-size:.75rem;color:rgba(255,255,255,.3);padding:4px 0">No other members yet</div>';
+
+      const defaultDate = myGroupSeasonStart ? myGroupSeasonStart.slice(0,10) : new Date().toISOString().slice(0,10);
+      manageHtml = `
+        <div class="lb-manage-section" id="lbManageSection" style="display:none">
+          <div class="lb-manage-title">Commissioner Controls</div>
+          <div class="lb-manage-members" id="lbManageMembers">${memberRows}</div>
+          <div class="lb-manage-season">
+            <label class="lb-manage-label">Season Start Date</label>
+            <div class="lb-manage-season-row">
+              <input type="date" class="lb-manage-date" id="lbSeasonDateInput" value="${esc(defaultDate)}">
+              <button class="lb-group-btn" id="btnSetSeason">Set Season</button>
+            </div>
+            <div class="lb-manage-season-hint">Only picks made after this date count in the group standings</div>
+          </div>
+        </div>`;
+    }
 
     el.innerHTML = `
       <div class="lb-group-active">
         <div class="lb-group-active-info">
           <span class="lb-group-active-name">${esc(myGroupName || 'My Group')}</span>
-          <span class="lb-group-active-meta">${groupUsers.length} member${groupUsers.length !== 1 ? 's' : ''}</span>
+          <span class="lb-group-active-meta">${groupUsers.length} member${groupUsers.length !== 1 ? 's' : ''}${myGroupIsOwner ? ' · <span class="lb-owner-badge">Commissioner</span>' : ''}</span>
+        </div>
+        ${seasonHtml}
+        <div class="lb-group-action-row">
+          <button class="lb-group-btn" id="btnCopyInvite">📋 Copy Invite Link</button>
+          ${myGroupIsOwner ? `<button class="lb-group-btn lb-group-btn-sec" id="btnManageGroup">⚙ Manage</button>` : ''}
+          <button class="lb-group-btn lb-group-btn-danger" id="btnLeaveGroup">Leave</button>
         </div>
         <div class="lb-group-code-wrap">
           <span class="lb-group-code-label">Code</span>
           <span class="lb-group-code" id="groupCodeDisplay">${esc(myGroupCode)}</span>
-          <button class="lb-group-copy" id="btnCopyCode" title="Copy code">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-          </button>
         </div>
-        <div class="lb-group-active-btns">
-          <button class="lb-group-leave" id="btnLeaveGroup">Leave Group</button>
-        </div>
+        ${manageHtml}
       </div>`;
 
     if (groupCol) groupCol.style.display = '';
     if (groupLabel) groupLabel.textContent = myGroupName || myGroupCode;
-    renderTable(groupUsers, 'lbGroupWrap', 'No picks yet in your group — share your code!');
 
-    document.getElementById('btnCopyCode')?.addEventListener('click', () => {
-      navigator.clipboard?.writeText(myGroupCode).catch(() => {});
-      const btn = document.getElementById('btnCopyCode');
-      btn.innerHTML = '✓';
-      setTimeout(() => { btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>'; }, 1500);
+    // Render group leaderboard with season filter
+    const seasonCutoff = myGroupSeasonStart ? new Date(myGroupSeasonStart).toISOString() : null;
+    const groupStatsMap = buildStatsMap(picksData, seasonCutoff);
+    const seasonUsers = buildRankedUsers(groupStatsMap).filter(u => u.group_code === myGroupCode);
+    renderTable(seasonUsers, 'lbGroupWrap', 'No picks yet in your group — share your code!');
+
+    // Copy invite link
+    document.getElementById('btnCopyInvite')?.addEventListener('click', () => {
+      navigator.clipboard?.writeText(inviteUrl).catch(() => {});
+      const btn = document.getElementById('btnCopyInvite');
+      const orig = btn.textContent;
+      btn.textContent = '✓ Copied!';
+      setTimeout(() => { if (btn) btn.textContent = orig; }, 2000);
     });
 
-    document.getElementById('btnLeaveGroup')?.addEventListener('click', async () => {
-      const btn = document.getElementById('btnLeaveGroup');
+    // Manage toggle
+    document.getElementById('btnManageGroup')?.addEventListener('click', () => {
+      const sec = document.getElementById('lbManageSection');
+      if (sec) sec.style.display = sec.style.display === 'none' ? '' : 'none';
+    });
+
+    // Remove member buttons
+    document.getElementById('lbManageMembers')?.addEventListener('click', async e => {
+      const btn = e.target.closest('.lb-manage-remove');
       if (!btn) return;
+      const uid = btn.dataset.uid;
+      const uname = btn.dataset.name;
+      if (!uid) return;
       if (btn.dataset.confirm !== '1') {
-        btn.dataset.confirm = '1';
-        btn.textContent = 'Tap again to confirm';
-        setTimeout(() => { if (btn) { btn.dataset.confirm = ''; btn.textContent = 'Leave Group'; } }, 3000);
+        btn.dataset.confirm = '1'; btn.textContent = 'Confirm?';
+        setTimeout(() => { if (btn) { btn.dataset.confirm = ''; btn.textContent = 'Remove'; } }, 3000);
         return;
       }
       btn.disabled = true;
       try {
-        await sb.from('profiles').update({ group_code: null, group_name: null }).eq('id', myId);
-        myGroupCode = null; myGroupName = null;
+        await sb.from('profiles').update({ group_code: null, group_name: null, group_is_owner: false }).eq('id', uid);
+        const row = document.querySelector(`.lb-manage-row[data-uid="${uid}"]`);
+        if (row) row.remove();
+        allUsers.forEach(u => { if (u.user_id === uid) { u.group_code = null; u.group_name = null; } });
+      } catch { btn.disabled = false; }
+    });
+
+    // Set season start
+    document.getElementById('btnSetSeason')?.addEventListener('click', async () => {
+      const dateVal = document.getElementById('lbSeasonDateInput')?.value;
+      if (!dateVal) return;
+      const btn = document.getElementById('btnSetSeason');
+      if (btn) { btn.textContent = 'Saving…'; btn.disabled = true; }
+      try {
+        const groupMemberIds = groupUsers.map(u => u.user_id);
+        // Update all group members with the season start date
+        await sb.from('profiles').update({ group_season_start: dateVal }).in('id', groupMemberIds);
+        myGroupSeasonStart = dateVal;
+        allUsers.forEach(u => { if (u.group_code === myGroupCode) u.group_season_start = dateVal; });
+        renderGroupStatus();
+      } catch { if (btn) { btn.textContent = 'Set Season'; btn.disabled = false; } }
+    });
+
+    // Leave group
+    document.getElementById('btnLeaveGroup')?.addEventListener('click', async () => {
+      const btn = document.getElementById('btnLeaveGroup');
+      if (!btn) return;
+      if (btn.dataset.confirm !== '1') {
+        btn.dataset.confirm = '1'; btn.textContent = 'Confirm leave?';
+        setTimeout(() => { if (btn) { btn.dataset.confirm = ''; btn.textContent = 'Leave'; } }, 3000);
+        return;
+      }
+      btn.disabled = true;
+      try {
+        await sb.from('profiles').update({ group_code: null, group_name: null, group_is_owner: false }).eq('id', myId);
+        myGroupCode = null; myGroupName = null; myGroupIsOwner = false; myGroupSeasonStart = null;
         allUsers.forEach(u => { if (u.user_id === myId) { u.group_code = null; u.group_name = null; } });
         renderGroupStatus();
       } catch { btn.disabled = false; }
@@ -598,8 +754,11 @@
     // ── Group leaderboard ──
     if (groupEl) {
       if (myGroupCode) {
-        const groupUsers = allUsers.filter(u => u.group_code === myGroupCode);
-        const nameHtml   = `<div class="lb-section-label" style="margin-bottom:12px">${esc(myGroupName || myGroupCode)} — ${groupUsers.length} member${groupUsers.length !== 1 ? 's' : ''}</div>`;
+        const seasonCutoff2 = myGroupSeasonStart ? new Date(myGroupSeasonStart).toISOString() : null;
+        const groupStatsMap2 = buildStatsMap(picksData, seasonCutoff2);
+        const groupUsers = buildRankedUsers(groupStatsMap2).filter(u => u.group_code === myGroupCode);
+        const seasonLabel = myGroupSeasonStart ? ` · Season from ${new Date(myGroupSeasonStart).toLocaleDateString('en-US',{month:'short',year:'numeric'})}` : '';
+        const nameHtml   = `<div class="lb-section-label" style="margin-bottom:12px">${esc(myGroupName || myGroupCode)} — ${groupUsers.length} member${groupUsers.length !== 1 ? 's' : ''}${seasonLabel}</div>`;
         const tableWrapId = 'lbMgGroupTable';
         groupEl.innerHTML = `<div class="lb-mg-group">${nameHtml}<div id="${tableWrapId}"></div></div>`;
         renderTable(groupUsers, tableWrapId, 'No picks yet in your group — share your code!');
@@ -734,6 +893,15 @@
   // ── Modals ─────────────────────────────────────
   wireModals(myId, allUsers, profileMap);
 
+  // Auto-join from invite link ?join=CODE
+  const joinParam = new URLSearchParams(location.search).get('join');
+  if (joinParam && !myGroupCode) {
+    const codeEl = document.getElementById('joinCodeInput');
+    if (codeEl) codeEl.value = joinParam.toUpperCase();
+    const modalJoinEl = document.getElementById('modalJoin');
+    if (modalJoinEl) modalJoinEl.style.display = 'flex';
+  }
+
   function wireModals(myId, allUsers, profileMap) {
     function openModal(id) { const el = document.getElementById(id); if (el) el.style.display = 'flex'; }
     function closeModal(id) { const el = document.getElementById(id); if (el) el.style.display = 'none'; }
@@ -816,9 +984,9 @@
       if (btn) { btn.textContent = 'Creating…'; btn.disabled = true; }
       try {
         const code = randCode();
-        const { error } = await sb.from('profiles').update({ group_code: code, group_name: name }).eq('id', myId);
+        const { error } = await sb.from('profiles').update({ group_code: code, group_name: name, group_is_owner: true }).eq('id', myId);
         if (error) throw error;
-        myGroupCode = code; myGroupName = name;
+        myGroupCode = code; myGroupName = name; myGroupIsOwner = true;
         if (allUsers) allUsers.forEach(u => { if (u.user_id === myId) { u.group_code = code; u.group_name = name; } });
         closeModal('modalCreate');
         if (nameEl) nameEl.value = '';
@@ -847,11 +1015,12 @@
       if (btn) { btn.textContent = 'Joining…'; btn.disabled = true; }
       try {
         // Look up group name from any member with that code
-        const { data: groupData } = await sb.from('profiles').select('group_name').eq('group_code', code).limit(1);
+        const { data: groupData } = await sb.from('profiles').select('group_name, group_season_start').eq('group_code', code).limit(1);
         const groupName = groupData?.[0]?.group_name || null;
-        const { error } = await sb.from('profiles').update({ group_code: code, group_name: groupName }).eq('id', myId);
+        const seasonStart = groupData?.[0]?.group_season_start || null;
+        const { error } = await sb.from('profiles').update({ group_code: code, group_name: groupName, group_is_owner: false, group_season_start: seasonStart }).eq('id', myId);
         if (error) throw error;
-        myGroupCode = code; myGroupName = groupName;
+        myGroupCode = code; myGroupName = groupName; myGroupIsOwner = false; myGroupSeasonStart = seasonStart;
         if (allUsers) allUsers.forEach(u => { if (u.user_id === myId) { u.group_code = code; u.group_name = groupName; } });
         closeModal('modalJoin');
         if (codeEl) codeEl.value = '';

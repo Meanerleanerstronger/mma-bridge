@@ -5055,6 +5055,113 @@ body.light-mode .cw-avatar-init { background: rgba(0,150,180,0.07) !important; b
 }
 .lb-group-leave:hover { background: rgba(255,60,60,0.14); color: #ff6060; }
 
+/* group management additions */
+.lb-group-btn-danger {
+  background: rgba(255,60,60,0.07); border-color: rgba(255,60,60,0.2); color: rgba(255,100,100,0.7);
+}
+.lb-group-btn-danger:hover { background: rgba(255,60,60,0.14); color: #ff6060; }
+.lb-group-action-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.lb-owner-badge {
+  font-family: 'Montserrat', sans-serif; font-size: 0.52rem; font-weight: 800;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  background: rgba(200,150,12,0.12); border: 1px solid rgba(200,150,12,0.3);
+  color: #c8960c; border-radius: 4px; padding: 2px 7px; vertical-align: middle;
+}
+.lb-group-season-info {
+  font-family: 'Inter', sans-serif; font-size: 0.72rem; color: rgba(200,150,12,0.7);
+  width: 100%; padding: 2px 0;
+}
+.lb-manage-section {
+  width: 100%; border-top: 1px solid rgba(255,255,255,0.07);
+  padding-top: 14px; margin-top: 4px;
+}
+.lb-manage-title {
+  font-family: 'Montserrat', sans-serif; font-size: 0.6rem; font-weight: 800;
+  letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.35);
+  margin-bottom: 10px;
+}
+.lb-manage-members { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.lb-manage-row {
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 7px; padding: 8px 12px;
+}
+.lb-manage-name { font-family: 'Inter', sans-serif; font-size: 0.82rem; color: rgba(255,255,255,0.75); }
+.lb-manage-remove {
+  font-family: 'Montserrat', sans-serif; font-size: 0.58rem; font-weight: 800;
+  letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer;
+  background: rgba(255,60,60,0.07); border: 1px solid rgba(255,60,60,0.2);
+  color: rgba(255,100,100,0.6); border-radius: 5px; padding: 5px 10px;
+  transition: all 0.15s;
+}
+.lb-manage-remove:hover { background: rgba(255,60,60,0.14); color: #ff6060; }
+.lb-manage-season { display: flex; flex-direction: column; gap: 6px; }
+.lb-manage-label {
+  font-family: 'Montserrat', sans-serif; font-size: 0.58rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3);
+}
+.lb-manage-season-row { display: flex; gap: 8px; align-items: center; }
+.lb-manage-date {
+  background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px; padding: 7px 10px; color: #fff;
+  font-family: 'Inter', sans-serif; font-size: 0.78rem;
+  color-scheme: dark;
+}
+.lb-manage-season-hint {
+  font-family: 'Inter', sans-serif; font-size: 0.68rem;
+  color: rgba(255,255,255,0.2);
+}
+
+/* per-row actions */
+.lb-row-actions { display: flex; gap: 6px; margin-top: 4px; flex-wrap: wrap; }
+.lb-action-btn {
+  font-family: 'Montserrat', sans-serif; font-size: 0.55rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.45); border-radius: 5px; padding: 5px 9px;
+  cursor: pointer; transition: all 0.15s;
+}
+.lb-action-btn:hover { background: rgba(0,229,255,0.08); border-color: rgba(0,229,255,0.25); color: #00e5ff; }
+.lb-action-picks { background: rgba(200,150,12,0.07); border-color: rgba(200,150,12,0.2); color: rgba(200,150,12,0.6); }
+.lb-action-picks:hover { background: rgba(200,150,12,0.14); border-color: rgba(200,150,12,0.4); color: #c8960c; }
+
+/* View Picks modal */
+.lb-picks-modal-inner { max-width: 480px; width: 92vw; max-height: 80vh; overflow-y: auto; }
+.lb-modal-sub { font-family: 'Inter', sans-serif; font-size: 0.78rem; color: rgba(255,255,255,0.35); margin-top: 2px; }
+.lb-picks-list { display: flex; flex-direction: column; gap: 6px; margin: 16px 0; }
+.lb-pick-row {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 8px; padding: 10px 14px;
+}
+.lb-pick-fight { flex: 1; font-family: 'Inter', sans-serif; font-size: 0.78rem; color: rgba(255,255,255,0.6); }
+.lb-pick-val { font-family: 'Montserrat', sans-serif; font-size: 0.72rem; font-weight: 700; color: #fff; }
+.lb-pick-icon { font-size: 0.85rem; min-width: 16px; text-align: center; }
+.lb-pick-correct { border-color: rgba(34,197,94,0.25); background: rgba(34,197,94,0.05); }
+.lb-pick-correct .lb-pick-val { color: #4ade80; }
+.lb-pick-correct .lb-pick-icon { color: #4ade80; }
+.lb-pick-wrong { border-color: rgba(239,68,68,0.2); background: rgba(239,68,68,0.04); }
+.lb-pick-wrong .lb-pick-val { color: rgba(255,100,100,0.7); }
+.lb-pick-wrong .lb-pick-icon { color: rgba(255,100,100,0.7); }
+.lb-pick-empty { font-family: 'Inter', sans-serif; font-size: 0.8rem; color: rgba(255,255,255,0.25); text-align: center; padding: 16px; }
+.lb-modal-close-btn {
+  width: 100%; padding: 11px; border-radius: 8px; cursor: pointer;
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.5); font-family: 'Montserrat', sans-serif;
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+}
+
+/* Picks page leaderboard button */
+.pk-lb-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'Montserrat', sans-serif; font-size: 0.62rem; font-weight: 800;
+  letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+  padding: 8px 14px; border-radius: 7px; cursor: pointer;
+  background: rgba(200,150,12,0.08); border: 1px solid rgba(200,150,12,0.25);
+  color: rgba(200,150,12,0.8); transition: all 0.15s;
+}
+.pk-lb-btn:hover { background: rgba(200,150,12,0.15); border-color: rgba(200,150,12,0.45); color: #c8960c; }
+
 /* rows */
 .lb-table { display: flex; flex-direction: column; gap: 8px; }
 
