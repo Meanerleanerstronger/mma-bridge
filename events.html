@@ -580,6 +580,103 @@
       .ov-matchup { font-size:clamp(1.5rem,7vw,2.2rem); }
     }
 
+    /* ── COMPLETED EVENT CARD ── */
+    .ev-card.is-completed { opacity:.75; }
+    .ev-card.is-completed:hover { opacity:1; }
+    .ev-perf-btn {
+      position:absolute;bottom:14px;right:20px;z-index:4;
+      display:flex;align-items:center;gap:6px;
+      background:rgba(200,150,12,.15);border:1px solid rgba(200,150,12,.4);
+      border-radius:8px;padding:7px 13px;
+      font-family:'Montserrat',sans-serif;font-size:.56rem;font-weight:800;
+      letter-spacing:.1em;text-transform:uppercase;color:#c8960c;cursor:pointer;
+      transition:background .15s;
+    }
+    .ev-perf-btn:hover{background:rgba(200,150,12,.28);}
+    .ev-completed-badge {
+      position:absolute;top:12px;left:12px;z-index:4;
+      font-family:'Montserrat',sans-serif;font-size:.52rem;font-weight:800;
+      letter-spacing:.12em;text-transform:uppercase;
+      color:rgba(255,255,255,.3);background:rgba(0,0,0,.35);
+      border:1px solid rgba(255,255,255,.1);border-radius:5px;padding:3px 8px;
+    }
+
+    /* ── PERFORMANCE MODAL ── */
+    .perf-overlay {
+      position:fixed;inset:0;z-index:6000;
+      display:flex;align-items:center;justify-content:center;padding:20px;
+    }
+    .perf-backdrop {
+      position:absolute;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);
+    }
+    .perf-panel {
+      position:relative;z-index:1;width:100%;max-width:480px;max-height:90vh;
+      background:#13131a;border:1px solid rgba(200,150,12,.25);border-radius:16px;
+      display:flex;flex-direction:column;overflow:hidden;
+      box-shadow:0 24px 80px rgba(0,0,0,.7),0 0 0 1px rgba(200,150,12,.08);
+    }
+    .perf-header {
+      display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
+      padding:20px 22px 14px;border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .perf-title { font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:900;color:#fff;text-transform:uppercase;letter-spacing:.04em; }
+    .perf-sub { font-family:'Inter',sans-serif;font-size:.72rem;color:rgba(255,255,255,.35);margin-top:3px; }
+    .perf-close { background:none;border:none;color:rgba(255,255,255,.3);font-size:.9rem;cursor:pointer;padding:2px 4px;transition:color .15s;flex-shrink:0; }
+    .perf-close:hover { color:#fff; }
+    .perf-body { flex:1;overflow-y:auto;padding:16px 22px;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.07) transparent; }
+    .perf-footer {
+      padding:12px 22px;border-top:1px solid rgba(255,255,255,.06);
+      display:flex;align-items:center;justify-content:center;
+    }
+    .perf-lb-link {
+      display:inline-flex;align-items:center;gap:7px;
+      font-family:'Montserrat',sans-serif;font-size:.65rem;font-weight:800;
+      letter-spacing:.1em;text-transform:uppercase;color:rgba(200,150,12,.6);
+      text-decoration:none;transition:color .15s;
+    }
+    .perf-lb-link:hover { color:#c8960c; }
+
+    /* Rank rows inside performance modal */
+    .perf-rank-list { display:flex;flex-direction:column;gap:8px; }
+    .perf-rank-row {
+      display:flex;align-items:center;gap:12px;
+      padding:10px 14px;border-radius:10px;
+      background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);
+    }
+    .perf-rank-row.perf-rank-1 { background:rgba(200,150,12,.08);border-color:rgba(200,150,12,.25); }
+    .perf-rank-num { font-family:'Montserrat',sans-serif;font-size:.75rem;font-weight:900;color:rgba(255,255,255,.2);width:18px;flex-shrink:0; }
+    .perf-rank-row.perf-rank-1 .perf-rank-num { color:#c8960c; }
+    .perf-rank-av { width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-size:.58rem;font-weight:800;color:rgba(255,255,255,.4);flex-shrink:0;overflow:hidden; }
+    .perf-rank-av img { width:100%;height:100%;object-fit:cover; }
+    .perf-rank-name { flex:1;font-family:'Inter',sans-serif;font-size:.82rem;font-weight:600;color:rgba(255,255,255,.75); }
+    .perf-rank-score { font-family:'Montserrat',sans-serif;font-size:.9rem;font-weight:900;color:#c8960c; }
+    .perf-rank-detail { font-family:'Inter',sans-serif;font-size:.65rem;color:rgba(255,255,255,.25);margin-left:4px; }
+    .perf-rank-trophy { font-size:.9rem;flex-shrink:0; }
+    .perf-fight-list { margin-top:18px; }
+    .perf-fight-title { font-family:'Montserrat',sans-serif;font-size:.55rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:8px; }
+    .perf-fight-row { display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04); }
+    .perf-fight-name { flex:1;font-family:'Inter',sans-serif;font-size:.7rem;color:rgba(255,255,255,.4); }
+    .perf-fight-winner { font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:800;color:#50d278; }
+    .perf-fight-method { font-family:'Inter',sans-serif;font-size:.62rem;color:rgba(255,255,255,.25); }
+    .perf-no-group { text-align:center;padding:28px 0;font-family:'Inter',sans-serif;font-size:.82rem;color:rgba(255,255,255,.3); }
+    .perf-no-group a { color:#c8960c;text-decoration:none; }
+
+    /* ── STICKY LEADERBOARD BUTTON ── */
+    .ev-lb-sticky {
+      position:fixed;bottom:24px;right:24px;z-index:4000;
+      display:flex;align-items:center;gap:8px;
+      background:rgba(200,150,12,.18);border:1.5px solid rgba(200,150,12,.5);
+      border-radius:50px;padding:12px 20px;
+      font-family:'Montserrat',sans-serif;font-size:.65rem;font-weight:800;
+      letter-spacing:.08em;text-transform:uppercase;color:#c8960c;
+      text-decoration:none;
+      box-shadow:0 4px 24px rgba(0,0,0,.5),0 0 0 1px rgba(200,150,12,.1);
+      backdrop-filter:blur(12px);
+      transition:background .15s,transform .15s;
+    }
+    .ev-lb-sticky:hover { background:rgba(200,150,12,.3);transform:translateY(-2px); }
+    @media(max-width:480px) { .ev-lb-sticky { bottom:16px;right:16px;padding:10px 16px;font-size:.6rem; } }
+
     /* ── ADD TO CALENDAR ── */
     .ov-cal-wrap { position:relative; }
     .ov-cal-btn {
@@ -733,6 +830,43 @@
       </button>
     </div>
     <div class="ev-list" id="listAll"></div>
+
+    <!-- RECENT RESULTS SECTION -->
+    <div id="evResultsSection" style="display:none">
+      <div class="ev-count-bar" style="margin-top:32px">
+        <div class="ev-count-accent"></div>
+        <div class="ev-count-label">Recent Results</div>
+        <div class="ev-count-pill" id="evResultCount"></div>
+        <a class="ev-review-btn" href="leaderboard.html" style="text-decoration:none">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="4" height="20"/><rect x="9" y="8" width="4" height="14"/><rect x="16" y="5" width="4" height="17"/></svg>
+          Full Leaderboard
+        </a>
+      </div>
+      <div class="ev-list" id="listCompleted"></div>
+    </div>
+  </div>
+
+  <!-- PERFORMANCE MODAL -->
+  <div class="perf-overlay" id="perfOverlay" style="display:none" role="dialog" aria-modal="true">
+    <div class="perf-backdrop" id="perfBackdrop"></div>
+    <div class="perf-panel">
+      <div class="perf-header">
+        <div>
+          <div class="perf-title" id="perfTitle">Group Performance</div>
+          <div class="perf-sub" id="perfSub"></div>
+        </div>
+        <button class="perf-close" id="perfClose">✕</button>
+      </div>
+      <div class="perf-body" id="perfBody">
+        <div class="lb-loading"><div class="lb-spinner"></div>Loading…</div>
+      </div>
+      <div class="perf-footer">
+        <a class="perf-lb-link" id="perfLbLink" href="leaderboard.html">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="4" height="20"/><rect x="9" y="8" width="4" height="14"/><rect x="16" y="5" width="4" height="17"/></svg>
+          View Full Leaderboard
+        </a>
+      </div>
+    </div>
   </div>
 
   <!-- PICKS HUB OVERLAY -->
@@ -1240,7 +1374,8 @@
 
     document.addEventListener('keydown',e=>{
       if(e.key==='Escape'){
-        if(document.getElementById('phOverlay')?.classList.contains('open')) closePicksHub();
+        if(document.getElementById('perfOverlay')?.style.display!=='none'&&document.getElementById('perfOverlay')?.style.display!='') closePerfModal();
+        else if(document.getElementById('phOverlay')?.classList.contains('open')) closePicksHub();
         else closeOverlay();
       }
     });
@@ -1325,7 +1460,19 @@
         document.getElementById('evReviewBtn').addEventListener('click', () => openPicksHub(upcoming));
 
         const p=new URLSearchParams(location.search), id=p.get('id');
-        if(id){ const t=upcoming.find(e=>e.id===id); if(t) setTimeout(()=>openOverlay(t),200); }
+        if(id){
+          const t=upcoming.find(e=>e.id===id)||all.find(e=>e.id===id);
+          if(t) setTimeout(()=>openOverlay(t),200);
+        }
+
+        // Load completed events (last 5, most recent first)
+        const completed = all.filter(e=>e.status==='completed').sort((a,b)=>new Date(b.isoDate)-new Date(a.isoDate)).slice(0,5);
+        const listCompleted = document.getElementById('listCompleted');
+        if (completed.length && listCompleted) {
+          completed.forEach(e=>{ const c=buildCompletedCard(e); if(c) listCompleted.appendChild(c); });
+          document.getElementById('evResultsSection').style.display='';
+          document.getElementById('evResultCount').textContent=`${completed.length} event${completed.length!==1?'s':''}`;
+        }
 
         // Load hype ratings badges after cards render
         loadHypeBadges(upcoming);
@@ -1390,6 +1537,151 @@
       document.getElementById('pwaBanner')?.setAttribute('hidden','');
       localStorage.setItem('pwa_dismissed', '1');
     });
+
+    /* ── COMPLETED EVENT CARD ── */
+    function buildCompletedCard(ev){
+      const isPPV = ev.type==='PPV', cls = isPPV ? 'ppv' : 'fn';
+      const main = getMainFight(ev); if (!main) return null;
+      const label = shortLabel(ev);
+      const matchup = `${lastName(main.a).toUpperCase()}  vs  ${lastName(main.b).toUpperCase()}`;
+      const winner = main.winner ? `Winner: ${main.winner}` : '';
+
+      const card = document.createElement('a');
+      card.href = `events.html?id=${encodeURIComponent(ev.id)}`;
+      card.className = `ev-card ${cls}`;
+      card.dataset.eventId = ev.id;
+
+      const posterEl = ev.poster
+        ? `<img class="ev-card-poster" src="${esc(ev.poster)}" alt="${esc(ev.name)}" loading="lazy" onerror="this.style.display='none'">`
+        : `<div class="ev-card-placeholder"></div>`;
+
+      card.innerHTML = `
+        ${posterEl}
+        <div class="ev-card-overlay"></div>
+        <div class="ev-card-bar"></div>
+        <div class="ev-card-content">
+          <div class="ev-card-top">
+            <span class="ev-card-badge">${isPPV?'PPV':'Fight Night'}</span>
+            <span class="ev-card-name">${esc(label)}</span>
+            <span class="ev-completed-badge">COMPLETED</span>
+          </div>
+          <div class="ev-card-matchup">${matchup}</div>
+          <div class="ev-card-sub">${esc(winner ? winner + '  ·  ' : '')}${esc(ev.date||'')}</div>
+        </div>
+        <div class="ev-card-meta">
+          <button class="ev-perf-btn" data-event-id="${esc(ev.id)}">📊 Group Performance</button>
+        </div>
+        <div class="ev-card-cta">View Results<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>`;
+
+      card.addEventListener('click', function(e){
+        if (e.metaKey||e.ctrlKey||e.shiftKey||e.button===1) return;
+        const perfBtn = e.target.closest('.ev-perf-btn');
+        if (perfBtn) { e.preventDefault(); openPerfModal(ev); return; }
+        e.preventDefault(); openOverlay(ev);
+      });
+
+      const wrap = document.createElement('div');
+      wrap.className = 'ev-card-wrap';
+      wrap.appendChild(card);
+      return wrap;
+    }
+
+    /* ── PERFORMANCE MODAL ── */
+    const perfOverlay = document.getElementById('perfOverlay');
+    const perfBackdrop = document.getElementById('perfBackdrop');
+    const perfClose = document.getElementById('perfClose');
+
+    async function openPerfModal(ev){
+      document.getElementById('perfTitle').textContent = ev.name || 'Group Performance';
+      document.getElementById('perfSub').textContent = ev.date || '';
+      document.getElementById('perfLbLink').href = `leaderboard.html?event=${encodeURIComponent(ev.id)}`;
+      document.getElementById('perfBody').innerHTML = '<div class="lb-loading"><div class="lb-spinner"></div>Loading…</div>';
+      perfOverlay.style.display = '';
+      document.body.classList.add('no-scroll');
+
+      try {
+        const sb = window._sb;
+        if (!sb) throw new Error('no sb');
+        const { data: { user } } = await sb.auth.getUser();
+        if (!user) {
+          document.getElementById('perfBody').innerHTML = '<div class="perf-no-group">Sign in to see your group\'s performance.</div>';
+          return;
+        }
+        const { data: prof } = await sb.from('profiles').select('group_code').eq('id', user.id).single();
+        const groupCode = prof?.group_code || null;
+
+        if (!groupCode) {
+          document.getElementById('perfBody').innerHTML = '<div class="perf-no-group">You\'re not in a group yet.<br><a href="leaderboard.html" style="color:#00e5ff">Join or create one →</a></div>';
+          return;
+        }
+
+        const { data: members } = await sb.from('profiles').select('id, display_name, avatar_url').eq('group_code', groupCode);
+        if (!members || !members.length) {
+          document.getElementById('perfBody').innerHTML = '<div class="perf-no-group">No group members found.</div>';
+          return;
+        }
+        const memberIds = members.map(m => m.id);
+
+        const { data: picks } = await sb.from('picks')
+          .select('user_id, fight_id, pick, is_correct')
+          .eq('event_id', ev.id)
+          .in('user_id', memberIds);
+
+        const allFights = [...(ev.mainCard||[]), ...(ev.prelims||[]), ...(ev.earlyPrelims||[])];
+        const scoredFights = allFights.filter(f => f.winner);
+
+        const memberMap = {};
+        members.forEach(m => { memberMap[m.id] = { name: m.display_name || 'User', avatar: m.avatar_url, correct: 0, total: 0 }; });
+
+        (picks || []).forEach(p => {
+          if (!memberMap[p.user_id]) return;
+          if (p.is_correct !== null && p.is_correct !== undefined) {
+            memberMap[p.user_id].total++;
+            if (p.is_correct) memberMap[p.user_id].correct++;
+          }
+        });
+
+        const ranked = Object.entries(memberMap)
+          .map(([id, d]) => ({ id, ...d, pct: d.total > 0 ? Math.round(100 * d.correct / d.total) : null }))
+          .filter(u => u.total > 0)
+          .sort((a, b) => (b.correct - a.correct) || ((b.pct||0) - (a.pct||0)));
+
+        if (!ranked.length) {
+          document.getElementById('perfBody').innerHTML = '<div class="perf-no-group">No picks recorded for this event yet.</div>';
+          return;
+        }
+
+        const medals = ['🥇','🥈','🥉'];
+        const rankRows = ranked.map((u, i) => `
+          <div class="perf-rank-row ${i===0?'perf-rank-1':''}">
+            <div class="perf-rank-num">${medals[i] || (i+1)}</div>
+            <div class="perf-rank-av">${u.avatar ? `<img src="${esc(u.avatar)}" style="width:28px;height:28px;border-radius:50%;object-fit:cover" onerror="this.style.display='none'">` : '<div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.1)"></div>'}</div>
+            <div class="perf-rank-name">${esc(u.name)}</div>
+            <div class="perf-rank-score">${u.correct}/${u.total} <span class="perf-rank-detail">${u.pct}%</span></div>
+            ${i===0?'<div class="perf-rank-trophy">🏆</div>':''}
+          </div>`).join('');
+
+        const fightRows = scoredFights.length ? scoredFights.map(f => `
+          <div class="perf-fight-row">
+            <div class="perf-fight-name">${esc(f.a)} vs ${esc(f.b)}</div>
+            <div class="perf-fight-winner">${esc(f.winner)}</div>
+            ${f.method ? `<div class="perf-fight-method">${esc(f.method)}</div>` : ''}
+          </div>`).join('') : '';
+
+        document.getElementById('perfBody').innerHTML = `
+          <div class="perf-rank-list">${rankRows}</div>
+          ${fightRows ? `<div class="perf-fight-list"><div class="perf-fight-title">Results</div>${fightRows}</div>` : ''}`;
+      } catch(e) {
+        document.getElementById('perfBody').innerHTML = '<div class="perf-no-group">Could not load performance data.</div>';
+      }
+    }
+
+    function closePerfModal(){
+      perfOverlay.style.display = 'none';
+      document.body.classList.remove('no-scroll');
+    }
+    perfClose?.addEventListener('click', closePerfModal);
+    perfBackdrop?.addEventListener('click', closePerfModal);
   </script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase.js"></script>
@@ -1420,6 +1712,12 @@
 <script src="notifications.js?v=2.1"></script>
 <script src="push.js?v=1.1"></script>
 <script src="animations.js?v=1.0"></script>
+
+<!-- Sticky Leaderboard Button -->
+<a href="leaderboard.html" class="ev-lb-sticky" title="View Leaderboard">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="4" height="20"/><rect x="9" y="8" width="4" height="14"/><rect x="16" y="5" width="4" height="17"/></svg>
+  Leaderboard
+</a>
 
 <!-- PWA Install Banner -->
 <div id="pwaBanner" hidden class="pwa-install-banner">
