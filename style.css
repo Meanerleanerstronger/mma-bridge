@@ -5805,6 +5805,7 @@ body.light-mode .ev-star-btn.starred {
   background: rgba(255,255,255,0.012);
 }
 .pk-hm-label {
+  display: flex; align-items: center;
   font-family: 'Montserrat', sans-serif;
   font-size: 0.5rem; font-weight: 900;
   letter-spacing: 0.24em; text-transform: uppercase;
@@ -6159,18 +6160,25 @@ body.light-mode .ev-star-btn.starred {
 }
 
 /* ── Double Down button ───────────────────────── */
-.pk-dd-btn {
+/* Wrap so DD btn + info btn sit on same line */
+.pk-dd-wrap {
   display: none;
-  width: 100%; padding: 9px 16px;
-  background: transparent; border: none;
+  align-items: center;
   border-top: 1px solid rgba(255,255,255,0.05);
+}
+.has-pick .pk-dd-wrap { display: flex; }
+.pk-dd-wrap .pk-info-btn { margin-right: 12px; margin-left: 0; flex-shrink: 0; }
+
+.pk-dd-btn {
+  display: flex;
+  flex: 1; padding: 9px 16px;
+  background: transparent; border: none; border-top: none;
   color: rgba(255,255,255,0.22);
   font-family: 'Montserrat', sans-serif; font-size: 0.58rem;
   font-weight: 800; letter-spacing: 0.13em; text-transform: uppercase;
   cursor: pointer; align-items: center; justify-content: center; gap: 7px;
   transition: all 0.18s ease;
 }
-.has-pick .pk-dd-btn { display: flex; }
 .pk-dd-icon { flex-shrink: 0; color: rgba(255,255,255,0.2); transition: color 0.18s; }
 .pk-dd-label { transition: color 0.18s; }
 .pk-dd-mult {
@@ -6196,6 +6204,88 @@ body.light-mode .ev-star-btn.starred {
 .pk-dd-btn.pk-dd-blocked {
   opacity: 0.28; cursor: not-allowed; pointer-events: none;
 }
+
+/* Info ? button — appears next to DD, hype label, FOTN badge */
+.pk-info-btn {
+  flex-shrink: 0;
+  width: 20px; height: 20px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 50%;
+  color: rgba(255,255,255,0.35);
+  font-family: 'Inter', sans-serif; font-size: 0.68rem; font-weight: 700;
+  cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+  transition: background 0.15s, color 0.15s;
+  line-height: 1; vertical-align: middle; margin-left: 5px;
+  padding: 0;
+}
+.pk-info-btn:hover { background: rgba(0,229,255,0.12); color: #00e5ff; border-color: rgba(0,229,255,0.3); }
+.pk-info-btn-sm { width: 16px; height: 16px; font-size: 0.6rem; margin-left: 4px; }
+.pk-info-btn-dark { background: rgba(0,0,0,0.25); border-color: rgba(255,255,255,0.15); }
+
+/* Info popup card */
+.pk-info-pop {
+  position: absolute;
+  z-index: 9999;
+  background: #141418;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.4);
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  animation: pkInfoFadeIn 0.15s ease;
+}
+@keyframes pkInfoFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.pk-info-pop-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 14px 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.pk-info-pop-title {
+  font-family: 'Montserrat', sans-serif; font-size: 0.7rem; font-weight: 800;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+}
+.pk-info-pop-close {
+  background: none; border: none; color: rgba(255,255,255,0.3);
+  font-size: 0.75rem; cursor: pointer; padding: 2px 4px;
+  transition: color 0.12s;
+}
+.pk-info-pop-close:hover { color: rgba(255,255,255,0.7); }
+.pk-info-pop-body {
+  padding: 12px 14px 14px;
+  font-size: 0.82rem; line-height: 1.65; color: rgba(255,255,255,0.52);
+}
+.pk-info-pop-body p { margin: 0 0 8px; }
+.pk-info-pop-body p:last-child { margin-bottom: 0; }
+.pk-info-pop-body strong { color: rgba(255,255,255,0.82); font-weight: 600; }
+.pk-info-examples { display: flex; flex-direction: column; gap: 5px; margin-top: 10px; }
+.pk-info-ex {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.78rem; font-family: 'Montserrat', sans-serif;
+  font-weight: 700; letter-spacing: 0.04em;
+  padding: 6px 10px; border-radius: 6px;
+}
+.pk-info-ex-icon {
+  width: 18px; height: 18px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem; font-weight: 900; flex-shrink: 0;
+}
+.pk-info-ex-good { background: rgba(0,255,136,0.07); color: rgba(0,255,136,0.75); }
+.pk-info-ex-good .pk-info-ex-icon { background: rgba(0,255,136,0.15); color: #00ff88; }
+.pk-info-ex-bad  { background: rgba(255,80,80,0.07); color: rgba(255,100,100,0.7); }
+.pk-info-ex-bad  .pk-info-ex-icon { background: rgba(255,80,80,0.15); color: #ff6060; }
+
+/* Light mode overrides */
+body.light-mode .pk-info-btn { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.12); color: rgba(0,0,0,0.35); }
+body.light-mode .pk-info-btn:hover { background: rgba(0,120,153,0.1); color: #006680; border-color: rgba(0,120,153,0.25); }
+body.light-mode .pk-info-pop { background: #f8f8fa; border-color: rgba(0,0,0,0.1); }
+body.light-mode .pk-info-pop-title { color: rgba(0,0,0,0.8); }
+body.light-mode .pk-info-pop-body { color: rgba(0,0,0,0.5); }
+body.light-mode .pk-info-pop-body strong { color: rgba(0,0,0,0.75); }
 
 /* Card golden glow when DD is active */
 .pk-dd-card {

@@ -488,7 +488,7 @@ function formatOdds(n) {
     if (lKeys.length !== mKeys.length) return true;
     for (const k of lKeys) {
       const l = localPicks[k], m = myPicks[k];
-      if (!m || l.pick !== m.pick || (l.base||'') !== (m.base||'') || (l.round||'') !== (m.round||'')) return true;
+      if (!m || l.pick !== m.pick || (l.base||'') !== (m.base||'')) return true;
     }
     return false;
   }
@@ -496,13 +496,6 @@ function formatOdds(n) {
   // ── Bulk save all picks to DB ─────────────────
   async function saveAllPicks() {
     if (!myId || !sb) { showToast('Sign in to save picks', 'err'); return; }
-    if (!localHype) {
-      showToast('Rate the hype before saving', 'err');
-      document.getElementById('pkHypeTrack')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      document.getElementById('pkHypeWidget')?.classList.add('pk-hype-shake');
-      setTimeout(() => document.getElementById('pkHypeWidget')?.classList.remove('pk-hype-shake'), 600);
-      return;
-    }
     const btn = document.getElementById('pkSaveBtn');
     if (btn) { btn.disabled = true; btn.textContent = 'Saving…'; }
     try {
@@ -783,7 +776,7 @@ function formatOdds(n) {
       cls: 'pk-fotn-bar pk-fotn-bar-empty',
       html: `
         <div class="pk-fotn-bar-left">
-          <div class="pk-fotn-bar-badge">FOTN</div>
+          <div class="pk-fotn-bar-badge">FOTN <button class="pk-info-btn pk-info-btn-sm pk-info-btn-dark" data-info="fotn" type="button" aria-label="What is FOTN?">?</button></div>
           <div class="pk-fotn-bar-hint">Which fight steals the show?</div>
         </div>
         <button class="pk-fotn-pick-btn" id="pkFotnPickBtn" type="button">Pick Fight of the Night</button>`,
@@ -1047,11 +1040,14 @@ function formatOdds(n) {
       </div>` : '';
 
     const ddBtnHtml = (!isCompleted && !isLocked) ? `
-      <button class="pk-dd-btn${isDD ? ' pk-dd-active' : ''}" data-key="${esc(key)}" type="button">
-        <svg class="pk-dd-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        <span class="pk-dd-label">${isDD ? 'UNDO DOUBLE DOWN' : 'DOUBLE DOWN'}</span>
-        <span class="pk-dd-mult">×2</span>
-      </button>` : '';
+      <div class="pk-dd-wrap">
+        <button class="pk-dd-btn${isDD ? ' pk-dd-active' : ''}" data-key="${esc(key)}" type="button">
+          <svg class="pk-dd-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <span class="pk-dd-label">${isDD ? 'UNDO DOUBLE DOWN' : 'DOUBLE DOWN'}</span>
+          <span class="pk-dd-mult">×2</span>
+        </button>
+        <button class="pk-info-btn" data-info="dd" type="button" aria-label="What is Double Down?">?</button>
+      </div>` : '';
 
     return `
       <div class="${cardCls}" data-key="${esc(key)}">
@@ -1725,7 +1721,7 @@ function formatOdds(n) {
     const label = localHype ? (HYPE_LABELS[localHype] || '') : 'Drag to rate';
     return `
       <div class="pk-hype-meter" id="pkHypeWidget">
-        <div class="pk-hm-label">HYPE</div>
+        <div class="pk-hm-label">HYPE <button class="pk-info-btn pk-info-btn-sm" data-info="hype" type="button" aria-label="What is Hype?">?</button></div>
         <div class="pk-hm-track" id="pkHypeTrack">
           <div class="pk-hm-fill" id="pkHypeFill" style="width:${pct}%"></div>
           <div class="pk-hm-thumb" id="pkHypeThumb" style="left:${pct}%;display:${pct > 0 ? 'block' : 'none'}"></div>
@@ -1941,6 +1937,7 @@ function formatOdds(n) {
     });
 
     bindInteractions();
+    bindInfoBtns();
     bindHype();
     bindFotn();
     updateFotnBar();
@@ -2022,6 +2019,81 @@ function formatOdds(n) {
         e.stopPropagation();
         showFotnConfirm(`${fd.a} vs ${fd.b}`);
       }, true);
+    });
+  }
+
+  // ── Info popup content ────────────────────────
+  const INFO_CONTENT = {
+    dd: {
+      title: 'Double Down',
+      body: `<p>Pick <strong>one fight per event</strong> to Double Down on. If you're right, all points for that fight are <strong>doubled (×2)</strong>. If you're wrong, you lose <strong>10 pts</strong>.</p>
+<p>Only one Double Down allowed per event. You can change or undo it any time before the event locks.</p>
+<div class="pk-info-examples">
+  <div class="pk-info-ex pk-info-ex-good"><span class="pk-info-ex-icon">+</span> Correct pick → ×2 all points (max 40 pts)</div>
+  <div class="pk-info-ex pk-info-ex-bad"><span class="pk-info-ex-icon">−</span> Wrong pick → −10 pts</div>
+</div>`,
+    },
+    hype: {
+      title: 'Hype Rating',
+      body: `<p>Rate how hyped you are for this event on a scale of <strong>1–10</strong> before it locks.</p>
+<p>Drag the bar to set your score. The <strong>community average</strong> appears once enough fans have rated.</p>
+<p style="color:rgba(255,255,255,.35);font-size:.78rem;margin-top:8px">Hype ratings don't affect your pick score — it's just the vibe check for the event.</p>`,
+    },
+    fotn: {
+      title: 'Fight of the Night',
+      body: `<p>Pick which fight you think will earn the <strong>Fight of the Night bonus</strong> — the most entertaining bout on the card.</p>
+<p>This is a separate pick from your winner predictions. Get it right and you earn <strong>+15 pts</strong>.</p>
+<p style="color:rgba(255,255,255,.35);font-size:.78rem;margin-top:8px">FOTN is awarded by the UFC after the event. Only one fight can win it.</p>`,
+    },
+  };
+
+  function showInfoPop(btn, infoKey) {
+    document.querySelectorAll('.pk-info-pop').forEach(p => p.remove());
+    const data = INFO_CONTENT[infoKey];
+    if (!data) return;
+    const pop = document.createElement('div');
+    pop.className = 'pk-info-pop';
+    pop.innerHTML = `
+      <div class="pk-info-pop-head">
+        <span class="pk-info-pop-title">${data.title}</span>
+        <button class="pk-info-pop-close" type="button">✕</button>
+      </div>
+      <div class="pk-info-pop-body">${data.body}</div>`;
+    document.body.appendChild(pop);
+
+    // Position near button
+    const rect = btn.getBoundingClientRect();
+    const popW = 260;
+    let left = rect.left + rect.width / 2 - popW / 2;
+    left = Math.max(12, Math.min(left, window.innerWidth - popW - 12));
+    let top = rect.top - 12;
+    pop.style.width = popW + 'px';
+    pop.style.left = left + 'px';
+    // Show above or below depending on space
+    pop.style.visibility = 'hidden';
+    pop.style.display = 'block';
+    const popH = pop.offsetHeight;
+    if (rect.top - popH - 16 > 0) {
+      pop.style.top = (rect.top + window.scrollY - popH - 10) + 'px';
+    } else {
+      pop.style.top = (rect.bottom + window.scrollY + 10) + 'px';
+    }
+    pop.style.visibility = '';
+
+    pop.querySelector('.pk-info-pop-close').addEventListener('click', () => pop.remove());
+    setTimeout(() => {
+      document.addEventListener('click', function outside(e) {
+        if (!pop.contains(e.target) && e.target !== btn) { pop.remove(); document.removeEventListener('click', outside); }
+      });
+    }, 10);
+  }
+
+  function bindInfoBtns() {
+    document.querySelectorAll('[data-info]').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        showInfoPop(btn, btn.dataset.info);
+      });
     });
   }
 
