@@ -5677,6 +5677,12 @@ body.light-mode .ev-star-btn.starred {
   color: rgba(255,255,255,0.25); margin-bottom: 12px; line-height: 1.5;
 }
 
+/* FOTN pill + How It Works on one line */
+.pk-hd-actions {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 8px;
+  margin-top: 10px;
+}
+
 /* Legacy aliases — kept for compat */
 .pk-header { max-width: 820px; margin: 0 auto; padding: 0; }
 .pk-page-eyebrow { font-family: 'Montserrat', sans-serif; font-size: 0.56rem; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(200,150,12,0.5); }
@@ -5780,7 +5786,7 @@ body.light-mode .ev-star-btn.starred {
 }
 .pk-ctrl-save {
   display: flex; justify-content: center; align-items: center;
-  padding: 14px 20px 18px;
+  padding: 10px 20px 14px;
 }
 
 /* fights container */
@@ -5805,7 +5811,6 @@ body.light-mode .ev-star-btn.starred {
   background: rgba(255,255,255,0.012);
 }
 .pk-hm-label {
-  display: flex; align-items: center;
   font-family: 'Montserrat', sans-serif;
   font-size: 0.5rem; font-weight: 900;
   letter-spacing: 0.24em; text-transform: uppercase;
@@ -7728,10 +7733,10 @@ body.light-mode .sb-section-line { background: rgba(0,0,0,0.07) !important; }
 .pk-challenge-banner {
   display: flex; align-items: center; gap: 16px;
   max-width: 1020px; margin: 0 auto 0;
-  padding: 14px 32px;
-  background: rgba(190,110,10,0.06);
-  border-top: 1px solid rgba(190,110,10,0.15);
-  border-bottom: 1px solid rgba(190,110,10,0.1);
+  padding: 8px 32px;
+  background: transparent;
+  border-top: 1px solid rgba(190,110,10,0.1);
+  border-bottom: 1px solid rgba(190,110,10,0.08);
 }
 .pk-ch-sword {
   font-size: 1.1rem; flex-shrink: 0;
@@ -7739,15 +7744,15 @@ body.light-mode .sb-section-line { background: rgba(0,0,0,0.07) !important; }
 .pk-ch-info { flex: 1; }
 .pk-ch-vs {
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.78rem; font-weight: 800;
+  font-size: 0.7rem; font-weight: 800;
   letter-spacing: 0.06em; text-transform: uppercase;
-  color: rgba(200,120,10,0.85);
+  color: rgba(200,120,10,0.7);
 }
-.pk-ch-vs strong { color: #ffaa00; }
+.pk-ch-vs strong { color: rgba(255,170,0,0.9); }
 .pk-ch-tally {
   font-family: 'Inter', sans-serif;
-  font-size: 0.72rem; color: rgba(255,255,255,0.35);
-  margin-top: 3px;
+  font-size: 0.68rem; color: rgba(255,255,255,0.28);
+  margin-top: 2px;
 }
 
 /* ── Picks: opponent pick indicator ── */
@@ -7835,7 +7840,7 @@ body.light-mode #site-disclaimer {
   font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 500;
   color: rgba(255,255,255,0.45);
   cursor: pointer; transition: all 0.18s ease;
-  margin-top: 10px;
+  margin-top: 0;
 }
 .pk-hiw-btn:hover { background: rgba(255,255,255,0.09); color: rgba(255,255,255,0.75); border-color: rgba(255,255,255,0.2); }
 
@@ -10169,7 +10174,7 @@ body.light-mode .pk-comment-input { background: rgba(0,0,0,.04) !important; bord
 /* ── FOTN reminder pill ── */
 .pk-fotn-reminder {
   display: inline-flex; align-items: center; gap: 5px;
-  margin-top: 6px;
+  margin-top: 0;
   padding: 4px 10px; border-radius: 20px;
   background: rgba(255,170,0,0.07); border: 1px solid rgba(255,170,0,0.18);
   color: rgba(255,170,0,0.75);

@@ -1721,13 +1721,14 @@ function formatOdds(n) {
     const label = localHype ? (HYPE_LABELS[localHype] || '') : 'Drag to rate';
     return `
       <div class="pk-hype-meter" id="pkHypeWidget">
-        <div class="pk-hm-label">HYPE <button class="pk-info-btn pk-info-btn-sm" data-info="hype" type="button" aria-label="What is Hype?">?</button></div>
+        <div class="pk-hm-label">HYPE</div>
         <div class="pk-hm-track" id="pkHypeTrack">
           <div class="pk-hm-fill" id="pkHypeFill" style="width:${pct}%"></div>
           <div class="pk-hm-thumb" id="pkHypeThumb" style="left:${pct}%;display:${pct > 0 ? 'block' : 'none'}"></div>
           <div class="pk-hm-track-label" id="pkHypeLabel" style="position:absolute;left:50%;transform:translateX(-50%);pointer-events:none;font-family:'Inter',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:${pct > 0 ? 'rgba(255,255,255,0.55)' : 'rgba(255,255,255,0.28)'};white-space:nowrap;">${label}</div>
         </div>
         ${hypeCount > 0 ? `<div class="pk-hype-avg-badge" id="pkHypeAvgBadge">${hypeAvg.toFixed(1)}<span class="pk-hype-denom">/10</span><span>${hypeCount} rating${hypeCount !== 1 ? 's' : ''}</span></div>` : `<div class="pk-hype-avg-badge" id="pkHypeAvgBadge" style="opacity:0"></div>`}
+        <button class="pk-info-btn pk-info-btn-sm" data-info="hype" type="button" aria-label="What is Hype?">?</button>
       </div>`;
   }
 
@@ -1798,15 +1799,16 @@ function formatOdds(n) {
             ${event.location ? `<span class="pk-meta-dot">·</span><span>${esc(event.location)}</span>` : ''}
             ${countdownHtml()}
           </div>
-          ${!isCompleted && !isLocked ? `<div class="pk-hd-sub">Predict winners · methods · rounds · Fight of the Night</div>` : ''}
-          ${!isCompleted && !isLocked ? `<div class="pk-fotn-reminder">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            Pick Fight of the Night at the bottom for +15 pts
-          </div>` : ''}
-          <button class="pk-hiw-btn" id="pkHowItWorks" type="button">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>
-            How It Works
-          </button>
+          <div class="pk-hd-actions">
+            ${!isCompleted && !isLocked ? `<div class="pk-fotn-reminder">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              +15 pts for Fight of the Night
+            </div>` : ''}
+            <button class="pk-hiw-btn" id="pkHowItWorks" type="button">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>
+              How It Works
+            </button>
+          </div>
           ${careerBadgeHtml()}
         </div>
 
@@ -1823,8 +1825,8 @@ function formatOdds(n) {
         ${challenge ? `
           <div class="pk-banner pk-challenge-banner">
             <div class="pk-ch-info">
-              <div class="pk-ch-vs">H2H vs <strong>${esc(oppName)}</strong></div>
-              <div class="pk-ch-tally">You: ${picked} picks · ${esc(oppName)}: ${oppPickCount} picks</div>
+              <div class="pk-ch-vs">H2H vs <strong>${esc(oppName.split(' ')[0])}</strong></div>
+              <div class="pk-ch-tally">You ${picked} · ${esc(oppName.split(' ')[0])} ${oppPickCount} picks</div>
             </div>
           </div>` : ''}
 
