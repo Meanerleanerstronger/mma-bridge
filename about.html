@@ -12,35 +12,31 @@
   <script src="theme.js?v=2.4"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About MMA Bridge — The UFC Fan Community Hub</title>
-  <meta name="description" content="MMA Bridge is built for UFC fans who want to go deeper — fight picks, community reviews, P4P rankings, and fighter stats all in one place.">
+  <title>How MMA Bridge Works — Pick'em Guide &amp; Features</title>
+  <meta name="description" content="Learn how MMA Bridge works — fight picks, tiers, groups, leaderboards, badges and more. Everything you need to compete all season long.">
   <link rel="canonical" href="https://mmabridge.com/about.html">
-  <meta property="og:title" content="About MMA Bridge — The UFC Fan Community Hub">
-  <meta property="og:description" content="MMA Bridge is built for UFC fans who want to go deeper — fight picks, community reviews, P4P rankings, and fighter stats all in one place.">
+  <meta property="og:title" content="How MMA Bridge Works — Pick'em Guide &amp; Features">
+  <meta property="og:description" content="Learn how MMA Bridge works — fight picks, tiers, groups, leaderboards, badges and more.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://mmabridge.com/images/mma-bridge-logo.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="About MMA Bridge — The UFC Fan Community Hub">
-  <meta name="twitter:description" content="MMA Bridge is built for UFC fans who want to go deeper — fight picks, community reviews, P4P rankings, and fighter stats all in one place.">
-  <meta name="twitter:image" content="https://mmabridge.com/images/mma-bridge-logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=6.9" />
   <style>
-    .about-page {
-      max-width: 680px;
+    .hw-page {
+      max-width: 760px;
       margin: 0 auto;
-      padding: 72px 28px 120px;
+      padding: 72px 24px 120px;
     }
 
-    .about-eyebrow {
+    .hw-eyebrow {
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.6rem; font-weight: 800;
-      letter-spacing: 0.2em; text-transform: uppercase;
+      font-size: 0.58rem; font-weight: 800;
+      letter-spacing: 0.22em; text-transform: uppercase;
       color: rgba(0,229,255,0.7);
       margin-bottom: 14px;
     }
 
-    .about-title {
+    .hw-title {
       font-family: 'Montserrat', sans-serif;
       font-weight: 900;
       font-size: clamp(2rem, 5vw, 3rem);
@@ -48,63 +44,284 @@
       letter-spacing: 0.04em;
       color: #fff;
       line-height: 1.1;
-      margin: 0 0 32px;
+      margin: 0 0 14px;
     }
-    .about-title span { color: #00e5ff; }
+    .hw-title span { color: #00e5ff; }
 
-    .about-divider {
+    .hw-lead {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+      margin: 0 0 48px;
+      max-width: 540px;
+    }
+
+    .hw-divider {
       width: 40px; height: 2px;
       background: linear-gradient(90deg, #00e5ff, transparent);
       border-radius: 2px;
       margin-bottom: 36px;
     }
 
-    .about-body {
-      font-family: 'Inter', sans-serif;
-      font-size: 1rem;
-      line-height: 1.8;
-      color: rgba(255,255,255,0.65);
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+    /* ── Section blocks ── */
+    .hw-section {
+      margin-bottom: 56px;
     }
-    .about-body p { margin: 0; }
 
-    .about-contact {
-      margin-top: 56px;
-      padding: 28px 32px;
-      background: rgba(0,229,255,0.04);
-      border: 1px solid rgba(0,229,255,0.15);
-      border-radius: 14px;
-    }
-    .about-contact-label {
+    .hw-section-label {
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.6rem; font-weight: 800;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: rgba(0,229,255,0.6);
+      font-size: 0.55rem; font-weight: 800;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(0,229,255,0.5);
       margin-bottom: 10px;
     }
-    .about-contact-text {
+
+    .hw-section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #fff;
+      margin: 0 0 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hw-section-icon {
+      font-size: 1.3rem;
+      line-height: 1;
+    }
+
+    .hw-section-body {
       font-family: 'Inter', sans-serif;
       font-size: 0.9rem;
-      color: rgba(255,255,255,0.5);
+      line-height: 1.75;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 16px;
+    }
+    .hw-section-body strong { color: rgba(255,255,255,0.9); font-weight: 600; }
+
+    /* ── Steps ── */
+    .hw-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .hw-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+    }
+    .hw-step-num {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 0.75rem;
+      color: #00e5ff;
+      min-width: 22px;
+      padding-top: 2px;
+    }
+    .hw-step-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.6);
+    }
+    .hw-step-text strong { color: rgba(255,255,255,0.9); font-weight: 600; }
+
+    /* ── Cards grid ── */
+    .hw-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .hw-card {
+      padding: 16px 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+    }
+    .hw-card-icon { font-size: 1.4rem; margin-bottom: 8px; }
+    .hw-card-name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 4px;
+    }
+    .hw-card-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.5;
+    }
+
+    /* ── Tier table ── */
+    .hw-tiers {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .hw-tier-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 10px 16px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 8px;
+    }
+    .hw-tier-badge {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      min-width: 90px;
+    }
+    .hw-tier-req {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ── FAQ ── */
+    .hw-faq { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+    .hw-faq-item {
+      padding: 16px 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+    }
+    .hw-faq-q {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 6px;
+    }
+    .hw-faq-a {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.65;
+    }
+    .hw-faq-a strong { color: rgba(255,255,255,0.7); font-weight: 600; }
+    .hw-faq-a a { color: #00e5ff; text-decoration: none; }
+    .hw-faq-a a:hover { text-decoration: underline; }
+
+    /* ── Separator ── */
+    .hw-sep {
+      height: 1px;
+      background: rgba(255,255,255,0.06);
+      margin: 48px 0;
+    }
+
+    /* ── CTA ── */
+    .hw-cta {
+      text-align: center;
+      padding: 48px 24px;
+      background: rgba(0,229,255,0.04);
+      border: 1px solid rgba(0,229,255,0.15);
+      border-radius: 16px;
+      margin-bottom: 56px;
+    }
+    .hw-cta-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1.4rem;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .hw-cta-title span { color: #00e5ff; }
+    .hw-cta-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 24px;
+    }
+    .hw-cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .hw-cta-btn {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: opacity .2s;
+    }
+    .hw-cta-btn:hover { opacity: 0.8; }
+    .hw-cta-btn.primary { background: #00e5ff; color: #040406; }
+    .hw-cta-btn.secondary { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.7); }
+
+    /* ── Contact ── */
+    .hw-contact {
+      padding: 28px 32px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+    }
+    .hw-contact-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.58rem; font-weight: 800;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 10px;
+    }
+    .hw-contact-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.4);
       line-height: 1.6;
     }
-    .about-contact-text a {
-      color: #00e5ff;
-      text-decoration: none;
-      font-weight: 500;
-    }
-    .about-contact-text a:hover { text-decoration: underline; }
+    .hw-contact-text a { color: #00e5ff; text-decoration: none; }
+    .hw-contact-text a:hover { text-decoration: underline; }
 
-    body.light-mode .about-title { color: #0a0a0f; }
-    body.light-mode .about-title span { color: #007a99; }
-    body.light-mode .about-eyebrow { color: #007a99; }
-    body.light-mode .about-body { color: rgba(0,0,0,0.6); }
-    body.light-mode .about-contact { background: rgba(0,150,180,0.05); border-color: rgba(0,150,180,0.2); }
-    body.light-mode .about-contact-label { color: rgba(0,120,150,0.7); }
-    body.light-mode .about-contact-text { color: rgba(0,0,0,0.45); }
-    body.light-mode .about-contact-text a { color: #006680; }
+    /* ── Light mode ── */
+    body.light-mode .hw-title { color: #0a0a0f; }
+    body.light-mode .hw-title span { color: #007a99; }
+    body.light-mode .hw-eyebrow,
+    body.light-mode .hw-section-label { color: #007a99; opacity: .8; }
+    body.light-mode .hw-lead,
+    body.light-mode .hw-section-body,
+    body.light-mode .hw-step-text,
+    body.light-mode .hw-card-desc,
+    body.light-mode .hw-tier-req,
+    body.light-mode .hw-faq-a { color: rgba(0,0,0,0.5); }
+    body.light-mode .hw-section-title,
+    body.light-mode .hw-card-name,
+    body.light-mode .hw-tier-badge,
+    body.light-mode .hw-faq-q { color: rgba(0,0,0,0.8); }
+    body.light-mode .hw-step,
+    body.light-mode .hw-card,
+    body.light-mode .hw-tier-row,
+    body.light-mode .hw-faq-item { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.08); }
+    body.light-mode .hw-cta { background: rgba(0,150,180,0.05); border-color: rgba(0,150,180,0.2); }
+    body.light-mode .hw-cta-title { color: #0a0a0f; }
+    body.light-mode .hw-cta-title span { color: #006680; }
+    body.light-mode .hw-cta-sub { color: rgba(0,0,0,0.45); }
+    body.light-mode .hw-cta-btn.primary { background: #007a99; }
+    body.light-mode .hw-cta-btn.secondary { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.12); color: rgba(0,0,0,0.55); }
+    body.light-mode .hw-contact { background: rgba(0,0,0,0.02); border-color: rgba(0,0,0,0.07); }
+    body.light-mode .hw-contact-label { color: rgba(0,0,0,0.3); }
+    body.light-mode .hw-contact-text { color: rgba(0,0,0,0.4); }
+    body.light-mode .hw-contact-text a { color: #006680; }
+    body.light-mode .hw-sep { background: rgba(0,0,0,0.07); }
+    body.light-mode .hw-faq-a a { color: #006680; }
+    body.light-mode .hw-step-num { color: #006680; }
   </style>
 </head>
 <body>
@@ -122,10 +339,8 @@
         <li><a href="reviews.html">Review</a></li>
         <li><a href="lucas.html">Lucas Bot</a></li>
         <li><a href="leaderboard.html">Leaderboard</a></li>
-        
         <li><a href="about.html" class="active">About</a></li>
-        <li>
-</li>
+        <li></li>
       </ul>
       <button class="theme-toggle" id="themeToggle" aria-label="Switch to light mode" title="Switch to light mode">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -152,8 +367,7 @@
       <a href="reviews.html">Review</a>
       <a href="lucas.html">Lucas Bot</a>
       <a href="leaderboard.html">Leaderboard</a>
-      
-      <a href="about.html">About</a>
+      <a href="about.html" class="active">About</a>
     </nav>
     <div class="nav-mobile-search">
       <form action="results.html" method="GET">
@@ -163,25 +377,204 @@
     <div class="nav-auth-mobile"></div>
   </div>
 
-  <div class="about-page">
-    <div class="about-eyebrow">About Us</div>
-    <h1 class="about-title">MMA <span>Bridge</span></h1>
-    <div class="about-divider"></div>
+  <div class="hw-page">
 
-    <div class="about-body">
-      <p>MMA Bridge is the home for MMA fans. We built one place to review fight cards, make your picks, follow upcoming events, and see how you stack up against the community.</p>
-      <p>We're bringing a dedicated home to reviewing and picking fights — somewhere fans can come before every event, lock in their calls, track their record, and follow the sport they love.</p>
-      <p>Our platform is built to grow with the MMA community. Whether you're a casual viewer or a die-hard follower, MMA Bridge is the place to make your voice heard on every card.</p>
-    </div>
+    <div class="hw-eyebrow">How It Works</div>
+    <h1 class="hw-title">Your <span>Guide</span> to MMA Bridge</h1>
+    <div class="hw-divider"></div>
+    <p class="hw-lead">MMA Bridge is a year-long UFC pick'em league. You and your friends compete every event — pick winners, earn points, climb the leaderboard, and see who really knows their MMA by the end of the season.</p>
 
-    <div class="about-contact">
-      <div class="about-contact-label">Contact Us</div>
-      <div class="about-contact-text">
-        Any questions, issues, or anything at all — please reach out. We want to hear from you.<br><br>
-        <a href="mailto:contact@mmabridge.com">contact@mmabridge.com</a><br><br>
-        If you have any concerns about content on this site — images, media, or anything else — please contact us directly at the email above before taking any action. We will respond promptly and sort it out.
+    <!-- ── 1. GETTING STARTED ── -->
+    <div class="hw-section">
+      <div class="hw-section-label">Step 1</div>
+      <div class="hw-section-title"><span class="hw-section-icon">🔑</span> Sign Up &amp; Join a Group</div>
+      <div class="hw-section-body">Everything is free. Create an account, then either <strong>create your own group</strong> or get an invite link from a friend and <strong>join theirs</strong>. Your group is your private league — you only compete against the people in it.</div>
+      <div class="hw-steps">
+        <div class="hw-step"><div class="hw-step-num">01</div><div class="hw-step-text">Go to <strong><a href="auth.html" style="color:#00e5ff">Sign Up</a></strong> — create an account with your email.</div></div>
+        <div class="hw-step"><div class="hw-step-num">02</div><div class="hw-step-text">Head to the <strong><a href="leaderboard.html" style="color:#00e5ff">Leaderboard</a></strong> page and click <strong>Create Group</strong>. Give it a name — this makes you the commissioner.</div></div>
+        <div class="hw-step"><div class="hw-step-num">03</div><div class="hw-step-text">Share your group's invite link with friends. They click it and get added automatically — no manual approval needed.</div></div>
+        <div class="hw-step"><div class="hw-step-num">04</div><div class="hw-step-text">As commissioner you can also <strong>set a season start date</strong> to zero everyone's stats and kick off a fresh competition.</div></div>
       </div>
     </div>
+
+    <!-- ── 2. MAKING PICKS ── -->
+    <div class="hw-section">
+      <div class="hw-section-label">Step 2</div>
+      <div class="hw-section-title"><span class="hw-section-icon">🥊</span> Make Your Fight Picks</div>
+      <div class="hw-section-body">Before each event starts, go to <strong><a href="events.html" style="color:#00e5ff">Upcoming Events</a></strong>, click any card, and hit <strong>Pick Fights</strong>. Choose the winner for as many bouts as you want — main card, prelims, early prelims. The more picks you make, the more data counts towards your accuracy score.</div>
+      <div class="hw-steps">
+        <div class="hw-step"><div class="hw-step-num">01</div><div class="hw-step-text"><strong>Picks lock</strong> when the event starts. A countdown on each card shows you exactly how long you have. Once locked, no changes.</div></div>
+        <div class="hw-step"><div class="hw-step-num">02</div><div class="hw-step-text">You can see the <strong>Community %</strong> on each fight — how the whole site is leaning. Don't just follow the crowd; going against the grain and being right earns you the <strong>Upset King</strong> badge.</div></div>
+        <div class="hw-step"><div class="hw-step-num">03</div><div class="hw-step-text">You'll also see <strong>X/Y in group</strong> on each fighter — that's how many of your group members picked them. Know who's fading who before the card goes live.</div></div>
+        <div class="hw-step"><div class="hw-step-num">04</div><div class="hw-step-text">After the event, results are entered and your picks are marked <strong>correct ✓</strong> or <strong>wrong ✗</strong> automatically.</div></div>
+      </div>
+    </div>
+
+    <!-- ── 3. SCORING ── -->
+    <div class="hw-section">
+      <div class="hw-section-label">Step 3</div>
+      <div class="hw-section-title"><span class="hw-section-icon">📊</span> How Scoring Works</div>
+      <div class="hw-section-body">Your score is <strong>accuracy</strong> — the percentage of your picks that were correct, across all judged fights. It's not about volume; picking 5 fights and getting 4 right (80%) beats picking 20 and going 12/20 (60%). You need at least <strong>10 judged picks</strong> to move off the entry tier.</div>
+      <div class="hw-cards">
+        <div class="hw-card">
+          <div class="hw-card-icon">✅</div>
+          <div class="hw-card-name">Correct Pick</div>
+          <div class="hw-card-desc">You picked the winner. Counts toward your accuracy score.</div>
+        </div>
+        <div class="hw-card">
+          <div class="hw-card-icon">⏳</div>
+          <div class="hw-card-name">Pending</div>
+          <div class="hw-card-desc">Fight hasn't happened yet, or results haven't been entered.</div>
+        </div>
+        <div class="hw-card">
+          <div class="hw-card-icon">❌</div>
+          <div class="hw-card-name">Wrong Pick</div>
+          <div class="hw-card-desc">You picked the loser. Still counts toward your total — no hiding.</div>
+        </div>
+        <div class="hw-card">
+          <div class="hw-card-icon">🏆</div>
+          <div class="hw-card-name">Accuracy %</div>
+          <div class="hw-card-desc">Correct ÷ Total judged picks. This is your rank on the leaderboard.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 4. TIERS ── -->
+    <div class="hw-section">
+      <div class="hw-section-label">Step 4</div>
+      <div class="hw-section-title"><span class="hw-section-icon">🎖️</span> Tier Rankings</div>
+      <div class="hw-section-body">Your accuracy earns you a tier. Tiers are displayed on your profile and the leaderboard. Hit <strong>10 judged picks</strong> to start climbing. Reach <strong>Legend</strong> and you've mastered the sport.</div>
+      <div class="hw-tiers">
+        <div class="hw-tier-row"><div class="hw-tier-badge" style="color:rgba(255,255,255,0.4)">Rookie</div><div class="hw-tier-req">Starting tier — under 10 judged picks</div></div>
+        <div class="hw-tier-row"><div class="hw-tier-badge" style="color:rgba(255,255,255,0.4)">Candidate</div><div class="hw-tier-req">10+ picks unlocked, any accuracy</div></div>
+        <div class="hw-tier-row"><div class="hw-tier-badge" style="color:#b0b0b0">Iron</div><div class="hw-tier-req">Under 50% accuracy</div></div>
+        <div class="hw-tier-row"><div class="hw-tier-badge" style="color:#cd7f32">Bronze</div><div class="hw-tier-req">50–54%</div></div>
+        <div class="hw-tier-row"><div class="hw-tier-badge" style="color:#a8a9ad">Silver</div><div class="hw-tier-req">55–59%</div></div>
+        <div class="hw-tier-row"><div class="hw-tier-badge" style="color:#c8a84b">Gold</div><div class="hw-tier-req">60–64%</div></div>
+        <div class="hw-tier-row"><div class="hw-tier-badge" style="color:#e5e4e2">Platinum</div><div class="hw-tier-req">65–69%</div></div>
+        <div class="hw-tier-row"><div class="hw-tier-badge" style="color:#b9f2ff">Diamond</div><div class="hw-tier-req">70–74%</div></div>
+        <div class="hw-tier-row"><div class="hw-tier-badge" style="color:#00e5ff">Legend</div><div class="hw-tier-req">75%+ accuracy</div></div>
+      </div>
+    </div>
+
+    <!-- ── 5. LEADERBOARD ── -->
+    <div class="hw-section">
+      <div class="hw-section-label">Step 5</div>
+      <div class="hw-section-title"><span class="hw-section-icon">📈</span> The Leaderboard</div>
+      <div class="hw-section-body">The <strong><a href="leaderboard.html" style="color:#00e5ff">Leaderboard</a></strong> has two views: your <strong>Group</strong> standings and the <strong>Global</strong> community rankings. Switch between <em>All Time</em>, <em>This Month</em>, <em>This Week</em>, and <em>Last 10 Events</em> to see who's hot right now versus who's been consistent all season.</div>
+      <div class="hw-steps">
+        <div class="hw-step"><div class="hw-step-num">📋</div><div class="hw-step-text"><strong>Group tab</strong> — only your group members. This is your league table.</div></div>
+        <div class="hw-step"><div class="hw-step-num">🌍</div><div class="hw-step-text"><strong>Community tab</strong> — everyone on MMA Bridge. Climb the global ranks too.</div></div>
+        <div class="hw-step"><div class="hw-step-num">⚔️</div><div class="hw-step-text"><strong>Head-to-Head</strong> — challenge any group member to a direct comparison. Who has the edge this month?</div></div>
+        <div class="hw-step"><div class="hw-step-num">📊</div><div class="hw-step-text"><strong>Group Performance</strong> — on completed event cards, hit the 📊 button to see exactly how your group scored on that card, fight by fight.</div></div>
+      </div>
+    </div>
+
+    <!-- ── 6. BADGES ── -->
+    <div class="hw-section">
+      <div class="hw-section-label">Extras</div>
+      <div class="hw-section-title"><span class="hw-section-icon">🏅</span> Achievement Badges</div>
+      <div class="hw-section-body">Badges appear on your profile when you hit milestones. They're bragging rights — show them off.</div>
+      <div class="hw-cards">
+        <div class="hw-card"><div class="hw-card-icon">⚡</div><div class="hw-card-name">Dark Horse</div><div class="hw-card-desc">Called an underdog upset — you picked the fighter nobody believed in.</div></div>
+        <div class="hw-card"><div class="hw-card-icon">👑</div><div class="hw-card-name">Upset King</div><div class="hw-card-desc">Called 3 or more upsets across all events. You fade favourites for a living.</div></div>
+        <div class="hw-card"><div class="hw-card-icon">🔥</div><div class="hw-card-name">Hot Hand</div><div class="hw-card-desc">On a winning streak across 5 consecutive events. Don't break it.</div></div>
+        <div class="hw-card"><div class="hw-card-icon">💯</div><div class="hw-card-name">Perfect Card</div><div class="hw-card-desc">Got every pick right in a single event (minimum 3 fights). Flawless.</div></div>
+        <div class="hw-card"><div class="hw-card-icon">M</div><div class="hw-card-name">Pick Master</div><div class="hw-card-desc">Made 30 or more picks in total. You're always in the action.</div></div>
+        <div class="hw-card"><div class="hw-card-icon">V</div><div class="hw-card-name">Veteran</div><div class="hw-card-desc">Picked at least 5 different events. Season-long commitment.</div></div>
+      </div>
+    </div>
+
+    <!-- ── 7. GROUP WALL ── -->
+    <div class="hw-section">
+      <div class="hw-section-label">Extras</div>
+      <div class="hw-section-title"><span class="hw-section-icon">💬</span> Group Wall</div>
+      <div class="hw-section-body">Your group has a <strong>wall</strong> on the leaderboard page — a private comment feed just for your crew. Talk trash before cards, react after stoppages, celebrate when your pick lands by KO in round 1. Scroll down on the Group tab to find it.</div>
+    </div>
+
+    <!-- ── 8. HYPE RATINGS ── -->
+    <div class="hw-section">
+      <div class="hw-section-label">Extras</div>
+      <div class="hw-section-title"><span class="hw-section-icon">🔥</span> Event Hype Ratings</div>
+      <div class="hw-section-body">On every event, you can rate your hype for the card on a scale of <strong>1–10</strong>. The community average shows on the event card and overlay so you can see how much buzz a show is generating — MEH all the way up to MUST-SEE.</div>
+      <div class="hw-cards">
+        <div class="hw-card"><div class="hw-card-icon">1–2</div><div class="hw-card-name">Meh / Sleeper</div><div class="hw-card-desc">Nobody's talking about this one.</div></div>
+        <div class="hw-card"><div class="hw-card-icon">5–6</div><div class="hw-card-name">Decent / Solid</div><div class="hw-card-desc">Good card, worth watching.</div></div>
+        <div class="hw-card"><div class="hw-card-icon">8–9</div><div class="hw-card-name">Very Hyped / Elite</div><div class="hw-card-desc">Block your calendar. This is a big one.</div></div>
+        <div class="hw-card"><div class="hw-card-icon">10</div><div class="hw-card-name">Must-See</div><div class="hw-card-desc">Max hype. Event of the year contender.</div></div>
+      </div>
+    </div>
+
+    <!-- ── 9. PROFILE ── -->
+    <div class="hw-section">
+      <div class="hw-section-label">Extras</div>
+      <div class="hw-section-title"><span class="hw-section-icon">👤</span> Your Profile</div>
+      <div class="hw-section-body">Your <strong>profile</strong> shows your accuracy over time, recent pick history, current tier, best streak, badges earned, and your favourite fighters. Click any user's name on the leaderboard to see their public profile and compare records.</div>
+    </div>
+
+    <div class="hw-sep"></div>
+
+    <!-- ── FAQ ── -->
+    <div class="hw-section">
+      <div class="hw-section-title" style="margin-bottom:16px"><span class="hw-section-icon">❓</span> Frequently Asked Questions</div>
+      <div class="hw-faq">
+        <div class="hw-faq-item">
+          <div class="hw-faq-q">When do picks lock?</div>
+          <div class="hw-faq-a">Picks lock the moment the event's main card starts. A live countdown on each event card tells you exactly how long you have. Once locked, you can't change or add picks for that event.</div>
+        </div>
+        <div class="hw-faq-item">
+          <div class="hw-faq-q">What if I only pick the main card and skip prelims?</div>
+          <div class="hw-faq-a">That's fine. Your accuracy is calculated only from fights you actually picked. You won't be penalised for fights you didn't pick — but you also won't get credit. Pick more fights for a more accurate reflection of your knowledge.</div>
+        </div>
+        <div class="hw-faq-item">
+          <div class="hw-faq-q">When are results entered after an event?</div>
+          <div class="hw-faq-a">Results are usually entered within 24 hours of an event ending. Once entered, your picks update automatically — you'll see the ✓ and ✗ on your picks page and your stats will update.</div>
+        </div>
+        <div class="hw-faq-item">
+          <div class="hw-faq-q">How do groups work — can I be in more than one?</div>
+          <div class="hw-faq-a">Currently each account is in one group at a time. Your picks still count on the global leaderboard regardless of group. If you want to run a separate league, you'd need a separate account for now — multi-group support is on the roadmap.</div>
+        </div>
+        <div class="hw-faq-item">
+          <div class="hw-faq-q">What does the commissioner do?</div>
+          <div class="hw-faq-a">The commissioner (group creator) can: <strong>set a season start date</strong> (which zeros stats and starts a fresh competition from that point), <strong>remove members</strong> from the group, and share the invite link. That's it — picks and results are the same for everyone.</div>
+        </div>
+        <div class="hw-faq-item">
+          <div class="hw-faq-q">How does the season start date work?</div>
+          <div class="hw-faq-a">When the commissioner sets a season start date, the group leaderboard only counts picks made after that date. It's a clean reset without deleting anyone's historical data. The global leaderboard always shows all-time stats separately.</div>
+        </div>
+        <div class="hw-faq-item">
+          <div class="hw-faq-q">Are all UFC events included automatically?</div>
+          <div class="hw-faq-a">Yes. Every upcoming UFC card is added to the site and automatically counts toward the season — no setup needed from your group. Just show up and pick.</div>
+        </div>
+        <div class="hw-faq-item">
+          <div class="hw-faq-q">How do I get the Hot Hand badge?</div>
+          <div class="hw-faq-a">Win more than 50% of your judged picks in 5 consecutive events. Your current streak is shown on your profile — 3+ events lights it up with 🔥.</div>
+        </div>
+        <div class="hw-faq-item">
+          <div class="hw-faq-q">Something's wrong / I have a question</div>
+          <div class="hw-faq-a">Email us at <a href="mailto:contact@mmabridge.com">contact@mmabridge.com</a> and we'll sort it out fast.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CTA ── -->
+    <div class="hw-cta">
+      <div class="hw-cta-title">Ready to <span>Compete?</span></div>
+      <div class="hw-cta-sub">Pick your first event, join a group, and start climbing.</div>
+      <div class="hw-cta-btns">
+        <a href="events.html" class="hw-cta-btn primary">View Events</a>
+        <a href="leaderboard.html" class="hw-cta-btn secondary">Leaderboard</a>
+      </div>
+    </div>
+
+    <div class="hw-contact">
+      <div class="hw-contact-label">Contact</div>
+      <div class="hw-contact-text">
+        Questions, issues, or anything at all — <a href="mailto:contact@mmabridge.com">contact@mmabridge.com</a><br><br>
+        If you have concerns about content on this site (images, media, etc.) please reach out before taking any action. We respond promptly.
+      </div>
+    </div>
+
   </div>
 
   <script>
@@ -203,7 +596,7 @@
   <script src="search.js"></script>
   <script src="premium.js?v=3.3"></script>
   <script src="widget.js"></script>
-<script src="notifications.js?v=2.1"></script>
-<script src="push.js?v=1.1"></script>
+  <script src="notifications.js?v=2.1"></script>
+  <script src="push.js?v=1.1"></script>
 </body>
 </html>

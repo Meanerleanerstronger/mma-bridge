@@ -676,6 +676,20 @@
     }
     .ev-lb-sticky:hover { background:rgba(200,150,12,.3);transform:translateY(-2px); }
     @media(max-width:480px) { .ev-lb-sticky { bottom:16px;right:16px;padding:10px 16px;font-size:.6rem; } }
+    .ev-help-btn {
+      position:fixed;bottom:76px;right:24px;z-index:4000;
+      width:40px;height:40px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      font-family:'Montserrat',sans-serif;font-size:.9rem;font-weight:900;
+      color:rgba(0,229,255,.8);
+      background:rgba(0,229,255,.08);border:1.5px solid rgba(0,229,255,.3);
+      text-decoration:none;
+      box-shadow:0 4px 16px rgba(0,0,0,.4);
+      backdrop-filter:blur(12px);
+      transition:background .15s,transform .15s;
+    }
+    .ev-help-btn:hover { background:rgba(0,229,255,.18);transform:translateY(-2px); }
+    @media(max-width:480px) { .ev-help-btn { bottom:64px;right:16px;width:36px;height:36px;font-size:.82rem; } }
 
     /* ── ADD TO CALENDAR ── */
     .ov-cal-wrap { position:relative; }
@@ -1718,6 +1732,9 @@
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="4" height="20"/><rect x="9" y="8" width="4" height="14"/><rect x="16" y="5" width="4" height="17"/></svg>
   Leaderboard
 </a>
+
+<!-- Sticky Help Button -->
+<a href="about.html" class="ev-help-btn" title="How it works">?</a>
 
 <!-- PWA Install Banner -->
 <div id="pwaBanner" hidden class="pwa-install-banner">
