@@ -325,6 +325,9 @@ function formatOdds(n) {
 
   // ── Community picks ───────────────────────────
   let communityPicks = {}; // { 'main-0': { 'Fighter A': 5, 'Fighter B': 3 } }
+  let groupPicks = {};     // same shape but only group members
+  let myGroupCode = null;
+  let groupMemberIds = new Set();
 
   async function loadCommunityPicks() {
     if (!sb) return;
@@ -337,6 +340,29 @@ function formatOdds(n) {
       (data || []).forEach(p => {
         if (!communityPicks[p.fight_key]) communityPicks[p.fight_key] = {};
         communityPicks[p.fight_key][p.pick] = (communityPicks[p.fight_key][p.pick] || 0) + 1;
+      });
+    } catch {}
+  }
+
+  async function loadGroupContext() {
+    if (!myId || !sb) return;
+    try {
+      const { data: prof } = await sb.from('profiles').select('group_code').eq('id', myId).single();
+      myGroupCode = prof?.group_code || null;
+      if (!myGroupCode) return;
+      const { data: members } = await sb.from('profiles').select('id').eq('group_code', myGroupCode);
+      groupMemberIds = new Set((members || []).map(m => m.id));
+      if (!groupMemberIds.size) return;
+      const { data: gpicks } = await sb.from('picks')
+        .select('user_id, fight_key, pick')
+        .eq('event_id', eventId)
+        .in('user_id', [...groupMemberIds])
+        .neq('fight_key', 'fotn')
+        .neq('fight_key', '__dd__');
+      groupPicks = {};
+      (gpicks || []).forEach(p => {
+        if (!groupPicks[p.fight_key]) groupPicks[p.fight_key] = {};
+        groupPicks[p.fight_key][p.pick] = (groupPicks[p.fight_key][p.pick] || 0) + 1;
       });
     } catch {}
   }
@@ -411,7 +437,7 @@ function formatOdds(n) {
     } catch {}
   }
 
-  await Promise.all([loadChallenge(), loadEventExtras(), loadCommunityPicks(), prefetchNextEvent(), loadCareerStats(), loadOdds(eventId)]);
+  await Promise.all([loadChallenge(), loadEventExtras(), loadCommunityPicks(), loadGroupContext(), prefetchNextEvent(), loadCareerStats(), loadOdds(eventId)]);
   loadFollowFeed();
 
   // ── Get fight data from key ───────────────────
@@ -972,6 +998,15 @@ function formatOdds(n) {
     const commLabelB = (showComm && commPctB !== null)
       ? `<div class="fc-comm-pct${commPctB >= 50 ? ' fc-comm-majority' : ''}"><span class="fc-comm-lbl">COMMUNITY</span><span class="fc-comm-num">${commPctB}%</span><span class="fc-comm-sub">picked this</span></div>` : '';
 
+    // Group pick count labels (show when user has a group)
+    const gComm = groupPicks[key] || {};
+    const gCountA = gComm[f.a] || 0;
+    const gCountB = gComm[f.b] || 0;
+    const gSize = groupMemberIds.size;
+    const showGroup = gSize > 0 && (gCountA > 0 || gCountB > 0);
+    const groupLabelA = showGroup ? `<div class="fc-group-breakdown"><span class="fc-group-bd-num">${gCountA}/${gSize}</span><span class="fc-group-bd-txt">in group</span></div>` : '';
+    const groupLabelB = showGroup ? `<div class="fc-group-breakdown"><span class="fc-group-bd-num">${gCountB}/${gSize}</span><span class="fc-group-bd-txt">in group</span></div>` : '';
+
     // Method row (slides in when picked) — keep sb-method-wrap + add fc-method-row
     const methodWrap = !isCompleted ? `
       <div class="sb-method-wrap fc-method-row${hasPick ? ' visible' : ''}" id="pkMethod-${esc(key)}">
@@ -1006,6 +1041,7 @@ function formatOdds(n) {
                 ${oddsTagA}
               </div>
               ${commLabelA}
+              ${groupLabelA}
               ${badgeA}
               ${oppBadgeA}
             </div>
@@ -1021,6 +1057,7 @@ function formatOdds(n) {
                 ${recB ? `<span class="fc-record">${esc(recB)}</span>` : ''}
               </div>
               ${commLabelB}
+              ${groupLabelB}
               ${badgeB}
               ${oppBadgeB}
             </div>

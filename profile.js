@@ -185,8 +185,9 @@
       else otherRunning = 0;
     }
 
-    // ── Dark horse badge for other user ──────────────────────
+    // ── Dark horse + upsets for other user ───────────────────
     let otherHasDarkHorse = false;
+    let otherUpsetCount = 0;
     picks.forEach(p => {
       const ev = eventMap[p.event_id];
       if (!ev) return;
@@ -196,13 +197,22 @@
           if (!f.winner) return;
           const isCorrect = p.pick?.toLowerCase() === (f.winner||'').toLowerCase();
           const pickedB = p.pick?.toLowerCase() === (f.b||'').toLowerCase();
-          if (isCorrect && pickedB) otherHasDarkHorse = true;
+          if (isCorrect && pickedB) { otherHasDarkHorse = true; otherUpsetCount++; }
         });
       });
     });
+
+    // ── Perfect card check for other user ────────────────────
+    const otherHasPerfectCard = Object.values(otherEvStats).some(s => s.scored >= 3 && s.correct === s.scored);
+
     const otherBadges = [];
-    if (otherHasDarkHorse) otherBadges.push({ icon: '⚡', name: 'Dark Horse', desc: 'Called an underdog win' });
-    if (otherBestStreak >= 3) otherBadges.push({ icon: '🔥', name: 'On a Run', desc: `${otherBestStreak}-event best streak` });
+    if (otherHasDarkHorse)            otherBadges.push({ icon: '⚡', name: 'Dark Horse',   desc: 'Called an underdog win' });
+    if (otherBestStreak >= 3)         otherBadges.push({ icon: '🔥', name: 'On a Run',     desc: `${otherBestStreak}-event best streak` });
+    if (otherCurrentStreak >= 5)      otherBadges.push({ icon: '🔥', name: 'Hot Hand',     desc: `${otherCurrentStreak}-event current streak` });
+    if (otherUpsetCount >= 3)         otherBadges.push({ icon: '👑', name: 'Upset King',   desc: `Called ${otherUpsetCount} upsets` });
+    if (otherHasPerfectCard)          otherBadges.push({ icon: '💯', name: 'Perfect Card', desc: 'Got all picks right in an event' });
+    if (picks.length >= 30)           otherBadges.push({ icon: 'M',  name: 'Pick Master',  desc: '30+ total picks' });
+    if (Object.keys(otherEvStats).length >= 5) otherBadges.push({ icon: 'V', name: 'Veteran', desc: 'Picked 5+ events' });
 
     // H2H challenge record for viewed user
     let chWins = 0, chLosses = 0, chTies = 0;
@@ -356,7 +366,7 @@
             <div class="pr-stat-lbl">Events Rated</div>
           </div>
           <div class="pr-stat">
-            <div class="pr-stat-num">${otherCurrentStreak}</div>
+            <div class="pr-stat-num">${otherCurrentStreak}${otherCurrentStreak >= 3 ? '<span class="pr-streak-fire">🔥</span>' : ''}</div>
             <div class="pr-stat-lbl">Current Streak</div>
           </div>
           ${chTotal > 0 ? `<div class="pr-stat">
@@ -694,8 +704,9 @@
     ? (ratings.reduce((s, r) => s + Number(r.hype_rating), 0) / totalRatings).toFixed(1)
     : '—';
 
-  // ── Dark horse: correctly picked the "b" fighter (typically underdog/second-listed) ──
+  // ── Dark horse + upset count: correctly picked the "b" fighter ──
   let hasDarkHorse = false;
+  let upsetCount = 0;
   allPicks.forEach(p => {
     const ev = eventMap[p.event_id];
     if (!ev) return;
@@ -706,7 +717,7 @@
         if (!f.winner) return;
         const isCorrect = p.pick?.toLowerCase() === (f.winner||'').toLowerCase();
         const pickedB = p.pick?.toLowerCase() === (f.b||'').toLowerCase();
-        if (isCorrect && pickedB) hasDarkHorse = true;
+        if (isCorrect && pickedB) { hasDarkHorse = true; upsetCount++; }
       });
     });
   });
@@ -734,13 +745,15 @@
 
   // ── Compute badges ────────────────────────────
   const BADGES = [
-    { id: 'sharp',     icon: 'S', name: 'Sharp',        desc: '70%+ accuracy on any event',       check: () => pickHistory.some(e => e.pct >= 70) },
-    { id: 'perfect',   icon: 'P', name: 'Perfect Card', desc: '100% correct on an event',          check: () => pickHistory.some(e => e.pct === 100) },
-    { id: 'veteran',   icon: 'V', name: 'Veteran',      desc: 'Picked 5+ events',                  check: () => pickHistory.length >= 5 },
-    { id: 'rater',     icon: 'C', name: 'Critic',       desc: 'Rated 5+ events',                   check: () => ratings.length >= 5 },
-    { id: 'dayone',    icon: 'D', name: 'Day One',      desc: 'Early adopter (joined before 2026)', check: () => new Date(user.created_at) < new Date('2026-01-01') },
-    { id: 'picker',    icon: 'M', name: 'Pick Master',  desc: '30+ total picks across all events', check: () => totalPicksAll >= 30 },
-    { id: 'darkhorse', icon: '⚡', name: 'Dark Horse',  desc: 'Correctly called an underdog win',  check: () => hasDarkHorse },
+    { id: 'sharp',     icon: 'S',  name: 'Sharp',        desc: '70%+ accuracy on any event',        check: () => pickHistory.some(e => e.pct >= 70) },
+    { id: 'perfect',   icon: '💯', name: 'Perfect Card', desc: '100% correct on an event',           check: () => pickHistory.some(e => e.pct === 100 && e.total >= 3) },
+    { id: 'veteran',   icon: 'V',  name: 'Veteran',      desc: 'Picked 5+ events',                   check: () => pickHistory.length >= 5 },
+    { id: 'rater',     icon: 'C',  name: 'Critic',       desc: 'Rated 5+ events',                    check: () => ratings.length >= 5 },
+    { id: 'dayone',    icon: 'D',  name: 'Day One',      desc: 'Early adopter (joined before 2026)',  check: () => new Date(user.created_at) < new Date('2026-01-01') },
+    { id: 'picker',    icon: 'M',  name: 'Pick Master',  desc: '30+ total picks across all events',  check: () => totalPicksAll >= 30 },
+    { id: 'darkhorse', icon: '⚡', name: 'Dark Horse',   desc: 'Correctly called an underdog win',   check: () => hasDarkHorse },
+    { id: 'hothand',   icon: '🔥', name: 'Hot Hand',     desc: '5-event winning streak',             check: () => currentStreak >= 5 },
+    { id: 'upsetking', icon: '👑', name: 'Upset King',   desc: 'Called 3+ upsets across all events', check: () => upsetCount >= 3 },
   ];
   const earnedBadges = BADGES.filter(b => b.check());
 
@@ -817,7 +830,7 @@
             <div class="pr-stat-lbl">Picks Made</div>
           </div>
           <div class="pr-stat">
-            <div class="pr-stat-num" id="statStreak">${currentStreak}</div>
+            <div class="pr-stat-num" id="statStreak">${currentStreak}${currentStreak >= 3 ? '<span class="pr-streak-fire">🔥</span>' : ''}</div>
             <div class="pr-stat-lbl">Current Streak</div>
           </div>
           <div class="pr-stat">

@@ -10176,3 +10176,109 @@ button:active, [role="button"]:active, .lb-tab:active, .pk-seg-btn:active,
   cursor: pointer; transition: all 0.18s ease;
 }
 .pk-replay-btn:hover { background: rgba(255,255,255,0.09); color: rgba(255,255,255,0.8); }
+
+/* ── Event card lock countdown badge ── */
+.ev-lock-badge {
+  display: inline-flex; align-items: center;
+  font-family: 'Montserrat', sans-serif; font-size: 0.52rem; font-weight: 800;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: #c8960c; background: rgba(200,150,12,0.12);
+  border: 1px solid rgba(200,150,12,0.35);
+  border-radius: 5px; padding: 3px 7px; margin-bottom: 4px;
+  white-space: nowrap;
+}
+.ev-lock-badge.is-locked { color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.12); }
+
+/* ── PWA install banner ── */
+.pwa-install-banner {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 9000;
+  display: flex; align-items: center; gap: 12px;
+  background: rgba(10,10,14,0.96); border-top: 1px solid rgba(200,150,12,0.3);
+  padding: 14px 20px; backdrop-filter: blur(16px);
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.5);
+}
+.pwa-banner-icon { font-size: 1.4rem; flex-shrink: 0; }
+.pwa-banner-text { flex: 1; min-width: 0; }
+.pwa-banner-title { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; font-weight: 800; color: #fff; }
+.pwa-banner-sub { font-family: 'Inter', sans-serif; font-size: 0.68rem; color: rgba(255,255,255,0.4); margin-top: 2px; }
+.pwa-banner-btn {
+  flex-shrink: 0; padding: 9px 18px; border-radius: 8px;
+  background: rgba(200,150,12,0.18); border: 1px solid rgba(200,150,12,0.5);
+  color: #c8960c; font-family: 'Montserrat', sans-serif; font-size: 0.72rem; font-weight: 800;
+  letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer;
+  transition: background 0.15s;
+}
+.pwa-banner-btn:hover { background: rgba(200,150,12,0.28); }
+.pwa-banner-dismiss {
+  flex-shrink: 0; background: none; border: none;
+  color: rgba(255,255,255,0.25); font-size: 1rem; cursor: pointer; padding: 4px 6px;
+  transition: color 0.15s;
+}
+.pwa-banner-dismiss:hover { color: rgba(255,255,255,0.6); }
+
+/* ── Group pick breakdown on fight cards ── */
+.fc-group-breakdown {
+  display: flex; align-items: center; gap: 4px;
+  margin-top: 4px;
+}
+.fc-group-bd-num {
+  font-family: 'Montserrat', sans-serif; font-size: 0.72rem; font-weight: 900;
+  color: #c8960c;
+}
+.fc-group-bd-txt {
+  font-family: 'Inter', sans-serif; font-size: 0.6rem; font-weight: 500;
+  color: rgba(200,150,12,0.5); text-transform: uppercase; letter-spacing: 0.06em;
+}
+
+/* ── Group wall (leaderboard my-group tab) ── */
+.lb-wall-wrap { margin-top: 24px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 18px; }
+.lb-wall-title { font-family: 'Montserrat', sans-serif; font-size: 0.62rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.22); margin-bottom: 12px; }
+.lb-wall-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; max-height: 320px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.08) transparent; }
+.lb-wall-comment { display: flex; gap: 10px; }
+.lb-wall-av { width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-size: 0.58rem; font-weight: 800; color: rgba(255,255,255,0.4); flex-shrink: 0; overflow: hidden; }
+.lb-wall-av img { width: 100%; height: 100%; object-fit: cover; }
+.lb-wall-body { flex: 1; min-width: 0; }
+.lb-wall-meta { display: flex; align-items: center; gap: 6px; margin-bottom: 2px; }
+.lb-wall-name { font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600; color: rgba(255,255,255,0.65); }
+.lb-wall-time { font-family: 'Inter', sans-serif; font-size: 0.62rem; color: rgba(255,255,255,0.22); }
+.lb-wall-text { font-family: 'Inter', sans-serif; font-size: 0.78rem; color: rgba(255,255,255,0.55); line-height: 1.45; word-break: break-word; }
+.lb-wall-empty { font-family: 'Inter', sans-serif; font-size: 0.78rem; color: rgba(255,255,255,0.2); padding: 8px 0; }
+.lb-wall-form { display: flex; gap: 8px; }
+.lb-wall-input {
+  flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px; padding: 9px 12px; color: rgba(255,255,255,0.8);
+  font-family: 'Inter', sans-serif; font-size: 0.8rem; outline: none;
+  transition: border-color 0.15s;
+}
+.lb-wall-input:focus { border-color: rgba(200,150,12,0.4); }
+.lb-wall-input::placeholder { color: rgba(255,255,255,0.2); }
+.lb-wall-post {
+  flex-shrink: 0; padding: 9px 16px; border-radius: 8px;
+  background: rgba(200,150,12,0.15); border: 1px solid rgba(200,150,12,0.4);
+  color: #c8960c; font-family: 'Montserrat', sans-serif; font-size: 0.65rem; font-weight: 800;
+  letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer;
+  transition: background 0.15s;
+}
+.lb-wall-post:hover { background: rgba(200,150,12,0.25); }
+.lb-wall-post:disabled { opacity: 0.4; cursor: default; }
+
+/* ── Group recap (last event scorecard) ── */
+.lb-recap-wrap { margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 18px; }
+.lb-recap-title { font-family: 'Montserrat', sans-serif; font-size: 0.62rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.22); margin-bottom: 4px; }
+.lb-recap-evname { font-family: 'Montserrat', sans-serif; font-size: 0.82rem; font-weight: 800; color: rgba(255,255,255,0.65); margin-bottom: 14px; }
+.lb-recap-table { width: 100%; border-collapse: collapse; }
+.lb-recap-th { font-family: 'Montserrat', sans-serif; font-size: 0.55rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.28); padding: 0 8px 8px; text-align: center; }
+.lb-recap-th.fight-th { text-align: left; min-width: 100px; }
+.lb-recap-td { padding: 6px 8px; border-top: 1px solid rgba(255,255,255,0.04); text-align: center; }
+.lb-recap-td.fight-td { text-align: left; font-family: 'Inter', sans-serif; font-size: 0.72rem; color: rgba(255,255,255,0.45); }
+.lb-recap-pick { font-family: 'Inter', sans-serif; font-size: 0.72rem; color: rgba(255,255,255,0.45); }
+.lb-recap-pick.correct { color: #50d278; font-weight: 700; }
+.lb-recap-pick.wrong { color: rgba(255,80,80,0.7); }
+.lb-recap-pick.no-pick { color: rgba(255,255,255,0.15); }
+.lb-recap-score-row { display: flex; align-items: center; gap: 10px; padding: 10px 0 4px; border-top: 1px solid rgba(255,255,255,0.06); margin-top: 8px; flex-wrap: wrap; }
+.lb-recap-score-chip { display: flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 4px 10px; }
+.lb-recap-score-name { font-family: 'Inter', sans-serif; font-size: 0.68rem; color: rgba(255,255,255,0.45); }
+.lb-recap-score-val { font-family: 'Montserrat', sans-serif; font-size: 0.78rem; font-weight: 900; color: #c8960c; }
+
+/* ── Streak fire indicator on profiles ── */
+.pr-streak-fire { display: inline-block; margin-left: 4px; font-size: 0.85em; vertical-align: middle; }

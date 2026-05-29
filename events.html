@@ -848,6 +848,17 @@
       const days=ev.isoDate?daysUntil(ev.isoDate):null;
       const dayLabel=days===null?'':days<=0?'TODAY':days===1?'TOMORROW':`${days}D AWAY`;
       const soon=days!==null&&days>0&&days<=7, isToday=days!==null&&days<=0;
+
+      // Lock countdown badge
+      let lockBadge='', lockLocked=false;
+      if(ev.start_time){
+        const ms=new Date(ev.start_time)-Date.now();
+        if(ms<=0){ lockBadge='PICKS LOCKED'; lockLocked=true; }
+        else if(ms<48*3600000){
+          const h=Math.floor(ms/3600000), m=Math.floor((ms%3600000)/60000);
+          lockBadge=h>0?`LOCKS IN ${h}h ${m}m`:`LOCKS IN ${m}m`;
+        }
+      }
       const label=shortLabel(ev);
       const matchup=`${lastName(main.a).toUpperCase()}  vs  ${lastName(main.b).toUpperCase()}`;
       const weightSub=main.titleFight
@@ -860,6 +871,7 @@
       card.className=`ev-card ${cls}`;
       card.setAttribute('aria-label',`Open ${ev.name}`);
       card.dataset.eventId=ev.id;
+      if(ev.start_time) card.dataset.startTime=ev.start_time;
 
       const posterEl=ev.poster
         ?`<img class="ev-card-poster" src="${esc(ev.poster)}" alt="${esc(ev.name)}" loading="lazy" onerror="this.style.display='none'">`
@@ -879,6 +891,7 @@
           <div class="ev-card-sub">${esc(weightSub)}</div>
         </div>
         <div class="ev-card-meta">
+          ${lockBadge?`<div class="ev-lock-badge${lockLocked?' is-locked':''}" data-lock-badge>${lockBadge}</div>`:''}
           ${dayLabel?`<div class="ev-card-days${soon?' soon':isToday?' today':''}">${dayLabel}</div>`:''}
           <div class="ev-card-date">${esc(ev.date||'')}</div>
           ${ev.location?`<div class="ev-card-location">${esc(ev.location)}</div>`:''}
@@ -1328,6 +1341,55 @@
       }
     }
     loadEvents();
+
+    // Live-update lock countdown badges every 60s
+    setInterval(() => {
+      document.querySelectorAll('.ev-card[data-start-time]').forEach(card => {
+        const st = card.dataset.startTime;
+        if (!st) return;
+        const ms = new Date(st) - Date.now();
+        let badge = card.querySelector('[data-lock-badge]');
+        if (ms <= 0) {
+          if (!badge) {
+            badge = document.createElement('div');
+            badge.setAttribute('data-lock-badge', '');
+            card.querySelector('.ev-card-meta')?.prepend(badge);
+          }
+          badge.className = 'ev-lock-badge is-locked';
+          badge.textContent = 'PICKS LOCKED';
+        } else if (ms < 48 * 3600000) {
+          const h = Math.floor(ms / 3600000), m = Math.floor((ms % 3600000) / 60000);
+          if (!badge) {
+            badge = document.createElement('div');
+            badge.setAttribute('data-lock-badge', '');
+            card.querySelector('.ev-card-meta')?.prepend(badge);
+          }
+          badge.className = 'ev-lock-badge';
+          badge.textContent = h > 0 ? `LOCKS IN ${h}h ${m}m` : `LOCKS IN ${m}m`;
+        }
+      });
+    }, 60000);
+
+    // PWA install prompt
+    let _pwaPrompt = null;
+    window.addEventListener('beforeinstallprompt', e => {
+      e.preventDefault();
+      _pwaPrompt = e;
+      if (!localStorage.getItem('pwa_dismissed')) {
+        document.getElementById('pwaBanner')?.removeAttribute('hidden');
+      }
+    });
+    document.getElementById('pwaInstallBtn')?.addEventListener('click', async () => {
+      if (!_pwaPrompt) return;
+      _pwaPrompt.prompt();
+      const { outcome } = await _pwaPrompt.userChoice;
+      if (outcome === 'accepted') document.getElementById('pwaBanner')?.setAttribute('hidden','');
+      _pwaPrompt = null;
+    });
+    document.getElementById('pwaBannerDismiss')?.addEventListener('click', () => {
+      document.getElementById('pwaBanner')?.setAttribute('hidden','');
+      localStorage.setItem('pwa_dismissed', '1');
+    });
   </script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase.js"></script>
@@ -1358,5 +1420,16 @@
 <script src="notifications.js?v=2.1"></script>
 <script src="push.js?v=1.1"></script>
 <script src="animations.js?v=1.0"></script>
+
+<!-- PWA Install Banner -->
+<div id="pwaBanner" hidden class="pwa-install-banner">
+  <div class="pwa-banner-icon">📱</div>
+  <div class="pwa-banner-text">
+    <div class="pwa-banner-title">Add MMA Bridge to your home screen</div>
+    <div class="pwa-banner-sub">Quick access — no app store needed</div>
+  </div>
+  <button id="pwaInstallBtn" class="pwa-banner-btn">Install</button>
+  <button id="pwaBannerDismiss" class="pwa-banner-dismiss">✕</button>
+</div>
 </body>
 </html>

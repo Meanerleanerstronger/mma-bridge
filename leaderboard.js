@@ -8,6 +8,18 @@
 //   ALTER TABLE profiles ADD COLUMN IF NOT EXISTS group_name TEXT;
 //   ALTER TABLE profiles ADD COLUMN IF NOT EXISTS group_is_owner BOOLEAN DEFAULT FALSE;
 //   ALTER TABLE profiles ADD COLUMN IF NOT EXISTS group_season_start TEXT;
+//
+// Group wall — run once in Supabase SQL editor:
+//   CREATE TABLE IF NOT EXISTS group_comments (
+//     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+//     user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+//     group_code TEXT NOT NULL,
+//     content TEXT NOT NULL,
+//     created_at TIMESTAMPTZ DEFAULT now()
+//   );
+//   ALTER TABLE group_comments ENABLE ROW LEVEL SECURITY;
+//   CREATE POLICY "read_group_comments" ON group_comments FOR SELECT USING (true);
+//   CREATE POLICY "insert_group_comments" ON group_comments FOR INSERT WITH CHECK (auth.uid() = user_id);
 // ==============================================
 (async function () {
 
@@ -747,6 +759,168 @@
     return { pts, correct, judged };
   }
 
+  function timeAgo(iso) {
+    if (!iso) return '';
+    const diff = Date.now() - new Date(iso).getTime();
+    const mins = Math.floor(diff / 60000);
+    if (mins < 2) return 'just now';
+    if (mins < 60) return `${mins}m ago`;
+    const h = Math.floor(mins / 60);
+    if (h < 24) return `${h}h ago`;
+    return `${Math.floor(h / 24)}d ago`;
+  }
+
+  function renderGroupRecap(groupUsers) {
+    const el = document.getElementById('lbMgRecap');
+    if (!el || !myGroupCode) return;
+
+    // Find most recent completed event
+    const completed = allEventsRaw
+      .filter(e => e.status === 'completed' && e.isoDate)
+      .sort((a, b) => new Date(b.isoDate) - new Date(a.isoDate));
+    if (!completed.length) { el.innerHTML = ''; return; }
+
+    const ev = completed[0];
+    const mainFights = ev.mainCard || [];
+    if (!mainFights.length) { el.innerHTML = ''; return; }
+
+    const memberIds = new Set(groupUsers.map(u => u.user_id));
+    const evPicks = picksData.filter(p => p.event_id === ev.id && memberIds.has(p.user_id) && p.fight_key !== 'fotn' && p.fight_key !== '__dd__');
+
+    // Build pick map: userId -> fightKey -> pick
+    const pickMap = {};
+    evPicks.forEach(p => {
+      if (!pickMap[p.user_id]) pickMap[p.user_id] = {};
+      pickMap[p.user_id][p.fight_key] = p.pick;
+    });
+
+    const fights = mainFights.map((f, i) => ({ f, key: `main-${i}` }));
+    const lastName = n => (n||'').trim().split(' ').pop();
+
+    const headerCols = `<th class="lb-recap-th fight-th">Fight</th>` +
+      groupUsers.map(u => `<th class="lb-recap-th">${esc((u.name||'?').split(' ')[0])}</th>`).join('');
+
+    const rows = fights.map(({ f, key }) => {
+      const winner = winnerMap[`${ev.id}:${key}`];
+      const cells = groupUsers.map(u => {
+        const pick = pickMap[u.user_id]?.[key];
+        if (!pick) return `<td class="lb-recap-td"><span class="lb-recap-pick no-pick">—</span></td>`;
+        const pickLast = lastName(pick);
+        if (!winner) return `<td class="lb-recap-td"><span class="lb-recap-pick">${esc(pickLast)}</span></td>`;
+        const correct = pick.toLowerCase() === winner;
+        return `<td class="lb-recap-td"><span class="lb-recap-pick ${correct ? 'correct' : 'wrong'}">${esc(pickLast)} ${correct ? '✓' : '✗'}</span></td>`;
+      }).join('');
+      return `<tr><td class="lb-recap-td fight-td">${esc(lastName(f.a))} vs ${esc(lastName(f.b))}</td>${cells}</tr>`;
+    }).join('');
+
+    const evScores = groupUsers.map(u => {
+      const uPicks = evPicks.filter(p => p.user_id === u.user_id);
+      const correct = uPicks.filter(p => winnerMap[`${ev.id}:${p.fight_key}`] && p.pick?.toLowerCase() === winnerMap[`${ev.id}:${p.fight_key}`]).length;
+      const judged = uPicks.filter(p => winnerMap[`${ev.id}:${p.fight_key}`] !== undefined).length;
+      return { name: u.name, correct, judged };
+    }).filter(s => s.judged > 0).sort((a, b) => b.correct - a.correct);
+
+    const scoreRow = evScores.length ? `<div class="lb-recap-score-row">
+      ${evScores.map(s => `<div class="lb-recap-score-chip"><span class="lb-recap-score-name">${esc((s.name||'?').split(' ')[0])}</span><span class="lb-recap-score-val">${s.correct}/${s.judged}</span></div>`).join('')}
+    </div>` : '';
+
+    el.innerHTML = `
+      <div class="lb-recap-wrap">
+        <div class="lb-recap-title">Last Event Scorecard</div>
+        <div class="lb-recap-evname">${esc(ev.name || ev.id)}</div>
+        <div style="overflow-x:auto">
+          <table class="lb-recap-table">
+            <thead><tr>${headerCols}</tr></thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>
+        ${scoreRow}
+      </div>`;
+  }
+
+  async function renderGroupWall() {
+    const el = document.getElementById('lbMgWall');
+    if (!el || !myGroupCode || !sb) return;
+
+    const userMap = {};
+    allUsers.forEach(u => { userMap[u.user_id] = { name: u.name, avatar: u.avatar_url }; });
+
+    async function loadWallComments() {
+      try {
+        const { data, error } = await sb.from('group_comments')
+          .select('id, user_id, content, created_at')
+          .eq('group_code', myGroupCode)
+          .order('created_at', { ascending: false })
+          .limit(30);
+        if (error) throw error;
+        return data || [];
+      } catch { return null; }
+    }
+
+    function renderComments(comments) {
+      const listEl = el.querySelector('.lb-wall-list');
+      if (!listEl) return;
+      if (comments === null) {
+        listEl.innerHTML = `<div class="lb-wall-empty">Group wall unavailable — run the SQL migration above to enable it.</div>`;
+        return;
+      }
+      if (!comments.length) {
+        listEl.innerHTML = `<div class="lb-wall-empty">No posts yet — be first to hype up the group!</div>`;
+        return;
+      }
+      listEl.innerHTML = comments.map(c => {
+        const u = userMap[c.user_id] || {};
+        const initials = ((u.name || '?').split(' ').map(w => w[0]).join('').toUpperCase().slice(0,2));
+        const avHtml = u.avatar
+          ? `<img src="${esc(u.avatar)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+          : '';
+        return `
+          <div class="lb-wall-comment">
+            <div class="lb-wall-av">${avHtml}<span${u.avatar ? ' style="display:none"' : ''}>${esc(initials)}</span></div>
+            <div class="lb-wall-body">
+              <div class="lb-wall-meta">
+                <span class="lb-wall-name">${esc(u.name || 'Member')}</span>
+                <span class="lb-wall-time">${timeAgo(c.created_at)}</span>
+              </div>
+              <div class="lb-wall-text">${esc(c.content)}</div>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    el.innerHTML = `
+      <div class="lb-wall-wrap">
+        <div class="lb-wall-title">Group Wall</div>
+        <div class="lb-wall-list"><div class="lb-wall-empty">Loading…</div></div>
+        ${myId ? `<div class="lb-wall-form">
+          <input class="lb-wall-input" id="lbWallInput" type="text" placeholder="Say something to your group…" maxlength="280" autocomplete="off">
+          <button class="lb-wall-post" id="lbWallPost">Post</button>
+        </div>` : ''}
+      </div>`;
+
+    const comments = await loadWallComments();
+    renderComments(comments);
+
+    document.getElementById('lbWallPost')?.addEventListener('click', async () => {
+      const input = document.getElementById('lbWallInput');
+      const content = input?.value.trim();
+      if (!content || !myId) return;
+      const btn = document.getElementById('lbWallPost');
+      btn.disabled = true;
+      try {
+        await sb.from('group_comments').insert({ user_id: myId, group_code: myGroupCode, content });
+        input.value = '';
+        const updated = await loadWallComments();
+        renderComments(updated);
+      } catch {}
+      btn.disabled = false;
+    });
+
+    document.getElementById('lbWallInput')?.addEventListener('keydown', e => {
+      if (e.key === 'Enter') document.getElementById('lbWallPost')?.click();
+    });
+  }
+
   function renderMyGroupView() {
     const groupEl  = document.getElementById('lbMgGroupSection');
     const challEl  = document.getElementById('lbMgChallengeSection');
@@ -760,8 +934,10 @@
         const seasonLabel = myGroupSeasonStart ? ` · Season from ${new Date(myGroupSeasonStart).toLocaleDateString('en-US',{month:'short',year:'numeric'})}` : '';
         const nameHtml   = `<div class="lb-section-label" style="margin-bottom:12px">${esc(myGroupName || myGroupCode)} — ${groupUsers.length} member${groupUsers.length !== 1 ? 's' : ''}${seasonLabel}</div>`;
         const tableWrapId = 'lbMgGroupTable';
-        groupEl.innerHTML = `<div class="lb-mg-group">${nameHtml}<div id="${tableWrapId}"></div></div>`;
+        groupEl.innerHTML = `<div class="lb-mg-group">${nameHtml}<div id="${tableWrapId}"></div><div id="lbMgRecap"></div><div id="lbMgWall"></div></div>`;
         renderTable(groupUsers, tableWrapId, 'No picks yet in your group — share your code!');
+        renderGroupRecap(groupUsers);
+        renderGroupWall();
       } else {
         groupEl.innerHTML = `<div class="lb-mg-empty">
           <div class="lb-mg-empty-title">No group yet</div>
