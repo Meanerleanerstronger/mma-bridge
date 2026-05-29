@@ -10282,3 +10282,42 @@ button:active, [role="button"]:active, .lb-tab:active, .pk-seg-btn:active,
 
 /* ── Streak fire indicator on profiles ── */
 .pr-streak-fire { display: inline-block; margin-left: 4px; font-size: 0.85em; vertical-align: middle; }
+
+/* ── Who's Picked tracker ── */
+.pk-who-picked { margin: 0 0 18px; padding: 14px 18px; background: rgba(0,229,255,0.04); border: 1px solid rgba(0,229,255,0.12); border-radius: 12px; }
+.pk-wp-label { font-family: 'Montserrat', sans-serif; font-size: 0.62rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(0,229,255,0.6); margin-bottom: 10px; }
+.pk-wp-pips { display: flex; flex-wrap: wrap; gap: 8px; }
+.pk-wp-pip { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; font-family: 'Montserrat', sans-serif; font-size: 0.62rem; font-weight: 800; letter-spacing: 0.04em; cursor: default; }
+.pk-wp-done { background: rgba(80,210,120,0.15); border: 1.5px solid rgba(80,210,120,0.5); color: #50d278; }
+.pk-wp-pending { background: rgba(255,255,255,0.04); border: 1.5px dashed rgba(255,255,255,0.2); color: rgba(255,255,255,0.3); }
+.pk-wp-you { position: absolute; bottom: -14px; left: 50%; transform: translateX(-50%); font-family: 'Inter', sans-serif; font-size: 0.52rem; font-weight: 600; color: rgba(0,229,255,0.7); white-space: nowrap; }
+
+/* ── Mini group standings widget on events page ── */
+.ev-group-widget { margin: 32px 0 0; padding: 18px 22px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; }
+.ev-gw-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.ev-gw-title { font-family: 'Montserrat', sans-serif; font-size: 0.62rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+.ev-gw-link { font-family: 'Montserrat', sans-serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(0,229,255,0.6); text-decoration: none; }
+.ev-gw-link:hover { color: #00e5ff; }
+.ev-gw-rows { display: flex; flex-direction: column; gap: 6px; }
+.ev-gw-row { display: flex; align-items: center; gap: 12px; padding: 8px 10px; background: rgba(255,255,255,0.02); border-radius: 8px; }
+.ev-gw-row.ev-gw-first { background: rgba(200,150,12,0.08); border: 1px solid rgba(200,150,12,0.2); }
+.ev-gw-rank { font-family: 'Montserrat', sans-serif; font-size: 0.72rem; font-weight: 900; color: rgba(255,255,255,0.25); min-width: 18px; }
+.ev-gw-row.ev-gw-first .ev-gw-rank { color: #c8960c; }
+.ev-gw-name { font-family: 'Inter', sans-serif; font-size: 0.82rem; color: rgba(255,255,255,0.7); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ev-gw-score { font-family: 'Montserrat', sans-serif; font-size: 0.72rem; font-weight: 700; color: rgba(255,255,255,0.4); }
+.ev-gw-row.ev-gw-first .ev-gw-score { color: #c8960c; }
+.ev-gw-empty { font-family: 'Inter', sans-serif; font-size: 0.8rem; color: rgba(255,255,255,0.25); text-align: center; padding: 12px 0; }
+
+/* ── New user onboarding banner ── */
+.mb-onboard-banner { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); z-index: 5000; width: min(420px, calc(100vw - 32px)); background: #07070a; border: 1.5px solid rgba(0,229,255,0.3); border-radius: 16px; padding: 18px 20px; box-shadow: 0 8px 40px rgba(0,0,0,0.7); display: flex; flex-direction: column; gap: 12px; animation: slideUpFade .35s cubic-bezier(.22,1,.36,1); }
+@keyframes slideUpFade { from { opacity:0; transform: translateX(-50%) translateY(20px); } to { opacity:1; transform: translateX(-50%) translateY(0); } }
+.mb-ob-title { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 0.9rem; letter-spacing: 0.03em; text-transform: uppercase; color: #fff; }
+.mb-ob-title span { color: #00e5ff; }
+.mb-ob-steps { display: flex; flex-direction: column; gap: 6px; }
+.mb-ob-step { display: flex; align-items: center; gap: 10px; font-family: 'Inter', sans-serif; font-size: 0.8rem; color: rgba(255,255,255,0.55); }
+.mb-ob-step-num { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 0.65rem; color: #00e5ff; min-width: 18px; }
+.mb-ob-step strong { color: rgba(255,255,255,0.85); }
+.mb-ob-btns { display: flex; gap: 8px; }
+.mb-ob-btn { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 9px 16px; border-radius: 8px; text-decoration: none; border: none; cursor: pointer; }
+.mb-ob-btn.primary { background: #00e5ff; color: #040406; }
+.mb-ob-btn.dismiss { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.45); }

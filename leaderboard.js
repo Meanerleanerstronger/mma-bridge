@@ -534,6 +534,7 @@
         <div class="lb-group-action-row">
           <button class="lb-group-btn" id="btnCopyInvite">📋 Copy Invite Link</button>
           ${myGroupIsOwner ? `<button class="lb-group-btn lb-group-btn-sec" id="btnManageGroup">⚙ Manage</button>` : ''}
+          <a class="lb-group-btn lb-group-btn-recap" href="recap.html" style="text-decoration:none">🏆 Season Recap</a>
           <button class="lb-group-btn lb-group-btn-danger" id="btnLeaveGroup">Leave</button>
         </div>
         <div class="lb-group-code-wrap">

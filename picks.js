@@ -295,6 +295,26 @@ function formatOdds(n) {
 
   await loadPicks();
 
+  // ── New results notification ──────────────────
+  // Show a banner the first time a user sees results for an event they picked
+  if (isCompleted && myId) {
+    const seenKey = `pk_seen_results_${eventId}`;
+    const hasSeen = localStorage.getItem(seenKey);
+    const myJudgedPicks = Object.entries(myPicks).filter(([k]) => k !== 'fotn' && k !== '__dd__');
+    if (!hasSeen && myJudgedPicks.length > 0) {
+      localStorage.setItem(seenKey, '1');
+      // Banner injected after render()
+      setTimeout(() => {
+        const { correct, total } = computeScore ? computeScore() : { correct: 0, total: 0 };
+        if (total > 0) {
+          const pct = Math.round((correct / total) * 100);
+          const emoji = pct >= 70 ? '🔥' : pct >= 50 ? '💪' : '😬';
+          showToast(`Results in! You went ${correct}/${total} — ${pct}% ${emoji}`, 'ok');
+        }
+      }, 800);
+    }
+  }
+
   // ── Load community hype avg from backend ──────
   async function loadEventExtras() {
     try {
@@ -328,6 +348,8 @@ function formatOdds(n) {
   let groupPicks = {};     // same shape but only group members
   let myGroupCode = null;
   let groupMemberIds = new Set();
+  let groupMembers = [];        // [{ id, display_name }]
+  let groupMembersWhoPickedIds = new Set(); // members who submitted ≥1 pick this event
 
   async function loadCommunityPicks() {
     if (!sb) return;
@@ -350,8 +372,9 @@ function formatOdds(n) {
       const { data: prof } = await sb.from('profiles').select('group_code').eq('id', myId).single();
       myGroupCode = prof?.group_code || null;
       if (!myGroupCode) return;
-      const { data: members } = await sb.from('profiles').select('id').eq('group_code', myGroupCode);
-      groupMemberIds = new Set((members || []).map(m => m.id));
+      const { data: members } = await sb.from('profiles').select('id, display_name').eq('group_code', myGroupCode);
+      groupMembers = members || [];
+      groupMemberIds = new Set(groupMembers.map(m => m.id));
       if (!groupMemberIds.size) return;
       const { data: gpicks } = await sb.from('picks')
         .select('user_id, fight_key, pick')
@@ -360,7 +383,9 @@ function formatOdds(n) {
         .neq('fight_key', 'fotn')
         .neq('fight_key', '__dd__');
       groupPicks = {};
+      groupMembersWhoPickedIds = new Set();
       (gpicks || []).forEach(p => {
+        groupMembersWhoPickedIds.add(p.user_id);
         if (!groupPicks[p.fight_key]) groupPicks[p.fight_key] = {};
         groupPicks[p.fight_key][p.pick] = (groupPicks[p.fight_key][p.pick] || 0) + 1;
       });
@@ -1252,6 +1277,32 @@ function formatOdds(n) {
     return `<div class="pk-career-badge pk-career-badge-${cls}">${careerCorrect}/${careerJudged} all-time · ${pct}%</div>`;
   }
 
+  // ── Who's Picked tracker ─────────────────────
+  function whoPickedHtml() {
+    if (!myGroupCode || groupMembers.length < 2 || isCompleted) return '';
+    const hasPicked  = groupMembers.filter(m => groupMembersWhoPickedIds.has(m.id));
+    const notPicked  = groupMembers.filter(m => !groupMembersWhoPickedIds.has(m.id));
+    const iLocked = isLocked;
+    const pickedRows = hasPicked.map(m => {
+      const isMe = m.id === myId;
+      return `<span class="pk-wp-pip pk-wp-done" title="${esc(m.display_name||'User')}">${esc((m.display_name||'?').slice(0,2).toUpperCase())}${isMe?'<span class="pk-wp-you">you</span>':''}</span>`;
+    }).join('');
+    const notRows = notPicked.map(m => {
+      const isMe = m.id === myId;
+      return `<span class="pk-wp-pip pk-wp-pending" title="${esc(m.display_name||'User')}">${esc((m.display_name||'?').slice(0,2).toUpperCase())}${isMe?'<span class="pk-wp-you">you</span>':''}</span>`;
+    }).join('');
+    const label = iLocked
+      ? `${hasPicked.length}/${groupMembers.length} picked before lock`
+      : notPicked.length === 0
+        ? `Everyone in the group has picked 🎉`
+        : `${notPicked.length} still need${notPicked.length===1?'s':''} to pick`;
+    return `
+      <div class="pk-who-picked">
+        <div class="pk-wp-label">${label}</div>
+        <div class="pk-wp-pips">${pickedRows}${notRows}</div>
+      </div>`;
+  }
+
   // Full score hero for completed events
   function scoreHero() {
     if (!isCompleted) return '';
@@ -1780,6 +1831,8 @@ function formatOdds(n) {
               <div class="pk-ch-tally">You: ${picked} picks · ${esc(oppName)}: ${oppPickCount} picks</div>
             </div>
           </div>` : ''}
+
+        ${whoPickedHtml()}
 
         ${scoreHero()}
 

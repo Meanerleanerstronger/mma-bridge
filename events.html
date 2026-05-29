@@ -858,6 +858,9 @@
       </div>
       <div class="ev-list" id="listCompleted"></div>
     </div>
+
+    <!-- MINI GROUP STANDINGS -->
+    <div id="evGroupWidget" style="display:none"></div>
   </div>
 
   <!-- PERFORMANCE MODAL -->
@@ -1551,6 +1554,97 @@
       document.getElementById('pwaBanner')?.setAttribute('hidden','');
       localStorage.setItem('pwa_dismissed', '1');
     });
+
+    /* ── Mini Group Standings Widget ── */
+    async function loadGroupWidget() {
+      const sb = window._sb;
+      if (!sb) return;
+      try {
+        const { data: { user } } = await sb.auth.getUser();
+        if (!user) return;
+        const { data: prof } = await sb.from('profiles').select('group_code, group_name').eq('id', user.id).single();
+        if (!prof?.group_code) return;
+        const { data: members } = await sb.from('profiles').select('id, display_name').eq('group_code', prof.group_code);
+        if (!members?.length) return;
+        const memberIds = members.map(m => m.id);
+        const { data: allPicks } = await sb.from('picks').select('user_id, event_id, fight_key, is_correct').in('user_id', memberIds).neq('fight_key', 'fotn').neq('fight_key', '__dd__');
+        const scoreMap = {};
+        members.forEach(m => { scoreMap[m.id] = { name: m.display_name || 'User', correct: 0, judged: 0 }; });
+        (allPicks || []).forEach(p => {
+          if (!scoreMap[p.user_id]) return;
+          if (p.is_correct !== null && p.is_correct !== undefined) {
+            scoreMap[p.user_id].judged++;
+            if (p.is_correct) scoreMap[p.user_id].correct++;
+          }
+        });
+        const ranked = Object.entries(scoreMap)
+          .map(([id, d]) => ({ id, ...d, pct: d.judged >= 5 ? Math.round(100 * d.correct / d.judged) : null }))
+          .sort((a, b) => (b.correct - a.correct) || ((b.pct||0) - (a.pct||0)))
+          .slice(0, 3);
+        if (!ranked.length) return;
+        const groupName = prof.group_name || 'Your Group';
+        const medals = ['🥇','🥈','🥉'];
+        const rows = ranked.map((u, i) => `
+          <div class="ev-gw-row${i===0?' ev-gw-first':''}">
+            <div class="ev-gw-rank">${medals[i]||i+1}</div>
+            <div class="ev-gw-name">${u.name}${u.id===user.id?' (you)':''}</div>
+            <div class="ev-gw-score">${u.correct}${u.pct!==null?' · '+u.pct+'%':''}</div>
+          </div>`).join('');
+        const el = document.getElementById('evGroupWidget');
+        if (!el) return;
+        el.innerHTML = `
+          <div class="ev-group-widget">
+            <div class="ev-gw-header">
+              <div class="ev-gw-title">${esc(groupName)}</div>
+              <a class="ev-gw-link" href="leaderboard.html">Full Standings →</a>
+            </div>
+            <div class="ev-gw-rows">${rows}</div>
+          </div>`;
+        el.style.display = '';
+      } catch {}
+    }
+
+    /* ── New User Onboarding Banner ── */
+    async function showOnboardingIfNew() {
+      const sb = window._sb;
+      if (!sb) return;
+      if (localStorage.getItem('mb_welcomed')) return;
+      try {
+        const { data: { user } } = await sb.auth.getUser();
+        if (!user) return;
+        const createdAt = user.created_at ? new Date(user.created_at) : null;
+        const isNew = createdAt && (Date.now() - createdAt.getTime()) < 72 * 3600 * 1000;
+        if (!isNew) { localStorage.setItem('mb_welcomed', '1'); return; }
+        const { data: prof } = await sb.from('profiles').select('group_code').eq('id', user.id).single();
+        const hasGroup = !!prof?.group_code;
+        if (hasGroup) { localStorage.setItem('mb_welcomed', '1'); return; }
+        const banner = document.createElement('div');
+        banner.className = 'mb-onboard-banner';
+        banner.id = 'mbOnboardBanner';
+        banner.innerHTML = `
+          <div class="mb-ob-title">Welcome to <span>MMA Bridge</span> 👊</div>
+          <div class="mb-ob-steps">
+            <div class="mb-ob-step"><div class="mb-ob-step-num">01</div><div>Join or <strong>create a group</strong> to compete with friends</div></div>
+            <div class="mb-ob-step"><div class="mb-ob-step-num">02</div><div><strong>Pick fight winners</strong> before each event locks</div></div>
+            <div class="mb-ob-step"><div class="mb-ob-step-num">03</div><div>Earn a <strong>tier rank</strong> based on accuracy all season</div></div>
+          </div>
+          <div class="mb-ob-btns">
+            <a href="leaderboard.html" class="mb-ob-btn primary">Join a Group</a>
+            <button class="mb-ob-btn dismiss" id="mbObDismiss">Got it</button>
+          </div>`;
+        document.body.appendChild(banner);
+        document.getElementById('mbObDismiss')?.addEventListener('click', () => {
+          banner.remove();
+          localStorage.setItem('mb_welcomed', '1');
+        });
+      } catch {}
+    }
+
+    // Run after auth loads
+    setTimeout(() => {
+      loadGroupWidget();
+      showOnboardingIfNew();
+    }, 1200);
 
     /* ── COMPLETED EVENT CARD ── */
     function buildCompletedCard(ev){
