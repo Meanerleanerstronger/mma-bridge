@@ -27,9 +27,10 @@
     /* Pages list */
     .ab-pages { display:flex;flex-direction:column;gap:10px;margin-bottom:48px; }
     .ab-page-row { display:flex;align-items:flex-start;gap:14px;padding:14px 18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px; }
-    .ab-page-icon { font-size:1.1rem;min-width:24px;padding-top:1px; }
-    .ab-page-name { font-family:'Montserrat',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:2px; }
+    .ab-page-name { font-family:'Montserrat',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:3px; }
     .ab-page-desc { font-family:'Inter',sans-serif;font-size:.8rem;color:rgba(255,255,255,.38);line-height:1.55; }
+    a.ab-page-row { text-decoration:none;transition:border-color .15s,background .15s; }
+    a.ab-page-row:hover { background:rgba(0,229,255,.05);border-color:rgba(0,229,255,.2); }
 
     /* Contact / disclaimer */
     .ab-contact { padding:24px 28px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:14px; }
@@ -104,58 +105,52 @@
     <h1 class="ab-title">MMA <span>Bridge</span></h1>
     <div class="ab-divider"></div>
 
-    <p class="ab-desc">MMA Bridge is the home for UFC fans. One place to preview upcoming events, make <strong>fight predictions</strong>, track your accuracy all season, compete against friends in a private league, and follow the sport you love — every week, every card.</p>
+    <p class="ab-desc">MMA Bridge is built for UFC fans who take the sport seriously. Preview every upcoming card, make <strong>fight predictions</strong>, track your accuracy across the full season, and compete against friends in a private group — all in one place.</p>
 
     <div class="ab-pages">
-      <div class="ab-page-row">
-        <div class="ab-page-icon">📅</div>
+      <a class="ab-page-row" href="events.html">
         <div>
           <div class="ab-page-name">Upcoming Events</div>
-          <div class="ab-page-desc">Every scheduled UFC card with full fight listings, countdowns, hype ratings, and calendar links.</div>
+          <div class="ab-page-desc">Every scheduled UFC card — full fight listings, event countdowns, hype ratings, and add-to-calendar links.</div>
         </div>
-      </div>
-      <div class="ab-page-row">
-        <div class="ab-page-icon">🥊</div>
+      </a>
+      <a class="ab-page-row" href="picks.html">
         <div>
           <div class="ab-page-name">Fight Forecast</div>
-          <div class="ab-page-desc">Pick winners, methods, and rounds before every event locks. Track your accuracy and climb the tier rankings — from Rookie to Legend.</div>
+          <div class="ab-page-desc">Pick winners and methods before every event locks. Track your accuracy over the season and climb through eight tiers — from Rookie to Legend.</div>
         </div>
-      </div>
-      <div class="ab-page-row">
-        <div class="ab-page-icon">🏆</div>
+      </a>
+      <a class="ab-page-row" href="leaderboard.html">
         <div>
           <div class="ab-page-name">Leaderboard &amp; Groups</div>
-          <div class="ab-page-desc">Private year-long leagues with your friends. Global community rankings too. Head-to-head challenges, season scoring, and a group wall.</div>
+          <div class="ab-page-desc">Private season-long leagues with your friends. Global community standings, head-to-head challenges, a shared group wall, and a season recap at the end.</div>
         </div>
-      </div>
-      <div class="ab-page-row">
-        <div class="ab-page-icon">⚖️</div>
+      </a>
+      <a class="ab-page-row" href="pfp.html">
         <div>
           <div class="ab-page-name">P4P Rankings</div>
-          <div class="ab-page-desc">Community pound-for-pound rankings. Vote for who you think is the best fighter on the planet right now.</div>
+          <div class="ab-page-desc">Community pound-for-pound rankings. Cast your vote and see how the MMA Bridge fanbase ranks the best fighters in the world.</div>
         </div>
-      </div>
-      <div class="ab-page-row">
-        <div class="ab-page-icon">✍️</div>
+      </a>
+      <a class="ab-page-row" href="reviews.html">
         <div>
           <div class="ab-page-name">Fight Reviews</div>
-          <div class="ab-page-desc">Write and read community reviews of past events and fights. Rate cards and share your takes.</div>
+          <div class="ab-page-desc">Write and read community reviews of past events and fights. Rate cards, share your takes, and see how others scored the night.</div>
         </div>
-      </div>
-      <div class="ab-page-row">
-        <div class="ab-page-icon">🤖</div>
+      </a>
+      <a class="ab-page-row" href="lucas.html">
         <div>
           <div class="ab-page-name">Lucas Bot</div>
-          <div class="ab-page-desc">AI assistant trained on MMA. Ask anything — fighter records, matchup history, event details, predictions.</div>
+          <div class="ab-page-desc">AI assistant built for MMA. Ask about fighter records, matchup history, event details, or get a breakdown before fight night.</div>
         </div>
-      </div>
+      </a>
     </div>
 
     <div class="ab-contact">
       <div class="ab-contact-label">Contact &amp; Feedback</div>
       <div class="ab-contact-text">
-        Questions, issues, suggestions, or anything at all — reach out at <a href="mailto:contact@mmabridge.com">contact@mmabridge.com</a>. We take every piece of feedback seriously and respond to everything.<br><br>
-        If you have any concerns about content on this site (images, media, or anything else) please contact us at the email above before taking any action. We will respond promptly and resolve it.
+        Questions, bug reports, suggestions, or general feedback — reach out at <a href="mailto:contact@mmabridge.com">contact@mmabridge.com</a>. We read and respond to everything.<br><br>
+        If you have concerns about any content on this site — images, media, or otherwise — please email us before taking any other action. We will respond promptly and resolve it.
       </div>
     </div>
   </div>
