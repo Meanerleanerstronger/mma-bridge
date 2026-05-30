@@ -35,10 +35,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     const liveNow = all.find(e => e.status === 'upcoming' && hasStarted(e));
     if (liveNow) liveNow._isLive = true;
 
-    // Show most recently completed event in hero for 7 days after it ends
+    // Show most recently completed event in hero for 3 days after it ends
     const recentCompleted = past[0];
     const isVeryRecent = recentCompleted &&
-      (now - new Date(recentCompleted.isoDate)) < 7 * 24 * 60 * 60 * 1000;
+      (now - new Date(recentCompleted.isoDate)) < 3 * 24 * 60 * 60 * 1000;
 
     renderHero(liveNow || (isVeryRecent ? recentCompleted : null) || upcoming[0] || past[0]);
 
@@ -99,20 +99,23 @@ function renderHero(ev) {
       btn.style.setProperty('border', '1px solid rgba(255,60,60,0.4)', 'important');
     } else if (isCompleted) {
       btn.textContent = 'Review the Card →';
-      btn.href = `event-review.html?id=${encodeURIComponent(ev.id)}`;
-      btn.target = '';
-      btn.className = 'hero-review-btn';
-      // Random start point in the 4s cycle so each load shows a different color first
-      btn.style.animationDelay = '-' + (Math.random() * 4).toFixed(2) + 's';
-    } else {
-      btn.textContent = 'View Full Card →';
       btn.href = `events.html?id=${encodeURIComponent(ev.id)}`;
       btn.target = '';
-      btn.style.setProperty('background', 'rgba(255,255,255,0.12)', 'important');
+      btn.className = '';
+      btn.style.setProperty('background', 'linear-gradient(135deg, #004d3d 0%, #00a878 55%, #00e5a0 100%)', 'important');
       btn.style.setProperty('color', '#fff', 'important');
-      btn.style.setProperty('text-shadow', 'none', 'important');
-      btn.style.setProperty('box-shadow', '0 4px 20px rgba(0,0,0,0.4)', 'important');
-      btn.style.setProperty('border', '1.5px solid rgba(255,255,255,0.25)', 'important');
+      btn.style.setProperty('text-shadow', '0 1px 4px rgba(0,0,0,0.4)', 'important');
+      btn.style.setProperty('box-shadow', '0 0 28px rgba(0,200,140,0.45), inset 0 1px 0 rgba(0,255,180,0.2)', 'important');
+      btn.style.setProperty('border', '1px solid rgba(0,229,160,0.5)', 'important');
+    } else {
+      btn.textContent = 'Make Your Picks →';
+      btn.href = `picks.html?event=${encodeURIComponent(ev.id)}`;
+      btn.target = '';
+      btn.style.setProperty('background', 'linear-gradient(135deg, #7a3100 0%, #d46400 55%, #ff8c00 100%)', 'important');
+      btn.style.setProperty('color', '#fff', 'important');
+      btn.style.setProperty('text-shadow', '0 1px 4px rgba(0,0,0,0.5)', 'important');
+      btn.style.setProperty('box-shadow', '0 0 28px rgba(255,120,0,0.45), inset 0 1px 0 rgba(255,180,80,0.2)', 'important');
+      btn.style.setProperty('border', '1px solid rgba(255,140,0,0.5)', 'important');
     }
   }
 }
