@@ -1534,26 +1534,6 @@
       });
     }, 60000);
 
-    // PWA install prompt
-    let _pwaPrompt = null;
-    window.addEventListener('beforeinstallprompt', e => {
-      e.preventDefault();
-      _pwaPrompt = e;
-      if (!localStorage.getItem('pwa_dismissed')) {
-        document.getElementById('pwaBanner')?.removeAttribute('hidden');
-      }
-    });
-    document.getElementById('pwaInstallBtn')?.addEventListener('click', async () => {
-      if (!_pwaPrompt) return;
-      _pwaPrompt.prompt();
-      const { outcome } = await _pwaPrompt.userChoice;
-      if (outcome === 'accepted') document.getElementById('pwaBanner')?.setAttribute('hidden','');
-      _pwaPrompt = null;
-    });
-    document.getElementById('pwaBannerDismiss')?.addEventListener('click', () => {
-      document.getElementById('pwaBanner')?.setAttribute('hidden','');
-      localStorage.setItem('pwa_dismissed', '1');
-    });
 
     /* ── Mini Group Standings Widget ── */
     async function loadGroupWidget() {
@@ -1831,14 +1811,5 @@
 <a href="about.html" class="ev-help-btn" title="How it works">?</a>
 
 <!-- PWA Install Banner -->
-<div id="pwaBanner" hidden class="pwa-install-banner">
-  <div class="pwa-banner-icon">📱</div>
-  <div class="pwa-banner-text">
-    <div class="pwa-banner-title">Add MMA Bridge to your home screen</div>
-    <div class="pwa-banner-sub">Quick access — no app store needed</div>
-  </div>
-  <button id="pwaInstallBtn" class="pwa-banner-btn">Install</button>
-  <button id="pwaBannerDismiss" class="pwa-banner-dismiss">✕</button>
-</div>
 </body>
 </html>

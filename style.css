@@ -9827,12 +9827,23 @@ body.light-mode .fp-fight-date { color: rgba(0,0,0,.3) !important; }
   margin-bottom: 10px; transition: opacity 0.15s, transform 0.15s;
 }
 .ob-cta:hover { opacity: 0.9; transform: translateY(-1px); }
-.ob-skip {
-  background: none; border: none; cursor: pointer;
-  font-family: 'Inter', sans-serif; font-size: 0.78rem;
-  color: rgba(255,255,255,.28); padding: 4px; transition: color 0.15s;
+.ob-close {
+  position: absolute; top: 14px; right: 14px;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12);
+  color: rgba(255,255,255,.5); font-size: 0.85rem;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: background .15s, color .15s;
 }
-.ob-skip:hover { color: rgba(255,255,255,.55); }
+.ob-close:hover { background: rgba(255,255,255,.13); color: #fff; }
+.ob-modal { position: relative; }
+.ob-skip {
+  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+  border-radius: 8px; cursor: pointer; width: 100%;
+  font-family: 'Inter', sans-serif; font-size: 0.8rem;
+  color: rgba(255,255,255,.45); padding: 10px 16px; transition: all 0.15s;
+}
+.ob-skip:hover { background: rgba(255,255,255,.09); color: rgba(255,255,255,.75); }
 
 /* ── How It Works section ─────────────────────────────────────────── */
 .hiw-section {
@@ -10285,31 +10296,37 @@ button:active, [role="button"]:active, .lb-tab:active, .pk-seg-btn:active,
 .ev-lock-badge.is-locked { color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.12); }
 
 /* ── PWA install banner ── */
-.pwa-install-banner {
-  position: fixed; bottom: 0; left: 0; right: 0; z-index: 9000;
-  display: flex; align-items: center; gap: 12px;
-  background: rgba(10,10,14,0.96); border-top: 1px solid rgba(200,150,12,0.3);
-  padding: 14px 20px; backdrop-filter: blur(16px);
-  box-shadow: 0 -4px 24px rgba(0,0,0,0.5);
+/* PWA install toast — small corner card */
+.pwa-toast {
+  position: fixed; bottom: 20px; right: 20px; z-index: 9000;
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(14,14,18,0.97); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px; padding: 12px 14px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  backdrop-filter: blur(16px);
+  max-width: 260px;
+  opacity: 0; transform: translateY(10px);
+  transition: opacity .25s ease, transform .25s ease;
 }
-.pwa-banner-icon { font-size: 1.4rem; flex-shrink: 0; }
-.pwa-banner-text { flex: 1; min-width: 0; }
-.pwa-banner-title { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; font-weight: 800; color: #fff; }
-.pwa-banner-sub { font-family: 'Inter', sans-serif; font-size: 0.68rem; color: rgba(255,255,255,0.4); margin-top: 2px; }
-.pwa-banner-btn {
-  flex-shrink: 0; padding: 9px 18px; border-radius: 8px;
-  background: rgba(200,150,12,0.18); border: 1px solid rgba(200,150,12,0.5);
-  color: #c8960c; font-family: 'Montserrat', sans-serif; font-size: 0.72rem; font-weight: 800;
-  letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer;
+.pwa-toast[hidden] { display: none !important; }
+.pwa-toast.pwa-toast-in { opacity: 1; transform: translateY(0); }
+.pwa-toast-text { flex: 1; min-width: 0; }
+.pwa-toast-title { font-family: 'Montserrat', sans-serif; font-size: 0.72rem; font-weight: 800; color: rgba(255,255,255,.85); }
+.pwa-toast-sub { font-family: 'Inter', sans-serif; font-size: 0.62rem; color: rgba(255,255,255,0.35); margin-top: 2px; }
+.pwa-toast-btn {
+  flex-shrink: 0; padding: 6px 12px; border-radius: 6px;
+  background: rgba(0,229,255,0.12); border: 1px solid rgba(0,229,255,0.3);
+  color: #00e5ff; font-family: 'Montserrat', sans-serif; font-size: 0.62rem; font-weight: 800;
+  letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; white-space: nowrap;
   transition: background 0.15s;
 }
-.pwa-banner-btn:hover { background: rgba(200,150,12,0.28); }
-.pwa-banner-dismiss {
+.pwa-toast-btn:hover { background: rgba(0,229,255,0.2); }
+.pwa-toast-dismiss {
   flex-shrink: 0; background: none; border: none;
-  color: rgba(255,255,255,0.25); font-size: 1rem; cursor: pointer; padding: 4px 6px;
-  transition: color 0.15s;
+  color: rgba(255,255,255,0.22); font-size: 0.75rem; cursor: pointer; padding: 2px 4px;
+  transition: color 0.15s; line-height: 1;
 }
-.pwa-banner-dismiss:hover { color: rgba(255,255,255,0.6); }
+.pwa-toast-dismiss:hover { color: rgba(255,255,255,0.55); }
 
 /* ── Group pick breakdown on fight cards ── */
 .fc-group-breakdown {

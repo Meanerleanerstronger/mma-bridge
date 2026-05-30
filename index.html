@@ -348,40 +348,6 @@
 
 <body>
 
-  <!-- WELCOME MODAL — first-visit onboarding -->
-  <div id="welcomeModal" class="wlc-overlay" aria-modal="true" role="dialog" aria-label="Welcome to MMA Bridge" style="display:none">
-    <div class="wlc-modal">
-      <button class="wlc-close" id="wlcClose" aria-label="Close">✕</button>
-      <div class="wlc-eyebrow">YOUR UFC HUB</div>
-      <h2 class="wlc-title">Welcome to<br><span>MMA Bridge</span></h2>
-      <div class="wlc-features">
-        <div class="wlc-feat">
-          
-          <div>
-            <div class="wlc-feat-title">Pick Every Fight</div>
-            <div class="wlc-feat-sub">Predict winners, methods & rounds for every UFC event</div>
-          </div>
-        </div>
-        <div class="wlc-feat">
-          
-          <div>
-            <div class="wlc-feat-title">Compete on the Leaderboard</div>
-            <div class="wlc-feat-sub">Track your pick accuracy and rank against the community</div>
-          </div>
-        </div>
-        <div class="wlc-feat">
-          
-          <div>
-            <div class="wlc-feat-title">Rate & Review Events</div>
-            <div class="wlc-feat-sub">Score cards, vote FOTN, and see what the community thinks</div>
-          </div>
-        </div>
-      </div>
-      <a href="auth.html" class="wlc-cta">Create Free Account →</a>
-      <button class="wlc-skip" id="wlcSkip">Browse as guest</button>
-    </div>
-  </div>
-
   <!-- NAVBAR -->
   <nav class="navbar">
     <div class="nav-container">
@@ -558,16 +524,16 @@
     <div class="ob-modal">
       <button class="ob-close" id="obClose" aria-label="Close">✕</button>
       <h2 class="ob-title">MMA <span>Bridge</span></h2>
-      <p class="ob-sub">Pick fights. Track your accuracy. Climb the leaderboard.</p>
+      <p class="ob-sub">Pick fights. Track your accuracy. Compete with friends.</p>
       <div class="ob-steps">
         <a class="ob-step ob-step-link" href="events.html" id="obStep1">
           <div class="ob-step-num">1</div>
           <div class="ob-step-text"><strong>Pick fights</strong> — predict winners before each event locks</div>
           <div class="ob-step-arrow">→</div>
         </a>
-        <a class="ob-step ob-step-link" href="reviews.html" id="obStep2">
+        <a class="ob-step ob-step-link" href="leaderboard.html" id="obStep2">
           <div class="ob-step-num">2</div>
-          <div class="ob-step-text"><strong>Rate events</strong> — score cards and leave reviews after</div>
+          <div class="ob-step-text"><strong>Join a group</strong> — private league with your friends all season</div>
           <div class="ob-step-arrow">→</div>
         </a>
         <div class="ob-step">
@@ -575,32 +541,76 @@
           <div class="ob-step-text"><strong>Climb the board</strong> — accuracy earns you a tier from Rookie to Legend</div>
         </div>
       </div>
-      <button class="ob-skip" id="obSkip">Got it, let me look around</button>
+      <button class="ob-skip" id="obSkip">Got it</button>
     </div>
   </div>
 
   <script>
     (function() {
-      var SEEN_KEY = 'mmab_welcomed_v2';
-      if (localStorage.getItem(SEEN_KEY)) return;
+      // Check all legacy keys so returning users never see this again
+      var KEYS = ['mmab_welcomed_v2', 'mma_bridge_welcomed', 'mb_welcomed'];
+      if (KEYS.some(function(k) { return localStorage.getItem(k); })) return;
       setTimeout(function() {
         var user = window.MMABridgeAuth?.getUser?.();
-        if (user) { localStorage.setItem(SEEN_KEY, '1'); return; }
+        if (user) { localStorage.setItem(KEYS[0], '1'); return; }
         var overlay = document.getElementById('obOverlay');
         if (!overlay) return;
         overlay.style.display = 'flex';
         function dismiss() {
-          overlay.style.display = 'none';
-          localStorage.setItem(SEEN_KEY, '1');
+          overlay.style.opacity = '0';
+          overlay.style.transition = 'opacity .2s';
+          setTimeout(function() { overlay.style.display = 'none'; }, 200);
+          KEYS.forEach(function(k) { localStorage.setItem(k, '1'); });
         }
         document.getElementById('obClose')?.addEventListener('click', dismiss);
         document.getElementById('obSkip')?.addEventListener('click', dismiss);
-        document.getElementById('obStep1')?.addEventListener('click', function() { localStorage.setItem(SEEN_KEY, '1'); });
-        document.getElementById('obStep2')?.addEventListener('click', function() { localStorage.setItem(SEEN_KEY, '1'); });
+        document.getElementById('obStep1')?.addEventListener('click', function() { KEYS.forEach(function(k){localStorage.setItem(k,'1');}); });
+        document.getElementById('obStep2')?.addEventListener('click', function() { KEYS.forEach(function(k){localStorage.setItem(k,'1');}); });
         overlay.addEventListener('click', function(e) { if (e.target === overlay) dismiss(); });
-      }, 600);
+        document.addEventListener('keydown', function onEsc(e) {
+          if (e.key === 'Escape') { dismiss(); document.removeEventListener('keydown', onEsc); }
+        });
+      }, 3500);
     })();
   </script>
+<!-- PWA install toast (bottom-right corner) -->
+<div id="pwaBanner" hidden class="pwa-toast">
+  <div class="pwa-toast-text">
+    <div class="pwa-toast-title">Add to home screen</div>
+    <div class="pwa-toast-sub">No app store needed</div>
+  </div>
+  <button id="pwaInstallBtn" class="pwa-toast-btn">Install</button>
+  <button id="pwaBannerDismiss" class="pwa-toast-dismiss">✕</button>
+</div>
+
+<script>
+  (function() {
+    if (localStorage.getItem('pwa_dismissed')) return;
+    var _prompt = null;
+    window.addEventListener('beforeinstallprompt', function(e) {
+      e.preventDefault();
+      _prompt = e;
+      setTimeout(function() {
+        if (!localStorage.getItem('pwa_dismissed')) {
+          var b = document.getElementById('pwaBanner');
+          if (b) { b.removeAttribute('hidden'); b.classList.add('pwa-toast-in'); }
+        }
+      }, 20000);
+    });
+    document.getElementById('pwaInstallBtn')?.addEventListener('click', async function() {
+      if (!_prompt) return;
+      _prompt.prompt();
+      var result = await _prompt.userChoice;
+      localStorage.setItem('pwa_dismissed', '1');
+      document.getElementById('pwaBanner')?.setAttribute('hidden', '');
+      _prompt = null;
+    });
+    document.getElementById('pwaBannerDismiss')?.addEventListener('click', function() {
+      document.getElementById('pwaBanner')?.setAttribute('hidden', '');
+      localStorage.setItem('pwa_dismissed', '1');
+    });
+  })();
+</script>
 <script src="animations.js?v=1.0"></script>
 </body>
 </html>
