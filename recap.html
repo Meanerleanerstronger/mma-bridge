@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
   <link rel="icon" type="image/png" href="images/mma-bridge-logo.png">
+  <link rel="shortcut icon" type="image/png" href="images/mma-bridge-logo.png">
+  <link rel="apple-touch-icon" href="images/mma-bridge-logo.png">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#00e5ff">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -10,74 +12,124 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Season Recap — MMA Bridge</title>
   <meta name="description" content="Final standings and season recap for your MMA Bridge group league.">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Barlow+Condensed:wght@700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=6.9" />
   <style>
-    .recap-page { max-width: 620px; margin: 0 auto; padding: 64px 20px 100px; }
+    .rc-page { max-width: 640px; margin: 0 auto; padding: 64px 20px 100px; }
 
-    .recap-loading { text-align: center; padding: 80px 20px; color: rgba(255,255,255,0.3); font-family:'Inter',sans-serif; font-size:.9rem; }
-    .recap-spinner { width:28px;height:28px;border:2.5px solid rgba(255,255,255,.08);border-top-color:#00e5ff;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px; }
-    @keyframes spin { to { transform:rotate(360deg); } }
+    .rc-loading { text-align:center; padding:80px 20px; color:rgba(255,255,255,.3); font-family:'Inter',sans-serif; font-size:.9rem; }
+    .rc-spinner { width:28px;height:28px;border:2.5px solid rgba(255,255,255,.08);border-top-color:#00e5ff;border-radius:50%;animation:rcspin .8s linear infinite;margin:0 auto 16px; }
+    @keyframes rcspin { to { transform:rotate(360deg); } }
 
-    .recap-eyebrow { font-family:'Montserrat',sans-serif;font-size:.58rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:rgba(0,229,255,.7);margin-bottom:10px; }
-    .recap-group-name { font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(1.8rem,5vw,2.8rem);text-transform:uppercase;letter-spacing:.04em;color:#fff;line-height:1.1;margin:0 0 6px; }
-    .recap-group-name span { color:#c8a84b; }
-    .recap-period { font-family:'Inter',sans-serif;font-size:.82rem;color:rgba(255,255,255,.35);margin-bottom:36px; }
-    .recap-divider { width:40px;height:2px;background:linear-gradient(90deg,#c8a84b,transparent);border-radius:2px;margin-bottom:36px; }
+    .rc-eyebrow { font-family:'Montserrat',sans-serif;font-size:.56rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:rgba(0,229,255,.6);margin-bottom:10px; }
+    .rc-title { font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(1.8rem,5vw,2.6rem);text-transform:uppercase;letter-spacing:.03em;color:#fff;line-height:1.1;margin:0 0 8px; }
+    .rc-title span { color:#c8960c; }
+    .rc-period { font-family:'Inter',sans-serif;font-size:.8rem;color:rgba(255,255,255,.35);margin-bottom:32px; }
+    .rc-divider { width:36px;height:2px;background:linear-gradient(90deg,#c8960c,transparent);border-radius:2px;margin-bottom:32px; }
 
-    /* Champion card */
-    .recap-champion { padding:28px 24px;background:linear-gradient(135deg,rgba(200,150,12,.12),rgba(200,150,12,.04));border:1.5px solid rgba(200,150,12,.35);border-radius:16px;text-align:center;margin-bottom:28px;position:relative;overflow:hidden; }
-    .recap-champion::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#c8a84b,transparent); }
-    .recap-ch-crown { font-size:2.2rem;margin-bottom:10px;display:block; }
-    .recap-ch-label { font-family:'Montserrat',sans-serif;font-size:.58rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(200,168,75,.6);margin-bottom:8px; }
-    .recap-ch-name { font-family:'Barlow Condensed','Montserrat',sans-serif;font-weight:900;font-size:2rem;letter-spacing:.04em;text-transform:uppercase;color:#fff;margin-bottom:8px; }
-    .recap-ch-stats { font-family:'Inter',sans-serif;font-size:.88rem;color:rgba(255,255,255,.55); }
-    .recap-ch-stats strong { color:#c8a84b; }
+    /* Champion */
+    .rc-champion {
+      position:relative;overflow:hidden;
+      background:linear-gradient(135deg,rgba(200,150,12,.12),rgba(200,150,12,.04));
+      border:1.5px solid rgba(200,150,12,.3);border-radius:16px;
+      padding:28px 24px;margin-bottom:12px;
+    }
+    .rc-champion::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#c8960c,transparent); }
+    .rc-ch-label { font-family:'Montserrat',sans-serif;font-size:.56rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(200,150,12,.6);margin-bottom:14px; }
+    .rc-ch-body { display:flex;align-items:center;gap:18px; }
+    .rc-ch-avatar {
+      width:58px;height:58px;border-radius:50%;
+      background:rgba(200,150,12,.12);border:2px solid rgba(200,150,12,.3);
+      display:flex;align-items:center;justify-content:center;
+      font-family:'Montserrat',sans-serif;font-size:1.3rem;font-weight:900;color:#c8960c;
+      flex-shrink:0;overflow:hidden;
+    }
+    .rc-ch-avatar img { width:100%;height:100%;object-fit:cover;border-radius:50%; }
+    .rc-ch-name { font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.25rem;text-transform:uppercase;letter-spacing:.04em;color:#fff;margin-bottom:8px; }
+    .rc-ch-stats { display:flex;gap:20px;flex-wrap:wrap; }
+    .rc-ch-stat-val { font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.05rem;color:#c8960c; }
+    .rc-ch-stat-lbl { font-family:'Inter',sans-serif;font-size:.64rem;color:rgba(255,255,255,.32);margin-top:1px; }
+    .rc-ch-tier { margin-top:10px;display:inline-block;font-family:'Montserrat',sans-serif;font-size:.58rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;border-radius:20px;padding:3px 10px;border:1px solid; }
+
+    /* Podium */
+    .rc-podium { display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:32px; }
+    .rc-pod {
+      background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);
+      border-radius:12px;padding:14px 16px;
+    }
+    .rc-pod-rank { font-family:'Montserrat',sans-serif;font-size:.5rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:5px; }
+    .rc-pod-name { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.9rem;text-transform:uppercase;letter-spacing:.03em;color:rgba(255,255,255,.85);margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+    .rc-pod-stats { display:flex;gap:14px; }
+    .rc-pod-stat-val { font-family:'Montserrat',sans-serif;font-weight:900;font-size:.85rem;color:rgba(255,255,255,.55); }
+    .rc-pod-stat-lbl { font-family:'Inter',sans-serif;font-size:.6rem;color:rgba(255,255,255,.25);margin-top:1px; }
 
     /* Standings */
-    .recap-standings-label { font-family:'Montserrat',sans-serif;font-size:.58rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:14px; }
-    .recap-rows { display:flex;flex-direction:column;gap:8px;margin-bottom:32px; }
-    .recap-row { display:flex;align-items:center;gap:12px;padding:12px 16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px; }
-    .recap-row.recap-row-1 { background:rgba(200,150,12,.07);border-color:rgba(200,150,12,.2); }
-    .recap-row.recap-row-2 { background:rgba(200,200,200,.04);border-color:rgba(200,200,200,.12); }
-    .recap-row.recap-row-3 { background:rgba(200,120,50,.04);border-color:rgba(200,120,50,.12); }
-    .recap-row-rank { font-family:'Montserrat',sans-serif;font-weight:900;font-size:.78rem;min-width:28px;text-align:center; }
-    .recap-row-1 .recap-row-rank { color:#c8a84b; }
-    .recap-row-2 .recap-row-rank { color:#b0b0b0; }
-    .recap-row-3 .recap-row-rank { color:#cd7f32; }
-    .recap-row-rank-n { color:rgba(255,255,255,.25); }
-    .recap-row-name { font-family:'Inter',sans-serif;font-size:.88rem;color:rgba(255,255,255,.75);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
-    .recap-row-score { font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:700;color:rgba(255,255,255,.45); }
-    .recap-row-1 .recap-row-score { color:#c8a84b; }
-    .recap-row-pct { font-family:'Montserrat',sans-serif;font-size:.7rem;color:rgba(255,255,255,.25);min-width:42px;text-align:right; }
+    .rc-section-lbl { font-family:'Montserrat',sans-serif;font-size:.5rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:12px; }
+    .rc-rows { display:flex;flex-direction:column;gap:0;margin-bottom:36px;border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden; }
+    .rc-row { display:grid;grid-template-columns:28px 1fr 60px 44px;align-items:center;gap:10px;padding:11px 16px;border-bottom:1px solid rgba(255,255,255,.05); }
+    .rc-row:last-child { border-bottom:none; }
+    .rc-row:nth-child(even) { background:rgba(255,255,255,.015); }
+    .rc-row-me { background:rgba(0,229,255,.04) !important; }
+    .rc-rank { font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:900;text-align:center;color:rgba(255,255,255,.22); }
+    .rc-rank-1 { color:#c8960c; }
+    .rc-rank-2 { color:rgba(170,170,170,.8); }
+    .rc-rank-3 { color:rgba(205,127,50,.8); }
+    .rc-row-name { font-family:'Montserrat',sans-serif;font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:.03em;color:rgba(255,255,255,.8);white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+    .rc-row-me .rc-row-name { color:#00e5ff; }
+    .rc-row-pts { font-family:'Montserrat',sans-serif;font-weight:900;font-size:.85rem;color:rgba(255,255,255,.65);text-align:right; }
+    .rc-row-acc { font-family:'Inter',sans-serif;font-size:.7rem;color:rgba(255,255,255,.3);text-align:right; }
 
-    /* Event log */
-    .recap-events-label { font-family:'Montserrat',sans-serif;font-size:.58rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:14px; }
-    .recap-events { display:flex;flex-direction:column;gap:6px;margin-bottom:36px; }
-    .recap-ev-row { display:flex;align-items:center;gap:10px;padding:8px 14px;background:rgba(255,255,255,.02);border-radius:8px; }
-    .recap-ev-name { font-family:'Inter',sans-serif;font-size:.78rem;color:rgba(255,255,255,.5);flex:1; }
-    .recap-ev-winner { font-family:'Montserrat',sans-serif;font-size:.68rem;font-weight:700;color:rgba(200,150,12,.8); }
+    /* Events */
+    .rc-events { display:flex;flex-direction:column;gap:7px;margin-bottom:36px; }
+    .rc-ev-row { display:flex;align-items:center;gap:12px;padding:9px 14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:9px; }
+    .rc-ev-name { font-family:'Inter',sans-serif;font-size:.75rem;color:rgba(255,255,255,.45);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+    .rc-ev-winner { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.7rem;letter-spacing:.04em;text-transform:uppercase;color:#c8960c;white-space:nowrap; }
+    .rc-ev-score { font-family:'Inter',sans-serif;font-size:.66rem;color:rgba(255,255,255,.28);white-space:nowrap; }
 
-    /* Share + CTA */
-    .recap-actions { display:flex;gap:10px;flex-wrap:wrap; }
-    .recap-share-btn { font-family:'Montserrat',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:11px 20px;border-radius:8px;border:none;cursor:pointer;display:flex;align-items:center;gap:7px;transition:opacity .15s; }
-    .recap-share-btn:hover { opacity:.8; }
-    .recap-share-btn.primary { background:#c8a84b;color:#040406; }
-    .recap-share-btn.secondary { background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.6); }
-    .recap-no-group { text-align:center;padding:80px 20px;font-family:'Inter',sans-serif;font-size:.9rem;color:rgba(255,255,255,.3); }
-    .recap-no-group a { color:#00e5ff;text-decoration:none; }
+    /* Actions */
+    .rc-actions { display:flex;gap:10px;flex-wrap:wrap; }
+    .rc-share-btn {
+      display:inline-flex;align-items:center;gap:7px;
+      background:rgba(200,150,12,.15);border:1px solid rgba(200,150,12,.3);
+      border-radius:10px;padding:11px 20px;cursor:pointer;transition:all .15s;
+      font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#c8960c;
+    }
+    .rc-share-btn:hover { background:rgba(200,150,12,.25);border-color:rgba(200,150,12,.5); }
+    .rc-lb-link {
+      display:inline-flex;align-items:center;gap:7px;text-decoration:none;
+      background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+      border-radius:10px;padding:11px 20px;transition:all .15s;
+      font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.45);
+    }
+    .rc-lb-link:hover { background:rgba(255,255,255,.09);color:rgba(255,255,255,.75); }
+
+    .rc-nogroup { text-align:center;padding:70px 20px;font-family:'Inter',sans-serif;font-size:.88rem;color:rgba(255,255,255,.35);line-height:1.7; }
+    .rc-nogroup a { color:#00e5ff;text-decoration:none; }
 
     /* light mode */
-    body.light-mode .recap-group-name { color:#0a0a0f; }
-    body.light-mode .recap-group-name span { color:#7a6000; }
-    body.light-mode .recap-eyebrow { color:#006680; }
-    body.light-mode .recap-period { color:rgba(0,0,0,.4); }
-    body.light-mode .recap-champion { background:rgba(180,130,0,.07);border-color:rgba(180,130,0,.3); }
-    body.light-mode .recap-ch-label { color:rgba(120,90,0,.6); }
-    body.light-mode .recap-ch-name { color:#0a0a0f; }
-    body.light-mode .recap-ch-stats { color:rgba(0,0,0,.5); }
-    body.light-mode .recap-row { background:rgba(0,0,0,.02);border-color:rgba(0,0,0,.07); }
-    body.light-mode .recap-row-name { color:rgba(0,0,0,.7); }
+    body.light-mode .rc-title { color:#0a0a0f; }
+    body.light-mode .rc-title span { color:#9a6800; }
+    body.light-mode .rc-eyebrow { color:#006680; }
+    body.light-mode .rc-period { color:rgba(0,0,0,.4); }
+    body.light-mode .rc-champion { background:linear-gradient(135deg,rgba(180,120,0,.07),transparent);border-color:rgba(180,120,0,.2); }
+    body.light-mode .rc-ch-name { color:#0a0a0f; }
+    body.light-mode .rc-ch-stat-val { color:#9a6800; }
+    body.light-mode .rc-pod { background:rgba(0,0,0,.03);border-color:rgba(0,0,0,.07); }
+    body.light-mode .rc-pod-name { color:rgba(0,0,0,.75); }
+    body.light-mode .rc-rows { border-color:rgba(0,0,0,.07); }
+    body.light-mode .rc-row { border-color:rgba(0,0,0,.05); }
+    body.light-mode .rc-row:nth-child(even) { background:rgba(0,0,0,.02); }
+    body.light-mode .rc-row-name { color:rgba(0,0,0,.72); }
+    body.light-mode .rc-row-pts { color:rgba(0,0,0,.6); }
+    body.light-mode .rc-row-acc { color:rgba(0,0,0,.32); }
+    body.light-mode .rc-row-me { background:rgba(0,120,153,.04) !important; }
+    body.light-mode .rc-row-me .rc-row-name { color:#006680; }
+    body.light-mode .rc-ev-row { background:rgba(0,0,0,.02);border-color:rgba(0,0,0,.06); }
+    body.light-mode .rc-ev-name { color:rgba(0,0,0,.42); }
+    body.light-mode .rc-ev-winner { color:#9a6800; }
+    body.light-mode .rc-share-btn { background:rgba(150,100,0,.1);border-color:rgba(150,100,0,.25);color:#9a6800; }
+    body.light-mode .rc-lb-link { background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.1);color:rgba(0,0,0,.45); }
+    body.light-mode .rc-nogroup { color:rgba(0,0,0,.4); }
   </style>
 </head>
 <body>
@@ -89,12 +141,19 @@
       <ul class="nav-links">
         <li><a href="index.html">Trending</a></li>
         <li><a href="events.html">Upcoming Events</a></li>
+        <li><a href="pfp.html">P4P</a></li>
+        <li><a href="reviews.html">Review</a></li>
+        <li><a href="lucas.html">Lucas Bot</a></li>
         <li><a href="leaderboard.html">Leaderboard</a></li>
         <li><a href="about.html">About</a></li>
       </ul>
       <button class="theme-toggle" id="themeToggle" aria-label="Switch to light mode">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       </button>
+      <form class="search-box" id="site-search-form" action="results.html" method="GET">
+        <input id="site-search" name="q" type="text" placeholder="Search fighters, events..." autocomplete="off" />
+        <span class="search-icon"><svg viewBox="0 0 24 24"><path d="M21 21l-4.3-4.3m1.8-5.2a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></span>
+      </form>
       <div class="nav-auth"></div>
       <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
     </div>
@@ -105,16 +164,24 @@
     <nav class="nav-mobile-links">
       <a href="index.html">Trending</a>
       <a href="events.html">Upcoming Events</a>
+      <a href="pfp.html">P4P</a>
+      <a href="reviews.html">Review</a>
+      <a href="lucas.html">Lucas Bot</a>
       <a href="leaderboard.html">Leaderboard</a>
       <a href="about.html">About</a>
     </nav>
+    <div class="nav-mobile-search">
+      <form action="results.html" method="GET">
+        <input name="q" type="text" placeholder="Search fighters, events..." autocomplete="off" />
+      </form>
+    </div>
     <div class="nav-auth-mobile"></div>
   </div>
 
-  <div class="recap-page" id="recapRoot">
-    <div class="recap-loading">
-      <div class="recap-spinner"></div>
-      Loading season recap…
+  <div class="rc-page" id="rcRoot">
+    <div class="rc-loading">
+      <div class="rc-spinner"></div>
+      Loading recap…
     </div>
   </div>
 
@@ -125,172 +192,6 @@
       document.getElementById('nav-mobile-overlay').classList.toggle('open');
       document.body.classList.toggle('no-scroll');
     });
-
-    function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-
-    async function loadRecap() {
-      const root = document.getElementById('recapRoot');
-      const sb = window._sb;
-      const p = new URLSearchParams(location.search);
-      let groupCode = p.get('group');
-
-      // If no group code in URL, try to get current user's group
-      if (!groupCode && sb) {
-        try {
-          const { data: { user } } = await sb.auth.getUser();
-          if (user) {
-            const { data: prof } = await sb.from('profiles').select('group_code').eq('id', user.id).single();
-            groupCode = prof?.group_code || null;
-          }
-        } catch {}
-      }
-
-      if (!groupCode || !sb) {
-        root.innerHTML = `<div class="recap-no-group">
-          No group found. <a href="leaderboard.html">Join or create a group →</a>
-        </div>`;
-        return;
-      }
-
-      try {
-        // Load group members
-        const { data: members } = await sb.from('profiles')
-          .select('id, display_name, group_name, group_season_start')
-          .eq('group_code', groupCode);
-
-        if (!members?.length) {
-          root.innerHTML = `<div class="recap-no-group">No members found for this group.</div>`;
-          return;
-        }
-
-        const groupName = members[0]?.group_name || 'Your Group';
-        const seasonStart = members[0]?.group_season_start || null;
-        const memberIds = members.map(m => m.id);
-
-        // Load all picks
-        let picksQuery = sb.from('picks')
-          .select('user_id, event_id, fight_key, is_correct, created_at')
-          .in('user_id', memberIds)
-          .neq('fight_key', 'fotn')
-          .neq('fight_key', '__dd__');
-        if (seasonStart) picksQuery = picksQuery.gte('created_at', seasonStart);
-        const { data: allPicks } = await picksQuery;
-
-        // Score each member
-        const scoreMap = {};
-        members.forEach(m => { scoreMap[m.id] = { name: m.display_name || 'User', correct: 0, judged: 0, events: new Set() }; });
-        (allPicks || []).forEach(p => {
-          if (!scoreMap[p.user_id]) return;
-          if (p.is_correct !== null && p.is_correct !== undefined) {
-            scoreMap[p.user_id].judged++;
-            if (p.is_correct) scoreMap[p.user_id].correct++;
-          }
-          if (p.event_id) scoreMap[p.user_id].events.add(p.event_id);
-        });
-
-        const ranked = Object.entries(scoreMap)
-          .map(([id, d]) => ({ id, ...d, pct: d.judged >= 3 ? Math.round(100 * d.correct / d.judged) : null }))
-          .sort((a, b) => (b.correct - a.correct) || ((b.pct||0) - (a.pct||0)));
-
-        const champion = ranked[0];
-        const medals = ['🥇','🥈','🥉'];
-        const rankCls = ['recap-row-1','recap-row-2','recap-row-3'];
-
-        // Load events for the log
-        const eventsRes = await fetch('data/events.json?v=' + Date.now()).catch(() => fetch('events.json'));
-        const eventsData = eventsRes.ok ? await eventsRes.json() : [];
-        const completedEvents = eventsData.filter(e => e.status === 'completed').sort((a,b) => new Date(b.isoDate) - new Date(a.isoDate)).slice(0, 8);
-
-        // Per-event winner
-        const eventWinnerRows = completedEvents.map(ev => {
-          const evScores = {};
-          members.forEach(m => { evScores[m.id] = { name: m.display_name || 'User', correct: 0, judged: 0 }; });
-          (allPicks || []).filter(p => p.event_id === ev.id).forEach(p => {
-            if (!evScores[p.user_id]) return;
-            if (p.is_correct !== null && p.is_correct !== undefined) {
-              evScores[p.user_id].judged++;
-              if (p.is_correct) evScores[p.user_id].correct++;
-            }
-          });
-          const best = Object.values(evScores).filter(s => s.judged > 0).sort((a,b) => b.correct - a.correct)[0];
-          if (!best) return '';
-          return `<div class="recap-ev-row">
-            <div class="recap-ev-name">${esc(ev.name)}</div>
-            <div class="recap-ev-winner">🏆 ${esc(best.name)} ${best.correct}/${best.judged}</div>
-          </div>`;
-        }).filter(Boolean).join('');
-
-        const seasonPeriod = seasonStart
-          ? `Season from ${new Date(seasonStart).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}`
-          : 'All-time standings';
-
-        const champStats = champion.judged >= 3
-          ? `<strong>${champion.correct}/${champion.judged}</strong> picks correct · <strong>${champion.pct}%</strong> accuracy`
-          : `${champion.correct} picks correct`;
-
-        const standingsRows = ranked.map((u, i) => `
-          <div class="recap-row ${rankCls[i]||''}">
-            <div class="recap-row-rank ${i >= 3 ? 'recap-row-rank-n' : ''}">${medals[i] || (i + 1)}</div>
-            <div class="recap-row-name">${esc(u.name)}</div>
-            <div class="recap-row-score">${u.correct}/${u.judged}</div>
-            <div class="recap-row-pct">${u.pct !== null ? u.pct + '%' : '—'}</div>
-          </div>`).join('');
-
-        // Share URL for this group
-        const shareUrl = `${location.origin}/recap.html?group=${encodeURIComponent(groupCode)}`;
-        const shareText = `${groupName} Season Recap 🏆\nChampion: ${champion.name}\n${champStats}\n${shareUrl}`;
-
-        root.innerHTML = `
-          <div class="recap-eyebrow">Season Recap</div>
-          <div class="recap-group-name">${esc(groupName)} <span>Season</span></div>
-          <div class="recap-period">${esc(seasonPeriod)}</div>
-          <div class="recap-divider"></div>
-
-          <div class="recap-champion">
-            <span class="recap-ch-crown">👑</span>
-            <div class="recap-ch-label">Season Champion</div>
-            <div class="recap-ch-name">${esc(champion.name)}</div>
-            <div class="recap-ch-stats">${champStats}</div>
-          </div>
-
-          <div class="recap-standings-label">Final Standings</div>
-          <div class="recap-rows">${standingsRows}</div>
-
-          ${completedEvents.length ? `
-          <div class="recap-events-label">Event Winners</div>
-          <div class="recap-events">${eventWinnerRows}</div>` : ''}
-
-          <div class="recap-actions">
-            <button class="recap-share-btn primary" id="recapShareBtn">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-              Share Recap
-            </button>
-            <a href="leaderboard.html" class="recap-share-btn secondary">View Live Standings</a>
-          </div>`;
-
-        document.getElementById('recapShareBtn')?.addEventListener('click', async () => {
-          if (navigator.share) {
-            navigator.share({ title: `${groupName} Season Recap`, text: shareText, url: shareUrl }).catch(() => copyToClipboard(shareUrl));
-          } else {
-            copyToClipboard(shareUrl);
-          }
-        });
-
-        // Update URL with group code for sharing
-        if (!p.get('group')) history.replaceState(null, '', `recap.html?group=${encodeURIComponent(groupCode)}`);
-      } catch(e) {
-        root.innerHTML = `<div class="recap-no-group">Could not load recap. <a href="leaderboard.html">Back to leaderboard →</a></div>`;
-      }
-    }
-
-    function copyToClipboard(text) {
-      navigator.clipboard?.writeText(text).then(() => alert('Link copied!')).catch(() => {
-        const el = document.createElement('textarea');
-        el.value = text; document.body.appendChild(el);
-        el.select(); document.execCommand('copy');
-        el.remove(); alert('Link copied!');
-      });
-    }
   </script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase.js"></script>
@@ -299,9 +200,357 @@
   <script src="premium.js?v=3.3"></script>
   <script src="widget.js"></script>
   <script src="notifications.js?v=2.1"></script>
+  <script src="push.js?v=1.1"></script>
+
   <script>
-    // Wait for Supabase to initialize then load
-    setTimeout(loadRecap, 600);
+  (async () => {
+    const root = document.getElementById('rcRoot');
+    const sb   = window._sb;
+    const esc  = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+    function showErr(msg) { root.innerHTML = `<div class="rc-nogroup">${msg}</div>`; }
+
+    if (!sb) { showErr('Could not connect — try refreshing.'); return; }
+
+    // Wait for auth to initialize
+    function waitForAuth(ms = 5000) {
+      return new Promise(res => {
+        const t0 = Date.now();
+        const tick = () => {
+          const u = window.MMABridgeAuth?.getUser?.();
+          if (u || Date.now() - t0 > ms) res(u || null);
+          else setTimeout(tick, 80);
+        };
+        tick();
+      });
+    }
+
+    const params    = new URLSearchParams(location.search);
+    let groupCode   = params.get('group') || null;
+
+    if (!groupCode) {
+      const user = await waitForAuth(5000);
+      if (user) {
+        const { data: prof } = await sb.from('profiles').select('group_code').eq('id', user.id).single();
+        groupCode = prof?.group_code || null;
+        if (groupCode) {
+          const u = new URL(location.href);
+          u.searchParams.set('group', groupCode);
+          history.replaceState(null, '', u);
+        }
+      }
+    }
+
+    if (!groupCode) {
+      showErr('No group found. <a href="leaderboard.html">Join or create a group on the Leaderboard.</a>');
+      return;
+    }
+
+    // ── Scoring helpers (identical to leaderboard.js) ──
+    const POINTS = { WINNER: 10, METHOD: 5, ROUND: 5, FOTN: 15 };
+
+    function getTier(judged, pct) {
+      if (judged === 0) return { name: 'Rookie',    color: '#666',   rank: 0 };
+      if (judged < 10)  return { name: 'Candidate', color: '#888',   rank: 1 };
+      if (pct === null || pct < 40) return { name: 'Iron',     color: '#8a7560', rank: 2 };
+      if (pct < 50)     return { name: 'Bronze',    color: '#cd7f32', rank: 3 };
+      if (pct < 55)     return { name: 'Silver',    color: '#aaa',    rank: 4 };
+      if (pct < 60)     return { name: 'Gold',      color: '#c8960c', rank: 5 };
+      if (pct < 65 || judged < 30) return { name: 'Platinum', color: '#00d4e8', rank: 6 };
+      if (pct < 70 || judged < 60) return { name: 'Diamond',  color: '#a0e4ff', rank: 7 };
+      return { name: 'Legend', color: '#c8960c', rank: 8 };
+    }
+
+    function normalizeMethodBase(m) {
+      if (!m) return '';
+      const u = m.toUpperCase();
+      if (u.includes('KO') || u.includes('TKO')) return 'KO/TKO';
+      if (u.includes('SUB') || u.includes('CHOKE') || u.includes('RNC') || u.includes('TRIANGLE') ||
+          u.includes('ARMBAR') || u.includes('GUILLOTINE') || u.includes('KIMURA') || u.includes('REAR NAKED')) return 'SUB';
+      if (u.includes('DECISION') || ['DEC','UD','SD','MD'].includes(u) ||
+          u.endsWith(' UD') || u.endsWith(' SD') || u.endsWith(' MD')) return 'DEC';
+      return '';
+    }
+
+    function extractRoundNum(m) {
+      const match = String(m||'').match(/R\s*(\d)/i);
+      return match ? match[1] : '';
+    }
+
+    // ── Load events.json for winner/method/FOTN lookups ──
+    const allEventsRaw = await fetch('./events.json', { cache: 'no-cache' }).then(r => r.json()).catch(() => []);
+    const winnerMap = {}, methodMap = {}, fotnMap = {};
+    allEventsRaw.filter(e => e.status === 'completed').forEach(ev => {
+      [...(ev.mainCard||[]).map((f,i)=>({f,key:`main-${i}`})),
+       ...(ev.prelims||[]).map((f,i)=>({f,key:`prelims-${i}`})),
+       ...(ev.earlyPrelims||[]).map((f,i)=>({f,key:`early-${i}`}))
+      ].forEach(({f,key}) => {
+        if (f.winner) winnerMap[`${ev.id}:${key}`] = f.winner.toLowerCase();
+        if (f.method) methodMap[`${ev.id}:${key}`] = f.method;
+      });
+      if (ev.fotn) fotnMap[ev.id] = ev.fotn.toLowerCase();
+    });
+    try {
+      const { data: dbRes } = await sb.from('fight_results').select('event_id, fight_key, winner, method, fotn');
+      (dbRes||[]).forEach(r => {
+        const k = `${r.event_id}:${r.fight_key}`;
+        if (r.winner) winnerMap[k] = r.winner.toLowerCase();
+        if (r.method) methodMap[k] = r.method;
+        if (r.fight_key === '__fotn__' && r.fotn) fotnMap[r.event_id] = r.fotn.toLowerCase();
+      });
+    } catch {}
+
+    // ── Load group members ──
+    const { data: members } = await sb.from('profiles')
+      .select('id, display_name, avatar_url, group_name, group_season_start')
+      .eq('group_code', groupCode);
+
+    if (!members?.length) { showErr('Group not found or has no members.'); return; }
+
+    const groupName   = members[0].group_name || 'Our Group';
+    const seasonStart = members[0].group_season_start || null;
+    const memberIds   = members.map(m => m.id);
+    const memberMap   = Object.fromEntries(members.map(m => [m.id, m]));
+
+    // ── Load all picks ──
+    const { data: picks } = await sb.from('picks')
+      .select('user_id, event_id, fight_key, pick, method, created_at')
+      .in('user_id', memberIds);
+
+    if (!picks) { showErr('Could not load picks data.'); return; }
+
+    // ── Build stats (same logic as leaderboard.js buildStatsMap) ──
+    const ddMap = {};
+    picks.forEach(r => {
+      if (r.fight_key === '__dd__' && r.user_id && r.pick) ddMap[`${r.user_id}:${r.event_id}`] = r.pick;
+    });
+
+    const statsMap = {};
+    memberIds.forEach(id => { statsMap[id] = { total:0, judged:0, correct:0, points:0 }; });
+
+    picks.forEach(r => {
+      if (!r.user_id || !statsMap[r.user_id]) return;
+      if (r.fight_key === '__dd__') return;
+      if (seasonStart && r.created_at && r.created_at < seasonStart) return;
+
+      if (r.fight_key === 'fotn') {
+        const actual = fotnMap[r.event_id];
+        if (actual && r.pick?.toLowerCase() === actual) statsMap[r.user_id].points += POINTS.FOTN;
+        return;
+      }
+
+      statsMap[r.user_id].total++;
+      const wKey   = `${r.event_id}:${r.fight_key}`;
+      const winner = winnerMap[wKey];
+      if (winner === undefined) return;
+      statsMap[r.user_id].judged++;
+      const isDD      = ddMap[`${r.user_id}:${r.event_id}`] === r.fight_key;
+      const isCorrect = r.pick?.toLowerCase() === winner;
+      if (!isCorrect) { if (isDD) statsMap[r.user_id].points -= 10; return; }
+      statsMap[r.user_id].correct++;
+      let pts = POINTS.WINNER;
+      const actualMethod = methodMap[wKey];
+      if (r.method && actualMethod) {
+        const pb = normalizeMethodBase(r.method), ab = normalizeMethodBase(actualMethod);
+        if (pb && ab && pb === ab) {
+          pts += POINTS.METHOD;
+          if (pb === 'KO/TKO' || pb === 'SUB') {
+            const pr = extractRoundNum(r.method), ar = extractRoundNum(actualMethod);
+            if (pr && ar && pr === ar) pts += POINTS.ROUND;
+          }
+        }
+      }
+      if (isDD) pts *= 2;
+      statsMap[r.user_id].points += pts;
+    });
+
+    // ── Rank members ──
+    const ranked = memberIds.map(id => {
+      const s   = statsMap[id];
+      const pct = s.judged > 0 ? Math.round((s.correct / s.judged) * 100) : null;
+      const tier = getTier(s.judged, pct);
+      const m    = memberMap[id];
+      return { id, name: m.display_name || 'Anonymous', avatar: m.avatar_url || '', ...s, pct, tier };
+    }).sort((a, b) => {
+      if (b.points !== a.points) return b.points - a.points;
+      if (a.pct !== null && b.pct !== null) return b.pct - a.pct;
+      if (a.pct !== null) return -1;
+      if (b.pct !== null) return 1;
+      return b.total - a.total;
+    });
+
+    // ── Per-event winner ──
+    const completedEvs = allEventsRaw
+      .filter(e => e.status === 'completed' && e.isoDate)
+      .sort((a, b) => new Date(b.isoDate) - new Date(a.isoDate))
+      .slice(0, 10);
+
+    const eventWinners = completedEvs.map(ev => {
+      const evPicks = picks.filter(p => p.event_id === ev.id && p.fight_key !== '__dd__' && p.fight_key !== 'fotn');
+      if (!evPicks.length) return null;
+      const evMap = {};
+      memberIds.forEach(id => { evMap[id] = { correct:0, judged:0 }; });
+      evPicks.forEach(p => {
+        if (!evMap[p.user_id]) return;
+        const w = winnerMap[`${ev.id}:${p.fight_key}`];
+        if (w === undefined) return;
+        evMap[p.user_id].judged++;
+        if (p.pick?.toLowerCase() === w) evMap[p.user_id].correct++;
+      });
+      const best = Object.entries(evMap)
+        .filter(([,s]) => s.judged > 0)
+        .sort(([,a],[,b]) => b.correct !== a.correct ? b.correct - a.correct : b.judged - a.judged)[0];
+      if (!best) return null;
+      const [uid, s] = best;
+      return { name: ev.name || ev.id, winner: memberMap[uid]?.display_name || '?', correct: s.correct, judged: s.judged };
+    }).filter(Boolean);
+
+    // ── Current user for "you" highlighting ──
+    const myUser = window.MMABridgeAuth?.getUser?.();
+    const myId   = myUser?.id || null;
+
+    // ── Helpers ──
+    function fmtDate(iso) {
+      if (!iso) return '';
+      return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+
+    function initials(name) {
+      return (name||'?').trim().split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();
+    }
+
+    function avatarHtml(u, size=58) {
+      const ini  = initials(u.name);
+      const fsz  = Math.round(size * 0.36);
+      const inner = `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:${fsz}px">${esc(ini)}</div>`;
+      if (u.avatar) {
+        return `<img src="${esc(u.avatar)}" alt="${esc(u.name)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">${inner.replace('display:flex','display:none').replace('none').replace('display:none','display:none').replace('display:flex','display:none')}${inner}`;
+      }
+      return inner;
+    }
+
+    // ── Build HTML ──
+    const champ  = ranked[0];
+    const second = ranked[1];
+    const third  = ranked[2];
+    const seasonLabel = seasonStart ? `Season from ${fmtDate(seasonStart)}` : 'All-time standings';
+
+    function champHtml() {
+      if (!champ) return '';
+      const ini = initials(champ.name);
+      const avatarInner = champ.avatar
+        ? `<img src="${esc(champ.avatar)}" alt="${esc(champ.name)}" style="width:100%;height:100%;object-fit:cover;border-radius:50%" onerror="this.style.display='none'">`
+        : `<span>${esc(ini)}</span>`;
+      return `
+        <div class="rc-champion">
+          <div class="rc-ch-label">Season Champion</div>
+          <div class="rc-ch-body">
+            <div class="rc-ch-avatar">${avatarInner}</div>
+            <div>
+              <div class="rc-ch-name">${esc(champ.name)}</div>
+              <div class="rc-ch-stats">
+                <div class="rc-ch-stat">
+                  <div class="rc-ch-stat-val">${champ.points}</div>
+                  <div class="rc-ch-stat-lbl">total pts</div>
+                </div>
+                <div class="rc-ch-stat">
+                  <div class="rc-ch-stat-val">${champ.pct !== null ? champ.pct + '%' : '—'}</div>
+                  <div class="rc-ch-stat-lbl">accuracy</div>
+                </div>
+                <div class="rc-ch-stat">
+                  <div class="rc-ch-stat-val">${champ.correct}/${champ.judged}</div>
+                  <div class="rc-ch-stat-lbl">correct</div>
+                </div>
+              </div>
+              <div class="rc-ch-tier" style="color:${champ.tier.color};border-color:${champ.tier.color}44">${champ.tier.name}</div>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    function podHtml(u, rankLabel) {
+      if (!u) return '';
+      return `
+        <div class="rc-pod">
+          <div class="rc-pod-rank">${esc(rankLabel)}</div>
+          <div class="rc-pod-name">${esc(u.name)}</div>
+          <div class="rc-pod-stats">
+            <div><div class="rc-pod-stat-val">${u.points}</div><div class="rc-pod-stat-lbl">pts</div></div>
+            <div><div class="rc-pod-stat-val">${u.pct !== null ? u.pct + '%' : '—'}</div><div class="rc-pod-stat-lbl">accuracy</div></div>
+            <div><div class="rc-pod-stat-val">${u.correct}/${u.judged}</div><div class="rc-pod-stat-lbl">correct</div></div>
+          </div>
+        </div>`;
+    }
+
+    const standingsHtml = ranked.map((u, i) => {
+      const rank = i + 1;
+      const rankCls = rank <= 3 ? ` rc-rank-${rank}` : '';
+      const isMe = u.id === myId;
+      return `
+        <div class="rc-row${isMe ? ' rc-row-me' : ''}">
+          <div class="rc-rank${rankCls}">${rank}</div>
+          <div class="rc-row-name">${esc(u.name)}${isMe ? ' <span style="font-size:.5rem;opacity:.6">(you)</span>' : ''}</div>
+          <div class="rc-row-pts">${u.points}<span style="font-size:.6rem;opacity:.45"> pts</span></div>
+          <div class="rc-row-acc">${u.pct !== null ? u.pct + '%' : '—'}</div>
+        </div>`;
+    }).join('');
+
+    const eventsHtml = eventWinners.length ? `
+      <div class="rc-section-lbl">Event Winners</div>
+      <div class="rc-events">
+        ${eventWinners.map(e => `
+          <div class="rc-ev-row">
+            <div class="rc-ev-name">${esc(e.name)}</div>
+            <div class="rc-ev-winner">${esc(e.winner.split(' ')[0])}</div>
+            <div class="rc-ev-score">${e.correct}/${e.judged}</div>
+          </div>`).join('')}
+      </div>` : '';
+
+    root.innerHTML = `
+      <div class="rc-eyebrow">Season Recap</div>
+      <h1 class="rc-title">${esc(groupName)} <span>Season</span></h1>
+      <div class="rc-period">${esc(seasonLabel)} · ${ranked.length} member${ranked.length !== 1 ? 's' : ''}</div>
+      <div class="rc-divider"></div>
+
+      ${champHtml()}
+
+      ${second || third ? `<div class="rc-podium">${podHtml(second,'2nd Place')}${podHtml(third,'3rd Place')}</div>` : ''}
+
+      <div class="rc-section-lbl">Full Standings</div>
+      <div class="rc-rows">${standingsHtml}</div>
+
+      ${eventsHtml}
+
+      <div class="rc-actions">
+        <button class="rc-share-btn" id="rcShareBtn" type="button">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          Share Recap
+        </button>
+        <a class="rc-lb-link" href="leaderboard.html">View Leaderboard</a>
+      </div>`;
+
+    document.getElementById('rcShareBtn').addEventListener('click', () => {
+      const url  = `https://mmabridge.com/recap.html?group=${encodeURIComponent(groupCode)}`;
+      const text = `${groupName} — Season Recap on MMA Bridge\n${url}`;
+      if (navigator.share) {
+        navigator.share({ title: `${groupName} Season Recap`, text, url }).catch(() => copyUrl(url));
+      } else {
+        copyUrl(url);
+      }
+    });
+
+    function copyUrl(url) {
+      navigator.clipboard?.writeText(url).then(() => {
+        const btn = document.getElementById('rcShareBtn');
+        if (btn) {
+          const orig = btn.innerHTML;
+          btn.textContent = 'Link copied!';
+          setTimeout(() => { btn.innerHTML = orig; }, 2000);
+        }
+      }).catch(() => { window.prompt('Copy this link:', url); });
+    }
+
+  })();
   </script>
 </body>
 </html>
