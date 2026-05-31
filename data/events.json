@@ -10004,6 +10004,9 @@
         "titleFight": false,
         "ranked": true,
         "slot": "main",
+        "winner": "Song Yadong",
+        "method": "SUB",
+        "round": 2,
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-01/YADONG_SONG_01-24.png",
         "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-01/FIGUEIREDO_DEIVESON_01-24.png"
       },
@@ -10015,6 +10018,10 @@
         "titleFight": false,
         "ranked": true,
         "slot": "comain",
+        "winner": "Alonzo Menifield",
+        "method": "TKO",
+        "round": 1,
+        "fotn": true,
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-11/MENIFIELD_ALONZO_11-22.png",
         "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-08/MINGYANG_ZHANG_08-23.png"
       },
@@ -10026,6 +10033,9 @@
         "titleFight": false,
         "ranked": true,
         "slot": "",
+        "winner": "Sergei Pavlovich",
+        "method": "KO",
+        "round": 1,
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-08/PAVLOVICH_SERGEI_08-23.png",
         "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-07/TEIXEIRA_TALLISON_07-12.png"
       },
@@ -10037,6 +10047,9 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
+        "winner": "Kai Asakura",
+        "method": "KO",
+        "round": 1,
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-08/ASAKURA_KAI_08-16.png",
         "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-01/SMOTHERMAN_CAMERON_01-24.png"
       },
@@ -10048,19 +10061,25 @@
         "titleFight": false,
         "ranked": true,
         "slot": "",
+        "winner": null,
+        "method": "NC",
+        "round": 2,
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-01/PEREZ_ALEX_01-24.png",
         "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-03/SUMUDAERJI_03-07.png"
       }
     ],
     "prelims": [
       {
-        "a": "Muslim Salikhov",
+        "a": "Carlston Harris",
         "b": "Jake Matthews",
         "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
         "slot": "",
+        "winner": "Jake Matthews",
+        "method": "DEC",
+        "round": 3,
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-11/SALIKHOV_MUSLIM_11-08.png",
         "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-09/MATTHEWS_JAKE_09-27.png"
       },
@@ -10072,6 +10091,9 @@
         "titleFight": false,
         "ranked": true,
         "slot": "",
+        "winner": "Angela Hill",
+        "method": "DEC",
+        "round": 3,
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-11/HILL_ANGELA_11-15.png",
         "imgB": ""
       },
@@ -10083,17 +10105,23 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
+        "winner": "Luis Felipe Dias",
+        "method": "TKO",
+        "round": 1,
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-10/DIAS_LUIS_FELIPE_10-07.png",
         "imgB": ""
       },
       {
         "a": "Rei Tsuruya",
-        "b": "Jesus Aguilar",
+        "b": "Luis Gurule",
         "weight": "Flyweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
         "slot": "",
+        "winner": "Rei Tsuruya",
+        "method": "SUB",
+        "round": 1,
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-03/TSURUYA_REI_03-08.png",
         "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-03/AGUILAR_JESUS_03-07.png"
       },
@@ -10105,6 +10133,9 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
+        "winner": "Jaqueline Amorim",
+        "method": "SUB",
+        "round": 1,
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-09/LOOKBOONMEE_LOMA_09-27.png",
         "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-10/AMORIM_JAQUELINE_10-25.png"
       },
@@ -10116,6 +10147,9 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
+        "winner": "Cody Haddon",
+        "method": "TKO",
+        "round": 2,
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-10/AORIQILENG_10-18.png",
         "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-11/HADDON_CODY_11-15.png"
       },
@@ -10127,6 +10161,9 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
+        "winner": "Jose Henrique Souza",
+        "method": "DEC",
+        "round": 3,
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-04/DING_MENG_08-13.png",
         "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2022-08/HENRIQUE_JOSE.png"
       }
