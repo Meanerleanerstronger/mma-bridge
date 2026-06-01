@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lucas Predictor — Admin | MMA Bridge</title>
+  <link rel="icon" type="image/png" href="../images/mma-bridge-logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cyan: #00e5ff;
+      --cyan-dim: rgba(0,229,255,0.08);
+      --cyan-border: rgba(0,229,255,0.18);
+      --bg: #060608;
+      --surface: #0e0e11;
+      --surface2: #131318;
+      --surface3: #1a1a20;
+      --text: #f0f0f0;
+      --text-dim: rgba(240,240,240,0.4);
+      --green: #00e676;
+      --orange: #ff8c00;
+      --red: #ff3c3c;
+      --gold: #c8a84b;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* ── GATE ── */
+    #gate {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      min-height: 100vh; gap: 20px;
+    }
+    .gate-logo {
+      font-family: 'Montserrat', sans-serif; font-weight: 900;
+      font-size: 1.4rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--cyan); margin-bottom: 8px;
+    }
+    .gate-sub { color: var(--text-dim); font-size: 0.85rem; margin-bottom: 24px; }
+    #gatePass {
+      background: var(--surface); border: 1px solid var(--cyan-border);
+      color: var(--text); font-family: 'Inter', sans-serif; font-size: 1rem;
+      padding: 14px 20px; border-radius: 10px; width: 280px;
+      outline: none; text-align: center; letter-spacing: 0.1em;
+    }
+    #gatePass:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(0,229,255,0.1); }
+    #gateBtn {
+      background: var(--cyan); color: #000;
+      font-family: 'Montserrat', sans-serif; font-weight: 800;
+      font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 13px 36px; border: none; border-radius: 8px;
+      cursor: pointer; transition: opacity 0.15s;
+    }
+    #gateBtn:hover { opacity: 0.85; }
+    #gateErr { color: var(--red); font-size: 0.82rem; }
+
+    /* ── PANEL ── */
+    #panel { display: none; }
+    .adm-header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--cyan-border);
+      padding: 18px 32px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .adm-title {
+      font-family: 'Montserrat', sans-serif; font-weight: 900;
+      font-size: 1rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cyan);
+    }
+    .adm-subtitle { color: var(--text-dim); font-size: 0.78rem; }
+    .adm-body { max-width: 960px; margin: 0 auto; padding: 32px 24px 80px; }
+
+    .adm-event-block {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px; margin-bottom: 32px; overflow: hidden;
+    }
+    .adm-event-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .adm-event-badge {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 3px 9px; border-radius: 4px;
+      background: rgba(0,229,255,0.1); color: var(--cyan); border: 1px solid rgba(0,229,255,0.2);
+    }
+    .adm-event-badge.ppv { background: rgba(200,168,75,0.12); color: var(--gold); border-color: rgba(200,168,75,0.25); }
+    .adm-event-name {
+      font-family: 'Montserrat', sans-serif; font-weight: 800;
+      font-size: 0.95rem; letter-spacing: 0.04em;
+    }
+    .adm-event-date { color: var(--text-dim); font-size: 0.78rem; margin-left: auto; }
+
+    .adm-fight {
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .adm-fight:last-child { border-bottom: none; }
+    .adm-fight-label {
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-dim); margin-bottom: 12px;
+    }
+    .adm-fight-label.main { color: var(--cyan); }
+    .adm-fight-label.comain { color: rgba(0,229,255,0.5); }
+
+    .adm-matchup {
+      display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px;
+      align-items: center; margin-bottom: 16px;
+    }
+    .adm-fighter-btn {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      padding: 14px 10px; border-radius: 10px;
+      border: 1.5px solid rgba(255,255,255,0.08);
+      background: var(--surface2); cursor: pointer;
+      transition: all 0.15s; position: relative;
+    }
+    .adm-fighter-btn:hover { border-color: rgba(0,229,255,0.3); background: rgba(0,229,255,0.04); }
+    .adm-fighter-btn.selected {
+      border-color: var(--cyan); background: rgba(0,229,255,0.08);
+      box-shadow: 0 0 20px rgba(0,229,255,0.12);
+    }
+    .adm-fighter-btn.selected::after {
+      content: '✓ PICK';
+      position: absolute; top: 8px; right: 8px;
+      font-size: 0.6rem; font-weight: 800; letter-spacing: 0.08em;
+      color: var(--cyan);
+    }
+    .adm-fighter-img {
+      width: 52px; height: 52px; border-radius: 50%;
+      object-fit: cover; object-position: top;
+      background: var(--surface3); border: 1px solid rgba(255,255,255,0.08);
+    }
+    .adm-fighter-img-placeholder {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: var(--surface3); border: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; color: var(--text-dim);
+    }
+    .adm-fighter-name {
+      font-family: 'Montserrat', sans-serif; font-weight: 800;
+      font-size: 0.82rem; text-align: center; letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+    .adm-vs {
+      font-family: 'Montserrat', sans-serif; font-weight: 900;
+      font-size: 0.8rem; color: var(--text-dim); letter-spacing: 0.1em;
+    }
+
+    .adm-controls { display: flex; flex-direction: column; gap: 14px; }
+    .adm-ctrl-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .adm-ctrl-label {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--text-dim); min-width: 90px;
+    }
+    .adm-slider {
+      flex: 1; min-width: 180px; height: 4px;
+      -webkit-appearance: none; background: rgba(255,255,255,0.1);
+      border-radius: 2px; outline: none;
+    }
+    .adm-slider::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 18px; height: 18px;
+      border-radius: 50%; background: var(--cyan); cursor: pointer;
+      box-shadow: 0 0 8px rgba(0,229,255,0.5);
+    }
+    .adm-conf-display {
+      font-family: 'Montserrat', sans-serif; font-weight: 800;
+      font-size: 1rem; color: var(--cyan); min-width: 44px; text-align: right;
+    }
+    .adm-textarea {
+      width: 100%; background: var(--surface2);
+      border: 1px solid rgba(255,255,255,0.08); border-radius: 8px;
+      color: var(--text); font-family: 'Inter', sans-serif; font-size: 0.85rem;
+      padding: 10px 14px; resize: vertical; min-height: 68px;
+      outline: none; line-height: 1.5;
+    }
+    .adm-textarea:focus { border-color: rgba(0,229,255,0.3); }
+    .adm-textarea::placeholder { color: rgba(255,255,255,0.2); }
+
+    .adm-save-row { display: flex; align-items: center; gap: 12px; margin-top: 4px; }
+    .adm-save-btn {
+      background: var(--cyan); color: #000;
+      font-family: 'Montserrat', sans-serif; font-weight: 800;
+      font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 10px 24px; border: none; border-radius: 7px;
+      cursor: pointer; transition: opacity 0.15s;
+    }
+    .adm-save-btn:hover { opacity: 0.85; }
+    .adm-save-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .adm-save-btn.saved {
+      background: var(--green); color: #000;
+    }
+    .adm-save-status { font-size: 0.78rem; color: var(--text-dim); }
+    .adm-save-status.ok { color: var(--green); }
+    .adm-save-status.err { color: var(--red); }
+
+    .adm-existing-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      background: rgba(0,230,118,0.1); color: var(--green); border: 1px solid rgba(0,230,118,0.2);
+      padding: 3px 9px; border-radius: 12px;
+    }
+
+    .adm-section-label {
+      font-family: 'Montserrat', sans-serif; font-weight: 800;
+      font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--text-dim); padding: 14px 24px 4px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    .adm-section-label:first-child { border-top: none; padding-top: 20px; }
+    .adm-section-label.main-lbl { color: var(--cyan); }
+
+    .adm-empty {
+      text-align: center; padding: 80px 24px;
+      color: var(--text-dim); font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      .adm-body { padding: 16px 12px 60px; }
+      .adm-matchup { grid-template-columns: 1fr auto 1fr; gap: 6px; }
+      .adm-fighter-name { font-size: 0.7rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── PASSWORD GATE ── -->
+<div id="gate">
+  <div class="gate-logo">MMA Bridge</div>
+  <div class="gate-sub">Predictor Admin</div>
+  <input type="password" id="gatePass" placeholder="Enter password" autocomplete="current-password">
+  <button id="gateBtn">Enter</button>
+  <div id="gateErr"></div>
+</div>
+
+<!-- ── MAIN PANEL ── -->
+<div id="panel">
+  <div class="adm-header">
+    <div>
+      <div class="adm-title">Predictor Admin</div>
+      <div class="adm-subtitle">Set Lucas picks for upcoming fights</div>
+    </div>
+  </div>
+  <div class="adm-body" id="admBody">
+    <div class="adm-empty">Loading upcoming fights…</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../supabase.js"></script>
+<script>
+(async () => {
+  // ── Password gate ──
+  const PASS = 'lucasknows';
+  const gateEl = document.getElementById('gate');
+  const panelEl = document.getElementById('panel');
+  const passEl  = document.getElementById('gatePass');
+  const btnEl   = document.getElementById('gateBtn');
+  const errEl   = document.getElementById('gateErr');
+
+  function unlock() {
+    if (passEl.value === PASS) {
+      gateEl.style.display = 'none';
+      panelEl.style.display = 'block';
+      init();
+    } else {
+      errEl.textContent = 'Wrong password.';
+      passEl.value = '';
+      passEl.focus();
+    }
+  }
+  btnEl.addEventListener('click', unlock);
+  passEl.addEventListener('keydown', e => { if (e.key === 'Enter') unlock(); });
+
+  // ── Helpers ──
+  function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function fightId(eventId, a, b) {
+    const norm = s => s.toLowerCase().replace(/[^a-z0-9]/g, '');
+    return `${eventId}__${norm(a)}__${norm(b)}`;
+  }
+
+  // ── Main init ──
+  async function init() {
+    const body = document.getElementById('admBody');
+    const sb = window._sb;
+
+    // Load events.json + existing predictions in parallel
+    const [all, { data: existingPreds }] = await Promise.all([
+      fetch('../events.json').then(r => r.json()),
+      sb.from('predictions').select('*')
+    ]);
+
+    const predsMap = {};
+    (existingPreds || []).forEach(p => { predsMap[p.fight_id] = p; });
+
+    const upcoming = all.filter(e => e.status === 'upcoming')
+      .sort((a, b) => a.isoDate.localeCompare(b.isoDate));
+
+    if (!upcoming.length) {
+      body.innerHTML = '<div class="adm-empty">No upcoming events.</div>';
+      return;
+    }
+
+    body.innerHTML = '';
+
+    upcoming.forEach(ev => {
+      const isPPV = (ev.type||'').toUpperCase().includes('PPV');
+      const block = document.createElement('div');
+      block.className = 'adm-event-block';
+
+      block.innerHTML = `
+        <div class="adm-event-header">
+          <span class="adm-event-badge${isPPV?' ppv':''}">${isPPV?'PPV':'Fight Night'}</span>
+          <span class="adm-event-name">${esc(ev.name)}</span>
+          <span class="adm-event-date">${esc(ev.date||'')} · ${esc(ev.location||'')}</span>
+        </div>
+      `;
+
+      function appendSection(label, fights, cls) {
+        if (!fights || !fights.length) return;
+        const lbl = document.createElement('div');
+        lbl.className = `adm-section-label ${cls}`;
+        lbl.textContent = label;
+        block.appendChild(lbl);
+
+        fights.forEach(f => {
+          const fid = fightId(ev.id, f.a, f.b);
+          const existing = predsMap[fid];
+          const fightEl = buildFightEl(ev, f, fid, existing, sb, predsMap);
+          block.appendChild(fightEl);
+        });
+      }
+
+      appendSection('Main Card', ev.mainCard || [], 'main-lbl');
+      appendSection('Prelims', ev.prelims || [], '');
+      appendSection('Early Prelims', ev.earlyPrelims || [], '');
+
+      body.appendChild(block);
+    });
+  }
+
+  function buildFightEl(ev, f, fid, existing, sb, predsMap) {
+    const isMain = f.slot === 'main', isComain = f.slot === 'comain';
+    const labelText = isMain ? 'Main Event' : isComain ? 'Co-Main' : `${f.weight||''} · ${f.rounds||'3 Rds'}`;
+    const labelCls  = isMain ? 'main' : isComain ? 'comain' : '';
+
+    const el = document.createElement('div');
+    el.className = 'adm-fight';
+
+    const pickedA = existing && existing.pick === f.a;
+    const pickedB = existing && existing.pick === f.b;
+    const existingConf = existing ? existing.confidence : 70;
+    const existingReasoning = existing ? (existing.reasoning || '') : '';
+
+    el.innerHTML = `
+      <div class="adm-fight-label ${labelCls}">${esc(labelText)}</div>
+      <div class="adm-matchup">
+        <button class="adm-fighter-btn${pickedA?' selected':''}" data-fighter="${esc(f.a)}" data-side="a">
+          ${f.imgA
+            ? `<img class="adm-fighter-img" src="${esc(f.imgA)}" alt="${esc(f.a)}" onerror="this.style.display='none'">`
+            : `<div class="adm-fighter-img-placeholder">👤</div>`}
+          <div class="adm-fighter-name">${esc(f.a)}</div>
+        </button>
+        <div class="adm-vs">VS</div>
+        <button class="adm-fighter-btn${pickedB?' selected':''}" data-fighter="${esc(f.b)}" data-side="b">
+          ${f.imgB
+            ? `<img class="adm-fighter-img" src="${esc(f.imgB)}" alt="${esc(f.b)}" onerror="this.style.display='none'">`
+            : `<div class="adm-fighter-img-placeholder">👤</div>`}
+          <div class="adm-fighter-name">${esc(f.b)}</div>
+        </button>
+      </div>
+      <div class="adm-controls">
+        <div class="adm-ctrl-row">
+          <span class="adm-ctrl-label">Confidence</span>
+          <input type="range" class="adm-slider" min="51" max="95" value="${existingConf}" data-role="slider">
+          <span class="adm-conf-display" data-role="confDisplay">${existingConf}%</span>
+        </div>
+        <div class="adm-ctrl-row" style="align-items:flex-start">
+          <span class="adm-ctrl-label" style="padding-top:4px">Reasoning</span>
+          <textarea class="adm-textarea" data-role="reasoning" placeholder="Why does Lucas think this fighter wins? Be specific — style matchup, recent form, etc.">${esc(existingReasoning)}</textarea>
+        </div>
+        <div class="adm-save-row">
+          <button class="adm-save-btn" data-role="saveBtn">
+            ${existing ? 'Update Pick' : 'Save Pick'}
+          </button>
+          ${existing ? `<span class="adm-existing-badge">✓ Pick saved</span>` : ''}
+          <span class="adm-save-status" data-role="status"></span>
+        </div>
+      </div>
+    `;
+
+    // ── State ──
+    let pickedFighter = existing ? existing.pick : null;
+
+    const btnA = el.querySelector('[data-side="a"]');
+    const btnB = el.querySelector('[data-side="b"]');
+    const slider = el.querySelector('[data-role="slider"]');
+    const confDisplay = el.querySelector('[data-role="confDisplay"]');
+    const reasoningEl = el.querySelector('[data-role="reasoning"]');
+    const saveBtn = el.querySelector('[data-role="saveBtn"]');
+    const statusEl = el.querySelector('[data-role="status"]');
+
+    function selectFighter(name) {
+      pickedFighter = name;
+      btnA.classList.toggle('selected', name === f.a);
+      btnB.classList.toggle('selected', name === f.b);
+    }
+
+    btnA.addEventListener('click', () => selectFighter(f.a));
+    btnB.addEventListener('click', () => selectFighter(f.b));
+
+    slider.addEventListener('input', () => {
+      confDisplay.textContent = slider.value + '%';
+    });
+
+    saveBtn.addEventListener('click', async () => {
+      if (!pickedFighter) { statusEl.textContent = 'Pick a fighter first.'; statusEl.className = 'adm-save-status err'; return; }
+      saveBtn.disabled = true;
+      statusEl.textContent = 'Saving…';
+      statusEl.className = 'adm-save-status';
+
+      const record = {
+        fight_id: fid,
+        event_id: ev.id,
+        fighter_a: f.a,
+        fighter_b: f.b,
+        pick: pickedFighter,
+        confidence: parseInt(slider.value),
+        reasoning: reasoningEl.value.trim() || null,
+        updated_at: new Date().toISOString()
+      };
+
+      const { error } = await window._sb.from('predictions').upsert(record, { onConflict: 'fight_id' });
+
+      if (error) {
+        statusEl.textContent = 'Error: ' + error.message;
+        statusEl.className = 'adm-save-status err';
+      } else {
+        saveBtn.textContent = 'Update Pick';
+        saveBtn.className = 'adm-save-btn saved';
+        statusEl.textContent = 'Saved!';
+        statusEl.className = 'adm-save-status ok';
+        predsMap[fid] = record;
+        setTimeout(() => { saveBtn.className = 'adm-save-btn'; statusEl.textContent = ''; }, 2000);
+      }
+      saveBtn.disabled = false;
+    });
+
+    return el;
+  }
+})();
+</script>
+</body>
+</html>

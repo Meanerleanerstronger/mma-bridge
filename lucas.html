@@ -818,6 +818,32 @@
     fetch(PING_URL).catch(() => {});
 
     let history = [], busy = false;
+
+    // ── Predictions cache ─────────────────────────
+    let _predsCache = null;
+    async function getPredictions() {
+      if (_predsCache) return _predsCache;
+      try {
+        const sb = window._sb; if (!sb) return [];
+        const { data } = await sb.from('predictions').select('*');
+        _predsCache = data || [];
+      } catch(e) { _predsCache = []; }
+      return _predsCache;
+    }
+    // Pre-fetch silently
+    getPredictions();
+
+    const PRED_KEYWORDS = /\b(predict|prediction|pick|who wins|gonna win|going to win|winner|this weekend|main event pick|parlay|bet|fade|lock|upset)\b/i;
+
+    async function buildPredContext(userMsg) {
+      if (!PRED_KEYWORDS.test(userMsg)) return null;
+      const preds = await getPredictions();
+      if (!preds.length) return null;
+      const lines = preds.map(p =>
+        `- ${p.fighter_a} vs ${p.fighter_b} (event: ${p.event_id}): Pick = ${p.pick}, Confidence = ${p.confidence}%${p.reasoning ? ', Reasoning = ' + p.reasoning : ''}`
+      );
+      return `[Lucas's current official picks from the MMA Bridge predictions database:\n${lines.join('\n')}\nUse these when answering prediction questions. Speak in your Lucas Bot voice — confident, a bit cocky, but knowledgeable.]`;
+    }
     const messagesEl = document.getElementById('messages');
     const inputEl    = document.getElementById('chat-input');
     const sendBtnEl  = document.getElementById('send-btn');
@@ -1043,10 +1069,13 @@
       inputEl.value = '';
       showTyping();
       try {
+        const predCtx = await buildPredContext(text);
+        const payload = { message: text, history, page: 'lucas' };
+        if (predCtx) payload.system_context = predCtx;
         const res = await fetch(BACKEND, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: text, history, page: 'lucas' })
+          body: JSON.stringify(payload)
         });
         const data = await res.json();
         removeTyping();

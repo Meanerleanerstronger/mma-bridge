@@ -492,6 +492,46 @@
     .ov-stat-label { font-family:'Inter',sans-serif;font-size:.6rem;color:rgba(255,255,255,.3); }
     .ov-stat-val   { font-family:'Montserrat',sans-serif;font-weight:700;font-size:.65rem;color:rgba(255,255,255,.65); }
 
+    /* ── LUCAS PREDICTION BAR ── */
+    .lp-bar {
+      margin: 0 0 0; padding: 8px 16px 10px;
+      background: rgba(0,229,255,0.03);
+      border-bottom: 1px solid rgba(0,229,255,0.07);
+      display: flex; flex-direction: column; gap: 5px;
+    }
+    .lp-bar-top {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .lp-bot-tag {
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(0,229,255,0.6); background: rgba(0,229,255,0.07);
+      border: 1px solid rgba(0,229,255,0.14); padding: 2px 7px; border-radius: 10px;
+      flex-shrink: 0;
+    }
+    .lp-pick-name {
+      font-family: 'Montserrat', sans-serif; font-weight: 800;
+      font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;
+      color: #00e5ff;
+    }
+    .lp-conf-pill {
+      font-size: 0.65rem; font-weight: 700;
+      color: rgba(0,229,255,0.7); margin-left: auto; flex-shrink: 0;
+    }
+    .lp-conf-track {
+      height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden;
+    }
+    .lp-conf-fill {
+      height: 100%; border-radius: 2px;
+      background: linear-gradient(90deg, rgba(0,229,255,0.5), #00e5ff);
+      transition: width 0.4s ease;
+    }
+    .lp-reasoning {
+      font-size: 0.72rem; color: rgba(240,240,240,0.5); font-style: italic;
+      line-height: 1.45; padding-top: 2px;
+    }
+    .lp-reasoning::before { content: '"'; }
+    .lp-reasoning::after  { content: '"'; }
+
     /* ── LIGHT MODE ── */
     body.light-mode .ev-overlay .ov-panel { background:#f0f0f4; }
     body.light-mode .ev-overlay .ov-section-header { background:rgba(240,240,244,.96); }
@@ -1214,8 +1254,9 @@
         calWrap.style.display='none';
       }
 
-      /* Fight card */
+      /* Fight card — load predictions alongside */
       buildFightCard(ev,isPPV,accent);
+      loadPredictions(ev);
 
       /* Reset hype */
       resetHype();
@@ -1240,6 +1281,42 @@
       overlay.classList.add('open');
       document.body.classList.add('no-scroll');
       document.getElementById('ovFightCol').scrollTop=0;
+    }
+
+    /* ── PREDICTION HELPERS ── */
+    function fightId(eventId,a,b){
+      const norm=s=>s.toLowerCase().replace(/[^a-z0-9]/g,'');
+      return `${eventId}__${norm(a)}__${norm(b)}`;
+    }
+
+    async function loadPredictions(ev){
+      if(ev.status!=='upcoming') return;
+      try{
+        const sb=window._sb; if(!sb) return;
+        const {data}=await sb.from('predictions').select('*').eq('event_id',ev.id);
+        if(!data||!data.length) return;
+        const map={};
+        data.forEach(p=>{ map[p.fight_id]=p; });
+        document.querySelectorAll('#ovFightCol .ov-fight[data-fight-id]').forEach(row=>{
+          const pred=map[row.dataset.fightId];
+          if(!pred) return;
+          const conf=Math.min(95,Math.max(51,parseInt(pred.confidence)||70));
+          const bar=document.createElement('div');
+          bar.className='lp-bar';
+          bar.innerHTML=`
+            <div class="lp-bar-top">
+              <span class="lp-bot-tag">Lucas's Pick</span>
+              <span class="lp-pick-name">${esc(pred.pick)}</span>
+              <span class="lp-conf-pill">${conf}% confidence</span>
+            </div>
+            <div class="lp-conf-track">
+              <div class="lp-conf-fill" style="width:${conf}%"></div>
+            </div>
+            ${pred.reasoning?`<div class="lp-reasoning">${esc(pred.reasoning)}</div>`:''}
+          `;
+          row.insertAdjacentElement('afterend',bar);
+        });
+      }catch(e){}
     }
 
     /* ── FIGHT CARD ── */
@@ -1284,6 +1361,8 @@
 
           const row=document.createElement('div');
           row.className=`ov-fight ${mainCls}${isUpcoming?' has-shots':''}`;
+          row.dataset.fightId=fightId(ev.id,f.a,f.b);
+          row.dataset.fighterA=f.a; row.dataset.fighterB=f.b;
 
           if(hasResult){
             /* ── RESULT ROW ── */
