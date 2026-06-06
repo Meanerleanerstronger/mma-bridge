@@ -1049,18 +1049,24 @@ function formatOdds(n) {
         <button class="pk-info-btn" data-info="dd" type="button" aria-label="What is Double Down?">?</button>
       </div>` : '';
 
+    const aFav = odds && odds.odds_a < odds.odds_b;
+    const extOddsA = odds ? `<div class="fc-odds-col fc-odds-col-a">
+      <span class="fc-odds-num${aFav ? ' fc-fav' : ' fc-dog'}">${formatOdds(odds.odds_a)}</span>
+    </div>` : '';
+    const extOddsB = odds ? `<div class="fc-odds-col fc-odds-col-b">
+      <span class="fc-odds-num${!aFav ? ' fc-fav' : ' fc-dog'}">${formatOdds(odds.odds_b)}</span>
+    </div>` : '';
+
     return `
       <div class="${cardCls}" data-key="${esc(key)}">
         ${headHtml}
-        <div class="fc-matchup">
+        <div class="fc-matchup${odds ? ' fc-matchup-odds' : ''}">
+          ${extOddsA}
           <div class="${sideACls}" data-key="${esc(key)}" data-pick="${esc(f.a)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
             ${photoA}
             <div class="fc-info">
               <div class="fc-name">${esc(f.a)}</div>
-              <div class="fc-sub-row">
-                ${recA ? `<span class="fc-record">${esc(recA)}</span>` : ''}
-                ${oddsTagA}
-              </div>
+              ${recA ? `<div class="fc-sub-row"><span class="fc-record">${esc(recA)}</span></div>` : ''}
               ${commLabelA}
               ${groupLabelA}
               ${badgeA}
@@ -1073,10 +1079,7 @@ function formatOdds(n) {
           <div class="${sideBCls}" data-key="${esc(key)}" data-pick="${esc(f.b)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
             <div class="fc-info fc-info-b">
               <div class="fc-name">${esc(f.b)}</div>
-              <div class="fc-sub-row fc-sub-row-b">
-                ${oddsTagB}
-                ${recB ? `<span class="fc-record">${esc(recB)}</span>` : ''}
-              </div>
+              ${recB ? `<div class="fc-sub-row fc-sub-row-b"><span class="fc-record">${esc(recB)}</span></div>` : ''}
               ${commLabelB}
               ${groupLabelB}
               ${badgeB}
@@ -1084,6 +1087,7 @@ function formatOdds(n) {
             </div>
             ${photoB}
           </div>
+          ${extOddsB}
         </div>
         ${methodWrap}
         ${ddBtnHtml}

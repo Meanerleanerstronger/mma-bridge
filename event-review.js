@@ -587,10 +587,7 @@ function fightRow(f, communityData) {
     : f.slot === 'comain'
       ? '<span class="er-slot-badge er-comain-badge">CO-MAIN</span>'
       : '';
-  const icons = [
-    f.titleFight ? '🏆' : '',
-    f.ranked     ? '⭐' : '',
-  ].filter(Boolean).join(' ');
+  const titleBadge = f.titleFight ? '<span class="er-title-badge">CHAMPIONSHIP</span>' : '';
 
   const METHOD_LABELS = {
     'KO':'KO','TKO':'TKO','SUB':'Sub',
@@ -646,7 +643,7 @@ function fightRow(f, communityData) {
         ${nameA}
         <span class="er-fvs">vs</span>
         ${nameB}
-        ${icons ? `<span class="er-ficons">${icons}</span>` : ''}
+        ${titleBadge}
       </div>
       <div class="er-fight-meta">
         ${f.weight ? `<span class="pill">${esc(f.weight)}</span>` : ''}

@@ -5939,6 +5939,19 @@ body.light-mode .ev-star-btn.starred {
   grid-template-columns: 1fr 64px 1fr;
   min-height: 110px;
 }
+.fc-matchup.fc-matchup-odds {
+  grid-template-columns: 44px 1fr 64px 1fr 44px;
+}
+.fc-odds-col {
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 2px;
+}
+.fc-odds-num {
+  font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
+  font-size: 0.9rem; font-weight: 900; letter-spacing: 0.02em;
+  line-height: 1; white-space: nowrap;
+}
+.fc-odds-col-b .fc-odds-num { text-align: center; }
 .fc-card.fc-maincrd .fc-matchup { min-height: 128px; }
 .fc-card.fc-main .fc-matchup { min-height: 154px; }
 
