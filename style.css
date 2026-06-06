@@ -137,6 +137,11 @@ a, a:visited {
 .nav-links li a:hover {
   color: #fff;
 }
+.nav-picks-tag {
+  font-size: 0.6em; font-weight: 800; letter-spacing: 0.06em;
+  color: rgba(0,229,255,0.6);
+  vertical-align: middle; margin-left: 2px;
+}
 
 .nav-links li a.active {
   color: #00e5ff;
