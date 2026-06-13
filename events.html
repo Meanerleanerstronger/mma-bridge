@@ -9,7 +9,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <script src="theme.js?v=2.4"></script>
+  <script src="theme.js?v=2.5"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Upcoming UFC Events 2025–2026 — Fight Picks &amp; Previews | MMA Bridge</title>
@@ -112,7 +112,7 @@
   ]
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=7.0" />
+  <link rel="stylesheet" href="style.css?v=7.1" />
 
   <style>
     /* ── KEYFRAMES ── */
@@ -1177,6 +1177,7 @@
 
     function openOverlay(ev){
       currentEvent=ev;
+      if (ev.name) document.title = ev.name + ' | MMA Bridge';
       if (typeof showCountdownCard === 'function') showCountdownCard(ev);
       const special=SPECIAL_EVENTS[ev.id];
       const isPPV=ev.type==='PPV', cls=isPPV?'ppv':'fn';
@@ -1442,6 +1443,7 @@
     function closeOverlay(){
       overlay.setAttribute('aria-hidden','true');
       overlay.classList.remove('open');
+      document.title = 'Upcoming UFC Events 2025–2026 — Fight Picks & Previews | MMA Bridge';
       // only remove no-scroll if picks hub isn't also open
       if(!document.getElementById('phOverlay')?.classList.contains('open'))
         document.body.classList.remove('no-scroll');

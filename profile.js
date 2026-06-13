@@ -303,6 +303,11 @@
         </div>`;
     }
 
+    // Dynamic page title
+    if (profileData.display_name) {
+      document.title = `${profileData.display_name} | MMA Bridge`;
+    }
+
     // Build other-user profile UI
     const initials = (profileData.display_name || 'U').split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
     const avatarHtml = profileData.avatar_url

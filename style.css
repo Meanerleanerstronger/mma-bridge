@@ -7800,22 +7800,70 @@ body.light-mode .pk-opp-label { color: rgba(180,80,0,0.9); background: rgba(190,
 body.light-mode .ch-nav-badge { border-color: #f0f0f4; }
 
 /* ── Site disclaimer footer ── */
+/* ── Focus rings (keyboard-nav only) ── */
+:focus-visible {
+  outline: 2px solid #00e5ff;
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* ── Site Footer ── */
 #site-disclaimer {
   display: block;
   width: 100%;
-  padding: 20px 32px;
+  padding: 40px 32px 32px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  margin-top: 72px;
+}
+.sf-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.sf-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+}
+.sf-nav a {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.sf-nav a:hover { color: #00e5ff; }
+.sf-legal {
   font-family: 'Inter', sans-serif;
-  font-size: 0.65rem;
-  line-height: 1.7;
+  font-size: 0.63rem;
+  line-height: 1.75;
   color: rgba(255,255,255,0.18);
-  text-align: center;
-  border-top: 1px solid rgba(255,255,255,0.05);
-  margin-top: 60px;
+  max-width: 480px;
+  text-align: right;
 }
-body.light-mode #site-disclaimer {
-  color: rgba(0,0,0,0.25);
-  border-top-color: rgba(0,0,0,0.07);
+.sf-legal a {
+  color: inherit;
+  text-decoration: underline;
+  opacity: 0.7;
+  transition: opacity 0.15s;
 }
+.sf-legal a:hover { opacity: 1; }
+@media (max-width: 640px) {
+  .sf-inner { flex-direction: column; gap: 20px; }
+  .sf-legal { text-align: left; }
+  #site-disclaimer { padding: 32px 20px 24px; }
+}
+body.light-mode #site-disclaimer { border-top-color: rgba(0,0,0,0.07); }
+body.light-mode .sf-nav a { color: rgba(0,0,0,0.35); }
+body.light-mode .sf-nav a:hover { color: #009bb5; }
+body.light-mode .sf-legal { color: rgba(0,0,0,0.25); }
 
 /* My Group & H2H tab view */
 .lb-tab-mygroup { border-color: rgba(0,229,255,0.15) !important; }

@@ -187,6 +187,19 @@ function formatOdds(n) {
   const event = eventsData.find(e => e.id === eventId || slugify(e.name || '') === eventId);
   if (!event) { root.innerHTML = `<div class="pk-error">Event not found. <a href="events.html" style="color:#00e5ff;text-decoration:none;">Browse events →</a></div>`; return; }
 
+  // Dynamic page title + OG image
+  if (event.name) {
+    document.title = `${event.name} — Picks | MMA Bridge`;
+    const ogT = document.querySelector('meta[property="og:title"]');
+    if (ogT) ogT.content = `${event.name} — Picks | MMA Bridge`;
+  }
+  if (event.poster) {
+    const ogImg = document.querySelector('meta[property="og:image"]');
+    if (ogImg) ogImg.content = event.poster;
+    const twImg = document.querySelector('meta[name="twitter:image"]');
+    if (twImg) twImg.content = event.poster;
+  }
+
   const isCompleted = event.status === 'completed';
   // Picks lock the moment the event start time passes (even before UFC marks it completed)
   const isLocked = !isCompleted && !!event.start_time && new Date() >= new Date(event.start_time);

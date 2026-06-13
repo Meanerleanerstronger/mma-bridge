@@ -30,6 +30,52 @@ document.addEventListener('DOMContentLoaded', function () {
   // Mirror class to body (IIFE only set it on <html>)
   document.body.classList.toggle('light-mode', isLight);
 
+  // ── Clean URLs: strip .html from address bar ──
+  (function() {
+    var loc = window.location;
+    if (loc.pathname.endsWith('.html')) {
+      var clean = loc.pathname.slice(0, -5);
+      try { history.replaceState(null, '', clean + loc.search + loc.hash); } catch(e) {}
+    }
+  })();
+
+  // ── Mobile nav: close on backdrop tap ──
+  var mobileOverlay = document.getElementById('nav-mobile-overlay');
+  if (mobileOverlay) {
+    mobileOverlay.addEventListener('click', function(e) {
+      if (e.target === mobileOverlay) {
+        mobileOverlay.classList.remove('open');
+        var ham = document.getElementById('nav-hamburger');
+        if (ham) ham.classList.remove('open');
+        document.body.classList.remove('no-scroll');
+      }
+    });
+  }
+
+  // ── Inject site footer on all pages ──
+  if (!document.getElementById('site-disclaimer')) {
+    var ft = document.createElement('footer');
+    ft.id = 'site-disclaimer';
+    ft.innerHTML =
+      '<div class="sf-inner">' +
+        '<nav class="sf-nav">' +
+          '<a href="index.html">Home</a>' +
+          '<a href="events.html">Events</a>' +
+          '<a href="picks.html">Picks</a>' +
+          '<a href="pfp.html">P4P</a>' +
+          '<a href="reviews.html">Reviews</a>' +
+          '<a href="leaderboard.html">Leaderboard</a>' +
+          '<a href="about.html">About</a>' +
+        '</nav>' +
+        '<div class="sf-legal">' +
+          'MMA Bridge is an independent fan site, not affiliated with the UFC or Zuffa LLC.' +
+          ' Fighter images and event posters remain the property of their respective owners.' +
+          ' &nbsp;&middot;&nbsp; <a href="mailto:contact@mmabridge.com">contact@mmabridge.com</a>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(ft);
+  }
+
   var btn = document.getElementById('themeToggle');
   if (!btn) return;
 
