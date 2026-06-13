@@ -162,7 +162,7 @@ export async function fetchWithRetry(url, options = {}, retries = 2) {
 let _eventsCache = null;
 async function fetchEventsJson() {
   if (_eventsCache) return _eventsCache;
-  _eventsCache = await fetch('./events.json').then(r => r.json());
+  _eventsCache = await fetch('./events.json?_=' + Date.now(), { cache: 'no-store' }).then(r => r.json());
   return _eventsCache;
 }
 
