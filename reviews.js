@@ -317,7 +317,9 @@ function isUpcomingEvent(ev) {
 // ── Load ──────────────────────────────────────
 (async () => {
   try {
-    allEvents = await API.getPastEvents();
+    const today = new Date().toISOString().slice(0, 10);
+    const all = await fetch('./events.json?_=' + Date.now(), { cache: 'no-store' }).then(r => r.json());
+    allEvents = all.filter(e => (e.isoDate || '9999') <= today && e.status === 'completed');
     debugLog('Reviews: loaded', allEvents.length, 'past events');
 
     ppvPast = allEvents.filter(ev => (ev.type||'').toUpperCase().includes('PPV'));
