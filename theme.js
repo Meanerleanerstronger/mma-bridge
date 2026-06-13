@@ -30,13 +30,13 @@ document.addEventListener('DOMContentLoaded', function () {
   // Mirror class to body (IIFE only set it on <html>)
   document.body.classList.toggle('light-mode', isLight);
 
-  // ── Clean URLs: strip .html from address bar ──
+  // ── Clean URLs: strip .html, remap index → trending ──
   (function() {
     var loc = window.location;
-    if (loc.pathname.endsWith('.html')) {
-      var clean = loc.pathname.slice(0, -5);
-      try { history.replaceState(null, '', clean + loc.search + loc.hash); } catch(e) {}
-    }
+    var path = loc.pathname;
+    if (path.endsWith('.html')) path = path.slice(0, -5);
+    if (path.endsWith('/index')) path = path.replace(/\/index$/, '/trending');
+    try { history.replaceState(null, '', path + loc.search + loc.hash); } catch(e) {}
   })();
 
   // ── Mobile nav: close on backdrop tap ──
