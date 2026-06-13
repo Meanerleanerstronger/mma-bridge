@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Load events for hero + recent results
   try {
-    const all = await fetch('/events.json').then(r => r.json());
+    const all = await fetch('/events.json?_=' + Date.now(), { cache: 'no-store' }).then(r => r.json());
     const now = new Date();
 
     // Returns true once an event's start time (ET) has passed
@@ -40,7 +40,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     const isVeryRecent = recentCompleted &&
       (now - new Date(recentCompleted.isoDate)) < 3 * 24 * 60 * 60 * 1000;
 
-    renderHero(liveNow || (isVeryRecent ? recentCompleted : null) || upcoming[0] || past[0]);
+    // Pinned hero event — override normal logic when set
+    const HERO_PIN_ID = 'ufc-freedom-250-topuria-vs-gaethje';
+    const pinned = HERO_PIN_ID && all.find(e => e.id === HERO_PIN_ID && e.status === 'upcoming');
+
+    renderHero(liveNow || pinned || (isVeryRecent ? recentCompleted : null) || upcoming[0] || past[0]);
 
     // ── Notification banner check ─────────────
     checkEventNotifications(all);

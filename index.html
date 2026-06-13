@@ -259,90 +259,6 @@
     body.light-mode .ob-step-text strong { color: #000 !important; }
     body.light-mode .ob-skip { color: rgba(0,0,0,.35) !important; }
 
-    /* How it works — compact bottom strip */
-    /* ── HOW IT WORKS — full redesign ── */
-    .hiw-section {
-      max-width: 1060px; margin: 64px auto 80px; padding: 0 24px;
-    }
-    .hiw-eyebrow {
-      font-family: 'Montserrat', sans-serif; font-weight: 900;
-      font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase;
-      color: #00e5ff; text-align: center; margin-bottom: 12px;
-      opacity: 0.7;
-    }
-    .hiw-heading {
-      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
-      font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1;
-      text-align: center; color: #fff;
-      margin-bottom: 48px; letter-spacing: -0.01em;
-    }
-    .hiw-heading span { color: #00e5ff; }
-    .hiw-strip {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
-    }
-    @media (max-width: 700px) { .hiw-strip { grid-template-columns: 1fr; gap: 12px; } }
-    .hiw-card {
-      position: relative; overflow: hidden;
-      display: flex; flex-direction: column;
-      background: rgba(255,255,255,.03);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 20px; padding: 32px 28px 28px;
-      text-decoration: none; cursor: pointer;
-      transition: transform 0.3s cubic-bezier(0.22,1,0.36,1),
-                  border-color 0.3s ease,
-                  box-shadow 0.3s ease;
-    }
-    .hiw-card::before {
-      content: ''; position: absolute; inset: 0;
-      background: var(--hiw-glow, radial-gradient(ellipse at 30% 0%, rgba(0,229,255,.08) 0%, transparent 65%));
-      opacity: 0; transition: opacity 0.35s ease; pointer-events: none;
-    }
-    .hiw-card:hover { transform: perspective(1000px) rotateX(4deg) translateY(-6px); border-color: var(--hiw-accent, rgba(0,229,255,.35)); box-shadow: 0 24px 60px rgba(0,0,0,.5), 0 0 0 1px var(--hiw-accent, rgba(0,229,255,.12)); }
-    .hiw-card:hover::before { opacity: 1; }
-    .hiw-card-icon {
-      width: 48px; height: 48px; border-radius: 14px; margin-bottom: 20px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      background: var(--hiw-icon-bg, rgba(0,229,255,.1));
-      border: 1px solid var(--hiw-icon-border, rgba(0,229,255,.2));
-      color: var(--hiw-accent-solid, #00e5ff);
-      transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease;
-    }
-    .hiw-card:hover .hiw-card-icon { transform: scale(1.1); box-shadow: 0 8px 24px var(--hiw-icon-shadow, rgba(0,229,255,.25)); }
-    .hiw-card-step {
-      font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 0.55rem;
-      letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--hiw-accent-solid, #00e5ff); opacity: 0.6; margin-bottom: 8px;
-    }
-    .hiw-card-title {
-      font-family: 'Barlow Condensed', sans-serif; font-weight: 900;
-      font-size: 1.55rem; line-height: 1; color: #fff;
-      margin-bottom: 10px; letter-spacing: 0.01em;
-    }
-    .hiw-card-sub {
-      font-family: 'Inter', sans-serif; font-size: 0.8rem;
-      color: rgba(255,255,255,.38); line-height: 1.55; flex: 1;
-    }
-    .hiw-card-cta {
-      display: inline-flex; align-items: center; gap: 6px; margin-top: 24px;
-      font-family: 'Montserrat', sans-serif; font-size: 0.68rem; font-weight: 800;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--hiw-accent-solid, #00e5ff); opacity: 0.7;
-      transition: opacity 0.2s ease, gap 0.2s ease;
-    }
-    .hiw-card:hover .hiw-card-cta { opacity: 1; gap: 10px; }
-    .hiw-card-cta svg { transition: transform 0.2s ease; }
-    .hiw-card:hover .hiw-card-cta svg { transform: translateX(3px); }
-    /* Card accent variants */
-    .hiw-card-picks  { --hiw-accent: rgba(0,229,255,.35); --hiw-accent-solid: #00e5ff; --hiw-icon-bg: rgba(0,229,255,.08); --hiw-icon-border: rgba(0,229,255,.2); --hiw-icon-shadow: rgba(0,229,255,.2); --hiw-glow: radial-gradient(ellipse at 20% 0%, rgba(0,229,255,.1) 0%, transparent 65%); }
-    .hiw-card-rate   { --hiw-accent: rgba(255,170,0,.35); --hiw-accent-solid: #ffaa00; --hiw-icon-bg: rgba(255,170,0,.08); --hiw-icon-border: rgba(255,170,0,.2); --hiw-icon-shadow: rgba(255,170,0,.2); --hiw-glow: radial-gradient(ellipse at 20% 0%, rgba(255,170,0,.09) 0%, transparent 65%); }
-    .hiw-card-lucas  { --hiw-accent: rgba(160,100,255,.4); --hiw-accent-solid: #a064ff; --hiw-icon-bg: rgba(160,100,255,.08); --hiw-icon-border: rgba(160,100,255,.2); --hiw-icon-shadow: rgba(160,100,255,.2); --hiw-glow: radial-gradient(ellipse at 20% 0%, rgba(160,100,255,.1) 0%, transparent 65%); }
-    /* Light mode */
-    body.light-mode .hiw-heading { color: #0a0a0d; }
-    body.light-mode .hiw-heading span { color: #007acc; }
-    body.light-mode .hiw-card { background: rgba(0,0,0,.02); border-color: rgba(0,0,0,.08); }
-    body.light-mode .hiw-card:hover { border-color: rgba(0,122,204,.3); box-shadow: 0 16px 48px rgba(0,0,0,.12); }
-    body.light-mode .hiw-card-title { color: #0a0a0d; }
-    body.light-mode .hiw-card-sub { color: rgba(0,0,0,.42); }
   </style>
 </head>
 
@@ -453,56 +369,8 @@
     </div>
   </div>
 
-  <!-- HOW IT WORKS -->
-  <section class="hiw-section reveal">
-    <div class="hiw-eyebrow">What you can do</div>
-    <h2 class="hiw-heading">On <span>MMA Bridge</span></h2>
-    <div class="hiw-strip">
-
-      <a class="hiw-card hiw-card-picks" href="picks.html?picker=1">
-        <div class="hiw-card-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <div class="hiw-card-step">Step 01</div>
-        <div class="hiw-card-title">Pick Fights</div>
-        <div class="hiw-card-sub">Call the winner, method, and round before the card locks. Stack points, climb the global leaderboard, and put your fight IQ on the line.</div>
-        <div class="hiw-card-cta">
-          Make your picks
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </div>
-      </a>
-
-      <a class="hiw-card hiw-card-rate" href="reviews.html">
-        <div class="hiw-card-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        </div>
-        <div class="hiw-card-step">Step 02</div>
-        <div class="hiw-card-title">Rate Events</div>
-        <div class="hiw-card-sub">Drop a star rating and written take on any completed card. Like Letterboxd but for UFC — your reviews live on the event forever.</div>
-        <div class="hiw-card-cta">
-          Leave a review
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </div>
-      </a>
-
-      <a class="hiw-card hiw-card-lucas" href="lucas.html">
-        <div class="hiw-card-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        </div>
-        <div class="hiw-card-step">Step 03</div>
-        <div class="hiw-card-title">Ask Lucas</div>
-        <div class="hiw-card-sub">Our AI MMA ambassador knows every fighter, result, and pick on the site. Debates, predictions, parlays, site navigation — he's got you.</div>
-        <div class="hiw-card-cta">
-          Talk to Lucas
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </div>
-      </a>
-
-    </div>
-  </section>
-
   <script src="notifications.js?v=2.1"></script>
-  <script type="module" src="script.js?v=2.5"></script>
+  <script type="module" src="script.js?v=2.6"></script>
 
   <script>
     window.addEventListener('scroll', () => {
