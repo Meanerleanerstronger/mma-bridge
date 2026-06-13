@@ -1,10 +1,29 @@
-/* MMA Bridge — shared countdown utility v1.0 */
+/* MMA Bridge — shared countdown utility v1.1
+   Adds: digit-flip animation, urgency/soon classes on parent pill
+*/
 (function () {
   'use strict';
 
   var _ivs = {};
 
   function pad(n) { return String(n).padStart(2, '0'); }
+
+  /* Extract current number texts from rendered cd-n spans */
+  function prevNums(el) {
+    return Array.from(el.querySelectorAll('.cd-n')).map(function (s) { return s.textContent; });
+  }
+
+  /* After setting innerHTML, flip any cd-n spans whose value changed */
+  function applyFlip(el, prev) {
+    var next = el.querySelectorAll('.cd-n');
+    next.forEach(function (span, i) {
+      if (prev[i] !== undefined && prev[i] !== span.textContent) {
+        span.classList.remove('cd-flip');
+        void span.offsetWidth; // restart animation
+        span.classList.add('cd-flip');
+      }
+    });
+  }
 
   /**
    * Start a live countdown inside el.
@@ -32,6 +51,8 @@
           el.innerHTML = '<span class="cd-ended">—</span>';
           clearInterval(_ivs[key]); delete _ivs[key];
         }
+        // Remove urgency classes when live/ended
+        el.classList.remove('cd-is-urgent', 'cd-is-soon');
         return;
       }
 
@@ -53,7 +74,18 @@
         html = '<span class="cd-n cd-urgent">' + m + '</span><span class="cd-u cd-urgent">m</span> <span class="cd-n cd-urgent">' + pad(s) + '</span><span class="cd-u cd-urgent">s</span>';
       }
 
+      // Capture previous values before replacing innerHTML
+      var prev = prevNums(el);
       el.innerHTML = html;
+
+      // Flip digits that changed
+      applyFlip(el, prev);
+
+      // Urgency classes on the pill element itself
+      var isUrgent = diff < 3600000;
+      var isSoon   = !isUrgent && diff < 86400000;
+      el.classList.toggle('cd-is-urgent', isUrgent);
+      el.classList.toggle('cd-is-soon',   isSoon);
     }
 
     render();
@@ -77,6 +109,6 @@
     } catch (e) { return ''; }
   }
 
-  window.initCountdown  = initCountdown;
+  window.initCountdown   = initCountdown;
   window.formatLocalTime = formatLocalTime;
 })();

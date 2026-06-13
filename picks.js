@@ -1727,7 +1727,7 @@ function formatOdds(n) {
       <div class="pk-hype-meter" id="pkHypeWidget">
         <div class="pk-hm-label">HYPE</div>
         <div class="pk-hm-track" id="pkHypeTrack">
-          <div class="pk-hm-fill" id="pkHypeFill" style="width:${pct}%"></div>
+          <div class="pk-hm-fill" id="pkHypeFill" style="width:0%" data-target-pct="${pct}"></div>
           <div class="pk-hm-thumb" id="pkHypeThumb" style="left:${pct}%;display:${pct > 0 ? 'block' : 'none'}"></div>
           <div class="pk-hm-track-label" id="pkHypeLabel" style="position:absolute;left:50%;transform:translateX(-50%);pointer-events:none;font-family:'Inter',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:${pct > 0 ? 'rgba(255,255,255,0.55)' : 'rgba(255,255,255,0.28)'};white-space:nowrap;">${label}</div>
         </div>
@@ -2504,13 +2504,21 @@ function formatOdds(n) {
   // ── Cascade entrance animation ────────────────
   function animateFightEntrance() {
     root.querySelectorAll('.sb-fight').forEach((card, i) => {
-      card.style.clipPath = 'inset(0 100% 0 0)';
-      card.style.transition = 'none';
+      // Clear any leftover clip-path from a previous run
+      card.style.clipPath = '';
+      card.classList.remove('fc-entering');
+      card.style.animationDelay = (i * 72) + 'ms';
+      void card.offsetWidth; // reflow to restart animation
+      card.classList.add('fc-entering');
+    });
+    // Animate hype fill bar from 0 → target after cards enter
+    requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        setTimeout(() => {
-          card.style.transition = `clip-path 0.6s cubic-bezier(0.22, 1, 0.36, 1) ${i * 80}ms`;
-          card.style.clipPath = 'inset(0 0% 0 0)';
-        }, 30);
+        const fill = document.getElementById('pkHypeFill');
+        if (fill) {
+          const pct = parseFloat(fill.dataset.targetPct || '0');
+          fill.style.width = pct + '%';
+        }
       });
     });
   }

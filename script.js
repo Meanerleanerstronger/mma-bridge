@@ -345,6 +345,7 @@ function paintNews(articles, container, list) {
 
     if (container) {
       container.innerHTML = articles.slice(0, 3).map(function(a, i) { return buildCard(a, i); }).join('');
+      if (window.MicroStaggerNews) MicroStaggerNews(container);
     }
 
     // Sidebar

@@ -10451,3 +10451,186 @@ button:active, [role="button"]:active, .lb-tab:active, .pk-seg-btn:active,
 .mb-ob-btn { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 9px 16px; border-radius: 8px; text-decoration: none; border: none; cursor: pointer; }
 .mb-ob-btn.primary { background: #00e5ff; color: #040406; }
 .mb-ob-btn.dismiss { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.45); }
+
+
+/* ═══════════════════════════════════════════════════════════
+   MICRO-INTERACTIONS v1.0
+   Kinetic energy without spectacle — speed + vibe.
+═══════════════════════════════════════════════════════════ */
+
+/* ── Shared stagger-in keyframes ──────────────────────── */
+@keyframes micro-slide-up {
+  0%   { opacity: 0; transform: translateY(18px) scale(0.97); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes micro-slide-left {
+  0%   { opacity: 0; transform: translateX(-16px); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes micro-scale-in {
+  0%   { opacity: 0; transform: scale(0.55); }
+  100% { opacity: 1; transform: none; }
+}
+.micro-stagger-up { animation: micro-slide-up   0.42s cubic-bezier(0.22,1,0.36,1) both; }
+.micro-stagger-lft{ animation: micro-slide-left 0.38s cubic-bezier(0.22,1,0.36,1) both; }
+.micro-stagger-sc { animation: micro-scale-in   0.32s cubic-bezier(0.34,1.56,0.64,1) both; }
+
+/* ── Countdown: digit flip on tick ───────────────────── */
+@keyframes cd-flip {
+  0%   { opacity: 0; transform: translateY(-35%) scaleY(0.6); }
+  100% { opacity: 1; transform: none; }
+}
+.cd-n.cd-flip {
+  display: inline-block;
+  animation: cd-flip 0.17s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+/* ── Countdown: < 24h approaching ────────────────────── */
+@keyframes cd-amber-pulse {
+  0%,100% { box-shadow: 0 0 0 0 transparent; }
+  50%      { box-shadow: 0 0 10px 3px rgba(255,140,0,0.22); }
+}
+.pk-countdown.cd-is-soon {
+  background:    rgba(255,140,0,0.10) !important;
+  border-color:  rgba(255,140,0,0.30) !important;
+  color:         rgba(255,165,40,0.90) !important;
+  animation: cd-amber-pulse 2.4s ease infinite !important;
+}
+
+/* ── Countdown: < 1h urgent ──────────────────────────── */
+@keyframes cd-heartbeat {
+  0%,100% { transform: scale(1); }
+  14%      { transform: scale(1.06); }
+  28%      { transform: scale(1.00); }
+  42%      { transform: scale(1.04); }
+}
+.pk-countdown.cd-is-urgent {
+  background:   rgba(255,40,40,0.12) !important;
+  border-color: rgba(255,60,60,0.40) !important;
+  color:        rgba(255,110,110,0.95) !important;
+  animation: cd-heartbeat 1.4s ease infinite !important;
+}
+
+/* ── Hype fill bars — smooth animate ─────────────────── */
+.pk-hm-fill {
+  transition: width 0.95s cubic-bezier(0.22,1,0.36,1) !important;
+}
+.ov-hype-fill {
+  transition: width 0.85s cubic-bezier(0.22,1,0.36,1), background 0.25s ease !important;
+}
+
+/* ── Fight card entrance (picks page) ────────────────── */
+@keyframes fc-enter {
+  0%   { opacity: 0; transform: translateY(20px) scale(0.96); }
+  100% { opacity: 1; transform: none; }
+}
+.sb-fight.fc-entering {
+  animation: fc-enter 0.46s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+/* ── Overlay fight rows (events page) ────────────────── */
+@keyframes ov-row-enter {
+  0%   { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: none; }
+}
+.ov-fight.ov-entering,
+.ov-section-header.ov-entering {
+  animation: ov-row-enter 0.38s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+/* ── News card entrance (homepage) ───────────────────── */
+@keyframes nc-enter {
+  0%   { opacity: 0; transform: translateY(14px); }
+  100% { opacity: 1; transform: none; }
+}
+.card-link.nc-entering {
+  animation: nc-enter 0.40s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+/* ── Results track card entrance ─────────────────────── */
+@keyframes rc-enter {
+  0%   { opacity: 0; transform: translateX(16px) scale(0.96); }
+  100% { opacity: 1; transform: none; }
+}
+.result-event-card.rc-entering {
+  animation: rc-enter 0.38s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+/* ── PFP stat box reveal ─────────────────────────────── */
+@keyframes stat-reveal {
+  0%   { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: none; }
+}
+.pfp-stat-box.stat-entering {
+  animation: stat-reveal 0.32s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+/* ── PFP streak pill pop-in ──────────────────────────── */
+@keyframes pill-pop {
+  0%   { opacity: 0; transform: scale(0.4); }
+  70%  { transform: scale(1.12); }
+  100% { opacity: 1; transform: none; }
+}
+.pfp-streak-pill.pill-popping {
+  animation: pill-pop 0.30s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+
+/* ── Live dot — enhanced ring pulse ──────────────────── */
+@keyframes live-ring {
+  0%   { box-shadow: 0 0 0 0 rgba(255,30,30,0.75); }
+  70%  { box-shadow: 0 0 0 8px rgba(255,30,30,0.00); }
+  100% { box-shadow: 0 0 0 0 rgba(255,30,30,0.00); }
+}
+.cd-live-dot {
+  animation: pulse 1.2s ease-in-out infinite, live-ring 1.2s ease-out infinite !important;
+}
+
+/* ── Smooth theme transition ─────────────────────────── */
+body.theme-transitioning *:not(img):not(video):not(svg):not(path):not(circle):not(polyline):not(polygon):not(line):not(rect) {
+  transition:
+    background-color 0.32s ease,
+    color            0.24s ease,
+    border-color     0.32s ease,
+    box-shadow       0.32s ease !important;
+}
+
+/* ── Card hover lift (news + review cards) ───────────── */
+.medium-card {
+  transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease !important;
+  will-change: transform;
+}
+.card-link:hover .medium-card {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 18px 44px rgba(0,0,0,0.52) !important;
+}
+
+/* ── Button micro-press ──────────────────────────────── */
+.pk-save-btn:active,
+.ob-cta:active,
+.hiw-card-cta:active {
+  transform: scale(0.96) !important;
+  transition: transform 0.08s ease !important;
+}
+
+/* ── Nav link underline slide ────────────────────────── */
+.nav-links a {
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 50%; right: 50%;
+  height: 1.5px;
+  background: #00e5ff;
+  transition: left 0.25s cubic-bezier(0.22,1,0.36,1), right 0.25s cubic-bezier(0.22,1,0.36,1);
+  border-radius: 2px;
+}
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  left: 0; right: 0;
+}
+
+/* ── Scroll-reveal: smoother easing ─────────────────── */
+.reveal {
+  will-change: opacity, transform;
+}

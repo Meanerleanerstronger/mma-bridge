@@ -194,14 +194,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.body.classList.add("no-scroll");
 
         requestAnimationFrame(() => {
+          // Stat boxes
+          if (window.MicroStaggerStats) MicroStaggerStats(panel);
+          // Streak pills
+          if (window.MicroStaggerPills) MicroStaggerPills(panel.querySelector('.pfp-streak-bar'));
+          // Fight history cards
           panel.querySelectorAll('.pfp-fight-card').forEach((el, i) => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(12px)';
-            setTimeout(() => {
-              el.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
-              el.style.opacity = '1';
-              el.style.transform = 'translateY(0)';
-            }, 180 + i * 55);
+            el.classList.remove('micro-stagger-up');
+            el.style.animationDelay = (220 + i * 60) + 'ms';
+            void el.offsetWidth;
+            el.classList.add('micro-stagger-up');
           });
         });
       };
