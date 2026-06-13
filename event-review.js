@@ -1032,6 +1032,22 @@ function renderPage(ev, community, extra = {}) {
     }
 
     const isCompleted = ev.status === 'completed';
+
+    // Dynamic page title + OG tags
+    if (ev.name) {
+      document.title = `${ev.name} — Review | MMA Bridge`;
+      const ogTitle = document.querySelector('meta[property="og:title"]');
+      if (ogTitle) ogTitle.content = `${ev.name} — Review | MMA Bridge`;
+      const twTitle = document.querySelector('meta[name="twitter:title"]');
+      if (twTitle) twTitle.content = `${ev.name} — Review | MMA Bridge`;
+    }
+    if (ev.poster) {
+      const ogImg = document.querySelector('meta[property="og:image"]');
+      if (ogImg) ogImg.content = ev.poster;
+      const twImg = document.querySelector('meta[name="twitter:image"]');
+      if (twImg) twImg.content = ev.poster;
+    }
+
     updateCommBadge(community);
     renderPage(ev, community, {
       communityPicks: isCompleted ? (communityPicks || {}) : {},
