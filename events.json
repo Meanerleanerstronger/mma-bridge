@@ -10182,7 +10182,7 @@
     "location": "Las Vegas, NV",
     "venue": "Meta APEX",
     "poster": "https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-05/060626-ufc-fight-night-muhammad-vs-bonfim-EVENT-ART.jpg",
-    "status": "upcoming",
+    "status": "completed",
     "mainCard": [
       {
         "a": "Belal Muhammad",
@@ -10192,6 +10192,9 @@
         "titleFight": false,
         "ranked": true,
         "slot": "main",
+        "winner": "Gabriel Bonfim",
+        "method": "DEC",
+        "round": 5,
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-11/MUHAMMAD_BELAL_11-22.png",
         "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-11/BONFIM_GABRIEL_11-08.png"
       },
@@ -10203,76 +10206,12 @@
         "titleFight": false,
         "ranked": true,
         "slot": "comain",
+        "winner": "Brendan Allen",
+        "method": "DEC",
+        "round": 3,
+        "fotn": true,
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-10/ALLEN_BRENDAN_10-18.png",
         "imgB": ""
-      },
-      {
-        "a": "Bryce Mitchell",
-        "b": "Victor Henry",
-        "weight": "Bantamweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-07/MITCHELL_BRYCE_07-26.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-04/HENRY_VICTOR_04-05.png"
-      },
-      {
-        "a": "Iwo Baraniewski",
-        "b": "Billy Elekana",
-        "weight": "Light Heavyweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-03/BARANIEWSKI_IWO_03-21.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-01/ELEKANA_BILLY_01-31.png"
-      }
-    ],
-    "prelims": [
-      {
-        "a": "Imanol Rodriguez",
-        "b": "Matt Schnell",
-        "weight": "Flyweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-02/RODRIGUEZ_IMANOL_02-28.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-11/SCHNELL_MATT_11-08.png"
-      },
-      {
-        "a": "Marcus McGhee",
-        "b": "Jakub Wiklacz",
-        "weight": "Bantamweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-07/MCGHEE_MARCUS_07-26.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-10/WIKLACZ_JAKUB_10-04.png"
-      },
-      {
-        "a": "Bruno Silva",
-        "b": "Edgar Chairez",
-        "weight": "Flyweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-03/SILVA_BRUNO_03-14.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-02/CHAIREZ_EDGAR_02-28.png"
-      },
-      {
-        "a": "Jordan Leavitt",
-        "b": "Joanderson Brito",
-        "weight": "Featherweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-02/LEAVITT_JORDAN_02-21.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-12/BRITO_JOANDERSON_12-13.png"
       },
       {
         "a": "Fares Ziam",
@@ -10282,8 +10221,97 @@
         "titleFight": false,
         "ranked": true,
         "slot": "",
+        "winner": "Tom Nolan",
+        "method": "DEC",
+        "round": 3,
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-12/ZIAM_FARES_12-06.png",
         "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-09/NOLAN_TOM_09-27.png"
+      },
+      {
+        "a": "Bryce Mitchell",
+        "b": "Santiago Luna",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "winner": "Bryce Mitchell",
+        "method": "SUB",
+        "round": 3,
+        "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-07/MITCHELL_BRYCE_07-26.png",
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-04/HENRY_VICTOR_04-05.png"
+      },
+      {
+        "a": "Iwo Baraniewski",
+        "b": "Junior Tafa",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "winner": "Iwo Baraniewski",
+        "method": "TKO",
+        "round": 1,
+        "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-03/BARANIEWSKI_IWO_03-21.png",
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-01/ELEKANA_BILLY_01-31.png"
+      }
+    ],
+    "prelims": [
+      {
+        "a": "Alessandro Costa",
+        "b": "Matt Schnell",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "winner": "Alessandro Costa",
+        "method": "TKO",
+        "round": 1,
+        "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-02/RODRIGUEZ_IMANOL_02-28.png",
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-11/SCHNELL_MATT_11-08.png"
+      },
+      {
+        "a": "Marcus McGhee",
+        "b": "John Yannis",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "winner": "Marcus McGhee",
+        "method": "DEC",
+        "round": 3,
+        "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-07/MCGHEE_MARCUS_07-26.png",
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-10/WIKLACZ_JAKUB_10-04.png"
+      },
+      {
+        "a": "Edgar Chairez",
+        "b": "Bruno Gustavo da Silva",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "winner": "Edgar Chairez",
+        "method": "SUB",
+        "round": 1,
+        "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-02/CHAIREZ_EDGAR_02-28.png",
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-03/SILVA_BRUNO_03-14.png"
+      },
+      {
+        "a": "Joanderson Brito",
+        "b": "Jordan Leavitt",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "winner": "Joanderson Brito",
+        "method": "SUB",
+        "round": 1,
+        "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-12/BRITO_JOANDERSON_12-13.png",
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-02/LEAVITT_JORDAN_02-21.png"
       },
       {
         "a": "Ketlen Souza",
@@ -10293,19 +10321,25 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
+        "winner": "Ketlen Souza",
+        "method": "KO",
+        "round": 1,
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-02/SOUZA_KETLEN_02-07.png",
         "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-10/CARNELOSSI_ARIANE_11-01.png"
       },
       {
-        "a": "Priscila Cachoeira",
-        "b": "Chelsea Chandler",
+        "a": "Chelsea Chandler",
+        "b": "Priscila Cachoeira",
         "weight": "Women's Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-02/CACHOEIRA_PRISCILA_02-07.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-04/CHANDLER_CHELSEA_04-26.png"
+        "winner": "Chelsea Chandler",
+        "method": "SUB",
+        "round": 1,
+        "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-04/CHANDLER_CHELSEA_04-26.png",
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2026-02/CACHOEIRA_PRISCILA_02-07.png"
       },
       {
         "a": "Jeisla Chaves",
@@ -10315,6 +10349,9 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
+        "winner": "Jeisla Chaves",
+        "method": "DEC",
+        "round": 3,
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-09/CHAVES_JEISLA.png",
         "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-03/DUBEN_YUNEISY_03-15.png"
       }
