@@ -321,8 +321,8 @@ function formatOdds(n) {
         const { correct, total } = computeScore ? computeScore() : { correct: 0, total: 0 };
         if (total > 0) {
           const pct = Math.round((correct / total) * 100);
-          const emoji = pct >= 70 ? '🔥' : pct >= 50 ? '💪' : '😬';
-          showToast(`Results in! You went ${correct}/${total} — ${pct}% ${emoji}`, 'ok');
+          const verdict = pct >= 70 ? 'Sharp.' : pct >= 50 ? 'Solid.' : 'Keep grinding.';
+          showToast(`Results in — ${correct}/${total} correct (${pct}%). ${verdict}`, 'ok');
           if (pct >= 50 && correct >= 2 && typeof confetti === 'function') {
             setTimeout(() => confetti({
               particleCount: Math.min(correct * 25, 180),

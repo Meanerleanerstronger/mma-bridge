@@ -2,16 +2,28 @@
 // Opens on ⌘K / Ctrl+K — searches pages, events, fighters.
 
 (function() {
+  var _I = {
+    home:  '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>',
+    cal:   '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
+    pick:  '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>',
+    rank:  '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>',
+    star:  '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+    chart: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>',
+    bolt:  '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+    info:  '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>',
+    user:  '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+    event: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
+  };
   var NAV = [
-    { label:'Trending',      icon:'📰', href:'index.html',       desc:'Homepage & latest MMA news' },
-    { label:'Events',        icon:'📅', href:'events.html',      desc:'Upcoming UFC events & fight cards' },
-    { label:'Make Picks',    icon:'🥊', href:'picks.html',       desc:'Submit your fight predictions' },
-    { label:'P4P Rankings',  icon:'🏆', href:'pfp.html',         desc:'Pound-for-pound fighter rankings' },
-    { label:'Reviews',       icon:'⭐', href:'reviews.html',     desc:'Rate & review completed events' },
-    { label:'Leaderboard',   icon:'📊', href:'leaderboard.html', desc:'Community pick accuracy rankings' },
-    { label:'Lucas Bot',     icon:'🤖', href:'lucas.html',       desc:'AI fight predictor & analysis' },
-    { label:'About',         icon:'ℹ️',  href:'about.html',       desc:'About MMA Bridge' },
-    { label:'Sign In',       icon:'🔑', href:'auth.html',        desc:'Log in or create an account' },
+    { label:'Trending',      icon:_I.home,  href:'index.html',       desc:'Homepage & latest MMA news' },
+    { label:'Events',        icon:_I.cal,   href:'events.html',      desc:'Upcoming UFC events & fight cards' },
+    { label:'Make Picks',    icon:_I.pick,  href:'picks.html',       desc:'Submit your fight predictions' },
+    { label:'P4P Rankings',  icon:_I.rank,  href:'pfp.html',         desc:'Pound-for-pound fighter rankings' },
+    { label:'Reviews',       icon:_I.star,  href:'reviews.html',     desc:'Rate & review completed events' },
+    { label:'Leaderboard',   icon:_I.chart, href:'leaderboard.html', desc:'Community pick accuracy rankings' },
+    { label:'Lucas Bot',     icon:_I.bolt,  href:'lucas.html',       desc:'AI fight predictor & analysis' },
+    { label:'About',         icon:_I.info,  href:'about.html',       desc:'About MMA Bridge' },
+    { label:'Sign In',       icon:_I.user,  href:'auth.html',        desc:'Log in or create an account' },
   ];
 
   var evCache = [];
@@ -48,7 +60,7 @@
         evCache = (data || []).filter(function(e) { return e.name; }).map(function(e) {
           return {
             label: e.name,
-            icon:  e.type === 'PPV' ? '🥊' : '📅',
+            icon:  _I.event,
             href:  'events.html?id=' + encodeURIComponent(e.id),
             desc:  (e.isoDate || '') + (e.venue ? ' · ' + e.venue : ''),
             status: e.status || ''

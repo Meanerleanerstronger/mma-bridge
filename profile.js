@@ -205,14 +205,21 @@
     // ── Perfect card check for other user ────────────────────
     const otherHasPerfectCard = Object.values(otherEvStats).some(s => s.scored >= 3 && s.correct === s.scored);
 
+    const _SVG_ZAP    = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`;
+    const _SVG_TREND  = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>`;
+    const _SVG_STAR   = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
+    const _SVG_CHECK  = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`;
+    const _SVG_TARGET = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`;
+    const _SVG_SHIELD = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`;
+
     const otherBadges = [];
-    if (otherHasDarkHorse)            otherBadges.push({ icon: '⚡', name: 'Dark Horse',   desc: 'Called an underdog win' });
-    if (otherBestStreak >= 3)         otherBadges.push({ icon: '🔥', name: 'On a Run',     desc: `${otherBestStreak}-event best streak` });
-    if (otherCurrentStreak >= 5)      otherBadges.push({ icon: '🔥', name: 'Hot Hand',     desc: `${otherCurrentStreak}-event current streak` });
-    if (otherUpsetCount >= 3)         otherBadges.push({ icon: '👑', name: 'Upset King',   desc: `Called ${otherUpsetCount} upsets` });
-    if (otherHasPerfectCard)          otherBadges.push({ icon: '💯', name: 'Perfect Card', desc: 'Got all picks right in an event' });
-    if (picks.length >= 30)           otherBadges.push({ icon: 'M',  name: 'Pick Master',  desc: '30+ total picks' });
-    if (Object.keys(otherEvStats).length >= 5) otherBadges.push({ icon: 'V', name: 'Veteran', desc: 'Picked 5+ events' });
+    if (otherHasDarkHorse)            otherBadges.push({ icon: _SVG_ZAP,    name: 'Dark Horse',   desc: 'Called an underdog win' });
+    if (otherBestStreak >= 3)         otherBadges.push({ icon: _SVG_TREND,  name: 'On a Run',     desc: `${otherBestStreak}-event best streak` });
+    if (otherCurrentStreak >= 5)      otherBadges.push({ icon: _SVG_TREND,  name: 'Hot Hand',     desc: `${otherCurrentStreak}-event current streak` });
+    if (otherUpsetCount >= 3)         otherBadges.push({ icon: _SVG_STAR,   name: 'Upset King',   desc: `Called ${otherUpsetCount} upsets` });
+    if (otherHasPerfectCard)          otherBadges.push({ icon: _SVG_CHECK,  name: 'Perfect Card', desc: 'Got all picks right in an event' });
+    if (picks.length >= 30)           otherBadges.push({ icon: _SVG_TARGET, name: 'Pick Master',  desc: '30+ total picks' });
+    if (Object.keys(otherEvStats).length >= 5) otherBadges.push({ icon: _SVG_SHIELD, name: 'Veteran', desc: 'Picked 5+ events' });
 
     // H2H challenge record for viewed user
     let chWins = 0, chLosses = 0, chTies = 0;
@@ -371,7 +378,7 @@
             <div class="pr-stat-lbl">Events Rated</div>
           </div>
           <div class="pr-stat">
-            <div class="pr-stat-num">${otherCurrentStreak}${otherCurrentStreak >= 3 ? '<span class="pr-streak-fire">🔥</span>' : ''}</div>
+            <div class="pr-stat-num">${otherCurrentStreak}${otherCurrentStreak >= 3 ? '<span class="pr-streak-badge">HOT</span>' : ''}</div>
             <div class="pr-stat-lbl">Current Streak</div>
           </div>
           ${chTotal > 0 ? `<div class="pr-stat">
@@ -624,33 +631,33 @@
 
   // ── Tier computation ──────────────────────────────────────
   function computeTier(judgedPicks, accuracy) {
-    if (judgedPicks === 0) return 'Rookie';
-    if (judgedPicks < 10)  return 'Candidate';
-    if (accuracy === null || accuracy < 40) return 'Iron';
-    if (accuracy < 50) return 'Bronze';
-    if (accuracy < 55) return 'Silver';
-    if (accuracy < 60) return 'Gold';
-    if (accuracy < 65 || judgedPicks < 30) return 'Platinum';
-    if (accuracy < 70 || judgedPicks < 60) return 'Diamond';
-    return 'Legend';
+    if (judgedPicks === 0) return 'Walkout';
+    if (judgedPicks < 10)  return 'Prospect';
+    if (accuracy === null || accuracy < 40) return 'Ranked';
+    if (accuracy < 50) return 'Contender';
+    if (accuracy < 55) return 'Main Event';
+    if (accuracy < 60) return 'Headliner';
+    if (accuracy < 65 || judgedPicks < 30) return 'Champion';
+    if (accuracy < 70 || judgedPicks < 60) return 'P4P';
+    return 'GOAT';
   }
 
   function buildTierProgress(judgedPicks, accuracy) {
     const TIER_STEPS = [
-      { name: 'Rookie',    minJudged: 0,  minAcc: 0  },
-      { name: 'Candidate', minJudged: 1,  minAcc: 0  },
-      { name: 'Iron',      minJudged: 10, minAcc: 0  },
-      { name: 'Bronze',    minJudged: 10, minAcc: 40 },
-      { name: 'Silver',    minJudged: 10, minAcc: 50 },
-      { name: 'Gold',      minJudged: 10, minAcc: 55 },
-      { name: 'Platinum',  minJudged: 30, minAcc: 60 },
-      { name: 'Diamond',   minJudged: 60, minAcc: 65 },
-      { name: 'Legend',    minJudged: 60, minAcc: 70 },
+      { name: 'Walkout',    minJudged: 0,  minAcc: 0  },
+      { name: 'Prospect',   minJudged: 1,  minAcc: 0  },
+      { name: 'Ranked',     minJudged: 10, minAcc: 0  },
+      { name: 'Contender',  minJudged: 10, minAcc: 40 },
+      { name: 'Main Event', minJudged: 10, minAcc: 50 },
+      { name: 'Headliner',  minJudged: 10, minAcc: 55 },
+      { name: 'Champion',   minJudged: 30, minAcc: 60 },
+      { name: 'P4P',        minJudged: 60, minAcc: 65 },
+      { name: 'GOAT',       minJudged: 60, minAcc: 70 },
     ];
     const current = computeTier(judgedPicks, accuracy);
     const currentIdx = TIER_STEPS.findIndex(t => t.name === current);
-    if (current === 'Legend') {
-      return `<div class="pr-tier-progress"><div class="pr-tier-progress-label"><span>MAX TIER</span><span>Legend</span></div><div class="pr-tier-bar-track"><div class="pr-tier-bar-fill" style="width:100%"></div></div></div>`;
+    if (current === 'GOAT') {
+      return `<div class="pr-tier-progress"><div class="pr-tier-progress-label"><span>MAX TIER</span><span>GOAT</span></div><div class="pr-tier-bar-track"><div class="pr-tier-bar-fill" style="width:100%"></div></div></div>`;
     }
     const next = TIER_STEPS[currentIdx + 1];
     const acc = accuracy || 0;
@@ -750,16 +757,27 @@
     .sort((a,b) => b.pct - a.pct);
 
   // ── Compute badges ────────────────────────────
+  const _B = {
+    zap:    `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+    trend:  `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>`,
+    star:   `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+    check:  `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`,
+    target: `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`,
+    shield: `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+    eye:    `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`,
+    clock:  `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
+  };
   const BADGES = [
-    { id: 'sharp',     icon: 'S',  name: 'Sharp',        desc: '70%+ accuracy on any event',        check: () => pickHistory.some(e => e.pct >= 70) },
-    { id: 'perfect',   icon: '💯', name: 'Perfect Card', desc: '100% correct on an event',           check: () => pickHistory.some(e => e.pct === 100 && e.total >= 3) },
-    { id: 'veteran',   icon: 'V',  name: 'Veteran',      desc: 'Picked 5+ events',                   check: () => pickHistory.length >= 5 },
-    { id: 'rater',     icon: 'C',  name: 'Critic',       desc: 'Rated 5+ events',                    check: () => ratings.length >= 5 },
-    { id: 'dayone',    icon: 'D',  name: 'Day One',      desc: 'Early adopter (joined before 2026)',  check: () => new Date(user.created_at) < new Date('2026-01-01') },
-    { id: 'picker',    icon: 'M',  name: 'Pick Master',  desc: '30+ total picks across all events',  check: () => totalPicksAll >= 30 },
-    { id: 'darkhorse', icon: '⚡', name: 'Dark Horse',   desc: 'Correctly called an underdog win',   check: () => hasDarkHorse },
-    { id: 'hothand',   icon: '🔥', name: 'Hot Hand',     desc: '5-event winning streak',             check: () => currentStreak >= 5 },
-    { id: 'upsetking', icon: '👑', name: 'Upset King',   desc: 'Called 3+ upsets across all events', check: () => upsetCount >= 3 },
+    { id: 'sharp',     icon: _B.zap,    name: 'Sharp',        desc: '70%+ accuracy on any event',        check: () => pickHistory.some(e => e.pct >= 70) },
+    { id: 'perfect',   icon: _B.check,  name: 'Perfect Card', desc: '100% correct on an event',           check: () => pickHistory.some(e => e.pct === 100 && e.total >= 3) },
+    { id: 'veteran',   icon: _B.shield, name: 'Veteran',      desc: 'Picked 5+ events',                   check: () => pickHistory.length >= 5 },
+    { id: 'rater',     icon: _B.star,   name: 'Critic',       desc: 'Rated 5+ events',                    check: () => ratings.length >= 5 },
+    { id: 'dayone',    icon: _B.clock,  name: 'Day One',      desc: 'Early adopter (joined before 2026)',  check: () => new Date(user.created_at) < new Date('2026-01-01') },
+    { id: 'picker',    icon: _B.target, name: 'Pick Master',  desc: '30+ total picks across all events',  check: () => totalPicksAll >= 30 },
+    { id: 'darkhorse', icon: _B.zap,    name: 'Dark Horse',   desc: 'Correctly called an underdog win',   check: () => hasDarkHorse },
+    { id: 'hothand',   icon: _B.trend,  name: 'Hot Hand',     desc: '5-event winning streak',             check: () => currentStreak >= 5 },
+    { id: 'upsetking', icon: _B.star,   name: 'Upset King',   desc: 'Called 3+ upsets across all events', check: () => upsetCount >= 3 },
+    { id: 'eyes',      icon: _B.eye,    name: 'Analyst',      desc: 'Viewed results after every event',   check: () => pickHistory.length >= 3 },
   ];
   const earnedBadges = BADGES.filter(b => b.check());
 
@@ -836,7 +854,7 @@
             <div class="pr-stat-lbl">Picks Made</div>
           </div>
           <div class="pr-stat">
-            <div class="pr-stat-num" id="statStreak">${currentStreak}${currentStreak >= 3 ? '<span class="pr-streak-fire">🔥</span>' : ''}</div>
+            <div class="pr-stat-num" id="statStreak">${currentStreak}${currentStreak >= 3 ? '<span class="pr-streak-badge">HOT</span>' : ''}</div>
             <div class="pr-stat-lbl">Current Streak</div>
           </div>
           <div class="pr-stat">

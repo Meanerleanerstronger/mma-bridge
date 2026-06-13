@@ -32,15 +32,15 @@
 
   // ── Tier Progression System ──────────────────
   function getTier(judged, pct) {
-    if (judged === 0) return { name: 'Rookie',    color: '#666',    rank: 0 };
-    if (judged < 10)  return { name: 'Candidate', color: '#888',    rank: 1 };
-    if (pct === null || pct < 40) return { name: 'Iron',      color: '#8a7560', rank: 2 };
-    if (pct < 50)     return { name: 'Bronze',    color: '#cd7f32', rank: 3 };
-    if (pct < 55)     return { name: 'Silver',    color: '#aaa',    rank: 4 };
-    if (pct < 60)     return { name: 'Gold',      color: '#c8960c', rank: 5 };
-    if (pct < 65 || judged < 30) return { name: 'Platinum', color: '#00d4e8', rank: 6 };
-    if (pct < 70 || judged < 60) return { name: 'Diamond',  color: '#a0e4ff', rank: 7 };
-    return { name: 'Legend',   color: '#c8960c', rank: 8 };
+    if (judged === 0) return { name: 'Walkout',    color: '#666',    rank: 0 };
+    if (judged < 10)  return { name: 'Prospect',   color: '#888',    rank: 1 };
+    if (pct === null || pct < 40) return { name: 'Ranked',    color: '#8a7560', rank: 2 };
+    if (pct < 50)     return { name: 'Contender',  color: '#cd7f32', rank: 3 };
+    if (pct < 55)     return { name: 'Main Event', color: '#aaa',    rank: 4 };
+    if (pct < 60)     return { name: 'Headliner',  color: '#c8960c', rank: 5 };
+    if (pct < 65 || judged < 30) return { name: 'Champion',  color: '#00d4e8', rank: 6 };
+    if (pct < 70 || judged < 60) return { name: 'P4P',       color: '#a0e4ff', rank: 7 };
+    return { name: 'GOAT',      color: '#c8960c', rank: 8 };
   }
 
   function tierBadgeHtml(judged, pct) {
@@ -641,17 +641,17 @@
     const rank = myUser.tierRank;
 
     // Progress bar logic: how far to next tier
-    const tierNames = ['Rookie','Candidate','Iron','Bronze','Silver','Gold','Platinum','Diamond','Legend'];
+    const tierNames = ['Walkout','Prospect','Ranked','Contender','Main Event','Headliner','Champion','P4P','GOAT'];
     let barFill = 0, barColor = t.color, reqText = '';
     if (rank === 0) { barFill = 0; reqText = 'Make your first pick to advance'; }
-    else if (rank === 1) { barFill = Math.min(judged / 10, 1); reqText = `${Math.max(10 - judged, 0)} more judged picks to Iron`; }
-    else if (rank === 2) { barFill = Math.min(pct / 40, 1); reqText = pct < 40 ? `${(40 - pct).toFixed(1)}% accuracy needed for Bronze` : 'Almost there!'; }
-    else if (rank === 3) { barFill = Math.min((pct - 40) / 10, 1); reqText = `${Math.max(50 - pct, 0).toFixed(1)}% more accuracy for Silver`; }
-    else if (rank === 4) { barFill = Math.min((pct - 50) / 5, 1); reqText = `${Math.max(55 - pct, 0).toFixed(1)}% more accuracy for Gold`; }
-    else if (rank === 5) { barFill = Math.min(Math.min((pct - 55) / 5, 1) * 0.5 + Math.min(judged / 30, 1) * 0.5, 1); reqText = pct < 60 ? `${Math.max(60 - pct, 0).toFixed(1)}% accuracy + ${Math.max(30 - judged, 0)} picks for Platinum` : `${Math.max(30 - judged, 0)} more judged picks for Platinum`; }
-    else if (rank === 6) { barFill = Math.min(Math.min((pct - 60) / 5, 1) * 0.5 + Math.min(judged / 60, 1) * 0.5, 1); reqText = pct < 65 ? `${Math.max(65 - pct, 0).toFixed(1)}% accuracy + ${Math.max(60 - judged, 0)} picks for Diamond` : `${Math.max(60 - judged, 0)} more judged picks for Diamond`; }
-    else if (rank === 7) { barFill = Math.min(Math.min((pct - 65) / 5, 1) * 0.5 + Math.min(judged / 60, 1) * 0.5, 1); reqText = pct < 70 ? `${Math.max(70 - pct, 0).toFixed(1)}% accuracy for Legend` : `${Math.max(60 - judged, 0)} more judged picks for Legend`; }
-    else { barFill = 1; reqText = 'Maximum tier achieved! 🏆'; barColor = '#c8960c'; }
+    else if (rank === 1) { barFill = Math.min(judged / 10, 1); reqText = `${Math.max(10 - judged, 0)} more judged picks to reach Ranked`; }
+    else if (rank === 2) { barFill = Math.min(pct / 40, 1); reqText = pct < 40 ? `${(40 - pct).toFixed(1)}% accuracy needed for Contender` : 'Almost there!'; }
+    else if (rank === 3) { barFill = Math.min((pct - 40) / 10, 1); reqText = `${Math.max(50 - pct, 0).toFixed(1)}% more accuracy for Main Event`; }
+    else if (rank === 4) { barFill = Math.min((pct - 50) / 5, 1); reqText = `${Math.max(55 - pct, 0).toFixed(1)}% more accuracy for Headliner`; }
+    else if (rank === 5) { barFill = Math.min(Math.min((pct - 55) / 5, 1) * 0.5 + Math.min(judged / 30, 1) * 0.5, 1); reqText = pct < 60 ? `${Math.max(60 - pct, 0).toFixed(1)}% accuracy + ${Math.max(30 - judged, 0)} picks for Champion` : `${Math.max(30 - judged, 0)} more judged picks for Champion`; }
+    else if (rank === 6) { barFill = Math.min(Math.min((pct - 60) / 5, 1) * 0.5 + Math.min(judged / 60, 1) * 0.5, 1); reqText = pct < 65 ? `${Math.max(65 - pct, 0).toFixed(1)}% accuracy + ${Math.max(60 - judged, 0)} picks for P4P` : `${Math.max(60 - judged, 0)} more judged picks for P4P`; }
+    else if (rank === 7) { barFill = Math.min(Math.min((pct - 65) / 5, 1) * 0.5 + Math.min(judged / 60, 1) * 0.5, 1); reqText = pct < 70 ? `${Math.max(70 - pct, 0).toFixed(1)}% accuracy for GOAT` : `${Math.max(60 - judged, 0)} more judged picks for GOAT`; }
+    else { barFill = 1; reqText = 'Maximum tier reached.'; barColor = '#c8960c'; }
 
     barFill = Math.max(0, Math.min(1, barFill));
 
