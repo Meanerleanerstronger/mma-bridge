@@ -510,7 +510,7 @@ function formatOdds(n) {
   async function saveAllPicks() {
     if (!myId || !sb) { showToast('Sign in to save picks', 'err'); return; }
     const btn = document.getElementById('pkSaveBtn');
-    if (btn) { btn.disabled = true; btn.textContent = 'Saving…'; }
+    if (btn) { btn.disabled = true; btn.classList.add('loading'); btn.textContent = 'Saving…'; }
     try {
       const toDelete = Object.keys(myPicks).filter(k => !localPicks[k]);
       if (toDelete.length > 0) {
@@ -558,7 +558,7 @@ function formatOdds(n) {
       console.error('saveAllPicks:', e);
       showToast('Could not save picks — please try again', 'err');
     } finally {
-      if (btn) btn.disabled = false;
+      if (btn) { btn.disabled = false; btn.classList.remove('loading'); }
     }
   }
 

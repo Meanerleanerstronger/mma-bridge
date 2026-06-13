@@ -6705,6 +6705,17 @@ body.light-mode .pk-info-pop-body strong { color: rgba(0,0,0,0.75); }
 }
 .pk-save-btn:hover { background: rgba(255,255,255,0.09); border-color: rgba(255,255,255,0.22); color: rgba(255,255,255,0.8); }
 .pk-save-btn.saved { border-color: rgba(80,200,120,0.3); color: rgba(80,200,120,0.75); background: rgba(80,200,120,0.04); }
+@keyframes pk-spin { to { transform: rotate(360deg); } }
+.pk-save-btn.loading { cursor: wait; pointer-events: none; opacity: 0.75; }
+.pk-save-btn.loading::before {
+  content: '';
+  width: 11px; height: 11px;
+  border: 2px solid rgba(255,255,255,0.15);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: pk-spin 0.65s linear infinite;
+  flex-shrink: 0;
+}
 .pk-save-btn.dirty {
   background: rgba(200,150,12,0.1);
   border-color: rgba(200,150,12,0.45);

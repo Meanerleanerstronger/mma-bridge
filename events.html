@@ -112,7 +112,7 @@
   ]
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=7.1" />
+  <link rel="stylesheet" href="style.css?v=7.2" />
 
   <style>
     /* ── KEYFRAMES ── */
@@ -122,6 +122,20 @@
     @keyframes pulse    { 0%,100%{opacity:1} 50%{opacity:.45} }
     @keyframes ovIn     { from{opacity:0;transform:scale(.97) translateY(12px)} to{opacity:1;transform:scale(1) translateY(0)} }
     @keyframes glowPop  { 0%{box-shadow:none} 50%{box-shadow:0 0 32px 4px var(--glow-c,rgba(0,229,255,.25))} 100%{box-shadow:none} }
+    @keyframes ev-shimmer { 0%{background-position:-200% center} 100%{background-position:200% center} }
+    .ev-skel {
+      width:100%; height:160px; border-radius:16px;
+      background:#0d0d11; border:1px solid rgba(255,255,255,0.05);
+      position:relative; overflow:hidden; flex-shrink:0;
+    }
+    .ev-skel::after {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,0.035) 50%,transparent 100%);
+      background-size:200% 100%;
+      animation:ev-shimmer 1.6s ease-in-out infinite;
+    }
+    .ev-skel:nth-child(2)::after { animation-delay:.18s; }
+    .ev-skel:nth-child(3)::after { animation-delay:.36s; }
 
     /* ── PAGE ── */
     .ev-page { max-width:980px; margin:0 auto; padding:52px 28px 120px; }
@@ -883,7 +897,11 @@
         Review Your Picks
       </button>
     </div>
-    <div class="ev-list" id="listAll"></div>
+    <div class="ev-list" id="listAll">
+      <div class="ev-skel"></div>
+      <div class="ev-skel"></div>
+      <div class="ev-skel"></div>
+    </div>
 
     <!-- MINI GROUP STANDINGS -->
     <div id="evGroupWidget" style="display:none"></div>
@@ -1542,6 +1560,7 @@
         const all=await res.json();
         const upcoming=all.filter(e=>e.status==='upcoming').sort((a,b)=>new Date(a.isoDate)-new Date(b.isoDate));
         const list=document.getElementById('listAll');
+        list.innerHTML='';
         upcoming.forEach(e=>{ const c=buildCard(e); if(c) list.appendChild(c); });
         document.getElementById('evCount').textContent=`${upcoming.length} event${upcoming.length!==1?'s':''}`;
 
