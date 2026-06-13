@@ -66,7 +66,7 @@
   root.innerHTML = `
     <div class="lb-hero">
       <h1 class="lb-title">Community<br><span>Leaderboard</span></h1>
-      <p class="lb-subtitle">Ranked by prediction accuracy across completed events</p>
+      <p class="lb-subtitle">Ranked by prediction accuracy across completed events <span id="lbLiveDot" style="display:none"></span></p>
       <button class="pk-hiw-btn lb-hiw-btn" id="lbHowItWorks" type="button">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>
         How It Works
@@ -675,6 +675,34 @@
   }
 
   renderGroupStatus();
+
+  // ── Supabase realtime — live picks updates ──────
+  if (sb) {
+    const liveDot = document.getElementById('lbLiveDot');
+    let realtimeReady = false;
+
+    sb.channel('lb-picks-live')
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'picks' }, () => {
+        // Flash rows to signal a new pick came in — debounce refreshes
+        document.querySelectorAll('.lb-row').forEach(r => {
+          r.classList.remove('lb-update-flash');
+          void r.offsetWidth;
+          r.classList.add('lb-update-flash');
+        });
+        // Remove flash classes after animation
+        setTimeout(() => document.querySelectorAll('.lb-row').forEach(r => r.classList.remove('lb-update-flash')), 700);
+      })
+      .subscribe(status => {
+        if (status === 'SUBSCRIBED' && !realtimeReady) {
+          realtimeReady = true;
+          if (liveDot) {
+            liveDot.className = 'lb-live-dot';
+            liveDot.textContent = 'Live';
+            liveDot.style.display = '';
+          }
+        }
+      });
+  }
 
   // ── Period tab wiring ──────────────────────────
   document.getElementById('lbPeriodTabs')?.addEventListener('click', e => {

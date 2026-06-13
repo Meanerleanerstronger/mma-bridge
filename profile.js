@@ -394,6 +394,7 @@
                 </div>`).join('')}
             </div>
           </div>` : ''}
+        ${otherEvList.length >= 3 ? buildSparkline(otherEvList) : ''}
         ${buildOtherPickHistorySection(picks, pickEventSet, winnerMap, eventMap)}
         ${buildOtherRatingsSection(ratings, eventMap)}
         ${favsHtml}
@@ -1539,6 +1540,51 @@
         row.querySelector('.pr-modal-row-check').textContent = isSelected ? '' : '✓';
       });
     });
+  }
+
+  // ── Accuracy sparkline ────────────────────────────────────────────────────
+  function buildSparkline(evList) {
+    const pts = evList.slice(0, 12).reverse(); // oldest → newest, max 12 events
+    const W = 260, H = 56, PAD = 6;
+    const xStep = pts.length > 1 ? (W - PAD * 2) / (pts.length - 1) : W;
+    const yScale = (pct) => PAD + (H - PAD * 2) * (1 - pct / 100);
+
+    const coords = pts.map((pct, i) => ({
+      x: PAD + i * xStep,
+      y: yScale(pct),
+      pct
+    }));
+
+    const polyline = coords.map(c => `${c.x.toFixed(1)},${c.y.toFixed(1)}`).join(' ');
+    const areaPath = `M${coords[0].x.toFixed(1)},${H} ` +
+      coords.map(c => `L${c.x.toFixed(1)},${c.y.toFixed(1)}`).join(' ') +
+      ` L${coords[coords.length-1].x.toFixed(1)},${H} Z`;
+
+    const midY = yScale(50).toFixed(1);
+    const last = coords[coords.length - 1];
+    const lastColor = last.pct >= 50 ? '#00e5ff' : '#ef4444';
+
+    const dots = coords.map((c, i) => i === coords.length - 1
+      ? `<circle cx="${c.x.toFixed(1)}" cy="${c.y.toFixed(1)}" r="3.5" fill="${lastColor}" stroke="#111114" stroke-width="1.5"/>`
+      : `<circle cx="${c.x.toFixed(1)}" cy="${c.y.toFixed(1)}" r="2" fill="rgba(0,229,255,0.4)"/>`
+    ).join('');
+
+    return `
+      <div class="pr-sparkline-wrap pr-section" style="animation-delay:0.08s" data-reveal>
+        <div class="pr-sparkline-label">Pick Accuracy — Last ${pts.length} Events</div>
+        <svg class="pr-sparkline-svg" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.18"/>
+              <stop offset="100%" stop-color="#00e5ff" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <line class="pr-sparkline-midline" x1="${PAD}" y1="${midY}" x2="${W - PAD}" y2="${midY}"/>
+          <path class="pr-sparkline-area" d="${areaPath}"/>
+          <polyline class="pr-sparkline-line" points="${polyline}"/>
+          ${dots}
+        </svg>
+      </div>`;
   }
 
   // ── Helpers for OTHER user profile ───────────────────────────────────────

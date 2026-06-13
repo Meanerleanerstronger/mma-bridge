@@ -323,6 +323,15 @@ function formatOdds(n) {
           const pct = Math.round((correct / total) * 100);
           const emoji = pct >= 70 ? '🔥' : pct >= 50 ? '💪' : '😬';
           showToast(`Results in! You went ${correct}/${total} — ${pct}% ${emoji}`, 'ok');
+          if (pct >= 50 && correct >= 2 && typeof confetti === 'function') {
+            setTimeout(() => confetti({
+              particleCount: Math.min(correct * 25, 180),
+              spread: 80,
+              origin: { y: 0.55 },
+              colors: ['#00e5ff', '#c8a84b', '#ffffff', '#00ff88', '#a78bfa'],
+              disableForReducedMotion: true
+            }), 400);
+          }
         }
       }, 800);
     }

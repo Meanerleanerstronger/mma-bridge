@@ -52,6 +52,81 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // ── Lenis smooth scroll ──
+  (function() {
+    var s = document.createElement('script');
+    s.src = 'https://unpkg.com/lenis@1.1.13/dist/lenis.min.js';
+    s.onload = function() {
+      try {
+        var lenis = new Lenis({
+          duration: 1.15,
+          easing: function(t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+          smoothWheel: true
+        });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+        window._lenis = lenis;
+      } catch(e) {}
+    };
+    document.head.appendChild(s);
+  })();
+
+  // ── Command palette ──
+  (function() {
+    var s = document.createElement('script');
+    s.src = '/cmd-palette.js?v=1.0';
+    document.head.appendChild(s);
+  })();
+
+  // ── ⌘K hint in navbar search box ──
+  requestAnimationFrame(function() {
+    var searchForm = document.getElementById('site-search-form');
+    if (searchForm && !searchForm.querySelector('.cp-nav-hint')) {
+      var hint = document.createElement('button');
+      hint.type = 'button';
+      hint.className = 'cp-nav-hint';
+      hint.innerHTML = '<kbd>⌘K</kbd>';
+      hint.title = 'Open command palette';
+      hint.onclick = function() { window.openCommandPalette && window.openCommandPalette(); };
+      searchForm.parentNode.insertBefore(hint, searchForm);
+    }
+  });
+
+  // ── Navbar scroll shadow ──
+  (function() {
+    var nav = document.querySelector('.navbar');
+    if (!nav) return;
+    var tick = false;
+    window.addEventListener('scroll', function() {
+      if (tick) return;
+      tick = true;
+      requestAnimationFrame(function() {
+        nav.classList.toggle('scrolled', window.scrollY > 10);
+        tick = false;
+      });
+    }, { passive: true });
+  })();
+
+  // ── IntersectionObserver scroll reveal ──
+  (function() {
+    var els = document.querySelectorAll('[data-reveal]');
+    if (!els.length || !window.IntersectionObserver) return;
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(function(el) { obs.observe(el); });
+  })();
+
+  // ── Register service worker ──
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').catch(function() {});
+  }
+
   // ── Inject site footer on all pages ──
   if (!document.getElementById('site-disclaimer')) {
     var ft = document.createElement('footer');
