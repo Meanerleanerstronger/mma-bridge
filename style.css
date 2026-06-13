@@ -3141,10 +3141,11 @@ body.light-mode .nav-auth-mobile .nav-signin-link { border-color: rgba(0,0,0,0.1
 body.light-mode .nav-mobile-signout { border-color: rgba(0,0,0,0.12); color: rgba(0,0,0,0.45); }
 
 /* ── Index hero inline overrides ── */
-body.light-mode #heroType { color: #009bb5 !important; }
-body.light-mode #heroTitle { color: #111 !important; text-shadow: none !important; }
-body.light-mode #heroMeta { color: rgba(0,0,0,0.5) !important; }
-body.light-mode #heroBtn { background: #009bb5 !important; color: #fff !important; }
+/* Hero sits over a dark poster image regardless of theme — keep text white always */
+body.light-mode #heroType  { color: rgba(255,255,255,0.55) !important; }
+body.light-mode #heroTitle { color: #fff !important; text-shadow: 0 2px 24px rgba(0,0,0,0.85) !important; }
+body.light-mode #heroMeta  { color: rgba(255,255,255,0.65) !important; }
+body.light-mode #heroBtn   { background: #009bb5 !important; color: #fff !important; }
 
 /* ── Index recent results ── */
 body.light-mode #resultsTrack { background: transparent; }
