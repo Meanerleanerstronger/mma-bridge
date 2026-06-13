@@ -52,25 +52,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // ── Lenis smooth scroll ──
-  (function() {
-    var s = document.createElement('script');
-    s.src = 'https://unpkg.com/lenis@1.1.13/dist/lenis.min.js';
-    s.onload = function() {
-      try {
-        var lenis = new Lenis({
-          duration: 1.15,
-          easing: function(t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
-          smoothWheel: true
-        });
-        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
-        requestAnimationFrame(raf);
-        window._lenis = lenis;
-      } catch(e) {}
-    };
-    document.head.appendChild(s);
-  })();
-
   // ── Command palette ──
   (function() {
     var s = document.createElement('script');
