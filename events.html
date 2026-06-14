@@ -434,20 +434,20 @@
     .ov-fight.is-main.ppv-main::before { background:linear-gradient(90deg,rgba(200,168,75,.0),rgba(200,168,75,.07),rgba(200,168,75,.0)); }
     .ov-fight.is-comain  { background:rgba(0,229,255,.01); }
 
-    /* Fighter names */
+    /* Fighter names — LARGE, cinematic, glossy */
     .ov-fighter {
-      font-family:'Inter',sans-serif;
-      font-weight:700;font-size:1.05rem;
-      color:#fff;line-height:1.15;
-      letter-spacing:0.01em;text-transform:none;
-      text-shadow:0 1px 6px rgba(0,0,0,.6);
+      font-family:'Barlow Condensed','Montserrat',sans-serif;
+      font-weight:900;font-size:1.35rem;
+      color:#fff;line-height:1.1;
+      letter-spacing:.02em;text-transform:uppercase;
+      text-shadow:0 1px 8px rgba(0,0,0,.7),0 0 1px rgba(255,255,255,.15);
       transition:color .2s,text-shadow .2s;
       position:relative;z-index:1;
     }
-    .ov-fight.is-main .ov-fighter { font-size:1.45rem;font-weight:800; }
+    .ov-fight.is-main .ov-fighter { font-size:1.85rem; }
     .ov-fighter.right { text-align:right; }
-    .ov-fighter.dim   { color:rgba(255,255,255,.55);font-size:.95rem; }
-    .ov-fight.is-main .ov-fighter.dim { font-size:1.45rem;font-weight:800;color:rgba(255,255,255,.6); }
+    .ov-fighter.dim   { color:rgba(255,255,255,.6);font-size:1.15rem; }
+    .ov-fight.is-main .ov-fighter.dim { font-size:1.85rem;color:rgba(255,255,255,.65); }
 
     /* Hover name glow */
     .ov-fight:hover .ov-fighter:not(.dim) {
@@ -474,7 +474,7 @@
       text-shadow:none;
       font-weight:700;
     }
-    .ov-fight.is-main .ov-fighter.lost { font-size:1.45rem; }
+    .ov-fight.is-main .ov-fighter.lost { font-size:1.85rem; }
     .ov-result-method {
       font-family:'Montserrat',sans-serif;
       font-weight:900;font-size:.82rem;
