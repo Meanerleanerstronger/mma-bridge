@@ -109,25 +109,25 @@ body::before{
   box-shadow:0 8px 40px rgba(0,0,0,0.7) !important;
 }
 
-/* ── NAV LINKS — glossy uppercase ── */
+/* ── NAV LINKS — glossy ── */
 .nav-links li a,.nav-links li a:visited{
   font-family:'Inter',sans-serif !important;
-  font-weight:600 !important;
-  font-size:10.5px !important;
-  letter-spacing:0.15em !important;
-  text-transform:uppercase !important;
-  color:rgba(255,255,255,0.42) !important;
-  text-shadow:0 1px 1px rgba(0,0,0,0.5),0 0 0 transparent !important;
+  font-weight:500 !important;
+  font-size:13px !important;
+  letter-spacing:0.01em !important;
+  text-transform:none !important;
+  color:rgba(255,255,255,0.45) !important;
+  text-shadow:0 1px 2px rgba(0,0,0,0.6) !important;
   transition:color 0.2s,text-shadow 0.2s !important;
   position:relative !important;
 }
 .nav-links li a:hover{
-  color:rgba(255,255,255,0.95) !important;
-  text-shadow:0 0 22px rgba(255,255,255,0.22),0 1px 0 rgba(255,255,255,0.1),0 -1px 0 rgba(255,255,255,0.06) !important;
+  color:rgba(255,255,255,1) !important;
+  text-shadow:0 0 18px rgba(255,255,255,0.55),0 0 40px rgba(255,255,255,0.2),0 1px 0 rgba(255,255,255,0.12) !important;
 }
 .nav-links li a.active{
   color:#00e5ff !important;
-  text-shadow:0 0 24px rgba(0,229,255,0.55),0 0 8px rgba(0,229,255,0.25),0 1px 0 rgba(0,229,255,0.15) !important;
+  text-shadow:0 0 20px rgba(0,229,255,0.75),0 0 50px rgba(0,229,255,0.3),0 0 8px rgba(0,229,255,0.3) !important;
 }
 .nav-links a::after{display:none !important;}
 
