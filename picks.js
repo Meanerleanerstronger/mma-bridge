@@ -95,6 +95,22 @@ function formatOdds(n) {
     toastTimer = setTimeout(() => { toast.style.display = 'none'; }, 2800);
   }
 
+  // ── Pick tap sound (Web Audio, no file needed) ──
+  let _ac;
+  function playPickSound() {
+    try {
+      _ac = _ac || new (window.AudioContext || window.webkitAudioContext)();
+      const osc = _ac.createOscillator(), gain = _ac.createGain();
+      osc.connect(gain); gain.connect(_ac.destination);
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(210, _ac.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(85, _ac.currentTime + 0.042);
+      gain.gain.setValueAtTime(0.065, _ac.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, _ac.currentTime + 0.055);
+      osc.start(_ac.currentTime); osc.stop(_ac.currentTime + 0.06);
+    } catch(e) {}
+  }
+
   root.innerHTML = `
   <div class="pk-skeleton-wrap">
     <div class="pk-skel-hd">
@@ -951,8 +967,10 @@ function formatOdds(n) {
       `<button class="pk-round-btn${savedRound === String(r) ? ` active ${roundCls}` : ''}" data-round="${r}" data-key="${esc(key)}" data-method-cls="${roundCls}">R${r}</button>`
     ).join('');
     const odds = getOddsForFight(f.a, f.b);
-    const recA = fighterRecord(f.a);
-    const recB = fighterRecord(f.b);
+    const recA  = fighterRecord(f.a);
+    const recB  = fighterRecord(f.b);
+    const formA = fighterForm(f.a);
+    const formB = fighterForm(f.b);
 
     // Card-level classes
     const cardCls = ['sb-fight fc-card',
@@ -1088,7 +1106,7 @@ function formatOdds(n) {
             ${photoA}
             <div class="fc-info">
               <div class="fc-name">${esc(f.a)}</div>
-              ${recA ? `<div class="fc-sub-row"><span class="fc-record">${esc(recA)}</span></div>` : ''}
+              ${(recA||formA) ? `<div class="fc-sub-row">${recA?`<span class="fc-record">${esc(recA)}</span>`:''}${formA||''}</div>` : ''}
               ${commLabelA}
               ${groupLabelA}
               ${badgeA}
@@ -1101,7 +1119,7 @@ function formatOdds(n) {
           <div class="${sideBCls}" data-key="${esc(key)}" data-pick="${esc(f.b)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
             <div class="fc-info fc-info-b">
               <div class="fc-name">${esc(f.b)}</div>
-              ${recB ? `<div class="fc-sub-row fc-sub-row-b"><span class="fc-record">${esc(recB)}</span></div>` : ''}
+              ${(recB||formB) ? `<div class="fc-sub-row fc-sub-row-b">${formB||''}${recB?`<span class="fc-record">${esc(recB)}</span>`:''}</div>` : ''}
               ${commLabelB}
               ${groupLabelB}
               ${badgeB}
@@ -1965,6 +1983,7 @@ function formatOdds(n) {
     });
 
     bindInteractions();
+    bindHoverCards();
     bindInfoBtns();
     bindHype();
     bindFotn();
@@ -1980,6 +1999,63 @@ function formatOdds(n) {
       initSpine();
       animateFightEntrance();
     });
+  }
+
+  // ── Fighter hover card (desktop only) ────────
+  function bindHoverCards() {
+    if (!window.matchMedia('(hover: hover)').matches) return;
+
+    let hc = document.getElementById('fc-hov');
+    if (!hc) {
+      hc = document.createElement('div');
+      hc.id = 'fc-hov';
+      hc.className = 'fc-hov';
+      document.body.appendChild(hc);
+    }
+
+    let hideT, showT;
+    const hide = () => hc.classList.remove('fc-hov-on');
+
+    const show = side => {
+      const fd = lookupFighter(side.dataset.pick);
+      if (!fd) return;
+      const rec = fd.record ? `${fd.record.wins}-${fd.record.losses}${fd.record.draws?`-${fd.record.draws}`:''}` : '';
+      const rows = (fd.last5 || []).slice(0, 5).map(f => {
+        const r = (f.result || '').toUpperCase();
+        const cls = r === 'W' ? 'w' : r === 'L' ? 'l' : 'nc';
+        return `<div class="fc-hov-row">
+          <span class="fc-hov-res fc-hov-${cls}">${r}</span>
+          <span class="fc-hov-opp">${esc(f.opponent || '')}</span>
+          <span class="fc-hov-mth">${esc(f.method || '')}${f.round ? ` R${f.round}` : ''}</span>
+        </div>`;
+      }).join('');
+
+      hc.innerHTML =
+        `<div class="fc-hov-name">${esc(fd.name)}</div>` +
+        (rec ? `<div class="fc-hov-rec">${rec}</div>` : '') +
+        (rows ? `<div class="fc-hov-fights">${rows}</div>` : '') +
+        (fd.id ? `<a class="fc-hov-link" href="fighter.html?id=${esc(fd.id)}" onclick="event.stopPropagation()">View Profile →</a>` : '');
+
+      hc.classList.add('fc-hov-on');
+
+      // Position above the element, fall back to below
+      const r = side.getBoundingClientRect();
+      const h = hc.getBoundingClientRect();
+      let top  = r.top - h.height - 10;
+      if (top < 8) top = r.bottom + 10;
+      let left = r.left + r.width / 2 - h.width / 2;
+      left = Math.max(8, Math.min(left, window.innerWidth - h.width - 8));
+      hc.style.top  = top  + 'px';
+      hc.style.left = left + 'px';
+    };
+
+    root.querySelectorAll('.sb-side[data-pick]').forEach(side => {
+      if (!lookupFighter(side.dataset.pick)) return;
+      side.addEventListener('mouseenter', () => { clearTimeout(hideT); showT = setTimeout(() => show(side), 220); });
+      side.addEventListener('mouseleave', () => { clearTimeout(showT); hideT = setTimeout(hide, 140); });
+    });
+    hc.addEventListener('mouseenter', () => clearTimeout(hideT));
+    hc.addEventListener('mouseleave', () => { hideT = setTimeout(hide, 140); });
   }
 
   // ── Bind hype drag bar ────────────────────────
@@ -2154,9 +2230,10 @@ function formatOdds(n) {
           fight.querySelectorAll('.pk-change-confirm').forEach(el => el.remove());
           fight.querySelectorAll('.sb-side').forEach(s => s.classList.remove('selected', 'dimmed', 'sb-tap'));
           side.classList.add('selected');
-          void side.offsetWidth; // force reflow so animation restarts
+          void side.offsetWidth;
           side.classList.add('sb-tap');
           setTimeout(() => side.classList.remove('sb-tap'), 300);
+          playPickSound();
           fight.querySelectorAll('.sb-side').forEach(s => { if (s !== side) s.classList.add('dimmed'); });
           const cur = localPicks[key] || {};
           localPicks[key] = { pick, base: cur.base || '', round: cur.round || '' };

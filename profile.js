@@ -1269,7 +1269,15 @@
 
     if (avgEl) { avgEl.textContent = avgRating; }
 
-    if (picksEl) { picksEl.textContent = totalPicksAll; }
+    if (picksEl && totalPicksAll > 0) {
+      let cur = 0;
+      const step = () => {
+        cur = Math.min(cur + Math.ceil(totalPicksAll / 22), totalPicksAll);
+        picksEl.textContent = cur;
+        if (cur < totalPicksAll) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    } else if (picksEl) { picksEl.textContent = totalPicksAll; }
   }
 
   // ── Notification preferences ──────────────────

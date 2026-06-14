@@ -8430,9 +8430,59 @@ button:focus:not(:focus-visible), a:focus:not(:focus-visible) { outline: none; }
   font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
   font-size: 0.6rem; font-weight: 900; letter-spacing: 0;
 }
-.pk-form-dot-w  { background: rgba(0,229,255,0.1);  color: rgba(0,229,255,0.8);  border: 1px solid rgba(0,229,255,0.22); }
-.pk-form-dot-l  { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.22); border: 1px solid rgba(255,255,255,0.08); }
-.pk-form-dot-nc { background: rgba(255,255,255,0.03); color: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.06); }
+.pk-form-dot-w  { background: rgba(0,200,80,0.13);   color: #00c850; border: 1px solid rgba(0,200,80,0.28); }
+.pk-form-dot-l  { background: rgba(255,55,55,0.1);   color: #ff4545; border: 1px solid rgba(255,55,55,0.22); }
+.pk-form-dot-nc { background: rgba(255,255,255,0.03); color: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.07); }
+
+/* ── Fighter hover card ── */
+.fc-hov {
+  position: fixed; z-index: 8900; width: 224px;
+  background: #0e0e12;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px; padding: 13px 14px 10px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.82), 0 0 0 1px rgba(255,255,255,0.04);
+  pointer-events: auto;
+  opacity: 0; transform: translateY(5px) scale(0.97);
+  transition: opacity 0.14s ease, transform 0.14s ease;
+  display: none;
+}
+.fc-hov.fc-hov-on { display: block; opacity: 1; transform: translateY(0) scale(1); }
+.fc-hov-name {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 1.05rem;
+  font-weight: 900; text-transform: uppercase; letter-spacing: 0.04em;
+  color: #fff; line-height: 1; margin-bottom: 3px;
+}
+.fc-hov-rec {
+  font-family: 'Inter', sans-serif; font-size: 0.62rem; font-weight: 500;
+  color: rgba(255,255,255,0.3); letter-spacing: 0.03em; margin-bottom: 10px;
+}
+.fc-hov-fights { display: flex; flex-direction: column; gap: 4px; margin-bottom: 9px; }
+.fc-hov-row { display: flex; align-items: center; gap: 7px; }
+.fc-hov-res {
+  width: 20px; height: 20px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 4px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 0.65rem; font-weight: 900;
+}
+.fc-hov-w  { background: rgba(0,200,80,0.14);  color: #00c850; border: 1px solid rgba(0,200,80,0.3); }
+.fc-hov-l  { background: rgba(255,55,55,0.12); color: #ff4545; border: 1px solid rgba(255,55,55,0.25); }
+.fc-hov-nc { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.3); border: 1px solid rgba(255,255,255,0.08); }
+.fc-hov-opp {
+  flex: 1; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 500;
+  color: rgba(255,255,255,0.72); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.fc-hov-mth {
+  font-family: 'Inter', sans-serif; font-size: 0.62rem;
+  color: rgba(255,255,255,0.28); white-space: nowrap;
+}
+.fc-hov-link {
+  display: block; text-align: center; margin-top: 2px;
+  font-family: 'Inter', sans-serif; font-size: 0.65rem; font-weight: 600;
+  color: rgba(0,229,255,0.6); text-decoration: none;
+  border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;
+  transition: color 0.1s;
+}
+.fc-hov-link:hover { color: #00e5ff; }
 
 /* Crowd fave / underdog badges */
 .pk-crowd-fave, .pk-crowd-dog {
