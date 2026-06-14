@@ -5,7 +5,8 @@
   },
   "scripts": {
     "validate": "node scripts/validate-json.js",
-    "enrich": "node scripts/enrich-fighters.js"
+    "enrich": "node scripts/enrich-fighters.js",
+    "enrich-wiki": "node scripts/enrich-fighters-wiki.js"
   }
 }
  

@@ -756,12 +756,11 @@ function formatOdds(n) {
     if (fill)  fill.style.width = pct + '%';
     if (thumb) { thumb.style.left = pct + '%'; thumb.style.display = pct > 0 ? 'block' : 'none'; }
     if (labelEl) {
-      labelEl.textContent = localHype ? (HYPE_LABELS[localHype] || '') : 'Drag to rate';
-      labelEl.style.color = pct > 0 ? 'rgba(255,255,255,0.55)' : 'rgba(255,255,255,0.28)';
+      labelEl.textContent = localHype ? (HYPE_LABELS[localHype] || '') : 'Rate this event';
     }
     if (avgBadge) {
       avgBadge.style.opacity = hypeCount > 0 ? '1' : '0';
-      if (hypeCount > 0) avgBadge.innerHTML = `${hypeAvg.toFixed(1)}<span class="pk-hype-denom">/10</span><span>${hypeCount} rating${hypeCount !== 1 ? 's' : ''}</span>`;
+      if (hypeCount > 0) avgBadge.innerHTML = `${hypeAvg.toFixed(1)}<span class="pk-hype-denom">/10</span>`;
     }
     if (hdBadge) {
       if (hypeCount > 0) {
@@ -969,8 +968,6 @@ function formatOdds(n) {
     const odds = getOddsForFight(f.a, f.b);
     const recA  = fighterRecord(f.a);
     const recB  = fighterRecord(f.b);
-    const formA = fighterForm(f.a);
-    const formB = fighterForm(f.b);
 
     // Card-level classes
     const cardCls = ['sb-fight fc-card',
@@ -1106,7 +1103,7 @@ function formatOdds(n) {
             ${photoA}
             <div class="fc-info">
               <div class="fc-name">${esc(f.a)}</div>
-              ${(recA||formA) ? `<div class="fc-sub-row">${recA?`<span class="fc-record">${esc(recA)}</span>`:''}${formA||''}</div>` : ''}
+              ${recA ? `<div class="fc-sub-row"><span class="fc-record">${esc(recA)}</span></div>` : ''}
               ${commLabelA}
               ${groupLabelA}
               ${badgeA}
@@ -1119,7 +1116,7 @@ function formatOdds(n) {
           <div class="${sideBCls}" data-key="${esc(key)}" data-pick="${esc(f.b)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
             <div class="fc-info fc-info-b">
               <div class="fc-name">${esc(f.b)}</div>
-              ${(recB||formB) ? `<div class="fc-sub-row fc-sub-row-b">${formB||''}${recB?`<span class="fc-record">${esc(recB)}</span>`:''}</div>` : ''}
+              ${recB ? `<div class="fc-sub-row fc-sub-row-b"><span class="fc-record">${esc(recB)}</span></div>` : ''}
               ${commLabelB}
               ${groupLabelB}
               ${badgeB}
@@ -1762,17 +1759,15 @@ function formatOdds(n) {
   function hypeMeterHtml() {
     if (isCompleted || isLocked) return '';
     const pct = localHype ? ((localHype - 1) / 9) * 100 : 0;
-    const label = localHype ? (HYPE_LABELS[localHype] || '') : 'Drag to rate';
+    const label = localHype ? (HYPE_LABELS[localHype] || '') : 'Rate this event';
     return `
-      <div class="pk-hype-meter" id="pkHypeWidget">
-        <div class="pk-hm-label">HYPE</div>
-        <div class="pk-hm-track" id="pkHypeTrack">
-          <div class="pk-hm-fill" id="pkHypeFill" style="width:0%" data-target-pct="${pct}"></div>
-          <div class="pk-hm-thumb" id="pkHypeThumb" style="left:${pct}%;display:${pct > 0 ? 'block' : 'none'}"></div>
-          <div class="pk-hm-track-label" id="pkHypeLabel" style="position:absolute;left:50%;transform:translateX(-50%);pointer-events:none;font-family:'Inter',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:${pct > 0 ? 'rgba(255,255,255,0.55)' : 'rgba(255,255,255,0.28)'};white-space:nowrap;">${label}</div>
+      <div class="pk-hype-slim" id="pkHypeWidget">
+        <span class="pk-hype-slim-label" id="pkHypeLabel">${label}</span>
+        <div class="pk-hype-slim-track" id="pkHypeTrack">
+          <div class="pk-hype-slim-fill" id="pkHypeFill" style="width:${pct}%" data-target-pct="${pct}"></div>
+          <div class="pk-hype-slim-thumb" id="pkHypeThumb" style="left:${pct}%;display:${pct > 0 ? 'block' : 'none'}"></div>
         </div>
-        ${hypeCount > 0 ? `<div class="pk-hype-avg-badge" id="pkHypeAvgBadge">${hypeAvg.toFixed(1)}<span class="pk-hype-denom">/10</span><span>${hypeCount} rating${hypeCount !== 1 ? 's' : ''}</span></div>` : `<div class="pk-hype-avg-badge" id="pkHypeAvgBadge" style="opacity:0"></div>`}
-        <button class="pk-info-btn pk-info-btn-sm" data-info="hype" type="button" aria-label="What is Hype?">?</button>
+        ${hypeCount > 0 ? `<span class="pk-hype-slim-avg" id="pkHypeAvgBadge">${hypeAvg.toFixed(1)}<span class="pk-hype-denom">/10</span></span>` : `<span class="pk-hype-slim-avg" id="pkHypeAvgBadge" style="opacity:0">—</span>`}
       </div>`;
   }
 
@@ -1844,16 +1839,11 @@ function formatOdds(n) {
             ${countdownHtml()}
           </div>
           <div class="pk-hd-actions">
-            ${!isCompleted && !isLocked ? `<div class="pk-fotn-reminder">
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              +15 pts for Fight of the Night
-            </div>` : ''}
-            <button class="pk-hiw-btn" id="pkHowItWorks" type="button">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>
-              How It Works
+            ${careerBadgeHtml()}
+            <button class="pk-hiw-icon-btn" id="pkHowItWorks" type="button" aria-label="How it works" title="How scoring works">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>
             </button>
           </div>
-          ${careerBadgeHtml()}
         </div>
 
         ${isLocked ? `
