@@ -157,13 +157,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     requestAnimationFrame(function() {
       requestAnimationFrame(function() {
-        wipe.style.transition = 'clip-path 0.72s cubic-bezier(0.4,0,0.2,1)';
+        wipe.style.transition = 'clip-path 1.3s cubic-bezier(0.4,0,0.2,1)';
         wipe.style.clipPath   = 'circle(180% at 50% 105%)';
         setTimeout(function() {
-          wipe.style.transition = 'opacity 0.28s ease';
+          wipe.style.transition = 'opacity 0.35s ease';
           wipe.style.opacity = '0';
-          setTimeout(function() { wipe.remove(); }, 300);
-        }, 680);
+          setTimeout(function() { wipe.remove(); }, 380);
+        }, 1260);
       });
     });
   });
