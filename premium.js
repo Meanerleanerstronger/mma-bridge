@@ -51,8 +51,8 @@ window.addEventListener('pageshow',function(e){
 var S=document.createElement('style');
 S.textContent=`
 
-/* ── BARLOW ON ALL BIG TEXT ── */
-h1,h2,.ev-card-matchup,.ov-matchup,#heroTitle,.ev-hero h1{
+/* ── BARLOW ON HERO / MATCHUP TEXT ONLY ── */
+.ev-card-matchup,.ov-matchup,#heroTitle,.ev-hero h1{
   font-family:'Barlow Condensed','Montserrat',sans-serif !important;
   font-weight:900 !important;
 }
