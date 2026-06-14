@@ -146,24 +146,27 @@ document.addEventListener('DOMContentLoaded', function () {
     localStorage.setItem('theme', nowLight ? 'light' : 'dark');
     _syncThemeBtn();
 
-    // Wipe overlay expands from bottom of screen
+    // Panel sweeps up from bottom, covers screen, exits off the top
     var wipe = document.createElement('div');
     wipe.id = 'theme-wipe';
     wipe.style.cssText =
       'position:fixed;inset:0;z-index:99990;pointer-events:none;' +
-      'background:' + (nowLight ? '#f2f2f4' : '#07070b') + ';' +
-      'clip-path:circle(0% at 50% 105%);will-change:clip-path;';
+      'background:' + (nowLight ? '#f0f0f2' : '#08080c') + ';' +
+      'transform:translateY(100%);will-change:transform;';
     document.body.appendChild(wipe);
 
+    var dur = 440;
     requestAnimationFrame(function() {
       requestAnimationFrame(function() {
-        wipe.style.transition = 'clip-path 1.3s cubic-bezier(0.4,0,0.2,1)';
-        wipe.style.clipPath   = 'circle(180% at 50% 105%)';
+        // Slide up to cover
+        wipe.style.transition = 'transform ' + dur + 'ms cubic-bezier(0.76,0,0.24,1)';
+        wipe.style.transform  = 'translateY(0%)';
+        // Slide off top once covered
         setTimeout(function() {
-          wipe.style.transition = 'opacity 0.35s ease';
-          wipe.style.opacity = '0';
-          setTimeout(function() { wipe.remove(); }, 380);
-        }, 1260);
+          wipe.style.transition = 'transform ' + dur + 'ms cubic-bezier(0.76,0,0.24,1)';
+          wipe.style.transform  = 'translateY(-100%)';
+          setTimeout(function() { wipe.remove(); }, dur + 20);
+        }, dur);
       });
     });
   });
