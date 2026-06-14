@@ -138,10 +138,34 @@ document.addEventListener('DOMContentLoaded', function () {
   _syncThemeBtn();
 
   btn.addEventListener('click', function () {
-    var nowLight = document.body.classList.toggle('light-mode');
+    var nowLight = !document.body.classList.contains('light-mode');
+
+    // Switch theme immediately (hidden under the wipe overlay)
+    document.body.classList.toggle('light-mode', nowLight);
     document.documentElement.classList.toggle('light-mode', nowLight);
     localStorage.setItem('theme', nowLight ? 'light' : 'dark');
     _syncThemeBtn();
+
+    // Wipe overlay expands from bottom of screen
+    var wipe = document.createElement('div');
+    wipe.id = 'theme-wipe';
+    wipe.style.cssText =
+      'position:fixed;inset:0;z-index:99990;pointer-events:none;' +
+      'background:' + (nowLight ? '#f2f2f4' : '#07070b') + ';' +
+      'clip-path:circle(0% at 50% 105%);will-change:clip-path;';
+    document.body.appendChild(wipe);
+
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        wipe.style.transition = 'clip-path 0.72s cubic-bezier(0.4,0,0.2,1)';
+        wipe.style.clipPath   = 'circle(180% at 50% 105%)';
+        setTimeout(function() {
+          wipe.style.transition = 'opacity 0.28s ease';
+          wipe.style.opacity = '0';
+          setTimeout(function() { wipe.remove(); }, 300);
+        }, 680);
+      });
+    });
   });
 });
 

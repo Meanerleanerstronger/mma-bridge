@@ -2152,8 +2152,11 @@ function formatOdds(n) {
       root.querySelectorAll('.sb-side[data-key]').forEach(side => {
         const applyPick = (key, pick, fight, side) => {
           fight.querySelectorAll('.pk-change-confirm').forEach(el => el.remove());
-          fight.querySelectorAll('.sb-side').forEach(s => s.classList.remove('selected', 'dimmed'));
+          fight.querySelectorAll('.sb-side').forEach(s => s.classList.remove('selected', 'dimmed', 'sb-tap'));
           side.classList.add('selected');
+          void side.offsetWidth; // force reflow so animation restarts
+          side.classList.add('sb-tap');
+          setTimeout(() => side.classList.remove('sb-tap'), 300);
           fight.querySelectorAll('.sb-side').forEach(s => { if (s !== side) s.classList.add('dimmed'); });
           const cur = localPicks[key] || {};
           localPicks[key] = { pick, base: cur.base || '', round: cur.round || '' };

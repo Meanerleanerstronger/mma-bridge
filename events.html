@@ -1095,7 +1095,11 @@
 
       card.addEventListener('click',function(e){
         if(e.metaKey||e.ctrlKey||e.shiftKey||e.button===1) return;
-        e.preventDefault(); openOverlay(ev);
+        e.preventDefault();
+        card.classList.remove('ev-press');
+        void card.offsetWidth;
+        card.classList.add('ev-press');
+        setTimeout(function(){ openOverlay(ev); }, 90);
       });
 
       // Wrap card + star button in a flex row
