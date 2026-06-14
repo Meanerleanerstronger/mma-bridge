@@ -109,14 +109,33 @@ body::before{
   box-shadow:0 8px 40px rgba(0,0,0,0.7) !important;
 }
 
-/* ── NAV LINKS UNDERLINE ── */
+/* ── NAV LINKS ── */
+.nav-links li a,.nav-links li a:visited{
+  font-family:'Inter',sans-serif !important;
+  font-weight:500 !important;
+  font-size:11px !important;
+  letter-spacing:0.13em !important;
+  text-transform:uppercase !important;
+  color:rgba(255,255,255,0.52) !important;
+  text-shadow:0 1px 0 rgba(255,255,255,0.04) !important;
+  transition:color 0.18s,text-shadow 0.18s !important;
+}
+.nav-links li a:hover{
+  color:rgba(255,255,255,0.9) !important;
+  text-shadow:0 0 18px rgba(255,255,255,0.18),0 1px 0 rgba(255,255,255,0.06) !important;
+}
+.nav-links li a.active{
+  color:#00e5ff !important;
+  text-shadow:0 0 20px rgba(0,229,255,0.45),0 0 6px rgba(0,229,255,0.2) !important;
+}
 .nav-links a{position:relative;}
 .nav-links a::after{
   content:'';position:absolute;bottom:-3px;left:0;
   width:0;height:1.5px;background:#00e5ff;border-radius:1px;
   transition:width 0.25s cubic-bezier(0.22,1,0.36,1);
 }
-.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+.nav-links a:hover::after{width:100%;}
+.nav-links a.active::after{display:none;}
 
 /* ── LOGO ── */
 .nav-logo-img{
