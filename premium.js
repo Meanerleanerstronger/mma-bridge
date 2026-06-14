@@ -602,6 +602,11 @@ document.addEventListener('click',function(e){
     'about.html':       'images/ABOUT.png',
   };
 
+  // Preload all nav images so switching is instant
+  Object.values(NAV_IMGS).forEach(function(src){
+    var pre = new Image(); pre.src = src;
+  });
+
   var panel = document.createElement('div');
   panel.id = 'mb-nav-preview';
   var img = document.createElement('img');
@@ -610,6 +615,7 @@ document.addEventListener('click',function(e){
   document.body.appendChild(panel);
 
   var hideTimer;
+  var currentKey = null;
 
   function getNavKey(href){
     if(!href) return null;
@@ -623,20 +629,25 @@ document.addEventListener('click',function(e){
     if(!key) return;
 
     clearTimeout(hideTimer);
-    img.src = NAV_IMGS[key];
+
+    if(key !== currentKey){
+      currentKey = key;
+      img.src = NAV_IMGS[key];
+    }
+
     var rect = anchor.getBoundingClientRect();
     var cx   = rect.left + rect.width / 2;
     var vw   = window.innerWidth;
     var panW = 280;
     var left = Math.min(Math.max(cx, panW/2 + 12), vw - panW/2 - 12);
     panel.style.left = left + 'px';
-    panel.style.transform = 'translateX(-50%) translateY(0)';
     panel.classList.add('mb-pv-show');
   }
 
   function hide(){
     hideTimer = setTimeout(function(){
       panel.classList.remove('mb-pv-show');
+      currentKey = null;
     }, 80);
   }
 
