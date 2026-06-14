@@ -4,7 +4,8 @@
     "ajv": "^8.17.1"
   },
   "scripts": {
-    "validate": "node scripts/validate-json.js"
+    "validate": "node scripts/validate-json.js",
+    "enrich": "node scripts/enrich-fighters.js"
   }
 }
  
