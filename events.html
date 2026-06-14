@@ -216,6 +216,12 @@
       transition:background .15s, border-color .15s, box-shadow .15s;
     }
     .ph-card-btn:hover { background:rgba(0,229,255,.25); border-color:#00e5ff; box-shadow:0 0 14px rgba(0,229,255,.3); }
+    .ph-card-btn-make {
+      background:linear-gradient(135deg,rgba(255,255,255,.08) 0%,rgba(255,255,255,.03) 100%) !important;
+      border-color:rgba(255,255,255,.2) !important;
+      color:rgba(255,255,255,.6) !important;
+    }
+    .ph-card-btn-make:hover { background:rgba(255,255,255,.12) !important; border-color:rgba(255,255,255,.4) !important; box-shadow:none !important; color:#fff !important; }
     .ph-empty { text-align:center; padding:40px 20px; font-family:'Inter',sans-serif; font-size:.82rem; color:rgba(255,255,255,.2); }
     @media(max-width:540px){
       .ph-panel{max-height:96vh;border-radius:14px 14px 0 0;margin-top:auto;margin-bottom:0;}
@@ -1494,7 +1500,26 @@
     const phOverlay = document.getElementById('phOverlay');
     const phList    = document.getElementById('phList');
 
-    function openPicksHub(upcoming){
+    async function openPicksHub(upcoming){
+      phList.innerHTML = '<div class="ph-empty" style="opacity:.5">Loading…</div>';
+      phOverlay.classList.add('open');
+      document.body.classList.add('no-scroll');
+
+      // Fetch user's existing picks to know which events have picks
+      let pickedEventIds = new Set();
+      try {
+        const sb = window._sb;
+        if(sb){
+          const { data:{ user } } = await sb.auth.getUser();
+          if(user){
+            const { data: myPicks } = await sb.from('picks')
+              .select('event_id')
+              .eq('user_id', user.id);
+            if(myPicks) myPicks.forEach(p => pickedEventIds.add(p.event_id));
+          }
+        }
+      } catch(_){}
+
       phList.innerHTML = '';
       if(!upcoming.length){
         phList.innerHTML = '<div class="ph-empty">No upcoming events found.</div>';
@@ -1506,6 +1531,7 @@
           const main = getMainFight(ev);
           const matchupTxt = main ? `${lastName(main.a).toUpperCase()} vs ${lastName(main.b).toUpperCase()}` : '';
           const metaParts = [ev.date, ev.location ? ev.location.split(',')[0] : ''].filter(Boolean);
+          const hasPicks = pickedEventIds.has(ev.id);
           const card = document.createElement('div');
           card.className = 'ph-card';
           card.innerHTML = `
@@ -1514,15 +1540,13 @@
               <div class="ph-card-name">${esc(ev.name||'')}</div>
               <div class="ph-card-meta">${esc(matchupTxt)}${matchupTxt&&metaParts.length?' · ':''}${esc(metaParts.join(' · '))}</div>
             </div>
-            <a class="ph-card-btn" href="picks.html?id=${encodeURIComponent(ev.id)}">
-              Review Picks
+            <a class="ph-card-btn ${hasPicks ? '' : 'ph-card-btn-make'}" href="picks.html?id=${encodeURIComponent(ev.id)}">
+              ${hasPicks ? 'Review Picks' : 'Make Your Picks'}
               <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>`;
           phList.appendChild(card);
         });
       }
-      phOverlay.classList.add('open');
-      document.body.classList.add('no-scroll');
     }
 
     function closePicksHub(){

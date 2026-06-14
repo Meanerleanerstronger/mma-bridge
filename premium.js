@@ -57,6 +57,26 @@ h1,h2,.ev-card-matchup,.ov-matchup,#heroTitle,.ev-hero h1{
   font-weight:900 !important;
 }
 
+/* ── INTER BODY FONT ── */
+body,p,span,div,li,td,th,label,input,button,a,
+.ev-card,.ov-fight,.news-card,.trending-card,.result-card,
+.pk-card,.fc-name,.fc-record,.fc-sub-row{
+  font-family:'Inter',sans-serif !important;
+}
+
+/* ── SECONDARY TEXT — cooler tint ── */
+.ph-card-meta,
+.ev-card-date,.ev-card-location,.ev-card-sub,
+.ov-fight-meta,.ov-method,.ov-round,
+.fc-record,.fc-sub-row,
+.result-card .result-meta,
+.news-card .nc-meta,.trending-card .tc-meta,
+.sidebar-label,.sidebar-sub,
+.lb-sub,.lb-meta,
+.profile-sub,.profile-stat-label{
+  color:rgba(190,205,215,0.52) !important;
+}
+
 /* ── DEEP BACKGROUND ── */
 html,body{ background:#030304 !important; overflow-x:hidden !important; }
 body{
