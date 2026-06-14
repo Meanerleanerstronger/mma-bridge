@@ -109,33 +109,27 @@ body::before{
   box-shadow:0 8px 40px rgba(0,0,0,0.7) !important;
 }
 
-/* ── NAV LINKS ── */
+/* ── NAV LINKS — glossy uppercase ── */
 .nav-links li a,.nav-links li a:visited{
   font-family:'Inter',sans-serif !important;
-  font-weight:500 !important;
-  font-size:11px !important;
-  letter-spacing:0.13em !important;
+  font-weight:600 !important;
+  font-size:10.5px !important;
+  letter-spacing:0.15em !important;
   text-transform:uppercase !important;
-  color:rgba(255,255,255,0.52) !important;
-  text-shadow:0 1px 0 rgba(255,255,255,0.04) !important;
-  transition:color 0.18s,text-shadow 0.18s !important;
+  color:rgba(255,255,255,0.42) !important;
+  text-shadow:0 1px 1px rgba(0,0,0,0.5),0 0 0 transparent !important;
+  transition:color 0.2s,text-shadow 0.2s !important;
+  position:relative !important;
 }
 .nav-links li a:hover{
-  color:rgba(255,255,255,0.9) !important;
-  text-shadow:0 0 18px rgba(255,255,255,0.18),0 1px 0 rgba(255,255,255,0.06) !important;
+  color:rgba(255,255,255,0.95) !important;
+  text-shadow:0 0 22px rgba(255,255,255,0.22),0 1px 0 rgba(255,255,255,0.1),0 -1px 0 rgba(255,255,255,0.06) !important;
 }
 .nav-links li a.active{
   color:#00e5ff !important;
-  text-shadow:0 0 20px rgba(0,229,255,0.45),0 0 6px rgba(0,229,255,0.2) !important;
+  text-shadow:0 0 24px rgba(0,229,255,0.55),0 0 8px rgba(0,229,255,0.25),0 1px 0 rgba(0,229,255,0.15) !important;
 }
-.nav-links a{position:relative;}
-.nav-links a::after{
-  content:'';position:absolute;bottom:-3px;left:0;
-  width:0;height:1.5px;background:#00e5ff;border-radius:1px;
-  transition:width 0.25s cubic-bezier(0.22,1,0.36,1);
-}
-.nav-links a:hover::after{width:100%;}
-.nav-links a.active::after{display:none;}
+.nav-links a::after{display:none !important;}
 
 /* ── LOGO ── */
 .nav-logo-img{
@@ -309,7 +303,38 @@ body.light-mode html,body.light-mode body{background:#f0f0f4 !important;}
   body{transition:none !important;}
   #mb-grain,#mb-glow{display:none !important;}
 }
+
+/* ── NAV PREVIEW PANEL ── */
+#mb-nav-preview{
+  position:fixed;
+  top:64px;
+  left:50%;
+  transform:translateX(-50%) translateY(-6px);
+  z-index:9990;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 0.18s ease,transform 0.18s ease;
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow:0 16px 60px rgba(0,0,0,0.8),0 0 0 1px rgba(255,255,255,0.07);
+  width:280px;
+  height:160px;
+}
+#mb-nav-preview.mb-pv-show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+#mb-nav-preview img{
+  width:100%;height:100%;object-fit:cover;object-position:top center;
+  display:block;border-radius:10px;
+}
+#mb-nav-preview::after{
+  content:'';position:absolute;inset:0;border-radius:10px;
+  background:linear-gradient(to bottom,transparent 55%,rgba(3,3,4,0.65) 100%);
+  pointer-events:none;
+}
 `;
+
 document.head.appendChild(S);
 
 /* ══════════════════════════════════════════════════
@@ -560,6 +585,72 @@ document.addEventListener('click',function(e){
   btn.appendChild(rpl);
   setTimeout(function(){rpl.remove();},580);
 });
+
+/* ══════════════════════════════════════════════════
+   NAV SCREENSHOT PREVIEWS
+══════════════════════════════════════════════════ */
+(function initNavPreviews(){
+  if(window.matchMedia('(pointer:coarse)').matches)return;
+
+  var NAV_IMGS = {
+    'index.html':       'images/TRENDING.png',
+    'events.html':      'images/UPCOMING.png',
+    'pfp.html':         'images/P4P.png',
+    'reviews.html':     'images/REVIEW.png',
+    'lucas.html':       'images/LUCAS.png',
+    'leaderboard.html': 'images/LEADER.png',
+    'about.html':       'images/ABOUT.png',
+  };
+
+  var panel = document.createElement('div');
+  panel.id = 'mb-nav-preview';
+  var img = document.createElement('img');
+  img.alt = '';
+  panel.appendChild(img);
+  document.body.appendChild(panel);
+
+  var hideTimer;
+
+  function getNavKey(href){
+    if(!href) return null;
+    var base = href.split('?')[0].split('#')[0].replace(/^.*\//, '');
+    return NAV_IMGS[base] ? base : null;
+  }
+
+  function show(anchor){
+    var href = anchor.getAttribute('href') || '';
+    var key  = getNavKey(href);
+    if(!key) return;
+
+    clearTimeout(hideTimer);
+    img.src = NAV_IMGS[key];
+    var rect = anchor.getBoundingClientRect();
+    var cx   = rect.left + rect.width / 2;
+    var vw   = window.innerWidth;
+    var panW = 280;
+    var left = Math.min(Math.max(cx, panW/2 + 12), vw - panW/2 - 12);
+    panel.style.left = left + 'px';
+    panel.style.transform = 'translateX(-50%) translateY(0)';
+    panel.classList.add('mb-pv-show');
+  }
+
+  function hide(){
+    hideTimer = setTimeout(function(){
+      panel.classList.remove('mb-pv-show');
+    }, 80);
+  }
+
+  document.addEventListener('mouseover', function(e){
+    var a = e.target.closest('.nav-links a');
+    if(a) show(a);
+  });
+  document.addEventListener('mouseout', function(e){
+    var a = e.target.closest('.nav-links a');
+    if(a) hide();
+  });
+  panel.addEventListener('mouseenter', function(){ clearTimeout(hideTimer); });
+  panel.addEventListener('mouseleave', hide);
+})();
 
 /* ══════════════════════════════════════════════════
    REMOVE STATS STRIP if it exists from v2

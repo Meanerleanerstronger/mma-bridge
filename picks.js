@@ -131,7 +131,7 @@ function formatOdds(n) {
 
   const [eventsData, fightersData, user] = await Promise.all([
     fetch('./events.json?v=' + Date.now()).then(r => r.ok ? r.json() : []).catch(() => []),
-    fetch('./data/fighters.json').then(r => r.ok ? r.json() : []).catch(() => []),
+    fetch('./data/fighters.json?v=' + Date.now()).then(r => r.ok ? r.json() : []).catch(() => []),
     getAuthUser(),
   ]);
 
