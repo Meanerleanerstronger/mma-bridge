@@ -5934,11 +5934,11 @@ body.light-mode .ev-star-btn.starred {
 /* Matchup grid: fighter-a | vs-col | fighter-b */
 .fc-matchup {
   display: grid;
-  grid-template-columns: 1fr 64px 1fr;
-  min-height: 110px;
+  grid-template-columns: 1fr 80px 1fr;
+  min-height: 150px;
 }
 .fc-matchup.fc-matchup-odds {
-  grid-template-columns: 44px 1fr 64px 1fr 44px;
+  grid-template-columns: 44px 1fr 80px 1fr 44px;
 }
 .fc-odds-col {
   display: flex; align-items: center; justify-content: center;
@@ -5950,15 +5950,15 @@ body.light-mode .ev-star-btn.starred {
   line-height: 1; white-space: nowrap;
 }
 .fc-odds-col-b .fc-odds-num { text-align: center; }
-.fc-card.fc-maincrd .fc-matchup { min-height: 128px; }
-.fc-card.fc-main .fc-matchup { min-height: 154px; }
+.fc-card.fc-maincrd .fc-matchup { min-height: 180px; }
+.fc-card.fc-main .fc-matchup { min-height: 220px; }
 
 /* Fighter sides */
 .fc-fighter {
   display: flex; flex-direction: row;
-  align-items: center; gap: 13px;
+  align-items: center; gap: 16px;
   cursor: pointer; user-select: none;
-  padding: 16px 14px;
+  padding: 20px 18px;
   position: relative;
   transition: background 0.15s;
 }
@@ -5973,22 +5973,22 @@ body.light-mode .ev-star-btn.starred {
 }
 .fc-fighter.fc-other,
 .fc-fighter.dimmed { opacity: 0.45; }
-.fc-fighter.result-loss { opacity: 0.35; pointer-events: none; }
+/* result-loss style now defined with fc-name rules above */
 
 /* sb-side aliases for JS compatibility */
 .sb-side { cursor: pointer; user-select: none; position: relative; }
 
 /* Photo portrait */
 .fc-photo {
-  width: 82px; aspect-ratio: 2/3;
+  width: 110px; aspect-ratio: 2/3;
   flex-shrink: 0; overflow: hidden;
   background: rgba(255,255,255,0.04);
-  border-radius: 8px;
+  border-radius: 10px;
   border: 1.5px solid rgba(255,255,255,0.09);
   display: flex; align-items: stretch;
 }
-.fc-card.fc-maincrd .fc-photo { width: 94px; }
-.fc-card.fc-main .fc-photo { width: 104px; }
+.fc-card.fc-maincrd .fc-photo { width: 130px; }
+.fc-card.fc-main .fc-photo { width: 150px; }
 .fc-photo img {
   width: 100%; height: 100%; object-fit: cover;
   object-position: top center; display: block;
@@ -6012,14 +6012,19 @@ body.light-mode .ev-star-btn.starred {
 }
 .fc-name {
   font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
-  font-weight: 900; font-size: 1.08rem; line-height: 1.05;
+  font-weight: 900; font-size: 1.3rem; line-height: 1.05;
   text-transform: uppercase; letter-spacing: 0.02em;
   color: rgba(255,255,255,0.85);
   transition: color 0.15s; word-break: break-word;
 }
-.fc-card.fc-maincrd .fc-name { font-size: 1.22rem; color: rgba(255,255,255,0.9); }
-.fc-card.fc-main .fc-name { font-size: 1.45rem; color: #fff; letter-spacing: 0.03em; }
+.fc-card.fc-maincrd .fc-name { font-size: 1.55rem; color: rgba(255,255,255,0.9); }
+.fc-card.fc-main .fc-name { font-size: 1.9rem; color: #fff; letter-spacing: 0.03em; }
 .fc-fighter.selected .fc-name { color: #c8960c; }
+.fc-fighter.result-win .fc-name { color: #4ade80 !important; }
+.fc-fighter.result-win .fc-photo { border-color: rgba(74,222,128,0.35); }
+.fc-fighter.result-loss { opacity: 1 !important; pointer-events: none; }
+.fc-fighter.result-loss .fc-name { color: #f87171 !important; }
+.fc-fighter.result-loss .fc-photo { opacity: 0.55; filter: grayscale(0.2); }
 
 .fc-sub-row {
   display: flex; align-items: center; gap: 5px; flex-wrap: wrap;
@@ -6130,19 +6135,22 @@ body.light-mode .ev-star-btn.starred {
 .fc-result-method { display: none; }
 
 .fc-result-verdict {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 900; font-size: 0.72rem;
-  color: #4ade80; text-align: center;
-  letter-spacing: 0.02em; line-height: 1.4;
-  padding: 6px 4px 0;
-  white-space: nowrap;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 4px; text-align: center; padding: 4px 2px;
 }
-.fc-result-verdict-method {
-  display: block;
-  font-size: 0.82rem; font-weight: 900;
-  color: #fff; letter-spacing: 0.06em;
-  text-transform: uppercase; margin-top: 2px;
+.fc-result-method-big {
+  font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
+  font-weight: 900; font-size: 1.15rem; line-height: 1;
+  color: #f87171; letter-spacing: 0.04em; text-transform: uppercase;
 }
+.fc-result-names {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.52rem; font-weight: 600;
+  color: rgba(255,255,255,0.35); letter-spacing: 0.02em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  max-width: 76px;
+}
+.fc-defeats { color: rgba(255,255,255,0.2); }
 
 /* Method row — fc-method-row alias for sb-method-wrap */
 .fc-method-row {
@@ -7237,13 +7245,13 @@ body.light-mode .ev-hype-badge { color: rgba(140,80,0,0.85); background: rgba(20
   .fc-matchup { grid-template-columns: 1fr 46px 1fr; }
   .fc-card.fc-maincrd .fc-matchup { grid-template-columns: 1fr 46px 1fr; }
   .fc-card.fc-main .fc-matchup { grid-template-columns: 1fr 46px 1fr; }
-  .fc-name { font-size: 0.95rem; }
-  .fc-card.fc-maincrd .fc-name { font-size: 1.1rem; }
-  .fc-card.fc-main .fc-name { font-size: 1.3rem; }
-  .fc-photo { width: 58px; }
-  .fc-card.fc-maincrd .fc-photo { width: 68px; }
-  .fc-card.fc-main .fc-photo { width: 78px; }
-  .fc-fighter { padding: 10px 8px; gap: 8px; }
+  .fc-name { font-size: 1.05rem; }
+  .fc-card.fc-maincrd .fc-name { font-size: 1.2rem; }
+  .fc-card.fc-main .fc-name { font-size: 1.45rem; }
+  .fc-photo { width: 72px; }
+  .fc-card.fc-maincrd .fc-photo { width: 88px; }
+  .fc-card.fc-main .fc-photo { width: 100px; }
+  .fc-fighter { padding: 14px 10px; gap: 10px; }
   .pk-seg-btn { font-size: 0.54rem; padding: 7px 6px; }
   .pk-save-bar { padding: 10px 16px 14px; }
   .pk-fotn-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 9px; }
