@@ -312,6 +312,11 @@
     .ov-topbar-right { display:flex;align-items:center;gap:12px; }
     .ov-pick-btn { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:10px 22px;border-radius:8px;background:linear-gradient(135deg,rgba(0,229,255,.22) 0%,rgba(0,160,190,.14) 100%);border:1.5px solid rgba(0,229,255,.65);color:#00e5ff;text-decoration:none;white-space:nowrap;backdrop-filter:blur(10px);box-shadow:0 0 18px rgba(0,229,255,.25);transition:background .15s,border-color .15s,box-shadow .15s,transform .15s; }
     .ov-pick-btn:hover { background:linear-gradient(135deg,rgba(0,229,255,.34) 0%,rgba(0,180,200,.25) 100%);border-color:#00e5ff;box-shadow:0 0 28px rgba(0,229,255,.45);transform:translateY(-1px); }
+    .ov-result-btn { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;padding:10px 18px;border-radius:8px;text-decoration:none;white-space:nowrap;transition:background .15s,transform .15s,box-shadow .15s; }
+    .ov-result-picks { background:rgba(74,222,128,.12);border:1.5px solid rgba(74,222,128,.5);color:#4ade80; }
+    .ov-result-picks:hover { background:rgba(74,222,128,.22);box-shadow:0 0 20px rgba(74,222,128,.3);transform:translateY(-1px); }
+    .ov-result-review { background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8); }
+    .ov-result-review:hover { background:rgba(255,255,255,.12);box-shadow:0 0 16px rgba(255,255,255,.1);transform:translateY(-1px); }
     .ov-badge-row { display:flex;align-items:center;gap:10px; }
     .ov-badge { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;padding:4px 12px;border-radius:4px;backdrop-filter:blur(10px); }
     .ov-badge.fn  { background:rgba(0,229,255,.15);border:1px solid rgba(0,229,255,.35);color:#00e5ff; }
@@ -466,26 +471,25 @@
 
     /* ── RESULT ROWS (completed events) ── */
     .ov-fighter.won {
-      color:#fff;
-      text-shadow:0 0 24px rgba(255,255,255,.18),0 1px 8px rgba(0,0,0,.7);
+      color:#4ade80;
+      text-shadow:0 0 20px rgba(74,222,128,.35),0 1px 8px rgba(0,0,0,.7);
     }
     .ov-fighter.lost {
-      color:rgba(255,255,255,.28);
+      color:#f87171;
       text-shadow:none;
       font-weight:700;
+      opacity:.75;
     }
     .ov-fight.is-main .ov-fighter.lost { font-size:1.85rem; }
     .ov-result-method {
       font-family:'Montserrat',sans-serif;
-      font-weight:900;font-size:.82rem;
-      letter-spacing:.14em;text-transform:uppercase;
+      font-weight:900;font-size:1rem;
+      letter-spacing:.1em;text-transform:uppercase;
       margin-bottom:3px;
     }
     .ov-result-detail {
-      font-family:'Inter',sans-serif;
-      font-size:.52rem;font-weight:600;
-      color:rgba(255,255,255,.32);
-      letter-spacing:.1em;text-transform:uppercase;
+      font-family:'Inter',sans-serif;font-size:.62rem;font-weight:700;
+      color:rgba(255,255,255,.5);letter-spacing:.06em;text-transform:uppercase;
     }
     .ov-win-pip {
       display:inline-block;width:5px;height:5px;border-radius:50%;
@@ -966,6 +970,8 @@
           </div>
           <div class="ov-topbar-right">
             <a class="ov-pick-btn" id="ovPickBtn" href="#">Pick Fights →</a>
+            <a class="ov-result-btn ov-result-picks" id="ovMyPicksBtn" href="#" style="display:none">My Picks →</a>
+            <a class="ov-result-btn ov-result-review" id="ovWriteReviewBtn" href="#" style="display:none">Write a Review →</a>
             <div class="ov-cal-wrap" id="ovCalWrap">
               <button class="ov-cal-btn" id="ovCalBtn">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
@@ -1250,9 +1256,14 @@
       if(total>1) metas.push(`<div class="ov-meta-item">${total} fights</div>`);
       document.getElementById('ovMetaRow').innerHTML=metas.join('');
 
-      /* Pick Fights button */
-      const pickBtn=document.getElementById('ovPickBtn');
-      if(pickBtn) pickBtn.href=`picks.html?id=${encodeURIComponent(ev.id)}`;
+      /* Pick Fights / result buttons */
+      const pickBtn        = document.getElementById('ovPickBtn');
+      const myPicksBtn     = document.getElementById('ovMyPicksBtn');
+      const writeReviewBtn = document.getElementById('ovWriteReviewBtn');
+      const isCompleted    = ev.status === 'completed';
+      if(pickBtn)        { pickBtn.style.display        = isCompleted ? 'none' : ''; pickBtn.href = `picks.html?id=${encodeURIComponent(ev.id)}`; }
+      if(myPicksBtn)     { myPicksBtn.style.display     = isCompleted ? '' : 'none'; myPicksBtn.href = `picks.html?id=${encodeURIComponent(ev.id)}`; }
+      if(writeReviewBtn) { writeReviewBtn.style.display = isCompleted ? '' : 'none'; writeReviewBtn.href = `reviews.html`; }
 
       /* Calendar button */
       const calWrap=document.getElementById('ovCalWrap');

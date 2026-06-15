@@ -6080,7 +6080,9 @@ body.light-mode .ev-star-btn.starred {
   border: 1px solid rgba(80,210,120,0.2);
 }
 .fc-badge-wrong {
-  color: rgba(255,255,255,0.25); background: transparent; border: none;
+  color: #f87171; background: rgba(248,113,113,0.08);
+  border: 1px solid rgba(248,113,113,0.2);
+  font-size: 0.8rem; font-weight: 900; letter-spacing: 0.05em;
 }
 .fc-win-share {
   display: inline-flex;
@@ -6125,10 +6127,21 @@ body.light-mode .ev-star-btn.starred {
   font-weight: 900; font-size: 0.6rem; letter-spacing: 0.18em;
   color: rgba(200,150,12,0.35); text-align: center;
 }
-.fc-result-method {
-  font-family: 'Inter', sans-serif; font-size: 0.55rem;
-  color: rgba(255,255,255,0.25); text-align: center;
+.fc-result-method { display: none; }
+
+.fc-result-verdict {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900; font-size: 0.72rem;
+  color: #4ade80; text-align: center;
+  letter-spacing: 0.02em; line-height: 1.4;
+  padding: 6px 4px 0;
   white-space: nowrap;
+}
+.fc-result-verdict-method {
+  display: block;
+  font-size: 0.82rem; font-weight: 900;
+  color: #fff; letter-spacing: 0.06em;
+  text-transform: uppercase; margin-top: 2px;
 }
 
 /* Method row — fc-method-row alias for sb-method-wrap */

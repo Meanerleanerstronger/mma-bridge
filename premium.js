@@ -304,35 +304,6 @@ body.light-mode html,body.light-mode body{background:#f0f0f4 !important;}
   #mb-grain,#mb-glow{display:none !important;}
 }
 
-/* ── NAV PREVIEW PANEL ── */
-#mb-nav-preview{
-  position:fixed;
-  top:64px;
-  left:50%;
-  transform:translateX(-50%) translateY(-6px);
-  z-index:9990;
-  pointer-events:none;
-  opacity:0;
-  transition:opacity 0.18s ease,transform 0.18s ease;
-  border-radius:10px;
-  overflow:hidden;
-  box-shadow:0 16px 60px rgba(0,0,0,0.8),0 0 0 1px rgba(255,255,255,0.07);
-  width:280px;
-  height:160px;
-}
-#mb-nav-preview.mb-pv-show{
-  opacity:1;
-  transform:translateX(-50%) translateY(0);
-}
-#mb-nav-preview img{
-  width:100%;height:100%;object-fit:cover;object-position:top center;
-  display:block;border-radius:10px;
-}
-#mb-nav-preview::after{
-  content:'';position:absolute;inset:0;border-radius:10px;
-  background:linear-gradient(to bottom,transparent 55%,rgba(3,3,4,0.65) 100%);
-  pointer-events:none;
-}
 `;
 
 document.head.appendChild(S);
@@ -586,82 +557,6 @@ document.addEventListener('click',function(e){
   setTimeout(function(){rpl.remove();},580);
 });
 
-/* ══════════════════════════════════════════════════
-   NAV SCREENSHOT PREVIEWS
-══════════════════════════════════════════════════ */
-(function initNavPreviews(){
-  if(window.matchMedia('(pointer:coarse)').matches)return;
-
-  var NAV_IMGS = {
-    'index.html':       'images/TRENDING.png',
-    'events.html':      'images/UPCOMING.png',
-    'pfp.html':         'images/P4P.png',
-    'reviews.html':     'images/REVIEW.png',
-    'lucas.html':       'images/LUCAS.png',
-    'leaderboard.html': 'images/LEADER.png',
-    'about.html':       'images/ABOUT.png',
-  };
-
-  // Preload all nav images so switching is instant
-  Object.values(NAV_IMGS).forEach(function(src){
-    var pre = new Image(); pre.src = src;
-  });
-
-  var panel = document.createElement('div');
-  panel.id = 'mb-nav-preview';
-  var img = document.createElement('img');
-  img.alt = '';
-  panel.appendChild(img);
-  document.body.appendChild(panel);
-
-  var hideTimer;
-  var currentKey = null;
-
-  function getNavKey(href){
-    if(!href) return null;
-    var base = href.split('?')[0].split('#')[0].replace(/^.*\//, '');
-    return NAV_IMGS[base] ? base : null;
-  }
-
-  function show(anchor){
-    var href = anchor.getAttribute('href') || '';
-    var key  = getNavKey(href);
-    if(!key) return;
-
-    clearTimeout(hideTimer);
-
-    if(key !== currentKey){
-      currentKey = key;
-      img.src = NAV_IMGS[key];
-    }
-
-    var rect = anchor.getBoundingClientRect();
-    var cx   = rect.left + rect.width / 2;
-    var vw   = window.innerWidth;
-    var panW = 280;
-    var left = Math.min(Math.max(cx, panW/2 + 12), vw - panW/2 - 12);
-    panel.style.left = left + 'px';
-    panel.classList.add('mb-pv-show');
-  }
-
-  function hide(){
-    hideTimer = setTimeout(function(){
-      panel.classList.remove('mb-pv-show');
-      currentKey = null;
-    }, 80);
-  }
-
-  document.addEventListener('mouseover', function(e){
-    var a = e.target.closest('.nav-links a');
-    if(a) show(a);
-  });
-  document.addEventListener('mouseout', function(e){
-    var a = e.target.closest('.nav-links a');
-    if(a) hide();
-  });
-  panel.addEventListener('mouseenter', function(){ clearTimeout(hideTimer); });
-  panel.addEventListener('mouseleave', hide);
-})();
 
 /* ══════════════════════════════════════════════════
    REMOVE STATS STRIP if it exists from v2

@@ -1044,7 +1044,10 @@ function formatOdds(n) {
     // VS center column — just VS + result method, comm % moved to fighter sides
     let vsColHtml = `<span class="fc-vs">VS</span>`;
     if (isCompleted && winner) {
-      vsColHtml += `<div class="fc-result-method">${esc(f.method || '')}</div>`;
+      const loser = winner === f.a ? f.b : f.a;
+      const methodStr = f.method ? f.method.toUpperCase() : '';
+      const roundStr  = f.round  ? ` ROUND ${f.round}`   : '';
+      vsColHtml += `<div class="fc-result-verdict">${esc(winner)} defeats ${esc(loser)}<span class="fc-result-verdict-method"> by ${methodStr}${roundStr}</span></div>`;
     }
 
     // Community % labels for each side
@@ -1373,45 +1376,11 @@ function formatOdds(n) {
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
             Share Result
           </button>
-          <button class="pk-replay-btn" id="pkReplayBtn">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.36"/></svg>
-            Replay
-          </button>
         </div>
       </div>`;
   }
 
-  // ── Replay results animation ──────────────────────────────────────
-  function initReplayBtn() {
-    document.getElementById('pkReplayBtn')?.addEventListener('click', () => {
-      const cards = root.querySelectorAll('.sb-fight[data-key]');
-      // Reset all badges to pre-flip state
-      cards.forEach(card => {
-        card.querySelectorAll('.fc-badge').forEach(b => {
-          b.style.opacity = '0';
-          b.style.transform = 'perspective(500px) rotateY(-90deg)';
-          b.style.transition = 'none';
-        });
-        card.style.boxShadow = '';
-      });
-      // Staggered 3D flip reveal per card
-      cards.forEach((card, i) => {
-        setTimeout(() => {
-          card.querySelectorAll('.fc-badge').forEach(b => {
-            b.style.transition = 'opacity 0.15s ease, transform 0.42s cubic-bezier(0.22,1,0.36,1)';
-            b.style.opacity = '1';
-            b.style.transform = 'perspective(500px) rotateY(0deg)';
-          });
-          card.style.transition = 'box-shadow 0.3s ease';
-          const isCorrect = card.querySelector('.fc-badge-correct');
-          card.style.boxShadow = isCorrect
-            ? '0 0 0 1px rgba(80,210,120,0.35), 0 4px 24px rgba(80,210,120,0.12)'
-            : '0 0 0 1px rgba(255,80,80,0.25), 0 4px 24px rgba(255,80,80,0.08)';
-          setTimeout(() => { card.style.boxShadow = ''; }, 1400);
-        }, i * 320);
-      });
-    });
-  }
+  function initReplayBtn() { /* removed */ }
 
   // ── Share picks card ──────────────────────────────────────────────
   function initShareBtn() {
