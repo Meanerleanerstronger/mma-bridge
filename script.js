@@ -42,9 +42,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Pinned hero event — override normal logic when set
     const HERO_PIN_ID = 'ufc-freedom-250-topuria-vs-gaethje';
-    const pinned = HERO_PIN_ID && all.find(e => e.id === HERO_PIN_ID && e.status === 'upcoming');
+    const pinned = HERO_PIN_ID && all.find(e => e.id === HERO_PIN_ID);
 
-    renderHero(liveNow || pinned || (isVeryRecent ? recentCompleted : null) || upcoming[0] || past[0]);
+    renderHero(liveNow || pinned || upcoming[0] || past[0]);
 
     // ── Notification banner check ─────────────
     checkEventNotifications(all);
