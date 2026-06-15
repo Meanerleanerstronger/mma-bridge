@@ -201,7 +201,7 @@
     "nationality": "French",
     "flag": "🇫🇷",
     "weightClass": "Heavyweight",
-    "ranking": "#1",
+    "ranking": "Heavyweight Champion",
     "ranking_change": 0,
     "record": {
       "wins": 14,
@@ -215,8 +215,16 @@
     "fightingOut": "Paris, France",
     "style": "Striker",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-03/GANE_CIRYL_L_03-04.png",
-    "bio": "Ciryl Gane is the most technically gifted heavyweight in MMA, combining elite kickboxing footwork with extraordinary movement that belies his 250-pound frame. A former interim champion, Bon Gamin's only UFC losses are to Ngannou and Pavlovich. His UFC 321 fight with Aspinall was ruled a No Contest after an accidental eye poke, with the rematch now a must-see.",
+    "bio": "Ciryl Gane is the UFC Heavyweight Champion — and at UFC Freedom 250, Bon Gamin delivered the performance of his life. When Alex Pereira, the most dangerous striker in the sport, came hunting a third belt, Gane answered with a stunning second-round KO. Fluid, athletic, and impossibly graceful for a 250-pound heavyweight, Gane proved that technique and movement can beat pure violence. The best heavyweight on the planet.",
     "last5": [
+      {
+        "opponent": "Alex Pereira",
+        "result": "W",
+        "method": "KO",
+        "event": "UFC Freedom 250",
+        "round": 2,
+        "time": ""
+      },
       {
         "opponent": "Alexander Volkov (fighter)",
         "result": "W",
@@ -248,14 +256,6 @@
         "event": "UFC Fight Night: Gane vs. Tuivasa",
         "round": 3,
         "time": "4:23"
-      },
-      {
-        "opponent": "Francis Ngannou",
-        "result": "L",
-        "method": "Decision (unanimous)",
-        "event": "UFC 270",
-        "round": 5,
-        "time": "5:00"
       }
     ]
   },
@@ -344,8 +344,16 @@
     "style": "Striker",
     "pfp": true,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/PEREIRA_ALEX_L.png",
-    "bio": "Alex Pereira is one of the most exciting champions in combat sports history, a two-division UFC champion and former Glory Kickboxing world champion whose generational power has produced five first-round knockouts in his last nine UFC fights. He lost the LHW title to Ankalaev at UFC 313 only to immediately reclaim it with a TKO in round one at UFC 320, cementing his status as the face of the sport.",
+    "bio": "Alex Pereira dared to be great. Already a two-division UFC champion and the most feared striker on the planet, Poatan chased history at UFC Freedom 250 by moving up to heavyweight to challenge for a third belt — a feat never before accomplished. Ciryl Gane, fluid and physically supreme, ended the quest with a second-round KO. The loss does nothing to diminish one of the most extraordinary runs in UFC history: from LHW to MW to HW, Pereira simply refused to stop dreaming bigger.",
     "last5": [
+      {
+        "opponent": "Ciryl Gane",
+        "result": "L",
+        "method": "KO",
+        "event": "UFC Freedom 250",
+        "round": 2,
+        "time": ""
+      },
       {
         "opponent": "Magomed Ankalaev",
         "result": "W",
@@ -377,14 +385,6 @@
         "event": "UFC 303",
         "round": 2,
         "time": "0:13"
-      },
-      {
-        "opponent": "Jamahal Hill",
-        "result": "W",
-        "method": "KO (punches)",
-        "event": "UFC 300",
-        "round": 1,
-        "time": "3:14"
       }
     ]
   },
@@ -1440,7 +1440,7 @@
     "nationality": "Georgian-Spanish",
     "flag": "🇬🇪",
     "weightClass": "Lightweight",
-    "ranking": "Champion",
+    "ranking": "Former Lightweight Champion",
     "record": {
       "wins": 17,
       "losses": 1,
@@ -1453,8 +1453,16 @@
     "fightingOut": "Tbilisi, Georgia",
     "style": "Striker",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/TOPURIA_ILIA_L_BELT_10-26.png",
-    "bio": "Ilia Topuria is the UFC Lightweight Champion and the most explosive knockout artist in the sport — undefeated at 17-0 and the first fighter in UFC history to become a two-division champion while remaining unbeaten. El Matador dethroned Volkanovski at FW, stopped Holloway in the rematch, then moved to lightweight and knocked out Oliveira in round one at UFC 317 to add a second belt.",
+    "bio": "Ilia Topuria is one of the most electrifying fighters the sport has ever seen — but on June 14, 2026, at the White House South Lawn, the unthinkable happened. In one of the greatest upsets in combat sports history, Justin Gaethje stopped El Matador on the stool between rounds four and five, ending his undefeated run at 17-0 and stripping him of the Lightweight title. Topuria had dominated the division, knocking out Volkanovski, Holloway, and Oliveira on his way to the belt, but Gaethje proved indestructible. The legacy remains extraordinary — a two-division champion undone by one of the toughest men alive.",
     "last5": [
+      {
+        "opponent": "Justin Gaethje",
+        "result": "L",
+        "method": "TKO (corner stoppage)",
+        "event": "UFC Freedom 250",
+        "round": 4,
+        "time": "5:00"
+      },
       {
         "opponent": "Charles Oliveira",
         "result": "W",
@@ -1486,14 +1494,6 @@
         "event": "UFC on ABC: Emmett vs. Topuria",
         "round": 5,
         "time": "5:00"
-      },
-      {
-        "opponent": "Bryce Mitchell",
-        "result": "W",
-        "method": "Submission (arm-triangle choke)",
-        "event": "UFC 282",
-        "round": 2,
-        "time": "3:10"
       }
     ]
   },
