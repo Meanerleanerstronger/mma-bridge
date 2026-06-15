@@ -421,7 +421,7 @@
     }
 
     let fighters = [];
-    fetch('data/fighters.json').then(r => r.ok ? r.json() : []).then(d => { fighters = d; }).catch(() => {});
+    fetch('data/fighters.json?_='+Date.now(),{cache:'no-store'}).then(r => r.ok ? r.json() : []).then(d => { fighters = d; }).catch(() => {});
 
     input.oninput = () => {
       const q = input.value.trim().toLowerCase();

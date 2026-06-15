@@ -98,8 +98,8 @@
     // Load their ratings, picks, favs, events, and fight_results in parallel (public)
     const [ratingsResult, eventsResult, fightersResult, picksResult, profileExtResult, resultsResult] = await Promise.all([
       sb.from('ratings').select('id, event_id, event_name, hype_rating, review_text, created_at').eq('user_id', viewedUserId).order('created_at', { ascending: false }),
-      fetch('./events.json').then(r => r.ok ? r.json() : []).catch(() => []),
-      fetch('./data/fighters.json').then(r => r.ok ? r.json() : []).catch(() => []),
+      fetch('./events.json?_='+Date.now(),{cache:'no-store'}).then(r => r.ok ? r.json() : []).catch(() => []),
+      fetch('./data/fighters.json?_='+Date.now(),{cache:'no-store'}).then(r => r.ok ? r.json() : []).catch(() => []),
       sb.from('picks').select('event_id, fight_key, pick').eq('user_id', viewedUserId).neq('fight_key', 'fotn'),
       sb.from('profiles').select('fav_fighters').eq('id', viewedUserId).single(),
       sb.from('fight_results').select('event_id, fight_key, winner').neq('fight_key', '__fotn__'),
@@ -453,8 +453,8 @@
       .select('id, event_id, event_name, hype_rating, review_text, created_at')
       .eq('user_id', user.id)
       .order('created_at', { ascending: false }),
-    fetch('./events.json').then(r => r.ok ? r.json() : []).catch(() => []),
-    fetch('./data/fighters.json').then(r => r.ok ? r.json() : []).catch(() => []),
+    fetch('./events.json?_='+Date.now(),{cache:'no-store'}).then(r => r.ok ? r.json() : []).catch(() => []),
+    fetch('./data/fighters.json?_='+Date.now(),{cache:'no-store'}).then(r => r.ok ? r.json() : []).catch(() => []),
     sb.from('picks')
       .select('event_id, fight_key, pick, method, round')
       .eq('user_id', user.id)

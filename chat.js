@@ -22,8 +22,8 @@ if (window.location.hostname !== 'localhost' && window.location.hostname !== '12
 async function loadLiveData() {
   try {
     const [evRes, fRes] = await Promise.all([
-      fetch('events.json'),
-      fetch('data/fighters.json')   // richer fighter data with full records
+      fetch('events.json?_='+Date.now(),{cache:'no-store'}),
+      fetch('data/fighters.json?_='+Date.now(),{cache:'no-store'})   // richer fighter data with full records
     ]);
     const [events, fighters] = await Promise.all([
       evRes.ok  ? evRes.json()  : null,

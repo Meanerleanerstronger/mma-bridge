@@ -30,7 +30,7 @@ async function resolveEvent(eventId) {
     }
   } catch {}
   try {
-    const all = await fetch('/events.json').then(r => r.json());
+    const all = await fetch('/events.json?_='+Date.now(),{cache:'no-store'}).then(r => r.json());
     return all.find(ev => ev.id === eventId || slugify(ev.name || '') === eventId) || null;
   } catch {}
   return null;

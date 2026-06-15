@@ -39,8 +39,8 @@
     loadPromise = (async () => {
       try {
         const [fRes, eRes] = await Promise.all([
-          fetch('data/fighters.json'),
-          fetch('data/events.json'),
+          fetch('data/fighters.json?_='+Date.now(),{cache:'no-store'}),
+          fetch('data/events.json?_='+Date.now(),{cache:'no-store'}),
         ]);
         fighters = fRes.ok ? await fRes.json() : [];
         events   = eRes.ok ? await eRes.json() : [];

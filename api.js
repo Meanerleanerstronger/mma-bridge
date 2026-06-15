@@ -169,7 +169,7 @@ async function fetchEventsJson() {
 export const API = {
   // Fighters
   async getFighters() {
-    return fetch('/fighters.json').then(r => r.json());
+    return fetch('/fighters.json?_='+Date.now(),{cache:'no-store'}).then(r => r.json());
   },
 
   async getFighter(id) {

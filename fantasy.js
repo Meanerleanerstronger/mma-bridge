@@ -25,7 +25,7 @@
   }
 
   const user = await waitForAuth();
-  const fighters = await fetch('data/fighters.json').then(r=>r.ok?r.json():[]).catch(()=>[]);
+  const fighters = await fetch('data/fighters.json?_='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():[]).catch(()=>[]);
 
   // ── Tab routing ────────────────────────────────
   let currentTab = 'team';

@@ -113,7 +113,7 @@
 
     // Load upcoming events
     let eventsData = [];
-    try { eventsData = await fetch('events.json').then(r => r.json()); } catch {}
+    try { eventsData = await fetch('events.json?_='+Date.now(),{cache:'no-store'}).then(r => r.json()); } catch {}
     const today = new Date(); today.setHours(0, 0, 0, 0);
     const upcoming = (eventsData || []).filter(e =>
       e.status !== 'completed' && e.isoDate && new Date(e.isoDate) >= today

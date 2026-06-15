@@ -21,7 +21,7 @@
       .replace(/['']/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
   }
 
-  fetch('data/fighters.json')
+  fetch('data/fighters.json?_='+Date.now(),{cache:'no-store'})
     .then(r => r.ok ? r.json() : [])
     .then(fighters => {
       let f;
@@ -37,7 +37,7 @@
       renderProfile(f);
 
       // ── Upcoming fight banner ─────────────────
-      fetch('events.json')
+      fetch('events.json?_='+Date.now(),{cache:'no-store'})
         .then(r => r.ok ? r.json() : [])
         .then(events => {
           const now = new Date();
