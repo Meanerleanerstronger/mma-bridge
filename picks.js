@@ -1044,11 +1044,10 @@ function formatOdds(n) {
     // VS center column — just VS + result method, comm % moved to fighter sides
     let vsColHtml = `<span class="fc-vs">VS</span>`;
     if (isCompleted && winner) {
-      const loser = winner === f.a ? f.b : f.a;
       let methodStr = f.method ? f.method.toUpperCase() : '';
       if (methodStr === 'KO' || methodStr === 'TKO' || methodStr.startsWith('KO ') || methodStr.startsWith('TKO')) methodStr = 'KO/TKO';
       const roundStr = f.round ? ` · R${f.round}` : '';
-      vsColHtml += `<div class="fc-result-verdict"><span class="fc-result-method-big">${esc(methodStr)}${esc(roundStr)}</span><div class="fc-result-names">${esc(winner)} <span class="fc-defeats">defeats</span> ${esc(loser)}</div></div>`;
+      vsColHtml += `<div class="fc-result-verdict"><span class="fc-result-method-big">${esc(methodStr)}${esc(roundStr)}</span></div>`;
     }
 
     // Community % labels for each side
