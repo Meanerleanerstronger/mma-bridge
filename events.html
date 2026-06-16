@@ -1286,7 +1286,7 @@
       if(pickBtn)        { pickBtn.style.display = isCompleted ? 'none' : ''; pickBtn.href = `picks.html?id=${encodeURIComponent(ev.id)}`; }
       if(actionBar)      { actionBar.style.display = isCompleted ? 'flex' : 'none'; }
       if(myPicksBtn)     { myPicksBtn.href = `picks.html?id=${encodeURIComponent(ev.id)}`; }
-      if(writeReviewBtn) { writeReviewBtn.href = `reviews.html`; }
+      if(writeReviewBtn) { writeReviewBtn.href = `event-review.html?id=${encodeURIComponent(ev.id)}`; }
 
       /* Calendar button */
       const calWrap=document.getElementById('ovCalWrap');
