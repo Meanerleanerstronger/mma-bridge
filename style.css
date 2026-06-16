@@ -5879,25 +5879,25 @@ body.light-mode .ev-star-btn.starred {
   font-family: 'Montserrat', sans-serif;
   font-size: 0.48rem; font-weight: 900;
   letter-spacing: 0.32em; text-transform: uppercase;
-  color: rgba(255,255,255,0.16);
+  color: rgba(255,255,255,0.28);
   padding: 28px 20px 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
 /* ── Fight Card (prediction slip) ── */
 .fc-card {
-  background: #0f0f16;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background: rgba(20,20,28,0.82);
+  border-bottom: 1px solid rgba(255,255,255,0.09);
   position: relative; overflow: hidden;
   transition: background 0.15s;
 }
 .fc-card:last-child { border-bottom: none; }
 .fc-card.fc-main {
-  background: linear-gradient(160deg, rgba(200,150,12,0.055) 0%, #0f0f16 55%);
-  border-bottom: 1px solid rgba(200,150,12,0.12);
+  background: linear-gradient(160deg, rgba(200,150,12,0.1) 0%, rgba(20,20,28,0.88) 55%);
+  border-bottom: 1px solid rgba(200,150,12,0.2);
 }
 .fc-card.fc-maincrd {
-  background: linear-gradient(160deg, rgba(255,255,255,0.025) 0%, #0f0f16 55%);
+  background: linear-gradient(160deg, rgba(255,255,255,0.05) 0%, rgba(20,20,28,0.85) 55%);
 }
 
 /* Head strip */
@@ -5912,11 +5912,11 @@ body.light-mode .ev-star-btn.starred {
 }
 .fc-weight {
   font-family: 'Inter', sans-serif; font-size: 0.6rem; font-weight: 600;
-  color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.05em;
 }
 .fc-rds {
   font-family: 'Inter', sans-serif; font-size: 0.6rem;
-  color: rgba(255,255,255,0.18);
+  color: rgba(255,255,255,0.3);
 }
 .fc-title-pip {
   font-family: 'Montserrat', sans-serif; font-size: 0.44rem; font-weight: 900;
@@ -5965,11 +5965,12 @@ body.light-mode .ev-star-btn.starred {
 .fc-fighter-b { flex-direction: row-reverse; }
 .fc-fighter:hover { background: rgba(255,255,255,0.028); }
 .fc-fighter.selected {
-  background: rgba(200,150,12,0.07);
+  background: rgba(200,150,12,0.13);
 }
 .fc-fighter.selected::after {
   content: ''; position: absolute; inset: 0; pointer-events: none;
-  border: 1px solid rgba(200,150,12,0.25); border-radius: 0;
+  border: 1.5px solid rgba(200,150,12,0.55); border-radius: 0;
+  box-shadow: inset 0 0 24px rgba(200,150,12,0.07);
 }
 .fc-fighter.fc-other,
 .fc-fighter.dimmed { opacity: 0.45; }
@@ -6764,8 +6765,8 @@ body.light-mode .pk-info-pop-body strong { color: rgba(0,0,0,0.75); }
   position: fixed; inset: 0; z-index: 0; pointer-events: none;
   background-image: var(--poster);
   background-size: cover; background-position: center top;
-  filter: blur(60px) saturate(0.4);
-  opacity: 0.06;
+  filter: blur(48px) saturate(0.9);
+  opacity: 0.18;
   transform: scale(1.1);
 }
 .pk-page { position: relative; }
