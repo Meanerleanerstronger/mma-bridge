@@ -217,9 +217,14 @@ function formatOdds(n) {
   }
 
   const isCompleted = event.status === 'completed';
-  // Picks lock the moment the event start time passes (even before UFC marks it completed)
   const isLocked = !isCompleted && !!event.start_time && new Date() >= new Date(event.start_time);
   let myId = user?.id || null;
+
+  /* Live polling — auto-start on fight night */
+  if (!isCompleted && event.isoDate && window.MMALive) {
+    const today = new Date().toISOString().slice(0, 10);
+    if (event.isoDate === today) window.MMALive.start(event.isoDate);
+  }
 
   // ── State ─────────────────────────────────────
   let myPicks    = {};   // confirmed DB state
