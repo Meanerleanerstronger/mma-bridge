@@ -10641,7 +10641,7 @@
     "isoDate": "2026-06-27",
     "location": "Baku, Azerbaijan",
     "venue": "National Gymnastics Arena",
-    "poster": "https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-05/062726-ufc-fight-night-fiziev-vs-torres-TEMP-HERO.jpg",
+    "poster": "https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-06/062726-ufc-fight-night-fiziev-vs-torres-EVENT-ART.jpg",
     "status": "upcoming",
     "startTime": "15:00",
     "mainCard": [
@@ -10668,23 +10668,12 @@
         "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-10/PEREIRA_MICHEL_10-18.png"
       },
       {
-        "a": "Marvin Vettori",
-        "b": "Ismail Naurdiev",
-        "weight": "Middleweight",
+        "a": "Nazim Sadykhov",
+        "b": "Matheus Camilo",
+        "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true,
-        "slot": "",
-        "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-10/VETTORI_MARVIN_10-18.png",
-        "imgB": ""
-      },
-      {
-        "a": "Ikram Aliskerov",
-        "b": "Brunno Ferreira",
-        "weight": "Middleweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": true,
+        "ranked": false,
         "slot": "",
         "imgA": "",
         "imgB": ""
@@ -10693,6 +10682,17 @@
         "a": "Asu Almabayev",
         "b": "Charles Johnson",
         "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Ikram Aliskerov",
+        "b": "Brunno Ferreira",
+        "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
@@ -10714,9 +10714,20 @@
     ],
     "prelims": [
       {
-        "a": "Rizvan Kuniev",
-        "b": "Tyrell Fortune",
-        "weight": "Heavyweight",
+        "a": "Farman Hasanov",
+        "b": "Eric Nolan",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Abdul-Rakhman Yakhyaev",
+        "b": "Julius Walker",
+        "weight": "Light Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
@@ -10736,20 +10747,9 @@
         "imgB": ""
       },
       {
-        "a": "Julius Walker",
-        "b": "Abdul-Rakhman Yakhyaev",
-        "weight": "Light Heavyweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "",
-        "imgB": ""
-      },
-      {
-        "a": "Bekzat Almakhan",
-        "b": "Jean Matsumoto",
-        "weight": "Bantamweight",
+        "a": "Kaan Ofli",
+        "b": "Javier Reyes",
+        "weight": "Featherweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
@@ -10769,20 +10769,9 @@
         "imgB": ""
       },
       {
-        "a": "Nazim Sadykhov",
-        "b": "Matheus Camilo",
-        "weight": "Lightweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "",
-        "imgB": ""
-      },
-      {
-        "a": "Farman Hasanov",
-        "b": "Eric Nolan",
-        "weight": "Welterweight",
+        "a": "Bekzat Almakhan",
+        "b": "Jean Matsumoto",
+        "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
