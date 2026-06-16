@@ -1,6 +1,6 @@
 // MMA Bridge Service Worker — Push + Offline Cache
 // v3 — JS/CSS always network-fresh, only images cached
-const CACHE_NAME = 'mma-bridge-v4';
+const CACHE_NAME = 'mma-bridge-v5';
 const STATIC_ASSETS = [
   '/mma-bridge/',
   '/mma-bridge/index.html',
