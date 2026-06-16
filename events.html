@@ -1233,7 +1233,8 @@
     function openOverlay(ev){
       currentEvent=ev;
       if (ev.name) document.title = ev.name + ' | MMA Bridge';
-      if (typeof showCountdownCard === 'function') showCountdownCard(ev);
+      if (ev.status === 'completed') { if (typeof closeCountdownCard === 'function') closeCountdownCard(); }
+      else if (typeof showCountdownCard === 'function') showCountdownCard(ev);
       const special=SPECIAL_EVENTS[ev.id];
       const isPPV=ev.type==='PPV', cls=isPPV?'ppv':'fn';
       const accent=special?special.accent:(isPPV?'#c8a84b':'#00e5ff');
