@@ -1314,13 +1314,7 @@ function formatOdds(n) {
     });
   }
 
-  // Small header badge — for upcoming events showing career record
-  function careerBadgeHtml() {
-    if (!myId || careerJudged < 3) return '';
-    const pct = Math.round((careerCorrect / careerJudged) * 100);
-    const cls = pct >= 65 ? 'great' : pct >= 50 ? 'ok' : 'poor';
-    return `<div class="pk-career-badge pk-career-badge-${cls}">${careerCorrect}/${careerJudged} all-time · ${pct}%</div>`;
-  }
+  function careerBadgeHtml() { return ''; }
 
   // ── Who's Picked tracker ─────────────────────
   function whoPickedHtml() {

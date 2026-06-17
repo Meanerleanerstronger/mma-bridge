@@ -87,7 +87,12 @@ function renderHero(ev) {
     type.textContent = ev.type === 'PPV' ? 'Next PPV Event' : 'Next Event';
   }
 
-  title.textContent = ev.name || '';
+  var titleText = ev.name || '';
+  if (typeof FXTypewriter === 'function' && titleText) {
+    FXTypewriter(title, titleText, 38, 200);
+  } else {
+    title.textContent = titleText;
+  }
   meta.textContent  = [ev.date, ev.location, ev.venue].filter(Boolean).join('  ·  ');
   const btn = document.getElementById('heroBtn');
   if (btn && ev.id) {

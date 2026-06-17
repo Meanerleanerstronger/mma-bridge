@@ -386,11 +386,11 @@
       const hasAccuracy = u.pct !== null && u.judged >= 3;
       const statHtml = hasPoints
         ? `<div class="lb-stat lb-stat-points">
-             <div class="lb-stat-val">${u.points}<span class="lb-stat-pts-sym">pts</span></div>
+             <div class="lb-stat-val" data-count="${u.points}" data-count-suffix="pts" data-count-duration="700">${u.points}pts</div>
              <div class="lb-stat-lbl">${hasAccuracy ? `${u.pct}% · ${u.correct}/${u.judged}` : `${u.count} picks`}</div>
            </div>`
         : `<div class="lb-stat">
-             <div class="lb-stat-val">${u.count}</div>
+             <div class="lb-stat-val" data-count="${hasAccuracy ? u.pct : u.count}" ${hasAccuracy ? 'data-count-suffix="%"' : ''} data-count-duration="700">${hasAccuracy ? u.pct + '%' : u.count}</div>
              <div class="lb-stat-lbl">${u.judged > 0 ? `${u.judged} judged` : 'picks'}</div>
            </div>`;
 
@@ -414,6 +414,13 @@
     }).join('');
 
     wrap.innerHTML = `<div class="lb-table">${rows}</div>`;
+
+    // Stagger rows + count-up stats
+    if (typeof FXStagger === 'function') {
+      var table = wrap.querySelector('.lb-table');
+      if (table) FXStagger(table, { delay: 38, type: 'up' });
+    }
+    if (typeof FXObserve === 'function') setTimeout(FXObserve, 80);
 
     // Wire View Picks buttons
     wrap.querySelectorAll('.lb-action-picks').forEach(btn => {
