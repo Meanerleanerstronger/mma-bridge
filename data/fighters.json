@@ -1440,7 +1440,7 @@
     "nationality": "Georgian-Spanish",
     "flag": "🇬🇪",
     "weightClass": "Lightweight",
-    "ranking": "Former Lightweight Champion",
+    "ranking": "#2",
     "record": {
       "wins": 17,
       "losses": 1,
@@ -1455,6 +1455,14 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/TOPURIA_ILIA_L_BELT_10-26.png",
     "bio": "Ilia Topuria is one of the most complete fighters to ever step inside the Octagon — a two-division UFC champion who did things nobody had done before. El Matador became featherweight champion at 25 by knocking out Alexander Volkanovski in round 2 at UFC 298, then moved up to lightweight and dominated Max Holloway and Charles Oliveira to become the youngest fighter in UFC history to hold two division titles. His combination of elite wrestling, razor-sharp boxing, devastating power, and elite IQ makes him a generational talent. After losing the lightweight title to Gaethje in June 2026, Topuria's story is far from over — this is a champion who will be back.",
     "last5": [
+      {
+        "opponent": "Justin Gaethje",
+        "result": "L",
+        "method": "TKO",
+        "event": "UFC 314",
+        "round": 5,
+        "time": "5:00"
+      },
       {
         "opponent": "Justin Gaethje",
         "result": "L",
@@ -1486,14 +1494,6 @@
         "event": "UFC 298",
         "round": 2,
         "time": "3:32"
-      },
-      {
-        "opponent": "Josh Emmett",
-        "result": "W",
-        "method": "Decision (unanimous)",
-        "event": "UFC on ABC: Emmett vs. Topuria",
-        "round": 5,
-        "time": "5:00"
       }
     ]
   },
