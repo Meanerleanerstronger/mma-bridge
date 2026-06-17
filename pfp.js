@@ -133,7 +133,40 @@ document.addEventListener("DOMContentLoaded", async () => {
   // ==============================================
   try {
     debugLog('Loading PFP page...');
-    const fighters = await API.getFighters();
+
+    // Load directly from local JSON — no backend dependency, no cold-start delay
+    const rawList = await fetch('data/fighters.json?_=' + Date.now(), { cache: 'no-store' })
+      .then(r => r.json())
+      .catch(() => []);
+
+    // Build a slug-keyed map that matches the shape pfp.js expects
+    const fighters = {};
+    rawList.forEach(f => {
+      const rec = f.record || {};
+      const wins   = rec.wins   ?? 0;
+      const losses = rec.losses ?? 0;
+      const draws  = rec.draws  ?? 0;
+      const recordStr = draws > 0 ? `${wins}–${losses}–${draws}` : `${wins}–${losses}`;
+
+      // Rank: read from DOM for P4P fighters; fall back to f.pfp or null
+      const domRow = document.querySelector(`[data-fighter="${f.id}"] .pfp-row-num`);
+      const rank = domRow ? (parseInt(domRow.textContent) || null) : (f.pfp || null);
+
+      fighters[f.id] = {
+        name:      f.name,
+        record:    recordStr,
+        division:  f.weightClass || f.division || '',
+        stance:    f.stance || '—',
+        height:    f.height || '—',
+        reach:     f.reach  || '—',
+        flag:      f.flag   || '',
+        country:   f.fightingOut || f.nationality || '',
+        champion:  f.ranking || null,
+        last5:     f.last5  || [],
+        rank,
+      };
+    });
+
     debugLog('Fighters loaded:', Object.keys(fighters).length);
 
     document.querySelectorAll("[data-fighter]").forEach(card => {

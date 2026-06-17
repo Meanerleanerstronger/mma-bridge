@@ -2085,6 +2085,71 @@
     ]
   },
   {
+    "id": "joshua-van",
+    "name": "Joshua Van",
+    "nickname": "",
+    "nationality": "Canadian",
+    "flag": "🇨🇦",
+    "weightClass": "Flyweight",
+    "ranking": "Champion",
+    "record": {
+      "wins": 12,
+      "losses": 1,
+      "draws": 0
+    },
+    "height": "5'6\"",
+    "reach": "68\"",
+    "stance": "Southpaw",
+    "age": 27,
+    "fightingOut": "Calgary, Canada",
+    "style": "Striker",
+    "pfp": true,
+    "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/VAN_JOSHUA_L_BELTMOCK.png",
+    "bio": "Joshua Van is the UFC Flyweight Champion, known for his explosive striking and finishing ability.",
+    "last5": [
+      {
+        "opponent": "Alexandre Pantoja",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 313",
+        "round": 3,
+        "time": "2:15"
+      },
+      {
+        "opponent": "Steve Erceg",
+        "result": "W",
+        "method": "Dec",
+        "event": "UFC Fight Night",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Tatsuro Taira",
+        "result": "W",
+        "method": "Dec",
+        "event": "UFC Fight Night",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Cody Durden",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night",
+        "round": 1,
+        "time": "1:44"
+      },
+      {
+        "opponent": "Tagir Ulanbekov",
+        "result": "L",
+        "method": "Dec",
+        "event": "UFC Fight Night",
+        "round": 3,
+        "time": "5:00"
+      }
+    ]
+  },
+  {
     "id": "brandon-moreno",
     "name": "Brandon Moreno",
     "nickname": "The Assassin Baby",
