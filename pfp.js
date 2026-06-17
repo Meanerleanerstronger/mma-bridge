@@ -32,30 +32,13 @@ const FIGHTER_PHOTOS = {
 };
 
 function burstParticles(x, y) {
-  const colors = [
-    'rgba(0,229,255,0.95)',
-    'rgba(200,168,75,0.95)',
-    'rgba(255,255,255,0.85)',
-    'rgba(0,180,255,0.8)',
-  ];
-  const count = 12;
-  for (let i = 0; i < count; i++) {
-    const el = document.createElement('div');
-    el.className = 'pfp-burst-particle';
-    const size = 5 + Math.random() * 9;
-    const angle = (i / count) * 360 + Math.random() * 30;
-    const dist  = 35 + Math.random() * 65;
-    const color = colors[Math.floor(Math.random() * colors.length)];
-    const dur   = 380 + Math.random() * 220;
-    const tx = Math.cos(angle * Math.PI / 180) * dist;
-    const ty = Math.sin(angle * Math.PI / 180) * dist;
-    el.style.cssText = `left:${x}px;top:${y}px;width:${size}px;height:${size}px;`
-      + `background:${color};box-shadow:0 0 ${size * 2}px ${color};`
-      + `--tx:${tx}px;--ty:${ty}px;`
-      + `animation:pfp-burst ${dur}ms cubic-bezier(0.2,0,0.8,1) forwards;`;
-    document.body.appendChild(el);
-    setTimeout(() => el.remove(), dur + 50);
-  }
+  [0, 80].forEach(delay => {
+    const ring = document.createElement('div');
+    ring.className = 'pfp-shockwave';
+    ring.style.cssText = `left:${x}px;top:${y}px;animation-delay:${delay}ms;`;
+    document.body.appendChild(ring);
+    setTimeout(() => ring.remove(), 600 + delay);
+  });
 }
 
 document.addEventListener("DOMContentLoaded", async () => {

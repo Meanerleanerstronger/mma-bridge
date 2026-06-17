@@ -11317,22 +11317,26 @@ img { image-rendering: auto; }
   color: #fff;
 }
 
-/* ── 10. P4P row click burst particles ── */
-.pfp-burst-particle {
+/* ── 10. P4P row click shockwave ── */
+.pfp-shockwave {
   position: fixed;
+  width: 0; height: 0;
   border-radius: 50%;
   pointer-events: none;
   z-index: 99999;
-  transform: translate(-50%, -50%) scale(0);
+  transform: translate(-50%, -50%);
+  border: 1.5px solid rgba(255,255,255,0.18);
+  box-shadow: 0 0 12px rgba(255,255,255,0.06), inset 0 0 8px rgba(255,255,255,0.04);
+  animation: pfp-shockwave 0.52s cubic-bezier(0.15,0,0.6,1) forwards;
 }
-@keyframes pfp-burst {
-  0%   { transform: translate(-50%,-50%) scale(0); opacity: 1; }
-  35%  { opacity: 1; }
-  100% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1); opacity: 0; }
+@keyframes pfp-shockwave {
+  0%   { width: 0;     height: 0;     opacity: 0.7; border-color: rgba(255,255,255,0.22); }
+  60%  { opacity: 0.25; }
+  100% { width: 180px; height: 180px; opacity: 0;   border-color: rgba(255,255,255,0.04); }
 }
 @keyframes pfp-row-tap {
-  0%   { background: rgba(0,229,255,0.12); }
+  0%   { background: rgba(255,255,255,0.06); }
   100% { background: transparent; }
 }
-.pfp-row-tapping { animation: pfp-row-tap 0.35s ease-out; }
+.pfp-row-tapping { animation: pfp-row-tap 0.3s ease-out; }
 }
