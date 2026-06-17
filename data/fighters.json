@@ -214,7 +214,7 @@
     "age": 34,
     "fightingOut": "Paris, France",
     "style": "Striker",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/GANE_CIRYL_R_06-14.png",
+    "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/GANE_CIRYL_R_06-14.png",
     "bio": "Ciryl Gane is the UFC Heavyweight Champion — and at UFC Freedom 250, Bon Gamin delivered the performance of his life. When Alex Pereira, the most dangerous striker in the sport, came hunting a third belt, Gane answered with a stunning second-round KO. Fluid, athletic, and impossibly graceful for a 250-pound heavyweight, Gane proved that technique and movement can beat pure violence. The best heavyweight on the planet.",
     "last5": [
       {
@@ -226,9 +226,9 @@
         "time": ""
       },
       {
-        "opponent": "Alexander Volkov (fighter)",
+        "opponent": "Alexander Volkov",
         "result": "W",
-        "method": "Decision (split)",
+        "method": "SD",
         "event": "UFC 310",
         "round": 3,
         "time": "5:00"

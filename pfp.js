@@ -27,8 +27,8 @@ const FIGHTER_PHOTOS = {
   'sean-strickland':      'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-01/STRICKLAND_SEAN_L_BELT_01-20.png',
   'charles-oliveira':     'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-06/OLIVEIRA_CHARLES_L_06-10.png',
   'conor-mcgregor':       'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2021-07/MCGREGOR_CONOR_L_07-10.png',
-  'ciryl-gane':           'https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/GANE_CIRYL_R_06-14.png',
-  'charles-oliveira':     'https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/OLIVEIRA_CHARLES_L_BMFMOCK.png',
+  'ciryl-gane':           'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/GANE_CIRYL_R_06-14.png',
+  'charles-oliveira':     'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/OLIVEIRA_CHARLES_L_BMFMOCK.png',
 };
 
 function burstParticles(x, y) {
