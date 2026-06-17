@@ -27,8 +27,36 @@ const FIGHTER_PHOTOS = {
   'sean-strickland':      'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-01/STRICKLAND_SEAN_L_BELT_01-20.png',
   'charles-oliveira':     'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-06/OLIVEIRA_CHARLES_L_06-10.png',
   'conor-mcgregor':       'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2021-07/MCGREGOR_CONOR_L_07-10.png',
-  'ciryl-gane':           'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-03/GANE_CIRYL_L_03-04.png',
+  'ciryl-gane':           'https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/GANE_CIRYL_R_06-14.png',
+  'charles-oliveira':     'https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/OLIVEIRA_CHARLES_L_BMFMOCK.png',
 };
+
+function burstParticles(x, y) {
+  const colors = [
+    'rgba(0,229,255,0.95)',
+    'rgba(200,168,75,0.95)',
+    'rgba(255,255,255,0.85)',
+    'rgba(0,180,255,0.8)',
+  ];
+  const count = 12;
+  for (let i = 0; i < count; i++) {
+    const el = document.createElement('div');
+    el.className = 'pfp-burst-particle';
+    const size = 5 + Math.random() * 9;
+    const angle = (i / count) * 360 + Math.random() * 30;
+    const dist  = 35 + Math.random() * 65;
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const dur   = 380 + Math.random() * 220;
+    const tx = Math.cos(angle * Math.PI / 180) * dist;
+    const ty = Math.sin(angle * Math.PI / 180) * dist;
+    el.style.cssText = `left:${x}px;top:${y}px;width:${size}px;height:${size}px;`
+      + `background:${color};box-shadow:0 0 ${size * 2}px ${color};`
+      + `--tx:${tx}px;--ty:${ty}px;`
+      + `animation:pfp-burst ${dur}ms cubic-bezier(0.2,0,0.8,1) forwards;`;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), dur + 50);
+  }
+}
 
 document.addEventListener("DOMContentLoaded", async () => {
   const drawer      = document.getElementById("fightDrawer");
@@ -173,6 +201,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.querySelectorAll("[data-fighter]").forEach(card => {
       card.onclick = e => {
         e.preventDefault();
+        // Burst particles from click point
+        burstParticles(e.clientX, e.clientY);
+        card.classList.remove('pfp-row-tapping');
+        void card.offsetWidth;
+        card.classList.add('pfp-row-tapping');
+
         const slug = card.dataset.fighter;
         const f = fighters[slug];
         if (!f) return;
