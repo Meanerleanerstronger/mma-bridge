@@ -470,7 +470,29 @@
   window.MMANotif = MMANotif;
 
   document.addEventListener('DOMContentLoaded', () => {
-    MMANotif.init();
+    // Bell is auth-gated — only render for signed-in users
+    function maybeInitBell() {
+      if (window._sb) {
+        window._sb.auth.getSession().then(({ data: { session } }) => {
+          if (session?.user) {
+            MMANotif.init();
+          } else {
+            // Hide the mount so it takes no space
+            const mount = document.getElementById('notifBellMount');
+            if (mount) mount.style.display = 'none';
+          }
+        }).catch(() => {
+          const mount = document.getElementById('notifBellMount');
+          if (mount) mount.style.display = 'none';
+        });
+      } else {
+        // Supabase not loaded — hide bell
+        const mount = document.getElementById('notifBellMount');
+        if (mount) mount.style.display = 'none';
+      }
+    }
+
+    maybeInitBell();
     renderSidebarWidget();
 
     // Load challenge count for badge
