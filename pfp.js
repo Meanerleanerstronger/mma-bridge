@@ -7,7 +7,7 @@ import API from './api.js';
 import { showLoading, showError } from './loading.js';
 
 const FIGHTER_PHOTOS = {
-  'islam-makhachev':      'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_detail_stance_thumbnail_full_body/s3/2025-01/MAKHACHEV_ISLAM_R_BELT_01-18.png',
+  'islam-makhachev':      'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/7/MAKHACHEV_ISLAM_L_BELT_01-18.png',
   'ilia-topuria':         'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/TOPURIA_ILIA_L_BELT_10-26.png',
   'khamzat-chimaev':      'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/CHIMAEV_KHAMZAT_L_BELTMOCK.png',
   'alex-pereira':         'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/PEREIRA_ALEX_L.png',
