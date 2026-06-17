@@ -330,7 +330,7 @@
     "nationality": "Brazilian",
     "flag": "🇧🇷",
     "weightClass": "Light Heavyweight",
-    "ranking": "Champion",
+    "ranking": "#4",
     "record": {
       "wins": 13,
       "losses": 4,
@@ -1375,7 +1375,7 @@
     "nationality": "American",
     "flag": "🇺🇸",
     "weightClass": "Lightweight",
-    "ranking": "Lightweight Champion",
+    "ranking": "Champion",
     "ranking_change": 1,
     "record": {
       "wins": 28,
@@ -1391,6 +1391,14 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/GAETHJE_JUSTIN_L_BELTMOCK.png",
     "bio": "Justin Gaethje is the UFC Lightweight Champion and one of the most indestructible fighters on the planet. On June 14, 2026, at the White House South Lawn, The Highlight delivered the performance of his career — stopping the undefeated Ilia Topuria between rounds four and five to claim the lightweight title in one of the greatest upsets in UFC history. A relentless pressure fighter who has never run from a war, Gaethje has been KO'd, submitted, and counted out by experts for years — and he just keeps coming back harder. Former interim champion, BMF titleholder, and now undisputed lightweight champion.",
     "last5": [
+      {
+        "opponent": "Ilia Topuria",
+        "result": "W",
+        "method": "TKO",
+        "event": "UFC 314",
+        "round": 5,
+        "time": "5:00"
+      },
       {
         "opponent": "Paddy Pimblett",
         "result": "W",
@@ -1422,14 +1430,6 @@
         "event": "UFC 291",
         "round": 2,
         "time": "1:00"
-      },
-      {
-        "opponent": "Rafael Fiziev",
-        "result": "W",
-        "method": "Decision (majority)",
-        "event": "UFC 286",
-        "round": 3,
-        "time": "5:00"
       }
     ]
   },
