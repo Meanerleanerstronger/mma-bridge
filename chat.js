@@ -87,7 +87,7 @@ async function loadLiveData() {
 
     // Current P4P rankings with record context
     const p4pContext = [
-      { rank: 1, name: 'Islam Makhachev', record: '28-1', division: 'Lightweight', next: 'UFC 330 vs Ian Garry (WW title, Aug 22 2026, Philadelphia)' },
+      { rank: 1, name: 'Islam Makhachev', record: '28-1', division: 'Lightweight', next: 'UFC 330 vs Ian Garry (WW title, Aug 15 2026, Philadelphia)' },
       { rank: 2, name: 'Alexander Volkanovski', record: '29-4', division: 'Featherweight', note: 'Beat Diego Lopes twice (UFC 314 + 325)' },
       { rank: 3, name: 'Petr Yan', record: '18-5', division: 'Bantamweight', note: 'BW Champion' },
       { rank: 4, name: 'Justin Gaethje', record: '28-5', division: 'Lightweight', note: 'LW Champion — shocked Topuria at +450 odds at UFC 314' },
