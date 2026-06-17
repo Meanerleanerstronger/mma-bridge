@@ -330,7 +330,7 @@
     <div style="position:absolute;inset:0;background:linear-gradient(105deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.6) 35%, rgba(0,0,0,0.05) 65%, rgba(0,0,0,0) 100%);"></div>
     <div id="hero-content" style="position:relative;z-index:2;padding:80px 56px 64px;max-width:600px;">
       <div id="heroType" style="font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:12px;"></div>
-      <h1 id="heroTitle" style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:2.4rem;text-transform:uppercase;letter-spacing:0.04em;color:#fff;margin:0 0 10px;text-shadow:0 2px 20px rgba(0,0,0,0.8);max-width:700px;"></h1>
+      <h1 id="heroTitle" style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:2.4rem;text-transform:uppercase;letter-spacing:0.04em;word-spacing:0.18em;color:#fff;margin:0 0 10px;text-shadow:0 2px 20px rgba(0,0,0,0.8);max-width:700px;"></h1>
       <div id="heroMeta" style="font-family:'Inter',sans-serif;font-size:0.9rem;color:rgba(255,255,255,0.6);margin-bottom:28px;"></div>
       <a id="heroBtn" href="events.html" style="display:inline-block !important;background:rgba(255,255,255,0.12);color:#fff;font-family:'Montserrat',sans-serif;font-weight:800;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;padding:12px 28px;border-radius:6px;text-decoration:none !important;border:1.5px solid rgba(255,255,255,0.25);">View Full Card →</a>
     </div>
@@ -387,60 +387,6 @@
   <script src="widget.js"></script>
 <script src="push.js?v=1.1"></script>
 
-  <!-- Onboarding Modal -->
-  <div class="ob-overlay" id="obOverlay" style="display:none" role="dialog" aria-modal="true" aria-label="Welcome to MMA Bridge">
-    <div class="ob-modal">
-      <button class="ob-close" id="obClose" aria-label="Close">✕</button>
-      <h2 class="ob-title">MMA <span>Bridge</span></h2>
-      <p class="ob-sub">Pick fights. Track your accuracy. Compete with friends.</p>
-      <div class="ob-steps">
-        <a class="ob-step ob-step-link" href="events.html" id="obStep1">
-          <div class="ob-step-num">1</div>
-          <div class="ob-step-text"><strong>Pick fights</strong> — predict winners before each event locks</div>
-          <div class="ob-step-arrow">→</div>
-        </a>
-        <a class="ob-step ob-step-link" href="leaderboard.html" id="obStep2">
-          <div class="ob-step-num">2</div>
-          <div class="ob-step-text"><strong>Join a group</strong> — private league with your friends all season</div>
-          <div class="ob-step-arrow">→</div>
-        </a>
-        <div class="ob-step">
-          <div class="ob-step-num">3</div>
-          <div class="ob-step-text"><strong>Climb the board</strong> — accuracy earns you a tier from Rookie to Legend</div>
-        </div>
-      </div>
-      <button class="ob-skip" id="obSkip">Got it</button>
-    </div>
-  </div>
-
-  <script>
-    (function() {
-      // Check all legacy keys so returning users never see this again
-      var KEYS = ['mmab_welcomed_v2', 'mma_bridge_welcomed', 'mb_welcomed'];
-      if (KEYS.some(function(k) { return localStorage.getItem(k); })) return;
-      setTimeout(function() {
-        var user = window.MMABridgeAuth?.getUser?.();
-        if (user) { localStorage.setItem(KEYS[0], '1'); return; }
-        var overlay = document.getElementById('obOverlay');
-        if (!overlay) return;
-        overlay.style.display = 'flex';
-        function dismiss() {
-          overlay.style.opacity = '0';
-          overlay.style.transition = 'opacity .2s';
-          setTimeout(function() { overlay.style.display = 'none'; }, 200);
-          KEYS.forEach(function(k) { localStorage.setItem(k, '1'); });
-        }
-        document.getElementById('obClose')?.addEventListener('click', dismiss);
-        document.getElementById('obSkip')?.addEventListener('click', dismiss);
-        document.getElementById('obStep1')?.addEventListener('click', function() { KEYS.forEach(function(k){localStorage.setItem(k,'1');}); });
-        document.getElementById('obStep2')?.addEventListener('click', function() { KEYS.forEach(function(k){localStorage.setItem(k,'1');}); });
-        overlay.addEventListener('click', function(e) { if (e.target === overlay) dismiss(); });
-        document.addEventListener('keydown', function onEsc(e) {
-          if (e.key === 'Escape') { dismiss(); document.removeEventListener('keydown', onEsc); }
-        });
-      }, 3500);
-    })();
-  </script>
 <!-- PWA install toast (bottom-right corner) -->
 <div id="pwaBanner" hidden class="pwa-toast">
   <div class="pwa-toast-text">
