@@ -37,27 +37,67 @@ async function loadLiveData() {
     // Build a compact context summary Lucas can use to ground answers
     const upcoming = allEvents
       .filter(e => e.status === 'upcoming')
-      .slice(0, 5)
+      .slice(0, 8)
       .map(e => ({
         name: e.name,
         date: e.date,
         location: e.location || '',
-        mainCard: (e.mainCard || []).slice(0, 5).map(f => `${f.a} vs ${f.b}`)
+        mainCard: (e.mainCard || []).slice(0, 5).map(f => ({
+          fight: `${f.a} vs ${f.b}`,
+          weight: f.weight || '',
+          title: f.titleFight || false,
+          odds: f.odds || null
+        }))
       }));
 
     const recent = allEvents
       .filter(e => e.status === 'completed')
-      .slice(-3)
+      .slice(-5)
       .map(e => ({
         name: e.name,
         date: e.date,
-        results: (e.mainCard || []).slice(0, 3).map(f => f.winner ? `${f.winner} def. ${f.a === f.winner ? f.b : f.a} (${f.method || 'DEC'})` : `${f.a} vs ${f.b}`)
+        results: (e.mainCard || []).slice(0, 5).map(f => {
+          if (!f.winner) return `${f.a} vs ${f.b} (no result yet)`;
+          const loser = f.a === f.winner ? f.b : f.a;
+          const odds = f.winnerOdds ? ` | winner was ${f.winnerOdds > 0 ? '+' : ''}${f.winnerOdds} underdog` : '';
+          return `${f.winner} def. ${loser} (${f.method || 'DEC'}, R${f.round || '?'})${odds}`;
+        })
       }));
+
+    // Notable upsets with betting odds context — Lucas uses this to gauge significance
+    const notableUpsets = [
+      {
+        fight: 'Justin Gaethje def. Ilia Topuria',
+        event: 'UFC 314',
+        date: 'June 14, 2026',
+        method: 'TKO (corner stoppage) R5',
+        bettingContext: 'Topuria was the -600 to -800 favourite; Gaethje was a +450 to +500 underdog — one of the biggest upsets in UFC lightweight history. Gaethje had lost to Max Holloway previously and most oddsmakers saw him as a live underdog at best, but his relentless pressure and iron chin carried him through five rounds.',
+        significance: 'Gaethje captured the LW title as a near 5-to-1 underdog. Most betting models gave him under 20% win probability.',
+        impact: 'Topuria drops from P4P #1 to #5; Gaethje jumps to P4P #4; LW division reshuffled.'
+      },
+      {
+        fight: 'Carlos Ulberg def. Alex Pereira',
+        event: 'UFC Freedom 250',
+        date: '2026',
+        method: 'KO',
+        bettingContext: 'Pereira was heavy favourite; Ulberg was a significant underdog as a late replacement.',
+        significance: 'Ulberg won the LHW title as a massive underdog, ending Poatan\'s reign.'
+      }
+    ];
+
+    // Current P4P rankings with record context
+    const p4pContext = [
+      { rank: 1, name: 'Islam Makhachev', record: '28-1', division: 'Lightweight', next: 'UFC 330 vs Ian Garry (WW title, Aug 22 2026, Philadelphia)' },
+      { rank: 2, name: 'Alexander Volkanovski', record: '29-4', division: 'Featherweight', note: 'Beat Diego Lopes twice (UFC 314 + 325)' },
+      { rank: 3, name: 'Petr Yan', record: '18-5', division: 'Bantamweight', note: 'BW Champion' },
+      { rank: 4, name: 'Justin Gaethje', record: '28-5', division: 'Lightweight', note: 'LW Champion — shocked Topuria at +450 odds at UFC 314' },
+      { rank: 5, name: 'Ilia Topuria', record: '17-1', division: 'Lightweight', note: 'Lost LW title to Gaethje via TKO R5, was -600 favourite' },
+    ];
 
     lucasLiveData = {
       events: allEvents,
       fighters: fighters || [],
-      context: { upcoming, recent, generatedAt: now.toISOString() }
+      context: { upcoming, recent, notableUpsets, p4pContext, generatedAt: now.toISOString() }
     };
   } catch (e) {
     // silently fail — backend will use its own disk copies as fallback

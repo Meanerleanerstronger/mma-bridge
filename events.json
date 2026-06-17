@@ -11246,5 +11246,128 @@
       }
     ],
     "earlyPrelims": []
+  },
+  {
+    "id": "ufc-330-garry-vs-makhachev",
+    "name": "UFC 330: Garry vs. Makhachev",
+    "type": "PPV",
+    "date": "Sat, Aug 22, 2026",
+    "isoDate": "2026-08-22",
+    "location": "Philadelphia, PA",
+    "venue": "Wells Fargo Center",
+    "poster": "",
+    "status": "upcoming",
+    "start_time": "2026-08-23T02:00:00Z",
+    "prelims_time": "2026-08-23T00:00:00Z",
+    "mainCard": [
+      {
+        "a": "Ian Garry",
+        "b": "Islam Makhachev",
+        "weight": "Welterweight",
+        "rounds": "5 Rds",
+        "titleFight": true,
+        "ranked": true,
+        "slot": "main",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-04/MACHADO_GARRY_IAN_L_04-26.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/7/MAKHACHEV_ISLAM_L_BELT_01-18.png",
+        "odds": {
+          "a": "-180",
+          "b": "+155",
+          "note": "Garry slight favourite on home turf, Islam moving up to WW"
+        }
+      },
+      {
+        "a": "Mackenzie Dern",
+        "b": "Amanda Robertson",
+        "weight": "Women's Strawweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "comain",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-11/DERN_MACKENZIE_L_11-16.png",
+        "imgB": ""
+      },
+      {
+        "a": "Geoff Neal",
+        "b": "Michael Morales",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Eryk Anders",
+        "b": "Brendan Allen",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Cub Swanson",
+        "b": "Danny Barlow",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
+    "prelims": [
+      {
+        "a": "Matt Frevola",
+        "b": "Roosevelt Roberts",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Journey Newson",
+        "b": "Victor Henry",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Melissa Gatto",
+        "b": "Maria Oliveira",
+        "weight": "Women's Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
+    "earlyPrelims": [
+      {
+        "a": "Kleydson Rodrigues",
+        "b": "Carlos Hernandez",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ]
   }
 ]
