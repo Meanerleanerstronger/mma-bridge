@@ -1178,7 +1178,7 @@
     "nickname": "The Problem",
     "nationality": "Russian",
     "flag": "🇷🇺",
-    "weightClass": "Welterweight",
+    "weightClass": "Lightweight",
     "ranking": "Champion",
     "record": {
       "wins": 28,
@@ -1440,7 +1440,7 @@
     "nationality": "Georgian-Spanish",
     "flag": "🇬🇪",
     "weightClass": "Lightweight",
-    "ranking": "#2",
+    "ranking": "#5",
     "record": {
       "wins": 17,
       "losses": 1,
@@ -1464,36 +1464,36 @@
         "time": "5:00"
       },
       {
-        "opponent": "Justin Gaethje",
-        "result": "L",
-        "method": "TKO (corner stoppage)",
-        "event": "UFC Freedom 250",
-        "round": 4,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Charles Oliveira",
-        "result": "W",
-        "method": "KO (punches)",
-        "event": "UFC 317",
-        "round": 1,
-        "time": "2:27"
-      },
-      {
         "opponent": "Max Holloway",
         "result": "W",
-        "method": "KO (punches)",
+        "method": "KO",
         "event": "UFC 308",
-        "round": 3,
-        "time": "1:34"
+        "round": 2,
+        "time": "2:31"
       },
       {
         "opponent": "Alexander Volkanovski",
         "result": "W",
-        "method": "KO (punch)",
+        "method": "KO",
         "event": "UFC 298",
         "round": 2,
-        "time": "3:32"
+        "time": "3:16"
+      },
+      {
+        "opponent": "Josh Emmett",
+        "result": "W",
+        "method": "KO",
+        "event": "UFC Fight Night",
+        "round": 2,
+        "time": "1:04"
+      },
+      {
+        "opponent": "Jai Herbert",
+        "result": "W",
+        "method": "KO",
+        "event": "UFC Fight Night",
+        "round": 1,
+        "time": "1:46"
       }
     ]
   },
@@ -1570,10 +1570,10 @@
     "nationality": "Australian",
     "flag": "🇦🇺",
     "weightClass": "Featherweight",
-    "ranking": "#2",
+    "ranking": "Champion",
     "ranking_change": -1,
     "record": {
-      "wins": 27,
+      "wins": 29,
       "losses": 4,
       "draws": 0
     },
@@ -1588,12 +1588,28 @@
     "bio": "Alexander Volkanovski was the longest-reigning UFC Featherweight Champion in history at three years, a former rugby player who built himself into a complete three-time champion through relentless improvement and elite cardio. Despite losses to Topuria and Makhachev, The Great's legacy as arguably the most well-rounded featherweight champion ever is secure.",
     "last5": [
       {
+        "opponent": "Diego Lopes",
+        "result": "W",
+        "method": "TKO",
+        "event": "UFC 325",
+        "round": 3,
+        "time": "4:12"
+      },
+      {
+        "opponent": "Diego Lopes",
+        "result": "W",
+        "method": "Dec",
+        "event": "UFC 314",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
         "opponent": "Ilia Topuria",
         "result": "L",
         "method": "KO",
         "event": "UFC 298",
         "round": 2,
-        "time": "3:00"
+        "time": "3:16"
       },
       {
         "opponent": "Islam Makhachev",
@@ -1601,29 +1617,13 @@
         "method": "TKO",
         "event": "UFC 294",
         "round": 1,
-        "time": "4:02"
-      },
-      {
-        "opponent": "Yair Rodriguez",
-        "result": "W",
-        "method": "TKO",
-        "event": "UFC 290",
-        "round": 3,
-        "time": "4:09"
+        "time": "0:55"
       },
       {
         "opponent": "Islam Makhachev",
         "result": "L",
         "method": "Dec",
         "event": "UFC 284",
-        "round": 5,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Max Holloway",
-        "result": "W",
-        "method": "Dec",
-        "event": "UFC 276",
         "round": 5,
         "time": "5:00"
       }
