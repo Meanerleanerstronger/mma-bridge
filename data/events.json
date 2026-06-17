@@ -11246,5 +11246,65 @@
       }
     ],
     "earlyPrelims": []
+  },
+  {
+    "id": "ufc-330-makhachev-vs-machado-garry",
+    "name": "UFC 330: Makhachev vs. Machado Garry",
+    "type": "PPV",
+    "date": "Sat, Aug 15, 2026",
+    "isoDate": "2026-08-15",
+    "location": "",
+    "venue": "",
+    "poster": "",
+    "status": "upcoming",
+    "start_time": null,
+    "mainCard": [
+      {
+        "a": "Islam Makhachev",
+        "b": "Ian Machado Garry",
+        "weight": "Welterweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "main",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Mackenzie Dern",
+        "b": "Gillian Robertson",
+        "weight": "W Strawweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "comain",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Opponent TBA",
+        "b": "TBA",
+        "weight": "",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Opponent TBA",
+        "b": "TBA",
+        "weight": "",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
+    "prelims": [],
+    "earlyPrelims": []
   }
 ]
