@@ -11391,92 +11391,28 @@ img { image-rendering: auto; }
 }
 
 /* ═══════════════════════════════════════════
-   FEATURE: ODDS TICKER
+   FEATURE: INLINE ODDS ON FIGHT ROWS (OVERLAY)
 ═══════════════════════════════════════════ */
-.odds-ticker-bar {
-  position: fixed;
-  bottom: 0; left: 0; right: 0;
-  height: 32px;
-  background: rgba(4,4,6,0.97);
-  border-top: 1px solid rgba(255,255,255,0.06);
+.ov-odds-row {
   display: flex;
   align-items: center;
-  overflow: hidden;
-  z-index: 4000;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-.odds-ticker-label {
-  flex-shrink: 0;
-  padding: 0 12px 0 14px;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.62rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: #e53935;
-  text-transform: uppercase;
-  border-right: 1px solid rgba(255,255,255,0.08);
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  white-space: nowrap;
-}
-.odds-ticker-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: #e53935;
-  animation: ticker-pulse 1.2s ease-in-out infinite;
-  flex-shrink: 0;
-}
-@keyframes ticker-pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: 0.4; transform: scale(0.7); }
-}
-.odds-ticker-track {
-  flex: 1;
-  overflow: hidden;
-  position: relative;
-}
-.odds-ticker-scroll {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  white-space: nowrap;
-  animation: ticker-scroll linear infinite;
-  will-change: transform;
-}
-@keyframes ticker-scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-.odds-ticker-item {
-  display: inline-flex;
-  align-items: center;
+  justify-content: center;
   gap: 6px;
-  padding: 0 28px;
+  margin-top: 5px;
+}
+.ov-odds-val {
   font-family: 'Inter', sans-serif;
-  font-size: 0.68rem;
-  font-weight: 500;
-  color: rgba(255,255,255,0.65);
-  border-right: 1px solid rgba(255,255,255,0.06);
+  font-size: 0.7rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
 }
-.odds-ticker-item .oti-event {
-  font-weight: 600;
-  color: rgba(255,255,255,0.35);
+.ov-odds-fav { color: #ef4444; }
+.ov-odds-dog { color: #22c55e; }
+.ov-odds-sep {
   font-size: 0.6rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.15);
 }
-.odds-ticker-item .oti-fighter {
-  color: rgba(255,255,255,0.8);
-  font-weight: 600;
-}
-.odds-ticker-item .oti-odds-fav  { color: #ef4444; font-weight: 700; font-variant-numeric: tabular-nums; }
-.odds-ticker-item .oti-odds-dog  { color: #22c55e; font-weight: 700; font-variant-numeric: tabular-nums; }
-.odds-ticker-item .oti-sep { color: rgba(255,255,255,0.15); }
-.odds-ticker-item .oti-move-up   { color: #22c55e; font-size: 0.6rem; }
-.odds-ticker-item .oti-move-down { color: #ef4444; font-size: 0.6rem; }
-body { padding-bottom: 32px; }
 
 /* ── 10. P4P row click shockwave ── */
 .pfp-shockwave {
