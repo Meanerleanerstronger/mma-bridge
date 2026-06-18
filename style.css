@@ -11317,6 +11317,167 @@ img { image-rendering: auto; }
   color: #fff;
 }
 
+/* ═══════════════════════════════════════════
+   FEATURE: FIGHTER ENTRANCE CRASH ANIMATION
+═══════════════════════════════════════════ */
+@keyframes crash-from-left {
+  0%   { transform: translateX(-160px) scale(0.82); opacity: 0; }
+  60%  { transform: translateX(6px) scale(1.06); opacity: 1; }
+  80%  { transform: translateX(-2px) scale(0.98); }
+  100% { transform: translateX(0) scale(1); opacity: 1; }
+}
+@keyframes crash-from-right {
+  0%   { transform: translateX(160px) scale(0.82); opacity: 0; }
+  60%  { transform: translateX(-6px) scale(1.06); opacity: 1; }
+  80%  { transform: translateX(2px) scale(0.98); }
+  100% { transform: translateX(0) scale(1); opacity: 1; }
+}
+@keyframes impact-flash {
+  0%   { opacity: 0; }
+  30%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+.ov-entrance-left  { animation: crash-from-left  0.42s cubic-bezier(0.22,1,0.36,1) both; }
+.ov-entrance-right { animation: crash-from-right 0.42s cubic-bezier(0.22,1,0.36,1) both; }
+.ov-impact-flash {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(255,255,255,0.07);
+  pointer-events: none;
+  animation: impact-flash 0.22s ease-out forwards;
+}
+
+/* ═══════════════════════════════════════════
+   FEATURE: GLITCH LOCK ON PICKS PAGE
+═══════════════════════════════════════════ */
+@keyframes glitch-shift {
+  0%   { clip-path: inset(0 0 100% 0); transform: translateX(0); }
+  10%  { clip-path: inset(10% 0 60% 0); transform: translateX(-4px); filter: hue-rotate(90deg); }
+  20%  { clip-path: inset(60% 0 10% 0); transform: translateX(4px); filter: hue-rotate(-60deg); }
+  30%  { clip-path: inset(30% 0 40% 0); transform: translateX(-2px); }
+  40%  { clip-path: inset(80% 0 5% 0);  transform: translateX(3px); filter: hue-rotate(180deg); }
+  50%  { clip-path: inset(0 0 70% 0);   transform: translateX(-3px); }
+  60%  { clip-path: inset(50% 0 20% 0); transform: translateX(2px); filter: hue-rotate(-90deg); }
+  70%  { clip-path: inset(20% 0 50% 0); transform: translateX(-1px); }
+  80%  { clip-path: inset(70% 0 0 0);   transform: translateX(4px); filter: hue-rotate(45deg); }
+  90%  { clip-path: inset(5% 0 80% 0);  transform: translateX(-2px); }
+  100% { clip-path: inset(0 0 0 0);     transform: translateX(0); filter: none; }
+}
+@keyframes scanlines-sweep {
+  0%   { background-position: 0 0; opacity: 0.18; }
+  100% { background-position: 0 100px; opacity: 0; }
+}
+.pk-glitch-overlay {
+  position: fixed; inset: 0; z-index: 8000; pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0,0,0,0.18) 3px,
+    rgba(0,0,0,0.18) 4px
+  );
+  animation: scanlines-sweep 0.55s ease-out forwards;
+}
+.pk-glitch-card {
+  position: relative; overflow: hidden;
+}
+.pk-glitch-card::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: inherit;
+  animation: glitch-shift 0.38s steps(1) forwards;
+  pointer-events: none;
+  z-index: 2;
+  mix-blend-mode: screen;
+}
+
+/* ═══════════════════════════════════════════
+   FEATURE: ODDS TICKER
+═══════════════════════════════════════════ */
+.odds-ticker-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 32px;
+  background: rgba(4,4,6,0.97);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  z-index: 4000;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.odds-ticker-label {
+  flex-shrink: 0;
+  padding: 0 12px 0 14px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #e53935;
+  text-transform: uppercase;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+.odds-ticker-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #e53935;
+  animation: ticker-pulse 1.2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes ticker-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.7); }
+}
+.odds-ticker-track {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+.odds-ticker-scroll {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  white-space: nowrap;
+  animation: ticker-scroll linear infinite;
+  will-change: transform;
+}
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.odds-ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 28px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.65);
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+.odds-ticker-item .oti-event {
+  font-weight: 600;
+  color: rgba(255,255,255,0.35);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.odds-ticker-item .oti-fighter {
+  color: rgba(255,255,255,0.8);
+  font-weight: 600;
+}
+.odds-ticker-item .oti-odds-fav  { color: #ef4444; font-weight: 700; font-variant-numeric: tabular-nums; }
+.odds-ticker-item .oti-odds-dog  { color: #22c55e; font-weight: 700; font-variant-numeric: tabular-nums; }
+.odds-ticker-item .oti-sep { color: rgba(255,255,255,0.15); }
+.odds-ticker-item .oti-move-up   { color: #22c55e; font-size: 0.6rem; }
+.odds-ticker-item .oti-move-down { color: #ef4444; font-size: 0.6rem; }
+body { padding-bottom: 32px; }
+
 /* ── 10. P4P row click shockwave ── */
 .pfp-shockwave {
   position: fixed;

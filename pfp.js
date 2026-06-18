@@ -244,6 +244,34 @@ document.addEventListener("DOMContentLoaded", async () => {
         drawer.classList.add("open");
         document.body.classList.add("no-scroll");
 
+        // ── Fighter photo parallax on mouse move ──
+        let _parallaxRaf = null;
+        function onParallaxMove(e) {
+          const img = panel.querySelector('.pfp-photo-col-img');
+          if (!img) return;
+          const rect = panel.getBoundingClientRect();
+          const cx = rect.left + rect.width * 0.25; // photo col center
+          const cy = rect.top  + rect.height * 0.5;
+          const dx = (e.clientX - cx) / (rect.width * 0.5);
+          const dy = (e.clientY - cy) / (rect.height * 0.5);
+          if (_parallaxRaf) cancelAnimationFrame(_parallaxRaf);
+          _parallaxRaf = requestAnimationFrame(() => {
+            img.style.transform = `translateX(${dx * 9}px) translateY(${dy * 5}px) scale(1.03)`;
+            img.style.transition = 'transform 0.12s ease-out';
+          });
+        }
+        function onParallaxLeave() {
+          const img = panel.querySelector('.pfp-photo-col-img');
+          if (img) {
+            img.style.transform = 'translateX(0) translateY(0) scale(1)';
+            img.style.transition = 'transform 0.5s ease-out';
+          }
+        }
+        panel.addEventListener('mousemove', onParallaxMove);
+        panel.addEventListener('mouseleave', onParallaxLeave);
+        // Clean up when drawer closes
+        const _prevClose = closeDrawer;
+
         requestAnimationFrame(() => {
           // Stat boxes
           if (window.MicroStaggerStats) MicroStaggerStats(panel);

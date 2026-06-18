@@ -2587,6 +2587,24 @@ function formatOdds(n) {
   initPkCountdown();
   setupComments();
 
+  // Glitch flicker when picks are locked
+  if (isLocked) {
+    requestAnimationFrame(() => {
+      // Scanline overlay sweep
+      const overlay = document.createElement('div');
+      overlay.className = 'pk-glitch-overlay';
+      document.body.appendChild(overlay);
+      setTimeout(() => overlay.remove(), 600);
+      // Staggered card glitch
+      document.querySelectorAll('.pk-fight').forEach((card, i) => {
+        setTimeout(() => {
+          card.classList.add('pk-glitch-card');
+          setTimeout(() => card.classList.remove('pk-glitch-card'), 420);
+        }, i * 55);
+      });
+    });
+  }
+
   // Retry hype fetch in background (handles Render cold-start delay)
   if (hypeCount === 0) {
     setTimeout(async () => {

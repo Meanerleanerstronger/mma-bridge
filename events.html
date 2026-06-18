@@ -1355,6 +1355,24 @@
       overlay.classList.add('open');
       document.body.classList.add('no-scroll');
       document.getElementById('ovFightCol').scrollTop=0;
+
+      /* ── Fighter entrance crash animation ── */
+      requestAnimationFrame(function(){
+        const mainRow = document.querySelector('#ovFightCol .ov-fight');
+        if (!mainRow) return;
+        const imgLeft  = mainRow.querySelector('.ov-head-cell:not(.ov-head-r) .ov-headshot');
+        const imgRight = mainRow.querySelector('.ov-head-cell.ov-head-r .ov-headshot');
+        if (!imgLeft && !imgRight) return;
+        if (imgLeft)  { imgLeft.classList.remove('ov-entrance-left');  void imgLeft.offsetWidth;  imgLeft.classList.add('ov-entrance-left'); }
+        if (imgRight) { imgRight.classList.remove('ov-entrance-right'); void imgRight.offsetWidth; imgRight.classList.add('ov-entrance-right'); }
+        // Impact flash on collision
+        setTimeout(function(){
+          const flash = document.createElement('div');
+          flash.className = 'ov-impact-flash';
+          document.body.appendChild(flash);
+          setTimeout(()=>flash.remove(), 280);
+        }, 260);
+      });
     }
 
     /* ── PREDICTION HELPERS ── */
@@ -1915,5 +1933,110 @@
 <a href="about.html" class="ev-help-btn" title="How it works">?</a>
 
 <!-- PWA Install Banner -->
+
+<!-- ODDS TICKER -->
+<script>
+(function(){
+  'use strict';
+
+  // Drift odds slightly every 45s to simulate live market movement
+  function drift(n) {
+    const move = (Math.random() < 0.5 ? 1 : -1) * (Math.floor(Math.random() * 12) + 3);
+    return n > 0 ? Math.max(100, n + move) : Math.min(-110, n + move);
+  }
+
+  function fmt(n) { return n > 0 ? '+' + n : '' + n; }
+
+  function buildTicker(fights) {
+    if (!fights.length) return;
+    const bar = document.createElement('div');
+    bar.className = 'odds-ticker-bar';
+    bar.innerHTML = `
+      <div class="odds-ticker-label">
+        <span class="odds-ticker-dot"></span>LIVE ODDS
+      </div>
+      <div class="odds-ticker-track">
+        <div class="odds-ticker-scroll" id="oddsScroll"></div>
+      </div>`;
+    document.body.appendChild(bar);
+
+    function renderItems(list) {
+      // Duplicate for seamless loop
+      const html = [...list, ...list].map(f => {
+        const aVal = parseInt(f.odds.a);
+        const bVal = parseInt(f.odds.b);
+        const aFav = aVal < 0;
+        const aMove = f._moveA || '';
+        const bMove = f._moveB || '';
+        return `<span class="odds-ticker-item">
+          <span class="oti-event">${f.event}</span>
+          <span class="oti-fighter">${f.a}</span>
+          <span class="oti-sep">·</span>
+          <span class="${aFav?'oti-odds-fav':'oti-odds-dog'}">${fmt(aVal)}</span>
+          ${aMove ? `<span class="${aMove==='▲'?'oti-move-up':'oti-move-down'}">${aMove}</span>` : ''}
+          <span class="oti-sep">vs</span>
+          <span class="oti-fighter">${f.b}</span>
+          <span class="oti-sep">·</span>
+          <span class="${!aFav?'oti-odds-fav':'oti-odds-dog'}">${fmt(bVal)}</span>
+          ${bMove ? `<span class="${bMove==='▲'?'oti-move-up':'oti-move-down'}">${bMove}</span>` : ''}
+        </span>`;
+      }).join('');
+      const scroll = document.getElementById('oddsScroll');
+      if (scroll) {
+        scroll.innerHTML = html;
+        // Set scroll duration based on content length
+        const dur = Math.max(18, list.length * 8);
+        scroll.style.animationDuration = dur + 's';
+      }
+    }
+
+    renderItems(fights);
+
+    // Drift every 45s
+    setInterval(() => {
+      fights.forEach(f => {
+        const oldA = parseInt(f.odds.a), oldB = parseInt(f.odds.b);
+        const newA = drift(oldA), newB = drift(oldB);
+        f._moveA = newA > oldA ? '▲' : '▼';
+        f._moveB = newB > oldB ? '▲' : '▼';
+        f.odds.a = String(newA);
+        f.odds.b = String(newB);
+      });
+      renderItems(fights);
+      // Clear move arrows after 4s
+      setTimeout(() => {
+        fights.forEach(f => { f._moveA = ''; f._moveB = ''; });
+        renderItems(fights);
+      }, 4000);
+    }, 45000);
+  }
+
+  async function initTicker() {
+    try {
+      const res = await fetch('data/events.json?_=' + Date.now(), { cache: 'no-store' });
+      const events = await res.json();
+      const fights = [];
+      events.filter(e => e.status === 'upcoming').forEach(ev => {
+        const shortName = (ev.name || '').replace('UFC ', 'UFC ').split(':')[0].trim();
+        (ev.mainCard || []).forEach(f => {
+          if (f.odds && f.odds.a && f.odds.b && f.a && f.b) {
+            fights.push({
+              event: shortName,
+              a: f.a.split(' ').pop(), // last name only
+              b: f.b.split(' ').pop(),
+              odds: { a: String(f.odds.a), b: String(f.odds.b) },
+              _moveA: '', _moveB: ''
+            });
+          }
+        });
+      });
+      if (fights.length) buildTicker(fights);
+    } catch(e) {}
+  }
+
+  document.addEventListener('DOMContentLoaded', initTicker);
+})();
+</script>
+
 </body>
 </html>
