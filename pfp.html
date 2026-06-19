@@ -161,10 +161,46 @@
 
     .pfp-list-header {
       display: flex; align-items: baseline; gap: 12px;
-      margin-bottom: 28px;
+      margin-bottom: 20px;
       padding-bottom: 16px;
       border-bottom: 1px solid rgba(255,255,255,0.06);
     }
+
+    /* Gender toggle */
+    .pfp-gender-toggle {
+      display: inline-flex;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 999px;
+      padding: 3px;
+      margin-bottom: 28px;
+      gap: 2px;
+    }
+    .pfp-gender-toggle button {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 7px 20px;
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      color: rgba(255,255,255,0.35);
+      cursor: pointer;
+      transition: background 0.18s ease, color 0.18s ease;
+    }
+    .pfp-gender-toggle button.active {
+      background: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.9);
+    }
+    .pfp-toggle-women.active {
+      background: rgba(200,100,180,0.18) !important;
+      color: rgba(240,180,230,0.95) !important;
+    }
+    body.light-mode .pfp-gender-toggle { background:rgba(0,0,0,0.04); border-color:rgba(0,0,0,0.1); }
+    body.light-mode .pfp-gender-toggle button { color:rgba(0,0,0,0.35); }
+    body.light-mode .pfp-gender-toggle button.active { background:rgba(0,0,0,0.08); color:rgba(0,0,0,0.85); }
 
     .pfp-list-title {
       font-family: 'Montserrat', sans-serif;
@@ -482,10 +518,18 @@
   <!-- Ranked list -->
   <div class="pfp-list-wrap">
     <div class="pfp-list-header">
-      <span class="pfp-list-title">Men's Pound-for-Pound</span>
+      <span class="pfp-list-title" id="pfpListTitle">Men's Pound-for-Pound</span>
       <span class="pfp-list-sub">Top 15 · June 2026</span>
     </div>
 
+    <!-- Gender toggle -->
+    <div class="pfp-gender-toggle" id="pfpGenderToggle">
+      <button class="pfp-toggle-men active">Men</button>
+      <button class="pfp-toggle-women">Women</button>
+    </div>
+
+    <!-- Men's grid -->
+    <div id="pfpMenSection">
     <div class="pfp-grid">
 
       <!-- Left column: #2–8 -->
@@ -634,8 +678,13 @@
         </div>
       </div>
 
+    </div><!-- end pfp-grid -->
+    </div><!-- end pfpMenSection -->
+
+    <!-- Women's grid (built dynamically by pfp.js) -->
+    <div id="pfpWomenSection" style="display:none;">
+      <div class="pfp-grid" id="pfpWomenGrid"></div>
     </div>
-  </div>
 
   <!-- Fighter Drawer -->
   <div id="fightDrawer" class="drawer" aria-hidden="true">
@@ -649,7 +698,7 @@
     </aside>
   </div>
 
-  <script type="module" src="pfp.js?v=4.0"></script>
+  <script type="module" src="pfp.js?v=5.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase.js"></script>
   <script src="auth.js?v=3.2"></script>
