@@ -51,6 +51,26 @@
     body.light-mode .ab-contact-label { color:rgba(0,0,0,.28); }
     body.light-mode .ab-contact-text { color:rgba(0,0,0,.4); }
     body.light-mode .ab-contact-text a { color:#006680; }
+
+    /* Privacy policy */
+    .ab-privacy { margin-top: 48px; }
+    .ab-privacy-eyebrow { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:28px; }
+    .ab-pp-section { margin-bottom:28px; }
+    .ab-pp-h { font-family:'Montserrat',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:8px; }
+    .ab-pp-p { font-family:'Inter',sans-serif;font-size:.84rem;line-height:1.72;color:rgba(255,255,255,.38);margin:0 0 8px; }
+    .ab-pp-p a { color:#00e5ff;text-decoration:none; }
+    .ab-pp-p a:hover { text-decoration:underline; }
+    .ab-pp-p strong { color:rgba(255,255,255,.6);font-weight:600; }
+    .ab-pp-list { font-family:'Inter',sans-serif;font-size:.84rem;line-height:1.72;color:rgba(255,255,255,.38);padding-left:18px;margin:0 0 8px; }
+    .ab-pp-list li { margin-bottom:4px; }
+    .ab-pp-updated { font-family:'Inter',sans-serif;font-size:.72rem;color:rgba(255,255,255,.18);margin-bottom:32px; }
+    .ab-pp-divider { width:100%;height:1px;background:rgba(255,255,255,.06);margin:40px 0; }
+    body.light-mode .ab-privacy-eyebrow { color:rgba(0,0,0,.22); }
+    body.light-mode .ab-pp-h { color:rgba(0,0,0,.5); }
+    body.light-mode .ab-pp-p { color:rgba(0,0,0,.4); }
+    body.light-mode .ab-pp-list { color:rgba(0,0,0,.4); }
+    body.light-mode .ab-pp-updated { color:rgba(0,0,0,.2); }
+    body.light-mode .ab-pp-divider { background:rgba(0,0,0,.07); }
   </style>
 </head>
 <body>
@@ -153,6 +173,88 @@
         If you have concerns about any content on this site — images, media, or otherwise — please email us before taking any other action. We will respond promptly and resolve it.
       </div>
     </div>
+
+    <div class="ab-pp-divider"></div>
+
+    <!-- PRIVACY POLICY -->
+    <div class="ab-privacy" id="privacy">
+      <div class="ab-privacy-eyebrow">Privacy Policy</div>
+      <div class="ab-pp-updated">Last updated: June 2026</div>
+
+      <div class="ab-pp-section">
+        <div class="ab-pp-h">What We Collect</div>
+        <p class="ab-pp-p">When you create an account, we collect:</p>
+        <ul class="ab-pp-list">
+          <li><strong>Email address</strong> — used only for login and account recovery</li>
+          <li><strong>Display name</strong> — the name shown on leaderboards and your profile</li>
+          <li><strong>Fight picks</strong> — your predictions for UFC events</li>
+          <li><strong>Hype ratings</strong> — your 1–10 event ratings</li>
+          <li><strong>Favourite fighters</strong> — fighters you follow for notifications</li>
+          <li><strong>Group membership</strong> — if you join or create a private pick'em group</li>
+        </ul>
+        <p class="ab-pp-p">We do not collect payment information, phone numbers, or any other personal data.</p>
+      </div>
+
+      <div class="ab-pp-section">
+        <div class="ab-pp-h">How We Use It</div>
+        <ul class="ab-pp-list">
+          <li>Running the pick'em game and tracking your accuracy over the season</li>
+          <li>Showing your stats on leaderboards and your public profile</li>
+          <li>Sending fight-night notifications if you enable push alerts</li>
+          <li>Letting you compete in private groups with friends</li>
+        </ul>
+        <p class="ab-pp-p">We do not sell your data, run ads, or share your information with any third parties for marketing purposes.</p>
+      </div>
+
+      <div class="ab-pp-section">
+        <div class="ab-pp-h">Third-Party Services</div>
+        <p class="ab-pp-p">MMA Bridge uses <strong>Supabase</strong> for authentication and database storage. Your email and account data are stored on Supabase's infrastructure. See <a href="https://supabase.com/privacy" target="_blank" rel="noopener">Supabase's privacy policy</a> for details on how they handle data.</p>
+        <p class="ab-pp-p">The site is hosted on <strong>GitHub Pages</strong>. Visit stats may be collected by GitHub's infrastructure per their privacy policy.</p>
+      </div>
+
+      <div class="ab-pp-section">
+        <div class="ab-pp-h">Cookies &amp; Local Storage</div>
+        <p class="ab-pp-p">We use browser localStorage to store:</p>
+        <ul class="ab-pp-list">
+          <li>Your login session token (Supabase auth)</li>
+          <li>Notification preferences and seen-notification IDs</li>
+          <li>Your theme preference (dark/light mode)</li>
+          <li>Temporary pick state to prevent data loss on refresh</li>
+        </ul>
+        <p class="ab-pp-p">No advertising cookies or cross-site trackers are used.</p>
+      </div>
+
+      <div class="ab-pp-section">
+        <div class="ab-pp-h">Your Rights</div>
+        <p class="ab-pp-p">You have the right to access, correct, or delete your personal data at any time.</p>
+        <ul class="ab-pp-list">
+          <li><strong>Delete your account</strong> — go to your <a href="profile.html">Profile page</a>, scroll to the Danger Zone, and click "Delete My Account." This permanently removes your profile, all picks, all ratings, and signs you out. It cannot be undone.</li>
+          <li><strong>Data export or correction requests</strong> — email <a href="mailto:contact@mmabridge.com">contact@mmabridge.com</a> and we'll respond within 30 days.</li>
+          <li><strong>EU/UK users (GDPR)</strong> — you have the right to object to processing, request portability, or lodge a complaint with your local supervisory authority.</li>
+        </ul>
+      </div>
+
+      <div class="ab-pp-section">
+        <div class="ab-pp-h">Data Retention</div>
+        <p class="ab-pp-p">Your data is kept for as long as your account exists. If you delete your account, all associated data is permanently removed within 24 hours. We do not retain backups of deleted accounts beyond our standard infrastructure backup window (7 days).</p>
+      </div>
+
+      <div class="ab-pp-section">
+        <div class="ab-pp-h">Security</div>
+        <p class="ab-pp-p">All data is transmitted over HTTPS. Authentication is handled by Supabase with industry-standard session management. Passwords are never stored by MMA Bridge — login is handled entirely by Supabase Auth.</p>
+      </div>
+
+      <div class="ab-pp-section">
+        <div class="ab-pp-h">Changes to This Policy</div>
+        <p class="ab-pp-p">If we make material changes to this policy, we'll update the date at the top of this page. Continued use of the site after changes constitutes acceptance.</p>
+      </div>
+
+      <div class="ab-pp-section">
+        <div class="ab-pp-h">Contact</div>
+        <p class="ab-pp-p">Privacy questions or data requests: <a href="mailto:contact@mmabridge.com">contact@mmabridge.com</a></p>
+      </div>
+    </div>
+
   </div>
 
   <script>
