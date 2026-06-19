@@ -4357,6 +4357,18 @@ body.light-mode #cursor-glow { display: none; }
   font-family: 'Inter', sans-serif; font-size: 0.8rem;
   color: rgba(255,255,255,0.3); text-align: center;
 }
+.sd-ask-lucas {
+  padding: 10px 14px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  font-family: 'Inter', sans-serif; font-size: 0.72rem;
+  color: rgba(255,255,255,0.25);
+  display: flex; align-items: center; gap: 6px;
+}
+.sd-ask-lucas a {
+  color: rgba(0,229,255,0.7); text-decoration: none; font-weight: 600;
+  transition: color 0.15s;
+}
+.sd-ask-lucas a:hover { color: #00e5ff; }
 
 /* ══════════════════════════════════════════════
    FIGHTER PROFILE PAGE — PREMIUM CINEMATIC
