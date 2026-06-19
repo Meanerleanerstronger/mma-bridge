@@ -268,22 +268,22 @@ document.addEventListener("DOMContentLoaded", async () => {
       toggleBtn.querySelector('.pfp-toggle-women').classList.add('active');
       listTitle.textContent = "Women's Pound-for-Pound";
       // Dissolve transition
-      menSection.style.transition = 'opacity 0.22s ease, transform 0.22s ease';
+      menSection.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
       menSection.style.opacity = '0';
-      menSection.style.transform = 'translateY(-10px)';
+      menSection.style.transform = 'translateY(-12px)';
       setTimeout(() => {
         menSection.style.display = 'none';
         menSection.style.transition = '';
         womenSection.style.display = '';
         womenSection.style.opacity = '0';
-        womenSection.style.transform = 'translateY(10px)';
-        requestAnimationFrame(() => {
-          womenSection.style.transition = 'opacity 0.28s ease, transform 0.28s ease';
+        womenSection.style.transform = 'translateY(14px)';
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          womenSection.style.transition = 'opacity 0.42s ease, transform 0.42s ease';
           womenSection.style.opacity = '1';
           womenSection.style.transform = 'translateY(0)';
-        });
+        }));
         attachRowClicks();
-      }, 220);
+      }, 310);
       if (womenHero) setHero(womenHero);
     }
 
@@ -293,22 +293,22 @@ document.addEventListener("DOMContentLoaded", async () => {
       toggleBtn.querySelector('.pfp-toggle-men').classList.add('active');
       toggleBtn.querySelector('.pfp-toggle-women').classList.remove('active');
       listTitle.textContent = "Men's Pound-for-Pound";
-      womenSection.style.transition = 'opacity 0.22s ease, transform 0.22s ease';
+      womenSection.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
       womenSection.style.opacity = '0';
-      womenSection.style.transform = 'translateY(-10px)';
+      womenSection.style.transform = 'translateY(-12px)';
       setTimeout(() => {
         womenSection.style.display = 'none';
         womenSection.style.transition = '';
         menSection.style.display = '';
         menSection.style.opacity = '0';
-        menSection.style.transform = 'translateY(10px)';
-        requestAnimationFrame(() => {
-          menSection.style.transition = 'opacity 0.28s ease, transform 0.28s ease';
+        menSection.style.transform = 'translateY(14px)';
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          menSection.style.transition = 'opacity 0.42s ease, transform 0.42s ease';
           menSection.style.opacity = '1';
           menSection.style.transform = 'translateY(0)';
-        });
+        }));
         attachRowClicks();
-      }, 220);
+      }, 310);
       setHero(menHero);
     }
 

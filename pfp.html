@@ -169,38 +169,40 @@
     /* Gender toggle */
     .pfp-gender-toggle {
       display: inline-flex;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.18);
       border-radius: 999px;
-      padding: 3px;
+      padding: 4px;
       margin-bottom: 28px;
-      gap: 2px;
+      gap: 3px;
     }
     .pfp-gender-toggle button {
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.62rem;
+      font-size: 0.68rem;
       font-weight: 800;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.13em;
       text-transform: uppercase;
-      padding: 7px 20px;
+      padding: 9px 26px;
       border-radius: 999px;
       border: none;
       background: transparent;
-      color: rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.5);
       cursor: pointer;
-      transition: background 0.18s ease, color 0.18s ease;
+      transition: background 0.22s ease, color 0.22s ease, box-shadow 0.22s ease;
     }
     .pfp-gender-toggle button.active {
-      background: rgba(255,255,255,0.1);
-      color: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.12) inset;
     }
     .pfp-toggle-women.active {
-      background: rgba(200,100,180,0.18) !important;
-      color: rgba(240,180,230,0.95) !important;
+      background: rgba(210,100,190,0.28) !important;
+      color: #f0b4e8 !important;
+      box-shadow: 0 0 12px rgba(210,100,190,0.25) !important;
     }
-    body.light-mode .pfp-gender-toggle { background:rgba(0,0,0,0.04); border-color:rgba(0,0,0,0.1); }
-    body.light-mode .pfp-gender-toggle button { color:rgba(0,0,0,0.35); }
-    body.light-mode .pfp-gender-toggle button.active { background:rgba(0,0,0,0.08); color:rgba(0,0,0,0.85); }
+    body.light-mode .pfp-gender-toggle { background:rgba(0,0,0,0.06); border-color:rgba(0,0,0,0.15); }
+    body.light-mode .pfp-gender-toggle button { color:rgba(0,0,0,0.45); }
+    body.light-mode .pfp-gender-toggle button.active { background:rgba(0,0,0,0.12); color:rgba(0,0,0,0.9); box-shadow: none; }
 
     .pfp-list-title {
       font-family: 'Montserrat', sans-serif;
@@ -698,7 +700,7 @@
     </aside>
   </div>
 
-  <script type="module" src="pfp.js?v=5.0"></script>
+  <script type="module" src="pfp.js?v=5.1"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase.js"></script>
   <script src="auth.js?v=3.2"></script>
