@@ -1,37 +1,57 @@
 {
   "hero": {
-    "title": "UFC 324 Main Card Announced",
-    "subtitle": "Two major title fights headline the event.",
-    "image": "images/UFC-311.jpeg",
+    "title": "Gaethje Dethrones Topuria — New Lightweight King",
+    "subtitle": "Justin Gaethje TKO'd Ilia Topuria in R4 at UFC Freedom 250 to claim the lightweight title in front of the White House.",
+    "image": "images/Justin Gaethje.jpeg",
     "link": "https://www.espn.com/mma/"
   },
   "trending": [
     {
       "id": 1,
-      "title": "Islam vs Arman 2 Official",
-      "source": "ESPN MMA",
-      "image": "images/Islam Arman.jpeg",
+      "title": "Ilia Topuria Hospitalized After Gaethje TKO",
+      "source": "MMA Fighting",
+      "image": "images/Justin Gaethje.jpeg",
       "link": "https://www.espn.com/mma/"
     },
     {
       "id": 2,
-      "title": "Ilia vs Max Heats Up",
-      "source": "MMA Fighting",
-      "image": "images/Illia Max 308.jpeg",
+      "title": "Pereira Plans to Appeal Gane Loss — Claims Illegal Back of Head Shots",
+      "source": "ESPN MMA",
+      "image": "images/mma-bridge-logo.png",
       "link": "https://www.espn.com/mma/"
     },
     {
       "id": 3,
-      "title": "Gaethje Teases Retirement?",
+      "title": "Ciryl Gane is Interim HW Champ — 'Le Bon Gamin' is Back",
       "source": "The Athletic",
+      "image": "images/mma-bridge-logo.png",
+      "link": "https://www.espn.com/mma/"
+    },
+    {
+      "id": 4,
+      "title": "Gaethje's Redemption Arc Complete — From Khabib Choke to LW Gold",
+      "source": "MMA Junkie",
       "image": "images/Justin Gaethje.jpeg",
+      "link": "https://www.espn.com/mma/"
+    },
+    {
+      "id": 5,
+      "title": "Islam Makhachev Calls Out Gaethje Immediately After Freedom 250",
+      "source": "ESPN MMA",
+      "image": "images/Islam Arman.jpeg",
       "link": "https://www.espn.com/mma/"
     }
   ],
   "today": [
-    "Gaethje hints at retirement",
-    "Ilia and Max go back and forth at UFC 308 presser",
-    "Islam calls out Usman for first defence",
-    "UFC 325 rumored for Perth, Australia"
+    "Ilia Topuria taken to hospital after brutal R4 TKO — camp says he is stable but badly concussed",
+    "Alex Pereira in meltdown mode — posting on social media claiming Gane used illegal back-of-head shots, threatening formal appeal to UFC",
+    "Ciryl Gane KO'd Pereira in R2 — MMA world is shocked, 'Le Bon Gamin' redemption arc goes crazy",
+    "Gaethje calls Freedom 250 the peak of his career — 'I told everyone I was built for this'",
+    "Islam Makhachev wants Gaethje immediately — 'The belt belongs back at AKA'",
+    "Sean O'Malley KO'd Zahabi in R2 — still looking for a real test at bantamweight",
+    "Pereira's back-of-head appeal claim already rejected by UFC officials — no foul found on review",
+    "Internet goes insane with Pereira cope memes — 'it was the back of his head bro'",
+    "Gaethje says he will defend against Makhachev first — 'he deserves the shot'",
+    "Ilia Topuria posts from hospital bed — 'I'll be back, this is just the beginning'"
   ]
 }

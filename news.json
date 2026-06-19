@@ -1,69 +1,57 @@
 {
+  "hero": {
+    "title": "Gaethje Dethrones Topuria — New Lightweight King",
+    "subtitle": "Justin Gaethje TKO'd Ilia Topuria in R4 at UFC Freedom 250 to claim the lightweight title in front of the White House.",
+    "image": "images/Justin Gaethje.jpeg",
+    "link": "https://www.espn.com/mma/"
+  },
   "trending": [
     {
-      "title": "UFC 327: Proch\u00e1zka vs. Ulberg - Full Fight Card, Preview and Predictions",
-      "description": "Jiri Prochazka looks to reclaim the light heavyweight title against Carlos Ulberg in Miami on April 11.",
-      "url": "https://www.espn.com/mma/",
-      "imageUrl": "",
-      "source": "ESPN MMA",
-      "publishedAt": "2026-03-29T00:00:00Z"
-    },
-    {
-      "title": "Israel Adesanya Returns: What a Win Over Joe Pyfer Would Mean for the Middleweight Division",
-      "description": "The former champ looks to get back on track tonight in Seattle against the dangerous Joe Pyfer.",
-      "url": "https://www.mmafighting.com/",
-      "imageUrl": "",
+      "id": 1,
+      "title": "Ilia Topuria Hospitalized After Gaethje TKO",
       "source": "MMA Fighting",
-      "publishedAt": "2026-03-28T00:00:00Z"
+      "image": "images/Justin Gaethje.jpeg",
+      "link": "https://www.espn.com/mma/"
     },
     {
-      "title": "Ilia Topuria vs. Justin Gaethje Set for UFC Freedom 250 at the White House",
-      "description": "The lightweight title will be on the line at the most unique venue in UFC history.",
-      "url": "https://mmajunkie.usatoday.com/",
-      "imageUrl": "",
-      "source": "MMA Junkie",
-      "publishedAt": "2026-03-27T00:00:00Z"
-    },
-    {
-      "title": "Charles Oliveira vs. Max Holloway 2 Results: Oliveira Wins BMF Title at UFC 326",
-      "description": "Do Bronx reclaims his form with a stunning victory over Holloway in Las Vegas.",
-      "url": "https://www.cbssports.com/mma/",
-      "imageUrl": "",
-      "source": "CBS Sports MMA",
-      "publishedAt": "2026-03-08T00:00:00Z"
-    },
-    {
-      "title": "Khamzat Chimaev Calls Out Sean Strickland After Dominant Title Win at UFC 319",
-      "description": "Borz wants to clear out the entire middleweight division after smothering Du Plessis.",
-      "url": "https://www.bloodyelbow.com/",
-      "imageUrl": "",
-      "source": "Bloody Elbow",
-      "publishedAt": "2026-03-01T00:00:00Z"
-    },
-    {
-      "title": "Alexander Volkanovski Retains Featherweight Crown Against Diego Lopes at UFC 325 in Sydney",
-      "description": "The GOAT featherweight puts on a masterclass in front of his home fans in Australia.",
-      "url": "https://www.espn.com/mma/",
-      "imageUrl": "",
+      "id": 2,
+      "title": "Pereira Plans to Appeal Gane Loss — Claims Illegal Back of Head Shots",
       "source": "ESPN MMA",
-      "publishedAt": "2026-02-01T00:00:00Z"
+      "image": "images/mma-bridge-logo.png",
+      "link": "https://www.espn.com/mma/"
     },
     {
-      "title": "Islam Makhachev Becomes Two-Division Champion, Destroys Della Maddalena at MSG",
-      "description": "The dominant lightweight champion moves up to welterweight and makes it look easy.",
-      "url": "https://www.mmafighting.com/",
-      "imageUrl": "",
-      "source": "MMA Fighting",
-      "publishedAt": "2025-11-16T00:00:00Z"
+      "id": 3,
+      "title": "Ciryl Gane is Interim HW Champ — 'Le Bon Gamin' is Back",
+      "source": "The Athletic",
+      "image": "images/mma-bridge-logo.png",
+      "link": "https://www.espn.com/mma/"
     },
     {
-      "title": "Tom Aspinall vs. Ciryl Gane Ends in No Contest After Controversial Eye Poke at UFC 321",
-      "description": "Abu Dhabi crowd erupts as the heavyweight title fight is waved off in dramatic fashion.",
-      "url": "https://mmajunkie.usatoday.com/",
-      "imageUrl": "",
+      "id": 4,
+      "title": "Gaethje's Redemption Arc Complete — From Khabib Choke to LW Gold",
       "source": "MMA Junkie",
-      "publishedAt": "2025-10-26T00:00:00Z"
+      "image": "images/Justin Gaethje.jpeg",
+      "link": "https://www.espn.com/mma/"
+    },
+    {
+      "id": 5,
+      "title": "Islam Makhachev Calls Out Gaethje Immediately After Freedom 250",
+      "source": "ESPN MMA",
+      "image": "images/Islam Arman.jpeg",
+      "link": "https://www.espn.com/mma/"
     }
   ],
-  "updatedAt": "2026-03-29T00:00:00Z"
+  "today": [
+    "Ilia Topuria taken to hospital after brutal R4 TKO — camp says he is stable but badly concussed",
+    "Alex Pereira in meltdown mode — posting on social media claiming Gane used illegal back-of-head shots, threatening formal appeal to UFC",
+    "Ciryl Gane KO'd Pereira in R2 — MMA world is shocked, 'Le Bon Gamin' redemption arc goes crazy",
+    "Gaethje calls Freedom 250 the peak of his career — 'I told everyone I was built for this'",
+    "Islam Makhachev wants Gaethje immediately — 'The belt belongs back at AKA'",
+    "Sean O'Malley KO'd Zahabi in R2 — still looking for a real test at bantamweight",
+    "Pereira's back-of-head appeal claim already rejected by UFC officials — no foul found on review",
+    "Internet goes insane with Pereira cope memes — 'it was the back of his head bro'",
+    "Gaethje says he will defend against Makhachev first — 'he deserves the shot'",
+    "Ilia Topuria posts from hospital bed — 'I'll be back, this is just the beginning'"
+  ]
 }
