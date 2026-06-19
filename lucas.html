@@ -830,7 +830,6 @@
       } catch(e) { _predsCache = []; }
       return _predsCache;
     }
-    // Pre-fetch silently
     getPredictions();
 
     const PRED_KEYWORDS = /\b(predict|prediction|pick|who wins|gonna win|going to win|winner|this weekend|main event pick|parlay|bet|fade|lock|upset)\b/i;
@@ -843,6 +842,82 @@
         `- ${p.fighter_a} vs ${p.fighter_b} (event: ${p.event_id}): Pick = ${p.pick}, Confidence = ${p.confidence}%${p.reasoning ? ', Reasoning = ' + p.reasoning : ''}`
       );
       return `[Lucas's current official picks from the MMA Bridge predictions database:\n${lines.join('\n')}\nUse these when answering prediction questions. Speak in your Lucas Bot voice — confident, a bit cocky, but knowledgeable.]`;
+    }
+
+    // ── Events / Champions context ────────────────
+    let _eventsCache = null;
+    let _builtEventCtx = null;
+
+    async function loadEvents() {
+      if (_eventsCache) return _eventsCache;
+      try {
+        _eventsCache = await fetch('/data/events.json?_='+Date.now(), {cache:'no-store'}).then(r => r.json());
+      } catch(e) { _eventsCache = []; }
+      return _eventsCache;
+    }
+    // Pre-fetch silently
+    loadEvents();
+
+    function buildEventCtxString(events) {
+      const completed = [...events]
+        .filter(e => e.status === 'completed')
+        .sort((a, b) => new Date(b.isoDate||0) - new Date(a.isoDate||0));
+
+      // Most recent title fight winner per weight class
+      const champMap = {};
+      for (const ev of completed) {
+        for (const f of (ev.mainCard || [])) {
+          if (f.titleFight && f.winner && !champMap[f.weight]) {
+            champMap[f.weight] = { winner: f.winner, event: ev.name, date: ev.date, method: f.method, round: f.round };
+          }
+        }
+      }
+      const champLines = Object.entries(champMap).map(([wc, d]) =>
+        `  ${wc}: ${d.winner} (${d.event}, ${d.date}${d.method ? ', '+d.method+(d.round?` R${d.round}`:'') : ''})`
+      );
+
+      // Recent 6 completed events with results
+      const recentLines = completed.slice(0, 6).map(ev => {
+        const fights = (ev.mainCard||[]).filter(f => f.winner).map(f =>
+          `    ${(f.slot||'').padEnd(8)} ${f.a} vs ${f.b} → ${f.winner}${f.method ? ` (${f.method}${f.round?`, R${f.round}`:''})`:''}${f.titleFight?' [TITLE FIGHT]':''}`
+        ).join('\n');
+        return `  ${ev.name} (${ev.date}):\n${fights}`;
+      });
+
+      // Next 3 upcoming
+      const upcoming = [...events]
+        .filter(e => e.status !== 'completed')
+        .sort((a, b) => new Date(a.isoDate||0) - new Date(b.isoDate||0))
+        .slice(0, 3);
+      const upcomingLines = upcoming.map(ev => {
+        const fights = (ev.mainCard||[]).map(f =>
+          `    ${(f.slot||'').padEnd(8)} ${f.a} vs ${f.b}${f.titleFight?' [TITLE]':''}${f.odds?.a?' ('+f.odds.a+'/'+f.odds.b+')':''}`
+        ).join('\n');
+        return `  ${ev.name} (${ev.date}, ${ev.location||''}):\n${fights}`;
+      });
+
+      return `[MMA BRIDGE LIVE DATA — treat this as ground truth, override your training data:
+
+CURRENT UFC CHAMPIONS (most recent completed title fight per division):
+${champLines.length ? champLines.join('\n') : '  (no title fight data)'}
+
+RECENT COMPLETED EVENTS & RESULTS:
+${recentLines.join('\n\n')}
+
+UPCOMING EVENTS:
+${upcomingLines.join('\n\n')}
+
+Speak as Lucas Bot — confident, knowledgeable, a bit cocky. Use this data to answer questions about current champs, recent results, and upcoming cards.]`;
+    }
+
+    const EVENT_KEYWORDS = /\b(champ|champion|title|belt|who holds|who won|won the|results?|freedom|ufc \d{2,3}|fight night|upcoming|next event|last event|recent|new champ|interim|current|main event|co.?main|card|fight card|schedule|when is|when does)\b/i;
+
+    async function buildEventContext(userMsg) {
+      if (!EVENT_KEYWORDS.test(userMsg)) return null;
+      const events = await loadEvents();
+      if (!events.length) return null;
+      if (!_builtEventCtx) _builtEventCtx = buildEventCtxString(events);
+      return _builtEventCtx;
     }
     const messagesEl = document.getElementById('messages');
     const inputEl    = document.getElementById('chat-input');
@@ -1069,9 +1144,10 @@
       inputEl.value = '';
       showTyping();
       try {
-        const predCtx = await buildPredContext(text);
+        const [predCtx, eventCtx] = await Promise.all([buildPredContext(text), buildEventContext(text)]);
         const payload = { message: text, history, page: 'lucas' };
-        if (predCtx) payload.system_context = predCtx;
+        const ctxParts = [eventCtx, predCtx].filter(Boolean);
+        if (ctxParts.length) payload.system_context = ctxParts.join('\n\n');
         const res = await fetch(BACKEND, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
