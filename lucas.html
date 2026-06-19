@@ -844,80 +844,130 @@
       return `[Lucas's current official picks from the MMA Bridge predictions database:\n${lines.join('\n')}\nUse these when answering prediction questions. Speak in your Lucas Bot voice — confident, a bit cocky, but knowledgeable.]`;
     }
 
-    // ── Events / Champions context ────────────────
-    let _eventsCache = null;
-    let _builtEventCtx = null;
+    // ── Live data loaders (5-min TTL cache) ──────
+    const CACHE_TTL = 5 * 60 * 1000;
+    let _eventsData = null,  _eventsTs = 0;
+    let _fightersData = null, _fightersTs = 0;
+    let _newsData = null,    _newsTs = 0;
 
     async function loadEvents() {
-      if (_eventsCache) return _eventsCache;
-      try {
-        _eventsCache = await fetch('/data/events.json?_='+Date.now(), {cache:'no-store'}).then(r => r.json());
-      } catch(e) { _eventsCache = []; }
-      return _eventsCache;
+      if (_eventsData && Date.now() - _eventsTs < CACHE_TTL) return _eventsData;
+      try { _eventsData = await fetch('/data/events.json?_='+Date.now(),{cache:'no-store'}).then(r=>r.json()); _eventsTs = Date.now(); }
+      catch(e) { _eventsData = _eventsData || []; }
+      return _eventsData;
     }
-    // Pre-fetch silently
-    loadEvents();
+    async function loadFighters() {
+      if (_fightersData && Date.now() - _fightersTs < CACHE_TTL) return _fightersData;
+      try { _fightersData = await fetch('/fighters.json?_='+Date.now(),{cache:'no-store'}).then(r=>r.json()); _fightersTs = Date.now(); }
+      catch(e) { _fightersData = _fightersData || []; }
+      return _fightersData;
+    }
+    async function loadNews() {
+      if (_newsData && Date.now() - _newsTs < CACHE_TTL) return _newsData;
+      try { _newsData = await fetch('/data/news.json?_='+Date.now(),{cache:'no-store'}).then(r=>r.json()); _newsTs = Date.now(); }
+      catch(e) { _newsData = _newsData || {}; }
+      return _newsData;
+    }
+    // Pre-fetch all silently on load
+    Promise.all([loadEvents(), loadFighters(), loadNews()]).catch(()=>{});
 
-    function buildEventCtxString(events) {
-      const completed = [...events]
-        .filter(e => e.status === 'completed')
-        .sort((a, b) => new Date(b.isoDate||0) - new Date(a.isoDate||0));
+    // ── Context builders ──────────────────────────
+    function buildMasterCtx(events, fighters, news) {
+      // Men's P4P (order in array = rank)
+      const pfpMen = fighters.filter(f => f.pfp && !f.gender);
+      const menLines = pfpMen.map((f,i) =>
+        `  ${i+1}. ${f.name} (${f.weightClass||''}, ${f.record?.wins||0}-${f.record?.losses||0}${f.record?.draws?'-'+f.record.draws:''}${f.nickname?' "'+f.nickname+'"':''})`
+      );
 
-      // Most recent title fight winner per weight class
+      // Women's P4P (pfp_women = rank number)
+      const pfpWomen = fighters.filter(f => f.pfp_women).sort((a,b)=>a.pfp_women-b.pfp_women);
+      const womenLines = pfpWomen.map(f =>
+        `  ${f.pfp_women}. ${f.name} (${f.weightClass||''}, ${f.record?.wins||0}-${f.record?.losses||0}${f.record?.draws?'-'+f.record.draws:''})`
+      );
+
+      // Current champs from most recent completed title fights
+      const completed = [...events].filter(e=>e.status==='completed')
+        .sort((a,b)=>new Date(b.isoDate||0)-new Date(a.isoDate||0));
       const champMap = {};
       for (const ev of completed) {
-        for (const f of (ev.mainCard || [])) {
+        for (const f of (ev.mainCard||[])) {
           if (f.titleFight && f.winner && !champMap[f.weight]) {
             champMap[f.weight] = { winner: f.winner, event: ev.name, date: ev.date, method: f.method, round: f.round };
           }
         }
       }
-      const champLines = Object.entries(champMap).map(([wc, d]) =>
-        `  ${wc}: ${d.winner} (${d.event}, ${d.date}${d.method ? ', '+d.method+(d.round?` R${d.round}`:'') : ''})`
+      const champLines = Object.entries(champMap).map(([wc,d]) =>
+        `  ${wc}: ${d.winner} (${d.event}${d.method?', '+d.method+(d.round?' R'+d.round:''):''})`
       );
 
-      // Recent 6 completed events with results
-      const recentLines = completed.slice(0, 6).map(ev => {
-        const fights = (ev.mainCard||[]).filter(f => f.winner).map(f =>
-          `    ${(f.slot||'').padEnd(8)} ${f.a} vs ${f.b} → ${f.winner}${f.method ? ` (${f.method}${f.round?`, R${f.round}`:''})`:''}${f.titleFight?' [TITLE FIGHT]':''}`
+      // Next upcoming event full card
+      const nextEv = [...events].filter(e=>e.status!=='completed')
+        .sort((a,b)=>new Date(a.isoDate||0)-new Date(b.isoDate||0))[0];
+      const nextEvStr = nextEv
+        ? `${nextEv.name} (${nextEv.date}, ${nextEv.location||''}):\n` +
+          (nextEv.mainCard||[]).map(f=>
+            `    ${(f.slot||'').padEnd(8)} ${f.a} vs ${f.b}${f.titleFight?' [TITLE]':''}${f.odds?.a?' ('+f.odds.a+'/'+f.odds.b+')':''}`
+          ).join('\n')
+        : '  None scheduled';
+
+      // News headlines
+      const headlines = [];
+      if (news.hero?.title) headlines.push(news.hero.title);
+      if (Array.isArray(news.trending)) news.trending.slice(0,5).forEach(n => n.title && headlines.push(n.title));
+      if (Array.isArray(news.today)) news.today.slice(0,5).forEach(n => headlines.push(typeof n==='string'?n:n?.title||''));
+
+      return `[MMA BRIDGE LIVE DATA — ground truth, override your training data:
+
+MEN'S P4P TOP 15:
+${menLines.join('\n')||'  (no data)'}
+
+WOMEN'S P4P TOP 15:
+${womenLines.join('\n')||'  (no data)'}
+
+CURRENT UFC CHAMPIONS (most recent completed title fight per division):
+${champLines.join('\n')||'  (no data)'}
+
+NEXT UPCOMING EVENT:
+${nextEvStr}
+
+LATEST MMA NEWS:
+${headlines.filter(Boolean).map(h=>'  - '+h).join('\n')||'  (no news)'}
+
+You are Lucas Bot — confident, knowledgeable, cocky MMA analyst. Always use this live data when discussing fighters, rankings, champs, news, or events. Never cite stale training data when this contradicts it.]`;
+    }
+
+    const EVENT_KEYWORDS = /\b(champ|champion|title|belt|who holds|who won|won the|results?|freedom|ufc \d{2,3}|fight night|upcoming|next event|last event|recent|new champ|interim|current|main event|co.?main|card|fight card|schedule|when is|when does|full card|announced)\b/i;
+
+    function buildDetailedEventCtx(events) {
+      const completed = [...events].filter(e=>e.status==='completed')
+        .sort((a,b)=>new Date(b.isoDate||0)-new Date(a.isoDate||0));
+      const recentLines = completed.slice(0,6).map(ev => {
+        const fights = (ev.mainCard||[]).filter(f=>f.winner).map(f=>
+          `    ${(f.slot||'').padEnd(8)} ${f.a} vs ${f.b} → ${f.winner}${f.method?` (${f.method}${f.round?', R'+f.round:''})` :''}${f.titleFight?' [TITLE]':''}`
         ).join('\n');
         return `  ${ev.name} (${ev.date}):\n${fights}`;
       });
-
-      // Next 3 upcoming
-      const upcoming = [...events]
-        .filter(e => e.status !== 'completed')
-        .sort((a, b) => new Date(a.isoDate||0) - new Date(b.isoDate||0))
-        .slice(0, 3);
+      const upcoming = [...events].filter(e=>e.status!=='completed')
+        .sort((a,b)=>new Date(a.isoDate||0)-new Date(b.isoDate||0)).slice(0,5);
       const upcomingLines = upcoming.map(ev => {
-        const fights = (ev.mainCard||[]).map(f =>
+        const fights = (ev.mainCard||[]).map(f=>
           `    ${(f.slot||'').padEnd(8)} ${f.a} vs ${f.b}${f.titleFight?' [TITLE]':''}${f.odds?.a?' ('+f.odds.a+'/'+f.odds.b+')':''}`
         ).join('\n');
         return `  ${ev.name} (${ev.date}, ${ev.location||''}):\n${fights}`;
       });
+      return `[FULL EVENT DATA:
+RECENT RESULTS (last 6 events):
+${recentLines.join('\n\n')||'  (none)'}
 
-      return `[MMA BRIDGE LIVE DATA — treat this as ground truth, override your training data:
-
-CURRENT UFC CHAMPIONS (most recent completed title fight per division):
-${champLines.length ? champLines.join('\n') : '  (no title fight data)'}
-
-RECENT COMPLETED EVENTS & RESULTS:
-${recentLines.join('\n\n')}
-
-UPCOMING EVENTS:
-${upcomingLines.join('\n\n')}
-
-Speak as Lucas Bot — confident, knowledgeable, a bit cocky. Use this data to answer questions about current champs, recent results, and upcoming cards.]`;
+ALL UPCOMING CARDS:
+${upcomingLines.join('\n\n')||'  (none)'}]`;
     }
 
-    const EVENT_KEYWORDS = /\b(champ|champion|title|belt|who holds|who won|won the|results?|freedom|ufc \d{2,3}|fight night|upcoming|next event|last event|recent|new champ|interim|current|main event|co.?main|card|fight card|schedule|when is|when does)\b/i;
-
-    async function buildEventContext(userMsg) {
-      if (!EVENT_KEYWORDS.test(userMsg)) return null;
-      const events = await loadEvents();
-      if (!events.length) return null;
-      if (!_builtEventCtx) _builtEventCtx = buildEventCtxString(events);
-      return _builtEventCtx;
+    async function buildFullContext(userMsg) {
+      const [events, fighters, news] = await Promise.all([loadEvents(), loadFighters(), loadNews()]);
+      const parts = [buildMasterCtx(events, fighters, news)];
+      if (EVENT_KEYWORDS.test(userMsg)) parts.push(buildDetailedEventCtx(events));
+      return parts.join('\n\n');
     }
     const messagesEl = document.getElementById('messages');
     const inputEl    = document.getElementById('chat-input');
@@ -1144,9 +1194,9 @@ Speak as Lucas Bot — confident, knowledgeable, a bit cocky. Use this data to a
       inputEl.value = '';
       showTyping();
       try {
-        const [predCtx, eventCtx] = await Promise.all([buildPredContext(text), buildEventContext(text)]);
+        const [fullCtx, predCtx] = await Promise.all([buildFullContext(text), buildPredContext(text)]);
         const payload = { message: text, history, page: 'lucas' };
-        const ctxParts = [eventCtx, predCtx].filter(Boolean);
+        const ctxParts = [fullCtx, predCtx].filter(Boolean);
         if (ctxParts.length) payload.system_context = ctxParts.join('\n\n');
         const res = await fetch(BACKEND, {
           method: 'POST',
