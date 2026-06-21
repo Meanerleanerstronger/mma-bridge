@@ -2788,17 +2788,17 @@
         "time": "2:35"
       },
       {
-        "a": "Magomed Ankalaev",
-        "b": "Aleksandar Rakic",
-        "weight": "Light Heavyweight",
+        "a": "Khamzat Chimaev",
+        "b": "Robert Whittaker",
+        "weight": "Middleweight",
         "rounds": "5 Rds",
         "titleFight": false,
         "ranked": true,
         "slot": "comain",
-        "winner": "Magomed Ankalaev",
-        "method": "TKO",
-        "round": 2,
-        "time": "3:47"
+        "winner": "Khamzat Chimaev",
+        "method": "UD",
+        "round": 5,
+        "time": "5:00"
       },
       {
         "a": "Umar Nurmagomedov",
@@ -4234,10 +4234,10 @@
         "titleFight": true,
         "ranked": true,
         "slot": "main",
-        "winner": "Diego Lopes",
-        "method": "TKO",
-        "round": 4,
-        "time": "3:22"
+        "winner": "Alexander Volkanovski",
+        "method": "UD",
+        "round": 5,
+        "time": "5:00"
       },
       {
         "a": "Paddy Pimblett",
@@ -10493,7 +10493,7 @@
     "location": "Las Vegas, NV",
     "venue": "Meta APEX",
     "poster": "https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-05/062026-ufc-fight-night-kape-vs-horiguchi-EVENT-ART.jpg",
-    "status": "upcoming",
+    "status": "completed",
     "startTime": "20:00",
     "mainCard": [
       {
@@ -10505,7 +10505,10 @@
         "ranked": true,
         "slot": "main",
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-12/KAPE_MANEL_12-13.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-11/HORIGUCHI_KYOJI_11-08.png"
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-11/HORIGUCHI_KYOJI_11-08.png",
+        "winner": "Manel Kape",
+        "method": "TKO",
+        "round": 3
       },
       {
         "a": "Giga Chikadze",
