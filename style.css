@@ -37,6 +37,8 @@
 /* =========================
    GLOBAL
 ========================= */
+*, *::before, *::after { box-sizing: border-box; }
+img, video, svg { max-width: 100%; }
 body {
   margin: 0;
   background: #0f0f0f;
@@ -407,7 +409,8 @@ a, a:visited {
 }
 
 .article-container {
-  width: 700px;
+  max-width: 700px;
+  width: 100%;
   margin: 40px auto;
   font-size: 17px;
   line-height: 1.7;
@@ -2846,7 +2849,7 @@ body.light-mode .pfp-fight-info { color: rgba(0,0,0,0.4); }
 .er-fvs {
   color: rgba(255,255,255,0.3);
   font-size: 0.85rem;
-  font-weight: 700;
+  font-weight: 600;
   font-family: 'Inter', sans-serif;
   text-shadow: none;
 }
@@ -4611,7 +4614,7 @@ body.light-mode #cursor-glow { display: none; }
   color: #00e5ff;
   font-family: 'Inter', sans-serif;
   font-size: 0.75rem;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
@@ -5721,7 +5724,7 @@ body.light-mode .ev-star-btn.starred {
 .pk-hype-denom { font-size: 0.7em; font-weight: 600; color: rgba(200,150,12,0.45); vertical-align: baseline; }
 .pk-hd-hype-badge .pk-hdb-label {
   font-family: 'Inter', sans-serif;
-  font-size: 0.55rem; font-weight: 700;
+  font-size: 0.55rem; font-weight: 600;
   letter-spacing: 0.14em; text-transform: uppercase;
   color: rgba(200,150,12,0.5); text-align: right;
 }
@@ -6116,7 +6119,7 @@ body.light-mode .ev-star-btn.starred {
   color: rgba(255,255,255,0.22);
 }
 .fc-comm-lbl {
-  font-family: 'Inter', sans-serif; font-size: 0.52rem; font-weight: 700;
+  font-family: 'Inter', sans-serif; font-size: 0.52rem; font-weight: 600;
   letter-spacing: 0.14em; text-transform: uppercase;
   color: rgba(255,255,255,0.28); line-height: 1;
 }
@@ -6170,7 +6173,7 @@ body.light-mode .ev-star-btn.starred {
   color: #c8960c;
   font-family: 'Inter', sans-serif;
   font-size: 0.55rem;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.05em;
   cursor: pointer;
   transition: background 0.15s;
@@ -6249,7 +6252,7 @@ body.light-mode .ev-star-btn.starred {
 }
 .sb-comm-pcts {
   display: flex; justify-content: space-between; width: 52px;
-  font-family: 'Inter', sans-serif; font-size: 0.48rem; font-weight: 700;
+  font-family: 'Inter', sans-serif; font-size: 0.48rem; font-weight: 600;
   color: rgba(255,255,255,0.28);
 }
 /* Method row — slides in below fight row when picked */
@@ -6319,7 +6322,7 @@ body.light-mode .ev-star-btn.starred {
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 50%;
   color: rgba(255,255,255,0.35);
-  font-family: 'Inter', sans-serif; font-size: 0.68rem; font-weight: 700;
+  font-family: 'Inter', sans-serif; font-size: 0.68rem; font-weight: 600;
   cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
   transition: background 0.15s, color 0.15s;
   line-height: 1; vertical-align: middle; margin-left: 5px;
@@ -7259,7 +7262,7 @@ body.pk-fotn-picking-body .pk-dossier-fight:hover ~ #pkFotnCursor,
 }
 .ev-hype-badge .ehb-label {
   font-family: 'Inter', sans-serif;
-  font-size: 0.5rem; font-weight: 700;
+  font-size: 0.5rem; font-weight: 600;
   letter-spacing: 0.13em; text-transform: uppercase;
   color: rgba(200,150,12,0.5);
 }
@@ -10609,7 +10612,7 @@ button:active, [role="button"]:active, .lb-tab:active, .pk-seg-btn:active,
 .lb-recap-td { padding: 6px 8px; border-top: 1px solid rgba(255,255,255,0.04); text-align: center; }
 .lb-recap-td.fight-td { text-align: left; font-family: 'Inter', sans-serif; font-size: 0.72rem; color: rgba(255,255,255,0.45); }
 .lb-recap-pick { font-family: 'Inter', sans-serif; font-size: 0.72rem; color: rgba(255,255,255,0.45); }
-.lb-recap-pick.correct { color: #50d278; font-weight: 700; }
+.lb-recap-pick.correct { color: #50d278; font-weight: 600; }
 .lb-recap-pick.wrong { color: rgba(255,80,80,0.7); }
 .lb-recap-pick.no-pick { color: rgba(255,255,255,0.15); }
 .lb-recap-score-row { display: flex; align-items: center; gap: 10px; padding: 10px 0 4px; border-top: 1px solid rgba(255,255,255,0.06); margin-top: 8px; flex-wrap: wrap; }
@@ -10618,7 +10621,7 @@ button:active, [role="button"]:active, .lb-tab:active, .pk-seg-btn:active,
 .lb-recap-score-val { font-family: 'Montserrat', sans-serif; font-size: 0.78rem; font-weight: 900; color: #c8960c; }
 
 /* ── Streak hot badge on profiles ── */
-.pr-streak-badge { display: inline-block; margin-left: 6px; padding: 1px 5px; border-radius: 3px; font-size: 0.55em; font-weight: 700; letter-spacing: 0.06em; background: rgba(255, 80, 50, 0.15); color: #ff5032; border: 1px solid rgba(255, 80, 50, 0.35); vertical-align: middle; line-height: 1.6; }
+.pr-streak-badge { display: inline-block; margin-left: 6px; padding: 1px 5px; border-radius: 3px; font-size: 0.55em; font-weight: 600; letter-spacing: 0.06em; background: rgba(255, 80, 50, 0.15); color: #ff5032; border: 1px solid rgba(255, 80, 50, 0.35); vertical-align: middle; line-height: 1.6; }
 
 /* ── Who's Picked tracker ── */
 .pk-who-picked { margin: 0 0 18px; padding: 14px 18px; background: rgba(0,229,255,0.04); border: 1px solid rgba(0,229,255,0.12); border-radius: 12px; }
@@ -11415,7 +11418,7 @@ img { image-rendering: auto; }
 .ov-odds-val {
   font-family: 'Inter', sans-serif;
   font-size: 0.7rem;
-  font-weight: 700;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.02em;
 }

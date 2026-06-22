@@ -452,7 +452,7 @@
     /* Community avg in overlay */
     .ov-comm-hype { margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:1px;white-space:nowrap; }
     .ov-comm-num { font-family:'Montserrat',sans-serif;font-size:1.8rem;font-weight:900;line-height:1;color:#c8960c;letter-spacing:.01em; }
-    .ov-comm-label { font-family:'Inter',sans-serif;font-size:.48rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(200,150,12,.5); }
+    .ov-comm-label { font-family:'Inter',sans-serif;font-size:.48rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(200,150,12,.5); }
     .ov-comm-count { font-family:'Inter',sans-serif;font-size:.46rem;font-weight:500;color:rgba(255,255,255,.22);letter-spacing:.04em; }
 
     /* ── BODY 2-COL ── */
@@ -537,7 +537,7 @@
 
     .ov-fight-mid { text-align:center;position:relative;z-index:1; }
     .ov-title-badge { font-size:.5rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#c8a84b;margin-bottom:4px; }
-    .ov-weight  { font-family:'Inter',sans-serif;font-size:.58rem;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.08em; }
+    .ov-weight  { font-family:'Inter',sans-serif;font-size:.58rem;font-weight:600;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.08em; }
     .ov-rounds  { font-family:'Inter',sans-serif;font-size:.5rem;color:rgba(255,255,255,.2);margin-top:3px; }
     .ov-slot-tag { font-size:.44rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-top:4px; }
 
@@ -560,7 +560,7 @@
       margin-bottom:3px;
     }
     .ov-result-detail {
-      font-family:'Inter',sans-serif;font-size:.62rem;font-weight:700;
+      font-family:'Inter',sans-serif;font-size:.62rem;font-weight:600;
       color:rgba(255,255,255,.5);letter-spacing:.06em;text-transform:uppercase;
     }
     .ov-win-pip {
@@ -1410,16 +1410,22 @@
       resetHype();
       const commHype = document.getElementById('ovCommHype');
       if (commHype) commHype.style.display = 'none';
-      fetch(`https://mmabridge-backend.onrender.com/api/ratings/${encodeURIComponent(ev.id)}`)
-        .then(r => r.ok ? r.json() : null)
-        .then(d => {
-          if (!d || !d.avg_hype || parseInt(d.total_ratings || 0) < 1) return;
-          const avg = parseFloat(d.avg_hype).toFixed(1);
-          const cnt = parseInt(d.total_ratings);
-          document.getElementById('ovCommNum').innerHTML = avg + '<span style="font-size:.8rem;font-weight:600;color:rgba(200,150,12,.4);vertical-align:baseline">/10</span>';
-          document.getElementById('ovCommCount').textContent = `${cnt} rating${cnt !== 1 ? 's' : ''}`;
-          if (commHype) commHype.style.display = '';
-        }).catch(() => {});
+      function _applyHypeData(d) {
+        if (!d || !d.avg_hype || parseInt(d.total_ratings || 0) < 1) return;
+        const avg = parseFloat(d.avg_hype).toFixed(1);
+        const cnt = parseInt(d.total_ratings);
+        document.getElementById('ovCommNum').innerHTML = avg + '<span style="font-size:.8rem;font-weight:600;color:rgba(200,150,12,.4);vertical-align:baseline">/10</span>';
+        document.getElementById('ovCommCount').textContent = `${cnt} rating${cnt !== 1 ? 's' : ''}`;
+        if (commHype) commHype.style.display = '';
+      }
+      if (_hypeCache.has(ev.id)) {
+        _applyHypeData(_hypeCache.get(ev.id));
+      } else {
+        fetch(`https://mmabridge-backend.onrender.com/api/ratings/${encodeURIComponent(ev.id)}`)
+          .then(r => r.ok ? r.json() : null)
+          .then(d => { if (d) _hypeCache.set(ev.id, d); _applyHypeData(d); })
+          .catch(() => {});
+      }
 
       /* Event stats sidebar */
       buildStats(ev,main);
@@ -1702,13 +1708,18 @@
     document.getElementById('phBackdrop').addEventListener('click', closePicksHub);
 
     /* ── HYPE BADGES ON EVENT CARDS ── */
+    let _hypeBadgesLoaded = false;
+    const _hypeCache = new Map();
     async function loadHypeBadges(events) {
+      if (_hypeBadgesLoaded) return;
+      _hypeBadgesLoaded = true;
       const API = 'https://mmabridge-backend.onrender.com/api';
       await Promise.all(events.map(async ev => {
         try {
           const res = await fetch(`${API}/ratings/${encodeURIComponent(ev.id)}`);
           if (!res.ok) return;
           const d = await res.json();
+          _hypeCache.set(ev.id, d);
           const avg = parseFloat(d.avg_hype || 0);
           const count = parseInt(d.total_ratings || 0);
           if (count < 1) return;
@@ -1724,6 +1735,7 @@
     }
 
     /* ── LOAD ── */
+    let _eventsLoaded = false;
     async function loadEvents(){
       try {
         const _cv = '?v=' + Date.now();
@@ -1736,7 +1748,15 @@
         upcoming.forEach(e=>{ const c=buildCard(e); if(c) list.appendChild(c); });
         document.getElementById('evCount').textContent=`${upcoming.length} event${upcoming.length!==1?'s':''}`;
 
-        document.getElementById('evReviewBtn').addEventListener('click', () => openPicksHub(upcoming));
+        if (!_eventsLoaded) {
+          document.getElementById('evReviewBtn').addEventListener('click', () => openPicksHub(upcoming));
+          _eventsLoaded = true;
+        } else {
+          const btn = document.getElementById('evReviewBtn');
+          const fresh = btn.cloneNode(true);
+          btn.parentNode.replaceChild(fresh, btn);
+          fresh.addEventListener('click', () => openPicksHub(upcoming));
+        }
 
         const p=new URLSearchParams(location.search), id=p.get('id');
         if(id){
@@ -1744,8 +1764,7 @@
           if(t) setTimeout(()=>openOverlay(t),200);
         }
 
-        // Load hype ratings badges after cards render
-        loadHypeBadges(upcoming);
+        if (!_hypeBadgesLoaded) loadHypeBadges(upcoming);
       } catch(err) {
         const list = document.getElementById('listAll');
         if (list) list.innerHTML = `
@@ -2009,6 +2028,46 @@
   <script src="premium.js?v=3.4"></script>
   <script src="widget.js"></script>
   <script>
+    // ── Hover-intent prefetch ──
+    (function(){
+      function prefetchLink(href) {
+        if (document.querySelector(`link[rel="prefetch"][href="${href}"]`)) return;
+        const l = document.createElement('link');
+        l.rel = 'prefetch'; l.href = href;
+        document.head.appendChild(l);
+      }
+
+      // Nav links
+      document.querySelectorAll('.nav-links a, .nav-mobile-links a').forEach(a => {
+        let t;
+        a.addEventListener('mouseenter', () => { t = setTimeout(() => prefetchLink(a.getAttribute('href')), 120); });
+        a.addEventListener('mouseleave', () => clearTimeout(t));
+      });
+
+      // Hero CTA
+      const heroCta = document.getElementById('evHeroCta');
+      if (heroCta) {
+        let t;
+        heroCta.addEventListener('mouseenter', () => { t = setTimeout(() => prefetchLink('picks.html?id=ufc-fight-night-kape-vs-horiguchi'), 120); });
+        heroCta.addEventListener('mouseleave', () => clearTimeout(t));
+      }
+
+      // Event cards — prefetch hype data on hover so overlay feels instant
+      document.getElementById('listAll')?.addEventListener('mouseover', e => {
+        const card = e.target.closest('.ev-card');
+        if (!card || card.dataset.prefetched) return;
+        card.dataset.prefetched = '1';
+        const evId = card.dataset.eventId;
+        if (evId && !_hypeCache.has(evId)) {
+          fetch(`https://mmabridge-backend.onrender.com/api/ratings/${encodeURIComponent(evId)}`)
+            .then(r => r.ok ? r.json() : null)
+            .then(d => { if (d) _hypeCache.set(evId, d); })
+            .catch(() => {});
+        }
+        prefetchLink(`picks.html?id=${encodeURIComponent(evId || '')}`);
+      });
+    })();
+
     // ── Countdown floating card ──
     var _cdStop = null;
     function showCountdownCard(ev) {
