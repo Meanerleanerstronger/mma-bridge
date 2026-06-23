@@ -20,6 +20,33 @@ function sb() { return window._sb; }
 function currentUserId() { return window.MMABridgeAuth?.getUser()?.id || null; }
 function isLoggedIn() { return !!window.MMABridgeAuth?.getToken(); }
 
+// ── Fight stats (from ufcstats bot) ──────────
+let _fightStatsData = null; // loaded per-event
+
+async function fetchFightStats(eventId) {
+  try {
+    const data = await fetch(`/data/fight-stats/${encodeURIComponent(eventId)}.json?_=${Date.now()}`, { cache: 'no-store' })
+      .then(r => r.ok ? r.json() : null);
+    _fightStatsData = data || null;
+  } catch { _fightStatsData = null; }
+}
+
+function lookupFightStats(nameA, nameB) {
+  if (!_fightStatsData?.fights) return null;
+  const normA = (nameA || '').toLowerCase().replace(/[^a-z]/g, '');
+  const normB = (nameB || '').toLowerCase().replace(/[^a-z]/g, '');
+  for (const f of _fightStatsData.fights) {
+    const n1 = f.fighter1.toLowerCase().replace(/[^a-z]/g, '');
+    const n2 = f.fighter2.toLowerCase().replace(/[^a-z]/g, '');
+    if ((n1 === normA && n2 === normB) || (n1 === normB && n2 === normA)) {
+      // Normalise so fighter1 = nameA
+      if (n1 === normA) return { a: f.stats.fighter1, b: f.stats.fighter2 };
+      return { a: f.stats.fighter2, b: f.stats.fighter1 };
+    }
+  }
+  return null;
+}
+
 // ── Load event ────────────────────────────────
 async function resolveEvent(eventId) {
   try {
@@ -636,6 +663,42 @@ function fightRow(f, communityData) {
       </div>`;
   }
 
+  const fightStats = lookupFightStats(f.a, f.b);
+  let statsHtml = '';
+  if (fightStats) {
+    const s = fightStats;
+    function statBar(aVal, bVal, label) {
+      const numA = parseInt((aVal || '0').split('/')[0]) || 0;
+      const numB = parseInt((bVal || '0').split('/')[0]) || 0;
+      const total = numA + numB || 1;
+      const pctA = Math.round(numA / total * 100);
+      const pctB = 100 - pctA;
+      return `
+        <div class="er-stat-row">
+          <span class="er-stat-val-a">${aVal || '0'}</span>
+          <div class="er-stat-bar-wrap">
+            <div class="er-stat-bar-a" style="width:${pctA}%"></div>
+            <div class="er-stat-bar-b" style="width:${pctB}%"></div>
+          </div>
+          <span class="er-stat-label">${label}</span>
+          <span class="er-stat-val-b">${bVal || '0'}</span>
+        </div>`;
+    }
+    statsHtml = `
+      <div class="er-fight-stats">
+        ${statBar(s.a.sigStr, s.b.sigStr, 'Sig. Str.')}
+        ${statBar(s.a.totalStr, s.b.totalStr, 'Total Str.')}
+        ${statBar(s.a.td, s.b.td, 'Takedowns')}
+        <div class="er-stat-extras">
+          <span>KD: ${s.a.kd || 0}</span>
+          <span>Ctrl: ${s.a.ctrlTime || '0:00'}</span>
+          <span class="er-stat-extras-mid">vs</span>
+          <span>Ctrl: ${s.b.ctrlTime || '0:00'}</span>
+          <span>KD: ${s.b.kd || 0}</span>
+        </div>
+      </div>`;
+  }
+
   return `
     <div class="er-fight-row ${f.slot === 'main' ? 'er-fight-main' : f.slot === 'comain' ? 'er-fight-comain' : ''}">
       ${slotBadge ? `<div>${slotBadge}</div>` : ''}
@@ -651,6 +714,7 @@ function fightRow(f, communityData) {
       </div>
       ${pickBarsHtml}
       ${resultHtml}
+      ${statsHtml}
     </div>`;
 }
 
@@ -1023,7 +1087,8 @@ function renderPage(ev, community, extra = {}) {
       fetchCommunityRating(eventId),
       fetchCommunityPicks(eventId),
       fetchFotnVotes(eventId),
-      loggedIn ? fetchMyEventPicks(eventId) : Promise.resolve([])
+      loggedIn ? fetchMyEventPicks(eventId) : Promise.resolve([]),
+      fetchFightStats(eventId),
     ]);
 
     if (!ev) {

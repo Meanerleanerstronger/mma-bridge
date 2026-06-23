@@ -11731,3 +11731,296 @@ body.light-mode .mobile-bottom-nav {
 }
 body.light-mode .mbn-item { color: rgba(0,0,0,0.35) !important; }
 body.light-mode .mbn-item.active { color: #007fa3 !important; background: rgba(0,150,180,0.08) !important; }
+
+/* ═══════════════════════════════════════════════
+   r/ufc TRENDING SECTION (homepage)
+═══════════════════════════════════════════════ */
+.reddit-section {
+  max-width: 1200px;
+  margin: 40px auto 0;
+  padding: 0 32px;
+}
+@media (max-width: 768px) { .reddit-section { padding: 0 16px; } }
+
+.reddit-section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.reddit-section-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+}
+.reddit-section-link {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  color: rgba(255,82,0,0.7);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+}
+.reddit-section-link:hover { color: #ff5200; }
+
+.reddit-posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 10px;
+}
+@media (max-width: 640px) { .reddit-posts { grid-template-columns: 1fr; } }
+
+.reddit-post {
+  display: block;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  padding: 12px 14px;
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s;
+}
+.reddit-post:hover {
+  background: rgba(255,82,0,0.05);
+  border-color: rgba(255,82,0,0.2);
+}
+.reddit-post-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+.reddit-post-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.reddit-flair {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.52rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 4px;
+  border: 1px solid;
+}
+.reddit-post-stat {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.3);
+}
+
+/* ═══════════════════════════════════════════════
+   DIVISIONAL RANKINGS (pfp.html)
+═══════════════════════════════════════════════ */
+.div-rankings-wrap {
+  max-width: 820px;
+  margin: 48px auto 40px;
+  padding: 0 24px;
+}
+.div-rankings-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.div-rankings-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+.div-rankings-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.2);
+}
+.div-rankings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 12px;
+}
+@media (max-width: 640px) { .div-rankings-grid { grid-template-columns: 1fr; } }
+
+.div-rank-division {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.div-rank-div-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(0,229,255,0.8);
+  padding: 12px 16px;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.div-rank-div-name::-webkit-details-marker { display: none; }
+.div-rank-div-name::before {
+  content: '▶';
+  font-size: 0.5rem;
+  color: rgba(255,255,255,0.25);
+  transition: transform 0.2s;
+}
+details[open] .div-rank-div-name::before { transform: rotate(90deg); }
+.div-rank-div-name:hover { background: rgba(0,229,255,0.04); }
+
+.div-rank-list { padding: 6px 0; }
+
+.div-rank-row {
+  display: grid;
+  grid-template-columns: 28px 1fr auto 20px;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px;
+}
+.div-rank-row:hover { background: rgba(255,255,255,0.02); }
+
+.div-rank-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.3);
+  text-align: right;
+}
+.div-rank-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.8);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.div-rank-rec {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.28);
+  white-space: nowrap;
+}
+.div-rank-move { font-size: 0.6rem; text-align: center; }
+.div-rank-move.up   { color: #22c55e; }
+.div-rank-move.down { color: #ef4444; }
+
+/* ═══════════════════════════════════════════════
+   FIGHT STATS BARS (event-review)
+═══════════════════════════════════════════════ */
+.er-fight-stats {
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: rgba(0,229,255,0.03);
+  border: 1px solid rgba(0,229,255,0.08);
+  border-radius: 8px;
+}
+.er-stat-row {
+  display: grid;
+  grid-template-columns: 52px 1fr 80px 52px;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.er-stat-row:last-of-type { margin-bottom: 0; }
+.er-stat-val-a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: rgba(0,229,255,0.85);
+  text-align: right;
+}
+.er-stat-val-b {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: rgba(255,120,0,0.85);
+  text-align: left;
+}
+.er-stat-bar-wrap {
+  height: 4px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.05);
+  display: flex;
+  overflow: hidden;
+}
+.er-stat-bar-a {
+  height: 100%;
+  background: rgba(0,229,255,0.5);
+  border-radius: 4px 0 0 4px;
+  transition: width 0.4s ease;
+}
+.er-stat-bar-b {
+  height: 100%;
+  background: rgba(255,120,0,0.5);
+  border-radius: 0 4px 4px 0;
+  transition: width 0.4s ease;
+}
+.er-stat-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.5rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  text-align: center;
+}
+.er-stat-extras {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.3);
+}
+.er-stat-extras-mid {
+  color: rgba(255,255,255,0.1);
+  font-size: 0.6rem;
+}
+
+/* ═══════════════════════════════════════════════
+   FIGHTER CAREER STATS (profile.js fav cards)
+═══════════════════════════════════════════════ */
+.pr-fav-stats {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.pr-fav-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+.pr-fav-stat-val {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: rgba(0,229,255,0.8);
+}
+.pr-fav-stat-lbl {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.44rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.22);
+}

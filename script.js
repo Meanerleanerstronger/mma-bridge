@@ -14,37 +14,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     const all = await fetch('/events.json?_=' + Date.now(), { cache: 'no-store' }).then(r => r.json());
     const now = new Date();
 
-    // Returns true once an event's start time (ET) has passed
-    function hasStarted(ev) {
-      if (!ev.isoDate) return false;
-      const t = ev.startTime || '22:00';
-      const evStart = new Date(`${ev.isoDate}T${t}:00-04:00`);
-      return now >= evStart;
-    }
-
     const past = all
       .filter(e => e.status === 'completed' && e.poster)
       .sort((a, b) => b.isoDate.localeCompare(a.isoDate));
 
-    // Upcoming events that haven't started yet
-    const upcoming = all
-      .filter(e => e.status === 'upcoming' && !hasStarted(e))
-      .sort((a, b) => a.isoDate.localeCompare(b.isoDate));
-
-    // An upcoming event whose start time just passed = live now, show as hero
-    const liveNow = all.find(e => e.status === 'upcoming' && hasStarted(e));
-    if (liveNow) liveNow._isLive = true;
-
-    // Show most recently completed event in hero for 3 days after it ends
-    const recentCompleted = past[0];
-    const isVeryRecent = recentCompleted &&
-      (now - new Date(recentCompleted.isoDate)) < 3 * 24 * 60 * 60 * 1000;
-
-    // Pinned hero event — override normal logic when set
-    const HERO_PIN_ID = 'ufc-freedom-250-topuria-vs-gaethje';
-    const pinned = HERO_PIN_ID && all.find(e => e.id === HERO_PIN_ID);
-
-    renderHero(liveNow || pinned || upcoming[0] || past[0]);
+    // 4-state hero resolution: results window → today → upcoming → past
+    const resolved = resolveHeroEvent(all, now);
+    if (resolved) {
+      renderHero(resolved.ev, resolved.mode, false);
+      // Async My Picks check for results mode — re-render if user has picks
+      if (resolved.mode === 'results') {
+        userHasPicks(resolved.ev.id).then(has => {
+          if (has) renderHero(resolved.ev, resolved.mode, true);
+        });
+      }
+    }
 
     // ── Notification banner check ─────────────
     checkEventNotifications(all);
@@ -57,75 +41,135 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Load news — don't await so it doesn't block the page
   renderNews();
+  renderReddit();
   setupSearch();
 });
 
-// ── Hero ──────────────────────────────────────
-function renderHero(ev) {
+// ── Hero resolution (4-state) ─────────────────
+function resolveHeroEvent(all, now) {
+  const todayStr  = now.toISOString().slice(0, 10);
+  const cutoffStr = new Date(now - 2 * 86400000).toISOString().slice(0, 10);
+
+  // 1. Results window: completed event with winner data, within 48 h
+  const recentWithResults = all
+    .filter(e => e.isoDate >= cutoffStr && e.isoDate <= todayStr && (e.mainCard || []).some(f => f.winner))
+    .sort((a, b) => new Date(b.isoDate) - new Date(a.isoDate))[0];
+  if (recentWithResults) return { ev: recentWithResults, mode: 'results' };
+
+  // 2. Today's event, no results yet — show Watch Live
+  const todayFight = all.find(e => e.isoDate === todayStr && !(e.mainCard || []).some(f => f.winner));
+  if (todayFight) return { ev: todayFight, mode: 'today' };
+
+  // 3. Next upcoming
+  const next = all
+    .filter(e => e.isoDate >= todayStr && e.status !== 'completed')
+    .sort((a, b) => new Date(a.isoDate) - new Date(b.isoDate))[0];
+  if (next) return { ev: next, mode: 'upcoming' };
+
+  // 4. Fallback: most recent past event
+  const mostRecent = all.filter(e => e.status === 'completed').sort((a, b) => new Date(b.isoDate) - new Date(a.isoDate))[0];
+  if (mostRecent) return { ev: mostRecent, mode: 'results' };
+
+  return null;
+}
+
+// Check if logged-in user has picks for an event (async)
+async function userHasPicks(eventId) {
+  try {
+    const sb = window._sb;
+    if (!sb) return false;
+    const { data: { user } } = await sb.auth.getUser();
+    if (!user) return false;
+    const { data } = await sb.from('picks').select('fight_key').eq('user_id', user.id).eq('event_id', eventId).limit(1);
+    return !!(data && data.length > 0);
+  } catch (e) { return false; }
+}
+
+// ── Hero render ───────────────────────────────
+function renderHero(ev, mode, hasPicks) {
   if (!ev) return;
   const img   = document.getElementById('heroImg');
   const type  = document.getElementById('heroType');
   const title = document.getElementById('heroTitle');
   const meta  = document.getElementById('heroMeta');
-  if (ev.poster) {
+  const btn   = document.getElementById('heroBtn');
+
+  if (ev.poster && img) {
     img.style.backgroundImage = `url('${ev.poster}')`;
     img.style.backgroundSize = 'cover';
-    // Per-event positioning to show faces
-    const positions = {
-      'ufc-fight-night-burns-vs-malott': 'center 20%',
-    };
-    img.style.backgroundPosition = positions[ev.id] || 'center top';
-  }
-  const isLive      = !!ev._isLive;
-  const isCompleted = ev.status === 'completed';
-
-  if (isLive) {
-    type.innerHTML = '<span style="display:inline-flex;align-items:center;gap:7px;"><span style="width:8px;height:8px;background:#ff2020;border-radius:50%;box-shadow:0 0 8px 2px rgba(255,30,30,0.7);animation:pulse 1.5s infinite;flex-shrink:0;"></span>LIVE NOW</span>';
-  } else if (isCompleted) {
-    type.textContent = ev.type === 'PPV' ? 'PPV Event — Results' : 'Event — Results';
-  } else {
-    type.textContent = ev.type === 'PPV' ? 'Next PPV Event' : 'Next Event';
+    img.style.backgroundPosition = 'center top';
   }
 
-  var titleText = ev.name || '';
-  if (typeof FXTypewriter === 'function' && titleText) {
-    FXTypewriter(title, titleText, 38, 200);
+  const isPPV = ev.type === 'PPV';
+
+  // Badge / type label
+  if (mode === 'today') {
+    if (type) type.innerHTML = '<span style="display:inline-flex;align-items:center;gap:7px;"><span style="width:8px;height:8px;background:#ff2020;border-radius:50%;box-shadow:0 0 8px 2px rgba(255,30,30,0.7);animation:pulse 1.5s infinite;flex-shrink:0;"></span>TONIGHT · LIVE</span>';
+  } else if (mode === 'results') {
+    if (type) type.textContent = isPPV ? 'PPV Event — Results' : 'Fight Night — Results';
   } else {
-    title.textContent = titleText;
+    if (type) type.textContent = isPPV ? 'Next PPV Event' : 'Next Fight Night';
   }
-  meta.textContent  = [ev.date, ev.location, ev.venue].filter(Boolean).join('  ·  ');
-  const btn = document.getElementById('heroBtn');
-  if (btn && ev.id) {
-    if (isLive) {
-      btn.textContent = 'Watch Live →';
-      btn.href = 'https://www.paramountplus.com/sports/ufc/';
-      btn.target = '_blank';
-      btn.rel = 'noopener noreferrer';
-      btn.style.setProperty('background', 'linear-gradient(135deg, #8b0000 0%, #cc0000 55%, #ff3030 100%)', 'important');
-      btn.style.setProperty('color', '#fff', 'important');
-      btn.style.setProperty('text-shadow', '0 1px 4px rgba(0,0,0,0.5)', 'important');
-      btn.style.setProperty('box-shadow', '0 0 28px rgba(255,30,30,0.45), inset 0 1px 0 rgba(255,120,120,0.2)', 'important');
-      btn.style.setProperty('border', '1px solid rgba(255,60,60,0.4)', 'important');
-    } else if (isCompleted) {
-      btn.textContent = 'Review the Card →';
-      btn.href = `events.html?id=${encodeURIComponent(ev.id)}`;
-      btn.target = '';
-      btn.className = '';
-      btn.style.setProperty('background', 'linear-gradient(135deg, #004d3d 0%, #00a878 55%, #00e5a0 100%)', 'important');
-      btn.style.setProperty('color', '#fff', 'important');
-      btn.style.setProperty('text-shadow', '0 1px 4px rgba(0,0,0,0.4)', 'important');
-      btn.style.setProperty('box-shadow', '0 0 28px rgba(0,200,140,0.45), inset 0 1px 0 rgba(0,255,180,0.2)', 'important');
-      btn.style.setProperty('border', '1px solid rgba(0,229,160,0.5)', 'important');
+
+  // Title with typewriter
+  const titleText = ev.name || '';
+  if (title) {
+    if (typeof FXTypewriter === 'function' && titleText) {
+      FXTypewriter(title, titleText, 38, 200);
     } else {
-      btn.textContent = 'Make Your Picks →';
-      btn.href = `picks.html?event=${encodeURIComponent(ev.id)}`;
-      btn.target = '';
-      btn.style.setProperty('background', 'linear-gradient(135deg, #7a3100 0%, #d46400 55%, #ff8c00 100%)', 'important');
-      btn.style.setProperty('color', '#fff', 'important');
-      btn.style.setProperty('text-shadow', '0 1px 4px rgba(0,0,0,0.5)', 'important');
-      btn.style.setProperty('box-shadow', '0 0 28px rgba(255,120,0,0.45), inset 0 1px 0 rgba(255,180,80,0.2)', 'important');
-      btn.style.setProperty('border', '1px solid rgba(255,140,0,0.5)', 'important');
+      title.textContent = titleText;
     }
+  }
+
+  if (meta) meta.textContent = [ev.date, ev.location, ev.venue].filter(Boolean).join('  ·  ');
+
+  if (!btn || !ev.id) return;
+
+  const eventId = encodeURIComponent(ev.id);
+
+  // Remove any existing secondary button
+  const existingSecondary = document.getElementById('heroSecondaryBtn');
+  if (existingSecondary) existingSecondary.remove();
+
+  if (mode === 'today') {
+    btn.textContent = 'Watch Live →';
+    btn.href = 'https://www.paramountplus.com/sports/ufc/';
+    btn.target = '_blank';
+    btn.rel = 'noopener noreferrer';
+    btn.style.setProperty('background', 'linear-gradient(135deg, #8b0000 0%, #cc0000 55%, #ff3030 100%)', 'important');
+    btn.style.setProperty('color', '#fff', 'important');
+    btn.style.setProperty('text-shadow', '0 1px 4px rgba(0,0,0,0.5)', 'important');
+    btn.style.setProperty('box-shadow', '0 0 28px rgba(255,30,30,0.45), inset 0 1px 0 rgba(255,120,120,0.2)', 'important');
+    btn.style.setProperty('border', '1px solid rgba(255,60,60,0.4)', 'important');
+  } else if (mode === 'results') {
+    btn.textContent = 'Review the Card →';
+    btn.href = `event-review.html?id=${eventId}`;
+    btn.target = '';
+    btn.rel = '';
+    btn.style.setProperty('background', 'linear-gradient(135deg, #004d3d 0%, #00a878 55%, #00e5a0 100%)', 'important');
+    btn.style.setProperty('color', '#fff', 'important');
+    btn.style.setProperty('text-shadow', '0 1px 4px rgba(0,0,0,0.4)', 'important');
+    btn.style.setProperty('box-shadow', '0 0 28px rgba(0,200,140,0.45), inset 0 1px 0 rgba(0,255,180,0.2)', 'important');
+    btn.style.setProperty('border', '1px solid rgba(0,229,160,0.5)', 'important');
+    // My Picks secondary button (only when user confirmed to have picks)
+    if (hasPicks) {
+      const myPicksBtn = document.createElement('a');
+      myPicksBtn.id = 'heroSecondaryBtn';
+      myPicksBtn.textContent = 'My Picks →';
+      myPicksBtn.href = `picks.html?event=${eventId}`;
+      myPicksBtn.style.cssText = 'display:inline-block;margin-left:10px;padding:12px 24px;border-radius:12px;font-family:Montserrat,sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;background:rgba(255,255,255,.07);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.12);transition:background .15s;';
+      btn.parentNode.insertBefore(myPicksBtn, btn.nextSibling);
+    }
+  } else {
+    btn.textContent = 'Make Your Picks →';
+    btn.href = `picks.html?event=${eventId}`;
+    btn.target = '';
+    btn.rel = '';
+    btn.style.setProperty('background', 'linear-gradient(135deg, #7a3100 0%, #d46400 55%, #ff8c00 100%)', 'important');
+    btn.style.setProperty('color', '#fff', 'important');
+    btn.style.setProperty('text-shadow', '0 1px 4px rgba(0,0,0,0.5)', 'important');
+    btn.style.setProperty('box-shadow', '0 0 28px rgba(255,120,0,0.45), inset 0 1px 0 rgba(255,180,80,0.2)', 'important');
+    btn.style.setProperty('border', '1px solid rgba(255,140,0,0.5)', 'important');
   }
 }
 
@@ -376,6 +420,43 @@ function paintNews(articles, container, list) {
 }
 
 // ── Search ────────────────────────────────────
+// ── Reddit r/ufc Trending ─────────────────────
+async function renderReddit() {
+  const section = document.getElementById('redditSection');
+  const container = document.getElementById('redditPosts');
+  if (!section || !container) return;
+  try {
+    const posts = await fetch('/data/reddit.json?_=' + Date.now(), { cache: 'no-store' }).then(r => r.ok ? r.json() : null);
+    if (!posts?.length) return;
+
+    const flairColors = {
+      'Discussion': '#00e5ff',
+      'News': '#f59e0b',
+      'Video': '#ef4444',
+      'Meme': '#a855f7',
+      'Highlight': '#22c55e',
+    };
+
+    container.innerHTML = posts.map(p => {
+      const title = p.title.length > 85 ? p.title.slice(0, 82) + '…' : p.title;
+      const flairColor = (p.flair && flairColors[p.flair]) || 'rgba(255,255,255,0.25)';
+      const flairHtml = p.flair ? `<span class="reddit-flair" style="border-color:${flairColor};color:${flairColor}">${p.flair}</span>` : '';
+      const score = p.score >= 1000 ? `${(p.score / 1000).toFixed(1)}k` : p.score;
+      return `
+        <a class="reddit-post" href="${p.url}" target="_blank" rel="noopener noreferrer">
+          <div class="reddit-post-title">${title}</div>
+          <div class="reddit-post-meta">
+            ${flairHtml}
+            <span class="reddit-post-stat">▲ ${score}</span>
+            <span class="reddit-post-stat">💬 ${p.comments}</span>
+          </div>
+        </a>`;
+    }).join('');
+
+    section.style.display = '';
+  } catch (e) { /* fail silently — non-critical */ }
+}
+
 function setupSearch() {
   const form  = document.getElementById('site-search-form');
   const input = document.getElementById('site-search');

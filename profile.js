@@ -296,6 +296,12 @@
               <div class="pr-fav-body">
                 <div class="pr-fav-name">${esc(f.name)}</div>
                 <div class="pr-fav-meta">${record ? `<span class="pr-fav-record">${esc(record)}</span>` : ''}${f.flag ? `<span>${esc(f.flag)}</span>` : ''}${f.weightClass ? `<span>${esc(f.weightClass)}</span>` : ''}</div>
+                ${f.stats ? `<div class="pr-fav-stats">
+                  ${f.stats.slpm ? `<span class="pr-fav-stat"><span class="pr-fav-stat-val">${f.stats.slpm}</span><span class="pr-fav-stat-lbl">SLpM</span></span>` : ''}
+                  ${f.stats.strAcc ? `<span class="pr-fav-stat"><span class="pr-fav-stat-val">${f.stats.strAcc}</span><span class="pr-fav-stat-lbl">Str Acc</span></span>` : ''}
+                  ${f.stats.tdAvg ? `<span class="pr-fav-stat"><span class="pr-fav-stat-val">${f.stats.tdAvg}</span><span class="pr-fav-stat-lbl">TD/15m</span></span>` : ''}
+                  ${f.stats.subAvg ? `<span class="pr-fav-stat"><span class="pr-fav-stat-val">${f.stats.subAvg}</span><span class="pr-fav-stat-lbl">Sub/15m</span></span>` : ''}
+                </div>` : ''}
               </div>
             </div>
           </a>`;

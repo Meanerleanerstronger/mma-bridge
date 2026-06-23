@@ -688,6 +688,49 @@
       <div class="pfp-grid" id="pfpWomenGrid"></div>
     </div>
 
+  <!-- Divisional Rankings -->
+  <div class="div-rankings-wrap" id="divRankingsWrap" style="display:none">
+    <div class="div-rankings-header">
+      <span class="div-rankings-title">Divisional Rankings</span>
+      <span class="div-rankings-sub">Updated weekly via ESPN</span>
+    </div>
+    <div class="div-rankings-grid" id="divRankingsGrid"></div>
+  </div>
+
+  <script>
+  (function() {
+    async function loadDivRankings() {
+      const wrap = document.getElementById('divRankingsWrap');
+      const grid = document.getElementById('divRankingsGrid');
+      if (!wrap || !grid) return;
+      try {
+        const divisions = await fetch('/data/rankings.json?_=' + Date.now(), { cache: 'no-store' })
+          .then(r => r.ok ? r.json() : null);
+        if (!divisions?.length) return;
+
+        grid.innerHTML = divisions.map(div => `
+          <details class="div-rank-division">
+            <summary class="div-rank-div-name">${div.division}</summary>
+            <div class="div-rank-list">
+              ${div.fighters.map(f => `
+                <div class="div-rank-row">
+                  <span class="div-rank-num">${f.isChamp ? 'C' : f.rank}</span>
+                  <span class="div-rank-name">${f.name}</span>
+                  <span class="div-rank-rec">${f.record}</span>
+                  ${f.movement > 0 ? '<span class="div-rank-move up">▲</span>'
+                    : f.movement < 0 ? '<span class="div-rank-move down">▼</span>'
+                    : '<span class="div-rank-move">—</span>'}
+                </div>`).join('')}
+            </div>
+          </details>`).join('');
+
+        wrap.style.display = '';
+      } catch (e) { /* fail silently */ }
+    }
+    document.addEventListener('DOMContentLoaded', loadDivRankings);
+  })();
+  </script>
+
   <!-- Fighter Drawer -->
   <div id="fightDrawer" class="drawer" aria-hidden="true">
     <div class="drawer-backdrop" id="drawerClose"></div>

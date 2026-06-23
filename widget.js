@@ -108,7 +108,7 @@
     }
     #lw-tab:hover #lw-tab-tooltip { opacity: 1; }
 
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
       #lw-widget, #lw-tab { display: none !important; }
     }
 
@@ -205,11 +205,13 @@
 
   /* ── Position helpers ── */
   function clampPos(x, y, el) {
-    const W  = el.offsetWidth  || (el === widget ? 210 : 28);
-    const H  = el.offsetHeight || (el === widget ? 120 : 70);
+    const W       = el.offsetWidth  || (el === widget ? 210 : 28);
+    const H       = el.offsetHeight || (el === widget ? 120 : 70);
+    const bottomNav = document.querySelector('.mobile-bottom-nav');
+    const navH    = (bottomNav && getComputedStyle(bottomNav).display !== 'none') ? (bottomNav.offsetHeight || 60) : 0;
     return {
       x: Math.max(0, Math.min(x, window.innerWidth  - W)),
-      y: Math.max(0, Math.min(y, window.innerHeight - H)),
+      y: Math.max(0, Math.min(y, window.innerHeight - H - navH - 8)),
     };
   }
 
@@ -240,7 +242,9 @@
   }
 
   function defaultCenterY() {
-    return Math.round((window.innerHeight - (widget.offsetHeight || 120)) / 2);
+    const bottomNav = document.querySelector('.mobile-bottom-nav');
+    const navH = (bottomNav && getComputedStyle(bottomNav).display !== 'none') ? (bottomNav.offsetHeight || 60) : 0;
+    return Math.round((window.innerHeight - navH - (widget.offsetHeight || 120)) / 2);
   }
 
   function initWidgetPosition() {
