@@ -8944,7 +8944,14 @@ body.light-mode .notif-item-sub { color: rgba(0,0,0,0.38) !important; }
 
 /* Responsive */
 @media (max-width: 600px) {
-  .notif-dropdown { width: calc(100vw - 24px); left: auto; right: 0; }
+  .notif-dropdown {
+    width: calc(100vw - 24px);
+    left: auto; right: 0;
+    max-height: calc(100dvh - 140px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    z-index: 9999;
+  }
   .fav-modal { padding: 22px 20px 20px; }
 }
 
