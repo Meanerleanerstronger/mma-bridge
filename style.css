@@ -7313,17 +7313,22 @@ body.light-mode .ev-hype-badge { color: rgba(140,80,0,0.85); background: rgba(20
   .pk-body { padding: 16px 0 80px; gap: 0; }
   .pk-event-name { font-size: 1.6rem; }
   .pk-round-btn { padding: 11px 4px; font-size: 0.68rem; }
-  /* fc-card mobile */
+  /* fc-card mobile — fix name overflow on odds layout */
   .fc-matchup { grid-template-columns: 1fr 46px 1fr; }
-  .fc-card.fc-maincrd .fc-matchup { grid-template-columns: 1fr 46px 1fr; }
-  .fc-card.fc-main .fc-matchup { grid-template-columns: 1fr 46px 1fr; }
-  .fc-name { font-size: 1.05rem; }
-  .fc-card.fc-maincrd .fc-name { font-size: 1.2rem; }
-  .fc-card.fc-main .fc-name { font-size: 1.45rem; }
-  .fc-photo { width: 72px; }
-  .fc-card.fc-maincrd .fc-photo { width: 88px; }
-  .fc-card.fc-main .fc-photo { width: 100px; }
-  .fc-fighter { padding: 14px 10px; gap: 10px; }
+  .fc-matchup.fc-matchup-odds { grid-template-columns: 30px 1fr 46px 1fr 30px; }
+  .fc-card.fc-maincrd .fc-matchup,
+  .fc-card.fc-maincrd .fc-matchup.fc-matchup-odds { grid-template-columns: 1fr 46px 1fr; }
+  .fc-card.fc-main .fc-matchup,
+  .fc-card.fc-main .fc-matchup.fc-matchup-odds { grid-template-columns: 1fr 52px 1fr; }
+  /* hide outer odds cols on ≤640px — they go into the fighter info instead */
+  .fc-matchup.fc-matchup-odds .fc-odds-col { display: none; }
+  .fc-name { font-size: 1rem; line-height: 1.1; word-break: break-word; overflow-wrap: break-word; }
+  .fc-card.fc-maincrd .fc-name { font-size: 1.15rem; }
+  .fc-card.fc-main .fc-name { font-size: 1.35rem; }
+  .fc-photo { width: 68px; }
+  .fc-card.fc-maincrd .fc-photo { width: 82px; }
+  .fc-card.fc-main .fc-photo { width: 96px; }
+  .fc-fighter { padding: 12px 10px; gap: 9px; }
   .pk-seg-btn { font-size: 0.54rem; padding: 7px 6px; }
   .pk-save-bar { padding: 10px 16px 14px; }
   .pk-fotn-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 9px; }
@@ -7337,6 +7342,19 @@ body.light-mode .ev-hype-badge { color: rgba(140,80,0,0.85); background: rgba(20
   /* Card rating mobile */
   .pk-card-rating { padding: 36px 20px 32px; }
   .pk-cr-num { font-size: 4.5rem; }
+}
+
+@media (max-width: 480px) {
+  /* Very small phones — further compress fight card names */
+  .fc-photo { width: 54px; }
+  .fc-card.fc-maincrd .fc-photo { width: 66px; }
+  .fc-card.fc-main .fc-photo { width: 78px; }
+  .fc-fighter { padding: 10px 8px; gap: 8px; }
+  .fc-name { font-size: 0.9rem; }
+  .fc-card.fc-maincrd .fc-name { font-size: 1rem; }
+  .fc-card.fc-main .fc-name { font-size: 1.2rem; }
+  .fc-odds-num { font-size: 0.75rem; }
+  .fc-record { font-size: 0.58rem; }
 }
 
 /* light mode */
@@ -11685,7 +11703,7 @@ h1, h2, h3, .ev-hero-matchup, .hero-title, .ov-matchup {
     -webkit-tap-highlight-color: transparent;
   }
   .mbn-item svg {
-    width: 20px; height: 20px;
+    width: 18px; height: 18px;
     stroke: currentColor;
     fill: none;
     stroke-width: 2;
