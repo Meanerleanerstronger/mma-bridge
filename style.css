@@ -11452,3 +11452,257 @@ img { image-rendering: auto; }
 }
 .pfp-row-tapping { animation: pfp-row-tap 0.3s ease-out; }
 }
+
+/* ══════════════════════════════════════════════════
+   MOBILE UI OVERHAUL v1
+══════════════════════════════════════════════════ */
+
+/* ── GLOBAL TOUCH / TYPOGRAPHY ── */
+*, *::before, *::after { touch-action: manipulation; }
+img, video, svg { max-width: 100%; }
+h1, h2, h3, .ev-hero-matchup, .hero-title, .ov-matchup {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* ── MOBILE NAVBAR: bell always visible, right-aligned ── */
+@media (max-width: 768px) {
+  /* Push bell to right side: logo stays left, bell + hamburger cluster right */
+  #notifBellMount {
+    margin-left: auto;
+    order: 10;
+  }
+  .nav-hamburger {
+    margin-left: 8px !important;
+    order: 11;
+  }
+  /* Hide theme-toggle on mobile — too cramped, access via menu */
+  .theme-toggle { display: none !important; }
+  /* Hide sign-in/sign-up from top bar on mobile — in hamburger menu */
+  .nav-auth { display: none !important; }
+  /* Ensure bell button meets touch target */
+  .notif-bell-btn {
+    width: 40px;
+    height: 40px;
+    min-height: 40px;
+    border-radius: 10px;
+  }
+  /* Nav container: items align properly */
+  .nav-container { gap: 0; }
+  .logo { flex-shrink: 0; }
+}
+
+/* ── MOBILE OVERLAY: scrollable, no cutoff ── */
+@media (max-width: 768px) {
+  .ev-overlay .ov-panel {
+    -webkit-overflow-scrolling: touch;
+  }
+  .ov-fight-col {
+    -webkit-overflow-scrolling: touch;
+    max-height: 55vh;
+  }
+  .ov-sidebar {
+    -webkit-overflow-scrolling: touch;
+  }
+  /* Hype track: full width on mobile */
+  .ov-hype-track-wrap {
+    flex: 1;
+    max-width: none !important;
+    width: auto !important;
+  }
+  /* Action bar wraps on mobile */
+  .ov-action-bar {
+    flex-wrap: wrap;
+    padding: 12px 16px;
+    gap: 10px;
+  }
+  .ov-action-btn {
+    flex: 1;
+    justify-content: center;
+    padding: 12px 16px;
+    font-size: 0.68rem;
+  }
+}
+
+/* ── EVENT CARDS: denser, headshots visible on mobile ── */
+@media (max-width: 640px) {
+  .ev-card {
+    height: 120px !important;
+  }
+  .ev-card-content {
+    max-width: 78% !important;
+    padding: 0 14px !important;
+  }
+  .ev-card-matchup {
+    font-size: clamp(1rem, 4.5vw, 1.3rem) !important;
+    margin-bottom: 4px !important;
+  }
+  .ev-card-sub {
+    font-size: 0.62rem;
+  }
+  /* Show meta (date/days) but compact */
+  .ev-card-meta {
+    display: flex !important;
+    right: 12px;
+    gap: 3px;
+  }
+  .ev-card-days {
+    font-size: 0.72rem;
+  }
+  .ev-card-date {
+    font-size: 0.58rem;
+  }
+  .ev-card-location { display: none; }
+  .ev-card-cta { display: none; }
+}
+
+/* ── TOUCH TARGETS: min 44px ── */
+@media (max-width: 768px) {
+  .ev-review-btn,
+  .ph-card-btn,
+  .nav-mobile-links a,
+  .ob-cta,
+  .ev-hero-cta {
+    min-height: 44px;
+  }
+  .nav-mobile-links a {
+    padding: 14px 24px;
+    font-size: 1.05rem;
+  }
+  .ev-review-btn {
+    padding: 10px 18px;
+  }
+}
+
+/* ── FEATURED HERO: mobile layout ── */
+@media (max-width: 480px) {
+  .ev-hero {
+    min-height: 180px !important;
+  }
+  .ev-hero-fighter {
+    width: 35% !important;
+  }
+  .ev-hero-matchup {
+    font-size: 1.4rem !important;
+  }
+  .ev-hero-badge {
+    font-size: 0.44rem;
+    padding: 2px 10px;
+  }
+  .ev-hero-meta {
+    font-size: 0.62rem;
+    margin-bottom: 14px;
+  }
+  .ev-hero-cta {
+    font-size: 0.58rem;
+    padding: 10px 18px;
+  }
+}
+
+/* ── HOMEPAGE HERO: tighter on mobile ── */
+@media (max-width: 480px) {
+  #hero-content {
+    padding: 36px 18px 32px !important;
+  }
+  #heroTitle {
+    font-size: 1.35rem !important;
+    line-height: 1.2 !important;
+  }
+  #heroMeta {
+    font-size: 0.78rem !important;
+    margin-bottom: 20px !important;
+  }
+  #heroBtn {
+    padding: 10px 20px !important;
+    font-size: 0.68rem !important;
+  }
+  /* Results track on mobile */
+  #resultsInner {
+    padding: 0 12px 14px !important;
+    gap: 8px !important;
+  }
+}
+
+/* ── HOMEPAGE CARDS: clean stacking ── */
+@media (max-width: 768px) {
+  .content-container {
+    padding: 0 12px !important;
+  }
+  .card-row {
+    gap: 12px;
+  }
+}
+
+/* ── RESULTS CAROUSEL: touch scrollable ── */
+#resultsTrack {
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+}
+
+/* ── BOTTOM NAV BAR ── */
+.mobile-bottom-nav {
+  display: none;
+}
+@media (max-width: 768px) {
+  .mobile-bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 1100;
+    background: rgba(8,8,12,0.97);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    height: 60px;
+    align-items: stretch;
+    padding: 0 4px;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .mbn-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    color: rgba(255,255,255,0.3);
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.48rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: 10px;
+    margin: 6px 2px;
+    transition: color 0.15s, background 0.15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .mbn-item svg {
+    width: 20px; height: 20px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+  .mbn-item.active,
+  .mbn-item:active {
+    color: #00e5ff;
+    background: rgba(0,229,255,0.08);
+  }
+  .mbn-item:hover { color: rgba(255,255,255,0.6); }
+
+  /* Push page content above bottom nav */
+  body { padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px)); }
+  /* Don't double-pad pages that already have bottom padding */
+  .ev-page { padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px)) !important; }
+}
+
+/* Light mode bottom nav */
+body.light-mode .mobile-bottom-nav {
+  background: rgba(245,245,248,0.97) !important;
+  border-top-color: rgba(0,0,0,0.08) !important;
+}
+body.light-mode .mbn-item { color: rgba(0,0,0,0.35) !important; }
+body.light-mode .mbn-item.active { color: #007fa3 !important; background: rgba(0,150,180,0.08) !important; }
