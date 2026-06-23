@@ -212,6 +212,12 @@
       color:#000; box-shadow:0 4px 20px rgba(200,168,75,.3);
     }
     .ev-hero-cta.cta-results:hover { transform:translateY(-2px); box-shadow:0 6px 28px rgba(200,168,75,.45); }
+    .ev-hero-cta.cta-live {
+      background:linear-gradient(135deg,#e53935 0%,#c62828 100%);
+      color:#fff; box-shadow:0 4px 20px rgba(229,57,53,.35);
+    }
+    .ev-hero-cta.cta-live:hover { transform:translateY(-2px); box-shadow:0 6px 28px rgba(229,57,53,.5); }
+    .ev-hero-btns { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
     @media(max-width:600px){
       .ev-hero { min-height:190px; }
       .ev-hero-fighter { width:42%; }
@@ -1744,40 +1750,116 @@
     }
 
     /* ── FEATURED HERO ── */
-    function buildFeaturedHero(ev){
-      const hero=document.getElementById('evFeaturedHero');
+
+    // Determine which event to feature and what mode
+    function resolveHeroEvent(all){
+      const todayStr = new Date().toISOString().slice(0,10);
+      const cutoffStr = new Date(Date.now() - 2*86400000).toISOString().slice(0,10);
+
+      // 1. Recently completed event with results (within 48h) — results window
+      const recentWithResults = all
+        .filter(e => e.isoDate >= cutoffStr && e.isoDate <= todayStr && (e.mainCard||[]).some(f=>f.winner))
+        .sort((a,b)=>new Date(b.isoDate)-new Date(a.isoDate))[0];
+      if(recentWithResults) return { ev: recentWithResults, mode: 'results' };
+
+      // 2. Today's event, no results yet
+      const todayFight = all.find(e => e.isoDate === todayStr && !(e.mainCard||[]).some(f=>f.winner));
+      if(todayFight) return { ev: todayFight, mode: 'today' };
+
+      // 3. Next upcoming
+      const next = all
+        .filter(e => e.isoDate >= todayStr && e.status !== 'completed')
+        .sort((a,b)=>new Date(a.isoDate)-new Date(b.isoDate))[0];
+      if(next) return { ev: next, mode: 'upcoming' };
+
+      return null;
+    }
+
+    // Check if logged-in user has picks for an event (async, non-blocking)
+    async function userHasPicks(eventId){
+      try {
+        const sb = window._sb;
+        if(!sb) return false;
+        const { data:{ user } } = await sb.auth.getUser();
+        if(!user) return false;
+        const { data } = await sb.from('picks').select('fight_key').eq('user_id', user.id).eq('event_id', eventId).limit(1);
+        return !!(data && data.length > 0);
+      } catch(e){ return false; }
+    }
+
+    function renderHero(ev, mode, hasPicks){
+      const hero = document.getElementById('evFeaturedHero');
       if(!hero) return;
-      if(!ev){ hero.style.display='none'; return; }
-      const main=getMainFight(ev);
+      const main = getMainFight(ev);
       if(!main){ hero.style.display='none'; return; }
-      const days=ev.isoDate?daysUntil(ev.isoDate):null;
-      const isToday=days!==null&&days<=0;
-      const badgeText=isToday?`Tonight · ${ev.type==='PPV'?'PPV':'UFC Fight Night'}`
-        :days===1?`Tomorrow · ${ev.type==='PPV'?'PPV':'UFC Fight Night'}`
-        :`${days}D Away · ${ev.type==='PPV'?'PPV':'UFC Fight Night'}`;
-      const isPPV=ev.type==='PPV';
-      const accentColor=isPPV?'#c8a84b':'#00e5ff';
-      const ctaClass=isPPV?'cta-results':'cta-picks';
-      const nameA=main.a.split(' ').pop().toUpperCase();
-      const nameB=main.b.split(' ').pop().toUpperCase();
-      hero.className='ev-hero';
-      hero.style.display='';
-      hero.innerHTML=`
-        ${ev.poster?`<div class="ev-hero-bg" style="background-image:url('${ev.poster}')"></div>`:'<div class="ev-hero-bg" style="background:linear-gradient(135deg,#0d0d14,#080810)"></div>'}
+
+      const isPPV = ev.type === 'PPV';
+      const days  = ev.isoDate ? daysUntil(ev.isoDate) : null;
+      const eventId = encodeURIComponent(ev.id);
+      const nameA = main.a.split(' ').pop().toUpperCase();
+      const nameB = main.b.split(' ').pop().toUpperCase();
+      const meta  = [main.weight, main.rounds, ev.venue || (ev.location?ev.location.split(',')[0]:'')].filter(Boolean).join(' · ');
+
+      let badge, buttons;
+
+      if(mode === 'results'){
+        badge = `RESULTS IN · ${isPPV?'PPV':'UFC FIGHT NIGHT'}`;
+        const reviewBtn = `<a class="ev-hero-cta cta-results" href="event-review.html?id=${eventId}">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><rect x="3" y="3" width="18" height="18" rx="3"/></svg>
+          Review Card
+        </a>`;
+        const picksBtn = hasPicks ? `<a class="ev-hero-cta cta-picks" href="picks.html?id=${eventId}">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+          My Picks
+        </a>` : '';
+        buttons = `<div class="ev-hero-btns">${picksBtn}${reviewBtn}</div>`;
+      } else if(mode === 'today'){
+        badge = `TONIGHT · ${isPPV?'PPV':'LIVE EVENT'}`;
+        buttons = `<a class="ev-hero-cta cta-live" href="https://plus.espn.com/" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>
+          Watch Live
+        </a>`;
+      } else {
+        const dLabel = days===0?'TODAY':days===1?'TOMORROW':`${days}D AWAY`;
+        badge = `${dLabel} · ${isPPV?'PPV':'UFC FIGHT NIGHT'}`;
+        buttons = `<a class="ev-hero-cta cta-picks" href="picks.html?id=${eventId}">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+          Make Your Picks
+        </a>`;
+      }
+
+      hero.className = 'ev-hero';
+      hero.style.display = '';
+      hero.innerHTML = `
+        ${ev.poster ? `<div class="ev-hero-bg" style="background-image:url('${ev.poster}')"></div>`
+                    : '<div class="ev-hero-bg"></div>'}
         <div class="ev-hero-fighters">
-          ${main.imgA?`<img class="ev-hero-fighter ev-hero-fighter-a" src="${main.imgA}" alt="${esc(main.a)}" onerror="this.style.display='none'">`:''}
-          ${main.imgB?`<img class="ev-hero-fighter ev-hero-fighter-b" src="${main.imgB}" alt="${esc(main.b)}" onerror="this.style.display='none'">`:''}
+          ${main.imgA ? `<img class="ev-hero-fighter ev-hero-fighter-a" src="${main.imgA}" alt="${esc(main.a)}" onerror="this.style.display='none'">` : ''}
+          ${main.imgB ? `<img class="ev-hero-fighter ev-hero-fighter-b" src="${main.imgB}" alt="${esc(main.b)}" onerror="this.style.display='none'">` : ''}
         </div>
         <div class="ev-hero-vs">VS</div>
         <div class="ev-hero-content">
-          <div class="ev-hero-badge">${esc(badgeText)}</div>
+          <div class="ev-hero-badge">${esc(badge)}</div>
           <div class="ev-hero-matchup">${nameA} <span>vs</span> ${nameB}</div>
-          <div class="ev-hero-meta">${esc(main.weight||'')}${main.rounds?' · '+main.rounds:''}${ev.venue?' · '+ev.venue:''}${ev.location?' · '+ev.location.split(',')[0]:''}</div>
-          <a id="evHeroCta" class="ev-hero-cta ${ctaClass}" href="picks.html?id=${encodeURIComponent(ev.id)}">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
-            Make Your Picks
-          </a>
+          <div class="ev-hero-meta">${esc(meta)}</div>
+          ${buttons}
         </div>`;
+    }
+
+    async function buildFeaturedHero(all){
+      const hero = document.getElementById('evFeaturedHero');
+      const resolved = resolveHeroEvent(all);
+      if(!resolved){ if(hero) hero.style.display='none'; return; }
+      const { ev, mode } = resolved;
+
+      // Render immediately without picks check (fast)
+      renderHero(ev, mode, false);
+
+      // Then async-check picks and re-render if results mode
+      if(mode === 'results'){
+        const hasPicks = await userHasPicks(ev.id);
+        if(hasPicks) renderHero(ev, mode, true);
+      }
     }
 
     /* ── LOAD ── */
@@ -1792,7 +1874,7 @@
         const list=document.getElementById('listAll');
         list.innerHTML='';
         upcoming.forEach(e=>{ const c=buildCard(e); if(c) list.appendChild(c); });
-        buildFeaturedHero(upcoming[0]);
+        buildFeaturedHero(all);
         document.getElementById('evCount').textContent=`${upcoming.length} event${upcoming.length!==1?'s':''}`;
 
         if (!_eventsLoaded) {
