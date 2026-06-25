@@ -421,30 +421,43 @@ function paintNews(articles, container, list) {
 
 // ── Search ────────────────────────────────────
 // ── Reddit r/ufc Trending ─────────────────────
+// Fetches directly from Reddit's browser CORS API (no bot/proxy needed)
 async function renderReddit() {
   const section = document.getElementById('redditSection');
   const container = document.getElementById('redditPosts');
   if (!section || !container) return;
   try {
-    const posts = await fetch('/data/reddit.json?_=' + Date.now(), { cache: 'no-store' }).then(r => r.ok ? r.json() : null);
-    if (!posts?.length) return;
+    const res = await fetch('https://www.reddit.com/r/ufc/hot.json?limit=15', {
+      headers: { 'Accept': 'application/json' },
+      signal: AbortSignal.timeout(8000),
+    });
+    if (!res.ok) return;
+    const data = await res.json();
+    const posts = (data?.data?.children || [])
+      .filter(c => c.kind === 't3' && !c.data.stickied && !c.data.pinned)
+      .slice(0, 8)
+      .map(c => ({
+        title:    c.data.title,
+        url:      `https://reddit.com${c.data.permalink}`,
+        score:    c.data.score,
+        comments: c.data.num_comments,
+        flair:    c.data.link_flair_text || '',
+      }));
+    if (!posts.length) return;
 
     const flairColors = {
-      'Discussion': '#00e5ff',
-      'News': '#f59e0b',
-      'Video': '#ef4444',
-      'Meme': '#a855f7',
-      'Highlight': '#22c55e',
+      'Discussion': '#00e5ff', 'News': '#f59e0b', 'Video': '#ef4444',
+      'Meme': '#a855f7', 'Highlight': '#22c55e', 'Ranking': '#f59e0b',
     };
 
     container.innerHTML = posts.map(p => {
       const title = p.title.length > 85 ? p.title.slice(0, 82) + '…' : p.title;
       const flairColor = (p.flair && flairColors[p.flair]) || 'rgba(255,255,255,0.25)';
-      const flairHtml = p.flair ? `<span class="reddit-flair" style="border-color:${flairColor};color:${flairColor}">${p.flair}</span>` : '';
+      const flairHtml = p.flair ? `<span class="reddit-flair" style="border-color:${flairColor};color:${flairColor}">${esc(p.flair)}</span>` : '';
       const score = p.score >= 1000 ? `${(p.score / 1000).toFixed(1)}k` : p.score;
       return `
         <a class="reddit-post" href="${p.url}" target="_blank" rel="noopener noreferrer">
-          <div class="reddit-post-title">${title}</div>
+          <div class="reddit-post-title">${esc(title)}</div>
           <div class="reddit-post-meta">
             ${flairHtml}
             <span class="reddit-post-stat">▲ ${score}</span>

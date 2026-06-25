@@ -18,6 +18,9 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Install dependencies (Puppeteer)
+        run: npm install
+
       - name: Run fighter stats sync
         run: node scripts/fighter-stats-sync.js
 

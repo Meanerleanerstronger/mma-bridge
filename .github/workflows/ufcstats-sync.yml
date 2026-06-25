@@ -21,6 +21,9 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Install dependencies (Puppeteer)
+        run: npm install
+
       - name: Run ufcstats sync
         run: node scripts/ufcstats-sync.js
 
