@@ -129,9 +129,10 @@ function formatOdds(n) {
       </div>`).join('')}
   </div>`;
 
+  const _cv = Math.floor(Date.now() / 3600000); // hourly cache — not every load
   const [eventsData, fightersData, user] = await Promise.all([
-    fetch('./events.json?v=' + Date.now()).then(r => r.ok ? r.json() : []).catch(() => []),
-    fetch('./data/fighters.json?v=' + Date.now()).then(r => r.ok ? r.json() : []).catch(() => []),
+    fetch(`./events.json?v=${_cv}`).then(r => r.ok ? r.json() : []).catch(() => []),
+    fetch(`./data/fighters.json?v=${_cv}`).then(r => r.ok ? r.json() : []).catch(() => []),
     getAuthUser(),
   ]);
 
@@ -505,7 +506,34 @@ function formatOdds(n) {
     } catch {}
   }
 
-  await Promise.all([loadChallenge(), loadEventExtras(), loadCommunityPicks(), loadGroupContext(), prefetchNextEvent(), loadCareerStats(), loadOdds(eventId)]);
+  // Fast Supabase calls — block render on these (< 500ms each)
+  await Promise.all([loadChallenge(), loadCommunityPicks(), loadGroupContext(), loadCareerStats()]);
+
+  // Slow Render-backend calls — fire after render so page is instant
+  loadEventExtras().then(() => updateHypeWidget()).catch(() => {});
+  loadOdds(eventId).then(() => {
+    // Patch odds into already-rendered cards without full re-render
+    document.querySelectorAll('.pk-fight[data-key]').forEach(card => {
+      const key = card.dataset.key;
+      const fdata = getFightData(key);
+      if (!fdata || !odds) return;
+      const aFav = odds.odds_a < 0;
+      if (!card.querySelector('.fc-odds-col-a')) {
+        const matchup = card.querySelector('.fc-matchup');
+        if (!matchup) return;
+        const oa = document.createElement('div');
+        oa.className = 'fc-odds-col fc-odds-col-a';
+        oa.innerHTML = `<span class="fc-odds-num${aFav ? ' fc-fav' : ' fc-dog'}">${formatOdds(odds.odds_a)}</span>`;
+        const ob = document.createElement('div');
+        ob.className = 'fc-odds-col fc-odds-col-b';
+        ob.innerHTML = `<span class="fc-odds-num${!aFav ? ' fc-fav' : ' fc-dog'}">${formatOdds(odds.odds_b)}</span>`;
+        matchup.prepend(oa);
+        matchup.append(ob);
+        matchup.classList.add('fc-matchup-odds');
+      }
+    });
+  }).catch(() => {});
+  prefetchNextEvent().catch(() => {});
   loadFollowFeed();
 
   // ── Get fight data from key ───────────────────
@@ -1110,7 +1138,7 @@ function formatOdds(n) {
           <div class="${sideACls}" data-key="${esc(key)}" data-pick="${esc(f.a)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
             ${photoA}
             <div class="fc-info">
-              <div class="fc-name">${esc(f.a)}<button class="fc-info-btn" data-fm="${esc(f.a)}" title="View profile" onclick="event.stopPropagation();window.openFighterModal&&window.openFighterModal(this.dataset.fm)">ⓘ</button></div>
+              <div class="fc-name"><a class="fc-fighter-link" href="fighter.html?name=${encodeURIComponent(f.a)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${esc(f.a)}</a></div>
               ${recA ? `<div class="fc-sub-row"><span class="fc-record">${esc(recA)}</span></div>` : ''}
               ${commLabelA}
               ${groupLabelA}
@@ -1123,7 +1151,7 @@ function formatOdds(n) {
           </div>
           <div class="${sideBCls}" data-key="${esc(key)}" data-pick="${esc(f.b)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
             <div class="fc-info fc-info-b">
-              <div class="fc-name"><button class="fc-info-btn" data-fm="${esc(f.b)}" title="View profile" onclick="event.stopPropagation();window.openFighterModal&&window.openFighterModal(this.dataset.fm)">ⓘ</button>${esc(f.b)}</div>
+              <div class="fc-name"><a class="fc-fighter-link" href="fighter.html?name=${encodeURIComponent(f.b)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${esc(f.b)}</a></div>
               ${recB ? `<div class="fc-sub-row fc-sub-row-b"><span class="fc-record">${esc(recB)}</span></div>` : ''}
               ${commLabelB}
               ${groupLabelB}

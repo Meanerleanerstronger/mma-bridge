@@ -80,8 +80,16 @@
     <div class="nav-auth-mobile"></div>
   </div>
 
+  <!-- Back nav -->
+  <div class="fp-back-nav">
+    <button class="fp-back-btn" onclick="history.length>1?history.back():(window.location='index.html')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Back
+    </button>
+  </div>
+
   <!-- FIGHTER PROFILE (rendered by fighter.js) -->
-  <div id="fp-root"></div>
+  <div id="fp-root"><div class="fp-loading"><div class="fp-loading-bar"></div></div></div>
 
   <script>
     window.addEventListener('scroll', () => {

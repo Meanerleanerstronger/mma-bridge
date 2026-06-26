@@ -522,25 +522,7 @@
 
   /* ── Public API ──────────────────────────────────────── */
   window.openFighterModal = function (name) {
-    buildSkeleton();
-    const overlay = document.getElementById('fm-overlay');
-    const content = document.getElementById('fm-content');
-
-    getFighters().then(() => {
-      const f = findFighter(name);
-      if (!f) {
-        content.innerHTML = `<div class="fm-empty">No profile found for "${esc(name)}"</div>`;
-      } else {
-        // Preload photo before setting HTML so it's likely cached when fm-hero renders
-        if (f.img) preloadPhoto(f.img);
-        content.innerHTML = renderFighter(f);
-      }
-    });
-
-    // Show modal immediately (with loading state) — don't wait for fighters.json
-    if (!_fighters) content.innerHTML = '<div class="fm-loading">Loading…</div>';
-    overlay.classList.add('fm-open');
-    document.body.classList.add('fm-lock');
+    window.open('fighter.html?name=' + encodeURIComponent(name), '_blank', 'noopener,noreferrer');
   };
 
   /* Kick everything off on page load */
