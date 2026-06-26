@@ -11030,7 +11030,7 @@
     "venue": "Paycom Center",
     "poster": "",
     "status": "upcoming",
-    "start_time": null,
+    "start_time": "2026-07-19T00:00:00.000Z",
     "mainCard": [
       {
         "a": "Dricus du Plessis",
@@ -11049,7 +11049,7 @@
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "comain",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/CANNONIER_JARED_L_08-16.png?itok=fI-AmOEF",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-11/DUNCAN_CHRISTIAN_LEROY_L_11-08.png?itok=YYD6jKSM"
@@ -11086,9 +11086,7 @@
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/TAVARES_BRAD_L_03-14.png?itok=b95gOYRd",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/BARRIAULT_MARC-ANDRE_L_05-10.png?itok=kJq5jhiN"
-      }
-    ],
-    "prelims": [
+      },
       {
         "a": "Chase Hooper",
         "b": "Mitch Ramirez",
@@ -11101,15 +11099,83 @@
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/RAMIREZ_MITCH_L_07-12.png?itok=yQWmeGob"
       },
       {
+        "a": "Tabatha Ricci",
+        "b": "Fatima Kline",
+        "weight": "Women's Strawweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/5/RICCI_TABATHA_L_08-24.png?itok=BqI35p0z",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/KLINE_FATIMA_L_07-12.png?itok=DGxlAmsY"
+      },
+      {
+        "a": "Tommy McMillen",
+        "b": "Alberto Montes",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/MCMILLEN_TOMMY_L_04-04.png?itok=HMdvrI8F",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/MONTES_ALBERTO_R_03-07.png?itok=XBEBBprq"
+      }
+    ],
+    "prelims": [
+      {
         "a": "Veronica Hardy",
         "b": "Dione Barbosa",
         "weight": "W Flyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/HARDY_VERONICA_L_10-04.png?itok=qkwM9Ng_",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/BARBOSA_DIONE_L_04-04.png?itok=U7l8E953"
+      },
+      {
+        "a": "Austin Bashi",
+        "b": "Jose Miguel Delgado",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Allen Frye Jr.",
+        "b": "Alvin Hines",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Levi Rodrigues Jr.",
+        "b": "Felipe Franco",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Alden Coria",
+        "b": "Stewart Nicoll",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/CORIA_ALDEN_L_02-21.png?itok=h0Ke1Q2E",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-08/NICOLL_STEWART_L_08-17.png?itok=2fIVytXS"
       }
     ],
     "earlyPrelims": []
