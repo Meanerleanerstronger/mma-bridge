@@ -7230,39 +7230,38 @@ body.light-mode .sf-legal { color: rgba(0,0,0,0.25); }
 /* ── How It Works modal content ── */
 .pk-hiw-modal { max-width: 400px !important; }
 .pk-hiw-body { padding-top: 8px !important; }
-.pk-hiw-rows { display: flex; flex-direction: column; gap: 0; }
+.pk-hiw-rows { display: flex; flex-direction: column; }
 .pk-hiw-row {
-  display: flex; align-items: center; gap: 12px;
-  padding: 11px 0;
+  display: flex; align-items: center; gap: 14px;
+  padding: 13px 0;
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 .pk-hiw-row:last-child { border-bottom: none; }
-.pk-hiw-icon {
-  width: 30px; height: 30px; border-radius: 8px; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
+.pk-hiw-num {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.55rem; font-weight: 800;
+  letter-spacing: 0.1em; color: rgba(255,255,255,0.18);
+  flex-shrink: 0; width: 22px; text-align: center;
 }
-.pk-hiw-cyan  { background: rgba(0,229,255,0.1);  color: #00e5ff; }
-.pk-hiw-amber { background: rgba(255,170,0,0.1);  color: #ffaa00; }
-.pk-hiw-red   { background: rgba(255,60,60,0.1);  color: #ff6060; }
-.pk-hiw-gold  { background: rgba(200,150,12,0.15); color: #c8960c; }
-.pk-hiw-label { font-family: 'Montserrat', sans-serif; font-size: 0.82rem; font-weight: 700; color: rgba(255,255,255,0.85); }
-.pk-hiw-sub   { font-family: 'Inter', sans-serif; font-size: 0.72rem; color: rgba(255,255,255,0.35); margin-top: 2px; }
+.pk-hiw-num-dd { color: #00e5ff; opacity: 0.6; }
+.pk-hiw-label { font-family: 'Montserrat', sans-serif; font-size: 0.82rem; font-weight: 700; color: rgba(255,255,255,0.82); }
+.pk-hiw-sub   { font-family: 'Inter', sans-serif; font-size: 0.7rem; color: rgba(255,255,255,0.3); margin-top: 2px; }
 .pk-hiw-pts {
   margin-left: auto; flex-shrink: 0;
   font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 900;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.4);
 }
-.pk-hiw-pts-gold { color: #c8960c; }
-.pk-hiw-dd-row { background: rgba(200,150,12,0.04); border-radius: 8px; padding: 11px 8px; margin: 4px -8px; border-bottom: none !important; }
-.pk-hiw-divider { height: 1px; background: rgba(255,255,255,0.07); margin: 4px 0; }
+.pk-hiw-pts-gold { color: #00e5ff; opacity: 0.7; }
+.pk-hiw-dd-row { border-bottom: none !important; }
+.pk-hiw-divider { height: 1px; background: rgba(255,255,255,0.06); margin: 2px 0; }
 .pk-hiw-max {
-  margin-top: 14px; padding: 10px 14px;
-  background: rgba(0,229,255,0.04); border-radius: 8px;
-  border: 1px solid rgba(0,229,255,0.08);
+  margin-top: 16px; padding: 11px 14px;
+  background: rgba(255,255,255,0.03); border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.07);
   font-family: 'Inter', sans-serif; font-size: 0.72rem;
-  color: rgba(255,255,255,0.35); text-align: center; line-height: 1.6;
+  color: rgba(255,255,255,0.3); text-align: center; line-height: 1.6;
 }
-.pk-hiw-max strong { color: rgba(255,255,255,0.65); }
+.pk-hiw-max strong { color: rgba(255,255,255,0.6); }
 body.light-mode .pk-hiw-btn { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.12); color: rgba(0,0,0,0.4); }
 body.light-mode .pk-hiw-btn:hover { background: rgba(0,0,0,0.09); color: rgba(0,0,0,0.7); }
 body.light-mode .pk-hiw-label { color: rgba(0,0,0,0.8); }
@@ -7750,13 +7749,15 @@ button:focus:not(:focus-visible), a:focus:not(:focus-visible) { outline: none; }
   color: rgba(255,255,255,0.28); white-space: nowrap;
 }
 .fc-hov-link {
-  display: block; text-align: center; margin-top: 2px;
-  font-family: 'Inter', sans-serif; font-size: 0.65rem; font-weight: 600;
-  color: rgba(0,229,255,0.6); text-decoration: none;
-  border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;
-  transition: color 0.1s;
+  display: block; margin-top: 8px; padding: 6px 0;
+  font-family: 'Montserrat', sans-serif; font-size: 0.58rem; font-weight: 800;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: #00e5ff; text-decoration: none; text-align: center;
+  background: rgba(0,229,255,0.06); border-radius: 4px;
+  border: 1px solid rgba(0,229,255,0.12);
+  transition: background 0.12s;
 }
-.fc-hov-link:hover { color: #00e5ff; }
+.fc-hov-link:hover { background: rgba(0,229,255,0.1); }
 
 /* Crowd fave / underdog badges */
 .pk-crowd-fave, .pk-crowd-dog {

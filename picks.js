@@ -136,21 +136,14 @@ function formatOdds(n) {
     getAuthUser(),
   ]);
 
-  // Merge admin-entered fight results from Supabase into events data
-  if (sb) {
-    try {
-      const { data: dbResults } = await sb.from('fight_results')
-        .select('event_id, fight_key, winner, method, fotn');
+  // Merge fight results + load user picks in parallel (both need only auth/eventId)
+  await Promise.all([
+    sb ? sb.from('fight_results').select('event_id, fight_key, winner, method, fotn').then(({ data: dbResults }) => {
       (dbResults || []).forEach(r => {
         const ev = eventsData.find(e => e.id === r.event_id);
         if (!ev) return;
-        const sections = [
-          { key: 'main',    fights: ev.mainCard     || [] },
-          { key: 'prelims', fights: ev.prelims      || [] },
-          { key: 'early',   fights: ev.earlyPrelims || [] },
-        ];
-        sections.forEach(({ key, fights }) => {
-          fights.forEach((f, i) => {
+        [['main', ev.mainCard], ['prelims', ev.prelims], ['early', ev.earlyPrelims]].forEach(([key, fights]) => {
+          (fights || []).forEach((f, i) => {
             if (`${key}-${i}` === r.fight_key) {
               if (r.winner) f.winner = r.winner;
               if (r.method) f.method = r.method;
@@ -159,8 +152,9 @@ function formatOdds(n) {
         });
         if (r.fight_key === '__fotn__' && r.fotn) ev.fotn = r.fotn;
       });
-    } catch {}
-  }
+    }).catch(() => {}) : Promise.resolve(),
+    loadPicks(),
+  ]);
 
   const fighterDB = {};
   (Array.isArray(fightersData) ? fightersData : []).forEach(f => {
@@ -327,8 +321,6 @@ function formatOdds(n) {
       }
     } catch {}
   }
-
-  await loadPicks();
 
   // ── New results notification ──────────────────
   // Show a banner the first time a user sees results for an event they picked
@@ -1909,50 +1901,40 @@ function formatOdds(n) {
           <div class="lb-modal-body pk-hiw-body">
             <div class="pk-hiw-rows">
               <div class="pk-hiw-row">
-                <span class="pk-hiw-icon pk-hiw-cyan">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-                </span>
+                <div class="pk-hiw-num">01</div>
                 <div>
                   <div class="pk-hiw-label">Pick the Winner</div>
-                  <div class="pk-hiw-sub">Correct fighter — +10 pts</div>
+                  <div class="pk-hiw-sub">Correct fighter</div>
                 </div>
                 <span class="pk-hiw-pts">+10</span>
               </div>
               <div class="pk-hiw-row">
-                <span class="pk-hiw-icon pk-hiw-amber">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-                </span>
+                <div class="pk-hiw-num">02</div>
                 <div>
                   <div class="pk-hiw-label">Method Bonus</div>
-                  <div class="pk-hiw-sub">KO · Sub · Decision — +5 pts</div>
+                  <div class="pk-hiw-sub">KO · Sub · Decision</div>
                 </div>
                 <span class="pk-hiw-pts">+5</span>
               </div>
               <div class="pk-hiw-row">
-                <span class="pk-hiw-icon pk-hiw-amber">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2v20M2 12h20"/></svg>
-                </span>
+                <div class="pk-hiw-num">03</div>
                 <div>
                   <div class="pk-hiw-label">Round Bonus</div>
-                  <div class="pk-hiw-sub">Exact round (needs correct method) — +5 pts</div>
+                  <div class="pk-hiw-sub">Exact round — needs correct method</div>
                 </div>
                 <span class="pk-hiw-pts">+5</span>
               </div>
               <div class="pk-hiw-row">
-                <span class="pk-hiw-icon pk-hiw-red">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                </span>
+                <div class="pk-hiw-num">04</div>
                 <div>
                   <div class="pk-hiw-label">Fight of the Night</div>
-                  <div class="pk-hiw-sub">Pick which fight earns FOTN — +15 pts</div>
+                  <div class="pk-hiw-sub">Pick which fight earns FOTN</div>
                 </div>
                 <span class="pk-hiw-pts">+15</span>
               </div>
               <div class="pk-hiw-divider"></div>
               <div class="pk-hiw-row pk-hiw-dd-row">
-                <span class="pk-hiw-icon pk-hiw-gold">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                </span>
+                <div class="pk-hiw-num pk-hiw-num-dd">DD</div>
                 <div>
                   <div class="pk-hiw-label">Double Down</div>
                   <div class="pk-hiw-sub">One per event · correct = ×2 pts · wrong = −10 pts</div>
@@ -2020,7 +2002,7 @@ function formatOdds(n) {
         `<div class="fc-hov-name">${esc(fd.name)}</div>` +
         (rec ? `<div class="fc-hov-rec">${rec}</div>` : '') +
         (rows ? `<div class="fc-hov-fights">${rows}</div>` : '') +
-        (fd.id ? `<a class="fc-hov-link" href="fighter.html?id=${esc(fd.id)}" onclick="event.stopPropagation()">View Profile →</a>` : '');
+        (fd.name ? `<a class="fc-hov-link" href="fighter.html?name=${encodeURIComponent(fd.name)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Open Profile</a>` : '');
 
       hc.classList.add('fc-hov-on');
 
