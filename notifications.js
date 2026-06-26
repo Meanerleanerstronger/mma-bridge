@@ -597,5 +597,40 @@
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') MMANotif.closeModal();
     });
+
+    // ── Self-contained event poller ──────────────────────────────────────────
+    // Fetches events.json independently so card-change detection runs even
+    // when the page has been open for hours, not just on initial load.
+    async function pollEvents() {
+      try {
+        const res = await fetch('data/events.json?_=' + Date.now(), { cache: 'no-store' });
+        if (!res.ok) return;
+        const events = await res.json();
+        MMANotif.checkEvents(events);
+      } catch {}
+    }
+
+    // Poll every 5 minutes while the tab is open
+    setInterval(pollEvents, 5 * 60 * 1000);
+
+    // Re-poll immediately when user returns to the tab (e.g. alt-tabs back)
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') pollEvents();
+    });
   });
+
+  // ── Service worker: periodic background check ────────────────────────────
+  // SW sends a 'CHECK_EVENTS' message to all open clients every 10 minutes.
+  // The client responds by re-running pollEvents (works even if setInterval
+  // was throttled by the browser for inactive tabs).
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.addEventListener('message', event => {
+      if (event.data?.type === 'CHECK_EVENTS') {
+        fetch('data/events.json?_=' + Date.now(), { cache: 'no-store' })
+          .then(r => r.json())
+          .then(events => MMANotif.checkEvents(events))
+          .catch(() => {});
+      }
+    });
+  }
 })();

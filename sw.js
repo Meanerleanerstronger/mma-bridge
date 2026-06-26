@@ -1,6 +1,6 @@
 // MMA Bridge Service Worker — Push + Offline Cache
 // v3 — JS/CSS always network-fresh, only images cached
-const CACHE_NAME = 'mma-bridge-v5';
+const CACHE_NAME = 'mma-bridge-v6';
 const STATIC_ASSETS = [
   '/mma-bridge/',
   '/mma-bridge/index.html',
@@ -76,6 +76,14 @@ self.addEventListener('push', event => {
     })
   );
 });
+
+// ── Periodic card-change ping to all open clients (every 10 min) ──
+function pingClients() {
+  self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(clients => {
+    clients.forEach(c => c.postMessage({ type: 'CHECK_EVENTS' }));
+  });
+}
+setInterval(pingClients, 10 * 60 * 1000);
 
 // ── Notification click handler ──
 self.addEventListener('notificationclick', event => {
