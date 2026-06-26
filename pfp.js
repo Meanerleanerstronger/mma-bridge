@@ -264,58 +264,43 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (showingWomen) return;
       showingWomen = true;
       buildWomenGrid();
-      toggleBtn.querySelector('.pfp-toggle-men').classList.remove('active');
-      toggleBtn.querySelector('.pfp-toggle-women').classList.add('active');
-      listTitle.textContent = "Women's Pound-for-Pound";
-      // Dissolve transition
-      menSection.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-      menSection.style.opacity = '0';
-      menSection.style.transform = 'translateY(-12px)';
-      setTimeout(() => {
-        menSection.style.display = 'none';
-        menSection.style.transition = '';
-        womenSection.style.display = '';
+      if (listTitle) listTitle.textContent = "Women's Pound-for-Pound";
+      // Fade in women's section (tab handles display toggling)
+      requestAnimationFrame(() => {
         womenSection.style.opacity = '0';
         womenSection.style.transform = 'translateY(14px)';
-        requestAnimationFrame(() => requestAnimationFrame(() => {
-          womenSection.style.transition = 'opacity 0.42s ease, transform 0.42s ease';
+        requestAnimationFrame(() => {
+          womenSection.style.transition = 'opacity 0.38s ease, transform 0.38s ease';
           womenSection.style.opacity = '1';
           womenSection.style.transform = 'translateY(0)';
-        }));
-        attachRowClicks();
-      }, 310);
+          setTimeout(() => { womenSection.style.transition = ''; }, 400);
+        });
+      });
+      attachRowClicks();
       if (womenHero) setHero(womenHero);
     }
 
     function switchToMen() {
       if (!showingWomen) return;
       showingWomen = false;
-      toggleBtn.querySelector('.pfp-toggle-men').classList.add('active');
-      toggleBtn.querySelector('.pfp-toggle-women').classList.remove('active');
-      listTitle.textContent = "Men's Pound-for-Pound";
-      womenSection.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-      womenSection.style.opacity = '0';
-      womenSection.style.transform = 'translateY(-12px)';
-      setTimeout(() => {
-        womenSection.style.display = 'none';
-        womenSection.style.transition = '';
-        menSection.style.display = '';
+      if (listTitle) listTitle.textContent = "Men's Pound-for-Pound";
+      requestAnimationFrame(() => {
         menSection.style.opacity = '0';
         menSection.style.transform = 'translateY(14px)';
-        requestAnimationFrame(() => requestAnimationFrame(() => {
-          menSection.style.transition = 'opacity 0.42s ease, transform 0.42s ease';
+        requestAnimationFrame(() => {
+          menSection.style.transition = 'opacity 0.38s ease, transform 0.38s ease';
           menSection.style.opacity = '1';
           menSection.style.transform = 'translateY(0)';
-        }));
-        attachRowClicks();
-      }, 310);
+          setTimeout(() => { menSection.style.transition = ''; }, 400);
+        });
+      });
+      attachRowClicks();
       setHero(menHero);
     }
 
-    if (toggleBtn) {
-      toggleBtn.querySelector('.pfp-toggle-men').addEventListener('click', switchToMen);
-      toggleBtn.querySelector('.pfp-toggle-women').addEventListener('click', switchToWomen);
-    }
+    // Expose for tab system
+    window.pfpSwitchToMen   = switchToMen;
+    window.pfpSwitchToWomen = switchToWomen;
 
     function attachRowClicks() {
       document.querySelectorAll("[data-fighter]").forEach(card => {

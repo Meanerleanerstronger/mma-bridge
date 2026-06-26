@@ -12,8 +12,8 @@
   <script src="theme.js?v=2.7"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>UFC Pound-for-Pound Rankings 2025 — Live P4P List | MMA Bridge</title>
-  <meta name="description" content="Live UFC pound-for-pound rankings with fighter records, recent form, and community ratings. Updated after every event.">
+  <title>UFC Rankings — P4P, Men's & Women's Divisional | MMA Bridge</title>
+  <meta name="description" content="UFC pound-for-pound and divisional rankings — men's P4P, women's P4P, and all weight class contenders. Updated weekly.">
   <link rel="canonical" href="https://mmabridge.com/pfp.html">
   <meta property="og:title" content="UFC Pound-for-Pound Rankings 2025 — Live P4P List | MMA Bridge">
   <meta property="og:description" content="Live UFC pound-for-pound rankings with fighter records, recent form, and community ratings. Updated after every event.">
@@ -166,43 +166,54 @@
       border-bottom: 1px solid rgba(255,255,255,0.06);
     }
 
-    /* Gender toggle */
-    .pfp-gender-toggle {
-      display: inline-flex;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.18);
-      border-radius: 999px;
-      padding: 4px;
+    /* ── Rankings tabs ── */
+    .rnk-tabs {
+      display: flex;
+      gap: 4px;
       margin-bottom: 28px;
-      gap: 3px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 4px;
+      width: fit-content;
     }
-    .pfp-gender-toggle button {
+    .rnk-tab {
       font-family: 'Montserrat', sans-serif;
       font-size: 0.68rem;
       font-weight: 800;
-      letter-spacing: 0.13em;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      padding: 9px 26px;
-      border-radius: 999px;
+      padding: 9px 22px;
+      border-radius: 8px;
       border: none;
       background: transparent;
-      color: rgba(255,255,255,0.5);
+      color: rgba(255,255,255,0.4);
       cursor: pointer;
-      transition: background 0.22s ease, color 0.22s ease, box-shadow 0.22s ease;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      white-space: nowrap;
     }
-    .pfp-gender-toggle button.active {
-      background: rgba(255,255,255,0.15);
-      color: #fff;
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.12) inset;
+    .rnk-tab.active {
+      background: rgba(200,168,75,0.15);
+      color: #e8c96a;
+      box-shadow: 0 0 0 1px rgba(200,168,75,0.25) inset;
     }
-    .pfp-toggle-women.active {
-      background: rgba(210,100,190,0.28) !important;
-      color: #f0b4e8 !important;
-      box-shadow: 0 0 12px rgba(210,100,190,0.25) !important;
+    .rnk-tab[data-tab="womens-p4p"].active {
+      background: rgba(210,100,190,0.18);
+      color: #f0b4e8;
+      box-shadow: 0 0 0 1px rgba(210,100,190,0.3) inset;
     }
-    body.light-mode .pfp-gender-toggle { background:rgba(0,0,0,0.06); border-color:rgba(0,0,0,0.15); }
-    body.light-mode .pfp-gender-toggle button { color:rgba(0,0,0,0.45); }
-    body.light-mode .pfp-gender-toggle button.active { background:rgba(0,0,0,0.12); color:rgba(0,0,0,0.9); box-shadow: none; }
+    .rnk-tab[data-tab="divisional"].active {
+      background: rgba(0,229,255,0.1);
+      color: #00e5ff;
+      box-shadow: 0 0 0 1px rgba(0,229,255,0.2) inset;
+    }
+    body.light-mode .rnk-tabs { background:rgba(0,0,0,0.04); border-color:rgba(0,0,0,0.1); }
+    body.light-mode .rnk-tab { color:rgba(0,0,0,0.4); }
+    body.light-mode .rnk-tab.active { color:#7a5a00; background:rgba(200,168,75,0.12); }
+    @media(max-width:480px) {
+      .rnk-tabs { width: 100%; }
+      .rnk-tab { flex: 1; padding: 9px 8px; font-size: 0.6rem; letter-spacing: 0.08em; }
+    }
 
     .pfp-list-title {
       font-family: 'Montserrat', sans-serif;
@@ -462,7 +473,7 @@
       <ul class="nav-links">
         <li><a href="index.html">Trending</a></li>
         <li><a href="events.html">Upcoming Events</a></li>
-        <li><a href="pfp.html" class="active">P4P</a></li>
+        <li><a href="pfp.html" class="active">Rankings</a></li>
         <li><a href="reviews.html">Review</a></li>
         <li><a href="lucas.html">Lucas Bot</a></li>
         <li><a href="leaderboard.html">Leaderboard</a></li><li><a href="about.html">About</a></li><li>
@@ -487,7 +498,7 @@
     <nav class="nav-mobile-links">
       <a href="index.html">Trending</a>
       <a href="events.html">Upcoming Events</a>
-      <a href="pfp.html" class="active">P4P</a>
+      <a href="pfp.html" class="active">Rankings</a>
       <a href="reviews.html">Review</a>
       <a href="lucas.html">Lucas Bot</a>
       <a href="leaderboard.html">Leaderboard</a>
@@ -520,18 +531,19 @@
   <!-- Ranked list -->
   <div class="pfp-list-wrap">
     <div class="pfp-list-header">
-      <span class="pfp-list-title" id="pfpListTitle">Men's Pound-for-Pound</span>
-      <span class="pfp-list-sub">Top 15 · June 2026</span>
+      <span class="pfp-list-title" id="pfpListTitle">UFC Rankings</span>
+      <span class="pfp-list-sub">Updated weekly</span>
     </div>
 
-    <!-- Gender toggle -->
-    <div class="pfp-gender-toggle" id="pfpGenderToggle">
-      <button class="pfp-toggle-men active">Men</button>
-      <button class="pfp-toggle-women">Women</button>
+    <!-- Tab nav -->
+    <div class="rnk-tabs" id="rnkTabs">
+      <button class="rnk-tab active" data-tab="mens-p4p">Men's P4P</button>
+      <button class="rnk-tab" data-tab="womens-p4p">Women's P4P</button>
+      <button class="rnk-tab" data-tab="divisional">Divisional</button>
     </div>
 
-    <!-- Men's grid -->
-    <div id="pfpMenSection">
+    <!-- Men's P4P panel -->
+    <div id="pfpMenSection" class="rnk-panel">
     <div class="pfp-grid">
 
       <!-- Left column: #2–8 -->
@@ -683,51 +695,82 @@
     </div><!-- end pfp-grid -->
     </div><!-- end pfpMenSection -->
 
-    <!-- Women's grid (built dynamically by pfp.js) -->
-    <div id="pfpWomenSection" style="display:none;">
+    <!-- Women's P4P panel (built dynamically by pfp.js) -->
+    <div id="pfpWomenSection" class="rnk-panel" style="display:none;">
       <div class="pfp-grid" id="pfpWomenGrid"></div>
     </div>
 
-  <!-- Divisional Rankings -->
-  <div class="div-rankings-wrap" id="divRankingsWrap" style="display:none">
-    <div class="div-rankings-header">
-      <span class="div-rankings-title">Divisional Rankings</span>
-      <span class="div-rankings-sub">Updated weekly via ESPN</span>
+    <!-- Divisional Rankings panel -->
+    <div id="pfpDivisionalSection" class="rnk-panel" style="display:none;">
+      <div id="divRankingsGrid"><div style="color:rgba(255,255,255,0.25);font-size:0.75rem;padding:24px 0;">Loading rankings…</div></div>
     </div>
-    <div class="div-rankings-grid" id="divRankingsGrid"></div>
-  </div>
 
   <script>
   (function() {
+    // ── Tab switching ──────────────────────────────
+    const tabs    = document.querySelectorAll('.rnk-tab');
+    const panels  = {
+      'mens-p4p':   document.getElementById('pfpMenSection'),
+      'womens-p4p': document.getElementById('pfpWomenSection'),
+      'divisional': document.getElementById('pfpDivisionalSection'),
+    };
+    let divLoaded = false;
+
+    function switchTab(tab) {
+      tabs.forEach(t => t.classList.toggle('active', t === tab));
+      const key = tab.dataset.tab;
+      Object.entries(panels).forEach(([k, el]) => { if (el) el.style.display = k === key ? '' : 'none'; });
+      if (key === 'divisional' && !divLoaded) { loadDivRankings(); divLoaded = true; }
+      // Delegate P4P content switching to pfp.js
+      if (key === 'womens-p4p' && window.pfpSwitchToWomen) window.pfpSwitchToWomen();
+      if (key === 'mens-p4p'   && window.pfpSwitchToMen)   window.pfpSwitchToMen();
+    }
+
+    tabs.forEach(t => t.addEventListener('click', () => switchTab(t)));
+
+    // ── Divisional rankings loader ─────────────────
     async function loadDivRankings() {
-      const wrap = document.getElementById('divRankingsWrap');
       const grid = document.getElementById('divRankingsGrid');
-      if (!wrap || !grid) return;
+      if (!grid) return;
       try {
         const divisions = await fetch('/data/rankings.json?_=' + Date.now(), { cache: 'no-store' })
           .then(r => r.ok ? r.json() : null);
-        if (!divisions?.length) return;
+        if (!divisions?.length) { grid.innerHTML = '<div style="color:rgba(255,255,255,0.25);font-size:0.75rem;padding:24px 0;">No rankings data yet.</div>'; return; }
 
-        grid.innerHTML = divisions.map(div => `
-          <details class="div-rank-division">
-            <summary class="div-rank-div-name">${div.division}</summary>
-            <div class="div-rank-list">
-              ${div.fighters.map(f => `
-                <div class="div-rank-row">
-                  <span class="div-rank-num">${f.isChamp ? 'C' : f.rank}</span>
-                  <span class="div-rank-name">${f.name}</span>
-                  <span class="div-rank-rec">${f.record}</span>
-                  ${f.movement > 0 ? '<span class="div-rank-move up">▲</span>'
-                    : f.movement < 0 ? '<span class="div-rank-move down">▼</span>'
-                    : '<span class="div-rank-move">—</span>'}
-                </div>`).join('')}
-            </div>
-          </details>`).join('');
+        // Separate men's and women's divisions
+        const womens = divisions.filter(d => /women/i.test(d.division));
+        const mens   = divisions.filter(d => !/women/i.test(d.division));
 
-        wrap.style.display = '';
-      } catch (e) { /* fail silently */ }
+        function renderGroup(label, divs) {
+          if (!divs.length) return '';
+          return `
+            <div class="div-rank-group-label">${label}</div>
+            ${divs.map(div => `
+              <details class="div-rank-division">
+                <summary class="div-rank-div-name">
+                  <span>${div.division}</span>
+                  ${div.fighters[0]?.isChamp ? `<span class="div-rank-champ-pill">${div.fighters[0].name}</span>` : ''}
+                  <svg class="div-rank-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                </summary>
+                <div class="div-rank-list">
+                  ${div.fighters.map(f => `
+                    <div class="div-rank-row${f.isChamp ? ' div-rank-champ' : ''}">
+                      <span class="div-rank-num">${f.isChamp ? 'C' : f.rank}</span>
+                      <span class="div-rank-name">${f.name}</span>
+                    </div>`).join('')}
+                </div>
+              </details>`).join('')}`;
+        }
+
+        grid.innerHTML = renderGroup('Men\'s Divisions', mens) + renderGroup('Women\'s Divisions', womens);
+      } catch (e) { if (grid) grid.innerHTML = '<div style="color:rgba(255,255,255,0.25);font-size:0.75rem;padding:24px 0;">Failed to load rankings.</div>'; }
     }
-    document.addEventListener('DOMContentLoaded', loadDivRankings);
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // pfp.js still handles women's P4P toggle — wire its init to tab context
+      const menBtn = document.querySelector('.rnk-tab[data-tab="mens-p4p"]');
+      if (menBtn) switchTab(menBtn);
+    });
   })();
   </script>
 
@@ -809,5 +852,29 @@
 <script src="notifications.js?v=2.1"></script>
 <script src="push.js?v=1.1"></script>
 <script src="micro.js?v=1.0"></script>
+
+  <!-- BOTTOM NAV (mobile only) -->
+  <nav class="mobile-bottom-nav" id="mobileBottomNav" aria-label="Main navigation">
+    <a href="index.html" class="mbn-item" data-page="index">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Home</span>
+    </a>
+    <a href="events.html" class="mbn-item" data-page="events">
+      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <span>Events</span>
+    </a>
+    <a href="pfp.html" class="mbn-item active" data-page="pfp">
+      <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <span>Rankings</span>
+    </a>
+    <a href="reviews.html" class="mbn-item" data-page="reviews">
+      <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="12" y2="17"/></svg>
+      <span>Review</span>
+    </a>
+    <a href="leaderboard.html" class="mbn-item" data-page="leaderboard">
+      <svg viewBox="0 0 24 24"><polyline points="18 20 18 10"/><polyline points="12 20 12 4"/><polyline points="6 20 6 14"/></svg>
+      <span>Ranks</span>
+    </a>
+  </nav>
 </body>
 </html>

@@ -12024,3 +12024,43 @@ details[open] .div-rank-div-name::before { transform: rotate(90deg); }
   text-transform: uppercase;
   color: rgba(255,255,255,0.22);
 }
+
+/* ── Divisional rankings — tab panel extras ── */
+#pfpDivisionalSection { padding: 4px 0 32px; }
+.div-rank-group-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.54rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.18);
+  padding: 20px 0 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  margin-bottom: 10px;
+}
+.div-rank-group-label:first-child { padding-top: 0; }
+.div-rank-champ-pill {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: #c8a84b;
+  background: rgba(200,168,75,0.08);
+  border: 1px solid rgba(200,168,75,0.2);
+  border-radius: 20px;
+  padding: 2px 8px;
+  margin-left: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 160px;
+}
+.div-rank-chevron {
+  flex-shrink: 0;
+  color: rgba(255,255,255,0.2);
+  transition: transform 0.2s;
+  margin-left: 4px;
+}
+details[open] .div-rank-chevron { transform: rotate(180deg); }
+.div-rank-div-name::before { display: none; }
+.div-rank-row.div-rank-champ .div-rank-num { color: #c8a84b; }
+.div-rank-row.div-rank-champ .div-rank-name { color: #e8c96a; font-weight: 600; }
