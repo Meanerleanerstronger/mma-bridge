@@ -2587,6 +2587,26 @@ function formatOdds(n) {
   initPkCountdown();
   setupComments();
 
+  // ── Highlight new fight from notification (hla/hlb URL params) ──
+  (function highlightNewFight() {
+    const p = new URLSearchParams(location.search);
+    const hla = p.get('hla'), hlb = p.get('hlb');
+    if (!hla || !hlb) return;
+    setTimeout(() => {
+      const norm = s => s.trim().toLowerCase();
+      const card = [...document.querySelectorAll('.sb-fight[data-key]')].find(el => {
+        const fa = norm(el.querySelector('[data-fa]')?.dataset.fa || '');
+        const fb = norm(el.querySelector('[data-fb]')?.dataset.fb || '');
+        const qa = norm(hla), qb = norm(hlb);
+        return (fa === qa && fb === qb) || (fa === qb && fb === qa);
+      });
+      if (!card) return;
+      card.classList.add('pk-fight-new');
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => card.classList.remove('pk-fight-new'), 9200);
+    }, 600);
+  })();
+
   // Glitch flicker when picks are locked
   if (isLocked) {
     requestAnimationFrame(() => {

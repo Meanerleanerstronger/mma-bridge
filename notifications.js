@@ -233,19 +233,21 @@
               const [oldA, oldB] = replacedFight.split('|');
               const pulledOut = (oldA === a || oldA === b) ? oldB : oldA;
               const replacement = (oldA === a || oldB === b) ? b : a;
+              const hlParam = `&hla=${encodeURIComponent(a)}&hlb=${encodeURIComponent(b)}`;
               arr.unshift({
                 id: notifId, type: 'card_update', read: false,
                 title: `Fighter change on ${ev.name}`,
                 body: `${pulledOut} out — replaced by ${replacement} · ${a} vs ${b}`,
-                href: `events.html?id=${evId}`, eventId: evId,
+                href: `events.html?id=${evId}${hlParam}`, eventId: evId,
                 eventDate: ev.isoDate, timestamp: now.toISOString()
               });
             } else {
+              const hlParam = `&hla=${encodeURIComponent(a)}&hlb=${encodeURIComponent(b)}`;
               arr.unshift({
                 id: notifId, type: 'card_update', read: false,
                 title: `Fight added to ${ev.name}`,
                 body: `${a} vs ${b}${weight ? ' · ' + weight : ''}`,
-                href: `events.html?id=${evId}`, eventId: evId,
+                href: `events.html?id=${evId}${hlParam}`, eventId: evId,
                 eventDate: ev.isoDate, timestamp: now.toISOString()
               });
             }

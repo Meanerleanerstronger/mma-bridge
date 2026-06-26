@@ -435,6 +435,27 @@
     .ov-fight.is-main.ppv-main::before { background:linear-gradient(90deg,rgba(200,168,75,.0),rgba(200,168,75,.07),rgba(200,168,75,.0)); }
     .ov-fight.is-comain  { background:rgba(0,229,255,.01); }
 
+    /* ── New fight highlight (from notification) ── */
+    @keyframes newFightPulse {
+      0%,100% { background:rgba(0,229,255,0.0);  box-shadow:none; }
+      20%,60% { background:rgba(0,229,255,0.10); box-shadow:0 0 0 1px rgba(0,229,255,0.35) inset; }
+    }
+    .ov-fight.fight-new {
+      animation: newFightPulse 1.1s ease 8; /* 8 pulses ≈ 8.8s */
+      border-radius:6px;
+      position:relative;
+    }
+    .ov-fight.fight-new::after {
+      content:'NEW FIGHT';
+      position:absolute; top:50%; right:14px; transform:translateY(-50%);
+      font-family:'Montserrat',sans-serif;
+      font-size:0.48rem; font-weight:800; letter-spacing:0.18em;
+      color:#00e5ff; background:rgba(0,229,255,0.1);
+      border:1px solid rgba(0,229,255,0.3); border-radius:4px;
+      padding:3px 8px; pointer-events:none;
+      animation: newFightPulse 1.1s ease 8;
+    }
+
     /* Fighter names — LARGE, cinematic, glossy */
     .ov-fighter {
       font-family:'Barlow Condensed','Montserrat',sans-serif;
@@ -1695,7 +1716,12 @@
         const p=new URLSearchParams(location.search), id=p.get('id');
         if(id){
           const t=upcoming.find(e=>e.id===id)||all.find(e=>e.id===id);
-          if(t) setTimeout(()=>openOverlay(t),200);
+          if(t) setTimeout(()=>{
+            openOverlay(t);
+            // Highlight a specific fight if hla/hlb params present (from notification)
+            const hla=p.get('hla'), hlb=p.get('hlb');
+            if(hla&&hlb) setTimeout(()=>highlightFight(hla,hlb), 400);
+          },200);
         }
 
         if (!_hypeBadgesLoaded) loadHypeBadges(upcoming);
@@ -1710,6 +1736,22 @@
           </div>`;
       }
     }
+    function highlightFight(fa, fb) {
+      const col = document.getElementById('ovFightCol');
+      if (!col) return;
+      const norm = s => s.trim().toLowerCase();
+      const row = [...col.querySelectorAll('.ov-fight')].find(el => {
+        const a = norm(el.dataset.fighterA || ''), b = norm(el.dataset.fighterB || '');
+        const qa = norm(fa), qb = norm(fb);
+        return (a === qa && b === qb) || (a === qb && b === qa);
+      });
+      if (!row) return;
+      row.classList.add('fight-new');
+      row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      // Remove class after animation completes (~9s)
+      setTimeout(() => row.classList.remove('fight-new'), 9200);
+    }
+
     loadEvents();
 
     // Live-update lock countdown badges every 60s
