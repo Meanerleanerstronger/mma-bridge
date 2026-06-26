@@ -849,6 +849,7 @@
     let _eventsData = null,  _eventsTs = 0;
     let _fightersData = null, _fightersTs = 0;
     let _newsData = null,    _newsTs = 0;
+    let _rankingsData = null, _rankingsTs = 0;
 
     async function loadEvents() {
       if (_eventsData && Date.now() - _eventsTs < CACHE_TTL) return _eventsData;
@@ -868,11 +869,17 @@
       catch(e) { _newsData = _newsData || {}; }
       return _newsData;
     }
+    async function loadRankings() {
+      if (_rankingsData && Date.now() - _rankingsTs < CACHE_TTL) return _rankingsData;
+      try { _rankingsData = await fetch('/data/rankings.json?_='+Date.now(),{cache:'no-store'}).then(r=>r.json()); _rankingsTs = Date.now(); }
+      catch(e) { _rankingsData = _rankingsData || []; }
+      return _rankingsData;
+    }
     // Pre-fetch all silently on load
-    Promise.all([loadEvents(), loadFighters(), loadNews()]).catch(()=>{});
+    Promise.all([loadEvents(), loadFighters(), loadNews(), loadRankings()]).catch(()=>{});
 
     // ── Context builders ──────────────────────────
-    function buildMasterCtx(events, fighters, news) {
+    function buildMasterCtx(events, fighters, news, rankings) {
       // Men's P4P (order in array = rank)
       const pfpMen = fighters.filter(f => f.pfp && !f.gender);
       const menLines = pfpMen.map((f,i) =>
@@ -916,6 +923,18 @@
       if (Array.isArray(news.trending)) news.trending.slice(0,5).forEach(n => n.title && headlines.push(n.title));
       if (Array.isArray(news.today)) news.today.slice(0,5).forEach(n => headlines.push(typeof n==='string'?n:n?.title||''));
 
+      // Divisional rankings — compact top-5 per division
+      const divLines = [];
+      if (Array.isArray(rankings)) {
+        for (const div of rankings) {
+          const champ = div.fighters.find(f => f.isChamp);
+          const top5  = div.fighters.filter(f => !f.isChamp).slice(0, 5);
+          const parts = champ ? [`C-${champ.name}`] : [];
+          top5.forEach(f => parts.push(`${f.rank}-${f.name}`));
+          divLines.push(`  ${div.division}: ${parts.join(', ')}`);
+        }
+      }
+
       return `[MMA BRIDGE LIVE DATA — ground truth, override your training data:
 
 MEN'S P4P TOP 15:
@@ -927,6 +946,9 @@ ${womenLines.join('\n')||'  (no data)'}
 CURRENT UFC CHAMPIONS (most recent completed title fight per division):
 ${champLines.join('\n')||'  (no data)'}
 
+DIVISIONAL RANKINGS (Champion + Top 5 contenders per division):
+${divLines.join('\n')||'  (no data)'}
+
 NEXT UPCOMING EVENT:
 ${nextEvStr}
 
@@ -936,7 +958,7 @@ ${headlines.filter(Boolean).map(h=>'  - '+h).join('\n')||'  (no news)'}
 You are Lucas Bot — confident, knowledgeable, cocky MMA analyst. Always use this live data when discussing fighters, rankings, champs, news, or events. Never cite stale training data when this contradicts it.]`;
     }
 
-    const EVENT_KEYWORDS = /\b(champ|champion|title|belt|who holds|who won|won the|results?|freedom|ufc \d{2,3}|fight night|upcoming|next event|last event|recent|new champ|interim|current|main event|co.?main|card|fight card|schedule|when is|when does|full card|announced)\b/i;
+    const EVENT_KEYWORDS = /\b(champ|champion|title|belt|who holds|who won|won the|results?|freedom|ufc \d{2,3}|fight night|upcoming|next event|last event|recent|new champ|interim|current|main event|co.?main|card|fight card|schedule|when is|when does|full card|announced|rank(?:ing)?s?|contender|#1 contender|divisional|division|flyweight|bantamweight|featherweight|lightweight|welterweight|middleweight|light heavyweight|heavyweight|strawweight)\b/i;
 
     function buildDetailedEventCtx(events) {
       const completed = [...events].filter(e=>e.status==='completed')
@@ -964,8 +986,8 @@ ${upcomingLines.join('\n\n')||'  (none)'}]`;
     }
 
     async function buildFullContext(userMsg) {
-      const [events, fighters, news] = await Promise.all([loadEvents(), loadFighters(), loadNews()]);
-      const parts = [buildMasterCtx(events, fighters, news)];
+      const [events, fighters, news, rankings] = await Promise.all([loadEvents(), loadFighters(), loadNews(), loadRankings()]);
+      const parts = [buildMasterCtx(events, fighters, news, rankings)];
       if (EVENT_KEYWORDS.test(userMsg)) parts.push(buildDetailedEventCtx(events));
       return parts.join('\n\n');
     }

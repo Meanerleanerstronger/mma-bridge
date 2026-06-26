@@ -728,42 +728,63 @@
 
     tabs.forEach(t => t.addEventListener('click', () => switchTab(t)));
 
-    // ── Divisional rankings loader ─────────────────
+    // ── Divisional rankings loader (card grid) ────────
+    const WEIGHT_LIMITS = {
+      'Flyweight': '125 lbs', 'Bantamweight': '135 lbs', 'Featherweight': '145 lbs',
+      'Lightweight': '155 lbs', 'Welterweight': '170 lbs', 'Middleweight': '185 lbs',
+      'Light Heavyweight': '205 lbs', 'Heavyweight': '265 lbs',
+      "Women's Strawweight": '115 lbs', "Women's Flyweight": '125 lbs',
+      "Women's Bantamweight": '135 lbs', "Women's Featherweight": '145 lbs',
+    };
+
     async function loadDivRankings() {
       const grid = document.getElementById('divRankingsGrid');
       if (!grid) return;
       try {
         const divisions = await fetch('/data/rankings.json?_=' + Date.now(), { cache: 'no-store' })
           .then(r => r.ok ? r.json() : null);
-        if (!divisions?.length) { grid.innerHTML = '<div style="color:rgba(255,255,255,0.25);font-size:0.75rem;padding:24px 0;">No rankings data yet.</div>'; return; }
+        if (!divisions?.length) {
+          grid.innerHTML = '<div style="color:rgba(255,255,255,0.25);font-size:0.75rem;padding:24px 0;">No rankings data yet.</div>';
+          return;
+        }
 
-        // Separate men's and women's divisions
         const womens = divisions.filter(d => /women/i.test(d.division));
         const mens   = divisions.filter(d => !/women/i.test(d.division));
 
-        function renderGroup(label, divs) {
-          if (!divs.length) return '';
-          return `
-            <div class="div-rank-group-label">${label}</div>
-            ${divs.map(div => `
-              <details class="div-rank-division">
-                <summary class="div-rank-div-name">
-                  <span>${div.division}</span>
-                  ${div.fighters[0]?.isChamp ? `<span class="div-rank-champ-pill">${div.fighters[0].name}</span>` : ''}
-                  <svg class="div-rank-chevron" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-                </summary>
-                <div class="div-rank-list">
-                  ${div.fighters.map(f => `
-                    <div class="div-rank-row${f.isChamp ? ' div-rank-champ' : ''}">
-                      <span class="div-rank-num">${f.isChamp ? 'C' : f.rank}</span>
-                      <span class="div-rank-name">${f.name}</span>
-                    </div>`).join('')}
-                </div>
-              </details>`).join('')}`;
+        function renderCard(div, idx) {
+          const champ = div.fighters.find(f => f.isChamp);
+          const contenders = div.fighters.filter(f => !f.isChamp).slice(0, 10);
+          const limit = WEIGHT_LIMITS[div.division] || '';
+          const delay = (idx * 40) + 'ms';
+          return `<div class="div-card" style="animation-delay:${delay}">
+            <div class="div-card-header">
+              <span class="div-card-name">${div.division.replace("Women's ", '')}</span>
+              ${limit ? `<span class="div-card-weight">${limit}</span>` : ''}
+            </div>
+            ${champ ? `<div class="div-card-champ">
+              <span class="div-card-champ-badge">CHAMP</span>
+              <span class="div-card-champ-name">${champ.name}</span>
+            </div>` : ''}
+            <div class="div-card-contenders">
+              ${contenders.map(f => `<div class="div-card-row">
+                <span class="div-card-rank">#${f.rank}</span>
+                <span class="div-card-fighter">${f.name}</span>
+              </div>`).join('')}
+            </div>
+          </div>`;
         }
 
-        grid.innerHTML = renderGroup('Men\'s Divisions', mens) + renderGroup('Women\'s Divisions', womens);
-      } catch (e) { if (grid) grid.innerHTML = '<div style="color:rgba(255,255,255,0.25);font-size:0.75rem;padding:24px 0;">Failed to load rankings.</div>'; }
+        function renderSection(label, divs, startIdx) {
+          if (!divs.length) return '';
+          return `<div class="div-cards-section-label">${label}</div>
+            <div class="div-cards-grid">${divs.map((d, i) => renderCard(d, startIdx + i)).join('')}</div>`;
+        }
+
+        grid.innerHTML = renderSection("Men's Divisions", mens, 0) +
+                         renderSection("Women's Divisions", womens, mens.length);
+      } catch (e) {
+        if (grid) grid.innerHTML = '<div style="color:rgba(255,255,255,0.25);font-size:0.75rem;padding:24px 0;">Failed to load rankings.</div>';
+      }
     }
 
     document.addEventListener('DOMContentLoaded', () => {

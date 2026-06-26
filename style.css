@@ -12064,3 +12064,108 @@ details[open] .div-rank-chevron { transform: rotate(180deg); }
 .div-rank-div-name::before { display: none; }
 .div-rank-row.div-rank-champ .div-rank-num { color: #c8a84b; }
 .div-rank-row.div-rank-champ .div-rank-name { color: #e8c96a; font-weight: 600; }
+
+/* ── Division Card Grid ───────────────────────────────── */
+.div-cards-section-label {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  padding: 28px 0 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 18px;
+}
+.div-cards-section-label:first-child { padding-top: 4px; }
+.div-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-bottom: 32px;
+}
+@media (max-width: 640px) { .div-cards-grid { grid-template-columns: 1fr; } }
+.div-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+  opacity: 0;
+  transform: translateY(12px);
+  animation: divCardIn 0.35s ease both;
+}
+.div-card:hover {
+  border-color: rgba(0,229,255,0.2);
+  transform: translateY(-2px);
+}
+@keyframes divCardIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+.div-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.div-card-name {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #00e5ff;
+}
+.div-card-weight {
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.3);
+  font-weight: 600;
+}
+.div-card-champ {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px 9px;
+  background: rgba(200,168,75,0.08);
+  border-bottom: 1px solid rgba(200,168,75,0.12);
+}
+.div-card-champ-badge {
+  font-size: 0.52rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #c8a84b;
+  background: rgba(200,168,75,0.15);
+  border: 1px solid rgba(200,168,75,0.3);
+  border-radius: 4px;
+  padding: 2px 5px;
+  flex-shrink: 0;
+}
+.div-card-champ-name {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #e8c96a;
+}
+.div-card-contenders {
+  padding: 6px 0 4px;
+}
+.div-card-row {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  align-items: center;
+  padding: 4px 16px;
+  gap: 6px;
+  transition: background 0.15s;
+}
+.div-card-row:hover { background: rgba(255,255,255,0.025); }
+.div-card-rank {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.25);
+  text-align: right;
+}
+.div-card-fighter {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.72);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
