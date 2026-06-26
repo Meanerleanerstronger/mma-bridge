@@ -1110,7 +1110,7 @@ function formatOdds(n) {
           <div class="${sideACls}" data-key="${esc(key)}" data-pick="${esc(f.a)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
             ${photoA}
             <div class="fc-info">
-              <div class="fc-name">${esc(f.a)}</div>
+              <div class="fc-name">${esc(f.a)}<button class="fc-info-btn" data-fm="${esc(f.a)}" title="View profile" onclick="event.stopPropagation();window.openFighterModal&&window.openFighterModal(this.dataset.fm)">ⓘ</button></div>
               ${recA ? `<div class="fc-sub-row"><span class="fc-record">${esc(recA)}</span></div>` : ''}
               ${commLabelA}
               ${groupLabelA}
@@ -1123,7 +1123,7 @@ function formatOdds(n) {
           </div>
           <div class="${sideBCls}" data-key="${esc(key)}" data-pick="${esc(f.b)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
             <div class="fc-info fc-info-b">
-              <div class="fc-name">${esc(f.b)}</div>
+              <div class="fc-name"><button class="fc-info-btn" data-fm="${esc(f.b)}" title="View profile" onclick="event.stopPropagation();window.openFighterModal&&window.openFighterModal(this.dataset.fm)">ⓘ</button>${esc(f.b)}</div>
               ${recB ? `<div class="fc-sub-row fc-sub-row-b"><span class="fc-record">${esc(recB)}</span></div>` : ''}
               ${commLabelB}
               ${groupLabelB}

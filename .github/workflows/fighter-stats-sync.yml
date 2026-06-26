@@ -1,7 +1,9 @@
-name: Fighter Stats Sync (Manual)
+name: Fighter Stats Sync
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '0 9 * * 4'  # Thursdays 09:00 UTC (day after fighter-record-sync)
 
 jobs:
   sync:

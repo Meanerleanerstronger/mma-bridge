@@ -465,6 +465,11 @@
       text-shadow:0 1px 8px rgba(0,0,0,.7),0 0 1px rgba(255,255,255,.15);
       transition:color .2s,text-shadow .2s;
       position:relative;z-index:1;
+      cursor:pointer;
+    }
+    .ov-fighter:hover {
+      color:#e8c96a;
+      text-shadow:0 0 18px rgba(200,168,75,.35),0 1px 8px rgba(0,0,0,.7);
     }
     .ov-fight.is-main .ov-fighter { font-size:1.85rem; }
     .ov-fighter.right { text-align:right; }
@@ -2042,6 +2047,22 @@
 <script src="push.js?v=1.1"></script>
 <script src="animations.js?v=2.0"></script>
 <script src="micro.js?v=1.0"></script>
+<script src="fighter-modal.js?v=1.0"></script>
+<script>
+// ── Fighter name click-to-profile in overlay ──────────────
+(function () {
+  document.addEventListener('click', function (e) {
+    const el = e.target.closest('.ov-fighter');
+    if (!el) return;
+    // Strip the win-pip span text (it's an empty span, just take the text node)
+    const name = (el.childNodes[el.childNodes.length - 1]?.textContent || el.textContent).trim();
+    if (name && window.openFighterModal) {
+      e.stopPropagation();
+      window.openFighterModal(name);
+    }
+  });
+})();
+</script>
 
 <!-- Sticky Leaderboard Button -->
 <a href="leaderboard.html" class="ev-lb-sticky" title="View Leaderboard">

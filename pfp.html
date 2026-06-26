@@ -666,12 +666,13 @@
     .div-contender-row {
       display: flex; align-items: center; gap: 13px;
       padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
-      cursor: default; border-radius: 0 6px 6px 0;
+      cursor: pointer; border-radius: 0 6px 6px 0;
       transition: padding-left 0.16s ease, background 0.14s;
     }
     .div-contender-row:hover {
-      padding-left: 6px; background: rgba(255,255,255,0.025);
+      padding-left: 6px; background: rgba(255,255,255,0.04);
     }
+    .div-champ-info { cursor: pointer; }
     .div-contender-rank {
       font-family: 'Montserrat', sans-serif;
       font-size: 0.68rem; font-weight: 900;
@@ -1267,6 +1268,22 @@
 <script src="notifications.js?v=2.1"></script>
 <script src="push.js?v=1.1"></script>
 <script src="micro.js?v=1.0"></script>
+<script src="fighter-modal.js?v=1.0"></script>
+<script>
+// ── Divisional spotlight fighter clicks ───────────────────
+document.addEventListener('click', function (e) {
+  const row = e.target.closest('.div-contender-row, .div-champ-info');
+  if (!row) return;
+  const nameEl = row.querySelector('.div-contender-name') || row.querySelector('.div-champ-name');
+  const name = nameEl ? nameEl.textContent.trim() : null;
+  if (name && window.openFighterModal) window.openFighterModal(name);
+});
+// Make divisional rows look clickable
+document.addEventListener('mouseover', function (e) {
+  const row = e.target.closest('.div-contender-row');
+  if (row) row.style.cursor = 'pointer';
+});
+</script>
 
   <!-- BOTTOM NAV (mobile only) -->
   <nav class="mobile-bottom-nav" id="mobileBottomNav" aria-label="Main navigation">
