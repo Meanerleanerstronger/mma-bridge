@@ -445,23 +445,109 @@
     return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
+  /* ── Photo preloading ────────────────────────────────── */
+  const _preloaded = new Set();
+
+  function preloadPhoto(url) {
+    if (!url || _preloaded.has(url)) return;
+    _preloaded.add(url);
+    const img = new Image();
+    img.src = url;
+  }
+
+  function preloadFighterByName(name) {
+    if (!_fighters) return;
+    const f = findFighter(name);
+    if (f?.img) preloadPhoto(f.img);
+  }
+
+  // After fighters.json loads, preload photos for fighters visible on this page
+  function preloadPageFighters() {
+    if (!_fighters) return;
+
+    // P4P rows: [data-fighter] slug → match by id
+    document.querySelectorAll('[data-fighter]').forEach(el => {
+      const slug = el.dataset.fighter;
+      const f = _fighters.find(x => x.id === slug || norm(x.name).replace(/\s/g,'-') === slug);
+      if (f?.img) preloadPhoto(f.img);
+    });
+
+    // Picks page / events overlay: data-fa / data-fb fighter names
+    document.querySelectorAll('[data-fa],[data-fb]').forEach(el => {
+      if (el.dataset.fa) preloadFighterByName(el.dataset.fa);
+      if (el.dataset.fb) preloadFighterByName(el.dataset.fb);
+    });
+
+    // Any rendered fighter name elements
+    document.querySelectorAll('.ov-fighter, .div-contender-name, .div-champ-name, .pfp-row-name').forEach(el => {
+      preloadFighterByName(el.textContent.trim());
+    });
+  }
+
+  // Hover-preload: start fetching the photo as soon as user mouses over a clickable fighter
+  function setupHoverPreload() {
+    document.addEventListener('mouseover', function (e) {
+      // Events overlay fighter names
+      const ovFighter = e.target.closest('.ov-fighter');
+      if (ovFighter) {
+        preloadFighterByName(ovFighter.textContent.trim());
+        return;
+      }
+      // Divisional contender rows
+      const contRow = e.target.closest('.div-contender-row');
+      if (contRow) {
+        const nameEl = contRow.querySelector('.div-contender-name');
+        if (nameEl) preloadFighterByName(nameEl.textContent.trim());
+        return;
+      }
+      // Champion photo panel
+      const champInfo = e.target.closest('.div-champ-info');
+      if (champInfo) {
+        const nameEl = champInfo.querySelector('.div-champ-name');
+        if (nameEl) preloadFighterByName(nameEl.textContent.trim());
+        return;
+      }
+      // Picks fighter name
+      const fcName = e.target.closest('.fc-name');
+      if (fcName) {
+        // fc-name has mixed text + button; extract just text nodes
+        const text = Array.from(fcName.childNodes)
+          .filter(n => n.nodeType === 3)
+          .map(n => n.textContent.trim())
+          .join(' ').trim();
+        if (text) preloadFighterByName(text);
+      }
+    }, { passive: true });
+  }
+
   /* ── Public API ──────────────────────────────────────── */
   window.openFighterModal = function (name) {
     buildSkeleton();
     const overlay = document.getElementById('fm-overlay');
     const content = document.getElementById('fm-content');
-    content.innerHTML = '<div class="fm-loading">Loading…</div>';
-    overlay.classList.add('fm-open');
-    document.body.classList.add('fm-lock');
 
     getFighters().then(() => {
       const f = findFighter(name);
-      content.innerHTML = f
-        ? renderFighter(f)
-        : `<div class="fm-empty">No profile found for "${esc(name)}"</div>`;
+      if (!f) {
+        content.innerHTML = `<div class="fm-empty">No profile found for "${esc(name)}"</div>`;
+      } else {
+        // Preload photo before setting HTML so it's likely cached when fm-hero renders
+        if (f.img) preloadPhoto(f.img);
+        content.innerHTML = renderFighter(f);
+      }
     });
+
+    // Show modal immediately (with loading state) — don't wait for fighters.json
+    if (!_fighters) content.innerHTML = '<div class="fm-loading">Loading…</div>';
+    overlay.classList.add('fm-open');
+    document.body.classList.add('fm-lock');
   };
 
-  /* Pre-fetch quietly on page load */
-  window.addEventListener('load', getFighters);
+  /* Kick everything off on page load */
+  window.addEventListener('load', () => {
+    getFighters().then(() => {
+      preloadPageFighters();
+      setupHoverPreload();
+    });
+  });
 })();

@@ -419,6 +419,12 @@
       border:1px solid rgba(255,255,255,.14);
       background:rgba(255,255,255,.04);
       flex-shrink:0;display:block;
+      cursor:pointer;
+      transition:border-color .18s, box-shadow .18s;
+    }
+    .ov-headshot:hover {
+      border-color:rgba(200,168,75,.5);
+      box-shadow:0 0 8px rgba(200,168,75,.25);
     }
     .ov-fight.is-main .ov-headshot { width:44px;height:44px; }
     .ov-fight::before {
@@ -2047,18 +2053,25 @@
 <script src="push.js?v=1.1"></script>
 <script src="animations.js?v=2.0"></script>
 <script src="micro.js?v=1.0"></script>
-<script src="fighter-modal.js?v=1.0"></script>
+<script src="fighter-modal.js?v=1.1"></script>
 <script>
-// ── Fighter name click-to-profile in overlay ──────────────
+// ── Fighter click-to-profile (names + headshots) ──────
 (function () {
   document.addEventListener('click', function (e) {
-    const el = e.target.closest('.ov-fighter');
-    if (!el) return;
-    // Strip the win-pip span text (it's an empty span, just take the text node)
-    const name = (el.childNodes[el.childNodes.length - 1]?.textContent || el.textContent).trim();
-    if (name && window.openFighterModal) {
-      e.stopPropagation();
-      window.openFighterModal(name);
+    // Fighter name text
+    const nameEl = e.target.closest('.ov-fighter');
+    if (nameEl) {
+      const name = nameEl.textContent.replace(/[ ​ ]/g, '').trim();
+      if (name && window.openFighterModal) { e.stopPropagation(); window.openFighterModal(name); }
+      return;
+    }
+    // Fighter headshot — which side?
+    const headCell = e.target.closest('.ov-head-cell');
+    if (headCell) {
+      const row = headCell.closest('.ov-fight');
+      if (!row) return;
+      const name = headCell.classList.contains('ov-head-r') ? row.dataset.fighterB : row.dataset.fighterA;
+      if (name && window.openFighterModal) { e.stopPropagation(); window.openFighterModal(name); }
     }
   });
 })();
