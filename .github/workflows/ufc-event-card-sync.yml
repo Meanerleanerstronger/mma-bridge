@@ -1,0 +1,36 @@
+name: UFC Event Card Sync
+
+on:
+  schedule:
+    - cron: '0 8,14,20 * * *'   # 3× daily — 8am, 2pm, 8pm UTC
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run event card sync
+        run: node scripts/ufc-event-card-sync.js
+
+      - name: Commit & push if changed
+        run: |
+          git config user.name  "Event Card Bot"
+          git config user.email "bot@mmabridge.com"
+          git add data/events.json events.json
+          if git diff --staged --quiet; then
+            echo "✅ No changes to commit"
+          else
+            git commit -m "chore(auto): sync UFC event cards"
+            git push
+          fi

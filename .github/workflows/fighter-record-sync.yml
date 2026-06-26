@@ -1,0 +1,36 @@
+name: Fighter Record Sync
+
+on:
+  schedule:
+    - cron: '0 10 * * 3'   # Every Wednesday 10:00 UTC (day after most events)
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run fighter record sync
+        run: node scripts/fighter-record-sync.js
+
+      - name: Commit & push if changed
+        run: |
+          git config user.name  "Fighter Record Bot"
+          git config user.email "bot@mmabridge.com"
+          git add data/fighters.json fighters.json
+          if git diff --staged --quiet; then
+            echo "✅ No changes to commit"
+          else
+            git commit -m "chore(auto): sync fighter records from UFC.com"
+            git push
+          fi
