@@ -459,6 +459,271 @@
       .pfp-debate-btn { display: none; }
       .pfp-hero-debate-btn { display: none; }
     }
+
+    /* ── Panel enter animation (replaces display:none flash) ── */
+    @keyframes panelFadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .rnk-panel.panel-entering { animation: panelFadeIn 0.22s ease both; }
+
+    /* ── Hero collapse when divisional tab active ── */
+    .pfp-hero-wrap {
+      overflow: hidden;
+      max-height: 700px;
+      transition: max-height 0.42s cubic-bezier(0.4,0,0.2,1),
+                  opacity 0.3s ease;
+    }
+    .is-divisional .pfp-hero-wrap {
+      max-height: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .is-divisional .pfp-list-header { display: none; }
+    .is-divisional .pfp-list-wrap {
+      max-width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+    .is-divisional .rnk-tabs {
+      margin: 20px 0 0 32px;
+      margin-bottom: 0;
+    }
+    @media (max-width: 768px) {
+      .is-divisional .rnk-tabs { margin: 14px 14px 0; }
+    }
+
+    /* ── Division Spotlight layout ── */
+    .div-spotlight {
+      display: flex;
+      height: calc(100vh - 132px); /* navbar ~66px + tabs area ~56px + buffer */
+      min-height: 480px;
+      overflow: hidden;
+    }
+
+    /* Left: champion full-body photo */
+    .div-spotlight-left {
+      position: relative;
+      width: 42%;
+      flex-shrink: 0;
+      background: #080810;
+      overflow: hidden;
+    }
+
+    /* Double-buffer photo layers for cross-fade */
+    .div-photo-layer {
+      position: absolute; inset: 0;
+      background-size: cover;
+      background-position: center 5%;
+      opacity: 0;
+      transition: opacity 0.38s ease;
+    }
+    .div-photo-layer.active { opacity: 1; }
+
+    /* Right-edge + bottom gradient overlay on photo */
+    .div-spotlight-left::after {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to right, transparent 52%, #060608 100%),
+        linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.2) 40%, transparent 65%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Champion info pinned to bottom-left of photo */
+    .div-champ-info {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 40px 44px;
+      z-index: 2;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .div-champ-info.fading { opacity: 0; transform: translateY(8px); }
+
+    .div-champ-badge {
+      display: inline-flex;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.48rem; font-weight: 900;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: #c8a84b;
+      background: rgba(200,168,75,0.1);
+      border: 1px solid rgba(200,168,75,0.28);
+      border-radius: 3px; padding: 3px 8px;
+      margin-bottom: 10px;
+    }
+    .div-champ-info.women-div .div-champ-badge {
+      color: #f0b4e8;
+      background: rgba(240,100,200,0.1);
+      border-color: rgba(240,100,200,0.25);
+    }
+    .div-champ-division {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.56rem; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(255,255,255,0.32);
+      margin-bottom: 6px;
+    }
+    .div-champ-nickname {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem; font-style: italic;
+      color: rgba(200,168,75,0.55);
+      margin-bottom: 4px;
+    }
+    .div-champ-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.1rem; font-weight: 900;
+      text-transform: uppercase;
+      color: #fff;
+      line-height: 1.05; letter-spacing: -0.015em;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 24px rgba(0,0,0,0.85);
+    }
+    .div-champ-record {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(255,255,255,0.42);
+    }
+
+    /* Right: pill nav + contenders */
+    .div-spotlight-right {
+      flex: 1; min-width: 0;
+      display: flex; flex-direction: column;
+      background: #060608;
+      overflow: hidden;
+    }
+
+    /* Division pill switcher */
+    .div-pill-nav {
+      display: flex; align-items: center;
+      gap: 5px; flex-wrap: nowrap;
+      padding: 28px 36px 16px;
+      overflow-x: auto; scrollbar-width: none;
+      flex-shrink: 0;
+    }
+    .div-pill-nav::-webkit-scrollbar { display: none; }
+
+    .div-pill {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.58rem; font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 6px 13px; border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: transparent;
+      color: rgba(255,255,255,0.32);
+      cursor: pointer; white-space: nowrap; flex-shrink: 0;
+      transition: background 0.16s, color 0.16s, border-color 0.16s, box-shadow 0.16s;
+    }
+    .div-pill.women { color: rgba(240,100,200,0.38); border-color: rgba(240,100,200,0.14); }
+    .div-pill:hover  { color: rgba(255,255,255,0.65); border-color: rgba(255,255,255,0.22); }
+    .div-pill.active {
+      background: rgba(200,168,75,0.14);
+      color: #e8c96a;
+      border-color: rgba(200,168,75,0.32);
+      box-shadow: 0 0 14px rgba(200,168,75,0.14);
+    }
+    .div-pill.women.active {
+      background: rgba(240,100,200,0.12);
+      color: #f0b4e8;
+      border-color: rgba(240,100,200,0.3);
+      box-shadow: 0 0 14px rgba(240,100,200,0.16);
+    }
+    .div-pill-sep {
+      width: 1px; height: 18px;
+      background: rgba(255,255,255,0.09);
+      flex-shrink: 0; margin: 0 3px;
+    }
+
+    /* Scrollable contenders area */
+    .div-contender-wrap {
+      flex: 1; overflow-y: auto;
+      padding: 6px 36px 80px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.07) transparent;
+    }
+    .div-contender-wrap::-webkit-scrollbar { width: 4px; }
+    .div-contender-wrap::-webkit-scrollbar-track { background: transparent; }
+    .div-contender-wrap::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
+
+    .div-contender-list {
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .div-contender-list.fading { opacity: 0; transform: translateY(5px); }
+
+    .div-contenders-header {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 4px; padding-top: 2px;
+    }
+    .div-contenders-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.52rem; font-weight: 800;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,0.16); white-space: nowrap;
+    }
+    .div-contenders-line { flex: 1; height: 1px; background: rgba(255,255,255,0.05); }
+
+    .div-contender-row {
+      display: flex; align-items: center; gap: 13px;
+      padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+      cursor: default; border-radius: 0 6px 6px 0;
+      transition: padding-left 0.16s ease, background 0.14s;
+    }
+    .div-contender-row:hover {
+      padding-left: 6px; background: rgba(255,255,255,0.025);
+    }
+    .div-contender-rank {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem; font-weight: 900;
+      color: rgba(255,255,255,0.14);
+      width: 26px; text-align: right; flex-shrink: 0;
+    }
+    .div-contender-photo {
+      width: 42px; height: 42px; border-radius: 50%;
+      background-size: cover; background-position: center top;
+      background-color: #161620;
+      border: 1.5px solid rgba(255,255,255,0.07);
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem; font-weight: 800;
+      color: rgba(255,255,255,0.22);
+      overflow: hidden;
+    }
+    .div-contender-info { flex: 1; min-width: 0; }
+    .div-contender-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.77rem; font-weight: 700;
+      color: #fff; text-transform: uppercase;
+      letter-spacing: 0.02em;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .div-contender-rec {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.6rem; font-weight: 600;
+      color: rgba(255,255,255,0.25); margin-top: 2px;
+    }
+
+    /* Mobile: stack layout */
+    @media (max-width: 768px) {
+      .div-spotlight {
+        flex-direction: column;
+        height: auto; min-height: 0;
+      }
+      .div-spotlight-left {
+        width: 100%; height: 280px; flex-shrink: 0;
+      }
+      .div-spotlight-left::after {
+        background:
+          linear-gradient(to bottom, transparent 40%, #060608 100%),
+          linear-gradient(to right, transparent 50%, transparent 100%);
+      }
+      .div-spotlight-right { flex: none; min-height: 60vh; }
+      .div-pill-nav { padding: 14px 14px 10px; }
+      .div-contender-wrap { padding: 4px 14px 100px; }
+      .div-champ-info { padding: 20px 20px; }
+      .div-champ-name { font-size: 1.35rem; }
+    }
   </style>
 </head>
 
@@ -513,7 +778,8 @@
     <div class="nav-auth-mobile"></div>
   </div>
 
-  <!-- #1 Hero -->
+  <!-- #1 Hero (wrapped for smooth collapse) -->
+  <div class="pfp-hero-wrap">
   <div class="pfp-hero" data-fighter="islam-makhachev">
     <div class="pfp-hero-photo" style="background-image:url('https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/7/MAKHACHEV_ISLAM_L_BELT_01-18.png');"></div>
     <div class="pfp-hero-overlay"></div>
@@ -527,6 +793,7 @@
       </div>
     </div>
   </div>
+  </div><!-- /.pfp-hero-wrap -->
 
   <!-- Ranked list -->
   <div class="pfp-list-wrap">
@@ -700,16 +967,30 @@
       <div class="pfp-grid" id="pfpWomenGrid"></div>
     </div>
 
-    <!-- Divisional Rankings panel -->
+    <!-- Divisional Rankings panel — immersive spotlight -->
     <div id="pfpDivisionalSection" class="rnk-panel" style="display:none;">
-      <div id="divRankingsGrid"><div style="color:rgba(255,255,255,0.25);font-size:0.75rem;padding:24px 0;">Loading rankings…</div></div>
+      <div class="div-spotlight" id="divSpotlight">
+        <!-- Left: champion full-body photo (double-buffered for cross-fade) -->
+        <div class="div-spotlight-left">
+          <div class="div-photo-layer" id="divPhotoA"></div>
+          <div class="div-photo-layer" id="divPhotoB"></div>
+          <div class="div-champ-info" id="divChampInfo"></div>
+        </div>
+        <!-- Right: pill nav + contenders -->
+        <div class="div-spotlight-right">
+          <div class="div-pill-nav" id="divPillNav"></div>
+          <div class="div-contender-wrap">
+            <div class="div-contender-list" id="divContenderList"></div>
+          </div>
+        </div>
+      </div>
     </div>
 
   <script>
   (function() {
-    // ── Tab switching ──────────────────────────────
-    const tabs    = document.querySelectorAll('.rnk-tab');
-    const panels  = {
+    // ── Tab switching (fade-in, no flash) ──────────────
+    const tabs   = document.querySelectorAll('.rnk-tab');
+    const panels = {
       'mens-p4p':   document.getElementById('pfpMenSection'),
       'womens-p4p': document.getElementById('pfpWomenSection'),
       'divisional': document.getElementById('pfpDivisionalSection'),
@@ -719,76 +1000,189 @@
     function switchTab(tab) {
       tabs.forEach(t => t.classList.toggle('active', t === tab));
       const key = tab.dataset.tab;
-      Object.entries(panels).forEach(([k, el]) => { if (el) el.style.display = k === key ? '' : 'none'; });
+
+      // Toggle divisional full-screen mode
+      document.body.classList.toggle('is-divisional', key === 'divisional');
+
+      Object.entries(panels).forEach(([k, el]) => {
+        if (!el) return;
+        if (k === key) {
+          el.style.display = '';
+          el.classList.remove('panel-entering');
+          void el.offsetHeight; // force reflow so animation fires fresh
+          el.classList.add('panel-entering');
+          el.addEventListener('animationend', () => el.classList.remove('panel-entering'), { once: true });
+        } else {
+          el.style.display = 'none';
+        }
+      });
+
       if (key === 'divisional' && !divLoaded) { loadDivRankings(); divLoaded = true; }
-      // Delegate P4P content switching to pfp.js
       if (key === 'womens-p4p' && window.pfpSwitchToWomen) window.pfpSwitchToWomen();
       if (key === 'mens-p4p'   && window.pfpSwitchToMen)   window.pfpSwitchToMen();
     }
 
     tabs.forEach(t => t.addEventListener('click', () => switchTab(t)));
 
-    // ── Divisional rankings loader (card grid) ────────
-    const WEIGHT_LIMITS = {
-      'Flyweight': '125 lbs', 'Bantamweight': '135 lbs', 'Featherweight': '145 lbs',
-      'Lightweight': '155 lbs', 'Welterweight': '170 lbs', 'Middleweight': '185 lbs',
-      'Light Heavyweight': '205 lbs', 'Heavyweight': '265 lbs',
-      "Women's Strawweight": '115 lbs', "Women's Flyweight": '125 lbs',
-      "Women's Bantamweight": '135 lbs', "Women's Featherweight": '145 lbs',
+    // ── Division Spotlight ─────────────────────────────
+    const DIV_LABELS = {
+      'Flyweight':'FLW', 'Bantamweight':'BW', 'Featherweight':'FW',
+      'Lightweight':'LW', 'Welterweight':'WW', 'Middleweight':'MW',
+      'Light Heavyweight':'LHW', 'Heavyweight':'HW',
+      "Women's Strawweight":'W·STW', "Women's Flyweight":'W·FLW',
+      "Women's Bantamweight":'W·BW', "Women's Featherweight":'W·FW',
     };
 
+    let divData      = [];
+    let fighterMap   = {};
+    let currentIdx   = 0;
+    let activeLayer  = 'A';
+
+    const photoA = document.getElementById('divPhotoA');
+    const photoB = document.getElementById('divPhotoB');
+
     async function loadDivRankings() {
-      const grid = document.getElementById('divRankingsGrid');
-      if (!grid) return;
       try {
-        const divisions = await fetch('/data/rankings.json?_=' + Date.now(), { cache: 'no-store' })
-          .then(r => r.ok ? r.json() : null);
-        if (!divisions?.length) {
-          grid.innerHTML = '<div style="color:rgba(255,255,255,0.25);font-size:0.75rem;padding:24px 0;">No rankings data yet.</div>';
-          return;
-        }
+        const ts = Date.now();
+        const [rankings, fighters] = await Promise.all([
+          fetch('/data/rankings.json?_=' + ts, { cache: 'no-store' }).then(r => r.ok ? r.json() : []),
+          fetch('/data/fighters.json?_=' + ts, { cache: 'no-store' }).then(r => r.ok ? r.json() : []),
+        ]);
 
-        const womens = divisions.filter(d => /women/i.test(d.division));
-        const mens   = divisions.filter(d => !/women/i.test(d.division));
+        fighters.forEach(f => { fighterMap[f.name.toLowerCase().trim()] = f; });
 
-        function renderCard(div, idx) {
-          const champ = div.fighters.find(f => f.isChamp);
-          const contenders = div.fighters.filter(f => !f.isChamp).slice(0, 10);
-          const limit = WEIGHT_LIMITS[div.division] || '';
-          const delay = (idx * 40) + 'ms';
-          return `<div class="div-card" style="animation-delay:${delay}">
-            <div class="div-card-header">
-              <span class="div-card-name">${div.division.replace("Women's ", '')}</span>
-              ${limit ? `<span class="div-card-weight">${limit}</span>` : ''}
-            </div>
-            ${champ ? `<div class="div-card-champ">
-              <span class="div-card-champ-badge">CHAMP</span>
-              <span class="div-card-champ-name">${champ.name}</span>
-            </div>` : ''}
-            <div class="div-card-contenders">
-              ${contenders.map(f => `<div class="div-card-row">
-                <span class="div-card-rank">#${f.rank}</span>
-                <span class="div-card-fighter">${f.name}</span>
-              </div>`).join('')}
+        const mens   = (rankings || []).filter(d => !/women/i.test(d.division));
+        const womens = (rankings || []).filter(d =>  /women/i.test(d.division));
+        divData = [...mens, ...womens];
+        if (!divData.length) return;
+
+        buildPillNav(mens.length);
+        showDivision(0, false);
+        preloadChampImages();
+      } catch(e) { /* silent */ }
+    }
+
+    function buildPillNav(menCount) {
+      const nav = document.getElementById('divPillNav');
+      if (!nav) return;
+      nav.innerHTML = divData.map((d, i) => {
+        const isW  = /women/i.test(d.division);
+        const lbl  = DIV_LABELS[d.division] || d.division;
+        const sep  = i === menCount ? '<div class="div-pill-sep"></div>' : '';
+        return `${sep}<button class="div-pill${isW?' women':''}${i===0?' active':''}" data-di="${i}">${lbl}</button>`;
+      }).join('');
+      nav.querySelectorAll('.div-pill').forEach(p => {
+        p.addEventListener('click', () => {
+          const idx = parseInt(p.dataset.di);
+          if (idx !== currentIdx) showDivision(idx, true);
+        });
+      });
+    }
+
+    function preloadChampImages() {
+      divData.forEach(d => {
+        const champ = d.fighters.find(f => f.isChamp);
+        const fw = champ ? fighterMap[champ.name.toLowerCase().trim()] : null;
+        if (fw?.img) { const img = new Image(); img.src = fw.img; }
+      });
+    }
+
+    function showDivision(idx, animate) {
+      const d = divData[idx];
+      if (!d) return;
+      currentIdx = idx;
+
+      // Update active pill
+      document.querySelectorAll('.div-pill').forEach((p, i) => p.classList.toggle('active', i === idx));
+
+      const isW       = /women/i.test(d.division);
+      const champ     = d.fighters.find(f => f.isChamp);
+      const contenders = d.fighters.filter(f => !f.isChamp).slice(0, 15);
+      const fw        = champ ? fighterMap[champ.name.toLowerCase().trim()] : null;
+      const photoUrl  = fw?.img || '';
+
+      if (!animate) {
+        // First load: set directly, no transition
+        if (photoUrl) { photoA.style.backgroundImage = `url('${photoUrl}')`; photoA.classList.add('active'); }
+        updateChampInfo(d, champ, fw, isW);
+        updateContenders(contenders, isW);
+        return;
+      }
+
+      // Cross-fade photo using double-buffer
+      const next = activeLayer === 'A' ? photoB : photoA;
+      const curr = activeLayer === 'A' ? photoA : photoB;
+      const swap = () => {
+        next.classList.add('active');
+        setTimeout(() => curr.classList.remove('active'), 20);
+        activeLayer = activeLayer === 'A' ? 'B' : 'A';
+      };
+      if (photoUrl) {
+        const img = new Image();
+        img.onload  = () => { next.style.backgroundImage = `url('${photoUrl}')`; swap(); };
+        img.onerror = () => { next.style.backgroundImage = ''; swap(); };
+        img.src = photoUrl;
+      } else {
+        next.style.backgroundImage = '';
+        swap();
+      }
+
+      // Fade content out → update → fade back in
+      const list = document.getElementById('divContenderList');
+      const info = document.getElementById('divChampInfo');
+      list.classList.add('fading');
+      info.classList.add('fading');
+      setTimeout(() => {
+        updateChampInfo(d, champ, fw, isW);
+        updateContenders(contenders, isW);
+        list.classList.remove('fading');
+        info.classList.remove('fading');
+      }, 210);
+    }
+
+    function updateChampInfo(d, champ, fw, isW) {
+      const el = document.getElementById('divChampInfo');
+      if (!el) return;
+      const rec = fw ? `${fw.record?.wins||0}–${fw.record?.losses||0}${fw.record?.draws?'–'+fw.record.draws:''}` : '';
+      const nick = fw?.nickname ? `"${fw.nickname}"` : '';
+      el.className = 'div-champ-info' + (isW ? ' women-div' : '');
+      el.innerHTML = `
+        <div class="div-champ-badge">CHAMPION</div>
+        <div class="div-champ-division">${d.division}</div>
+        ${nick ? `<div class="div-champ-nickname">${nick}</div>` : ''}
+        <div class="div-champ-name">${champ ? champ.name : 'Vacant'}</div>
+        ${rec ? `<div class="div-champ-record">${rec}</div>` : ''}
+      `;
+    }
+
+    function updateContenders(contenders, isW) {
+      const el = document.getElementById('divContenderList');
+      if (!el) return;
+      const gold = isW ? 'rgba(240,100,200,0.5)' : 'rgba(200,168,75,0.5)';
+      el.innerHTML = `
+        <div class="div-contenders-header">
+          <span class="div-contenders-label">Contenders</span>
+          <div class="div-contenders-line"></div>
+        </div>
+        ${contenders.map(f => {
+          const fw   = fighterMap[f.name.toLowerCase().trim()];
+          const rec  = fw ? `${fw.record?.wins||'?'}–${fw.record?.losses||'?'}${fw.record?.draws?'–'+fw.record.draws:''}` : '';
+          const photo = fw?.img || '';
+          const init  = f.name.split(' ').pop().substring(0,2).toUpperCase();
+          const rankColor = f.rank <= 3 ? `color:${gold}` : '';
+          return `<div class="div-contender-row">
+            <div class="div-contender-rank" style="${rankColor}">#${f.rank}</div>
+            <div class="div-contender-photo" ${photo?`style="background-image:url('${photo}')"`:''}>${photo?'':init}</div>
+            <div class="div-contender-info">
+              <div class="div-contender-name">${f.name}</div>
+              ${rec?`<div class="div-contender-rec">${rec}</div>`:''}
             </div>
           </div>`;
-        }
-
-        function renderSection(label, divs, startIdx) {
-          if (!divs.length) return '';
-          return `<div class="div-cards-section-label">${label}</div>
-            <div class="div-cards-grid">${divs.map((d, i) => renderCard(d, startIdx + i)).join('')}</div>`;
-        }
-
-        grid.innerHTML = renderSection("Men's Divisions", mens, 0) +
-                         renderSection("Women's Divisions", womens, mens.length);
-      } catch (e) {
-        if (grid) grid.innerHTML = '<div style="color:rgba(255,255,255,0.25);font-size:0.75rem;padding:24px 0;">Failed to load rankings.</div>';
-      }
+        }).join('')}
+      `;
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      // pfp.js still handles women's P4P toggle — wire its init to tab context
       const menBtn = document.querySelector('.rnk-tab[data-tab="mens-p4p"]');
       if (menBtn) switchTab(menBtn);
     });
