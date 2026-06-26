@@ -21,13 +21,14 @@ const __dir = dirname(fileURLToPath(import.meta.url));
 const ROOT  = join(__dir, '..');
 
 // ── Args ──────────────────────────────────────────────────────────────
-const args       = process.argv.slice(2);
-const dryRun     = args.includes('--dry-run');
-const nameIdx    = args.indexOf('--name');
-const evtIdx     = args.indexOf('--event');
-const targetName = nameIdx >= 0 ? args[nameIdx + 1] : null;
-const targetEvt  = evtIdx  >= 0 ? args[evtIdx  + 1] : null;
-const forceAll   = args.includes('--all');
+const args         = process.argv.slice(2);
+const dryRun       = args.includes('--dry-run');
+const nameIdx      = args.indexOf('--name');
+const evtIdx       = args.indexOf('--event');
+const targetName   = nameIdx >= 0 ? args[nameIdx + 1] : null;
+const targetEvt    = evtIdx  >= 0 ? args[evtIdx  + 1] : null;
+const forceAll     = args.includes('--all');
+const fromFighters = args.includes('--from-fighters'); // process all fighters.json entries
 
 // ── Helpers ───────────────────────────────────────────────────────────
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
@@ -168,7 +169,7 @@ function parseMmaRecord(content) {
 
   return {
     record: { wins, losses, draws },
-    last5:  fights.slice(0, 5),
+    last5:  fights.slice(0, 10), // field kept as last5 for compatibility; stores up to 10
   };
 }
 
@@ -191,6 +192,15 @@ let names;
 
 if (targetName) {
   names = [targetName.trim()];
+} else if (fromFighters) {
+  // Process all real fighters in fighters.json that don't have fight history yet
+  // (or have stale data with fewer than 3 fights stored)
+  const todo = fighters.filter(f =>
+    f.name && f.name !== 'TBA' && !f.name.includes('TBA') &&
+    (!f.last5 || f.last5.length < 3)
+  );
+  names = todo.map(f => f.name);
+  console.log(`Processing ${names.length} fighters from fighters.json without fight history`);
 } else {
   const targetEvents = events.filter(ev => {
     if (targetEvt) return ev.id === targetEvt || slug(ev.name) === slug(targetEvt);
@@ -198,7 +208,7 @@ if (targetName) {
   });
 
   if (!targetEvents.length) {
-    console.error('No matching events. Use --event, --name, or --all.');
+    console.error('No matching events. Use --event, --name, --all, or --from-fighters.');
     process.exit(1);
   }
 

@@ -1,0 +1,42 @@
+name: Fighter History Sync
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 7 * * 2'  # Tuesdays 07:00 UTC — runs before photo sync (08:00)
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    timeout-minutes: 55  # 488 fighters × ~2s = ~16 min; Wikipedia is fast
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Enrich upcoming-event fighters (always refresh)
+        run: node scripts/enrich-fighters-wiki.js
+        continue-on-error: true
+
+      - name: Enrich all fighters missing fight history
+        run: node scripts/enrich-fighters-wiki.js --from-fighters
+        continue-on-error: true
+
+      - name: Commit & push if changed
+        run: |
+          git config user.name  "Fighter History Bot"
+          git config user.email "bot@mmabridge.com"
+          git add data/fighters.json fighters.json
+          if git diff --staged --quiet; then
+            echo "✅ No changes to commit"
+          else
+            git commit -m "chore(auto): sync fighter fight history from Wikipedia"
+            git push
+          fi

@@ -196,29 +196,85 @@
         color: rgba(255,255,255,0.22); margin-top: 3px;
       }
 
+      /* Win breakdown pills */
+      .fm-win-breakdown { display: inline-flex; gap: 6px; margin-left: 6px; }
+      .fm-wb-item {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.5rem; font-weight: 700;
+        letter-spacing: 0.06em; padding: 2px 7px;
+        border-radius: 20px; display: flex; align-items: center; gap: 4px;
+      }
+      .fm-wb-n { font-size: 0.68rem; font-weight: 900; }
+      .fm-wb-ko  { background: rgba(255,80,80,0.1);  color: rgba(255,120,120,0.8); border: 1px solid rgba(255,80,80,0.15); }
+      .fm-wb-sub { background: rgba(100,200,255,0.08); color: rgba(100,200,255,0.7); border: 1px solid rgba(100,200,255,0.14); }
+      .fm-wb-dec { background: rgba(200,168,75,0.08);  color: rgba(200,168,75,0.6);  border: 1px solid rgba(200,168,75,0.14); }
+
+      /* Fight rows */
       .fm-fights { display: flex; flex-direction: column; }
       .fm-fight-row {
-        display: flex; align-items: center; gap: 9px;
+        display: flex; align-items: center; gap: 8px;
         padding: 8px 0;
         border-bottom: 1px solid rgba(255,255,255,0.04);
-        font-size: 0.7rem;
       }
       .fm-fight-row:last-child { border-bottom: none; }
       .fm-fr {
         font-family: 'Montserrat', sans-serif;
-        font-size: 0.62rem; font-weight: 900;
+        font-size: 0.6rem; font-weight: 900;
         width: 20px; text-align: center; flex-shrink: 0;
         border-radius: 3px; padding: 2px 0;
       }
-      .fm-fr-w { color: #4ade80; background: rgba(74,222,128,0.08); }
-      .fm-fr-l { color: #f87171; background: rgba(248,113,113,0.08); }
+      .fm-fr-w  { color: #4ade80; background: rgba(74,222,128,0.09); }
+      .fm-fr-l  { color: #f87171; background: rgba(248,113,113,0.09); }
       .fm-fr-nc { color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.04); }
       .fm-fight-opp {
-        flex: 1; font-weight: 600; color: rgba(255,255,255,0.82);
+        flex: 1; font-weight: 700; color: rgba(255,255,255,0.85);
+        font-size: 0.72rem;
         white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        min-width: 0;
       }
-      .fm-fight-method { font-size: 0.6rem; color: rgba(255,255,255,0.28); flex-shrink: 0; }
-      .fm-fight-meta   { font-size: 0.55rem; color: rgba(255,255,255,0.18); flex-shrink: 0; white-space: nowrap; }
+      .fm-fight-event {
+        font-size: 0.58rem; color: rgba(255,255,255,0.2);
+        flex-shrink: 0; white-space: nowrap; overflow: hidden;
+        max-width: 90px; text-overflow: ellipsis;
+      }
+      .fm-fight-right {
+        display: flex; align-items: center; gap: 4px; flex-shrink: 0;
+      }
+      .fm-fight-detail { font-size: 0.52rem; color: rgba(255,255,255,0.18); white-space: nowrap; }
+
+      /* Method badge */
+      .fm-mbadge {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.48rem; font-weight: 800;
+        letter-spacing: 0.06em; padding: 2px 5px;
+        border-radius: 3px; white-space: nowrap;
+      }
+      .fm-mb-ko  { background: rgba(255,80,80,0.1);   color: rgba(255,130,130,0.85); }
+      .fm-mb-sub { background: rgba(100,200,255,0.09); color: rgba(120,200,255,0.8); }
+      .fm-mb-dec { background: rgba(200,168,75,0.08);  color: rgba(200,168,75,0.65); }
+      .fm-mb-nc  { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.3); }
+
+      /* Full record link */
+      .fm-full-link {
+        display: inline-flex; align-items: center; margin-top: 14px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.56rem; font-weight: 700;
+        letter-spacing: 0.1em; text-transform: uppercase;
+        color: rgba(200,168,75,0.55);
+        text-decoration: none;
+        transition: color 0.15s;
+      }
+      .fm-full-link:hover { color: #e8c96a; }
+      .fm-no-history {
+        font-size: 0.65rem; color: rgba(255,255,255,0.18);
+        padding: 10px 0 4px;
+        display: flex; align-items: center; gap: 10px;
+      }
+      .fm-full-link-inline {
+        font-size: 0.58rem; color: rgba(200,168,75,0.45);
+        text-decoration: none; transition: color 0.15s;
+      }
+      .fm-full-link-inline:hover { color: #e8c96a; }
 
       .fm-empty {
         padding: 60px 0; text-align: center;
@@ -264,12 +320,34 @@
   }
 
   /* ── Render ──────────────────────────────────────────── */
+  function nameToSlug(name) {
+    return (name || '').normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-');
+  }
+
+  function methodBadge(method) {
+    const m = (method || '').toUpperCase();
+    if (/KO|TKO/.test(m))           return '<span class="fm-mbadge fm-mb-ko">KO/TKO</span>';
+    if (/SUB|CHOKE|TRIANGLE|ARMBAR|HEEL|GUILLOTINE|RNC/.test(m)) return '<span class="fm-mbadge fm-mb-sub">SUB</span>';
+    if (/DEC|DECISION/.test(m))     return '<span class="fm-mbadge fm-mb-dec">DEC</span>';
+    if (/NC|NO CONTEST/.test(m))    return '<span class="fm-mbadge fm-mb-nc">NC</span>';
+    if (method)                     return `<span class="fm-mbadge fm-mb-dec">${esc(method.substring(0,8))}</span>`;
+    return '';
+  }
+
   function renderFighter(f) {
     const rec = f.record
       ? `${f.record.wins}–${f.record.losses}${f.record.draws ? '–' + f.record.draws : ''}`
       : '';
-    const last5    = (f.last5 || []).slice(0, 5);
+    const fights   = f.last5 || [];
     const hasStats = f.stats && f.stats.slpm;
+    const ufcSlug  = f.id || nameToSlug(f.name);
+
+    // Win method breakdown
+    const wins = fights.filter(x => x.result === 'W');
+    const wKO  = wins.filter(x => /KO|TKO/.test((x.method||'').toUpperCase())).length;
+    const wSub = wins.filter(x => /SUB|CHOKE|ARMBAR|TRIANGLE|HEEL|GUILLOTINE|RNC/.test((x.method||'').toUpperCase())).length;
+    const wDec = wins.filter(x => /DEC|DECISION/.test((x.method||'').toUpperCase())).length;
 
     const physItems = [
       f.height  && ['Height', f.height],
@@ -287,7 +365,14 @@
           </div>`).join('')}
       </div>` : '';
 
-    const bioSnippet = f.bio ? f.bio.substring(0, 280) + (f.bio.length > 280 ? '…' : '') : '';
+    const bioSnippet = f.bio ? f.bio.substring(0, 300) + (f.bio.length > 300 ? '…' : '') : '';
+
+    const winBreakdown = (wKO + wSub + wDec > 0) ? `
+      <div class="fm-win-breakdown">
+        ${wKO  ? `<span class="fm-wb-item fm-wb-ko"><span class="fm-wb-n">${wKO}</span> KO/TKO</span>`  : ''}
+        ${wSub ? `<span class="fm-wb-item fm-wb-sub"><span class="fm-wb-n">${wSub}</span> SUB</span>` : ''}
+        ${wDec ? `<span class="fm-wb-item fm-wb-dec"><span class="fm-wb-n">${wDec}</span> DEC</span>` : ''}
+      </div>` : '';
 
     const statsHtml = hasStats ? `
       <div class="fm-section-hd">Career Averages</div>
@@ -306,22 +391,31 @@
           </div>`).join('')}
       </div>` : '';
 
-    const fightsHtml = last5.length ? `
-      <div class="fm-section-hd">Recent Fights</div>
+    const fightsHtml = fights.length ? `
+      <div class="fm-section-hd">Fight Record${winBreakdown}</div>
       <div class="fm-fights">
-        ${last5.map(fight => {
-          const res  = (fight.result || '').toUpperCase();
-          const cls  = res === 'W' ? 'fm-fr-w' : res === 'L' ? 'fm-fr-l' : 'fm-fr-nc';
-          const meth = fight.method ? esc(fight.method) : '';
-          const det  = [fight.round ? 'R' + fight.round : '', fight.event ? esc(fight.event) : ''].filter(Boolean).join(' · ');
+        ${fights.map(fight => {
+          const res = (fight.result || '').toUpperCase();
+          const cls = res === 'W' ? 'fm-fr-w' : res === 'L' ? 'fm-fr-l' : 'fm-fr-nc';
+          const det = [fight.round ? 'R' + fight.round : '', fight.time || ''].filter(Boolean).join(' ');
           return `<div class="fm-fight-row">
             <span class="fm-fr ${cls}">${res || '–'}</span>
             <span class="fm-fight-opp">${esc(fight.opponent || '–')}</span>
-            <span class="fm-fight-method">${meth}</span>
-            <span class="fm-fight-meta">${det}</span>
+            <span class="fm-fight-event">${esc((fight.event || '').replace(/^(UFC|PFL|ONE)\s*/i, ''))}</span>
+            <span class="fm-fight-right">
+              ${methodBadge(fight.method)}
+              ${det ? `<span class="fm-fight-detail">${det}</span>` : ''}
+            </span>
           </div>`;
         }).join('')}
-      </div>` : '';
+      </div>
+      <a class="fm-full-link" href="https://www.ufc.com/athlete/${ufcSlug}" target="_blank" rel="noopener">
+        Full record on UFC.com ↗
+      </a>` : `
+      <div class="fm-no-history">
+        Fight history loading…
+        <a class="fm-full-link-inline" href="https://www.ufc.com/athlete/${ufcSlug}" target="_blank" rel="noopener">View on UFC.com ↗</a>
+      </div>`;
 
     return `
       <div class="fm-hero" ${f.img ? `style="background-image:url('${f.img}')"` : ''}>
@@ -344,7 +438,6 @@
           </div>` : ''}
         ${statsHtml}
         ${fightsHtml}
-        ${!last5.length && !hasStats ? `<div style="font-size:0.65rem;color:rgba(255,255,255,0.2);padding:8px 0 4px">Fight history syncing weekly.</div>` : ''}
       </div>`;
   }
 
