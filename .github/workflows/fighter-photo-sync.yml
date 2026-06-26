@@ -1,0 +1,36 @@
+name: Fighter Photo Sync
+
+on:
+  schedule:
+    - cron: '0 8 * * 2'  # Every Tuesday at 08:00 UTC (day after most UFC events)
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run photo sync
+        run: node scripts/fighter-photo-sync.js
+
+      - name: Commit & push if changed
+        run: |
+          git config user.name  "Fighter Photo Bot"
+          git config user.email "bot@mmabridge.com"
+          git add data/fighters.json
+          if git diff --staged --quiet; then
+            echo "✅ No changes to commit"
+          else
+            git commit -m "chore(auto): sync fighter photos from UFC.com"
+            git push
+          fi
