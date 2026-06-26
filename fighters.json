@@ -931,7 +931,7 @@
     "age": 36,
     "fightingOut": "Chicago, Illinois",
     "style": "Wrestler",
-    "img": "images/fighters/muhammad_belal.png",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/MUHAMMAD_BELAL_L_06-06.png?itok=sZ00w5IQ",
     "bio": "Belal Muhammad (24-4) is a former UFC Welterweight Champion — not necessarily the best striker or the best wrestler in the division, but nobody puts it together like him. Relentless pace, insane cardio, and suffocating pressure that breaks everyone eventually. Captured the title from Leon Edwards at UFC 304 and defended it once before losing a hard-fought decision to Jack Della Maddalena at UFC 315.",
     "last5": [
       {
@@ -1062,7 +1062,7 @@
     "age": 29,
     "fightingOut": "Shymkent, Kazakhstan",
     "style": "All-Around",
-    "img": "images/fighters/rakhmonov_shavkat.png",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/5/RAKHMONOV_SHAVKAT_L_12-07.png?itok=iUYvV22v",
     "bio": "Shavkat Rakhmonov (18-0) is one of the last perfectly undefeated elite fighters in the sport — and every single win in the UFC has come by finish. KOs, TKOs, submissions, it doesn't matter; he finds a way to stop you. The Kazakh Nomad blends Sambist grappling with creative, unpredictable striking and has finished every opponent he's ever faced at the highest level. Mandatory title challenger, it's just a matter of when.",
     "last5": [
       {
@@ -5335,7 +5335,7 @@
       "losses": 0,
       "draws": 0
     },
-    "img": "",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
     "bio": "Gable Steveson is the most hyped heavyweight prospect in MMA — a 2020 Olympic gold medalist and two-time NCAA wrestling champion who brings a pedigree of dominance that rivals any fighter in history. After a stint with WWE, Steveson signed with the UFC in April 2026 off a 3-0 pro MMA record, finishing all three opponents in the first round. He trains at Jackson Wink MMA Academy under the tutelage of Jon Jones. His UFC debut against Elisha Ellison at UFC 329 on July 11, 2026 is one of the most anticipated heavyweight debuts in recent memory.",
     "last5": [
       {
@@ -5453,7 +5453,7 @@
     "weightClass": "Flyweight",
     "ranking": "#2",
     "record": {
-      "wins": 21,
+      "wins": 23,
       "losses": 7,
       "draws": 0
     },
@@ -5466,6 +5466,22 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-07/KAPE_MANEL_L_07-08.png",
     "bio": "Manel Kape is one of the most electric flyweights on the roster, an Angolan striker who backs up his trash talk with devastating knockout power. 'Starboy' has four finishes in the UFC and owns wins over ranked opponents, making him a dangerous matchup for anyone at 125 lbs.",
     "last5": [
+      {
+        "opponent": "Kyoji Horiguchi",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Kape vs. Horiguchi",
+        "round": 3,
+        "time": "2:42"
+      },
+      {
+        "opponent": "Brandon Royval",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "UFC on ESPN: Royval vs. Kape",
+        "round": 1,
+        "time": "3:18"
+      },
       {
         "opponent": "Asu Almabayev",
         "result": "W",
@@ -5503,6 +5519,30 @@
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Cannonier vs. Strickland",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Zhalgas Zhumagulov",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Font vs. Aldo",
+        "round": 1,
+        "time": "4:02"
+      },
+      {
+        "opponent": "Ode' Osbourne",
+        "result": "W",
+        "method": "KO (flying knee and punches)",
+        "event": "UFC 265",
+        "round": 1,
+        "time": "4:44"
+      },
+      {
+        "opponent": "Matheus Nicolau",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Edwards vs. Muhammad",
         "round": 3,
         "time": "5:00"
       }
@@ -8258,7 +8298,8 @@
         "round": 1,
         "time": "1:04"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/ZAHABI_AIEMANN_R_06-14.png?itok=Rkew0wVb"
   },
   {
     "id": "kyle-daukaus",
@@ -8309,7 +8350,8 @@
         "round": 1,
         "time": "1:13"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/DAUKAUS_KYLE_R_06-14.png?itok=u2hBMZhV"
   },
   {
     "id": "diego-lopes",
@@ -8360,7 +8402,8 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/LOPES_DIEGO_L_06-14.png?itok=UQIuHbZC"
   },
   {
     "id": "steve-garcia",
@@ -8411,7 +8454,8 @@
         "round": 2,
         "time": "1:01"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/GARCIA_STEVE_R_06-14.png?itok=Xi8Pxast"
   },
   {
     "id": "josh-hokit",
@@ -8462,17 +8506,26 @@
         "round": 1,
         "time": "2:00"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/HOKIT_JOSH_L_06-14.png?itok=Es1_9BbW"
   },
   {
     "id": "kyoji-horiguchi",
     "name": "Kyoji Horiguchi",
     "record": {
       "wins": 36,
-      "losses": 5,
+      "losses": 6,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Manel Kape",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Kape vs. Horiguchi",
+        "round": 3,
+        "time": "2:42"
+      },
       {
         "opponent": "Amir Albazi",
         "result": "W",
@@ -8512,8 +8565,41 @@
         "event": "2023 in Rizin Fighting Federation#Rizin 45",
         "round": 2,
         "time": "3:44"
+      },
+      {
+        "opponent": "Hiromasa Ougikubo",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Bellator MMA vs. Rizin",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Yuto Hokamura",
+        "result": "W",
+        "method": "Technical Submission (arm-triangle choke)",
+        "event": "2022 in Rizin Fighting Federation#Super Rizin & Rizin 38",
+        "round": 2,
+        "time": "2:59"
+      },
+      {
+        "opponent": "Patchy Mix",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "Bellator 279",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Sergio Pettis",
+        "result": "L",
+        "method": "KO (spinning backfist)",
+        "event": "Bellator 272",
+        "round": 4,
+        "time": "3:24"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-11/HORIGUCHI_KYOJI_R_11-22.png?itok=Dn6SxnwP"
   },
   {
     "id": "vinicius-oliveira",
@@ -8564,7 +8650,8 @@
         "round": 3,
         "time": "4:41"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/OLIVEIRA_VINICIUS_L_06-20.png?itok=1W04x7_K"
   },
   {
     "id": "jhonata-diniz",
@@ -8615,7 +8702,8 @@
         "round": 2,
         "time": "2:12"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/DINIZ_JHONATA_L_10-11.png?itok=a7w4jLAU"
   },
   {
     "id": "jose-luiz-rodrigues",
@@ -8717,7 +8805,8 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/ROSA_KAROL_L_06-20.png?itok=YUHa84_9"
   },
   {
     "id": "ion-cutelaba",
@@ -8768,7 +8857,8 @@
         "round": 1,
         "time": "4:37"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/CUTELABA_ION_L_06-20.png?itok=UdDEIagu"
   },
   {
     "id": "navajo-stirling",
@@ -8819,7 +8909,8 @@
         "round": 1,
         "time": "4:37"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/STIRLING_NAVAJO_L_03-28.png?itok=BVUQTbQ5"
   },
   {
     "id": "farid-basharat",
@@ -8870,7 +8961,8 @@
         "round": 1,
         "time": "4:15"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-10/2/BASHARAT_FARID_L_10-26.png?itok=L4yAubSy"
   },
   {
     "id": "ethyn-ewing",
@@ -8921,7 +9013,8 @@
         "round": 1,
         "time": "4:15"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/EWING_ETHYN_L_04-04.png?itok=AdTd6fQ0"
   },
   {
     "id": "mitch-raposo",
@@ -8972,7 +9065,8 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-05/RAPOSO_MITCH_L_06-01.png?itok=fgzxnjZ5"
   },
   {
     "id": "bia-mesquita",
@@ -9023,7 +9117,8 @@
         "round": 2,
         "time": "4:21"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/MESQUITA_BIA_L_10-11.png?itok=W3FwWXNQ"
   },
   {
     "id": "andre-lima",
@@ -9074,7 +9169,8 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/LIMA_ANDRE_L_06-20.png?itok=C4QdWb5Q"
   },
   {
     "id": "hyder-amil",
@@ -9125,7 +9221,8 @@
         "round": 2,
         "time": "2:12"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/AMIL_HYDER_L_06-20.png?itok=Y4pBvEwK"
   },
   {
     "id": "christian-rodriguez",
@@ -9176,7 +9273,8 @@
         "round": 1,
         "time": "2:57"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-03/RODRIGUEZ_CHRISTIAN_L_03-29.png?itok=VQtmpVuP"
   },
   {
     "id": "melsik-baghdasaryan",
@@ -9227,7 +9325,8 @@
         "round": 2,
         "time": "1:50"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/BAGHDASARYAN_MELSIK_L_06-20.png?itok=ffJEA1RN"
   },
   {
     "id": "murtazali-magomedov",
@@ -9278,7 +9377,8 @@
         "round": 2,
         "time": "1:50"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/MAGOMEDOV_MURTAZLI_R_06-20.png?itok=wXAJELZD"
   },
   {
     "id": "gaston-bolanos",
@@ -9329,7 +9429,8 @@
         "round": 1,
         "time": "2:19"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/BOLANOS_GASTON_L_06-20.png?itok=WvUQBhDT"
   },
   {
     "id": "rafael-fiziev",
@@ -9380,7 +9481,8 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/FIZIEV_RAFAEL_L_06-27.png?itok=9yGMUIvE"
   },
   {
     "id": "manuel-torres",
@@ -9431,7 +9533,8 @@
         "round": 1,
         "time": "1:50"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-03/TORRES_MANUEL_L_03-29.png?itok=yThf85tQ"
   },
   {
     "id": "shara-magomedov",
@@ -9482,7 +9585,8 @@
         "round": 3,
         "time": "2:27"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/MAGOMEDOV_SHARA_L_06-27.png?itok=_iIAbX5t"
   },
   {
     "id": "michel-pereira",
@@ -9533,7 +9637,8 @@
         "round": 1,
         "time": "0:54"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/PEREIRA_MICHEL_L_08-23.png?itok=NBF0z1BU"
   },
   {
     "id": "ismail-naurdiev",
@@ -9584,7 +9689,8 @@
         "round": 1,
         "time": "3:23"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-11/NAURDIEV_ISMAIL_L_11-22.png?itok=PK0HzWkv"
   },
   {
     "id": "ikram-aliskerov",
@@ -9635,7 +9741,8 @@
         "round": 1,
         "time": "2:10"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/ALISKEROV_IKRAM_L_06-27.png?itok=3ij01m2a"
   },
   {
     "id": "asu-almabayev",
@@ -9686,7 +9793,8 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/ALMABAYEV_ASU_L_06-27.png?itok=Y0SjNrdV"
   },
   {
     "id": "charles-johnson",
@@ -9737,7 +9845,8 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/JOHNSON_CHARLES_L_03-14.png?itok=KZuPZ1W7"
   },
   {
     "id": "abusupiyan-magomedov",
@@ -9839,7 +9948,8 @@
         "round": 1,
         "time": "1:34"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/OLEKSIEJCZUK_MICHAL_L_02-07.png?itok=hDOVJtgb"
   },
   {
     "id": "rizvan-kuniev",
@@ -9890,7 +10000,8 @@
         "round": 3,
         "time": "1:00"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-06/KUNIEV_RIZVAN_R_06-21.png?itok=RaVbAYbN"
   },
   {
     "id": "tyrell-fortune",
@@ -9941,7 +10052,8 @@
         "round": 1,
         "time": "3:14"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/FORTUNE_TYRELL_R_03-28.png?itok=_-CzoqwV"
   },
   {
     "id": "nursulton-ruziboev",
@@ -9992,7 +10104,8 @@
         "round": 1,
         "time": "0:44"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/RUZIBOEV_NURSULTON_L_06-27.png?itok=qjqgBV1p"
   },
   {
     "id": "andrey-pulyaev",
@@ -10043,7 +10156,8 @@
         "round": 1,
         "time": "3:32"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-03/PULYAEV_ANDREY_R_03-22.png?itok=jWF656q7"
   },
   {
     "id": "bekzat-almakhan",
@@ -10094,7 +10208,8 @@
         "round": 1,
         "time": "0:07"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/ALMAKHAN_BEKZAT_L_06-27.png?itok=6I60CdPv"
   },
   {
     "id": "jean-matsumoto",
@@ -10145,7 +10260,8 @@
         "round": 1,
         "time": "4:15"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/MATSUMOTO_JEAN_L_02-07.png?itok=khw9HcPe"
   },
   {
     "id": "andreas-gustafsson",
@@ -10196,7 +10312,8 @@
         "round": 5,
         "time": "1:07"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/GUSTAFSSON_ANDREAS_L_09-06.png?itok=oVfEIQg-"
   },
   {
     "id": "nazim-sadykhov",
@@ -10247,7 +10364,8 @@
         "round": 3,
         "time": "0:38"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-12/SADYKHOV_NAZIM_L_12-06.png?itok=ccjzeBfj"
   },
   {
     "id": "matheus-camilo",
@@ -10298,7 +10416,8 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/CAMILO_MATHEUS_R.png?itok=YPpivJ_i"
   },
   {
     "id": "eric-nolan",
@@ -10349,7 +10468,8 @@
         "round": 2,
         "time": "0:23"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/NOLAN_ERIC_R_08-16.png?itok=Lf5rUsnh"
   },
   {
     "id": "lone-er-kavanagh",
@@ -10400,7 +10520,8 @@
         "round": 1,
         "time": "2:35"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-03/KAVANAGH_LONEER_L_03-22.png?itok=TudzQ-4b"
   },
   {
     "id": "ferreira",
@@ -10502,7 +10623,8 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/GARBRANDT_CODY_L_03-07.png?itok=NqRJRm08"
   },
   {
     "id": "adrian-yanez",
@@ -10553,7 +10675,8 @@
         "round": 1,
         "time": "3:49"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-12/YANEZ_ADRIAN_L_12-14.png?itok=SPA6dLRg"
   },
   {
     "id": "tracy-cortez",
@@ -10604,7 +10727,8 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/5/CORTEZ_TRACY_L_07-13.png?itok=XYLdpC6o"
   },
   {
     "id": "wang-cong",
@@ -10655,7 +10779,8 @@
         "round": 1,
         "time": "1:02"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/CONG_WANG_L_02-07.png?itok=LBnTljRc"
   },
   {
     "id": "kai-kamaka-iii",
@@ -10706,7 +10831,8 @@
         "round": 2,
         "time": "0:58"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/KAMAKA_KAI_L_04-04.png?itok=608oMHfq"
   },
   {
     "id": "luke-riley",
@@ -10757,7 +10883,8 @@
         "round": 2,
         "time": "0:17"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/RILEY_LUKE_L_03-21.png?itok=o5AdqH4w"
   },
   {
     "id": "damian-pinas",
@@ -10808,7 +10935,8 @@
         "round": 2,
         "time": "2:13"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/PINAS_DAMIAN_L_02-28.png?itok=XaoAMm8p"
   },
   {
     "id": "cesar-almeida",
@@ -10859,7 +10987,8 @@
         "round": 2,
         "time": "2:13"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-12/ALMEIDA_CESAR_L_12-13.png?itok=-zsz4wrx"
   },
   {
     "id": "cody-durden",
@@ -10910,7 +11039,8 @@
         "round": 2,
         "time": "2:58"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/DURDEN_CODY_L_03-07.png?itok=vvCN2I2y"
   },
   {
     "id": "ode-osbourne",
@@ -10961,6 +11091,1515 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/OSBOURNE_ODE_L_02-21.png?itok=aw0NxANu"
+  },
+  {
+    "id": "song-yadong",
+    "name": "Song Yadong",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/YADONG_SONG_L_05-30.png?itok=yMtLdKZS"
+  },
+  {
+    "id": "natalia-silva",
+    "name": "Natália Silva",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-01/SILVA_NATALIA_L_01-24.png?itok=A5iY_ScW"
+  },
+  {
+    "id": "deiveson-figueiredo",
+    "name": "Deiveson Figueiredo",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/FIGUEIREDO_DEIVESON_L_10-11.png?itok=arHv-wVH"
+  },
+  {
+    "id": "modestas-bukauskas",
+    "name": "Modestas Bukauskas",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/BUKAUSKAS_MODESTAS_L_05-16.png?itok=J4AuKXWf"
+  },
+  {
+    "id": "alex-perez",
+    "name": "Alex Perez",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/PEREZ_ALEX_L_05-30.png?itok=Pvs7AuKU"
+  },
+  {
+    "id": "ricky-turcios",
+    "name": "Ricky Turcios",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-02/TURCIOS_RICKY_L_02-24.png?itok=94CYiy7J"
+  },
+  {
+    "id": "cameron-smotherman",
+    "name": "Cameron Smotherman",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/SMOTHERMAN_CAMERON_L_05-03.png?itok=gcqi0JfH"
+  },
+  {
+    "id": "ateba-gautier",
+    "name": "Ateba Gautier",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/GAUTIER_ATEBA_L_05-09.png?itok=dydh3iVk"
+  },
+  {
+    "id": "denzel-freeman",
+    "name": "Denzel Freeman",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-11/FREEMAN_DENZEL_R_11-22.png?itok=LYuPiV6V"
+  },
+  {
+    "id": "dan-hooker",
+    "name": "Dan Hooker",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-01/HOOKER_DAN_L_01-31.png?itok=GV6BT7Q-"
+  },
+  {
+    "id": "tallison-teixeira",
+    "name": "Tallison Teixeira",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/TEIXEIRA_TALLISON_R_07-12.png?itok=vtmFVu5M"
+  },
+  {
+    "id": "tai-tuivasa",
+    "name": "Tai Tuivasa",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/TUIVASA_TAI_L_05-02.png?itok=XW0QZQmA"
+  },
+  {
+    "id": "quillan-salkilld",
+    "name": "Quillan Salkilld",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-01/SALKILLD_QUILLAN_L_01-31.png?itok=FT1z9B_U"
+  },
+  {
+    "id": "jamie-mullarkey",
+    "name": "Jamie Mullarkey",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/MULLARKEY_JAMIE_L_09-27.png?itok=3mV2XbLt"
+  },
+  {
+    "id": "billy-elekana",
+    "name": "Billy Elekana",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/ELEKANA_BILLY_L_01-31.png?itok=l0IviRUv"
+  },
+  {
+    "id": "junior-tafa",
+    "name": "Junior Tafa",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/TAFA_JUNIOR_L_05-02.png?itok=dLi9Oyuv"
+  },
+  {
+    "id": "cam-rowston",
+    "name": "Cam Rowston"
+  },
+  {
+    "id": "cody-brundage",
+    "name": "Cody Brundage",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/BRUNDAGE_CODY_L_05-16.png?itok=6XckDt9Q"
+  },
+  {
+    "id": "jacob-malkoun",
+    "name": "Jacob Malkoun",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/MALKOUN_JACOB_L_05-02.png?itok=8P_D4zmL"
+  },
+  {
+    "id": "torrez-finney",
+    "name": "Torrez Finney",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/FINNEY_TORREZ_L_01-31.png?itok=coCuBaUp"
+  },
+  {
+    "id": "kiefer-crosbie",
+    "name": "Kiefer Crosbie",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/CROSBIE_KIEFER_L_07-27.png?itok=Ucpa5apM"
+  },
+  {
+    "id": "carlos-candelario",
+    "name": "Carlos Candelario",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2022-05/526c1be0-510d-4326-b67a-adbdb0fe1796%252FCANDELARIO_CARLOS_L_04-30.png?itok=kkFnO-7v"
+  },
+  {
+    "id": "mingyang-zhang",
+    "name": "Mingyang Zhang"
+  },
+  {
+    "id": "josh-parisian",
+    "name": "Josh Parisian",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-03/PARISIAN_JOSH_L_08-12.png?itok=F44hVZHz"
+  },
+  {
+    "id": "marc-andre-barriault",
+    "name": "Marc-Andre Barriault",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/BARRIAULT_MARC-ANDRE_L_05-10.png?itok=kJq5jhiN"
+  },
+  {
+    "id": "dustin-jacoby",
+    "name": "Dustin Jacoby",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/JACOBY_DUSTIN_L_02-07.png?itok=1bDBrjfv"
+  },
+  {
+    "id": "julius-walker",
+    "name": "Julius Walker",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/WALKER_JULIUS_L_08-09.png?itok=U6ZUMaBd"
+  },
+  {
+    "id": "guido-cannetti",
+    "name": "Guido Cannetti",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-06/CANNETTI_GUIDO_L_03-11.png?itok=hdTXGjxg"
+  },
+  {
+    "id": "yusuf-gurhan",
+    "name": "Yusuf Gurhan"
+  },
+  {
+    "id": "terrance-mckinney",
+    "name": "Terrance McKinney",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/MCKINNEY_TERRANCE_L_03-28.png?itok=xOcN-WHP"
+  },
+  {
+    "id": "kevin-jousset",
+    "name": "Kevin Jousset",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-09/JOUSSET_KEVIN_L_09-28.png?itok=UDZimzgf"
+  },
+  {
+    "id": "zac-pauga",
+    "name": "Zac Pauga",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-02/PAUGA_ZAC_L_02-10.png?itok=ABMYlLru"
+  },
+  {
+    "id": "drew-dober",
+    "name": "Drew Dober",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/DOBER_DREW_L_03-07.png?itok=2b9RABZl"
+  },
+  {
+    "id": "aleksandr-hernandez",
+    "name": "Aleksandr Hernandez"
+  },
+  {
+    "id": "kelvin-gastelum",
+    "name": "Kelvin Gastelum",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/GASTELUM_KELVIN_L_04-11.png?itok=yRQgInm7"
+  },
+  {
+    "id": "dustin-stoltzfus",
+    "name": "Dustin Stoltzfus",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/STOLTZFUS_DUSTIN-L_05-17.png?itok=H4e1QGAv"
+  },
+  {
+    "id": "santiago-luna",
+    "name": "Santiago Luna",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/LUNA_SANTIAGO_L_02-28.png?itok=zdTFJx55"
+  },
+  {
+    "id": "quang-le",
+    "name": "Quang Le",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-08/LE_QUANG_L_08-10.png?itok=_GZ0WqG6"
+  },
+  {
+    "id": "dusko-todorovic",
+    "name": "Dusko Todorovic",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2022-08/4526cb41-c0d2-423a-ad18-d8efe88477f3%252FTODOROVIC_DUSKO_L_05-21.png?itok=Cs7dDZH4"
+  },
+  {
+    "id": "jose-medina",
+    "name": "Jose Medina"
+  },
+  {
+    "id": "amanda-lemos",
+    "name": "Amanda Lemos",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/LEMOS_AMANDA_L_03-14.png?itok=djp2Zzev"
+  },
+  {
+    "id": "zach-reese",
+    "name": "Zach Reese",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/REESE_ZACH_L_02-21.png?itok=beiKFsJ0"
+  },
+  {
+    "id": "sedriques-dumas",
+    "name": "Sedriques Dumas",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/DUMAS_SEDRIQUES_L_04-12.png?itok=x6aJnKrz"
+  },
+  {
+    "id": "jesus-aguilar",
+    "name": "Jesus Aguilar",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/AGUILAR_JESUS_L_09-13.png?itok=u6hVvPbp"
+  },
+  {
+    "id": "luis-gurule",
+    "name": "Luis Gurule",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/GURULE_LUIS_R_09-13.png?itok=S4-QiBmF"
+  },
+  {
+    "id": "alden-coria",
+    "name": "Alden Coria",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/CORIA_ALDEN_L_02-21.png?itok=h0Ke1Q2E"
+  },
+  {
+    "id": "alessandro-costa",
+    "name": "Alessandro Costa",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/COSTA_ALESSANDRO_L_04-04.png?itok=w2_4hLLL"
+  },
+  {
+    "id": "reinier-de-ridder",
+    "name": "Reinier de Ridder",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/DE-RIDDER_REINIER_L_10-18.png?itok=4Bk9ddfu"
+  },
+  {
+    "id": "raul-rosas-jr",
+    "name": "Raul Rosas Jr.",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-03/ROSAS_JR_RAUL_L_03-29.png?itok=WrV_fpkM"
+  },
+  {
+    "id": "rob-font",
+    "name": "Rob Font",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/FONT_ROB_L_03-07.png?itok=1MgNWkzy"
+  },
+  {
+    "id": "michael-johnson",
+    "name": "Michael Johnson",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-01/JOHNSON_MICHAEL_L_01-24.png?itok=fCCyiIzI"
+  },
+  {
+    "id": "gregory-rodrigues",
+    "name": "Gregory Rodrigues",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/RODRIGUES_GREGORY_L_03-07.png?itok=klxiW8-p"
+  },
+  {
+    "id": "brunno-ferreira",
+    "name": "Brunno Ferreira",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/FERREIRA_BRUNNO_L_07-19.png?itok=rQPmgZMB"
+  },
+  {
+    "id": "long-xiao",
+    "name": "Long Xiao"
+  },
+  {
+    "id": "donte-johnson",
+    "name": "Donte Johnson",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/JOHNSON_DONTE_L_03-07.png?itok=A4k7bO9o"
+  },
+  {
+    "id": "alberto-montes",
+    "name": "Alberto Montes",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/MONTES_ALBERTO_R_03-07.png?itok=XBEBBprq"
+  },
+  {
+    "id": "niko-price",
+    "name": "Niko Price",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-06/PRICE_NIKO_L_06-28.png?itok=pV3E99ve"
+  },
+  {
+    "id": "themba-gorimbo",
+    "name": "Themba Gorimbo",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-10/GORIMBO_THEMBA_L_10-12.png?itok=5AoSoKfD"
+  },
+  {
+    "id": "bogdan-guskov",
+    "name": "Bogdan Guskov",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/7/GUSKOV_BOGDAN_L_01-18.png?itok=IAOAajQf"
+  },
+  {
+    "id": "nurullo-aliev",
+    "name": "Nurullo Aliev",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-11/ALIEV_NURULLO_L_11-22.png?itok=NcnIZwgs"
+  },
+  {
+    "id": "edson-barboza",
+    "name": "Edson Barboza",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-12/BARBOZA_EDSON_L_12-06.png?itok=4HS5D_Np"
+  },
+  {
+    "id": "marc-diakiese",
+    "name": "Marc Diakiese",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-07/DIAKIESE_MARC_L_07-22.png?itok=KIy-BSTb"
+  },
+  {
+    "id": "damir-ismagulov",
+    "name": "Damir Ismagulov",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-06/ISMAGULOV_DAMIR_L_07-01.png?itok=vVamIkvm"
+  },
+  {
+    "id": "jordan-leavitt",
+    "name": "Jordan Leavitt",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/LEAVITT_JORDAN_L_06-06.png?itok=6oX30sib"
+  },
+  {
+    "id": "mike-aswell-jr",
+    "name": "Mike Aswell Jr."
+  },
+  {
+    "id": "chris-duncan",
+    "name": "Chris Duncan",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-07/DUNCAN_CHRIS_L_07-22.png?itok=35KjIAR4"
+  },
+  {
+    "id": "roman-dolidze",
+    "name": "Roman Dolidze",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/DOLIDZE_ROMAN_L_03-21.png?itok=LBWQed7d"
+  },
+  {
+    "id": "danny-silva",
+    "name": "Danny Silva",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/SILVA_DANNY_L_08-02.png?itok=KZOcQwow"
+  },
+  {
+    "id": "kyle-campbell",
+    "name": "Kyle Campbell"
+  },
+  {
+    "id": "shanelle-dyer",
+    "name": "Shanelle Dyer",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/DYER_SHANELLE_L_03-21.png?itok=cYvyUqI4"
+  },
+  {
+    "id": "rossana-oliveira",
+    "name": "Rossana Oliveira"
+  },
+  {
+    "id": "brando-pericic",
+    "name": "Brando Pericic",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/PERICIC_BRANDO_L_09-27.png?itok=UWps5XKu"
+  },
+  {
+    "id": "liam-sutherland",
+    "name": "Liam Sutherland"
+  },
+  {
+    "id": "joe-pyfer",
+    "name": "Joe Pyfer",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-06/PYFER_JOE_L_06-29.png?itok=sM3GEwSu"
+  },
+  {
+    "id": "michael-chiesa",
+    "name": "Michael Chiesa",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/CHIESA_MICHAEL_L_03-28.png?itok=sCF2lLlZ"
+  },
+  {
+    "id": "julian-erosa",
+    "name": "Julian Erosa",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/EROSA_JULIAN_L_03-28.png?itok=QBTJINN6"
+  },
+  {
+    "id": "lerryan-douglas",
+    "name": "Lerryan Douglas",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/DOUGLAS_LERRYAN_R_03-28.png?itok=59ApcdLf"
+  },
+  {
+    "id": "mansur-abdul-malik",
+    "name": "Mansur Abdul-Malik",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/ABDUL-MALIK_MANSUR_L_03-28.png?itok=ZFfVM7S4"
+  },
+  {
+    "id": "yousri-belgaroui",
+    "name": "Yousri Belgaroui",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/BELGAROUI_YOUSRI_R_10-18.png?itok=1K9Q4J-G"
+  },
+  {
+    "id": "kyle-nelson",
+    "name": "Kyle Nelson",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/NELSON_KYLE_L_10-18.png?itok=N6FSsbo_"
+  },
+  {
+    "id": "ignacio-bahamondes",
+    "name": "Ignacio Bahamondes",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/BAHAMONDES_IGNACIO_L_03-28.png?itok=VTeHZCVE"
+  },
+  {
+    "id": "tofiq-musayev",
+    "name": "Tofiq Musayev",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-06/MUSAYEV_TOFIQ_L_06-21.png?itok=wQeHfkul"
+  },
+  {
+    "id": "chase-hooper",
+    "name": "Chase Hooper",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/HOOPER_CHASE_L_03-28.png?itok=kKgPb3_n"
+  },
+  {
+    "id": "lance-gibson-jr",
+    "name": "Lance Gibson Jr.",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-12/GIBSON_JR_LANCE_R_12-13.png?itok=k-q6SrNE"
+  },
+  {
+    "id": "marcin-tybura",
+    "name": "Marcin Tybura",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/TYBURA_MARCIN_L_03-28.png?itok=TNTDlOaO"
+  },
+  {
+    "id": "casey-oneill",
+    "name": "Casey O'Neill",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/ONEILL_CASEY_L_03-28.png?itok=SrTyGo0-"
+  },
+  {
+    "id": "gabriella-fernandes",
+    "name": "Gabriella Fernandes",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/FERNANDES_GABRIELLA_L_08-09.png?itok=sUYuxLOm"
+  },
+  {
+    "id": "bruno-lopes",
+    "name": "Bruno Lopes",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/2/LOPES_BRUNO_L_01-11.png?itok=gOWa96DN"
+  },
+  {
+    "id": "tabatha-ricci",
+    "name": "Tabatha Ricci",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/5/RICCI_TABATHA_L_08-24.png?itok=BqI35p0z"
+  },
+  {
+    "id": "abdul-rakhman-yakhyaev",
+    "name": "Abdul Rakhman Yakhyaev"
+  },
+  {
+    "id": "brendson-ribeiro",
+    "name": "Brendson Ribeiro",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-02/RIBEIRO_BRENDSON_L_02-17.png?itok=T2HXVKsB"
+  },
+  {
+    "id": "rafael-estevam",
+    "name": "Rafael Estevam",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/ESTEVAM_RAFAEL_L_08-02.png?itok=9BQyjN44"
+  },
+  {
+    "id": "tommy-mcmillen",
+    "name": "Tommy McMillen",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/MCMILLEN_TOMMY_L_04-04.png?itok=HMdvrI8F"
+  },
+  {
+    "id": "manolo-zecchini",
+    "name": "Manolo Zecchini",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/ZECCHINI_MANOLO_R_04-04.png?itok=9jWtZxNN"
+  },
+  {
+    "id": "jose-delano",
+    "name": "Jose Delano",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/DELANO_JOSE_L_04-04.png?itok=yx6OJq5I"
+  },
+  {
+    "id": "robert-ruchala",
+    "name": "Robert Ruchala",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/RUCHALA_ROBERT_R_04-04.png?itok=dyMpcjir"
+  },
+  {
+    "id": "thomas-petersen",
+    "name": "Thomas Petersen",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/PETERSEN_THOMAS_L_05-03.png?itok=sYHO_Yst"
+  },
+  {
+    "id": "guilherme-pat",
+    "name": "Guilherme Pat",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/PAT_GUILHERME_L_04-04.png?itok=XG_cC52L"
+  },
+  {
+    "id": "stewart-nicoll",
+    "name": "Stewart Nicoll",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-08/NICOLL_STEWART_L_08-17.png?itok=2fIVytXS"
+  },
+  {
+    "id": "darrius-flowers",
+    "name": "Darrius Flowers",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-02/FLOWERS_DARRIUS_L_07-29.png?itok=fI4ZyGRM"
+  },
+  {
+    "id": "lando-vannata",
+    "name": "Lando Vannata",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/VANNATA_LANDO_L_04-04.png?itok=ceMwCOLJ"
+  },
+  {
+    "id": "alice-pereira",
+    "name": "Alice Pereira",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/PEREIRA_ALICE_L_04-04.png?itok=971jtgjZ"
+  },
+  {
+    "id": "hailey-cowan",
+    "name": "Hailey Cowan",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-03/COWAN_HAILEY_L_02_25.png?itok=FHOVXSgq"
+  },
+  {
+    "id": "tresean-gore",
+    "name": "Tresean Gore",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-04/GORE_TRESEAN_L_04-12.png?itok=JeztGuNv"
+  },
+  {
+    "id": "azamat-bekoev",
+    "name": "Azamat Bekoev",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/BEKOEV_AZAMAT_L_04-04.png?itok=a6lk_o5N"
+  },
+  {
+    "id": "dione-barbosa",
+    "name": "Dione Barbosa",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/BARBOSA_DIONE_L_04-04.png?itok=U7l8E953"
+  },
+  {
+    "id": "melissa-gatto",
+    "name": "Melissa Gatto",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-03/GATTO_MELISSA_L_07-01.png?itok=xSfep8cI"
+  },
+  {
+    "id": "azamat-murzakanov",
+    "name": "Azamat Murzakanov",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/MURZAKANOV_AZAMAT_L_04-11.png?itok=mqQa9nra"
+  },
+  {
+    "id": "dominick-reyes",
+    "name": "Dominick Reyes",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/REYES_DOMINICK_L_04-11.png?itok=7HSVtv1p"
+  },
+  {
+    "id": "johnny-walker",
+    "name": "Johnny Walker",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/WALKER_JOHNNY_L_08-23.png?itok=cy7jdBoB"
+  },
+  {
+    "id": "cub-swanson",
+    "name": "Cub Swanson",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/SWANSON_CUB_L_04-11.png?itok=8LCtVmm8"
+  },
+  {
+    "id": "nate-landwehr",
+    "name": "Nate Landwehr",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/LANDWEHR_NATE_L_07-12.png?itok=yAVkr3X6"
+  },
+  {
+    "id": "aaron-pico",
+    "name": "Aaron Pico",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/PICO_AARON_R_08-16.png?itok=90xvvwSZ"
+  },
+  {
+    "id": "patricio-pitbull",
+    "name": "Patricio Pitbull"
+  },
+  {
+    "id": "kevin-holland",
+    "name": "Kevin Holland",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/HOLLAND_KEVIN_L_04-11.png?itok=mOqmHvqp"
+  },
+  {
+    "id": "randy-brown",
+    "name": "Randy Brown",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-04/BROWN_RANDY_L_04-26.png?itok=alaUuEEQ"
+  },
+  {
+    "id": "mateusz-gamrot",
+    "name": "Mateusz Gamrot",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/GAMROT_MATEUSZ_L_04-11.png?itok=4H5q88x9"
+  },
+  {
+    "id": "esteban-ribovics",
+    "name": "Esteban Ribovics",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-09/RIBOVICS_ESTEBAN_L_05-11.png?itok=sQBu-_E0"
+  },
+  {
+    "id": "lupita-godinez",
+    "name": "Lupita Godinez",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-03/GODINEZ_LOOPY_L_03-29.png?itok=GYu4a1a8"
+  },
+  {
+    "id": "chris-padilla",
+    "name": "Chris Padilla",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/PADILLA_CHRIS_L_04-11.png?itok=-TtykdQo"
+  },
+  {
+    "id": "marquel-mederos",
+    "name": "MarQuel Mederos",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-06/MEDEROS_MARQUEL_L_06-07.png?itok=LMaN4fsf"
+  },
+  {
+    "id": "vicente-luque",
+    "name": "Vicente Luque",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/LUQUE_VICENTE_L_10-11.png?itok=Hsx6rALQ"
+  },
+  {
+    "id": "charles-radtke",
+    "name": "Charles Radtke",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/RADTKE_CHARLES_L_04-11.png?itok=rRI5kMVe"
+  },
+  {
+    "id": "francisco-prado",
+    "name": "Francisco Prado",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/PRADO_FRANCISCO_L_07-19.png?itok=DtuntsjN"
+  },
+  {
+    "id": "mike-malott",
+    "name": "Mike Malott",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/MALOTT_MIKE_L_05-10.png?itok=d0J2-On7"
+  },
+  {
+    "id": "charles-jourdain",
+    "name": "Charles Jourdain",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/JOURDAIN_CHARLES_L_10-18.png?itok=lbnIm7ba"
+  },
+  {
+    "id": "kyler-phillips",
+    "name": "Kyler Phillips",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/PHILLIPS_KYLER_L_04-18.png?itok=HIpTQwmE"
+  },
+  {
+    "id": "jai-herbert",
+    "name": "Jai Herbert",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-03/HERBERT_JAI_L_03-22.png?itok=dCAcIrpk"
+  },
+  {
+    "id": "mandel-nallo",
+    "name": "Mandel Nallo",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/NALLO_MANDEL_L_04-18.png?itok=7Z3AEAXw"
+  },
+  {
+    "id": "jasmine-jasudavicius",
+    "name": "Jasmine Jasudavicius",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/JASUDAVICIUS_JASMINE_L_04-18.png?itok=brWuBeJK"
+  },
+  {
+    "id": "karine-silva",
+    "name": "Karine Silva",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/SILVA_KARINE_L_08-16.png?itok=6JdZdcEV"
+  },
+  {
+    "id": "gauge-young",
+    "name": "Gauge Young",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/YOUNG_GAUGE_R_08-23.png?itok=DEcjS31_"
+  },
+  {
+    "id": "thiago-moises",
+    "name": "Thiago Moisés",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/MOISES_THIAGO_L_04-18.png?itok=Psb_LkNa"
+  },
+  {
+    "id": "marcio-barbosa",
+    "name": "Marcio Barbosa",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/BARBOSA_MARCIO_R_04-18.png?itok=TMaL9uRx"
+  },
+  {
+    "id": "dennis-buzukja",
+    "name": "Dennis Buzukja",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/BUZUKJA_DENNIS_L_04-18.png?itok=q20Eox1G"
+  },
+  {
+    "id": "robert-valentin",
+    "name": "Robert Valentin"
+  },
+  {
+    "id": "julien-leblanc",
+    "name": "Julien Leblanc",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/LEBLANC_JULIEN_L_04-18.png?itok=zBIsz0dB"
+  },
+  {
+    "id": "gokhan-saricam",
+    "name": "Gokhan Saricam",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/SARICAM_GOKHAN_R_04-18.png?itok=3bhwid51"
+  },
+  {
+    "id": "tanner-boser",
+    "name": "Tanner Boser",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/BOSER_TANNER_L_04-18.png?itok=_lraVPHf"
+  },
+  {
+    "id": "melissa-croden",
+    "name": "Melissa Croden",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/CRODEN_MELISSA_L_10-18.png?itok=0xkEkNiU"
+  },
+  {
+    "id": "daria-zheleznyakova",
+    "name": "Daria Zheleznyakova",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-06/ZHELEZNIAKOVA_DARIA_L_06-21.png?itok=2_fWceIz"
+  },
+  {
+    "id": "jj-aldrich",
+    "name": "JJ Aldrich",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/ALDRICH_JJ_L_04-18.png?itok=IsgI-ZFw"
+  },
+  {
+    "id": "jamey-lyn-horth",
+    "name": "Jamey-Lyn Horth",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-12/HORTH_JAMEY-LYN_L_12-13.png?itok=6cuyU03W"
+  },
+  {
+    "id": "john-castaneda",
+    "name": "John Castaneda",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/CASTANEDA_JOHN_L_04-18.png?itok=0hwSejmd"
+  },
+  {
+    "id": "mark-vologdin",
+    "name": "Mark Vologdin",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/VOLOGDIN_MARK_R_04-18.png?itok=Nd85RW3E"
+  },
+  {
+    "id": "john-yannis",
+    "name": "John Yannis",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/YANNIS_JOHN_R_08-02.png?itok=6f71jGGi"
+  },
+  {
+    "id": "jamie-siraj",
+    "name": "Jamie Siraj",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/SIRAJ_JAMIE_L_04-18.png?itok=TpAUX4o0"
+  },
+  {
+    "id": "aljamain-sterling",
+    "name": "Aljamain Sterling",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/STERLING_ALJAMAIN_L_04-25.png?itok=lJPFybAO"
+  },
+  {
+    "id": "youssef-zalal",
+    "name": "Youssef Zalal",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-08/ZALAL_YOUSSEF_L_08-10.png?itok=pZreInuR"
+  },
+  {
+    "id": "norma-dumont",
+    "name": "Norma Dumont",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/DUMONT_NORMA_L_04-25.png?itok=uOQsIEx0"
+  },
+  {
+    "id": "joselyne-edwards",
+    "name": "Joselyne Edwards",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/EDWARDS_JOSELYNE_L_08-09.png?itok=k2CkSa7C"
+  },
+  {
+    "id": "rafa-garcia",
+    "name": "Rafa Garcia",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/GARCIA_RAFA_L_04-25.png?itok=d8UPY_i6"
+  },
+  {
+    "id": "alexander-hernandez",
+    "name": "Alexander Hernandez",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/HERNANDEZ_ALEXANDER_L_09-13.png?itok=B5l45CwH"
+  },
+  {
+    "id": "davey-grant",
+    "name": "Davey Grant",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/GRANT_DAVEY_L_04-25.png?itok=eXuCU5Cp"
+  },
+  {
+    "id": "adrian-martinetti",
+    "name": "Adrian Martinetti"
+  },
+  {
+    "id": "montel-jackson",
+    "name": "Montel Jackson",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/JACKSON_MONTEL_L_04-25.png?itok=34cpNdxi"
+  },
+  {
+    "id": "raoni-barcelos",
+    "name": "Raoni Barcelos",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/BARCELOS_RAONI_L_01-18.png?itok=wbdKRVUn"
+  },
+  {
+    "id": "marcus-buchecha",
+    "name": "Marcus Buchecha",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/BUCHECHA_MARCUS_L_04-25.png?itok=YjhLQE74"
+  },
+  {
+    "id": "ryan-spann",
+    "name": "Ryan Spann",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/SPANN_RYAN_L_07-19.png?itok=uktQXcGD"
+  },
+  {
+    "id": "rodolfo-vieira",
+    "name": "Rodolfo Vieira",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/VIEIRA_RODOLFO_L_04-25.png?itok=lZzBJfMR"
+  },
+  {
+    "id": "eric-mcconico",
+    "name": "Eric McConico",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-02/MCCONICO_ERIC_R_02-22.png?itok=GdZ7i8i0"
+  },
+  {
+    "id": "jackson-mcvey",
+    "name": "Jackson McVey",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/MCVEY_JACKSON_L_04-25.png?itok=KjOOInLO"
+  },
+  {
+    "id": "mayra-bueno-silva",
+    "name": "Mayra Bueno Silva",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/BUENO_SILVA_MAYRA_L_04-25.png?itok=3d6BSANI"
+  },
+  {
+    "id": "michelle-montague",
+    "name": "Michelle Montague",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/MONTAGUE_MICHELLE_L_09-27.png?itok=hREMtg7j"
+  },
+  {
+    "id": "jafel-filho",
+    "name": "Jafel Filho",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/FILHO_JAFEL_L_04-25.png?itok=4f5tktve"
+  },
+  {
+    "id": "francis-marshall",
+    "name": "Francis Marshall",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/MARSHALL_FRANCIS_L_04-25.png?itok=Dz7HMd3L"
+  },
+  {
+    "id": "lucas-brennan",
+    "name": "Lucas Brennan",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/BRENNAN_LUCAS_R_04-25.png?itok=ajTVXdf5"
+  },
+  {
+    "id": "max-griffin",
+    "name": "Max Griffin",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/GRIFFIN_MAX_L_04-25.png?itok=nrxbmm1d"
+  },
+  {
+    "id": "victor-valenzuela",
+    "name": "Victor Valenzuela"
+  },
+  {
+    "id": "talita-alencar",
+    "name": "Talita Alencar",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/ALENCAR_TALITA_L_04-25.png?itok=onBqiGWH"
+  },
+  {
+    "id": "julia-polastri",
+    "name": "Julia Polastri",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/POLASTRI_JULIA_L_10-11.png?itok=_M66nIku"
+  },
+  {
+    "id": "beneil-dariush",
+    "name": "Beneil Dariush",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/DARIUSH_BENEIL_L_05-02.png?itok=EGBjHKgU"
+  },
+  {
+    "id": "tim-elliott",
+    "name": "Tim Elliott",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/ELLIOTT_TIM_L_05-02.png?itok=Um9NmdXb"
+  },
+  {
+    "id": "shamil-gaziev",
+    "name": "Shamil Gaziev",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/GAZIEV_SHAMIL_L_05-02.png?itok=VAF3kcSW"
+  },
+  {
+    "id": "louie-sutherland",
+    "name": "Louie Sutherland",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/SUTHERLAND_LOUIE_L_03-21.png?itok=No4Ki3Gm"
+  },
+  {
+    "id": "robert-bryczek",
+    "name": "Robert Bryczek",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-02/BRYZCEK_ROBERT_L_02-10.png?itok=xbrgBOJC"
+  },
+  {
+    "id": "kevin-christian",
+    "name": "Kevin Christian",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-11/CHRISTIAN_KEVIN_R_11-01.png?itok=mjkSZ7v2"
+  },
+  {
+    "id": "gerald-meerschaert",
+    "name": "Gerald Meerschaert",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/MEERSCHAERT_GERALD_L_08-16.png?itok=ZSkiqY23"
+  },
+  {
+    "id": "colby-thicknesse",
+    "name": "Colby Thicknesse",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/THICKNESSE_COLBY_L_05-02.png?itok=N5HTzqNl"
+  },
+  {
+    "id": "vince-morales",
+    "name": "Vince Morales",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-02/MORALES_VINCE_L_02-15.png?itok=CQyIe6Jm"
+  },
+  {
+    "id": "ben-johnston",
+    "name": "Ben Johnston"
+  },
+  {
+    "id": "wes-schultz",
+    "name": "Wes Schultz",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/SHULTZ_WESLEY_R_05-02.png?itok=TcJ3DhOa"
+  },
+  {
+    "id": "jonathan-micallef",
+    "name": "Jonathan Micallef",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/MICALLEF_JONATHAN_L_05-02.png?itok=pdvc4yE3"
+  },
+  {
+    "id": "dom-mar-fan",
+    "name": "Dom Mar Fan",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-01/MAR_FAN_DOM_R_01-31.png?itok=X_iT6-pY"
+  },
+  {
+    "id": "kody-steele",
+    "name": "Kody Steele",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-02/STEELE_KODY_R_02-08.png?itok=1eXV9YAp"
+  },
+  {
+    "id": "ollie-schmid",
+    "name": "Ollie Schmid",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/SCHMID_OLLIE_R_05-02.png?itok=yb6L6zTk"
+  },
+  {
+    "id": "marwan-rahiki",
+    "name": "Marwan Rahiki",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/RAHIKI_MARWAN_L_05-02.png?itok=4HkXr7I1"
+  },
+  {
+    "id": "joaquin-buckley",
+    "name": "Joaquin Buckley",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/5/BUCKLEY_JOAQUIN_L_05-11.png?itok=yyjyefDC"
+  },
+  {
+    "id": "king-green",
+    "name": "King Green",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/GREEN_KING_L_05-09.png?itok=8VMeSq2i"
+  },
+  {
+    "id": "jeremy-stephens",
+    "name": "Jeremy Stephens",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/STEPHENS_JEREMY_L_05-03.png?itok=czlgIcjI"
+  },
+  {
+    "id": "ozzy-diaz",
+    "name": "Ozzy Diaz",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-03/DIAZ_OZZY_R_03-08.png?itok=09cI1qBO"
+  },
+  {
+    "id": "grant-dawson",
+    "name": "Grant Dawson",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/DAWSON_GRANT_L_05-09.png?itok=JuVEhRo_"
+  },
+  {
+    "id": "mateusz-rebecki",
+    "name": "Mateusz Rebecki",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/REBECKI_MATEUSZ_L_08-02.png?itok=_6ybUU3F"
+  },
+  {
+    "id": "joel-alvarez",
+    "name": "Joel Alvarez",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/ALVAREZ_JOEL_L_05-09.png?itok=MGw1DSGs"
+  },
+  {
+    "id": "yaroslav-amosov",
+    "name": "Yaroslav Amosov",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-12/AMOSOV_YAROSLAV_R_12-13.png?itok=ykKn1cKu"
+  },
+  {
+    "id": "jim-miller",
+    "name": "Jim Miller",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/MILLER_JIM_L_05-09.png?itok=v9YKyo9m"
+  },
+  {
+    "id": "jared-gordon",
+    "name": "Jared Gordon",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/GORDON_JARED_L_05-17.png?itok=JksSLA9u"
+  },
+  {
+    "id": "roman-kopylov",
+    "name": "Roman Kopylov",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/KOPYLOV_ROMAN_L_05-09.png?itok=Lc4htX8o"
+  },
+  {
+    "id": "marco-tulio",
+    "name": "Marco Tulio",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/12/TULIO_MARCO_L_01-11.png?itok=wTbKK65g"
+  },
+  {
+    "id": "pat-sabatini",
+    "name": "Pat Sabatini",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/SABATINI_PAT_L_05-09.png?itok=YDUceiMi"
+  },
+  {
+    "id": "william-gomis",
+    "name": "William Gomis",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/GOMIS_WILLIAM_L_09-06.png?itok=BGKwXp-S"
+  },
+  {
+    "id": "baisangur-susurkaev",
+    "name": "Baisangur Susurkaev",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/SUSURKAEV_BAISANGUR_L_05-09.png?itok=tUbfeTCb"
+  },
+  {
+    "id": "djorden-santos",
+    "name": "Djorden Santos",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-03/SANTOS_DJORDEN_L_03-08.png?itok=DpF2CDFt"
+  },
+  {
+    "id": "clayton-carpenter",
+    "name": "Clayton Carpenter",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/CARPENTER_CLAYTON_L_05-09.png?itok=Rt1pWT48"
+  },
+  {
+    "id": "jose-ochoa",
+    "name": "Jose Ochoa",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-11/OCHOA_JOSE_R_11-23.png?itok=-cU98Zht"
+  },
+  {
+    "id": "melquizael-costa",
+    "name": "Melquizael Costa",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-12/COSTA_MELQUIZAEL_L_12-13.png?itok=4B7irp2h"
+  },
+  {
+    "id": "dooho-choi",
+    "name": "Dooho Choi",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/CHOI_DOOHO_L_05-16.png?itok=pN8VMyeW"
+  },
+  {
+    "id": "daniel-santos",
+    "name": "Daniel Santos",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/SANTOS_DANIEL_L_10-04.png?itok=v0mSMNti"
+  },
+  {
+    "id": "malcolm-wellmaker",
+    "name": "Malcolm Wellmaker",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/WELLMAKER_MALCOM_L_05-16.png?itok=5FHWs2Te"
+  },
+  {
+    "id": "juan-diaz",
+    "name": "Juan Diaz",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/DIAS_JUAN_R_05-16.png?itok=ii8fyksW"
+  },
+  {
+    "id": "rodolfo-bellato",
+    "name": "Rodolfo Bellato",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/BELLATO_RODOLFO_L.png?itok=HfYoV0Vf"
+  },
+  {
+    "id": "timmy-cuamba",
+    "name": "Timmy Cuamba"
+  },
+  {
+    "id": "bernardo-sopaj",
+    "name": "Bernardo Sopaj",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/6/SOPAJ_BENARDO_L_03-02.png?itok=fxyt7hIc"
+  },
+  {
+    "id": "jeremiah-wells",
+    "name": "Jeremiah Wells",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/WELLS_JEREMIAH_L_11-01.png?itok=OaoLPcHM"
+  },
+  {
+    "id": "nicolas-dalby",
+    "name": "Nicolas Dalby",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-11/DALBY_NICOLAS_L_11-22.png?itok=MsZO3BbI"
+  },
+  {
+    "id": "tuco-tokkos",
+    "name": "Tuco Tokkos",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/TOKKOS_TUCO_L_05-16.png?itok=0OQDiFEx"
+  },
+  {
+    "id": "ivan-erslan",
+    "name": "Ivan Erslan",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-09/ERSLAN_IVAN_R_09-28.png?itok=tilez7aY"
+  },
+  {
+    "id": "trey-ogden",
+    "name": "Trey Ogden",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/2/OGDEN_TREY_L_01-11.png?itok=OeJQJXNx"
+  },
+  {
+    "id": "thomas-gantt",
+    "name": "Thomas Gantt",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/GANTT_THOMAS_L_05-16.png?itok=mXejZpYg"
+  },
+  {
+    "id": "jacqueline-cavalcanti",
+    "name": "Jacqueline Cavalcanti",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/5/CAVALCANTI_JACQUELINE_L_08-24.png?itok=NQZ5w4CU"
+  },
+  {
+    "id": "andre-petroski",
+    "name": "Andre Petroski",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-12/3/PETROSKI_ANDRE_L_09-07.png?itok=XRHPUO-h"
+  },
+  {
+    "id": "alice-ardelean",
+    "name": "Alice Ardelean",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/ARDELEAN_ALICE_L_05-16.png?itok=8kSUhwkV"
+  },
+  {
+    "id": "polyana-viana",
+    "name": "Polyana Viana",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-08/VIANA_POLYANA_L_08-12.png?itok=BH04lqi0"
+  },
+  {
+    "id": "daniel-barez",
+    "name": "Daniel Barez",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/BAREZ_DANIEL_L_05-16.png?itok=DAbacu0a"
+  },
+  {
+    "id": "shauna-bannon",
+    "name": "Shauna Bannon",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/BANNON_SHAUNA_L_05-16.png?itok=MoHNOg5o"
+  },
+  {
+    "id": "nicolle-caliari",
+    "name": "Nicolle Caliari",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/2/CALIARI_NICOLLE_L_01-11.png?itok=F6kDO8bo"
+  },
+  {
+    "id": "alonzo-menifield",
+    "name": "Alonzo Menifield",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-06/MENIFIELD_ALONZO_L_06-14.png?itok=2VKbZoXE"
+  },
+  {
+    "id": "zhang-mingyang",
+    "name": "Zhang Mingyang",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/MINGYANG_ZHANG_L_05-30.png?itok=2J_lSlBx"
+  },
+  {
+    "id": "kai-asakura",
+    "name": "Kai Asakura",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/ASAKURA_KAI_L_05-30.png?itok=RXn11ARV"
+  },
+  {
+    "id": "sumudaerji",
+    "name": "Sumudaerji",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/SUMUDAERJI_L_03-07.png?itok=NyopQV5l"
+  },
+  {
+    "id": "carlston-harris",
+    "name": "Carlston Harris",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/14/HARRIS_CARLSTON_L_05-18.png?itok=N9hd4716"
+  },
+  {
+    "id": "jake-matthews",
+    "name": "Jake Matthews",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/MATTHEWS_JAKE_L_05-30.png?itok=kYM4Kq87"
+  },
+  {
+    "id": "angela-hill",
+    "name": "Angela Hill",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/HILL_ANGELA_L_05-30.png?itok=CwRO3dvX"
+  },
+  {
+    "id": "xiong-jingnan",
+    "name": "Xiong Jingnan"
+  },
+  {
+    "id": "luis-felipe-dias",
+    "name": "Luis Felipe Dias"
+  },
+  {
+    "id": "yi-sak-lee",
+    "name": "Yi Sak Lee",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/LEE_YISAK_L_05-30.png?itok=lwpEKxvo"
+  },
+  {
+    "id": "rei-tsuruya",
+    "name": "Rei Tsuruya",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/TSURUYA_REI_L_05-30.png?itok=tcf6P7yR"
+  },
+  {
+    "id": "loma-lookboonmee",
+    "name": "Loma Lookboonmee",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/LOOKBOONMEE_LOMA_L_05-30.png?itok=0i4vxYP3"
+  },
+  {
+    "id": "jaqueline-amorim",
+    "name": "Jaqueline Amorim",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/AMORIM_JAQUELINE_L_10-25.png?itok=kKvKcJBq"
+  },
+  {
+    "id": "aoriqileng",
+    "name": "Aoriqileng",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/AORIQILENG_L_05-30.png?itok=I45de0t0"
+  },
+  {
+    "id": "cody-haddon",
+    "name": "Cody Haddon",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-11/HADDON_CODY_L_10-12.png?itok=C0RuaCHl"
+  },
+  {
+    "id": "meng-ding",
+    "name": "Meng Ding"
+  },
+  {
+    "id": "jose-henrique-souza",
+    "name": "Jose Henrique Souza"
+  },
+  {
+    "id": "gabriel-bonfim",
+    "name": "Gabriel Bonfim",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-11/BONFIM_GABRIEL_L_11-08.png?itok=FGdOTced"
+  },
+  {
+    "id": "edmen-shahbazyan",
+    "name": "Edmen Shahbazyan",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/SHAHBAZYAN_EDMEN_L_10-04.png?itok=f_qqD29S"
+  },
+  {
+    "id": "fares-ziam",
+    "name": "Fares Ziam",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/ZIAM_FARES_L_06-06.png?itok=bYY345Ee"
+  },
+  {
+    "id": "tom-nolan",
+    "name": "Tom Nolan",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/NOLAN_TOM_L_09-27.png?itok=MyU46nSD"
+  },
+  {
+    "id": "iwo-baraniewski",
+    "name": "Iwo Baraniewski",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/BARANIEWSKI_IWO_L_06-06.png?itok=zp1QNRHk"
+  },
+  {
+    "id": "matt-schnell",
+    "name": "Matt Schnell",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/SCHNELL_MATT_L_06-06.png?itok=yKzRTgaC"
+  },
+  {
+    "id": "marcus-mcghee",
+    "name": "Marcus McGhee",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/MCGHEE_MARCUS_L_06-06.png?itok=DOTo3j44"
+  },
+  {
+    "id": "edgar-chairez",
+    "name": "Edgar Chairez",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/CHAIREZ_EDGAR_L_02-28.png?itok=WL7kQO7z"
+  },
+  {
+    "id": "bruno-gustavo-da-silva",
+    "name": "Bruno Gustavo da Silva"
+  },
+  {
+    "id": "joanderson-brito",
+    "name": "Joanderson Brito",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-12/BRITO_JOANDERSON_L_12-13.png?itok=MAvkv4Zx"
+  },
+  {
+    "id": "ketlen-souza",
+    "name": "Ketlen Souza",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/SOUZA_KETLEN_L_06-06.png?itok=6jQmx9wf"
+  },
+  {
+    "id": "ariane-carnelossi",
+    "name": "Ariane Carnelossi",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/CARNELOSSI_ARIANE_L_05-18.png?itok=62BKJVV3"
+  },
+  {
+    "id": "chelsea-chandler",
+    "name": "Chelsea Chandler",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-04/CHANDLER_CHELSEA_L_04-26.png?itok=DL0RRFId"
+  },
+  {
+    "id": "priscila-cachoeira",
+    "name": "Priscila Cachoeira",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/CACHOEIRA_PRISCILA_L_06-06.png?itok=FFiYkCQu"
+  },
+  {
+    "id": "jeisla-chaves",
+    "name": "Jeisla Chaves",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/CHAVES_JEISLA_L_06-06.png?itok=mXsCur2H"
+  },
+  {
+    "id": "yuneisy-duben",
+    "name": "Yuneisy Duben",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-03/DUBEN_YUNEISY_L_03-15.png?itok=0wFdwn-N"
+  },
+  {
+    "id": "luana-santos",
+    "name": "Luana Santos",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/SANTOS_LUANA_L_05-17.png?itok=F9R3I5g7"
+  },
+  {
+    "id": "allan-nascimento",
+    "name": "Allan Nascimento",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/NASCIMENTO_ALLAN_L_06-20.png?itok=JhxcvpK7"
+  },
+  {
+    "id": "melissa-mullins",
+    "name": "Melissa Mullins",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/MULLINS_MELISSA_L_03-21.png?itok=BryqglDE"
+  },
+  {
+    "id": "kevin-borjas",
+    "name": "Kevin Borjas",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-04/BORJAS_KEVIN_L_11-11.png?itok=lzFPPN1l"
+  },
+  {
+    "id": "michael-aswell-jr",
+    "name": "Michael Aswell Jr."
+  },
+  {
+    "id": "shane-collins",
+    "name": "Shane Collins",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/COLLINS_SHANE_L_06-20.png?itok=i03rd4l-"
+  },
+  {
+    "id": "otari-tanzilovi",
+    "name": "Otari Tanzilovi",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/TANZILOVI_OTARI_R_06-20.png?itok=0A7J24BS"
+  },
+  {
+    "id": "leon-shahbazyan",
+    "name": "Leon Shahbazyan",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/SHAHBAZYAN_LEON_L_06-20.png?itok=ToSA3_7-"
+  },
+  {
+    "id": "levan-chokheli",
+    "name": "Levan Chokheli",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/CHOKHELI_LEVAN_R_06-20.png?itok=36IHyuqN"
+  },
+  {
+    "id": "farman-hasanov",
+    "name": "Farman Hasanov",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/HASANOV_FARMAN_L_06-27.png?itok=_Ex8iG6f"
+  },
+  {
+    "id": "abdul-rakhman-yakhyaev",
+    "name": "Abdul-Rakhman Yakhyaev"
+  },
+  {
+    "id": "kaan-ofli",
+    "name": "Kaan Ofli",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/OFLI_KAAN_L_06-27.png?itok=6swnPJvi"
+  },
+  {
+    "id": "javier-reyes",
+    "name": "Javier Reyes",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/REYES_JAVIER_R_06-27.png?itok=OJn5M8K3"
+  },
+  {
+    "id": "daniil-donchenko",
+    "name": "Daniil Donchenko",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/DONCHENKO_DANIIL_L_06-27.png?itok=nLBeXaNg"
+  },
+  {
+    "id": "jared-cannonier",
+    "name": "Jared Cannonier",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/CANNONIER_JARED_L_08-16.png?itok=fI-AmOEF"
+  },
+  {
+    "id": "christian-leroy-duncan",
+    "name": "Christian Leroy Duncan",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-11/DUNCAN_CHRISTIAN_LEROY_L_11-08.png?itok=YYD6jKSM"
+  },
+  {
+    "id": "jacobe-smith",
+    "name": "Jacobe Smith",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/SMITH_JACOBE_L_02-21.png?itok=sBX3a4YZ"
+  },
+  {
+    "id": "amanda-ribas",
+    "name": "Amanda Ribas",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/RIBAS_AMANDA_L_07-26.png?itok=3dIeCYcl"
+  },
+  {
+    "id": "fatima-kline",
+    "name": "Fatima Kline",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/KLINE_FATIMA_L_07-12.png?itok=DGxlAmsY"
+  },
+  {
+    "id": "brad-tavares",
+    "name": "Brad Tavares",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/TAVARES_BRAD_L_03-14.png?itok=b95gOYRd"
+  },
+  {
+    "id": "mitch-ramirez",
+    "name": "Mitch Ramirez",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/RAMIREZ_MITCH_L_07-12.png?itok=yQWmeGob"
+  },
+  {
+    "id": "veronica-hardy",
+    "name": "Veronica Hardy",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/HARDY_VERONICA_L_10-04.png?itok=qkwM9Ng_"
+  },
+  {
+    "id": "david-martinez",
+    "name": "David Martinez",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-03/MARTINEZ_DAVID_L_03-29.png?itok=SahwXzRS"
+  },
+  {
+    "id": "uran-satybaldiev",
+    "name": "Uran Satybaldiev",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/SATYBALDIEV_URAN_L_08-23.png?itok=PM2a7Hrg"
+  },
+  {
+    "id": "valter-walker",
+    "name": "Valter Walker",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/WALKER_VALTER_L_10-25.png?itok=iTXf1Ry8"
+  },
+  {
+    "id": "magomed-tuchalov",
+    "name": "Magomed Tuchalov"
+  },
+  {
+    "id": "ramazan-temirov",
+    "name": "Ramazan Temirov",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-11/TEMIROV_RAMAZAN_L_10-12.png?itok=K_Er6WPQ"
+  },
+  {
+    "id": "islam-dulatov",
+    "name": "Islam Dulatov",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/DULATOV_ISLAM_R_07-19.png?itok=_FoQ4SmB"
+  },
+  {
+    "id": "wellington-turman",
+    "name": "Wellington Turman",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-11/TURMAN_WELLINGTON_L_12-02.png?itok=icqJ0amp"
+  },
+  {
+    "id": "ismael-bonfim",
+    "name": "Ismael Bonfim",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-02/BONFIM_ISMAEL_L_02-15.png?itok=V4XbGXyH"
+  },
+  {
+    "id": "axel-sola",
+    "name": "Axel Sola",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/SOLA_AXEL_L_09-06.png?itok=QVekEELf"
+  },
+  {
+    "id": "uros-medic",
+    "name": "Uroš Medić",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/MEDIC_UROS_L_08-09.png?itok=EtRaAk1l"
+  },
+  {
+    "id": "daniel-rodriguez",
+    "name": "Daniel Rodriguez",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-10/RODRIGUEZ_DANIEL_L_10-12.png?itok=zE9JhfZS"
+  },
+  {
+    "id": "ante-delija",
+    "name": "Ante Delija",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/DELIJA_ANTE_R_09-06.png?itok=oHlO2_kY"
+  },
+  {
+    "id": "dusko-todorovic",
+    "name": "Duško Todorović",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2022-08/4526cb41-c0d2-423a-ad18-d8efe88477f3%252FTODOROVIC_DUSKO_L_05-21.png?itok=Cs7dDZH4"
+  },
+  {
+    "id": "vlasto-cepo",
+    "name": "Vlasto Čepo",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
+  },
+  {
+    "id": "gilbert-urbina",
+    "name": "Gilbert Urbina",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-02/URBINA_GILBERT_L_02-03.png?itok=rua26OyB"
+  },
+  {
+    "id": "jovan-leka",
+    "name": "Jovan Leka",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/LEKA_JOVAN_R.png?itok=1oQSry_R"
+  },
+  {
+    "id": "max-gimenis",
+    "name": "Max Gimenis",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-11/GIMENIS_MAX_R_11-08.png?itok=oa55U8Cc"
+  },
+  {
+    "id": "ludovit-klein",
+    "name": "Ludovit Klein",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/KLEIN_LUDOVIT_L_10-25.png?itok=c3UsUNGg"
+  },
+  {
+    "id": "josias-musasa",
+    "name": "Josias Musasa",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/MUSASA_JOSIAS_R_09-27.png?itok=qPrj5s1_"
+  },
+  {
+    "id": "bogdan-grad",
+    "name": "Bogdan Grad",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-11/GRAD_BOGDAN_L_11-22.png?itok=-akhAGX6"
+  },
+  {
+    "id": "oban-elliott",
+    "name": "Oban Elliott",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/ELLIOTT_OBAN_L_01-31.png?itok=FCIO37_E"
+  },
+  {
+    "id": "michael-oliveira",
+    "name": "Michael Oliveira",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/OLIVEIRA_MICHAEL_L.png?itok=5h0mJJUd"
+  },
+  {
+    "id": "ian-garry",
+    "name": "Ian Garry",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-04/MACHADO_GARRY_IAN_L_04-26.png?itok=DVG8yebN"
+  },
+  {
+    "id": "gillian-robertson",
+    "name": "Gillian Robertson",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/5/ROBERTSON_GILLIAN_L_01-20.png?itok=yw3RX2mI"
+  },
+  {
+    "id": "opponent-tba",
+    "name": "Opponent TBA"
+  },
+  {
+    "id": "tba",
+    "name": "TBA"
   }
 ]

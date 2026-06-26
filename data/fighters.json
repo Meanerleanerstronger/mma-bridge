@@ -5453,7 +5453,7 @@
     "weightClass": "Flyweight",
     "ranking": "#2",
     "record": {
-      "wins": 21,
+      "wins": 23,
       "losses": 7,
       "draws": 0
     },
@@ -5466,6 +5466,22 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-07/KAPE_MANEL_L_07-08.png",
     "bio": "Manel Kape is one of the most electric flyweights on the roster, an Angolan striker who backs up his trash talk with devastating knockout power. 'Starboy' has four finishes in the UFC and owns wins over ranked opponents, making him a dangerous matchup for anyone at 125 lbs.",
     "last5": [
+      {
+        "opponent": "Kyoji Horiguchi",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Kape vs. Horiguchi",
+        "round": 3,
+        "time": "2:42"
+      },
+      {
+        "opponent": "Brandon Royval",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "UFC on ESPN: Royval vs. Kape",
+        "round": 1,
+        "time": "3:18"
+      },
       {
         "opponent": "Asu Almabayev",
         "result": "W",
@@ -5503,6 +5519,30 @@
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Cannonier vs. Strickland",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Zhalgas Zhumagulov",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Font vs. Aldo",
+        "round": 1,
+        "time": "4:02"
+      },
+      {
+        "opponent": "Ode' Osbourne",
+        "result": "W",
+        "method": "KO (flying knee and punches)",
+        "event": "UFC 265",
+        "round": 1,
+        "time": "4:44"
+      },
+      {
+        "opponent": "Matheus Nicolau",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Edwards vs. Muhammad",
         "round": 3,
         "time": "5:00"
       }
@@ -8474,10 +8514,18 @@
     "name": "Kyoji Horiguchi",
     "record": {
       "wins": 36,
-      "losses": 5,
+      "losses": 6,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Manel Kape",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Kape vs. Horiguchi",
+        "round": 3,
+        "time": "2:42"
+      },
       {
         "opponent": "Amir Albazi",
         "result": "W",
@@ -8517,6 +8565,38 @@
         "event": "2023 in Rizin Fighting Federation#Rizin 45",
         "round": 2,
         "time": "3:44"
+      },
+      {
+        "opponent": "Hiromasa Ougikubo",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Bellator MMA vs. Rizin",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Yuto Hokamura",
+        "result": "W",
+        "method": "Technical Submission (arm-triangle choke)",
+        "event": "2022 in Rizin Fighting Federation#Super Rizin & Rizin 38",
+        "round": 2,
+        "time": "2:59"
+      },
+      {
+        "opponent": "Patchy Mix",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "Bellator 279",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Sergio Pettis",
+        "result": "L",
+        "method": "KO (spinning backfist)",
+        "event": "Bellator 272",
+        "round": 4,
+        "time": "3:24"
       }
     ],
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-11/HORIGUCHI_KYOJI_R_11-22.png?itok=Dn6SxnwP"
