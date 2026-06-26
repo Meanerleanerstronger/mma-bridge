@@ -63,9 +63,39 @@ async function fetchPhoto(name) {
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
+const args      = process.argv.slice(2);
+const forceAll  = args.includes('--force');   // re-fetch ALL fighters, even ones with URLs
+const nameIdx   = args.indexOf('--name');
+const targetName = nameIdx >= 0 ? args[nameIdx + 1] : null;
+
+async function isUrlBroken(url) {
+  if (!url) return true;
+  try {
+    const res = await fetch(url, {
+      method: 'HEAD',
+      headers: { 'User-Agent': 'Mozilla/5.0' },
+      signal: AbortSignal.timeout(8000),
+      redirect: 'follow',
+    });
+    return res.status === 403 || res.status === 404 || res.status >= 500;
+  } catch { return true; }
+}
+
 async function run() {
   const fighters = JSON.parse(fs.readFileSync(FIGHTERS_PATH, 'utf8'));
   const events   = JSON.parse(fs.readFileSync(EVENTS_PATH,   'utf8'));
+
+  // --name mode: just fix one fighter
+  if (targetName) {
+    const norm = s => s.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const fighter = fighters.find(f => norm(f.name) === norm(targetName));
+    if (!fighter) { console.error(`Fighter not found: ${targetName}`); process.exit(1); }
+    const img = await fetchPhoto(fighter.name);
+    if (img) { fighter.img = img; console.log(`✅ ${fighter.name} -> ${img}`); }
+    else      { console.warn(`⚠️  Could not find photo for ${fighter.name}`); }
+    fs.writeFileSync(FIGHTERS_PATH, JSON.stringify(fighters, null, 2));
+    return;
+  }
 
   // Collect all fighter names from events (past 6 months + upcoming)
   const cutoff = new Date();
@@ -93,11 +123,22 @@ async function run() {
   }
   if (stubs) console.log(`➕ Added ${stubs} stub entries from events`);
 
-  // Find fighters that need a photo
-  const todo = fighters.filter(f =>
-    f.name &&
-    (!f.img || f.img.startsWith('images/'))  // missing or local fallback
-  );
+  // Find fighters that need a photo (missing, local fallback, --force, or broken URL)
+  let todo;
+  if (forceAll) {
+    todo = fighters.filter(f => f.name);
+  } else {
+    const candidates = fighters.filter(f => f.name && f.img && !f.img.startsWith('images/'));
+    console.log(`🔍 Checking ${candidates.length} existing URLs for 403/404...`);
+    const broken = [];
+    for (const f of candidates) {
+      if (await isUrlBroken(f.img)) broken.push(f);
+      await sleep(200);
+    }
+    console.log(`  ${broken.length} broken URLs found`);
+    const missing = fighters.filter(f => f.name && (!f.img || f.img.startsWith('images/')));
+    todo = [...missing, ...broken];
+  }
 
   console.log(`📸 ${todo.length} fighters need photos (${fighters.length} total)`);
   if (!todo.length) { console.log('✅ All up to date.'); return; }

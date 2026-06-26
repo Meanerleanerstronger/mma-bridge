@@ -2,7 +2,7 @@ name: Fighter Photo Sync
 
 on:
   schedule:
-    - cron: '0 8 * * 2'  # Every Tuesday at 08:00 UTC (day after most UFC events)
+    - cron: '0 1 * * *'  # Every day at 01:00 UTC — checks for broken URLs + new fighters
   workflow_dispatch:
 
 jobs:
