@@ -10,6 +10,7 @@
   const SEEN_KEY     = 'mma_seen_v' + V;
   const FAV_KEY      = 'mma_fav_fighter';
   const KNOWN_EV_KEY = 'mma_known_events';
+  const CARD_SNAP_KEY = 'mma_card_snap_v2';
   const MAX_NOTIFS   = 25;
 
   // Clear stale keys from v1
@@ -51,6 +52,20 @@
   }
   function getKnownEvents() { try { return new Set(JSON.parse(localStorage.getItem(KNOWN_EV_KEY) || '[]')); } catch { return new Set(); } }
   function saveKnownEvents(s){ try { localStorage.setItem(KNOWN_EV_KEY, JSON.stringify([...s])); } catch {} }
+
+  function getCardSnap()  { try { return JSON.parse(localStorage.getItem(CARD_SNAP_KEY) || '{}'); } catch { return {}; } }
+  function saveCardSnap(o){ try { localStorage.setItem(CARD_SNAP_KEY, JSON.stringify(o)); } catch {} }
+
+  function eventFightSet(ev) {
+    // Returns Set of "a|b|weight" strings for all fights on an event
+    const fights = new Set();
+    for (const sec of ['mainCard', 'prelims', 'earlyPrelims']) {
+      for (const f of (ev[sec] || [])) {
+        if (f.a && f.b) fights.add(`${f.a}|${f.b}|${f.weight || ''}`);
+      }
+    }
+    return fights;
+  }
 
   // ── Fav fighter ───────────────────────────────
   function getFav()  { try { return JSON.parse(localStorage.getItem(FAV_KEY) || 'null'); } catch { return null; } }
@@ -183,6 +198,66 @@
         });
       }
 
+      // ── Card change detection: new fights added, fighter pullouts ──
+      if (prefEnabled('card_update')) {
+        const snap = getCardSnap();
+        const newSnap = {};
+        const cutoffMs = Date.now() - 2 * 24 * 60 * 60 * 1000; // ignore events >2 days past
+        const isFirstSnap = Object.keys(snap).length === 0;
+
+        upcoming.forEach(ev => {
+          const evId = ev.id || slugify(ev.name || '');
+          if (!evId) return;
+          const curr = eventFightSet(ev);
+          newSnap[evId] = [...curr];
+
+          if (isFirstSnap || !snap[evId]) return; // silent seed
+
+          const prev = new Set(snap[evId]);
+
+          // New fights (in curr but not prev)
+          curr.forEach(fight => {
+            if (prev.has(fight)) return;
+            const [a, b, weight] = fight.split('|');
+            // Check if it's a replacement (one fighter slot matches a prev fight)
+            let replacedFight = null;
+            prev.forEach(pf => {
+              const [pa, pb] = pf.split('|');
+              if (!curr.has(pf) && (pa === a || pb === b || pa === b || pb === a)) {
+                replacedFight = pf;
+              }
+            });
+            const notifId = `card_${evId}_${slugify(a)}_${slugify(b)}`;
+            if (seen.has(notifId)) return;
+            if (replacedFight) {
+              const [oldA, oldB] = replacedFight.split('|');
+              const pulledOut = (oldA === a || oldA === b) ? oldB : oldA;
+              const replacement = (oldA === a || oldB === b) ? b : a;
+              arr.unshift({
+                id: notifId, type: 'card_update', read: false,
+                title: `Fighter change on ${ev.name}`,
+                body: `${pulledOut} out — replaced by ${replacement} · ${a} vs ${b}`,
+                href: `events.html?id=${evId}`, eventId: evId,
+                eventDate: ev.isoDate, timestamp: now.toISOString()
+              });
+            } else {
+              arr.unshift({
+                id: notifId, type: 'card_update', read: false,
+                title: `Fight added to ${ev.name}`,
+                body: `${a} vs ${b}${weight ? ' · ' + weight : ''}`,
+                href: `events.html?id=${evId}`, eventId: evId,
+                eventDate: ev.isoDate, timestamp: now.toISOString()
+              });
+            }
+            addSeen(notifId);
+            changed = true;
+          });
+        });
+
+        if (!isFirstSnap || Object.keys(snap).length) saveCardSnap(newSnap);
+        else saveCardSnap(newSnap); // always seed on first run
+      }
+
       if (changed) saveNotifs(arr);
       this.updateBadge();
     },
@@ -280,7 +355,7 @@
             </div>`;
         }).join('');
 
-        const iconMap = { fight_upcoming: SVG.fight, fight_day: SVG.dayof, new_event: SVG.event };
+        const iconMap = { fight_upcoming: SVG.fight, fight_day: SVG.dayof, new_event: SVG.event, card_update: SVG.fight };
         const regularHtml = notifs.slice(0, 12).map(n => {
           let title = esc(n.title);
           if (n.type === 'fight_upcoming' && n.eventDate) {
