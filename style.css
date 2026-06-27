@@ -4834,7 +4834,7 @@ body.light-mode .ev-star-btn.starred {
 .pk-nav {
   display: flex; align-items: center; justify-content: space-between;
   padding: 20px 20px 0;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .pk-back {
   display: inline-flex; align-items: center; gap: 6px;
@@ -4844,11 +4844,11 @@ body.light-mode .ev-star-btn.starred {
   color: rgba(255,255,255,0.28); text-decoration: none;
   transition: color 0.15s; white-space: nowrap;
 }
-.pk-back:hover { color: rgba(255,255,255,0.65); }
+.pk-back:hover { color: #f0b429; }
 
 /* Header block */
 .pk-hd {
-  padding: 0 20px 24px;
+  padding: 0 20px 14px;
   border-bottom: 1px solid rgba(255,255,255,0.06);
   margin-bottom: 0;
   position: relative;
@@ -4882,7 +4882,7 @@ body.light-mode .ev-star-btn.starred {
   font-family: 'Montserrat', sans-serif;
   font-size: 0.56rem; font-weight: 800;
   letter-spacing: 0.2em; text-transform: uppercase;
-  color: rgba(255,255,255,0.28); margin-bottom: 6px;
+  color: rgba(240,180,41,0.55); margin-bottom: 6px;
 }
 .pk-hd-title {
   font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
@@ -4914,7 +4914,7 @@ body.light-mode .ev-star-btn.starred {
   color: rgba(255,255,255,0.3); cursor: pointer; flex-shrink: 0;
   transition: border-color 0.15s, color 0.15s;
 }
-.pk-hiw-icon-btn:hover { border-color: rgba(255,255,255,0.3); color: rgba(255,255,255,0.6); }
+.pk-hiw-icon-btn:hover { border-color: rgba(240,180,41,0.5); color: #f0b429; }
 
 /* Legacy aliases — kept for compat */
 .pk-header { max-width: 820px; margin: 0 auto; padding: 0; }
@@ -5127,9 +5127,10 @@ body.light-mode .ev-star-btn.starred {
   font-family: 'Montserrat', sans-serif;
   font-size: 0.48rem; font-weight: 900;
   letter-spacing: 0.32em; text-transform: uppercase;
-  color: rgba(255,255,255,0.38);
-  padding: 28px 20px 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  color: rgba(240,180,41,0.5);
+  padding: 16px 20px 10px 22px;
+  border-bottom: 1px solid rgba(240,180,41,0.1);
+  border-left: 2px solid rgba(240,180,41,0.35);
 }
 
 /* ── Fight Card (prediction slip) ── */
@@ -5268,10 +5269,17 @@ body.light-mode .ev-star-btn.starred {
   display: flex; align-items: center; gap: 5px;
 }
 .fc-fighter-link {
-  color: inherit; text-decoration: none;
-  transition: color 0.15s;
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: rgba(240,180,41,0.25);
+  text-underline-offset: 3px;
+  transition: color 0.15s, text-decoration-color 0.15s;
 }
-.fc-fighter-link:hover { color: #f0b429; }
+.fc-fighter-link:hover {
+  color: #f0b429;
+  text-decoration-color: rgba(240,180,41,0.65);
+}
 .fc-fighter.selected .fc-fighter-link:hover { color: rgba(240,180,41,0.7); }
 .fc-card.fc-maincrd .fc-name { font-size: 1.55rem; color: rgba(255,255,255,0.95); }
 .fc-card.fc-main .fc-name { font-size: 1.9rem; color: #fff; letter-spacing: 0.03em; }
@@ -6014,17 +6022,17 @@ body.pk-save-bar-open .pk-lb-float { bottom: 140px; }
 
 .pk-save-btn {
   display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(240,180,41,0.06);
+  border: 1px solid rgba(240,180,41,0.22);
   border-radius: 8px; cursor: pointer;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.55);
   font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 600;
   letter-spacing: 0.03em;
   padding: 11px 36px; white-space: nowrap;
   transition: background 0.15s, border-color 0.15s, color 0.15s;
   min-width: 180px; justify-content: center;
 }
-.pk-save-btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.78); }
+.pk-save-btn:hover { background: rgba(240,180,41,0.1); border-color: rgba(240,180,41,0.4); color: rgba(255,255,255,0.82); }
 .pk-save-btn.saved { border-color: rgba(80,200,120,0.3); color: rgba(80,200,120,0.8); background: rgba(80,200,120,0.05); }
 @keyframes pk-spin { to { transform: rotate(360deg); } }
 
@@ -6750,13 +6758,13 @@ body.light-mode .pk-hd-meta { color: rgba(0,0,0,0.45) !important; }
 body.light-mode .pk-meta-dot { color: rgba(0,0,0,0.2) !important; }
 body.light-mode .pk-hd-sub { color: rgba(0,0,0,0.32) !important; }
 body.light-mode .pk-back { color: rgba(0,0,0,0.28) !important; }
-body.light-mode .pk-back:hover { color: rgba(0,0,0,0.6) !important; }
+body.light-mode .pk-back:hover { color: #b8820a !important; }
 
 /* ctrl strip */
 body.light-mode .pk-ctrl { border-bottom-color: rgba(0,0,0,0.07) !important; }
 body.light-mode .pk-save-bar { background: rgba(0,0,0,0.015) !important; border-top-color: rgba(0,0,0,0.06) !important; }
-body.light-mode .pk-save-btn { background: rgba(0,0,0,0.04) !important; border-color: rgba(0,0,0,0.13) !important; color: rgba(0,0,0,0.5) !important; }
-body.light-mode .pk-save-btn:hover { background: rgba(0,0,0,0.07) !important; color: rgba(0,0,0,0.75) !important; }
+body.light-mode .pk-save-btn { background: rgba(180,130,10,0.06) !important; border-color: rgba(180,130,10,0.28) !important; color: rgba(0,0,0,0.45) !important; }
+body.light-mode .pk-save-btn:hover { background: rgba(180,130,10,0.12) !important; border-color: rgba(180,130,10,0.5) !important; color: rgba(0,0,0,0.75) !important; }
 body.light-mode .pk-save-btn.dirty { background: rgba(200,150,12,0.07) !important; border-color: rgba(200,150,12,0.35) !important; color: #7a5500 !important; }
 body.light-mode .pk-save-btn.saved { background: rgba(0,180,80,0.05) !important; border-color: rgba(0,180,80,0.25) !important; color: #00804a !important; }
 
@@ -6767,7 +6775,7 @@ body.light-mode .pk-completed-banner { background: rgba(0,0,0,0.02) !important; 
 body.light-mode .pk-locked-banner { background: rgba(200,50,50,0.05) !important; border-color: rgba(200,50,50,0.14) !important; color: #cc2200 !important; }
 
 /* Section label */
-body.light-mode .fc-section-lbl { color: rgba(0,0,0,0.22) !important; border-bottom-color: rgba(0,0,0,0.05) !important; }
+body.light-mode .fc-section-lbl { color: rgba(160,100,8,0.55) !important; border-bottom-color: rgba(0,0,0,0.07) !important; border-left-color: rgba(180,130,10,0.3) !important; }
 
 /* Fight cards */
 body.light-mode .fc-card { background: #ffffff !important; border-bottom-color: rgba(0,0,0,0.07) !important; }
