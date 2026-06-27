@@ -10695,7 +10695,7 @@
     "location": "Baku, Azerbaijan",
     "venue": "National Gymnastics Arena",
     "poster": "https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-06/062726-ufc-fight-night-fiziev-vs-torres-EVENT-ART.jpg",
-    "status": "upcoming",
+    "status": "completed",
     "startTime": "15:00",
     "mainCard": [
       {
@@ -10707,7 +10707,10 @@
         "ranked": true,
         "slot": "main",
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-10/FIZIEV_RAFAEL_10-18.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-09/TORRES_MANUEL_09-27.png"
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-09/TORRES_MANUEL_09-27.png",
+        "winner": "Rafael Fiziev",
+        "method": "KO/TKO",
+        "round": 2
       },
       {
         "a": "Shara Magomedov",
@@ -10718,7 +10721,9 @@
         "ranked": true,
         "slot": "comain",
         "imgA": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-09/MAGOMEDOV_SHARA_09-27.png",
-        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-10/PEREIRA_MICHEL_10-18.png"
+        "imgB": "https://www.ufc.com/images/styles/event_results_athlete_headshot/s3/2025-10/PEREIRA_MICHEL_10-18.png",
+        "winner": "Shara Magomedov",
+        "method": "DEC"
       },
       {
         "a": "Nazim Sadykhov",
@@ -10729,7 +10734,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-12/SADYKHOV_NAZIM_L_12-06.png?itok=ccjzeBfj",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/CAMILO_MATHEUS_R.png?itok=YPpivJ_i"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/CAMILO_MATHEUS_R.png?itok=YPpivJ_i",
+        "winner": "Matheus Camilo",
+        "method": "KO/TKO",
+        "round": 1
       },
       {
         "a": "Asu Almabayev",
@@ -10740,7 +10748,10 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/ALMABAYEV_ASU_L_06-27.png?itok=Y0SjNrdV",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/JOHNSON_CHARLES_L_03-14.png?itok=KZuPZ1W7"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/JOHNSON_CHARLES_L_03-14.png?itok=KZuPZ1W7",
+        "winner": "Asu Almabayev",
+        "method": "SUB",
+        "round": 3
       },
       {
         "a": "Ikram Aliskerov",
@@ -10751,7 +10762,9 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/ALISKEROV_IKRAM_L_06-27.png?itok=3ij01m2a",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/FERREIRA_BRUNNO_L_07-19.png?itok=rQPmgZMB"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/FERREIRA_BRUNNO_L_07-19.png?itok=rQPmgZMB",
+        "winner": "Ikram Aliskerov",
+        "method": "DEC"
       },
       {
         "a": "Abusupiyan Magomedov",
@@ -10762,7 +10775,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/OLEKSIEJCZUK_MICHAL_L_02-07.png?itok=hDOVJtgb"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/OLEKSIEJCZUK_MICHAL_L_02-07.png?itok=hDOVJtgb",
+        "winner": "Abus Magomedov",
+        "method": "SUB",
+        "round": 1
       }
     ],
     "prelims": [
@@ -10775,7 +10791,9 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/HASANOV_FARMAN_L_06-27.png?itok=_Ex8iG6f",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/NOLAN_ERIC_R_08-16.png?itok=Lf5rUsnh"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/NOLAN_ERIC_R_08-16.png?itok=Lf5rUsnh",
+        "winner": "Farman Hasanov",
+        "method": "DEC"
       },
       {
         "a": "Abdul-Rakhman Yakhyaev",
@@ -10786,7 +10804,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/WALKER_JULIUS_L_08-09.png?itok=U6ZUMaBd"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/WALKER_JULIUS_L_08-09.png?itok=U6ZUMaBd",
+        "winner": "Abdul-Rakhman Yakhyaev",
+        "method": "KO/TKO",
+        "round": 1
       },
       {
         "a": "Nursulton Ruziboev",
@@ -10797,7 +10818,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/RUZIBOEV_NURSULTON_L_06-27.png?itok=qjqgBV1p",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-03/PULYAEV_ANDREY_R_03-22.png?itok=jWF656q7"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-03/PULYAEV_ANDREY_R_03-22.png?itok=jWF656q7",
+        "winner": "Nursulton Ruziboev",
+        "method": "SUB",
+        "round": 1
       },
       {
         "a": "Kaan Ofli",
@@ -10808,7 +10832,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/OFLI_KAAN_L_06-27.png?itok=6swnPJvi",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/REYES_JAVIER_R_06-27.png?itok=OJn5M8K3"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/REYES_JAVIER_R_06-27.png?itok=OJn5M8K3",
+        "winner": "Kaan Ofli",
+        "method": "SUB",
+        "round": 1
       },
       {
         "a": "Bekzat Almakhan",
@@ -10819,7 +10846,9 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/ALMAKHAN_BEKZAT_L_06-27.png?itok=6I60CdPv",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/MATSUMOTO_JEAN_L_02-07.png?itok=khw9HcPe"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/MATSUMOTO_JEAN_L_02-07.png?itok=khw9HcPe",
+        "winner": "Jean Matsumoto",
+        "method": "DEC"
       },
       {
         "a": "Daniil Donchenko",
@@ -10830,7 +10859,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/DONCHENKO_DANIIL_L_06-27.png?itok=nLBeXaNg",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
+        "winner": "Daniil Donchenko",
+        "method": "KO/TKO",
+        "round": 2
       },
       {
         "a": "Tahir Abdullayev",
@@ -10841,7 +10873,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/ABDULLAYEV_TAHIR_L_06-27.png?itok=OjpS2GZ7",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
+        "winner": "Tahir Abdullayev",
+        "method": "KO/TKO",
+        "round": 3
       }
     ],
     "earlyPrelims": [],
@@ -11554,6 +11589,44 @@
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-08/NJOKUANI_CHIDI_L.png?itok=XOQFtiWO"
       }
     ],
+    "earlyPrelims": []
+  },
+  {
+    "id": "ufc-fight-night-hernandez-vs-rodrigues",
+    "name": "UFC Fight Night: Hernandez vs. Rodrigues",
+    "type": "FIGHT NIGHT",
+    "date": "Sat, Aug 22, 2026",
+    "isoDate": "2026-08-22",
+    "location": "",
+    "venue": "",
+    "poster": "",
+    "status": "upcoming",
+    "start_time": null,
+    "mainCard": [
+      {
+        "a": "Anthony Hernandez",
+        "b": "Gregory Rodrigues",
+        "weight": "Middleweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "main",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Opponent TBA",
+        "b": "TBA",
+        "weight": "",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "comain",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
+    "prelims": [],
     "earlyPrelims": []
   }
 ]
