@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function () {
     wipe.id = 'theme-wipe';
     wipe.style.cssText =
       'position:fixed;inset:0;z-index:99990;pointer-events:none;' +
-      'background:' + (nowLight ? '#f0f0f2' : '#08080c') + ';' +
+      'background:' + (nowLight ? '#faf8f3' : '#08080c') + ';' +
       'transform:translateY(100%);will-change:transform;';
     document.body.appendChild(wipe);
 
