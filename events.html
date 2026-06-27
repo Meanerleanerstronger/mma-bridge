@@ -845,6 +845,99 @@
     .cd-live-dot { width:9px;height:9px;border-radius:50%;background:#f0b429;flex-shrink:0;box-shadow:0 0 8px #f0b429; }
     .cd-ended { color:rgba(255,255,255,.2);font-size:.8rem; }
     @media(max-width:640px) { #evCdCard { right:10px; left:10px; width:auto; top:68px; } }
+
+    /* ── RECENT RESULTS PORTAL ── */
+    .ev-recent-section { margin-top:36px; }
+    .ev-recent-header { margin-bottom:14px; }
+    .ev-recent-label {
+      font-family:'Montserrat',sans-serif; font-weight:900;
+      font-size:.52rem; letter-spacing:.26em; text-transform:uppercase;
+      color:#f0b429; margin-bottom:4px;
+    }
+    .ev-recent-sub {
+      font-family:'Inter',sans-serif; font-size:.72rem;
+      color:rgba(255,255,255,.3); letter-spacing:.01em;
+    }
+    .ev-recent-list { display:flex; flex-direction:column; gap:10px; }
+    .ev-rc {
+      display:flex; align-items:center; gap:16px;
+      background:rgba(22,22,30,.9);
+      border:1px solid rgba(255,255,255,.08);
+      border-left:2.5px solid rgba(240,180,41,.35);
+      border-radius:10px; padding:14px 16px;
+      transition:border-color .15s,background .15s;
+      position:relative; overflow:hidden;
+    }
+    .ev-rc:hover { border-color:rgba(240,180,41,.55); background:rgba(26,26,36,.95); }
+    .ev-rc-poster {
+      width:52px; height:72px; border-radius:6px;
+      object-fit:cover; object-position:center;
+      flex-shrink:0; opacity:.82;
+      background:rgba(255,255,255,.04);
+    }
+    .ev-rc-poster-placeholder {
+      width:52px; height:72px; border-radius:6px;
+      background:rgba(255,255,255,.05);
+      flex-shrink:0; display:flex; align-items:center;
+      justify-content:center; font-size:1.5rem;
+    }
+    .ev-rc-info { flex:1; min-width:0; }
+    .ev-rc-badge {
+      font-family:'Montserrat',sans-serif; font-weight:800;
+      font-size:.38rem; letter-spacing:.18em; text-transform:uppercase;
+      color:rgba(255,255,255,.28); margin-bottom:4px;
+    }
+    .ev-rc-name {
+      font-family:'Barlow Condensed','Montserrat',sans-serif;
+      font-weight:900; font-size:1.05rem; text-transform:uppercase;
+      letter-spacing:.03em; color:rgba(255,255,255,.9);
+      line-height:1.1; margin-bottom:5px;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .ev-rc-result {
+      font-family:'Inter',sans-serif; font-size:.68rem;
+      color:rgba(255,255,255,.38); letter-spacing:.01em;
+    }
+    .ev-rc-result strong { color:rgba(255,255,255,.72); font-weight:600; }
+    .ev-rc-btns { display:flex; flex-direction:column; gap:7px; flex-shrink:0; }
+    .ev-rc-btn {
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:6px; white-space:nowrap; cursor:pointer; text-decoration:none;
+      font-family:'Montserrat',sans-serif; font-weight:800;
+      font-size:.5rem; letter-spacing:.12em; text-transform:uppercase;
+      border-radius:7px; padding:8px 14px;
+      transition:background .15s,border-color .15s,color .15s;
+    }
+    .ev-rc-btn-review {
+      background:rgba(240,180,41,.1);
+      border:1.5px solid rgba(240,180,41,.45);
+      color:#f0b429;
+    }
+    .ev-rc-btn-review:hover { background:rgba(240,180,41,.18); border-color:#f0b429; }
+    .ev-rc-btn-picks {
+      background:rgba(255,255,255,.05);
+      border:1.5px solid rgba(255,255,255,.12);
+      color:rgba(255,255,255,.6);
+    }
+    .ev-rc-btn-picks:hover { background:rgba(255,255,255,.09); border-color:rgba(255,255,255,.25); color:#fff; }
+    @media(max-width:600px) {
+      .ev-rc { flex-wrap:wrap; }
+      .ev-rc-btns { flex-direction:row; width:100%; }
+      .ev-rc-btn { flex:1; }
+      .ev-rc-poster,.ev-rc-poster-placeholder { display:none; }
+    }
+    body.light-mode .ev-recent-label { color:#b8820a; }
+    body.light-mode .ev-recent-sub { color:rgba(0,0,0,.38); }
+    body.light-mode .ev-rc { background:#fff; border-color:rgba(0,0,0,.08); border-left-color:rgba(180,130,10,.35); }
+    body.light-mode .ev-rc:hover { border-left-color:rgba(180,130,10,.7); background:#fffdf8; }
+    body.light-mode .ev-rc-name { color:#111; }
+    body.light-mode .ev-rc-badge { color:rgba(0,0,0,.3); }
+    body.light-mode .ev-rc-result { color:rgba(0,0,0,.4); }
+    body.light-mode .ev-rc-result strong { color:rgba(0,0,0,.75); }
+    body.light-mode .ev-rc-btn-review { background:rgba(180,130,10,.08); border-color:rgba(180,130,10,.4); color:#b8820a; }
+    body.light-mode .ev-rc-btn-review:hover { background:rgba(180,130,10,.16); border-color:#b8820a; }
+    body.light-mode .ev-rc-btn-picks { background:rgba(0,0,0,.04); border-color:rgba(0,0,0,.12); color:rgba(0,0,0,.55); }
+    body.light-mode .ev-rc-btn-picks:hover { color:rgba(0,0,0,.8); border-color:rgba(0,0,0,.25); }
   </style>
 </head>
 
@@ -961,6 +1054,15 @@
       <div class="ev-skel"></div>
       <div class="ev-skel"></div>
       <div class="ev-skel"></div>
+    </div>
+
+    <!-- RECENT RESULTS PORTAL -->
+    <div class="ev-recent-section" id="evRecentSection" style="display:none">
+      <div class="ev-recent-header">
+        <div class="ev-recent-label">Recent Results</div>
+        <div class="ev-recent-sub">Tap to review results or see how your picks scored</div>
+      </div>
+      <div class="ev-recent-list" id="evRecentList"></div>
     </div>
 
     <!-- MINI GROUP STANDINGS -->
@@ -1105,6 +1207,63 @@
       const m=r.match(/UFC (\d+)/); if(m) return `UFC ${m[1]}`;
       if(r.toLowerCase().includes('freedom')){ const n=r.match(/Freedom (\d+)/i); return n?`UFC FREEDOM ${n[1]}`:'UFC FREEDOM'; }
       return r.split(':')[0].trim().toUpperCase();
+    }
+
+    /* ── RECENT RESULTS CARDS ── */
+    function buildRecentCard(ev) {
+      const main = getMainFight(ev);
+      if (!main) return null;
+      const label = shortLabel(ev);
+      const isPPV = ev.type === 'PPV';
+
+      // Result line: "KAPE def. HORIGUCHI · KO/TKO · R3"
+      let resultLine = '';
+      if (main.winner) {
+        const winner = main.winner === main.a ? main.a : main.b;
+        const loser  = main.winner === main.a ? main.b : main.a;
+        const wLast  = lastName(winner).toUpperCase();
+        const lLast  = lastName(loser).toUpperCase();
+        let method = (main.method || '').toUpperCase();
+        if (method === 'KO' || method === 'TKO' || method.startsWith('KO ') || method.startsWith('TKO')) method = 'KO/TKO';
+        const round = main.round ? ` · R${main.round}` : '';
+        resultLine = `<strong>${wLast}</strong> def. ${lLast} · ${method}${round}`;
+      } else {
+        const a = lastName(main.a).toUpperCase(), b = lastName(main.b).toUpperCase();
+        resultLine = `${a} vs ${b}`;
+      }
+
+      const card = document.createElement('div');
+      card.className = 'ev-rc';
+
+      const posterHtml = ev.poster
+        ? `<img class="ev-rc-poster" src="${esc(ev.poster)}" alt="${esc(ev.name)}" loading="lazy" onerror="this.outerHTML='<div class=ev-rc-poster-placeholder>🥊</div>'">`
+        : `<div class="ev-rc-poster-placeholder">🥊</div>`;
+
+      const eventEncId = encodeURIComponent(ev.id);
+      card.innerHTML = `
+        ${posterHtml}
+        <div class="ev-rc-info">
+          <div class="ev-rc-badge">${isPPV ? 'PPV · FINAL' : 'Fight Night · Final'}</div>
+          <div class="ev-rc-name">${esc(label)}</div>
+          <div class="ev-rc-result">${resultLine}</div>
+        </div>
+        <div class="ev-rc-btns">
+          <button class="ev-rc-btn ev-rc-btn-review" type="button">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 10h8M8 14h5"/></svg>
+            Review Card
+          </button>
+          <a class="ev-rc-btn ev-rc-btn-picks" href="picks.html?id=${eventEncId}">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><rect x="3" y="3" width="18" height="18" rx="3"/></svg>
+            Your Picks
+          </a>
+        </div>`;
+
+      card.querySelector('.ev-rc-btn-review').addEventListener('click', function(e) {
+        e.preventDefault();
+        openOverlay(ev);
+      });
+
+      return card;
     }
 
     /* ── BUILD EVENT LIST CARD ── */
@@ -1722,6 +1881,19 @@
           const fresh = btn.cloneNode(true);
           btn.parentNode.replaceChild(fresh, btn);
           fresh.addEventListener('click', () => openPicksHub(upcoming));
+        }
+
+        // Recent Results portal — last 3 completed events, newest first
+        const completed = all
+          .filter(e => e.status === 'completed')
+          .sort((a, b) => new Date(b.isoDate) - new Date(a.isoDate))
+          .slice(0, 3);
+        const recentSection = document.getElementById('evRecentSection');
+        const recentList    = document.getElementById('evRecentList');
+        if (completed.length && recentSection && recentList) {
+          recentList.innerHTML = '';
+          completed.forEach(e => { const c = buildRecentCard(e); if (c) recentList.appendChild(c); });
+          recentSection.style.display = '';
         }
 
         const p=new URLSearchParams(location.search), id=p.get('id');
