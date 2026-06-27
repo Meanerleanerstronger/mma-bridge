@@ -1,0 +1,98 @@
+{
+  "eventId": "ufc-freedom-250-topuria-vs-gaethje",
+  "eventName": "UFC Freedom 250: Topuria vs. Gaethje",
+  "fights": [
+    {
+      "fighter1": "Justin Gaethje Ilia Topuria",
+      "fighter2": "Ciryl Gane Alex Pereira",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 1",
+          "sigStr": "9197",
+          "totalStr": "00",
+          "td": "Lightweight",
+          "subAtt": 4,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "1 0",
+          "sigStr": "5412",
+          "totalStr": "00",
+          "td": "Heavyweight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Sean O'Malley Aiemann Zahabi",
+      "fighter2": "Josh Hokit Derrick Lewis",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "4132",
+          "totalStr": "00",
+          "td": "Bantamweight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "1 0",
+          "sigStr": "867",
+          "totalStr": "10",
+          "td": "Heavyweight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Mauricio Ruffy Michael Chandler",
+      "fighter2": "Bo Nickal Kyle Daukaus",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "2 0",
+          "sigStr": "193",
+          "totalStr": "00",
+          "td": "Lightweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "1 0",
+          "sigStr": "162",
+          "totalStr": "00",
+          "td": "Middleweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Diego Lopes Steve Garcia",
+      "fighter2": "",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "2447",
+          "totalStr": "00",
+          "td": "Featherweight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0",
+          "sigStr": "",
+          "totalStr": "",
+          "td": "",
+          "subAtt": 0,
+          "ctrlTime": "0:00"
+        }
+      }
+    }
+  ]
+}
