@@ -620,6 +620,7 @@ function formatOdds(n) {
     const picked = pickCount();
     const bar = document.getElementById('pkSaveBar');
     if (!bar) return;
+    document.body.classList.toggle('pk-save-bar-open', picked > 0);
     const btn  = bar.querySelector('.pk-save-btn');
     const dirty = hasUnsavedChanges();
     if (btn) {
@@ -1843,6 +1844,17 @@ function formatOdds(n) {
             <span>Sign in to save your picks and track your record</span>
             <a href="auth.html" class="pk-signin-link">Sign In →</a>
           </div>` : ''}
+        ${!isCompleted && !isLocked && !localStorage.getItem('pk_onboard_seen') ? `
+          <div class="pk-onboard-hint" id="pkOnboardHint">
+            <div class="pk-onboard-steps">
+              <span class="pk-onboard-step"><span class="pk-onboard-num">1</span>Pick a winner for each fight</span>
+              <span class="pk-onboard-sep">·</span>
+              <span class="pk-onboard-step"><span class="pk-onboard-num">2</span>Guess method &amp; round for bonus points</span>
+              <span class="pk-onboard-sep">·</span>
+              <span class="pk-onboard-step"><span class="pk-onboard-num">3</span>Track your accuracy on the leaderboard</span>
+            </div>
+            <button class="pk-onboard-close" onclick="this.closest('.pk-onboard-hint').remove();localStorage.setItem('pk_onboard_seen','1')" aria-label="Dismiss">✕</button>
+          </div>` : ''}
         ${challenge ? `
           <div class="pk-banner pk-challenge-banner">
             <div class="pk-ch-info">
@@ -2205,6 +2217,7 @@ function formatOdds(n) {
           const cur = localPicks[key] || {};
           localPicks[key] = { pick, base: cur.base || '', round: cur.round || '' };
           sessionStorage.setItem(`pk_draft_${eventId}`, JSON.stringify(localPicks));
+          if (!localStorage.getItem('pk_onboard_seen')) { localStorage.setItem('pk_onboard_seen','1'); document.getElementById('pkOnboardHint')?.remove(); }
           const methodWrap = document.getElementById(`pkMethod-${key}`);
           if (methodWrap) methodWrap.classList.add('visible');
           fight.classList.toggle('has-pick', true);

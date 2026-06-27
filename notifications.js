@@ -260,6 +260,28 @@
         else saveCardSnap(newSnap); // always seed on first run
       }
 
+      // ── Picks lock reminder (24h warning) ──────────────────
+      if (prefEnabled('lock_remind')) {
+        upcoming.forEach(ev => {
+          if (!ev.start_time) return;
+          const evId = ev.id || slugify(ev.name || '');
+          const lockId = `lock_remind_${evId}`;
+          if (seen.has(lockId)) return;
+          const msUntilLock = new Date(ev.start_time) - now;
+          if (msUntilLock > 0 && msUntilLock < 24 * 60 * 60 * 1000) {
+            const hrs = Math.round(msUntilLock / 3600000);
+            arr.unshift({
+              id: lockId, type: 'lock_remind', read: false,
+              title: `Picks lock in ${hrs}h — ${esc(ev.name)}`,
+              body: 'Submit your picks before the event starts.',
+              href: `picks.html?id=${encodeURIComponent(evId)}`,
+              timestamp: now.toISOString()
+            });
+            addSeen(lockId); changed = true;
+          }
+        });
+      }
+
       if (changed) saveNotifs(arr);
       this.updateBadge();
     },
@@ -357,7 +379,7 @@
             </div>`;
         }).join('');
 
-        const iconMap = { fight_upcoming: SVG.fight, fight_day: SVG.dayof, new_event: SVG.event, card_update: SVG.fight };
+        const iconMap = { fight_upcoming: SVG.fight, fight_day: SVG.dayof, new_event: SVG.event, card_update: SVG.fight, lock_remind: SVG.bell };
         const regularHtml = notifs.slice(0, 12).map(n => {
           let title = esc(n.title);
           if (n.type === 'fight_upcoming' && n.eventDate) {
