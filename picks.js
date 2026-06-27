@@ -136,9 +136,11 @@ function formatOdds(n) {
     getAuthUser(),
   ]);
 
-  // Merge fight results + load user picks in parallel (both need only auth/eventId)
-  await Promise.all([
-    sb ? sb.from('fight_results').select('event_id, fight_key, winner, method, fotn').then(({ data: dbResults }) => {
+  // Merge fight results from DB into eventsData
+  if (sb) {
+    try {
+      const { data: dbResults } = await sb.from('fight_results')
+        .select('event_id, fight_key, winner, method, fotn');
       (dbResults || []).forEach(r => {
         const ev = eventsData.find(e => e.id === r.event_id);
         if (!ev) return;
@@ -152,9 +154,8 @@ function formatOdds(n) {
         });
         if (r.fight_key === '__fotn__' && r.fotn) ev.fotn = r.fotn;
       });
-    }).catch(() => {}) : Promise.resolve(),
-    loadPicks(),
-  ]);
+    } catch {}
+  }
 
   const fighterDB = {};
   (Array.isArray(fightersData) ? fightersData : []).forEach(f => {
@@ -321,6 +322,8 @@ function formatOdds(n) {
       }
     } catch {}
   }
+
+  await loadPicks();
 
   // ── New results notification ──────────────────
   // Show a banner the first time a user sees results for an event they picked
@@ -1806,10 +1809,6 @@ function formatOdds(n) {
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
             Switch Event
           </button>
-          <a class="pk-lb-btn" href="leaderboard.html?event=${encodeURIComponent(eventId)}">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-            Leaderboard
-          </a>
         </div>
 
         <div class="pk-hd">
@@ -2596,6 +2595,13 @@ function formatOdds(n) {
   render();
   initPkCountdown();
   setupComments();
+
+  // ── Floating leaderboard button ───────────────
+  const lbFloat = document.createElement('a');
+  lbFloat.className = 'pk-lb-float';
+  lbFloat.href = `leaderboard.html?event=${encodeURIComponent(eventId)}`;
+  lbFloat.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span>Leaderboard</span>`;
+  document.body.appendChild(lbFloat);
 
   // ── Highlight new fight from notification (hla/hlb URL params) ──
   (function highlightNewFight() {

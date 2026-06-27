@@ -365,12 +365,16 @@
             if (d !== null && d >= 0) title = esc(`${n.fighter} is fighting in ${d} day${d !== 1 ? 's' : ''}!`);
           }
           const icon = iconMap[n.type] || SVG.bell;
+          // For card updates, show the matchup big and the event name small
+          const isCardUpdate = n.type === 'card_update';
+          const mainLine = isCardUpdate ? esc(n.body) : title;
+          const subLine  = isCardUpdate ? title : esc(n.body);
           return `
-            <a class="notif-item${n.read ? ' read' : ''}" href="${esc(n.href || '#')}" data-id="${esc(n.id)}">
+            <a class="notif-item${n.read ? ' read' : ''}${isCardUpdate ? ' notif-card-update' : ''}" href="${esc(n.href || '#')}" data-id="${esc(n.id)}">
               <span class="notif-item-icon">${icon}</span>
               <div class="notif-item-body">
-                <div class="notif-item-title">${title}</div>
-                <div class="notif-item-sub">${esc(n.body)}</div>
+                <div class="notif-item-title">${mainLine}</div>
+                <div class="notif-item-sub">${subLine}</div>
               </div>
               ${!n.read ? '<span class="notif-unread-dot"></span>' : ''}
             </a>`;
