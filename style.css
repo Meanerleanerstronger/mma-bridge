@@ -3184,7 +3184,7 @@ body.light-mode .results-section-label { color: rgba(0,0,0,0.4) !important; }
 
 /* ── Sidebar (index) ── */
 body.light-mode .sidebar { background: #fff !important; border-left-color: #b8820a; }
-body.light-mode .sidebar h3 { -webkit-text-fill-color: transparent; }
+body.light-mode .sidebar h3 { color: #b8820a !important; -webkit-text-fill-color: #b8820a !important; background: none !important; border-bottom-color: rgba(0,0,0,0.08) !important; }
 body.light-mode .sidebar li { color: rgba(0,0,0,0.65) !important; border-bottom-color: rgba(0,0,0,0.06) !important; }
 
 /* ── Story cards ── */
@@ -11804,3 +11804,46 @@ body.light-mode .search-result-label { color: rgba(0,0,0,0.4) !important; }
 body.light-mode .notif-dot { background: #b8820a !important; }
 body.light-mode .notif-bell-btn { color: rgba(0,0,0,0.5) !important; }
 body.light-mode .notif-bell-btn:hover { color: #b8820a !important; }
+
+/* ══════════════════════════════════════════════
+   LIGHT MODE — GOLD HOVER + REMAINING FIXES (v8.9)
+   ============================================== */
+
+/* ── Nav active — defeat any override ── */
+html.light-mode .nav-links li a.active,
+body.light-mode .nav-links li a.active { color: #b8820a !important; text-shadow: none !important; }
+
+/* ── Sidebar TODAY IN MMA ── */
+body.light-mode .sidebar h3 { color: #b8820a !important; -webkit-text-fill-color: #b8820a !important; background: none !important; }
+body.light-mode .sidebar { background: #fff !important; border-left-color: rgba(180,130,10,0.4) !important; }
+body.light-mode .sidebar li a { color: rgba(0,0,0,0.65) !important; text-decoration: none !important; }
+body.light-mode .sidebar li a:hover { color: #b8820a !important; }
+
+/* ── Fighter name links — gold on hover everywhere ── */
+body.light-mode .ov-fighter a:hover,
+body.light-mode .fc-fighter-link:hover,
+body.light-mode .fp-fighter-link:hover,
+body.light-mode .pfp-fighter-link:hover,
+body.light-mode .pr-fighter-link:hover,
+body.light-mode .lb-name a:hover { color: #b8820a !important; }
+
+/* Dark mode hover gold for fighter names in picks/events */
+.ov-fighter a:hover,
+.fc-fighter-link:hover,
+.fp-fighter-link:hover { color: #f0b429 !important; }
+
+/* ── Recent Results cards in light mode ── */
+body.light-mode #resultsInner > a {
+  background: #fff !important;
+  border-color: rgba(0,0,0,0.08) !important;
+}
+body.light-mode #resultsInner > a:hover {
+  border-color: rgba(180,130,10,0.35) !important;
+}
+
+/* ── pk-info-btn (picks page info button) ── */
+body.light-mode .pk-info-btn:hover { background: rgba(180,130,10,0.1) !important; color: #b8820a !important; border-color: rgba(180,130,10,0.25) !important; }
+body.light-mode .pk-seg-btn.active.pk-seg-dec { background: rgba(180,130,10,0.08) !important; border-color: rgba(180,130,10,0.25) !important; color: #b8820a !important; }
+
+/* ── General clickable links light mode gold hover ── */
+body.light-mode a[href]:not(.btn):not(.nav-link):not(.mbn-item):hover { color: #b8820a; }
