@@ -1350,25 +1350,41 @@
         const round  = roundEl.classList.contains('hidden') ? null : (parseInt(roundEl.value, 10) || null);
         const fotn   = fotnEl ? fotnEl.value.trim() : undefined;
 
-        const payload = { token: token(), event_id: eventId, fight_key: fightKey, winner, method };
-        if (round !== null) payload.round = round;
-        if (fotn)           payload.fotn  = fotn;
-
         btn.disabled = true;
         btn.textContent = 'Saving...';
         msg.className = 'fight-save-msg';
         msg.textContent = '';
 
         try {
-          const res = await fetch(`${API_BASE}/api/admin/set-result`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
-          const data = await res.json();
-          if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+          // Try direct Supabase write first (faster, no cold-start)
+          const sb = window._sb;
+          if (sb) {
+            const record = {
+              event_id:   eventId,
+              fight_key:  fightKey,
+              winner:     winner.toLowerCase(),
+              method:     method || null,
+              round:      round  || null,
+              fotn:       fotn   || null,
+              updated_at: new Date().toISOString(),
+            };
+            const { error } = await sb.from('fight_results').upsert(record, { onConflict: 'event_id,fight_key' });
+            if (error) throw new Error(error.message || 'Supabase write failed');
+          } else {
+            // Fallback to backend API
+            const payload = { token: token(), event_id: eventId, fight_key: fightKey, winner, method };
+            if (round !== null) payload.round = round;
+            if (fotn)           payload.fotn  = fotn;
+            const res = await fetch(`${API_BASE}/api/admin/set-result`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+          }
           msg.className = 'fight-save-msg ok';
-          msg.textContent = 'Saved successfully.';
+          msg.textContent = 'Saved ✓';
           row.classList.add('saved');
         } catch (e) {
           msg.className = 'fight-save-msg err';
@@ -1392,18 +1408,29 @@
         btn.textContent = 'Saving...';
 
         try {
-          const res = await fetch(`${API_BASE}/api/admin/set-result`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ token: token(), event_id: eventId, fight_key: '__fotn__', fotn })
-          });
-          const data = await res.json();
-          if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
-          btn.textContent = 'Saved';
+          const sb = window._sb;
+          if (sb) {
+            const { error } = await sb.from('fight_results').upsert({
+              event_id:   eventId,
+              fight_key:  '__fotn__',
+              fotn:       fotn,
+              updated_at: new Date().toISOString(),
+            }, { onConflict: 'event_id,fight_key' });
+            if (error) throw new Error(error.message);
+          } else {
+            const res = await fetch(`${API_BASE}/api/admin/set-result`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ token: token(), event_id: eventId, fight_key: '__fotn__', fotn })
+            });
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+          }
+          btn.textContent = 'Saved ✓';
           setTimeout(() => { btn.textContent = 'Save FOTN'; btn.disabled = false; }, 2000);
         } catch (e) {
-          btn.textContent = 'Error';
-          setTimeout(() => { btn.textContent = 'Save FOTN'; btn.disabled = false; }, 2000);
+          btn.textContent = 'Error: ' + (e.message || 'failed');
+          setTimeout(() => { btn.textContent = 'Save FOTN'; btn.disabled = false; }, 3000);
         }
       }
 
