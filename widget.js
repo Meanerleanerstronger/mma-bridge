@@ -46,7 +46,7 @@
     #lw-widget.lw-hidden  { opacity: 0 !important; pointer-events: none !important; }
     #lw-widget.lw-dragging {
       cursor: grabbing !important;
-      box-shadow: 0 16px 48px rgba(0,0,0,0.75), 0 0 0 1px rgba(0,229,255,0.12) !important;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.75), 0 0 0 1px rgba(240,180,41,0.12) !important;
     }
 
     /* ── Collapsed tab ── */
@@ -76,14 +76,14 @@
       pointer-events: all;
     }
     #lw-tab:hover {
-      background: rgba(0,229,255,0.08);
-      border-color: rgba(0,229,255,0.2);
+      background: rgba(240,180,41,0.08);
+      border-color: rgba(240,180,41,0.2);
     }
     #lw-tab-dot {
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: #00e5ff;
+      background: #f0b429;
       animation: lwPulse 2s ease infinite;
     }
     #lw-tab-tooltip {
@@ -130,20 +130,20 @@
       font-weight: 800;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: rgba(0,229,255,0.8);
+      color: rgba(240,180,41,0.8);
       pointer-events: none;
     }
     #lw-dot {
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: #00e5ff;
+      background: #f0b429;
       flex-shrink: 0;
       animation: lwPulse 2s ease infinite;
     }
     @keyframes lwPulse {
-      0%,100% { box-shadow: 0 0 0 0 rgba(0,229,255,0.5); opacity:1; }
-      50%      { box-shadow: 0 0 0 5px rgba(0,229,255,0); opacity:0.7; }
+      0%,100% { box-shadow: 0 0 0 0 rgba(240,180,41,0.5); opacity:1; }
+      50%      { box-shadow: 0 0 0 5px rgba(240,180,41,0); opacity:0.7; }
     }
     #lw-close {
       background: none;

@@ -1548,7 +1548,7 @@
         <div class="pr-modal-row${isFav ? ' selected' : ''}" data-id="${esc(f.id)}">
           ${f.img
             ? `<img src="${esc(f.img)}" alt="${esc(f.name)}" onerror="this.style.display='none'">`
-            : `<div style="width:38px;height:38px;border-radius:50%;background:#1c1c1c;display:flex;align-items:center;justify-content:center;font-family:Montserrat,sans-serif;font-weight:800;font-size:0.85rem;color:rgba(0,229,255,0.5)">${esc(initials)}</div>`}
+            : `<div style="width:38px;height:38px;border-radius:50%;background:#1c1c1c;display:flex;align-items:center;justify-content:center;font-family:Montserrat,sans-serif;font-weight:800;font-size:0.85rem;color:rgba(240,180,41,0.5)">${esc(initials)}</div>`}
           <div class="pr-modal-row-info">
             <div class="pr-modal-row-name">${esc(f.name)}</div>
             <div class="pr-modal-row-meta">${esc(f.weightClass || '')}${f.ranking ? ' · ' + f.ranking : ''}</div>
@@ -1594,11 +1594,11 @@
 
     const midY = yScale(50).toFixed(1);
     const last = coords[coords.length - 1];
-    const lastColor = last.pct >= 50 ? '#00e5ff' : '#ef4444';
+    const lastColor = last.pct >= 50 ? '#f0b429' : '#ef4444';
 
     const dots = coords.map((c, i) => i === coords.length - 1
       ? `<circle cx="${c.x.toFixed(1)}" cy="${c.y.toFixed(1)}" r="3.5" fill="${lastColor}" stroke="#111114" stroke-width="1.5"/>`
-      : `<circle cx="${c.x.toFixed(1)}" cy="${c.y.toFixed(1)}" r="2" fill="rgba(0,229,255,0.4)"/>`
+      : `<circle cx="${c.x.toFixed(1)}" cy="${c.y.toFixed(1)}" r="2" fill="rgba(240,180,41,0.4)"/>`
     ).join('');
 
     return `
@@ -1607,8 +1607,8 @@
         <svg class="pr-sparkline-svg" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.18"/>
-              <stop offset="100%" stop-color="#00e5ff" stop-opacity="0"/>
+              <stop offset="0%" stop-color="#f0b429" stop-opacity="0.18"/>
+              <stop offset="100%" stop-color="#f0b429" stop-opacity="0"/>
             </linearGradient>
           </defs>
           <line class="pr-sparkline-midline" x1="${PAD}" y1="${midY}" x2="${W - PAD}" y2="${midY}"/>

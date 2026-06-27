@@ -5,7 +5,7 @@
   <link rel="shortcut icon" type="image/png" href="images/mma-bridge-logo.png">
   <link rel="apple-touch-icon" href="images/mma-bridge-logo.png">
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#00e5ff">
+  <meta name="theme-color" content="#f0b429">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -24,7 +24,7 @@
   <meta name="twitter:description" content="Pick 5 UFC fighters, earn points when they win, and compete in Fantasy MMA leagues on MMA Bridge.">
   <meta name="twitter:image" content="https://mmabridge.com/images/mma-bridge-logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=6.9" />
+  <link rel="stylesheet" href="style.css?v=8.6" />
   <style>
 /* FANTASY MMA */
 .fant-hero { text-align:center; padding:52px 20px 28px; }
@@ -36,7 +36,7 @@
 .fant-tab.active { background:rgba(255,255,255,.1); color:#fff; }
 .fant-root { max-width:860px; margin:0 auto; padding:0 20px 60px; }
 .fant-loading { text-align:center; color:rgba(255,255,255,.3); font-family:'Inter',sans-serif; font-size:.85rem; padding:40px; }
-.fant-season-chip { display:inline-block; background:rgba(0,229,255,.1); border:1px solid rgba(0,229,255,.25); color:#00e5ff; font-family:'Montserrat',sans-serif; font-weight:800; font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; padding:3px 10px; border-radius:4px; margin-bottom:18px; }
+.fant-season-chip { display:inline-block; background:rgba(240,180,41,.1); border:1px solid rgba(240,180,41,.25); color:#f0b429; font-family:'Montserrat',sans-serif; font-weight:800; font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; padding:3px 10px; border-radius:4px; margin-bottom:18px; }
 .fant-slot-info { font-family:'Inter',sans-serif; font-size:.8rem; color:rgba(255,255,255,.35); margin-bottom:16px; }
 .fant-slot-info strong { color:#c8960c; }
 .fant-roster-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(145px,1fr)); gap:12px; margin-bottom:20px; }
@@ -57,7 +57,7 @@
 .fant-picker { margin-top:16px; background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.07); border-radius:14px; padding:16px; }
 .fant-picker-title { font-family:'Montserrat',sans-serif; font-weight:800; font-size:.8rem; color:#fff; margin:0 0 12px; }
 .fant-search { width:100%; box-sizing:border-box; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:10px; color:#fff; font-family:'Inter',sans-serif; font-size:.85rem; padding:10px 14px; margin-bottom:12px; }
-.fant-search:focus { outline:none; border-color:rgba(0,229,255,.4); }
+.fant-search:focus { outline:none; border-color:rgba(240,180,41,.4); }
 .fant-search::placeholder { color:rgba(255,255,255,.25); }
 .fant-picker-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:8px; max-height:300px; overflow-y:auto; }
 .fant-pick-item { background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.07); border-radius:10px; padding:12px 8px; text-align:center; cursor:pointer; transition:border-color .15s, background .15s; }
@@ -69,7 +69,7 @@
 .fant-lb-row { display:flex; align-items:center; gap:12px; padding:12px 16px; border-bottom:1px solid rgba(255,255,255,.05); transition:background .12s; }
 .fant-lb-row:last-child { border-bottom:none; }
 .fant-lb-row:hover { background:rgba(255,255,255,.03); }
-.fant-lb-row.me { background:rgba(0,229,255,.04); }
+.fant-lb-row.me { background:rgba(240,180,41,.04); }
 .fant-lb-pos { font-family:'Montserrat',sans-serif; font-weight:900; font-size:.85rem; color:rgba(255,255,255,.3); width:22px; text-align:center; flex-shrink:0; }
 .fant-lb-pos.gold { color:#c8960c; }
 .fant-lb-pos.silver { color:#aaa; }
@@ -77,7 +77,7 @@
 .fant-lb-avatar { width:30px; height:30px; border-radius:50%; object-fit:cover; background:rgba(255,255,255,.08); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-family:'Montserrat',sans-serif; font-weight:800; font-size:.62rem; color:rgba(255,255,255,.5); overflow:hidden; }
 .fant-lb-avatar img { width:100%; height:100%; object-fit:cover; }
 .fant-lb-name { font-family:'Montserrat',sans-serif; font-weight:700; font-size:.82rem; color:#fff; flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-.fant-lb-you { font-size:.58rem; color:rgba(0,229,255,.7); margin-left:5px; font-family:'Montserrat',sans-serif; font-weight:800; }
+.fant-lb-you { font-size:.58rem; color:rgba(240,180,41,.7); margin-left:5px; font-family:'Montserrat',sans-serif; font-weight:800; }
 .fant-lb-pts { font-family:'Montserrat',sans-serif; font-weight:900; font-size:1rem; color:#c8960c; flex-shrink:0; }
 .fant-lb-pts span { font-size:.6rem; color:rgba(255,255,255,.3); font-weight:600; margin-left:2px; }
 .fant-group-box { background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:14px; padding:20px; margin-bottom:20px; }
@@ -89,7 +89,7 @@
 @keyframes slideUp { from { transform:translateY(60px); opacity:0; } to { transform:none; opacity:1; } }
 .fant-modal-title { font-family:'Montserrat',sans-serif; font-weight:900; font-size:1rem; color:#fff; margin:0 0 14px; }
 .fant-modal-input { width:100%; box-sizing:border-box; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:10px; color:#fff; font-family:'Inter',sans-serif; font-size:.9rem; padding:12px 16px; margin-bottom:12px; }
-.fant-modal-input:focus { outline:none; border-color:rgba(0,229,255,.4); }
+.fant-modal-input:focus { outline:none; border-color:rgba(240,180,41,.4); }
 .fant-modal-err { color:rgba(255,80,80,.75); font-family:'Inter',sans-serif; font-size:.75rem; margin-top:6px; min-height:18px; }
 .fant-empty { text-align:center; padding:36px 16px; color:rgba(255,255,255,.25); font-family:'Inter',sans-serif; font-size:.85rem; line-height:1.6; }
 .fant-empty a { color:#c8960c; text-decoration:none; font-weight:700; }

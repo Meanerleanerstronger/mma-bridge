@@ -5,7 +5,7 @@
   <link rel="shortcut icon" type="image/png" href="images/mma-bridge-logo.png">
   <link rel="apple-touch-icon" href="images/mma-bridge-logo.png">
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#00e5ff">
+  <meta name="theme-color" content="#f0b429">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <script src="theme.js?v=2.7"></script>
   <meta charset="UTF-8" />
@@ -13,15 +13,15 @@
   <title>Season Recap — MMA Bridge</title>
   <meta name="description" content="Final standings and season recap for your MMA Bridge group league.">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=6.9" />
+  <link rel="stylesheet" href="style.css?v=8.6" />
   <style>
     .rc-page { max-width: 640px; margin: 0 auto; padding: 64px 20px 100px; }
 
     .rc-loading { text-align:center; padding:80px 20px; color:rgba(255,255,255,.3); font-family:'Inter',sans-serif; font-size:.9rem; }
-    .rc-spinner { width:28px;height:28px;border:2.5px solid rgba(255,255,255,.08);border-top-color:#00e5ff;border-radius:50%;animation:rcspin .8s linear infinite;margin:0 auto 16px; }
+    .rc-spinner { width:28px;height:28px;border:2.5px solid rgba(255,255,255,.08);border-top-color:#f0b429;border-radius:50%;animation:rcspin .8s linear infinite;margin:0 auto 16px; }
     @keyframes rcspin { to { transform:rotate(360deg); } }
 
-    .rc-eyebrow { font-family:'Montserrat',sans-serif;font-size:.56rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:rgba(0,229,255,.6);margin-bottom:10px; }
+    .rc-eyebrow { font-family:'Montserrat',sans-serif;font-size:.56rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:rgba(240,180,41,.6);margin-bottom:10px; }
     .rc-title { font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(1.8rem,5vw,2.6rem);text-transform:uppercase;letter-spacing:.03em;color:#fff;line-height:1.1;margin:0 0 8px; }
     .rc-title span { color:#c8960c; }
     .rc-period { font-family:'Inter',sans-serif;font-size:.8rem;color:rgba(255,255,255,.35);margin-bottom:32px; }
@@ -69,13 +69,13 @@
     .rc-row { display:grid;grid-template-columns:28px 1fr 60px 44px;align-items:center;gap:10px;padding:11px 16px;border-bottom:1px solid rgba(255,255,255,.05); }
     .rc-row:last-child { border-bottom:none; }
     .rc-row:nth-child(even) { background:rgba(255,255,255,.015); }
-    .rc-row-me { background:rgba(0,229,255,.04) !important; }
+    .rc-row-me { background:rgba(240,180,41,.04) !important; }
     .rc-rank { font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:900;text-align:center;color:rgba(255,255,255,.22); }
     .rc-rank-1 { color:#c8960c; }
     .rc-rank-2 { color:rgba(170,170,170,.8); }
     .rc-rank-3 { color:rgba(205,127,50,.8); }
     .rc-row-name { font-family:'Montserrat',sans-serif;font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:.03em;color:rgba(255,255,255,.8);white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
-    .rc-row-me .rc-row-name { color:#00e5ff; }
+    .rc-row-me .rc-row-name { color:#f0b429; }
     .rc-row-pts { font-family:'Montserrat',sans-serif;font-weight:900;font-size:.85rem;color:rgba(255,255,255,.65);text-align:right; }
     .rc-row-acc { font-family:'Inter',sans-serif;font-size:.7rem;color:rgba(255,255,255,.3);text-align:right; }
 
@@ -104,7 +104,7 @@
     .rc-lb-link:hover { background:rgba(255,255,255,.09);color:rgba(255,255,255,.75); }
 
     .rc-nogroup { text-align:center;padding:70px 20px;font-family:'Inter',sans-serif;font-size:.88rem;color:rgba(255,255,255,.35);line-height:1.7; }
-    .rc-nogroup a { color:#00e5ff;text-decoration:none; }
+    .rc-nogroup a { color:#f0b429;text-decoration:none; }
 
     /* light mode */
     body.light-mode .rc-title { color:#0a0a0f; }

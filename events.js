@@ -512,7 +512,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       toast = document.createElement('div');
       toast.id = 'ev-notif-toast';
       toast.style.cssText = `position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
-        background:rgba(0,229,255,0.1);border:1px solid rgba(0,229,255,0.35);
+        background:rgba(240,180,41,0.1);border:1px solid rgba(240,180,41,0.35);
         color:cyan;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.72rem;
         letter-spacing:0.06em;padding:9px 20px;border-radius:6px;z-index:9999;
         backdrop-filter:blur(8px);opacity:0;transition:opacity 0.2s;pointer-events:none;`;

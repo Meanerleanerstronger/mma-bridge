@@ -226,7 +226,7 @@
             <span class="sd-name">${escHtml(p.label)}</span>
             <span class="sd-sub">${escHtml(p.sub)}</span>
           </div>
-          <span style="font-size:0.68rem;color:rgba(0,229,255,0.7);font-weight:700;letter-spacing:0.08em;flex-shrink:0;">→</span>
+          <span style="font-size:0.68rem;color:rgba(240,180,41,0.7);font-weight:700;letter-spacing:0.08em;flex-shrink:0;">→</span>
         `, () => navigateTo(p.href));
         drop.appendChild(row);
       });

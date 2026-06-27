@@ -139,7 +139,7 @@
           mid.querySelector('.ov-result-method')?.remove();
           mid.querySelector('.ov-result-detail')?.remove();
 
-          const methodColors = { 'KO/TKO': '#e53935', 'SUB': '#8b5cf6', 'DEC': 'rgba(0,229,255,.75)', 'NC': 'rgba(255,255,255,.3)' };
+          const methodColors = { 'KO/TKO': '#e53935', 'SUB': '#8b5cf6', 'DEC': 'rgba(240,180,41,.75)', 'NC': 'rgba(255,255,255,.3)' };
           const col = methodColors[hit.method] || 'rgba(255,255,255,.45)';
 
           if (hit.method) {

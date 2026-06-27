@@ -192,12 +192,12 @@ function formatOdds(n) {
     const next = eventsData.find(e => e.status !== 'completed' && (e.isoDate || '') >= today)
                  || eventsData.find(e => e.status !== 'completed');
     if (next) { window.location.replace(`picks.html?id=${encodeURIComponent(next.id)}`); return; }
-    root.innerHTML = `<div class="pk-error">No upcoming events. <a href="events.html" style="color:#00e5ff;text-decoration:none;">Browse events →</a></div>`;
+    root.innerHTML = `<div class="pk-error">No upcoming events. <a href="events.html" style="color:#f0b429;text-decoration:none;">Browse events →</a></div>`;
     return;
   }
 
   const event = eventsData.find(e => e.id === eventId || slugify(e.name || '') === eventId);
-  if (!event) { root.innerHTML = `<div class="pk-error">Event not found. <a href="events.html" style="color:#00e5ff;text-decoration:none;">Browse events →</a></div>`; return; }
+  if (!event) { root.innerHTML = `<div class="pk-error">Event not found. <a href="events.html" style="color:#f0b429;text-decoration:none;">Browse events →</a></div>`; return; }
 
   // Dynamic page title + OG image
   if (event.name) {
@@ -345,7 +345,7 @@ function formatOdds(n) {
               particleCount: Math.min(correct * 25, 180),
               spread: 80,
               origin: { y: 0.55 },
-              colors: ['#00e5ff', '#c8a84b', '#ffffff', '#00ff88', '#a78bfa'],
+              colors: ['#f0b429', '#c8a84b', '#ffffff', '#00ff88', '#a78bfa'],
               disableForReducedMotion: true
             }), 400);
           }
