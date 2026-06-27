@@ -164,7 +164,6 @@ a, a:visited {
 
 .nav-links li a.active {
   color: #f0b429;
-  text-shadow: 0 0 20px rgba(240,180,41,0.45), 0 0 6px rgba(240,180,41,0.2);
   text-decoration: none;
   border-bottom: none;
   outline: none;
@@ -7910,7 +7909,6 @@ button:focus:not(:focus-visible), a:focus:not(:focus-visible) { outline: none; }
 .lb-stat-accuracy .lb-stat-val,
 .lb-stat-points .lb-stat-val {
   color: #f0b429;
-  text-shadow: 0 0 12px rgba(240,180,41,0.4);
 }
 .lb-stat-pct-sym,
 .lb-stat-pts-sym {

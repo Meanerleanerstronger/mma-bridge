@@ -334,7 +334,7 @@ function initWidget() {
     .wgt-pred-tag { background:rgba(240,180,41,0.08);border:1px solid rgba(240,180,41,0.18);border-radius:20px;padding:2px 9px;font-size:0.62rem;font-weight:600;color:#f0b429;font-family:'Inter',sans-serif; }
     .wgt-pred-conf { display:flex;align-items:center;gap:7px;margin-top:6px; }
     .wgt-pred-conf-bar { flex:1;height:3px;background:rgba(255,255,255,0.07);border-radius:2px;overflow:hidden; }
-    .wgt-pred-conf-fill { height:100%;background:linear-gradient(90deg,#f0b429,#80ffea);border-radius:2px; }
+    .wgt-pred-conf-fill { height:100%;background:linear-gradient(90deg,#f0b429,#e8c870);border-radius:2px; }
     .wgt-pred-conf-pct { font-family:'Montserrat',sans-serif;font-size:0.62rem;font-weight:800;color:#f0b429;min-width:28px;text-align:right; }
     .wgt-pred-reasoning { font-family:'Inter',sans-serif;font-size:0.7rem;line-height:1.5;color:rgba(255,255,255,0.38);margin-top:9px;padding-top:9px;border-top:1px solid rgba(255,255,255,0.05);font-style:italic; }
 

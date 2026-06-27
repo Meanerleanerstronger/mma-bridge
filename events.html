@@ -112,7 +112,7 @@
   ]
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=8.6" />
+  <link rel="stylesheet" href="style.css?v=8.7" />
 
   <style>
     /* ── KEYFRAMES ── */
@@ -291,13 +291,13 @@
     .ov-poster-placeholder { position:absolute;inset:0;background:linear-gradient(135deg,#0d0d12,#080810);display:flex;align-items:center;justify-content:center; }
     .ov-poster-placeholder-inner { font-family:'Barlow Condensed','Montserrat',sans-serif;font-weight:900;font-size:7rem;color:rgba(255,255,255,.03);text-transform:uppercase;letter-spacing:.05em;text-align:center;line-height:.9;user-select:none;white-space:pre-line; }
 
-    .ov-hero.is-ppv::after { content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#8a6a10,#c8a84b,#fff8c0,#c8a84b,#8a6a10,transparent);background-size:250% auto;animation:shimmer 3.5s linear infinite;z-index:6; }
-    .ov-hero.is-special-green::after { content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#00b359,#00ff88,#afffda,#00ff88,#00b359,transparent);background-size:250% auto;animation:shimmer 3.5s linear infinite;z-index:6;filter:drop-shadow(0 0 6px rgba(0,255,136,.7)); }
+    .ov-hero.is-ppv::after { display:none; }
+    .ov-hero.is-special-green::after { display:none; }
 
     .ov-topbar { position:absolute;top:0;left:0;right:0;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;z-index:10; }
     .ov-topbar-right { display:flex;align-items:center;gap:12px; }
-    .ov-pick-btn { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:10px 22px;border-radius:8px;background:linear-gradient(135deg,rgba(240,180,41,.22) 0%,rgba(180,130,10,.14) 100%);border:1.5px solid rgba(240,180,41,.65);color:#f0b429;text-decoration:none;white-space:nowrap;backdrop-filter:blur(10px);box-shadow:0 0 18px rgba(240,180,41,.25);transition:background .15s,border-color .15s,box-shadow .15s,transform .15s; }
-    .ov-pick-btn:hover { background:linear-gradient(135deg,rgba(240,180,41,.34) 0%,rgba(180,130,10,.25) 100%);border-color:#f0b429;box-shadow:0 0 28px rgba(240,180,41,.45);transform:translateY(-1px); }
+    .ov-pick-btn { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:10px 22px;border-radius:8px;background:rgba(240,180,41,.12);border:1.5px solid rgba(240,180,41,.55);color:#f0b429;text-decoration:none;white-space:nowrap;transition:background .15s,border-color .15s,transform .15s; }
+    .ov-pick-btn:hover { background:rgba(240,180,41,.2);border-color:#f0b429;transform:translateY(-1px); }
     .ov-result-btn { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;padding:10px 18px;border-radius:8px;text-decoration:none;white-space:nowrap;transition:background .15s,transform .15s,box-shadow .15s; }
     .ov-result-picks { background:rgba(74,222,128,.12);border:1.5px solid rgba(74,222,128,.5);color:#4ade80; }
     .ov-result-picks:hover { background:rgba(74,222,128,.22);box-shadow:0 0 20px rgba(74,222,128,.3);transform:translateY(-1px); }
@@ -317,7 +317,7 @@
     .ov-badge { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;padding:4px 12px;border-radius:4px;backdrop-filter:blur(10px); }
     .ov-badge.fn  { background:rgba(240,180,41,.15);border:1px solid rgba(240,180,41,.35);color:#f0b429; }
     .ov-badge.ppv { background:rgba(200,168,75,.15);border:1px solid rgba(200,168,75,.4);color:#c8a84b; }
-    .ov-badge.special-green { background:rgba(0,255,136,.1);border:1px solid rgba(0,255,136,.35);color:#00ff88; }
+    .ov-badge.special-green { background:rgba(240,180,41,.15);border:1px solid rgba(240,180,41,.35);color:#f0b429; }
     .ov-live-dot  { display:flex;align-items:center;gap:5px;font-family:'Montserrat',sans-serif;font-size:.46rem;font-weight:800;letter-spacing:.15em;color:#ff4444; }
     .ov-live-dot::before { content:'';width:6px;height:6px;border-radius:50%;background:#ff4444;animation:pulse 1.2s ease infinite; }
     .ov-close { width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);font-size:.95rem;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(10px);transition:background .2s,border-color .2s,color .2s; }
@@ -834,7 +834,7 @@
     #evCdX { background:none;border:none;color:rgba(240,180,41,.45);font-size:.72rem;cursor:pointer;padding:0 2px;line-height:1;flex-shrink:0;transition:color .15s; }
     #evCdX:hover { color:#f0b429; }
     .ev-cd-label { font-family:'Montserrat',sans-serif;font-size:.52rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,180,41,.55);margin-bottom:4px; }
-    #evCdTimer { font-family:'Montserrat',sans-serif;font-weight:900;font-size:2rem;color:#f0b429;letter-spacing:.02em;margin-bottom:8px;min-height:2.2rem;text-shadow:0 0 18px rgba(240,180,41,.4); }
+    #evCdTimer { font-family:'Montserrat',sans-serif;font-weight:900;font-size:2rem;color:#f0b429;letter-spacing:.02em;margin-bottom:8px;min-height:2.2rem; }
     #evCdLocal { font-family:'Inter',sans-serif;font-size:.63rem;color:rgba(255,255,255,.38);line-height:1.5; }
     /* shared cd-* classes used by countdown.js */
     .cd-n { font-family:'Montserrat',sans-serif;font-weight:900;color:#f0b429; }
@@ -1108,7 +1108,7 @@
     }
 
     /* ── BUILD EVENT LIST CARD ── */
-    const SPECIAL_EVENTS = { 'ufc-fight-night-song-vs-figueiredo': { accent:'#00ff88', glowColor:'rgba(0,255,136,.22)' } };
+    const SPECIAL_EVENTS = {};
 
     function buildCard(ev){
       const isPPV=ev.type==='PPV', cls=isPPV?'ppv':'fn';

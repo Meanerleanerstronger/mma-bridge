@@ -39,7 +39,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Pacifico&display=swap" rel="stylesheet">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="style.css?v=8.6" />
+  <link rel="stylesheet" href="style.css?v=8.7" />
 
   <style>
     @media (max-width: 768px) {
@@ -122,15 +122,7 @@
       position: relative;
       animation: sectionFadeIn 0.5s 0.3s ease both;
     }
-    .section-title::after {
-      content: '';
-      position: absolute;
-      bottom: -8px; left: 50%;
-      transform: translateX(-50%);
-      width: 36px; height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(240,180,41,0.5), transparent);
-      border-radius: 2px;
-    }
+    .section-title::after { display: none; }
 
     /* ── RESULTS TRACK FADES ── */
     #resultsTrack {
@@ -154,12 +146,7 @@
 
     /* ── TODAY IN MMA SIDEBAR ── */
     .sidebar h3 {
-      background: linear-gradient(120deg, #f0b429 0%, #80ffea 50%, #f0b429 100%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: shimmerSlide 5s linear infinite;
+      color: #f0b429;
     }
 
     /* ── CONTENT SECTION ── */
@@ -362,7 +349,7 @@
 
   <!-- RECENT RESULTS - Infinite auto-scroll -->
   <div style="padding:36px 0 0;">
-    <h3 class="results-section-label" style="font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin:0 0 18px;padding:0 48px;">Recent Results</h3>
+    <h3 class="results-section-label" style="font-family:'Montserrat',sans-serif;font-size:0.72rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#f0b429;margin:0 0 18px;padding:0 48px;">Recent Results</h3>
     <div style="position:relative;">
       <!-- fade left -->
       <div class="results-fade-l" style="position:absolute;left:0;top:0;bottom:16px;width:80px;background:linear-gradient(to right,#0f0f0f 0%,transparent 100%);z-index:2;pointer-events:none;"></div>
@@ -384,7 +371,7 @@
   <!-- MAIN CONTENT -->
   <div class="content-container">
     <div class="left-column">
-      <h3 class="section-title" style="text-align:center;font-family:'Montserrat',sans-serif;font-size:1.15rem;font-weight:900;letter-spacing:0.14em;text-transform:uppercase;color:#fff;margin-bottom:28px;">Trending Today</h3>
+      <h3 class="section-title" style="text-align:center;font-family:'Montserrat',sans-serif;font-size:1.15rem;font-weight:900;letter-spacing:0.14em;text-transform:uppercase;color:#f0b429;margin-bottom:28px;">Trending Today</h3>
       <div class="card-row" id="trending-cards"></div>
     </div>
     <div class="sidebar">
@@ -403,7 +390,7 @@
   </div>
 
   <script src="notifications.js?v=2.3"></script>
-  <script type="module" src="script.js?v=2.7"></script>
+  <script type="module" src="script.js?v=2.8"></script>
 
   <script>
     window.addEventListener('scroll', () => {
