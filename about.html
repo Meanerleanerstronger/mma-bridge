@@ -22,8 +22,7 @@
     .ab-eyebrow { font-family:'Montserrat',sans-serif;font-size:.58rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:rgba(240,180,41,.7);margin-bottom:14px; }
     .ab-title { font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(2rem,5vw,3rem);text-transform:uppercase;letter-spacing:.04em;color:#fff;line-height:1.1;margin:0 0 10px; }
     .ab-title span { color:#f0b429; }
-    .ab-tagline { font-family:'Inter',sans-serif;font-size:1.05rem;font-weight:500;color:rgba(255,255,255,.45);margin:0 0 32px;letter-spacing:.01em; }
-    .ab-divider { width:40px;height:2px;background:linear-gradient(90deg,#f0b429,transparent);border-radius:2px;margin-bottom:32px; }
+    .ab-tagline { font-family:'Inter',sans-serif;font-size:1.05rem;font-weight:500;color:rgba(255,255,255,.45);margin:0 0 36px;letter-spacing:.01em; }
 
     /* ── Manifesto ── */
     .ab-manifesto { font-family:'Inter',sans-serif;font-size:.95rem;line-height:1.8;color:rgba(255,255,255,.5);margin-bottom:48px; }
@@ -35,7 +34,7 @@
     .ab-what-text strong { color:rgba(255,255,255,.78);font-weight:600; }
 
     /* ── Founder section ── */
-    .ab-founder-section { margin-bottom: 56px; }
+    .ab-founder-section { margin-bottom: 56px; perspective: 900px; }
     .ab-founder-eyebrow { font-family:'Montserrat',sans-serif;font-size:.52rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,180,41,.5);margin-bottom:20px; }
     .ab-founder-card {
       display: flex;
@@ -45,46 +44,40 @@
       border: 1px solid rgba(240,180,41,.15);
       border-radius: 20px;
       padding: 28px 32px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .28s cubic-bezier(.34,1.4,.64,1), box-shadow .28s ease, border-color .2s;
+      transform-style: preserve-3d;
+      will-change: transform;
     }
-    .ab-founder-photo-link {
+    .ab-founder-card:hover {
+      transform: translateY(-6px) rotateX(3deg) scale(1.015);
+      box-shadow: 0 28px 56px rgba(0,0,0,.55), 0 0 0 1px rgba(240,180,41,.28), 0 0 40px rgba(240,180,41,.07);
+      border-color: rgba(240,180,41,.32);
+    }
+    .ab-founder-photo-wrap {
       flex-shrink: 0;
-      display: block;
       width: 90px; height: 90px;
       border-radius: 50%;
       overflow: hidden;
       border: 2px solid rgba(240,180,41,.3);
-      box-shadow: 0 0 0 0 rgba(240,180,41,0);
-      transition: transform .22s cubic-bezier(.34,1.56,.64,1), box-shadow .22s ease;
-      text-decoration: none;
+      transition: box-shadow .28s ease;
     }
-    .ab-founder-photo-link:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 0 5px rgba(240,180,41,.22), 0 8px 28px rgba(0,0,0,.5);
+    .ab-founder-card:hover .ab-founder-photo-wrap {
+      box-shadow: 0 0 0 5px rgba(240,180,41,.18), 0 8px 24px rgba(0,0,0,.4);
     }
     .ab-founder-photo { width:100%;height:100%;object-fit:cover;display:block; }
     .ab-founder-info { flex: 1; }
-    .ab-founder-name-link { text-decoration: none; }
     .ab-founder-name {
       font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.05rem;
       color:#fff;margin:0 0 4px;letter-spacing:.01em;
-      transition: color .15s;
     }
-    .ab-founder-name-link:hover .ab-founder-name { color:#f0b429; }
     .ab-founder-role { font-family:'Montserrat',sans-serif;font-size:.52rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:rgba(240,180,41,.65);margin-bottom:5px; }
-    .ab-founder-location { font-family:'Inter',sans-serif;font-size:.78rem;color:rgba(255,255,255,.32);margin-bottom:14px; }
-    .ab-founder-li {
-      display: inline-flex; align-items: center; gap: 7px;
-      font-family:'Inter',sans-serif;font-size:.72rem;font-weight:500;
-      color:rgba(255,255,255,.3);text-decoration:none;
-      transition: color .15s;
-    }
-    .ab-founder-li:hover { color:#f0b429; }
-    .ab-founder-li svg { width:14px;height:14px;flex-shrink:0; }
+    .ab-founder-location { font-family:'Inter',sans-serif;font-size:.78rem;color:rgba(255,255,255,.32);margin:0; }
 
     /* mobile founder card */
     @media(max-width:480px){
       .ab-founder-card { flex-direction:column;align-items:center;text-align:center;padding:24px 20px; }
-      .ab-founder-location { margin-bottom:12px; }
     }
 
     /* ── Contact ── */
@@ -118,7 +111,6 @@
     body.light-mode .ab-founder-name { color:#0a0a0f; }
     body.light-mode .ab-founder-role { color:#007a99; }
     body.light-mode .ab-founder-location { color:rgba(0,0,0,.38); }
-    body.light-mode .ab-founder-li { color:rgba(0,0,0,.35); }
     body.light-mode .ab-contact { background:rgba(0,0,0,.02);border-color:rgba(0,0,0,.07); }
     body.light-mode .ab-contact-label { color:rgba(0,0,0,.25); }
     body.light-mode .ab-contact-text { color:rgba(0,0,0,.42); }
@@ -184,47 +176,40 @@
     <div class="ab-eyebrow">About</div>
     <h1 class="ab-title">MMA <span>Bridge</span></h1>
     <p class="ab-tagline">Built by a fan, for fans who actually watch the fights.</p>
-    <div class="ab-divider"></div>
 
     <!-- Manifesto -->
     <p class="ab-manifesto">
-      Every other option was built for someone else. <strong>Tapology</strong> is a great stats database — deep and useful, but clinical. Built for researchers, not fans. <strong>ESPN</strong> is a broadcast network that treats you like a casual viewer. Neither gives you a real place to pick fights, compete on it, argue rankings, and actually feel something about the sport.<br><br>
-      There was nothing built for the fan who watches every card, has strong opinions on every matchup, and wants to back those opinions up. So this got built.
+      Every other option was built for someone else. <strong>Tapology</strong> is a great stats database, deep and useful, but built for researchers. <strong>ESPN</strong> covers the sport well, but it's a broadcast network first. Neither was built for the fan who watches every card, has strong opinions on every matchup, and wants to actually compete on those opinions.<br><br>
+      There was nothing built for that fan. So this got built.
     </p>
 
     <!-- What's here -->
     <div class="ab-what-eyebrow">What's here</div>
     <p class="ab-what-text">
-      <strong>Pick fight winners</strong> before every card locks — winner, method, round. Climb from Rookie to Legend based on pure accuracy. <strong>Run a private pick'em league</strong> with your crew all season — standings, head-to-head, the whole thing. Check <strong>P4P rankings</strong> and cast your vote. Read and write <strong>event reviews</strong> after fight night. And ask <strong>Lucas</strong> — our MMA AI — anything about any fighter, any event, any result. That's MMA Bridge.
+      <strong>Pick fight winners</strong> before every card locks: winner, method, round. Climb from Rookie to Legend based on pure accuracy. <strong>Host private fantasy games</strong> with your crew all season, full standings and head-to-head. Check <strong>P4P rankings</strong> and cast your vote. Read and write <strong>event reviews</strong> after fight night. Ask <strong>Lucas</strong>, our MMA AI, anything about any fighter, any event, any result. That's MMA Bridge.
     </p>
 
     <!-- Meet the Founder -->
     <div class="ab-founder-section">
       <div class="ab-founder-eyebrow">The Founder</div>
-      <div class="ab-founder-card">
-        <a class="ab-founder-photo-link" href="https://www.linkedin.com/in/harshith-bandi-35234b2b9" target="_blank" rel="noopener" aria-label="Harshith Bandi on LinkedIn">
+      <a class="ab-founder-card" href="https://www.linkedin.com/in/harshith-bandi-35234b2b9" target="_blank" rel="noopener">
+        <div class="ab-founder-photo-wrap">
           <img class="ab-founder-photo" src="images/harshith.png" alt="Harshith Bandi">
-        </a>
+        </div>
         <div class="ab-founder-info">
-          <a class="ab-founder-name-link" href="https://www.linkedin.com/in/harshith-bandi-35234b2b9" target="_blank" rel="noopener">
-            <div class="ab-founder-name">Harshith Bandi</div>
-          </a>
+          <div class="ab-founder-name">Harshith Bandi</div>
           <div class="ab-founder-role">Founder &amp; Developer</div>
           <div class="ab-founder-location">San Diego, CA</div>
-          <a class="ab-founder-li" href="https://www.linkedin.com/in/harshith-bandi-35234b2b9" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            LinkedIn
-          </a>
         </div>
-      </div>
+      </a>
     </div>
 
     <!-- Contact -->
     <div class="ab-contact">
       <div class="ab-contact-label">Contact &amp; Feedback</div>
       <div class="ab-contact-text">
-        Questions, bug reports, suggestions, or general feedback — reach out at <a href="mailto:contact@mmabridge.com">contact@mmabridge.com</a>. We read and respond to everything.<br><br>
-        If you have concerns about any content on this site — images, media, or otherwise — please email us before taking any other action. We'll respond promptly and resolve it.
+        Questions, bug reports, suggestions or general feedback: reach out at <a href="mailto:contact@mmabridge.com">contact@mmabridge.com</a>. We read and respond to everything.<br><br>
+        If you have concerns about any content on this site (images, media or otherwise), please email us before taking any other action. We'll respond promptly.
       </div>
     </div>
 
@@ -239,12 +224,12 @@
         <div class="ab-pp-h">What We Collect</div>
         <p class="ab-pp-p">When you create an account, we collect:</p>
         <ul class="ab-pp-list">
-          <li><strong>Email address</strong> — used only for login and account recovery</li>
-          <li><strong>Display name</strong> — the name shown on leaderboards and your profile</li>
-          <li><strong>Fight picks</strong> — your predictions for UFC events</li>
-          <li><strong>Hype ratings</strong> — your 1–10 event ratings</li>
-          <li><strong>Favourite fighters</strong> — fighters you follow for notifications</li>
-          <li><strong>Group membership</strong> — if you join or create a private pick'em group</li>
+          <li><strong>Email address</strong>: used only for login and account recovery</li>
+          <li><strong>Display name</strong>: the name shown on leaderboards and your profile</li>
+          <li><strong>Fight picks</strong>: your predictions for UFC events</li>
+          <li><strong>Hype ratings</strong>: your 1–10 event ratings</li>
+          <li><strong>Favourite fighters</strong>: fighters you follow for notifications</li>
+          <li><strong>Group membership</strong>: if you join or create a private pick'em group</li>
         </ul>
         <p class="ab-pp-p">We do not collect payment information, phone numbers, or any other personal data.</p>
       </div>
@@ -282,9 +267,9 @@
         <div class="ab-pp-h">Your Rights</div>
         <p class="ab-pp-p">You have the right to access, correct, or delete your personal data at any time.</p>
         <ul class="ab-pp-list">
-          <li><strong>Delete your account</strong> — go to your <a href="profile.html">Profile page</a>, scroll to the Danger Zone, and click "Delete My Account." This permanently removes your profile, all picks, all ratings, and signs you out. It cannot be undone.</li>
-          <li><strong>Data export or correction requests</strong> — email <a href="mailto:contact@mmabridge.com">contact@mmabridge.com</a> and we'll respond within 30 days.</li>
-          <li><strong>EU/UK users (GDPR)</strong> — you have the right to object to processing, request portability, or lodge a complaint with your local supervisory authority.</li>
+          <li><strong>Delete your account</strong>: go to your <a href="profile.html">Profile page</a>, scroll to the Danger Zone, and click "Delete My Account." This permanently removes your profile, all picks, all ratings, and signs you out. It cannot be undone.</li>
+          <li><strong>Data export or correction requests</strong>: email <a href="mailto:contact@mmabridge.com">contact@mmabridge.com</a> and we'll respond within 30 days.</li>
+          <li><strong>EU/UK users (GDPR)</strong>: you have the right to object to processing, request portability, or lodge a complaint with your local supervisory authority.</li>
         </ul>
       </div>
 
@@ -295,7 +280,7 @@
 
       <div class="ab-pp-section">
         <div class="ab-pp-h">Security</div>
-        <p class="ab-pp-p">All data is transmitted over HTTPS. Authentication is handled by Supabase with industry-standard session management. Passwords are never stored by MMA Bridge — login is handled entirely by Supabase Auth.</p>
+        <p class="ab-pp-p">All data is transmitted over HTTPS. Authentication is handled by Supabase with industry-standard session management. Passwords are never stored by MMA Bridge. Login is handled entirely by Supabase Auth.</p>
       </div>
 
       <div class="ab-pp-section">
