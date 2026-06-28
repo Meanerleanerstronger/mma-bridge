@@ -1,6 +1,6 @@
 /*!
- * MMA Bridge — Onboarding Tour v2.0
- * Multi-page scripted tour with spotlight, animated cursor, page transitions
+ * MMA Bridge — Onboarding Tour v3.0
+ * Fully automatic cinematic tour. No Next button — plays like a video.
  */
 (function () {
   'use strict';
@@ -8,285 +8,246 @@
   const SK_SEEN   = 'mma_tour_seen';
   const SK_ACTIVE = 'mma_tour_active';
   const SK_STEP   = 'mma_tour_step';
-  const OFFER_DELAY = 2600;
-  const IS_MOBILE   = window.innerWidth < 700;
 
-  /* ── State ───────────────────────────────── */
-  let currentStep = 0;
-  let running     = false;
-  let autoTimer   = null;
+  /* ─── State ───────────────────────────── */
+  let running   = false;
+  let stepTimer = null;
+  let localIdx  = 0;
 
-  /* ── DOM ─────────────────────────────────── */
-  let elTop, elBot, elLeft, elRight, elGlow;
-  let elCursor, elBubble, elBubbleText, elDots, elNextBtn, elProgressFill;
+  /* ─── DOM refs ────────────────────────── */
+  let elTop, elBot, elLeft, elRight, elGlow, elCursor, elBubble, elBubbleText, elEndBtn, elBar;
 
-  /* ── Page detection ──────────────────────── */
-  const PAGE = (() => {
-    const p = location.pathname.split('/').pop() || 'index.html';
-    if (p === '' || p === 'index.html') return 'index';
+  /* ─── Page ────────────────────────────── */
+  const PAGE = (function () {
+    const p = location.pathname.split('/').pop();
+    if (!p || p === 'index.html') return 'index';
     return p.replace('.html', '');
   })();
 
-  /* ── Step definitions ────────────────────── */
-  function allSteps() {
-    const ev = window._tourNextEvent;
-    const evName = ev ? ev.name : 'the next event';
-    const evId   = ev ? encodeURIComponent(ev.id) : '';
+  const IS_MOB = window.innerWidth < 680;
 
-    const lastEv = window._tourLastEvent;
-    const lastName = lastEv ? lastEv.name : 'the last event';
+  /* ─── Steps ───────────────────────────── */
+  function allSteps() {
+    const nev  = window._tourNextEvent;
+    const lev  = window._tourLastEvent;
+    const nId  = nev ? encodeURIComponent(nev.id) : '';
+    const nName = nev ? nev.name : 'the next event';
+    const lName = lev ? lev.name : 'the last event';
 
     return [
-      // ── INDEX ──────────────────────────────
+      /* 0 — index: hero */
       {
         page: 'index',
-        target: () => document.getElementById('heroSection'),
-        cursor: () => document.getElementById('heroBtn'),
-        text: `${lastName} just finished. This hero updates automatically — review mode now, then flips to Make Your Picks when ${evName} gets close.`,
-        pad: 0, scroll: false, ttl: 6500,
+        sel: '#heroSection',
+        cursorSel: '#heroBtn',
+        text: `${lName} just wrapped. This hero updates automatically — shows results now, flips to picks mode when ${nName} gets close.`,
+        dur: 4000, scroll: false,
       },
+      /* 1 — index: results */
       {
         page: 'index',
-        target: () => document.getElementById('resultsTrack') || document.querySelector('.results-section'),
-        cursor: () => document.querySelector('#resultsInner a'),
-        text: "Every result from last weekend right here — scroll through, tap a card, see the full breakdown.",
-        pad: 8, scroll: true, ttl: 5000,
+        sel: '#resultsTrack',
+        cursorSel: '#resultsInner',
+        text: 'Recent results scroll right here. Every finish, every decision — tap a card for the full breakdown.',
+        dur: 3500, scroll: true,
+        nav: 'events.html', navStep: 2,
       },
+      /* 2 — events: card list */
       {
-        page: 'index',
-        target: () => document.getElementById('lw-btn') || document.querySelector('.ev-help-btn'),
-        cursor: () => document.getElementById('lw-btn'),
-        text: "Got questions? I'm Lucas. I live in that chat button on every page. Hit me anytime — fighters, picks, rules, I got you.",
-        pad: 14, scroll: false, ttl: 5500,
-        onShow: () => {
-          // pulse the chat button
-          const btn = document.getElementById('lw-btn');
-          if (btn) { btn.style.transform = 'scale(1.18)'; btn.style.transition = 'transform .3s'; after(600, () => { btn.style.transform = ''; }); }
+        page: 'events',
+        sel: '.ev-list',
+        cursorSel: '.ev-card',
+        text: 'Every announced UFC event — PPVs, Fight Nights, numbered cards. Tap any card to see the full fight card.',
+        dur: 3500, scroll: false,
+        onEnter: scrollTop,
+      },
+      /* 3 — events: click a card */
+      {
+        page: 'events',
+        sel: '.ev-card',
+        cursorSel: '.ev-card',
+        text: 'Opens the full overlay with fights, headshots, and hype ratings. Make your picks straight from here.',
+        dur: 3500, scroll: false,
+        click: true,
+        onEnter: () => after(100, () => {
+          const c = q('.ev-card'); if (c) c.click();
+        }),
+        nav: nId ? `picks.html?event=${nId}` : 'pfp.html',
+        navStep: nId ? 4 : 6,
+      },
+      /* 4 — picks: fight cards */
+      {
+        page: 'picks',
+        sel: '.pk-card-wrap, .sb-card, [class*="fc-fight"], .fc-fight-card',
+        cursorSel: '.sb-side[data-pick], .fc-fighter',
+        text: `This is ${nName}. Pick a winner for every fight before the event locks. Lock time is automatic.`,
+        dur: 4000, scroll: false,
+        onEnter: scrollTop,
+      },
+      /* 5 — picks: simulate clicking picks */
+      {
+        page: 'picks',
+        sel: '.sb-side[data-pick], .fc-fighter',
+        cursorSel: '.sb-side[data-pick], .fc-fighter',
+        text: 'Just tap a fighter to lock your pick. Green when the result is in. Red means rethink your strategy next time.',
+        dur: 3800, scroll: false,
+        click: true,
+        onEnter: () => {
+          // Actually click 3 picks with delays
+          const sides = [...document.querySelectorAll('.sb-side[data-pick]')];
+          if (sides.length >= 2) {
+            after(400, () => { clickEl(sides[0]); });
+            after(900, () => { clickEl(sides[3] || sides[1]); });
+            after(1400, () => { clickEl(sides[4] || sides[2] || sides[0]); });
+          }
         },
-        nav: 'events.html', navStep: 3,
-        nextLabel: 'See Events →',
+        nav: 'pfp.html', navStep: 6,
       },
-
-      // ── EVENTS ─────────────────────────────
-      {
-        page: 'events',
-        target: () => document.getElementById('listAll') || document.querySelector('.ev-list'),
-        cursor: () => document.querySelector('.ev-card') || document.querySelector('#listAll > *'),
-        text: "Every currently announced UFC event — PPVs, Fight Nights, numbered cards. Updates the second a new one is confirmed.",
-        pad: 12, scroll: false, ttl: 5500,
-        onShow: () => scrollToTop(),
-      },
-      {
-        page: 'events',
-        target: () => document.getElementById('evReviewBtn'),
-        cursor: () => document.getElementById('evReviewBtn'),
-        text: "Made picks for a past event? Review Your Picks shows exactly how you did — green for right, red for wrong.",
-        pad: 12, scroll: false, ttl: 5200,
-        clickTarget: true,
-        nav: 'pfp.html', navStep: 5,
-        nextLabel: 'See Rankings →',
-      },
-
-      // ── PFP ────────────────────────────────
+      /* 6 — pfp: hero */
       {
         page: 'pfp',
-        target: () => document.querySelector('.pfp-hero'),
-        cursor: () => document.querySelector('.pfp-hero-name'),
-        text: "The pound-for-pound top 15 — best fighters in the world regardless of weight class. Islam Makhachev sitting at number one.",
-        pad: 0, scroll: false, ttl: 5800,
-        onShow: () => scrollToTop(),
+        sel: '.pfp-hero',
+        cursorSel: '.pfp-hero-name',
+        text: 'Pound-for-pound top 15 — best fighters in the world regardless of weight class. Updated after every title fight.',
+        dur: 3500, scroll: false,
+        onEnter: scrollTop,
       },
+      /* 7 — pfp: click a fighter row */
       {
         page: 'pfp',
-        target: () => document.querySelector('.pfp-row'),
-        cursor: () => document.querySelector('.pfp-row'),
-        text: "Click any fighter to see their full profile — last 5 fights, record, stance, country, finishing rate.",
-        pad: 8, scroll: false, ttl: 5000,
-        clickTarget: true,
+        sel: '.pfp-grid, .pfp-list',
+        cursorSel: '.pfp-row',
+        text: 'Click any fighter for their full profile — last 5 fights, record, country, stance, finishing rate.',
+        dur: 3500, scroll: false,
+        click: true,
+        onEnter: () => after(500, () => { const r = q('.pfp-row'); if (r) r.click(); }),
       },
+      /* 8 — pfp: divisional tab */
       {
         page: 'pfp',
-        target: () => document.querySelector('.rnk-tab[data-tab="womens-p4p"]'),
-        cursor: () => document.querySelector('.rnk-tab[data-tab="womens-p4p"]'),
-        text: "Women's P4P is right here too — same format, best pound-for-pound across all women's divisions.",
-        pad: 10, scroll: false, ttl: 4500,
-        clickTarget: true,
+        sel: '.rnk-tabs',
+        cursorSel: '.rnk-tab[data-tab="divisional"]',
+        text: 'Divisional rankings across all 12 weight classes. Top 15 contenders, updated after every card.',
+        dur: 3500, scroll: false,
+        click: true,
+        onEnter: () => after(300, () => { const t = q('.rnk-tab[data-tab="divisional"]'); if (t) t.click(); }),
+        nav: 'reviews.html', navStep: 9,
       },
-      {
-        page: 'pfp',
-        target: () => document.querySelector('.rnk-tab[data-tab="divisional"]'),
-        cursor: () => document.querySelector('.rnk-tab[data-tab="divisional"]'),
-        text: "Divisional rankings — all 12 weight classes, top 15 contenders each. Cycle through any division.",
-        pad: 10, scroll: false, ttl: 5200,
-        clickTarget: true,
-        onAfter: () => cycleDivisions(),
-        nav: 'reviews.html', navStep: 8,
-        nextLabel: 'See Reviews →',
-      },
-
-      // ── REVIEWS ────────────────────────────
+      /* 9 — reviews: card grid */
       {
         page: 'reviews',
-        target: () => document.querySelector('.rv-search-wrap'),
-        cursor: () => document.querySelector('.rv-search-wrap input'),
-        text: "Search up any event you loved or hated 😛 — PPVs, Fight Nights, numbered events. Spill your heart out.",
-        pad: 14, scroll: false, ttl: 5500,
-        onShow: () => scrollToTop(),
+        sel: '.rv-grid, .rv-cards, [class*="rv-"]',
+        cursorSel: '.rv-card.ppv, .rv-card',
+        text: 'Rate any UFC event 1 to 10. Write exactly what you thought. See what the whole community rated it.',
+        dur: 4000, scroll: false,
+        onEnter: scrollTop,
       },
+      /* 10 — reviews: fake review */
       {
         page: 'reviews',
-        target: () => document.querySelector('.rv-card.ppv') || document.querySelector('.rv-card'),
-        cursor: () => document.querySelector('.rv-card.ppv') || document.querySelector('.rv-card'),
-        text: "Rate any card 1 to 10, write what you thought, see what the community rated it. Talk about the fights you wish had gone different.",
-        pad: 8, scroll: false, ttl: 6000,
-        onAfter: () => showFakeReview(),
-        nav: 'leaderboard.html', navStep: 10,
-        nextLabel: 'See Leaderboard →',
+        sel: '.rv-card.ppv, .rv-card',
+        cursorSel: '.rv-card.ppv, .rv-card',
+        text: 'Spill your heart out. Fights you loved, results you wish had gone different — it all lives here.',
+        dur: 5500, scroll: false,
+        click: false,
+        onEnter: showFakeReview,
+        nav: 'leaderboard.html', navStep: 11,
       },
-
-      // ── LEADERBOARD ────────────────────────
+      /* 11 — leaderboard */
       {
         page: 'leaderboard',
-        target: () => document.getElementById('lbRoot') || document.querySelector('.lb-page'),
-        cursor: () => document.getElementById('lbRoot'),
-        text: "Community leaderboard — everyone ranked by accuracy. Join a group with your crew for a private season-long league.",
-        pad: 0, scroll: false, ttl: 5500,
-        onShow: () => scrollToTop(),
-        nav: 'lucas.html', navStep: 11,
-        nextLabel: 'Meet Lucas →',
+        sel: '#lbRoot, .lb-page',
+        cursorSel: '#lbRoot',
+        text: 'Community leaderboard — everyone ranked by pick accuracy. Join a group with your friends for a private season league.',
+        dur: 4000, scroll: false,
+        onEnter: scrollTop,
+        nav: 'lucas.html', navStep: 12,
       },
-
-      // ── LUCAS ──────────────────────────────
+      /* 12 — lucas: final */
       {
         page: 'lucas',
-        target: () => document.getElementById('lw-window') || document.querySelector('.lucas-page') || document.body,
-        cursor: null,
-        text: "This is where I live. Every page has my chat widget, but this is my full house — long form questions, fight breakdowns, predictions, all of it.",
-        pad: 0, scroll: false, ttl: 0,
-        isFinal: true,
+        sel: null,
+        cursorSel: null,
+        text: "That's the whole site. Make an account, it's free — your picks, your rank, your group. I'll be right here if you need anything.",
+        dur: 0, scroll: false,
+        onEnter: scrollTop,
+        final: true,
       },
     ];
   }
 
-  /* ── Page steps ───────────────────────────── */
-  function stepsForPage() {
+  /* ─── Page steps ──────────────────────── */
+  function pageSteps() {
     return allSteps()
-      .map((s, i) => ({ ...s, idx: i }))
+      .map((s, i) => ({ ...s, gIdx: i }))
       .filter(s => s.page === PAGE);
   }
 
-  /* ── Offer modal ──────────────────────────── */
-  function showOffer() {
-    if (document.getElementById('trOffer')) return;
-    const wrap = make('div', { id: 'trOffer' });
-    wrap.innerHTML = `
-      <div id="trOfferCard">
-        <div id="trOfferHead">
-          <div id="trOfferAv">L</div>
-          <div>
-            <div id="trOfferName">Lucas</div>
-            <div id="trOfferSub">MMA Bridge AI</div>
-          </div>
-        </div>
-        <p id="trOfferMsg">First time here? Let me show you around — takes about a minute.</p>
-        <div id="trOfferBtns">
-          <button id="trNo">No thanks</button>
-          <button id="trYes">Show me around →</button>
-        </div>
-      </div>`;
-    document.body.appendChild(wrap);
-    raf(() => wrap.classList.add('tr-in'));
-    document.getElementById('trYes').onclick = () => { killOffer(); startTour(); };
-    document.getElementById('trNo').onclick  = () => { killOffer(); ls(SK_SEEN, '1'); };
+  /* ─── Helpers ─────────────────────────── */
+  function q(sel) {
+    if (!sel) return null;
+    const parts = sel.split(',').map(s => s.trim());
+    for (const p of parts) {
+      try { const el = document.querySelector(p); if (el) return el; } catch {}
+    }
+    return null;
+  }
+  function make(tag, attrs) {
+    const el = document.createElement(tag);
+    if (attrs) Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
+    return el;
+  }
+  function css(el, props) { if (el) Object.assign(el.style, props); }
+  function after(ms, fn) { return setTimeout(fn, ms); }
+  function raf(fn) { requestAnimationFrame(fn); }
+  function lsGet(k) { try { return localStorage.getItem(k); } catch { return null; } }
+  function lsSet(k, v) { try { localStorage.setItem(k, v); } catch {} }
+  function ssGet(k) { try { return sessionStorage.getItem(k); } catch { return null; } }
+  function ssSet(k, v) { try { sessionStorage.setItem(k, v); } catch {} }
+  function scrollTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  function clickEl(el) { if (el) { el.click(); } }
+
+  /* ─── Typing sound ────────────────────── */
+  let _actx;
+  function getACtx() {
+    if (!_actx) try { _actx = new (window.AudioContext || window.webkitAudioContext)(); } catch {}
+    return _actx;
+  }
+  function playTick() {
+    try {
+      const ctx = getACtx(); if (!ctx) return;
+      const osc = ctx.createOscillator();
+      const g   = ctx.createGain();
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(900 + Math.random() * 400, ctx.currentTime);
+      g.gain.setValueAtTime(0.04, ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04);
+      osc.connect(g); g.connect(ctx.destination);
+      osc.start(); osc.stop(ctx.currentTime + 0.04);
+    } catch {}
   }
 
-  function killOffer() {
-    const el = document.getElementById('trOffer');
-    if (!el) return;
-    el.classList.remove('tr-in');
-    el.classList.add('tr-out');
-    after(360, () => el.remove());
-  }
-
-  /* ── Build tour DOM ───────────────────────── */
-  function buildDOM() {
-    const panelCSS = {
-      position:'fixed', zIndex:'9980', pointerEvents:'none',
-      background:'rgba(0,0,0,0.86)', backdropFilter:'blur(3px)',
-      transition:'top .48s cubic-bezier(.4,0,.2,1), left .48s cubic-bezier(.4,0,.2,1), width .48s cubic-bezier(.4,0,.2,1), height .48s cubic-bezier(.4,0,.2,1)',
-    };
-    elTop   = make('div'); css(elTop,   { ...panelCSS, top:'0', left:'0', right:'0', height:'0' });
-    elBot   = make('div'); css(elBot,   { ...panelCSS, bottom:'0', left:'0', right:'0', height:'0' });
-    elLeft  = make('div'); css(elLeft,  { ...panelCSS, top:'0', left:'0', width:'0', height:'100vh' });
-    elRight = make('div'); css(elRight, { ...panelCSS, top:'0', right:'0', width:'0', height:'100vh' });
-
-    elGlow = make('div');
-    css(elGlow, {
-      position:'fixed', zIndex:'9981', pointerEvents:'none',
-      border:'1.5px solid rgba(240,180,41,.55)', borderRadius:'10px',
-      boxShadow:'0 0 0 1px rgba(240,180,41,.1), 0 0 44px rgba(240,180,41,.2)',
-      transition:'all .48s cubic-bezier(.4,0,.2,1)', opacity:'0',
-      animation:'trGlowPulse 2.2s ease-in-out infinite',
+  /* ─── Spotlight ───────────────────────── */
+  function spotlight(el, pad) {
+    if (!el) { clearSpot(); return; }
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    after(320, () => {
+      if (!running) return;
+      const r  = el.getBoundingClientRect();
+      const p  = pad ?? 14;
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const t  = Math.max(0, r.top - p);
+      const b  = Math.max(0, vh - r.bottom - p);
+      const l  = Math.max(0, r.left - p);
+      const ri = Math.max(0, vw - r.right - p);
+      const mh = vh - t - b;
+      elTop.style.height   = t + 'px';
+      elBot.style.height   = b + 'px';
+      elLeft.style.cssText  += `;top:${t}px;height:${mh}px;width:${l}px`;
+      elRight.style.cssText += `;top:${t}px;height:${mh}px;width:${ri}px`;
+      css(elGlow, { top:(r.top-p)+'px', left:(r.left-p)+'px', width:(r.width+p*2)+'px', height:(r.height+p*2)+'px', opacity:'1' });
     });
-
-    // Progress bar
-    const progWrap = make('div');
-    css(progWrap, { position:'fixed', top:'0', left:'0', right:'0', height:'3px', zIndex:'9995', background:'rgba(255,255,255,.06)', pointerEvents:'none' });
-    elProgressFill = make('div');
-    css(elProgressFill, { height:'100%', width:'0%', background:'linear-gradient(90deg,#c98a00,#f0b429,#ffd960)', transition:'width .55s cubic-bezier(.4,0,.2,1)' });
-    progWrap.appendChild(elProgressFill);
-
-    // Skip
-    const skip = make('button', { id:'trSkip' });
-    skip.textContent = 'Skip tour';
-    skip.onclick = endTour;
-
-    // Cursor
-    elCursor = make('div', { id:'trCursor' });
-    elCursor.innerHTML = `<svg viewBox="0 0 24 28" width="22" height="26" fill="none">
-      <path d="M4 3L20 12.5L12.5 14.8L8.5 23L4 3Z" fill="white" stroke="rgba(0,0,0,0.35)" stroke-width="1.4" stroke-linejoin="round"/>
-    </svg>`;
-    if (IS_MOBILE) elCursor.style.display = 'none';
-
-    // Bubble
-    elBubble = make('div', { id:'trBubble' });
-    elBubble.innerHTML = `
-      <div id="trBubbleHead">
-        <div id="trBubbleAv">L</div>
-        <span id="trBubbleLabel">Lucas</span>
-        <div id="trDots"></div>
-        <button id="trX" title="Close">✕</button>
-      </div>
-      <div id="trBubbleText"></div>
-      <div id="trBubbleFoot">
-        <button id="trNext">Next →</button>
-      </div>`;
-
-    document.body.append(elTop, elBot, elLeft, elRight, elGlow, progWrap, skip, elCursor, elBubble);
-
-    elBubbleText = document.getElementById('trBubbleText');
-    elDots       = document.getElementById('trDots');
-    elNextBtn    = document.getElementById('trNext');
-    elNextBtn.onclick = null; // wired per-step in doStep
-    document.getElementById('trX').onclick = endTour;
-  }
-
-  /* ── Spotlight ────────────────────────────── */
-  function spotlight(rect, pad) {
-    const p  = pad ?? 12;
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-    const t  = Math.max(0, rect.top    - p);
-    const b  = Math.max(0, vh - rect.bottom - p);
-    const l  = Math.max(0, rect.left   - p);
-    const r  = Math.max(0, vw - rect.right  - p);
-    const mh = vh - t - b;
-
-    elTop.style.height   = t + 'px';
-    elBot.style.height   = b + 'px';
-    elLeft.style.top     = t + 'px'; elLeft.style.height = mh + 'px'; elLeft.style.width = l + 'px';
-    elRight.style.top    = t + 'px'; elRight.style.height = mh + 'px'; elRight.style.width = r + 'px';
-    css(elGlow, { top:(rect.top-p)+'px', left:(rect.left-p)+'px', width:(rect.width+p*2)+'px', height:(rect.height+p*2)+'px', opacity:'1' });
   }
 
   function clearSpot() {
@@ -295,527 +256,433 @@
     elGlow.style.opacity = '0';
   }
 
-  /* ── Cursor ───────────────────────────────── */
+  /* ─── Cursor ──────────────────────────── */
   function moveCursor(el) {
-    if (IS_MOBILE || !el) { elCursor.style.opacity = '0'; return; }
+    if (IS_MOB || !el || !elCursor) return;
     const r = el.getBoundingClientRect();
-    css(elCursor, { left:(r.left + r.width*.22)+'px', top:(r.top + r.height*.22)+'px', opacity:'1' });
+    css(elCursor, { left:(r.left + r.width * .22)+'px', top:(r.top + r.height * .22)+'px', opacity:'1' });
   }
 
-  function clickCursor() {
+  function animateClick() {
+    if (!elCursor) return;
     elCursor.classList.add('tr-clicking');
-    after(170, () => elCursor.classList.remove('tr-clicking'));
+    after(160, () => elCursor.classList.remove('tr-clicking'));
   }
 
-  /* ── Dots ─────────────────────────────────── */
-  function renderDots(total, cur) {
-    elDots.innerHTML = '';
-    for (let i = 0; i < total; i++) {
-      const d = make('div');
-      css(d, { width:'5px', height:'5px', borderRadius:'50%', flexShrink:'0',
-        background: i === cur ? '#f0b429' : 'rgba(255,255,255,.2)', transition:'background .3s' });
-      elDots.appendChild(d);
-    }
-  }
-
-  /* ── Typewriter ───────────────────────────── */
-  function typeIn(el, text, sound, done) {
+  /* ─── Typewriter ──────────────────────── */
+  function typeIn(el, text, useSound, done) {
     el.textContent = '';
     let i = 0;
     function tick() {
       if (!running) return;
       el.textContent += text[i++];
-      if (sound && i % 3 === 0) playTick();
-      if (i < text.length) after(18, tick);
-      else if (done) after(100, done);
+      if (useSound && i % 2 === 0) playTick();
+      if (i < text.length) after(11, tick);
+      else if (done) done();
     }
     tick();
   }
 
-  /* ── Typing sound ─────────────────────────── */
-  function playTick() {
-    try {
-      const ctx = new (window.AudioContext || window.webkitAudioContext)();
-      const buf = ctx.createBuffer(1, 256, ctx.sampleRate);
-      const d   = buf.getChannelData(0);
-      for (let i = 0; i < 256; i++) d[i] = (Math.random()*2-1) * 0.07;
-      const src = ctx.createBufferSource();
-      src.buffer = buf;
-      const gain = ctx.createGain();
-      gain.gain.value = 0.4;
-      src.connect(gain); gain.connect(ctx.destination);
-      src.start();
-    } catch {}
-  }
-
-  /* ── Division cycling ─────────────────────── */
-  function cycleDivisions() {
-    const pills = [...document.querySelectorAll('.div-pill:not(.div-pill-sep)')];
-    if (!pills.length) return;
-    let i = 0;
-    function next() {
-      if (!running || i >= Math.min(3, pills.length)) return;
-      pills[i].click();
-      moveCursor(pills[i]);
-      spotlight(pills[i].getBoundingClientRect(), 10);
-      i++;
-      after(900, next);
-    }
-    next();
-  }
-
-  /* ── Fake review overlay ──────────────────── */
+  /* ─── Fake review panel ───────────────── */
   function showFakeReview() {
-    const existing = document.getElementById('trFakeReview');
-    if (existing) existing.remove();
-
-    const panel = make('div', { id:'trFakeReview' });
+    const old = document.getElementById('trFakeRev');
+    if (old) old.remove();
+    const panel = make('div', { id: 'trFakeRev' });
     panel.innerHTML = `
-      <div id="trFakeRevHead">UFC Freedom 250: Topuria vs Gaethje</div>
-      <div id="trFakeStars">★★★★★<span style="opacity:.3">★★★★★</span></div>
-      <div id="trFakeRevText" style="min-height:52px;font-family:Inter,sans-serif;font-size:.82rem;line-height:1.6;color:rgba(255,255,255,.75);"></div>
-      <div id="trFakeRevComm" style="margin-top:12px;font-family:Inter,sans-serif;font-size:.72rem;color:rgba(255,255,255,.35);">47 community reviews · avg 4.3 ★</div>`;
+      <div class="trfr-title">UFC Freedom 250 — Topuria vs Gaethje</div>
+      <div class="trfr-stars">★★★★★<span>★★★★★</span></div>
+      <div class="trfr-text" id="trFrText"></div>
+      <div class="trfr-meta">47 reviews · community avg 4.3 ★</div>`;
     document.body.appendChild(panel);
-
-    const fakeReviewText = "One of the best UFC events I've watched in years. Gaethje walked through everything Topuria threw at him. The atmosphere was electric from prelims to the main event. Fiziev vs Torres fight of the night no question.";
-    const textEl = document.getElementById('trFakeRevText');
-    typeIn(textEl, fakeReviewText, true, null);
-
-    after(6000, () => {
-      panel.style.transition = 'opacity .4s';
-      panel.style.opacity = '0';
-      after(400, () => panel.remove());
-    });
+    raf(() => panel.classList.add('trfr-in'));
+    const fake = "Watched every second. Gaethje walked through everything Topuria threw at him — the crowd was unreal. Fiziev vs Torres was fight of the night easy. One of the best PPVs in years.";
+    typeIn(document.getElementById('trFrText'), fake, true, null);
+    after(5200, () => { panel.style.opacity = '0'; after(400, () => panel.remove()); });
   }
 
-  /* ── Navigate to next page ────────────────── */
-  function navigateTo(url, nextStep) {
-    ss(SK_ACTIVE, '1');
-    ss(SK_STEP, String(nextStep));
+  /* ─── Offer modal ─────────────────────── */
+  function showOffer() {
+    if (document.getElementById('trOffer') || running) return;
+    const wrap = make('div', { id: 'trOffer' });
+    wrap.innerHTML = `
+      <div id="trOfferAv">L</div>
+      <p id="trOfferMsg">Hey, I'm Lucas. Want me to show you around?</p>
+      <div id="trOfferBtns">
+        <button id="trNo">No, I'm good</button>
+        <button id="trYes">Yes, show me →</button>
+      </div>`;
+    document.body.appendChild(wrap);
+    raf(() => wrap.classList.add('tr-offer-in'));
+    document.getElementById('trYes').onclick = () => { killOffer(); startTour(); };
+    document.getElementById('trNo').onclick  = () => { killOffer(); lsSet(SK_SEEN, '1'); };
+  }
+
+  function killOffer() {
+    const el = document.getElementById('trOffer');
+    if (!el) return;
+    el.classList.remove('tr-offer-in');
+    after(360, () => el.remove());
+  }
+
+  /* ─── Navigate ────────────────────────── */
+  function navigate(url, gIdx) {
+    ssSet(SK_ACTIVE, '1');
+    ssSet(SK_STEP, String(gIdx));
     clearSpot();
     if (elCursor) elCursor.style.opacity = '0';
-
-    // Cinematic fade out
-    const curtain = make('div', { id:'trCurtain' });
-    css(curtain, { position:'fixed', inset:'0', zIndex:'9999', background:'#000', opacity:'0', transition:'opacity .45s ease', pointerEvents:'all' });
+    const curtain = make('div', { id: 'trCurtain' });
+    css(curtain, { position:'fixed', inset:'0', zIndex:'9999', background:'#000', opacity:'0', pointerEvents:'all', transition:'opacity .4s ease' });
     document.body.appendChild(curtain);
     raf(() => { curtain.style.opacity = '1'; });
-    after(480, () => { window.location.href = url; });
+    after(440, () => { window.location.href = url; });
   }
 
-  /* ── Run steps for current page ───────────── */
-  function runPageTour() {
-    const steps = stepsForPage();
-    const globalStep = parseInt(ss(SK_STEP) || '0', 10);
+  /* ─── Build tour DOM ──────────────────── */
+  function buildDOM() {
+    if (document.getElementById('trEndBtn')) return; // already built
 
-    // Find which local step to start from
-    let localIdx = 0;
-    for (let i = 0; i < steps.length; i++) {
-      if (steps[i].idx <= globalStep) localIdx = i;
-    }
-    // If we just arrived on this page, start from the first step of this page
-    if (!ss(SK_ACTIVE)) localIdx = 0;
+    const panelBase = { position:'fixed', zIndex:'9980', pointerEvents:'none', background:'rgba(0,0,0,.84)', backdropFilter:'blur(2px)', transition:'all .42s cubic-bezier(.4,0,.2,1)' };
+    elTop   = make('div'); css(elTop,   { ...panelBase, top:'0', left:'0', right:'0', height:'0' });
+    elBot   = make('div'); css(elBot,   { ...panelBase, bottom:'0', left:'0', right:'0', height:'0' });
+    elLeft  = make('div'); css(elLeft,  { ...panelBase, top:'0', left:'0', width:'0', height:'100vh' });
+    elRight = make('div'); css(elRight, { ...panelBase, top:'0', right:'0', width:'0', height:'100vh' });
 
-    currentStep = localIdx;
-    buildDOM();
-    after(IS_MOBILE ? 200 : 300, () => runLocalStep(currentStep, steps));
-  }
+    elGlow = make('div');
+    css(elGlow, { position:'fixed', zIndex:'9981', pointerEvents:'none', border:'1.5px solid rgba(240,180,41,.5)', borderRadius:'10px', boxShadow:'0 0 0 1px rgba(240,180,41,.1),0 0 40px rgba(240,180,41,.18)', transition:'all .42s cubic-bezier(.4,0,.2,1)', opacity:'0', animation:'trGlowPulse 2.4s ease-in-out infinite' });
 
-  function runLocalStep(localIdx, steps) {
-    if (!running || localIdx >= steps.length) return;
-    const s = steps[localIdx];
-    const total = steps.length;
+    // Progress bar
+    const progWrap = make('div');
+    css(progWrap, { position:'fixed', top:'0', left:'0', right:'0', height:'2px', zIndex:'9995', background:'rgba(255,255,255,.05)', pointerEvents:'none' });
+    elBar = make('div');
+    css(elBar, { height:'100%', width:'0%', background:'linear-gradient(90deg,#c98a00,#f0b429,#ffd960)', transition:'width .5s ease' });
+    progWrap.appendChild(elBar);
 
-    clearTimeout(autoTimer);
-
-    // Progress across ALL steps
-    const allS = allSteps();
-    const pct  = (s.idx / Math.max(1, allS.length - 1)) * 100;
-    elProgressFill.style.width = pct + '%';
-
-    // Dots for current page
-    renderDots(total, localIdx);
-
-    // Button label
-    const isLastOfPage = localIdx === total - 1;
-    if (isLastOfPage && s.nav) {
-      elNextBtn.textContent = s.nextLabel || 'Next →';
-    } else if (s.isFinal) {
-      elNextBtn.style.display = 'none';
-    } else {
-      elNextBtn.textContent = localIdx === total - 1 ? 'Got it →' : 'Next →';
-    }
-
-    if (s.isFinal) { runFinalStep(s); return; }
-
-    // Scroll
-    if (s.scroll) {
-      const tEl = s.target?.();
-      if (tEl) { tEl.scrollIntoView({ behavior:'smooth', block:'center' }); }
-      after(700, () => doStep(s, localIdx, steps));
-    } else {
-      if (s.scroll === false && localIdx === 0) scrollToTop();
-      // Give JS-rendered pages more time on first step after navigation
-      const initDelay = (localIdx === 0 && ss(SK_ACTIVE)) ? 1200 : 300;
-      after(localIdx === 0 ? initDelay : 300, () => doStep(s, localIdx, steps));
-    }
-  }
-
-  function doStep(s, localIdx, steps, attempt) {
-    if (!running) return;
-    attempt = attempt || 0;
-    const targetEl = s.target?.();
-    if (!targetEl) {
-      if (attempt < 18) { after(280, () => doStep(s, localIdx, steps, attempt + 1)); return; }
-      advanceLocal(localIdx, steps); return;
-    }
-
-    // Spotlight
-    spotlight(targetEl.getBoundingClientRect(), s.pad);
+    // Always-on End button
+    elEndBtn = make('button', { id: 'trEndBtn' });
+    elEndBtn.innerHTML = '&#x2715; End Tour';
+    elEndBtn.onclick = endTour;
 
     // Cursor
-    const curEl = s.cursor?.() || targetEl;
-    moveCursor(curEl);
+    elCursor = make('div', { id: 'trCursor' });
+    elCursor.innerHTML = `<svg viewBox="0 0 22 26" width="20" height="24" fill="none"><path d="M3 2.5L19 12L12 14L8.5 22L3 2.5Z" fill="white" stroke="rgba(0,0,0,.4)" stroke-width="1.2" stroke-linejoin="round"/></svg>`;
 
-    // Click target
-    if (s.clickTarget && curEl) {
-      after(400, () => { if (!running) return; clickCursor(); curEl.click(); });
-    }
+    // Bubble
+    elBubble = make('div', { id: 'trBubble' });
+    elBubble.innerHTML = `
+      <div id="trBubbleHead"><div id="trBubbleAv">L</div><span id="trBubbleLbl">Lucas</span></div>
+      <div id="trBubbleText"></div>`;
+    elBubbleText = elBubble.querySelector('#trBubbleText');
 
-    // onShow callback
-    if (s.onShow) s.onShow();
-
-    // Slide bubble in
-    elBubble.classList.add('tr-bubble-in');
-    elBubbleText.textContent = '';
-
-    after(260, () => {
-      if (!running) return;
-      typeIn(elBubbleText, s.text, false, () => {
-        if (!running) return;
-        if (s.onAfter) after(300, s.onAfter);
-        if (s.ttl > 0) {
-          autoTimer = after(s.ttl, () => advanceLocal(localIdx, steps));
-        }
-      });
-    });
-
-    // Wire Next button for this step
-    elNextBtn.onclick = () => { clearTimeout(autoTimer); advanceLocal(localIdx, steps); };
+    document.body.append(elTop, elBot, elLeft, elRight, elGlow, progWrap, elEndBtn, elCursor, elBubble);
   }
 
-  function advanceLocal(localIdx, steps) {
-    clearTimeout(autoTimer);
-    const s = steps[localIdx];
-    const next = localIdx + 1;
+  /* ─── Play a step ─────────────────────── */
+  function playStep(steps, idx, retries) {
+    if (!running || idx >= steps.length) return;
+    retries = retries || 0;
+    const s = steps[idx];
 
-    // If this step navigates to another page
-    if (next >= steps.length && s.nav) {
-      navigateTo(s.nav, s.navStep);
+    clearTimeout(stepTimer);
+
+    // Update progress bar
+    const all = allSteps();
+    if (elBar) elBar.style.width = ((s.gIdx / Math.max(1, all.length - 1)) * 100) + '%';
+
+    // onEnter callback
+    if (s.onEnter && retries === 0) s.onEnter();
+
+    // Find target
+    const targetEl = q(s.sel);
+    if (!targetEl && retries < 20) {
+      after(250, () => playStep(steps, idx, retries + 1));
       return;
     }
+
+    // Spotlight & cursor
+    if (targetEl) {
+      spotlight(targetEl, 14);
+      after(350, () => {
+        if (!running) return;
+        const curEl = q(s.cursorSel) || targetEl;
+        moveCursor(curEl);
+        if (s.click) { after(300, () => { animateClick(); }); }
+      });
+    } else {
+      clearSpot();
+    }
+
+    // Show bubble
+    elBubble.classList.add('tr-bubble-in');
+    elBubbleText.textContent = '';
+    after(120, () => {
+      if (!running) return;
+      typeIn(elBubbleText, s.text, false, () => {
+        if (!running || s.dur === 0) return;
+        stepTimer = after(s.dur - 800, () => advance(steps, idx));
+      });
+    });
+  }
+
+  function advance(steps, idx) {
+    if (!running) return;
+    const s = steps[idx];
+    const next = idx + 1;
+
+    if (s.nav) { navigate(s.nav, s.navStep); return; }
     if (next >= steps.length) { endTour(); return; }
 
-    currentStep = next;
-    runLocalStep(next, steps);
+    localIdx = next;
+    playStep(steps, next);
   }
 
-  /* ── Final step ───────────────────────────── */
-  function runFinalStep(s) {
+  /* ─── Final step ──────────────────────── */
+  function playFinal() {
     clearSpot();
     if (elCursor) elCursor.style.opacity = '0';
-    elProgressFill.style.width = '100%';
-    elBubble.classList.add('tr-bubble-in');
+    if (elBar) elBar.style.width = '100%';
 
+    elBubble.classList.add('tr-bubble-in');
     elBubble.innerHTML = `
-      <div id="trBubbleHead">
-        <div id="trBubbleAv">L</div>
-        <span id="trBubbleLabel">Lucas</span>
-        <button id="trX" title="Close">✕</button>
-      </div>
-      <div id="trBubbleText" style="margin-bottom:18px;">${s.text}</div>
+      <div id="trBubbleHead"><div id="trBubbleAv">L</div><span id="trBubbleLbl">Lucas</span></div>
+      <div id="trBubbleText" style="margin-bottom:18px;">That's the whole site. Make an account, it's free — your picks, your rank, your group. I'll be right here if you need anything.</div>
       <div id="trFinalBtns">
         <a href="auth.html" id="trCreateBtn">Create Account →</a>
-        <button id="trExploreBtn" onclick="window._tourEnd()">Keep Exploring</button>
+        <button id="trExpBtn" onclick="window._tourEnd()">Keep Exploring</button>
       </div>`;
-    document.getElementById('trX').onclick = endTour;
   }
 
-  /* ── End tour ─────────────────────────────── */
+  /* ─── Run page ────────────────────────── */
+  function runPage() {
+    buildDOM();
+
+    const steps = pageSteps();
+    if (!steps.length) return;
+
+    // Find which step to start at (cross-page navigation)
+    const gTarget = parseInt(ssGet(SK_STEP) || '0', 10);
+    let start = 0;
+    for (let i = 0; i < steps.length; i++) {
+      if (steps[i].gIdx <= gTarget) start = i;
+    }
+    localIdx = start;
+
+    const s = steps[start];
+    if (s.final) { playFinal(); return; }
+
+    // Small boot delay so page fully paints
+    const bootDelay = ssGet(SK_ACTIVE) ? 1400 : 200;
+    after(bootDelay, () => { if (running) playStep(steps, start); });
+  }
+
+  /* ─── End tour ────────────────────────── */
   function endTour() {
     running = false;
-    clearTimeout(autoTimer);
-    ls(SK_SEEN, '1');
+    clearTimeout(stepTimer);
+    lsSet(SK_SEEN, '1');
+    ssSet(SK_ACTIVE, null);
+    ssSet(SK_STEP, null);
     sessionStorage.removeItem(SK_ACTIVE);
     sessionStorage.removeItem(SK_STEP);
 
-    const targets = [elTop, elBot, elLeft, elRight, elGlow, elCursor, elBubble,
-      elProgressFill?.parentElement, document.getElementById('trSkip'),
-      document.getElementById('trFakeReview')];
-    targets.forEach(el => {
-      if (!el) return;
-      el.style.transition = 'opacity .35s ease';
-      el.style.opacity = '0';
-    });
-    after(380, () => targets.forEach(el => el?.remove()));
+    const els = [elTop, elBot, elLeft, elRight, elGlow, elCursor, elBubble,
+      elEndBtn, elBar?.parentElement, document.getElementById('trFakeRev')];
+    els.forEach(el => { if (!el) return; el.style.transition = 'opacity .3s ease'; el.style.opacity = '0'; });
+    after(340, () => els.forEach(el => el?.remove()));
   }
-
   window._tourEnd = endTour;
 
-  /* ── Start tour ───────────────────────────── */
+  /* ─── Start ───────────────────────────── */
   function startTour() {
     if (running) return;
     running = true;
-    ss(SK_ACTIVE, '1');
-    ss(SK_STEP, '0');
-    ls(SK_SEEN, '1');
-    runPageTour();
+    ssSet(SK_ACTIVE, '1');
+    ssSet(SK_STEP, '0');
+    lsSet(SK_SEEN, '1');
+    killOffer();
+    runPage();
   }
 
-  /* ── Helpers ──────────────────────────────── */
-  function make(tag, attrs) {
-    const el = document.createElement(tag);
-    if (attrs) Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
-    return el;
-  }
-  function css(el, props) { Object.assign(el.style, props); }
-  function after(ms, fn) { return setTimeout(fn, ms); }
-  function raf(fn) { requestAnimationFrame(fn); }
-  function ls(k, v) { try { localStorage.setItem(k, v); } catch {} }
-  function ss(k, v) {
-    try {
-      if (v === undefined) return sessionStorage.getItem(k);
-      sessionStorage.setItem(k, v);
-    } catch {}
-  }
-  function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
-
-  /* ── Fade-in on page arrival ──────────────── */
-  function fadeIn() {
-    document.body.style.opacity = '0';
-    document.body.style.transition = 'none';
-    raf(() => {
-      document.body.style.transition = 'opacity .45s ease';
-      document.body.style.opacity = '1';
-    });
-  }
-
-  /* ── CSS ──────────────────────────────────── */
+  /* ─── CSS ─────────────────────────────── */
   function injectCSS() {
     const s = document.createElement('style');
     s.textContent = `
       @keyframes trGlowPulse {
-        0%,100% { box-shadow: 0 0 0 1px rgba(240,180,41,.1), 0 0 32px rgba(240,180,41,.14); }
-        50%      { box-shadow: 0 0 0 1px rgba(240,180,41,.3), 0 0 56px rgba(240,180,41,.28); }
+        0%,100%{box-shadow:0 0 0 1px rgba(240,180,41,.1),0 0 28px rgba(240,180,41,.12)}
+        50%{box-shadow:0 0 0 1px rgba(240,180,41,.28),0 0 50px rgba(240,180,41,.24)}
       }
+      @keyframes trCurBob {0%,100%{margin-top:0}50%{margin-top:-5px}}
 
-      /* ── Offer ── */
-      #trOffer {
-        position:fixed; bottom:32px; left:50%;
-        transform:translateX(-50%) translateY(140%);
-        width:min(420px,calc(100vw - 40px)); z-index:9985;
-        transition:transform .52s cubic-bezier(.34,1.2,.64,1);
+      /* End button — always visible */
+      #trEndBtn {
+        position:fixed; top:16px; right:20px; z-index:9996;
+        background:rgba(20,20,28,.9); border:1px solid rgba(255,255,255,.1);
+        color:rgba(255,255,255,.45); font-family:'Montserrat',sans-serif;
+        font-weight:700; font-size:.62rem; letter-spacing:.1em; text-transform:uppercase;
+        padding:7px 14px; border-radius:5px; cursor:pointer;
+        backdrop-filter:blur(8px); transition:color .15s,border-color .15s;
       }
-      #trOffer.tr-in  { transform:translateX(-50%) translateY(0); }
-      #trOffer.tr-out { transform:translateX(-50%) translateY(140%); transition-duration:.34s; transition-timing-function:cubic-bezier(.4,0,.2,1); }
-      #trOfferCard {
-        background:linear-gradient(135deg,rgba(10,12,20,.97),rgba(20,22,34,.95));
-        border:1px solid rgba(240,180,41,.22); border-radius:18px; padding:24px 26px;
-        box-shadow:0 24px 64px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.04);
-        backdrop-filter:blur(24px);
-      }
-      #trOfferHead { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
-      #trOfferAv {
-        width:38px; height:38px; border-radius:50%;
-        background:linear-gradient(135deg,#f0b429,#c98a00);
-        display:flex; align-items:center; justify-content:center;
-        font-family:'Montserrat',sans-serif; font-weight:900; font-size:.9rem; color:#000; flex-shrink:0;
-      }
-      #trOfferName { font-family:'Montserrat',sans-serif; font-weight:700; font-size:.88rem; color:#fff; }
-      #trOfferSub  { font-family:'Inter',sans-serif; font-size:.68rem; color:rgba(255,255,255,.35); margin-top:2px; }
-      #trOfferMsg  { font-family:'Inter',sans-serif; font-size:.9rem; line-height:1.65; color:rgba(255,255,255,.82); margin:0 0 20px; }
-      #trOfferBtns { display:flex; gap:10px; justify-content:flex-end; }
-      #trNo {
-        background:none; border:1px solid rgba(255,255,255,.12); color:rgba(255,255,255,.45);
-        font-family:'Montserrat',sans-serif; font-weight:700; font-size:.7rem; letter-spacing:.06em;
-        text-transform:uppercase; padding:9px 18px; border-radius:6px; cursor:pointer; transition:all .2s;
-      }
-      #trNo:hover { color:rgba(255,255,255,.75); border-color:rgba(255,255,255,.28); }
-      #trYes {
-        background:linear-gradient(135deg,#7a3100,#d46400 55%,#ff8c00); color:#fff;
-        font-family:'Montserrat',sans-serif; font-weight:800; font-size:.7rem; letter-spacing:.1em;
-        text-transform:uppercase; padding:9px 22px; border-radius:6px; border:none; cursor:pointer;
-        box-shadow:0 4px 18px rgba(255,120,0,.32); transition:transform .2s,box-shadow .2s;
-      }
-      #trYes:hover { transform:translateY(-2px); box-shadow:0 6px 24px rgba(255,120,0,.46); }
+      #trEndBtn:hover{color:rgba(255,255,255,.8);border-color:rgba(255,255,255,.25)}
 
-      /* ── Cursor ── */
+      /* Cursor */
       #trCursor {
         position:fixed; z-index:9990; pointer-events:none; opacity:0;
-        width:22px; height:26px;
-        filter:drop-shadow(0 2px 10px rgba(0,0,0,.55));
-        transition:left .72s cubic-bezier(.34,1.3,.64,1), top .72s cubic-bezier(.34,1.3,.64,1), opacity .3s ease;
-        animation:trBob 2s ease-in-out infinite;
+        filter:drop-shadow(0 2px 8px rgba(0,0,0,.5));
+        transition:left .65s cubic-bezier(.34,1.3,.64,1),top .65s cubic-bezier(.34,1.3,.64,1),opacity .25s;
+        animation:trCurBob 2s ease-in-out infinite;
       }
-      #trCursor.tr-clicking { transform:scale(.7); animation:none; transition:transform .1s; }
-      @keyframes trBob { 0%,100%{margin-top:0} 50%{margin-top:-5px} }
+      #trCursor.tr-clicking{transform:scale(.7);animation:none;transition:transform .08s}
 
-      /* ── Skip ── */
-      #trSkip {
-        position:fixed; top:18px; right:22px; z-index:9995;
-        background:none; border:none; color:rgba(255,255,255,.28);
-        font-family:'Inter',sans-serif; font-size:.72rem; letter-spacing:.05em;
-        cursor:pointer; padding:6px 10px; border-radius:4px; transition:color .2s;
-      }
-      #trSkip:hover { color:rgba(255,255,255,.7); }
-
-      /* ── Bubble ── */
+      /* Bubble */
       #trBubble {
-        position:fixed; bottom:28px; left:28px; z-index:9990;
-        max-width:400px;
-        background:linear-gradient(135deg,rgba(10,12,20,.97),rgba(18,20,30,.95));
-        border:1px solid rgba(240,180,41,.18); border-radius:16px; padding:20px 22px;
-        box-shadow:0 16px 52px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.04);
-        backdrop-filter:blur(20px);
-        transform:translateY(130%); transition:transform .48s cubic-bezier(.34,1.2,.64,1);
-        pointer-events:all;
+        position:fixed; bottom:26px; left:26px; z-index:9990;
+        width:min(380px,calc(100vw - 52px));
+        background:linear-gradient(135deg,rgba(8,10,18,.97),rgba(16,18,28,.96));
+        border:1px solid rgba(240,180,41,.16); border-radius:14px; padding:18px 20px;
+        box-shadow:0 14px 44px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03);
+        backdrop-filter:blur(18px);
+        transform:translateY(120%); transition:transform .44s cubic-bezier(.34,1.2,.64,1);
+        pointer-events:none;
       }
-      #trBubble.tr-bubble-in { transform:translateY(0); }
-      #trBubbleHead { display:flex; align-items:center; gap:10px; margin-bottom:13px; }
-      #trBubbleAv {
-        width:26px; height:26px; border-radius:50%;
+      #trBubble.tr-bubble-in{transform:translateY(0)}
+      #trBubbleHead{display:flex;align-items:center;gap:9px;margin-bottom:11px}
+      #trBubbleAv{
+        width:24px;height:24px;border-radius:50%;flex-shrink:0;
         background:linear-gradient(135deg,#f0b429,#c98a00);
-        display:flex; align-items:center; justify-content:center;
-        font-family:'Montserrat',sans-serif; font-weight:900; font-size:.7rem; color:#000; flex-shrink:0;
+        display:flex;align-items:center;justify-content:center;
+        font-family:'Montserrat',sans-serif;font-weight:900;font-size:.66rem;color:#000
       }
-      #trBubbleLabel { font-family:'Montserrat',sans-serif; font-weight:700; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.4); }
-      #trDots { display:flex; gap:5px; margin-left:auto; align-items:center; }
-      #trX { background:none; border:none; color:rgba(255,255,255,.28); font-size:.9rem; cursor:pointer; padding:2px 4px; margin-left:6px; border-radius:4px; transition:color .15s; }
-      #trX:hover { color:rgba(255,255,255,.8); }
-      #trBubbleText { font-family:'Inter',sans-serif; font-size:.875rem; line-height:1.65; color:rgba(255,255,255,.88); min-height:42px; }
-      #trBubbleFoot { display:flex; justify-content:flex-end; margin-top:16px; }
-      #trNext {
-        background:linear-gradient(135deg,#7a3100,#d46400 55%,#ff8c00); color:#fff;
-        font-family:'Montserrat',sans-serif; font-weight:800; font-size:.68rem; letter-spacing:.1em;
-        text-transform:uppercase; padding:9px 22px; border-radius:6px; border:none; cursor:pointer;
-        box-shadow:0 4px 14px rgba(255,120,0,.28); transition:transform .18s cubic-bezier(.34,1.4,.64,1),box-shadow .18s;
+      #trBubbleLbl{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35)}
+      #trBubbleText{font-family:'Inter',sans-serif;font-size:.84rem;line-height:1.65;color:rgba(255,255,255,.88);min-height:38px}
+      #trFinalBtns{display:flex;gap:9px;margin-top:16px;flex-wrap:wrap}
+      #trCreateBtn{
+        flex:1;min-width:120px;text-align:center;
+        background:linear-gradient(135deg,#7a3100,#d46400 55%,#ff8c00);color:#fff;
+        font-family:'Montserrat',sans-serif;font-weight:800;font-size:.68rem;letter-spacing:.1em;
+        text-transform:uppercase;padding:10px 16px;border-radius:6px;text-decoration:none;display:block;
+        box-shadow:0 4px 16px rgba(255,120,0,.28);transition:transform .18s,box-shadow .18s
       }
-      #trNext:hover { transform:translateY(-2px) scale(1.04); box-shadow:0 6px 20px rgba(255,120,0,.42); }
-      #trFinalBtns { display:flex; gap:10px; flex-wrap:wrap; }
-      #trCreateBtn {
-        flex:1; text-align:center; min-width:130px;
-        background:linear-gradient(135deg,#7a3100,#d46400 55%,#ff8c00); color:#fff;
-        font-family:'Montserrat',sans-serif; font-weight:800; font-size:.7rem; letter-spacing:.1em;
-        text-transform:uppercase; padding:11px 18px; border-radius:6px; text-decoration:none; display:block;
-        box-shadow:0 4px 16px rgba(255,120,0,.3); transition:transform .18s,box-shadow .18s;
+      #trCreateBtn:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(255,120,0,.44)}
+      #trExpBtn{
+        flex:1;min-width:120px;
+        background:rgba(255,255,255,.05);color:rgba(255,255,255,.55);
+        font-family:'Montserrat',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.1em;
+        text-transform:uppercase;padding:10px 16px;border-radius:6px;
+        border:1px solid rgba(255,255,255,.09);cursor:pointer;transition:background .2s,color .2s;
+        pointer-events:all
       }
-      #trCreateBtn:hover { transform:translateY(-2px); box-shadow:0 6px 24px rgba(255,120,0,.44); }
-      #trExploreBtn {
-        flex:1; min-width:130px;
-        background:rgba(255,255,255,.06); color:rgba(255,255,255,.6);
-        font-family:'Montserrat',sans-serif; font-weight:700; font-size:.7rem; letter-spacing:.1em;
-        text-transform:uppercase; padding:11px 18px; border-radius:6px;
-        border:1px solid rgba(255,255,255,.1); cursor:pointer; transition:background .2s,color .2s;
-      }
-      #trExploreBtn:hover { background:rgba(255,255,255,.1); color:#fff; }
+      #trExpBtn:hover{background:rgba(255,255,255,.1);color:#fff}
 
-      /* ── Fake review panel ── */
-      #trFakeReview {
-        position:fixed; bottom:28px; right:28px; z-index:9991;
-        width:min(340px,calc(100vw - 56px));
-        background:linear-gradient(135deg,rgba(10,12,20,.97),rgba(18,20,30,.95));
-        border:1px solid rgba(240,180,41,.2); border-radius:14px; padding:18px 20px;
-        box-shadow:0 16px 44px rgba(0,0,0,.55); backdrop-filter:blur(20px);
-        animation:trFakeRevIn .4s cubic-bezier(.34,1.2,.64,1) both;
+      /* Offer */
+      #trOffer{
+        position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(140%);
+        width:min(400px,calc(100vw - 40px));z-index:9985;
+        background:linear-gradient(135deg,rgba(8,10,18,.97),rgba(16,18,28,.95));
+        border:1px solid rgba(240,180,41,.2);border-radius:16px;padding:24px 26px;
+        box-shadow:0 20px 56px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03);
+        backdrop-filter:blur(20px);transition:transform .5s cubic-bezier(.34,1.2,.64,1)
       }
-      @keyframes trFakeRevIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
-      #trFakeRevHead { font-family:'Montserrat',sans-serif; font-weight:700; font-size:.78rem; color:rgba(255,255,255,.6); margin-bottom:10px; }
-      #trFakeStars { font-size:1.3rem; color:#f0b429; margin-bottom:10px; letter-spacing:2px; }
+      #trOffer.tr-offer-in{transform:translateX(-50%) translateY(0)}
+      #trOfferAv{
+        width:36px;height:36px;border-radius:50%;
+        background:linear-gradient(135deg,#f0b429,#c98a00);
+        display:flex;align-items:center;justify-content:center;
+        font-family:'Montserrat',sans-serif;font-weight:900;font-size:.84rem;color:#000;
+        margin-bottom:12px
+      }
+      #trOfferMsg{font-family:'Inter',sans-serif;font-size:.92rem;line-height:1.6;color:rgba(255,255,255,.8);margin:0 0 18px}
+      #trOfferBtns{display:flex;gap:9px;justify-content:flex-end}
+      #trNo{
+        background:none;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.38);
+        font-family:'Montserrat',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.08em;
+        text-transform:uppercase;padding:9px 18px;border-radius:6px;cursor:pointer;transition:all .18s
+      }
+      #trNo:hover{color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.25)}
+      #trYes{
+        background:linear-gradient(135deg,#7a3100,#d46400 55%,#ff8c00);color:#fff;
+        font-family:'Montserrat',sans-serif;font-weight:800;font-size:.68rem;letter-spacing:.1em;
+        text-transform:uppercase;padding:9px 22px;border-radius:6px;border:none;cursor:pointer;
+        box-shadow:0 4px 16px rgba(255,120,0,.3);transition:transform .18s,box-shadow .18s
+      }
+      #trYes:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(255,120,0,.44)}
 
-      /* ── Tour trigger button (persistent, for logged-in users) ── */
-      .tr-tour-btn {
-        display:inline-flex; align-items:center; gap:7px; cursor:pointer;
-        background:rgba(240,180,41,.08); border:1px solid rgba(240,180,41,.22);
-        color:rgba(240,180,41,.75); border-radius:6px; padding:9px 18px;
-        font-family:'Montserrat',sans-serif; font-weight:700; font-size:.68rem;
-        letter-spacing:.1em; text-transform:uppercase; transition:all .22s ease;
-        text-decoration:none;
+      /* Fake review panel */
+      #trFakeRev{
+        position:fixed;bottom:26px;right:26px;z-index:9991;
+        width:min(320px,calc(100vw - 52px));
+        background:linear-gradient(135deg,rgba(8,10,18,.97),rgba(16,18,28,.95));
+        border:1px solid rgba(240,180,41,.18);border-radius:12px;padding:16px 18px;
+        box-shadow:0 14px 40px rgba(0,0,0,.55);backdrop-filter:blur(18px);
+        opacity:0;transition:opacity .4s ease;pointer-events:none;
       }
-      .tr-tour-btn:hover {
-        background:rgba(240,180,41,.15); border-color:rgba(240,180,41,.5);
-        color:#f0b429; transform:translateY(-1px);
-        box-shadow:0 4px 16px rgba(240,180,41,.14);
-      }
-      .tr-tour-btn svg { width:13px; height:13px; flex-shrink:0; }
+      #trFakeRev.trfr-in{opacity:1}
+      .trfr-title{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.72rem;color:rgba(255,255,255,.55);margin-bottom:8px}
+      .trfr-stars{font-size:1.1rem;color:#f0b429;letter-spacing:2px;margin-bottom:8px}
+      .trfr-stars span{opacity:.25}
+      .trfr-text{font-family:'Inter',sans-serif;font-size:.78rem;line-height:1.6;color:rgba(255,255,255,.72);min-height:44px}
+      .trfr-meta{font-family:'Inter',sans-serif;font-size:.66rem;color:rgba(255,255,255,.28);margin-top:10px}
 
-      /* ── Mobile ── */
-      @media (max-width:680px) {
-        #trOffer { bottom:88px; }
-        #trBubble { left:12px !important; right:12px !important; max-width:none !important; bottom:86px !important; }
-        #trFakeReview { display:none; }
+      /* Mobile */
+      @media(max-width:680px){
+        #trCursor{display:none}
+        #trBubble{left:10px !important;right:10px !important;width:auto !important;bottom:80px !important}
+        #trFakeRev{display:none}
+        #trOffer{bottom:80px}
       }
     `;
     document.head.appendChild(s);
   }
 
-  /* ── Init ─────────────────────────────────── */
-  async function init() {
-    // Continuing a cross-page tour (any page)
-    if (ss(SK_ACTIVE)) {
-      fadeIn();
-      await prefetchEvents();
-      running = true;
-      runPageTour();
-      return;
-    }
-
-    // Auto-start only fires on index page for new guests
-    if (PAGE !== 'index') return;
-    if (localStorage.getItem(SK_SEEN)) return;
-
-    await prefetchEvents();
-
-    // Check auth — if logged in, never auto-start
-    let isLoggedIn = false;
-    try {
-      const sb = window._sb;
-      if (sb) {
-        const { data: { user } } = await sb.auth.getUser();
-        if (user) isLoggedIn = true;
-      }
-    } catch {}
-
-    if (isLoggedIn) return;
-
-    // Guest, first visit — mandatory tour after brief page-settle delay
-    after(1800, () => {
-      if (localStorage.getItem(SK_SEEN)) return;
-      if (running) return;
-      startTour();
+  /* ─── Fade in on page arrival ─────────── */
+  function fadeIn() {
+    document.body.style.opacity = '0';
+    document.body.style.transition = 'none';
+    raf(() => {
+      document.body.style.transition = 'opacity .4s ease';
+      document.body.style.opacity    = '1';
     });
   }
 
+  /* ─── Prefetch events ─────────────────── */
   async function prefetchEvents() {
     try {
-      const all = await fetch('/events.json?_=' + Date.now(), { cache:'no-store' }).then(r => r.json());
-      const now = new Date();
-      const todayStr = now.toISOString().slice(0, 10);
-      window._tourNextEvent = all
-        .filter(e => e.isoDate >= todayStr && e.status !== 'completed')
-        .sort((a, b) => a.isoDate.localeCompare(b.isoDate))[0] || null;
-      window._tourLastEvent = all
-        .filter(e => e.status === 'completed')
-        .sort((a, b) => b.isoDate.localeCompare(a.isoDate))[0] || null;
+      const all = await fetch('events.json?_=' + Date.now(), { cache: 'no-store' }).then(r => r.json());
+      const now = new Date(); const today = now.toISOString().slice(0, 10);
+      window._tourNextEvent = all.filter(e => e.isoDate >= today && e.status !== 'completed').sort((a, b) => a.isoDate.localeCompare(b.isoDate))[0] || null;
+      window._tourLastEvent = all.filter(e => e.status === 'completed').sort((a, b) => b.isoDate.localeCompare(a.isoDate))[0] || null;
     } catch {}
   }
 
-  // Boot
-  injectCSS();
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
+  /* ─── Init ────────────────────────────── */
+  async function init() {
+    // Resuming cross-page tour
+    if (ssGet(SK_ACTIVE)) {
+      fadeIn();
+      await prefetchEvents();
+      running = true;
+      runPage();
+      return;
+    }
+
+    // Show offer only on index for first-time guests
+    if (PAGE !== 'index') return;
+    if (lsGet(SK_SEEN)) return;
+
+    await prefetchEvents();
+
+    // Wait for Supabase to init, then check auth
+    after(900, async () => {
+      if (lsGet(SK_SEEN) || running) return;
+      let loggedIn = false;
+      try { const { data: { user } } = await window._sb.auth.getUser(); if (user) loggedIn = true; } catch {}
+      if (loggedIn) return;
+      after(600, () => { if (!lsGet(SK_SEEN) && !running) showOffer(); });
+    });
   }
+
+  /* ─── Boot ────────────────────────────── */
+  injectCSS();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 
   window.startTour      = startTour;
   window.startTourOffer = showOffer;
