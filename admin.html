@@ -1286,6 +1286,7 @@
         const fighterA = fight.a || 'Fighter A';
         const fighterB = fight.b || 'Fighter B';
         const needsRound = m => m === 'KO/TKO' || m === 'Sub';
+        const noWinner   = m => m === 'Cancelled' || m === 'NC' || m === 'Draw';
 
         // Determine pre-selected state
         const selWinner = saved ? saved.winner : null;
@@ -1299,11 +1300,11 @@
             <span class="fight-saved-mark">Saved</span>
           </div>
           <div class="fight-controls">
-            <button class="btn-fighter${selWinner === fighterA ? ' selected' : ''}" data-fighter="${escAttr(fighterA)}">${escHtml(fighterA)}</button>
-            <button class="btn-fighter${selWinner === fighterB ? ' selected' : ''}" data-fighter="${escAttr(fighterB)}">${escHtml(fighterB)}</button>
+            <button class="btn-fighter${selWinner === fighterA ? ' selected' : ''}${noWinner(selMethod) ? ' hidden' : ''}" data-fighter="${escAttr(fighterA)}">${escHtml(fighterA)}</button>
+            <button class="btn-fighter${selWinner === fighterB ? ' selected' : ''}${noWinner(selMethod) ? ' hidden' : ''}" data-fighter="${escAttr(fighterB)}">${escHtml(fighterB)}</button>
 
             <select class="fight-method">
-              ${['KO/TKO','Sub','Decision (UD)','Decision (SD)','Decision (MD)','NC','Draw'].map(m =>
+              ${['KO/TKO','Sub','Decision (UD)','Decision (SD)','Decision (MD)','NC','Draw','Cancelled'].map(m =>
                 `<option value="${escAttr(m)}"${m === selMethod ? ' selected' : ''}>${escHtml(m)}</option>`
               ).join('')}
             </select>
@@ -1322,11 +1323,16 @@
           });
         });
 
-        // Method change — toggle round visibility
+        // Method change — toggle round + winner visibility
         const methodSel = row.querySelector('.fight-method');
         const roundInp  = row.querySelector('.fight-round');
         methodSel.addEventListener('change', () => {
           roundInp.classList.toggle('hidden', !needsRound(methodSel.value));
+          const isCancelled = noWinner(methodSel.value);
+          row.querySelectorAll('.btn-fighter').forEach(b => {
+            b.classList.toggle('hidden', isCancelled);
+            if (isCancelled) b.classList.remove('selected');
+          });
         });
 
         // Save button
@@ -1344,9 +1350,9 @@
         const roundEl = row.querySelector('.fight-round');
         const fotnEl  = document.getElementById(`fotn-${eventId}`);
 
-        if (!selBtn) { msg.className = 'fight-save-msg err'; msg.textContent = 'Select a winner first.'; return; }
+        if (!selBtn && !noWinner(method)) { msg.className = 'fight-save-msg err'; msg.textContent = 'Select a winner first.'; return; }
 
-        const winner = selBtn.dataset.fighter;
+        const winner = selBtn ? selBtn.dataset.fighter : null;
         const round  = roundEl.classList.contains('hidden') ? null : (parseInt(roundEl.value, 10) || null);
         const fotn   = fotnEl ? fotnEl.value.trim() : undefined;
 
@@ -1362,7 +1368,7 @@
             const record = {
               event_id:   eventId,
               fight_key:  fightKey,
-              winner:     winner.toLowerCase(),
+              winner:     winner ? winner.toLowerCase() : null,
               method:     method || null,
               round:      round  || null,
               fotn:       fotn   || null,

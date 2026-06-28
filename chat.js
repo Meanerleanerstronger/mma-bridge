@@ -113,10 +113,16 @@ async function loadLiveData() {
       tiers: 'Users ranked by accuracy: Rookie → Candidate → Iron → Bronze → Silver → Gold → Platinum → Diamond → Legend. Need 10+ judged picks to leave Candidate tier.',
     };
 
+    const uiContext = {
+      resultColors: 'In the event overlay and picks page, fight results are color-coded: KO/TKO = red, Submission = orange, Decision (UD/SD/MD) = white/light grey, NC = muted grey. These colors appear on the finish method pill next to each fight result.',
+      heroStates: 'The homepage hero cycles through 4 states automatically: TONIGHT (red live badge, Watch Live button) on event day; SPLIT SCREEN (left = recent completed Review, right = upcoming Make Picks) for back-to-back weekends before Wednesday midnight; single UPCOMING (Make Your Picks, orange button) within 7 days of next event after Wednesday; single COMPLETED (Review the Card, green button) when next event is 7+ days away.',
+      pickColors: 'On the picks page, after results are entered: correct picks highlight green, incorrect picks highlight red.',
+    };
+
     lucasLiveData = {
       events: allEvents,
       fighters: fighters || [],
-      context: { upcoming, recent, notableUpsets, p4pContext, mmaBridgeScoring, generatedAt: now.toISOString() }
+      context: { upcoming, recent, notableUpsets, p4pContext, mmaBridgeScoring, uiContext, generatedAt: now.toISOString() }
     };
   } catch (e) {
     // silently fail — backend will use its own disk copies as fallback

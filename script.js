@@ -86,13 +86,16 @@ function resolveHeroEvent(all, now) {
   // ≤7 days away — check Wednesday 11:59pm cutoff
   const wednesdayCutoff = getWednesdayCutoff(eventDate);
 
-  if (now <= wednesdayCutoff && lastCompleted) {
-    // Before Wednesday midnight — SPLIT SCREEN
+  const daysSinceCompleted = lastCompleted
+    ? (now - new Date(lastCompleted.isoDate + 'T20:00:00')) / 86400000
+    : Infinity;
+
+  if (now <= wednesdayCutoff && lastCompleted && daysSinceCompleted < 7) {
+    // Recent completed event + before Wednesday midnight → SPLIT SCREEN
     return { mode: 'split', ev: next, completed: lastCompleted };
-  } else {
-    // After Wednesday midnight — single upcoming only
-    return { mode: 'upcoming', ev: next };
   }
+  // After Wednesday midnight (or no recent event) → single upcoming
+  return { mode: 'upcoming', ev: next };
 }
 
 // Wednesday 11:59:59pm of the same calendar week as the event
