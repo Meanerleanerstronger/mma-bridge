@@ -134,13 +134,29 @@
 <script src="animations.js?v=2.0"></script>
 <script src="chat.js?v=2.4"></script>
 
-<div class="lucas-nudge ln-wedge" id="lucasNudge" onclick="window.toggleChat && window.toggleChat()">
-  <span class="ln-icon">📊</span>
-  <span>How are tiers calculated? Ask Lucas</span>
-  <span class="ln-arrow">↘</span>
+<div class="lnx-wrap" id="lucasNudge">
+  <div class="lnx-card" id="lucasNudgeCard">
+    <div class="lnx-eyebrow">Ask Lucas</div>
+    <span class="lnx-text">How are tiers calculated? How do groups work? I know all of it.</span>
+    <button class="lnx-close" id="lucasNudgeClose" aria-label="Dismiss">✕</button>
+  </div>
+  <svg class="lnx-arrow" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M26 4 C26 4, 38 14, 38 28 C38 38, 32 44, 26 48" stroke="#f0b429" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.75"/>
+    <path d="M20 43 L26 48 L30 42" stroke="#f0b429" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.75"/>
+  </svg>
 </div>
 <script>
-  setTimeout(function(){ var n=document.getElementById('lucasNudge'); if(n) n.classList.add('ln-visible'); }, 4500);
+(function(){
+  var wrap=document.getElementById('lucasNudge'),card=document.getElementById('lucasNudgeCard'),closeBtn=document.getElementById('lucasNudgeClose');
+  if(!wrap||localStorage.getItem('lnx_dismissed'))return;
+  setTimeout(function(){wrap.classList.add('lnx-visible');},4500);
+  card.addEventListener('click',function(e){if(e.target===closeBtn||closeBtn.contains(e.target))return;window.toggleChat&&window.toggleChat();});
+  closeBtn.addEventListener('click',function(e){e.stopPropagation();wrap.classList.remove('lnx-visible');setTimeout(function(){wrap.style.display='none';},400);localStorage.setItem('lnx_dismissed','1');});
+  var isDragging=false,startX,startY,startRight,startBottom;
+  card.addEventListener('pointerdown',function(e){if(e.target===closeBtn||closeBtn.contains(e.target))return;isDragging=true;startX=e.clientX;startY=e.clientY;var rect=wrap.getBoundingClientRect();startRight=window.innerWidth-rect.right;startBottom=window.innerHeight-rect.bottom;wrap.classList.add('lnx-dragging');card.setPointerCapture(e.pointerId);});
+  card.addEventListener('pointermove',function(e){if(!isDragging)return;var dx=e.clientX-startX,dy=e.clientY-startY;wrap.style.right=Math.max(0,startRight-dx)+'px';wrap.style.bottom=Math.max(0,startBottom-dy)+'px';wrap.style.left='auto';wrap.style.top='auto';});
+  card.addEventListener('pointerup',function(){isDragging=false;wrap.classList.remove('lnx-dragging');});
+})();
 </script>
 </body>
 </html>
