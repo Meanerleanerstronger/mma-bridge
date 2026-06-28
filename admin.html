@@ -1225,12 +1225,24 @@
             loaded = true;
             let existingResults = {};
             try {
-              const r = await fetch(`${API_BASE}/api/admin/results?event_id=${encodeURIComponent(ev.id)}&token=${encodeURIComponent(token())}`);
-              if (r.ok) {
-                const json = await r.json();
-                (json.results || []).forEach(row => {
-                  existingResults[row.fight_key] = row;
-                });
+              // Primary: read directly from Supabase (fast, no cold-start)
+              const sb = window._sb;
+              if (sb) {
+                const { data, error } = await sb
+                  .from('fight_results')
+                  .select('*')
+                  .eq('event_id', ev.id);
+                if (!error && data) {
+                  data.forEach(row => { existingResults[row.fight_key] = row; });
+                }
+              }
+              // Fallback: backend API (if Supabase returned nothing)
+              if (!Object.keys(existingResults).length) {
+                const r = await fetch(`${API_BASE}/api/admin/results?event_id=${encodeURIComponent(ev.id)}&token=${encodeURIComponent(token())}`);
+                if (r.ok) {
+                  const json = await r.json();
+                  (json.results || []).forEach(row => { existingResults[row.fight_key] = row; });
+                }
               }
             } catch (_) {}
             body.innerHTML = '';

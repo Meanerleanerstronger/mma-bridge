@@ -147,6 +147,7 @@
         <div id="trBubbleAv">L</div>
         <span id="trBubbleLabel">Lucas</span>
         <div id="trDots"></div>
+        <button id="trX" title="Close tour">✕</button>
       </div>
       <div id="trBubbleText"></div>
       <div id="trBubbleFoot">
@@ -159,6 +160,7 @@
     elDots       = document.getElementById('trDots');
     elNextBtn    = document.getElementById('trNext');
     elNextBtn.onclick = advance;
+    document.getElementById('trX').onclick = endTour;
   }
 
   /* ── Spotlight ────────────────────────────── */
@@ -314,12 +316,14 @@
       <div id="trBubbleHead">
         <div id="trBubbleAv">L</div>
         <span id="trBubbleLabel">Lucas</span>
+        <button id="trX" title="Close tour">✕</button>
       </div>
-      <div id="trBubbleText" style="margin-bottom:18px;">That's the gist. Make an account — it's free. Pick fights, build your tier, run a group with your crew.</div>
+      <div id="trBubbleText" style="margin-bottom:18px;">That's the gist. Make an account, it's free. Pick fights, build your tier, run a group with your crew.</div>
       <div id="trFinalBtns">
         <a href="auth.html" id="trCreateBtn">Create Account →</a>
         <button id="trExploreBtn" onclick="window._tourEnd()">Keep Exploring</button>
       </div>`;
+    document.getElementById('trX').onclick = endTour;
   }
 
   /* ── Advance / end ────────────────────────── */
@@ -486,6 +490,12 @@
         letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.45);
       }
       #trDots { display:flex; gap:5px; margin-left:auto; align-items:center; }
+      #trX {
+        background:none; border:none; color:rgba(255,255,255,.3); font-size:.9rem;
+        cursor:pointer; padding:2px 4px; margin-left:8px; border-radius:4px;
+        line-height:1; transition:color .15s; flex-shrink:0;
+      }
+      #trX:hover { color:rgba(255,255,255,.8); }
       #trBubbleText {
         font-family:'Inter',sans-serif; font-size:.875rem; line-height:1.65;
         color:rgba(255,255,255,.88); min-height:42px;
