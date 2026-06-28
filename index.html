@@ -408,16 +408,12 @@
   </div>
 
   <!-- Tour CTA -->
-  <div id="tourCTA" style="padding:64px 24px 80px;text-align:center;">
-    <div style="max-width:560px;margin:0 auto;background:linear-gradient(135deg,rgba(240,180,41,.06) 0%,rgba(240,180,41,.02) 100%);border:1px solid rgba(240,180,41,.14);border-radius:20px;padding:48px 40px;">
-      <div style="font-family:'Montserrat',sans-serif;font-size:.58rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:rgba(240,180,41,.5);margin-bottom:14px;">New Here?</div>
-      <h2 style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.55rem;text-transform:uppercase;letter-spacing:.04em;color:#fff;margin:0 0 12px;line-height:1.2;">See how it works</h2>
-      <p style="font-family:'Inter',sans-serif;font-size:.9rem;line-height:1.65;color:rgba(255,255,255,.42);margin:0 0 32px;">Lucas walks you through every section of the site in about a minute. Events, picks, rankings, reviews, leaderboard.</p>
-      <button onclick="window.startTour && window.startTour()" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#7a3100,#d46400 55%,#ff8c00);color:#fff;font-family:'Montserrat',sans-serif;font-weight:800;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;padding:16px 40px;border-radius:10px;border:none;cursor:pointer;box-shadow:0 8px 32px rgba(255,120,0,.28);transition:transform .2s cubic-bezier(.34,1.4,.64,1),box-shadow .2s;" onmouseover="this.style.transform='translateY(-3px) scale(1.03)';this.style.boxShadow='0 14px 40px rgba(255,120,0,.42)'" onmouseout="this.style.transform='';this.style.boxShadow='0 8px 32px rgba(255,120,0,.28)'">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><circle cx="12" cy="12" r="10"/><polyline points="10 15 14 12 10 9"/></svg>
-        Take the Tour
-      </button>
-    </div>
+  <div style="padding:56px 48px 100px;text-align:center;">
+    <div style="width:40px;height:1px;background:rgba(255,255,255,.08);margin:0 auto 32px;"></div>
+    <p style="font-family:'Inter',sans-serif;font-size:.8rem;color:rgba(255,255,255,.3);margin:0 0 18px;letter-spacing:.02em;">New here? Lucas walks you through the whole site.</p>
+    <button onclick="window.startTour && window.startTour()" style="display:inline-flex;align-items:center;gap:8px;background:none;border:1px solid rgba(240,180,41,.3);color:rgba(240,180,41,.8);font-family:'Montserrat',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:11px 26px;border-radius:6px;cursor:pointer;transition:border-color .2s,color .2s,background .2s;" onmouseover="this.style.borderColor='rgba(240,180,41,.7)';this.style.color='#f0b429';this.style.background='rgba(240,180,41,.07)'" onmouseout="this.style.borderColor='rgba(240,180,41,.3)';this.style.color='rgba(240,180,41,.8)';this.style.background='none'">
+      Take the Tour ›
+    </button>
   </div>
 
   <script src="notifications.js?v=2.4"></script>
