@@ -1285,6 +1285,15 @@ document.addEventListener('mouseover', function (e) {
 });
 </script>
 
+  <div class="lucas-nudge ln-slab" id="lucasNudge" onclick="window.toggleChat && window.toggleChat()">
+    <span class="ln-icon">🏆</span>
+    <span>What do these rankings mean? Ask Lucas</span>
+    <span class="ln-arrow">↘</span>
+  </div>
+  <script>
+    setTimeout(function(){ var n=document.getElementById('lucasNudge'); if(n) n.classList.add('ln-visible'); }, 3500);
+  </script>
+
   <!-- BOTTOM NAV (mobile only) -->
   <nav class="mobile-bottom-nav" id="mobileBottomNav" aria-label="Main navigation">
     <a href="index.html" class="mbn-item" data-page="index">

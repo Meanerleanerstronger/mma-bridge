@@ -598,5 +598,14 @@
 <script src="push.js?v=1.2"></script>
 <script src="animations.js?v=2.0"></script>
 <script src="micro.js?v=1.0"></script>
+
+<div class="lucas-nudge ln-pill" id="lucasNudge" onclick="window.toggleChat && window.toggleChat()">
+  <span class="ln-icon">📋</span>
+  <span>How does reviewing work? Ask Lucas</span>
+  <span class="ln-arrow">↘</span>
+</div>
+<script>
+  setTimeout(function(){ var n=document.getElementById('lucasNudge'); if(n) n.classList.add('ln-visible'); }, 5000);
+</script>
 </body>
 </html>

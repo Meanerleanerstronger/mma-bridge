@@ -2235,6 +2235,14 @@
 
 <!-- PWA Install Banner -->
 
+<div class="lucas-nudge ln-speech" id="lucasNudge" onclick="window.toggleChat && window.toggleChat()">
+  <span class="ln-icon">💬</span>
+  <span>Confused about an event? Ask Lucas</span>
+  <span class="ln-arrow">↘</span>
+</div>
+<script>
+  setTimeout(function(){ var n=document.getElementById('lucasNudge'); if(n) n.classList.add('ln-visible'); }, 4000);
+</script>
 
 </body>
 </html>

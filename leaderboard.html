@@ -132,5 +132,15 @@
 <script src="notifications.js?v=2.4"></script>
 <script src="push.js?v=1.2"></script>
 <script src="animations.js?v=2.0"></script>
+<script src="chat.js?v=2.4"></script>
+
+<div class="lucas-nudge ln-wedge" id="lucasNudge" onclick="window.toggleChat && window.toggleChat()">
+  <span class="ln-icon">📊</span>
+  <span>How are tiers calculated? Ask Lucas</span>
+  <span class="ln-arrow">↘</span>
+</div>
+<script>
+  setTimeout(function(){ var n=document.getElementById('lucasNudge'); if(n) n.classList.add('ln-visible'); }, 4500);
+</script>
 </body>
 </html>
