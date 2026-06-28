@@ -17841,7 +17841,86 @@
   {
     "id": "lance-gibson-jr",
     "name": "Lance Gibson Jr.",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-12/GIBSON_JR_LANCE_R_12-13.png?itok=k-q6SrNE"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-12/GIBSON_JR_LANCE_R_12-13.png?itok=k-q6SrNE",
+    "record": {
+      "wins": 4,
+      "losses": 5,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Masanori Suda",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "2002 in Shooto#Shooto: Treasure Hunt 1",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Evan Tanner",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC 29",
+        "round": 1,
+        "time": "4:48"
+      },
+      {
+        "opponent": "Masanori Suda",
+        "result": "W",
+        "method": "Decision (majority)",
+        "event": "2000 in Shooto#Shooto - R.E.A.D. 6",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Jermaine Andre",
+        "result": "W",
+        "method": "KO (knee)",
+        "event": "UFC 24",
+        "round": 3,
+        "time": "3:35"
+      },
+      {
+        "opponent": "Akihiro Gono",
+        "result": "W",
+        "method": "Decision (majority)",
+        "event": "SB 13 - SuperBrawl 13",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Rocky Batastini",
+        "result": "L",
+        "method": "KO (punch)",
+        "event": "SB 10 - SuperBrawl 10",
+        "round": 1,
+        "time": "0:09"
+      },
+      {
+        "opponent": "Dan Severn",
+        "result": "L",
+        "method": "Submission (keylock)",
+        "event": "SB 5 - SuperBrawl 5",
+        "round": 1,
+        "time": "26:22"
+      },
+      {
+        "opponent": "Peter Matautia",
+        "result": "W",
+        "method": "Submission (rear naked choke)",
+        "event": "SB 4 - SuperBrawl 4",
+        "round": 1,
+        "time": "1:33"
+      },
+      {
+        "opponent": "Bob Gilstrap",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "SB 4 - SuperBrawl 4",
+        "round": 1,
+        "time": "4:53"
+      }
+    ]
   },
   {
     "id": "marcin-tybura",
@@ -27445,7 +27524,7 @@
         "opponent": "Natalia Kuziutina",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "List_of_Invicta_FC_events#Invicta_FC_52:_Machado_vs._McCormack",
+        "event": "List of Invicta FC events#Invicta FC 52: Machado vs. McCormack",
         "round": 3,
         "time": "5:00"
       },
@@ -27453,7 +27532,7 @@
         "opponent": "Laura Gallardo",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "List_of_Invicta_FC_events#Invicta_FC_51:_Tennant_vs._Bernardo",
+        "event": "List of Invicta FC events#Invicta FC 51: Tennant vs. Bernardo",
         "round": 3,
         "time": "5:00"
       },
@@ -27461,7 +27540,7 @@
         "opponent": "Sidney Trillo",
         "result": "W",
         "method": "TKO (punches)",
-        "event": "List_of_Invicta_FC_events#Invicta_FC_47:_Ducote_vs._Zappitella",
+        "event": "List of Invicta FC events#Invicta FC 47: Ducote vs. Zappitella",
         "round": 3,
         "time": "4:45"
       },
@@ -27469,7 +27548,7 @@
         "opponent": "Ariana Melendez",
         "result": "W",
         "method": "Submission (rear-naked choke)",
-        "event": "List_of_Invicta_FC_events#Invicta_FC_on_AXS_TV:_Rodríguez_vs._Torquato",
+        "event": "List of Invicta FC events#Invicta FC on AXS TV: Rodríguez vs. Torquato",
         "round": 1,
         "time": "3:00"
       }
@@ -29441,5 +29520,96 @@
     "id": "nina-milosevic",
     "name": "Nina Milošević",
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/2022-02/womens-silhouette-RED-corner.png?itok=SXsY1AgG"
+  },
+  {
+    "id": "anthony-hernandez",
+    "name": "Anthony Hernandez",
+    "record": {
+      "wins": 11,
+      "losses": 2,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Edmen Shahbazyan",
+        "result": "W",
+        "method": "TKO (elbows and punches)",
+        "event": "UFC Fight Night: Dern vs. Hill",
+        "round": 3,
+        "time": "1:01"
+      },
+      {
+        "opponent": "Marc-André Barriault",
+        "result": "W",
+        "method": "Technical Submission (arm-triangle choke)",
+        "event": "UFC Fight Night: Sandhagen vs. Song",
+        "round": 3,
+        "time": "1:53"
+      },
+      {
+        "opponent": "Josh Fremd",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 273",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Rodolfo Vieira",
+        "result": "W",
+        "method": "Submission (guillotine choke)",
+        "event": "UFC 258",
+        "round": 2,
+        "time": "1:53"
+      },
+      {
+        "opponent": "Kevin Holland",
+        "result": "L",
+        "method": "TKO (knees and punches)",
+        "event": "UFC on ESPN: Overeem vs. Harris",
+        "round": 1,
+        "time": "0:39"
+      },
+      {
+        "opponent": "Jun Yong Park",
+        "result": "W",
+        "method": "Submission (anaconda choke)",
+        "event": "UFC Fight Night: Andrade vs. Zhang",
+        "round": 2,
+        "time": "4:39"
+      },
+      {
+        "opponent": "Markus Perez",
+        "result": "L",
+        "method": "Submission (anaconda choke)",
+        "event": "UFC Fight Night: Assunção vs. Moraes 2",
+        "round": 2,
+        "time": "1:07"
+      },
+      {
+        "opponent": "Jordan Wright",
+        "result": "NC",
+        "method": "NC (overturned)",
+        "event": "Dana White's Contender Series Season 2#Week 2 – June 19",
+        "round": 1,
+        "time": "0:40"
+      },
+      {
+        "opponent": "Brendan Allen",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Legacy Fighting Alliance in 2018#Legacy Fighting Alliance 32: Allen vs. Hernandez",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Mike Persons",
+        "result": "W",
+        "method": "Submission (guillotine choke)",
+        "event": "Global Knockout 9",
+        "round": 1,
+        "time": "1:54"
+      }
+    ]
   }
 ]
