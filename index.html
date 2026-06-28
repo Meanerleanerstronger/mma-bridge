@@ -462,7 +462,7 @@
   var closeBtn = document.getElementById('lucasNudgeClose');
   if (!wrap) return;
   if (localStorage.getItem('lnx_dismissed')) return;
-  setTimeout(function(){ wrap.classList.add('lnx-visible'); }, 2800);
+  wrap.classList.add('lnx-visible');
 
   // Click card body → open Lucas
   card.addEventListener('click', function(e) {

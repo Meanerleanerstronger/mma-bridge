@@ -610,7 +610,7 @@
 (function(){
   var wrap=document.getElementById('lucasNudge'),card=document.getElementById('lucasNudgeCard'),closeBtn=document.getElementById('lucasNudgeClose');
   if(!wrap||localStorage.getItem('lnx_dismissed'))return;
-  setTimeout(function(){wrap.classList.add('lnx-visible');},5000);
+  wrap.classList.add('lnx-visible');
   card.addEventListener('click',function(e){if(e.target===closeBtn||closeBtn.contains(e.target))return;window.toggleChat&&window.toggleChat();});
   closeBtn.addEventListener('click',function(e){e.stopPropagation();wrap.classList.remove('lnx-visible');setTimeout(function(){wrap.style.display='none';},400);localStorage.setItem('lnx_dismissed','1');});
   var isDragging=false,startX,startY,startRight,startBottom;

@@ -369,95 +369,13 @@
       .pfp-hero-name { font-size: 1.45rem; }
     }
 
-    /* ── Debate Button ── */
+    /* ── P4P Row ── */
     .pfp-row {
       position: relative;
-      /* reserve space on the right so button never overlaps the record */
-      padding-right: 100px;
     }
-
-    .pfp-debate-btn {
-      position: absolute;
-      right: 4px;
-      top: 50%;
-      transform: translateY(-50%) translateX(14px);
-      opacity: 0;
-      pointer-events: none;
-      display: flex;
-      align-items: center;
-      background: #ff7a1a;
-      border: none;
-      border-radius: 20px;
-      padding: 5px 13px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.59rem;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #000;
-      cursor: pointer;
-      white-space: nowrap;
-      z-index: 20;
-      transition: opacity 0.18s ease,
-                  transform 0.26s cubic-bezier(0.34,1.56,0.64,1),
-                  background 0.15s, box-shadow 0.15s;
-    }
-    .pfp-row:hover .pfp-debate-btn {
-      opacity: 1;
-      pointer-events: all;
-      transform: translateY(-50%) translateX(0);
-      box-shadow: 0 0 22px rgba(255,120,30,0.45), 0 4px 14px rgba(0,0,0,0.4);
-    }
-    .pfp-debate-btn:hover {
-      background: #ff9140;
-      box-shadow: 0 0 32px rgba(255,120,30,0.6), 0 4px 18px rgba(0,0,0,0.5) !important;
-    }
-    .pfp-debate-btn:active {
-      transform: translateY(-50%) scale(0.94) !important;
-    }
-
-    /* Hero debate button */
-    .pfp-hero-debate-btn {
-      position: absolute;
-      bottom: 28px;
-      right: 28px;
-      display: flex;
-      align-items: center;
-      background: #ff7a1a;
-      border: none;
-      border-radius: 22px;
-      padding: 9px 20px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #000;
-      cursor: pointer;
-      white-space: nowrap;
-      z-index: 20;
-      opacity: 0;
-      transform: translateY(6px);
-      transition: opacity 0.2s ease,
-                  transform 0.26s cubic-bezier(0.34,1.56,0.64,1),
-                  background 0.15s, box-shadow 0.15s;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-    }
-    .pfp-hero:hover .pfp-hero-debate-btn {
-      opacity: 1;
-      transform: translateY(0);
-      box-shadow: 0 0 32px rgba(255,120,30,0.45), 0 6px 22px rgba(0,0,0,0.55);
-    }
-    .pfp-hero-debate-btn:hover {
-      background: #ff9140;
-      box-shadow: 0 0 44px rgba(255,120,30,0.6), 0 6px 28px rgba(0,0,0,0.6) !important;
-    }
-    .pfp-hero-debate-btn:active { transform: scale(0.96) !important; }
 
     @media (max-width: 768px) {
       .pfp-row { padding-right: 8px; }
-      .pfp-debate-btn { display: none; }
-      .pfp-hero-debate-btn { display: none; }
     }
 
     /* ── Panel enter animation (replaces display:none flash) ── */
@@ -1219,59 +1137,6 @@
   <script src="premium.js?v=3.4"></script>
   <script src="widget.js"></script>
 
-  <script>
-  // ── PFP Debate Button Injector ──────────────────
-  document.addEventListener('DOMContentLoaded', function () {
-
-    function openDebate(fighterName, rank) {
-      const msg = rank === 1
-        ? `I think you've got ${fighterName} at #1 but I'm not sure he deserves the top spot — debate me`
-        : `I disagree with ${fighterName} being ranked #${rank} on the MMA Bridge P4P list — debate me`;
-
-      // Open Lucas widget then fire the message
-      if (typeof toggleChat === 'function' && !chatOpen) toggleChat();
-      setTimeout(function () {
-        if (typeof sendMsg === 'function') sendMsg(msg);
-      }, chatOpen ? 50 : 320);
-    }
-
-    // Inject into all pfp-row cards
-    document.querySelectorAll('.pfp-row[data-fighter]').forEach(function (row) {
-      const nameEl = row.querySelector('.pfp-row-name');
-      const numEl  = row.querySelector('.pfp-row-num');
-      if (!nameEl || !numEl) return;
-      const name = nameEl.textContent.trim();
-      const rank = parseInt(numEl.textContent.trim()) || 0;
-
-      const btn = document.createElement('button');
-      btn.className = 'pfp-debate-btn';
-      btn.setAttribute('aria-label', 'Debate this ranking with Lucas');
-      btn.textContent = 'Debate';
-      btn.addEventListener('click', function (e) {
-        e.stopPropagation(); // don't open fighter modal
-        openDebate(name, rank);
-      });
-      row.appendChild(btn);
-    });
-
-    // Inject into hero (#1 card)
-    const hero = document.querySelector('.pfp-hero[data-fighter]');
-    if (hero) {
-      const heroNameEl = hero.querySelector('.pfp-hero-name');
-      const name = heroNameEl ? heroNameEl.textContent.trim() : 'Islam Makhachev';
-
-      const heroBtn = document.createElement('button');
-      heroBtn.className = 'pfp-hero-debate-btn';
-      heroBtn.setAttribute('aria-label', 'Debate this ranking with Lucas');
-      heroBtn.textContent = 'Debate';
-      heroBtn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        openDebate(name, 1);
-      });
-      hero.appendChild(heroBtn);
-    }
-  });
-  </script>
 <script src="notifications.js?v=2.4"></script>
 <script src="push.js?v=1.2"></script>
 <script src="micro.js?v=1.0"></script>
@@ -1304,7 +1169,7 @@ document.addEventListener('mouseover', function (e) {
   (function(){
     var wrap=document.getElementById('lucasNudge'),card=document.getElementById('lucasNudgeCard'),closeBtn=document.getElementById('lucasNudgeClose');
     if(!wrap||localStorage.getItem('lnx_dismissed'))return;
-    setTimeout(function(){wrap.classList.add('lnx-visible');},3500);
+    wrap.classList.add('lnx-visible');
     card.addEventListener('click',function(e){if(e.target===closeBtn||closeBtn.contains(e.target))return;window.toggleChat&&window.toggleChat();});
     closeBtn.addEventListener('click',function(e){e.stopPropagation();wrap.classList.remove('lnx-visible');setTimeout(function(){wrap.style.display='none';},400);localStorage.setItem('lnx_dismissed','1');});
     var isDragging=false,startX,startY,startRight,startBottom;
