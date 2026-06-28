@@ -732,6 +732,22 @@
       #trFakeRevHead { font-family:'Montserrat',sans-serif; font-weight:700; font-size:.78rem; color:rgba(255,255,255,.6); margin-bottom:10px; }
       #trFakeStars { font-size:1.3rem; color:#f0b429; margin-bottom:10px; letter-spacing:2px; }
 
+      /* ── Tour trigger button (persistent, for logged-in users) ── */
+      .tr-tour-btn {
+        display:inline-flex; align-items:center; gap:7px; cursor:pointer;
+        background:rgba(240,180,41,.08); border:1px solid rgba(240,180,41,.22);
+        color:rgba(240,180,41,.75); border-radius:6px; padding:9px 18px;
+        font-family:'Montserrat',sans-serif; font-weight:700; font-size:.68rem;
+        letter-spacing:.1em; text-transform:uppercase; transition:all .22s ease;
+        text-decoration:none;
+      }
+      .tr-tour-btn:hover {
+        background:rgba(240,180,41,.15); border-color:rgba(240,180,41,.5);
+        color:#f0b429; transform:translateY(-1px);
+        box-shadow:0 4px 16px rgba(240,180,41,.14);
+      }
+      .tr-tour-btn svg { width:13px; height:13px; flex-shrink:0; }
+
       /* ── Mobile ── */
       @media (max-width:680px) {
         #trOffer { bottom:88px; }
@@ -744,32 +760,38 @@
 
   /* ── Init ─────────────────────────────────── */
   async function init() {
-    // Continuing a cross-page tour
+    // Continuing a cross-page tour (any page)
     if (ss(SK_ACTIVE)) {
       fadeIn();
-      // Pre-fetch event data
       await prefetchEvents();
       running = true;
       runPageTour();
       return;
     }
 
-    // Fresh visit — only show offer on index
+    // Auto-start only fires on index page for new guests
     if (PAGE !== 'index') return;
     if (localStorage.getItem(SK_SEEN)) return;
 
     await prefetchEvents();
 
-    after(OFFER_DELAY, async () => {
+    // Check auth — if logged in, never auto-start
+    let isLoggedIn = false;
+    try {
+      const sb = window._sb;
+      if (sb) {
+        const { data: { user } } = await sb.auth.getUser();
+        if (user) isLoggedIn = true;
+      }
+    } catch {}
+
+    if (isLoggedIn) return;
+
+    // Guest, first visit — mandatory tour after brief page-settle delay
+    after(1800, () => {
       if (localStorage.getItem(SK_SEEN)) return;
-      try {
-        const sb = window._sb;
-        if (sb) {
-          const { data: { user } } = await sb.auth.getUser();
-          if (user) return;
-        }
-      } catch {}
-      showOffer();
+      if (running) return;
+      startTour();
     });
   }
 
