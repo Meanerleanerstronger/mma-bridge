@@ -10,9 +10,10 @@
   const SK_STEP   = 'mma_tour_step';
 
   /* ─── State ───────────────────────────── */
-  let running   = false;
-  let stepTimer = null;
-  let localIdx  = 0;
+  let running    = false;
+  let stepTimer  = null;
+  let localIdx   = 0;
+  let typeToken  = 0; // increments each typeIn call to cancel previous
 
   /* ─── DOM refs ────────────────────────── */
   let elTop, elBot, elLeft, elRight, elGlow, elCursor, elBubble, elBubbleText, elEndBtn, elBar;
@@ -272,9 +273,10 @@
   /* ─── Typewriter ──────────────────────── */
   function typeIn(el, text, useSound, done) {
     el.textContent = '';
+    const myToken = ++typeToken;
     let i = 0;
     function tick() {
-      if (!running) return;
+      if (!running || typeToken !== myToken) return; // cancelled by new step
       el.textContent += text[i++];
       if (useSound && i % 2 === 0) playTick();
       if (i < text.length) after(11, tick);
@@ -669,13 +671,17 @@
 
     await prefetchEvents();
 
-    // Wait for Supabase to init, then check auth
-    after(900, async () => {
+    // Wait for Supabase to init, then check auth — single clean check at 1.6s
+    after(1600, async () => {
       if (lsGet(SK_SEEN) || running) return;
       let loggedIn = false;
-      try { const { data: { user } } = await window._sb.auth.getUser(); if (user) loggedIn = true; } catch {}
-      if (loggedIn) return;
-      after(600, () => { if (!lsGet(SK_SEEN) && !running) showOffer(); });
+      try {
+        if (window._sb) {
+          const { data: { user } } = await window._sb.auth.getUser();
+          if (user) loggedIn = true;
+        }
+      } catch {}
+      if (!loggedIn && !lsGet(SK_SEEN) && !running) showOffer();
     });
   }
 
