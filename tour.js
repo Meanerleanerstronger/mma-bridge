@@ -1,5 +1,5 @@
 /*!
- * MMA Bridge — Onboarding Tour v3.2
+ * MMA Bridge — Onboarding Tour v3.3
  * Fully automatic cinematic tour. No Next button — plays like a video.
  */
 (function () {
@@ -15,6 +15,8 @@
   let localIdx    = 0;
   let typeToken   = 0;
   let _navigating = false;
+  let _driftTimer = null;
+  let _driftEl    = null;
 
   /* ─── DOM refs ────────────────────────── */
   let elTop, elBot, elLeft, elRight, elGlow, elCursor, elBubble, elBubbleText, elEndBtn, elBar;
@@ -60,7 +62,7 @@
         page: 'events',
         sel: '.ev-list',
         cursorSel: '.ev-card',
-        text: 'Every announced UFC event — PPVs, Fight Nights, numbered cards. Tap any card to see the full fight card and make your picks.',
+        text: 'Every announced UFC event — PPVs, Fight Nights, numbered cards. Tap any card to see the full fight card.',
         dur: 3200, scroll: false,
         onEnter: scrollTop,
       },
@@ -75,7 +77,7 @@
           if (!document.querySelector('.ev-overlay.open')) {
             const card = q('.ev-card');
             if (card) {
-              after(300, () => { moveCursor(card); animateClick(); after(180, () => clickEl(card)); });
+              after(300, () => { moveCursor(card); startDrift(card); after(180, () => { playClick(); animateClick(); clickEl(card); }); });
             }
           }
         },
@@ -87,7 +89,10 @@
         cursorSel: '#ovMyPicksBtn',
         text: 'Hit Make Picks to lock in your winner, method, and round — picks auto-lock the moment the event starts.',
         dur: 3000, scroll: false,
-        onEnter: () => after(400, () => { const btn = q('#ovMyPicksBtn, .ov-action-picks'); if (btn) { moveCursor(btn); animateClick(); } }),
+        onEnter: () => after(400, () => {
+          const btn = q('#ovMyPicksBtn, .ov-action-picks');
+          if (btn) { moveCursor(btn); startDrift(btn); after(600, () => { playClick(); animateClick(); pressEl(btn); }); }
+        }),
         nav: nId ? `picks.html?id=${nId}` : 'pfp.html',
         navStep: nId ? 5 : 7,
         navMsg: "Alright, let me take you to the picks page...",
@@ -110,9 +115,9 @@
         dur: 4200, scroll: false,
         onEnter: () => {
           const sides = [...document.querySelectorAll('.sb-side[data-pick]')];
-          if (sides[0]) after(300,  () => { animateClick(); clickEl(sides[0]); moveCursor(sides[0]); });
-          if (sides[3]) after(900,  () => { animateClick(); clickEl(sides[3]); moveCursor(sides[3]); });
-          if (sides[5]) after(1600, () => { animateClick(); clickEl(sides[5]); moveCursor(sides[5]); });
+          if (sides[0]) after(300,  () => { moveCursor(sides[0]); startDrift(sides[0]); after(120, () => { playClick(); animateClick(); pressEl(sides[0]); clickEl(sides[0]); }); });
+          if (sides[3]) after(900,  () => { moveCursor(sides[3]); startDrift(sides[3]); after(120, () => { playClick(); animateClick(); pressEl(sides[3]); clickEl(sides[3]); }); });
+          if (sides[5]) after(1600, () => { moveCursor(sides[5]); startDrift(sides[5]); after(120, () => { playClick(); animateClick(); pressEl(sides[5]); clickEl(sides[5]); }); });
         },
         nav: 'pfp.html', navStep: 7,
         navMsg: "Let me show you the P4P rankings next...",
@@ -126,34 +131,35 @@
         dur: 3500, scroll: false,
         onEnter: scrollTop,
       },
-      /* 8 — pfp: click a fighter row */
+      /* 8 — pfp: click a fighter row → spotlight the fighter row being clicked */
       {
         page: 'pfp',
         sel: '.pfp-grid, .pfp-list',
         cursorSel: '.pfp-row',
         text: 'Click any fighter for their full profile — last 5 fights, record, country, stance, finishing rate.',
         dur: 3500, scroll: false,
-        click: true,
-        onEnter: () => after(500, () => { const r = q('.pfp-row'); if (r) r.click(); }),
+        onEnter: () => after(500, () => {
+          const r = q('.pfp-row');
+          if (r) { moveCursor(r); startDrift(r); after(400, () => { playClick(); animateClick(); pressEl(r); r.click(); }); }
+        }),
       },
-      /* 9 — pfp: click divisional tab, then spotlight divisional section */
+      /* 9 — pfp: click divisional tab, spotlight shifts to divisional content */
       {
         page: 'pfp',
         sel: '.rnk-tabs',
         cursorSel: '.rnk-tab[data-tab="divisional"]',
         text: 'Divisional rankings across all 12 weight classes — every contender, every title picture, updated after each card.',
         dur: 4200, scroll: false,
-        click: true,
         onEnter: () => after(300, () => {
           const t = q('.rnk-tab[data-tab="divisional"]');
           if (t) {
             moveCursor(t);
-            animateClick();
-            after(120, () => t.click());
-            after(600, () => {
+            startDrift(t);
+            after(400, () => { playClick(); animateClick(); pressEl(t); t.click(); });
+            after(700, () => {
               if (!running) return;
               const divSec = document.getElementById('pfpDivisionalSection');
-              if (divSec) spotlight(divSec, 20);
+              if (divSec) { spotlight(divSec, 20); moveCursor(divSec); startDrift(divSec); }
             });
           }
         }),
@@ -169,18 +175,23 @@
         dur: 3800, scroll: false,
         onEnter: scrollTop,
       },
-      /* 11 — reviews: show community review panel */
+      /* 11 — reviews: click card, spotlight shifts to community panel */
       {
         page: 'reviews',
         sel: '.rv-card.ppv, .rv-card',
         cursorSel: '.rv-card.ppv, .rv-card',
         text: "Tap a card and you'll see community ratings, fight scores, and every fan's hot take — plus submit your own.",
         dur: 5800, scroll: false,
-        click: false,
         onEnter: () => {
           const card = q('.rv-card.ppv, .rv-card');
-          if (card) { moveCursor(card); animateClick(); }
+          if (card) { moveCursor(card); startDrift(card); after(200, () => { playClick(); animateClick(); pressEl(card); }); }
           after(400, showFakeCommunityReview);
+          // shift spotlight to the panel once it has appeared and faded in
+          after(900, () => {
+            if (!running) return;
+            const panel = document.getElementById('trFakeRev');
+            if (panel) { spotlight(panel, 10); moveCursor(panel); startDrift(panel); }
+          });
         },
         nav: 'leaderboard.html', navStep: 12,
         navMsg: "Let me show you the leaderboard...",
@@ -240,12 +251,20 @@
   function scrollTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
   function clickEl(el) { if (el) el.click(); }
 
-  /* ─── Typing sound ────────────────────── */
+  /* ─── Press visual feedback ───────────── */
+  function pressEl(el) {
+    if (!el) return;
+    el.classList.add('tr-pressing');
+    after(180, () => el && el.classList.remove('tr-pressing'));
+  }
+
+  /* ─── Audio ───────────────────────────── */
   let _actx;
   function getACtx() {
     if (!_actx) try { _actx = new (window.AudioContext || window.webkitAudioContext)(); } catch {}
     return _actx;
   }
+
   function playTick() {
     try {
       const ctx = getACtx(); if (!ctx) return;
@@ -258,6 +277,47 @@
       osc.connect(g); g.connect(ctx.destination);
       osc.start(); osc.stop(ctx.currentTime + 0.04);
     } catch {}
+  }
+
+  function playClick() {
+    try {
+      const ctx = getACtx(); if (!ctx) return;
+      const dur  = 0.055;
+      const sr   = ctx.sampleRate;
+      const buf  = ctx.createBuffer(1, Math.ceil(sr * dur), sr);
+      const data = buf.getChannelData(0);
+      for (let i = 0; i < data.length; i++) {
+        const t = i / data.length;
+        data[i] = (Math.random() * 2 - 1) * Math.pow(1 - t, 5) * 0.9;
+      }
+      const src = ctx.createBufferSource();
+      src.buffer = buf;
+      const g = ctx.createGain();
+      g.gain.setValueAtTime(0.55, ctx.currentTime);
+      src.connect(g); g.connect(ctx.destination);
+      src.start();
+    } catch {}
+  }
+
+  /* ─── Cursor drift ────────────────────── */
+  function startDrift(el) {
+    _driftEl = el;
+    clearTimeout(_driftTimer);
+    function drift() {
+      if (!running || !_driftEl || !elCursor) return;
+      const r = _driftEl.getBoundingClientRect();
+      if (r.width === 0 && r.height === 0) return;
+      const x = r.left + r.width  * (0.12 + Math.random() * 0.68);
+      const y = r.top  + r.height * (0.12 + Math.random() * 0.68);
+      css(elCursor, { left: x + 'px', top: y + 'px', opacity: '1' });
+      _driftTimer = after(1600 + Math.random() * 900, drift);
+    }
+    _driftTimer = after(1400, drift);
+  }
+
+  function stopDrift() {
+    clearTimeout(_driftTimer);
+    _driftEl = null;
   }
 
   /* ─── Spotlight ───────────────────────── */
@@ -293,7 +353,7 @@
   function moveCursor(el) {
     if (IS_MOB || !el || !elCursor) return;
     const r = el.getBoundingClientRect();
-    css(elCursor, { left:(r.left + r.width * .22)+'px', top:(r.top + r.height * .22)+'px', opacity:'1' });
+    css(elCursor, { left:(r.left + r.width * .3)+'px', top:(r.top + r.height * .28)+'px', opacity:'1' });
   }
 
   function animateClick() {
@@ -327,20 +387,20 @@
       <div class="trfr-rating-bar"><span class="trfr-avg">8.4</span><span class="trfr-avglab">/ 10 avg &nbsp;·&nbsp; 142 reviews</span></div>
       <div class="trfr-comments">
         <div class="trfr-comment"><span class="trfr-who">IceMan_89:</span> Card of the year, no debate.</div>
-        <div class="trfr-comment"><span class="trfr-who">FightFanKev:</span> Fiziev vs Torres was FOTN 10x over.</div>
-        <div class="trfr-comment"><span class="trfr-who">octagonrat:</span> Main event lived up to the hype. 9/10.</div>
+        <div class="trfr-comment"><span class="trfr-who">FightFanKev:</span> Gaethje vs Topuria was an all-timer. Crowd was electric.</div>
+        <div class="trfr-comment"><span class="trfr-who">octagonrat:</span> Can't believe Illia lost. Still a 9/10 card.</div>
       </div>
       <div class="trfr-separator"></div>
       <div class="trfr-typing-label">You are typing...</div>
       <div class="trfr-text" id="trFrText"></div>`;
     document.body.appendChild(panel);
     raf(() => panel.classList.add('trfr-in'));
-    const fake = "Watched every second. Gaethje walked through everything — crowd was unreal. Fiziev fight of the night easily. One of the best PPVs in years.";
+    const fake = "Watched every second. Gaethje walked through everything Topuria threw — crowd was unreal. Main event delivered 10 times over. One of the best PPVs in years.";
     after(600, () => {
       const el = document.getElementById('trFrText');
       if (el) typeIn(el, fake, true, null);
     });
-    after(5600, () => { panel.style.opacity = '0'; after(400, () => panel.remove()); });
+    after(5600, () => { if (panel) { panel.style.opacity = '0'; after(400, () => panel.remove()); } });
   }
 
   /* ─── Offer modal ─────────────────────── */
@@ -371,6 +431,7 @@
   function navigate(url, gIdx) {
     if (_navigating) return;
     _navigating = true;
+    stopDrift();
     ssSet(SK_ACTIVE, '1');
     ssSet(SK_STEP, String(gIdx));
     clearSpot();
@@ -428,6 +489,7 @@
     const s = steps[idx];
 
     clearTimeout(stepTimer);
+    stopDrift();
 
     const all = allSteps();
     if (elBar) elBar.style.width = ((s.gIdx / Math.max(1, all.length - 1)) * 100) + '%';
@@ -446,7 +508,8 @@
         if (!running) return;
         const curEl = q(s.cursorSel) || targetEl;
         moveCursor(curEl);
-        if (s.click) { after(300, () => { animateClick(); }); }
+        startDrift(curEl);
+        if (s.click) { after(300, () => { playClick(); animateClick(); }); }
       });
     } else {
       clearSpot();
@@ -489,6 +552,7 @@
   /* ─── Final step ──────────────────────── */
   function playFinal() {
     clearSpot();
+    stopDrift();
     if (elCursor) elCursor.style.opacity = '0';
     if (elBar) elBar.style.width = '100%';
 
@@ -526,6 +590,7 @@
   /* ─── End tour ────────────────────────── */
   function endTour() {
     running = false;
+    stopDrift();
     clearTimeout(stepTimer);
     lsSet(SK_SEEN, '1');
     ssSet(SK_ACTIVE, null);
@@ -561,7 +626,13 @@
         0%,100%{box-shadow:0 0 0 1px rgba(240,180,41,.1),0 0 28px rgba(240,180,41,.12)}
         50%{box-shadow:0 0 0 1px rgba(240,180,41,.28),0 0 50px rgba(240,180,41,.24)}
       }
-      @keyframes trCurBob {0%,100%{margin-top:0}50%{margin-top:-5px}}
+      @keyframes trCurFloat {
+        0%  {margin-top:0;   margin-left:0}
+        25% {margin-top:-5px;margin-left:3px}
+        50% {margin-top:-2px;margin-left:-4px}
+        75% {margin-top:-6px;margin-left:2px}
+        100%{margin-top:0;   margin-left:0}
+      }
 
       #trEndBtn {
         position:fixed; top:18px; right:22px; z-index:9996;
@@ -581,10 +652,17 @@
       #trCursor {
         position:fixed; z-index:9990; pointer-events:none; opacity:0;
         filter:drop-shadow(0 2px 8px rgba(0,0,0,.5));
-        transition:left .65s cubic-bezier(.34,1.3,.64,1),top .65s cubic-bezier(.34,1.3,.64,1),opacity .25s;
-        animation:trCurBob 2s ease-in-out infinite;
+        transition:left .7s cubic-bezier(.34,1.15,.64,1),top .7s cubic-bezier(.34,1.15,.64,1),opacity .25s;
+        animation:trCurFloat 3.2s ease-in-out infinite;
       }
-      #trCursor.tr-clicking{transform:scale(.7);animation:none;transition:transform .08s}
+      #trCursor.tr-clicking{transform:scale(.72);filter:drop-shadow(0 1px 4px rgba(0,0,0,.4));animation:none;transition:transform .07s,filter .07s}
+
+      /* Element press feedback */
+      .tr-pressing {
+        transform:scale(0.95) !important;
+        filter:brightness(0.82) !important;
+        transition:transform 0.09s ease,filter 0.09s ease !important;
+      }
 
       #trBubble {
         position:fixed; bottom:26px; left:26px; z-index:9990;
