@@ -563,6 +563,18 @@
       margin-right:7px;vertical-align:middle;flex-shrink:0;
     }
 
+    /* Method legend */
+    .ov-method-legend {
+      display:flex;align-items:center;gap:6px;
+      justify-content:flex-end;
+      padding:0 2px 12px;
+    }
+    .ov-leg-pill {
+      font-family:'Montserrat',sans-serif;font-size:.48rem;font-weight:800;
+      letter-spacing:.12em;text-transform:uppercase;
+      border:1px solid;border-radius:20px;padding:3px 8px;
+    }
+
     .ov-fotn-hover { display:none; }
 
     /* ── RIGHT: sidebar ── */
@@ -1440,7 +1452,7 @@
       /* Badge + live */
       const badge=document.getElementById('ovBadge');
       badge.textContent=isPPV?'PPV':'Fight Night'; badge.className=`ov-badge ${special?'special-green':cls}`;
-      document.getElementById('ovLiveDot').style.display=isToday?'flex':'none';
+      document.getElementById('ovLiveDot').style.display=(isToday && ev.status!=='completed')?'flex':'none';
 
       /* Text */
       document.getElementById('ovEventLabel').textContent=[ev.date,ev.venue,ev.location].filter(Boolean).join('  ·  ');
@@ -1603,11 +1615,10 @@
         if(u.includes('TKO'))                return {label:'TKO', color:'#e53935'};
         if(u==='NC'||u.includes('NO CONT')) return {label:'NC',  color:'rgba(255,255,255,.3)'};
         if(u.includes('SUB')||u.includes('CHOKE')||u.includes('CRANK')||u.includes('TRIANGLE')||u.includes('RNC'))
-                                              return {label:'SUB', color:'#8b5cf6'};
-        if(u==='UD')  return {label:'UD',  color:'rgba(240,180,41,.75)'};
-        if(u==='MD')  return {label:'MD',  color:'rgba(240,180,41,.65)'};
-        if(u==='SD')  return {label:'SD',  color:'rgba(240,180,41,.55)'};
-        return {label:m, color:'rgba(255,255,255,.45)'};
+                                              return {label:'SUB', color:'#f0820a'};
+        if(u.startsWith('DECISION')||u==='UD'||u==='MD'||u==='SD'||u.includes('DEC'))
+                                              return {label:u==='UD'?'UD':u==='MD'?'MD':u==='SD'?'SD':'DEC', color:'rgba(255,255,255,.85)'};
+        return {label:m, color:'rgba(255,255,255,.6)'};
       }
 
       function headCell(url,flip){
@@ -1636,7 +1647,7 @@
 
           if(hasResult){
             /* ── RESULT ROW ── */
-            const aWon=f.winner===f.a;
+            const aWon=f.winner.toLowerCase()===f.a.toLowerCase();
             const ms=methodStyle(f.method);
             const pip=`<span class="ov-win-pip" style="background:${ms.color};box-shadow:0 0 6px ${ms.color};"></span>`;
             row.innerHTML=`
@@ -1678,6 +1689,17 @@
         });
       }
 
+      /* Method legend — only show for completed events */
+      if(!isUpcoming){
+        const leg=document.createElement('div');
+        leg.className='ov-method-legend';
+        leg.innerHTML=`
+          <span class="ov-leg-pill" style="color:#e53935;border-color:rgba(229,57,53,.25)">KO/TKO</span>
+          <span class="ov-leg-pill" style="color:#f0820a;border-color:rgba(240,130,10,.25)">SUB</span>
+          <span class="ov-leg-pill" style="color:rgba(255,255,255,.8);border-color:rgba(255,255,255,.15)">DEC</span>
+        `;
+        col.appendChild(leg);
+      }
       section('Main Card',   ev.mainCard||[],   accent);
       section('Prelims',     ev.prelims||[],    '#f0b429');
       section('Early Prelims',ev.earlyPrelims||[],'rgba(255,255,255,.3)');

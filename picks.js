@@ -992,8 +992,8 @@ function formatOdds(n) {
     const savedRound = saved.round || '';
     const rounds   = maxRounds(f.rounds);
     const winner   = f.winner || null;
-    const resultA  = isCompleted && winner ? (winner === f.a ? 'win' : 'loss') : '';
-    const resultB  = isCompleted && winner ? (winner === f.b ? 'win' : 'loss') : '';
+    const resultA  = isCompleted && winner ? (winner.toLowerCase() === f.a.toLowerCase() ? 'win' : 'loss') : '';
+    const resultB  = isCompleted && winner ? (winner.toLowerCase() === f.b.toLowerCase() ? 'win' : 'loss') : '';
     const correctA = isCompleted && pickedA && resultA === 'win';
     const correctB = isCompleted && pickedB && resultB === 'win';
     const pickResultA = (isCompleted && pickedA) ? computePickPoints(key, f) : { pts: 0, isPerfect: false };
