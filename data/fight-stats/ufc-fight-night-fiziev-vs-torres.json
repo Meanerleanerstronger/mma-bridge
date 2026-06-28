@@ -1,0 +1,167 @@
+{
+  "eventId": "ufc-fight-night-fiziev-vs-torres",
+  "eventName": "UFC Fight Night: Fiziev vs. Torres",
+  "fights": [
+    {
+      "fighter1": "Rafael Fiziev Manuel Torres",
+      "fighter2": "Shara Magomedov Michel Pereira",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "2522",
+          "totalStr": "00",
+          "td": "Lightweight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 1",
+          "sigStr": "5235",
+          "totalStr": "00",
+          "td": "Middleweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Matheus Camilo Nazim Sadykhov",
+      "fighter2": "Asu Almabayev Charles Johnson",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "40",
+          "totalStr": "00",
+          "td": "Lightweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "2821",
+          "totalStr": "11",
+          "td": "Flyweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Ikram Aliskerov Brunno Ferreira",
+      "fighter2": "Abus Magomedov Michal Oleksiejczuk",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "4719",
+          "totalStr": "10",
+          "td": "Middleweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "1 0",
+          "sigStr": "105",
+          "totalStr": "10",
+          "td": "Middleweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Farman Hasanov Eric Nolan",
+      "fighter2": "Abdul Rakhman Yakhyaev Julius Walker",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "2115",
+          "totalStr": "00",
+          "td": "Welterweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "1 0",
+          "sigStr": "60",
+          "totalStr": "00",
+          "td": "LightHeavyweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Nursulton Ruziboev Andrey Pulyaev",
+      "fighter2": "Kaan Ofli Javier Reyes",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "12",
+          "totalStr": "10",
+          "td": "Middleweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "1 0",
+          "sigStr": "177",
+          "totalStr": "10",
+          "td": "Featherweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Daniil Donchenko Theodor Berggren",
+      "fighter2": "Jean Matsumoto Bekzat Almakhan",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "2 0",
+          "sigStr": "7123",
+          "totalStr": "00",
+          "td": "Welterweight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 1",
+          "sigStr": "7969",
+          "totalStr": "00",
+          "td": "Bantamweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Tahir Abdullayev Jefferson Nascimento",
+      "fighter2": "",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "3735",
+          "totalStr": "00",
+          "td": "Welterweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0",
+          "sigStr": "",
+          "totalStr": "",
+          "td": "",
+          "subAtt": 0,
+          "ctrlTime": "0:00"
+        }
+      }
+    }
+  ]
+}
