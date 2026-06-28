@@ -266,32 +266,50 @@ function formatOdds(n) {
   function computePickPoints(fightKey, fightData) {
     const p = myPicks[fightKey];
     const isDD = myPicks['__dd__']?.pick === fightKey;
-    if (!p || !fightData?.winner) return { pts: 0, breakdown: [], isDD };
+    if (!p || !fightData?.winner) return { pts: 0, breakdown: [], isDD, isPerfect: false };
     const correct = (p.pick || '').toLowerCase() === fightData.winner.toLowerCase();
     if (!correct) {
-      if (isDD) return { pts: -10, breakdown: ['-10 double down miss'], isDD };
-      return { pts: 0, breakdown: [], isDD };
+      if (isDD) return { pts: -20, breakdown: ['-20 DD wrong fighter'], isDD, isPerfect: false };
+      return { pts: 0, breakdown: [], isDD, isPerfect: false };
     }
     let pts = POINTS.WINNER;
     const breakdown = ['+10 winner'];
+    let methodCorrect = false;
+    let roundCorrect = false;
+
     if (p.method && fightData.method) {
       const pickedBase = normalizeMethodBase(p.method);
       const actualBase = normalizeMethodBase(fightData.method);
       if (pickedBase && actualBase && pickedBase === actualBase) {
+        methodCorrect = true;
         pts += POINTS.METHOD;
         breakdown.push('+5 method');
         if (pickedBase === 'KO/TKO' || pickedBase === 'SUB') {
           const pr = extractRoundNum(p.method);
           const ar = extractRoundNum(fightData.method);
           if (pr && ar && pr === ar) {
+            roundCorrect = true;
             pts += POINTS.ROUND;
             breakdown.push('+5 round');
+          } else if (pr && ar) {
+            if (isDD) { pts -= 2; breakdown.push('-2 DD wrong round'); }
           }
+        } else {
+          roundCorrect = true; // DEC — no round bonus possible, method correct = perfect
         }
+      } else if (pickedBase && actualBase) {
+        if (isDD) { pts -= 2; breakdown.push('-2 DD wrong method'); }
       }
     }
-    if (isDD) { pts *= 2; breakdown.push('×2 double down'); }
-    return { pts, breakdown, isDD };
+
+    const isPerfect = methodCorrect && roundCorrect;
+
+    if (isDD && isPerfect) {
+      return { pts: 45, breakdown: ['+45 DD perfect ⚡'], isDD, isPerfect };
+    }
+    if (isDD) breakdown.push('⚡ Double Down');
+
+    return { pts, breakdown, isDD, isPerfect };
   }
 
   // ── Load picks from DB ────────────────────────
@@ -932,9 +950,11 @@ function formatOdds(n) {
     allFights.forEach(({ f, key }) => {
       if (!myPicks[key] || !f.winner) return;
       judged++;
-      const { pts } = computePickPoints(key, f);
-      totalPts += pts;
-      if (pts >= POINTS.WINNER) correct++;
+      const result = computePickPoints(key, f);
+      totalPts += result.pts;
+      // A pick is "correct" if the fighter was right — check directly against winner
+      const p = myPicks[key];
+      if (p && f.winner && (p.pick || '').toLowerCase() === f.winner.toLowerCase()) correct++;
     });
     // FOTN bonus
     let fotnPts = 0;
@@ -976,8 +996,10 @@ function formatOdds(n) {
     const resultB  = isCompleted && winner ? (winner === f.b ? 'win' : 'loss') : '';
     const correctA = isCompleted && pickedA && resultA === 'win';
     const correctB = isCompleted && pickedB && resultB === 'win';
-    const { pts: ptsA } = (isCompleted && pickedA) ? computePickPoints(key, f) : { pts: 0 };
-    const { pts: ptsB } = (isCompleted && pickedB) ? computePickPoints(key, f) : { pts: 0 };
+    const pickResultA = (isCompleted && pickedA) ? computePickPoints(key, f) : { pts: 0, isPerfect: false };
+    const pickResultB = (isCompleted && pickedB) ? computePickPoints(key, f) : { pts: 0, isPerfect: false };
+    const { pts: ptsA, isPerfect: isPerfectA } = pickResultA;
+    const { pts: ptsB, isPerfect: isPerfectB } = pickResultB;
     const comm      = communityPicks[key] || {};
     const commTotal = Object.values(comm).reduce((s, v) => s + v, 0);
     const hasPick   = pickedA || pickedB;
@@ -998,6 +1020,11 @@ function formatOdds(n) {
     const recA  = fighterRecord(f.a);
     const recB  = fighterRecord(f.b);
 
+    const myPerfect = (pickedA && isPerfectA) || (pickedB && isPerfectB);
+    const myMiss    = isCompleted && (
+      (pickedA && resultA === 'loss') || (pickedB && resultB === 'loss')
+    );
+
     // Card-level classes
     const cardCls = ['sb-fight fc-card',
       isMain ? 'fc-main' : isMainCard ? 'fc-maincrd' : '',
@@ -1005,6 +1032,8 @@ function formatOdds(n) {
       isDD ? 'pk-dd-card' : '',
       isCompleted ? 'is-completed' : '',
       isMain ? 'is-main' : isMainCard ? 'is-main-card' : '',
+      myPerfect ? 'pk-pick-perfect' : '',
+      myMiss    ? 'pk-pick-miss'    : '',
     ].filter(Boolean).join(' ');
 
     // Fighter side A classes
@@ -1042,16 +1071,17 @@ function formatOdds(n) {
     }
 
     // Badges
-    const ddTag = isDD ? ' <span class="pk-dd-badge-tag">⚡×2</span>' : '';
+    const ddTag = isDD ? ' <span class="pk-dd-badge-tag">⚡DD</span>' : '';
     const winShareBtn = (winner, loser, pts, commPct) =>
       `<button class="fc-win-share" data-winner="${esc(winner)}" data-loser="${esc(loser)}" data-pts="${pts}" data-comm="${commPct ?? ''}" data-event="${esc(event?.name || '')}" title="Share your win">🎉 Share</button>`;
+    const perfTick = (isPerfect) => isPerfect ? '<span class="pk-perfect-tick">✓</span>' : '';
     const badgeA = correctA
-      ? `<div class="fc-badge fc-badge-correct">✓ +${ptsA}pts${isDD ? ' ⚡' : ''}${winShareBtn(f.a, f.b, ptsA, commPctA)}</div>`
-      : (isCompleted && pickedA ? `<div class="fc-badge fc-badge-wrong">✗ ${ptsA < 0 ? ptsA + 'pts ⚡' : '0pts'}</div>` : '')
+      ? `<div class="fc-badge fc-badge-correct${isPerfectA ? ' pk-badge-perfect' : ''}">${perfTick(isPerfectA)}+${ptsA}pts${isDD ? ' ⚡' : ''}${winShareBtn(f.a, f.b, ptsA, commPctA)}</div>`
+      : (isCompleted && pickedA ? `<div class="fc-badge fc-badge-wrong">✗ ${ptsA < 0 ? ptsA + 'pts' + (isDD ? ' ⚡DD' : '') : '0pts'}</div>` : '')
       + (!isCompleted && pickedA ? `<div class="fc-badge fc-badge-pick${isSavedA ? '' : ' unsaved'}">${isSavedA ? 'YOUR PICK ✓' : 'YOUR PICK •'}${ddTag}</div>` : '');
     const badgeB = correctB
-      ? `<div class="fc-badge fc-badge-correct">✓ +${ptsB}pts${isDD ? ' ⚡' : ''}${winShareBtn(f.b, f.a, ptsB, commPctB)}</div>`
-      : (isCompleted && pickedB ? `<div class="fc-badge fc-badge-wrong">✗ ${ptsB < 0 ? ptsB + 'pts ⚡' : '0pts'}</div>` : '')
+      ? `<div class="fc-badge fc-badge-correct${isPerfectB ? ' pk-badge-perfect' : ''}">${perfTick(isPerfectB)}+${ptsB}pts${isDD ? ' ⚡' : ''}${winShareBtn(f.b, f.a, ptsB, commPctB)}</div>`
+      : (isCompleted && pickedB ? `<div class="fc-badge fc-badge-wrong">✗ ${ptsB < 0 ? ptsB + 'pts' + (isDD ? ' ⚡DD' : '') : '0pts'}</div>` : '')
       + (!isCompleted && pickedB ? `<div class="fc-badge fc-badge-pick${isSavedB ? '' : ' unsaved'}">${isSavedB ? 'YOUR PICK ✓' : 'YOUR PICK •'}${ddTag}</div>` : '');
 
     // Opponent badges
@@ -1873,6 +1903,13 @@ function formatOdds(n) {
           ${mainSection}${prelimSection}${earlySection}
         </div>
 
+        ${isCompleted ? `
+        <a class="pk-review-cta" href="event-review.html?id=${encodeURIComponent(eventId)}">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><rect x="3" y="3" width="18" height="18" rx="3"/></svg>
+          Review the Card
+          <span class="pk-review-cta-sub">Rate fights · leave your take</span>
+        </a>` : ''}
+
         ${isCompleted && nextEventData ? `
         <div class="pk-next-event">
           <div class="pk-next-label">Up Next</div>
@@ -1944,16 +1981,35 @@ function formatOdds(n) {
                 <span class="pk-hiw-pts">+15</span>
               </div>
               <div class="pk-hiw-divider"></div>
+              <div class="pk-hiw-divider"></div>
               <div class="pk-hiw-row pk-hiw-dd-row">
-                <div class="pk-hiw-num pk-hiw-num-dd">DD</div>
+                <div class="pk-hiw-num pk-hiw-num-dd">⚡</div>
                 <div>
-                  <div class="pk-hiw-label">Double Down</div>
-                  <div class="pk-hiw-sub">One per event · correct = ×2 pts · wrong = −10 pts</div>
+                  <div class="pk-hiw-label">Double Down — Perfect</div>
+                  <div class="pk-hiw-sub">Fighter + method + round all correct</div>
                 </div>
-                <span class="pk-hiw-pts pk-hiw-pts-gold">×2</span>
+                <span class="pk-hiw-pts pk-hiw-pts-gold">+45</span>
+              </div>
+              <div class="pk-hiw-row pk-hiw-dd-row">
+                <div class="pk-hiw-num pk-hiw-num-dd">⚡</div>
+                <div>
+                  <div class="pk-hiw-label">Double Down — Wrong fighter</div>
+                  <div class="pk-hiw-sub">Fighter pick was wrong</div>
+                </div>
+                <span class="pk-hiw-pts" style="color:#f87171">−20</span>
+              </div>
+              <div class="pk-hiw-row pk-hiw-dd-row">
+                <div class="pk-hiw-num pk-hiw-num-dd">⚡</div>
+                <div>
+                  <div class="pk-hiw-label">Double Down — Wrong bonus</div>
+                  <div class="pk-hiw-sub">Right fighter, wrong method or round</div>
+                </div>
+                <span class="pk-hiw-pts" style="color:#f87171">−2 each</span>
               </div>
             </div>
-            <div class="pk-hiw-max">Perfect pick: winner + method + round = <strong>20 pts</strong> &nbsp;·&nbsp; with Double Down = <strong>40 pts</strong></div>
+            <div class="pk-hiw-max">
+              Perfect pick (no DD): <strong>+20 pts ✓</strong> &nbsp;·&nbsp; DD perfect: <strong>+45 pts ⚡✓</strong>
+            </div>
           </div>
         </div>`;
       document.body.appendChild(el);
@@ -2109,11 +2165,12 @@ function formatOdds(n) {
   const INFO_CONTENT = {
     dd: {
       title: 'Double Down',
-      body: `<p>Pick <strong>one fight per event</strong> to Double Down on. If you're right, all points for that fight are <strong>doubled (×2)</strong>. If you're wrong, you lose <strong>10 pts</strong>.</p>
+      body: `<p>Pick <strong>one fight per event</strong> to Double Down on. Nail all three (fighter, method, round) and you earn <strong>+45 pts flat</strong>. Get the fighter wrong and you lose <strong>20 pts</strong>.</p>
 <p>Only one Double Down allowed per event. You can change or undo it any time before the event locks.</p>
 <div class="pk-info-examples">
-  <div class="pk-info-ex pk-info-ex-good"><span class="pk-info-ex-icon">+</span> Correct pick → ×2 all points (max 40 pts)</div>
-  <div class="pk-info-ex pk-info-ex-bad"><span class="pk-info-ex-icon">−</span> Wrong pick → −10 pts</div>
+  <div class="pk-info-ex pk-info-ex-good"><span class="pk-info-ex-icon">⚡</span> All correct → +45 pts perfect DD</div>
+  <div class="pk-info-ex pk-info-ex-good"><span class="pk-info-ex-icon">+</span> Right fighter, wrong bonus → pts − 2 per miss</div>
+  <div class="pk-info-ex pk-info-ex-bad"><span class="pk-info-ex-icon">−</span> Wrong fighter → −20 pts</div>
 </div>`,
     },
     hype: {

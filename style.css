@@ -11863,3 +11863,188 @@ body.light-mode .pk-seg-btn.active.pk-seg-dec { background: rgba(180,130,10,0.08
 
 /* ── General clickable links light mode gold hover ── */
 body.light-mode a[href]:not(.btn):not(.nav-link):not(.mbn-item):hover { color: #b8820a; }
+
+/* ══════════════════════════════════════════════
+   PICKS v9.3 — Perfect / Miss / DD visuals
+══════════════════════════════════════════════ */
+
+/* Perfect pick — green glow ring */
+.pk-pick-perfect {
+  position: relative;
+  box-shadow: 0 0 0 1.5px rgba(80,210,120,0.45), 0 0 18px rgba(80,210,120,0.12) !important;
+}
+.pk-pick-perfect::before {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  border: 1.5px solid rgba(80,210,120,0.3);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Perfect tick in the badge */
+.pk-perfect-tick {
+  display: inline-block;
+  font-size: 1em;
+  margin-right: 3px;
+  color: #50d278;
+}
+.pk-badge-perfect {
+  color: #50d278 !important;
+  background: rgba(80,210,120,0.12) !important;
+  border-color: rgba(80,210,120,0.35) !important;
+  font-size: 0.62rem !important;
+  letter-spacing: 0.04em;
+}
+
+/* Wrong fighter pick — diagonal slash overlay */
+.pk-pick-miss {
+  position: relative;
+}
+.pk-pick-miss::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  right: 10%;
+  height: 1.5px;
+  background: linear-gradient(to right, transparent 0%, rgba(248,113,113,0.55) 20%, rgba(248,113,113,0.55) 80%, transparent 100%);
+  transform: rotate(-6deg) translateY(-50%);
+  pointer-events: none;
+  z-index: 3;
+  border-radius: 2px;
+}
+
+/* Review the Card CTA at bottom of completed picks */
+.pk-review-cta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 24px 16px 8px;
+  padding: 18px 22px;
+  background: rgba(80,210,120,0.07);
+  border: 1.5px solid rgba(80,210,120,0.3);
+  border-radius: 12px;
+  color: rgba(80,210,120,0.9);
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: background 0.15s, border-color 0.15s;
+}
+.pk-review-cta:hover {
+  background: rgba(80,210,120,0.13);
+  border-color: rgba(80,210,120,0.55);
+}
+.pk-review-cta-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  opacity: 0.65;
+  margin-left: auto;
+}
+
+/* Scoring hint bubble */
+.pk-score-hint {
+  position: fixed;
+  bottom: 88px;
+  right: 18px;
+  z-index: 1200;
+  background: #0f1117;
+  border: 1px solid rgba(240,180,41,0.25);
+  border-radius: 14px;
+  padding: 14px 16px 12px;
+  width: 200px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  opacity: 0;
+  transform: translateY(12px) scale(0.97);
+  transition: opacity 0.25s, transform 0.25s;
+  pointer-events: none;
+}
+.pk-score-hint.pk-score-hint-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+.pk-score-hint-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(240,180,41,0.6);
+  margin-bottom: 10px;
+}
+.pk-score-hint-close {
+  position: absolute;
+  top: 8px; right: 10px;
+  background: none; border: none;
+  color: rgba(255,255,255,0.25);
+  font-size: 0.65rem;
+  cursor: pointer;
+  padding: 2px 4px;
+  line-height: 1;
+  transition: color 0.15s;
+}
+.pk-score-hint-close:hover { color: rgba(255,255,255,0.6); }
+.pk-score-hint-rows { display: flex; flex-direction: column; gap: 5px; }
+.pk-score-hint-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.55);
+}
+.pk-score-hint-pts {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.75);
+}
+.pk-score-hint-green { color: #50d278 !important; }
+.pk-score-hint-gold  { color: #f0b429 !important; }
+.pk-score-hint-red   { color: #f87171 !important; }
+.pk-score-hint-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.07);
+  margin: 3px 0;
+}
+.pk-score-hint-arrow {
+  position: absolute;
+  bottom: -8px;
+  right: 22px;
+  width: 14px;
+  height: 8px;
+  background: #0f1117;
+  clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
+  border-bottom: 1px solid rgba(240,180,41,0.25);
+}
+.pk-score-hint-lucas {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+  padding: 6px 10px;
+  border-radius: 7px;
+  background: rgba(240,180,41,0.06);
+  border: 1px solid rgba(240,180,41,0.18);
+  color: rgba(240,180,41,0.7);
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  transition: background 0.15s;
+}
+.pk-score-hint-lucas:hover {
+  background: rgba(240,180,41,0.12);
+  color: #f0b429;
+}
+
+/* HIW modal — override for new scoring */
+.pk-hiw-max { background: rgba(80,210,120,0.06) !important; border-color: rgba(80,210,120,0.18) !important; }
+.pk-hiw-max strong { color: #50d278 !important; }

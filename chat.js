@@ -94,10 +94,29 @@ async function loadLiveData() {
       { rank: 5, name: 'Ilia Topuria', record: '17-1', division: 'Lightweight', note: 'Lost LW title to Gaethje via TKO R5, was -600 favourite' },
     ];
 
+    const mmaBridgeScoring = {
+      overview: 'MMA Bridge is a UFC pick\'em site. Users pick fight winners before events lock and earn points based on accuracy.',
+      base: {
+        winner: '+10 pts for correct fighter pick',
+        method: '+5 pts bonus for correct finish method (KO/TKO, Submission, or Decision)',
+        round: '+5 pts bonus for correct round (only for KO/TKO or SUB picks)',
+        fotn: '+15 pts for correct Fight of the Night pick',
+        perfect_no_dd: 'Perfect pick (fighter + method + round all correct, no Double Down) = +20 pts total, shown with a green tick',
+      },
+      double_down: {
+        description: 'Each event users can choose ONE fight to Double Down on. Stakes are higher.',
+        dd_perfect: '+45 pts flat if fighter + method + round all correct (green tick shown)',
+        dd_wrong_fighter: '-20 pts if the fighter pick is wrong',
+        dd_wrong_bonus: '-2 pts deducted per wrong bonus (method or round) when fighter is correct but bonus(es) missed',
+        dd_example: 'If you DD a fight, pick right fighter, right method, wrong round: 10+5−2 = 13 pts',
+      },
+      tiers: 'Users ranked by accuracy: Rookie → Candidate → Iron → Bronze → Silver → Gold → Platinum → Diamond → Legend. Need 10+ judged picks to leave Candidate tier.',
+    };
+
     lucasLiveData = {
       events: allEvents,
       fighters: fighters || [],
-      context: { upcoming, recent, notableUpsets, p4pContext, generatedAt: now.toISOString() }
+      context: { upcoming, recent, notableUpsets, p4pContext, mmaBridgeScoring, generatedAt: now.toISOString() }
     };
   } catch (e) {
     // silently fail — backend will use its own disk copies as fallback

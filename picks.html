@@ -24,7 +24,7 @@
   <meta name="twitter:description" content="Pick the winner, method, and round for every UFC fight. Track your accuracy and climb the MMA Bridge leaderboard.">
   <meta name="twitter:image" content="https://mmabridge.com/images/mma-bridge-logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800&family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=9.2" />
+  <link rel="stylesheet" href="style.css?v=9.3" />
 </head>
 <body class="pk-page">
 
@@ -110,6 +110,42 @@
   <!-- SAVE TOAST -->
   <div id="pkToast" class="pk-toast" style="display:none"></div>
 
+  <!-- SCORING HINT BUBBLE -->
+  <div class="pk-score-hint" id="pkScoreHint">
+    <button class="pk-score-hint-close" id="pkScoreHintClose" aria-label="Dismiss">✕</button>
+    <div class="pk-score-hint-title">Scoring</div>
+    <div class="pk-score-hint-rows">
+      <div class="pk-score-hint-row"><span>Winner</span><span class="pk-score-hint-pts">+10</span></div>
+      <div class="pk-score-hint-row"><span>Method</span><span class="pk-score-hint-pts">+5</span></div>
+      <div class="pk-score-hint-row"><span>Round</span><span class="pk-score-hint-pts">+5</span></div>
+      <div class="pk-score-hint-row"><span>Perfect (all 3)</span><span class="pk-score-hint-pts pk-score-hint-green">+20 ✓</span></div>
+      <div class="pk-score-hint-divider"></div>
+      <div class="pk-score-hint-row"><span>DD perfect</span><span class="pk-score-hint-pts pk-score-hint-gold">+45 ⚡✓</span></div>
+      <div class="pk-score-hint-row"><span>DD wrong fighter</span><span class="pk-score-hint-pts pk-score-hint-red">−20</span></div>
+      <div class="pk-score-hint-row"><span>DD wrong bonus</span><span class="pk-score-hint-pts pk-score-hint-red">−2 each</span></div>
+    </div>
+    <div class="pk-score-hint-arrow"></div>
+    <a class="pk-score-hint-lucas" href="#" onclick="if(window.toggleChat){event.preventDefault();window.toggleChat();}">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Ask Lucas about scoring
+    </a>
+  </div>
+  <script>
+    (function() {
+      var hint = document.getElementById('pkScoreHint');
+      var close = document.getElementById('pkScoreHintClose');
+      var seen = localStorage.getItem('pk_score_hint_seen');
+      if (seen) { if (hint) hint.style.display = 'none'; }
+      else {
+        setTimeout(function() { if (hint) hint.classList.add('pk-score-hint-visible'); }, 1800);
+      }
+      if (close) close.addEventListener('click', function() {
+        if (hint) { hint.classList.remove('pk-score-hint-visible'); setTimeout(function(){ hint.style.display='none'; }, 300); }
+        localStorage.setItem('pk_score_hint_seen', '1');
+      });
+    })();
+  </script>
+
   <script>
     window.addEventListener('scroll', () => {
       document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 10);
@@ -130,12 +166,13 @@
   <script src="countdown.js?v=1.0"></script>
   <script src="live.js?v=1.0"></script>
   <script src="premium.js?v=3.4"></script>
-  <script src="picks.js?v=6.7"></script>
+  <script src="picks.js?v=6.8"></script>
 <script src="notifications.js?v=2.4"></script>
 <script src="push.js?v=1.2"></script>
 <script src="animations.js?v=2.0"></script>
 <script src="micro.js?v=1.0"></script>
 <script src="fighter-modal.js?v=1.1"></script>
+<script src="chat.js?v=2.4"></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
 </body>
 </html>

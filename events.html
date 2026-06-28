@@ -1871,13 +1871,6 @@
           fresh.addEventListener('click', () => openPicksHub(upcoming));
         }
 
-        // Completed events — last 3, newest first — appended after upcoming
-        const completed = all
-          .filter(e => e.status === 'completed')
-          .sort((a, b) => new Date(b.isoDate) - new Date(a.isoDate))
-          .slice(0, 3);
-        completed.forEach(e => { const c = buildCompletedCard(e); if (c) list.appendChild(c); });
-
         const p=new URLSearchParams(location.search), id=p.get('id');
         if(id){
           const t=upcoming.find(e=>e.id===id)||all.find(e=>e.id===id);

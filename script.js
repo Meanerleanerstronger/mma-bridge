@@ -143,7 +143,7 @@ function renderHero(ev, mode, hasPicks) {
     btn.style.setProperty('border', '1px solid rgba(255,60,60,0.4)', 'important');
   } else if (mode === 'results') {
     btn.textContent = 'Review the Card →';
-    btn.href = `event-review.html?id=${eventId}`;
+    btn.href = `events.html?id=${eventId}`;
     btn.target = '';
     btn.rel = '';
     btn.style.setProperty('background', 'linear-gradient(135deg, #004d3d 0%, #00a878 55%, #00e5a0 100%)', 'important');
@@ -156,13 +156,13 @@ function renderHero(ev, mode, hasPicks) {
       const myPicksBtn = document.createElement('a');
       myPicksBtn.id = 'heroSecondaryBtn';
       myPicksBtn.textContent = 'My Picks →';
-      myPicksBtn.href = `picks.html?event=${eventId}`;
+      myPicksBtn.href = `picks.html?id=${eventId}`;
       myPicksBtn.style.cssText = 'display:inline-block;margin-left:10px;padding:12px 24px;border-radius:12px;font-family:Montserrat,sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;background:rgba(255,255,255,.07);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.12);transition:background .15s;';
       btn.parentNode.insertBefore(myPicksBtn, btn.nextSibling);
     }
   } else {
     btn.textContent = 'Make Your Picks →';
-    btn.href = `picks.html?event=${eventId}`;
+    btn.href = `picks.html?id=${eventId}`;
     btn.target = '';
     btn.rel = '';
     btn.style.setProperty('background', 'linear-gradient(135deg, #7a3100 0%, #d46400 55%, #ff8c00 100%)', 'important');
