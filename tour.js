@@ -53,56 +53,40 @@
         dur: 3500, scroll: true,
         nav: 'events.html', navStep: 2,
       },
-      /* 2 — events: card list */
+      /* 2 — events: card list — NO click, cursor just hovers */
       {
         page: 'events',
         sel: '.ev-list',
         cursorSel: '.ev-card',
-        text: 'Every announced UFC event — PPVs, Fight Nights, numbered cards. Tap any card to see the full fight card.',
-        dur: 3500, scroll: false,
+        text: 'Every announced UFC event — PPVs, Fight Nights, numbered cards. Tap any card to see the full fight card and make your picks.',
+        dur: 4500, scroll: false,
         onEnter: scrollTop,
-      },
-      /* 3 — events: click a card */
-      {
-        page: 'events',
-        sel: '.ev-card',
-        cursorSel: '.ev-card',
-        text: 'Opens the full overlay with fights, headshots, and hype ratings. Make your picks straight from here.',
-        dur: 3500, scroll: false,
-        click: true,
-        onEnter: () => after(100, () => {
-          const c = q('.ev-card'); if (c) c.click();
-        }),
         nav: nId ? `picks.html?event=${nId}` : 'pfp.html',
-        navStep: nId ? 4 : 6,
+        navStep: nId ? 3 : 5,
       },
-      /* 4 — picks: fight cards */
+      /* 3 — picks: spotlight fight list */
       {
         page: 'picks',
-        sel: '.pk-card-wrap, .sb-card, [class*="fc-fight"], .fc-fight-card',
-        cursorSel: '.sb-side[data-pick], .fc-fighter',
-        text: `This is ${nName}. Pick a winner for every fight before the event locks. Lock time is automatic.`,
-        dur: 4000, scroll: false,
+        sel: '.sb-side[data-pick]',
+        cursorSel: '.sb-side[data-pick]',
+        text: `${nName} — pick a winner for every fight before the card locks. Picks are auto-locked at event start.`,
+        dur: 3800, scroll: false,
         onEnter: scrollTop,
       },
-      /* 5 — picks: simulate clicking picks */
+      /* 4 — picks: cursor clicks 3 real picks */
       {
         page: 'picks',
-        sel: '.sb-side[data-pick], .fc-fighter',
-        cursorSel: '.sb-side[data-pick], .fc-fighter',
-        text: 'Just tap a fighter to lock your pick. Green when the result is in. Red means rethink your strategy next time.',
-        dur: 3800, scroll: false,
-        click: true,
+        sel: '.sb-side[data-pick]',
+        cursorSel: '.sb-side[data-pick]',
+        text: 'Tap a fighter to lock your pick. Green when right, red when wrong. Track your accuracy on the leaderboard.',
+        dur: 4200, scroll: false,
         onEnter: () => {
-          // Actually click 3 picks with delays
           const sides = [...document.querySelectorAll('.sb-side[data-pick]')];
-          if (sides.length >= 2) {
-            after(400, () => { clickEl(sides[0]); });
-            after(900, () => { clickEl(sides[3] || sides[1]); });
-            after(1400, () => { clickEl(sides[4] || sides[2] || sides[0]); });
-          }
+          if (sides[0]) after(300,  () => { animateClick(); clickEl(sides[0]); moveCursor(sides[0]); });
+          if (sides[3]) after(900,  () => { animateClick(); clickEl(sides[3]); moveCursor(sides[3]); });
+          if (sides[5]) after(1600, () => { animateClick(); clickEl(sides[5]); moveCursor(sides[5]); });
         },
-        nav: 'pfp.html', navStep: 6,
+        nav: 'pfp.html', navStep: 5,
       },
       /* 6 — pfp: hero */
       {
@@ -132,9 +116,9 @@
         dur: 3500, scroll: false,
         click: true,
         onEnter: () => after(300, () => { const t = q('.rnk-tab[data-tab="divisional"]'); if (t) t.click(); }),
-        nav: 'reviews.html', navStep: 9,
+        nav: 'reviews.html', navStep: 8,
       },
-      /* 9 — reviews: card grid */
+      /* 8 — reviews: card grid */
       {
         page: 'reviews',
         sel: '.rv-grid, .rv-cards, [class*="rv-"]',
@@ -152,9 +136,9 @@
         dur: 5500, scroll: false,
         click: false,
         onEnter: showFakeReview,
-        nav: 'leaderboard.html', navStep: 11,
+        nav: 'leaderboard.html', navStep: 10,
       },
-      /* 11 — leaderboard */
+      /* 10 — leaderboard */
       {
         page: 'leaderboard',
         sel: '#lbRoot, .lb-page',
@@ -162,7 +146,7 @@
         text: 'Community leaderboard — everyone ranked by pick accuracy. Join a group with your friends for a private season league.',
         dur: 4000, scroll: false,
         onEnter: scrollTop,
-        nav: 'lucas.html', navStep: 12,
+        nav: 'lucas.html', navStep: 11,
       },
       /* 12 — lucas: final */
       {
@@ -343,6 +327,12 @@
   function buildDOM() {
     if (document.getElementById('trEndBtn')) return; // already built
 
+    // Full-page click blocker — sits above page, below tour UI
+    // Prevents user from interacting with anything except End Tour
+    const blocker = make('div', { id: 'trBlocker' });
+    css(blocker, { position:'fixed', inset:'0', zIndex:'9970', pointerEvents:'all', cursor:'default' });
+    document.body.appendChild(blocker);
+
     const panelBase = { position:'fixed', zIndex:'9980', pointerEvents:'none', background:'rgba(0,0,0,.84)', backdropFilter:'blur(2px)', transition:'all .42s cubic-bezier(.4,0,.2,1)' };
     elTop   = make('div'); css(elTop,   { ...panelBase, top:'0', left:'0', right:'0', height:'0' });
     elBot   = make('div'); css(elBot,   { ...panelBase, bottom:'0', left:'0', right:'0', height:'0' });
@@ -487,7 +477,8 @@
     sessionStorage.removeItem(SK_STEP);
 
     const els = [elTop, elBot, elLeft, elRight, elGlow, elCursor, elBubble,
-      elEndBtn, elBar?.parentElement, document.getElementById('trFakeRev')];
+      elEndBtn, elBar?.parentElement, document.getElementById('trFakeRev'),
+      document.getElementById('trBlocker')];
     els.forEach(el => { if (!el) return; el.style.transition = 'opacity .3s ease'; el.style.opacity = '0'; });
     after(340, () => els.forEach(el => el?.remove()));
   }
@@ -514,16 +505,21 @@
       }
       @keyframes trCurBob {0%,100%{margin-top:0}50%{margin-top:-5px}}
 
-      /* End button — always visible */
+      /* End button — always visible, gold, unmissable */
       #trEndBtn {
-        position:fixed; top:16px; right:20px; z-index:9996;
-        background:rgba(20,20,28,.9); border:1px solid rgba(255,255,255,.1);
-        color:rgba(255,255,255,.45); font-family:'Montserrat',sans-serif;
-        font-weight:700; font-size:.62rem; letter-spacing:.1em; text-transform:uppercase;
-        padding:7px 14px; border-radius:5px; cursor:pointer;
-        backdrop-filter:blur(8px); transition:color .15s,border-color .15s;
+        position:fixed; top:18px; right:22px; z-index:9996;
+        background:rgba(240,180,41,.12); border:1.5px solid rgba(240,180,41,.5);
+        color:rgba(240,180,41,.95); font-family:'Montserrat',sans-serif;
+        font-weight:800; font-size:.74rem; letter-spacing:.1em; text-transform:uppercase;
+        padding:10px 22px; border-radius:7px; cursor:pointer;
+        backdrop-filter:blur(12px); transition:all .18s ease;
+        box-shadow:0 2px 16px rgba(240,180,41,.1);
       }
-      #trEndBtn:hover{color:rgba(255,255,255,.8);border-color:rgba(255,255,255,.25)}
+      #trEndBtn:hover{
+        background:rgba(240,180,41,.22); border-color:rgba(240,180,41,.8);
+        color:#f0b429; box-shadow:0 4px 24px rgba(240,180,41,.22);
+        transform:translateY(-1px);
+      }
 
       /* Cursor */
       #trCursor {
