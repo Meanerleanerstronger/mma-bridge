@@ -217,6 +217,7 @@
   // ── Public API ───────────────────────────────
   window.MMABridgePush = {
     registerSW,
+    requestPush: subscribeToPush,   // exposed so notif footer can trigger it
     starEvent,
     unstarEvent,
     isStarred,

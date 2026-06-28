@@ -8486,6 +8486,12 @@ body.light-mode .notif-item-sub { color: rgba(0,0,0,0.38) !important; }
 }
 .notif-push-status.on { color: #f0b429; }
 .notif-push-status.blocked { color: rgba(255,80,80,0.7); }
+.notif-ios-hint { cursor: default; align-items: flex-start; padding-top: 10px; }
+.notif-ios-hint:hover { background: rgba(255,255,255,0.02); border-color: rgba(255,255,255,0.06); color: rgba(255,255,255,0.4); }
+.notif-ios-sub {
+  display: block; font-size: 0.62rem;
+  color: rgba(255,255,255,0.22); margin-top: 2px; line-height: 1.4;
+}
 .notif-empty-hint {
   font-size: 0.65rem; color: rgba(255,255,255,0.18);
   margin-top: 4px; line-height: 1.5;

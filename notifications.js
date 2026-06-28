@@ -433,8 +433,15 @@
       }
 
       if (footerEl) {
-        const pushSupported = 'serviceWorker' in navigator && 'PushManager' in window;
-        if (pushSupported) {
+        const hasSW    = 'serviceWorker' in navigator;
+        const hasPush  = 'PushManager' in window;
+        const hasNotif = typeof Notification !== 'undefined';
+        const isIOS    = /iP(hone|od|ad)/.test(navigator.userAgent);
+        const isInPWA  = window.navigator.standalone === true
+                      || window.matchMedia('(display-mode: standalone)').matches;
+
+        if (hasSW && hasPush && hasNotif) {
+          // Full Web Push supported (Chrome, Edge, Firefox, Safari 16+ macOS, iOS PWA 16.4+)
           footerEl.innerHTML = `
             <button class="notif-push-row" id="notifPushToggle">
               <span class="notif-push-icon">${SVG.bell}</span>
@@ -448,12 +455,22 @@
               alert('Push notifications are blocked. Enable them in your browser settings, then try again.');
               return;
             }
-            await window.MMABridgePush.subscribeToPush();
-            _updatePushStatus();
+            const sub = await window.MMABridgePush.requestPush();
+            if (sub) _updatePushStatus();
             const t = document.querySelector('#notifPushToggle .notif-push-text');
             if (t) t.textContent = _getPushLabel();
           });
+        } else if (isIOS && !isInPWA) {
+          // iOS Safari browser — push requires PWA install
+          footerEl.innerHTML = `
+            <div class="notif-push-row notif-ios-hint">
+              <span class="notif-push-icon">${SVG.bell}</span>
+              <span class="notif-push-text">Add to Home Screen for push alerts
+                <span class="notif-ios-sub">Tap Share → Add to Home Screen in Safari</span>
+              </span>
+            </div>`;
         } else {
+          // No push support and not iOS — hide footer
           footerEl.innerHTML = '';
         }
       }
@@ -483,6 +500,7 @@
   };
 
   function _getPushLabel() {
+    if (typeof Notification === 'undefined') return 'Push alerts';
     const perm = Notification.permission;
     if (perm === 'granted') return 'Push alerts on';
     if (perm === 'denied') return 'Push blocked in browser';
@@ -492,6 +510,7 @@
   function _updatePushStatus() {
     const el = document.getElementById('notifPushStatus');
     if (!el) return;
+    if (typeof Notification === 'undefined') return;
     const perm = Notification.permission;
     el.className = 'notif-push-status ' + (perm === 'granted' ? 'on' : perm === 'denied' ? 'blocked' : '');
     el.textContent = perm === 'granted' ? 'ON' : perm === 'denied' ? 'Blocked' : '';
