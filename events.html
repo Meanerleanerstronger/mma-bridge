@@ -112,7 +112,7 @@
   ]
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=9.0" />
+  <link rel="stylesheet" href="style.css?v=9.1" />
 
   <style>
     /* ── KEYFRAMES ── */
@@ -304,15 +304,54 @@
     .ov-result-review { background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8); }
     .ov-result-review:hover { background:rgba(255,255,255,.12);box-shadow:0 0 16px rgba(255,255,255,.1);transform:translateY(-1px); }
 
-    /* ── Completed Event Action Bar ── */
-    .ov-action-bar { display:flex;align-items:center;justify-content:center;gap:14px;padding:16px 28px;background:rgba(0,0,0,.25);border-bottom:1px solid rgba(255,255,255,.07); }
-    .ov-action-btn { display:inline-flex;align-items:center;gap:9px;padding:13px 30px;border-radius:10px;font-family:'Montserrat',sans-serif;font-weight:800;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;white-space:nowrap;transition:background .2s,box-shadow .2s,transform .15s,border-color .2s; }
-    .ov-action-picks { color:#4ade80;background:rgba(74,222,128,.1);border:1.5px solid rgba(74,222,128,.45);box-shadow:0 0 16px rgba(74,222,128,.15); }
-    .ov-action-picks:hover { background:rgba(74,222,128,.18);border-color:rgba(74,222,128,.8);box-shadow:0 0 28px rgba(74,222,128,.4);transform:translateY(-1px); }
-    .ov-action-picks svg { filter:drop-shadow(0 0 5px rgba(74,222,128,.7)); }
-    .ov-action-review { color:rgba(255,255,255,.8);background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.2); }
-    .ov-action-review:hover { background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.45);box-shadow:0 0 20px rgba(255,255,255,.1);transform:translateY(-1px);color:#fff; }
+    /* ── Completed Event Action Bar — 2 big CTAs ── */
+    .ov-action-bar {
+      display:flex; align-items:stretch; gap:12px;
+      padding:18px 24px 20px;
+      background:rgba(0,0,0,.35);
+      border-bottom:1px solid rgba(255,255,255,.07);
+    }
+    .ov-action-btn {
+      flex:1; display:flex; flex-direction:column; align-items:center;
+      justify-content:center; gap:8px; padding:18px 20px;
+      border-radius:12px; text-decoration:none; text-align:center;
+      font-family:'Montserrat',sans-serif; font-weight:800;
+      font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
+      transition:background .2s,transform .15s,border-color .2s,box-shadow .2s;
+      white-space:nowrap;
+    }
+    .ov-action-btn svg { flex-shrink:0; }
+    .ov-action-btn-sub {
+      font-family:'Inter',sans-serif; font-size:.6rem; font-weight:400;
+      letter-spacing:.01em; text-transform:none; opacity:.65;
+    }
+    .ov-action-picks {
+      color:#f0b429;
+      background:rgba(240,180,41,.1);
+      border:1.5px solid rgba(240,180,41,.5);
+    }
+    .ov-action-picks:hover {
+      background:rgba(240,180,41,.18);
+      border-color:#f0b429;
+      transform:translateY(-2px);
+      box-shadow:0 8px 28px rgba(240,180,41,.2);
+    }
+    .ov-action-review {
+      color:rgba(255,255,255,.82);
+      background:rgba(255,255,255,.06);
+      border:1.5px solid rgba(255,255,255,.18);
+    }
+    .ov-action-review:hover {
+      background:rgba(255,255,255,.11);
+      border-color:rgba(255,255,255,.38);
+      transform:translateY(-2px);
+      color:#fff;
+    }
     .ov-action-divider { display:none; }
+    @media(max-width:480px) {
+      .ov-action-bar { flex-direction:column; }
+      .ov-action-btn { padding:14px 16px; }
+    }
     .ov-badge-row { display:flex;align-items:center;gap:10px; }
     .ov-badge { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;padding:4px 12px;border-radius:4px;backdrop-filter:blur(10px); }
     .ov-badge.fn  { background:rgba(240,180,41,.15);border:1px solid rgba(240,180,41,.35);color:#f0b429; }
@@ -846,98 +885,48 @@
     .cd-ended { color:rgba(255,255,255,.2);font-size:.8rem; }
     @media(max-width:640px) { #evCdCard { right:10px; left:10px; width:auto; top:68px; } }
 
-    /* ── RECENT RESULTS PORTAL ── */
-    .ev-recent-section { margin-top:36px; }
-    .ev-recent-header { margin-bottom:14px; }
-    .ev-recent-label {
+    /* ── COMPLETED EVENT CARDS (in main list) ── */
+    .ev-card.is-completed {
+      opacity:1; cursor:pointer;
+      background:rgba(14,14,18,.95);
+    }
+    .ev-card.is-completed .ev-card-overlay {
+      background:linear-gradient(to right,rgba(4,4,6,.97) 0%,rgba(4,4,6,.88) 32%,rgba(4,4,6,.55) 58%,rgba(4,4,6,.2) 78%,transparent 100%);
+    }
+    .ev-card.is-completed .ev-card-poster { opacity:.45; filter:grayscale(.25); }
+    .ev-card.is-completed:hover .ev-card-poster { opacity:.62; filter:grayscale(.1); }
+    .ev-card.is-completed:hover { border-color:rgba(240,180,41,.3); transform:translateY(-2px); box-shadow:0 12px 40px rgba(0,0,0,.7); }
+    .ev-completed-badge {
       font-family:'Montserrat',sans-serif; font-weight:900;
-      font-size:.52rem; letter-spacing:.26em; text-transform:uppercase;
-      color:#f0b429; margin-bottom:4px;
-    }
-    .ev-recent-sub {
-      font-family:'Inter',sans-serif; font-size:.72rem;
-      color:rgba(255,255,255,.3); letter-spacing:.01em;
-    }
-    .ev-recent-list { display:flex; flex-direction:column; gap:10px; }
-    .ev-rc {
-      display:flex; align-items:center; gap:16px;
-      background:rgba(22,22,30,.9);
-      border:1px solid rgba(255,255,255,.08);
-      border-left:2.5px solid rgba(240,180,41,.35);
-      border-radius:10px; padding:14px 16px;
-      transition:border-color .15s,background .15s;
-      position:relative; overflow:hidden;
-    }
-    .ev-rc:hover { border-color:rgba(240,180,41,.55); background:rgba(26,26,36,.95); }
-    .ev-rc-poster {
-      width:52px; height:72px; border-radius:6px;
-      object-fit:cover; object-position:center;
-      flex-shrink:0; opacity:.82;
-      background:rgba(255,255,255,.04);
-    }
-    .ev-rc-poster-placeholder {
-      width:52px; height:72px; border-radius:6px;
-      background:rgba(255,255,255,.05);
-      flex-shrink:0; display:flex; align-items:center;
-      justify-content:center; font-size:1.5rem;
-    }
-    .ev-rc-info { flex:1; min-width:0; }
-    .ev-rc-badge {
-      font-family:'Montserrat',sans-serif; font-weight:800;
       font-size:.38rem; letter-spacing:.18em; text-transform:uppercase;
-      color:rgba(255,255,255,.28); margin-bottom:4px;
+      padding:3px 8px; border-radius:4px;
+      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1);
+      color:rgba(255,255,255,.35);
     }
-    .ev-rc-name {
-      font-family:'Barlow Condensed','Montserrat',sans-serif;
-      font-weight:900; font-size:1.05rem; text-transform:uppercase;
-      letter-spacing:.03em; color:rgba(255,255,255,.9);
-      line-height:1.1; margin-bottom:5px;
-      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    .ev-result-line {
+      font-family:'Inter',sans-serif; font-size:.72rem;
+      color:rgba(255,255,255,.42); letter-spacing:.01em;
+      margin-top:3px;
     }
-    .ev-rc-result {
-      font-family:'Inter',sans-serif; font-size:.68rem;
-      color:rgba(255,255,255,.38); letter-spacing:.01em;
+    .ev-result-line strong { color:rgba(255,255,255,.75); font-weight:600; }
+    .ev-result-cta {
+      font-family:'Montserrat',sans-serif; font-weight:700;
+      font-size:.44rem; letter-spacing:.14em; text-transform:uppercase;
+      color:rgba(240,180,41,.55); margin-top:8px;
+      display:flex; align-items:center; gap:5px;
     }
-    .ev-rc-result strong { color:rgba(255,255,255,.72); font-weight:600; }
-    .ev-rc-btns { display:flex; flex-direction:column; gap:7px; flex-shrink:0; }
-    .ev-rc-btn {
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:6px; white-space:nowrap; cursor:pointer; text-decoration:none;
-      font-family:'Montserrat',sans-serif; font-weight:800;
-      font-size:.5rem; letter-spacing:.12em; text-transform:uppercase;
-      border-radius:7px; padding:8px 14px;
-      transition:background .15s,border-color .15s,color .15s;
-    }
-    .ev-rc-btn-review {
-      background:rgba(240,180,41,.1);
-      border:1.5px solid rgba(240,180,41,.45);
-      color:#f0b429;
-    }
-    .ev-rc-btn-review:hover { background:rgba(240,180,41,.18); border-color:#f0b429; }
-    .ev-rc-btn-picks {
-      background:rgba(255,255,255,.05);
-      border:1.5px solid rgba(255,255,255,.12);
-      color:rgba(255,255,255,.6);
-    }
-    .ev-rc-btn-picks:hover { background:rgba(255,255,255,.09); border-color:rgba(255,255,255,.25); color:#fff; }
-    @media(max-width:600px) {
-      .ev-rc { flex-wrap:wrap; }
-      .ev-rc-btns { flex-direction:row; width:100%; }
-      .ev-rc-btn { flex:1; }
-      .ev-rc-poster,.ev-rc-poster-placeholder { display:none; }
-    }
-    body.light-mode .ev-recent-label { color:#b8820a; }
-    body.light-mode .ev-recent-sub { color:rgba(0,0,0,.38); }
-    body.light-mode .ev-rc { background:#fff; border-color:rgba(0,0,0,.08); border-left-color:rgba(180,130,10,.35); }
-    body.light-mode .ev-rc:hover { border-left-color:rgba(180,130,10,.7); background:#fffdf8; }
-    body.light-mode .ev-rc-name { color:#111; }
-    body.light-mode .ev-rc-badge { color:rgba(0,0,0,.3); }
-    body.light-mode .ev-rc-result { color:rgba(0,0,0,.4); }
-    body.light-mode .ev-rc-result strong { color:rgba(0,0,0,.75); }
-    body.light-mode .ev-rc-btn-review { background:rgba(180,130,10,.08); border-color:rgba(180,130,10,.4); color:#b8820a; }
-    body.light-mode .ev-rc-btn-review:hover { background:rgba(180,130,10,.16); border-color:#b8820a; }
-    body.light-mode .ev-rc-btn-picks { background:rgba(0,0,0,.04); border-color:rgba(0,0,0,.12); color:rgba(0,0,0,.55); }
-    body.light-mode .ev-rc-btn-picks:hover { color:rgba(0,0,0,.8); border-color:rgba(0,0,0,.25); }
+    .ev-card.is-completed:hover .ev-result-cta { color:#f0b429; }
+    body.light-mode .ev-card.is-completed .ev-card-overlay { background:linear-gradient(to right,rgba(250,248,243,.97) 0%,rgba(250,248,243,.88) 32%,rgba(250,248,243,.55) 60%,transparent 100%); }
+    body.light-mode .ev-result-line { color:rgba(0,0,0,.4); }
+    body.light-mode .ev-result-line strong { color:rgba(0,0,0,.75); }
+    body.light-mode .ev-result-cta { color:rgba(160,100,8,.55); }
+    body.light-mode .ev-card.is-completed:hover .ev-result-cta { color:#b8820a; }
+    /* action bar light mode */
+    body.light-mode .ov-action-bar { background:rgba(0,0,0,.05); border-bottom-color:rgba(0,0,0,.07); }
+    body.light-mode .ov-action-picks { color:#b8820a; background:rgba(180,130,10,.08); border-color:rgba(180,130,10,.4); }
+    body.light-mode .ov-action-picks:hover { background:rgba(180,130,10,.16); border-color:#b8820a; box-shadow:none; }
+    body.light-mode .ov-action-review { color:rgba(0,0,0,.65); background:rgba(0,0,0,.04); border-color:rgba(0,0,0,.14); }
+    body.light-mode .ov-action-review:hover { background:rgba(0,0,0,.08); border-color:rgba(0,0,0,.28); color:rgba(0,0,0,.85); box-shadow:none; }
   </style>
 </head>
 
@@ -1056,15 +1045,6 @@
       <div class="ev-skel"></div>
     </div>
 
-    <!-- RECENT RESULTS PORTAL -->
-    <div class="ev-recent-section" id="evRecentSection" style="display:none">
-      <div class="ev-recent-header">
-        <div class="ev-recent-label">Recent Results</div>
-        <div class="ev-recent-sub">Tap to review results or see how your picks scored</div>
-      </div>
-      <div class="ev-recent-list" id="evRecentList"></div>
-    </div>
-
     <!-- MINI GROUP STANDINGS -->
     <div id="evGroupWidget" style="display:none"></div>
   </div>
@@ -1145,13 +1125,14 @@
       <!-- COMPLETED EVENT ACTION BAR -->
       <div class="ov-action-bar" id="ovActionBar" style="display:none">
         <a class="ov-action-btn ov-action-picks" id="ovMyPicksBtn" href="#">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><rect x="3" y="3" width="18" height="18" rx="3"/></svg>
-          My Picks
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><rect x="3" y="3" width="18" height="18" rx="3"/></svg>
+          See Your Picks
+          <span class="ov-action-btn-sub">View your picks + how you scored</span>
         </a>
-        <div class="ov-action-divider"></div>
         <a class="ov-action-btn ov-action-review" id="ovWriteReviewBtn" href="#">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-          Write a Review
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          Review the Card
+          <span class="ov-action-btn-sub">Rate fights · leave your take</span>
         </a>
       </div>
 
@@ -1209,61 +1190,68 @@
       return r.split(':')[0].trim().toUpperCase();
     }
 
-    /* ── RECENT RESULTS CARDS ── */
-    function buildRecentCard(ev) {
-      const main = getMainFight(ev);
-      if (!main) return null;
+    /* ── COMPLETED EVENT CARD (shows result in the main list) ── */
+    function buildCompletedCard(ev) {
+      const isPPV = ev.type === 'PPV', cls = isPPV ? 'ppv' : 'fn';
+      const main = getMainFight(ev); if (!main) return null;
       const label = shortLabel(ev);
-      const isPPV = ev.type === 'PPV';
 
-      // Result line: "KAPE def. HORIGUCHI · KO/TKO · R3"
+      // Result line for main event
       let resultLine = '';
       if (main.winner) {
-        const winner = main.winner === main.a ? main.a : main.b;
-        const loser  = main.winner === main.a ? main.b : main.a;
-        const wLast  = lastName(winner).toUpperCase();
-        const lLast  = lastName(loser).toUpperCase();
+        const wLast = lastName(main.winner).toUpperCase();
+        const loser = main.winner === main.a ? main.b : main.a;
+        const lLast = lastName(loser).toUpperCase();
         let method = (main.method || '').toUpperCase();
-        if (method === 'KO' || method === 'TKO' || method.startsWith('KO ') || method.startsWith('TKO')) method = 'KO/TKO';
+        if (method === 'KO' || method === 'TKO' || method.startsWith('KO') || method.startsWith('TKO')) method = 'KO/TKO';
         const round = main.round ? ` · R${main.round}` : '';
         resultLine = `<strong>${wLast}</strong> def. ${lLast} · ${method}${round}`;
       } else {
-        const a = lastName(main.a).toUpperCase(), b = lastName(main.b).toUpperCase();
-        resultLine = `${a} vs ${b}`;
+        resultLine = `${lastName(main.a).toUpperCase()} vs ${lastName(main.b).toUpperCase()}`;
       }
 
-      const card = document.createElement('div');
-      card.className = 'ev-rc';
+      const card = document.createElement('a');
+      card.href = `events.html?id=${encodeURIComponent(ev.id)}`;
+      card.className = `ev-card ${cls} is-completed`;
+      card.setAttribute('aria-label', `Review ${ev.name}`);
+      card.dataset.eventId = ev.id;
 
-      const posterHtml = ev.poster
-        ? `<img class="ev-rc-poster" src="${esc(ev.poster)}" alt="${esc(ev.name)}" loading="lazy" onerror="this.outerHTML='<div class=ev-rc-poster-placeholder>🥊</div>'">`
-        : `<div class="ev-rc-poster-placeholder">🥊</div>`;
+      const posterEl = ev.poster
+        ? `<img class="ev-card-poster" src="${esc(ev.poster)}" alt="${esc(ev.name)}" loading="lazy" onerror="this.style.display='none'">`
+        : `<div class="ev-card-placeholder"></div>`;
 
-      const eventEncId = encodeURIComponent(ev.id);
       card.innerHTML = `
-        ${posterHtml}
-        <div class="ev-rc-info">
-          <div class="ev-rc-badge">${isPPV ? 'PPV · FINAL' : 'Fight Night · Final'}</div>
-          <div class="ev-rc-name">${esc(label)}</div>
-          <div class="ev-rc-result">${resultLine}</div>
+        ${posterEl}
+        <div class="ev-card-overlay"></div>
+        <div class="ev-card-bar"></div>
+        <div class="ev-card-content">
+          <div class="ev-card-top">
+            <span class="ev-completed-badge">FINAL</span>
+            <span class="ev-card-name">${esc(label)}</span>
+          </div>
+          <div class="ev-card-matchup" style="font-size:clamp(1.05rem,2.2vw,1.5rem)">${lastName(main.a).toUpperCase()} vs ${lastName(main.b).toUpperCase()}</div>
+          <div class="ev-result-line">${resultLine}</div>
+          <div class="ev-result-cta">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M9 12l2 2 4-4"/><rect x="3" y="3" width="18" height="18" rx="3"/></svg>
+            Review Results
+          </div>
         </div>
-        <div class="ev-rc-btns">
-          <button class="ev-rc-btn ev-rc-btn-review" type="button">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 10h8M8 14h5"/></svg>
-            Review Card
-          </button>
-          <a class="ev-rc-btn ev-rc-btn-picks" href="picks.html?id=${eventEncId}">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><rect x="3" y="3" width="18" height="18" rx="3"/></svg>
-            Your Picks
-          </a>
+        <div class="ev-card-meta">
+          <div class="ev-card-date">${esc(ev.date || '')}</div>
+          ${ev.location ? `<div class="ev-card-location">${esc(ev.location)}</div>` : ''}
         </div>`;
 
-      card.querySelector('.ev-rc-btn-review').addEventListener('click', function(e) {
+      card.addEventListener('click', function(e) {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
         e.preventDefault();
-        openOverlay(ev);
+        card.classList.remove('ev-press'); void card.offsetWidth; card.classList.add('ev-press');
+        setTimeout(function() { openOverlay(ev); }, 90);
       });
 
-      return card;
+      const wrap = document.createElement('div');
+      wrap.className = 'ev-card-wrap';
+      wrap.appendChild(card);
+      return wrap;
     }
 
     /* ── BUILD EVENT LIST CARD ── */
@@ -1883,18 +1871,12 @@
           fresh.addEventListener('click', () => openPicksHub(upcoming));
         }
 
-        // Recent Results portal — last 3 completed events, newest first
+        // Completed events — last 3, newest first — appended after upcoming
         const completed = all
           .filter(e => e.status === 'completed')
           .sort((a, b) => new Date(b.isoDate) - new Date(a.isoDate))
           .slice(0, 3);
-        const recentSection = document.getElementById('evRecentSection');
-        const recentList    = document.getElementById('evRecentList');
-        if (completed.length && recentSection && recentList) {
-          recentList.innerHTML = '';
-          completed.forEach(e => { const c = buildRecentCard(e); if (c) recentList.appendChild(c); });
-          recentSection.style.display = '';
-        }
+        completed.forEach(e => { const c = buildCompletedCard(e); if (c) list.appendChild(c); });
 
         const p=new URLSearchParams(location.search), id=p.get('id');
         if(id){
