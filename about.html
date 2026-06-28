@@ -10,67 +10,125 @@
   <script src="theme.js?v=2.7"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About MMA Bridge — The UFC Fan Community Hub</title>
-  <meta name="description" content="MMA Bridge is the home for UFC fans — fight picks, event previews, community rankings, P4P votes, fight reviews, and more.">
+  <title>About MMA Bridge — Built for Fans Who Watch the Fights</title>
+  <meta name="description" content="MMA Bridge is built by a fan, for fans who actually watch the fights. Pick winners, climb tiers, run a league, ask Lucas anything.">
   <link rel="canonical" href="https://mmabridge.com/about.html">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=9.2" />
+  <link rel="stylesheet" href="style.css?v=9.3" />
   <style>
-    .ab-page { max-width: 620px; margin: 0 auto; padding: 72px 24px 120px; }
+    .ab-page { max-width: 640px; margin: 0 auto; padding: 72px 24px 120px; }
+
+    /* ── Hero ── */
     .ab-eyebrow { font-family:'Montserrat',sans-serif;font-size:.58rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:rgba(240,180,41,.7);margin-bottom:14px; }
-    .ab-title { font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(2rem,5vw,3rem);text-transform:uppercase;letter-spacing:.04em;color:#fff;line-height:1.1;margin:0 0 14px; }
+    .ab-title { font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(2rem,5vw,3rem);text-transform:uppercase;letter-spacing:.04em;color:#fff;line-height:1.1;margin:0 0 10px; }
     .ab-title span { color:#f0b429; }
-    .ab-divider { width:40px;height:2px;background:linear-gradient(90deg,#f0b429,transparent);border-radius:2px;margin-bottom:30px; }
-    .ab-desc { font-family:'Inter',sans-serif;font-size:1rem;line-height:1.75;color:rgba(255,255,255,.55);margin-bottom:40px; }
-    .ab-desc strong { color:rgba(255,255,255,.85); }
+    .ab-tagline { font-family:'Inter',sans-serif;font-size:1.05rem;font-weight:500;color:rgba(255,255,255,.45);margin:0 0 32px;letter-spacing:.01em; }
+    .ab-divider { width:40px;height:2px;background:linear-gradient(90deg,#f0b429,transparent);border-radius:2px;margin-bottom:32px; }
 
-    /* Pages list */
-    .ab-pages { display:flex;flex-direction:column;gap:10px;margin-bottom:48px; }
-    .ab-page-row { display:flex;align-items:flex-start;gap:14px;padding:14px 18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px; }
-    .ab-page-name { font-family:'Montserrat',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:3px; }
-    .ab-page-desc { font-family:'Inter',sans-serif;font-size:.8rem;color:rgba(255,255,255,.38);line-height:1.55; }
-    a.ab-page-row { text-decoration:none;transition:border-color .15s,background .15s; }
-    a.ab-page-row:hover { background:rgba(240,180,41,.05);border-color:rgba(240,180,41,.2); }
+    /* ── Manifesto ── */
+    .ab-manifesto { font-family:'Inter',sans-serif;font-size:.95rem;line-height:1.8;color:rgba(255,255,255,.5);margin-bottom:48px; }
+    .ab-manifesto strong { color:rgba(255,255,255,.82);font-weight:600; }
 
-    /* Contact / disclaimer */
-    .ab-contact { padding:24px 28px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);border-radius:14px; }
-    .ab-contact-label { font-family:'Montserrat',sans-serif;font-size:.55rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:10px; }
-    .ab-contact-text { font-family:'Inter',sans-serif;font-size:.88rem;color:rgba(255,255,255,.38);line-height:1.7; }
+    /* ── What's here ── */
+    .ab-what-eyebrow { font-family:'Montserrat',sans-serif;font-size:.52rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,180,41,.5);margin-bottom:12px; }
+    .ab-what-text { font-family:'Inter',sans-serif;font-size:.92rem;line-height:1.78;color:rgba(255,255,255,.48);margin-bottom:56px; }
+    .ab-what-text strong { color:rgba(255,255,255,.78);font-weight:600; }
+
+    /* ── Founder section ── */
+    .ab-founder-section { margin-bottom: 56px; }
+    .ab-founder-eyebrow { font-family:'Montserrat',sans-serif;font-size:.52rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,180,41,.5);margin-bottom:20px; }
+    .ab-founder-card {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      background: rgba(255,255,255,.025);
+      border: 1px solid rgba(240,180,41,.15);
+      border-radius: 20px;
+      padding: 28px 32px;
+    }
+    .ab-founder-photo-link {
+      flex-shrink: 0;
+      display: block;
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid rgba(240,180,41,.3);
+      box-shadow: 0 0 0 0 rgba(240,180,41,0);
+      transition: transform .22s cubic-bezier(.34,1.56,.64,1), box-shadow .22s ease;
+      text-decoration: none;
+    }
+    .ab-founder-photo-link:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 0 5px rgba(240,180,41,.22), 0 8px 28px rgba(0,0,0,.5);
+    }
+    .ab-founder-photo { width:100%;height:100%;object-fit:cover;display:block; }
+    .ab-founder-info { flex: 1; }
+    .ab-founder-name-link { text-decoration: none; }
+    .ab-founder-name {
+      font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.05rem;
+      color:#fff;margin:0 0 4px;letter-spacing:.01em;
+      transition: color .15s;
+    }
+    .ab-founder-name-link:hover .ab-founder-name { color:#f0b429; }
+    .ab-founder-role { font-family:'Montserrat',sans-serif;font-size:.52rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:rgba(240,180,41,.65);margin-bottom:5px; }
+    .ab-founder-location { font-family:'Inter',sans-serif;font-size:.78rem;color:rgba(255,255,255,.32);margin-bottom:14px; }
+    .ab-founder-li {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family:'Inter',sans-serif;font-size:.72rem;font-weight:500;
+      color:rgba(255,255,255,.3);text-decoration:none;
+      transition: color .15s;
+    }
+    .ab-founder-li:hover { color:#f0b429; }
+    .ab-founder-li svg { width:14px;height:14px;flex-shrink:0; }
+
+    /* mobile founder card */
+    @media(max-width:480px){
+      .ab-founder-card { flex-direction:column;align-items:center;text-align:center;padding:24px 20px; }
+      .ab-founder-location { margin-bottom:12px; }
+    }
+
+    /* ── Contact ── */
+    .ab-contact { padding:22px 26px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:14px;margin-bottom:48px; }
+    .ab-contact-label { font-family:'Montserrat',sans-serif;font-size:.52rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:10px; }
+    .ab-contact-text { font-family:'Inter',sans-serif;font-size:.86rem;color:rgba(255,255,255,.38);line-height:1.7; }
     .ab-contact-text a { color:#f0b429;text-decoration:none; }
     .ab-contact-text a:hover { text-decoration:underline; }
 
-    /* light mode */
-    body.light-mode .ab-title { color:#0a0a0f; }
-    body.light-mode .ab-title span { color:#007a99; }
-    body.light-mode .ab-eyebrow { color:#007a99; }
-    body.light-mode .ab-desc { color:rgba(0,0,0,.55); }
-    body.light-mode .ab-page-row { background:rgba(0,0,0,.03);border-color:rgba(0,0,0,.08); }
-    body.light-mode .ab-page-name { color:rgba(0,0,0,.75); }
-    body.light-mode .ab-page-desc { color:rgba(0,0,0,.42); }
-    body.light-mode .ab-contact { background:rgba(0,0,0,.02);border-color:rgba(0,0,0,.07); }
-    body.light-mode .ab-contact-label { color:rgba(0,0,0,.28); }
-    body.light-mode .ab-contact-text { color:rgba(0,0,0,.4); }
-    body.light-mode .ab-contact-text a { color:#b8820a; }
-
-    /* Privacy policy */
-    .ab-privacy { margin-top: 48px; }
-    .ab-privacy-eyebrow { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:28px; }
-    .ab-pp-section { margin-bottom:28px; }
-    .ab-pp-h { font-family:'Montserrat',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:8px; }
-    .ab-pp-p { font-family:'Inter',sans-serif;font-size:.84rem;line-height:1.72;color:rgba(255,255,255,.38);margin:0 0 8px; }
+    /* ── Privacy ── */
+    .ab-pp-divider { width:100%;height:1px;background:rgba(255,255,255,.06);margin:8px 0 40px; }
+    .ab-privacy-eyebrow { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.2);margin-bottom:24px; }
+    .ab-pp-updated { font-family:'Inter',sans-serif;font-size:.72rem;color:rgba(255,255,255,.18);margin-bottom:28px; }
+    .ab-pp-section { margin-bottom:26px; }
+    .ab-pp-h { font-family:'Montserrat',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:8px; }
+    .ab-pp-p { font-family:'Inter',sans-serif;font-size:.83rem;line-height:1.72;color:rgba(255,255,255,.36);margin:0 0 8px; }
     .ab-pp-p a { color:#f0b429;text-decoration:none; }
     .ab-pp-p a:hover { text-decoration:underline; }
-    .ab-pp-p strong { color:rgba(255,255,255,.6);font-weight:600; }
-    .ab-pp-list { font-family:'Inter',sans-serif;font-size:.84rem;line-height:1.72;color:rgba(255,255,255,.38);padding-left:18px;margin:0 0 8px; }
+    .ab-pp-p strong { color:rgba(255,255,255,.58);font-weight:600; }
+    .ab-pp-list { font-family:'Inter',sans-serif;font-size:.83rem;line-height:1.72;color:rgba(255,255,255,.36);padding-left:18px;margin:0 0 8px; }
     .ab-pp-list li { margin-bottom:4px; }
-    .ab-pp-updated { font-family:'Inter',sans-serif;font-size:.72rem;color:rgba(255,255,255,.18);margin-bottom:32px; }
-    .ab-pp-divider { width:100%;height:1px;background:rgba(255,255,255,.06);margin:40px 0; }
-    body.light-mode .ab-privacy-eyebrow { color:rgba(0,0,0,.22); }
+
+    /* ── Light mode ── */
+    body.light-mode .ab-title { color:#0a0a0f; }
+    body.light-mode .ab-title span { color:#007a99; }
+    body.light-mode .ab-eyebrow,body.light-mode .ab-what-eyebrow,body.light-mode .ab-founder-eyebrow { color:#007a99; }
+    body.light-mode .ab-tagline { color:rgba(0,0,0,.4); }
+    body.light-mode .ab-manifesto,body.light-mode .ab-what-text { color:rgba(0,0,0,.5); }
+    body.light-mode .ab-manifesto strong,body.light-mode .ab-what-text strong { color:rgba(0,0,0,.75); }
+    body.light-mode .ab-founder-card { background:rgba(0,0,0,.03);border-color:rgba(0,120,160,.15); }
+    body.light-mode .ab-founder-name { color:#0a0a0f; }
+    body.light-mode .ab-founder-role { color:#007a99; }
+    body.light-mode .ab-founder-location { color:rgba(0,0,0,.38); }
+    body.light-mode .ab-founder-li { color:rgba(0,0,0,.35); }
+    body.light-mode .ab-contact { background:rgba(0,0,0,.02);border-color:rgba(0,0,0,.07); }
+    body.light-mode .ab-contact-label { color:rgba(0,0,0,.25); }
+    body.light-mode .ab-contact-text { color:rgba(0,0,0,.42); }
+    body.light-mode .ab-contact-text a { color:#b8820a; }
+    body.light-mode .ab-privacy-eyebrow { color:rgba(0,0,0,.2); }
     body.light-mode .ab-pp-h { color:rgba(0,0,0,.5); }
-    body.light-mode .ab-pp-p { color:rgba(0,0,0,.4); }
-    body.light-mode .ab-pp-list { color:rgba(0,0,0,.4); }
-    body.light-mode .ab-pp-updated { color:rgba(0,0,0,.2); }
+    body.light-mode .ab-pp-p,body.light-mode .ab-pp-list { color:rgba(0,0,0,.4); }
+    body.light-mode .ab-pp-p strong { color:rgba(0,0,0,.6); }
     body.light-mode .ab-pp-divider { background:rgba(0,0,0,.07); }
+    body.light-mode .ab-pp-updated { color:rgba(0,0,0,.2); }
   </style>
 </head>
 <body>
@@ -121,61 +179,59 @@
   </div>
 
   <div class="ab-page">
+
+    <!-- Hero -->
     <div class="ab-eyebrow">About</div>
     <h1 class="ab-title">MMA <span>Bridge</span></h1>
-    <p class="ab-desc">MMA Bridge is built for UFC fans who take the sport seriously. Preview every upcoming card, make fight predictions, track your accuracy across the full season, and compete against friends in a private group — all in one place.</p>
+    <p class="ab-tagline">Built by a fan, for fans who actually watch the fights.</p>
+    <div class="ab-divider"></div>
 
-    <div class="ab-pages">
-      <a class="ab-page-row" href="events.html">
-        <div>
-          <div class="ab-page-name">Upcoming Events</div>
-          <div class="ab-page-desc">Every scheduled UFC card — full fight listings, event countdowns, hype ratings, and add-to-calendar links.</div>
+    <!-- Manifesto -->
+    <p class="ab-manifesto">
+      Every other option was built for someone else. <strong>Tapology</strong> is a great stats database — deep and useful, but clinical. Built for researchers, not fans. <strong>ESPN</strong> is a broadcast network that treats you like a casual viewer. Neither gives you a real place to pick fights, compete on it, argue rankings, and actually feel something about the sport.<br><br>
+      There was nothing built for the fan who watches every card, has strong opinions on every matchup, and wants to back those opinions up. So this got built.
+    </p>
+
+    <!-- What's here -->
+    <div class="ab-what-eyebrow">What's here</div>
+    <p class="ab-what-text">
+      <strong>Pick fight winners</strong> before every card locks — winner, method, round. Climb from Rookie to Legend based on pure accuracy. <strong>Run a private pick'em league</strong> with your crew all season — standings, head-to-head, the whole thing. Check <strong>P4P rankings</strong> and cast your vote. Read and write <strong>event reviews</strong> after fight night. And ask <strong>Lucas</strong> — our MMA AI — anything about any fighter, any event, any result. That's MMA Bridge.
+    </p>
+
+    <!-- Meet the Founder -->
+    <div class="ab-founder-section">
+      <div class="ab-founder-eyebrow">The Founder</div>
+      <div class="ab-founder-card">
+        <a class="ab-founder-photo-link" href="https://www.linkedin.com/in/harshith-bandi-35234b2b9" target="_blank" rel="noopener" aria-label="Harshith Bandi on LinkedIn">
+          <img class="ab-founder-photo" src="images/harshith.png" alt="Harshith Bandi">
+        </a>
+        <div class="ab-founder-info">
+          <a class="ab-founder-name-link" href="https://www.linkedin.com/in/harshith-bandi-35234b2b9" target="_blank" rel="noopener">
+            <div class="ab-founder-name">Harshith Bandi</div>
+          </a>
+          <div class="ab-founder-role">Founder &amp; Developer</div>
+          <div class="ab-founder-location">San Diego, CA</div>
+          <a class="ab-founder-li" href="https://www.linkedin.com/in/harshith-bandi-35234b2b9" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
         </div>
-      </a>
-      <a class="ab-page-row" href="picks.html">
-        <div>
-          <div class="ab-page-name">Fight Forecast</div>
-          <div class="ab-page-desc">Pick winners and methods before every event locks. Track your accuracy over the season and climb through eight tiers — from Rookie to Legend.</div>
-        </div>
-      </a>
-      <a class="ab-page-row" href="leaderboard.html">
-        <div>
-          <div class="ab-page-name">Leaderboard &amp; Groups</div>
-          <div class="ab-page-desc">Private season-long leagues with your friends. Global community standings, head-to-head challenges, a shared group wall, and a season recap at the end.</div>
-        </div>
-      </a>
-      <a class="ab-page-row" href="pfp.html">
-        <div>
-          <div class="ab-page-name">P4P Rankings</div>
-          <div class="ab-page-desc">Community pound-for-pound rankings. Cast your vote and see how the MMA Bridge fanbase ranks the best fighters in the world.</div>
-        </div>
-      </a>
-      <a class="ab-page-row" href="reviews.html">
-        <div>
-          <div class="ab-page-name">Fight Reviews</div>
-          <div class="ab-page-desc">Write and read community reviews of past events and fights. Rate cards, share your takes, and see how others scored the night.</div>
-        </div>
-      </a>
-      <a class="ab-page-row" href="lucas.html">
-        <div>
-          <div class="ab-page-name">Lucas Bot</div>
-          <div class="ab-page-desc">AI assistant built for MMA. Ask about fighter records, matchup history, event details, or get a breakdown before fight night.</div>
-        </div>
-      </a>
+      </div>
     </div>
 
+    <!-- Contact -->
     <div class="ab-contact">
       <div class="ab-contact-label">Contact &amp; Feedback</div>
       <div class="ab-contact-text">
         Questions, bug reports, suggestions, or general feedback — reach out at <a href="mailto:contact@mmabridge.com">contact@mmabridge.com</a>. We read and respond to everything.<br><br>
-        If you have concerns about any content on this site — images, media, or otherwise — please email us before taking any other action. We will respond promptly and resolve it.
+        If you have concerns about any content on this site — images, media, or otherwise — please email us before taking any other action. We'll respond promptly and resolve it.
       </div>
     </div>
 
     <div class="ab-pp-divider"></div>
 
-    <!-- PRIVACY POLICY -->
-    <div class="ab-privacy" id="privacy">
+    <!-- Privacy Policy -->
+    <div id="privacy">
       <div class="ab-privacy-eyebrow">Privacy Policy</div>
       <div class="ab-pp-updated">Last updated: June 2026</div>
 
@@ -272,5 +328,6 @@
   <script src="widget.js"></script>
   <script src="notifications.js?v=2.4"></script>
   <script src="push.js?v=1.2"></script>
+  <script src="chat.js?v=2.4"></script>
 </body>
 </html>
