@@ -267,7 +267,7 @@
     elBubbleText = document.getElementById('trBubbleText');
     elDots       = document.getElementById('trDots');
     elNextBtn    = document.getElementById('trNext');
-    elNextBtn.onclick = advance;
+    elNextBtn.onclick = null; // wired per-step in doStep
     document.getElementById('trX').onclick = endTour;
   }
 
