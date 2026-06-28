@@ -11867,15 +11867,16 @@ body.light-mode a[href]:not(.btn):not(.nav-link):not(.mbn-item):hover { color: #
 /* ══════════════════════════════════════════════
    LUCAS NUDGE — floating bubble near chat widget
 ══════════════════════════════════════════════ */
+/* Speech bubble positioned LEFT of the Lucas chat button */
 .lnx-wrap {
   position: fixed;
-  bottom: 108px;
-  right: 22px;
+  bottom: 16px;
+  right: 90px;
   z-index: 1100;
-  width: 220px;
+  width: 196px;
   opacity: 0;
   pointer-events: none;
-  transform: translateY(10px) scale(0.96);
+  transform: translateX(10px) scale(0.97);
   transition: opacity 0.35s cubic-bezier(.22,1,.36,1), transform 0.35s cubic-bezier(.22,1,.36,1);
   user-select: none;
   touch-action: none;
@@ -11883,24 +11884,49 @@ body.light-mode a[href]:not(.btn):not(.nav-link):not(.mbn-item):hover { color: #
 .lnx-wrap.lnx-visible {
   opacity: 1;
   pointer-events: auto;
-  transform: translateY(0) scale(1);
+  transform: translateX(0) scale(1);
+  animation: lnxFloat 5s ease-in-out infinite;
 }
-.lnx-wrap.lnx-dragging { transition: none; cursor: grabbing; }
+.lnx-wrap.lnx-dragging { transition: none; cursor: grabbing; animation: none !important; }
 
 /* Main card container */
 .lnx-card {
   position: relative;
-  background: rgba(6,6,10,0.88);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(240,180,41,0.32);
+  background: rgba(6,6,10,0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(240,180,41,0.35);
   border-radius: 14px;
-  padding: 14px 36px 14px 16px;
+  padding: 12px 30px 12px 14px;
   box-shadow:
-    0 0 0 1px rgba(240,180,41,0.06) inset,
-    0 4px 32px rgba(0,0,0,0.55),
-    0 0 24px rgba(240,180,41,0.07);
+    0 0 0 1px rgba(240,180,41,0.07) inset,
+    0 4px 32px rgba(0,0,0,0.6),
+    0 0 24px rgba(240,180,41,0.08);
   cursor: grab;
+}
+/* CSS speech bubble arrow pointing RIGHT toward Lucas button */
+.lnx-card::after {
+  content: '';
+  position: absolute;
+  right: -9px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0; height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 9px solid rgba(240,180,41,0.35);
+}
+.lnx-card::before {
+  content: '';
+  position: absolute;
+  right: -7px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  width: 0; height: 0;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 8px solid rgba(6,6,10,0.92);
 }
 .lnx-card:active { cursor: grabbing; }
 
@@ -11943,30 +11969,21 @@ body.light-mode a[href]:not(.btn):not(.nav-link):not(.mbn-item):hover { color: #
 }
 .lnx-close:hover { color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.07); }
 
-/* Gold SVG arrow pointing down to Lucas button */
-.lnx-arrow {
-  position: absolute;
-  bottom: -52px;
-  right: 20px;
-  width: 52px;
-  height: 52px;
-  pointer-events: none;
-}
-
 /* Float animation */
 @keyframes lnxFloat {
   0%,100% { transform: translateY(0); }
-  50%      { transform: translateY(-5px); }
+  50%      { transform: translateY(-4px); }
 }
-.lnx-wrap.lnx-visible { animation: lnxFloat 5s ease-in-out infinite; }
 .lnx-wrap.lnx-visible.lnx-dragging { animation: none; }
 
 /* Light mode */
 body.light-mode .lnx-card {
-  background: rgba(255,255,252,0.92);
+  background: rgba(255,255,252,0.95);
   border-color: rgba(180,130,10,0.3);
   box-shadow: 0 4px 28px rgba(0,0,0,0.15), 0 0 20px rgba(180,130,10,0.06);
 }
+body.light-mode .lnx-card::before { border-left-color: rgba(255,255,252,0.95); }
+body.light-mode .lnx-card::after  { border-left-color: rgba(180,130,10,0.3); }
 body.light-mode .lnx-text { color: rgba(0,0,0,0.65); }
 body.light-mode .lnx-eyebrow { color: rgba(160,110,0,0.55); }
 body.light-mode .lnx-close { color: rgba(0,0,0,0.2); }

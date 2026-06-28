@@ -112,7 +112,7 @@
   ]
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=9.2" />
+  <link rel="stylesheet" href="style.css?v=9.3" />
 
   <style>
     /* ── KEYFRAMES ── */
@@ -795,23 +795,8 @@
     .perf-no-group { text-align:center;padding:28px 0;font-family:'Inter',sans-serif;font-size:.82rem;color:rgba(255,255,255,.3); }
     .perf-no-group a { color:#c8960c;text-decoration:none; }
 
-    /* ── STICKY LEADERBOARD BUTTON ── */
-    .ev-lb-sticky {
-      position:fixed;bottom:24px;right:24px;z-index:4000;
-      display:flex;align-items:center;gap:8px;
-      background:rgba(200,150,12,.18);border:1.5px solid rgba(200,150,12,.5);
-      border-radius:50px;padding:12px 20px;
-      font-family:'Montserrat',sans-serif;font-size:.65rem;font-weight:800;
-      letter-spacing:.08em;text-transform:uppercase;color:#c8960c;
-      text-decoration:none;
-      box-shadow:0 4px 24px rgba(0,0,0,.5),0 0 0 1px rgba(200,150,12,.1);
-      backdrop-filter:blur(12px);
-      transition:background .15s,transform .15s;
-    }
-    .ev-lb-sticky:hover { background:rgba(200,150,12,.3);transform:translateY(-2px); }
-    @media(max-width:480px) { .ev-lb-sticky { bottom:16px;right:16px;padding:10px 16px;font-size:.6rem; } }
     .ev-help-btn {
-      position:fixed;bottom:76px;right:24px;z-index:4000;
+      position:fixed;bottom:28px;left:24px;z-index:4000;
       width:40px;height:40px;border-radius:50%;
       display:flex;align-items:center;justify-content:center;
       font-family:'Montserrat',sans-serif;font-size:.9rem;font-weight:900;
@@ -823,7 +808,7 @@
       transition:background .15s,transform .15s;
     }
     .ev-help-btn:hover { background:rgba(240,180,41,.18);transform:translateY(-2px); }
-    @media(max-width:480px) { .ev-help-btn { bottom:64px;right:16px;width:36px;height:36px;font-size:.82rem; } }
+    @media(max-width:480px) { .ev-help-btn { bottom:20px;left:16px;width:36px;height:36px;font-size:.82rem; } }
 
     /* ── ADD TO CALENDAR ── */
     .ov-cal-wrap { position:relative; }
@@ -2136,7 +2121,7 @@
   <script src="search.js"></script>
   <script src="countdown.js?v=1.0"></script>
   <script src="live.js?v=1.0"></script>
-  <script src="chat.js?v=2.3"></script>
+  <script src="chat.js?v=2.4"></script>
   <script src="premium.js?v=3.4"></script>
   <script src="widget.js"></script>
   <script>
@@ -2224,12 +2209,6 @@
 })();
 </script>
 
-<!-- Sticky Leaderboard Button -->
-<a href="leaderboard.html" class="ev-lb-sticky" title="View Leaderboard">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="4" height="20"/><rect x="9" y="8" width="4" height="14"/><rect x="16" y="5" width="4" height="17"/></svg>
-  Leaderboard
-</a>
-
 <!-- Sticky Help Button -->
 <a href="about.html" class="ev-help-btn" title="How it works">?</a>
 
@@ -2241,10 +2220,6 @@
     <span class="lnx-text">Confused about a fight or who to pick? I got you.</span>
     <button class="lnx-close" id="lucasNudgeClose" aria-label="Dismiss">✕</button>
   </div>
-  <svg class="lnx-arrow" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M26 4 C26 4, 38 14, 38 28 C38 38, 32 44, 26 48" stroke="#f0b429" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.75"/>
-    <path d="M20 43 L26 48 L30 42" stroke="#f0b429" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.75"/>
-  </svg>
 </div>
 <script>
 (function(){
