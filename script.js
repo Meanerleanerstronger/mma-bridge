@@ -21,12 +21,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     // 4-state hero resolution: results window → today → upcoming → past
     const resolved = resolveHeroEvent(all, now);
     if (resolved) {
-      renderHero(resolved.ev, resolved.mode, false);
-      // Async My Picks check for results mode — re-render if user has picks
-      if (resolved.mode === 'results') {
-        userHasPicks(resolved.ev.id).then(has => {
-          if (has) renderHero(resolved.ev, resolved.mode, true);
-        });
+      if (resolved.mode === 'split') {
+        renderHeroSplit(resolved.completed, resolved.ev);
+      } else {
+        renderHero(resolved.ev, resolved.mode, false);
+        if (resolved.mode === 'completed') {
+          userHasPicks(resolved.ev.id).then(has => {
+            if (has) renderHero(resolved.ev, resolved.mode, true);
+          });
+        }
       }
     }
 
@@ -45,32 +48,61 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupSearch();
 });
 
-// ── Hero resolution (4-state) ─────────────────
+// ── Hero resolution (dynamic 5-state formula) ─────────────────
+// TODAY → TONIGHT
+// next event ≤7 days + before Wednesday 11:59pm → SPLIT SCREEN
+// next event ≤7 days + after Wednesday 11:59pm → single UPCOMING
+// next event >7 days → single COMPLETED
 function resolveHeroEvent(all, now) {
-  const todayStr  = now.toISOString().slice(0, 10);
-  const cutoffStr = new Date(now - 2 * 86400000).toISOString().slice(0, 10);
+  const todayStr = now.toISOString().slice(0, 10);
 
-  // 1. Results window: completed event with winner data, within 48 h
-  const recentWithResults = all
-    .filter(e => e.isoDate >= cutoffStr && e.isoDate <= todayStr && (e.mainCard || []).some(f => f.winner))
-    .sort((a, b) => new Date(b.isoDate) - new Date(a.isoDate))[0];
-  if (recentWithResults) return { ev: recentWithResults, mode: 'results' };
-
-  // 2. Today's event, no results yet — show Watch Live
-  const todayFight = all.find(e => e.isoDate === todayStr && !(e.mainCard || []).some(f => f.winner));
+  // 1. TODAY — event happening today, not yet completed
+  const todayFight = all.find(e => e.isoDate === todayStr && e.status !== 'completed');
   if (todayFight) return { ev: todayFight, mode: 'today' };
 
-  // 3. Next upcoming
+  // Find next upcoming event (future dates only)
   const next = all
-    .filter(e => e.isoDate >= todayStr && e.status !== 'completed')
-    .sort((a, b) => new Date(a.isoDate) - new Date(b.isoDate))[0];
-  if (next) return { ev: next, mode: 'upcoming' };
+    .filter(e => e.isoDate > todayStr && e.status !== 'completed')
+    .sort((a, b) => a.isoDate.localeCompare(b.isoDate))[0];
 
-  // 4. Fallback: most recent past event
-  const mostRecent = all.filter(e => e.status === 'completed').sort((a, b) => new Date(b.isoDate) - new Date(a.isoDate))[0];
-  if (mostRecent) return { ev: mostRecent, mode: 'results' };
+  // Most recent completed event
+  const lastCompleted = all
+    .filter(e => e.status === 'completed')
+    .sort((a, b) => b.isoDate.localeCompare(a.isoDate))[0];
 
-  return null;
+  if (!next) {
+    // No upcoming events — show completed
+    return lastCompleted ? { ev: lastCompleted, mode: 'completed' } : null;
+  }
+
+  const eventDate = new Date(next.isoDate + 'T20:00:00');
+  const daysUntil = (eventDate - now) / 86400000;
+
+  if (daysUntil > 7) {
+    // >7 days away — show most recent completed
+    return lastCompleted ? { ev: lastCompleted, mode: 'completed' } : { ev: next, mode: 'upcoming' };
+  }
+
+  // ≤7 days away — check Wednesday 11:59pm cutoff
+  const wednesdayCutoff = getWednesdayCutoff(eventDate);
+
+  if (now <= wednesdayCutoff && lastCompleted) {
+    // Before Wednesday midnight — SPLIT SCREEN
+    return { mode: 'split', ev: next, completed: lastCompleted };
+  } else {
+    // After Wednesday midnight — single upcoming only
+    return { mode: 'upcoming', ev: next };
+  }
+}
+
+// Wednesday 11:59:59pm of the same calendar week as the event
+function getWednesdayCutoff(eventDate) {
+  const day = eventDate.getDay(); // 0=Sun, 3=Wed, 6=Sat
+  const daysFromWed = (day - 3 + 7) % 7;
+  const wed = new Date(eventDate);
+  wed.setDate(eventDate.getDate() - daysFromWed);
+  wed.setHours(23, 59, 59, 0);
+  return wed;
 }
 
 // Check if logged-in user has picks for an event (async)
@@ -105,7 +137,7 @@ function renderHero(ev, mode, hasPicks) {
   // Badge / type label
   if (mode === 'today') {
     if (type) type.innerHTML = '<span style="display:inline-flex;align-items:center;gap:7px;"><span style="width:8px;height:8px;background:#ff2020;border-radius:50%;box-shadow:0 0 8px 2px rgba(255,30,30,0.7);animation:pulse 1.5s infinite;flex-shrink:0;"></span>TONIGHT · LIVE</span>';
-  } else if (mode === 'results') {
+  } else if (mode === 'completed' || mode === 'results') {
     if (type) type.textContent = isPPV ? 'PPV Event — Results' : 'Fight Night — Results';
   } else {
     if (type) type.textContent = isPPV ? 'Next PPV Event' : 'Next Fight Night';
@@ -141,7 +173,7 @@ function renderHero(ev, mode, hasPicks) {
     btn.style.setProperty('text-shadow', '0 1px 4px rgba(0,0,0,0.5)', 'important');
     btn.style.setProperty('box-shadow', '0 0 28px rgba(255,30,30,0.45), inset 0 1px 0 rgba(255,120,120,0.2)', 'important');
     btn.style.setProperty('border', '1px solid rgba(255,60,60,0.4)', 'important');
-  } else if (mode === 'results') {
+  } else if (mode === 'completed' || mode === 'results') {
     btn.textContent = 'Review the Card →';
     btn.href = `events.html?id=${eventId}`;
     btn.target = '';
@@ -171,6 +203,52 @@ function renderHero(ev, mode, hasPicks) {
     btn.style.setProperty('box-shadow', '0 0 28px rgba(255,120,0,0.45), inset 0 1px 0 rgba(255,180,80,0.2)', 'important');
     btn.style.setProperty('border', '1px solid rgba(255,140,0,0.5)', 'important');
   }
+}
+
+// ── Split Hero (completed left + upcoming right) ──────────────
+function renderHeroSplit(completedEv, upcomingEv) {
+  const section = document.getElementById('heroSection');
+  if (!section) return;
+
+  const cId  = encodeURIComponent(completedEv.id);
+  const uId  = encodeURIComponent(upcomingEv.id);
+  const cPPV = completedEv.type === 'PPV';
+  const uPPV = upcomingEv.type === 'PPV';
+
+  section.style.display    = 'flex';
+  section.style.minHeight  = '560px';
+  section.style.background = '#111';
+  section.style.position   = 'relative';
+  section.style.overflow   = 'hidden';
+
+  section.innerHTML = `
+    <!-- LEFT: Completed -->
+    <div style="flex:1;position:relative;overflow:hidden;">
+      <div style="position:absolute;inset:0;background-image:url('${completedEv.poster||''}');background-size:cover;background-position:center top;filter:brightness(0.62) saturate(0.75);"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(105deg,rgba(0,0,0,0.88) 0%,rgba(0,0,0,0.55) 50%,rgba(0,0,0,0.15) 100%);"></div>
+      <div style="position:relative;z-index:2;padding:80px 44px 56px;height:100%;box-sizing:border-box;display:flex;flex-direction:column;justify-content:flex-end;">
+        <div style="font-family:'Montserrat',sans-serif;font-size:0.6rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:10px;">${cPPV ? 'PPV Event' : 'Fight Night'} — Results</div>
+        <h2 style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(1.1rem,2.2vw,1.7rem);text-transform:uppercase;letter-spacing:0.04em;color:#fff;margin:0 0 8px;text-shadow:0 2px 20px rgba(0,0,0,0.8);line-height:1.15;">${completedEv.name||''}</h2>
+        <div style="font-family:'Inter',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.5);margin-bottom:22px;">${[completedEv.date,completedEv.location].filter(Boolean).join('  ·  ')}</div>
+        <a href="events.html?id=${cId}" class="hero-review-btn" style="align-self:flex-start;">Review the Card →</a>
+      </div>
+    </div>
+
+    <!-- DIVIDER -->
+    <div style="position:absolute;left:50%;top:8%;bottom:8%;width:1px;background:linear-gradient(to bottom,transparent 0%,rgba(240,180,41,0.45) 40%,rgba(240,180,41,0.45) 60%,transparent 100%);transform:translateX(-50%);z-index:10;pointer-events:none;"></div>
+
+    <!-- RIGHT: Upcoming -->
+    <div style="flex:1;position:relative;overflow:hidden;">
+      <div style="position:absolute;inset:0;background-image:url('${upcomingEv.poster||''}');background-size:cover;background-position:center top;filter:brightness(0.88) saturate(1.05);"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(to left,rgba(0,0,0,0.88) 0%,rgba(0,0,0,0.55) 50%,rgba(0,0,0,0.1) 100%);"></div>
+      <div style="position:relative;z-index:2;padding:80px 44px 56px;height:100%;box-sizing:border-box;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-end;text-align:right;">
+        <div style="font-family:'Montserrat',sans-serif;font-size:0.6rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:10px;">${uPPV ? 'Next PPV Event' : 'Next Fight Night'}</div>
+        <h2 style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(1.1rem,2.2vw,1.7rem);text-transform:uppercase;letter-spacing:0.04em;color:#fff;margin:0 0 8px;text-shadow:0 2px 20px rgba(0,0,0,0.8);line-height:1.15;">${upcomingEv.name||''}</h2>
+        <div style="font-family:'Inter',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.55);margin-bottom:22px;">${[upcomingEv.date,upcomingEv.location].filter(Boolean).join('  ·  ')}</div>
+        <a href="picks.html?id=${uId}" id="heroBtn" style="display:inline-block !important;background:linear-gradient(135deg,#7a3100 0%,#d46400 55%,#ff8c00 100%) !important;color:#fff !important;font-family:'Montserrat',sans-serif !important;font-weight:800 !important;font-size:0.78rem !important;letter-spacing:0.12em !important;text-transform:uppercase !important;padding:13px 28px !important;border-radius:6px !important;text-decoration:none !important;border:1px solid rgba(255,140,0,0.5) !important;box-shadow:0 0 28px rgba(255,120,0,0.45) !important;animation:heroBtnPulse 3s 1.2s ease infinite !important;transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1) !important;">Make Your Picks →</a>
+      </div>
+    </div>
+  `;
 }
 
 // ── Event Notifications ───────────────────────

@@ -53,6 +53,24 @@
       /* Today in MMA sidebar — full width below cards on mobile */
       .content-container { flex-direction: column; }
       .sidebar { width: 100%; box-sizing: border-box; margin-left: 0; }
+      /* Split hero: stack vertically on mobile, show upcoming on top */
+      #heroSection[style*="display: flex"],
+      #heroSection[style*="display:flex"] {
+        flex-direction: column-reverse !important;
+        min-height: 680px !important;
+      }
+      #heroSection[style*="display: flex"] > div:first-child,
+      #heroSection[style*="display:flex"] > div:first-child {
+        flex: 0 0 48% !important;
+      }
+      #heroSection[style*="display: flex"] > div:last-child,
+      #heroSection[style*="display:flex"] > div:last-child {
+        flex: 0 0 52% !important;
+      }
+      /* Hide divider on mobile split */
+      #heroSection > div[style*="left:50%"] { display: none !important; }
+      /* Right panel text left-align on mobile */
+      #heroSection > div:last-child > div { align-items: flex-start !important; text-align: left !important; }
     }
   </style>
 
@@ -390,7 +408,7 @@
   </div>
 
   <script src="notifications.js?v=2.4"></script>
-  <script type="module" src="script.js?v=2.9"></script>
+  <script type="module" src="script.js?v=3.0"></script>
 
   <script>
     window.addEventListener('scroll', () => {
