@@ -5166,15 +5166,25 @@ body.light-mode .ev-star-btn.starred {
   min-height: 32px;
   cursor: pointer;
 }
-.fc-head:hover { background: rgba(255,255,255,0.03); }
+.fc-head:hover { background: rgba(255,255,255,0.025); }
 .fc-head-h2h {
-  font-family: 'Montserrat', sans-serif; font-weight: 700;
-  font-size: 0.52rem; letter-spacing: 0.1em; text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif; font-weight: 800;
+  font-size: 0.52rem; letter-spacing: 0.12em; text-transform: uppercase;
   color: rgba(240,180,41,0.0);
-  transition: color 0.15s;
+  border: 1px solid rgba(240,180,41,0.0);
+  padding: 4px 10px; border-radius: 6px;
   white-space: nowrap;
+  transition: color 0.2s, border-color 0.2s, background 0.2s,
+              box-shadow 0.2s, transform 0.18s;
+  pointer-events: none; /* just a label, fc-head is the click target */
 }
-.fc-head:hover .fc-head-h2h { color: rgba(240,180,41,0.65); }
+.fc-head:hover .fc-head-h2h {
+  color: #f0b429;
+  border-color: rgba(240,180,41,0.35);
+  background: rgba(240,180,41,0.08);
+  box-shadow: 0 0 12px rgba(240,180,41,0.2), inset 0 0 8px rgba(240,180,41,0.06);
+  transform: scale(1.05);
+}
 .fc-head-left {
   display: flex; align-items: center; gap: 6px;
 }
