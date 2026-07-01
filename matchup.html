@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="images/mma-bridge-logo.png">
+  <link rel="shortcut icon" type="image/png" href="images/mma-bridge-logo.png">
+  <link rel="apple-touch-icon" href="images/mma-bridge-logo.png">
+  <meta name="theme-color" content="#f0b429">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <script src="theme.js?v=2.7"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fight Matchup | MMA Bridge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=9.3" />
+  <style>
+    body { background:#060608; min-height:100vh; }
+
+    /* ── BACK BAR ── */
+    .mu-back {
+      display:inline-flex; align-items:center; gap:7px;
+      font-family:'Montserrat',sans-serif; font-weight:700; font-size:.62rem;
+      letter-spacing:.12em; text-transform:uppercase;
+      color:rgba(255,255,255,.35); text-decoration:none;
+      padding:22px 24px 0; transition:color .18s;
+    }
+    .mu-back:hover { color:#f0b429; }
+    .mu-back svg { opacity:.5; }
+    .mu-back:hover svg { opacity:1; }
+
+    /* ── PAGE WRAPPER ── */
+    .mu-page { max-width:960px; margin:0 auto; padding:0 20px 100px; }
+
+    /* ── HERO HEADER ── */
+    .mu-header {
+      display:grid; grid-template-columns:1fr auto 1fr;
+      align-items:center; gap:16px;
+      padding:32px 0 0;
+    }
+    .mu-name {
+      font-family:'Barlow Condensed',sans-serif; font-weight:900;
+      font-size:clamp(1.6rem,4vw,2.8rem); text-transform:uppercase;
+      letter-spacing:.02em; line-height:1; cursor:pointer;
+      transition:color .18s;
+      text-decoration:none;
+    }
+    .mu-name-a { color:#f0b429; text-align:left; }
+    .mu-name-b { color:#60a5fa; text-align:right; }
+    .mu-name-a:hover { color:#ffd960; text-decoration:underline; text-underline-offset:4px; }
+    .mu-name-b:hover { color:#93c5fd; text-decoration:underline; text-underline-offset:4px; }
+    .mu-vs-block { text-align:center; flex-shrink:0; }
+    .mu-vs {
+      font-family:'Barlow Condensed',sans-serif; font-weight:900;
+      font-size:clamp(1rem,2.5vw,1.4rem); color:rgba(255,255,255,.18);
+      letter-spacing:.1em; text-transform:uppercase;
+    }
+    .mu-weight {
+      font-family:'Montserrat',sans-serif; font-weight:700; font-size:.58rem;
+      letter-spacing:.18em; text-transform:uppercase;
+      color:rgba(255,255,255,.3); margin-top:4px;
+    }
+
+    /* ── DIVIDER LINE ── */
+    .mu-divider {
+      display:grid; grid-template-columns:1fr 40px 1fr;
+      gap:0; margin:14px 0 0; height:2px;
+    }
+    .mu-div-a { background:linear-gradient(90deg,transparent,#f0b429); }
+    .mu-div-mid { background:rgba(255,255,255,.08); }
+    .mu-div-b { background:linear-gradient(90deg,#60a5fa,transparent); }
+
+    /* ── HEADSHOTS ── */
+    .mu-shots {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:0; margin-top:-10px;
+      pointer-events:none; overflow:hidden;
+      max-height:340px;
+    }
+    .mu-shot-wrap { display:flex; align-items:flex-end; overflow:hidden; }
+    .mu-shot-wrap.right { justify-content:flex-end; }
+    .mu-shot-img {
+      width:260px; max-width:45vw;
+      object-fit:contain; object-position:bottom center;
+      filter:drop-shadow(0 0 40px rgba(0,0,0,.8));
+    }
+    .mu-shot-wrap .mu-shot-img { transform:scaleX(-1); }
+    .mu-shot-wrap.right .mu-shot-img { transform:scaleX(1); }
+
+    /* ── TABS ── */
+    .mu-tabs {
+      display:flex; gap:0; border-bottom:1px solid rgba(255,255,255,.07);
+      margin:0 0 0;
+    }
+    .mu-tab {
+      padding:13px 20px; font-family:'Montserrat',sans-serif;
+      font-weight:800; font-size:.62rem; letter-spacing:.14em;
+      text-transform:uppercase; color:rgba(255,255,255,.28);
+      border:none; background:none; cursor:pointer;
+      border-bottom:2px solid transparent; margin-bottom:-1px;
+      transition:color .18s, border-color .18s;
+    }
+    .mu-tab:hover { color:rgba(255,255,255,.55); }
+    .mu-tab.active { color:#f0b429; border-bottom-color:#f0b429; }
+
+    /* ── STATS TABLE ── */
+    .mu-stats { margin-top:0; }
+    .mu-stat-row {
+      display:grid; grid-template-columns:1fr 120px 1fr;
+      align-items:center; padding:18px 0;
+      border-bottom:1px solid rgba(255,255,255,.05);
+    }
+    .mu-stat-row:last-child { border-bottom:none; }
+    .mu-stat-val {
+      font-family:'Barlow Condensed',sans-serif; font-weight:800;
+      font-size:1.35rem; transition:color .15s;
+    }
+    .mu-stat-val.a { color:#f0b429; text-align:left; }
+    .mu-stat-val.b { color:#60a5fa; text-align:right; }
+    .mu-stat-val.a.edge { color:#ffd960; text-shadow:0 0 12px rgba(255,217,96,.3); }
+    .mu-stat-val.b.edge { color:#93c5fd; text-shadow:0 0 12px rgba(147,197,253,.3); }
+    .mu-stat-label {
+      text-align:center;
+      font-family:'Montserrat',sans-serif; font-weight:800;
+      font-size:.56rem; letter-spacing:.16em; text-transform:uppercase;
+      color:rgba(255,255,255,.3);
+    }
+
+    /* ── ODDS SECTION ── */
+    .mu-odds-section {
+      margin-top:32px; padding:24px 28px;
+      background:rgba(255,255,255,.02);
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:12px;
+    }
+    .mu-odds-title {
+      font-family:'Montserrat',sans-serif; font-weight:800;
+      font-size:.6rem; letter-spacing:.18em; text-transform:uppercase;
+      color:rgba(255,255,255,.25); margin-bottom:18px;
+    }
+    .mu-odds-grid {
+      display:grid; grid-template-columns:1fr 1fr; gap:16px;
+    }
+    .mu-odds-card {
+      background:rgba(255,255,255,.03); border-radius:10px;
+      padding:18px 20px; text-align:center;
+      border:1px solid rgba(255,255,255,.06);
+      transition:border-color .18s;
+    }
+    .mu-odds-card:hover { border-color:rgba(255,255,255,.12); }
+    .mu-odds-fighter {
+      font-family:'Montserrat',sans-serif; font-weight:700;
+      font-size:.68rem; letter-spacing:.06em;
+      color:rgba(255,255,255,.45); margin-bottom:10px;
+      text-transform:uppercase;
+    }
+    .mu-odds-num {
+      font-family:'Barlow Condensed',sans-serif; font-weight:900;
+      font-size:2.2rem; line-height:1;
+    }
+    .mu-odds-num.fav { color:#4ade80; }
+    .mu-odds-num.dog { color:#f87171; }
+    .mu-odds-implied {
+      font-family:'Inter',sans-serif; font-size:.68rem;
+      color:rgba(255,255,255,.28); margin-top:6px;
+    }
+    .mu-odds-source {
+      font-family:'Inter',sans-serif; font-size:.6rem;
+      color:rgba(255,255,255,.18); text-align:center; margin-top:14px;
+    }
+
+    /* ── PICKS CTA ── */
+    .mu-picks-cta {
+      margin-top:28px; text-align:center;
+    }
+    .mu-picks-btn {
+      display:inline-flex; align-items:center; gap:8px;
+      background:linear-gradient(135deg,#7a3100,#d46400 52%,#f0a500);
+      border:none; color:#fff;
+      font-family:'Montserrat',sans-serif; font-weight:800;
+      font-size:.72rem; letter-spacing:.1em; text-transform:uppercase;
+      padding:13px 30px; border-radius:8px; cursor:pointer; text-decoration:none;
+      box-shadow:0 4px 20px rgba(240,140,0,.3);
+      transition:transform .18s, box-shadow .18s;
+    }
+    .mu-picks-btn:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(240,140,0,.45); }
+
+    /* ── LOADING ── */
+    .mu-loading {
+      text-align:center; padding:80px 24px;
+      font-family:'Inter',sans-serif; font-size:.84rem;
+      color:rgba(255,255,255,.25);
+    }
+
+    /* ── LIGHT MODE ── */
+    body.light-mode .mu-stat-val.a { color:#b8820a; }
+    body.light-mode .mu-stat-val.b { color:#2563eb; }
+    body.light-mode .mu-name-a { color:#b8820a; }
+    body.light-mode .mu-name-b { color:#2563eb; }
+    body.light-mode .mu-stat-label { color:rgba(0,0,0,.4); }
+    body.light-mode .mu-stat-row { border-bottom-color:rgba(0,0,0,.06); }
+
+    /* ── MOBILE ── */
+    @media(max-width:600px){
+      .mu-name { font-size:1.3rem; }
+      .mu-shots { max-height:220px; }
+      .mu-shot-img { width:160px; }
+      .mu-stat-row { grid-template-columns:1fr 90px 1fr; padding:14px 0; }
+      .mu-stat-val { font-size:1.1rem; }
+      .mu-stat-label { font-size:.5rem; }
+      .mu-odds-grid { grid-template-columns:1fr 1fr; gap:10px; }
+      .mu-tab { padding:11px 12px; font-size:.55rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a class="logo" href="index.html">
+        <img src="images/mma-bridge-logo.png" class="nav-logo-img" alt="MMA Bridge">
+      </a>
+      <div id="notifBellMount"></div>
+      <ul class="nav-links">
+        <li><a href="index.html">Trending</a></li>
+        <li><a href="events.html" class="active">Upcoming Events</a></li>
+        <li><a href="pfp.html">Rankings</a></li>
+        <li><a href="reviews.html">Review</a></li>
+        <li><a href="lucas.html">Lucas Bot</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Switch theme">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <div class="nav-auth"></div>
+      <button class="nav-hamburger" id="nav-hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <!-- BACK LINK -->
+  <a class="mu-back" id="muBackLink" href="events.html">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Back to event
+  </a>
+
+  <div class="mu-page">
+    <div id="muRoot" class="mu-loading">Loading matchup...</div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
+  <script src="auth.js?v=3.2"></script>
+  <script src="search.js"></script>
+  <script src="chat.js?v=2.4"></script>
+  <script src="fighter-modal.js?v=1.1"></script>
+  <script>
+  (function(){
+    const API = 'https://mmabridge-backend.onrender.com/api';
+    const p   = new URLSearchParams(location.search);
+    const eventId  = p.get('event') || '';
+    const nameA    = p.get('a') || '';
+    const nameB    = p.get('b') || '';
+    const weight   = p.get('weight') || '';
+    const imgA     = p.get('imgA') || '';
+    const imgB     = p.get('imgB') || '';
+
+    document.title = nameA && nameB ? `${nameA} vs ${nameB} | MMA Bridge` : 'Fight Matchup | MMA Bridge';
+
+    /* back link → events.html with overlay */
+    const backLink = document.getElementById('muBackLink');
+    if (eventId) backLink.href = `events.html?id=${encodeURIComponent(eventId)}`;
+
+    function esc(s){ const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+    function fmtOdds(n){ return n > 0 ? '+'+n : String(n); }
+    function impliedProb(n){
+      const pct = n < 0 ? (-n / (-n + 100)) * 100 : (100 / (n + 100)) * 100;
+      return Math.round(pct) + '%';
+    }
+    function nameSlugged(n){ return n.toLowerCase().replace(/[^a-z0-9]/g,'-').replace(/-+/g,'-'); }
+    function fuzzyMatch(hayName, needleName){
+      if (!hayName || !needleName) return false;
+      const a = hayName.toLowerCase().replace(/[^a-z]/g,'');
+      const b = needleName.toLowerCase().replace(/[^a-z]/g,'');
+      return a === b || a.includes(b) || b.includes(a);
+    }
+
+    /* ── Load data in parallel ── */
+    Promise.all([
+      fetch('data/fighters.json?_='+Date.now(),{cache:'no-store'}).then(r=>r.json()).catch(()=>[]),
+      fetch(`${API}/odds/${encodeURIComponent(eventId)}`).then(r=>r.json()).catch(()=>({odds:[]})),
+    ]).then(([fighters, oddsData]) => {
+
+      const fA = fighters.find(f => fuzzyMatch(f.name, nameA)) || {};
+      const fB = fighters.find(f => fuzzyMatch(f.name, nameB)) || {};
+
+      /* find fight odds — try matching either a or b name */
+      const oddsEntry = (oddsData.odds||[]).find(o =>
+        (fuzzyMatch(o.a, nameA) || fuzzyMatch(o.b, nameA)) &&
+        (fuzzyMatch(o.a, nameB) || fuzzyMatch(o.b, nameB))
+      );
+      let oddsForA = null, oddsForB = null;
+      if (oddsEntry) {
+        const aIsA = fuzzyMatch(oddsEntry.a, nameA);
+        oddsForA = aIsA ? oddsEntry.odds_a : oddsEntry.odds_b;
+        oddsForB = aIsA ? oddsEntry.odds_b : oddsEntry.odds_a;
+      }
+
+      /* ── STAT ROWS ── */
+      function recStr(f){ if(!f.record) return '—'; const r=f.record; return `${r.wins}-${r.losses}-${r.draws}`; }
+      function edge(valA, valB, higherIsBetter){
+        /* returns classes 'edge' if this fighter has the edge on a numeric stat */
+        const nA = parseFloat(String(valA).replace(/[^0-9.]/g,''));
+        const nB = parseFloat(String(valB).replace(/[^0-9.]/g,''));
+        if (isNaN(nA) || isNaN(nB) || nA === nB) return {a:'',b:''};
+        const aWins = higherIsBetter ? nA > nB : nA < nB;
+        return { a: aWins ? 'edge' : '', b: aWins ? '' : 'edge' };
+      }
+
+      const reachEdge  = edge(fA.reach||'0', fB.reach||'0', true);
+      const heightEdge = edge(fA.height||'0', fB.height||'0', true);
+      const ageEdge    = edge(fA.age||99, fB.age||99, false);
+
+      const statRows = [
+        { label:'RECORD',      a: recStr(fA),           b: recStr(fB),           eA:'', eB:'' },
+        { label:'HEIGHT',      a: fA.height||'—',       b: fB.height||'—',       eA:heightEdge.a, eB:heightEdge.b },
+        { label:'REACH',       a: fA.reach||'—',        b: fB.reach||'—',        eA:reachEdge.a, eB:reachEdge.b },
+        { label:'STANCE',      a: fA.stance||'—',       b: fB.stance||'—',       eA:'', eB:'' },
+        { label:'AGE',         a: fA.age||'—',          b: fB.age||'—',          eA:ageEdge.a, eB:ageEdge.b },
+        { label:'NATIONALITY', a: (fA.flag||'')+' '+(fA.nationality||'—'), b: (fB.flag||'')+' '+(fB.nationality||'—'), eA:'', eB:'' },
+        { label:'STYLE',       a: fA.style||'—',        b: fB.style||'—',        eA:'', eB:'' },
+      ];
+
+      const statsHTML = statRows.map(r => `
+        <div class="mu-stat-row">
+          <div class="mu-stat-val a ${r.eA}">${esc(String(r.a))}</div>
+          <div class="mu-stat-label">${r.label}</div>
+          <div class="mu-stat-val b ${r.eB}">${esc(String(r.b))}</div>
+        </div>`).join('');
+
+      /* ── ODDS HTML ── */
+      let oddsHTML = '';
+      if (oddsForA !== null && oddsForB !== null) {
+        const aFav = oddsForA < 0;
+        oddsHTML = `
+        <div class="mu-odds-section">
+          <div class="mu-odds-title">Betting Odds</div>
+          <div class="mu-odds-grid">
+            <div class="mu-odds-card">
+              <div class="mu-odds-fighter">${esc(nameA)}</div>
+              <div class="mu-odds-num ${aFav?'fav':'dog'}">${fmtOdds(oddsForA)}</div>
+              <div class="mu-odds-implied">Implied ${impliedProb(oddsForA)}</div>
+            </div>
+            <div class="mu-odds-card">
+              <div class="mu-odds-fighter">${esc(nameB)}</div>
+              <div class="mu-odds-num ${!aFav?'fav':'dog'}">${fmtOdds(oddsForB)}</div>
+              <div class="mu-odds-implied">Implied ${impliedProb(oddsForB)}</div>
+            </div>
+          </div>
+          <div class="mu-odds-source">Odds via The Odds API · for entertainment only</div>
+        </div>`;
+      }
+
+      /* ── FIGHTER HEADSHOTS ── */
+      const shotA = imgA || fA.img || '';
+      const shotB = imgB || fB.img || '';
+      const shotsHTML = (shotA || shotB) ? `
+        <div class="mu-shots">
+          <div class="mu-shot-wrap">
+            ${shotA ? `<img class="mu-shot-img" src="${esc(shotA)}" alt="${esc(nameA)}" onerror="this.style.display='none'">` : ''}
+          </div>
+          <div class="mu-shot-wrap right">
+            ${shotB ? `<img class="mu-shot-img" src="${esc(shotB)}" alt="${esc(nameB)}" onerror="this.style.display='none'">` : ''}
+          </div>
+        </div>` : '';
+
+      /* ── FIGHTER PROFILE LINKS ── */
+      const profileA = fA.id ? `profile.html?fighter=${encodeURIComponent(fA.id)}` : `results.html?q=${encodeURIComponent(nameA)}`;
+      const profileB = fB.id ? `profile.html?fighter=${encodeURIComponent(fB.id)}` : `results.html?q=${encodeURIComponent(nameB)}`;
+
+      /* ── PICKS LINK ── */
+      const picksHref = eventId ? `picks.html?id=${encodeURIComponent(eventId)}` : 'events.html';
+
+      /* ── RENDER ── */
+      document.getElementById('muRoot').innerHTML = `
+        <div class="mu-header">
+          <a class="mu-name mu-name-a" href="${profileA}">${esc(nameA)}</a>
+          <div class="mu-vs-block">
+            <div class="mu-vs">VS</div>
+            ${weight ? `<div class="mu-weight">${esc(weight)}</div>` : ''}
+          </div>
+          <a class="mu-name mu-name-b" href="${profileB}">${esc(nameB)}</a>
+        </div>
+        <div class="mu-divider"><div class="mu-div-a"></div><div class="mu-div-mid"></div><div class="mu-div-b"></div></div>
+        ${shotsHTML}
+        <div class="mu-tabs">
+          <button class="mu-tab active">Matchup Stats</button>
+        </div>
+        <div class="mu-stats">${statsHTML}</div>
+        ${oddsHTML}
+        <div class="mu-picks-cta">
+          <a class="mu-picks-btn" href="${picksHref}">Make Your Picks →</a>
+        </div>
+      `;
+
+      document.title = `${nameA} vs ${nameB} | MMA Bridge`;
+    });
+
+    window.addEventListener('scroll', () => {
+      document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 10);
+    });
+  })();
+  </script>
+</body>
+</html>

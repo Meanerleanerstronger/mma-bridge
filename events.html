@@ -513,8 +513,11 @@
       cursor:pointer;
     }
     .ov-fighter:hover {
-      color:#e8c96a;
-      text-shadow:0 0 18px rgba(200,168,75,.35),0 1px 8px rgba(0,0,0,.7);
+      color:#f0b429;
+      text-shadow:0 0 18px rgba(240,180,41,.4),0 1px 8px rgba(0,0,0,.7);
+      text-decoration:underline;
+      text-underline-offset:3px;
+      text-decoration-color:rgba(240,180,41,.55);
     }
     .ov-fight.is-main .ov-fighter { font-size:1.85rem; }
     .ov-fighter.right { text-align:right; }
@@ -1545,6 +1548,7 @@
       overlay.classList.add('open');
       document.body.classList.add('no-scroll');
       document.getElementById('ovFightCol').scrollTop=0;
+      window._activeEventId = ev.id;
 
       /* ── Fighter entrance crash animation ── */
       requestAnimationFrame(function(){
@@ -2209,23 +2213,39 @@
 <script src="micro.js?v=1.0"></script>
 <script src="fighter-modal.js?v=1.1"></script>
 <script>
-// ── Fighter click-to-profile (names + headshots) ──────
+// ── Fight row → matchup page + Fighter name → modal ──────
 (function () {
   document.addEventListener('click', function (e) {
-    // Fighter name text
+    // Fighter name → open modal (stops propagation so row click doesn't fire)
     const nameEl = e.target.closest('.ov-fighter');
     if (nameEl) {
-      const name = nameEl.textContent.replace(/[ ​ ]/g, '').trim();
+      const name = nameEl.dataset.fighterName || nameEl.textContent.replace(/[ ​ ]/g,'').trim();
       if (name && window.openFighterModal) { e.stopPropagation(); window.openFighterModal(name); }
       return;
     }
-    // Fighter headshot — which side?
+    // Fighter headshot → open modal
     const headCell = e.target.closest('.ov-head-cell');
     if (headCell) {
       const row = headCell.closest('.ov-fight');
       if (!row) return;
       const name = headCell.classList.contains('ov-head-r') ? row.dataset.fighterB : row.dataset.fighterA;
       if (name && window.openFighterModal) { e.stopPropagation(); window.openFighterModal(name); }
+      return;
+    }
+    // Fight row → matchup page
+    const row = e.target.closest('.ov-fight[data-fighter-a][data-fighter-b]');
+    if (row && row.dataset.fighterA && row.dataset.fighterB) {
+      const evId   = window._activeEventId || '';
+      const fA     = row.dataset.fighterA;
+      const fB     = row.dataset.fighterB;
+      const wEl    = row.querySelector('.ov-weight');
+      const weight = wEl ? wEl.textContent.trim() : '';
+      const imgAEl = row.querySelector('.ov-head-cell:not(.ov-head-r) .ov-headshot');
+      const imgBEl = row.querySelector('.ov-head-cell.ov-head-r .ov-headshot');
+      const imgA   = imgAEl ? imgAEl.src : '';
+      const imgB   = imgBEl ? imgBEl.src : '';
+      const url = 'matchup.html?event=' + encodeURIComponent(evId) + '&a=' + encodeURIComponent(fA) + '&b=' + encodeURIComponent(fB) + '&weight=' + encodeURIComponent(weight) + '&imgA=' + encodeURIComponent(imgA) + '&imgB=' + encodeURIComponent(imgB);
+      window.location.href = url;
     }
   });
 })();
