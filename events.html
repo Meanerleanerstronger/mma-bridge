@@ -223,13 +223,13 @@
       position:relative; width:100%; height:160px; border-radius:16px;
       overflow:hidden; cursor:pointer; border:1px solid rgba(255,255,255,.07);
       animation:fadeUp .4s ease both; text-decoration:none; display:block;
-      transition:border-color .25s, transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s;
+      transition:border-color .25s, box-shadow .3s;
     }
     .ev-card:nth-child(1){animation-delay:.04s}.ev-card:nth-child(2){animation-delay:.08s}
     .ev-card:nth-child(3){animation-delay:.12s}.ev-card:nth-child(4){animation-delay:.16s}
     .ev-card:nth-child(5){animation-delay:.20s}.ev-card:nth-child(n+6){animation-delay:.24s}
-    .ev-card.fn:hover  { border-color:rgba(255,255,255,.18);transform:translateY(-3px);box-shadow:0 16px 50px rgba(0,0,0,.7); }
-    .ev-card.ppv:hover { border-color:rgba(200,168,75,.3);transform:translateY(-3px);box-shadow:0 16px 50px rgba(0,0,0,.7); }
+    .ev-card.fn:hover  { border-color:rgba(255,255,255,.18);box-shadow:0 16px 50px rgba(0,0,0,.7); }
+    .ev-card.ppv:hover { border-color:rgba(200,168,75,.3);box-shadow:0 16px 50px rgba(0,0,0,.7); }
     .ev-card.ppv::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 0%,#8a6a10 15%,#c8a84b 35%,#fff8c0 50%,#c8a84b 65%,#8a6a10 85%,transparent 100%);background-size:250% auto;animation:shimmer 4s linear infinite;z-index:5; }
 
 
@@ -426,6 +426,7 @@
       overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 0 40px;
       scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.07) transparent;
       border-right:1px solid rgba(255,255,255,.05);
+      display:flex;flex-direction:column;
     }
     .ov-fight-col::-webkit-scrollbar { width:3px; }
     .ov-fight-col::-webkit-scrollbar-thumb { background:rgba(255,255,255,.08);border-radius:2px; }
@@ -438,17 +439,21 @@
     .ov-section-label { font-family:'Montserrat',sans-serif;font-weight:900;font-size:.48rem;letter-spacing:.24em;text-transform:uppercase; }
     .ov-section-line  { flex:1;height:1px;background:rgba(255,255,255,.05); }
 
-    /* Fight row — NO picks UI, hover glow + FOTN reveal */
+    /* Fight row — card containers */
     .ov-fight {
       position:relative;
       display:grid;grid-template-columns:1fr 110px 1fr;
       align-items:center;gap:8px;
-      padding:18px 28px;
-      border-bottom:1px solid rgba(255,255,255,.04);
-      cursor:default;
-      transition:background .18s;
+      padding:16px 22px;
+      margin:0 12px;
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:10px;
+      cursor:pointer;
+      transition:background .18s, border-color .2s;
       overflow:hidden;
     }
+    .ov-fight + .ov-fight { margin-top:6px; }
+    .ov-section-header + .ov-fight { margin-top:8px; }
     .ov-fight.has-shots { grid-template-columns:36px 1fr 110px 1fr 36px; }
     .ov-fight.has-shots.is-main { grid-template-columns:44px 1fr 110px 1fr 44px; }
     .ov-head-cell { display:flex;align-items:center;justify-content:center;position:relative;z-index:1; }
@@ -472,12 +477,13 @@
       opacity:0;transition:opacity .2s;
     }
     .ov-fight:hover::before { opacity:1; }
-    .ov-fight:hover { background:rgba(255,255,255,.025); }
+    .ov-fight:hover { background:rgba(255,255,255,.03); border-color:rgba(255,255,255,.12); }
 
-    .ov-fight.is-main    { padding:18px 28px;background:rgba(240,180,41,.02);border-bottom:1px solid rgba(240,180,41,.06); }
-    .ov-fight.is-main.ppv-main { background:rgba(200,168,75,.02);border-bottom:1px solid rgba(200,168,75,.06); }
+    .ov-fight.is-main    { padding:18px 22px;background:rgba(240,180,41,.02);border-color:rgba(240,180,41,.12); }
+    .ov-fight.is-main.ppv-main { background:rgba(200,168,75,.02);border-color:rgba(200,168,75,.14); }
     .ov-fight.is-main::before { background:linear-gradient(90deg,rgba(240,180,41,.0),rgba(240,180,41,.06),rgba(240,180,41,.0)); }
     .ov-fight.is-main.ppv-main::before { background:linear-gradient(90deg,rgba(200,168,75,.0),rgba(200,168,75,.07),rgba(200,168,75,.0)); }
+    .ov-fight.is-main:hover { border-color:rgba(240,180,41,.28); }
     .ov-fight.is-comain  { background:rgba(240,180,41,.01); }
 
     /* ── New fight highlight (from notification) ── */
@@ -514,6 +520,7 @@
     }
     .ov-fighter:hover {
       color:#f0b429;
+      font-style:italic;
       text-shadow:0 0 18px rgba(240,180,41,.4),0 1px 8px rgba(0,0,0,.7);
       text-decoration:underline;
       text-underline-offset:3px;
@@ -644,8 +651,8 @@
     body.light-mode .ev-overlay .ov-fighter { color:#111; }
     body.light-mode .ev-overlay .ov-fighter.dim { color:#555; }
     body.light-mode .ev-overlay .ov-fight::before { background:linear-gradient(90deg,rgba(180,130,10,.0),rgba(180,130,10,.04),rgba(180,130,10,.0)); }
-    body.light-mode .ev-overlay .ov-fight { border-bottom-color:rgba(0,0,0,.05); }
-    body.light-mode .ev-overlay .ov-fight:hover { background:rgba(0,0,0,.025); }
+    body.light-mode .ev-overlay .ov-fight { border-color:rgba(0,0,0,.1); }
+    body.light-mode .ev-overlay .ov-fight:hover { background:rgba(0,0,0,.04); border-color:rgba(0,0,0,.2); }
     body.light-mode .ev-overlay .ov-fight:hover .ov-fighter:not(.dim) { color:#000;text-shadow:none; }
     body.light-mode .ev-overlay .ov-poster-gradient { background:linear-gradient(to bottom,rgba(250,248,243,.1) 0%,transparent 25%,rgba(250,248,243,.8) 70%,rgba(250,248,243,1) 100%),linear-gradient(to right,rgba(250,248,243,.65) 0%,transparent 55%); }
     body.light-mode .ev-overlay .ov-matchup { color:#111;text-shadow:none; }
