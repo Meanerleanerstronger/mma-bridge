@@ -516,9 +516,15 @@
       text-shadow:0 1px 8px rgba(0,0,0,.7),0 0 1px rgba(255,255,255,.15);
       transition:color .2s,text-shadow .2s;
       position:relative;z-index:1;
-      cursor:pointer;
+      cursor:default;
     }
-    .ov-fighter:hover {
+    /* Only the name span is interactive */
+    .ov-fn {
+      cursor:pointer;
+      display:inline;
+      transition:color .15s,text-shadow .15s,font-style .1s;
+    }
+    .ov-fn:hover {
       color:#f0b429;
       font-style:italic;
       text-shadow:0 0 18px rgba(240,180,41,.4),0 1px 8px rgba(0,0,0,.7);
@@ -531,7 +537,7 @@
     .ov-fighter.dim   { color:rgba(255,255,255,.6);font-size:1.15rem; }
     .ov-fight.is-main .ov-fighter.dim { font-size:1.85rem;color:rgba(255,255,255,.65); }
 
-    /* Hover name glow */
+    /* Row hover — subtly brighten the name */
     .ov-fight:hover .ov-fighter:not(.dim) {
       color:#fff;
       text-shadow:0 0 28px rgba(240,180,41,.35),0 1px 8px rgba(0,0,0,.7);
@@ -1662,14 +1668,14 @@
             const ms=methodStyle(f.method);
             const pip=`<span class="ov-win-pip" style="background:${ms.color};box-shadow:0 0 6px ${ms.color};"></span>`;
             row.innerHTML=`
-              <div class="ov-fighter ${dimCls} ${aWon?'won':'lost'}">${aWon?pip:''}${esc(f.a)}</div>
+              <div class="ov-fighter ${dimCls} ${aWon?'won':'lost'}">${aWon?pip:''}<span class="ov-fn">${esc(f.a)}</span></div>
               <div class="ov-fight-mid">
                 ${f.titleFight?`<div class="ov-title-badge">Title</div>`:''}
                 <div class="ov-weight">${esc(f.weight||'')}</div>
                 <div class="ov-result-method" style="color:${ms.color}">${esc(ms.label)}</div>
                 <div class="ov-result-detail">Rd ${esc(String(f.round))} · ${esc(f.time||'')}</div>
               </div>
-              <div class="ov-fighter right ${dimCls} ${aWon?'lost':'won'}">${esc(f.b)}${!aWon?`&thinsp;${pip}`:''}</div>
+              <div class="ov-fighter right ${dimCls} ${aWon?'lost':'won'}"><span class="ov-fn">${esc(f.b)}</span>${!aWon?`&thinsp;${pip}`:''}</div>
             `;
           } else {
             /* ── UPCOMING / NO RESULT ROW ── */
@@ -1685,14 +1691,14 @@
             })() : '';
             row.innerHTML=`
               ${headCell(f.imgA,false)}
-              <div class="ov-fighter ${dimCls}">${esc(f.a)}</div>
+              <div class="ov-fighter ${dimCls}"><span class="ov-fn">${esc(f.a)}</span></div>
               <div class="ov-fight-mid">
                 ${f.titleFight?`<div class="ov-title-badge">Title</div>`:''}
                 ${f.rounds?`<div class="ov-rounds">${esc(f.rounds)}</div>`:''}
                 ${isMain?`<div class="ov-slot-tag" style="color:${accent}">MAIN EVENT</div>`:isComain?`<div class="ov-slot-tag" style="color:rgba(240,180,41,.5)">CO-MAIN</div>`:''}
                 ${oddsHtml}
               </div>
-              <div class="ov-fighter right ${dimCls}">${esc(f.b)}</div>
+              <div class="ov-fighter right ${dimCls}"><span class="ov-fn">${esc(f.b)}</span></div>
               ${headCell(f.imgB,true)}
             `;
           }
@@ -2223,10 +2229,10 @@
 // ── Fight row → matchup page + Fighter name → modal ──────
 (function () {
   document.addEventListener('click', function (e) {
-    // Fighter name → open modal (stops propagation so row click doesn't fire)
-    const nameEl = e.target.closest('.ov-fighter');
+    // Fighter name span → open modal (only the exact text span, not the full grid cell)
+    const nameEl = e.target.closest('.ov-fn');
     if (nameEl) {
-      const name = nameEl.dataset.fighterName || nameEl.textContent.replace(/[ ​ ]/g,'').trim();
+      const name = nameEl.textContent.trim();
       if (name && window.openFighterModal) { e.stopPropagation(); window.openFighterModal(name); }
       return;
     }

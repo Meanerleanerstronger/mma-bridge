@@ -5137,17 +5137,20 @@ body.light-mode .ev-star-btn.starred {
 /* ── Fight Card (prediction slip) ── */
 .fc-card {
   background: rgba(22,22,32,0.92);
-  border-bottom: 1px solid rgba(255,255,255,0.11);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  margin-bottom: 10px;
   position: relative; overflow: hidden;
-  transition: background 0.15s;
+  transition: background 0.15s, border-color 0.2s;
 }
-.fc-card:last-child { border-bottom: none; }
+.fc-card:last-child { margin-bottom: 0; }
 .fc-card.fc-main {
   background: linear-gradient(160deg, rgba(200,150,12,0.1) 0%, rgba(20,20,28,0.88) 55%);
-  border-bottom: 1px solid rgba(200,150,12,0.2);
+  border-color: rgba(200,150,12,0.18);
 }
 .fc-card.fc-maincrd {
   background: linear-gradient(160deg, rgba(255,255,255,0.05) 0%, rgba(20,20,28,0.85) 55%);
+  border-color: rgba(255,255,255,0.09);
 }
 
 /* Head strip */
