@@ -541,6 +541,12 @@ function getPageContext() {
   if (file === 'reviews.html')      return 'review';
   if (file === 'event-review.html') return 'review';
   if (file === 'index.html' || file === '') return 'home';
+  if (file === 'matchup.html') {
+    const mp = new URLSearchParams(window.location.search);
+    const mA = mp.get('a') || '', mB = mp.get('b') || '';
+    if (mA && mB) return `matchup:${mA} vs ${mB}`;
+    return 'matchup';
+  }
   return 'widget';
 }
 
