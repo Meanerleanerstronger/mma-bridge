@@ -432,12 +432,34 @@
     .ov-fight-col::-webkit-scrollbar-thumb { background:rgba(255,255,255,.08);border-radius:2px; }
 
     .ov-section-header {
-      padding:16px 28px 10px;display:flex;align-items:center;gap:10px;
-      position:sticky;top:0;background:rgba(7,7,10,.96);backdrop-filter:blur(10px);
-      z-index:5;border-bottom:1px solid rgba(255,255,255,.04);
+      margin:18px 12px 10px;
+      padding:12px 18px;
+      display:flex;align-items:center;gap:14px;
+      border-radius:8px;
+      background:rgba(255,255,255,.025);
+      border-left:3px solid var(--sec-color, rgba(255,255,255,.2));
+      border-top:1px solid rgba(255,255,255,.05);
+      border-right:1px solid rgba(255,255,255,.04);
+      border-bottom:1px solid rgba(255,255,255,.04);
     }
-    .ov-section-label { font-family:'Montserrat',sans-serif;font-weight:900;font-size:.48rem;letter-spacing:.24em;text-transform:uppercase; }
+    .ov-section-header:first-child { margin-top:10px; }
+    .ov-section-label {
+      font-family:'Barlow Condensed','Montserrat',sans-serif;
+      font-weight:900;font-size:1rem;letter-spacing:.14em;
+      text-transform:uppercase;line-height:1;
+    }
     .ov-section-line  { flex:1;height:1px;background:rgba(255,255,255,.05); }
+
+    /* Cancelled fight row */
+    .ov-fight-cancelled { opacity:.45;pointer-events:none;position:relative; }
+    .ov-fight-cancelled::after {
+      content:'CANCELLED';position:absolute;inset:0;
+      display:flex;align-items:center;justify-content:center;
+      font-family:'Montserrat',sans-serif;font-weight:900;font-size:.55rem;
+      letter-spacing:.2em;color:#f87171;
+      background:repeating-linear-gradient(-45deg,transparent,transparent 8px,rgba(248,113,113,.04) 8px,rgba(248,113,113,.04) 9px);
+      border-radius:10px;
+    }
 
     /* Fight row — card containers */
     .ov-fight {
@@ -453,6 +475,7 @@
       overflow:hidden;
     }
     .ov-fight + .ov-fight { margin-top:6px; }
+    .ov-fight + .ov-section-header { margin-top:22px; }
     .ov-section-header + .ov-fight { margin-top:8px; }
     .ov-fight.has-shots { grid-template-columns:36px 1fr 110px 1fr 36px; }
     .ov-fight.has-shots.is-main { grid-template-columns:44px 1fr 110px 1fr 44px; }
@@ -1648,6 +1671,7 @@
         if(!fights||!fights.length) return;
         const hdr=document.createElement('div');
         hdr.className='ov-section-header';
+        hdr.style.setProperty('--sec-color', color);
         hdr.innerHTML=`<span class="ov-section-label" style="color:${color}">${label}</span><div class="ov-section-line"></div>`;
         col.appendChild(hdr);
 
@@ -1658,7 +1682,8 @@
           const hasResult=!isUpcoming&&f.winner;
 
           const row=document.createElement('div');
-          row.className=`ov-fight ${mainCls}${isUpcoming?' has-shots':''}`;
+          const cancelledCls=f.cancelled?' ov-fight-cancelled':'';
+          row.className=`ov-fight ${mainCls}${isUpcoming?' has-shots':''}${cancelledCls}`;
           row.dataset.fightId=fightId(ev.id,f.a,f.b);
           row.dataset.fighterA=f.a; row.dataset.fighterB=f.b;
 
@@ -1717,9 +1742,9 @@
         `;
         col.appendChild(leg);
       }
-      section('Main Card',   ev.mainCard||[],   accent);
-      section('Prelims',     ev.prelims||[],    '#f0b429');
-      section('Early Prelims',ev.earlyPrelims||[],'rgba(255,255,255,.3)');
+      section('Main Card',    ev.mainCard||[],    accent);
+      section('Prelims',      ev.prelims||[],     'rgba(255,255,255,.75)');
+      section('Early Prelims',ev.earlyPrelims||[],'rgba(255,255,255,.35)');
     }
 
     /* ── COMMUNITY ── */

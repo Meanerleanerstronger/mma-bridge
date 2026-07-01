@@ -7,8 +7,9 @@
  *  2. Marks completed events + writes winner/method/round for every fight
  *  3. Adds new events announced by UFC (skeleton entry with full card)
  *  4. Finds missing poster art by probing UFC CDN URL patterns
- *  5. Syncs newly announced fights onto existing upcoming events
- *  6. Saves both root events.json and data/events.json
+ *  5. Syncs newly announced fights onto existing upcoming events (correct section)
+ *  6. Detects fights dropped from the ESPN card (sets cancelled:true)
+ *  7. Saves both root events.json and data/events.json
  *
  * Method detection from ESPN details array:
  *  "Unofficial Winner Kotko"      → KO/TKO
@@ -224,13 +225,29 @@ async function buildNewEvent(espnEv) {
   const location = city ? (state ? `${city}, ${state}` : `${city}, ${country}`) : '';
   const isPPV   = /ufc\s+\d+/i.test(name);
 
-  // ESPN lists fights earliest→latest (prelims first, main event last)
-  const comps     = [...(espnEv.competitions || [])].reverse(); // now main event first
-  const mainCount = comps.length >= 10 ? 6 : 5;
-  const mainCard  = comps.slice(0, mainCount).map((c, i) =>
+  // ESPN lists fights earliest→latest (early prelims → prelims → main card)
+  // Reverse so main event is first, then split into sections by fight count.
+  // Typical UFC event: ~5-6 main card, ~5-6 prelims, ~4-5 early prelims
+  const comps = [...(espnEv.competitions || [])].reverse(); // now main event first
+  const total = comps.length;
+  const isPPV = /ufc\s+\d+/i.test(name);
+
+  // Calculate section sizes based on total fight count
+  let mainCount, prelimCount;
+  if (total <= 8) {
+    mainCount = Math.min(5, total); prelimCount = total - mainCount;
+  } else if (total <= 12) {
+    mainCount = isPPV ? 6 : 5; prelimCount = Math.ceil((total - mainCount) * 0.55);
+  } else {
+    mainCount = isPPV ? 6 : 5; prelimCount = 6;
+  }
+  const earlyCount = total - mainCount - prelimCount;
+
+  const mainCard     = comps.slice(0, mainCount).map((c, i) =>
     buildFightFromESPN(c, i === 0 ? 'main' : i === 1 ? 'comain' : '')
   );
-  const prelims   = comps.slice(mainCount).map(c => buildFightFromESPN(c, ''));
+  const prelims      = comps.slice(mainCount, mainCount + prelimCount).map(c => buildFightFromESPN(c, ''));
+  const earlyPrelims = comps.slice(mainCount + prelimCount).map(c => buildFightFromESPN(c, ''));
 
   const poster = await findPoster(id, isoDate);
 
@@ -246,7 +263,7 @@ async function buildNewEvent(espnEv) {
     start_time: null,
     mainCard,
     prelims,
-    earlyPrelims: [],
+    earlyPrelims,
   };
 }
 
@@ -345,25 +362,64 @@ async function main() {
 
     // ── D: CARD UPDATE — new fights announced for an upcoming event ───────────
     if (!isCompleted && ourEv) {
-      const comps = espnEv.competitions || [];
-      let added = 0;
+      // ESPN lists fights earliest→latest, reverse to get main card first
+      const compsRev = [...(espnEv.competitions || [])].reverse();
+      const total    = compsRev.length;
+      const isPPVev  = /ufc\s+\d+/i.test(espnEv.name || '');
 
-      for (const comp of comps) {
+      // Determine section boundaries (same logic as buildNewEvent)
+      let mc, pc;
+      if (total <= 8)       { mc = Math.min(5, total); pc = total - mc; }
+      else if (total <= 12) { mc = isPPVev ? 6 : 5;   pc = Math.ceil((total - mc) * 0.55); }
+      else                  { mc = isPPVev ? 6 : 5;   pc = 6; }
+
+      let added = 0;
+      compsRev.forEach((comp, idx) => {
         const sorted = [...(comp.competitors || [])].sort((a, b) => (a.order || 0) - (b.order || 0));
         const a = sorted[0]?.athlete?.displayName || '';
         const b = sorted[1]?.athlete?.displayName || '';
-        if (!a || !b) continue;
+        if (!a || !b) return;
+        if (fightAlreadyExists(ourEv, a, b)) return;
 
-        if (!fightAlreadyExists(ourEv, a, b)) {
-          const fight = buildFightFromESPN(comp, '');
-          ourEv.prelims = ourEv.prelims || [];
-          ourEv.prelims.push(fight);
-          console.log(`  + New fight on card: ${a} vs ${b}`);
-          added++;
+        // Assign to section based on ESPN position
+        const section = idx < mc ? 'mainCard' : idx < mc + pc ? 'prelims' : 'earlyPrelims';
+        const slot    = idx === 0 ? 'main' : idx === 1 ? 'comain' : '';
+        const fight   = buildFightFromESPN(comp, slot);
+        ourEv[section] = ourEv[section] || [];
+        ourEv[section].push(fight);
+        console.log(`  + New fight (${section}): ${a} vs ${b}`);
+        added++;
+      });
+
+      if (added > 0) changes.push(`Card update: ${ourEv.name} (+${added} fights)`);
+    }
+
+    // ── E: DROPPED FIGHTS — in our JSON but gone from ESPN ───────────────────
+    if (!isCompleted && ourEv) {
+      const espnNames = new Set();
+      for (const comp of (espnEv.competitions || [])) {
+        for (const c of (comp.competitors || [])) {
+          const n = c.athlete?.displayName || c.displayName || '';
+          if (n) espnNames.add(n.toLowerCase().replace(/[^a-z]/g,''));
         }
       }
 
-      if (added > 0) changes.push(`Card update: ${ourEv.name} (+${added} fights)`);
+      let dropped = 0;
+      for (const sec of ['mainCard', 'prelims', 'earlyPrelims']) {
+        for (const fight of (ourEv[sec] || [])) {
+          if (fight.cancelled) continue;
+          const aKey = fight.a.toLowerCase().replace(/[^a-z]/g,'');
+          const bKey = fight.b.toLowerCase().replace(/[^a-z]/g,'');
+          // Only flag if ESPN has the event with fights but neither fighter appears
+          if (espnNames.size > 0 && !espnNames.has(aKey) && !espnNames.has(bKey)) {
+            fight.cancelled = true;
+            console.log(`  ⚠ Fight possibly dropped: ${fight.a} vs ${fight.b} (not in ESPN)`);
+            dropped++;
+          }
+        }
+      }
+
+      if (dropped > 0) changes.push(`Dropped fights flagged: ${ourEv.name} (${dropped})`);
     }
   }
 
