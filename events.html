@@ -426,7 +426,6 @@
       overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 0 40px;
       scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.07) transparent;
       border-right:1px solid rgba(255,255,255,.05);
-      display:flex;flex-direction:column;
     }
     .ov-fight-col::-webkit-scrollbar { width:3px; }
     .ov-fight-col::-webkit-scrollbar-thumb { background:rgba(255,255,255,.08);border-radius:2px; }
@@ -471,8 +470,7 @@
       border:1px solid rgba(255,255,255,.06);
       border-radius:10px;
       cursor:pointer;
-      transition:background .18s, border-color .2s;
-      overflow:hidden;
+      transition:background .18s, border-color .2s, transform .18s, box-shadow .18s;
     }
     .ov-fight + .ov-fight { margin-top:6px; }
     .ov-fight + .ov-section-header { margin-top:22px; }
@@ -496,11 +494,17 @@
     .ov-fight.is-main .ov-headshot { width:44px;height:44px; }
     .ov-fight::before {
       content:'';position:absolute;inset:0;
+      border-radius:10px;
       background:linear-gradient(90deg,rgba(240,180,41,.0),rgba(240,180,41,.04),rgba(240,180,41,.0));
       opacity:0;transition:opacity .2s;
     }
     .ov-fight:hover::before { opacity:1; }
-    .ov-fight:hover { background:rgba(255,255,255,.03); border-color:rgba(255,255,255,.12); }
+    .ov-fight:hover {
+      background:rgba(255,255,255,.03);
+      border-color:rgba(255,255,255,.15);
+      transform:translateY(-2px);
+      box-shadow:0 8px 30px rgba(0,0,0,.5);
+    }
 
     .ov-fight.is-main    { padding:18px 22px;background:rgba(240,180,41,.02);border-color:rgba(240,180,41,.12); }
     .ov-fight.is-main.ppv-main { background:rgba(200,168,75,.02);border-color:rgba(200,168,75,.14); }

@@ -5141,9 +5141,14 @@ body.light-mode .ev-star-btn.starred {
   border-radius: 12px;
   margin-bottom: 10px;
   position: relative; overflow: hidden;
-  transition: background 0.15s, border-color 0.2s;
+  transition: background 0.15s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 .fc-card:last-child { margin-bottom: 0; }
+.fc-card:hover {
+  border-color: rgba(255,255,255,0.13);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.55);
+}
 .fc-card.fc-main {
   background: linear-gradient(160deg, rgba(200,150,12,0.1) 0%, rgba(20,20,28,0.88) 55%);
   border-color: rgba(200,150,12,0.18);
@@ -5159,7 +5164,17 @@ body.light-mode .ev-star-btn.starred {
   padding: 8px 14px 6px;
   border-bottom: 1px solid rgba(255,255,255,0.05);
   min-height: 32px;
+  cursor: pointer;
 }
+.fc-head:hover { background: rgba(255,255,255,0.03); }
+.fc-head-h2h {
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  font-size: 0.52rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(240,180,41,0.0);
+  transition: color 0.15s;
+  white-space: nowrap;
+}
+.fc-head:hover .fc-head-h2h { color: rgba(240,180,41,0.65); }
 .fc-head-left {
   display: flex; align-items: center; gap: 6px;
 }
@@ -5301,7 +5316,14 @@ body.light-mode .ev-star-btn.starred {
 .fc-sub-row-b { justify-content: flex-end; }
 .fc-record {
   font-family: 'Inter', sans-serif; font-size: 0.65rem; font-weight: 500;
-  color: rgba(255,255,255,0.38); letter-spacing: 0.03em;
+  color: rgba(255,255,255,0.55); letter-spacing: 0.03em;
+  opacity: 0;
+  transition: opacity 0.18s 0s; /* instant hide when leaving name */
+}
+/* Only reveal after cursor sits on the name link for 1.5s */
+.fc-info:has(.fc-fighter-link:hover) .fc-record {
+  opacity: 1;
+  transition: opacity 0.18s 1.5s;
 }
 .fc-odds {
   font-family: 'Barlow Condensed', 'Montserrat', sans-serif;

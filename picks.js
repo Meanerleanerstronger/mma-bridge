@@ -1091,12 +1091,13 @@ function formatOdds(n) {
     // Head strip — weight, rounds, title pip, card label
     const cardLblTxt = isMain ? 'MAIN EVENT' : (isMainCard && idx === 0 ? 'CO-MAIN' : '');
     const headHtml = `
-      <div class="fc-head">
+      <div class="fc-head" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" data-weight="${esc(f.weight||'')}">
         <div class="fc-head-left">
           ${f.weight ? `<span class="fc-weight">${esc(f.weight)}</span>` : ''}
           ${f.rounds ? `<span class="fc-rds">· ${esc(f.rounds)}</span>` : ''}
           ${f.titleFight ? `<span class="fc-title-pip">TITLE FIGHT</span>` : ''}
         </div>
+        <span class="fc-head-h2h">H2H →</span>
         ${cardLblTxt ? `<span class="fc-card-lbl">${cardLblTxt}</span>` : ''}
       </div>`;
 
