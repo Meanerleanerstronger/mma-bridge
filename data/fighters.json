@@ -17175,7 +17175,94 @@
   },
   {
     "id": "kyle-campbell",
-    "name": "Kyle Campbell"
+    "name": "Kyle Campbell",
+    "record": {
+      "wins": 18,
+      "losses": 10,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Drew Dober",
+        "result": "L",
+        "method": "TKO (knees and punches)",
+        "event": "UFC Fight Night: de Ridder vs. Allen",
+        "round": 3,
+        "time": "1:16"
+      },
+      {
+        "opponent": "Benoît Saint Denis",
+        "result": "L",
+        "method": "Submission (arm-triangle choke)",
+        "event": "UFC 315",
+        "round": 2,
+        "time": "2:35"
+      },
+      {
+        "opponent": "Gustavo Wurlitzer",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "BTC 24",
+        "round": 1,
+        "time": "3:04"
+      },
+      {
+        "opponent": "Josh Henry",
+        "result": "W",
+        "method": "TKO (head kick and punches)",
+        "event": "List of PFC events#Prospect Fighting Championships 16: Mein vs. Chavez",
+        "round": 1,
+        "time": "2:14"
+      },
+      {
+        "opponent": "Marco Antonio Elpidio",
+        "result": "W",
+        "method": "KO (head kick)",
+        "event": "List of PFC events#Prospect Fighting Championships 14: Knockout Kidney Disease 3",
+        "round": 1,
+        "time": "3:23"
+      },
+      {
+        "opponent": "Shane Campbell",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "Unified MMA 43",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Michael Dufort",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "Samourai MMA 1",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Austin Hubbard",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Cowboy vs. Gaethje",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Nordine Taleb",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Iaquinta vs. Cowboy",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Cody Pfister",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "BTC 5",
+        "round": 3,
+        "time": "5:00"
+      }
+    ]
   },
   {
     "id": "shanelle-dyer",
