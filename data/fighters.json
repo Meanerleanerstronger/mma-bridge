@@ -5811,13 +5811,21 @@
     "weightClass": "Heavyweight",
     "ranking": "Unranked",
     "record": {
-      "wins": 2,
+      "wins": 3,
       "losses": 0,
       "draws": 0
     },
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
     "bio": "Gable Steveson is the most hyped heavyweight prospect in MMA — a 2020 Olympic gold medalist and two-time NCAA wrestling champion who brings a pedigree of dominance that rivals any fighter in history. After a stint with WWE, Steveson signed with the UFC in April 2026 off a 3-0 pro MMA record, finishing all three opponents in the first round. He trains at Jackson Wink MMA Academy under the tutelage of Jon Jones. His UFC debut against Elisha Ellison at UFC 329 on July 11, 2026 is one of the most anticipated heavyweight debuts in recent memory.",
     "last5": [
+      {
+        "opponent": "Hugo Lezama",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Mexico Fight League 3",
+        "round": 1,
+        "time": "3:50"
+      },
       {
         "opponent": "Kevin Hein",
         "result": "W",
@@ -5887,14 +5895,6 @@
         "result": "W",
         "method": "style=\"font-size:88%\"|10–4",
         "event": "style=\"font-size:88%\" rowspan=4|April 2–3, 2021",
-        "round": 0,
-        "time": ""
-      },
-      {
-        "opponent": "Jordan Wood",
-        "result": "W",
-        "method": "style=\"font-size:88%\"|TF 10–0",
-        "event": "style=\"font-size:88%\" rowspan=2|December 4–5, 2020",
         "round": 0,
         "time": ""
       }
@@ -6142,7 +6142,7 @@
     "ranking": "#4",
     "record": {
       "wins": 17,
-      "losses": 8,
+      "losses": 9,
       "draws": 0
     },
     "height": "5'7\"",
@@ -6154,6 +6154,14 @@
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-12/ROYVAL_BRANDON_L_12-13.png?itok=zYqioTbh",
     "bio": "Brandon Royval is one of the most exciting flyweights alive — a high-risk, high-reward grappler who comes to finish every fight. 'Raw Dawg' holds submission wins over multiple ranked opponents and is never out of a fight, bringing relentless pressure and a never-back-down mentality that makes every outing must-watch.",
     "last5": [
+      {
+        "opponent": "Manel Kape",
+        "result": "L",
+        "method": "KO (punches)",
+        "event": "UFC on ESPN: Royval vs. Kape",
+        "round": 1,
+        "time": "3:18"
+      },
       {
         "opponent": "Joshua Van",
         "result": "L",
@@ -6225,14 +6233,6 @@
         "event": "UFC 255",
         "round": 1,
         "time": "4:59"
-      },
-      {
-        "opponent": "Kai Kara-France",
-        "result": "W",
-        "method": "Submission (guillotine choke)",
-        "event": "UFC 253",
-        "round": 2,
-        "time": "0:48"
       }
     ]
   },
@@ -14824,11 +14824,19 @@
     "name": "Terrance McKinney",
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/MCKINNEY_TERRANCE_L_03-28.png?itok=xOcN-WHP",
     "record": {
-      "wins": 17,
+      "wins": 18,
       "losses": 8,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Kyle Nelson (fighter)",
+        "result": "W",
+        "method": "TKO (head kick and punches)",
+        "event": "UFC Fight Night: Adesanya vs. Pyfer",
+        "round": 1,
+        "time": "0:24"
+      },
       {
         "opponent": "Chris Duncan (fighter)",
         "result": "L",
@@ -14900,14 +14908,6 @@
         "event": "UFC on ESPN: Santos vs. Hill",
         "round": 1,
         "time": "2:17"
-      },
-      {
-        "opponent": "Drew Dober",
-        "result": "L",
-        "method": "TKO (knee and punches)",
-        "event": "UFC Fight Night: Santos vs. Ankalaev",
-        "round": 1,
-        "time": "3:17"
       }
     ],
     "nickname": "T. Wrecks"
@@ -29926,11 +29926,19 @@
     "id": "bobby-green",
     "name": "Bobby Green",
     "record": {
-      "wins": 34,
+      "wins": 35,
       "losses": 17,
       "draws": 1
     },
     "last5": [
+      {
+        "opponent": "Jeremy Stephens",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC 328",
+        "round": 1,
+        "time": "4:20"
+      },
       {
         "opponent": "Daniel Zellhuber",
         "result": "W",
@@ -30002,14 +30010,6 @@
         "event": "UFC Fight Night: Makhachev vs. Green",
         "round": 1,
         "time": "3:23"
-      },
-      {
-        "opponent": "Nasrat Haqparast",
-        "result": "W",
-        "method": "Decision (unanimous)",
-        "event": "UFC 271",
-        "round": 3,
-        "time": "5:00"
       }
     ],
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/GREEN_KING_L_05-09.png?itok=8VMeSq2i",
