@@ -30607,5 +30607,96 @@
     ],
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/5/HERNANDEZ_ANTHONY_L_10-19.png?itok=8a6qWRi5",
     "nickname": "Fluffy"
+  },
+  {
+    "id": "john-garza",
+    "name": "John Garza",
+    "record": {
+      "wins": 24,
+      "losses": 19,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Daniel Zellhuber",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 318",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Ottman Azaitar",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "UFC on ESPN: Covington vs. Buckley",
+        "round": 2,
+        "time": "2:03"
+      },
+      {
+        "opponent": "Darrius Flowers",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Hermansson vs. Pyfer",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Carlos Diego Ferreira",
+        "result": "L",
+        "method": "KO (punch)",
+        "event": "UFC Fight Night: Dern vs. Hill",
+        "round": 2,
+        "time": "1:50"
+      },
+      {
+        "opponent": "Marc Diakiese",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Thompson vs. Holland",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Jamie Mullarkey",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC on ESPN: dos Anjos vs. Fiziev",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Alan Patrick (fighter)",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "UFC on ESPN: Błachowicz vs. Rakić",
+        "round": 2,
+        "time": "3:22"
+      },
+      {
+        "opponent": "Clay Guida",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Overeem vs. Volkov",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Thiago Moisés",
+        "result": "L",
+        "method": "Submission (achilles lock)",
+        "event": "UFC Fight Night: Smith vs. Teixeira",
+        "round": 2,
+        "time": "0:25"
+      },
+      {
+        "opponent": "Stevie Ray (fighter)",
+        "result": "L",
+        "method": "Decision (majority)",
+        "event": "UFC Fight Night: Maia vs. Askren",
+        "round": 3,
+        "time": "5:00"
+      }
+    ]
   }
 ]
