@@ -11492,6 +11492,33 @@
     "earlyPrelims": []
   },
   {
+    "id": "ufc-fight-night-gamrot-vs-salkilld",
+    "name": "UFC Fight Night: Gamrot vs Salkilld",
+    "type": "FIGHT NIGHT",
+    "date": "Sat, Aug 8, 2026",
+    "isoDate": "2026-08-08",
+    "location": "",
+    "venue": "",
+    "poster": "",
+    "status": "upcoming",
+    "start_time": null,
+    "mainCard": [
+      {
+        "a": "Mateusz Gamrot",
+        "b": "Quillan Salkilld",
+        "weight": "Lightweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "main",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
+    "prelims": [],
+    "earlyPrelims": []
+  },
+  {
     "id": "ufc-330-makhachev-vs-machado-garry",
     "name": "UFC 330: Makhachev vs. Garry",
     "type": "PPV",
@@ -11530,6 +11557,17 @@
         "slot": "comain",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-11/DERN_MACKENZIE_L_11-16.png",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/5/ROBERTSON_GILLIAN_L_01-20.png?itok=yw3RX2mI"
+      },
+      {
+        "a": "Jalin Turner",
+        "b": "Kauê Fernandes",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
       }
     ],
     "prelims": [
@@ -11553,7 +11591,8 @@
         "ranked": false,
         "slot": "",
         "imgA": "",
-        "imgB": ""
+        "imgB": "",
+        "cancelled": true
       },
       {
         "a": "Edson Barboza",
@@ -11611,7 +11650,19 @@
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-08/NJOKUANI_CHIDI_L.png?itok=XOQFtiWO"
       }
     ],
-    "earlyPrelims": []
+    "earlyPrelims": [
+      {
+        "a": "Neil Magny",
+        "b": "Ramiz Brahimaj",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ]
   },
   {
     "id": "ufc-fight-night-hernandez-vs-rodrigues",
@@ -11635,6 +11686,44 @@
         "slot": "main",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/5/HERNANDEZ_ANTHONY_L_10-19.png?itok=8a6qWRi5",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/RODRIGUES_GREGORY_L_03-07.png?itok=klxiW8-p"
+      },
+      {
+        "a": "Opponent TBA",
+        "b": "TBA",
+        "weight": "",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "comain",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
+    "prelims": [],
+    "earlyPrelims": []
+  },
+  {
+    "id": "ufc-fight-night-paris",
+    "name": "UFC Fight Night: Paris",
+    "type": "FIGHT NIGHT",
+    "date": "Sat, Sep 5, 2026",
+    "isoDate": "2026-09-05",
+    "location": "",
+    "venue": "",
+    "poster": "",
+    "status": "upcoming",
+    "start_time": null,
+    "mainCard": [
+      {
+        "a": "Opponent TBA",
+        "b": "TBA",
+        "weight": "",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "main",
+        "imgA": "",
+        "imgB": ""
       },
       {
         "a": "Opponent TBA",
