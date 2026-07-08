@@ -24,12 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (resolved.mode === 'split') {
         renderHeroSplit(resolved.completed, resolved.ev);
       } else {
-        renderHero(resolved.ev, resolved.mode, false);
-        if (resolved.mode === 'completed') {
-          userHasPicks(resolved.ev.id).then(has => {
-            if (has) renderHero(resolved.ev, resolved.mode, true);
-          });
-        }
+        renderHero(resolved.ev, resolved.mode);
       }
     }
 
@@ -120,138 +115,174 @@ async function userHasPicks(eventId) {
   } catch (e) { return false; }
 }
 
-// ── Hero render ───────────────────────────────
-function renderHero(ev, mode, hasPicks) {
+// ── New editorial hero render ─────────────────
+function renderHero(ev, mode) {
   if (!ev) return;
-  const img   = document.getElementById('heroImg');
-  const type  = document.getElementById('heroType');
-  const title = document.getElementById('heroTitle');
-  const meta  = document.getElementById('heroMeta');
-  const btn   = document.getElementById('heroBtn');
-
-  if (ev.poster && img) {
-    img.style.backgroundImage = `url('${ev.poster}')`;
-    img.style.backgroundSize = 'cover';
-    img.style.backgroundPosition = 'center top';
-  }
-
   const isPPV = ev.type === 'PPV';
+  const me = ev.mainCard?.[0];
 
-  // Badge / type label
-  if (mode === 'today') {
-    if (type) type.innerHTML = '<span style="display:inline-flex;align-items:center;gap:7px;"><span style="width:8px;height:8px;background:#ff2020;border-radius:50%;box-shadow:0 0 8px 2px rgba(255,30,30,0.7);animation:pulse 1.5s infinite;flex-shrink:0;"></span>TONIGHT · LIVE</span>';
-  } else if (mode === 'completed' || mode === 'results') {
-    if (type) type.textContent = isPPV ? 'PPV Event — Results' : 'Fight Night — Results';
-  } else {
-    if (type) type.textContent = isPPV ? 'Next PPV Event' : 'Next Fight Night';
+  function lastName(fullName) {
+    if (!fullName) return '';
+    const parts = (fullName || '').trim().split(' ');
+    return parts[parts.length - 1].toUpperCase();
   }
 
-  // Title with typewriter
-  const titleText = ev.name || '';
-  if (title) {
-    if (typeof FXTypewriter === 'function' && titleText) {
-      FXTypewriter(title, titleText, 38, 200);
+  const nameA = lastName(me?.a);
+  const nameB = lastName(me?.b);
+
+  // Eyebrow
+  let eyebrowParts = [];
+  if (mode === 'today') {
+    eyebrowParts = ['<span style="display:inline-flex;align-items:center;gap:6px"><span style="width:7px;height:7px;background:#ff2020;border-radius:50%;box-shadow:0 0 8px 2px rgba(255,30,30,0.7);animation:pulse 1.5s infinite;flex-shrink:0"></span>TONIGHT</span>', 'LIVE NOW'];
+  } else if (mode === 'completed' || mode === 'results') {
+    eyebrowParts = ['RESULTS', isPPV ? 'PAY-PER-VIEW' : 'FIGHT NIGHT'];
+  } else {
+    eyebrowParts = ['NEXT', isPPV ? 'PAY-PER-VIEW' : 'FIGHT NIGHT', ev.name || ''];
+  }
+  const eyebrowHTML = eyebrowParts.filter(Boolean).map((p, i) => i === 0 ? p : `<span class="nh-dot">·</span>${p}`).join(' ');
+
+  // Names
+  let namesHTML = '';
+  if (nameA || nameB) {
+    namesHTML = `
+      <div class="nh-name-a">${nameA}</div>
+      <div class="nh-name-vs-row">
+        <span class="nh-vs-label">vs.</span>
+        <span class="nh-name-b">${nameB}</span>
+      </div>`;
+  } else {
+    namesHTML = `<div class="nh-name-a" style="font-size:clamp(2rem,4vw,3.5rem)">${(ev.name||'').toUpperCase()}</div>`;
+  }
+
+  // Tagline
+  let tagline = '';
+  const tparts = [me?.weight, ev.date, ev.venue || ev.location].filter(Boolean);
+  if (mode === 'today') {
+    tagline = `Fight night is here. ${tparts.slice(1).join(' · ')}.`;
+  } else if (mode === 'completed' || mode === 'results') {
+    if (me?.winner) {
+      const loser = me.winner === me.a ? me.b : me.a;
+      tagline = `${me.winner} def. ${loser}${me.method ? ' by ' + me.method : ''}${me.round ? ', Round ' + me.round : ''}. ${ev.date}.`;
     } else {
-      title.textContent = titleText;
-    }
-  }
-
-  if (meta) meta.textContent = [ev.date, ev.location, ev.venue].filter(Boolean).join('  ·  ');
-
-  if (!btn || !ev.id) return;
-
-  const eventId = encodeURIComponent(ev.id);
-
-  // Remove any existing secondary button
-  const existingSecondary = document.getElementById('heroSecondaryBtn');
-  if (existingSecondary) existingSecondary.remove();
-
-  if (mode === 'today') {
-    btn.textContent = 'Watch Live →';
-    btn.href = 'https://www.paramountplus.com/sports/ufc/';
-    btn.target = '_blank';
-    btn.rel = 'noopener noreferrer';
-    btn.style.setProperty('background', 'linear-gradient(135deg, #8b0000 0%, #cc0000 55%, #ff3030 100%)', 'important');
-    btn.style.setProperty('color', '#fff', 'important');
-    btn.style.setProperty('text-shadow', '0 1px 4px rgba(0,0,0,0.5)', 'important');
-    btn.style.setProperty('box-shadow', '0 0 28px rgba(255,30,30,0.45), inset 0 1px 0 rgba(255,120,120,0.2)', 'important');
-    btn.style.setProperty('border', '1px solid rgba(255,60,60,0.4)', 'important');
-  } else if (mode === 'completed' || mode === 'results') {
-    btn.textContent = 'Review the Card →';
-    btn.href = `events.html?id=${eventId}`;
-    btn.target = '';
-    btn.rel = '';
-    btn.style.setProperty('background', 'linear-gradient(135deg, #004d3d 0%, #00a878 55%, #00e5a0 100%)', 'important');
-    btn.style.setProperty('color', '#fff', 'important');
-    btn.style.setProperty('text-shadow', '0 1px 4px rgba(0,0,0,0.4)', 'important');
-    btn.style.setProperty('box-shadow', '0 0 28px rgba(0,200,140,0.45), inset 0 1px 0 rgba(0,255,180,0.2)', 'important');
-    btn.style.setProperty('border', '1px solid rgba(0,229,160,0.5)', 'important');
-    // My Picks secondary button (only when user confirmed to have picks)
-    if (hasPicks) {
-      const myPicksBtn = document.createElement('a');
-      myPicksBtn.id = 'heroSecondaryBtn';
-      myPicksBtn.textContent = 'My Picks →';
-      myPicksBtn.href = `picks.html?id=${eventId}`;
-      myPicksBtn.style.cssText = 'display:inline-block;margin-left:10px;padding:12px 24px;border-radius:12px;font-family:Montserrat,sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;background:rgba(255,255,255,.07);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.12);transition:background .15s;';
-      btn.parentNode.insertBefore(myPicksBtn, btn.nextSibling);
+      tagline = [ev.date, ev.location].filter(Boolean).join(' · ') + '.';
     }
   } else {
-    btn.textContent = 'Make Your Picks →';
-    btn.href = `picks.html?id=${eventId}`;
-    btn.target = '';
-    btn.rel = '';
-    btn.style.setProperty('background', 'linear-gradient(135deg, #7a3100 0%, #d46400 55%, #ff8c00 100%)', 'important');
-    btn.style.setProperty('color', '#fff', 'important');
-    btn.style.setProperty('text-shadow', '0 1px 4px rgba(0,0,0,0.5)', 'important');
-    btn.style.setProperty('box-shadow', '0 0 28px rgba(255,120,0,0.45), inset 0 1px 0 rgba(255,180,80,0.2)', 'important');
-    btn.style.setProperty('border', '1px solid rgba(255,140,0,0.5)', 'important');
+    tagline = [tparts[0], tparts.slice(1).join(' · ')].filter(Boolean).join(' · ') + '.';
+  }
+
+  // Buttons
+  const eventId = encodeURIComponent(ev.id || '');
+  let btnsHTML = '';
+  if (mode === 'today') {
+    btnsHTML = `<a class="nh-btn-primary red" href="https://www.espn.com/watch/" target="_blank" rel="noopener">Watch Live →</a>
+      <a class="nh-btn-secondary" href="events.html?id=${eventId}">Fight Card</a>`;
+  } else if (mode === 'completed' || mode === 'results') {
+    btnsHTML = `<a class="nh-btn-primary green" href="events.html?id=${eventId}">Review the Card →</a>
+      <a class="nh-btn-secondary" href="reviews.html">Write a Review</a>`;
+  } else {
+    btnsHTML = `<a class="nh-btn-primary" href="picks.html?event=${eventId}">Make your picks →</a>
+      <a class="nh-btn-secondary" href="picks.html?event=${eventId}">Full fight card</a>`;
+  }
+
+  // Stats bar
+  const totalFights = ((ev.mainCard||[]).length + (ev.prelims||[]).length + (ev.earlyPrelims||[]).length);
+  const isLocked = ev.start_time && new Date() >= new Date(ev.start_time);
+  const picksStatus = (mode === 'completed' || mode === 'results') ? 'Results In' : isLocked ? 'Locked' : 'Live';
+  const picksClass = (mode === 'upcoming' || mode === 'today') && !isLocked ? 'nh-stat-live' : 'nh-stat-locked';
+  const picksDot = picksClass === 'nh-stat-live' ? '<span class="nh-live-dot"></span>' : '';
+
+  function getCountdown(isoDate) {
+    const eventTime = new Date(isoDate + 'T22:00:00');
+    const diff = eventTime - new Date();
+    if (diff <= 0) return null;
+    const days  = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins  = Math.floor((diff % 3600000) / 60000);
+    return { days, hours, mins };
+  }
+
+  let statsHTML = '';
+  if (mode === 'upcoming' || mode === 'today' || mode === 'split') {
+    const cd = getCountdown(ev.isoDate);
+    const cdStr = cd
+      ? (cd.days > 0
+          ? `<span id="nhCdDays">${cd.days}</span><sub>d</sub> <span id="nhCdHrs">${cd.hours}</span><sub>h</sub>`
+          : `<span id="nhCdHrs">${cd.hours}</span><sub>h</sub> <span id="nhCdMins">${cd.mins}</span><sub>m</sub>`)
+      : 'Tonight';
+    statsHTML = `
+      <div class="nh-stat">
+        <div class="nh-stat-val" id="nhCountdown">${cdStr}</div>
+        <div class="nh-stat-label">Until fight night</div>
+      </div>
+      <div class="nh-stat-sep"></div>
+      <div class="nh-stat">
+        <div class="nh-stat-val">${totalFights}</div>
+        <div class="nh-stat-label">Bouts on the card</div>
+      </div>
+      <div class="nh-stat-sep"></div>
+      <div class="nh-stat ${picksClass}">
+        <div class="nh-stat-val">${picksDot}${picksStatus}</div>
+        <div class="nh-stat-label">Community picks</div>
+      </div>`;
+  } else {
+    const winner = me?.winner || '';
+    statsHTML = `
+      <div class="nh-stat">
+        <div class="nh-stat-val">${totalFights}</div>
+        <div class="nh-stat-label">Bouts on the card</div>
+      </div>
+      ${winner ? `
+      <div class="nh-stat-sep"></div>
+      <div class="nh-stat">
+        <div class="nh-stat-val" style="font-size:1.1rem;color:#f0b429">${winner}</div>
+        <div class="nh-stat-label">Main event winner</div>
+      </div>` : ''}`;
+  }
+
+  // Poster meta bottom-right
+  let posterMetaHTML = '';
+  if (ev.date || ev.venue) {
+    const dateParts = (ev.date || '').split(',');
+    const dayStr  = dateParts[0]?.trim() || '';
+    const restStr = dateParts.slice(1).join(',').trim() || '';
+    posterMetaHTML = `${dayStr ? `<div>${dayStr}</div>` : ''}${restStr ? `<div style="color:rgba(255,255,255,0.5)">${restStr}</div>` : ''}${ev.venue ? `<div style="margin-top:2px;color:rgba(255,255,255,0.5)">${ev.venue}</div>` : ''}`;
+  }
+
+  // Inject
+  const eyebrowEl = document.getElementById('nhEyebrow');
+  const namesEl   = document.getElementById('nhNames');
+  const taglineEl = document.getElementById('nhTagline');
+  const btnsEl    = document.getElementById('nhBtns');
+  const statsEl   = document.getElementById('nhStats');
+  const posterImg = document.getElementById('nhPosterImg');
+  const posterMeta= document.getElementById('nhPosterMeta');
+
+  if (eyebrowEl) eyebrowEl.innerHTML  = eyebrowHTML;
+  if (namesEl)   namesEl.innerHTML    = namesHTML;
+  if (taglineEl) taglineEl.textContent = tagline;
+  if (btnsEl)    btnsEl.innerHTML     = btnsHTML;
+  if (statsEl)   statsEl.innerHTML    = statsHTML;
+  if (posterImg && ev.poster) { posterImg.src = ev.poster; posterImg.alt = ev.name || ''; }
+  if (posterMeta) posterMeta.innerHTML = posterMetaHTML;
+
+  // Live countdown tick
+  if ((mode === 'upcoming' || mode === 'today') && ev.isoDate) {
+    const tickInterval = setInterval(() => {
+      const cd = getCountdown(ev.isoDate);
+      if (!cd) { clearInterval(tickInterval); return; }
+      const dEl = document.getElementById('nhCdDays');
+      const hEl = document.getElementById('nhCdHrs');
+      const mEl = document.getElementById('nhCdMins');
+      if (dEl) dEl.textContent = cd.days;
+      if (hEl) hEl.textContent = cd.hours;
+      if (mEl) mEl.textContent = cd.mins;
+    }, 60000);
   }
 }
 
-// ── Split Hero (completed left + upcoming right) ──────────────
+// ── Split mode: show upcoming in editorial layout ─────────────
 function renderHeroSplit(completedEv, upcomingEv) {
-  const section = document.getElementById('heroSection');
-  if (!section) return;
-
-  const cId  = encodeURIComponent(completedEv.id);
-  const uId  = encodeURIComponent(upcomingEv.id);
-  const cPPV = completedEv.type === 'PPV';
-  const uPPV = upcomingEv.type === 'PPV';
-
-  section.style.display    = 'flex';
-  section.style.minHeight  = '560px';
-  section.style.background = '#111';
-  section.style.position   = 'relative';
-  section.style.overflow   = 'hidden';
-
-  section.innerHTML = `
-    <!-- LEFT: Completed -->
-    <div style="flex:1;position:relative;overflow:hidden;">
-      <div style="position:absolute;inset:0;background-image:url('${completedEv.poster||''}');background-size:cover;background-position:center top;filter:brightness(0.62) saturate(0.75);"></div>
-      <div style="position:absolute;inset:0;background:linear-gradient(105deg,rgba(0,0,0,0.88) 0%,rgba(0,0,0,0.55) 50%,rgba(0,0,0,0.15) 100%);"></div>
-      <div style="position:relative;z-index:2;padding:80px 44px 56px;height:100%;box-sizing:border-box;display:flex;flex-direction:column;justify-content:flex-end;">
-        <div style="font-family:'Montserrat',sans-serif;font-size:0.6rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:10px;">${cPPV ? 'PPV Event' : 'Fight Night'} — Results</div>
-        <h2 style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(1.1rem,2.2vw,1.7rem);text-transform:uppercase;letter-spacing:0.04em;color:#fff;margin:0 0 8px;text-shadow:0 2px 20px rgba(0,0,0,0.8);line-height:1.15;">${completedEv.name||''}</h2>
-        <div style="font-family:'Inter',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.5);margin-bottom:22px;">${[completedEv.date,completedEv.location].filter(Boolean).join('  ·  ')}</div>
-        <a href="events.html?id=${cId}" class="hero-review-btn" style="align-self:flex-start;">Review the Card →</a>
-      </div>
-    </div>
-
-    <!-- DIVIDER -->
-    <div style="position:absolute;left:50%;top:8%;bottom:8%;width:1px;background:linear-gradient(to bottom,transparent 0%,rgba(240,180,41,0.45) 40%,rgba(240,180,41,0.45) 60%,transparent 100%);transform:translateX(-50%);z-index:10;pointer-events:none;"></div>
-
-    <!-- RIGHT: Upcoming -->
-    <div style="flex:1;position:relative;overflow:hidden;">
-      <div style="position:absolute;inset:0;background-image:url('${upcomingEv.poster||''}');background-size:cover;background-position:center top;filter:brightness(0.88) saturate(1.05);"></div>
-      <div style="position:absolute;inset:0;background:linear-gradient(to left,rgba(0,0,0,0.88) 0%,rgba(0,0,0,0.55) 50%,rgba(0,0,0,0.1) 100%);"></div>
-      <div style="position:relative;z-index:2;padding:80px 44px 56px;height:100%;box-sizing:border-box;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-end;text-align:right;">
-        <div style="font-family:'Montserrat',sans-serif;font-size:0.6rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:10px;">${uPPV ? 'Next PPV Event' : 'Next Fight Night'}</div>
-        <h2 style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(1.1rem,2.2vw,1.7rem);text-transform:uppercase;letter-spacing:0.04em;color:#fff;margin:0 0 8px;text-shadow:0 2px 20px rgba(0,0,0,0.8);line-height:1.15;">${upcomingEv.name||''}</h2>
-        <div style="font-family:'Inter',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.55);margin-bottom:22px;">${[upcomingEv.date,upcomingEv.location].filter(Boolean).join('  ·  ')}</div>
-        <a href="picks.html?id=${uId}" id="heroBtn" style="display:inline-block !important;background:linear-gradient(135deg,#7a3100 0%,#d46400 55%,#ff8c00 100%) !important;color:#fff !important;font-family:'Montserrat',sans-serif !important;font-weight:800 !important;font-size:0.78rem !important;letter-spacing:0.12em !important;text-transform:uppercase !important;padding:13px 28px !important;border-radius:6px !important;text-decoration:none !important;border:1px solid rgba(255,140,0,0.5) !important;box-shadow:0 0 28px rgba(255,120,0,0.45) !important;animation:heroBtnPulse 3s 1.2s ease infinite !important;transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1) !important;">Make Your Picks →</a>
-      </div>
-    </div>
-  `;
+  renderHero(upcomingEv, 'upcoming');
 }
 
 // ── Event Notifications ───────────────────────
