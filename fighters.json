@@ -5811,13 +5811,21 @@
     "weightClass": "Heavyweight",
     "ranking": "Unranked",
     "record": {
-      "wins": 0,
+      "wins": 3,
       "losses": 0,
       "draws": 0
     },
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
     "bio": "Gable Steveson is the most hyped heavyweight prospect in MMA — a 2020 Olympic gold medalist and two-time NCAA wrestling champion who brings a pedigree of dominance that rivals any fighter in history. After a stint with WWE, Steveson signed with the UFC in April 2026 off a 3-0 pro MMA record, finishing all three opponents in the first round. He trains at Jackson Wink MMA Academy under the tutelage of Jon Jones. His UFC debut against Elisha Ellison at UFC 329 on July 11, 2026 is one of the most anticipated heavyweight debuts in recent memory.",
     "last5": [
+      {
+        "opponent": "Hugo Lezama",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Mexico Fight League 3",
+        "round": 1,
+        "time": "3:50"
+      },
       {
         "opponent": "Kevin Hein",
         "result": "W",
@@ -5887,14 +5895,6 @@
         "result": "W",
         "method": "style=\"font-size:88%\"|10–4",
         "event": "style=\"font-size:88%\" rowspan=4|April 2–3, 2021",
-        "round": 0,
-        "time": ""
-      },
-      {
-        "opponent": "Jordan Wood",
-        "result": "W",
-        "method": "style=\"font-size:88%\"|TF 10–0",
-        "event": "style=\"font-size:88%\" rowspan=2|December 4–5, 2020",
         "round": 0,
         "time": ""
       }
@@ -6155,6 +6155,14 @@
     "bio": "Brandon Royval is one of the most exciting flyweights alive — a high-risk, high-reward grappler who comes to finish every fight. 'Raw Dawg' holds submission wins over multiple ranked opponents and is never out of a fight, bringing relentless pressure and a never-back-down mentality that makes every outing must-watch.",
     "last5": [
       {
+        "opponent": "Manel Kape",
+        "result": "L",
+        "method": "KO (punches)",
+        "event": "UFC on ESPN: Royval vs. Kape",
+        "round": 1,
+        "time": "3:18"
+      },
+      {
         "opponent": "Joshua Van",
         "result": "L",
         "method": "Decision (unanimous)",
@@ -6225,14 +6233,6 @@
         "event": "UFC 255",
         "round": 1,
         "time": "4:59"
-      },
-      {
-        "opponent": "Kai Kara-France",
-        "result": "W",
-        "method": "Submission (guillotine choke)",
-        "event": "UFC 253",
-        "round": 2,
-        "time": "0:48"
       }
     ]
   },
@@ -14830,6 +14830,14 @@
     },
     "last5": [
       {
+        "opponent": "Kyle Nelson (fighter)",
+        "result": "W",
+        "method": "TKO (head kick and punches)",
+        "event": "UFC Fight Night: Adesanya vs. Pyfer",
+        "round": 1,
+        "time": "0:24"
+      },
+      {
         "opponent": "Chris Duncan (fighter)",
         "result": "L",
         "method": "Submission (anaconda choke)",
@@ -14900,14 +14908,6 @@
         "event": "UFC on ESPN: Santos vs. Hill",
         "round": 1,
         "time": "2:17"
-      },
-      {
-        "opponent": "Drew Dober",
-        "result": "L",
-        "method": "TKO (knee and punches)",
-        "event": "UFC Fight Night: Santos vs. Ankalaev",
-        "round": 1,
-        "time": "3:17"
       }
     ],
     "nickname": "T. Wrecks"
@@ -17175,7 +17175,94 @@
   },
   {
     "id": "kyle-campbell",
-    "name": "Kyle Campbell"
+    "name": "Kyle Campbell",
+    "record": {
+      "wins": 18,
+      "losses": 10,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Drew Dober",
+        "result": "L",
+        "method": "TKO (knees and punches)",
+        "event": "UFC Fight Night: de Ridder vs. Allen",
+        "round": 3,
+        "time": "1:16"
+      },
+      {
+        "opponent": "Benoît Saint Denis",
+        "result": "L",
+        "method": "Submission (arm-triangle choke)",
+        "event": "UFC 315",
+        "round": 2,
+        "time": "2:35"
+      },
+      {
+        "opponent": "Gustavo Wurlitzer",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "BTC 24",
+        "round": 1,
+        "time": "3:04"
+      },
+      {
+        "opponent": "Josh Henry",
+        "result": "W",
+        "method": "TKO (head kick and punches)",
+        "event": "List of PFC events#Prospect Fighting Championships 16: Mein vs. Chavez",
+        "round": 1,
+        "time": "2:14"
+      },
+      {
+        "opponent": "Marco Antonio Elpidio",
+        "result": "W",
+        "method": "KO (head kick)",
+        "event": "List of PFC events#Prospect Fighting Championships 14: Knockout Kidney Disease 3",
+        "round": 1,
+        "time": "3:23"
+      },
+      {
+        "opponent": "Shane Campbell",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "Unified MMA 43",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Michael Dufort",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "Samourai MMA 1",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Austin Hubbard",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Cowboy vs. Gaethje",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Nordine Taleb",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Iaquinta vs. Cowboy",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Cody Pfister",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "BTC 5",
+        "round": 3,
+        "time": "5:00"
+      }
+    ]
   },
   {
     "id": "shanelle-dyer",
@@ -29845,6 +29932,14 @@
     },
     "last5": [
       {
+        "opponent": "Jeremy Stephens",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC 328",
+        "round": 1,
+        "time": "4:20"
+      },
+      {
         "opponent": "Daniel Zellhuber",
         "result": "W",
         "method": "TKO (punches)",
@@ -29915,14 +30010,6 @@
         "event": "UFC Fight Night: Makhachev vs. Green",
         "round": 1,
         "time": "3:23"
-      },
-      {
-        "opponent": "Nasrat Haqparast",
-        "result": "W",
-        "method": "Decision (unanimous)",
-        "event": "UFC 271",
-        "round": 3,
-        "time": "5:00"
       }
     ],
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/GREEN_KING_L_05-09.png?itok=8VMeSq2i",
@@ -30520,5 +30607,98 @@
     ],
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/5/HERNANDEZ_ANTHONY_L_10-19.png?itok=8a6qWRi5",
     "nickname": "Fluffy"
+  },
+  {
+    "id": "john-garza",
+    "name": "John Garza",
+    "record": {
+      "wins": 6,
+      "losses": 1,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Daniel Zellhuber",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 318",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Ottman Azaitar",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "UFC on ESPN: Covington vs. Buckley",
+        "round": 2,
+        "time": "2:03"
+      },
+      {
+        "opponent": "Darrius Flowers",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Hermansson vs. Pyfer",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Carlos Diego Ferreira",
+        "result": "L",
+        "method": "KO (punch)",
+        "event": "UFC Fight Night: Dern vs. Hill",
+        "round": 2,
+        "time": "1:50"
+      },
+      {
+        "opponent": "Marc Diakiese",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Thompson vs. Holland",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Jamie Mullarkey",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC on ESPN: dos Anjos vs. Fiziev",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Alan Patrick (fighter)",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "UFC on ESPN: Błachowicz vs. Rakić",
+        "round": 2,
+        "time": "3:22"
+      },
+      {
+        "opponent": "Clay Guida",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Overeem vs. Volkov",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Thiago Moisés",
+        "result": "L",
+        "method": "Submission (achilles lock)",
+        "event": "UFC Fight Night: Smith vs. Teixeira",
+        "round": 2,
+        "time": "0:25"
+      },
+      {
+        "opponent": "Stevie Ray (fighter)",
+        "result": "L",
+        "method": "Decision (majority)",
+        "event": "UFC Fight Night: Maia vs. Askren",
+        "round": 3,
+        "time": "5:00"
+      }
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_BLUE.png?VersionId=Om_hItmX1XM4gJZUDxmeO._luirl8gW7&amp;itok=ij6lbEqO",
+    "nickname": "Mowgli"
   }
 ]
