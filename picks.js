@@ -55,8 +55,12 @@ function formatOdds(n) {
   const toast = document.getElementById('pkToast');
   const sb    = window._sb;
 
-  // Persist event ID so refresh / direct navigation works
-  let eventId = getParam('id');
+  // Accept ?id= or legacy ?event= param
+  let eventId = getParam('id') || getParam('event');
+  if (eventId && !getParam('id')) {
+    // Canonicalise to ?id= so back button and history work correctly
+    history.replaceState(null, '', location.pathname + '?id=' + encodeURIComponent(eventId));
+  }
   if (!eventId) {
     const stored = sessionStorage.getItem('pk_last_event');
     if (stored) {

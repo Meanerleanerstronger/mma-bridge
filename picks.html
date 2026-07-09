@@ -182,7 +182,8 @@ document.addEventListener('click', function(e) {
   const fA     = head.dataset.fa;
   const fB     = head.dataset.fb;
   const weight = head.dataset.weight || '';
-  const evId   = new URLSearchParams(location.search).get('event') || '';
+  const _ps = new URLSearchParams(location.search);
+  const evId = _ps.get('id') || _ps.get('event') || '';
   window.location.href = 'matchup.html?event=' + encodeURIComponent(evId)
     + '&a=' + encodeURIComponent(fA)
     + '&b=' + encodeURIComponent(fB)

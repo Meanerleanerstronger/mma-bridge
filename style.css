@@ -4817,12 +4817,12 @@ body.light-mode .ev-star-btn.starred {
   background-position: center 20%;
   background-repeat: no-repeat;
   opacity: 0;
-  filter: blur(80px) saturate(1.2) brightness(0.55);
+  filter: blur(55px) saturate(1.4) brightness(0.6);
   pointer-events: none;
   transition: opacity 1.2s ease;
 }
-#pk-poster-bg.loaded { opacity: 0.09; }
-body.light-mode #pk-poster-bg.loaded { opacity: 0.06; }
+#pk-poster-bg.loaded { opacity: 0.22; }
+body.light-mode #pk-poster-bg.loaded { opacity: 0.12; }
 
 .pk-loading {
   display: flex; align-items: center; justify-content: center;

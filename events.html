@@ -1487,10 +1487,25 @@
     const ovClose=document.getElementById('ovClose');
     const ovBackdrop=document.getElementById('ovBackdrop');
     let currentEvent=null;
+    let _allEvents=[];            // populated by loadEvents so popstate can find events
+    let _overlayOpen=false;       // tracks whether overlay UI is open
+    let _overlayHistoryPushed=false; // true when we pushed a state (vs deep-link replace)
 
-    function openOverlay(ev){
+    function openOverlay(ev, _skipHistory){
       currentEvent=ev;
+      _overlayOpen=true;
       if (ev.name) document.title = ev.name + ' | MMA Bridge';
+      /* History management — push state so browser back closes overlay */
+      if (!_skipHistory) {
+        const currentId = new URLSearchParams(location.search).get('id');
+        if (currentId === ev.id) {
+          history.replaceState({mbEventId:ev.id}, ev.name||'', '?id='+encodeURIComponent(ev.id));
+          _overlayHistoryPushed = false;
+        } else {
+          history.pushState({mbEventId:ev.id}, ev.name||'', '?id='+encodeURIComponent(ev.id));
+          _overlayHistoryPushed = true;
+        }
+      }
       if (ev.status === 'completed') { if (typeof closeCountdownCard === 'function') closeCountdownCard(); }
       else if (typeof showCountdownCard === 'function') showCountdownCard(ev);
       /* Live polling — start for today's event, stop for others */
@@ -1807,7 +1822,9 @@
     }
 
     /* ── CLOSE EVENT OVERLAY ── */
-    function closeOverlay(){
+    function _closeOverlayUI(){
+      if (!_overlayOpen) return;
+      _overlayOpen = false;
       overlay.setAttribute('aria-hidden','true');
       overlay.classList.remove('open');
       document.title = 'Upcoming UFC Events 2025–2026 — Fight Picks & Previews | MMA Bridge';
@@ -1815,8 +1832,29 @@
         document.body.classList.remove('no-scroll');
       if (window.MMALive) window.MMALive.stop();
     }
+    function closeOverlay(){
+      _closeOverlayUI();
+      if (_overlayHistoryPushed) {
+        _overlayHistoryPushed = false;
+        history.back(); // popstate will fire but _overlayOpen is false so no double-close
+      } else {
+        history.replaceState(null, '', location.pathname);
+      }
+    }
     ovClose.addEventListener('click',closeOverlay);
     ovBackdrop.addEventListener('click',closeOverlay);
+
+    /* Browser back/forward support */
+    window.addEventListener('popstate', function(e){
+      if (e.state && e.state.mbEventId) {
+        if (!_overlayOpen) {
+          const ev = _allEvents.find(e2=>e2.id===e.state.mbEventId);
+          if (ev) openOverlay(ev, true); // _skipHistory=true, already in right state
+        }
+      } else {
+        if (_overlayOpen) { _overlayHistoryPushed=false; _closeOverlayUI(); }
+      }
+    });
 
     /* Calendar dropdown toggle */
     document.getElementById('ovCalBtn').addEventListener('click',function(e){
@@ -1921,6 +1959,7 @@
         const res = await fetch('data/events.json' + _cv).catch(()=>fetch('events.json' + _cv));
         if (!res || !res.ok) throw new Error('Could not load events');
         const all=await res.json();
+        _allEvents = all; // expose to popstate handler
         const upcoming=all.filter(e=>e.status==='upcoming').sort((a,b)=>new Date(a.isoDate)-new Date(b.isoDate));
         const list=document.getElementById('listAll');
         list.innerHTML='';
@@ -1941,7 +1980,9 @@
         if(id){
           const t=upcoming.find(e=>e.id===id)||all.find(e=>e.id===id);
           if(t) setTimeout(()=>{
-            openOverlay(t);
+            // Deep-link: replace current history entry with proper state so back works
+            history.replaceState({mbEventId:t.id}, t.name||'', '?id='+encodeURIComponent(t.id));
+            openOverlay(t, true); // skipHistory — state already set above
             // Highlight a specific fight if hla/hlb params present (from notification)
             const hla=p.get('hla'), hlb=p.get('hlb');
             if(hla&&hlb) setTimeout(()=>highlightFight(hla,hlb), 400);
