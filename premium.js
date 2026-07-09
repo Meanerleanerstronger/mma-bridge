@@ -65,12 +65,12 @@ body{
     !important;
 }
 
-/* ── SCROLL PROGRESS BAR ── */
-#mb-progress{
-  position:fixed;top:0;left:0;height:2px;width:0%;z-index:99999;pointer-events:none;
-  background:linear-gradient(90deg,#f0b429,#d49514,#f0b429);background-size:200% auto;
-  transition:width 0.08s linear;
-}
+/* ── SCROLLBAR OVERRIDE (prevent macOS gold accent color from showing) ── */
+::-webkit-scrollbar{width:6px;height:6px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.12);border-radius:3px;}
+::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.2);}
+html{scrollbar-color:rgba(255,255,255,0.12) transparent;scrollbar-width:thin;}
 
 /* ── SCANLINES ── */
 body::before{
@@ -306,16 +306,7 @@ body.light-mode html,body.light-mode body{background:#f0f0f4 !important;}
 
 document.head.appendChild(S);
 
-/* ══════════════════════════════════════════════════
-   ② SCROLL PROGRESS BAR
-══════════════════════════════════════════════════ */
-var prog=document.createElement('div');
-prog.id='mb-progress';
-document.body.appendChild(prog);
-window.addEventListener('scroll',function(){
-  var d=document.documentElement;
-  prog.style.width=Math.min((d.scrollTop/(d.scrollHeight-d.clientHeight))*100,100)+'%';
-},{passive:true});
+/* ② SCROLL PROGRESS BAR — removed (was causing gold streak at top) */
 
 /* ══════════════════════════════════════════════════
    ③ FILM GRAIN
