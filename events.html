@@ -2190,7 +2190,7 @@
   <script src="countdown.js?v=1.0"></script>
   <script src="live.js?v=1.0"></script>
   <script src="chat.js?v=2.4"></script>
-  <script src="premium.js?v=3.4"></script>
+  <script src="premium.js?v=3.5"></script>
   <script src="widget.js"></script>
   <script>
     // ── Hover-intent prefetch ──
@@ -2286,7 +2286,7 @@
       const imgBEl = row.querySelector('.ov-head-cell.ov-head-r .ov-headshot');
       const imgA   = imgAEl ? imgAEl.src : '';
       const imgB   = imgBEl ? imgBEl.src : '';
-      const url = 'matchup.html?event=' + encodeURIComponent(evId) + '&a=' + encodeURIComponent(fA) + '&b=' + encodeURIComponent(fB) + '&weight=' + encodeURIComponent(weight) + '&imgA=' + encodeURIComponent(imgA) + '&imgB=' + encodeURIComponent(imgB);
+      const url = 'matchup.html?event=' + encodeURIComponent(evId) + '&a=' + encodeURIComponent(fA) + '&b=' + encodeURIComponent(fB) + '&weight=' + encodeURIComponent(weight) + '&imgA=' + encodeURIComponent(imgA) + '&imgB=' + encodeURIComponent(imgB) + '&from=events';
       window.location.href = url;
     }
   });

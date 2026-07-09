@@ -69,8 +69,6 @@ body{
 #mb-progress{
   position:fixed;top:0;left:0;height:2px;width:0%;z-index:99999;pointer-events:none;
   background:linear-gradient(90deg,#f0b429,#d49514,#f0b429);background-size:200% auto;
-  box-shadow:0 2px 10px rgba(240,180,41,0.4);
-  clip-path:inset(0 0 -14px 0);
   transition:width 0.08s linear;
 }
 

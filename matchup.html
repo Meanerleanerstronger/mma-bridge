@@ -10,8 +10,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fight Matchup | MMA Bridge</title>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,900&family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=9.4" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css?v=9.5" />
   <style>
     *, *::before, *::after { box-sizing:border-box; }
     body { background:#040407; min-height:100vh; }
@@ -421,6 +422,8 @@
   <script src="supabase.js"></script>
   <script src="auth.js?v=3.2"></script>
   <script src="search.js"></script>
+  <script src="premium.js?v=3.5"></script>
+  <script src="animations.js?v=2.0"></script>
   <script src="chat.js?v=2.4"></script>
   <script src="fighter-modal.js?v=1.1"></script>
   <script src="notifications.js?v=2.4"></script>
@@ -438,12 +441,19 @@
 
     if (nameA && nameB) document.title = `${nameA} vs ${nameB} | MMA Bridge`;
 
-    /* back link — prefer picks page if eventId known, fall back to events overlay */
+    /* back link — dynamic based on where user came from */
     const backLink  = document.getElementById('muBackLink');
     const backLabel = document.getElementById('muBackLabel');
-    if (eventId) {
+    const fromPage  = p.get('from') || '';
+    if (fromPage === 'picks' && eventId) {
       backLink.href = `picks.html?event=${encodeURIComponent(eventId)}`;
       if (backLabel) backLabel.textContent = 'Back to picks';
+    } else if (fromPage === 'events' && eventId) {
+      backLink.href = `events.html?id=${encodeURIComponent(eventId)}`;
+      if (backLabel) backLabel.textContent = 'Back to event';
+    } else if (eventId) {
+      backLink.href = `events.html?id=${encodeURIComponent(eventId)}`;
+      if (backLabel) backLabel.textContent = 'Back to event';
     }
 
     function esc(s){ const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }

@@ -12208,3 +12208,398 @@ body.light-mode .lnx-close:hover { color: rgba(0,0,0,0.55); background: rgba(0,0
 /* HIW modal — override for new scoring */
 .pk-hiw-max { background: rgba(80,210,120,0.06) !important; border-color: rgba(80,210,120,0.18) !important; }
 .pk-hiw-max strong { color: #50d278 !important; }
+
+
+/* ══════════════════════════════════════════════════
+   PICKS PAGE v2 — DUEL CARD REDESIGN
+   All rules here override earlier declarations.
+══════════════════════════════════════════════════ */
+
+/* ── Event hero: poster becomes a real banner ── */
+#pkRoot { position: relative; }
+
+.pk-poster-bg {
+  position: absolute !important;
+  top: 0; left: 0; right: 0;
+  height: 520px;
+  filter: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+  background-size: cover !important;
+  background-position: center 18% !important;
+  z-index: 0;
+}
+.pk-poster-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(8,8,12,0.18) 0%, rgba(8,8,12,0.65) 50%, rgba(8,8,12,1) 83%),
+    linear-gradient(to right, rgba(8,8,12,0.72) 0%, transparent 35%, rgba(8,8,12,0.72) 100%);
+}
+
+/* Nav stays near top, readable over poster */
+.pk-nav {
+  position: relative; z-index: 2;
+  padding: 22px 22px 0;
+  margin-bottom: 0;
+}
+.pk-back {
+  color: rgba(255,255,255,0.45) !important;
+  backdrop-filter: blur(6px);
+  background: rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 6px 14px;
+  gap: 7px;
+}
+.pk-back:hover { color: #fff !important; background: rgba(0,0,0,0.35); }
+.pk-switch-btn {
+  backdrop-filter: blur(6px);
+  background: rgba(0,0,0,0.25);
+  border-color: rgba(255,255,255,0.12) !important;
+}
+
+/* Header: push title down into poster zone */
+.pk-hd {
+  padding: 130px 22px 32px !important;
+  border-bottom: none !important;
+  margin-bottom: 0 !important;
+  position: relative; z-index: 2;
+}
+.pk-hd-eyebrow {
+  font-size: 0.48rem !important;
+  letter-spacing: 0.32em !important;
+  color: rgba(200,150,12,0.7) !important;
+  margin-bottom: 10px !important;
+}
+.pk-hd-title {
+  font-size: clamp(2rem, 5.5vw, 3.4rem) !important;
+  line-height: 0.95 !important;
+  text-shadow: 0 4px 28px rgba(0,0,0,0.85), 0 2px 8px rgba(0,0,0,0.9) !important;
+  margin-bottom: 14px !important;
+}
+.pk-hd-meta {
+  font-size: 0.78rem !important;
+  color: rgba(255,255,255,0.42) !important;
+  gap: 10px !important;
+}
+.pk-hd-hype-badge {
+  top: 22px !important;
+}
+
+/* Banners, ctrl, fight list: above the poster fade */
+.pk-banner, .pk-ctrl, .pk-fights,
+.pk-onboard-hint, .pk-challenge-banner {
+  position: relative; z-index: 2;
+}
+
+/* Onboarding hint: cleaner look */
+.pk-onboard-hint {
+  margin: 0 22px 18px !important;
+  border-radius: 10px !important;
+  background: rgba(14,14,22,0.85) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+/* ── Section label: horizontal rule with centered text ── */
+.fc-section-lbl {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  padding: 28px 22px 16px !important;
+  border-left: none !important;
+  border-bottom: none !important;
+  font-size: 0.42rem !important;
+  letter-spacing: 0.38em !important;
+  color: rgba(200,150,12,0.5) !important;
+  white-space: nowrap;
+}
+.fc-section-lbl::before,
+.fc-section-lbl::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(200,150,12,0.15), transparent);
+}
+
+/* Fight list: padding on sides */
+.pk-fights {
+  padding: 0 10px 60px !important;
+}
+
+/* ── DUEL CARD ── */
+
+/* Card */
+.fc-card {
+  border-radius: 16px !important;
+  margin-bottom: 14px !important;
+  background: rgba(10,10,16,0.98) !important;
+  border-color: rgba(255,255,255,0.07) !important;
+  overflow: hidden !important;
+}
+.fc-card.fc-main {
+  border-color: rgba(200,150,12,0.22) !important;
+}
+.fc-card:hover {
+  transform: none !important;
+  box-shadow: 0 6px 32px rgba(0,0,0,0.6) !important;
+  border-color: rgba(255,255,255,0.12) !important;
+}
+
+/* Matchup: explicit height for duel layout */
+.fc-matchup {
+  min-height: 170px !important;
+  position: relative;
+}
+.fc-card.fc-maincrd .fc-matchup { min-height: 210px !important; }
+.fc-card.fc-main    .fc-matchup { min-height: 260px !important; }
+
+/* Fighter side: column, content at bottom, relative for photo */
+.fc-fighter {
+  position: relative !important;
+  overflow: hidden !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: flex-end !important;
+  padding: 18px 18px !important;
+  gap: 4px !important;
+  background: transparent !important;
+  transition: none !important;
+}
+.fc-fighter:hover { background: transparent !important; }
+.fc-fighter-b {
+  flex-direction: column !important;
+  align-items: flex-end !important;
+}
+
+/* Photo: fills entire fighter side */
+.fc-photo {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  aspect-ratio: unset !important;
+  border-radius: 0 !important;
+  border: none !important;
+  z-index: 0;
+  background: rgba(255,255,255,0.02);
+  overflow: hidden;
+}
+.fc-photo img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: top center !important;
+  transition: filter 0.3s, transform 0.3s !important;
+}
+.fc-card.fc-maincrd .fc-photo,
+.fc-card.fc-main    .fc-photo { width: 100% !important; }
+
+/* Silhouette fallback: fill the side */
+.fc-sil {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.pk-silhouette {
+  width: 55%;
+  height: 75%;
+  opacity: 0.06 !important;
+}
+
+/* Gradient overlays — fade from photo edges toward VS center */
+.sb-side-a::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to right, rgba(8,8,12,0.0) 0%, rgba(8,8,12,0.72) 78%, rgba(8,8,12,0.96) 100%),
+    linear-gradient(to top,   rgba(8,8,12,0.94) 0%, rgba(8,8,12,0.35) 42%, transparent 68%);
+  z-index: 1; pointer-events: none;
+  transition: background 0.22s;
+}
+.sb-side-b::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to left,  rgba(8,8,12,0.0) 0%, rgba(8,8,12,0.72) 78%, rgba(8,8,12,0.96) 100%),
+    linear-gradient(to top,   rgba(8,8,12,0.94) 0%, rgba(8,8,12,0.35) 42%, transparent 68%);
+  z-index: 1; pointer-events: none;
+  transition: background 0.22s;
+}
+
+/* Selected: golden warmth floods the photo side */
+.sb-side-a.selected::before {
+  background:
+    linear-gradient(to right, rgba(160,100,0,0.28) 0%, rgba(8,8,12,0.68) 80%, rgba(8,8,12,0.95) 100%),
+    linear-gradient(to top,   rgba(8,8,12,0.9) 0%,  rgba(8,8,12,0.2)  46%, transparent 70%);
+}
+.sb-side-b.selected::before {
+  background:
+    linear-gradient(to left,  rgba(160,100,0,0.28) 0%, rgba(8,8,12,0.68) 80%, rgba(8,8,12,0.95) 100%),
+    linear-gradient(to top,   rgba(8,8,12,0.9) 0%,  rgba(8,8,12,0.2)  46%, transparent 70%);
+}
+
+/* Non-picked: heavy dim */
+.sb-side-a.fc-other::before {
+  background:
+    linear-gradient(to right, rgba(8,8,12,0.45) 0%, rgba(8,8,12,0.92) 80%, rgba(8,8,12,0.98) 100%),
+    linear-gradient(to top,   rgba(8,8,12,0.98) 0%, rgba(8,8,12,0.88) 55%, rgba(8,8,12,0.6) 100%);
+}
+.sb-side-b.fc-other::before {
+  background:
+    linear-gradient(to left,  rgba(8,8,12,0.45) 0%, rgba(8,8,12,0.92) 80%, rgba(8,8,12,0.98) 100%),
+    linear-gradient(to top,   rgba(8,8,12,0.98) 0%, rgba(8,8,12,0.88) 55%, rgba(8,8,12,0.6) 100%);
+}
+.fc-fighter.fc-other { opacity: 1 !important; }
+.fc-fighter.fc-other .fc-photo img {
+  filter: grayscale(65%) brightness(0.42) !important;
+}
+.fc-fighter.fc-other .fc-name {
+  color: rgba(255,255,255,0.28) !important;
+  text-shadow: none !important;
+}
+
+/* Override old selected::after border — replace with golden overlay */
+.fc-fighter.selected::after {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: rgba(200,140,0,0.08) !important;
+  border: 1px solid rgba(200,140,0,0.32) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  z-index: 2 !important;
+  pointer-events: none;
+}
+.fc-fighter.selected .fc-photo { border: none !important; }
+
+/* Fighter info: above gradients */
+.fc-info {
+  position: relative !important;
+  z-index: 3 !important;
+  flex: unset !important;
+  min-width: 0;
+  gap: 3px !important;
+}
+.fc-info-b {
+  align-items: flex-end !important;
+  text-align: right !important;
+}
+
+/* Fighter name: large, text-shadow for photo readability */
+.fc-name {
+  font-size: 1.6rem !important;
+  color: #fff !important;
+  text-shadow: 0 2px 14px rgba(0,0,0,0.95), 0 0 28px rgba(0,0,0,0.75) !important;
+  line-height: 1.0 !important;
+}
+.fc-card.fc-maincrd .fc-name { font-size: 1.9rem !important; }
+.fc-card.fc-main    .fc-name { font-size: 2.3rem !important; letter-spacing: 0.02em !important; }
+.fc-fighter.selected .fc-name {
+  color: #f0b429 !important;
+  text-shadow: 0 0 22px rgba(240,180,41,0.55), 0 2px 10px rgba(0,0,0,0.95) !important;
+}
+.fc-fighter-link {
+  text-decoration: none !important;
+}
+.fc-fighter-link:hover { color: #f0b429 !important; }
+
+/* Record: always show, subtle */
+.fc-record {
+  opacity: 0.5 !important;
+  transition: opacity 0.18s !important;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.9) !important;
+}
+.fc-info:hover .fc-record { opacity: 0.75 !important; transition: opacity 0.15s !important; }
+
+/* Odds: above gradient */
+.fc-odds-col { z-index: 2; position: relative; }
+
+/* Community % and group breakdown: above gradient */
+.fc-comm-pct,
+.fc-group-breakdown,
+.fc-badge,
+.fc-opp { position: relative !important; z-index: 3 !important; }
+
+/* Comm % numbers: shadow for legibility */
+.fc-comm-num {
+  text-shadow: 0 2px 8px rgba(0,0,0,0.85) !important;
+}
+
+/* VS column: clean divider */
+.fc-vs-col {
+  z-index: 4;
+  position: relative;
+  border-left: 1px solid rgba(255,255,255,0.07) !important;
+  border-right: 1px solid rgba(255,255,255,0.07) !important;
+  background: rgba(8,8,12,0.65) !important;
+  width: 66px !important;
+}
+.fc-vs {
+  font-size: 0.54rem !important;
+  letter-spacing: 0.2em !important;
+  color: rgba(200,150,12,0.45) !important;
+}
+
+/* Result method: red, above overlay */
+.fc-result-verdict { z-index: 5; position: relative; }
+.fc-result-method-big {
+  font-size: 1rem !important;
+  color: #f87171 !important;
+}
+
+/* Head strip: crisp, minimal */
+.fc-head {
+  border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+  padding: 7px 16px !important;
+  background: rgba(8,8,12,0.7) !important;
+  backdrop-filter: blur(4px);
+}
+.fc-head:hover { background: rgba(255,255,255,0.02) !important; }
+
+/* Method / round row */
+.sb-method-wrap {
+  background: rgba(0,0,0,0.25) !important;
+  border-top: 1px solid rgba(255,255,255,0.04) !important;
+}
+
+/* DD button */
+.pk-dd-wrap {
+  background: rgba(0,0,0,0.2) !important;
+  border-top: 1px solid rgba(255,255,255,0.04) !important;
+}
+
+/* FOTN bar */
+.pk-fotn-bar {
+  background: rgba(12,12,18,0.88) !important;
+  border-color: rgba(200,150,12,0.18) !important;
+  backdrop-filter: blur(6px) !important;
+}
+
+/* ── Mobile overrides ── */
+@media (max-width: 640px) {
+  .pk-poster-bg { height: 380px !important; }
+  .pk-hd { padding: 90px 16px 28px !important; }
+  .pk-hd-title { font-size: clamp(1.6rem, 7vw, 2.4rem) !important; }
+  .pk-nav { padding: 16px 16px 0 !important; }
+  .pk-fights { padding: 0 6px 60px !important; }
+  .fc-section-lbl { padding: 22px 16px 12px !important; }
+  .fc-matchup    { min-height: 145px !important; }
+  .fc-card.fc-maincrd .fc-matchup { min-height: 175px !important; }
+  .fc-card.fc-main    .fc-matchup { min-height: 215px !important; }
+  .fc-fighter { padding: 14px 13px !important; }
+  .fc-name { font-size: 1.25rem !important; }
+  .fc-card.fc-maincrd .fc-name { font-size: 1.5rem !important; }
+  .fc-card.fc-main    .fc-name { font-size: 1.75rem !important; }
+  .fc-vs-col { width: 52px !important; }
+}
+@media (max-width: 380px) {
+  .fc-name { font-size: 1.05rem !important; }
+  .fc-card.fc-maincrd .fc-name { font-size: 1.25rem !important; }
+  .fc-card.fc-main    .fc-name { font-size: 1.45rem !important; }
+  .fc-vs-col { width: 44px !important; }
+}
