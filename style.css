@@ -6568,6 +6568,43 @@ body.light-mode .pk-fotn-section { border-top-color: rgba(0,0,0,0.07) !important
 body.light-mode .pk-save-btn.dirty { color: #fff !important; }
 body.light-mode .ev-hype-badge { color: rgba(140,80,0,0.85); background: rgba(200,130,0,0.07); border-color: rgba(180,110,0,0.2); }
 
+/* ── EV-HYPE-SLOT — community hype baked into upcoming event cards ── */
+.ev-hype-slot {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 10px 14px 12px;
+  background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 100%);
+  display: flex; flex-direction: row; align-items: flex-end; gap: 6px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 4;
+}
+.ev-hype-slot.loaded { opacity: 1; }
+.ev-hype-slot .ehs-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 2.4rem; font-weight: 900; line-height: 1;
+  color: #f0b429;
+  text-shadow: 0 0 18px rgba(240,180,41,0.6), 0 0 40px rgba(240,150,20,0.3);
+  letter-spacing: -0.01em;
+}
+.ev-hype-slot .ehs-sep {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1rem; font-weight: 700; color: rgba(240,180,41,0.35);
+  line-height: 1; margin-bottom: 6px;
+}
+.ev-hype-slot .ehs-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.48rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(240,180,41,0.55);
+  line-height: 1; margin-bottom: 7px; flex: 1;
+}
+.ev-hype-slot .ehs-count {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.46rem; font-weight: 500;
+  color: rgba(255,255,255,0.22); letter-spacing: 0.04em;
+  line-height: 1; margin-bottom: 7px;
+}
+
 /* toast */
 .pk-toast {
   position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);

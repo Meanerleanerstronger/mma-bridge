@@ -261,6 +261,14 @@
     .ev-card.ppv:hover .ev-card-cta { color:rgba(200,168,75,.6); }
     .ev-card-cta svg { width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round; }
 
+    /* Community hype slot — bottom-right corner of card */
+    .ev-hype-slot { position:absolute;bottom:12px;right:18px;z-index:4;display:flex;flex-direction:column;align-items:flex-end;gap:2px;opacity:0;pointer-events:none;transition:opacity .4s ease; }
+    .ev-hype-slot.loaded { opacity:1; }
+    .ev-hype-slot .ehs-num { font-family:'Barlow Condensed',sans-serif;font-size:2rem;font-weight:900;line-height:1;color:#f0b429;text-shadow:0 0 14px rgba(240,180,41,.6),0 0 30px rgba(240,150,20,.25);letter-spacing:-.01em;display:flex;align-items:baseline;gap:2px; }
+    .ev-hype-slot .ehs-sep { font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:700;color:rgba(240,180,41,.28);line-height:1; }
+    .ev-hype-slot .ehs-label { font-family:'Inter',sans-serif;font-size:.42rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:rgba(240,180,41,.45);line-height:1; }
+    .ev-hype-slot .ehs-count { font-family:'Inter',sans-serif;font-size:.4rem;font-weight:500;color:rgba(255,255,255,.16);letter-spacing:.03em;line-height:1; }
+
     /* ══════════════════════════════════
        CINEMATIC OVERLAY
     ══════════════════════════════════ */
@@ -1230,6 +1238,49 @@
       return r.split(':')[0].trim().toUpperCase();
     }
 
+    /* ── HYPE UTILITIES (top-level so save callback can reach them) ── */
+    const _RATINGS_API = 'https://mmabridge-backend.onrender.com/api';
+    let _hypeTimer = null;
+
+    function updateCardHypeSlot(evId, d) {
+      const slot = document.querySelector(`.ev-hype-slot[data-ev-hype-slot="${CSS.escape(evId)}"]`);
+      if (!slot) return;
+      const avg = parseFloat(d.avg_hype || 0);
+      const count = parseInt(d.total_ratings || 0);
+      if (count < 1) return;
+      slot.innerHTML = `<div class="ehs-num">${avg.toFixed(1)}<span class="ehs-sep">/10</span></div><div class="ehs-label">Community Hype</div><div class="ehs-count">${count} rating${count !== 1 ? 's' : ''}</div>`;
+      slot.classList.add('loaded');
+    }
+
+    function applyOverlayHype(d) {
+      if (!d || parseInt(d.total_ratings || 0) < 1) return;
+      const avg = parseFloat(d.avg_hype).toFixed(1);
+      const cnt = parseInt(d.total_ratings);
+      const commHype = document.getElementById('ovCommHype');
+      const commNum  = document.getElementById('ovCommNum');
+      const commCount = document.getElementById('ovCommCount');
+      if (commNum) commNum.innerHTML = avg + '<span style="font-size:.8rem;font-weight:600;color:rgba(200,150,12,.4);vertical-align:baseline">/10</span>';
+      if (commCount) commCount.textContent = `${cnt} rating${cnt !== 1 ? 's' : ''}`;
+      if (commHype) commHype.style.display = '';
+    }
+
+    async function saveAndRefreshHype(ev, v) {
+      if (!ev) return;
+      try {
+        await fetch(`${_RATINGS_API}/ratings`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ event_id: ev.id, event_name: ev.name || '', hype_rating: v, fotn_prediction: null })
+        });
+        const res = await fetch(`${_RATINGS_API}/ratings/${encodeURIComponent(ev.id)}`);
+        if (!res.ok) return;
+        const d = await res.json();
+        _hypeCache.set(ev.id, d);
+        applyOverlayHype(d);
+        updateCardHypeSlot(ev.id, d);
+      } catch {}
+    }
+
     /* ── COMPLETED EVENT CARD (shows result in the main list) ── */
     function buildCompletedCard(ev) {
       const isPPV = ev.type === 'PPV', cls = isPPV ? 'ppv' : 'fn';
@@ -1362,35 +1413,13 @@
         setTimeout(function(){ openOverlay(ev); }, 90);
       });
 
-      // Wrap card + star button in a flex row
       const wrap = document.createElement('div');
       wrap.className = 'ev-card-wrap';
+      const hySlot = document.createElement('div');
+      hySlot.className = 'ev-hype-slot';
+      hySlot.dataset.evHypeSlot = ev.id;
+      card.appendChild(hySlot);
       wrap.appendChild(card);
-
-      // Star button — browser push alerts 1 week & day before
-      const starBtn = document.createElement('button');
-      const STAR_EMPTY = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
-      const STAR_FULL  = `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`;
-      function refreshStar(){
-        const on = window.MMABridgePush?.isStarred(ev.id) || false;
-        starBtn.className = 'ev-star-btn' + (on ? ' starred' : '');
-        starBtn.title = on ? 'Starred — click to remove' : 'Star for push alerts 1 week & day before';
-        starBtn.innerHTML = on ? STAR_FULL : STAR_EMPTY;
-      }
-      refreshStar();
-      starBtn.addEventListener('click', async function(e){
-        e.preventDefault(); e.stopPropagation();
-        if (!window.MMABridgePush) { alert('Push notifications not ready yet, try again in a moment.'); return; }
-        const on = this.classList.contains('starred');
-        this.classList.add('loading');
-        if (on) {
-          await window.MMABridgePush.unstarEvent(ev.id);
-        } else {
-          await window.MMABridgePush.starEvent(ev.id, ev.name || '', ev.isoDate || '', ev.start_time || '');
-        }
-        refreshStar();
-      });
-      wrap.appendChild(starBtn);
       return wrap;
     }
 
@@ -1425,6 +1454,8 @@
         t.style.color=active?HYPE_C[v]:'';
         t.style.fontWeight=active?'900':'';
       });
+      clearTimeout(_hypeTimer);
+      _hypeTimer = setTimeout(() => saveAndRefreshHype(currentEvent, v), 700);
     }
     function resetHype(){
       currentHype=null;
@@ -1563,20 +1594,12 @@
       resetHype();
       const commHype = document.getElementById('ovCommHype');
       if (commHype) commHype.style.display = 'none';
-      function _applyHypeData(d) {
-        if (!d || !d.avg_hype || parseInt(d.total_ratings || 0) < 1) return;
-        const avg = parseFloat(d.avg_hype).toFixed(1);
-        const cnt = parseInt(d.total_ratings);
-        document.getElementById('ovCommNum').innerHTML = avg + '<span style="font-size:.8rem;font-weight:600;color:rgba(200,150,12,.4);vertical-align:baseline">/10</span>';
-        document.getElementById('ovCommCount').textContent = `${cnt} rating${cnt !== 1 ? 's' : ''}`;
-        if (commHype) commHype.style.display = '';
-      }
       if (_hypeCache.has(ev.id)) {
-        _applyHypeData(_hypeCache.get(ev.id));
+        applyOverlayHype(_hypeCache.get(ev.id));
       } else {
-        fetch(`https://mmabridge-backend.onrender.com/api/ratings/${encodeURIComponent(ev.id)}`)
+        fetch(`${_RATINGS_API}/ratings/${encodeURIComponent(ev.id)}`)
           .then(r => r.ok ? r.json() : null)
-          .then(d => { if (d) _hypeCache.set(ev.id, d); _applyHypeData(d); })
+          .then(d => { if (d) { _hypeCache.set(ev.id, d); applyOverlayHype(d); } })
           .catch(() => {});
       }
 
@@ -1879,23 +1902,13 @@
     async function loadHypeBadges(events) {
       if (_hypeBadgesLoaded) return;
       _hypeBadgesLoaded = true;
-      const API = 'https://mmabridge-backend.onrender.com/api';
       await Promise.all(events.map(async ev => {
         try {
-          const res = await fetch(`${API}/ratings/${encodeURIComponent(ev.id)}`);
+          const res = await fetch(`${_RATINGS_API}/ratings/${encodeURIComponent(ev.id)}`);
           if (!res.ok) return;
           const d = await res.json();
           _hypeCache.set(ev.id, d);
-          const avg = parseFloat(d.avg_hype || 0);
-          const count = parseInt(d.total_ratings || 0);
-          if (count < 1) return;
-          const card = document.querySelector(`.ev-card[data-event-id="${CSS.escape(ev.id)}"]`);
-          if (!card) return;
-          const badge = document.createElement('div');
-          badge.className = 'ev-hype-badge';
-          badge.innerHTML = `<div class="ehb-num">${avg.toFixed(1)}<span style="font-size:.75rem;font-weight:600;color:rgba(200,150,12,.4);vertical-align:baseline">/10</span></div><div class="ehb-label">Community Hype</div><div class="ehb-count">${count} rating${count !== 1 ? 's' : ''}</div>`;
-          badge.style.cssText = 'position:absolute;top:12px;right:56px;z-index:10';
-          card.appendChild(badge);
+          updateCardHypeSlot(ev.id, d);
         } catch {}
       }));
     }
