@@ -36,7 +36,7 @@
   </script>
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,900&family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Pacifico&display=swap" rel="stylesheet">
 
   <!-- CSS -->
   <link rel="stylesheet" href="style.css?v=9.3" />
@@ -53,7 +53,24 @@
       /* Today in MMA sidebar — full width below cards on mobile */
       .content-container { flex-direction: column; }
       .sidebar { width: 100%; box-sizing: border-box; margin-left: 0; }
-      /* hero mobile handled by .nh-hero classes */
+      /* Split hero: stack vertically on mobile, show upcoming on top */
+      #heroSection[style*="display: flex"],
+      #heroSection[style*="display:flex"] {
+        flex-direction: column-reverse !important;
+        min-height: 680px !important;
+      }
+      #heroSection[style*="display: flex"] > div:first-child,
+      #heroSection[style*="display:flex"] > div:first-child {
+        flex: 0 0 48% !important;
+      }
+      #heroSection[style*="display: flex"] > div:last-child,
+      #heroSection[style*="display:flex"] > div:last-child {
+        flex: 0 0 52% !important;
+      }
+      /* Hide divider on mobile split */
+      #heroSection > div[style*="left:50%"] { display: none !important; }
+      /* Right panel text left-align on mobile */
+      #heroSection > div:last-child > div { align-items: flex-start !important; text-align: left !important; }
     }
   </style>
 
@@ -154,232 +171,6 @@
     .content-container {
       animation: sectionFadeIn 0.5s 0.4s ease both;
     }
-
-    /* ── EDITORIAL HERO ── */
-    .nh-hero {
-      display: grid;
-      grid-template-columns: 52% 48%;
-      min-height: 600px;
-      position: relative;
-      overflow: hidden;
-      background: #060608;
-    }
-    .nh-left {
-      position: relative;
-      z-index: 2;
-      padding: 104px 52px 52px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-    }
-    .nh-right {
-      position: relative;
-      overflow: hidden;
-    }
-    .nh-right::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to right, #060608 0%, rgba(6,6,8,0.55) 28%, transparent 55%);
-      z-index: 1;
-      pointer-events: none;
-    }
-    .nh-poster {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      display: block;
-    }
-    .nh-poster-meta {
-      position: absolute;
-      bottom: 22px;
-      right: 22px;
-      z-index: 2;
-      text-align: right;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.58rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.75);
-      line-height: 1.7;
-      text-shadow: 0 1px 10px rgba(0,0,0,0.9);
-    }
-    .nh-eyebrow {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.58rem;
-      font-weight: 800;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: #f0b429;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .nh-eyebrow .nh-dot { color: rgba(240,180,41,0.4); }
-    .nh-name-a {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900;
-      font-size: clamp(3.8rem, 7vw, 6.5rem);
-      color: #fff;
-      line-height: 0.88;
-      letter-spacing: -0.01em;
-      text-shadow: 0 2px 40px rgba(0,0,0,0.7);
-      text-transform: uppercase;
-    }
-    .nh-name-vs-row {
-      display: flex;
-      align-items: baseline;
-      gap: 14px;
-      margin-top: 4px;
-    }
-    .nh-vs-label {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      font-style: italic;
-      font-size: clamp(1.3rem, 2.6vw, 2rem);
-      color: rgba(255,255,255,0.3);
-      flex-shrink: 0;
-    }
-    .nh-name-b {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900;
-      font-size: clamp(2.6rem, 5.5vw, 4.8rem);
-      color: rgba(255,255,255,0.85);
-      line-height: 1;
-      text-shadow: 0 2px 30px rgba(0,0,0,0.6);
-      text-transform: uppercase;
-    }
-    .nh-tagline {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.87rem;
-      color: rgba(255,255,255,0.42);
-      line-height: 1.65;
-      margin: 18px 0 30px;
-      max-width: 400px;
-    }
-    .nh-btns {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 38px;
-    }
-    .nh-btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: #f0b429;
-      color: #000;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 14px 26px;
-      border-radius: 6px;
-      text-decoration: none;
-      transition: opacity 0.15s, transform 0.2s;
-      white-space: nowrap;
-    }
-    .nh-btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
-    .nh-btn-primary.red { background: linear-gradient(135deg,#8b0000,#cc0000); color:#fff; }
-    .nh-btn-primary.green { background: linear-gradient(135deg,#004d3d,#00a878); color:#fff; }
-    .nh-btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      background: rgba(255,255,255,0.06);
-      color: rgba(255,255,255,0.72);
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 14px 26px;
-      border-radius: 6px;
-      text-decoration: none;
-      border: 1px solid rgba(255,255,255,0.13);
-      transition: background 0.15s, border-color 0.15s, transform 0.2s;
-      white-space: nowrap;
-    }
-    .nh-btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.24); transform: translateY(-2px); }
-    .nh-stats {
-      display: flex;
-      align-items: center;
-      padding-top: 24px;
-      border-top: 1px solid rgba(255,255,255,0.07);
-      max-width: 460px;
-    }
-    .nh-stat { flex: 1; }
-    .nh-stat-val {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 900;
-      font-size: 1.55rem;
-      color: #fff;
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-    .nh-stat-val sub {
-      font-size: 0.6rem;
-      vertical-align: baseline;
-      color: rgba(255,255,255,0.35);
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-    }
-    .nh-stat-label {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.44rem;
-      font-weight: 800;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.25);
-    }
-    .nh-stat-sep {
-      width: 1px;
-      height: 30px;
-      background: rgba(255,255,255,0.09);
-      margin: 0 18px;
-      flex-shrink: 0;
-    }
-    .nh-stat-live .nh-stat-val {
-      color: #f0b429;
-      display: flex;
-      align-items: center;
-      gap: 7px;
-    }
-    .nh-live-dot {
-      width: 7px; height: 7px;
-      background: #f0b429;
-      border-radius: 50%;
-      display: inline-block;
-      animation: liveDot 2s infinite;
-      flex-shrink: 0;
-    }
-    .nh-stat-locked .nh-stat-val { color: rgba(255,255,255,0.35); }
-    @media (max-width: 768px) {
-      .nh-hero { grid-template-columns: 1fr; min-height: auto; }
-      .nh-right { height: 280px; order: -1; }
-      .nh-right::before { background: linear-gradient(to bottom, transparent 30%, #060608 100%); }
-      .nh-poster-meta { display: none; }
-      .nh-left { padding: 24px 22px 40px; }
-      .nh-name-a { font-size: clamp(3rem, 15vw, 4.5rem); }
-      .nh-name-b { font-size: clamp(2.2rem, 11vw, 3.5rem); }
-      .nh-tagline { font-size: 0.82rem; }
-      .nh-btns { flex-direction: column; }
-      .nh-btn-primary, .nh-btn-secondary { text-align: center; justify-content: center; }
-    }
-    body.light-mode .nh-hero { background: #f2f0eb; }
-    body.light-mode .nh-left { background: transparent; }
-    body.light-mode .nh-right::before { background: linear-gradient(to right, #f2f0eb 0%, rgba(242,240,235,0.55) 28%, transparent 55%); }
-    body.light-mode .nh-name-a, body.light-mode .nh-name-b { color: #0a0a0f; text-shadow: none; }
-    body.light-mode .nh-tagline { color: rgba(0,0,0,0.45); }
-    body.light-mode .nh-btn-secondary { background: rgba(0,0,0,0.05); color: rgba(0,0,0,0.65); border-color: rgba(0,0,0,0.15); }
-    body.light-mode .nh-stats { border-top-color: rgba(0,0,0,0.08); }
-    body.light-mode .nh-stat-val { color: #0a0a0f; }
-    body.light-mode .nh-stat-sep { background: rgba(0,0,0,0.1); }
-    body.light-mode .nh-poster-meta { color: rgba(255,255,255,0.85); }
 
     /* ── LIGHT MODE overrides ── */
     body.light-mode {
@@ -562,18 +353,15 @@
 
 
 
-  <!-- HERO — editorial split: left=text, right=poster -->
-  <section id="heroSection" class="nh-hero">
-    <div class="nh-left" id="nhLeft">
-      <div class="nh-eyebrow" id="nhEyebrow"></div>
-      <div class="nh-names" id="nhNames"></div>
-      <p class="nh-tagline" id="nhTagline"></p>
-      <div class="nh-btns" id="nhBtns"></div>
-      <div class="nh-stats" id="nhStats"></div>
-    </div>
-    <div class="nh-right" id="nhRight">
-      <img class="nh-poster" id="nhPosterImg" src="" alt="" loading="eager">
-      <div class="nh-poster-meta" id="nhPosterMeta"></div>
+    <!-- HERO — auto-updates to next upcoming event -->
+  <section class="hero spotlight-bg" id="heroSection" style="position:relative;overflow:hidden;min-height:560px;background:#111;">
+    <div id="heroImg" style="position:absolute;inset:0;background-size:cover;background-position:center top;filter:brightness(0.92) saturate(1.05);transition:opacity 0.6s;"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(105deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.6) 35%, rgba(0,0,0,0.05) 65%, rgba(0,0,0,0) 100%);"></div>
+    <div id="hero-content" style="position:relative;z-index:2;padding:80px 56px 64px;max-width:600px;">
+      <div id="heroType" style="font-family:'Montserrat',sans-serif;font-size:0.65rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:12px;"></div>
+      <h1 id="heroTitle" style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:2.4rem;text-transform:uppercase;letter-spacing:0.04em;word-spacing:0.18em;color:#fff;margin:0 0 10px;text-shadow:0 2px 20px rgba(0,0,0,0.8);max-width:700px;"></h1>
+      <div id="heroMeta" style="font-family:'Inter',sans-serif;font-size:0.9rem;color:rgba(255,255,255,0.6);margin-bottom:28px;"></div>
+      <a id="heroBtn" href="events.html" style="display:inline-block !important;background:rgba(255,255,255,0.12);color:#fff;font-family:'Montserrat',sans-serif;font-weight:800;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;padding:12px 28px;border-radius:6px;text-decoration:none !important;border:1.5px solid rgba(255,255,255,0.25);">View Full Card →</a>
     </div>
   </section>
 
