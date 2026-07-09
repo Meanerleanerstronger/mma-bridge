@@ -12653,3 +12653,133 @@ body.light-mode .lnx-close:hover { color: rgba(0,0,0,0.55); background: rgba(0,0
   .fc-card.fc-main    .fc-name { font-size: 1.45rem !important; }
   .fc-vs-col { width: 44px !important; }
 }
+
+
+/* ═══════════════════════════════════════════════════════════
+   UX.JS — Global UX Layer  v1.0
+   Page transitions · Scroll reveals · Tilt · Spring · Ripple
+   Blur-up · Confetti · Tab crossfade
+═══════════════════════════════════════════════════════════ */
+
+/* ── 1. PAGE TRANSITIONS ── */
+html.ux-entering body {
+  animation: ux-page-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+html.ux-exiting body {
+  animation: ux-page-out 0.24s ease forwards;
+  pointer-events: none !important;
+}
+html.ux-exiting * { pointer-events: none !important; }
+
+@keyframes ux-page-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes ux-page-out {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-8px); }
+}
+
+
+/* ── 2. SCROLL REVEALS ── */
+.sr-watching {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.48s ease, transform 0.48s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.sr-watching.sr-revealed {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+
+/* ── 3. 3-D CARD TILT ── */
+.ev-card,
+.review-card,
+.pfp-card {
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.22s ease !important;
+  will-change: transform;
+}
+
+
+/* ── 4. SPRING BUTTON PRESS ── */
+.ux-pressed {
+  transform: scale(0.93) !important;
+  transition: transform 0.08s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+
+/* ── 5. BLUR-UP IMAGES ── */
+.ux-img-loading {
+  filter: blur(14px) saturate(0.6);
+  transition: filter 0.0s;
+}
+.ux-img-loaded {
+  filter: none;
+  transition: filter 0.45s ease;
+}
+
+
+/* ── 6. CONFETTI PARTICLES ── */
+.ux-confetti {
+  position: fixed;
+  border-radius: 3px;
+  pointer-events: none;
+  z-index: 99999;
+  animation: ux-confetti-burst var(--dur, 900ms) cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes ux-confetti-burst {
+  0%   { opacity: 1;   transform: translate(0, 0) rotate(0deg) scale(1); }
+  55%  { opacity: 1; }
+  100% { opacity: 0;   transform: translate(var(--dx), var(--dy)) rotate(var(--rot)) scale(0.3); }
+}
+
+
+/* ── 7. TAB CROSSFADE ── */
+.ux-tab-out {
+  animation: ux-tab-fade-out 0.18s ease forwards;
+}
+.ux-tab-in {
+  animation: ux-tab-fade-in 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes ux-tab-fade-out {
+  to { opacity: 0; transform: translateY(6px); }
+}
+@keyframes ux-tab-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ── 8. RIPPLE ── */
+.pk-side,
+.pk-pick-btn,
+.lb-tab,
+.ev-card-cta {
+  position: relative;
+  overflow: hidden;
+}
+.ux-ripple {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.28);
+  transform: translate(-50%, -50%) scale(0);
+  animation: ux-ripple-expand 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  pointer-events: none;
+}
+@keyframes ux-ripple-expand {
+  to { transform: translate(-50%, -50%) scale(60); opacity: 0; }
+}
+
+
+/* ── LEADERBOARD tab swap enhancements ── */
+#lbBoards,
+#lbGroupWrap,
+#lbMyGroupView,
+#lbGroups {
+  transition: opacity 0.2s ease;
+}
+

@@ -726,19 +726,37 @@
     const challSec   = document.getElementById('lbChallengesSection');
     const myGroupView = document.getElementById('lbMyGroupView');
 
+    const fadeSwap = window.MMAFadeSwap;
+
     if (period === 'mygroup') {
-      if (boards)     boards.style.display     = 'none';
-      if (groupSec)   groupSec.style.display   = 'none';
-      if (challSec)   challSec.style.display   = 'none';
-      if (myGroupView) myGroupView.style.display = '';
-      renderMyGroupView();
+      const toShow = myGroupView;
+      const toHide = (boards?.style.display !== 'none' ? boards : null);
+      if (challSec) challSec.style.display = 'none';
+      if (groupSec) groupSec.style.display = 'none';
+      if (fadeSwap && toHide && toShow) {
+        fadeSwap(toHide, toShow, renderMyGroupView);
+      } else {
+        if (boards) boards.style.display = 'none';
+        if (myGroupView) { myGroupView.style.display = ''; renderMyGroupView(); }
+      }
       return;
     }
 
     // Restore normal view
-    if (boards)      boards.style.display     = '';
-    if (groupSec)    groupSec.style.display   = '';
-    if (myGroupView) myGroupView.style.display = 'none';
+    if (myGroupView && myGroupView.style.display !== 'none') {
+      if (fadeSwap && boards) {
+        fadeSwap(myGroupView, boards);
+        if (groupSec) groupSec.style.display = '';
+      } else {
+        if (myGroupView) myGroupView.style.display = 'none';
+        if (boards) boards.style.display = '';
+        if (groupSec) groupSec.style.display = '';
+      }
+    } else {
+      if (boards) boards.style.display = '';
+      if (groupSec) groupSec.style.display = '';
+      if (myGroupView) myGroupView.style.display = 'none';
+    }
     // challenges section visibility controlled by loadAndRenderChallenges
 
     if (period === 'last10') {
