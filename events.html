@@ -365,8 +365,7 @@
     .ov-badge.fn  { background:rgba(240,180,41,.15);border:1px solid rgba(240,180,41,.35);color:#f0b429; }
     .ov-badge.ppv { background:rgba(200,168,75,.15);border:1px solid rgba(200,168,75,.4);color:#c8a84b; }
     .ov-badge.special-green { background:rgba(240,180,41,.15);border:1px solid rgba(240,180,41,.35);color:#f0b429; }
-    .ov-live-dot  { display:flex;align-items:center;gap:5px;font-family:'Montserrat',sans-serif;font-size:.46rem;font-weight:800;letter-spacing:.15em;color:#ff4444; }
-    .ov-live-dot::before { content:'';width:6px;height:6px;border-radius:50%;background:#ff4444;animation:pulse 1.2s ease infinite; }
+    .ov-days-badge { display:inline-flex;align-items:center;font-family:'Montserrat',sans-serif;font-size:.44rem;font-weight:800;letter-spacing:.14em;color:rgba(255,255,255,.55);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:3px 9px;border-radius:4px; }
     .ov-close { width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);font-size:.95rem;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(10px);transition:background .2s,border-color .2s,color .2s; }
     .ov-close:hover { background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.3);color:#fff; }
 
@@ -1146,7 +1145,7 @@
         <div class="ov-topbar">
           <div class="ov-badge-row">
             <span class="ov-badge" id="ovBadge"></span>
-            <span class="ov-live-dot" id="ovLiveDot" style="display:none;">TONIGHT</span>
+            <span class="ov-days-badge" id="ovDaysBadge" style="display:none;"></span>
           </div>
           <div class="ov-topbar-right">
             <a class="ov-pick-btn" id="ovPickBtn" href="#">Pick Fights →</a>
@@ -1541,7 +1540,21 @@
       /* Badge + live */
       const badge=document.getElementById('ovBadge');
       badge.textContent=isPPV?'PPV':'Fight Night'; badge.className=`ov-badge ${special?'special-green':cls}`;
-      document.getElementById('ovLiveDot').style.display=(isToday && ev.status!=='completed')?'flex':'none';
+      /* Days badge — accurate, no pulsing, shows only for upcoming */
+      const daysBadge = document.getElementById('ovDaysBadge');
+      if (ev.status === 'completed' || !ev.isoDate) {
+        daysBadge.style.display = 'none';
+      } else {
+        const daysOut = daysUntil(ev.isoDate);
+        const DAY_NAMES = ['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];
+        const evDow = new Date(ev.isoDate + 'T00:00:00').getDay();
+        let label;
+        if (daysOut <= 0)       label = 'THIS ' + DAY_NAMES[evDow];
+        else if (daysOut === 1) label = 'TOMORROW';
+        else                    label = `${daysOut} DAYS AWAY`;
+        daysBadge.textContent = label;
+        daysBadge.style.display = 'inline-flex';
+      }
 
       /* Text */
       document.getElementById('ovEventLabel').textContent=[ev.date,ev.venue,ev.location].filter(Boolean).join('  ·  ');
