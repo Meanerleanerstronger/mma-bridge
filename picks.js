@@ -803,7 +803,7 @@ function formatOdds(n) {
     if (fill)  fill.style.width = pct + '%';
     if (thumb) { thumb.style.left = pct + '%'; thumb.style.display = pct > 0 ? 'block' : 'none'; }
     if (labelEl) {
-      labelEl.textContent = localHype ? (HYPE_LABELS[localHype] || '') : 'Rate this event';
+      labelEl.textContent = localHype ? (HYPE_LABELS[localHype] || '') : 'Rate card hype';
     }
     if (avgBadge) {
       avgBadge.style.opacity = hypeCount > 0 ? '1' : '0';
@@ -1016,7 +1016,10 @@ function formatOdds(n) {
     const roundBtns  = Array.from({length: rounds}, (_, i) => i + 1).map(r =>
       `<button class="pk-round-btn${savedRound === String(r) ? ` active ${roundCls}` : ''}" data-round="${r}" data-key="${esc(key)}" data-method-cls="${roundCls}">R${r}</button>`
     ).join('');
-    const odds = getOddsForFight(f.a, f.b);
+    let odds = getOddsForFight(f.a, f.b);
+    if (!odds && f.odds && f.odds.a && f.odds.b) {
+      odds = { odds_a: parseInt(f.odds.a), odds_b: parseInt(f.odds.b) };
+    }
     const recA  = fighterRecord(f.a);
     const recB  = fighterRecord(f.b);
 
@@ -1097,7 +1100,7 @@ function formatOdds(n) {
           ${f.rounds ? `<span class="fc-rds">· ${esc(f.rounds)}</span>` : ''}
           ${f.titleFight ? `<span class="fc-title-pip">TITLE FIGHT</span>` : ''}
         </div>
-        <span class="fc-head-h2h">H2H →</span>
+        <span class="fc-head-h2h">MATCHUP →</span>
         ${cardLblTxt ? `<span class="fc-card-lbl">${cardLblTxt}</span>` : ''}
       </div>`;
 

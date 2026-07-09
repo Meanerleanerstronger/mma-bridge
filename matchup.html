@@ -480,7 +480,8 @@
     Promise.all([
       fetch('data/fighters.json?_='+Date.now(),{cache:'no-store'}).then(r=>r.json()).catch(()=>[]),
       fetch(`${API}/odds/${encodeURIComponent(eventId)}`).then(r=>r.json()).catch(()=>({odds:[]})),
-    ]).then(([fighters, oddsData]) => {
+      eventId ? fetch('data/events.json?_='+Date.now(),{cache:'no-store'}).then(r=>r.json()).catch(()=>[]) : Promise.resolve([]),
+    ]).then(([fighters, oddsData, eventsArr]) => {
 
       const fA = fighters.find(f=>fuzzyMatch(f.name,nameA)) || {};
       const fB = fighters.find(f=>fuzzyMatch(f.name,nameB)) || {};
@@ -494,6 +495,19 @@
         const aIsA = fuzzyMatch(oddsEntry.a,nameA);
         oddsForA = aIsA ? oddsEntry.odds_a : oddsEntry.odds_b;
         oddsForB = aIsA ? oddsEntry.odds_b : oddsEntry.odds_a;
+      }
+      /* JSON odds fallback when API returns nothing */
+      if (oddsForA===null && oddsForB===null && eventId && eventsArr.length) {
+        const ev = eventsArr.find(e=>e.id===eventId);
+        if (ev) {
+          const allF=[...(ev.mainCard||[]),...(ev.prelims||[]),...(ev.earlyPrelims||[])];
+          const fight=allF.find(f=>(fuzzyMatch(f.a,nameA)||fuzzyMatch(f.b,nameA)));
+          if (fight && fight.odds && fight.odds.a && fight.odds.b) {
+            const aIsA=fuzzyMatch(fight.a,nameA);
+            oddsForA=aIsA?parseInt(fight.odds.a):parseInt(fight.odds.b);
+            oddsForB=aIsA?parseInt(fight.odds.b):parseInt(fight.odds.a);
+          }
+        }
       }
 
       /* stat rows */

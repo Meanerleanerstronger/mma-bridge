@@ -5168,22 +5168,19 @@ body.light-mode .ev-star-btn.starred {
 }
 .fc-head:hover { background: rgba(255,255,255,0.025); }
 .fc-head-h2h {
-  font-family: 'Montserrat', sans-serif; font-weight: 800;
-  font-size: 0.52rem; letter-spacing: 0.12em; text-transform: uppercase;
-  color: rgba(240,180,41,0.0);
-  border: 1px solid rgba(240,180,41,0.0);
-  padding: 4px 10px; border-radius: 6px;
+  font-family: 'Inter', sans-serif; font-weight: 700;
+  font-size: 0.5rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0);
+  border: 1px solid rgba(255,255,255,0);
+  padding: 3px 9px; border-radius: 20px;
   white-space: nowrap;
-  transition: color 0.2s, border-color 0.2s, background 0.2s,
-              box-shadow 0.2s, transform 0.18s;
-  pointer-events: none; /* just a label, fc-head is the click target */
+  transition: color 0.18s, border-color 0.18s, background 0.18s;
+  pointer-events: none;
 }
 .fc-head:hover .fc-head-h2h {
-  color: #f0b429;
-  border-color: rgba(240,180,41,0.35);
-  background: rgba(240,180,41,0.08);
-  box-shadow: 0 0 12px rgba(240,180,41,0.2), inset 0 0 8px rgba(240,180,41,0.06);
-  transform: scale(1.05);
+  color: rgba(255,255,255,0.55);
+  border-color: rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.05);
 }
 .fc-head-left {
   display: flex; align-items: center; gap: 6px;
