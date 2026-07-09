@@ -11696,6 +11696,145 @@
         "ranked": false,
         "slot": "comain",
         "imgA": "",
+        "imgB": "",
+        "cancelled": true
+      },
+      {
+        "a": "Carli Judice",
+        "b": "Jeisla Chaves",
+        "weight": "W Strawweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "comain",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Roman Dolidze",
+        "b": "Reinier de Ridder",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Serghei Spivac",
+        "b": "Vitor Petrino",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Kennedy Nzechukwu",
+        "b": "Shamil Gaziev",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
+    "prelims": [
+      {
+        "a": "Wes Schultz",
+        "b": "Jackson McVey",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Shanelle Dyer",
+        "b": "Elise Reed",
+        "weight": "W Strawweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
+    "earlyPrelims": []
+  },
+  {
+    "id": "ufc-fight-night-nurmagomedov-vs-song",
+    "name": "UFC Fight Night: Nurmagomedov vs. Song",
+    "type": "FIGHT NIGHT",
+    "date": "Sat, Aug 29, 2026",
+    "isoDate": "2026-08-29",
+    "location": "",
+    "venue": "",
+    "poster": "",
+    "status": "upcoming",
+    "start_time": null,
+    "mainCard": [
+      {
+        "a": "Umar Nurmagomedov",
+        "b": "Song Yadong",
+        "weight": "Bantamweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "main",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Yan Xiaonan",
+        "b": "Denise Gomes",
+        "weight": "W Strawweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "comain",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Sumudaerji",
+        "b": "Alex Perez",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Rei Tsuruya",
+        "b": "Kevin Borjas",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Ce Liu",
+        "b": "Junior Tafa",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
         "imgB": ""
       }
     ],
