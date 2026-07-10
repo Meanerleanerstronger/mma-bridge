@@ -683,6 +683,23 @@ function formatOdds(n) {
     } else if (shareBtn) {
       shareBtn.remove();
     }
+    // Sync bottom save CTA
+    const bottomCount = document.getElementById('pkBottomSaveCount');
+    const bottomBtn   = document.getElementById('pkBottomSaveBtn');
+    const total = (event.mainCard||[]).length + (event.prelims||[]).length + (event.earlyPrelims||[]).length;
+    if (bottomCount) {
+      if (picked >= total && total > 0) {
+        bottomCount.textContent = dirty ? `${picked} picks — unsaved` : `All ${picked} picks saved ✓`;
+      } else {
+        bottomCount.textContent = picked > 0 ? `${picked} of ${total} picks made` : `${total} fights to pick`;
+      }
+    }
+    if (bottomBtn) {
+      const allSaved = !dirty && picked > 0;
+      bottomBtn.textContent = allSaved ? '✓ All Picks Saved' : (picked > 0 ? `Save ${picked} Pick${picked !== 1 ? 's' : ''}` : 'Save All Picks');
+      bottomBtn.className = `pk-bottom-save-btn${allSaved ? ' saved' : (dirty && picked > 0 ? ' dirty' : '')}`;
+      bottomBtn.disabled = allSaved;
+    }
   }
 
   function shareMyPicks() {
@@ -1927,6 +1944,17 @@ function formatOdds(n) {
           <span class="pk-review-cta-sub">Rate fights · leave your take</span>
         </a>` : ''}
 
+        ${myId && !isCompleted && !isLocked ? `
+        <div class="pk-bottom-save" id="pkBottomSave">
+          <div class="pk-bottom-save-inner">
+            <div class="pk-bottom-save-count" id="pkBottomSaveCount">${picked > 0 ? `${picked} of ${total} picks made` : `${total} fights to pick`}</div>
+            <button class="pk-bottom-save-btn" id="pkBottomSaveBtn" type="button">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Save All Picks
+            </button>
+          </div>
+        </div>` : ''}
+
         ${isCompleted && nextEventData ? `
         <div class="pk-next-event">
           <div class="pk-next-label">Up Next</div>
@@ -1949,8 +1977,9 @@ function formatOdds(n) {
         </div>
       </div>`;
 
-    // Bind save button (inline in ctrl panel)
+    // Bind save buttons
     document.getElementById('pkSaveBtn')?.addEventListener('click', saveAllPicks);
+    document.getElementById('pkBottomSaveBtn')?.addEventListener('click', saveAllPicks);
 
     // ── How It Works modal ──
     document.getElementById('pkHowItWorks')?.addEventListener('click', () => {
@@ -2279,6 +2308,7 @@ function formatOdds(n) {
     if (!isCompleted && !isLocked) {
       // ── Fighter side click → pick ──
       root.querySelectorAll('.sb-side[data-key]').forEach(side => {
+        let _pickEvent = null;
         const applyPick = (key, pick, fight, side) => {
           fight.querySelectorAll('.pk-change-confirm').forEach(el => el.remove());
           fight.querySelectorAll('.sb-side').forEach(s => s.classList.remove('selected', 'dimmed', 'sb-tap'));
@@ -2286,6 +2316,7 @@ function formatOdds(n) {
           void side.offsetWidth;
           side.classList.add('sb-tap');
           setTimeout(() => side.classList.remove('sb-tap'), 300);
+          if (window.MMAPickFlood) window.MMAPickFlood(side, _pickEvent);
           playPickSound();
           fight.querySelectorAll('.sb-side').forEach(s => { if (s !== side) s.classList.add('dimmed'); });
           const cur = localPicks[key] || {};
@@ -2358,7 +2389,7 @@ function formatOdds(n) {
 
           applyPick(key, pick, fight, side);
         };
-        side.addEventListener('click', activate);
+        side.addEventListener('click', function(e) { _pickEvent = e; activate(); });
         side.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); } });
       });
 

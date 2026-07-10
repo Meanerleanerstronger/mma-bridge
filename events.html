@@ -742,9 +742,13 @@
     @media(max-width:900px) {
       .ov-body { grid-template-columns:1fr; }
       .ov-sidebar { border-top:1px solid rgba(255,255,255,.05); max-height:260px; }
-      .ov-fight-col { max-height:50vh; }
     }
     @media(max-width:768px) {
+      /* Make the whole overlay panel scroll on mobile — fights no longer capped at 50vh */
+      .ov-panel { overflow-y:auto; -webkit-overflow-scrolling:touch; }
+      .ov-body { overflow:visible; display:flex; flex-direction:column; }
+      .ov-fight-col { overflow-y:visible; max-height:none; padding-bottom:80px; }
+      .ov-sidebar { overflow:visible; max-height:none; }
       .ev-page { padding:28px 12px 80px; }
       .ev-card { height:140px; }
       .ev-card-content { max-width:80%;padding:0 14px; }

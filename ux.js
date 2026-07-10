@@ -324,6 +324,49 @@
 
 
   /* ─────────────────────────────────────────────
+     11. FIGHT ROW STAGGER (overlay)
+  ───────────────────────────────────────────── */
+  function microStaggerFights(col) {
+    if (!col) return;
+    var rows = col.querySelectorAll('.ov-fight');
+    rows.forEach(function (row, i) {
+      row.style.opacity = '0';
+      row.style.transform = 'translateY(14px)';
+      row.style.transition = 'none';
+      setTimeout(function () {
+        row.style.transition = 'opacity 0.32s ease, transform 0.32s cubic-bezier(0.22,1,0.36,1)';
+        row.style.opacity = '1';
+        row.style.transform = 'translateY(0)';
+      }, 30 + i * 42);
+    });
+  }
+  window.MicroStaggerFights = microStaggerFights;
+
+
+  /* ─────────────────────────────────────────────
+     12. PICK FLOOD FILL
+  ───────────────────────────────────────────── */
+  function pickFlood(el, e) {
+    var existing = el.querySelectorAll('.ux-flood');
+    existing.forEach(function (f) { f.remove(); });
+
+    var rect = el.getBoundingClientRect();
+    var cx = e ? (e.clientX || e.touches && e.touches[0] && e.touches[0].clientX || rect.left + rect.width / 2) : rect.left + rect.width / 2;
+    var cy = e ? (e.clientY || e.touches && e.touches[0] && e.touches[0].clientY || rect.top + rect.height / 2) : rect.top + rect.height / 2;
+    var x = cx - rect.left;
+    var y = cy - rect.top;
+
+    var flood = document.createElement('span');
+    flood.className = 'ux-flood';
+    flood.style.left = x + 'px';
+    flood.style.top  = y + 'px';
+    el.appendChild(flood);
+    setTimeout(function () { flood.remove(); }, 650);
+  }
+  window.MMAPickFlood = pickFlood;
+
+
+  /* ─────────────────────────────────────────────
      INIT
   ───────────────────────────────────────────── */
   window.addEventListener('DOMContentLoaded', function () {
