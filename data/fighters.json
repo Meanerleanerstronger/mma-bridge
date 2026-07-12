@@ -780,7 +780,7 @@
     "ranking": "#2",
     "ranking_change": 0,
     "record": {
-      "wins": 26,
+      "wins": 27,
       "losses": 9,
       "draws": 0
     },
@@ -793,6 +793,14 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-02/WHITTAKER_ROBERT_L_02-17.png",
     "bio": "Robert Whittaker is a former UFC Middleweight Champion and one of the most technically gifted strikers in the division's history. Crisp combinations, elite footwork and an iron chin have allowed him to beat nearly every top contender. His rivalry with Adesanya defined an era of middleweight MMA and he remains one of the most dangerous fighters at 185.",
     "last5": [
+      {
+        "opponent": "Nikita Krylov",
+        "result": "W",
+        "method": "TKO (jaw injury)",
+        "event": "UFC 329",
+        "round": 3,
+        "time": "1:01"
+      },
       {
         "opponent": "Reinier de Ridder",
         "result": "L",
@@ -863,14 +871,6 @@
         "method": "Decision (unanimous)",
         "event": "UFC 254",
         "round": 3,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Darren Till",
-        "result": "W",
-        "method": "Decision (unanimous)",
-        "event": "UFC on ESPN: Whittaker vs. Till",
-        "round": 5,
         "time": "5:00"
       }
     ]
@@ -5616,12 +5616,20 @@
     "ranking": "#7",
     "record": {
       "wins": 31,
-      "losses": 11,
+      "losses": 12,
       "draws": 0
     },
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/KRYLOV_NIKITA_L_01-24.png",
     "bio": "Nikita Krylov is one of the most exciting submission hunters in the light heavyweight division — a Ukrainian 'Miner' who digs for chokes, triangles, and rear-naked chokes at a relentless pace. With 29 wins and the majority by finish, Krylov has been a UFC staple since 2013 and has tested himself against the very best in the division. Though back-to-back KO losses to Reyes and Guskov in 2025 raised questions, he rebounded emphatically with a round-three knockout of Bukauskas at UFC 324 to reassert himself as a top-10 threat.",
     "last5": [
+      {
+        "opponent": "Robert Whittaker (fighter)",
+        "result": "L",
+        "method": "TKO (jaw injury)",
+        "event": "UFC 329",
+        "round": 3,
+        "time": "1:01"
+      },
       {
         "opponent": "Modestas Bukauskas",
         "result": "W",
@@ -5691,14 +5699,6 @@
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Lee vs. Oliveira",
-        "round": 3,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Glover Teixeira",
-        "result": "L",
-        "method": "Decision (split)",
-        "event": "UFC Fight Night: Cowboy vs. Gaethje",
         "round": 3,
         "time": "5:00"
       }
@@ -5811,13 +5811,21 @@
     "weightClass": "Heavyweight",
     "ranking": "Unranked",
     "record": {
-      "wins": 3,
+      "wins": 4,
       "losses": 0,
       "draws": 0
     },
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
     "bio": "Gable Steveson is the most hyped heavyweight prospect in MMA — a 2020 Olympic gold medalist and two-time NCAA wrestling champion who brings a pedigree of dominance that rivals any fighter in history. After a stint with WWE, Steveson signed with the UFC in April 2026 off a 3-0 pro MMA record, finishing all three opponents in the first round. He trains at Jackson Wink MMA Academy under the tutelage of Jon Jones. His UFC debut against Elisha Ellison at UFC 329 on July 11, 2026 is one of the most anticipated heavyweight debuts in recent memory.",
     "last5": [
+      {
+        "opponent": "Elisha Ellison",
+        "result": "W",
+        "method": "KO (knees and punches)",
+        "event": "UFC 329",
+        "round": 1,
+        "time": "2:31"
+      },
       {
         "opponent": "Hugo Lezama",
         "result": "W",
@@ -5887,14 +5895,6 @@
         "result": "W",
         "method": "style=\"font-size:88%\"|TF 10–0",
         "event": "style=\"font-size:88%\" rowspan=5|May 30, 2021",
-        "round": 0,
-        "time": ""
-      },
-      {
-        "opponent": "Nick Gwiazdowski",
-        "result": "W",
-        "method": "style=\"font-size:88%\"|10–4",
-        "event": "style=\"font-size:88%\" rowspan=4|April 2–3, 2021",
         "round": 0,
         "time": ""
       }
@@ -6141,7 +6141,7 @@
     "weightClass": "Flyweight",
     "ranking": "#4",
     "record": {
-      "wins": 17,
+      "wins": 18,
       "losses": 9,
       "draws": 0
     },
@@ -6154,6 +6154,14 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/ROYVAL_BRANDON_L_12-13.png",
     "bio": "Brandon Royval is one of the most exciting flyweights alive — a high-risk, high-reward grappler who comes to finish every fight. 'Raw Dawg' holds submission wins over multiple ranked opponents and is never out of a fight, bringing relentless pressure and a never-back-down mentality that makes every outing must-watch.",
     "last5": [
+      {
+        "opponent": "Lone'er Kavanagh",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC 329",
+        "round": 3,
+        "time": "3:40"
+      },
       {
         "opponent": "Manel Kape",
         "result": "L",
@@ -6225,14 +6233,6 @@
         "event": "UFC on ESPN: Cannonier vs. Gastelum",
         "round": 2,
         "time": "1:46"
-      },
-      {
-        "opponent": "Brandon Moreno",
-        "result": "L",
-        "method": "TKO (punches)",
-        "event": "UFC 255",
-        "round": 1,
-        "time": "4:59"
       }
     ]
   },
@@ -9763,11 +9763,19 @@
     "id": "farid-basharat",
     "name": "Farid Basharat",
     "record": {
-      "wins": 15,
+      "wins": 16,
       "losses": 0,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "John Garza",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 329",
+        "round": 3,
+        "time": "5:00"
+      },
       {
         "opponent": "Jean Matsumoto",
         "result": "W",
@@ -9839,14 +9847,6 @@
         "event": "Oktagon 26",
         "round": 0,
         "time": "align=center |3:12"
-      },
-      {
-        "opponent": "Marco Zannetti",
-        "result": "W",
-        "method": "Decision (unanimous)",
-        "event": "Contenders Norwich 29",
-        "round": 3,
-        "time": "5:00"
       }
     ],
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/2/BASHARAT_FARID_L_10-26.png",
@@ -11945,10 +11945,18 @@
     "name": "Lone'er Kavanagh",
     "record": {
       "wins": 10,
-      "losses": 1,
+      "losses": 2,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Brandon Royval",
+        "result": "L",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC 329",
+        "round": 3,
+        "time": "3:40"
+      },
       {
         "opponent": "Brandon Moreno",
         "result": "W",
@@ -12020,14 +12028,6 @@
         "event": "Cage Warriors 134",
         "round": 3,
         "time": "1:13"
-      },
-      {
-        "opponent": "Danny Missin",
-        "result": "W",
-        "method": "Submission (guillotine choke)",
-        "event": "FightStar Championship 19",
-        "round": 1,
-        "time": "0:56"
       }
     ],
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/KAVANAGH_LONEER_L_03-22.png"
@@ -12088,10 +12088,18 @@
     "name": "Cody Garbrandt",
     "record": {
       "wins": 15,
-      "losses": 7,
+      "losses": 8,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Adrian Yañez",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC 329",
+        "round": 1,
+        "time": "2:47"
+      },
       {
         "opponent": "Xiao Long",
         "result": "W",
@@ -12163,14 +12171,6 @@
         "event": "UFC 235",
         "round": 1,
         "time": "4:51"
-      },
-      {
-        "opponent": "T.J. Dillashaw",
-        "result": "L",
-        "method": "KO (knee and punches)",
-        "event": "UFC 227",
-        "round": 1,
-        "time": "4:10"
       }
     ],
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/GARBRANDT_CODY_L_03-07.png",
@@ -12273,10 +12273,18 @@
     "name": "Tracy Cortez",
     "record": {
       "wins": 12,
-      "losses": 3,
+      "losses": 4,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Wang Cong",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 329",
+        "round": 3,
+        "time": "5:00"
+      },
       {
         "opponent": "Erin Blanchfield",
         "result": "L",
@@ -12348,14 +12356,6 @@
         "event": "Dana White's Contender Series Season Three#Week 6 - July 30",
         "round": 3,
         "time": "5:00"
-      },
-      {
-        "opponent": "Erin Blanchfield",
-        "result": "W",
-        "method": "Decision (split)",
-        "event": "List of Invicta FC events#Invicta FC 34: Porto vs. Gonzalez",
-        "round": 3,
-        "time": "5:00"
       }
     ],
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/5/CORTEZ_TRACY_L_07-13.png"
@@ -12364,11 +12364,19 @@
     "id": "wang-cong",
     "name": "Wang Cong",
     "record": {
-      "wins": 9,
+      "wins": 10,
       "losses": 1,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Tracy Cortez",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 329",
+        "round": 3,
+        "time": "5:00"
+      },
       {
         "opponent": "Eduarda Moura",
         "result": "W",
@@ -12440,14 +12448,6 @@
         "event": "Dragon FC 7",
         "round": 1,
         "time": "1:53"
-      },
-      {
-        "opponent": "Ji Hongfeng",
-        "result": "W",
-        "method": "Submission (rear-naked choke)",
-        "event": "2022 in Wu Lin Feng#Wu Lin Feng x Huya Kung Fu Carnival 6",
-        "round": 2,
-        "time": "N/A"
       }
     ],
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/CONG_WANG_L_02-07.png",
@@ -12458,10 +12458,18 @@
     "name": "Kai Kamaka III",
     "record": {
       "wins": 18,
-      "losses": 7,
+      "losses": 8,
       "draws": 1
     },
     "last5": [
+      {
+        "opponent": "Luke Riley",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC 329",
+        "round": 1,
+        "time": "3:03"
+      },
       {
         "opponent": "Dakota Hope",
         "result": "W",
@@ -12531,14 +12539,6 @@
         "result": "L",
         "method": "Decision (split)",
         "event": "Bellator 279",
-        "round": 3,
-        "time": "5:00"
-      },
-      {
-        "opponent": "John de Jesus",
-        "result": "W",
-        "method": "Decision (unanimous)",
-        "event": "Bellator 272",
         "round": 3,
         "time": "5:00"
       }
@@ -12656,10 +12656,18 @@
     "name": "Cesar Almeida",
     "record": {
       "wins": 7,
-      "losses": 2,
+      "losses": 3,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Damian Pinas",
+        "result": "L",
+        "method": "KO (punch)",
+        "event": "UFC 329",
+        "round": 1,
+        "time": "4:44"
+      },
       {
         "opponent": "Cezary Oleksiejczuk",
         "result": "L",
@@ -12740,11 +12748,19 @@
     "id": "cody-durden",
     "name": "Cody Durden",
     "record": {
-      "wins": 17,
-      "losses": 9,
+      "wins": 18,
+      "losses": 11,
       "draws": 1
     },
     "last5": [
+      {
+        "opponent": "Alessandro Costa",
+        "result": "L",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC 329",
+        "round": 2,
+        "time": "2:19"
+      },
       {
         "opponent": "Allan Nascimento",
         "result": "L",
@@ -12816,14 +12832,6 @@
         "event": "UFC on ESPN: Tsarukyan vs. Gamrot",
         "round": 1,
         "time": "1:08"
-      },
-      {
-        "opponent": "Muhammad Mokaev",
-        "result": "L",
-        "method": "Submission (guillotine choke)",
-        "event": "UFC Fight Night: Volkov vs. Aspinall",
-        "round": 1,
-        "time": "0:58"
       }
     ],
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/DURDEN_CODY_L_03-07.png",
@@ -14865,10 +14873,18 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/MCKINNEY_TERRANCE_L_03-28.png",
     "record": {
       "wins": 18,
-      "losses": 8,
+      "losses": 9,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "King Green",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC 329",
+        "round": 1,
+        "time": "4:59"
+      },
       {
         "opponent": "Kyle Nelson (fighter)",
         "result": "W",
@@ -14939,14 +14955,6 @@
         "method": "KO (flying knee)",
         "event": "UFC 283",
         "round": 2,
-        "time": "2:17"
-      },
-      {
-        "opponent": "Erick Gonzalez",
-        "result": "W",
-        "method": "Submission (rear-naked choke)",
-        "event": "UFC on ESPN: Santos vs. Hill",
-        "round": 1,
         "time": "2:17"
       }
     ],
@@ -29967,11 +29975,19 @@
     "id": "bobby-green",
     "name": "Bobby Green",
     "record": {
-      "wins": 35,
+      "wins": 36,
       "losses": 17,
       "draws": 1
     },
     "last5": [
+      {
+        "opponent": "Terrance McKinney",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC 329",
+        "round": 1,
+        "time": "4:59"
+      },
       {
         "opponent": "Jeremy Stephens",
         "result": "W",
@@ -30043,14 +30059,6 @@
         "event": "UFC Fight Night: Cannonier vs. Strickland",
         "round": 2,
         "time": "2:45"
-      },
-      {
-        "opponent": "Islam Makhachev",
-        "result": "L",
-        "method": "TKO (punches)",
-        "event": "UFC Fight Night: Makhachev vs. Green",
-        "round": 1,
-        "time": "3:23"
       }
     ],
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/GREEN_KING_L_05-09.png",
@@ -30060,11 +30068,19 @@
     "id": "zachary-reese",
     "name": "Zachary Reese",
     "record": {
-      "wins": 9,
-      "losses": 2,
+      "wins": 10,
+      "losses": 4,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Ryan Gandra",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC 329",
+        "round": 1,
+        "time": "1:15"
+      },
       {
         "opponent": "Sedriques Dumas",
         "result": "NC",
@@ -30136,14 +30152,6 @@
         "event": "Fury FC 74",
         "round": 1,
         "time": "0:35"
-      },
-      {
-        "opponent": "Shahriar Zolfaghari",
-        "result": "W",
-        "method": "TKO (elbows and punches)",
-        "event": "Fury FC 71",
-        "round": 1,
-        "time": "0:50"
       }
     ],
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/REESE_ZACH_L_02-21.png",
@@ -30568,7 +30576,7 @@
       {
         "opponent": "Edmen Shahbazyan",
         "result": "W",
-        "method": "TKO (elbows and punches)",
+        "method": "TKO (punches)",
         "event": "UFC Fight Night: Dern vs. Hill",
         "round": 3,
         "time": "1:01"
