@@ -10891,7 +10891,7 @@
     "location": "Las Vegas, NV",
     "venue": "T-Mobile Arena",
     "poster": "https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/2026-06/071126-ufc-329-mcgregor-vs-holloway-2-EVENT-ART.jpg",
-    "status": "upcoming",
+    "status": "completed",
     "startTime": "22:00",
     "mainCard": [
       {
@@ -10903,7 +10903,10 @@
         "ranked": true,
         "slot": "main",
         "imgA": "images/fighters/mcgregor_conor.png",
-        "imgB": "images/fighters/holloway_max.png"
+        "imgB": "images/fighters/holloway_max.png",
+        "winner": "Max Holloway",
+        "method": "KO/TKO",
+        "round": 1
       },
       {
         "a": "Paddy Pimblett",
@@ -10914,7 +10917,10 @@
         "ranked": true,
         "slot": "comain",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/event_results_athlete_headshot/s3/2024-07/PIMBLETT_PADDY_07-27.png",
-        "imgB": "images/fighters/saint_denis_benoit.png"
+        "imgB": "images/fighters/saint_denis_benoit.png",
+        "winner": "Paddy Pimblett",
+        "method": "SUB",
+        "round": 1
       },
       {
         "a": "Robert Whittaker",
@@ -10925,7 +10931,10 @@
         "ranked": true,
         "slot": "",
         "imgA": "images/fighters/whittaker_robert.png",
-        "imgB": "images/fighters/krylov_nikita.png"
+        "imgB": "images/fighters/krylov_nikita.png",
+        "winner": "Robert Whittaker",
+        "method": "KO/TKO",
+        "round": 3
       },
       {
         "a": "Cory Sandhagen",
@@ -10936,7 +10945,9 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/event_results_athlete_headshot/s3/2025-05/SANDHAGEN_CORY_05-03.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/event_results_athlete_headshot/s3/2026-02/BAUTISTA_MARIO_02-07.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/event_results_athlete_headshot/s3/2026-02/BAUTISTA_MARIO_02-07.png",
+        "winner": "Mario Bautista",
+        "method": "DEC"
       },
       {
         "a": "Brandon Royval",
@@ -10947,7 +10958,10 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/event_results_athlete_headshot/s3/2025-12/ROYVAL_BRANDON_12-13.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/event_results_athlete_headshot/s3/2026-02/KAVANAGH_LONEER_02-28.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/event_results_athlete_headshot/s3/2026-02/KAVANAGH_LONEER_02-28.png",
+        "winner": "Brandon Royval",
+        "method": "SUB",
+        "round": 3
       },
       {
         "a": "Terrance McKinney",
@@ -10958,7 +10972,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/event_results_athlete_headshot/s3/2026-03/MCKINNEY_TERRANCE_03-28.png",
-        "imgB": "https://ufc.com/images/styles/event_results_athlete_headshot/s3/2026-05/GREEN_KING_05-09.png"
+        "imgB": "https://ufc.com/images/styles/event_results_athlete_headshot/s3/2026-05/GREEN_KING_05-09.png",
+        "winner": "King Green",
+        "method": "KO/TKO",
+        "round": 1
       }
     ],
     "prelims": [
@@ -10971,7 +10988,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/event_results_athlete_headshot/s3/2026-03/GARBRANDT_CODY_03-07.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/event_results_athlete_headshot/s3/2026-03/YANEZ_ADRIAN_03-28.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/event_results_athlete_headshot/s3/2026-03/YANEZ_ADRIAN_03-28.png",
+        "winner": "Adrian Yañez",
+        "method": "KO/TKO",
+        "round": 1
       },
       {
         "a": "Kai Kamaka III",
@@ -10982,7 +11002,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/event_results_athlete_headshot/s3/2026-04/KAMAKA_KAI_04-04.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/event_results_athlete_headshot/s3/2026-03/RILEY_LUKE_03-21.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/event_results_athlete_headshot/s3/2026-03/RILEY_LUKE_03-21.png",
+        "winner": "Luke Riley",
+        "method": "KO/TKO",
+        "round": 1
       },
       {
         "a": "Gable Steveson",
@@ -10993,7 +11016,10 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/ELLISON_ELISHA_R_09-27.png?itok=jG-nlBq_"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/ELLISON_ELISHA_R_09-27.png?itok=jG-nlBq_",
+        "winner": "Gable Steveson",
+        "method": "KO/TKO",
+        "round": 1
       }
     ],
     "earlyPrelims": [
@@ -11006,7 +11032,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/event_results_athlete_headshot/s3/2026-02/PINAS_DAMIAN_02-28.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/event_results_athlete_headshot/s3/2025-12/ALMEIDA_CESAR_12-13.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/event_results_athlete_headshot/s3/2025-12/ALMEIDA_CESAR_12-13.png",
+        "winner": "Damian Pinas",
+        "method": "KO/TKO",
+        "round": 1
       },
       {
         "a": "Cody Durden",
@@ -11017,7 +11046,10 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/event_results_athlete_headshot/s3/2026-04/DURDEN_CODY_04-25.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/event_results_athlete_headshot/s3/2026-02/OSBOURNE_ODE_02-21.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/event_results_athlete_headshot/s3/2026-02/OSBOURNE_ODE_02-21.png",
+        "winner": "Alessandro Costa",
+        "method": "SUB",
+        "round": 2
       },
       {
         "a": "Tracy Cortez",
@@ -11028,7 +11060,9 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/5/CORTEZ_TRACY_L_07-13.png?itok=XYLdpC6o",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/CONG_WANG_L_02-07.png?itok=LBnTljRc"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/CONG_WANG_L_02-07.png?itok=LBnTljRc",
+        "winner": "Wang Cong",
+        "method": "DEC"
       },
       {
         "a": "Farid Basharat",
@@ -11039,7 +11073,9 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-10/2/BASHARAT_FARID_L_10-26.png?itok=L4yAubSy",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/EWING_ETHYN_L_04-04.png?itok=AdTd6fQ0"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/EWING_ETHYN_L_04-04.png?itok=AdTd6fQ0",
+        "winner": "Farid Basharat",
+        "method": "DEC"
       },
       {
         "a": "Ryan Gandra",
@@ -11050,7 +11086,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/GANDRA_RYAN_L_02-28.png?itok=WjvG_SeT",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/REESE_ZACH_L_02-21.png?itok=beiKFsJ0"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/REESE_ZACH_L_02-21.png?itok=beiKFsJ0",
+        "winner": "Ryan Gandra",
+        "method": "KO/TKO",
+        "round": 1
       },
       {
         "a": "Alessandro Costa",
