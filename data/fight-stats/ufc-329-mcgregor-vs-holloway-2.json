@@ -1,0 +1,167 @@
+{
+  "eventId": "ufc-329-mcgregor-vs-holloway-2",
+  "eventName": "UFC 329: McGregor vs. Holloway 2",
+  "fights": [
+    {
+      "fighter1": "Max Holloway Conor McGregor",
+      "fighter2": "Paddy Pimblett Benoit Saint Denis",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "120",
+          "totalStr": "00",
+          "td": "Welterweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "41",
+          "totalStr": "10",
+          "td": "Lightweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Mario Bautista Cory Sandhagen",
+      "fighter2": "Brandon Royval Lone'er Kavanagh",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "11489",
+          "totalStr": "30",
+          "td": "Bantamweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 1",
+          "sigStr": "8456",
+          "totalStr": "21",
+          "td": "Flyweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "King Green Terrance McKinney",
+      "fighter2": "Robert Whittaker Nikita Krylov",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "4345",
+          "totalStr": "00",
+          "td": "Lightweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "5451",
+          "totalStr": "00",
+          "td": "LightHeavyweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Gable Steveson Elisha Ellison",
+      "fighter2": "Adrian Yanez Cody Garbrandt",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "4113",
+          "totalStr": "00",
+          "td": "Heavyweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "1 0",
+          "sigStr": "1613",
+          "totalStr": "00",
+          "td": "Bantamweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Luke Riley Kai Kamaka III",
+      "fighter2": "Wang Cong Tracy Cortez",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "4323",
+          "totalStr": "00",
+          "td": "Featherweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "13772",
+          "totalStr": "00",
+          "td": "Women'sFlyweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Damian Pinas Cesar Almeida",
+      "fighter2": "Farid Basharat John Garza",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "2537",
+          "totalStr": "00",
+          "td": "Middleweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "8682",
+          "totalStr": "00",
+          "td": "Bantamweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Ryan Gandra Zach Reese",
+      "fighter2": "Alessandro Costa Cody Durden",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "105",
+          "totalStr": "00",
+          "td": "Middleweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "2128",
+          "totalStr": "20",
+          "td": "Flyweight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        }
+      }
+    }
+  ]
+}
