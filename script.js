@@ -223,6 +223,9 @@ function renderHeroSplit(completedEv, upcomingEv) {
   section.style.background = '#111';
   section.style.position   = 'relative';
   section.style.overflow   = 'hidden';
+  // Desktop-only align-items/padding override lives in index.html's CSS
+  // (gated to min-width:769px) so mobile's existing layout is untouched —
+  // see the comment there for why .hero's base align-items:flex-end breaks this.
 
   section.innerHTML = `
     <!-- LEFT: Completed -->

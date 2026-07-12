@@ -42,6 +42,19 @@
   <link rel="stylesheet" href="style.css?v=9.7" />
 
   <style>
+    /* Split hero (desktop): .hero's base align-items:flex-end and padding:30px
+       are meant for the single-hero mode (bottom-aligned text over a fixed-height
+       bg div). In split mode the two panels are normal in-flow flex items with no
+       explicit height, so flex-end shrinks them to content height and sinks them
+       to the bottom, leaving empty space above. Gated to desktop only — mobile's
+       existing column-reverse layout already looks right and must stay untouched. */
+    @media (min-width: 769px) {
+      #heroSection[style*="display: flex"],
+      #heroSection[style*="display:flex"] {
+        align-items: stretch !important;
+        padding: 0 !important;
+      }
+    }
     @media (max-width: 768px) {
       /* Results track */
       #resultsTrack { padding: 0; }
@@ -409,7 +422,7 @@
 
 
   <script src="notifications.js?v=2.4"></script>
-  <script type="module" src="script.js?v=3.1"></script>
+  <script type="module" src="script.js?v=3.2"></script>
 
   <script>
     window.addEventListener('scroll', () => {

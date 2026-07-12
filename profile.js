@@ -680,40 +680,76 @@
     </div>`;
   }
 
-  // ── Favourite fighters (localStorage + Supabase) ─────────
+  // ── Favourite fighters (Supabase = source of truth, localStorage = paint cache) ──
+  // In-memory array is what every read/write actually touches; localStorage just
+  // mirrors it for instant paint on next load. Reading/writing localStorage directly
+  // (the old approach) raced the async Supabase fetch below — a click before that
+  // fetch resolved would upsert an incomplete list and silently wipe out favorites
+  // saved from another device.
   const FAVS_KEY = 'mmab_favs';
-  function getFavs() {
-    try { return JSON.parse(localStorage.getItem(FAVS_KEY)) || []; } catch { return []; }
+  let favIds = [];
+  try { favIds = JSON.parse(localStorage.getItem(FAVS_KEY)) || []; } catch { favIds = []; }
+
+  function getFavs() { return favIds; }
+  function persistFavsLocal(ids) {
+    try { localStorage.setItem(FAVS_KEY, JSON.stringify(ids)); } catch {}
   }
 
-  // Sync fav_fighters from Supabase into localStorage (handles cross-device)
-  if (sb && user?.id) {
-    sb.from('profiles').select('fav_fighters').eq('id', user.id).single().then(({ data }) => {
-      if (data?.fav_fighters?.length) {
-        const local = getFavs();
-        // Merge: union of Supabase + local; always use Supabase if local is empty
-        const merged = local.length
-          ? [...new Set([...local, ...data.fav_fighters])]
-          : data.fav_fighters;
-        try { localStorage.setItem(FAVS_KEY, JSON.stringify(merged)); } catch {}
-      } else if (getFavs().length) {
-        // Local has data but Supabase doesn't — upsert so missing profile rows get created too
-        sb.from('profiles').upsert({ id: user.id, fav_fighters: getFavs() }).catch(() => {});
-      }
-      // Always re-render after Supabase check so cross-device data appears
-      const grid = document.getElementById('favsGrid');
-      if (grid) renderFavs();
-    }).catch(() => {});
+  function showFavToast(msg) {
+    let el = document.getElementById('prFavToast');
+    if (!el) {
+      el = document.createElement('div');
+      el.id = 'prFavToast';
+      el.style.cssText = 'position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:#1a1a1a;color:#fff;padding:10px 18px;border-radius:8px;font-family:Inter,sans-serif;font-size:.82rem;z-index:9999;box-shadow:0 6px 24px rgba(0,0,0,.4);border:1px solid rgba(255,80,80,.3);opacity:0;transition:opacity .2s';
+      document.body.appendChild(el);
+    }
+    el.textContent = msg;
+    el.style.opacity = '1';
+    clearTimeout(el._t);
+    el._t = setTimeout(() => { el.style.opacity = '0'; }, 3200);
   }
+
+  // Pull the authoritative list from Supabase and merge BEFORE any click handlers
+  // are wired up (this is awaited, not fire-and-forget) so a user can't act on a
+  // stale/incomplete local list while the merge is still in flight.
+  async function syncFavsFromServer() {
+    if (!sb || !user?.id) return;
+    try {
+      const { data } = await sb.from('profiles').select('fav_fighters').eq('id', user.id).single();
+      if (data?.fav_fighters?.length) {
+        favIds = favIds.length
+          ? [...new Set([...favIds, ...data.fav_fighters])]
+          : data.fav_fighters;
+        persistFavsLocal(favIds);
+      } else if (favIds.length) {
+        // Local has data but Supabase doesn't (new device/browser, or a prior
+        // save failed silently) — push it up so it isn't lost, and surface any
+        // failure instead of swallowing it.
+        const { error } = await sb.from('profiles').upsert({ id: user.id, fav_fighters: favIds });
+        if (error) showFavToast('Could not sync favorites — check your connection');
+      }
+    } catch {}
+  }
+  await syncFavsFromServer();
 
   const fighterById = {};
   fighters.forEach(f => { if (f.id) fighterById[f.id] = f; });
 
-  function saveFavs(ids) {
-    try { localStorage.setItem(FAVS_KEY, JSON.stringify(ids)); } catch {}
+  async function saveFavs(ids) {
+    const prev = favIds;
+    favIds = ids;
+    persistFavsLocal(ids);
     window.MMABridgePush?.updateFavFighters(ids, fighterById).catch?.(() => {});
     if (sb && user?.id) {
-      sb.from('profiles').upsert({ id: user.id, fav_fighters: ids }).catch(() => {});
+      const { error } = await sb.from('profiles').upsert({ id: user.id, fav_fighters: ids });
+      if (error) {
+        // Roll back so this device doesn't diverge from what's actually saved,
+        // and tell the user instead of pretending it worked.
+        favIds = prev;
+        persistFavsLocal(prev);
+        renderFavs();
+        showFavToast('Could not save — try again');
+      }
     }
   }
 
@@ -1564,8 +1600,8 @@
         const isSelected = row.classList.contains('selected');
         if (isSelected) {
           favs = favs.filter(x => x !== id);
-        } else {
-          if (!favs.includes(id)) favs.push(id);
+        } else if (!favs.includes(id)) {
+          favs = [...favs, id]; // new array — getFavs() returns the live in-memory list, don't mutate it in place
         }
         saveFavs(favs);
         row.classList.toggle('selected', !isSelected);
