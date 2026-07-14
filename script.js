@@ -241,7 +241,7 @@ function renderHeroSplit(completedEv, upcomingEv) {
     </div>
 
     <!-- DIVIDER -->
-    <div style="position:absolute;left:50%;top:8%;bottom:8%;width:1px;background:linear-gradient(to bottom,transparent 0%,rgba(240,180,41,0.45) 40%,rgba(240,180,41,0.45) 60%,transparent 100%);transform:translateX(-50%);z-index:10;pointer-events:none;"></div>
+    <div style="position:absolute;left:50%;top:8%;bottom:8%;width:1px;background:linear-gradient(to bottom,transparent 0%,rgba(217,123,63,0.45) 40%,rgba(217,123,63,0.45) 60%,transparent 100%);transform:translateX(-50%);z-index:10;pointer-events:none;"></div>
 
     <!-- RIGHT: Upcoming -->
     <div style="flex:1;position:relative;overflow:hidden;">
@@ -273,14 +273,14 @@ function checkEventNotifications(events) {
     if (!soon.length) return;
     const target = soon[0];
     const banner = document.createElement('div');
-    banner.style.cssText = 'position:fixed;top:70px;left:50%;transform:translateX(-50%);z-index:9998;background:linear-gradient(135deg,#0a1820,#0d2538);border:1px solid rgba(240,180,41,0.28);border-radius:12px;padding:14px 18px;max-width:380px;width:calc(100% - 40px);box-shadow:0 8px 40px rgba(0,0,0,0.6);display:flex;align-items:center;gap:12px;animation:sectionFadeIn 0.4s ease both;';
+    banner.style.cssText = 'position:fixed;top:70px;left:50%;transform:translateX(-50%);z-index:9998;background:linear-gradient(135deg,#0a1820,#0d2538);border:1px solid rgba(217,123,63,0.28);border-radius:12px;padding:14px 18px;max-width:380px;width:calc(100% - 40px);box-shadow:0 8px 40px rgba(0,0,0,0.6);display:flex;align-items:center;gap:12px;animation:sectionFadeIn 0.4s ease both;';
     banner.innerHTML = `
-      <span style="flex-shrink:0;display:flex;align-items:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(240,180,41,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></span>
+      <span style="flex-shrink:0;display:flex;align-items:center;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(217,123,63,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></span>
       <div style="flex:1;min-width:0;">
         <div style="font-family:Montserrat,sans-serif;font-size:0.78rem;font-weight:700;color:#fff;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${target.name} is today!</div>
         <div style="font-family:Inter,sans-serif;font-size:0.68rem;color:rgba(255,255,255,0.38);">Starts ${target.startTime || '10PM'} ET · ${target.venue || target.location || ''}</div>
       </div>
-      <a href="events.html?id=${encodeURIComponent(target.id)}" style="flex-shrink:0;background:rgba(240,180,41,0.09);border:1px solid rgba(240,180,41,0.28);color:cyan;font-family:Montserrat,sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:7px 12px;border-radius:6px;text-decoration:none;">View</a>
+      <a href="events.html?id=${encodeURIComponent(target.id)}" style="flex-shrink:0;background:rgba(217,123,63,0.09);border:1px solid rgba(217,123,63,0.28);color:cyan;font-family:Montserrat,sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:7px 12px;border-radius:6px;text-decoration:none;">View</a>
       <button onclick="this.parentElement.remove()" style="flex-shrink:0;background:none;border:none;color:rgba(255,255,255,0.22);cursor:pointer;font-size:1.1rem;padding:4px;line-height:1;">✕</button>`;
     document.body.appendChild(banner);
     setTimeout(() => { if (banner.parentElement) banner.remove(); }, 10000);
@@ -313,7 +313,7 @@ function renderRecentResults(events) {
     const card = document.createElement('a');
     card.href  = `event-review.html?id=${encodeURIComponent(slug)}`;
     card.style.cssText = `display:block;text-decoration:none;flex-shrink:0;width:280px;background:${cardBg};border:1px solid ${cardBorder};border-radius:12px;overflow:hidden;transition:border-color 0.2s,transform 0.2s;`;
-    card.onmouseenter = () => { card.style.borderColor='rgba(240,180,41,0.3)'; card.style.transform='translateY(-3px)'; };
+    card.onmouseenter = () => { card.style.borderColor='rgba(217,123,63,0.3)'; card.style.transform='translateY(-3px)'; };
     card.onmouseleave = () => { card.style.borderColor=cardBorder; card.style.transform='none'; };
     card.innerHTML = `
       <div style="height:160px;background-image:url('${ev.poster||''}');background-size:cover;background-position:center top;filter:brightness(0.75);"></div>
@@ -321,7 +321,7 @@ function renderRecentResults(events) {
         <div style="font-family:'Montserrat',sans-serif;font-size:0.58rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:${dateCol};margin-bottom:5px;">${ev.date||''}</div>
         <div style="font-family:'Montserrat',sans-serif;font-size:0.8rem;font-weight:800;color:${nameCol};margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${ev.name||''}</div>
         ${winner ? `
-          <div style="font-family:'Inter',sans-serif;font-size:0.76rem;color:#f0b429;font-weight:600;">${winner} def. ${loser}</div>
+          <div style="font-family:'Inter',sans-serif;font-size:0.76rem;color:#d97b3f;font-weight:600;">${winner} def. ${loser}</div>
           <div style="font-family:'Inter',sans-serif;font-size:0.68rem;color:${metaCol};margin-top:3px;">${methodLabel} · R${me?.round||''}</div>
         ` : ''}
       </div>`;
@@ -537,8 +537,8 @@ async function renderReddit() {
     if (!posts.length) return;
 
     const flairColors = {
-      'Discussion': '#f0b429', 'News': '#f59e0b', 'Video': '#ef4444',
-      'Meme': '#a855f7', 'Highlight': '#22c55e', 'Ranking': '#f59e0b',
+      'Discussion': '#d97b3f', 'News': '#b8611e', 'Video': '#ef4444',
+      'Meme': '#a855f7', 'Highlight': '#22c55e', 'Ranking': '#b8611e',
     };
 
     container.innerHTML = posts.map(p => {

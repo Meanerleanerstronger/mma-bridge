@@ -196,12 +196,12 @@ function formatOdds(n) {
     const next = eventsData.find(e => e.status !== 'completed' && (e.isoDate || '') >= today)
                  || eventsData.find(e => e.status !== 'completed');
     if (next) { window.location.replace(`picks.html?id=${encodeURIComponent(next.id)}`); return; }
-    root.innerHTML = `<div class="pk-error">No upcoming events. <a href="events.html" style="color:#f0b429;text-decoration:none;">Browse events →</a></div>`;
+    root.innerHTML = `<div class="pk-error">No upcoming events. <a href="events.html" style="color:#d97b3f;text-decoration:none;">Browse events →</a></div>`;
     return;
   }
 
   const event = eventsData.find(e => e.id === eventId || slugify(e.name || '') === eventId);
-  if (!event) { root.innerHTML = `<div class="pk-error">Event not found. <a href="events.html" style="color:#f0b429;text-decoration:none;">Browse events →</a></div>`; return; }
+  if (!event) { root.innerHTML = `<div class="pk-error">Event not found. <a href="events.html" style="color:#d97b3f;text-decoration:none;">Browse events →</a></div>`; return; }
 
   // Dynamic page title + OG image
   if (event.name) {
@@ -376,7 +376,7 @@ function formatOdds(n) {
               particleCount: Math.min(correct * 25, 180),
               spread: 80,
               origin: { y: 0.55 },
-              colors: ['#f0b429', '#c8a84b', '#ffffff', '#e8c870', '#a78bfa'],
+              colors: ['#d97b3f', '#e0975a', '#ffffff', '#e0975a', '#a78bfa'],
               disableForReducedMotion: true
             }), 400);
           }
@@ -737,11 +737,11 @@ function formatOdds(n) {
 
     // Gold top bar
     const bar = ctx.createLinearGradient(0,0,W,0);
-    bar.addColorStop(0,'#c8960c'); bar.addColorStop(1,'rgba(200,150,12,0.15)');
+    bar.addColorStop(0,'#b8611e'); bar.addColorStop(1,'rgba(184,97,30,0.15)');
     ctx.fillStyle = bar; ctx.fillRect(0,0,W,4);
 
     // Header
-    ctx.font = '900 12px sans-serif'; ctx.fillStyle = 'rgba(200,150,12,0.55)';
+    ctx.font = '900 12px sans-serif'; ctx.fillStyle = 'rgba(184,97,30,0.55)';
     ctx.letterSpacing = '3px'; ctx.textBaseline = 'top';
     ctx.fillText('MMA BRIDGE', 40, 22); ctx.letterSpacing = '0px';
     ctx.font = '900 26px sans-serif'; ctx.fillStyle = '#fff';
@@ -761,7 +761,7 @@ function formatOdds(n) {
 
       // Tick
       ctx.font = `bold ${isMain ? 20 : 16}px sans-serif`;
-      ctx.fillStyle = p ? '#c8960c' : 'rgba(255,255,255,0.12)';
+      ctx.fillStyle = p ? '#b8611e' : 'rgba(255,255,255,0.12)';
       ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
       ctx.fillText(p ? '✓' : '·', 28, midY);
 
@@ -783,7 +783,7 @@ function formatOdds(n) {
         if (p.method) {
           ctx.textAlign = 'right';
           ctx.font = `bold ${isMain ? 20 : 16}px sans-serif`;
-          ctx.fillStyle = '#c8960c';
+          ctx.fillStyle = '#b8611e';
           ctx.fillText(p.method, W - 36, midY - 6);
           ctx.font = '500 11px sans-serif';
           ctx.fillStyle = 'rgba(255,255,255,0.25)';
@@ -812,7 +812,7 @@ function formatOdds(n) {
     });
 
     // Footer
-    ctx.font = '700 13px sans-serif'; ctx.fillStyle = 'rgba(200,150,12,0.5)';
+    ctx.font = '700 13px sans-serif'; ctx.fillStyle = 'rgba(184,97,30,0.5)';
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     ctx.fillText('mmabridge.com', W/2, H - footerH/2);
 
@@ -1521,11 +1521,11 @@ function formatOdds(n) {
 
     // Gold top bar
     const bar = ctx.createLinearGradient(0,0,W,0);
-    bar.addColorStop(0,'#c8960c'); bar.addColorStop(1,'rgba(200,150,12,0.15)');
+    bar.addColorStop(0,'#b8611e'); bar.addColorStop(1,'rgba(184,97,30,0.15)');
     ctx.fillStyle = bar; ctx.fillRect(0,0,W,4);
 
     // Header
-    ctx.font = '900 13px sans-serif'; ctx.fillStyle = 'rgba(200,150,12,0.55)';
+    ctx.font = '900 13px sans-serif'; ctx.fillStyle = 'rgba(184,97,30,0.55)';
     ctx.letterSpacing = '3px'; ctx.fillText('MMA BRIDGE', 40, 30); ctx.letterSpacing = '0px';
     ctx.font = '900 22px sans-serif'; ctx.fillStyle = 'rgba(255,255,255,0.88)';
     const short = evName.length > 36 ? evName.slice(0,34)+'…' : evName;
@@ -1558,7 +1558,7 @@ function formatOdds(n) {
       ctx.fillText(nameA.toUpperCase(), 28, midY - 8);
       // pct A
       ctx.font = `bold 18px sans-serif`;
-      ctx.fillStyle = pctA >= 50 ? '#c8960c' : 'rgba(255,255,255,0.35)';
+      ctx.fillStyle = pctA >= 50 ? '#b8611e' : 'rgba(255,255,255,0.35)';
       ctx.fillText(`${pctA}%`, 28, midY + 12);
 
       // Fighter B name
@@ -1567,7 +1567,7 @@ function formatOdds(n) {
       const nameB = fight.b.split(' ').pop();
       ctx.fillText(nameB.toUpperCase(), W - 28, midY - 8);
       ctx.font = 'bold 18px sans-serif';
-      ctx.fillStyle = pctB >= 50 ? '#c8960c' : 'rgba(255,255,255,0.35)';
+      ctx.fillStyle = pctB >= 50 ? '#b8611e' : 'rgba(255,255,255,0.35)';
       ctx.fillText(`${pctB}%`, W - 28, midY + 12);
 
       // Progress bar
@@ -1575,7 +1575,7 @@ function formatOdds(n) {
       ctx.beginPath(); ctx.roundRect(barX, midY - 5, barW, 10, 5); ctx.fill();
       if (pctA > 0) {
         const fillGrad = ctx.createLinearGradient(barX,0,barX+barW,0);
-        fillGrad.addColorStop(0,'#c8960c'); fillGrad.addColorStop(1,'rgba(200,150,12,0.3)');
+        fillGrad.addColorStop(0,'#b8611e'); fillGrad.addColorStop(1,'rgba(184,97,30,0.3)');
         ctx.fillStyle = fillGrad;
         ctx.beginPath(); ctx.roundRect(barX, midY - 5, (barW * pctA) / 100, 10, 5); ctx.fill();
       }
@@ -1629,12 +1629,12 @@ function formatOdds(n) {
 
     // Gold top bar
     const bar = ctx.createLinearGradient(0, 0, W, 0);
-    bar.addColorStop(0, '#c8960c'); bar.addColorStop(1, 'rgba(200,150,12,0.2)');
+    bar.addColorStop(0, '#b8611e'); bar.addColorStop(1, 'rgba(184,97,30,0.2)');
     ctx.fillStyle = bar; ctx.fillRect(0, 0, W, 4);
 
     // Brand label
     ctx.font = '800 12px sans-serif';
-    ctx.fillStyle = 'rgba(200,150,12,0.55)';
+    ctx.fillStyle = 'rgba(184,97,30,0.55)';
     ctx.fillText('MMA BRIDGE', 48, 58);
 
     // Event name
@@ -1649,7 +1649,7 @@ function formatOdds(n) {
 
     // Big correct count
     ctx.font = '900 100px sans-serif';
-    ctx.fillStyle = '#c8960c';
+    ctx.fillStyle = '#b8611e';
     ctx.fillText(`${correct}`, 48, 258);
     const cw = ctx.measureText(`${correct}`).width;
     ctx.font = '900 52px sans-serif';
@@ -1659,7 +1659,7 @@ function formatOdds(n) {
     // PCT right-aligned
     ctx.textAlign = 'right';
     ctx.font = '900 68px sans-serif';
-    ctx.fillStyle = pct >= 70 ? '#c8960c' : pct >= 50 ? 'rgba(200,150,12,0.7)' : 'rgba(255,100,100,0.8)';
+    ctx.fillStyle = pct >= 70 ? '#b8611e' : pct >= 50 ? 'rgba(184,97,30,0.7)' : 'rgba(255,100,100,0.8)';
     ctx.fillText(`${pct}%`, W - 48, 228);
     ctx.font = '700 18px sans-serif';
     ctx.fillStyle = 'rgba(255,255,255,0.38)';
@@ -1679,7 +1679,7 @@ function formatOdds(n) {
     ctx.fillText('Can you beat me?', 48, 374);
     ctx.textAlign = 'right';
     ctx.font = '700 13px sans-serif';
-    ctx.fillStyle = 'rgba(200,150,12,0.65)';
+    ctx.fillStyle = 'rgba(184,97,30,0.65)';
     ctx.fillText('mmabridge.com', W - 48, 374);
     ctx.textAlign = 'left';
 
@@ -1698,24 +1698,24 @@ function formatOdds(n) {
 
     // Gold glow top-left
     const g1 = ctx.createRadialGradient(0, 0, 0, 0, 0, 480);
-    g1.addColorStop(0, 'rgba(200,150,12,0.15)'); g1.addColorStop(1, 'transparent');
+    g1.addColorStop(0, 'rgba(184,97,30,0.15)'); g1.addColorStop(1, 'transparent');
     ctx.fillStyle = g1; ctx.fillRect(0, 0, W, H);
 
     // Gold top bar
     const bar = ctx.createLinearGradient(0, 0, W, 0);
-    bar.addColorStop(0, '#c8960c'); bar.addColorStop(1, 'rgba(200,150,12,0.15)');
+    bar.addColorStop(0, '#b8611e'); bar.addColorStop(1, 'rgba(184,97,30,0.15)');
     ctx.fillStyle = bar; ctx.fillRect(0, 0, W, 4);
 
     // "I CALLED IT ✓"
     ctx.font = '900 13px sans-serif';
-    ctx.fillStyle = 'rgba(200,150,12,0.6)';
+    ctx.fillStyle = 'rgba(184,97,30,0.6)';
     ctx.letterSpacing = '4px';
     ctx.textBaseline = 'top';
     ctx.fillText('MMA BRIDGE', 48, 32);
     ctx.letterSpacing = '0px';
 
     ctx.font = '900 48px sans-serif';
-    ctx.fillStyle = '#c8960c';
+    ctx.fillStyle = '#b8611e';
     ctx.fillText('I CALLED IT ✓', 48, 72);
 
     // Winner name
@@ -1738,7 +1738,7 @@ function formatOdds(n) {
     // Points badge
     if (pts && parseInt(pts) > 0) {
       ctx.font = '900 40px sans-serif';
-      ctx.fillStyle = '#c8960c';
+      ctx.fillStyle = '#b8611e';
       ctx.textAlign = 'right';
       ctx.fillText(`+${pts}pts`, W - 48, 200);
       if (commPct) {
@@ -1756,7 +1756,7 @@ function formatOdds(n) {
     ctx.fillStyle = 'rgba(255,255,255,0.2)';
     ctx.fillText('Think you can do better?', 48, 376);
     ctx.font = '700 13px sans-serif';
-    ctx.fillStyle = 'rgba(200,150,12,0.6)';
+    ctx.fillStyle = 'rgba(184,97,30,0.6)';
     ctx.textAlign = 'right';
     ctx.fillText('mmabridge.com', W - 48, 376);
     ctx.textAlign = 'left';

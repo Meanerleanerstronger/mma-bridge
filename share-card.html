@@ -49,7 +49,7 @@
       font-weight: 900;
       font-size: 0.85rem;
       letter-spacing: 0.15em;
-      color: #f0b429;
+      color: #d97b3f;
     }
 
     .format-toggle {
@@ -72,9 +72,9 @@
       transition: all 0.15s;
     }
     .fmt-btn.active {
-      background: rgba(240,180,41,0.1);
-      border-color: rgba(240,180,41,0.4);
-      color: #f0b429;
+      background: rgba(217,123,63,0.1);
+      border-color: rgba(217,123,63,0.4);
+      color: #d97b3f;
     }
     .fmt-btn:hover:not(.active) { color: #fff; border-color: rgba(255,255,255,0.25); }
 
@@ -121,7 +121,7 @@
     }
 
     .btn-download {
-      background: #f0b429;
+      background: #d97b3f;
       color: #060608;
     }
     .btn-download:hover { background: #33ecff; }
@@ -145,9 +145,9 @@
       bottom: 28px;
       left: 50%;
       transform: translateX(-50%) translateY(80px);
-      background: rgba(240,180,41,0.15);
-      border: 1px solid rgba(240,180,41,0.3);
-      color: #f0b429;
+      background: rgba(217,123,63,0.15);
+      border: 1px solid rgba(217,123,63,0.3);
+      color: #d97b3f;
       font-size: 0.8rem;
       font-weight: 600;
       padding: 10px 20px;
@@ -275,14 +275,14 @@
 
       // Subtle radial glow top-left (cyan)
       const gl1 = ctx.createRadialGradient(isWide ? 340 : W * 0.3, 0, 0, isWide ? 340 : W * 0.3, 0, isWide ? 500 : 800);
-      gl1.addColorStop(0, 'rgba(240,180,41,0.09)');
+      gl1.addColorStop(0, 'rgba(217,123,63,0.09)');
       gl1.addColorStop(1, 'transparent');
       ctx.fillStyle = gl1;
       ctx.fillRect(0, 0, W, H);
 
       // Subtle glow bottom-right (gold)
       const gl2 = ctx.createRadialGradient(W, H, 0, W, H, isWide ? 420 : 640);
-      gl2.addColorStop(0, 'rgba(200,150,12,0.08)');
+      gl2.addColorStop(0, 'rgba(184,97,30,0.08)');
       gl2.addColorStop(1, 'transparent');
       ctx.fillStyle = gl2;
       ctx.fillRect(0, 0, W, H);
@@ -323,7 +323,7 @@
       }
 
       // ── Top cyan bar ──
-      ctx.fillStyle = '#f0b429';
+      ctx.fillStyle = '#d97b3f';
       ctx.fillRect(0, 0, W, 4);
 
       const pad = isWide ? 52 : 64;
@@ -331,7 +331,7 @@
       // ── MMA BRIDGE logo ──
       ctx.font = `900 ${isWide ? 13 : 14}px Montserrat, Arial Black, sans-serif`;
       ctx.letterSpacing = '3px';
-      ctx.fillStyle = '#f0b429';
+      ctx.fillStyle = '#d97b3f';
       ctx.textBaseline = 'top';
       ctx.fillText('MMA BRIDGE', pad, isWide ? 32 : 40);
       ctx.letterSpacing = '0px';
@@ -350,15 +350,15 @@
       const tw = ctx.measureText(rankText).width;
       const bx = pad, by = rankY, bw = tw + badgePad * 2, bh = isWide ? 26 : 28;
 
-      ctx.fillStyle = isChamp ? 'rgba(200,150,12,0.18)' : 'rgba(240,180,41,0.12)';
+      ctx.fillStyle = isChamp ? 'rgba(184,97,30,0.18)' : 'rgba(217,123,63,0.12)';
       roundRect(ctx, bx, by, bw, bh, 5);
       ctx.fill();
-      ctx.strokeStyle = isChamp ? 'rgba(200,150,12,0.5)' : 'rgba(240,180,41,0.35)';
+      ctx.strokeStyle = isChamp ? 'rgba(184,97,30,0.5)' : 'rgba(217,123,63,0.35)';
       ctx.lineWidth = 1;
       roundRect(ctx, bx, by, bw, bh, 5);
       ctx.stroke();
 
-      ctx.fillStyle = isChamp ? '#c8960c' : '#f0b429';
+      ctx.fillStyle = isChamp ? '#b8611e' : '#d97b3f';
       ctx.textBaseline = 'middle';
       ctx.textAlign = 'left';
       ctx.fillText(rankText, bx + badgePad, by + bh / 2);
