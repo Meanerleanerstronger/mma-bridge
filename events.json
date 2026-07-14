@@ -11311,26 +11311,26 @@
   },
   {
     "id": "ufc-fight-night-ankalaev-vs-rountree-jr",
-    "name": "UFC Fight Night: Ankalaev vs. Rountree Jr.",
+    "name": "UFC Fight Night: Ankalaev vs. Guskov",
     "type": "FIGHT NIGHT",
     "date": "Sat, Jul 25, 2026",
     "isoDate": "2026-07-25",
     "location": "Abu Dhabi, UAE",
     "venue": "Etihad Arena",
-    "poster": "",
+    "poster": "https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/2026-07/072526-ufc-fight-night-ankalaev-vs-guskov-EVENT-ART.jpg",
     "status": "upcoming",
     "start_time": "2026-07-25T16:00:00.000Z",
     "mainCard": [
       {
         "a": "Magomed Ankalaev",
-        "b": "Khalil Rountree Jr.",
+        "b": "Bogdan Guskov",
         "weight": "Light Heavyweight",
-        "rounds": "5 Rds",
+        "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/ANKALAEV_MAGOMED_L_10-26.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/ROUNTREE_KHALIL_L_10-05.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/7/GUSKOV_BOGDAN_L_01-18.png"
       },
       {
         "a": "Umar Nurmagomedov",
@@ -11419,17 +11419,6 @@
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/ZAYNUKOV_MAGOMED_R_10-07.png?itok=rUlbqlka",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
-      },
-      {
-        "a": "Magomed Ankalaev",
-        "b": "Bogdan Guskov",
-        "weight": "Light Heavyweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": true,
-        "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/ANKALAEV_MAGOMED_L_10-26.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/7/GUSKOV_BOGDAN_L_01-18.png"
       }
     ],
     "prelims": [

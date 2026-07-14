@@ -3,10 +3,14 @@
  * ufc-event-card-sync.js
  * Scrapes UFC.com event pages to keep data/events.json current:
  *   - Adds newly announced fights (main card, prelims, early prelims)
+ *   - Removes fights whose pairing is no longer on the UFC.com card (fighter
+ *     pulled out / replaced) and re-homes a vacated slot ("main"/"comain")
+ *     onto the replacement fight, renaming the event if the main event changed
  *   - Sets start_time from broadcast timestamp
  *   - Fills imgA/imgB from data/fighters.json name lookup
  *   - Sets titleFight and ranked flags
  * Preserves all manually-set fields (slot, winner, method, round, time).
+ * Never touches a fight that already has a `winner` (judged results are final).
  * Writes data/events.json + events.json (root copy).
  */
 
@@ -181,6 +185,29 @@ function fightsMatch(a, b) {
   return false;
 }
 
+// Does `name` appear in either corner of any fight in `fights`? Used to tell
+// "this fighter is still on the card, just against someone new" (pull-out
+// replacement) apart from "this fighter is gone entirely" (fight cancelled).
+function hasFighter(name, fights) {
+  const n = norm(name), sn = lastName(name);
+  return fights.some(f => {
+    if (norm(f.a) === n || norm(f.b) === n) return true;
+    return !!sn && (lastName(f.a) === sn || lastName(f.b) === sn);
+  });
+}
+
+// "Khalil Rountree Jr." → "Rountree Jr." (keeps generational suffixes attached)
+function titleLastName(name) {
+  const words = (name || '').trim().split(/\s+/).filter(Boolean);
+  if (!words.length) return name || '';
+  const suffixes = new Set(['jr', 'jr.', 'sr', 'sr.', 'ii', 'iii', 'iv', 'v']);
+  const last = words[words.length - 1];
+  if (words.length >= 2 && suffixes.has(last.toLowerCase().replace(/\.$/, ''))) {
+    return `${words[words.length - 2]} ${last}`;
+  }
+  return last;
+}
+
 function mergeFights(existing, fromUFC, fighterIdx) {
   const result = [...existing];
 
@@ -250,6 +277,39 @@ async function syncEvent(ev, fighterIdx) {
   const prevPreLen    = (ev.prelims     || []).length;
   const prevEarlyLen  = (ev.earlyPrelims|| []).length;
 
+  // ── Pull-out detection ──────────────────────────────────────────────
+  // mergeFights() only ever adds/updates fights, so a withdrawn fighter's
+  // old pairing would otherwise sit stale forever while the replacement
+  // gets bolted on as a duplicate unslotted fight. Remove any existing fight
+  // whose pairing no longer appears anywhere on the fresh UFC.com card, and
+  // remember the slot (main/comain) so it can be handed to the replacement.
+  const freshBySection = { mainCard: ufcMain, prelims: ufcPrelims, earlyPrelims: ufcEarlyPre };
+  const allFresh = [...ufcMain, ...ufcPrelims, ...ufcEarlyPre];
+  const vacatedSlots = [];
+
+  for (const section of ['mainCard', 'prelims', 'earlyPrelims']) {
+    const fresh = freshBySection[section];
+    if (!fresh.length) continue; // empty scrape = likely a fetch/parse hiccup, not "card is empty" — skip
+    const kept = [];
+    for (const f of (ev[section] || [])) {
+      if (f.winner) { kept.push(f); continue; } // judged fights are final, never touched
+      if (fresh.some(uf => fightsMatch(f, uf))) { kept.push(f); continue; } // still the current pairing
+
+      const aStill = hasFighter(f.a, allFresh);
+      const bStill = hasFighter(f.b, allFresh);
+      if (aStill || bStill) {
+        const survivor = aStill ? f.a : f.b;
+        const droppedOut = aStill ? f.b : f.a;
+        console.log(`    🔁 Pull-out: ${droppedOut} is out, ${survivor} has a new opponent (was: ${f.a} vs ${f.b}${f.slot ? `, slot="${f.slot}"` : ''})`);
+        if (f.slot) vacatedSlots.push({ slot: f.slot, survivor });
+      } else {
+        console.log(`    ⚠️  Fight no longer on card, no replacement found: ${f.a} vs ${f.b}${f.slot ? ` (was slot="${f.slot}" — needs manual review)` : ''}`);
+      }
+      changed = true; // dropped either way — don't carry stale fights forward
+    }
+    ev[section] = kept;
+  }
+
   if (ufcMain.length)     ev.mainCard     = mergeFights(ev.mainCard    || [], ufcMain,     fighterIdx);
 
   // Build sets of fighters already placed in higher sections so we don't re-add them lower
@@ -264,6 +324,35 @@ async function syncEvent(ev, fighterIdx) {
   // Also clean existing fights that may have moved up sections
   ev.prelims      = (ev.prelims     || []).filter(notInMain);
   ev.earlyPrelims = (ev.earlyPrelims|| []).filter(f => notInMain(f) && !presFighters.has(norm(f.a)) && !presFighters.has(norm(f.b)));
+
+  // ── Hand vacated slots to the replacement fight ─────────────────────
+  // The withdrawn fighter's old fight is gone (removed above); the survivor's
+  // new pairing was just added above as an unslotted fight by mergeFights().
+  // Find it and give it the vacated slot label. If "main" moved, rename the
+  // event to match — but only here, never as a general reconciliation check,
+  // so deliberate naming (e.g. rematch "2" suffixes) is never fought.
+  for (const { slot, survivor } of vacatedSlots) {
+    const target = ['mainCard', 'prelims', 'earlyPrelims']
+      .flatMap(s => ev[s] || [])
+      .find(f => !f.slot && hasFighter(survivor, [f]));
+    if (!target) {
+      console.log(`    ⚠️  No replacement fight found for vacated slot="${slot}" (survivor: ${survivor}) — needs manual review.`);
+      continue;
+    }
+    target.slot = slot;
+    console.log(`    ➡️  Slot "${slot}" reassigned to ${target.a} vs ${target.b}`);
+    changed = true;
+    if (slot === 'main') {
+      const ppvMatch = ev.name.match(/^(UFC\s+\d+):/i);
+      const prefix = ppvMatch ? `${ppvMatch[1]}:` : 'UFC Fight Night:';
+      const newName = `${prefix} ${titleLastName(target.a)} vs. ${titleLastName(target.b)}`;
+      if (newName !== ev.name) {
+        console.log(`    ✏️  Event renamed: "${ev.name}" → "${newName}"`);
+        ev.name = newName;
+        changed = true;
+      }
+    }
+  }
 
   // Fill missing imgA/imgB on all existing fights
   for (const section of ['mainCard', 'prelims', 'earlyPrelims']) {

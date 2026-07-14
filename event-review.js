@@ -992,7 +992,7 @@ function renderPage(ev, community, extra = {}) {
     });
   }
 
-  textarea.addEventListener('focus', () => { if (!textarea.disabled) textarea.style.borderColor = 'rgba(0,255,255,0.45)'; });
+  textarea.addEventListener('focus', () => { if (!textarea.disabled) textarea.style.borderColor = 'rgba(240,180,41,0.45)'; });
   textarea.addEventListener('blur',  () => textarea.style.borderColor = '#222');
 
   // ── Submit / Edit ─────────────────────────────
