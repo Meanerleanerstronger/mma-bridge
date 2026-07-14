@@ -11151,39 +11151,6 @@
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-11/DUNCAN_CHRISTIAN_LEROY_L_11-08.png?itok=YYD6jKSM"
       },
       {
-        "a": "Kevin Holland",
-        "b": "Jacobe Smith",
-        "weight": "Welterweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/HOLLAND_KEVIN_L_04-11.png?itok=mOqmHvqp",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/SMITH_JACOBE_L_02-21.png?itok=sBX3a4YZ"
-      },
-      {
-        "a": "Amanda Ribas",
-        "b": "Fatima Kline",
-        "weight": "W Strawweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/RIBAS_AMANDA_L_07-26.png?itok=3dIeCYcl",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/KLINE_FATIMA_L_07-12.png?itok=DGxlAmsY"
-      },
-      {
-        "a": "Brad Tavares",
-        "b": "Marc-Andre Barriault",
-        "weight": "Middleweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/TAVARES_BRAD_L_03-14.png?itok=b95gOYRd",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/BARRIAULT_MARC-ANDRE_L_05-10.png?itok=kJq5jhiN"
-      },
-      {
         "a": "Chase Hooper",
         "b": "Mitch Ramirez",
         "weight": "Lightweight",
@@ -11219,17 +11186,6 @@
     ],
     "prelims": [
       {
-        "a": "Veronica Hardy",
-        "b": "Dione Barbosa",
-        "weight": "W Flyweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": true,
-        "slot": "",
-        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/HARDY_VERONICA_L_10-04.png?itok=qkwM9Ng_",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/BARBOSA_DIONE_L_04-04.png?itok=U7l8E953"
-      },
-      {
         "a": "Austin Bashi",
         "b": "Jose Miguel Delgado",
         "weight": "Featherweight",
@@ -11239,17 +11195,6 @@
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/BASHI_AUSTIN_L_08-02.png?itok=P1CQ0RSu",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/DELGADO_JOSE_R_10-25.png?itok=Dfg3Y3py"
-      },
-      {
-        "a": "Allen Frye Jr.",
-        "b": "Alvin Hines",
-        "weight": "Heavyweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-12/FRYE_ALLEN_L_12-13.png?itok=JTD8nXM0",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-06/HINES_ALVIN_R_06-28.png?itok=4Yj9bfkr"
       },
       {
         "a": "Levi Rodrigues Jr.",
@@ -11290,7 +11235,7 @@
         "weight": "Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "",
         "imgA": "",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-06/HINES_ALVIN_R_06-28.png"
@@ -11333,28 +11278,6 @@
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/7/GUSKOV_BOGDAN_L_01-18.png"
       },
       {
-        "a": "Umar Nurmagomedov",
-        "b": "David Martinez",
-        "weight": "Bantamweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": true,
-        "slot": "comain",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-09/NURMAGOMEDOV_UMAR_L_09-28.png",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-03/MARTINEZ_DAVID_L_03-29.png?itok=SahwXzRS"
-      },
-      {
-        "a": "Uran Satybaldiev",
-        "b": "Dustin Jacoby",
-        "weight": "Light Heavyweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/SATYBALDIEV_URAN_L_08-23.png?itok=PM2a7Hrg",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/JACOBY_DUSTIN_L_02-07.png?itok=1bDBrjfv"
-      },
-      {
         "a": "Rizvan Kuniev",
         "b": "Tyrell Fortune",
         "weight": "Heavyweight",
@@ -11364,17 +11287,6 @@
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-06/KUNIEV_RIZVAN_R_06-21.png?itok=RaVbAYbN",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/FORTUNE_TYRELL_R_03-28.png?itok=_-CzoqwV"
-      },
-      {
-        "a": "Valter Walker",
-        "b": "Thomas Petersen",
-        "weight": "Heavyweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": true,
-        "slot": "",
-        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/WALKER_VALTER_L_10-25.png?itok=iTXf1Ry8",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/PETERSEN_THOMAS_L_05-03.png?itok=sYHO_Yst"
       },
       {
         "a": "Steve Erceg",
@@ -11454,6 +11366,28 @@
         "slot": "",
         "imgA": "",
         "imgB": ""
+      },
+      {
+        "a": "Valter Walker",
+        "b": "Thomas Petersen",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/WALKER_VALTER_L_10-25.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/PETERSEN_THOMAS_L_05-03.png"
+      },
+      {
+        "a": "Uran Satybaldiev",
+        "b": "Dustin Jacoby",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/SATYBALDIEV_URAN_L_08-23.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/JACOBY_DUSTIN_L_02-07.png"
       }
     ],
     "earlyPrelims": []
