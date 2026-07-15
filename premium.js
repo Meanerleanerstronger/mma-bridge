@@ -108,12 +108,14 @@ body::before{
 }
 
 /* ── NAV LINKS — glossy ── */
+.nav-links{ gap:22px !important; }
 .nav-links li a,.nav-links li a:visited{
-  font-family:'Montserrat',sans-serif !important;
-  font-weight:700 !important;
-  font-size:12.5px !important;
-  letter-spacing:0.06em !important;
+  font-family:'Barlow Condensed',Montserrat,sans-serif !important;
+  font-weight:800 !important;
+  font-size:15px !important;
+  letter-spacing:0.03em !important;
   text-transform:uppercase !important;
+  white-space:nowrap !important;
   color:rgba(255,255,255,0.45) !important;
   text-shadow:0 1px 2px rgba(0,0,0,0.6) !important;
   transition:color 0.2s,text-shadow 0.2s !important;
