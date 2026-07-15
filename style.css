@@ -139,7 +139,7 @@ a, a:visited {
 .nav-links {
   margin: 0 auto;
   display: flex;
-  gap: 22px;
+  gap: 32px;
   list-style: none;
   padding: 0;
 }
@@ -150,8 +150,8 @@ a, a:visited {
   text-decoration: none;
   font-family: 'Barlow Condensed', 'Montserrat', sans-serif !important;
   font-weight: 800 !important;
-  font-size: 15px !important;
-  letter-spacing: 0.03em !important;
+  font-size: 17px !important;
+  letter-spacing: 0.04em !important;
   text-transform: uppercase !important;
   white-space: nowrap !important;
   text-shadow: 0 1px 0 rgba(255,255,255,0.04);
