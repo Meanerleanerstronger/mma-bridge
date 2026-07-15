@@ -31777,5 +31777,96 @@
   {
     "id": "anna-melisano",
     "name": "Anna Melisano"
+  },
+  {
+    "id": "santiago-ponzinibbio",
+    "name": "Santiago Ponzinibbio",
+    "record": {
+      "wins": 30,
+      "losses": 9,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Daniel Rodriguez (fighter)",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Sandhagen vs. Figueiredo",
+        "round": 3,
+        "time": "1:12"
+      },
+      {
+        "opponent": "Carlston Harris",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Dern vs. Ribas 2",
+        "round": 3,
+        "time": "3:13"
+      },
+      {
+        "opponent": "Muslim Salikhov",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC on ESPN: Namajunas vs. Cortez",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Kevin Holland",
+        "result": "L",
+        "method": "KO (punch)",
+        "event": "UFC 287",
+        "round": 3,
+        "time": "3:16"
+      },
+      {
+        "opponent": "Alex Morono",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC 282",
+        "round": 3,
+        "time": "2:29"
+      },
+      {
+        "opponent": "Michel Pereira",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Holm vs. Vieira",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Geoff Neal",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC 269",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Miguel Baeza (fighter)",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Rozenstruik vs. Sakai",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Li Jingliang",
+        "result": "L",
+        "method": "KO (punch)",
+        "event": "UFC on ABC: Holloway vs. Kattar",
+        "round": 1,
+        "time": "4:25"
+      },
+      {
+        "opponent": "Neil Magny",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "UFC Fight Night: Magny vs. Ponzinibbio",
+        "round": 4,
+        "time": "2:36"
+      }
+    ]
   }
 ]
