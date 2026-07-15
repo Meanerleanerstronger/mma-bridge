@@ -109,11 +109,11 @@ body::before{
 
 /* ── NAV LINKS — glossy ── */
 .nav-links li a,.nav-links li a:visited{
-  font-family:'Inter',sans-serif !important;
-  font-weight:500 !important;
-  font-size:13px !important;
-  letter-spacing:0.01em !important;
-  text-transform:none !important;
+  font-family:'Montserrat',sans-serif !important;
+  font-weight:700 !important;
+  font-size:12.5px !important;
+  letter-spacing:0.06em !important;
+  text-transform:uppercase !important;
   color:rgba(255,255,255,0.45) !important;
   text-shadow:0 1px 2px rgba(0,0,0,0.6) !important;
   transition:color 0.2s,text-shadow 0.2s !important;
