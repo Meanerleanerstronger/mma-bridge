@@ -8296,7 +8296,7 @@ button:focus:not(:focus-visible), a:focus:not(:focus-visible) { outline: none; }
 ══════════════════════════════════════════════════ */
 
 /* Bell mount */
-#notifBellMount { display: flex; align-items: center; }
+#notifBellMount { display: flex; align-items: center; margin-right: 22px; }
 .notif-wrap { position: relative; display: flex; align-items: center; }
 
 /* Bell button */
