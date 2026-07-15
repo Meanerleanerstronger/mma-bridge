@@ -11237,7 +11237,7 @@
         "titleFight": false,
         "ranked": true,
         "slot": "",
-        "imgA": "",
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-06/HINES_ALVIN_R_06-28.png"
       },
       {
@@ -11248,8 +11248,19 @@
         "titleFight": false,
         "ranked": true,
         "slot": "",
-        "imgA": "",
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/2022-02/womens-silhouette-RED-corner.png?itok=SXsY1AgG",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/BARBOSA_DIONE_L_04-04.png"
+      },
+      {
+        "a": "Ezra Elliot",
+        "b": "Damien Anderson",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
       }
     ],
     "earlyPrelims": []
@@ -11311,17 +11322,6 @@
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-11/TURMAN_WELLINGTON_L_12-02.png?itok=icqJ0amp"
       },
       {
-        "a": "Ismael Bonfim",
-        "b": "Axel Sola",
-        "weight": "Lightweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-02/BONFIM_ISMAEL_L_02-15.png?itok=V4XbGXyH",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/SOLA_AXEL_L_09-06.png?itok=QVekEELf"
-      },
-      {
         "a": "Magomed Zaynukov",
         "b": "Damian Rzepecki",
         "weight": "Lightweight",
@@ -11364,8 +11364,8 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "",
-        "imgB": ""
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/PONZINIBBIO_SANTIAGO_L_05-03.png?itok=fN0mdvZ2",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/PATTERSON_SAM_L_09-06.png?itok=DwRzQATP"
       },
       {
         "a": "Valter Walker",
@@ -11388,6 +11388,17 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/SATYBALDIEV_URAN_L_08-23.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/JACOBY_DUSTIN_L_02-07.png"
+      },
+      {
+        "a": "Ismael Bonfim",
+        "b": "Axel Sola",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-02/BONFIM_ISMAEL_L_02-15.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-09/SOLA_AXEL_L_09-06.png"
       }
     ],
     "earlyPrelims": []
