@@ -57,14 +57,32 @@
   function saveCardSnap(o){ try { localStorage.setItem(CARD_SNAP_KEY, JSON.stringify(o)); } catch {} }
 
   function eventFightSet(ev) {
-    // Returns Set of "a|b|weight" strings for all fights on an event
+    // Returns Set of "a|b" strings for all fights on an event. Deliberately
+    // excludes weight — it used to be part of the key, which meant a bot
+    // normalizing/filling in a weight string for an otherwise-unchanged fight
+    // made it look "removed + re-added" with identical fighters, and the
+    // replacement-detection below would then report a fighter as pulling out
+    // and being "replaced by" themselves (e.g. "Dustin Jacoby out — replaced
+    // by Dustin Jacoby"). Weight is looked up separately (eventFightWeights)
+    // only for display text, not identity.
     const fights = new Set();
     for (const sec of ['mainCard', 'prelims', 'earlyPrelims']) {
       for (const f of (ev[sec] || [])) {
-        if (f.a && f.b) fights.add(`${f.a}|${f.b}|${f.weight || ''}`);
+        if (f.a && f.b) fights.add(`${f.a}|${f.b}`);
       }
     }
     return fights;
+  }
+
+  function eventFightWeights(ev) {
+    // Map of "a|b" -> weight, for notification display text only.
+    const weights = {};
+    for (const sec of ['mainCard', 'prelims', 'earlyPrelims']) {
+      for (const f of (ev[sec] || [])) {
+        if (f.a && f.b) weights[`${f.a}|${f.b}`] = f.weight || '';
+      }
+    }
+    return weights;
   }
 
   // ── Fav fighter ───────────────────────────────
@@ -209,6 +227,7 @@
           const evId = ev.id || slugify(ev.name || '');
           if (!evId) return;
           const curr = eventFightSet(ev);
+          const weights = eventFightWeights(ev);
           newSnap[evId] = [...curr];
 
           if (isFirstSnap || !snap[evId]) return; // silent seed
@@ -218,11 +237,13 @@
           // New fights (in curr but not prev)
           curr.forEach(fight => {
             if (prev.has(fight)) return;
-            const [a, b, weight] = fight.split('|');
+            const [a, b] = fight.split('|');
+            const weight = weights[fight] || '';
             // Check if it's a replacement (one fighter slot matches a prev fight)
             let replacedFight = null;
             prev.forEach(pf => {
               const [pa, pb] = pf.split('|');
+              if (pa === a && pb === b) return; // same two fighters — not a swap
               if (!curr.has(pf) && (pa === a || pb === b || pa === b || pb === a)) {
                 replacedFight = pf;
               }
