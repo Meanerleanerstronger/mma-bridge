@@ -11911,8 +11911,13 @@ body.light-mode .lb-h2h-card { background: #fff !important; border-color: rgba(0
 body.light-mode .lb-h2h-name { color: #111 !important; }
 
 /* ── Picks page fight cards ── */
-body.light-mode .fc-card { background: #fff !important; border-color: rgba(0,0,0,0.1) !important; }
-body.light-mode .fc-card:hover { background: #f9f6ee !important; border-color: rgba(180,130,10,0.25) !important; }
+/* Cards had no shadow except on :hover — in dark mode the card's own dark
+   tone already reads as separate from the near-black page without one, but
+   a white card on a near-white page with only a 1px border has almost no
+   visible depth, which is most of why this page reads as "empty" in light
+   mode even though the content itself is identical to dark mode. */
+body.light-mode .fc-card { background: #fff !important; border-color: rgba(0,0,0,0.1) !important; box-shadow: 0 2px 14px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04) !important; }
+body.light-mode .fc-card:hover { background: #f9f6ee !important; border-color: rgba(180,130,10,0.25) !important; box-shadow: 0 6px 22px rgba(0,0,0,0.09), 0 2px 6px rgba(0,0,0,0.05) !important; }
 body.light-mode .fc-fighter { color: #111 !important; }
 body.light-mode .fc-fighter.dim { color: rgba(0,0,0,0.45) !important; }
 body.light-mode .fc-vs { color: rgba(0,0,0,0.25) !important; }
@@ -12351,6 +12356,16 @@ body.light-mode .lnx-close:hover { color: rgba(0,0,0,0.55); background: rgba(0,0
   position: absolute; inset: 0;
   background:
     linear-gradient(to bottom, rgba(8,8,12,0.18) 0%, rgba(8,8,12,0.65) 50%, rgba(8,8,12,1) 83%),
+    linear-gradient(to right, rgba(8,8,12,0.72) 0%, transparent 35%, rgba(8,8,12,0.72) 100%);
+}
+/* Poster fades to hardcoded black at its base — fine in dark mode where the
+   page background past the poster is also near-black, but in light mode
+   that created a hard cliff: dark photo fading to pure black, then an
+   instant cut to the pale page background right below it. Fade to the
+   actual light-mode page color instead so it's a continuous transition. */
+body.light-mode .pk-poster-bg::after {
+  background:
+    linear-gradient(to bottom, rgba(8,8,12,0.18) 0%, rgba(8,8,12,0.65) 50%, rgba(250,248,243,1) 83%),
     linear-gradient(to right, rgba(8,8,12,0.72) 0%, transparent 35%, rgba(8,8,12,0.72) 100%);
 }
 
