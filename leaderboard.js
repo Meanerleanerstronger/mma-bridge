@@ -48,6 +48,19 @@
     return `<span class="lb-tier" style="color:${t.color};border-color:${t.color}22">${t.name}</span>`;
   }
 
+  function skeletonRows(n = 6) {
+    return Array(n).fill(0).map(() => `
+      <div class="lb-skel-row">
+        <div class="lb-skel-pos pk-skel"></div>
+        <div class="lb-skel-avatar pk-skel"></div>
+        <div class="lb-skel-lines">
+          <div class="lb-skel-name pk-skel"></div>
+          <div class="lb-skel-sub pk-skel"></div>
+        </div>
+        <div class="lb-skel-stat pk-skel"></div>
+      </div>`).join('');
+  }
+
   const root = document.getElementById('lbRoot');
   const sb   = window._sb;
 
@@ -110,7 +123,7 @@
         <div class="lb-board-col">
           <div class="lb-section-label">Global Rankings</div>
           <div class="lb-table-wrap" id="lbGlobalWrap">
-            <div class="lb-loading"><div class="lb-spinner"></div>Loading…</div>
+            ${skeletonRows()}
           </div>
         </div>
         <!-- Group (hidden until in a group) -->
@@ -131,7 +144,7 @@
         </div>
       </div>
       <div id="lbChallengesWrap" class="lb-ch-list">
-        <div class="lb-loading"><div class="lb-spinner"></div>Loading…</div>
+        ${skeletonRows(3)}
       </div>
     </div>
 

@@ -73,25 +73,72 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // ── Navbar scroll shadow ──
+  // ── Navbar scroll shadow + hide-on-scroll-down / reveal-on-scroll-up ──
   (function() {
     var nav = document.querySelector('.navbar');
     if (!nav) return;
     var tick = false;
+    var lastY = window.scrollY;
+    var navH = nav.offsetHeight;
     window.addEventListener('scroll', function() {
       if (tick) return;
       tick = true;
       requestAnimationFrame(function() {
-        nav.classList.toggle('scrolled', window.scrollY > 10);
+        var y = window.scrollY;
+        nav.classList.toggle('scrolled', y > 10);
+        // Never hide until scrolled past the nav's own height — otherwise a
+        // tiny downward wiggle near the top hides it for no reason.
+        if (y > navH) {
+          nav.classList.toggle('nav-hidden', y > lastY);
+        } else {
+          nav.classList.remove('nav-hidden');
+        }
+        lastY = y;
         tick = false;
       });
     }, { passive: true });
   })();
 
-  // ── IntersectionObserver scroll reveal ──
+  // ── Image fade-in (fighter photos, posters) ──
+  // Images across the site just pop in with no transition once loaded,
+  // which reads as unpolished and (on slow connections) causes a visible
+  // "flash" as each one resolves. Fade newly-loading images in smoothly;
+  // images already cached/complete by the time this runs skip the fade
+  // entirely so they don't flicker. A MutationObserver covers images
+  // rendered later by JS (fight cards, posters, rankings, etc.) since most
+  // of those exist well after this DOMContentLoaded fires.
   (function() {
-    var els = document.querySelectorAll('[data-reveal]');
-    if (!els.length || !window.IntersectionObserver) return;
+    function setup(img) {
+      if (img.dataset.fadeInit) return;
+      img.dataset.fadeInit = '1';
+      if (img.complete && img.naturalWidth > 0) { img.classList.add('img-loaded'); return; }
+      img.classList.add('img-fade');
+      var done = function() { img.classList.add('img-loaded'); };
+      img.addEventListener('load', done, { once: true });
+      img.addEventListener('error', done, { once: true }); // never hide a broken image forever
+    }
+    document.querySelectorAll('img').forEach(setup);
+    if (window.MutationObserver) {
+      new MutationObserver(function(mutations) {
+        mutations.forEach(function(m) {
+          m.addedNodes.forEach(function(node) {
+            if (node.nodeType !== 1) return;
+            if (node.tagName === 'IMG') setup(node);
+            else if (node.querySelectorAll) node.querySelectorAll('img').forEach(setup);
+          });
+        });
+      }).observe(document.body, { childList: true, subtree: true });
+    }
+  })();
+
+  // ── IntersectionObserver scroll reveal ──
+  // Exposed globally because most [data-reveal] targets (leaderboard rows,
+  // rankings, review cards) are rendered asynchronously well after this
+  // DOMContentLoaded fires — pages that inject such content must call
+  // window.MMAReveal.scan() once after rendering, or those elements just
+  // sit at opacity:0 forever since the observer never saw them.
+  (function() {
+    if (!window.IntersectionObserver) { window.MMAReveal = { scan: function(){} }; return; }
     var obs = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
@@ -100,7 +147,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       });
     }, { threshold: 0.12 });
-    els.forEach(function(el) { obs.observe(el); });
+    function scan(root) {
+      var scope = root || document;
+      scope.querySelectorAll('[data-reveal]:not(.is-visible)').forEach(function(el) {
+        obs.observe(el);
+      });
+    }
+    window.MMAReveal = { scan: scan };
+    scan();
   })();
 
   // ── Register service worker ──

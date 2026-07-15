@@ -25,7 +25,7 @@
   <meta name="twitter:image" content="https://mmabridge.com/images/mma-bridge-logo.png">
 
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Pacifico&family=Inter:wght@300;400;500;600&family=Barlow+Condensed:wght@800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=9.12" />
+  <link rel="stylesheet" href="style.css?v=9.14" />
 
   <style>
     /* ── KEYFRAMES ── */
@@ -203,6 +203,10 @@
     @media (max-width: 768px) { .rv-arrow { display: none !important; } }
 
     /* ── PPV CARD ── */
+    @keyframes rv-card-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: none; }
+    }
     .rv-card {
       flex-shrink: 0;
       cursor: pointer;
@@ -212,6 +216,10 @@
       background: #0e0e12;
       border: 1px solid rgba(255,255,255,0.08);
       transition: border-color 0.25s, box-shadow 0.3s;
+      animation: rv-card-in 0.5s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .rv-card { animation: none; }
     }
     .rv-card.ppv { width: 260px; height: 340px; }
     .rv-card.fn  { width: 220px; height: 290px; }
@@ -585,7 +593,7 @@
     <div id="searchEmpty" style="display:none; padding:20px 40px; color:rgba(255,255,255,0.25); font-family:'Inter',sans-serif; font-size:0.88rem;">No events found.</div>
   </div>
 
-  <script type="module" src="reviews.js?v=2.3"></script>
+  <script type="module" src="reviews.js?v=2.4"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase.js"></script>
   <script src="auth.js?v=3.2"></script>

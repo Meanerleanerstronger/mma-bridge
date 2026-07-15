@@ -183,7 +183,11 @@ function renderRow(container, countEl, events, type) {
     return;
   }
   countEl.textContent = '';
-  events.forEach(ev => container.appendChild(buildCard(ev, type)));
+  events.forEach((ev, i) => {
+    const card = buildCard(ev, type);
+    card.style.animationDelay = `${Math.min(i, 10) * 45}ms`;
+    container.appendChild(card);
+  });
 }
 
 // ── Sort dropdowns ────────────────────────────
