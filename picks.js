@@ -376,7 +376,7 @@ function formatOdds(n) {
               particleCount: Math.min(correct * 25, 180),
               spread: 80,
               origin: { y: 0.55 },
-              colors: ['#d97b3f', '#e0975a', '#ffffff', '#e0975a', '#a78bfa'],
+              colors: ['#d97b3f', '#d97b3f', '#ffffff', '#d97b3f', '#a78bfa'],
               disableForReducedMotion: true
             }), 400);
           }

@@ -61,7 +61,7 @@ h1,h2,.ev-card-matchup,.ov-matchup,#heroTitle,.ev-hero h1{
 html,body{ background:#030304 !important; overflow-x:hidden !important; }
 body{
   background-image:
-    radial-gradient(ellipse 60% 35% at 85% 100%,rgba(224,151,90,0.02) 0%,transparent 55%)
+    radial-gradient(ellipse 60% 35% at 85% 100%,rgba(217,123,63,0.02) 0%,transparent 55%)
     !important;
 }
 
@@ -206,7 +206,7 @@ body::before{
 /* ── EV CARDS 3D ── */
 .ev-card{transform-style:preserve-3d;will-change:transform;}
 .ev-card.fn:hover{box-shadow:0 20px 60px rgba(0,0,0,0.75),0 0 0 1px rgba(217,123,63,0.1) !important;}
-.ev-card.ppv:hover{box-shadow:0 20px 60px rgba(0,0,0,0.75),0 0 0 1px rgba(224,151,90,0.12) !important;}
+.ev-card.ppv:hover{box-shadow:0 20px 60px rgba(0,0,0,0.75),0 0 0 1px rgba(217,123,63,0.12) !important;}
 
 /* ── OVERLAY GLASS ── */
 .ov-hype-bar{
@@ -229,8 +229,8 @@ body::before{
   box-shadow:inset 3px 0 0 rgba(217,123,63,0.5) !important;
 }
 .ov-fight.ppv-main:hover{
-  background:rgba(224,151,90,0.025) !important;
-  box-shadow:inset 3px 0 0 rgba(224,151,90,0.5) !important;
+  background:rgba(217,123,63,0.025) !important;
+  box-shadow:inset 3px 0 0 rgba(217,123,63,0.5) !important;
 }
 
 /* ── HYPE THUMB ── */

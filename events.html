@@ -112,7 +112,7 @@
   ]
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=9.11" />
+  <link rel="stylesheet" href="style.css?v=9.12" />
 
   <style>
     /* ── KEYFRAMES ── */
@@ -187,7 +187,7 @@
     .ph-card:hover { background:rgba(255,255,255,.05); border-color:rgba(217,123,63,.2); }
     .ph-card-badge { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.48rem;letter-spacing:.16em;text-transform:uppercase;padding:3px 9px;border-radius:4px;flex-shrink:0; }
     .ph-card-badge.fn  { background:rgba(217,123,63,.12);border:1px solid rgba(217,123,63,.3);color:#d97b3f; }
-    .ph-card-badge.ppv { background:rgba(224,151,90,.12);border:1px solid rgba(224,151,90,.35);color:#e0975a; }
+    .ph-card-badge.ppv { background:rgba(217,123,63,.12);border:1px solid rgba(217,123,63,.35);color:#d97b3f; }
     .ph-card-info { flex:1; min-width:0; }
     .ph-card-name { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.88rem;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
     .ph-card-meta { font-family:'Inter',sans-serif;font-size:.7rem;color:rgba(255,255,255,.3);margin-top:3px; }
@@ -229,8 +229,8 @@
     .ev-card:nth-child(3){animation-delay:.12s}.ev-card:nth-child(4){animation-delay:.16s}
     .ev-card:nth-child(5){animation-delay:.20s}.ev-card:nth-child(n+6){animation-delay:.24s}
     .ev-card.fn:hover  { border-color:rgba(255,255,255,.18);box-shadow:0 16px 50px rgba(0,0,0,.7); }
-    .ev-card.ppv:hover { border-color:rgba(224,151,90,.3);box-shadow:0 16px 50px rgba(0,0,0,.7); }
-    .ev-card.ppv::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 0%,#8a6a10 15%,#e0975a 35%,#fff8c0 50%,#e0975a 65%,#8a6a10 85%,transparent 100%);background-size:250% auto;animation:shimmer 4s linear infinite;z-index:5; }
+    .ev-card.ppv:hover { border-color:rgba(217,123,63,.3);box-shadow:0 16px 50px rgba(0,0,0,.7); }
+    .ev-card.ppv::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 0%,#8a6a10 15%,#d97b3f 35%,#fff8c0 50%,#d97b3f 65%,#8a6a10 85%,transparent 100%);background-size:250% auto;animation:shimmer 4s linear infinite;z-index:5; }
 
 
     .ev-card-poster { position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;display:block;transition:transform .5s cubic-bezier(.22,1,.36,1); }
@@ -243,7 +243,7 @@
     .ev-card-top { display:flex;align-items:center;gap:9px;margin-bottom:8px; }
     .ev-card-badge { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.42rem;letter-spacing:.18em;text-transform:uppercase;padding:3px 9px;border-radius:4px;backdrop-filter:blur(6px); }
     .ev-card.fn  .ev-card-badge { background:rgba(217,123,63,.12);border:1px solid rgba(217,123,63,.3);color:#d97b3f; }
-    .ev-card.ppv .ev-card-badge { background:rgba(224,151,90,.12);border:1px solid rgba(224,151,90,.35);color:#e0975a; }
+    .ev-card.ppv .ev-card-badge { background:rgba(217,123,63,.12);border:1px solid rgba(217,123,63,.35);color:#d97b3f; }
     .ev-card-name    { font-family:'Montserrat',sans-serif;font-weight:900;font-size:.86rem;color:rgba(255,255,255,.6);letter-spacing:.05em;text-transform:uppercase; }
     .ev-card.ppv .ev-card-name { color:rgba(232,200,90,.7); }
     .ev-card-matchup { font-family:'Barlow Condensed','Montserrat',sans-serif;font-weight:900;font-size:clamp(1.25rem,2.6vw,1.75rem);color:#fff;letter-spacing:.03em;text-transform:uppercase;line-height:1.1;margin-bottom:8px;text-shadow:0 2px 16px rgba(0,0,0,.9); }
@@ -253,12 +253,12 @@
     .ev-card-meta   { position:absolute;right:22px;top:50%;transform:translateY(-50%);z-index:3;text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:5px; }
     .ev-card-days   { font-family:'Montserrat',sans-serif;font-weight:900;font-size:.82rem;letter-spacing:.07em;color:rgba(255,255,255,.3); }
     .ev-card-days.soon  { color:#d97b3f;animation:pulse 2.2s ease infinite; }
-    .ev-card-days.today { color:#e0975a;animation:pulse 2s ease infinite; }
+    .ev-card-days.today { color:#d97b3f;animation:pulse 2s ease infinite; }
     .ev-card-date   { font-family:'Inter',sans-serif;font-size:.68rem;color:rgba(255,255,255,.2); }
     .ev-card-location { font-family:'Inter',sans-serif;font-size:.6rem;color:rgba(255,255,255,.13);max-width:120px;text-align:right; }
     .ev-card-cta    { position:absolute;bottom:14px;right:22px;z-index:3;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.48rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.2);display:flex;align-items:center;gap:5px;transition:color .2s; }
     .ev-card.fn:hover  .ev-card-cta { color:rgba(217,123,63,.6); }
-    .ev-card.ppv:hover .ev-card-cta { color:rgba(224,151,90,.6); }
+    .ev-card.ppv:hover .ev-card-cta { color:rgba(217,123,63,.6); }
     .ev-card-cta svg { width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round; }
 
     /* Community hype slot — bottom-right corner of card */
@@ -363,7 +363,7 @@
     .ov-badge-row { display:flex;align-items:center;gap:10px; }
     .ov-badge { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;padding:4px 12px;border-radius:4px;backdrop-filter:blur(10px); }
     .ov-badge.fn  { background:rgba(217,123,63,.15);border:1px solid rgba(217,123,63,.35);color:#d97b3f; }
-    .ov-badge.ppv { background:rgba(224,151,90,.15);border:1px solid rgba(224,151,90,.4);color:#e0975a; }
+    .ov-badge.ppv { background:rgba(217,123,63,.15);border:1px solid rgba(217,123,63,.4);color:#d97b3f; }
     .ov-badge.special-green { background:rgba(217,123,63,.15);border:1px solid rgba(217,123,63,.35);color:#d97b3f; }
     .ov-days-badge { display:inline-flex;align-items:center;font-family:'Montserrat',sans-serif;font-size:.44rem;font-weight:800;letter-spacing:.14em;color:rgba(255,255,255,.55);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:3px 9px;border-radius:4px; }
     .ov-close { width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);font-size:.95rem;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(10px);transition:background .2s,border-color .2s,color .2s; }
@@ -495,8 +495,8 @@
       transition:border-color .18s, box-shadow .18s;
     }
     .ov-headshot:hover {
-      border-color:rgba(224,151,90,.5);
-      box-shadow:0 0 8px rgba(224,151,90,.25);
+      border-color:rgba(217,123,63,.5);
+      box-shadow:0 0 8px rgba(217,123,63,.25);
     }
     .ov-fight.is-main .ov-headshot { width:44px;height:44px; }
     .ov-fight::before {
@@ -514,9 +514,9 @@
     }
 
     .ov-fight.is-main    { padding:18px 22px;background:rgba(217,123,63,.02);border-color:rgba(217,123,63,.12); }
-    .ov-fight.is-main.ppv-main { background:rgba(224,151,90,.02);border-color:rgba(224,151,90,.14); }
+    .ov-fight.is-main.ppv-main { background:rgba(217,123,63,.02);border-color:rgba(217,123,63,.14); }
     .ov-fight.is-main::before { background:linear-gradient(90deg,rgba(217,123,63,.0),rgba(217,123,63,.06),rgba(217,123,63,.0)); }
-    .ov-fight.is-main.ppv-main::before { background:linear-gradient(90deg,rgba(224,151,90,.0),rgba(224,151,90,.07),rgba(224,151,90,.0)); }
+    .ov-fight.is-main.ppv-main::before { background:linear-gradient(90deg,rgba(217,123,63,.0),rgba(217,123,63,.07),rgba(217,123,63,.0)); }
     .ov-fight.is-main:hover { border-color:rgba(217,123,63,.28); }
     .ov-fight.is-comain  { background:rgba(217,123,63,.01); }
 
@@ -577,11 +577,11 @@
       text-shadow:0 0 28px rgba(217,123,63,.35),0 1px 8px rgba(0,0,0,.7);
     }
     .ov-fight.ppv-main:hover .ov-fighter:not(.dim) {
-      text-shadow:0 0 28px rgba(224,151,90,.4),0 1px 8px rgba(0,0,0,.7);
+      text-shadow:0 0 28px rgba(217,123,63,.4),0 1px 8px rgba(0,0,0,.7);
     }
 
     .ov-fight-mid { text-align:center;position:relative;z-index:1; }
-    .ov-title-badge { font-size:.5rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#e0975a;margin-bottom:4px; }
+    .ov-title-badge { font-size:.5rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#d97b3f;margin-bottom:4px; }
     .ov-weight  { font-family:'Inter',sans-serif;font-size:.58rem;font-weight:600;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.08em; }
     .ov-rounds  { font-family:'Inter',sans-serif;font-size:.5rem;color:rgba(255,255,255,.2);margin-top:3px; }
     .ov-slot-tag { font-size:.44rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-top:4px; }
@@ -637,7 +637,7 @@
     /* Community */
     .ov-community-bar { height:22px;border-radius:5px;overflow:hidden;display:flex;margin-top:6px;background:rgba(255,255,255,.04); }
     .ov-comm-left  { background:rgba(217,123,63,.15);display:flex;align-items:center;padding:0 9px;font-family:'Montserrat',sans-serif;font-size:.54rem;font-weight:800;color:#d97b3f;transition:width .5s ease; }
-    .ov-comm-right { flex:1;display:flex;align-items:center;justify-content:flex-end;padding:0 9px;font-family:'Montserrat',sans-serif;font-size:.54rem;font-weight:800;color:rgba(224,151,90,.75); }
+    .ov-comm-right { flex:1;display:flex;align-items:center;justify-content:flex-end;padding:0 9px;font-family:'Montserrat',sans-serif;font-size:.54rem;font-weight:800;color:rgba(217,123,63,.75); }
     .ov-comm-fighters { display:flex;justify-content:space-between;font-family:'Inter',sans-serif;font-size:.58rem;color:rgba(255,255,255,.28);margin-top:5px; }
 
     /* Quick stats in sidebar */
@@ -929,8 +929,8 @@
     /* shared cd-* classes used by countdown.js */
     .cd-n { font-family:'Montserrat',sans-serif;font-weight:900;color:#d97b3f; }
     .cd-u { font-family:'Montserrat',sans-serif;font-size:.58em;font-weight:700;color:rgba(217,123,63,.5);margin-left:1px; }
-    .cd-urgent.cd-n { color:#e0975a!important; }
-    .cd-urgent.cd-u { color:rgba(224,151,90,.65)!important; }
+    .cd-urgent.cd-n { color:#d97b3f!important; }
+    .cd-urgent.cd-u { color:rgba(217,123,63,.65)!important; }
     .cd-live { display:inline-flex;align-items:center;gap:7px;font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.1rem;color:#d97b3f;animation:pulse 1.8s ease infinite; }
     .cd-live-dot { width:9px;height:9px;border-radius:50%;background:#d97b3f;flex-shrink:0;box-shadow:0 0 8px #d97b3f; }
     .cd-ended { color:rgba(255,255,255,.2);font-size:.8rem; }
@@ -1428,7 +1428,7 @@
 
     /* ── HYPE ── */
     const HYPE_W=['','Sleeper','Low Key','Building','Decent','Solid','Good','Hyped','Very Hyped','Elite Card','All-Time Card'];
-    const HYPE_C=['','#666','#888','#b8b832','#b8b832','#e0975a','#e0975a','#d97b3f','#d97b3f','#ff6030','#ff3300'];
+    const HYPE_C=['','#666','#888','#b8b832','#b8b832','#d97b3f','#d97b3f','#d97b3f','#d97b3f','#ff6030','#ff3300'];
     let currentHype=null;
 
     function buildHypeTicks(){
@@ -1519,7 +1519,7 @@
       }
       const special=SPECIAL_EVENTS[ev.id];
       const isPPV=ev.type==='PPV', cls=isPPV?'ppv':'fn';
-      const accent=special?special.accent:(isPPV?'#e0975a':'#d97b3f');
+      const accent=special?special.accent:(isPPV?'#d97b3f':'#d97b3f');
       const main=getMainFight(ev);
       const days=ev.isoDate?daysUntil(ev.isoDate):null;
       const isToday=days!==null&&days<=0;
@@ -1815,7 +1815,7 @@
       const lp=40+(seed%41), rp=100-lp;
       document.getElementById('ovCommFighters').innerHTML=`
         <span style="color:#d97b3f;font-weight:700;">${esc(lastName(main.a))} ${lp}%</span>
-        <span style="color:rgba(224,151,90,.75);font-weight:700;">${rp}% ${esc(lastName(main.b))}</span>`;
+        <span style="color:rgba(217,123,63,.75);font-weight:700;">${rp}% ${esc(lastName(main.b))}</span>`;
       document.getElementById('ovCommLeft').style.width=lp+'%';
       document.getElementById('ovCommLeft').textContent=lp+'%';
       document.getElementById('ovCommRight').textContent=rp+'%';
