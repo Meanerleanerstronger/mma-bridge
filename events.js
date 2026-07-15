@@ -476,6 +476,37 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch(e) { debugLog('FOTN save failed', e); }
   };
 
+  // ── Reminder banner check ─────────────────
+  function checkReminderBanners(evList) {
+    function getSubs() { try { return JSON.parse(localStorage.getItem('mma_notif_subs') || '[]'); } catch { return []; } }
+    const subs = getSubs();
+    const now = Date.now();
+    const twoDays = 48 * 60 * 60 * 1000;
+    const banners = [];
+
+    evList.forEach(ev => {
+      const id = ev.id || slugify(ev.name || '');
+      if (!subs.includes(id)) return;
+      if (!ev.isoDate) return;
+      const diff = new Date(ev.isoDate).getTime() - now;
+      if (diff < 0 || diff > twoDays) return;
+      const days = Math.ceil(diff / 86400000);
+      const label = days <= 0 ? 'today' : days === 1 ? 'tomorrow' : `in ${days} days`;
+      banners.push({ name: ev.name, label, id });
+    });
+
+    if (!banners.length) return;
+    const container = document.createElement('div');
+    container.className = 'ev-reminder-banner-container';
+    container.innerHTML = banners.map(b => `
+      <div class="ev-reminder-banner">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <span><strong>${esc(b.name)}</strong> is ${esc(b.label)} — picks are open now!</span>
+        <a class="ev-reminder-banner-link" href="picks.html?id=${esc(b.id)}">Make Picks →</a>
+      </div>`).join('');
+    wrap.insertAdjacentElement('beforebegin', container);
+  }
+
   // ── Notification bell logic ───────────────
   function bindNotifBells() {
     function getSubs() { try { return JSON.parse(localStorage.getItem('mma_notif_subs') || '[]'); } catch { return []; } }
@@ -661,6 +692,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     bindCalendarButtons();
     bindNotifBells();
     bindStarButtons();
+    checkReminderBanners(events);
 
     // Auto-open event if URL has a hash like #ev-ufc-327-prochazka-vs-ulberg
     if (location.hash) {

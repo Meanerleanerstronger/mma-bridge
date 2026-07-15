@@ -233,9 +233,9 @@ function renderHeroSplit(completedEv, upcomingEv) {
       <div style="position:absolute;inset:0;background-image:url('${completedEv.poster||''}');background-size:cover;background-position:center top;filter:brightness(0.62) saturate(0.75);"></div>
       <div style="position:absolute;inset:0;background:linear-gradient(105deg,rgba(0,0,0,0.88) 0%,rgba(0,0,0,0.55) 50%,rgba(0,0,0,0.15) 100%);"></div>
       <div style="position:relative;z-index:2;padding:80px 44px 56px;height:100%;box-sizing:border-box;display:flex;flex-direction:column;justify-content:flex-end;">
-        <div style="font-family:'Montserrat',sans-serif;font-size:0.6rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:10px;">${cPPV ? 'PPV Event' : 'Fight Night'} — Results</div>
-        <h2 style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(1.1rem,2.2vw,1.7rem);text-transform:uppercase;letter-spacing:0.04em;color:#fff;margin:0 0 8px;text-shadow:0 2px 20px rgba(0,0,0,0.8);line-height:1.15;">${completedEv.name||''}</h2>
-        <div style="font-family:'Inter',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.5);margin-bottom:22px;">${[completedEv.date,completedEv.location].filter(Boolean).join('  ·  ')}</div>
+        <div class="hero-split-eyebrow" style="font-family:'Montserrat',sans-serif;font-size:0.6rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:10px;">${cPPV ? 'PPV Event' : 'Fight Night'} — Results</div>
+        <h2 class="hero-split-title" style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(1.1rem,2.2vw,1.7rem);text-transform:uppercase;letter-spacing:0.04em;color:#fff;margin:0 0 8px;text-shadow:0 2px 20px rgba(0,0,0,0.8);line-height:1.15;">${completedEv.name||''}</h2>
+        <div class="hero-split-meta" style="font-family:'Inter',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.5);margin-bottom:22px;">${[completedEv.date,completedEv.location].filter(Boolean).join('  ·  ')}</div>
         <a href="events.html?id=${cId}" class="hero-review-btn" style="align-self:flex-start;">Review the Card →</a>
       </div>
     </div>
@@ -248,9 +248,9 @@ function renderHeroSplit(completedEv, upcomingEv) {
       <div style="position:absolute;inset:0;background-image:url('${upcomingEv.poster||''}');background-size:cover;background-position:center top;filter:brightness(0.88) saturate(1.05);"></div>
       <div style="position:absolute;inset:0;background:linear-gradient(to left,rgba(0,0,0,0.88) 0%,rgba(0,0,0,0.55) 50%,rgba(0,0,0,0.1) 100%);"></div>
       <div style="position:relative;z-index:2;padding:80px 44px 56px;height:100%;box-sizing:border-box;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-end;text-align:right;">
-        <div style="font-family:'Montserrat',sans-serif;font-size:0.6rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:10px;">${uPPV ? 'Next PPV Event' : 'Next Fight Night'}</div>
-        <h2 style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(1.1rem,2.2vw,1.7rem);text-transform:uppercase;letter-spacing:0.04em;color:#fff;margin:0 0 8px;text-shadow:0 2px 20px rgba(0,0,0,0.8);line-height:1.15;">${upcomingEv.name||''}</h2>
-        <div style="font-family:'Inter',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.55);margin-bottom:22px;">${[upcomingEv.date,upcomingEv.location].filter(Boolean).join('  ·  ')}</div>
+        <div class="hero-split-eyebrow" style="font-family:'Montserrat',sans-serif;font-size:0.6rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:10px;">${uPPV ? 'Next PPV Event' : 'Next Fight Night'}</div>
+        <h2 class="hero-split-title" style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(1.1rem,2.2vw,1.7rem);text-transform:uppercase;letter-spacing:0.04em;color:#fff;margin:0 0 8px;text-shadow:0 2px 20px rgba(0,0,0,0.8);line-height:1.15;">${upcomingEv.name||''}</h2>
+        <div class="hero-split-meta" style="font-family:'Inter',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.55);margin-bottom:22px;">${[upcomingEv.date,upcomingEv.location].filter(Boolean).join('  ·  ')}</div>
         <a href="picks.html?id=${uId}" id="heroBtn" style="display:inline-block !important;background:linear-gradient(135deg,#7a3100 0%,#d46400 55%,#ff8c00 100%) !important;color:#fff !important;font-family:'Montserrat',sans-serif !important;font-weight:800 !important;font-size:0.78rem !important;letter-spacing:0.12em !important;text-transform:uppercase !important;padding:13px 28px !important;border-radius:6px !important;text-decoration:none !important;border:1px solid rgba(255,140,0,0.5) !important;box-shadow:0 0 28px rgba(255,120,0,0.45) !important;animation:heroBtnPulse 3s 1.2s ease infinite !important;transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1) !important;">Make Your Picks →</a>
       </div>
     </div>

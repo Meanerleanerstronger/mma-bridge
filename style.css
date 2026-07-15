@@ -3166,6 +3166,14 @@ body.light-mode #heroType  { color: rgba(255,255,255,0.55) !important; }
 body.light-mode #heroTitle { color: #fff !important; text-shadow: 0 2px 24px rgba(0,0,0,0.85) !important; }
 body.light-mode #heroMeta  { color: rgba(255,255,255,0.65) !important; }
 body.light-mode #heroBtn   { background: #b8611e !important; color: #fff !important; }
+/* Split hero (renderHeroSplit in script.js) generates plain h2/div tags with no
+   id, so the generic body.light-mode h1/h2/h3 rule below wins over their inline
+   color:#fff (any !important stylesheet rule beats a non-!important inline
+   style, regardless of specificity) — same "dark poster, always-white-text"
+   exception as above, just scoped by class since there's no id here. */
+body.light-mode .hero-split-eyebrow { color: rgba(255,255,255,0.45) !important; }
+body.light-mode .hero-split-title   { color: #fff !important; text-shadow: 0 2px 24px rgba(0,0,0,0.85) !important; }
+body.light-mode .hero-split-meta    { color: rgba(255,255,255,0.6) !important; }
 
 /* ── Index recent results ── */
 body.light-mode #resultsTrack { background: transparent; }
@@ -4698,6 +4706,46 @@ body.light-mode #cursor-glow { display: none; }
   background: rgba(217,123,63,0.07);
   border-color: rgba(217,123,63,0.28);
 }
+
+/* ── Reminder banner (events.js checkReminderBanners) ── */
+.ev-reminder-banner-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.ev-reminder-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: rgba(217,123,63,0.08);
+  border: 1px solid rgba(217,123,63,0.25);
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.7);
+}
+.ev-reminder-banner svg {
+  flex-shrink: 0;
+  color: #d97b3f;
+}
+.ev-reminder-banner strong { color: #fff; }
+.ev-reminder-banner-link {
+  margin-left: auto;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #d97b3f;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.ev-reminder-banner-link:hover { text-decoration: underline; }
+body.light-mode .ev-reminder-banner { background: rgba(184,97,30,0.06) !important; border-color: rgba(184,97,30,0.22) !important; color: rgba(0,0,0,0.6) !important; }
+body.light-mode .ev-reminder-banner svg { color: #b8611e !important; }
+body.light-mode .ev-reminder-banner strong { color: #111 !important; }
+body.light-mode .ev-reminder-banner-link { color: #b8611e !important; }
 
 /* ── Event card wrapper: card flex-grows, star sits right ── */
 .ev-card-wrap {
@@ -6838,14 +6886,20 @@ body.light-mode .pk-change-no { color: rgba(0,0,0,0.4) !important; border-color:
 /* ── PICKS PAGE LIGHT MODE — NEW FC-* + PK-HD CLASSES ── */
 /* Shell / nav / header */
 body.light-mode .pk-page { background: #faf8f3 !important; color: #111 !important; }
-body.light-mode .pk-hd { border-bottom-color: rgba(0,0,0,0.07) !important; }
-body.light-mode .pk-hd-eyebrow { color: rgba(160,100,8,0.65) !important; }
-body.light-mode .pk-hd-title { color: #0a0a10 !important; }
-body.light-mode .pk-hd-meta { color: rgba(0,0,0,0.45) !important; }
-body.light-mode .pk-meta-dot { color: rgba(0,0,0,0.2) !important; }
-body.light-mode .pk-hd-sub { color: rgba(0,0,0,0.32) !important; }
-body.light-mode .pk-back { color: rgba(0,0,0,0.28) !important; }
-body.light-mode .pk-back:hover { color: #b8611e !important; }
+/* .pk-hd sits in the "ambient poster bg" zone (see .pk-hd padding-top:130px
+   rule) — a dark event poster behind it, regardless of site theme — so its
+   text must stay light/white in light mode too, same reasoning as the
+   homepage hero's #heroTitle etc. A previous pass here assumed .pk-hd sat on
+   a plain background and forced near-black text, which went invisible over
+   the poster once that feature shipped. */
+body.light-mode .pk-hd { border-bottom-color: rgba(255,255,255,0.06) !important; }
+body.light-mode .pk-hd-eyebrow { color: rgba(217,123,63,0.7) !important; }
+body.light-mode .pk-hd-title { color: #fff !important; text-shadow: 0 4px 28px rgba(0,0,0,0.85), 0 2px 8px rgba(0,0,0,0.9) !important; }
+body.light-mode .pk-hd-meta { color: rgba(255,255,255,0.55) !important; }
+body.light-mode .pk-meta-dot { color: rgba(255,255,255,0.3) !important; }
+body.light-mode .pk-hd-sub { color: rgba(255,255,255,0.45) !important; }
+body.light-mode .pk-back { color: rgba(255,255,255,0.5) !important; }
+body.light-mode .pk-back:hover { color: #ffb37a !important; }
 
 /* ctrl strip */
 body.light-mode .pk-ctrl { border-bottom-color: rgba(0,0,0,0.07) !important; }
@@ -6854,6 +6908,14 @@ body.light-mode .pk-save-btn { background: rgba(180,130,10,0.06) !important; bor
 body.light-mode .pk-save-btn:hover { background: rgba(180,130,10,0.12) !important; border-color: rgba(180,130,10,0.5) !important; color: rgba(0,0,0,0.75) !important; }
 body.light-mode .pk-save-btn.dirty { background: rgba(184,97,30,0.07) !important; border-color: rgba(184,97,30,0.35) !important; color: #7a5500 !important; }
 body.light-mode .pk-save-btn.saved { background: rgba(0,180,80,0.05) !important; border-color: rgba(0,180,80,0.25) !important; color: #00804a !important; }
+
+/* mobile bottom save CTA — never had a light-mode pass at all (undefined CSS
+   vars masked this above; fixed here now that it has real base values) */
+body.light-mode .pk-bottom-save { background: linear-gradient(to bottom, transparent, #faf8f3 35%) !important; }
+body.light-mode .pk-bottom-save-inner { background: #fff !important; border-color: rgba(0,0,0,0.08) !important; box-shadow: 0 8px 32px rgba(0,0,0,0.1), 0 2px 8px rgba(0,0,0,0.05) !important; }
+body.light-mode .pk-bottom-save-count { color: rgba(0,0,0,0.5) !important; }
+body.light-mode .pk-bottom-save-btn { background: #b8611e !important; color: #fff !important; }
+body.light-mode .pk-bottom-save-btn:hover:not(:disabled) { background: #a8551a !important; }
 
 /* banners */
 body.light-mode .pk-signin-banner { background: rgba(184,97,30,0.05) !important; border-color: rgba(184,97,30,0.14) !important; color: rgba(160,100,8,0.75) !important; }
@@ -12813,7 +12875,12 @@ html.ux-exiting * { pointer-events: none !important; }
   right: 0;
   z-index: 90;
   padding: 12px 16px 16px;
-  background: linear-gradient(to bottom, transparent, var(--bg) 35%);
+  /* --bg/--card-bg/--border/--text-muted/--gold below were never defined
+     anywhere in this stylesheet (no :root declaration, nothing set via JS) —
+     every property using them was silently invalid, falling back to
+     transparent/inherited values. Replaced with concrete tokens matching
+     .pk-save-bar's established dark/light pattern elsewhere on this page. */
+  background: linear-gradient(to bottom, transparent, #0a0a0a 35%);
   pointer-events: none;
 }
 .pk-bottom-save-inner {
@@ -12821,8 +12888,8 @@ html.ux-exiting * { pointer-events: none !important; }
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
+  background: #161616;
+  border: 1px solid rgba(255,255,255,0.08);
   border-radius: 14px;
   padding: 12px 16px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.35), 0 2px 8px rgba(0,0,0,0.2);
@@ -12832,7 +12899,7 @@ html.ux-exiting * { pointer-events: none !important; }
 .pk-bottom-save-count {
   font-size: 0.82rem;
   font-family: 'Inter', sans-serif;
-  color: var(--text-muted);
+  color: rgba(255,255,255,0.5);
   letter-spacing: 0.02em;
 }
 .pk-bottom-save-btn {
@@ -12842,7 +12909,7 @@ html.ux-exiting * { pointer-events: none !important; }
   padding: 10px 20px;
   border-radius: 10px;
   border: none;
-  background: var(--gold);
+  background: #d97b3f;
   color: #000;
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 1rem;
@@ -12855,7 +12922,7 @@ html.ux-exiting * { pointer-events: none !important; }
   flex-shrink: 0;
 }
 .pk-bottom-save-btn:hover:not(:disabled) {
-  background: #e8a81a;
+  background: #e8935c;
   transform: translateY(-1px);
 }
 .pk-bottom-save-btn:active:not(:disabled) {
