@@ -9960,23 +9960,11 @@ body.light-mode .pk-drum-wrap::after {
   font-family: 'Inter', sans-serif; font-size: 0.68rem;
   color: rgba(217,123,63,.5); margin-left: auto;
 }
-.lb-my-pos-msg {
-  width: 100%; font-family: 'Inter', sans-serif; font-size: 0.74rem; font-weight: 600;
-  padding: 8px 12px; border-radius: 8px; margin-top: 2px;
-}
-.lb-my-pos-lead {
-  background: rgba(217,123,63,.12); border: 1px solid rgba(217,123,63,.3); color: #d97b3f;
-}
-.lb-my-pos-close {
-  background: rgba(217,123,63,.06); border: 1px solid rgba(217,123,63,.18); color: rgba(217,123,63,.85);
-}
 /* Light mode */
 body.light-mode .lb-tier { opacity: 0.85; }
 body.light-mode .lb-my-tier { background: rgba(0,0,0,.03) !important; border-color: rgba(0,0,0,.08) !important; }
 body.light-mode .lb-my-tier-label { color: rgba(0,0,0,.5) !important; }
 body.light-mode .lb-my-tier-sub { color: rgba(0,0,0,.45) !important; }
-body.light-mode .lb-my-pos-lead { background: rgba(217,123,63,.1) !important; color: #b8611e !important; }
-body.light-mode .lb-my-pos-close { background: rgba(217,123,63,.06) !important; color: rgba(184,97,30,.85) !important; }
 
 /* ======= PER-FIGHT COMMENTS ======= */
 .pk-comments-wrap {
@@ -13188,4 +13176,79 @@ html.ux-exiting * { pointer-events: none !important; }
     justify-content: center;
   }
 }
+
+/* ======= LUCAS MOMENTS — rare special popup bubble ======= */
+.lm-bubble {
+  position: fixed;
+  bottom: 100px;
+  right: 28px;
+  width: 340px;
+  max-width: calc(100vw - 24px);
+  background: #14100c;
+  border: 1px solid rgba(217,123,63,.35);
+  border-radius: 20px;
+  padding: 18px 20px 20px;
+  box-shadow: 0 24px 64px rgba(0,0,0,.55), 0 0 0 1px rgba(217,123,63,.08), 0 0 40px rgba(217,123,63,.15);
+  z-index: 10000;
+  opacity: 0;
+  transform: translateY(24px) scale(.85) rotate(1.5deg);
+  transform-origin: bottom right;
+  transition: opacity .32s cubic-bezier(.2,.9,.3,1.4), transform .38s cubic-bezier(.2,.9,.3,1.4);
+  pointer-events: none;
+}
+.lm-bubble.lm-in {
+  opacity: 1;
+  transform: translateY(0) scale(1) rotate(0deg);
+  pointer-events: all;
+}
+.lm-bubble.lm-out {
+  opacity: 0;
+  transform: translateY(10px) scale(.92) rotate(-1deg);
+  transition: opacity .22s ease, transform .22s ease;
+}
+.lm-bubble-tail {
+  position: absolute; bottom: -9px; right: 34px;
+  width: 18px; height: 18px;
+  background: #14100c;
+  border-right: 1px solid rgba(217,123,63,.35);
+  border-bottom: 1px solid rgba(217,123,63,.35);
+  transform: rotate(45deg);
+}
+.lm-bubble-close {
+  position: absolute; top: 12px; right: 12px;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: rgba(255,255,255,.06); border: none; cursor: pointer;
+  color: rgba(255,255,255,.5); display: flex; align-items: center; justify-content: center;
+  transition: background .15s, color .15s;
+}
+.lm-bubble-close:hover { background: rgba(255,255,255,.12); color: #fff; }
+.lm-bubble-head {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+}
+.lm-bubble-av {
+  width: 30px; height: 30px; border-radius: 9px;
+  background: #d97b3f; color: #14100c;
+  font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: .85rem;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.lm-bubble-name {
+  font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: .8rem;
+  letter-spacing: .04em; color: #d97b3f; text-transform: uppercase;
+}
+.lm-bubble-text {
+  font-family: 'Inter', sans-serif; font-size: .92rem; line-height: 1.5;
+  color: rgba(255,255,255,.85);
+}
+@media (max-width: 480px) {
+  .lm-bubble { right: 12px; left: 12px; width: auto; bottom: 92px; }
+  .lm-bubble-tail { right: 30px; }
+}
+body.light-mode .lm-bubble {
+  background: #fffaf5; border-color: rgba(217,123,63,.4);
+  box-shadow: 0 24px 64px rgba(0,0,0,.18), 0 0 40px rgba(217,123,63,.12);
+}
+body.light-mode .lm-bubble-tail { background: #fffaf5; }
+body.light-mode .lm-bubble-text { color: rgba(20,16,12,.82); }
+body.light-mode .lm-bubble-close { background: rgba(0,0,0,.05); color: rgba(0,0,0,.45); }
+body.light-mode .lm-bubble-close:hover { background: rgba(0,0,0,.1); color: #000; }
 

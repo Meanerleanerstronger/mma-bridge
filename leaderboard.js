@@ -683,17 +683,6 @@
 
     barFill = Math.max(0, Math.min(1, barFill));
 
-    // ── Rank-position nudge — only for users with a real sample size ──
-    const myPos = allUsers.findIndex(u => u.user_id === myId);
-    let posMsg = '';
-    if (judged > 0 && allUsers.length > 2) {
-      if (myPos === 0) {
-        posMsg = `<div class="lb-my-pos-msg lb-my-pos-lead">🏆 You're in 1st — don't lose the lead.</div>`;
-      } else if (myPos === 1) {
-        posMsg = `<div class="lb-my-pos-msg lb-my-pos-close">You're in 2nd, right behind 1st — you're almost there.</div>`;
-      }
-    }
-
     tierEl.innerHTML = `
       <span class="lb-my-tier-label">Your Tier</span>
       <span class="lb-my-tier-badge" style="color:${t.color};border-color:${t.color}44">${t.name}</span>
@@ -708,10 +697,15 @@
         </div>
         <div class="lb-my-tier-req">${reqText}</div>
       </div>
-      ${posMsg}
     `;
     const wrap = document.getElementById('lbGlobalWrap');
     if (wrap) wrap.insertAdjacentElement('beforebegin', tierEl);
+
+    // ── Rank-position moment — rare Lucas popup, not a persistent banner ──
+    const myPos = allUsers.findIndex(u => u.user_id === myId);
+    if (judged > 0 && allUsers.length > 2) {
+      window.LucasMoments?.maybeStretchRun(myPos);
+    }
   }
 
   renderGroupStatus();

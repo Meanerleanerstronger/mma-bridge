@@ -632,6 +632,7 @@ function formatOdds(n) {
       let toastMsg = `${n} pick${n !== 1 ? 's' : ''} locked in`;
       if (withCrowd + upsets >= 3) toastMsg += ` · ${upsets} upset${upsets !== 1 ? 's' : ''}`;
       showToast(toastMsg);
+      if (myPicks['__dd__']?.pick) window.LucasMoments?.maybeFirstDoubleDown();
       // Brief locked glow on save bar
       const bar = document.getElementById('pkSaveBar');
       if (bar) { bar.classList.add('pk-save-bar-locked'); setTimeout(() => bar.classList.remove('pk-save-bar-locked'), 1400); }
