@@ -49,9 +49,34 @@ async function notifyFavFighters(ev) {
   }
 }
 
-const ROOT    = path.join(__dirname, '..');
-const EV_ROOT = path.join(ROOT, 'events.json');
-const EV_DATA = path.join(ROOT, 'data', 'events.json');
+const ROOT      = path.join(__dirname, '..');
+const EV_ROOT   = path.join(ROOT, 'events.json');
+const EV_DATA   = path.join(ROOT, 'data', 'events.json');
+const FTR_DATA  = path.join(ROOT, 'data', 'fighters.json');
+
+// ── Keep fighter resumes (last5) in sync with graded results ──────────────
+// Without this, a fighter's "recent fights" list only updates whenever the
+// separate weekly Wikipedia/UFC.com scrape happens to catch up — which can
+// lag real results by months (verified: 573 of 664 checkable fights were
+// missing from resumes as of 2026-07-16). This makes the site's own graded
+// result the source of truth for last5 the moment it's entered here.
+// (normName is defined further down in this file — reused here too.)
+
+const METHOD_EXPAND = { TKO: 'TKO', KO: 'KO', SUB: 'Sub', UD: 'Decision (unanimous)', MD: 'Decision (majority)', SD: 'Decision (split)', DEC: 'Decision (unanimous)' };
+
+function appendLast5(fighters, byNormName, selfName, oppName, result, method, round, time, eventName) {
+  const fighter = byNormName[normName(selfName)];
+  if (!fighter) return false;
+  if (!fighter.last5) fighter.last5 = [];
+  const already = fighter.last5.some(l5 => normName(l5.opponent) === normName(oppName) && l5.event === eventName);
+  if (already) return false;
+  fighter.last5.unshift({
+    opponent: oppName, result,
+    method: METHOD_EXPAND[method] || method || '',
+    event: eventName, round: round || null, time: time || null,
+  });
+  return true;
+}
 
 // ── Fetch helpers ─────────────────────────────────────────────────────────────
 
@@ -315,6 +340,11 @@ async function main() {
   const ourEvents = JSON.parse(fs.readFileSync(EV_DATA, 'utf8'));
   const changes   = [];
 
+  const fighters     = JSON.parse(fs.readFileSync(FTR_DATA, 'utf8'));
+  const byNormName   = {};
+  fighters.forEach(f => { byNormName[normName(f.name)] = f; });
+  let last5Added = 0;
+
   console.log('Fetching events from ESPN...');
   const espnEvents = await fetchAllESPN();
   console.log(`ESPN returned ${espnEvents.length} events\n`);
@@ -354,6 +384,9 @@ async function main() {
           if (round)  fight.round  = round;
           console.log(`  ✓ ${winnerName} def. ${loserName} — ${method || '?'} R${round || '?'}`);
           updated++;
+
+          if (appendLast5(fighters, byNormName, winnerName, loserName, 'W', method, round, fight.time, ourEv.name)) last5Added++;
+          if (appendLast5(fighters, byNormName, loserName, winnerName, 'L', method, round, fight.time, ourEv.name)) last5Added++;
         }
       }
 
@@ -463,6 +496,11 @@ async function main() {
   fs.writeFileSync(EV_ROOT, json, 'utf8');
   fs.writeFileSync(EV_DATA, json, 'utf8');
   console.log('\n💾 Saved events.json (root + data/)');
+
+  if (last5Added > 0) {
+    fs.writeFileSync(FTR_DATA, JSON.stringify(fighters, null, 2), 'utf8');
+    console.log(`💾 Saved data/fighters.json (+${last5Added} last5 entries)`);
+  }
 
   // Pass to GitHub Actions step output
   if (process.env.GITHUB_OUTPUT) {

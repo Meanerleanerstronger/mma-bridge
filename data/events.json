@@ -7026,7 +7026,7 @@
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
-        "winner": "Benoît Saint-Denis",
+        "winner": "Benoit Saint-Denis",
         "method": "KO",
         "round": 2,
         "time": "2:10"
@@ -8193,41 +8193,50 @@
         "method": "SUB",
         "round": 2,
         "time": "0:40"
-      },
-      {
-        "a": "Niko Price",
-        "b": "Themba Gorimbo",
-        "weight": "Welterweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "winner": "Nyamjargal Tumendemberel",
-        "method": "UD",
-        "round": 3,
-        "time": "5:00"
       }
     ],
     "earlyPrelims": [
       {
-        "a": "Nikita Krylov",
-        "b": "Bogdan Guskov",
-        "weight": "Light Heavyweight",
+        "a": "Rodolfo Bellato",
+        "b": "Luke Fernandez",
+        "weight": "",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "",
         "winner": "Rodolfo Bellato",
         "method": "TKO",
         "round": 1,
         "time": "2:42"
       },
       {
-        "a": "Nurullo Aliev",
-        "b": "Cody Durden",
-        "weight": "Flyweight",
+        "a": "Diyar Nurgozhay",
+        "b": "Rafael Tobias",
+        "weight": "",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "",
         "winner": "Diyar Nurgozhay",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "a": "Nyamjargal Tumendemberel",
+        "b": "Cody Durden",
+        "weight": "",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "",
+        "winner": "Nyamjargal Tumendemberel",
         "method": "UD",
         "round": 3,
         "time": "5:00"
@@ -8259,19 +8268,6 @@
         "method": "MD",
         "round": 5,
         "time": "5:00"
-      },
-      {
-        "a": "Tom Aspinall",
-        "b": "Ciryl Gane",
-        "weight": "Heavyweight",
-        "rounds": "5 Rds",
-        "titleFight": true,
-        "ranked": true,
-        "slot": "comain",
-        "winner": "Tom Aspinall",
-        "method": "TKO",
-        "round": 1,
-        "time": "3:02"
       },
       {
         "a": "Arnold Allen",
@@ -10653,7 +10649,7 @@
         "slot": "",
         "imgA": "",
         "imgB": "",
-        "winner": "Gaston Bolaños",
+        "winner": "Gaston Bolanos",
         "method": "DEC"
       },
       {
@@ -10776,7 +10772,7 @@
         "slot": "",
         "imgA": "",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/OLEKSIEJCZUK_MICHAL_L_02-07.png?itok=hDOVJtgb",
-        "winner": "Abus Magomedov",
+        "winner": "Abusupiyan Magomedov",
         "method": "SUB",
         "round": 1
       }
@@ -10965,7 +10961,7 @@
       },
       {
         "a": "Terrance McKinney",
-        "b": "Bobby Green",
+        "b": "King Green",
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
@@ -10989,7 +10985,7 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/event_results_athlete_headshot/s3/2026-03/GARBRANDT_CODY_03-07.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/event_results_athlete_headshot/s3/2026-03/YANEZ_ADRIAN_03-28.png",
-        "winner": "Adrian Yañez",
+        "winner": "Adrian Yanez",
         "method": "KO/TKO",
         "round": 1
       },
@@ -11039,7 +11035,7 @@
       },
       {
         "a": "Cody Durden",
-        "b": "Ode' Osbourne",
+        "b": "Alessandro Costa",
         "weight": "Flyweight",
         "rounds": "3 Rds",
         "titleFight": false,
