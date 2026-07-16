@@ -38,8 +38,8 @@
     if (pct < 50)     return { name: 'Contender',  color: '#cd7f32', rank: 3 };
     if (pct < 55)     return { name: 'Main Event', color: '#aaa',    rank: 4 };
     if (pct < 60)     return { name: 'Headliner',  color: '#b8611e', rank: 5 };
-    if (pct < 65 || judged < 30) return { name: 'Champion',  color: '#00d4e8', rank: 6 };
-    if (pct < 70 || judged < 60) return { name: 'P4P',       color: '#a0e4ff', rank: 7 };
+    if (pct < 65 || judged < 30) return { name: 'Champion',  color: '#d97b3f', rank: 6 };
+    if (pct < 70 || judged < 60) return { name: 'P4P',       color: '#ff9a4d', rank: 7 };
     return { name: 'GOAT',      color: '#b8611e', rank: 8 };
   }
 
@@ -683,6 +683,17 @@
 
     barFill = Math.max(0, Math.min(1, barFill));
 
+    // ── Rank-position nudge — only for users with a real sample size ──
+    const myPos = allUsers.findIndex(u => u.user_id === myId);
+    let posMsg = '';
+    if (judged > 0 && allUsers.length > 2) {
+      if (myPos === 0) {
+        posMsg = `<div class="lb-my-pos-msg lb-my-pos-lead">🏆 You're in 1st — don't lose the lead.</div>`;
+      } else if (myPos === 1) {
+        posMsg = `<div class="lb-my-pos-msg lb-my-pos-close">You're in 2nd, right behind 1st — you're almost there.</div>`;
+      }
+    }
+
     tierEl.innerHTML = `
       <span class="lb-my-tier-label">Your Tier</span>
       <span class="lb-my-tier-badge" style="color:${t.color};border-color:${t.color}44">${t.name}</span>
@@ -697,6 +708,7 @@
         </div>
         <div class="lb-my-tier-req">${reqText}</div>
       </div>
+      ${posMsg}
     `;
     const wrap = document.getElementById('lbGlobalWrap');
     if (wrap) wrap.insertAdjacentElement('beforebegin', tierEl);

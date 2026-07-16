@@ -9960,11 +9960,23 @@ body.light-mode .pk-drum-wrap::after {
   font-family: 'Inter', sans-serif; font-size: 0.68rem;
   color: rgba(217,123,63,.5); margin-left: auto;
 }
+.lb-my-pos-msg {
+  width: 100%; font-family: 'Inter', sans-serif; font-size: 0.74rem; font-weight: 600;
+  padding: 8px 12px; border-radius: 8px; margin-top: 2px;
+}
+.lb-my-pos-lead {
+  background: rgba(217,123,63,.12); border: 1px solid rgba(217,123,63,.3); color: #d97b3f;
+}
+.lb-my-pos-close {
+  background: rgba(217,123,63,.06); border: 1px solid rgba(217,123,63,.18); color: rgba(217,123,63,.85);
+}
 /* Light mode */
 body.light-mode .lb-tier { opacity: 0.85; }
 body.light-mode .lb-my-tier { background: rgba(0,0,0,.03) !important; border-color: rgba(0,0,0,.08) !important; }
 body.light-mode .lb-my-tier-label { color: rgba(0,0,0,.5) !important; }
 body.light-mode .lb-my-tier-sub { color: rgba(0,0,0,.45) !important; }
+body.light-mode .lb-my-pos-lead { background: rgba(217,123,63,.1) !important; color: #b8611e !important; }
+body.light-mode .lb-my-pos-close { background: rgba(217,123,63,.06) !important; color: rgba(184,97,30,.85) !important; }
 
 /* ======= PER-FIGHT COMMENTS ======= */
 .pk-comments-wrap {

@@ -2217,7 +2217,8 @@ function formatOdds(n) {
   <div class="pk-info-ex pk-info-ex-good"><span class="pk-info-ex-icon">⚡</span> All correct → +45 pts perfect DD</div>
   <div class="pk-info-ex pk-info-ex-good"><span class="pk-info-ex-icon">+</span> Right fighter, wrong bonus → pts − 2 per miss</div>
   <div class="pk-info-ex pk-info-ex-bad"><span class="pk-info-ex-icon">−</span> Wrong fighter → −20 pts</div>
-</div>`,
+</div>
+<p style="color:rgba(255,255,255,.35);font-size:.78rem;margin-top:8px">Save it for the pick you're most sure about — one great Double Down can swing a whole card in your favor.</p>`,
     },
     hype: {
       title: 'Hype Rating',
