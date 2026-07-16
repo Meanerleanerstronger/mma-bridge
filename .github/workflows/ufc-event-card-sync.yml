@@ -21,6 +21,8 @@ jobs:
           node-version: '20'
 
       - name: Run event card sync
+        env:
+          INTERNAL_SECRET: ${{ secrets.INTERNAL_SECRET }}
         run: node scripts/ufc-event-card-sync.js
 
       - name: Commit & push if changed

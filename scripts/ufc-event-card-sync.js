@@ -208,7 +208,7 @@ function titleLastName(name) {
   return last;
 }
 
-function mergeFights(existing, fromUFC, fighterIdx) {
+function mergeFights(existing, fromUFC, fighterIdx, newlyAdded) {
   const result = [...existing];
 
   for (const ufcFight of fromUFC) {
@@ -233,10 +233,29 @@ function mergeFights(existing, fromUFC, fighterIdx) {
         imgB:      lookupImg(ufcFight.b, fighterIdx),
       });
       console.log(`    ➕ New fight added: ${ufcFight.a} vs ${ufcFight.b}`);
+      if (newlyAdded) { if (ufcFight.a) newlyAdded.push(ufcFight.a); if (ufcFight.b) newlyAdded.push(ufcFight.b); }
     }
   }
 
   return result;
+}
+
+// ── Notify users who favorited a fighter now confirmed on a card ──
+// Silent no-op if INTERNAL_SECRET isn't configured (e.g. local dev runs).
+async function notifyFavFighters(fighters, eventName, eventId) {
+  const secret = process.env.INTERNAL_SECRET;
+  if (!secret || !fighters.length) return;
+  try {
+    const res = await fetch('https://mmabridge-backend.onrender.com/api/push/announce-fighters', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Internal-Secret': secret },
+      body: JSON.stringify({ fighters, eventName, eventId }),
+    });
+    if (res.ok) console.log(`  🔔 Notified fav-fighter subscribers for ${eventName}`);
+    else console.warn(`  ⚠️  announce-fighters returned ${res.status}`);
+  } catch (e) {
+    console.warn(`  ⚠️  announce-fighters call failed: ${e.message}`);
+  }
 }
 
 async function syncEvent(ev, fighterIdx) {
@@ -310,16 +329,19 @@ async function syncEvent(ev, fighterIdx) {
     ev[section] = kept;
   }
 
-  if (ufcMain.length)     ev.mainCard     = mergeFights(ev.mainCard    || [], ufcMain,     fighterIdx);
+  const newlyAdded = [];
+  if (ufcMain.length)     ev.mainCard     = mergeFights(ev.mainCard    || [], ufcMain,     fighterIdx, newlyAdded);
 
   // Build sets of fighters already placed in higher sections so we don't re-add them lower
   const mainFighters = new Set((ev.mainCard || []).flatMap(f => [norm(f.a), norm(f.b)]));
   const notInMain = f => !mainFighters.has(norm(f.a)) && !mainFighters.has(norm(f.b));
 
-  if (ufcPrelims.length)  ev.prelims      = mergeFights(ev.prelims     || [], ufcPrelims.filter(notInMain),  fighterIdx);
+  if (ufcPrelims.length)  ev.prelims      = mergeFights(ev.prelims     || [], ufcPrelims.filter(notInMain),  fighterIdx, newlyAdded);
   const presFighters = new Set((ev.prelims || []).flatMap(f => [norm(f.a), norm(f.b)]));
   const notInPres = f => notInMain(f) && !presFighters.has(norm(f.a)) && !presFighters.has(norm(f.b));
-  if (ufcEarlyPre.length) ev.earlyPrelims = mergeFights(ev.earlyPrelims|| [], ufcEarlyPre.filter(notInPres), fighterIdx);
+  if (ufcEarlyPre.length) ev.earlyPrelims = mergeFights(ev.earlyPrelims|| [], ufcEarlyPre.filter(notInPres), fighterIdx, newlyAdded);
+
+  if (newlyAdded.length) await notifyFavFighters(newlyAdded, ev.name, ev.id);
 
   // Also clean existing fights that may have moved up sections
   ev.prelims      = (ev.prelims     || []).filter(notInMain);

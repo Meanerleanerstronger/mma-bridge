@@ -1242,6 +1242,7 @@
         closeModal('modalCreate');
         if (nameEl) nameEl.value = '';
         renderGroupStatus();
+        window.LucasMoments?.groupWelcome(name);
       } catch {
         if (errEl) errEl.textContent = 'Something went wrong — please try again.';
       } finally { if (btn) { btn.textContent = 'Create Group'; btn.disabled = false; } }
@@ -1276,6 +1277,7 @@
         closeModal('modalJoin');
         if (codeEl) codeEl.value = '';
         renderGroupStatus();
+        window.LucasMoments?.groupWelcome(groupName || 'the group');
       } catch (err) {
         if (errEl) errEl.textContent = 'Could not join group. Check the code and try again.';
       } finally { if (btn) { btn.textContent = 'Join Group'; btn.disabled = false; } }

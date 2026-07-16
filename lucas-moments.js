@@ -11,6 +11,7 @@
 
   function seen(key)     { try { return !!localStorage.getItem(`lucas_moment_${key}`); } catch { return true; } }
   function markSeen(key) { try { localStorage.setItem(`lucas_moment_${key}`, '1'); } catch {} }
+  function esc(s)        { return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 
   function showBubble(text) {
     document.querySelectorAll('.lm-bubble').forEach(b => b.remove());
@@ -82,7 +83,12 @@
     showBubble(text);
   }
 
-  window.LucasMoments = { maybeSeasonOpener, maybeFirstDoubleDown, maybeStretchRun };
+  // ── Moment 4: Joining/creating a group — fires every time, it's a one-off action, not a page-load nudge ──
+  function groupWelcome(groupName) {
+    showBubble(`Welcome to <strong>${esc(groupName)}</strong>. Good luck out there.`);
+  }
+
+  window.LucasMoments = { maybeSeasonOpener, maybeFirstDoubleDown, maybeStretchRun, groupWelcome, showBubble };
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', maybeSeasonOpener);

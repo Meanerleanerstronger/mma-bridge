@@ -25,6 +25,8 @@ jobs:
 
       - name: Run UFC sync
         id: sync
+        env:
+          INTERNAL_SECRET: ${{ secrets.INTERNAL_SECRET }}
         run: node scripts/ufc-sync.js
 
       - name: Commit & push if changed

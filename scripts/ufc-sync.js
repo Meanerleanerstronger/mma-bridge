@@ -23,6 +23,32 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+// ── Notify users who favorited a fighter now appearing on a card ──
+// Silent no-op if INTERNAL_SECRET isn't configured (e.g. local dev runs).
+async function notifyFavFighters(ev) {
+  const secret = process.env.INTERNAL_SECRET;
+  if (!secret) return;
+  const fighters = [];
+  for (const section of ['mainCard', 'prelims', 'earlyPrelims']) {
+    for (const f of (ev[section] || [])) {
+      if (f.a) fighters.push(f.a);
+      if (f.b) fighters.push(f.b);
+    }
+  }
+  if (!fighters.length) return;
+  try {
+    const res = await fetch('https://mmabridge-backend.onrender.com/api/push/announce-fighters', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Internal-Secret': secret },
+      body: JSON.stringify({ fighters, eventName: ev.name, eventId: ev.id }),
+    });
+    if (res.ok) console.log(`  🔔 Notified fav-fighter subscribers for ${ev.name}`);
+    else console.warn(`  ⚠️  announce-fighters returned ${res.status}`);
+  } catch (e) {
+    console.warn(`  ⚠️  announce-fighters call failed: ${e.message}`);
+  }
+}
+
 const ROOT    = path.join(__dirname, '..');
 const EV_ROOT = path.join(ROOT, 'events.json');
 const EV_DATA = path.join(ROOT, 'data', 'events.json');
@@ -347,6 +373,7 @@ async function main() {
       else ourEvents.push(newEv);
 
       changes.push(`New event: ${espnEv.name}`);
+      await notifyFavFighters(newEv);
     }
 
     // ── C: POSTER — upcoming event missing its poster ─────────────────────────
