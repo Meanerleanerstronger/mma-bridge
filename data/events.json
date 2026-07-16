@@ -11255,8 +11255,8 @@
         "titleFight": false,
         "ranked": true,
         "slot": "",
-        "imgA": "",
-        "imgB": ""
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_BLUE.png?VersionId=Om_hItmX1XM4gJZUDxmeO._luirl8gW7&amp;itok=ij6lbEqO"
       }
     ],
     "earlyPrelims": []
@@ -11327,6 +11327,17 @@
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/ZAYNUKOV_MAGOMED_R_10-07.png?itok=rUlbqlka",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
+      },
+      {
+        "a": "Ismael Bonfim",
+        "b": "Axel Sola",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-02/BONFIM_ISMAEL_L_02-15.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-09/SOLA_AXEL_L_09-06.png"
       }
     ],
     "prelims": [
@@ -11384,17 +11395,6 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/SATYBALDIEV_URAN_L_08-23.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/JACOBY_DUSTIN_L_02-07.png"
-      },
-      {
-        "a": "Ismael Bonfim",
-        "b": "Axel Sola",
-        "weight": "Lightweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-02/BONFIM_ISMAEL_L_02-15.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-09/SOLA_AXEL_L_09-06.png"
       }
     ],
     "earlyPrelims": []
