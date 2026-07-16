@@ -23,6 +23,30 @@ function normName(s) {
   return (s || '').toLowerCase().replace(/[^a-z]/g, '');
 }
 
+// ufcstats.com sits behind a Cloudflare JS challenge. page.goto()'s
+// networkidle2 can resolve *during* that challenge page, right before its
+// own client-side redirect fires — so evaluate() then runs against a page
+// that's already navigating away, throwing "Execution context was
+// destroyed, most likely because of a navigation." This was previously
+// unhandled on the initial event-list load (unlike the per-event loop,
+// which already has a try/catch), so it crashed the entire script with
+// exit code 1 -> the daily "all jobs failed" email, even though the fix is
+// just to wait a beat for the redirect to settle and retry once or twice.
+async function gotoAndEval(page, url, evalFn, retries = 2) {
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      await page.goto(url, { waitUntil: 'networkidle2', timeout: 45000 });
+      await new Promise(r => setTimeout(r, 1500));
+      return await page.evaluate(evalFn);
+    } catch (e) {
+      const isNavRace = /[Ee]xecution context was destroyed|[Nn]avigation/.test(e.message || '');
+      if (attempt === retries || !isNavRace) throw e;
+      console.warn(`  ⚠️  Navigation race on ${url} (attempt ${attempt + 1}/${retries + 1}), retrying…`);
+      await new Promise(r => setTimeout(r, 2000 * (attempt + 1)));
+    }
+  }
+}
+
 async function run() {
   const events  = JSON.parse(fs.readFileSync(EVENTS_PATH, 'utf8'));
   const cutoff  = new Date(Date.now() - 14 * 86400000).toISOString().slice(0, 10);
@@ -44,8 +68,7 @@ async function run() {
 
     // Load event list once
     console.log('Loading ufcstats event list…');
-    await page.goto('http://www.ufcstats.com/statistics/events/completed?page=all', { waitUntil: 'networkidle2', timeout: 45000 });
-    const eventLinks = await page.evaluate(() => {
+    const eventLinks = await gotoAndEval(page, 'http://www.ufcstats.com/statistics/events/completed?page=all', () => {
       return Array.from(document.querySelectorAll('a[href*="event-details"]')).map(a => ({
         url: a.href,
         text: a.textContent.replace(/\s+/g, ' ').trim(),
@@ -93,8 +116,7 @@ async function run() {
       console.log(`  → ${best}`);
 
       try {
-        await page.goto(best, { waitUntil: 'networkidle2', timeout: 45000 });
-        const fights = await page.evaluate(() => {
+        const fights = await gotoAndEval(page, best, () => {
           const rows = Array.from(document.querySelectorAll('tbody tr'));
           const fights = [];
           let i = 0;
