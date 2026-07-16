@@ -398,7 +398,7 @@
     "ranking": "#1",
     "ranking_change": 1,
     "record": {
-      "wins": 21,
+      "wins": 20,
       "losses": 2,
       "draws": 1
     },
@@ -11218,7 +11218,7 @@
     "id": "rizvan-kuniev",
     "name": "Rizvan Kuniev",
     "record": {
-      "wins": 12,
+      "wins": 13,
       "losses": 3,
       "draws": 1
     },
@@ -12935,7 +12935,7 @@
     "name": "Song Yadong",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/YADONG_SONG_L_05-30.png",
     "record": {
-      "wins": 23,
+      "wins": 22,
       "losses": 9,
       "draws": 1
     },
@@ -16432,7 +16432,7 @@
         "time": "3:46"
       },
       {
-        "opponent": "Carlos Eduardo",
+        "opponent": "Carlos Eduardo (fighter)",
         "result": "W",
         "method": "TKO (punches)",
         "event": "MMA Series 64",
@@ -18089,6 +18089,14 @@
     },
     "last5": [
       {
+        "opponent": "Lance Gibson Jr.",
+        "result": "L",
+        "method": "TKO (knees)",
+        "event": "UFC Fight Night: Adesanya vs. Pyfer",
+        "round": 1,
+        "time": "2:56"
+      },
+      {
         "opponent": "Alexander Hernandez",
         "result": "L",
         "method": "TKO (punches)",
@@ -18157,14 +18165,6 @@
         "result": "L",
         "method": "Decision (unanimous)",
         "event": "UFC 263",
-        "round": 3,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Alex Caceres",
-        "result": "L",
-        "method": "Decision (unanimous)",
-        "event": "UFC 250",
         "round": 3,
         "time": "5:00"
       }
@@ -18557,6 +18557,14 @@
     },
     "last5": [
       {
+        "opponent": "Virna Jandiroba",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Moicano vs. Duncan",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
         "opponent": "Amanda Ribas",
         "result": "W",
         "method": "TKO (elbow and punches)",
@@ -18627,14 +18635,6 @@
         "event": "UFC Fight Night: Costa vs. Vettori",
         "round": 3,
         "time": "5:00"
-      },
-      {
-        "opponent": "Manon Fiorot",
-        "result": "L",
-        "method": "TKO (punches)",
-        "event": "UFC Fight Night: Rozenstruik vs. Sakai",
-        "round": 2,
-        "time": "3:00"
       }
     ],
     "nickname": "Baby Shark"
@@ -19347,8 +19347,8 @@
     "name": "Johnny Walker",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/WALKER_JOHNNY_L_08-23.png",
     "record": {
-      "wins": 22,
-      "losses": 10,
+      "wins": 21,
+      "losses": 7,
       "draws": 0
     },
     "last5": [
@@ -28372,6 +28372,14 @@
     },
     "last5": [
       {
+        "opponent": "Angela Hill",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 322",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
         "opponent": "Melissa Martinez",
         "result": "W",
         "method": "TKO (head kick and punches)",
@@ -29049,7 +29057,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-02/BONFIM_ISMAEL_L_02-15.png",
     "record": {
       "wins": 20,
-      "losses": 6,
+      "losses": 1,
       "draws": 0
     },
     "last5": [
@@ -29690,8 +29698,8 @@
     "name": "Michael Oliveira",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/OLIVEIRA_MICHAEL_L.png",
     "record": {
-      "wins": 1,
-      "losses": 0,
+      "wins": 37,
+      "losses": 11,
       "draws": 0
     },
     "last5": [
@@ -30348,7 +30356,7 @@
     "name": "Chidi Njokuani",
     "record": {
       "wins": 25,
-      "losses": 11,
+      "losses": 12,
       "draws": 0
     },
     "last5": [
@@ -30568,8 +30576,8 @@
     "id": "anthony-hernandez",
     "name": "Anthony Hernandez",
     "record": {
-      "wins": 15,
-      "losses": 3,
+      "wins": 11,
+      "losses": 2,
       "draws": 0
     },
     "last5": [
@@ -30848,7 +30856,7 @@
     "name": "Neil Magny",
     "record": {
       "wins": 31,
-      "losses": 15,
+      "losses": 14,
       "draws": 0
     },
     "last5": [
@@ -31241,7 +31249,7 @@
     "record": {
       "wins": 14,
       "losses": 6,
-      "draws": 1
+      "draws": 0
     },
     "last5": [
       {
@@ -31525,7 +31533,7 @@
     "id": "magomed-zaynukov",
     "name": "Magomed Zaynukov",
     "record": {
-      "wins": 1,
+      "wins": 8,
       "losses": 0,
       "draws": 0
     },
@@ -31601,7 +31609,7 @@
     "id": "damian-rzepecki",
     "name": "Damian Rzepecki",
     "record": {
-      "wins": 0,
+      "wins": 10,
       "losses": 0,
       "draws": 0
     },
@@ -31828,7 +31836,7 @@
     "id": "santiago-ponzinibbio",
     "name": "Santiago Ponzinibbio",
     "record": {
-      "wins": 31,
+      "wins": 30,
       "losses": 9,
       "draws": 0
     },
