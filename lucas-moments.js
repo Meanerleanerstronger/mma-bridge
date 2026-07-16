@@ -56,7 +56,7 @@
     const weekAfter = new Date(SEASON_START.getTime() + 7 * 86400000);
     if (now < SEASON_START || now > weekAfter) return;
     markSeen(key);
-    showBubble("New season, clean slate — everyone's starting even right now. Start strong, fight one.");
+    showBubble("New season. Everyone's even. Start strong.");
   }
 
   // ── Moment 2: First Double Down ever — once, per user ──
@@ -77,8 +77,8 @@
     if (now < stretchStart || now > SEASON_END) return;
     markSeen(key);
     const text = rankPos === 0
-      ? "Season's winding down and you're leading. Don't get comfortable — protect it."
-      : "Right behind 1st with the finish line close. This is exactly when leads flip.";
+      ? "You're leading with the season winding down. Don't get comfortable."
+      : "You're right behind 1st. This is where leads flip.";
     showBubble(text);
   }
 
