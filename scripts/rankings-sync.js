@@ -28,10 +28,15 @@ async function run() {
   const sections = html.split('<div class="view-grouping">').slice(1);
 
   for (const section of sections) {
-    // Division name
-    const divMatch = /<div class="view-grouping-header">([^<]+)<\/div>/.exec(section);
+    // Division name. Not just [^<]+ up to the closing </div> — the P4P
+    // headers ("Men's Pound-for-Pound <span>Top Rank</span>") have a nested
+    // <span>, which silently broke that simpler match (regex can't cross the
+    // inner tag boundary), so the two P4P sections were dropped entirely
+    // with no error. Match everything up to the closing tag non-greedily,
+    // then strip any inner tags from the captured text instead.
+    const divMatch = /<div class="view-grouping-header">([\s\S]*?)<\/div>/.exec(section);
     if (!divMatch) continue;
-    const division = divMatch[1].trim();
+    const division = divMatch[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
 
     // Champion from h5 inside rankings--athlete--champion block
     const champMatch = /<h5><a[^>]*>([^<]+)<\/a><\/h5>/.exec(section);

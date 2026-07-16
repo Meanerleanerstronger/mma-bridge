@@ -1,5 +1,90 @@
 [
   {
+    "division": "Men's Pound-for-Pound Top Rank",
+    "fighters": [
+      {
+        "rank": "C",
+        "name": "Islam Makhachev",
+        "isChamp": true
+      },
+      {
+        "rank": 1,
+        "name": "Islam Makhachev",
+        "isChamp": false
+      },
+      {
+        "rank": 2,
+        "name": "Alexander Volkanovski",
+        "isChamp": false
+      },
+      {
+        "rank": 3,
+        "name": "Petr Yan",
+        "isChamp": false
+      },
+      {
+        "rank": 4,
+        "name": "Justin Gaethje",
+        "isChamp": false
+      },
+      {
+        "rank": 5,
+        "name": "Ilia Topuria",
+        "isChamp": false
+      },
+      {
+        "rank": 6,
+        "name": "Tom Aspinall",
+        "isChamp": false
+      },
+      {
+        "rank": 7,
+        "name": "Sean Strickland",
+        "isChamp": false
+      },
+      {
+        "rank": 8,
+        "name": "Merab Dvalishvili",
+        "isChamp": false
+      },
+      {
+        "rank": 9,
+        "name": "Alex Pereira",
+        "isChamp": false
+      },
+      {
+        "rank": 10,
+        "name": "Ciryl Gane",
+        "isChamp": false
+      },
+      {
+        "rank": 11,
+        "name": "Joshua Van",
+        "isChamp": false
+      },
+      {
+        "rank": 12,
+        "name": "Khamzat Chimaev",
+        "isChamp": false
+      },
+      {
+        "rank": 13,
+        "name": "Alexandre Pantoja",
+        "isChamp": false
+      },
+      {
+        "rank": 14,
+        "name": "Arman Tsarukyan",
+        "isChamp": false
+      },
+      {
+        "rank": 15,
+        "name": "Charles Oliveira",
+        "isChamp": false
+      }
+    ]
+  },
+  {
     "division": "Flyweight",
     "fighters": [
       {
@@ -19,12 +104,12 @@
       },
       {
         "rank": 3,
-        "name": "Tatsuro Taira",
+        "name": "Brandon Royval",
         "isChamp": false
       },
       {
         "rank": 4,
-        "name": "Brandon Royval",
+        "name": "Tatsuro Taira",
         "isChamp": false
       },
       {
@@ -109,22 +194,22 @@
       },
       {
         "rank": 4,
-        "name": "Cory Sandhagen",
+        "name": "Mario Bautista",
         "isChamp": false
       },
       {
         "rank": 5,
-        "name": "Song Yadong",
+        "name": "Cory Sandhagen",
         "isChamp": false
       },
       {
         "rank": 6,
-        "name": "Aiemann Zahabi",
+        "name": "Song Yadong",
         "isChamp": false
       },
       {
         "rank": 7,
-        "name": "Mario Bautista",
+        "name": "Aiemann Zahabi",
         "isChamp": false
       },
       {
@@ -159,12 +244,12 @@
       },
       {
         "rank": 14,
-        "name": "Marcus McGhee",
+        "name": "Farid Basharat",
         "isChamp": false
       },
       {
         "rank": 15,
-        "name": "Farid Basharat",
+        "name": "Marcus McGhee",
         "isChamp": false
       }
     ]
@@ -284,12 +369,12 @@
       },
       {
         "rank": 5,
-        "name": "Benoît Saint Denis",
+        "name": "Paddy Pimblett",
         "isChamp": false
       },
       {
         "rank": 6,
-        "name": "Paddy Pimblett",
+        "name": "Benoît Saint Denis",
         "isChamp": false
       },
       {
@@ -309,12 +394,12 @@
       },
       {
         "rank": 10,
-        "name": "Rafael Fiziev",
+        "name": "Renato Moicano",
         "isChamp": false
       },
       {
-        "rank": 10,
-        "name": "Renato Moicano",
+        "rank": 11,
+        "name": "Rafael Fiziev",
         "isChamp": false
       },
       {
@@ -479,37 +564,32 @@
       },
       {
         "rank": 10,
-        "name": "Robert Whittaker",
-        "isChamp": false
-      },
-      {
-        "rank": 11,
         "name": "Jared Cannonier",
         "isChamp": false
       },
       {
-        "rank": 12,
+        "rank": 11,
         "name": "Gregory Rodrigues",
         "isChamp": false
       },
       {
-        "rank": 13,
+        "rank": 12,
         "name": "Christian Leroy Duncan",
         "isChamp": false
       },
       {
-        "rank": 14,
-        "name": "Roman Dolidze",
-        "isChamp": false
-      },
-      {
-        "rank": 15,
+        "rank": 13,
         "name": "Ikram Aliskerov",
         "isChamp": false
       },
       {
-        "rank": 15,
+        "rank": 14,
         "name": "Bo Nickal",
+        "isChamp": false
+      },
+      {
+        "rank": 15,
+        "name": "Roman Dolidze",
         "isChamp": false
       }
     ]
@@ -549,17 +629,17 @@
       },
       {
         "rank": 6,
+        "name": "Paulo Costa",
+        "isChamp": false
+      },
+      {
+        "rank": 7,
         "name": "Jamahal Hill",
         "isChamp": false
       },
       {
-        "rank": 7,
+        "rank": 8,
         "name": "Azamat Murzakanov",
-        "isChamp": false
-      },
-      {
-        "rank": 7,
-        "name": "Paulo Costa",
         "isChamp": false
       },
       {
@@ -568,7 +648,7 @@
         "isChamp": false
       },
       {
-        "rank": 10,
+        "rank": 9,
         "name": "Bogdan Guskov",
         "isChamp": false
       },
@@ -579,7 +659,7 @@
       },
       {
         "rank": 12,
-        "name": "Nikita Krylov",
+        "name": "Robert Whittaker",
         "isChamp": false
       },
       {
@@ -594,7 +674,7 @@
       },
       {
         "rank": 15,
-        "name": "Alonzo Menifield",
+        "name": "Nikita Krylov",
         "isChamp": false
       }
     ]
@@ -653,7 +733,7 @@
         "isChamp": false
       },
       {
-        "rank": 10,
+        "rank": 9,
         "name": "Ante Delija",
         "isChamp": false
       },
@@ -669,17 +749,102 @@
       },
       {
         "rank": 13,
-        "name": "Brando Peričić",
+        "name": "Valter Walker",
         "isChamp": false
       },
       {
         "rank": 14,
-        "name": "Valter Walker",
+        "name": "Brando Peričić",
         "isChamp": false
       },
       {
         "rank": 15,
         "name": "Mick Parkin",
+        "isChamp": false
+      }
+    ]
+  },
+  {
+    "division": "Women's Pound-for-Pound Top Rank",
+    "fighters": [
+      {
+        "rank": "C",
+        "name": "Valentina Shevchenko",
+        "isChamp": true
+      },
+      {
+        "rank": 1,
+        "name": "Valentina Shevchenko",
+        "isChamp": false
+      },
+      {
+        "rank": 2,
+        "name": "Kayla Harrison",
+        "isChamp": false
+      },
+      {
+        "rank": 3,
+        "name": "Zhang Weili",
+        "isChamp": false
+      },
+      {
+        "rank": 4,
+        "name": "Natalia Silva",
+        "isChamp": false
+      },
+      {
+        "rank": 5,
+        "name": "Manon Fiorot",
+        "isChamp": false
+      },
+      {
+        "rank": 6,
+        "name": "Mackenzie Dern",
+        "isChamp": false
+      },
+      {
+        "rank": 7,
+        "name": "Alexa Grasso",
+        "isChamp": false
+      },
+      {
+        "rank": 8,
+        "name": "Erin Blanchfield",
+        "isChamp": false
+      },
+      {
+        "rank": 9,
+        "name": "Julianna Peña",
+        "isChamp": false
+      },
+      {
+        "rank": 10,
+        "name": "Tatiana Suarez",
+        "isChamp": false
+      },
+      {
+        "rank": 11,
+        "name": "Virna Jandiroba",
+        "isChamp": false
+      },
+      {
+        "rank": 12,
+        "name": "Yan Xiaonan",
+        "isChamp": false
+      },
+      {
+        "rank": 13,
+        "name": "Raquel Pennington",
+        "isChamp": false
+      },
+      {
+        "rank": 14,
+        "name": "Rose Namajunas",
+        "isChamp": false
+      },
+      {
+        "rank": 15,
+        "name": "Maycee Barber",
         "isChamp": false
       }
     ]
@@ -749,7 +914,7 @@
       },
       {
         "rank": 12,
-        "name": "Angela Hill",
+        "name": "Alexia Thainara",
         "isChamp": false
       },
       {
@@ -759,7 +924,7 @@
       },
       {
         "rank": 14,
-        "name": "Alexia Thainara",
+        "name": "Angela Hill",
         "isChamp": false
       },
       {
@@ -814,27 +979,27 @@
       },
       {
         "rank": 8,
-        "name": "Tracy Cortez",
+        "name": "Wang Cong",
         "isChamp": false
       },
       {
         "rank": 9,
-        "name": "Miranda Maverick",
+        "name": "Tracy Cortez",
         "isChamp": false
       },
       {
         "rank": 10,
-        "name": "Karine Silva",
+        "name": "Miranda Maverick",
         "isChamp": false
       },
       {
         "rank": 11,
-        "name": "Casey O&#039;Neill",
+        "name": "Karine Silva",
         "isChamp": false
       },
       {
         "rank": 12,
-        "name": "Wang Cong",
+        "name": "Casey O&#039;Neill",
         "isChamp": false
       },
       {

@@ -970,9 +970,14 @@
 
         fighters.forEach(f => { fighterMap[f.name.toLowerCase().trim()] = f; });
 
-        // Deduplicate by division name — keep first occurrence only
+        // Deduplicate by division name — keep first occurrence only.
+        // Also drop the two "Pound-for-Pound" entries here — those are the
+        // P4P tabs' data (rankings-sync.js correctly captures them now, see
+        // the "Men's P4P" rank text above), not a weight class, so they
+        // don't belong in the Divisional weight-class browser.
         const seen = new Set();
         const unique = (rankings || []).filter(d => {
+          if (/pound-for-pound/i.test(d.division)) return false;
           if (seen.has(d.division)) return false;
           seen.add(d.division);
           return true;

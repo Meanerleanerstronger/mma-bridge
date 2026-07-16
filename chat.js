@@ -21,13 +21,15 @@ if (window.location.hostname !== 'localhost' && window.location.hostname !== '12
 // Fetch events + fighters at startup and build a structured context for Lucas
 async function loadLiveData() {
   try {
-    const [evRes, fRes] = await Promise.all([
+    const [evRes, fRes, rRes] = await Promise.all([
       fetch('events.json?_='+Date.now(),{cache:'no-store'}),
-      fetch('data/fighters.json?_='+Date.now(),{cache:'no-store'})   // richer fighter data with full records
+      fetch('data/fighters.json?_='+Date.now(),{cache:'no-store'}),   // richer fighter data with full records
+      fetch('data/rankings.json?_='+Date.now(),{cache:'no-store'}).catch(() => null) // weekly UFC.com scrape — see rankings-sync.js
     ]);
-    const [events, fighters] = await Promise.all([
+    const [events, fighters, rankings] = await Promise.all([
       evRes.ok  ? evRes.json()  : null,
-      fRes.ok   ? fRes.json()   : null
+      fRes.ok   ? fRes.json()   : null,
+      rRes && rRes.ok ? rRes.json().catch(() => null) : null
     ]);
     if (!events && !fighters) return;
 
@@ -85,14 +87,42 @@ async function loadLiveData() {
       }
     ];
 
-    // Current P4P rankings with record context
-    const p4pContext = [
+    // Current P4P rankings with record context. Sourced live from
+    // data/rankings.json (rankings-sync.js scrapes UFC.com's "Men's
+    // Pound-for-Pound Top Rank" section weekly) instead of a hand-maintained
+    // array that went stale every time rankings changed. Falls back to a
+    // fixed snapshot only if that fetch/parse ever comes back empty.
+    const P4P_FALLBACK = [
       { rank: 1, name: 'Islam Makhachev', record: '28-1', division: 'Lightweight', next: 'UFC 330 vs Ian Garry (WW title, Aug 15 2026, Philadelphia)' },
       { rank: 2, name: 'Alexander Volkanovski', record: '29-4', division: 'Featherweight', note: 'Beat Diego Lopes twice (UFC 314 + 325)' },
       { rank: 3, name: 'Petr Yan', record: '18-5', division: 'Bantamweight', note: 'BW Champion' },
       { rank: 4, name: 'Justin Gaethje', record: '28-5', division: 'Lightweight', note: 'LW Champion — shocked Topuria at +450 odds at UFC 314' },
       { rank: 5, name: 'Ilia Topuria', record: '17-1', division: 'Lightweight', note: 'Lost LW title to Gaethje via TKO R5, was -600 favourite' },
     ];
+
+    function buildP4pContext(rankingsData, fightersData) {
+      if (!Array.isArray(rankingsData)) return P4P_FALLBACK;
+      const menP4P = rankingsData.find(d => /pound-for-pound/i.test(d.division || '') && /men/i.test(d.division || ''));
+      if (!menP4P || !menP4P.fighters || !menP4P.fighters.length) return P4P_FALLBACK;
+
+      const byName = new Map((fightersData || []).map(f => [(f.name || '').toLowerCase(), f]));
+      const seen = new Set();
+      const list = [];
+      for (const f of menP4P.fighters) {
+        const key = (f.name || '').toLowerCase();
+        if (!key || seen.has(key)) continue; // champ ('C') and rank-1 are often the same person listed twice
+        seen.add(key);
+        const match = byName.get(key);
+        const rec = match && match.record
+          ? `${match.record.wins ?? 0}-${match.record.losses ?? 0}${match.record.draws ? '-' + match.record.draws : ''}`
+          : '';
+        list.push({ rank: f.rank === 'C' ? 1 : f.rank, name: f.name, record: rec, division: (match && match.weightClass) || '' });
+      }
+      list.sort((a, b) => a.rank - b.rank);
+      return list.length ? list.slice(0, 10) : P4P_FALLBACK;
+    }
+
+    const p4pContext = buildP4pContext(rankings, fighters);
 
     const mmaBridgeScoring = {
       overview: 'MMA Bridge is a UFC pick\'em site. Users pick fight winners before events lock and earn points based on accuracy.',
