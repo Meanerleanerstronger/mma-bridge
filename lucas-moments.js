@@ -64,7 +64,7 @@
     const key = 'first_double_down';
     if (seen(key)) return;
     markSeen(key);
-    showBubble("Ooh — a Double Down. Bold. That's either the smartest read of the card, or the story you'll be hearing about all week. Good luck.");
+    showBubble("Ohhh — a Double Down. All the glory, or no glory. Good luck.");
   }
 
   // ── Moment 3: Crucial stretch — once per season, only for 1st/2nd place ──
