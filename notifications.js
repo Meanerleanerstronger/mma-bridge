@@ -85,6 +85,30 @@
     return weights;
   }
 
+  // ── "Your Corner" fav fighters (multi, Supabase-backed) ──
+  let cornerFavs = []; // [{ name, slug }]
+  let fightersCache = null;
+
+  async function loadCornerFavs() {
+    try {
+      const sb   = window._sb;
+      const user = window.MMABridgeAuth?.getUser?.();
+      if (!sb || !user) { cornerFavs = []; return; }
+      const { data } = await sb.from('profiles').select('fav_fighters').eq('id', user.id).single();
+      let ids = data?.fav_fighters;
+      if (typeof ids === 'string') { try { ids = JSON.parse(ids); } catch { ids = []; } }
+      if (!Array.isArray(ids)) ids = [];
+      if (!ids.length) { cornerFavs = []; return; }
+      if (!fightersCache) {
+        fightersCache = await fetch('data/fighters.json?_=' + Date.now(), { cache: 'no-store' })
+          .then(r => r.ok ? r.json() : []).catch(() => []);
+      }
+      const byId = {};
+      (fightersCache || []).forEach(f => { byId[f.id] = f.name; });
+      cornerFavs = ids.map(id => byId[id]).filter(Boolean).map(name => ({ name, slug: slugify(name) }));
+    } catch { cornerFavs = []; }
+  }
+
   // ── Fav fighter ───────────────────────────────
   function getFav()  { try { return JSON.parse(localStorage.getItem(FAV_KEY) || 'null'); } catch { return null; } }
   function setFav(name) {
@@ -175,44 +199,49 @@
       allIds.forEach(id => knownIds.add(id));
       saveKnownEvents(knownIds);
 
-      if (fav && prefEnabled('fight_upcoming')) {
-        upcoming.forEach(ev => {
-          const evId = ev.id || slugify(ev.name || '');
-          if (!evId) return;
-          let opponent = null;
-          for (const sec of ['mainCard', 'prelims', 'earlyPrelims']) {
-            for (const f of (ev[sec] || [])) {
-              if (slugify(f.a) === fav.slug) { opponent = f.b; break; }
-              if (slugify(f.b) === fav.slug) { opponent = f.a; break; }
+      const favList = [...(fav ? [fav] : []), ...cornerFavs]
+        .filter((f, i, self) => self.findIndex(x => x.slug === f.slug) === i);
+
+      if (favList.length && prefEnabled('fight_upcoming')) {
+        favList.forEach(fav => {
+          upcoming.forEach(ev => {
+            const evId = ev.id || slugify(ev.name || '');
+            if (!evId) return;
+            let opponent = null;
+            for (const sec of ['mainCard', 'prelims', 'earlyPrelims']) {
+              for (const f of (ev[sec] || [])) {
+                if (slugify(f.a) === fav.slug) { opponent = f.b; break; }
+                if (slugify(f.b) === fav.slug) { opponent = f.a; break; }
+              }
+              if (opponent !== null) break;
             }
-            if (opponent !== null) break;
-          }
-          if (opponent === null) return;
-          const days = daysUntil(ev.isoDate);
-          if (days === null || days < 0) return;
-          const baseId = `${fav.slug}_${evId}_fight`;
-          const dayId  = `${fav.slug}_${evId}_dayof`;
-          if (days <= 1 && !seen.has(dayId)) {
-            arr.unshift({
-              id: dayId, type: 'fight_day', read: false,
-              fighter: fav.name, opponent, eventId: evId,
-              title: `${fav.name} fights ${days === 0 ? 'TODAY' : 'TOMORROW'}!`,
-              body: `vs ${opponent} · ${ev.name}${ev.venue ? ' · ' + ev.venue : ''}`,
-              href: `events.html?id=${evId}`,
-              eventDate: ev.isoDate, timestamp: now.toISOString()
-            });
-            addSeen(dayId); addSeen(baseId); changed = true;
-          } else if (!seen.has(baseId)) {
-            arr.unshift({
-              id: baseId, type: 'fight_upcoming', read: false,
-              fighter: fav.name, opponent, eventId: evId,
-              title: `${fav.name} is fighting in ${days} day${days !== 1 ? 's' : ''}!`,
-              body: `vs ${opponent} · ${ev.name}${ev.venue ? ' · ' + ev.venue : ''}`,
-              href: `events.html?id=${evId}`,
-              eventDate: ev.isoDate, timestamp: now.toISOString()
-            });
-            addSeen(baseId); changed = true;
-          }
+            if (opponent === null) return;
+            const days = daysUntil(ev.isoDate);
+            if (days === null || days < 0) return;
+            const baseId = `${fav.slug}_${evId}_fight`;
+            const dayId  = `${fav.slug}_${evId}_dayof`;
+            if (days <= 1 && !seen.has(dayId)) {
+              arr.unshift({
+                id: dayId, type: 'fight_day', read: false,
+                fighter: fav.name, opponent, eventId: evId,
+                title: `${fav.name} fights ${days === 0 ? 'TODAY' : 'TOMORROW'}!`,
+                body: `vs ${opponent} · ${ev.name} — make your pick for who wins.`,
+                href: `picks.html?id=${evId}`,
+                eventDate: ev.isoDate, timestamp: now.toISOString()
+              });
+              addSeen(dayId); addSeen(baseId); changed = true;
+            } else if (!seen.has(baseId)) {
+              arr.unshift({
+                id: baseId, type: 'fight_upcoming', read: false,
+                fighter: fav.name, opponent, eventId: evId,
+                title: `${fav.name} is fighting in ${days} day${days !== 1 ? 's' : ''}!`,
+                body: `vs ${opponent} · ${ev.name}${ev.venue ? ' · ' + ev.venue : ''}`,
+                href: `picks.html?id=${evId}`,
+                eventDate: ev.isoDate, timestamp: now.toISOString()
+              });
+              addSeen(baseId); changed = true;
+            }
+          });
         });
       }
 
@@ -250,11 +279,22 @@
             });
             const notifId = `card_${evId}_${slugify(a)}_${slugify(b)}`;
             if (seen.has(notifId)) return;
-            if (replacedFight) {
+            const hlParam = `&hla=${encodeURIComponent(a)}&hlb=${encodeURIComponent(b)}`;
+            const favMatch = favList.find(f => f.slug === slugify(a)) ? a
+                           : favList.find(f => f.slug === slugify(b)) ? b : null;
+            if (favMatch) {
+              const opp = favMatch === a ? b : a;
+              arr.unshift({
+                id: notifId, type: 'fav_announced', read: false,
+                title: `${favMatch} just got announced!`,
+                body: `${favMatch} vs ${opp} · ${ev.name} — make your pick.`,
+                href: `picks.html?id=${evId}`, eventId: evId,
+                eventDate: ev.isoDate, timestamp: now.toISOString()
+              });
+            } else if (replacedFight) {
               const [oldA, oldB] = replacedFight.split('|');
               const pulledOut = (oldA === a || oldA === b) ? oldB : oldA;
               const replacement = (oldA === a || oldB === b) ? b : a;
-              const hlParam = `&hla=${encodeURIComponent(a)}&hlb=${encodeURIComponent(b)}`;
               arr.unshift({
                 id: notifId, type: 'card_update', read: false,
                 title: `Fighter change on ${ev.name}`,
@@ -263,7 +303,6 @@
                 eventDate: ev.isoDate, timestamp: now.toISOString()
               });
             } else {
-              const hlParam = `&hla=${encodeURIComponent(a)}&hlb=${encodeURIComponent(b)}`;
               arr.unshift({
                 id: notifId, type: 'card_update', read: false,
                 title: `Fight added to ${ev.name}`,
@@ -400,7 +439,7 @@
             </div>`;
         }).join('');
 
-        const iconMap = { fight_upcoming: SVG.fight, fight_day: SVG.dayof, new_event: SVG.event, card_update: SVG.fight, lock_remind: SVG.bell };
+        const iconMap = { fight_upcoming: SVG.fight, fight_day: SVG.dayof, new_event: SVG.event, card_update: SVG.fight, lock_remind: SVG.bell, fav_announced: SVG.star };
         const regularHtml = notifs.slice(0, 12).map(n => {
           let title = esc(n.title);
           if (n.type === 'fight_upcoming' && n.eventDate) {
@@ -671,12 +710,17 @@
     // when the page has been open for hours, not just on initial load.
     async function pollEvents() {
       try {
+        await loadCornerFavs();
         const res = await fetch('data/events.json?_=' + Date.now(), { cache: 'no-store' });
         if (!res.ok) return;
         const events = await res.json();
         MMANotif.checkEvents(events);
       } catch {}
     }
+
+    // Load once at startup so the very first checkEvents() call already
+    // has the user's "Your Corner" favorites available.
+    loadCornerFavs().then(() => { if (window._cachedEvents) MMANotif.checkEvents(window._cachedEvents); });
 
     // Poll every 5 minutes while the tab is open
     setInterval(pollEvents, 5 * 60 * 1000);
