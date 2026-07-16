@@ -13252,3 +13252,113 @@ body.light-mode .lm-bubble-text { color: rgba(20,16,12,.82); }
 body.light-mode .lm-bubble-close { background: rgba(0,0,0,.05); color: rgba(0,0,0,.45); }
 body.light-mode .lm-bubble-close:hover { background: rgba(0,0,0,.1); color: #000; }
 
+/* ======= LEADERBOARD MODALS — Create/Join Group, View Picks =======
+   These classes had markup in leaderboard.js but no CSS anywhere,
+   so they rendered as unstyled, uncentered blocks pushed into normal
+   page flow instead of an overlay dialog. */
+.lb-modal-backdrop,
+.lb-modal-overlay {
+  position: fixed; inset: 0; z-index: 10001;
+  background: rgba(0,0,0,.65);
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: center; justify-content: center;
+  padding: 20px;
+}
+.lb-modal {
+  width: 100%; max-width: 420px;
+  background: #14100c;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+  box-shadow: 0 24px 64px rgba(0,0,0,.55);
+  overflow: hidden;
+}
+.lb-modal-header {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
+  padding: 18px 20px; border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.lb-modal-title {
+  font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.02rem; color: #fff;
+}
+.lb-modal-sub {
+  font-family: 'Inter', sans-serif; font-size: .78rem; color: rgba(255,255,255,.4);
+}
+.lb-modal-close {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  background: rgba(255,255,255,.06); border: none; color: rgba(255,255,255,.6);
+  cursor: pointer; font-size: .9rem; line-height: 1;
+  transition: background .15s, color .15s;
+}
+.lb-modal-close:hover { background: rgba(255,255,255,.12); color: #fff; }
+.lb-modal-body { padding: 20px; }
+.lb-modal-desc {
+  font-family: 'Inter', sans-serif; font-size: .85rem; color: rgba(255,255,255,.5);
+  line-height: 1.5; margin: 0 0 16px;
+}
+.lb-modal-input {
+  width: 100%; box-sizing: border-box;
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.12);
+  border-radius: 10px; padding: 12px 14px; margin-bottom: 14px;
+  font-family: 'Inter', sans-serif; font-size: .95rem; color: #fff;
+}
+.lb-modal-input::placeholder { color: rgba(255,255,255,.3); }
+.lb-modal-input:focus { outline: none; border-color: rgba(217,123,63,.55); }
+.lb-modal-input-code { text-align: center; text-transform: uppercase; letter-spacing: .18em; font-weight: 700; }
+.lb-modal-submit {
+  width: 100%; background: #d97b3f; color: #14100c; border: none; border-radius: 10px;
+  padding: 13px; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: .88rem;
+  letter-spacing: .02em; cursor: pointer; transition: opacity .15s, transform .1s;
+}
+.lb-modal-submit:hover { opacity: .9; }
+.lb-modal-submit:active { transform: scale(.98); }
+.lb-modal-submit:disabled { opacity: .5; cursor: not-allowed; }
+.lb-modal-err {
+  min-height: 1.1em; margin-top: 10px;
+  font-family: 'Inter', sans-serif; font-size: .78rem; color: #ff7a7a;
+}
+
+/* ── View Picks modal variant ── */
+.lb-picks-modal-inner { max-width: 460px; max-height: 80vh; display: flex; flex-direction: column; }
+.lb-picks-list { padding: 8px 20px 12px; overflow-y: auto; }
+.lb-pick-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.06);
+  font-family: 'Inter', sans-serif; font-size: .82rem;
+}
+.lb-pick-row:last-child { border-bottom: none; }
+.lb-pick-fight { color: rgba(255,255,255,.5); flex: 1; min-width: 0; }
+.lb-pick-val { color: #fff; font-weight: 600; text-align: right; }
+.lb-pick-icon { font-weight: 800; flex-shrink: 0; }
+.lb-pick-row.lb-pick-correct .lb-pick-icon { color: #4ade80; }
+.lb-pick-row.lb-pick-correct .lb-pick-val { color: #4ade80; }
+.lb-pick-row.lb-pick-wrong .lb-pick-icon { color: #ff6b6b; }
+.lb-pick-row.lb-pick-wrong .lb-pick-val { color: #ff6b6b; }
+.lb-pick-empty {
+  padding: 20px; text-align: center; color: rgba(255,255,255,.35);
+  font-family: 'Inter', sans-serif; font-size: .85rem;
+}
+.lb-modal-close-btn {
+  display: block; width: calc(100% - 40px); margin: 4px 20px 20px;
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+  color: rgba(255,255,255,.8); border-radius: 10px; padding: 11px;
+  font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: .85rem;
+  cursor: pointer; transition: background .15s;
+}
+.lb-modal-close-btn:hover { background: rgba(255,255,255,.1); }
+
+/* ── Light mode ── */
+body.light-mode .lb-modal { background: #fffaf5; border-color: rgba(0,0,0,.08); }
+body.light-mode .lb-modal-header { border-color: rgba(0,0,0,.06); }
+body.light-mode .lb-modal-title { color: #14100c; }
+body.light-mode .lb-modal-sub { color: rgba(0,0,0,.4); }
+body.light-mode .lb-modal-desc { color: rgba(0,0,0,.5); }
+body.light-mode .lb-modal-close { background: rgba(0,0,0,.05); color: rgba(0,0,0,.45); }
+body.light-mode .lb-modal-close:hover { background: rgba(0,0,0,.1); color: #000; }
+body.light-mode .lb-modal-input { background: rgba(0,0,0,.03); border-color: rgba(0,0,0,.12); color: #14100c; }
+body.light-mode .lb-modal-input::placeholder { color: rgba(0,0,0,.3); }
+body.light-mode .lb-pick-row { border-color: rgba(0,0,0,.06); }
+body.light-mode .lb-pick-fight { color: rgba(0,0,0,.5); }
+body.light-mode .lb-pick-val { color: #14100c; }
+body.light-mode .lb-modal-close-btn { background: rgba(0,0,0,.04); border-color: rgba(0,0,0,.1); color: rgba(0,0,0,.7); }
+body.light-mode .lb-modal-close-btn:hover { background: rgba(0,0,0,.08); }
+
