@@ -180,6 +180,18 @@ const fightersPath = join(ROOT, 'data', 'fighters.json');
 const events   = JSON.parse(readFileSync(eventsPath,  'utf8'));
 let   fighters = JSON.parse(readFileSync(fightersPath, 'utf8'));
 
+// ── Which event names are ours (verified against our own graded results) ──
+// This script used to unconditionally overwrite last5 for every fighter on
+// any upcoming card, every single day — silently clobbering the accurate,
+// hand-reconciled resumes ufc-sync.js now maintains from our own graded
+// results, replacing them with Wikipedia's own (differently-formatted,
+// unverified-against-us) event names. Skip re-enriching anyone whose last5
+// already has real entries sourced from our own archive.
+const ourEventNames = new Set(events.map(e => e.name));
+function hasVerifiedHistory(entry) {
+  return !!(entry?.last5?.length) && entry.last5.some(l5 => ourEventNames.has(l5.event));
+}
+
 // ── Build fighter lookup ───────────────────────────────────────────────
 const existingBySlug = {};
 for (const f of fighters) {
@@ -194,10 +206,11 @@ if (targetName) {
   names = [targetName.trim()];
 } else if (fromFighters) {
   // Process all real fighters in fighters.json that don't have fight history yet
-  // (or have stale data with fewer than 3 fights stored)
+  // (or have stale data with fewer than 3 fights stored) — skip anyone whose
+  // existing last5 is already verified against our own events.json archive.
   const todo = fighters.filter(f =>
     f.name && f.name !== 'TBA' && !f.name.includes('TBA') &&
-    (!f.last5 || f.last5.length < 3)
+    (!f.last5 || f.last5.length < 3) && !hasVerifiedHistory(f)
   );
   names = todo.map(f => f.name);
   console.log(`Processing ${names.length} fighters from fighters.json without fight history`);
@@ -260,11 +273,16 @@ for (const name of names) {
     }
 
     entry.record = record;
-    entry.last5  = last5;
 
     const recStr = `${record.wins}-${record.losses}${record.draws ? `-${record.draws}` : ''}`;
     const form   = last5.map(f => f.result).join(' ');
-    console.log(`✓  ${recStr.padEnd(10)} [${form}]`);
+
+    if (hasVerifiedHistory(entry)) {
+      console.log(`✓  ${recStr.padEnd(10)} [record only — last5 already verified from our own results]`);
+    } else {
+      entry.last5 = last5;
+      console.log(`✓  ${recStr.padEnd(10)} [${form}]`);
+    }
     enriched++;
 
     await sleep(600);
