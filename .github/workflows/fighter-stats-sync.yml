@@ -3,7 +3,12 @@ name: Fighter Stats Sync
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 9 * * 4'  # Thursdays 09:00 UTC (day after fighter-record-sync)
+    # Daily while working through the ~538-fighter backlog (this job was
+    # running weekly already but silently produced zero results every time
+    # due to two bugs now fixed — a wrong CSS class in the stats parser, and
+    # ufcstats.com's own search-by-name being non-functional). Once the
+    # backlog clears this reverts to being a light maintenance job.
+    - cron: '0 9 * * *'
 
 jobs:
   sync:
@@ -15,16 +20,16 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Setup Node 20
+      - name: Setup Node 22
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
 
       - name: Install dependencies (Puppeteer)
         run: npm install
 
       - name: Run fighter stats sync
-        run: node scripts/fighter-stats-sync.js
+        run: node scripts/fighter-stats-sync.js --limit 100
 
       - name: Commit & push if changed
         run: |

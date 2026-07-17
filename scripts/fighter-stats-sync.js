@@ -4,7 +4,23 @@
  * (ufcstats.com uses Cloudflare JS challenge — requires a real browser)
  *
  * Adds a `stats` key to each fighter in data/fighters.json with career averages.
- * Run manually via workflow_dispatch — not scheduled automatically.
+ *
+ * Fighter lookup works by crawling ufcstats.com's A-Z letter directory
+ * (?char=X&page=all) once per run and fuzzy-matching names locally — NOT by
+ * ufcstats.com's own ?action=search query params, which turned out to be
+ * completely non-functional (searching "Islam Makhachev" returned an
+ * unrelated alphabetical fighter list, ignoring the query entirely). Since
+ * no fighter in our data has a pre-known ufcstatsId, every lookup went
+ * through that broken search — meaning this script, before this fix, would
+ * have silently assigned fighters' stats from whichever fighter happened to
+ * be first in the ignored search result, not their own. Verified against
+ * ufcstats.com directly before writing this.
+ *
+ * Processes up to --limit fighters per run (default 100) so a single run
+ * stays bounded on GitHub Actions; scheduled to run repeatedly until the
+ * backlog of never-yet-populated fighters is worked through, then just
+ * maintains newcomers. Run manually any time with:
+ *   node scripts/fighter-stats-sync.js [--limit N]
  */
 
 import fs        from 'fs';
@@ -15,9 +31,70 @@ import puppeteer from 'puppeteer';
 const __dirname     = path.dirname(fileURLToPath(import.meta.url));
 const FIGHTERS_PATH = path.join(__dirname, '..', 'data', 'fighters.json');
 
+const args      = process.argv.slice(2);
+const limitIdx  = args.indexOf('--limit');
+const LIMIT     = limitIdx >= 0 ? parseInt(args[limitIdx + 1], 10) : 100;
+
+function normName(s) {
+  return (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .toLowerCase().replace(/[^a-z]/g, '');
+}
+
+// ufcstats.com sits behind a Cloudflare JS challenge. page.goto()'s
+// networkidle2 can resolve *during* that challenge page, right before its
+// own client-side redirect fires — so a subsequent evaluate/content() call
+// runs against a page that's already navigating away, throwing "Execution
+// context was destroyed, most likely because of a navigation." Same root
+// cause already diagnosed and fixed in ufcstats-sync.js.
+async function gotoWithRetry(page, url, retries = 2) {
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      await page.goto(url, { waitUntil: 'networkidle2', timeout: 30000 });
+      await new Promise(r => setTimeout(r, 1000));
+      return;
+    } catch (e) {
+      const isNavRace = /[Ee]xecution context was destroyed|[Nn]avigation/.test(e.message || '');
+      if (attempt === retries || !isNavRace) throw e;
+      console.warn(`    ⚠️  Navigation race on ${url} (attempt ${attempt + 1}/${retries + 1}), retrying…`);
+      await new Promise(r => setTimeout(r, 2000 * (attempt + 1)));
+    }
+  }
+}
+
+// ufcstats.com's directory groups by LAST NAME first letter.
+async function buildDirectory(page) {
+  const letters = 'abcdefghijklmnopqrstuvwxyz'.split('');
+  const byName = new Map(); // normalized full name -> detail URL
+  for (const ch of letters) {
+    try {
+      await gotoWithRetry(page, `http://www.ufcstats.com/statistics/fighters?char=${ch}&page=all`);
+      const rows = await page.evaluate(() => {
+        const trs = [...document.querySelectorAll('tr.b-statistics__table-row')];
+        return trs.map(tr => {
+          const cells = [...tr.querySelectorAll('td')];
+          if (cells.length < 2) return null;
+          const first = cells[0]?.textContent.trim() || '';
+          const last  = cells[1]?.textContent.trim() || '';
+          const link  = tr.querySelector('a[href*="fighter-details"]');
+          return link ? { name: `${first} ${last}`.trim(), href: link.href } : null;
+        }).filter(Boolean);
+      });
+      for (const r of rows) {
+        const key = normName(r.name);
+        if (key) byName.set(key, r.href);
+      }
+      process.stdout.write('.');
+    } catch (e) {
+      console.warn(`\n  ⚠️  Directory letter "${ch}" failed: ${e.message}`);
+    }
+  }
+  console.log(`\nDirectory built: ${byName.size} fighters`);
+  return byName;
+}
+
 function parseCareerStats(html) {
   const stats = {};
-  const items = [...html.matchAll(/<i[^>]*b-list__box-list-item-title[^>]*>([^<]+)<\/i>\s*([^<\n]+)/gi)];
+  const items = [...html.matchAll(/<i[^>]*b-list__box-item-title[^>]*>([^<]+)<\/i>\s*([^<\n]+)/gi)];
   for (const item of items) {
     const key = item[1].trim();
     const val = item[2].trim().replace(/--/g, '').trim();
@@ -36,8 +113,9 @@ function parseCareerStats(html) {
 
 async function run() {
   const fighters = JSON.parse(fs.readFileSync(FIGHTERS_PATH, 'utf8'));
-  const todo = fighters.filter(f => f.name && !f.stats?.slpm);
-  console.log(`${todo.length} fighters to update`);
+  const allTodo = fighters.filter(f => f.name && !f.stats?.slpm);
+  const todo = allTodo.slice(0, LIMIT);
+  console.log(`${allTodo.length} fighters total need stats — processing ${todo.length} this run (--limit ${LIMIT})`);
   if (!todo.length) { console.log('All up to date.'); return; }
 
   const browser = await puppeteer.launch({
@@ -45,34 +123,20 @@ async function run() {
     args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
   });
 
-  let updated = 0;
+  let updated = 0, notFound = 0;
   try {
     const page = await browser.newPage();
     await page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
 
+    console.log('Building A-Z fighter directory (one-time crawl this run)...');
+    const directory = await buildDirectory(page);
+
     for (const fighter of todo) {
-      const nameParts = fighter.name.trim().split(/\s+/);
-      if (nameParts.length < 2) continue;
-      const firstName = nameParts[0];
-      const lastName  = nameParts.slice(1).join(' ');
-
       try {
-        let detailUrl = fighter.ufcstatsId
-          ? `http://www.ufcstats.com/fighter-details/${fighter.ufcstatsId}`
-          : null;
+        const detailUrl = directory.get(normName(fighter.name));
+        if (!detailUrl) { console.warn(`  ⚠️  Not in directory: ${fighter.name}`); notFound++; continue; }
 
-        if (!detailUrl) {
-          const searchUrl = `http://www.ufcstats.com/statistics/fighters?action=search&SearchFirstName=${encodeURIComponent(firstName)}&SearchLastName=${encodeURIComponent(lastName)}`;
-          await page.goto(searchUrl, { waitUntil: 'networkidle2', timeout: 30000 });
-          detailUrl = await page.evaluate(() => {
-            const link = document.querySelector('a[href*="fighter-details"]');
-            return link ? link.href : null;
-          });
-        }
-
-        if (!detailUrl) { console.warn(`  ⚠️  Not found: ${fighter.name}`); continue; }
-
-        await page.goto(detailUrl, { waitUntil: 'networkidle2', timeout: 30000 });
+        await gotoWithRetry(page, detailUrl);
         const html  = await page.content();
         const stats = parseCareerStats(html);
 
@@ -90,7 +154,7 @@ async function run() {
   }
 
   fs.writeFileSync(FIGHTERS_PATH, JSON.stringify(fighters, null, 2));
-  console.log(`\n✅ Done. Updated ${updated} fighters.`);
+  console.log(`\n✅ Done. Updated ${updated}/${todo.length} this run (${notFound} not in ufcstats.com directory, ${allTodo.length - updated} still remaining overall).`);
 }
 
 run().catch(e => { console.error('Fighter stats sync failed:', e.message); process.exit(1); });
