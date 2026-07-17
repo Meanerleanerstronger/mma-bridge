@@ -114,7 +114,7 @@
       {
         "opponent": "Rizvan Kuniev",
         "result": "W",
-        "method": "Decision (split)",
+        "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Hill vs. Rountree Jr.",
         "round": 3,
         "time": "5:00"
@@ -211,7 +211,7 @@
       {
         "opponent": "Tallison Teixeira",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC Fight Night: Song vs. Figueiredo",
         "round": 1,
         "time": null
@@ -404,7 +404,7 @@
       {
         "opponent": "Alexander Volkov",
         "result": "L",
-        "method": "Decision (split)",
+        "method": "Decision (unanimous)",
         "event": "UFC 321: Aspinall vs. Gane",
         "round": 3,
         "time": "5:00"
@@ -516,7 +516,7 @@
       },
       {
         "opponent": "Magomed Ankalaev",
-        "result": "W",
+        "result": "L",
         "method": "Decision (unanimous)",
         "event": "UFC 313: Pereira vs. Ankalaev",
         "round": 5,
@@ -527,7 +527,7 @@
         "result": "W",
         "method": "TKO",
         "event": "UFC 307: Pereira vs. Rountree",
-        "round": 5,
+        "round": 4,
         "time": "4:19"
       },
       {
@@ -630,7 +630,7 @@
       },
       {
         "opponent": "Alex Pereira",
-        "result": "L",
+        "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC 313: Pereira vs. Ankalaev",
         "round": 5,
@@ -641,7 +641,7 @@
         "result": "W",
         "method": "TKO",
         "event": "UFC 308: Topuria vs. Holloway",
-        "round": 2,
+        "round": 3,
         "time": "3:47"
       },
       {
@@ -752,7 +752,7 @@
       {
         "opponent": "Carlos Ulberg",
         "result": "L",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC 327: Procházka vs. Ulberg",
         "round": 1,
         "time": "3:45"
@@ -760,7 +760,7 @@
       {
         "opponent": "Khalil Rountree Jr.",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC 320: Ankalaev vs. Pereira 2",
         "round": 3,
         "time": "3:04"
@@ -833,7 +833,7 @@
       {
         "opponent": "Jiří Procházka",
         "result": "L",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC 320: Ankalaev vs. Pereira 2",
         "round": 3,
         "time": "3:04"
@@ -851,7 +851,7 @@
         "result": "L",
         "method": "TKO",
         "event": "UFC 307: Pereira vs. Rountree",
-        "round": 5,
+        "round": 4,
         "time": "4:19"
       },
       {
@@ -986,7 +986,7 @@
       },
       {
         "opponent": "Sean Strickland",
-        "result": "L",
+        "result": "W",
         "method": "Decision (split)",
         "event": "UFC 297: Strickland vs. du Plessis",
         "round": 5,
@@ -1100,7 +1100,7 @@
       {
         "opponent": "Nikita Krylov",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "TKO",
         "event": "UFC 329: McGregor vs. Holloway 2",
         "round": 3,
         "time": null
@@ -1108,7 +1108,7 @@
       {
         "opponent": "Reinier de Ridder",
         "result": "L",
-        "method": "Decision (split)",
+        "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Whittaker vs. de Ridder",
         "round": 5,
         "time": "5:00"
@@ -1142,7 +1142,7 @@
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC 298: Volkanovski vs. Topuria",
-        "round": 5,
+        "round": 3,
         "time": "5:00"
       },
       {
@@ -1254,7 +1254,7 @@
       {
         "opponent": "Sean Strickland",
         "result": "L",
-        "method": "Decision (split)",
+        "method": "Decision (unanimous)",
         "event": "UFC 328: Chimaev vs. Strickland",
         "round": 5,
         "time": "5:00"
@@ -1341,9 +1341,17 @@
     "bio": "Sean Strickland is a two-time UFC Middleweight Champion and one of the most polarising figures in the sport. After his shock upset of Adesanya, he lost the belt twice to du Plessis before turning the tables on everyone — he knocked out Hernandez at UFC Fight Night and then stunned the undefeated Khamzat Chimaev via split decision at UFC 328 to reclaim the title. His volume boxing, iron chin, and relentless pressure make him uniquely difficult to finish.",
     "last5": [
       {
+        "opponent": "Anthony Hernandez",
+        "result": "W",
+        "method": "TKO",
+        "event": "UFC Fight Night: Strickland vs. Hernandez",
+        "round": 3,
+        "time": "2:23"
+      },
+      {
         "opponent": "Khamzat Chimaev",
         "result": "W",
-        "method": "Decision (split)",
+        "method": "Decision (unanimous)",
         "event": "UFC 328: Chimaev vs. Strickland",
         "round": 5,
         "time": "5:00"
@@ -1377,12 +1385,12 @@
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC 302: Makhachev vs. Poirier",
-        "round": 3,
+        "round": 5,
         "time": "5:00"
       },
       {
         "opponent": "Dricus du Plessis",
-        "result": "W",
+        "result": "L",
         "method": "Decision (split)",
         "event": "UFC 297: Strickland vs. du Plessis",
         "round": 5,
@@ -1555,12 +1563,12 @@
         "result": "L",
         "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Tsarukyan vs. Hooker",
-        "round": 5,
+        "round": 3,
         "time": "5:00"
       },
       {
         "opponent": "Jack Della Maddalena",
-        "result": "W",
+        "result": "L",
         "method": "Decision (unanimous)",
         "event": "UFC 315: Muhammad vs. Della Maddalena",
         "round": 5,
@@ -1643,9 +1651,9 @@
       {
         "opponent": "Carlos Prates",
         "result": "L",
-        "method": "TKO R3 3:17",
+        "method": "TKO",
         "event": "UFC Fight Night: Della Maddalena vs. Prates",
-        "round": null,
+        "round": 3,
         "time": null
       },
       {
@@ -1658,7 +1666,7 @@
       },
       {
         "opponent": "Belal Muhammad",
-        "result": "L",
+        "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC 315: Muhammad vs. Della Maddalena",
         "round": 5,
@@ -1758,7 +1766,7 @@
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC 296: Edwards vs. Covington",
-        "round": 3,
+        "round": 2,
         "time": "5:00"
       },
       {
@@ -2161,7 +2169,7 @@
       {
         "opponent": "Ilia Topuria",
         "result": "L",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC 317: Topuria vs. Oliveira",
         "round": 1,
         "time": "2:27"
@@ -2171,7 +2179,7 @@
         "result": "W",
         "method": "Sub",
         "event": "UFC 309: Jones vs. Miocic",
-        "round": 3,
+        "round": 5,
         "time": "4:59"
       },
       {
@@ -2250,9 +2258,9 @@
       {
         "opponent": "Paddy Pimblett",
         "result": "W",
-        "method": "TKO",
+        "method": "Decision (unanimous)",
         "event": "UFC 324: Gaethje vs. Pimblett",
-        "round": 3,
+        "round": 5,
         "time": "2:14"
       },
       {
@@ -2338,7 +2346,7 @@
       {
         "opponent": "Charles Oliveira",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC 317: Topuria vs. Oliveira",
         "round": 1,
         "time": "2:27"
@@ -2428,7 +2436,7 @@
       {
         "opponent": "Conor McGregor",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "TKO",
         "event": "UFC 329: McGregor vs. Holloway 2",
         "round": 1,
         "time": null
@@ -2581,10 +2589,10 @@
       },
       {
         "opponent": "Diego Lopes",
-        "result": "L",
+        "result": "W",
         "method": "TKO",
         "event": "UFC 314: Volkanovski vs. Lopes",
-        "round": 4,
+        "round": 5,
         "time": "3:22"
       },
       {
@@ -2663,7 +2671,7 @@
       {
         "opponent": "Lerone Murphy",
         "result": "W",
-        "method": "Decision (majority)",
+        "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Evloev vs. Murphy",
         "round": 5,
         "time": "5:00"
@@ -2744,9 +2752,9 @@
       {
         "opponent": "Arnold Allen",
         "result": "W",
-        "method": "KO",
+        "method": "Decision (unanimous)",
         "event": "UFC 324: Gaethje vs. Pimblett",
-        "round": 1,
+        "round": 3,
         "time": "1:44"
       },
       {
@@ -2866,9 +2874,9 @@
       {
         "opponent": "Sean O'Malley",
         "result": "W",
-        "method": "Decision (unanimous)",
+        "method": "Sub",
         "event": "UFC 316: Dvalishvili vs. O'Malley 2",
-        "round": 5,
+        "round": 3,
         "time": "5:00"
       },
       {
@@ -2994,7 +3002,7 @@
       },
       {
         "opponent": "Song Yadong",
-        "result": "L",
+        "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC 299: O'Malley vs. Vera 2",
         "round": 3,
@@ -3070,7 +3078,7 @@
         "result": "L",
         "method": "Decision (unanimous)",
         "event": "UFC 329: McGregor vs. Holloway 2",
-        "round": null,
+        "round": 3,
         "time": null
       },
       {
@@ -3341,9 +3349,9 @@
       {
         "opponent": "Joshua Van",
         "result": "L",
-        "method": "Sub",
+        "method": "TKO",
         "event": "UFC 323: Dvalishvili vs. Yan 2",
-        "round": 4,
+        "round": 1,
         "time": "3:22"
       },
       {
@@ -3359,7 +3367,7 @@
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC 310: Pantoja vs. Asakura",
-        "round": 5,
+        "round": 2,
         "time": "5:00"
       },
       {
@@ -3454,9 +3462,9 @@
       {
         "opponent": "Alexandre Pantoja",
         "result": "W",
-        "method": "Sub",
+        "method": "TKO",
         "event": "UFC 323: Dvalishvili vs. Yan 2",
-        "round": 4,
+        "round": 1,
         "time": "3:22"
       },
       {
@@ -3469,10 +3477,10 @@
       },
       {
         "opponent": "Bruno Silva",
-        "result": "L",
-        "method": "KO",
+        "result": "W",
+        "method": "TKO",
         "event": "UFC 316: Dvalishvili vs. O'Malley 2",
-        "round": 2,
+        "round": 3,
         "time": "2:10"
       },
       {
@@ -3543,9 +3551,9 @@
       {
         "opponent": "Tatsuro Taira",
         "result": "L",
-        "method": "Decision (unanimous)",
+        "method": "TKO",
         "event": "UFC 323: Dvalishvili vs. Yan 2",
-        "round": 3,
+        "round": 2,
         "time": "5:00"
       },
       {
@@ -3714,14 +3722,14 @@
       {
         "opponent": "Maycee Barber",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC Fight Night: Adesanya vs. Pyfer",
         "round": 1,
         "time": "2:42"
       },
       {
         "opponent": "Natalia Silva",
-        "result": "W",
+        "result": "L",
         "method": "Decision (unanimous)",
         "event": "UFC 315: Muhammad vs. Della Maddalena",
         "round": 3,
@@ -3822,7 +3830,7 @@
         "result": "W",
         "method": "TKO",
         "event": "UFC 300: Pereira vs. Hill",
-        "round": 3,
+        "round": 5,
         "time": "4:02"
       },
       {
@@ -3976,7 +3984,7 @@
     "last5": [
       {
         "opponent": "Julianna Peña",
-        "result": "W",
+        "result": "L",
         "method": "Decision (unanimous)",
         "event": "UFC 307: Pereira vs. Rountree",
         "round": 5,
@@ -4060,14 +4068,14 @@
       {
         "opponent": "Kayla Harrison",
         "result": "L",
-        "method": "Decision (unanimous)",
+        "method": "Sub",
         "event": "UFC 316: Dvalishvili vs. O'Malley 2",
-        "round": 5,
+        "round": 2,
         "time": "5:00"
       },
       {
         "opponent": "Raquel Pennington",
-        "result": "L",
+        "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC 307: Pereira vs. Rountree",
         "round": 5,
@@ -4549,7 +4557,7 @@
       {
         "opponent": "Max Holloway",
         "result": "L",
-        "method": "KO/TKO",
+        "method": "TKO",
         "event": "UFC 329: McGregor vs. Holloway 2",
         "round": 1,
         "time": null
@@ -5408,9 +5416,9 @@
       {
         "opponent": "Payton Talbott",
         "result": "L",
-        "method": "TKO",
+        "method": "Decision (unanimous)",
         "event": "UFC 323: Dvalishvili vs. Yan 2",
-        "round": 2,
+        "round": 3,
         "time": "4:55"
       },
       {
@@ -6504,7 +6512,7 @@
       {
         "opponent": "Jiří Procházka",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC 327: Procházka vs. Ulberg",
         "round": 1,
         "time": "3:45"
@@ -6512,7 +6520,7 @@
       {
         "opponent": "Dominick Reyes",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC Fight Night: Ulberg vs. Reyes",
         "round": 1,
         "time": "4:27"
@@ -6625,15 +6633,15 @@
       {
         "opponent": "Jack Della Maddalena",
         "result": "W",
-        "method": "TKO R3 3:17",
+        "method": "TKO",
         "event": "UFC Fight Night: Della Maddalena vs. Prates",
-        "round": null,
+        "round": 3,
         "time": null
       },
       {
         "opponent": "Geoff Neal",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC 319: Du Plessis vs. Chimaev",
         "round": 1,
         "time": "4:59"
@@ -6651,7 +6659,7 @@
         "result": "W",
         "method": "TKO",
         "event": "UFC 305: du Plessis vs. Adesanya",
-        "round": 1,
+        "round": 2,
         "time": "2:35"
       },
       {
@@ -6730,9 +6738,9 @@
       {
         "opponent": "Rafael Fiziev",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC 325: Volkanovski vs. Lopes 2",
-        "round": 1,
+        "round": 2,
         "time": "2:10"
       },
       {
@@ -6746,10 +6754,10 @@
       {
         "opponent": "Benoît Saint Denis",
         "result": "L",
-        "method": "Submission (face crank)",
+        "method": "Sub",
         "event": "UFC Fight Night: Imavov vs. Borralho",
         "round": 2,
-        "time": "2:56"
+        "time": "2:15"
       },
       {
         "opponent": "King Green",
@@ -6940,18 +6948,18 @@
       },
       {
         "opponent": "Song Yadong",
-        "result": "L",
+        "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC 324: Gaethje vs. Pimblett",
-        "round": 5,
+        "round": 3,
         "time": "5:00"
       },
       {
         "opponent": "Merab Dvalishvili",
         "result": "L",
-        "method": "Decision (unanimous)",
+        "method": "Sub",
         "event": "UFC 316: Dvalishvili vs. O'Malley 2",
-        "round": 5,
+        "round": 3,
         "time": "5:00"
       },
       {
@@ -7047,9 +7055,9 @@
       {
         "opponent": "Mauricio Ruffy",
         "result": "W",
-        "method": "KO",
+        "method": "Sub",
         "event": "UFC Fight Night: Imavov vs. Borralho",
-        "round": 1,
+        "round": 2,
         "time": "2:15"
       },
       {
@@ -7153,7 +7161,7 @@
       {
         "opponent": "Robert Whittaker",
         "result": "L",
-        "method": "KO/TKO",
+        "method": "TKO",
         "event": "UFC 329: McGregor vs. Holloway 2",
         "round": 3,
         "time": null
@@ -7161,15 +7169,15 @@
       {
         "opponent": "Modestas Bukauskas",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC 324: Gaethje vs. Pimblett",
-        "round": 1,
+        "round": 3,
         "time": "2:10"
       },
       {
         "opponent": "Bogdan Guskov",
         "result": "L",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC Fight Night: Whittaker vs. de Ridder",
         "round": 1,
         "time": "4:18"
@@ -7277,7 +7285,7 @@
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC 329: McGregor vs. Holloway 2",
-        "round": null,
+        "round": 3,
         "time": null
       },
       {
@@ -7299,7 +7307,7 @@
       {
         "opponent": "Vinicius Oliveira",
         "result": "W",
-        "method": "Submission (rear-naked choke)",
+        "method": "Sub",
         "event": "UFC Fight Night: Bautista vs. Oliveira",
         "round": 2,
         "time": "4:46"
@@ -7397,7 +7405,7 @@
       {
         "opponent": "Elisha Ellison",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "TKO",
         "event": "UFC 329: McGregor vs. Holloway 2",
         "round": 1,
         "time": null
@@ -7637,10 +7645,10 @@
       {
         "opponent": "Kyoji Horiguchi",
         "result": "W",
-        "method": "TKO (punches)",
+        "method": "TKO",
         "event": "UFC Fight Night: Kape vs. Horiguchi",
         "round": 3,
-        "time": "2:42"
+        "time": null
       },
       {
         "opponent": "Brandon Royval",
@@ -7756,9 +7764,9 @@
       {
         "opponent": "Brandon Moreno",
         "result": "W",
-        "method": "Decision (unanimous)",
+        "method": "TKO",
         "event": "UFC 323: Dvalishvili vs. Yan 2",
-        "round": 3,
+        "round": 2,
         "time": "5:00"
       },
       {
@@ -8263,7 +8271,7 @@
         "result": "L",
         "method": "TKO",
         "event": "UFC 306: O'Malley vs. Dvalishvili",
-        "round": 2,
+        "round": 3,
         "time": "3:55"
       },
       {
@@ -8357,9 +8365,9 @@
       {
         "opponent": "Jean Silva",
         "result": "L",
-        "method": "KO",
+        "method": "Decision (unanimous)",
         "event": "UFC 324: Gaethje vs. Pimblett",
-        "round": 1,
+        "round": 3,
         "time": "1:44"
       },
       {
@@ -8453,7 +8461,7 @@
       {
         "opponent": "Movsar Evloev",
         "result": "L",
-        "method": "Decision (majority)",
+        "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Evloev vs. Murphy",
         "round": 5,
         "time": "5:00"
@@ -8461,7 +8469,7 @@
       {
         "opponent": "Aaron Pico",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC 319: Du Plessis vs. Chimaev",
         "round": 1,
         "time": "3:21"
@@ -8829,9 +8837,9 @@
       {
         "opponent": "Justin Gaethje",
         "result": "L",
-        "method": "TKO",
+        "method": "Decision (unanimous)",
         "event": "UFC 324: Gaethje vs. Pimblett",
-        "round": 3,
+        "round": 5,
         "time": "2:14"
       },
       {
@@ -8972,7 +8980,7 @@
       {
         "opponent": "Chris Duncan",
         "result": "W",
-        "method": "Sub (RNC)",
+        "method": "Sub",
         "event": "UFC Fight Night: Moicano vs. Duncan",
         "round": 2,
         "time": "3:14"
@@ -9118,7 +9126,7 @@
         "result": "L",
         "method": "Sub",
         "event": "UFC 309: Jones vs. Miocic",
-        "round": 3,
+        "round": 5,
         "time": "4:59"
       },
       {
@@ -9190,7 +9198,7 @@
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Tsarukyan vs. Hooker",
-        "round": 5,
+        "round": 3,
         "time": "5:00"
       },
       {
@@ -9404,7 +9412,7 @@
       {
         "opponent": "Mike Malott",
         "result": "L",
-        "method": "TKO (Punches)",
+        "method": "TKO",
         "event": "UFC Fight Night: Burns vs. Malott",
         "round": 3,
         "time": "2:08"
@@ -9684,7 +9692,7 @@
         "result": "W",
         "method": "TKO",
         "event": "UFC 309: Jones vs. Miocic",
-        "round": 2,
+        "round": 3,
         "time": "3:22"
       },
       {
@@ -9692,7 +9700,7 @@
         "result": "W",
         "method": "TKO",
         "event": "UFC 300: Pereira vs. Hill",
-        "round": 1,
+        "round": 2,
         "time": "1:18"
       },
       {
@@ -9778,7 +9786,7 @@
       {
         "opponent": "Reinier de Ridder",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC Fight Night: de Ridder vs. Allen",
         "round": 4,
         "time": "5:00"
@@ -9932,7 +9940,7 @@
         "result": "L",
         "method": "Decision (unanimous)",
         "event": "UFC 302: Makhachev vs. Poirier",
-        "round": 3,
+        "round": 5,
         "time": "5:00"
       },
       {
@@ -9940,7 +9948,7 @@
         "result": "L",
         "method": "Decision (unanimous)",
         "event": "UFC 298: Volkanovski vs. Topuria",
-        "round": 5,
+        "round": 3,
         "time": "5:00"
       },
       {
@@ -10340,7 +10348,7 @@
         "result": "L",
         "method": "TKO",
         "event": "UFC 308: Topuria vs. Holloway",
-        "round": 2,
+        "round": 3,
         "time": "3:47"
       },
       {
@@ -10538,7 +10546,7 @@
       {
         "opponent": "Jailton Almeida",
         "result": "W",
-        "method": "Decision (split)",
+        "method": "Decision (unanimous)",
         "event": "UFC 321: Aspinall vs. Gane",
         "round": 3,
         "time": "5:00"
@@ -10634,7 +10642,7 @@
       {
         "opponent": "Tallison Teixeira",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC Fight Night: Lewis vs. Teixeira",
         "round": 1,
         "time": "0:35"
@@ -10722,7 +10730,7 @@
       {
         "opponent": "Shamil Gaziev",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC Fight Night: Tsarukyan vs. Hooker",
         "round": 1,
         "time": "1:22"
@@ -10730,7 +10738,7 @@
       {
         "opponent": "Ante Delija",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC Fight Night: Garcia vs. Onama",
         "round": 1,
         "time": "3:59"
@@ -10745,7 +10753,7 @@
       },
       {
         "opponent": "Serghei Spivac",
-        "result": "L",
+        "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC 316: Dvalishvili vs. O'Malley 2",
         "round": 3,
@@ -10926,7 +10934,7 @@
         "result": "L",
         "method": "TKO",
         "event": "UFC 300: Pereira vs. Hill",
-        "round": 3,
+        "round": 5,
         "time": "4:02"
       },
       {
@@ -11150,10 +11158,10 @@
       },
       {
         "opponent": "Jessica Andrade",
-        "result": "W",
+        "result": "L",
         "method": "Decision (unanimous)",
         "event": "UFC 295: Prochazka vs. Pereira 2",
-        "round": 3,
+        "round": 2,
         "time": "5:00"
       },
       {
@@ -11167,7 +11175,7 @@
       {
         "opponent": "Amanda Ribas",
         "result": "W",
-        "method": "Submission (armbar)",
+        "method": "Sub",
         "event": "UFC Fight Night: Dern vs. Ribas 2",
         "round": 3,
         "time": "4:56"
@@ -11264,7 +11272,7 @@
     "last5": [
       {
         "opponent": "Alexa Grasso",
-        "result": "L",
+        "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC 315: Muhammad vs. Della Maddalena",
         "round": 3,
@@ -11364,7 +11372,7 @@
       {
         "opponent": "Jasmine Jasudavicius",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC Fight Night: de Ridder vs. Allen",
         "round": 1,
         "time": "1:14"
@@ -11455,9 +11463,9 @@
       {
         "opponent": "Tracy Cortez",
         "result": "W",
-        "method": "Decision (unanimous)",
+        "method": "Sub",
         "event": "UFC 322: Della Maddalena vs. Makhachev",
-        "round": 3,
+        "round": 2,
         "time": "5:00"
       },
       {
@@ -11577,7 +11585,7 @@
       {
         "opponent": "Alexa Grasso",
         "result": "L",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC Fight Night: Adesanya vs. Pyfer",
         "round": 1,
         "time": "2:42"
@@ -11722,9 +11730,9 @@
       {
         "opponent": "Julianna Peña",
         "result": "W",
-        "method": "Decision (unanimous)",
+        "method": "Sub",
         "event": "UFC 316: Dvalishvili vs. O'Malley 2",
-        "round": 5,
+        "round": 2,
         "time": "5:00"
       },
       {
@@ -11732,7 +11740,7 @@
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC 300: Pereira vs. Hill",
-        "round": 3,
+        "round": 2,
         "time": "5:00"
       },
       {
@@ -11903,7 +11911,7 @@
       {
         "opponent": "Marlon Vera",
         "result": "W",
-        "method": "Decision (split)",
+        "method": "Decision (unanimous)",
         "event": "UFC Fight Night: de Ridder vs. Allen",
         "round": 3,
         "time": "5:00"
@@ -11966,7 +11974,7 @@
         "result": "W",
         "method": "Sub",
         "event": "UFC 322: Della Maddalena vs. Makhachev",
-        "round": 2,
+        "round": 1,
         "time": "3:15"
       },
       {
@@ -11980,10 +11988,10 @@
       {
         "opponent": "Michel Pereira",
         "result": "W",
-        "method": "KO (punches and elbows)",
+        "method": "KO",
         "event": "UFC Fight Night: Walker vs. Zhang",
         "round": 1,
-        "time": "0:43"
+        "time": "4:58"
       },
       {
         "opponent": "Keanan Patershuk",
@@ -12055,10 +12063,10 @@
       },
       {
         "opponent": "Alexander Volkanovski",
-        "result": "W",
+        "result": "L",
         "method": "TKO",
         "event": "UFC 314: Volkanovski vs. Lopes",
-        "round": 4,
+        "round": 5,
         "time": "3:22"
       },
       {
@@ -12066,7 +12074,7 @@
         "result": "W",
         "method": "TKO",
         "event": "UFC 306: O'Malley vs. Dvalishvili",
-        "round": 2,
+        "round": 3,
         "time": "3:55"
       },
       {
@@ -12156,7 +12164,7 @@
       {
         "opponent": "David Onama",
         "result": "W",
-        "method": "TKO (punches)",
+        "method": "TKO",
         "event": "UFC Fight Night: Garcia vs. Onama",
         "round": 1,
         "time": "3:34"
@@ -12225,9 +12233,9 @@
       {
         "opponent": "Denzel Freeman",
         "result": "W",
-        "method": "Decision (unanimous)",
+        "method": "TKO",
         "event": "UFC 324: Gaethje vs. Pimblett",
-        "round": 3,
+        "round": 1,
         "time": "5:00"
       },
       {
@@ -12285,10 +12293,10 @@
       {
         "opponent": "Manel Kape",
         "result": "L",
-        "method": "TKO (punches)",
+        "method": "TKO",
         "event": "UFC Fight Night: Kape vs. Horiguchi",
         "round": 3,
-        "time": "2:42"
+        "time": null
       },
       {
         "opponent": "Amir Albazi",
@@ -12301,7 +12309,7 @@
       {
         "opponent": "Tagir Ulanbekov",
         "result": "W",
-        "method": "Technical Submission (rear-naked choke)",
+        "method": "Sub",
         "event": "UFC Fight Night: Tsarukyan vs. Hooker",
         "round": 3,
         "time": "2:18"
@@ -12394,7 +12402,7 @@
       {
         "opponent": "Mario Bautista",
         "result": "L",
-        "method": "Submission (rear-naked choke)",
+        "method": "Sub",
         "event": "UFC Fight Night: Bautista vs. Oliveira",
         "round": 2,
         "time": "4:46"
@@ -12447,7 +12455,7 @@
       {
         "opponent": "Mario Pinto",
         "result": "L",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC Fight Night: Oliveira vs. Gamrot",
         "round": 2,
         "time": "4:10"
@@ -12584,7 +12592,7 @@
         "result": "L",
         "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Kape vs. Horiguchi",
-        "round": null,
+        "round": 3,
         "time": null
       },
       {
@@ -12642,7 +12650,7 @@
       {
         "opponent": "Navajo Stirling",
         "result": "L",
-        "method": "KO/TKO",
+        "method": "TKO",
         "event": "UFC Fight Night: Kape vs. Horiguchi",
         "round": 2,
         "time": null
@@ -12711,7 +12719,7 @@
       {
         "opponent": "Ion Cutelaba",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "TKO",
         "event": "UFC Fight Night: Kape vs. Horiguchi",
         "round": 2,
         "time": null
@@ -12819,7 +12827,7 @@
       {
         "opponent": "Jean Matsumoto",
         "result": "W",
-        "method": "Decision (split)",
+        "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Bautista vs. Oliveira",
         "round": 3,
         "time": "5:00"
@@ -12983,7 +12991,7 @@
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Kape vs. Horiguchi",
-        "round": null,
+        "round": 3,
         "time": null
       },
       {
@@ -13112,7 +13120,7 @@
         "result": "L",
         "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Kape vs. Horiguchi",
-        "round": null,
+        "round": 3,
         "time": null
       },
       {
@@ -13248,7 +13256,7 @@
       {
         "opponent": "Andre Fili",
         "result": "L",
-        "method": "Decision (split)",
+        "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Dolidze vs. Hernandez",
         "round": 3,
         "time": "5:00"
@@ -13356,7 +13364,7 @@
       {
         "opponent": "Jean Silva",
         "result": "L",
-        "method": "TKO (punches and elbows)",
+        "method": "KO",
         "event": "UFC Fight Night: Cejudo vs. Song",
         "round": 1,
         "time": "4:15"
@@ -13472,7 +13480,7 @@
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Kape vs. Horiguchi",
-        "round": null,
+        "round": 3,
         "time": null
       },
       {
@@ -13531,7 +13539,7 @@
       {
         "opponent": "Manuel Torres",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "TKO",
         "event": "UFC Fight Night: Fiziev vs. Torres",
         "round": 2,
         "time": null
@@ -13539,9 +13547,9 @@
       {
         "opponent": "Mauricio Ruffy",
         "result": "L",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC 325: Volkanovski vs. Lopes 2",
-        "round": 1,
+        "round": 2,
         "time": "2:10"
       },
       {
@@ -13656,7 +13664,7 @@
       {
         "opponent": "Rafael Fiziev",
         "result": "L",
-        "method": "KO/TKO",
+        "method": "TKO",
         "event": "UFC Fight Night: Fiziev vs. Torres",
         "round": 2,
         "time": null
@@ -13664,7 +13672,7 @@
       {
         "opponent": "Grant Dawson",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC 323: Dvalishvili vs. Yan 2",
         "round": 1,
         "time": "0:44"
@@ -13767,7 +13775,7 @@
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Fiziev vs. Torres",
-        "round": null,
+        "round": 3,
         "time": null
       },
       {
@@ -13900,7 +13908,7 @@
         "result": "L",
         "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Fiziev vs. Torres",
-        "round": null,
+        "round": 3,
         "time": null
       },
       {
@@ -13916,7 +13924,7 @@
         "result": "W",
         "method": "TKO",
         "event": "UFC 301: Pantoja vs. Erceg",
-        "round": 2,
+        "round": 1,
         "time": "3:30"
       },
       {
@@ -13930,10 +13938,10 @@
       {
         "opponent": "Kyle Daukaus",
         "result": "L",
-        "method": "KO (punches and elbows)",
+        "method": "KO",
         "event": "UFC Fight Night: Walker vs. Zhang",
         "round": 1,
-        "time": "0:43"
+        "time": "4:58"
       },
       {
         "opponent": "Abusupiyan Magomedov",
@@ -14070,7 +14078,7 @@
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Fiziev vs. Torres",
-        "round": null,
+        "round": 3,
         "time": null
       },
       {
@@ -14317,9 +14325,9 @@
       {
         "opponent": "Alex Perez",
         "result": "L",
-        "method": "Decision (unanimous)",
+        "method": "TKO",
         "event": "UFC 324: Gaethje vs. Pimblett",
-        "round": 3,
+        "round": 1,
         "time": "5:00"
       },
       {
@@ -14341,10 +14349,10 @@
       {
         "opponent": "Lone'er Kavanagh",
         "result": "W",
-        "method": "KO (punch)",
+        "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Walker vs. Zhang",
-        "round": 2,
-        "time": "4:35"
+        "round": 3,
+        "time": "5:00"
       },
       {
         "opponent": "Ramazan Temirov",
@@ -14642,7 +14650,7 @@
       {
         "opponent": "Curtis Blaydes",
         "result": "L",
-        "method": "Decision (split)",
+        "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Hill vs. Rountree Jr.",
         "round": 3,
         "time": "5:00"
@@ -14951,9 +14959,9 @@
       {
         "opponent": "Ateba Gautier",
         "result": "L",
-        "method": "TKO",
+        "method": "Decision (unanimous)",
         "event": "UFC 324: Gaethje vs. Pimblett",
-        "round": 1,
+        "round": 3,
         "time": "1:41"
       },
       {
@@ -15013,7 +15021,7 @@
         "result": "L",
         "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Fiziev vs. Torres",
-        "round": null,
+        "round": 3,
         "time": null
       },
       {
@@ -15114,13 +15122,13 @@
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Fiziev vs. Torres",
-        "round": null,
+        "round": 3,
         "time": null
       },
       {
         "opponent": "Farid Basharat",
         "result": "L",
-        "method": "Decision (split)",
+        "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Bautista vs. Oliveira",
         "round": 3,
         "time": "5:00"
@@ -15128,7 +15136,7 @@
       {
         "opponent": "Miles Johns",
         "result": "W",
-        "method": "Decision (split)",
+        "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Dolidze vs. Hernandez",
         "round": 3,
         "time": "5:00"
@@ -15203,10 +15211,10 @@
     "last5": [
       {
         "opponent": "Khaos Williams",
-        "result": "L",
-        "method": "KO",
+        "result": "W",
+        "method": "Decision (unanimous)",
         "event": "UFC 316: Dvalishvili vs. O'Malley 2",
-        "round": 1,
+        "round": 3,
         "time": "1:45"
       },
       {
@@ -15265,7 +15273,7 @@
       {
         "opponent": "Matheus Camilo",
         "result": "L",
-        "method": "KO/TKO",
+        "method": "TKO",
         "event": "UFC Fight Night: Fiziev vs. Torres",
         "round": 1,
         "time": null
@@ -15273,7 +15281,7 @@
       {
         "opponent": "Nikolas Motta",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC Fight Night: Hill vs. Rountree Jr.",
         "round": 2,
         "time": "4:17"
@@ -15390,7 +15398,7 @@
       {
         "opponent": "Nazim Sadykhov",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "TKO",
         "event": "UFC Fight Night: Fiziev vs. Torres",
         "round": 1,
         "time": null
@@ -15398,9 +15406,9 @@
       {
         "opponent": "Viacheslav Borshchev",
         "result": "W",
-        "method": "KO",
+        "method": "Decision (unanimous)",
         "event": "UFC 322: Della Maddalena vs. Makhachev",
-        "round": 1,
+        "round": 3,
         "time": "0:55"
       },
       {
@@ -15461,7 +15469,7 @@
         "result": "L",
         "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Fiziev vs. Torres",
-        "round": null,
+        "round": 3,
         "time": null
       },
       {
@@ -15687,7 +15695,7 @@
       {
         "opponent": "Adrian Yanez",
         "result": "L",
-        "method": "KO/TKO",
+        "method": "TKO",
         "event": "UFC 329: McGregor vs. Holloway 2",
         "round": 1,
         "time": null
@@ -15713,7 +15721,7 @@
         "result": "L",
         "method": "KO",
         "event": "UFC 300: Pereira vs. Hill",
-        "round": 1,
+        "round": 2,
         "time": "0:56"
       },
       {
@@ -15812,7 +15820,7 @@
       {
         "opponent": "Cody Garbrandt",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "TKO",
         "event": "UFC 329: McGregor vs. Holloway 2",
         "round": 1,
         "time": null
@@ -15836,7 +15844,7 @@
       {
         "opponent": "Vinicius Salvador",
         "result": "W",
-        "method": "TKO (punches)",
+        "method": "KO",
         "event": "UFC Fight Night: Barboza vs. Murphy",
         "round": 1,
         "time": "2:47"
@@ -15922,15 +15930,15 @@
         "result": "L",
         "method": "Decision (unanimous)",
         "event": "UFC 329: McGregor vs. Holloway 2",
-        "round": null,
+        "round": 3,
         "time": null
       },
       {
         "opponent": "Erin Blanchfield",
         "result": "L",
-        "method": "Decision (unanimous)",
+        "method": "Sub",
         "event": "UFC 322: Della Maddalena vs. Makhachev",
-        "round": 3,
+        "round": 2,
         "time": "5:00"
       },
       {
@@ -16038,7 +16046,7 @@
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC 329: McGregor vs. Holloway 2",
-        "round": null,
+        "round": 3,
         "time": null
       },
       {
@@ -16076,7 +16084,7 @@
       {
         "opponent": "Gabriella Fernandes",
         "result": "L",
-        "method": "Technical Submission (rear-naked choke)",
+        "method": "Sub",
         "event": "UFC Fight Night: Yan vs. Figueiredo",
         "round": 2,
         "time": "3:49"
@@ -16137,7 +16145,7 @@
       {
         "opponent": "Luke Riley",
         "result": "L",
-        "method": "KO/TKO",
+        "method": "TKO",
         "event": "UFC 329: McGregor vs. Holloway 2",
         "round": 1,
         "time": null
@@ -16238,7 +16246,7 @@
       {
         "opponent": "Kai Kamaka III",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "TKO",
         "event": "UFC 329: McGregor vs. Holloway 2",
         "round": 1,
         "time": null
@@ -16306,7 +16314,7 @@
       {
         "opponent": "Cesar Almeida",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "TKO",
         "event": "UFC 329: McGregor vs. Holloway 2",
         "round": 1,
         "time": null
@@ -16367,7 +16375,7 @@
       {
         "opponent": "Damian Pinas",
         "result": "L",
-        "method": "KO/TKO",
+        "method": "TKO",
         "event": "UFC 329: McGregor vs. Holloway 2",
         "round": 1,
         "time": null
@@ -16399,7 +16407,7 @@
       {
         "opponent": "Abdul Razak Alhassan",
         "result": "W",
-        "method": "KO (punch)",
+        "method": "KO",
         "event": "UFC Fight Night: Dern vs. Ribas 2",
         "round": 1,
         "time": "4:16"
@@ -16540,7 +16548,7 @@
       {
         "opponent": "Allan Nascimento",
         "result": "L",
-        "method": "Submission (anaconda choke)",
+        "method": "Sub",
         "event": "UFC Fight Night: Garcia vs. Onama",
         "round": 2,
         "time": "3:13"
@@ -16564,7 +16572,7 @@
       {
         "opponent": "Matt Schnell",
         "result": "W",
-        "method": "Submission (ninja choke)",
+        "method": "Sub",
         "event": "UFC Fight Night: Burns vs. Brady",
         "round": 2,
         "time": "0:29"
@@ -16622,6 +16630,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Alibi Idiris",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Strickland vs. Hernandez",
+        "round": 3,
+        "time": "5:00"
+      },
       {
         "opponent": "Vinicius Salvador",
         "result": "L",
@@ -16742,10 +16758,10 @@
       },
       {
         "opponent": "Sean O'Malley",
-        "result": "W",
+        "result": "L",
         "method": "Decision (unanimous)",
         "event": "UFC 324: Gaethje vs. Pimblett",
-        "round": 5,
+        "round": 3,
         "time": "5:00"
       },
       {
@@ -16758,7 +16774,7 @@
       },
       {
         "opponent": "Petr Yan",
-        "result": "W",
+        "result": "L",
         "method": "Decision (unanimous)",
         "event": "UFC 299: O'Malley vs. Vera 2",
         "round": 3,
@@ -16978,7 +16994,7 @@
         "result": "W",
         "method": "KO",
         "event": "UFC 300: Pereira vs. Hill",
-        "round": 1,
+        "round": 2,
         "time": "0:56"
       },
       {
@@ -16992,10 +17008,10 @@
       {
         "opponent": "Song Yadong",
         "result": "L",
-        "method": "Submission (guillotine choke)",
+        "method": "Sub",
         "event": "UFC Fight Night: Song vs. Figueiredo",
         "round": 2,
-        "time": "4:42"
+        "time": null
       },
       {
         "opponent": "Umar Nurmagomedov",
@@ -17008,7 +17024,7 @@
       {
         "opponent": "Montel Jackson",
         "result": "W",
-        "method": "Decision (split)",
+        "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Oliveira vs. Gamrot",
         "round": 3,
         "time": "5:00"
@@ -17093,9 +17109,9 @@
       {
         "opponent": "Nikita Krylov",
         "result": "L",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC 324: Gaethje vs. Pimblett",
-        "round": 1,
+        "round": 3,
         "time": "2:10"
       },
       {
@@ -17141,7 +17157,7 @@
       {
         "opponent": "Paul Craig",
         "result": "W",
-        "method": "KO (elbow)",
+        "method": "TKO",
         "event": "UFC Fight Night: Imavov vs. Borralho",
         "round": 1,
         "time": "5:00"
@@ -17218,9 +17234,9 @@
       {
         "opponent": "Charles Johnson",
         "result": "W",
-        "method": "Decision (unanimous)",
+        "method": "TKO",
         "event": "UFC 324: Gaethje vs. Pimblett",
-        "round": 3,
+        "round": 1,
         "time": "5:00"
       },
       {
@@ -17371,7 +17387,7 @@
       {
         "opponent": "Kai Asakura",
         "result": "L",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC Fight Night: Song vs. Figueiredo",
         "round": 1,
         "time": null
@@ -17415,7 +17431,7 @@
       {
         "opponent": "Ozzy Diaz",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC 328: Chimaev vs. Strickland",
         "round": 2,
         "time": "1:30"
@@ -17423,9 +17439,9 @@
       {
         "opponent": "Andrey Pulyaev",
         "result": "W",
-        "method": "TKO",
+        "method": "Decision (unanimous)",
         "event": "UFC 324: Gaethje vs. Pimblett",
-        "round": 1,
+        "round": 3,
         "time": "1:41"
       },
       {
@@ -17541,9 +17557,9 @@
       {
         "opponent": "Josh Hokit",
         "result": "L",
-        "method": "Decision (unanimous)",
+        "method": "TKO",
         "event": "UFC 324: Gaethje vs. Pimblett",
-        "round": 3,
+        "round": 1,
         "time": "5:00"
       }
     ]
@@ -17593,7 +17609,7 @@
       {
         "opponent": "Arman Tsarukyan",
         "result": "L",
-        "method": "Submission (arm-triangle choke)",
+        "method": "Sub",
         "event": "UFC Fight Night: Tsarukyan vs. Hooker",
         "round": 2,
         "time": "3:34"
@@ -17678,15 +17694,15 @@
       {
         "opponent": "Tai Tuivasa",
         "result": "W",
-        "method": "TKO",
+        "method": "Decision (unanimous)",
         "event": "UFC 325: Volkanovski vs. Lopes 2",
-        "round": 2,
+        "round": 3,
         "time": "4:22"
       },
       {
         "opponent": "Derrick Lewis",
         "result": "L",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC Fight Night: Lewis vs. Teixeira",
         "round": 1,
         "time": "0:35"
@@ -17702,10 +17718,10 @@
       {
         "opponent": "Sergei Pavlovich",
         "result": "L",
-        "method": "KO (punches)",
+        "method": "TKO",
         "event": "UFC Fight Night: Song vs. Figueiredo",
         "round": 1,
-        "time": "0:39"
+        "time": null
       },
       {
         "opponent": "Tai Tuivasa",
@@ -17795,9 +17811,9 @@
       {
         "opponent": "Tallison Teixeira",
         "result": "L",
-        "method": "TKO",
+        "method": "Decision (unanimous)",
         "event": "UFC 325: Volkanovski vs. Lopes 2",
-        "round": 2,
+        "round": 3,
         "time": "4:22"
       },
       {
@@ -17904,15 +17920,15 @@
       {
         "opponent": "Jamie Mullarkey",
         "result": "W",
-        "method": "Decision (unanimous)",
+        "method": "Sub",
         "event": "UFC 325: Volkanovski vs. Lopes 2",
-        "round": 3,
+        "round": 1,
         "time": "5:00"
       },
       {
         "opponent": "Nasrat Haqparast",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC 321: Aspinall vs. Gane",
         "round": 1,
         "time": "2:22"
@@ -17920,10 +17936,10 @@
       {
         "opponent": "Beneil Dariush",
         "result": "W",
-        "method": "TKO (punches)",
+        "method": "TKO",
         "event": "UFC Fight Night: Della Maddalena vs. Prates",
         "round": 1,
-        "time": "3:29"
+        "time": null
       },
       {
         "opponent": "Jamie Mullarkey",
@@ -18012,9 +18028,9 @@
       {
         "opponent": "Quillan Salkilld",
         "result": "L",
-        "method": "Decision (unanimous)",
+        "method": "Sub",
         "event": "UFC 325: Volkanovski vs. Lopes 2",
-        "round": 3,
+        "round": 1,
         "time": "5:00"
       },
       {
@@ -18121,9 +18137,9 @@
       {
         "opponent": "Junior Tafa",
         "result": "W",
-        "method": "Decision (unanimous)",
+        "method": "Sub",
         "event": "UFC 325: Volkanovski vs. Lopes 2",
-        "round": 3,
+        "round": 2,
         "time": "5:00"
       },
       {
@@ -18222,9 +18238,9 @@
       {
         "opponent": "Billy Elekana",
         "result": "L",
-        "method": "Decision (unanimous)",
+        "method": "Sub",
         "event": "UFC 325: Volkanovski vs. Lopes 2",
-        "round": 3,
+        "round": 2,
         "time": "5:00"
       },
       {
@@ -18238,18 +18254,18 @@
       {
         "opponent": "Iwo Baraniewski",
         "result": "L",
-        "method": "TKO (leg kick and punches)",
+        "method": "TKO",
         "event": "UFC Fight Night: Muhammad vs. Bonfim",
         "round": 1,
-        "time": "1:25"
+        "time": null
       },
       {
         "opponent": "Kevin Christian",
         "result": "W",
-        "method": "KO (punches and elbows)",
+        "method": "TKO",
         "event": "UFC Fight Night: Della Maddalena vs. Prates",
         "round": 1,
-        "time": "2:42"
+        "time": null
       },
       {
         "opponent": "Billy Elekana",
@@ -18325,15 +18341,15 @@
       {
         "opponent": "Robert Bryczek",
         "result": "W",
-        "method": "TKO",
+        "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Della Maddalena vs. Prates",
-        "round": null,
+        "round": 3,
         "time": null
       },
       {
         "opponent": "Cody Brundage",
         "result": "W",
-        "method": "Sub",
+        "method": "TKO",
         "event": "UFC 325: Volkanovski vs. Lopes 2",
         "round": 2,
         "time": "2:33"
@@ -18361,7 +18377,7 @@
       {
         "opponent": "Donte Johnson",
         "result": "L",
-        "method": "Decision (split)",
+        "method": "Decision (unanimous)",
         "event": "UFC 326: Holloway vs. Oliveira 2",
         "round": 3,
         "time": "5:00"
@@ -18369,7 +18385,7 @@
       {
         "opponent": "Cam Rowston",
         "result": "L",
-        "method": "Sub",
+        "method": "TKO",
         "event": "UFC 325: Volkanovski vs. Lopes 2",
         "round": 2,
         "time": "2:33"
@@ -18403,7 +18419,7 @@
         "result": "L",
         "method": "TKO",
         "event": "UFC 300: Pereira vs. Hill",
-        "round": 1,
+        "round": 2,
         "time": "1:18"
       },
       {
@@ -18896,9 +18912,9 @@
       {
         "opponent": "Bruno Silva",
         "result": "W",
-        "method": "Decision (unanimous)",
+        "method": "TKO",
         "event": "UFC 315: Muhammad vs. Della Maddalena",
-        "round": 3,
+        "round": 1,
         "time": "5:00"
       },
       {
@@ -19021,7 +19037,7 @@
       {
         "opponent": "Julius Walker",
         "result": "W",
-        "method": "TKO (punches)",
+        "method": "TKO",
         "event": "UFC Fight Night: Bautista vs. Oliveira",
         "round": 2,
         "time": "1:42"
@@ -19115,7 +19131,7 @@
       {
         "opponent": "Abdul-Rakhman Yakhyaev",
         "result": "L",
-        "method": "KO/TKO",
+        "method": "TKO",
         "event": "UFC Fight Night: Fiziev vs. Torres",
         "round": 1,
         "time": null
@@ -19123,7 +19139,7 @@
       {
         "opponent": "Dustin Jacoby",
         "result": "L",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC Fight Night: Bautista vs. Oliveira",
         "round": 2,
         "time": "1:42"
@@ -19266,7 +19282,7 @@
       {
         "opponent": "King Green",
         "result": "L",
-        "method": "KO/TKO",
+        "method": "TKO",
         "event": "UFC 329: McGregor vs. Holloway 2",
         "round": 1,
         "time": null
@@ -19290,9 +19306,9 @@
       {
         "opponent": "Chris Duncan",
         "result": "L",
-        "method": "Decision (unanimous)",
+        "method": "Sub",
         "event": "UFC 323: Dvalishvili vs. Yan 2",
-        "round": 3,
+        "round": 1,
         "time": "5:00"
       },
       {
@@ -19439,7 +19455,7 @@
       {
         "opponent": "Bryan Battle",
         "result": "L",
-        "method": "TKO (punches)",
+        "method": "KO",
         "event": "UFC Fight Night: Moicano vs. Saint Denis",
         "round": 2,
         "time": "3:47"
@@ -19545,7 +19561,7 @@
       {
         "opponent": "Michael Johnson",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC 326: Holloway vs. Oliveira 2",
         "round": 2,
         "time": "1:53"
@@ -19683,7 +19699,7 @@
       {
         "opponent": "Vicente Luque",
         "result": "L",
-        "method": "Sub (D'Arce)",
+        "method": "Sub",
         "event": "UFC 327: Procházka vs. Ulberg",
         "round": 1,
         "time": "4:08"
@@ -19707,9 +19723,9 @@
       {
         "opponent": "Joe Pyfer",
         "result": "L",
-        "method": "TKO",
+        "method": "Decision (unanimous)",
         "event": "UFC 316: Dvalishvili vs. O'Malley 2",
-        "round": 2,
+        "round": 3,
         "time": "3:22"
       },
       {
@@ -19947,7 +19963,7 @@
       {
         "opponent": "Quang Le",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "Noche UFC: Lopes vs. Silva",
         "round": 1,
         "time": "2:48"
@@ -19955,10 +19971,10 @@
       {
         "opponent": "Bryce Mitchell",
         "result": "L",
-        "method": "Submission (arm-triangle choke)",
+        "method": "Sub",
         "event": "UFC Fight Night: Muhammad vs. Bonfim",
         "round": 3,
-        "time": "4:52"
+        "time": null
       },
       {
         "opponent": "Angel Pacheco",
@@ -20049,7 +20065,7 @@
       {
         "opponent": "Santiago Luna",
         "result": "L",
-        "method": "KO",
+        "method": "TKO",
         "event": "Noche UFC: Lopes vs. Silva",
         "round": 1,
         "time": "2:48"
@@ -20385,6 +20401,14 @@
     "nickname": "Grim",
     "last5": [
       {
+        "opponent": "Alden Coria",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Strickland vs. Hernandez",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
         "opponent": "Rei Tsuruya",
         "result": "L",
         "method": "Sub",
@@ -20421,6 +20445,14 @@
     },
     "nickname": "Cobra",
     "last5": [
+      {
+        "opponent": "Luis Gurule",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Strickland vs. Hernandez",
+        "round": 3,
+        "time": "5:00"
+      },
       {
         "opponent": "Alessandro Costa",
         "result": "W",
@@ -20497,7 +20529,7 @@
       {
         "opponent": "Robert Whittaker",
         "result": "W",
-        "method": "Decision (split)",
+        "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Whittaker vs. de Ridder",
         "round": 5,
         "time": "5:00"
@@ -20521,7 +20553,7 @@
       {
         "opponent": "Brendan Allen",
         "result": "L",
-        "method": "TKO (corner stoppage)",
+        "method": "TKO",
         "event": "UFC Fight Night: de Ridder vs. Allen",
         "round": 4,
         "time": "5:00"
@@ -20831,7 +20863,7 @@
       {
         "opponent": "Drew Dober",
         "result": "L",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC 326: Holloway vs. Oliveira 2",
         "round": 2,
         "time": "1:53"
@@ -20948,7 +20980,7 @@
       {
         "opponent": "Brunno Ferreira",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC 326: Holloway vs. Oliveira 2",
         "round": 1,
         "time": "1:47"
@@ -20964,7 +20996,7 @@
       {
         "opponent": "Jack Hermansson",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC 317: Topuria vs. Oliveira",
         "round": 1,
         "time": "4:21"
@@ -21076,13 +21108,13 @@
         "result": "L",
         "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Fiziev vs. Torres",
-        "round": null,
+        "round": 3,
         "time": null
       },
       {
         "opponent": "Gregory Rodrigues",
         "result": "L",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC 326: Holloway vs. Oliveira 2",
         "round": 1,
         "time": "1:47"
@@ -21117,7 +21149,7 @@
       {
         "opponent": "Cody Brundage",
         "result": "W",
-        "method": "Decision (split)",
+        "method": "Decision (unanimous)",
         "event": "UFC 326: Holloway vs. Oliveira 2",
         "round": 3,
         "time": "5:00"
@@ -21283,10 +21315,10 @@
       {
         "opponent": "Jonathan Micallef",
         "result": "L",
-        "method": "Decision (split)",
+        "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Della Maddalena vs. Prates",
         "round": 3,
-        "time": "5:00"
+        "time": null
       },
       {
         "opponent": "Jeremiah Wells",
@@ -21384,7 +21416,7 @@
       {
         "opponent": "Nikita Krylov",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC Fight Night: Whittaker vs. de Ridder",
         "round": 1,
         "time": "4:18"
@@ -21905,10 +21937,10 @@
       {
         "opponent": "Joanderson Brito",
         "result": "L",
-        "method": "Submission (ninja choke)",
+        "method": "Sub",
         "event": "UFC Fight Night: Muhammad vs. Bonfim",
         "round": 1,
-        "time": "4:19"
+        "time": null
       },
       {
         "opponent": "Yadier del Valle",
@@ -22020,9 +22052,9 @@
       {
         "opponent": "Terrance McKinney",
         "result": "W",
-        "method": "Decision (unanimous)",
+        "method": "Sub",
         "event": "UFC 323: Dvalishvili vs. Yan 2",
-        "round": 3,
+        "round": 1,
         "time": "5:00"
       },
       {
@@ -22036,7 +22068,7 @@
       {
         "opponent": "Renato Moicano",
         "result": "L",
-        "method": "Submission (face crank)",
+        "method": "Sub",
         "event": "UFC Fight Night: Moicano vs. Duncan",
         "round": 2,
         "time": "3:14"
@@ -22060,7 +22092,7 @@
       {
         "opponent": "Jordan Vucenic",
         "result": "W",
-        "method": "Submission (guillotine choke)",
+        "method": "Sub",
         "event": "UFC Fight Night: Edwards vs. Brady",
         "round": 2,
         "time": "3:42"
@@ -22496,10 +22528,10 @@
       {
         "opponent": "Shamil Gaziev",
         "result": "W",
-        "method": "KO (punch)",
+        "method": "TKO",
         "event": "UFC Fight Night: Della Maddalena vs. Prates",
         "round": 2,
-        "time": "3:44"
+        "time": null
       },
       {
         "opponent": "Louie Sutherland",
@@ -22595,9 +22627,9 @@
       {
         "opponent": "Kelvin Gastelum",
         "result": "W",
-        "method": "TKO",
+        "method": "Decision (unanimous)",
         "event": "UFC 316: Dvalishvili vs. O'Malley 2",
-        "round": 2,
+        "round": 3,
         "time": "3:22"
       },
       {
@@ -22627,7 +22659,7 @@
       {
         "opponent": "Israel Adesanya",
         "result": "W",
-        "method": "TKO (punches)",
+        "method": "TKO",
         "event": "UFC Fight Night: Adesanya vs. Pyfer",
         "round": 2,
         "time": "4:18"
@@ -22736,7 +22768,7 @@
       {
         "opponent": "Niko Price",
         "result": "W",
-        "method": "Submission (rear-naked choke)",
+        "method": "Sub",
         "event": "UFC Fight Night: Adesanya vs. Pyfer",
         "round": 1,
         "time": "1:03"
@@ -22829,7 +22861,7 @@
       {
         "opponent": "Lerryan Douglas",
         "result": "L",
-        "method": "KO (punches)",
+        "method": "TKO",
         "event": "UFC Fight Night: Adesanya vs. Pyfer",
         "round": 1,
         "time": "3:33"
@@ -22923,7 +22955,7 @@
       {
         "opponent": "Julian Erosa",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC Fight Night: Adesanya vs. Pyfer",
         "round": 1,
         "time": "3:33"
@@ -22963,7 +22995,7 @@
       {
         "opponent": "Mansur Abdul-Malik",
         "result": "W",
-        "method": "TKO (knee)",
+        "method": "TKO",
         "event": "UFC Fight Night: Adesanya vs. Pyfer",
         "round": 3,
         "time": "3:39"
@@ -23087,7 +23119,7 @@
       {
         "opponent": "Steve Garcia",
         "result": "L",
-        "method": "TKO (elbows and punches)",
+        "method": "KO",
         "event": "UFC Fight Night: Burns vs. Brady",
         "round": 1,
         "time": "3:59"
@@ -23381,7 +23413,7 @@
       {
         "opponent": "Alexander Hernandez",
         "result": "L",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC 319: Du Plessis vs. Chimaev",
         "round": 1,
         "time": "1:33"
@@ -23389,7 +23421,7 @@
       {
         "opponent": "Lance Gibson Jr.",
         "result": "L",
-        "method": "TKO (knees)",
+        "method": "TKO",
         "event": "UFC Fight Night: Adesanya vs. Pyfer",
         "round": 1,
         "time": "2:56"
@@ -23676,7 +23708,7 @@
       {
         "opponent": "Gabriella Fernandes",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC Fight Night: Adesanya vs. Pyfer",
         "round": 1,
         "time": "3:11"
@@ -23778,7 +23810,7 @@
       {
         "opponent": "Casey O'Neill",
         "result": "L",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC Fight Night: Adesanya vs. Pyfer",
         "round": 1,
         "time": "3:11"
@@ -24013,7 +24045,7 @@
       {
         "opponent": "Abdul Rakhman Yakhyaev",
         "result": "L",
-        "method": "Sub (RNC)",
+        "method": "Sub",
         "event": "UFC Fight Night: Moicano vs. Duncan",
         "round": 1,
         "time": "2:52"
@@ -24021,9 +24053,9 @@
       {
         "opponent": "Azamat Murzakanov",
         "result": "L",
-        "method": "Decision (unanimous)",
+        "method": "TKO",
         "event": "UFC 316: Dvalishvili vs. O'Malley 2",
-        "round": 3,
+        "round": 1,
         "time": "5:00"
       }
     ]
@@ -24226,7 +24258,7 @@
       {
         "opponent": "Guilherme Pat",
         "result": "W",
-        "method": "Decision (majority)",
+        "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Moicano vs. Duncan",
         "round": 3,
         "time": "5:00"
@@ -24247,7 +24279,7 @@
       {
         "opponent": "Thomas Petersen",
         "result": "L",
-        "method": "Decision (majority)",
+        "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Moicano vs. Duncan",
         "round": 3,
         "time": "5:00"
@@ -24309,7 +24341,7 @@
       {
         "opponent": "Darrius Flowers",
         "result": "L",
-        "method": "TKO (slam and punches)",
+        "method": "TKO",
         "event": "UFC Fight Night: Moicano vs. Duncan",
         "round": 2,
         "time": "0:52"
@@ -24403,7 +24435,7 @@
       {
         "opponent": "Hailey Cowan",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC Fight Night: Moicano vs. Duncan",
         "round": 2,
         "time": "4:24"
@@ -24424,7 +24456,7 @@
       {
         "opponent": "Alice Pereira",
         "result": "L",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC Fight Night: Moicano vs. Duncan",
         "round": 2,
         "time": "4:24"
@@ -24445,7 +24477,7 @@
       {
         "opponent": "Azamat Bekoev",
         "result": "W",
-        "method": "Sub (Guillotine)",
+        "method": "Sub",
         "event": "UFC Fight Night: Moicano vs. Duncan",
         "round": 3,
         "time": "3:27"
@@ -24505,7 +24537,7 @@
       {
         "opponent": "Tresean Gore",
         "result": "L",
-        "method": "Technical Submission (guillotine choke)",
+        "method": "Sub",
         "event": "UFC Fight Night: Moicano vs. Duncan",
         "round": 3,
         "time": "3:27"
@@ -24619,7 +24651,7 @@
       {
         "opponent": "Dione Barbosa",
         "result": "L",
-        "method": "Decision (majority)",
+        "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Moicano vs. Duncan",
         "round": 3,
         "time": "5:00"
@@ -24627,7 +24659,7 @@
       {
         "opponent": "Tamires Vidal",
         "result": "W",
-        "method": "TKO (punch to the body)",
+        "method": "KO",
         "event": "UFC Fight Night: Barboza vs. Murphy",
         "round": 3,
         "time": "0:37"
@@ -24727,9 +24759,9 @@
       {
         "opponent": "Brendson Ribeiro",
         "result": "W",
-        "method": "Decision (unanimous)",
+        "method": "TKO",
         "event": "UFC 316: Dvalishvili vs. O'Malley 2",
-        "round": 3,
+        "round": 1,
         "time": "5:00"
       },
       {
@@ -24828,7 +24860,7 @@
       {
         "opponent": "Johnny Walker",
         "result": "W",
-        "method": "Decision (split)",
+        "method": "Decision (unanimous)",
         "event": "UFC 327: Procházka vs. Ulberg",
         "round": 3,
         "time": "5:00"
@@ -24860,7 +24892,7 @@
       {
         "opponent": "Carlos Ulberg",
         "result": "L",
-        "method": "KO (punches)",
+        "method": "TKO",
         "event": "UFC Fight Night: Ulberg vs. Reyes",
         "round": 1,
         "time": "4:27"
@@ -24953,7 +24985,7 @@
       {
         "opponent": "Dominick Reyes",
         "result": "L",
-        "method": "Decision (split)",
+        "method": "Decision (unanimous)",
         "event": "UFC 327: Procházka vs. Ulberg",
         "round": 3,
         "time": "5:00"
@@ -25201,7 +25233,7 @@
       {
         "opponent": "Morgan Charriere",
         "result": "L",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC Fight Night: Lewis vs. Teixeira",
         "round": 3,
         "time": "0:27"
@@ -25318,7 +25350,7 @@
       {
         "opponent": "Lerone Murphy",
         "result": "L",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC 319: Du Plessis vs. Chimaev",
         "round": 1,
         "time": "3:21"
@@ -25540,10 +25572,10 @@
       },
       {
         "opponent": "Vicente Luque",
-        "result": "L",
-        "method": "Decision (unanimous)",
+        "result": "W",
+        "method": "Sub",
         "event": "UFC 316: Dvalishvili vs. O'Malley 2",
-        "round": 3,
+        "round": 2,
         "time": "5:00"
       },
       {
@@ -25775,7 +25807,7 @@
       {
         "opponent": "Esteban Ribovics",
         "result": "W",
-        "method": "Sub (Arm Triangle)",
+        "method": "Sub",
         "event": "UFC 327: Procházka vs. Ulberg",
         "round": 2,
         "time": "4:19"
@@ -25807,7 +25839,7 @@
       {
         "opponent": "Charles Oliveira",
         "result": "L",
-        "method": "Submission (face crank)",
+        "method": "Sub",
         "event": "UFC Fight Night: Oliveira vs. Gamrot",
         "round": 2,
         "time": "2:48"
@@ -25892,7 +25924,7 @@
       {
         "opponent": "Mateusz Gamrot",
         "result": "L",
-        "method": "Sub (Arm Triangle)",
+        "method": "Sub",
         "event": "UFC 327: Procházka vs. Ulberg",
         "round": 2,
         "time": "4:19"
@@ -26162,7 +26194,7 @@
       {
         "opponent": "Kelvin Gastelum",
         "result": "W",
-        "method": "Sub (D'Arce)",
+        "method": "Sub",
         "event": "UFC 327: Procházka vs. Ulberg",
         "round": 1,
         "time": "4:08"
@@ -26177,10 +26209,10 @@
       },
       {
         "opponent": "Kevin Holland",
-        "result": "W",
-        "method": "Decision (unanimous)",
+        "result": "L",
+        "method": "Sub",
         "event": "UFC 316: Dvalishvili vs. O'Malley 2",
-        "round": 3,
+        "round": 2,
         "time": "5:00"
       },
       {
@@ -26304,9 +26336,9 @@
       {
         "opponent": "Mike Malott",
         "result": "L",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC 315: Muhammad vs. Della Maddalena",
-        "round": 1,
+        "round": 2,
         "time": "2:45"
       }
     ]
@@ -26332,7 +26364,7 @@
       {
         "opponent": "Nikolay Veretennikov",
         "result": "L",
-        "method": "Decision (split)",
+        "method": "Decision (unanimous)",
         "event": "UFC 318: Holloway vs. Poirier 3",
         "round": 3,
         "time": "5:00"
@@ -26360,15 +26392,15 @@
       {
         "opponent": "Charles Radtke",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC 315: Muhammad vs. Della Maddalena",
-        "round": 1,
+        "round": 2,
         "time": "2:45"
       },
       {
         "opponent": "Gilbert Burns",
         "result": "W",
-        "method": "TKO (punches)",
+        "method": "TKO",
         "event": "UFC Fight Night: Burns vs. Malott",
         "round": 3,
         "time": "2:08"
@@ -26493,7 +26525,7 @@
       {
         "opponent": "Davey Grant",
         "result": "W",
-        "method": "Submission (guillotine choke)",
+        "method": "Sub",
         "event": "UFC Fight Night: de Ridder vs. Allen",
         "round": 1,
         "time": "3:05"
@@ -26679,7 +26711,7 @@
       {
         "opponent": "Mandel Nallo",
         "result": "W",
-        "method": "TKO (punches)",
+        "method": "TKO",
         "event": "UFC Fight Night: Burns vs. Malott",
         "round": 1,
         "time": "2:05"
@@ -26773,7 +26805,7 @@
       {
         "opponent": "Jai Herbert",
         "result": "L",
-        "method": "TKO (Punches)",
+        "method": "TKO",
         "event": "UFC Fight Night: Burns vs. Malott",
         "round": 1,
         "time": "2:05"
@@ -26792,8 +26824,8 @@
     "last5": [
       {
         "opponent": "Jessica Andrade",
-        "result": "L",
-        "method": "TKO",
+        "result": "W",
+        "method": "Sub",
         "event": "UFC 315: Muhammad vs. Della Maddalena",
         "round": 1,
         "time": "1:55"
@@ -26809,7 +26841,7 @@
       {
         "opponent": "Manon Fiorot",
         "result": "L",
-        "method": "TKO (punches)",
+        "method": "TKO",
         "event": "UFC Fight Night: de Ridder vs. Allen",
         "round": 1,
         "time": "1:14"
@@ -27003,7 +27035,7 @@
       {
         "opponent": "Thiago Moisés",
         "result": "W",
-        "method": "Decision (split)",
+        "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Burns vs. Malott",
         "round": 3,
         "time": "5:00"
@@ -27023,7 +27055,7 @@
       {
         "opponent": "Gauge Young",
         "result": "L",
-        "method": "Decision (split)",
+        "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Burns vs. Malott",
         "round": 3,
         "time": "5:00"
@@ -27116,7 +27148,7 @@
       {
         "opponent": "Dennis Buzukja",
         "result": "W",
-        "method": "KO (Punch)",
+        "method": "TKO",
         "event": "UFC Fight Night: Burns vs. Malott",
         "round": 1,
         "time": "1:20"
@@ -27137,7 +27169,7 @@
       {
         "opponent": "Marcio Barbosa",
         "result": "L",
-        "method": "KO (Punch)",
+        "method": "TKO",
         "event": "UFC Fight Night: Burns vs. Malott",
         "round": 1,
         "time": "1:20"
@@ -27151,7 +27183,7 @@
       {
         "opponent": "Julien Leblanc",
         "result": "W",
-        "method": "Sub (RNC)",
+        "method": "Sub",
         "event": "UFC Fight Night: Burns vs. Malott",
         "round": 1,
         "time": "2:22"
@@ -27179,7 +27211,7 @@
       {
         "opponent": "Robert Valentin",
         "result": "L",
-        "method": "Sub (RNC)",
+        "method": "Sub",
         "event": "UFC Fight Night: Burns vs. Malott",
         "round": 1,
         "time": "2:22"
@@ -27199,7 +27231,7 @@
       {
         "opponent": "Tanner Boser",
         "result": "W",
-        "method": "TKO (Punches)",
+        "method": "TKO",
         "event": "UFC Fight Night: Burns vs. Malott",
         "round": 2,
         "time": "4:43"
@@ -27219,7 +27251,7 @@
       {
         "opponent": "Gokhan Saricam",
         "result": "L",
-        "method": "TKO (Punches)",
+        "method": "TKO",
         "event": "UFC Fight Night: Burns vs. Malott",
         "round": 2,
         "time": "4:43"
@@ -27593,7 +27625,7 @@
       {
         "opponent": "Jamie Siraj",
         "result": "W",
-        "method": "TKO (Elbows)",
+        "method": "TKO",
         "event": "UFC Fight Night: Burns vs. Malott",
         "round": 1,
         "time": "2:43"
@@ -27614,7 +27646,7 @@
       {
         "opponent": "John Yannis",
         "result": "L",
-        "method": "TKO (Elbows)",
+        "method": "TKO",
         "event": "UFC Fight Night: Burns vs. Malott",
         "round": 1,
         "time": "2:43"
@@ -27644,7 +27676,7 @@
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Walker vs. Zhang",
-        "round": 5,
+        "round": 3,
         "time": "5:00"
       },
       {
@@ -27937,10 +27969,10 @@
       {
         "opponent": "Nora Cornolle",
         "result": "W",
-        "method": "Submission (rear-naked choke)",
+        "method": "Sub",
         "event": "UFC Fight Night: Strickland vs. Hernandez",
         "round": 2,
-        "time": "2:44"
+        "time": null
       },
       {
         "opponent": "Priscila Cachoeira",
@@ -27961,7 +27993,7 @@
       {
         "opponent": "Tamires Vidal",
         "result": "W",
-        "method": "Submission (face crank)",
+        "method": "Sub",
         "event": "UFC Fight Night: Hernandez vs. Pereira",
         "round": 3,
         "time": "4:33"
@@ -28022,7 +28054,7 @@
       {
         "opponent": "Jared Gordon",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "Noche UFC: Lopes vs. Silva",
         "round": 3,
         "time": "2:27"
@@ -28054,7 +28086,7 @@
       {
         "opponent": "Grant Dawson",
         "result": "L",
-        "method": "TKO (elbows and punches)",
+        "method": "KO",
         "event": "UFC Fight Night: Royval vs. Taira",
         "round": 2,
         "time": "1:42"
@@ -28131,7 +28163,7 @@
       {
         "opponent": "Chase Hooper",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC 319: Du Plessis vs. Chimaev",
         "round": 1,
         "time": "1:33"
@@ -28256,7 +28288,7 @@
       {
         "opponent": "Charles Jourdain",
         "result": "L",
-        "method": "Submission (guillotine choke)",
+        "method": "Sub",
         "event": "UFC Fight Night: de Ridder vs. Allen",
         "round": 1,
         "time": "3:05"
@@ -28363,7 +28395,7 @@
       {
         "opponent": "Raoni Barcelos",
         "result": "L",
-        "method": "Decision (split)",
+        "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Sterling vs. Zalal",
         "round": 3,
         "time": "5:00"
@@ -28371,7 +28403,7 @@
       {
         "opponent": "Deiveson Figueiredo",
         "result": "L",
-        "method": "Decision (split)",
+        "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Oliveira vs. Gamrot",
         "round": 3,
         "time": "5:00"
@@ -28472,7 +28504,7 @@
       {
         "opponent": "Montel Jackson",
         "result": "W",
-        "method": "Decision (split)",
+        "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Sterling vs. Zalal",
         "round": 3,
         "time": "5:00"
@@ -28564,7 +28596,7 @@
       {
         "opponent": "Ryan Spann",
         "result": "L",
-        "method": "KO (punches)",
+        "method": "TKO",
         "event": "UFC Fight Night: Sterling vs. Zalal",
         "round": 2,
         "time": "2:10"
@@ -28650,13 +28682,13 @@
         "result": "W",
         "method": "Sub",
         "event": "UFC 318: Holloway vs. Poirier 3",
-        "round": 2,
+        "round": 1,
         "time": "3:10"
       },
       {
         "opponent": "Marcus Buchecha",
         "result": "W",
-        "method": "KO (punches)",
+        "method": "TKO",
         "event": "UFC Fight Night: Sterling vs. Zalal",
         "round": 2,
         "time": "2:10"
@@ -29414,10 +29446,10 @@
       {
         "opponent": "Quillan Salkilld",
         "result": "L",
-        "method": "TKO (punches)",
+        "method": "TKO",
         "event": "UFC Fight Night: Della Maddalena vs. Prates",
         "round": 1,
-        "time": "3:29"
+        "time": null
       },
       {
         "opponent": "Benoît Saint Denis",
@@ -29622,9 +29654,9 @@
       {
         "opponent": "Brando Pericic",
         "result": "L",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC Fight Night: Della Maddalena vs. Prates",
-        "round": null,
+        "round": 2,
         "time": null
       },
       {
@@ -29646,7 +29678,7 @@
       {
         "opponent": "Waldo Cortes-Acosta",
         "result": "L",
-        "method": "KO (punch)",
+        "method": "TKO",
         "event": "UFC Fight Night: Tsarukyan vs. Hooker",
         "round": 1,
         "time": "1:22"
@@ -29733,7 +29765,7 @@
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Della Maddalena vs. Prates",
-        "round": null,
+        "round": 3,
         "time": null
       },
       {
@@ -29759,9 +29791,9 @@
       {
         "opponent": "Cam Rowston",
         "result": "L",
-        "method": "TKO",
+        "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Della Maddalena vs. Prates",
-        "round": null,
+        "round": 3,
         "time": null
       },
       {
@@ -29859,9 +29891,9 @@
       {
         "opponent": "Junior Tafa",
         "result": "L",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC Fight Night: Della Maddalena vs. Prates",
-        "round": null,
+        "round": 1,
         "time": null
       }
     ]
@@ -29881,7 +29913,7 @@
         "result": "L",
         "method": "Sub",
         "event": "UFC 322: Della Maddalena vs. Makhachev",
-        "round": 2,
+        "round": 1,
         "time": "3:15"
       },
       {
@@ -29999,7 +30031,7 @@
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Della Maddalena vs. Prates",
-        "round": null,
+        "round": 3,
         "time": null
       }
     ]
@@ -30104,9 +30136,9 @@
       {
         "opponent": "Wes Schultz",
         "result": "L",
-        "method": "Sub R3",
+        "method": "Sub",
         "event": "UFC Fight Night: Della Maddalena vs. Prates",
-        "round": null,
+        "round": 3,
         "time": null
       }
     ]
@@ -30125,9 +30157,9 @@
       {
         "opponent": "Ben Johnston",
         "result": "W",
-        "method": "Sub R3",
+        "method": "Sub",
         "event": "UFC Fight Night: Della Maddalena vs. Prates",
-        "round": null,
+        "round": 3,
         "time": null
       }
     ]
@@ -30146,9 +30178,9 @@
       {
         "opponent": "Themba Gorimbo",
         "result": "W",
-        "method": "Split Dec",
+        "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Della Maddalena vs. Prates",
-        "round": null,
+        "round": 3,
         "time": null
       }
     ]
@@ -30167,9 +30199,9 @@
       {
         "opponent": "Kody Steele",
         "result": "L",
-        "method": "Sub R1",
+        "method": "Sub",
         "event": "UFC Fight Night: Della Maddalena vs. Prates",
-        "round": null,
+        "round": 1,
         "time": null
       }
     ]
@@ -30187,9 +30219,9 @@
       {
         "opponent": "Dom Mar Fan",
         "result": "W",
-        "method": "Sub R1",
+        "method": "Sub",
         "event": "UFC Fight Night: Della Maddalena vs. Prates",
-        "round": null,
+        "round": 1,
         "time": null
       }
     ]
@@ -30208,9 +30240,9 @@
       {
         "opponent": "Marwan Rahiki",
         "result": "L",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC Fight Night: Della Maddalena vs. Prates",
-        "round": null,
+        "round": 1,
         "time": null
       }
     ]
@@ -30229,9 +30261,9 @@
       {
         "opponent": "Ollie Schmid",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC Fight Night: Della Maddalena vs. Prates",
-        "round": null,
+        "round": 1,
         "time": null
       }
     ]
@@ -30382,7 +30414,7 @@
       {
         "opponent": "Terrance McKinney",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "TKO",
         "event": "UFC 329: McGregor vs. Holloway 2",
         "round": 1,
         "time": null
@@ -30608,7 +30640,7 @@
       {
         "opponent": "Ateba Gautier",
         "result": "L",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC 328: Chimaev vs. Strickland",
         "round": 2,
         "time": "1:30"
@@ -30644,7 +30676,7 @@
       {
         "opponent": "Manuel Torres",
         "result": "L",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC 323: Dvalishvili vs. Yan 2",
         "round": 1,
         "time": "0:44"
@@ -31211,7 +31243,7 @@
       {
         "opponent": "Rafa Garcia",
         "result": "L",
-        "method": "KO",
+        "method": "TKO",
         "event": "Noche UFC: Lopes vs. Silva",
         "round": 3,
         "time": "2:27"
@@ -31741,7 +31773,7 @@
       {
         "opponent": "Dan Ige",
         "result": "W",
-        "method": "TKO (spinning back kick and punches)",
+        "method": "TKO",
         "event": "UFC Fight Night: Strickland vs. Hernandez",
         "round": 1,
         "time": "4:56"
@@ -32282,7 +32314,7 @@
       {
         "opponent": "Gabriel Bonfim",
         "result": "W",
-        "method": "TKO (knees and punches)",
+        "method": "KO",
         "event": "UFC Fight Night: Almeida vs. Lewis",
         "round": 2,
         "time": "4:33"
@@ -32391,7 +32423,7 @@
       {
         "opponent": "Oumar Sy",
         "result": "L",
-        "method": "Submission (face crank)",
+        "method": "Sub",
         "event": "UFC Fight Night: Barboza vs. Murphy",
         "round": 1,
         "time": "3:43"
@@ -32644,7 +32676,7 @@
       {
         "opponent": "Cody Brundage",
         "result": "L",
-        "method": "TKO (punches)",
+        "method": "TKO",
         "event": "UFC Fight Night: Allen vs. Costa",
         "round": 2,
         "time": "0:44"
@@ -32756,7 +32788,7 @@
       {
         "opponent": "Alice Ardelean",
         "result": "L",
-        "method": "Submission (ankle lock)",
+        "method": "Sub",
         "event": "UFC Fight Night: Allen vs. Costa",
         "round": 2,
         "time": "4:36"
@@ -32934,15 +32966,15 @@
       {
         "opponent": "Zhang Mingyang",
         "result": "W",
-        "method": "TKO (punches)",
+        "method": "TKO",
         "event": "UFC Fight Night: Song vs. Figueiredo",
         "round": 1,
-        "time": "4:15"
+        "time": null
       },
       {
         "opponent": "Volkan Oezdemir",
         "result": "L",
-        "method": "KO (knee and punches)",
+        "method": "TKO",
         "event": "UFC Fight Night: Tsarukyan vs. Hooker",
         "round": 1,
         "time": "1:27"
@@ -33027,10 +33059,10 @@
       {
         "opponent": "Alonzo Menifield",
         "result": "L",
-        "method": "TKO (punches)",
+        "method": "TKO",
         "event": "UFC Fight Night: Song vs. Figueiredo",
         "round": 1,
-        "time": "4:15"
+        "time": null
       },
       {
         "opponent": "Johnny Walker (fighter)",
@@ -33051,7 +33083,7 @@
       {
         "opponent": "Ozzy Diaz",
         "result": "W",
-        "method": "TKO (elbow and punches)",
+        "method": "KO",
         "event": "UFC Fight Night: Yan vs. Figueiredo",
         "round": 1,
         "time": "2:25"
@@ -33130,16 +33162,16 @@
         "result": "L",
         "method": "Decision (unanimous)",
         "event": "UFC 310: Pantoja vs. Asakura",
-        "round": 5,
+        "round": 2,
         "time": "5:00"
       },
       {
         "opponent": "Cameron Smotherman",
         "result": "W",
-        "method": "KO (punch)",
+        "method": "TKO",
         "event": "UFC Fight Night: Song vs. Figueiredo",
         "round": 1,
-        "time": "1:50"
+        "time": null
       },
       {
         "opponent": "Tim Elliott",
@@ -33265,7 +33297,7 @@
       {
         "opponent": "Santiago Ponzinibbio",
         "result": "L",
-        "method": "TKO (punches)",
+        "method": "KO",
         "event": "UFC Fight Night: Dern vs. Ribas 2",
         "round": 3,
         "time": "3:13"
@@ -33273,7 +33305,7 @@
       {
         "opponent": "Khaos Williams",
         "result": "L",
-        "method": "KO (punch)",
+        "method": "KO",
         "event": "UFC Fight Night: Barboza vs. Murphy",
         "round": 1,
         "time": "1:30"
@@ -33366,7 +33398,7 @@
       {
         "opponent": "Neil Magny",
         "result": "L",
-        "method": "Submission (brabo choke)",
+        "method": "Sub",
         "event": "UFC Fight Night: Ulberg vs. Reyes",
         "round": 3,
         "time": "3:08"
@@ -33499,7 +33531,7 @@
       {
         "opponent": "Luana Pinheiro",
         "result": "W",
-        "method": "Submission (guillotine choke)",
+        "method": "Sub",
         "event": "UFC Fight Night: Barboza vs. Murphy",
         "round": 2,
         "time": "4:12"
@@ -33783,10 +33815,10 @@
       {
         "opponent": "Jaqueline Amorim",
         "result": "L",
-        "method": "Submission (armbar)",
+        "method": "Sub",
         "event": "UFC Fight Night: Song vs. Figueiredo",
         "round": 1,
-        "time": "4:04"
+        "time": null
       },
       {
         "opponent": "Alexia Thainara",
@@ -34049,7 +34081,7 @@
       {
         "opponent": "Stephen Thompson",
         "result": "W",
-        "method": "Decision (split)",
+        "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Lewis vs. Teixeira",
         "round": 3,
         "time": "5:00"
@@ -34105,7 +34137,7 @@
       {
         "opponent": "Nicolas Dalby",
         "result": "L",
-        "method": "TKO (knees and punches)",
+        "method": "KO",
         "event": "UFC Fight Night: Almeida vs. Lewis",
         "round": 2,
         "time": "4:33"
@@ -34158,7 +34190,7 @@
       {
         "opponent": "Andre Muniz",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC 320: Ankalaev vs. Pereira 2",
         "round": 1,
         "time": "4:58"
@@ -34307,7 +34339,7 @@
       {
         "opponent": "Matt Frevola",
         "result": "W",
-        "method": "KO (knee)",
+        "method": "KO",
         "event": "UFC Fight Night: Moicano vs. Saint Denis",
         "round": 3,
         "time": "2:59"
@@ -34413,10 +34445,10 @@
       {
         "opponent": "Junior Tafa",
         "result": "W",
-        "method": "TKO (leg kick and punches)",
+        "method": "TKO",
         "event": "UFC Fight Night: Muhammad vs. Bonfim",
         "round": 1,
-        "time": "1:25"
+        "time": null
       },
       {
         "opponent": "Austen Lane",
@@ -34622,10 +34654,10 @@
       },
       {
         "opponent": "Jonathan Martinez",
-        "result": "L",
+        "result": "W",
         "method": "TKO",
         "event": "UFC 309: Jones vs. Miocic",
-        "round": 1,
+        "round": 3,
         "time": "2:15"
       },
       {
@@ -34844,10 +34876,10 @@
       {
         "opponent": "Jordan Leavitt",
         "result": "W",
-        "method": "Submission (ninja choke)",
+        "method": "Sub",
         "event": "UFC Fight Night: Muhammad vs. Bonfim",
         "round": 1,
-        "time": "4:19"
+        "time": null
       },
       {
         "opponent": "Isaac Thomson",
@@ -34937,10 +34969,10 @@
       {
         "opponent": "Ariane Carnelossi",
         "result": "W",
-        "method": "KO (punches and head kick)",
+        "method": "TKO",
         "event": "UFC Fight Night: Muhammad vs. Bonfim",
         "round": 1,
-        "time": "1:34"
+        "time": null
       },
       {
         "opponent": "Bruna Brasil",
@@ -35030,10 +35062,10 @@
       {
         "opponent": "Ketlen Souza",
         "result": "L",
-        "method": "KO (punches and head kick)",
+        "method": "TKO",
         "event": "UFC Fight Night: Muhammad vs. Bonfim",
         "round": 1,
-        "time": "1:34"
+        "time": null
       },
       {
         "opponent": "Talita Alencar",
@@ -35123,10 +35155,10 @@
       {
         "opponent": "Priscila Cachoeira",
         "result": "W",
-        "method": "Submission (armbar)",
+        "method": "Sub",
         "event": "UFC Fight Night: Muhammad vs. Bonfim",
         "round": 1,
-        "time": "3:42"
+        "time": null
       },
       {
         "opponent": "Joselyne Edwards",
@@ -35215,10 +35247,10 @@
       {
         "opponent": "Chelsea Chandler",
         "result": "L",
-        "method": "Submission (armbar)",
+        "method": "Sub",
         "event": "UFC Fight Night: Muhammad vs. Bonfim",
         "round": 1,
-        "time": "3:42"
+        "time": null
       },
       {
         "opponent": "Klaudia Syguła",
@@ -35351,7 +35383,7 @@
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Kape vs. Horiguchi",
-        "round": null,
+        "round": 3,
         "time": null
       },
       {
@@ -35388,7 +35420,7 @@
         "result": "L",
         "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Kape vs. Horiguchi",
-        "round": null,
+        "round": 3,
         "time": null
       },
       {
@@ -35438,7 +35470,7 @@
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Kape vs. Horiguchi",
-        "round": null,
+        "round": 3,
         "time": null
       },
       {
@@ -35460,7 +35492,7 @@
         "result": "L",
         "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Kape vs. Horiguchi",
-        "round": null,
+        "round": 3,
         "time": null
       }
     ]
@@ -35481,7 +35513,7 @@
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Kape vs. Horiguchi",
-        "round": null,
+        "round": 3,
         "time": null
       }
     ]
@@ -35501,7 +35533,7 @@
         "result": "L",
         "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Kape vs. Horiguchi",
-        "round": null,
+        "round": 3,
         "time": null
       }
     ]
@@ -35519,7 +35551,7 @@
       {
         "opponent": "Levan Chokheli",
         "result": "L",
-        "method": "KO/TKO",
+        "method": "TKO",
         "event": "UFC Fight Night: Kape vs. Horiguchi",
         "round": 1,
         "time": null
@@ -35620,7 +35652,7 @@
       {
         "opponent": "Leon Shahbazyan",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "TKO",
         "event": "UFC Fight Night: Kape vs. Horiguchi",
         "round": 1,
         "time": null
@@ -35643,7 +35675,7 @@
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Fiziev vs. Torres",
-        "round": null,
+        "round": 3,
         "time": null
       }
     ]
@@ -35655,7 +35687,7 @@
       {
         "opponent": "Julius Walker",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "TKO",
         "event": "UFC Fight Night: Fiziev vs. Torres",
         "round": 1,
         "time": null
@@ -35663,7 +35695,7 @@
       {
         "opponent": "Brendson Ribeiro",
         "result": "W",
-        "method": "Sub (RNC)",
+        "method": "Sub",
         "event": "UFC Fight Night: Moicano vs. Duncan",
         "round": 1,
         "time": "2:52"
@@ -35733,7 +35765,7 @@
       {
         "opponent": "Theodor Berggren",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "TKO",
         "event": "UFC Fight Night: Fiziev vs. Torres",
         "round": 2,
         "time": null
@@ -35870,7 +35902,7 @@
       {
         "opponent": "Eryk Anders",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC Fight Night: Dolidze vs. Hernandez",
         "round": 1,
         "time": "3:53"
@@ -35970,6 +36002,14 @@
     "nickname": "Cobe",
     "last5": [
       {
+        "opponent": "Josiah Harrell",
+        "result": "W",
+        "method": "TKO",
+        "event": "UFC Fight Night: Strickland vs. Hernandez",
+        "round": 1,
+        "time": "3:01"
+      },
+      {
         "opponent": "Niko Price",
         "result": "W",
         "method": "Sub",
@@ -36000,7 +36040,7 @@
       {
         "opponent": "Mackenzie Dern",
         "result": "L",
-        "method": "Submission (armbar)",
+        "method": "Sub",
         "event": "UFC Fight Night: Dern vs. Ribas 2",
         "round": 3,
         "time": "4:56"
@@ -36646,7 +36686,7 @@
       {
         "opponent": "Adam Fugitt",
         "result": "W",
-        "method": "KO",
+        "method": "TKO",
         "event": "UFC 318: Holloway vs. Poirier 3",
         "round": 1,
         "time": "0:55"
@@ -37153,7 +37193,7 @@
       {
         "opponent": "Waldo Cortes-Acosta",
         "result": "L",
-        "method": "KO (punches)",
+        "method": "TKO",
         "event": "UFC Fight Night: Garcia vs. Onama",
         "round": 1,
         "time": "3:59"
@@ -37912,6 +37952,14 @@
     },
     "last5": [
       {
+        "opponent": "Michel Pereira",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Strickland vs. Hernandez",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
         "opponent": "Ryan Gandra",
         "result": "L",
         "method": "KO/TKO",
@@ -38031,7 +38079,7 @@
       {
         "opponent": "Jack Hermansson",
         "result": "W",
-        "method": "KO (punch)",
+        "method": "TKO",
         "event": "UFC Fight Night: Tsarukyan vs. Hooker",
         "round": 1,
         "time": "2:46"
@@ -38114,9 +38162,17 @@
     },
     "last5": [
       {
-        "opponent": "Carlos Prates",
+        "opponent": "Uros Medic",
         "result": "L",
         "method": "KO",
+        "event": "UFC Fight Night: Strickland vs. Hernandez",
+        "round": 1,
+        "time": "1:19"
+      },
+      {
+        "opponent": "Carlos Prates",
+        "result": "L",
+        "method": "TKO",
         "event": "UFC 319: Du Plessis vs. Chimaev",
         "round": 1,
         "time": "4:59"
@@ -38223,6 +38279,14 @@
     },
     "last5": [
       {
+        "opponent": "Carlos Leal",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Strickland vs. Hernandez",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
         "opponent": "Rhys McKee",
         "result": "W",
         "method": "Decision (split)",
@@ -38328,7 +38392,7 @@
       {
         "opponent": "Daniil Donchenko",
         "result": "L",
-        "method": "KO/TKO",
+        "method": "TKO",
         "event": "UFC Fight Night: Fiziev vs. Torres",
         "round": 2,
         "time": null
@@ -38349,7 +38413,7 @@
       {
         "opponent": "Jefferson Nascimento",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "TKO",
         "event": "UFC Fight Night: Fiziev vs. Torres",
         "round": 3,
         "time": null
@@ -38370,7 +38434,7 @@
       {
         "opponent": "Tahir Abdullayev",
         "result": "L",
-        "method": "KO/TKO",
+        "method": "TKO",
         "event": "UFC Fight Night: Fiziev vs. Torres",
         "round": 3,
         "time": null
@@ -38391,7 +38455,7 @@
       {
         "opponent": "Gable Steveson",
         "result": "L",
-        "method": "KO/TKO",
+        "method": "TKO",
         "event": "UFC 329: McGregor vs. Holloway 2",
         "round": 1,
         "time": null
@@ -38521,6 +38585,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Sean Strickland",
+        "result": "L",
+        "method": "TKO",
+        "event": "UFC Fight Night: Strickland vs. Hernandez",
+        "round": 3,
+        "time": "2:23"
+      },
       {
         "opponent": "Roman Dolidze",
         "result": "W",
@@ -39062,6 +39134,14 @@
     "nickname": "Crispy",
     "last5": [
       {
+        "opponent": "Juliana Miller",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Strickland vs. Hernandez",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
         "opponent": "Nicolle Caliari",
         "result": "W",
         "method": "TKO",
@@ -39083,7 +39163,7 @@
     "last5": [
       {
         "opponent": "Waldo Cortes-Acosta",
-        "result": "W",
+        "result": "L",
         "method": "Decision (unanimous)",
         "event": "UFC 316: Dvalishvili vs. O'Malley 2",
         "round": 3,
@@ -39885,7 +39965,17 @@
       "losses": 2,
       "draws": 0
     },
-    "nickname": "Mufasa"
+    "nickname": "Mufasa",
+    "last5": [
+      {
+        "opponent": "Phil Rowe",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Strickland vs. Hernandez",
+        "round": 3,
+        "time": "5:00"
+      }
+    ]
   },
   {
     "id": "seokhyeon-ko",
@@ -39938,7 +40028,7 @@
       {
         "opponent": "Carlston Harris",
         "result": "W",
-        "method": "TKO (punches)",
+        "method": "KO",
         "event": "UFC Fight Night: Dern vs. Ribas 2",
         "round": 3,
         "time": "3:13"
