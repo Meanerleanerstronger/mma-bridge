@@ -108,6 +108,28 @@ function getWednesdayCutoff(eventDate) {
   return wed;
 }
 
+// Dynamic "watch on Paramount+" caption — uses the event's own start_time
+// (already stored in UTC for pick-locking) converted to the viewer's local
+// timezone, so international cards (Australia, Abu Dhabi, etc.) just work
+// automatically instead of needing a hardcoded "usually Saturday noon ET"
+// guess that's wrong for anyone outside the US or off a standard card.
+function watchTimeText(ev) {
+  if (ev.start_time) {
+    const d = new Date(ev.start_time);
+    if (!isNaN(d)) {
+      const timeStr = d.toLocaleString([], {
+        weekday: 'short', hour: 'numeric', minute: '2-digit', timeZoneName: 'short',
+      });
+      return `Watch on Paramount+ · ${timeStr}`;
+    }
+  }
+  const loc = (ev.location || '').toLowerCase();
+  const intl = /australia|sydney|melbourne|perth|brisbane|abu dhabi|dubai|u\.?a\.?e\.?|saudi|riyadh|jeddah|qatar|doha|singapore|manila|shanghai|beijing|london|manchester/.test(loc);
+  return intl
+    ? 'Watch on Paramount+ · check local start time for this card'
+    : 'Watch on Paramount+ · usually Saturdays, around 12PM ET';
+}
+
 // Check if logged-in user has picks for an event (async)
 async function userHasPicks(eventId) {
   try {
@@ -162,20 +184,32 @@ function renderHero(ev, mode, hasPicks) {
 
   const eventId = encodeURIComponent(ev.id);
 
-  // Remove any existing secondary button
+  // Remove any existing secondary button/note
   const existingSecondary = document.getElementById('heroSecondaryBtn');
   if (existingSecondary) existingSecondary.remove();
+  const existingWatchNote = document.getElementById('heroWatchNote');
+  if (existingWatchNote) existingWatchNote.remove();
 
   if (mode === 'today') {
-    btn.textContent = 'Watch Live →';
-    btn.href = 'https://www.paramountplus.com/sports/ufc/';
+    // No live-detection attempt here — that was never reliable (date
+    // math against UTC vs. the viewer's local day). Just a calm,
+    // always-correct pointer to Paramount+ with the event's actual
+    // broadcast start time in the viewer's own timezone when known.
+    btn.textContent = 'Watch on Paramount+ →';
+    btn.href = 'https://www.paramountplus.com/';
     btn.target = '_blank';
     btn.rel = 'noopener noreferrer';
-    btn.style.setProperty('background', 'linear-gradient(135deg, #8b0000 0%, #cc0000 55%, #ff3030 100%)', 'important');
+    btn.style.setProperty('background', 'linear-gradient(135deg, #7a3100 0%, #d46400 55%, #ff8c00 100%)', 'important');
     btn.style.setProperty('color', '#fff', 'important');
-    btn.style.setProperty('text-shadow', '0 1px 4px rgba(0,0,0,0.5)', 'important');
-    btn.style.setProperty('box-shadow', '0 0 28px rgba(255,30,30,0.45), inset 0 1px 0 rgba(255,120,120,0.2)', 'important');
-    btn.style.setProperty('border', '1px solid rgba(255,60,60,0.4)', 'important');
+    btn.style.setProperty('text-shadow', '0 1px 4px rgba(0,0,0,0.4)', 'important');
+    btn.style.setProperty('box-shadow', '0 0 28px rgba(255,140,0,0.4), inset 0 1px 0 rgba(255,190,120,0.2)', 'important');
+    btn.style.setProperty('border', '1px solid rgba(255,140,0,0.5)', 'important');
+
+    const note = document.createElement('div');
+    note.id = 'heroWatchNote';
+    note.textContent = watchTimeText(ev);
+    note.style.cssText = 'margin-top:12px;font-family:Inter,sans-serif;font-size:0.78rem;color:rgba(255,255,255,0.45);';
+    btn.parentNode.insertBefore(note, btn.nextSibling);
   } else if (mode === 'completed' || mode === 'results') {
     btn.textContent = 'Review the Card →';
     btn.href = `events.html?id=${eventId}`;
