@@ -1150,12 +1150,14 @@
 <script src="fighter-modal.js?v=1.1"></script>
 <script>
 // ── Divisional spotlight fighter clicks ───────────────────
+// Same-tab navigation to match the P4P tab's row clicks on this page —
+// previously used window.openFighterModal() which opens a new tab.
 document.addEventListener('click', function (e) {
   const row = e.target.closest('.div-contender-row, .div-champ-info');
   if (!row) return;
   const nameEl = row.querySelector('.div-contender-name') || row.querySelector('.div-champ-name');
   const name = nameEl ? nameEl.textContent.trim() : null;
-  if (name && window.openFighterModal) window.openFighterModal(name);
+  if (name) window.location.href = 'fighter.html?name=' + encodeURIComponent(name);
 });
 // Make divisional rows look clickable
 document.addEventListener('mouseover', function (e) {

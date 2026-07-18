@@ -574,8 +574,8 @@
         return c.length ? `<div class="mu-fighter-chips">${c.join('')}</div>` : '';
       }
 
-      const profileA = fA.id ? `profile.html?fighter=${encodeURIComponent(fA.id)}` : `#`;
-      const profileB = fB.id ? `profile.html?fighter=${encodeURIComponent(fB.id)}` : `#`;
+      const profileA = `fighter.html?${fA.id ? `id=${encodeURIComponent(fA.id)}` : `name=${encodeURIComponent(nameA)}`}`;
+      const profileB = `fighter.html?${fB.id ? `id=${encodeURIComponent(fB.id)}` : `name=${encodeURIComponent(nameB)}`}`;
       const picksHref = eventId ? `picks.html?event=${encodeURIComponent(eventId)}` : 'events.html';
 
       /* ── RESUME DATA ── */

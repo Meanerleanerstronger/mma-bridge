@@ -72,6 +72,38 @@
       ? `<div class="fp-stats-strip">${stats.map(s=>`<div class="fp-stat-item"><span class="fp-stat-val">${s.val}</span><span class="fp-stat-lbl">${s.lbl}</span></div>`).join('')}</div>`
       : '';
 
+    const aboutTags = [f.style, f.fightingOut].filter(Boolean);
+    const bioHtml = (f.bio || aboutTags.length) ? `
+      <div class="fp-section-head">
+        <span class="fp-section-title">About</span>
+        <div class="fp-section-line"></div>
+      </div>
+      ${aboutTags.length ? `<div class="fp-about-meta">${aboutTags.map(t=>`<span class="fp-about-tag">${esc(t)}</span>`).join('')}</div>` : ''}
+      ${f.bio ? `<p class="fp-bio-text">${esc(f.bio)}</p>` : ''}
+    ` : '';
+
+    const CAREER_STAT_LABELS = {
+      slpm: 'Strikes Landed /min', strAcc: 'Striking Accuracy',
+      sapm: 'Strikes Absorbed /min', strDef: 'Striking Defense',
+      tdAvg: 'Takedowns /15min', tdAcc: 'Takedown Accuracy',
+      tdDef: 'Takedown Defense', subAvg: 'Submissions /15min',
+    };
+    const CAREER_STAT_ORDER = ['slpm','strAcc','sapm','strDef','tdAvg','tdAcc','tdDef','subAvg'];
+    const careerStats = f.stats ? CAREER_STAT_ORDER.filter(k => f.stats[k]) : [];
+    const careerStatsHtml = careerStats.length ? `
+      <div class="fp-section-head">
+        <span class="fp-section-title">Career Stats</span>
+        <div class="fp-section-line"></div>
+      </div>
+      <div class="fp-career-grid">
+        ${careerStats.map(k => `
+          <div class="fp-career-item">
+            <div class="fp-career-val">${esc(f.stats[k])}</div>
+            <div class="fp-career-lbl">${CAREER_STAT_LABELS[k]}</div>
+          </div>`).join('')}
+      </div>
+    ` : '';
+
     const fightsHtml = fights.length
       ? `<div class="fp-section-head">
            <span class="fp-section-title">Record</span>
@@ -123,6 +155,8 @@
       </div>
       ${statsHtml}
       <div class="fp-content">
+        ${bioHtml}
+        ${careerStatsHtml}
         ${fightsHtml}
         <a class="fp-ufc-link" href="https://www.ufc.com/athlete/${ufcSlug}" target="_blank" rel="noopener">
           Full record on UFC.com
