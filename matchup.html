@@ -10,7 +10,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fight Matchup | MMA Bridge</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800;1,900&family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="style.css?v=9.17" />
   <style>
@@ -22,7 +22,7 @@
       display:inline-flex; align-items:center; gap:7px;
       font-family:'Montserrat',sans-serif; font-weight:700; font-size:.6rem;
       letter-spacing:.14em; text-transform:uppercase;
-      color:rgba(255,255,255,.28); text-decoration:none;
+      color:rgba(255,255,255,.32); text-decoration:none;
       padding:16px 24px 0; transition:color .18s;
     }
     .mu-back:hover { color:#d97b3f; }
@@ -31,39 +31,23 @@
     .mu-hero {
       position:relative; overflow:hidden;
       min-height:400px;
-      background:linear-gradient(180deg,#0a0a10 0%,#060608 100%);
+      background:#0a0a0a;
       margin-top:10px;
     }
-    /* full radial glows — one each side */
-    .mu-hero-glow-a {
-      position:absolute; top:-20%; left:-5%;
-      width:55%; height:140%;
-      background:radial-gradient(ellipse at 30% 50%,rgba(217,123,63,.16) 0%,transparent 65%);
-      pointer-events:none;
-    }
-    .mu-hero-glow-b {
-      position:absolute; top:-20%; right:-5%;
-      width:55%; height:140%;
-      background:radial-gradient(ellipse at 70% 50%,rgba(96,165,250,.16) 0%,transparent 65%);
-      pointer-events:none;
-    }
-    /* center slash */
+    /* glows/noise removed — a plain dark ground with grayscale photos
+       and a single hairline divider reads calmer and more "program",
+       less "app glow effect" */
+    .mu-hero-glow-a, .mu-hero-glow-b, .mu-hero-noise { display:none; }
     .mu-hero-slash {
       position:absolute; top:0; bottom:0;
       left:calc(50% - 1px); width:2px;
       background:linear-gradient(180deg,
         transparent 0%,
-        rgba(255,255,255,.06) 15%,
-        rgba(255,255,255,.12) 50%,
-        rgba(255,255,255,.06) 85%,
+        rgba(255,255,255,.1) 15%,
+        rgba(255,255,255,.18) 50%,
+        rgba(255,255,255,.1) 85%,
         transparent 100%);
       pointer-events:none; z-index:1;
-    }
-    /* noise grain texture */
-    .mu-hero-noise {
-      position:absolute; inset:0; pointer-events:none; z-index:0; opacity:.03;
-      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      background-size:200px 200px;
     }
 
     /* fighter images */
@@ -78,20 +62,15 @@
     .mu-hero-img {
       height:380px; width:auto; max-width:58%;
       object-fit:contain; object-position:bottom center;
-      opacity:.9;
+      filter:grayscale(0.3);
+      opacity:.92;
     }
     .mu-hero-img-wrap.a .mu-hero-img {
-      filter:
-        drop-shadow(0 0 60px rgba(0,0,0,1))
-        drop-shadow(-6px 0 30px rgba(217,123,63,.25))
-        drop-shadow(0 20px 40px rgba(0,0,0,.8));
+      filter:grayscale(0.3) drop-shadow(0 16px 30px rgba(0,0,0,.8));
     }
     .mu-hero-img-wrap.b .mu-hero-img {
       transform:scaleX(-1);
-      filter:
-        drop-shadow(0 0 60px rgba(0,0,0,1))
-        drop-shadow(6px 0 30px rgba(96,165,250,.25))
-        drop-shadow(0 20px 40px rgba(0,0,0,.8));
+      filter:grayscale(0.3) drop-shadow(0 16px 30px rgba(0,0,0,.8));
     }
 
     /* text overlay */
@@ -102,41 +81,32 @@
       padding:36px 28px 28px;
       min-height:400px;
     }
-    .mu-hero-side { display:flex; flex-direction:column; gap:8px; }
+    .mu-hero-side { display:flex; flex-direction:column; gap:9px; }
     .mu-hero-side.b { align-items:flex-end; text-align:right; }
 
     .mu-fighter-name {
       font-family:'Barlow Condensed',sans-serif; font-weight:900; font-style:italic;
       font-size:clamp(2.2rem,5.5vw,4.2rem);
       text-transform:uppercase; letter-spacing:.01em; line-height:.92;
-      text-decoration:none; transition:filter .2s;
-      display:block;
-    }
-    .mu-fighter-name.a {
+      text-decoration:none; transition:opacity .2s;
+      display:inline-block;
       color:#fff;
-      text-shadow:
-        0 0 50px rgba(217,123,63,.35),
-        0 2px 0 rgba(0,0,0,.9),
-        0 4px 20px rgba(0,0,0,.7);
+      text-shadow:0 2px 0 rgba(0,0,0,.9), 0 4px 20px rgba(0,0,0,.7);
+      border-bottom:3px solid transparent;
+      padding-bottom:6px;
     }
-    .mu-fighter-name.b {
-      color:#fff;
-      text-shadow:
-        0 0 50px rgba(96,165,250,.35),
-        0 2px 0 rgba(0,0,0,.9),
-        0 4px 20px rgba(0,0,0,.7);
-    }
-    .mu-fighter-name:hover { filter:brightness(1.2); }
+    .mu-fighter-name.a { border-color:#d97b3f; }
+    .mu-fighter-name.b { border-color:#60a5fa; }
+    .mu-fighter-name:hover { opacity:.8; }
 
     .mu-fighter-chips { display:flex; gap:5px; flex-wrap:wrap; }
     .mu-hero-side.b .mu-fighter-chips { justify-content:flex-end; }
     .mu-chip {
       font-family:'Montserrat',sans-serif; font-weight:700; font-size:.46rem;
       letter-spacing:.1em; text-transform:uppercase;
-      padding:3px 8px; border-radius:4px;
-      border:1px solid rgba(255,255,255,.12);
-      color:rgba(255,255,255,.5); background:rgba(0,0,0,.4);
-      backdrop-filter:blur(4px);
+      padding:3px 8px; border-radius:2px;
+      border:1px solid rgba(255,255,255,.16);
+      color:rgba(255,255,255,.55);
     }
 
     /* VS center */
@@ -146,17 +116,14 @@
       padding-bottom:6px;
     }
     .mu-vs-text {
-      font-family:'Barlow Condensed',sans-serif; font-weight:900;
-      font-size:clamp(1rem,2.5vw,1.35rem);
-      letter-spacing:.25em; text-transform:uppercase;
-      background:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,.1));
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-      background-clip:text;
+      font-family:'Newsreader',serif; font-weight:400; font-style:italic;
+      font-size:clamp(1.1rem,2.5vw,1.4rem);
+      color:rgba(255,255,255,.45);
     }
     .mu-vs-weight {
-      font-family:'Montserrat',sans-serif; font-weight:800; font-size:.48rem;
-      letter-spacing:.18em; text-transform:uppercase;
-      color:rgba(255,255,255,.22); white-space:nowrap;
+      font-family:'Montserrat',sans-serif; font-weight:700; font-size:.48rem;
+      letter-spacing:.16em; text-transform:uppercase;
+      color:rgba(255,255,255,.28); white-space:nowrap;
     }
 
     /* bottom fade */
@@ -176,24 +143,22 @@
     /* ── CONTENT ── */
     .mu-content { max-width:860px; margin:0 auto; padding:0 20px 100px; }
 
-    /* ── PANELS (shared) ── */
+    /* ── PANELS (shared) — flat ledger surface, no glass/blur ── */
     .mu-panel {
       margin-top:20px;
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:16px; overflow:hidden;
-      background:rgba(255,255,255,.02);
-      box-shadow:0 4px 40px rgba(0,0,0,.5), 0 1px 0 rgba(255,255,255,.04) inset;
-      backdrop-filter:blur(8px);
+      border:1px solid rgba(255,255,255,.09);
+      border-radius:4px; overflow:hidden;
+      background:rgba(255,255,255,.015);
     }
     .mu-panel-header {
-      padding:13px 22px;
-      border-bottom:1px solid rgba(255,255,255,.06);
-      font-family:'Montserrat',sans-serif; font-weight:800;
-      font-size:.52rem; letter-spacing:.22em; text-transform:uppercase;
-      color:rgba(255,255,255,.25);
+      padding:12px 20px;
+      border-bottom:1px solid rgba(255,255,255,.07);
+      font-family:'Montserrat',sans-serif; font-weight:700;
+      font-size:.55rem; letter-spacing:.18em; text-transform:uppercase;
+      color:rgba(255,255,255,.5);
       display:flex; align-items:center; gap:10px;
     }
-    .mu-panel-header::after { content:''; flex:1; height:1px; background:rgba(255,255,255,.06); }
+    .mu-panel-header::after { content:''; flex:1; height:1px; background:rgba(255,255,255,.07); }
 
     /* ── TABS ── */
     .mu-tabs {
@@ -229,38 +194,39 @@
       display:grid; grid-template-columns:1fr auto 1fr;
       align-items:center; gap:10px; padding:10px 8px;
       margin:0 -8px;
-      border-radius:8px;
-      border-bottom:1px solid rgba(255,255,255,.03);
+      border-radius:3px;
+      border-bottom:1px solid rgba(255,255,255,.05);
       transition:background .15s;
     }
     .mu-common-row:hover { background:rgba(255,255,255,.025); }
     .mu-common-row:last-child { border-bottom:none; }
     .mu-common-result {
       display:inline-flex; align-items:center; justify-content:center;
-      min-width:26px; height:22px; padding:0 6px; border-radius:5px;
+      min-width:24px; height:20px; padding:0 6px; border-radius:2px;
       font-family:'Montserrat',sans-serif; font-weight:800;
-      font-size:.62rem; letter-spacing:.02em;
+      font-size:.6rem; letter-spacing:.02em;
+      border:1px solid currentColor;
     }
-    .mu-common-result.w { color:#4ade80; background:rgba(74,222,128,.13); border:1px solid rgba(74,222,128,.2); }
-    .mu-common-result.l { color:#f87171; background:rgba(248,113,113,.1); border:1px solid rgba(248,113,113,.16); }
+    .mu-common-result.w { color:#4ade80; }
+    .mu-common-result.l { color:#f87171; }
     .mu-common-opponent {
       font-family:'Montserrat',sans-serif; font-weight:700; font-size:.6rem;
-      color:rgba(255,255,255,.55); text-align:center;
+      color:rgba(255,255,255,.6); text-align:center;
       text-transform:uppercase; letter-spacing:.04em;
       text-decoration:none; transition:color .15s;
     }
     .mu-common-opponent:hover { color:#d97b3f; }
     .mu-common-method {
       font-family:'Inter',sans-serif; font-size:.55rem;
-      color:rgba(255,255,255,.3); margin-top:3px;
+      color:rgba(255,255,255,.32); margin-top:3px;
     }
     .mu-common-sub {
-      font-size:.52rem; color:rgba(255,255,255,.2);
+      font-size:.52rem; color:rgba(255,255,255,.24);
       font-family:'Montserrat',sans-serif; margin-bottom:10px; letter-spacing:.06em;
     }
     .mu-form-name {
       font-family:'Montserrat',sans-serif; font-size:.52rem; font-weight:700;
-      color:rgba(255,255,255,.4); letter-spacing:.08em; text-transform:uppercase;
+      color:rgba(255,255,255,.45); letter-spacing:.08em; text-transform:uppercase;
       margin-bottom:8px;
     }
     .mu-form-name.b { text-align:right; }
@@ -269,120 +235,107 @@
     }
     .mu-form-row.b { justify-content:flex-end; }
     .mu-form-pip {
-      width:30px; height:30px; border-radius:7px;
+      width:28px; height:28px; border-radius:3px;
       display:flex; align-items:center; justify-content:center;
-      font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:.9rem;
-      transition:transform .15s;
+      font-family:'Montserrat',sans-serif; font-weight:800; font-size:.68rem;
+      border:1px solid currentColor;
     }
-    .mu-form-pip:hover { transform:translateY(-2px); }
-    .mu-form-pip.w { background:rgba(74,222,128,.15); color:#4ade80; border:1px solid rgba(74,222,128,.2); }
-    .mu-form-pip.l { background:rgba(248,113,113,.12); color:#f87171; border:1px solid rgba(248,113,113,.18); }
+    .mu-form-pip.w { color:#4ade80; }
+    .mu-form-pip.l { color:#f87171; }
     .mu-form-sub {
       font-family:'Inter',sans-serif; font-size:.52rem;
-      color:rgba(255,255,255,.28); margin-top:5px;
+      color:rgba(255,255,255,.3); margin-top:6px;
     }
     .mu-form-section {
       display:grid; grid-template-columns:1fr 1px 1fr; gap:16px; align-items:start;
     }
-    .mu-form-divider { background:rgba(255,255,255,.06); align-self:stretch; }
+    .mu-form-divider { background:rgba(255,255,255,.08); align-self:stretch; }
     .mu-h2h-banner {
-      text-align:center; padding:16px;
-      font-family:'Barlow Condensed',sans-serif; font-weight:900;
-      font-size:1.1rem; color:#d97b3f;
-      text-transform:uppercase; letter-spacing:.06em;
-      background:rgba(217,123,63,.06);
-      border-radius:8px; margin-bottom:4px;
+      text-align:center; padding:14px;
+      font-family:'Newsreader',serif; font-weight:500; font-style:italic;
+      font-size:1.05rem; color:#d97b3f;
+      border:1px solid rgba(217,123,63,.3);
+      border-radius:3px; margin-bottom:4px;
     }
     .mu-no-common {
       text-align:center; padding:20px;
       font-family:'Inter',sans-serif; font-size:.72rem;
-      color:rgba(255,255,255,.22);
+      color:rgba(255,255,255,.25);
     }
 
     /* ── STAT ROWS ── */
     .mu-stat-row {
       display:grid; grid-template-columns:1fr 106px 1fr;
-      align-items:center; padding:15px 22px;
-      border-bottom:1px solid rgba(255,255,255,.04);
+      align-items:center; padding:14px 20px;
+      border-bottom:1px solid rgba(255,255,255,.06);
       transition:background .15s;
     }
     .mu-stat-row:last-child { border-bottom:none; }
-    .mu-stat-row:hover { background:rgba(255,255,255,.025); }
+    .mu-stat-row:hover { background:rgba(255,255,255,.02); }
 
     .mu-stat-val {
-      font-family:'Barlow Condensed',sans-serif; font-weight:800;
-      font-size:1.28rem; line-height:1;
+      font-family:'Barlow Condensed',sans-serif; font-weight:700;
+      font-size:1.22rem; line-height:1;
+      font-variant-numeric: tabular-nums;
     }
-    .mu-stat-val.a { color:rgba(255,255,255,.92); }
-    .mu-stat-val.b { color:rgba(255,255,255,.92); text-align:right; }
-    .mu-stat-val.a.edge {
-      color:#fff;
-      text-shadow:0 0 14px rgba(217,123,63,.5);
-    }
-    .mu-stat-val.b.edge {
-      color:#fff;
-      text-shadow:0 0 14px rgba(96,165,250,.5);
-    }
-    .mu-stat-val.a.edge::after  { content:' ▲'; font-size:.55em; opacity:.65; }
-    .mu-stat-val.b.edge::before { content:'▲ '; font-size:.55em; opacity:.65; }
+    .mu-stat-val.a { color:rgba(255,255,255,.9); }
+    .mu-stat-val.b { color:rgba(255,255,255,.9); text-align:right; }
+    .mu-stat-val.a.edge { color:#d97b3f; }
+    .mu-stat-val.b.edge { color:#60a5fa; }
+    .mu-stat-val.a.edge::after  { content:' \25b2'; font-size:.55em; opacity:.7; }
+    .mu-stat-val.b.edge::before { content:'\25b2 '; font-size:.55em; opacity:.7; }
 
     .mu-stat-label {
       text-align:center;
-      font-family:'Montserrat',sans-serif; font-weight:800;
-      font-size:.48rem; letter-spacing:.16em; text-transform:uppercase;
-      color:rgba(255,255,255,.25);
+      font-family:'Montserrat',sans-serif; font-weight:700;
+      font-size:.48rem; letter-spacing:.14em; text-transform:uppercase;
+      color:rgba(255,255,255,.3);
     }
 
     /* ── ODDS ── */
     .mu-odds-body { display:grid; grid-template-columns:1fr 1fr; }
-    .mu-odds-side { padding:24px; text-align:center; }
-    .mu-odds-side.a { border-right:1px solid rgba(255,255,255,.05); }
+    .mu-odds-side { padding:22px; text-align:center; }
+    .mu-odds-side.a { border-right:1px solid rgba(255,255,255,.07); }
     .mu-odds-name {
       font-family:'Montserrat',sans-serif; font-weight:700; font-size:.58rem;
       letter-spacing:.08em; text-transform:uppercase;
-      color:rgba(255,255,255,.38); margin-bottom:10px;
+      color:rgba(255,255,255,.42); margin-bottom:10px;
     }
     .mu-odds-num {
-      font-family:'Barlow Condensed',sans-serif; font-weight:900;
-      font-size:3rem; line-height:1; letter-spacing:-.01em;
+      font-family:'Barlow Condensed',sans-serif; font-weight:800;
+      font-size:2.7rem; line-height:1; letter-spacing:-.01em;
+      font-variant-numeric: tabular-nums;
     }
-    .mu-odds-num.fav {
-      color:#4ade80;
-      text-shadow:0 0 30px rgba(74,222,128,.35),0 0 8px rgba(74,222,128,.15);
-    }
+    .mu-odds-num.fav { color:#4ade80; }
     .mu-odds-num.dog { color:#f87171; }
     .mu-odds-prob {
       font-family:'Inter',sans-serif; font-size:.62rem; font-weight:500;
-      color:rgba(255,255,255,.28); margin-top:8px;
+      color:rgba(255,255,255,.32); margin-top:8px;
     }
     .mu-odds-note {
-      padding:9px 20px; border-top:1px solid rgba(255,255,255,.04);
+      padding:9px 20px; border-top:1px solid rgba(255,255,255,.06);
       font-family:'Inter',sans-serif; font-size:.52rem;
-      color:rgba(255,255,255,.14); text-align:center;
+      color:rgba(255,255,255,.18); text-align:center;
     }
 
-    /* ── PICKS CTA ── */
+    /* ── PICKS CTA — flat, confident, no gradient-glow button ── */
     .mu-cta { margin-top:24px; text-align:center; }
     .mu-picks-btn {
       display:inline-flex; align-items:center; gap:10px;
-      background:linear-gradient(135deg,#7a3100 0%,#c85800 45%,#f0a500 100%);
-      border:none; color:#fff;
+      background:#d97b3f;
+      border:none; color:#0a0a0a;
       font-family:'Montserrat',sans-serif; font-weight:800;
-      font-size:.7rem; letter-spacing:.12em; text-transform:uppercase;
-      padding:15px 38px; border-radius:12px; cursor:pointer; text-decoration:none;
-      box-shadow:0 4px 30px rgba(240,140,0,.35),0 1px 0 rgba(255,220,100,.2) inset;
-      transition:transform .18s, box-shadow .18s;
+      font-size:.7rem; letter-spacing:.1em; text-transform:uppercase;
+      padding:14px 36px; border-radius:3px; cursor:pointer; text-decoration:none;
+      transition:background .18s;
     }
-    .mu-picks-btn:hover {
-      transform:translateY(-3px) scale(1.02);
-      box-shadow:0 14px 40px rgba(240,140,0,.55),0 1px 0 rgba(255,220,100,.2) inset;
-    }
+    .mu-picks-btn:hover { background:#e8935c; }
 
     /* ── LOADING ── */
     .mu-loading {
       text-align:center; padding:140px 24px;
       font-family:'Inter',sans-serif; font-size:.84rem;
-      color:rgba(255,255,255,.2);
+      color:rgba(255,255,255,.22);
     }
 
     /* ── LIGHT MODE ── */
@@ -392,39 +345,40 @@
     body.light-mode .mu-hero-fade { background:linear-gradient(to top,#faf8f3 0%,transparent 100%); }
     body.light-mode .mu-stat-val.a { color:#a06b00; }
     body.light-mode .mu-stat-val.b { color:#1d4ed8; }
-    body.light-mode .mu-panel { background:rgba(0,0,0,.02); border-color:rgba(0,0,0,.08); }
+    body.light-mode .mu-panel { background:rgba(0,0,0,.015); border-color:rgba(0,0,0,.09); }
     body.light-mode .mu-back { color:rgba(0,0,0,.35); }
     body.light-mode .mu-back:hover { color:#b8611e; }
-    body.light-mode .mu-chip { color:rgba(0,0,0,.6); background:rgba(0,0,0,.05); border-color:rgba(0,0,0,.12); }
-    body.light-mode .mu-vs-text { background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.22)); -webkit-background-clip:text; background-clip:text; }
+    body.light-mode .mu-chip { color:rgba(0,0,0,.6); border-color:rgba(0,0,0,.16); }
+    body.light-mode .mu-vs-text { color:rgba(0,0,0,.5); }
     body.light-mode .mu-vs-weight { color:rgba(0,0,0,.35); }
-    body.light-mode .mu-panel-header { color:rgba(0,0,0,.4); border-bottom-color:rgba(0,0,0,.08); }
-    body.light-mode .mu-panel-header::after { background:rgba(0,0,0,.08); }
+    body.light-mode .mu-panel-header { color:rgba(0,0,0,.55); border-bottom-color:rgba(0,0,0,.09); }
+    body.light-mode .mu-panel-header::after { background:rgba(0,0,0,.09); }
     body.light-mode .mu-tabs { border-bottom-color:rgba(0,0,0,.1); }
     body.light-mode .mu-tab { color:rgba(0,0,0,.35); }
     body.light-mode .mu-tab:hover { color:rgba(0,0,0,.7); }
     body.light-mode .mu-tab.active { color:#b8611e; border-bottom-color:#b8611e; }
-    body.light-mode .mu-resume-block { border-bottom-color:rgba(0,0,0,.06); }
+    body.light-mode .mu-resume-block { border-bottom-color:rgba(0,0,0,.07); }
     body.light-mode .mu-resume-label { color:#b8611e; }
-    body.light-mode .mu-common-row { border-bottom-color:rgba(0,0,0,.05); }
+    body.light-mode .mu-common-row { border-bottom-color:rgba(0,0,0,.06); }
     body.light-mode .mu-common-row:hover { background:rgba(0,0,0,.03); }
-    body.light-mode .mu-common-opponent { color:rgba(0,0,0,.62); }
+    body.light-mode .mu-common-opponent { color:rgba(0,0,0,.65); }
     body.light-mode .mu-common-opponent:hover { color:#b8611e; }
-    body.light-mode .mu-common-method { color:rgba(0,0,0,.42); }
+    body.light-mode .mu-common-method { color:rgba(0,0,0,.45); }
     body.light-mode .mu-common-sub { color:rgba(0,0,0,.32); }
-    body.light-mode .mu-form-name { color:rgba(0,0,0,.5); }
-    body.light-mode .mu-form-divider { background:rgba(0,0,0,.09); }
-    body.light-mode .mu-form-sub { color:rgba(0,0,0,.38); }
+    body.light-mode .mu-form-name { color:rgba(0,0,0,.55); }
+    body.light-mode .mu-form-divider { background:rgba(0,0,0,.1); }
+    body.light-mode .mu-form-sub { color:rgba(0,0,0,.4); }
     body.light-mode .mu-no-common { color:rgba(0,0,0,.35); }
-    body.light-mode .mu-h2h-banner { background:rgba(184,97,30,.08); color:#b8611e; }
-    body.light-mode .mu-stat-row { border-bottom-color:rgba(0,0,0,.06); }
+    body.light-mode .mu-h2h-banner { color:#b8611e; border-color:rgba(184,97,30,.4); }
+    body.light-mode .mu-stat-row { border-bottom-color:rgba(0,0,0,.07); }
     body.light-mode .mu-stat-row:hover { background:rgba(0,0,0,.03); }
-    body.light-mode .mu-stat-label { color:rgba(0,0,0,.4); }
-    body.light-mode .mu-odds-side.a { border-right-color:rgba(0,0,0,.08); }
+    body.light-mode .mu-stat-label { color:rgba(0,0,0,.42); }
+    body.light-mode .mu-odds-side.a { border-right-color:rgba(0,0,0,.09); }
     body.light-mode .mu-odds-name { color:rgba(0,0,0,.5); }
-    body.light-mode .mu-odds-prob { color:rgba(0,0,0,.45); }
-    body.light-mode .mu-odds-note { border-top-color:rgba(0,0,0,.06); color:rgba(0,0,0,.32); }
+    body.light-mode .mu-odds-prob { color:rgba(0,0,0,.48); }
+    body.light-mode .mu-odds-note { border-top-color:rgba(0,0,0,.07); color:rgba(0,0,0,.35); }
     body.light-mode .mu-loading { color:rgba(0,0,0,.35); }
+    body.light-mode .mu-picks-btn { color:#fff; }
 
     /* ── MOBILE ── */
     @media(max-width:600px){

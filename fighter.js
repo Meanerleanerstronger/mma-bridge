@@ -78,7 +78,7 @@
         <span class="fp-section-title">About</span>
         <div class="fp-section-line"></div>
       </div>
-      ${aboutTags.length ? `<div class="fp-about-meta">${aboutTags.map(t=>`<span class="fp-about-tag">${esc(t)}</span>`).join('')}</div>` : ''}
+      ${aboutTags.length ? `<div class="fp-about-meta">${aboutTags.map(t=>`<span>${esc(t)}</span>`).join('')}</div>` : ''}
       ${f.bio ? `<p class="fp-bio-text">${esc(f.bio)}</p>` : ''}
     ` : '';
 
@@ -98,8 +98,8 @@
       <div class="fp-career-grid">
         ${careerStats.map(k => `
           <div class="fp-career-item">
-            <div class="fp-career-val">${esc(f.stats[k])}</div>
             <div class="fp-career-lbl">${CAREER_STAT_LABELS[k]}</div>
+            <div class="fp-career-val">${esc(f.stats[k])}</div>
           </div>`).join('')}
       </div>
     ` : '';
