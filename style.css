@@ -4804,6 +4804,40 @@ body.light-mode #cursor-glow { display: none; }
 }
 .fp-upcoming-link:hover { background: rgba(217,123,63,0.08); }
 
+/* Light mode — hero/stats-strip stay dark (they sit on a photo/glass
+   card, same convention as event hero overlays elsewhere), everything
+   below that sits on the actual page background and needs real
+   light-appropriate colors instead of white-on-white. */
+body.light-mode .fp-section-line { background: rgba(0,0,0,0.08); }
+body.light-mode .fp-win-pill.dec { background: rgba(0,0,0,0.04); color: rgba(0,0,0,0.45); border-color: rgba(0,0,0,0.09); }
+body.light-mode .fp-about-tag { color: rgba(0,0,0,0.6); background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.1); }
+body.light-mode .fp-bio-text { color: rgba(0,0,0,0.55); }
+body.light-mode .fp-career-item { background: rgba(0,0,0,0.02); border-color: rgba(0,0,0,0.08); }
+body.light-mode .fp-career-item:hover { background: rgba(0,0,0,0.045); }
+body.light-mode .fp-career-val { color: #111; }
+body.light-mode .fp-career-lbl { color: rgba(0,0,0,0.4); }
+body.light-mode .fp-fight-row { border-bottom-color: rgba(0,0,0,0.07); }
+body.light-mode .fp-fight-row:hover { background: rgba(0,0,0,0.03); }
+body.light-mode .fp-res.nc, body.light-mode .fp-res.d { background: rgba(0,0,0,0.04); color: rgba(0,0,0,0.4); border-color: rgba(0,0,0,0.09); }
+body.light-mode .fp-fight-opp { color: #111; }
+body.light-mode .fp-fight-event-name { color: rgba(0,0,0,0.32); }
+body.light-mode .fp-fight-method.dec { color: rgba(0,0,0,0.42); }
+body.light-mode .fp-fight-method.nc { color: rgba(0,0,0,0.28); }
+body.light-mode .fp-fight-rnd { color: rgba(0,0,0,0.3); }
+body.light-mode .fp-ufc-link { color: rgba(0,0,0,0.4); border-bottom-color: rgba(0,0,0,0.14); }
+body.light-mode .fp-not-found { color: rgba(0,0,0,0.35); }
+body.light-mode .fp-not-found strong { color: rgba(0,0,0,0.15); }
+body.light-mode .fp-loading-bar { background: rgba(0,0,0,0.07); }
+body.light-mode .fp-news-item { background: rgba(0,0,0,0.02); border-color: rgba(0,0,0,0.08); }
+body.light-mode .fp-news-item:hover { background: rgba(0,0,0,0.04); }
+body.light-mode .fp-news-item-thumb { background: rgba(0,0,0,0.04); }
+body.light-mode .fp-news-item-title { color: #111; }
+body.light-mode .fp-news-item-meta { color: rgba(0,0,0,0.4); }
+body.light-mode .fp-news-loading, body.light-mode .fp-news-empty { color: rgba(0,0,0,0.32); }
+body.light-mode .fp-upcoming-event { color: rgba(0,0,0,0.45); }
+body.light-mode .fp-upcoming-link { border-color: rgba(184,97,30,0.35); color: #b8611e; }
+body.light-mode .fp-upcoming-link:hover { background: rgba(184,97,30,0.1); }
+
 /* Mobile */
 @media (max-width: 600px) {
   .fp-hero-content { padding: 0 18px 40px; }

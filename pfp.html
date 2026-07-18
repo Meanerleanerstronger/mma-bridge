@@ -337,10 +337,36 @@
     }
     .pfp-row:hover .pfp-row-rec { color: rgba(255,255,255,0.85); }
 
-    /* light mode */
+    /* light mode — hero and champ-spotlight photo stay dark (text sits on
+       a photo overlay, same convention used across the site), everything
+       on a plain panel background gets real light-appropriate colors */
     body.light-mode .pfp-page { background: #f2f2f2; }
-    body.light-mode .pfp-row-name { color: #111; }
     body.light-mode .pfp-list-wrap { background: #f2f2f2; }
+    body.light-mode .pfp-list-header { border-bottom-color: rgba(0,0,0,0.08); }
+    body.light-mode .pfp-list-title { color: rgba(0,0,0,0.55); }
+    body.light-mode .pfp-list-sub { color: rgba(0,0,0,0.32); background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.08); }
+    body.light-mode .pfp-row { border-bottom-color: rgba(0,0,0,0.07); }
+    body.light-mode .pfp-row-num { color: rgba(0,0,0,0.18); }
+    body.light-mode .pfp-row-photo { background-color: #ddd; border-color: rgba(0,0,0,0.08); }
+    body.light-mode .pfp-row-name { color: #111; }
+    body.light-mode .pfp-row:hover .pfp-row-name { color: #7a3d00; }
+    body.light-mode .pfp-row-sub { color: rgba(0,0,0,0.35); }
+    body.light-mode .pfp-row-rec { color: rgba(0,0,0,0.5); }
+    body.light-mode .pfp-row:hover .pfp-row-rec { color: rgba(0,0,0,0.75); }
+
+    body.light-mode .div-spotlight-right { background: #f2f2f2; }
+    body.light-mode .div-pill { color: rgba(0,0,0,0.4); border-color: rgba(0,0,0,0.14); }
+    body.light-mode .div-pill:hover { color: rgba(0,0,0,0.7); border-color: rgba(0,0,0,0.25); }
+    body.light-mode .div-pill.women { color: rgba(190,40,140,0.6); border-color: rgba(190,40,140,0.2); }
+    body.light-mode .div-pill-sep { background: rgba(0,0,0,0.12); }
+    body.light-mode .div-contenders-label { color: rgba(0,0,0,0.3); }
+    body.light-mode .div-contenders-line { background: rgba(0,0,0,0.08); }
+    body.light-mode .div-contender-row { border-bottom-color: rgba(0,0,0,0.06); }
+    body.light-mode .div-contender-row:hover { background: rgba(0,0,0,0.045); }
+    body.light-mode .div-contender-rank { color: rgba(0,0,0,0.25); }
+    body.light-mode .div-contender-photo { background-color: #ddd; border-color: rgba(0,0,0,0.1); color: rgba(0,0,0,0.35); }
+    body.light-mode .div-contender-name { color: #111; }
+    body.light-mode .div-contender-rec { color: rgba(0,0,0,0.4); }
 
     @media (max-width: 900px) {
       .pfp-grid { grid-template-columns: 1fr; gap: 0; }
