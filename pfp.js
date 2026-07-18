@@ -43,16 +43,6 @@ const FIGHTER_PHOTOS = {
   'maycee-barber':          'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/BARBER_MAYCEE_L_12-06.png',
 };
 
-function burstParticles(x, y) {
-  [0, 80].forEach(delay => {
-    const ring = document.createElement('div');
-    ring.className = 'pfp-shockwave';
-    ring.style.cssText = `left:${x}px;top:${y}px;animation-delay:${delay}ms;`;
-    document.body.appendChild(ring);
-    setTimeout(() => ring.remove(), 600 + delay);
-  });
-}
-
 document.addEventListener("DOMContentLoaded", async () => {
   const drawer      = document.getElementById("fightDrawer");
   const drawerClose = document.getElementById("drawerClose");
@@ -92,65 +82,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   drawerClose.onclick = closeDrawer;
   drawerX.onclick     = closeDrawer;
   document.addEventListener("keydown", e => e.key === "Escape" && closeDrawer());
-
-  function methodColor(method) {
-    if (!method) return '#555';
-    const m = method.toUpperCase();
-    if (m.includes('KO') || m.includes('TKO')) return '#e53935';
-    if (m.includes('SUB') || m.includes('CHOKE') || m.includes('CRANK') || m.includes('TRIANGLE') || m.includes('RNC')) return '#8b5cf6';
-    if (m.includes('NC') || m.includes('NO CONTEST')) return '#555';
-    return '#1a6ccc';
-  }
-
-  function methodLabel(method) {
-    if (!method) return '';
-    const m = method.toUpperCase();
-    if (m.includes('KO') && !m.includes('TKO')) return 'KO';
-    if (m.includes('TKO')) return 'TKO';
-    if (m.includes('SUB') || m.includes('CHOKE') || m.includes('CRANK') || m.includes('TRIANGLE') || m.includes('RNC')) return 'SUB';
-    if (m.includes('UD')) return 'UD';
-    if (m.includes('SD')) return 'SD';
-    if (m.includes('MD')) return 'MD';
-    if (m.includes('NC') || m.includes('NO CONTEST')) return 'NC';
-    return method;
-  }
-
-  function renderLast5(fights) {
-    if (!fights?.length) return `<p style="color:rgba(255,255,255,0.4);padding:16px 0;font-family:'Montserrat',sans-serif;font-size:0.82rem;">No recent fights on record</p>`;
-
-    const streak = fights.slice(0, 5).map(f => (f.result || '').toUpperCase());
-
-    const streakHtml = `
-      <div class="pfp-streak-bar">
-        ${streak.map(r => {
-          const bg = r === 'W' ? '#16a34a' : r === 'L' ? '#dc2626' : '#444';
-          return `<div class="pfp-streak-pill" style="background:${bg};">${r}</div>`;
-        }).join('')}
-      </div>`;
-
-    const cardsHtml = fights.slice(0, 5).map(f => {
-      const r      = (f.result || '').toUpperCase();
-      const cls    = r === 'W' ? 'win' : r === 'L' ? 'loss' : 'nc';
-      const resBg  = r === 'W' ? '#16a34a' : r === 'L' ? '#dc2626' : '#555';
-      const mColor = methodColor(f.method);
-      const mLabel = methodLabel(f.method);
-      return `
-        <div class="pfp-fight-card ${cls}">
-          <div class="pfp-fight-top">
-            <div class="pfp-fight-result-badge" style="background:${resBg};">${r}</div>
-            <div class="pfp-fight-opponent">vs ${esc(f.opponent)}</div>
-          </div>
-          <div class="pfp-fight-details">
-            <span class="pfp-fight-method" style="background:${mColor}20;border:1px solid ${mColor}50;color:${mColor};">${esc(mLabel)}</span>
-            ${f.method && mLabel !== f.method ? `<span class="pfp-fight-info">${esc(f.method)}</span>` : ''}
-            <span class="pfp-fight-info" style="margin-left:auto;">R${esc(String(f.round))} · ${esc(f.time||'')}</span>
-          </div>
-          ${f.event ? `<div class="pfp-fight-event-name">${esc(f.event)}</div>` : ''}
-        </div>`;
-    }).join('');
-
-    return streakHtml + cardsHtml;
-  }
 
   // ==============================================
   // LOAD + RENDER
@@ -306,107 +237,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.querySelectorAll("[data-fighter]").forEach(card => {
       card.onclick = e => {
         e.preventDefault();
-        // Burst particles from click point
-        burstParticles(e.clientX, e.clientY);
-        card.classList.remove('pfp-row-tapping');
-        void card.offsetWidth;
-        card.classList.add('pfp-row-tapping');
-
         const slug = card.dataset.fighter;
-        const f = fighters[slug];
-        if (!f) return;
-
-        const photo = FIGHTER_PHOTOS[slug] || '';
-        const panel = document.querySelector('#fightDrawer .drawer-panel');
-
-        const champBadge = f.champion
-          ? `<span class="pfp-modal-champ-badge">⚡ ${esc(f.champion)}</span>`
-          : '';
-
-        const statsHtml = `
-          <div class="pfp-division-header">${esc(f.division||'')}</div>
-          <div class="pfp-stats-grid">
-            ${[['Record',f.record],['Stance',f.stance],['Height',f.height],['Reach',f.reach]].map(([lbl,val]) => `
-              <div class="pfp-stat-box">
-                <div class="pfp-stat-val">${esc(val||'—')}</div>
-                <div class="pfp-stat-lbl">${lbl}</div>
-              </div>`).join('')}
-          </div>`;
-
-        panel.innerHTML = `
-          <div class="pfp-photo-col">
-            ${photo ? `<img class="pfp-photo-col-img" src="${photo}" onerror="this.style.display='none'">` : ''}
-            <div class="pfp-photo-col-grad"></div>
-            <div class="pfp-photo-col-info">
-              <div class="pfp-modal-rank-tag">#${f.rankWomen || f.rank || '?'} ${f.gender === 'female' ? "Women's P4P" : 'P4P'}</div>
-              <div class="pfp-modal-fighter-name">${esc(f.name)}</div>
-              <div class="pfp-modal-meta-row">
-                <span class="pfp-modal-record">${esc(f.record)}</span>
-                ${champBadge ? `<span class="pfp-modal-sep"></span>${champBadge}` : ''}
-              </div>
-            </div>
-          </div>
-          <div class="pfp-info-col">
-            <div class="pfp-info-topbar">
-              <span class="pfp-info-country">
-                <span class="pfp-country-flag">${esc(f.flag||'')}</span>
-                <span class="pfp-country-name">${esc(f.country||'')}</span>
-              </span>
-              <button class="drawer-x" id="pfpModalX" aria-label="Close">✕</button>
-            </div>
-            <div class="pfp-info-scroll">
-              ${statsHtml}
-              <div class="pfp-section-lbl">Last 5 Fights</div>
-              ${renderLast5(f.last5)}
-            </div>
-          </div>`;
-
-        document.getElementById('pfpModalX').onclick = closeDrawer;
-
-        drawer.classList.add("open");
-        document.body.classList.add("no-scroll");
-
-        // ── Fighter photo parallax on mouse move ──
-        let _parallaxRaf = null;
-        function onParallaxMove(e) {
-          const img = panel.querySelector('.pfp-photo-col-img');
-          if (!img) return;
-          const rect = panel.getBoundingClientRect();
-          const cx = rect.left + rect.width * 0.25; // photo col center
-          const cy = rect.top  + rect.height * 0.5;
-          const dx = (e.clientX - cx) / (rect.width * 0.5);
-          const dy = (e.clientY - cy) / (rect.height * 0.5);
-          if (_parallaxRaf) cancelAnimationFrame(_parallaxRaf);
-          _parallaxRaf = requestAnimationFrame(() => {
-            img.style.transform = `translateX(${dx * 9}px) translateY(${dy * 5}px) scale(1.03)`;
-            img.style.transition = 'transform 0.12s ease-out';
-          });
-        }
-        function onParallaxLeave() {
-          const img = panel.querySelector('.pfp-photo-col-img');
-          if (img) {
-            img.style.transform = 'translateX(0) translateY(0) scale(1)';
-            img.style.transition = 'transform 0.5s ease-out';
-          }
-        }
-        panel.addEventListener('mousemove', onParallaxMove);
-        panel.addEventListener('mouseleave', onParallaxLeave);
-        // Clean up when drawer closes
-        const _prevClose = closeDrawer;
-
-        requestAnimationFrame(() => {
-          // Stat boxes
-          if (window.MicroStaggerStats) MicroStaggerStats(panel);
-          // Streak pills
-          if (window.MicroStaggerPills) MicroStaggerPills(panel.querySelector('.pfp-streak-bar'));
-          // Fight history cards
-          panel.querySelectorAll('.pfp-fight-card').forEach((el, i) => {
-            el.classList.remove('micro-stagger-up');
-            el.style.animationDelay = (220 + i * 60) + 'ms';
-            void el.offsetWidth;
-            el.classList.add('micro-stagger-up');
-          });
-        });
+        if (!slug) return;
+        window.location.href = `fighter.html?id=${encodeURIComponent(slug)}`;
       };
     }); // end forEach
     } // end attachRowClicks
