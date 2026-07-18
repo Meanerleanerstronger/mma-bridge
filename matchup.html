@@ -590,7 +590,7 @@
         const h2hFights = (fA.last5||[]).filter(f =>
           f.opponent && f.opponent.toLowerCase().replace(/[^a-z]/g,'').includes(nB.toLowerCase().replace(/[^a-z]/g,'').slice(0,5))
         );
-        const h2hBanner = h2hFights.length ? `<div class="mu-h2h-banner">&#9876; They've fought before &mdash; ${esc(nA)} went ${h2hFights[0].result==='W'?'WIN':'LOSS'} vs ${esc(nB)}</div>` : '';
+        const h2hBanner = h2hFights.length ? `<div class="mu-h2h-banner">They've fought before &mdash; ${esc(nA)} went ${h2hFights[0].result==='W'?'WIN':'LOSS'} vs ${esc(nB)}</div>` : '';
 
         const oppsA = new Map();
         for (const f of (fA.last5||[])) if (f.opponent) oppsA.set(f.opponent.toLowerCase().replace(/[^a-z]/g,''), f);
