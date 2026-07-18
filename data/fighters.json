@@ -37091,7 +37091,94 @@
   {
     "id": "dan-ige",
     "name": "Dan Ige",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/IGE_DAN_L_07-19.png?itok=eje2mypv"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/IGE_DAN_L_07-19.png?itok=eje2mypv",
+    "record": {
+      "wins": 19,
+      "losses": 11,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Melquizael Costa",
+        "result": "L",
+        "method": "TKO (spinning back kick and punches)",
+        "event": "UFC Fight Night: Strickland vs. Hernandez",
+        "round": 1,
+        "time": "4:56"
+      },
+      {
+        "opponent": "Patrício Pitbull",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 318",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Sean Woodson",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC 314",
+        "round": 3,
+        "time": "1:12"
+      },
+      {
+        "opponent": "Lerone Murphy",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 308",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Diego Lopes (fighter)",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 303",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Andre Fili",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "UFC Fight Night: Hermansson vs. Pyfer",
+        "round": 1,
+        "time": "2:43"
+      },
+      {
+        "opponent": "Bryce Mitchell",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Fiziev vs. Gamrot",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Nate Landwehr",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 289",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Damon Jackson",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "UFC Fight Night: Strickland vs. Imavov",
+        "round": 2,
+        "time": "4:13"
+      },
+      {
+        "opponent": "Movsar Evloev",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Volkov vs. Rozenstruik",
+        "round": 3,
+        "time": "5:00"
+      }
+    ]
   },
   {
     "id": "josiah-harrell",
@@ -37101,7 +37188,94 @@
   {
     "id": "carlos-leal",
     "name": "Carlos Leal",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-11/LEAL_CARLOS_L_10-26.png?itok=ZJxDU-p0"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-11/LEAL_CARLOS_L_10-26.png?itok=ZJxDU-p0",
+    "record": {
+      "wins": 14,
+      "losses": 1,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Jiří Procházka",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "UFC 327",
+        "round": 1,
+        "time": "3:45"
+      },
+      {
+        "opponent": "Dominick Reyes",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "UFC Fight Night: Ulberg vs. Reyes",
+        "round": 1,
+        "time": "4:27"
+      },
+      {
+        "opponent": "Jan Błachowicz",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Edwards vs. Brady",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Volkan Oezdemir",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Yan vs. Figueiredo",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Alonzo Menifield",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "UFC on ESPN: Lewis vs. Nascimento",
+        "round": 1,
+        "time": "0:12"
+      },
+      {
+        "opponent": "Da Un Jung",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC 293",
+        "round": 3,
+        "time": "4:49"
+      },
+      {
+        "opponent": "Ihor Potieria",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC on ABC: Rozenstruik vs. Almeida",
+        "round": 1,
+        "time": "2:09"
+      },
+      {
+        "opponent": "Nicolae Negumereanu",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "UFC 281",
+        "round": 1,
+        "time": "3:44"
+      },
+      {
+        "opponent": "Tafon Nchukwi",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Tsarukyan vs. Gamrot",
+        "round": 1,
+        "time": "1:15"
+      },
+      {
+        "opponent": "Fabio Cherant",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 271",
+        "round": 3,
+        "time": "5:00"
+      }
+    ]
   },
   {
     "id": "alibi-idiris",
@@ -37111,12 +37285,186 @@
   {
     "id": "nora-cornolle",
     "name": "Nora Cornolle",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/CORNOLLE_NORA_L_02-21.png?itok=kaGyWqff"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/CORNOLLE_NORA_L_02-21.png?itok=kaGyWqff",
+    "record": {
+      "wins": 9,
+      "losses": 4,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Joselyne Edwards",
+        "result": "L",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC Fight Night: Strickland vs. Hernandez",
+        "round": 2,
+        "time": "2:44"
+      },
+      {
+        "opponent": "Karol Rosa",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Taira vs. Park",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Hailey Cowan",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC 314",
+        "round": 2,
+        "time": "1:52"
+      },
+      {
+        "opponent": "Jacqueline Cavalcanti",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Moicano vs. Saint Denis",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Melissa Mullins",
+        "result": "W",
+        "method": "TKO (knee to the body and head kicks)",
+        "event": "UFC Fight Night: Allen vs. Curtis 2",
+        "round": 2,
+        "time": "3:06"
+      },
+      {
+        "opponent": "Joselyne Edwards",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Gane vs. Spivac",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Hassna Gaber",
+        "result": "W",
+        "method": "TKO (leg injury)",
+        "event": "UAE Warriors 38",
+        "round": 1,
+        "time": "2:45"
+      },
+      {
+        "opponent": "Sanaa Mandar",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UAE Warriors 37",
+        "round": 1,
+        "time": "2:47"
+      },
+      {
+        "opponent": "Priscila de Souza",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Hexagone MMA 6",
+        "round": 2,
+        "time": "2:25"
+      },
+      {
+        "opponent": "Asmaa Abash",
+        "result": "W",
+        "method": "TKO (elbows)",
+        "event": "UAE Warriors 32",
+        "round": 3,
+        "time": "3:15"
+      }
+    ]
   },
   {
     "id": "punahele-soriano",
     "name": "Punahele Soriano",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/SORIANO_PUNAHELE_L_10-04.png?itok=aPEGRoQ-"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/SORIANO_PUNAHELE_L_10-04.png?itok=aPEGRoQ-",
+    "record": {
+      "wins": 13,
+      "losses": 4,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Ramiz Brahimaj",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Strickland vs. Hernandez",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Nikolay Veretennikov",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 320",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Uroš Medić",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "UFC Fight Night: Dern vs. Ribas 2",
+        "round": 1,
+        "time": "0:31"
+      },
+      {
+        "opponent": "Miguel Baeza",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Cannonier vs. Imavov",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Dustin Stoltzfus",
+        "result": "L",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC on ESPN: Dariush vs. Tsarukyan",
+        "round": 2,
+        "time": "4:10"
+      },
+      {
+        "opponent": "Roman Kopylov",
+        "result": "L",
+        "method": "TKO (body kick and punches)",
+        "event": "UFC Fight Night: Strickland vs. Imavov",
+        "round": 2,
+        "time": "3:19"
+      },
+      {
+        "opponent": "Dalcha Lungiambula",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "UFC on ABC: Ortega vs. Rodríguez",
+        "round": 2,
+        "time": "0:28"
+      },
+      {
+        "opponent": "Nick Maximov",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Hermansson vs. Strickland",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Brendan Allen",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Sandhagen vs. Dillashaw",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Duško Todorović",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC on ABC: Holloway vs. Kattar",
+        "round": 1,
+        "time": "4:48"
+      }
+    ]
   },
   {
     "id": "phil-rowe",
