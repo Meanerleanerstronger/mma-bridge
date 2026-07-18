@@ -180,8 +180,11 @@
         list.innerHTML = articles.map(a => {
           const date = a.date ? new Date(a.date).toLocaleDateString('en-US',{month:'short',day:'numeric'}) : '';
           return `<a class="fp-news-item" href="${esc(a.url)}" target="_blank" rel="noopener">
-            <div class="fp-news-item-title">${esc(a.title)}</div>
-            <div class="fp-news-item-meta">${esc(a.source||'')}${date ? ' · '+date : ''}</div>
+            ${a.thumb ? `<div class="fp-news-item-thumb"><img src="${esc(a.thumb)}" alt="" loading="lazy" onerror="this.parentElement.remove()" /></div>` : ''}
+            <div class="fp-news-item-body">
+              <div class="fp-news-item-title">${esc(a.title)}</div>
+              <div class="fp-news-item-meta">${esc(a.source||'')}${date ? ' · '+date : ''}</div>
+            </div>
           </a>`;
         }).join('');
       }).catch(() => { list.innerHTML = '<div class="fp-news-empty">Could not load news.</div>'; });
