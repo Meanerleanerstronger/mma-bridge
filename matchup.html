@@ -254,6 +254,16 @@
       font-family:'Inter',sans-serif; font-size:.55rem;
       color:rgba(255,255,255,.3); margin-top:3px;
     }
+    .mu-common-sub {
+      font-size:.52rem; color:rgba(255,255,255,.2);
+      font-family:'Montserrat',sans-serif; margin-bottom:10px; letter-spacing:.06em;
+    }
+    .mu-form-name {
+      font-family:'Montserrat',sans-serif; font-size:.52rem; font-weight:700;
+      color:rgba(255,255,255,.4); letter-spacing:.08em; text-transform:uppercase;
+      margin-bottom:8px;
+    }
+    .mu-form-name.b { text-align:right; }
     .mu-form-row {
       display:flex; gap:5px; flex-wrap:wrap;
     }
@@ -401,6 +411,8 @@
     body.light-mode .mu-common-opponent { color:rgba(0,0,0,.62); }
     body.light-mode .mu-common-opponent:hover { color:#b8611e; }
     body.light-mode .mu-common-method { color:rgba(0,0,0,.42); }
+    body.light-mode .mu-common-sub { color:rgba(0,0,0,.32); }
+    body.light-mode .mu-form-name { color:rgba(0,0,0,.5); }
     body.light-mode .mu-form-divider { background:rgba(0,0,0,.09); }
     body.light-mode .mu-form-sub { color:rgba(0,0,0,.38); }
     body.light-mode .mu-no-common { color:rgba(0,0,0,.35); }
@@ -658,19 +670,19 @@
             ${h2hBanner ? `<div class="mu-resume-block">${h2hBanner}</div>` : ''}
             <div class="mu-resume-block">
               <div class="mu-resume-label">Common Opponents</div>
-              <div style="font-size:.52rem;color:rgba(255,255,255,.2);font-family:'Montserrat',sans-serif;margin-bottom:10px;letter-spacing:.06em;">${esc(nA)} left &middot; ${esc(nB)} right</div>
+              <div class="mu-common-sub">${esc(nA)} left &middot; ${esc(nB)} right</div>
               ${commonHTML}
             </div>
             <div class="mu-resume-block">
               <div class="mu-resume-label">Recent Form</div>
               <div class="mu-form-section">
                 <div>
-                  <div style="font-family:'Montserrat',sans-serif;font-size:.52rem;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px">${esc(nA)}</div>
+                  <div class="mu-form-name">${esc(nA)}</div>
                   ${formPips(fA.last5, false)}
                 </div>
                 <div class="mu-form-divider"></div>
                 <div>
-                  <div style="font-family:'Montserrat',sans-serif;font-size:.52rem;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;text-align:right">${esc(nB)}</div>
+                  <div class="mu-form-name b">${esc(nB)}</div>
                   ${formPips(fB.last5, true)}
                 </div>
               </div>
