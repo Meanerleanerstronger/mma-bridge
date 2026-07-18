@@ -222,39 +222,49 @@
     .mu-resume-block:last-child { border-bottom:none; }
     .mu-resume-label {
       font-family:'Montserrat',sans-serif; font-weight:800;
-      font-size:.5rem; letter-spacing:.18em; text-transform:uppercase;
-      color:rgba(255,255,255,.28); margin-bottom:14px;
+      font-size:.52rem; letter-spacing:.2em; text-transform:uppercase;
+      color:#d97b3f; opacity:.75; margin-bottom:14px;
     }
     .mu-common-row {
       display:grid; grid-template-columns:1fr auto 1fr;
-      align-items:center; gap:10px; padding:8px 0;
+      align-items:center; gap:10px; padding:10px 8px;
+      margin:0 -8px;
+      border-radius:8px;
       border-bottom:1px solid rgba(255,255,255,.03);
+      transition:background .15s;
     }
+    .mu-common-row:hover { background:rgba(255,255,255,.025); }
     .mu-common-row:last-child { border-bottom:none; }
     .mu-common-result {
-      font-family:'Barlow Condensed',sans-serif; font-weight:900;
-      font-size:1.1rem;
+      display:inline-flex; align-items:center; justify-content:center;
+      min-width:26px; height:22px; padding:0 6px; border-radius:5px;
+      font-family:'Montserrat',sans-serif; font-weight:800;
+      font-size:.62rem; letter-spacing:.02em;
     }
-    .mu-common-result.w { color:#4ade80; }
-    .mu-common-result.l { color:#f87171; }
+    .mu-common-result.w { color:#4ade80; background:rgba(74,222,128,.13); border:1px solid rgba(74,222,128,.2); }
+    .mu-common-result.l { color:#f87171; background:rgba(248,113,113,.1); border:1px solid rgba(248,113,113,.16); }
     .mu-common-opponent {
       font-family:'Montserrat',sans-serif; font-weight:700; font-size:.6rem;
       color:rgba(255,255,255,.55); text-align:center;
       text-transform:uppercase; letter-spacing:.04em;
+      text-decoration:none; transition:color .15s;
     }
+    .mu-common-opponent:hover { color:#d97b3f; }
     .mu-common-method {
       font-family:'Inter',sans-serif; font-size:.55rem;
-      color:rgba(255,255,255,.3); margin-top:1px;
+      color:rgba(255,255,255,.3); margin-top:3px;
     }
     .mu-form-row {
-      display:flex; gap:4px; flex-wrap:wrap;
+      display:flex; gap:5px; flex-wrap:wrap;
     }
     .mu-form-row.b { justify-content:flex-end; }
     .mu-form-pip {
-      width:28px; height:28px; border-radius:6px;
+      width:30px; height:30px; border-radius:7px;
       display:flex; align-items:center; justify-content:center;
-      font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:.85rem;
+      font-family:'Barlow Condensed',sans-serif; font-weight:900; font-size:.9rem;
+      transition:transform .15s;
     }
+    .mu-form-pip:hover { transform:translateY(-2px); }
     .mu-form-pip.w { background:rgba(74,222,128,.15); color:#4ade80; border:1px solid rgba(74,222,128,.2); }
     .mu-form-pip.l { background:rgba(248,113,113,.12); color:#f87171; border:1px solid rgba(248,113,113,.18); }
     .mu-form-sub {
@@ -599,7 +609,7 @@
               <div class="mu-common-result ${c.resultA.toLowerCase()}">${esc(c.resultA)}</div>
               <div class="mu-common-method">${esc((c.methodA.split(' ')[0])||'')}</div>
             </div>
-            <div class="mu-common-opponent">${esc(c.opponent)}</div>
+            <a class="mu-common-opponent" href="fighter.html?name=${encodeURIComponent(c.opponent)}">${esc(c.opponent)}</a>
             <div style="text-align:right">
               <div class="mu-common-result ${c.resultB.toLowerCase()}">${esc(c.resultB)}</div>
               <div class="mu-common-method">${esc((c.methodB.split(' ')[0])||'')}</div>
