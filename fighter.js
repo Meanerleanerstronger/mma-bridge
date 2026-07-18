@@ -87,7 +87,9 @@
            return `<div class="fp-fight-row">
              <div class="fp-res ${res}">${res.toUpperCase()}</div>
              <div class="fp-fight-opp-wrap">
-               <div class="fp-fight-opp">${esc(fight.opponent)}</div>
+               ${fight.opponent
+                 ? `<a class="fp-fight-opp" href="fighter.html?name=${encodeURIComponent(fight.opponent)}">${esc(fight.opponent)}</a>`
+                 : `<div class="fp-fight-opp">—</div>`}
                ${fight.event ? `<div class="fp-fight-event-name">${esc(cleanEvent(fight.event))}</div>` : ''}
              </div>
              <div class="fp-fight-method ${mc}">${esc(methodLabel(fight.method))}</div>
