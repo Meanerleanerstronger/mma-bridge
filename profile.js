@@ -70,7 +70,7 @@
   }
 
   const sb = window._sb;
-  const API_BASE = 'https://mmabridge.onrender.com';
+  const API_BASE = 'https://mmabridge-backend.onrender.com';
 
   // ── VIEWING ANOTHER USER'S PROFILE ────────────
   if (!isOwnProfile) {

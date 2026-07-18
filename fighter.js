@@ -172,7 +172,7 @@
   function loadFighterNews(name) {
     const list = document.getElementById('fpNewsList');
     if (!list) return;
-    fetch(`https://mmabridge.onrender.com/api/news/fighter?name=${encodeURIComponent(name)}`)
+    fetch(`https://mmabridge-backend.onrender.com/api/news/fighter?name=${encodeURIComponent(name)}`)
       .then(r => r.ok ? r.json() : {articles:[]})
       .then(data => {
         const articles = data.articles || [];
