@@ -1,0 +1,144 @@
+{
+  "eventId": "ufc-fight-night-oklahoma-city",
+  "eventName": "UFC Fight Night: Du Plessis vs. Usman",
+  "fights": [
+    {
+      "fighter1": "Dricus Du Plessis Kamaru Usman",
+      "fighter2": "Christian Leroy Duncan Jared Cannonier",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "13692",
+          "totalStr": "00",
+          "td": "Middleweight",
+          "subAtt": 5,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "6815",
+          "totalStr": "00",
+          "td": "Middleweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Chase Hooper Mitch Ramirez",
+      "fighter2": "Fatima Kline Tabatha Ricci",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "31",
+          "totalStr": "10",
+          "td": "Lightweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "6624",
+          "totalStr": "10",
+          "td": "Women'sStrawweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Tommy McMillen Alberto Montes",
+      "fighter2": "Jose Delgado Austin Bashi",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "2 0",
+          "sigStr": "25256",
+          "totalStr": "00",
+          "td": "Featherweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "1 0",
+          "sigStr": "3532",
+          "totalStr": "01",
+          "td": "Featherweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Jean-Paul Lebosnoyani Seokhyeon Ko",
+      "fighter2": "Felipe Franco Levi Rodrigues Jr.",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "5266",
+          "totalStr": "20",
+          "td": "Welterweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "3911",
+          "totalStr": "00",
+          "td": "LightHeavyweight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Ezra Elliott Damien Anderson",
+      "fighter2": "Alden Coria Stewart Nicoll",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "67",
+          "totalStr": "31",
+          "td": "Featherweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "4428",
+          "totalStr": "40",
+          "td": "Flyweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "RJ Harris Alvin Hines",
+      "fighter2": "Dione Barbosa Anna Melisano",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "1511",
+          "totalStr": "00",
+          "td": "Heavyweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "52",
+          "totalStr": "20",
+          "td": "Women'sFlyweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    }
+  ]
+}
