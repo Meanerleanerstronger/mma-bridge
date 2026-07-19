@@ -1518,7 +1518,8 @@
       else if (typeof showCountdownCard === 'function') showCountdownCard(ev);
       /* Live polling — start for today's event, stop for others */
       if (window.MMALive) {
-        const today = new Date().toISOString().slice(0,10);
+        const _n = new Date();
+        const today = _n.getFullYear()+'-'+String(_n.getMonth()+1).padStart(2,'0')+'-'+String(_n.getDate()).padStart(2,'0');
         if (ev.isoDate === today || ev.status === 'upcoming') window.MMALive.start(ev.isoDate);
         else window.MMALive.stop();
       }

@@ -11,6 +11,36 @@
   @view-transition { navigation: none; }
 }
 
+/* Branded easing instead of the browser's default flat 0.25s linear
+   crossfade — a touch of directional drift so it reads as "the next
+   page arriving" rather than a generic dissolve. */
+::view-transition-old(root) {
+  animation: mmaPageOut 0.32s cubic-bezier(0.4, 0, 1, 1) both;
+}
+::view-transition-new(root) {
+  animation: mmaPageIn 0.38s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes mmaPageOut {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to   { opacity: 0; transform: translateY(-8px) scale(0.99); }
+}
+@keyframes mmaPageIn {
+  from { opacity: 0; transform: translateY(10px) scale(1.005); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+}
+
+/* Keep the navbar as a stable, persistent element across navigations
+   instead of letting the browser capture-and-crossfade it along with
+   everything else — it's visually identical page to page, so morphing
+   it in place (effectively: not animating it at all) reads as an
+   always-there app header rather than something that flickers on
+   every click. */
+.navbar { view-transition-name: mma-navbar; }
+::view-transition-group(mma-navbar) { animation-duration: 0.01s; }
+
 /* ── Image fade-in (see theme.js) ── */
 img.img-fade { opacity: 0; transition: opacity 0.35s ease; }
 img.img-fade.img-loaded { opacity: 1; }

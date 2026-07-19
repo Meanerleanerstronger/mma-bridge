@@ -213,8 +213,11 @@
 
   // Load events.json to build winner, method, and FOTN lookups
   const allEventsRaw = await fetch('./events.json', { cache: 'no-cache' }).then(r => r.json()).catch(() => []);
-  // War Room entry point — only surfaced when an event is actually today
-  const todayStr = new Date().toISOString().slice(0, 10);
+  // War Room entry point — only surfaced when an event is actually today.
+  // Local date, not UTC (toISOString rolls over a day early for US evening
+  // visitors, which would hide a genuinely-live event's War Room button).
+  const _now = new Date();
+  const todayStr = _now.getFullYear() + '-' + String(_now.getMonth() + 1).padStart(2, '0') + '-' + String(_now.getDate()).padStart(2, '0');
   const liveEventToday = allEventsRaw.find(e => e.isoDate === todayStr && e.status !== 'completed') || null;
   const winnerMap = {}; // 'eventId:fightKey' -> 'winner lowercase'
   const methodMap = {}; // 'eventId:fightKey' -> 'method string'

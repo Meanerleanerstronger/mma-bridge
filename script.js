@@ -48,13 +48,20 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupSearch();
 });
 
+// Local (viewer's timezone) YYYY-MM-DD — NOT now.toISOString(), which is
+// UTC and silently rolls over to "tomorrow" for US evening visitors,
+// making today's event vanish from every isoDate comparison below.
+function localDateStr(d) {
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+}
+
 // ── Hero resolution (dynamic 5-state formula) ─────────────────
 // TODAY → TONIGHT
 // next event ≤7 days + before Wednesday 11:59pm → SPLIT SCREEN
 // next event ≤7 days + after Wednesday 11:59pm → single UPCOMING
 // next event >7 days → single COMPLETED
 function resolveHeroEvent(all, now) {
-  const todayStr = now.toISOString().slice(0, 10);
+  const todayStr = localDateStr(now);
 
   // 1. TODAY — event happening today, not yet completed
   const todayFight = all.find(e => e.isoDate === todayStr && e.status !== 'completed');

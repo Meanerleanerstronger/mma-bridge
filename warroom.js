@@ -175,7 +175,9 @@
   function gradedCount() { return fights.filter(f => winnerMap[f.key] !== undefined).length; }
 
   // ── Render shell ─────────────────────────────
-  const isToday = ev.isoDate === new Date().toISOString().slice(0, 10);
+  // Local date, not UTC — see script.js localDateStr for why.
+  const _now = new Date();
+  const isToday = ev.isoDate === (_now.getFullYear() + '-' + String(_now.getMonth() + 1).padStart(2, '0') + '-' + String(_now.getDate()).padStart(2, '0'));
   root.innerHTML = `
     <div class="wr-hero">
       <div class="wr-hero-top">
