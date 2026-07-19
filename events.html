@@ -1586,7 +1586,6 @@
       const myPicksBtn     = document.getElementById('ovMyPicksBtn');
       const writeReviewBtn = document.getElementById('ovWriteReviewBtn');
       const isCompleted    = ev.status === 'completed';
-      const isToday        = ev.isoDate === new Date().toISOString().slice(0,10);
       if(pickBtn)        { pickBtn.style.display = isCompleted ? 'none' : ''; pickBtn.href = `picks.html?id=${encodeURIComponent(ev.id)}`; }
       if(warroomBtn)     { warroomBtn.style.display = (!isCompleted && isToday) ? '' : 'none'; warroomBtn.href = `warroom.html?event=${encodeURIComponent(ev.id)}`; }
       if(actionBar)      { actionBar.style.display = isCompleted ? 'flex' : 'none'; }
