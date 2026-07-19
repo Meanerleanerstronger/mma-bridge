@@ -213,6 +213,9 @@
 
   // Load events.json to build winner, method, and FOTN lookups
   const allEventsRaw = await fetch('./events.json', { cache: 'no-cache' }).then(r => r.json()).catch(() => []);
+  // War Room entry point — only surfaced when an event is actually today
+  const todayStr = new Date().toISOString().slice(0, 10);
+  const liveEventToday = allEventsRaw.find(e => e.isoDate === todayStr && e.status !== 'completed') || null;
   const winnerMap = {}; // 'eventId:fightKey' -> 'winner lowercase'
   const methodMap = {}; // 'eventId:fightKey' -> 'method string'
   const fotnMap   = {}; // 'eventId' -> 'fotn fight name lowercase'
@@ -580,6 +583,7 @@
           <button class="lb-group-btn" id="btnCopyInvite">📋 Copy Invite Link</button>
           ${myGroupIsOwner ? `<button class="lb-group-btn lb-group-btn-sec" id="btnManageGroup">⚙ Manage</button>` : ''}
           <a class="lb-group-btn lb-group-btn-recap" href="recap.html" style="text-decoration:none">🏆 Season Recap</a>
+          ${liveEventToday ? `<a class="lb-group-btn lb-group-btn-warroom" href="warroom.html?event=${encodeURIComponent(liveEventToday.id)}" style="text-decoration:none">War Room — Live Now</a>` : ''}
           <button class="lb-group-btn lb-group-btn-danger" id="btnLeaveGroup">Leave</button>
         </div>
         <div class="lb-group-code-wrap">

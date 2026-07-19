@@ -306,6 +306,10 @@
     .ov-topbar-right { display:flex;align-items:center;gap:12px; }
     .ov-pick-btn { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:10px 22px;border-radius:8px;background:rgba(217,123,63,.12);border:1.5px solid rgba(217,123,63,.55);color:#d97b3f;text-decoration:none;white-space:nowrap;transition:background .15s,border-color .15s,transform .15s; }
     .ov-pick-btn:hover { background:rgba(217,123,63,.2);border-color:#d97b3f;transform:translateY(-1px); }
+    .ov-warroom-btn { position:relative;padding-left:30px;background:rgba(255,59,59,.1);border-color:rgba(255,59,59,.5);color:#ff5c5c; }
+    .ov-warroom-btn:hover { background:rgba(255,59,59,.18);border-color:#ff3b3b; }
+    .ov-warroom-btn::before { content:'';position:absolute;left:14px;top:50%;transform:translateY(-50%);width:6px;height:6px;border-radius:50%;background:#ff3b3b;box-shadow:0 0 6px rgba(255,59,59,.7);animation:ovWarroomPulse 1.4s ease infinite; }
+    @keyframes ovWarroomPulse { 0%,100% { opacity:1; } 50% { opacity:.3; } }
     .ov-result-btn { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;padding:10px 18px;border-radius:8px;text-decoration:none;white-space:nowrap;transition:background .15s,transform .15s,box-shadow .15s; }
     .ov-result-picks { background:rgba(74,222,128,.12);border:1.5px solid rgba(74,222,128,.5);color:#4ade80; }
     .ov-result-picks:hover { background:rgba(74,222,128,.22);box-shadow:0 0 20px rgba(74,222,128,.3);transform:translateY(-1px); }
@@ -1152,6 +1156,7 @@
             <span class="ov-days-badge" id="ovDaysBadge" style="display:none;"></span>
           </div>
           <div class="ov-topbar-right">
+            <a class="ov-pick-btn ov-warroom-btn" id="ovWarroomBtn" href="#" style="display:none">War Room — Live</a>
             <a class="ov-pick-btn" id="ovPickBtn" href="#">Pick Fights →</a>
             <div class="ov-cal-wrap" id="ovCalWrap">
               <button class="ov-cal-btn" id="ovCalBtn">
@@ -1576,11 +1581,14 @@
 
       /* Pick Fights / result buttons */
       const pickBtn        = document.getElementById('ovPickBtn');
+      const warroomBtn     = document.getElementById('ovWarroomBtn');
       const actionBar      = document.getElementById('ovActionBar');
       const myPicksBtn     = document.getElementById('ovMyPicksBtn');
       const writeReviewBtn = document.getElementById('ovWriteReviewBtn');
       const isCompleted    = ev.status === 'completed';
+      const isToday        = ev.isoDate === new Date().toISOString().slice(0,10);
       if(pickBtn)        { pickBtn.style.display = isCompleted ? 'none' : ''; pickBtn.href = `picks.html?id=${encodeURIComponent(ev.id)}`; }
+      if(warroomBtn)     { warroomBtn.style.display = (!isCompleted && isToday) ? '' : 'none'; warroomBtn.href = `warroom.html?event=${encodeURIComponent(ev.id)}`; }
       if(actionBar)      { actionBar.style.display = isCompleted ? 'flex' : 'none'; }
       if(myPicksBtn)     { myPicksBtn.href = `picks.html?id=${encodeURIComponent(ev.id)}`; }
       if(writeReviewBtn) { writeReviewBtn.href = `event-review.html?id=${encodeURIComponent(ev.id)}`; }
