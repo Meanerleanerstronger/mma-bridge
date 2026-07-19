@@ -88,7 +88,19 @@
     showBubble(`Welcome to <strong>${esc(groupName)}</strong>. Good luck out there.`);
   }
 
-  window.LucasMoments = { maybeSeasonOpener, maybeFirstDoubleDown, maybeStretchRun, groupWelcome, showBubble };
+  // ── Moment 5: Tied with someone late in the season — once per season,
+  // explains the double-down tiebreaker so it doesn't feel arbitrary ──
+  function maybeTieExplainer() {
+    const key = `tie_explainer_${SEASON_KEY}`;
+    if (seen(key)) return;
+    const now = new Date();
+    const stretchStart = new Date(SEASON_END.getTime() - 30 * 86400000);
+    if (now < stretchStart || now > SEASON_END) return;
+    markSeen(key);
+    showBubble("You're tied with someone right now. Ties break on who's thrown more Double Downs — biggest risk-taker wins the tiebreak.");
+  }
+
+  window.LucasMoments = { maybeSeasonOpener, maybeFirstDoubleDown, maybeStretchRun, maybeTieExplainer, groupWelcome, showBubble };
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', maybeSeasonOpener);

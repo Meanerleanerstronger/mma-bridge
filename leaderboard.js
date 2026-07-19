@@ -723,6 +723,17 @@
     if (judged > 0 && allUsers.length > 2) {
       window.LucasMoments?.maybeStretchRun(myPos);
     }
+
+    // ── Tie-explainer moment — I'm level with whoever's directly above
+    // or below me (same tier + points), late in the season ──
+    if (myPos >= 0) {
+      const me    = allUsers[myPos];
+      const above = allUsers[myPos - 1];
+      const below = allUsers[myPos + 1];
+      const tied = (above && above.tierRank === me.tierRank && above.points === me.points)
+                || (below && below.tierRank === me.tierRank && below.points === me.points);
+      if (tied) window.LucasMoments?.maybeTieExplainer();
+    }
   }
 
   renderGroupStatus();
