@@ -270,17 +270,29 @@
     const ddMap = {}; // 'userId:eventId' -> fightKey to double down on
     picks.forEach(r => {
       if (r.fight_key === '__dd__' && r.user_id && r.pick) {
+        if (cutoff && r.created_at && r.created_at < cutoff) return;
+        if (allowedEventIds && !allowedEventIds.has(r.event_id)) return;
         ddMap[`${r.user_id}:${r.event_id}`] = r.pick;
       }
     });
 
     const map = {};
+    // Tally how many times each user actually double-downed (within the
+    // same cutoff/group scope as everything else) — used as a leaderboard
+    // tiebreaker: when two users are otherwise equal, the one who took
+    // more double-down risk ranks higher.
+    Object.keys(ddMap).forEach(key => {
+      const uid = key.split(':')[0];
+      if (!map[uid]) map[uid] = { total: 0, judged: 0, correct: 0, points: 0, ddCount: 0 };
+      map[uid].ddCount++;
+    });
+
     picks.forEach(r => {
       if (!r.user_id) return;
       if (r.fight_key === '__dd__') return; // handled via ddMap
       if (cutoff && r.created_at && r.created_at < cutoff) return;
       if (allowedEventIds && !allowedEventIds.has(r.event_id)) return;
-      if (!map[r.user_id]) map[r.user_id] = { total: 0, judged: 0, correct: 0, points: 0 };
+      if (!map[r.user_id]) map[r.user_id] = { total: 0, judged: 0, correct: 0, points: 0, ddCount: 0 };
 
       if (r.fight_key === 'fotn') {
         const actualFotn = fotnMap[r.event_id];
@@ -326,7 +338,7 @@
     const ids = Object.keys(statsMap);
     return ids.map(uid => {
       const p   = profileMap[uid] || {};
-      const s   = statsMap[uid]   || { total: 0, judged: 0, correct: 0, points: 0 };
+      const s   = statsMap[uid]   || { total: 0, judged: 0, correct: 0, points: 0, ddCount: 0 };
       const pct = s.judged > 0 ? Math.round((s.correct / s.judged) * 100) : null;
       const tier = getTier(s.judged, pct);
       return {
@@ -335,11 +347,16 @@
         group_is_owner: p.group_is_owner || false,
         group_season_start: p.group_season_start || null,
         count: s.total, judged: s.judged, correct: s.correct, pct, points: s.points || 0,
+        ddCount: s.ddCount || 0,
         tier, tierName: tier.name, tierRank: tier.rank,
       };
     }).sort((a, b) => {
       if (b.tierRank !== a.tierRank) return b.tierRank - a.tierRank;
       if (b.points !== a.points) return b.points - a.points;
+      // Tiebreaker: still tied on points within the same tier — rank the
+      // bigger risk-taker higher (more double-downs attempted), not just
+      // whoever happened to accumulate picks in some other order.
+      if (b.ddCount !== a.ddCount) return b.ddCount - a.ddCount;
       const aH = a.pct !== null && a.judged >= 3;
       const bH = b.pct !== null && b.judged >= 3;
       if (aH && bH) return b.pct - a.pct;
