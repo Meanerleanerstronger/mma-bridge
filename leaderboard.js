@@ -2,12 +2,14 @@
 // MMA BRIDGE — LEADERBOARD + GROUPS
 // Ranked by total picks made (picks table)
 // Requires Supabase profiles table columns:
-//   group_code TEXT, group_name TEXT, group_is_owner BOOLEAN, group_season_start TEXT
+//   group_code TEXT, group_name TEXT, group_is_owner BOOLEAN, group_season_start TEXT,
+//   group_event_types TEXT (JSON array string, e.g. '["ppv","fightnight"]')
 // Run in Supabase SQL editor if missing:
 //   ALTER TABLE profiles ADD COLUMN IF NOT EXISTS group_code TEXT;
 //   ALTER TABLE profiles ADD COLUMN IF NOT EXISTS group_name TEXT;
 //   ALTER TABLE profiles ADD COLUMN IF NOT EXISTS group_is_owner BOOLEAN DEFAULT FALSE;
 //   ALTER TABLE profiles ADD COLUMN IF NOT EXISTS group_season_start TEXT;
+//   ALTER TABLE profiles ADD COLUMN IF NOT EXISTS group_event_types TEXT;
 //
 // Group wall — run once in Supabase SQL editor:
 //   CREATE TABLE IF NOT EXISTS group_comments (
@@ -158,6 +160,12 @@
         <div class="lb-modal-body">
           <p class="lb-modal-desc">Give your group a name. We'll generate a join code you can share with friends.</p>
           <input class="lb-modal-input" id="groupNameInput" type="text" placeholder="e.g. Team Contenders, Cage Rats…" maxlength="40" autocomplete="off" />
+          <div class="lb-modal-label">Which events count?</div>
+          <div class="lb-evtype-row">
+            <label class="lb-evtype-opt"><input type="checkbox" id="evtypePpv" checked> <span>PPV <em>(UFC 333, etc.)</em></span></label>
+            <label class="lb-evtype-opt"><input type="checkbox" id="evtypeFn" checked> <span>Fight Night</span></label>
+            <label class="lb-evtype-opt"><input type="checkbox" id="evtypeDwcs"> <span>Contender Series</span></label>
+          </div>
           <button class="lb-modal-submit" id="submitCreate">Create Group</button>
           <div class="lb-modal-err" id="createErr"></div>
         </div>
@@ -193,6 +201,16 @@
 
   // Points system
   const POINTS = { WINNER: 10, METHOD: 5, ROUND: 5, FOTN: 15 };
+
+  // Classify an event for the group event-type filter. Contender Series
+  // events are stored with type:'FIGHT NIGHT' just like regular Fight
+  // Nights (no dedicated type field), so it's detected by name.
+  function eventTypeOf(e) {
+    if (/contender series/i.test(e.name || '')) return 'dwcs';
+    if (e.type === 'PPV') return 'ppv';
+    if (e.type === 'FIGHT NIGHT') return 'fightnight';
+    return null;
+  }
 
   function normalizeMethodBase(m) {
     if (!m) return '';
@@ -381,7 +399,7 @@
   if (profileIds.length > 0) {
     const { data: pData } = await sb
       .from('profiles')
-      .select('id, display_name, avatar_url, group_code, group_name, group_is_owner, group_season_start')
+      .select('id, display_name, avatar_url, group_code, group_name, group_is_owner, group_season_start, group_event_types')
       .in('id', profileIds);
     profilesData = pData || [];
   }
@@ -396,6 +414,13 @@
   let myGroupName = myProfile.group_name || null;
   let myGroupIsOwner = myProfile.group_is_owner === true;
   let myGroupSeasonStart = myProfile.group_season_start || null;
+  // Which event types count toward this group's standings — defaults to
+  // PPV + Fight Night (excludes Contender Series) for groups created
+  // before this setting existed, matching the new-group default.
+  let myGroupEventTypes = (() => {
+    try { const v = JSON.parse(myProfile.group_event_types || 'null'); return Array.isArray(v) && v.length ? v : ['ppv', 'fightnight']; }
+    catch { return ['ppv', 'fightnight']; }
+  })();
 
   // ── Render a leaderboard table ─────────────────
   function renderTable(users, wrapId, emptyMsg) {
@@ -572,6 +597,15 @@
             </div>
             <div class="lb-manage-season-hint">Only picks made after this date count in the group standings</div>
           </div>
+          <div class="lb-manage-evtypes">
+            <label class="lb-manage-label">Which Events Count</label>
+            <div class="lb-evtype-row">
+              <label class="lb-evtype-opt"><input type="checkbox" id="lbEvtypePpv" ${myGroupEventTypes.includes('ppv') ? 'checked' : ''}> <span>PPV <em>(UFC 333, etc.)</em></span></label>
+              <label class="lb-evtype-opt"><input type="checkbox" id="lbEvtypeFn" ${myGroupEventTypes.includes('fightnight') ? 'checked' : ''}> <span>Fight Night</span></label>
+              <label class="lb-evtype-opt"><input type="checkbox" id="lbEvtypeDwcs" ${myGroupEventTypes.includes('dwcs') ? 'checked' : ''}> <span>Contender Series</span></label>
+            </div>
+            <button class="lb-group-btn" id="btnSetEvtypes">Save</button>
+          </div>
         </div>`;
     }
 
@@ -599,9 +633,14 @@
     if (groupCol) groupCol.style.display = '';
     if (groupLabel) groupLabel.textContent = myGroupName || myGroupCode;
 
-    // Render group leaderboard with season filter
+    // Render group leaderboard with season filter + event-type filter
     const seasonCutoff = myGroupSeasonStart ? new Date(myGroupSeasonStart).toISOString() : null;
-    const groupStatsMap = buildStatsMap(picksData, seasonCutoff);
+    const allowedEventIds = new Set(
+      allEventsRaw
+        .filter(e => eventTypeOf(e) && myGroupEventTypes.includes(eventTypeOf(e)))
+        .map(e => e.id)
+    );
+    const groupStatsMap = buildStatsMap(picksData, seasonCutoff, allowedEventIds);
     const seasonUsers = buildRankedUsers(groupStatsMap).filter(u => u.group_code === myGroupCode);
     renderTable(seasonUsers, 'lbGroupWrap', 'No picks yet in your group — share your code!');
 
@@ -655,6 +694,24 @@
         allUsers.forEach(u => { if (u.group_code === myGroupCode) u.group_season_start = dateVal; });
         renderGroupStatus();
       } catch { if (btn) { btn.textContent = 'Set Season'; btn.disabled = false; } }
+    });
+
+    document.getElementById('btnSetEvtypes')?.addEventListener('click', async () => {
+      const btn = document.getElementById('btnSetEvtypes');
+      if (btn) { btn.textContent = 'Saving…'; btn.disabled = true; }
+      try {
+        const types = [
+          document.getElementById('lbEvtypePpv')?.checked  ? 'ppv'  : null,
+          document.getElementById('lbEvtypeFn')?.checked   ? 'fightnight' : null,
+          document.getElementById('lbEvtypeDwcs')?.checked ? 'dwcs' : null,
+        ].filter(Boolean);
+        const groupMemberIds = groupUsers.map(u => u.user_id);
+        // Same as season start — applied to every member's row so the
+        // filter reads correctly no matter whose profile loads it.
+        await sb.from('profiles').update({ group_event_types: JSON.stringify(types) }).in('id', groupMemberIds);
+        myGroupEventTypes = types.length ? types : ['ppv', 'fightnight'];
+        renderGroupStatus();
+      } catch { if (btn) { btn.textContent = 'Save'; btn.disabled = false; } }
     });
 
     // Leave group
@@ -1270,9 +1327,17 @@
       if (btn) { btn.textContent = 'Creating…'; btn.disabled = true; }
       try {
         const code = randCode();
-        const { error } = await sb.from('profiles').update({ group_code: code, group_name: name, group_is_owner: true }).eq('id', myId);
+        const eventTypes = [
+          document.getElementById('evtypePpv')?.checked  ? 'ppv'  : null,
+          document.getElementById('evtypeFn')?.checked   ? 'fightnight' : null,
+          document.getElementById('evtypeDwcs')?.checked ? 'dwcs' : null,
+        ].filter(Boolean);
+        const { error } = await sb.from('profiles').update({
+          group_code: code, group_name: name, group_is_owner: true,
+          group_event_types: JSON.stringify(eventTypes),
+        }).eq('id', myId);
         if (error) throw error;
-        myGroupCode = code; myGroupName = name; myGroupIsOwner = true;
+        myGroupCode = code; myGroupName = name; myGroupIsOwner = true; myGroupEventTypes = eventTypes;
         if (allUsers) allUsers.forEach(u => { if (u.user_id === myId) { u.group_code = code; u.group_name = name; } });
         closeModal('modalCreate');
         if (nameEl) nameEl.value = '';

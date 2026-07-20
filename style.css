@@ -13487,6 +13487,26 @@ body.light-mode .lm-bubble-close:hover { background: rgba(0,0,0,.1); color: #000
   border-radius: 10px; padding: 12px 14px; margin-bottom: 14px;
   font-family: 'Inter', sans-serif; font-size: .95rem; color: #fff;
 }
+.lb-modal-label {
+  font-family: 'Montserrat', sans-serif; font-size: .58rem; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.4);
+  margin-bottom: 8px;
+}
+.lb-evtype-row { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+.lb-evtype-opt {
+  display: flex; align-items: center; gap: 9px;
+  font-family: 'Inter', sans-serif; font-size: .85rem; color: rgba(255,255,255,.75);
+  cursor: pointer; user-select: none;
+}
+.lb-evtype-opt input[type="checkbox"] {
+  width: 16px; height: 16px; accent-color: #d97b3f; cursor: pointer; flex-shrink: 0;
+}
+.lb-evtype-opt em { font-style: normal; color: rgba(255,255,255,.35); font-size: .78rem; }
+.lb-manage-evtypes { margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.07); }
+body.light-mode .lb-modal-label { color: rgba(0,0,0,.45); }
+body.light-mode .lb-evtype-opt { color: rgba(0,0,0,.7); }
+body.light-mode .lb-evtype-opt em { color: rgba(0,0,0,.35); }
+body.light-mode .lb-manage-evtypes { border-top-color: rgba(0,0,0,.08); }
 .lb-modal-input::placeholder { color: rgba(255,255,255,.3); }
 .lb-modal-input:focus { outline: none; border-color: rgba(217,123,63,.55); }
 .lb-modal-input-code { text-align: center; text-transform: uppercase; letter-spacing: .18em; font-weight: 700; }
