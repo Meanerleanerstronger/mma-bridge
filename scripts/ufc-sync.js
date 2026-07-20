@@ -354,9 +354,15 @@ async function main() {
     const espnDate    = (espnEv.date || '').slice(0, 10);
     const ourEv       = findOurEvent(espnEv, ourEvents);
 
-    // ── A: RESULTS — completed event we haven't marked done yet ───────────────
-    if (isCompleted && ourEv && ourEv.status !== 'completed') {
-      console.log(`📋 Syncing results: ${espnEv.name}`);
+    // ── A: RESULTS — enter any individually-completed fight's result as soon
+    // as ESPN reports it, rather than waiting for ESPN's own aggregate
+    // event.status.type.completed flag, which has been observed to lag
+    // behind (and occasionally flap independently of) individual fight
+    // completions. Only flip our own event status to "completed" once
+    // every one of our fights actually has a result — that's a fact we can
+    // derive ourselves, not something we need to trust a single upstream
+    // flag for. ────────────────────────────────────────────────────────────
+    if (ourEv && ourEv.status !== 'completed') {
       let updated = 0;
 
       for (const comp of (espnEv.competitions || [])) {
@@ -390,9 +396,13 @@ async function main() {
         }
       }
 
-      if (updated > 0) {
+      if (updated > 0) console.log(`📋 Synced results: ${espnEv.name} (${updated} fights)`), changes.push(`Results: ${espnEv.name} (${updated} fights)`);
+
+      const graded = [...(ourEv.mainCard||[]), ...(ourEv.prelims||[]), ...(ourEv.earlyPrelims||[])].filter(f => !f.cancelled);
+      const allGraded = graded.length > 0 && graded.every(f => f.winner);
+      if (isCompleted || allGraded) {
         ourEv.status = 'completed';
-        changes.push(`Results: ${espnEv.name} (${updated} fights)`);
+        changes.push(`Marked completed: ${espnEv.name}`);
       }
     }
 
@@ -421,6 +431,14 @@ async function main() {
     }
 
     // ── D: DROPPED FIGHTS — detect first so replacements can be added in step E ─
+    // ESPN's own scoreboard response for a given event has been observed to
+    // flap between runs near event time (a fighter present on one poll,
+    // missing on the next, back a run later) — trusting a single snapshot
+    // caused a real bug: the same fight got flagged cancelled, then
+    // "replaced" by re-adding itself, then flagged cancelled again, forever,
+    // once per sync run. Require it to be missing on two consecutive runs
+    // before actually flagging it, and self-heal (reset the strike) the
+    // moment ESPN shows it again.
     if (!isCompleted && ourEv) {
       const espnNames = new Set();
       for (const comp of (espnEv.competitions || [])) {
@@ -436,11 +454,19 @@ async function main() {
           if (fight.cancelled) continue;
           const aKey = fight.a.toLowerCase().replace(/[^a-z]/g,'');
           const bKey = fight.b.toLowerCase().replace(/[^a-z]/g,'');
-          // Only flag if ESPN has the event with fights but neither fighter appears
-          if (espnNames.size > 0 && !espnNames.has(aKey) && !espnNames.has(bKey)) {
-            fight.cancelled = true;
-            console.log(`  ⚠ Fight dropped: ${fight.a} vs ${fight.b} (not in ESPN)`);
-            dropped++;
+          const missingFromEspn = espnNames.size > 0 && !espnNames.has(aKey) && !espnNames.has(bKey);
+          if (missingFromEspn) {
+            if (fight._espnMissStreak) {
+              fight.cancelled = true;
+              delete fight._espnMissStreak;
+              console.log(`  ⚠ Fight dropped: ${fight.a} vs ${fight.b} (missing from ESPN 2 runs in a row)`);
+              dropped++;
+            } else {
+              fight._espnMissStreak = true;
+              console.log(`  ? Fight not in ESPN this run (1st miss, watching): ${fight.a} vs ${fight.b}`);
+            }
+          } else if (fight._espnMissStreak) {
+            delete fight._espnMissStreak; // back — ESPN was just flapping
           }
         }
       }
