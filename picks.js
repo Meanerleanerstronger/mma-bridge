@@ -1011,7 +1011,7 @@ function formatOdds(n) {
   }
 
   // ── Build one fight card (prediction slip design) ─
-  function buildFight(f, sectionKey, idx, isMain, isMainCard) {
+  function buildFight(f, sectionKey, idx, isMain, isMainCard, isComain, posTag) {
     const key      = `${sectionKey}-${idx}`;
     const saved    = localPicks[key] || {};
     const opp      = oppPicks[key] || {};
@@ -1123,7 +1123,7 @@ function formatOdds(n) {
     const oppBadgeB = oppPickedB ? `<div class="fc-opp">${esc(oppName)}'s pick</div>` : '';
 
     // Head strip — weight, rounds, title pip, card label
-    const cardLblTxt = isMain ? 'MAIN EVENT' : (isMainCard && idx === 0 ? 'CO-MAIN' : '');
+    const cardLblTxt = isMain ? 'MAIN EVENT' : isComain ? 'CO-MAIN' : (posTag ? posTag.toUpperCase() : '');
     const headHtml = `
       <div class="fc-head" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" data-weight="${esc(f.weight||'')}">
         <div class="fc-head-left">
@@ -1231,7 +1231,26 @@ function formatOdds(n) {
 
   function buildSection(title, fights, sectionKey, isMainCard) {
     if (!fights || !fights.length) return '';
-    const cards = fights.map((f, i) => buildFight(f, sectionKey, i, isMainCard && i === 0, isMainCard)).join('');
+    // Fight order is stored main-event-first (index 0) → earliest
+    // chronologically (highest index) within each section — verified
+    // against real UFC.com card order, not guessed. f.slot already
+    // correctly marks 'main'/'comain'; positional labels for the rest
+    // (opener/feature bout) are derived the same verified way, not from
+    // an index===0 assumption that (bug) collided with the main-event check.
+    const cards = fights.map((f, i) => {
+      const isMain   = f.slot === 'main';
+      const isComain = f.slot === 'comain';
+      const isLast   = i === fights.length - 1;
+      let posTag = '';
+      if (isMainCard) {
+        if (isLast && fights.length > 2) posTag = 'Main Card Opener';
+        else if (i === 2 && fights.length > 3) posTag = 'Feature Bout';
+      } else if (sectionKey === 'prelims') {
+        if (i === 0) posTag = 'Featured Prelim';
+        else if (isLast && fights.length > 1) posTag = 'Prelim Opener';
+      }
+      return buildFight(f, sectionKey, i, isMain, isMainCard, isComain, posTag);
+    }).join('');
     return `
       <div class="fc-section">
         <div class="fc-section-lbl">${esc(title)}</div>
