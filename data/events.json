@@ -11985,6 +11985,54 @@
         "slot": "comain",
         "imgA": "",
         "imgB": "",
+        "cancelled": true
+      },
+      {
+        "a": "Tim Elliott",
+        "b": "Édgar Cháirez",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "",
+        "cancelled": true
+      },
+      {
+        "a": "Curtis Blaydes",
+        "b": "Waldo Cortes Acosta",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "",
+        "cancelled": true
+      },
+      {
+        "a": "Manon Fiorot",
+        "b": "Alexa Grasso",
+        "weight": "W Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "",
+        "cancelled": true
+      },
+      {
+        "a": "Brandon Moreno",
+        "b": "Joseph Morales",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "comain",
+        "imgA": "",
+        "imgB": "",
         "_espnMissStreak": true
       },
       {
@@ -12025,6 +12073,30 @@
       }
     ],
     "prelims": [
+      {
+        "a": "Kelvin Gastelum",
+        "b": "Yousri Belgaroui",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "",
+        "cancelled": true
+      },
+      {
+        "a": "JJ Aldrich",
+        "b": "Regina Tarin",
+        "weight": "W Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "",
+        "cancelled": true
+      },
       {
         "a": "Kelvin Gastelum",
         "b": "Yousri Belgaroui",
@@ -12168,7 +12240,8 @@
         "slot": "comain",
         "imgA": "",
         "imgB": "",
-        "cancelled": false
+        "cancelled": false,
+        "_espnMissStreak": true
       },
       {
         "a": "Tim Elliott",
@@ -12180,7 +12253,8 @@
         "slot": "",
         "imgA": "",
         "imgB": "",
-        "cancelled": false
+        "cancelled": false,
+        "_espnMissStreak": true
       },
       {
         "a": "Curtis Blaydes",
@@ -12192,7 +12266,8 @@
         "slot": "",
         "imgA": "",
         "imgB": "",
-        "cancelled": false
+        "cancelled": false,
+        "_espnMissStreak": true
       },
       {
         "a": "Manon Fiorot",
@@ -12204,7 +12279,8 @@
         "slot": "",
         "imgA": "",
         "imgB": "",
-        "cancelled": false
+        "cancelled": false,
+        "_espnMissStreak": true
       },
       {
         "a": "Mario Pinto",
@@ -12265,7 +12341,8 @@
         "slot": "",
         "imgA": "",
         "imgB": "",
-        "cancelled": false
+        "cancelled": false,
+        "_espnMissStreak": true
       },
       {
         "a": "JJ Aldrich",
@@ -12277,7 +12354,8 @@
         "slot": "",
         "imgA": "",
         "imgB": "",
-        "cancelled": false
+        "cancelled": false,
+        "_espnMissStreak": true
       }
     ],
     "earlyPrelims": []
