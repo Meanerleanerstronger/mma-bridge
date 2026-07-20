@@ -608,12 +608,14 @@ async function loadAndRenderReviews(eventId) {
 }
 
 // ── Fight card section ────────────────────────
-function fightRow(f, communityData) {
+function fightRow(f, communityData, posTag) {
   const slotBadge = f.slot === 'main'
     ? '<span class="er-slot-badge er-main-badge">MAIN EVENT</span>'
     : f.slot === 'comain'
       ? '<span class="er-slot-badge er-comain-badge">CO-MAIN</span>'
-      : '';
+      : posTag
+        ? `<span class="er-slot-badge er-pos-badge">${esc(posTag)}</span>`
+        : '';
   const titleBadge = f.titleFight ? '<span class="er-title-badge">CHAMPIONSHIP</span>' : '';
 
   const METHOD_LABELS = {
@@ -721,6 +723,21 @@ function fightRow(f, communityData) {
 function fightSection(label, fights, communityPicksByKey) {
   if (!fights?.length) return '';
   const sectionKey = label === 'Main Card' ? 'main' : label === 'Prelims' ? 'prelims' : 'earlyPrelims';
+  // Same verified convention as events.html/picks.js: fight order is
+  // stored main-event-first (index 0) → earliest chronologically (highest
+  // index) within each section, confirmed against real UFC.com card order.
+  const isMainCard = label === 'Main Card';
+  const posTagFor = (i) => {
+    const isLast = i === fights.length - 1;
+    if (isMainCard) {
+      if (isLast && fights.length > 2) return 'Main Card Opener';
+      if (i === 2 && fights.length > 3) return 'Feature Bout';
+    } else if (label === 'Prelims') {
+      if (i === 0) return 'Featured Prelim';
+      if (isLast && fights.length > 1) return 'Prelim Opener';
+    }
+    return '';
+  };
   return `
     <details class="er-drop">
       <summary class="er-drop-sum">
@@ -731,7 +748,7 @@ function fightSection(label, fights, communityPicksByKey) {
         </span>
       </summary>
       <div class="er-drop-body">
-        ${fights.map((f, i) => fightRow(f, communityPicksByKey?.[`${sectionKey}-${i}`])).join('')}
+        ${fights.map((f, i) => fightRow(f, communityPicksByKey?.[`${sectionKey}-${i}`], posTagFor(i))).join('')}
       </div>
     </details>`;
 }

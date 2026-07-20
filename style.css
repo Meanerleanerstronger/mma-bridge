@@ -2897,6 +2897,12 @@ body.light-mode .pfp-fight-info { color: rgba(0,0,0,0.4); }
   border: 1px solid rgba(255,255,255,0.2);
   color: rgba(255,255,255,0.75);
 }
+.er-pos-badge {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.4);
+}
+body.light-mode .er-pos-badge { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.12); color: rgba(0,0,0,0.45); }
 .er-fight-names {
   display: flex; align-items: baseline; gap: 10px;
   flex-wrap: wrap;
