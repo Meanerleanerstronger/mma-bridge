@@ -3,13 +3,20 @@
 // Ranked by total picks made (picks table)
 // Requires Supabase profiles table columns:
 //   group_code TEXT, group_name TEXT, group_is_owner BOOLEAN, group_season_start TEXT,
-//   group_event_types TEXT (JSON array string, e.g. '["ppv","fightnight"]')
+//   group_event_types TEXT (JSON array string, e.g. '["ppv","fightnight"]'),
+//   group_excluded_events TEXT (JSON array of event ids excluded from this group's scoring)
 // Run in Supabase SQL editor if missing:
 //   ALTER TABLE profiles ADD COLUMN IF NOT EXISTS group_code TEXT;
 //   ALTER TABLE profiles ADD COLUMN IF NOT EXISTS group_name TEXT;
 //   ALTER TABLE profiles ADD COLUMN IF NOT EXISTS group_is_owner BOOLEAN DEFAULT FALSE;
 //   ALTER TABLE profiles ADD COLUMN IF NOT EXISTS group_season_start TEXT;
 //   ALTER TABLE profiles ADD COLUMN IF NOT EXISTS group_event_types TEXT;
+//   ALTER TABLE profiles ADD COLUMN IF NOT EXISTS group_excluded_events TEXT;
+//
+// Commissioner management (roster, team name, season/scoring, per-event
+// overrides, pick-timing check) lives at commissioner.html — leaderboard.js
+// only surfaces a link to it, so there's a single place a commissioner
+// manages their group instead of two half-duplicated ones.
 //
 // Group wall — run once in Supabase SQL editor:
 //   CREATE TABLE IF NOT EXISTS group_comments (
@@ -399,7 +406,7 @@
   if (profileIds.length > 0) {
     const { data: pData } = await sb
       .from('profiles')
-      .select('id, display_name, avatar_url, group_code, group_name, group_is_owner, group_season_start, group_event_types')
+      .select('id, display_name, avatar_url, group_code, group_name, group_is_owner, group_season_start, group_event_types, group_excluded_events')
       .in('id', profileIds);
     profilesData = pData || [];
   }
@@ -420,6 +427,12 @@
   let myGroupEventTypes = (() => {
     try { const v = JSON.parse(myProfile.group_event_types || 'null'); return Array.isArray(v) && v.length ? v : ['ppv', 'fightnight']; }
     catch { return ['ppv', 'fightnight']; }
+  })();
+  // Specific events the commissioner pulled out of this group's scoring
+  // via commissioner.html, on top of the event-type filter above.
+  let myGroupExcludedEvents = (() => {
+    try { const v = JSON.parse(myProfile.group_excluded_events || 'null'); return Array.isArray(v) ? v : []; }
+    catch { return []; }
   })();
 
   // ── Render a leaderboard table ─────────────────
@@ -576,38 +589,9 @@
       seasonHtml = `<div class="lb-group-season-info">📅 Season from <strong>${esc(d)}</strong></div>`;
     }
 
-    let manageHtml = '';
-    if (myGroupIsOwner) {
-      const memberRows = groupUsers.filter(u => u.user_id !== myId).map(u => `
-        <div class="lb-manage-row" data-uid="${esc(u.user_id)}">
-          <span class="lb-manage-name">${esc(u.name)}</span>
-          <button class="lb-manage-remove" data-uid="${esc(u.user_id)}" data-name="${esc(u.name)}">Remove</button>
-        </div>`).join('') || '<div style="font-size:.75rem;color:rgba(255,255,255,.3);padding:4px 0">No other members yet</div>';
-
-      const defaultDate = myGroupSeasonStart ? myGroupSeasonStart.slice(0,10) : new Date().toISOString().slice(0,10);
-      manageHtml = `
-        <div class="lb-manage-section" id="lbManageSection" style="display:none">
-          <div class="lb-manage-title">Commissioner Controls</div>
-          <div class="lb-manage-members" id="lbManageMembers">${memberRows}</div>
-          <div class="lb-manage-season">
-            <label class="lb-manage-label">Season Start Date</label>
-            <div class="lb-manage-season-row">
-              <input type="date" class="lb-manage-date" id="lbSeasonDateInput" value="${esc(defaultDate)}">
-              <button class="lb-group-btn" id="btnSetSeason">Set Season</button>
-            </div>
-            <div class="lb-manage-season-hint">Only picks made after this date count in the group standings</div>
-          </div>
-          <div class="lb-manage-evtypes">
-            <label class="lb-manage-label">Which Events Count</label>
-            <div class="lb-evtype-row">
-              <label class="lb-evtype-opt"><input type="checkbox" id="lbEvtypePpv" ${myGroupEventTypes.includes('ppv') ? 'checked' : ''}> <span>PPV <em>(UFC 333, etc.)</em></span></label>
-              <label class="lb-evtype-opt"><input type="checkbox" id="lbEvtypeFn" ${myGroupEventTypes.includes('fightnight') ? 'checked' : ''}> <span>Fight Night</span></label>
-              <label class="lb-evtype-opt"><input type="checkbox" id="lbEvtypeDwcs" ${myGroupEventTypes.includes('dwcs') ? 'checked' : ''}> <span>Contender Series</span></label>
-            </div>
-            <button class="lb-group-btn" id="btnSetEvtypes">Save</button>
-          </div>
-        </div>`;
-    }
+    // Full commissioner management (roster, team name, season/scoring,
+    // per-event overrides, pick-timing check) lives at commissioner.html —
+    // one place with everything, instead of a half-duplicated inline panel.
 
     el.innerHTML = `
       <div class="lb-group-active">
@@ -618,7 +602,7 @@
         ${seasonHtml}
         <div class="lb-group-action-row">
           <button class="lb-group-btn" id="btnCopyInvite">📋 Copy Invite Link</button>
-          ${myGroupIsOwner ? `<button class="lb-group-btn lb-group-btn-sec" id="btnManageGroup">⚙ Manage</button>` : ''}
+          ${myGroupIsOwner ? `<a class="lb-group-btn lb-group-btn-sec" href="commissioner.html" style="text-decoration:none">⚙ Commissioner Dashboard</a>` : ''}
           <a class="lb-group-btn lb-group-btn-recap" href="recap.html" style="text-decoration:none">🏆 Season Recap</a>
           ${liveEventToday ? `<a class="lb-group-btn lb-group-btn-warroom" href="warroom.html?event=${encodeURIComponent(liveEventToday.id)}" style="text-decoration:none">War Room — Live Now</a>` : ''}
           <button class="lb-group-btn lb-group-btn-danger" id="btnLeaveGroup">Leave</button>
@@ -627,7 +611,6 @@
           <span class="lb-group-code-label">Code</span>
           <span class="lb-group-code" id="groupCodeDisplay">${esc(myGroupCode)}</span>
         </div>
-        ${manageHtml}
       </div>`;
 
     if (groupCol) groupCol.style.display = '';
@@ -637,7 +620,7 @@
     const seasonCutoff = myGroupSeasonStart ? new Date(myGroupSeasonStart).toISOString() : null;
     const allowedEventIds = new Set(
       allEventsRaw
-        .filter(e => eventTypeOf(e) && myGroupEventTypes.includes(eventTypeOf(e)))
+        .filter(e => eventTypeOf(e) && myGroupEventTypes.includes(eventTypeOf(e)) && !myGroupExcludedEvents.includes(e.id))
         .map(e => e.id)
     );
     const groupStatsMap = buildStatsMap(picksData, seasonCutoff, allowedEventIds);
@@ -651,67 +634,6 @@
       const orig = btn.textContent;
       btn.textContent = '✓ Copied!';
       setTimeout(() => { if (btn) btn.textContent = orig; }, 2000);
-    });
-
-    // Manage toggle
-    document.getElementById('btnManageGroup')?.addEventListener('click', () => {
-      const sec = document.getElementById('lbManageSection');
-      if (sec) sec.style.display = sec.style.display === 'none' ? '' : 'none';
-    });
-
-    // Remove member buttons
-    document.getElementById('lbManageMembers')?.addEventListener('click', async e => {
-      const btn = e.target.closest('.lb-manage-remove');
-      if (!btn) return;
-      const uid = btn.dataset.uid;
-      const uname = btn.dataset.name;
-      if (!uid) return;
-      if (btn.dataset.confirm !== '1') {
-        btn.dataset.confirm = '1'; btn.textContent = 'Confirm?';
-        setTimeout(() => { if (btn) { btn.dataset.confirm = ''; btn.textContent = 'Remove'; } }, 3000);
-        return;
-      }
-      btn.disabled = true;
-      try {
-        await sb.from('profiles').update({ group_code: null, group_name: null, group_is_owner: false }).eq('id', uid);
-        const row = document.querySelector(`.lb-manage-row[data-uid="${uid}"]`);
-        if (row) row.remove();
-        allUsers.forEach(u => { if (u.user_id === uid) { u.group_code = null; u.group_name = null; } });
-      } catch { btn.disabled = false; }
-    });
-
-    // Set season start
-    document.getElementById('btnSetSeason')?.addEventListener('click', async () => {
-      const dateVal = document.getElementById('lbSeasonDateInput')?.value;
-      if (!dateVal) return;
-      const btn = document.getElementById('btnSetSeason');
-      if (btn) { btn.textContent = 'Saving…'; btn.disabled = true; }
-      try {
-        const groupMemberIds = groupUsers.map(u => u.user_id);
-        // Update all group members with the season start date
-        await sb.from('profiles').update({ group_season_start: dateVal }).in('id', groupMemberIds);
-        myGroupSeasonStart = dateVal;
-        allUsers.forEach(u => { if (u.group_code === myGroupCode) u.group_season_start = dateVal; });
-        renderGroupStatus();
-      } catch { if (btn) { btn.textContent = 'Set Season'; btn.disabled = false; } }
-    });
-
-    document.getElementById('btnSetEvtypes')?.addEventListener('click', async () => {
-      const btn = document.getElementById('btnSetEvtypes');
-      if (btn) { btn.textContent = 'Saving…'; btn.disabled = true; }
-      try {
-        const types = [
-          document.getElementById('lbEvtypePpv')?.checked  ? 'ppv'  : null,
-          document.getElementById('lbEvtypeFn')?.checked   ? 'fightnight' : null,
-          document.getElementById('lbEvtypeDwcs')?.checked ? 'dwcs' : null,
-        ].filter(Boolean);
-        const groupMemberIds = groupUsers.map(u => u.user_id);
-        // Same as season start — applied to every member's row so the
-        // filter reads correctly no matter whose profile loads it.
-        await sb.from('profiles').update({ group_event_types: JSON.stringify(types) }).in('id', groupMemberIds);
-        myGroupEventTypes = types.length ? types : ['ppv', 'fightnight'];
-        renderGroupStatus();
-      } catch { if (btn) { btn.textContent = 'Save'; btn.disabled = false; } }
     });
 
     // Leave group
