@@ -1237,15 +1237,23 @@ function formatOdds(n) {
     // correctly marks 'main'/'comain'; positional labels for the rest
     // (opener/feature bout) are derived the same verified way, not from
     // an index===0 assumption that (bug) collided with the main-event check.
+    // "Opener"/"Feature Bout" only mean anything once the section is
+    // actually full — on a still-being-announced card, whatever fight
+    // happens to sit last right now isn't really "the opener". Completed
+    // events are a permanent historical fact, so always trust them; for
+    // upcoming events, only label once the section looks like a real,
+    // standard-sized card. Main Event/Co-Main aren't gated — those come
+    // from f.slot at fixed low indices that don't shift as fights are added.
+    const cardIsFinal = event.status === 'completed';
     const cards = fights.map((f, i) => {
       const isMain   = f.slot === 'main';
       const isComain = f.slot === 'comain';
       const isLast   = i === fights.length - 1;
       let posTag = '';
-      if (isMainCard) {
+      if (isMainCard && (cardIsFinal || fights.length >= 5)) {
         if (isLast && fights.length > 2) posTag = 'Main Card Opener';
         else if (i === 2 && fights.length > 3) posTag = 'Feature Bout';
-      } else if (sectionKey === 'prelims') {
+      } else if (sectionKey === 'prelims' && (cardIsFinal || fights.length >= 4)) {
         if (i === 0) posTag = 'Featured Prelim';
         else if (isLast && fights.length > 1) posTag = 'Prelim Opener';
       }

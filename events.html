@@ -1749,14 +1749,23 @@
           const dimCls=(!isMain&&!isComain)?'dim':'';
           // Fight order is stored main-event-first (index 0) → earliest
           // chronologically (highest index) within each section — verified
-          // against real UFC.com card order, not guessed. That gives us
-          // real positional labels beyond just main/co-main for free.
+          // against real UFC.com card order, not guessed. But "opener" and
+          // "feature bout" only mean anything once the section is actually
+          // full — on a still-being-announced card, whatever fight happens
+          // to sit last right now isn't really "the opener", it's just the
+          // last one confirmed so far. Completed events are a permanent
+          // historical fact (never gain more fights), so always trust them;
+          // for upcoming events, only label once the section looks like a
+          // real, standard-sized card. Main Event/Co-Main aren't gated —
+          // those come from f.slot at fixed low indices that don't shift
+          // as more fights get added, not from where the array currently ends.
           const isLast = i === fights.length - 1;
+          const cardIsFinal = ev.status === 'completed';
           let posTag = '';
-          if (label === 'Main Card') {
+          if (label === 'Main Card' && (cardIsFinal || fights.length >= 5)) {
             if (isLast && fights.length > 2) posTag = 'MAIN CARD OPENER';
             else if (i === 2 && fights.length > 3) posTag = 'FEATURE BOUT';
-          } else if (label === 'Prelims') {
+          } else if (label === 'Prelims' && (cardIsFinal || fights.length >= 4)) {
             if (i === 0) posTag = 'FEATURED PRELIM';
             else if (isLast && fights.length > 1) posTag = 'PRELIM OPENER';
           }

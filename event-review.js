@@ -720,19 +720,23 @@ function fightRow(f, communityData, posTag) {
     </div>`;
 }
 
-function fightSection(label, fights, communityPicksByKey) {
+function fightSection(label, fights, communityPicksByKey, cardIsFinal) {
   if (!fights?.length) return '';
   const sectionKey = label === 'Main Card' ? 'main' : label === 'Prelims' ? 'prelims' : 'earlyPrelims';
   // Same verified convention as events.html/picks.js: fight order is
   // stored main-event-first (index 0) → earliest chronologically (highest
   // index) within each section, confirmed against real UFC.com card order.
+  // "Opener"/"Feature Bout" only mean anything once the section is full —
+  // gate them behind cardIsFinal (completed event, or a full-size section)
+  // so we never guess on a still-being-announced card. Main Event/Co-Main
+  // aren't gated since they come from fixed-index f.slot data.
   const isMainCard = label === 'Main Card';
   const posTagFor = (i) => {
     const isLast = i === fights.length - 1;
-    if (isMainCard) {
+    if (isMainCard && (cardIsFinal || fights.length >= 5)) {
       if (isLast && fights.length > 2) return 'Main Card Opener';
       if (i === 2 && fights.length > 3) return 'Feature Bout';
-    } else if (label === 'Prelims') {
+    } else if (label === 'Prelims' && (cardIsFinal || fights.length >= 4)) {
       if (i === 0) return 'Featured Prelim';
       if (isLast && fights.length > 1) return 'Prelim Opener';
     }
@@ -889,9 +893,9 @@ function renderPage(ev, community, extra = {}) {
           ${hasCard ? `
             <div class="er-card er-card-fights">
               <div class="er-card-title">Full Fight Card</div>
-              ${fightSection('Main Card',     ev.mainCard,     communityPicks)}
-              ${fightSection('Prelims',       ev.prelims,      communityPicks)}
-              ${fightSection('Early Prelims', ev.earlyPrelims, communityPicks)}
+              ${fightSection('Main Card',     ev.mainCard,     communityPicks, ev.status === 'completed')}
+              ${fightSection('Prelims',       ev.prelims,      communityPicks, ev.status === 'completed')}
+              ${fightSection('Early Prelims', ev.earlyPrelims, communityPicks, ev.status === 'completed')}
             </div>` : ''}
 
         </div>
