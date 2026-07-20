@@ -17,6 +17,50 @@ function decodeEntities(s) {
 }
 function normName(s) { return decodeEntities(s).toLowerCase().replace(/[^a-z]/g, ''); }
 
+// ── Week-over-week rank movement ──────────────────────────
+// The site's rankings.json gets fully overwritten every run, so "movement"
+// has to be computed by diffing against whatever was on disk *before* this
+// run's write — there's no separate history file to maintain. Only applies
+// to non-champion ranked entries (numeric rank); champions get a distinct
+// 'new-champ' flag instead of an up/down arrow, since rank 'C' has no
+// numeric direction.
+function loadPreviousRankings() {
+  try { return JSON.parse(fs.readFileSync(OUT, 'utf8')); } catch { return []; }
+}
+
+function attachMovement(divisions, prevDivisions) {
+  const prevByDiv = {};
+  prevDivisions.forEach(d => { if (!prevByDiv[d.division]) prevByDiv[d.division] = d; });
+
+  divisions.forEach(d => {
+    const prev = prevByDiv[d.division];
+    const prevRankMap = {};
+    let prevChamp = null;
+    if (prev) {
+      prev.fighters.forEach(f => {
+        if (f.isChamp) prevChamp = f;
+        else if (typeof f.rank === 'number') prevRankMap[normName(f.name)] = f.rank;
+      });
+    }
+
+    d.fighters.forEach(f => {
+      if (f.isChamp) {
+        if (prevChamp && normName(prevChamp.name) !== normName(f.name)) f.movement = 'new-champ';
+        return;
+      }
+      const key = normName(f.name);
+      if (!(key in prevRankMap)) {
+        f.movement = 'new';
+      } else if (prevRankMap[key] === f.rank) {
+        f.movement = 'same';
+      } else {
+        f.movement = prevRankMap[key] > f.rank ? 'up' : 'down';
+        f.prevRank = prevRankMap[key];
+      }
+    });
+  });
+}
+
 // ── Keep fighters.json's own `ranking` field in sync with the live scrape ──
 // This field is read directly on fighter.html, search.js, results.js, and
 // pfp.js, but nothing was ever updating it after it was first set — found
@@ -67,6 +111,9 @@ function syncFighterRankings(divisions) {
 }
 
 async function run() {
+  // Read before writing — this run's "previous" is whatever's on disk now.
+  const prevDivisions = loadPreviousRankings();
+
   const res = await fetch('https://www.ufc.com/rankings', {
     headers: {
       'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
@@ -91,7 +138,7 @@ async function run() {
     // then strip any inner tags from the captured text instead.
     const divMatch = /<div class="view-grouping-header">([\s\S]*?)<\/div>/.exec(section);
     if (!divMatch) continue;
-    const division = divMatch[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+    const division = decodeEntities(divMatch[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim());
 
     // Champion from h5 inside rankings--athlete--champion block
     const champMatch = /<h5><a[^>]*>([^<]+)<\/a><\/h5>/.exec(section);
@@ -112,14 +159,28 @@ async function run() {
 
   if (!divisions.length) throw new Error('Parsed 0 divisions — UFC page structure may have changed');
 
-  fs.writeFileSync(OUT, JSON.stringify(divisions, null, 2));
-  console.log(`✅ Rankings: wrote ${divisions.length} divisions to data/rankings.json`);
-  divisions.slice(0, 4).forEach(d => {
+  // The UFC rankings page lists each division twice in its markup (the
+  // second pass is a stray partial listing) — keep first occurrence only,
+  // which is always the full 16-fighter version. Deduping here (not just
+  // in syncFighterRankings) matters now that movement diffing keys off
+  // division name — a duplicate would let the partial entry silently win.
+  const seenDiv = new Set();
+  const dedupedDivisions = divisions.filter(d => {
+    if (seenDiv.has(d.division)) return false;
+    seenDiv.add(d.division);
+    return true;
+  });
+
+  attachMovement(dedupedDivisions, prevDivisions);
+
+  fs.writeFileSync(OUT, JSON.stringify(dedupedDivisions, null, 2));
+  console.log(`✅ Rankings: wrote ${dedupedDivisions.length} divisions to data/rankings.json`);
+  dedupedDivisions.slice(0, 4).forEach(d => {
     const champ = d.fighters.find(f => f.isChamp);
     console.log(`  ${d.division}: champ=${champ?.name || 'none'}, ${d.fighters.length} total`);
   });
 
-  syncFighterRankings(divisions);
+  syncFighterRankings(dedupedDivisions);
 }
 
 run().catch(e => { console.error('Rankings sync failed:', e.message); process.exit(1); });

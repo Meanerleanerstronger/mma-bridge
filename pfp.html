@@ -501,6 +501,11 @@
       background: rgba(240,100,200,0.1);
       border-color: rgba(240,100,200,0.25);
     }
+    .div-champ-badge-new {
+      color: #4ade80 !important;
+      background: rgba(74,222,128,0.1) !important;
+      border-color: rgba(74,222,128,0.3) !important;
+    }
     .div-champ-division {
       font-family: 'Montserrat', sans-serif;
       font-size: 0.56rem; font-weight: 700;
@@ -648,6 +653,19 @@
       font-size: 0.6rem; font-weight: 600;
       color: rgba(255,255,255,0.25); margin-top: 2px;
     }
+    .div-move {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.6rem; font-weight: 800;
+      letter-spacing: 0.04em;
+      padding: 3px 7px; border-radius: 4px;
+      flex-shrink: 0; white-space: nowrap;
+    }
+    .div-move-up   { color: #4ade80; background: rgba(74,222,128,0.1); }
+    .div-move-down { color: #f87171; background: rgba(248,113,113,0.1); }
+    .div-move-new  { color: #60a5fa; background: rgba(96,165,250,0.1); }
+    body.light-mode .div-move-up   { background: rgba(34,197,94,0.12); }
+    body.light-mode .div-move-down { background: rgba(239,68,68,0.12); }
+    body.light-mode .div-move-new  { background: rgba(59,130,246,0.12); }
 
     /* Mobile: stack layout */
     @media (max-width: 768px) {
@@ -1103,8 +1121,9 @@
       const rec = fw ? `${fw.record?.wins||0}–${fw.record?.losses||0}${fw.record?.draws?'–'+fw.record.draws:''}` : '';
       const nick = fw?.nickname ? `"${fw.nickname}"` : '';
       el.className = 'div-champ-info' + (isW ? ' women-div' : '');
+      const badgeLabel = champ?.movement === 'new-champ' ? 'NEW CHAMPION' : 'CHAMPION';
       el.innerHTML = `
-        <div class="div-champ-badge">CHAMPION</div>
+        <div class="div-champ-badge${champ?.movement === 'new-champ' ? ' div-champ-badge-new' : ''}">${badgeLabel}</div>
         <div class="div-champ-division">${d.division}</div>
         ${nick ? `<div class="div-champ-nickname">${nick}</div>` : ''}
         <div class="div-champ-name">${champ ? champ.name : 'Vacant'}</div>
@@ -1127,6 +1146,15 @@
           const photo = fw?.img || '';
           const init  = f.name.split(' ').pop().substring(0,2).toUpperCase();
           const rankColor = f.rank <= 3 ? `color:${gold}` : '';
+          // Week-over-week movement, from rankings-sync.js diffing this
+          // week's scrape against last week's file before overwriting it.
+          const moveHtml = f.movement === 'up'
+            ? `<span class="div-move div-move-up">▲ ${f.prevRank - f.rank}</span>`
+            : f.movement === 'down'
+              ? `<span class="div-move div-move-down">▼ ${f.rank - f.prevRank}</span>`
+              : f.movement === 'new'
+                ? `<span class="div-move div-move-new">NEW</span>`
+                : '';
           return `<div class="div-contender-row">
             <div class="div-contender-rank" style="${rankColor}">#${f.rank}</div>
             <div class="div-contender-photo" ${photo?`style="background-image:url('${photo}')"`:''}>${photo?'':init}</div>
@@ -1134,6 +1162,7 @@
               <div class="div-contender-name">${f.name}</div>
               ${rec?`<div class="div-contender-rec">${rec}</div>`:''}
             </div>
+            ${moveHtml}
           </div>`;
         }).join('')}
       `;
@@ -1164,7 +1193,7 @@
   <script src="auth.js?v=3.2"></script>
   <script src="challenge.js?v=1.0"></script>
   <script src="search.js"></script>
-  <script src="chat.js?v=2.1"></script>
+  <script src="chat.js?v=2.5"></script>
 <script src="lucas-moments.js?v=1.3"></script>
   <script src="ux.js?v=1.0"></script>
   <script src="premium.js?v=3.10"></script>
