@@ -131,13 +131,40 @@ async function fetchAllESPN() {
   const results = await Promise.all(chunks);
   // Deduplicate by ESPN id
   const seen = new Set();
-  const all  = [];
+  const byId  = [];
   for (const evs of results) {
     for (const ev of evs) {
-      if (!seen.has(ev.id)) { seen.add(ev.id); all.push(ev); }
+      if (!seen.has(ev.id)) { seen.add(ev.id); byId.push(ev); }
     }
   }
-  return all;
+
+  // ESPN has been observed to serve multiple distinct event objects (different
+  // ids) for the same real-world card while its lineup is still being
+  // announced in batches — each with a different partial roster. Since our
+  // own matching is by date, every one of those maps to the same local
+  // event, and processing them as separate passes caused a real bug: one
+  // pass would add fights the OTHER pass's roster didn't know about, and
+  // that pass would immediately flag them "missing". Merge same-date
+  // entries into one combined roster (competitions dedup'd by the pair of
+  // competitor ids) so the rest of the script only ever sees one, complete
+  // event per real-world date.
+  const byDate = new Map();
+  for (const ev of byId) {
+    const date = (ev.date || '').slice(0, 10);
+    if (!date) continue;
+    if (!byDate.has(date)) { byDate.set(date, ev); continue; }
+    const merged = byDate.get(date);
+    const seenComps = new Set(
+      (merged.competitions || []).map(c => (c.competitors || []).map(x => x.id).sort().join('-'))
+    );
+    for (const comp of (ev.competitions || [])) {
+      const key = (comp.competitors || []).map(x => x.id).sort().join('-');
+      if (!seenComps.has(key)) { merged.competitions = merged.competitions || []; merged.competitions.push(comp); seenComps.add(key); }
+    }
+    // Prefer whichever object reports the event as completed
+    if (ev.status?.type?.completed) merged.status = ev.status;
+  }
+  return [...byDate.values()];
 }
 
 // ── Method parsing from ESPN details ─────────────────────────────────────────
