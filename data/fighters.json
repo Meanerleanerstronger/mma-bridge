@@ -26507,6 +26507,16 @@
       "wins": 11,
       "losses": 1,
       "draws": 1
+    },
+    "stats": {
+      "slpm": "5.46",
+      "strAcc": "58%",
+      "sapm": "4.58",
+      "strDef": "52%",
+      "tdAvg": "0.23",
+      "tdAcc": "8%",
+      "tdDef": "82%",
+      "subAvg": "0.0"
     }
   },
   {
@@ -26608,7 +26618,17 @@
         "time": "style=\"text-align:center\" | 3:52"
       }
     ],
-    "nickname": "The Silent Assassin"
+    "nickname": "The Silent Assassin",
+    "stats": {
+      "slpm": "4.80",
+      "strAcc": "50%",
+      "sapm": "5.24",
+      "strDef": "51%",
+      "tdAvg": "0.89",
+      "tdAcc": "48%",
+      "tdDef": "59%",
+      "subAvg": "0.7"
+    }
   },
   {
     "id": "charles-radtke",
@@ -26645,7 +26665,17 @@
         "round": 2,
         "time": "2:45"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "2.50",
+      "strAcc": "53%",
+      "sapm": "2.45",
+      "strDef": "54%",
+      "tdAvg": "1.99",
+      "tdAcc": "44%",
+      "tdDef": "100%",
+      "subAvg": "0.5"
+    }
   },
   {
     "id": "francisco-prado",
@@ -26673,7 +26703,17 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "3.68",
+      "strAcc": "43%",
+      "sapm": "4.31",
+      "strDef": "54%",
+      "tdAvg": "0.76",
+      "tdAcc": "19%",
+      "tdDef": "40%",
+      "subAvg": "0.8"
+    }
   },
   {
     "id": "mike-malott",
@@ -26766,7 +26806,17 @@
         "time": "0:36"
       }
     ],
-    "nickname": "Proper"
+    "nickname": "Proper",
+    "stats": {
+      "slpm": "4.02",
+      "strAcc": "48%",
+      "sapm": "3.09",
+      "strDef": "56%",
+      "tdAvg": "1.63",
+      "tdAcc": "50%",
+      "tdDef": "57%",
+      "subAvg": "0.7"
+    }
   },
   {
     "id": "charles-jourdain",
@@ -26875,7 +26925,17 @@
         "time": "2:32"
       }
     ],
-    "nickname": "Air"
+    "nickname": "Air",
+    "stats": {
+      "slpm": "5.36",
+      "strAcc": "49%",
+      "sapm": "4.11",
+      "strDef": "56%",
+      "tdAvg": "0.38",
+      "tdAcc": "21%",
+      "tdDef": "46%",
+      "subAvg": "0.6"
+    }
   },
   {
     "id": "kyler-phillips",
@@ -26968,7 +27028,17 @@
         "time": "5:00"
       }
     ],
-    "nickname": "The Matrix"
+    "nickname": "The Matrix",
+    "stats": {
+      "slpm": "4.75",
+      "strAcc": "43%",
+      "sapm": "3.83",
+      "strDef": "58%",
+      "tdAvg": "2.82",
+      "tdAcc": "47%",
+      "tdDef": "75%",
+      "subAvg": "0.3"
+    }
   },
   {
     "id": "jai-herbert",
@@ -27061,7 +27131,17 @@
         "time": "3:26"
       }
     ],
-    "nickname": "Black Country Banger"
+    "nickname": "Black Country Banger",
+    "stats": {
+      "slpm": "3.19",
+      "strAcc": "41%",
+      "sapm": "3.34",
+      "strDef": "52%",
+      "tdAvg": "0.42",
+      "tdAcc": "21%",
+      "tdDef": "66%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "mandel-nallo",
@@ -27082,7 +27162,17 @@
         "round": 1,
         "time": "2:05"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "8.26",
+      "strAcc": "58%",
+      "sapm": "5.03",
+      "strDef": "54%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "100%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "jasmine-jasudavicius",
@@ -27182,7 +27272,17 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "3.47",
+      "strAcc": "44%",
+      "sapm": "3.46",
+      "strDef": "51%",
+      "tdAvg": "2.63",
+      "tdAcc": "46%",
+      "tdDef": "75%",
+      "subAvg": "0.5"
+    }
   },
   {
     "id": "karine-silva",
@@ -27283,7 +27383,17 @@
         "time": "2:16"
       }
     ],
-    "nickname": "Killer"
+    "nickname": "Killer",
+    "stats": {
+      "slpm": "2.24",
+      "strAcc": "38%",
+      "sapm": "2.74",
+      "strDef": "52%",
+      "tdAvg": "1.93",
+      "tdAcc": "50%",
+      "tdDef": "26%",
+      "subAvg": "1.6"
+    }
   },
   {
     "id": "gauge-young",
@@ -27304,7 +27414,17 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "6.32",
+      "strAcc": "52%",
+      "sapm": "5.12",
+      "strDef": "49%",
+      "tdAvg": "0.75",
+      "tdAcc": "30%",
+      "tdDef": "76%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "thiago-moises",
@@ -27396,7 +27516,17 @@
         "round": 4,
         "time": "2:38"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "2.52",
+      "strAcc": "42%",
+      "sapm": "4.40",
+      "strDef": "52%",
+      "tdAvg": "1.37",
+      "tdAcc": "29%",
+      "tdDef": "52%",
+      "subAvg": "1.1"
+    }
   },
   {
     "id": "marcio-barbosa",
@@ -27417,7 +27547,17 @@
         "round": 1,
         "time": "1:20"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "7.01",
+      "strAcc": "47%",
+      "sapm": "6.65",
+      "strDef": "52%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "100%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "dennis-buzukja",
@@ -27438,7 +27578,17 @@
         "round": 1,
         "time": "1:20"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "4.21",
+      "strAcc": "43%",
+      "sapm": "4.79",
+      "strDef": "48%",
+      "tdAvg": "0.62",
+      "tdAcc": "27%",
+      "tdDef": "75%",
+      "subAvg": "0.2"
+    }
   },
   {
     "id": "robert-valentin",
@@ -27460,7 +27610,17 @@
         "round": 1,
         "time": "1:10"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "1.30",
+      "strAcc": "55%",
+      "sapm": "2.72",
+      "strDef": "33%",
+      "tdAvg": "0.59",
+      "tdAcc": "50%",
+      "tdDef": "55%",
+      "subAvg": "1.8"
+    }
   },
   {
     "id": "julien-leblanc",
@@ -27480,7 +27640,17 @@
         "round": 1,
         "time": "2:22"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "1.69",
+      "strAcc": "66%",
+      "sapm": "2.96",
+      "strDef": "46%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "gokhan-saricam",
@@ -27500,7 +27670,17 @@
         "round": 2,
         "time": "4:43"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "5.87",
+      "strAcc": "47%",
+      "sapm": "6.18",
+      "strDef": "38%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "100%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "tanner-boser",
@@ -27601,7 +27781,17 @@
         "time": "5:00"
       }
     ],
-    "nickname": "The Bulldozer"
+    "nickname": "The Bulldozer",
+    "stats": {
+      "slpm": "4.82",
+      "strAcc": "53%",
+      "sapm": "3.00",
+      "strDef": "57%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "69%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "melissa-croden",
@@ -27622,7 +27812,17 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "4.27",
+      "strAcc": "47%",
+      "sapm": "2.13",
+      "strDef": "59%",
+      "tdAvg": "2.02",
+      "tdAcc": "50%",
+      "tdDef": "66%",
+      "subAvg": "0.3"
+    }
   },
   {
     "id": "daria-zheleznyakova",
@@ -27735,7 +27935,17 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "3.92",
+      "strAcc": "46%",
+      "sapm": "4.34",
+      "strDef": "61%",
+      "tdAvg": "0.70",
+      "tdAcc": "25%",
+      "tdDef": "67%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "jamey-lyn-horth",
@@ -27763,7 +27973,17 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "3.80",
+      "strAcc": "47%",
+      "sapm": "2.64",
+      "strDef": "63%",
+      "tdAvg": "0.98",
+      "tdAcc": "42%",
+      "tdDef": "80%",
+      "subAvg": "0.2"
+    }
   },
   {
     "id": "john-castaneda",
@@ -27856,7 +28076,17 @@
         "time": "5:00"
       }
     ],
-    "nickname": "Sexi Mexi"
+    "nickname": "Sexi Mexi",
+    "stats": {
+      "slpm": "4.95",
+      "strAcc": "51%",
+      "sapm": "5.07",
+      "strDef": "54%",
+      "tdAvg": "1.49",
+      "tdAcc": "37%",
+      "tdDef": "75%",
+      "subAvg": "0.1"
+    }
   },
   {
     "id": "mark-vologdin",
@@ -27866,6 +28096,16 @@
       "wins": 12,
       "losses": 4,
       "draws": 2
+    },
+    "stats": {
+      "slpm": "6.93",
+      "strAcc": "47%",
+      "sapm": "10.00",
+      "strDef": "40%",
+      "tdAvg": "0.50",
+      "tdAcc": "14%",
+      "tdDef": "57%",
+      "subAvg": "0.0"
     }
   },
   {
@@ -27894,7 +28134,17 @@
         "round": 1,
         "time": "2:43"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "3.56",
+      "strAcc": "49%",
+      "sapm": "4.07",
+      "strDef": "62%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "80%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "jamie-siraj",
@@ -27915,7 +28165,17 @@
         "round": 1,
         "time": "2:43"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "2.21",
+      "strAcc": "25%",
+      "sapm": "7.73",
+      "strDef": "38%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "aljamain-sterling",
@@ -28008,7 +28268,17 @@
         "time": "1:28"
       }
     ],
-    "nickname": "Funk Master"
+    "nickname": "Funk Master",
+    "stats": {
+      "slpm": "4.26",
+      "strAcc": "52%",
+      "sapm": "2.15",
+      "strDef": "59%",
+      "tdAvg": "2.54",
+      "tdAcc": "32%",
+      "tdDef": "44%",
+      "subAvg": "0.6"
+    }
   },
   {
     "id": "youssef-zalal",
@@ -28101,7 +28371,17 @@
         "time": "5:00"
       }
     ],
-    "nickname": "The Moroccan Devil"
+    "nickname": "The Moroccan Devil",
+    "stats": {
+      "slpm": "2.78",
+      "strAcc": "50%",
+      "sapm": "1.79",
+      "strDef": "64%",
+      "tdAvg": "1.84",
+      "tdAcc": "31%",
+      "tdDef": "55%",
+      "subAvg": "1.3"
+    }
   },
   {
     "id": "norma-dumont",
@@ -28202,7 +28482,17 @@
         "time": "5:00"
       }
     ],
-    "nickname": "The Immortal"
+    "nickname": "The Immortal",
+    "stats": {
+      "slpm": "3.85",
+      "strAcc": "50%",
+      "sapm": "2.33",
+      "strDef": "64%",
+      "tdAvg": "1.43",
+      "tdAcc": "54%",
+      "tdDef": "71%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "joselyne-edwards",
@@ -28287,7 +28577,17 @@
         "time": "5:00"
       }
     ],
-    "nickname": "La Pantera"
+    "nickname": "La Pantera",
+    "stats": {
+      "slpm": "4.61",
+      "strAcc": "53%",
+      "sapm": "3.26",
+      "strDef": "50%",
+      "tdAvg": "1.29",
+      "tdAcc": "36%",
+      "tdDef": "62%",
+      "subAvg": "0.6"
+    }
   },
   {
     "id": "rafa-garcia",
@@ -28380,7 +28680,17 @@
         "time": "5:00"
       }
     ],
-    "nickname": "Gifted"
+    "nickname": "Gifted",
+    "stats": {
+      "slpm": "4.28",
+      "strAcc": "44%",
+      "sapm": "4.42",
+      "strDef": "61%",
+      "tdAvg": "3.22",
+      "tdAcc": "45%",
+      "tdDef": "77%",
+      "subAvg": "0.4"
+    }
   },
   {
     "id": "alexander-hernandez",
@@ -28481,7 +28791,17 @@
         "time": "1:23"
       }
     ],
-    "nickname": "El Gran Chango"
+    "nickname": "El Gran Chango",
+    "stats": {
+      "slpm": "4.23",
+      "strAcc": "40%",
+      "sapm": "4.45",
+      "strDef": "59%",
+      "tdAvg": "1.05",
+      "tdAcc": "35%",
+      "tdDef": "68%",
+      "subAvg": "0.1"
+    }
   },
   {
     "id": "davey-grant",
@@ -28590,7 +28910,17 @@
         "time": "3:03"
       }
     ],
-    "nickname": "Dangerous"
+    "nickname": "Dangerous",
+    "stats": {
+      "slpm": "5.58",
+      "strAcc": "45%",
+      "sapm": "4.04",
+      "strDef": "54%",
+      "tdAvg": "0.95",
+      "tdAcc": "38%",
+      "tdDef": "65%",
+      "subAvg": "0.2"
+    }
   },
   {
     "id": "adrian-martinetti",
@@ -28705,7 +29035,17 @@
         "time": "5:00"
       }
     ],
-    "nickname": "Quik"
+    "nickname": "Quik",
+    "stats": {
+      "slpm": "3.02",
+      "strAcc": "52%",
+      "sapm": "1.40",
+      "strDef": "60%",
+      "tdAvg": "2.71",
+      "tdAcc": "63%",
+      "tdDef": "67%",
+      "subAvg": "0.3"
+    }
   },
   {
     "id": "raoni-barcelos",
@@ -28813,7 +29153,17 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "4.65",
+      "strAcc": "51%",
+      "sapm": "4.24",
+      "strDef": "60%",
+      "tdAvg": "2.51",
+      "tdAcc": "31%",
+      "tdDef": "87%",
+      "subAvg": "0.7"
+    }
   },
   {
     "id": "marcus-buchecha",
@@ -28897,7 +29247,17 @@
         "round": 1,
         "time": "2:55"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "1.59",
+      "strAcc": "50%",
+      "sapm": "2.15",
+      "strDef": "50%",
+      "tdAvg": "2.02",
+      "tdAcc": "16%",
+      "tdDef": "0%",
+      "subAvg": "0.4"
+    }
   },
   {
     "id": "ryan-spann",
@@ -28990,7 +29350,17 @@
         "time": "3:47"
       }
     ],
-    "nickname": "Superman"
+    "nickname": "Superman",
+    "stats": {
+      "slpm": "3.11",
+      "strAcc": "39%",
+      "sapm": "3.92",
+      "strDef": "43%",
+      "tdAvg": "1.21",
+      "tdAcc": "34%",
+      "tdDef": "59%",
+      "subAvg": "1.7"
+    }
   },
   {
     "id": "rodolfo-vieira",
@@ -29082,7 +29452,17 @@
         "round": 1,
         "time": "2:58"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "3.43",
+      "strAcc": "54%",
+      "sapm": "4.28",
+      "strDef": "49%",
+      "tdAvg": "2.87",
+      "tdAcc": "22%",
+      "tdDef": "60%",
+      "subAvg": "0.9"
+    }
   },
   {
     "id": "eric-mcconico",
@@ -29110,7 +29490,17 @@
         "round": 1,
         "time": "1:45"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "2.92",
+      "strAcc": "46%",
+      "sapm": "3.05",
+      "strDef": "45%",
+      "tdAvg": "0.64",
+      "tdAcc": "100%",
+      "tdDef": "68%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "jackson-mcvey",
@@ -29131,7 +29521,17 @@
         "round": 1,
         "time": "2:14"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "6.51",
+      "strAcc": "69%",
+      "sapm": "3.37",
+      "strDef": "23%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "1.2"
+    }
   },
   {
     "id": "mayra-bueno-silva",
@@ -29232,7 +29632,17 @@
         "time": "2:29"
       }
     ],
-    "nickname": "Sheetara"
+    "nickname": "Sheetara",
+    "stats": {
+      "slpm": "3.52",
+      "strAcc": "56%",
+      "sapm": "4.71",
+      "strDef": "51%",
+      "tdAvg": "0.46",
+      "tdAcc": "23%",
+      "tdDef": "64%",
+      "subAvg": "1.3"
+    }
   },
   {
     "id": "michelle-montague",
@@ -29253,7 +29663,17 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "2.77",
+      "strAcc": "48%",
+      "sapm": "2.47",
+      "strDef": "41%",
+      "tdAvg": "3.50",
+      "tdAcc": "53%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "jafel-filho",
@@ -29274,7 +29694,17 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "1.78",
+      "strAcc": "40%",
+      "sapm": "1.76",
+      "strDef": "50%",
+      "tdAvg": "2.40",
+      "tdAcc": "47%",
+      "tdDef": "50%",
+      "subAvg": "1.8"
+    }
   },
   {
     "id": "francis-marshall",
@@ -29295,7 +29725,17 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "3.19",
+      "strAcc": "34%",
+      "sapm": "3.45",
+      "strDef": "55%",
+      "tdAvg": "2.71",
+      "tdAcc": "47%",
+      "tdDef": "88%",
+      "subAvg": "0.5"
+    }
   },
   {
     "id": "lucas-brennan",
@@ -29388,7 +29828,17 @@
         "time": "1:54"
       }
     ],
-    "nickname": "Skywalker"
+    "nickname": "Skywalker",
+    "stats": {
+      "slpm": "0.60",
+      "strAcc": "25%",
+      "sapm": "2.20",
+      "strDef": "52%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "33%",
+      "subAvg": "1.0"
+    }
   },
   {
     "id": "max-griffin",
@@ -29481,7 +29931,17 @@
         "time": "2:03"
       }
     ],
-    "nickname": "Pain"
+    "nickname": "Pain",
+    "stats": {
+      "slpm": "3.70",
+      "strAcc": "47%",
+      "sapm": "3.69",
+      "strDef": "58%",
+      "tdAvg": "1.44",
+      "tdAcc": "41%",
+      "tdDef": "69%",
+      "subAvg": "0.2"
+    }
   },
   {
     "id": "victor-valenzuela",
@@ -29501,7 +29961,17 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "3.47",
+      "strAcc": "40%",
+      "sapm": "4.81",
+      "strDef": "51%",
+      "tdAvg": "0.63",
+      "tdAcc": "33%",
+      "tdDef": "55%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "talita-alencar",
@@ -29594,7 +30064,17 @@
         "time": "4:14"
       }
     ],
-    "nickname": "Problem Child"
+    "nickname": "Problem Child",
+    "stats": {
+      "slpm": "3.09",
+      "strAcc": "36%",
+      "sapm": "3.67",
+      "strDef": "51%",
+      "tdAvg": "3.01",
+      "tdAcc": "29%",
+      "tdDef": "66%",
+      "subAvg": "0.5"
+    }
   },
   {
     "id": "julia-polastri",
@@ -29615,7 +30095,17 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "6.22",
+      "strAcc": "56%",
+      "sapm": "5.18",
+      "strDef": "59%",
+      "tdAvg": "0.62",
+      "tdAcc": "80%",
+      "tdDef": "57%",
+      "subAvg": "0.3"
+    }
   },
   {
     "id": "beneil-dariush",
@@ -29731,7 +30221,17 @@
         "round": 2,
         "time": "1:00"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "3.74",
+      "strAcc": "49%",
+      "sapm": "2.63",
+      "strDef": "57%",
+      "tdAvg": "2.21",
+      "tdAcc": "38%",
+      "tdDef": "82%",
+      "subAvg": "0.8"
+    }
   },
   {
     "id": "tim-elliott",
@@ -29831,7 +30331,17 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "3.51",
+      "strAcc": "43%",
+      "sapm": "3.00",
+      "strDef": "56%",
+      "tdAvg": "3.61",
+      "tdAcc": "45%",
+      "tdDef": "59%",
+      "subAvg": "1.1"
+    }
   },
   {
     "id": "shamil-gaziev",
@@ -29939,7 +30449,17 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "2.94",
+      "strAcc": "46%",
+      "sapm": "4.92",
+      "strDef": "45%",
+      "tdAvg": "1.06",
+      "tdAcc": "33%",
+      "tdDef": "83%",
+      "subAvg": "0.3"
+    }
   },
   {
     "id": "louie-sutherland",
@@ -29968,7 +30488,17 @@
         "round": 1,
         "time": "3:44"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "1.81",
+      "strAcc": "68%",
+      "sapm": "2.03",
+      "strDef": "30%",
+      "tdAvg": "4.95",
+      "tdAcc": "42%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "robert-bryczek",
@@ -30068,7 +30598,17 @@
         "round": 1,
         "time": "1:33"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "2.80",
+      "strAcc": "37%",
+      "sapm": "4.51",
+      "strDef": "55%",
+      "tdAvg": "0.36",
+      "tdAcc": "100%",
+      "tdDef": "71%",
+      "subAvg": "0.4"
+    }
   },
   {
     "id": "kevin-christian",
@@ -30088,7 +30628,17 @@
         "round": 1,
         "time": null
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "2.19",
+      "strAcc": "58%",
+      "sapm": "3.54",
+      "strDef": "40%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "50%",
+      "subAvg": "1.9"
+    }
   },
   {
     "id": "gerald-meerschaert",
@@ -30181,7 +30731,17 @@
         "time": "1:39"
       }
     ],
-    "nickname": "GM3"
+    "nickname": "GM3",
+    "stats": {
+      "slpm": "2.95",
+      "strAcc": "45%",
+      "sapm": "3.44",
+      "strDef": "53%",
+      "tdAvg": "1.70",
+      "tdAcc": "29%",
+      "tdDef": "40%",
+      "subAvg": "1.5"
+    }
   },
   {
     "id": "colby-thicknesse",
@@ -30202,7 +30762,17 @@
         "round": 3,
         "time": null
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "3.24",
+      "strAcc": "41%",
+      "sapm": "2.93",
+      "strDef": "54%",
+      "tdAvg": "0.67",
+      "tdAcc": "7%",
+      "tdDef": "33%",
+      "subAvg": "1.7"
+    }
   },
   {
     "id": "vince-morales",
@@ -30295,7 +30865,17 @@
         "time": "5:00"
       }
     ],
-    "nickname": "Vandetta"
+    "nickname": "Vandetta",
+    "stats": {
+      "slpm": "3.54",
+      "strAcc": "37%",
+      "sapm": "3.91",
+      "strDef": "54%",
+      "tdAvg": "0.71",
+      "tdAcc": "47%",
+      "tdDef": "63%",
+      "subAvg": "0.5"
+    }
   },
   {
     "id": "ben-johnston",
@@ -30309,7 +30889,17 @@
         "round": 3,
         "time": null
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "1.01",
+      "strAcc": "75%",
+      "sapm": "1.01",
+      "strDef": "29%",
+      "tdAvg": "2.54",
+      "tdAcc": "100%",
+      "tdDef": "100%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "wes-schultz",
@@ -30330,7 +30920,17 @@
         "round": 3,
         "time": null
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "2.91",
+      "strAcc": "46%",
+      "sapm": "3.11",
+      "strDef": "43%",
+      "tdAvg": "2.39",
+      "tdAcc": "21%",
+      "tdDef": "0%",
+      "subAvg": "3.6"
+    }
   },
   {
     "id": "jonathan-micallef",
@@ -30351,7 +30951,17 @@
         "round": 3,
         "time": null
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "3.85",
+      "strAcc": "43%",
+      "sapm": "3.64",
+      "strDef": "56%",
+      "tdAvg": "1.08",
+      "tdAcc": "42%",
+      "tdDef": "66%",
+      "subAvg": "0.7"
+    }
   },
   {
     "id": "dom-mar-fan",
@@ -30372,7 +30982,17 @@
         "round": 1,
         "time": null
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "3.43",
+      "strAcc": "56%",
+      "sapm": "2.31",
+      "strDef": "44%",
+      "tdAvg": "1.84",
+      "tdAcc": "50%",
+      "tdDef": "62%",
+      "subAvg": "0.3"
+    }
   },
   {
     "id": "kody-steele",
@@ -30392,7 +31012,17 @@
         "round": 1,
         "time": null
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "3.85",
+      "strAcc": "32%",
+      "sapm": "6.20",
+      "strDef": "52%",
+      "tdAvg": "1.07",
+      "tdAcc": "25%",
+      "tdDef": "100%",
+      "subAvg": "0.5"
+    }
   },
   {
     "id": "ollie-schmid",
@@ -30413,7 +31043,17 @@
         "round": 1,
         "time": null
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "3.23",
+      "strAcc": "30%",
+      "sapm": "7.90",
+      "strDef": "45%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "marwan-rahiki",
@@ -30434,7 +31074,17 @@
         "round": 1,
         "time": null
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "7.75",
+      "strAcc": "52%",
+      "sapm": "5.90",
+      "strDef": "57%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "100%",
+      "subAvg": "0.8"
+    }
   },
   {
     "id": "joaquin-buckley",
@@ -30543,7 +31193,17 @@
         "time": "5:00"
       }
     ],
-    "nickname": "New Mansa"
+    "nickname": "New Mansa",
+    "stats": {
+      "slpm": "3.62",
+      "strAcc": "36%",
+      "sapm": "3.10",
+      "strDef": "58%",
+      "tdAvg": "1.43",
+      "tdAcc": "45%",
+      "tdDef": "70%",
+      "subAvg": "0.1"
+    }
   },
   {
     "id": "king-green",
@@ -30660,7 +31320,17 @@
         "time": "5:00"
       }
     ],
-    "nickname": "King"
+    "nickname": "King",
+    "stats": {
+      "slpm": "6.49",
+      "strAcc": "53%",
+      "sapm": "3.63",
+      "strDef": "62%",
+      "tdAvg": "1.32",
+      "tdAcc": "43%",
+      "tdDef": "71%",
+      "subAvg": "0.3"
+    }
   },
   {
     "id": "jeremy-stephens",
@@ -30753,7 +31423,17 @@
         "time": "4:19"
       }
     ],
-    "nickname": "Lil&#039; Heathen"
+    "nickname": "Lil&#039; Heathen",
+    "stats": {
+      "slpm": "3.13",
+      "strAcc": "40%",
+      "sapm": "3.25",
+      "strDef": "57%",
+      "tdAvg": "1.10",
+      "tdAcc": "38%",
+      "tdDef": "61%",
+      "subAvg": "0.4"
+    }
   },
   {
     "id": "ozzy-diaz",
@@ -30781,7 +31461,17 @@
         "round": 1,
         "time": "2:25"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "5.33",
+      "strAcc": "49%",
+      "sapm": "6.52",
+      "strDef": "61%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "50%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "grant-dawson",
@@ -30906,7 +31596,17 @@
         "time": "4:59"
       }
     ],
-    "nickname": "KGD"
+    "nickname": "KGD",
+    "stats": {
+      "slpm": "3.14",
+      "strAcc": "51%",
+      "sapm": "2.14",
+      "strDef": "44%",
+      "tdAvg": "3.58",
+      "tdAcc": "39%",
+      "tdDef": "66%",
+      "subAvg": "1.4"
+    }
   },
   {
     "id": "mateusz-rebecki",
@@ -31014,7 +31714,17 @@
         "round": 5,
         "time": "5:00"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "4.79",
+      "strAcc": "46%",
+      "sapm": "4.36",
+      "strDef": "54%",
+      "tdAvg": "3.05",
+      "tdAcc": "48%",
+      "tdDef": "53%",
+      "subAvg": "0.4"
+    }
   },
   {
     "id": "joel-alvarez",
@@ -31107,7 +31817,17 @@
         "time": "2:22"
       }
     ],
-    "nickname": "El Fenomeno"
+    "nickname": "El Fenomeno",
+    "stats": {
+      "slpm": "4.53",
+      "strAcc": "54%",
+      "sapm": "3.03",
+      "strDef": "53%",
+      "tdAvg": "0.18",
+      "tdAcc": "33%",
+      "tdDef": "46%",
+      "subAvg": "1.1"
+    }
   },
   {
     "id": "yaroslav-amosov",
@@ -31207,7 +31927,17 @@
         "round": 2,
         "time": "4:05"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "2.65",
+      "strAcc": "53%",
+      "sapm": "1.38",
+      "strDef": "60%",
+      "tdAvg": "11.11",
+      "tdAcc": "53%",
+      "tdDef": "0%",
+      "subAvg": "3.2"
+    }
   },
   {
     "id": "jim-miller",
@@ -31308,7 +32038,17 @@
         "time": "5:00"
       }
     ],
-    "nickname": "A-10"
+    "nickname": "A-10",
+    "stats": {
+      "slpm": "2.92",
+      "strAcc": "42%",
+      "sapm": "3.43",
+      "strDef": "56%",
+      "tdAvg": "1.49",
+      "tdAcc": "45%",
+      "tdDef": "47%",
+      "subAvg": "1.7"
+    }
   },
   {
     "id": "jared-gordon",
@@ -31425,7 +32165,17 @@
         "time": "2:39"
       }
     ],
-    "nickname": "Flash"
+    "nickname": "Flash",
+    "stats": {
+      "slpm": "5.57",
+      "strAcc": "53%",
+      "sapm": "4.11",
+      "strDef": "55%",
+      "tdAvg": "1.91",
+      "tdAcc": "34%",
+      "tdDef": "60%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "roman-kopylov",
@@ -31533,7 +32283,17 @@
         "round": 3,
         "time": "1:09"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "4.54",
+      "strAcc": "50%",
+      "sapm": "5.08",
+      "strDef": "53%",
+      "tdAvg": "1.12",
+      "tdAcc": "50%",
+      "tdDef": "88%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "marco-tulio",
@@ -31570,7 +32330,17 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "6.02",
+      "strAcc": "53%",
+      "sapm": "2.97",
+      "strDef": "56%",
+      "tdAvg": "1.05",
+      "tdAcc": "26%",
+      "tdDef": "0%",
+      "subAvg": "0.3"
+    }
   },
   {
     "id": "pat-sabatini",
@@ -31662,7 +32432,17 @@
         "round": 1,
         "time": "1:53"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "1.69",
+      "strAcc": "54%",
+      "sapm": "1.16",
+      "strDef": "54%",
+      "tdAvg": "4.27",
+      "tdAcc": "41%",
+      "tdDef": "50%",
+      "subAvg": "1.3"
+    }
   },
   {
     "id": "william-gomis",
@@ -31699,7 +32479,17 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "3.20",
+      "strAcc": "48%",
+      "sapm": "2.60",
+      "strDef": "61%",
+      "tdAvg": "0.73",
+      "tdAcc": "38%",
+      "tdDef": "77%",
+      "subAvg": "0.3"
+    }
   },
   {
     "id": "baisangur-susurkaev",
@@ -31728,7 +32518,17 @@
         "round": 2,
         "time": "2:01"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "5.74",
+      "strAcc": "54%",
+      "sapm": "4.45",
+      "strDef": "58%",
+      "tdAvg": "2.09",
+      "tdAcc": "26%",
+      "tdDef": "100%",
+      "subAvg": "0.8"
+    }
   },
   {
     "id": "djorden-santos",
@@ -31749,7 +32549,17 @@
         "round": 3,
         "time": "4:12"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "6.64",
+      "strAcc": "42%",
+      "sapm": "6.35",
+      "strDef": "48%",
+      "tdAvg": "0.51",
+      "tdAcc": "28%",
+      "tdDef": "85%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "clayton-carpenter",
@@ -31769,7 +32579,17 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "3.88",
+      "strAcc": "50%",
+      "sapm": "4.47",
+      "strDef": "49%",
+      "tdAvg": "1.75",
+      "tdAcc": "35%",
+      "tdDef": "50%",
+      "subAvg": "1.0"
+    }
   },
   {
     "id": "jose-ochoa",
@@ -31798,7 +32618,17 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "5.16",
+      "strAcc": "47%",
+      "sapm": "2.99",
+      "strDef": "58%",
+      "tdAvg": "0.30",
+      "tdAcc": "25%",
+      "tdDef": "65%",
+      "subAvg": "0.9"
+    }
   },
   {
     "id": "melquizael-costa",
@@ -31899,7 +32729,17 @@
         "time": "4:05"
       }
     ],
-    "nickname": "The Dalmatian"
+    "nickname": "The Dalmatian",
+    "stats": {
+      "slpm": "4.29",
+      "strAcc": "47%",
+      "sapm": "3.19",
+      "strDef": "50%",
+      "tdAvg": "1.53",
+      "tdAcc": "35%",
+      "tdDef": "50%",
+      "subAvg": "0.8"
+    }
   },
   {
     "id": "dooho-choi",
@@ -32008,7 +32848,17 @@
         "time": "1:33"
       }
     ],
-    "nickname": "The Korean Superboy"
+    "nickname": "The Korean Superboy",
+    "stats": {
+      "slpm": "5.00",
+      "strAcc": "55%",
+      "sapm": "4.43",
+      "strDef": "57%",
+      "tdAvg": "1.26",
+      "tdAcc": "53%",
+      "tdDef": "59%",
+      "subAvg": "0.5"
+    }
   },
   {
     "id": "daniel-santos",
