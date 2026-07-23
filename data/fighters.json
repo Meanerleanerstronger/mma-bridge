@@ -85,7 +85,7 @@
     "ranking_change": 1,
     "record": {
       "wins": 19,
-      "losses": 6,
+      "losses": 5,
       "draws": 0
     },
     "height": "6'4\"",
@@ -522,7 +522,7 @@
     "ranking": "#1",
     "ranking_change": 1,
     "record": {
-      "wins": 21,
+      "wins": 20,
       "losses": 2,
       "draws": 1
     },
@@ -3098,7 +3098,7 @@
     "ranking_change": 1,
     "record": {
       "wins": 23,
-      "losses": 10,
+      "losses": 9,
       "draws": 2
     },
     "height": "5'7\"",
@@ -3248,9 +3248,9 @@
     "ranking": "#3",
     "ranking_change": 0,
     "record": {
-      "wins": 17,
-      "losses": 5,
-      "draws": 1
+      "wins": 16,
+      "losses": 3,
+      "draws": 0
     },
     "height": "5'5\"",
     "reach": "66\"",
@@ -16587,7 +16587,7 @@
     "name": "Song Yadong",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/YADONG_SONG_L_05-30.png",
     "record": {
-      "wins": 23,
+      "wins": 22,
       "losses": 9,
       "draws": 1
     },
@@ -19613,8 +19613,8 @@
     "name": "Kelvin Gastelum",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/GASTELUM_KELVIN_L_04-11.png",
     "record": {
-      "wins": 21,
-      "losses": 11,
+      "wins": 19,
+      "losses": 9,
       "draws": 0
     },
     "last5": [
@@ -23065,7 +23065,7 @@
     "name": "Yousri Belgaroui",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/BELGAROUI_YOUSRI_R_10-18.png",
     "record": {
-      "wins": 9,
+      "wins": 10,
       "losses": 3,
       "draws": 0
     },
@@ -25309,8 +25309,8 @@
     "name": "Johnny Walker",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/WALKER_JOHNNY_L_08-23.png",
     "record": {
-      "wins": 22,
-      "losses": 10,
+      "wins": 21,
+      "losses": 7,
       "draws": 0
     },
     "last5": [
@@ -30238,7 +30238,7 @@
     "name": "Tim Elliott",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/ELLIOTT_TIM_L_05-02.png",
     "record": {
-      "wins": 22,
+      "wins": 21,
       "losses": 14,
       "draws": 1
     },
@@ -38380,7 +38380,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-02/BONFIM_ISMAEL_L_02-15.png",
     "record": {
       "wins": 20,
-      "losses": 6,
+      "losses": 1,
       "draws": 0
     },
     "last5": [
@@ -39091,8 +39091,8 @@
     "name": "Michael Oliveira",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/OLIVEIRA_MICHAEL_L.png",
     "record": {
-      "wins": 1,
-      "losses": 0,
+      "wins": 37,
+      "losses": 11,
       "draws": 0
     },
     "last5": [
@@ -39765,7 +39765,7 @@
     "name": "Chidi Njokuani",
     "record": {
       "wins": 25,
-      "losses": 11,
+      "losses": 12,
       "draws": 0
     },
     "last5": [
@@ -40064,8 +40064,8 @@
     "id": "anthony-hernandez",
     "name": "Anthony Hernandez",
     "record": {
-      "wins": 15,
-      "losses": 3,
+      "wins": 11,
+      "losses": 2,
       "draws": 0
     },
     "last5": [
@@ -40384,7 +40384,7 @@
     "name": "Neil Magny",
     "record": {
       "wins": 31,
-      "losses": 15,
+      "losses": 14,
       "draws": 0
     },
     "last5": [
@@ -40835,7 +40835,7 @@
     "record": {
       "wins": 14,
       "losses": 6,
-      "draws": 1
+      "draws": 0
     },
     "last5": [
       {
@@ -41460,7 +41460,7 @@
     "id": "santiago-ponzinibbio",
     "name": "Santiago Ponzinibbio",
     "record": {
-      "wins": 31,
+      "wins": 30,
       "losses": 9,
       "draws": 0
     },
@@ -41988,11 +41988,93 @@
     "name": "Phil Rowe",
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/ROWE_PHIL_L_02-21.png?itok=uhNlGeQ7",
     "record": {
-      "wins": 11,
+      "wins": 12,
       "losses": 7,
       "draws": 0
     },
-    "nickname": "The Fresh Prince"
+    "nickname": "The Fresh Prince",
+    "last5": [
+      {
+        "opponent": "Jacob Kilburn",
+        "result": "W",
+        "method": "Submission (triangle choke)",
+        "event": "Island Fights 97",
+        "round": 1,
+        "time": "2:44"
+      },
+      {
+        "opponent": "Jean-Paul Lebosnoyani",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Strickland vs. Hernandez",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Ko Seok-hyeon",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Garcia vs. Onama",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Ange Loosa",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Usman vs. Buckley",
+        "round": 3,
+        "time": "4:03"
+      },
+      {
+        "opponent": "Jake Matthews (fighter)",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 302",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Neil Magny",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC on ABC: Emmett vs. Topuria",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Niko Price",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Thompson vs. Holland",
+        "round": 3,
+        "time": "3:26"
+      },
+      {
+        "opponent": "Jason Witt (fighter)",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Hermansson vs. Strickland",
+        "round": 2,
+        "time": "2:15"
+      },
+      {
+        "opponent": "Orion Cosce",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Hall vs. Strickland",
+        "round": 2,
+        "time": "4:21"
+      },
+      {
+        "opponent": "Gabriel Green (fighter)",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 258",
+        "round": 3,
+        "time": "5:00"
+      }
+    ]
   },
   {
     "id": "yadier-del-valle",
@@ -42063,7 +42145,7 @@
     "name": "Joseph Morales",
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-11/MORALES_JOSEPH_R_11-08.png?itok=C6wjX2tp",
     "record": {
-      "wins": 15,
+      "wins": 14,
       "losses": 2,
       "draws": 0
     },
@@ -42469,7 +42551,7 @@
     "id": "muhammad-said",
     "name": "Muhammad Said",
     "record": {
-      "wins": 9,
+      "wins": 17,
       "losses": 0,
       "draws": 0
     },
@@ -42562,7 +42644,7 @@
     "id": "cody-gibson",
     "name": "Cody Gibson",
     "record": {
-      "wins": 22,
+      "wins": 21,
       "losses": 12,
       "draws": 0
     },
