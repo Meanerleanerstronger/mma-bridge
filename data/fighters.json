@@ -43461,6 +43461,16 @@
       "wins": 24,
       "losses": 4,
       "draws": 0
+    },
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
     }
   },
   {
@@ -43471,6 +43481,16 @@
       "wins": 22,
       "losses": 3,
       "draws": 0
+    },
+    "stats": {
+      "slpm": "1.33",
+      "strAcc": "58%",
+      "sapm": "1.73",
+      "strDef": "58%",
+      "tdAvg": "4.00",
+      "tdAcc": "40%",
+      "tdDef": "100%",
+      "subAvg": "0.0"
     }
   },
   {
@@ -43482,10 +43502,30 @@
       "losses": 2,
       "draws": 0
     },
-    "nickname": "King"
+    "nickname": "King",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "muhammad-saidov",
-    "name": "Muhammad Saidov"
+    "name": "Muhammad Saidov",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    }
   }
 ]
