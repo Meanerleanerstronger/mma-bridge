@@ -11407,7 +11407,9 @@
         "ranked": true,
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/ANKALAEV_MAGOMED_L_10-26.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/7/GUSKOV_BOGDAN_L_01-18.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/7/GUSKOV_BOGDAN_L_01-18.png",
+        "winner": "Magomed Tuchalov",
+        "method": "DEC"
       },
       {
         "a": "Rizvan Kuniev",
@@ -11488,7 +11490,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/PONZINIBBIO_SANTIAGO_L_05-03.png?itok=fN0mdvZ2",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/PATTERSON_SAM_L_09-06.png?itok=DwRzQATP"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/PATTERSON_SAM_L_09-06.png?itok=DwRzQATP",
+        "winner": "Sam Patterson",
+        "method": "KO/TKO",
+        "round": 2
       },
       {
         "a": "Valter Walker",
@@ -11499,7 +11504,10 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/WALKER_VALTER_L_10-25.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/PETERSEN_THOMAS_L_05-03.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/PETERSEN_THOMAS_L_05-03.png",
+        "winner": "Valter Walker",
+        "method": "SUB",
+        "round": 1
       },
       {
         "a": "Cody Gibson",
@@ -11524,7 +11532,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-02/BONFIM_ISMAEL_L_02-15.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-09/SOLA_AXEL_L_09-06.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-09/SOLA_AXEL_L_09-06.png",
+        "winner": "Axel Sola",
+        "method": "SUB",
+        "round": 1
       },
       {
         "a": "Dustin Jacoby",
@@ -11535,7 +11546,10 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/JACOBY_DUSTIN_L_02-07.png",
-        "imgB": ""
+        "imgB": "",
+        "winner": "Muhammad Said",
+        "method": "KO/TKO",
+        "round": 2
       }
     ],
     "earlyPrelims": []
@@ -13526,9 +13540,81 @@
         "imgA": "",
         "imgB": "",
         "cancelled": true
+      },
+      {
+        "a": "Brandon Moreno",
+        "b": "Joseph Morales",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "comain",
+        "imgA": "",
+        "imgB": "",
+        "cancelled": true
+      },
+      {
+        "a": "Tim Elliott",
+        "b": "Édgar Cháirez",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "",
+        "cancelled": true
+      },
+      {
+        "a": "Curtis Blaydes",
+        "b": "Waldo Cortes Acosta",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "",
+        "cancelled": true
+      },
+      {
+        "a": "Manon Fiorot",
+        "b": "Alexa Grasso",
+        "weight": "W Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "",
+        "cancelled": true
       }
     ],
     "prelims": [
+      {
+        "a": "Kelvin Gastelum",
+        "b": "Yousri Belgaroui",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "",
+        "cancelled": true
+      },
+      {
+        "a": "JJ Aldrich",
+        "b": "Regina Tarin",
+        "weight": "W Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "",
+        "cancelled": true
+      },
       {
         "a": "Kelvin Gastelum",
         "b": "Yousri Belgaroui",
