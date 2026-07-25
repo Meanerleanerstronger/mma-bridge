@@ -14402,6 +14402,14 @@
     },
     "last5": [
       {
+        "opponent": "Tyrell Fortune",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Ankalaev vs. Guskov",
+        "round": 3,
+        "time": null
+      },
+      {
         "opponent": "Jailton Almeida",
         "result": "W",
         "method": "Decision (unanimous)",
@@ -14503,6 +14511,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Rizvan Kuniev",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Ankalaev vs. Guskov",
+        "round": 3,
+        "time": null
+      },
       {
         "opponent": "Marcin Tybura",
         "result": "W",
@@ -43581,7 +43597,17 @@
       "tdAcc": "0%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Saygid Izagakhmaev",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Ankalaev vs. Guskov",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "saygid-izagakhmaev",
@@ -43601,7 +43627,17 @@
       "tdAcc": "40%",
       "tdDef": "100%",
       "subAvg": "0.0"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Abubakar Vagaev",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Ankalaev vs. Guskov",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "abdul-hussein",
