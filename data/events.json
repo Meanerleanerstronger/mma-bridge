@@ -11395,7 +11395,7 @@
     "location": "Abu Dhabi, UAE",
     "venue": "Etihad Arena",
     "poster": "https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/2026-07/072526-ufc-fight-night-ankalaev-vs-guskov-EVENT-ART.jpg",
-    "status": "upcoming",
+    "status": "completed",
     "start_time": "2026-07-25T16:00:00.000Z",
     "mainCard": [
       {
@@ -13740,9 +13740,81 @@
         "imgA": "",
         "imgB": "",
         "cancelled": true
+      },
+      {
+        "a": "Brandon Moreno",
+        "b": "Joseph Morales",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "comain",
+        "imgA": "",
+        "imgB": "",
+        "cancelled": true
+      },
+      {
+        "a": "Tim Elliott",
+        "b": "Édgar Cháirez",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "",
+        "cancelled": true
+      },
+      {
+        "a": "Curtis Blaydes",
+        "b": "Waldo Cortes Acosta",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "",
+        "cancelled": true
+      },
+      {
+        "a": "Manon Fiorot",
+        "b": "Alexa Grasso",
+        "weight": "W Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "",
+        "cancelled": true
       }
     ],
     "prelims": [
+      {
+        "a": "Kelvin Gastelum",
+        "b": "Yousri Belgaroui",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "",
+        "cancelled": true
+      },
+      {
+        "a": "JJ Aldrich",
+        "b": "Regina Tarin",
+        "weight": "W Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "",
+        "cancelled": true
+      },
       {
         "a": "Kelvin Gastelum",
         "b": "Yousri Belgaroui",
