@@ -2782,6 +2782,20 @@ body.light-mode .pfp-fight-info { color: rgba(0,0,0,0.4); }
   letter-spacing: 0; color: rgba(255,255,255,0.25);
 }
 
+.er-dropped-card {
+  border-color: rgba(255,180,60,0.2);
+  background: linear-gradient(145deg, rgba(255,180,60,0.07) 0%, rgba(255,180,60,0.02) 100%);
+}
+.er-dropped-row {
+  font-family: 'Inter', sans-serif; font-size: 0.82rem; line-height: 1.5;
+  color: rgba(255,190,90,0.9);
+}
+.er-dropped-row + .er-dropped-row { margin-top: 10px; }
+.er-dropped-row strong { color: rgba(255,200,110,1); }
+body.light-mode .er-dropped-card { background: rgba(200,140,0,0.05) !important; border-color: rgba(200,140,0,0.16) !important; }
+body.light-mode .er-dropped-row { color: #a06800 !important; }
+body.light-mode .er-dropped-row strong { color: #8a5800 !important; }
+
 /* Stars */
 .er-stars { display: flex; gap: 6px; margin-bottom: 8px; }
 .er-star {
@@ -5278,6 +5292,18 @@ body.light-mode #pk-poster-bg.loaded { opacity: 0.12; }
 }
 .pk-locked-banner svg { flex-shrink: 0; opacity: 0.8; }
 
+.pk-dropped-banner {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  background: rgba(255,180,60,0.07);
+  border-top: 1px solid rgba(255,180,60,0.2);
+  border-bottom: 1px solid rgba(255,180,60,0.2);
+  padding: 12px 20px;
+  font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 500;
+  color: rgba(255,190,90,0.9);
+  text-align: center;
+}
+.pk-dropped-banner svg { flex-shrink: 0; opacity: 0.85; }
+
 /* First-visit onboarding hint */
 .pk-onboard-hint {
   display: flex; align-items: center; justify-content: space-between; gap: 12px;
@@ -7132,6 +7158,7 @@ body.light-mode .pk-signin-banner { background: rgba(184,97,30,0.05) !important;
 body.light-mode .pk-signin-link { background: rgba(184,97,30,0.08) !important; border-color: rgba(184,97,30,0.28) !important; color: #7a5500 !important; }
 body.light-mode .pk-completed-banner { background: rgba(0,0,0,0.02) !important; border-color: rgba(0,0,0,0.06) !important; color: rgba(0,0,0,0.35) !important; }
 body.light-mode .pk-locked-banner { background: rgba(200,50,50,0.05) !important; border-color: rgba(200,50,50,0.14) !important; color: #cc2200 !important; }
+body.light-mode .pk-dropped-banner { background: rgba(200,140,0,0.05) !important; border-color: rgba(200,140,0,0.16) !important; color: #a06800 !important; }
 
 /* Section label */
 body.light-mode .fc-section-lbl { color: rgba(160,100,8,0.55) !important; border-bottom-color: rgba(0,0,0,0.07) !important; border-left-color: rgba(180,130,10,0.3) !important; }

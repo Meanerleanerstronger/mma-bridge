@@ -219,6 +219,10 @@ function mergeFights(existing, fromUFC, fighterIdx, newlyAdded) {
       if (!match.imgB) match.imgB = lookupImg(match.b, fighterIdx);
       if (ufcFight.titleFight) match.titleFight = true;
       if (ufcFight.ranked)     match.ranked = true;
+      // Title fights and main events are always scheduled for 5 rounds.
+      if ((match.titleFight || match.slot === 'main') && match.rounds !== '5 Rds') {
+        match.rounds = '5 Rds';
+      }
     } else {
       // New fight — add it
       result.push({
@@ -323,6 +327,11 @@ async function syncEvent(ev, fighterIdx) {
         if (f.slot) vacatedSlots.push({ slot: f.slot, survivor });
       } else {
         console.log(`    ⚠️  Fight no longer on card, no replacement found: ${f.a} vs ${f.b}${f.slot ? ` (was slot="${f.slot}" — needs manual review)` : ''}`);
+        ev.droppedFights = ev.droppedFights || [];
+        const alreadyNoted = ev.droppedFights.some(d => fightsMatch(d, f));
+        if (!alreadyNoted) {
+          ev.droppedFights.push({ a: f.a, b: f.b, reason: 'removed from the card', droppedAt: new Date().toISOString() });
+        }
       }
       changed = true; // dropped either way — don't carry stale fights forward
     }
@@ -371,6 +380,11 @@ async function syncEvent(ev, fighterIdx) {
       if (newName !== ev.name) {
         console.log(`    ✏️  Event renamed: "${ev.name}" → "${newName}"`);
         ev.name = newName;
+        changed = true;
+      }
+      // A main-event slot is always scheduled for 5 rounds, title fight or not.
+      if (target.rounds !== '5 Rds') {
+        target.rounds = '5 Rds';
         changed = true;
       }
     }

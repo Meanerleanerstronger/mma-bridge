@@ -607,6 +607,19 @@ async function loadAndRenderReviews(eventId) {
   renderReviews(reviews, feed);
 }
 
+// ── Dropped/cancelled fight notices (auto-populated by the card sync bot) ──
+function droppedFightsHtml(ev) {
+  const dropped = ev.droppedFights || [];
+  if (!dropped.length) return '';
+  return `
+    <div class="er-card er-dropped-card">
+      ${dropped.map(d => `
+        <div class="er-dropped-row">
+          <strong>${esc(d.a)} vs. ${esc(d.b)}</strong> was pulled from the card${d.reason ? ` — ${esc(d.reason)}` : ''}. This fight did not happen and was not scored.
+        </div>`).join('')}
+    </div>`;
+}
+
 // ── Fight card section ────────────────────────
 function fightRow(f, communityData, posTag) {
   const slotBadge = f.slot === 'main'
@@ -712,7 +725,7 @@ function fightRow(f, communityData, posTag) {
       </div>
       <div class="er-fight-meta">
         ${f.weight ? `<span class="pill">${esc(f.weight)}</span>` : ''}
-        ${f.rounds ? `<span class="pill pill-dim">${esc(f.rounds)}</span>` : ''}
+        ${(() => { const rds = (f.titleFight || f.slot === 'main') ? '5 Rds' : f.rounds; return rds ? `<span class="pill pill-dim">${esc(rds)}</span>` : ''; })()}
       </div>
       ${pickBarsHtml}
       ${resultHtml}
@@ -851,6 +864,8 @@ function renderPage(ev, community, extra = {}) {
       <div class="er-two-col">
 
         <div class="er-content">
+
+          ${droppedFightsHtml(ev)}
 
           <div class="er-community-bar">
             <span class="er-comm-label">Community Rating</span>

@@ -1855,6 +1855,17 @@ function formatOdds(n) {
       </div>`;
   }
 
+  // ── Dropped/cancelled fight notices (auto-populated by the card sync bot) ──
+  function droppedFightsHtml() {
+    const dropped = event.droppedFights || [];
+    if (!dropped.length) return '';
+    return dropped.map(d => `
+      <div class="pk-banner pk-dropped-banner">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v5m0 3h.01"/></svg>
+        <span><strong>${esc(d.a)} vs. ${esc(d.b)}</strong> was pulled from the card${d.reason ? ` — ${esc(d.reason)}` : ''}. This fight will not be scored.</span>
+      </div>`).join('');
+  }
+
   // ── FOTN bar at top of body ────────────────────
   function fotnBarHtml() {
     if (isCompleted || isLocked) return '';
@@ -1936,6 +1947,7 @@ function formatOdds(n) {
             <span>Sign in to save your picks and track your record</span>
             <a href="auth.html" class="pk-signin-link">Sign In →</a>
           </div>` : ''}
+        ${droppedFightsHtml()}
         ${!isCompleted && !isLocked && !localStorage.getItem('pk_onboard_seen') ? `
           <div class="pk-onboard-hint" id="pkOnboardHint">
             <div class="pk-onboard-steps">

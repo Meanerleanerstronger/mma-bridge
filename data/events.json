@@ -11402,14 +11402,15 @@
         "a": "Magomed Ankalaev",
         "b": "Bogdan Guskov",
         "weight": "Light Heavyweight",
-        "rounds": "3 Rds",
+        "rounds": "5 Rds",
         "titleFight": false,
         "ranked": true,
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/ANKALAEV_MAGOMED_L_10-26.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/7/GUSKOV_BOGDAN_L_01-18.png",
-        "winner": "Magomed Tuchalov",
-        "method": "DEC"
+        "winner": "Magomed Ankalaev",
+        "method": "KO/TKO",
+        "round": 5
       },
       {
         "a": "Rizvan Kuniev",
@@ -11448,7 +11449,9 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/ZAYNUKOV_MAGOMED_R_10-07.png?itok=rUlbqlka",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
+        "winner": "Magomed Zaynukov",
+        "method": "DEC"
       },
       {
         "a": "Abubakar Vagaev",
@@ -11474,7 +11477,9 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-02/RIBEIRO_BRENDSON_L_02-17.png?itok=T2HXVKsB"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-02/RIBEIRO_BRENDSON_L_02-17.png?itok=T2HXVKsB",
+        "winner": "Magomed Tuchalov",
+        "method": "DEC"
       },
       {
         "a": "Nurullo Aliev",
@@ -11555,12 +11560,20 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/JACOBY_DUSTIN_L_02-07.png",
         "imgB": "",
-        "winner": "Muhammad Said",
+        "winner": "Muhammad Saidov",
         "method": "KO/TKO",
         "round": 2
       }
     ],
-    "earlyPrelims": []
+    "earlyPrelims": [],
+    "droppedFights": [
+      {
+        "a": "Islam Dulatov",
+        "b": "Wellington Turman",
+        "reason": "Dulatov hospitalized with an illness and withdrew day-of; no replacement was found",
+        "droppedAt": "2026-07-25T12:00:00.000Z"
+      }
+    ]
   },
   {
     "id": "ufc-fight-night-medi-vs-rodriguez",
@@ -11570,7 +11583,7 @@
     "isoDate": "2026-08-01",
     "location": "Belgrade, Serbia",
     "venue": "Belgrade Arena",
-    "poster": "https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/2026-05/080126-ufc-fight-night-medic-vs-rodriguez-TEMP-HERO.jpg",
+    "poster": "https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/2026-07/080126-ufc-fight-night-medic-vs-rodriguez-EVENT-ART.jpg",
     "status": "upcoming",
     "start_time": null,
     "mainCard": [
@@ -11708,7 +11721,7 @@
     "isoDate": "2026-08-08",
     "location": "",
     "venue": "",
-    "poster": "",
+    "poster": "https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/2026-07/080826-ufc-fight-night-gamrot-vs-salkilld-EVENT-ART.jpg",
     "status": "upcoming",
     "start_time": null,
     "mainCard": [
