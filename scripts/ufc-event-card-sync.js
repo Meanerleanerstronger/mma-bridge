@@ -214,9 +214,15 @@ function mergeFights(existing, fromUFC, fighterIdx, newlyAdded) {
   for (const ufcFight of fromUFC) {
     const match = result.find(f => fightsMatch(f, ufcFight));
     if (match) {
-      // Update fields we're allowed to update
-      if (!match.imgA) match.imgA = lookupImg(match.a, fighterIdx);
-      if (!match.imgB) match.imgB = lookupImg(match.b, fighterIdx);
+      // Update fields we're allowed to update.
+      // fighters.json (fighterIdx) is the freshly-maintained source of truth for
+      // headshots — always defer to it over whatever's cached on the fight, since
+      // UFC's CDN periodically retires old image paths (they 403) and a
+      // fill-only-if-blank rule would let that stale, dead link sit forever.
+      const freshImgA = lookupImg(match.a, fighterIdx);
+      const freshImgB = lookupImg(match.b, fighterIdx);
+      if (freshImgA && freshImgA !== match.imgA) match.imgA = freshImgA;
+      if (freshImgB && freshImgB !== match.imgB) match.imgB = freshImgB;
       if (ufcFight.titleFight) match.titleFight = true;
       if (ufcFight.ranked)     match.ranked = true;
       // Title fights and main events are always scheduled for 5 rounds.
@@ -262,6 +268,23 @@ async function notifyFavFighters(fighters, eventName, eventId) {
   }
 }
 
+// Resync imgA/imgB on every fight in the event against fighters.json — always
+// on, whether or not UFC.com's own event page exists yet. A brand-new event
+// discovered via ESPN (ufc-sync.js) is created with blank images and
+// otherwise only gets backfilled once UFC.com publishes its fight-card page,
+// which can lag by days/weeks — this runs independent of that gate so photos
+// show up as soon as fighters.json has them, not once UFC.com catches up.
+function syncImages(ev, fighterIdx) {
+  let changed = false;
+  for (const section of ['mainCard', 'prelims', 'earlyPrelims']) {
+    for (const f of (ev[section] || [])) {
+      if (f.a) { const img = lookupImg(f.a, fighterIdx); if (img && img !== f.imgA) { f.imgA = img; changed = true; } }
+      if (f.b) { const img = lookupImg(f.b, fighterIdx); if (img && img !== f.imgB) { f.imgB = img; changed = true; } }
+    }
+  }
+  return changed;
+}
+
 async function syncEvent(ev, fighterIdx) {
   const slug = deriveUfcSlug(ev.id, ev.isoDate);
   const url  = `https://www.ufc.com/event/${slug}`;
@@ -270,12 +293,12 @@ async function syncEvent(ev, fighterIdx) {
   const html = await fetchPage(url);
   if (!html) {
     console.log('  ⚠️  Could not fetch page');
-    return false;
+    return syncImages(ev, fighterIdx);
   }
 
   if (!html.includes('c-listing-fight__corner--red')) {
     console.log('  ⚠️  No fight card found on page');
-    return false;
+    return syncImages(ev, fighterIdx);
   }
 
   const ufcMain      = parseSection(html, 'main-card');
@@ -390,13 +413,7 @@ async function syncEvent(ev, fighterIdx) {
     }
   }
 
-  // Fill missing imgA/imgB on all existing fights
-  for (const section of ['mainCard', 'prelims', 'earlyPrelims']) {
-    for (const f of (ev[section] || [])) {
-      if (!f.imgA && f.a) { f.imgA = lookupImg(f.a, fighterIdx); if (f.imgA) changed = true; }
-      if (!f.imgB && f.b) { f.imgB = lookupImg(f.b, fighterIdx); if (f.imgB) changed = true; }
-    }
-  }
+  if (syncImages(ev, fighterIdx)) changed = true;
 
   if ((ev.mainCard    || []).length !== prevMainLen)  changed = true;
   if ((ev.prelims     || []).length !== prevPreLen)   changed = true;
