@@ -16,13 +16,18 @@ async function loadOdds(eventId) {
 }
 
 function getOddsForFight(nameA, nameB) {
-  const norm = s => s.toLowerCase().replace(/[^a-z]/g, '');
+  const norm = s => (s || '').toLowerCase().replace(/[^a-z]/g, '');
+  const fuzzy = (x, y) => { const nx = norm(x), ny = norm(y); return !!nx && !!ny && (nx === ny || nx.includes(ny) || ny.includes(nx)); };
+  // Both fighters must match the same odds entry (in either order) — matching
+  // just one side independently can silently attach a totally unrelated
+  // fight's odds when a name happens to share a substring.
   const match = _oddsCache.find(o =>
-    (norm(o.a).includes(norm(nameA)) || norm(nameA).includes(norm(o.a))) ||
-    (norm(o.b).includes(norm(nameB)) || norm(nameB).includes(norm(o.b)))
+    (fuzzy(o.a, nameA) || fuzzy(o.b, nameA)) &&
+    (fuzzy(o.a, nameB) || fuzzy(o.b, nameB))
   );
   if (!match) return null;
-  return match;
+  const aIsA = fuzzy(match.a, nameA);
+  return { odds_a: aIsA ? match.odds_a : match.odds_b, odds_b: aIsA ? match.odds_b : match.odds_a };
 }
 
 function formatOdds(n) {
@@ -538,15 +543,24 @@ function formatOdds(n) {
   // Slow Render-backend calls — fire after render so page is instant
   loadEventExtras().then(() => updateHypeWidget()).catch(() => {});
   loadOdds(eventId).then(() => {
-    // Patch odds into already-rendered cards without full re-render
-    document.querySelectorAll('.pk-fight[data-key]').forEach(card => {
+    // Odds arrive after the initial render (cache is empty on first paint),
+    // so patch them into already-rendered cards rather than re-rendering —
+    // this was previously a no-op: wrong selector (.pk-fight doesn't exist
+    // on fight cards, which use .fc-card) and a stray `odds` reference that
+    // isn't defined in this scope.
+    document.querySelectorAll('.fc-card[data-key]').forEach(card => {
       const key = card.dataset.key;
       const fdata = getFightData(key);
-      if (!fdata || !odds) return;
-      const aFav = odds.odds_a < 0;
-      if (!card.querySelector('.fc-odds-col-a')) {
-        const matchup = card.querySelector('.fc-matchup');
-        if (!matchup) return;
+      if (!fdata) return;
+      let odds = getOddsForFight(fdata.a, fdata.b);
+      if (!odds && fdata.odds && fdata.odds.a && fdata.odds.b) {
+        odds = { odds_a: parseInt(fdata.odds.a), odds_b: parseInt(fdata.odds.b) };
+      }
+      if (!odds) return;
+      const aFav = odds.odds_a < odds.odds_b;
+
+      const matchup = card.querySelector('.fc-matchup');
+      if (matchup && !matchup.querySelector('.fc-odds-col-a')) {
         const oa = document.createElement('div');
         oa.className = 'fc-odds-col fc-odds-col-a';
         oa.innerHTML = `<span class="fc-odds-num${aFav ? ' fc-fav' : ' fc-dog'}">${formatOdds(odds.odds_a)}</span>`;
@@ -556,6 +570,26 @@ function formatOdds(n) {
         matchup.prepend(oa);
         matchup.append(ob);
         matchup.classList.add('fc-matchup-odds');
+      }
+
+      function ensureSubRow(infoSel, extraCls) {
+        const info = card.querySelector(infoSel);
+        if (!info) return null;
+        let row = info.querySelector('.fc-sub-row');
+        if (!row) {
+          row = document.createElement('div');
+          row.className = `fc-sub-row${extraCls ? ' ' + extraCls : ''}`;
+          info.insertBefore(row, info.querySelector('.fc-comm-pct, .fc-group-breakdown, .fc-badge') || null);
+        }
+        return row;
+      }
+      const subRowA = ensureSubRow('.sb-side-a .fc-info, .fc-fighter:not(.fc-fighter-b) .fc-info');
+      const subRowB = ensureSubRow('.sb-side-b .fc-info, .fc-fighter-b .fc-info', 'fc-sub-row-b');
+      if (subRowA && !subRowA.querySelector('.fc-odds-inline')) {
+        subRowA.insertAdjacentHTML('beforeend', `<span class="fc-odds-inline"><span class="fc-odds${aFav ? ' fc-fav' : ' fc-dog'}">${formatOdds(odds.odds_a)}</span></span>`);
+      }
+      if (subRowB && !subRowB.querySelector('.fc-odds-inline')) {
+        subRowB.insertAdjacentHTML('afterbegin', `<span class="fc-odds-inline"><span class="fc-odds${!aFav ? ' fc-fav' : ' fc-dog'}">${formatOdds(odds.odds_b)}</span></span>`);
       }
     });
   }).catch(() => {});
@@ -1200,7 +1234,7 @@ function formatOdds(n) {
             ${photoA}
             <div class="fc-info">
               <div class="fc-name"><a class="fc-fighter-link" href="fighter.html?name=${encodeURIComponent(f.a)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${esc(f.a)}</a></div>
-              ${recA ? `<div class="fc-sub-row"><span class="fc-record">${esc(recA)}</span></div>` : ''}
+              ${(recA || oddsTagA) ? `<div class="fc-sub-row">${recA ? `<span class="fc-record">${esc(recA)}</span>` : ''}${oddsTagA ? `<span class="fc-odds-inline">${oddsTagA}</span>` : ''}</div>` : ''}
               ${commLabelA}
               ${groupLabelA}
               ${badgeA}
@@ -1213,7 +1247,7 @@ function formatOdds(n) {
           <div class="${sideBCls}" data-key="${esc(key)}" data-pick="${esc(f.b)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
             <div class="fc-info fc-info-b">
               <div class="fc-name"><a class="fc-fighter-link" href="fighter.html?name=${encodeURIComponent(f.b)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${esc(f.b)}</a></div>
-              ${recB ? `<div class="fc-sub-row fc-sub-row-b"><span class="fc-record">${esc(recB)}</span></div>` : ''}
+              ${(recB || oddsTagB) ? `<div class="fc-sub-row fc-sub-row-b">${oddsTagB ? `<span class="fc-odds-inline">${oddsTagB}</span>` : ''}${recB ? `<span class="fc-record">${esc(recB)}</span>` : ''}</div>` : ''}
               ${commLabelB}
               ${groupLabelB}
               ${badgeB}
@@ -1373,6 +1407,19 @@ function formatOdds(n) {
 
     // Toggle handler (event delegation)
     document.addEventListener('click', async e => {
+      const headRow = e.target.closest('.fc-head[data-fa][data-fb]');
+      if (headRow && !e.target.closest('.fc-fighter-link')) {
+        const fA = headRow.dataset.fa, fB = headRow.dataset.fb;
+        const weight = headRow.dataset.weight || '';
+        const card = headRow.closest('.fc-card[data-key]');
+        const key = card?.dataset.key || '';
+        const fight = key ? getFightData(key) : null;
+        const imgA = fight?.imgA || '', imgB = fight?.imgB || '';
+        const url = 'matchup.html?event=' + encodeURIComponent(eventId) + '&a=' + encodeURIComponent(fA) + '&b=' + encodeURIComponent(fB) + '&weight=' + encodeURIComponent(weight) + '&imgA=' + encodeURIComponent(imgA) + '&imgB=' + encodeURIComponent(imgB) + '&from=picks';
+        window.location.href = url;
+        return;
+      }
+
       const winShare = e.target.closest('.fc-win-share');
       if (winShare) {
         e.stopPropagation();

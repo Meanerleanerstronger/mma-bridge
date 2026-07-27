@@ -5639,6 +5639,15 @@ body.light-mode #pk-poster-bg.loaded { opacity: 0.12; }
 .fc-fav { color: #b8611e; }
 .fc-dog { color: rgba(255,255,255,0.45); }
 
+/* Inline odds badge inside fc-info — the mobile fallback for the outer
+   .fc-odds-col strip (hidden ≤640px). Hidden on wider screens so odds
+   aren't shown twice. */
+.fc-odds-inline {
+  font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
+  font-size: 0.85rem; font-weight: 800; letter-spacing: 0.01em;
+  display: none;
+}
+
 .fc-comm-pct {
   display: flex; flex-direction: column;
   margin-top: 6px; gap: 0;
@@ -6937,6 +6946,7 @@ body.light-mode .ev-hype-badge { color: rgba(140,80,0,0.85); background: rgba(20
   .fc-card.fc-main .fc-matchup.fc-matchup-odds { grid-template-columns: 1fr 52px 1fr; }
   /* hide outer odds cols on ≤640px — they go into the fighter info instead */
   .fc-matchup.fc-matchup-odds .fc-odds-col { display: none; }
+  .fc-odds-inline { display: inline; }
   .fc-name { font-size: 1rem; line-height: 1.1; word-break: break-word; overflow-wrap: break-word; }
   .fc-card.fc-maincrd .fc-name { font-size: 1.15rem; }
   .fc-card.fc-main .fc-name { font-size: 1.35rem; }
