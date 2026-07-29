@@ -164,10 +164,10 @@ async function buildEventCountdownPost(page) {
     return img && img.complete && img.naturalWidth > 0;
   }, { timeout: 15000 }).catch(() => {});
   await hideFloatingWidgets(page);
-  // .ov-topbar holds the Pick Fights / Calendar / Close buttons — real
-  // in-page navigation controls, not something that belongs in a public
-  // promotional screenshot.
-  await page.addStyleTag({ content: `.ov-topbar { display: none !important; }` });
+  // Keep "Pick Fights →" visible as a clear on-image call-to-action — only
+  // hide the Calendar dropdown and the ✕ close button, which are just
+  // in-page navigation controls that don't belong in a public post.
+  await page.addStyleTag({ content: `#ovCalWrap, .ov-close { display: none !important; }` });
 
   const el = await page.$('#ovHero');
   const rawPath = path.join(OUT_DIR, '_raw-countdown.png');
@@ -177,7 +177,8 @@ async function buildEventCountdownPost(page) {
   const days = ev.isoDate ? daysUntil(ev.isoDate) : null;
   const whenPhrase = days === null ? '' : days <= 0 ? 'is TODAY' : days === 1 ? 'is tomorrow' : `is in ${days} days`;
   const matchup = main ? `${lastName(main.a)} vs. ${lastName(main.b)}` : (ev.name || '');
-  const caption = `${matchup} ${whenPhrase}. Make your picks on mmabridge.com`;
+  const pickUrl = `${SITE_URL}/picks.html?id=${ev.id}`;
+  const caption = `${matchup} ${whenPhrase}. Make your picks: ${pickUrl}`;
 
   return [{ rawPath, caption }];
 }
@@ -211,7 +212,8 @@ async function buildEventRecapPost(page) {
     const loser = main.winner === main.a ? main.b : main.a;
     resultPhrase = `. ${lastName(main.winner)} def. ${lastName(loser)}`;
   }
-  const caption = `Relive ${ev.name}${resultPhrase}. Full card recap and community ratings on mmabridge.com`;
+  const reviewUrl = `${SITE_URL}/event-review.html?id=${ev.id}`;
+  const caption = `Relive ${ev.name}${resultPhrase}. Full card recap and community ratings: ${reviewUrl}`;
 
   return [{ rawPath, caption }];
 }
