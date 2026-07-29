@@ -129,7 +129,7 @@ async function buildNewsPosts(page) {
     const rawPath = path.join(OUT_DIR, `_raw-${i}.png`);
     await el.screenshot({ path: rawPath });
 
-    const caption = source ? `${title} — via ${source}` : title;
+    const caption = source ? `${title} (via ${source})` : title;
     posts.push({ rawPath, caption });
   }
 
@@ -177,7 +177,7 @@ async function buildEventCountdownPost(page) {
   const days = ev.isoDate ? daysUntil(ev.isoDate) : null;
   const whenPhrase = days === null ? '' : days <= 0 ? 'is TODAY' : days === 1 ? 'is tomorrow' : `is in ${days} days`;
   const matchup = main ? `${lastName(main.a)} vs. ${lastName(main.b)}` : (ev.name || '');
-  const caption = `${matchup} ${whenPhrase} — make your picks on mmabridge.com 🥊`;
+  const caption = `${matchup} ${whenPhrase}. Make your picks on mmabridge.com`;
 
   return [{ rawPath, caption }];
 }
@@ -209,9 +209,9 @@ async function buildEventRecapPost(page) {
   let resultPhrase = '';
   if (main && main.winner) {
     const loser = main.winner === main.a ? main.b : main.a;
-    resultPhrase = ` — ${lastName(main.winner)} def. ${lastName(loser)}`;
+    resultPhrase = `. ${lastName(main.winner)} def. ${lastName(loser)}`;
   }
-  const caption = `Relive ${ev.name}${resultPhrase}. Full card recap + community ratings on mmabridge.com 📋`;
+  const caption = `Relive ${ev.name}${resultPhrase}. Full card recap and community ratings on mmabridge.com`;
 
   return [{ rawPath, caption }];
 }
