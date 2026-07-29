@@ -26555,9 +26555,9 @@
     "name": "Chris Padilla",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/PADILLA_CHRIS_L_04-11.png",
     "record": {
-      "wins": 17,
+      "wins": 16,
       "losses": 6,
-      "draws": 1
+      "draws": 0
     },
     "nickname": "Taco",
     "stats": {
@@ -26569,7 +26569,89 @@
       "tdAcc": "28%",
       "tdDef": "80%",
       "subAvg": "0.3"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Sean Woodson",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Covington vs. Buckley",
+        "round": 1,
+        "time": "4:58"
+      },
+      {
+        "opponent": "Luis Pajuelo",
+        "result": "W",
+        "method": "Submission (brabo choke)",
+        "event": "UFC on ESPN: Ribas vs. Namajunas",
+        "round": 1,
+        "time": "2:45"
+      },
+      {
+        "opponent": "Kyle Nelson (fighter)",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Grasso vs. Shevchenko 2",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Julian Erosa",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Song vs. Simón",
+        "round": 1,
+        "time": "1:41"
+      },
+      {
+        "opponent": "Cameron Graves",
+        "result": "W",
+        "method": "TKO (elbow)",
+        "event": "Fury FC 46",
+        "round": 2,
+        "time": "1:19"
+      },
+      {
+        "opponent": "Nate Richardson",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "2021 in Legacy Fighting Alliance#Legacy Fighting Alliance 99: Dennis vs. Cherant",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Spike Carlyle",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "California Xtreme Fighting 17",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Donald Sanchez",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "2019 in Legacy Fighting Alliance#Legacy Fighting Alliance 58: Park vs. Willis",
+        "round": 2,
+        "time": "1:27"
+      },
+      {
+        "opponent": "Fard Muhammad",
+        "result": "W",
+        "method": "Submission (triangle choke)",
+        "event": "KOTC: 20th Anniversary",
+        "round": 3,
+        "time": "1:19"
+      },
+      {
+        "opponent": "Kurt Kinser",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "KOTC: Under Siege",
+        "round": 3,
+        "time": "5:00"
+      }
+    ]
   },
   {
     "id": "marquel-mederos",
@@ -43823,6 +43905,17 @@
         "round": 5,
         "time": "5:00"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
   }
 ]
