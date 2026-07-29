@@ -839,6 +839,69 @@
     body.light-mode .admin-tabs { border-bottom-color: rgba(0,0,0,0.1); }
     body.light-mode .admin-tab { color: rgba(0,0,0,0.4); }
     body.light-mode .analytics-row-name { color: rgba(0,0,0,0.7); }
+
+    /* ══════════════════════════════════════════════════════
+       MOBILE — this whole admin panel was built desktop-first
+       with no phone use in mind. The worst offender: the
+       Marketing Buddy result-card header crams 3-4 buttons
+       into one non-wrapping flex row (Copy Caption / Change
+       Image / Download Image / Post to Instagram) — exact same
+       overflow-off-the-edge bug fixed on events.html's overlay
+       topbar earlier. Same fix here: let it wrap, shrink to fit.
+       ══════════════════════════════════════════════════════ */
+    @media (max-width: 640px) {
+      .admin-page { padding: 60px 14px 100px; }
+
+      /* Header + tabs */
+      .admin-header { margin-bottom: 18px; }
+      .admin-tabs { gap: 2px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .admin-tab { padding: 9px 12px; font-size: 0.66rem; white-space: nowrap; }
+
+      /* Login card fills the screen better on narrow phones */
+      .login-card { padding: 28px 22px; }
+
+      /* Marketing Buddy — today's posts + content generator cards */
+      .mkt-result-header {
+        flex-wrap: wrap;
+        gap: 10px 8px;
+        padding: 12px;
+      }
+      .mkt-result-actions {
+        flex-wrap: wrap;
+        gap: 6px;
+        width: 100%;
+      }
+      .btn-copy, .btn-post {
+        flex: 1 1 auto;
+        text-align: center;
+        padding: 8px 10px;
+        font-size: 0.68rem;
+      }
+      .mkt-result-body { font-size: 0.9rem; padding: 12px; min-height: 100px; }
+      .mkt-result-card img { max-width: 100% !important; }
+      .mkt-platform-status { flex-wrap: wrap; gap: 8px 14px; }
+      .mkt-grid { gap: 12px; }
+      .mkt-platforms { gap: 6px; }
+      .mkt-platform-btn { padding: 6px 12px; font-size: 0.72rem; }
+      .mkt-reddit-row { flex-wrap: wrap; }
+
+      /* Fight editing rows — already wrap, just tighten for touch */
+      .event-header { padding: 14px 16px; }
+      .fight-row { padding: 12px; }
+      .fight-controls { gap: 6px; }
+      .btn-fighter { flex: 1 1 auto; max-width: none; text-align: center; }
+      .fight-method, .fight-round { flex: 0 0 auto; }
+      .btn-save { margin-left: 0; flex: 1 1 100%; padding: 10px 18px; }
+      .fotn-row { flex-direction: column; align-items: stretch; }
+      .fotn-input { min-width: 0; }
+
+      /* Analytics */
+      .analytics-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .stat-value { font-size: 1.5rem; }
+    }
+    @media (max-width: 400px) {
+      .analytics-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
