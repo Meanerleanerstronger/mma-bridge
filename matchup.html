@@ -209,24 +209,105 @@
       position:fixed; top:16px; left:16px; margin:0; z-index:20;
     }
     body.mu-poster-mode .mu-fighter-name { font-size:clamp(3rem,9vw,7rem); }
-    .mu-poster-exit {
+    .mu-poster-controls {
       position:fixed; top:16px; right:16px; z-index:20;
-      display:none;
+      display:none; align-items:center; gap:8px;
+    }
+    body.mu-poster-mode .mu-poster-controls { display:flex; }
+    .mu-poster-exit {
       background:rgba(0,0,0,.55); backdrop-filter:blur(8px);
       border:1px solid rgba(255,255,255,.2); border-radius:20px;
       color:#fff; font-family:'Montserrat',sans-serif; font-weight:700;
       font-size:.62rem; letter-spacing:.08em; text-transform:uppercase;
-      padding:9px 18px; cursor:pointer;
+      padding:9px 18px; cursor:pointer; white-space:nowrap;
     }
-    body.mu-poster-mode .mu-poster-exit { display:block; }
-    .mu-poster-hint {
-      position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
-      z-index:20; display:none;
-      font-family:'Inter',sans-serif; font-size:.7rem; color:rgba(255,255,255,.4);
-      background:rgba(0,0,0,.5); backdrop-filter:blur(8px);
-      padding:8px 16px; border-radius:20px; white-space:nowrap;
+
+    /* poster theme toggle — separate from the site-wide theme, since a
+       promo poster shouldn't inherit whatever mode the visitor happens to
+       be browsing in. Dark is the default look; light flips the negative
+       space (the container itself) to white/cream while keeping the
+       per-side color wash. */
+    .mu-poster-theme {
+      flex-shrink:0;
+      display:flex; align-items:center; justify-content:center;
+      width:34px; height:34px;
+      background:rgba(0,0,0,.55); backdrop-filter:blur(8px);
+      border:1px solid rgba(255,255,255,.2); border-radius:50%;
+      color:#fff; font-size:.85rem; cursor:pointer;
     }
-    body.mu-poster-mode .mu-poster-hint { display:block; }
+
+    /* poster brand watermark — small corner tag so a re-shared screenshot
+       still reads as MMA Bridge content even cropped loosely. */
+    .mu-poster-brand {
+      position:absolute; left:24px; bottom:16px; z-index:3;
+      display:none;
+      font-family:'Montserrat',sans-serif; font-weight:800; font-size:.56rem;
+      letter-spacing:.22em; text-transform:uppercase;
+      color:rgba(255,255,255,.4);
+    }
+    body.mu-poster-mode .mu-poster-brand { display:block; }
+
+    /* poster event banner — small stamped strip above the VS badge with
+       the card name/date when known, so the poster carries more than just
+       two names floating in empty space. */
+    .mu-poster-eventline {
+      position:absolute; top:20px; left:50%; transform:translateX(-50%);
+      z-index:3; display:none;
+      font-family:'Montserrat',sans-serif; font-weight:800; font-size:.58rem;
+      letter-spacing:.24em; text-transform:uppercase;
+      color:rgba(255,255,255,.55);
+      padding:6px 16px; border:1px solid rgba(255,255,255,.18); border-radius:20px;
+      background:rgba(0,0,0,.35); backdrop-filter:blur(6px);
+      white-space:nowrap;
+    }
+    body.mu-poster-mode .mu-poster-eventline.has-text { display:block; }
+
+    /* poster grain/texture — repurposes the previously-unused
+       .mu-hero-noise element instead of leaving the poster a flat gradient
+       ("less boring" — diagonal hairline texture reads as a print poster
+       instead of a plain screenshot). */
+    body.mu-poster-mode .mu-hero-noise {
+      display:block; position:absolute; inset:0; z-index:0; pointer-events:none;
+      background-image:repeating-linear-gradient(45deg, rgba(255,255,255,.03) 0 2px, transparent 2px 14px);
+      mix-blend-mode:overlay;
+    }
+    body.mu-poster-mode .mu-vs-weight {
+      font-size:.56rem; padding:4px 12px; border-radius:2px;
+      border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.06);
+      transform:rotate(-2deg);
+    }
+
+    /* ── POSTER LIGHT MODE — independent of the toggle above; flips the
+       negative space white/cream instead of near-black. ── */
+    body.mu-poster-mode.mu-poster-light { background:#f6f3ec !important; }
+    body.mu-poster-mode.mu-poster-light .mu-hero { background:#f6f3ec; }
+    body.mu-poster-mode.mu-poster-light .mu-hero-fade { background:linear-gradient(to top,#f6f3ec 0%,transparent 100%); }
+    body.mu-poster-mode.mu-poster-light .mu-hero-glow-a { background:linear-gradient(120deg, rgba(217,123,63,.24) 0%, rgba(217,123,63,.03) 55%, transparent 75%); }
+    body.mu-poster-mode.mu-poster-light .mu-hero-glow-b { background:linear-gradient(240deg, rgba(37,99,235,.2) 0%, rgba(37,99,235,.03) 55%, transparent 75%); }
+    body.mu-poster-mode.mu-poster-light .mu-hero-noise { background-image:repeating-linear-gradient(45deg, rgba(0,0,0,.025) 0 2px, transparent 2px 14px); mix-blend-mode:multiply; }
+    body.mu-poster-mode.mu-poster-light .mu-fighter-name {
+      color:#161514; -webkit-text-stroke:1px rgba(255,255,255,.6);
+      text-shadow:0 3px 0 rgba(255,255,255,.75), 0 8px 30px rgba(0,0,0,.15);
+    }
+    body.mu-poster-mode.mu-poster-light .mu-fighter-name.a { text-shadow:0 3px 0 rgba(255,255,255,.75), 0 8px 30px rgba(217,123,63,.3); }
+    body.mu-poster-mode.mu-poster-light .mu-fighter-name.b { text-shadow:0 3px 0 rgba(255,255,255,.75), 0 8px 30px rgba(37,99,235,.28); }
+    body.mu-poster-mode.mu-poster-light .mu-vs-badge {
+      background:radial-gradient(circle at 35% 30%, rgba(255,255,255,.95), rgba(230,225,215,.6) 70%);
+      border-color:rgba(0,0,0,.15);
+      box-shadow:0 0 0 1px rgba(0,0,0,.08), 0 0 26px rgba(217,123,63,.25), inset 0 0 14px rgba(0,0,0,.06);
+    }
+    body.mu-poster-mode.mu-poster-light .mu-vs-text { color:#161514; text-shadow:0 1px 2px rgba(255,255,255,.7); }
+    body.mu-poster-mode.mu-poster-light .mu-vs-weight { color:rgba(0,0,0,.55); border-color:rgba(0,0,0,.18); background:rgba(0,0,0,.04); }
+    body.mu-poster-mode.mu-poster-light .mu-poster-brand,
+    body.mu-poster-mode.mu-poster-light .mu-poster-eventline { color:rgba(0,0,0,.4); }
+    body.mu-poster-mode.mu-poster-light .mu-poster-eventline { background:rgba(255,255,255,.55); border-color:rgba(0,0,0,.14); }
+    body.mu-poster-mode.mu-poster-light .mu-poster-exit,
+    body.mu-poster-mode.mu-poster-light .mu-poster-theme {
+      background:rgba(255,255,255,.7); border-color:rgba(0,0,0,.16); color:#161514;
+    }
+    body.mu-poster-mode.mu-poster-light .mu-view-toggle { border-color:rgba(0,0,0,.16); }
+    body.mu-poster-mode.mu-poster-light .mu-view-btn { color:rgba(0,0,0,.4); }
+    body.mu-poster-mode.mu-poster-light .mu-view-btn:hover:not(.active) { color:#161514; }
 
     /* ── SPLIT BAR ── */
     .mu-split-bar {
@@ -330,17 +411,48 @@
     }
     .mu-form-row.b { justify-content:flex-end; }
     .mu-form-pip {
+      position:relative;
       width:28px; height:28px; border-radius:3px;
       display:flex; align-items:center; justify-content:center;
       font-family:'Montserrat',sans-serif; font-weight:800; font-size:.68rem;
       border:1px solid currentColor;
+      text-decoration:none; cursor:pointer;
+      transition:background .15s, transform .15s;
     }
     .mu-form-pip.w { color:#4ade80; }
     .mu-form-pip.l { color:#f87171; }
+    .mu-form-pip:hover { background:currentColor; transform:translateY(-1px); }
+    .mu-form-pip.w:hover .mu-form-pip-letter,
+    .mu-form-pip.l:hover .mu-form-pip-letter { color:#0a0a0a; }
+    /* custom hover tooltip — replaces relying on the native title attribute
+       (slow to appear, unstyled) so "who'd they beat/lose to" is
+       immediately visible on hover. */
+    .mu-form-tip {
+      display:none;
+      position:absolute; bottom:calc(100% + 8px); left:50%;
+      transform:translateX(-50%);
+      background:#111; border:1px solid rgba(255,255,255,.14);
+      border-radius:6px; padding:6px 10px;
+      font-family:'Inter',sans-serif; font-size:.64rem; font-weight:500;
+      color:rgba(255,255,255,.85); white-space:nowrap;
+      z-index:10; pointer-events:none;
+      box-shadow:0 8px 22px rgba(0,0,0,.5);
+    }
+    .mu-form-pip:hover .mu-form-tip { display:block; }
     .mu-form-sub {
       font-family:'Inter',sans-serif; font-size:.52rem;
       color:rgba(255,255,255,.3); margin-top:6px;
     }
+    .mu-form-full {
+      display:inline-flex; align-items:center; gap:4px;
+      font-family:'Montserrat',sans-serif; font-weight:700; font-size:.5rem;
+      letter-spacing:.1em; text-transform:uppercase;
+      color:#d97b3f; text-decoration:none; margin-top:8px;
+      opacity:.85; transition:opacity .15s;
+    }
+    .mu-form-full:hover { opacity:1; }
+    .mu-form-name-row { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+    .mu-form-name-row.b { flex-direction:row-reverse; }
     .mu-form-section {
       display:grid; grid-template-columns:1fr 1px 1fr; gap:16px; align-items:start;
     }
@@ -463,6 +575,8 @@
     body.light-mode .mu-form-name { color:rgba(0,0,0,.55); }
     body.light-mode .mu-form-divider { background:rgba(0,0,0,.1); }
     body.light-mode .mu-form-sub { color:rgba(0,0,0,.4); }
+    body.light-mode .mu-form-tip { background:#fff; border-color:rgba(0,0,0,.14); color:rgba(0,0,0,.75); box-shadow:0 8px 22px rgba(0,0,0,.18); }
+    body.light-mode .mu-form-full { color:#b8611e; }
     body.light-mode .mu-no-common { color:rgba(0,0,0,.35); }
     body.light-mode .mu-h2h-banner { color:#b8611e; border-color:rgba(184,97,30,.4); }
     body.light-mode .mu-stat-row { border-bottom-color:rgba(0,0,0,.07); }
@@ -527,8 +641,10 @@
     <button class="mu-view-btn" data-view="poster" type="button">Poster</button>
   </div>
 
-  <button class="mu-poster-exit" id="muPosterExit" type="button">✕ Exit Poster View</button>
-  <div class="mu-poster-hint">Screenshot this to post — designed for Instagram</div>
+  <div class="mu-poster-controls">
+    <button class="mu-poster-theme" id="muPosterTheme" type="button" title="Toggle poster light/dark">🌙</button>
+    <button class="mu-poster-exit" id="muPosterExit" type="button">✕ Exit Poster View</button>
+  </div>
 
   <div id="muRoot" class="mu-loading">Loading matchup...</div>
 
@@ -692,6 +808,20 @@
       const profileB = `fighter.html?${fB.id ? `id=${encodeURIComponent(fB.id)}` : `name=${encodeURIComponent(nameB)}`}`;
       const picksHref = eventId ? `picks.html?event=${encodeURIComponent(eventId)}` : 'events.html';
 
+      /* poster event banner text — only shown once a real card is known */
+      let eventLine = '';
+      if (eventId && eventsArr.length) {
+        const evForLine = eventsArr.find(e=>e.id===eventId);
+        if (evForLine) {
+          const parts = [evForLine.name || ''];
+          if (evForLine.date) {
+            const d = new Date(evForLine.date);
+            if (!isNaN(d)) parts.push(d.toLocaleDateString('en-US',{month:'short',day:'numeric'}));
+          }
+          eventLine = parts.filter(Boolean).join(' · ');
+        }
+      }
+
       /* ── RESUME DATA ── */
       function resumeHTML(fA, fB, nA, nB) {
         const h2hFights = (fA.last5||[]).filter(f =>
@@ -722,9 +852,22 @@
 
         function formPips(fights, reverse) {
           const last5 = (fights||[]).slice(0,5);
-          const pips = last5.map(f=>`<div class="mu-form-pip ${(f.result||'').toLowerCase()}" title="${esc(f.opponent||'')} &mdash; ${esc(f.method||'')}">${esc(f.result||'')}</div>`).join('');
-          return `<div class="mu-form-row${reverse?' b':''}">${pips}</div><div class="mu-form-sub">Last 5 fights (newest left)</div>`;
+          const pips = last5.map(f=>{
+            const result = (f.result||'').toUpperCase();
+            const verb = result === 'W' ? 'Beat' : result === 'L' ? 'Lost to' : 'Drew';
+            const opp = f.opponent || 'unknown';
+            const tip = `${verb} ${opp}${f.method ? ' &middot; ' + esc(f.method) : ''}`;
+            const href = f.opponent ? `fighter.html?name=${encodeURIComponent(f.opponent)}` : '#';
+            return `<a class="mu-form-pip ${result.toLowerCase()}" href="${href}">
+              <span class="mu-form-pip-letter">${esc(result)}</span>
+              <span class="mu-form-tip">${tip}</span>
+            </a>`;
+          }).join('');
+          return `<div class="mu-form-row${reverse?' b':''}">${pips}</div><div class="mu-form-sub">Last 5 fights (newest left) &middot; hover for details</div>`;
         }
+
+        const fullResumeA = `fighter.html?${fA.id ? `id=${encodeURIComponent(fA.id)}` : `name=${encodeURIComponent(nA)}`}`;
+        const fullResumeB = `fighter.html?${fB.id ? `id=${encodeURIComponent(fB.id)}` : `name=${encodeURIComponent(nB)}`}`;
 
         return `
           <div class="mu-resume-section">
@@ -738,13 +881,19 @@
               <div class="mu-resume-label">Recent Form</div>
               <div class="mu-form-section">
                 <div>
-                  <div class="mu-form-name">${esc(nA)}</div>
+                  <div class="mu-form-name-row">
+                    <div class="mu-form-name">${esc(nA)}</div>
+                  </div>
                   ${formPips(fA.last5, false)}
+                  <a class="mu-form-full" href="${fullResumeA}">Full Resume &rarr;</a>
                 </div>
                 <div class="mu-form-divider"></div>
                 <div>
-                  <div class="mu-form-name b">${esc(nB)}</div>
+                  <div class="mu-form-name-row b">
+                    <div class="mu-form-name b">${esc(nB)}</div>
+                  </div>
                   ${formPips(fB.last5, true)}
+                  <a class="mu-form-full" href="${fullResumeB}" style="float:right">Full Resume &rarr;</a>
                 </div>
               </div>
             </div>
@@ -757,6 +906,8 @@
           <div class="mu-hero-glow-b"></div>
           <div class="mu-hero-slash"></div>
           <div class="mu-hero-noise"></div>
+          <div class="mu-poster-brand">MMA Bridge</div>
+          <div class="mu-poster-eventline${eventLine?' has-text':''}">${esc(eventLine)}</div>
           ${imgsHTML}
           <div class="mu-hero-text">
             <div class="mu-hero-side a">
@@ -813,8 +964,9 @@
       document.title = `${nameA} vs ${nameB} | MMA Bridge`;
 
       // ── Poster / Full view toggle ──
-      const viewToggle = document.getElementById('muViewToggle');
-      const posterExit = document.getElementById('muPosterExit');
+      const viewToggle  = document.getElementById('muViewToggle');
+      const posterExit  = document.getElementById('muPosterExit');
+      const posterTheme = document.getElementById('muPosterTheme');
       viewToggle.style.display = 'inline-flex';
 
       function setView(view) {
@@ -826,6 +978,12 @@
         btn.addEventListener('click', () => setView(btn.dataset.view));
       });
       posterExit.addEventListener('click', () => setView('full'));
+
+      // poster-only light/dark toggle, independent of the site's own theme
+      posterTheme.addEventListener('click', () => {
+        const isLight = document.body.classList.toggle('mu-poster-light');
+        posterTheme.textContent = isLight ? '☀️' : '🌙';
+      });
     });
 
     window.addEventListener('scroll', () => {
