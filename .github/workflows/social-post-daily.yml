@@ -48,7 +48,12 @@ jobs:
             git push
           fi
 
-      - name: Publish to Twitter / Instagram
+      # Twitter is manual now (posting moved behind a pay-per-use credits
+      # wall on X's API) — review + post it yourself from admin.html's
+      # Marketing Buddy tab. This step only best-effort posts to Instagram
+      # (free API, once INSTAGRAM_ACCESS_TOKEN/INSTAGRAM_ACCOUNT_ID are set
+      # on Render) and never fails the job.
+      - name: Publish to Instagram (best-effort)
         if: steps.check.outputs.generated == 'true'
         env:
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}

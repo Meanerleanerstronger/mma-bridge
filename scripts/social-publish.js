@@ -5,17 +5,23 @@
  * and social/latest.json, AND after the workflow has committed + pushed
  * that image so GitHub Pages can serve it.
  *
- * 1. Polls the now-public image URL until it actually 200s (Pages deploys
- *    aren't instant — posting to Instagram with a URL that 404s fails the
- *    whole thing).
- * 2. Logs into the backend's admin API to get a token
- *    (POST /api/admin/auth — the existing password-based admin flow, same
- *    one the admin dashboard uses; there's no separate static-token path).
- * 3. Posts to Twitter (required — job fails if this fails) and Instagram
- *    (best-effort — Instagram credentials aren't set up on Render yet as
- *    of this being written, so a "not configured" response here is
- *    expected and shouldn't fail the job; a real posting failure still
- *    should be visible in the logs, just not fatal).
+ * Twitter is NOT auto-posted here anymore: X moved posting behind a
+ * pay-per-use credits wall on this app, and posting manually was chosen
+ * instead — review + copy the caption + download the image from the
+ * "Today's Auto-Generated Post" card in admin.html's Marketing Buddy tab,
+ * then post it yourself. That page reads social/latest.json directly, so
+ * this script's only remaining jobs are:
+ *
+ * 1. Poll the now-public image URL until it actually 200s (Pages deploys
+ *    aren't instant), so the admin page + Instagram both see a working URL.
+ * 2. Best-effort post to Instagram, if INSTAGRAM_ACCESS_TOKEN and
+ *    INSTAGRAM_ACCOUNT_ID are set on Render (Instagram's Graph API has no
+ *    per-post cost, unlike Twitter's current API) — a "not configured"
+ *    response is expected and normal until those are set up, and never
+ *    fails the job either way.
+ *
+ * Never exits with a failure code — a publish hiccup shouldn't block the
+ * daily image from being generated and available for manual posting.
  *
  * If latest.json doesn't exist (today's content type isn't implemented
  * yet — see social-post-daily.js), this is a clean no-op.
@@ -84,16 +90,18 @@ async function main() {
 
   const live = await waitUntilLive(imageUrl);
   if (!live) {
-    throw new Error(`Gave up waiting for ${imageUrl} to go live — GitHub Pages deploy may be stuck or the commit step failed`);
+    console.log(`⚠️  Gave up waiting for ${imageUrl} to go live — GitHub Pages deploy may be stuck. The image/caption are still committed, just not confirmed reachable yet; the admin page will still show them once Pages catches up.`);
+    return;
   }
+  console.log(`Image is live.`);
 
-  const token = await getAdminToken();
-
-  const twitterResult = await postTo('twitter', token, sidecar.caption, imageUrl);
-  if (!twitterResult.ok) {
-    throw new Error(`Twitter post failed: ${twitterResult.error || JSON.stringify(twitterResult)}`);
+  let token;
+  try {
+    token = await getAdminToken();
+  } catch (e) {
+    console.log(`⚠️  Could not authenticate to backend, skipping Instagram post: ${e.message}`);
+    return;
   }
-  console.log(`✅ Posted to Twitter: ${twitterResult.url || '(no url returned)'}`);
 
   const igResult = await postTo('instagram', token, sidecar.caption, imageUrl);
   if (igResult.ok) {
@@ -103,9 +111,11 @@ async function main() {
     // Render — log clearly but don't fail the job over it.
     console.log(`⚠️  Instagram post skipped/failed: ${igResult.error || JSON.stringify(igResult)}`);
   }
+  console.log(`Reminder: Twitter is manual now — copy the caption + image from admin.html's Marketing Buddy tab and post it yourself.`);
 }
 
 main().catch(e => {
-  console.error('social-publish failed:', e.message);
-  process.exit(1);
+  // Never fail the job over a publish hiccup — the image/caption are
+  // already generated and committed regardless.
+  console.log(`⚠️  social-publish encountered an error (non-fatal): ${e.message}`);
 });
