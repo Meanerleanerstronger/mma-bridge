@@ -27,50 +27,67 @@
     }
     .mu-back:hover { color:#d97b3f; }
 
-    /* ── HERO ── */
+    /* ── HERO — poster-style: diagonal corner-color wash, bigger vivid
+       photos, VS medallion, big shadowed type. Replaces the previous
+       deliberately-flat "plain dark ground + hairline divider" version. ── */
     .mu-hero {
       position:relative; overflow:hidden;
-      min-height:400px;
-      background:#0a0a0a;
+      min-height:480px;
+      background:#050506;
       margin-top:10px;
+      transition:min-height .3s ease;
     }
-    /* glows/noise removed — a plain dark ground with grayscale photos
-       and a single hairline divider reads calmer and more "program",
-       less "app glow effect" */
-    .mu-hero-glow-a, .mu-hero-glow-b, .mu-hero-noise { display:none; }
+    /* diagonal corner-color wash — the single biggest lever for reading as
+       a poster instead of a spec sheet. Two angled panels meeting in a
+       jagged seam down the middle, amber left / steel right. */
+    .mu-hero-glow-a, .mu-hero-glow-b {
+      position:absolute; top:0; bottom:0; width:62%; z-index:0;
+      pointer-events:none;
+    }
+    .mu-hero-glow-a {
+      left:0;
+      clip-path:polygon(0 0, 100% 0, 84% 100%, 0 100%);
+      background:linear-gradient(120deg, rgba(217,123,63,.32) 0%, rgba(217,123,63,.05) 55%, transparent 75%);
+    }
+    .mu-hero-glow-b {
+      right:0;
+      clip-path:polygon(16% 0, 100% 0, 100% 100%, 0 100%);
+      background:linear-gradient(240deg, rgba(96,165,250,.26) 0%, rgba(96,165,250,.04) 55%, transparent 75%);
+    }
+    .mu-hero-noise { display:none; }
     .mu-hero-slash {
-      position:absolute; top:0; bottom:0;
-      left:calc(50% - 1px); width:2px;
+      position:absolute; top:0; bottom:0; left:0; width:3px; height:100%;
+      transform-origin:top left;
       background:linear-gradient(180deg,
-        transparent 0%,
-        rgba(255,255,255,.1) 15%,
-        rgba(255,255,255,.18) 50%,
-        rgba(255,255,255,.1) 85%,
-        transparent 100%);
-      pointer-events:none; z-index:1;
+        transparent 0%, rgba(255,255,255,.5) 15%,
+        rgba(255,255,255,.75) 50%, rgba(255,255,255,.5) 85%, transparent 100%);
+      box-shadow:0 0 24px rgba(217,123,63,.5);
+      left:calc(50% - 1px);
+      clip-path:polygon(46% 0, 54% 0, 68% 100%, 60% 100%);
+      pointer-events:none; z-index:2;
     }
 
-    /* fighter images */
+    /* fighter images — bigger, full color, per-side rim glow */
     .mu-hero-imgs {
       position:absolute; inset:0;
       display:grid; grid-template-columns:1fr 1fr;
       pointer-events:none; z-index:1;
     }
     .mu-hero-img-wrap { display:flex; align-items:flex-end; overflow:hidden; }
-    .mu-hero-img-wrap.a { justify-content:flex-start; padding-left:2%; }
-    .mu-hero-img-wrap.b { justify-content:flex-end; padding-right:2%; }
+    .mu-hero-img-wrap.a { justify-content:flex-start; padding-left:1%; }
+    .mu-hero-img-wrap.b { justify-content:flex-end; padding-right:1%; }
     .mu-hero-img {
-      height:380px; width:auto; max-width:58%;
+      height:440px; width:auto; max-width:62%;
       object-fit:contain; object-position:bottom center;
-      filter:grayscale(0.3);
-      opacity:.92;
+      filter:grayscale(0.05) contrast(1.06);
+      opacity:.97;
     }
     .mu-hero-img-wrap.a .mu-hero-img {
-      filter:grayscale(0.3) drop-shadow(0 16px 30px rgba(0,0,0,.8));
+      filter:grayscale(0.05) contrast(1.06) drop-shadow(-6px 18px 34px rgba(217,123,63,.35)) drop-shadow(0 10px 26px rgba(0,0,0,.85));
     }
     .mu-hero-img-wrap.b .mu-hero-img {
       transform:scaleX(-1);
-      filter:grayscale(0.3) drop-shadow(0 16px 30px rgba(0,0,0,.8));
+      filter:grayscale(0.05) contrast(1.06) drop-shadow(6px 18px 34px rgba(96,165,250,.3)) drop-shadow(0 10px 26px rgba(0,0,0,.85));
     }
 
     /* text overlay */
@@ -79,25 +96,25 @@
       display:grid; grid-template-columns:1fr auto 1fr;
       align-items:flex-end;
       padding:36px 28px 28px;
-      min-height:400px;
+      min-height:480px;
+      transition:min-height .3s ease;
     }
     .mu-hero-side { display:flex; flex-direction:column; gap:9px; }
     .mu-hero-side.b { align-items:flex-end; text-align:right; }
 
     .mu-fighter-name {
       font-family:'Barlow Condensed',sans-serif; font-weight:900; font-style:italic;
-      font-size:clamp(2.2rem,5.5vw,4.2rem);
-      text-transform:uppercase; letter-spacing:.01em; line-height:.92;
+      font-size:clamp(2.6rem,6.8vw,5.4rem);
+      text-transform:uppercase; letter-spacing:.005em; line-height:.88;
       text-decoration:none; transition:opacity .2s;
       display:inline-block;
       color:#fff;
-      text-shadow:0 2px 0 rgba(0,0,0,.9), 0 4px 20px rgba(0,0,0,.7);
-      border-bottom:3px solid transparent;
-      padding-bottom:6px;
+      -webkit-text-stroke:1px rgba(0,0,0,.4);
+      text-shadow:0 3px 0 rgba(0,0,0,.9), 0 8px 34px rgba(0,0,0,.75);
     }
-    .mu-fighter-name.a { border-color:#d97b3f; }
-    .mu-fighter-name.b { border-color:#60a5fa; }
-    .mu-fighter-name:hover { opacity:.8; }
+    .mu-fighter-name.a { text-shadow:0 3px 0 rgba(0,0,0,.9), 0 8px 34px rgba(217,123,63,.35); }
+    .mu-fighter-name.b { text-shadow:0 3px 0 rgba(0,0,0,.9), 0 8px 34px rgba(96,165,250,.3); }
+    .mu-fighter-name:hover { opacity:.85; }
 
     .mu-fighter-chips { display:flex; gap:5px; flex-wrap:wrap; }
     .mu-hero-side.b .mu-fighter-chips { justify-content:flex-end; }
@@ -109,21 +126,33 @@
       color:rgba(255,255,255,.55);
     }
 
-    /* VS center */
+    /* VS medallion — was plain italic serif text, now a lit badge */
     .mu-vs-center {
-      text-align:center; padding:0 10px;
-      display:flex; flex-direction:column; align-items:center; gap:5px;
-      padding-bottom:6px;
+      text-align:center; padding:0 6px;
+      display:flex; flex-direction:column; align-items:center; gap:8px;
+      padding-bottom:10px;
+    }
+    .mu-vs-badge {
+      width:56px; height:56px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      background:radial-gradient(circle at 35% 30%, rgba(255,255,255,.1), rgba(10,10,10,.5) 70%);
+      border:1.5px solid rgba(255,255,255,.3);
+      box-shadow:0 0 0 1px rgba(0,0,0,.4), 0 0 26px rgba(217,123,63,.35), inset 0 0 14px rgba(0,0,0,.5);
+      animation:mu-vs-pulse 2.6s ease-in-out infinite;
+    }
+    @keyframes mu-vs-pulse {
+      0%,100% { box-shadow:0 0 0 1px rgba(0,0,0,.4), 0 0 22px rgba(217,123,63,.3), inset 0 0 14px rgba(0,0,0,.5); }
+      50%     { box-shadow:0 0 0 1px rgba(0,0,0,.4), 0 0 34px rgba(217,123,63,.55), inset 0 0 14px rgba(0,0,0,.5); }
     }
     .mu-vs-text {
-      font-family:'Newsreader',serif; font-weight:400; font-style:italic;
-      font-size:clamp(1.1rem,2.5vw,1.4rem);
-      color:rgba(255,255,255,.45);
+      font-family:'Barlow Condensed',sans-serif; font-weight:900; font-style:italic;
+      font-size:1.05rem; letter-spacing:.02em;
+      color:#fff; text-shadow:0 2px 6px rgba(0,0,0,.7);
     }
     .mu-vs-weight {
       font-family:'Montserrat',sans-serif; font-weight:700; font-size:.48rem;
       letter-spacing:.16em; text-transform:uppercase;
-      color:rgba(255,255,255,.28); white-space:nowrap;
+      color:rgba(255,255,255,.4); white-space:nowrap;
     }
 
     /* bottom fade */
@@ -132,6 +161,72 @@
       background:linear-gradient(to top,#040407 0%,transparent 100%);
       pointer-events:none; z-index:2;
     }
+
+    /* ── VIEW TOGGLE ── */
+    .mu-view-toggle {
+      display:inline-flex; gap:2px; margin:16px 24px 0;
+      border:1px solid rgba(255,255,255,.12); border-radius:20px; padding:2px;
+    }
+    .mu-view-btn {
+      font-family:'Montserrat',sans-serif; font-weight:800; font-size:.6rem;
+      letter-spacing:.1em; text-transform:uppercase;
+      padding:7px 16px; border-radius:18px; border:none; cursor:pointer;
+      background:transparent; color:rgba(255,255,255,.4);
+      transition:background .18s, color .18s;
+    }
+    .mu-view-btn.active { background:#d97b3f; color:#0a0a0a; }
+    .mu-view-btn:hover:not(.active) { color:#fff; }
+
+    /* ── POSTER MODE — full-bleed, chrome hidden, always dark regardless
+       of site theme (a promo poster shouldn't adapt to light mode),
+       sized so a straight screenshot is ready to post as-is. ── */
+    body.mu-poster-mode { background:#050506 !important; }
+    body.mu-poster-mode .navbar,
+    body.mu-poster-mode .mu-back,
+    body.mu-poster-mode .mu-content,
+    body.mu-poster-mode .mu-split-bar,
+    /* Floating chrome (Lucas chat launcher, "Live on MMA Bridge" activity
+       widget, notification bell) — same reasoning as the social pipeline's
+       screenshot bot hiding these: they'd show up in anyone's real
+       screenshot too, and don't belong in a shareable poster. */
+    body.mu-poster-mode #lw-btn,
+    body.mu-poster-mode #lw-window,
+    body.mu-poster-mode #lw-widget,
+    body.mu-poster-mode #lw-tab,
+    body.mu-poster-mode #notifBellMount { display:none !important; }
+    /* Center the hero at its natural content height (the same height that
+       already reads well in Full mode) inside the viewport — stretching it
+       to a forced 100vh left a dead gap up top with align-items:flex-end
+       shoving the actual photos/names down near the bottom edge, cropped
+       off-screen. Centering, not stretching, is the fix. */
+    body.mu-poster-mode #muRoot {
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+    body.mu-poster-mode .mu-view-toggle {
+      position:fixed; top:16px; left:16px; margin:0; z-index:20;
+    }
+    body.mu-poster-mode .mu-fighter-name { font-size:clamp(3rem,9vw,7rem); }
+    .mu-poster-exit {
+      position:fixed; top:16px; right:16px; z-index:20;
+      display:none;
+      background:rgba(0,0,0,.55); backdrop-filter:blur(8px);
+      border:1px solid rgba(255,255,255,.2); border-radius:20px;
+      color:#fff; font-family:'Montserrat',sans-serif; font-weight:700;
+      font-size:.62rem; letter-spacing:.08em; text-transform:uppercase;
+      padding:9px 18px; cursor:pointer;
+    }
+    body.mu-poster-mode .mu-poster-exit { display:block; }
+    .mu-poster-hint {
+      position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
+      z-index:20; display:none;
+      font-family:'Inter',sans-serif; font-size:.7rem; color:rgba(255,255,255,.4);
+      background:rgba(0,0,0,.5); backdrop-filter:blur(8px);
+      padding:8px 16px; border-radius:20px; white-space:nowrap;
+    }
+    body.mu-poster-mode .mu-poster-hint { display:block; }
 
     /* ── SPLIT BAR ── */
     .mu-split-bar {
@@ -382,13 +477,17 @@
 
     /* ── MOBILE ── */
     @media(max-width:600px){
-      .mu-hero-text { min-height:280px; padding:20px 14px 20px; }
-      .mu-fighter-name { font-size:1.6rem; }
-      .mu-hero-img { height:260px; }
+      .mu-hero { min-height:340px; }
+      .mu-hero-text { min-height:340px; padding:20px 14px 20px; }
+      .mu-fighter-name { font-size:1.9rem; }
+      .mu-hero-img { height:300px; }
+      .mu-vs-badge { width:42px; height:42px; }
+      .mu-vs-text { font-size:.82rem; }
       .mu-stat-row { grid-template-columns:1fr 78px 1fr; padding:12px 14px; }
       .mu-stat-val { font-size:1.05rem; }
       .mu-stat-label { font-size:.42rem; }
       .mu-odds-num { font-size:2.4rem; }
+      body.mu-poster-mode .mu-fighter-name { font-size:clamp(2.2rem,10vw,3.2rem); }
     }
   </style>
 </head>
@@ -422,6 +521,14 @@
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
     <span id="muBackLabel">Back</span>
   </a>
+
+  <div class="mu-view-toggle" id="muViewToggle" style="display:none">
+    <button class="mu-view-btn active" data-view="full" type="button">Full</button>
+    <button class="mu-view-btn" data-view="poster" type="button">Poster</button>
+  </div>
+
+  <button class="mu-poster-exit" id="muPosterExit" type="button">✕ Exit Poster View</button>
+  <div class="mu-poster-hint">Screenshot this to post — designed for Instagram</div>
 
   <div id="muRoot" class="mu-loading">Loading matchup...</div>
 
@@ -657,7 +764,7 @@
               ${chips(fA)}
             </div>
             <div class="mu-vs-center">
-              <div class="mu-vs-text">VS</div>
+              <div class="mu-vs-badge"><div class="mu-vs-text">VS</div></div>
               ${weight?`<div class="mu-vs-weight">${esc(weight)}</div>`:''}
             </div>
             <div class="mu-hero-side b">
@@ -704,6 +811,21 @@
       });
 
       document.title = `${nameA} vs ${nameB} | MMA Bridge`;
+
+      // ── Poster / Full view toggle ──
+      const viewToggle = document.getElementById('muViewToggle');
+      const posterExit = document.getElementById('muPosterExit');
+      viewToggle.style.display = 'inline-flex';
+
+      function setView(view) {
+        document.body.classList.toggle('mu-poster-mode', view === 'poster');
+        viewToggle.querySelectorAll('.mu-view-btn').forEach(b => b.classList.toggle('active', b.dataset.view === view));
+        window.scrollTo(0, 0);
+      }
+      viewToggle.querySelectorAll('.mu-view-btn').forEach(btn => {
+        btn.addEventListener('click', () => setView(btn.dataset.view));
+      });
+      posterExit.addEventListener('click', () => setView('full'));
     });
 
     window.addEventListener('scroll', () => {
