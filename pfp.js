@@ -28,10 +28,10 @@ const FIGHTER_PHOTOS = {
   // Women's P4P
   'valentina-shevchenko':   'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/SHEVCHENKO_VALENTINA_L_BELT_11-15.png',
   'kayla-harrison':         'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-06/HARRISON_KAYLA_L_BELTMOCK.png',
-  'zhang-weili':            'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2022-06/WEILI_ZHANG_L_06-11.png',
+  'zhang-weili':            'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2022-06/d6bd47bc-d423-4ae8-9073-f0abd7777751%252FWEILI_ZHANG_L_06-11.png',
   'natalia-silva':          'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/SILVA_NATALIA_L_01-24.png',
   'manon-fiorot':           'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/FIOROT_MANON_L_10-18.png',
-  'mackenzie-dern':         'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-11/DERN_MACKENZIE_L_11-16.png',
+  'mackenzie-dern':         'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/DERN_MACKENZIE_L_BELT.png',
   'alexa-grasso':           'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/GRASSO_ALEXA_L_03-28.png',
   'erin-blanchfield':       'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/BLANCHFIELD_ERIN_L_11-15.png',
   'julianna-pena':          'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2022-08/PENA_JULIANNA_L_12-11.png',

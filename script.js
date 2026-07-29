@@ -444,19 +444,19 @@ async function renderNews() {
     {
       title: 'UFC 328: Chimaev vs. Strickland — What Happened and What\'s Next',
       url: 'https://mmajunkie.usatoday.com/category/ufc',
-      imageUrl: 'https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-04/050926-ufc-329-chimaev-vs-strickland-EVENT-ART.jpg',
+      imageUrl: 'https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/2026-04/050926-ufc-329-chimaev-vs-strickland-EVENT-ART.jpg',
       source: 'MMA Junkie'
     },
     {
       title: 'McGregor vs. Holloway 2: Everything You Need to Know About UFC 329',
       url: 'https://www.espn.com/mma/',
-      imageUrl: 'https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-05/071126-ufc-329-mcgregor-vs-holloway-2-EVENT-ART.jpg',
+      imageUrl: 'https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/2026-06/071126-ufc-329-mcgregor-vs-holloway-2-EVENT-ART.jpg',
       source: 'ESPN MMA'
     },
     {
       title: 'UFC Freedom 250: Topuria vs. Gaethje Preview — Title Fight Preview',
       url: 'https://www.cbssports.com/ufc/',
-      imageUrl: 'https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-04/061426-ufc-250-topuria-vs-gaethje-EVENT-ART.jpg',
+      imageUrl: 'https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/2026-04/061426-ufc-freedom-250-EVENT-ART.jpg',
       source: 'CBS Sports'
     },
   ];

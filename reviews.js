@@ -66,7 +66,7 @@ function buildCard(ev, type) {
 
   // Per-image object-position overrides for posters with awkward crops
   const posterPositions = {
-    'https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-03/040426-ufc-fight-night-moicano-vs-duncan-EVENT-ART.jpg': 'center 12%',
+    'https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/2026-03/040426-ufc-fight-night-moicano-vs-duncan-EVENT-ART.jpg': 'center 12%',
   };
   const objPos = poster ? (posterPositions[poster] || 'top center') : '';
   const placeholderGrad = CARD_PLACEHOLDER_GRADIENTS[Math.floor(Math.random() * CARD_PLACEHOLDER_GRADIENTS.length)];
