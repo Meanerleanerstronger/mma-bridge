@@ -5080,6 +5080,22 @@ body.light-mode .ev-star-btn.starred {
 ══════════════════════════════════════════════════ */
 .pk-page { min-height: 100vh; background: #0d0d10; color: #fff; }
 
+/* Ambient event poster — fixed behind entire picks page */
+#pk-poster-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center 20%;
+  background-repeat: no-repeat;
+  opacity: 0;
+  filter: blur(55px) saturate(1.4) brightness(0.6);
+  pointer-events: none;
+  transition: opacity 1.2s ease;
+}
+#pk-poster-bg.loaded { opacity: 0.22; }
+body.light-mode #pk-poster-bg.loaded { opacity: 0.12; }
+
 .pk-loading {
   display: flex; align-items: center; justify-content: center;
   gap: 14px; padding: 120px 20px;

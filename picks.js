@@ -219,6 +219,15 @@ function formatOdds(n) {
     if (ogImg) ogImg.content = event.poster;
     const twImg = document.querySelector('meta[name="twitter:image"]');
     if (twImg) twImg.content = event.poster;
+    // Ambient background poster — faint fixed layer behind entire page
+    let bgEl = document.getElementById('pk-poster-bg');
+    if (!bgEl) {
+      bgEl = document.createElement('div');
+      bgEl.id = 'pk-poster-bg';
+      document.body.insertBefore(bgEl, document.body.firstChild);
+    }
+    bgEl.style.backgroundImage = `url(${event.poster})`;
+    requestAnimationFrame(() => bgEl.classList.add('loaded'));
   }
 
   const isCompleted = event.status === 'completed';
