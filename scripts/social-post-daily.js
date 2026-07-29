@@ -1,19 +1,21 @@
 #!/usr/bin/env node
 /**
  * social-post-daily.js
- * Generates one social poster image + caption per day, rotating between
- * three content types (news / fighter / event). Only 'news' is implemented —
- * fighter and event both need their real page structure confirmed before
- * writing any scraping logic (same rule this project always follows: never
- * guess selectors), so they currently log and exit cleanly instead of
- * posting garbage or failing the workflow.
+ * Generates poster image(s) + caption(s) per day, rotating between three
+ * content types:
+ *   - news           up to 3 posts, from index.html's "Trending Today" cards
+ *   - event_countdown 1 post, the next upcoming event's hero from events.html
+ *   - event_recap    1 post, the most recently completed event's hero from
+ *                    event-review.html
  *
- * 'news' navigates puppeteer to the LIVE site and screenshots each of the
- * (up to 3) "Trending Today" cards on index.html — same headline and
- * source text read straight off each rendered card, not a separate API
- * call, so every caption always matches what's in its image.
+ * All three navigate puppeteer to the LIVE site and screenshot the real
+ * rendered element — no guessed selectors, no fabricated data. Event
+ * countdown/recap read *which* event to use straight from data/events.json
+ * (already checked out in the same repo this script runs from) rather than
+ * scraping dates off the page, since that data is both more reliable and
+ * already-verified real event data.
  *
- * Writes, per post (up to 3 per day for 'news'):
+ * Writes, per post:
  *   social/<date>-<type>-<n>.png — a 1080x1350 poster, ready to publish
  *   social/latest.json           — { type, date, posts: [{caption, image}] }
  *                                   for admin.html's Marketing Buddy tab to
@@ -28,7 +30,8 @@ import sharp   from 'sharp';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const OUT_DIR   = path.join(__dirname, '..', 'social');
+const OUT_DIR      = path.join(__dirname, '..', 'social');
+const EVENTS_PATH  = path.join(__dirname, '..', 'data', 'events.json');
 const SITE_URL  = process.env.SITE_URL || 'https://mmabridge.com';
 
 const POSTER_W = 1080;
@@ -43,8 +46,22 @@ function todayKey(date) {
 function pickContentType(date) {
   const startOfYear = new Date(Date.UTC(date.getUTCFullYear(), 0, 0));
   const dayOfYear = Math.floor((date - startOfYear) / 86400000);
-  const types = ['news', 'fighter', 'event'];
+  const types = ['news', 'event_countdown', 'event_recap'];
   return types[dayOfYear % 3];
+}
+
+function loadEvents() {
+  return JSON.parse(fs.readFileSync(EVENTS_PATH, 'utf8'));
+}
+
+function getMainFight(ev) {
+  const mc = ev.mainCard || [];
+  return mc.find(f => f.slot === 'main') || mc[0] || null;
+}
+
+function lastName(name) {
+  const parts = (name || '').trim().split(/\s+/);
+  return parts[parts.length - 1] || name;
 }
 
 // Several UI widgets are position:fixed (pinned to the viewport, not the
@@ -124,21 +141,109 @@ async function buildNewsPosts(page) {
   return posts;
 }
 
-async function buildFighterPost() {
-  // TODO: not implemented. Needs the real fighter-profile page structure
-  // (which URL, which element holds the "stat card" worth screenshotting)
-  // confirmed against the actual site before writing scraping logic here —
-  // do not guess a selector.
-  return null;
+function daysUntil(isoDate) {
+  const today = new Date(); today.setUTCHours(0, 0, 0, 0);
+  const target = new Date(isoDate + 'T00:00:00Z');
+  return Math.round((target - today) / 86400000);
 }
 
-async function buildEventPost() {
-  // TODO: not implemented. Same as buildFighterPost — needs the real event
-  // countdown page/section confirmed first.
-  return null;
+async function buildEventCountdownPost(page) {
+  const events = loadEvents();
+  const today = todayKey(new Date());
+  const upcoming = events
+    .filter(e => e.status !== 'completed' && e.isoDate && e.isoDate >= today)
+    .sort((a, b) => a.isoDate.localeCompare(b.isoDate));
+  const ev = upcoming[0];
+  if (!ev) return null; // no upcoming event scheduled — nothing to build today
+
+  await page.setViewport({ width: 800, height: 900, deviceScaleFactor: 2 });
+  await page.goto(`${SITE_URL}/events.html?id=${encodeURIComponent(ev.id)}`, { waitUntil: 'networkidle2', timeout: 45000 });
+  await page.waitForSelector('#ovHero', { timeout: 20000 });
+  // The hero fades its poster in via onload — same reasoning as news day:
+  // wait for it, but proceed even if it never finishes rather than hang.
+  await page.waitForFunction(() => {
+    const img = document.querySelector('#ovHero .ov-poster');
+    return img && img.complete && img.naturalWidth > 0;
+  }, { timeout: 15000 }).catch(() => {});
+  await hideFloatingWidgets(page);
+  // .ov-topbar holds the Pick Fights / Calendar / Close buttons — real
+  // in-page navigation controls, not something that belongs in a public
+  // promotional screenshot.
+  await page.addStyleTag({ content: `.ov-topbar { display: none !important; }` });
+
+  const el = await page.$('#ovHero');
+  const rawPath = path.join(OUT_DIR, '_raw-countdown.png');
+  await el.screenshot({ path: rawPath });
+
+  const main = getMainFight(ev);
+  const days = ev.isoDate ? daysUntil(ev.isoDate) : null;
+  const whenPhrase = days === null ? '' : days <= 0 ? 'is TODAY' : days === 1 ? 'is tomorrow' : `is in ${days} days`;
+  const matchup = main ? `${lastName(main.a)} vs. ${lastName(main.b)}` : (ev.name || '');
+  const caption = `${matchup} ${whenPhrase} — make your picks on mmabridge.com 🥊`;
+
+  return [{ rawPath, caption }];
 }
 
-async function finalizePoster(rawPath, outPath) {
+async function buildEventRecapPost(page) {
+  const events = loadEvents();
+  const today = todayKey(new Date());
+  const completed = events
+    .filter(e => e.status === 'completed' && e.isoDate && e.isoDate <= today)
+    .sort((a, b) => b.isoDate.localeCompare(a.isoDate));
+  const ev = completed[0];
+  if (!ev) return null; // no completed event yet — nothing to recap
+
+  await page.setViewport({ width: 800, height: 900, deviceScaleFactor: 2 });
+  await page.goto(`${SITE_URL}/event-review.html?id=${encodeURIComponent(ev.id)}`, { waitUntil: 'networkidle2', timeout: 45000 });
+  await page.waitForSelector('.er-hero, .er-no-poster', { timeout: 20000 });
+  await page.waitForFunction(() => {
+    const img = document.querySelector('.er-hero-img');
+    return !img || (img.complete && img.naturalWidth > 0); // no poster at all is fine too — falls back to .er-no-poster
+  }, { timeout: 15000 }).catch(() => {});
+  await hideFloatingWidgets(page);
+
+  const heroSel = (await page.$('.er-hero')) ? '.er-hero' : '.er-no-poster';
+  const el = await page.$(heroSel);
+  const rawPath = path.join(OUT_DIR, '_raw-recap.png');
+  await el.screenshot({ path: rawPath });
+
+  const main = getMainFight(ev);
+  let resultPhrase = '';
+  if (main && main.winner) {
+    const loser = main.winner === main.a ? main.b : main.a;
+    resultPhrase = ` — ${lastName(main.winner)} def. ${lastName(loser)}`;
+  }
+  const caption = `Relive ${ev.name}${resultPhrase}. Full card recap + community ratings on mmabridge.com 📋`;
+
+  return [{ rawPath, caption }];
+}
+
+// News cards are already close to the 4:5 target ratio (just the photo,
+// see buildNewsPosts), so a plain smart-crop works fine there. The event
+// hero screenshots are wide/landscape — cover-cropping those into a 4:5
+// frame either zoomed hard into one fighter's face or chopped the other
+// one out entirely. Instead: a blurred, scaled-up copy fills the frame as
+// a backdrop, and the full, uncropped hero sits on top at whatever size
+// fits — nothing gets cut off, and it still looks full-bleed rather than
+// like a small image floating on plain black bars.
+async function finalizePosterBlurredBackdrop(rawPath, outPath) {
+  const background = await sharp(rawPath)
+    .resize(POSTER_W, POSTER_H, { fit: 'cover' })
+    .blur(50)
+    .modulate({ brightness: 0.55 })
+    .toBuffer();
+  const foreground = await sharp(rawPath)
+    .resize(POSTER_W, POSTER_H, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+    .toBuffer();
+  await sharp(background)
+    .composite([{ input: foreground }])
+    .png()
+    .toFile(outPath);
+  fs.unlinkSync(rawPath);
+}
+
+async function finalizePoster(rawPath, outPath, mode = 'cover') {
+  if (mode === 'blurred-backdrop') return finalizePosterBlurredBackdrop(rawPath, outPath);
   await sharp(rawPath)
     .resize(POSTER_W, POSTER_H, { fit: 'cover', position: sharp.strategy.attention })
     .png()
@@ -150,7 +255,9 @@ async function main() {
   fs.mkdirSync(OUT_DIR, { recursive: true });
 
   const date = new Date();
-  const type = pickContentType(date);
+  // FORCE_TYPE lets you test a specific content type locally without waiting
+  // for the day-of-year rotation to land on it, e.g. `FORCE_TYPE=event_recap node scripts/social-post-daily.js`
+  const type = process.env.FORCE_TYPE || pickContentType(date);
   console.log(`Today's content type: ${type}`);
 
   const browser = await puppeteer.launch({
@@ -158,34 +265,35 @@ async function main() {
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
   });
   const page = await browser.newPage();
-  // Wide viewport + 3x scale factor: the trending card is ~220px CSS-wide in
-  // the real 3-column desktop layout, so we need real pixels to upscale from
-  // cleanly rather than a blurry stretch of a small screenshot.
-  await page.setViewport({ width: 1400, height: 1000, deviceScaleFactor: 3 });
 
   let rawPosts;
   try {
     if (type === 'news') {
+      // Wide viewport + 3x scale factor: the trending card is ~220px
+      // CSS-wide in the real 3-column desktop layout, so we need real
+      // pixels to upscale from cleanly rather than a blurry stretch.
+      await page.setViewport({ width: 1400, height: 1000, deviceScaleFactor: 3 });
       rawPosts = await buildNewsPosts(page);
-    } else if (type === 'fighter') {
-      rawPosts = await buildFighterPost();
+    } else if (type === 'event_countdown') {
+      rawPosts = await buildEventCountdownPost(page);
     } else {
-      rawPosts = await buildEventPost();
+      rawPosts = await buildEventRecapPost(page);
     }
   } finally {
     await browser.close();
   }
 
   if (!rawPosts) {
-    console.log(`⏭️  '${type}' content type isn't implemented yet — skipping today, no post generated.`);
+    console.log(`⏭️  No content available for '${type}' today (e.g. no upcoming/completed event to use) — skipping, no post generated.`);
     return;
   }
 
+  const finalizeMode = type === 'news' ? 'cover' : 'blurred-backdrop';
   const key = todayKey(date);
   const posts = [];
   for (let i = 0; i < rawPosts.length; i++) {
     const imageName = `${key}-${type}-${i + 1}.png`;
-    await finalizePoster(rawPosts[i].rawPath, path.join(OUT_DIR, imageName));
+    await finalizePoster(rawPosts[i].rawPath, path.join(OUT_DIR, imageName), finalizeMode);
     posts.push({ caption: rawPosts[i].caption, image: imageName });
   }
 
