@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
  * social-post-daily.js
- * Generates poster image(s) + caption(s) per day, rotating between three
- * content types:
+ * Generates ALL of these every single day (high-volume mode — previously
+ * rotated one type per day, now builds everything available each run):
  *   - news           up to 3 posts, from index.html's "Trending Today" cards
  *   - event_countdown 1 post, the next upcoming event's hero from events.html
  *   - event_recap    1 post, the most recently completed event's hero from
@@ -15,9 +15,14 @@
  * scraping dates off the page, since that data is both more reliable and
  * already-verified real event data.
  *
+ * Each type builds independently and failures don't cascade — if, say,
+ * there's no completed event yet so event_recap has nothing to build, or
+ * one type hits an error, the other types still get generated rather than
+ * the whole run coming back empty.
+ *
  * Writes, per post:
  *   social/<date>-<type>-<n>.png — a 1080x1350 poster, ready to publish
- *   social/latest.json           — { type, date, posts: [{caption, image}] }
+ *   social/latest.json           — { date, posts: [{type, caption, image}] }
  *                                   for admin.html's Marketing Buddy tab to
  *                                   read back and show as review options
  * Does NOT commit, push, or post anything — that's the workflow's job.
@@ -41,14 +46,7 @@ function todayKey(date) {
   return date.toISOString().slice(0, 10); // YYYY-MM-DD
 }
 
-// Rotates by day-of-year so the 3-day cycle doesn't reset at each month
-// boundary the way a day-of-month % 3 would.
-function pickContentType(date) {
-  const startOfYear = new Date(Date.UTC(date.getUTCFullYear(), 0, 0));
-  const dayOfYear = Math.floor((date - startOfYear) / 86400000);
-  const types = ['news', 'event_countdown', 'event_recap'];
-  return types[dayOfYear % 3];
-}
+const ALL_TYPES = ['news', 'event_countdown', 'event_recap'];
 
 function loadEvents() {
   return JSON.parse(fs.readFileSync(EVENTS_PATH, 'utf8'));
@@ -251,14 +249,28 @@ async function finalizePoster(rawPath, outPath, mode = 'cover') {
   fs.unlinkSync(rawPath);
 }
 
+async function buildRawPosts(page, type) {
+  if (type === 'news') {
+    // Wide viewport + 3x scale factor: the trending card is ~220px
+    // CSS-wide in the real 3-column desktop layout, so we need real
+    // pixels to upscale from cleanly rather than a blurry stretch.
+    await page.setViewport({ width: 1400, height: 1000, deviceScaleFactor: 3 });
+    return buildNewsPosts(page);
+  }
+  if (type === 'event_countdown') return buildEventCountdownPost(page);
+  return buildEventRecapPost(page);
+}
+
 async function main() {
   fs.mkdirSync(OUT_DIR, { recursive: true });
 
   const date = new Date();
-  // FORCE_TYPE lets you test a specific content type locally without waiting
-  // for the day-of-year rotation to land on it, e.g. `FORCE_TYPE=event_recap node scripts/social-post-daily.js`
-  const type = process.env.FORCE_TYPE || pickContentType(date);
-  console.log(`Today's content type: ${type}`);
+  const key  = todayKey(date);
+  // FORCE_TYPE restricts to just one type for local testing, e.g.
+  // `FORCE_TYPE=event_recap node scripts/social-post-daily.js` — omit it
+  // to build everything, which is what the daily workflow does.
+  const typesToRun = process.env.FORCE_TYPE ? [process.env.FORCE_TYPE] : ALL_TYPES;
+  console.log(`Building: ${typesToRun.join(', ')}`);
 
   const browser = await puppeteer.launch({
     headless: 'new',
@@ -266,42 +278,44 @@ async function main() {
   });
   const page = await browser.newPage();
 
-  let rawPosts;
+  const allPosts = [];
   try {
-    if (type === 'news') {
-      // Wide viewport + 3x scale factor: the trending card is ~220px
-      // CSS-wide in the real 3-column desktop layout, so we need real
-      // pixels to upscale from cleanly rather than a blurry stretch.
-      await page.setViewport({ width: 1400, height: 1000, deviceScaleFactor: 3 });
-      rawPosts = await buildNewsPosts(page);
-    } else if (type === 'event_countdown') {
-      rawPosts = await buildEventCountdownPost(page);
-    } else {
-      rawPosts = await buildEventRecapPost(page);
+    for (const type of typesToRun) {
+      let rawPosts;
+      try {
+        rawPosts = await buildRawPosts(page, type);
+      } catch (e) {
+        // One type failing (a page hiccup, a selector that stopped
+        // matching, whatever) shouldn't cost the other types their posts
+        // too — log it and move on.
+        console.error(`⚠️  '${type}' failed, skipping just this type: ${e.message}`);
+        continue;
+      }
+      if (!rawPosts) {
+        console.log(`⏭️  No content available for '${type}' today (e.g. no upcoming/completed event to use).`);
+        continue;
+      }
+      const finalizeMode = type === 'news' ? 'cover' : 'blurred-backdrop';
+      for (let i = 0; i < rawPosts.length; i++) {
+        const imageName = `${key}-${type}-${i + 1}.png`;
+        await finalizePoster(rawPosts[i].rawPath, path.join(OUT_DIR, imageName), finalizeMode);
+        allPosts.push({ type, caption: rawPosts[i].caption, image: imageName });
+      }
     }
   } finally {
     await browser.close();
   }
 
-  if (!rawPosts) {
-    console.log(`⏭️  No content available for '${type}' today (e.g. no upcoming/completed event to use) — skipping, no post generated.`);
+  if (!allPosts.length) {
+    console.log('⏭️  Nothing generated today at all — every type either failed or had no content available.');
     return;
   }
 
-  const finalizeMode = type === 'news' ? 'cover' : 'blurred-backdrop';
-  const key = todayKey(date);
-  const posts = [];
-  for (let i = 0; i < rawPosts.length; i++) {
-    const imageName = `${key}-${type}-${i + 1}.png`;
-    await finalizePoster(rawPosts[i].rawPath, path.join(OUT_DIR, imageName), finalizeMode);
-    posts.push({ caption: rawPosts[i].caption, image: imageName });
-  }
-
-  const sidecar = { type, date: key, posts };
+  const sidecar = { date: key, posts: allPosts };
   fs.writeFileSync(path.join(OUT_DIR, 'latest.json'), JSON.stringify(sidecar, null, 2));
 
-  console.log(`✅ Built ${posts.length} ${type} post(s):`);
-  posts.forEach(p => console.log(`   ${p.image} — ${p.caption}`));
+  console.log(`✅ Built ${allPosts.length} post(s) across ${typesToRun.length} type(s):`);
+  allPosts.forEach(p => console.log(`   [${p.type}] ${p.image} — ${p.caption}`));
 }
 
 main().catch(e => {

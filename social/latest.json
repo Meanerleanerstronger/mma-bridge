@@ -1,18 +1,30 @@
 {
-  "type": "news",
   "date": "2026-07-29",
   "posts": [
     {
+      "type": "news",
       "caption": "Ex-UFC fighter Anthony Smith arrested on three felony charges — via ESPN",
       "image": "2026-07-29-news-1.png"
     },
     {
+      "type": "news",
       "caption": "Ilia Topuria told he should fight unranked Islam Makhachev teammate ‘John Pork’ by UFC GOAT — via Yardbarker",
       "image": "2026-07-29-news-2.png"
     },
     {
+      "type": "news",
       "caption": "Bogdan Guskov releases first statement after lopsided loss to Magomed Ankalaev in UFC Abu Dhabi headliner — via MMA Fighting",
       "image": "2026-07-29-news-3.png"
+    },
+    {
+      "type": "event_countdown",
+      "caption": "Medić vs. Rodriguez is in 3 days — make your picks on mmabridge.com 🥊",
+      "image": "2026-07-29-event_countdown-1.png"
+    },
+    {
+      "type": "event_recap",
+      "caption": "Relive UFC Fight Night: Ankalaev vs. Guskov — Ankalaev def. Guskov. Full card recap + community ratings on mmabridge.com 📋",
+      "image": "2026-07-29-event_recap-1.png"
     }
   ]
 }

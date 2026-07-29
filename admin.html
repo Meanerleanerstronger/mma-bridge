@@ -1236,7 +1236,7 @@
         }
 
         const posts = data.posts || [];
-        labelEl.textContent = `Today's Auto-Generated Posts — ${typeLabels[data.type] || data.type} (${posts.length})`;
+        labelEl.textContent = `Today's Auto-Generated Posts (${posts.length})`;
         if (!posts.length) {
           containerEl.innerHTML = `<div style="font-family:'Inter',sans-serif;font-size:0.85rem;color:rgba(255,255,255,0.35);">Today's pipeline ran but produced no posts.</div>`;
           return;
@@ -1258,7 +1258,7 @@
           card.className = 'mkt-result-card';
           card.innerHTML = `
             <div class="mkt-result-header">
-              <span class="mkt-result-platform">Option ${idx + 1}</span>
+              <span class="mkt-result-platform">${esc(typeLabels[post.type] || post.type)} · Option ${idx + 1}</span>
               <div class="mkt-result-actions">
                 <button class="btn-copy" data-act="copy">Copy Caption</button>
                 <button class="btn-copy" data-act="change-image">Change Image</button>
@@ -1386,16 +1386,27 @@
 
       // ── Platform status ───────────────────────────────────
       let _platformStatus = {};
-      async function loadPlatformStatus() {
+      async function loadPlatformStatus(attempt = 1) {
         try {
           const res = await fetch(`${API_BASE}/api/admin/marketing/status?token=${encodeURIComponent(token())}`);
-          if (!res.ok) return;
+          if (!res.ok) throw new Error('bad response');
           _platformStatus = await res.json();
           ['twitter','reddit','instagram'].forEach(p => {
             const el = $(`mkt-st-${p}`);
             if (el) el.classList.toggle('ready', !!_platformStatus[p]);
           });
-        } catch (_) {}
+        } catch (_) {
+          // Render's free tier sleeps the backend after inactivity — the
+          // first request after that can take ~30s, same cold-start this
+          // codebase already retries around elsewhere (picks.js hype
+          // ratings). Without this, a cold-start here silently left
+          // buttons stuck on "not connected" even when credentials were
+          // completely fine.
+          if (attempt < 4) {
+            await new Promise(r => setTimeout(r, 4000));
+            return loadPlatformStatus(attempt + 1);
+          }
+        }
       }
 
       // ── Load events.json and existing results ─────────────
