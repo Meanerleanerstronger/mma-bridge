@@ -1,0 +1,55 @@
+name: Daily Social Post
+
+on:
+  schedule:
+    - cron: '0 18 * * *'   # once daily, 6pm UTC — adjust to whenever you want it to post
+  workflow_dispatch:        # lets you trigger a run manually from the Actions tab to test
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies (Puppeteer + Sharp)
+        run: npm install
+
+      - name: Generate today's post
+        run: node scripts/social-post-daily.js
+
+      - name: Check whether a post was generated
+        id: check
+        run: |
+          if [ -f social/latest.json ]; then
+            echo "generated=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "generated=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit poster image
+        if: steps.check.outputs.generated == 'true'
+        run: |
+          git config user.name  "Social Post Bot"
+          git config user.email "bot@mmabridge.com"
+          git add social/
+          if git diff --staged --quiet; then
+            echo "No image changes to commit"
+          else
+            git commit -m "chore(auto): daily social post $(date -u +%Y-%m-%d)"
+            git push
+          fi
+
+      - name: Publish to Twitter / Instagram
+        if: steps.check.outputs.generated == 'true'
+        env:
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+        run: node scripts/social-publish.js

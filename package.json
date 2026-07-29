@@ -2,12 +2,14 @@
   "type": "module",
   "dependencies": {
     "ajv": "^8.17.1",
-    "puppeteer": "^22.0.0"
+    "puppeteer": "^22.0.0",
+    "sharp": "^0.33.5"
   },
   "scripts": {
     "validate": "node scripts/validate-json.js",
     "enrich": "node scripts/enrich-fighters.js",
-    "enrich-wiki": "node scripts/enrich-fighters-wiki.js"
+    "enrich-wiki": "node scripts/enrich-fighters-wiki.js",
+    "social-post": "node scripts/social-post-daily.js && node scripts/social-publish.js"
   }
 }
  
