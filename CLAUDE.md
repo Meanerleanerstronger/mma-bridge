@@ -22,8 +22,9 @@ MMA Bridge (mmabridge.com) is a UFC pick'em fan site. Vanilla JS frontend (no fr
 | `fighters.json` / `data/fighters.json` | Fighter data including headshot URLs |
 | `events.json` / `data/events.json` | Event data (fights, dates, etc.) |
 | `auth.html` / `auth.js` | Login/signup |
-| `admin.html` | Admin panel for entering fight results |
+| `admin.html` | Admin panel for entering fight results, plus "Marketing Buddy" tab for daily social content review/posting |
 | `config.js` | Supabase keys, `window._sb` init |
+| `scripts/social-post-daily.js` | Daily social pipeline (news/event countdown/recap posters) — see `SOCIAL_PIPELINE.md` |
 
 ## Supabase Tables (Key Columns)
 ### `profiles`
