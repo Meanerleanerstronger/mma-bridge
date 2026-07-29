@@ -28,10 +28,10 @@
     document.querySelectorAll('.nav-auth-mobile').forEach(el => {
       if (user) {
         el.innerHTML = `
-          <div class="nav-mobile-user">
+          <a href="profile.html" class="nav-mobile-user" title="View your profile">
             <img class="nav-avatar" src="${escHtml(user.avatar_url || '')}" alt="${escHtml(user.display_name || '')}" onerror="this.style.display='none'">
             <span>${escHtml(user.display_name || 'Fighter')}</span>
-          </div>
+          </a>
           <button type="button" class="nav-mobile-signout" onclick="window.MMABridgeAuth.signOut()">Sign out</button>`;
       } else {
         el.innerHTML = `

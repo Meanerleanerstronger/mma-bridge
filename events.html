@@ -112,7 +112,7 @@
   ]
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=9.20" />
+  <link rel="stylesheet" href="style.css?v=9.21" />
 
   <style>
     /* ── KEYFRAMES ── */
@@ -774,6 +774,18 @@
       .ov-head-cell { display:none !important; }
       .ov-fight.has-shots { grid-template-columns:1fr 110px 1fr !important; }
       .ov-fight.has-shots.is-main { grid-template-columns:1fr 110px 1fr !important; }
+
+      /* Topbar (Pick Fights / Calendar / Close) overflowed off the right edge
+         on narrow screens — the panel clips overflow-x, so the close button
+         became genuinely unreachable with no way to exit the overlay.
+         Shrink everything so it fits on one line, and wrap as a hard
+         guarantee it never clips again even on very narrow devices. */
+      .ov-topbar { padding:12px 14px; gap:8px; z-index:15; }
+      .ov-topbar-right { flex-wrap:wrap; justify-content:flex-end; gap:8px; row-gap:8px; }
+      .ov-pick-btn { padding:8px 12px; font-size:.6rem; }
+      .ov-cal-btn { padding:8px; gap:0; }
+      .ov-cal-btn .ov-btn-label { display:none; }
+      .ov-close { width:32px; height:32px; font-size:.8rem; flex-shrink:0; }
     }
     @media(max-width:480px) {
       .ev-card { height:120px; }
@@ -1157,12 +1169,12 @@
             <span class="ov-days-badge" id="ovDaysBadge" style="display:none;"></span>
           </div>
           <div class="ov-topbar-right">
-            <a class="ov-pick-btn ov-warroom-btn" id="ovWarroomBtn" href="#" style="display:none">War Room — Live</a>
-            <a class="ov-pick-btn" id="ovPickBtn" href="#">Pick Fights →</a>
+            <a class="ov-pick-btn ov-warroom-btn" id="ovWarroomBtn" href="#" style="display:none"><span class="ov-btn-label">War Room — Live</span></a>
+            <a class="ov-pick-btn" id="ovPickBtn" href="#"><span class="ov-btn-label">Pick Fights →</span></a>
             <div class="ov-cal-wrap" id="ovCalWrap">
               <button class="ov-cal-btn" id="ovCalBtn">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-                Calendar
+                <span class="ov-btn-label">Calendar</span>
               </button>
               <div class="ov-cal-drop" id="ovCalDrop">
                 <a class="ov-cal-opt" id="ovCalGoogle" href="#" target="_blank" rel="noopener">Google Calendar</a>
@@ -2287,7 +2299,7 @@
   </script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase.js"></script>
-  <script src="auth.js?v=3.2"></script>
+  <script src="auth.js?v=3.3"></script>
   <script src="challenge.js?v=1.0"></script>
   <script src="search.js"></script>
   <script src="countdown.js?v=1.0"></script>
