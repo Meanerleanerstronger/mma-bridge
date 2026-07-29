@@ -1184,6 +1184,13 @@
 
         posts.forEach((post, idx) => {
           const imgUrl = './social/' + post.image;
+          // Tracks whether the image was swapped for a locally-uploaded one.
+          // Instagram's API needs a real public URL — a locally-picked file
+          // has no URL Instagram can reach, so posting has to fall back to
+          // the original auto-generated (already publicly-hosted) image in
+          // that case rather than silently failing or lying about what got posted.
+          let customImageUrl = null; // set to the original public URL if swapped
+
           const card = document.createElement('div');
           card.className = 'mkt-result-card';
           card.innerHTML = `
@@ -1191,37 +1198,88 @@
               <span class="mkt-result-platform">Option ${idx + 1}</span>
               <div class="mkt-result-actions">
                 <button class="btn-copy" data-act="copy">Copy Caption</button>
-                <a class="btn-copy" data-act="download" href="${esc(imgUrl)}" download="${esc(post.image)}" style="text-decoration:none">Download Image</a>
+                <button class="btn-copy" data-act="change-image">Change Image</button>
+                <button class="btn-copy" data-act="download">Download Image</button>
                 ${igReady
                   ? `<button class="btn-post" data-act="instagram">Post to Instagram</button>`
                   : `<button class="btn-post" disabled title="Add Instagram API keys in Render to enable">Instagram not connected</button>`}
               </div>
             </div>
             <div style="padding:16px;">
-              <img src="${esc(imgUrl)}" alt="Poster option ${idx + 1}" style="width:100%;max-width:340px;border-radius:8px;display:block;margin-bottom:14px;border:1px solid rgba(255,255,255,0.08);" onerror="this.style.display='none'">
+              <img data-role="preview" src="${esc(imgUrl)}" alt="Poster option ${idx + 1}" style="width:100%;max-width:340px;border-radius:8px;display:block;margin-bottom:14px;border:1px solid rgba(255,255,255,0.08);" onerror="this.style.display='none'">
+              <input type="file" accept="image/*" data-role="file-input" style="display:none">
             </div>
             <div class="mkt-post-status"></div>
           `;
 
+          // Caption is editable now — copy/post always read whatever's
+          // currently typed in the box, not the original generated text.
           const ta = document.createElement('textarea');
           ta.className = 'mkt-result-body';
-          ta.readOnly = true;
           ta.value = post.caption;
           card.querySelector('.mkt-post-status').before(ta);
           containerEl.appendChild(card);
 
+          const previewImg = card.querySelector('[data-role="preview"]');
+          const fileInput  = card.querySelector('[data-role="file-input"]');
+          const statusEl   = card.querySelector('.mkt-post-status');
+
           card.querySelector('[data-act="copy"]').addEventListener('click', function () {
-            navigator.clipboard.writeText(post.caption).then(() => {
+            navigator.clipboard.writeText(ta.value).then(() => {
               this.textContent = 'Copied!';
               this.classList.add('copied');
               setTimeout(() => { this.textContent = 'Copy Caption'; this.classList.remove('copied'); }, 2000);
             });
           });
 
+          // Change Image — swap the preview to a locally-picked file.
+          card.querySelector('[data-act="change-image"]').addEventListener('click', () => fileInput.click());
+          fileInput.addEventListener('change', () => {
+            const file = fileInput.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = () => {
+              previewImg.src = reader.result;
+              previewImg.style.display = '';
+              customImageUrl = new URL(imgUrl, location.href).href; // remember the real public URL for Instagram
+              statusEl.className = 'mkt-post-status';
+              statusEl.textContent = 'Custom image set — Download will save this file; Instagram posting will still use the original generated image, since a locally-picked file has no public URL for Instagram to fetch.';
+            };
+            reader.readAsDataURL(file);
+          });
+
+          // Download — fetch as a blob and trigger via an object URL rather
+          // than relying on the <a download> attribute, which Safari
+          // frequently ignores for images (opens the file in a new tab
+          // instead of saving it).
+          card.querySelector('[data-act="download"]').addEventListener('click', async function () {
+            const btn = this;
+            const original = btn.textContent;
+            try {
+              const isCustom = previewImg.src.startsWith('data:');
+              let blob;
+              if (isCustom) {
+                blob = await (await fetch(previewImg.src)).blob();
+              } else {
+                blob = await (await fetch(imgUrl)).blob();
+              }
+              const blobUrl = URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = blobUrl;
+              a.download = post.image;
+              document.body.appendChild(a);
+              a.click();
+              a.remove();
+              URL.revokeObjectURL(blobUrl);
+            } catch (e) {
+              btn.textContent = 'Download failed';
+              setTimeout(() => { btn.textContent = original; }, 2000);
+            }
+          });
+
           const igBtn = card.querySelector('[data-act="instagram"]');
           if (igBtn) {
             igBtn.addEventListener('click', async () => {
-              const statusEl = card.querySelector('.mkt-post-status');
               igBtn.disabled = true;
               igBtn.textContent = 'Posting...';
               statusEl.className = 'mkt-post-status';
@@ -1233,8 +1291,8 @@
                   body: JSON.stringify({
                     token: token(),
                     platform: 'instagram',
-                    content: post.caption,
-                    image_url: new URL(imgUrl, location.href).href,
+                    content: ta.value,
+                    image_url: customImageUrl || new URL(imgUrl, location.href).href,
                   }),
                 });
                 const result = await res.json();
