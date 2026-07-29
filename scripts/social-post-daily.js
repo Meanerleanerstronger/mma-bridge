@@ -8,17 +8,17 @@
  * guess selectors), so they currently log and exit cleanly instead of
  * posting garbage or failing the workflow.
  *
- * 'news' navigates puppeteer to the LIVE site and screenshots the actual
- * first "Trending Today" card on index.html (#news-card-0) — same headline
- * and source text read straight off that rendered card, not a separate API
- * call, so the caption always matches what's in the image.
+ * 'news' navigates puppeteer to the LIVE site and screenshots each of the
+ * (up to 3) "Trending Today" cards on index.html — same headline and
+ * source text read straight off each rendered card, not a separate API
+ * call, so every caption always matches what's in its image.
  *
- * Writes:
- *   social/<date>-<type>.png   — the 1080x1350 poster, ready to publish
- *   social/latest.json         — { type, caption, image, date } for the
- *                                 publish step to read back
- * Does NOT commit, push, or post anything — that's social-publish.js and
- * the workflow's job.
+ * Writes, per post (up to 3 per day for 'news'):
+ *   social/<date>-<type>-<n>.png — a 1080x1350 poster, ready to publish
+ *   social/latest.json           — { type, date, posts: [{caption, image}] }
+ *                                   for admin.html's Marketing Buddy tab to
+ *                                   read back and show as review options
+ * Does NOT commit, push, or post anything — that's the workflow's job.
  */
 
 import fs      from 'fs';
@@ -62,48 +62,66 @@ async function hideFloatingWidgets(page) {
   });
 }
 
-async function buildNewsPost(page) {
+// index.html's "Trending Today" section only ever renders 3 cards in the DOM
+// (#news-card-0/1/2) — extras beyond that are held in a JS-side queue
+// (window._newsQueue, see script.js) and only swapped in if one of the 3
+// visible images breaks, they're never additional visible cards. So 3 is
+// the real, honest number of distinct trending stories available to build
+// posts from today, not a rounded-down guess.
+const NEWS_CARD_COUNT = 3;
+
+async function buildNewsPosts(page) {
   await page.goto(`${SITE_URL}/index.html`, { waitUntil: 'networkidle2', timeout: 45000 });
 
   // The trending cards render async after a fetch — wait for the first one.
   await page.waitForSelector('#news-card-0 .card-image img', { timeout: 20000 });
 
-  // Give the actual <img> a moment to finish loading so the screenshot
-  // isn't a blank/broken frame. If it never finishes (slow/dead image url,
-  // which does happen — see the events.json photo-bug fixes this repo has
-  // needed before), proceed anyway rather than hang the whole job.
-  await page.waitForFunction(() => {
-    const img = document.querySelector('#news-card-0 .card-image img');
-    return img && img.complete && img.naturalWidth > 0;
-  }, { timeout: 15000 }).catch(() => {});
-
-  const { title, source } = await page.evaluate(() => {
-    const t = document.querySelector('#news-card-0 .nc-title-0');
-    const s = document.querySelector('#news-card-0 .nc-source-0');
-    return {
-      title:  t ? t.textContent.trim() : '',
-      source: (s ? s.textContent.trim() : '').replace(/^·\s*/, ''),
-    };
-  });
-  if (!title) {
-    throw new Error('Could not read a headline off #news-card-0 — the trending section may be empty or its markup changed');
-  }
-
   await hideFloatingWidgets(page);
 
-  // Screenshot just the photo (.card-image), not the whole card. The full
-  // card is ~2:1 tall:wide (fixed 195px photo + a text block below it),
-  // nowhere near the 4:5 target — cover-cropping the whole card to fit
-  // chopped the headline off mid-sentence. The headline/source already go
-  // out as the caption text, so there's no need to keep them legible in the
-  // image itself; screenshotting just the photo gives a clean full-bleed
-  // crop with no cut-off text.
-  const el = await page.$('#news-card-0 .card-image');
-  const rawPath = path.join(OUT_DIR, '_raw.png');
-  await el.screenshot({ path: rawPath });
+  const posts = [];
+  for (let i = 0; i < NEWS_CARD_COUNT; i++) {
+    const cardSel = `#news-card-${i}`;
+    const exists = await page.$(cardSel);
+    if (!exists) break; // fewer than 3 stories today — use however many there are
 
-  const caption = source ? `${title} — via ${source}` : title;
-  return { rawPath, caption };
+    // Give the actual <img> a moment to finish loading so the screenshot
+    // isn't a blank/broken frame. If it never finishes (slow/dead image url,
+    // which does happen — see the events.json photo-bug fixes this repo has
+    // needed before), proceed anyway rather than hang the whole job.
+    await page.waitForFunction((sel) => {
+      const img = document.querySelector(`${sel} .card-image img`);
+      return img && img.complete && img.naturalWidth > 0;
+    }, { timeout: 15000 }, cardSel).catch(() => {});
+
+    const { title, source } = await page.evaluate((sel) => {
+      const t = document.querySelector(`${sel} .nc-title-${sel.split('-').pop()}`);
+      const s = document.querySelector(`${sel} .nc-source-${sel.split('-').pop()}`);
+      return {
+        title:  t ? t.textContent.trim() : '',
+        source: (s ? s.textContent.trim() : '').replace(/^·\s*/, ''),
+      };
+    }, cardSel);
+    if (!title) continue; // this slot didn't render text for some reason — skip it, don't fail the whole batch
+
+    // Screenshot just the photo (.card-image), not the whole card. The full
+    // card is ~2:1 tall:wide (fixed 195px photo + a text block below it),
+    // nowhere near the 4:5 target — cover-cropping the whole card to fit
+    // chopped the headline off mid-sentence. The headline/source already go
+    // out as the caption text, so there's no need to keep them legible in
+    // the image itself; screenshotting just the photo gives a clean
+    // full-bleed crop with no cut-off text.
+    const el = await page.$(`${cardSel} .card-image`);
+    const rawPath = path.join(OUT_DIR, `_raw-${i}.png`);
+    await el.screenshot({ path: rawPath });
+
+    const caption = source ? `${title} — via ${source}` : title;
+    posts.push({ rawPath, caption });
+  }
+
+  if (!posts.length) {
+    throw new Error('Could not read any headlines off the trending cards — the section may be empty or its markup changed');
+  }
+  return posts;
 }
 
 async function buildFighterPost() {
@@ -145,34 +163,37 @@ async function main() {
   // cleanly rather than a blurry stretch of a small screenshot.
   await page.setViewport({ width: 1400, height: 1000, deviceScaleFactor: 3 });
 
-  let result;
+  let rawPosts;
   try {
     if (type === 'news') {
-      result = await buildNewsPost(page);
+      rawPosts = await buildNewsPosts(page);
     } else if (type === 'fighter') {
-      result = await buildFighterPost();
+      rawPosts = await buildFighterPost();
     } else {
-      result = await buildEventPost();
+      rawPosts = await buildEventPost();
     }
   } finally {
     await browser.close();
   }
 
-  if (!result) {
+  if (!rawPosts) {
     console.log(`⏭️  '${type}' content type isn't implemented yet — skipping today, no post generated.`);
     return;
   }
 
   const key = todayKey(date);
-  const imageName = `${key}-${type}.png`;
-  const imagePath = path.join(OUT_DIR, imageName);
-  await finalizePoster(result.rawPath, imagePath);
+  const posts = [];
+  for (let i = 0; i < rawPosts.length; i++) {
+    const imageName = `${key}-${type}-${i + 1}.png`;
+    await finalizePoster(rawPosts[i].rawPath, path.join(OUT_DIR, imageName));
+    posts.push({ caption: rawPosts[i].caption, image: imageName });
+  }
 
-  const sidecar = { type, caption: result.caption, image: imageName, date: key };
+  const sidecar = { type, date: key, posts };
   fs.writeFileSync(path.join(OUT_DIR, 'latest.json'), JSON.stringify(sidecar, null, 2));
 
-  console.log(`✅ Built ${type} post → social/${imageName}`);
-  console.log(`   Caption: ${result.caption}`);
+  console.log(`✅ Built ${posts.length} ${type} post(s):`);
+  posts.forEach(p => console.log(`   ${p.image} — ${p.caption}`));
 }
 
 main().catch(e => {

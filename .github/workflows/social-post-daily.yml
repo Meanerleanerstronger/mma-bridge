@@ -35,7 +35,13 @@ jobs:
             echo "generated=false" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Commit poster image
+      # Nothing auto-posts anywhere from here — review + post yourself from
+      # admin.html's Marketing Buddy tab, which reads these files directly:
+      # copy a caption + download its image for Twitter, or click
+      # "Post to Instagram" to publish via the API once those credentials
+      # are set up on Render. Keeps you in control of which of the (up to 3)
+      # options actually goes out, instead of the workflow picking one.
+      - name: Commit poster images
         if: steps.check.outputs.generated == 'true'
         run: |
           git config user.name  "Social Post Bot"
@@ -47,14 +53,3 @@ jobs:
             git commit -m "chore(auto): daily social post $(date -u +%Y-%m-%d)"
             git push
           fi
-
-      # Twitter is manual now (posting moved behind a pay-per-use credits
-      # wall on X's API) — review + post it yourself from admin.html's
-      # Marketing Buddy tab. This step only best-effort posts to Instagram
-      # (free API, once INSTAGRAM_ACCESS_TOKEN/INSTAGRAM_ACCOUNT_ID are set
-      # on Render) and never fails the job.
-      - name: Publish to Instagram (best-effort)
-        if: steps.check.outputs.generated == 'true'
-        env:
-          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-        run: node scripts/social-publish.js

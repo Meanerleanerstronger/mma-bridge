@@ -9,7 +9,7 @@
     "validate": "node scripts/validate-json.js",
     "enrich": "node scripts/enrich-fighters.js",
     "enrich-wiki": "node scripts/enrich-fighters-wiki.js",
-    "social-post": "node scripts/social-post-daily.js && node scripts/social-publish.js"
+    "social-post": "node scripts/social-post-daily.js"
   }
 }
  

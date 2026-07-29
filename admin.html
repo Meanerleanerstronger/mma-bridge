@@ -941,23 +941,17 @@
       <!-- Tab: Marketing -->
       <div id="tab-marketing" class="admin-tab-content">
 
-        <!-- Today's auto-generated daily social post — the GitHub Actions
+        <!-- Today's auto-generated daily social posts — the GitHub Actions
              pipeline (scripts/social-post-daily.js) generates and commits
-             this every day but does NOT auto-post it (Twitter's API now
-             requires paid credits per post; Instagram credentials aren't
-             set up yet). Review it here and post it yourself manually. -->
-        <div class="section-label" style="margin-bottom:14px">Today's Auto-Generated Post</div>
-        <div class="mkt-result-card" id="today-post-card" style="margin-bottom:32px">
-          <div class="mkt-result-header">
-            <span class="mkt-result-platform" id="today-post-type">Loading…</span>
-            <div class="mkt-result-actions">
-              <button class="btn-copy" id="today-post-copy" style="display:none">Copy Caption</button>
-              <a class="btn-copy" id="today-post-download" style="display:none;text-decoration:none" download>Download Image</a>
-            </div>
-          </div>
-          <div id="today-post-body" style="padding:16px;">
-            <div style="font-family:'Inter',sans-serif;font-size:0.85rem;color:rgba(255,255,255,0.35);">Checking for today's post...</div>
-          </div>
+             up to 3 image+caption options every day but does NOT
+             auto-post to Twitter (its API now charges per post on this
+             app). Review these, copy whichever caption you like + download
+             its image to post on Twitter yourself, or click "Post to
+             Instagram" to publish straight to Instagram via the API once
+             those credentials are set up. -->
+        <div class="section-label" id="today-posts-label" style="margin-bottom:14px">Today's Auto-Generated Posts</div>
+        <div id="today-posts-container" style="margin-bottom:32px; display:flex; flex-direction:column; gap:16px;">
+          <div style="font-family:'Inter',sans-serif;font-size:0.85rem;color:rgba(255,255,255,0.35);">Checking for today's posts...</div>
         </div>
 
         <div class="section-label" style="margin-bottom:14px">Content Generator</div>
@@ -1158,54 +1152,111 @@
       async function enterAdmin() {
         showScreen('admin');
         await loadEvents();
-        loadPlatformStatus();
+        await loadPlatformStatus();
         loadTodaysPost();
       }
 
-      // ── Today's auto-generated social post ────────────────
+      // ── Today's auto-generated social posts (up to 3) ─────
       async function loadTodaysPost() {
-        const typeEl     = $('today-post-type');
-        const bodyEl     = $('today-post-body');
-        const copyBtn    = $('today-post-copy');
-        const downloadEl = $('today-post-download');
+        const labelEl     = $('today-posts-label');
+        const containerEl = $('today-posts-container');
+        const typeLabels  = { news: '📰 News', fighter: '🥊 Fighter Stat Card', event: '📅 Event Countdown' };
+
+        let data;
         try {
           const res = await fetch('./social/latest.json?_=' + Date.now(), { cache: 'no-store' });
           if (!res.ok) throw new Error('not found');
-          const data = await res.json();
+          data = await res.json();
+        } catch (e) {
+          containerEl.innerHTML = `<div style="font-family:'Inter',sans-serif;font-size:0.85rem;color:rgba(255,255,255,0.35);">No posts generated yet today — the daily pipeline runs once a day; check back after it's run, or trigger it manually from GitHub Actions.</div>`;
+          return;
+        }
 
-          const typeLabels = { news: '📰 News', fighter: '🥊 Fighter Stat Card', event: '📅 Event Countdown' };
-          typeEl.textContent = typeLabels[data.type] || data.type;
+        const posts = data.posts || [];
+        labelEl.textContent = `Today's Auto-Generated Posts — ${typeLabels[data.type] || data.type} (${posts.length})`;
+        if (!posts.length) {
+          containerEl.innerHTML = `<div style="font-family:'Inter',sans-serif;font-size:0.85rem;color:rgba(255,255,255,0.35);">Today's pipeline ran but produced no posts.</div>`;
+          return;
+        }
 
-          const imgUrl = './social/' + data.image;
-          bodyEl.innerHTML = `
-            <img src="${imgUrl}" alt="Today's poster" style="width:100%;max-width:340px;border-radius:8px;display:block;margin-bottom:14px;border:1px solid rgba(255,255,255,0.08);" onerror="this.style.display='none'">
-            <div style="font-family:'Inter',sans-serif;font-size:0.65rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:6px;">Caption (${esc(data.date)})</div>
+        const igReady = !!_platformStatus.instagram;
+        containerEl.innerHTML = '';
+
+        posts.forEach((post, idx) => {
+          const imgUrl = './social/' + post.image;
+          const card = document.createElement('div');
+          card.className = 'mkt-result-card';
+          card.innerHTML = `
+            <div class="mkt-result-header">
+              <span class="mkt-result-platform">Option ${idx + 1}</span>
+              <div class="mkt-result-actions">
+                <button class="btn-copy" data-act="copy">Copy Caption</button>
+                <a class="btn-copy" data-act="download" href="${esc(imgUrl)}" download="${esc(post.image)}" style="text-decoration:none">Download Image</a>
+                ${igReady
+                  ? `<button class="btn-post" data-act="instagram">Post to Instagram</button>`
+                  : `<button class="btn-post" disabled title="Add Instagram API keys in Render to enable">Instagram not connected</button>`}
+              </div>
+            </div>
+            <div style="padding:16px;">
+              <img src="${esc(imgUrl)}" alt="Poster option ${idx + 1}" style="width:100%;max-width:340px;border-radius:8px;display:block;margin-bottom:14px;border:1px solid rgba(255,255,255,0.08);" onerror="this.style.display='none'">
+            </div>
+            <div class="mkt-post-status"></div>
           `;
+
           const ta = document.createElement('textarea');
           ta.className = 'mkt-result-body';
           ta.readOnly = true;
-          ta.value = data.caption;
-          ta.style.padding = '0';
-          bodyEl.appendChild(ta);
+          ta.value = post.caption;
+          card.querySelector('.mkt-post-status').before(ta);
+          containerEl.appendChild(card);
 
-          copyBtn.style.display = '';
-          copyBtn.onclick = () => {
-            navigator.clipboard.writeText(data.caption).then(() => {
-              copyBtn.textContent = 'Copied!';
-              copyBtn.classList.add('copied');
-              setTimeout(() => { copyBtn.textContent = 'Copy Caption'; copyBtn.classList.remove('copied'); }, 2000);
+          card.querySelector('[data-act="copy"]').addEventListener('click', function () {
+            navigator.clipboard.writeText(post.caption).then(() => {
+              this.textContent = 'Copied!';
+              this.classList.add('copied');
+              setTimeout(() => { this.textContent = 'Copy Caption'; this.classList.remove('copied'); }, 2000);
             });
-          };
+          });
 
-          downloadEl.style.display = '';
-          downloadEl.href = imgUrl;
-          downloadEl.download = data.image;
-        } catch (e) {
-          typeEl.textContent = 'No post yet';
-          copyBtn.style.display = 'none';
-          downloadEl.style.display = 'none';
-          bodyEl.innerHTML = `<div style="font-family:'Inter',sans-serif;font-size:0.85rem;color:rgba(255,255,255,0.35);">No post generated yet today — the daily pipeline runs once a day; check back after it's run, or trigger it manually from GitHub Actions.</div>`;
-        }
+          const igBtn = card.querySelector('[data-act="instagram"]');
+          if (igBtn) {
+            igBtn.addEventListener('click', async () => {
+              const statusEl = card.querySelector('.mkt-post-status');
+              igBtn.disabled = true;
+              igBtn.textContent = 'Posting...';
+              statusEl.className = 'mkt-post-status';
+              statusEl.textContent = '';
+              try {
+                const res = await fetch(`${API_BASE}/api/admin/marketing/post`, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                    token: token(),
+                    platform: 'instagram',
+                    content: post.caption,
+                    image_url: new URL(imgUrl, location.href).href,
+                  }),
+                });
+                const result = await res.json();
+                if (!result.ok) throw new Error(result.error || 'Post failed');
+                igBtn.textContent = 'Posted!';
+                igBtn.classList.add('posted');
+                statusEl.className = 'mkt-post-status ok';
+                statusEl.textContent = 'Posted to Instagram';
+              } catch (e) {
+                igBtn.textContent = 'Failed';
+                igBtn.classList.add('error');
+                statusEl.className = 'mkt-post-status err';
+                statusEl.textContent = e.message;
+                setTimeout(() => {
+                  igBtn.disabled = false;
+                  igBtn.textContent = 'Post to Instagram';
+                  igBtn.classList.remove('error');
+                }, 3000);
+              }
+            });
+          }
+        });
       }
 
       function esc(s) {
