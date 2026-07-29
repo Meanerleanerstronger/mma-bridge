@@ -522,7 +522,7 @@
     "ranking": "#1",
     "ranking_change": 1,
     "record": {
-      "wins": 21,
+      "wins": 22,
       "losses": 2,
       "draws": 1
     },
@@ -6852,7 +6852,8 @@
       "tdAcc": "35%",
       "tdDef": "72%",
       "subAvg": "1.7"
-    }
+    },
+    "stance": "Southpaw"
   },
   {
     "id": "nikita-krylov",
@@ -7725,7 +7726,7 @@
     "ranking": "#10",
     "record": {
       "wins": 14,
-      "losses": 4,
+      "losses": 5,
       "draws": 0
     },
     "height": "5'4\"",
@@ -7737,6 +7738,14 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/ERCEG_STEVE_L_08-09.png",
     "bio": "Steve Erceg is an Australian flyweight who stormed into title contention with a breakout performance against Alexandre Pantoja, taking the champion the full five rounds in a closely contested title fight. The Perth native relies on wrestling and pressure to control pace and has quickly become one of the division's most exciting prospects.",
     "last5": [
+      {
+        "opponent": "Ramazan Temirov",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Ankalaev vs. Guskov",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Tim Elliott",
         "result": "W",
@@ -11550,7 +11559,8 @@
       "tdAcc": "14%",
       "tdDef": "83%",
       "subAvg": "0.0"
-    }
+    },
+    "stance": "Orthodox"
   },
   {
     "id": "kyle-daukaus",
@@ -11706,7 +11716,8 @@
       "tdAcc": "46%",
       "tdDef": "68%",
       "subAvg": "1.3"
-    }
+    },
+    "stance": "Orthodox"
   },
   {
     "id": "steve-garcia",
@@ -12520,7 +12531,8 @@
       "tdAcc": "37%",
       "tdDef": "54%",
       "subAvg": "0.3"
-    }
+    },
+    "stance": "Orthodox"
   },
   {
     "id": "ethyn-ewing",
@@ -14037,7 +14049,8 @@
       "tdAcc": "45%",
       "tdDef": "44%",
       "subAvg": "1.4"
-    }
+    },
+    "stance": "Orthodox"
   },
   {
     "id": "charles-johnson",
@@ -14396,11 +14409,19 @@
     "id": "rizvan-kuniev",
     "name": "Rizvan Kuniev",
     "record": {
-      "wins": 13,
+      "wins": 14,
       "losses": 3,
       "draws": 1
     },
     "last5": [
+      {
+        "opponent": "Tyrell Fortune",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Ankalaev vs. Guskov",
+        "round": 3,
+        "time": null
+      },
       {
         "opponent": "Jailton Almeida",
         "result": "W",
@@ -14499,10 +14520,18 @@
     "name": "Tyrell Fortune",
     "record": {
       "wins": 18,
-      "losses": 3,
+      "losses": 4,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Rizvan Kuniev",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Ankalaev vs. Guskov",
+        "round": 3,
+        "time": null
+      },
       {
         "opponent": "Marcin Tybura",
         "result": "W",
@@ -16920,7 +16949,8 @@
       "tdAcc": "34%",
       "tdDef": "57%",
       "subAvg": "1.2"
-    }
+    },
+    "stance": "Orthodox"
   },
   {
     "id": "modestas-bukauskas",
@@ -17157,7 +17187,8 @@
       "tdAcc": "45%",
       "tdDef": "74%",
       "subAvg": "0.8"
-    }
+    },
+    "stance": "Orthodox"
   },
   {
     "id": "ricky-turcios",
@@ -18914,10 +18945,18 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/JACOBY_DUSTIN_L_02-07.png",
     "record": {
       "wins": 22,
-      "losses": 9,
+      "losses": 10,
       "draws": 1
     },
     "last5": [
+      {
+        "opponent": "Muhammad Said",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Ankalaev vs. Guskov",
+        "round": 2,
+        "time": null
+      },
       {
         "opponent": "Julius Walker",
         "result": "W",
@@ -19009,7 +19048,8 @@
       "tdAcc": "25%",
       "tdDef": "62%",
       "subAvg": "0.0"
-    }
+    },
+    "stance": "Orthodox"
   },
   {
     "id": "julius-walker",
@@ -19866,7 +19906,8 @@
       "tdAcc": "37%",
       "tdDef": "46%",
       "subAvg": "1.1"
-    }
+    },
+    "stance": "Orthodox"
   },
   {
     "id": "santiago-luna",
@@ -20163,7 +20204,8 @@
       "tdAcc": "64%",
       "tdDef": "63%",
       "subAvg": "0.7"
-    }
+    },
+    "stance": "Southpaw"
   },
   {
     "id": "zach-reese",
@@ -21517,11 +21559,19 @@
     "name": "Nurullo Aliev",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/ALIEV_NURULLO_L_11-22.png",
     "record": {
-      "wins": 11,
+      "wins": 12,
       "losses": 0,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Mike Davis",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Ankalaev vs. Guskov",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Shaqueme Rock",
         "result": "W",
@@ -21724,7 +21774,8 @@
       "tdAcc": "50%",
       "tdDef": "73%",
       "subAvg": "0.1"
-    }
+    },
+    "stance": "Orthodox"
   },
   {
     "id": "marc-diakiese",
@@ -23959,7 +24010,8 @@
       "tdAcc": "18%",
       "tdDef": "68%",
       "subAvg": "0.2"
-    }
+    },
+    "stance": "Southpaw"
   },
   {
     "id": "bruno-lopes",
@@ -24203,11 +24255,19 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-02/RIBEIRO_BRENDSON_L_02-17.png",
     "record": {
       "wins": 17,
-      "losses": 10,
+      "losses": 11,
       "draws": 0
     },
     "nickname": "The Gorilla",
     "last5": [
+      {
+        "opponent": "Magomed Tuchalov",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Ankalaev vs. Guskov",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Abdul Rakhman Yakhyaev",
         "result": "L",
@@ -24476,11 +24536,19 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/PETERSEN_THOMAS_L_05-03.png",
     "record": {
       "wins": 11,
-      "losses": 4,
+      "losses": 5,
       "draws": 0
     },
     "nickname": "The Train",
     "last5": [
+      {
+        "opponent": "Valter Walker",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC Fight Night: Ankalaev vs. Guskov",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Guilherme Pat",
         "result": "W",
@@ -25167,7 +25235,8 @@
       "tdAcc": "20%",
       "tdDef": "88%",
       "subAvg": "0.2"
-    }
+    },
+    "stance": "Southpaw"
   },
   {
     "id": "dominick-reyes",
@@ -25302,7 +25371,8 @@
       "tdAcc": "28%",
       "tdDef": "82%",
       "subAvg": "0.2"
-    }
+    },
+    "stance": "Southpaw"
   },
   {
     "id": "johnny-walker",
@@ -25791,7 +25861,8 @@
       "tdAcc": "50%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "stance": "Orthodox"
   },
   {
     "id": "patricio-pitbull",
@@ -26368,7 +26439,8 @@
       "tdAcc": "66%",
       "tdDef": "66%",
       "subAvg": "0.2"
-    }
+    },
+    "stance": "Orthodox"
   },
   {
     "id": "lupita-godinez",
@@ -26497,7 +26569,89 @@
       "tdAcc": "28%",
       "tdDef": "80%",
       "subAvg": "0.3"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Sean Woodson",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Covington vs. Buckley",
+        "round": 1,
+        "time": "4:58"
+      },
+      {
+        "opponent": "Luis Pajuelo",
+        "result": "W",
+        "method": "Submission (brabo choke)",
+        "event": "UFC on ESPN: Ribas vs. Namajunas",
+        "round": 1,
+        "time": "2:45"
+      },
+      {
+        "opponent": "Kyle Nelson (fighter)",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Grasso vs. Shevchenko 2",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Julian Erosa",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Song vs. Simón",
+        "round": 1,
+        "time": "1:41"
+      },
+      {
+        "opponent": "Cameron Graves",
+        "result": "W",
+        "method": "TKO (elbow)",
+        "event": "Fury FC 46",
+        "round": 2,
+        "time": "1:19"
+      },
+      {
+        "opponent": "Nate Richardson",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "2021 in Legacy Fighting Alliance#Legacy Fighting Alliance 99: Dennis vs. Cherant",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Spike Carlyle",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "California Xtreme Fighting 17",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Donald Sanchez",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "2019 in Legacy Fighting Alliance#Legacy Fighting Alliance 58: Park vs. Willis",
+        "round": 2,
+        "time": "1:27"
+      },
+      {
+        "opponent": "Fard Muhammad",
+        "result": "W",
+        "method": "Submission (triangle choke)",
+        "event": "KOTC: 20th Anniversary",
+        "round": 3,
+        "time": "1:19"
+      },
+      {
+        "opponent": "Kurt Kinser",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "KOTC: Under Siege",
+        "round": 3,
+        "time": "5:00"
+      }
+    ]
   },
   {
     "id": "marquel-mederos",
@@ -27424,7 +27578,8 @@
       "tdAcc": "30%",
       "tdDef": "76%",
       "subAvg": "0.0"
-    }
+    },
+    "stance": "Orthodox"
   },
   {
     "id": "thiago-moises",
@@ -27588,7 +27743,8 @@
       "tdAcc": "27%",
       "tdDef": "75%",
       "subAvg": "0.2"
-    }
+    },
+    "stance": "Orthodox"
   },
   {
     "id": "robert-valentin",
@@ -28278,7 +28434,8 @@
       "tdAcc": "32%",
       "tdDef": "44%",
       "subAvg": "0.6"
-    }
+    },
+    "stance": "Orthodox"
   },
   {
     "id": "youssef-zalal",
@@ -30231,7 +30388,8 @@
       "tdAcc": "38%",
       "tdDef": "82%",
       "subAvg": "0.8"
-    }
+    },
+    "stance": "Southpaw"
   },
   {
     "id": "tim-elliott",
@@ -34651,7 +34809,8 @@
       "tdAcc": "30%",
       "tdDef": "72%",
       "subAvg": "0.2"
-    }
+    },
+    "stance": "Orthodox"
   },
   {
     "id": "xiong-jingnan",
@@ -35339,7 +35498,8 @@
       "tdAcc": "53%",
       "tdDef": "78%",
       "subAvg": "1.0"
-    }
+    },
+    "stance": "Orthodox"
   },
   {
     "id": "edmen-shahbazyan",
@@ -37537,7 +37697,8 @@
       "tdAcc": "52%",
       "tdDef": "82%",
       "subAvg": "0.6"
-    }
+    },
+    "stance": "Orthodox"
   },
   {
     "id": "fatima-kline",
@@ -37640,7 +37801,8 @@
       "tdAcc": "66%",
       "tdDef": "65%",
       "subAvg": "0.2"
-    }
+    },
+    "stance": "Orthodox"
   },
   {
     "id": "brad-tavares",
@@ -37982,7 +38144,8 @@
       "tdAcc": "25%",
       "tdDef": "100%",
       "subAvg": "0.0"
-    }
+    },
+    "stance": "Orthodox"
   },
   {
     "id": "uran-satybaldiev",
@@ -38010,11 +38173,19 @@
     "name": "Valter Walker",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/WALKER_VALTER_L_10-25.png",
     "record": {
-      "wins": 15,
+      "wins": 16,
       "losses": 1,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Thomas Petersen",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC Fight Night: Ankalaev vs. Guskov",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Louie Sutherland",
         "result": "W",
@@ -38112,7 +38283,7 @@
     "id": "magomed-tuchalov",
     "name": "Magomed Tuchalov",
     "record": {
-      "wins": 6,
+      "wins": 7,
       "losses": 0,
       "draws": 0
     },
@@ -38127,19 +38298,37 @@
       "tdDef": "0%",
       "subAvg": "0.0"
     },
-    "nickname": "Tiger"
+    "nickname": "Tiger",
+    "last5": [
+      {
+        "opponent": "Brendson Ribeiro",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Ankalaev vs. Guskov",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "ramazan-temirov",
     "name": "Ramazan Temirov",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-11/TEMIROV_RAMAZAN_L_10-12.png",
     "record": {
-      "wins": 19,
+      "wins": 20,
       "losses": 3,
       "draws": 0
     },
     "nickname": "Temurlan",
     "last5": [
+      {
+        "opponent": "Steve Erceg",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Ankalaev vs. Guskov",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Cody Durden",
         "result": "L",
@@ -38380,10 +38569,18 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-02/BONFIM_ISMAEL_L_02-15.png",
     "record": {
       "wins": 20,
-      "losses": 6,
+      "losses": 7,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Axel Sola",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC Fight Night: Ankalaev vs. Guskov",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Belal Muhammad",
         "result": "W",
@@ -38482,7 +38679,7 @@
     "name": "Axel Sola",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-09/SOLA_AXEL_L_09-06.png",
     "record": {
-      "wins": 11,
+      "wins": 12,
       "losses": 1,
       "draws": 1
     },
@@ -38495,7 +38692,17 @@
       "tdAcc": "36%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Ismael Bonfim",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC Fight Night: Ankalaev vs. Guskov",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "uros-medic",
@@ -38701,7 +38908,8 @@
       "tdAcc": "50%",
       "tdDef": "64%",
       "subAvg": "0.1"
-    }
+    },
+    "stance": "Southpaw"
   },
   {
     "id": "ante-delija",
@@ -38794,7 +39002,18 @@
         "time": "0:59"
       }
     ],
-    "nickname": "Walking Trouble"
+    "nickname": "Walking Trouble",
+    "stats": {
+      "slpm": "4.28",
+      "strAcc": "38%",
+      "sapm": "3.95",
+      "strDef": "52%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "75%",
+      "subAvg": "0.0"
+    },
+    "stance": "Orthodox"
   },
   {
     "id": "dusko-todorovic",
@@ -38887,7 +39106,18 @@
         "time": "3:15"
       }
     ],
-    "nickname": "Thunder"
+    "nickname": "Thunder",
+    "stats": {
+      "slpm": "4.73",
+      "strAcc": "57%",
+      "sapm": "4.40",
+      "strDef": "48%",
+      "tdAvg": "1.77",
+      "tdAcc": "21%",
+      "tdDef": "42%",
+      "subAvg": "0.3"
+    },
+    "stance": "Orthodox"
   },
   {
     "id": "vlasto-cepo",
@@ -38897,6 +39127,16 @@
       "wins": 0,
       "losses": 0,
       "draws": 0
+    },
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
     }
   },
   {
@@ -38918,7 +39158,18 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "5.57",
+      "strAcc": "56%",
+      "sapm": "4.62",
+      "strDef": "44%",
+      "tdAvg": "2.86",
+      "tdAcc": "44%",
+      "tdDef": "0%",
+      "subAvg": "0.7"
+    },
+    "stance": "Orthodox"
   },
   {
     "id": "jovan-leka",
@@ -38928,6 +39179,16 @@
       "wins": 1,
       "losses": 0,
       "draws": 0
+    },
+    "stats": {
+      "slpm": "1.60",
+      "strAcc": "75%",
+      "sapm": "0.60",
+      "strDef": "43%",
+      "tdAvg": "1.00",
+      "tdAcc": "100%",
+      "tdDef": "55%",
+      "subAvg": "1.0"
     }
   },
   {
@@ -38938,6 +39199,16 @@
       "wins": 6,
       "losses": 2,
       "draws": 0
+    },
+    "stats": {
+      "slpm": "3.21",
+      "strAcc": "42%",
+      "sapm": "9.64",
+      "strDef": "47%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
     }
   },
   {
@@ -39031,7 +39302,17 @@
         "time": "5:00"
       }
     ],
-    "nickname": "Mr. Highlight"
+    "nickname": "Mr. Highlight",
+    "stats": {
+      "slpm": "3.76",
+      "strAcc": "53%",
+      "sapm": "3.48",
+      "strDef": "53%",
+      "tdAvg": "1.37",
+      "tdAcc": "51%",
+      "tdDef": "76%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "josias-musasa",
@@ -39042,7 +39323,17 @@
       "losses": 2,
       "draws": 0
     },
-    "nickname": "The KO Wizard"
+    "nickname": "The KO Wizard",
+    "stats": {
+      "slpm": "3.19",
+      "strAcc": "45%",
+      "sapm": "4.39",
+      "strDef": "36%",
+      "tdAvg": "0.90",
+      "tdAcc": "50%",
+      "tdDef": "81%",
+      "subAvg": "0.5"
+    }
   },
   {
     "id": "bogdan-grad",
@@ -39063,7 +39354,17 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "4.06",
+      "strAcc": "51%",
+      "sapm": "5.06",
+      "strDef": "49%",
+      "tdAvg": "4.22",
+      "tdAcc": "40%",
+      "tdDef": "75%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "oban-elliott",
@@ -39084,7 +39385,17 @@
         "round": 1,
         "time": "2:45"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "3.62",
+      "strAcc": "48%",
+      "sapm": "2.24",
+      "strDef": "61%",
+      "tdAvg": "1.52",
+      "tdAcc": "40%",
+      "tdDef": "52%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "michael-oliveira",
@@ -39176,7 +39487,17 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "8.40",
+      "strAcc": "51%",
+      "sapm": "3.36",
+      "strDef": "66%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "100%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "ian-garry",
@@ -39362,7 +39683,18 @@
         "time": "4:59"
       }
     ],
-    "nickname": "The Savage"
+    "nickname": "The Savage",
+    "stats": {
+      "slpm": "2.71",
+      "strAcc": "48%",
+      "sapm": "2.86",
+      "strDef": "56%",
+      "tdAvg": "2.76",
+      "tdAcc": "40%",
+      "tdDef": "38%",
+      "subAvg": "0.9"
+    },
+    "stance": "Orthodox"
   },
   {
     "id": "opponent-tba",
@@ -39657,7 +39989,17 @@
       }
     ],
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/5/OROLBAI_MYKTYBEK_L_11-18.png",
-    "nickname": "Krygyz"
+    "nickname": "Krygyz",
+    "stats": {
+      "slpm": "2.78",
+      "strAcc": "50%",
+      "sapm": "2.70",
+      "strDef": "51%",
+      "tdAvg": "8.77",
+      "tdAcc": "59%",
+      "tdDef": "40%",
+      "subAvg": "0.5"
+    }
   },
   {
     "id": "geoff-neal",
@@ -39758,7 +40100,18 @@
       }
     ],
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/NEAL_GEOFF_L_02-21.png",
-    "nickname": "Handz of Steel"
+    "nickname": "Handz of Steel",
+    "stats": {
+      "slpm": "5.02",
+      "strAcc": "50%",
+      "sapm": "5.50",
+      "strDef": "57%",
+      "tdAvg": "0.54",
+      "tdAcc": "45%",
+      "tdDef": "87%",
+      "subAvg": "0.1"
+    },
+    "stance": "Southpaw"
   },
   {
     "id": "chidi-njokuani",
@@ -39859,7 +40212,17 @@
       }
     ],
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-08/NJOKUANI_CHIDI_L.png",
-    "nickname": "Bang Bang"
+    "nickname": "Bang Bang",
+    "stats": {
+      "slpm": "5.16",
+      "strAcc": "61%",
+      "sapm": "3.32",
+      "strDef": "57%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "75%",
+      "subAvg": "0.1"
+    }
   },
   {
     "id": "theodor-berggren",
@@ -39880,7 +40243,17 @@
         "round": 2,
         "time": null
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "3.49",
+      "strAcc": "35%",
+      "sapm": "10.78",
+      "strDef": "33%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "tahir-abdullayev",
@@ -39901,7 +40274,17 @@
         "round": 3,
         "time": null
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "2.56",
+      "strAcc": "42%",
+      "sapm": "2.42",
+      "strDef": "51%",
+      "tdAvg": "2.07",
+      "tdAcc": "33%",
+      "tdDef": "100%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "jefferson-nascimento",
@@ -39922,7 +40305,17 @@
         "round": 3,
         "time": null
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "2.42",
+      "strAcc": "48%",
+      "sapm": "2.56",
+      "strDef": "57%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "66%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "elisha-ellison",
@@ -39943,7 +40336,17 @@
         "round": 1,
         "time": null
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "3.61",
+      "strAcc": "38%",
+      "sapm": "15.79",
+      "strDef": "33%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "100%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "ryan-gandra",
@@ -39964,7 +40367,17 @@
         "round": 1,
         "time": null
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "11.71",
+      "strAcc": "50%",
+      "sapm": "2.30",
+      "strDef": "73%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "100%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "austin-bashi",
@@ -39984,7 +40397,17 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "1.89",
+      "strAcc": "42%",
+      "sapm": "2.34",
+      "strDef": "52%",
+      "tdAvg": "6.09",
+      "tdAcc": "35%",
+      "tdDef": "63%",
+      "subAvg": "1.4"
+    }
   },
   {
     "id": "jose-miguel-delgado",
@@ -40005,7 +40428,17 @@
       "losses": 1,
       "draws": 0
     },
-    "nickname": "AJ"
+    "nickname": "AJ",
+    "stats": {
+      "slpm": "2.20",
+      "strAcc": "38%",
+      "sapm": "4.27",
+      "strDef": "36%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "alvin-hines",
@@ -40026,7 +40459,17 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "5.58",
+      "strAcc": "32%",
+      "sapm": "7.62",
+      "strDef": "38%",
+      "tdAvg": "0.90",
+      "tdAcc": "10%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "levi-rodrigues-jr",
@@ -40037,7 +40480,17 @@
       "losses": 1,
       "draws": 0
     },
-    "nickname": "Baby Monster"
+    "nickname": "Baby Monster",
+    "stats": {
+      "slpm": "2.60",
+      "strAcc": "50%",
+      "sapm": "4.60",
+      "strDef": "29%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "57%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "felipe-franco",
@@ -40048,7 +40501,17 @@
       "losses": 2,
       "draws": 0
     },
-    "nickname": "Negão"
+    "nickname": "Negão",
+    "stats": {
+      "slpm": "2.55",
+      "strAcc": "57%",
+      "sapm": "2.39",
+      "strDef": "43%",
+      "tdAvg": "3.70",
+      "tdAcc": "40%",
+      "tdDef": "87%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "nina-milosevic",
@@ -40058,6 +40521,16 @@
       "wins": 0,
       "losses": 0,
       "draws": 0
+    },
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
     }
   },
   {
@@ -40183,7 +40656,17 @@
       }
     ],
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/5/HERNANDEZ_ANTHONY_L_10-19.png",
-    "nickname": "Fluffy"
+    "nickname": "Fluffy",
+    "stats": {
+      "slpm": "4.57",
+      "strAcc": "60%",
+      "sapm": "3.10",
+      "strDef": "51%",
+      "tdAvg": "5.88",
+      "tdAcc": "48%",
+      "tdDef": "68%",
+      "subAvg": "1.6"
+    }
   },
   {
     "id": "john-garza",
@@ -40276,7 +40759,17 @@
       }
     ],
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_BLUE.png?VersionId=Om_hItmX1XM4gJZUDxmeO._luirl8gW7&amp;itok=ij6lbEqO",
-    "nickname": "Mowgli"
+    "nickname": "Mowgli",
+    "stats": {
+      "slpm": "5.47",
+      "strAcc": "43%",
+      "sapm": "5.73",
+      "strDef": "35%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "77%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "jalin-turner",
@@ -40377,7 +40870,17 @@
       }
     ],
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/TURNER_JALIN_L_03-08.png",
-    "nickname": "The Tarantula"
+    "nickname": "The Tarantula",
+    "stats": {
+      "slpm": "5.79",
+      "strAcc": "48%",
+      "sapm": "4.54",
+      "strDef": "41%",
+      "tdAvg": "0.75",
+      "tdAcc": "55%",
+      "tdDef": "75%",
+      "subAvg": "1.1"
+    }
   },
   {
     "id": "neil-magny",
@@ -40486,7 +40989,17 @@
       }
     ],
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/MAGNY_NEIL_L_12-13.png",
-    "nickname": "The Haitian Sensation"
+    "nickname": "The Haitian Sensation",
+    "stats": {
+      "slpm": "3.40",
+      "strAcc": "46%",
+      "sapm": "2.44",
+      "strDef": "51%",
+      "tdAvg": "2.17",
+      "tdAcc": "39%",
+      "tdDef": "55%",
+      "subAvg": "0.3"
+    }
   },
   {
     "id": "ramiz-brahimaj",
@@ -40586,7 +41099,17 @@
         "time": "0:55"
       }
     ],
-    "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/BRAHIMAJ_RAMIZ_L_02-21.png"
+    "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/BRAHIMAJ_RAMIZ_L_02-21.png",
+    "stats": {
+      "slpm": "2.29",
+      "strAcc": "48%",
+      "sapm": "3.27",
+      "strDef": "47%",
+      "tdAvg": "1.99",
+      "tdAcc": "34%",
+      "tdDef": "44%",
+      "subAvg": "1.6"
+    }
   },
   {
     "id": "kaue-fernandes",
@@ -40596,6 +41119,16 @@
       "wins": 11,
       "losses": 2,
       "draws": 0
+    },
+    "stats": {
+      "slpm": "4.28",
+      "strAcc": "55%",
+      "sapm": "1.42",
+      "strDef": "62%",
+      "tdAvg": "1.18",
+      "tdAcc": "100%",
+      "tdDef": "76%",
+      "subAvg": "0.0"
     }
   },
   {
@@ -40625,7 +41158,17 @@
         "round": 3,
         "time": "4:20"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "9.32",
+      "strAcc": "50%",
+      "sapm": "6.62",
+      "strDef": "57%",
+      "tdAvg": "0.52",
+      "tdAcc": "25%",
+      "tdDef": "80%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "serghei-spivac",
@@ -40718,7 +41261,17 @@
         "time": "5:00"
       }
     ],
-    "nickname": "Polar Bear"
+    "nickname": "Polar Bear",
+    "stats": {
+      "slpm": "3.57",
+      "strAcc": "47%",
+      "sapm": "4.23",
+      "strDef": "52%",
+      "tdAvg": "3.82",
+      "tdAcc": "59%",
+      "tdDef": "63%",
+      "subAvg": "0.5"
+    }
   },
   {
     "id": "vitor-petrino",
@@ -40826,7 +41379,17 @@
         "round": 2,
         "time": "3:36"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "3.24",
+      "strAcc": "48%",
+      "sapm": "2.71",
+      "strDef": "51%",
+      "tdAvg": "2.60",
+      "tdAcc": "46%",
+      "tdDef": "79%",
+      "subAvg": "0.7"
+    }
   },
   {
     "id": "kennedy-nzechukwu",
@@ -40919,7 +41482,17 @@
         "time": "3:04"
       }
     ],
-    "nickname": "Chosen"
+    "nickname": "Chosen",
+    "stats": {
+      "slpm": "4.96",
+      "strAcc": "46%",
+      "sapm": "4.58",
+      "strDef": "51%",
+      "tdAvg": "0.50",
+      "tdAcc": "45%",
+      "tdDef": "80%",
+      "subAvg": "0.2"
+    }
   },
   {
     "id": "elise-reed",
@@ -41011,7 +41584,18 @@
         "round": 2,
         "time": "4:57"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "3.41",
+      "strAcc": "53%",
+      "sapm": "3.26",
+      "strDef": "51%",
+      "tdAvg": "0.46",
+      "tdAcc": "60%",
+      "tdDef": "53%",
+      "subAvg": "0.0"
+    },
+    "stance": "Orthodox"
   },
   {
     "id": "denise-gomes",
@@ -41112,7 +41696,18 @@
         "time": "1:56"
       }
     ],
-    "nickname": "Dee"
+    "nickname": "Dee",
+    "stats": {
+      "slpm": "4.43",
+      "strAcc": "49%",
+      "sapm": "3.16",
+      "strDef": "51%",
+      "tdAvg": "1.45",
+      "tdAcc": "34%",
+      "tdDef": "66%",
+      "subAvg": "0.7"
+    },
+    "stance": "Orthodox"
   },
   {
     "id": "ce-liu",
@@ -41127,7 +41722,7 @@
     "id": "magomed-zaynukov",
     "name": "Magomed Zaynukov",
     "record": {
-      "wins": 8,
+      "wins": 9,
       "losses": 0,
       "draws": 0
     },
@@ -41198,14 +41793,24 @@
       }
     ],
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/ZAYNUKOV_MAGOMED_R_10-07.png?itok=rUlbqlka",
-    "nickname": "Wild Chanko"
+    "nickname": "Wild Chanko",
+    "stats": {
+      "slpm": "15.67",
+      "strAcc": "60%",
+      "sapm": "4.80",
+      "strDef": "58%",
+      "tdAvg": "2.00",
+      "tdAcc": "100%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "damian-rzepecki",
     "name": "Damian Rzepecki",
     "record": {
       "wins": 10,
-      "losses": 0,
+      "losses": 1,
       "draws": 0
     },
     "last5": [
@@ -41291,17 +41896,35 @@
       }
     ],
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
-    "nickname": "The Butcher"
+    "nickname": "The Butcher",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "mike-davis",
     "name": "Mike Davis",
     "record": {
       "wins": 12,
-      "losses": 3,
+      "losses": 4,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Nurullo Aliev",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Ankalaev vs. Guskov",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Luiz Garagorri",
         "result": "W",
@@ -41400,7 +42023,17 @@
       }
     ],
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-05/DAVIS_MIKE_L_03-16.png?itok=7e1Vgn5K",
-    "nickname": "Beast Boy"
+    "nickname": "Beast Boy",
+    "stats": {
+      "slpm": "4.73",
+      "strAcc": "53%",
+      "sapm": "5.23",
+      "strDef": "54%",
+      "tdAvg": "2.40",
+      "tdAcc": "44%",
+      "tdDef": "60%",
+      "subAvg": "0.8"
+    }
   },
   {
     "id": "jean-paul-lebosnoyani",
@@ -41421,7 +42054,17 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "4.14",
+      "strAcc": "46%",
+      "sapm": "4.05",
+      "strDef": "57%",
+      "tdAvg": "2.89",
+      "tdAcc": "42%",
+      "tdDef": "100%",
+      "subAvg": "1.9"
+    }
   },
   {
     "id": "seokhyeon-ko",
@@ -41432,7 +42075,17 @@
       "losses": 3,
       "draws": 0
     },
-    "nickname": "The Korean Tyson"
+    "nickname": "The Korean Tyson",
+    "stats": {
+      "slpm": "3.15",
+      "strAcc": "50%",
+      "sapm": "1.93",
+      "strDef": "62%",
+      "tdAvg": "3.00",
+      "tdAcc": "52%",
+      "tdDef": "50%",
+      "subAvg": "0.2"
+    }
   },
   {
     "id": "rj-harris",
@@ -41443,7 +42096,17 @@
       "losses": 0,
       "draws": 0
     },
-    "nickname": "The Hammer"
+    "nickname": "The Hammer",
+    "stats": {
+      "slpm": "9.00",
+      "strAcc": "57%",
+      "sapm": "6.60",
+      "strDef": "56%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "anna-melisano",
@@ -41454,17 +42117,35 @@
       "losses": 2,
       "draws": 0
     },
-    "nickname": "Bandana"
+    "nickname": "Bandana",
+    "stats": {
+      "slpm": "0.49",
+      "strAcc": "33%",
+      "sapm": "1.23",
+      "strDef": "28%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "50%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "santiago-ponzinibbio",
     "name": "Santiago Ponzinibbio",
     "record": {
       "wins": 31,
-      "losses": 9,
+      "losses": 10,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Sam Patterson",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Ankalaev vs. Guskov",
+        "round": 2,
+        "time": null
+      },
       {
         "opponent": "Carlston Harris",
         "result": "W",
@@ -41547,17 +42228,47 @@
       }
     ],
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/PONZINIBBIO_SANTIAGO_L_05-03.png?itok=fN0mdvZ2",
-    "nickname": "Argentine Dagger"
+    "nickname": "Argentine Dagger",
+    "stats": {
+      "slpm": "4.78",
+      "strAcc": "41%",
+      "sapm": "4.68",
+      "strDef": "61%",
+      "tdAvg": "0.60",
+      "tdAcc": "27%",
+      "tdDef": "71%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "sam-patterson",
     "name": "Sam Patterson",
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/PATTERSON_SAM_L_09-06.png?itok=DwRzQATP",
     "record": {
-      "wins": 14,
+      "wins": 15,
       "losses": 3,
       "draws": 1
-    }
+    },
+    "stats": {
+      "slpm": "2.62",
+      "strAcc": "37%",
+      "sapm": "3.06",
+      "strDef": "50%",
+      "tdAvg": "0.82",
+      "tdAcc": "50%",
+      "tdDef": "33%",
+      "subAvg": "1.6"
+    },
+    "last5": [
+      {
+        "opponent": "Santiago Ponzinibbio",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Ankalaev vs. Guskov",
+        "round": 2,
+        "time": null
+      }
+    ]
   },
   {
     "id": "ezra-elliot",
@@ -41578,7 +42289,17 @@
       "losses": 1,
       "draws": 0
     },
-    "nickname": "Demon Hands"
+    "nickname": "Demon Hands",
+    "stats": {
+      "slpm": "0.47",
+      "strAcc": "35%",
+      "sapm": "0.40",
+      "strDef": "45%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "33%",
+      "subAvg": "1.0"
+    }
   },
   {
     "id": "uros-medic",
@@ -41589,7 +42310,17 @@
       "losses": 3,
       "draws": 0
     },
-    "nickname": "The Doctor"
+    "nickname": "The Doctor",
+    "stats": {
+      "slpm": "5.59",
+      "strAcc": "60%",
+      "sapm": "3.42",
+      "strDef": "56%",
+      "tdAvg": "0.34",
+      "tdAcc": "50%",
+      "tdDef": "55%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "dan-ige",
@@ -41682,7 +42413,17 @@
         "time": "5:00"
       }
     ],
-    "nickname": "100 Grand"
+    "nickname": "100 Grand",
+    "stats": {
+      "slpm": "3.60",
+      "strAcc": "45%",
+      "sapm": "3.56",
+      "strDef": "56%",
+      "tdAvg": "0.93",
+      "tdAcc": "26%",
+      "tdDef": "56%",
+      "subAvg": "0.2"
+    }
   },
   {
     "id": "josiah-harrell",
@@ -41693,7 +42434,17 @@
       "losses": 5,
       "draws": 0
     },
-    "nickname": "The Muscle Hamster"
+    "nickname": "The Muscle Hamster",
+    "stats": {
+      "slpm": "2.32",
+      "strAcc": "50%",
+      "sapm": "10.94",
+      "strDef": "29%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "carlos-leal",
@@ -41786,7 +42537,17 @@
         "time": "5:00"
       }
     ],
-    "nickname": "The Lion"
+    "nickname": "The Lion",
+    "stats": {
+      "slpm": "8.75",
+      "strAcc": "47%",
+      "sapm": "7.78",
+      "strDef": "48%",
+      "tdAvg": "0.43",
+      "tdAcc": "11%",
+      "tdDef": "90%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "alibi-idiris",
@@ -41796,6 +42557,16 @@
       "wins": 11,
       "losses": 1,
       "draws": 0
+    },
+    "stats": {
+      "slpm": "2.51",
+      "strAcc": "44%",
+      "sapm": "2.64",
+      "strDef": "60%",
+      "tdAvg": "3.25",
+      "tdAcc": "31%",
+      "tdDef": "66%",
+      "subAvg": "0.0"
     }
   },
   {
@@ -41888,7 +42659,17 @@
         "round": 3,
         "time": "3:15"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "2.73",
+      "strAcc": "55%",
+      "sapm": "2.04",
+      "strDef": "56%",
+      "tdAvg": "0.22",
+      "tdAcc": "11%",
+      "tdDef": "47%",
+      "subAvg": "0.2"
+    }
   },
   {
     "id": "punahele-soriano",
@@ -41981,7 +42762,17 @@
         "time": "4:48"
       }
     ],
-    "nickname": "Puna"
+    "nickname": "Puna",
+    "stats": {
+      "slpm": "4.42",
+      "strAcc": "53%",
+      "sapm": "3.31",
+      "strDef": "47%",
+      "tdAvg": "1.97",
+      "tdAcc": "51%",
+      "tdDef": "48%",
+      "subAvg": "0.1"
+    }
   },
   {
     "id": "phil-rowe",
@@ -41992,7 +42783,99 @@
       "losses": 7,
       "draws": 0
     },
-    "nickname": "The Fresh Prince"
+    "nickname": "The Fresh Prince",
+    "last5": [
+      {
+        "opponent": "Jacob Kilburn",
+        "result": "W",
+        "method": "Submission (triangle choke)",
+        "event": "Island Fights 97",
+        "round": 1,
+        "time": "2:44"
+      },
+      {
+        "opponent": "Jean-Paul Lebosnoyani",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Strickland vs. Hernandez",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Ko Seok-hyeon",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Garcia vs. Onama",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Ange Loosa",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Usman vs. Buckley",
+        "round": 3,
+        "time": "4:03"
+      },
+      {
+        "opponent": "Jake Matthews (fighter)",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 302",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Neil Magny",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC on ABC: Emmett vs. Topuria",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Niko Price",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Thompson vs. Holland",
+        "round": 3,
+        "time": "3:26"
+      },
+      {
+        "opponent": "Jason Witt (fighter)",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Hermansson vs. Strickland",
+        "round": 2,
+        "time": "2:15"
+      },
+      {
+        "opponent": "Orion Cosce",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Hall vs. Strickland",
+        "round": 2,
+        "time": "4:21"
+      },
+      {
+        "opponent": "Gabriel Green (fighter)",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 258",
+        "round": 3,
+        "time": "5:00"
+      }
+    ],
+    "stats": {
+      "slpm": "3.51",
+      "strAcc": "49%",
+      "sapm": "4.15",
+      "strDef": "50%",
+      "tdAvg": "0.46",
+      "tdAcc": "36%",
+      "tdDef": "53%",
+      "subAvg": "0.2"
+    }
   },
   {
     "id": "yadier-del-valle",
@@ -42003,7 +42886,17 @@
       "losses": 1,
       "draws": 0
     },
-    "nickname": "The Cuban Problem"
+    "nickname": "The Cuban Problem",
+    "stats": {
+      "slpm": "4.05",
+      "strAcc": "60%",
+      "sapm": "2.16",
+      "strDef": "55%",
+      "tdAvg": "1.23",
+      "tdAcc": "42%",
+      "tdDef": "58%",
+      "subAvg": "2.0"
+    }
   },
   {
     "id": "juliana-miller",
@@ -42014,7 +42907,17 @@
       "losses": 4,
       "draws": 0
     },
-    "nickname": "Killer"
+    "nickname": "Killer",
+    "stats": {
+      "slpm": "2.65",
+      "strAcc": "39%",
+      "sapm": "4.14",
+      "strDef": "44%",
+      "tdAvg": "2.16",
+      "tdAcc": "29%",
+      "tdDef": "44%",
+      "subAvg": "1.2"
+    }
   },
   {
     "id": "luke-fernandez",
@@ -42024,6 +42927,16 @@
       "wins": 6,
       "losses": 1,
       "draws": 0
+    },
+    "stats": {
+      "slpm": "8.14",
+      "strAcc": "58%",
+      "sapm": "10.17",
+      "strDef": "36%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
     }
   },
   {
@@ -42034,6 +42947,16 @@
       "wins": 11,
       "losses": 2,
       "draws": 0
+    },
+    "stats": {
+      "slpm": "4.52",
+      "strAcc": "59%",
+      "sapm": "2.81",
+      "strDef": "61%",
+      "tdAvg": "1.37",
+      "tdAcc": "75%",
+      "tdDef": "80%",
+      "subAvg": "0.0"
     }
   },
   {
@@ -42045,7 +42968,17 @@
       "losses": 2,
       "draws": 0
     },
-    "nickname": "Bipolar"
+    "nickname": "Bipolar",
+    "stats": {
+      "slpm": "2.77",
+      "strAcc": "36%",
+      "sapm": "5.81",
+      "strDef": "35%",
+      "tdAvg": "2.40",
+      "tdAcc": "33%",
+      "tdDef": "100%",
+      "subAvg": "1.6"
+    }
   },
   {
     "id": "nyamjargal-tumendemberel",
@@ -42056,7 +42989,17 @@
       "losses": 1,
       "draws": 0
     },
-    "nickname": "Art of Knockout"
+    "nickname": "Art of Knockout",
+    "stats": {
+      "slpm": "2.72",
+      "strAcc": "42%",
+      "sapm": "2.47",
+      "strDef": "53%",
+      "tdAvg": "3.37",
+      "tdAcc": "50%",
+      "tdDef": "56%",
+      "subAvg": "2.1"
+    }
   },
   {
     "id": "joseph-morales",
@@ -42149,7 +43092,17 @@
         "time": "5:00"
       }
     ],
-    "nickname": "Bopo"
+    "nickname": "Bopo",
+    "stats": {
+      "slpm": "2.00",
+      "strAcc": "40%",
+      "sapm": "2.05",
+      "strDef": "57%",
+      "tdAvg": "1.14",
+      "tdAcc": "42%",
+      "tdDef": "26%",
+      "subAvg": "3.0"
+    }
   },
   {
     "id": "edgar-chairez",
@@ -42242,7 +43195,18 @@
         "time": "1:47"
       }
     ],
-    "nickname": "Puro Chicali"
+    "nickname": "Puro Chicali",
+    "stats": {
+      "slpm": "3.76",
+      "strAcc": "46%",
+      "sapm": "4.71",
+      "strDef": "46%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "47%",
+      "subAvg": "1.4"
+    },
+    "stance": "Orthodox"
   },
   {
     "id": "waldo-cortes-acosta",
@@ -42335,11 +43299,31 @@
         "time": "3:01"
       }
     ],
-    "nickname": "Salsa Boy"
+    "nickname": "Salsa Boy",
+    "stats": {
+      "slpm": "5.34",
+      "strAcc": "48%",
+      "sapm": "3.63",
+      "strDef": "54%",
+      "tdAvg": "0.40",
+      "tdAcc": "50%",
+      "tdDef": "73%",
+      "subAvg": "0.1"
+    }
   },
   {
     "id": "regina-tarin",
-    "name": "Regina Tarin"
+    "name": "Regina Tarin",
+    "stats": {
+      "slpm": "7.60",
+      "strAcc": "47%",
+      "sapm": "7.00",
+      "strDef": "57%",
+      "tdAvg": "1.00",
+      "tdAcc": "33%",
+      "tdDef": "50%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "mario-pinto",
@@ -42349,6 +43333,16 @@
       "wins": 12,
       "losses": 0,
       "draws": 0
+    },
+    "stats": {
+      "slpm": "2.85",
+      "strAcc": "69%",
+      "sapm": "1.93",
+      "strDef": "58%",
+      "tdAvg": "2.38",
+      "tdAcc": "26%",
+      "tdDef": "100%",
+      "subAvg": "0.9"
     }
   },
   {
@@ -42442,7 +43436,17 @@
         "time": "5:00"
       }
     ],
-    "nickname": "Venom"
+    "nickname": "Venom",
+    "stats": {
+      "slpm": "2.28",
+      "strAcc": "58%",
+      "sapm": "1.51",
+      "strDef": "62%",
+      "tdAvg": "0.19",
+      "tdAcc": "16%",
+      "tdDef": "70%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "kurtis-campbell",
@@ -42453,7 +43457,17 @@
       "losses": 1,
       "draws": 0
     },
-    "nickname": "The Pink Panther"
+    "nickname": "The Pink Panther",
+    "stats": {
+      "slpm": "3.50",
+      "strAcc": "48%",
+      "sapm": "2.63",
+      "strDef": "51%",
+      "tdAvg": "8.76",
+      "tdAcc": "40%",
+      "tdDef": "50%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "trevor-peek",
@@ -42463,17 +43477,35 @@
       "wins": 9,
       "losses": 3,
       "draws": 0
+    },
+    "stats": {
+      "slpm": "4.39",
+      "strAcc": "53%",
+      "sapm": "3.88",
+      "strDef": "43%",
+      "tdAvg": "1.45",
+      "tdAcc": "50%",
+      "tdDef": "52%",
+      "subAvg": "0.0"
     }
   },
   {
     "id": "muhammad-said",
     "name": "Muhammad Said",
     "record": {
-      "wins": 9,
+      "wins": 10,
       "losses": 0,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Dustin Jacoby",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Ankalaev vs. Guskov",
+        "round": 2,
+        "time": null
+      },
       {
         "opponent": "Jorge Calvo",
         "result": "W",
@@ -42556,17 +43588,35 @@
       }
     ],
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
-    "nickname": "Kubik"
+    "nickname": "Kubik",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "cody-gibson",
     "name": "Cody Gibson",
     "record": {
       "wins": 22,
-      "losses": 12,
+      "losses": 13,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Abdul Hussein",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC Fight Night: Ankalaev vs. Guskov",
+        "round": 3,
+        "time": null
+      },
       {
         "opponent": "Aori Qileng",
         "result": "L",
@@ -42649,17 +43699,47 @@
       }
     ],
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/GIBSON_CODY_L_10-18.png?itok=RRlURnEJ",
-    "nickname": "The Renegade"
+    "nickname": "The Renegade",
+    "stats": {
+      "slpm": "3.63",
+      "strAcc": "46%",
+      "sapm": "3.22",
+      "strDef": "57%",
+      "tdAvg": "2.12",
+      "tdAcc": "37%",
+      "tdDef": "69%",
+      "subAvg": "0.6"
+    }
   },
   {
     "id": "abubakar-vagaev",
     "name": "Abubakar Vagaev",
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
     "record": {
-      "wins": 24,
+      "wins": 25,
       "losses": 4,
       "draws": 0
-    }
+    },
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "last5": [
+      {
+        "opponent": "Saygid Izagakhmaev",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Ankalaev vs. Guskov",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "saygid-izagakhmaev",
@@ -42667,19 +43747,175 @@
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-11/IZAGAKHMAEV_SAYGID_R_11-22.png?itok=z92QPUJE",
     "record": {
       "wins": 22,
-      "losses": 3,
+      "losses": 4,
       "draws": 0
-    }
+    },
+    "stats": {
+      "slpm": "1.33",
+      "strAcc": "58%",
+      "sapm": "1.73",
+      "strDef": "58%",
+      "tdAvg": "4.00",
+      "tdAcc": "40%",
+      "tdDef": "100%",
+      "subAvg": "0.0"
+    },
+    "last5": [
+      {
+        "opponent": "Abubakar Vagaev",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Ankalaev vs. Guskov",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "abdul-hussein",
     "name": "Abdul Hussein",
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
     "record": {
-      "wins": 15,
+      "wins": 16,
       "losses": 2,
       "draws": 0
     },
-    "nickname": "King"
+    "nickname": "King",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "last5": [
+      {
+        "opponent": "Cody Gibson",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC Fight Night: Ankalaev vs. Guskov",
+        "round": 3,
+        "time": null
+      }
+    ]
+  },
+  {
+    "id": "muhammad-saidov",
+    "name": "Muhammad Saidov",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    }
+  },
+  {
+    "id": "salahdine-parnasse",
+    "name": "Salahdine Parnasse",
+    "record": {
+      "wins": 0,
+      "losses": 0,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Kenneth Cross",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "MVP MMA: Rousey vs. Carano",
+        "round": 1,
+        "time": "4:18"
+      },
+      {
+        "opponent": "Marcin Held",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "2026 in Konfrontacja Sztuk Walki#XTB KSW 114: Parnasse vs. Held",
+        "round": 2,
+        "time": "3:35"
+      },
+      {
+        "opponent": "Marian Ziółkowski",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "2025 in Konfrontacja Sztuk Walki#XTB KSW 106: Parnasse vs. Ziółkowski",
+        "round": 2,
+        "time": "3:54"
+      },
+      {
+        "opponent": "Wilson Varela",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "2024 in Konfrontacja Sztuk Walki#KSW 101",
+        "round": 2,
+        "time": "1:00"
+      },
+      {
+        "opponent": "Valeriu Mircea",
+        "result": "W",
+        "method": "KO (head kick and punches)",
+        "event": "2024 in Konfrontacja Sztuk Walki#XTB KSW 93: Parnasse vs. Mircea",
+        "round": 1,
+        "time": "4:00"
+      },
+      {
+        "opponent": "Adrian Bartosiński",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "2023 in Konfrontacja Sztuk Walki#XTB KSW 89: Bartosiński vs. Parnasse",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Robert Ruchała",
+        "result": "W",
+        "method": "KO (soccer kick to the body)",
+        "event": "2023 in Konfrontacja Sztuk Walki#KSW 85",
+        "round": 4,
+        "time": "4:42"
+      },
+      {
+        "opponent": "Sebastian Rajewski",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "2022 in Konfrontacja Sztuk Walki#KSW 76: Parnasse vs. Rajewski",
+        "round": 4,
+        "time": "2:21"
+      },
+      {
+        "opponent": "Daniel Rutkowski",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "2022 in Konfrontacja Sztuk Walki#KSW 68: Parnasse vs. Rutkowski",
+        "round": 4,
+        "time": "1:07"
+      },
+      {
+        "opponent": "Daniel Torres",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "2021 in Konfrontacja Sztuk Walki#KSW 65: Khalidov vs. Soldić",
+        "round": 5,
+        "time": "5:00"
+      }
+    ],
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
   }
 ]
