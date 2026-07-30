@@ -1,15 +1,30 @@
 {
-  "date": "2026-07-29",
+  "date": "2026-07-30",
   "posts": [
+    {
+      "type": "news",
+      "caption": "Conor McGregor Uses Absurd Reason to Back His UFC 329 Plea to Nevada Commission (via Essentially Sports)",
+      "image": "2026-07-30-news-1.png"
+    },
+    {
+      "type": "news",
+      "caption": "Khabib Nurmagomedov points out what MMA beginners can learn from ‘John Pork’ after his UFC debut (via Yardbarker)",
+      "image": "2026-07-30-news-2.png"
+    },
+    {
+      "type": "news",
+      "caption": "Anthony Smith Issued $500K Bond After Being Arrested for Allegedly Threatening to Kill His Wife (via Essentially Sports)",
+      "image": "2026-07-30-news-3.png"
+    },
+    {
+      "type": "event_countdown",
+      "caption": "Medić vs. Rodriguez is in 2 days. Make your picks: https://mmabridge.com/picks.html?id=ufc-fight-night-medi-vs-rodriguez",
+      "image": "2026-07-30-event_countdown-1.png"
+    },
     {
       "type": "event_recap",
       "caption": "Relive UFC Fight Night: Ankalaev vs. Guskov. Ankalaev def. Guskov. Full card recap and community ratings: https://mmabridge.com/event-review.html?id=ufc-fight-night-ankalaev-vs-rountree-jr",
-      "image": "2026-07-29-event_recap-1.png"
-    },
-    {
-      "type": "h2h",
-      "caption": "This main event is easily one of the most competitive main events this year. If Islam gets this done, is he the GOAT? Full breakdown: https://mmabridge.com/matchup.html?event=ufc-330-makhachev-vs-machado-garry&a=Ian%20Garry&b=Islam%20Makhachev&weight=Welterweight&from=events",
-      "image": "2026-07-29-h2h-1.png"
+      "image": "2026-07-30-event_recap-1.png"
     }
   ]
 }
