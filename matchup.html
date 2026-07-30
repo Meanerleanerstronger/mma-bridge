@@ -596,8 +596,8 @@
     .mu-form-divider { background:rgba(255,255,255,.08); align-self:stretch; }
     .mu-h2h-banner {
       text-align:center; padding:14px;
-      font-family:'Newsreader',serif; font-weight:500; font-style:italic;
-      font-size:1.05rem; color:#d97b3f;
+      font-family:'Inter',sans-serif; font-weight:500; font-style:normal;
+      font-size:.92rem; color:rgba(255,255,255,.85);
       border:1px solid rgba(217,123,63,.3);
       border-radius:3px; margin-bottom:4px;
     }
@@ -722,7 +722,7 @@
     body.light-mode .mu-form-full { color:#b8611e; border-color:rgba(184,97,30,.4); }
     body.light-mode .mu-form-full:hover { background:#b8611e; color:#fff; border-color:#b8611e; }
     body.light-mode .mu-no-common { color:rgba(0,0,0,.35); }
-    body.light-mode .mu-h2h-banner { color:#b8611e; border-color:rgba(184,97,30,.4); }
+    body.light-mode .mu-h2h-banner { color:rgba(0,0,0,.75); border-color:rgba(184,97,30,.4); }
     body.light-mode .mu-h2h-tag { color:#b8611e; }
     body.light-mode .mu-stat-row { border-bottom-color:rgba(0,0,0,.07); }
     body.light-mode .mu-stat-row:hover { background:rgba(0,0,0,.03); }
@@ -1030,12 +1030,25 @@
         const meetingCount = Math.max(h2hAllFromA.length, h2hAllFromB.length);
         let h2hBanner = '';
         if (h2hMatch) {
-          const winnerName = h2hFromA
-            ? (h2hFromA.result === 'W' ? nA : nB)
-            : (h2hFromB.result === 'W' ? nB : nA);
-          const loserName = winnerName === nA ? nB : nA;
-          const bits = [`${esc(winnerName)} beat ${esc(loserName)}`];
-          if (h2hMatch.method) bits.push(`by ${esc(h2hMatch.method)}`);
+          // The result on record is from ONE fighter's perspective (W/L/D/NC)
+          // — only 'W'/'L' imply an actual winner. Treating anything else as
+          // an automatic loss (the old `=== 'W' ? A : B` check) misreports a
+          // No Contest or Draw as a definite result, which is just wrong.
+          const perspective = h2hFromA
+            ? { result: h2hFromA.result, subjectIsA: true }
+            : { result: h2hFromB.result, subjectIsA: false };
+          const subject = perspective.subjectIsA ? nA : nB;
+          const other   = perspective.subjectIsA ? nB : nA;
+          const result  = (perspective.result || '').toUpperCase();
+          const bits = [];
+          if (result === 'W')       bits.push(`${esc(subject)} beat ${esc(other)}`);
+          else if (result === 'L')  bits.push(`${esc(other)} beat ${esc(subject)}`);
+          else if (result === 'D')  bits.push(`${esc(subject)} and ${esc(other)} fought to a draw`);
+          else if (result === 'NC') bits.push(`${esc(subject)} vs ${esc(other)} was ruled a No Contest`);
+          else                      bits.push(`${esc(subject)} vs ${esc(other)}`);
+          // Skip the method for NC/D — it's typically just "NC"/"Draw" again,
+          // redundant with the sentence already built above.
+          if (h2hMatch.method && result !== 'NC' && result !== 'D') bits.push(`(${esc(h2hMatch.method)})`);
           if (h2hMatch.event)  bits.push(`at ${esc(h2hMatch.event)}`);
           const meetingPhrase = meetingCount > 1 ? `in their first of ${meetingCount} recent meetings` : 'in their only meeting on record';
           h2hBanner = `<div class="mu-h2h-banner"><span class="mu-h2h-tag">Rematch</span>${bits.join(' ')} ${meetingPhrase}</div>`;
