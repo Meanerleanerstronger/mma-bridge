@@ -38,6 +38,18 @@ so it always matches exactly what's in the screenshot.
 
 ## Known gotchas already hit and fixed (don't re-introduce)
 
+0. **Any image added to `social/latest.json` for "Post to Instagram" must
+   be between 4:5 and 1.91:1 aspect ratio** — Instagram's Graph API
+   rejects anything outside that with a 400 "aspect ratio is not
+   supported" error (code 36003). `matchup.html`'s poster-view hero is a
+   wide banner (~3.2:1 raw) — screenshotting it straight into
+   `social/` without compositing (like the news/event types do via
+   `finalizePoster`/`finalizePosterBlurredBackdrop`) will pass this exact
+   error at post time, not at generation time, so it looks fine in the
+   admin review card until someone actually clicks Post. Composite it
+   down to a compliant ratio first — for this wide a source, padding to
+   1080x565 (1.91:1) with a solid color sampled from a corner pixel wastes
+   far less space than forcing it into a 4:5 portrait frame.
 1. **Floating widgets bleed into screenshots.** `#lw-widget`/`#lw-tab`
    (the "Live on MMA Bridge" activity widget) and `#lw-btn`/`#lw-window`
    (Lucas chat launcher) are `position:fixed`. Puppeteer's element
