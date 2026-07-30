@@ -370,30 +370,16 @@
       background:linear-gradient(115deg, #b5581f 0%, #d97b3f 45%, #e8935c 100%);
       clip-path:polygon(38% 0, 100% 0, 100% 100%, 18% 100%);
     }
-    .mu-classic-grid {
-      position:absolute; inset:0; z-index:0; opacity:.14; pointer-events:none;
-      background-image:
-        repeating-linear-gradient(45deg, rgba(255,255,255,.5) 0 1.5px, transparent 1.5px 46px),
-        repeating-linear-gradient(-45deg, rgba(255,255,255,.5) 0 1.5px, transparent 1.5px 46px);
-    }
-    /* ghost wordmark running up the right edge — echoes the big rotated
-       promotion wordmark real posters print along the side panel */
-    .mu-classic-ghost {
-      position:absolute; top:0; right:6px; bottom:0; z-index:0;
-      writing-mode:vertical-rl;
-      font-weight:900; font-style:italic; font-size:2.6rem;
-      letter-spacing:.06em; color:rgba(255,255,255,.1);
-      display:flex; align-items:center; pointer-events:none;
-      white-space:nowrap;
-    }
-    .mu-classic-badge {
-      position:absolute; top:20px; left:20px; z-index:3;
-      width:58px; height:58px; border-radius:4px;
-      background:#d97b3f; color:#0a0a0a;
-      display:flex; flex-direction:column; align-items:center; justify-content:center;
-      font-family:'Montserrat',sans-serif; font-weight:900; font-size:.56rem;
-      line-height:1.15; letter-spacing:.02em; text-align:center;
-      box-shadow:0 8px 20px rgba(0,0,0,.4);
+    /* event name — plain, big, corner-stamped (no badge box, no brand
+       repetition — just the card name reading like a real poster's top
+       corner line). */
+    .mu-classic-eventname {
+      position:absolute; top:18px; left:22px; right:22px; z-index:3;
+      text-align:left;
+      font-weight:800; font-style:italic; text-transform:uppercase;
+      font-size:clamp(1rem,4.2vw,1.5rem); line-height:1.05;
+      color:#fff; letter-spacing:.01em;
+      text-shadow:0 2px 8px rgba(0,0,0,.5);
     }
     .mu-classic-photos {
       position:absolute; left:0; right:0; bottom:26%; top:8%; z-index:1;
@@ -408,7 +394,7 @@
     .mu-classic-img.b { margin-left:-2.5%; z-index:1; }
     .mu-classic-textblock {
       position:absolute; left:22px; right:22px; z-index:3;
-      bottom:52px;
+      bottom:24px;
     }
     .mu-classic-name {
       font-weight:900; font-style:italic; text-transform:uppercase;
@@ -432,32 +418,27 @@
       letter-spacing:.16em; text-transform:uppercase;
       color:rgba(255,255,255,.6);
     }
-    .mu-classic-bar {
-      position:absolute; left:0; right:0; bottom:0; z-index:3;
-      display:flex; align-items:center; justify-content:space-between;
-      padding:12px 20px; border-top:1px solid rgba(255,255,255,.14);
-      background:rgba(0,0,0,.35); backdrop-filter:blur(4px);
-      font-family:'Montserrat',sans-serif; font-weight:800; font-size:.56rem;
-      letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.75);
+    /* location — big, same font as the fighter names, real presence
+       instead of a small caption buried in a bottom bar. */
+    .mu-classic-location {
+      margin-top:6px;
+      font-weight:800; font-style:italic; text-transform:uppercase;
+      font-size:clamp(1rem,4vw,1.4rem); line-height:1;
+      color:#d97b3f;
+      text-shadow:0 2px 8px rgba(0,0,0,.5);
     }
-    .mu-classic-bar .mu-classic-brand { color:#d97b3f; }
 
     /* Classic + light (orange/white) — same underlying .mu-poster-light
        toggle used by banner Poster mode, applied to Classic's own markup. */
     body.mu-classic-mode.mu-poster-light .mu-classic-card { background:#faf7f1; }
     body.mu-classic-mode.mu-poster-light .mu-classic-panel { background:linear-gradient(115deg, #e8935c 0%, #d97b3f 45%, #b5581f 100%); }
-    body.mu-classic-mode.mu-poster-light .mu-classic-grid { background-image:
-        repeating-linear-gradient(45deg, rgba(0,0,0,.5) 0 1.5px, transparent 1.5px 46px),
-        repeating-linear-gradient(-45deg, rgba(0,0,0,.5) 0 1.5px, transparent 1.5px 46px); }
-    body.mu-classic-mode.mu-poster-light .mu-classic-ghost { color:rgba(0,0,0,.06); }
+    body.mu-classic-mode.mu-poster-light .mu-classic-eventname,
     body.mu-classic-mode.mu-poster-light .mu-classic-name,
     body.mu-classic-mode.mu-poster-light .mu-classic-vsline {
       color:#161514; text-shadow:0 2px 10px rgba(255,255,255,.4);
     }
     body.mu-classic-mode.mu-poster-light .mu-classic-weight { color:rgba(0,0,0,.55); }
-    body.mu-classic-mode.mu-poster-light .mu-classic-bar {
-      background:rgba(255,255,255,.55); border-top-color:rgba(0,0,0,.12); color:rgba(0,0,0,.6);
-    }
+    body.mu-classic-mode.mu-poster-light .mu-classic-location { color:#b5581f; text-shadow:0 2px 8px rgba(255,255,255,.4); }
     body.mu-classic-mode.mu-poster-light { background:#f6f3ec !important; }
 
     /* ── SPLIT BAR ── */
@@ -766,10 +747,10 @@
       .mu-poster-theme { width:30px; height:30px; font-size:.75rem; }
     }
     @media(max-width:420px){
-      .mu-classic-textblock { bottom:40px; }
+      .mu-classic-textblock { bottom:18px; }
       .mu-classic-name, .mu-classic-vsline { font-size:clamp(1.3rem,7.6vw,1.9rem); }
-      .mu-classic-badge { width:48px; height:48px; font-size:.48rem; }
-      .mu-classic-ghost { font-size:1.8rem; }
+      .mu-classic-location { font-size:clamp(.8rem,4.4vw,1.1rem); }
+      .mu-classic-eventname { font-size:clamp(.75rem,4.6vw,1.1rem); }
     }
   </style>
 </head>
@@ -989,19 +970,21 @@
          by the admin Dream H2H generator for un-booked matchups) always wins
          over the auto-lookup, since there's no real eventId to look up. */
       let eventLine = '';
+      let classicEventName = eventNameParam;
+      let classicLocation  = venueParam;
+      const evForLine = (eventId && eventsArr.length) ? eventsArr.find(e=>e.id===eventId) : null;
       if (eventNameParam || venueParam) {
         eventLine = [eventNameParam, venueParam].filter(Boolean).join(' · ');
-      } else if (eventId && eventsArr.length) {
-        const evForLine = eventsArr.find(e=>e.id===eventId);
-        if (evForLine) {
-          const parts = [evForLine.name || ''];
-          if (evForLine.date) {
-            const d = new Date(evForLine.date);
-            if (!isNaN(d)) parts.push(d.toLocaleDateString('en-US',{month:'short',day:'numeric'}));
-          }
-          eventLine = parts.filter(Boolean).join(' · ');
+      } else if (evForLine) {
+        const parts = [evForLine.name || ''];
+        if (evForLine.date) {
+          const d = new Date(evForLine.date);
+          if (!isNaN(d)) parts.push(d.toLocaleDateString('en-US',{month:'short',day:'numeric'}));
         }
+        eventLine = parts.filter(Boolean).join(' · ');
       }
+      if (!classicEventName && evForLine) classicEventName = evForLine.name || '';
+      if (!classicLocation && evForLine) classicLocation = evForLine.location || evForLine.venue || '';
 
       /* ── RESUME DATA ── */
       function resumeHTML(fA, fB, nA, nB) {
@@ -1110,9 +1093,7 @@
         <div class="mu-classic-wrap">
           <div class="mu-classic-card">
             <div class="mu-classic-panel"></div>
-            <div class="mu-classic-grid"></div>
-            <div class="mu-classic-ghost">MMA BRIDGE</div>
-            <div class="mu-classic-badge">MMA<br>BRIDGE</div>
+            ${classicEventName?`<div class="mu-classic-eventname">${esc(classicEventName)}</div>`:''}
             <div class="mu-classic-photos">
               ${shotA?`<img class="mu-classic-img a" src="${esc(shotA)}" alt="${esc(nameA)}" onerror="this.style.display='none'">`:''}
               ${shotB?`<img class="mu-classic-img b" src="${esc(shotB)}" alt="${esc(nameB)}" onerror="this.style.display='none'">`:''}
@@ -1121,10 +1102,7 @@
               <div class="mu-classic-name">${esc(nameA)}</div>
               <div class="mu-classic-vsline"><span class="vs">vs</span>${esc(nameB)}</div>
               ${weight?`<div class="mu-classic-weight">${esc(weight)}</div>`:''}
-            </div>
-            <div class="mu-classic-bar">
-              <span>${esc(eventLine || 'MMA Bridge Matchup')}</span>
-              <span class="mu-classic-brand">MMA Bridge</span>
+              ${classicLocation?`<div class="mu-classic-location">${esc(classicLocation)}</div>`:''}
             </div>
           </div>
         </div>
