@@ -350,9 +350,150 @@
     body.mu-poster-mode.mu-poster-light .mu-poster-theme {
       background:rgba(255,255,255,.7); border-color:rgba(0,0,0,.16); color:#161514;
     }
-    body.mu-poster-mode.mu-poster-light .mu-view-toggle { border-color:rgba(0,0,0,.16); }
-    body.mu-poster-mode.mu-poster-light .mu-view-btn { color:rgba(0,0,0,.4); }
-    body.mu-poster-mode.mu-poster-light .mu-view-btn:hover:not(.active) { color:#161514; }
+    body.mu-poster-mode.mu-poster-light .mu-view-toggle,
+    body.mu-classic-mode.mu-poster-light .mu-view-toggle { border-color:rgba(0,0,0,.16); }
+    body.mu-poster-mode.mu-poster-light .mu-view-btn,
+    body.mu-classic-mode.mu-poster-light .mu-view-btn { color:rgba(0,0,0,.4); }
+    body.mu-poster-mode.mu-poster-light .mu-view-btn:hover:not(.active),
+    body.mu-classic-mode.mu-poster-light .mu-view-btn:hover:not(.active) { color:#161514; }
+    body.mu-classic-mode.mu-poster-light .mu-poster-exit,
+    body.mu-classic-mode.mu-poster-light .mu-poster-theme {
+      background:rgba(255,255,255,.7); border-color:rgba(0,0,0,.16); color:#161514;
+    }
+
+    /* ── CLASSIC MODE — a second, distinct poster style: official
+       fight-poster layout (both fighters standing side by side facing
+       forward, stacked name lockup, event badge, bottom info bar) rather
+       than the split-screen banner of Poster mode. Orange/black or
+       orange/white only — deliberately not a copy of any promotion's
+       actual poster art or logo, just the same genre of layout. ── */
+    body.mu-classic-mode { background:#050506 !important; }
+    body.mu-classic-mode .navbar,
+    body.mu-classic-mode .mu-back,
+    body.mu-classic-mode .mu-content,
+    body.mu-classic-mode .mu-split-bar,
+    body.mu-classic-mode .mu-hero,
+    body.mu-classic-mode #lw-btn,
+    body.mu-classic-mode #lw-window,
+    body.mu-classic-mode #lw-widget,
+    body.mu-classic-mode #lw-tab,
+    body.mu-classic-mode #notifBellMount { display:none !important; }
+    body.mu-classic-mode .mu-view-toggle { position:fixed; top:16px; left:16px; margin:0; z-index:20; }
+    body.mu-classic-mode .mu-poster-controls { display:flex; }
+    body.mu-classic-mode .mu-poster-exit,
+    body.mu-classic-mode .mu-poster-theme { background:rgba(0,0,0,.55); border-color:rgba(255,255,255,.2); color:#fff; }
+
+    .mu-classic-wrap {
+      display:none;
+      min-height:100vh; padding:80px 16px 32px;
+      align-items:center; justify-content:center;
+    }
+    body.mu-classic-mode .mu-classic-wrap { display:flex; }
+
+    .mu-classic-card {
+      position:relative; overflow:hidden;
+      width:min(92vw, 520px); aspect-ratio:4/5;
+      background:#0b0b0c;
+      border-radius:6px;
+      box-shadow:0 30px 90px rgba(0,0,0,.65);
+      font-family:'Barlow Condensed',sans-serif;
+    }
+    /* diagonal orange panel — the single graphic move that reads as "fight
+       poster" instead of "app screenshot with photos on it" */
+    .mu-classic-panel {
+      position:absolute; top:0; right:0; bottom:0; width:56%; z-index:0;
+      background:linear-gradient(115deg, #b5581f 0%, #d97b3f 45%, #e8935c 100%);
+      clip-path:polygon(38% 0, 100% 0, 100% 100%, 18% 100%);
+    }
+    .mu-classic-grid {
+      position:absolute; inset:0; z-index:0; opacity:.14; pointer-events:none;
+      background-image:
+        repeating-linear-gradient(45deg, rgba(255,255,255,.5) 0 1.5px, transparent 1.5px 46px),
+        repeating-linear-gradient(-45deg, rgba(255,255,255,.5) 0 1.5px, transparent 1.5px 46px);
+    }
+    /* ghost wordmark running up the right edge — echoes the big rotated
+       promotion wordmark real posters print along the side panel */
+    .mu-classic-ghost {
+      position:absolute; top:0; right:6px; bottom:0; z-index:0;
+      writing-mode:vertical-rl;
+      font-weight:900; font-style:italic; font-size:2.6rem;
+      letter-spacing:.06em; color:rgba(255,255,255,.1);
+      display:flex; align-items:center; pointer-events:none;
+      white-space:nowrap;
+    }
+    .mu-classic-badge {
+      position:absolute; top:20px; left:20px; z-index:3;
+      width:58px; height:58px; border-radius:4px;
+      background:#d97b3f; color:#0a0a0a;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      font-family:'Montserrat',sans-serif; font-weight:900; font-size:.56rem;
+      line-height:1.15; letter-spacing:.02em; text-align:center;
+      box-shadow:0 8px 20px rgba(0,0,0,.4);
+    }
+    .mu-classic-photos {
+      position:absolute; left:0; right:0; bottom:26%; top:8%; z-index:1;
+      display:flex; align-items:flex-end; justify-content:center;
+    }
+    .mu-classic-img {
+      height:100%; width:auto; max-width:58%;
+      object-fit:contain; object-position:bottom center;
+      filter:contrast(1.12) saturate(1.05);
+    }
+    .mu-classic-img.a { margin-right:-2.5%; z-index:2; }
+    .mu-classic-img.b { margin-left:-2.5%; z-index:1; }
+    .mu-classic-textblock {
+      position:absolute; left:22px; right:22px; z-index:3;
+      bottom:52px;
+    }
+    .mu-classic-name {
+      font-weight:900; font-style:italic; text-transform:uppercase;
+      font-size:clamp(1.7rem,7.2vw,2.5rem); line-height:.92;
+      color:#fff; letter-spacing:.005em;
+      text-shadow:0 2px 10px rgba(0,0,0,.5);
+    }
+    .mu-classic-vsline {
+      font-weight:900; font-style:italic; text-transform:uppercase;
+      font-size:clamp(1.7rem,7.2vw,2.5rem); line-height:.92;
+      color:#fff; letter-spacing:.005em;
+      text-shadow:0 2px 10px rgba(0,0,0,.5);
+    }
+    .mu-classic-vsline .vs {
+      color:#d97b3f; font-size:.62em; text-decoration:underline;
+      text-underline-offset:3px; margin-right:.15em;
+    }
+    .mu-classic-weight {
+      margin-top:8px;
+      font-family:'Montserrat',sans-serif; font-weight:700; font-size:.62rem;
+      letter-spacing:.16em; text-transform:uppercase;
+      color:rgba(255,255,255,.6);
+    }
+    .mu-classic-bar {
+      position:absolute; left:0; right:0; bottom:0; z-index:3;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 20px; border-top:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.35); backdrop-filter:blur(4px);
+      font-family:'Montserrat',sans-serif; font-weight:800; font-size:.56rem;
+      letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.75);
+    }
+    .mu-classic-bar .mu-classic-brand { color:#d97b3f; }
+
+    /* Classic + light (orange/white) — same underlying .mu-poster-light
+       toggle used by banner Poster mode, applied to Classic's own markup. */
+    body.mu-classic-mode.mu-poster-light .mu-classic-card { background:#faf7f1; }
+    body.mu-classic-mode.mu-poster-light .mu-classic-panel { background:linear-gradient(115deg, #e8935c 0%, #d97b3f 45%, #b5581f 100%); }
+    body.mu-classic-mode.mu-poster-light .mu-classic-grid { background-image:
+        repeating-linear-gradient(45deg, rgba(0,0,0,.5) 0 1.5px, transparent 1.5px 46px),
+        repeating-linear-gradient(-45deg, rgba(0,0,0,.5) 0 1.5px, transparent 1.5px 46px); }
+    body.mu-classic-mode.mu-poster-light .mu-classic-ghost { color:rgba(0,0,0,.06); }
+    body.mu-classic-mode.mu-poster-light .mu-classic-name,
+    body.mu-classic-mode.mu-poster-light .mu-classic-vsline {
+      color:#161514; text-shadow:0 2px 10px rgba(255,255,255,.4);
+    }
+    body.mu-classic-mode.mu-poster-light .mu-classic-weight { color:rgba(0,0,0,.55); }
+    body.mu-classic-mode.mu-poster-light .mu-classic-bar {
+      background:rgba(255,255,255,.55); border-top-color:rgba(0,0,0,.12); color:rgba(0,0,0,.6);
+    }
+    body.mu-classic-mode.mu-poster-light { background:#f6f3ec !important; }
 
     /* ── SPLIT BAR ── */
     .mu-split-bar {
@@ -647,6 +788,23 @@
       .mu-stat-label { font-size:.42rem; }
       .mu-odds-num { font-size:2.4rem; }
       body.mu-poster-mode .mu-fighter-name { font-size:clamp(2.2rem,10vw,3.2rem); }
+      /* Poster/Classic mode's view-toggle (top-left) and controls
+         (top-right) fit side by side on desktop but collide once a third
+         "Classic" button was added — on narrow screens stack them into two
+         rows instead of overlapping. */
+      body.mu-poster-mode .mu-view-toggle,
+      body.mu-classic-mode .mu-view-toggle { top:10px; left:10px; }
+      .mu-view-btn { padding:6px 10px; font-size:.52rem; }
+      body.mu-poster-mode .mu-poster-controls,
+      body.mu-classic-mode .mu-poster-controls { top:52px; left:10px; right:10px; }
+      .mu-poster-exit { font-size:.55rem; padding:7px 12px; }
+      .mu-poster-theme { width:30px; height:30px; font-size:.75rem; }
+    }
+    @media(max-width:420px){
+      .mu-classic-textblock { bottom:40px; }
+      .mu-classic-name, .mu-classic-vsline { font-size:clamp(1.3rem,7.6vw,1.9rem); }
+      .mu-classic-badge { width:48px; height:48px; font-size:.48rem; }
+      .mu-classic-ghost { font-size:1.8rem; }
     }
   </style>
 </head>
@@ -684,6 +842,7 @@
   <div class="mu-view-toggle" id="muViewToggle" style="display:none">
     <button class="mu-view-btn active" data-view="full" type="button">Full</button>
     <button class="mu-view-btn" data-view="poster" type="button">Poster</button>
+    <button class="mu-view-btn" data-view="classic" type="button">Classic</button>
   </div>
 
   <div class="mu-poster-controls">
@@ -983,6 +1142,29 @@
           </div>
           <div class="mu-hero-fade"></div>
         </div>
+
+        <div class="mu-classic-wrap">
+          <div class="mu-classic-card">
+            <div class="mu-classic-panel"></div>
+            <div class="mu-classic-grid"></div>
+            <div class="mu-classic-ghost">MMA BRIDGE</div>
+            <div class="mu-classic-badge">MMA<br>BRIDGE</div>
+            <div class="mu-classic-photos">
+              ${shotA?`<img class="mu-classic-img a" src="${esc(shotA)}" alt="${esc(nameA)}" onerror="this.style.display='none'">`:''}
+              ${shotB?`<img class="mu-classic-img b" src="${esc(shotB)}" alt="${esc(nameB)}" onerror="this.style.display='none'">`:''}
+            </div>
+            <div class="mu-classic-textblock">
+              <div class="mu-classic-name">${esc(nameA)}</div>
+              <div class="mu-classic-vsline"><span class="vs">vs</span>${esc(nameB)}</div>
+              ${weight?`<div class="mu-classic-weight">${esc(weight)}</div>`:''}
+            </div>
+            <div class="mu-classic-bar">
+              <span>${esc(eventLine || 'MMA Bridge Matchup')}</span>
+              <span class="mu-classic-brand">MMA Bridge</span>
+            </div>
+          </div>
+        </div>
+
         <div class="mu-split-bar"><div class="mu-split-a"></div><div class="mu-split-b"></div></div>
         <div class="mu-content">
           <div class="mu-tabs">
@@ -1029,7 +1211,9 @@
 
       function setView(view) {
         document.body.classList.toggle('mu-poster-mode', view === 'poster');
+        document.body.classList.toggle('mu-classic-mode', view === 'classic');
         viewToggle.querySelectorAll('.mu-view-btn').forEach(b => b.classList.toggle('active', b.dataset.view === view));
+        posterExit.textContent = view === 'classic' ? '✕ Exit Classic View' : '✕ Exit Poster View';
         window.scrollTo(0, 0);
       }
       viewToggle.querySelectorAll('.mu-view-btn').forEach(btn => {
@@ -1037,9 +1221,11 @@
       });
       posterExit.addEventListener('click', () => setView('full'));
 
-      // ?poster=1 — used by the admin "Dream H2H Poster" generator to open
-      // straight into Poster view instead of making the admin click twice.
+      // ?poster=1 / ?classic=1 — used by the admin "Dream H2H Poster"
+      // generator to open straight into a given view instead of making the
+      // admin click twice.
       if (p.get('poster') === '1') setView('poster');
+      if (p.get('classic') === '1') setView('classic');
 
       // poster-only light/dark toggle, independent of the site's own theme
       posterTheme.addEventListener('click', () => {

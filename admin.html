@@ -1105,8 +1105,12 @@
             <input type="text" class="mkt-input" id="h2h-weight" placeholder="Weight class (auto-filled, editable)">
             <input type="text" class="mkt-input" id="h2h-event" placeholder="Event name (optional, e.g. UFC 330)">
           </div>
-          <div class="mkt-h2h-grid" style="grid-template-columns:1fr auto">
+          <div class="mkt-h2h-grid">
             <input type="text" class="mkt-input" id="h2h-location" placeholder="Location (optional, e.g. Las Vegas, NV)">
+            <select class="mkt-select" id="h2h-style">
+              <option value="poster">Banner Poster (wide)</option>
+              <option value="classic">Classic Poster (fight-card style)</option>
+            </select>
           </div>
           <div class="mkt-field" style="margin-bottom:12px">
             <label for="h2h-caption">Caption (for Instagram/Twitter)</label>
@@ -1332,6 +1336,7 @@
         const weightEl   = $('h2h-weight');
         const eventEl    = $('h2h-event');
         const locationEl = $('h2h-location');
+        const styleEl    = $('h2h-style');
         const captionEl  = $('h2h-caption');
         const genBtn     = $('h2h-generate');
         const copyBtn    = $('h2h-copy-caption');
@@ -1426,8 +1431,8 @@
           const params = new URLSearchParams({
             a: selectedA.name,
             b: selectedB.name,
-            poster: '1',
           });
+          params.set(styleEl.value === 'classic' ? 'classic' : 'poster', '1');
           if (weightEl.value.trim())   params.set('weight', weightEl.value.trim());
           if (eventEl.value.trim())    params.set('eventName', eventEl.value.trim());
           if (locationEl.value.trim()) params.set('location', locationEl.value.trim());
