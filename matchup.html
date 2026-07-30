@@ -55,6 +55,22 @@
       background:linear-gradient(240deg, rgba(96,165,250,.26) 0%, rgba(96,165,250,.04) 55%, transparent 75%);
     }
     .mu-hero-noise { display:none; }
+    /* diagonal wireframe grid — a generic interlocking-diamond line motif
+       (not any specific promotion's actual poster art) layered over the
+       color wash for extra graphic energy; masked out toward the bottom so
+       it doesn't fight with the fighter names sitting there. */
+    .mu-hero-grid {
+      position:absolute; inset:0; z-index:0; pointer-events:none;
+      opacity:.16;
+      background-image:
+        repeating-linear-gradient(45deg, rgba(255,255,255,.55) 0 1.5px, transparent 1.5px 58px),
+        repeating-linear-gradient(-45deg, rgba(255,255,255,.55) 0 1.5px, transparent 1.5px 58px);
+      -webkit-mask-image:linear-gradient(to bottom, black 0%, black 55%, transparent 92%);
+      mask-image:linear-gradient(to bottom, black 0%, black 55%, transparent 92%);
+    }
+    body.light-mode .mu-hero-grid { opacity:.09; background-image:
+        repeating-linear-gradient(45deg, rgba(0,0,0,.55) 0 1.5px, transparent 1.5px 58px),
+        repeating-linear-gradient(-45deg, rgba(0,0,0,.55) 0 1.5px, transparent 1.5px 58px); }
     .mu-hero-slash {
       position:absolute; top:0; bottom:0; left:0; width:3px; height:100%;
       transform-origin:top left;
@@ -125,13 +141,39 @@
       border:1px solid rgba(255,255,255,.16);
       color:rgba(255,255,255,.55);
     }
+    /* gold champion badge + record chip — extra poster-style flavor beyond
+       the plain nationality/stance tags. */
+    .mu-chip.champ {
+      color:#1a1206; border-color:transparent;
+      background:linear-gradient(135deg,#f4d99a,#c9922f 55%,#8a5f1c);
+      font-weight:800;
+    }
+    .mu-chip.record {
+      color:#d97b3f; border-color:rgba(217,123,63,.4);
+      font-variant-numeric:tabular-nums;
+    }
+    .mu-hero-side.b .mu-chip.record { color:#60a5fa; border-color:rgba(96,165,250,.4); }
 
-    /* VS medallion — was plain italic serif text, now a lit badge */
+    /* VS medallion — was plain italic serif text, now a lit badge with a
+       slow-spinning color sunburst behind it for extra poster energy. */
     .mu-vs-center {
+      position:relative;
       text-align:center; padding:0 6px;
       display:flex; flex-direction:column; align-items:center; gap:8px;
       padding-bottom:10px;
     }
+    .mu-vs-center::before {
+      content:''; position:absolute; top:0; left:50%;
+      width:130px; height:130px; margin-left:-65px; margin-top:-37px;
+      background:repeating-conic-gradient(from 0deg,
+        rgba(217,123,63,.22) 0deg 9deg, transparent 9deg 20deg,
+        rgba(96,165,250,.18) 20deg 29deg, transparent 29deg 40deg);
+      border-radius:50%;
+      animation:mu-sunburst-spin 22s linear infinite;
+      z-index:-1;
+      pointer-events:none;
+    }
+    @keyframes mu-sunburst-spin { to { transform:rotate(360deg); } }
     .mu-vs-badge {
       width:56px; height:56px; border-radius:50%;
       display:flex; align-items:center; justify-content:center;
@@ -285,6 +327,9 @@
     body.mu-poster-mode.mu-poster-light .mu-hero-glow-a { background:linear-gradient(120deg, rgba(217,123,63,.24) 0%, rgba(217,123,63,.03) 55%, transparent 75%); }
     body.mu-poster-mode.mu-poster-light .mu-hero-glow-b { background:linear-gradient(240deg, rgba(37,99,235,.2) 0%, rgba(37,99,235,.03) 55%, transparent 75%); }
     body.mu-poster-mode.mu-poster-light .mu-hero-noise { background-image:repeating-linear-gradient(45deg, rgba(0,0,0,.025) 0 2px, transparent 2px 14px); mix-blend-mode:multiply; }
+    body.mu-poster-mode.mu-poster-light .mu-hero-grid { opacity:.09; background-image:
+        repeating-linear-gradient(45deg, rgba(0,0,0,.55) 0 1.5px, transparent 1.5px 58px),
+        repeating-linear-gradient(-45deg, rgba(0,0,0,.55) 0 1.5px, transparent 1.5px 58px); }
     body.mu-poster-mode.mu-poster-light .mu-fighter-name {
       color:#161514; -webkit-text-stroke:1px rgba(255,255,255,.6);
       text-shadow:0 3px 0 rgba(255,255,255,.75), 0 8px 30px rgba(0,0,0,.15);
@@ -670,6 +715,12 @@
     const weight  = p.get('weight') || '';
     const imgA    = p.get('imgA') || '';
     const imgB    = p.get('imgB') || '';
+    // NOTE: deliberately not named `location` — that would shadow
+    // window.location for the rest of this scope (including the
+    // `location.search` read above, due to const hoisting) and break the
+    // page outright.
+    const eventNameParam = p.get('eventName') || '';
+    const venueParam     = p.get('location') || '';
 
     if (nameA && nameB) document.title = `${nameA} vs ${nameB} | MMA Bridge`;
 
@@ -799,6 +850,8 @@
       /* chips */
       function chips(f){
         const c=[];
+        if(f.ranking === 'Champion') c.push(`<span class="mu-chip champ">&#9813; Champion</span>`);
+        if(f.record) c.push(`<span class="mu-chip record">${esc(recStr(f))}</span>`);
         if(f.nationality) c.push(`<span class="mu-chip nat">${f.flag||''} ${f.nationality}</span>`);
         if(f.stance) c.push(`<span class="mu-chip">${f.stance}</span>`);
         return c.length ? `<div class="mu-fighter-chips">${c.join('')}</div>` : '';
@@ -808,9 +861,13 @@
       const profileB = `fighter.html?${fB.id ? `id=${encodeURIComponent(fB.id)}` : `name=${encodeURIComponent(nameB)}`}`;
       const picksHref = eventId ? `picks.html?event=${encodeURIComponent(eventId)}` : 'events.html';
 
-      /* poster event banner text — only shown once a real card is known */
+      /* poster event banner text — an explicit ?eventName=/&location= (used
+         by the admin Dream H2H generator for un-booked matchups) always wins
+         over the auto-lookup, since there's no real eventId to look up. */
       let eventLine = '';
-      if (eventId && eventsArr.length) {
+      if (eventNameParam || venueParam) {
+        eventLine = [eventNameParam, venueParam].filter(Boolean).join(' · ');
+      } else if (eventId && eventsArr.length) {
         const evForLine = eventsArr.find(e=>e.id===eventId);
         if (evForLine) {
           const parts = [evForLine.name || ''];
@@ -904,6 +961,7 @@
         <div class="mu-hero">
           <div class="mu-hero-glow-a"></div>
           <div class="mu-hero-glow-b"></div>
+          <div class="mu-hero-grid"></div>
           <div class="mu-hero-slash"></div>
           <div class="mu-hero-noise"></div>
           <div class="mu-poster-brand">MMA Bridge</div>

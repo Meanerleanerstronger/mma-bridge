@@ -1090,7 +1090,7 @@
              from fighters.json directly. -->
         <div class="section-label" style="margin-bottom:14px">Dream H2H Poster</div>
         <div class="mkt-h2h-box">
-          <div class="mkt-h2h-sub">Search any two fighters, even ones not booked against each other, and open a shareable poster. Opens in a new tab in Poster view — use the light/dark toggle there, then screenshot it to post.</div>
+          <div class="mkt-h2h-sub">Search any two fighters, even ones not booked against each other, and open a shareable poster. Opens in a new tab in Poster view — use the light/dark toggle there, then screenshot it to post. Instagram's API needs a real hosted image URL, so posting from here is still a manual screenshot + upload — Copy Caption below gets the caption ready to paste.</div>
           <div class="mkt-h2h-grid">
             <div class="mkt-autocomplete">
               <input type="text" class="mkt-input" id="h2h-fighter-a" placeholder="Fighter A (e.g. Ilia Topuria)" autocomplete="off">
@@ -1101,11 +1101,20 @@
               <div class="mkt-autocomplete-list" id="h2h-list-b"></div>
             </div>
           </div>
-          <div class="mkt-h2h-grid" style="grid-template-columns:1fr auto">
+          <div class="mkt-h2h-grid">
             <input type="text" class="mkt-input" id="h2h-weight" placeholder="Weight class (auto-filled, editable)">
+            <input type="text" class="mkt-input" id="h2h-event" placeholder="Event name (optional, e.g. UFC 330)">
+          </div>
+          <div class="mkt-h2h-grid" style="grid-template-columns:1fr auto">
+            <input type="text" class="mkt-input" id="h2h-location" placeholder="Location (optional, e.g. Las Vegas, NV)">
+          </div>
+          <div class="mkt-field" style="margin-bottom:12px">
+            <label for="h2h-caption">Caption (for Instagram/Twitter)</label>
+            <textarea class="mkt-input" id="h2h-caption" rows="3" style="resize:vertical;font-family:'Inter',sans-serif;" placeholder="e.g. This one's a bloodbath on paper. Who you got?"></textarea>
           </div>
           <div class="mkt-h2h-actions">
             <button class="btn-post" id="h2h-generate" type="button" disabled>Open Poster &rarr;</button>
+            <button class="btn-copy" id="h2h-copy-caption" type="button">Copy Caption</button>
             <span style="font-family:'Inter',sans-serif;font-size:0.72rem;color:rgba(255,255,255,0.3);" id="h2h-hint">Pick both fighters to enable</span>
           </div>
         </div>
@@ -1320,9 +1329,13 @@
         const inputB  = $('h2h-fighter-b');
         const listA   = $('h2h-list-a');
         const listB   = $('h2h-list-b');
-        const weightEl = $('h2h-weight');
-        const genBtn  = $('h2h-generate');
-        const hintEl  = $('h2h-hint');
+        const weightEl   = $('h2h-weight');
+        const eventEl    = $('h2h-event');
+        const locationEl = $('h2h-location');
+        const captionEl  = $('h2h-caption');
+        const genBtn     = $('h2h-generate');
+        const copyBtn    = $('h2h-copy-caption');
+        const hintEl     = $('h2h-hint');
         if (!inputA || inputA.dataset.wired) return;
         inputA.dataset.wired = '1';
 
@@ -1360,25 +1373,48 @@
         function updateGenerateState() {
           const ready = !!(selectedA && selectedB);
           genBtn.disabled = !ready;
-          hintEl.textContent = ready
-            ? `Ready: ${selectedA.name} vs ${selectedB.name}`
-            : 'Pick both fighters to enable';
+          if (ready) {
+            hintEl.textContent = `Ready: ${selectedA.name} vs ${selectedB.name}`;
+          } else if (!selectedA && inputA.value.trim() && !search(inputA.value).length) {
+            hintEl.textContent = `No fighter matches "${inputA.value.trim()}", check the spelling`;
+          } else if (!selectedB && inputB.value.trim() && !search(inputB.value).length) {
+            hintEl.textContent = `No fighter matches "${inputB.value.trim()}", check the spelling`;
+          } else if ((inputA.value.trim() && !selectedA) || (inputB.value.trim() && !selectedB)) {
+            hintEl.textContent = 'Pick a fighter from the dropdown list';
+          } else {
+            hintEl.textContent = 'Pick both fighters to enable';
+          }
+        }
+
+        function findExact(q) {
+          const clean = q.trim().toLowerCase();
+          if (!clean) return null;
+          return _h2hFightersCache.find(f => (f.name || '').toLowerCase() === clean) || null;
         }
 
         function wireInput(inputEl, listEl, setSelected) {
+          function pick(f) {
+            inputEl.value = f.name;
+            setSelected(f);
+            listEl.classList.remove('open');
+            if (f.weightClass && !weightEl.value) weightEl.value = f.weightClass;
+            updateGenerateState();
+          }
           inputEl.addEventListener('input', () => {
             setSelected(null);
             updateGenerateState();
-            renderList(listEl, search(inputEl.value), f => {
-              inputEl.value = f.name;
-              setSelected(f);
-              listEl.classList.remove('open');
-              if (f.weightClass && !weightEl.value) weightEl.value = f.weightClass;
-              updateGenerateState();
-            });
+            renderList(listEl, search(inputEl.value), pick);
           });
+          // Typing the exact name and tabbing/clicking away (instead of
+          // clicking a dropdown row) is a completely normal way to use a
+          // search box — without this, the button silently stayed disabled
+          // forever with no indication why the fighter "didn't take".
           inputEl.addEventListener('blur', () => {
-            setTimeout(() => listEl.classList.remove('open'), 150);
+            setTimeout(() => {
+              listEl.classList.remove('open');
+              const exact = findExact(inputEl.value);
+              if (exact) pick(exact);
+            }, 150);
           });
         }
 
@@ -1392,10 +1428,22 @@
             b: selectedB.name,
             poster: '1',
           });
-          if (weightEl.value.trim()) params.set('weight', weightEl.value.trim());
+          if (weightEl.value.trim())   params.set('weight', weightEl.value.trim());
+          if (eventEl.value.trim())    params.set('eventName', eventEl.value.trim());
+          if (locationEl.value.trim()) params.set('location', locationEl.value.trim());
           if (selectedA.img) params.set('imgA', selectedA.img);
           if (selectedB.img) params.set('imgB', selectedB.img);
           window.open(`matchup.html?${params.toString()}`, '_blank');
+        });
+
+        copyBtn.addEventListener('click', () => {
+          const text = captionEl.value.trim();
+          if (!text) { captionEl.focus(); return; }
+          navigator.clipboard.writeText(text).then(() => {
+            copyBtn.textContent = 'Copied!';
+            copyBtn.classList.add('copied');
+            setTimeout(() => { copyBtn.textContent = 'Copy Caption'; copyBtn.classList.remove('copied'); }, 2000);
+          });
         });
       }
 
