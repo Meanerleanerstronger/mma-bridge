@@ -541,7 +541,9 @@
     .mu-form-row {
       display:flex; gap:5px; flex-wrap:wrap;
     }
-    .mu-form-row.b { justify-content:flex-end; }
+    /* left fighter's pips pack toward the right of their column, i.e.
+       toward the center VS divider — see formPips() for why. */
+    .mu-form-row.pack-center { justify-content:flex-end; }
     .mu-form-pip {
       position:relative;
       width:28px; height:28px; border-radius:3px;
@@ -576,13 +578,16 @@
       color:rgba(255,255,255,.3); margin-top:6px;
     }
     .mu-form-full {
-      display:inline-flex; align-items:center; gap:4px;
-      font-family:'Montserrat',sans-serif; font-weight:700; font-size:.5rem;
+      display:inline-block;
+      font-family:'Montserrat',sans-serif; font-weight:800; font-size:.52rem;
       letter-spacing:.1em; text-transform:uppercase;
-      color:#d97b3f; text-decoration:none; margin-top:8px;
-      opacity:.85; transition:opacity .15s;
+      color:#d97b3f; text-decoration:none; margin-top:10px;
+      border:1px solid rgba(217,123,63,.4); border-radius:20px;
+      padding:7px 16px;
+      transition:background .15s, color .15s, border-color .15s;
     }
-    .mu-form-full:hover { opacity:1; }
+    .mu-form-full:hover { background:#d97b3f; color:#0a0a0a; border-color:#d97b3f; }
+    .mu-form-full.b { float:right; }
     .mu-form-name-row { display:flex; align-items:center; justify-content:space-between; gap:8px; }
     .mu-form-name-row.b { flex-direction:row-reverse; }
     .mu-form-section {
@@ -595,6 +600,12 @@
       font-size:1.05rem; color:#d97b3f;
       border:1px solid rgba(217,123,63,.3);
       border-radius:3px; margin-bottom:4px;
+    }
+    .mu-h2h-tag {
+      display:block;
+      font-family:'Montserrat',sans-serif; font-weight:800; font-style:normal;
+      font-size:.56rem; letter-spacing:.22em; text-transform:uppercase;
+      color:#d97b3f; opacity:.8; margin-bottom:6px;
     }
     .mu-no-common {
       text-align:center; padding:20px;
@@ -708,9 +719,11 @@
     body.light-mode .mu-form-divider { background:rgba(0,0,0,.1); }
     body.light-mode .mu-form-sub { color:rgba(0,0,0,.4); }
     body.light-mode .mu-form-tip { background:#fff; border-color:rgba(0,0,0,.14); color:rgba(0,0,0,.75); box-shadow:0 8px 22px rgba(0,0,0,.18); }
-    body.light-mode .mu-form-full { color:#b8611e; }
+    body.light-mode .mu-form-full { color:#b8611e; border-color:rgba(184,97,30,.4); }
+    body.light-mode .mu-form-full:hover { background:#b8611e; color:#fff; border-color:#b8611e; }
     body.light-mode .mu-no-common { color:rgba(0,0,0,.35); }
     body.light-mode .mu-h2h-banner { color:#b8611e; border-color:rgba(184,97,30,.4); }
+    body.light-mode .mu-h2h-tag { color:#b8611e; }
     body.light-mode .mu-stat-row { border-bottom-color:rgba(0,0,0,.07); }
     body.light-mode .mu-stat-row:hover { background:rgba(0,0,0,.03); }
     body.light-mode .mu-stat-label { color:rgba(0,0,0,.42); }
@@ -850,10 +863,20 @@
       const pct = n < 0 ? (-n / (-n + 100)) * 100 : (100 / (n + 100)) * 100;
       return Math.round(pct) + '%';
     }
+    /* Strips accents before dropping non-letters — plain .replace(/[^a-z]/g,'')
+       alone deletes characters like í/á/ř wholesale instead of folding them to
+       their base letter, so "Jiří Procházka" (fighters.json's spelling) silently
+       failed to match "Jiri Prochazka" (how several events.json entries spell
+       the same fighter) and every downstream lookup — photo, stats, last5 —
+       came back empty for those cards. Found by testing the resume tab, not
+       hypothetically: verify against real accented names before assuming this
+       kind of matcher is fine as-is. */
+    function normName(s){
+      return s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z]/g,'');
+    }
     function fuzzyMatch(a, b){
       if (!a || !b) return false;
-      const clean = s => s.toLowerCase().replace(/[^a-z]/g,'');
-      const ca = clean(a), cb = clean(b);
+      const ca = normName(a), cb = normName(b);
       return ca === cb || ca.includes(cb) || cb.includes(ca);
     }
     function edge(va, vb, higher){
@@ -988,17 +1011,42 @@
 
       /* ── RESUME DATA ── */
       function resumeHTML(fA, fB, nA, nB) {
-        const h2hFights = (fA.last5||[]).filter(f =>
-          f.opponent && f.opponent.toLowerCase().replace(/[^a-z]/g,'').includes(nB.toLowerCase().replace(/[^a-z]/g,'').slice(0,5))
-        );
-        const h2hBanner = h2hFights.length ? `<div class="mu-h2h-banner">They've fought before &mdash; ${esc(nA)} went ${h2hFights[0].result==='W'?'WIN':'LOSS'} vs ${esc(nB)}</div>` : '';
+        /* Rematch detection — check BOTH fighters' records (not just A's),
+           since last5 data can be asymmetric, and spell the actual result
+           of the first meeting out explicitly (winner, method, event)
+           rather than a vague "went WIN/LOSS". */
+        function findAllH2H(otherName, last5) {
+          const clean = normName(otherName).slice(0,5);
+          return (last5||[]).filter(f => f.opponent && normName(f.opponent).includes(clean));
+        }
+        const h2hAllFromA = findAllH2H(nB, fA.last5);
+        const h2hAllFromB = findAllH2H(nA, fB.last5);
+        // last5 is newest-first, so the OLDEST available meeting (what we
+        // call "first meeting" here — earliest one this data can see) is
+        // the last item in the filtered list, not the first.
+        const h2hFromA = h2hAllFromA[h2hAllFromA.length - 1];
+        const h2hFromB = h2hAllFromB[h2hAllFromB.length - 1];
+        const h2hMatch = h2hFromA || h2hFromB;
+        const meetingCount = Math.max(h2hAllFromA.length, h2hAllFromB.length);
+        let h2hBanner = '';
+        if (h2hMatch) {
+          const winnerName = h2hFromA
+            ? (h2hFromA.result === 'W' ? nA : nB)
+            : (h2hFromB.result === 'W' ? nB : nA);
+          const loserName = winnerName === nA ? nB : nA;
+          const bits = [`${esc(winnerName)} beat ${esc(loserName)}`];
+          if (h2hMatch.method) bits.push(`by ${esc(h2hMatch.method)}`);
+          if (h2hMatch.event)  bits.push(`at ${esc(h2hMatch.event)}`);
+          const meetingPhrase = meetingCount > 1 ? `in their first of ${meetingCount} recent meetings` : 'in their only meeting on record';
+          h2hBanner = `<div class="mu-h2h-banner"><span class="mu-h2h-tag">Rematch</span>${bits.join(' ')} ${meetingPhrase}</div>`;
+        }
 
         const oppsA = new Map();
-        for (const f of (fA.last5||[])) if (f.opponent) oppsA.set(f.opponent.toLowerCase().replace(/[^a-z]/g,''), f);
+        for (const f of (fA.last5||[])) if (f.opponent) oppsA.set(normName(f.opponent), f);
         const common = [];
         for (const f of (fB.last5||[])) {
           if (!f.opponent) continue;
-          const key = f.opponent.toLowerCase().replace(/[^a-z]/g,'');
+          const key = normName(f.opponent);
           if (oppsA.has(key)) common.push({ opponent:f.opponent, resultA:oppsA.get(key).result||'', methodA:oppsA.get(key).method||'', resultB:f.result||'', methodB:f.method||'' });
         }
         const commonHTML = common.length ? common.map(c=>`
@@ -1014,8 +1062,16 @@
             </div>
           </div>`).join('') : `<div class="mu-no-common">No common opponents in recent fight history</div>`;
 
-        function formPips(fights, reverse) {
-          const last5 = (fights||[]).slice(0,5);
+        /* Recent-form pips converge toward the VS divider in the middle —
+           each fighter's most recent fight sits nearest the center, oldest
+           furthest out, so the row reads like a timeline walking toward
+           "now" from both sides at once instead of two identical
+           newest-on-the-left lists that don't relate to the page layout. */
+        function formPips(fights, isLeftFighter) {
+          let last5 = (fights||[]).slice(0,5);
+          // Left fighter: oldest-to-newest left-to-right, so the newest
+          // fight ends up rightmost, closest to the center divider.
+          if (isLeftFighter) last5 = last5.slice().reverse();
           const pips = last5.map(f=>{
             const result = (f.result||'').toUpperCase();
             const verb = result === 'W' ? 'Beat' : result === 'L' ? 'Lost to' : 'Drew';
@@ -1027,7 +1083,9 @@
               <span class="mu-form-tip">${tip}</span>
             </a>`;
           }).join('');
-          return `<div class="mu-form-row${reverse?' b':''}">${pips}</div><div class="mu-form-sub">Last 5 fights (newest left) &middot; hover for details</div>`;
+          const rowClass = isLeftFighter ? ' pack-center' : '';
+          const caption = isLeftFighter ? 'Oldest to newest, right = most recent' : 'Newest to oldest, left = most recent';
+          return `<div class="mu-form-row${rowClass}">${pips}</div><div class="mu-form-sub">${caption} &middot; hover for details</div>`;
         }
 
         const fullResumeA = `fighter.html?${fA.id ? `id=${encodeURIComponent(fA.id)}` : `name=${encodeURIComponent(nA)}`}`;
@@ -1048,16 +1106,16 @@
                   <div class="mu-form-name-row">
                     <div class="mu-form-name">${esc(nA)}</div>
                   </div>
-                  ${formPips(fA.last5, false)}
-                  <a class="mu-form-full" href="${fullResumeA}">Full Resume &rarr;</a>
+                  ${formPips(fA.last5, true)}
+                  <a class="mu-form-full" href="${fullResumeA}">Full Resume</a>
                 </div>
                 <div class="mu-form-divider"></div>
                 <div>
                   <div class="mu-form-name-row b">
                     <div class="mu-form-name b">${esc(nB)}</div>
                   </div>
-                  ${formPips(fB.last5, true)}
-                  <a class="mu-form-full" href="${fullResumeB}" style="float:right">Full Resume &rarr;</a>
+                  ${formPips(fB.last5, false)}
+                  <a class="mu-form-full b" href="${fullResumeB}">Full Resume</a>
                 </div>
               </div>
             </div>
