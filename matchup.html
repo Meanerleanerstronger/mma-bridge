@@ -979,6 +979,10 @@
       });
       posterExit.addEventListener('click', () => setView('full'));
 
+      // ?poster=1 — used by the admin "Dream H2H Poster" generator to open
+      // straight into Poster view instead of making the admin click twice.
+      if (p.get('poster') === '1') setView('poster');
+
       // poster-only light/dark toggle, independent of the site's own theme
       posterTheme.addEventListener('click', () => {
         const isLight = document.body.classList.toggle('mu-poster-light');

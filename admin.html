@@ -504,6 +504,71 @@
       transition: border-color 0.2s;
     }
     .mkt-select:focus { border-color: rgba(184,97,30,0.4); }
+    .mkt-input {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 9px 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: #fff;
+      outline: none;
+      width: 100%;
+      transition: border-color 0.2s;
+    }
+    .mkt-input:focus { border-color: rgba(184,97,30,0.4); }
+    .mkt-input::placeholder { color: rgba(255,255,255,0.25); }
+
+    /* ── Dream H2H poster generator ──────────────────────── */
+    .mkt-h2h-box {
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 32px;
+    }
+    .mkt-h2h-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+    .mkt-h2h-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+      align-items: start;
+    }
+    @media (max-width: 560px) { .mkt-h2h-grid { grid-template-columns: 1fr; } }
+    .mkt-autocomplete { position: relative; }
+    .mkt-autocomplete-list {
+      display: none;
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0; right: 0;
+      max-height: 220px;
+      overflow-y: auto;
+      background: #17171a;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      z-index: 30;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+    }
+    .mkt-autocomplete-list.open { display: block; }
+    .mkt-autocomplete-item {
+      padding: 9px 12px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.8);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .mkt-autocomplete-item:hover { background: rgba(184,97,30,0.18); }
+    .mkt-autocomplete-item small { color: rgba(255,255,255,0.35); font-size: 0.7rem; }
+    .mkt-h2h-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 
     .mkt-platforms {
       display: flex;
@@ -1017,6 +1082,34 @@
           <div style="font-family:'Inter',sans-serif;font-size:0.85rem;color:rgba(255,255,255,0.35);">Checking for today's posts...</div>
         </div>
 
+        <!-- Dream H2H poster generator — pick ANY two fighters (they don't
+             need to be actually booked) and open matchup.html straight into
+             Poster view, ready to screenshot and post. Reuses the same
+             matchup.html hero already built for real event matchups; the
+             page works fine with just names since it looks stats/photos up
+             from fighters.json directly. -->
+        <div class="section-label" style="margin-bottom:14px">Dream H2H Poster</div>
+        <div class="mkt-h2h-box">
+          <div class="mkt-h2h-sub">Search any two fighters, even ones not booked against each other, and open a shareable poster. Opens in a new tab in Poster view — use the light/dark toggle there, then screenshot it to post.</div>
+          <div class="mkt-h2h-grid">
+            <div class="mkt-autocomplete">
+              <input type="text" class="mkt-input" id="h2h-fighter-a" placeholder="Fighter A (e.g. Ilia Topuria)" autocomplete="off">
+              <div class="mkt-autocomplete-list" id="h2h-list-a"></div>
+            </div>
+            <div class="mkt-autocomplete">
+              <input type="text" class="mkt-input" id="h2h-fighter-b" placeholder="Fighter B (e.g. Arman Tsarukyan)" autocomplete="off">
+              <div class="mkt-autocomplete-list" id="h2h-list-b"></div>
+            </div>
+          </div>
+          <div class="mkt-h2h-grid" style="grid-template-columns:1fr auto">
+            <input type="text" class="mkt-input" id="h2h-weight" placeholder="Weight class (auto-filled, editable)">
+          </div>
+          <div class="mkt-h2h-actions">
+            <button class="btn-post" id="h2h-generate" type="button" disabled>Open Poster &rarr;</button>
+            <span style="font-family:'Inter',sans-serif;font-size:0.72rem;color:rgba(255,255,255,0.3);" id="h2h-hint">Pick both fighters to enable</span>
+          </div>
+        </div>
+
         <div class="section-label" style="margin-bottom:14px">Content Generator</div>
 
         <!-- Platform connection status -->
@@ -1217,6 +1310,93 @@
         await loadEvents();
         await loadPlatformStatus();
         loadTodaysPost();
+        setupH2HGenerator();
+      }
+
+      // ── Dream H2H poster generator ─────────────────────────
+      let _h2hFightersCache = null;
+      async function setupH2HGenerator() {
+        const inputA  = $('h2h-fighter-a');
+        const inputB  = $('h2h-fighter-b');
+        const listA   = $('h2h-list-a');
+        const listB   = $('h2h-list-b');
+        const weightEl = $('h2h-weight');
+        const genBtn  = $('h2h-generate');
+        const hintEl  = $('h2h-hint');
+        if (!inputA || inputA.dataset.wired) return;
+        inputA.dataset.wired = '1';
+
+        let selectedA = null, selectedB = null;
+
+        if (!_h2hFightersCache) {
+          try {
+            const res = await fetch('data/fighters.json?_=' + Date.now(), { cache: 'no-store' });
+            _h2hFightersCache = await res.json();
+          } catch (e) {
+            _h2hFightersCache = [];
+          }
+        }
+
+        function search(q) {
+          const clean = q.trim().toLowerCase();
+          if (!clean) return [];
+          return _h2hFightersCache
+            .filter(f => (f.name || '').toLowerCase().includes(clean))
+            .slice(0, 8);
+        }
+
+        function renderList(listEl, results, onPick) {
+          if (!results.length) { listEl.classList.remove('open'); listEl.innerHTML = ''; return; }
+          listEl.innerHTML = results.map(f => `
+            <div class="mkt-autocomplete-item" data-id="${esc(f.id || '')}">
+              ${esc(f.name)} ${f.weightClass ? `<small>${esc(f.weightClass)}</small>` : ''}
+            </div>`).join('');
+          listEl.classList.add('open');
+          listEl.querySelectorAll('.mkt-autocomplete-item').forEach((el, i) => {
+            el.addEventListener('click', () => onPick(results[i]));
+          });
+        }
+
+        function updateGenerateState() {
+          const ready = !!(selectedA && selectedB);
+          genBtn.disabled = !ready;
+          hintEl.textContent = ready
+            ? `Ready: ${selectedA.name} vs ${selectedB.name}`
+            : 'Pick both fighters to enable';
+        }
+
+        function wireInput(inputEl, listEl, setSelected) {
+          inputEl.addEventListener('input', () => {
+            setSelected(null);
+            updateGenerateState();
+            renderList(listEl, search(inputEl.value), f => {
+              inputEl.value = f.name;
+              setSelected(f);
+              listEl.classList.remove('open');
+              if (f.weightClass && !weightEl.value) weightEl.value = f.weightClass;
+              updateGenerateState();
+            });
+          });
+          inputEl.addEventListener('blur', () => {
+            setTimeout(() => listEl.classList.remove('open'), 150);
+          });
+        }
+
+        wireInput(inputA, listA, f => { selectedA = f; });
+        wireInput(inputB, listB, f => { selectedB = f; });
+
+        genBtn.addEventListener('click', () => {
+          if (!selectedA || !selectedB) return;
+          const params = new URLSearchParams({
+            a: selectedA.name,
+            b: selectedB.name,
+            poster: '1',
+          });
+          if (weightEl.value.trim()) params.set('weight', weightEl.value.trim());
+          if (selectedA.img) params.set('imgA', selectedA.img);
+          if (selectedB.img) params.set('imgB', selectedB.img);
+          window.open(`matchup.html?${params.toString()}`, '_blank');
+        });
       }
 
       // ── Today's auto-generated social posts (up to 3) ─────
