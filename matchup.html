@@ -55,22 +55,6 @@
       background:linear-gradient(240deg, rgba(96,165,250,.26) 0%, rgba(96,165,250,.04) 55%, transparent 75%);
     }
     .mu-hero-noise { display:none; }
-    /* diagonal wireframe grid — a generic interlocking-diamond line motif
-       (not any specific promotion's actual poster art) layered over the
-       color wash for extra graphic energy; masked out toward the bottom so
-       it doesn't fight with the fighter names sitting there. */
-    .mu-hero-grid {
-      position:absolute; inset:0; z-index:0; pointer-events:none;
-      opacity:.16;
-      background-image:
-        repeating-linear-gradient(45deg, rgba(255,255,255,.55) 0 1.5px, transparent 1.5px 58px),
-        repeating-linear-gradient(-45deg, rgba(255,255,255,.55) 0 1.5px, transparent 1.5px 58px);
-      -webkit-mask-image:linear-gradient(to bottom, black 0%, black 55%, transparent 92%);
-      mask-image:linear-gradient(to bottom, black 0%, black 55%, transparent 92%);
-    }
-    body.light-mode .mu-hero-grid { opacity:.09; background-image:
-        repeating-linear-gradient(45deg, rgba(0,0,0,.55) 0 1.5px, transparent 1.5px 58px),
-        repeating-linear-gradient(-45deg, rgba(0,0,0,.55) 0 1.5px, transparent 1.5px 58px); }
     .mu-hero-slash {
       position:absolute; top:0; bottom:0; left:0; width:3px; height:100%;
       transform-origin:top left;
@@ -154,26 +138,12 @@
     }
     .mu-hero-side.b .mu-chip.record { color:#60a5fa; border-color:rgba(96,165,250,.4); }
 
-    /* VS medallion — was plain italic serif text, now a lit badge with a
-       slow-spinning color sunburst behind it for extra poster energy. */
+    /* VS medallion — plain lit badge, no spinning graphic behind it. */
     .mu-vs-center {
-      position:relative;
       text-align:center; padding:0 6px;
       display:flex; flex-direction:column; align-items:center; gap:8px;
       padding-bottom:10px;
     }
-    .mu-vs-center::before {
-      content:''; position:absolute; top:0; left:50%;
-      width:130px; height:130px; margin-left:-65px; margin-top:-37px;
-      background:repeating-conic-gradient(from 0deg,
-        rgba(217,123,63,.22) 0deg 9deg, transparent 9deg 20deg,
-        rgba(96,165,250,.18) 20deg 29deg, transparent 29deg 40deg);
-      border-radius:50%;
-      animation:mu-sunburst-spin 22s linear infinite;
-      z-index:-1;
-      pointer-events:none;
-    }
-    @keyframes mu-sunburst-spin { to { transform:rotate(360deg); } }
     .mu-vs-badge {
       width:56px; height:56px; border-radius:50%;
       display:flex; align-items:center; justify-content:center;
@@ -289,18 +259,17 @@
     }
     body.mu-poster-mode .mu-poster-brand { display:block; }
 
-    /* poster event banner — small stamped strip above the VS badge with
-       the card name/date when known, so the poster carries more than just
-       two names floating in empty space. */
+    /* poster event line — plain, big, sits below the hero (not overlaid on
+       the photos) so it never fights with the fighters for space and stays
+       legible in one line regardless of theme. */
     .mu-poster-eventline {
-      position:absolute; top:20px; left:50%; transform:translateX(-50%);
-      z-index:3; display:none;
-      font-family:'Montserrat',sans-serif; font-weight:800; font-size:.58rem;
-      letter-spacing:.24em; text-transform:uppercase;
-      color:rgba(255,255,255,.55);
-      padding:6px 16px; border:1px solid rgba(255,255,255,.18); border-radius:20px;
-      background:rgba(0,0,0,.35); backdrop-filter:blur(6px);
-      white-space:nowrap;
+      display:none;
+      text-align:center;
+      padding:18px 20px;
+      background:#050506;
+      font-family:'Barlow Condensed',sans-serif; font-weight:800; font-style:italic;
+      font-size:clamp(1.3rem,3.6vw,2.1rem); letter-spacing:.01em; text-transform:uppercase;
+      color:rgba(255,255,255,.9);
     }
     body.mu-poster-mode .mu-poster-eventline.has-text { display:block; }
 
@@ -327,9 +296,6 @@
     body.mu-poster-mode.mu-poster-light .mu-hero-glow-a { background:linear-gradient(120deg, rgba(217,123,63,.24) 0%, rgba(217,123,63,.03) 55%, transparent 75%); }
     body.mu-poster-mode.mu-poster-light .mu-hero-glow-b { background:linear-gradient(240deg, rgba(37,99,235,.2) 0%, rgba(37,99,235,.03) 55%, transparent 75%); }
     body.mu-poster-mode.mu-poster-light .mu-hero-noise { background-image:repeating-linear-gradient(45deg, rgba(0,0,0,.025) 0 2px, transparent 2px 14px); mix-blend-mode:multiply; }
-    body.mu-poster-mode.mu-poster-light .mu-hero-grid { opacity:.09; background-image:
-        repeating-linear-gradient(45deg, rgba(0,0,0,.55) 0 1.5px, transparent 1.5px 58px),
-        repeating-linear-gradient(-45deg, rgba(0,0,0,.55) 0 1.5px, transparent 1.5px 58px); }
     body.mu-poster-mode.mu-poster-light .mu-fighter-name {
       color:#161514; -webkit-text-stroke:1px rgba(255,255,255,.6);
       text-shadow:0 3px 0 rgba(255,255,255,.75), 0 8px 30px rgba(0,0,0,.15);
@@ -343,9 +309,8 @@
     }
     body.mu-poster-mode.mu-poster-light .mu-vs-text { color:#161514; text-shadow:0 1px 2px rgba(255,255,255,.7); }
     body.mu-poster-mode.mu-poster-light .mu-vs-weight { color:rgba(0,0,0,.55); border-color:rgba(0,0,0,.18); background:rgba(0,0,0,.04); }
-    body.mu-poster-mode.mu-poster-light .mu-poster-brand,
-    body.mu-poster-mode.mu-poster-light .mu-poster-eventline { color:rgba(0,0,0,.4); }
-    body.mu-poster-mode.mu-poster-light .mu-poster-eventline { background:rgba(255,255,255,.55); border-color:rgba(0,0,0,.14); }
+    body.mu-poster-mode.mu-poster-light .mu-poster-brand { color:rgba(0,0,0,.4); }
+    body.mu-poster-mode.mu-poster-light .mu-poster-eventline { background:#f6f3ec; color:rgba(0,0,0,.8); }
     body.mu-poster-mode.mu-poster-light .mu-poster-exit,
     body.mu-poster-mode.mu-poster-light .mu-poster-theme {
       background:rgba(255,255,255,.7); border-color:rgba(0,0,0,.16); color:#161514;
@@ -1120,11 +1085,9 @@
         <div class="mu-hero">
           <div class="mu-hero-glow-a"></div>
           <div class="mu-hero-glow-b"></div>
-          <div class="mu-hero-grid"></div>
           <div class="mu-hero-slash"></div>
           <div class="mu-hero-noise"></div>
           <div class="mu-poster-brand">MMA Bridge</div>
-          <div class="mu-poster-eventline${eventLine?' has-text':''}">${esc(eventLine)}</div>
           ${imgsHTML}
           <div class="mu-hero-text">
             <div class="mu-hero-side a">
@@ -1142,6 +1105,7 @@
           </div>
           <div class="mu-hero-fade"></div>
         </div>
+        <div class="mu-poster-eventline${eventLine?' has-text':''}">${esc(eventLine)}</div>
 
         <div class="mu-classic-wrap">
           <div class="mu-classic-card">
