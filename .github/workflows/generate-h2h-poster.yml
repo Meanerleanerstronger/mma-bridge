@@ -1,0 +1,89 @@
+name: Generate H2H Poster
+
+# On-demand counterpart to Daily Social Post — triggered from admin.html's
+# "Dream H2H Poster" generator (via the backend's /api/admin/marketing/
+# generate-h2h-poster endpoint, which calls this workflow_dispatch using a
+# GitHub PAT stored on Render). Builds one poster and appends it to
+# social/manual-queue.json instead of social/latest.json, since that file
+# gets fully overwritten every day by the daily workflow and a one-off
+# admin request needs to survive that.
+
+on:
+  workflow_dispatch:
+    inputs:
+      fighter_a:
+        required: true
+      fighter_b:
+        required: true
+      weight:
+        required: false
+      event_name:
+        required: false
+      location:
+        required: false
+      style:
+        description: 'poster (wide banner) or classic (fight-card style)'
+        required: true
+        default: 'poster'
+      theme:
+        description: 'dark or light'
+        required: true
+        default: 'dark'
+      caption:
+        required: false
+      request_id:
+        description: 'unique id admin.html generated at trigger time, used to poll for this specific result'
+        required: true
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies (Puppeteer + Sharp)
+        run: npm install
+
+      - name: Generate the poster
+        env:
+          FIGHTER_A:  ${{ inputs.fighter_a }}
+          FIGHTER_B:  ${{ inputs.fighter_b }}
+          WEIGHT:     ${{ inputs.weight }}
+          EVENT_NAME: ${{ inputs.event_name }}
+          LOCATION:   ${{ inputs.location }}
+          STYLE:      ${{ inputs.style }}
+          THEME:      ${{ inputs.theme }}
+          CAPTION:    ${{ inputs.caption }}
+          REQUEST_ID: ${{ inputs.request_id }}
+        run: node scripts/generate-h2h-poster.js
+
+      # A daily-pipeline run or another admin request could push to social/
+      # in between this job starting and finishing — pull --rebase + retry
+      # instead of a bare push, so this doesn't silently lose the commit the
+      # way an earlier manual edit this same file got clobbered once already.
+      - name: Commit and push the new poster
+        run: |
+          git config user.name  "H2H Poster Bot"
+          git config user.email "bot@mmabridge.com"
+          git add social/
+          if git diff --staged --quiet; then
+            echo "Nothing to commit"
+            exit 0
+          fi
+          git commit -m "chore(auto): H2H poster ${{ inputs.fighter_a }} vs ${{ inputs.fighter_b }} (${{ inputs.request_id }})"
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin main && git push && exit 0
+            echo "Push failed, retrying ($i)..."
+            sleep 3
+          done
+          echo "Could not push after 5 attempts" >&2
+          exit 1

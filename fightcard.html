@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="images/mma-bridge-logo.png">
+  <meta name="robots" content="noindex">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fight Card | MMA Bridge</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing:border-box; }
+    body {
+      margin:0; min-height:100vh;
+      background:#050506;
+      font-family:'Inter',sans-serif;
+      display:flex; align-items:center; justify-content:center;
+      padding:60px 16px;
+    }
+    body.fc-light { background:#f6f3ec; }
+
+    /* ── shared card shell ── */
+    .fc-card {
+      position:relative; width:min(94vw, 640px);
+      background:#0b0b0c; border-radius:8px; overflow:hidden;
+      box-shadow:0 30px 90px rgba(0,0,0,.6);
+    }
+    body.fc-light .fc-card { background:#faf7f1; }
+
+    .fc-header {
+      position:relative; padding:22px 24px 16px;
+      text-align:center;
+      background:linear-gradient(160deg, rgba(217,123,63,.16), transparent 65%);
+    }
+    .fc-badge {
+      display:inline-block; padding:5px 16px; margin-bottom:10px;
+      background:#d97b3f; color:#0a0a0a; border-radius:3px;
+      font-family:'Montserrat',sans-serif; font-weight:900; font-size:.68rem;
+      letter-spacing:.14em; text-transform:uppercase;
+    }
+    .fc-event-name {
+      font-family:'Barlow Condensed',sans-serif; font-weight:900; font-style:italic;
+      text-transform:uppercase; color:#fff;
+      font-size:clamp(1.4rem,4.4vw,2rem); line-height:1;
+    }
+    body.fc-light .fc-event-name { color:#161514; }
+    .fc-event-sub {
+      margin-top:4px;
+      font-family:'Montserrat',sans-serif; font-weight:700; font-size:.62rem;
+      letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.4);
+    }
+    body.fc-light .fc-event-sub { color:rgba(0,0,0,.45); }
+
+    /* ── CARD MODE — grid of headshot-pair rows, grouped by section ── */
+    .fc-section-bar {
+      display:flex; align-items:center; gap:10px;
+      padding:9px 24px; margin-top:4px;
+      background:rgba(217,123,63,.12);
+      font-family:'Montserrat',sans-serif; font-weight:800; font-size:.62rem;
+      letter-spacing:.16em; text-transform:uppercase; color:#d97b3f;
+    }
+    .fc-section-bar::after { content:''; flex:1; height:1px; background:rgba(217,123,63,.3); }
+    .fc-rows { padding:8px 20px 22px; display:flex; flex-direction:column; gap:2px; }
+    .fc-bout {
+      display:grid; grid-template-columns:1fr auto 1fr;
+      align-items:center; gap:10px;
+      padding:12px 6px; border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    body.fc-light .fc-bout { border-bottom-color:rgba(0,0,0,.07); }
+    .fc-bout:last-child { border-bottom:none; }
+    .fc-fighter { display:flex; align-items:center; gap:10px; min-width:0; }
+    .fc-fighter.b { flex-direction:row-reverse; text-align:right; }
+    .fc-thumb {
+      width:52px; height:52px; border-radius:6px; object-fit:cover;
+      flex-shrink:0; background:#1a1a1c;
+      border:1px solid rgba(255,255,255,.1);
+    }
+    .fc-fighter-info { min-width:0; }
+    .fc-fighter-name {
+      font-family:'Montserrat',sans-serif; font-weight:800; font-size:.78rem;
+      color:#fff; text-transform:uppercase; letter-spacing:.01em;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    body.fc-light .fc-fighter-name { color:#161514; }
+    .fc-fighter-rank {
+      font-family:'Inter',sans-serif; font-size:.62rem; color:rgba(255,255,255,.35);
+    }
+    body.fc-light .fc-fighter-rank { color:rgba(0,0,0,.4); }
+    .fc-bout-mid { text-align:center; }
+    .fc-bout-vs {
+      font-family:'Barlow Condensed',sans-serif; font-weight:900; font-style:italic;
+      font-size:.85rem; color:rgba(255,255,255,.3);
+    }
+    .fc-bout-weight {
+      font-family:'Montserrat',sans-serif; font-weight:700; font-size:.5rem;
+      letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.28);
+      white-space:nowrap;
+    }
+
+    /* ── NEXT-FIGHT MODE — big stacked matchup list, poster-style type ── */
+    .fc-next-rows { display:flex; flex-direction:column; }
+    .fc-next-row {
+      position:relative; padding:20px 24px;
+      border-bottom:1px solid rgba(255,255,255,.07);
+      overflow:hidden;
+    }
+    body.fc-light .fc-next-row { border-bottom-color:rgba(0,0,0,.08); }
+    .fc-next-row:last-child { border-bottom:none; }
+    .fc-next-row:nth-child(odd) { background:rgba(217,123,63,.05); }
+    .fc-next-row:nth-child(even) { background:rgba(96,165,250,.05); }
+    .fc-next-tag {
+      display:inline-block; margin-bottom:6px;
+      font-family:'Montserrat',sans-serif; font-weight:800; font-size:.54rem;
+      letter-spacing:.16em; text-transform:uppercase; color:#d97b3f;
+    }
+    .fc-next-matchup {
+      font-family:'Barlow Condensed',sans-serif; font-weight:900; font-style:italic;
+      text-transform:uppercase; color:#fff; line-height:1;
+      font-size:clamp(1.3rem,4.6vw,1.9rem);
+      display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;
+    }
+    body.fc-light .fc-next-matchup { color:#161514; }
+    .fc-next-matchup .vs {
+      font-size:.55em; color:#d97b3f; text-decoration:underline;
+      text-underline-offset:3px;
+    }
+    .fc-next-weight {
+      margin-top:4px;
+      font-family:'Montserrat',sans-serif; font-weight:700; font-size:.56rem;
+      letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.35);
+    }
+    body.fc-light .fc-next-weight { color:rgba(0,0,0,.4); }
+
+    .fc-footer {
+      padding:12px 24px; text-align:center;
+      font-family:'Montserrat',sans-serif; font-weight:800; font-size:.56rem;
+      letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.35);
+      border-top:1px solid rgba(255,255,255,.07);
+    }
+    body.fc-light .fc-footer { color:rgba(0,0,0,.4); border-top-color:rgba(0,0,0,.08); }
+
+    .fc-empty {
+      padding:60px 24px; text-align:center;
+      font-family:'Inter',sans-serif; color:rgba(255,255,255,.3);
+    }
+  </style>
+</head>
+<body>
+  <div id="fcRoot" class="fc-card"><div class="fc-empty">Loading...</div></div>
+
+  <script>
+  (function(){
+    const p = new URLSearchParams(location.search);
+    const mode      = p.get('mode') === 'next' ? 'next' : 'card';
+    const theme     = p.get('theme') === 'light' ? 'light' : 'dark';
+    const eventName = p.get('eventName') || (mode === 'next' ? 'Fights We Want To See' : 'Fight Card');
+    const eventSub  = p.get('eventSub') || '';
+    if (theme === 'light') document.body.classList.add('fc-light');
+
+    function esc(s){ const d=document.createElement('div'); d.textContent=s||''; return d.innerHTML; }
+
+    // Bouts travel as base64-encoded JSON so an arbitrary number of fights
+    // doesn't blow past URL length limits the way N separate query params
+    // per fighter would. Each bout: { a, b, imgA, imgB, weight, section, tag }
+    let bouts = [];
+    try {
+      const raw = p.get('bouts');
+      if (raw) bouts = JSON.parse(decodeURIComponent(escape(atob(raw))));
+    } catch (e) { bouts = []; }
+
+    const root = document.getElementById('fcRoot');
+    if (!Array.isArray(bouts) || !bouts.length) {
+      root.innerHTML = '<div class="fc-empty">No fights added yet.</div>';
+      return;
+    }
+
+    document.title = `${eventName} | MMA Bridge`;
+
+    function renderCardMode() {
+      // Group by section (Main Card / Prelims / Early Prelims / bare), in
+      // the order sections first appear rather than a fixed hardcoded
+      // order, so a builder that only uses one section doesn't show empty
+      // headers for the others.
+      const sections = [];
+      const bySection = new Map();
+      bouts.forEach(b => {
+        const sec = b.section || 'Fight Card';
+        if (!bySection.has(sec)) { bySection.set(sec, []); sections.push(sec); }
+        bySection.get(sec).push(b);
+      });
+
+      const sectionsHTML = sections.map(sec => `
+        <div class="fc-section-bar">${esc(sec)}</div>
+        <div class="fc-rows">
+          ${bySection.get(sec).map(b => `
+            <div class="fc-bout">
+              <div class="fc-fighter a">
+                ${b.imgA ? `<img class="fc-thumb" src="${esc(b.imgA)}" onerror="this.style.display='none'">` : ''}
+                <div class="fc-fighter-info">
+                  <div class="fc-fighter-name">${esc(b.a)}</div>
+                </div>
+              </div>
+              <div class="fc-bout-mid">
+                <div class="fc-bout-vs">VS</div>
+                ${b.weight ? `<div class="fc-bout-weight">${esc(b.weight)}</div>` : ''}
+              </div>
+              <div class="fc-fighter b">
+                ${b.imgB ? `<img class="fc-thumb" src="${esc(b.imgB)}" onerror="this.style.display='none'">` : ''}
+                <div class="fc-fighter-info">
+                  <div class="fc-fighter-name">${esc(b.b)}</div>
+                </div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `).join('');
+
+      root.innerHTML = `
+        <div class="fc-header">
+          <div class="fc-badge">MMA Bridge</div>
+          <div class="fc-event-name">${esc(eventName)}</div>
+          ${eventSub ? `<div class="fc-event-sub">${esc(eventSub)}</div>` : ''}
+        </div>
+        ${sectionsHTML}
+        <div class="fc-footer">mmabridge.com</div>
+      `;
+    }
+
+    function renderNextMode() {
+      const rowsHTML = bouts.map(b => `
+        <div class="fc-next-row">
+          ${b.tag ? `<div class="fc-next-tag">${esc(b.tag)}</div>` : ''}
+          <div class="fc-next-matchup">${esc(b.a)} <span class="vs">vs</span> ${esc(b.b)}</div>
+          ${b.weight ? `<div class="fc-next-weight">${esc(b.weight)}</div>` : ''}
+        </div>
+      `).join('');
+
+      root.innerHTML = `
+        <div class="fc-header">
+          <div class="fc-badge">MMA Bridge</div>
+          <div class="fc-event-name">${esc(eventName)}</div>
+          ${eventSub ? `<div class="fc-event-sub">${esc(eventSub)}</div>` : ''}
+        </div>
+        <div class="fc-next-rows">${rowsHTML}</div>
+        <div class="fc-footer">mmabridge.com</div>
+      `;
+    }
+
+    if (mode === 'next') renderNextMode();
+    else renderCardMode();
+  })();
+  </script>
+</body>
+</html>

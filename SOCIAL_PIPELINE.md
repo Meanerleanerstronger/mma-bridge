@@ -5,6 +5,37 @@ existing manual "Marketing Buddy" prototype into a daily pipeline. This
 doc covers the frontend half (generation + review). See the Backend
 repo's `MARKETING_SETUP.md` for the posting/API-credentials half.
 
+## On-demand generators (not part of the daily run)
+
+Three admin.html tools let you assemble a graphic yourself instead of
+waiting for the daily pipeline, all sharing the same fighter search
+(`data/fighters.json`, typo/accent-tolerant):
+
+- **Dream H2H Poster** — pick any two fighters (booked or not), style
+  (wide Banner or fight-card-style Classic), theme (dark/light). "Open
+  Poster" previews in a new tab. "Generate for Instagram" actually
+  renders it server-side via `generate-h2h-poster.yml` (workflow_dispatch,
+  triggered by the backend's `/api/admin/marketing/generate-h2h-poster`)
+  and appends it to `social/manual-queue.json` — polled from admin.html
+  and shown as a normal review card once ready (~60-90s).
+- **Fight Card Builder** — add multiple bouts, tag each with a section
+  (Main Card/Co-Main/Prelims/Early Prelims), preview a full event-card
+  graphic via `fightcard.html?mode=card`.
+- **Next Fight to Make** — stack a few dream matchups into a listicle-
+  style graphic via `fightcard.html?mode=next`, e.g. for a "what should
+  get booked next" post.
+
+Card Builder and Next Fight to Make currently only support the "Open
+Preview" (new tab, screenshot-yourself) flow, not the server-side
+Generate-for-Instagram automation Dream H2H has — that would need
+`scripts/generate-h2h-poster.js` generalized to target `fightcard.html`
+with an arbitrary bout list instead of a single named matchup.
+
+Both `fightcard.html` and the poster-mode/classic-mode URLs on
+`matchup.html` accept `?theme=light|dark` so a script can pick the theme
+without a click — needed since these are also driven headlessly by the
+generation script, not just browsed manually.
+
 ## What it does
 
 Every day, `.github/workflows/social-post-daily.yml` runs

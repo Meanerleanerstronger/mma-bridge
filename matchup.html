@@ -1240,6 +1240,14 @@
       if (p.get('poster') === '1') setView('poster');
       if (p.get('classic') === '1') setView('classic');
 
+      // ?theme=light|dark — lets the automated poster-generation script
+      // (scripts/generate-h2h-poster.js) pick the theme headlessly, since
+      // there's no click to drive it there.
+      if (p.get('theme') === 'light') {
+        document.body.classList.add('mu-poster-light');
+        posterTheme.textContent = '☀️';
+      }
+
       // poster-only light/dark toggle, independent of the site's own theme
       posterTheme.addEventListener('click', () => {
         const isLight = document.body.classList.toggle('mu-poster-light');

@@ -570,6 +570,35 @@
     .mkt-autocomplete-item small { color: rgba(255,255,255,0.35); font-size: 0.7rem; }
     .mkt-h2h-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 
+    /* ── Fight Card Builder / Next Fight to Make — repeatable bout rows ── */
+    .fc-builder-rows { display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px; }
+    .fc-builder-row {
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 12px;
+      position: relative;
+    }
+    .fc-builder-row .mkt-h2h-grid:last-of-type { margin-bottom: 0; }
+    .fc-row-remove {
+      position: absolute; top: 10px; right: 10px;
+      background: transparent; border: none; cursor: pointer;
+      color: rgba(255,255,255,0.3);
+      font-family: 'Inter', sans-serif; font-size: 0.7rem;
+      padding: 4px 8px;
+    }
+    .fc-row-remove:hover { color: #e05555; }
+    .btn-add-row {
+      background: transparent;
+      border: 1px dashed rgba(217,123,63,0.4);
+      color: #d97b3f;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 600;
+      cursor: pointer; width: 100%;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .btn-add-row:hover { background: rgba(217,123,63,0.08); border-color: rgba(217,123,63,0.7); }
+
     .mkt-platforms {
       display: flex;
       flex-wrap: wrap;
@@ -1132,6 +1161,50 @@
           <div id="h2h-generate-result"></div>
         </div>
 
+        <!-- Fight Card Builder — a full event-card graphic (grouped by
+             Main Card/Prelims/etc), assembled from any fighters, not tied
+             to a real scheduled event. -->
+        <div class="section-label" style="margin-bottom:14px">Fight Card Builder</div>
+        <div class="mkt-h2h-box">
+          <div class="mkt-h2h-sub">Build a full fight-card graphic — add each bout, tag its section, and preview. Same fighter search as Dream H2H.</div>
+          <div class="mkt-h2h-grid">
+            <input type="text" class="mkt-input" id="fcb-event-name" placeholder="Event name (e.g. UFC 330: Makhachev vs. Garry)">
+            <input type="text" class="mkt-input" id="fcb-event-sub" placeholder="Subtitle (optional, e.g. Aug 15 · Las Vegas)">
+          </div>
+          <div class="mkt-h2h-grid" style="grid-template-columns:auto 1fr">
+            <select class="mkt-select" id="fcb-theme">
+              <option value="dark">Dark</option>
+              <option value="light">Light</option>
+            </select>
+          </div>
+          <div class="fc-builder-rows" id="fcb-rows"></div>
+          <button class="btn-add-row" id="fcb-add-row" type="button">+ Add Fight</button>
+          <div class="mkt-h2h-actions" style="margin-top:14px;">
+            <button class="btn-post" id="fcb-preview" type="button" disabled>Open Preview &rarr;</button>
+            <span style="font-family:'Inter',sans-serif;font-size:0.72rem;color:rgba(255,255,255,0.3);" id="fcb-hint">Add at least one fight</span>
+          </div>
+        </div>
+
+        <!-- Next Fight to Make — a stacked "dream matchups" listicle, e.g.
+             for a "what should MMA Bridge book next" style post. -->
+        <div class="section-label" style="margin-bottom:14px">Next Fight to Make</div>
+        <div class="mkt-h2h-box">
+          <div class="mkt-h2h-sub">Stack up a few dream matchups for a "what should happen next" post. Each row gets an optional short tag (e.g. "Title eliminator").</div>
+          <div class="mkt-h2h-grid">
+            <input type="text" class="mkt-input" id="nfm-event-name" placeholder="Headline (e.g. Fights We Want To See)">
+            <select class="mkt-select" id="nfm-theme">
+              <option value="dark">Dark</option>
+              <option value="light">Light</option>
+            </select>
+          </div>
+          <div class="fc-builder-rows" id="nfm-rows"></div>
+          <button class="btn-add-row" id="nfm-add-row" type="button">+ Add Matchup</button>
+          <div class="mkt-h2h-actions" style="margin-top:14px;">
+            <button class="btn-post" id="nfm-preview" type="button" disabled>Open Preview &rarr;</button>
+            <span style="font-family:'Inter',sans-serif;font-size:0.72rem;color:rgba(255,255,255,0.3);" id="nfm-hint">Add at least one matchup</span>
+          </div>
+        </div>
+
         <div class="section-label" style="margin-bottom:14px">Content Generator</div>
 
         <!-- Platform connection status -->
@@ -1333,10 +1406,74 @@
         await loadPlatformStatus();
         loadTodaysPost();
         setupH2HGenerator();
+        setupFightCardBuilder();
+        setupNextFightBuilder();
+      }
+
+      // ── Shared fighter search — used by Dream H2H, Fight Card Builder,
+      // and Next Fight to Make. One cache, one matching/rendering
+      // implementation, so a fix (like the accent-name or exact-match-on-
+      // blur fixes already made here) only needs to happen once instead of
+      // drifting across three copy-pasted versions.
+      let _fightersCache = null;
+      async function loadFightersCache() {
+        if (!_fightersCache) {
+          try {
+            const res = await fetch('data/fighters.json?_=' + Date.now(), { cache: 'no-store' });
+            _fightersCache = await res.json();
+          } catch (e) {
+            _fightersCache = [];
+          }
+        }
+        return _fightersCache;
+      }
+      function searchFighters(q) {
+        const clean = q.trim().toLowerCase();
+        if (!clean) return [];
+        return _fightersCache.filter(f => (f.name || '').toLowerCase().includes(clean)).slice(0, 8);
+      }
+      function findExactFighter(q) {
+        const clean = q.trim().toLowerCase();
+        if (!clean) return null;
+        return _fightersCache.find(f => (f.name || '').toLowerCase() === clean) || null;
+      }
+      function renderFighterList(listEl, results, onPick) {
+        if (!results.length) { listEl.classList.remove('open'); listEl.innerHTML = ''; return; }
+        listEl.innerHTML = results.map(f => `
+          <div class="mkt-autocomplete-item" data-id="${esc(f.id || '')}">
+            ${esc(f.name)} ${f.weightClass ? `<small>${esc(f.weightClass)}</small>` : ''}
+          </div>`).join('');
+        listEl.classList.add('open');
+        listEl.querySelectorAll('.mkt-autocomplete-item').forEach((el, i) => {
+          el.addEventListener('click', () => onPick(results[i]));
+        });
+      }
+      // onSelect(fighterOrNull) fires on every change — null when the field
+      // no longer holds a confirmed pick (typing again, cleared, etc).
+      function wireFighterAutocomplete(inputEl, listEl, onSelect) {
+        function pick(f) {
+          inputEl.value = f.name;
+          onSelect(f);
+          listEl.classList.remove('open');
+        }
+        inputEl.addEventListener('input', () => {
+          onSelect(null);
+          renderFighterList(listEl, searchFighters(inputEl.value), pick);
+        });
+        // Typing the exact name and tabbing/clicking away (instead of
+        // clicking a dropdown row) is a completely normal way to use a
+        // search box — without this, downstream buttons silently stayed
+        // disabled forever with no indication why the fighter "didn't take".
+        inputEl.addEventListener('blur', () => {
+          setTimeout(() => {
+            listEl.classList.remove('open');
+            const exact = findExactFighter(inputEl.value);
+            if (exact) pick(exact);
+          }, 150);
+        });
       }
 
       // ── Dream H2H poster generator ─────────────────────────
-      let _h2hFightersCache = null;
       async function setupH2HGenerator() {
         const inputA  = $('h2h-fighter-a');
         const inputB  = $('h2h-fighter-b');
@@ -1358,35 +1495,7 @@
         inputA.dataset.wired = '1';
 
         let selectedA = null, selectedB = null;
-
-        if (!_h2hFightersCache) {
-          try {
-            const res = await fetch('data/fighters.json?_=' + Date.now(), { cache: 'no-store' });
-            _h2hFightersCache = await res.json();
-          } catch (e) {
-            _h2hFightersCache = [];
-          }
-        }
-
-        function search(q) {
-          const clean = q.trim().toLowerCase();
-          if (!clean) return [];
-          return _h2hFightersCache
-            .filter(f => (f.name || '').toLowerCase().includes(clean))
-            .slice(0, 8);
-        }
-
-        function renderList(listEl, results, onPick) {
-          if (!results.length) { listEl.classList.remove('open'); listEl.innerHTML = ''; return; }
-          listEl.innerHTML = results.map(f => `
-            <div class="mkt-autocomplete-item" data-id="${esc(f.id || '')}">
-              ${esc(f.name)} ${f.weightClass ? `<small>${esc(f.weightClass)}</small>` : ''}
-            </div>`).join('');
-          listEl.classList.add('open');
-          listEl.querySelectorAll('.mkt-autocomplete-item').forEach((el, i) => {
-            el.addEventListener('click', () => onPick(results[i]));
-          });
-        }
+        await loadFightersCache();
 
         function updateGenerateState() {
           const ready = !!(selectedA && selectedB);
@@ -1394,9 +1503,9 @@
           genIgBtn.disabled = !ready;
           if (ready) {
             hintEl.textContent = `Ready: ${selectedA.name} vs ${selectedB.name}`;
-          } else if (!selectedA && inputA.value.trim() && !search(inputA.value).length) {
+          } else if (!selectedA && inputA.value.trim() && !searchFighters(inputA.value).length) {
             hintEl.textContent = `No fighter matches "${inputA.value.trim()}", check the spelling`;
-          } else if (!selectedB && inputB.value.trim() && !search(inputB.value).length) {
+          } else if (!selectedB && inputB.value.trim() && !searchFighters(inputB.value).length) {
             hintEl.textContent = `No fighter matches "${inputB.value.trim()}", check the spelling`;
           } else if ((inputA.value.trim() && !selectedA) || (inputB.value.trim() && !selectedB)) {
             hintEl.textContent = 'Pick a fighter from the dropdown list';
@@ -1405,40 +1514,16 @@
           }
         }
 
-        function findExact(q) {
-          const clean = q.trim().toLowerCase();
-          if (!clean) return null;
-          return _h2hFightersCache.find(f => (f.name || '').toLowerCase() === clean) || null;
-        }
-
-        function wireInput(inputEl, listEl, setSelected) {
-          function pick(f) {
-            inputEl.value = f.name;
-            setSelected(f);
-            listEl.classList.remove('open');
-            if (f.weightClass && !weightEl.value) weightEl.value = f.weightClass;
-            updateGenerateState();
-          }
-          inputEl.addEventListener('input', () => {
-            setSelected(null);
-            updateGenerateState();
-            renderList(listEl, search(inputEl.value), pick);
-          });
-          // Typing the exact name and tabbing/clicking away (instead of
-          // clicking a dropdown row) is a completely normal way to use a
-          // search box — without this, the button silently stayed disabled
-          // forever with no indication why the fighter "didn't take".
-          inputEl.addEventListener('blur', () => {
-            setTimeout(() => {
-              listEl.classList.remove('open');
-              const exact = findExact(inputEl.value);
-              if (exact) pick(exact);
-            }, 150);
-          });
-        }
-
-        wireInput(inputA, listA, f => { selectedA = f; });
-        wireInput(inputB, listB, f => { selectedB = f; });
+        wireFighterAutocomplete(inputA, listA, f => {
+          selectedA = f;
+          if (f && f.weightClass && !weightEl.value) weightEl.value = f.weightClass;
+          updateGenerateState();
+        });
+        wireFighterAutocomplete(inputB, listB, f => {
+          selectedB = f;
+          if (f && f.weightClass && !weightEl.value) weightEl.value = f.weightClass;
+          updateGenerateState();
+        });
 
         genBtn.addEventListener('click', () => {
           if (!selectedA || !selectedB) return;
@@ -1536,6 +1621,158 @@
             setTimeout(poll, 5000);
           };
           setTimeout(poll, 8000); // the workflow itself takes a few seconds just to start
+        });
+      }
+
+      // Shared by both builders below — one bout row (two fighter searches
+      // + whatever extra fields the caller wants), returning the row plus
+      // its live selection state so the preview button can read it back.
+      function createBoutRow(rowsEl, extraFieldsHTML, onChange) {
+        const el = document.createElement('div');
+        el.className = 'fc-builder-row';
+        el.innerHTML = `
+          <button class="fc-row-remove" type="button">Remove</button>
+          <div class="mkt-h2h-grid">
+            <div class="mkt-autocomplete">
+              <input type="text" class="mkt-input" placeholder="Fighter A" autocomplete="off" data-role="a">
+              <div class="mkt-autocomplete-list"></div>
+            </div>
+            <div class="mkt-autocomplete">
+              <input type="text" class="mkt-input" placeholder="Fighter B" autocomplete="off" data-role="b">
+              <div class="mkt-autocomplete-list"></div>
+            </div>
+          </div>
+          <div class="mkt-h2h-grid">${extraFieldsHTML}</div>
+        `;
+        rowsEl.appendChild(el);
+
+        const row = { el, a: null, b: null };
+        const inputA = el.querySelector('[data-role="a"]');
+        const inputB = el.querySelector('[data-role="b"]');
+        const lists  = el.querySelectorAll('.mkt-autocomplete-list');
+        const weightEl = el.querySelector('[data-role="weight"]');
+
+        wireFighterAutocomplete(inputA, lists[0], f => {
+          row.a = f;
+          if (f && f.weightClass && weightEl && !weightEl.value) weightEl.value = f.weightClass;
+          onChange();
+        });
+        wireFighterAutocomplete(inputB, lists[1], f => {
+          row.b = f;
+          if (f && f.weightClass && weightEl && !weightEl.value) weightEl.value = f.weightClass;
+          onChange();
+        });
+
+        el.querySelector('.fc-row-remove').addEventListener('click', () => {
+          el.remove();
+          row.removed = true;
+          onChange();
+        });
+
+        return row;
+      }
+
+      // ── Fight Card Builder ──────────────────────────────────
+      async function setupFightCardBuilder() {
+        const rowsEl      = $('fcb-rows');
+        const addBtn      = $('fcb-add-row');
+        const previewBtn  = $('fcb-preview');
+        const hintEl      = $('fcb-hint');
+        const eventNameEl = $('fcb-event-name');
+        const eventSubEl  = $('fcb-event-sub');
+        const themeEl     = $('fcb-theme');
+        if (!rowsEl || rowsEl.dataset.wired) return;
+        rowsEl.dataset.wired = '1';
+        await loadFightersCache();
+
+        let rows = [];
+
+        function updateState() {
+          rows = rows.filter(r => !r.removed);
+          const readyCount = rows.filter(r => r.a && r.b).length;
+          previewBtn.disabled = !readyCount;
+          hintEl.textContent = readyCount ? `${readyCount} fight${readyCount === 1 ? '' : 's'} ready` : 'Add at least one fight';
+        }
+
+        function addRow() {
+          const row = createBoutRow(rowsEl, `
+            <input type="text" class="mkt-input" placeholder="Weight class (optional)" data-role="weight">
+            <select class="mkt-select" data-role="section">
+              <option value="Main Card">Main Card</option>
+              <option value="Co-Main">Co-Main</option>
+              <option value="Prelims">Prelims</option>
+              <option value="Early Prelims">Early Prelims</option>
+            </select>
+          `, updateState);
+          rows.push(row);
+          updateState();
+        }
+
+        addBtn.addEventListener('click', addRow);
+        addRow();
+
+        previewBtn.addEventListener('click', () => {
+          const bouts = rows.filter(r => r.a && r.b).map(r => ({
+            a: r.a.name, b: r.b.name,
+            imgA: r.a.img || '', imgB: r.b.img || '',
+            weight: r.el.querySelector('[data-role="weight"]').value.trim(),
+            section: r.el.querySelector('[data-role="section"]').value,
+          }));
+          if (!bouts.length) return;
+          const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(bouts))));
+          const params = new URLSearchParams({ mode: 'card', bouts: encoded });
+          if (eventNameEl.value.trim()) params.set('eventName', eventNameEl.value.trim());
+          if (eventSubEl.value.trim())  params.set('eventSub', eventSubEl.value.trim());
+          if (themeEl.value === 'light') params.set('theme', 'light');
+          window.open(`fightcard.html?${params.toString()}`, '_blank');
+        });
+      }
+
+      // ── Next Fight to Make ──────────────────────────────────
+      async function setupNextFightBuilder() {
+        const rowsEl      = $('nfm-rows');
+        const addBtn      = $('nfm-add-row');
+        const previewBtn  = $('nfm-preview');
+        const hintEl      = $('nfm-hint');
+        const eventNameEl = $('nfm-event-name');
+        const themeEl     = $('nfm-theme');
+        if (!rowsEl || rowsEl.dataset.wired) return;
+        rowsEl.dataset.wired = '1';
+        await loadFightersCache();
+
+        let rows = [];
+
+        function updateState() {
+          rows = rows.filter(r => !r.removed);
+          const readyCount = rows.filter(r => r.a && r.b).length;
+          previewBtn.disabled = !readyCount;
+          hintEl.textContent = readyCount ? `${readyCount} matchup${readyCount === 1 ? '' : 's'} ready` : 'Add at least one matchup';
+        }
+
+        function addRow() {
+          const row = createBoutRow(rowsEl, `
+            <input type="text" class="mkt-input" placeholder="Weight class (optional)" data-role="weight">
+            <input type="text" class="mkt-input" placeholder="Tag (optional, e.g. Title Eliminator)" data-role="tag">
+          `, updateState);
+          rows.push(row);
+          updateState();
+        }
+
+        addBtn.addEventListener('click', addRow);
+        addRow();
+
+        previewBtn.addEventListener('click', () => {
+          const bouts = rows.filter(r => r.a && r.b).map(r => ({
+            a: r.a.name, b: r.b.name,
+            weight: r.el.querySelector('[data-role="weight"]').value.trim(),
+            tag: r.el.querySelector('[data-role="tag"]').value.trim(),
+          }));
+          if (!bouts.length) return;
+          const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(bouts))));
+          const params = new URLSearchParams({ mode: 'next', bouts: encoded });
+          if (eventNameEl.value.trim()) params.set('eventName', eventNameEl.value.trim());
+          if (themeEl.value === 'light') params.set('theme', 'light');
+          window.open(`fightcard.html?${params.toString()}`, '_blank');
         });
       }
 
