@@ -1090,7 +1090,7 @@
              from fighters.json directly. -->
         <div class="section-label" style="margin-bottom:14px">Dream H2H Poster</div>
         <div class="mkt-h2h-box">
-          <div class="mkt-h2h-sub">Search any two fighters, even ones not booked against each other, and open a shareable poster. Opens in a new tab in Poster view — use the light/dark toggle there, then screenshot it to post. Instagram's API needs a real hosted image URL, so posting from here is still a manual screenshot + upload — Copy Caption below gets the caption ready to paste.</div>
+          <div class="mkt-h2h-sub">Search any two fighters, even ones not booked against each other. "Open Poster" previews it in a new tab. "Generate for Instagram" renders it for real (takes about a minute) and drops it here with a caption editor and a working Post to Instagram button, same as the daily auto-posts.</div>
           <div class="mkt-h2h-grid">
             <div class="mkt-autocomplete">
               <input type="text" class="mkt-input" id="h2h-fighter-a" placeholder="Fighter A (e.g. Ilia Topuria)" autocomplete="off">
@@ -1112,15 +1112,24 @@
               <option value="classic">Classic Poster (fight-card style)</option>
             </select>
           </div>
+          <div class="mkt-h2h-grid" style="grid-template-columns:auto 1fr">
+            <select class="mkt-select" id="h2h-theme">
+              <option value="dark">Dark</option>
+              <option value="light">Light</option>
+            </select>
+          </div>
           <div class="mkt-field" style="margin-bottom:12px">
             <label for="h2h-caption">Caption (for Instagram/Twitter)</label>
             <textarea class="mkt-input" id="h2h-caption" rows="3" style="resize:vertical;font-family:'Inter',sans-serif;" placeholder="e.g. This one's a bloodbath on paper. Who you got?"></textarea>
           </div>
           <div class="mkt-h2h-actions">
             <button class="btn-post" id="h2h-generate" type="button" disabled>Open Poster &rarr;</button>
+            <button class="btn-post" id="h2h-generate-ig" type="button" disabled>Generate for Instagram</button>
             <button class="btn-copy" id="h2h-copy-caption" type="button">Copy Caption</button>
             <span style="font-family:'Inter',sans-serif;font-size:0.72rem;color:rgba(255,255,255,0.3);" id="h2h-hint">Pick both fighters to enable</span>
           </div>
+          <div id="h2h-generate-status" style="margin-top:14px;"></div>
+          <div id="h2h-generate-result"></div>
         </div>
 
         <div class="section-label" style="margin-bottom:14px">Content Generator</div>
@@ -1337,10 +1346,14 @@
         const eventEl    = $('h2h-event');
         const locationEl = $('h2h-location');
         const styleEl    = $('h2h-style');
+        const themeEl    = $('h2h-theme');
         const captionEl  = $('h2h-caption');
         const genBtn     = $('h2h-generate');
+        const genIgBtn   = $('h2h-generate-ig');
         const copyBtn    = $('h2h-copy-caption');
         const hintEl     = $('h2h-hint');
+        const statusEl   = $('h2h-generate-status');
+        const resultEl   = $('h2h-generate-result');
         if (!inputA || inputA.dataset.wired) return;
         inputA.dataset.wired = '1';
 
@@ -1378,6 +1391,7 @@
         function updateGenerateState() {
           const ready = !!(selectedA && selectedB);
           genBtn.disabled = !ready;
+          genIgBtn.disabled = !ready;
           if (ready) {
             hintEl.textContent = `Ready: ${selectedA.name} vs ${selectedB.name}`;
           } else if (!selectedA && inputA.value.trim() && !search(inputA.value).length) {
@@ -1433,6 +1447,7 @@
             b: selectedB.name,
           });
           params.set(styleEl.value === 'classic' ? 'classic' : 'poster', '1');
+          if (themeEl.value === 'light') params.set('theme', 'light');
           if (weightEl.value.trim())   params.set('weight', weightEl.value.trim());
           if (eventEl.value.trim())    params.set('eventName', eventEl.value.trim());
           if (locationEl.value.trim()) params.set('location', locationEl.value.trim());
@@ -1450,35 +1465,89 @@
             setTimeout(() => { copyBtn.textContent = 'Copy Caption'; copyBtn.classList.remove('copied'); }, 2000);
           });
         });
+
+        // "Generate for Instagram" — triggers the GitHub Action that actually
+        // renders the poster server-side (this admin panel has no headless
+        // browser of its own), then polls social/manual-queue.json for the
+        // specific request_id the backend handed back, since the render
+        // takes roughly a minute and there's no other way to know it's done.
+        genIgBtn.addEventListener('click', async () => {
+          if (!selectedA || !selectedB) return;
+          genIgBtn.disabled = true;
+          genBtn.disabled = true;
+          resultEl.innerHTML = '';
+          statusEl.innerHTML = `<div style="font-family:'Inter',sans-serif;font-size:0.8rem;color:rgba(255,255,255,0.5);">Queuing your poster...</div>`;
+
+          let requestId;
+          try {
+            const res = await fetch(`${API_BASE}/api/admin/marketing/generate-h2h-poster`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                token: token(),
+                fighterA: selectedA.name,
+                fighterB: selectedB.name,
+                weight: weightEl.value.trim(),
+                eventName: eventEl.value.trim(),
+                location: locationEl.value.trim(),
+                style: styleEl.value,
+                theme: themeEl.value,
+                caption: captionEl.value.trim(),
+              }),
+            });
+            const data = await res.json();
+            if (!data.ok) throw new Error(data.error || 'Could not start generation');
+            requestId = data.request_id;
+          } catch (e) {
+            statusEl.innerHTML = `<div style="font-family:'Inter',sans-serif;font-size:0.8rem;color:#e05555;">${esc(e.message)}</div>`;
+            genIgBtn.disabled = false;
+            genBtn.disabled = false;
+            return;
+          }
+
+          statusEl.innerHTML = `<div style="font-family:'Inter',sans-serif;font-size:0.8rem;color:rgba(255,255,255,0.5);">Generating your poster... this usually takes 60-90 seconds. You can leave this tab open — no need to refresh.</div>`;
+
+          // Poll for up to ~3 minutes. The action is genuinely async (real
+          // Puppeteer render + a git commit/push), so there's no faster,
+          // reliable way to know it landed than checking for its id to show
+          // up in the queue file.
+          const deadline = Date.now() + 180000;
+          const poll = async () => {
+            if (Date.now() > deadline) {
+              statusEl.innerHTML = `<div style="font-family:'Inter',sans-serif;font-size:0.8rem;color:#e05555;">Still not ready after 3 minutes — check the GitHub Actions tab for errors, or try again.</div>`;
+              genIgBtn.disabled = false;
+              genBtn.disabled = false;
+              return;
+            }
+            try {
+              const res = await fetch('./social/manual-queue.json?_=' + Date.now(), { cache: 'no-store' });
+              if (res.ok) {
+                const queue = await res.json();
+                const found = (queue.posts || []).find(p => p.id === requestId);
+                if (found) {
+                  statusEl.innerHTML = `<div style="font-family:'Inter',sans-serif;font-size:0.8rem;color:#28be64;">Ready.</div>`;
+                  renderPostCard(found, 'Dream H2H', resultEl);
+                  genIgBtn.disabled = false;
+                  genBtn.disabled = false;
+                  return;
+                }
+              }
+            } catch (e) {}
+            setTimeout(poll, 5000);
+          };
+          setTimeout(poll, 8000); // the workflow itself takes a few seconds just to start
+        });
       }
 
-      // ── Today's auto-generated social posts (up to 3) ─────
-      async function loadTodaysPost() {
-        const labelEl     = $('today-posts-label');
-        const containerEl = $('today-posts-container');
-        const typeLabels  = { news: '📰 News', event_countdown: '🥊 Event Countdown', event_recap: '📋 Event Recap', h2h: '⚔️ H2H Matchup' };
+      const typeLabels = { news: '📰 News', event_countdown: '🥊 Event Countdown', event_recap: '📋 Event Recap', h2h: '⚔️ H2H Matchup' };
 
-        let data;
-        try {
-          const res = await fetch('./social/latest.json?_=' + Date.now(), { cache: 'no-store' });
-          if (!res.ok) throw new Error('not found');
-          data = await res.json();
-        } catch (e) {
-          containerEl.innerHTML = `<div style="font-family:'Inter',sans-serif;font-size:0.85rem;color:rgba(255,255,255,0.35);">No posts generated yet today — the daily pipeline runs once a day; check back after it's run, or trigger it manually from GitHub Actions.</div>`;
-          return;
-        }
-
-        const posts = data.posts || [];
-        labelEl.textContent = `Today's Auto-Generated Posts (${posts.length})`;
-        if (!posts.length) {
-          containerEl.innerHTML = `<div style="font-family:'Inter',sans-serif;font-size:0.85rem;color:rgba(255,255,255,0.35);">Today's pipeline ran but produced no posts.</div>`;
-          return;
-        }
-
-        const igReady = !!_platformStatus.instagram;
-        containerEl.innerHTML = '';
-
-        posts.forEach((post, idx) => {
+      // Builds one review card (image + editable caption + Copy/Change/
+      // Download/Post to Instagram) and appends it to containerEl. Shared
+      // by the daily "Today's Auto-Generated Posts" list and the Dream H2H
+      // generator's inline "your poster is ready" result — same card,
+      // same behavior, wherever a generated post shows up.
+      function renderPostCard(post, label, containerEl) {
+          const igReady = !!_platformStatus.instagram;
           const imgUrl = './social/' + post.image;
           // Tracks whether the image was swapped for a locally-uploaded one.
           // Instagram's API needs a real public URL — a locally-picked file
@@ -1491,7 +1560,7 @@
           card.className = 'mkt-result-card';
           card.innerHTML = `
             <div class="mkt-result-header">
-              <span class="mkt-result-platform">${esc(typeLabels[post.type] || post.type)} · Option ${idx + 1}</span>
+              <span class="mkt-result-platform">${esc(typeLabels[post.type] || post.type)} · ${esc(label)}</span>
               <div class="mkt-result-actions">
                 <button class="btn-copy" data-act="copy">Copy Caption</button>
                 <button class="btn-copy" data-act="change-image">Change Image</button>
@@ -1502,7 +1571,7 @@
               </div>
             </div>
             <div style="padding:16px;">
-              <img data-role="preview" src="${esc(imgUrl)}" alt="Poster option ${idx + 1}" style="width:100%;max-width:340px;border-radius:8px;display:block;margin-bottom:14px;border:1px solid rgba(255,255,255,0.08);" onerror="this.style.display='none'">
+              <img data-role="preview" src="${esc(imgUrl)}" alt="${esc(label)}" style="width:100%;max-width:340px;border-radius:8px;display:block;margin-bottom:14px;border:1px solid rgba(255,255,255,0.08);" onerror="this.style.display='none'">
               <input type="file" accept="image/*" data-role="file-input" style="display:none">
             </div>
             <div class="mkt-post-status"></div>
@@ -1610,7 +1679,39 @@
               }
             });
           }
-        });
+      }
+
+      // ── Today's auto-generated social posts (up to 3) plus any
+      // admin-generated Dream H2H posters queued via the generator below.
+      // The daily pipeline fully overwrites latest.json every day, so
+      // on-demand posters live in a separate manual-queue.json that
+      // survives that — merged into the same list here.
+      async function loadTodaysPost() {
+        const labelEl     = $('today-posts-label');
+        const containerEl = $('today-posts-container');
+
+        let dailyPosts = [];
+        try {
+          const res = await fetch('./social/latest.json?_=' + Date.now(), { cache: 'no-store' });
+          if (res.ok) dailyPosts = (await res.json()).posts || [];
+        } catch (e) {}
+
+        let queuedPosts = [];
+        try {
+          const res = await fetch('./social/manual-queue.json?_=' + Date.now(), { cache: 'no-store' });
+          if (res.ok) queuedPosts = (await res.json()).posts || [];
+        } catch (e) {}
+
+        const posts = [...dailyPosts, ...queuedPosts];
+        labelEl.textContent = `Today's Auto-Generated Posts (${posts.length})`;
+        if (!posts.length) {
+          containerEl.innerHTML = `<div style="font-family:'Inter',sans-serif;font-size:0.85rem;color:rgba(255,255,255,0.35);">No posts generated yet today — the daily pipeline runs once a day; check back after it's run, or trigger it manually from GitHub Actions.</div>`;
+          return;
+        }
+
+        containerEl.innerHTML = '';
+        dailyPosts.forEach((post, idx) => renderPostCard(post, `Option ${idx + 1}`, containerEl));
+        queuedPosts.forEach(post => renderPostCard(post, 'Dream H2H', containerEl));
       }
 
       function esc(s) {
