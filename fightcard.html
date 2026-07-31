@@ -13,16 +13,50 @@
       margin:0; min-height:100vh;
       background:#050506;
       font-family:'Inter',sans-serif;
-      display:flex; align-items:center; justify-content:center;
-      padding:60px 16px;
+      display:flex; flex-direction:column; align-items:center;
+      padding:80px 16px 40px;
     }
     body.fc-light { background:#f6f3ec; }
 
+    /* ── top controls (outside the card, not part of the screenshot) ── */
+    .fc-controls {
+      position:fixed; top:16px; left:0; right:0; z-index:20;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 16px;
+    }
+    .fc-back {
+      display:inline-flex; align-items:center; gap:6px;
+      font-family:'Montserrat',sans-serif; font-weight:700; font-size:.68rem;
+      letter-spacing:.08em; text-transform:uppercase;
+      color:rgba(255,255,255,.5); text-decoration:none;
+      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14);
+      border-radius:20px; padding:8px 16px;
+    }
+    body.fc-light .fc-back { color:rgba(0,0,0,.55); background:rgba(0,0,0,.05); border-color:rgba(0,0,0,.14); }
+    .fc-right-controls { display:flex; gap:8px; }
+    .fc-btn {
+      font-family:'Montserrat',sans-serif; font-weight:700; font-size:.66rem;
+      letter-spacing:.06em; text-transform:uppercase;
+      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16);
+      color:#fff; border-radius:20px; padding:8px 16px; cursor:pointer;
+    }
+    .fc-btn:hover { background:rgba(255,255,255,.12); }
+    .fc-btn.active { background:#d97b3f; border-color:#d97b3f; color:#0a0a0a; }
+    body.fc-light .fc-btn { background:rgba(0,0,0,.05); border-color:rgba(0,0,0,.14); color:#161514; }
+    body.fc-light .fc-btn:hover { background:rgba(0,0,0,.1); }
+    body.fc-light .fc-btn.active { background:#d97b3f; border-color:#d97b3f; color:#0a0a0a; }
+    .fc-hint-pill {
+      text-align:center; margin-top:70px; margin-bottom:-40px;
+      font-family:'Inter',sans-serif; font-size:.72rem; color:rgba(255,255,255,.35);
+    }
+    body.fc-light .fc-hint-pill { color:rgba(0,0,0,.4); }
+
     /* ── shared card shell ── */
     .fc-card {
-      position:relative; width:min(94vw, 640px);
+      position:relative; width:min(94vw, 720px);
       background:#0b0b0c; border-radius:8px; overflow:hidden;
       box-shadow:0 30px 90px rgba(0,0,0,.6);
+      margin-top:24px;
     }
     body.fc-light .fc-card { background:#faf7f1; }
 
@@ -50,73 +84,81 @@
     }
     body.fc-light .fc-event-sub { color:rgba(0,0,0,.45); }
 
-    /* ── CARD MODE — grid of headshot-pair rows, grouped by section ── */
+    /* ── CARD MODE — dense 2-column grid of bout cells ── */
     .fc-section-bar {
       display:flex; align-items:center; gap:10px;
-      padding:9px 24px; margin-top:4px;
+      padding:9px 20px; margin-top:4px;
       background:rgba(217,123,63,.12);
       font-family:'Montserrat',sans-serif; font-weight:800; font-size:.62rem;
       letter-spacing:.16em; text-transform:uppercase; color:#d97b3f;
     }
     .fc-section-bar::after { content:''; flex:1; height:1px; background:rgba(217,123,63,.3); }
-    .fc-rows { padding:8px 20px 22px; display:flex; flex-direction:column; gap:2px; }
-    .fc-bout {
-      display:grid; grid-template-columns:1fr auto 1fr;
-      align-items:center; gap:10px;
-      padding:12px 6px; border-bottom:1px solid rgba(255,255,255,.06);
+    .fc-grid {
+      padding:14px 16px 20px; display:grid;
+      grid-template-columns:1fr 1fr; gap:10px;
     }
-    body.fc-light .fc-bout { border-bottom-color:rgba(0,0,0,.07); }
-    .fc-bout:last-child { border-bottom:none; }
-    .fc-fighter { display:flex; align-items:center; gap:10px; min-width:0; }
-    .fc-fighter.b { flex-direction:row-reverse; text-align:right; }
+    @media(max-width:520px) { .fc-grid { grid-template-columns:1fr; } }
+    .fc-cell {
+      border:1px solid rgba(255,255,255,.09); border-radius:6px;
+      padding:10px; display:flex; flex-direction:column; gap:6px;
+      background:rgba(255,255,255,.015);
+    }
+    body.fc-light .fc-cell { border-color:rgba(0,0,0,.09); background:rgba(0,0,0,.015); }
+    .fc-cell-photos { display:flex; align-items:center; justify-content:center; gap:8px; }
     .fc-thumb {
-      width:52px; height:52px; border-radius:6px; object-fit:cover;
+      width:64px; height:64px; border-radius:4px; object-fit:cover;
       flex-shrink:0; background:#1a1a1c;
       border:1px solid rgba(255,255,255,.1);
     }
-    .fc-fighter-info { min-width:0; }
-    .fc-fighter-name {
-      font-family:'Montserrat',sans-serif; font-weight:800; font-size:.78rem;
-      color:#fff; text-transform:uppercase; letter-spacing:.01em;
-      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-    }
-    body.fc-light .fc-fighter-name { color:#161514; }
-    .fc-fighter-rank {
-      font-family:'Inter',sans-serif; font-size:.62rem; color:rgba(255,255,255,.35);
-    }
-    body.fc-light .fc-fighter-rank { color:rgba(0,0,0,.4); }
-    .fc-bout-mid { text-align:center; }
-    .fc-bout-vs {
+    .fc-thumb.empty { display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,.15); font-size:1.4rem; }
+    .fc-cell-vs {
       font-family:'Barlow Condensed',sans-serif; font-weight:900; font-style:italic;
-      font-size:.85rem; color:rgba(255,255,255,.3);
+      font-size:.72rem; color:rgba(255,255,255,.28); flex-shrink:0;
     }
-    .fc-bout-weight {
-      font-family:'Montserrat',sans-serif; font-weight:700; font-size:.5rem;
-      letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.28);
-      white-space:nowrap;
+    .fc-cell-names {
+      display:flex; align-items:flex-start; justify-content:space-between; gap:6px;
     }
+    .fc-cell-name {
+      font-family:'Montserrat',sans-serif; font-weight:800; font-size:.62rem;
+      color:#fff; text-transform:uppercase; letter-spacing:.01em;
+      line-height:1.15; flex:1;
+    }
+    .fc-cell-name.b { text-align:right; }
+    body.fc-light .fc-cell-name { color:#161514; }
+    .fc-cell-weight {
+      text-align:center;
+      font-family:'Montserrat',sans-serif; font-weight:700; font-size:.48rem;
+      letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.32);
+    }
+    body.fc-light .fc-cell-weight { color:rgba(0,0,0,.4); }
 
-    /* ── NEXT-FIGHT MODE — big stacked matchup list, poster-style type ── */
+    /* ── NEXT-FIGHT MODE — stacked matchup list, now with headshots ── */
     .fc-next-rows { display:flex; flex-direction:column; }
     .fc-next-row {
-      position:relative; padding:20px 24px;
+      position:relative; padding:16px 22px;
       border-bottom:1px solid rgba(255,255,255,.07);
-      overflow:hidden;
+      display:flex; align-items:center; gap:14px;
     }
     body.fc-light .fc-next-row { border-bottom-color:rgba(0,0,0,.08); }
     .fc-next-row:last-child { border-bottom:none; }
     .fc-next-row:nth-child(odd) { background:rgba(217,123,63,.05); }
     .fc-next-row:nth-child(even) { background:rgba(96,165,250,.05); }
+    .fc-next-photo {
+      width:56px; height:56px; border-radius:6px; object-fit:cover; flex-shrink:0;
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .fc-next-photo.b-side { order:3; }
+    .fc-next-body { flex:1; min-width:0; }
     .fc-next-tag {
-      display:inline-block; margin-bottom:6px;
+      display:inline-block; margin-bottom:4px;
       font-family:'Montserrat',sans-serif; font-weight:800; font-size:.54rem;
       letter-spacing:.16em; text-transform:uppercase; color:#d97b3f;
     }
     .fc-next-matchup {
       font-family:'Barlow Condensed',sans-serif; font-weight:900; font-style:italic;
       text-transform:uppercase; color:#fff; line-height:1;
-      font-size:clamp(1.3rem,4.6vw,1.9rem);
-      display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;
+      font-size:clamp(1.1rem,4vw,1.6rem);
+      display:flex; align-items:baseline; gap:8px; flex-wrap:wrap;
     }
     body.fc-light .fc-next-matchup { color:#161514; }
     .fc-next-matchup .vs {
@@ -142,44 +184,109 @@
       padding:60px 24px; text-align:center;
       font-family:'Inter',sans-serif; color:rgba(255,255,255,.3);
     }
+
+    /* ── EDIT PANEL — lives below the card, never part of the screenshot ── */
+    .fc-edit-panel {
+      display:none; width:min(94vw, 720px); margin-top:20px;
+      background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.1);
+      border-radius:8px; padding:18px;
+      font-family:'Inter',sans-serif;
+    }
+    body.fc-light .fc-edit-panel { background:rgba(0,0,0,.02); border-color:rgba(0,0,0,.1); }
+    .fc-edit-panel.open { display:block; }
+    .fc-edit-title {
+      font-family:'Montserrat',sans-serif; font-weight:800; font-size:.7rem;
+      letter-spacing:.12em; text-transform:uppercase; color:#d97b3f;
+      margin-bottom:12px;
+    }
+    .fc-edit-list { display:flex; flex-direction:column; gap:8px; margin-bottom:16px; }
+    .fc-edit-row {
+      display:flex; align-items:center; gap:10px;
+      background:rgba(255,255,255,.04); border-radius:6px; padding:8px 12px;
+      font-size:.78rem; color:rgba(255,255,255,.85);
+    }
+    body.fc-light .fc-edit-row { background:rgba(0,0,0,.04); color:rgba(0,0,0,.8); }
+    .fc-edit-row-text { flex:1; }
+    .fc-edit-remove {
+      background:transparent; border:none; color:#e05555; cursor:pointer;
+      font-size:.72rem; font-weight:600; padding:4px 8px;
+    }
+    .fc-add-row {
+      display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:8px;
+      position:relative;
+    }
+    @media(max-width:520px) { .fc-add-row { grid-template-columns:1fr; } }
+    .fc-add-row-extra { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:8px; }
+    @media(max-width:520px) { .fc-add-row-extra { grid-template-columns:1fr; } }
+    .fc-input {
+      background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.14);
+      border-radius:6px; padding:9px 12px; color:#fff; font-size:.82rem;
+      font-family:'Inter',sans-serif; width:100%;
+    }
+    body.fc-light .fc-input { background:rgba(0,0,0,.03); border-color:rgba(0,0,0,.14); color:#161514; }
+    .fc-autocomplete { position:relative; }
+    .fc-autocomplete-list {
+      display:none; position:absolute; top:calc(100% + 4px); left:0; right:0;
+      max-height:200px; overflow-y:auto; background:#17171a;
+      border:1px solid rgba(255,255,255,.14); border-radius:8px; z-index:30;
+      box-shadow:0 12px 30px rgba(0,0,0,.5);
+    }
+    .fc-autocomplete-list.open { display:block; }
+    .fc-autocomplete-item {
+      padding:9px 12px; font-size:.8rem; color:rgba(255,255,255,.85); cursor:pointer;
+    }
+    .fc-autocomplete-item:hover { background:rgba(217,123,63,.18); }
+    .fc-add-btn {
+      background:#d97b3f; border:none; color:#0a0a0a; font-weight:700;
+      font-size:.76rem; padding:9px 20px; border-radius:20px; cursor:pointer;
+      font-family:'Montserrat',sans-serif; letter-spacing:.04em; text-transform:uppercase;
+    }
+    .fc-add-btn:disabled { opacity:.4; cursor:not-allowed; }
   </style>
 </head>
 <body>
+  <div class="fc-controls">
+    <a class="fc-back" id="fcBack" href="admin.html">&larr; Back</a>
+    <div class="fc-right-controls">
+      <button class="fc-btn" id="fcThemeBtn" type="button">🌙 Dark</button>
+      <button class="fc-btn" id="fcEditBtn" type="button">✎ Edit Fights</button>
+    </div>
+  </div>
+
   <div id="fcRoot" class="fc-card"><div class="fc-empty">Loading...</div></div>
+  <div class="fc-edit-panel" id="fcEditPanel"></div>
 
   <script>
   (function(){
     const p = new URLSearchParams(location.search);
-    const mode      = p.get('mode') === 'next' ? 'next' : 'card';
-    const theme     = p.get('theme') === 'light' ? 'light' : 'dark';
-    const eventName = p.get('eventName') || (mode === 'next' ? 'Fights We Want To See' : 'Fight Card');
-    const eventSub  = p.get('eventSub') || '';
-    if (theme === 'light') document.body.classList.add('fc-light');
+    let mode      = p.get('mode') === 'next' ? 'next' : 'card';
+    let theme     = p.get('theme') === 'light' ? 'light' : 'dark';
+    let eventName = p.get('eventName') || (mode === 'next' ? 'Fights We Want To See' : 'Fight Card');
+    let eventSub  = p.get('eventSub') || '';
 
     function esc(s){ const d=document.createElement('div'); d.textContent=s||''; return d.innerHTML; }
 
-    // Bouts travel as base64-encoded JSON so an arbitrary number of fights
-    // doesn't blow past URL length limits the way N separate query params
-    // per fighter would. Each bout: { a, b, imgA, imgB, weight, section, tag }
     let bouts = [];
     try {
       const raw = p.get('bouts');
       if (raw) bouts = JSON.parse(decodeURIComponent(escape(atob(raw))));
     } catch (e) { bouts = []; }
+    bouts.forEach((b, i) => { b._id = i + 1; });
+    let boutSeq = bouts.length;
 
-    const root = document.getElementById('fcRoot');
-    if (!Array.isArray(bouts) || !bouts.length) {
-      root.innerHTML = '<div class="fc-empty">No fights added yet.</div>';
-      return;
+    const root       = document.getElementById('fcRoot');
+    const editPanel  = document.getElementById('fcEditPanel');
+    const themeBtn   = document.getElementById('fcThemeBtn');
+    const editBtn    = document.getElementById('fcEditBtn');
+    let editMode = false;
+
+    function applyTheme() {
+      document.body.classList.toggle('fc-light', theme === 'light');
+      themeBtn.textContent = theme === 'light' ? '☀️ Light' : '🌙 Dark';
     }
 
-    document.title = `${eventName} | MMA Bridge`;
-
     function renderCardMode() {
-      // Group by section (Main Card / Prelims / Early Prelims / bare), in
-      // the order sections first appear rather than a fixed hardcoded
-      // order, so a builder that only uses one section doesn't show empty
-      // headers for the others.
+      if (!bouts.length) { root.innerHTML = '<div class="fc-empty">No fights added yet — click Edit Fights to add some.</div>'; return; }
       const sections = [];
       const bySection = new Map();
       bouts.forEach(b => {
@@ -190,25 +297,19 @@
 
       const sectionsHTML = sections.map(sec => `
         <div class="fc-section-bar">${esc(sec)}</div>
-        <div class="fc-rows">
+        <div class="fc-grid">
           ${bySection.get(sec).map(b => `
-            <div class="fc-bout">
-              <div class="fc-fighter a">
-                ${b.imgA ? `<img class="fc-thumb" src="${esc(b.imgA)}" onerror="this.style.display='none'">` : ''}
-                <div class="fc-fighter-info">
-                  <div class="fc-fighter-name">${esc(b.a)}</div>
-                </div>
+            <div class="fc-cell">
+              <div class="fc-cell-photos">
+                ${b.imgA ? `<img class="fc-thumb" src="${esc(b.imgA)}" onerror="this.outerHTML='<div class=&quot;fc-thumb empty&quot;>?</div>'">` : '<div class="fc-thumb empty">?</div>'}
+                <div class="fc-cell-vs">VS</div>
+                ${b.imgB ? `<img class="fc-thumb" src="${esc(b.imgB)}" onerror="this.outerHTML='<div class=&quot;fc-thumb empty&quot;>?</div>'">` : '<div class="fc-thumb empty">?</div>'}
               </div>
-              <div class="fc-bout-mid">
-                <div class="fc-bout-vs">VS</div>
-                ${b.weight ? `<div class="fc-bout-weight">${esc(b.weight)}</div>` : ''}
+              <div class="fc-cell-names">
+                <div class="fc-cell-name">${esc(b.a)}</div>
+                <div class="fc-cell-name b">${esc(b.b)}</div>
               </div>
-              <div class="fc-fighter b">
-                ${b.imgB ? `<img class="fc-thumb" src="${esc(b.imgB)}" onerror="this.style.display='none'">` : ''}
-                <div class="fc-fighter-info">
-                  <div class="fc-fighter-name">${esc(b.b)}</div>
-                </div>
-              </div>
+              ${b.weight ? `<div class="fc-cell-weight">${esc(b.weight)}</div>` : ''}
             </div>
           `).join('')}
         </div>
@@ -226,11 +327,16 @@
     }
 
     function renderNextMode() {
+      if (!bouts.length) { root.innerHTML = '<div class="fc-empty">No matchups added yet — click Edit Fights to add some.</div>'; return; }
       const rowsHTML = bouts.map(b => `
         <div class="fc-next-row">
-          ${b.tag ? `<div class="fc-next-tag">${esc(b.tag)}</div>` : ''}
-          <div class="fc-next-matchup">${esc(b.a)} <span class="vs">vs</span> ${esc(b.b)}</div>
-          ${b.weight ? `<div class="fc-next-weight">${esc(b.weight)}</div>` : ''}
+          ${b.imgA ? `<img class="fc-next-photo" src="${esc(b.imgA)}" onerror="this.style.display='none'">` : ''}
+          <div class="fc-next-body">
+            ${b.tag ? `<div class="fc-next-tag">${esc(b.tag)}</div>` : ''}
+            <div class="fc-next-matchup">${esc(b.a)} <span class="vs">vs</span> ${esc(b.b)}</div>
+            ${b.weight ? `<div class="fc-next-weight">${esc(b.weight)}</div>` : ''}
+          </div>
+          ${b.imgB ? `<img class="fc-next-photo b-side" src="${esc(b.imgB)}" onerror="this.style.display='none'">` : ''}
         </div>
       `).join('');
 
@@ -245,8 +351,139 @@
       `;
     }
 
-    if (mode === 'next') renderNextMode();
-    else renderCardMode();
+    function render() {
+      document.title = `${eventName} | MMA Bridge`;
+      if (mode === 'next') renderNextMode(); else renderCardMode();
+      if (editMode) renderEditPanel();
+    }
+
+    // ── Fighter search, used only by the edit panel ──
+    let fightersCache = null;
+    async function loadFighters() {
+      if (!fightersCache) {
+        try {
+          const res = await fetch('data/fighters.json?_=' + Date.now(), { cache:'no-store' });
+          fightersCache = await res.json();
+        } catch (e) { fightersCache = []; }
+      }
+      return fightersCache;
+    }
+    function searchFighters(q) {
+      const clean = q.trim().toLowerCase();
+      if (!clean || !fightersCache) return [];
+      return fightersCache.filter(f => (f.name||'').toLowerCase().includes(clean)).slice(0, 8);
+    }
+
+    function wireAutocomplete(inputEl, listEl, onPick) {
+      inputEl.addEventListener('input', () => {
+        const results = searchFighters(inputEl.value);
+        if (!results.length) { listEl.classList.remove('open'); listEl.innerHTML=''; return; }
+        listEl.innerHTML = results.map(f => `<div class="fc-autocomplete-item">${esc(f.name)}</div>`).join('');
+        listEl.classList.add('open');
+        listEl.querySelectorAll('.fc-autocomplete-item').forEach((el,i) => {
+          el.addEventListener('click', () => {
+            inputEl.value = results[i].name;
+            inputEl.dataset.img = results[i].img || '';
+            inputEl.dataset.weight = results[i].weightClass || '';
+            listEl.classList.remove('open');
+            onPick(results[i]);
+          });
+        });
+      });
+      inputEl.addEventListener('blur', () => setTimeout(() => listEl.classList.remove('open'), 150));
+    }
+
+    function renderEditPanel() {
+      const extraFieldsHTML = mode === 'card'
+        ? `<input type="text" class="fc-input" id="fcNewWeight" placeholder="Weight class (optional)">
+           <select class="fc-input" id="fcNewSection">
+             <option value="Main Card">Main Card</option>
+             <option value="Co-Main">Co-Main</option>
+             <option value="Prelims">Prelims</option>
+             <option value="Early Prelims">Early Prelims</option>
+           </select>`
+        : `<input type="text" class="fc-input" id="fcNewWeight" placeholder="Weight class (optional)">
+           <input type="text" class="fc-input" id="fcNewTag" placeholder="Tag (optional)">`;
+
+      editPanel.innerHTML = `
+        <div class="fc-edit-title">${mode === 'card' ? 'Fights on this card' : 'Matchups'} (${bouts.length})</div>
+        <div class="fc-edit-list">
+          ${bouts.length ? bouts.map(b => `
+            <div class="fc-edit-row">
+              <div class="fc-edit-row-text">${esc(b.a)} vs ${esc(b.b)}${b.weight ? ' &middot; ' + esc(b.weight) : ''}</div>
+              <button class="fc-edit-remove" data-remove="${b._id}" type="button">Remove</button>
+            </div>
+          `).join('') : `<div style="opacity:.5;font-size:.8rem;">None yet — add one below.</div>`}
+        </div>
+        <div class="fc-edit-title">Add a fight</div>
+        <div class="fc-add-row">
+          <div class="fc-autocomplete">
+            <input type="text" class="fc-input" id="fcNewA" placeholder="Fighter A" autocomplete="off">
+            <div class="fc-autocomplete-list" id="fcNewAList"></div>
+          </div>
+          <div class="fc-autocomplete">
+            <input type="text" class="fc-input" id="fcNewB" placeholder="Fighter B" autocomplete="off">
+            <div class="fc-autocomplete-list" id="fcNewBList"></div>
+          </div>
+        </div>
+        <div class="fc-add-row-extra">${extraFieldsHTML}</div>
+        <button class="fc-add-btn" id="fcAddBoutBtn" type="button" disabled>+ Add</button>
+      `;
+
+      editPanel.querySelectorAll('[data-remove]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = parseInt(btn.dataset.remove, 10);
+          bouts = bouts.filter(b => b._id !== id);
+          render();
+        });
+      });
+
+      const inputA = document.getElementById('fcNewA');
+      const inputB = document.getElementById('fcNewB');
+      const listA  = document.getElementById('fcNewAList');
+      const listB  = document.getElementById('fcNewBList');
+      const addBtn = document.getElementById('fcAddBoutBtn');
+      let selA = null, selB = null;
+
+      function checkReady() { addBtn.disabled = !(inputA.value.trim() && inputB.value.trim()); }
+      wireAutocomplete(inputA, listA, f => { selA = f; checkReady(); });
+      wireAutocomplete(inputB, listB, f => { selB = f; checkReady(); });
+      inputA.addEventListener('input', () => { selA = null; checkReady(); });
+      inputB.addEventListener('input', () => { selB = null; checkReady(); });
+
+      addBtn.addEventListener('click', () => {
+        const nameA = inputA.value.trim(), nameB = inputB.value.trim();
+        if (!nameA || !nameB) return;
+        const weightEl  = document.getElementById('fcNewWeight');
+        const sectionEl = document.getElementById('fcNewSection');
+        const tagEl     = document.getElementById('fcNewTag');
+        boutSeq++;
+        bouts.push({
+          _id: boutSeq,
+          a: nameA, b: nameB,
+          imgA: selA ? (selA.img||'') : (inputA.dataset.img||''),
+          imgB: selB ? (selB.img||'') : (inputB.dataset.img||''),
+          weight: weightEl ? weightEl.value.trim() : '',
+          section: sectionEl ? sectionEl.value : undefined,
+          tag: tagEl ? tagEl.value.trim() : undefined,
+        });
+        render();
+      });
+    }
+
+    themeBtn.addEventListener('click', () => {
+      theme = theme === 'light' ? 'dark' : 'light';
+      applyTheme();
+    });
+    editBtn.addEventListener('click', () => {
+      editMode = !editMode;
+      editBtn.classList.toggle('active', editMode);
+      editPanel.classList.toggle('open', editMode);
+      if (editMode) { loadFighters().then(renderEditPanel); }
+    });
+
+    applyTheme();
+    render();
   })();
   </script>
 </body>
