@@ -43922,20 +43922,60 @@
   {
     "id": "nathaniel-wood",
     "name": "Nathaniel Wood",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/WOOD_NATHANIEL_L_10-25.png?itok=xpw74M8X"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/WOOD_NATHANIEL_L_10-25.png?itok=xpw74M8X",
+    "stats": {
+      "slpm": "5.64",
+      "strAcc": "51%",
+      "sapm": "4.25",
+      "strDef": "54%",
+      "tdAvg": "1.35",
+      "tdAcc": "48%",
+      "tdDef": "73%",
+      "subAvg": "0.5"
+    }
   },
   {
     "id": "mairon-santos",
-    "name": "Mairon Santos"
+    "name": "Mairon Santos",
+    "stats": {
+      "slpm": "3.33",
+      "strAcc": "48%",
+      "sapm": "2.24",
+      "strDef": "65%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "69%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "morgan-charriere",
     "name": "Morgan Charrière",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-09/CHARRIERE_MORGAN_L_09-28.png?itok=U74Yn8DR"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-09/CHARRIERE_MORGAN_L_09-28.png?itok=U74Yn8DR",
+    "stats": {
+      "slpm": "4.02",
+      "strAcc": "50%",
+      "sapm": "4.51",
+      "strDef": "53%",
+      "tdAvg": "2.06",
+      "tdAcc": "46%",
+      "tdDef": "83%",
+      "subAvg": "0.3"
+    }
   },
   {
     "id": "felipe-lima",
     "name": "Felipe Lima",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-12/LIMA_FELIPE_L_06-22.png?itok=X6oZYeqp"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-12/LIMA_FELIPE_L_06-22.png?itok=X6oZYeqp",
+    "stats": {
+      "slpm": "2.86",
+      "strAcc": "45%",
+      "sapm": "2.91",
+      "strDef": "64%",
+      "tdAvg": "2.18",
+      "tdAcc": "27%",
+      "tdDef": "85%",
+      "subAvg": "0.7"
+    }
   }
 ]
