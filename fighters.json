@@ -43917,5 +43917,80 @@
       "subAvg": "0.0"
     },
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
+  },
+  {
+    "id": "yair-rodriguez",
+    "name": "Yair Rodriguez",
+    "nickname": "El Pantera",
+    "nationality": "Mexican",
+    "flag": "🇲🇽",
+    "weightClass": "Featherweight",
+    "ranking": "#5",
+    "record": {
+      "wins": 20,
+      "losses": 5,
+      "draws": 0
+    },
+    "height": "5'11\"",
+    "reach": "71\"",
+    "stance": "Freestyle",
+    "age": 33,
+    "fightingOut": "Chicago, Illinois",
+    "style": "Striker",
+    "pfp": false,
+    "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-04/RODRIGUEZ_YAIR_L_04-12.png",
+    "bio": "Yair Rodriguez is a former interim UFC Featherweight Champion known for his unpredictable, highlight-reel striking and submission instincts. The Parral, Mexico native won \"The Ultimate Fighter Latin America\" season 1 before captivating fans with acrobatic finishes throughout his UFC run. He won the interim featherweight title via triangle choke over Josh Emmett in 2023 before falling short against Alexander Volkanovski in a title unification bout.",
+    "last5": [
+      {
+        "opponent": "Patricio Pitbull",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 314",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Brian Ortega",
+        "result": "L",
+        "method": "Submission (arm-triangle choke)",
+        "event": "UFC Fight Night: Rodriguez vs. Ortega",
+        "round": 3,
+        "time": "0:58"
+      },
+      {
+        "opponent": "Alexander Volkanovski",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC 290",
+        "round": 3,
+        "time": "4:19"
+      },
+      {
+        "opponent": "Josh Emmett",
+        "result": "W",
+        "method": "Submission (triangle choke)",
+        "event": "UFC 284",
+        "round": 2,
+        "time": "4:19"
+      },
+      {
+        "opponent": "Brian Ortega",
+        "result": "W",
+        "method": "TKO (shoulder injury)",
+        "event": "UFC on ABC: Rozenstruik vs. Almeida",
+        "round": 1,
+        "time": "4:11"
+      }
+    ],
+    "stats": {
+      "slpm": "4.65",
+      "strAcc": "47%",
+      "sapm": "3.78",
+      "strDef": "53%",
+      "tdAvg": "0.71",
+      "tdAcc": "24%",
+      "tdDef": "59%",
+      "subAvg": "0.64"
+    }
   }
 ]
