@@ -451,8 +451,12 @@
       padding:6px 12px;
       box-shadow:0 6px 16px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.45), inset 0 -2px 0 rgba(0,0,0,.18);
     }
+    /* top:20% (was 2%) reserves real headroom above the fighters for the
+       logo + event badge stacked above — at 2% the photos started almost
+       at the card's top edge with the fighters' heads already right there,
+       so the badge had nowhere to sit but directly over a face. */
     .mu-classic-photos {
-      position:absolute; left:0; right:0; bottom:20%; top:2%; z-index:1;
+      position:absolute; left:0; right:0; bottom:20%; top:20%; z-index:1;
       display:flex; align-items:flex-end; justify-content:center;
     }
     .mu-classic-img {
