@@ -414,6 +414,13 @@
       content:''; position:absolute; inset:0; z-index:2; pointer-events:none;
       background:radial-gradient(ellipse at 50% 45%, transparent 52%, rgba(0,0,0,.5) 100%);
     }
+    /* logo — sits above the event badge, top-dead-center of the card. */
+    .mu-classic-logo {
+      position:absolute; top:2.5%; left:50%; z-index:3;
+      transform:translateX(-50%);
+      width:38px; height:38px;
+      filter:drop-shadow(0 6px 14px rgba(0,0,0,.4));
+    }
     /* badge — a real solid block again, not a thin text-only label (that
        read as flimsy/no presence) and not a light gradient-sheen pill
        (that read as a flashy button). Flat solid orange fill, heavy
@@ -421,16 +428,17 @@
        without being shiny. Same block in both modes, no color-per-theme
        logic needed since it's a solid fill either way. */
     .mu-classic-eventname {
-      position:absolute; top:6%; left:50%; z-index:3;
+      position:absolute; top:11%; left:50%; z-index:3;
       transform:translateX(-50%);
       background:#e8691c;
       box-shadow:0 14px 30px rgba(0,0,0,.5);
-      padding:13px 30px;
+      border-radius:8px;
+      padding:14px 32px;
       text-align:center; white-space:nowrap;
       font-family:'Oswald',sans-serif;
       font-weight:800; text-transform:uppercase;
-      font-size:clamp(1.3rem,4.6vw,1.9rem); line-height:1;
-      color:#0a0a0a; letter-spacing:.04em;
+      font-size:clamp(1.6rem,5.6vw,2.3rem); line-height:1;
+      color:#0a0a0a; letter-spacing:.03em;
     }
     /* optional custom tag (e.g. "REMATCH") — small ribbon, top-left corner,
        distinct from the centered event-name badge. */
@@ -461,19 +469,18 @@
       bottom:22px;
     }
     .mu-classic-name-row { display:flex; align-items:baseline; gap:9px; }
-    /* Names/VS are the same rich orange as the badge in BOTH modes now
-       (previously white-on-dark / near-black-on-orange — two unrelated
-       color schemes). Extruded "3D poster type" — a few crisp, hard-offset
-       (NOT blurred) stacked shadow layers behind the letterforms — is what
-       actually reads as premium/game-title depth; a flat fill always reads
-       flat no matter the color. Dark mode's shadow is a dark warm brown
-       (visible against near-black — pure black-on-black would vanish);
-       light mode's is neutral black (reads naturally on the white card). */
+    /* Names go back to flipping per mode — white on the dark card, black
+       on the light one (see the light-mode override below) — while VS
+       below stays the constant orange accent in both. Extruded "3D poster
+       type" — a few crisp, hard-offset (NOT blurred) stacked shadow layers
+       behind the letterforms — is what actually reads as premium/
+       game-title depth; a flat fill always reads flat no matter the
+       color. */
     .mu-classic-name {
       font-family:'Barlow Condensed',sans-serif;
       font-weight:800; font-style:italic; text-transform:uppercase;
       font-size:clamp(1.6rem,7vw,2.5rem); line-height:.94;
-      color:#e8691c; letter-spacing:.005em;
+      color:#fff; letter-spacing:.005em;
       text-shadow:2px 2px 0 rgba(40,16,4,.9), 4px 4px 0 rgba(20,8,2,.55);
     }
     .mu-classic-vsline {
@@ -481,7 +488,7 @@
       font-family:'Barlow Condensed',sans-serif;
       font-weight:800; font-style:italic; text-transform:uppercase;
       font-size:clamp(1.6rem,7vw,2.5rem); line-height:.94;
-      color:#e8691c; letter-spacing:.005em;
+      color:#fff; letter-spacing:.005em;
       text-shadow:2px 2px 0 rgba(40,16,4,.9), 4px 4px 0 rgba(20,8,2,.55);
     }
     /* VS — solid color + the same extrusion, NOT a background-clip:text
@@ -490,15 +497,13 @@
        download elsewhere on the site) — it silently drops the clip and
        just paints the gradient as a solid rectangle, which is exactly what
        turned "VS" into a blank orange blob in every downloaded poster.
-       Color flips per mode (white on the dark card, black on the light
-       one) instead of matching the names — the extrusion shadow stays a
-       consistent orange tint in both, tying it back to the accent color
-       without needing the fill itself to be orange. */
+       Stays the constant orange accent in BOTH modes now (names are what
+       flips white/black instead). */
     .mu-classic-vsline .vs {
       font-family:'Barlow Condensed',sans-serif;
       font-style:italic; font-weight:900;
-      color:#fff;
-      text-shadow:2px 2px 0 rgba(232,105,28,.45), 4px 4px 0 rgba(232,105,28,.22);
+      color:#e8691c;
+      text-shadow:2px 2px 0 rgba(40,16,4,.9), 4px 4px 0 rgba(20,8,2,.55);
       font-size:.85em;
     }
     /* champion / rematch-number superscript tags */
@@ -559,18 +564,19 @@
     body.mu-classic-mode.mu-poster-light .mu-classic-card::after {
       background:radial-gradient(ellipse at 50% 45%, transparent 60%, rgba(0,0,0,.14) 100%);
     }
-    /* names/location keep the same orange fill as dark mode, but the
-       extrusion shadow flips to plain black — a dark-brown shadow (right
-       for popping orange text off a near-black card) reads muddy on white,
-       same reason light mode's frame border below gets bumped up too. */
+    /* names flip to black on the light card (white on the dark one); VS
+       stays the constant orange in both, so no override needed for it
+       here — only its shadow already reads fine on white as-is. */
     body.mu-classic-mode.mu-poster-light .mu-classic-name,
     body.mu-classic-mode.mu-poster-light .mu-classic-vsline {
-      text-shadow:2px 2px 0 rgba(0,0,0,.22), 4px 4px 0 rgba(0,0,0,.12);
-    }
-    /* VS flips to black text on the light card (white on the dark one) —
-       the orange-tinted shadow stays the same in both modes. */
-    body.mu-classic-mode.mu-poster-light .mu-classic-vsline .vs {
       color:#161514;
+      text-shadow:2px 2px 0 rgba(255,255,255,.55), 4px 4px 0 rgba(255,255,255,.3);
+    }
+    /* ...but that override also caught the nested .vs span — put its
+       orange back on top since names and VS diverge in color now. */
+    body.mu-classic-mode.mu-poster-light .mu-classic-vsline .vs {
+      color:#e8691c;
+      text-shadow:2px 2px 0 rgba(0,0,0,.22), 4px 4px 0 rgba(0,0,0,.12);
     }
     body.mu-classic-mode.mu-poster-light .mu-classic-location {
       text-shadow:1px 1px 0 rgba(0,0,0,.18);
@@ -1307,6 +1313,7 @@
 
         <div class="mu-classic-wrap">
           <div class="mu-classic-card">
+            <img class="mu-classic-logo" src="images/mma-bridge-logo.png" alt="MMA Bridge">
             ${tagParam?`<div class="mu-classic-tagline">${esc(tagParam)}</div>`:''}
             ${classicEventName?`<div class="mu-classic-eventname">${esc(classicEventName)}</div>`:''}
             <div class="mu-classic-photos">
