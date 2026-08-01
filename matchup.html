@@ -392,7 +392,7 @@
       /* inset line = a real frame edge (crisp, not a blur) instead of a
          borderless image dump; outer shadow keeps the card feeling lifted
          off the page. */
-      box-shadow:inset 0 0 0 1px rgba(255,138,61,.22), 0 30px 90px rgba(0,0,0,.65);
+      box-shadow:inset 0 0 0 1px rgba(232,105,28,.3), 0 30px 90px rgba(0,0,0,.65);
       font-family:'Montserrat',sans-serif;
     }
     /* scattered speckle texture — two dot layers at different scales/
@@ -416,11 +416,14 @@
     }
     /* badge — big, centered top, sitting between the fighters' heads
        instead of tucked in a corner, with a hard-edged gradient sheen
-       instead of a glow. */
+       instead of a glow. Weighted toward the deep #e8691c end rather than
+       a light peachy top — a single consistent "rich orange," not two
+       different oranges between dark and light mode. Same treatment in
+       both modes now, no separate dark-badge-on-orange light variant. */
     .mu-classic-eventname {
       position:absolute; top:6%; left:50%; z-index:3;
       transform:translateX(-50%);
-      background:linear-gradient(165deg, #ffb066 0%, #ff8a3d 45%, #e8691c 100%);
+      background:linear-gradient(165deg, #ff9a4d 0%, #e8691c 60%, #c65a12 100%);
       /* inset top highlight = a hard light-catching bevel edge, the same
          trick real molded-plastic/chrome badge art uses for "3D" without
          any blur — reads as a raised object, not a flat pasted rectangle. */
@@ -432,24 +435,16 @@
       font-size:clamp(1.1rem,4.6vw,1.6rem); line-height:1.05;
       color:#0a0a0a; letter-spacing:.02em;
     }
-    body.mu-classic-mode.mu-poster-light .mu-classic-eventname {
-      background:linear-gradient(165deg, #2a2825 0%, #161514 60%, #0a0a0a 100%);
-      color:#ffd9b3;
-    }
     /* optional custom tag (e.g. "REMATCH") — small ribbon, top-left corner,
        distinct from the centered event-name badge. */
     .mu-classic-tagline {
       position:absolute; top:6%; left:20px; z-index:3;
-      background:linear-gradient(165deg, #ffb066 0%, #ff8a3d 45%, #e8691c 100%);
+      background:linear-gradient(165deg, #ff9a4d 0%, #e8691c 60%, #c65a12 100%);
       color:#0a0a0a; border-radius:3px;
       font-family:'Montserrat',sans-serif; font-weight:900;
       font-size:.62rem; letter-spacing:.1em; text-transform:uppercase;
       padding:6px 12px;
       box-shadow:0 6px 16px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.45), inset 0 -2px 0 rgba(0,0,0,.18);
-    }
-    body.mu-classic-mode.mu-poster-light .mu-classic-tagline {
-      background:linear-gradient(165deg, #2a2825 0%, #161514 60%, #0a0a0a 100%);
-      color:#ffd9b3;
     }
     .mu-classic-photos {
       position:absolute; left:0; right:0; bottom:20%; top:2%; z-index:1;
@@ -469,24 +464,28 @@
       bottom:22px;
     }
     .mu-classic-name-row { display:flex; align-items:baseline; gap:9px; }
-    /* extruded "3D poster type" — a few crisp, hard-offset (NOT blurred)
-       stacked shadow layers behind the letterforms. This is what actually
-       reads as premium/game-title depth; a flat fill (even a gradient one)
-       always reads flat no matter the color. */
+    /* Names/VS are the same rich orange as the badge in BOTH modes now
+       (previously white-on-dark / near-black-on-orange — two unrelated
+       color schemes). Extruded "3D poster type" — a few crisp, hard-offset
+       (NOT blurred) stacked shadow layers behind the letterforms — is what
+       actually reads as premium/game-title depth; a flat fill always reads
+       flat no matter the color. Dark mode's shadow is a dark warm brown
+       (visible against near-black — pure black-on-black would vanish);
+       light mode's is neutral black (reads naturally on the white card). */
     .mu-classic-name {
       font-family:'Barlow Condensed',sans-serif;
       font-weight:800; font-style:italic; text-transform:uppercase;
       font-size:clamp(1.6rem,7vw,2.5rem); line-height:.94;
-      color:#fff; letter-spacing:.005em;
-      text-shadow:2px 2px 0 rgba(0,0,0,.55), 4px 4px 0 rgba(0,0,0,.3);
+      color:#e8691c; letter-spacing:.005em;
+      text-shadow:2px 2px 0 rgba(40,16,4,.9), 4px 4px 0 rgba(20,8,2,.55);
     }
     .mu-classic-vsline {
       display:flex; align-items:baseline; gap:12px;
       font-family:'Barlow Condensed',sans-serif;
       font-weight:800; font-style:italic; text-transform:uppercase;
       font-size:clamp(1.6rem,7vw,2.5rem); line-height:.94;
-      color:#fff; letter-spacing:.005em;
-      text-shadow:2px 2px 0 rgba(0,0,0,.55), 4px 4px 0 rgba(0,0,0,.3);
+      color:#e8691c; letter-spacing:.005em;
+      text-shadow:2px 2px 0 rgba(40,16,4,.9), 4px 4px 0 rgba(20,8,2,.55);
     }
     /* VS — solid color + the same extrusion, NOT a background-clip:text
        gradient fill. html2canvas doesn't support background-clip:text (the
@@ -497,15 +496,15 @@
     .mu-classic-vsline .vs {
       font-family:'Barlow Condensed',sans-serif;
       font-style:italic; font-weight:900;
-      color:#ff8a3d;
-      text-shadow:2px 2px 0 rgba(0,0,0,.6), 4px 4px 0 rgba(0,0,0,.35);
+      color:#e8691c;
+      text-shadow:2px 2px 0 rgba(40,16,4,.9), 4px 4px 0 rgba(20,8,2,.55);
       font-size:.85em;
     }
     /* champion / rematch-number superscript tags */
     .mu-classic-tag {
       display:inline-flex; align-items:center; justify-content:center;
       width:16px; height:16px; border-radius:3px;
-      background:linear-gradient(165deg, #ffb066 0%, #ff8a3d 55%, #e8691c 100%);
+      background:linear-gradient(165deg, #ff9a4d 0%, #e8691c 60%, #c65a12 100%);
       box-shadow:inset 0 1px 0 rgba(255,255,255,.45), inset 0 -1px 0 rgba(0,0,0,.18);
       color:#0a0a0a;
       font-family:'Montserrat',sans-serif; font-weight:800; font-size:.55rem;
@@ -518,14 +517,15 @@
       letter-spacing:.06em; text-transform:uppercase;
       color:rgba(255,255,255,.6);
     }
-    /* date/location — bottom line, plain and bold, not competing with
-       the names for attention. */
+    /* date/location — same rich orange as the names/badge now, still the
+       bottom-line anchor rather than competing for the biggest type. */
     .mu-classic-location {
       margin-top:14px;
       font-family:'Barlow Condensed',sans-serif;
       font-weight:800; font-style:normal; text-transform:uppercase;
       font-size:clamp(.9rem,3.4vw,1.15rem); line-height:1;
-      color:#fff;
+      color:#e8691c;
+      text-shadow:1px 1px 0 rgba(40,16,4,.8);
     }
     .mu-classic-brandline {
       position:absolute; left:20px; right:20px; bottom:8px; z-index:3;
@@ -535,35 +535,46 @@
       color:rgba(255,255,255,.35);
     }
 
-    /* Classic + light (orange/white) — same scattered-speckle texture,
-       inverted onto a solid orange field instead of near-black. */
-    body.mu-classic-mode.mu-poster-light .mu-classic-card { background:#e8691c; }
+    /* Classic + light — mostly WHITE card now (was a solid orange field),
+       orange kept as the accent: badge, tag, VS, names, location all stay
+       the exact same rich #e8691c used in dark mode (see .mu-classic-name
+       etc. above — no per-mode color override needed anymore, only the
+       card's own background/texture/vignette/shadow-color change here). */
+    body.mu-classic-mode.mu-poster-light .mu-classic-card {
+      background:
+        radial-gradient(ellipse 62% 15% at 50% 79%, rgba(0,0,0,.22), transparent 70%),
+        #f6f3ec;
+    }
     body.mu-classic-mode.mu-poster-light .mu-classic-card::before {
       background-image:
-        radial-gradient(circle, rgba(0,0,0,.28) 1px, transparent 1.6px),
-        radial-gradient(circle, rgba(0,0,0,.16) 1px, transparent 1.6px);
+        radial-gradient(circle, rgba(232,105,28,.4) 1px, transparent 1.6px),
+        radial-gradient(circle, rgba(232,105,28,.22) 1px, transparent 1.6px);
       background-size:29px 29px, 17px 17px;
       background-position:0 0, 8px 12px;
       opacity:.55;
     }
+    /* lighter vignette — a heavy dark edge-darken that works on near-black
+       just reads as dirty smudging on white. */
+    body.mu-classic-mode.mu-poster-light .mu-classic-card::after {
+      background:radial-gradient(ellipse at 50% 45%, transparent 60%, rgba(0,0,0,.14) 100%);
+    }
+    /* names/VS/location keep the same orange fill as dark mode, but the
+       extrusion shadow flips to plain black — a dark-brown shadow (right
+       for popping orange text off a near-black card) reads muddy on white,
+       same reason light mode's frame border below gets bumped up too. */
     body.mu-classic-mode.mu-poster-light .mu-classic-name,
-    body.mu-classic-mode.mu-poster-light .mu-classic-vsline {
-      color:#161514;
-      text-shadow:2px 2px 0 rgba(255,255,255,.5), 4px 4px 0 rgba(255,255,255,.3);
+    body.mu-classic-mode.mu-poster-light .mu-classic-vsline,
+    body.mu-classic-mode.mu-poster-light .mu-classic-vsline .vs {
+      text-shadow:2px 2px 0 rgba(0,0,0,.22), 4px 4px 0 rgba(0,0,0,.12);
     }
     body.mu-classic-mode.mu-poster-light .mu-classic-location {
-      color:#161514;
+      text-shadow:1px 1px 0 rgba(0,0,0,.18);
     }
-    body.mu-classic-mode.mu-poster-light .mu-classic-vsline .vs {
-      color:#161514;
-      text-shadow:2px 2px 0 rgba(255,255,255,.5), 4px 4px 0 rgba(255,255,255,.3);
+    body.mu-classic-mode.mu-poster-light .mu-classic-card {
+      box-shadow:inset 0 0 0 1px rgba(232,105,28,.4), 0 30px 90px rgba(0,0,0,.22);
     }
-    body.mu-classic-mode.mu-poster-light .mu-classic-tag {
-      background:linear-gradient(165deg, #2a2825 0%, #161514 60%, #0a0a0a 100%);
-      color:#ffd9b3;
-    }
-    body.mu-classic-mode.mu-poster-light .mu-classic-weight { color:rgba(0,0,0,.6); }
-    body.mu-classic-mode.mu-poster-light .mu-classic-brandline { color:rgba(0,0,0,.45); }
+    body.mu-classic-mode.mu-poster-light .mu-classic-weight { color:rgba(0,0,0,.55); }
+    body.mu-classic-mode.mu-poster-light .mu-classic-brandline { color:rgba(0,0,0,.4); }
     body.mu-classic-mode.mu-poster-light { background:#f6f3ec !important; }
 
     /* ── SPLIT BAR ── */
