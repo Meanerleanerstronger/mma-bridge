@@ -355,53 +355,55 @@
     }
     body.mu-classic-mode .mu-classic-wrap { display:flex; }
 
-    /* Studied four actual official UFC poster/hero images before this pass
-       (not guessed): every one of them uses a textured or lit background
-       (grunge/scratch texture, a radial colored spotlight, or a moody
-       city-skyline gradient) plus fighters lit with colored rim-light and
-       filling almost the entire frame height — never a flat solid color
-       and never small photos floating in empty space, which is what the
-       previous "calm" pass over-corrected into. Rebuilt around: a warm
-       radial glow from top, a faint diagonal scratch texture for grit,
-       bigger photos with colored rim-light via drop-shadow, still no
-       diamond-grid/ghost-text clutter from the version before that. */
+    /* Third pass — explicit feedback: the radial spotlight glow and the
+       colored drop-shadow rim-light on the photos both read as "AI slop,"
+       not premium. Everything glow-based is gone: no radial gradient, no
+       blurred text-shadow, no drop-shadow rim-light. Background is a flat
+       near-black with a scattered orange speckle texture instead (crisp
+       dots, not a soft blur). Solid-fill elements (badge, VS) get a tight
+       linear-gradient sheen for a "shiny" quality that's a hard highlight,
+       not a diffuse glow — those read completely differently even though
+       both involve a gradient. Names switch to italic Barlow Condensed
+       (this site's own established type voice elsewhere, e.g. the banner
+       Poster mode) instead of upright Montserrat, which was reading as a
+       direct copy of UFC's own poster typography rather than "inspired by." */
     .mu-classic-card {
       position:relative; overflow:hidden;
       width:min(92vw, 520px); aspect-ratio:4/5;
-      /* pure near-black base — the previous version started from a warm
-         brown (#1a1611) which muddied together with the orange glow into
-         a dirty haze instead of a clean spotlight. Tighter, punchier
-         falloff on the glow itself too. */
-      background:
-        radial-gradient(60% 42% at 50% 0%, rgba(255,138,61,.65) 0%, rgba(255,138,61,.22) 38%, transparent 70%),
-        #060605;
+      background:#0a0908;
       border-radius:4px;
       box-shadow:0 30px 90px rgba(0,0,0,.65);
       font-family:'Montserrat',sans-serif;
     }
-    /* faint diagonal scratch texture — the grit/energy element every
-       reference poster had, kept subtle so it reads as print texture
-       instead of a "busy AI pattern." */
+    /* scattered speckle texture — two dot layers at different scales/
+       offsets so it reads as irregular grain, not a repeating pattern. */
     .mu-classic-card::before {
       content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
-      background-image:repeating-linear-gradient(115deg, rgba(255,255,255,.05) 0 1px, transparent 1px 5px, transparent 5px 34px);
-      mix-blend-mode:overlay; opacity:.5;
+      background-image:
+        radial-gradient(circle, rgba(255,138,61,.5) 1px, transparent 1.6px),
+        radial-gradient(circle, rgba(255,138,61,.28) 1px, transparent 1.6px);
+      background-size:29px 29px, 17px 17px;
+      background-position:0 0, 8px 12px;
+      opacity:.55;
     }
-    /* corner badge — real design presence now: solid brand-orange chip
-       instead of a barely-there dark label, since this is literally the
-       first thing the eye lands on. */
+    /* badge — big, centered top, sitting between the fighters' heads
+       instead of tucked in a corner, with a hard-edged gradient sheen
+       instead of a glow. */
     .mu-classic-eventname {
-      position:absolute; top:20px; left:20px; z-index:3;
-      background:#ff8a3d; box-shadow:0 8px 20px rgba(0,0,0,.4);
-      border-radius:4px; padding:9px 14px;
-      text-align:left;
+      position:absolute; top:6%; left:50%; z-index:3;
+      transform:translateX(-50%);
+      background:linear-gradient(165deg, #ffb066 0%, #ff8a3d 45%, #e8691c 100%);
+      box-shadow:0 8px 20px rgba(0,0,0,.5);
+      border-radius:4px; padding:10px 20px;
+      text-align:center; white-space:nowrap;
       font-family:'Barlow Condensed',sans-serif;
       font-weight:800; font-style:italic; text-transform:uppercase;
-      font-size:clamp(.85rem,3.2vw,1.05rem); line-height:1.05;
+      font-size:clamp(1.1rem,4.6vw,1.6rem); line-height:1.05;
       color:#0a0a0a; letter-spacing:.02em;
     }
     body.mu-classic-mode.mu-poster-light .mu-classic-eventname {
-      background:#161514; color:#ffd9b3;
+      background:linear-gradient(165deg, #2a2825 0%, #161514 60%, #0a0a0a 100%);
+      color:#ffd9b3;
     }
     .mu-classic-photos {
       position:absolute; left:0; right:0; bottom:20%; top:2%; z-index:1;
@@ -412,51 +414,43 @@
       object-fit:contain; object-position:bottom center;
       filter:contrast(1.12) saturate(1.02);
     }
-    /* colored rim-light per side, same trick the real posters get from
-       actual studio lighting — fakes that same "lit, not flat" look. */
-    .mu-classic-img.a {
-      margin-right:-3%; z-index:2;
-      filter:contrast(1.12) saturate(1.02) drop-shadow(-10px 14px 26px rgba(255,138,61,.45));
-    }
-    .mu-classic-img.b {
-      margin-left:-3%; z-index:1;
-      filter:contrast(1.12) saturate(1.02) drop-shadow(10px 14px 26px rgba(96,165,250,.32));
-    }
+    .mu-classic-img.a { margin-right:-3%; z-index:2; }
+    .mu-classic-img.b { margin-left:-3%; z-index:1; }
     /* name lockup sits bottom-left, both fighters stacked together —
-       not split across the poster — matching the reference exactly. */
+       not split across the poster. */
     .mu-classic-textblock {
       position:absolute; left:20px; right:20px; z-index:3;
       bottom:22px;
     }
-    .mu-classic-name-row { display:flex; align-items:baseline; gap:7px; }
+    .mu-classic-name-row { display:flex; align-items:baseline; gap:9px; }
     .mu-classic-name {
       font-family:'Barlow Condensed',sans-serif;
-      font-weight:800; font-style:normal; text-transform:uppercase;
+      font-weight:800; font-style:italic; text-transform:uppercase;
       font-size:clamp(1.6rem,7vw,2.5rem); line-height:.94;
-      color:#fff; letter-spacing:.01em;
-      text-shadow:0 2px 4px rgba(0,0,0,.6), 0 12px 30px rgba(0,0,0,.5);
+      color:#fff; letter-spacing:.005em;
     }
     .mu-classic-vsline {
-      display:flex; align-items:baseline; gap:8px;
+      display:flex; align-items:baseline; gap:12px;
       font-family:'Barlow Condensed',sans-serif;
-      font-weight:800; font-style:normal; text-transform:uppercase;
+      font-weight:800; font-style:italic; text-transform:uppercase;
       font-size:clamp(1.6rem,7vw,2.5rem); line-height:.94;
-      color:#fff; letter-spacing:.01em;
-      text-shadow:0 2px 4px rgba(0,0,0,.6), 0 12px 30px rgba(0,0,0,.5);
+      color:#fff; letter-spacing:.005em;
     }
+    /* VS — much bigger, no underline, no glow, solid gradient-sheen fill
+       instead of a flat tint. */
     .mu-classic-vsline .vs {
-      font-family:'Montserrat',sans-serif;
-      color:#ff8a3d; font-size:.42em; font-weight:800;
-      text-decoration:underline; text-underline-offset:3px;
-      text-shadow:0 0 14px rgba(255,138,61,.6);
+      font-family:'Barlow Condensed',sans-serif;
+      font-style:italic; font-weight:900;
+      background:linear-gradient(165deg, #ffb066 0%, #ff8a3d 55%, #e8691c 100%);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      font-size:.85em;
     }
-    /* champion / rematch-number superscript tags — the small detail that
-       makes the reference read as an authentic fight poster, not just
-       big text on a color field. */
+    /* champion / rematch-number superscript tags */
     .mu-classic-tag {
       display:inline-flex; align-items:center; justify-content:center;
       width:16px; height:16px; border-radius:3px;
-      background:#ff8a3d; color:#0a0a0a;
+      background:linear-gradient(165deg, #ffb066 0%, #ff8a3d 55%, #e8691c 100%);
+      color:#0a0a0a;
       font-family:'Montserrat',sans-serif; font-weight:800; font-size:.55rem;
       transform:translateY(-6px);
     }
@@ -467,8 +461,8 @@
       letter-spacing:.06em; text-transform:uppercase;
       color:rgba(255,255,255,.6);
     }
-    /* date/location — bottom line, plain and bold like the reference's
-       date stamp, not competing with the names for attention. */
+    /* date/location — bottom line, plain and bold, not competing with
+       the names for attention. */
     .mu-classic-location {
       margin-top:14px;
       font-family:'Barlow Condensed',sans-serif;
@@ -484,32 +478,30 @@
       color:rgba(255,255,255,.35);
     }
 
-    /* Classic + light (orange/white) — same radial-glow + texture recipe,
-       just inverted: a brighter warm highlight fading into a deeper,
-       richer orange instead of near-black. Still lit, not flat. */
-    body.mu-classic-mode.mu-poster-light .mu-classic-card {
-      background:
-        radial-gradient(120% 70% at 50% -6%, rgba(255,224,179,.85) 0%, rgba(255,224,179,.25) 32%, transparent 60%),
-        linear-gradient(180deg, #ffab5c 0%, #e8802f 55%, #d9691a 100%);
-    }
+    /* Classic + light (orange/white) — same scattered-speckle texture,
+       inverted onto a solid orange field instead of near-black. */
+    body.mu-classic-mode.mu-poster-light .mu-classic-card { background:#e8691c; }
     body.mu-classic-mode.mu-poster-light .mu-classic-card::before {
-      background-image:repeating-linear-gradient(115deg, rgba(0,0,0,.05) 0 1px, transparent 1px 5px, transparent 5px 34px);
-      mix-blend-mode:multiply; opacity:.4;
-    }
-    body.mu-classic-mode.mu-poster-light .mu-classic-img.a {
-      filter:contrast(1.12) saturate(1.02) drop-shadow(-10px 14px 24px rgba(0,0,0,.3));
-    }
-    body.mu-classic-mode.mu-poster-light .mu-classic-img.b {
-      filter:contrast(1.12) saturate(1.02) drop-shadow(10px 14px 24px rgba(37,99,235,.35));
+      background-image:
+        radial-gradient(circle, rgba(0,0,0,.28) 1px, transparent 1.6px),
+        radial-gradient(circle, rgba(0,0,0,.16) 1px, transparent 1.6px);
+      background-size:29px 29px, 17px 17px;
+      background-position:0 0, 8px 12px;
+      opacity:.55;
     }
     body.mu-classic-mode.mu-poster-light .mu-classic-name,
     body.mu-classic-mode.mu-poster-light .mu-classic-vsline,
     body.mu-classic-mode.mu-poster-light .mu-classic-location {
       color:#161514;
-      text-shadow:0 2px 4px rgba(255,255,255,.35), 0 10px 26px rgba(0,0,0,.2);
     }
-    body.mu-classic-mode.mu-poster-light .mu-classic-vsline .vs { color:#0a0a0a; text-shadow:none; }
-    body.mu-classic-mode.mu-poster-light .mu-classic-tag { background:#161514; color:#f4e3d3; }
+    body.mu-classic-mode.mu-poster-light .mu-classic-vsline .vs {
+      background:linear-gradient(165deg, #2a2825 0%, #161514 60%, #0a0a0a 100%);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    body.mu-classic-mode.mu-poster-light .mu-classic-tag {
+      background:linear-gradient(165deg, #2a2825 0%, #161514 60%, #0a0a0a 100%);
+      color:#ffd9b3;
+    }
     body.mu-classic-mode.mu-poster-light .mu-classic-weight { color:rgba(0,0,0,.6); }
     body.mu-classic-mode.mu-poster-light .mu-classic-brandline { color:rgba(0,0,0,.45); }
     body.mu-classic-mode.mu-poster-light { background:#f6f3ec !important; }
