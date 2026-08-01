@@ -806,6 +806,7 @@
 
   <div class="mu-poster-controls">
     <button class="mu-poster-theme" id="muPosterTheme" type="button" title="Toggle poster light/dark">🌙</button>
+    <button class="mu-poster-theme" id="muPosterDownload" type="button" title="Download poster">&#8681;</button>
     <button class="mu-poster-exit" id="muPosterExit" type="button">✕ Exit Poster View</button>
   </div>
 
@@ -1252,6 +1253,125 @@
       posterTheme.addEventListener('click', () => {
         const isLight = document.body.classList.toggle('mu-poster-light');
         posterTheme.textContent = isLight ? '☀️' : '🌙';
+      });
+
+      // ── Download Poster ──────────────────────────────────────
+      // Same html2canvas-based approach as fightcard.html — see that file's
+      // comment for why the initial SVG-foreignObject attempt was dropped
+      // (it rendered perfectly via direct navigation, but failed
+      // consistently only when decoded via new Image() on a live http://
+      // page — a narrow browser quirk not worth chasing further).
+      const API_BASE_DL = 'https://mmabridge-backend.onrender.com';
+      let _html2canvasPromise = null;
+      function loadHtml2Canvas() {
+        if (!_html2canvasPromise) {
+          _html2canvasPromise = new Promise((resolve, reject) => {
+            const s = document.createElement('script');
+            s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+            s.onload = () => resolve(window.html2canvas);
+            s.onerror = () => reject(new Error('Could not load html2canvas'));
+            document.head.appendChild(s);
+          });
+        }
+        return _html2canvasPromise;
+      }
+      async function downloadPosterImage(targetEl, filename) {
+        const html2canvas = await loadHtml2Canvas();
+        const imgs = [...targetEl.querySelectorAll('img')];
+        const originalSrcs = imgs.map(img => img.src);
+        await Promise.all(imgs.map(async img => {
+          const src = img.getAttribute('src');
+          if (!src || src.startsWith('data:')) return;
+          try {
+            const proxied = `${API_BASE_DL}/api/image-proxy?url=${encodeURIComponent(src)}`;
+            const blob = await (await fetch(proxied)).blob();
+            const dataUrl = await new Promise((resolve, reject) => {
+              const reader = new FileReader();
+              reader.onload = () => resolve(reader.result);
+              reader.onerror = reject;
+              reader.readAsDataURL(blob);
+            });
+            img.src = dataUrl;
+          } catch (e) {}
+        }));
+        try {
+          const bg = getComputedStyle(targetEl).backgroundColor;
+          const canvas = await html2canvas(targetEl, { backgroundColor: bg, scale: 2, useCORS: true, logging: false });
+          await new Promise((resolve, reject) => {
+            canvas.toBlob(blob => {
+              if (!blob) { reject(new Error('canvas produced no image data')); return; }
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              // target="_blank" isn't for opening a new tab here — it's
+              // what makes theme.js's global "fade + navigate on internal
+              // link click" handler leave this anchor alone. That handler
+              // only excludes href starting with #/http/mailto or
+              // target === "_blank", and blob: URLs matched none of the
+              // first three — it was hijacking this click, preventDefault-
+              // ing the real download, and manually navigating the whole
+              // page to the blob URL instead (which 404s once the browser
+              // gets to it, taking the rest of the page down with it).
+              a.href = url; a.download = filename; a.target = '_blank';
+              document.body.appendChild(a); a.click(); a.remove();
+              // Revoking synchronously right after click() races the
+              // browser actually starting the download — confirmed this
+              // loses the race consistently on this page (many more
+              // scripts loaded than fightcard.html means more event-loop
+              // contention). Give it a beat.
+              setTimeout(() => URL.revokeObjectURL(url), 1000);
+              resolve();
+            }, 'image/png');
+          });
+        } finally {
+          imgs.forEach((img, i) => { img.src = originalSrcs[i]; });
+        }
+      }
+
+      const posterDownload = document.getElementById('muPosterDownload');
+      posterDownload.addEventListener('click', async () => {
+        posterDownload.disabled = true;
+        const original = posterDownload.innerHTML;
+        posterDownload.textContent = '...';
+
+        const isClassic = document.body.classList.contains('mu-classic-mode');
+        let target, restore = () => {};
+        if (isClassic) {
+          target = document.querySelector('.mu-classic-card');
+        } else {
+          // Poster (banner) mode's event name/location line is a sibling
+          // AFTER .mu-hero, not inside it (kept that way so it never
+          // overlaps the fighters) — temporarily move both into an
+          // offscreen wrapper so they capture as one image, then put them
+          // straight back where they came from either way.
+          const hero = document.querySelector('.mu-hero');
+          const heroParent = hero.parentNode, heroNext = hero.nextSibling;
+          const eventline = document.querySelector('.mu-poster-eventline.has-text');
+          const elParent = eventline ? eventline.parentNode : null;
+          const elNext = eventline ? eventline.nextSibling : null;
+          const wrapper = document.createElement('div');
+          wrapper.style.cssText = 'position:fixed; left:-9999px; top:0; display:inline-block;';
+          document.body.appendChild(wrapper);
+          wrapper.appendChild(hero);
+          if (eventline) wrapper.appendChild(eventline);
+          target = wrapper;
+          restore = () => {
+            heroParent.insertBefore(hero, heroNext);
+            if (eventline) elParent.insertBefore(eventline, elNext);
+            wrapper.remove();
+          };
+        }
+
+        try {
+          await downloadPosterImage(target, `${(nameA + '-vs-' + nameB).replace(/[^a-z0-9-]+/gi, '-')}.png`);
+        } catch (e) {
+          posterDownload.textContent = '✕';
+          setTimeout(() => { posterDownload.innerHTML = original; posterDownload.disabled = false; }, 2000);
+          restore();
+          return;
+        }
+        restore();
+        posterDownload.innerHTML = original;
+        posterDownload.disabled = false;
       });
     });
 

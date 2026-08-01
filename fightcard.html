@@ -61,7 +61,7 @@
     body.fc-light .fc-card { background:#faf7f1; }
 
     .fc-header {
-      position:relative; padding:22px 24px 16px;
+      position:relative; padding:18px 24px 14px;
       text-align:center;
       background:linear-gradient(160deg, rgba(217,123,63,.16), transparent 65%);
     }
@@ -74,7 +74,8 @@
     .fc-event-name {
       font-family:'Barlow Condensed',sans-serif; font-weight:900; font-style:italic;
       text-transform:uppercase; color:#fff;
-      font-size:clamp(1.4rem,4.4vw,2rem); line-height:1;
+      font-size:clamp(1.7rem,5.4vw,2.5rem); line-height:.95;
+      -webkit-text-stroke:.5px rgba(0,0,0,.3);
     }
     body.fc-light .fc-event-name { color:#161514; }
     .fc-event-sub {
@@ -86,48 +87,46 @@
 
     /* ── CARD MODE — dense 2-column grid of bout cells ── */
     .fc-section-bar {
-      display:flex; align-items:center; gap:10px;
       padding:9px 20px; margin-top:4px;
       background:rgba(217,123,63,.12);
-      font-family:'Montserrat',sans-serif; font-weight:800; font-size:.62rem;
-      letter-spacing:.16em; text-transform:uppercase; color:#d97b3f;
+      font-family:'Montserrat',sans-serif; font-weight:800; font-size:.64rem;
+      letter-spacing:.18em; text-transform:uppercase; color:#d97b3f;
     }
-    .fc-section-bar::after { content:''; flex:1; height:1px; background:rgba(217,123,63,.3); }
     .fc-grid {
-      padding:14px 16px 20px; display:grid;
-      grid-template-columns:1fr 1fr; gap:10px;
+      padding:10px 12px 16px; display:grid;
+      grid-template-columns:1fr 1fr; gap:8px;
     }
     @media(max-width:520px) { .fc-grid { grid-template-columns:1fr; } }
     .fc-cell {
       border:1px solid rgba(255,255,255,.09); border-radius:6px;
-      padding:10px; display:flex; flex-direction:column; gap:6px;
+      padding:0; overflow:hidden;
       background:rgba(255,255,255,.015);
     }
     body.fc-light .fc-cell { border-color:rgba(0,0,0,.09); background:rgba(0,0,0,.015); }
-    .fc-cell-photos { display:flex; align-items:center; justify-content:center; gap:8px; }
+    .fc-cell-photos { display:flex; align-items:stretch; }
     .fc-thumb {
-      width:64px; height:64px; border-radius:4px; object-fit:cover;
+      width:50%; height:104px; object-fit:cover;
       flex-shrink:0; background:#1a1a1c;
-      border:1px solid rgba(255,255,255,.1);
     }
-    .fc-thumb.empty { display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,.15); font-size:1.4rem; }
-    .fc-cell-vs {
-      font-family:'Barlow Condensed',sans-serif; font-weight:900; font-style:italic;
-      font-size:.72rem; color:rgba(255,255,255,.28); flex-shrink:0;
-    }
+    .fc-thumb.empty { display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,.15); font-size:1.8rem; }
     .fc-cell-names {
       display:flex; align-items:flex-start; justify-content:space-between; gap:6px;
+      padding:8px 10px 2px;
     }
     .fc-cell-name {
-      font-family:'Montserrat',sans-serif; font-weight:800; font-size:.62rem;
-      color:#fff; text-transform:uppercase; letter-spacing:.01em;
+      font-family:'Montserrat',sans-serif; font-weight:900; font-size:.72rem;
+      color:#fff; text-transform:uppercase; letter-spacing:.005em;
       line-height:1.15; flex:1;
     }
     .fc-cell-name.b { text-align:right; }
     body.fc-light .fc-cell-name { color:#161514; }
+    .fc-cell-vs {
+      font-family:'Barlow Condensed',sans-serif; font-weight:900; font-style:italic;
+      font-size:.6rem; color:#d97b3f; flex-shrink:0; padding-top:2px;
+    }
     .fc-cell-weight {
-      text-align:center;
-      font-family:'Montserrat',sans-serif; font-weight:700; font-size:.48rem;
+      text-align:center; padding:0 10px 8px;
+      font-family:'Montserrat',sans-serif; font-weight:700; font-size:.5rem;
       letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.32);
     }
     body.fc-light .fc-cell-weight { color:rgba(0,0,0,.4); }
@@ -135,20 +134,21 @@
     /* ── NEXT-FIGHT MODE — stacked matchup list, now with headshots ── */
     .fc-next-rows { display:flex; flex-direction:column; }
     .fc-next-row {
-      position:relative; padding:16px 22px;
+      position:relative; padding:0 16px;
+      min-height:104px;
       border-bottom:1px solid rgba(255,255,255,.07);
-      display:flex; align-items:center; gap:14px;
+      display:flex; align-items:stretch; gap:12px;
     }
     body.fc-light .fc-next-row { border-bottom-color:rgba(0,0,0,.08); }
     .fc-next-row:last-child { border-bottom:none; }
     .fc-next-row:nth-child(odd) { background:rgba(217,123,63,.05); }
     .fc-next-row:nth-child(even) { background:rgba(96,165,250,.05); }
     .fc-next-photo {
-      width:56px; height:56px; border-radius:6px; object-fit:cover; flex-shrink:0;
+      width:84px; height:auto; margin:8px 0; border-radius:6px; object-fit:cover; flex-shrink:0;
       border:1px solid rgba(255,255,255,.12);
     }
     .fc-next-photo.b-side { order:3; }
-    .fc-next-body { flex:1; min-width:0; }
+    .fc-next-body { flex:1; min-width:0; display:flex; flex-direction:column; justify-content:center; }
     .fc-next-tag {
       display:inline-block; margin-bottom:4px;
       font-family:'Montserrat',sans-serif; font-weight:800; font-size:.54rem;
@@ -157,7 +157,7 @@
     .fc-next-matchup {
       font-family:'Barlow Condensed',sans-serif; font-weight:900; font-style:italic;
       text-transform:uppercase; color:#fff; line-height:1;
-      font-size:clamp(1.1rem,4vw,1.6rem);
+      font-size:clamp(1.2rem,4.4vw,1.8rem);
       display:flex; align-items:baseline; gap:8px; flex-wrap:wrap;
     }
     body.fc-light .fc-next-matchup { color:#161514; }
@@ -249,6 +249,7 @@
     <a class="fc-back" id="fcBack" href="admin.html">&larr; Back</a>
     <div class="fc-right-controls">
       <button class="fc-btn" id="fcThemeBtn" type="button">🌙 Dark</button>
+      <button class="fc-btn" id="fcDownloadBtn" type="button">&#8681; Download</button>
       <button class="fc-btn" id="fcEditBtn" type="button">✎ Edit Fights</button>
     </div>
   </div>
@@ -302,11 +303,11 @@
             <div class="fc-cell">
               <div class="fc-cell-photos">
                 ${b.imgA ? `<img class="fc-thumb" src="${esc(b.imgA)}" onerror="this.outerHTML='<div class=&quot;fc-thumb empty&quot;>?</div>'">` : '<div class="fc-thumb empty">?</div>'}
-                <div class="fc-cell-vs">VS</div>
                 ${b.imgB ? `<img class="fc-thumb" src="${esc(b.imgB)}" onerror="this.outerHTML='<div class=&quot;fc-thumb empty&quot;>?</div>'">` : '<div class="fc-thumb empty">?</div>'}
               </div>
               <div class="fc-cell-names">
                 <div class="fc-cell-name">${esc(b.a)}</div>
+                <div class="fc-cell-vs">VS</div>
                 <div class="fc-cell-name b">${esc(b.b)}</div>
               </div>
               ${b.weight ? `<div class="fc-cell-weight">${esc(b.weight)}</div>` : ''}
@@ -406,6 +407,11 @@
            <input type="text" class="fc-input" id="fcNewTag" placeholder="Tag (optional)">`;
 
       editPanel.innerHTML = `
+        <div class="fc-edit-title">Title</div>
+        <div class="fc-add-row-extra">
+          <input type="text" class="fc-input" id="fcEditEventName" placeholder="Event name (e.g. UFC 331)" value="${esc(eventName)}">
+          <input type="text" class="fc-input" id="fcEditEventSub" placeholder="Subtitle (optional, e.g. Sep 8 · Inglewood)" value="${esc(eventSub)}">
+        </div>
         <div class="fc-edit-title">${mode === 'card' ? 'Fights on this card' : 'Matchups'} (${bouts.length})</div>
         <div class="fc-edit-list">
           ${bouts.length ? bouts.map(b => `
@@ -436,6 +442,18 @@
           bouts = bouts.filter(b => b._id !== id);
           render();
         });
+      });
+
+      // Title fields only re-render the poster itself, not the whole edit
+      // panel — re-rendering the panel on every keystroke would blow away
+      // focus and cursor position mid-type.
+      document.getElementById('fcEditEventName').addEventListener('input', e => {
+        eventName = e.target.value; document.title = `${eventName} | MMA Bridge`;
+        if (mode === 'next') renderNextMode(); else renderCardMode();
+      });
+      document.getElementById('fcEditEventSub').addEventListener('input', e => {
+        eventSub = e.target.value;
+        if (mode === 'next') renderNextMode(); else renderCardMode();
       });
 
       const inputA = document.getElementById('fcNewA');
@@ -480,6 +498,104 @@
       editBtn.classList.toggle('active', editMode);
       editPanel.classList.toggle('open', editMode);
       if (editMode) { loadFighters().then(renderEditPanel); }
+    });
+
+    // ── Download Poster ──────────────────────────────────────
+    // Fighter photos come from a CDN with no Access-Control-Allow-Origin
+    // header, so drawing them straight into a <canvas> taints it and blocks
+    // export. Fix: re-fetch each image through the backend's same-origin
+    // proxy first (swapped to a data: URI, which never taints), then
+    // rasterize with html2canvas — NOT a hand-rolled SVG-foreignObject +
+    // Image() approach: that route was tried first and, even once fully
+    // valid (well-formed XML, verified by opening the exact generated SVG
+    // directly in a browser tab, where it rendered perfectly), still failed
+    // consistently — but ONLY when loaded via new Image() from a page
+    // served over http://, not from about:blank. That's a real, narrow
+    // browser quirk around SVG-as-<img> decoding that wasn't worth chasing
+    // further; html2canvas walks the DOM and paints it with Canvas 2D
+    // primitives instead, sidestepping that whole failure category.
+    const API_BASE = 'https://mmabridge-backend.onrender.com';
+    let _html2canvasPromise = null;
+    function loadHtml2Canvas() {
+      if (!_html2canvasPromise) {
+        _html2canvasPromise = new Promise((resolve, reject) => {
+          const s = document.createElement('script');
+          s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+          s.onload = () => resolve(window.html2canvas);
+          s.onerror = () => reject(new Error('Could not load html2canvas'));
+          document.head.appendChild(s);
+        });
+      }
+      return _html2canvasPromise;
+    }
+    async function downloadPosterImage(targetEl, filename) {
+      const html2canvas = await loadHtml2Canvas();
+
+      // Swap real fighter photos to same-origin data: URIs in place (not on
+      // a detached clone — html2canvas renders far more faithfully against
+      // an element that's actually laid out in the live page), then restore
+      // the originals afterward regardless of outcome.
+      const imgs = [...targetEl.querySelectorAll('img')];
+      const originalSrcs = imgs.map(img => img.src);
+      await Promise.all(imgs.map(async img => {
+        const src = img.getAttribute('src');
+        if (!src || src.startsWith('data:')) return;
+        try {
+          const proxied = `${API_BASE}/api/image-proxy?url=${encodeURIComponent(src)}`;
+          const blob = await (await fetch(proxied)).blob();
+          const dataUrl = await new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(blob);
+          });
+          img.src = dataUrl;
+        } catch (e) { /* leave the original src — html2canvas will just skip/blank that one image, not fail the whole export */ }
+      }));
+
+      try {
+        const bg = getComputedStyle(targetEl).backgroundColor;
+        const canvas = await html2canvas(targetEl, { backgroundColor: bg, scale: 2, useCORS: true, logging: false });
+        await new Promise((resolve, reject) => {
+          canvas.toBlob(blob => {
+            if (!blob) { reject(new Error('canvas produced no image data')); return; }
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            // target="_blank" defends against theme.js-style global
+            // "fade + navigate on internal link click" handlers (confirmed
+            // one exists and hijacks this exact click on matchup.html,
+            // which loads theme.js and this page doesn't — but cheap
+            // insurance either way).
+            a.href = url; a.download = filename; a.target = '_blank';
+            document.body.appendChild(a); a.click(); a.remove();
+            // Revoking synchronously right after click() races the browser
+            // actually starting the download — on a heavier page this can
+            // lose the race outright (confirmed: reliable here, but failed
+            // 100% of the time on matchup.html, which loads far more
+            // scripts and has more event-loop contention). Give it a beat.
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+            resolve();
+          }, 'image/png');
+        });
+      } finally {
+        imgs.forEach((img, i) => { img.src = originalSrcs[i]; });
+      }
+    }
+
+    const downloadBtn = document.getElementById('fcDownloadBtn');
+    downloadBtn.addEventListener('click', async () => {
+      downloadBtn.disabled = true;
+      const original = downloadBtn.innerHTML;
+      downloadBtn.textContent = 'Preparing...';
+      try {
+        await downloadPosterImage(document.querySelector('.fc-card'), `${eventName.replace(/[^a-z0-9]+/gi,'-')}.png`);
+      } catch (e) {
+        downloadBtn.textContent = 'Failed';
+        setTimeout(() => { downloadBtn.innerHTML = original; downloadBtn.disabled = false; }, 2000);
+        return;
+      }
+      downloadBtn.innerHTML = original;
+      downloadBtn.disabled = false;
     });
 
     applyTheme();
