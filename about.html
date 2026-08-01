@@ -55,18 +55,6 @@
       box-shadow: 0 28px 56px rgba(0,0,0,.55), 0 0 0 1px rgba(255,138,61,.28), 0 0 40px rgba(255,138,61,.07);
       border-color: rgba(255,138,61,.32);
     }
-    .ab-founder-photo-wrap {
-      flex-shrink: 0;
-      width: 90px; height: 90px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 2px solid rgba(255,138,61,.3);
-      transition: box-shadow .28s ease;
-    }
-    .ab-founder-card:hover .ab-founder-photo-wrap {
-      box-shadow: 0 0 0 5px rgba(255,138,61,.18), 0 8px 24px rgba(0,0,0,.4);
-    }
-    .ab-founder-photo { width:100%;height:100%;object-fit:cover;display:block; }
     .ab-founder-info { flex: 1; }
     .ab-founder-name {
       font-family:'Montserrat',sans-serif;font-weight:800;font-size:1.05rem;
@@ -177,6 +165,7 @@
     <h1 class="ab-title">MMA <span>Bridge</span></h1>
     <p class="ab-tagline">Built by a fan, for fans who actually watch the fights.</p>
 
+    <div data-follow-us style="margin-bottom:36px;"></div>
 
     <!-- Manifesto -->
     <p class="ab-manifesto">
@@ -194,9 +183,6 @@
     <div class="ab-founder-section">
       <div class="ab-founder-eyebrow">The Founder</div>
       <a class="ab-founder-card" href="https://www.linkedin.com/in/harshith-bandi-35234b2b9" target="_blank" rel="noopener">
-        <div class="ab-founder-photo-wrap">
-          <img class="ab-founder-photo" src="images/harshith.png" alt="Harshith Bandi">
-        </div>
         <div class="ab-founder-info">
           <div class="ab-founder-name">Harshith Bandi</div>
           <div class="ab-founder-role">Founder &amp; Developer</div>
@@ -317,6 +303,6 @@
   <script src="push.js?v=1.2"></script>
   <script src="chat.js?v=2.5"></script>
 <script src="lucas-moments.js?v=1.3"></script>
-  
+  <script src="social-follow.js?v=1.0"></script>
 </body>
 </html>
