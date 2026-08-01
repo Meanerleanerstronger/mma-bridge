@@ -24808,6 +24808,14 @@
     "nickname": "All Hail",
     "last5": [
       {
+        "opponent": "Nina Milošević",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Alice Pereira",
         "result": "L",
         "method": "TKO",
@@ -27725,6 +27733,14 @@
     },
     "nickname": "The Great",
     "last5": [
+      {
+        "opponent": "Bogdan Grad",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 2,
+        "time": null
+      },
       {
         "opponent": "Marcio Barbosa",
         "result": "L",
@@ -39189,7 +39205,17 @@
       "tdAcc": "100%",
       "tdDef": "55%",
       "subAvg": "1.0"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Alexander Poppeck",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "max-gimenis",
@@ -39346,6 +39372,14 @@
     },
     "nickname": "The Unleashed",
     "last5": [
+      {
+        "opponent": "Dennis Buzukja",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 2,
+        "time": null
+      },
       {
         "opponent": "Muhammad Naimov",
         "result": "L",
@@ -40531,7 +40565,17 @@
       "tdAcc": "0%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Hailey Cowan",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "anthony-hernandez",
@@ -44162,6 +44206,14 @@
     },
     "last5": [
       {
+        "opponent": "Kyle Prepolec",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Grant Dawson",
         "result": "L",
         "method": "Submission (rear-naked choke)",
@@ -44263,6 +44315,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Mateusz Rębecki",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Drew Dober",
         "result": "L",
@@ -44398,7 +44458,17 @@
       "tdAcc": "0%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Stephanie Luciano",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "stephanie-luciano",
@@ -44412,6 +44482,16 @@
       "tdAcc": "71%",
       "tdDef": "80%",
       "subAvg": "0.3"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Marina Spasić",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      }
+    ]
   }
 ]
