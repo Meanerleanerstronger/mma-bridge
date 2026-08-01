@@ -44242,7 +44242,17 @@
         "time": "5:00"
       }
     ],
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-07/REBECKI_MATEUSZ_L_08-01.png?itok=OcAV8a48"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-07/REBECKI_MATEUSZ_L_08-01.png?itok=OcAV8a48",
+    "stats": {
+      "slpm": "4.79",
+      "strAcc": "46%",
+      "sapm": "4.36",
+      "strDef": "54%",
+      "tdAvg": "3.05",
+      "tdAcc": "48%",
+      "tdDef": "53%",
+      "subAvg": "0.4"
+    }
   },
   {
     "id": "kyle-prepolec",
@@ -44334,24 +44344,74 @@
         "time": "5:00"
       }
     ],
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/PREPOLEC_KYLE_L_10-18.png?itok=iTfcQHT_"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/PREPOLEC_KYLE_L_10-18.png?itok=iTfcQHT_",
+    "stats": {
+      "slpm": "3.25",
+      "strAcc": "34%",
+      "sapm": "5.69",
+      "strDef": "48%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "45%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "milos-janicic",
     "name": "Milos Janicic",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-07/JANICIC_MILOS_L_08-01.png?itok=k_mHSDi4"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-07/JANICIC_MILOS_L_08-01.png?itok=k_mHSDi4",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "noah-gugnon",
-    "name": "Noah Gugnon"
+    "name": "Noah Gugnon",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "marina-spasic",
     "name": "Marina Spasić",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-07/SPASIC_MARINA_L_08-01.png?itok=OpUqsboj"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-07/SPASIC_MARINA_L_08-01.png?itok=OpUqsboj",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "stephanie-luciano",
-    "name": "Stephanie Luciano"
+    "name": "Stephanie Luciano",
+    "stats": {
+      "slpm": "5.20",
+      "strAcc": "42%",
+      "sapm": "3.04",
+      "strDef": "64%",
+      "tdAvg": "1.30",
+      "tdAcc": "71%",
+      "tdDef": "80%",
+      "subAvg": "0.3"
+    }
   }
 ]
