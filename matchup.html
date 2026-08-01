@@ -10,7 +10,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fight Matchup | MMA Bridge</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800;1,900&family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800;1,900&family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=Oswald:wght@700;800&display=swap" rel="stylesheet">
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="style.css?v=9.21" />
   <style>
@@ -414,24 +414,24 @@
       content:''; position:absolute; inset:0; z-index:2; pointer-events:none;
       background:radial-gradient(ellipse at 50% 45%, transparent 52%, rgba(0,0,0,.5) 100%);
     }
-    /* badge — dropped the filled gradient pill entirely (read as an
-       "amateur"/flashy button sitting on the poster). Replaced with a
-       plain editorial masthead label: wide-tracked small caps and a thin
-       accent rule underneath, no fill, no shadow-box — the kind of
-       restrained typographic mark real premium event branding uses
-       instead of a big colored button shouting for attention. */
+    /* badge — a real solid block again, not a thin text-only label (that
+       read as flimsy/no presence) and not a light gradient-sheen pill
+       (that read as a flashy button). Flat solid orange fill, heavy
+       Oswald type at real size, crisp drop shadow for lift — substantial
+       without being shiny. Same block in both modes, no color-per-theme
+       logic needed since it's a solid fill either way. */
     .mu-classic-eventname {
       position:absolute; top:6%; left:50%; z-index:3;
       transform:translateX(-50%);
+      background:#e8691c;
+      box-shadow:0 14px 30px rgba(0,0,0,.5);
+      padding:13px 30px;
       text-align:center; white-space:nowrap;
       font-family:'Oswald',sans-serif;
-      font-weight:600; text-transform:uppercase;
-      font-size:clamp(.8rem,2.6vw,1rem); line-height:1;
-      color:#fff; letter-spacing:.34em;
-      padding-bottom:9px;
-      border-bottom:1.5px solid rgba(232,105,28,.75);
+      font-weight:800; text-transform:uppercase;
+      font-size:clamp(1.3rem,4.6vw,1.9rem); line-height:1;
+      color:#0a0a0a; letter-spacing:.04em;
     }
-    body.mu-classic-mode.mu-poster-light .mu-classic-eventname { color:#161514; }
     /* optional custom tag (e.g. "REMATCH") — small ribbon, top-left corner,
        distinct from the centered event-name badge. */
     .mu-classic-tagline {

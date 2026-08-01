@@ -69,18 +69,14 @@
       /* no background glow — a soft orange wash behind the header read as
          AI-slop haze rather than depth; plain flat is more premium here. */
     }
-    /* badge — dropped the filled gradient pill (read as an amateur/flashy
-       button) for the same restrained editorial masthead label used on
-       the H2H poster: wide-tracked text and a thin accent rule, no fill. */
+    /* badge — the real logo mark, not a fake text-in-a-box. It's a black
+       circular badge with its own built-in fill, so it reads the same on
+       either theme without needing a light/dark variant. */
     .fc-badge {
-      display:inline-block; margin-bottom:12px;
-      padding-bottom:8px;
-      border-bottom:1.5px solid rgba(232,105,28,.75);
-      font-family:'Oswald',sans-serif; font-weight:600;
-      font-size:.72rem; color:#fff;
-      letter-spacing:.34em; text-transform:uppercase;
+      display:block; margin:0 auto 10px;
+      width:52px; height:52px;
+      filter:drop-shadow(0 6px 14px rgba(0,0,0,.4));
     }
-    body.fc-light .fc-badge { color:#161514; }
     /* small hard-offset extrusion — a touch of "raised type" depth, not a
        blur/glow — on the biggest word on the page. */
     .fc-event-name {
@@ -390,7 +386,7 @@
 
       root.innerHTML = `
         <div class="fc-header">
-          <div class="fc-badge">MMA Bridge</div>
+          <img class="fc-badge" src="images/mma-bridge-logo.png" alt="MMA Bridge">
           <div class="fc-event-name">${esc(eventName)}</div>
           ${eventSub ? `<div class="fc-event-sub">${esc(eventSub)}</div>` : ''}
         </div>
@@ -415,7 +411,7 @@
 
       root.innerHTML = `
         <div class="fc-header">
-          <div class="fc-badge">MMA Bridge</div>
+          <img class="fc-badge" src="images/mma-bridge-logo.png" alt="MMA Bridge">
           <div class="fc-event-name">${esc(eventName)}</div>
           ${eventSub ? `<div class="fc-event-sub">${esc(eventSub)}</div>` : ''}
         </div>
