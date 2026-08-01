@@ -421,7 +421,7 @@
     .mu-classic-logo {
       position:absolute; top:3%; left:50%; z-index:3;
       transform:translateX(-50%);
-      width:36px; height:36px;
+      width:68px; height:68px;
       filter:drop-shadow(0 6px 14px rgba(0,0,0,.4));
     }
     /* optional custom tag (e.g. "REMATCH") — small ribbon, top-left corner. */
@@ -438,7 +438,7 @@
        top pulled back up (only the small logo needs headroom) and the max
        width opened up so they fill more of the frame. */
     .mu-classic-photos {
-      position:absolute; left:0; right:0; bottom:23%; top:9%; z-index:1;
+      position:absolute; left:0; right:0; bottom:23%; top:13%; z-index:1;
       display:flex; align-items:flex-end; justify-content:center;
     }
     .mu-classic-img {
@@ -510,25 +510,26 @@
       color:rgba(255,255,255,.6);
     }
     /* event name — moved down here as plain text (no badge/container),
-       sitting right above the location line in the exact same font
-       treatment as .mu-classic-location below. */
+       sitting right above the location line — bigger than the location
+       now, since it's the more important of the two lines. */
     .mu-classic-eventline {
       margin-top:14px;
       font-family:'Barlow Condensed',sans-serif;
       font-weight:800; font-style:normal; text-transform:uppercase;
-      font-size:clamp(.9rem,3.4vw,1.15rem); line-height:1;
+      font-size:clamp(1.2rem,4.4vw,1.6rem); line-height:1;
       color:#e8691c;
       text-shadow:1px 1px 0 rgba(40,16,4,.8);
     }
-    /* date/location — same rich orange as the names/badge now, still the
-       bottom-line anchor rather than competing for the biggest type. */
+    /* date/location — white on the dark card / black on the light one
+       (was the same orange as the event name above, which made the two
+       lines blur together — this gives the location its own identity). */
     .mu-classic-location {
       margin-top:8px;
       font-family:'Barlow Condensed',sans-serif;
       font-weight:800; font-style:normal; text-transform:uppercase;
       font-size:clamp(.9rem,3.4vw,1.15rem); line-height:1;
-      color:#e8691c;
-      text-shadow:1px 1px 0 rgba(40,16,4,.8);
+      color:#fff;
+      text-shadow:1px 1px 0 rgba(0,0,0,.5);
     }
     .mu-classic-brandline {
       position:absolute; left:20px; right:20px; bottom:8px; z-index:3;
@@ -575,9 +576,12 @@
       color:#e8691c;
       text-shadow:2px 2px 0 rgba(0,0,0,.22), 4px 4px 0 rgba(0,0,0,.12);
     }
-    body.mu-classic-mode.mu-poster-light .mu-classic-location,
     body.mu-classic-mode.mu-poster-light .mu-classic-eventline {
       text-shadow:1px 1px 0 rgba(0,0,0,.18);
+    }
+    body.mu-classic-mode.mu-poster-light .mu-classic-location {
+      color:#161514;
+      text-shadow:1px 1px 0 rgba(255,255,255,.5);
     }
     body.mu-classic-mode.mu-poster-light .mu-classic-card {
       box-shadow:inset 0 0 0 1px rgba(232,105,28,.4), 0 30px 90px rgba(0,0,0,.22);
