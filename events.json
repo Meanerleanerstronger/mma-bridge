@@ -11584,7 +11584,7 @@
     "location": "Belgrade, Serbia",
     "venue": "Belgrade Arena",
     "poster": "https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/2026-07/080126-ufc-fight-night-medic-vs-rodriguez-EVENT-ART.jpg",
-    "status": "upcoming",
+    "status": "completed",
     "start_time": null,
     "mainCard": [
       {
@@ -11596,7 +11596,10 @@
         "ranked": false,
         "slot": "main",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/MEDIC_UROS_L_08-09.png?itok=EtRaAk1l",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/RODRIGUEZ_DANIEL_L_10-12.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/RODRIGUEZ_DANIEL_L_10-12.png",
+        "winner": "Uroš Medić",
+        "method": "KO/TKO",
+        "round": 1
       },
       {
         "a": "Ante Delija",
@@ -16620,6 +16623,54 @@
         "imgA": "",
         "imgB": "",
         "cancelled": true
+      },
+      {
+        "a": "Brandon Moreno",
+        "b": "Joseph Morales",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "comain",
+        "imgA": "",
+        "imgB": "",
+        "cancelled": true
+      },
+      {
+        "a": "Tim Elliott",
+        "b": "Édgar Cháirez",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "",
+        "cancelled": true
+      },
+      {
+        "a": "Curtis Blaydes",
+        "b": "Waldo Cortes Acosta",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "",
+        "cancelled": true
+      },
+      {
+        "a": "Manon Fiorot",
+        "b": "Alexa Grasso",
+        "weight": "W Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "",
+        "cancelled": true
       }
     ],
     "prelims": [
@@ -18852,6 +18903,30 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/ALDRICH_JJ_L_04-18.png",
+        "imgB": "",
+        "cancelled": true
+      },
+      {
+        "a": "Kelvin Gastelum",
+        "b": "Yousri Belgaroui",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "",
+        "cancelled": true
+      },
+      {
+        "a": "JJ Aldrich",
+        "b": "Regina Tarin",
+        "weight": "W Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
         "imgB": "",
         "cancelled": true
       },
