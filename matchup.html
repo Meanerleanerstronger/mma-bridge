@@ -414,34 +414,17 @@
       content:''; position:absolute; inset:0; z-index:2; pointer-events:none;
       background:radial-gradient(ellipse at 50% 45%, transparent 52%, rgba(0,0,0,.5) 100%);
     }
-    /* logo — sits above the event badge, top-dead-center of the card. */
+    /* logo — top-dead-center of the card. The event-name badge that used
+       to sit below it is gone (moved to plain text at the bottom, next to
+       the location line — see .mu-classic-eventline) — with only the logo
+       up here now, far less headroom is needed above the fighters. */
     .mu-classic-logo {
-      position:absolute; top:2.5%; left:50%; z-index:3;
+      position:absolute; top:3%; left:50%; z-index:3;
       transform:translateX(-50%);
-      width:38px; height:38px;
+      width:36px; height:36px;
       filter:drop-shadow(0 6px 14px rgba(0,0,0,.4));
     }
-    /* badge — a real solid block again, not a thin text-only label (that
-       read as flimsy/no presence) and not a light gradient-sheen pill
-       (that read as a flashy button). Flat solid orange fill, heavy
-       Oswald type at real size, crisp drop shadow for lift — substantial
-       without being shiny. Same block in both modes, no color-per-theme
-       logic needed since it's a solid fill either way. */
-    .mu-classic-eventname {
-      position:absolute; top:11%; left:50%; z-index:3;
-      transform:translateX(-50%);
-      background:#e8691c;
-      box-shadow:0 14px 30px rgba(0,0,0,.5);
-      border-radius:8px;
-      padding:14px 32px;
-      text-align:center; white-space:nowrap;
-      font-family:'Oswald',sans-serif;
-      font-weight:800; text-transform:uppercase;
-      font-size:clamp(1.6rem,5.6vw,2.3rem); line-height:1;
-      color:#0a0a0a; letter-spacing:.03em;
-    }
-    /* optional custom tag (e.g. "REMATCH") — small ribbon, top-left corner,
-       distinct from the centered event-name badge. */
+    /* optional custom tag (e.g. "REMATCH") — small ribbon, top-left corner. */
     .mu-classic-tagline {
       position:absolute; top:6%; left:20px; z-index:3;
       background:linear-gradient(165deg, #ff9a4d 0%, #e8691c 60%, #c65a12 100%);
@@ -451,16 +434,15 @@
       padding:6px 12px;
       box-shadow:0 6px 16px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.45), inset 0 -2px 0 rgba(0,0,0,.18);
     }
-    /* top:20% (was 2%) reserves real headroom above the fighters for the
-       logo + event badge stacked above — at 2% the photos started almost
-       at the card's top edge with the fighters' heads already right there,
-       so the badge had nowhere to sit but directly over a face. */
+    /* Bigger fighters now that there's no badge eating vertical space —
+       top pulled back up (only the small logo needs headroom) and the max
+       width opened up so they fill more of the frame. */
     .mu-classic-photos {
-      position:absolute; left:0; right:0; bottom:20%; top:20%; z-index:1;
+      position:absolute; left:0; right:0; bottom:23%; top:9%; z-index:1;
       display:flex; align-items:flex-end; justify-content:center;
     }
     .mu-classic-img {
-      height:100%; width:auto; max-width:60%;
+      height:100%; width:auto; max-width:68%;
       object-fit:contain; object-position:bottom center;
       filter:contrast(1.12) saturate(1.02);
     }
@@ -527,10 +509,21 @@
       letter-spacing:.06em; text-transform:uppercase;
       color:rgba(255,255,255,.6);
     }
+    /* event name — moved down here as plain text (no badge/container),
+       sitting right above the location line in the exact same font
+       treatment as .mu-classic-location below. */
+    .mu-classic-eventline {
+      margin-top:14px;
+      font-family:'Barlow Condensed',sans-serif;
+      font-weight:800; font-style:normal; text-transform:uppercase;
+      font-size:clamp(.9rem,3.4vw,1.15rem); line-height:1;
+      color:#e8691c;
+      text-shadow:1px 1px 0 rgba(40,16,4,.8);
+    }
     /* date/location — same rich orange as the names/badge now, still the
        bottom-line anchor rather than competing for the biggest type. */
     .mu-classic-location {
-      margin-top:14px;
+      margin-top:8px;
       font-family:'Barlow Condensed',sans-serif;
       font-weight:800; font-style:normal; text-transform:uppercase;
       font-size:clamp(.9rem,3.4vw,1.15rem); line-height:1;
@@ -582,7 +575,8 @@
       color:#e8691c;
       text-shadow:2px 2px 0 rgba(0,0,0,.22), 4px 4px 0 rgba(0,0,0,.12);
     }
-    body.mu-classic-mode.mu-poster-light .mu-classic-location {
+    body.mu-classic-mode.mu-poster-light .mu-classic-location,
+    body.mu-classic-mode.mu-poster-light .mu-classic-eventline {
       text-shadow:1px 1px 0 rgba(0,0,0,.18);
     }
     body.mu-classic-mode.mu-poster-light .mu-classic-card {
@@ -913,8 +907,8 @@
     @media(max-width:420px){
       .mu-classic-textblock { bottom:18px; }
       .mu-classic-name, .mu-classic-vsline { font-size:clamp(1.3rem,7.6vw,1.9rem); }
-      .mu-classic-location { font-size:clamp(.8rem,4.4vw,1.1rem); }
-      .mu-classic-eventname { font-size:clamp(.75rem,4.6vw,1.1rem); }
+      .mu-classic-location,
+      .mu-classic-eventline { font-size:clamp(.8rem,4.4vw,1.1rem); }
     }
   </style>
 </head>
@@ -1319,7 +1313,6 @@
           <div class="mu-classic-card">
             <img class="mu-classic-logo" src="images/mma-bridge-logo.png" alt="MMA Bridge">
             ${tagParam?`<div class="mu-classic-tagline">${esc(tagParam)}</div>`:''}
-            ${classicEventName?`<div class="mu-classic-eventname">${esc(classicEventName)}</div>`:''}
             <div class="mu-classic-photos">
               ${shotA?`<img class="mu-classic-img a" src="${esc(shotA)}" alt="${esc(nameA)}" onerror="this.style.display='none'">`:''}
               ${shotB?`<img class="mu-classic-img b" src="${esc(shotB)}" alt="${esc(nameB)}" onerror="this.style.display='none'">`:''}
@@ -1333,6 +1326,7 @@
                 <span class="vs">vs</span>${esc(nameB)}
               </div>
               ${weight?`<div class="mu-classic-weight">${esc(weight)}</div>`:''}
+              ${classicEventName?`<div class="mu-classic-eventline">${esc(classicEventName)}</div>`:''}
               ${classicLocation?`<div class="mu-classic-location">${esc(classicLocation)}</div>`:''}
             </div>
             <div class="mu-classic-brandline">
