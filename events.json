@@ -11679,7 +11679,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/KLEIN_LUDOVIT_L_10-25.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-06/MUSAYEV_TOFIQ_L_06-21.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-06/MUSAYEV_TOFIQ_L_06-21.png",
+        "winner": "Tofiq Musayev",
+        "method": "KO/TKO",
+        "round": 2
       },
       {
         "a": "Mark Vologdin",
@@ -11690,7 +11693,9 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/VOLOGDIN_MARK_R_04-18.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-09/MUSASA_JOSIAS_R_09-27.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-09/MUSASA_JOSIAS_R_09-27.png",
+        "winner": "Borislav Nikolic",
+        "round": 3
       },
       {
         "a": "Dennis Buzukja",
@@ -11715,7 +11720,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/ELLIOTT_OBAN_L_01-31.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/OLIVEIRA_MICHAEL_L.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/OLIVEIRA_MICHAEL_L.png",
+        "winner": "Michael Oliveira",
+        "method": "KO/TKO",
+        "round": 1
       },
       {
         "a": "Nina Milošević",
@@ -16406,6 +16414,54 @@
         "imgA": "",
         "imgB": "",
         "cancelled": true
+      },
+      {
+        "a": "Brandon Moreno",
+        "b": "Joseph Morales",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "comain",
+        "imgA": "",
+        "imgB": "",
+        "cancelled": true
+      },
+      {
+        "a": "Tim Elliott",
+        "b": "Édgar Cháirez",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "",
+        "cancelled": true
+      },
+      {
+        "a": "Curtis Blaydes",
+        "b": "Waldo Cortes Acosta",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "",
+        "cancelled": true
+      },
+      {
+        "a": "Manon Fiorot",
+        "b": "Alexa Grasso",
+        "weight": "W Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "",
+        "cancelled": true
       }
     ],
     "prelims": [
@@ -18518,6 +18574,30 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/ALDRICH_JJ_L_04-18.png",
+        "imgB": "",
+        "cancelled": true
+      },
+      {
+        "a": "Kelvin Gastelum",
+        "b": "Yousri Belgaroui",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "",
+        "cancelled": true
+      },
+      {
+        "a": "JJ Aldrich",
+        "b": "Regina Tarin",
+        "weight": "W Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
         "imgB": "",
         "cancelled": true
       },
