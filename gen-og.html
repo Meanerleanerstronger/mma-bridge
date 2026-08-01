@@ -7,12 +7,12 @@
   <style>
     body { background: #111; color: #fff; font-family: monospace; padding: 24px; }
     canvas { display: block; border: 1px solid #333; margin: 16px 0; }
-    button { background: #d97b3f; color: #000; border: none; padding: 10px 24px; font-size: 1rem; font-weight: 700; border-radius: 6px; cursor: pointer; }
+    button { background: #ff8a3d; color: #000; border: none; padding: 10px 24px; font-size: 1rem; font-weight: 700; border-radius: 6px; cursor: pointer; }
     p { color: rgba(255,255,255,0.5); font-size: 0.85rem; margin-top: 8px; }
   </style>
 </head>
 <body>
-  <h2 style="color:#d97b3f;font-family:sans-serif;margin:0 0 12px">MMA Bridge OG Image Generator</h2>
+  <h2 style="color:#ff8a3d;font-family:sans-serif;margin:0 0 12px">MMA Bridge OG Image Generator</h2>
   <canvas id="og" width="1200" height="630"></canvas>
   <button onclick="download()">Download og-image.png</button>
   <p>Save as <code>og-image.png</code> in the root of your GitHub Pages repo.</p>
@@ -29,20 +29,20 @@
 
       // Radial glow top-left
       const glow = ctx.createRadialGradient(300, 0, 0, 300, 0, 700);
-      glow.addColorStop(0, 'rgba(217,123,63,0.12)');
+      glow.addColorStop(0, 'rgba(255,138,61,0.12)');
       glow.addColorStop(1, 'transparent');
       ctx.fillStyle = glow;
       ctx.fillRect(0, 0, W, H);
 
       // Bottom right gold glow
       const glow2 = ctx.createRadialGradient(W, H, 0, W, H, 600);
-      glow2.addColorStop(0, 'rgba(184,97,30,0.07)');
+      glow2.addColorStop(0, 'rgba(224,107,26,0.07)');
       glow2.addColorStop(1, 'transparent');
       ctx.fillStyle = glow2;
       ctx.fillRect(0, 0, W, H);
 
       // Thin top cyan line
-      ctx.fillStyle = '#d97b3f';
+      ctx.fillStyle = '#ff8a3d';
       ctx.fillRect(0, 0, W, 3);
 
       // Logo placeholder (octagon)
@@ -60,7 +60,7 @@
       ctx.fillText('Rate. Pick. Follow the Fight.', 170, H / 2 + 20);
 
       // Divider
-      ctx.fillStyle = 'rgba(217,123,63,0.15)';
+      ctx.fillStyle = 'rgba(255,138,61,0.15)';
       ctx.fillRect(170, H / 2 + 44, 560, 1);
 
       // Feature pills
@@ -68,13 +68,13 @@
       features.forEach((label, i) => {
         const x = 170 + i * 148;
         const y = H / 2 + 70;
-        ctx.strokeStyle = 'rgba(217,123,63,0.25)';
+        ctx.strokeStyle = 'rgba(255,138,61,0.25)';
         ctx.lineWidth = 1;
         ctx.beginPath();
         roundRect(ctx, x, y, 134, 32, 6);
         ctx.stroke();
         ctx.font = '600 11px Arial, sans-serif';
-        ctx.fillStyle = 'rgba(217,123,63,0.7)';
+        ctx.fillStyle = 'rgba(255,138,61,0.7)';
         ctx.textAlign = 'center';
         ctx.fillText(label.toUpperCase(), x + 67, y + 21);
         ctx.textAlign = 'left';
@@ -95,17 +95,17 @@
         i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
       }
       ctx.closePath();
-      ctx.strokeStyle = 'rgba(217,123,63,0.6)';
+      ctx.strokeStyle = 'rgba(255,138,61,0.6)';
       ctx.lineWidth = 2;
       ctx.stroke();
       const inner = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
-      inner.addColorStop(0, 'rgba(217,123,63,0.1)');
+      inner.addColorStop(0, 'rgba(255,138,61,0.1)');
       inner.addColorStop(1, 'transparent');
       ctx.fillStyle = inner;
       ctx.fill();
       // B letter
       ctx.font = '900 48px "Arial Black", Impact, sans-serif';
-      ctx.fillStyle = '#d97b3f';
+      ctx.fillStyle = '#ff8a3d';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText('M', cx, cy);

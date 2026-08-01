@@ -4,7 +4,7 @@
   <link rel="icon" type="image/png" href="images/mma-bridge-logo.png">
   <link rel="shortcut icon" type="image/png" href="images/mma-bridge-logo.png">
   <link rel="apple-touch-icon" href="images/mma-bridge-logo.png">
-  <meta name="theme-color" content="#d97b3f">
+  <meta name="theme-color" content="#ff8a3d">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <script src="theme.js?v=2.7"></script>
   <meta charset="UTF-8" />
@@ -25,7 +25,7 @@
       color:rgba(255,255,255,.32); text-decoration:none;
       padding:16px 24px 0; transition:color .18s;
     }
-    .mu-back:hover { color:#d97b3f; }
+    .mu-back:hover { color:#ff8a3d; }
 
     /* ── HERO — poster-style: diagonal corner-color wash, bigger vivid
        photos, VS medallion, big shadowed type. Replaces the previous
@@ -47,7 +47,7 @@
     .mu-hero-glow-a {
       left:0;
       clip-path:polygon(0 0, 100% 0, 84% 100%, 0 100%);
-      background:linear-gradient(120deg, rgba(217,123,63,.32) 0%, rgba(217,123,63,.05) 55%, transparent 75%);
+      background:linear-gradient(120deg, rgba(255,138,61,.32) 0%, rgba(255,138,61,.05) 55%, transparent 75%);
     }
     .mu-hero-glow-b {
       right:0;
@@ -61,7 +61,7 @@
       background:linear-gradient(180deg,
         transparent 0%, rgba(255,255,255,.5) 15%,
         rgba(255,255,255,.75) 50%, rgba(255,255,255,.5) 85%, transparent 100%);
-      box-shadow:0 0 24px rgba(217,123,63,.5);
+      box-shadow:0 0 24px rgba(255,138,61,.5);
       left:calc(50% - 1px);
       clip-path:polygon(46% 0, 54% 0, 68% 100%, 60% 100%);
       pointer-events:none; z-index:2;
@@ -83,7 +83,7 @@
       opacity:.97;
     }
     .mu-hero-img-wrap.a .mu-hero-img {
-      filter:grayscale(0.05) contrast(1.06) drop-shadow(-6px 18px 34px rgba(217,123,63,.35)) drop-shadow(0 10px 26px rgba(0,0,0,.85));
+      filter:grayscale(0.05) contrast(1.06) drop-shadow(-6px 18px 34px rgba(255,138,61,.35)) drop-shadow(0 10px 26px rgba(0,0,0,.85));
     }
     .mu-hero-img-wrap.b .mu-hero-img {
       transform:scaleX(-1);
@@ -112,7 +112,7 @@
       -webkit-text-stroke:1px rgba(0,0,0,.4);
       text-shadow:0 3px 0 rgba(0,0,0,.9), 0 8px 34px rgba(0,0,0,.75);
     }
-    .mu-fighter-name.a { text-shadow:0 3px 0 rgba(0,0,0,.9), 0 8px 34px rgba(217,123,63,.35); }
+    .mu-fighter-name.a { text-shadow:0 3px 0 rgba(0,0,0,.9), 0 8px 34px rgba(255,138,61,.35); }
     .mu-fighter-name.b { text-shadow:0 3px 0 rgba(0,0,0,.9), 0 8px 34px rgba(96,165,250,.3); }
     .mu-fighter-name:hover { opacity:.85; }
 
@@ -133,7 +133,7 @@
       font-weight:800;
     }
     .mu-chip.record {
-      color:#d97b3f; border-color:rgba(217,123,63,.4);
+      color:#ff8a3d; border-color:rgba(255,138,61,.4);
       font-variant-numeric:tabular-nums;
     }
     .mu-hero-side.b .mu-chip.record { color:#60a5fa; border-color:rgba(96,165,250,.4); }
@@ -149,12 +149,12 @@
       display:flex; align-items:center; justify-content:center;
       background:radial-gradient(circle at 35% 30%, rgba(255,255,255,.1), rgba(10,10,10,.5) 70%);
       border:1.5px solid rgba(255,255,255,.3);
-      box-shadow:0 0 0 1px rgba(0,0,0,.4), 0 0 26px rgba(217,123,63,.35), inset 0 0 14px rgba(0,0,0,.5);
+      box-shadow:0 0 0 1px rgba(0,0,0,.4), 0 0 26px rgba(255,138,61,.35), inset 0 0 14px rgba(0,0,0,.5);
       animation:mu-vs-pulse 2.6s ease-in-out infinite;
     }
     @keyframes mu-vs-pulse {
-      0%,100% { box-shadow:0 0 0 1px rgba(0,0,0,.4), 0 0 22px rgba(217,123,63,.3), inset 0 0 14px rgba(0,0,0,.5); }
-      50%     { box-shadow:0 0 0 1px rgba(0,0,0,.4), 0 0 34px rgba(217,123,63,.55), inset 0 0 14px rgba(0,0,0,.5); }
+      0%,100% { box-shadow:0 0 0 1px rgba(0,0,0,.4), 0 0 22px rgba(255,138,61,.3), inset 0 0 14px rgba(0,0,0,.5); }
+      50%     { box-shadow:0 0 0 1px rgba(0,0,0,.4), 0 0 34px rgba(255,138,61,.55), inset 0 0 14px rgba(0,0,0,.5); }
     }
     .mu-vs-text {
       font-family:'Barlow Condensed',sans-serif; font-weight:900; font-style:italic;
@@ -186,7 +186,7 @@
       background:transparent; color:rgba(255,255,255,.4);
       transition:background .18s, color .18s;
     }
-    .mu-view-btn.active { background:#d97b3f; color:#0a0a0a; }
+    .mu-view-btn.active { background:#ff8a3d; color:#0a0a0a; }
     .mu-view-btn:hover:not(.active) { color:#fff; }
 
     /* ── POSTER MODE — full-bleed, chrome hidden, always dark regardless
@@ -293,19 +293,19 @@
     body.mu-poster-mode.mu-poster-light { background:#f6f3ec !important; }
     body.mu-poster-mode.mu-poster-light .mu-hero { background:#f6f3ec; }
     body.mu-poster-mode.mu-poster-light .mu-hero-fade { background:linear-gradient(to top,#f6f3ec 0%,transparent 100%); }
-    body.mu-poster-mode.mu-poster-light .mu-hero-glow-a { background:linear-gradient(120deg, rgba(217,123,63,.24) 0%, rgba(217,123,63,.03) 55%, transparent 75%); }
+    body.mu-poster-mode.mu-poster-light .mu-hero-glow-a { background:linear-gradient(120deg, rgba(255,138,61,.24) 0%, rgba(255,138,61,.03) 55%, transparent 75%); }
     body.mu-poster-mode.mu-poster-light .mu-hero-glow-b { background:linear-gradient(240deg, rgba(37,99,235,.2) 0%, rgba(37,99,235,.03) 55%, transparent 75%); }
     body.mu-poster-mode.mu-poster-light .mu-hero-noise { background-image:repeating-linear-gradient(45deg, rgba(0,0,0,.025) 0 2px, transparent 2px 14px); mix-blend-mode:multiply; }
     body.mu-poster-mode.mu-poster-light .mu-fighter-name {
       color:#161514; -webkit-text-stroke:1px rgba(255,255,255,.6);
       text-shadow:0 3px 0 rgba(255,255,255,.75), 0 8px 30px rgba(0,0,0,.15);
     }
-    body.mu-poster-mode.mu-poster-light .mu-fighter-name.a { text-shadow:0 3px 0 rgba(255,255,255,.75), 0 8px 30px rgba(217,123,63,.3); }
+    body.mu-poster-mode.mu-poster-light .mu-fighter-name.a { text-shadow:0 3px 0 rgba(255,255,255,.75), 0 8px 30px rgba(255,138,61,.3); }
     body.mu-poster-mode.mu-poster-light .mu-fighter-name.b { text-shadow:0 3px 0 rgba(255,255,255,.75), 0 8px 30px rgba(37,99,235,.28); }
     body.mu-poster-mode.mu-poster-light .mu-vs-badge {
       background:radial-gradient(circle at 35% 30%, rgba(255,255,255,.95), rgba(230,225,215,.6) 70%);
       border-color:rgba(0,0,0,.15);
-      box-shadow:0 0 0 1px rgba(0,0,0,.08), 0 0 26px rgba(217,123,63,.25), inset 0 0 14px rgba(0,0,0,.06);
+      box-shadow:0 0 0 1px rgba(0,0,0,.08), 0 0 26px rgba(255,138,61,.25), inset 0 0 14px rgba(0,0,0,.06);
     }
     body.mu-poster-mode.mu-poster-light .mu-vs-text { color:#161514; text-shadow:0 1px 2px rgba(255,255,255,.7); }
     body.mu-poster-mode.mu-poster-light .mu-vs-weight { color:rgba(0,0,0,.55); border-color:rgba(0,0,0,.18); background:rgba(0,0,0,.04); }
@@ -417,7 +417,7 @@
     }
     .mu-classic-vsline .vs {
       font-family:'Montserrat',sans-serif;
-      color:#d97b3f; font-size:.42em; font-weight:800;
+      color:#ff8a3d; font-size:.42em; font-weight:800;
       text-decoration:underline; text-underline-offset:3px;
     }
     /* champion / rematch-number superscript tags — the small detail that
@@ -426,7 +426,7 @@
     .mu-classic-tag {
       display:inline-flex; align-items:center; justify-content:center;
       width:16px; height:16px; border-radius:3px;
-      background:#d97b3f; color:#0a0a0a;
+      background:#ff8a3d; color:#0a0a0a;
       font-family:'Montserrat',sans-serif; font-weight:800; font-size:.55rem;
       transform:translateY(-6px);
     }
@@ -455,7 +455,7 @@
     }
 
     /* Classic + light (orange/white) */
-    body.mu-classic-mode.mu-poster-light .mu-classic-card { background:#d97b3f; }
+    body.mu-classic-mode.mu-poster-light .mu-classic-card { background:#ff8a3d; }
     body.mu-classic-mode.mu-poster-light .mu-classic-name,
     body.mu-classic-mode.mu-poster-light .mu-classic-vsline,
     body.mu-classic-mode.mu-poster-light .mu-classic-location {
@@ -471,7 +471,7 @@
     .mu-split-bar {
       display:grid; grid-template-columns:1fr 1fr; height:2px;
     }
-    .mu-split-a { background:linear-gradient(90deg,transparent 0%,#d97b3f 100%); }
+    .mu-split-a { background:linear-gradient(90deg,transparent 0%,#ff8a3d 100%); }
     .mu-split-b { background:linear-gradient(90deg,#60a5fa 0%,transparent 100%); }
 
     /* ── CONTENT ── */
@@ -508,7 +508,7 @@
       transition:color .18s, border-color .18s;
     }
     .mu-tab:hover { color:rgba(255,255,255,.6); }
-    .mu-tab.active { color:#d97b3f; border-bottom-color:#d97b3f; }
+    .mu-tab.active { color:#ff8a3d; border-bottom-color:#ff8a3d; }
     .mu-tab-panel { display:none; }
     .mu-tab-panel.active { display:block; }
 
@@ -522,7 +522,7 @@
     .mu-resume-label {
       font-family:'Montserrat',sans-serif; font-weight:800;
       font-size:.52rem; letter-spacing:.2em; text-transform:uppercase;
-      color:#d97b3f; opacity:.75; margin-bottom:14px;
+      color:#ff8a3d; opacity:.75; margin-bottom:14px;
     }
     .mu-common-row {
       display:grid; grid-template-columns:1fr auto 1fr;
@@ -549,7 +549,7 @@
       text-transform:uppercase; letter-spacing:.04em;
       text-decoration:none; transition:color .15s;
     }
-    .mu-common-opponent:hover { color:#d97b3f; }
+    .mu-common-opponent:hover { color:#ff8a3d; }
     .mu-common-method {
       font-family:'Inter',sans-serif; font-size:.55rem;
       color:rgba(255,255,255,.32); margin-top:3px;
@@ -607,12 +607,12 @@
       display:inline-block;
       font-family:'Montserrat',sans-serif; font-weight:800; font-size:.52rem;
       letter-spacing:.1em; text-transform:uppercase;
-      color:#d97b3f; text-decoration:none; margin-top:10px;
-      border:1px solid rgba(217,123,63,.4); border-radius:20px;
+      color:#ff8a3d; text-decoration:none; margin-top:10px;
+      border:1px solid rgba(255,138,61,.4); border-radius:20px;
       padding:7px 16px;
       transition:background .15s, color .15s, border-color .15s;
     }
-    .mu-form-full:hover { background:#d97b3f; color:#0a0a0a; border-color:#d97b3f; }
+    .mu-form-full:hover { background:#ff8a3d; color:#0a0a0a; border-color:#ff8a3d; }
     .mu-form-full.b { float:right; }
     .mu-form-name-row { display:flex; align-items:center; justify-content:space-between; gap:8px; }
     .mu-form-name-row.b { flex-direction:row-reverse; }
@@ -624,14 +624,14 @@
       text-align:center; padding:14px;
       font-family:'Inter',sans-serif; font-weight:500; font-style:normal;
       font-size:.92rem; color:rgba(255,255,255,.85);
-      border:1px solid rgba(217,123,63,.3);
+      border:1px solid rgba(255,138,61,.3);
       border-radius:3px; margin-bottom:4px;
     }
     .mu-h2h-tag {
       display:block;
       font-family:'Montserrat',sans-serif; font-weight:800; font-style:normal;
       font-size:.56rem; letter-spacing:.22em; text-transform:uppercase;
-      color:#d97b3f; opacity:.8; margin-bottom:6px;
+      color:#ff8a3d; opacity:.8; margin-bottom:6px;
     }
     .mu-no-common {
       text-align:center; padding:20px;
@@ -656,7 +656,7 @@
     }
     .mu-stat-val.a { color:rgba(255,255,255,.9); }
     .mu-stat-val.b { color:rgba(255,255,255,.9); text-align:right; }
-    .mu-stat-val.a.edge { color:#d97b3f; }
+    .mu-stat-val.a.edge { color:#ff8a3d; }
     .mu-stat-val.b.edge { color:#60a5fa; }
     .mu-stat-val.a.edge::after  { content:' \25b2'; font-size:.55em; opacity:.7; }
     .mu-stat-val.b.edge::before { content:'\25b2 '; font-size:.55em; opacity:.7; }
@@ -698,14 +698,14 @@
     .mu-cta { margin-top:24px; text-align:center; }
     .mu-picks-btn {
       display:inline-flex; align-items:center; gap:10px;
-      background:#d97b3f;
+      background:#ff8a3d;
       border:none; color:#0a0a0a;
       font-family:'Montserrat',sans-serif; font-weight:800;
       font-size:.7rem; letter-spacing:.1em; text-transform:uppercase;
       padding:14px 36px; border-radius:3px; cursor:pointer; text-decoration:none;
       transition:background .18s;
     }
-    .mu-picks-btn:hover { background:#e8935c; }
+    .mu-picks-btn:hover { background:#ffad70; }
 
     /* ── LOADING ── */
     .mu-loading {
@@ -723,7 +723,7 @@
     body.light-mode .mu-stat-val.b { color:#1d4ed8; }
     body.light-mode .mu-panel { background:rgba(0,0,0,.015); border-color:rgba(0,0,0,.09); }
     body.light-mode .mu-back { color:rgba(0,0,0,.35); }
-    body.light-mode .mu-back:hover { color:#b8611e; }
+    body.light-mode .mu-back:hover { color:#e06b1a; }
     body.light-mode .mu-chip { color:rgba(0,0,0,.6); border-color:rgba(0,0,0,.16); }
     body.light-mode .mu-vs-text { color:rgba(0,0,0,.5); }
     body.light-mode .mu-vs-weight { color:rgba(0,0,0,.35); }
@@ -732,24 +732,24 @@
     body.light-mode .mu-tabs { border-bottom-color:rgba(0,0,0,.1); }
     body.light-mode .mu-tab { color:rgba(0,0,0,.35); }
     body.light-mode .mu-tab:hover { color:rgba(0,0,0,.7); }
-    body.light-mode .mu-tab.active { color:#b8611e; border-bottom-color:#b8611e; }
+    body.light-mode .mu-tab.active { color:#e06b1a; border-bottom-color:#e06b1a; }
     body.light-mode .mu-resume-block { border-bottom-color:rgba(0,0,0,.07); }
-    body.light-mode .mu-resume-label { color:#b8611e; }
+    body.light-mode .mu-resume-label { color:#e06b1a; }
     body.light-mode .mu-common-row { border-bottom-color:rgba(0,0,0,.06); }
     body.light-mode .mu-common-row:hover { background:rgba(0,0,0,.03); }
     body.light-mode .mu-common-opponent { color:rgba(0,0,0,.65); }
-    body.light-mode .mu-common-opponent:hover { color:#b8611e; }
+    body.light-mode .mu-common-opponent:hover { color:#e06b1a; }
     body.light-mode .mu-common-method { color:rgba(0,0,0,.45); }
     body.light-mode .mu-common-sub { color:rgba(0,0,0,.32); }
     body.light-mode .mu-form-name { color:rgba(0,0,0,.55); }
     body.light-mode .mu-form-divider { background:rgba(0,0,0,.1); }
     body.light-mode .mu-form-sub { color:rgba(0,0,0,.4); }
     body.light-mode .mu-form-tip { background:#fff; border-color:rgba(0,0,0,.14); color:rgba(0,0,0,.75); box-shadow:0 8px 22px rgba(0,0,0,.18); }
-    body.light-mode .mu-form-full { color:#b8611e; border-color:rgba(184,97,30,.4); }
-    body.light-mode .mu-form-full:hover { background:#b8611e; color:#fff; border-color:#b8611e; }
+    body.light-mode .mu-form-full { color:#e06b1a; border-color:rgba(224,107,26,.4); }
+    body.light-mode .mu-form-full:hover { background:#e06b1a; color:#fff; border-color:#e06b1a; }
     body.light-mode .mu-no-common { color:rgba(0,0,0,.35); }
-    body.light-mode .mu-h2h-banner { color:rgba(0,0,0,.75); border-color:rgba(184,97,30,.4); }
-    body.light-mode .mu-h2h-tag { color:#b8611e; }
+    body.light-mode .mu-h2h-banner { color:rgba(0,0,0,.75); border-color:rgba(224,107,26,.4); }
+    body.light-mode .mu-h2h-tag { color:#e06b1a; }
     body.light-mode .mu-stat-row { border-bottom-color:rgba(0,0,0,.07); }
     body.light-mode .mu-stat-row:hover { background:rgba(0,0,0,.03); }
     body.light-mode .mu-stat-label { color:rgba(0,0,0,.42); }

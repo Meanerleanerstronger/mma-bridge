@@ -231,7 +231,7 @@
   /* ─────────────────────────────────────────────
      8. CONFETTI CELEBRATION
   ───────────────────────────────────────────── */
-  var CONFETTI_COLORS = ['#d97b3f','#ff6030','#ffffff','#d97b3f','#ff3300','#ffd700'];
+  var CONFETTI_COLORS = ['#ff8a3d','#ff6030','#ffffff','#ff8a3d','#ff3300','#ffd700'];
 
   function burstConfetti(cx, cy, count) {
     count = count || 36;
