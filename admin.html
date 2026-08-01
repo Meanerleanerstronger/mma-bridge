@@ -1141,6 +1141,9 @@
               <option value="classic">Classic Poster (fight-card style)</option>
             </select>
           </div>
+          <div class="mkt-h2h-grid">
+            <input type="text" class="mkt-input" id="h2h-tag" placeholder="Tag (optional, e.g. Rematch)">
+          </div>
           <div class="mkt-h2h-grid" style="grid-template-columns:auto 1fr">
             <select class="mkt-select" id="h2h-theme">
               <option value="dark">Dark</option>
@@ -1482,6 +1485,7 @@
         const weightEl   = $('h2h-weight');
         const eventEl    = $('h2h-event');
         const locationEl = $('h2h-location');
+        const tagEl      = $('h2h-tag');
         const styleEl    = $('h2h-style');
         const themeEl    = $('h2h-theme');
         const captionEl  = $('h2h-caption');
@@ -1536,6 +1540,7 @@
           if (weightEl.value.trim())   params.set('weight', weightEl.value.trim());
           if (eventEl.value.trim())    params.set('eventName', eventEl.value.trim());
           if (locationEl.value.trim()) params.set('location', locationEl.value.trim());
+          if (tagEl.value.trim())      params.set('tag', tagEl.value.trim());
           if (selectedA.img) params.set('imgA', selectedA.img);
           if (selectedB.img) params.set('imgB', selectedB.img);
           window.open(`matchup.html?${params.toString()}`, '_blank');
@@ -1703,6 +1708,7 @@
               <option value="Prelims">Prelims</option>
               <option value="Early Prelims">Early Prelims</option>
             </select>
+            <input type="text" class="mkt-input" placeholder="Tag (optional, e.g. Rematch)" data-role="tag">
           `, updateState);
           rows.push(row);
           updateState();
@@ -1718,6 +1724,7 @@
             flagA: r.a.flag || '', flagB: r.b.flag || '',
             weight: r.el.querySelector('[data-role="weight"]').value.trim(),
             section: r.el.querySelector('[data-role="section"]').value,
+            tag: r.el.querySelector('[data-role="tag"]').value.trim(),
           }));
           if (!bouts.length) return;
           const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(bouts))));

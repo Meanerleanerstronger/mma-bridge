@@ -166,6 +166,16 @@
       letter-spacing:.16em; text-transform:uppercase;
       color:rgba(255,255,255,.4); white-space:nowrap;
     }
+    /* optional custom tag (e.g. "REMATCH") above the VS medallion in
+       Poster (banner) mode — same gradient-sheen fill as the site's other
+       shiny badges, not a glow. */
+    .mu-poster-tag {
+      background:linear-gradient(165deg, #ffb066 0%, #ff8a3d 45%, #e8691c 100%);
+      color:#0a0a0a; border-radius:20px;
+      font-family:'Montserrat',sans-serif; font-weight:900; font-size:.5rem;
+      letter-spacing:.14em; text-transform:uppercase;
+      padding:4px 12px; white-space:nowrap;
+    }
 
     /* bottom fade */
     .mu-hero-fade {
@@ -402,6 +412,21 @@
       color:#0a0a0a; letter-spacing:.02em;
     }
     body.mu-classic-mode.mu-poster-light .mu-classic-eventname {
+      background:linear-gradient(165deg, #2a2825 0%, #161514 60%, #0a0a0a 100%);
+      color:#ffd9b3;
+    }
+    /* optional custom tag (e.g. "REMATCH") — small ribbon, top-left corner,
+       distinct from the centered event-name badge. */
+    .mu-classic-tagline {
+      position:absolute; top:6%; left:20px; z-index:3;
+      background:linear-gradient(165deg, #ffb066 0%, #ff8a3d 45%, #e8691c 100%);
+      color:#0a0a0a; border-radius:3px;
+      font-family:'Montserrat',sans-serif; font-weight:900;
+      font-size:.62rem; letter-spacing:.1em; text-transform:uppercase;
+      padding:6px 12px;
+      box-shadow:0 6px 16px rgba(0,0,0,.4);
+    }
+    body.mu-classic-mode.mu-poster-light .mu-classic-tagline {
       background:linear-gradient(165deg, #2a2825 0%, #161514 60%, #0a0a0a 100%);
       color:#ffd9b3;
     }
@@ -905,6 +930,7 @@
     // page outright.
     const eventNameParam = p.get('eventName') || '';
     const venueParam     = p.get('location') || '';
+    const tagParam       = p.get('tag') || '';
 
     if (nameA && nameB) document.title = `${nameA} vs ${nameB} | MMA Bridge`;
 
@@ -1215,6 +1241,7 @@
               ${chips(fA)}
             </div>
             <div class="mu-vs-center">
+              ${tagParam?`<div class="mu-poster-tag">${esc(tagParam)}</div>`:''}
               <div class="mu-vs-badge"><div class="mu-vs-text">VS</div></div>
               ${weight?`<div class="mu-vs-weight">${esc(weight)}</div>`:''}
             </div>
@@ -1229,6 +1256,7 @@
 
         <div class="mu-classic-wrap">
           <div class="mu-classic-card">
+            ${tagParam?`<div class="mu-classic-tagline">${esc(tagParam)}</div>`:''}
             ${classicEventName?`<div class="mu-classic-eventname">${esc(classicEventName)}</div>`:''}
             <div class="mu-classic-photos">
               ${shotA?`<img class="mu-classic-img a" src="${esc(shotA)}" alt="${esc(nameA)}" onerror="this.style.display='none'">`:''}

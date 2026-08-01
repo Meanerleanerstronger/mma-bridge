@@ -93,10 +93,10 @@
 
     /* ── CARD MODE — dense 2-column grid of bout cells ── */
     .fc-section-bar {
-      padding:9px 20px; margin-top:4px;
+      padding:11px 20px; margin-top:4px;
       background:rgba(255,138,61,.12);
-      font-family:'Montserrat',sans-serif; font-weight:800; font-size:.64rem;
-      letter-spacing:.18em; text-transform:uppercase; color:#ff8a3d;
+      font-family:'Montserrat',sans-serif; font-weight:800; font-size:1.05rem;
+      letter-spacing:.14em; text-transform:uppercase; color:#ff8a3d;
     }
     /* flex + wrap + center instead of a fixed 2-col grid — a lone fight
        (or an odd count) used to leave a huge dead cell next to it; this
@@ -106,10 +106,22 @@
       justify-content:center; gap:8px;
     }
     .fc-cell {
+      position:relative;
       border:1px solid rgba(255,255,255,.09); border-radius:6px;
       padding:0; overflow:hidden;
       background:rgba(255,255,255,.015);
       flex:1 1 320px; max-width:calc(50% - 4px);
+    }
+    /* rematch/eliminator/whatever-else ribbon — same gradient-sheen
+       treatment as the header badge, top-left corner over the photos. */
+    .fc-cell-tag {
+      position:absolute; top:8px; left:8px; z-index:2;
+      background:linear-gradient(165deg, #ffb066 0%, #ff8a3d 45%, #e8691c 100%);
+      color:#0a0a0a; border-radius:3px;
+      font-family:'Montserrat',sans-serif; font-weight:900; font-size:.6rem;
+      letter-spacing:.1em; text-transform:uppercase;
+      padding:4px 10px;
+      box-shadow:0 4px 12px rgba(0,0,0,.45);
     }
     @media(max-width:520px) { .fc-cell { max-width:100%; } }
     body.fc-light .fc-cell { border-color:rgba(0,0,0,.09); background:rgba(0,0,0,.015); }
@@ -160,12 +172,12 @@
     body.fc-light .fc-cell-name { color:#161514; }
     .fc-cell-vs {
       font-family:'Barlow Condensed',sans-serif; font-weight:900; font-style:italic;
-      font-size:.72rem; color:#ff8a3d; flex-shrink:0; padding-top:2px;
+      font-size:1.3rem; color:#ff8a3d; flex-shrink:0; padding-top:2px;
     }
     .fc-cell-weight {
-      text-align:center; padding:0 10px 8px;
-      font-family:'Montserrat',sans-serif; font-weight:700; font-size:.62rem;
-      letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.32);
+      text-align:center; padding:2px 10px 10px;
+      font-family:'Montserrat',sans-serif; font-weight:700; font-size:.85rem;
+      letter-spacing:.06em; text-transform:uppercase; color:rgba(255,255,255,.4);
     }
     body.fc-light .fc-cell-weight { color:rgba(0,0,0,.4); }
 
@@ -345,6 +357,7 @@
         <div class="fc-grid">
           ${bySection.get(sec).map(b => `
             <div class="fc-cell">
+              ${b.tag ? `<div class="fc-cell-tag">${esc(b.tag)}</div>` : ''}
               <div class="fc-cell-photos">
                 ${b.imgA ? `<div class="fc-thumb" style="background-image:url('${esc(b.imgA)}')"></div>` : '<div class="fc-thumb empty">?</div>'}
                 ${b.imgB ? `<div class="fc-thumb" style="background-image:url('${esc(b.imgB)}')"></div>` : '<div class="fc-thumb empty">?</div>'}
@@ -453,9 +466,10 @@
              <option value="Co-Main">Co-Main</option>
              <option value="Prelims">Prelims</option>
              <option value="Early Prelims">Early Prelims</option>
-           </select>`
+           </select>
+           <input type="text" class="fc-input" id="fcNewTag" placeholder="Tag (optional, e.g. Rematch)">`
         : `<input type="text" class="fc-input" id="fcNewWeight" placeholder="Weight class (optional)">
-           <input type="text" class="fc-input" id="fcNewTag" placeholder="Tag (optional)">`;
+           <input type="text" class="fc-input" id="fcNewTag" placeholder="Tag (optional, e.g. Rematch)">`;
 
       editPanel.innerHTML = `
         <div class="fc-edit-title">Title</div>
