@@ -355,90 +355,116 @@
     }
     body.mu-classic-mode .mu-classic-wrap { display:flex; }
 
+    /* Flat, calm, single-color field — the reference poster this was
+       redone to match (UFC 308 Topuria vs Holloway) is one solid gold
+       panel, not a two-tone diagonal split. "Dark" = near-black field,
+       "light" = a solid rich orange field (our color standing in for
+       their gold), matching that same one-color-field structure instead
+       of trying to cram color-blocking in. */
     .mu-classic-card {
       position:relative; overflow:hidden;
       width:min(92vw, 520px); aspect-ratio:4/5;
-      background:#0b0b0c;
-      border-radius:6px;
+      background:#111113;
+      border-radius:4px;
       box-shadow:0 30px 90px rgba(0,0,0,.65);
-      font-family:'Barlow Condensed',sans-serif;
+      font-family:'Montserrat',sans-serif;
     }
-    /* diagonal orange panel — the single graphic move that reads as "fight
-       poster" instead of "app screenshot with photos on it" */
-    .mu-classic-panel {
-      position:absolute; top:0; right:0; bottom:0; width:56%; z-index:0;
-      background:linear-gradient(115deg, #b5581f 0%, #d97b3f 45%, #e8935c 100%);
-      clip-path:polygon(38% 0, 100% 0, 100% 100%, 18% 100%);
-    }
-    /* event name — plain, big, corner-stamped (no badge box, no brand
-       repetition — just the card name reading like a real poster's top
-       corner line). */
+    /* small corner badge — event name only, plain dark rounded-square
+       tag low-key in the corner, same role as the promotion's own
+       logo+event-number badge on a real poster. */
     .mu-classic-eventname {
-      position:absolute; top:18px; left:22px; right:22px; z-index:3;
+      position:absolute; top:20px; left:20px; z-index:3;
+      background:rgba(0,0,0,.5); border:1px solid rgba(255,255,255,.14);
+      border-radius:4px; padding:8px 12px;
       text-align:left;
-      font-weight:800; font-style:italic; text-transform:uppercase;
-      font-size:clamp(1rem,4.2vw,1.5rem); line-height:1.05;
-      color:#fff; letter-spacing:.01em;
-      text-shadow:0 2px 8px rgba(0,0,0,.5);
+      font-weight:800; font-style:normal; text-transform:uppercase;
+      font-size:clamp(.68rem,2.6vw,.85rem); line-height:1.1;
+      color:#fff; letter-spacing:.02em;
+    }
+    body.mu-classic-mode.mu-poster-light .mu-classic-eventname {
+      background:rgba(255,255,255,.5); border-color:rgba(0,0,0,.14); color:#161514;
     }
     .mu-classic-photos {
-      position:absolute; left:0; right:0; bottom:26%; top:8%; z-index:1;
+      position:absolute; left:0; right:0; bottom:24%; top:6%; z-index:1;
       display:flex; align-items:flex-end; justify-content:center;
     }
     .mu-classic-img {
       height:100%; width:auto; max-width:58%;
       object-fit:contain; object-position:bottom center;
-      filter:contrast(1.12) saturate(1.05);
+      filter:contrast(1.1) saturate(.92);
     }
     .mu-classic-img.a { margin-right:-2.5%; z-index:2; }
     .mu-classic-img.b { margin-left:-2.5%; z-index:1; }
+    /* name lockup sits bottom-left, both fighters stacked together —
+       not split across the poster — matching the reference exactly. */
     .mu-classic-textblock {
-      position:absolute; left:22px; right:22px; z-index:3;
-      bottom:24px;
+      position:absolute; left:20px; right:20px; z-index:3;
+      bottom:22px;
     }
+    .mu-classic-name-row { display:flex; align-items:baseline; gap:7px; }
     .mu-classic-name {
-      font-weight:900; font-style:italic; text-transform:uppercase;
-      font-size:clamp(1.7rem,7.2vw,2.5rem); line-height:.92;
-      color:#fff; letter-spacing:.005em;
-      text-shadow:0 2px 10px rgba(0,0,0,.5);
+      font-family:'Barlow Condensed',sans-serif;
+      font-weight:800; font-style:normal; text-transform:uppercase;
+      font-size:clamp(1.5rem,6.6vw,2.3rem); line-height:.94;
+      color:#fff; letter-spacing:.01em;
     }
     .mu-classic-vsline {
-      font-weight:900; font-style:italic; text-transform:uppercase;
-      font-size:clamp(1.7rem,7.2vw,2.5rem); line-height:.92;
-      color:#fff; letter-spacing:.005em;
-      text-shadow:0 2px 10px rgba(0,0,0,.5);
+      display:flex; align-items:baseline; gap:8px;
+      font-family:'Barlow Condensed',sans-serif;
+      font-weight:800; font-style:normal; text-transform:uppercase;
+      font-size:clamp(1.5rem,6.6vw,2.3rem); line-height:.94;
+      color:#fff; letter-spacing:.01em;
     }
     .mu-classic-vsline .vs {
-      color:#d97b3f; font-size:.62em; text-decoration:underline;
-      text-underline-offset:3px; margin-right:.15em;
+      font-family:'Montserrat',sans-serif;
+      color:#d97b3f; font-size:.42em; font-weight:800;
+      text-decoration:underline; text-underline-offset:3px;
+    }
+    /* champion / rematch-number superscript tags — the small detail that
+       makes the reference read as an authentic fight poster, not just
+       big text on a color field. */
+    .mu-classic-tag {
+      display:inline-flex; align-items:center; justify-content:center;
+      width:16px; height:16px; border-radius:3px;
+      background:#d97b3f; color:#0a0a0a;
+      font-family:'Montserrat',sans-serif; font-weight:800; font-size:.55rem;
+      transform:translateY(-6px);
     }
     .mu-classic-weight {
-      margin-top:8px;
-      font-family:'Montserrat',sans-serif; font-weight:700; font-size:.62rem;
-      letter-spacing:.16em; text-transform:uppercase;
+      margin-top:10px;
+      font-style:italic;
+      font-weight:600; font-size:.66rem;
+      letter-spacing:.06em; text-transform:uppercase;
       color:rgba(255,255,255,.6);
     }
-    /* location — big, same font as the fighter names, real presence
-       instead of a small caption buried in a bottom bar. */
+    /* date/location — bottom line, plain and bold like the reference's
+       date stamp, not competing with the names for attention. */
     .mu-classic-location {
-      margin-top:6px;
-      font-weight:800; font-style:italic; text-transform:uppercase;
-      font-size:clamp(1rem,4vw,1.4rem); line-height:1;
-      color:#d97b3f;
-      text-shadow:0 2px 8px rgba(0,0,0,.5);
+      margin-top:14px;
+      font-family:'Barlow Condensed',sans-serif;
+      font-weight:800; font-style:normal; text-transform:uppercase;
+      font-size:clamp(.9rem,3.4vw,1.15rem); line-height:1;
+      color:#fff;
+    }
+    .mu-classic-brandline {
+      position:absolute; left:20px; right:20px; bottom:8px; z-index:3;
+      display:flex; align-items:center; justify-content:space-between;
+      font-family:'Montserrat',sans-serif; font-weight:700; font-size:.5rem;
+      letter-spacing:.1em; text-transform:uppercase;
+      color:rgba(255,255,255,.35);
     }
 
-    /* Classic + light (orange/white) — same underlying .mu-poster-light
-       toggle used by banner Poster mode, applied to Classic's own markup. */
-    body.mu-classic-mode.mu-poster-light .mu-classic-card { background:#faf7f1; }
-    body.mu-classic-mode.mu-poster-light .mu-classic-panel { background:linear-gradient(115deg, #e8935c 0%, #d97b3f 45%, #b5581f 100%); }
-    body.mu-classic-mode.mu-poster-light .mu-classic-eventname,
+    /* Classic + light (orange/white) */
+    body.mu-classic-mode.mu-poster-light .mu-classic-card { background:#d97b3f; }
     body.mu-classic-mode.mu-poster-light .mu-classic-name,
-    body.mu-classic-mode.mu-poster-light .mu-classic-vsline {
-      color:#161514; text-shadow:0 2px 10px rgba(255,255,255,.4);
+    body.mu-classic-mode.mu-poster-light .mu-classic-vsline,
+    body.mu-classic-mode.mu-poster-light .mu-classic-location {
+      color:#161514;
     }
+    body.mu-classic-mode.mu-poster-light .mu-classic-vsline .vs { color:#0a0a0a; }
+    body.mu-classic-mode.mu-poster-light .mu-classic-tag { background:#161514; color:#f4e3d3; }
     body.mu-classic-mode.mu-poster-light .mu-classic-weight { color:rgba(0,0,0,.55); }
-    body.mu-classic-mode.mu-poster-light .mu-classic-location { color:#b5581f; text-shadow:0 2px 8px rgba(255,255,255,.4); }
+    body.mu-classic-mode.mu-poster-light .mu-classic-brandline { color:rgba(0,0,0,.4); }
     body.mu-classic-mode.mu-poster-light { background:#f6f3ec !important; }
 
     /* ── SPLIT BAR ── */
@@ -1164,17 +1190,25 @@
 
         <div class="mu-classic-wrap">
           <div class="mu-classic-card">
-            <div class="mu-classic-panel"></div>
             ${classicEventName?`<div class="mu-classic-eventname">${esc(classicEventName)}</div>`:''}
             <div class="mu-classic-photos">
               ${shotA?`<img class="mu-classic-img a" src="${esc(shotA)}" alt="${esc(nameA)}" onerror="this.style.display='none'">`:''}
               ${shotB?`<img class="mu-classic-img b" src="${esc(shotB)}" alt="${esc(nameB)}" onerror="this.style.display='none'">`:''}
             </div>
             <div class="mu-classic-textblock">
-              <div class="mu-classic-name">${esc(nameA)}</div>
-              <div class="mu-classic-vsline"><span class="vs">vs</span>${esc(nameB)}</div>
+              <div class="mu-classic-name-row">
+                <div class="mu-classic-name">${esc(nameA)}</div>
+                ${fA.ranking === 'Champion' ? `<span class="mu-classic-tag">C</span>` : ''}
+              </div>
+              <div class="mu-classic-vsline">
+                <span class="vs">vs</span>${esc(nameB)}
+              </div>
               ${weight?`<div class="mu-classic-weight">${esc(weight)}</div>`:''}
               ${classicLocation?`<div class="mu-classic-location">${esc(classicLocation)}</div>`:''}
+            </div>
+            <div class="mu-classic-brandline">
+              <span>MMA Bridge</span>
+              <span>mmabridge.com</span>
             </div>
           </div>
         </div>
@@ -1284,7 +1318,16 @@
           if (!src || src.startsWith('data:')) return;
           try {
             const proxied = `${API_BASE_DL}/api/image-proxy?url=${encodeURIComponent(src)}`;
-            const blob = await (await fetch(proxied)).blob();
+            const res = await fetch(proxied);
+            // fetch() only rejects on network failure, not on HTTP error
+            // status — a 404 (e.g. backend not yet redeployed with this
+            // endpoint) resolves "successfully" with an error page body,
+            // which then got read as if it were image bytes and written
+            // into img.src as garbage, breaking the photo instead of just
+            // leaving the original (uncorrupted) src in place. Checking
+            // res.ok is what was missing.
+            if (!res.ok) return;
+            const blob = await res.blob();
             const dataUrl = await new Promise((resolve, reject) => {
               const reader = new FileReader();
               reader.onload = () => resolve(reader.result);

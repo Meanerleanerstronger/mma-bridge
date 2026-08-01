@@ -571,7 +571,15 @@
         if (!src || src.startsWith('data:')) return;
         try {
           const proxied = `${API_BASE}/api/image-proxy?url=${encodeURIComponent(src)}`;
-          const blob = await (await fetch(proxied)).blob();
+          const res = await fetch(proxied);
+          // fetch() only rejects on network failure, not HTTP error status —
+          // a 404 (backend not yet redeployed with this endpoint, which is
+          // exactly what happened) resolves "successfully" with an error
+          // page body, which then got read as image bytes and written into
+          // img.src as garbage, breaking the photo instead of leaving the
+          // original (uncorrupted) src in place.
+          if (!res.ok) return;
+          const blob = await res.blob();
           const dataUrl = await new Promise((resolve, reject) => {
             const reader = new FileReader();
             reader.onload = () => resolve(reader.result);
