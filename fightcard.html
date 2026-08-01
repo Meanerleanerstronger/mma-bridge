@@ -66,30 +66,37 @@
     .fc-header {
       position:relative; padding:18px 24px 14px;
       text-align:center;
-      background:linear-gradient(160deg, rgba(255,138,61,.16), transparent 65%);
+      /* no background glow — a soft orange wash behind the header read as
+         AI-slop haze rather than depth; plain flat is more premium here. */
     }
+    /* badge — dropped the filled gradient pill (read as an amateur/flashy
+       button) for the same restrained editorial masthead label used on
+       the H2H poster: wide-tracked text and a thin accent rule, no fill. */
     .fc-badge {
-      display:inline-block; padding:5px 16px; margin-bottom:10px;
-      /* hard gradient sheen, not a blurred glow — a crisp highlight-to-
-         shadow fill reads as shiny/modern; a soft blur reads as AI slop. */
-      background:linear-gradient(165deg, #ffb066 0%, #ff8a3d 45%, #e8691c 100%);
-      color:#0a0a0a; border-radius:3px;
-      font-family:'Montserrat',sans-serif; font-weight:900; font-size:.68rem;
-      letter-spacing:.14em; text-transform:uppercase;
+      display:inline-block; margin-bottom:12px;
+      padding-bottom:8px;
+      border-bottom:1.5px solid rgba(232,105,28,.75);
+      font-family:'Oswald',sans-serif; font-weight:600;
+      font-size:.72rem; color:#fff;
+      letter-spacing:.34em; text-transform:uppercase;
     }
+    body.fc-light .fc-badge { color:#161514; }
+    /* small hard-offset extrusion — a touch of "raised type" depth, not a
+       blur/glow — on the biggest word on the page. */
     .fc-event-name {
       font-family:'Barlow Condensed',sans-serif; font-weight:900; font-style:italic;
       text-transform:uppercase; color:#fff;
       font-size:clamp(1.7rem,5.4vw,2.5rem); line-height:.95;
       -webkit-text-stroke:.5px rgba(0,0,0,.3);
+      text-shadow:2px 2px 0 rgba(232,105,28,.35);
     }
-    body.fc-light .fc-event-name { color:#161514; }
+    body.fc-light .fc-event-name { color:#161514; text-shadow:2px 2px 0 rgba(232,105,28,.3); }
     .fc-event-sub {
-      margin-top:4px;
-      font-family:'Montserrat',sans-serif; font-weight:700; font-size:.62rem;
-      letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.4);
+      margin-top:6px;
+      font-family:'Montserrat',sans-serif; font-weight:700; font-size:.8rem;
+      letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.5);
     }
-    body.fc-light .fc-event-sub { color:rgba(0,0,0,.45); }
+    body.fc-light .fc-event-sub { color:rgba(0,0,0,.5); }
 
     /* ── CARD MODE — dense 2-column grid of bout cells ── */
     /* Oswald — a tall, tight, no-nonsense condensed grotesque, the closest
