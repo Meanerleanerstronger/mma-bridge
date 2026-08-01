@@ -9917,6 +9917,14 @@
     "bio": "Jan Blachowicz is a former UFC Light Heavyweight Champion and living proof that experience and legendary Polish power can carry a fighter to the very top. Blachowicz shocked the world by stopping Dominick Reyes and submitting Israel Adesanya to become champion, and remains a serious threat at 205 with his concrete right hand.",
     "last5": [
       {
+        "opponent": "Navajo Stirling",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Carlos Ulberg",
         "result": "L",
         "method": "Decision (unanimous)",
@@ -9998,6 +10006,14 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/RAKIC_ALEKSANDAR_L_10-25.png",
     "bio": "Aleksandar Rakic is an Austrian kickboxer with the physical tools to compete with anyone in the light heavyweight division, standing 6'4\" with elite technique and finishing power. 'Rocket' has beaten multiple ranked opponents and was a title contender before a knee injury derailed his momentum mid-fight against Glover Teixeira.",
     "last5": [
+      {
+        "opponent": "Marcin Tybura",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Magomed Ankalaev",
         "result": "L",
@@ -12329,6 +12345,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Jan Blachowicz",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Ion Cutelaba",
         "result": "W",
@@ -23778,6 +23802,14 @@
     },
     "last5": [
       {
+        "opponent": "Aleksandar Rakic",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Tyrell Fortune",
         "result": "L",
         "method": "Decision (unanimous)",
@@ -27774,6 +27806,14 @@
     "id": "robert-valentin",
     "name": "Robert Valentin",
     "last5": [
+      {
+        "opponent": "Duško Todorović",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Julien Leblanc",
         "result": "W",
@@ -39060,6 +39100,14 @@
     },
     "last5": [
       {
+        "opponent": "Robert Valentin",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "José Medina",
         "result": "W",
         "method": "Submission (rear-naked choke)",
@@ -39171,7 +39219,17 @@
       "tdAcc": "0%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Gilbert Urbina",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "gilbert-urbina",
@@ -39184,6 +39242,14 @@
     },
     "nickname": "The RGV Bad Boy",
     "last5": [
+      {
+        "opponent": "Vlasto Čepo",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Christian Leroy Duncan",
         "result": "L",
@@ -44471,7 +44537,17 @@
       "tdAcc": "0%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Noah Gugnon",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "noah-gugnon",
@@ -44485,7 +44561,17 @@
       "tdAcc": "0%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Milos Janicic",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "marina-spasic",
