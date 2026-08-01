@@ -7100,22 +7100,22 @@
       "losses": 0,
       "draws": 0
     },
-    "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
+    "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-07/STEVESON_GABLE_L_07-11.png",
     "bio": "Gable Steveson is the most hyped heavyweight prospect in MMA — a 2020 Olympic gold medalist and two-time NCAA wrestling champion who brings a pedigree of dominance that rivals any fighter in history. After a stint with WWE, Steveson signed with the UFC in April 2026 off a 3-0 pro MMA record, finishing all three opponents in the first round. He trains at Jackson Wink MMA Academy under the tutelage of Jon Jones. His UFC debut against Elisha Ellison at UFC 329 on July 11, 2026 is one of the most anticipated heavyweight debuts in recent memory.",
     "last5": [
       {
         "opponent": "Elisha Ellison",
         "result": "W",
-        "method": "TKO",
+        "method": "KO/TKO",
         "event": "UFC 329: McGregor vs. Holloway 2",
         "round": 1,
-        "time": null
+        "time": "2:31"
       },
       {
         "opponent": "Hugo Lezama",
         "result": "W",
         "method": "TKO (punches)",
-        "event": "Mexico Fight League 3",
+        "event": "MFL 3",
         "round": 1,
         "time": "3:50"
       },
@@ -7131,57 +7131,9 @@
         "opponent": "Braden Peterson",
         "result": "W",
         "method": "TKO (punches)",
-        "event": "2025 in Legacy Fighting Alliance#LFA 217: McKee vs. Nobre",
+        "event": "LFA 217: McKee vs. Nobre",
         "round": 1,
         "time": "1:38"
-      },
-      {
-        "opponent": "Billy Swanson",
-        "result": "W",
-        "method": "KO (punches)",
-        "event": "Dirty Boxing Championship 4",
-        "round": 1,
-        "time": "0:15"
-      },
-      {
-        "opponent": "Alexander Romanov (fighter)",
-        "result": "W",
-        "method": "style=\"font-size:88%\"|TF 10–0",
-        "event": "style=\"font-size:88%\" rowspan=1|May 30, 2026",
-        "round": 0,
-        "time": ""
-      },
-      {
-        "opponent": "Mason Parris",
-        "result": "W",
-        "method": "style=\"font-size:88%\"|5–0",
-        "event": "style=\"font-size:88%\" rowspan=2|June 10, 2023",
-        "round": 0,
-        "time": ""
-      },
-      {
-        "opponent": "Nick Gwiazdowski",
-        "result": "W",
-        "method": "style=\"font-size:88%\"|TF 10–0",
-        "event": "style=\"font-size:88%\" rowspan=4|April 27, 2023",
-        "round": 0,
-        "time": ""
-      },
-      {
-        "opponent": "Geno Petriashvili",
-        "result": "W",
-        "method": "style=\"font-size:88%\"|10–8",
-        "event": "style=\"font-size:88%\" rowspan=4|August 5–6, 2021",
-        "round": 0,
-        "time": ""
-      },
-      {
-        "opponent": "Aly Barghout",
-        "result": "W",
-        "method": "style=\"font-size:88%\"|TF 10–0",
-        "event": "style=\"font-size:88%\" rowspan=5|May 30, 2021",
-        "round": 0,
-        "time": ""
       }
     ],
     "stats": {

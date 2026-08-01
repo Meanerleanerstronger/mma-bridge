@@ -118,21 +118,31 @@
          default) lands on the torso and chops the head off entirely.
          Anchor toward the top so the face is what actually shows. */
       object-position:center 12%;
-      flex-shrink:0; background:#1a1a1c;
+      flex-shrink:0;
+      /* No background of its own — the cutout PNGs have transparent
+         edges, and a hardcoded dark fill here showed through them even
+         in light mode. Let .fc-cell-photos' theme-aware background show
+         through instead. */
+      background:transparent;
       /* Unify photos shot on different backgrounds/lighting into one
          graphic instead of looking like stitched-together stock photos. */
       filter:grayscale(.55) contrast(1.12) brightness(.95);
     }
-    .fc-thumb.empty { display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,.15); font-size:1.8rem; height:132px; width:50%; }
+    .fc-thumb.empty {
+      display:flex; align-items:center; justify-content:center;
+      color:rgba(255,255,255,.15); font-size:1.8rem; height:132px; width:50%;
+      background:#1a1a1c;
+    }
+    body.fc-light .fc-thumb.empty { background:#d8d0c0; color:rgba(0,0,0,.2); }
     .fc-cell-names {
       display:flex; align-items:flex-start; justify-content:space-between; gap:6px;
       padding:8px 10px 2px;
     }
     .fc-cell-fighter { display:flex; align-items:center; gap:5px; flex:1; min-width:0; }
     .fc-cell-fighter.b { flex-direction:row-reverse; }
-    .fc-cell-flag { font-size:.72rem; flex-shrink:0; line-height:1; }
+    .fc-cell-flag { font-size:.95rem; flex-shrink:0; line-height:1; }
     .fc-cell-name {
-      font-family:'Montserrat',sans-serif; font-weight:900; font-size:.7rem;
+      font-family:'Montserrat',sans-serif; font-weight:900; font-size:.92rem;
       color:#fff; text-transform:uppercase; letter-spacing:.005em;
       line-height:1.15; min-width:0;
     }
@@ -140,11 +150,11 @@
     body.fc-light .fc-cell-name { color:#161514; }
     .fc-cell-vs {
       font-family:'Barlow Condensed',sans-serif; font-weight:900; font-style:italic;
-      font-size:.6rem; color:#d97b3f; flex-shrink:0; padding-top:2px;
+      font-size:.72rem; color:#d97b3f; flex-shrink:0; padding-top:2px;
     }
     .fc-cell-weight {
       text-align:center; padding:0 10px 8px;
-      font-family:'Montserrat',sans-serif; font-weight:700; font-size:.5rem;
+      font-family:'Montserrat',sans-serif; font-weight:700; font-size:.62rem;
       letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.32);
     }
     body.fc-light .fc-cell-weight { color:rgba(0,0,0,.4); }
