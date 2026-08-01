@@ -380,9 +380,19 @@
     .mu-classic-card {
       position:relative; overflow:hidden;
       width:min(92vw, 520px); aspect-ratio:4/5;
-      background:#0a0908;
+      /* Grounding shadow baked into the background — a soft dark ellipse
+         under where the fighters' feet land — so they read as standing ON
+         something instead of pasted onto flat color with a hard cutout
+         edge and no contact shadow (the single biggest "cheap cutout"
+         tell). */
+      background:
+        radial-gradient(ellipse 62% 15% at 50% 79%, rgba(0,0,0,.55), transparent 70%),
+        #0a0908;
       border-radius:4px;
-      box-shadow:0 30px 90px rgba(0,0,0,.65);
+      /* inset line = a real frame edge (crisp, not a blur) instead of a
+         borderless image dump; outer shadow keeps the card feeling lifted
+         off the page. */
+      box-shadow:inset 0 0 0 1px rgba(255,138,61,.22), 0 30px 90px rgba(0,0,0,.65);
       font-family:'Montserrat',sans-serif;
     }
     /* scattered speckle texture — two dot layers at different scales/
@@ -396,6 +406,14 @@
       background-position:0 0, 8px 12px;
       opacity:.55;
     }
+    /* vignette — plain edge-darkening (NOT a colored glow/blur), the
+       classic photography/poster trick that pulls the eye to the center
+       and keeps flat corners from feeling empty. Sits above the photos so
+       it actually darkens their outer edges too. */
+    .mu-classic-card::after {
+      content:''; position:absolute; inset:0; z-index:2; pointer-events:none;
+      background:radial-gradient(ellipse at 50% 45%, transparent 52%, rgba(0,0,0,.5) 100%);
+    }
     /* badge — big, centered top, sitting between the fighters' heads
        instead of tucked in a corner, with a hard-edged gradient sheen
        instead of a glow. */
@@ -403,7 +421,10 @@
       position:absolute; top:6%; left:50%; z-index:3;
       transform:translateX(-50%);
       background:linear-gradient(165deg, #ffb066 0%, #ff8a3d 45%, #e8691c 100%);
-      box-shadow:0 8px 20px rgba(0,0,0,.5);
+      /* inset top highlight = a hard light-catching bevel edge, the same
+         trick real molded-plastic/chrome badge art uses for "3D" without
+         any blur — reads as a raised object, not a flat pasted rectangle. */
+      box-shadow:0 8px 20px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.45), inset 0 -2px 0 rgba(0,0,0,.18);
       border-radius:4px; padding:10px 20px;
       text-align:center; white-space:nowrap;
       font-family:'Barlow Condensed',sans-serif;
@@ -424,7 +445,7 @@
       font-family:'Montserrat',sans-serif; font-weight:900;
       font-size:.62rem; letter-spacing:.1em; text-transform:uppercase;
       padding:6px 12px;
-      box-shadow:0 6px 16px rgba(0,0,0,.4);
+      box-shadow:0 6px 16px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.45), inset 0 -2px 0 rgba(0,0,0,.18);
     }
     body.mu-classic-mode.mu-poster-light .mu-classic-tagline {
       background:linear-gradient(165deg, #2a2825 0%, #161514 60%, #0a0a0a 100%);
@@ -448,11 +469,16 @@
       bottom:22px;
     }
     .mu-classic-name-row { display:flex; align-items:baseline; gap:9px; }
+    /* extruded "3D poster type" — a few crisp, hard-offset (NOT blurred)
+       stacked shadow layers behind the letterforms. This is what actually
+       reads as premium/game-title depth; a flat fill (even a gradient one)
+       always reads flat no matter the color. */
     .mu-classic-name {
       font-family:'Barlow Condensed',sans-serif;
       font-weight:800; font-style:italic; text-transform:uppercase;
       font-size:clamp(1.6rem,7vw,2.5rem); line-height:.94;
       color:#fff; letter-spacing:.005em;
+      text-shadow:2px 2px 0 rgba(0,0,0,.55), 4px 4px 0 rgba(0,0,0,.3);
     }
     .mu-classic-vsline {
       display:flex; align-items:baseline; gap:12px;
@@ -460,14 +486,19 @@
       font-weight:800; font-style:italic; text-transform:uppercase;
       font-size:clamp(1.6rem,7vw,2.5rem); line-height:.94;
       color:#fff; letter-spacing:.005em;
+      text-shadow:2px 2px 0 rgba(0,0,0,.55), 4px 4px 0 rgba(0,0,0,.3);
     }
-    /* VS — much bigger, no underline, no glow, solid gradient-sheen fill
-       instead of a flat tint. */
+    /* VS — solid color + the same extrusion, NOT a background-clip:text
+       gradient fill. html2canvas doesn't support background-clip:text (the
+       same category of limitation that was squishing fighter photos on
+       download elsewhere on the site) — it silently drops the clip and
+       just paints the gradient as a solid rectangle, which is exactly what
+       turned "VS" into a blank orange blob in every downloaded poster. */
     .mu-classic-vsline .vs {
       font-family:'Barlow Condensed',sans-serif;
       font-style:italic; font-weight:900;
-      background:linear-gradient(165deg, #ffb066 0%, #ff8a3d 55%, #e8691c 100%);
-      -webkit-background-clip:text; background-clip:text; color:transparent;
+      color:#ff8a3d;
+      text-shadow:2px 2px 0 rgba(0,0,0,.6), 4px 4px 0 rgba(0,0,0,.35);
       font-size:.85em;
     }
     /* champion / rematch-number superscript tags */
@@ -475,6 +506,7 @@
       display:inline-flex; align-items:center; justify-content:center;
       width:16px; height:16px; border-radius:3px;
       background:linear-gradient(165deg, #ffb066 0%, #ff8a3d 55%, #e8691c 100%);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.45), inset 0 -1px 0 rgba(0,0,0,.18);
       color:#0a0a0a;
       font-family:'Montserrat',sans-serif; font-weight:800; font-size:.55rem;
       transform:translateY(-6px);
@@ -515,13 +547,16 @@
       opacity:.55;
     }
     body.mu-classic-mode.mu-poster-light .mu-classic-name,
-    body.mu-classic-mode.mu-poster-light .mu-classic-vsline,
+    body.mu-classic-mode.mu-poster-light .mu-classic-vsline {
+      color:#161514;
+      text-shadow:2px 2px 0 rgba(255,255,255,.5), 4px 4px 0 rgba(255,255,255,.3);
+    }
     body.mu-classic-mode.mu-poster-light .mu-classic-location {
       color:#161514;
     }
     body.mu-classic-mode.mu-poster-light .mu-classic-vsline .vs {
-      background:linear-gradient(165deg, #2a2825 0%, #161514 60%, #0a0a0a 100%);
-      -webkit-background-clip:text; background-clip:text; color:transparent;
+      color:#161514;
+      text-shadow:2px 2px 0 rgba(255,255,255,.5), 4px 4px 0 rgba(255,255,255,.3);
     }
     body.mu-classic-mode.mu-poster-light .mu-classic-tag {
       background:linear-gradient(165deg, #2a2825 0%, #161514 60%, #0a0a0a 100%);
