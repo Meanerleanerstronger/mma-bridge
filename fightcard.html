@@ -116,17 +116,24 @@
     .fc-cell-photos { display:flex; align-items:stretch; background:#101012; }
     body.fc-light .fc-cell-photos { background:#e4ded2; }
     .fc-thumb {
-      width:50%; height:132px; object-fit:cover;
+      width:50%; height:132px; flex-shrink:0;
+      /* CSS background-image + background-size:cover, NOT an <img> with
+         object-fit:cover — html2canvas doesn't honor object-fit on replaced
+         elements and just stretches the raw image into the box, which is
+         exactly what was squishing/smushing fighters in downloaded PNGs
+         even though the live page (real browser layout engine) looked
+         correct. background-size:cover rasterizes correctly. */
+      background-size:cover;
       /* Source photos are full-body cutouts — centering the crop (the
          default) lands on the torso and chops the head off entirely.
          Anchor toward the top so the face is what actually shows. */
-      object-position:center 12%;
-      flex-shrink:0;
-      /* No background of its own — the cutout PNGs have transparent
+      background-position:center 12%;
+      background-repeat:no-repeat;
+      /* No background color of its own — the cutout PNGs have transparent
          edges, and a hardcoded dark fill here showed through them even
          in light mode. Let .fc-cell-photos' theme-aware background show
          through instead. */
-      background:transparent;
+      background-color:transparent;
       /* Unify photos shot on different backgrounds/lighting into one
          graphic instead of looking like stitched-together stock photos. */
       filter:grayscale(.55) contrast(1.12) brightness(.95);
@@ -175,8 +182,12 @@
     .fc-next-row:nth-child(odd) { background:rgba(255,138,61,.05); }
     .fc-next-row:nth-child(even) { background:rgba(96,165,250,.05); }
     .fc-next-photo {
-      width:84px; height:auto; margin:8px 0; border-radius:6px; object-fit:cover; flex-shrink:0;
-      object-position:center 12%;
+      width:84px; margin:8px 0; border-radius:6px; flex-shrink:0;
+      /* Same background-image/cover swap as .fc-thumb — html2canvas
+         ignores object-fit and stretches <img> content into its box. */
+      background-size:cover;
+      background-position:center 12%;
+      background-repeat:no-repeat;
       filter:grayscale(.55) contrast(1.12) brightness(.95);
       border:1px solid rgba(255,255,255,.12);
     }
@@ -335,8 +346,8 @@
           ${bySection.get(sec).map(b => `
             <div class="fc-cell">
               <div class="fc-cell-photos">
-                ${b.imgA ? `<img class="fc-thumb" src="${esc(b.imgA)}" onerror="this.outerHTML='<div class=&quot;fc-thumb empty&quot;>?</div>'">` : '<div class="fc-thumb empty">?</div>'}
-                ${b.imgB ? `<img class="fc-thumb" src="${esc(b.imgB)}" onerror="this.outerHTML='<div class=&quot;fc-thumb empty&quot;>?</div>'">` : '<div class="fc-thumb empty">?</div>'}
+                ${b.imgA ? `<div class="fc-thumb" style="background-image:url('${esc(b.imgA)}')"></div>` : '<div class="fc-thumb empty">?</div>'}
+                ${b.imgB ? `<div class="fc-thumb" style="background-image:url('${esc(b.imgB)}')"></div>` : '<div class="fc-thumb empty">?</div>'}
               </div>
               <div class="fc-cell-names">
                 <div class="fc-cell-fighter">
@@ -370,13 +381,13 @@
       if (!bouts.length) { root.innerHTML = '<div class="fc-empty">No matchups added yet — click Edit Fights to add some.</div>'; return; }
       const rowsHTML = bouts.map(b => `
         <div class="fc-next-row">
-          ${b.imgA ? `<img class="fc-next-photo" src="${esc(b.imgA)}" onerror="this.style.display='none'">` : ''}
+          ${b.imgA ? `<div class="fc-next-photo" style="background-image:url('${esc(b.imgA)}')"></div>` : ''}
           <div class="fc-next-body">
             ${b.tag ? `<div class="fc-next-tag">${esc(b.tag)}</div>` : ''}
             <div class="fc-next-matchup">${b.flagA ? esc(b.flagA)+' ' : ''}${esc(b.a)} <span class="vs">vs</span> ${b.flagB ? esc(b.flagB)+' ' : ''}${esc(b.b)}</div>
             ${b.weight ? `<div class="fc-next-weight">${esc(b.weight)}</div>` : ''}
           </div>
-          ${b.imgB ? `<img class="fc-next-photo b-side" src="${esc(b.imgB)}" onerror="this.style.display='none'">` : ''}
+          ${b.imgB ? `<div class="fc-next-photo b-side" style="background-image:url('${esc(b.imgB)}')"></div>` : ''}
         </div>
       `).join('');
 
@@ -577,10 +588,15 @@
       // a detached clone — html2canvas renders far more faithfully against
       // an element that's actually laid out in the live page), then restore
       // the originals afterward regardless of outcome.
-      const imgs = [...targetEl.querySelectorAll('img')];
-      const originalSrcs = imgs.map(img => img.src);
-      await Promise.all(imgs.map(async img => {
-        const src = img.getAttribute('src');
+      // Fighter photos are CSS background-images (not <img src>) — see the
+      // .fc-thumb/.fc-next-photo comments for why: html2canvas ignores
+      // object-fit on <img> elements and stretches the raw photo into its
+      // box, which was squishing/smushing fighters in every downloaded PNG.
+      const photoEls = [...targetEl.querySelectorAll('.fc-thumb:not(.empty), .fc-next-photo')];
+      const originalBgs = photoEls.map(el => el.style.backgroundImage);
+      await Promise.all(photoEls.map(async el => {
+        const match = (el.style.backgroundImage || '').match(/url\(["']?(.*?)["']?\)/);
+        const src = match && match[1];
         if (!src || src.startsWith('data:')) return;
         try {
           const proxied = `${API_BASE}/api/image-proxy?url=${encodeURIComponent(src)}`;
@@ -589,8 +605,8 @@
           // a 404 (backend not yet redeployed with this endpoint, which is
           // exactly what happened) resolves "successfully" with an error
           // page body, which then got read as image bytes and written into
-          // img.src as garbage, breaking the photo instead of leaving the
-          // original (uncorrupted) src in place.
+          // the background-image as garbage, breaking the photo instead of
+          // leaving the original (uncorrupted) url in place.
           if (!res.ok) return;
           const blob = await res.blob();
           const dataUrl = await new Promise((resolve, reject) => {
@@ -599,8 +615,8 @@
             reader.onerror = reject;
             reader.readAsDataURL(blob);
           });
-          img.src = dataUrl;
-        } catch (e) { /* leave the original src — html2canvas will just skip/blank that one image, not fail the whole export */ }
+          el.style.backgroundImage = `url("${dataUrl}")`;
+        } catch (e) { /* leave the original url — html2canvas will just skip/blank that one image, not fail the whole export */ }
       }));
 
       try {
@@ -628,7 +644,7 @@
           }, 'image/png');
         });
       } finally {
-        imgs.forEach((img, i) => { img.src = originalSrcs[i]; });
+        photoEls.forEach((el, i) => { el.style.backgroundImage = originalBgs[i]; });
       }
     }
 
