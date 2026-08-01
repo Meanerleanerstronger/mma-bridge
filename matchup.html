@@ -414,27 +414,24 @@
       content:''; position:absolute; inset:0; z-index:2; pointer-events:none;
       background:radial-gradient(ellipse at 50% 45%, transparent 52%, rgba(0,0,0,.5) 100%);
     }
-    /* badge — big, centered top, sitting between the fighters' heads
-       instead of tucked in a corner, with a hard-edged gradient sheen
-       instead of a glow. Weighted toward the deep #e8691c end rather than
-       a light peachy top — a single consistent "rich orange," not two
-       different oranges between dark and light mode. Same treatment in
-       both modes now, no separate dark-badge-on-orange light variant. */
+    /* badge — dropped the filled gradient pill entirely (read as an
+       "amateur"/flashy button sitting on the poster). Replaced with a
+       plain editorial masthead label: wide-tracked small caps and a thin
+       accent rule underneath, no fill, no shadow-box — the kind of
+       restrained typographic mark real premium event branding uses
+       instead of a big colored button shouting for attention. */
     .mu-classic-eventname {
       position:absolute; top:6%; left:50%; z-index:3;
       transform:translateX(-50%);
-      background:linear-gradient(165deg, #ff9a4d 0%, #e8691c 60%, #c65a12 100%);
-      /* inset top highlight = a hard light-catching bevel edge, the same
-         trick real molded-plastic/chrome badge art uses for "3D" without
-         any blur — reads as a raised object, not a flat pasted rectangle. */
-      box-shadow:0 8px 20px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.45), inset 0 -2px 0 rgba(0,0,0,.18);
-      border-radius:4px; padding:10px 20px;
       text-align:center; white-space:nowrap;
-      font-family:'Barlow Condensed',sans-serif;
-      font-weight:800; font-style:italic; text-transform:uppercase;
-      font-size:clamp(1.1rem,4.6vw,1.6rem); line-height:1.05;
-      color:#0a0a0a; letter-spacing:.02em;
+      font-family:'Oswald',sans-serif;
+      font-weight:600; text-transform:uppercase;
+      font-size:clamp(.8rem,2.6vw,1rem); line-height:1;
+      color:#fff; letter-spacing:.34em;
+      padding-bottom:9px;
+      border-bottom:1.5px solid rgba(232,105,28,.75);
     }
+    body.mu-classic-mode.mu-poster-light .mu-classic-eventname { color:#161514; }
     /* optional custom tag (e.g. "REMATCH") — small ribbon, top-left corner,
        distinct from the centered event-name badge. */
     .mu-classic-tagline {
@@ -492,12 +489,16 @@
        same category of limitation that was squishing fighter photos on
        download elsewhere on the site) — it silently drops the clip and
        just paints the gradient as a solid rectangle, which is exactly what
-       turned "VS" into a blank orange blob in every downloaded poster. */
+       turned "VS" into a blank orange blob in every downloaded poster.
+       Color flips per mode (white on the dark card, black on the light
+       one) instead of matching the names — the extrusion shadow stays a
+       consistent orange tint in both, tying it back to the accent color
+       without needing the fill itself to be orange. */
     .mu-classic-vsline .vs {
       font-family:'Barlow Condensed',sans-serif;
       font-style:italic; font-weight:900;
-      color:#e8691c;
-      text-shadow:2px 2px 0 rgba(40,16,4,.9), 4px 4px 0 rgba(20,8,2,.55);
+      color:#fff;
+      text-shadow:2px 2px 0 rgba(232,105,28,.45), 4px 4px 0 rgba(232,105,28,.22);
       font-size:.85em;
     }
     /* champion / rematch-number superscript tags */
@@ -558,14 +559,18 @@
     body.mu-classic-mode.mu-poster-light .mu-classic-card::after {
       background:radial-gradient(ellipse at 50% 45%, transparent 60%, rgba(0,0,0,.14) 100%);
     }
-    /* names/VS/location keep the same orange fill as dark mode, but the
+    /* names/location keep the same orange fill as dark mode, but the
        extrusion shadow flips to plain black — a dark-brown shadow (right
        for popping orange text off a near-black card) reads muddy on white,
        same reason light mode's frame border below gets bumped up too. */
     body.mu-classic-mode.mu-poster-light .mu-classic-name,
-    body.mu-classic-mode.mu-poster-light .mu-classic-vsline,
-    body.mu-classic-mode.mu-poster-light .mu-classic-vsline .vs {
+    body.mu-classic-mode.mu-poster-light .mu-classic-vsline {
       text-shadow:2px 2px 0 rgba(0,0,0,.22), 4px 4px 0 rgba(0,0,0,.12);
+    }
+    /* VS flips to black text on the light card (white on the dark one) —
+       the orange-tinted shadow stays the same in both modes. */
+    body.mu-classic-mode.mu-poster-light .mu-classic-vsline .vs {
+      color:#161514;
     }
     body.mu-classic-mode.mu-poster-light .mu-classic-location {
       text-shadow:1px 1px 0 rgba(0,0,0,.18);
