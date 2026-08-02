@@ -44670,43 +44670,113 @@
     "id": "ty-miller",
     "name": "Ty Miller",
     "weightClass": "Welterweight",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-01/MILLER_TY_R_01-24.png"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-01/MILLER_TY_R_01-24.png",
+    "stats": {
+      "slpm": "7.16",
+      "strAcc": "38%",
+      "sapm": "4.65",
+      "strDef": "64%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "75%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "billy-ray-goff",
     "name": "Billy Ray Goff",
     "weightClass": "Welterweight",
-    "img": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2024-05/GOFF_BILLY_R_08-26.png"
+    "img": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2024-05/GOFF_BILLY_R_08-26.png",
+    "stats": {
+      "slpm": "7.51",
+      "strAcc": "46%",
+      "sapm": "5.02",
+      "strDef": "59%",
+      "tdAvg": "1.75",
+      "tdAcc": "16%",
+      "tdDef": "66%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "diego-ferreira",
     "name": "Diego Ferreira",
     "weightClass": "Lightweight",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/FERREIRA_DIEGO_L_01-18.png"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/FERREIRA_DIEGO_L_01-18.png",
+    "stats": {
+      "slpm": "4.70",
+      "strAcc": "39%",
+      "sapm": "3.46",
+      "strDef": "55%",
+      "tdAvg": "0.82",
+      "tdAcc": "30%",
+      "tdDef": "57%",
+      "subAvg": "0.6"
+    }
   },
   {
     "id": "billy-quarantillo",
     "name": "Billy Quarantillo",
     "weightClass": "Lightweight",
-    "img": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2024-12/QUARANTILLO_BILLY_R_12-14.png"
+    "img": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2024-12/QUARANTILLO_BILLY_R_12-14.png",
+    "stats": {
+      "slpm": "7.44",
+      "strAcc": "54%",
+      "sapm": "5.83",
+      "strDef": "42%",
+      "tdAvg": "1.47",
+      "tdAcc": "24%",
+      "tdDef": "61%",
+      "subAvg": "1.0"
+    }
   },
   {
     "id": "darren-elkins",
     "name": "Darren Elkins",
     "weightClass": "Featherweight",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-04/ELKINS_DARREN_L_04-12.png"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-04/ELKINS_DARREN_L_04-12.png",
+    "stats": {
+      "slpm": "3.40",
+      "strAcc": "38%",
+      "sapm": "3.34",
+      "strDef": "51%",
+      "tdAvg": "2.87",
+      "tdAcc": "34%",
+      "tdDef": "56%",
+      "subAvg": "1.1"
+    }
   },
   {
     "id": "steven-asplund",
     "name": "Steven Asplund",
     "weightClass": "Heavyweight",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/ASPLUND_STEVE_R_03-14.png"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/ASPLUND_STEVE_R_03-14.png",
+    "stats": {
+      "slpm": "10.05",
+      "strAcc": "51%",
+      "sapm": "6.64",
+      "strDef": "50%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "100%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "ravena-oliveira",
     "name": "Ravena Oliveira",
     "weightClass": "Women's Flyweight",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/OLIVEIRA_RAVENA_R_03-21.png"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/OLIVEIRA_RAVENA_R_03-21.png",
+    "stats": {
+      "slpm": "1.91",
+      "strAcc": "30%",
+      "sapm": "3.72",
+      "strDef": "46%",
+      "tdAvg": "0.88",
+      "tdAcc": "50%",
+      "tdDef": "46%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "alexia-thainara",
@@ -44714,7 +44784,17 @@
     "nationality": "Brazilian",
     "flag": "🇧🇷",
     "weightClass": "Women's Strawweight",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/THAINARA_ALEXIA_R_09-27.png"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/THAINARA_ALEXIA_R_09-27.png",
+    "stats": {
+      "slpm": "4.62",
+      "strAcc": "43%",
+      "sapm": "2.46",
+      "strDef": "59%",
+      "tdAvg": "4.54",
+      "tdAcc": "57%",
+      "tdDef": "100%",
+      "subAvg": "1.8"
+    }
   },
   {
     "id": "jose-montanha-da-silva",
