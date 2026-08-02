@@ -24,7 +24,7 @@
   <meta name="twitter:description" content="Read and write community UFC event reviews. Rate cards, vote for Fight of the Night, and compare your take with thousands of MMA fans.">
   <meta name="twitter:image" content="https://mmabridge.com/images/mma-bridge-logo.png">
 
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Pacifico&family=Inter:wght@300;400;500;600&family=Barlow+Condensed:wght@800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Pacifico&family=Inter:wght@300;400;500;600&family=Barlow+Condensed:wght@800&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=9.21" />
 
   <style>
@@ -211,21 +211,29 @@
       flex-shrink: 0;
       cursor: pointer;
       position: relative;
+      /* overflow stays visible on the outer card now — the rating badge
+         needs to sit partially outside the rounded poster, and a clipped
+         parent would just cut it off. Everything that DOES need clipping
+         (poster, gradient, text) lives one level in, inside .card-clip. */
+      transition: box-shadow 0.3s;
+      animation: rv-card-in 0.5s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    .rv-card .card-clip {
+      position: absolute; inset: 0;
       border-radius: 16px;
       overflow: hidden;
       background: #0e0e12;
       border: 1px solid rgba(255,255,255,0.08);
-      transition: border-color 0.25s, box-shadow 0.3s;
-      animation: rv-card-in 0.5s cubic-bezier(0.22,1,0.36,1) both;
+      transition: border-color 0.25s;
     }
+    .rv-card:hover .card-clip { border-color: rgba(255,138,61,0.4); }
     @media (prefers-reduced-motion: reduce) {
       .rv-card { animation: none; }
     }
     .rv-card.ppv { width: 260px; height: 340px; }
     .rv-card.fn  { width: 220px; height: 290px; }
 
-    .rv-card:hover {
-      border-color: rgba(255,138,61,0.4);
+    .rv-card:hover .card-clip {
       box-shadow: 0 28px 60px rgba(0,0,0,0.75), 0 0 0 1px rgba(255,138,61,0.08), 0 0 40px rgba(255,138,61,0.06);
     }
 
@@ -268,12 +276,15 @@
       padding: 14px 16px 18px;
       z-index: 2;
     }
+    /* Oswald — plainer and grittier than Montserrat Black at this size;
+       reads as a local fight poster instead of a corporate sports-app
+       tile. Not a dramatic redesign, just a steadier, simpler face. */
     .rv-card .card-name {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
       font-size: 1rem;
       text-transform: uppercase;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.01em;
       color: #fff;
       line-height: 1.2;
       margin-bottom: 5px;
@@ -315,24 +326,28 @@
       color: #ff8a3d;
     }
 
-    /* Community rating badge top-right */
+    /* Community rating — pinned so it pokes outside the poster's rounded
+       corner (top-right), instead of a small inset badge easy to miss.
+       Solid fill + real size so it reads instantly, not just on close
+       inspection. .rv-card itself is overflow:visible now specifically
+       so this can hang off the edge like this. */
     .rv-card .card-rating {
       position: absolute;
-      top: 12px; right: 12px;
-      background: rgba(0,0,0,0.7);
-      border: 1px solid rgba(255,138,61,0.3);
-      color: #ff8a3d;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      font-size: 0.58rem;
-      padding: 4px 9px;
-      border-radius: 4px;
-      backdrop-filter: blur(8px);
-      z-index: 3;
+      top: -12px; right: -10px;
+      background: linear-gradient(165deg, #ffb066 0%, #ff8a3d 45%, #e8691c 100%);
+      border: 2.5px solid #0a0a0e;
+      color: #0a0a0a;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 0.92rem;
+      padding: 6px 11px;
+      border-radius: 20px;
+      box-shadow: 0 8px 18px rgba(0,0,0,.55);
+      z-index: 5;
     }
 
     /* Bottom glow line on hover — slides in */
-    .rv-card::after {
+    .rv-card .card-clip::after {
       content: '';
       position: absolute;
       bottom: 0; left: 0; right: 0;
@@ -344,7 +359,7 @@
       animation: shimmerSlide 3s linear infinite;
       z-index: 4;
     }
-    .rv-card:hover::after { opacity: 1; }
+    .rv-card:hover .card-clip::after { opacity: 1; }
 
     /* ── SKELETON ── */
     .rv-skel {

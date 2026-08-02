@@ -228,6 +228,7 @@ function renderReviews(reviews, container) {
   }
 
   const SHOW_INIT = 3;
+  const REVIEW_BATCH_SIZE = 10;
   const cards = reviews.map((rv, i) => {
     const hidden  = i >= SHOW_INIT ? ' hidden' : '';
     const isOwn   = !!(uid && rv.user_id === uid);
@@ -278,10 +279,17 @@ function renderReviews(reviews, container) {
       </div>`;
   });
 
-  const moreBtn = reviews.length > SHOW_INIT ? `
+  // Batches of 10, not "reveal literally everything at once" — a card
+  // with hundreds of ratings used to dump the entire list into the page
+  // in one shot the moment you clicked Show More, leaving you to scroll
+  // through all of it with no way back. Each click only loads the next
+  // page; the button keeps counting down instead of disappearing.
+  const remainingAfterInit = reviews.length - SHOW_INIT;
+  const moreBtn = remainingAfterInit > 0 ? `
     <div class="er-show-more-wrap" id="erShowMoreWrap">
       <button class="er-show-more-btn" id="erShowMore">
-        Show ${reviews.length - SHOW_INIT} more review${reviews.length - SHOW_INIT !== 1 ? 's' : ''}
+        Show ${Math.min(REVIEW_BATCH_SIZE, remainingAfterInit)} more review${Math.min(REVIEW_BATCH_SIZE, remainingAfterInit) !== 1 ? 's' : ''}
+        <span class="er-show-more-remaining">(${remainingAfterInit} left)</span>
       </button>
     </div>` : '';
 
@@ -300,14 +308,25 @@ function renderReviews(reviews, container) {
     });
   });
 
-  // Show more reviews
-  container.querySelector('#erShowMore')?.addEventListener('click', () => {
-    container.querySelectorAll('.er-rev-card.hidden').forEach((card, i) => {
+  // Show more reviews — one batch (REVIEW_BATCH_SIZE) per click, not
+  // every hidden card at once. Re-labels/hides the button as the
+  // remaining count changes instead of removing it after a single click.
+  container.querySelector('#erShowMore')?.addEventListener('click', function handleShowMore() {
+    const hiddenCards = [...container.querySelectorAll('.er-rev-card.hidden')];
+    hiddenCards.slice(0, REVIEW_BATCH_SIZE).forEach((card, i) => {
       card.classList.remove('hidden');
       card.classList.add('reveal');
       card.style.animationDelay = `${i * 60}ms`;
     });
-    container.querySelector('#erShowMoreWrap')?.remove();
+    const stillHidden = hiddenCards.length - REVIEW_BATCH_SIZE;
+    const wrap = container.querySelector('#erShowMoreWrap');
+    if (stillHidden > 0) {
+      const btn = wrap.querySelector('#erShowMore');
+      const nextBatch = Math.min(REVIEW_BATCH_SIZE, stillHidden);
+      btn.innerHTML = `Show ${nextBatch} more review${nextBatch !== 1 ? 's' : ''} <span class="er-show-more-remaining">(${stillHidden} left)</span>`;
+    } else {
+      wrap?.remove();
+    }
   });
 
   // ── Review like buttons ───────────────────────

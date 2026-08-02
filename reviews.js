@@ -42,6 +42,15 @@ function getMainEvent(ev) {
 function getEventId(ev) {
   return ev.id || slugify(ev.name || ev.eventName || '');
 }
+// Strips the "UFC Fight Night:" / "UFC 329:" / "Noche UFC:" prefix for
+// the card title — the type badge already conveys that, and repeating it
+// in every title was pushing "UFC FIGHT NIGHT: MEDIĆ VS. RODRIGUEZ" onto
+// 3 cramped lines instead of a clean "MEDIĆ VS. RODRIGUEZ".
+function shortName(name) {
+  const s = String(name || '');
+  const idx = s.indexOf(': ');
+  return idx > -1 ? s.slice(idx + 2) : s;
+}
 
 const CARD_PLACEHOLDER_GRADIENTS = [
   'linear-gradient(140deg,#f97316 0%,#ea580c 100%)',
@@ -72,18 +81,20 @@ function buildCard(ev, type) {
   const placeholderGrad = CARD_PLACEHOLDER_GRADIENTS[Math.floor(Math.random() * CARD_PLACEHOLDER_GRADIENTS.length)];
 
   card.innerHTML = `
-    <div class="card-badge">${isPPV ? 'PPV' : 'Fight Night'}</div>
-    ${poster
-      ? `<img class="card-poster" src="${escHtml(poster)}" alt="${escHtml(name)}" loading="lazy"
-           style="object-position:${objPos}"
-           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-         <div class="card-placeholder" style="display:none;background:${placeholderGrad}"></div>`
-      : `<div class="card-placeholder" style="background:${placeholderGrad}"></div>`
-    }
-    <div class="card-gradient"></div>
-    <div class="card-info">
-      <div class="card-name">${escHtml(name)}</div>
-      <div class="card-matchup">${escHtml(matchup)}</div>
+    <div class="card-clip">
+      <div class="card-badge">${isPPV ? 'PPV' : 'Fight Night'}</div>
+      ${poster
+        ? `<img class="card-poster" src="${escHtml(poster)}" alt="${escHtml(name)}" loading="lazy"
+             style="object-position:${objPos}"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+           <div class="card-placeholder" style="display:none;background:${placeholderGrad}"></div>`
+        : `<div class="card-placeholder" style="background:${placeholderGrad}"></div>`
+      }
+      <div class="card-gradient"></div>
+      <div class="card-info">
+        <div class="card-name">${escHtml(shortName(name))}</div>
+        <div class="card-matchup">${escHtml(matchup)}</div>
+      </div>
     </div>
   `;
 
