@@ -212,7 +212,12 @@
       position:relative; padding:calc(18px * var(--fc-scale)) 22px;
       min-height:calc(104px * var(--fc-scale));
       border-bottom:1px solid rgba(255,255,255,.1);
-      display:flex; align-items:center; gap:calc(18px * var(--fc-scale));
+      /* align-items:stretch (not center) — .fc-next-photo has no height
+         of its own and depends on stretch to fill the row; switching this
+         to center for the "more elegant spacing" pass silently collapsed
+         every photo to zero height (the div was still there, just 0px
+         tall, so nothing painted — background-image, live or downloaded). */
+      display:flex; align-items:stretch; gap:calc(18px * var(--fc-scale));
     }
     body.fc-light .fc-next-row { border-bottom-color:rgba(0,0,0,.12); }
     .fc-next-row:last-child { border-bottom:none; }
@@ -714,14 +719,29 @@
         if (!src || src.startsWith('data:')) return;
         try {
           const proxied = `${API_BASE}/api/image-proxy?url=${encodeURIComponent(src)}`;
-          const res = await fetch(proxied);
+          // The backend is Render free-tier and sleeps after inactivity —
+          // the first request after a while can come back as a cold-start
+          // error (502/503) well before the instance is actually warm.
+          // A single failed attempt used to just give up silently, leaving
+          // the original cross-origin URL in place, which html2canvas then
+          // renders as a blank photo (CORS taint) — that's what "photos
+          // missing" actually was. Retry a couple times with backoff
+          // instead of bailing on the first hiccup.
+          let res;
+          for (let attempt = 0; attempt < 3; attempt++) {
+            try {
+              res = await fetch(proxied);
+              if (res.ok) break;
+            } catch (e) { res = null; }
+            if (attempt < 2) await new Promise(r => setTimeout(r, 1500 * (attempt + 1)));
+          }
           // fetch() only rejects on network failure, not HTTP error status —
           // a 404 (backend not yet redeployed with this endpoint, which is
           // exactly what happened) resolves "successfully" with an error
           // page body, which then got read as image bytes and written into
           // the background-image as garbage, breaking the photo instead of
           // leaving the original (uncorrupted) url in place.
-          if (!res.ok) return;
+          if (!res || !res.ok) return;
           const blob = await res.blob();
           const dataUrl = await new Promise((resolve, reject) => {
             const reader = new FileReader();

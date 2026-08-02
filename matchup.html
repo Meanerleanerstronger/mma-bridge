@@ -1445,7 +1445,19 @@
           if (!src || src.startsWith('data:')) return;
           try {
             const proxied = `${API_BASE_DL}/api/image-proxy?url=${encodeURIComponent(src)}`;
-            const res = await fetch(proxied);
+            // Render free-tier cold-start can return an error well before
+            // the instance is actually warm — retry a couple times with
+            // backoff instead of giving up on the first hiccup (which used
+            // to silently leave a cross-origin src in place that
+            // html2canvas then renders as a blank photo).
+            let res;
+            for (let attempt = 0; attempt < 3; attempt++) {
+              try {
+                res = await fetch(proxied);
+                if (res.ok) break;
+              } catch (e) { res = null; }
+              if (attempt < 2) await new Promise(r => setTimeout(r, 1500 * (attempt + 1)));
+            }
             // fetch() only rejects on network failure, not on HTTP error
             // status — a 404 (e.g. backend not yet redeployed with this
             // endpoint) resolves "successfully" with an error page body,
@@ -1453,7 +1465,7 @@
             // into img.src as garbage, breaking the photo instead of just
             // leaving the original (uncorrupted) src in place. Checking
             // res.ok is what was missing.
-            if (!res.ok) return;
+            if (!res || !res.ok) return;
             const blob = await res.blob();
             const dataUrl = await new Promise((resolve, reject) => {
               const reader = new FileReader();
