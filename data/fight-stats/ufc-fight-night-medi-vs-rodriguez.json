@@ -1,0 +1,167 @@
+{
+  "eventId": "ufc-fight-night-medi-vs-rodriguez",
+  "eventName": "UFC Fight Night: Medić vs. Rodriguez",
+  "fights": [
+    {
+      "fighter1": "Uros Medic Daniel Rodriguez",
+      "fighter2": "Navajo Stirling Jan Blachowicz",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "111",
+          "totalStr": "00",
+          "td": "Welterweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "353",
+          "totalStr": "00",
+          "td": "LightHeavyweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Aleksandar Rakic Marcin Tybura",
+      "fighter2": "Robert Valentin Dusko Todorovic",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "7133",
+          "totalStr": "00",
+          "td": "Heavyweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "11",
+          "totalStr": "20",
+          "td": "Middleweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Gilbert Urbina Vlasto Cepo",
+      "fighter2": "Noah Gugnon Milos Janicic",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "307",
+          "totalStr": "00",
+          "td": "Middleweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "56",
+          "totalStr": "10",
+          "td": "Lightweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Tofiq Musayev Ludovit Klein",
+      "fighter2": "Michael Oliveira Oban Elliott",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "4646",
+          "totalStr": "00",
+          "td": "Lightweight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "2 0",
+          "sigStr": "146",
+          "totalStr": "00",
+          "td": "Welterweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Borislav Nikolic Mark Vologdin",
+      "fighter2": "Bogdan Grad Dennis Buzukja",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 1",
+          "sigStr": "5742",
+          "totalStr": "20",
+          "td": "Bantamweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "4446",
+          "totalStr": "20",
+          "td": "Featherweight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Mateusz Rebecki Kyle Prepolec",
+      "fighter2": "Nina Milosevic Hailey Cowan",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "752",
+          "totalStr": "00",
+          "td": "Lightweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "1 0",
+          "sigStr": "2113",
+          "totalStr": "00",
+          "td": "Women'sBantamweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Jovan Leka Alexander Poppeck",
+      "fighter2": "Stephanie Luciano Marina Spasic",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "108",
+          "totalStr": "00",
+          "td": "Heavyweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "2025",
+          "totalStr": "10",
+          "td": "Women'sStrawweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    }
+  ]
+}
