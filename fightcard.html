@@ -204,16 +204,20 @@
        makes a 2-matchup list render noticeably bigger than a 6-matchup
        one instead of both being squeezed into the exact same small size. ── */
     .fc-next-rows { display:flex; flex-direction:column; }
+    /* Generous scaled vertical padding (was 0, relying only on min-height)
+       — that's what made rows blur into each other with no way to tell
+       where one ends and the next begins. Padding + the border now both
+       do real work instead of the border alone. */
     .fc-next-row {
-      position:relative; padding:0 16px;
+      position:relative; padding:calc(18px * var(--fc-scale)) 22px;
       min-height:calc(104px * var(--fc-scale));
-      border-bottom:1px solid rgba(255,255,255,.07);
-      display:flex; align-items:stretch; gap:12px;
+      border-bottom:1px solid rgba(255,255,255,.1);
+      display:flex; align-items:center; gap:calc(18px * var(--fc-scale));
     }
-    body.fc-light .fc-next-row { border-bottom-color:rgba(0,0,0,.08); }
+    body.fc-light .fc-next-row { border-bottom-color:rgba(0,0,0,.12); }
     .fc-next-row:last-child { border-bottom:none; }
-    .fc-next-row:nth-child(odd) { background:rgba(255,138,61,.05); }
-    .fc-next-row:nth-child(even) { background:rgba(96,165,250,.05); }
+    .fc-next-row:nth-child(odd) { background:rgba(255,138,61,.045); }
+    .fc-next-row:nth-child(even) { background:rgba(96,165,250,.045); }
     .fc-next-photo {
       width:calc(84px * var(--fc-scale)); margin:8px 0; border-radius:6px; flex-shrink:0;
       /* Same background-image/cover swap as .fc-thumb — html2canvas
@@ -226,43 +230,67 @@
     }
     .fc-next-photo.b-side { order:3; }
     .fc-next-body { flex:1; min-width:0; display:flex; flex-direction:column; justify-content:center; }
+    /* Tag — a quiet italic label with a short flanking rule instead of a
+       loud solid-orange caps chip. Reads like real fight-poster caption
+       type ("WORLD FLYWEIGHT CHAMPIONSHIP", "LIGHTWEIGHT BOUT") rather
+       than a UI badge. */
     .fc-next-tag {
-      display:inline-block; margin-bottom:4px;
-      font-family:'Montserrat',sans-serif; font-weight:800;
-      font-size:calc(.54rem * var(--fc-scale));
-      letter-spacing:.16em; text-transform:uppercase; color:#ff8a3d;
+      display:inline-flex; align-items:center; gap:calc(8px * var(--fc-scale));
+      margin-bottom:calc(8px * var(--fc-scale));
+      font-family:'Barlow Condensed',sans-serif; font-weight:600; font-style:italic;
+      font-size:calc(.66rem * var(--fc-scale));
+      letter-spacing:.22em; text-transform:uppercase; color:#e0b378;
     }
+    .fc-next-tag::before {
+      content:''; display:inline-block; flex-shrink:0;
+      width:calc(16px * var(--fc-scale)); height:1px;
+      background:currentColor; opacity:.55;
+    }
+    /* Names — same Barlow Condensed voice as everywhere else on the card
+       (not a font swap), just given room to breathe: real line-height
+       instead of a cramped 1, a touch of letter-spacing, and a scaled gap
+       so the words don't crowd together as --fc-scale climbs on smaller
+       fight lists. */
     .fc-next-matchup {
-      font-family:'Barlow Condensed',sans-serif; font-weight:900; font-style:italic;
-      text-transform:uppercase; color:#fff; line-height:1;
+      font-family:'Barlow Condensed',sans-serif; font-weight:800; font-style:italic;
+      text-transform:uppercase; color:#fff; line-height:1.12;
       font-size:calc(clamp(1.2rem,4.4vw,1.8rem) * var(--fc-scale));
-      display:flex; align-items:baseline; gap:8px; flex-wrap:wrap;
+      letter-spacing:.008em;
+      display:flex; align-items:baseline; gap:calc(13px * var(--fc-scale)); flex-wrap:wrap;
     }
     body.fc-light .fc-next-matchup { color:#161514; }
+    /* VS — small, quiet, flanked by thin rules (no underline/bold/orange
+       fill) instead of shouting at the same volume as the names. */
     .fc-next-matchup .vs {
-      font-size:.55em; color:#ff8a3d; text-decoration:underline;
-      text-underline-offset:3px;
+      display:inline-flex; align-items:center; gap:calc(7px * var(--fc-scale));
+      font-size:.46em; font-weight:600; font-style:normal;
+      letter-spacing:.2em; text-transform:uppercase;
+      color:rgba(255,255,255,.45);
     }
-    /* champion badge — replaces the per-fighter flag emoji entirely; only
-       shows when a fighter's fighters.json ranking is literally
-       "Champion". Gold, not orange — reads as a title belt, not just
-       another accent color. */
+    body.fc-light .fc-next-matchup .vs { color:rgba(0,0,0,.4); }
+    .fc-next-matchup .vs::before,
+    .fc-next-matchup .vs::after {
+      content:''; width:calc(13px * var(--fc-scale)); height:1px;
+      background:currentColor; opacity:.6;
+    }
+    /* Champion mark — a thin gold ring instead of a solid gradient-filled
+       circle, which read as a cheap game badge rather than a title mark. */
     .fc-champ-badge {
       display:inline-flex; align-items:center; justify-content:center;
-      width:calc(22px * var(--fc-scale)); height:calc(22px * var(--fc-scale));
+      width:calc(20px * var(--fc-scale)); height:calc(20px * var(--fc-scale));
       border-radius:50%; flex-shrink:0;
-      background:linear-gradient(135deg,#f4d99a,#c9922f 55%,#8a5f1c);
-      box-shadow:0 2px 6px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.5);
-      color:#1a1206; font-family:'Montserrat',sans-serif; font-weight:900;
-      font-size:calc(.85rem * var(--fc-scale));
+      background:transparent;
+      border:calc(1.5px * var(--fc-scale)) solid #d9b06e;
+      color:#e0bd85; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-style:normal;
+      font-size:calc(.7rem * var(--fc-scale));
     }
     .fc-next-weight {
-      margin-top:4px;
-      font-family:'Montserrat',sans-serif; font-weight:700;
-      font-size:calc(.56rem * var(--fc-scale));
-      letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.35);
+      margin-top:calc(7px * var(--fc-scale));
+      font-family:'Barlow Condensed',sans-serif; font-weight:500; font-style:italic;
+      font-size:calc(.66rem * var(--fc-scale));
+      letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.42);
     }
-    body.fc-light .fc-next-weight { color:rgba(0,0,0,.4); }
+    body.fc-light .fc-next-weight { color:rgba(0,0,0,.42); }
 
     .fc-footer {
       padding:12px 24px; text-align:center;
