@@ -41,6 +41,9 @@
       color:#fff; border-radius:20px; padding:8px 16px; cursor:pointer;
     }
     .fc-btn:hover { background:rgba(255,255,255,.12); }
+    .fc-zoom-group { display:flex; align-items:center; gap:4px; }
+    .fc-zoom-btn { padding:8px 14px; cursor:pointer; }
+    .fc-zoom-label { pointer-events:none; min-width:52px; text-align:center; font-variant-numeric:tabular-nums; }
     .fc-btn.active { background:linear-gradient(165deg, #ffb066 0%, #ff8a3d 45%, #e8691c 100%); border-color:#ff8a3d; color:#0a0a0a; }
     body.fc-light .fc-btn { background:rgba(0,0,0,.05); border-color:rgba(0,0,0,.14); color:#161514; }
     body.fc-light .fc-btn:hover { background:rgba(0,0,0,.1); }
@@ -60,6 +63,13 @@
       /* flat pure-black reads as "app screenshot" — a faint diagonal
          hairline texture reads as a printed/designed graphic instead */
       background-image:repeating-linear-gradient(135deg, rgba(255,255,255,.025) 0 1px, transparent 1px 22px);
+      /* Next-fight mode's photos/text scale off this — the card's width
+         is fixed regardless of bout count, so a 2-matchup list used to
+         render at the exact same small size as a 6-matchup list and just
+         looked lost/zoomed-out. Set automatically from bout count (fewer
+         bouts = bigger number) and adjustable by hand via the Zoom
+         buttons; see setZoom() below. */
+      --fc-scale: 1;
     }
     body.fc-light .fc-card { background-color:#faf7f1; background-image:repeating-linear-gradient(135deg, rgba(0,0,0,.02) 0 1px, transparent 1px 22px); }
 
@@ -188,11 +198,15 @@
     }
     body.fc-light .fc-cell-weight { color:rgba(0,0,0,.4); }
 
-    /* ── NEXT-FIGHT MODE — stacked matchup list, now with headshots ── */
+    /* ── NEXT-FIGHT MODE — stacked matchup list, now with headshots.
+       Every size below is a base value multiplied by --fc-scale (set on
+       .fc-card, see its comment) instead of a fixed px/rem — that's what
+       makes a 2-matchup list render noticeably bigger than a 6-matchup
+       one instead of both being squeezed into the exact same small size. ── */
     .fc-next-rows { display:flex; flex-direction:column; }
     .fc-next-row {
       position:relative; padding:0 16px;
-      min-height:104px;
+      min-height:calc(104px * var(--fc-scale));
       border-bottom:1px solid rgba(255,255,255,.07);
       display:flex; align-items:stretch; gap:12px;
     }
@@ -201,7 +215,7 @@
     .fc-next-row:nth-child(odd) { background:rgba(255,138,61,.05); }
     .fc-next-row:nth-child(even) { background:rgba(96,165,250,.05); }
     .fc-next-photo {
-      width:84px; margin:8px 0; border-radius:6px; flex-shrink:0;
+      width:calc(84px * var(--fc-scale)); margin:8px 0; border-radius:6px; flex-shrink:0;
       /* Same background-image/cover swap as .fc-thumb — html2canvas
          ignores object-fit and stretches <img> content into its box. */
       background-size:cover;
@@ -214,13 +228,14 @@
     .fc-next-body { flex:1; min-width:0; display:flex; flex-direction:column; justify-content:center; }
     .fc-next-tag {
       display:inline-block; margin-bottom:4px;
-      font-family:'Montserrat',sans-serif; font-weight:800; font-size:.54rem;
+      font-family:'Montserrat',sans-serif; font-weight:800;
+      font-size:calc(.54rem * var(--fc-scale));
       letter-spacing:.16em; text-transform:uppercase; color:#ff8a3d;
     }
     .fc-next-matchup {
       font-family:'Barlow Condensed',sans-serif; font-weight:900; font-style:italic;
       text-transform:uppercase; color:#fff; line-height:1;
-      font-size:clamp(1.2rem,4.4vw,1.8rem);
+      font-size:calc(clamp(1.2rem,4.4vw,1.8rem) * var(--fc-scale));
       display:flex; align-items:baseline; gap:8px; flex-wrap:wrap;
     }
     body.fc-light .fc-next-matchup { color:#161514; }
@@ -228,9 +243,23 @@
       font-size:.55em; color:#ff8a3d; text-decoration:underline;
       text-underline-offset:3px;
     }
+    /* champion badge — replaces the per-fighter flag emoji entirely; only
+       shows when a fighter's fighters.json ranking is literally
+       "Champion". Gold, not orange — reads as a title belt, not just
+       another accent color. */
+    .fc-champ-badge {
+      display:inline-flex; align-items:center; justify-content:center;
+      width:calc(22px * var(--fc-scale)); height:calc(22px * var(--fc-scale));
+      border-radius:50%; flex-shrink:0;
+      background:linear-gradient(135deg,#f4d99a,#c9922f 55%,#8a5f1c);
+      box-shadow:0 2px 6px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.5);
+      color:#1a1206; font-family:'Montserrat',sans-serif; font-weight:900;
+      font-size:calc(.85rem * var(--fc-scale));
+    }
     .fc-next-weight {
       margin-top:4px;
-      font-family:'Montserrat',sans-serif; font-weight:700; font-size:.56rem;
+      font-family:'Montserrat',sans-serif; font-weight:700;
+      font-size:calc(.56rem * var(--fc-scale));
       letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.35);
     }
     body.fc-light .fc-next-weight { color:rgba(0,0,0,.4); }
@@ -311,6 +340,11 @@
   <div class="fc-controls">
     <a class="fc-back" id="fcBack" href="admin.html">&larr; Back</a>
     <div class="fc-right-controls">
+      <div class="fc-zoom-group" id="fcZoomGroup" style="display:none">
+        <button class="fc-btn fc-zoom-btn" id="fcZoomOut" type="button">&minus;</button>
+        <span class="fc-btn fc-zoom-label" id="fcZoomLabel">100%</span>
+        <button class="fc-btn fc-zoom-btn" id="fcZoomIn" type="button">&plus;</button>
+      </div>
       <button class="fc-btn" id="fcThemeBtn" type="button">🌙 Dark</button>
       <button class="fc-btn" id="fcDownloadBtn" type="button">&#8681; Download</button>
       <button class="fc-btn" id="fcEditBtn" type="button">✎ Edit Fights</button>
@@ -342,7 +376,19 @@
     const editPanel  = document.getElementById('fcEditPanel');
     const themeBtn   = document.getElementById('fcThemeBtn');
     const editBtn    = document.getElementById('fcEditBtn');
+    const zoomGroup  = document.getElementById('fcZoomGroup');
+    const zoomLabel  = document.getElementById('fcZoomLabel');
     let editMode = false;
+
+    zoomGroup.style.display = mode === 'next' ? 'flex' : 'none';
+    document.getElementById('fcZoomOut').addEventListener('click', () => {
+      manualZoom = Math.max(0.6, +(manualZoom - 0.1).toFixed(2));
+      applyZoom();
+    });
+    document.getElementById('fcZoomIn').addEventListener('click', () => {
+      manualZoom = Math.min(2, +(manualZoom + 0.1).toFixed(2));
+      applyZoom();
+    });
 
     function applyTheme() {
       document.body.classList.toggle('fc-light', theme === 'light');
@@ -402,7 +448,7 @@
           ${b.imgA ? `<div class="fc-next-photo" style="background-image:url('${esc(b.imgA)}')"></div>` : ''}
           <div class="fc-next-body">
             ${b.tag ? `<div class="fc-next-tag">${esc(b.tag)}</div>` : ''}
-            <div class="fc-next-matchup">${b.flagA ? esc(b.flagA)+' ' : ''}${esc(b.a)} <span class="vs">vs</span> ${b.flagB ? esc(b.flagB)+' ' : ''}${esc(b.b)}</div>
+            <div class="fc-next-matchup">${b.champA ? '<span class="fc-champ-badge">C</span>' : ''}${esc(b.a)} <span class="vs">vs</span> ${b.champB ? '<span class="fc-champ-badge">C</span>' : ''}${esc(b.b)}</div>
             ${b.weight ? `<div class="fc-next-weight">${esc(b.weight)}</div>` : ''}
           </div>
           ${b.imgB ? `<div class="fc-next-photo b-side" style="background-image:url('${esc(b.imgB)}')"></div>` : ''}
@@ -420,9 +466,30 @@
       `;
     }
 
+    // ── Zoom (next-fight mode only) ──────────────────────────
+    // Fewer matchups should render noticeably bigger — a 2-fight list on
+    // the same fixed-width card as a 6-fight list used to come out at the
+    // exact same small size and just looked lost/zoomed-out. autoScale is
+    // recomputed every render from the current bout count; manualZoom is
+    // a user-adjustable multiplier on top of it via the +/- buttons.
+    let manualZoom = 1;
+    function autoScaleForCount(n) {
+      if (n <= 2) return 1.6;
+      if (n === 3) return 1.35;
+      if (n === 4) return 1.15;
+      if (n === 5) return 1.05;
+      return 1;
+    }
+    function applyZoom() {
+      const scale = mode === 'next' ? autoScaleForCount(bouts.length) * manualZoom : 1;
+      root.style.setProperty('--fc-scale', scale);
+      zoomLabel.textContent = Math.round(manualZoom * 100) + '%';
+    }
+
     function render() {
       document.title = `${eventName} | MMA Bridge`;
       if (mode === 'next') renderNextMode(); else renderCardMode();
+      applyZoom();
       if (editMode) renderEditPanel();
     }
 
@@ -454,7 +521,7 @@
             inputEl.value = results[i].name;
             inputEl.dataset.img = results[i].img || '';
             inputEl.dataset.weight = results[i].weightClass || '';
-            inputEl.dataset.flag = results[i].flag || '';
+            inputEl.dataset.champ = results[i].ranking === 'Champion' ? '1' : '';
             listEl.classList.remove('open');
             onPick(results[i]);
           });
@@ -551,8 +618,8 @@
           a: nameA, b: nameB,
           imgA: selA ? (selA.img||'') : (inputA.dataset.img||''),
           imgB: selB ? (selB.img||'') : (inputB.dataset.img||''),
-          flagA: selA ? (selA.flag||'') : (inputA.dataset.flag||''),
-          flagB: selB ? (selB.flag||'') : (inputB.dataset.flag||''),
+          champA: selA ? (selA.ranking === 'Champion') : !!inputA.dataset.champ,
+          champB: selB ? (selB.ranking === 'Champion') : !!inputB.dataset.champ,
           weight: weightEl ? weightEl.value.trim() : '',
           section: sectionEl ? sectionEl.value : undefined,
           tag: tagEl ? tagEl.value.trim() : undefined,

@@ -1773,7 +1773,7 @@
           const bouts = rows.filter(r => r.a && r.b).map(r => ({
             a: r.a.name, b: r.b.name,
             imgA: r.a.img || '', imgB: r.b.img || '',
-            flagA: r.a.flag || '', flagB: r.b.flag || '',
+            champA: r.a.ranking === 'Champion', champB: r.b.ranking === 'Champion',
             weight: r.el.querySelector('[data-role="weight"]').value.trim(),
             tag: r.el.querySelector('[data-role="tag"]').value.trim(),
           }));
