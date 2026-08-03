@@ -91,8 +91,8 @@ function formatOdds(n) {
 
   const SILHOUETTE = `
     <svg class="pk-silhouette" viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="40" cy="30" r="20" fill="rgba(255,255,255,0.07)"/>
-      <path d="M4 105 C4 72 20 62 40 62 C60 62 76 72 76 105Z" fill="rgba(255,255,255,0.07)"/>
+      <circle cx="40" cy="30" r="20" fill="rgba(255,255,255,0.16)"/>
+      <path d="M4 105 C4 72 20 62 40 62 C60 62 76 72 76 105Z" fill="rgba(255,255,255,0.16)"/>
     </svg>`;
 
   let toastTimer;
@@ -1118,15 +1118,19 @@ function formatOdds(n) {
       resultB ? `result-${resultB}` : '',
     ].filter(Boolean).join(' ');
 
-    // Photos — fc-photo wrapper with img + sil fallback
+    // Photos — fc-photo wrapper with img + sil fallback. One retry on
+    // load failure (a working image URL failing once, transiently, was
+    // indistinguishable from the fighter genuinely having no photo — see
+    // the .pk-silhouette opacity fix nearby) before actually giving up.
+    const IMG_ERROR_HANDLER = "if(!this.dataset.retried){this.dataset.retried='1';this.src=this.src;}else{this.style.display='none';this.nextElementSibling.style.display='flex';}";
     const photoA = `<div class="fc-photo">${
       f.imgA
-        ? `<img src="${esc(f.imgA)}" alt="${esc(f.a)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fc-sil" style="display:none">${SILHOUETTE}</div>`
+        ? `<img src="${esc(f.imgA)}" alt="${esc(f.a)}" loading="lazy" onerror="${IMG_ERROR_HANDLER}"><div class="fc-sil" style="display:none">${SILHOUETTE}</div>`
         : `<div class="fc-sil">${SILHOUETTE}</div>`
     }</div>`;
     const photoB = `<div class="fc-photo">${
       f.imgB
-        ? `<img src="${esc(f.imgB)}" alt="${esc(f.b)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fc-sil" style="display:none">${SILHOUETTE}</div>`
+        ? `<img src="${esc(f.imgB)}" alt="${esc(f.b)}" loading="lazy" onerror="${IMG_ERROR_HANDLER}"><div class="fc-sil" style="display:none">${SILHOUETTE}</div>`
         : `<div class="fc-sil">${SILHOUETTE}</div>`
     }</div>`;
 

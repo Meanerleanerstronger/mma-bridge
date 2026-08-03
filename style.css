@@ -12818,7 +12818,14 @@ body.light-mode .pk-poster-bg::after {
 .pk-silhouette {
   width: 55%;
   height: 75%;
-  opacity: 0.06 !important;
+  /* Was 0.06, ON TOP of the SVG's own 0.07-alpha fills (see picks.js) —
+     those multiply, landing under 0.01 effective opacity. That's exactly
+     what made a real photo failing to load (a working URL that just
+     didn't load that one time) look identical to a fighter genuinely
+     having no photo — no visible signal anything was even trying to
+     render. Single control point now: this opacity is 1, the SVG's own
+     fill alpha (bumped to 0.16) is what makes it a soft icon. */
+  opacity: 1;
 }
 
 /* Gradient overlays — fade from photo edges toward VS center */
