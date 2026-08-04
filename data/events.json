@@ -12001,19 +12001,6 @@
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-02/MCCONICO_ERIC_R_02-22.png"
       },
       {
-        "a": "Neil Magny",
-        "b": "Ramiz Brahimaj",
-        "weight": "Welterweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/MAGNY_NEIL_L_12-13.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/BRAHIMAJ_RAMIZ_L_02-21.png"
-      }
-    ],
-    "earlyPrelims": [
-      {
         "a": "Vicente Luque",
         "b": "Tresean Gore",
         "weight": "Middleweight",
@@ -12023,7 +12010,9 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/LUQUE_VICENTE_L_10-11.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-04/GORE_TRESEAN_L_04-12.png"
-      },
+      }
+    ],
+    "earlyPrelims": [
       {
         "a": "Jeremiah Wells",
         "b": "Myktybek Orolbai",
@@ -12034,6 +12023,17 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/WELLS_JEREMIAH_L_11-01.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/5/OROLBAI_MYKTYBEK_L_11-18.png"
+      },
+      {
+        "a": "Neil Magny",
+        "b": "Ramiz Brahimaj",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/MAGNY_NEIL_L_12-13.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/BRAHIMAJ_RAMIZ_L_02-21.png"
       }
     ],
     "droppedFights": [
@@ -12097,15 +12097,26 @@
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/PETRINO_VITOR_L_03-14.png"
       },
       {
-        "a": "Kody Steele",
-        "b": "Gauge Young",
-        "weight": "Lightweight",
+        "a": "Carli Judice",
+        "b": "Jeisla Chaves",
+        "weight": "Women's Strawweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "comain",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-07/JUDICE_CARLI_L_07-19.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/CHAVES_JEISLA_L_06-06.png"
+      },
+      {
+        "a": "Kennedy Nzechukwu",
+        "b": "Shamil Gaziev",
+        "weight": "Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-02/STEELE_KODY_R_02-08.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/YOUNG_GAUGE_R_08-23.png"
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/NZECHUKWU_KENNEDY_L_12-13.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/GAZIEV_SHAMIL_L_05-02.png"
       }
     ],
     "prelims": [
@@ -12132,26 +12143,15 @@
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/REED_ELISE_L_05-17.png"
       },
       {
-        "a": "Kennedy Nzechukwu",
-        "b": "Shamil Gaziev",
-        "weight": "Heavyweight",
+        "a": "Kody Steele",
+        "b": "Gauge Young",
+        "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/NZECHUKWU_KENNEDY_L_12-13.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/GAZIEV_SHAMIL_L_05-02.png"
-      },
-      {
-        "a": "Carli Judice",
-        "b": "Jeisla Chaves",
-        "weight": "Women's Strawweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": true,
-        "slot": "comain",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-07/JUDICE_CARLI_L_07-19.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/CHAVES_JEISLA_L_06-06.png"
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-02/STEELE_KODY_R_02-08.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/YOUNG_GAUGE_R_08-23.png"
       }
     ],
     "earlyPrelims": [],
