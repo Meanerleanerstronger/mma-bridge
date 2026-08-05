@@ -4829,7 +4829,7 @@
     "fightingOut": "West Linn, Oregon",
     "style": "Wrestler",
     "legend": true,
-    "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2014-01/SONNEN_CHAEL_L_01-25.png",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/Chael_Sonnen/ChaelSonnen_UFC159_018.png?VersionId=Fclt6W3Nkb1BNJBAWd.Ww5NM9y7IWKNS&amp;itok=07ftQcDM",
     "bio": "Chael Sonnen is the greatest trash talker in the history of combat sports — a world-class wrestler who turned every fight week into appointment television with his unmatched verbal warfare. He dominated Anderson Silva for 4.5 rounds in two title fights and repeatedly challenged for the middleweight and light heavyweight belts. His mic work made him a bigger star than most champions ever become.",
     "last5": [
       {
@@ -9856,7 +9856,7 @@
     "ranking": "",
     "record": {
       "wins": 29,
-      "losses": 11,
+      "losses": 12,
       "draws": 2
     },
     "height": "6'2\"",
@@ -9868,6 +9868,14 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/BLACHOWICZ_JAN_L_12-06.png",
     "bio": "Jan Blachowicz is a former UFC Light Heavyweight Champion and living proof that experience and legendary Polish power can carry a fighter to the very top. Blachowicz shocked the world by stopping Dominick Reyes and submitting Israel Adesanya to become champion, and remains a serious threat at 205 with his concrete right hand.",
     "last5": [
+      {
+        "opponent": "Navajo Stirling",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Carlos Ulberg",
         "result": "L",
@@ -9937,7 +9945,7 @@
     "weightClass": "Light Heavyweight",
     "ranking": "",
     "record": {
-      "wins": 14,
+      "wins": 15,
       "losses": 6,
       "draws": 0
     },
@@ -9950,6 +9958,14 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/RAKIC_ALEKSANDAR_L_10-25.png",
     "bio": "Aleksandar Rakic is an Austrian kickboxer with the physical tools to compete with anyone in the light heavyweight division, standing 6'4\" with elite technique and finishing power. 'Rocket' has beaten multiple ranked opponents and was a title contender before a knee injury derailed his momentum mid-fight against Glover Teixeira.",
     "last5": [
+      {
+        "opponent": "Marcin Tybura",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Magomed Ankalaev",
         "result": "L",
@@ -12276,11 +12292,19 @@
     "id": "navajo-stirling",
     "name": "Navajo Stirling",
     "record": {
-      "wins": 10,
+      "wins": 11,
       "losses": 0,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Jan Blachowicz",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Ion Cutelaba",
         "result": "W",
@@ -20009,7 +20033,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2022-08/4526cb41-c0d2-423a-ad18-d8efe88477f3%252FTODOROVIC_DUSKO_L_05-21.png",
     "record": {
       "wins": 13,
-      "losses": 6,
+      "losses": 7,
       "draws": 0
     },
     "nickname": "Thunder",
@@ -23400,11 +23424,19 @@
     "name": "Tofiq Musayev",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-06/MUSAYEV_TOFIQ_L_06-21.png",
     "record": {
-      "wins": 23,
+      "wins": 24,
       "losses": 6,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Ludovit Klein",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 2,
+        "time": null
+      },
       {
         "opponent": "Ignacio Bahamondes",
         "result": "W",
@@ -23717,10 +23749,18 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/TYBURA_MARCIN_L_03-28.png",
     "record": {
       "wins": 27,
-      "losses": 11,
+      "losses": 12,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Aleksandar Rakic",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Tyrell Fortune",
         "result": "L",
@@ -24754,11 +24794,19 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/COWAN_HAILEY_L_02_25.png",
     "record": {
       "wins": 7,
-      "losses": 5,
+      "losses": 6,
       "draws": 0
     },
     "nickname": "All Hail",
     "last5": [
+      {
+        "opponent": "Nina Milošević",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Alice Pereira",
         "result": "L",
@@ -27672,11 +27720,19 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/BUZUKJA_DENNIS_L_04-18.png",
     "record": {
       "wins": 12,
-      "losses": 6,
+      "losses": 7,
       "draws": 0
     },
     "nickname": "The Great",
     "last5": [
+      {
+        "opponent": "Bogdan Grad",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 2,
+        "time": null
+      },
       {
         "opponent": "Marcio Barbosa",
         "result": "L",
@@ -27702,6 +27758,14 @@
     "id": "robert-valentin",
     "name": "Robert Valentin",
     "last5": [
+      {
+        "opponent": "Duško Todorović",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Julien Leblanc",
         "result": "W",
@@ -28202,7 +28266,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/VOLOGDIN_MARK_R_04-18.png",
     "record": {
       "wins": 12,
-      "losses": 4,
+      "losses": 5,
       "draws": 2
     },
     "stats": {
@@ -28214,7 +28278,17 @@
       "tdAcc": "14%",
       "tdDef": "57%",
       "subAvg": "0.0"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Borislav Nikolic",
+        "result": "L",
+        "method": "",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 3,
+        "time": null
+      }
+    ]
   },
   {
     "id": "john-yannis",
@@ -31723,7 +31797,7 @@
     "name": "Mateusz Rebecki",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-07/REBECKI_MATEUSZ_L_08-02.png",
     "record": {
-      "wins": 20,
+      "wins": 21,
       "losses": 5,
       "draws": 0
     },
@@ -38661,11 +38735,19 @@
     "name": "Uroš Medić",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/MEDIC_UROS_L_08-09.png",
     "record": {
-      "wins": 13,
+      "wins": 14,
       "losses": 3,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Daniel Rodriguez",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Geoff Neal",
         "result": "W",
@@ -38765,10 +38847,18 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/RODRIGUEZ_DANIEL_L_10-12.png",
     "record": {
       "wins": 20,
-      "losses": 5,
+      "losses": 6,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Uroš Medić",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Kevin Holland",
         "result": "W",
@@ -38973,10 +39063,18 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2022-08/4526cb41-c0d2-423a-ad18-d8efe88477f3%252FTODOROVIC_DUSKO_L_05-21.png",
     "record": {
       "wins": 13,
-      "losses": 6,
+      "losses": 7,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Robert Valentin",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "José Medina",
         "result": "W",
@@ -39076,8 +39174,8 @@
     "name": "Vlasto Čepo",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
     "record": {
-      "wins": 0,
-      "losses": 0,
+      "wins": 14,
+      "losses": 4,
       "draws": 0
     },
     "stats": {
@@ -39089,19 +39187,38 @@
       "tdAcc": "0%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Gilbert Urbina",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      }
+    ],
+    "nickname": "El Chapo"
   },
   {
     "id": "gilbert-urbina",
     "name": "Gilbert Urbina",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-02/URBINA_GILBERT_L_02-03.png",
     "record": {
-      "wins": 7,
+      "wins": 8,
       "losses": 5,
       "draws": 0
     },
     "nickname": "The RGV Bad Boy",
     "last5": [
+      {
+        "opponent": "Vlasto Čepo",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Christian Leroy Duncan",
         "result": "L",
@@ -39128,8 +39245,8 @@
     "name": "Jovan Leka",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/LEKA_JOVAN_R.png",
     "record": {
-      "wins": 1,
-      "losses": 0,
+      "wins": 14,
+      "losses": 2,
       "draws": 0
     },
     "stats": {
@@ -39141,7 +39258,17 @@
       "tdAcc": "100%",
       "tdDef": "55%",
       "subAvg": "1.0"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Alexander Poppeck",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "max-gimenis",
@@ -39169,10 +39296,18 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/KLEIN_LUDOVIT_L_10-25.png",
     "record": {
       "wins": 24,
-      "losses": 5,
+      "losses": 6,
       "draws": 1
     },
     "last5": [
+      {
+        "opponent": "Tofiq Musayev",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 2,
+        "time": null
+      },
       {
         "opponent": "Roosevelt Roberts",
         "result": "W",
@@ -39292,12 +39427,20 @@
     "name": "Bogdan Grad",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/GRAD_BOGDAN_L_11-22.png",
     "record": {
-      "wins": 15,
+      "wins": 16,
       "losses": 4,
       "draws": 0
     },
     "nickname": "The Unleashed",
     "last5": [
+      {
+        "opponent": "Dennis Buzukja",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 2,
+        "time": null
+      },
       {
         "opponent": "Muhammad Naimov",
         "result": "L",
@@ -39324,11 +39467,19 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/ELLIOTT_OBAN_L_01-31.png",
     "record": {
       "wins": 12,
-      "losses": 4,
+      "losses": 5,
       "draws": 0
     },
     "nickname": "The Welsh Gangster",
     "last5": [
+      {
+        "opponent": "Michael Oliveira",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Jose Enrique Vega",
         "result": "W",
@@ -39354,11 +39505,19 @@
     "name": "Michael Oliveira",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/OLIVEIRA_MICHAEL_L.png",
     "record": {
-      "wins": 1,
+      "wins": 10,
       "losses": 0,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Oban Elliott",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Mateusz Gamrot",
         "result": "W",
@@ -39449,7 +39608,8 @@
       "tdAcc": "0%",
       "tdDef": "100%",
       "subAvg": "0.0"
-    }
+    },
+    "nickname": "PQD"
   },
   {
     "id": "ian-garry",
@@ -40470,8 +40630,8 @@
     "name": "Nina Milošević",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/image/2022-02/womens-silhouette-RED-corner.png",
     "record": {
-      "wins": 0,
-      "losses": 0,
+      "wins": 9,
+      "losses": 1,
       "draws": 0
     },
     "stats": {
@@ -40483,7 +40643,18 @@
       "tdAcc": "0%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Hailey Cowan",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      }
+    ],
+    "nickname": "Queen Beast"
   },
   {
     "id": "anthony-hernandez",
@@ -41668,7 +41839,8 @@
       "wins": 0,
       "losses": 0,
       "draws": 0
-    }
+    },
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
   },
   {
     "id": "magomed-zaynukov",
@@ -42258,7 +42430,7 @@
     "name": "Uros Medic",
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/MEDIC_UROS_L_08-09.png?itok=EtRaAk1l",
     "record": {
-      "wins": 13,
+      "wins": 14,
       "losses": 3,
       "draws": 0
     },
@@ -43872,6 +44044,584 @@
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
   },
   {
+    "id": "nathaniel-wood",
+    "name": "Nathaniel Wood",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/WOOD_NATHANIEL_L_10-25.png?itok=xpw74M8X",
+    "stats": {
+      "slpm": "5.64",
+      "strAcc": "51%",
+      "sapm": "4.25",
+      "strDef": "54%",
+      "tdAvg": "1.35",
+      "tdAcc": "48%",
+      "tdDef": "73%",
+      "subAvg": "0.5"
+    },
+    "record": {
+      "wins": 23,
+      "losses": 6,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Losene Keita",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Evloev vs. Murphy",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Jose Miguel Delgado",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 321",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Morgan Charrière",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Edwards vs. Brady",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Daniel Pineda (fighter)",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 304",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Muhammad Naimov",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 294",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Andre Fili",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Aspinall vs. Tybura",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Charles Jourdain",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Gane vs. Tuivasa",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Charles Rosa",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Blaydes vs. Aspinall",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Casey Kenney",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 254",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "John Castañeda",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Whittaker vs. Till",
+        "round": 3,
+        "time": "5:00"
+      }
+    ],
+    "nickname": "The Last Kingsman"
+  },
+  {
+    "id": "mairon-santos",
+    "name": "Mairon Santos",
+    "stats": {
+      "slpm": "3.33",
+      "strAcc": "48%",
+      "sapm": "2.24",
+      "strDef": "65%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "69%",
+      "subAvg": "0.0"
+    }
+  },
+  {
+    "id": "morgan-charriere",
+    "name": "Morgan Charrière",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-09/CHARRIERE_MORGAN_L_09-28.png?itok=U74Yn8DR",
+    "stats": {
+      "slpm": "4.02",
+      "strAcc": "50%",
+      "sapm": "4.51",
+      "strDef": "53%",
+      "tdAvg": "2.06",
+      "tdAcc": "46%",
+      "tdDef": "83%",
+      "subAvg": "0.3"
+    },
+    "record": {
+      "wins": 21,
+      "losses": 12,
+      "draws": 1
+    },
+    "nickname": "The Last Pirate"
+  },
+  {
+    "id": "felipe-lima",
+    "name": "Felipe Lima",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-12/LIMA_FELIPE_L_06-22.png?itok=X6oZYeqp",
+    "stats": {
+      "slpm": "2.86",
+      "strAcc": "45%",
+      "sapm": "2.91",
+      "strDef": "64%",
+      "tdAvg": "2.18",
+      "tdAcc": "27%",
+      "tdDef": "85%",
+      "subAvg": "0.7"
+    },
+    "record": {
+      "wins": 14,
+      "losses": 2,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Payton Talbott",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 317",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Miles Johns",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Covington vs. Buckley",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Muhammad Naimov",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC on ABC: Whittaker vs. Aliskerov",
+        "round": 3,
+        "time": "1:15"
+      },
+      {
+        "opponent": "Jonas Mågård",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "2023 in Oktagon MMA#Oktagon 45 Special: Mågård vs. Lima",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Evgeniy Odnorog",
+        "result": "W",
+        "method": "KO (flying knee)",
+        "event": "Fight Club Rush 10",
+        "round": 1,
+        "time": "0:35"
+      },
+      {
+        "opponent": "Fernando Flores",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Fight Club Rush 8",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Farbod Iran Nezhad",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "2020 in Brave Combat Federation#Brave CF 39",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Gustavo Oliveira",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Mr. Cage 39",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Eurides Bandeira",
+        "result": "W",
+        "method": "TKO (retirement)",
+        "event": "Amazon Talent 10",
+        "round": 3,
+        "time": "3:40"
+      },
+      {
+        "opponent": "Adalberto Mota da Silva Jr.",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Arena Fight Championship 4",
+        "round": 1,
+        "time": "0:43"
+      }
+    ],
+    "nickname": "Jungle Boy"
+  },
+  {
+    "id": "mateusz-r-becki",
+    "name": "Mateusz Rębecki",
+    "record": {
+      "wins": 21,
+      "losses": 5,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Kyle Prepolec",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      },
+      {
+        "opponent": "Grant Dawson",
+        "result": "L",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC 328",
+        "round": 3,
+        "time": "4:42"
+      },
+      {
+        "opponent": "Ľudovít Klein",
+        "result": "L",
+        "method": "Decision (majority)",
+        "event": "UFC 321",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Chris Duncan (fighter)",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Taira vs. Park",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Myktybek Orolbai",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC 308",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Carlos Diego Ferreira",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Lewis vs. Nascimento",
+        "round": 3,
+        "time": "4:51"
+      },
+      {
+        "opponent": "Roosevelt Roberts",
+        "result": "W",
+        "method": "Submission (armbar)",
+        "event": "UFC 295",
+        "round": 1,
+        "time": "3:08"
+      },
+      {
+        "opponent": "Loik Radzhabov",
+        "result": "W",
+        "method": "TKO (punch)",
+        "event": "UFC on ABC: Emmett vs. Topuria",
+        "round": 2,
+        "time": "2:36"
+      },
+      {
+        "opponent": "Nick Fiore",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Strickland vs. Imavov",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Rodrigo Lídio",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "Dana White's Contender Series season 6#Week 6 – August 30",
+        "round": 1,
+        "time": "3:05"
+      },
+      {
+        "opponent": "Arkadiy Osipyan",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Fight Exclusive Night 37",
+        "round": 5,
+        "time": "5:00"
+      }
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-07/REBECKI_MATEUSZ_L_08-01.png?itok=OcAV8a48",
+    "stats": {
+      "slpm": "4.79",
+      "strAcc": "46%",
+      "sapm": "4.36",
+      "strDef": "54%",
+      "tdAvg": "3.05",
+      "tdAcc": "48%",
+      "tdDef": "53%",
+      "subAvg": "0.4"
+    }
+  },
+  {
+    "id": "kyle-prepolec",
+    "name": "Kyle Prepolec",
+    "record": {
+      "wins": 18,
+      "losses": 11,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Mateusz Rębecki",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      },
+      {
+        "opponent": "Drew Dober",
+        "result": "L",
+        "method": "TKO (knees and punches)",
+        "event": "UFC Fight Night: de Ridder vs. Allen",
+        "round": 3,
+        "time": "1:16"
+      },
+      {
+        "opponent": "Benoît Saint Denis",
+        "result": "L",
+        "method": "Submission (arm-triangle choke)",
+        "event": "UFC 315",
+        "round": 2,
+        "time": "2:35"
+      },
+      {
+        "opponent": "Gustavo Wurlitzer",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "BTC 24",
+        "round": 1,
+        "time": "3:04"
+      },
+      {
+        "opponent": "Josh Henry",
+        "result": "W",
+        "method": "TKO (head kick and punches)",
+        "event": "List of PFC events#Prospect Fighting Championships 16: Mein vs. Chavez",
+        "round": 1,
+        "time": "2:14"
+      },
+      {
+        "opponent": "Marco Antonio Elpidio",
+        "result": "W",
+        "method": "KO (head kick)",
+        "event": "List of PFC events#Prospect Fighting Championships 14: Knockout Kidney Disease 3",
+        "round": 1,
+        "time": "3:23"
+      },
+      {
+        "opponent": "Shane Campbell",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "Unified MMA 43",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Michael Dufort",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "Samourai MMA 1",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Austin Hubbard",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Cowboy vs. Gaethje",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Nordine Taleb",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Iaquinta vs. Cowboy",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Cody Pfister",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "BTC 5",
+        "round": 3,
+        "time": "5:00"
+      }
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/PREPOLEC_KYLE_L_10-18.png?itok=iTfcQHT_",
+    "stats": {
+      "slpm": "3.25",
+      "strAcc": "34%",
+      "sapm": "5.69",
+      "strDef": "48%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "45%",
+      "subAvg": "0.0"
+    },
+    "nickname": "Killshot"
+  },
+  {
+    "id": "milos-janicic",
+    "name": "Milos Janicic",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-07/JANICIC_MILOS_L_08-01.png?itok=k_mHSDi4",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "last5": [
+      {
+        "opponent": "Noah Gugnon",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      }
+    ],
+    "record": {
+      "wins": 19,
+      "losses": 4,
+      "draws": 0
+    },
+    "nickname": "The Cobra"
+  },
+  {
+    "id": "noah-gugnon",
+    "name": "Noah Gugnon",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "last5": [
+      {
+        "opponent": "Milos Janicic",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      }
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-07/GUGNON_NOAH_R_08-01.png?itok=llkgIODo",
+    "record": {
+      "wins": 10,
+      "losses": 2,
+      "draws": 0
+    }
+  },
+  {
+    "id": "marina-spasic",
+    "name": "Marina Spasić",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-07/SPASIC_MARINA_L_08-01.png?itok=OpUqsboj",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "last5": [
+      {
+        "opponent": "Stephanie Luciano",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      }
+    ],
+    "record": {
+      "wins": 7,
+      "losses": 2,
+      "draws": 0
+    },
+    "nickname": "Maki Beki"
+  },
+  {
+    "id": "stephanie-luciano",
+    "name": "Stephanie Luciano",
+    "stats": {
+      "slpm": "5.20",
+      "strAcc": "42%",
+      "sapm": "3.04",
+      "strDef": "64%",
+      "tdAvg": "1.30",
+      "tdAcc": "71%",
+      "tdDef": "80%",
+      "subAvg": "0.3"
+    },
+    "last5": [
+      {
+        "opponent": "Marina Spasić",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC Fight Night: Medić vs. Rodriguez",
+        "round": 1,
+        "time": null
+      }
+    ]
+  },
+  {
     "id": "yair-rodriguez",
     "name": "Yair Rodriguez",
     "nickname": "El Pantera",
@@ -43880,7 +44630,7 @@
     "weightClass": "Featherweight",
     "ranking": "#5",
     "record": {
-      "wins": 20,
+      "wins": 21,
       "losses": 5,
       "draws": 0
     },
@@ -43950,43 +44700,393 @@
     "id": "ty-miller",
     "name": "Ty Miller",
     "weightClass": "Welterweight",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-01/MILLER_TY_R_01-24.png"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-01/MILLER_TY_R_01-24.png",
+    "stats": {
+      "slpm": "7.16",
+      "strAcc": "38%",
+      "sapm": "4.65",
+      "strDef": "64%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "75%",
+      "subAvg": "0.0"
+    },
+    "record": {
+      "wins": 7,
+      "losses": 0,
+      "draws": 0
+    },
+    "nickname": "Thriller"
   },
   {
     "id": "billy-ray-goff",
     "name": "Billy Ray Goff",
     "weightClass": "Welterweight",
-    "img": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2024-05/GOFF_BILLY_R_08-26.png"
+    "img": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2024-05/GOFF_BILLY_R_08-26.png",
+    "stats": {
+      "slpm": "7.51",
+      "strAcc": "46%",
+      "sapm": "5.02",
+      "strDef": "59%",
+      "tdAvg": "1.75",
+      "tdAcc": "16%",
+      "tdDef": "66%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "diego-ferreira",
     "name": "Diego Ferreira",
     "weightClass": "Lightweight",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/FERREIRA_DIEGO_L_01-18.png"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/FERREIRA_DIEGO_L_01-18.png",
+    "stats": {
+      "slpm": "4.70",
+      "strAcc": "39%",
+      "sapm": "3.46",
+      "strDef": "55%",
+      "tdAvg": "0.82",
+      "tdAcc": "30%",
+      "tdDef": "57%",
+      "subAvg": "0.6"
+    },
+    "record": {
+      "wins": 19,
+      "losses": 7,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Alexander Hernandez",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Lopes vs. Silva",
+        "round": 2,
+        "time": "3:46"
+      },
+      {
+        "opponent": "Grant Dawson",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 311",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Mateusz Rębecki",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Lewis vs. Nascimento",
+        "round": 3,
+        "time": "4:51"
+      },
+      {
+        "opponent": "Michael Johnson (fighter)",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "UFC Fight Night: Dern vs. Hill",
+        "round": 2,
+        "time": "1:50"
+      },
+      {
+        "opponent": "Mateusz Gamrot",
+        "result": "L",
+        "method": "TKO (submission to knee to the body)",
+        "event": "UFC Fight Night: Lewis vs. Daukaus",
+        "round": 2,
+        "time": "3:26"
+      },
+      {
+        "opponent": "Gregor Gillespie",
+        "result": "L",
+        "method": "TKO (elbows and punches)",
+        "event": "UFC on ESPN: Rodriguez vs. Waterson",
+        "round": 2,
+        "time": "4:51"
+      },
+      {
+        "opponent": "Beneil Dariush",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Overeem vs. Volkov",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Anthony Pettis",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC 246",
+        "round": 2,
+        "time": "1:46"
+      },
+      {
+        "opponent": "Mairbek Taisumov",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 242",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Rustam Khabilov",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Błachowicz vs. Santos",
+        "round": 3,
+        "time": "5:00"
+      }
+    ]
   },
   {
     "id": "billy-quarantillo",
     "name": "Billy Quarantillo",
     "weightClass": "Lightweight",
-    "img": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2024-12/QUARANTILLO_BILLY_R_12-14.png"
+    "img": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2024-12/QUARANTILLO_BILLY_R_12-14.png",
+    "stats": {
+      "slpm": "7.44",
+      "strAcc": "54%",
+      "sapm": "5.83",
+      "strDef": "42%",
+      "tdAvg": "1.47",
+      "tdAcc": "24%",
+      "tdDef": "61%",
+      "subAvg": "1.0"
+    },
+    "record": {
+      "wins": 18,
+      "losses": 7,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Cub Swanson",
+        "result": "L",
+        "method": "KO (punch)",
+        "event": "UFC on ESPN: Covington vs. Buckley",
+        "round": 3,
+        "time": "1:36"
+      },
+      {
+        "opponent": "Youssef Zalal",
+        "result": "L",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC on ESPN: Ribas vs. Namajunas",
+        "round": 2,
+        "time": "1:50"
+      },
+      {
+        "opponent": "Damon Jackson",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Sandhagen vs. Font",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Edson Barboza",
+        "result": "L",
+        "method": "KO (knee)",
+        "event": "UFC on ESPN: Holloway vs. Allen",
+        "round": 1,
+        "time": "2:37"
+      },
+      {
+        "opponent": "Alexander Hernandez",
+        "result": "W",
+        "method": "TKO (knees and punches)",
+        "event": "UFC 282",
+        "round": 2,
+        "time": "4:30"
+      },
+      {
+        "opponent": "Shane Burgos",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 268",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Gabriel Benítez",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Makhachev vs. Moisés",
+        "round": 3,
+        "time": "3:40"
+      },
+      {
+        "opponent": "Gavin Tucker",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 256",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Kyle Nelson (fighter)",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "UFC Fight Night: Waterson vs. Hill",
+        "round": 3,
+        "time": "0:07"
+      },
+      {
+        "opponent": "Spike Carlyle",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Woodley vs. Burns",
+        "round": 3,
+        "time": "5:00"
+      }
+    ]
   },
   {
     "id": "darren-elkins",
     "name": "Darren Elkins",
     "weightClass": "Featherweight",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-04/ELKINS_DARREN_L_04-12.png"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-04/ELKINS_DARREN_L_04-12.png",
+    "stats": {
+      "slpm": "3.40",
+      "strAcc": "38%",
+      "sapm": "3.34",
+      "strDef": "51%",
+      "tdAvg": "2.87",
+      "tdAcc": "34%",
+      "tdDef": "56%",
+      "subAvg": "1.1"
+    },
+    "record": {
+      "wins": 29,
+      "losses": 12,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Julian Erosa",
+        "result": "L",
+        "method": "TKO (elbow and punches)",
+        "event": "UFC 314",
+        "round": 1,
+        "time": "4:15"
+      },
+      {
+        "opponent": "Daniel Pineda (fighter)",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Hernandez vs. Pereira",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "T.J. Brown",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC Fight Night: Yusuff vs. Barboza",
+        "round": 3,
+        "time": "2:23"
+      },
+      {
+        "opponent": "Jonathan Pearce (fighter)",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Thompson vs. Holland",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Tristan Connelly",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Font vs. Vera",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Cub Swanson",
+        "result": "L",
+        "method": "TKO (spinning wheel kick and punches)",
+        "event": "UFC Fight Night: Lewis vs. Daukaus",
+        "round": 1,
+        "time": "2:12"
+      },
+      {
+        "opponent": "Darrick Minner",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Sandhagen vs. Dillashaw",
+        "round": 2,
+        "time": "3:48"
+      },
+      {
+        "opponent": "Luiz Eduardo Garagorri",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC on ESPN: Santos vs. Teixeira",
+        "round": 3,
+        "time": "2:22"
+      },
+      {
+        "opponent": "Nate Landwehr",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Overeem vs. Harris",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Ryan Hall (grappler)",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: de Randamie vs. Ladd",
+        "round": 3,
+        "time": "5:00"
+      }
+    ],
+    "nickname": "The Damage"
   },
   {
     "id": "steven-asplund",
     "name": "Steven Asplund",
     "weightClass": "Heavyweight",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/ASPLUND_STEVE_R_03-14.png"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/ASPLUND_STEVE_R_03-14.png",
+    "stats": {
+      "slpm": "10.05",
+      "strAcc": "51%",
+      "sapm": "6.64",
+      "strDef": "50%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "100%",
+      "subAvg": "0.0"
+    },
+    "record": {
+      "wins": 7,
+      "losses": 2,
+      "draws": 0
+    },
+    "nickname": "Concrete"
   },
   {
     "id": "ravena-oliveira",
     "name": "Ravena Oliveira",
     "weightClass": "Women's Flyweight",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/OLIVEIRA_RAVENA_R_03-21.png"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/OLIVEIRA_RAVENA_R_03-21.png",
+    "stats": {
+      "slpm": "1.91",
+      "strAcc": "30%",
+      "sapm": "3.72",
+      "strDef": "46%",
+      "tdAvg": "0.88",
+      "tdAcc": "50%",
+      "tdDef": "46%",
+      "subAvg": "0.0"
+    },
+    "record": {
+      "wins": 7,
+      "losses": 4,
+      "draws": 1
+    },
+    "nickname": "Kenoudy"
   },
   {
     "id": "alexia-thainara",
@@ -43994,7 +45094,23 @@
     "nationality": "Brazilian",
     "flag": "🇧🇷",
     "weightClass": "Women's Strawweight",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/THAINARA_ALEXIA_R_09-27.png"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/THAINARA_ALEXIA_R_09-27.png",
+    "stats": {
+      "slpm": "4.62",
+      "strAcc": "43%",
+      "sapm": "2.46",
+      "strDef": "59%",
+      "tdAvg": "4.54",
+      "tdAcc": "57%",
+      "tdDef": "100%",
+      "subAvg": "1.8"
+    },
+    "record": {
+      "wins": 14,
+      "losses": 1,
+      "draws": 0
+    },
+    "nickname": "Burguesinha"
   },
   {
     "id": "jose-montanha-da-silva",
@@ -44009,5 +45125,26 @@
       "draws": 0
     },
     "img": ""
+  },
+  {
+    "id": "muslim-salikhov",
+    "name": "Muslim Salikhov",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-11/SALIKHOV_MUSLIM_L_11-08.png?itok=r0fWreVE",
+    "stats": {
+      "slpm": "3.37",
+      "strAcc": "49%",
+      "sapm": "2.96",
+      "strDef": "62%",
+      "tdAvg": "1.07",
+      "tdAcc": "32%",
+      "tdDef": "72%",
+      "subAvg": "0.0"
+    },
+    "record": {
+      "wins": 22,
+      "losses": 6,
+      "draws": 0
+    },
+    "nickname": "King of Kung Fu"
   }
 ]
