@@ -12437,6 +12437,18 @@
         "ranked": false,
         "slot": "main",
         "imgA": "",
+        "imgB": "",
+        "_espnMissStreak": true
+      },
+      {
+        "a": "Yair Rodriguez",
+        "b": "Jean Silva",
+        "weight": "Featherweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "main",
+        "imgA": "",
         "imgB": ""
       }
     ],
@@ -12473,8 +12485,31 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/ALDRICH_JJ_L_04-18.png",
         "imgB": ""
+      },
+      {
+        "a": "David Martinez",
+        "b": "Dan Ige",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
       }
     ],
-    "earlyPrelims": []
+    "earlyPrelims": [
+      {
+        "a": "Ignacio Bahamondes",
+        "b": "Muslim Salikhov",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ]
   }
 ]
