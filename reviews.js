@@ -42,15 +42,6 @@ function getMainEvent(ev) {
 function getEventId(ev) {
   return ev.id || slugify(ev.name || ev.eventName || '');
 }
-// Strips the "UFC Fight Night:" / "UFC 329:" / "Noche UFC:" prefix for
-// the card title — the type badge already conveys that, and repeating it
-// in every title was pushing "UFC FIGHT NIGHT: MEDIĆ VS. RODRIGUEZ" onto
-// 3 cramped lines instead of a clean "MEDIĆ VS. RODRIGUEZ".
-function shortName(name) {
-  const s = String(name || '');
-  const idx = s.indexOf(': ');
-  return idx > -1 ? s.slice(idx + 2) : s;
-}
 
 const CARD_PLACEHOLDER_GRADIENTS = [
   'linear-gradient(140deg,#f97316 0%,#ea580c 100%)',
@@ -92,7 +83,7 @@ function buildCard(ev, type) {
       }
       <div class="card-gradient"></div>
       <div class="card-info">
-        <div class="card-name">${escHtml(shortName(name))}</div>
+        <div class="card-name">${escHtml(name)}</div>
         <div class="card-matchup">${escHtml(matchup)}</div>
       </div>
     </div>
