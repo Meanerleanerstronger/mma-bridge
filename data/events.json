@@ -12386,8 +12386,8 @@
     "earlyPrelims": []
   },
   {
-    "id": "noche-ufc-grasso-vs-fiorot",
-    "name": "Noche UFC: Grasso vs. Fiorot",
+    "id": "noche-ufc-rodriguez-vs-silva",
+    "name": "Noche UFC: Rodriguez vs. Silva",
     "type": "FIGHT NIGHT",
     "date": "Sat, Sep 12, 2026",
     "isoDate": "2026-09-12",
@@ -12398,13 +12398,24 @@
     "start_time": null,
     "mainCard": [
       {
+        "a": "Yair Rodriguez",
+        "b": "Jean Silva",
+        "weight": "Featherweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "main",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-04/RODRIGUEZ_YAIR_L_04-12.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-02/SILVA_JEAN_L_02-22.png"
+      },
+      {
         "a": "Alexa Grasso",
         "b": "Manon Fiorot",
         "weight": "W Flyweight",
         "rounds": "5 Rds",
         "titleFight": false,
         "ranked": true,
-        "slot": "main",
+        "slot": "comain",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/GRASSO_ALEXA_L_03-28.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/FIOROT_MANON_L_10-18.png"
       },
@@ -12415,7 +12426,7 @@
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
-        "slot": "comain",
+        "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/MORENO_BRANDON_L_02-28.png",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-11/MORALES_JOSEPH_R_11-08.png?itok=C6wjX2tp"
       },
@@ -12429,17 +12440,6 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/BLAYDES_CURTIS_L_04-11.png",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/CORTES_ACOSTA_WALDO_L.png?itok=agfAljgN"
-      },
-      {
-        "a": "Opponent TBA",
-        "b": "TBA",
-        "weight": "",
-        "rounds": "5 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "main",
-        "imgA": "",
-        "imgB": ""
       }
     ],
     "prelims": [
@@ -12474,7 +12474,7 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/ALDRICH_JJ_L_04-18.png",
-        "imgB": ""
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/TARIN_REGINA_L_02-28.png?itok=LpWAerkt"
       }
     ],
     "earlyPrelims": []
