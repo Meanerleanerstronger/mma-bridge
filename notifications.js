@@ -293,8 +293,11 @@
               });
             } else if (replacedFight) {
               const [oldA, oldB] = replacedFight.split('|');
-              const pulledOut = (oldA === a || oldA === b) ? oldB : oldA;
-              const replacement = (oldA === a || oldB === b) ? b : a;
+              // pulledOut = the old-fight fighter who isn't in the new fight;
+              // replacement = the new-fight fighter who wasn't in the old fight.
+              // (Not just "oldB"/"a" — the still-there fighter can land in either slot.)
+              const pulledOut = [oldA, oldB].find(x => x !== a && x !== b);
+              const replacement = [a, b].find(x => x !== oldA && x !== oldB);
               arr.unshift({
                 id: notifId, type: 'card_update', read: false,
                 title: `Fighter change on ${ev.name}`,
