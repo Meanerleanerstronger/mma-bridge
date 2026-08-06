@@ -45279,7 +45279,17 @@
       "losses": 2,
       "draws": 0
     },
-    "nickname": "The Smoke"
+    "nickname": "The Smoke",
+    "stats": {
+      "slpm": "7.41",
+      "strAcc": "43%",
+      "sapm": "15.00",
+      "strDef": "42%",
+      "tdAvg": "0.93",
+      "tdAcc": "11%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "robelis-despaigne",
@@ -45372,7 +45382,17 @@
         "round": 1,
         "time": "3:00"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "2.11",
+      "strAcc": "59%",
+      "sapm": "2.54",
+      "strDef": "46%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "50%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "joel-lvarez",
@@ -45464,21 +45484,61 @@
         "time": "2:22"
       }
     ],
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/ALVAREZ_JOEL_L_05-09.png?itok=MGw1DSGs"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/ALVAREZ_JOEL_L_05-09.png?itok=MGw1DSGs",
+    "stats": {
+      "slpm": "4.53",
+      "strAcc": "54%",
+      "sapm": "3.03",
+      "strDef": "53%",
+      "tdAvg": "0.18",
+      "tdAcc": "33%",
+      "tdDef": "46%",
+      "subAvg": "1.1"
+    }
   },
   {
     "id": "marlon-vera",
     "name": "Marlon Vera",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/VERA_MARLON_L_02-28.png?itok=1Ebcd42S"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/VERA_MARLON_L_02-28.png?itok=1Ebcd42S",
+    "stats": {
+      "slpm": "4.18",
+      "strAcc": "47%",
+      "sapm": "5.34",
+      "strDef": "50%",
+      "tdAvg": "0.47",
+      "tdAcc": "39%",
+      "tdDef": "71%",
+      "subAvg": "0.8"
+    }
   },
   {
     "id": "eduarda-moura",
     "name": "Eduarda Moura",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-11/MOURA_EDUARDA_L_06-08.png?itok=jiGCZaUM"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-11/MOURA_EDUARDA_L_06-08.png?itok=jiGCZaUM",
+    "stats": {
+      "slpm": "2.57",
+      "strAcc": "37%",
+      "sapm": "2.50",
+      "strDef": "58%",
+      "tdAvg": "3.58",
+      "tdAcc": "34%",
+      "tdDef": "80%",
+      "subAvg": "0.4"
+    }
   },
   {
     "id": "joosang-yoo",
-    "name": "JooSang Yoo"
+    "name": "JooSang Yoo",
+    "stats": {
+      "slpm": "6.36",
+      "strAcc": "58%",
+      "sapm": "4.99",
+      "strDef": "56%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "50%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "michael-aswell",
