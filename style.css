@@ -13486,6 +13486,99 @@ body.light-mode .lm-bubble-text { color: rgba(20,16,12,.82); }
 body.light-mode .lm-bubble-close { background: rgba(0,0,0,.05); color: rgba(0,0,0,.45); }
 body.light-mode .lm-bubble-close:hover { background: rgba(0,0,0,.1); color: #000; }
 
+/* ======= SITE NUDGES — picks-due / review-prompt popup ======= */
+.sn-bubble {
+  position: fixed;
+  bottom: 100px;
+  right: 28px;
+  width: 340px;
+  max-width: calc(100vw - 24px);
+  background: #14100c;
+  border: 1px solid rgba(255,138,61,.35);
+  border-radius: 20px;
+  padding: 18px 20px 20px;
+  box-shadow: 0 24px 64px rgba(0,0,0,.55), 0 0 0 1px rgba(255,138,61,.08), 0 0 40px rgba(255,138,61,.15);
+  z-index: 10000;
+  opacity: 0;
+  transform: translateY(24px) scale(.85) rotate(1.5deg);
+  transform-origin: bottom right;
+  transition: opacity .32s cubic-bezier(.2,.9,.3,1.4), transform .38s cubic-bezier(.2,.9,.3,1.4);
+  pointer-events: none;
+}
+.sn-bubble.sn-in {
+  opacity: 1;
+  transform: translateY(0) scale(1) rotate(0deg);
+  pointer-events: all;
+}
+.sn-bubble.sn-out {
+  opacity: 0;
+  transform: translateY(10px) scale(.92) rotate(-1deg);
+  transition: opacity .22s ease, transform .22s ease;
+}
+.sn-tail {
+  position: absolute; bottom: -9px; right: 34px;
+  width: 18px; height: 18px;
+  background: #14100c;
+  border-right: 1px solid rgba(255,138,61,.35);
+  border-bottom: 1px solid rgba(255,138,61,.35);
+  transform: rotate(45deg);
+}
+.sn-close {
+  position: absolute; top: 12px; right: 12px;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: rgba(255,255,255,.06); border: none; cursor: pointer;
+  color: rgba(255,255,255,.5); display: flex; align-items: center; justify-content: center;
+  transition: background .15s, color .15s;
+}
+.sn-close:hover { background: rgba(255,255,255,.12); color: #fff; }
+.sn-text {
+  font-family: 'Inter', sans-serif; font-size: .92rem; line-height: 1.5;
+  color: rgba(255,255,255,.85);
+  padding-right: 18px;
+  margin-bottom: 14px;
+}
+.sn-text strong { color: #fff; }
+.sn-actions {
+  display: flex; flex-direction: column; gap: 8px;
+}
+.sn-cta {
+  display: block;
+  text-align: center;
+  background: #ff8a3d;
+  color: #14100c;
+  font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: .82rem;
+  letter-spacing: .03em; text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 11px 14px;
+  transition: background .15s, transform .15s;
+}
+.sn-cta:hover { background: #ff9a54; transform: translateY(-1px); }
+.sn-later {
+  background: none; border: none; cursor: pointer;
+  font-family: 'Inter', sans-serif; font-size: .76rem;
+  color: rgba(255,255,255,.4);
+  text-decoration: underline; text-underline-offset: 2px;
+  padding: 2px 0;
+  transition: color .15s;
+}
+.sn-later:hover { color: rgba(255,255,255,.65); }
+@media (max-width: 480px) {
+  .sn-bubble { right: 12px; left: 12px; width: auto; bottom: 92px; }
+  .sn-tail { right: 30px; }
+}
+body.light-mode .sn-bubble {
+  background: #fffaf5; border-color: rgba(255,138,61,.4);
+  box-shadow: 0 24px 64px rgba(0,0,0,.18), 0 0 40px rgba(255,138,61,.12);
+}
+body.light-mode .sn-tail { background: #fffaf5; }
+body.light-mode .sn-text { color: rgba(20,16,12,.82); }
+body.light-mode .sn-text strong { color: #14100c; }
+body.light-mode .sn-close { background: rgba(0,0,0,.05); color: rgba(0,0,0,.45); }
+body.light-mode .sn-close:hover { background: rgba(0,0,0,.1); color: #000; }
+body.light-mode .sn-later { color: rgba(20,16,12,.4); }
+body.light-mode .sn-later:hover { color: rgba(20,16,12,.65); }
+
 /* ======= LEADERBOARD MODALS — Create/Join Group, View Picks =======
    These classes had markup in leaderboard.js but no CSS anywhere,
    so they rendered as unstyled, uncentered blocks pushed into normal
