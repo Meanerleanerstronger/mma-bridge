@@ -8599,7 +8599,7 @@
     "weightClass": "Lightweight",
     "ranking": "#10",
     "record": {
-      "wins": 21,
+      "wins": 20,
       "losses": 7,
       "draws": 1
     },
@@ -17652,7 +17652,7 @@
     "name": "Tai Tuivasa",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/TUIVASA_TAI_L_05-02.png",
     "record": {
-      "wins": 15,
+      "wins": 14,
       "losses": 10,
       "draws": 0
     },
@@ -23859,7 +23859,7 @@
     "name": "Casey O'Neill",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/ONEILL_CASEY_L_03-28.png",
     "record": {
-      "wins": 11,
+      "wins": 10,
       "losses": 2,
       "draws": 0
     },
@@ -32931,9 +32931,9 @@
     "name": "Dooho Choi",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/CHOI_DOOHO_L_05-16.png",
     "record": {
-      "wins": 17,
+      "wins": 14,
       "losses": 4,
-      "draws": 1
+      "draws": 0
     },
     "last5": [
       {
@@ -45509,7 +45509,94 @@
       "tdAcc": "39%",
       "tdDef": "71%",
       "subAvg": "0.8"
-    }
+    },
+    "record": {
+      "wins": 23,
+      "losses": 12,
+      "draws": 1
+    },
+    "last5": [
+      {
+        "opponent": "David Martínez (fighter)",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Moreno vs. Kavanagh",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Aiemann Zahabi",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: de Ridder vs. Allen",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Sean O'Malley (fighter)",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 299",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Pedro Munhoz",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 292",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Cory Sandhagen",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC on ESPN: Vera vs. Sandhagen",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Dominick Cruz",
+        "result": "W",
+        "method": "KO (head kick)",
+        "event": "UFC on ESPN: Vera vs. Cruz",
+        "round": 4,
+        "time": "2:17"
+      },
+      {
+        "opponent": "Rob Font",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Font vs. Vera",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Frankie Edgar",
+        "result": "W",
+        "method": "KO (front kick)",
+        "event": "UFC 268",
+        "round": 3,
+        "time": "3:50"
+      },
+      {
+        "opponent": "Davey Grant",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: The Korean Zombie vs. Ige",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "José Aldo",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Thompson vs. Neal",
+        "round": 3,
+        "time": "5:00"
+      }
+    ]
   },
   {
     "id": "eduarda-moura",
@@ -45544,5 +45631,96 @@
     "id": "michael-aswell",
     "name": "Michael Aswell",
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/ASWELL_MICHAEL_R_05-31.png?itok=8ZDrUuaM"
+  },
+  {
+    "id": "sean-woodson",
+    "name": "Sean Woodson",
+    "record": {
+      "wins": 13,
+      "losses": 2,
+      "draws": 1
+    },
+    "last5": [
+      {
+        "opponent": "Dan Ige",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC 314",
+        "round": 3,
+        "time": "1:12"
+      },
+      {
+        "opponent": "Fernando Padilla",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Covington vs. Buckley",
+        "round": 1,
+        "time": "4:58"
+      },
+      {
+        "opponent": "Alex Caceres",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Lewis vs. Nascimento",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Charles Jourdain",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC 297",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Luis Saldaña",
+        "result": "D",
+        "method": "Draw (split)",
+        "event": "UFC 278",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Collin Anglin",
+        "result": "W",
+        "method": "TKO (punches to the body)",
+        "event": "UFC Fight Night: Holloway vs. Rodríguez",
+        "round": 1,
+        "time": "4:30"
+      },
+      {
+        "opponent": "Youssef Zalal",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Rozenstruik vs. Sakai",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Julian Erosa",
+        "result": "L",
+        "method": "Submission (D'Arce choke)",
+        "event": "UFC on ESPN: Poirier vs. Hooker",
+        "round": 0,
+        "time": "align=\"center\"|2:44"
+      },
+      {
+        "opponent": "Kyle Bochniak",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Reyes vs. Weidman",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Terrance McKinney",
+        "result": "W",
+        "method": "KO (flying knee)",
+        "event": "Dana White's Contender Series Season Three#Week 5 - July 23",
+        "round": 2,
+        "time": "1:49"
+      }
+    ]
   }
 ]
