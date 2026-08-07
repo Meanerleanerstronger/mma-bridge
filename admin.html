@@ -2208,33 +2208,22 @@
         msg.textContent = '';
 
         try {
-          // Try direct Supabase write first (faster, no cold-start)
-          const sb = window._sb;
-          if (sb) {
-            const record = {
-              event_id:   eventId,
-              fight_key:  fightKey,
-              winner:     winner ? winner.toLowerCase() : null,
-              method:     method || null,
-              round:      round  || null,
-              fotn:       fotn   || null,
-              updated_at: new Date().toISOString(),
-            };
-            const { error } = await sb.from('fight_results').upsert(record, { onConflict: 'event_id,fight_key' });
-            if (error) throw new Error(error.message || 'Supabase write failed');
-          } else {
-            // Fallback to backend API
-            const payload = { token: token(), event_id: eventId, fight_key: fightKey, winner, method };
-            if (round !== null) payload.round = round;
-            if (fotn)           payload.fotn  = fotn;
-            const res = await fetch(`${API_BASE}/api/admin/set-result`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(payload)
-            });
-            const data = await res.json();
-            if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
-          }
+          // Writes go through the backend's service-role endpoint, not a
+          // direct client-side Supabase upsert — fight_results has RLS
+          // enabled with public read-only, so an anon-key write would just
+          // get rejected. This also means the admin password check (which
+          // the backend re-verifies via the token) is the only thing
+          // gating writes, at the DB level too, not just in the UI.
+          const payload = { token: token(), event_id: eventId, fight_key: fightKey, winner, method };
+          if (round !== null) payload.round = round;
+          if (fotn)           payload.fotn  = fotn;
+          const res = await fetch(`${API_BASE}/api/admin/set-result`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
           msg.className = 'fight-save-msg ok';
           msg.textContent = 'Saved ✓';
           row.classList.add('saved');
@@ -2260,24 +2249,13 @@
         btn.textContent = 'Saving...';
 
         try {
-          const sb = window._sb;
-          if (sb) {
-            const { error } = await sb.from('fight_results').upsert({
-              event_id:   eventId,
-              fight_key:  '__fotn__',
-              fotn:       fotn,
-              updated_at: new Date().toISOString(),
-            }, { onConflict: 'event_id,fight_key' });
-            if (error) throw new Error(error.message);
-          } else {
-            const res = await fetch(`${API_BASE}/api/admin/set-result`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ token: token(), event_id: eventId, fight_key: '__fotn__', fotn })
-            });
-            const data = await res.json();
-            if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
-          }
+          const res = await fetch(`${API_BASE}/api/admin/set-result`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token: token(), event_id: eventId, fight_key: '__fotn__', fotn })
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
           btn.textContent = 'Saved ✓';
           setTimeout(() => { btn.textContent = 'Save FOTN'; btn.disabled = false; }, 2000);
         } catch (e) {
