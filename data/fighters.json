@@ -45778,5 +45778,96 @@
       "tdDef": "71%",
       "subAvg": "0.2"
     }
+  },
+  {
+    "id": "miles-johns",
+    "name": "Miles Johns",
+    "record": {
+      "wins": 15,
+      "losses": 5,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Daniel Marcos",
+        "result": "L",
+        "method": "Technical Submission (rear-naked choke)",
+        "event": "UFC Fight Night: Bonfim vs. Brown",
+        "round": 2,
+        "time": "4:23"
+      },
+      {
+        "opponent": "Jean Matsumoto",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC on ESPN: Dolidze vs. Hernandez",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Felipe Lima (fighter)",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Covington vs. Buckley",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Vince Morales",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Nzechukwu vs. Cuțelaba",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "John Castañeda",
+        "result": "L",
+        "method": "Technical Submission (arm-triangle choke)",
+        "event": "UFC Fight Night: Hermansson vs. Strickland",
+        "round": 3,
+        "time": "1:38"
+      },
+      {
+        "opponent": "Anderson dos Santos (fighter)",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "UFC 265",
+        "round": 3,
+        "time": "1:16"
+      },
+      {
+        "opponent": "Kevin Natividad",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "UFC Fight Night: Hall vs. Silva",
+        "round": 3,
+        "time": "2:51"
+      },
+      {
+        "opponent": "Mario Bautista",
+        "result": "L",
+        "method": "TKO (flying knee and punches)",
+        "event": "UFC 247",
+        "round": 2,
+        "time": "1:41"
+      },
+      {
+        "opponent": "Cole Smith (fighter)",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Cowboy vs. Gaethje",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Richie Santiago",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Dana White's Contender Series Season 3#Week 2 - June 25",
+        "round": 3,
+        "time": "5:00"
+      }
+    ]
   }
 ]
