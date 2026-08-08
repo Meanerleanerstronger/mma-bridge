@@ -45869,31 +45869,91 @@
         "time": "5:00"
       }
     ],
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/JOHNS_MILES_L_08-08.png?itok=IVHMWSad"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/JOHNS_MILES_L_08-08.png?itok=IVHMWSad",
+    "stats": {
+      "slpm": "3.36",
+      "strAcc": "44%",
+      "sapm": "2.99",
+      "strDef": "65%",
+      "tdAvg": "1.22",
+      "tdAcc": "26%",
+      "tdDef": "77%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "manoel-sousa",
     "name": "Manoel Sousa",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/SOUSA_MANOEL_L_08-08.png?itok=RoZ_IBho"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/SOUSA_MANOEL_L_08-08.png?itok=RoZ_IBho",
+    "stats": {
+      "slpm": "4.15",
+      "strAcc": "45%",
+      "sapm": "3.71",
+      "strDef": "51%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "60%",
+      "subAvg": "1.6"
+    }
   },
   {
     "id": "richie-miranda",
     "name": "Richie Miranda",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "gianni-vazquez",
     "name": "Gianni Vazquez",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/VAZQUEZ_GIANNI_R_02-07.png?itok=gF8MOrZZ"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/VAZQUEZ_GIANNI_R_02-07.png?itok=gF8MOrZZ",
+    "stats": {
+      "slpm": "1.60",
+      "strAcc": "22%",
+      "sapm": "3.93",
+      "strDef": "39%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "62%",
+      "subAvg": "2.0"
+    }
   },
   {
     "id": "gigi-canuto",
     "name": "Gigi Canuto",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/CANUTO_GIGI_L_08-08.png?itok=MG4NAPui"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/CANUTO_GIGI_L_08-08.png?itok=MG4NAPui",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "carol-foro",
     "name": "Carol Foro",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/FORO_CAROL_R_09-09.png?itok=NvyM-r3g"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/FORO_CAROL_R_09-09.png?itok=NvyM-r3g",
+    "stats": {
+      "slpm": "7.80",
+      "strAcc": "55%",
+      "sapm": "7.67",
+      "strDef": "58%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "100%",
+      "subAvg": "0.0"
+    }
   }
 ]
