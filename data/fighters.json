@@ -30658,6 +30658,14 @@
     "nickname": "Vanilla Gorilla",
     "last5": [
       {
+        "opponent": "José Montanha",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Tai Tuivasa",
         "result": "W",
         "method": "Decision (unanimous)",
@@ -45809,6 +45817,14 @@
     },
     "last5": [
       {
+        "opponent": "Gianni Vazquez",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Daniel Marcos",
         "result": "L",
         "method": "Technical Submission (rear-naked choke)",
@@ -45914,7 +45930,17 @@
       "tdAcc": "0%",
       "tdDef": "60%",
       "subAvg": "1.6"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Richie Miranda",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "richie-miranda",
@@ -45929,7 +45955,17 @@
       "tdAcc": "0%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Manoel Sousa",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "gianni-vazquez",
@@ -45944,7 +45980,17 @@
       "tdAcc": "0%",
       "tdDef": "62%",
       "subAvg": "2.0"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Miles Johns",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "gigi-canuto",
