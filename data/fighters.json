@@ -43042,7 +43042,17 @@
       "tdAcc": "29%",
       "tdDef": "44%",
       "subAvg": "1.2"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Ravena Oliveira",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": 2,
+        "time": null
+      }
+    ]
   },
   {
     "id": "luke-fernandez",
@@ -45127,7 +45137,17 @@
       "losses": 4,
       "draws": 1
     },
-    "nickname": "Kenoudy"
+    "nickname": "Kenoudy",
+    "last5": [
+      {
+        "opponent": "Juliana Miller",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": 2,
+        "time": null
+      }
+    ]
   },
   {
     "id": "alexia-thainara",
@@ -45939,7 +45959,17 @@
       "tdAcc": "0%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Carol Foro",
+        "result": "L",
+        "method": "",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": 3,
+        "time": null
+      }
+    ]
   },
   {
     "id": "carol-foro",
@@ -45954,6 +45984,16 @@
       "tdAcc": "0%",
       "tdDef": "100%",
       "subAvg": "0.0"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Gigi Canuto",
+        "result": "W",
+        "method": "",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": 3,
+        "time": null
+      }
+    ]
   }
 ]
