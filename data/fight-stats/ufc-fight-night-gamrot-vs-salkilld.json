@@ -1,0 +1,144 @@
+{
+  "eventId": "ufc-fight-night-gamrot-vs-salkilld",
+  "eventName": "UFC Fight Night: Gamrot vs Salkilld",
+  "fights": [
+    {
+      "fighter1": "Quillan Salkilld Mateusz Gamrot",
+      "fighter2": "Diego Ferreira Billy Quarantillo",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "103",
+          "totalStr": "12",
+          "td": "Lightweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "11673",
+          "totalStr": "00",
+          "td": "Lightweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Yadier del Valle Darren Elkins",
+      "fighter2": "Alexia Thainara Amanda Lemos",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "50",
+          "totalStr": "00",
+          "td": "Featherweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "8156",
+          "totalStr": "00",
+          "td": "Women'sStrawweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Ty Miller Billy Ray Goff",
+      "fighter2": "Steven Asplund Guilherme Pat",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "2 0",
+          "sigStr": "13325",
+          "totalStr": "00",
+          "td": "Welterweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "2 1",
+          "sigStr": "6645",
+          "totalStr": "10",
+          "td": "Heavyweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Diyar Nurgozhay Bruno Lopes",
+      "fighter2": "Jose Montanha Louie Sutherland",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "2 0",
+          "sigStr": "4814",
+          "totalStr": "00",
+          "td": "LightHeavyweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "23",
+          "totalStr": "10",
+          "td": "Heavyweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Manoel Sousa Richie Miranda",
+      "fighter2": "Miles Johns Gianni Vazquez",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "6746",
+          "totalStr": "00",
+          "td": "Lightweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "1 0",
+          "sigStr": "127",
+          "totalStr": "00",
+          "td": "Featherweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Juliana Miller Ravena Oliveira",
+      "fighter2": "Carol Foro Gigi Canuto",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "247",
+          "totalStr": "10",
+          "td": "Women'sFlyweight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "10656",
+          "totalStr": "01",
+          "td": "Women'sStrawweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    }
+  ]
+}
