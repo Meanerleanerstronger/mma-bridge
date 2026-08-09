@@ -11819,7 +11819,10 @@
         "ranked": false,
         "slot": "comain",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-01/MILLER_TY_R_01-24.png",
-        "imgB": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2024-05/GOFF_BILLY_R_08-26.png"
+        "imgB": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2024-05/GOFF_BILLY_R_08-26.png",
+        "winner": "Ty Miller",
+        "method": "KO/TKO",
+        "round": 3
       },
       {
         "a": "Diyar Nurgozhay",
@@ -11830,7 +11833,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-03/NURGOZHAY_DIYAR_L_03-15.png?itok=8btMThdO",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/2/LOPES_BRUNO_L_01-11.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/2/LOPES_BRUNO_L_01-11.png",
+        "winner": "Diyar Nurgozhay",
+        "method": "KO/TKO",
+        "round": 1
       }
     ],
     "prelims": [
@@ -11879,7 +11885,9 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/ASPLUND_STEVE_R_03-14.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/PAT_GUILHERME_L_04-04.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/PAT_GUILHERME_L_04-04.png",
+        "winner": "Steven Asplund",
+        "method": "DEC"
       },
       {
         "a": "Juliana Miller",
@@ -11904,7 +11912,9 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/LEMOS_AMANDA_L_03-14.png",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/THAINARA_ALEXIA_R_09-27.png"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/THAINARA_ALEXIA_R_09-27.png",
+        "winner": "Alexia Thainara",
+        "method": "DEC"
       },
       {
         "a": "Manoel Sousa",

@@ -20091,6 +20091,14 @@
     },
     "last5": [
       {
+        "opponent": "Alexia Thainara",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Tatiana Suarez",
         "result": "L",
         "method": "TKO",
@@ -24016,6 +24024,14 @@
     },
     "last5": [
       {
+        "opponent": "Diyar Nurgozhay",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Édgar Cháirez",
         "result": "L",
         "method": "Submission (rear-naked choke)",
@@ -24572,6 +24588,14 @@
     },
     "nickname": "Kong",
     "last5": [
+      {
+        "opponent": "Steven Asplund",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Thomas Petersen",
         "result": "L",
@@ -43100,7 +43124,17 @@
       "tdAcc": "75%",
       "tdDef": "80%",
       "subAvg": "0.0"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Bruno Lopes",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "rafael-tobias",
@@ -44775,7 +44809,17 @@
       "losses": 0,
       "draws": 0
     },
-    "nickname": "Thriller"
+    "nickname": "Thriller",
+    "last5": [
+      {
+        "opponent": "Billy Ray Goff",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": 3,
+        "time": null
+      }
+    ]
   },
   {
     "id": "billy-ray-goff",
@@ -44791,7 +44835,17 @@
       "tdAcc": "16%",
       "tdDef": "66%",
       "subAvg": "0.0"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Ty Miller",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": 3,
+        "time": null
+      }
+    ]
   },
   {
     "id": "diego-ferreira",
@@ -45123,7 +45177,17 @@
       "losses": 2,
       "draws": 0
     },
-    "nickname": "Concrete"
+    "nickname": "Concrete",
+    "last5": [
+      {
+        "opponent": "Guilherme Pat",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "ravena-oliveira",
@@ -45179,7 +45243,17 @@
       "losses": 1,
       "draws": 0
     },
-    "nickname": "Burguesinha"
+    "nickname": "Burguesinha",
+    "last5": [
+      {
+        "opponent": "Amanda Lemos",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "jose-montanha-da-silva",
