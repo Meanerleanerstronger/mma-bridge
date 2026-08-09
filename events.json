@@ -11796,7 +11796,7 @@
     "location": "Enterprise, NV",
     "venue": "UFC APEX",
     "poster": "https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/2026-07/080826-ufc-fight-night-gamrot-vs-salkilld-EVENT-ART.jpg",
-    "status": "upcoming",
+    "status": "completed",
     "start_time": null,
     "mainCard": [
       {
@@ -11808,7 +11808,10 @@
         "ranked": true,
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/GAMROT_MATEUSZ_L_04-11.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/SALKILLD_QUILLAN_L_01-31.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/SALKILLD_QUILLAN_L_01-31.png",
+        "winner": "Quillan Salkilld",
+        "method": "SUB",
+        "round": 1
       },
       {
         "a": "Ty Miller",
@@ -11849,7 +11852,9 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/FERREIRA_DIEGO_L_01-18.png",
-        "imgB": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2024-12/QUARANTILLO_BILLY_R_12-14.png"
+        "imgB": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2024-12/QUARANTILLO_BILLY_R_12-14.png",
+        "winner": "Diego Ferreira",
+        "method": "DEC"
       },
       {
         "a": "Louie Sutherland",
@@ -11874,7 +11879,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-04/ELKINS_DARREN_L_04-12.png",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/DEL_VALLE_YADIER_L_05-17.png?itok=uInyKMVn"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/DEL_VALLE_YADIER_L_05-17.png?itok=uInyKMVn",
+        "winner": "Yadier del Valle",
+        "method": "KO/TKO",
+        "round": 1
       },
       {
         "a": "Steven Asplund",
