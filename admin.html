@@ -599,6 +599,28 @@
     }
     .btn-add-row:hover { background: rgba(255,138,61,0.08); border-color: rgba(255,138,61,0.7); }
 
+    /* ── Slash ("Winner of X / Y") side toggle — turns one fighter slot
+       into a TBD-winner matchup between two fighters, rendered on
+       fightcard.html as a clean diagonal split photo. ── */
+    .fc-side-main { display: flex; gap: 6px; align-items: center; }
+    .fc-side-main .mkt-autocomplete { flex: 1; min-width: 0; }
+    .fc-slash-btn {
+      flex-shrink: 0;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.4);
+      border-radius: 6px;
+      padding: 0 10px;
+      height: 38px;
+      font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+    }
+    .fc-slash-btn:hover { border-color: rgba(255,138,61,0.5); color: #ff8a3d; }
+    .fc-slash-btn.active { background: rgba(255,138,61,0.15); border-color: #ff8a3d; color: #ff8a3d; }
+    .fc-side-slash { margin-top: 6px; }
+    .fc-side-slash .mkt-autocomplete-list { top: calc(100% + 4px); }
+
     .mkt-platforms {
       display: flex;
       flex-wrap: wrap;
@@ -1632,40 +1654,73 @@
       // Shared by both builders below — one bout row (two fighter searches
       // + whatever extra fields the caller wants), returning the row plus
       // its live selection state so the preview button can read it back.
+      // Either side can be toggled into a "slash" — a TBD-winner matchup
+      // between two fighters (e.g. "Fighter A vs Winner of B / C") — via
+      // the ⚔ button, which reveals a second fighter search for that side.
       function createBoutRow(rowsEl, extraFieldsHTML, onChange) {
         const el = document.createElement('div');
         el.className = 'fc-builder-row';
+        function sideHTML(role, placeholder) {
+          return `
+            <div class="fc-side" data-side="${role}">
+              <div class="fc-side-main">
+                <div class="mkt-autocomplete">
+                  <input type="text" class="mkt-input" placeholder="${placeholder}" autocomplete="off" data-role="${role}">
+                  <div class="mkt-autocomplete-list"></div>
+                </div>
+                <button type="button" class="fc-slash-btn" data-side="${role}" title="Make this &quot;Winner of X / Y&quot; instead of one fighter">&#9876; Slash</button>
+              </div>
+              <div class="fc-side-slash" data-side="${role}" style="display:none">
+                <div class="mkt-autocomplete">
+                  <input type="text" class="mkt-input" placeholder="or Fighter (winner of the two)" autocomplete="off" data-role="${role}2">
+                  <div class="mkt-autocomplete-list"></div>
+                </div>
+              </div>
+            </div>`;
+        }
         el.innerHTML = `
           <button class="fc-row-remove" type="button">Remove</button>
           <div class="mkt-h2h-grid">
-            <div class="mkt-autocomplete">
-              <input type="text" class="mkt-input" placeholder="Fighter A" autocomplete="off" data-role="a">
-              <div class="mkt-autocomplete-list"></div>
-            </div>
-            <div class="mkt-autocomplete">
-              <input type="text" class="mkt-input" placeholder="Fighter B" autocomplete="off" data-role="b">
-              <div class="mkt-autocomplete-list"></div>
-            </div>
+            ${sideHTML('a', 'Fighter A')}
+            ${sideHTML('b', 'Fighter B')}
           </div>
           <div class="mkt-h2h-grid">${extraFieldsHTML}</div>
         `;
         rowsEl.appendChild(el);
 
-        const row = { el, a: null, b: null };
-        const inputA = el.querySelector('[data-role="a"]');
-        const inputB = el.querySelector('[data-role="b"]');
-        const lists  = el.querySelectorAll('.mkt-autocomplete-list');
+        const row = { el, a: null, b: null, a2: null, b2: null, aSlash: false, bSlash: false };
         const weightEl = el.querySelector('[data-role="weight"]');
 
-        wireFighterAutocomplete(inputA, lists[0], f => {
-          row.a = f;
-          if (f && f.weightClass && weightEl && !weightEl.value) weightEl.value = f.weightClass;
-          onChange();
-        });
-        wireFighterAutocomplete(inputB, lists[1], f => {
-          row.b = f;
-          if (f && f.weightClass && weightEl && !weightEl.value) weightEl.value = f.weightClass;
-          onChange();
+        ['a', 'b'].forEach(side => {
+          const input      = el.querySelector(`[data-role="${side}"]`);
+          const input2      = el.querySelector(`[data-role="${side}2"]`);
+          const sideEl      = el.querySelector(`.fc-side[data-side="${side}"]`);
+          const list        = sideEl.querySelector('.fc-side-main .mkt-autocomplete-list');
+          const list2        = sideEl.querySelector('.fc-side-slash .mkt-autocomplete-list');
+          const slashWrap   = sideEl.querySelector('.fc-side-slash');
+          const slashBtn    = sideEl.querySelector('.fc-slash-btn');
+
+          wireFighterAutocomplete(input, list, f => {
+            row[side] = f;
+            if (f && f.weightClass && weightEl && !weightEl.value) weightEl.value = f.weightClass;
+            onChange();
+          });
+          wireFighterAutocomplete(input2, list2, f => {
+            row[side + '2'] = f;
+            onChange();
+          });
+
+          slashBtn.addEventListener('click', () => {
+            const turningOn = slashWrap.style.display === 'none';
+            slashWrap.style.display = turningOn ? 'block' : 'none';
+            slashBtn.classList.toggle('active', turningOn);
+            row[side + 'Slash'] = turningOn;
+            if (!turningOn) {
+              input2.value = '';
+              row[side + '2'] = null;
+            }
+            onChange();
+          });
         });
 
         el.querySelector('.fc-row-remove').addEventListener('click', () => {
@@ -1675,6 +1730,32 @@
         });
 
         return row;
+      }
+      // A side is "ready" once it resolves to a real fighter (normal mode)
+      // or two real fighters (slash mode) — used by both builders' preview
+      // gating and bout-payload assembly below.
+      function boutSideReady(row, side) {
+        return row[side + 'Slash'] ? !!(row[side] && row[side + '2']) : !!row[side];
+      }
+      // Returns the {a/imgA/flagA/champA} fields for a normal side, or the
+      // {aSplit} field for a slash side — spread directly into the bout
+      // object being built for fightcard.html.
+      function boutSideFields(row, side) {
+        const capSide = side.toUpperCase();
+        if (row[side + 'Slash']) {
+          const f1 = row[side], f2 = row[side + '2'];
+          return {
+            [side]: `${f1.name} / ${f2.name}`,
+            [side + 'Split']: { name1: f1.name, img1: f1.img || '', name2: f2.name, img2: f2.img || '' },
+          };
+        }
+        const f = row[side];
+        return {
+          [side]: f.name,
+          ['img' + capSide]: f.img || '',
+          ['flag' + capSide]: f.flag || '',
+          ['champ' + capSide]: f.ranking === 'Champion',
+        };
       }
 
       // ── Fight Card Builder ──────────────────────────────────
@@ -1694,7 +1775,7 @@
 
         function updateState() {
           rows = rows.filter(r => !r.removed);
-          const readyCount = rows.filter(r => r.a && r.b).length;
+          const readyCount = rows.filter(r => boutSideReady(r, 'a') && boutSideReady(r, 'b')).length;
           previewBtn.disabled = !readyCount;
           hintEl.textContent = readyCount ? `${readyCount} fight${readyCount === 1 ? '' : 's'} ready` : 'Add at least one fight';
         }
@@ -1718,10 +1799,9 @@
         addRow();
 
         previewBtn.addEventListener('click', () => {
-          const bouts = rows.filter(r => r.a && r.b).map(r => ({
-            a: r.a.name, b: r.b.name,
-            imgA: r.a.img || '', imgB: r.b.img || '',
-            flagA: r.a.flag || '', flagB: r.b.flag || '',
+          const bouts = rows.filter(r => boutSideReady(r, 'a') && boutSideReady(r, 'b')).map(r => ({
+            ...boutSideFields(r, 'a'),
+            ...boutSideFields(r, 'b'),
             weight: r.el.querySelector('[data-role="weight"]').value.trim(),
             section: r.el.querySelector('[data-role="section"]').value,
             tag: r.el.querySelector('[data-role="tag"]').value.trim(),
@@ -1752,7 +1832,7 @@
 
         function updateState() {
           rows = rows.filter(r => !r.removed);
-          const readyCount = rows.filter(r => r.a && r.b).length;
+          const readyCount = rows.filter(r => boutSideReady(r, 'a') && boutSideReady(r, 'b')).length;
           previewBtn.disabled = !readyCount;
           hintEl.textContent = readyCount ? `${readyCount} matchup${readyCount === 1 ? '' : 's'} ready` : 'Add at least one matchup';
         }
@@ -1770,10 +1850,9 @@
         addRow();
 
         previewBtn.addEventListener('click', () => {
-          const bouts = rows.filter(r => r.a && r.b).map(r => ({
-            a: r.a.name, b: r.b.name,
-            imgA: r.a.img || '', imgB: r.b.img || '',
-            champA: r.a.ranking === 'Champion', champB: r.b.ranking === 'Champion',
+          const bouts = rows.filter(r => boutSideReady(r, 'a') && boutSideReady(r, 'b')).map(r => ({
+            ...boutSideFields(r, 'a'),
+            ...boutSideFields(r, 'b'),
             weight: r.el.querySelector('[data-role="weight"]').value.trim(),
             tag: r.el.querySelector('[data-role="tag"]').value.trim(),
           }));

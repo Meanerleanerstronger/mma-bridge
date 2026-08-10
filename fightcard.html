@@ -297,6 +297,28 @@
     }
     body.fc-light .fc-next-weight { color:rgba(0,0,0,.42); }
 
+    /* ── SLASH ("Winner of X / Y") photo — a container that would normally
+       hold one fighter's cutout instead holds two, each clipped to its own
+       diagonal half with a thin gap between them showing the card's own
+       background — a clean hard-edged split, not a blended/morphed photo.
+       Applied alongside .fc-thumb or .fc-next-photo (which still supply the
+       box's size/position); this class only adds the relative/clip context. */
+    .fc-split-photo { position:relative; overflow:hidden; background-image:none !important; }
+    .fc-split-half {
+      position:absolute; inset:0;
+      background-size:cover; background-position:center 12%; background-repeat:no-repeat;
+      background-color:transparent;
+      filter:grayscale(.55) contrast(1.12) brightness(.95);
+    }
+    /* Exact corner-to-corner diagonal split (top-left → bottom-right) —
+       two complementary triangles that share the same hypotenuse, so they
+       tile the box with zero gap and zero overlap regardless of its aspect
+       ratio. A thin inset highlight (clipped to the same triangle, so it
+       only actually shows along the shared diagonal edge) is what reads as
+       a clean "slash" line rather than the two photos just abutting. */
+    .fc-split-half.h1 { clip-path: polygon(0 0, 100% 0, 100% 100%); box-shadow: inset -1.5px 1.5px 0 rgba(255,255,255,.3); }
+    .fc-split-half.h2 { clip-path: polygon(0 0, 100% 100%, 0 100%); box-shadow: inset 1.5px -1.5px 0 rgba(255,255,255,.3); }
+
     .fc-footer {
       padding:12px 24px; text-align:center;
       font-family:'Montserrat',sans-serif; font-weight:800; font-size:.56rem;
@@ -441,25 +463,32 @@
       const sectionsHTML = sections.map(sec => `
         <div class="fc-section-bar">${esc(sec)}</div>
         <div class="fc-grid">
-          ${bySection.get(sec).map(b => `
+          ${bySection.get(sec).map(b => {
+            const aName = b.aSplit ? `Winner of ${b.aSplit.name1} / ${b.aSplit.name2}` : b.a;
+            const bName = b.bSplit ? `Winner of ${b.bSplit.name1} / ${b.bSplit.name2}` : b.b;
+            const aPhoto = b.aSplit
+              ? `<div class="fc-thumb fc-split-photo"><div class="fc-split-half h1" style="background-image:url('${esc(b.aSplit.img1)}')"></div><div class="fc-split-half h2" style="background-image:url('${esc(b.aSplit.img2)}')"></div></div>`
+              : (b.imgA ? `<div class="fc-thumb" style="background-image:url('${esc(b.imgA)}')"></div>` : '<div class="fc-thumb empty">?</div>');
+            const bPhoto = b.bSplit
+              ? `<div class="fc-thumb fc-split-photo"><div class="fc-split-half h1" style="background-image:url('${esc(b.bSplit.img1)}')"></div><div class="fc-split-half h2" style="background-image:url('${esc(b.bSplit.img2)}')"></div></div>`
+              : (b.imgB ? `<div class="fc-thumb" style="background-image:url('${esc(b.imgB)}')"></div>` : '<div class="fc-thumb empty">?</div>');
+            return `
             <div class="fc-cell">
               ${b.tag ? `<div class="fc-cell-tag">${esc(b.tag)}</div>` : ''}
-              <div class="fc-cell-photos">
-                ${b.imgA ? `<div class="fc-thumb" style="background-image:url('${esc(b.imgA)}')"></div>` : '<div class="fc-thumb empty">?</div>'}
-                ${b.imgB ? `<div class="fc-thumb" style="background-image:url('${esc(b.imgB)}')"></div>` : '<div class="fc-thumb empty">?</div>'}
-              </div>
+              <div class="fc-cell-photos">${aPhoto}${bPhoto}</div>
               <div class="fc-cell-names">
                 <div class="fc-cell-fighter">
-                  <div class="fc-cell-name">${esc(b.a)}</div>
+                  <div class="fc-cell-name">${esc(aName)}</div>
                 </div>
                 <div class="fc-cell-vs">VS</div>
                 <div class="fc-cell-fighter b">
-                  <div class="fc-cell-name b">${esc(b.b)}</div>
+                  <div class="fc-cell-name b">${esc(bName)}</div>
                 </div>
               </div>
               ${b.weight ? `<div class="fc-cell-weight">${esc(b.weight)}</div>` : ''}
             </div>
-          `).join('')}
+          `;
+          }).join('')}
         </div>
       `).join('');
 
@@ -476,17 +505,27 @@
 
     function renderNextMode() {
       if (!bouts.length) { root.innerHTML = '<div class="fc-empty">No matchups added yet — click Edit Fights to add some.</div>'; return; }
-      const rowsHTML = bouts.map(b => `
+      const rowsHTML = bouts.map(b => {
+        const aName = b.aSplit ? `Winner of ${b.aSplit.name1} / ${b.aSplit.name2}` : b.a;
+        const bName = b.bSplit ? `Winner of ${b.bSplit.name1} / ${b.bSplit.name2}` : b.b;
+        const aPhoto = b.aSplit
+          ? `<div class="fc-next-photo fc-split-photo"><div class="fc-split-half h1" style="background-image:url('${esc(b.aSplit.img1)}')"></div><div class="fc-split-half h2" style="background-image:url('${esc(b.aSplit.img2)}')"></div></div>`
+          : (b.imgA ? `<div class="fc-next-photo" style="background-image:url('${esc(b.imgA)}')"></div>` : '');
+        const bPhoto = b.bSplit
+          ? `<div class="fc-next-photo fc-split-photo b-side"><div class="fc-split-half h1" style="background-image:url('${esc(b.bSplit.img1)}')"></div><div class="fc-split-half h2" style="background-image:url('${esc(b.bSplit.img2)}')"></div></div>`
+          : (b.imgB ? `<div class="fc-next-photo b-side" style="background-image:url('${esc(b.imgB)}')"></div>` : '');
+        return `
         <div class="fc-next-row">
-          ${b.imgA ? `<div class="fc-next-photo" style="background-image:url('${esc(b.imgA)}')"></div>` : ''}
+          ${aPhoto}
           <div class="fc-next-body">
             ${b.tag ? `<div class="fc-next-tag">${esc(b.tag)}</div>` : ''}
-            <div class="fc-next-matchup">${b.champA ? '<span class="fc-champ-badge">C</span>' : ''}${esc(b.a)} <span class="vs">vs</span> ${b.champB ? '<span class="fc-champ-badge">C</span>' : ''}${esc(b.b)}</div>
+            <div class="fc-next-matchup">${b.champA ? '<span class="fc-champ-badge">C</span>' : ''}${esc(aName)} <span class="vs">vs</span> ${b.champB ? '<span class="fc-champ-badge">C</span>' : ''}${esc(bName)}</div>
             ${b.weight ? `<div class="fc-next-weight">${esc(b.weight)}</div>` : ''}
           </div>
-          ${b.imgB ? `<div class="fc-next-photo b-side" style="background-image:url('${esc(b.imgB)}')"></div>` : ''}
+          ${bPhoto}
         </div>
-      `).join('');
+      `;
+      }).join('');
 
       root.innerHTML = `
         <div class="fc-header">
@@ -711,7 +750,13 @@
       // .fc-thumb/.fc-next-photo comments for why: html2canvas ignores
       // object-fit on <img> elements and stretches the raw photo into its
       // box, which was squishing/smushing fighters in every downloaded PNG.
-      const photoEls = [...targetEl.querySelectorAll('.fc-thumb:not(.empty), .fc-next-photo')];
+      // .fc-split-half — the two half-photos inside a slash ("Winner of
+      // X / Y") container — carry their own background-image; the
+      // .fc-split-photo parent (still matched by .fc-thumb/.fc-next-photo
+      // above) has none, so :not(.fc-split-photo) skips it as a no-op
+      // instead of wasting a proxy round-trip on an element with nothing
+      // to swap.
+      const photoEls = [...targetEl.querySelectorAll('.fc-thumb:not(.empty):not(.fc-split-photo), .fc-next-photo:not(.fc-split-photo), .fc-split-half')];
       const originalBgs = photoEls.map(el => el.style.backgroundImage);
       await Promise.all(photoEls.map(async el => {
         const match = (el.style.backgroundImage || '').match(/url\(["']?(.*?)["']?\)/);
