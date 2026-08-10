@@ -264,6 +264,12 @@
       display:flex; align-items:baseline; gap:calc(13px * var(--fc-scale)); flex-wrap:wrap;
     }
     body.fc-light .fc-next-matchup { color:#161514; }
+    /* Badge + name as one flex unit — keeps the champ mark glued next to
+       its own fighter's name (vertically centered on it, small consistent
+       gap) instead of the badge and the name being separate flex items
+       that could independently wrap, which used to strand the badge alone
+       on its own line above the name when the row wrapped. */
+    .fc-fighter-name { display:inline-flex; align-items:center; gap:calc(7px * var(--fc-scale)); }
     /* VS — small, quiet, flanked by thin rules (no underline/bold/orange
        fill) instead of shouting at the same volume as the names. */
     .fc-next-matchup .vs {
@@ -278,16 +284,18 @@
       content:''; width:calc(13px * var(--fc-scale)); height:1px;
       background:currentColor; opacity:.6;
     }
-    /* Champion mark — a thin gold ring instead of a solid gradient-filled
-       circle, which read as a cheap game badge rather than a title mark. */
+    /* Champion mark — a thin gold ring (not a solid gradient-filled circle,
+       which read as a cheap game badge) with a faint gold wash inside so
+       it doesn't sit as an empty outline — reads as a proper title mark
+       instead of just a stray "C". */
     .fc-champ-badge {
       display:inline-flex; align-items:center; justify-content:center;
-      width:calc(20px * var(--fc-scale)); height:calc(20px * var(--fc-scale));
+      width:calc(19px * var(--fc-scale)); height:calc(19px * var(--fc-scale));
       border-radius:50%; flex-shrink:0;
-      background:transparent;
+      background:rgba(217,176,110,.14);
       border:calc(1.5px * var(--fc-scale)) solid #d9b06e;
-      color:#e0bd85; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-style:normal;
-      font-size:calc(.7rem * var(--fc-scale));
+      color:#f0d9a8; font-family:'Barlow Condensed',sans-serif; font-weight:700; font-style:normal;
+      font-size:calc(.66rem * var(--fc-scale));
     }
     .fc-next-weight {
       margin-top:calc(7px * var(--fc-scale));
@@ -512,7 +520,11 @@
           ${aPhoto}
           <div class="fc-next-body">
             ${b.tag ? `<div class="fc-next-tag">${esc(b.tag)}</div>` : ''}
-            <div class="fc-next-matchup">${b.champA ? '<span class="fc-champ-badge">C</span>' : ''}${esc(aName)} <span class="vs">vs</span> ${b.champB ? '<span class="fc-champ-badge">C</span>' : ''}${esc(bName)}</div>
+            <div class="fc-next-matchup">
+              <span class="fc-fighter-name">${b.champA ? '<span class="fc-champ-badge">C</span>' : ''}${esc(aName)}</span>
+              <span class="vs">vs</span>
+              <span class="fc-fighter-name">${b.champB ? '<span class="fc-champ-badge">C</span>' : ''}${esc(bName)}</span>
+            </div>
             ${b.weight ? `<div class="fc-next-weight">${esc(b.weight)}</div>` : ''}
           </div>
           ${bPhoto}
