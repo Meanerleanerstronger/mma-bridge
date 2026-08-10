@@ -151,47 +151,52 @@
       },
       {
         "rank": 8,
-        "name": "Amir Albazi",
+        "name": "Brandon Moreno",
         "isChamp": false,
-        "movement": "same"
+        "movement": "up",
+        "prevRank": 9
       },
       {
         "rank": 9,
-        "name": "Brandon Moreno",
+        "name": "Amir Albazi",
         "isChamp": false,
-        "movement": "same"
+        "movement": "down",
+        "prevRank": 8
       },
       {
         "rank": 10,
-        "name": "Alex Perez",
+        "name": "Ramazan Temirov",
         "isChamp": false,
         "movement": "up",
-        "prevRank": 11
+        "prevRank": 13
       },
       {
         "rank": 11,
-        "name": "Steve Erceg",
+        "name": "Alex Perez",
         "isChamp": false,
         "movement": "down",
         "prevRank": 10
       },
       {
         "rank": 12,
+        "name": "Steve Erceg",
+        "isChamp": false,
+        "movement": "down",
+        "prevRank": 11
+      },
+      {
+        "rank": 13,
         "name": "Tim Elliott",
         "isChamp": false,
-        "movement": "same"
+        "movement": "down",
+        "prevRank": 12
       },
       {
-        "rank": 13,
-        "name": "Ramazan Temirov",
-        "isChamp": false,
-        "movement": "new"
-      },
-      {
-        "rank": 13,
+        "rank": 14,
         "name": "Tagir Ulanbekov",
         "isChamp": false,
-        "movement": "same"
+        "movement": "down",
+        "prevRank": 13
       },
       {
         "rank": 15,
@@ -577,21 +582,24 @@
       },
       {
         "rank": 12,
-        "name": "Mike Malott",
+        "name": "Uroš Medić",
         "isChamp": false,
-        "movement": "same"
+        "movement": "up",
+        "prevRank": 14
       },
       {
         "rank": 13,
-        "name": "Michael Venom Page",
+        "name": "Mike Malott",
         "isChamp": false,
-        "movement": "same"
+        "movement": "down",
+        "prevRank": 12
       },
       {
         "rank": 14,
-        "name": "Uroš Medić",
+        "name": "Michael Venom Page",
         "isChamp": false,
-        "movement": "same"
+        "movement": "down",
+        "prevRank": 13
       },
       {
         "rank": 15,
@@ -729,15 +737,17 @@
       },
       {
         "rank": 4,
-        "name": "Jan Błachowicz",
+        "name": "Khalil Rountree Jr.",
         "isChamp": false,
-        "movement": "same"
+        "movement": "up",
+        "prevRank": 5
       },
       {
         "rank": 5,
-        "name": "Khalil Rountree Jr.",
+        "name": "Navajo Stirling",
         "isChamp": false,
-        "movement": "same"
+        "movement": "up",
+        "prevRank": 15
       },
       {
         "rank": 6,
@@ -759,35 +769,38 @@
       },
       {
         "rank": 9,
-        "name": "Dominick Reyes",
+        "name": "Jan Błachowicz",
         "isChamp": false,
-        "movement": "up",
-        "prevRank": 10
+        "movement": "down",
+        "prevRank": 4
       },
       {
         "rank": 10,
-        "name": "Bogdan Guskov",
+        "name": "Dominick Reyes",
         "isChamp": false,
         "movement": "down",
         "prevRank": 9
       },
       {
         "rank": 11,
-        "name": "Robert Whittaker",
+        "name": "Bogdan Guskov",
         "isChamp": false,
-        "movement": "same"
+        "movement": "down",
+        "prevRank": 10
       },
       {
         "rank": 12,
-        "name": "Johnny Walker",
+        "name": "Robert Whittaker",
         "isChamp": false,
-        "movement": "same"
+        "movement": "down",
+        "prevRank": 11
       },
       {
         "rank": 13,
-        "name": "Aleksandar Rakić",
+        "name": "Johnny Walker",
         "isChamp": false,
-        "movement": "same"
+        "movement": "down",
+        "prevRank": 12
       },
       {
         "rank": 14,
@@ -797,9 +810,9 @@
       },
       {
         "rank": 15,
-        "name": "Navajo Stirling",
+        "name": "Nikita Krylov",
         "isChamp": false,
-        "movement": "same"
+        "movement": "new"
       }
     ]
   },
@@ -869,41 +882,40 @@
         "rank": 10,
         "name": "Valter Walker",
         "isChamp": false,
-        "movement": "up",
-        "prevRank": 13
+        "movement": "same"
       },
       {
         "rank": 11,
         "name": "Tyrell Fortune",
         "isChamp": false,
-        "movement": "down",
-        "prevRank": 9
+        "movement": "same"
       },
       {
-        "rank": 12,
-        "name": "Derrick Lewis",
+        "rank": 11,
+        "name": "Aleksandar Rakić",
         "isChamp": false,
-        "movement": "down",
-        "prevRank": 11
+        "movement": "new"
       },
       {
         "rank": 13,
-        "name": "Marcin Tybura",
+        "name": "Derrick Lewis",
         "isChamp": false,
         "movement": "down",
         "prevRank": 12
       },
       {
         "rank": 14,
-        "name": "Brando Peričić",
+        "name": "Marcin Tybura",
         "isChamp": false,
-        "movement": "same"
+        "movement": "down",
+        "prevRank": 13
       },
       {
         "rank": 15,
-        "name": "Mick Parkin",
+        "name": "Brando Peričić",
         "isChamp": false,
-        "movement": "same"
+        "movement": "down",
+        "prevRank": 14
       }
     ]
   },
