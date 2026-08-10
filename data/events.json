@@ -11796,7 +11796,7 @@
     "location": "Enterprise, NV",
     "venue": "UFC APEX",
     "poster": "https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/2026-07/080826-ufc-fight-night-gamrot-vs-salkilld-EVENT-ART.jpg",
-    "status": "upcoming",
+    "status": "completed",
     "start_time": null,
     "mainCard": [
       {
@@ -11808,7 +11808,10 @@
         "ranked": true,
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/GAMROT_MATEUSZ_L_04-11.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/SALKILLD_QUILLAN_L_01-31.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/SALKILLD_QUILLAN_L_01-31.png",
+        "winner": "Quillan Salkilld",
+        "method": "SUB",
+        "round": 1
       },
       {
         "a": "Ty Miller",
@@ -11819,7 +11822,10 @@
         "ranked": false,
         "slot": "comain",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-01/MILLER_TY_R_01-24.png",
-        "imgB": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2024-05/GOFF_BILLY_R_08-26.png"
+        "imgB": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2024-05/GOFF_BILLY_R_08-26.png",
+        "winner": "Ty Miller",
+        "method": "KO/TKO",
+        "round": 3
       },
       {
         "a": "Diyar Nurgozhay",
@@ -11830,7 +11836,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-03/NURGOZHAY_DIYAR_L_03-15.png?itok=8btMThdO",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/2/LOPES_BRUNO_L_01-11.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/2/LOPES_BRUNO_L_01-11.png",
+        "winner": "Diyar Nurgozhay",
+        "method": "KO/TKO",
+        "round": 1
       }
     ],
     "prelims": [
@@ -11843,7 +11852,9 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/FERREIRA_DIEGO_L_01-18.png",
-        "imgB": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2024-12/QUARANTILLO_BILLY_R_12-14.png"
+        "imgB": "https://ufc.com/images/styles/event_fight_card_upper_body_of_standing_athlete/s3/2024-12/QUARANTILLO_BILLY_R_12-14.png",
+        "winner": "Diego Ferreira",
+        "method": "DEC"
       },
       {
         "a": "Louie Sutherland",
@@ -11854,7 +11865,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/SUTHERLAND_LOUIE_L_03-21.png",
-        "imgB": ""
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
+        "winner": "José Montanha",
+        "method": "SUB",
+        "round": 1
       },
       {
         "a": "Darren Elkins",
@@ -11865,7 +11879,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-04/ELKINS_DARREN_L_04-12.png",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/DEL_VALLE_YADIER_L_05-17.png?itok=uInyKMVn"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/DEL_VALLE_YADIER_L_05-17.png?itok=uInyKMVn",
+        "winner": "Yadier del Valle",
+        "method": "KO/TKO",
+        "round": 1
       },
       {
         "a": "Steven Asplund",
@@ -11876,7 +11893,9 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/ASPLUND_STEVE_R_03-14.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/PAT_GUILHERME_L_04-04.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/PAT_GUILHERME_L_04-04.png",
+        "winner": "Steven Asplund",
+        "method": "DEC"
       },
       {
         "a": "Juliana Miller",
@@ -11887,7 +11906,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/MILLER_JULIANA_L_02-21.png?itok=QkrFSkh5",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/OLIVEIRA_RAVENA_R_03-21.png"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/OLIVEIRA_RAVENA_R_03-21.png",
+        "winner": "Juliana Miller",
+        "method": "SUB",
+        "round": 2
       },
       {
         "a": "Amanda Lemos",
@@ -11898,10 +11920,53 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/LEMOS_AMANDA_L_03-14.png",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/THAINARA_ALEXIA_R_09-27.png"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/THAINARA_ALEXIA_R_09-27.png",
+        "winner": "Alexia Thainara",
+        "method": "DEC"
+      },
+      {
+        "a": "Manoel Sousa",
+        "b": "Richie Miranda",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/SOUSA_MANOEL_L_08-08.png?itok=RoZ_IBho",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
+        "winner": "Manoel Sousa",
+        "method": "DEC"
       }
     ],
-    "earlyPrelims": []
+    "earlyPrelims": [
+      {
+        "a": "Miles Johns",
+        "b": "Gianni Vazquez",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/JOHNS_MILES_L_08-08.png?itok=IVHMWSad",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/VAZQUEZ_GIANNI_R_02-07.png?itok=gF8MOrZZ",
+        "winner": "Miles Johns",
+        "method": "KO/TKO",
+        "round": 1
+      },
+      {
+        "a": "Gigi Canuto",
+        "b": "Carol Foro",
+        "weight": "W Strawweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/CANUTO_GIGI_L_08-08.png?itok=MG4NAPui",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/FORO_CAROL_R_09-09.png?itok=NvyM-r3g",
+        "winner": "Carol Foro",
+        "round": 3
+      }
+    ]
   },
   {
     "id": "ufc-330-makhachev-vs-machado-garry",
@@ -12044,7 +12109,7 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/TOBIAS_RAFAEL_L_03-07.png?itok=O0kRAhgO",
-        "imgB": ""
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-08/FERNANDO_LUCAS_R.png?itok=nbOsST1x"
       }
     ],
     "droppedFights": [
@@ -12265,7 +12330,7 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "",
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-01/BATBAYAR_NAMSRAI_R_01-31.png?itok=cka0z5KF",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/LIMA_ANDRE_L_06-20.png"
       }
     ],
@@ -12278,8 +12343,8 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "",
-        "imgB": ""
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/JENKINS_JACK_L_09-27.png?itok=WCdioTR0",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-12/WOODSON_SEAN_L_12-14.png?itok=HkMQi1cR"
       },
       {
         "a": "Rei Tsuruya",
@@ -12490,6 +12555,17 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/MARTINEZ_DAVID_L_03-29.png",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/IGE_DAN_L_07-19.png?itok=eje2mypv"
+      },
+      {
+        "a": "Tommy McMillen",
+        "b": "Marwan Rahiki",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/MCMILLEN_TOMMY_L_04-04.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/RAHIKI_MARWAN_L_05-02.png"
       }
     ],
     "prelims": [

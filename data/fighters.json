@@ -8599,7 +8599,7 @@
     "weightClass": "Lightweight",
     "ranking": "#10",
     "record": {
-      "wins": 21,
+      "wins": 20,
       "losses": 7,
       "draws": 1
     },
@@ -17652,7 +17652,7 @@
     "name": "Tai Tuivasa",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/TUIVASA_TAI_L_05-02.png",
     "record": {
-      "wins": 15,
+      "wins": 14,
       "losses": 10,
       "draws": 0
     },
@@ -17768,6 +17768,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Mateusz Gamrot",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Beneil Dariush",
         "result": "W",
@@ -20086,10 +20094,18 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/LEMOS_AMANDA_L_03-14.png",
     "record": {
       "wins": 15,
-      "losses": 6,
+      "losses": 7,
       "draws": 1
     },
     "last5": [
+      {
+        "opponent": "Alexia Thainara",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Tatiana Suarez",
         "result": "L",
@@ -23859,7 +23875,7 @@
     "name": "Casey O'Neill",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/ONEILL_CASEY_L_03-28.png",
     "record": {
-      "wins": 11,
+      "wins": 10,
       "losses": 2,
       "draws": 0
     },
@@ -24015,6 +24031,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Diyar Nurgozhay",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Édgar Cháirez",
         "result": "L",
@@ -24572,6 +24596,14 @@
     },
     "nickname": "Kong",
     "last5": [
+      {
+        "opponent": "Steven Asplund",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Thomas Petersen",
         "result": "L",
@@ -26214,6 +26246,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Quillan Salkilld",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Esteban Ribovics",
         "result": "W",
@@ -30658,6 +30698,14 @@
     "nickname": "Vanilla Gorilla",
     "last5": [
       {
+        "opponent": "José Montanha",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Tai Tuivasa",
         "result": "W",
         "method": "Decision (unanimous)",
@@ -32931,9 +32979,9 @@
     "name": "Dooho Choi",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/CHOI_DOOHO_L_05-16.png",
     "record": {
-      "wins": 17,
+      "wins": 14,
       "losses": 4,
-      "draws": 1
+      "draws": 0
     },
     "last5": [
       {
@@ -43021,7 +43069,17 @@
       "tdAcc": "42%",
       "tdDef": "58%",
       "subAvg": "2.0"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Darren Elkins",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "juliana-miller",
@@ -43042,7 +43100,17 @@
       "tdAcc": "29%",
       "tdDef": "44%",
       "subAvg": "1.2"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Ravena Oliveira",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": 2,
+        "time": null
+      }
+    ]
   },
   {
     "id": "luke-fernandez",
@@ -43082,7 +43150,17 @@
       "tdAcc": "75%",
       "tdDef": "80%",
       "subAvg": "0.0"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Bruno Lopes",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "rafael-tobias",
@@ -44757,7 +44835,17 @@
       "losses": 0,
       "draws": 0
     },
-    "nickname": "Thriller"
+    "nickname": "Thriller",
+    "last5": [
+      {
+        "opponent": "Billy Ray Goff",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": 3,
+        "time": null
+      }
+    ]
   },
   {
     "id": "billy-ray-goff",
@@ -44773,7 +44861,17 @@
       "tdAcc": "16%",
       "tdDef": "66%",
       "subAvg": "0.0"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Ty Miller",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": 3,
+        "time": null
+      }
+    ]
   },
   {
     "id": "diego-ferreira",
@@ -44796,6 +44894,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Billy Quarantillo",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Alexander Hernandez",
         "result": "L",
@@ -44900,6 +45006,14 @@
     },
     "last5": [
       {
+        "opponent": "Diego Ferreira",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Cub Swanson",
         "result": "L",
         "method": "KO (punch)",
@@ -45003,6 +45117,14 @@
     },
     "last5": [
       {
+        "opponent": "Yadier del Valle",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Julian Erosa",
         "result": "L",
         "method": "TKO (elbow and punches)",
@@ -45105,7 +45227,17 @@
       "losses": 2,
       "draws": 0
     },
-    "nickname": "Concrete"
+    "nickname": "Concrete",
+    "last5": [
+      {
+        "opponent": "Guilherme Pat",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "ravena-oliveira",
@@ -45127,7 +45259,17 @@
       "losses": 4,
       "draws": 1
     },
-    "nickname": "Kenoudy"
+    "nickname": "Kenoudy",
+    "last5": [
+      {
+        "opponent": "Juliana Miller",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": 2,
+        "time": null
+      }
+    ]
   },
   {
     "id": "alexia-thainara",
@@ -45151,7 +45293,17 @@
       "losses": 1,
       "draws": 0
     },
-    "nickname": "Burguesinha"
+    "nickname": "Burguesinha",
+    "last5": [
+      {
+        "opponent": "Amanda Lemos",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "jose-montanha-da-silva",
@@ -45165,7 +45317,7 @@
       "losses": 1,
       "draws": 0
     },
-    "img": ""
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
   },
   {
     "id": "muslim-salikhov",
@@ -45509,7 +45661,94 @@
       "tdAcc": "39%",
       "tdDef": "71%",
       "subAvg": "0.8"
-    }
+    },
+    "record": {
+      "wins": 23,
+      "losses": 12,
+      "draws": 1
+    },
+    "last5": [
+      {
+        "opponent": "David Martínez (fighter)",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Moreno vs. Kavanagh",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Aiemann Zahabi",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: de Ridder vs. Allen",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Sean O'Malley (fighter)",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 299",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Pedro Munhoz",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 292",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Cory Sandhagen",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC on ESPN: Vera vs. Sandhagen",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Dominick Cruz",
+        "result": "W",
+        "method": "KO (head kick)",
+        "event": "UFC on ESPN: Vera vs. Cruz",
+        "round": 4,
+        "time": "2:17"
+      },
+      {
+        "opponent": "Rob Font",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Font vs. Vera",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Frankie Edgar",
+        "result": "W",
+        "method": "KO (front kick)",
+        "event": "UFC 268",
+        "round": 3,
+        "time": "3:50"
+      },
+      {
+        "opponent": "Davey Grant",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: The Korean Zombie vs. Ige",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "José Aldo",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Thompson vs. Neal",
+        "round": 3,
+        "time": "5:00"
+      }
+    ]
   },
   {
     "id": "eduarda-moura",
@@ -45544,5 +45783,387 @@
     "id": "michael-aswell",
     "name": "Michael Aswell",
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/ASWELL_MICHAEL_R_05-31.png?itok=8ZDrUuaM"
+  },
+  {
+    "id": "sean-woodson",
+    "name": "Sean Woodson",
+    "record": {
+      "wins": 13,
+      "losses": 2,
+      "draws": 1
+    },
+    "last5": [
+      {
+        "opponent": "Dan Ige",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC 314",
+        "round": 3,
+        "time": "1:12"
+      },
+      {
+        "opponent": "Fernando Padilla",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Covington vs. Buckley",
+        "round": 1,
+        "time": "4:58"
+      },
+      {
+        "opponent": "Alex Caceres",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Lewis vs. Nascimento",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Charles Jourdain",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC 297",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Luis Saldaña",
+        "result": "D",
+        "method": "Draw (split)",
+        "event": "UFC 278",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Collin Anglin",
+        "result": "W",
+        "method": "TKO (punches to the body)",
+        "event": "UFC Fight Night: Holloway vs. Rodríguez",
+        "round": 1,
+        "time": "4:30"
+      },
+      {
+        "opponent": "Youssef Zalal",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Rozenstruik vs. Sakai",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Julian Erosa",
+        "result": "L",
+        "method": "Submission (D'Arce choke)",
+        "event": "UFC on ESPN: Poirier vs. Hooker",
+        "round": 0,
+        "time": "align=\"center\"|2:44"
+      },
+      {
+        "opponent": "Kyle Bochniak",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Reyes vs. Weidman",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Terrance McKinney",
+        "result": "W",
+        "method": "KO (flying knee)",
+        "event": "Dana White's Contender Series Season Three#Week 5 - July 23",
+        "round": 2,
+        "time": "1:49"
+      }
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-12/WOODSON_SEAN_L_12-14.png?itok=HkMQi1cR",
+    "stats": {
+      "slpm": "5.57",
+      "strAcc": "46%",
+      "sapm": "4.18",
+      "strDef": "58%",
+      "tdAvg": "0.58",
+      "tdAcc": "55%",
+      "tdDef": "84%",
+      "subAvg": "0.3"
+    }
+  },
+  {
+    "id": "lucas-fernando",
+    "name": "Lucas Fernando",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-08/FERNANDO_LUCAS_R.png?itok=nbOsST1x",
+    "stats": {
+      "slpm": "1.87",
+      "strAcc": "51%",
+      "sapm": "4.73",
+      "strDef": "38%",
+      "tdAvg": "3.00",
+      "tdAcc": "30%",
+      "tdDef": "0%",
+      "subAvg": "1.0"
+    }
+  },
+  {
+    "id": "namsrai-batbayar",
+    "name": "Namsrai Batbayar",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-01/BATBAYAR_NAMSRAI_R_01-31.png?itok=cka0z5KF",
+    "stats": {
+      "slpm": "4.44",
+      "strAcc": "45%",
+      "sapm": "3.42",
+      "strDef": "48%",
+      "tdAvg": "2.85",
+      "tdAcc": "30%",
+      "tdDef": "100%",
+      "subAvg": "0.9"
+    }
+  },
+  {
+    "id": "jack-jenkins",
+    "name": "Jack Jenkins",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/JENKINS_JACK_L_09-27.png?itok=WCdioTR0",
+    "stats": {
+      "slpm": "4.48",
+      "strAcc": "61%",
+      "sapm": "2.95",
+      "strDef": "59%",
+      "tdAvg": "1.98",
+      "tdAcc": "60%",
+      "tdDef": "71%",
+      "subAvg": "0.2"
+    }
+  },
+  {
+    "id": "miles-johns",
+    "name": "Miles Johns",
+    "record": {
+      "wins": 16,
+      "losses": 5,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Gianni Vazquez",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": 1,
+        "time": null
+      },
+      {
+        "opponent": "Daniel Marcos",
+        "result": "L",
+        "method": "Technical Submission (rear-naked choke)",
+        "event": "UFC Fight Night: Bonfim vs. Brown",
+        "round": 2,
+        "time": "4:23"
+      },
+      {
+        "opponent": "Jean Matsumoto",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC on ESPN: Dolidze vs. Hernandez",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Felipe Lima (fighter)",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Covington vs. Buckley",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Vince Morales",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Nzechukwu vs. Cuțelaba",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "John Castañeda",
+        "result": "L",
+        "method": "Technical Submission (arm-triangle choke)",
+        "event": "UFC Fight Night: Hermansson vs. Strickland",
+        "round": 3,
+        "time": "1:38"
+      },
+      {
+        "opponent": "Anderson dos Santos (fighter)",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "UFC 265",
+        "round": 3,
+        "time": "1:16"
+      },
+      {
+        "opponent": "Kevin Natividad",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "UFC Fight Night: Hall vs. Silva",
+        "round": 3,
+        "time": "2:51"
+      },
+      {
+        "opponent": "Mario Bautista",
+        "result": "L",
+        "method": "TKO (flying knee and punches)",
+        "event": "UFC 247",
+        "round": 2,
+        "time": "1:41"
+      },
+      {
+        "opponent": "Cole Smith (fighter)",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Cowboy vs. Gaethje",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Richie Santiago",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Dana White's Contender Series Season 3#Week 2 - June 25",
+        "round": 3,
+        "time": "5:00"
+      }
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/JOHNS_MILES_L_08-08.png?itok=IVHMWSad",
+    "stats": {
+      "slpm": "3.36",
+      "strAcc": "44%",
+      "sapm": "2.99",
+      "strDef": "65%",
+      "tdAvg": "1.22",
+      "tdAcc": "26%",
+      "tdDef": "77%",
+      "subAvg": "0.0"
+    }
+  },
+  {
+    "id": "manoel-sousa",
+    "name": "Manoel Sousa",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/SOUSA_MANOEL_L_08-08.png?itok=RoZ_IBho",
+    "stats": {
+      "slpm": "4.15",
+      "strAcc": "45%",
+      "sapm": "3.71",
+      "strDef": "51%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "60%",
+      "subAvg": "1.6"
+    },
+    "last5": [
+      {
+        "opponent": "Richie Miranda",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": null,
+        "time": null
+      }
+    ]
+  },
+  {
+    "id": "richie-miranda",
+    "name": "Richie Miranda",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "last5": [
+      {
+        "opponent": "Manoel Sousa",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": null,
+        "time": null
+      }
+    ]
+  },
+  {
+    "id": "gianni-vazquez",
+    "name": "Gianni Vazquez",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/VAZQUEZ_GIANNI_R_02-07.png?itok=gF8MOrZZ",
+    "stats": {
+      "slpm": "1.60",
+      "strAcc": "22%",
+      "sapm": "3.93",
+      "strDef": "39%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "62%",
+      "subAvg": "2.0"
+    },
+    "last5": [
+      {
+        "opponent": "Miles Johns",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": 1,
+        "time": null
+      }
+    ]
+  },
+  {
+    "id": "gigi-canuto",
+    "name": "Gigi Canuto",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/CANUTO_GIGI_L_08-08.png?itok=MG4NAPui",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "last5": [
+      {
+        "opponent": "Carol Foro",
+        "result": "L",
+        "method": "",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": 3,
+        "time": null
+      }
+    ]
+  },
+  {
+    "id": "carol-foro",
+    "name": "Carol Foro",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/FORO_CAROL_R_09-09.png?itok=NvyM-r3g",
+    "stats": {
+      "slpm": "7.80",
+      "strAcc": "55%",
+      "sapm": "7.67",
+      "strDef": "58%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "100%",
+      "subAvg": "0.0"
+    },
+    "last5": [
+      {
+        "opponent": "Gigi Canuto",
+        "result": "W",
+        "method": "",
+        "event": "UFC Fight Night: Gamrot vs Salkilld",
+        "round": 3,
+        "time": null
+      }
+    ]
   }
 ]
