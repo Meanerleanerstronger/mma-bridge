@@ -298,26 +298,19 @@
     body.fc-light .fc-next-weight { color:rgba(0,0,0,.42); }
 
     /* ── SLASH ("Winner of X / Y") photo — a container that would normally
-       hold one fighter's cutout instead holds two, each clipped to its own
-       diagonal half with a thin gap between them showing the card's own
-       background — a clean hard-edged split, not a blended/morphed photo.
-       Applied alongside .fc-thumb or .fc-next-photo (which still supply the
-       box's size/position); this class only adds the relative/clip context. */
-    .fc-split-photo { position:relative; overflow:hidden; background-image:none !important; }
+       hold one fighter's cutout instead holds two, stacked as their own
+       small full rectangular photos (not diagonally clipped into each
+       other — that read as a muddy/morphed mess up close). Applied
+       alongside .fc-thumb or .fc-next-photo (which still supply the box's
+       overall size/position); this class turns it into a flex column of
+       two clean mini-photos with a hairline gap between them. */
+    .fc-split-photo { display:flex; flex-direction:column; gap:2px; background-image:none !important; }
     .fc-split-half {
-      position:absolute; inset:0;
+      flex:1 1 0; min-height:0; width:100%;
       background-size:cover; background-position:center 12%; background-repeat:no-repeat;
       background-color:transparent;
       filter:grayscale(.55) contrast(1.12) brightness(.95);
     }
-    /* Exact corner-to-corner diagonal split (top-left → bottom-right) —
-       two complementary triangles that share the same hypotenuse, so they
-       tile the box with zero gap and zero overlap regardless of its aspect
-       ratio. A thin inset highlight (clipped to the same triangle, so it
-       only actually shows along the shared diagonal edge) is what reads as
-       a clean "slash" line rather than the two photos just abutting. */
-    .fc-split-half.h1 { clip-path: polygon(0 0, 100% 0, 100% 100%); box-shadow: inset -1.5px 1.5px 0 rgba(255,255,255,.3); }
-    .fc-split-half.h2 { clip-path: polygon(0 0, 100% 100%, 0 100%); box-shadow: inset 1.5px -1.5px 0 rgba(255,255,255,.3); }
 
     .fc-footer {
       padding:12px 24px; text-align:center;
