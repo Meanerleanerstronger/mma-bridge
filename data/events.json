@@ -12372,17 +12372,6 @@
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/PEREZ_ALEX_L_05-30.png"
       },
       {
-        "a": "Ce Liu",
-        "b": "Junior Tafa",
-        "weight": "Light Heavyweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": true,
-        "slot": "",
-        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/TAFA_JUNIOR_L_05-02.png"
-      },
-      {
         "a": "Aoriqileng",
         "b": "Kai Asakura",
         "weight": "Bantamweight",
@@ -12447,6 +12436,12 @@
         "b": "TBA",
         "reason": "removed from the card",
         "droppedAt": "2026-08-07T00:50:47.167Z"
+      },
+      {
+        "a": "Ce Liu",
+        "b": "Junior Tafa",
+        "reason": "removed from the card",
+        "droppedAt": "2026-08-11T08:45:07.417Z"
       }
     ]
   },
