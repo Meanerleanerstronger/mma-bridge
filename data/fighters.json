@@ -46188,6 +46188,14 @@
       {
         "opponent": "Matt Adams",
         "result": "W",
+        "method": "KO/TKO",
+        "event": "Dana White's Contender Series: Season 10, Week 1",
+        "round": 1,
+        "time": null
+      },
+      {
+        "opponent": "Matt Adams",
+        "result": "W",
         "method": "TKO (punches)",
         "event": "Dana White's Contender Series season 10#Week 1 – August 11",
         "round": 1,
@@ -46255,7 +46263,17 @@
       "tdAcc": "0%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Anthony Wint",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "Dana White's Contender Series: Season 10, Week 1",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "fabrizio-escarrega",
@@ -46269,7 +46287,17 @@
       "tdAcc": "0%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Abe Alsaghir",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "Dana White's Contender Series: Season 10, Week 1",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "abe-alsaghir",
@@ -46283,7 +46311,17 @@
       "tdAcc": "0%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Fabrizio Escarrega",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Dana White's Contender Series: Season 10, Week 1",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "bilal-hasan",
@@ -46297,7 +46335,17 @@
       "tdAcc": "0%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Mridul Saikia",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "Dana White's Contender Series: Season 10, Week 1",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "mridul-saikia",
@@ -46311,7 +46359,17 @@
       "tdAcc": "0%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Bilal Hasan",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "Dana White's Contender Series: Season 10, Week 1",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "tom-pagliarulo",
@@ -46325,7 +46383,17 @@
       "tdAcc": "0%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Ananias Mulumba",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "Dana White's Contender Series: Season 10, Week 1",
+        "round": 3,
+        "time": null
+      }
+    ]
   },
   {
     "id": "ananias-mulumba",
@@ -46339,7 +46407,17 @@
       "tdAcc": "0%",
       "tdDef": "100%",
       "subAvg": "2.1"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Tom Pagliarulo",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "Dana White's Contender Series: Season 10, Week 1",
+        "round": 3,
+        "time": null
+      }
+    ]
   },
   {
     "id": "jon-kunneman",
@@ -46353,7 +46431,17 @@
       "tdAcc": "0%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Joe Kropschot",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "Dana White's Contender Series: Season 10, Week 1",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "joe-kropschot",
@@ -46367,7 +46455,17 @@
       "tdAcc": "0%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Jon Kunneman",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Dana White's Contender Series: Season 10, Week 1",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "liu-ce",

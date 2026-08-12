@@ -11977,7 +11977,7 @@
     "location": "",
     "venue": "",
     "poster": "",
-    "status": "upcoming",
+    "status": "completed",
     "start_time": null,
     "mainCard": [
       {
@@ -11989,7 +11989,10 @@
         "ranked": false,
         "slot": "main",
         "imgA": "",
-        "imgB": ""
+        "imgB": "",
+        "winner": "Anthony Wint",
+        "method": "KO/TKO",
+        "round": 1
       },
       {
         "a": "Fabrizio Escarrega",
@@ -12000,7 +12003,9 @@
         "ranked": false,
         "slot": "comain",
         "imgA": "",
-        "imgB": ""
+        "imgB": "",
+        "winner": "Abe Alsaghir",
+        "method": "DEC"
       },
       {
         "a": "Bilal Hasan",
@@ -12011,7 +12016,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "",
-        "imgB": ""
+        "imgB": "",
+        "winner": "Bilal Hasan",
+        "method": "KO/TKO",
+        "round": 1
       },
       {
         "a": "Tom Pagliarulo",
@@ -12022,7 +12030,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "",
-        "imgB": ""
+        "imgB": "",
+        "winner": "Tom Pagliarulo",
+        "method": "KO/TKO",
+        "round": 3
       },
       {
         "a": "Jon Kunneman",
@@ -12033,7 +12044,9 @@
         "ranked": false,
         "slot": "",
         "imgA": "",
-        "imgB": ""
+        "imgB": "",
+        "winner": "Joe Kropschot",
+        "method": "DEC"
       }
     ],
     "prelims": [],
