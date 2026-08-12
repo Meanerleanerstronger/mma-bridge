@@ -11969,6 +11969,90 @@
     ]
   },
   {
+    "id": "dana-white-s-contender-series-season-10-week-1",
+    "name": "Dana White's Contender Series: Season 10, Week 1",
+    "type": "FIGHT NIGHT",
+    "date": "Tue, Aug 11, 2026",
+    "isoDate": "2026-08-11",
+    "location": "",
+    "venue": "",
+    "poster": "",
+    "status": "completed",
+    "start_time": null,
+    "mainCard": [
+      {
+        "a": "Anthony Wint",
+        "b": "Matt Adams",
+        "weight": "Heavyweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "main",
+        "imgA": "",
+        "imgB": "",
+        "winner": "Anthony Wint",
+        "method": "KO/TKO",
+        "round": 1
+      },
+      {
+        "a": "Fabrizio Escarrega",
+        "b": "Abe Alsaghir",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "comain",
+        "imgA": "",
+        "imgB": "",
+        "winner": "Abe Alsaghir",
+        "method": "DEC"
+      },
+      {
+        "a": "Bilal Hasan",
+        "b": "Mridul Saikia",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "",
+        "winner": "Bilal Hasan",
+        "method": "KO/TKO",
+        "round": 1
+      },
+      {
+        "a": "Tom Pagliarulo",
+        "b": "Ananias Mulumba",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "",
+        "winner": "Tom Pagliarulo",
+        "method": "KO/TKO",
+        "round": 3
+      },
+      {
+        "a": "Jon Kunneman",
+        "b": "Joe Kropschot",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "",
+        "winner": "Joe Kropschot",
+        "method": "DEC"
+      }
+    ],
+    "prelims": [],
+    "earlyPrelims": []
+  },
+  {
     "id": "ufc-330-makhachev-vs-machado-garry",
     "name": "UFC 330: Makhachev vs. Garry",
     "type": "PPV",
@@ -12286,17 +12370,6 @@
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/PEREZ_ALEX_L_05-30.png"
       },
       {
-        "a": "Ce Liu",
-        "b": "Junior Tafa",
-        "weight": "Light Heavyweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": true,
-        "slot": "",
-        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/TAFA_JUNIOR_L_05-02.png"
-      },
-      {
         "a": "Aoriqileng",
         "b": "Kai Asakura",
         "weight": "Bantamweight",
@@ -12317,6 +12390,17 @@
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-01/BATBAYAR_NAMSRAI_R_01-31.png?itok=cka0z5KF",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/LIMA_ANDRE_L_06-20.png"
+      },
+      {
+        "a": "Liu Ce",
+        "b": "Junior Tafa",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/TAFA_JUNIOR_L_05-02.png"
       }
     ],
     "prelims": [
@@ -12361,6 +12445,12 @@
         "b": "TBA",
         "reason": "removed from the card",
         "droppedAt": "2026-08-07T00:50:47.167Z"
+      },
+      {
+        "a": "Ce Liu",
+        "b": "Junior Tafa",
+        "reason": "removed from the card",
+        "droppedAt": "2026-08-11T08:45:07.417Z"
       }
     ]
   },

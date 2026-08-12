@@ -46165,5 +46165,349 @@
         "time": null
       }
     ]
+  },
+  {
+    "id": "anthony-wint",
+    "name": "Anthony Wint",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "record": {
+      "wins": 7,
+      "losses": 0,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Matt Adams",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "Dana White's Contender Series: Season 10, Week 1",
+        "round": 1,
+        "time": null
+      },
+      {
+        "opponent": "Matt Adams",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Dana White's Contender Series season 10#Week 1 – August 11",
+        "round": 1,
+        "time": "0:34"
+      },
+      {
+        "opponent": "Jamahl Tatum",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Fury FC 117",
+        "round": 1,
+        "time": "0:37"
+      },
+      {
+        "opponent": "Miles Banks",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "Fury Challenger Series 15",
+        "round": 1,
+        "time": "0:31"
+      },
+      {
+        "opponent": "Emmanuel Verdier",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Xtreme Fighting Championships#XFC Young Guns 9 & 10",
+        "round": 3,
+        "time": "4:02"
+      },
+      {
+        "opponent": "Omar El-Sahlah",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "Fury FC 103",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Jawaski Bethly",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "Double Down FC 1",
+        "round": 1,
+        "time": "0:41"
+      },
+      {
+        "opponent": "Luis Alfonso Garcia Diaz",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Titan FC 81",
+        "round": 2,
+        "time": "3:12"
+      }
+    ]
+  },
+  {
+    "id": "matt-adams",
+    "name": "Matt Adams",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "last5": [
+      {
+        "opponent": "Anthony Wint",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "Dana White's Contender Series: Season 10, Week 1",
+        "round": 1,
+        "time": null
+      }
+    ]
+  },
+  {
+    "id": "fabrizio-escarrega",
+    "name": "Fabrizio Escarrega",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "last5": [
+      {
+        "opponent": "Abe Alsaghir",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "Dana White's Contender Series: Season 10, Week 1",
+        "round": null,
+        "time": null
+      }
+    ]
+  },
+  {
+    "id": "abe-alsaghir",
+    "name": "Abe Alsaghir",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "last5": [
+      {
+        "opponent": "Fabrizio Escarrega",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Dana White's Contender Series: Season 10, Week 1",
+        "round": null,
+        "time": null
+      }
+    ]
+  },
+  {
+    "id": "bilal-hasan",
+    "name": "Bilal Hasan",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "last5": [
+      {
+        "opponent": "Mridul Saikia",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "Dana White's Contender Series: Season 10, Week 1",
+        "round": 1,
+        "time": null
+      }
+    ]
+  },
+  {
+    "id": "mridul-saikia",
+    "name": "Mridul Saikia",
+    "stats": {
+      "slpm": "0.91",
+      "strAcc": "28%",
+      "sapm": "2.74",
+      "strDef": "36%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "last5": [
+      {
+        "opponent": "Bilal Hasan",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "Dana White's Contender Series: Season 10, Week 1",
+        "round": 1,
+        "time": null
+      }
+    ]
+  },
+  {
+    "id": "tom-pagliarulo",
+    "name": "Tom Pagliarulo",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "last5": [
+      {
+        "opponent": "Ananias Mulumba",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "Dana White's Contender Series: Season 10, Week 1",
+        "round": 3,
+        "time": null
+      }
+    ]
+  },
+  {
+    "id": "ananias-mulumba",
+    "name": "Ananias Mulumba",
+    "stats": {
+      "slpm": "6.10",
+      "strAcc": "44%",
+      "sapm": "5.96",
+      "strDef": "52%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "100%",
+      "subAvg": "2.1"
+    },
+    "last5": [
+      {
+        "opponent": "Tom Pagliarulo",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "Dana White's Contender Series: Season 10, Week 1",
+        "round": 3,
+        "time": null
+      }
+    ]
+  },
+  {
+    "id": "jon-kunneman",
+    "name": "Jon Kunneman",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "last5": [
+      {
+        "opponent": "Joe Kropschot",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "Dana White's Contender Series: Season 10, Week 1",
+        "round": null,
+        "time": null
+      }
+    ]
+  },
+  {
+    "id": "joe-kropschot",
+    "name": "Joe Kropschot",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "last5": [
+      {
+        "opponent": "Jon Kunneman",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Dana White's Contender Series: Season 10, Week 1",
+        "round": null,
+        "time": null
+      }
+    ]
+  },
+  {
+    "id": "liu-ce",
+    "name": "Liu Ce",
+    "record": {
+      "wins": 3,
+      "losses": 1,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Igor Barabanov",
+        "result": "W",
+        "method": "TKO (leg kicks and punches)",
+        "event": "WLF W.A.R.S. 94",
+        "round": 1,
+        "time": "4:56"
+      },
+      {
+        "opponent": "Ivan Gnizditskiy",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "Happy Elephant MMA Champions League 11",
+        "round": 2,
+        "time": "1:55"
+      },
+      {
+        "opponent": "Batjargal Munkh-Erdene",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "WLF W.A.R.S. 65",
+        "round": 2,
+        "time": "1:07"
+      },
+      {
+        "opponent": "Yu Haiming",
+        "result": "W",
+        "method": "KO (punch and head kick)",
+        "event": "WLF W.A.R.S. 64",
+        "round": 1,
+        "time": "1:11"
+      }
+    ]
   }
 ]
