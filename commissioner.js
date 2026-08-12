@@ -32,13 +32,12 @@
   }
 
   function eventTypeOf(e) {
-    if (/contender series/i.test(e.name || '')) return 'dwcs';
     if (e.type === 'PPV') return 'ppv';
     if (e.type === 'FIGHT NIGHT') return 'fightnight';
     return null;
   }
   function eventTypeLabel(t) {
-    return t === 'ppv' ? 'PPV' : t === 'fightnight' ? 'Fight Night' : t === 'dwcs' ? 'Contender Series' : '';
+    return t === 'ppv' ? 'PPV' : t === 'fightnight' ? 'Fight Night' : '';
   }
 
   root.innerHTML = `
@@ -176,7 +175,6 @@
           <div class="lb-evtype-row">
             <label class="lb-evtype-opt"><input type="checkbox" id="cxTypePpv" ${eventTypes.includes('ppv') ? 'checked' : ''}> <span>PPV <em>(UFC 333, etc.)</em></span></label>
             <label class="lb-evtype-opt"><input type="checkbox" id="cxTypeFn" ${eventTypes.includes('fightnight') ? 'checked' : ''}> <span>Fight Night</span></label>
-            <label class="lb-evtype-opt"><input type="checkbox" id="cxTypeDwcs" ${eventTypes.includes('dwcs') ? 'checked' : ''}> <span>Contender Series</span></label>
           </div>
           <button class="cx-primary-btn" id="cxSaveTypes">Save Event Types</button>
         </section>
@@ -310,7 +308,6 @@
       eventTypes = [
         document.getElementById('cxTypePpv')?.checked  ? 'ppv'  : null,
         document.getElementById('cxTypeFn')?.checked   ? 'fightnight' : null,
-        document.getElementById('cxTypeDwcs')?.checked ? 'dwcs' : null,
       ].filter(Boolean);
       if (!eventTypes.length) eventTypes = ['ppv', 'fightnight'];
       await updateGroupAll({ group_event_types: JSON.stringify(eventTypes) });

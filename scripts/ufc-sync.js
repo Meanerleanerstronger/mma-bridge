@@ -377,6 +377,14 @@ async function main() {
   console.log(`ESPN returned ${espnEvents.length} events\n`);
 
   for (const espnEv of espnEvents) {
+    // Dana White's Contender Series is deliberately not tracked — decided
+    // it's not worth covering (no picks/reviews/leaderboard value the way
+    // PPV/Fight Night cards have), and its ESPN feed entries were also the
+    // source of a repeated runaway-duplication bug (500+ phantom fight
+    // entries on a single event, several times). Skip before any of the
+    // new-event/results/poster logic below even looks at it.
+    if (/contender series/i.test(espnEv.name || '')) continue;
+
     const isCompleted = espnEv.status?.type?.completed === true;
     const espnDate    = (espnEv.date || '').slice(0, 10);
     const ourEv       = findOurEvent(espnEv, ourEvents);

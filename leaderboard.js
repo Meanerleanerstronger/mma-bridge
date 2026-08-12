@@ -171,7 +171,6 @@
           <div class="lb-evtype-row">
             <label class="lb-evtype-opt"><input type="checkbox" id="evtypePpv" checked> <span>PPV <em>(UFC 333, etc.)</em></span></label>
             <label class="lb-evtype-opt"><input type="checkbox" id="evtypeFn" checked> <span>Fight Night</span></label>
-            <label class="lb-evtype-opt"><input type="checkbox" id="evtypeDwcs"> <span>Contender Series</span></label>
           </div>
           <button class="lb-modal-submit" id="submitCreate">Create Group</button>
           <div class="lb-modal-err" id="createErr"></div>
@@ -209,11 +208,8 @@
   // Points system
   const POINTS = { WINNER: 10, METHOD: 5, ROUND: 5, FOTN: 15 };
 
-  // Classify an event for the group event-type filter. Contender Series
-  // events are stored with type:'FIGHT NIGHT' just like regular Fight
-  // Nights (no dedicated type field), so it's detected by name.
+  // Classify an event for the group event-type filter.
   function eventTypeOf(e) {
-    if (/contender series/i.test(e.name || '')) return 'dwcs';
     if (e.type === 'PPV') return 'ppv';
     if (e.type === 'FIGHT NIGHT') return 'fightnight';
     return null;
@@ -1252,7 +1248,6 @@
         const eventTypes = [
           document.getElementById('evtypePpv')?.checked  ? 'ppv'  : null,
           document.getElementById('evtypeFn')?.checked   ? 'fightnight' : null,
-          document.getElementById('evtypeDwcs')?.checked ? 'dwcs' : null,
         ].filter(Boolean);
         const { error } = await sb.from('profiles').update({
           group_code: code, group_name: name, group_is_owner: true,
