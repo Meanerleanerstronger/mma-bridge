@@ -12740,5 +12740,54 @@
         "imgB": ""
       }
     ]
+  },
+  {
+    "id": "ufc-332",
+    "name": "UFC 332",
+    "type": "PPV",
+    "date": "Sat, Oct 3, 2026",
+    "isoDate": "2026-10-03",
+    "location": "",
+    "venue": "",
+    "poster": "",
+    "status": "upcoming",
+    "start_time": null,
+    "mainCard": [
+      {
+        "a": "Opponent TBA",
+        "b": "TBA",
+        "weight": "",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "main",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Opponent TBA",
+        "b": "TBA",
+        "weight": "",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "comain",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Opponent TBA",
+        "b": "TBA",
+        "weight": "",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
+    "prelims": [],
+    "earlyPrelims": []
   }
 ]
