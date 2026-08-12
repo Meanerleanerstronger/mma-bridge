@@ -46178,7 +46178,70 @@
       "tdAcc": "0%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "record": {
+      "wins": 7,
+      "losses": 0,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Matt Adams",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Dana White's Contender Series season 10#Week 1 – August 11",
+        "round": 1,
+        "time": "0:34"
+      },
+      {
+        "opponent": "Jamahl Tatum",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Fury FC 117",
+        "round": 1,
+        "time": "0:37"
+      },
+      {
+        "opponent": "Miles Banks",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "Fury Challenger Series 15",
+        "round": 1,
+        "time": "0:31"
+      },
+      {
+        "opponent": "Emmanuel Verdier",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Xtreme Fighting Championships#XFC Young Guns 9 & 10",
+        "round": 3,
+        "time": "4:02"
+      },
+      {
+        "opponent": "Omar El-Sahlah",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "Fury FC 103",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Jawaski Bethly",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "Double Down FC 1",
+        "round": 1,
+        "time": "0:41"
+      },
+      {
+        "opponent": "Luis Alfonso Garcia Diaz",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Titan FC 81",
+        "round": 2,
+        "time": "3:12"
+      }
+    ]
   },
   {
     "id": "matt-adams",
@@ -46305,5 +46368,48 @@
       "tdDef": "0%",
       "subAvg": "0.0"
     }
+  },
+  {
+    "id": "liu-ce",
+    "name": "Liu Ce",
+    "record": {
+      "wins": 3,
+      "losses": 1,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Igor Barabanov",
+        "result": "W",
+        "method": "TKO (leg kicks and punches)",
+        "event": "WLF W.A.R.S. 94",
+        "round": 1,
+        "time": "4:56"
+      },
+      {
+        "opponent": "Ivan Gnizditskiy",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "Happy Elephant MMA Champions League 11",
+        "round": 2,
+        "time": "1:55"
+      },
+      {
+        "opponent": "Batjargal Munkh-Erdene",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "WLF W.A.R.S. 65",
+        "round": 2,
+        "time": "1:07"
+      },
+      {
+        "opponent": "Yu Haiming",
+        "result": "W",
+        "method": "KO (punch and head kick)",
+        "event": "WLF W.A.R.S. 64",
+        "round": 1,
+        "time": "1:11"
+      }
+    ]
   }
 ]
