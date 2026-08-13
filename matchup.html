@@ -947,10 +947,13 @@
     <span id="muBackLabel">Back</span>
   </a>
 
+  <!-- Poster/Classic switching is admin-only now (driven by ?poster=1 /
+       ?classic=1 from admin.html's Dream H2H generator) — this bar stays
+       hidden on the public page since there's nothing left to switch
+       between. The "full" button is kept (never shown) so setView()'s
+       querySelectorAll has something to operate on. -->
   <div class="mu-view-toggle" id="muViewToggle" style="display:none">
     <button class="mu-view-btn active" data-view="full" type="button">Full</button>
-    <button class="mu-view-btn" data-view="poster" type="button">Poster</button>
-    <button class="mu-view-btn" data-view="classic" type="button">Classic</button>
   </div>
 
   <div class="mu-poster-controls">
@@ -1382,7 +1385,9 @@
       const viewToggle  = document.getElementById('muViewToggle');
       const posterExit  = document.getElementById('muPosterExit');
       const posterTheme = document.getElementById('muPosterTheme');
-      viewToggle.style.display = 'inline-flex';
+      // Deliberately not unhiding viewToggle here — Poster/Classic are
+      // admin.html-only now, reached via ?poster=1/?classic=1, not a
+      // visible button on the public page (see the div's own comment).
 
       function setView(view) {
         document.body.classList.toggle('mu-poster-mode', view === 'poster');
