@@ -46885,7 +46885,10 @@
       "tdAcc": "0%",
       "tdDef": "50%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "6'7\"",
+    "reach": "84.0\"",
+    "weightClass": "Heavyweight"
   },
   {
     "id": "joel-lvarez",
@@ -46988,7 +46991,9 @@
       "tdDef": "46%",
       "subAvg": "1.1"
     },
-    "nickname": "El Fenomeno"
+    "nickname": "El Fenomeno",
+    "height": "6'3\"",
+    "reach": "77.0\""
   },
   {
     "id": "marlon-vera",
@@ -47091,7 +47096,9 @@
         "time": "5:00"
       }
     ],
-    "nickname": "Chito"
+    "nickname": "Chito",
+    "height": "5'8\"",
+    "reach": "70.5\""
   },
   {
     "id": "eduarda-moura",
@@ -47112,7 +47119,10 @@
       "losses": 2,
       "draws": 0
     },
-    "nickname": "Ronda"
+    "nickname": "Ronda",
+    "height": "5'6\"",
+    "reach": "67.0\"",
+    "weightClass": "Women's Flyweight"
   },
   {
     "id": "joosang-yoo",
@@ -47126,7 +47136,15 @@
       "tdAcc": "0%",
       "tdDef": "50%",
       "subAvg": "0.0"
-    }
+    },
+    "nickname": "Zombie Jr.",
+    "record": {
+      "wins": 9,
+      "losses": 1,
+      "draws": 0
+    },
+    "weightClass": "Featherweight",
+    "height": "5'7\""
   },
   {
     "id": "michael-aswell",
@@ -47137,7 +47155,10 @@
       "losses": 5,
       "draws": 0
     },
-    "nickname": "The Texas Kid"
+    "nickname": "The Texas Kid",
+    "height": "5'8\"",
+    "reach": "69.0\"",
+    "weightClass": "Featherweight"
   },
   {
     "id": "sean-woodson",
@@ -47240,7 +47261,10 @@
       "tdDef": "84%",
       "subAvg": "0.3"
     },
-    "nickname": "The Sniper"
+    "nickname": "The Sniper",
+    "height": "6'2.5\"",
+    "reach": "78.0\"",
+    "weightClass": "Featherweight"
   },
   {
     "id": "lucas-fernando",
@@ -47257,10 +47281,13 @@
       "subAvg": "1.0"
     },
     "record": {
-      "wins": 0,
-      "losses": 1,
+      "wins": 13,
+      "losses": 3,
       "draws": 0
-    }
+    },
+    "height": "6'3\"",
+    "reach": "80.0\"",
+    "weightClass": "Light Heavyweight"
   },
   {
     "id": "namsrai-batbayar",
@@ -47281,7 +47308,8 @@
       "losses": 1,
       "draws": 0
     },
-    "nickname": "Steppe Warrior"
+    "nickname": "Steppe Warrior",
+    "weightClass": "Flyweight"
   },
   {
     "id": "jack-jenkins",
@@ -47302,7 +47330,10 @@
       "losses": 4,
       "draws": 0
     },
-    "nickname": "Phar"
+    "nickname": "Phar",
+    "height": "5'7\"",
+    "reach": "68.0\"",
+    "weightClass": "Featherweight"
   },
   {
     "id": "miles-johns",
@@ -47413,7 +47444,10 @@
       "tdDef": "77%",
       "subAvg": "0.0"
     },
-    "nickname": "Chapo"
+    "nickname": "Chapo",
+    "height": "5'7\"",
+    "reach": "68.0\"",
+    "weightClass": "Bantamweight"
   },
   {
     "id": "manoel-sousa",
@@ -47444,7 +47478,10 @@
       "losses": 1,
       "draws": 0
     },
-    "nickname": "Manumito"
+    "nickname": "Manumito",
+    "height": "5'9\"",
+    "reach": "70.0\"",
+    "weightClass": "Lightweight"
   },
   {
     "id": "richie-miranda",
@@ -47475,7 +47512,10 @@
       "losses": 2,
       "draws": 0
     },
-    "nickname": "El Machete"
+    "nickname": "El Machete",
+    "height": "5'8\"",
+    "reach": "75.0\"",
+    "weightClass": "Lightweight"
   },
   {
     "id": "gianni-vazquez",
@@ -47506,7 +47546,10 @@
       "losses": 6,
       "draws": 1
     },
-    "nickname": "Kriptonita"
+    "nickname": "Kriptonita",
+    "height": "5'7\"",
+    "reach": "71.0\"",
+    "weightClass": "Bantamweight"
   },
   {
     "id": "gigi-canuto",
@@ -47537,7 +47580,10 @@
       "losses": 2,
       "draws": 0
     },
-    "nickname": "Diamond"
+    "nickname": "Diamond",
+    "height": "5'2.5\"",
+    "reach": "64.0\"",
+    "weightClass": "Women's Strawweight"
   },
   {
     "id": "carol-foro",
@@ -47568,7 +47614,10 @@
       "losses": 1,
       "draws": 0
     },
-    "nickname": "Anabelle"
+    "nickname": "Anabelle",
+    "height": "5'2\"",
+    "reach": "61.5\"",
+    "weightClass": "Women's Strawweight"
   },
   {
     "id": "anthony-wint",
