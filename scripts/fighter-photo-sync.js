@@ -14,6 +14,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname      = path.dirname(fileURLToPath(import.meta.url));
 const FIGHTERS_PATH  = path.join(__dirname, '..', 'data', 'fighters.json');
+const FIGHTERS_ROOT  = path.join(__dirname, '..', 'fighters.json');
 const EVENTS_PATH    = path.join(__dirname, '..', 'data', 'events.json');
 const DELAY_MS       = 600;
 
@@ -94,6 +95,7 @@ async function run() {
     if (img) { fighter.img = img; console.log(`✅ ${fighter.name} -> ${img}`); }
     else      { console.warn(`⚠️  Could not find photo for ${fighter.name}`); }
     fs.writeFileSync(FIGHTERS_PATH, JSON.stringify(fighters, null, 2));
+    fs.writeFileSync(FIGHTERS_ROOT, JSON.stringify(fighters, null, 2));
     return;
   }
 
@@ -155,6 +157,7 @@ async function run() {
   }
 
   fs.writeFileSync(FIGHTERS_PATH, JSON.stringify(fighters, null, 2));
+  fs.writeFileSync(FIGHTERS_ROOT, JSON.stringify(fighters, null, 2));
   console.log(`\n✅ Done. Updated ${updated}/${todo.length} fighters.`);
 }
 
