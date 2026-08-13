@@ -20510,7 +20510,11 @@
       "tdDef": "63%",
       "subAvg": "0.7"
     },
-    "stance": "Southpaw"
+    "stance": "Southpaw",
+    "weightClass": "Women's Strawweight",
+    "height": "5'4\"",
+    "reach": "65\"",
+    "nickname": "Amandinha"
   },
   {
     "id": "zach-reese",
@@ -20613,7 +20617,10 @@
       "tdAcc": "61%",
       "tdDef": "52%",
       "subAvg": "1.2"
-    }
+    },
+    "weightClass": "Middleweight",
+    "height": "6'4\"",
+    "reach": "77\""
   },
   {
     "id": "sedriques-dumas",
@@ -20668,7 +20675,10 @@
       "tdAcc": "31%",
       "tdDef": "33%",
       "subAvg": "0.2"
-    }
+    },
+    "weightClass": "Middleweight",
+    "height": "6'2\"",
+    "reach": "79\""
   },
   {
     "id": "jesus-aguilar",
@@ -20706,7 +20716,10 @@
       "tdAcc": "29%",
       "tdDef": "45%",
       "subAvg": "1.1"
-    }
+    },
+    "weightClass": "Flyweight",
+    "height": "5'4\"",
+    "reach": "62.5\""
   },
   {
     "id": "luis-gurule",
@@ -20761,7 +20774,10 @@
       "tdAcc": "15%",
       "tdDef": "60%",
       "subAvg": "0.2"
-    }
+    },
+    "weightClass": "Flyweight",
+    "height": "5'5\"",
+    "reach": "64\""
   },
   {
     "id": "alden-coria",
@@ -20800,7 +20816,10 @@
       "tdAcc": "54%",
       "tdDef": "56%",
       "subAvg": "1.5"
-    }
+    },
+    "weightClass": "Flyweight",
+    "height": "5'8\"",
+    "reach": "67\""
   },
   {
     "id": "alessandro-costa",
@@ -20855,7 +20874,10 @@
       "tdAcc": "26%",
       "tdDef": "87%",
       "subAvg": "0.7"
-    }
+    },
+    "weightClass": "Flyweight",
+    "height": "5'4\"",
+    "reach": "67\""
   },
   {
     "id": "reinier-de-ridder",
@@ -20966,7 +20988,10 @@
       "tdAcc": "29%",
       "tdDef": "40%",
       "subAvg": "0.6"
-    }
+    },
+    "weightClass": "Light Heavyweight",
+    "height": "6'4\"",
+    "reach": "78\""
   },
   {
     "id": "raul-rosas-jr",
@@ -21069,7 +21094,11 @@
       "tdAcc": "54%",
       "tdDef": "25%",
       "subAvg": "0.9"
-    }
+    },
+    "weightClass": "Bantamweight",
+    "height": "5'9\"",
+    "reach": "67\"",
+    "stance": "Southpaw"
   },
   {
     "id": "rob-font",
@@ -21179,7 +21208,11 @@
       "tdAcc": "29%",
       "tdDef": "37%",
       "subAvg": "0.3"
-    }
+    },
+    "weightClass": "Bantamweight",
+    "height": "5'8\"",
+    "reach": "71.5\"",
+    "stance": "Orthodox"
   },
   {
     "id": "michael-johnson",
@@ -21290,7 +21323,11 @@
       "tdAcc": "38%",
       "tdDef": "81%",
       "subAvg": "0.0"
-    }
+    },
+    "weightClass": "Lightweight",
+    "height": "5'10\"",
+    "reach": "73\"",
+    "stance": "Southpaw"
   },
   {
     "id": "gregory-rodrigues",
@@ -21393,7 +21430,10 @@
       "tdAcc": "34%",
       "tdDef": "75%",
       "subAvg": "0.4"
-    }
+    },
+    "weightClass": "Middleweight",
+    "height": "6'3\"",
+    "reach": "75\""
   },
   {
     "id": "brunno-ferreira",
@@ -21432,7 +21472,10 @@
       "tdAcc": "22%",
       "tdDef": "50%",
       "subAvg": "0.6"
-    }
+    },
+    "weightClass": "Middleweight",
+    "height": "5'10\"",
+    "reach": "72\""
   },
   {
     "id": "long-xiao",
@@ -21446,7 +21489,15 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "weightClass": "Bantamweight",
+    "height": "5'8\"",
+    "reach": "70\"",
+    "record": {
+      "wins": 27,
+      "losses": 11,
+      "draws": 0
+    }
   },
   {
     "id": "donte-johnson",
@@ -21477,7 +21528,10 @@
       "tdAcc": "100%",
       "tdDef": "75%",
       "subAvg": "0.7"
-    }
+    },
+    "weightClass": "Middleweight",
+    "height": "5'8\"",
+    "reach": "74\""
   },
   {
     "id": "alberto-montes",
@@ -21508,7 +21562,10 @@
       "tdAcc": "0%",
       "tdDef": "77%",
       "subAvg": "3.4"
-    }
+    },
+    "weightClass": "Featherweight",
+    "height": "5'7\"",
+    "reach": "69\""
   },
   {
     "id": "niko-price",
@@ -21619,7 +21676,10 @@
       "tdAcc": "30%",
       "tdDef": "50%",
       "subAvg": "0.6"
-    }
+    },
+    "weightClass": "Welterweight",
+    "height": "6'0\"",
+    "reach": "76\""
   },
   {
     "id": "themba-gorimbo",
@@ -21738,7 +21798,10 @@
       "tdAcc": "62%",
       "tdDef": "73%",
       "subAvg": "0.4"
-    }
+    },
+    "weightClass": "Welterweight",
+    "height": "6'1\"",
+    "reach": "77\""
   },
   {
     "id": "bogdan-guskov",
@@ -21857,7 +21920,10 @@
       "tdAcc": "0%",
       "tdDef": "57%",
       "subAvg": "0.7"
-    }
+    },
+    "weightClass": "Light Heavyweight",
+    "height": "6'3\"",
+    "reach": "76\""
   },
   {
     "id": "nurullo-aliev",
@@ -22924,7 +22990,10 @@
       "tdAcc": "8%",
       "tdDef": "100%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "5'6\"",
+    "reach": "65.0\"",
+    "weightClass": "Women's Strawweight"
   },
   {
     "id": "rossana-oliveira",
@@ -23685,7 +23754,9 @@
       "tdAcc": "23%",
       "tdDef": "66%",
       "subAvg": "0.5"
-    }
+    },
+    "height": "5'11\"",
+    "reach": "71.0\""
   },
   {
     "id": "ignacio-bahamondes",
@@ -23796,7 +23867,10 @@
       "tdAcc": "0%",
       "tdDef": "70%",
       "subAvg": "0.6"
-    }
+    },
+    "height": "6'3\"",
+    "reach": "75.0\"",
+    "weightClass": "Lightweight"
   },
   {
     "id": "tofiq-musayev",
@@ -23906,7 +23980,11 @@
       "tdAcc": "60%",
       "tdDef": "50%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "5'10\"",
+    "reach": "72.0\"",
+    "weightClass": "Lightweight",
+    "nickname": ""
   },
   {
     "id": "chase-hooper",
@@ -24009,7 +24087,10 @@
       "tdAcc": "32%",
       "tdDef": "55%",
       "subAvg": "2.2"
-    }
+    },
+    "height": "6'1\"",
+    "reach": "75.5\"",
+    "weightClass": "Lightweight"
   },
   {
     "id": "lance-gibson-jr",
@@ -24231,7 +24312,9 @@
       "tdAcc": "33%",
       "tdDef": "70%",
       "subAvg": "0.1"
-    }
+    },
+    "height": "6'3\"",
+    "reach": "78.0\""
   },
   {
     "id": "casey-oneill",
@@ -24342,7 +24425,10 @@
       "tdAcc": "34%",
       "tdDef": "70%",
       "subAvg": "0.7"
-    }
+    },
+    "height": "5'6\"",
+    "reach": "69.0\"",
+    "weightClass": "Women's Flyweight"
   },
   {
     "id": "gabriella-fernandes",
@@ -24382,7 +24468,10 @@
       "tdDef": "68%",
       "subAvg": "0.2"
     },
-    "stance": "Southpaw"
+    "stance": "Southpaw",
+    "height": "5'6\"",
+    "reach": "66.0\"",
+    "weightClass": "Women's Flyweight"
   },
   {
     "id": "bruno-lopes",
@@ -24509,7 +24598,10 @@
       "tdAcc": "21%",
       "tdDef": "100%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "6'2\"",
+    "reach": "74.5\"",
+    "weightClass": "Light Heavyweight"
   },
   {
     "id": "tabatha-ricci",
@@ -24612,7 +24704,10 @@
       "tdAcc": "34%",
       "tdDef": "54%",
       "subAvg": "0.1"
-    }
+    },
+    "height": "5'1\"",
+    "reach": "61.0\"",
+    "weightClass": "Women's Strawweight"
   },
   {
     "id": "abdul-rakhman-yakhyaev",
@@ -24673,7 +24768,10 @@
       "tdAcc": "42%",
       "tdDef": "21%",
       "subAvg": "0.6"
-    }
+    },
+    "height": "6'3\"",
+    "reach": "81.0\"",
+    "weightClass": "Light Heavyweight"
   },
   {
     "id": "rafael-estevam",
@@ -24704,7 +24802,10 @@
       "tdAcc": "33%",
       "tdDef": "66%",
       "subAvg": "0.2"
-    }
+    },
+    "height": "5'8\"",
+    "reach": "69.0\"",
+    "weightClass": "Flyweight"
   },
   {
     "id": "tommy-mcmillen",
@@ -24735,7 +24836,10 @@
       "tdAcc": "0%",
       "tdDef": "83%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "6'0\"",
+    "reach": "74.0\"",
+    "weightClass": "Featherweight"
   },
   {
     "id": "manolo-zecchini",
@@ -24766,7 +24870,10 @@
       "tdAcc": "0%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "5'8\"",
+    "reach": "68.0\"",
+    "weightClass": "Featherweight"
   },
   {
     "id": "jose-delano",
@@ -24796,7 +24903,10 @@
       "tdAcc": "0%",
       "tdDef": "75%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "5'8\"",
+    "reach": "70.5\"",
+    "weightClass": "Featherweight"
   },
   {
     "id": "robert-ruchala",
@@ -24907,7 +25017,9 @@
       "tdAcc": "22%",
       "tdDef": "71%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "5'10\"",
+    "weightClass": "Featherweight"
   },
   {
     "id": "thomas-petersen",
@@ -24946,7 +25058,10 @@
       "tdAcc": "43%",
       "tdDef": "87%",
       "subAvg": "0.4"
-    }
+    },
+    "height": "6'1\"",
+    "reach": "74.0\"",
+    "weightClass": "Heavyweight"
   },
   {
     "id": "guilherme-pat",
@@ -24985,7 +25100,10 @@
       "tdAcc": "0%",
       "tdDef": "100%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "6'6\"",
+    "reach": "81.0\"",
+    "weightClass": "Heavyweight"
   },
   {
     "id": "stewart-nicoll",
@@ -25016,7 +25134,10 @@
       "tdAcc": "22%",
       "tdDef": "33%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "5'5\"",
+    "reach": "65.5\"",
+    "weightClass": "Flyweight"
   },
   {
     "id": "darrius-flowers",
@@ -26542,7 +26663,8 @@
     },
     "height": "6'3\"",
     "reach": "81\"",
-    "weightClass": "Welterweight"
+    "weightClass": "Welterweight",
+    "stance": "Orthodox"
   },
   {
     "id": "randy-brown",
@@ -27117,7 +27239,10 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "height": "5'9\"",
+    "reach": "74.0\"",
+    "weightClass": "Lightweight"
   },
   {
     "id": "marquel-mederos",
@@ -27137,7 +27262,10 @@
       "tdAcc": "8%",
       "tdDef": "82%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "5'10\"",
+    "reach": "69.5\"",
+    "weightClass": "Lightweight"
   },
   {
     "id": "vicente-luque",
@@ -27248,7 +27376,10 @@
       "tdAcc": "48%",
       "tdDef": "59%",
       "subAvg": "0.7"
-    }
+    },
+    "height": "5'11\"",
+    "reach": "75.5\"",
+    "weightClass": "Middleweight"
   },
   {
     "id": "charles-radtke",
@@ -27295,7 +27426,10 @@
       "tdAcc": "44%",
       "tdDef": "100%",
       "subAvg": "0.5"
-    }
+    },
+    "height": "5'9\"",
+    "reach": "72.0\"",
+    "weightClass": "Welterweight"
   },
   {
     "id": "francisco-prado",
@@ -27333,7 +27467,10 @@
       "tdAcc": "19%",
       "tdDef": "40%",
       "subAvg": "0.8"
-    }
+    },
+    "height": "5'10\"",
+    "reach": "69.0\"",
+    "weightClass": "Welterweight"
   },
   {
     "id": "mike-malott",
@@ -27436,7 +27573,10 @@
       "tdAcc": "50%",
       "tdDef": "57%",
       "subAvg": "0.7"
-    }
+    },
+    "height": "6'1\"",
+    "reach": "73.0\"",
+    "weightClass": "Welterweight"
   },
   {
     "id": "charles-jourdain",
@@ -27555,7 +27695,10 @@
       "tdAcc": "21%",
       "tdDef": "46%",
       "subAvg": "0.6"
-    }
+    },
+    "height": "5'9\"",
+    "reach": "69.0\"",
+    "weightClass": "Bantamweight"
   },
   {
     "id": "kyler-phillips",
@@ -27658,7 +27801,10 @@
       "tdAcc": "47%",
       "tdDef": "75%",
       "subAvg": "0.3"
-    }
+    },
+    "height": "5'8\"",
+    "reach": "72.0\"",
+    "weightClass": "Bantamweight"
   },
   {
     "id": "jai-herbert",
@@ -27761,7 +27907,11 @@
       "tdAcc": "21%",
       "tdDef": "66%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "6'1\"",
+    "reach": "77.0\"",
+    "weightClass": "Lightweight",
+    "stance": "Orthodox"
   },
   {
     "id": "mandel-nallo",
@@ -27792,7 +27942,10 @@
       "tdAcc": "0%",
       "tdDef": "100%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "6'0\"",
+    "reach": "75.0\"",
+    "weightClass": "Lightweight"
   },
   {
     "id": "jasmine-jasudavicius",
@@ -27902,7 +28055,10 @@
       "tdAcc": "46%",
       "tdDef": "75%",
       "subAvg": "0.5"
-    }
+    },
+    "height": "5'7\"",
+    "reach": "68.0\"",
+    "weightClass": "Flyweight"
   },
   {
     "id": "karine-silva",
@@ -28013,7 +28169,11 @@
       "tdAcc": "50%",
       "tdDef": "26%",
       "subAvg": "1.6"
-    }
+    },
+    "height": "5'4\"",
+    "reach": "67.0\"",
+    "weightClass": "Flyweight",
+    "stance": "Orthodox"
   },
   {
     "id": "gauge-young",
@@ -28045,7 +28205,10 @@
       "tdDef": "76%",
       "subAvg": "0.0"
     },
-    "stance": "Orthodox"
+    "stance": "Orthodox",
+    "height": "5'9\"",
+    "reach": "70.0\"",
+    "weightClass": "Lightweight"
   },
   {
     "id": "thiago-moises",
@@ -28147,7 +28310,10 @@
       "tdAcc": "29%",
       "tdDef": "52%",
       "subAvg": "1.1"
-    }
+    },
+    "height": "5'9\"",
+    "reach": "70.5\"",
+    "weightClass": "Lightweight"
   },
   {
     "id": "marcio-barbosa",
@@ -28178,7 +28344,10 @@
       "tdAcc": "0%",
       "tdDef": "100%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "5'6\"",
+    "reach": "70.5\"",
+    "weightClass": "Featherweight"
   },
   {
     "id": "dennis-buzukja",
@@ -28218,7 +28387,9 @@
       "tdDef": "75%",
       "subAvg": "0.2"
     },
-    "stance": "Orthodox"
+    "stance": "Orthodox",
+    "height": "5'9\"",
+    "reach": "70.5\""
   },
   {
     "id": "robert-valentin",
@@ -28288,7 +28459,10 @@
       "tdAcc": "0%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "6'2\"",
+    "reach": "74.5\"",
+    "weightClass": "Middleweight"
   },
   {
     "id": "gokhan-saricam",
@@ -28318,7 +28492,10 @@
       "tdAcc": "0%",
       "tdDef": "100%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "6'3\"",
+    "reach": "75.5\"",
+    "weightClass": "Heavyweight"
   },
   {
     "id": "tanner-boser",
@@ -28429,7 +28606,10 @@
       "tdAcc": "0%",
       "tdDef": "69%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "6'2\"",
+    "reach": "75.5\"",
+    "weightClass": "Heavyweight"
   },
   {
     "id": "melissa-croden",
@@ -28460,7 +28640,10 @@
       "tdAcc": "50%",
       "tdDef": "66%",
       "subAvg": "0.3"
-    }
+    },
+    "weightClass": "Women's Bantamweight",
+    "height": "5'9\"",
+    "reach": "68.5\""
   },
   {
     "id": "daria-zheleznyakova",
@@ -28481,7 +28664,10 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "weightClass": "Women's Bantamweight",
+    "height": "5'9\"",
+    "reach": "68\""
   },
   {
     "id": "jj-aldrich",
@@ -28583,7 +28769,10 @@
       "tdAcc": "25%",
       "tdDef": "67%",
       "subAvg": "0.0"
-    }
+    },
+    "weightClass": "Women's Flyweight",
+    "height": "5'5\"",
+    "reach": "67.5\""
   },
   {
     "id": "jamey-lyn-horth",
@@ -28621,7 +28810,10 @@
       "tdAcc": "42%",
       "tdDef": "80%",
       "subAvg": "0.2"
-    }
+    },
+    "weightClass": "Women's Flyweight",
+    "height": "5'7\"",
+    "reach": "66\""
   },
   {
     "id": "john-castaneda",
@@ -28724,7 +28916,11 @@
       "tdAcc": "37%",
       "tdDef": "75%",
       "subAvg": "0.1"
-    }
+    },
+    "weightClass": "Bantamweight",
+    "height": "5'6\"",
+    "reach": "71\"",
+    "stance": "Switch"
   },
   {
     "id": "mark-vologdin",
@@ -28754,7 +28950,10 @@
         "round": 3,
         "time": null
       }
-    ]
+    ],
+    "weightClass": "Bantamweight",
+    "height": "5'3\"",
+    "reach": "65\""
   },
   {
     "id": "john-yannis",
@@ -28792,7 +28991,10 @@
       "tdAcc": "0%",
       "tdDef": "80%",
       "subAvg": "0.0"
-    }
+    },
+    "weightClass": "Bantamweight",
+    "height": "5'7\"",
+    "reach": "70.5\""
   },
   {
     "id": "jamie-siraj",
@@ -28823,7 +29025,10 @@
       "tdAcc": "0%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "weightClass": "Bantamweight",
+    "height": "5'7\"",
+    "reach": "66.5\""
   },
   {
     "id": "aljamain-sterling",
@@ -28927,7 +29132,10 @@
       "tdDef": "44%",
       "subAvg": "0.6"
     },
-    "stance": "Orthodox"
+    "stance": "Orthodox",
+    "weightClass": "Featherweight",
+    "height": "5'7\"",
+    "reach": "71\""
   },
   {
     "id": "youssef-zalal",
@@ -29030,7 +29238,11 @@
       "tdAcc": "31%",
       "tdDef": "55%",
       "subAvg": "1.3"
-    }
+    },
+    "weightClass": "Featherweight",
+    "height": "5'10\"",
+    "reach": "72\"",
+    "stance": "Orthodox"
   },
   {
     "id": "norma-dumont",
@@ -29141,7 +29353,10 @@
       "tdAcc": "54%",
       "tdDef": "71%",
       "subAvg": "0.0"
-    }
+    },
+    "weightClass": "Bantamweight",
+    "height": "5'7\"",
+    "reach": "67\""
   },
   {
     "id": "joselyne-edwards",
@@ -29236,7 +29451,11 @@
       "tdAcc": "36%",
       "tdDef": "62%",
       "subAvg": "0.6"
-    }
+    },
+    "weightClass": "Bantamweight",
+    "height": "5'8\"",
+    "reach": "70\"",
+    "stance": "Orthodox"
   },
   {
     "id": "rafa-garcia",
@@ -29339,7 +29558,10 @@
       "tdAcc": "45%",
       "tdDef": "77%",
       "subAvg": "0.4"
-    }
+    },
+    "weightClass": "Lightweight",
+    "height": "5'7\"",
+    "reach": "70\""
   },
   {
     "id": "alexander-hernandez",
@@ -29450,7 +29672,10 @@
       "tdAcc": "35%",
       "tdDef": "68%",
       "subAvg": "0.1"
-    }
+    },
+    "weightClass": "Lightweight",
+    "height": "5'9\"",
+    "reach": "72\""
   },
   {
     "id": "davey-grant",
@@ -29569,7 +29794,10 @@
       "tdAcc": "38%",
       "tdDef": "65%",
       "subAvg": "0.2"
-    }
+    },
+    "weightClass": "Bantamweight",
+    "height": "5'8\"",
+    "reach": "69\""
   },
   {
     "id": "adrian-martinetti",
@@ -29694,7 +29922,10 @@
       "tdAcc": "63%",
       "tdDef": "67%",
       "subAvg": "0.3"
-    }
+    },
+    "weightClass": "Bantamweight",
+    "height": "5'10\"",
+    "reach": "75.5\""
   },
   {
     "id": "raoni-barcelos",
@@ -29812,7 +30043,10 @@
       "tdAcc": "31%",
       "tdDef": "87%",
       "subAvg": "0.7"
-    }
+    },
+    "weightClass": "Bantamweight",
+    "height": "5'7\"",
+    "reach": "67\""
   },
   {
     "id": "marcus-buchecha",
@@ -29906,7 +30140,10 @@
       "tdAcc": "16%",
       "tdDef": "0%",
       "subAvg": "0.4"
-    }
+    },
+    "weightClass": "Heavyweight",
+    "height": "6'3\"",
+    "reach": "77.5\""
   },
   {
     "id": "ryan-spann",
@@ -30009,7 +30246,9 @@
       "tdAcc": "34%",
       "tdDef": "59%",
       "subAvg": "1.7"
-    }
+    },
+    "height": "6'5\"",
+    "reach": "79\""
   },
   {
     "id": "rodolfo-vieira",
@@ -30510,7 +30749,7 @@
       "tdDef": "33%",
       "subAvg": "1.0"
     },
-    "weightClass": "Featherweight",
+    "weightClass": "Lightweight",
     "height": "5'10\"",
     "reach": "71.0\""
   },
@@ -30753,7 +30992,8 @@
       "subAvg": "0.5"
     },
     "weightClass": "Strawweight",
-    "height": "5'1\""
+    "height": "5'1\"",
+    "reach": "58.5\""
   },
   {
     "id": "julia-polastri",
@@ -31150,7 +31390,7 @@
       "subAvg": "0.3"
     },
     "weightClass": "Heavyweight",
-    "height": "6'3\"",
+    "height": "6'4\"",
     "reach": "78.5\""
   },
   {
@@ -31941,7 +32181,8 @@
       "subAvg": "0.1"
     },
     "reach": "76\"",
-    "weightClass": "Welterweight"
+    "weightClass": "Welterweight",
+    "height": "5'8\""
   },
   {
     "id": "king-green",
@@ -32177,7 +32418,8 @@
       "subAvg": "0.4"
     },
     "height": "5'8.5\"",
-    "reach": "71\""
+    "reach": "71\"",
+    "weightClass": "Lightweight"
   },
   {
     "id": "ozzy-diaz",
@@ -33919,7 +34161,16 @@
       "tdAcc": "31%",
       "tdDef": "71%",
       "subAvg": "0.0"
-    }
+    },
+    "weightClass": "Bantamweight",
+    "height": "5'9\"",
+    "reach": "71\"",
+    "record": {
+      "wins": 10,
+      "losses": 4,
+      "draws": 0
+    },
+    "nickname": "Twilight"
   },
   {
     "id": "bernardo-sopaj",
@@ -34468,7 +34719,10 @@
       "tdAcc": "0%",
       "tdDef": "85%",
       "subAvg": "0.0"
-    }
+    },
+    "weightClass": "Women's Bantamweight",
+    "height": "5'8\"",
+    "reach": "70\""
   },
   {
     "id": "andre-petroski",
@@ -34578,7 +34832,10 @@
       "tdAcc": "52%",
       "tdDef": "86%",
       "subAvg": "1.2"
-    }
+    },
+    "weightClass": "Middleweight",
+    "height": "6'0\"",
+    "reach": "73\""
   },
   {
     "id": "alice-ardelean",
@@ -34608,7 +34865,10 @@
       "tdAcc": "50%",
       "tdDef": "85%",
       "subAvg": "0.2"
-    }
+    },
+    "weightClass": "Women's Strawweight",
+    "height": "5'3\"",
+    "reach": "62\""
   },
   {
     "id": "polyana-viana",
@@ -34711,7 +34971,10 @@
       "tdAcc": "33%",
       "tdDef": "33%",
       "subAvg": "1.5"
-    }
+    },
+    "weightClass": "Women's Strawweight",
+    "height": "5'5\"",
+    "reach": "67\""
   },
   {
     "id": "daniel-barez",
@@ -34741,7 +35004,10 @@
       "tdAcc": "29%",
       "tdDef": "80%",
       "subAvg": "0.5"
-    }
+    },
+    "weightClass": "Flyweight",
+    "height": "5'6\"",
+    "reach": "66\""
   },
   {
     "id": "shauna-bannon",
@@ -34772,7 +35038,10 @@
       "tdAcc": "0%",
       "tdDef": "47%",
       "subAvg": "0.5"
-    }
+    },
+    "weightClass": "Women's Strawweight",
+    "height": "5'5\"",
+    "reach": "65\""
   },
   {
     "id": "nicolle-caliari",
@@ -34810,7 +35079,10 @@
       "tdAcc": "29%",
       "tdDef": "50%",
       "subAvg": "1.0"
-    }
+    },
+    "weightClass": "Women's Strawweight",
+    "height": "5'3\"",
+    "reach": "62\""
   },
   {
     "id": "alonzo-menifield",
@@ -34921,7 +35193,10 @@
       "tdAcc": "31%",
       "tdDef": "78%",
       "subAvg": "0.2"
-    }
+    },
+    "weightClass": "Light Heavyweight",
+    "height": "6'0\"",
+    "reach": "76\""
   },
   {
     "id": "zhang-mingyang",
@@ -35024,7 +35299,10 @@
       "tdAcc": "0%",
       "tdDef": "75%",
       "subAvg": "0.0"
-    }
+    },
+    "weightClass": "Light Heavyweight",
+    "height": "6'2\"",
+    "reach": "75.5\""
   },
   {
     "id": "kai-asakura",
@@ -35126,7 +35404,10 @@
       "tdAcc": "0%",
       "tdDef": "50%",
       "subAvg": "0.0"
-    }
+    },
+    "weightClass": "Bantamweight",
+    "height": "5'8\"",
+    "reach": "69\""
   },
   {
     "id": "sumudaerji",
@@ -35157,7 +35438,10 @@
       "tdAcc": "37%",
       "tdDef": "73%",
       "subAvg": "0.5"
-    }
+    },
+    "weightClass": "Flyweight",
+    "height": "5'8\"",
+    "reach": "72\""
   },
   {
     "id": "carlston-harris",
@@ -35268,7 +35552,10 @@
       "tdAcc": "20%",
       "tdDef": "55%",
       "subAvg": "0.5"
-    }
+    },
+    "weightClass": "Welterweight",
+    "height": "6'0\"",
+    "reach": "76\""
   },
   {
     "id": "jake-matthews",
@@ -35379,7 +35666,10 @@
       "tdAcc": "41%",
       "tdDef": "66%",
       "subAvg": "0.7"
-    }
+    },
+    "weightClass": "Welterweight",
+    "height": "5'11.5\"",
+    "reach": "73\""
   },
   {
     "id": "angela-hill",
@@ -35483,7 +35773,10 @@
       "tdDef": "72%",
       "subAvg": "0.2"
     },
-    "stance": "Orthodox"
+    "stance": "Orthodox",
+    "weightClass": "Women's Strawweight",
+    "height": "5'3\"",
+    "reach": "64.5\""
   },
   {
     "id": "xiong-jingnan",
@@ -35584,7 +35877,11 @@
       "tdAcc": "0%",
       "tdDef": "75%",
       "subAvg": "0.0"
-    }
+    },
+    "weightClass": "Women's Strawweight",
+    "height": "5'5\"",
+    "reach": "64\"",
+    "nickname": "The Panda"
   },
   {
     "id": "luis-felipe-dias",
@@ -35724,7 +36021,9 @@
       "tdAcc": "0%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "weightClass": "Middleweight",
+    "height": "6'2\""
   },
   {
     "id": "rei-tsuruya",
@@ -35754,7 +36053,10 @@
       "tdAcc": "37%",
       "tdDef": "50%",
       "subAvg": "2.0"
-    }
+    },
+    "weightClass": "Flyweight",
+    "height": "5'6\"",
+    "reach": "68\""
   },
   {
     "id": "loma-lookboonmee",
@@ -35856,7 +36158,10 @@
       "tdAcc": "50%",
       "tdDef": "70%",
       "subAvg": "0.1"
-    }
+    },
+    "weightClass": "Women's Strawweight",
+    "height": "5'1\"",
+    "reach": "61.5\""
   },
   {
     "id": "jaqueline-amorim",
@@ -35886,7 +36191,10 @@
       "tdAcc": "33%",
       "tdDef": "0%",
       "subAvg": "4.3"
-    }
+    },
+    "weightClass": "Women's Strawweight",
+    "height": "5'3\"",
+    "reach": "68\""
   },
   {
     "id": "aoriqileng",
@@ -35917,7 +36225,10 @@
       "tdAcc": "46%",
       "tdDef": "59%",
       "subAvg": "0.2"
-    }
+    },
+    "height": "5'7\"",
+    "reach": "69.0\"",
+    "weightClass": "Bantamweight"
   },
   {
     "id": "cody-haddon",
@@ -35947,7 +36258,10 @@
       "tdAcc": "35%",
       "tdDef": "83%",
       "subAvg": "0.6"
-    }
+    },
+    "height": "5'7\"",
+    "reach": "69.0\"",
+    "weightClass": "Bantamweight"
   },
   {
     "id": "meng-ding",
@@ -35961,7 +36275,8 @@
         "round": 3,
         "time": null
       }
-    ]
+    ],
+    "weightClass": "Welterweight"
   },
   {
     "id": "jose-henrique-souza",
@@ -36060,7 +36375,9 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "height": "6'3\"",
+    "weightClass": "Welterweight"
   },
   {
     "id": "gabriel-bonfim",
@@ -36172,7 +36489,10 @@
       "tdDef": "78%",
       "subAvg": "1.0"
     },
-    "stance": "Orthodox"
+    "stance": "Orthodox",
+    "height": "6'1\"",
+    "reach": "72.5\"",
+    "weightClass": "Welterweight"
   },
   {
     "id": "edmen-shahbazyan",
@@ -36283,7 +36603,10 @@
       "tdAcc": "36%",
       "tdDef": "66%",
       "subAvg": "0.4"
-    }
+    },
+    "height": "6'2.5\"",
+    "reach": "74.0\"",
+    "weightClass": "Middleweight"
   },
   {
     "id": "fares-ziam",
@@ -36402,7 +36725,10 @@
       "tdAcc": "42%",
       "tdDef": "70%",
       "subAvg": "0.5"
-    }
+    },
+    "height": "6'1\"",
+    "reach": "75.0\"",
+    "weightClass": "Lightweight"
   },
   {
     "id": "tom-nolan",
@@ -36449,7 +36775,10 @@
       "tdAcc": "26%",
       "tdDef": "58%",
       "subAvg": "1.4"
-    }
+    },
+    "height": "6'3\"",
+    "reach": "73.0\"",
+    "weightClass": "Lightweight"
   },
   {
     "id": "iwo-baraniewski",
@@ -36544,7 +36873,10 @@
       "tdAcc": "0%",
       "tdDef": "100%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "6'0.5\"",
+    "reach": "73.5\"",
+    "weightClass": "Light Heavyweight"
   },
   {
     "id": "matt-schnell",
@@ -36671,7 +37003,10 @@
       "tdAcc": "45%",
       "tdDef": "43%",
       "subAvg": "1.2"
-    }
+    },
+    "height": "5'8\"",
+    "reach": "70.0\"",
+    "weightClass": "Flyweight"
   },
   {
     "id": "marcus-mcghee",
@@ -36774,7 +37109,10 @@
       "tdAcc": "11%",
       "tdDef": "90%",
       "subAvg": "0.2"
-    }
+    },
+    "height": "5'8\"",
+    "reach": "69.0\"",
+    "weightClass": "Bantamweight"
   },
   {
     "id": "edgar-chairez",
@@ -36904,7 +37242,10 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "height": "5'4\"",
+    "reach": "65.0\"",
+    "weightClass": "Flyweight"
   },
   {
     "id": "joanderson-brito",
@@ -37007,7 +37348,10 @@
       "tdAcc": "67%",
       "tdDef": "57%",
       "subAvg": "1.2"
-    }
+    },
+    "height": "5'8\"",
+    "reach": "72.0\"",
+    "weightClass": "Featherweight"
   },
   {
     "id": "ketlen-souza",
@@ -37110,7 +37454,10 @@
       "tdAcc": "13%",
       "tdDef": "53%",
       "subAvg": "0.2"
-    }
+    },
+    "height": "5'3\"",
+    "reach": "63.0\"",
+    "weightClass": "Strawweight"
   },
   {
     "id": "ariane-carnelossi",
@@ -37205,7 +37552,10 @@
       "tdAcc": "50%",
       "tdDef": "22%",
       "subAvg": "0.2"
-    }
+    },
+    "height": "5'2\"",
+    "reach": "61.5\"",
+    "weightClass": "Strawweight"
   },
   {
     "id": "chelsea-chandler",
@@ -37307,7 +37657,10 @@
       "tdAcc": "60%",
       "tdDef": "25%",
       "subAvg": "0.3"
-    }
+    },
+    "height": "5'8.5\"",
+    "reach": "68.0\"",
+    "weightClass": "Bantamweight"
   },
   {
     "id": "priscila-cachoeira",
@@ -37410,7 +37763,10 @@
       "tdAcc": "50%",
       "tdDef": "69%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "5'7\"",
+    "reach": "65.0\"",
+    "weightClass": "Bantamweight"
   },
   {
     "id": "jeisla-chaves",
@@ -37441,7 +37797,10 @@
       "tdAcc": "37%",
       "tdDef": "62%",
       "subAvg": "0.5"
-    }
+    },
+    "height": "5'6\"",
+    "reach": "68.0\"",
+    "weightClass": "Flyweight"
   },
   {
     "id": "yuneisy-duben",
@@ -37471,7 +37830,10 @@
       "tdAcc": "50%",
       "tdDef": "50%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "5'4\"",
+    "reach": "65.5\"",
+    "weightClass": "Flyweight"
   },
   {
     "id": "luana-santos",
@@ -37517,7 +37879,10 @@
       "tdAcc": "37%",
       "tdDef": "85%",
       "subAvg": "1.0"
-    }
+    },
+    "height": "5'6\"",
+    "reach": "67.0\"",
+    "weightClass": "Women's Bantamweight"
   },
   {
     "id": "allan-nascimento",
@@ -37556,7 +37921,10 @@
       "tdAcc": "20%",
       "tdDef": "41%",
       "subAvg": "0.9"
-    }
+    },
+    "height": "5'8.5\"",
+    "reach": "69.5\"",
+    "weightClass": "Flyweight"
   },
   {
     "id": "melissa-mullins",
@@ -37587,7 +37955,10 @@
       "tdAcc": "46%",
       "tdDef": "85%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "5'7\"",
+    "reach": "68.0\"",
+    "weightClass": "Women's Bantamweight"
   },
   {
     "id": "kevin-borjas",
@@ -37626,7 +37997,10 @@
       "tdAcc": "0%",
       "tdDef": "72%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "5'5\"",
+    "reach": "68.0\"",
+    "weightClass": "Flyweight"
   },
   {
     "id": "michael-aswell-jr",
@@ -37650,7 +38024,16 @@
       "tdAcc": "25%",
       "tdDef": "55%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "5'8\"",
+    "reach": "69.0\"",
+    "weightClass": "Featherweight",
+    "record": {
+      "wins": 11,
+      "losses": 5,
+      "draws": 0
+    },
+    "nickname": "The Texas Kid"
   },
   {
     "id": "shane-collins",
@@ -37681,7 +38064,9 @@
       "tdAcc": "0%",
       "tdDef": "44%",
       "subAvg": "3.0"
-    }
+    },
+    "height": "5'9\"",
+    "weightClass": "Featherweight"
   },
   {
     "id": "otari-tanzilovi",
@@ -37711,7 +38096,9 @@
       "tdAcc": "36%",
       "tdDef": "85%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "5'10\"",
+    "weightClass": "Featherweight"
   },
   {
     "id": "leon-shahbazyan",
@@ -37822,7 +38209,10 @@
       "tdAcc": "50%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "6'4\"",
+    "reach": "77.0\"",
+    "weightClass": "Welterweight"
   },
   {
     "id": "levan-chokheli",
@@ -37852,7 +38242,9 @@
       "tdAcc": "0%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "6'0\"",
+    "weightClass": "Welterweight"
   },
   {
     "id": "farman-hasanov",
@@ -37883,7 +38275,9 @@
       "tdAcc": "62%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "6'0\"",
+    "weightClass": "Welterweight"
   },
   {
     "id": "abdul-rakhman-yakhyaev",
@@ -37915,7 +38309,16 @@
       "tdAcc": "75%",
       "tdDef": "100%",
       "subAvg": "7.4"
-    }
+    },
+    "height": "6'2\"",
+    "reach": "78.0\"",
+    "weightClass": "Light Heavyweight",
+    "record": {
+      "wins": 10,
+      "losses": 0,
+      "draws": 0
+    },
+    "nickname": "The Hunter"
   },
   {
     "id": "kaan-ofli",
@@ -37954,7 +38357,10 @@
       "tdAcc": "7%",
       "tdDef": "0%",
       "subAvg": "0.7"
-    }
+    },
+    "height": "5'7\"",
+    "reach": "66.0\"",
+    "weightClass": "Featherweight"
   },
   {
     "id": "javier-reyes",
@@ -37985,7 +38391,10 @@
       "tdAcc": "50%",
       "tdDef": "50%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "5'7\"",
+    "reach": "73.0\"",
+    "weightClass": "Featherweight"
   },
   {
     "id": "daniil-donchenko",
@@ -38015,7 +38424,10 @@
       "tdAcc": "33%",
       "tdDef": "75%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "5'11\"",
+    "reach": "71.0\"",
+    "weightClass": "Welterweight"
   },
   {
     "id": "jared-cannonier",
@@ -38118,7 +38530,10 @@
       "tdAcc": "45%",
       "tdDef": "64%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "5'11\"",
+    "reach": "77.5\"",
+    "weightClass": "Middleweight"
   },
   {
     "id": "christian-leroy-duncan",
@@ -38229,7 +38644,10 @@
       "tdAcc": "20%",
       "tdDef": "57%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "6'2\"",
+    "reach": "79.0\"",
+    "weightClass": "Middleweight"
   },
   {
     "id": "jacobe-smith",
@@ -38268,7 +38686,10 @@
       "tdAcc": "91%",
       "tdDef": "100%",
       "subAvg": "0.7"
-    }
+    },
+    "height": "5'10\"",
+    "reach": "72.0\"",
+    "weightClass": "Welterweight"
   },
   {
     "id": "amanda-ribas",
@@ -38371,7 +38792,10 @@
       "tdDef": "82%",
       "subAvg": "0.6"
     },
-    "stance": "Orthodox"
+    "stance": "Orthodox",
+    "height": "5'4\"",
+    "reach": "66.0\"",
+    "weightClass": "Women's Strawweight"
   },
   {
     "id": "fatima-kline",
@@ -38475,7 +38899,10 @@
       "tdDef": "65%",
       "subAvg": "0.2"
     },
-    "stance": "Orthodox"
+    "stance": "Orthodox",
+    "height": "5'6\"",
+    "reach": "67.0\"",
+    "weightClass": "Women's Strawweight"
   },
   {
     "id": "brad-tavares",
@@ -38593,7 +39020,10 @@
       "tdAcc": "26%",
       "tdDef": "80%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "6'1\"",
+    "reach": "74.0\"",
+    "weightClass": "Middleweight"
   },
   {
     "id": "mitch-ramirez",
@@ -38613,7 +39043,10 @@
       "tdAcc": "33%",
       "tdDef": "33%",
       "subAvg": "0.0"
-    }
+    },
+    "weightClass": "Lightweight",
+    "height": "5'9\"",
+    "reach": "70.5\""
   },
   {
     "id": "veronica-hardy",
@@ -38715,7 +39148,10 @@
       "tdAcc": "41%",
       "tdDef": "51%",
       "subAvg": "0.3"
-    }
+    },
+    "weightClass": "Flyweight",
+    "height": "5'3\"",
+    "reach": "64\""
   },
   {
     "id": "david-martinez",
@@ -38818,7 +39254,10 @@
       "tdDef": "100%",
       "subAvg": "0.0"
     },
-    "stance": "Orthodox"
+    "stance": "Orthodox",
+    "weightClass": "Bantamweight",
+    "height": "5'5\"",
+    "reach": "67.5\""
   },
   {
     "id": "uran-satybaldiev",
@@ -38839,7 +39278,10 @@
       "tdAcc": "0%",
       "tdDef": "50%",
       "subAvg": "1.7"
-    }
+    },
+    "weightClass": "Light Heavyweight",
+    "height": "6'4\"",
+    "reach": "79\""
   },
   {
     "id": "valter-walker",
@@ -38950,7 +39392,10 @@
       "tdAcc": "69%",
       "tdDef": "0%",
       "subAvg": "2.5"
-    }
+    },
+    "weightClass": "Heavyweight",
+    "height": "6'6\"",
+    "reach": "78.5\""
   },
   {
     "id": "magomed-tuchalov",
@@ -38981,7 +39426,9 @@
         "round": null,
         "time": null
       }
-    ]
+    ],
+    "weightClass": "Light Heavyweight",
+    "height": "6'5\""
   },
   {
     "id": "ramazan-temirov",
@@ -39028,7 +39475,10 @@
       "tdAcc": "50%",
       "tdDef": "100%",
       "subAvg": "0.0"
-    }
+    },
+    "weightClass": "Flyweight",
+    "height": "5'4\"",
+    "reach": "63\""
   },
   {
     "id": "islam-dulatov",
@@ -39131,7 +39581,10 @@
       "tdAcc": "100%",
       "tdDef": "100%",
       "subAvg": "0.0"
-    }
+    },
+    "weightClass": "Welterweight",
+    "height": "6'3\"",
+    "reach": "75\""
   },
   {
     "id": "wellington-turman",
@@ -39234,7 +39687,10 @@
       "tdAcc": "20%",
       "tdDef": "42%",
       "subAvg": "0.8"
-    }
+    },
+    "weightClass": "Middleweight",
+    "height": "6'0\"",
+    "reach": "72\""
   },
   {
     "id": "ismael-bonfim",
@@ -39345,7 +39801,10 @@
       "tdAcc": "33%",
       "tdDef": "76%",
       "subAvg": "0.0"
-    }
+    },
+    "weightClass": "Lightweight",
+    "height": "5'8\"",
+    "reach": "71.5\""
   },
   {
     "id": "axel-sola",
@@ -39375,7 +39834,10 @@
         "round": 1,
         "time": null
       }
-    ]
+    ],
+    "weightClass": "Lightweight",
+    "height": "6'0\"",
+    "reach": "74\""
   },
   {
     "id": "uros-medic",
@@ -39598,7 +40060,10 @@
       "tdDef": "64%",
       "subAvg": "0.1"
     },
-    "stance": "Southpaw"
+    "stance": "Southpaw",
+    "weightClass": "Welterweight",
+    "height": "6'1\"",
+    "reach": "74\""
   },
   {
     "id": "ante-delija",
@@ -39702,7 +40167,10 @@
       "tdDef": "75%",
       "subAvg": "0.0"
     },
-    "stance": "Orthodox"
+    "stance": "Orthodox",
+    "weightClass": "Heavyweight",
+    "height": "6'3.5\"",
+    "reach": "78\""
   },
   {
     "id": "dusko-todorovic",
@@ -39848,7 +40316,9 @@
         "time": null
       }
     ],
-    "nickname": "El Chapo"
+    "nickname": "El Chapo",
+    "weightClass": "Middleweight",
+    "height": "6'1\""
   },
   {
     "id": "gilbert-urbina",
@@ -39888,7 +40358,10 @@
       "tdDef": "0%",
       "subAvg": "0.7"
     },
-    "stance": "Orthodox"
+    "stance": "Orthodox",
+    "weightClass": "Middleweight",
+    "height": "5'9\"",
+    "reach": "75\""
   },
   {
     "id": "jovan-leka",
@@ -39918,7 +40391,10 @@
         "round": 1,
         "time": null
       }
-    ]
+    ],
+    "weightClass": "Heavyweight",
+    "height": "6'4\"",
+    "reach": "75\""
   },
   {
     "id": "max-gimenis",
@@ -39938,7 +40414,9 @@
       "tdAcc": "0%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "weightClass": "Heavyweight",
+    "height": "6'1\""
   },
   {
     "id": "ludovit-klein",
@@ -40049,7 +40527,10 @@
       "tdAcc": "51%",
       "tdDef": "76%",
       "subAvg": "0.0"
-    }
+    },
+    "weightClass": "Lightweight",
+    "height": "5'7\"",
+    "reach": "72.5\""
   },
   {
     "id": "josias-musasa",
@@ -42914,7 +43395,10 @@
       "tdAcc": "44%",
       "tdDef": "60%",
       "subAvg": "0.8"
-    }
+    },
+    "height": "6'0\"",
+    "reach": "72.5\"",
+    "weightClass": "Lightweight"
   },
   {
     "id": "jean-paul-lebosnoyani",
@@ -42945,7 +43429,10 @@
       "tdAcc": "42%",
       "tdDef": "100%",
       "subAvg": "1.9"
-    }
+    },
+    "height": "5'11\"",
+    "reach": "72\"",
+    "weightClass": "Welterweight"
   },
   {
     "id": "seokhyeon-ko",
@@ -42966,7 +43453,10 @@
       "tdAcc": "52%",
       "tdDef": "50%",
       "subAvg": "0.2"
-    }
+    },
+    "height": "5'10\"",
+    "reach": "71\"",
+    "weightClass": "Welterweight"
   },
   {
     "id": "rj-harris",
@@ -42987,7 +43477,10 @@
       "tdAcc": "0%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "6'3\"",
+    "reach": "78\"",
+    "weightClass": "Heavyweight"
   },
   {
     "id": "anna-melisano",
@@ -43008,7 +43501,10 @@
       "tdAcc": "0%",
       "tdDef": "50%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "5'4.5\"",
+    "reach": "68\"",
+    "weightClass": "Women's Flyweight"
   },
   {
     "id": "santiago-ponzinibbio",
@@ -43119,7 +43615,10 @@
       "tdAcc": "27%",
       "tdDef": "71%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "6'0\"",
+    "reach": "73\"",
+    "weightClass": "Welterweight"
   },
   {
     "id": "sam-patterson",
@@ -43149,7 +43648,10 @@
         "round": 2,
         "time": null
       }
-    ]
+    ],
+    "height": "6'3\"",
+    "reach": "78\"",
+    "weightClass": "Welterweight"
   },
   {
     "id": "ezra-elliot",
@@ -43159,7 +43661,10 @@
       "wins": 8,
       "losses": 0,
       "draws": 0
-    }
+    },
+    "height": "5'9\"",
+    "reach": "72\"",
+    "weightClass": "Featherweight"
   },
   {
     "id": "damien-anderson",
@@ -43180,7 +43685,9 @@
       "tdAcc": "0%",
       "tdDef": "33%",
       "subAvg": "1.0"
-    }
+    },
+    "height": "5'7\"",
+    "weightClass": "Featherweight"
   },
   {
     "id": "uros-medic",
@@ -43201,7 +43708,10 @@
       "tdAcc": "50%",
       "tdDef": "55%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "6'1\"",
+    "reach": "71\"",
+    "weightClass": "Welterweight"
   },
   {
     "id": "dan-ige",
@@ -43304,7 +43814,10 @@
       "tdAcc": "26%",
       "tdDef": "56%",
       "subAvg": "0.2"
-    }
+    },
+    "height": "5'7\"",
+    "reach": "71\"",
+    "weightClass": "Featherweight"
   },
   {
     "id": "josiah-harrell",
@@ -43325,7 +43838,10 @@
       "tdAcc": "0%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "5'7.5\"",
+    "reach": "68\"",
+    "weightClass": "Welterweight"
   },
   {
     "id": "carlos-leal",
@@ -43428,7 +43944,10 @@
       "tdAcc": "11%",
       "tdDef": "90%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "5'11\"",
+    "reach": "74\"",
+    "weightClass": "Welterweight"
   },
   {
     "id": "alibi-idiris",
@@ -43448,7 +43967,10 @@
       "tdAcc": "31%",
       "tdDef": "66%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "5'6\"",
+    "reach": "68\"",
+    "weightClass": "Flyweight"
   },
   {
     "id": "nora-cornolle",
@@ -43550,7 +44072,10 @@
       "tdAcc": "11%",
       "tdDef": "47%",
       "subAvg": "0.2"
-    }
+    },
+    "height": "5'7\"",
+    "reach": "67\"",
+    "weightClass": "Women's Bantamweight"
   },
   {
     "id": "punahele-soriano",
@@ -43653,7 +44178,10 @@
       "tdAcc": "51%",
       "tdDef": "48%",
       "subAvg": "0.1"
-    }
+    },
+    "height": "5'11\"",
+    "reach": "72.5\"",
+    "weightClass": "Welterweight"
   },
   {
     "id": "phil-rowe",
@@ -43756,7 +44284,10 @@
       "tdAcc": "36%",
       "tdDef": "53%",
       "subAvg": "0.2"
-    }
+    },
+    "height": "6'3\"",
+    "reach": "80.5\"",
+    "weightClass": "Welterweight"
   },
   {
     "id": "yadier-del-valle",
@@ -43787,7 +44318,10 @@
         "round": 1,
         "time": null
       }
-    ]
+    ],
+    "height": "5'9\"",
+    "reach": "69\"",
+    "weightClass": "Featherweight"
   },
   {
     "id": "juliana-miller",
@@ -43818,7 +44352,10 @@
         "round": 2,
         "time": null
       }
-    ]
+    ],
+    "height": "5'7\"",
+    "reach": "66\"",
+    "weightClass": "Women's Flyweight"
   },
   {
     "id": "luke-fernandez",
@@ -43838,7 +44375,10 @@
       "tdAcc": "0%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "height": "6'1.5\"",
+    "reach": "76.5\"",
+    "weightClass": "Light Heavyweight"
   },
   {
     "id": "diyar-nurgozhay",
@@ -43868,7 +44408,10 @@
         "round": 1,
         "time": null
       }
-    ]
+    ],
+    "weightClass": "Light Heavyweight",
+    "height": "6'2\"",
+    "reach": "74.0\""
   },
   {
     "id": "rafael-tobias",
@@ -43889,7 +44432,10 @@
       "tdAcc": "33%",
       "tdDef": "100%",
       "subAvg": "1.6"
-    }
+    },
+    "weightClass": "Light Heavyweight",
+    "height": "6'2\"",
+    "reach": "74.5\""
   },
   {
     "id": "nyamjargal-tumendemberel",
@@ -43910,7 +44456,10 @@
       "tdAcc": "50%",
       "tdDef": "56%",
       "subAvg": "2.1"
-    }
+    },
+    "weightClass": "Flyweight",
+    "height": "5'7\"",
+    "reach": "71.0\""
   },
   {
     "id": "joseph-morales",
@@ -44013,7 +44562,10 @@
       "tdAcc": "42%",
       "tdDef": "26%",
       "subAvg": "3.0"
-    }
+    },
+    "weightClass": "Flyweight",
+    "height": "5'6\"",
+    "reach": "68.0\""
   },
   {
     "id": "edgar-chairez",
@@ -44117,7 +44669,10 @@
       "tdDef": "47%",
       "subAvg": "1.4"
     },
-    "stance": "Orthodox"
+    "stance": "Orthodox",
+    "weightClass": "Flyweight",
+    "height": "5'7\"",
+    "reach": "71.0\""
   },
   {
     "id": "waldo-cortes-acosta",
@@ -44220,7 +44775,10 @@
       "tdAcc": "50%",
       "tdDef": "73%",
       "subAvg": "0.1"
-    }
+    },
+    "weightClass": "Heavyweight",
+    "height": "6'4\"",
+    "reach": "78.0\""
   },
   {
     "id": "regina-tarin",
@@ -44255,7 +44813,10 @@
       "tdAcc": "26%",
       "tdDef": "100%",
       "subAvg": "0.9"
-    }
+    },
+    "weightClass": "Heavyweight",
+    "height": "6'5\"",
+    "reach": "79.0\""
   },
   {
     "id": "michael-page",
@@ -44358,7 +44919,10 @@
       "tdAcc": "16%",
       "tdDef": "70%",
       "subAvg": "0.0"
-    }
+    },
+    "weightClass": "Middleweight",
+    "height": "6'3\"",
+    "reach": "79.0\""
   },
   {
     "id": "kurtis-campbell",
@@ -44379,7 +44943,10 @@
       "tdAcc": "40%",
       "tdDef": "50%",
       "subAvg": "0.0"
-    }
+    },
+    "weightClass": "Featherweight",
+    "height": "5'9\"",
+    "reach": "72.0\""
   },
   {
     "id": "trevor-peek",
@@ -44399,7 +44966,10 @@
       "tdAcc": "50%",
       "tdDef": "52%",
       "subAvg": "0.0"
-    }
+    },
+    "weightClass": "Featherweight",
+    "height": "5'9\"",
+    "reach": "70.0\""
   },
   {
     "id": "muhammad-said",
@@ -44510,7 +45080,9 @@
       "tdAcc": "0%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "weightClass": "Light Heavyweight",
+    "height": "6'2\""
   },
   {
     "id": "cody-gibson",
@@ -44621,7 +45193,10 @@
       "tdAcc": "37%",
       "tdDef": "69%",
       "subAvg": "0.6"
-    }
+    },
+    "weightClass": "Bantamweight",
+    "height": "5'10\"",
+    "reach": "71.0\""
   },
   {
     "id": "abubakar-vagaev",
@@ -44651,7 +45226,9 @@
         "round": null,
         "time": null
       }
-    ]
+    ],
+    "weightClass": "Welterweight",
+    "height": "6'0\""
   },
   {
     "id": "saygid-izagakhmaev",
@@ -44681,7 +45258,10 @@
         "round": null,
         "time": null
       }
-    ]
+    ],
+    "weightClass": "Welterweight",
+    "height": "6'0\"",
+    "reach": "74.5\""
   },
   {
     "id": "abdul-hussein",
@@ -44712,7 +45292,9 @@
         "round": 3,
         "time": null
       }
-    ]
+    ],
+    "weightClass": "Bantamweight",
+    "height": "5'5\""
   },
   {
     "id": "muhammad-saidov",
@@ -44726,7 +45308,15 @@
       "tdAcc": "0%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "weightClass": "Light Heavyweight",
+    "height": "6'2\"",
+    "record": {
+      "wins": 10,
+      "losses": 0,
+      "draws": 0
+    },
+    "nickname": "Kubik"
   },
   {
     "id": "salahdine-parnasse",
@@ -44828,7 +45418,8 @@
       "tdDef": "0%",
       "subAvg": "0.0"
     },
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
+    "weightClass": "Lightweight"
   },
   {
     "id": "nathaniel-wood",
@@ -44931,7 +45522,10 @@
         "time": "5:00"
       }
     ],
-    "nickname": "The Last Kingsman"
+    "nickname": "The Last Kingsman",
+    "weightClass": "Featherweight",
+    "height": "5'6\"",
+    "reach": "69.0\""
   },
   {
     "id": "mairon-santos",
@@ -44966,7 +45560,10 @@
       "losses": 12,
       "draws": 1
     },
-    "nickname": "The Last Pirate"
+    "nickname": "The Last Pirate",
+    "weightClass": "Featherweight",
+    "height": "5'8\"",
+    "reach": "69\""
   },
   {
     "id": "felipe-lima",
@@ -45069,7 +45666,10 @@
         "time": "0:43"
       }
     ],
-    "nickname": "Jungle Boy"
+    "nickname": "Jungle Boy",
+    "weightClass": "Bantamweight",
+    "height": "5'6\"",
+    "reach": "68\""
   },
   {
     "id": "mateusz-r-becki",
@@ -45179,7 +45779,10 @@
       "tdAcc": "48%",
       "tdDef": "53%",
       "subAvg": "0.4"
-    }
+    },
+    "weightClass": "Lightweight",
+    "height": "5'7\"",
+    "reach": "66\""
   },
   {
     "id": "kyle-prepolec",
@@ -45290,7 +45893,10 @@
       "tdDef": "45%",
       "subAvg": "0.0"
     },
-    "nickname": "Killshot"
+    "nickname": "Killshot",
+    "weightClass": "Lightweight",
+    "height": "5'9\"",
+    "reach": "70\""
   },
   {
     "id": "milos-janicic",
@@ -45321,7 +45927,10 @@
       "losses": 4,
       "draws": 0
     },
-    "nickname": "The Cobra"
+    "nickname": "The Cobra",
+    "weightClass": "Lightweight",
+    "height": "5'11\"",
+    "reach": "72.8\""
   },
   {
     "id": "noah-gugnon",
@@ -45351,7 +45960,9 @@
       "wins": 10,
       "losses": 2,
       "draws": 0
-    }
+    },
+    "weightClass": "Lightweight",
+    "height": "5'10\""
   },
   {
     "id": "marina-spasic",
@@ -45382,7 +45993,8 @@
       "losses": 2,
       "draws": 0
     },
-    "nickname": "Maki Beki"
+    "nickname": "Maki Beki",
+    "height": "5'4\""
   },
   {
     "id": "stephanie-luciano",
@@ -45553,7 +46165,9 @@
         "round": 3,
         "time": null
       }
-    ]
+    ],
+    "height": "6'2\"",
+    "reach": "77.5\""
   },
   {
     "id": "billy-ray-goff",
@@ -45690,7 +46304,9 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "height": "5'9\"",
+    "reach": "74\""
   },
   {
     "id": "billy-quarantillo",
@@ -45801,7 +46417,9 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "height": "5'10\"",
+    "reach": "70\""
   },
   {
     "id": "darren-elkins",
@@ -45913,7 +46531,10 @@
         "time": "5:00"
       }
     ],
-    "nickname": "The Damage"
+    "nickname": "The Damage",
+    "height": "5'10\"",
+    "reach": "71\"",
+    "stance": "Orthodox"
   },
   {
     "id": "steven-asplund",
@@ -45945,7 +46566,9 @@
         "round": null,
         "time": null
       }
-    ]
+    ],
+    "height": "6'5\"",
+    "reach": "78\""
   },
   {
     "id": "ravena-oliveira",
@@ -46011,7 +46634,9 @@
         "round": null,
         "time": null
       }
-    ]
+    ],
+    "height": "5'4\"",
+    "reach": "67\""
   },
   {
     "id": "jose-montanha-da-silva",
@@ -46025,7 +46650,9 @@
       "losses": 1,
       "draws": 0
     },
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
+    "height": "6'4\"",
+    "reach": "76\""
   },
   {
     "id": "muslim-salikhov",
@@ -46128,7 +46755,10 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "weightClass": "Welterweight",
+    "height": "5'11\"",
+    "reach": "70\""
   },
   {
     "id": "sean-sharaf",
@@ -46149,7 +46779,10 @@
       "tdAcc": "11%",
       "tdDef": "0%",
       "subAvg": "0.0"
-    }
+    },
+    "weightClass": "Heavyweight",
+    "height": "6'2\"",
+    "reach": "76\""
   },
   {
     "id": "robelis-despaigne",
