@@ -302,13 +302,18 @@
 
     // ── Load group members ──
     const { data: members } = await sb.from('profiles')
-      .select('id, display_name, avatar_url, group_name, group_season_start')
+      .select('id, display_name, avatar_url, group_name, group_season_start, group_season_end')
       .eq('group_code', groupCode);
 
     if (!members?.length) { showErr('Group not found or has no members.'); return; }
 
     const groupName   = members[0].group_name || 'Our Group';
     const seasonStart = members[0].group_season_start || null;
+    // Bare "YYYY-MM-DD" parses as UTC midnight — push to the last instant
+    // of that day so the end date itself is fully included, not excluded.
+    const seasonEnd   = members[0].group_season_end
+      ? new Date(new Date(members[0].group_season_end).getTime() + 86400000 - 1).toISOString()
+      : null;
     const memberIds   = members.map(m => m.id);
     const memberMap   = Object.fromEntries(members.map(m => [m.id, m]));
 
@@ -332,6 +337,7 @@
       if (!r.user_id || !statsMap[r.user_id]) return;
       if (r.fight_key === '__dd__') return;
       if (seasonStart && r.created_at && r.created_at < seasonStart) return;
+      if (seasonEnd && r.created_at && r.created_at > seasonEnd) return;
 
       if (r.fight_key === 'fotn') {
         const actual = fotnMap[r.event_id];
@@ -433,7 +439,9 @@
     const champ  = ranked[0];
     const second = ranked[1];
     const third  = ranked[2];
-    const seasonLabel = seasonStart ? `Season from ${fmtDate(seasonStart)}` : 'All-time standings';
+    const seasonLabel = (seasonStart || members[0].group_season_end)
+      ? `Season ${seasonStart ? 'from ' + fmtDate(seasonStart) : ''}${seasonStart && members[0].group_season_end ? ' ' : ''}${members[0].group_season_end ? 'through ' + fmtDate(members[0].group_season_end) : ''}`
+      : 'All-time standings';
 
     function champHtml() {
       if (!champ) return '';

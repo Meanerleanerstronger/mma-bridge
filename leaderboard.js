@@ -293,11 +293,12 @@
     return new Set(completed.map(e => e.id).filter(Boolean));
   }
 
-  function buildStatsMap(picks, cutoff, allowedEventIds = null) {
+  function buildStatsMap(picks, cutoff, allowedEventIds = null, endCutoff = null) {
     const ddMap = {}; // 'userId:eventId' -> fightKey to double down on
     picks.forEach(r => {
       if (r.fight_key === '__dd__' && r.user_id && r.pick) {
         if (cutoff && r.created_at && r.created_at < cutoff) return;
+        if (endCutoff && r.created_at && r.created_at > endCutoff) return;
         if (allowedEventIds && !allowedEventIds.has(r.event_id)) return;
         ddMap[`${r.user_id}:${r.event_id}`] = r.pick;
       }
@@ -318,6 +319,7 @@
       if (!r.user_id) return;
       if (r.fight_key === '__dd__') return; // handled via ddMap
       if (cutoff && r.created_at && r.created_at < cutoff) return;
+      if (endCutoff && r.created_at && r.created_at > endCutoff) return;
       if (allowedEventIds && !allowedEventIds.has(r.event_id)) return;
       if (!map[r.user_id]) map[r.user_id] = { total: 0, judged: 0, correct: 0, points: 0, ddCount: 0 };
 
@@ -373,6 +375,7 @@
         group_code: p.group_code || null, group_name: p.group_name || null,
         group_is_owner: p.group_is_owner || false,
         group_season_start: p.group_season_start || null,
+        group_season_end: p.group_season_end || null,
         count: s.total, judged: s.judged, correct: s.correct, pct, points: s.points || 0,
         ddCount: s.ddCount || 0,
         tier, tierName: tier.name, tierRank: tier.rank,
@@ -402,7 +405,7 @@
   if (profileIds.length > 0) {
     const { data: pData } = await sb
       .from('profiles')
-      .select('id, display_name, avatar_url, group_code, group_name, group_is_owner, group_season_start, group_event_types, group_excluded_events')
+      .select('id, display_name, avatar_url, group_code, group_name, group_is_owner, group_season_start, group_season_end, group_event_types, group_excluded_events')
       .in('id', profileIds);
     profilesData = pData || [];
   }
@@ -417,6 +420,7 @@
   let myGroupName = myProfile.group_name || null;
   let myGroupIsOwner = myProfile.group_is_owner === true;
   let myGroupSeasonStart = myProfile.group_season_start || null;
+  let myGroupSeasonEnd   = myProfile.group_season_end   || null;
   // Which event types count toward this group's standings — defaults to
   // PPV + Fight Night (excludes Contender Series) for groups created
   // before this setting existed, matching the new-group default.
@@ -580,9 +584,13 @@
     const inviteUrl  = `${location.origin}/leaderboard.html?join=${myGroupCode}`;
 
     let seasonHtml = '';
-    if (myGroupSeasonStart) {
-      const d = new Date(myGroupSeasonStart).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
-      seasonHtml = `<div class="lb-group-season-info">📅 Season from <strong>${esc(d)}</strong></div>`;
+    if (myGroupSeasonStart || myGroupSeasonEnd) {
+      const dStart = myGroupSeasonStart ? new Date(myGroupSeasonStart).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : null;
+      const dEnd   = myGroupSeasonEnd   ? new Date(myGroupSeasonEnd).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})   : null;
+      const label = dStart && dEnd ? `${esc(dStart)} – ${esc(dEnd)}`
+                  : dStart ? `From ${esc(dStart)}`
+                  : `Through ${esc(dEnd)}`;
+      seasonHtml = `<div class="lb-group-season-info">📅 Season <strong>${label}</strong></div>`;
     }
 
     // Full commissioner management (roster, team name, season/scoring,
@@ -614,12 +622,16 @@
 
     // Render group leaderboard with season filter + event-type filter
     const seasonCutoff = myGroupSeasonStart ? new Date(myGroupSeasonStart).toISOString() : null;
+    // End date is a bare "YYYY-MM-DD" — parsed as UTC midnight, which would
+    // exclude every pick made *during* that day if used as-is. Push it to
+    // the last instant of that day so the end date counts as fully included.
+    const seasonCutoffEnd = myGroupSeasonEnd ? new Date(new Date(myGroupSeasonEnd).getTime() + 86400000 - 1).toISOString() : null;
     const allowedEventIds = new Set(
       allEventsRaw
         .filter(e => eventTypeOf(e) && myGroupEventTypes.includes(eventTypeOf(e)) && !myGroupExcludedEvents.includes(e.id))
         .map(e => e.id)
     );
-    const groupStatsMap = buildStatsMap(picksData, seasonCutoff, allowedEventIds);
+    const groupStatsMap = buildStatsMap(picksData, seasonCutoff, allowedEventIds, seasonCutoffEnd);
     const seasonUsers = buildRankedUsers(groupStatsMap).filter(u => u.group_code === myGroupCode);
     renderTable(seasonUsers, 'lbGroupWrap', 'No picks yet in your group — share your code!');
 
@@ -644,7 +656,7 @@
       btn.disabled = true;
       try {
         await sb.from('profiles').update({ group_code: null, group_name: null, group_is_owner: false }).eq('id', myId);
-        myGroupCode = null; myGroupName = null; myGroupIsOwner = false; myGroupSeasonStart = null;
+        myGroupCode = null; myGroupName = null; myGroupIsOwner = false; myGroupSeasonStart = null; myGroupSeasonEnd = null;
         allUsers.forEach(u => { if (u.user_id === myId) { u.group_code = null; u.group_name = null; } });
         renderGroupStatus();
       } catch { btn.disabled = false; }
@@ -1014,9 +1026,12 @@
     if (groupEl) {
       if (myGroupCode) {
         const seasonCutoff2 = myGroupSeasonStart ? new Date(myGroupSeasonStart).toISOString() : null;
-        const groupStatsMap2 = buildStatsMap(picksData, seasonCutoff2);
+        const seasonCutoff2End = myGroupSeasonEnd ? new Date(new Date(myGroupSeasonEnd).getTime() + 86400000 - 1).toISOString() : null;
+        const groupStatsMap2 = buildStatsMap(picksData, seasonCutoff2, null, seasonCutoff2End);
         const groupUsers = buildRankedUsers(groupStatsMap2).filter(u => u.group_code === myGroupCode);
-        const seasonLabel = myGroupSeasonStart ? ` · Season from ${new Date(myGroupSeasonStart).toLocaleDateString('en-US',{month:'short',year:'numeric'})}` : '';
+        const seasonLabel = (myGroupSeasonStart || myGroupSeasonEnd)
+          ? ` · Season ${myGroupSeasonStart ? 'from ' + new Date(myGroupSeasonStart).toLocaleDateString('en-US',{month:'short',year:'numeric'}) : ''}${myGroupSeasonStart && myGroupSeasonEnd ? ' ' : ''}${myGroupSeasonEnd ? 'through ' + new Date(myGroupSeasonEnd).toLocaleDateString('en-US',{month:'short',year:'numeric'}) : ''}`
+          : '';
         const nameHtml   = `<div class="lb-section-label" style="margin-bottom:12px">${esc(myGroupName || myGroupCode)} — ${groupUsers.length} member${groupUsers.length !== 1 ? 's' : ''}${seasonLabel}</div>`;
         const tableWrapId = 'lbMgGroupTable';
         groupEl.innerHTML = `<div class="lb-mg-group">${nameHtml}<div id="${tableWrapId}"></div><div id="lbMgRecap"></div><div id="lbMgWall"></div></div>`;
@@ -1284,12 +1299,13 @@
       if (btn) { btn.textContent = 'Joining…'; btn.disabled = true; }
       try {
         // Look up group name from any member with that code
-        const { data: groupData } = await sb.from('profiles').select('group_name, group_season_start').eq('group_code', code).limit(1);
+        const { data: groupData } = await sb.from('profiles').select('group_name, group_season_start, group_season_end').eq('group_code', code).limit(1);
         const groupName = groupData?.[0]?.group_name || null;
         const seasonStart = groupData?.[0]?.group_season_start || null;
-        const { error } = await sb.from('profiles').update({ group_code: code, group_name: groupName, group_is_owner: false, group_season_start: seasonStart }).eq('id', myId);
+        const seasonEnd = groupData?.[0]?.group_season_end || null;
+        const { error } = await sb.from('profiles').update({ group_code: code, group_name: groupName, group_is_owner: false, group_season_start: seasonStart, group_season_end: seasonEnd }).eq('id', myId);
         if (error) throw error;
-        myGroupCode = code; myGroupName = groupName; myGroupIsOwner = false; myGroupSeasonStart = seasonStart;
+        myGroupCode = code; myGroupName = groupName; myGroupIsOwner = false; myGroupSeasonStart = seasonStart; myGroupSeasonEnd = seasonEnd;
         if (allUsers) allUsers.forEach(u => { if (u.user_id === myId) { u.group_code = code; u.group_name = groupName; } });
         closeModal('modalJoin');
         if (codeEl) codeEl.value = '';

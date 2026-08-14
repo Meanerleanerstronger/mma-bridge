@@ -4,10 +4,11 @@
 // and use every power they have — roster, team name, scoring rules,
 // per-event overrides, and pick-timing integrity — without hunting
 // through the leaderboard page. Requires Supabase profiles columns:
-//   group_code, group_name, group_is_owner, group_season_start,
+//   group_code, group_name, group_is_owner, group_season_start, group_season_end,
 //   group_event_types, group_excluded_events (all TEXT/BOOLEAN, see below)
 // Run in Supabase SQL editor if missing:
 //   ALTER TABLE profiles ADD COLUMN IF NOT EXISTS group_excluded_events TEXT;
+//   ALTER TABLE profiles ADD COLUMN IF NOT EXISTS group_season_end TEXT;
 // ==============================================
 (async function () {
 
@@ -60,7 +61,7 @@
 
   const { data: prof } = await sb
     .from('profiles')
-    .select('id, display_name, group_code, group_name, group_is_owner, group_season_start, group_event_types, group_excluded_events')
+    .select('id, display_name, group_code, group_name, group_is_owner, group_season_start, group_season_end, group_event_types, group_excluded_events')
     .eq('id', myId)
     .single();
 
@@ -77,6 +78,7 @@
   let groupCode = prof.group_code;
   let groupName = prof.group_name || 'My Group';
   let seasonStart = prof.group_season_start || null;
+  let seasonEnd   = prof.group_season_end   || null;
   let eventTypes = (() => {
     try { const v = JSON.parse(prof.group_event_types || 'null'); return Array.isArray(v) && v.length ? v : ['ppv', 'fightnight']; }
     catch { return ['ppv', 'fightnight']; }
@@ -167,9 +169,14 @@
           <label class="cx-label">Season Start Date</label>
           <div class="cx-add-row">
             <input type="date" class="cx-input" id="cxSeasonDate" value="${seasonStart ? seasonStart.slice(0,10) : new Date().toISOString().slice(0,10)}" />
-            <button class="cx-primary-btn" id="cxSaveSeason">Set Season</button>
           </div>
-          <div class="cx-hint">Only picks made after this date count in your group standings.</div>
+          <label class="cx-label" style="margin-top:12px">Season End Date <span style="opacity:.55;font-weight:400">(optional)</span></label>
+          <div class="cx-add-row">
+            <input type="date" class="cx-input" id="cxSeasonEndDate" value="${seasonEnd ? seasonEnd.slice(0,10) : ''}" />
+            ${seasonEnd ? `<button class="cx-danger-btn" id="cxClearSeasonEnd" type="button">Clear</button>` : ''}
+          </div>
+          <button class="cx-primary-btn" id="cxSaveSeason" style="margin-top:10px">Save Season Dates</button>
+          <div class="cx-hint">Only picks made on or after the start date${seasonEnd ? ' and on or before the end date' : ''} count in your group standings. Leave the end date blank for an open-ended season.</div>
 
           <label class="cx-label" style="margin-top:18px">Which Event Types Count</label>
           <div class="lb-evtype-row">
@@ -259,7 +266,8 @@
       btn.disabled = true; btn.textContent = 'Adding…';
       await sb.from('profiles').update({
         group_code: groupCode, group_name: groupName, group_is_owner: false,
-        group_season_start: seasonStart, group_event_types: JSON.stringify(eventTypes),
+        group_season_start: seasonStart, group_season_end: seasonEnd,
+        group_event_types: JSON.stringify(eventTypes),
         group_excluded_events: JSON.stringify(excludedEvents)
       }).eq('id', uid);
       members.push({ id: uid, name: uname, avatar: null });
@@ -293,12 +301,24 @@
     });
 
     document.getElementById('cxSaveSeason')?.addEventListener('click', async () => {
-      const val = document.getElementById('cxSeasonDate')?.value;
+      const val    = document.getElementById('cxSeasonDate')?.value;
+      const valEnd = document.getElementById('cxSeasonEndDate')?.value || '';
       if (!val) return;
+      if (valEnd && valEnd < val) {
+        alert('Season end date can\'t be before the start date.');
+        return;
+      }
       const btn = document.getElementById('cxSaveSeason');
       btn.textContent = 'Saving…'; btn.disabled = true;
       seasonStart = val;
-      await updateGroupAll({ group_season_start: seasonStart });
+      seasonEnd = valEnd || null;
+      await updateGroupAll({ group_season_start: seasonStart, group_season_end: seasonEnd });
+      render();
+    });
+
+    document.getElementById('cxClearSeasonEnd')?.addEventListener('click', async () => {
+      seasonEnd = null;
+      await updateGroupAll({ group_season_end: null });
       render();
     });
 
