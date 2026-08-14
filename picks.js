@@ -1169,7 +1169,7 @@ function formatOdds(n) {
           ${f.rounds ? `<span class="fc-rds">· ${esc(f.rounds)}</span>` : ''}
           ${f.titleFight ? `<span class="fc-title-pip">TITLE FIGHT</span>` : ''}
         </div>
-        <span class="fc-head-h2h">MATCHUP →</span>
+        <span class="fc-head-h2h">Matchup</span>
         ${cardLblTxt ? `<span class="fc-card-lbl">${cardLblTxt}</span>` : ''}
       </div>`;
 

@@ -4743,9 +4743,15 @@ body.light-mode #cursor-glow { display: none; }
 }
 .fp-ufc-link:hover { color: #ff8a3d; border-color: #ff8a3d; }
 
-/* Back button */
+/* Back button — was position:fixed;top:0, which sat directly underneath
+   the navbar (position:sticky, not fixed — so it already reserves its
+   own space at the top of the page) at the same z-index stacking
+   context. The navbar's higher z-index always won, so this entire bar
+   — including the back button — was permanently invisible, 100% covered,
+   on every load. Switched to a normal in-flow element (matches how
+   matchup.html's own back button already does it correctly) so it just
+   sits right below the navbar instead of fighting it for the same pixels. */
 .fp-back-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   padding: 14px 24px;
   display: flex; align-items: center; justify-content: space-between;
   background: #0d0d0d;
@@ -4753,17 +4759,18 @@ body.light-mode #cursor-glow { display: none; }
 }
 .fp-back-btn {
   display: flex; align-items: center; gap: 7px;
-  background: none; border: none; cursor: pointer;
-  color: rgba(255,255,255,0.45);
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px; padding: 7px 14px; cursor: pointer;
+  color: rgba(255,255,255,0.6);
   font-family: 'Montserrat', sans-serif;
   font-size: 0.62rem; font-weight: 700;
   letter-spacing: 0.14em; text-transform: uppercase;
-  transition: color 0.15s;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
 }
-.fp-back-btn:hover { color: #ff8a3d; }
+.fp-back-btn:hover { color: #ff8a3d; background: rgba(255,138,61,0.1); border-color: rgba(255,138,61,0.3); }
 body.light-mode .fp-back-nav { background: #fff; border-bottom-color: rgba(0,0,0,0.08); }
-body.light-mode .fp-back-btn { color: rgba(0,0,0,0.45); }
-body.light-mode .fp-back-btn:hover { color: #e06b1a; }
+body.light-mode .fp-back-btn { color: rgba(0,0,0,0.55); background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.1); }
+body.light-mode .fp-back-btn:hover { color: #e06b1a; background: rgba(224,107,26,0.08); border-color: rgba(224,107,26,0.3); }
 .fp-back-btn svg { width: 13px; height: 13px; }
 
 /* Not found */
@@ -5471,21 +5478,36 @@ body.light-mode #pk-poster-bg.loaded { opacity: 0.12; }
   cursor: pointer;
 }
 .fc-head:hover { background: rgba(255,255,255,0.025); }
+/* Was color/border rgba(...,0) until :hover — fully invisible by default,
+   so there was zero visual cue the row was clickable at all (and on
+   touch devices, which never :hover, permanently invisible). Now a
+   quiet-but-real pill at rest, brightening on hover instead of
+   appearing from nothing. Text arrow swapped for a proper SVG chevron. */
 .fc-head-h2h {
+  display: inline-flex; align-items: center; gap: 4px;
   font-family: 'Inter', sans-serif; font-weight: 700;
   font-size: 0.5rem; letter-spacing: 0.08em; text-transform: uppercase;
-  color: rgba(255,255,255,0);
-  border: 1px solid rgba(255,255,255,0);
+  color: rgba(255,138,61,0.55);
+  border: 1px solid rgba(255,138,61,0.22);
+  background: rgba(255,138,61,0.06);
   padding: 3px 9px; border-radius: 20px;
   white-space: nowrap;
   transition: color 0.18s, border-color 0.18s, background 0.18s;
   pointer-events: none;
 }
-.fc-head:hover .fc-head-h2h {
-  color: rgba(255,255,255,0.55);
-  border-color: rgba(255,255,255,0.14);
-  background: rgba(255,255,255,0.05);
+.fc-head-h2h::after {
+  content: ''; width: 8px; height: 8px; flex-shrink: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ff8a3d' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='5' y1='12' x2='19' y2='12'/%3E%3Cpolyline points='12 5 19 12 12 19'/%3E%3C/svg%3E");
+  background-size: contain; background-repeat: no-repeat;
+  opacity: 0.7;
 }
+.fc-head:hover .fc-head-h2h {
+  color: #ff8a3d;
+  border-color: rgba(255,138,61,0.45);
+  background: rgba(255,138,61,0.12);
+}
+body.light-mode .fc-head-h2h { color: rgba(224,107,26,0.6); border-color: rgba(224,107,26,0.25); background: rgba(224,107,26,0.07); }
+body.light-mode .fc-head:hover .fc-head-h2h { color: #e06b1a; border-color: rgba(224,107,26,0.5); background: rgba(224,107,26,0.12); }
 .fc-head-left {
   display: flex; align-items: center; gap: 6px;
 }
@@ -8491,12 +8513,17 @@ body.light-mode .lb-skel-stat {
 .pk-form-dot-l  { background: rgba(255,55,55,0.1);   color: #ff4545; border: 1px solid rgba(255,55,55,0.22); }
 .pk-form-dot-nc { background: rgba(255,255,255,0.03); color: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.07); }
 
-/* ── Fighter hover card ── */
+/* ── Fighter hover card ──
+   Widened from 224px (was cramping the opponent name + method into a
+   sliver, forcing an ellipsis-truncated "Belal ..." / "Carlo..." on
+   basically every row) and given the CTA real button weight instead of
+   a near-invisible thin-bordered pill — this is the "open profile"
+   popup, made to actually look like a finished piece of UI. */
 .fc-hov {
-  position: fixed; z-index: 8900; width: 224px;
+  position: fixed; z-index: 8900; width: 296px;
   background: #0e0e12;
   border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 12px; padding: 13px 14px 10px;
+  border-radius: 14px; padding: 16px 18px 14px;
   box-shadow: 0 24px 60px rgba(0,0,0,0.82), 0 0 0 1px rgba(255,255,255,0.04);
   pointer-events: auto;
   opacity: 0; transform: translateY(5px) scale(0.97);
@@ -8505,43 +8532,56 @@ body.light-mode .lb-skel-stat {
 }
 .fc-hov.fc-hov-on { display: block; opacity: 1; transform: translateY(0) scale(1); }
 .fc-hov-name {
-  font-family: 'Barlow Condensed', sans-serif; font-size: 1.05rem;
-  font-weight: 900; text-transform: uppercase; letter-spacing: 0.04em;
-  color: #fff; line-height: 1; margin-bottom: 3px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 1.25rem;
+  font-weight: 900; text-transform: uppercase; letter-spacing: 0.02em;
+  color: #fff; line-height: 1.05; margin-bottom: 4px;
 }
 .fc-hov-rec {
-  font-family: 'Inter', sans-serif; font-size: 0.62rem; font-weight: 500;
-  color: rgba(255,255,255,0.3); letter-spacing: 0.03em; margin-bottom: 10px;
+  font-family: 'Inter', sans-serif; font-size: 0.68rem; font-weight: 600;
+  color: rgba(255,255,255,0.4); letter-spacing: 0.03em; margin-bottom: 12px;
+  padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.07);
 }
-.fc-hov-fights { display: flex; flex-direction: column; gap: 4px; margin-bottom: 9px; }
-.fc-hov-row { display: flex; align-items: center; gap: 7px; }
+.fc-hov-fights { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+.fc-hov-row { display: flex; align-items: center; gap: 8px; }
 .fc-hov-res {
-  width: 20px; height: 20px; flex-shrink: 0;
+  width: 22px; height: 22px; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
-  border-radius: 4px;
-  font-family: 'Barlow Condensed', sans-serif; font-size: 0.65rem; font-weight: 900;
+  border-radius: 5px;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; font-weight: 900;
 }
 .fc-hov-w  { background: rgba(0,200,80,0.14);  color: #00c850; border: 1px solid rgba(0,200,80,0.3); }
 .fc-hov-l  { background: rgba(255,55,55,0.12); color: #ff4545; border: 1px solid rgba(255,55,55,0.25); }
 .fc-hov-nc { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.3); border: 1px solid rgba(255,255,255,0.08); }
 .fc-hov-opp {
-  flex: 1; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 500;
-  color: rgba(255,255,255,0.72); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  flex: 1; min-width: 0; font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 500;
+  color: rgba(255,255,255,0.8); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .fc-hov-mth {
-  font-family: 'Inter', sans-serif; font-size: 0.62rem;
-  color: rgba(255,255,255,0.28); white-space: nowrap;
+  flex-shrink: 0; font-family: 'Inter', sans-serif; font-size: 0.64rem;
+  color: rgba(255,255,255,0.32); white-space: nowrap;
 }
 .fc-hov-link {
-  display: block; margin-top: 8px; padding: 6px 0;
-  font-family: 'Montserrat', sans-serif; font-size: 0.58rem; font-weight: 800;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  color: #ff8a3d; text-decoration: none; text-align: center;
-  background: rgba(255,138,61,0.06); border-radius: 4px;
-  border: 1px solid rgba(255,138,61,0.12);
-  transition: background 0.12s;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  margin-top: 4px; padding: 10px 0;
+  font-family: 'Montserrat', sans-serif; font-size: 0.66rem; font-weight: 800;
+  letter-spacing: 0.09em; text-transform: uppercase;
+  color: #0a0a0a; text-decoration: none;
+  background: linear-gradient(165deg, #ffb066 0%, #ff8a3d 45%, #e8691c 100%);
+  border-radius: 8px; border: none;
+  box-shadow: 0 4px 14px rgba(255,138,61,0.28);
+  transition: transform 0.12s, box-shadow 0.12s;
 }
-.fc-hov-link:hover { background: rgba(255,138,61,0.1); }
+.fc-hov-link:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(255,138,61,0.4); }
+.fc-hov-link::after {
+  content: ''; width: 12px; height: 12px; flex-shrink: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230a0a0a' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='5' y1='12' x2='19' y2='12'/%3E%3Cpolyline points='12 5 19 12 12 19'/%3E%3C/svg%3E");
+  background-size: contain; background-repeat: no-repeat;
+}
+body.light-mode .fc-hov { background: #fffaf5; border-color: rgba(0,0,0,0.1); box-shadow: 0 24px 60px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.03); }
+body.light-mode .fc-hov-name { color: #161514; }
+body.light-mode .fc-hov-rec { color: rgba(0,0,0,0.4); border-bottom-color: rgba(0,0,0,0.08); }
+body.light-mode .fc-hov-opp { color: rgba(0,0,0,0.75); }
+body.light-mode .fc-hov-mth { color: rgba(0,0,0,0.35); }
 
 /* Crowd fave / underdog badges */
 .pk-crowd-fave, .pk-crowd-dog {
