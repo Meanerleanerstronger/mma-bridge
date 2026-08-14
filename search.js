@@ -70,6 +70,80 @@
     { keywords: ['about','privacy','contact'], label: 'About MMA Bridge', sub: 'About the site + privacy policy', href: 'about.html' },
   ];
 
+  // ── Help topics — "how do I..." style queries get a real step-by-step
+  // walkthrough card with screenshots instead of a page link. Matched by
+  // phrase (substring) first, then by a looser keyword-overlap score so
+  // "how do i view rankings" and "where are the divisional rankings"
+  // both land on the same topic. ──────────────────────────────
+  const HELP_TOPICS = [
+    {
+      id: 'make-picks',
+      title: 'How to Make Your Picks',
+      phrases: ['how do i make picks', 'how do i make my picks', 'how to make picks', 'how to pick', 'how do i pick', 'make picks', 'how does picking work'],
+      keywords: ['pick', 'picks', 'picking'],
+      steps: [
+        { text: 'Head to Upcoming Events and open the card you want in on.', img: 'images/help/picks-1-events.jpg' },
+        { text: 'Tap a fighter’s photo to pick them to win. Add a method and round guess for bonus points.', img: 'images/help/picks-2-select.jpg' },
+        { text: 'Tip: press and hold (or hover) a fighter’s photo to preview their last 5 fights before you decide.', img: 'images/help/picks-3-profile.jpg' },
+      ],
+      cta: { label: 'Go make your picks', href: 'events.html' },
+    },
+    {
+      id: 'p4p-rankings',
+      title: 'How to View Pound-for-Pound Rankings',
+      phrases: ['how do i view p4p', 'how to view p4p', 'where is p4p', 'how do i see p4p', 'p4p rankings', 'pound for pound rankings', 'how do i view pound for pound'],
+      keywords: ['p4p', 'pound'],
+      steps: [
+        { text: 'Click Rankings in the top nav.', img: '' },
+        { text: 'Men’s P4P is the default view — top 15 pound-for-pound, updated weekly. Switch to Women’s P4P with the tab next to it.', img: 'images/help/p4p-1-list.jpg' },
+      ],
+      cta: { label: 'Open P4P Rankings', href: 'pfp.html' },
+    },
+    {
+      id: 'divisional-rankings',
+      title: 'How to View Divisional Rankings',
+      phrases: ['how do i view divisional rankings', 'how to view divisional rankings', 'divisional rankings', 'how do i see divisional rankings', 'weight class rankings', 'how do i view rankings by division'],
+      keywords: ['divisional', 'division'],
+      steps: [
+        { text: 'Go to Rankings, then click the Divisional tab.', img: '' },
+        { text: 'Pick a weight class chip (Flyweight, Bantamweight, Welterweight, etc) to see that division’s ranked contenders.', img: 'images/help/divisional-1-tab.jpg' },
+      ],
+      cta: { label: 'Open Divisional Rankings', href: 'pfp.html' },
+    },
+    {
+      id: 'write-review',
+      title: 'How to Write a Review',
+      phrases: ['how do i write a review', 'how to write a review', 'how do i review', 'how to review an event', 'how do i rate a card', 'leave a review', 'write a review'],
+      keywords: ['review', 'reviews', 'rate'],
+      steps: [
+        { text: 'Go to Review — every completed card is listed, newest first.', img: 'images/help/review-1-list.jpg' },
+        { text: 'Open a card, rate it 1–5 stars, and optionally write up what you thought.', img: 'images/help/review-2-form.jpg' },
+      ],
+      cta: { label: 'Go to Reviews', href: 'reviews.html' },
+    },
+  ];
+
+  // "how do/does/can/to i/you ..." — a strong signal this is a help query,
+  // not a fighter/event search. Used to prioritize the help card over
+  // regular results even on a looser keyword match.
+  const HELP_INTENT_RE = /\b(how (do|does|can|to) (i|you|we)|where (is|are|do i)|how (do i|to))\b/i;
+
+  function matchHelpTopic(q) {
+    const ql = q.toLowerCase().trim();
+    if (ql.length < 4) return null;
+    // Exact/substring phrase match — highest confidence.
+    for (const topic of HELP_TOPICS) {
+      if (topic.phrases.some(p => ql.includes(p))) return topic;
+    }
+    // Looser match: has help intent AND at least one topic keyword.
+    if (HELP_INTENT_RE.test(ql)) {
+      for (const topic of HELP_TOPICS) {
+        if (topic.keywords.some(kw => ql.includes(kw))) return topic;
+      }
+    }
+    return null;
+  }
+
   // ── Load data once ────────────────────────────
   async function loadData() {
     if (fighters && events) return;
@@ -204,9 +278,51 @@
     } catch { return []; }
   }
 
+  // ── Render a "how do I..." help card ──────────
+  function renderHelpCard(topic) {
+    const drop = getOrCreateDrop();
+    drop.innerHTML = '';
+    drop.classList.add('sd-help-mode');
+
+    const stepsHtml = topic.steps.map((s, i) => `
+      <div class="sd-help-step">
+        <div class="sd-help-step-row">
+          <span class="sd-help-step-num">${i + 1}</span>
+          <span class="sd-help-step-text">${escHtml(s.text)}</span>
+        </div>
+        ${s.img ? `<img class="sd-help-step-img" src="${escHtml(s.img)}" alt="Step ${i + 1}" loading="lazy">` : ''}
+      </div>
+    `).join('');
+
+    const card = document.createElement('div');
+    card.className = 'sd-help-card';
+    card.innerHTML = `
+      <div class="sd-help-header">
+        <span class="sd-help-kicker">MMA Bridge Help</span>
+        <button class="sd-help-close" type="button" aria-label="Close">&times;</button>
+      </div>
+      <div class="sd-help-title">${escHtml(topic.title)}</div>
+      <div class="sd-help-steps">${stepsHtml}</div>
+      <a class="sd-help-cta" href="${escHtml(topic.cta.href)}">${escHtml(topic.cta.label)} →</a>
+    `;
+    card.querySelector('.sd-help-close').addEventListener('mousedown', e => { e.preventDefault(); hideDrop(); });
+    card.querySelector('.sd-help-cta').addEventListener('mousedown', e => { e.preventDefault(); navigateTo(topic.cta.href); });
+    drop.appendChild(card);
+
+    const askRow = document.createElement('div');
+    askRow.className = 'sd-ask-lucas';
+    askRow.innerHTML = `<span>Something else?</span> <a href="lucas.html">Ask Lucas →</a>`;
+    askRow.addEventListener('mousedown', e => e.preventDefault());
+    drop.appendChild(askRow);
+
+    drop.style.display = 'block';
+    activeIdx = -1;
+  }
+
   // ── Render dropdown ───────────────────────────
   function showDrop(pages, users, fighterResults, eventResults, newsResults) {
     const drop = getOrCreateDrop();
+    drop.classList.remove('sd-help-mode');
     drop.innerHTML = '';
 
     const total = pages.length + users.length + fighterResults.length + eventResults.length + newsResults.length;
@@ -373,6 +489,11 @@
     if (q.length < 1) { hideDrop(); return; }
 
     debounce = setTimeout(async () => {
+      // Help queries ("how do I make picks") short-circuit straight to a
+      // step-by-step card — no need to wait on fighter/event/news data.
+      const helpTopic = matchHelpTopic(q);
+      if (helpTopic) { renderHelpCard(helpTopic); return; }
+
       await loadData();
       const ql = q.toLowerCase();
 

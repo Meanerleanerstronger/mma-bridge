@@ -4399,12 +4399,17 @@ body.light-mode #cursor-glow { display: none; }
   background: rgba(10,10,16,0.97);
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 10px;
-  overflow: hidden;
   z-index: 9999;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-shadow: 0 16px 48px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,138,61,0.06);
   min-width: 320px;
+  /* Was overflow:hidden with no height cap — fine for a handful of short
+     result rows, but a help card with several image steps could run
+     well past the bottom of the viewport with its CTA button
+     unreachable. Scrolls internally instead now. */
+  max-height: calc(100vh - 90px);
+  overflow-y: auto; overflow-x: hidden;
 }
 .sd-section {
   padding: 8px 14px 4px;
@@ -4469,6 +4474,68 @@ body.light-mode #cursor-glow { display: none; }
   transition: color 0.15s;
 }
 .sd-ask-lucas a:hover { color: #ff8a3d; }
+
+/* ── Search-bar help cards — "how do I make picks" style queries get a
+   real step-by-step walkthrough with screenshots instead of a page link. ── */
+.search-dropdown.sd-help-mode { width: 420px; max-width: calc(100vw - 32px); }
+.sd-help-card { padding: 16px 18px 18px; }
+.sd-help-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 6px;
+}
+.sd-help-kicker {
+  font-family: 'Montserrat', sans-serif; font-size: 0.58rem; font-weight: 800;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,138,61,0.6);
+}
+.sd-help-close {
+  background: none; border: none; cursor: pointer;
+  color: rgba(255,255,255,0.35); font-size: 1.1rem; line-height: 1;
+  padding: 2px 4px; transition: color 0.15s;
+}
+.sd-help-close:hover { color: #fff; }
+.sd-help-title {
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-style: italic;
+  text-transform: uppercase; color: #fff;
+  font-size: 1.4rem; line-height: 1.05; margin-bottom: 14px;
+}
+.sd-help-steps { display: flex; flex-direction: column; gap: 14px; margin-bottom: 16px; }
+.sd-help-step-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
+.sd-help-step-num {
+  flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%;
+  background: rgba(255,138,61,0.14); border: 1px solid rgba(255,138,61,0.35);
+  color: #ff8a3d; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.68rem;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 1px;
+}
+.sd-help-step-text {
+  font-family: 'Inter', sans-serif; font-size: 0.82rem; line-height: 1.45;
+  color: rgba(255,255,255,0.82);
+}
+.sd-help-step-img {
+  display: block; width: 100%; border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+.sd-help-cta {
+  display: block; text-align: center;
+  background: linear-gradient(165deg, #ffb066 0%, #ff8a3d 45%, #e8691c 100%);
+  color: #0a0a0a; text-decoration: none;
+  font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.78rem;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  border-radius: 10px; padding: 12px 16px;
+  box-shadow: 0 6px 18px rgba(255,138,61,0.3);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.sd-help-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(255,138,61,0.42); }
+/* No light-mode text color overrides here — .search-dropdown itself is
+   always dark regardless of site theme (true for every other row type
+   in this dropdown too, not just the help card), so light-mode dark
+   text would go near-invisible against it. */
+@media (max-width: 480px) {
+  .search-dropdown.sd-help-mode { width: calc(100vw - 24px); }
+  .sd-help-title { font-size: 1.2rem; }
+}
 
 /* ══════════════════════════════════════════════
    FIGHTER PROFILE PAGE
