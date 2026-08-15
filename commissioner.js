@@ -178,6 +178,12 @@
           <button class="cx-primary-btn" id="cxSaveSeason" style="margin-top:10px">Save Season Dates</button>
           <div class="cx-hint">Only picks made on or after the start date${seasonEnd ? ' and on or before the end date' : ''} count in your group standings. Leave the end date blank for an open-ended season.</div>
 
+          <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.07)">
+            <label class="cx-label">Start a New Season</label>
+            <div class="cx-hint" style="margin-bottom:10px">Moves the season start to today and clears the end date — nobody's picks are deleted, they just stop counting toward standings until the new season. Check <a href="recap.html" class="icon-arrow">Season Recap</a> first if you want to save this season's final standings before resetting.</div>
+            <button class="cx-danger-btn" id="cxResetSeason" type="button">Reset Season</button>
+          </div>
+
           <label class="cx-label" style="margin-top:18px">Which Event Types Count</label>
           <div class="lb-evtype-row">
             <label class="lb-evtype-opt"><input type="checkbox" id="cxTypePpv" ${eventTypes.includes('ppv') ? 'checked' : ''}> <span>PPV <em>(UFC 333, etc.)</em></span></label>
@@ -319,6 +325,20 @@
     document.getElementById('cxClearSeasonEnd')?.addEventListener('click', async () => {
       seasonEnd = null;
       await updateGroupAll({ group_season_end: null });
+      render();
+    });
+
+    document.getElementById('cxResetSeason')?.addEventListener('click', async function () {
+      const btn = this;
+      if (btn.dataset.confirm !== '1') {
+        btn.dataset.confirm = '1'; btn.textContent = 'Reset — confirm?';
+        setTimeout(() => { if (btn) { btn.dataset.confirm = ''; btn.textContent = 'Reset Season'; } }, 3000);
+        return;
+      }
+      btn.textContent = 'Resetting…'; btn.disabled = true;
+      seasonStart = new Date().toISOString().slice(0, 10);
+      seasonEnd = null;
+      await updateGroupAll({ group_season_start: seasonStart, group_season_end: null });
       render();
     });
 
