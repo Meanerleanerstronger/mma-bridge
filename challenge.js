@@ -75,7 +75,7 @@
             <div class="ch-pop-event">${esc(c.event_name || c.event_id)}</div>
             <div class="ch-pop-label">Someone challenged you</div>
           </div>
-          <a class="ch-pop-btn" href="picks.html?id=${encodeURIComponent(c.event_id)}">Pick Now →</a>
+          <a class="ch-pop-btn icon-arrow" href="picks.html?id=${encodeURIComponent(c.event_id)}">Pick Now</a>
         </div>`).join('')}
     `;
     const badge = document.getElementById('ch-nav-badge');

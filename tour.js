@@ -412,7 +412,7 @@
       <p id="trOfferMsg">Hey, I'm Lucas. Want me to show you around?</p>
       <div id="trOfferBtns">
         <button id="trNo">No, I'm good</button>
-        <button id="trYes">Yes, show me →</button>
+        <button id="trYes" class="icon-arrow">Yes, show me</button>
       </div>`;
     document.body.appendChild(wrap);
     raf(() => wrap.classList.add('tr-offer-in'));
@@ -561,7 +561,7 @@
       <div id="trBubbleHead"><div id="trBubbleAv">L</div><span id="trBubbleLbl">Lucas</span></div>
       <div id="trBubbleText" style="margin-bottom:18px;">That's the whole site. Make an account, it's free — your picks, your rank, your group. I'll be right here if you need anything.</div>
       <div id="trFinalBtns">
-        <a href="auth.html" id="trCreateBtn">Create Account →</a>
+        <a href="auth.html" id="trCreateBtn" class="icon-arrow">Create Account</a>
         <button id="trExpBtn" onclick="window._tourEnd()">Keep Exploring</button>
       </div>`;
   }

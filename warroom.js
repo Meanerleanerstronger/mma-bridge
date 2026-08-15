@@ -52,7 +52,7 @@
     root.innerHTML = `<div class="wr-empty-state">
       <div class="wr-empty-title">No event selected</div>
       <p>Open the War Room from an event's page during fight night.</p>
-      <a href="events.html" class="wr-empty-link">Browse events →</a>
+      <a href="events.html" class="wr-empty-link icon-arrow">Browse events</a>
     </div>`;
     return;
   }
@@ -65,7 +65,7 @@
   if (!ev) {
     root.innerHTML = `<div class="wr-empty-state">
       <div class="wr-empty-title">Event not found</div>
-      <a href="events.html" class="wr-empty-link">Browse events →</a>
+      <a href="events.html" class="wr-empty-link icon-arrow">Browse events</a>
     </div>`;
     return;
   }
@@ -91,7 +91,7 @@
     root.innerHTML = `<div class="wr-empty-state">
       <div class="wr-empty-title">Sign in to enter the War Room</div>
       <p>You need an account and a group to see live scores side by side.</p>
-      <a href="auth.html" class="wr-empty-link">Sign in →</a>
+      <a href="auth.html" class="wr-empty-link icon-arrow">Sign in</a>
     </div>`;
     return;
   }
@@ -103,7 +103,7 @@
     root.innerHTML = `<div class="wr-empty-state">
       <div class="wr-empty-title">You're not in a group yet</div>
       <p>War Room shows live scores for everyone in a group, side by side. Create or join one first.</p>
-      <a href="leaderboard.html" class="wr-empty-link">Create or join a group →</a>
+      <a href="leaderboard.html" class="wr-empty-link icon-arrow">Create or join a group</a>
     </div>`;
     return;
   }

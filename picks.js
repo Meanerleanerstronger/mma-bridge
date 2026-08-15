@@ -201,12 +201,12 @@ function formatOdds(n) {
     const next = eventsData.find(e => e.status !== 'completed' && (e.isoDate || '') >= today)
                  || eventsData.find(e => e.status !== 'completed');
     if (next) { window.location.replace(`picks.html?id=${encodeURIComponent(next.id)}`); return; }
-    root.innerHTML = `<div class="pk-error">No upcoming events. <a href="events.html" style="color:#ff8a3d;text-decoration:none;">Browse events →</a></div>`;
+    root.innerHTML = `<div class="pk-error">No upcoming events. <a href="events.html" class="icon-arrow" style="color:#ff8a3d;text-decoration:none;">Browse events</a></div>`;
     return;
   }
 
   const event = eventsData.find(e => e.id === eventId || slugify(e.name || '') === eventId);
-  if (!event) { root.innerHTML = `<div class="pk-error">Event not found. <a href="events.html" style="color:#ff8a3d;text-decoration:none;">Browse events →</a></div>`; return; }
+  if (!event) { root.innerHTML = `<div class="pk-error">Event not found. <a href="events.html" class="icon-arrow" style="color:#ff8a3d;text-decoration:none;">Browse events</a></div>`; return; }
 
   // Dynamic page title + OG image
   if (event.name) {
@@ -1513,7 +1513,7 @@ function formatOdds(n) {
   function scoreHero() {
     if (!isCompleted) return '';
     const { correct, total, totalPts, fotnPts } = computeScore();
-    if (!myId) return `<div class="pk-score-hero pk-score-hero-anon"><div class="pk-score-hero-anon-title">Sign in to track your picks</div><a href="auth.html" class="pk-score-hero-anon-link">Sign In →</a></div>`;
+    if (!myId) return `<div class="pk-score-hero pk-score-hero-anon"><div class="pk-score-hero-anon-title">Sign in to track your picks</div><a href="auth.html" class="pk-score-hero-anon-link icon-arrow">Sign In</a></div>`;
     if (total === 0) return `<div class="pk-score-hero pk-score-hero-empty"><div class="pk-score-hero-empty-title">No picks recorded</div><div class="pk-score-hero-empty-sub">Make picks on upcoming events to track your accuracy</div></div>`;
     const pct = Math.round((correct / total) * 100);
     const cls = pct >= 70 ? 'great' : pct >= 50 ? 'ok' : 'poor';
@@ -1996,7 +1996,7 @@ function formatOdds(n) {
         ${!myId && !isCompleted && !isLocked ? `
           <div class="pk-banner pk-signin-banner">
             <span>Sign in to save your picks and track your record</span>
-            <a href="auth.html" class="pk-signin-link">Sign In →</a>
+            <a href="auth.html" class="pk-signin-link icon-arrow">Sign In</a>
           </div>` : ''}
         ${droppedFightsHtml()}
         ${!isCompleted && !isLocked && !localStorage.getItem('pk_onboard_seen') ? `

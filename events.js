@@ -287,7 +287,7 @@ document.addEventListener('DOMContentLoaded', async () => {
               <div class="ev-header-right">
                 <div class="ev-body-meta">${ev.date||''} &nbsp;·&nbsp; ${ev.location||''} &nbsp;·&nbsp; ${ev.venue||''}</div>
                 <div class="ev-header-actions">
-                  ${upcoming ? `<a class="ev-picks-btn" href="picks.html?id=${esc(id)}">Pick Fights →</a>` : ''}
+                  ${upcoming ? `<a class="ev-picks-btn icon-arrow" href="picks.html?id=${esc(id)}">Pick Fights</a>` : ''}
                   ${upcoming ? `<button class="ev-consensus-btn" data-ev-id="${esc(id)}" data-ev-name="${esc(ev.name||'')}" data-main-card="${esc(JSON.stringify(ev.mainCard||[]))}" title="Share community pick consensus" onclick="event.stopPropagation()">Share Consensus</button>` : ''}
                   ${calBtnHtml}
                   ${bellHtml}
@@ -502,7 +502,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div class="ev-reminder-banner">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
         <span><strong>${esc(b.name)}</strong> is ${esc(b.label)} — picks are open now!</span>
-        <a class="ev-reminder-banner-link" href="picks.html?id=${esc(b.id)}">Make Picks →</a>
+        <a class="ev-reminder-banner-link icon-arrow" href="picks.html?id=${esc(b.id)}">Make Picks</a>
       </div>`).join('');
     wrap.insertAdjacentElement('beforebegin', container);
   }

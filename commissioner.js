@@ -54,7 +54,7 @@
     root.innerHTML = `
       <div class="cx-empty-state">
         <div class="cx-empty-title">Sign in to manage your group</div>
-        <a class="cx-empty-link" href="leaderboard.html">Go to Leaderboard →</a>
+        <a class="cx-empty-link icon-arrow" href="leaderboard.html">Go to Leaderboard</a>
       </div>`;
     return;
   }
@@ -70,7 +70,7 @@
       <div class="cx-empty-state">
         <div class="cx-empty-title">${!prof?.group_code ? "You're not in a group yet" : 'Only the commissioner of a group can access this page'}</div>
         <p class="cx-empty-sub">${!prof?.group_code ? 'Create or join a group from the leaderboard to get started.' : `Ask ${'your group\'s commissioner'} to make changes, or create your own group to become one.`}</p>
-        <a class="cx-empty-link" href="leaderboard.html">Go to Leaderboard →</a>
+        <a class="cx-empty-link icon-arrow" href="leaderboard.html">Go to Leaderboard</a>
       </div>`;
     return;
   }

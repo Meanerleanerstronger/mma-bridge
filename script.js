@@ -202,7 +202,7 @@ function renderHero(ev, mode, hasPicks) {
     // math against UTC vs. the viewer's local day). Just a calm,
     // always-correct pointer to Paramount+ with the event's actual
     // broadcast start time in the viewer's own timezone when known.
-    btn.textContent = 'Watch on Paramount+ →';
+    btn.textContent = 'Watch on Paramount+';
     btn.href = 'https://www.paramountplus.com/';
     btn.target = '_blank';
     btn.rel = 'noopener noreferrer';
@@ -218,7 +218,7 @@ function renderHero(ev, mode, hasPicks) {
     note.style.cssText = 'margin-top:12px;font-family:Inter,sans-serif;font-size:0.78rem;color:rgba(255,255,255,0.45);';
     btn.parentNode.insertBefore(note, btn.nextSibling);
   } else if (mode === 'completed' || mode === 'results') {
-    btn.textContent = 'Review the Card →';
+    btn.textContent = 'Review the Card';
     btn.href = `events.html?id=${eventId}`;
     btn.target = '';
     btn.rel = '';
@@ -231,13 +231,14 @@ function renderHero(ev, mode, hasPicks) {
     if (hasPicks) {
       const myPicksBtn = document.createElement('a');
       myPicksBtn.id = 'heroSecondaryBtn';
-      myPicksBtn.textContent = 'My Picks →';
+      myPicksBtn.className = 'icon-arrow';
+      myPicksBtn.textContent = 'My Picks';
       myPicksBtn.href = `picks.html?id=${eventId}`;
       myPicksBtn.style.cssText = 'display:inline-block;margin-left:10px;padding:12px 24px;border-radius:12px;font-family:Montserrat,sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;background:rgba(255,255,255,.07);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.12);transition:background .15s;';
       btn.parentNode.insertBefore(myPicksBtn, btn.nextSibling);
     }
   } else {
-    btn.textContent = 'Make Your Picks →';
+    btn.textContent = 'Make Your Picks';
     btn.href = `picks.html?id=${eventId}`;
     btn.target = '';
     btn.rel = '';
@@ -277,7 +278,7 @@ function renderHeroSplit(completedEv, upcomingEv) {
         <div class="hero-split-eyebrow" style="font-family:'Montserrat',sans-serif;font-size:0.6rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:10px;">${cPPV ? 'PPV Event' : 'Fight Night'} — Results</div>
         <h2 class="hero-split-title" style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(1.1rem,2.2vw,1.7rem);text-transform:uppercase;letter-spacing:0.04em;color:#fff;margin:0 0 8px;text-shadow:0 2px 20px rgba(0,0,0,0.8);line-height:1.15;">${completedEv.name||''}</h2>
         <div class="hero-split-meta" style="font-family:'Inter',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.5);margin-bottom:22px;">${[completedEv.date,completedEv.location].filter(Boolean).join('  ·  ')}</div>
-        <a href="events.html?id=${cId}" class="hero-review-btn" style="align-self:flex-start;">Review the Card →</a>
+        <a href="events.html?id=${cId}" class="hero-review-btn icon-arrow" style="align-self:flex-start;">Review the Card</a>
       </div>
     </div>
 
@@ -292,7 +293,7 @@ function renderHeroSplit(completedEv, upcomingEv) {
         <div class="hero-split-eyebrow" style="font-family:'Montserrat',sans-serif;font-size:0.6rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:10px;">${uPPV ? 'Next PPV Event' : 'Next Fight Night'}</div>
         <h2 class="hero-split-title" style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(1.1rem,2.2vw,1.7rem);text-transform:uppercase;letter-spacing:0.04em;color:#fff;margin:0 0 8px;text-shadow:0 2px 20px rgba(0,0,0,0.8);line-height:1.15;">${upcomingEv.name||''}</h2>
         <div class="hero-split-meta" style="font-family:'Inter',sans-serif;font-size:0.82rem;color:rgba(255,255,255,0.55);margin-bottom:22px;">${[upcomingEv.date,upcomingEv.location].filter(Boolean).join('  ·  ')}</div>
-        <a href="picks.html?id=${uId}" id="heroBtn" style="display:inline-block !important;background:linear-gradient(135deg,#7a3100 0%,#d46400 55%,#ff8c00 100%) !important;color:#fff !important;font-family:'Montserrat',sans-serif !important;font-weight:800 !important;font-size:0.78rem !important;letter-spacing:0.12em !important;text-transform:uppercase !important;padding:13px 28px !important;border-radius:6px !important;text-decoration:none !important;border:1px solid rgba(255,140,0,0.5) !important;box-shadow:0 0 28px rgba(255,120,0,0.45) !important;animation:heroBtnPulse 3s 1.2s ease infinite !important;transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1) !important;">Make Your Picks →</a>
+        <a href="picks.html?id=${uId}" id="heroBtn" class="icon-arrow" style="display:inline-block !important;background:linear-gradient(135deg,#7a3100 0%,#d46400 55%,#ff8c00 100%) !important;color:#fff !important;font-family:'Montserrat',sans-serif !important;font-weight:800 !important;font-size:0.78rem !important;letter-spacing:0.12em !important;text-transform:uppercase !important;padding:13px 28px !important;border-radius:6px !important;text-decoration:none !important;border:1px solid rgba(255,140,0,0.5) !important;box-shadow:0 0 28px rgba(255,120,0,0.45) !important;animation:heroBtnPulse 3s 1.2s ease infinite !important;transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1) !important;">Make Your Picks</a>
       </div>
     </div>
   `;

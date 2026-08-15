@@ -1170,7 +1170,7 @@
           </div>
           <div class="ov-topbar-right">
             <a class="ov-pick-btn ov-warroom-btn" id="ovWarroomBtn" href="#" style="display:none"><span class="ov-btn-label">War Room — Live</span></a>
-            <a class="ov-pick-btn" id="ovPickBtn" href="#"><span class="ov-btn-label">Pick Fights →</span></a>
+            <a class="ov-pick-btn" id="ovPickBtn" href="#"><span class="ov-btn-label icon-arrow">Pick Fights</span></a>
             <div class="ov-cal-wrap" id="ovCalWrap">
               <button class="ov-cal-btn" id="ovCalBtn">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
@@ -2150,7 +2150,7 @@
           <div class="ev-group-widget">
             <div class="ev-gw-header">
               <div class="ev-gw-title">${esc(groupName)}</div>
-              <a class="ev-gw-link" href="leaderboard.html">Full Standings →</a>
+              <a class="ev-gw-link icon-arrow" href="leaderboard.html">Full Standings</a>
             </div>
             <div class="ev-gw-rows">${rows}</div>
           </div>`;
@@ -2225,7 +2225,7 @@
         const groupCode = prof?.group_code || null;
 
         if (!groupCode) {
-          document.getElementById('perfBody').innerHTML = '<div class="perf-no-group">You\'re not in a group yet.<br><a href="leaderboard.html" style="color:#ff8a3d">Join or create one →</a></div>';
+          document.getElementById('perfBody').innerHTML = '<div class="perf-no-group">You\'re not in a group yet.<br><a href="leaderboard.html" class="icon-arrow" style="color:#ff8a3d">Join or create one</a></div>';
           return;
         }
 

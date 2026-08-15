@@ -529,7 +529,7 @@
             <div class="notif-push-row notif-ios-hint">
               <span class="notif-push-icon">${SVG.bell}</span>
               <span class="notif-push-text">Add to Home Screen for push alerts
-                <span class="notif-ios-sub">Tap Share → Add to Home Screen in Safari</span>
+                <span class="notif-ios-sub">Tap Share, then Add to Home Screen in Safari</span>
               </span>
             </div>`;
         } else {
@@ -643,12 +643,12 @@
       ? `<div class="fav-widget-set">
            <div class="fav-widget-label">${SVG.star} Your Fighter</div>
            <div class="fav-widget-name">${esc(fav.name)}</div>
-           <button class="fav-widget-change" onclick="MMANotif.openModal()">Change →</button>
+           <button class="fav-widget-change icon-arrow" onclick="MMANotif.openModal()">Change</button>
          </div>`
       : `<div class="fav-widget-empty">
            <div class="fav-widget-label">${SVG.star} Favorite Fighter</div>
            <div class="fav-widget-hint">Get notified about your fighter's upcoming bouts</div>
-           <button class="fav-widget-set-btn" onclick="MMANotif.openModal()">Set Fighter →</button>
+           <button class="fav-widget-set-btn icon-arrow" onclick="MMANotif.openModal()">Set Fighter</button>
          </div>`;
   }
 

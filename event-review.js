@@ -808,7 +808,7 @@ function renderPage(ev, community, extra = {}) {
         <div class="er-login-cta-title">Rate this card</div>
         <div class="er-login-cta-sub">Sign in to share your take with the community</div>
       </div>
-      <a href="auth.html" class="er-login-cta-btn" onclick="sessionStorage.setItem('auth_return_to',location.href)">Sign In →</a>
+      <a href="auth.html" class="er-login-cta-btn icon-arrow" onclick="sessionStorage.setItem('auth_return_to',location.href)">Sign In</a>
     </div>` : '';
 
   // Your Picks accuracy card (completed events only)
@@ -830,7 +830,7 @@ function renderPage(ev, community, extra = {}) {
           <div class="er-picks-stat-label">Accuracy</div>
         </div>
       </div>
-      <a class="er-picks-link" href="picks.html?id=${encodeURIComponent(eventId)}">See all picks →</a>
+      <a class="er-picks-link icon-arrow" href="picks.html?id=${encodeURIComponent(eventId)}">See all picks</a>
     </div>` : '';
 
   // FOTN community vote reveal (completed events)
@@ -1074,7 +1074,7 @@ function renderPage(ev, community, extra = {}) {
       saveStoredRating(eventId, savedData);
       const tweetText = encodeURIComponent(`Just rated ${name} ${selected}/5 on MMA Bridge!`);
       const tweetUrl  = encodeURIComponent(location.href);
-      toast.innerHTML = `Review saved! <a class="er-share-x" href="https://twitter.com/intent/tweet?text=${tweetText}&url=${tweetUrl}" target="_blank" rel="noopener">Share on X →</a>`;
+      toast.innerHTML = `Review saved! <a class="er-share-x icon-arrow" href="https://twitter.com/intent/tweet?text=${tweetText}&url=${tweetUrl}" target="_blank" rel="noopener">Share on X</a>`;
       toast.classList.add('show');
       lockForm();
       refreshCommunity();

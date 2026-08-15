@@ -449,7 +449,7 @@
           </div>
           <div class="lb-empty-title">${esc(emptyMsg || 'No picks yet.')}</div>
           <div class="lb-empty-sub">Pick fight winners before events lock — your accuracy is tracked and ranked here.</div>
-          <a class="lb-empty-cta" href="events.html">View Upcoming Events →</a>
+          <a class="lb-empty-cta icon-arrow" href="events.html">View Upcoming Events</a>
         </div>`;
       return;
     }
@@ -1138,7 +1138,7 @@
           const badgeClass = resolvedStatus === 'pending' ? 'lb-ch-badge-pending' : resolvedStatus === 'completed' ? 'lb-ch-badge-done' : 'lb-ch-badge-active';
           const badgeLabel = resolvedStatus === 'pending' ? 'Pending' : resolvedStatus === 'completed' ? 'Completed' : 'Active';
           const href = `picks.html?id=${encodeURIComponent(c.event_id)}`;
-          const actionBtn = `<a href="${href}" class="lb-ch-btn lb-ch-btn-view">View Picks →</a>`;
+          const actionBtn = `<a href="${href}" class="lb-ch-btn lb-ch-btn-view icon-arrow">View Picks</a>`;
 
           return `
             <div class="lb-ch-card lb-h2h-card">
@@ -1385,11 +1385,11 @@
       let actionBtn = '';
       const href = `picks.html?id=${encodeURIComponent(c.event_id)}&challenge=${encodeURIComponent(c.id)}`;
       if (status === 'pending' && !isChallenger) {
-        actionBtn = `<a href="${href}" class="lb-ch-btn lb-ch-btn-accept">Accept &amp; Pick →</a>`;
+        actionBtn = `<a href="${href}" class="lb-ch-btn lb-ch-btn-accept icon-arrow">Accept &amp; Pick</a>`;
       } else if (status === 'completed') {
-        actionBtn = `<a href="${href}" class="lb-ch-btn lb-ch-btn-result">See Result →</a>`;
+        actionBtn = `<a href="${href}" class="lb-ch-btn lb-ch-btn-result icon-arrow">See Result</a>`;
       } else {
-        actionBtn = `<a href="${href}" class="lb-ch-btn lb-ch-btn-view">View Picks →</a>`;
+        actionBtn = `<a href="${href}" class="lb-ch-btn lb-ch-btn-view icon-arrow">View Picks</a>`;
       }
 
       const roleLabel = isChallenger ? 'You challenged' : 'Challenge received';

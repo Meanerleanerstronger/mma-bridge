@@ -392,7 +392,7 @@
             <label>Display Name</label>
             <input type="text" id="setupName" placeholder="Your fight name" autocomplete="nickname" maxlength="32" />
           </div>
-          <button type="button" class="auth-submit-btn" id="setupBtn" style="background:rgba(255,138,61,0.18);border-color:rgba(255,138,61,0.5);">Let's Go →</button>
+          <button type="button" class="auth-submit-btn icon-arrow" id="setupBtn" style="background:rgba(255,138,61,0.18);border-color:rgba(255,138,61,0.5);"><span id="setupBtnText">Let's Go</span></button>
         </div>
       </div>
 
@@ -637,13 +637,14 @@
         if (!name) { showMsg('Please enter a display name.', 'error'); return; }
         if (name.length < 2) { showMsg('Display name must be at least 2 characters.', 'error'); return; }
         const btn = document.getElementById('setupBtn');
-        btn.disabled = true; btn.textContent = 'Saving…';
+        const btnText = document.getElementById('setupBtnText');
+        btn.disabled = true; btnText.textContent = 'Saving…';
         showMsg('');
         const sb = window._sb;
-        if (!sb) { showMsg('Connection unavailable. Please try again.', 'error'); btn.disabled = false; btn.textContent = 'Let\'s Go →'; return; }
+        if (!sb) { showMsg('Connection unavailable. Please try again.', 'error'); btn.disabled = false; btnText.textContent = 'Let\'s Go'; return; }
         try {
           const { data: { session } } = await sb.auth.getSession();
-          if (!session?.user) { showMsg('Session expired. Please sign in again.', 'error'); btn.disabled = false; btn.textContent = 'Let\'s Go →'; return; }
+          if (!session?.user) { showMsg('Session expired. Please sign in again.', 'error'); btn.disabled = false; btnText.textContent = 'Let\'s Go'; return; }
           const { error } = await sb.from('profiles').upsert({ id: session.user.id, display_name: name }, { onConflict: 'id' });
           if (error) throw error;
           showMsg('Welcome to MMA Bridge! Redirecting…', 'success');
@@ -654,7 +655,7 @@
           }, 1000);
         } catch {
           showMsg('Could not save your name. Please try again.', 'error');
-          btn.disabled = false; btn.textContent = 'Let\'s Go →';
+          btn.disabled = false; btnText.textContent = 'Let\'s Go';
         }
       });
       document.getElementById('setupName').addEventListener('keydown', e => {
