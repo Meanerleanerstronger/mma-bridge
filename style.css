@@ -8227,6 +8227,8 @@ button:focus:not(:focus-visible), a:focus:not(:focus-visible) { outline: none; }
   text-decoration: none;
 }
 .lb-group-btn:hover { background: rgba(255,138,61,0.14); border-color: rgba(255,138,61,0.4); }
+.lb-inline-icon { flex-shrink: 0; }
+.lb-group-season-info .lb-inline-icon { vertical-align: -2px; margin-right: 2px; }
 .lb-group-btn-sec {
   background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.12);
   color: rgba(255,255,255,0.55);
@@ -13819,6 +13821,8 @@ body.light-mode .sn-later:hover { color: rgba(20,16,12,.65); }
   border-radius: 10px; padding: 12px 14px; margin-bottom: 14px;
   font-family: 'Inter', sans-serif; font-size: .95rem; color: #fff;
 }
+.lb-picks-event-select { margin: 8px 0 0; cursor: pointer; }
+.lb-my-picks-btn { display: inline-block; margin-bottom: 16px; }
 .lb-modal-label {
   font-family: 'Montserrat', sans-serif; font-size: .58rem; font-weight: 700;
   letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.4);

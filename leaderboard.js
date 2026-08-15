@@ -88,6 +88,7 @@
 
       <!-- NEXT EVENT TO PICK -->
       <div id="lbNextEventBanner"></div>
+      <div id="lbMyPicksRow"></div>
 
       <!-- PERIOD TABS -->
       <div class="lb-period-tabs" id="lbPeriodTabs">
@@ -273,6 +274,23 @@
   }
 
   renderNextEventBanner();
+  renderMyPicksRow();
+
+  function renderMyPicksRow() {
+    const mount = document.getElementById('lbMyPicksRow');
+    if (!mount || !myId) return;
+    const played = myPlayedEvents();
+    if (!played.length) { mount.innerHTML = ''; return; }
+    mount.innerHTML = `<button class="lb-action-btn lb-my-picks-btn" id="lbMyPicksBtn" type="button">See My Picks</button>`;
+    document.getElementById('lbMyPicksBtn')?.addEventListener('click', () => {
+      const nextEv = allEventsRaw
+        .filter(e => e.isoDate > todayStr && e.status !== 'completed')
+        .sort((a, b) => a.isoDate.localeCompare(b.isoDate))[0];
+      const hasPickedNext = nextEv ? picksData.some(p => p.event_id === nextEv.id && p.user_id === myId) : false;
+      const defaultEventId = (nextEv && !hasPickedNext) ? nextEv.id : myPlayedEvents()[0]?.id;
+      if (defaultEventId) showUserPicks(myId, 'Your', defaultEventId, true);
+    });
+  }
 
   function renderNextEventBanner() {
     const mount = document.getElementById('lbNextEventBanner');
@@ -543,16 +561,14 @@
   }
 
   // ── Show a user's picks for a specific event in a modal ──
-  async function showUserPicks(uid, uname) {
-    const eventId = new URLSearchParams(location.search).get('event') || '';
-    if (!eventId) return;
-    // Find event name
+  // selfMode = true adds an event picker so the signed-in user can browse
+  // picks for ANY event they've played, not just whatever ?event= is in
+  // the URL (which only two inbound links ever set).
+  async function buildPicksRows(uid, eventId) {
     const ev = allEventsRaw.find(e => e.id === eventId);
     const evName = ev ? ev.name : eventId;
-    // Get picks for this user+event
     const { data: upicks } = await sb.from('picks').select('fight_key, pick, method').eq('user_id', uid).eq('event_id', eventId);
     const picks = (upicks || []).filter(p => p.fight_key !== 'fotn' && p.fight_key !== '__dd__' && p.fight_key !== '__fotn__');
-    // Build fight display
     function fightLabel(fk) {
       const dash = fk.lastIndexOf('-');
       const section = fk.slice(0, dash);
@@ -575,8 +591,22 @@
         ${icon ? `<span class="lb-pick-icon">${icon}</span>` : ''}
       </div>`;
     }).join('') : '<div class="lb-pick-empty">No picks submitted for this event</div>';
+    return { evName, rowsHtml: rows };
+  }
 
-    // Show modal
+  function myPlayedEvents() {
+    if (!myId) return [];
+    const ids = [...new Set(picksData.filter(p => p.user_id === myId).map(p => p.event_id))];
+    return ids
+      .map(id => allEventsRaw.find(e => e.id === id))
+      .filter(Boolean)
+      .sort((a, b) => (b.isoDate || '').localeCompare(a.isoDate || ''));
+  }
+
+  async function showUserPicks(uid, uname, eventId, selfMode) {
+    eventId = eventId || new URLSearchParams(location.search).get('event') || '';
+    if (!eventId) return;
+
     let modal = document.getElementById('lbPicksModal');
     if (!modal) {
       modal = document.createElement('div');
@@ -584,17 +614,29 @@
       modal.className = 'lb-modal-overlay';
       document.body.appendChild(modal);
     }
-    modal.innerHTML = `
-      <div class="lb-modal lb-picks-modal-inner">
-        <div class="lb-modal-header">
-          <div class="lb-modal-title">${esc(uname)}'s Picks</div>
-          <div class="lb-modal-sub">${esc(evName)}</div>
-        </div>
-        <div class="lb-picks-list">${rows}</div>
-        <button class="lb-modal-close-btn" id="lbPicksClose">Close</button>
-      </div>`;
-    modal.style.display = 'flex';
-    document.getElementById('lbPicksClose')?.addEventListener('click', () => { modal.style.display = 'none'; });
+
+    const played = selfMode ? myPlayedEvents() : [];
+    const pickerHtml = selfMode && played.length ? `
+      <select class="lb-modal-input lb-picks-event-select" id="lbPicksEventSelect">
+        ${played.map(e => `<option value="${esc(e.id)}" ${e.id === eventId ? 'selected' : ''}>${esc(e.name)}</option>`).join('')}
+      </select>` : '';
+
+    async function render(evId) {
+      const { evName, rowsHtml } = await buildPicksRows(uid, evId);
+      modal.innerHTML = `
+        <div class="lb-modal lb-picks-modal-inner">
+          <div class="lb-modal-header">
+            <div class="lb-modal-title">${esc(uname)}'s Picks</div>
+            <div class="lb-modal-sub">${pickerHtml || esc(evName)}</div>
+          </div>
+          <div class="lb-picks-list">${rowsHtml}</div>
+          <button class="lb-modal-close-btn" id="lbPicksClose">Close</button>
+        </div>`;
+      modal.style.display = 'flex';
+      document.getElementById('lbPicksClose')?.addEventListener('click', () => { modal.style.display = 'none'; });
+      document.getElementById('lbPicksEventSelect')?.addEventListener('change', e => render(e.target.value));
+    }
+    render(eventId);
     modal.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
   }
 
@@ -620,7 +662,7 @@
       const label = dStart && dEnd ? `${esc(dStart)} – ${esc(dEnd)}`
                   : dStart ? `From ${esc(dStart)}`
                   : `Through ${esc(dEnd)}`;
-      seasonHtml = `<div class="lb-group-season-info">📅 Season <strong>${label}</strong></div>`;
+      seasonHtml = `<div class="lb-group-season-info"><svg class="lb-inline-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Season <strong>${label}</strong></div>`;
     }
 
     // Full commissioner management (roster, team name, season/scoring,
@@ -635,9 +677,9 @@
         </div>
         ${seasonHtml}
         <div class="lb-group-action-row">
-          <button class="lb-group-btn" id="btnCopyInvite">📋 Copy Invite Link</button>
-          ${myGroupIsOwner ? `<a class="lb-group-btn lb-group-btn-sec" href="commissioner.html" style="text-decoration:none">⚙ Commissioner Dashboard</a>` : ''}
-          <a class="lb-group-btn lb-group-btn-recap" href="recap.html" style="text-decoration:none">🏆 Season Recap</a>
+          <button class="lb-group-btn" id="btnCopyInvite"><svg class="lb-inline-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg> Copy Invite Link</button>
+          ${myGroupIsOwner ? `<a class="lb-group-btn lb-group-btn-sec" href="commissioner.html" style="text-decoration:none"><svg class="lb-inline-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Commissioner Dashboard</a>` : ''}
+          <a class="lb-group-btn lb-group-btn-recap" href="recap.html" style="text-decoration:none"><svg class="lb-inline-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg> Season Recap</a>
           ${liveEventToday ? `<a class="lb-group-btn lb-group-btn-warroom" href="warroom.html?event=${encodeURIComponent(liveEventToday.id)}" style="text-decoration:none">War Room — Live Now</a>` : ''}
           <button class="lb-group-btn lb-group-btn-danger" id="btnLeaveGroup">Leave</button>
         </div>
@@ -762,9 +804,34 @@
 
   renderGroupStatus();
 
-  // ── Supabase realtime — live picks updates ──────
+  // ── Supabase realtime — live picks + results updates ──────
   if (sb) {
     let realtimeReady = false;
+
+    // As an admin enters results, re-pull fight_results, merge the new
+    // winner/method/fotn into the existing maps (mutated in place — every
+    // render function already closes over these), and re-render whatever's
+    // currently on screen so scores/tiers update without a page reload.
+    async function refreshFightResults() {
+      const { data: dbResults } = await sb.from('fight_results').select('event_id, fight_key, winner, method, fotn');
+      (dbResults || []).forEach(r => {
+        const k = `${r.event_id}:${r.fight_key}`;
+        if (r.winner) winnerMap[k] = r.winner.toLowerCase();
+        if (r.method) methodMap[k] = r.method;
+        if (r.fight_key === '__fotn__' && r.fotn) fotnMap[r.event_id] = r.fotn.toLowerCase();
+      });
+      const activeTab = document.querySelector('#lbPeriodTabs .lb-tab.active')?.dataset.period || 'all';
+      if (activeTab === 'mygroup') {
+        renderMyGroupView();
+      } else {
+        currentStatsMap = activeTab === 'last10'
+          ? buildStatsMap(picksData, null, getLast10EventIds())
+          : buildStatsMap(picksData, getPeriodCutoff(activeTab));
+        allUsers = buildRankedUsers(currentStatsMap);
+        renderTable(allUsers, 'lbGlobalWrap', 'No picks yet — be the first!');
+      }
+      renderGroupStatus();
+    }
 
     sb.channel('lb-picks-live')
       .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'picks' }, () => {
@@ -776,6 +843,9 @@
         });
         // Remove flash classes after animation
         setTimeout(() => document.querySelectorAll('.lb-row').forEach(r => r.classList.remove('lb-update-flash')), 700);
+      })
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'fight_results' }, () => {
+        refreshFightResults();
       })
       .subscribe(status => {
         if (status === 'SUBSCRIBED' && !realtimeReady) {

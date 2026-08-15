@@ -1057,12 +1057,18 @@ function formatOdds(n) {
     const savedRound = saved.round || '';
     const rounds   = maxRounds(f.rounds);
     const winner   = f.winner || null;
-    const resultA  = isCompleted && winner ? (winner.toLowerCase() === f.a.toLowerCase() ? 'win' : 'loss') : '';
-    const resultB  = isCompleted && winner ? (winner.toLowerCase() === f.b.toLowerCase() ? 'win' : 'loss') : '';
-    const correctA = isCompleted && pickedA && resultA === 'win';
-    const correctB = isCompleted && pickedB && resultB === 'win';
-    const pickResultA = (isCompleted && pickedA) ? computePickPoints(key, f) : { pts: 0, isPerfect: false };
-    const pickResultB = (isCompleted && pickedB) ? computePickPoints(key, f) : { pts: 0, isPerfect: false };
+    // A fight can have a result before the whole card is marked complete —
+    // an admin may enter early-card results while later fights are still
+    // live. Gate per-fight correctness on the fight actually having a
+    // winner, not just the event-wide isCompleted flag, so live-entered
+    // results show immediately instead of waiting for the full card.
+    const fightDone = isCompleted || !!winner;
+    const resultA  = fightDone && winner ? (winner.toLowerCase() === f.a.toLowerCase() ? 'win' : 'loss') : '';
+    const resultB  = fightDone && winner ? (winner.toLowerCase() === f.b.toLowerCase() ? 'win' : 'loss') : '';
+    const correctA = fightDone && pickedA && resultA === 'win';
+    const correctB = fightDone && pickedB && resultB === 'win';
+    const pickResultA = (fightDone && pickedA) ? computePickPoints(key, f) : { pts: 0, isPerfect: false };
+    const pickResultB = (fightDone && pickedB) ? computePickPoints(key, f) : { pts: 0, isPerfect: false };
     const { pts: ptsA, isPerfect: isPerfectA } = pickResultA;
     const { pts: ptsB, isPerfect: isPerfectB } = pickResultB;
     const comm      = communityPicks[key] || {};
@@ -1089,7 +1095,7 @@ function formatOdds(n) {
     const recB  = fighterRecord(f.b);
 
     const myPerfect = (pickedA && isPerfectA) || (pickedB && isPerfectB);
-    const myMiss    = isCompleted && (
+    const myMiss    = fightDone && (
       (pickedA && resultA === 'loss') || (pickedB && resultB === 'loss')
     );
 
@@ -1098,7 +1104,7 @@ function formatOdds(n) {
       isMain ? 'fc-main' : isMainCard ? 'fc-maincrd' : '',
       hasPick ? 'has-pick' : '',
       isDD ? 'pk-dd-card' : '',
-      isCompleted ? 'is-completed' : '',
+      fightDone ? 'is-completed' : '',
       isMain ? 'is-main' : isMainCard ? 'is-main-card' : '',
       myPerfect ? 'pk-pick-perfect' : '',
       myMiss    ? 'pk-pick-miss'    : '',
@@ -1149,12 +1155,12 @@ function formatOdds(n) {
     const perfTick = (isPerfect) => isPerfect ? '<span class="pk-perfect-tick">✓</span>' : '';
     const badgeA = correctA
       ? `<div class="fc-badge fc-badge-correct${isPerfectA ? ' pk-badge-perfect' : ''}">${perfTick(isPerfectA)}+${ptsA}pts${isDD ? ' ⚡' : ''}${winShareBtn(f.a, f.b, ptsA, commPctA)}</div>`
-      : (isCompleted && pickedA ? `<div class="fc-badge fc-badge-wrong">✗ ${ptsA < 0 ? ptsA + 'pts' + (isDD ? ' ⚡DD' : '') : '0pts'}</div>` : '')
-      + (!isCompleted && pickedA ? `<div class="fc-badge fc-badge-pick${isSavedA ? '' : ' unsaved'}">${isSavedA ? 'YOUR PICK ✓' : 'YOUR PICK •'}${ddTag}</div>` : '');
+      : (fightDone && pickedA ? `<div class="fc-badge fc-badge-wrong">✗ ${ptsA < 0 ? ptsA + 'pts' + (isDD ? ' ⚡DD' : '') : '0pts'}</div>` : '')
+      + (!fightDone && pickedA ? `<div class="fc-badge fc-badge-pick${isSavedA ? '' : ' unsaved'}">${isSavedA ? 'YOUR PICK ✓' : 'YOUR PICK •'}${ddTag}</div>` : '');
     const badgeB = correctB
       ? `<div class="fc-badge fc-badge-correct${isPerfectB ? ' pk-badge-perfect' : ''}">${perfTick(isPerfectB)}+${ptsB}pts${isDD ? ' ⚡' : ''}${winShareBtn(f.b, f.a, ptsB, commPctB)}</div>`
-      : (isCompleted && pickedB ? `<div class="fc-badge fc-badge-wrong">✗ ${ptsB < 0 ? ptsB + 'pts' + (isDD ? ' ⚡DD' : '') : '0pts'}</div>` : '')
-      + (!isCompleted && pickedB ? `<div class="fc-badge fc-badge-pick${isSavedB ? '' : ' unsaved'}">${isSavedB ? 'YOUR PICK ✓' : 'YOUR PICK •'}${ddTag}</div>` : '');
+      : (fightDone && pickedB ? `<div class="fc-badge fc-badge-wrong">✗ ${ptsB < 0 ? ptsB + 'pts' + (isDD ? ' ⚡DD' : '') : '0pts'}</div>` : '')
+      + (!fightDone && pickedB ? `<div class="fc-badge fc-badge-pick${isSavedB ? '' : ' unsaved'}">${isSavedB ? 'YOUR PICK ✓' : 'YOUR PICK •'}${ddTag}</div>` : '');
 
     // Opponent badges
     const oppBadgeA = oppPickedA ? `<div class="fc-opp">${esc(oppName)}'s pick</div>` : '';
@@ -1175,7 +1181,7 @@ function formatOdds(n) {
 
     // VS center column — just VS + result method, comm % moved to fighter sides
     let vsColHtml = `<span class="fc-vs">VS</span>`;
-    if (isCompleted && winner) {
+    if (fightDone && winner) {
       let methodStr = f.method ? f.method.toUpperCase() : '';
       if (methodStr === 'KO' || methodStr === 'TKO' || methodStr.startsWith('KO ') || methodStr.startsWith('TKO')) methodStr = 'KO/TKO';
       const roundStr = f.round ? ` · R${f.round}` : '';
@@ -2805,6 +2811,33 @@ function formatOdds(n) {
   render();
   initPkCountdown();
   setupComments();
+
+  // ── Supabase realtime — results appear live as an admin enters them ──
+  // Merges fresh fight_results rows straight into `event`'s fight objects
+  // (same object buildFight() reads from) and re-renders — no reload needed.
+  if (sb && !isCompleted) {
+    sb.channel(`pk-results-${eventId}`)
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'fight_results', filter: `event_id=eq.${eventId}` }, async () => {
+        try {
+          const { data: dbResults } = await sb.from('fight_results')
+            .select('fight_key, winner, method, fotn')
+            .eq('event_id', eventId);
+          (dbResults || []).forEach(r => {
+            [['main', event.mainCard], ['prelims', event.prelims], ['early', event.earlyPrelims]].forEach(([key, fights]) => {
+              (fights || []).forEach((f, i) => {
+                if (`${key}-${i}` === r.fight_key) {
+                  if (r.winner) f.winner = r.winner;
+                  if (r.method) f.method = r.method;
+                }
+              });
+            });
+            if (r.fight_key === '__fotn__' && r.fotn) event.fotn = r.fotn;
+          });
+          render();
+        } catch {}
+      })
+      .subscribe();
+  }
 
   // ── Floating leaderboard button ───────────────
   const lbFloat = document.createElement('a');

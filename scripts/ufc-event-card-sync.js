@@ -311,10 +311,14 @@ async function syncEvent(ev, fighterIdx) {
 
   let changed = false;
 
-  // start_time
-  if (startTime && !ev.start_time) {
+  // start_time — keep re-syncing from UFC.com's broadcaster timestamp on every
+  // run (not just the first time we see it) so a later schedule change on
+  // UFC.com's end corrects our stored value instead of freezing it stale.
+  // Only while the event hasn't happened yet — once it's completed the
+  // broadcast time is history, not something to keep overwriting.
+  if (startTime && ev.status !== 'completed' && startTime !== ev.start_time) {
     ev.start_time = startTime;
-    console.log(`  ⏰ start_time set: ${startTime}`);
+    console.log(`  ⏰ start_time synced: ${startTime}`);
     changed = true;
   }
 

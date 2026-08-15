@@ -115,7 +115,7 @@
             <h1 class="cx-title">${esc(groupName)}</h1>
             <div class="cx-hero-meta"><span>${members.length}</span> member${members.length !== 1 ? 's' : ''} · code <span class="cx-code">${esc(groupCode)}</span></div>
           </div>
-          <button class="cx-copy-btn" id="cxCopyInvite">📋 Copy Invite Link</button>
+          <button class="cx-copy-btn" id="cxCopyInvite"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:3px"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>Copy Invite Link</button>
         </div>
         <div class="cx-power-strip">
           <span class="cx-power-lbl">What you can do here:</span>
