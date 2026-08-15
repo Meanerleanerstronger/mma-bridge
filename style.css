@@ -4470,10 +4470,21 @@ body.light-mode #cursor-glow { display: none; }
   display: flex; align-items: center; gap: 6px;
 }
 .sd-ask-lucas a {
+  display: inline-flex; align-items: center; gap: 4px;
   color: rgba(255,138,61,0.7); text-decoration: none; font-weight: 600;
   transition: color 0.15s;
 }
 .sd-ask-lucas a:hover { color: #ff8a3d; }
+/* Shared small chevron for "→"-style link affordances — was a bare
+   unicode arrow character in several spots (this footer link, the page-
+   shortcut rows above it, the news-result subline); one real SVG icon
+   used everywhere instead. */
+.sd-arrow-icon {
+  display: inline-block; width: 8px; height: 8px; flex-shrink: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ff8a3d' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='5' y1='12' x2='19' y2='12'/%3E%3Cpolyline points='12 5 19 12 12 19'/%3E%3C/svg%3E");
+  background-size: contain; background-repeat: no-repeat;
+  opacity: 0.85;
+}
 
 /* ── Search-bar help cards — "how do I make picks" style queries get a
    real step-by-step walkthrough with screenshots instead of a page link. ── */
@@ -4518,7 +4529,8 @@ body.light-mode #cursor-glow { display: none; }
   box-shadow: 0 8px 24px rgba(0,0,0,0.4);
 }
 .sd-help-cta {
-  display: block; text-align: center;
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  text-align: center;
   background: linear-gradient(165deg, #ffb066 0%, #ff8a3d 45%, #e8691c 100%);
   color: #0a0a0a; text-decoration: none;
   font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.78rem;
@@ -4528,6 +4540,11 @@ body.light-mode #cursor-glow { display: none; }
   transition: transform 0.15s, box-shadow 0.15s;
 }
 .sd-help-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(255,138,61,0.42); }
+.sd-help-cta::after {
+  content: ''; width: 10px; height: 10px; flex-shrink: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230a0a0a' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='5' y1='12' x2='19' y2='12'/%3E%3Cpolyline points='12 5 19 12 12 19'/%3E%3C/svg%3E");
+  background-size: contain; background-repeat: no-repeat;
+}
 /* No light-mode text color overrides here — .search-dropdown itself is
    always dark regardless of site theme (true for every other row type
    in this dropdown too, not just the help card), so light-mode dark

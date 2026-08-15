@@ -303,7 +303,7 @@
       </div>
       <div class="sd-help-title">${escHtml(topic.title)}</div>
       <div class="sd-help-steps">${stepsHtml}</div>
-      <a class="sd-help-cta" href="${escHtml(topic.cta.href)}">${escHtml(topic.cta.label)} →</a>
+      <a class="sd-help-cta" href="${escHtml(topic.cta.href)}">${escHtml(topic.cta.label)}</a>
     `;
     card.querySelector('.sd-help-close').addEventListener('mousedown', e => { e.preventDefault(); hideDrop(); });
     card.querySelector('.sd-help-cta').addEventListener('mousedown', e => { e.preventDefault(); navigateTo(topic.cta.href); });
@@ -311,7 +311,7 @@
 
     const askRow = document.createElement('div');
     askRow.className = 'sd-ask-lucas';
-    askRow.innerHTML = `<span>Something else?</span> <a href="lucas.html">Ask Lucas →</a>`;
+    askRow.innerHTML = `<span>Something else?</span> <a href="lucas.html">Ask Lucas <span class="sd-arrow-icon"></span></a>`;
     askRow.addEventListener('mousedown', e => e.preventDefault());
     drop.appendChild(askRow);
 
@@ -342,7 +342,7 @@
             <span class="sd-name">${escHtml(p.label)}</span>
             <span class="sd-sub">${escHtml(p.sub)}</span>
           </div>
-          <span style="font-size:0.68rem;color:rgba(240,180,41,0.7);font-weight:700;letter-spacing:0.08em;flex-shrink:0;">→</span>
+          <span class="sd-arrow-icon" style="width:9px;height:9px;flex-shrink:0;"></span>
         `, () => navigateTo(p.href));
         drop.appendChild(row);
       });
@@ -440,7 +440,7 @@
         const row = buildRow(`
           <div class="sd-info">
             <span class="sd-name" style="font-size:0.8rem;">${escHtml(n.title)}</span>
-            <span class="sd-sub">Latest MMA news →</span>
+            <span class="sd-sub">Latest MMA news</span>
           </div>
         `, () => navigateTo(n.href));
         drop.appendChild(row);
@@ -450,7 +450,7 @@
     // "Ask Lucas" footer when there are results
     const askRow = document.createElement('div');
     askRow.className = 'sd-ask-lucas';
-    askRow.innerHTML = `<span>Not finding it?</span> <a href="lucas.html">Ask Lucas →</a>`;
+    askRow.innerHTML = `<span>Not finding it?</span> <a href="lucas.html">Ask Lucas <span class="sd-arrow-icon"></span></a>`;
     askRow.addEventListener('mousedown', e => e.preventDefault());
     drop.appendChild(askRow);
 
