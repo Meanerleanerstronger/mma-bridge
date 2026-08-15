@@ -47993,31 +47993,91 @@
   {
     "id": "austen-lane",
     "name": "Austen Lane",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-02/LANE_AUSTEN_L_03-01.png?itok=8X3Keh9f"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-02/LANE_AUSTEN_L_03-01.png?itok=8X3Keh9f",
+    "stats": {
+      "slpm": "2.70",
+      "strAcc": "50%",
+      "sapm": "2.45",
+      "strDef": "39%",
+      "tdAvg": "1.50",
+      "tdAcc": "28%",
+      "tdDef": "33%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "mason-jones",
     "name": "Mason Jones",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/JONES_MASON_L_03-21.png?itok=_sn2EwLA"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/JONES_MASON_L_03-21.png?itok=_sn2EwLA",
+    "stats": {
+      "slpm": "5.98",
+      "strAcc": "42%",
+      "sapm": "4.45",
+      "strDef": "50%",
+      "tdAvg": "3.48",
+      "tdAcc": "55%",
+      "tdDef": "73%",
+      "subAvg": "0.2"
+    }
   },
   {
     "id": "losene-keita",
-    "name": "Losene Keita"
+    "name": "Losene Keita",
+    "stats": {
+      "slpm": "3.47",
+      "strAcc": "43%",
+      "sapm": "4.47",
+      "strDef": "62%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "100%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "mantas-kondratavicius",
     "name": "Mantas Kondratavicius",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/KONDRATAVICIUS_MANTAS_L_03-21.png?itok=vn9NYCgj"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/KONDRATAVICIUS_MANTAS_L_03-21.png?itok=vn9NYCgj",
+    "stats": {
+      "slpm": "4.97",
+      "strAcc": "65%",
+      "sapm": "1.30",
+      "strDef": "57%",
+      "tdAvg": "2.80",
+      "tdAcc": "60%",
+      "tdDef": "91%",
+      "subAvg": "0.9"
+    }
   },
   {
     "id": "antonio-trocoli",
     "name": "Antonio Trocoli",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-11/TROCOLI_ANTONIO_R_11-09.png?itok=C1tyD_TC"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-11/TROCOLI_ANTONIO_R_11-09.png?itok=C1tyD_TC",
+    "stats": {
+      "slpm": "1.27",
+      "strAcc": "47%",
+      "sapm": "5.30",
+      "strDef": "26%",
+      "tdAvg": "0.88",
+      "tdAcc": "9%",
+      "tdDef": "42%",
+      "subAvg": "0.4"
+    }
   },
   {
     "id": "abdul-kareem-al-selwady",
     "name": "Abdul-Kareem Al-Selwady",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-02/AL-SELWADY_ABDUL-KAREEM_L_03-02.png?itok=v2xf85h-"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-02/AL-SELWADY_ABDUL-KAREEM_L_03-02.png?itok=v2xf85h-",
+    "stats": {
+      "slpm": "4.61",
+      "strAcc": "41%",
+      "sapm": "3.43",
+      "strDef": "60%",
+      "tdAvg": "1.47",
+      "tdAcc": "23%",
+      "tdDef": "54%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "shaqueme-rock",
@@ -48027,16 +48087,46 @@
   {
     "id": "christian-edwards",
     "name": "Christian Edwards",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/EDWARDS_CHRISTIAN_R_05-16.png?itok=9hKWjz5V"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/EDWARDS_CHRISTIAN_R_05-16.png?itok=9hKWjz5V",
+    "stats": {
+      "slpm": "2.40",
+      "strAcc": "50%",
+      "sapm": "2.40",
+      "strDef": "55%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    }
   },
   {
     "id": "andre-fili",
     "name": "Andre Fili",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/FILI_ANDRE_L_03-14.png?itok=Zud7jwf3"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/FILI_ANDRE_L_03-14.png?itok=Zud7jwf3",
+    "stats": {
+      "slpm": "3.89",
+      "strAcc": "37%",
+      "sapm": "4.55",
+      "strDef": "49%",
+      "tdAvg": "2.24",
+      "tdAcc": "46%",
+      "tdDef": "71%",
+      "subAvg": "0.2"
+    }
   },
   {
     "id": "alexander-poppeck",
     "name": "Alexander Poppeck",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-07/POPPECK_ALEXANDER_R_08-01.png?itok=iZyFUwKT"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-07/POPPECK_ALEXANDER_R_08-01.png?itok=iZyFUwKT",
+    "stats": {
+      "slpm": "3.88",
+      "strAcc": "54%",
+      "sapm": "8.69",
+      "strDef": "33%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    }
   }
 ]
