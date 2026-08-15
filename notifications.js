@@ -109,6 +109,48 @@
     } catch { cornerFavs = []; }
   }
 
+  // ── Picks lock reminder (24h warning, personalized) ──────
+  // Only notifies signed-in users who have NOT submitted any picks yet
+  // for the soon-locking event — fired async so checkEvents() itself
+  // stays synchronous for its other (many) sync callers.
+  async function checkPickLockReminders(upcoming) {
+    try {
+      const sb   = window._sb;
+      const user = window.MMABridgeAuth?.getUser?.();
+      if (!sb || !user) return;
+
+      const seen = getSeen();
+      const now  = new Date();
+      let changed = false;
+      const arr = getNotifs();
+
+      for (const ev of upcoming) {
+        if (!ev.start_time) continue;
+        const evId = ev.id || slugify(ev.name || '');
+        const lockId = `lock_remind_${evId}`;
+        if (seen.has(lockId)) continue;
+        const msUntilLock = new Date(ev.start_time) - now;
+        if (msUntilLock <= 0 || msUntilLock >= 24 * 60 * 60 * 1000) continue;
+
+        const { data } = await sb.from('picks').select('id').eq('event_id', evId).eq('user_id', user.id).limit(1);
+        if (data && data.length) { addSeen(lockId); continue; } // already picked — no reminder needed
+
+        const hrs = Math.round(msUntilLock / 3600000);
+        arr.unshift({
+          id: lockId, type: 'lock_remind', read: false,
+          title: `You haven't picked yet — locks in ${hrs}h`,
+          body: `${esc(ev.name)} — submit your picks before it starts.`,
+          href: `picks.html?id=${encodeURIComponent(evId)}`,
+          timestamp: now.toISOString()
+        });
+        addSeen(lockId);
+        changed = true;
+      }
+
+      if (changed) { saveNotifs(arr); MMANotif.updateBadge(); }
+    } catch {}
+  }
+
   // ── Fav fighter ───────────────────────────────
   function getFav()  { try { return JSON.parse(localStorage.getItem(FAV_KEY) || 'null'); } catch { return null; } }
   function setFav(name) {
@@ -323,27 +365,7 @@
         else saveCardSnap(newSnap); // always seed on first run
       }
 
-      // ── Picks lock reminder (24h warning) ──────────────────
-      if (prefEnabled('lock_remind')) {
-        upcoming.forEach(ev => {
-          if (!ev.start_time) return;
-          const evId = ev.id || slugify(ev.name || '');
-          const lockId = `lock_remind_${evId}`;
-          if (seen.has(lockId)) return;
-          const msUntilLock = new Date(ev.start_time) - now;
-          if (msUntilLock > 0 && msUntilLock < 24 * 60 * 60 * 1000) {
-            const hrs = Math.round(msUntilLock / 3600000);
-            arr.unshift({
-              id: lockId, type: 'lock_remind', read: false,
-              title: `Picks lock in ${hrs}h — ${esc(ev.name)}`,
-              body: 'Submit your picks before the event starts.',
-              href: `picks.html?id=${encodeURIComponent(evId)}`,
-              timestamp: now.toISOString()
-            });
-            addSeen(lockId); changed = true;
-          }
-        });
-      }
+      if (prefEnabled('lock_remind')) checkPickLockReminders(upcoming);
 
       if (changed) saveNotifs(arr);
       this.updateBadge();

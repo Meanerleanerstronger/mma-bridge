@@ -635,17 +635,9 @@
   } catch {}
   const myChTotal = myChWins + myChLosses + myChTies;
 
-  // ── Tier computation ──────────────────────────────────────
+  // ── Tier computation (canonical source: tiers.js) ──────────
   function computeTier(judgedPicks, accuracy) {
-    if (judgedPicks === 0) return 'Walkout';
-    if (judgedPicks < 10)  return 'Prospect';
-    if (accuracy === null || accuracy < 40) return 'Ranked';
-    if (accuracy < 50) return 'Contender';
-    if (accuracy < 55) return 'Main Event';
-    if (accuracy < 60) return 'Headliner';
-    if (accuracy < 65 || judgedPicks < 30) return 'Champion';
-    if (accuracy < 70 || judgedPicks < 60) return 'P4P';
-    return 'GOAT';
+    return window.MMATiers.getTier(judgedPicks, accuracy).name;
   }
 
   function buildTierProgress(judgedPicks, accuracy) {

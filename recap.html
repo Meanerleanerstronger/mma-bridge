@@ -8,12 +8,13 @@
   <meta name="theme-color" content="#ff8a3d">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <script src="theme.js?v=2.7"></script>
+  <script src="tiers.js?v=1.0"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Season Recap — MMA Bridge</title>
   <meta name="description" content="Final standings and season recap for your MMA Bridge group league.">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Barlow+Condensed:wght@800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=9.21" />
+  <link rel="stylesheet" href="style.css?v=9.22" />
   <style>
     .rc-page { max-width: 640px; margin: 0 auto; padding: 64px 20px 100px; }
 
@@ -21,21 +22,20 @@
     .rc-spinner { width:28px;height:28px;border:2.5px solid rgba(255,255,255,.08);border-top-color:#ff8a3d;border-radius:50%;animation:rcspin .8s linear infinite;margin:0 auto 16px; }
     @keyframes rcspin { to { transform:rotate(360deg); } }
 
-    .rc-eyebrow { font-family:'Montserrat',sans-serif;font-size:.56rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,138,61,.6);margin-bottom:10px; }
+    .rc-eyebrow { font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,138,61,.6);margin-bottom:10px; }
     .rc-title { font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(1.8rem,5vw,2.6rem);text-transform:uppercase;letter-spacing:.03em;color:#fff;line-height:1.1;margin:0 0 8px; }
     .rc-title span { color:#e06b1a; }
     .rc-period { font-family:'Inter',sans-serif;font-size:.8rem;color:rgba(255,255,255,.35);margin-bottom:32px; }
-    .rc-divider { width:36px;height:2px;background:linear-gradient(90deg,#e06b1a,transparent);border-radius:2px;margin-bottom:32px; }
+    .rc-divider { width:36px;height:2px;background:#e06b1a;border-radius:2px;margin-bottom:32px; }
 
     /* Champion */
     .rc-champion {
       position:relative;overflow:hidden;
-      background:linear-gradient(135deg,rgba(224,107,26,.12),rgba(224,107,26,.04));
-      border:1.5px solid rgba(224,107,26,.3);border-radius:16px;
+      background:rgba(255,255,255,.035);
+      border:1px solid rgba(224,107,26,.35);border-radius:16px;
       padding:28px 24px;margin-bottom:12px;
     }
-    .rc-champion::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#e06b1a,transparent); }
-    .rc-ch-label { font-family:'Montserrat',sans-serif;font-size:.56rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(224,107,26,.6);margin-bottom:14px; }
+    .rc-ch-label { font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(224,107,26,.6);margin-bottom:14px; }
     .rc-ch-body { display:flex;align-items:center;gap:18px; }
     .rc-ch-avatar {
       width:58px;height:58px;border-radius:50%;
@@ -45,11 +45,11 @@
       flex-shrink:0;overflow:hidden;
     }
     .rc-ch-avatar img { width:100%;height:100%;object-fit:cover;border-radius:50%; }
-    .rc-ch-name { font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.25rem;text-transform:uppercase;letter-spacing:.04em;color:#fff;margin-bottom:8px; }
+    .rc-ch-name { font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.4rem;text-transform:uppercase;letter-spacing:.04em;color:#fff;margin-bottom:8px; }
     .rc-ch-stats { display:flex;gap:20px;flex-wrap:wrap; }
-    .rc-ch-stat-val { font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.05rem;color:#e06b1a; }
-    .rc-ch-stat-lbl { font-family:'Inter',sans-serif;font-size:.64rem;color:rgba(255,255,255,.32);margin-top:1px; }
-    .rc-ch-tier { margin-top:10px;display:inline-block;font-family:'Montserrat',sans-serif;font-size:.58rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;border-radius:20px;padding:3px 10px;border:1px solid; }
+    .rc-ch-stat-val { font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.3rem;color:#e06b1a; }
+    .rc-ch-stat-lbl { font-family:'Inter',sans-serif;font-size:.8rem;color:rgba(255,255,255,.32);margin-top:1px; }
+    .rc-ch-tier { margin-top:10px;display:inline-block;font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;border-radius:20px;padding:3px 10px;border:1px solid; }
 
     /* Podium */
     .rc-podium { display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:32px; }
@@ -57,34 +57,34 @@
       background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);
       border-radius:12px;padding:14px 16px;
     }
-    .rc-pod-rank { font-family:'Montserrat',sans-serif;font-size:.5rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:5px; }
+    .rc-pod-rank { font-family:'Montserrat',sans-serif;font-size:.68rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:5px; }
     .rc-pod-name { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.9rem;text-transform:uppercase;letter-spacing:.03em;color:rgba(255,255,255,.85);margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
     .rc-pod-stats { display:flex;gap:14px; }
     .rc-pod-stat-val { font-family:'Montserrat',sans-serif;font-weight:900;font-size:.85rem;color:rgba(255,255,255,.55); }
-    .rc-pod-stat-lbl { font-family:'Inter',sans-serif;font-size:.6rem;color:rgba(255,255,255,.25);margin-top:1px; }
+    .rc-pod-stat-lbl { font-family:'Inter',sans-serif;font-size:.78rem;color:rgba(255,255,255,.25);margin-top:1px; }
 
     /* Standings */
-    .rc-section-lbl { font-family:'Montserrat',sans-serif;font-size:.5rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:12px; }
+    .rc-section-lbl { font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:12px; }
     .rc-rows { display:flex;flex-direction:column;gap:0;margin-bottom:36px;border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden; }
-    .rc-row { display:grid;grid-template-columns:28px 1fr 60px 44px;align-items:center;gap:10px;padding:11px 16px;border-bottom:1px solid rgba(255,255,255,.05); }
+    .rc-row { display:grid;grid-template-columns:32px 1fr 68px 52px;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.05); }
     .rc-row:last-child { border-bottom:none; }
     .rc-row:nth-child(even) { background:rgba(255,255,255,.015); }
     .rc-row-me { background:rgba(255,138,61,.04) !important; }
-    .rc-rank { font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:900;text-align:center;color:rgba(255,255,255,.22); }
+    .rc-rank { font-family:'Montserrat',sans-serif;font-size:.85rem;font-weight:900;text-align:center;color:rgba(255,255,255,.22); }
     .rc-rank-1 { color:#e06b1a; }
     .rc-rank-2 { color:rgba(170,170,170,.8); }
     .rc-rank-3 { color:rgba(205,127,50,.8); }
-    .rc-row-name { font-family:'Montserrat',sans-serif;font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:.03em;color:rgba(255,255,255,.8);white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+    .rc-row-name { font-family:'Montserrat',sans-serif;font-weight:700;font-size:.9rem;text-transform:uppercase;letter-spacing:.03em;color:rgba(255,255,255,.8);white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
     .rc-row-me .rc-row-name { color:#ff8a3d; }
-    .rc-row-pts { font-family:'Montserrat',sans-serif;font-weight:900;font-size:.85rem;color:rgba(255,255,255,.65);text-align:right; }
-    .rc-row-acc { font-family:'Inter',sans-serif;font-size:.7rem;color:rgba(255,255,255,.3);text-align:right; }
+    .rc-row-pts { font-family:'Montserrat',sans-serif;font-weight:900;font-size:.95rem;color:rgba(255,255,255,.65);text-align:right; }
+    .rc-row-acc { font-family:'Inter',sans-serif;font-size:.82rem;color:rgba(255,255,255,.3);text-align:right; }
 
     /* Events */
     .rc-events { display:flex;flex-direction:column;gap:7px;margin-bottom:36px; }
-    .rc-ev-row { display:flex;align-items:center;gap:12px;padding:9px 14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:9px; }
-    .rc-ev-name { font-family:'Inter',sans-serif;font-size:.75rem;color:rgba(255,255,255,.45);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
-    .rc-ev-winner { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.7rem;letter-spacing:.04em;text-transform:uppercase;color:#e06b1a;white-space:nowrap; }
-    .rc-ev-score { font-family:'Inter',sans-serif;font-size:.66rem;color:rgba(255,255,255,.28);white-space:nowrap; }
+    .rc-ev-row { display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:9px; }
+    .rc-ev-name { font-family:'Inter',sans-serif;font-size:.85rem;color:rgba(255,255,255,.45);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+    .rc-ev-winner { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;color:#e06b1a;white-space:nowrap; }
+    .rc-ev-score { font-family:'Inter',sans-serif;font-size:.8rem;color:rgba(255,255,255,.28);white-space:nowrap; }
 
     /* Actions */
     .rc-actions { display:flex;gap:10px;flex-wrap:wrap; }
@@ -111,14 +111,21 @@
     body.light-mode .rc-title span { color:#9a6800; }
     body.light-mode .rc-eyebrow { color:#006680; }
     body.light-mode .rc-period { color:rgba(0,0,0,.4); }
-    body.light-mode .rc-champion { background:linear-gradient(135deg,rgba(180,120,0,.07),transparent);border-color:rgba(180,120,0,.2); }
+    body.light-mode .rc-champion { background:rgba(0,0,0,.02);border-color:rgba(180,120,0,.35); }
+    body.light-mode .rc-ch-label { color:rgba(180,120,0,.75); }
     body.light-mode .rc-ch-name { color:#0a0a0f; }
     body.light-mode .rc-ch-stat-val { color:#9a6800; }
+    body.light-mode .rc-ch-stat-lbl { color:rgba(0,0,0,.4); }
     body.light-mode .rc-pod { background:rgba(0,0,0,.03);border-color:rgba(0,0,0,.07); }
+    body.light-mode .rc-pod-rank { color:rgba(0,0,0,.3); }
     body.light-mode .rc-pod-name { color:rgba(0,0,0,.75); }
+    body.light-mode .rc-pod-stat-val { color:rgba(0,0,0,.55); }
+    body.light-mode .rc-pod-stat-lbl { color:rgba(0,0,0,.32); }
+    body.light-mode .rc-section-lbl { color:rgba(0,0,0,.3); }
     body.light-mode .rc-rows { border-color:rgba(0,0,0,.07); }
     body.light-mode .rc-row { border-color:rgba(0,0,0,.05); }
     body.light-mode .rc-row:nth-child(even) { background:rgba(0,0,0,.02); }
+    body.light-mode .rc-rank { color:rgba(0,0,0,.3); }
     body.light-mode .rc-row-name { color:rgba(0,0,0,.72); }
     body.light-mode .rc-row-pts { color:rgba(0,0,0,.6); }
     body.light-mode .rc-row-acc { color:rgba(0,0,0,.32); }
@@ -127,6 +134,7 @@
     body.light-mode .rc-ev-row { background:rgba(0,0,0,.02);border-color:rgba(0,0,0,.06); }
     body.light-mode .rc-ev-name { color:rgba(0,0,0,.42); }
     body.light-mode .rc-ev-winner { color:#9a6800; }
+    body.light-mode .rc-ev-score { color:rgba(0,0,0,.32); }
     body.light-mode .rc-share-btn { background:rgba(150,100,0,.1);border-color:rgba(150,100,0,.25);color:#9a6800; }
     body.light-mode .rc-lb-link { background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.1);color:rgba(0,0,0,.45); }
     body.light-mode .rc-nogroup { color:rgba(0,0,0,.4); }
@@ -199,7 +207,7 @@
   <script src="search.js"></script>
   <script src="premium.js?v=3.10"></script>
   <script src="widget.js"></script>
-  <script src="notifications.js?v=2.5"></script>
+  <script src="notifications.js?v=2.6"></script>
   <script src="push.js?v=1.2"></script>
 
   <script>
@@ -249,17 +257,7 @@
     // ── Scoring helpers (identical to leaderboard.js) ──
     const POINTS = { WINNER: 10, METHOD: 5, ROUND: 5, FOTN: 15 };
 
-    function getTier(judged, pct) {
-      if (judged === 0) return { name: 'Rookie',    color: '#666',   rank: 0 };
-      if (judged < 10)  return { name: 'Candidate', color: '#888',   rank: 1 };
-      if (pct === null || pct < 40) return { name: 'Iron',     color: '#8a7560', rank: 2 };
-      if (pct < 50)     return { name: 'Bronze',    color: '#cd7f32', rank: 3 };
-      if (pct < 55)     return { name: 'Silver',    color: '#aaa',    rank: 4 };
-      if (pct < 60)     return { name: 'Gold',      color: '#e06b1a', rank: 5 };
-      if (pct < 65 || judged < 30) return { name: 'Platinum', color: '#00d4e8', rank: 6 };
-      if (pct < 70 || judged < 60) return { name: 'Diamond',  color: '#a0e4ff', rank: 7 };
-      return { name: 'Legend', color: '#e06b1a', rank: 8 };
-    }
+    const getTier = window.MMATiers.getTier;
 
     function normalizeMethodBase(m) {
       if (!m) return '';
@@ -515,6 +513,7 @@
       </div>` : '';
 
     root.innerHTML = `
+      <a href="leaderboard.html" class="cx-back">← Leaderboard</a>
       <div class="rc-eyebrow">Season Recap</div>
       <h1 class="rc-title">${esc(groupName)} <span>Season</span></h1>
       <div class="rc-period">${esc(seasonLabel)} · ${ranked.length} member${ranked.length !== 1 ? 's' : ''}</div>

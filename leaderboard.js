@@ -39,18 +39,8 @@
     return Math.random().toString(36).slice(2, 8).toUpperCase();
   }
 
-  // ── Tier Progression System ──────────────────
-  function getTier(judged, pct) {
-    if (judged === 0) return { name: 'Walkout',    color: '#666',    rank: 0 };
-    if (judged < 10)  return { name: 'Prospect',   color: '#888',    rank: 1 };
-    if (pct === null || pct < 40) return { name: 'Ranked',    color: '#8a7560', rank: 2 };
-    if (pct < 50)     return { name: 'Contender',  color: '#cd7f32', rank: 3 };
-    if (pct < 55)     return { name: 'Main Event', color: '#aaa',    rank: 4 };
-    if (pct < 60)     return { name: 'Headliner',  color: '#e06b1a', rank: 5 };
-    if (pct < 65 || judged < 30) return { name: 'Champion',  color: '#ff8a3d', rank: 6 };
-    if (pct < 70 || judged < 60) return { name: 'P4P',       color: '#ff9a4d', rank: 7 };
-    return { name: 'GOAT',      color: '#e06b1a', rank: 8 };
-  }
+  // ── Tier Progression System (canonical source: tiers.js) ──
+  const getTier = window.MMATiers.getTier;
 
   function tierBadgeHtml(judged, pct) {
     const t = getTier(judged, pct);
@@ -96,6 +86,9 @@
     </div>
     <div class="lb-wrap">
 
+      <!-- NEXT EVENT TO PICK -->
+      <div id="lbNextEventBanner"></div>
+
       <!-- PERIOD TABS -->
       <div class="lb-period-tabs" id="lbPeriodTabs">
         <button class="lb-tab active" data-period="all">All Time</button>
@@ -107,6 +100,7 @@
 
       <!-- MY GROUP & H2H VIEW (hidden by default) -->
       <div id="lbMyGroupView" style="display:none">
+        <button class="lb-action-btn lb-back-to-rankings" id="lbBackToRankings" type="button">&larr; Back to Rankings</button>
         <div id="lbMgGroupSection"></div>
         <div id="lbMgChallengeSection"></div>
       </div>
@@ -276,6 +270,42 @@
       `<div class="lb-error">No rankings data yet — be the first to make picks!</div>`;
     wireModals(null, null, null);
     return;
+  }
+
+  renderNextEventBanner();
+
+  function renderNextEventBanner() {
+    const mount = document.getElementById('lbNextEventBanner');
+    if (!mount) return;
+    const nextEv = allEventsRaw
+      .filter(e => e.isoDate > todayStr && e.status !== 'completed')
+      .sort((a, b) => a.isoDate.localeCompare(b.isoDate))[0];
+    if (!nextEv) { mount.innerHTML = ''; return; }
+
+    const hasPicked = myId ? picksData.some(p => p.event_id === nextEv.id && p.user_id === myId) : false;
+    const lockMs = nextEv.start_time ? new Date(nextEv.start_time) - new Date() : null;
+    let countdown = '';
+    if (lockMs !== null && !isNaN(lockMs)) {
+      if (lockMs <= 0) {
+        countdown = 'Picks locked';
+      } else {
+        const days = Math.floor(lockMs / 86400000);
+        const hrs  = Math.floor((lockMs % 86400000) / 3600000);
+        countdown = days > 0 ? `Locks in ${days}d ${hrs}h` : `Locks in ${hrs}h`;
+      }
+    }
+
+    mount.innerHTML = `
+      <div class="lb-next-event-banner">
+        <div class="lb-nxt-info">
+          <div class="lb-nxt-label">Next Event to Pick</div>
+          <div class="lb-nxt-name">${esc(nextEv.name)}</div>
+          ${countdown ? `<div class="lb-nxt-countdown">${esc(countdown)}</div>` : ''}
+        </div>
+        <a class="lb-nxt-cta ${hasPicked ? 'lb-nxt-cta-done' : ''}" href="picks.html?id=${encodeURIComponent(nextEv.id)}">
+          ${hasPicked ? 'Picks Submitted ✓ — View/Edit' : 'Make Your Picks →'}
+        </a>
+      </div>`;
   }
 
   // ── Period filter helper ────────────────────
@@ -813,6 +843,10 @@
       renderTable(allUsers, 'lbGlobalWrap', 'No picks in this period yet.');
       renderGroupStatus();
     }, 80);
+  });
+
+  document.getElementById('lbBackToRankings')?.addEventListener('click', () => {
+    document.querySelector('#lbPeriodTabs .lb-tab[data-period="all"]')?.click();
   });
 
   // ── My Group & H2H view ───────────────────────

@@ -211,6 +211,8 @@
           </div>
         </section>
 
+        <section class="cx-card cx-card-wide" id="cxNextEvent"></section>
+
         <section class="cx-card cx-card-soon">
           <div class="cx-card-head">
             <h2>Coming Soon</h2>
@@ -218,7 +220,6 @@
           </div>
           <ul class="cx-soon-list">
             <li>CSV export of member stats</li>
-            <li>Season reset (archive standings, start fresh)</li>
             <li>Transfer commissioner role to someone else</li>
           </ul>
         </section>
@@ -228,6 +229,7 @@
     wireEvents();
     renderEventList('');
     loadFairPlay();
+    loadNextEventCard();
   }
 
   // ── Roster: add player search ────────────────
@@ -395,6 +397,56 @@
         renderEventList(document.getElementById('cxEventSearch')?.value.trim() || '');
       });
     });
+  }
+
+  // ── Next Event to Pick ────────────────────────
+  async function loadNextEventCard() {
+    const box = document.getElementById('cxNextEvent');
+    if (!box) return;
+
+    const now = new Date();
+    const todayStr = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0') + '-' + String(now.getDate()).padStart(2, '0');
+    const nextEv = allEventsRaw
+      .filter(e => e.isoDate > todayStr && e.status !== 'completed')
+      .sort((a, b) => a.isoDate.localeCompare(b.isoDate))[0];
+
+    if (!nextEv) {
+      box.innerHTML = `
+        <div class="cx-card-head"><h2>Next Event to Pick</h2></div>
+        <div class="cx-hint">No upcoming events on the schedule yet.</div>`;
+      return;
+    }
+
+    let hasPicked = false;
+    try {
+      const { data } = await sb.from('picks').select('id').eq('event_id', nextEv.id).eq('user_id', myId).limit(1);
+      hasPicked = !!(data && data.length);
+    } catch {}
+
+    const lockMs = nextEv.start_time ? new Date(nextEv.start_time) - new Date() : null;
+    let countdown = '';
+    if (lockMs !== null && !isNaN(lockMs)) {
+      if (lockMs <= 0) {
+        countdown = 'Picks locked';
+      } else {
+        const days = Math.floor(lockMs / 86400000);
+        const hrs  = Math.floor((lockMs % 86400000) / 3600000);
+        countdown = days > 0 ? `Locks in ${days}d ${hrs}h` : `Locks in ${hrs}h`;
+      }
+    }
+
+    box.innerHTML = `
+      <div class="cx-card-head"><h2>Next Event to Pick</h2></div>
+      <div class="lb-next-event-banner" style="margin-bottom:0">
+        <div class="lb-nxt-info">
+          <div class="lb-nxt-label">Group members pick before it locks</div>
+          <div class="lb-nxt-name">${esc(nextEv.name)}</div>
+          ${countdown ? `<div class="lb-nxt-countdown">${esc(countdown)}</div>` : ''}
+        </div>
+        <a class="lb-nxt-cta ${hasPicked ? 'lb-nxt-cta-done' : ''}" href="picks.html?id=${encodeURIComponent(nextEv.id)}">
+          ${hasPicked ? 'Picks Submitted ✓ — View/Edit' : 'Make Your Picks →'}
+        </a>
+      </div>`;
   }
 
   // ── Fair play / pick timing ──────────────────
