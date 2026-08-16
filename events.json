@@ -13257,7 +13257,9 @@
         "ranked": true,
         "slot": "comain",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/DERN_MACKENZIE_L_BELT.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/5/ROBERTSON_GILLIAN_L_01-20.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/5/ROBERTSON_GILLIAN_L_01-20.png",
+        "winner": "Mackenzie Dern",
+        "method": "DEC"
       },
       {
         "a": "Mansur Abdul-Malik",
@@ -13268,7 +13270,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/ABDUL-MALIK_MANSUR_L_03-28.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/STOLTZFUS_DUSTIN-L_05-17.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/STOLTZFUS_DUSTIN-L_05-17.png",
+        "winner": "Dustin Stoltzfus",
+        "method": "SUB",
+        "round": 2
       },
       {
         "a": "Edson Barboza",
@@ -13279,7 +13284,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/BARBOZA_EDSON_L_12-06.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-09/RIBOVICS_ESTEBAN_L_05-11.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-09/RIBOVICS_ESTEBAN_L_05-11.png",
+        "winner": "Esteban Ribovics",
+        "method": "KO/TKO",
+        "round": 2
       },
       {
         "a": "Jalin Turner",
@@ -13290,7 +13298,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/TURNER_JALIN_L_03-08.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-11/FERNANDES_KAUE_L_11-04.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-11/FERNANDES_KAUE_L_11-04.png",
+        "winner": "Jalin Turner",
+        "method": "KO/TKO",
+        "round": 1
       }
     ],
     "prelims": [

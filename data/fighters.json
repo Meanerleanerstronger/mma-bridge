@@ -10743,6 +10743,14 @@
     "bio": "Mackenzie Dern is one of the most decorated grapplers in women's MMA, a BJJ world champion who grew up on the mats alongside her father Wellington 'Megaton' Dias. Dern's submission skills are world-class and she has steadily improved her striking, becoming a top-five strawweight with title ambitions.",
     "last5": [
       {
+        "opponent": "Gillian Robertson",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 330: Makhachev vs. Garry",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Virna Jandiroba",
         "result": "W",
         "method": "Decision (unanimous)",
@@ -20105,6 +20113,14 @@
     },
     "last5": [
       {
+        "opponent": "Mansur Abdul-Malik",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC 330: Makhachev vs. Garry",
+        "round": 2,
+        "time": null
+      },
+      {
         "opponent": "Kelvin Gastelum",
         "result": "L",
         "method": "Decision (unanimous)",
@@ -22066,6 +22082,14 @@
     },
     "last5": [
       {
+        "opponent": "Esteban Ribovics",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 330: Makhachev vs. Garry",
+        "round": 2,
+        "time": null
+      },
+      {
         "opponent": "Arnold Allen",
         "result": "L",
         "method": "Decision (unanimous)",
@@ -23524,6 +23548,14 @@
       "draws": 1
     },
     "last5": [
+      {
+        "opponent": "Dustin Stoltzfus",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC 330: Makhachev vs. Garry",
+        "round": 2,
+        "time": null
+      },
       {
         "opponent": "Yousri Belgaroui",
         "result": "L",
@@ -26921,6 +26953,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Edson Barboza",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 330: Makhachev vs. Garry",
+        "round": 2,
+        "time": null
+      },
       {
         "opponent": "Mateusz Gamrot",
         "result": "L",
@@ -40909,6 +40949,14 @@
     },
     "last5": [
       {
+        "opponent": "Mackenzie Dern",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 330: Makhachev vs. Garry",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Amanda Lemos",
         "result": "W",
         "method": "Decision (unanimous)",
@@ -42170,6 +42218,14 @@
     },
     "last5": [
       {
+        "opponent": "Kauê Fernandes",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 330: Makhachev vs. Garry",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "King Green",
         "result": "W",
         "method": "KO",
@@ -42546,7 +42602,17 @@
     },
     "weightClass": "Lightweight",
     "height": "5'9\"",
-    "reach": "73.0\""
+    "reach": "73.0\"",
+    "last5": [
+      {
+        "opponent": "Jalin Turner",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 330: Makhachev vs. Garry",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "carli-judice",
