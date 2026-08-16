@@ -14033,6 +14033,44 @@
     ]
   },
   {
+    "id": "ufc-fight-night-rosas-jr-vs-barcelos",
+    "name": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+    "type": "FIGHT NIGHT",
+    "date": "Sat, Sep 26, 2026",
+    "isoDate": "2026-09-26",
+    "location": "",
+    "venue": "",
+    "poster": "",
+    "status": "upcoming",
+    "start_time": null,
+    "mainCard": [
+      {
+        "a": "Raul Rosas Jr.",
+        "b": "Raoni Barcelos",
+        "weight": "Bantamweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "main",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "TBA",
+        "b": "Opponent TBA",
+        "weight": "",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "comain",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
+    "prelims": [],
+    "earlyPrelims": []
+  },
+  {
     "id": "ufc-332",
     "name": "UFC 332",
     "type": "PPV",
