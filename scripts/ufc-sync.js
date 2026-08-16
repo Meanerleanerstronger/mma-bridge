@@ -84,6 +84,25 @@ async function pushResultToSupabase(eventId, fightKey, winner, method, round) {
   }
 }
 
+// ── Wake the backend's tight live-result poller ────────────────────────────
+// Fire-and-forget — a failed wake call just means live updates stay on this
+// script's own cron cadence instead of the tighter ~60s backend poll, not a
+// hard failure. Silent no-op if INTERNAL_SECRET isn't configured.
+async function wakeLivePoll() {
+  const secret = process.env.INTERNAL_SECRET;
+  if (!secret) return;
+  try {
+    const res = await fetch('https://mmabridge-backend.onrender.com/api/admin/wake-live-poll', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Internal-Secret': secret },
+    });
+    if (res.ok) console.log('  ⏱️  Woke live-result poller');
+    else console.warn(`  ⚠️  wake-live-poll returned ${res.status}`);
+  } catch (e) {
+    console.warn(`  ⚠️  wake-live-poll call failed: ${e.message}`);
+  }
+}
+
 const ROOT      = path.join(__dirname, '..');
 const EV_ROOT   = path.join(ROOT, 'events.json');
 const EV_DATA   = path.join(ROOT, 'data', 'events.json');
@@ -411,6 +430,9 @@ async function main() {
   const espnEvents = await fetchAllESPN();
   console.log(`ESPN returned ${espnEvents.length} events\n`);
 
+  const todayStr = new Date().toISOString().slice(0, 10);
+  let wokeLivePoll = false;
+
   for (const espnEv of espnEvents) {
     // Dana White's Contender Series is deliberately not tracked — decided
     // it's not worth covering (no picks/reviews/leaderboard value the way
@@ -423,6 +445,15 @@ async function main() {
     const isCompleted = espnEv.status?.type?.completed === true;
     const espnDate    = (espnEv.date || '').slice(0, 10);
     const ourEv       = findOurEvent(espnEv, ourEvents);
+
+    // Card's live today — wake the backend's tight ~60s ESPN poller so
+    // results land in Supabase within a minute instead of waiting on this
+    // script's own ~15min cron interval. Idempotent on the backend side,
+    // but only worth calling once per run either way.
+    if (!wokeLivePoll && ourEv && ourEv.status !== 'completed' && espnDate === todayStr) {
+      wokeLivePoll = true;
+      await wakeLivePoll();
+    }
 
     // ── A: RESULTS — enter any individually-completed fight's result as soon
     // as ESPN reports it, rather than waiting for ESPN's own aggregate

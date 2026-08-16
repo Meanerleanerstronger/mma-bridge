@@ -4,8 +4,12 @@ on:
   schedule:
     # Every 6 hours — picks up new events, posters, card updates
     - cron: '0 */6 * * *'
-    # Every 30 min on Sat + Sun UTC — catches results as they come in on fight nights
-    - cron: '*/30 * * * 6,0'
+    # Every 15 min, every day — UFC cards aren't only on weekends (Fight
+    # Nights land on weekdays too). This is what detects a live-today event
+    # and wakes the backend's tight ~60s poller (live_poll.py); the actual
+    # in-fight result speed comes from that, not this interval — this just
+    # bounds the worst case for "how late could the wake-up itself be."
+    - cron: '*/15 * * * *'
   workflow_dispatch: # Manual trigger from GitHub Actions UI
 
 jobs:
