@@ -1,0 +1,144 @@
+{
+  "eventId": "ufc-330-makhachev-vs-machado-garry",
+  "eventName": "UFC 330: Makhachev vs. Garry",
+  "fights": [
+    {
+      "fighter1": "Islam Makhachev Ian Machado Garry",
+      "fighter2": "Mackenzie Dern Gillian Robertson",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "2229",
+          "totalStr": "00",
+          "td": "Welterweight",
+          "subAtt": 5,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "6549",
+          "totalStr": "10",
+          "td": "Women'sStrawweight",
+          "subAtt": 5,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Jalin Turner Kaue Fernandes",
+      "fighter2": "Dustin Stoltzfus Mansur Abdul-Malik",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "92",
+          "totalStr": "00",
+          "td": "Lightweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "4334",
+          "totalStr": "10",
+          "td": "Middleweight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Esteban Ribovics Edson Barboza",
+      "fighter2": "Chidi Njokuani Joel Alvarez",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "6330",
+          "totalStr": "00",
+          "td": "Lightweight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "15574",
+          "totalStr": "00",
+          "td": "Welterweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Charles Johnson Eduardo Chapolin",
+      "fighter2": "Donte Johnson Eric McConico",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 1",
+          "sigStr": "6655",
+          "totalStr": "10",
+          "td": "CatchWeight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "1 0",
+          "sigStr": "116",
+          "totalStr": "00",
+          "td": "Middleweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Tresean Gore Vicente Luque",
+      "fighter2": "Lucas Fernando Rafael Tobias",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "6546",
+          "totalStr": "11",
+          "td": "Middleweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "2 0",
+          "sigStr": "6913",
+          "totalStr": "00",
+          "td": "LightHeavyweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Neil Magny Ramiz Brahimaj",
+      "fighter2": "Jeremiah Wells Myktybek Orolbai",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "247",
+          "totalStr": "10",
+          "td": "Welterweight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "1626",
+          "totalStr": "10",
+          "td": "Welterweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    }
+  ]
+}
