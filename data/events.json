@@ -13233,8 +13233,8 @@
     "location": "Philadelphia, PA",
     "venue": "Xfinity Mobile Arena",
     "poster": "https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/2026-07/081526-ufc-330-makhachev-vs-machado-garry-EVENT-ART.jpg",
-    "status": "upcoming",
-    "start_time": "2026-08-16T02:00:00Z",
+    "status": "completed",
+    "start_time": "2026-08-16T01:00:00.000Z",
     "prelims_time": "2026-08-16T00:00:00Z",
     "mainCard": [
       {
@@ -13246,7 +13246,9 @@
         "ranked": true,
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-04/MACHADO_GARRY_IAN_L_04-26.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/7/MAKHACHEV_ISLAM_L_BELT_01-18.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/7/MAKHACHEV_ISLAM_L_BELT_01-18.png",
+        "winner": "Islam Makhachev",
+        "method": "DEC"
       },
       {
         "a": "Mackenzie Dern",
@@ -13257,7 +13259,9 @@
         "ranked": true,
         "slot": "comain",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/DERN_MACKENZIE_L_BELT.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/5/ROBERTSON_GILLIAN_L_01-20.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/5/ROBERTSON_GILLIAN_L_01-20.png",
+        "winner": "Mackenzie Dern",
+        "method": "DEC"
       },
       {
         "a": "Mansur Abdul-Malik",
@@ -13268,7 +13272,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/ABDUL-MALIK_MANSUR_L_03-28.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/STOLTZFUS_DUSTIN-L_05-17.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/STOLTZFUS_DUSTIN-L_05-17.png",
+        "winner": "Dustin Stoltzfus",
+        "method": "SUB",
+        "round": 2
       },
       {
         "a": "Edson Barboza",
@@ -13279,7 +13286,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/BARBOZA_EDSON_L_12-06.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-09/RIBOVICS_ESTEBAN_L_05-11.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-09/RIBOVICS_ESTEBAN_L_05-11.png",
+        "winner": "Esteban Ribovics",
+        "method": "KO/TKO",
+        "round": 2
       },
       {
         "a": "Jalin Turner",
@@ -13290,7 +13300,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/TURNER_JALIN_L_03-08.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-11/FERNANDES_KAUE_L_11-04.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-11/FERNANDES_KAUE_L_11-04.png",
+        "winner": "Jalin Turner",
+        "method": "KO/TKO",
+        "round": 1
       }
     ],
     "prelims": [
@@ -13303,7 +13316,9 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/LUQUE_VICENTE_L_10-11.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-04/GORE_TRESEAN_L_04-12.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-04/GORE_TRESEAN_L_04-12.png",
+        "winner": "Tresean Gore",
+        "method": "DEC"
       },
       {
         "a": "Donte Johnson",
@@ -13314,7 +13329,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/JOHNSON_DONTE_L_03-07.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-02/MCCONICO_ERIC_R_02-22.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-02/MCCONICO_ERIC_R_02-22.png",
+        "winner": "Donte Johnson",
+        "method": "KO/TKO",
+        "round": 1
       },
       {
         "a": "Chidi Njokuani",
@@ -13325,7 +13343,9 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-08/NJOKUANI_CHIDI_L.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/ALVAREZ_JOEL_L_05-09.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/ALVAREZ_JOEL_L_05-09.png",
+        "winner": "Chidi Njokuani",
+        "round": 3
       },
       {
         "a": "Charles Johnson",
@@ -13336,7 +13356,9 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/JOHNSON_CHARLES_L_03-14.png",
-        "imgB": ""
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/CHAPOLIN_EDUARDO_R_08-15.png?itok=-LuiriXm",
+        "winner": "Charles Johnson",
+        "round": 3
       }
     ],
     "earlyPrelims": [
@@ -13349,7 +13371,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/MAGNY_NEIL_L_12-13.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/BRAHIMAJ_RAMIZ_L_02-21.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/BRAHIMAJ_RAMIZ_L_02-21.png",
+        "winner": "Neil Magny",
+        "method": "KO/TKO",
+        "round": 2
       },
       {
         "a": "Jeremiah Wells",
@@ -13360,7 +13385,10 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/WELLS_JEREMIAH_L_11-01.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/5/OROLBAI_MYKTYBEK_L_11-18.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/5/OROLBAI_MYKTYBEK_L_11-18.png",
+        "winner": "Jeremiah Wells",
+        "method": "SUB",
+        "round": 3
       },
       {
         "a": "Rafael Tobias",
@@ -13371,7 +13399,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/TOBIAS_RAFAEL_L_03-07.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-08/FERNANDO_LUCAS_R.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-08/FERNANDO_LUCAS_R.png",
+        "winner": "Lucas Fernando",
+        "method": "KO/TKO",
+        "round": 3
       }
     ],
     "droppedFights": [
@@ -13577,7 +13608,7 @@
         "titleFight": false,
         "ranked": true,
         "slot": "",
-        "imgA": "",
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/TAFA_JUNIOR_L_05-02.png"
       }
     ],
@@ -14002,6 +14033,44 @@
         "imgB": ""
       }
     ]
+  },
+  {
+    "id": "ufc-fight-night-rosas-jr-vs-barcelos",
+    "name": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+    "type": "FIGHT NIGHT",
+    "date": "Sat, Sep 26, 2026",
+    "isoDate": "2026-09-26",
+    "location": "",
+    "venue": "",
+    "poster": "",
+    "status": "upcoming",
+    "start_time": null,
+    "mainCard": [
+      {
+        "a": "Raul Rosas Jr.",
+        "b": "Raoni Barcelos",
+        "weight": "Bantamweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "main",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "TBA",
+        "b": "Opponent TBA",
+        "weight": "",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "comain",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
+    "prelims": [],
+    "earlyPrelims": []
   },
   {
     "id": "ufc-332",
