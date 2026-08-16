@@ -27297,7 +27297,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/LUQUE_VICENTE_L_10-11.png",
     "record": {
       "wins": 24,
-      "losses": 12,
+      "losses": 13,
       "draws": 1
     },
     "last5": [
@@ -48105,7 +48105,94 @@
       "tdAcc": "28%",
       "tdDef": "33%",
       "subAvg": "0.0"
-    }
+    },
+    "record": {
+      "wins": 12,
+      "losses": 3,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Justin Tafa",
+        "result": "NC",
+        "method": "NC (accidental eye poke)",
+        "event": "UFC on ABC: Emmett vs. Topuria",
+        "round": 1,
+        "time": "0:29"
+      },
+      {
+        "opponent": "Richard Jacobi",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Dana White's Contender Series Season 6#Week 9 – September 20",
+        "round": 1,
+        "time": "4:34"
+      },
+      {
+        "opponent": "Eric Lunsford",
+        "result": "W",
+        "method": "TKO (knee injury)",
+        "event": "Fury FC 58",
+        "round": 1,
+        "time": "1:39"
+      },
+      {
+        "opponent": "Juan Adams",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Fury FC 54",
+        "round": 4,
+        "time": "0:43"
+      },
+      {
+        "opponent": "Rashaun Jackson",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "Combat Night: Clash of the Titans 5",
+        "round": 1,
+        "time": "0:31"
+      },
+      {
+        "opponent": "Brad Taylor",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "Combat Night Pro 20",
+        "round": 1,
+        "time": "2:35"
+      },
+      {
+        "opponent": "Tebaris Gordon",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Warfare MMA 19",
+        "round": 1,
+        "time": "2:22"
+      },
+      {
+        "opponent": "Vernon Lewis",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "Legacy Fighting Alliance in 2020#Legacy Fighting Alliance 83: Jackson vs. Chaulet",
+        "round": 1,
+        "time": "4:10"
+      },
+      {
+        "opponent": "Cameron Graham",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Combat Night Pro 14",
+        "round": 2,
+        "time": "1:25"
+      },
+      {
+        "opponent": "Brad Taylor",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "Combat Night Pro 13",
+        "round": 1,
+        "time": "3:07"
+      }
+    ]
   },
   {
     "id": "mason-jones",
@@ -48120,7 +48207,94 @@
       "tdAcc": "55%",
       "tdDef": "73%",
       "subAvg": "0.2"
-    }
+    },
+    "record": {
+      "wins": 18,
+      "losses": 2,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Axel Sola",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Evloev vs. Murphy",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Bolaji Oki",
+        "result": "W",
+        "method": "TKO (elbows)",
+        "event": "UFC Fight Night: Imavov vs. Borralho",
+        "round": 2,
+        "time": "3:18"
+      },
+      {
+        "opponent": "Jeremy Stephens",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Sandhagen vs. Figueiredo",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Michael Pagani",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "2024 in Cage Warriors#Cage Warriors 175",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Bryce Logan",
+        "result": "W",
+        "method": "TKO (punches and knees)",
+        "event": "2024 in Cage Warriors#Cage Warriors 166",
+        "round": 2,
+        "time": "2:45"
+      },
+      {
+        "opponent": "Yann Liasse",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Cage Warriors 161",
+        "round": 2,
+        "time": "4:24"
+      },
+      {
+        "opponent": "Ľudovít Klein",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Blaydes vs. Aspinall",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "David Onama",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Costa vs. Vettori",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Alan Patrick (fighter)",
+        "result": "NC",
+        "method": "NC (accidental eye poke)",
+        "event": "UFC Fight Night: Rozenstruik vs. Sakai",
+        "round": 2,
+        "time": "2:14"
+      },
+      {
+        "opponent": "Mike Davis (fighter)",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Chiesa vs. Magny",
+        "round": 3,
+        "time": "5:00"
+      }
+    ]
   },
   {
     "id": "losene-keita",
@@ -48134,7 +48308,94 @@
       "tdAcc": "0%",
       "tdDef": "100%",
       "subAvg": "0.0"
-    }
+    },
+    "record": {
+      "wins": 16,
+      "losses": 2,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Nathaniel Wood (fighter)",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Evloev vs. Murphy",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Ronald Paradeiser",
+        "result": "W",
+        "method": "TKO (elbow and punches)",
+        "event": "2024 in Oktagon MMA#Oktagon 65: Paradeiser vs. Keita 2",
+        "round": 2,
+        "time": "1:02"
+      },
+      {
+        "opponent": "Mateusz Legierski",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "2024 in Oktagon MMA#Oktagon 61: Paradeiser vs. Duque",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Predrag Bogdanović",
+        "result": "W",
+        "method": "TKO (punch to the body)",
+        "event": "2024 in Oktagon MMA#Oktagon 59: Summer Party",
+        "round": 2,
+        "time": "4:15"
+      },
+      {
+        "opponent": "Agy Sardari",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "2024 in Oktagon MMA#Oktagon 57: Eckerlin vs. Brož",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Niko Samsonidse",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "2023 in Oktagon MMA#Oktagon 50: Keita vs. Samsonidse",
+        "round": 2,
+        "time": "0:23"
+      },
+      {
+        "opponent": "Mate Sanikidze",
+        "result": "L",
+        "method": "TKO (leg injury)",
+        "event": "2023 in Oktagon MMA#Oktagon 45: Sanikidze vs. Keita",
+        "round": 1,
+        "time": "1:08"
+      },
+      {
+        "opponent": "Jakub Tichota",
+        "result": "W",
+        "method": "TKO (punch)",
+        "event": "2023 in Oktagon MMA#Oktagon 42: Keita vs. Tichota",
+        "round": 4,
+        "time": "3:53"
+      },
+      {
+        "opponent": "Samuel Bark",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "2023 in Oktagon MMA#Oktagon 39: Jungwirth vs. Oliveira",
+        "round": 1,
+        "time": "0:30"
+      },
+      {
+        "opponent": "Ivan Buchinger",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Oktagon 33",
+        "round": 1,
+        "time": "3:00"
+      }
+    ]
   },
   {
     "id": "mantas-kondratavicius",
@@ -48214,7 +48475,94 @@
       "tdAcc": "46%",
       "tdDef": "71%",
       "subAvg": "0.2"
-    }
+    },
+    "record": {
+      "wins": 25,
+      "losses": 14,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Vinicius Oliveira",
+        "result": "L",
+        "method": "TKO (punches and elbows)",
+        "event": "UFC Fight Night: Kape vs. Horiguchi",
+        "round": 2,
+        "time": "4:56"
+      },
+      {
+        "opponent": "Jose Miguel Delgado",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Emmett vs. Vallejos",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Christian Rodriguez",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC on ESPN: Dolidze vs. Hernandez",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Melquizael Costa",
+        "result": "L",
+        "method": "Submission (guillotine choke)",
+        "event": "UFC Fight Night: Cejudo vs. Song",
+        "round": 1,
+        "time": "4:30"
+      },
+      {
+        "opponent": "Cub Swanson",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC 303",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Dan Ige",
+        "result": "L",
+        "method": "KO (punches)",
+        "event": "UFC Fight Night: Hermansson vs. Pyfer",
+        "round": 1,
+        "time": "2:43"
+      },
+      {
+        "opponent": "Nathaniel Wood (fighter)",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Aspinall vs. Tybura",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Bill Algeo",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Sandhagen vs. Song",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Joanderson Brito",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Font vs. Vera",
+        "round": 1,
+        "time": "0:41"
+      },
+      {
+        "opponent": "Daniel Pineda (fighter)",
+        "result": "NC",
+        "method": "NC (accidental eye poke)",
+        "event": "UFC Fight Night: Gane vs. Volkov",
+        "round": 2,
+        "time": "0:46"
+      }
+    ]
   },
   {
     "id": "alexander-poppeck",
