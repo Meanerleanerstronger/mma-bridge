@@ -4,7 +4,11 @@
  *
  * What it does:
  *  1. Fetches all UFC events in a 6-month rolling window from ESPN
- *  2. Marks completed events + writes winner/method/round for every fight
+ *  2. Marks completed events + writes winner/method/round for every fight,
+ *     and pushes each graded result straight into Supabase (fight_results)
+ *     via the admin API — this is what the site's live-update pipeline
+ *     (Supabase Realtime on leaderboard.js/picks.js) actually reacts to,
+ *     so results go live automatically with no manual admin.html entry
  *  3. Adds new events announced by UFC (skeleton entry with full card)
  *  4. Finds missing poster art by probing UFC CDN URL patterns
  *  5. Syncs newly announced fights onto existing upcoming events (correct section)
@@ -17,8 +21,9 @@
  *  "Unofficial Winner Decision"   → DEC
  */
 
-import fs   from 'fs';
-import path from 'path';
+import fs     from 'fs';
+import path   from 'path';
+import crypto from 'crypto';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -46,6 +51,36 @@ async function notifyFavFighters(ev) {
     else console.warn(`  ⚠️  announce-fighters returned ${res.status}`);
   } catch (e) {
     console.warn(`  ⚠️  announce-fighters call failed: ${e.message}`);
+  }
+}
+
+// ── Push a graded result straight into Supabase (fight_results) ───────────
+// Reuses the exact same admin-panel endpoint (and its existing HMAC-token
+// auth) that a human would otherwise have to hit by hand in admin.html —
+// no new backend route, no new secret. This is what makes results actually
+// live-update on the site (leaderboard.js/picks.js subscribe to this table
+// via Supabase Realtime) instead of only updating the static JSON, which
+// nothing watches for changes at runtime. Silent no-op if ADMIN_PASSWORD
+// isn't configured (e.g. local dev runs) — the static JSON write still
+// happens either way, so nothing is lost, results just won't go live until
+// the next scheduled static-file deploy in that case.
+function adminToken() {
+  const secret = process.env.ADMIN_PASSWORD;
+  if (!secret) return null;
+  return crypto.createHmac('sha256', secret).update('mma-bridge-admin-session').digest('hex');
+}
+async function pushResultToSupabase(eventId, fightKey, winner, method, round) {
+  const token = adminToken();
+  if (!token) return;
+  try {
+    const res = await fetch('https://mmabridge-backend.onrender.com/api/admin/set-result', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token, event_id: eventId, fight_key: fightKey, winner, method, round: round || null }),
+    });
+    if (!res.ok) console.warn(`  ⚠️  set-result returned ${res.status} for ${eventId}:${fightKey}`);
+  } catch (e) {
+    console.warn(`  ⚠️  set-result call failed: ${e.message}`);
   }
 }
 
@@ -428,6 +463,9 @@ async function main() {
 
           if (appendLast5(fighters, byNormName, winnerName, loserName, 'W', method, round, fight.time, ourEv.name)) last5Added++;
           if (appendLast5(fighters, byNormName, loserName, winnerName, 'L', method, round, fight.time, ourEv.name)) last5Added++;
+
+          const sectionKey = hit.section === 'mainCard' ? 'main' : hit.section === 'prelims' ? 'prelims' : 'early';
+          await pushResultToSupabase(ourEv.id, `${sectionKey}-${hit.index}`, winnerName, method, round);
         }
       }
 

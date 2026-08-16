@@ -27,6 +27,7 @@ jobs:
         id: sync
         env:
           INTERNAL_SECRET: ${{ secrets.INTERNAL_SECRET }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
         run: node scripts/ufc-sync.js
 
       - name: Commit & push if changed
