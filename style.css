@@ -5829,6 +5829,11 @@ body.light-mode .fc-head:hover .fc-head-h2h { color: #e06b1a; border-color: rgba
   border: 1px solid rgba(248,113,113,0.2);
   font-size: 0.8rem; font-weight: 900; letter-spacing: 0.05em;
 }
+.fc-badge-winner {
+  color: rgba(80,210,120,0.9); background: rgba(80,210,120,0.08);
+  border: 1px solid rgba(80,210,120,0.2);
+  font-size: 0.7rem; font-weight: 900; letter-spacing: 0.08em;
+}
 .fc-win-share {
   display: inline-flex;
   align-items: center;
@@ -7353,6 +7358,7 @@ body.light-mode .sb-comm-pcts { color: rgba(0,0,0,0.38) !important; }
 /* Badges */
 body.light-mode .fc-badge-pick { color: rgba(150,90,8,0.9) !important; background: rgba(224,107,26,0.07) !important; border-color: rgba(224,107,26,0.2) !important; }
 body.light-mode .fc-badge-correct { color: rgba(0,150,80,0.9) !important; background: rgba(0,180,80,0.07) !important; border-color: rgba(0,180,80,0.2) !important; }
+body.light-mode .fc-badge-winner { color: rgba(0,150,80,0.9) !important; background: rgba(0,180,80,0.07) !important; border-color: rgba(0,180,80,0.2) !important; }
 
 /* Method row */
 body.light-mode .sb-method-wrap,

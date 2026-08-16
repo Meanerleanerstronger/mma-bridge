@@ -1148,18 +1148,24 @@ function formatOdds(n) {
       oddsTagB = `<span class="fc-odds${!aFav ? ' fc-fav' : ' fc-dog'}">${formatOdds(odds.odds_b)}</span>`;
     }
 
-    // Badges
+    // Badges — once the fight's done, every side gets an unambiguous label:
+    // the fighter who actually won always says WINNER; if you picked them
+    // too, that merges into one badge instead of two stacked ones. If you
+    // picked the OTHER fighter, that side says YOUR PICK (✗) so it's never
+    // just a bare "-Npts" with no context for which fighter was yours.
     const ddTag = isDD ? ' <span class="pk-dd-badge-tag">⚡DD</span>' : '';
     const winShareBtn = (winner, loser, pts, commPct) =>
       `<button class="fc-win-share" data-winner="${esc(winner)}" data-loser="${esc(loser)}" data-pts="${pts}" data-comm="${commPct ?? ''}" data-event="${esc(event?.name || '')}" title="Share your win">🎉 Share</button>`;
     const perfTick = (isPerfect) => isPerfect ? '<span class="pk-perfect-tick">✓</span>' : '';
     const badgeA = correctA
-      ? `<div class="fc-badge fc-badge-correct${isPerfectA ? ' pk-badge-perfect' : ''}">${perfTick(isPerfectA)}+${ptsA}pts${isDD ? ' ⚡' : ''}${winShareBtn(f.a, f.b, ptsA, commPctA)}</div>`
-      : (fightDone && pickedA ? `<div class="fc-badge fc-badge-wrong">✗ ${ptsA < 0 ? ptsA + 'pts' + (isDD ? ' ⚡DD' : '') : '0pts'}</div>` : '')
+      ? `<div class="fc-badge fc-badge-correct${isPerfectA ? ' pk-badge-perfect' : ''}">${perfTick(isPerfectA)}YOUR PICK · WINNER +${ptsA}pts${isDD ? ' ⚡' : ''}${winShareBtn(f.a, f.b, ptsA, commPctA)}</div>`
+      : (fightDone && resultA === 'win' ? `<div class="fc-badge fc-badge-winner">WINNER</div>` : '')
+      + (fightDone && pickedA && resultA !== 'win' ? `<div class="fc-badge fc-badge-wrong">YOUR PICK ✗ ${ptsA < 0 ? ptsA + 'pts' + (isDD ? ' ⚡DD' : '') : '0pts'}</div>` : '')
       + (!fightDone && pickedA ? `<div class="fc-badge fc-badge-pick${isSavedA ? '' : ' unsaved'}">${isSavedA ? 'YOUR PICK ✓' : 'YOUR PICK •'}${ddTag}</div>` : '');
     const badgeB = correctB
-      ? `<div class="fc-badge fc-badge-correct${isPerfectB ? ' pk-badge-perfect' : ''}">${perfTick(isPerfectB)}+${ptsB}pts${isDD ? ' ⚡' : ''}${winShareBtn(f.b, f.a, ptsB, commPctB)}</div>`
-      : (fightDone && pickedB ? `<div class="fc-badge fc-badge-wrong">✗ ${ptsB < 0 ? ptsB + 'pts' + (isDD ? ' ⚡DD' : '') : '0pts'}</div>` : '')
+      ? `<div class="fc-badge fc-badge-correct${isPerfectB ? ' pk-badge-perfect' : ''}">${perfTick(isPerfectB)}YOUR PICK · WINNER +${ptsB}pts${isDD ? ' ⚡' : ''}${winShareBtn(f.b, f.a, ptsB, commPctB)}</div>`
+      : (fightDone && resultB === 'win' ? `<div class="fc-badge fc-badge-winner">WINNER</div>` : '')
+      + (fightDone && pickedB && resultB !== 'win' ? `<div class="fc-badge fc-badge-wrong">YOUR PICK ✗ ${ptsB < 0 ? ptsB + 'pts' + (isDD ? ' ⚡DD' : '') : '0pts'}</div>` : '')
       + (!fightDone && pickedB ? `<div class="fc-badge fc-badge-pick${isSavedB ? '' : ' unsaved'}">${isSavedB ? 'YOUR PICK ✓' : 'YOUR PICK •'}${ddTag}</div>` : '');
 
     // Opponent badges
