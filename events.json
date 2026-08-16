@@ -13303,7 +13303,9 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/LUQUE_VICENTE_L_10-11.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-04/GORE_TRESEAN_L_04-12.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-04/GORE_TRESEAN_L_04-12.png",
+        "winner": "Tresean Gore",
+        "method": "DEC"
       },
       {
         "a": "Donte Johnson",
@@ -13314,7 +13316,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/JOHNSON_DONTE_L_03-07.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-02/MCCONICO_ERIC_R_02-22.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-02/MCCONICO_ERIC_R_02-22.png",
+        "winner": "Donte Johnson",
+        "method": "KO/TKO",
+        "round": 1
       },
       {
         "a": "Chidi Njokuani",
@@ -13336,7 +13341,9 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/JOHNSON_CHARLES_L_03-14.png",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/CHAPOLIN_EDUARDO_R_08-15.png?itok=-LuiriXm"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/CHAPOLIN_EDUARDO_R_08-15.png?itok=-LuiriXm",
+        "winner": "Charles Johnson",
+        "round": 3
       }
     ],
     "earlyPrelims": [
@@ -13377,7 +13384,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/TOBIAS_RAFAEL_L_03-07.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-08/FERNANDO_LUCAS_R.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-08/FERNANDO_LUCAS_R.png",
+        "winner": "Lucas Fernando",
+        "method": "KO/TKO",
+        "round": 3
       }
     ],
     "droppedFights": [

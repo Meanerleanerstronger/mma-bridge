@@ -14154,6 +14154,14 @@
     },
     "last5": [
       {
+        "opponent": "Eduardo Chapolin",
+        "result": "W",
+        "method": "",
+        "event": "UFC 330: Makhachev vs. Garry",
+        "round": 3,
+        "time": null
+      },
+      {
         "opponent": "Asu Almabayev",
         "result": "L",
         "method": "Sub",
@@ -21511,6 +21519,14 @@
     "nickname": "Lock Jaw",
     "last5": [
       {
+        "opponent": "Eric McConico",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 330: Makhachev vs. Garry",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Cody Brundage",
         "result": "W",
         "method": "Decision (unanimous)",
@@ -25367,6 +25383,14 @@
     "nickname": "Mr. Vicious",
     "last5": [
       {
+        "opponent": "Vicente Luque",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 330: Makhachev vs. Garry",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Azamat Bekoev",
         "result": "W",
         "method": "Sub",
@@ -27277,6 +27301,14 @@
       "draws": 1
     },
     "last5": [
+      {
+        "opponent": "Tresean Gore",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 330: Makhachev vs. Garry",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Kelvin Gastelum",
         "result": "W",
@@ -30366,6 +30398,14 @@
       "draws": 1
     },
     "last5": [
+      {
+        "opponent": "Donte Johnson",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 330: Makhachev vs. Garry",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Rodolfo Vieira",
         "result": "W",
@@ -44467,7 +44507,17 @@
     },
     "weightClass": "Light Heavyweight",
     "height": "6'2\"",
-    "reach": "74.5\""
+    "reach": "74.5\"",
+    "last5": [
+      {
+        "opponent": "Lucas Fernando",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 330: Makhachev vs. Garry",
+        "round": 3,
+        "time": null
+      }
+    ]
   },
   {
     "id": "nyamjargal-tumendemberel",
@@ -47319,7 +47369,17 @@
     },
     "height": "6'3\"",
     "reach": "80.0\"",
-    "weightClass": "Light Heavyweight"
+    "weightClass": "Light Heavyweight",
+    "last5": [
+      {
+        "opponent": "Rafael Tobias",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 330: Makhachev vs. Garry",
+        "round": 3,
+        "time": null
+      }
+    ]
   },
   {
     "id": "namsrai-batbayar",
@@ -48020,7 +48080,17 @@
       "tdDef": "75%",
       "subAvg": "0.0"
     },
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/CHAPOLIN_EDUARDO_R_08-15.png?itok=-LuiriXm"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/CHAPOLIN_EDUARDO_R_08-15.png?itok=-LuiriXm",
+    "last5": [
+      {
+        "opponent": "Charles Johnson",
+        "result": "L",
+        "method": "",
+        "event": "UFC 330: Makhachev vs. Garry",
+        "round": 3,
+        "time": null
+      }
+    ]
   },
   {
     "id": "austen-lane",
