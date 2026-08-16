@@ -13233,7 +13233,7 @@
     "location": "Philadelphia, PA",
     "venue": "Xfinity Mobile Arena",
     "poster": "https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/2026-07/081526-ufc-330-makhachev-vs-machado-garry-EVENT-ART.jpg",
-    "status": "upcoming",
+    "status": "completed",
     "start_time": "2026-08-16T01:00:00.000Z",
     "prelims_time": "2026-08-16T00:00:00Z",
     "mainCard": [
@@ -13246,7 +13246,9 @@
         "ranked": true,
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-04/MACHADO_GARRY_IAN_L_04-26.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/7/MAKHACHEV_ISLAM_L_BELT_01-18.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/7/MAKHACHEV_ISLAM_L_BELT_01-18.png",
+        "winner": "Islam Makhachev",
+        "method": "DEC"
       },
       {
         "a": "Mackenzie Dern",
