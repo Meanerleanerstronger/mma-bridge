@@ -530,14 +530,20 @@ async function main() {
       await notifyFavFighters(newEv);
     }
 
-    // ── C: POSTER — upcoming event missing its poster ─────────────────────────
-    if (!isCompleted && ourEv && !ourEv.poster) {
+    // ── C: POSTER — missing poster, or still on the temporary bout-announcement
+    // graphic (TEMP-HERO) — those get set by hand as a placeholder before UFC
+    // publishes the real theatrical poster, and without this re-check they'd
+    // stay on the placeholder forever, since findPoster() only ever runs once
+    // a poster field is non-empty. Re-probe TEMP-HERO events every run so they
+    // self-upgrade the moment the real EVENT-ART poster goes live. ───────────
+    if (!isCompleted && ourEv && (!ourEv.poster || ourEv.poster.includes('TEMP-HERO'))) {
       console.log(`🎨 Searching poster: ${ourEv.name}`);
       const poster = await findPoster(ourEv.id, ourEv.isoDate);
-      if (poster) {
+      if (poster && poster !== ourEv.poster) {
+        const upgraded = !!ourEv.poster;
         ourEv.poster = poster;
-        console.log(`  ✓ Found: ${poster}`);
-        changes.push(`Poster: ${ourEv.name}`);
+        console.log(`  ✓ ${upgraded ? 'Upgraded placeholder to final' : 'Found'}: ${poster}`);
+        changes.push(`${upgraded ? 'Poster upgraded' : 'Poster'}: ${ourEv.name}`);
       }
     }
 
