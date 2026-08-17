@@ -13475,6 +13475,28 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/SPIVAC_SERGHEI_L_02-21.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/PETRINO_VITOR_L_03-14.png"
+      },
+      {
+        "a": "MarQuel Mederos",
+        "b": "Mason Jones",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-06/MEDEROS_MARQUEL_L_06-07.png",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/JONES_MASON_L_03-21.png?itok=_sn2EwLA"
+      },
+      {
+        "a": "Kennedy Nzechukwu",
+        "b": "Shamil Gaziev",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/NZECHUKWU_KENNEDY_L_12-13.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/GAZIEV_SHAMIL_L_05-02.png"
       }
     ],
     "prelims": [
@@ -13501,26 +13523,59 @@
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/REED_ELISE_L_05-17.png"
       },
       {
-        "a": "Kody Steele",
-        "b": "Gauge Young",
+        "a": "Chris Padilla",
+        "b": "Nasrat Haqparast",
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-02/STEELE_KODY_R_02-08.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/YOUNG_GAUGE_R_08-23.png"
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/PADILLA_CHRIS_L_04-11.png",
+        "imgB": ""
       },
       {
-        "a": "Kennedy Nzechukwu",
-        "b": "Shamil Gaziev",
-        "weight": "Heavyweight",
+        "a": "Gauge Young",
+        "b": "Stan Dorsainvil",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/YOUNG_GAUGE_R_08-23.png",
+        "imgB": ""
+      },
+      {
+        "a": "Jamall Emmers",
+        "b": "Lerryan Douglas",
+        "weight": "Featherweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/NZECHUKWU_KENNEDY_L_12-13.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/GAZIEV_SHAMIL_L_05-02.png"
+        "imgA": "",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/DOUGLAS_LERRYAN_R_03-28.png"
+      },
+      {
+        "a": "Marcio Barbosa",
+        "b": "Ryan Kuse",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/BARBOSA_MARCIO_R_04-18.png",
+        "imgB": ""
+      },
+      {
+        "a": "Terrance Chatman",
+        "b": "Anthony Wint",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
       }
     ],
     "earlyPrelims": [],
@@ -14141,8 +14196,8 @@
         "titleFight": false,
         "ranked": false,
         "slot": "main",
-        "imgA": "",
-        "imgB": ""
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/5/BUCKLEY_JOAQUIN_L_05-11.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/MALOTT_MIKE_L_05-10.png"
       },
       {
         "a": "Mandel Nallo",
@@ -14152,8 +14207,8 @@
         "titleFight": false,
         "ranked": false,
         "slot": "comain",
-        "imgA": "",
-        "imgB": ""
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/NALLO_MANDEL_L_04-18.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-07/LANDWEHR_NATE_L_07-12.png"
       },
       {
         "a": "Erin Blanchfield",
@@ -14163,8 +14218,8 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "",
-        "imgB": ""
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/BLANCHFIELD_ERIN_L_11-15.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/JASUDAVICIUS_JASMINE_L_04-18.png"
       },
       {
         "a": "Tanner Boser",
@@ -14174,8 +14229,8 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "",
-        "imgB": ""
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/BOSER_TANNER_L_04-18.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/DINIZ_JHONATA_L_10-11.png"
       },
       {
         "a": "Marc-Andre Barriault",
@@ -14185,8 +14240,8 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "",
-        "imgB": ""
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/BARRIAULT_MARC-ANDRE_L_05-10.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/DAUKAUS_KYLE_R_06-14.png"
       }
     ],
     "prelims": [
@@ -14198,8 +14253,8 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "",
-        "imgB": ""
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/CRODEN_MELISSA_L_10-18.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-04/CHANDLER_CHELSEA_L_04-26.png"
       },
       {
         "a": "Jamey-Lyn Horth",
@@ -14209,8 +14264,8 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "",
-        "imgB": ""
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/HORTH_JAMEY-LYN_L_12-13.png",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/5/CERMINARA_KATLYN_L_03-09.png?itok=L1T9rkza"
       },
       {
         "a": "Charles Jourdain",
@@ -14220,7 +14275,7 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/JOURDAIN_CHARLES_L_10-18.png",
         "imgB": ""
       }
     ],
