@@ -18,8 +18,10 @@
  *
  * Processes up to --limit fighters per run (default 100) so a single run
  * stays bounded on GitHub Actions; scheduled to run repeatedly until the
- * backlog of never-yet-populated fighters is worked through, then just
- * maintains newcomers. Run manually any time with:
+ * backlog of never-yet-populated fighters is worked through. After that,
+ * it doesn't just sit idle on newcomers — anyone whose stats are older
+ * than STALE_DAYS gets re-queued too, since career averages genuinely
+ * change after every fight. Run manually any time with:
  *   node scripts/fighter-stats-sync.js [--limit N]
  */
 
@@ -30,10 +32,16 @@ import puppeteer from 'puppeteer';
 
 const __dirname     = path.dirname(fileURLToPath(import.meta.url));
 const FIGHTERS_PATH = path.join(__dirname, '..', 'data', 'fighters.json');
+const FIGHTERS_ROOT = path.join(__dirname, '..', 'fighters.json');
 
 const args      = process.argv.slice(2);
 const limitIdx  = args.indexOf('--limit');
 const LIMIT     = limitIdx >= 0 ? parseInt(args[limitIdx + 1], 10) : 100;
+// Once a fighter has stats, they never got re-checked — career averages
+// (SLpM, TD Avg, etc.) genuinely change after every fight, so a
+// "sync once, done forever" fighter would silently go stale after their
+// first bout post-sync. Re-queue anyone whose stats are older than this.
+const STALE_DAYS = 60;
 
 function normName(s) {
   return (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '')
@@ -113,9 +121,16 @@ function parseCareerStats(html) {
 
 async function run() {
   const fighters = JSON.parse(fs.readFileSync(FIGHTERS_PATH, 'utf8'));
-  const allTodo = fighters.filter(f => f.name && !f.stats?.slpm);
+  const now = Date.now();
+  const staleCutoff = now - STALE_DAYS * 86400000;
+  const missing = fighters.filter(f => f.name && !f.stats?.slpm);
+  const stale = fighters.filter(f => f.name && f.stats?.slpm &&
+    (!f.statsSyncedAt || new Date(f.statsSyncedAt).getTime() < staleCutoff));
+  // Missing fighters first (bigger visible gap), then oldest-synced stale ones.
+  stale.sort((a, b) => new Date(a.statsSyncedAt || 0) - new Date(b.statsSyncedAt || 0));
+  const allTodo = [...missing, ...stale];
   const todo = allTodo.slice(0, LIMIT);
-  console.log(`${allTodo.length} fighters total need stats — processing ${todo.length} this run (--limit ${LIMIT})`);
+  console.log(`${missing.length} missing, ${stale.length} stale (>${STALE_DAYS}d) — processing ${todo.length} this run (--limit ${LIMIT})`);
   if (!todo.length) { console.log('All up to date.'); return; }
 
   const browser = await puppeteer.launch({
@@ -143,6 +158,7 @@ async function run() {
         if (!stats) { console.warn(`  ⚠️  No stats parsed: ${fighter.name}`); continue; }
 
         fighter.stats = stats;
+        fighter.statsSyncedAt = new Date().toISOString();
         updated++;
         console.log(`  ✅ ${fighter.name}: SLpM=${stats.slpm} StrAcc=${stats.strAcc} TD=${stats.tdAvg}`);
 
@@ -154,6 +170,7 @@ async function run() {
   }
 
   fs.writeFileSync(FIGHTERS_PATH, JSON.stringify(fighters, null, 2));
+  fs.writeFileSync(FIGHTERS_ROOT, JSON.stringify(fighters, null, 2));
   console.log(`\n✅ Done. Updated ${updated}/${todo.length} this run (${notFound} not in ufcstats.com directory, ${allTodo.length - updated} still remaining overall).`);
 }
 

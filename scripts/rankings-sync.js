@@ -11,6 +11,7 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OUT           = path.join(__dirname, '..', 'data', 'rankings.json');
 const FIGHTERS_PATH = path.join(__dirname, '..', 'data', 'fighters.json');
+const FIGHTERS_ROOT = path.join(__dirname, '..', 'fighters.json');
 
 function decodeEntities(s) {
   return (s || '').replace(/&#039;/g, "'").replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
@@ -104,6 +105,7 @@ function syncFighterRankings(divisions) {
 
   if (changed > 0) {
     fs.writeFileSync(FIGHTERS_PATH, JSON.stringify(fighters, null, 2));
+    fs.writeFileSync(FIGHTERS_ROOT, JSON.stringify(fighters, null, 2));
   }
   console.log(`✅ Fighter rankings synced: ${changed} changed`);
   log.slice(0, 20).forEach(l => console.log(`  ${l}`));

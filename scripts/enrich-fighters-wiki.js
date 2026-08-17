@@ -176,6 +176,7 @@ function parseMmaRecord(content) {
 // ── Load data ─────────────────────────────────────────────────────────
 const eventsPath   = join(ROOT, 'data', 'events.json');
 const fightersPath = join(ROOT, 'data', 'fighters.json');
+const fightersRootPath = join(ROOT, 'fighters.json');
 
 const events   = JSON.parse(readFileSync(eventsPath,  'utf8'));
 let   fighters = JSON.parse(readFileSync(fightersPath, 'utf8'));
@@ -296,6 +297,7 @@ for (const name of names) {
 // ── Write ─────────────────────────────────────────────────────────────
 if (!dryRun) {
   writeFileSync(fightersPath, JSON.stringify(fighters, null, 2), 'utf8');
+  writeFileSync(fightersRootPath, JSON.stringify(fighters, null, 2), 'utf8');
   console.log(`\n${'─'.repeat(50)}`);
   console.log(`Enriched:  ${enriched}`);
   console.log(`Not found: ${notFound}`);
