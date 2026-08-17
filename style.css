@@ -4650,19 +4650,13 @@ body.light-mode #cursor-glow { display: none; }
 .fp-flag { font-size: 1.05rem; }
 
 /* Stats strip — a flush "tale of the tape" ledger directly under the
-   hero, not a floating glass card. A soft edge-fading accent line (not
-   a flat solid bar) is the only orange here; the rest is plain
-   hairlines and tabular numerals. */
+   hero, not a floating glass card. Plain hairlines and tabular numerals. */
 .fp-stats-strip {
   position: relative;
   display: flex;
   background: #111;
+  border-top: 2px solid #ff8a3d;
   border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-.fp-stats-strip::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, transparent 0%, #ff8a3d 18%, #ff8a3d 82%, transparent 100%);
 }
 .fp-stat-item {
   flex: 1;
@@ -10626,7 +10620,7 @@ body.light-mode .pk-fotn-reminder { background: rgba(180,110,0,0.07); border-col
 }
 .pr-tier-bar-fill {
   height: 100%; border-radius: 2px;
-  background: linear-gradient(90deg, #ff8a3d, rgba(0,140,200,0.6));
+  background: #ff8a3d;
   transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 body.light-mode .pr-tier-progress-label { color: rgba(0,0,0,0.35); }
@@ -12179,11 +12173,11 @@ details[open] .div-rank-div-name::before { transform: rotate(90deg); }
 }
 .pr-fav-stat-lbl {
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.44rem;
+  font-size: 0.62rem;
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.22);
+  color: rgba(255,255,255,0.4);
 }
 
 /* ── Divisional rankings — tab panel extras ── */

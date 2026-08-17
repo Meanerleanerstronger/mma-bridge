@@ -69,12 +69,7 @@
       margin: 0 0 8px;
     }
     .rv-hero h1 span {
-      background: linear-gradient(120deg, #ff8a3d 0%, #ff8a3d 40%, #e06b1a 70%, #ff8a3d 100%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: shimmerSlide 4s linear infinite;
+      color: #ff8a3d;
     }
     .rv-hero p {
       color: rgba(255,255,255,0.3);
@@ -146,7 +141,7 @@
     .row-accent {
       display: inline-block;
       width: 3px; height: 16px;
-      background: linear-gradient(to bottom, #ff8a3d, rgba(255,138,61,0.3));
+      background: #ff8a3d;
       border-radius: 2px;
       flex-shrink: 0;
       transform-origin: top;
@@ -154,8 +149,8 @@
     }
     .rv-row-count {
       font-family: 'Inter', sans-serif;
-      font-size: 0.66rem;
-      color: rgba(255,255,255,0.2);
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.4);
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.07);
       border-radius: 20px;
@@ -310,8 +305,8 @@
       top: 12px; left: 12px;
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
-      font-size: 0.5rem;
-      letter-spacing: 0.16em;
+      font-size: 0.66rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       padding: 4px 9px;
       border-radius: 4px;
@@ -349,17 +344,15 @@
       z-index: 5;
     }
 
-    /* Bottom glow line on hover — slides in */
+    /* Bottom accent line on hover */
     .rv-card .card-clip::after {
       content: '';
       position: absolute;
       bottom: 0; left: 0; right: 0;
       height: 3px;
-      background: linear-gradient(90deg, transparent, #ff8a3d 30%, #ff8a3d 50%, #ff8a3d 70%, transparent);
-      background-size: 200% auto;
+      background: #ff8a3d;
       opacity: 0;
       transition: opacity 0.25s;
-      animation: shimmerSlide 3s linear infinite;
       z-index: 4;
     }
     .rv-card:hover .card-clip::after { opacity: 1; }

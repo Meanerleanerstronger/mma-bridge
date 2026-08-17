@@ -230,7 +230,7 @@
     .ev-card:nth-child(5){animation-delay:.20s}.ev-card:nth-child(n+6){animation-delay:.24s}
     .ev-card.fn:hover  { border-color:rgba(255,255,255,.18);box-shadow:0 16px 50px rgba(0,0,0,.7); }
     .ev-card.ppv:hover { border-color:rgba(255,138,61,.3);box-shadow:0 16px 50px rgba(0,0,0,.7); }
-    .ev-card.ppv::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent 0%,#8a6a10 15%,#ff8a3d 35%,#fff8c0 50%,#ff8a3d 65%,#8a6a10 85%,transparent 100%);background-size:250% auto;animation:shimmer 4s linear infinite;z-index:5; }
+    .ev-card.ppv::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:#ff8a3d;z-index:5; }
 
 
     .ev-card-poster { position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;display:block;transition:transform .5s cubic-bezier(.22,1,.36,1); }
@@ -255,7 +255,7 @@
     .ev-card-days.soon  { color:#ff8a3d;animation:pulse 2.2s ease infinite; }
     .ev-card-days.today { color:#ff8a3d;animation:pulse 2s ease infinite; }
     .ev-card-date   { font-family:'Inter',sans-serif;font-size:.68rem;color:rgba(255,255,255,.2); }
-    .ev-card-location { font-family:'Inter',sans-serif;font-size:.6rem;color:rgba(255,255,255,.13);max-width:120px;text-align:right; }
+    .ev-card-location { font-family:'Inter',sans-serif;font-size:.7rem;color:rgba(255,255,255,.4);max-width:120px;text-align:right; }
     .ev-card-cta    { position:absolute;bottom:14px;right:22px;z-index:3;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.48rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.2);display:flex;align-items:center;gap:5px;transition:color .2s; }
     .ev-card.fn:hover  .ev-card-cta { color:rgba(255,138,61,.6); }
     .ev-card.ppv:hover .ev-card-cta { color:rgba(255,138,61,.6); }
@@ -267,7 +267,7 @@
     .ev-hype-slot .ehs-num { font-family:'Barlow Condensed',sans-serif;font-size:2rem;font-weight:900;line-height:1;color:#ff8a3d;text-shadow:0 0 14px rgba(255,138,61,.6),0 0 30px rgba(240,150,20,.25);letter-spacing:-.01em;display:flex;align-items:baseline;gap:2px; }
     .ev-hype-slot .ehs-sep { font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:700;color:rgba(255,138,61,.28);line-height:1; }
     .ev-hype-slot .ehs-label { font-family:'Inter',sans-serif;font-size:.42rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,138,61,.45);line-height:1; }
-    .ev-hype-slot .ehs-count { font-family:'Inter',sans-serif;font-size:.4rem;font-weight:500;color:rgba(255,255,255,.16);letter-spacing:.03em;line-height:1; }
+    .ev-hype-slot .ehs-count { font-family:'Inter',sans-serif;font-size:.62rem;font-weight:500;color:rgba(255,255,255,.4);letter-spacing:.03em;line-height:1; }
 
     /* ══════════════════════════════════
        CINEMATIC OVERLAY
@@ -503,13 +503,6 @@
       box-shadow:0 0 8px rgba(255,138,61,.25);
     }
     .ov-fight.is-main .ov-headshot { width:44px;height:44px; }
-    .ov-fight::before {
-      content:'';position:absolute;inset:0;
-      border-radius:10px;
-      background:linear-gradient(90deg,rgba(255,138,61,.0),rgba(255,138,61,.04),rgba(255,138,61,.0));
-      opacity:0;transition:opacity .2s;
-    }
-    .ov-fight:hover::before { opacity:1; }
     .ov-fight:hover {
       background:rgba(255,255,255,.03);
       border-color:rgba(255,255,255,.15);
@@ -519,8 +512,6 @@
 
     .ov-fight.is-main    { padding:18px 22px;background:rgba(255,138,61,.02);border-color:rgba(255,138,61,.12); }
     .ov-fight.is-main.ppv-main { background:rgba(255,138,61,.02);border-color:rgba(255,138,61,.14); }
-    .ov-fight.is-main::before { background:linear-gradient(90deg,rgba(255,138,61,.0),rgba(255,138,61,.06),rgba(255,138,61,.0)); }
-    .ov-fight.is-main.ppv-main::before { background:linear-gradient(90deg,rgba(255,138,61,.0),rgba(255,138,61,.07),rgba(255,138,61,.0)); }
     .ov-fight.is-main:hover { border-color:rgba(255,138,61,.28); }
     .ov-fight.is-comain  { background:rgba(255,138,61,.01); }
 
@@ -926,7 +917,7 @@
     /* ── COUNTDOWN FLOATING CARD ── */
     #evCdCard {
       position:fixed; top:72px; right:20px; width:290px;
-      background:linear-gradient(135deg,rgba(255,138,61,.13) 0%,rgba(0,180,210,.07) 100%);
+      background:rgba(255,138,61,.1);
       border:1.5px solid rgba(255,138,61,.45);
       border-radius:16px; padding:16px 18px; z-index:3500;
       box-shadow:0 8px 40px rgba(0,0,0,.65);
