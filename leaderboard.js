@@ -742,6 +742,17 @@
       setTimeout(() => { if (btn) btn.textContent = orig; }, 2000);
     });
 
+    // Click the code chip to copy just the code
+    document.getElementById('groupCodeDisplay')?.closest('.lb-group-code-wrap')?.addEventListener('click', function () {
+      navigator.clipboard?.writeText(myGroupCode).catch(() => {});
+      const lbl = this.querySelector('.lb-group-code-label');
+      if (lbl) {
+        const orig = lbl.textContent;
+        lbl.textContent = 'Copied!';
+        setTimeout(() => { lbl.textContent = orig; }, 1500);
+      }
+    });
+
     // Leave group
     document.getElementById('btnLeaveGroup')?.addEventListener('click', async () => {
       const btn = document.getElementById('btnLeaveGroup');

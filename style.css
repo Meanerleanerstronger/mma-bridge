@@ -8486,7 +8486,24 @@ body.light-mode .lb-nxt-countdown { color: rgba(0,0,0,0.45); }
   font-family: 'Inter', sans-serif; font-size: 0.72rem;
   color: rgba(255,255,255,0.35);
 }
-.lb-group-action-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.lb-group-action-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+.lb-group-code-wrap {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px; padding: 7px 12px; cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.lb-group-code-wrap:hover { background: rgba(255,138,61,0.06); border-color: rgba(255,138,61,0.3); }
+.lb-group-code-label {
+  font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.65rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35);
+}
+.lb-group-code {
+  font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.85rem;
+  letter-spacing: 0.12em; color: #ff8a3d;
+}
+body.light-mode .lb-group-code-wrap { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.1); }
+body.light-mode .lb-group-code-label { color: rgba(0,0,0,0.4); }
 .lb-owner-badge {
   display: inline-block; font-family: 'Montserrat', sans-serif;
   font-size: 0.68rem; font-weight: 800; letter-spacing: 0.08em;
