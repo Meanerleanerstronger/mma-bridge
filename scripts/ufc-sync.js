@@ -344,13 +344,24 @@ function formatDate(isoDate) {
   });
 }
 
+function roundsFromESPN(comp, slot) {
+  // ESPN reports the real scheduled round count per fight (format.regulation.periods)
+  // — some co-mains (and occasionally other slots) are scheduled 5 rounds despite
+  // not being a title fight or the literal main event, so guessing purely by slot
+  // position is wrong. Trust ESPN's number when present; only fall back to the
+  // slot-based guess if it's missing.
+  const periods = comp?.format?.regulation?.periods;
+  if (periods === 3 || periods === 5) return `${periods} Rds`;
+  return slot === 'main' ? '5 Rds' : '3 Rds';
+}
+
 function buildFightFromESPN(comp, slot) {
   // ESPN lists fighter[0] as order:2 (visiting), fighter[1] as order:1 (home) — normalize
   const sorted = [...(comp.competitors || [])].sort((a, b) => (a.order || 0) - (b.order || 0));
   const a = sorted[0]?.athlete?.displayName || sorted[0]?.displayName || '';
   const b = sorted[1]?.athlete?.displayName || sorted[1]?.displayName || '';
   const wc = comp.type?.abbreviation || '';
-  return { a, b, weight: wc, rounds: slot === 'main' ? '5 Rds' : '3 Rds', titleFight: false, ranked: false, slot, imgA: '', imgB: '' };
+  return { a, b, weight: wc, rounds: roundsFromESPN(comp, slot), titleFight: false, ranked: false, slot, imgA: '', imgB: '' };
 }
 
 async function buildNewEvent(espnEv) {
@@ -460,6 +471,47 @@ async function main() {
     if (!wokeLivePoll && ourEv && ourEv.status !== 'completed' && espnDate === todayStr) {
       wokeLivePoll = true;
       await wakeLivePoll();
+    }
+
+    // ── A0: ROUNDS — correct any fight's round count against ESPN's real
+    // format.regulation.periods, for every fight on every upcoming event,
+    // every run — not just new ones. Catches cases like a non-title 5-round
+    // co-main that got created before this field was read, or a card change
+    // that flips a fight's round count after the fact.
+    //
+    // ESPN has been observed to serve conflicting periods values for the
+    // SAME fight across the multiple partial-roster event objects that get
+    // merged into one (see the merge comment in fetchAllESPN) — an early,
+    // incomplete snapshot defaulting to 3 rounds alongside a later, correct
+    // 5-round entry. Collect every match per fight and take the max rather
+    // than whichever one happens to be encountered last, so this can't
+    // flip-flop or settle on the wrong value depending on array order. ────
+    if (ourEv && ourEv.status !== 'completed') {
+      const bestRounds = new Map(); // "section-index" -> highest periods seen this run
+      for (const comp of (espnEv.competitions || [])) {
+        const competitors = (comp.competitors || []).map(c => c.athlete?.displayName || c.displayName || '');
+        if (competitors.length < 2) continue;
+        const hit = findOurFight(ourEv, competitors[0], competitors[1]);
+        if (!hit) continue;
+        const key = `${hit.section}-${hit.index}`;
+        const periods = comp?.format?.regulation?.periods;
+        const rounds = (periods === 3 || periods === 5) ? periods : null;
+        if (rounds === null) continue; // no real ESPN signal — leave existing/slot-guess value alone
+        const prev = bestRounds.get(key);
+        if (prev === undefined || rounds > prev) bestRounds.set(key, rounds);
+      }
+      for (const [key, rounds] of bestRounds) {
+        const [section, idxStr] = key.split(/-(?=\d+$)/);
+        const idx = parseInt(idxStr, 10);
+        const fight = ourEv[section]?.[idx];
+        if (!fight) continue;
+        const correctRounds = `${rounds} Rds`;
+        if (correctRounds !== fight.rounds) {
+          console.log(`  🔢 Round count corrected: ${fight.a} vs ${fight.b} — ${fight.rounds || '?'} → ${correctRounds}`);
+          fight.rounds = correctRounds;
+          changes.push(`Rounds corrected: ${fight.a} vs ${fight.b} (${ourEv.name})`);
+        }
+      }
     }
 
     // ── A: RESULTS — enter any individually-completed fight's result as soon
