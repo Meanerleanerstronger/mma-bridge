@@ -676,3 +676,35 @@ function startLiveFeed() {
 
 startLiveFeed();
 
+// ── "Review the Card" button — random color cycle ──────────────
+// Was a fixed 4-stop CSS keyframe (same dark, muddy gradients every load,
+// same order every cycle). Curated palette of solid, bright, well-rounded
+// colors instead — genuinely random pick each tick (no immediate repeat),
+// crossfades smoothly via the .hero-review-btn CSS transition in index.html.
+const REVIEW_BTN_PALETTE = [
+  { bg: '#00c2d1', border: '#00838f', text: '#062226' }, // cyan
+  { bg: '#8b5cf6', border: '#6d28d9', text: '#1a0e33' }, // purple
+  { bg: '#22c55e', border: '#15803d', text: '#062611' }, // green
+  { bg: '#ff8a3d', border: '#c9601a', text: '#2b1200' }, // orange
+  { bg: '#ec4899', border: '#be185d', text: '#2b0716' }, // pink
+  { bg: '#eab308', border: '#a16207', text: '#241900' }, // gold
+  { bg: '#3b82f6', border: '#1d4ed8', text: '#08163a' }, // blue
+  { bg: '#3f3f46', border: '#18181b', text: '#f4f4f5' }, // charcoal/black
+];
+let lastReviewColorIdx = -1;
+function applyRandomReviewColor() {
+  const btn = document.querySelector('.hero-review-btn');
+  if (!btn) return;
+  let idx;
+  do { idx = Math.floor(Math.random() * REVIEW_BTN_PALETTE.length); }
+  while (idx === lastReviewColorIdx && REVIEW_BTN_PALETTE.length > 1);
+  lastReviewColorIdx = idx;
+  const c = REVIEW_BTN_PALETTE[idx];
+  btn.style.background = c.bg;
+  btn.style.borderColor = c.border;
+  btn.style.color = c.text;
+  btn.style.boxShadow = `0 4px 20px ${c.bg}55`;
+}
+applyRandomReviewColor();
+setInterval(applyRandomReviewColor, 3500);
+
