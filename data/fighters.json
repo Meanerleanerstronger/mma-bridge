@@ -11573,7 +11573,7 @@
     "name": "Kyle Daukaus",
     "record": {
       "wins": 17,
-      "losses": 4,
+      "losses": 5,
       "draws": 0
     },
     "last5": [
@@ -19095,7 +19095,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/BARRIAULT_MARC-ANDRE_L_05-10.png",
     "record": {
       "wins": 17,
-      "losses": 11,
+      "losses": 9,
       "draws": 0
     },
     "last5": [
@@ -21038,7 +21038,7 @@
     "name": "Raul Rosas Jr.",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/ROSAS_JR_RAUL_L_03-29.png",
     "record": {
-      "wins": 13,
+      "wins": 12,
       "losses": 1,
       "draws": 0
     },
@@ -26256,7 +26256,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-07/LANDWEHR_NATE_L_07-12.png",
     "record": {
       "wins": 18,
-      "losses": 8,
+      "losses": 7,
       "draws": 0
     },
     "last5": [
@@ -32164,7 +32164,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/5/BUCKLEY_JOAQUIN_L_05-11.png",
     "record": {
       "wins": 21,
-      "losses": 8,
+      "losses": 7,
       "draws": 0
     },
     "last5": [
@@ -48676,5 +48676,96 @@
       "tdDef": "0%",
       "subAvg": "0.0"
     }
+  },
+  {
+    "id": "katlyn-cerminara",
+    "name": "Katlyn Cerminara",
+    "record": {
+      "wins": 18,
+      "losses": 6,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Maycee Barber",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 299",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Manon Fiorot",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 280",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Amanda Ribas",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC on ESPN: Błachowicz vs. Rakić",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Jennifer Maia",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Kattar vs. Chikadze",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Viviane Araújo (fighter)",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 262",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Cynthia Calvillo",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 255",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Jéssica Andrade",
+        "result": "L",
+        "method": "KO (punches to the body)",
+        "event": "UFC Fight Night: Ortega vs. The Korean Zombie",
+        "round": 1,
+        "time": "4:55"
+      },
+      {
+        "opponent": "Antonina Shevchenko",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Woodley vs. Burns",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Valentina Shevchenko",
+        "result": "L",
+        "method": "TKO (elbows and punches)",
+        "event": "UFC 247",
+        "round": 3,
+        "time": "1:03"
+      },
+      {
+        "opponent": "Jennifer Maia",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 244",
+        "round": 3,
+        "time": "5:00"
+      }
+    ]
   }
 ]
