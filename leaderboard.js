@@ -1039,7 +1039,36 @@
       </div>`;
   }
 
-  async function renderGroupWall() {
+  // ── Lucas weekly recap — one AI blurb per group per finished event,
+  // cached client-side so it's not regenerated on every page load. ──
+  async function loadLucasRecap(groupUsers) {
+    const completed = allEventsRaw
+      .filter(e => e.status === 'completed' && e.isoDate)
+      .sort((a, b) => new Date(b.isoDate) - new Date(a.isoDate));
+    if (!completed.length || !groupUsers.length) return null;
+    const ev = completed[0];
+    const cacheKey = `lucas_recap_${myGroupCode}_${ev.id}`;
+    const cached = localStorage.getItem(cacheKey);
+    if (cached) return cached;
+
+    try {
+      const res = await fetch('https://mmabridge-backend.onrender.com/api/group/weekly-recap', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          group_name: myGroupName || myGroupCode,
+          event_name: ev.name,
+          standings: groupUsers.slice(0, 5).map(u => ({ name: u.name, points: u.points, accuracy: u.pct })),
+        }),
+      });
+      if (!res.ok) return null;
+      const { recap } = await res.json();
+      if (recap) localStorage.setItem(cacheKey, recap);
+      return recap || null;
+    } catch { return null; }
+  }
+
+  async function renderGroupWall(groupUsers) {
     const el = document.getElementById('lbMgWall');
     if (!el || !myGroupCode || !sb) return;
 
@@ -1090,6 +1119,7 @@
     }
 
     el.innerHTML = `
+      <div id="lbLucasRecap"></div>
       <div class="lb-wall-wrap">
         <div class="lb-wall-title">Group Wall</div>
         <div class="lb-wall-list"><div class="lb-wall-empty">Loading…</div></div>
@@ -1098,6 +1128,17 @@
           <button class="lb-wall-post" id="lbWallPost">Post</button>
         </div>` : ''}
       </div>`;
+
+    loadLucasRecap(groupUsers).then(recap => {
+      const mount = document.getElementById('lbLucasRecap');
+      if (mount && recap) {
+        mount.innerHTML = `
+          <div class="lb-lucas-recap">
+            <span class="lb-lucas-recap-icon">L</span>
+            <div><div class="lb-lucas-recap-label">Lucas says</div><div class="lb-lucas-recap-text">${esc(recap)}</div></div>
+          </div>`;
+      }
+    });
 
     const comments = await loadWallComments();
     renderComments(comments);
@@ -1141,7 +1182,7 @@
         groupEl.innerHTML = `<div class="lb-mg-group">${nameHtml}<div id="${tableWrapId}"></div><div id="lbMgRecap"></div><div id="lbMgWall"></div></div>`;
         renderTable(groupUsers, tableWrapId, 'No picks yet in your group — share your code!');
         renderGroupRecap(groupUsers);
-        renderGroupWall();
+        renderGroupWall(groupUsers);
       } else {
         groupEl.innerHTML = `<div class="lb-mg-empty">
           <div class="lb-mg-empty-title">No group yet</div>

@@ -52,6 +52,41 @@
     .rc-ch-tier { margin-top:10px;display:inline-block;font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;border-radius:20px;padding:3px 10px;border:1px solid; }
 
     /* Podium */
+    /* Reveal sequence */
+    .rc-reveal-btn {
+      display:block;width:100%;margin-bottom:32px;padding:22px 24px;cursor:pointer;
+      background:rgba(255,138,61,.1);border:1px solid rgba(255,138,61,.35);border-radius:16px;
+      font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.05rem;letter-spacing:.04em;
+      text-transform:uppercase;color:#ff8a3d;transition:background .15s,border-color .15s;
+    }
+    .rc-reveal-btn:hover { background:rgba(255,138,61,.16);border-color:rgba(255,138,61,.55); }
+    .rc-reveal-btn:disabled { opacity:.5;cursor:default; }
+    .rc-calc { text-align:center;padding:40px 20px;margin-bottom:32px; }
+    .rc-calc-pulse {
+      width:44px;height:44px;margin:0 auto 16px;border-radius:50%;
+      background:rgba(255,138,61,.15);border:2px solid rgba(255,138,61,.4);
+      animation:rc-calc-pulse 1s ease-in-out infinite;
+    }
+    @keyframes rc-calc-pulse { 0%,100% { transform:scale(1);opacity:1; } 50% { transform:scale(1.25);opacity:.5; } }
+    .rc-calc-text { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.9rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.5); }
+    .rc-pod-slot:empty { display:none; }
+    .rc-pod-enter { animation:rc-pod-in .5s cubic-bezier(.22,1,.36,1) both; }
+    @keyframes rc-pod-in { from { opacity:0;transform:translateY(24px) scale(.95); } to { opacity:1;transform:none; } }
+    .rc-drumroll { text-align:center;padding:24px 20px;margin-bottom:12px; }
+    .rc-drumroll-text {
+      font-family:'Montserrat',sans-serif;font-weight:800;font-size:.95rem;letter-spacing:.1em;text-transform:uppercase;
+      color:#ff8a3d;animation:rc-drumroll-shake .18s ease-in-out infinite;
+    }
+    @keyframes rc-drumroll-shake { 0%,100% { transform:translateX(0); } 25% { transform:translateX(-3px); } 75% { transform:translateX(3px); } }
+    .rc-champ-enter { animation:rc-champ-in .6s cubic-bezier(.22,1,.36,1) both; }
+    @keyframes rc-champ-in { from { opacity:0;transform:translateY(30px) scale(.92); } to { opacity:1;transform:none; } }
+    .rc-seerank-btn {
+      display:inline-block;padding:12px 26px;cursor:pointer;
+      background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:10px;
+      font-family:'Montserrat',sans-serif;font-weight:800;font-size:.8rem;letter-spacing:.06em;
+      text-transform:uppercase;color:rgba(255,255,255,.7);transition:background .15s;
+    }
+    .rc-seerank-btn:hover { background:rgba(255,255,255,.1);color:#fff; }
     .rc-podium { display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:32px; }
     .rc-pod {
       background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);
@@ -201,6 +236,7 @@
       document.body.classList.toggle('no-scroll');
     });
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase.js"></script>
   <script src="auth.js?v=3.3"></script>
@@ -519,12 +555,34 @@
       <div class="rc-period">${esc(seasonLabel)} · ${ranked.length} member${ranked.length !== 1 ? 's' : ''}</div>
       <div class="rc-divider"></div>
 
-      ${champHtml()}
+      <div id="rcRevealZone">
+        ${champ ? `<button class="rc-reveal-btn" id="rcRevealBtn" type="button">🏆 Reveal Results</button>` : ''}
+      </div>
 
-      ${second || third ? `<div class="rc-podium">${podHtml(second,'2nd Place')}${podHtml(third,'3rd Place')}</div>` : ''}
+      <div id="rcCalc" class="rc-calc" style="display:none">
+        <div class="rc-calc-pulse"></div>
+        <div class="rc-calc-text">Calculating standings…</div>
+      </div>
 
-      <div class="rc-section-lbl">Full Standings</div>
-      <div class="rc-rows">${standingsHtml}</div>
+      <div id="rcPodiumStage" style="display:none">
+        <div class="rc-podium">
+          <div class="rc-pod-slot" id="rcPod2"></div>
+          <div class="rc-pod-slot" id="rcPod3"></div>
+        </div>
+        <div id="rcDrumroll" class="rc-drumroll" style="display:none">
+          <div class="rc-drumroll-text">Revealing the champion…</div>
+        </div>
+        <div id="rcChampSlot"></div>
+      </div>
+
+      <div id="rcSeeRankZone" style="display:none;text-align:center;margin-bottom:12px">
+        <button class="rc-seerank-btn" id="rcSeeRankBtn" type="button">See Full Rankings ↓</button>
+      </div>
+
+      <div id="rcStandingsWrap" style="display:none">
+        <div class="rc-section-lbl">Full Standings</div>
+        <div class="rc-rows">${standingsHtml}</div>
+      </div>
 
       ${eventsHtml}
 
@@ -535,6 +593,56 @@
         </button>
         <a class="rc-lb-link" href="leaderboard.html">View Leaderboard</a>
       </div>`;
+
+    // ── Podium reveal sequence ──────────────────────────
+    document.getElementById('rcRevealBtn')?.addEventListener('click', function () {
+      const btn = this;
+      btn.disabled = true;
+      document.getElementById('rcCalc').style.display = '';
+      btn.closest('#rcRevealZone').style.display = 'none';
+
+      setTimeout(() => {
+        document.getElementById('rcCalc').style.display = 'none';
+        document.getElementById('rcPodiumStage').style.display = '';
+
+        const pod2 = document.getElementById('rcPod2');
+        const pod3 = document.getElementById('rcPod3');
+        pod3.innerHTML = podHtml(third, '3rd Place');
+        pod3.classList.add('rc-pod-enter');
+
+        setTimeout(() => {
+          pod2.innerHTML = podHtml(second, '2nd Place');
+          pod2.classList.add('rc-pod-enter');
+
+          setTimeout(() => {
+            const drum = document.getElementById('rcDrumroll');
+            drum.style.display = '';
+
+            setTimeout(() => {
+              drum.style.display = 'none';
+              const champSlot = document.getElementById('rcChampSlot');
+              champSlot.innerHTML = champHtml();
+              champSlot.classList.add('rc-champ-enter');
+              if (typeof confetti === 'function') {
+                confetti({ particleCount: 140, spread: 90, origin: { y: 0.5 },
+                  colors: ['#ff8a3d', '#ffd700', '#ffffff', '#e06b1a'], disableForReducedMotion: true });
+              }
+
+              setTimeout(() => {
+                document.getElementById('rcSeeRankZone').style.display = '';
+              }, 700);
+            }, 1200);
+          }, 900);
+        }, 900);
+      }, 1400);
+    });
+
+    document.getElementById('rcSeeRankBtn')?.addEventListener('click', function () {
+      const wrap = document.getElementById('rcStandingsWrap');
+      wrap.style.display = '';
+      this.closest('#rcSeeRankZone').style.display = 'none';
+      wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
 
     document.getElementById('rcShareBtn').addEventListener('click', () => {
       const url  = `https://mmabridge.com/recap.html?group=${encodeURIComponent(groupCode)}`;

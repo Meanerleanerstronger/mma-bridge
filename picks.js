@@ -2821,6 +2821,7 @@ function formatOdds(n) {
   // ── Supabase realtime — results appear live as an admin enters them ──
   // Merges fresh fight_results rows straight into `event`'s fight objects
   // (same object buildFight() reads from) and re-renders — no reload needed.
+  const celebratedFights = new Set(); // dedupe so a fight only confettis once per page load
   if (sb && !isCompleted) {
     sb.channel(`pk-results-${eventId}`)
       .on('postgres_changes', { event: '*', schema: 'public', table: 'fight_results', filter: `event_id=eq.${eventId}` }, async () => {
@@ -2838,6 +2839,23 @@ function formatOdds(n) {
               });
             });
             if (r.fight_key === '__fotn__' && r.fotn) event.fotn = r.fotn;
+
+            // Live celebration — your pick on this fight just got graded correct
+            if (r.winner && myId && !celebratedFights.has(r.fight_key)) {
+              const myPick = myPicks[r.fight_key]?.pick;
+              if (myPick && myPick.toLowerCase() === r.winner.toLowerCase()) {
+                celebratedFights.add(r.fight_key);
+                if (typeof confetti === 'function') {
+                  setTimeout(() => confetti({
+                    particleCount: 70,
+                    spread: 70,
+                    origin: { y: 0.55 },
+                    colors: ['#ff8a3d', '#ff8a3d', '#ffffff', '#ff8a3d', '#a78bfa'],
+                    disableForReducedMotion: true
+                  }), 200);
+                }
+              }
+            }
           });
           render();
         } catch {}
