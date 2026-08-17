@@ -14120,5 +14120,110 @@
     ],
     "prelims": [],
     "earlyPrelims": []
+  },
+  {
+    "id": "ufc-fight-night-buckley-vs-malott",
+    "name": "UFC Fight Night: Buckley vs. Malott",
+    "type": "FIGHT NIGHT",
+    "date": "Sat, Oct 17, 2026",
+    "isoDate": "2026-10-17",
+    "location": "",
+    "venue": "",
+    "poster": "",
+    "status": "upcoming",
+    "start_time": null,
+    "mainCard": [
+      {
+        "a": "Joaquin Buckley",
+        "b": "Mike Malott",
+        "weight": "Welterweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "main",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Mandel Nallo",
+        "b": "Nate Landwehr",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "comain",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Erin Blanchfield",
+        "b": "Jasmine Jasudavicius",
+        "weight": "W Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Tanner Boser",
+        "b": "Jhonata Diniz",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Marc-Andre Barriault",
+        "b": "Kyle Daukaus",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
+    "prelims": [
+      {
+        "a": "Melissa Croden",
+        "b": "Chelsea Chandler",
+        "weight": "W Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Jamey-Lyn Horth",
+        "b": "Katlyn Cerminara",
+        "weight": "W Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Charles Jourdain",
+        "b": "Timmy Cuamba",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
+    "earlyPrelims": []
   }
 ]
