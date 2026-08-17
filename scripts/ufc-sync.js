@@ -169,7 +169,14 @@ async function espnWindow(fromDate, toDate) {
   }
 }
 
-// Fetch 6-month rolling window in 2-month chunks to avoid huge payloads
+// Fetch 6-month rolling window in 2-month chunks to avoid huge payloads.
+// Each chunk MUST span 2 months (i to i+2), not 1 (i to i+1) — the latter
+// was the bug: with i stepping by 2 (-1,1,3,5) but each window only 1
+// month wide, every other month was never fetched at all (e.g. today the
+// windows were Jul17-Aug17, Sep17-Oct17, Nov17-Dec17 — Oct17-Nov17 fell
+// through entirely, silently dropping any event announced in that gap,
+// which is exactly how UFC 333 (Oct 24) went unnoticed for weeks despite
+// ESPN already having its full fight card).
 async function fetchAllESPN() {
   const now   = new Date();
   const chunks = [];
@@ -177,7 +184,7 @@ async function fetchAllESPN() {
     const from = new Date(now);
     from.setMonth(from.getMonth() + i);
     const to = new Date(now);
-    to.setMonth(to.getMonth() + i + 1);
+    to.setMonth(to.getMonth() + i + 2);
     const f = from.toISOString().slice(0, 10).replace(/-/g, '');
     const t = to.toISOString().slice(0, 10).replace(/-/g, '');
     chunks.push(espnWindow(f, t));

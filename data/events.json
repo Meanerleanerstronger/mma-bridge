@@ -13596,7 +13596,7 @@
     "isoDate": "2026-08-29",
     "location": "Shanghai, China",
     "venue": "Shanghai Oriental Sports Center",
-    "poster": "",
+    "poster": "https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-08/082926-ufc-fight-night-nurmagomedov-vs-song-EVENT-ART.jpg",
     "status": "upcoming",
     "start_time": "2026-08-29T10:00:00.000Z",
     "mainCard": [
@@ -13784,6 +13784,28 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/WOOD_NATHANIEL_L_10-25.png",
         "imgB": ""
+      },
+      {
+        "a": "Farés Ziam",
+        "b": "Axel Sola",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "comain",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Losene Keita",
+        "b": "Muhammad Naimov",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
       }
     ],
     "prelims": [
@@ -13797,9 +13819,32 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-09/CHARRIERE_MORGAN_L_09-28.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-12/LIMA_FELIPE_L_06-22.png"
+      },
+      {
+        "a": "Oumar Sy",
+        "b": "Modestas Bukauskas",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
       }
     ],
-    "earlyPrelims": []
+    "earlyPrelims": [
+      {
+        "a": "Nora Cornolle",
+        "b": "Klaudia Syguła",
+        "weight": "W Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ]
   },
   {
     "id": "noche-ufc-rodriguez-vs-silva",
@@ -14292,5 +14337,160 @@
         "imgB": ""
       }
     ]
+  },
+  {
+    "id": "ufc-333-volkanovski-vs-evloev",
+    "name": "UFC 333: Volkanovski vs. Evloev",
+    "type": "PPV",
+    "date": "Sat, Oct 24, 2026",
+    "isoDate": "2026-10-24",
+    "location": "",
+    "venue": "",
+    "poster": "",
+    "status": "upcoming",
+    "start_time": null,
+    "mainCard": [
+      {
+        "a": "Alexander Volkanovski",
+        "b": "Movsar Evloev",
+        "weight": "Featherweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "main",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Petr Yan",
+        "b": "Merab Dvalishvili",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "comain",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Lone'er Kavanagh",
+        "b": "Ramazan Temirov",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Alexander Volkov",
+        "b": "Rizvan Kuniev",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Arnold Allen",
+        "b": "Aaron Pico",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Dominick Reyes",
+        "b": "Azamat Murzakanov",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
+    "prelims": [
+      {
+        "a": "Abus Magomedov",
+        "b": "Cam Rowston",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Nikita Krylov",
+        "b": "Abdul-Rakhman Yakhyaev",
+        "weight": "",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
+    "earlyPrelims": [
+      {
+        "a": "Grant Dawson",
+        "b": "Nurullo Aliev",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ]
+  },
+  {
+    "id": "ufc-fight-night-bonfim-vs-brady",
+    "name": "UFC Fight Night: Bonfim vs. Brady",
+    "type": "FIGHT NIGHT",
+    "date": "Sat, Nov 7, 2026",
+    "isoDate": "2026-11-07",
+    "location": "",
+    "venue": "",
+    "poster": "",
+    "status": "upcoming",
+    "start_time": null,
+    "mainCard": [
+      {
+        "a": "Gabriel Bonfim",
+        "b": "Sean Brady",
+        "weight": "Welterweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "main",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "TBA",
+        "b": "Opponent TBA",
+        "weight": "",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "comain",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
+    "prelims": [],
+    "earlyPrelims": []
   }
 ]
