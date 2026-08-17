@@ -640,6 +640,20 @@
     modal.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
   }
 
+  // ── Group roster (real membership, independent of pick history) ──
+  // allUsers/groupUsers below are built from picksData, so a brand-new
+  // group where nobody has picked yet would otherwise always show "0
+  // members" even when everyone successfully joined — this fetches the
+  // actual profiles.group_code roster (same query commissioner.js uses).
+  let rosterCache = { code: null, count: null };
+  async function fetchRosterCount(code) {
+    try {
+      const { count } = await sb.from('profiles').select('id', { count: 'exact', head: true }).eq('group_code', code);
+      rosterCache = { code, count: count ?? null };
+      return rosterCache.count;
+    } catch { return null; }
+  }
+
   // ── Render group status + group board ─────────
   function renderGroupStatus() {
     const el       = document.getElementById('lbGroupStatus');
@@ -654,6 +668,8 @@
 
     const groupUsers = allUsers.filter(u => u.group_code === myGroupCode);
     const inviteUrl  = `${location.origin}/leaderboard.html?join=${myGroupCode}`;
+    const knownRosterCount = rosterCache.code === myGroupCode ? rosterCache.count : null;
+    const memberCount = knownRosterCount !== null ? knownRosterCount : groupUsers.length;
 
     let seasonHtml = '';
     if (myGroupSeasonStart || myGroupSeasonEnd) {
@@ -673,7 +689,7 @@
       <div class="lb-group-active">
         <div class="lb-group-active-info">
           <span class="lb-group-active-name">${esc(myGroupName || 'My Group')}</span>
-          <span class="lb-group-active-meta">${groupUsers.length} member${groupUsers.length !== 1 ? 's' : ''}${myGroupIsOwner ? ' · <span class="lb-owner-badge">Commissioner</span>' : ''}</span>
+          <span class="lb-group-active-meta" id="lbGroupMemberMeta">${memberCount} member${memberCount !== 1 ? 's' : ''}${myGroupIsOwner ? ' · <span class="lb-owner-badge">Commissioner</span>' : ''}</span>
         </div>
         ${seasonHtml}
         <div class="lb-group-action-row">
@@ -691,6 +707,16 @@
 
     if (groupCol) groupCol.style.display = '';
     if (groupLabel) groupLabel.textContent = myGroupName || myGroupCode;
+
+    if (knownRosterCount === null) {
+      fetchRosterCount(myGroupCode).then(count => {
+        if (count === null || rosterCache.code !== myGroupCode) return;
+        const metaEl = document.getElementById('lbGroupMemberMeta');
+        if (metaEl) {
+          metaEl.innerHTML = `${count} member${count !== 1 ? 's' : ''}${myGroupIsOwner ? ' · <span class="lb-owner-badge">Commissioner</span>' : ''}`;
+        }
+      });
+    }
 
     // Render group leaderboard with season filter + event-type filter
     const seasonCutoff = myGroupSeasonStart ? new Date(myGroupSeasonStart).toISOString() : null;
@@ -1177,9 +1203,17 @@
         const seasonLabel = (myGroupSeasonStart || myGroupSeasonEnd)
           ? ` · Season ${myGroupSeasonStart ? 'from ' + new Date(myGroupSeasonStart).toLocaleDateString('en-US',{month:'short',year:'numeric'}) : ''}${myGroupSeasonStart && myGroupSeasonEnd ? ' ' : ''}${myGroupSeasonEnd ? 'through ' + new Date(myGroupSeasonEnd).toLocaleDateString('en-US',{month:'short',year:'numeric'}) : ''}`
           : '';
-        const nameHtml   = `<div class="lb-section-label" style="margin-bottom:12px">${esc(myGroupName || myGroupCode)} — ${groupUsers.length} member${groupUsers.length !== 1 ? 's' : ''}${seasonLabel}</div>`;
+        const mgRosterCount = (rosterCache.code === myGroupCode && rosterCache.count !== null) ? rosterCache.count : groupUsers.length;
+        const nameHtml   = `<div class="lb-section-label" style="margin-bottom:12px" id="lbMgMemberLabel">${esc(myGroupName || myGroupCode)} — ${mgRosterCount} member${mgRosterCount !== 1 ? 's' : ''}${seasonLabel}</div>`;
         const tableWrapId = 'lbMgGroupTable';
         groupEl.innerHTML = `<div class="lb-mg-group">${nameHtml}<div id="${tableWrapId}"></div><div id="lbMgRecap"></div><div id="lbMgWall"></div></div>`;
+        if (rosterCache.code !== myGroupCode) {
+          fetchRosterCount(myGroupCode).then(count => {
+            if (count === null || rosterCache.code !== myGroupCode) return;
+            const lbl = document.getElementById('lbMgMemberLabel');
+            if (lbl) lbl.innerHTML = `${esc(myGroupName || myGroupCode)} — ${count} member${count !== 1 ? 's' : ''}${seasonLabel}`;
+          });
+        }
         renderTable(groupUsers, tableWrapId, 'No picks yet in your group — share your code!');
         renderGroupRecap(groupUsers);
         renderGroupWall(groupUsers);
@@ -1409,10 +1443,10 @@
           document.getElementById('evtypePpv')?.checked  ? 'ppv'  : null,
           document.getElementById('evtypeFn')?.checked   ? 'fightnight' : null,
         ].filter(Boolean);
-        const { error } = await sb.from('profiles').update({
-          group_code: code, group_name: name, group_is_owner: true,
+        const { error } = await sb.from('profiles').upsert({
+          id: myId, group_code: code, group_name: name, group_is_owner: true,
           group_event_types: JSON.stringify(eventTypes),
-        }).eq('id', myId);
+        });
         if (error) throw error;
         myGroupCode = code; myGroupName = name; myGroupIsOwner = true; myGroupEventTypes = eventTypes;
         if (allUsers) allUsers.forEach(u => { if (u.user_id === myId) { u.group_code = code; u.group_name = name; } });
@@ -1448,7 +1482,7 @@
         const groupName = groupData?.[0]?.group_name || null;
         const seasonStart = groupData?.[0]?.group_season_start || null;
         const seasonEnd = groupData?.[0]?.group_season_end || null;
-        const { error } = await sb.from('profiles').update({ group_code: code, group_name: groupName, group_is_owner: false, group_season_start: seasonStart, group_season_end: seasonEnd }).eq('id', myId);
+        const { error } = await sb.from('profiles').upsert({ id: myId, group_code: code, group_name: groupName, group_is_owner: false, group_season_start: seasonStart, group_season_end: seasonEnd });
         if (error) throw error;
         myGroupCode = code; myGroupName = groupName; myGroupIsOwner = false; myGroupSeasonStart = seasonStart; myGroupSeasonEnd = seasonEnd;
         if (allUsers) allUsers.forEach(u => { if (u.user_id === myId) { u.group_code = code; u.group_name = groupName; } });
