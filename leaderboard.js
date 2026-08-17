@@ -654,6 +654,35 @@
     } catch { return null; }
   }
 
+  // Full roster (names/avatars), not just a count — so a group where
+  // members joined but haven't picked yet still shows every real person,
+  // not just an empty "no picks yet" state with nobody's name on it.
+  let rosterListCache = { code: null, rows: null };
+  async function fetchRosterList(code) {
+    if (rosterListCache.code === code && rosterListCache.rows) return rosterListCache.rows;
+    try {
+      const { data } = await sb.from('profiles').select('id, display_name, avatar_url').eq('group_code', code);
+      rosterListCache = { code, rows: data || [] };
+      return rosterListCache.rows;
+    } catch { return null; }
+  }
+
+  // Fills in any roster member who hasn't picked yet as a zero-stat row,
+  // so renderTable() shows the whole group, not just pick-participants.
+  function mergeRosterIntoUsers(rankedUsers, rosterRows) {
+    if (!rosterRows) return rankedUsers;
+    const present = new Set(rankedUsers.map(u => u.user_id));
+    const extra = rosterRows
+      .filter(r => !present.has(r.id))
+      .map(r => ({
+        user_id: r.id, name: r.display_name || 'Anonymous', avatar: r.avatar_url || '',
+        group_code: myGroupCode, group_name: myGroupName,
+        count: 0, judged: 0, correct: 0, pct: null, points: 0, ddCount: 0,
+        tier: getTier(0, null), tierName: getTier(0, null).name, tierRank: getTier(0, null).rank,
+      }));
+    return [...rankedUsers, ...extra];
+  }
+
   // ── Render group status + group board ─────────
   function renderGroupStatus() {
     const el       = document.getElementById('lbGroupStatus');
@@ -731,7 +760,14 @@
     );
     const groupStatsMap = buildStatsMap(picksData, seasonCutoff, allowedEventIds, seasonCutoffEnd);
     const seasonUsers = buildRankedUsers(groupStatsMap).filter(u => u.group_code === myGroupCode);
-    renderTable(seasonUsers, 'lbGroupWrap', 'No picks yet in your group — share your code!');
+    const knownRoster = rosterListCache.code === myGroupCode ? rosterListCache.rows : null;
+    renderTable(mergeRosterIntoUsers(seasonUsers, knownRoster), 'lbGroupWrap', 'No picks yet in your group — share your code!');
+    if (!knownRoster) {
+      fetchRosterList(myGroupCode).then(rows => {
+        if (!rows || rosterListCache.code !== myGroupCode) return;
+        renderTable(mergeRosterIntoUsers(seasonUsers, rows), 'lbGroupWrap', 'No picks yet in your group — share your code!');
+      });
+    }
 
     // Copy invite link
     document.getElementById('btnCopyInvite')?.addEventListener('click', () => {
@@ -1225,7 +1261,14 @@
             if (lbl) lbl.innerHTML = `${esc(myGroupName || myGroupCode)} — ${count} member${count !== 1 ? 's' : ''}${seasonLabel}`;
           });
         }
-        renderTable(groupUsers, tableWrapId, 'No picks yet in your group — share your code!');
+        const knownMgRoster = rosterListCache.code === myGroupCode ? rosterListCache.rows : null;
+        renderTable(mergeRosterIntoUsers(groupUsers, knownMgRoster), tableWrapId, 'No picks yet in your group — share your code!');
+        if (!knownMgRoster) {
+          fetchRosterList(myGroupCode).then(rows => {
+            if (!rows || rosterListCache.code !== myGroupCode) return;
+            renderTable(mergeRosterIntoUsers(groupUsers, rows), tableWrapId, 'No picks yet in your group — share your code!');
+          });
+        }
         renderGroupRecap(groupUsers);
         renderGroupWall(groupUsers);
       } else {

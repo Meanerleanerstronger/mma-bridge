@@ -8440,53 +8440,68 @@ body.light-mode .lb-skel-stat {
 
 /* Next Event to Pick banner */
 .lb-next-event-banner {
-  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 18px;
   background: rgba(255,255,255,0.035); border: 1px solid rgba(224,107,26,0.3);
-  border-radius: 14px; padding: 18px 22px; margin-bottom: 22px;
+  border-radius: 14px; padding: 24px 26px; margin-bottom: 22px;
 }
 .lb-nxt-label {
-  font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.7rem;
-  letter-spacing: 0.18em; text-transform: uppercase; color: rgba(224,107,26,0.7);
-  margin-bottom: 6px;
+  font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.72rem;
+  letter-spacing: 0.14em; text-transform: uppercase; color: #ff8a3d;
+  margin-bottom: 8px;
 }
 .lb-nxt-name {
-  font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.1rem;
-  color: #fff; margin-bottom: 4px;
+  font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.4rem;
+  line-height: 1.15; color: #fff; margin-bottom: 6px;
 }
 .lb-nxt-countdown {
-  font-family: 'Inter', sans-serif; font-size: 0.82rem; color: rgba(255,255,255,0.4);
+  font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.88rem; color: rgba(255,255,255,0.5);
 }
+/* Solid, high-contrast CTA — matches the site's actual flagship button
+   (#heroBtn) instead of the low-contrast tinted-ghost style that made
+   this the weakest-looking button on the page relative to its importance. */
 .lb-nxt-cta {
   display: inline-flex; align-items: center; flex-shrink: 0;
-  background: rgba(255,138,61,0.12); border: 1px solid rgba(255,138,61,0.35);
-  color: #ff8a3d; text-decoration: none; border-radius: 10px; padding: 12px 22px;
-  font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.8rem;
-  letter-spacing: 0.06em; text-transform: uppercase;
-  transition: background 0.15s, border-color 0.15s;
+  background: #ff8a3d; border: none;
+  color: #0a0a0a; text-decoration: none; border-radius: 10px; padding: 15px 28px;
+  font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 0.9rem;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  transition: background 0.15s, transform 0.15s;
 }
-.lb-nxt-cta:hover { background: rgba(255,138,61,0.2); border-color: rgba(255,138,61,0.55); }
-.lb-nxt-cta-done { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.15); color: rgba(255,255,255,0.6); }
-.lb-nxt-cta-done:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.25); }
+.lb-nxt-cta:hover { background: #ffa15f; transform: translateY(-1px); }
+.lb-nxt-cta-done { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.75); }
+.lb-nxt-cta-done:hover { background: rgba(255,255,255,0.12); transform: none; }
 body.light-mode .lb-next-event-banner { background: rgba(0,0,0,0.02); border-color: rgba(180,120,0,0.3); }
 body.light-mode .lb-nxt-name { color: #0a0a0f; }
-body.light-mode .lb-nxt-countdown { color: rgba(0,0,0,0.45); }
+body.light-mode .lb-nxt-countdown { color: rgba(0,0,0,0.5); }
 @media (max-width: 600px) {
-  .lb-next-event-banner { padding: 16px; }
+  .lb-next-event-banner { padding: 18px; }
   .lb-nxt-cta { width: 100%; justify-content: center; }
 }
 
 /* Group active state */
-.lb-group-active { margin-top: 14px; display: flex; flex-direction: column; gap: 10px; }
-.lb-group-active-info { display: flex; flex-direction: column; gap: 3px; }
+.lb-group-active { margin-top: 16px; display: flex; flex-direction: column; gap: 14px; }
+.lb-group-active-info { display: flex; flex-direction: column; gap: 5px; }
 .lb-group-active-name {
-  font-family: 'Montserrat', sans-serif; font-weight: 800;
-  font-size: 0.88rem; color: rgba(255,255,255,0.85);
+  font-family: 'Montserrat', sans-serif; font-weight: 900;
+  font-size: 1.2rem; color: #fff;
 }
 .lb-group-active-meta {
-  font-family: 'Inter', sans-serif; font-size: 0.72rem;
-  color: rgba(255,255,255,0.35);
+  font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.82rem;
+  color: rgba(255,255,255,0.45);
 }
-.lb-group-action-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+.lb-group-action-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
+/* Copy Invite Link is the one thing a commissioner actually needs people
+   to click — everything else in this row is upkeep/navigation, so it
+   gets the confident solid-fill treatment and the rest stay quiet. */
+.lb-group-action-row .lb-group-btn:first-child {
+  background: #ff8a3d; border: none; color: #0a0a0a; font-weight: 900;
+  padding: 10px 18px;
+}
+.lb-group-action-row .lb-group-btn:first-child:hover { background: #ffa15f; }
+body.light-mode .lb-group-action-row .lb-group-btn:first-child { background: #e06b1a !important; color: #fff !important; }
+body.light-mode .lb-group-active-name { color: #111 !important; }
+body.light-mode .lb-group-active-meta { color: rgba(0,0,0,0.5) !important; }
+body.light-mode .lb-group-season-info { color: rgba(0,0,0,0.5) !important; }
 .lb-group-code-wrap {
   display: inline-flex; align-items: center; gap: 8px;
   background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
