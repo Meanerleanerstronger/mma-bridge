@@ -13488,15 +13488,15 @@
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/JONES_MASON_L_03-21.png?itok=_sn2EwLA"
       },
       {
-        "a": "Kennedy Nzechukwu",
-        "b": "Shamil Gaziev",
+        "a": "Anthony Wint",
+        "b": "Terrance Chatman",
         "weight": "Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/NZECHUKWU_KENNEDY_L_12-13.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/GAZIEV_SHAMIL_L_05-02.png"
+        "imgA": "",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
       }
     ],
     "prelims": [
@@ -13567,15 +13567,15 @@
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
       },
       {
-        "a": "Terrance Chatman",
-        "b": "Anthony Wint",
+        "a": "Kennedy Nzechukwu",
+        "b": "Shamil Gaziev",
         "weight": "Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true,
+        "ranked": false,
         "slot": "",
-        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
-        "imgB": ""
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/NZECHUKWU_KENNEDY_L_12-13.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/GAZIEV_SHAMIL_L_05-02.png"
       }
     ],
     "earlyPrelims": [],
@@ -13645,17 +13645,6 @@
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/ASAKURA_KAI_L_05-30.png"
       },
       {
-        "a": "Namsrai Batbayar",
-        "b": "Andre Lima",
-        "weight": "Flyweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/BATBAYAR_NAMSRAI_R_01-31.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/LIMA_ANDRE_L_06-20.png"
-      },
-      {
         "a": "Liu Ce",
         "b": "Junior Tafa",
         "weight": "Light Heavyweight",
@@ -13700,6 +13689,17 @@
         "slot": "",
         "imgA": "",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/POLASTRI_JULIA_L_10-11.png"
+      },
+      {
+        "a": "Namsrai Batbayar",
+        "b": "Andre Lima",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/BATBAYAR_NAMSRAI_R_01-31.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/LIMA_ANDRE_L_06-20.png"
       }
     ],
     "earlyPrelims": [],
