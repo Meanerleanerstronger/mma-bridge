@@ -14144,7 +14144,7 @@
     "venue": "",
     "poster": "",
     "status": "upcoming",
-    "start_time": null,
+    "start_time": "2026-09-26T22:00:00.000Z",
     "mainCard": [
       {
         "a": "Raul Rosas Jr.",
@@ -14152,25 +14152,22 @@
         "weight": "Bantamweight",
         "rounds": "5 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/ROSAS_JR_RAUL_L_03-29.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/BARCELOS_RAONI_L_01-18.png"
-      },
-      {
-        "a": "TBA",
-        "b": "Opponent TBA",
-        "weight": "",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "comain",
-        "imgA": "",
-        "imgB": ""
       }
     ],
     "prelims": [],
-    "earlyPrelims": []
+    "earlyPrelims": [],
+    "droppedFights": [
+      {
+        "a": "TBA",
+        "b": "Opponent TBA",
+        "reason": "removed from the card",
+        "droppedAt": "2026-08-19T08:27:07.214Z"
+      }
+    ]
   },
   {
     "id": "ufc-332",
@@ -14225,7 +14222,7 @@
         "titleFight": false,
         "ranked": false,
         "slot": "comain",
-        "imgA": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/FIGUEIREDO_DEIVESON_L_10-11.png",
         "imgB": ""
       },
       {
@@ -14236,7 +14233,7 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/WALKER_JOHNNY_L_08-23.png",
         "imgB": ""
       },
       {
@@ -14247,8 +14244,8 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "",
-        "imgB": ""
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/VETTORI_MARVIN_L_12-06.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/NAURDIEV_ISMAIL_L_11-22.png"
       },
       {
         "a": "Ateba Gautier",
@@ -14258,8 +14255,8 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "",
-        "imgB": ""
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/GAUTIER_ATEBA_L_05-09.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/KOPYLOV_ROMAN_L_05-09.png"
       }
     ],
     "prelims": [
@@ -14272,7 +14269,7 @@
         "ranked": false,
         "slot": "",
         "imgA": "",
-        "imgB": ""
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/CORIA_ALDEN_L_02-21.png"
       },
       {
         "a": "Damian Pinas",
@@ -14282,8 +14279,8 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "",
-        "imgB": ""
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/PINAS_DAMIAN_L_02-28.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/PULYAEV_ANDREY_R_03-22.png"
       },
       {
         "a": "Court McGee",
@@ -14294,7 +14291,7 @@
         "ranked": false,
         "slot": "",
         "imgA": "",
-        "imgB": ""
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/NOLAN_ERIC_R_08-16.png"
       }
     ],
     "earlyPrelims": []
