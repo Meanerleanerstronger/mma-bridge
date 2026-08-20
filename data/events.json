@@ -13714,7 +13714,19 @@
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/LIMA_ANDRE_L_06-20.png"
       }
     ],
-    "earlyPrelims": [],
+    "earlyPrelims": [
+      {
+        "a": "Bilal Hasan",
+        "b": "Nilson Rojas",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
     "droppedFights": [
       {
         "a": "Opponent TBA",
@@ -13854,6 +13866,17 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/CORNOLLE_NORA_L_02-21.png",
+        "imgB": ""
+      },
+      {
+        "a": "Delphine Benouaich",
+        "b": "Sofia Montenegro",
+        "weight": "W Strawweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
         "imgB": ""
       }
     ]
