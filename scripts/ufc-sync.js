@@ -377,6 +377,12 @@ function roundsFromESPN(comp, slot) {
   return slot === 'main' ? '5 Rds' : '3 Rds';
 }
 
+// ESPN's own scoreboard lists an unannounced-opponent slot with a literal
+// "TBA" / "Opponent TBA" competitor name — not a real fighter. Letting that
+// through produced ghost fights (some landing in the main/co-main slot) and
+// nonsense "pull-out" notifications once the placeholder later disappeared.
+function isTBA(name) { return !name || /\bTBA\b/i.test(name); }
+
 function buildFightFromESPN(comp, slot) {
   // ESPN lists fighter[0] as order:2 (visiting), fighter[1] as order:1 (home) — normalize
   const sorted = [...(comp.competitors || [])].sort((a, b) => (a.order || 0) - (b.order || 0));
@@ -400,7 +406,15 @@ async function buildNewEvent(espnEv) {
   // ESPN lists fights earliest→latest (early prelims → prelims → main card)
   // Reverse so main event is first, then split into sections by fight count.
   // Typical UFC event: ~5-6 main card, ~5-6 prelims, ~4-5 early prelims
-  const comps = [...(espnEv.competitions || [])].reverse(); // now main event first
+  // Drop unannounced-opponent ("TBA") placeholder slots before any of this —
+  // filtering after slot-assignment would let one sitting first in ESPN's
+  // list steal the "main" slot label out from under the real main event.
+  const comps = [...(espnEv.competitions || [])].reverse().filter(c => {
+    const sorted = [...(c.competitors || [])].sort((x, y) => (x.order || 0) - (y.order || 0));
+    const a = sorted[0]?.athlete?.displayName || sorted[0]?.displayName || '';
+    const b = sorted[1]?.athlete?.displayName || sorted[1]?.displayName || '';
+    return !isTBA(a) && !isTBA(b);
+  }); // now main event first
   const total = comps.length;
 
   // Calculate section sizes based on total fight count
@@ -668,8 +682,14 @@ async function main() {
 
     // ── E: CARD UPDATE — new fights / replacements for an upcoming event ───────
     if (!isCompleted && ourEv) {
-      // ESPN lists fights earliest→latest, reverse to get main card first
-      const compsRev = [...(espnEv.competitions || [])].reverse();
+      // ESPN lists fights earliest→latest, reverse to get main card first.
+      // Drop TBA placeholders before slot assignment (see buildNewEvent).
+      const compsRev = [...(espnEv.competitions || [])].reverse().filter(c => {
+        const sorted = [...(c.competitors || [])].sort((x, y) => (x.order || 0) - (y.order || 0));
+        const a = sorted[0]?.athlete?.displayName || '';
+        const b = sorted[1]?.athlete?.displayName || '';
+        return !isTBA(a) && !isTBA(b);
+      });
       const total    = compsRev.length;
       const isPPVev  = /ufc\s+\d+/i.test(espnEv.name || '');
 
