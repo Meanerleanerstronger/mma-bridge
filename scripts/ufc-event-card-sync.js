@@ -401,8 +401,12 @@ async function syncEvent(ev, fighterIdx) {
     console.log(`    ➡️  Slot "${slot}" reassigned to ${target.a} vs ${target.b}`);
     changed = true;
     if (slot === 'main') {
-      const ppvMatch = ev.name.match(/^(UFC\s+\d+):/i);
-      const prefix = ppvMatch ? `${ppvMatch[1]}:` : 'UFC Fight Night:';
+      // Preserve the event's existing brand prefix (e.g. "UFC 331:", "Noche UFC:",
+      // "UFC Fight Night:") — only fall back to "UFC Fight Night:" when the name
+      // has no colon-delimited prefix at all. A hardcoded "UFC Fight Night:" here
+      // would silently rebrand a Noche/other special-series event on a pull-out.
+      const prefixMatch = ev.name.match(/^([^:]+):/);
+      const prefix = prefixMatch ? `${prefixMatch[1]}:` : 'UFC Fight Night:';
       const newName = `${prefix} ${titleLastName(target.a)} vs. ${titleLastName(target.b)}`;
       if (newName !== ev.name) {
         console.log(`    ✏️  Event renamed: "${ev.name}" → "${newName}"`);

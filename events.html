@@ -244,6 +244,7 @@
     .ev-card-badge { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.42rem;letter-spacing:.18em;text-transform:uppercase;padding:3px 9px;border-radius:4px;backdrop-filter:blur(6px); }
     .ev-card.fn  .ev-card-badge { background:rgba(255,138,61,.12);border:1px solid rgba(255,138,61,.3);color:#ff8a3d; }
     .ev-card.ppv .ev-card-badge { background:rgba(255,138,61,.12);border:1px solid rgba(255,138,61,.35);color:#ff8a3d; }
+    .ev-card-changed-badge { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.42rem;letter-spacing:.14em;text-transform:uppercase;padding:3px 8px;border-radius:4px;background:rgba(255,120,40,.14);border:1px solid rgba(255,140,60,.4);color:#ff9d5c; }
     .ev-card-name    { font-family:'Montserrat',sans-serif;font-weight:900;font-size:.86rem;color:rgba(255,255,255,.6);letter-spacing:.05em;text-transform:uppercase; }
     .ev-card.ppv .ev-card-name { color:rgba(232,200,90,.7); }
     .ev-card-matchup { font-family:'Barlow Condensed','Montserrat',sans-serif;font-weight:900;font-size:clamp(1.25rem,2.6vw,1.75rem);color:#fff;letter-spacing:.03em;text-transform:uppercase;line-height:1.1;margin-bottom:8px;text-shadow:0 2px 16px rgba(0,0,0,.9); }
@@ -426,6 +427,15 @@
     }
     .ov-matchup .vs-sep { font-size:.38em;color:rgba(255,255,255,.28);letter-spacing:.15em;vertical-align:middle;font-weight:700;padding:0 .4em; }
     .ov-meta-row { display:flex;align-items:center;gap:14px;flex-wrap:wrap; }
+    .ov-card-changes { margin-top:10px;display:flex;flex-direction:column;gap:5px; }
+    .ov-card-change {
+      display:flex;align-items:center;gap:7px;
+      font-family:'Inter',sans-serif;font-size:.72rem;color:rgba(255,180,120,.85);
+      background:rgba(255,120,40,.1);border:1px solid rgba(255,140,60,.25);border-radius:7px;
+      padding:5px 10px;width:fit-content;
+    }
+    .ov-card-change svg { width:12px;height:12px;flex-shrink:0;stroke:#ff8a3d;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round; }
+    .ov-card-change strong { color:#ffb87a;font-weight:700; }
     .ov-meta-item { font-family:'Inter',sans-serif;font-size:.7rem;color:rgba(255,255,255,.38);display:flex;align-items:center;gap:5px; }
 
     /* ── HYPE BAR ── */
@@ -1232,6 +1242,7 @@
           <div class="ov-event-label" id="ovEventLabel"></div>
           <div class="ov-matchup" id="ovMatchup"></div>
           <div class="ov-meta-row" id="ovMetaRow"></div>
+          <div class="ov-card-changes" id="ovCardChanges" style="display:none"></div>
         </div>
       </div>
 
@@ -1458,6 +1469,7 @@
             <span class="ev-card-badge">${isPPV?'PPV':'Fight Night'}</span>
             <span class="ev-card-name">${esc(label)}</span>
             ${main.titleFight?'<span class="ev-card-title-badge">Title</span>':''}
+            ${ev.droppedFights&&ev.droppedFights.length?'<span class="ev-card-changed-badge">Card Change</span>':''}
           </div>
           <div class="ev-card-matchup">${matchup}</div>
           <div class="ev-card-sub">${esc(weightSub)}</div>
@@ -1697,6 +1709,20 @@
       const total=[...(ev.mainCard||[]),...(ev.prelims||[]),...(ev.earlyPrelims||[])].length;
       if(total>1) metas.push(`<div class="ov-meta-item">${total} fights</div>`);
       document.getElementById('ovMetaRow').innerHTML=metas.join('');
+
+      /* Card changes — pull-outs / replacements flagged by the auto-sync bot */
+      const changesEl=document.getElementById('ovCardChanges');
+      if(ev.droppedFights && ev.droppedFights.length){
+        changesEl.style.display='flex';
+        changesEl.innerHTML=ev.droppedFights.map(d=>`
+          <div class="ov-card-change">
+            <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L14.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
+            <span><strong>${esc(d.a)}</strong> vs <strong>${esc(d.b)}</strong> — ${esc(d.reason||'card change')}</span>
+          </div>`).join('');
+      } else {
+        changesEl.style.display='none';
+        changesEl.innerHTML='';
+      }
 
       /* Pick Fights / result buttons */
       const pickBtn        = document.getElementById('ovPickBtn');

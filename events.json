@@ -13919,7 +13919,7 @@
   },
   {
     "id": "noche-ufc-rodriguez-vs-silva",
-    "name": "Noche UFC: Rodriguez vs. Silva",
+    "name": "Noche UFC: Silva vs. Delgado",
     "type": "FIGHT NIGHT",
     "date": "Sat, Sep 12, 2026",
     "isoDate": "2026-09-12",
@@ -13928,17 +13928,25 @@
     "poster": "",
     "status": "upcoming",
     "start_time": "2026-09-12T21:00:00.000Z",
-    "mainCard": [
+    "droppedFights": [
       {
         "a": "Yair Rodriguez",
         "b": "Jean Silva",
+        "reason": "Yair Rodriguez pulled out (injury) — Jose Miguel Delgado steps in on short notice",
+        "droppedAt": "2026-08-21T00:00:00.000Z"
+      }
+    ],
+    "mainCard": [
+      {
+        "a": "Jean Silva",
+        "b": "Jose Miguel Delgado",
         "weight": "Featherweight",
         "rounds": "5 Rds",
         "titleFight": false,
         "ranked": true,
         "slot": "main",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-04/RODRIGUEZ_YAIR_L_04-12.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-02/SILVA_JEAN_L_02-22.png"
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-02/SILVA_JEAN_L_02-22.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-07/DELGADO_JOSE_R_07-18.png"
       },
       {
         "a": "Alexa Grasso",
