@@ -308,8 +308,19 @@ function findOurEvent(espnEv, ourEvents) {
 
 // ── Poster URL guessing ───────────────────────────────────────────────────────
 
-async function findPoster(eventId, isoDate) {
+// `slugs` — one or more candidate filename slugs to try, most likely first.
+// UFC's EVENT-ART filenames are matchup-based ("...-silva-vs-delgado-..."),
+// not tied to our internal event id — so passing only the id silently stops
+// matching the moment a main event changes (pull-out/replacement) after the
+// id was set, or for ids we mint ourselves that were never matchup-shaped
+// (e.g. location-based ids like "ufc-fight-night-paris"). Callers should also
+// pass a slug built from the current main-event matchup so poster discovery
+// keeps working through a card change, not just at event creation.
+async function findPoster(slugs, isoDate) {
   if (!isoDate) return null;
+  const candidates = (Array.isArray(slugs) ? slugs : [slugs]).filter(Boolean);
+  if (!candidates.length) return null;
+
   const d  = new Date(isoDate + 'T12:00:00Z');
   const mm = String(d.getUTCMonth() + 1).padStart(2, '0');
   const dd = String(d.getUTCDate()).padStart(2, '0');
@@ -325,11 +336,22 @@ async function findPoster(eventId, isoDate) {
     if (!folders.includes(folder)) folders.push(folder);
   }
 
-  for (const folder of folders) {
-    const url = `https://www.ufc.com/images/styles/background_image_xl_2x/s3/${folder}/${prefix}-${eventId}-EVENT-ART.jpg`;
-    if (await probeHead(url)) return url;
+  for (const eventId of candidates) {
+    for (const folder of folders) {
+      const url = `https://www.ufc.com/images/styles/background_image_xl_2x/s3/${folder}/${prefix}-${eventId}-EVENT-ART.jpg`;
+      if (await probeHead(url)) return url;
+    }
   }
   return null;
+}
+
+// Build the "fighter-vs-fighter" slug UFC actually names poster files after,
+// from a fight's current a/b — e.g. {a:'Jean Silva', b:'Jose Delgado'} → "silva-vs-delgado".
+function matchupSlug(fight) {
+  if (!fight || !fight.a || !fight.b) return null;
+  const last = n => slugify((n || '').trim().split(/\s+/).pop());
+  const la = last(fight.a), lb = last(fight.b);
+  return la && lb ? `${la}-vs-${lb}` : null;
 }
 
 // ── Build a new event skeleton from ESPN data ─────────────────────────────────
@@ -398,7 +420,7 @@ async function buildNewEvent(espnEv) {
   const prelims      = comps.slice(mainCount, mainCount + prelimCount).map(c => buildFightFromESPN(c, ''));
   const earlyPrelims = comps.slice(mainCount + prelimCount).map(c => buildFightFromESPN(c, ''));
 
-  const poster = await findPoster(id, isoDate);
+  const poster = await findPoster([id, matchupSlug(mainCard[0])], isoDate);
 
   return {
     id, name,
@@ -590,7 +612,8 @@ async function main() {
     // self-upgrade the moment the real EVENT-ART poster goes live. ───────────
     if (!isCompleted && ourEv && (!ourEv.poster || ourEv.poster.includes('TEMP-HERO'))) {
       console.log(`🎨 Searching poster: ${ourEv.name}`);
-      const poster = await findPoster(ourEv.id, ourEv.isoDate);
+      const currentMain = (ourEv.mainCard || []).find(f => f.slot === 'main') || (ourEv.mainCard || [])[0];
+      const poster = await findPoster([ourEv.id, matchupSlug(currentMain)], ourEv.isoDate);
       if (poster && poster !== ourEv.poster) {
         const upgraded = !!ourEv.poster;
         ourEv.poster = poster;
