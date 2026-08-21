@@ -37,6 +37,15 @@ function lastName(name) {
   return parts[parts.length - 1];
 }
 
+// UFC.com renders an unannounced-opponent slot as literal "TBA" text (often
+// "Opponent TBA"). That's a placeholder, not a fighter — it must never be
+// scraped in as a real fight, merged into the card, or logged as a pull-out
+// when it later disappears (that produced the "Opponent TBA vs TBA — removed
+// from the card" junk banner users were seeing on live events).
+function isTBA(name) {
+  return !name || /\bTBA\b/i.test(name);
+}
+
 function nameToSlug(name) {
   return norm(name).replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-');
 }
@@ -142,6 +151,7 @@ function parseSection(html, sectionId) {
     const nameA = parseName(redChunk, 'red');
     const nameB = parseName(blueChunk, 'blue');
     if (!nameA || !nameB) continue;
+    if (isTBA(nameA) || isTBA(nameB)) continue; // unannounced-opponent placeholder, not a real fight
 
     // Check ranked (any corner rank div has content like "#3")
     const hasRank = /#\d/.test(redChunk) || /#\d/.test(blueChunk);
@@ -352,6 +362,10 @@ async function syncEvent(ev, fighterIdx) {
         const droppedOut = aStill ? f.b : f.a;
         console.log(`    🔁 Pull-out: ${droppedOut} is out, ${survivor} has a new opponent (was: ${f.a} vs ${f.b}${f.slot ? `, slot="${f.slot}"` : ''})`);
         if (f.slot) vacatedSlots.push({ slot: f.slot, survivor });
+      } else if (isTBA(f.a) || isTBA(f.b)) {
+        // Leftover "Opponent TBA vs TBA" placeholder from before this guard existed —
+        // just drop it silently, it was never a real fight and isn't real news.
+        console.log(`    🧹 Discarding stale TBA placeholder: ${f.a} vs ${f.b}`);
       } else {
         console.log(`    ⚠️  Fight no longer on card, no replacement found: ${f.a} vs ${f.b}${f.slot ? ` (was slot="${f.slot}" — needs manual review)` : ''}`);
         ev.droppedFights = ev.droppedFights || [];

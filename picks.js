@@ -41,6 +41,10 @@ function formatOdds(n) {
   function esc(s) {
     return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
+  // "TBA" / "Opponent TBA" is UFC.com's placeholder for an unannounced
+  // opponent, not a real fighter — never let it show up as a pickable fight.
+  function isTBA(name) { return !name || /\bTBA\b/i.test(name); }
+  function isConfirmedFight(f) { return !!f && !isTBA(f.a) && !isTBA(f.b); }
   function getParam(k) { return new URLSearchParams(location.search).get(k) || ''; }
   function slugify(s) { return (s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,''); }
 
@@ -1296,6 +1300,9 @@ function formatOdds(n) {
     // from f.slot at fixed low indices that don't shift as fights are added.
     const cardIsFinal = event.status === 'completed';
     const cards = fights.map((f, i) => {
+      // Skip unannounced-opponent placeholders — index i is preserved (not
+      // filtered out of the array) so pick keys for other fights don't shift.
+      if (!isConfirmedFight(f)) return '';
       const isMain   = f.slot === 'main';
       const isComain = f.slot === 'comain';
       const isLast   = i === fights.length - 1;

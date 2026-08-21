@@ -1305,7 +1305,13 @@
     /* ── HELPERS ── */
     function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
     function daysUntil(iso){ return Math.ceil((new Date(iso+'T00:00:00')-new Date())/86400000); }
-    function getMainFight(ev){ const mc=ev.mainCard||[]; return mc.find(f=>f.slot==='main')||mc[0]||null; }
+    /* "TBA" / "Opponent TBA" are UFC.com placeholder text for an unannounced
+       opponent, not a real fighter — never show a fight (or a "card change"
+       note) built from one until it's a fully confirmed matchup. */
+    function isTBA(name){ return !name || /\bTBA\b/i.test(name); }
+    function isConfirmedFight(f){ return !!f && !isTBA(f.a) && !isTBA(f.b); }
+    function realDroppedFights(ev){ return (ev.droppedFights||[]).filter(isConfirmedFight); }
+    function getMainFight(ev){ const mc=(ev.mainCard||[]).filter(isConfirmedFight); return mc.find(f=>f.slot==='main')||mc[0]||null; }
     function lastName(full){ const p=(full||'').trim().split(' '); return p.length>1?p[p.length-1]:full; }
     function shortLabel(ev){
       const r=ev.name||'';
@@ -1470,7 +1476,7 @@
             <span class="ev-card-badge">${isPPV?'PPV':'Fight Night'}</span>
             <span class="ev-card-name">${esc(label)}</span>
             ${main.titleFight?'<span class="ev-card-title-badge">Title</span>':''}
-            ${ev.droppedFights&&ev.droppedFights.length?'<span class="ev-card-changed-badge">Card Change</span>':''}
+            ${realDroppedFights(ev).length?'<span class="ev-card-changed-badge">Card Change</span>':''}
           </div>
           <div class="ev-card-matchup">${matchup}</div>
           <div class="ev-card-sub">${esc(weightSub)}</div>
@@ -1707,15 +1713,16 @@
       const metas=[];
       if(main&&main.weight) metas.push(`<div class="ov-meta-item">${esc(main.weight)}${main.titleFight?' · Title Fight':''}</div>`);
       if(main&&main.rounds) metas.push(`<div class="ov-meta-item">${esc(main.rounds)}</div>`);
-      const total=[...(ev.mainCard||[]),...(ev.prelims||[]),...(ev.earlyPrelims||[])].length;
+      const total=[...(ev.mainCard||[]),...(ev.prelims||[]),...(ev.earlyPrelims||[])].filter(isConfirmedFight).length;
       if(total>1) metas.push(`<div class="ov-meta-item">${total} fights</div>`);
       document.getElementById('ovMetaRow').innerHTML=metas.join('');
 
       /* Card changes — pull-outs / replacements flagged by the auto-sync bot */
       const changesEl=document.getElementById('ovCardChanges');
-      if(ev.droppedFights && ev.droppedFights.length){
+      const realChanges=realDroppedFights(ev);
+      if(realChanges.length){
         changesEl.style.display='flex';
-        changesEl.innerHTML=ev.droppedFights.map(d=>`
+        changesEl.innerHTML=realChanges.map(d=>`
           <div class="ov-card-change">
             <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L14.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
             <span><strong>${esc(d.a)}</strong> vs <strong>${esc(d.b)}</strong> — ${esc(d.reason||'card change')}</span>
@@ -1880,7 +1887,8 @@
       }
 
       function section(label,fights,color){
-        if(!fights||!fights.length) return;
+        fights=(fights||[]).filter(isConfirmedFight);
+        if(!fights.length) return;
         const hdr=document.createElement('div');
         hdr.className='ov-section-header';
         hdr.style.setProperty('--sec-color', color);
@@ -2005,7 +2013,7 @@
       if(ev.location) rows.push(['Location',ev.location]);
       if(ev.date)     rows.push(['Date',ev.date]);
       if(main&&main.weight) rows.push(['Main Weight',main.weight]);
-      const total=[...(ev.mainCard||[]),...(ev.prelims||[]),...(ev.earlyPrelims||[])].length;
+      const total=[...(ev.mainCard||[]),...(ev.prelims||[]),...(ev.earlyPrelims||[])].filter(isConfirmedFight).length;
       if(total) rows.push(['Total Fights',total]);
       list.innerHTML=rows.map(([l,v])=>`
         <div class="ov-stat-row">
