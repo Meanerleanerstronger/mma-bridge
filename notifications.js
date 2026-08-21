@@ -43,7 +43,21 @@
   }
 
   // ── Storage ──────────────────────────────────
-  function getNotifs()  { try { return JSON.parse(localStorage.getItem(NOTIF_KEY) || '[]'); } catch { return []; } }
+  // Self-heal: purge any notification already stuck in a user's local history
+  // from the "undefined out — replaced by undefined · TBA vs Opponent TBA"
+  // bug (fixed above) — no way to reach into their localStorage otherwise.
+  function isGarbageNotif(n) {
+    const t = `${n.title || ''} ${n.body || ''}`;
+    return /\bundefined\b/i.test(t) || /\bTBA\b/i.test(t);
+  }
+  function getNotifs()  {
+    try {
+      const arr = JSON.parse(localStorage.getItem(NOTIF_KEY) || '[]');
+      const clean = arr.filter(n => !isGarbageNotif(n));
+      if (clean.length !== arr.length) saveNotifs(clean);
+      return clean;
+    } catch { return []; }
+  }
   function saveNotifs(a){ try { localStorage.setItem(NOTIF_KEY, JSON.stringify(a.slice(0, MAX_NOTIFS))); } catch {} }
   function getSeen()    { try { return new Set(JSON.parse(localStorage.getItem(SEEN_KEY) || '[]')); } catch { return new Set(); } }
   function addSeen(id)  {
@@ -55,6 +69,16 @@
 
   function getCardSnap()  { try { return JSON.parse(localStorage.getItem(CARD_SNAP_KEY) || '{}'); } catch { return {}; } }
   function saveCardSnap(o){ try { localStorage.setItem(CARD_SNAP_KEY, JSON.stringify(o)); } catch {} }
+
+  // "TBA" / "Opponent TBA" is UFC.com's placeholder for an unannounced
+  // opponent, not a real fighter. Every event's placeholder collapses to the
+  // same literal "Opponent TBA|TBA" string, so once more than one existed
+  // (or one was added/removed) the diff below couldn't tell which fighter
+  // was actually "pulling out" or "replacing" whom — both sides matched
+  // TBA/Opponent TBA on both ends, so pulledOut/replacement came back
+  // undefined, producing "undefined out — replaced by undefined · TBA vs
+  // Opponent TBA" garbage notifications. Never treat one as a real fight.
+  function isTBA(name) { return !name || /\bTBA\b/i.test(name); }
 
   function eventFightSet(ev) {
     // Returns Set of "a|b" strings for all fights on an event. Deliberately
@@ -68,7 +92,7 @@
     const fights = new Set();
     for (const sec of ['mainCard', 'prelims', 'earlyPrelims']) {
       for (const f of (ev[sec] || [])) {
-        if (f.a && f.b) fights.add(`${f.a}|${f.b}`);
+        if (f.a && f.b && !isTBA(f.a) && !isTBA(f.b)) fights.add(`${f.a}|${f.b}`);
       }
     }
     return fights;
@@ -79,7 +103,7 @@
     const weights = {};
     for (const sec of ['mainCard', 'prelims', 'earlyPrelims']) {
       for (const f of (ev[sec] || [])) {
-        if (f.a && f.b) weights[`${f.a}|${f.b}`] = f.weight || '';
+        if (f.a && f.b && !isTBA(f.a) && !isTBA(f.b)) weights[`${f.a}|${f.b}`] = f.weight || '';
       }
     }
     return weights;
