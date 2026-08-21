@@ -13722,7 +13722,8 @@
         "ranked": true,
         "slot": "",
         "imgA": "",
-        "imgB": ""
+        "imgB": "",
+        "_espnMissStreak": true
       },
       {
         "a": "Lawrence Lui",
@@ -13733,7 +13734,8 @@
         "ranked": true,
         "slot": "",
         "imgA": "",
-        "imgB": ""
+        "imgB": "",
+        "_espnMissStreak": true
       },
       {
         "a": "Ding Meng",
@@ -13742,6 +13744,18 @@
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": true,
+        "slot": "",
+        "imgA": "",
+        "imgB": "",
+        "_espnMissStreak": true
+      },
+      {
+        "a": "Bilal Hasan",
+        "b": "Nilson Rojas",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
         "slot": "",
         "imgA": "",
         "imgB": ""
@@ -14212,6 +14226,17 @@
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/ROSAS_JR_RAUL_L_03-29.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/BARCELOS_RAONI_L_01-18.png"
+      },
+      {
+        "a": "TBA",
+        "b": "Opponent TBA",
+        "weight": "",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "comain",
+        "imgA": "",
+        "imgB": ""
       }
     ],
     "prelims": [],
