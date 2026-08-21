@@ -261,6 +261,22 @@
     .ev-card.ppv:hover .ev-card-cta { color:rgba(255,138,61,.6); }
     .ev-card-cta svg { width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round; }
 
+    /* Pull-down poster handle — top-right corner of card */
+    .ev-poster-handle {
+      position:absolute; top:10px; right:10px; z-index:4;
+      width:26px;height:20px; border-radius:8px;
+      background:rgba(4,4,6,.55); border:1px solid rgba(255,255,255,.16);
+      backdrop-filter:blur(6px);
+      display:flex;align-items:center;justify-content:center;
+      cursor:grab; touch-action:none;
+      transition:background .2s,border-color .2s,transform .15s;
+    }
+    .ev-poster-handle svg { width:12px;height:12px;fill:none;stroke:rgba(255,255,255,.55);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;transition:stroke .2s; }
+    .ev-card:hover .ev-poster-handle { background:rgba(4,4,6,.75); border-color:rgba(255,138,61,.4); }
+    .ev-card:hover .ev-poster-handle svg { stroke:#ff8a3d; }
+    .ev-poster-handle:active { cursor:grabbing; transform:scale(.92); }
+    .ev-poster-handle.dragging { transition:none; }
+
     /* Community hype slot — bottom-right corner of card */
     .ev-hype-slot { position:absolute;bottom:12px;right:18px;z-index:4;display:flex;flex-direction:column;align-items:flex-end;gap:2px;opacity:0;pointer-events:none;transition:opacity .4s ease; }
     .ev-hype-slot.loaded { opacity:1; }
@@ -268,6 +284,33 @@
     .ev-hype-slot .ehs-sep { font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:700;color:rgba(255,138,61,.28);line-height:1; }
     .ev-hype-slot .ehs-label { font-family:'Inter',sans-serif;font-size:.42rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,138,61,.45);line-height:1; }
     .ev-hype-slot .ehs-count { font-family:'Inter',sans-serif;font-size:.62rem;font-weight:500;color:rgba(255,255,255,.4);letter-spacing:.03em;line-height:1; }
+
+    /* ══════════════════════════════════
+       POSTER LIGHTBOX
+    ══════════════════════════════════ */
+    .pl-lightbox { position:fixed;inset:0;z-index:2500;visibility:hidden;pointer-events:none; }
+    .pl-lightbox.open { visibility:visible;pointer-events:all; }
+    .pl-backdrop { position:absolute;inset:0;background:rgba(0,0,0,0);backdrop-filter:blur(0px);transition:background .35s ease,backdrop-filter .35s ease; }
+    .pl-lightbox.open .pl-backdrop { background:rgba(3,3,5,.93);backdrop-filter:blur(6px); }
+    .pl-frame {
+      position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+      padding:60px 20px;gap:14px;
+      opacity:0;transform:scale(.94) translateY(24px);
+      transition:opacity .38s ease,transform .38s cubic-bezier(.22,1,.36,1);
+    }
+    .pl-lightbox.open .pl-frame { opacity:1;transform:scale(1) translateY(0); }
+    .pl-img { max-width:min(92vw,560px);max-height:78vh;width:auto;height:auto;border-radius:14px;box-shadow:0 30px 90px rgba(0,0,0,.75);object-fit:contain; }
+    .pl-caption { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);text-align:center; }
+    .pl-close {
+      position:absolute;top:18px;right:18px;z-index:2;
+      width:38px;height:38px;border-radius:50%;
+      background:rgba(20,20,24,.7);border:1px solid rgba(255,255,255,.14);
+      color:rgba(255,255,255,.7);font-size:1rem;line-height:1;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
+      transition:background .2s,border-color .2s,color .2s,transform .2s;
+    }
+    .pl-close:hover { background:rgba(255,138,61,.15);border-color:rgba(255,138,61,.4);color:#ff8a3d;transform:rotate(90deg); }
+    @media(max-width:540px){ .pl-img{max-width:94vw;} .pl-close{top:12px;right:12px;} }
 
     /* ══════════════════════════════════
        CINEMATIC OVERLAY
@@ -1143,6 +1186,16 @@
     </div>
   </div>
 
+  <!-- POSTER LIGHTBOX (pull-down reveal) -->
+  <div class="pl-lightbox" id="plLightbox" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="pl-backdrop" id="plBackdrop"></div>
+    <div class="pl-frame">
+      <button class="pl-close" id="plClose" aria-label="Close poster">✕</button>
+      <img class="pl-img" id="plImg" src="" alt="">
+      <div class="pl-caption" id="plCaption"></div>
+    </div>
+  </div>
+
   <!-- CINEMATIC OVERLAY -->
   <div class="ev-overlay" id="evOverlay" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="ov-backdrop" id="ovBackdrop"></div>
@@ -1399,6 +1452,7 @@
         ${posterEl}
         <div class="ev-card-overlay"></div>
         <div class="ev-card-bar"></div>
+        ${ev.poster?`<div class="ev-poster-handle" data-poster-handle title="Pull down for full poster"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>`:''}
         <div class="ev-card-content">
           <div class="ev-card-top">
             <span class="ev-card-badge">${isPPV?'PPV':'Fight Night'}</span>
@@ -1425,6 +1479,11 @@
         setTimeout(function(){ openOverlay(ev); }, 90);
       });
 
+      if(ev.poster){
+        const handle=card.querySelector('[data-poster-handle]');
+        if(handle) wirePosterHandle(handle, ev);
+      }
+
       const wrap = document.createElement('div');
       wrap.className = 'ev-card-wrap';
       const hySlot = document.createElement('div');
@@ -1433,6 +1492,61 @@
       card.appendChild(hySlot);
       wrap.appendChild(card);
       return wrap;
+    }
+
+    /* ── POSTER LIGHTBOX (pull-down reveal) ── */
+    const plLightbox=document.getElementById('plLightbox');
+    const plBackdrop=document.getElementById('plBackdrop');
+    const plImg=document.getElementById('plImg');
+    const plCaption=document.getElementById('plCaption');
+    const plClose=document.getElementById('plClose');
+
+    function openPosterLightbox(ev){
+      plImg.src=ev.poster; plImg.alt=ev.name||'';
+      plCaption.textContent=ev.name||'';
+      plLightbox.classList.add('open');
+      plLightbox.setAttribute('aria-hidden','false');
+      document.body.style.overflow='hidden';
+    }
+    function closePosterLightbox(){
+      plLightbox.classList.remove('open');
+      plLightbox.setAttribute('aria-hidden','true');
+      document.body.style.overflow='';
+    }
+    plBackdrop.addEventListener('click', closePosterLightbox);
+    plClose.addEventListener('click', closePosterLightbox);
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape' && plLightbox.classList.contains('open')) closePosterLightbox(); });
+
+    function wirePosterHandle(handle, ev){
+      let dragging=false, startY=0, moved=0;
+      const THRESHOLD=8; // px of drag before we treat it as a pull, not a tap
+
+      handle.addEventListener('pointerdown', e=>{
+        e.preventDefault(); e.stopPropagation();
+        dragging=true; moved=0; startY=e.clientY;
+        handle.classList.add('dragging');
+        handle.setPointerCapture(e.pointerId);
+      });
+      handle.addEventListener('pointermove', e=>{
+        if(!dragging) return;
+        e.stopPropagation();
+        const dy=Math.max(0, e.clientY-startY);
+        moved=dy;
+        handle.style.transform=`translateY(${Math.min(dy,26)}px) scale(${dy>THRESHOLD?0.92:1})`;
+      });
+      const release=e=>{
+        if(!dragging) return;
+        e.stopPropagation();
+        dragging=false;
+        handle.classList.remove('dragging');
+        handle.style.transform='';
+        openPosterLightbox(ev);
+      };
+      handle.addEventListener('pointerup', release);
+      handle.addEventListener('pointercancel', e=>{
+        dragging=false; handle.classList.remove('dragging'); handle.style.transform='';
+      });
+      handle.addEventListener('click', e=>{ e.preventDefault(); e.stopPropagation(); });
     }
 
     /* ── HYPE ── */
