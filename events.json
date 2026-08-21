@@ -13712,21 +13712,42 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/BATBAYAR_NAMSRAI_R_01-31.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/LIMA_ANDRE_L_06-20.png"
-      }
-    ],
-    "earlyPrelims": [
+      },
       {
-        "a": "Bilal Hasan",
-        "b": "Nilson Rojas",
-        "weight": "Flyweight",
+        "a": "Xiao Long",
+        "b": "Francesco Nuzzi",
+        "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Lawrence Lui",
+        "b": "Hector Santiago",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Ding Meng",
+        "b": "Cam Nelson",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
         "slot": "",
         "imgA": "",
         "imgB": ""
       }
     ],
+    "earlyPrelims": [],
     "droppedFights": [
       {
         "a": "Opponent TBA",
@@ -13877,7 +13898,7 @@
         "ranked": false,
         "slot": "",
         "imgA": "",
-        "imgB": ""
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/MONTENEGRO_SOFIA_R.png?itok=MM4uaphO"
       }
     ]
   },
@@ -14191,17 +14212,6 @@
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/ROSAS_JR_RAUL_L_03-29.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/BARCELOS_RAONI_L_01-18.png"
-      },
-      {
-        "a": "TBA",
-        "b": "Opponent TBA",
-        "weight": "",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "comain",
-        "imgA": "",
-        "imgB": ""
       }
     ],
     "prelims": [],
