@@ -28582,6 +28582,14 @@
     "nickname": "Gee Money",
     "last5": [
       {
+        "opponent": "Stan Dorsainvil",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Hernandez vs. Rodrigues",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Thiago Moisés",
         "result": "W",
         "method": "Decision (unanimous)",
@@ -28723,6 +28731,14 @@
     },
     "nickname": "Ticoto",
     "last5": [
+      {
+        "opponent": "Ryan Kuse",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Hernandez vs. Rodrigues",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Dennis Buzukja",
         "result": "W",
@@ -49703,7 +49719,17 @@
       "losses": 0,
       "draws": 0
     },
-    "nickname": "The Drill"
+    "nickname": "The Drill",
+    "last5": [
+      {
+        "opponent": "Gauge Young",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Hernandez vs. Rodrigues",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "ryan-kuse",
@@ -49725,7 +49751,17 @@
       "losses": 2,
       "draws": 0
     },
-    "nickname": "3rd Street Savage"
+    "nickname": "3rd Street Savage",
+    "last5": [
+      {
+        "opponent": "Marcio Barbosa",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Hernandez vs. Rodrigues",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "terrance-chatman",
