@@ -13707,8 +13707,8 @@
         "titleFight": false,
         "ranked": true,
         "slot": "",
-        "imgA": "",
-        "imgB": "",
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/LONG_XIAO_L_08-23.png?itok=wt2ezu8C",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
         "cancelled": true
       },
       {
@@ -13719,7 +13719,7 @@
         "titleFight": false,
         "ranked": true,
         "slot": "",
-        "imgA": "",
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-01/LUI_LAWRENCE_R_01-31_0.png?itok=dKAwwQi3",
         "imgB": "",
         "cancelled": true
       },
@@ -13731,7 +13731,7 @@
         "titleFight": false,
         "ranked": true,
         "slot": "",
-        "imgA": "",
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/MENG_DING_L_05-30.png?itok=H0Huhzwl",
         "imgB": "",
         "cancelled": true
       },
@@ -13743,8 +13743,8 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "",
-        "imgB": ""
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/LONG_XIAO_L_08-23.png?itok=wt2ezu8C",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
       },
       {
         "a": "Lawrence Lui",
@@ -13754,34 +13754,11 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "",
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-01/LUI_LAWRENCE_R_01-31_0.png?itok=dKAwwQi3",
         "imgB": ""
       }
     ],
-    "earlyPrelims": [
-      {
-        "a": "Bilal Hasan",
-        "b": "Nilson Rojas",
-        "weight": "Flyweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "",
-        "imgB": ""
-      },
-      {
-        "a": "Ding Meng",
-        "b": "Cameron Nelson",
-        "weight": "Welterweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "",
-        "imgB": ""
-      }
-    ],
+    "earlyPrelims": [],
     "droppedFights": [
       {
         "a": "Ce Liu",
@@ -13932,7 +13909,7 @@
   },
   {
     "id": "noche-ufc-rodriguez-vs-silva",
-    "name": "Noche UFC: Silva vs. Delgado",
+    "name": "Noche UFC: Rodriguez vs. Silva",
     "type": "FIGHT NIGHT",
     "date": "Sat, Sep 12, 2026",
     "isoDate": "2026-09-12",
@@ -13950,17 +13927,6 @@
       }
     ],
     "mainCard": [
-      {
-        "a": "Jean Silva",
-        "b": "Jose Miguel Delgado",
-        "weight": "Featherweight",
-        "rounds": "5 Rds",
-        "titleFight": false,
-        "ranked": true,
-        "slot": "main",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-02/SILVA_JEAN_L_02-22.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-07/DELGADO_JOSE_R_07-18.png"
-      },
       {
         "a": "Alexa Grasso",
         "b": "Manon Fiorot",
@@ -14015,6 +13981,17 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/MCMILLEN_TOMMY_L_04-04.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/RAHIKI_MARWAN_L_05-02.png"
+      },
+      {
+        "a": "Yair Rodriguez",
+        "b": "Jean Silva",
+        "weight": "Featherweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "main",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-04/RODRIGUEZ_YAIR_L_04-12.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-02/SILVA_JEAN_L_02-22.png"
       }
     ],
     "prelims": [
@@ -14070,8 +14047,8 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "",
-        "imgB": "",
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/JIMENEZ_RAMIRO_R_08-19.png?itok=AOac_e0j",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/VERA_RODRIGO_R_05-30.png?itok=ZvELiIEn",
         "cancelled": true
       },
       {
@@ -14083,34 +14060,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/GARCIA_RAFA_L_04-25.png",
-        "imgB": "",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/RONGZHU_L_05-28.png?itok=cqDnLlXs",
         "cancelled": true
       }
     ],
-    "earlyPrelims": [
-      {
-        "a": "Ramiro Jimenez",
-        "b": "Rodrigo Vera",
-        "weight": "Featherweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "",
-        "imgB": ""
-      },
-      {
-        "a": "Rafa Garcia",
-        "b": "Rongzhu",
-        "weight": "Lightweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "",
-        "imgB": ""
-      }
-    ]
+    "earlyPrelims": []
   },
   {
     "id": "ufc-331-van-vs-pantoja-2",
