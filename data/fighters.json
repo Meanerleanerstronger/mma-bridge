@@ -29805,7 +29805,7 @@
     "name": "Rafa Garcia",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/GARCIA_RAFA_L_04-25.png",
     "record": {
-      "wins": 19,
+      "wins": 18,
       "losses": 4,
       "draws": 0
     },
@@ -50075,5 +50075,96 @@
       "subAvg": "0.0"
     },
     "statsSyncedAt": "2026-08-21T09:37:47.623Z"
+  },
+  {
+    "id": "lawrence-lui",
+    "name": "Lawrence Lui",
+    "record": {
+      "wins": 11,
+      "losses": 5,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "A. J. McKee",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "Bellator MMA in 2018#Bellator 197",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Andrew Natividad",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Bellator MMA in 2018#Bellator 193",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Treston Thomison",
+        "result": "W",
+        "method": "TKO (doctor stoppage)",
+        "event": "Bellator MMA in 2017#Bellator 181",
+        "round": 1,
+        "time": "3:34"
+      },
+      {
+        "opponent": "John Macapá",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "Bellator MMA in 2016#Bellator 167",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Isao Kobayashi",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "Bellator MMA in 2016#Bellator 157",
+        "round": 2,
+        "time": "2:11"
+      },
+      {
+        "opponent": "Emmanuel Sanchez",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "Bellator MMA in 2015#Bellator 145",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Sean Wilson",
+        "result": "W",
+        "method": "TKO (elbows and punches)",
+        "event": "Bellator 138",
+        "round": 1,
+        "time": "4:56"
+      },
+      {
+        "opponent": "Sam Toomer",
+        "result": "W",
+        "method": "TKO (knees to the body and punches)",
+        "event": "RFA 25: Lawrence vs. Toomer",
+        "round": 1,
+        "time": "4:55"
+      },
+      {
+        "opponent": "Mark Dickman",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "RFA 17: Cochrane vs. Giagos",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Luis Saldaña",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "RFA 10",
+        "round": 3,
+        "time": "5:00"
+      }
+    ]
   }
 ]
