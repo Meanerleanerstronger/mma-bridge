@@ -2012,6 +2012,11 @@ function formatOdds(n) {
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
             Picks are locked — the event has started
           </div>` : ''}
+        ${myId && (isLocked || isCompleted) && savedPickCount() === 0 ? `
+          <div class="pk-banner pk-nopicks-banner">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
+            You never made picks for this event
+          </div>` : ''}
         ${!myId && !isCompleted && !isLocked ? `
           <div class="pk-banner pk-signin-banner">
             <span>Sign in to save your picks and track your record</span>

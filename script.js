@@ -212,11 +212,26 @@ function renderHero(ev, mode, hasPicks) {
     btn.style.setProperty('box-shadow', '0 0 28px rgba(255,140,0,0.4), inset 0 1px 0 rgba(255,190,120,0.2)', 'important');
     btn.style.setProperty('border', '1px solid rgba(255,140,0,0.5)', 'important');
 
+    // Always-visible "View Your Picks" — during a live event this used to
+    // not exist at all on the hero (the completed-mode version only shows
+    // up after an async check confirms the user has picks, which is wrong
+    // here: on fight night you want a direct, permanent way back to your
+    // picks regardless of whether that check has resolved yet). Styled as
+    // a real second action, not a ghost link, so it reads as visible as
+    // the Paramount+ button next to it.
+    const picksBtn = document.createElement('a');
+    picksBtn.id = 'heroSecondaryBtn';
+    picksBtn.className = 'icon-arrow';
+    picksBtn.textContent = 'View Your Picks';
+    picksBtn.href = `picks.html?id=${eventId}`;
+    picksBtn.style.cssText = 'display:inline-block;margin-left:12px;padding:13px 28px;border-radius:6px;font-family:Montserrat,sans-serif;font-weight:800;font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;background:rgba(255,255,255,0.1);color:#fff;border:1.5px solid rgba(255,255,255,0.4);box-shadow:0 0 20px rgba(255,255,255,0.06);transition:background .15s,border-color .15s;';
+    btn.parentNode.insertBefore(picksBtn, btn.nextSibling);
+
     const note = document.createElement('div');
     note.id = 'heroWatchNote';
     note.textContent = watchTimeText(ev);
-    note.style.cssText = 'margin-top:12px;font-family:Inter,sans-serif;font-size:0.78rem;color:rgba(255,255,255,0.45);';
-    btn.parentNode.insertBefore(note, btn.nextSibling);
+    note.style.cssText = 'margin-top:12px;font-family:Inter,sans-serif;font-size:0.78rem;color:rgba(255,255,255,0.45);width:100%;';
+    picksBtn.parentNode.insertBefore(note, picksBtn.nextSibling);
   } else if (mode === 'completed' || mode === 'results') {
     btn.textContent = 'Review the Card';
     btn.href = `events.html?id=${eventId}`;
