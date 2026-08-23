@@ -27658,7 +27658,17 @@
     "height": "5'10\"",
     "reach": "69.5\"",
     "weightClass": "Lightweight",
-    "statsSyncedAt": "2026-08-22T09:29:05.645Z"
+    "statsSyncedAt": "2026-08-22T09:29:05.645Z",
+    "last5": [
+      {
+        "opponent": "Mason Jones",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Hernandez vs. Rodrigues",
+        "round": 2,
+        "time": null
+      }
+    ]
   },
   {
     "id": "vicente-luque",
@@ -48733,6 +48743,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "MarQuel Mederos",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Hernandez vs. Rodrigues",
+        "round": 2,
+        "time": null
+      },
       {
         "opponent": "Axel Sola",
         "result": "W",
