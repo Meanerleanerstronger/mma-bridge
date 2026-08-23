@@ -13423,7 +13423,7 @@
     "location": "Sacramento, CA",
     "venue": "Golden 1 Center",
     "poster": "https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/2026-08/082226-ufc-fight-night-herndandez-vs-rodrigues-EVENT-ART.jpg",
-    "status": "upcoming",
+    "status": "completed",
     "start_time": "2026-08-23T00:00:00.000Z",
     "mainCard": [
       {
@@ -13463,7 +13463,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/DOLIDZE_ROMAN_L_03-21.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/DE-RIDDER_REINIER_L_10-18.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/DE-RIDDER_REINIER_L_10-18.png",
+        "winner": "Reinier de Ridder",
+        "method": "KO/TKO",
+        "round": 1
       },
       {
         "a": "Serghei Spivac",
@@ -13474,7 +13477,9 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/SPIVAC_SERGHEI_L_02-21.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/PETRINO_VITOR_L_03-14.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/PETRINO_VITOR_L_03-14.png",
+        "winner": "Vitor Petrino",
+        "round": 3
       },
       {
         "a": "MarQuel Mederos",
