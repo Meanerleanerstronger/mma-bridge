@@ -2496,7 +2496,7 @@
     function showCountdownCard(ev) {
       if (!ev.start_time) return;
       document.getElementById('evCdName').textContent = ev.name || 'UFC Event';
-      document.getElementById('evCdLocal').textContent = 'Main Card · ' + (window.formatLocalTime(ev.start_time) || ev.date || '');
+      document.getElementById('evCdLocal').textContent = 'First Fight · ' + (window.formatLocalTime(ev.start_time) || ev.date || '');
       if (_cdStop) { _cdStop(); _cdStop = null; }
       _cdStop = window.initCountdown(document.getElementById('evCdTimer'), ev.start_time);
       document.getElementById('evCdCard').classList.add('open');

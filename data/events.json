@@ -13621,7 +13621,7 @@
     "venue": "Shanghai Oriental Sports Center",
     "poster": "https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-08/082926-ufc-fight-night-nurmagomedov-vs-song-EVENT-ART.jpg",
     "status": "upcoming",
-    "start_time": "2026-08-29T10:00:00.000Z",
+    "start_time": "2026-08-29T07:00:00.000Z",
     "mainCard": [
       {
         "a": "Umar Nurmagomedov",
@@ -13946,7 +13946,7 @@
   },
   {
     "id": "noche-ufc-rodriguez-vs-silva",
-    "name": "Noche UFC: Rodriguez vs. Silva",
+    "name": "Noche UFC: Silva vs. Delgado",
     "type": "FIGHT NIGHT",
     "date": "Sat, Sep 12, 2026",
     "isoDate": "2026-09-12",
@@ -13954,19 +13954,21 @@
     "venue": "Desert Diamond Arena",
     "poster": "",
     "status": "upcoming",
-    "start_time": "2026-09-12T21:00:00.000Z",
+    "start_time": "2026-09-12T18:00:00.000Z",
     "droppedFights": [],
     "mainCard": [
       {
-        "a": "Yair Rodriguez",
-        "b": "Jean Silva",
+        "a": "Jean Silva",
+        "b": "Jose Miguel Delgado",
         "weight": "Featherweight",
         "rounds": "5 Rds",
         "titleFight": false,
         "ranked": true,
         "slot": "main",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-04/RODRIGUEZ_YAIR_L_04-12.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-02/SILVA_JEAN_L_02-22.png"
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-02/SILVA_JEAN_L_02-22.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-07/DELGADO_JOSE_R_07-18.png",
+        "manualOverride": true,
+        "manualOverrideNote": "Yair Rodriguez pulled out (injury), Jose Miguel Delgado steps in — confirmed by admin 2026-08-23, ahead of UFC.com publishing the change."
       },
       {
         "a": "Alexa Grasso",
@@ -14106,7 +14108,7 @@
     "venue": "",
     "poster": "https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-08/091926-ufc-331-van-vs-pantoja-2-EVENT-ART.jpg",
     "status": "upcoming",
-    "start_time": "2026-09-20T01:00:00.000Z",
+    "start_time": "2026-09-19T21:00:00.000Z",
     "mainCard": [
       {
         "a": "Joshua Van",

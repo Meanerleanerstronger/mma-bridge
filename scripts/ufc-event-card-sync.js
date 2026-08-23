@@ -163,10 +163,18 @@ function parseSection(html, sectionId) {
 }
 
 function parseStartTime(html) {
-  // Main card broadcaster timestamp
-  const tsMatch = html.match(/c-event-fight-card-broadcaster__time[^>]*data-timestamp="(\d+)"/);
-  if (!tsMatch) return null;
-  return new Date(parseInt(tsMatch[1]) * 1000).toISOString();
+  // UFC.com's event page carries one broadcaster-time block per card segment
+  // (Main Card, Prelims, and — on PPVs — Early Prelims), each using this same
+  // class, listed in the DOM in latest-to-earliest order (Main Card first).
+  // Taking only the first match (the old behavior) silently returned the
+  // Main Card start every time — which is why the site's countdown and pick
+  // lock were keying off the main event's start instead of the actual first
+  // fight of the night, hours earlier. Take the EARLIEST of every timestamp
+  // found instead, whatever segment that turns out to be.
+  const matches = [...html.matchAll(/c-event-fight-card-broadcaster__time[^>]*data-timestamp="(\d+)"/g)];
+  if (!matches.length) return null;
+  const earliest = Math.min(...matches.map(m => parseInt(m[1], 10)));
+  return new Date(earliest * 1000).toISOString();
 }
 
 function buildFighterIndex(fighters) {
@@ -323,7 +331,27 @@ function normalizeMainCardSlots(ev) {
   return changed;
 }
 
+// A fight carrying manualOverride was entered from a source more current
+// than UFC.com's own page (e.g. breaking pull-out news UFC.com hasn't
+// published yet) — this exists because that exact scenario played out
+// live on 2026-08-23: UFC.com's page still listed Yair Rodriguez after he
+// was confirmed out, so the pull-out reconciliation below (correctly, by
+// its own logic) reverted Jose Miguel Delgado's replacement fight straight
+// back to Rodriguez the next time it ran. Skip reconciliation for the
+// whole event while any fight on it is flagged, rather than resolving
+// per-fight — a card change is rarely isolated to one bout's neighbors,
+// and half-applying UFC.com's version while the other half stays manual
+// is worse than just waiting. Clear manualOverride once UFC.com catches up.
+function hasManualOverride(ev) {
+  return ['mainCard', 'prelims', 'earlyPrelims'].some(s => (ev[s] || []).some(f => f.manualOverride));
+}
+
 async function syncEvent(ev, fighterIdx) {
+  if (hasManualOverride(ev)) {
+    console.log(`\n📋 ${ev.name} — skipped (manualOverride set on a fight, not reconciling against UFC.com yet)`);
+    return false;
+  }
+
   const slug = deriveUfcSlug(ev.id, ev.isoDate);
   const url  = `https://www.ufc.com/event/${slug}`;
   console.log(`\n📋 ${ev.name} → ${url}`);
