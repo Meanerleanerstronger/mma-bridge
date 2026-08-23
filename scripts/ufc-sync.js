@@ -271,16 +271,23 @@ function namesMatch(a, b) {
   return false;
 }
 
-// Find which fight in our event matches ESPN competitors
+// Find which fight in our event matches ESPN competitors.
+// Requires BOTH names of the pair to match (in either order) — matching on
+// just one loosely-fuzzy name was a real bug: two different "Anthony"s on
+// the same card (Hernandez and Wint) share a 7-char normalized prefix, so
+// Anthony Wint's own win got misfiled onto the Hernandez vs. Rodrigues main
+// event the first time this ran live (2026-08-22), overwriting the real
+// result with the wrong fighter and method. Requiring the full pair to
+// match makes a same-first-name collision like that structurally impossible
+// regardless of how loose namesMatch's fuzzy threshold is.
 function findOurFight(ourEv, winnerName, loserName) {
   for (const section of ['mainCard', 'prelims', 'earlyPrelims']) {
     const fights = ourEv[section] || [];
     for (let i = 0; i < fights.length; i++) {
       const f = fights[i];
-      if (namesMatch(f.a, winnerName) || namesMatch(f.b, winnerName) ||
-          namesMatch(f.a, loserName)  || namesMatch(f.b, loserName)) {
-        return { section, index: i, fight: f };
-      }
+      const aHit = namesMatch(f.a, winnerName) || namesMatch(f.a, loserName);
+      const bHit = namesMatch(f.b, winnerName) || namesMatch(f.b, loserName);
+      if (aHit && bHit) return { section, index: i, fight: f };
     }
   }
   return null;
