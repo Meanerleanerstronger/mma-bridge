@@ -69,19 +69,29 @@ function adminToken() {
   if (!secret) return null;
   return crypto.createHmac('sha256', secret).update('mma-bridge-admin-session').digest('hex');
 }
+// Retries a few times on transient failure (Render free-tier cold starts and
+// brief 502/503s are common right as a card goes live and traffic spikes) —
+// a single failed attempt used to be silently swallowed forever, since the
+// caller only re-attempts a push for a fight it hasn't graded locally yet.
+// Returns true only once the backend actually confirmed the write.
 async function pushResultToSupabase(eventId, fightKey, winner, method, round) {
   const token = adminToken();
-  if (!token) return;
-  try {
-    const res = await fetch('https://mmabridge-backend.onrender.com/api/admin/set-result', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token, event_id: eventId, fight_key: fightKey, winner, method, round: round || null }),
-    });
-    if (!res.ok) console.warn(`  ⚠️  set-result returned ${res.status} for ${eventId}:${fightKey}`);
-  } catch (e) {
-    console.warn(`  ⚠️  set-result call failed: ${e.message}`);
+  if (!token) return false;
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      const res = await fetch('https://mmabridge-backend.onrender.com/api/admin/set-result', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token, event_id: eventId, fight_key: fightKey, winner, method, round: round || null }),
+      });
+      if (res.ok) return true;
+      console.warn(`  ⚠️  set-result returned ${res.status} for ${eventId}:${fightKey} (attempt ${attempt}/3)`);
+    } catch (e) {
+      console.warn(`  ⚠️  set-result call failed: ${e.message} (attempt ${attempt}/3)`);
+    }
+    if (attempt < 3) await new Promise(r => setTimeout(r, attempt * 1500));
   }
+  return false;
 }
 
 // ── Wake the backend's tight live-result poller ────────────────────────────
@@ -580,6 +590,8 @@ async function main() {
         }
 
         const fight = ourEv[hit.section][hit.index];
+        const sectionKey = hit.section === 'mainCard' ? 'main' : hit.section === 'prelims' ? 'prelims' : 'early';
+
         if (!fight.winner) {
           fight.winner = winnerName;
           if (method) fight.method = method;
@@ -590,8 +602,15 @@ async function main() {
           if (appendLast5(fighters, byNormName, winnerName, loserName, 'W', method, round, fight.time, ourEv.name)) last5Added++;
           if (appendLast5(fighters, byNormName, loserName, winnerName, 'L', method, round, fight.time, ourEv.name)) last5Added++;
 
-          const sectionKey = hit.section === 'mainCard' ? 'main' : hit.section === 'prelims' ? 'prelims' : 'early';
-          await pushResultToSupabase(ourEv.id, `${sectionKey}-${hit.index}`, winnerName, method, round);
+          const synced = await pushResultToSupabase(ourEv.id, `${sectionKey}-${hit.index}`, winnerName, method, round);
+          if (synced) fight._supabaseSynced = true;
+        } else if (!fight._supabaseSynced) {
+          // Graded locally on an earlier run, but the Supabase push never
+          // confirmed (backend 5xx, cold start, etc). Retry every run until
+          // it actually succeeds instead of dropping it silently forever.
+          console.log(`  ↻ Retrying Supabase push: ${fight.winner} def. ... (${ourEv.name})`);
+          const synced = await pushResultToSupabase(ourEv.id, `${sectionKey}-${hit.index}`, fight.winner, fight.method, fight.round);
+          if (synced) { fight._supabaseSynced = true; changes.push(`Supabase sync recovered: ${fight.winner} (${ourEv.name})`); }
         }
       }
 
