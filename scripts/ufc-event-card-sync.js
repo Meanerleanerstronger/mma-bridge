@@ -295,6 +295,34 @@ function syncImages(ev, fighterIdx) {
   return changed;
 }
 
+// Enforce that 'main' sits at mainCard[0] and 'comain' at mainCard[1], with
+// no stray duplicate of either label elsewhere. The render layer (events.html
+// / picks.js) trusts f.slot directly, not array position — so the vacated-slot
+// handoff above (target.slot = slot) was only half the fix: it correctly
+// relabels the replacement fight but never moves it, so a fight that inherited
+// "main" from a pulled-out fighter's opponent could sit anywhere in the array
+// while the actual header/ordering UI (which assumes index 0/1) still looked
+// at whatever was physically first. This is what actually produced the
+// Yair Rodriguez → Jose Miguel Delgado bug (2026-08-22): the real reason
+// wasn't a name-matching miss, it was this exact position/label mismatch.
+// Idempotent, safe to run every sync regardless of whether anything changed.
+function normalizeMainCardSlots(ev) {
+  const mc = ev.mainCard || [];
+  if (mc.length < 2) return false;
+  let changed = false;
+
+  const mainIdx = mc.findIndex(f => f.slot === 'main');
+  if (mainIdx > 0) { mc.unshift(mc.splice(mainIdx, 1)[0]); changed = true; }
+  mc.forEach((f, i) => { if (i !== 0 && f.slot === 'main') { f.slot = ''; changed = true; } });
+
+  const comainIdx = mc.findIndex(f => f.slot === 'comain');
+  if (comainIdx > 1) { mc.splice(1, 0, mc.splice(comainIdx, 1)[0]); changed = true; }
+  mc.forEach((f, i) => { if (i !== 1 && f.slot === 'comain') { f.slot = ''; changed = true; } });
+
+  ev.mainCard = mc;
+  return changed;
+}
+
 async function syncEvent(ev, fighterIdx) {
   const slug = deriveUfcSlug(ev.id, ev.isoDate);
   const url  = `https://www.ufc.com/event/${slug}`;
@@ -434,6 +462,8 @@ async function syncEvent(ev, fighterIdx) {
       }
     }
   }
+
+  if (normalizeMainCardSlots(ev)) changed = true;
 
   if (syncImages(ev, fighterIdx)) changed = true;
 

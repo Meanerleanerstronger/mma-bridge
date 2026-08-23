@@ -738,12 +738,43 @@ async function main() {
         const slot    = idx === 0 ? 'main' : idx === 1 ? 'comain' : '';
         const fight   = buildFightFromESPN(comp, slot);
         ourEv[section] = ourEv[section] || [];
-        ourEv[section].push(fight);
+        // A brand-new "main"/"comain" fight (a replacement bout ESPN just
+        // announced) has to land at the front of the section, not the end —
+        // pushing it on unconditionally left the slot label correct while
+        // the array position was wrong, which is exactly what produced the
+        // UFC 332 main-event mislabel (Figueiredo vs. Talbott sat as
+        // mainCard[0] with slot="comain" because an earlier run pushed it
+        // in without repositioning). See normalizeMainCardSlots() below,
+        // which also catches this if it ever slips through again.
+        if (slot === 'main')       ourEv[section].unshift(fight);
+        else if (slot === 'comain') ourEv[section].splice(1, 0, fight);
+        else ourEv[section].push(fight);
         console.log(`  + New fight (${section}): ${a} vs ${b}`);
         added++;
       });
 
       if (added > 0) changes.push(`Card update: ${ourEv.name} (+${added} fights)`);
+    }
+
+    // ── F: SLOT NORMALIZATION — safety net, every run ──────────────────────
+    // Enforces 'main' at mainCard[0] and 'comain' at mainCard[1] with no
+    // stray duplicates, regardless of how a fight got its label. The render
+    // layer trusts f.slot directly rather than array position, so a label
+    // that's correct but misplaced (or duplicated) still displays wrong.
+    // Idempotent — runs unconditionally so this can't silently drift again.
+    if (ourEv && ourEv.status !== 'completed' && (ourEv.mainCard || []).length >= 2) {
+      const mc = ourEv.mainCard;
+      let normChanged = false;
+      const mainIdx = mc.findIndex(f => f.slot === 'main');
+      if (mainIdx > 0) { mc.unshift(mc.splice(mainIdx, 1)[0]); normChanged = true; }
+      mc.forEach((f, i) => { if (i !== 0 && f.slot === 'main') { f.slot = ''; normChanged = true; } });
+      const comainIdx = mc.findIndex(f => f.slot === 'comain');
+      if (comainIdx > 1) { mc.splice(1, 0, mc.splice(comainIdx, 1)[0]); normChanged = true; }
+      mc.forEach((f, i) => { if (i !== 1 && f.slot === 'comain') { f.slot = ''; normChanged = true; } });
+      if (normChanged) {
+        console.log(`  🔧 Slot order normalized: ${ourEv.name}`);
+        changes.push(`Slot order fixed: ${ourEv.name}`);
+      }
     }
   }
 
