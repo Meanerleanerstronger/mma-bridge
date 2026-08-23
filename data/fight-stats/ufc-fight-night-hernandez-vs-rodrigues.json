@@ -1,0 +1,167 @@
+{
+  "eventId": "ufc-fight-night-hernandez-vs-rodrigues",
+  "eventName": "UFC Fight Night: Hernandez vs. Rodrigues",
+  "fights": [
+    {
+      "fighter1": "Gregory Rodrigues Anthony Hernandez",
+      "fighter2": "Vitor Petrino Serghei Spivac",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "3 0",
+          "sigStr": "17490",
+          "totalStr": "00",
+          "td": "Middleweight",
+          "subAtt": 5,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "6423",
+          "totalStr": "00",
+          "td": "Heavyweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Reinier de Ridder Roman Dolidze",
+      "fighter2": "MarQuel Mederos Mason Jones",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "711",
+          "totalStr": "00",
+          "td": "LightHeavyweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "1 0",
+          "sigStr": "7377",
+          "totalStr": "00",
+          "td": "Lightweight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Carli Judice Jeisla Chaves",
+      "fighter2": "Anthony Wint Terrance Chatman",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "1610",
+          "totalStr": "00",
+          "td": "Women'sFlyweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "51",
+          "totalStr": "11",
+          "td": "Heavyweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Jamall Emmers Lerryan Douglas",
+      "fighter2": "Shamil Gaziev Kennedy Nzechukwu",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "1714",
+          "totalStr": "00",
+          "td": "Featherweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "1 0",
+          "sigStr": "23",
+          "totalStr": "00",
+          "td": "Heavyweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Chris Padilla Nasrat Haqparast",
+      "fighter2": "Marcio Barbosa Ryan Kuse",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "12571",
+          "totalStr": "10",
+          "td": "Lightweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "1 0",
+          "sigStr": "115",
+          "totalStr": "00",
+          "td": "Featherweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Stan Dorsainvil Gauge Young",
+      "fighter2": "Jackson McVey Wes Schultz",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "123137",
+          "totalStr": "00",
+          "td": "Lightweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "1 0",
+          "sigStr": "3824",
+          "totalStr": "01",
+          "td": "Middleweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Shanelle Dyer Elise Reed",
+      "fighter2": "",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "13649",
+          "totalStr": "00",
+          "td": "Women'sStrawweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0",
+          "sigStr": "",
+          "totalStr": "",
+          "td": "",
+          "subAtt": 0,
+          "ctrlTime": "0:00"
+        }
+      }
+    }
+  ]
+}
