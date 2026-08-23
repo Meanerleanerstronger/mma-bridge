@@ -13793,9 +13793,32 @@
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-01/LUI_LAWRENCE_R_01-31_0.png?itok=dKAwwQi3",
         "imgB": ""
+      },
+      {
+        "a": "Bilal Hasan",
+        "b": "Nilson Rojas",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
       }
     ],
-    "earlyPrelims": [],
+    "earlyPrelims": [
+      {
+        "a": "Ding Meng",
+        "b": "Cameron Nelson",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
     "droppedFights": [
       {
         "a": "Ce Liu",
@@ -14094,7 +14117,19 @@
         "cancelled": true
       }
     ],
-    "earlyPrelims": []
+    "earlyPrelims": [
+      {
+        "a": "Rafa Garcia",
+        "b": "Rongzhu",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ]
   },
   {
     "id": "ufc-331-van-vs-pantoja-2",
