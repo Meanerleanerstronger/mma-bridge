@@ -13902,7 +13902,7 @@
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
-        "slot": "comain",
+        "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/ZIAM_FARES_L_06-06.png?itok=bYY345Ee",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-09/SOLA_AXEL_L_09-06.png"
       },
@@ -13969,7 +13969,7 @@
   },
   {
     "id": "noche-ufc-rodriguez-vs-silva",
-    "name": "Noche UFC: Rodriguez vs. Silva",
+    "name": "Noche UFC: Silva vs. Delgado",
     "type": "FIGHT NIGHT",
     "date": "Sat, Sep 12, 2026",
     "isoDate": "2026-09-12",
@@ -13978,15 +13978,19 @@
     "poster": "",
     "status": "upcoming",
     "start_time": "2026-09-12T21:00:00.000Z",
-    "droppedFights": [
-      {
-        "a": "Yair Rodriguez",
-        "b": "Jean Silva",
-        "reason": "Yair Rodriguez pulled out (injury) — Jose Miguel Delgado steps in on short notice",
-        "droppedAt": "2026-08-21T00:00:00.000Z"
-      }
-    ],
+    "droppedFights": [],
     "mainCard": [
+      {
+        "a": "Jean Silva",
+        "b": "Jose Miguel Delgado",
+        "weight": "Featherweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "main",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-02/SILVA_JEAN_L_02-22.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-07/DELGADO_JOSE_R_07-18.png"
+      },
       {
         "a": "Alexa Grasso",
         "b": "Manon Fiorot",
@@ -14041,17 +14045,6 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/MCMILLEN_TOMMY_L_04-04.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/RAHIKI_MARWAN_L_05-02.png"
-      },
-      {
-        "a": "Yair Rodriguez",
-        "b": "Jean Silva",
-        "weight": "Featherweight",
-        "rounds": "5 Rds",
-        "titleFight": false,
-        "ranked": true,
-        "slot": "main",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-04/RODRIGUEZ_YAIR_L_04-12.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-02/SILVA_JEAN_L_02-22.png"
       }
     ],
     "prelims": [
@@ -14345,7 +14338,7 @@
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
-        "slot": "comain",
+        "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/FIGUEIREDO_DEIVESON_L_10-11.png",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-06/TALBOTT_PAYTON_L_06-28.png?itok=SCY_KVRR"
       },
@@ -14356,7 +14349,7 @@
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
-        "slot": "",
+        "slot": "comain",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/WALKER_JOHNNY_L_08-23.png",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/5/PARKIN_MICK_L_07-27.png?itok=OX9b6Fw2"
       },
