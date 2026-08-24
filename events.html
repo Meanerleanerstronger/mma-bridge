@@ -1670,6 +1670,13 @@
     let _allEvents=[];            // populated by loadEvents so popstate can find events
     let _overlayOpen=false;       // tracks whether overlay UI is open
     let _overlayHistoryPushed=false; // true when we pushed a state (vs deep-link replace)
+    // The API rejects a second startViewTransition() while one is still
+    // running ("InvalidStateError: Transition was aborted") — a real risk
+    // here since open/close can fire in quick succession (fast clicking,
+    // or a deep-link auto-open landing right after a close). Track the
+    // in-flight one and just skip the transition wrapper (fall straight
+    // to the instant DOM update) rather than erroring, if another is busy.
+    let _ovTransitionBusy=false;
 
     // Thin wrapper: morphs the clicked card's poster into the overlay hero
     // via the View Transitions API when available (Chrome/Edge; silently
@@ -1680,14 +1687,18 @@
     // size between them automatically — no manual animation needed.
     function openOverlay(ev, _skipHistory){
       const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (document.startViewTransition && !reduceMotion) {
+      if (document.startViewTransition && !reduceMotion && !_ovTransitionBusy) {
         const srcPoster = ev.id ? document.querySelector(`.ev-card[data-event-id="${CSS.escape(ev.id)}"] .ev-card-poster`) : null;
         if (srcPoster) srcPoster.style.viewTransitionName = 'ev-shared-poster';
+        _ovTransitionBusy = true;
         const t = document.startViewTransition(() => {
           _openOverlayInner(ev, _skipHistory);
           if (srcPoster) srcPoster.style.viewTransitionName = '';
         });
-        t.finished.catch(()=>{}).finally(() => { if (srcPoster) srcPoster.style.viewTransitionName = ''; });
+        t.finished.catch(()=>{}).finally(() => {
+          _ovTransitionBusy = false;
+          if (srcPoster) srcPoster.style.viewTransitionName = '';
+        });
         return;
       }
       _openOverlayInner(ev, _skipHistory);
@@ -2074,15 +2085,17 @@
     }
     function closeOverlay(){
       const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (document.startViewTransition && !reduceMotion && currentEvent) {
+      if (document.startViewTransition && !reduceMotion && currentEvent && !_ovTransitionBusy) {
         const destPoster = document.querySelector(`.ev-card[data-event-id="${CSS.escape(currentEvent.id)}"] .ev-card-poster`);
         const heroPoster = overlay.querySelector('.ov-poster');
         if (heroPoster) heroPoster.style.viewTransitionName = 'ev-shared-poster';
+        _ovTransitionBusy = true;
         const t = document.startViewTransition(() => {
           _closeOverlayUI();
           if (destPoster) destPoster.style.viewTransitionName = 'ev-shared-poster';
         });
         t.finished.catch(()=>{}).finally(() => {
+          _ovTransitionBusy = false;
           if (heroPoster) heroPoster.style.viewTransitionName = '';
           if (destPoster) destPoster.style.viewTransitionName = '';
         });
