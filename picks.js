@@ -883,7 +883,14 @@ function oddsSpanHtml(val, isFav, numClass) {
     const hdBadge  = document.getElementById('pkHdHypeBadge');
 
     if (fill)  fill.style.width = pct + '%';
-    if (thumb) { thumb.style.left = pct + '%'; thumb.style.display = pct > 0 ? 'block' : 'none'; }
+    // Was hidden entirely until the first drag (display:none at pct===0) —
+    // nothing on screen told you this was a draggable control at all until
+    // you'd already found it by accident. Always visible now, sitting at
+    // the left edge at rest.
+    if (thumb) {
+      thumb.style.left = pct + '%';
+      thumb.classList.toggle('pk-hype-thumb-idle', !localHype);
+    }
     if (labelEl) {
       labelEl.textContent = localHype ? (HYPE_LABELS[localHype] || '') : 'Rate card hype';
     }
@@ -1937,7 +1944,7 @@ function oddsSpanHtml(val, isFav, numClass) {
           <span class="pk-hype-slim-label" id="pkHypeLabel">${label}</span>
           <div class="pk-hype-slim-track" id="pkHypeTrack">
             <div class="pk-hype-slim-fill" id="pkHypeFill" style="width:${pct}%" data-target-pct="${pct}"></div>
-            <div class="pk-hype-slim-thumb" id="pkHypeThumb" style="left:${pct}%;display:${pct > 0 ? 'block' : 'none'}"></div>
+            <div class="pk-hype-slim-thumb${localHype ? '' : ' pk-hype-thumb-idle'}" id="pkHypeThumb" style="left:${pct}%"></div>
           </div>
         </div>
       </div>`;

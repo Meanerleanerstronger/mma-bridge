@@ -5509,42 +5509,61 @@ body.light-mode #pk-poster-bg.loaded { opacity: 0.12; }
   display: flex; flex-direction: column; gap: 0;
 }
 
-/* ── Hype Meter — slim single-line bar ── */
+/* ── Hype Meter ── was a slim 6px single-line bar with a 14px thumb that
+   stayed display:none until you'd already dragged it once — nothing about
+   it read as "the main interactive thing on this page." Rebuilt at
+   main-feature scale: thick glowing track, a big always-visible handle,
+   idle pulse inviting the drag before it's been touched. */
 .pk-hype-slim {
   display: flex; align-items: center; gap: 12px;
   padding: 10px 20px;
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 .pk-hype-slim-label {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.7rem; font-weight: 500;
-  color: rgba(255,255,255,0.28); white-space: nowrap;
-  min-width: 90px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem; font-weight: 800;
+  color: rgba(255,255,255,0.55); white-space: nowrap;
+  min-width: 118px;
 }
 .pk-hype-slim-track {
-  flex: 1; height: 6px; border-radius: 3px;
-  background: rgba(255,255,255,0.07); cursor: pointer;
+  flex: 1; height: 22px; border-radius: 11px;
+  background: rgba(255,255,255,0.06);
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.35);
+  cursor: pointer;
   position: relative; user-select: none;
+  margin: 0 4px;
 }
-.pk-hype-slim-track:hover { background: rgba(255,255,255,0.1); }
+.pk-hype-slim-track:hover { background: rgba(255,255,255,0.09); }
 .pk-hype-slim-track.dragging { cursor: grabbing; }
 .pk-hype-slim-fill {
-  position: absolute; left: 0; top: 0; height: 100%; border-radius: 3px;
-  background: linear-gradient(90deg, rgba(170,110,10,0.7), #e06b1a);
+  position: absolute; left: 0; top: 0; height: 100%; border-radius: 11px;
+  background: linear-gradient(90deg, #7a3100 0%, #c25700 50%, #ff8a3d 100%);
+  box-shadow: 0 0 14px rgba(255,138,61,0.4);
   pointer-events: none;
+  transition: box-shadow 0.2s ease;
 }
 .pk-hype-slim-thumb {
   position: absolute; top: 50%; transform: translate(-50%, -50%);
-  width: 14px; height: 14px; border-radius: 50%;
-  background: #e06b1a; border: 2px solid rgba(255,255,255,0.2);
-  box-shadow: 0 1px 6px rgba(0,0,0,0.5); pointer-events: none;
-  transition: transform 0.08s ease;
+  width: 38px; height: 38px; border-radius: 50%;
+  background: linear-gradient(150deg, #ffb066 0%, #ff8a3d 60%, #d46400 100%);
+  border: 3px solid #fff;
+  box-shadow: 0 3px 14px rgba(0,0,0,0.5), 0 0 0 5px rgba(255,138,61,0.18);
+  pointer-events: none;
+  transition: transform 0.1s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s ease;
+  z-index: 2;
 }
-.pk-hype-slim-track.dragging .pk-hype-slim-thumb { transform: translate(-50%,-50%) scale(1.3); }
+.pk-hype-slim-track.dragging .pk-hype-slim-thumb { transform: translate(-50%,-50%) scale(1.22); }
+/* Idle pulse — invites the drag before the card has been rated at all;
+   removed the instant a value is set (see updateHypeWidget in picks.js). */
+@keyframes pkHypeThumbIdle {
+  0%, 100% { box-shadow: 0 3px 14px rgba(0,0,0,0.5), 0 0 0 5px rgba(255,138,61,0.18); }
+  50%      { box-shadow: 0 3px 18px rgba(0,0,0,0.5), 0 0 0 11px rgba(255,138,61,0.1); }
+}
+.pk-hype-thumb-idle { animation: pkHypeThumbIdle 1.8s ease-in-out infinite; }
 .pk-hype-slim-avg {
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.82rem; font-weight: 900;
-  color: #e06b1a; white-space: nowrap;
+  font-size: 1.15rem; font-weight: 900;
+  color: #ff8a3d; white-space: nowrap;
 }
 /* legacy meter IDs still bound by JS — alias new track to old ID handling */
 #pkHypeTrack { }
@@ -5564,24 +5583,25 @@ body.light-mode #pk-poster-bg.loaded { opacity: 0.12; }
    pick, not an optional footnote — it needs to look like the thing you're
    supposed to do, not something you'd only notice if already looking. */
 .pk-hype-card {
-  margin: 0 20px 16px; padding: 16px 18px 18px;
-  border-radius: 12px; background: rgba(255,138,61,0.04);
-  border: 1px solid rgba(255,138,61,0.16);
+  margin: 0 20px 18px; padding: 18px 20px 16px;
+  border-radius: 14px; background: rgba(255,138,61,0.05);
+  border: 1.5px solid rgba(255,138,61,0.2);
+  box-shadow: 0 4px 20px rgba(255,138,61,0.06);
 }
 .pk-hype-card-head {
   display: flex; align-items: center; justify-content: space-between; gap: 10px;
   margin-bottom: 6px;
 }
 .pk-hype-card-eyebrow {
-  font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.68rem;
-  letter-spacing: 0.08em; text-transform: uppercase; color: #ff8a3d;
+  font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 0.78rem;
+  letter-spacing: 0.09em; text-transform: uppercase; color: #ff8a3d;
 }
 .pk-hype-card-count { color: rgba(255,255,255,0.3); font-weight: 600; font-size: 0.72rem; }
 .pk-hype-card-sub {
   font-family: 'Inter', sans-serif; font-size: 0.78rem; line-height: 1.5;
   color: rgba(255,255,255,0.45); margin-bottom: 14px;
 }
-.pk-hype-card-track-row { display: flex; align-items: center; gap: 12px; }
+.pk-hype-card-track-row { display: flex; align-items: center; gap: 12px; padding: 14px 4px 22px; }
 body.light-mode .pk-hype-card { background: rgba(224,107,26,0.04); border-color: rgba(224,107,26,0.18); }
 body.light-mode .pk-hype-card-eyebrow { color: #b8611e; }
 body.light-mode .pk-hype-card-sub { color: rgba(0,0,0,0.45); }
@@ -7177,6 +7197,12 @@ body.light-mode .ev-hype-badge { color: rgba(140,80,0,0.85); background: rgba(20
   /* Card rating mobile */
   .pk-card-rating { padding: 36px 20px 32px; }
   .pk-cr-num { font-size: 4.5rem; }
+  /* Hype slider mobile — shrink label/thumb to avoid cramping */
+  .pk-hype-slim-label { min-width: 84px; font-size: 0.82rem; }
+  .pk-hype-slim-track { height: 20px; margin: 0 2px; }
+  .pk-hype-slim-thumb { width: 32px; height: 32px; }
+  .pk-hype-slim-avg { font-size: 1rem; }
+  .pk-hype-card { padding: 18px 16px; }
 }
 
 @media (max-width: 480px) {
