@@ -5709,15 +5709,22 @@ body.light-mode .fc-head:hover .fc-head-h2h { border-color: rgba(224,107,26,0.55
   grid-template-columns: 44px 1fr 80px 1fr 44px;
 }
 .fc-odds-col {
-  display: flex; align-items: center; justify-content: center;
-  padding: 0 2px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 0 2px; gap: 2px;
 }
 .fc-odds-num {
   font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
-  font-size: 0.9rem; font-weight: 900; letter-spacing: 0.02em;
+  font-size: 1.05rem; font-weight: 900; letter-spacing: 0.02em;
   line-height: 1; white-space: nowrap;
+  display: inline-flex; flex-direction: column; align-items: center; gap: 2px;
 }
 .fc-odds-col-b .fc-odds-num { text-align: center; }
+/* FAV/DOG tag under the number — see oddsSpanHtml() in picks.js. Color-only
+   was ambiguous without already knowing which sign means what. */
+.fc-odds-tag {
+  font-family: 'Inter', sans-serif; font-size: 0.48rem; font-weight: 800;
+  letter-spacing: 0.07em; text-transform: uppercase; opacity: 0.6;
+}
 .fc-card.fc-maincrd .fc-matchup { min-height: 180px; }
 .fc-card.fc-main .fc-matchup { min-height: 220px; }
 
@@ -5828,9 +5835,14 @@ body.light-mode .fc-head:hover .fc-head-h2h { border-color: rgba(224,107,26,0.55
 .fc-odds {
   font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
   font-size: 1.25rem; font-weight: 900; letter-spacing: 0.01em;
+  display: inline-flex; align-items: baseline; gap: 4px;
 }
-.fc-fav { color: #e06b1a; }
-.fc-dog { color: rgba(255,255,255,0.45); }
+/* Was #e06b1a — a duller, lower-contrast orange than the site's actual
+   brand accent (#ff8a3d, used for the "selected" pick state right next to
+   this). Matched to that instead so favorite/underdog reads with the same
+   visual weight as everything else on the fight card, not fainter. */
+.fc-fav { color: #ff8a3d; }
+.fc-dog { color: rgba(255,255,255,0.55); }
 
 /* Inline odds badge inside fc-info — the mobile fallback for the outer
    .fc-odds-col strip (hidden ≤640px). Hidden on wider screens so odds
@@ -11744,14 +11756,25 @@ img { image-rendering: auto; }
   margin-top: 5px;
 }
 .ov-odds-val {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.7rem;
-  font-weight: 600;
+  font-family: 'Barlow Condensed', 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
 }
-.ov-odds-fav { color: #ef4444; }
-.ov-odds-dog { color: #22c55e; }
+/* Was #ef4444 red for favorite / #22c55e green for underdog — backwards
+   from picks.js's own orange=favorite convention on the exact same data,
+   and color-only with no label either way. Unified + explicit FAV/DOG tag
+   added below so it reads correctly without needing to know the color code. */
+.ov-odds-fav { color: #ff8a3d; }
+.ov-odds-dog { color: rgba(255,255,255,0.55); }
+.ov-odds-tag {
+  font-family: 'Inter', sans-serif; font-size: 0.5rem; font-weight: 800;
+  letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.65;
+}
 .ov-odds-sep {
   font-size: 0.6rem;
   color: rgba(255,255,255,0.15);

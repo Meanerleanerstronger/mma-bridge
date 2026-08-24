@@ -2020,10 +2020,14 @@
               const aVal = parseInt(f.odds.a), bVal = parseInt(f.odds.b);
               const fmtO = n => n > 0 ? `+${n}` : `${n}`;
               const aFav = aVal < 0;
+              // Was color-only (and using red=favorite/green=underdog, the
+              // opposite of picks.js's own orange=favorite convention on
+              // the same data) — genuinely ambiguous without a legend.
+              // Explicit FAV/DOG text now, colors unified with picks.js.
               return `<div class="ov-odds-row">
-                <span class="ov-odds-val ${aFav?'ov-odds-fav':'ov-odds-dog'}">${fmtO(aVal)}</span>
+                <span class="ov-odds-val ${aFav?'ov-odds-fav':'ov-odds-dog'}">${fmtO(aVal)}<span class="ov-odds-tag">${aFav?'Fav':'Dog'}</span></span>
                 <span class="ov-odds-sep">·</span>
-                <span class="ov-odds-val ${!aFav?'ov-odds-fav':'ov-odds-dog'}">${fmtO(bVal)}</span>
+                <span class="ov-odds-val ${!aFav?'ov-odds-fav':'ov-odds-dog'}">${fmtO(bVal)}<span class="ov-odds-tag">${!aFav?'Fav':'Dog'}</span></span>
               </div>`;
             })() : '';
             row.innerHTML=`

@@ -35,6 +35,14 @@ function formatOdds(n) {
   return n > 0 ? `+${n}` : `${n}`;
 }
 
+// Was color-only across all 4 render sites (a plain orange vs. faint-white
+// number, no text) — genuinely ambiguous without already knowing American
+// odds notation (is +350 the favorite or the underdog?). Explicit Fav/Dog
+// tag now, everywhere odds render.
+function oddsSpanHtml(val, isFav, numClass) {
+  return `<span class="${numClass}${isFav ? ' fc-fav' : ' fc-dog'}">${formatOdds(val)}<span class="fc-odds-tag">${isFav ? 'Fav' : 'Dog'}</span></span>`;
+}
+
 (async function () {
   'use strict';
 
@@ -567,10 +575,10 @@ function formatOdds(n) {
       if (matchup && !matchup.querySelector('.fc-odds-col-a')) {
         const oa = document.createElement('div');
         oa.className = 'fc-odds-col fc-odds-col-a';
-        oa.innerHTML = `<span class="fc-odds-num${aFav ? ' fc-fav' : ' fc-dog'}">${formatOdds(odds.odds_a)}</span>`;
+        oa.innerHTML = oddsSpanHtml(odds.odds_a, aFav, 'fc-odds-num');
         const ob = document.createElement('div');
         ob.className = 'fc-odds-col fc-odds-col-b';
-        ob.innerHTML = `<span class="fc-odds-num${!aFav ? ' fc-fav' : ' fc-dog'}">${formatOdds(odds.odds_b)}</span>`;
+        ob.innerHTML = oddsSpanHtml(odds.odds_b, !aFav, 'fc-odds-num');
         matchup.prepend(oa);
         matchup.append(ob);
         matchup.classList.add('fc-matchup-odds');
@@ -590,10 +598,10 @@ function formatOdds(n) {
       const subRowA = ensureSubRow('.sb-side-a .fc-info, .fc-fighter:not(.fc-fighter-b) .fc-info');
       const subRowB = ensureSubRow('.sb-side-b .fc-info, .fc-fighter-b .fc-info', 'fc-sub-row-b');
       if (subRowA && !subRowA.querySelector('.fc-odds-inline')) {
-        subRowA.insertAdjacentHTML('beforeend', `<span class="fc-odds-inline"><span class="fc-odds${aFav ? ' fc-fav' : ' fc-dog'}">${formatOdds(odds.odds_a)}</span></span>`);
+        subRowA.insertAdjacentHTML('beforeend', `<span class="fc-odds-inline">${oddsSpanHtml(odds.odds_a, aFav, 'fc-odds')}</span>`);
       }
       if (subRowB && !subRowB.querySelector('.fc-odds-inline')) {
-        subRowB.insertAdjacentHTML('afterbegin', `<span class="fc-odds-inline"><span class="fc-odds${!aFav ? ' fc-fav' : ' fc-dog'}">${formatOdds(odds.odds_b)}</span></span>`);
+        subRowB.insertAdjacentHTML('afterbegin', `<span class="fc-odds-inline">${oddsSpanHtml(odds.odds_b, !aFav, 'fc-odds')}</span>`);
       }
     });
   }).catch(() => {});
@@ -1153,8 +1161,8 @@ function formatOdds(n) {
     let oddsTagA = '', oddsTagB = '';
     if (odds) {
       const aFav = odds.odds_a < odds.odds_b;
-      oddsTagA = `<span class="fc-odds${aFav ? ' fc-fav' : ' fc-dog'}">${formatOdds(odds.odds_a)}</span>`;
-      oddsTagB = `<span class="fc-odds${!aFav ? ' fc-fav' : ' fc-dog'}">${formatOdds(odds.odds_b)}</span>`;
+      oddsTagA = oddsSpanHtml(odds.odds_a, aFav, 'fc-odds');
+      oddsTagB = oddsSpanHtml(odds.odds_b, !aFav, 'fc-odds');
     }
 
     // Badges — once the fight's done, every side gets an unambiguous label:
@@ -1244,10 +1252,10 @@ function formatOdds(n) {
 
     const aFav = odds && odds.odds_a < odds.odds_b;
     const extOddsA = odds ? `<div class="fc-odds-col fc-odds-col-a">
-      <span class="fc-odds-num${aFav ? ' fc-fav' : ' fc-dog'}">${formatOdds(odds.odds_a)}</span>
+      ${oddsSpanHtml(odds.odds_a, aFav, 'fc-odds-num')}
     </div>` : '';
     const extOddsB = odds ? `<div class="fc-odds-col fc-odds-col-b">
-      <span class="fc-odds-num${!aFav ? ' fc-fav' : ' fc-dog'}">${formatOdds(odds.odds_b)}</span>
+      ${oddsSpanHtml(odds.odds_b, !aFav, 'fc-odds-num')}
     </div>` : '';
 
     return `
