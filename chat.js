@@ -274,6 +274,20 @@ function initWidget() {
       transform: translateY(0) scale(1);
     }
 
+    /* Mobile: the 60px fixed bottom nav bar sits at z-index 1100 — this
+       launcher's z-index 9998 with a plain bottom:28px put it visually
+       on top of the bar's last tab instead of above it. Push both the
+       launcher and the panel clear of the bar, and let the panel use
+       the actual viewport width instead of a fixed 340px that could
+       clip or crowd a narrow phone screen. */
+    @media (max-width: 768px) {
+      #lw-btn { bottom: 76px; right: 14px; }
+      #lw-window {
+        bottom: 140px; right: 14px; left: 14px;
+        width: auto; max-width: none; height: min(480px, 60vh);
+      }
+    }
+
     #lw-header {
       background: #141414;
       border-bottom: 1px solid rgba(255,255,255,0.06);

@@ -7183,6 +7183,10 @@ body.light-mode .ev-hype-badge { color: rgba(140,80,0,0.85); background: rgba(20
   /* hide outer odds cols on ≤640px — they go into the fighter info instead */
   .fc-matchup.fc-matchup-odds .fc-odds-col { display: none; }
   .fc-odds-inline { display: inline; }
+  /* Record + odds + Profile link were cramming onto one run-on line —
+     force Profile onto its own row under record/odds, both sides,
+     regardless of DOM order (mirrored on side B). */
+  .fc-fighter-link { flex-basis: 100%; order: 5; margin-top: 2px; }
   .fc-name { font-size: 1rem; line-height: 1.1; word-break: break-word; overflow-wrap: break-word; }
   .fc-card.fc-maincrd .fc-name { font-size: 1.15rem; }
   .fc-card.fc-main .fc-name { font-size: 1.35rem; }
