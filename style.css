@@ -1,3 +1,12 @@
+/* Cross-page navigation cross-fade (View Transitions API, Chrome/Edge —
+   silently ignored elsewhere, no fallback needed). Site is a stack of
+   plain multi-page HTML with no SPA router, so every link click was a
+   hard white/black flash reload; this alone smooths every same-origin
+   navigation sitewide with zero per-page JS. */
+@view-transition {
+  navigation: auto;
+}
+
 /* ── Reusable CTA chevron — replaces bare "→" unicode characters that
    were baked directly into ~30 button/link labels sitewide ("Let's Go
    →", "Sign In →", "Pick Now →", etc). Uses CSS masking (shape from the
@@ -5098,7 +5107,11 @@ body.light-mode .ev-reminder-banner-link { color: #e06b1a !important; }
 .ev-card-wrap .event-card:hover,
 .ev-card-wrap .ev-card:hover {
   transform: perspective(900px) rotateX(2.5deg) translateY(-3px) scale(1.01);
-  box-shadow: 0 14px 40px rgba(0,0,0,0.35);
+  /* --ev-ambient is set per-card from the poster's own dominant color
+     (poster-accent.js) once sampling resolves; falls back to the
+     original fixed black shadow until then / if sampling is unavailable
+     (e.g. the poster CDN doesn't allow cross-origin canvas reads). */
+  box-shadow: 0 14px 40px var(--ev-ambient, rgba(0,0,0,0.35));
 }
 
 /* ── Star button ── */

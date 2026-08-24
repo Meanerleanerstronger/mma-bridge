@@ -331,9 +331,17 @@
     }
     .ev-overlay.open .ov-panel { opacity:1;transform:scale(1) translateY(0); }
 
+    /* Card → overlay poster morph (View Transitions API). Default browser
+       duration (250ms) reads as a snap; slowed + eased to feel like a
+       deliberate motion instead. No-op in browsers without support. */
+    ::view-transition-group(ev-shared-poster) {
+      animation-duration: 420ms;
+      animation-timing-function: cubic-bezier(0.22,1,0.36,1);
+    }
+
     /* ── HERO ── */
-    .ov-hero { position:relative;height:46vh;min-height:280px;max-height:460px;flex-shrink:0;overflow:hidden; }
-    .ov-poster { position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block; }
+    .ov-hero { position:relative;height:46vh;min-height:280px;max-height:460px;flex-shrink:0;overflow:hidden;perspective:900px; }
+    .ov-poster { position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block;transition:transform .15s ease-out; }
     .ov-poster-gradient {
       position:absolute;inset:0;
       background:
@@ -1446,6 +1454,19 @@
       return `LOCKS IN ${h}h ${m}m`;
     }
 
+    // Tints a card's hover glow with its own poster's dominant color instead
+    // of the fixed orange every card uses by default (still the fallback —
+    // see the CSS var default in style.css — so this is purely additive; a
+    // CORS-blocked poster or slow/failed sample just leaves the default).
+    function applyPosterAccent(ev){
+      if (!ev.poster || !window.getPosterAccentColor) return;
+      window.getPosterAccentColor(ev.poster).then(color => {
+        if (!color) return;
+        const card = document.querySelector(`.ev-card[data-event-id="${CSS.escape(ev.id)}"]`);
+        if (card) card.style.setProperty('--ev-ambient', `rgba(${color},0.4)`);
+      });
+    }
+
     function buildCard(ev){
       const isPPV=ev.type==='PPV', cls=isPPV?'ppv':'fn';
       const main=getMainFight(ev); if(!main) return null;
@@ -1650,7 +1671,29 @@
     let _overlayOpen=false;       // tracks whether overlay UI is open
     let _overlayHistoryPushed=false; // true when we pushed a state (vs deep-link replace)
 
+    // Thin wrapper: morphs the clicked card's poster into the overlay hero
+    // via the View Transitions API when available (Chrome/Edge; silently
+    // falls back to the old instant-swap everywhere else, including when
+    // the user has prefers-reduced-motion on). Tags the source card's
+    // poster and the freshly-built hero poster with the same
+    // view-transition-name so the browser cross-fades + morphs position/
+    // size between them automatically — no manual animation needed.
     function openOverlay(ev, _skipHistory){
+      const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (document.startViewTransition && !reduceMotion) {
+        const srcPoster = ev.id ? document.querySelector(`.ev-card[data-event-id="${CSS.escape(ev.id)}"] .ev-card-poster`) : null;
+        if (srcPoster) srcPoster.style.viewTransitionName = 'ev-shared-poster';
+        const t = document.startViewTransition(() => {
+          _openOverlayInner(ev, _skipHistory);
+          if (srcPoster) srcPoster.style.viewTransitionName = '';
+        });
+        t.finished.catch(()=>{}).finally(() => { if (srcPoster) srcPoster.style.viewTransitionName = ''; });
+        return;
+      }
+      _openOverlayInner(ev, _skipHistory);
+    }
+
+    function _openOverlayInner(ev, _skipHistory){
       currentEvent=ev;
       _overlayOpen=true;
       if (ev.name) document.title = ev.name + ' | MMA Bridge';
@@ -1689,6 +1732,7 @@
       if(ev.poster){
         const img=document.createElement('img');
         img.className='ov-poster'; img.src=ev.poster; img.alt=ev.name||'';
+        img.style.viewTransitionName='ev-shared-poster';
         img.onerror=()=>{ img.remove(); placeholder.style.display='flex'; };
         img.onload=()=>{ placeholder.style.display='none'; };
         placeholder.style.display='none';
@@ -2029,7 +2073,22 @@
       if (window.MMALive) window.MMALive.stop();
     }
     function closeOverlay(){
-      _closeOverlayUI();
+      const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (document.startViewTransition && !reduceMotion && currentEvent) {
+        const destPoster = document.querySelector(`.ev-card[data-event-id="${CSS.escape(currentEvent.id)}"] .ev-card-poster`);
+        const heroPoster = overlay.querySelector('.ov-poster');
+        if (heroPoster) heroPoster.style.viewTransitionName = 'ev-shared-poster';
+        const t = document.startViewTransition(() => {
+          _closeOverlayUI();
+          if (destPoster) destPoster.style.viewTransitionName = 'ev-shared-poster';
+        });
+        t.finished.catch(()=>{}).finally(() => {
+          if (heroPoster) heroPoster.style.viewTransitionName = '';
+          if (destPoster) destPoster.style.viewTransitionName = '';
+        });
+      } else {
+        _closeOverlayUI();
+      }
       if (_overlayHistoryPushed) {
         _overlayHistoryPushed = false;
         history.back(); // popstate will fire but _overlayOpen is false so no double-close
@@ -2060,6 +2119,38 @@
     document.addEventListener('click',function(){
       document.getElementById('ovCalDrop').classList.remove('open');
     });
+
+    /* Overlay hero poster — subtle mouse-parallax tilt, desktop pointer
+       devices only. Tilts just the poster image (not the title/buttons
+       layered on top of it), capped small (max 3deg) to read as depth
+       rather than a gimmick. #ovHero itself is static across opens — only
+       its poster child gets swapped per event — so one listener covers
+       every event, just re-queries the current poster each move. */
+    (function(){
+      const heroEl = document.getElementById('ovHero');
+      if (!heroEl) return;
+      if (!matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      let raf = null, pendingX = 0, pendingY = 0;
+      function apply(){
+        raf = null;
+        const poster = heroEl.querySelector('.ov-poster');
+        if (!poster) return;
+        poster.style.transform = `scale(1.04) rotateX(${pendingY}deg) rotateY(${pendingX}deg)`;
+      }
+      heroEl.addEventListener('mousemove', e => {
+        const r = heroEl.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        pendingX = +(px * 3).toFixed(2);
+        pendingY = +(py * -3).toFixed(2);
+        if (!raf) raf = requestAnimationFrame(apply);
+      });
+      heroEl.addEventListener('mouseleave', () => {
+        const poster = heroEl.querySelector('.ov-poster');
+        if (poster) poster.style.transform = '';
+      });
+    })();
 
     document.addEventListener('keydown',e=>{
       if(e.key==='Escape'){
@@ -2159,7 +2250,7 @@
         const upcoming=all.filter(e=>e.status==='upcoming').sort((a,b)=>new Date(a.isoDate)-new Date(b.isoDate));
         const list=document.getElementById('listAll');
         list.innerHTML='';
-        upcoming.forEach(e=>{ const c=buildCard(e); if(c) list.appendChild(c); });
+        upcoming.forEach(e=>{ const c=buildCard(e); if(c){ list.appendChild(c); applyPosterAccent(e); } });
         document.getElementById('evCount').textContent=`${upcoming.length} event${upcoming.length!==1?'s':''}`;
 
         if (!_eventsLoaded) {
@@ -2442,6 +2533,7 @@
   <script src="search.js"></script>
   <script src="countdown.js?v=1.0"></script>
   <script src="fight-position-tags.js?v=1.0"></script>
+  <script src="poster-accent.js?v=1.0"></script>
   <script src="live.js?v=1.0"></script>
   <script src="chat.js?v=2.5"></script>
 <script src="lucas-moments.js?v=1.3"></script>
