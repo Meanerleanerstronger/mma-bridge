@@ -484,6 +484,27 @@ function fightAlreadyExists(ourEv, nameA, nameB) {
   return false;
 }
 
+// Find a fight already flagged cancelled that matches this exact pairing —
+// i.e. ESPN flapped, we cancelled it after 2 missed runs, and it's now
+// back with the SAME two fighters (not a replacement). fightAlreadyExists()
+// deliberately ignores cancelled fights so a genuine replacement can be
+// added, but nothing ever un-cancels the stale entry when it's not a
+// replacement at all — just the same fight reappearing. That produced a
+// real duplicate bug: a cancelled copy sitting forever next to a fresh
+// "new fight" copy of the identical pairing (Lawrence Lui vs. Hector
+// Santiago, Xiao Long vs. Francesco Nuzzi — both on the same card).
+function findCancelledMatch(ourEv, nameA, nameB) {
+  for (const section of ['mainCard', 'prelims', 'earlyPrelims']) {
+    for (const f of (ourEv[section] || [])) {
+      if (!f.cancelled) continue;
+      const aHit = namesMatch(f.a, nameA) || namesMatch(f.a, nameB);
+      const bHit = namesMatch(f.b, nameA) || namesMatch(f.b, nameB);
+      if (aHit && bHit) return f;
+    }
+  }
+  return null;
+}
+
 // ── Main ──────────────────────────────────────────────────────────────────────
 
 async function main() {
@@ -732,6 +753,18 @@ async function main() {
         const b = sorted[1]?.athlete?.displayName || '';
         if (!a || !b) return;
         if (fightAlreadyExists(ourEv, a, b)) return; // skips cancelled, so replacements get added
+
+        // Same pairing came back after being wrongly flagged cancelled (ESPN
+        // flapping, not an actual pull-out) — un-cancel and refresh the
+        // existing entry in place instead of adding a duplicate.
+        const revived = findCancelledMatch(ourEv, a, b);
+        if (revived) {
+          delete revived.cancelled;
+          delete revived._espnMissStreak;
+          console.log(`  ↺ Fight back on card, un-cancelling: ${a} vs ${b}`);
+          added++;
+          return;
+        }
 
         // Assign to section based on ESPN position
         const section = idx < mc ? 'mainCard' : idx < mc + pc ? 'prelims' : 'earlyPrelims';
