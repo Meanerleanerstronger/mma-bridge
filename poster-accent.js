@@ -6,16 +6,21 @@
  * ambient glows per-event instead of one fixed orange for every card,
  * the way Spotify/Apple Music derive a now-playing color from cover art.
  *
- * Depends on the poster CDN sending CORS headers permissive enough for
- * canvas reads (crossOrigin="anonymous" + Access-Control-Allow-Origin).
- * If it doesn't, getImageData() throws (tainted canvas) — caught and
- * cached as null so every caller just falls back to its default color,
- * silently, forever (no retry storm, no visible error).
+ * Neither poster CDN (ufc.com, dmxg5wxfqgb4u.cloudfront.net) sends CORS
+ * headers permissive enough for a plain crossOrigin="anonymous" canvas
+ * read — verified live: the image load itself fails outright, not just
+ * the canvas step. Routed through the backend's existing image proxy
+ * (/api/image-proxy, already used for poster downloads) instead, which
+ * sets Access-Control-Allow-Origin: * on its response. That proxy only
+ * allow-lists the cloudfront host though, so a ufc.com-hosted poster
+ * still resolves null — caught and cached, same silent permanent
+ * fallback as a real CORS failure would produce.
  */
 (function () {
   'use strict';
 
   const cache = new Map(); // poster URL -> "r,g,b" string | null
+  const PROXY = 'https://mmabridge-backend.onrender.com/api/image-proxy?url=';
 
   function sampleColor(url) {
     return new Promise((resolve) => {
@@ -44,7 +49,7 @@
         }
       };
       img.onerror = () => resolve(null);
-      img.src = url;
+      img.src = PROXY + encodeURIComponent(url);
     });
   }
 
