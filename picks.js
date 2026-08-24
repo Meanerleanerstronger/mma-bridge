@@ -1211,6 +1211,9 @@ function oddsSpanHtml(val, isFav, numClass) {
 
     // VS center column — just VS + result method, comm % moved to fighter sides
     let vsColHtml = `<span class="fc-vs">VS</span>`;
+    if (!fightDone && !isCompleted && !isLocked && !hasPick) {
+      vsColHtml += `<span class="fc-pick-hint">TAP TO<br>PICK</span>`;
+    }
     if (fightDone && winner) {
       let methodStr = f.method ? f.method.toUpperCase() : '';
       if (methodStr === 'KO' || methodStr === 'TKO' || methodStr.startsWith('KO ') || methodStr.startsWith('TKO')) methodStr = 'KO/TKO';
@@ -2223,9 +2226,12 @@ function oddsSpanHtml(val, isFav, numClass) {
     });
   }
 
-  // ── Fighter hover card (desktop only) ────────
+  // ── Fighter stats preview — hover on desktop, tap "Profile ›" on
+  // touch (no hover support means no other way to see a fighter's record
+  // /recent fights without leaving the page — a real user hit exactly
+  // that wall and had to be told to go to a competitor over it) ───────
   function bindHoverCards() {
-    if (!window.matchMedia('(hover: hover)').matches) return;
+    const hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
     let hc = document.getElementById('fc-hov');
     if (!hc) {
@@ -2235,8 +2241,8 @@ function oddsSpanHtml(val, isFav, numClass) {
       document.body.appendChild(hc);
     }
 
-    let hideT, showT;
-    const hide = () => hc.classList.remove('fc-hov-on');
+    let hideT, showT, openFor = null;
+    const hide = () => { hc.classList.remove('fc-hov-on'); openFor = null; };
 
     const show = side => {
       const fd = lookupFighter(side.dataset.pick);
@@ -2255,10 +2261,11 @@ function oddsSpanHtml(val, isFav, numClass) {
       hc.innerHTML =
         `<div class="fc-hov-name">${esc(fd.name)}</div>` +
         (rec ? `<div class="fc-hov-rec">${rec}</div>` : '') +
-        (rows ? `<div class="fc-hov-fights">${rows}</div>` : '') +
-        (fd.name ? `<a class="fc-hov-link" href="fighter.html?name=${encodeURIComponent(fd.name)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Open Profile</a>` : '');
+        (rows ? `<div class="fc-hov-fights">${rows}</div>` : '<div class="fc-hov-empty">No recent fight history on file.</div>') +
+        (fd.name ? `<a class="fc-hov-link" href="fighter.html?name=${encodeURIComponent(fd.name)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">View Full Profile ›</a>` : '');
 
       hc.classList.add('fc-hov-on');
+      openFor = side;
 
       // Position above the element, fall back to below
       const r = side.getBoundingClientRect();
@@ -2273,11 +2280,34 @@ function oddsSpanHtml(val, isFav, numClass) {
 
     root.querySelectorAll('.sb-side[data-pick]').forEach(side => {
       if (!lookupFighter(side.dataset.pick)) return;
-      side.addEventListener('mouseenter', () => { clearTimeout(hideT); showT = setTimeout(() => show(side), 220); });
-      side.addEventListener('mouseleave', () => { clearTimeout(showT); hideT = setTimeout(hide, 140); });
+      if (hasHover) {
+        side.addEventListener('mouseenter', () => { clearTimeout(hideT); showT = setTimeout(() => show(side), 220); });
+        side.addEventListener('mouseleave', () => { clearTimeout(showT); hideT = setTimeout(hide, 140); });
+      }
+      // Tap the small "Profile" link to preview stats inline instead of
+      // jumping straight to another page — works with or without hover.
+      const link = side.querySelector('.fc-fighter-link');
+      if (link) {
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (openFor === side) { hide(); return; }
+          show(side);
+        });
+      }
     });
+    hc.addEventListener('click', e => e.stopPropagation());
     hc.addEventListener('mouseenter', () => clearTimeout(hideT));
     hc.addEventListener('mouseleave', () => { hideT = setTimeout(hide, 140); });
+    // render() calls bindHoverCards() on every re-render — guard the
+    // document-level listener so it's only ever attached once.
+    if (!document.body.dataset.fcHovDocBound) {
+      document.body.dataset.fcHovDocBound = '1';
+      document.addEventListener('click', () => {
+        const openHc = document.getElementById('fc-hov');
+        if (openHc) openHc.classList.remove('fc-hov-on');
+      });
+    }
   }
 
   // ── Bind hype drag bar ────────────────────────

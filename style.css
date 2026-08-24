@@ -5966,6 +5966,16 @@ body.light-mode .fc-head:hover .fc-head-h2h { border-color: rgba(224,107,26,0.55
   color: rgba(224,107,26,0.35); text-align: center;
 }
 .fc-result-method { display: none; }
+/* Explicit "this is how you pick" affordance — the card previously gave
+   zero visual signal that tapping a fighter's photo registers a pick;
+   fades once either side is selected (has-pick class on the card). */
+.fc-pick-hint {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800; font-size: 0.52rem; letter-spacing: 0.1em;
+  color: rgba(255,138,61,0.55); text-align: center;
+  line-height: 1.35; margin-top: 4px;
+}
+.fc-card.has-pick .fc-pick-hint { display: none; }
 
 .fc-result-verdict {
   display: flex; flex-direction: column; align-items: center;
@@ -8835,6 +8845,10 @@ body.light-mode .lb-group-code-label { color: rgba(0,0,0,0.4); }
   padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.07);
 }
 .fc-hov-fights { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+.fc-hov-empty {
+  font-family: 'Inter', sans-serif; font-size: 0.72rem;
+  color: rgba(255,255,255,0.3); margin-bottom: 12px;
+}
 .fc-hov-row { display: flex; align-items: center; gap: 8px; }
 .fc-hov-res {
   width: 22px; height: 22px; flex-shrink: 0;
@@ -13163,6 +13177,14 @@ body.light-mode .pk-poster-bg::after {
   transition: none !important;
 }
 .fc-fighter:hover { background: transparent !important; }
+/* Desktop-only "this is clickable" cue — the card had no hover affordance
+   at all before, just a flat photo that gave no signal it did anything. */
+@media (hover: hover) and (pointer: fine) {
+  .fc-fighter:not(.selected):not(.fc-other):not(.result-win):not(.result-loss):hover .fc-photo img {
+    filter: brightness(1.12) !important;
+    transform: scale(1.035) !important;
+  }
+}
 .fc-fighter-b {
   flex-direction: column !important;
   align-items: flex-end !important;
