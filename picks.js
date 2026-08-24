@@ -1299,21 +1299,16 @@ function formatOdds(n) {
     // standard-sized card. Main Event/Co-Main aren't gated — those come
     // from f.slot at fixed low indices that don't shift as fights are added.
     const cardIsFinal = event.status === 'completed';
+    const posTagKind = isMainCard ? 'mainCard' : sectionKey === 'prelims' ? 'prelims' : 'other';
     const cards = fights.map((f, i) => {
       // Skip unannounced-opponent placeholders — index i is preserved (not
       // filtered out of the array) so pick keys for other fights don't shift.
       if (!isConfirmedFight(f)) return '';
       const isMain   = f.slot === 'main';
       const isComain = f.slot === 'comain';
-      const isLast   = i === fights.length - 1;
-      let posTag = '';
-      if (isMainCard && (cardIsFinal || fights.length >= 5)) {
-        if (isLast && fights.length > 2) posTag = 'Main Card Opener';
-        else if (i === 2 && fights.length > 3) posTag = 'Feature Bout';
-      } else if (sectionKey === 'prelims' && (cardIsFinal || fights.length >= 4)) {
-        if (i === 0) posTag = 'Featured Prelim';
-        else if (isLast && fights.length > 1) posTag = 'Prelim Opener';
-      }
+      const posTag = window.computeFightPosTag
+        ? window.computeFightPosTag(posTagKind, fights, i, cardIsFinal)
+        : '';
       return buildFight(f, sectionKey, i, isMain, isMainCard, isComain, posTag);
     }).join('');
     return `
