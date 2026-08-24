@@ -1110,6 +1110,16 @@
         <button class="admin-tab" data-tab="analytics">Analytics</button>
       </div>
 
+      <!-- Test email utility — the only way to confirm RESEND_API_KEY is
+           actually working right now, instead of waiting up to 4h for the
+           next scheduled pick/review reminder run to fire. -->
+      <div style="display:flex;gap:8px;align-items:center;margin:0 0 18px;padding:12px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;">
+        <span style="font-size:0.8rem;color:rgba(255,255,255,0.5);white-space:nowrap;">Test email service</span>
+        <input type="email" id="test-email-to" placeholder="you@example.com" style="flex:1;max-width:280px;padding:6px 10px;background:#111;border:1px solid rgba(255,255,255,0.15);border-radius:6px;color:#fff;font-size:0.82rem;">
+        <button id="btn-test-email" style="padding:6px 14px;background:#ff8a3d;color:#000;border:none;border-radius:6px;font-weight:700;font-size:0.78rem;cursor:pointer;">Send Test</button>
+        <span id="test-email-status" style="font-size:0.78rem;color:rgba(255,255,255,0.5);"></span>
+      </div>
+
       <!-- Tab: Events -->
       <div id="tab-events" class="admin-tab-content active">
         <div id="events-container">
@@ -1401,6 +1411,32 @@
       $('btn-login').addEventListener('click', doLogin);
       $('admin-pw').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
       $('btn-logout').addEventListener('click', doLogout);
+
+      $('btn-test-email')?.addEventListener('click', async () => {
+        const to = $('test-email-to').value.trim();
+        const statusEl = $('test-email-status');
+        if (!to) { statusEl.textContent = 'Enter an email first'; statusEl.style.color = '#e55'; return; }
+        statusEl.textContent = 'Sending…';
+        statusEl.style.color = 'rgba(255,255,255,0.5)';
+        try {
+          const res = await fetch(`${API_BASE}/api/admin/test-email`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token: token(), to }),
+          });
+          const data = await res.json();
+          if (res.ok && data.ok) {
+            statusEl.textContent = `Sent ✓ (${data.resend_id || ''})`;
+            statusEl.style.color = '#5c5';
+          } else {
+            statusEl.textContent = 'Failed: ' + (data.error || res.status);
+            statusEl.style.color = '#e55';
+          }
+        } catch (e) {
+          statusEl.textContent = 'Failed: ' + e.message;
+          statusEl.style.color = '#e55';
+        }
+      });
 
       // ── Tab switching ─────────────────────────────────────
       document.querySelectorAll('.admin-tab').forEach(tab => {
