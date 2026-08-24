@@ -5558,6 +5558,45 @@ body.light-mode #pk-poster-bg.loaded { opacity: 0.12; }
   80%     { transform: translateX(4px); }
 }
 
+/* ── Hype card — was a thin single-line bar (0.7rem faint label, 6px
+   track), easy to scroll straight past. Now a real card with its own
+   header/subcopy since rating hype is a required step before the first
+   pick, not an optional footnote — it needs to look like the thing you're
+   supposed to do, not something you'd only notice if already looking. */
+.pk-hype-card {
+  margin: 0 20px 16px; padding: 16px 18px 18px;
+  border-radius: 12px; background: rgba(255,138,61,0.04);
+  border: 1px solid rgba(255,138,61,0.16);
+}
+.pk-hype-card-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  margin-bottom: 6px;
+}
+.pk-hype-card-eyebrow {
+  font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.68rem;
+  letter-spacing: 0.08em; text-transform: uppercase; color: #ff8a3d;
+}
+.pk-hype-card-count { color: rgba(255,255,255,0.3); font-weight: 600; font-size: 0.72rem; }
+.pk-hype-card-sub {
+  font-family: 'Inter', sans-serif; font-size: 0.78rem; line-height: 1.5;
+  color: rgba(255,255,255,0.45); margin-bottom: 14px;
+}
+.pk-hype-card-track-row { display: flex; align-items: center; gap: 12px; }
+body.light-mode .pk-hype-card { background: rgba(224,107,26,0.04); border-color: rgba(224,107,26,0.18); }
+body.light-mode .pk-hype-card-eyebrow { color: #b8611e; }
+body.light-mode .pk-hype-card-sub { color: rgba(0,0,0,0.45); }
+body.light-mode .pk-hype-card-count { color: rgba(0,0,0,0.3); }
+
+/* Attention pulse — fired when a pick is blocked for not having rated hype
+   yet, right as the page scrolls back up to this card, so the thing you
+   were just sent to do is unmistakable rather than a static scroll target. */
+@keyframes pkHypeAttn {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,138,61,0); border-color: rgba(255,138,61,0.16); }
+  15%, 45% { box-shadow: 0 0 0 4px rgba(255,138,61,0.25); border-color: rgba(255,138,61,0.6); }
+  30%      { box-shadow: 0 0 0 2px rgba(255,138,61,0.15); border-color: rgba(255,138,61,0.4); }
+}
+.pk-hype-card.pk-hype-attn { animation: pkHypeAttn 1.5s ease; }
+
 /* ── Section label ── */
 .fc-section {
   display: flex; flex-direction: column;

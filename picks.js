@@ -1909,19 +1909,29 @@ function formatOdds(n) {
     _pkCdStop = window.initCountdown ? window.initCountdown(el, event.start_time) : null;
   }
 
-  // ── Hype meter — horizontal amber drag bar ──
+  // ── Hype meter — was a thin, easy-to-skip inline bar with a faint 0.7rem
+  // label; now a full card with its own eyebrow + encouraging line, since
+  // picking a fighter without having rated hype first now blocks with a
+  // prompt that scrolls back to this exact widget (see bindInteractions) —
+  // it needs to actually look like the thing you're being sent to do.
   function hypeMeterHtml() {
     if (isCompleted || isLocked) return '';
     const pct = localHype ? ((localHype - 1) / 9) * 100 : 0;
     const label = localHype ? (HYPE_LABELS[localHype] || '') : 'Rate this event';
     return `
-      <div class="pk-hype-slim" id="pkHypeWidget">
-        <span class="pk-hype-slim-label" id="pkHypeLabel">${label}</span>
-        <div class="pk-hype-slim-track" id="pkHypeTrack">
-          <div class="pk-hype-slim-fill" id="pkHypeFill" style="width:${pct}%" data-target-pct="${pct}"></div>
-          <div class="pk-hype-slim-thumb" id="pkHypeThumb" style="left:${pct}%;display:${pct > 0 ? 'block' : 'none'}"></div>
+      <div class="pk-hype-card" id="pkHypeWidget">
+        <div class="pk-hype-card-head">
+          <span class="pk-hype-card-eyebrow">Rate This Card${localHype ? '' : ' — Required Before Picking'}</span>
+          ${hypeCount > 0 ? `<span class="pk-hype-slim-avg" id="pkHypeAvgBadge">${hypeAvg.toFixed(1)}<span class="pk-hype-denom">/10</span><span class="pk-hype-card-count"> · ${hypeCount} rating${hypeCount !== 1 ? 's' : ''}</span></span>` : `<span class="pk-hype-slim-avg" id="pkHypeAvgBadge" style="opacity:0">—</span>`}
         </div>
-        ${hypeCount > 0 ? `<span class="pk-hype-slim-avg" id="pkHypeAvgBadge">${hypeAvg.toFixed(1)}<span class="pk-hype-denom">/10</span></span>` : `<span class="pk-hype-slim-avg" id="pkHypeAvgBadge" style="opacity:0">—</span>`}
+        <div class="pk-hype-card-sub">How hyped are you for this card? Drag to rate it before locking in your picks.</div>
+        <div class="pk-hype-card-track-row">
+          <span class="pk-hype-slim-label" id="pkHypeLabel">${label}</span>
+          <div class="pk-hype-slim-track" id="pkHypeTrack">
+            <div class="pk-hype-slim-fill" id="pkHypeFill" style="width:${pct}%" data-target-pct="${pct}"></div>
+            <div class="pk-hype-slim-thumb" id="pkHypeThumb" style="left:${pct}%;display:${pct > 0 ? 'block' : 'none'}"></div>
+          </div>
+        </div>
       </div>`;
   }
 
@@ -2456,6 +2466,22 @@ function formatOdds(n) {
           if (!myId) { showToast('Sign in to save picks', 'err'); return; }
 
           const wasSelected = side.classList.contains('selected');
+
+          // Hard requirement: rate the card's hype before the first pick.
+          // Deselecting an existing pick is always allowed — this only
+          // blocks making a NEW pick with no hype rating yet.
+          if (!wasSelected && !localHype) {
+            showToast('Rate this card\'s hype first', 'err');
+            const hypeEl = document.getElementById('pkHypeWidget');
+            if (hypeEl) {
+              hypeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              hypeEl.classList.remove('pk-hype-attn');
+              void hypeEl.offsetWidth;
+              hypeEl.classList.add('pk-hype-attn');
+              setTimeout(() => hypeEl.classList.remove('pk-hype-attn'), 1600);
+            }
+            return;
+          }
 
           // Dismiss any existing confirm on this fight
           if (wasSelected) {

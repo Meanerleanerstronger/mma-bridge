@@ -908,12 +908,35 @@
     .er-picks-link:hover { color: #ff8a3d; }
 
     /* ── FOTN vote reveal ── */
-    .er-fotn-vote-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .er-fotn-vote-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; padding: 4px 6px; border-radius: 6px; transition: background .2s; }
     .er-fotn-vote-rank { font-family: 'Montserrat', sans-serif; font-size: 0.58rem; font-weight: 800; color: rgba(255,255,255,0.22); width: 20px; flex-shrink: 0; }
     .er-fotn-vote-fight { font-family: 'Inter', sans-serif; font-size: 0.76rem; color: rgba(255,255,255,0.65); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .er-fotn-vote-bar-wrap { width: 70px; height: 4px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden; flex-shrink: 0; }
-    .er-fotn-vote-bar { height: 100%; background: linear-gradient(90deg, #ff8a3d, rgba(255,138,61,0.35)); border-radius: 4px; }
+    .er-fotn-vote-bar {
+      height: 100%; width: 0; background: linear-gradient(90deg, #ff8a3d, rgba(255,138,61,0.35)); border-radius: 4px;
+      animation: erFotnFill .7s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
+    @keyframes erFotnFill { from { width: 0; } to { width: var(--fotn-pct, 0%); } }
     .er-fotn-vote-pct { font-family: 'Montserrat', sans-serif; font-size: 0.66rem; font-weight: 700; color: rgba(255,255,255,0.3); width: 30px; text-align: right; flex-shrink: 0; }
+    /* Community-winner row — was visually identical to every other row
+       except sitting first; now unmistakably the pick, not just "#1 in a
+       flat list you have to read the rank number to notice." */
+    .er-fotn-vote-row.is-winner {
+      background: linear-gradient(90deg, rgba(255,138,61,0.1), rgba(255,138,61,0.02));
+      animation: erFotnWinnerIn .5s ease both;
+    }
+    @keyframes erFotnWinnerIn { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: translateX(0); } }
+    .er-fotn-vote-row.is-winner .er-fotn-vote-rank { color: #ff8a3d; }
+    .er-fotn-vote-row.is-winner .er-fotn-vote-fight { color: #fff; font-weight: 700; }
+    .er-fotn-vote-row.is-winner .er-fotn-vote-bar-wrap { height: 6px; box-shadow: 0 0 10px rgba(255,138,61,0.4); }
+    .er-fotn-vote-row.is-winner .er-fotn-vote-bar { background: linear-gradient(90deg, #ff8a3d, #ffb066); }
+    .er-fotn-vote-row.is-winner .er-fotn-vote-pct { color: #ff8a3d; font-size: 0.74rem; }
+    .er-fotn-winner-badge {
+      display: inline-block; margin-left: 6px; padding: 1px 6px; border-radius: 8px;
+      background: rgba(255,138,61,0.15); border: 1px solid rgba(255,138,61,0.35);
+      font-family: 'Montserrat', sans-serif; font-size: 0.5rem; font-weight: 800;
+      letter-spacing: 0.06em; text-transform: uppercase; color: #ff8a3d; flex-shrink: 0;
+    }
     .er-fotn-vote-total { font-family: 'Inter', sans-serif; font-size: 0.62rem; color: rgba(255,255,255,0.18); margin-top: 6px; }
 
     /* ── Share on X ── */

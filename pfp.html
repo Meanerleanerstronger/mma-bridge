@@ -268,8 +268,19 @@
       color: rgba(255,255,255,0.13);
       width: 30px; flex-shrink: 0; text-align: center;
       transition: color 0.2s;
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
     }
     .pfp-row:hover .pfp-row-num { color: rgba(255,138,61,0.6); }
+    /* Rank-change badge — fighters.json's ranking_change field existed but
+       was never actually rendered anywhere on the site. */
+    .pfp-rank-delta {
+      font-family: 'Inter', sans-serif; font-size: 0.52rem; font-weight: 800;
+      line-height: 1; letter-spacing: -0.01em;
+    }
+    .pfp-rank-delta.up   { color: #00d68f; }
+    .pfp-rank-delta.down { color: #ff4d4d; }
+    body.light-mode .pfp-rank-delta.up   { color: #00a877; }
+    body.light-mode .pfp-rank-delta.down { color: #e03a3a; }
 
     .pfp-row-photo {
       width: 54px; height: 54px;
@@ -769,7 +780,7 @@
       <!-- Left column: #2–8 -->
       <div>
         <div class="pfp-row" data-fighter="alexander-volkanovski">
-          <div class="pfp-row-num">2</div>
+          <div class="pfp-row-num">2<span class="pfp-rank-delta down">▼1</span></div>
           <div class="pfp-row-photo" style="background-image:url('https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/VOLKANOVSKI_ALEXANDER_L_BELT_01-31.png');"></div>
           <div class="pfp-row-info">
             <div class="pfp-row-name">Alexander Volkanovski</div>
@@ -789,7 +800,7 @@
         </div>
 
         <div class="pfp-row" data-fighter="justin-gaethje">
-          <div class="pfp-row-num">4</div>
+          <div class="pfp-row-num">4<span class="pfp-rank-delta up">▲1</span></div>
           <div class="pfp-row-photo" style="background-image:url('https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/GAETHJE_JUSTIN_L_BELTMOCK.png');"></div>
           <div class="pfp-row-info">
             <div class="pfp-row-name">Justin Gaethje</div>
@@ -842,7 +853,7 @@
       <!-- Right column: #9–15 -->
       <div>
         <div class="pfp-row" data-fighter="merab-dvalishvili">
-          <div class="pfp-row-num">9</div>
+          <div class="pfp-row-num">9<span class="pfp-rank-delta up">▲1</span></div>
           <div class="pfp-row-photo" style="background-image:url('https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2022-08/DVALISHVILI_MERAB_L_08-20.png');"></div>
           <div class="pfp-row-info">
             <div class="pfp-row-name">Merab Dvalishvili</div>
@@ -862,7 +873,7 @@
         </div>
 
         <div class="pfp-row" data-fighter="khamzat-chimaev">
-          <div class="pfp-row-num">11</div>
+          <div class="pfp-row-num">11<span class="pfp-rank-delta up">▲1</span></div>
           <div class="pfp-row-photo" style="background-image:url('https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/CHIMAEV_KHAMZAT_L_BELTMOCK.png');"></div>
           <div class="pfp-row-info">
             <div class="pfp-row-name">Khamzat Chimaev</div>
@@ -902,7 +913,7 @@
         </div>
 
         <div class="pfp-row" data-fighter="arman-tsarukyan">
-          <div class="pfp-row-num">15</div>
+          <div class="pfp-row-num">15<span class="pfp-rank-delta up">▲1</span></div>
           <div class="pfp-row-photo" style="background-image:url('https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/TSARUKYAN_ARMAN_L_11-22.png');"></div>
           <div class="pfp-row-info">
             <div class="pfp-row-name">Arman Tsarukyan</div>

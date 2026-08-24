@@ -839,10 +839,10 @@ function renderPage(ev, community, extra = {}) {
       <div class="er-card-title">FOTN Predictions — Community Vote</div>
       <div class="er-fotn-votes">
         ${fotnVotes.votes.map((v, i) => `
-          <div class="er-fotn-vote-row">
+          <div class="er-fotn-vote-row${i === 0 ? ' is-winner' : ''}">
             <div class="er-fotn-vote-rank">#${i + 1}</div>
-            <div class="er-fotn-vote-fight">${esc(v.fight)}</div>
-            <div class="er-fotn-vote-bar-wrap"><div class="er-fotn-vote-bar" style="width:${v.pct}%"></div></div>
+            <div class="er-fotn-vote-fight">${esc(v.fight)}${i === 0 ? '<span class="er-fotn-winner-badge">Community Pick</span>' : ''}</div>
+            <div class="er-fotn-vote-bar-wrap"><div class="er-fotn-vote-bar" style="--fotn-pct:${v.pct}%;animation-delay:${i * 80}ms"></div></div>
             <div class="er-fotn-vote-pct">${v.pct}%</div>
           </div>`).join('')}
         <div class="er-fotn-vote-total">${fotnVotes.total} prediction${fotnVotes.total !== 1 ? 's' : ''} total</div>
