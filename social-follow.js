@@ -1,8 +1,7 @@
-// Site-wide "Follow us" bar — X / Instagram / LinkedIn only (no GitHub/YouTube,
-// this isn't a dev-tools site). Auto-appends one instance at the very bottom
-// of every page that loads this script, and fills in any in-page placeholder
-// (<div data-follow-us></div>) with a matching bar — used by about.html to
-// also show one near the top of the page.
+// Site-wide "Follow us" bar — X / Instagram / LinkedIn / TikTok. Auto-appends
+// one instance at the very bottom of every page that loads this script, and
+// fills in any in-page placeholder (<div data-follow-us></div>) with a
+// matching bar — used by about.html to also show one near the top of the page.
 (function () {
   const LINKS = [
     {
@@ -19,6 +18,11 @@
       name: 'LinkedIn',
       href: 'https://www.linkedin.com/company/mma-bridge/',
       svg: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>'
+    },
+    {
+      name: 'TikTok',
+      href: 'https://www.tiktok.com/@mma_bridge',
+      svg: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82c-1.007-.982-1.594-2.335-1.594-3.82h-3.05v14.36c0 1.647-1.334 2.982-2.98 2.982a2.982 2.982 0 0 1-2.982-2.982 2.982 2.982 0 0 1 2.982-2.98c.24 0 .47.03.69.087v-3.12a6.13 6.13 0 0 0-.69-.04A6.03 6.03 0 0 0 3 16.36a6.03 6.03 0 0 0 6.03 6.03 6.03 6.03 0 0 0 6.03-6.03v-7.3a7.9 7.9 0 0 0 4.61 1.48V7.5a4.85 4.85 0 0 1-3.07-1.68z"/></svg>'
     },
   ];
 
