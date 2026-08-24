@@ -725,7 +725,12 @@ function formatOdds(n) {
     // Sync bottom save CTA
     const bottomCount = document.getElementById('pkBottomSaveCount');
     const bottomBtn   = document.getElementById('pkBottomSaveBtn');
+    const bottomProgress = document.getElementById('pkBottomSaveProgress');
     const total = (event.mainCard||[]).length + (event.prelims||[]).length + (event.earlyPrelims||[]).length;
+    if (bottomProgress) {
+      bottomProgress.style.width = `${total ? Math.round(picked/total*100) : 0}%`;
+      bottomProgress.classList.toggle('complete', picked >= total && total > 0);
+    }
     if (bottomCount) {
       if (picked >= total && total > 0) {
         bottomCount.textContent = dirty ? `${picked} picks — unsaved` : `All ${picked} picks saved ✓`;
@@ -1528,7 +1533,7 @@ function formatOdds(n) {
     if (!isCompleted) return '';
     const { correct, total, totalPts, fotnPts } = computeScore();
     if (!myId) return `<div class="pk-score-hero pk-score-hero-anon"><div class="pk-score-hero-anon-title">Sign in to track your picks</div><a href="auth.html" class="pk-score-hero-anon-link icon-arrow">Sign In</a></div>`;
-    if (total === 0) return `<div class="pk-score-hero pk-score-hero-empty"><div class="pk-score-hero-empty-title">No picks recorded</div><div class="pk-score-hero-empty-sub">Make picks on upcoming events to track your accuracy</div></div>`;
+    if (total === 0) return `<div class="pk-score-hero pk-score-hero-empty"><div class="pk-score-hero-empty-title lb-empty-fade">No picks recorded</div><div class="pk-score-hero-empty-sub lb-empty-fade">Make picks on upcoming events to track your accuracy</div></div>`;
     const pct = Math.round((correct / total) * 100);
     const cls = pct >= 70 ? 'great' : pct >= 50 ? 'ok' : 'poor';
     const verdict = pct >= 70 ? 'Sharp' : pct >= 50 ? 'Solid' : 'Rough Night';
@@ -2057,6 +2062,7 @@ function formatOdds(n) {
         ${myId && !isCompleted && !isLocked ? `
         <div class="pk-bottom-save" id="pkBottomSave">
           <div class="pk-bottom-save-inner">
+            <div class="pk-bottom-save-progress" id="pkBottomSaveProgress" style="width:${total ? Math.round(picked/total*100) : 0}%"></div>
             <div class="pk-bottom-save-count" id="pkBottomSaveCount">${picked > 0 ? `${picked} of ${total} picks made` : `${total} fights to pick`}</div>
             <button class="pk-bottom-save-btn" id="pkBottomSaveBtn" type="button">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
