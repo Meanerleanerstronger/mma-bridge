@@ -5523,7 +5523,7 @@ body.light-mode #pk-poster-bg.loaded { opacity: 0.12; }
   font-family: 'Montserrat', sans-serif;
   font-size: 0.95rem; font-weight: 800;
   color: rgba(255,255,255,0.55); white-space: nowrap;
-  min-width: 118px;
+  min-width: 170px; flex-shrink: 0;
 }
 .pk-hype-slim-track {
   flex: 1; height: 22px; border-radius: 11px;
@@ -7198,7 +7198,7 @@ body.light-mode .ev-hype-badge { color: rgba(140,80,0,0.85); background: rgba(20
   .pk-card-rating { padding: 36px 20px 32px; }
   .pk-cr-num { font-size: 4.5rem; }
   /* Hype slider mobile — shrink label/thumb to avoid cramping */
-  .pk-hype-slim-label { min-width: 84px; font-size: 0.82rem; }
+  .pk-hype-slim-label { min-width: 110px; font-size: 0.82rem; }
   .pk-hype-slim-track { height: 20px; margin: 0 2px; }
   .pk-hype-slim-thumb { width: 32px; height: 32px; }
   .pk-hype-slim-avg { font-size: 1rem; }
