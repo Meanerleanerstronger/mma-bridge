@@ -5814,17 +5814,20 @@ body.light-mode .fc-head:hover .fc-head-h2h { border-color: rgba(224,107,26,0.55
   transition: color 0.15s; word-break: break-word;
   display: flex; align-items: center; gap: 5px;
 }
+/* Moved out of the fighter name (a real link there was silently eating
+   the "pick this fighter" click — nothing distinguished it from plain
+   text, so tapping the name opened fighter.html in a new tab instead of
+   picking). Lives in the sub-row now as a small, clearly-secondary link. */
 .fc-fighter-link {
-  color: inherit;
-  text-decoration: underline;
-  text-decoration-style: dotted;
-  text-decoration-color: rgba(255,138,61,0.25);
-  text-underline-offset: 3px;
-  transition: color 0.15s, text-decoration-color 0.15s;
+  font-family: 'Inter', sans-serif; font-size: 0.65rem; font-weight: 600;
+  color: rgba(255,138,61,0.75);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: color 0.15s;
 }
 .fc-fighter-link:hover {
   color: #ff8a3d;
-  text-decoration-color: rgba(255,138,61,0.65);
+  text-decoration: underline;
 }
 .fc-fighter.selected .fc-fighter-link:hover { color: rgba(255,138,61,0.7); }
 .fc-card.fc-maincrd .fc-name { font-size: 1.55rem; color: rgba(255,255,255,0.95); }
@@ -5844,13 +5847,6 @@ body.light-mode .fc-head:hover .fc-head-h2h { border-color: rgba(224,107,26,0.55
 .fc-record {
   font-family: 'Inter', sans-serif; font-size: 0.65rem; font-weight: 500;
   color: rgba(255,255,255,0.55); letter-spacing: 0.03em;
-  opacity: 0;
-  transition: opacity 0.18s 0s; /* instant hide when leaving name */
-}
-/* Only reveal after cursor sits on the name link for 1.5s */
-.fc-info:has(.fc-fighter-link:hover) .fc-record {
-  opacity: 1;
-  transition: opacity 0.18s 1.5s;
 }
 .fc-odds {
   font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
@@ -7216,6 +7212,7 @@ body.light-mode .ev-hype-badge { color: rgba(140,80,0,0.85); background: rgba(20
   .fc-card.fc-main .fc-name { font-size: 1.2rem; }
   .fc-odds-num { font-size: 0.75rem; }
   .fc-record { font-size: 0.58rem; }
+  .fc-fighter-link { font-size: 0.58rem; }
 }
 
 /* light mode */
@@ -13309,10 +13306,7 @@ body.light-mode .pk-poster-bg::after {
   color: #ff8a3d !important;
   text-shadow: 0 0 22px rgba(255,138,61,0.55), 0 2px 10px rgba(0,0,0,0.95) !important;
 }
-.fc-fighter-link {
-  text-decoration: none !important;
-}
-.fc-fighter-link:hover { color: #ff8a3d !important; }
+.fc-fighter-link:hover { text-decoration: underline !important; }
 
 /* Record: always show, subtle */
 .fc-record {

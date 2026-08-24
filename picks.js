@@ -1273,8 +1273,8 @@ function oddsSpanHtml(val, isFav, numClass) {
           <div class="${sideACls}" data-key="${esc(key)}" data-pick="${esc(f.a)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
             ${photoA}
             <div class="fc-info">
-              <div class="fc-name"><a class="fc-fighter-link" href="fighter.html?name=${encodeURIComponent(f.a)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${esc(f.a)}</a></div>
-              ${(recA || oddsTagA) ? `<div class="fc-sub-row">${recA ? `<span class="fc-record">${esc(recA)}</span>` : ''}${oddsTagA ? `<span class="fc-odds-inline">${oddsTagA}</span>` : ''}</div>` : ''}
+              <div class="fc-name">${esc(f.a)}</div>
+              <div class="fc-sub-row">${recA ? `<span class="fc-record">${esc(recA)}</span>` : ''}${oddsTagA ? `<span class="fc-odds-inline">${oddsTagA}</span>` : ''}<a class="fc-fighter-link" href="fighter.html?name=${encodeURIComponent(f.a)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Profile ›</a></div>
               ${commLabelA}
               ${groupLabelA}
               ${badgeA}
@@ -1286,8 +1286,8 @@ function oddsSpanHtml(val, isFav, numClass) {
           </div>
           <div class="${sideBCls}" data-key="${esc(key)}" data-pick="${esc(f.b)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
             <div class="fc-info fc-info-b">
-              <div class="fc-name"><a class="fc-fighter-link" href="fighter.html?name=${encodeURIComponent(f.b)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${esc(f.b)}</a></div>
-              ${(recB || oddsTagB) ? `<div class="fc-sub-row fc-sub-row-b">${oddsTagB ? `<span class="fc-odds-inline">${oddsTagB}</span>` : ''}${recB ? `<span class="fc-record">${esc(recB)}</span>` : ''}</div>` : ''}
+              <div class="fc-name">${esc(f.b)}</div>
+              <div class="fc-sub-row fc-sub-row-b"><a class="fc-fighter-link" href="fighter.html?name=${encodeURIComponent(f.b)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">‹ Profile</a>${oddsTagB ? `<span class="fc-odds-inline">${oddsTagB}</span>` : ''}${recB ? `<span class="fc-record">${esc(recB)}</span>` : ''}</div>
               ${commLabelB}
               ${groupLabelB}
               ${badgeB}
