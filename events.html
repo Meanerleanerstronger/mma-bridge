@@ -1432,6 +1432,20 @@
     /* ── BUILD EVENT LIST CARD ── */
     const SPECIAL_EVENTS = {};
 
+    // Shared by buildCard() (initial render) and the periodic refresh below —
+    // was two separate copies that only agreed by coincidence. Shows seconds
+    // once inside the last hour so the badge is actually accurate to the
+    // second there, not just "accurate to whatever minute the last render
+    // happened to land on."
+    function formatLockBadge(ms){
+      if(ms<3600000){
+        const m=Math.floor(ms/60000), s=Math.floor((ms%60000)/1000);
+        return `LOCKS IN ${m}m ${String(s).padStart(2,'0')}s`;
+      }
+      const h=Math.floor(ms/3600000), m=Math.floor((ms%3600000)/60000);
+      return `LOCKS IN ${h}h ${m}m`;
+    }
+
     function buildCard(ev){
       const isPPV=ev.type==='PPV', cls=isPPV?'ppv':'fn';
       const main=getMainFight(ev); if(!main) return null;
@@ -1445,8 +1459,7 @@
         const ms=new Date(ev.start_time)-Date.now();
         if(ms<=0){ lockBadge='PICKS LOCKED'; lockLocked=true; }
         else if(ms<48*3600000){
-          const h=Math.floor(ms/3600000), m=Math.floor((ms%3600000)/60000);
-          lockBadge=h>0?`LOCKS IN ${h}h ${m}m`:`LOCKS IN ${m}m`;
+          lockBadge=formatLockBadge(ms);
         }
       }
       const label=shortLabel(ev);
@@ -2221,7 +2234,11 @@
 
     loadEvents();
 
-    // Live-update lock countdown badges every 60s
+    // Live-update lock countdown badges every 1s — was 60s with no seconds
+    // shown at all, so a badge could sit reading a stale minute for up to a
+    // full minute right as picks were about to lock. formatLockBadge() is
+    // the same function buildCard() uses for the initial render, so the two
+    // can't drift out of sync with each other again.
     setInterval(() => {
       document.querySelectorAll('.ev-card[data-start-time]').forEach(card => {
         const st = card.dataset.startTime;
@@ -2237,17 +2254,16 @@
           badge.className = 'ev-lock-badge is-locked';
           badge.textContent = 'PICKS LOCKED';
         } else if (ms < 48 * 3600000) {
-          const h = Math.floor(ms / 3600000), m = Math.floor((ms % 3600000) / 60000);
           if (!badge) {
             badge = document.createElement('div');
             badge.setAttribute('data-lock-badge', '');
             card.querySelector('.ev-card-meta')?.prepend(badge);
           }
           badge.className = 'ev-lock-badge';
-          badge.textContent = h > 0 ? `LOCKS IN ${h}h ${m}m` : `LOCKS IN ${m}m`;
+          badge.textContent = formatLockBadge(ms);
         }
       });
-    }, 60000);
+    }, 1000);
 
 
     /* ── Mini Group Standings Widget ── */
