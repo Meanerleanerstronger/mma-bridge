@@ -1670,36 +1670,37 @@
     let _allEvents=[];            // populated by loadEvents so popstate can find events
     let _overlayOpen=false;       // tracks whether overlay UI is open
     let _overlayHistoryPushed=false; // true when we pushed a state (vs deep-link replace)
-    // The API rejects a second startViewTransition() while one is still
-    // running ("InvalidStateError: Transition was aborted") — a real risk
-    // here since open/close can fire in quick succession (fast clicking,
-    // or a deep-link auto-open landing right after a close). Track the
-    // in-flight one and just skip the transition wrapper (fall straight
-    // to the instant DOM update) rather than erroring, if another is busy.
-    let _ovTransitionBusy=false;
 
-    // Thin wrapper: morphs the clicked card's poster into the overlay hero
-    // via the View Transitions API when available (Chrome/Edge; silently
-    // falls back to the old instant-swap everywhere else, including when
-    // the user has prefers-reduced-motion on). Tags the source card's
-    // poster and the freshly-built hero poster with the same
-    // view-transition-name so the browser cross-fades + morphs position/
-    // size between them automatically — no manual animation needed.
+    // Poster morph: style.css opts the whole site into automatic view
+    // transitions on every navigation (`@view-transition { navigation:
+    // auto }`), and openOverlay/closeOverlay's history.pushState calls
+    // count as a navigation for that purpose — so the browser already
+    // wraps them in a transition on its own. Calling
+    // document.startViewTransition() manually here too raced that
+    // automatic one and threw "InvalidStateError: Transition was aborted"
+    // on essentially every open/close (caught live during testing).
+    // Tagging the source/destination poster with a matching
+    // view-transition-name is all that's needed — the automatic
+    // transition picks up the match and morphs it the same way a manual
+    // one would, no separate startViewTransition() call required.
+    //
+    // Card poster elements persist in the DOM forever once built (never
+    // removed, just visually covered by the overlay), so a name left on
+    // one from a previous open/close would collide with tagging a
+    // different card later — the transition name must be unique across
+    // the whole document at any moment. Clear any previous tag first.
+    function untagCardPosters(){
+      document.querySelectorAll('.ev-card-poster[style*="view-transition-name"]').forEach(el => {
+        el.style.viewTransitionName = '';
+      });
+    }
+
     function openOverlay(ev, _skipHistory){
       const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (document.startViewTransition && !reduceMotion && !_ovTransitionBusy) {
-        const srcPoster = ev.id ? document.querySelector(`.ev-card[data-event-id="${CSS.escape(ev.id)}"] .ev-card-poster`) : null;
+      if (!reduceMotion && ev.id) {
+        untagCardPosters();
+        const srcPoster = document.querySelector(`.ev-card[data-event-id="${CSS.escape(ev.id)}"] .ev-card-poster`);
         if (srcPoster) srcPoster.style.viewTransitionName = 'ev-shared-poster';
-        _ovTransitionBusy = true;
-        const t = document.startViewTransition(() => {
-          _openOverlayInner(ev, _skipHistory);
-          if (srcPoster) srcPoster.style.viewTransitionName = '';
-        });
-        t.finished.catch(()=>{}).finally(() => {
-          _ovTransitionBusy = false;
-          if (srcPoster) srcPoster.style.viewTransitionName = '';
-        });
-        return;
       }
       _openOverlayInner(ev, _skipHistory);
     }
@@ -2085,23 +2086,12 @@
     }
     function closeOverlay(){
       const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (document.startViewTransition && !reduceMotion && currentEvent && !_ovTransitionBusy) {
+      if (!reduceMotion && currentEvent) {
+        untagCardPosters();
         const destPoster = document.querySelector(`.ev-card[data-event-id="${CSS.escape(currentEvent.id)}"] .ev-card-poster`);
-        const heroPoster = overlay.querySelector('.ov-poster');
-        if (heroPoster) heroPoster.style.viewTransitionName = 'ev-shared-poster';
-        _ovTransitionBusy = true;
-        const t = document.startViewTransition(() => {
-          _closeOverlayUI();
-          if (destPoster) destPoster.style.viewTransitionName = 'ev-shared-poster';
-        });
-        t.finished.catch(()=>{}).finally(() => {
-          _ovTransitionBusy = false;
-          if (heroPoster) heroPoster.style.viewTransitionName = '';
-          if (destPoster) destPoster.style.viewTransitionName = '';
-        });
-      } else {
-        _closeOverlayUI();
+        if (destPoster) destPoster.style.viewTransitionName = 'ev-shared-poster';
       }
+      _closeOverlayUI();
       if (_overlayHistoryPushed) {
         _overlayHistoryPushed = false;
         history.back(); // popstate will fire but _overlayOpen is false so no double-close
