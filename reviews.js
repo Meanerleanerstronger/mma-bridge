@@ -321,6 +321,20 @@ function isUpcomingEvent(ev) {
 }
 
 // ── Load ──────────────────────────────────────
+// Skeleton shown instantly, before the events.json fetch resolves —
+// these rows previously just sat empty for however long the fetch took,
+// which reads as broken rather than loading on a cold cache/slow link.
+function skeletonCards(n) {
+  return Array(n).fill(0).map(() => `
+    <div class="rv-skel-card">
+      <div class="rv-skel-img"></div>
+      <div class="rv-skel-line"></div>
+      <div class="rv-skel-line short"></div>
+    </div>`).join('');
+}
+if (scrollPPV) scrollPPV.innerHTML = skeletonCards(4);
+if (scrollFN)  scrollFN.innerHTML  = skeletonCards(4);
+
 (async () => {
   try {
     const today = new Date().toISOString().slice(0, 10);

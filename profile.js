@@ -372,15 +372,15 @@
       <div class="pr-stats">
         <div class="pr-stats-inner">
           <div class="pr-stat">
-            <div class="pr-stat-num">${eventsPickedCount || '—'}</div>
+            <div class="pr-stat-num">${eventsPickedCount ? `<span data-count="${eventsPickedCount}">0</span>` : '—'}</div>
             <div class="pr-stat-lbl">Events Picked</div>
           </div>
           <div class="pr-stat">
-            <div class="pr-stat-num">${accuracy !== null ? accuracy + '%' : '—'}</div>
+            <div class="pr-stat-num">${accuracy !== null ? `<span data-count="${accuracy}" data-count-suffix="%">0</span>` : '—'}</div>
             <div class="pr-stat-lbl">Pick Accuracy</div>
           </div>
           <div class="pr-stat">
-            <div class="pr-stat-num">${totalRatings || '—'}</div>
+            <div class="pr-stat-num">${totalRatings ? `<span data-count="${totalRatings}">0</span>` : '—'}</div>
             <div class="pr-stat-lbl">Events Rated</div>
           </div>
           <div class="pr-stat">
@@ -918,6 +918,7 @@
 
     animateStats();
     attachEvents();
+    window.FXInit && window.FXInit();
 
     const avatarBtn = document.getElementById('prAvatarUploadBtn');
     const avatarInput = document.getElementById('prAvatarInput');
