@@ -962,7 +962,11 @@
       transition:background .15s,transform .15s;
     }
     .ev-help-btn:hover { background:rgba(255,138,61,.18);transform:translateY(-2px); }
-    @media(max-width:480px) { .ev-help-btn { bottom:20px;left:16px;width:36px;height:36px;font-size:.82rem; } }
+    /* bottom:20-28px collided with the fixed 60px bottom nav bar that
+       appears at the same ≤768px breakpoint — sat directly on top of
+       the HOME tab. Push clear of it. */
+    @media(max-width:768px) { .ev-help-btn { bottom:76px; } }
+    @media(max-width:480px) { .ev-help-btn { bottom:76px;left:16px;width:36px;height:36px;font-size:.82rem; } }
 
     /* ── ADD TO CALENDAR ── */
     .ov-cal-wrap { position:relative; }
@@ -2636,6 +2640,12 @@
     var _cdStop = null;
     function showCountdownCard(ev) {
       if (!ev.start_time) return;
+      // On mobile this card is position:fixed at the top of the screen —
+      // since the overlay content scrolls underneath it, it stayed
+      // permanently pinned there, blocking the fight list. The overlay's
+      // own "X DAYS AWAY" badge in the header already shows the same
+      // info, so just skip the floating duplicate on narrow screens.
+      if (window.innerWidth <= 640) return;
       document.getElementById('evCdName').textContent = ev.name || 'UFC Event';
       document.getElementById('evCdLocal').textContent = 'First Fight · ' + (window.formatLocalTime(ev.start_time) || ev.date || '');
       if (_cdStop) { _cdStop(); _cdStop = null; }

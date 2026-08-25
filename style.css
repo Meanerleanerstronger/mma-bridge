@@ -10954,6 +10954,11 @@ button:active, [role="button"]:active, .lb-tab:active, .pk-seg-btn:active,
   transition: color 0.15s; line-height: 1;
 }
 .pwa-toast-dismiss:hover { color: rgba(255,255,255,0.55); }
+/* Had no mobile override at all — bottom:20px/right:20px sat directly on
+   top of the fixed 60px bottom nav bar, covering its last two tabs. */
+@media (max-width: 768px) {
+  .pwa-toast { bottom: 76px; right: 12px; left: 12px; max-width: none; }
+}
 
 /* ── Group pick breakdown on fight cards ── */
 .fc-group-breakdown {
