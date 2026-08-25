@@ -2229,115 +2229,25 @@ function oddsSpanHtml(val, isFav, numClass) {
     });
   }
 
-  // ── Fighter stats preview — hover on desktop, tap "Profile ›" on
-  // touch (no hover support means no other way to see a fighter's record
-  // /recent fights without leaving the page — a real user hit exactly
-  // that wall and had to be told to go to a competitor over it) ───────
+  // ── Fighter stats — one tap on "Profile", one place it opens.
+  // Picks used to have its own preview popup here (record + last 5
+  // fights, hover on desktop / bottom-sheet on touch) that was a smaller
+  // reimplementation of the site-wide fighter modal (fighter-modal.js) —
+  // two different fighter-info UIs living on the same page. That modal
+  // has more in it anyway (career averages, win-method breakdown,
+  // physical stats), so this just opens that instead of maintaining a
+  // second, thinner one. Same interaction on desktop and touch — no
+  // separate hover-preview micro-UI to keep in sync with it.
   function bindHoverCards() {
-    const hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-
-    let hc = document.getElementById('fc-hov');
-    if (!hc) {
-      hc = document.createElement('div');
-      hc.id = 'fc-hov';
-      hc.className = 'fc-hov';
-      document.body.appendChild(hc);
-    }
-    // Touch backdrop — without hover, this becomes a fixed-position bottom
-    // sheet (see CSS) instead of a tooltip pinned to the tap coordinates,
-    // which used to stay glued to that screen position while the page
-    // scrolled underneath it and drift over unrelated cards below with no
-    // way to dismiss it. Backdrop + close button give it an explicit exit.
-    let bd = document.getElementById('fc-hov-backdrop');
-    if (!bd) {
-      bd = document.createElement('div');
-      bd.id = 'fc-hov-backdrop';
-      bd.className = 'fc-hov-backdrop';
-      document.body.appendChild(bd);
-    }
-
-    let hideT, showT, openFor = null;
-    const hide = () => {
-      hc.classList.remove('fc-hov-on');
-      bd.classList.remove('fc-hov-backdrop-on');
-      openFor = null;
-    };
-
-    const show = side => {
-      const fd = lookupFighter(side.dataset.pick);
-      if (!fd) return;
-      const rec = fd.record ? `${fd.record.wins}-${fd.record.losses}${fd.record.draws?`-${fd.record.draws}`:''}` : '';
-      const rows = (fd.last5 || []).slice(0, 5).map(f => {
-        const r = (f.result || '').toUpperCase();
-        const cls = r === 'W' ? 'w' : r === 'L' ? 'l' : 'nc';
-        return `<div class="fc-hov-row">
-          <span class="fc-hov-res fc-hov-${cls}">${r}</span>
-          <span class="fc-hov-opp">${esc(f.opponent || '')}</span>
-          <span class="fc-hov-mth">${esc(f.method || '')}${f.round ? ` R${f.round}` : ''}</span>
-        </div>`;
-      }).join('');
-
-      hc.innerHTML =
-        (hasHover ? '' : `<button class="fc-hov-close" type="button" aria-label="Close">✕</button>`) +
-        `<div class="fc-hov-name">${esc(fd.name)}</div>` +
-        (rec ? `<div class="fc-hov-rec">${rec}</div>` : '') +
-        (rows ? `<div class="fc-hov-fights">${rows}</div>` : '<div class="fc-hov-empty">No recent fight history on file.</div>') +
-        (fd.name ? `<a class="fc-hov-link" href="fighter.html?name=${encodeURIComponent(fd.name)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">View Full Profile ›</a>` : '');
-
-      hc.classList.add('fc-hov-on');
-      openFor = side;
-      hc.querySelector('.fc-hov-close')?.addEventListener('click', e => { e.stopPropagation(); hide(); });
-
-      if (hasHover) {
-        // Position above the element, fall back to below
-        const r = side.getBoundingClientRect();
-        const h = hc.getBoundingClientRect();
-        let top  = r.top - h.height - 10;
-        if (top < 8) top = r.bottom + 10;
-        let left = r.left + r.width / 2 - h.width / 2;
-        left = Math.max(8, Math.min(left, window.innerWidth - h.width - 8));
-        hc.style.top  = top  + 'px';
-        hc.style.left = left + 'px';
-      } else {
-        // Touch: fixed bottom sheet, CSS owns position — don't fight it
-        // with inline top/left left over from a previous hasHover render.
-        hc.style.top = '';
-        hc.style.left = '';
-        bd.classList.add('fc-hov-backdrop-on');
-      }
-    };
-
     root.querySelectorAll('.sb-side[data-pick]').forEach(side => {
-      if (!lookupFighter(side.dataset.pick)) return;
-      if (hasHover) {
-        side.addEventListener('mouseenter', () => { clearTimeout(hideT); showT = setTimeout(() => show(side), 220); });
-        side.addEventListener('mouseleave', () => { clearTimeout(showT); hideT = setTimeout(hide, 140); });
-      }
-      // Tap the small "Profile" link to preview stats inline instead of
-      // jumping straight to another page — works with or without hover.
       const link = side.querySelector('.fc-fighter-link');
-      if (link) {
-        link.addEventListener('click', e => {
-          e.preventDefault();
-          e.stopPropagation();
-          if (openFor === side) { hide(); return; }
-          show(side);
-        });
-      }
-    });
-    hc.addEventListener('click', e => e.stopPropagation());
-    hc.addEventListener('mouseenter', () => clearTimeout(hideT));
-    hc.addEventListener('mouseleave', () => { hideT = setTimeout(hide, 140); });
-    bd.addEventListener('click', hide);
-    // render() calls bindHoverCards() on every re-render — guard the
-    // document-level listener so it's only ever attached once.
-    if (!document.body.dataset.fcHovDocBound) {
-      document.body.dataset.fcHovDocBound = '1';
-      document.addEventListener('click', () => {
-        document.getElementById('fc-hov')?.classList.remove('fc-hov-on');
-        document.getElementById('fc-hov-backdrop')?.classList.remove('fc-hov-backdrop-on');
+      if (!link) return;
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+        window.openFighterModal?.(side.dataset.pick);
       });
-    }
+    });
   }
 
   // ── Bind hype drag bar ────────────────────────

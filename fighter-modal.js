@@ -521,8 +521,30 @@
   }
 
   /* ── Public API ──────────────────────────────────────── */
+  // Was calling window.open() to fighter.html in a new tab — every bit of
+  // the panel/renderFighter/CSS machinery above this line was fully built
+  // but never actually wired to anything, so every "see fighter info"
+  // tap on the site bounced you to a new tab instead of showing this. On
+  // top of that, picks.js had its own separate, simpler preview popup
+  // (record + last 5 fights only) doing a smaller version of the same
+  // job. One in-page modal now, everywhere.
   window.openFighterModal = function (name) {
-    window.open('fighter.html?name=' + encodeURIComponent(name), '_blank', 'noopener,noreferrer');
+    buildSkeleton();
+    const overlay = document.getElementById('fm-overlay');
+    const content = document.getElementById('fm-content');
+    content.innerHTML = '<div class="fm-loading">Loading…</div>';
+    overlay.classList.add('fm-open');
+    document.body.classList.add('fm-lock');
+
+    getFighters().then(() => {
+      if (!overlay.classList.contains('fm-open')) return; // closed while loading
+      const f = findFighter(name);
+      content.innerHTML = f
+        ? renderFighter(f)
+        : `<div class="fm-empty">No profile found for ${esc(name)}.<br>
+             <a class="fm-full-link" href="fighter.html?name=${encodeURIComponent(name)}">Search anyway ›</a>
+           </div>`;
+    });
   };
 
   /* Kick everything off on page load */
