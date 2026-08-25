@@ -14648,6 +14648,33 @@
     ]
   },
   {
+    "id": "ufc-fight-night-las-vegas",
+    "name": "UFC Fight Night: Las Vegas",
+    "type": "FIGHT NIGHT",
+    "date": "Sat, Oct 31, 2026",
+    "isoDate": "2026-10-31",
+    "location": "",
+    "venue": "",
+    "poster": "",
+    "status": "upcoming",
+    "start_time": null,
+    "mainCard": [
+      {
+        "a": "Nick Klein",
+        "b": "Joe Kropschot",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "main",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
+    "prelims": [],
+    "earlyPrelims": []
+  },
+  {
     "id": "ufc-fight-night-bonfim-vs-brady",
     "name": "UFC Fight Night: Bonfim vs. Brady",
     "type": "FIGHT NIGHT",
