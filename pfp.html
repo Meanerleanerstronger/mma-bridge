@@ -68,93 +68,11 @@
       min-height: 100vh;
     }
 
-    /* ── Hero ── */
-    .pfp-hero {
-      position: relative;
-      height: 480px;
-      overflow: hidden;
-      cursor: pointer;
-    }
-
-    .pfp-hero-photo {
-      position: absolute; inset: 0;
-      background-size: cover;
-      background-position: center 13%;
-      transition: transform 0.7s cubic-bezier(0.22,1,0.36,1);
-    }
-
-    .pfp-hero:hover .pfp-hero-photo { transform: scale(1.04); }
-
-    .pfp-hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(
-        105deg,
-        rgba(0,0,0,0.95) 0%,
-        rgba(0,0,0,0.72) 38%,
-        rgba(0,0,0,0.12) 65%,
-        rgba(0,0,0,0) 100%
-      ), linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 45%);
-    }
-
-    .pfp-hero-content {
-      position: absolute;
-      bottom: 0; left: 0;
-      padding: 52px 56px;
-      max-width: 580px;
-      animation: heroContentIn 0.7s 0.2s ease both;
-    }
-
-    .pfp-hero-tag {
-      font-size: 0.58rem; font-weight: 800;
-      letter-spacing: 0.22em; text-transform: uppercase;
-      color: #ff8a3d; margin-bottom: 12px;
-      background: rgba(255,138,61,0.1);
-      border: 1px solid rgba(255,138,61,0.25);
-      border-radius: 20px;
-      display: inline-block;
-      padding: 5px 14px;
-    }
-
-    .pfp-hero-name {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 3.6rem; font-weight: 900;
-      text-transform: uppercase; color: #fff;
-      line-height: 0.95; letter-spacing: 0.02em;
-      margin-bottom: 18px;
-      text-shadow: 0 4px 30px rgba(0,0,0,0.8);
-    }
-
-    .pfp-hero-meta { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
-    .pfp-hero-record {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1rem; font-weight: 700;
-      color: rgba(255,255,255,0.88);
-    }
-    .pfp-hero-div {
-      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
-      color: rgba(255,255,255,0.32);
-    }
-    .pfp-hero-champ {
-      font-size: 0.54rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
-      color: #ff8a3d;
-      background: rgba(255,138,61,0.1);
-      border: 1px solid rgba(255,138,61,0.3);
-      border-radius: 4px; padding: 4px 10px;
-      animation: goldPulse 3s ease infinite;
-    }
-
-    /* ── List ── */
+    /* ── Page wrap (holds the tab nav above the spotlight) ── */
     .pfp-list-wrap {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 44px 56px 80px;
-    }
-
-    .pfp-list-header {
-      display: flex; align-items: baseline; gap: 12px;
-      margin-bottom: 20px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 28px 56px 0;
     }
 
     /* ── Rankings tabs ── */
@@ -206,155 +124,11 @@
       .rnk-tab { flex: 1; padding: 9px 8px; font-size: 0.6rem; letter-spacing: 0.08em; }
     }
 
-    .pfp-list-title {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.64rem; font-weight: 800;
-      letter-spacing: 0.22em; text-transform: uppercase;
-      color: rgba(255,255,255,0.48);
-    }
-
-    .pfp-list-sub {
-      font-size: 0.58rem; font-weight: 600;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 20px;
-      padding: 2px 9px;
-    }
-
-    /* 2-column grid */
-    .pfp-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0 48px;
-    }
-
-    .pfp-row {
-      display: flex; align-items: center; gap: 16px;
-      padding: 15px 8px 15px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      cursor: pointer;
-      transition: padding-left 0.25s cubic-bezier(0.34,1.56,0.64,1), border-color 0.2s;
-      text-decoration: none; color: inherit;
-      border-radius: 0 8px 8px 0;
-      animation: rowIn 0.4s ease both;
-    }
-
-    /* Stagger rows */
-    .pfp-grid > div:first-child .pfp-row:nth-child(1) { animation-delay: 0.08s; }
-    .pfp-grid > div:first-child .pfp-row:nth-child(2) { animation-delay: 0.14s; }
-    .pfp-grid > div:first-child .pfp-row:nth-child(3) { animation-delay: 0.20s; }
-    .pfp-grid > div:first-child .pfp-row:nth-child(4) { animation-delay: 0.26s; }
-    .pfp-grid > div:first-child .pfp-row:nth-child(5) { animation-delay: 0.32s; }
-    .pfp-grid > div:first-child .pfp-row:nth-child(6) { animation-delay: 0.38s; }
-    .pfp-grid > div:first-child .pfp-row:nth-child(7) { animation-delay: 0.44s; }
-    .pfp-grid > div:last-child  .pfp-row:nth-child(1) { animation-delay: 0.11s; }
-    .pfp-grid > div:last-child  .pfp-row:nth-child(2) { animation-delay: 0.17s; }
-    .pfp-grid > div:last-child  .pfp-row:nth-child(3) { animation-delay: 0.23s; }
-    .pfp-grid > div:last-child  .pfp-row:nth-child(4) { animation-delay: 0.29s; }
-    .pfp-grid > div:last-child  .pfp-row:nth-child(5) { animation-delay: 0.35s; }
-    .pfp-grid > div:last-child  .pfp-row:nth-child(6) { animation-delay: 0.41s; }
-    .pfp-grid > div:last-child  .pfp-row:nth-child(7) { animation-delay: 0.47s; }
-
-    .pfp-row:hover {
-      padding-left: 10px;
-      border-color: rgba(255,138,61,0.15);
-      background: rgba(255,138,61,0.025);
-    }
-
-    .pfp-row-num {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.85rem; font-weight: 900;
-      color: rgba(255,255,255,0.13);
-      width: 30px; flex-shrink: 0; text-align: center;
-      transition: color 0.2s;
-      display: flex; flex-direction: column; align-items: center; gap: 2px;
-    }
-    .pfp-row:hover .pfp-row-num { color: rgba(255,138,61,0.6); }
-    /* Rank-change badge — fighters.json's ranking_change field existed but
-       was never actually rendered anywhere on the site. */
-    .pfp-rank-delta {
-      font-family: 'Inter', sans-serif; font-size: 0.52rem; font-weight: 800;
-      line-height: 1; letter-spacing: -0.01em;
-    }
-    .pfp-rank-delta.up   { color: #00d68f; }
-    .pfp-rank-delta.down { color: #ff4d4d; }
-    body.light-mode .pfp-rank-delta.up   { color: #00a877; }
-    body.light-mode .pfp-rank-delta.down { color: #e03a3a; }
-
-    .pfp-row-photo {
-      width: 54px; height: 54px;
-      border-radius: 10px; flex-shrink: 0;
-      background-size: cover;
-      background-position: center 13%;
-      background-color: #141414;
-      border: 1px solid rgba(255,255,255,0.07);
-      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), border-color 0.2s, box-shadow 0.2s;
-    }
-    .pfp-row:hover .pfp-row-photo {
-      transform: scale(1.06);
-      border-color: rgba(255,138,61,0.3);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.5);
-    }
-
-    .pfp-row-info { flex: 1; min-width: 0; }
-
-    .pfp-row-name {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.85rem; font-weight: 800;
-      color: #fff; text-transform: uppercase;
-      letter-spacing: 0.03em;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-      transition: color 0.2s;
-    }
-    .pfp-row:hover .pfp-row-name { color: rgba(255,248,200,0.97); }
-
-    .pfp-row-sub {
-      font-size: 0.65rem; color: rgba(255,255,255,0.25);
-      text-transform: uppercase; letter-spacing: 0.06em;
-      margin-top: 3px;
-      display: flex; align-items: center; gap: 6px;
-    }
-
-    .pfp-row-champ {
-      font-size: 0.46rem; font-weight: 800; letter-spacing: 0.08em;
-      text-transform: uppercase; color: #ff8a3d;
-      background: rgba(255,138,61,0.08);
-      border: 1px solid rgba(255,138,61,0.2);
-      border-radius: 3px; padding: 2px 5px;
-      transition: background 0.2s, box-shadow 0.2s;
-    }
-    .pfp-row:hover .pfp-row-champ {
-      background: rgba(255,138,61,0.14);
-      box-shadow: 0 0 8px rgba(255,138,61,0.2);
-    }
-
-    .pfp-row-rec {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.76rem; font-weight: 600;
-      color: rgba(255,255,255,0.55);
-      flex-shrink: 0; padding-left: 8px;
-      transition: color 0.2s;
-    }
-    .pfp-row:hover .pfp-row-rec { color: rgba(255,255,255,0.85); }
-
-    /* light mode — hero and champ-spotlight photo stay dark (text sits on
-       a photo overlay, same convention used across the site), everything
-       on a plain panel background gets real light-appropriate colors */
+    /* light mode — champ-spotlight photo stays dark (text sits on a photo
+       overlay, same convention used across the site), everything on a
+       plain panel background gets real light-appropriate colors */
     body.light-mode .pfp-page { background: #f2f2f2; }
     body.light-mode .pfp-list-wrap { background: #f2f2f2; }
-    body.light-mode .pfp-list-header { border-bottom-color: rgba(0,0,0,0.08); }
-    body.light-mode .pfp-list-title { color: rgba(0,0,0,0.55); }
-    body.light-mode .pfp-list-sub { color: rgba(0,0,0,0.32); background: rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.08); }
-    body.light-mode .pfp-row { border-bottom-color: rgba(0,0,0,0.07); }
-    body.light-mode .pfp-row-num { color: rgba(0,0,0,0.18); }
-    body.light-mode .pfp-row-photo { background-color: #ddd; border-color: rgba(0,0,0,0.08); }
-    body.light-mode .pfp-row-name { color: #111; }
-    body.light-mode .pfp-row:hover .pfp-row-name { color: #7a3d00; }
-    body.light-mode .pfp-row-sub { color: rgba(0,0,0,0.35); }
-    body.light-mode .pfp-row-rec { color: rgba(0,0,0,0.5); }
-    body.light-mode .pfp-row:hover .pfp-row-rec { color: rgba(0,0,0,0.75); }
 
     body.light-mode .div-spotlight-right { background: #f2f2f2; }
     body.light-mode .div-pill { color: rgba(0,0,0,0.4); border-color: rgba(0,0,0,0.14); }
@@ -370,73 +144,20 @@
     body.light-mode .div-contender-name { color: #111; }
     body.light-mode .div-contender-rec { color: rgba(0,0,0,0.4); }
 
-    @media (max-width: 900px) {
-      .pfp-grid { grid-template-columns: 1fr; gap: 0; }
-      .pfp-hero { height: 360px; }
-      .pfp-hero-name { font-size: 2.4rem; }
-      .pfp-hero-content { padding: 32px 28px; }
-      .pfp-list-wrap { padding: 32px 24px 60px; }
-    }
-
-    @media (max-width: 768px) {
-      .pfp-hero { height: 300px; }
-      .pfp-hero-name { font-size: 1.75rem; }
-      .pfp-hero-content { padding: 24px 20px; }
-      .pfp-hero-tag { font-size: 0.52rem; padding: 4px 10px; }
-      .pfp-hero-meta { gap: 12px; flex-wrap: wrap; }
-      .pfp-list-wrap { padding: 24px 16px 60px; }
-      .pfp-list-header { margin-bottom: 16px; padding-bottom: 12px; }
-      .pfp-row { padding: 12px 6px 12px 0; }
-      .pfp-row-photo { width: 46px; height: 46px; border-radius: 8px; }
-      .pfp-row-name { font-size: 0.8rem; }
-      .pfp-row-rec { font-size: 0.72rem; }
-    }
-
-    @media (max-width: 400px) {
-      .pfp-hero { height: 260px; }
-      .pfp-hero-name { font-size: 1.45rem; }
-    }
-
-    /* ── P4P Row ── */
-    .pfp-row {
-      position: relative;
-    }
-
-    @media (max-width: 768px) {
-      .pfp-row { padding-right: 8px; }
-    }
-
-    /* ── Panel enter animation (replaces display:none flash) ── */
-    @keyframes panelFadeIn {
-      from { opacity: 0; transform: translateY(5px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .rnk-panel.panel-entering { animation: panelFadeIn 0.22s ease both; }
-
-    /* ── Hero collapse when divisional tab active ── */
-    .pfp-hero-wrap {
-      overflow: hidden;
-      max-height: 700px;
-      transition: max-height 0.42s cubic-bezier(0.4,0,0.2,1),
-                  opacity 0.3s ease;
-    }
-    .is-divisional .pfp-hero-wrap {
-      max-height: 0;
-      opacity: 0;
-      pointer-events: none;
-    }
-    .is-divisional .pfp-list-header { display: none; }
-    .is-divisional .pfp-list-wrap {
+    /* Every tab shows the same spotlight layout now, so the tab nav
+       always sits full-width flush against it — no separate "divisional
+       mode" margin/collapse rules needed any more. */
+    .pfp-list-wrap {
       max-width: 100%;
       padding: 0;
       margin: 0;
     }
-    .is-divisional .rnk-tabs {
+    .rnk-tabs {
       margin: 20px 0 0 32px;
       margin-bottom: 0;
     }
     @media (max-width: 768px) {
-      .is-divisional .rnk-tabs { margin: 14px 14px 0; }
+      .rnk-tabs { margin: 14px 14px 0; }
     }
 
     /* ── Division Spotlight layout ── */
@@ -545,14 +266,17 @@
       overflow: hidden;
     }
 
-    /* Division pill switcher */
+    /* Division pill switcher — Divisional tab only; P4P has no weight
+       classes to pick between, so this stays hidden on those two tabs. */
     .div-pill-nav {
-      display: flex; align-items: center;
+      display: none;
+      align-items: center;
       gap: 5px; flex-wrap: nowrap;
       padding: 28px 36px 16px;
       overflow-x: auto; scrollbar-width: none;
       flex-shrink: 0;
     }
+    .is-divisional .div-pill-nav { display: flex; }
     .div-pill-nav::-webkit-scrollbar { display: none; }
 
     .div-pill {
@@ -665,9 +389,14 @@
     .div-move-up   { color: #4ade80; background: rgba(74,222,128,0.1); }
     .div-move-down { color: #f87171; background: rgba(248,113,113,0.1); }
     .div-move-new  { color: #60a5fa; background: rgba(96,165,250,0.1); }
+    /* Neutral "no change" marker — every row gets a movement indicator now,
+       not just the ones that happened to move, so the list doesn't read
+       like most rows were never updated. */
+    .div-move-same { color: rgba(255,255,255,0.18); background: transparent; padding: 3px 4px; }
     body.light-mode .div-move-up   { background: rgba(34,197,94,0.12); }
     body.light-mode .div-move-down { background: rgba(239,68,68,0.12); }
     body.light-mode .div-move-new  { background: rgba(59,130,246,0.12); }
+    body.light-mode .div-move-same { color: rgba(0,0,0,0.18); }
 
     /* Mobile: stack layout */
     @media (max-width: 768px) {
@@ -743,30 +472,8 @@
     <div class="nav-auth-mobile"></div>
   </div>
 
-  <!-- #1 Hero (wrapped for smooth collapse) -->
-  <div class="pfp-hero-wrap">
-  <div class="pfp-hero" data-fighter="islam-makhachev">
-    <div class="pfp-hero-photo" style="background-image:url('https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/7/MAKHACHEV_ISLAM_L_BELT_01-18.png');"></div>
-    <div class="pfp-hero-overlay"></div>
-    <div class="pfp-hero-content">
-      <div class="pfp-hero-tag">#1 Pound for Pound · May 2026</div>
-      <div class="pfp-hero-name">Islam<br>Makhachev</div>
-      <div class="pfp-hero-meta">
-        <span class="pfp-hero-record">28–1</span>
-        <span class="pfp-hero-div">Welterweight · 🇷🇺</span>
-        <span class="pfp-hero-champ">WW Champion</span>
-      </div>
-    </div>
-  </div>
-  </div><!-- /.pfp-hero-wrap -->
-
   <!-- Ranked list -->
   <div class="pfp-list-wrap">
-    <div class="pfp-list-header">
-      <span class="pfp-list-title" id="pfpListTitle">UFC Rankings</span>
-      <span class="pfp-list-sub">Updated weekly</span>
-    </div>
-
     <!-- Tab nav -->
     <div class="rnk-tabs" id="rnkTabs">
       <button class="rnk-tab active" data-tab="mens-p4p">Men's P4P</button>
@@ -774,422 +481,29 @@
       <button class="rnk-tab" data-tab="divisional">Divisional</button>
     </div>
 
-    <!-- Men's P4P panel -->
-    <div id="pfpMenSection" class="rnk-panel">
-    <div class="pfp-grid">
-
-      <!-- Left column: #2–8 -->
-      <div>
-        <div class="pfp-row" data-fighter="alexander-volkanovski">
-          <div class="pfp-row-num">2<span class="pfp-rank-delta down">▼1</span></div>
-          <div class="pfp-row-photo" style="background-image:url('https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/VOLKANOVSKI_ALEXANDER_L_BELT_01-31.png');"></div>
-          <div class="pfp-row-info">
-            <div class="pfp-row-name">Alexander Volkanovski</div>
-            <div class="pfp-row-sub">Featherweight · 🇦🇺 <span class="pfp-row-champ">FW Champ</span></div>
-          </div>
-          <div class="pfp-row-rec">29–4</div>
-        </div>
-
-        <div class="pfp-row" data-fighter="petr-yan">
-          <div class="pfp-row-num">3</div>
-          <div class="pfp-row-photo" style="background-image:url('https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/YAN_PETR_L_BELT_04-09.png');"></div>
-          <div class="pfp-row-info">
-            <div class="pfp-row-name">Petr Yan</div>
-            <div class="pfp-row-sub">Bantamweight · 🇷🇺 <span class="pfp-row-champ">BW Champ</span></div>
-          </div>
-          <div class="pfp-row-rec">18–5</div>
-        </div>
-
-        <div class="pfp-row" data-fighter="justin-gaethje">
-          <div class="pfp-row-num">4<span class="pfp-rank-delta up">▲1</span></div>
-          <div class="pfp-row-photo" style="background-image:url('https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/GAETHJE_JUSTIN_L_BELTMOCK.png');"></div>
-          <div class="pfp-row-info">
-            <div class="pfp-row-name">Justin Gaethje</div>
-            <div class="pfp-row-sub">Lightweight · 🇺🇸 <span class="pfp-row-champ">LW Champ</span></div>
-          </div>
-          <div class="pfp-row-rec">28–5</div>
-        </div>
-
-        <div class="pfp-row" data-fighter="ilia-topuria">
-          <div class="pfp-row-num">5</div>
-          <div class="pfp-row-photo" style="background-image:url('https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/TOPURIA_ILIA_L_BELT_10-26.png');"></div>
-          <div class="pfp-row-info">
-            <div class="pfp-row-name">Ilia Topuria</div>
-            <div class="pfp-row-sub">Lightweight · 🇬🇪</div>
-          </div>
-          <div class="pfp-row-rec">17–1</div>
-        </div>
-
-        <div class="pfp-row" data-fighter="tom-aspinall">
-          <div class="pfp-row-num">6</div>
-          <div class="pfp-row-photo" style="background-image:url('https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/ASPINALL_TOM_L_BELT_10-25.png');"></div>
-          <div class="pfp-row-info">
-            <div class="pfp-row-name">Tom Aspinall</div>
-            <div class="pfp-row-sub">Heavyweight · 🇬🇧 <span class="pfp-row-champ">HW Champ</span></div>
-          </div>
-          <div class="pfp-row-rec">15–3</div>
-        </div>
-
-        <div class="pfp-row" data-fighter="sean-strickland">
-          <div class="pfp-row-num">7</div>
-          <div class="pfp-row-photo" style="background-image:url('https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-01/STRICKLAND_SEAN_L_BELT_01-20.png');"></div>
-          <div class="pfp-row-info">
-            <div class="pfp-row-name">Sean Strickland</div>
-            <div class="pfp-row-sub">Middleweight · 🇺🇸 <span class="pfp-row-champ">MW Champ</span></div>
-          </div>
-          <div class="pfp-row-rec">31–7</div>
-        </div>
-
-        <div class="pfp-row" data-fighter="alex-pereira">
-          <div class="pfp-row-num">8</div>
-          <div class="pfp-row-photo" style="background-image:url('https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/PEREIRA_ALEX_L.png');"></div>
-          <div class="pfp-row-info">
-            <div class="pfp-row-name">Alex Pereira</div>
-            <div class="pfp-row-sub">Light HW · 🇧🇷</div>
-          </div>
-          <div class="pfp-row-rec">13–4</div>
-        </div>
+    <!-- One spotlight (champion + contenders) drives all three tabs —
+         Men's P4P, Women's P4P, and (with the weight-class pill nav
+         shown) every Divisional list. pfp.js swaps what's rendered
+         into it; there's no separate markup per tab any more. -->
+    <div class="div-spotlight" id="divSpotlight">
+      <!-- Left: champion/#1 full-body photo (double-buffered for cross-fade) -->
+      <div class="div-spotlight-left">
+        <div class="div-photo-layer" id="divPhotoA"></div>
+        <div class="div-photo-layer" id="divPhotoB"></div>
+        <div class="div-champ-info" id="divChampInfo"></div>
       </div>
-
-      <!-- Right column: #9–15 -->
-      <div>
-        <div class="pfp-row" data-fighter="merab-dvalishvili">
-          <div class="pfp-row-num">9<span class="pfp-rank-delta up">▲1</span></div>
-          <div class="pfp-row-photo" style="background-image:url('https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2022-08/DVALISHVILI_MERAB_L_08-20.png');"></div>
-          <div class="pfp-row-info">
-            <div class="pfp-row-name">Merab Dvalishvili</div>
-            <div class="pfp-row-sub">Bantamweight · 🇬🇪</div>
-          </div>
-          <div class="pfp-row-rec">21–5</div>
-        </div>
-
-        <div class="pfp-row" data-fighter="joshua-van">
-          <div class="pfp-row-num">10</div>
-          <div class="pfp-row-photo" style="background-image:url('https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/VAN_JOSHUA_L_BELTMOCK.png');"></div>
-          <div class="pfp-row-info">
-            <div class="pfp-row-name">Joshua Van</div>
-            <div class="pfp-row-sub">Flyweight · 🇨🇦 <span class="pfp-row-champ">FLY Champ</span></div>
-          </div>
-          <div class="pfp-row-rec">12–1</div>
-        </div>
-
-        <div class="pfp-row" data-fighter="khamzat-chimaev">
-          <div class="pfp-row-num">11<span class="pfp-rank-delta up">▲1</span></div>
-          <div class="pfp-row-photo" style="background-image:url('https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/CHIMAEV_KHAMZAT_L_BELTMOCK.png');"></div>
-          <div class="pfp-row-info">
-            <div class="pfp-row-name">Khamzat Chimaev</div>
-            <div class="pfp-row-sub">Middleweight · 🇸🇪</div>
-          </div>
-          <div class="pfp-row-rec">15–1</div>
-        </div>
-
-        <div class="pfp-row" data-fighter="ciryl-gane">
-          <div class="pfp-row-num">12</div>
-          <div class="pfp-row-photo" style="background-image:url('https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/GANE_CIRYL_R_06-14.png');"></div>
-          <div class="pfp-row-info">
-            <div class="pfp-row-name">Ciryl Gane</div>
-            <div class="pfp-row-sub">Heavyweight · 🇫🇷</div>
-          </div>
-          <div class="pfp-row-rec">14–2</div>
-        </div>
-
-        <div class="pfp-row" data-fighter="alexandre-pantoja">
-          <div class="pfp-row-num">13</div>
-          <div class="pfp-row-photo" style="background-image:url('https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/PANTOJA_ALEXANDRE_L_07-08.png');"></div>
-          <div class="pfp-row-info">
-            <div class="pfp-row-name">Alexandre Pantoja</div>
-            <div class="pfp-row-sub">Flyweight · 🇧🇷</div>
-          </div>
-          <div class="pfp-row-rec">27–5</div>
-        </div>
-
-        <div class="pfp-row" data-fighter="charles-oliveira">
-          <div class="pfp-row-num">14</div>
-          <div class="pfp-row-photo" style="background-image:url('https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/OLIVEIRA_CHARLES_L_BMFMOCK.png');"></div>
-          <div class="pfp-row-info">
-            <div class="pfp-row-name">Charles Oliveira</div>
-            <div class="pfp-row-sub">Lightweight · 🇧🇷</div>
-          </div>
-          <div class="pfp-row-rec">37–11</div>
-        </div>
-
-        <div class="pfp-row" data-fighter="arman-tsarukyan">
-          <div class="pfp-row-num">15<span class="pfp-rank-delta up">▲1</span></div>
-          <div class="pfp-row-photo" style="background-image:url('https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/TSARUKYAN_ARMAN_L_11-22.png');"></div>
-          <div class="pfp-row-info">
-            <div class="pfp-row-name">Arman Tsarukyan</div>
-            <div class="pfp-row-sub">Lightweight · 🇦🇲</div>
-          </div>
-          <div class="pfp-row-rec">23–3</div>
-        </div>
-      </div>
-
-    </div><!-- end pfp-grid -->
-    </div><!-- end pfpMenSection -->
-
-    <!-- Women's P4P panel (built dynamically by pfp.js) -->
-    <div id="pfpWomenSection" class="rnk-panel" style="display:none;">
-      <div class="pfp-grid" id="pfpWomenGrid"></div>
-    </div>
-
-    <!-- Divisional Rankings panel — immersive spotlight -->
-    <div id="pfpDivisionalSection" class="rnk-panel" style="display:none;">
-      <div class="div-spotlight" id="divSpotlight">
-        <!-- Left: champion full-body photo (double-buffered for cross-fade) -->
-        <div class="div-spotlight-left">
-          <div class="div-photo-layer" id="divPhotoA"></div>
-          <div class="div-photo-layer" id="divPhotoB"></div>
-          <div class="div-champ-info" id="divChampInfo"></div>
-        </div>
-        <!-- Right: pill nav + contenders -->
-        <div class="div-spotlight-right">
-          <div class="div-pill-nav" id="divPillNav"></div>
-          <div class="div-contender-wrap">
-            <div class="div-contender-list" id="divContenderList"></div>
-          </div>
+      <!-- Right: pill nav (Divisional only) + contenders -->
+      <div class="div-spotlight-right">
+        <div class="div-pill-nav" id="divPillNav"></div>
+        <div class="div-contender-wrap">
+          <div class="div-contender-list" id="divContenderList"></div>
         </div>
       </div>
     </div>
+  </div><!-- /.pfp-list-wrap -->
 
-  <script>
-  (function() {
-    // ── Tab switching (fade-in, no flash) ──────────────
-    const tabs   = document.querySelectorAll('.rnk-tab');
-    const panels = {
-      'mens-p4p':   document.getElementById('pfpMenSection'),
-      'womens-p4p': document.getElementById('pfpWomenSection'),
-      'divisional': document.getElementById('pfpDivisionalSection'),
-    };
-    let divLoaded = false;
 
-    function switchTab(tab) {
-      tabs.forEach(t => t.classList.toggle('active', t === tab));
-      const key = tab.dataset.tab;
-
-      // Toggle divisional full-screen mode
-      document.body.classList.toggle('is-divisional', key === 'divisional');
-
-      Object.entries(panels).forEach(([k, el]) => {
-        if (!el) return;
-        if (k === key) {
-          el.style.display = '';
-          el.classList.remove('panel-entering');
-          void el.offsetHeight; // force reflow so animation fires fresh
-          el.classList.add('panel-entering');
-          el.addEventListener('animationend', () => el.classList.remove('panel-entering'), { once: true });
-        } else {
-          el.style.display = 'none';
-        }
-      });
-
-      if (key === 'divisional' && !divLoaded) { loadDivRankings(); divLoaded = true; }
-      if (key === 'womens-p4p' && window.pfpSwitchToWomen) window.pfpSwitchToWomen();
-      if (key === 'mens-p4p'   && window.pfpSwitchToMen)   window.pfpSwitchToMen();
-    }
-
-    tabs.forEach(t => t.addEventListener('click', () => switchTab(t)));
-
-    // ── Division Spotlight ─────────────────────────────
-    const DIV_LABELS = {
-      'Flyweight':'FLW', 'Bantamweight':'BW', 'Featherweight':'FW',
-      'Lightweight':'LW', 'Welterweight':'WW', 'Middleweight':'MW',
-      'Light Heavyweight':'LHW', 'Heavyweight':'HW',
-      "Women's Strawweight":'W·STW', "Women's Flyweight":'W·FLW',
-      "Women's Bantamweight":'W·BW', "Women's Featherweight":'W·FW',
-    };
-
-    let divData      = [];
-    let fighterMap   = {};
-    let currentIdx   = 0;
-    let activeLayer  = 'A';
-
-    const photoA = document.getElementById('divPhotoA');
-    const photoB = document.getElementById('divPhotoB');
-
-    async function loadDivRankings() {
-      try {
-        const ts = Date.now();
-        const [rankings, fighters] = await Promise.all([
-          fetch('/data/rankings.json?_=' + ts, { cache: 'no-store' }).then(r => r.ok ? r.json() : []),
-          fetch('/data/fighters.json?_=' + ts, { cache: 'no-store' }).then(r => r.ok ? r.json() : []),
-        ]);
-
-        fighters.forEach(f => { fighterMap[f.name.toLowerCase().trim()] = f; });
-
-        // Deduplicate by division name — keep first occurrence only.
-        // Also drop the two "Pound-for-Pound" entries here — those are the
-        // P4P tabs' data (rankings-sync.js correctly captures them now, see
-        // the "Men's P4P" rank text above), not a weight class, so they
-        // don't belong in the Divisional weight-class browser.
-        const seen = new Set();
-        const unique = (rankings || []).filter(d => {
-          if (/pound-for-pound/i.test(d.division)) return false;
-          if (seen.has(d.division)) return false;
-          seen.add(d.division);
-          return true;
-        });
-        const mens   = unique.filter(d => !/women/i.test(d.division));
-        const womens = unique.filter(d =>  /women/i.test(d.division));
-        divData = [...mens, ...womens];
-        if (!divData.length) return;
-
-        buildPillNav(mens.length);
-        showDivision(0, false);
-        preloadChampImages();
-      } catch(e) { /* silent */ }
-    }
-
-    function buildPillNav(menCount) {
-      const nav = document.getElementById('divPillNav');
-      if (!nav) return;
-      nav.innerHTML = divData.map((d, i) => {
-        const isW  = /women/i.test(d.division);
-        const lbl  = DIV_LABELS[d.division] || d.division;
-        const sep  = i === menCount ? '<div class="div-pill-sep"></div>' : '';
-        return `${sep}<button class="div-pill${isW?' women':''}${i===0?' active':''}" data-di="${i}">${lbl}</button>`;
-      }).join('');
-      nav.querySelectorAll('.div-pill').forEach(p => {
-        p.addEventListener('click', () => {
-          const idx = parseInt(p.dataset.di);
-          if (idx !== currentIdx) showDivision(idx, true);
-        });
-      });
-    }
-
-    function preloadChampImages() {
-      divData.forEach(d => {
-        const champ = d.fighters.find(f => f.isChamp);
-        const fw = champ ? fighterMap[champ.name.toLowerCase().trim()] : null;
-        if (fw?.img) { const img = new Image(); img.src = fw.img; }
-      });
-    }
-
-    function showDivision(idx, animate) {
-      const d = divData[idx];
-      if (!d) return;
-      currentIdx = idx;
-
-      // Update active pill
-      document.querySelectorAll('.div-pill').forEach((p, i) => p.classList.toggle('active', i === idx));
-
-      const isW       = /women/i.test(d.division);
-      const champ     = d.fighters.find(f => f.isChamp);
-      const contenders = d.fighters.filter(f => !f.isChamp).slice(0, 15);
-      const fw        = champ ? fighterMap[champ.name.toLowerCase().trim()] : null;
-      const photoUrl  = fw?.img || '';
-
-      if (!animate) {
-        // First load: set directly, no transition
-        if (photoUrl) { photoA.style.backgroundImage = `url('${photoUrl}')`; photoA.classList.add('active'); }
-        updateChampInfo(d, champ, fw, isW);
-        updateContenders(contenders, isW);
-        return;
-      }
-
-      // Cross-fade photo using double-buffer
-      const next = activeLayer === 'A' ? photoB : photoA;
-      const curr = activeLayer === 'A' ? photoA : photoB;
-      const swap = () => {
-        next.classList.add('active');
-        setTimeout(() => curr.classList.remove('active'), 20);
-        activeLayer = activeLayer === 'A' ? 'B' : 'A';
-      };
-      if (photoUrl) {
-        const img = new Image();
-        img.onload  = () => { next.style.backgroundImage = `url('${photoUrl}')`; swap(); };
-        img.onerror = () => { next.style.backgroundImage = ''; swap(); };
-        img.src = photoUrl;
-      } else {
-        next.style.backgroundImage = '';
-        swap();
-      }
-
-      // Fade content out → update → fade back in
-      const list = document.getElementById('divContenderList');
-      const info = document.getElementById('divChampInfo');
-      list.classList.add('fading');
-      info.classList.add('fading');
-      setTimeout(() => {
-        updateChampInfo(d, champ, fw, isW);
-        updateContenders(contenders, isW);
-        list.classList.remove('fading');
-        info.classList.remove('fading');
-      }, 210);
-    }
-
-    function updateChampInfo(d, champ, fw, isW) {
-      const el = document.getElementById('divChampInfo');
-      if (!el) return;
-      const rec = fw ? `${fw.record?.wins||0}–${fw.record?.losses||0}${fw.record?.draws?'–'+fw.record.draws:''}` : '';
-      const nick = fw?.nickname ? `"${fw.nickname}"` : '';
-      el.className = 'div-champ-info' + (isW ? ' women-div' : '');
-      const badgeLabel = champ?.movement === 'new-champ' ? 'NEW CHAMPION' : 'CHAMPION';
-      el.innerHTML = `
-        <div class="div-champ-badge${champ?.movement === 'new-champ' ? ' div-champ-badge-new' : ''}">${badgeLabel}</div>
-        <div class="div-champ-division">${d.division}</div>
-        ${nick ? `<div class="div-champ-nickname">${nick}</div>` : ''}
-        <div class="div-champ-name">${champ ? champ.name : 'Vacant'}</div>
-        ${rec ? `<div class="div-champ-record">${rec}</div>` : ''}
-      `;
-    }
-
-    function updateContenders(contenders, isW) {
-      const el = document.getElementById('divContenderList');
-      if (!el) return;
-      const gold = isW ? 'rgba(240,100,200,0.5)' : 'rgba(255,138,61,0.5)';
-      el.innerHTML = `
-        <div class="div-contenders-header">
-          <span class="div-contenders-label">Contenders</span>
-          <div class="div-contenders-line"></div>
-        </div>
-        ${contenders.map(f => {
-          const fw   = fighterMap[f.name.toLowerCase().trim()];
-          const rec  = fw ? `${fw.record?.wins||'?'}–${fw.record?.losses||'?'}${fw.record?.draws?'–'+fw.record.draws:''}` : '';
-          const photo = fw?.img || '';
-          const init  = f.name.split(' ').pop().substring(0,2).toUpperCase();
-          const rankColor = f.rank <= 3 ? `color:${gold}` : '';
-          // Week-over-week movement, from rankings-sync.js diffing this
-          // week's scrape against last week's file before overwriting it.
-          const moveHtml = f.movement === 'up'
-            ? `<span class="div-move div-move-up">▲ ${f.prevRank - f.rank}</span>`
-            : f.movement === 'down'
-              ? `<span class="div-move div-move-down">▼ ${f.rank - f.prevRank}</span>`
-              : f.movement === 'new'
-                ? `<span class="div-move div-move-new">NEW</span>`
-                : '';
-          return `<div class="div-contender-row">
-            <div class="div-contender-rank" style="${rankColor}">#${f.rank}</div>
-            <div class="div-contender-photo" ${photo?`style="background-image:url('${photo}')"`:''}>${photo?'':init}</div>
-            <div class="div-contender-info">
-              <div class="div-contender-name">${f.name}</div>
-              ${rec?`<div class="div-contender-rec">${rec}</div>`:''}
-            </div>
-            ${moveHtml}
-          </div>`;
-        }).join('')}
-      `;
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      const menBtn = document.querySelector('.rnk-tab[data-tab="mens-p4p"]');
-      if (menBtn) switchTab(menBtn);
-    });
-  })();
-  </script>
-
-  <!-- Fighter Drawer -->
-  <div id="fightDrawer" class="drawer" aria-hidden="true">
-    <div class="drawer-backdrop" id="drawerClose"></div>
-    <aside class="drawer-panel">
-      <div class="drawer-top">
-        <div class="drawer-title" id="drawerTitle">Fighter</div>
-        <button class="drawer-x" id="drawerX" aria-label="Close">✕</button>
-      </div>
-      <div class="drawer-content" id="drawerContent"></div>
-    </aside>
-  </div>
-
-  <script type="module" src="pfp.js?v=5.2"></script>
+  <script type="module" src="pfp.js?v=6.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase.js"></script>
   <script src="auth.js?v=3.3"></script>
@@ -1205,23 +519,6 @@
 <script src="push.js?v=1.2"></script>
 <script src="micro.js?v=1.0"></script>
 <script src="fighter-modal.js?v=1.1"></script>
-<script>
-// ── Divisional spotlight fighter clicks ───────────────────
-// Same-tab navigation to match the P4P tab's row clicks on this page —
-// previously used window.openFighterModal() which opens a new tab.
-document.addEventListener('click', function (e) {
-  const row = e.target.closest('.div-contender-row, .div-champ-info');
-  if (!row) return;
-  const nameEl = row.querySelector('.div-contender-name') || row.querySelector('.div-champ-name');
-  const name = nameEl ? nameEl.textContent.trim() : null;
-  if (name) window.location.href = 'fighter.html?name=' + encodeURIComponent(name);
-});
-// Make divisional rows look clickable
-document.addEventListener('mouseover', function (e) {
-  const row = e.target.closest('.div-contender-row');
-  if (row) row.style.cursor = 'pointer';
-});
-</script>
 
   <div class="lnx-wrap" id="lucasNudge">
     <div class="lnx-card" id="lucasNudgeCard">

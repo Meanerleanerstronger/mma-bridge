@@ -1,254 +1,246 @@
 // ==============================================
-// MMA BRIDGE - PFP PAGE (PREMIUM REDESIGN)
+// MMA BRIDGE — RANKINGS PAGE
 // ==============================================
+// One data source (data/rankings.json, synced by rankings-sync.js) and one
+// render path (renderSpotlight) drive all three tabs — Men's P4P, Women's
+// P4P, and every Divisional weight class. Previously Men's P4P was a
+// hand-typed static HTML list, Women's P4P was built from a completely
+// different fighters.json field (pfp_women), and Divisional had its own
+// third implementation — three disconnected systems that could each drift
+// out of sync with reality independently. Now there's exactly one.
 
-import CONFIG, { debugLog } from './config.js';
-import API from './api.js';
-import { showLoading, showError } from './loading.js';
-
-const FIGHTER_PHOTOS = {
-  // Men's P4P
-  'islam-makhachev':        'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/7/MAKHACHEV_ISLAM_L_BELT_01-18.png',
-  'ilia-topuria':           'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/TOPURIA_ILIA_L_BELT_10-26.png',
-  'khamzat-chimaev':        'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/CHIMAEV_KHAMZAT_L_BELTMOCK.png',
-  'alex-pereira':           'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/PEREIRA_ALEX_L.png',
-  'alexander-volkanovski':  'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/VOLKANOVSKI_ALEXANDER_L_BELT_01-31.png',
-  'petr-yan':               'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/YAN_PETR_L_BELT_04-09.png',
-  'merab-dvalishvili':      'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2022-08/DVALISHVILI_MERAB_L_08-20.png',
-  'tom-aspinall':           'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/ASPINALL_TOM_L_BELT_10-25.png',
-  'alexandre-pantoja':      'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/PANTOJA_ALEXANDRE_L_07-08.png',
-  'max-holloway':           'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-04/HOLLOWAY_MAX_L_04-13.png',
-  'joshua-van':             'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/VAN_JOSHUA_L_BELTMOCK.png',
-  'arman-tsarukyan':        'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/TSARUKYAN_ARMAN_L_11-22.png',
-  'justin-gaethje':         'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/GAETHJE_JUSTIN_L_BELTMOCK.png',
-  'sean-omalley':           'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/OMALLEY_SEAN_L_01-24.png',
-  'sean-strickland':        'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-01/STRICKLAND_SEAN_L_BELT_01-20.png',
-  'charles-oliveira':       'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/OLIVEIRA_CHARLES_L_BMFMOCK.png',
-  'ciryl-gane':             'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/GANE_CIRYL_R_06-14.png',
-  // Women's P4P
-  'valentina-shevchenko':   'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/SHEVCHENKO_VALENTINA_L_BELT_11-15.png',
-  'kayla-harrison':         'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-06/HARRISON_KAYLA_L_BELTMOCK.png',
-  'zhang-weili':            'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2022-06/d6bd47bc-d423-4ae8-9073-f0abd7777751%252FWEILI_ZHANG_L_06-11.png',
-  'natalia-silva':          'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/SILVA_NATALIA_L_01-24.png',
-  'manon-fiorot':           'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/FIOROT_MANON_L_10-18.png',
-  'mackenzie-dern':         'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/DERN_MACKENZIE_L_BELT.png',
-  'alexa-grasso':           'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/GRASSO_ALEXA_L_03-28.png',
-  'erin-blanchfield':       'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/BLANCHFIELD_ERIN_L_11-15.png',
-  'julianna-pena':          'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2022-08/PENA_JULIANNA_L_12-11.png',
-  'tatiana-suarez':         'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/SUAREZ_TATIANA_L_04-11.png',
-  'virna-jandiroba':        'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/JANDIROBA_VIRNA_L_04-04.png',
-  'raquel-pennington':      'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/5/PENNINGTON_RAQUEL_L_01-20.png',
-  'yan-xiaonan':            'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-04/XIAONAN_YAN_L_04-12.png',
-  'rose-namajunas':         'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-06/NAMAJUNAS_ROSE_L_06-14.png',
-  'maycee-barber':          'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/BARBER_MAYCEE_L_12-06.png',
+const DIV_LABELS = {
+  'Flyweight': 'FLW', 'Bantamweight': 'BW', 'Featherweight': 'FW',
+  'Lightweight': 'LW', 'Welterweight': 'WW', 'Middleweight': 'MW',
+  'Light Heavyweight': 'LHW', 'Heavyweight': 'HW',
+  "Women's Strawweight": 'W·STW', "Women's Flyweight": 'W·FLW',
+  "Women's Bantamweight": 'W·BW', "Women's Featherweight": 'W·FW',
 };
 
-document.addEventListener("DOMContentLoaded", async () => {
-  const drawer      = document.getElementById("fightDrawer");
-  const drawerClose = document.getElementById("drawerClose");
-  const drawerX     = document.getElementById("drawerX");
-  const drawerTitle = document.getElementById("drawerTitle");
-  const drawerContent = document.getElementById("drawerContent");
+// Fighter names have to survive a round trip between two independently
+// edited JSON files (rankings.json from a weekly scrape, fighters.json
+// hand-maintained) — a curly vs straight apostrophe ("Lone'er Kavanagh"
+// vs "Lone’er Kavanagh") was silently breaking the join for that fighter,
+// so the row fell back to a blank initials circle with no explanation.
+// Strip everything but letters/numbers before comparing so punctuation
+// differences can't break the match.
+function normName(s) {
+  return String(s || '').toLowerCase().normalize('NFKD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9]/g, '');
+}
 
-  const esc = (s) => String(s ?? "")
-    .replaceAll("&","&amp;").replaceAll("<","&lt;")
-    .replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
+const esc = (s) => String(s ?? '')
+  .replaceAll('&', '&amp;').replaceAll('<', '&lt;')
+  .replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#039;');
 
-  function openDrawer(title, html) {
-    drawerTitle.textContent = title;
-    drawerContent.innerHTML = html;
-    drawer.classList.add("open");
-    document.body.classList.add("no-scroll");
+document.addEventListener('DOMContentLoaded', async () => {
+  const photoA   = document.getElementById('divPhotoA');
+  const photoB   = document.getElementById('divPhotoB');
+  const pillNav  = document.getElementById('divPillNav');
+  const champInfoEl = document.getElementById('divChampInfo');
+  const listEl   = document.getElementById('divContenderList');
+  const tabs     = document.querySelectorAll('.rnk-tab');
+  const spotlight = document.getElementById('divSpotlight');
 
-    // Staggered animation for fight cards
-    requestAnimationFrame(() => {
-      drawerContent.querySelectorAll('.bout-card').forEach((el, i) => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(14px)';
-        setTimeout(() => {
-          el.style.transition = 'opacity 0.28s ease, transform 0.28s ease';
-          el.style.opacity = '1';
-          el.style.transform = 'translateY(0)';
-        }, 80 + i * 65);
-      });
-    });
-  }
+  let fighterMap = {};
+  let p4pMen = null, p4pWomen = null, divisions = [];
+  let activeLayer = 'A';
+  let currentDivIdx = 0;
+  let currentMode = 'mens-p4p'; // 'mens-p4p' | 'womens-p4p' | 'divisional'
 
-  function closeDrawer() {
-    drawer.classList.remove("open");
-    document.body.classList.remove("no-scroll");
-  }
-
-  drawerClose.onclick = closeDrawer;
-  drawerX.onclick     = closeDrawer;
-  document.addEventListener("keydown", e => e.key === "Escape" && closeDrawer());
-
-  // ==============================================
-  // LOAD + RENDER
-  // ==============================================
   try {
-    debugLog('Loading PFP page...');
+    const ts = Date.now();
+    const [rankings, fighters] = await Promise.all([
+      fetch('data/rankings.json?_=' + ts, { cache: 'no-store' }).then(r => r.ok ? r.json() : []),
+      fetch('data/fighters.json?_=' + ts, { cache: 'no-store' }).then(r => r.ok ? r.json() : []),
+    ]);
 
-    const rawList = await fetch('data/fighters.json?_=' + Date.now(), { cache: 'no-store' })
-      .then(r => r.json())
-      .catch(() => []);
+    fighters.forEach(f => { fighterMap[normName(f.name)] = f; });
 
-    // Build slug-keyed fighter map
-    const fighters = {};
-    rawList.forEach(f => {
-      const rec = f.record || {};
-      const wins = rec.wins ?? 0, losses = rec.losses ?? 0, draws = rec.draws ?? 0;
-      const recordStr = draws > 0 ? `${wins}–${losses}–${draws}` : `${wins}–${losses}`;
-      const domRow = document.querySelector(`[data-fighter="${f.id}"] .pfp-row-num`);
-      const rank = domRow ? (parseInt(domRow.textContent) || null) : (f.pfp || null);
-      fighters[f.id] = {
-        name: f.name, record: recordStr,
-        division: f.weightClass || f.division || '',
-        stance: f.stance || '—', height: f.height || '—', reach: f.reach || '—',
-        flag: f.flag || '', country: f.fightingOut || f.nationality || '',
-        champion: f.ranking || null, last5: f.last5 || [],
-        rank,
-        rankWomen: f.pfp_women || null,
-        gender: f.gender || 'male',
-      };
+    (rankings || []).forEach(d => {
+      if (/pound-for-pound/i.test(d.division)) {
+        if (/women/i.test(d.division)) p4pWomen = d;
+        else p4pMen = d;
+      }
+    });
+    const seen = new Set();
+    divisions = (rankings || []).filter(d => {
+      if (/pound-for-pound/i.test(d.division)) return false;
+      if (seen.has(d.division)) return false;
+      seen.add(d.division);
+      return true;
+    });
+    // Men's divisions first, then women's — pill nav order + separator.
+    divisions.sort((a, b) => {
+      const aw = /women/i.test(a.division) ? 1 : 0;
+      const bw = /women/i.test(b.division) ? 1 : 0;
+      return aw - bw;
     });
 
-    // Sorted women's list for dynamic grid
-    const womenList = rawList
-      .filter(f => f.gender === 'female' && f.pfp_women)
-      .sort((a, b) => a.pfp_women - b.pfp_women);
-
-    // ── Render women's grid into #pfpWomenGrid ──
-    function buildWomenGrid() {
-      const grid = document.getElementById('pfpWomenGrid');
-      if (!grid || grid.dataset.built) return;
-      grid.dataset.built = '1';
-      const left = document.createElement('div');
-      const right = document.createElement('div');
-      womenList.forEach((f, i) => {
-        if (i === 0) return; // #1 shown in hero
-        const rec = f.record || {};
-        const wins = rec.wins ?? 0, losses = rec.losses ?? 0, draws = rec.draws ?? 0;
-        const recStr = draws > 0 ? `${wins}–${losses}–${draws}` : `${wins}–${losses}`;
-        const photo = FIGHTER_PHOTOS[f.id] || f.img || '';
-        const champLabel = f.ranking || '';
-        const isChamp = champLabel.toLowerCase().includes('champ');
-        const row = document.createElement('div');
-        row.className = 'pfp-row';
-        row.dataset.fighter = f.id;
-        row.innerHTML = `
-          <div class="pfp-row-num">${f.pfp_women}</div>
-          <div class="pfp-row-photo" style="${photo ? `background-image:url('${photo}')` : ''}"></div>
-          <div class="pfp-row-info">
-            <div class="pfp-row-name">${esc(f.name)}</div>
-            <div class="pfp-row-sub">${esc(f.weightClass||'')} · ${esc(f.flag||'')}${isChamp ? ` <span class="pfp-row-champ">${esc(champLabel)}</span>` : ''}</div>
-          </div>
-          <div class="pfp-row-rec">${recStr}</div>`;
-        (i < 8 ? left : right).appendChild(row);
-      });
-      grid.appendChild(left);
-      grid.appendChild(right);
-    }
-
-    // ── Toggle logic ──
-    let showingWomen = false;
-    const toggleBtn   = document.getElementById('pfpGenderToggle');
-    const menSection  = document.getElementById('pfpMenSection');
-    const womenSection = document.getElementById('pfpWomenSection');
-    const listTitle   = document.getElementById('pfpListTitle');
-    const heroEl      = document.querySelector('.pfp-hero');
-
-    // Men's hero data
-    const menHero = {
-      photo: 'https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/7/MAKHACHEV_ISLAM_L_BELT_01-18.png',
-      tag: '#1 Pound for Pound · June 2026',
-      name: 'Islam<br>Makhachev',
-      record: '28–1',
-      div: 'Lightweight · 🇷🇺',
-      champ: 'LW Champion',
-      slug: 'islam-makhachev',
-    };
-    // Women's hero — Valentina
-    const womenHeroF = womenList[0];
-    const womenHero = womenHeroF ? {
-      photo: FIGHTER_PHOTOS[womenHeroF.id] || womenHeroF.img || '',
-      tag: '#1 Women\'s P4P · June 2026',
-      name: womenHeroF.name.replace(' ', '<br>'),
-      record: (() => { const r = womenHeroF.record||{}; const w=r.wins??0,l=r.losses??0,d=r.draws??0; return d>0?`${w}–${l}–${d}`:`${w}–${l}`; })(),
-      div: `${womenHeroF.weightClass||''} · ${womenHeroF.flag||''}`,
-      champ: womenHeroF.ranking || '',
-      slug: womenHeroF.id,
-    } : null;
-
-    function setHero(data) {
-      if (!heroEl || !data) return;
-      heroEl.dataset.fighter = data.slug;
-      heroEl.querySelector('.pfp-hero-photo').style.backgroundImage = `url('${data.photo}')`;
-      heroEl.querySelector('.pfp-hero-tag').textContent = data.tag;
-      heroEl.querySelector('.pfp-hero-name').innerHTML = data.name;
-      heroEl.querySelector('.pfp-hero-record').textContent = data.record;
-      heroEl.querySelector('.pfp-hero-div').textContent = data.div;
-      heroEl.querySelector('.pfp-hero-champ').textContent = data.champ;
-    }
-
-    function switchToWomen() {
-      if (showingWomen) return;
-      showingWomen = true;
-      buildWomenGrid();
-      if (listTitle) listTitle.textContent = "Women's Pound-for-Pound";
-      // Fade in women's section (tab handles display toggling)
-      requestAnimationFrame(() => {
-        womenSection.style.opacity = '0';
-        womenSection.style.transform = 'translateY(14px)';
-        requestAnimationFrame(() => {
-          womenSection.style.transition = 'opacity 0.38s ease, transform 0.38s ease';
-          womenSection.style.opacity = '1';
-          womenSection.style.transform = 'translateY(0)';
-          setTimeout(() => { womenSection.style.transition = ''; }, 400);
-        });
-      });
-      attachRowClicks();
-      if (womenHero) setHero(womenHero);
-    }
-
-    function switchToMen() {
-      if (!showingWomen) return;
-      showingWomen = false;
-      if (listTitle) listTitle.textContent = "Men's Pound-for-Pound";
-      requestAnimationFrame(() => {
-        menSection.style.opacity = '0';
-        menSection.style.transform = 'translateY(14px)';
-        requestAnimationFrame(() => {
-          menSection.style.transition = 'opacity 0.38s ease, transform 0.38s ease';
-          menSection.style.opacity = '1';
-          menSection.style.transform = 'translateY(0)';
-          setTimeout(() => { menSection.style.transition = ''; }, 400);
-        });
-      });
-      attachRowClicks();
-      setHero(menHero);
-    }
-
-    // Expose for tab system
-    window.pfpSwitchToMen   = switchToMen;
-    window.pfpSwitchToWomen = switchToWomen;
-
-    function attachRowClicks() {
-      document.querySelectorAll("[data-fighter]").forEach(card => {
-      card.onclick = e => {
-        e.preventDefault();
-        const slug = card.dataset.fighter;
-        if (!slug) return;
-        window.location.href = `fighter.html?id=${encodeURIComponent(slug)}`;
-      };
-    }); // end forEach
-    } // end attachRowClicks
-
-    attachRowClicks();
-    debugLog('PFP page ready!');
-  } catch (error) {
-    console.error('Error loading fighters:', error);
-    const container = document.querySelector('.pfp-grid') || document.body;
-    showError(container, 'Unable to load rankings right now. Please try again.');
+    buildPillNav();
+    if (p4pMen) renderSpotlight(p4pMen, { isP4P: true, animate: false });
+    preloadUpcomingPhotos();
+  } catch (e) {
+    console.error('Rankings load failed:', e);
+    if (listEl) listEl.innerHTML = `<div style="padding:40px 0;color:rgba(255,255,255,0.3);font-family:'Inter',sans-serif;font-size:0.85rem;">Unable to load rankings right now. Please try again.</div>`;
+    return;
   }
+
+  // ── Pill nav (Divisional weight classes only) ──────────
+  function buildPillNav() {
+    if (!pillNav) return;
+    const menCount = divisions.filter(d => !/women/i.test(d.division)).length;
+    pillNav.innerHTML = divisions.map((d, i) => {
+      const isW = /women/i.test(d.division);
+      const lbl = DIV_LABELS[d.division] || d.division;
+      const sep = i === menCount ? '<div class="div-pill-sep"></div>' : '';
+      return `${sep}<button class="div-pill${isW ? ' women' : ''}${i === 0 ? ' active' : ''}" data-di="${i}">${lbl}</button>`;
+    }).join('');
+    pillNav.querySelectorAll('.div-pill').forEach(p => {
+      p.addEventListener('click', () => {
+        const idx = parseInt(p.dataset.di);
+        if (idx === currentDivIdx) return;
+        currentDivIdx = idx;
+        pillNav.querySelectorAll('.div-pill').forEach((el, i) => el.classList.toggle('active', i === idx));
+        renderSpotlight(divisions[idx], { isP4P: false, animate: true });
+      });
+    });
+  }
+
+  function preloadUpcomingPhotos() {
+    const all = [...(p4pMen ? [p4pMen] : []), ...(p4pWomen ? [p4pWomen] : []), ...divisions];
+    all.forEach(d => {
+      const hero = d.fighters.find(f => f.isChamp) || d.fighters.find(f => f.rank === 1);
+      const fw = hero ? fighterMap[normName(hero.name)] : null;
+      if (fw?.img) { const img = new Image(); img.src = fw.img; }
+    });
+  }
+
+  // ── Tab switching ───────────────────────────────────────
+  tabs.forEach(t => t.addEventListener('click', () => {
+    const key = t.dataset.tab;
+    if (key === currentMode) return;
+    tabs.forEach(el => el.classList.toggle('active', el === t));
+    currentMode = key;
+    document.body.classList.toggle('is-divisional', key === 'divisional');
+
+    if (key === 'mens-p4p'   && p4pMen)   renderSpotlight(p4pMen,   { isP4P: true, animate: true });
+    if (key === 'womens-p4p' && p4pWomen) renderSpotlight(p4pWomen, { isP4P: true, animate: true });
+    if (key === 'divisional') renderSpotlight(divisions[currentDivIdx], { isP4P: false, animate: true });
+  }));
+
+  // ── One render path for every tab ───────────────────────
+  function renderSpotlight(entry, { isP4P, animate }) {
+    if (!entry) return;
+    const isW = /women/i.test(entry.division);
+    const hero = isP4P
+      ? entry.fighters.find(f => f.rank === 1)
+      : entry.fighters.find(f => f.isChamp);
+    if (!hero) return;
+    const contenders = entry.fighters
+      .filter(f => f !== hero && normName(f.name) !== normName(hero.name))
+      .sort((a, b) => (a.rank === 'C' ? 0 : a.rank) - (b.rank === 'C' ? 0 : b.rank))
+      .slice(0, 15);
+    const heroFw = fighterMap[normName(hero.name)];
+    const photoUrl = heroFw?.img || '';
+
+    const apply = () => {
+      updateChampInfo(entry, hero, heroFw, isW, isP4P);
+      updateContenders(contenders, isW);
+    };
+
+    if (!animate) {
+      if (photoUrl) { photoA.style.backgroundImage = `url('${photoUrl}')`; photoA.classList.add('active'); }
+      apply();
+      return;
+    }
+
+    const next = activeLayer === 'A' ? photoB : photoA;
+    const curr = activeLayer === 'A' ? photoA : photoB;
+    const swap = () => {
+      next.classList.add('active');
+      setTimeout(() => curr.classList.remove('active'), 20);
+      activeLayer = activeLayer === 'A' ? 'B' : 'A';
+    };
+    if (photoUrl) {
+      const img = new Image();
+      img.onload  = () => { next.style.backgroundImage = `url('${photoUrl}')`; swap(); };
+      img.onerror = () => { next.style.backgroundImage = ''; swap(); };
+      img.src = photoUrl;
+    } else {
+      next.style.backgroundImage = '';
+      swap();
+    }
+
+    listEl.classList.add('fading');
+    champInfoEl.classList.add('fading');
+    setTimeout(() => {
+      apply();
+      listEl.classList.remove('fading');
+      champInfoEl.classList.remove('fading');
+    }, 210);
+  }
+
+  function updateChampInfo(entry, hero, fw, isW, isP4P) {
+    if (!champInfoEl) return;
+    const rec = fw ? `${fw.record?.wins ?? 0}–${fw.record?.losses ?? 0}${fw.record?.draws ? '–' + fw.record.draws : ''}` : '';
+    const nick = fw?.nickname ? `"${esc(fw.nickname)}"` : '';
+    const divLabel = fw?.weightClass || entry.division.replace(/'s Pound-for-Pound Top Rank/i, "'s P4P").replace(/^Pound-for-Pound Top Rank/i, 'P4P');
+    const badgeLabel = isP4P ? '#1 POUND-FOR-POUND' : (hero.movement === 'new-champ' ? 'NEW CHAMPION' : 'CHAMPION');
+    champInfoEl.className = 'div-champ-info' + (isW ? ' women-div' : '');
+    champInfoEl.innerHTML = `
+      <div class="div-champ-badge${hero.movement === 'new-champ' ? ' div-champ-badge-new' : ''}">${badgeLabel}</div>
+      <div class="div-champ-division">${esc(divLabel)}${fw?.flag ? ' · ' + fw.flag : ''}</div>
+      ${nick ? `<div class="div-champ-nickname">${nick}</div>` : ''}
+      <div class="div-champ-name">${esc(hero.name)}</div>
+      ${rec ? `<div class="div-champ-record">${rec}</div>` : ''}
+    `;
+  }
+
+  function updateContenders(contenders, isW) {
+    if (!listEl) return;
+    const gold = isW ? 'rgba(240,100,200,0.5)' : 'rgba(255,138,61,0.5)';
+    listEl.innerHTML = `
+      <div class="div-contenders-header">
+        <span class="div-contenders-label">Contenders</span>
+        <div class="div-contenders-line"></div>
+      </div>
+      ${contenders.map(f => {
+        const fw  = fighterMap[normName(f.name)];
+        const rec = fw ? `${fw.record?.wins ?? '?'}–${fw.record?.losses ?? '?'}${fw.record?.draws ? '–' + fw.record.draws : ''}` : '';
+        const photo = fw?.img || '';
+        const init  = f.name.trim().split(/\s+/).pop().substring(0, 2).toUpperCase();
+        const rankColor = typeof f.rank === 'number' && f.rank <= 3 ? `color:${gold}` : '';
+        // Every row gets a movement indicator — a neutral dash for "same"
+        // instead of nothing, so the list doesn't read like most rows were
+        // never updated (only the ones that happened to move showed
+        // anything at all before).
+        const moveHtml = f.movement === 'up'
+          ? `<span class="div-move div-move-up">▲ ${(f.prevRank ?? f.rank) - f.rank}</span>`
+          : f.movement === 'down'
+            ? `<span class="div-move div-move-down">▼ ${f.rank - (f.prevRank ?? f.rank)}</span>`
+            : f.movement === 'new'
+              ? `<span class="div-move div-move-new">NEW</span>`
+              : `<span class="div-move div-move-same">–</span>`;
+        return `<div class="div-contender-row" data-name="${esc(f.name)}">
+          <div class="div-contender-rank" style="${rankColor}">#${f.rank}</div>
+          <div class="div-contender-photo" ${photo ? `style="background-image:url('${photo}')"` : ''}>${photo ? '' : init}</div>
+          <div class="div-contender-info">
+            <div class="div-contender-name">${esc(f.name)}</div>
+            ${rec ? `<div class="div-contender-rec">${rec}</div>` : ''}
+          </div>
+          ${moveHtml}
+        </div>`;
+      }).join('')}
+    `;
+  }
+
+  // ── Row / hero clicks → fighter profile, same tab ───────
+  document.addEventListener('click', e => {
+    const row = e.target.closest('.div-contender-row, .div-champ-info');
+    if (!row || !spotlight.contains(row)) return;
+    const name = row.dataset.name || row.querySelector('.div-champ-name')?.textContent?.trim();
+    if (name) window.location.href = 'fighter.html?name=' + encodeURIComponent(name);
+  });
 });
