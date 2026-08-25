@@ -679,17 +679,27 @@
     .pr-sign-in-btn:hover { background: rgba(255,138,61,0.18); }
 
     /* ── BACK BUTTON ── */
+    /* Was a bare text link with no visual weight, easy to miss sitting over
+       the hero photo. Matches the pill-button treatment used everywhere
+       else on the site (fighter.html's fp-back-btn), with backdrop blur
+       since this one sits over a photo instead of a solid bar. */
     .pr-back {
-      position: absolute; top: 20px; left: 40px;
+      position: absolute; top: 20px; left: 40px; z-index: 3;
       display: flex; align-items: center; gap: 7px;
-      color: rgba(255,255,255,0.4);
+      color: rgba(255,255,255,0.7);
+      background: rgba(0,0,0,0.28);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 20px;
+      padding: 7px 14px;
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.65rem; font-weight: 700;
+      font-size: 0.62rem; font-weight: 700;
       letter-spacing: 0.12em; text-transform: uppercase;
       text-decoration: none;
-      transition: color 0.2s;
+      transition: color 0.15s, background 0.15s, border-color 0.15s;
     }
-    .pr-back:hover { color: #ff8a3d; }
+    .pr-back:hover { color: #ff8a3d; background: rgba(255,138,61,0.14); border-color: rgba(255,138,61,0.35); }
+    .pr-back svg { width: 8px; height: 12px; flex-shrink: 0; }
 
     /* ── REMOVE CONFIRM ── */
     .pr-confirm-box {

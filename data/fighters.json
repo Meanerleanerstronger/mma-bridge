@@ -50712,5 +50712,38 @@
     "id": "steven-koslow",
     "name": "Steven Koslow",
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-01/KOSLOW_STEVEN_L_12-10.png?itok=pqAG6P4G"
+  },
+  {
+    "id": "michael-morales",
+    "name": "Michael Morales",
+    "nickname": "",
+    "nationality": "Ecuadorean",
+    "flag": "🇪🇨",
+    "weightClass": "Welterweight",
+    "ranking": "#3",
+    "record": {
+      "wins": 19,
+      "losses": 0,
+      "draws": 0
+    },
+    "height": "6'0\"",
+    "reach": "79\"",
+    "stance": "Orthodox",
+    "age": 27,
+    "fightingOut": "Pasaje, Ecuador",
+    "style": "Striker",
+    "pfp": false,
+    "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/5/MORALES_MICHAEL_L_08-24.png",
+    "bio": "Michael Morales is an undefeated Ecuadorean welterweight contender known for his sharp striking. He picked up a first-round TKO over Sean Brady at UFC 322, extending his unbeaten record and cementing his spot in the welterweight top 5.",
+    "last5": [
+      {
+        "opponent": "Sean Brady",
+        "result": "W",
+        "method": "TKO",
+        "event": "UFC 322: Della Maddalena vs. Makhachev",
+        "round": 1,
+        "time": "3:27"
+      }
+    ]
   }
 ]

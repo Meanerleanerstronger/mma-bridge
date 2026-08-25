@@ -90,7 +90,7 @@
           <div class="pr-icon"></div>
           <h2>Profile not found</h2>
           <p>This user's profile doesn't exist or is not public.</p>
-          <a href="javascript:history.back()" class="pr-sign-in-btn">Go Back</a>
+          <a href="index.html" class="pr-sign-in-btn" onclick="if(history.length>1){history.back();return false;}">Go Back</a>
         </div>`;
       return;
     }
@@ -331,7 +331,7 @@
     root.innerHTML = `
       <div class="pr-hero">
         <div class="pr-hero-bg"></div>
-        <a href="javascript:history.back()" class="pr-back">
+        <a href="index.html" class="pr-back" onclick="if(history.length>1){history.back();return false;}">
           <svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="6,1 1,6 6,11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           Back
         </a>
@@ -836,7 +836,7 @@
       <!-- HERO -->
       <div class="pr-hero">
         <div class="pr-hero-bg"></div>
-        <a href="javascript:history.back()" class="pr-back">
+        <a href="index.html" class="pr-back" onclick="if(history.length>1){history.back();return false;}">
           <svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="6,1 1,6 6,11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           Back
         </a>
