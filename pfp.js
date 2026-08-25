@@ -19,13 +19,17 @@ const DIV_LABELS = {
 
 // Fighter names have to survive a round trip between two independently
 // edited JSON files (rankings.json from a weekly scrape, fighters.json
-// hand-maintained) — a curly vs straight apostrophe ("Lone'er Kavanagh"
-// vs "Lone’er Kavanagh") was silently breaking the join for that fighter,
-// so the row fell back to a blank initials circle with no explanation.
-// Strip everything but letters/numbers before comparing so punctuation
-// differences can't break the match.
+// hand-maintained). Two ways this broke the join silently, falling back
+// to a blank initials circle with no explanation: a curly vs straight
+// apostrophe ("Lone'er Kavanagh" vs "Lone’er Kavanagh"), and un-decoded
+// HTML entities from the scrape ("Sean O&#039;Malley" instead of "Sean
+// O'Malley" — the &#039; itself doesn't strip to nothing, so it never
+// matched "seanomalley"). Decode entities first, then strip everything
+// but letters/numbers so punctuation differences can't break the match.
 function normName(s) {
-  return String(s || '').toLowerCase().normalize('NFKD')
+  return String(s || '')
+    .replace(/&#0?39;|&apos;/g, "'").replace(/&amp;/g, '&')
+    .toLowerCase().normalize('NFKD')
     .replace(/[̀-ͯ]/g, '')
     .replace(/[^a-z0-9]/g, '');
 }

@@ -2154,7 +2154,7 @@
     "id": "max-holloway",
     "name": "Max Holloway",
     "nickname": "Blessed",
-    "nationality": "Hawaiian",
+    "nationality": "American",
     "flag": "🇺🇸",
     "weightClass": "Lightweight",
     "ranking": "#4",
@@ -3048,8 +3048,8 @@
     "id": "joshua-van",
     "name": "Joshua Van",
     "nickname": "The Fearless",
-    "nationality": "Canadian",
-    "flag": "🇨🇦",
+    "nationality": "Burmese",
+    "flag": "🇲🇲",
     "weightClass": "Flyweight",
     "ranking": "Champion",
     "record": {
@@ -3057,11 +3057,11 @@
       "losses": 2,
       "draws": 0
     },
-    "height": "5'6\"",
-    "reach": "68\"",
+    "height": "5'5\"",
+    "reach": "65\"",
     "stance": "Southpaw",
     "age": 27,
-    "fightingOut": "Calgary, Canada",
+    "fightingOut": "Hakha, Myanmar",
     "style": "Striker",
     "pfp": true,
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/VAN_JOSHUA_L_BELTMOCK.png",
@@ -3224,7 +3224,7 @@
     "id": "valentina-shevchenko",
     "name": "Valentina Shevchenko",
     "nickname": "Bullet",
-    "nationality": "Kyrgyz",
+    "nationality": "Kyrgyzstani",
     "flag": "🇰🇬",
     "weightClass": "Women's Flyweight",
     "ranking": "Champion",
@@ -7253,8 +7253,8 @@
     "id": "amir-albazi",
     "name": "Amir Albazi",
     "nickname": "The Prince",
-    "nationality": "Swedish-Kuwaiti",
-    "flag": "🇸🇪",
+    "nationality": "Iraqi",
+    "flag": "🇮🇶",
     "weightClass": "Flyweight",
     "ranking": "#8",
     "record": {
@@ -8200,8 +8200,8 @@
     "id": "lerone-murphy",
     "name": "Lerone Murphy",
     "nickname": "The Miracle",
-    "nationality": "British",
-    "flag": "🇬🇧",
+    "nationality": "English",
+    "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
     "weightClass": "Featherweight",
     "ranking": "#3",
     "record": {
@@ -8572,8 +8572,8 @@
     "id": "paddy-pimblett",
     "name": "Paddy Pimblett",
     "nickname": "The Baddy",
-    "nationality": "British",
-    "flag": "🇬🇧",
+    "nationality": "English",
+    "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
     "weightClass": "Lightweight",
     "ranking": "#5",
     "record": {
@@ -11694,7 +11694,9 @@
     "weightClass": "Bantamweight",
     "height": "5'8\"",
     "reach": "68\"",
-    "statsSyncedAt": "2026-08-20T09:34:56.693Z"
+    "statsSyncedAt": "2026-08-20T09:34:56.693Z",
+    "nationality": "Canadian",
+    "flag": "🇨🇦"
   },
   {
     "id": "kyle-daukaus",
@@ -11860,7 +11862,9 @@
     "weightClass": "Featherweight",
     "height": "5'11\"",
     "reach": "72.5\"",
-    "statsSyncedAt": "2026-08-20T09:35:02.472Z"
+    "statsSyncedAt": "2026-08-20T09:35:02.472Z",
+    "nationality": "Brazilian",
+    "flag": "🇧🇷"
   },
   {
     "id": "steve-garcia",
@@ -11943,7 +11947,9 @@
     "weightClass": "Featherweight",
     "height": "6'0\"",
     "reach": "75\"",
-    "statsSyncedAt": "2026-08-20T09:35:05.109Z"
+    "statsSyncedAt": "2026-08-20T09:35:05.109Z",
+    "nationality": "American",
+    "flag": "🇺🇸"
   },
   {
     "id": "josh-hokit",
@@ -12018,7 +12024,9 @@
     "nickname": "The Incredible Hok",
     "height": "6'1\"",
     "reach": "73.5\"",
-    "statsSyncedAt": "2026-08-20T09:35:08.011Z"
+    "statsSyncedAt": "2026-08-20T09:35:08.011Z",
+    "nationality": "American",
+    "flag": "🇺🇸"
   },
   {
     "id": "kyoji-horiguchi",
@@ -12125,7 +12133,9 @@
     "weightClass": "Flyweight",
     "height": "5'4\"",
     "reach": "69\"",
-    "statsSyncedAt": "2026-08-20T09:35:10.693Z"
+    "statsSyncedAt": "2026-08-20T09:35:10.693Z",
+    "nationality": "Japanese",
+    "flag": "🇯🇵"
   },
   {
     "id": "vinicius-oliveira",
@@ -12417,7 +12427,9 @@
     "height": "5'7\"",
     "reach": "67\"",
     "stance": "Orthodox",
-    "statsSyncedAt": "2026-08-20T09:35:19.475Z"
+    "statsSyncedAt": "2026-08-20T09:35:19.475Z",
+    "nationality": "Brazilian",
+    "flag": "🇧🇷"
   },
   {
     "id": "ion-cutelaba",
@@ -12592,7 +12604,9 @@
     "height": "6'4\"",
     "reach": "79\"",
     "stance": "Orthodox",
-    "statsSyncedAt": "2026-08-20T09:35:25.304Z"
+    "statsSyncedAt": "2026-08-20T09:35:25.304Z",
+    "nationality": "New Zealander",
+    "flag": "🇳🇿"
   },
   {
     "id": "farid-basharat",
@@ -12724,7 +12738,9 @@
     "weightClass": "Bantamweight",
     "height": "5'8\"",
     "reach": "71\"",
-    "statsSyncedAt": "2026-08-20T09:35:28.062Z"
+    "statsSyncedAt": "2026-08-20T09:35:28.062Z",
+    "nationality": "British",
+    "flag": "🇬🇧"
   },
   {
     "id": "ethyn-ewing",
@@ -12975,7 +12991,9 @@
     "stance": "Orthodox",
     "height": "5'4\"",
     "reach": "67\"",
-    "statsSyncedAt": "2026-08-20T09:35:36.321Z"
+    "statsSyncedAt": "2026-08-20T09:35:36.321Z",
+    "nationality": "Brazilian",
+    "flag": "🇧🇷"
   },
   {
     "id": "andre-lima",
@@ -13610,7 +13628,9 @@
     "stance": "Switch",
     "height": "5'8\"",
     "reach": "71.5\"",
-    "statsSyncedAt": "2026-08-20T09:35:56.063Z"
+    "statsSyncedAt": "2026-08-20T09:35:56.063Z",
+    "nationality": "Kyrgyzstani",
+    "flag": "🇰🇬"
   },
   {
     "id": "manuel-torres",
@@ -13726,7 +13746,9 @@
     "stance": "Switch",
     "height": "5'10\"",
     "reach": "73\"",
-    "statsSyncedAt": "2026-08-20T09:35:58.699Z"
+    "statsSyncedAt": "2026-08-20T09:35:58.699Z",
+    "nationality": "Mexican",
+    "flag": "🇲🇽"
   },
   {
     "id": "shara-magomedov",
@@ -14205,7 +14227,9 @@
     "stance": "Southpaw",
     "height": "6'0\"",
     "reach": "76\"",
-    "statsSyncedAt": "2026-08-20T09:36:10.328Z"
+    "statsSyncedAt": "2026-08-20T09:36:10.328Z",
+    "nationality": "Russian",
+    "flag": "🇷🇺"
   },
   {
     "id": "asu-almabayev",
@@ -14321,7 +14345,9 @@
     "weightClass": "Flyweight",
     "height": "5'4\"",
     "reach": "65\"",
-    "statsSyncedAt": "2026-08-20T09:36:12.954Z"
+    "statsSyncedAt": "2026-08-20T09:36:12.954Z",
+    "nationality": "Kazakhstani",
+    "flag": "🇰🇿"
   },
   {
     "id": "charles-johnson",
@@ -14453,7 +14479,9 @@
     "stance": "Switch",
     "height": "5'9\"",
     "reach": "70\"",
-    "statsSyncedAt": "2026-08-20T09:36:15.484Z"
+    "statsSyncedAt": "2026-08-20T09:36:15.484Z",
+    "nationality": "American",
+    "flag": "🇺🇸"
   },
   {
     "id": "abusupiyan-magomedov",
@@ -14811,7 +14839,9 @@
     "stance": "Orthodox",
     "height": "6'4\"",
     "reach": "76\"",
-    "statsSyncedAt": "2026-08-20T09:36:21.352Z"
+    "statsSyncedAt": "2026-08-20T09:36:21.352Z",
+    "nationality": "Russian",
+    "flag": "🇷🇺"
   },
   {
     "id": "tyrell-fortune",
@@ -14925,7 +14955,9 @@
     "weightClass": "Heavyweight",
     "height": "6'3\"",
     "reach": "75.5\"",
-    "statsSyncedAt": "2026-08-20T09:36:24.236Z"
+    "statsSyncedAt": "2026-08-20T09:36:24.236Z",
+    "nationality": "American",
+    "flag": "🇺🇸"
   },
   {
     "id": "nursulton-ruziboev",
@@ -15829,7 +15861,9 @@
     "weightClass": "Flyweight",
     "height": "5'6\"",
     "reach": "67\"",
-    "statsSyncedAt": "2026-08-20T09:36:49.392Z"
+    "statsSyncedAt": "2026-08-20T09:36:49.392Z",
+    "nationality": "English",
+    "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿"
   },
   {
     "id": "ferreira",
@@ -16243,7 +16277,9 @@
     "weightClass": "Women's Flyweight",
     "height": "5'5\"",
     "reach": "65\"",
-    "statsSyncedAt": "2026-08-20T09:36:58.161Z"
+    "statsSyncedAt": "2026-08-20T09:36:58.161Z",
+    "nationality": "American",
+    "flag": "🇺🇸"
   },
   {
     "id": "wang-cong",
@@ -16350,7 +16386,9 @@
     "weightClass": "Women's Flyweight",
     "height": "5'6\"",
     "reach": "65.5\"",
-    "statsSyncedAt": "2026-08-20T09:37:00.705Z"
+    "statsSyncedAt": "2026-08-20T09:37:00.705Z",
+    "nationality": "Chinese",
+    "flag": "🇨🇳"
   },
   {
     "id": "kai-kamaka-iii",
@@ -17133,7 +17171,9 @@
     "weightClass": "Bantamweight",
     "height": "5'8\"",
     "reach": "67\"",
-    "statsSyncedAt": "2026-08-20T09:37:20.424Z"
+    "statsSyncedAt": "2026-08-20T09:37:20.424Z",
+    "nationality": "Chinese",
+    "flag": "🇨🇳"
   },
   {
     "id": "natalia-silva",
@@ -17239,7 +17279,9 @@
     "weightClass": "Women's Flyweight",
     "height": "5'4\"",
     "reach": "65\"",
-    "statsSyncedAt": "2026-08-20T09:37:23.358Z"
+    "statsSyncedAt": "2026-08-20T09:37:23.358Z",
+    "nationality": "Brazilian",
+    "flag": "🇧🇷"
   },
   {
     "id": "deiveson-figueiredo",
@@ -17347,7 +17389,9 @@
     "weightClass": "Bantamweight",
     "height": "5'5\"",
     "reach": "68\"",
-    "statsSyncedAt": "2026-08-20T09:37:26.304Z"
+    "statsSyncedAt": "2026-08-20T09:37:26.304Z",
+    "nationality": "Brazilian",
+    "flag": "🇧🇷"
   },
   {
     "id": "modestas-bukauskas",
@@ -17593,7 +17637,9 @@
     "weightClass": "Flyweight",
     "height": "5'6\"",
     "reach": "65\"",
-    "statsSyncedAt": "2026-08-20T09:37:32.178Z"
+    "statsSyncedAt": "2026-08-20T09:37:32.178Z",
+    "nationality": "American",
+    "flag": "🇺🇸"
   },
   {
     "id": "ricky-turcios",
@@ -17984,7 +18030,9 @@
     "height": "6'0\"",
     "reach": "75.5\"",
     "stance": "Orthodox",
-    "statsSyncedAt": "2026-08-20T09:37:46.274Z"
+    "statsSyncedAt": "2026-08-20T09:37:46.274Z",
+    "nationality": "New Zealander",
+    "flag": "🇳🇿"
   },
   {
     "id": "tallison-teixeira",
@@ -18328,7 +18376,9 @@
     "weightClass": "Lightweight",
     "height": "6'0\"",
     "reach": "75\"",
-    "statsSyncedAt": "2026-08-21T09:37:53.371Z"
+    "statsSyncedAt": "2026-08-21T09:37:53.371Z",
+    "nationality": "Australian",
+    "flag": "🇦🇺"
   },
   {
     "id": "jamie-mullarkey",
@@ -20769,7 +20819,9 @@
     "height": "5'4\"",
     "reach": "65\"",
     "nickname": "Amandinha",
-    "statsSyncedAt": "2026-08-21T09:39:36.007Z"
+    "statsSyncedAt": "2026-08-21T09:39:36.007Z",
+    "nationality": "Brazilian",
+    "flag": "🇧🇷"
   },
   {
     "id": "zach-reese",
@@ -21261,7 +21313,9 @@
     "weightClass": "Light Heavyweight",
     "height": "6'4\"",
     "reach": "78\"",
-    "statsSyncedAt": "2026-08-21T09:40:01.904Z"
+    "statsSyncedAt": "2026-08-21T09:40:01.904Z",
+    "nationality": "Dutch",
+    "flag": "🇳🇱"
   },
   {
     "id": "raul-rosas-jr",
@@ -21369,7 +21423,9 @@
     "height": "5'9\"",
     "reach": "67\"",
     "stance": "Southpaw",
-    "statsSyncedAt": "2026-08-21T09:40:05.511Z"
+    "statsSyncedAt": "2026-08-21T09:40:05.511Z",
+    "nationality": "Mexican-American",
+    "flag": "🇺🇸"
   },
   {
     "id": "rob-font",
@@ -21707,7 +21763,9 @@
     "weightClass": "Middleweight",
     "height": "6'3\"",
     "reach": "75\"",
-    "statsSyncedAt": "2026-08-21T09:40:14.293Z"
+    "statsSyncedAt": "2026-08-21T09:40:14.293Z",
+    "nationality": "Brazilian",
+    "flag": "🇧🇷"
   },
   {
     "id": "brunno-ferreira",
@@ -22211,7 +22269,9 @@
     "weightClass": "Light Heavyweight",
     "height": "6'3\"",
     "reach": "76\"",
-    "statsSyncedAt": "2026-08-21T09:40:31.820Z"
+    "statsSyncedAt": "2026-08-21T09:40:31.820Z",
+    "nationality": "Uzbekistani",
+    "flag": "🇺🇿"
   },
   {
     "id": "nurullo-aliev",
@@ -23057,7 +23117,9 @@
     "reach": "76.0\"",
     "stance": "Orthodox",
     "nickname": "The Caucasian",
-    "statsSyncedAt": "2026-08-21T09:41:06.348Z"
+    "statsSyncedAt": "2026-08-21T09:41:06.348Z",
+    "nationality": "Georgian",
+    "flag": "🇬🇪"
   },
   {
     "id": "danny-silva",
@@ -23427,7 +23489,9 @@
     "weightClass": "Heavyweight",
     "height": "6'5\"",
     "reach": "79.5\"",
-    "statsSyncedAt": "2026-08-21T09:41:28.346Z"
+    "statsSyncedAt": "2026-08-21T09:41:28.346Z",
+    "nationality": "New Zealander",
+    "flag": "🇳🇿"
   },
   {
     "id": "liam-sutherland",
@@ -23564,7 +23628,9 @@
     "weightClass": "Middleweight",
     "height": "6'2\"",
     "reach": "75.0\"",
-    "statsSyncedAt": "2026-08-21T09:41:32.842Z"
+    "statsSyncedAt": "2026-08-21T09:41:32.842Z",
+    "nationality": "American",
+    "flag": "🇺🇸"
   },
   {
     "id": "michael-chiesa",
@@ -24664,7 +24730,9 @@
     },
     "height": "6'3\"",
     "reach": "78.0\"",
-    "statsSyncedAt": "2026-08-21T09:42:21.256Z"
+    "statsSyncedAt": "2026-08-21T09:42:21.256Z",
+    "nationality": "Polish",
+    "flag": "🇵🇱"
   },
   {
     "id": "casey-oneill",
@@ -24779,7 +24847,9 @@
     "height": "5'6\"",
     "reach": "69.0\"",
     "weightClass": "Women's Flyweight",
-    "statsSyncedAt": "2026-08-21T09:42:24.790Z"
+    "statsSyncedAt": "2026-08-21T09:42:24.790Z",
+    "nationality": "Australian",
+    "flag": "🇦🇺"
   },
   {
     "id": "gabriella-fernandes",
@@ -24823,7 +24893,9 @@
     "height": "5'6\"",
     "reach": "66.0\"",
     "weightClass": "Women's Flyweight",
-    "statsSyncedAt": "2026-08-22T09:27:34.454Z"
+    "statsSyncedAt": "2026-08-22T09:27:34.454Z",
+    "nationality": "Brazilian",
+    "flag": "🇧🇷"
   },
   {
     "id": "bruno-lopes",
@@ -25061,7 +25133,9 @@
     "height": "5'1\"",
     "reach": "61.0\"",
     "weightClass": "Women's Strawweight",
-    "statsSyncedAt": "2026-08-22T09:27:40.225Z"
+    "statsSyncedAt": "2026-08-22T09:27:40.225Z",
+    "nationality": "Brazilian",
+    "flag": "🇧🇷"
   },
   {
     "id": "abdul-rakhman-yakhyaev",
@@ -26160,7 +26234,9 @@
     "height": "5'11\"",
     "reach": "71\"",
     "weightClass": "Light Heavyweight",
-    "statsSyncedAt": "2026-08-22T09:28:32.396Z"
+    "statsSyncedAt": "2026-08-22T09:28:32.396Z",
+    "nationality": "Russian",
+    "flag": "🇷🇺"
   },
   {
     "id": "dominick-reyes",
@@ -26300,7 +26376,9 @@
     "height": "6'4\"",
     "reach": "77\"",
     "weightClass": "Light Heavyweight",
-    "statsSyncedAt": "2026-08-22T09:28:35.286Z"
+    "statsSyncedAt": "2026-08-22T09:28:35.286Z",
+    "nationality": "American",
+    "flag": "🇺🇸"
   },
   {
     "id": "johnny-walker",
@@ -26430,7 +26508,9 @@
     "height": "6'5\"",
     "reach": "82\"",
     "weightClass": "Light Heavyweight",
-    "statsSyncedAt": "2026-08-22T09:28:38.209Z"
+    "statsSyncedAt": "2026-08-22T09:28:38.209Z",
+    "nationality": "Brazilian",
+    "flag": "🇧🇷"
   },
   {
     "id": "cub-swanson",
@@ -26806,7 +26886,9 @@
     "height": "5'8\"",
     "reach": "70.5\"",
     "weightClass": "Featherweight",
-    "statsSyncedAt": "2026-08-22T09:28:46.500Z"
+    "statsSyncedAt": "2026-08-22T09:28:46.500Z",
+    "nationality": "American",
+    "flag": "🇺🇸"
   },
   {
     "id": "patricio-pitbull",
@@ -27275,7 +27357,9 @@
     "reach": "71\"",
     "weightClass": "Lightweight",
     "stance": "Southpaw",
-    "statsSyncedAt": "2026-08-22T09:28:57.644Z"
+    "statsSyncedAt": "2026-08-22T09:28:57.644Z",
+    "nationality": "Polish",
+    "flag": "🇵🇱"
   },
   {
     "id": "esteban-ribovics",
@@ -27535,7 +27619,9 @@
     "height": "5'2\"",
     "reach": "61\"",
     "weightClass": "Women's Strawweight",
-    "nickname": "Loopy"
+    "nickname": "Loopy",
+    "nationality": "Mexican",
+    "flag": "🇲🇽"
   },
   {
     "id": "chris-padilla",
@@ -28007,7 +28093,9 @@
     "height": "6'1\"",
     "reach": "73.0\"",
     "weightClass": "Welterweight",
-    "statsSyncedAt": "2026-08-22T09:29:17.144Z"
+    "statsSyncedAt": "2026-08-22T09:29:17.144Z",
+    "nationality": "Canadian",
+    "flag": "🇨🇦"
   },
   {
     "id": "charles-jourdain",
@@ -28494,7 +28582,9 @@
     "height": "5'7\"",
     "reach": "68.0\"",
     "weightClass": "Flyweight",
-    "statsSyncedAt": "2026-08-22T09:29:30.915Z"
+    "statsSyncedAt": "2026-08-22T09:29:30.915Z",
+    "nationality": "Canadian",
+    "flag": "🇨🇦"
   },
   {
     "id": "karine-silva",
@@ -28610,7 +28700,9 @@
     "reach": "67.0\"",
     "weightClass": "Flyweight",
     "stance": "Orthodox",
-    "statsSyncedAt": "2026-08-22T09:29:33.648Z"
+    "statsSyncedAt": "2026-08-22T09:29:33.648Z",
+    "nationality": "Brazilian",
+    "flag": "🇧🇷"
   },
   {
     "id": "gauge-young",
@@ -29105,7 +29197,9 @@
     "weightClass": "Women's Bantamweight",
     "height": "5'9\"",
     "reach": "68.5\"",
-    "statsSyncedAt": "2026-08-22T09:29:58.491Z"
+    "statsSyncedAt": "2026-08-22T09:29:58.491Z",
+    "nationality": "Canadian",
+    "flag": "🇨🇦"
   },
   {
     "id": "daria-zheleznyakova",
@@ -29235,7 +29329,9 @@
     "weightClass": "Women's Flyweight",
     "height": "5'5\"",
     "reach": "67.5\"",
-    "statsSyncedAt": "2026-08-22T09:30:01.455Z"
+    "statsSyncedAt": "2026-08-22T09:30:01.455Z",
+    "nationality": "American",
+    "flag": "🇺🇸"
   },
   {
     "id": "jamey-lyn-horth",
@@ -29604,7 +29700,9 @@
     "weightClass": "Featherweight",
     "height": "5'7\"",
     "reach": "71\"",
-    "statsSyncedAt": "2026-08-23T09:27:31.942Z"
+    "statsSyncedAt": "2026-08-23T09:27:31.942Z",
+    "nationality": "American",
+    "flag": "🇺🇸"
   },
   {
     "id": "youssef-zalal",
@@ -29712,7 +29810,9 @@
     "height": "5'10\"",
     "reach": "72\"",
     "stance": "Orthodox",
-    "statsSyncedAt": "2026-08-23T09:27:34.811Z"
+    "statsSyncedAt": "2026-08-23T09:27:34.811Z",
+    "nationality": "Moroccan",
+    "flag": "🇲🇦"
   },
   {
     "id": "norma-dumont",
@@ -29827,7 +29927,9 @@
     "weightClass": "Bantamweight",
     "height": "5'7\"",
     "reach": "67\"",
-    "statsSyncedAt": "2026-08-23T09:27:37.665Z"
+    "statsSyncedAt": "2026-08-23T09:27:37.665Z",
+    "nationality": "Brazilian",
+    "flag": "🇧🇷"
   },
   {
     "id": "joselyne-edwards",
@@ -29927,7 +30029,9 @@
     "height": "5'8\"",
     "reach": "70\"",
     "stance": "Orthodox",
-    "statsSyncedAt": "2026-08-23T09:27:40.165Z"
+    "statsSyncedAt": "2026-08-23T09:27:40.165Z",
+    "nationality": "Panamanian",
+    "flag": "🇵🇦"
   },
   {
     "id": "rafa-garcia",
@@ -30523,7 +30627,9 @@
     "weightClass": "Bantamweight",
     "height": "5'7\"",
     "reach": "67\"",
-    "statsSyncedAt": "2026-08-23T09:27:53.897Z"
+    "statsSyncedAt": "2026-08-23T09:27:53.897Z",
+    "nationality": "Brazilian",
+    "flag": "🇧🇷"
   },
   {
     "id": "marcus-buchecha",
@@ -31077,7 +31183,9 @@
     "weightClass": "Women's Bantamweight",
     "height": "5'9\"",
     "reach": "68.5\"",
-    "statsSyncedAt": "2026-08-23T09:28:13.580Z"
+    "statsSyncedAt": "2026-08-23T09:28:13.580Z",
+    "nationality": "New Zealander",
+    "flag": "🇳🇿"
   },
   {
     "id": "jafel-filho",
@@ -31665,7 +31773,9 @@
     "weightClass": "Lightweight",
     "height": "5'10\"",
     "reach": "72.0\"",
-    "statsSyncedAt": "2026-08-23T09:28:35.593Z"
+    "statsSyncedAt": "2026-08-23T09:28:35.593Z",
+    "nationality": "Iranian-American",
+    "flag": "🇺🇸"
   },
   {
     "id": "tim-elliott",
@@ -31779,7 +31889,9 @@
     "weightClass": "Flyweight",
     "height": "5'7\"",
     "reach": "66.0\"",
-    "statsSyncedAt": "2026-08-23T09:28:38.170Z"
+    "statsSyncedAt": "2026-08-23T09:28:38.170Z",
+    "nationality": "American",
+    "flag": "🇺🇸"
   },
   {
     "id": "shamil-gaziev",
@@ -32722,7 +32834,9 @@
     "reach": "76\"",
     "weightClass": "Welterweight",
     "height": "5'8\"",
-    "statsSyncedAt": "2026-08-23T09:29:21.223Z"
+    "statsSyncedAt": "2026-08-23T09:29:21.223Z",
+    "nationality": "American",
+    "flag": "🇺🇸"
   },
   {
     "id": "king-green",
@@ -33485,7 +33599,9 @@
     "height": "6'0\"",
     "reach": "75\"",
     "weightClass": "Welterweight",
-    "statsSyncedAt": "2026-08-23T09:29:40.974Z"
+    "statsSyncedAt": "2026-08-23T09:29:40.974Z",
+    "nationality": "Ukrainian",
+    "flag": "🇺🇦"
   },
   {
     "id": "jim-miller",
@@ -34333,7 +34449,9 @@
     "height": "5'10\"",
     "reach": "71\"",
     "weightClass": "Featherweight",
-    "statsSyncedAt": "2026-08-23T09:30:11.568Z"
+    "statsSyncedAt": "2026-08-23T09:30:11.568Z",
+    "nationality": "Brazilian",
+    "flag": "🇧🇷"
   },
   {
     "id": "dooho-choi",
@@ -35300,7 +35418,9 @@
     "weightClass": "Women's Bantamweight",
     "height": "5'8\"",
     "reach": "70\"",
-    "statsSyncedAt": "2026-08-24T09:48:09.830Z"
+    "statsSyncedAt": "2026-08-24T09:48:09.830Z",
+    "nationality": "Portuguese",
+    "flag": "🇵🇹"
   },
   {
     "id": "andre-petroski",
@@ -36367,7 +36487,9 @@
     "weightClass": "Women's Strawweight",
     "height": "5'3\"",
     "reach": "64.5\"",
-    "statsSyncedAt": "2026-08-24T09:48:48.079Z"
+    "statsSyncedAt": "2026-08-24T09:48:48.079Z",
+    "nationality": "American",
+    "flag": "🇺🇸"
   },
   {
     "id": "xiong-jingnan",
@@ -37093,7 +37215,9 @@
     "height": "6'1\"",
     "reach": "72.5\"",
     "weightClass": "Welterweight",
-    "statsSyncedAt": "2026-08-24T09:49:14.022Z"
+    "statsSyncedAt": "2026-08-24T09:49:14.022Z",
+    "nationality": "Brazilian",
+    "flag": "🇧🇷"
   },
   {
     "id": "edmen-shahbazyan",
@@ -37382,7 +37506,9 @@
     "height": "6'3\"",
     "reach": "73.0\"",
     "weightClass": "Lightweight",
-    "statsSyncedAt": "2026-08-24T09:49:22.686Z"
+    "statsSyncedAt": "2026-08-24T09:49:22.686Z",
+    "nationality": "Australian",
+    "flag": "🇦🇺"
   },
   {
     "id": "iwo-baraniewski",
@@ -37719,7 +37845,9 @@
     "height": "5'8\"",
     "reach": "69.0\"",
     "weightClass": "Bantamweight",
-    "statsSyncedAt": "2026-08-24T09:49:31.336Z"
+    "statsSyncedAt": "2026-08-24T09:49:31.336Z",
+    "nationality": "American",
+    "flag": "🇺🇸"
   },
   {
     "id": "edgar-chairez",
@@ -38506,7 +38634,9 @@
     "height": "5'6\"",
     "reach": "67.0\"",
     "weightClass": "Women's Bantamweight",
-    "statsSyncedAt": "2026-08-24T09:49:57.338Z"
+    "statsSyncedAt": "2026-08-24T09:49:57.338Z",
+    "nationality": "Brazilian",
+    "flag": "🇧🇷"
   },
   {
     "id": "allan-nascimento",
@@ -39171,7 +39301,9 @@
     "height": "5'11\"",
     "reach": "77.5\"",
     "weightClass": "Middleweight",
-    "statsSyncedAt": "2026-08-24T09:51:13.973Z"
+    "statsSyncedAt": "2026-08-24T09:51:13.973Z",
+    "nationality": "American",
+    "flag": "🇺🇸"
   },
   {
     "id": "christian-leroy-duncan",
@@ -39286,7 +39418,9 @@
     "height": "6'2\"",
     "reach": "79.0\"",
     "weightClass": "Middleweight",
-    "statsSyncedAt": "2026-08-24T09:51:16.538Z"
+    "statsSyncedAt": "2026-08-24T09:51:16.538Z",
+    "nationality": "British",
+    "flag": "🇬🇧"
   },
   {
     "id": "jacobe-smith",
@@ -39436,7 +39570,9 @@
     "height": "5'4\"",
     "reach": "66.0\"",
     "weightClass": "Women's Strawweight",
-    "statsSyncedAt": "2026-08-24T09:51:22.245Z"
+    "statsSyncedAt": "2026-08-24T09:51:22.245Z",
+    "nationality": "Brazilian",
+    "flag": "🇧🇷"
   },
   {
     "id": "fatima-kline",
@@ -39544,7 +39680,9 @@
     "height": "5'6\"",
     "reach": "67.0\"",
     "weightClass": "Women's Strawweight",
-    "statsSyncedAt": "2026-08-24T09:51:25.049Z"
+    "statsSyncedAt": "2026-08-24T09:51:25.049Z",
+    "nationality": "American",
+    "flag": "🇺🇸"
   },
   {
     "id": "brad-tavares",
@@ -40043,7 +40181,9 @@
     "weightClass": "Heavyweight",
     "height": "6'6\"",
     "reach": "78.5\"",
-    "statsSyncedAt": "2026-08-24T09:52:26.157Z"
+    "statsSyncedAt": "2026-08-24T09:52:26.157Z",
+    "nationality": "Brazilian",
+    "flag": "🇧🇷"
   },
   {
     "id": "magomed-tuchalov",
@@ -40128,7 +40268,9 @@
     "weightClass": "Flyweight",
     "height": "5'4\"",
     "reach": "63\"",
-    "statsSyncedAt": "2026-08-24T09:52:31.741Z"
+    "statsSyncedAt": "2026-08-24T09:52:31.741Z",
+    "nationality": "Uzbekistani",
+    "flag": "🇺🇿"
   },
   {
     "id": "islam-dulatov",
@@ -40713,7 +40855,9 @@
     "stance": "Southpaw",
     "weightClass": "Welterweight",
     "height": "6'1\"",
-    "reach": "74\""
+    "reach": "74\"",
+    "nationality": "American",
+    "flag": "🇺🇸"
   },
   {
     "id": "ante-delija",
@@ -40820,7 +40964,9 @@
     "stance": "Orthodox",
     "weightClass": "Heavyweight",
     "height": "6'3.5\"",
-    "reach": "78\""
+    "reach": "78\"",
+    "nationality": "Croatian",
+    "flag": "🇭🇷"
   },
   {
     "id": "dusko-todorovic",
@@ -41613,7 +41759,9 @@
     "stance": "Orthodox",
     "height": "5'5\"",
     "reach": "63.0\"",
-    "weightClass": "Women's Strawweight"
+    "weightClass": "Women's Strawweight",
+    "nationality": "Canadian",
+    "flag": "🇨🇦"
   },
   {
     "id": "opponent-tba",
@@ -42663,7 +42811,9 @@
     "weightClass": "Middleweight",
     "stance": "Orthodox",
     "height": "6'0\"",
-    "reach": "75.0\""
+    "reach": "75.0\"",
+    "nationality": "American",
+    "flag": "🇺🇸"
   },
   {
     "id": "john-garza",
@@ -43020,7 +43170,9 @@
     },
     "weightClass": "Welterweight",
     "height": "6'3\"",
-    "reach": "80.0\""
+    "reach": "80.0\"",
+    "nationality": "American",
+    "flag": "🇺🇸"
   },
   {
     "id": "ramiz-brahimaj",
@@ -43339,7 +43491,9 @@
     "weightClass": "Heavyweight",
     "stance": "Orthodox",
     "height": "6'3\"",
-    "reach": "78.0\""
+    "reach": "78.0\"",
+    "nationality": "Moldovan",
+    "flag": "🇲🇩"
   },
   {
     "id": "vitor-petrino",
@@ -43811,7 +43965,9 @@
     "stance": "Orthodox",
     "weightClass": "Women's Strawweight",
     "height": "5'2\"",
-    "reach": "63.0\""
+    "reach": "63.0\"",
+    "nationality": "Brazilian",
+    "flag": "🇧🇷"
   },
   {
     "id": "ce-liu",
@@ -44823,7 +44979,9 @@
     },
     "height": "5'7\"",
     "reach": "67\"",
-    "weightClass": "Women's Bantamweight"
+    "weightClass": "Women's Bantamweight",
+    "nationality": "French",
+    "flag": "🇫🇷"
   },
   {
     "id": "punahele-soriano",
@@ -45536,7 +45694,9 @@
     },
     "weightClass": "Heavyweight",
     "height": "6'4\"",
-    "reach": "78.0\""
+    "reach": "78.0\"",
+    "nationality": "Dominican",
+    "flag": "🇩🇴"
   },
   {
     "id": "regina-tarin",
@@ -47864,7 +48024,9 @@
     ],
     "nickname": "Chito",
     "height": "5'8\"",
-    "reach": "70.5\""
+    "reach": "70.5\"",
+    "nationality": "Ecuadorean",
+    "flag": "🇪🇨"
   },
   {
     "id": "eduarda-moura",
@@ -47888,7 +48050,9 @@
     "nickname": "Ronda",
     "height": "5'6\"",
     "reach": "67.0\"",
-    "weightClass": "Women's Flyweight"
+    "weightClass": "Women's Flyweight",
+    "nationality": "Brazilian",
+    "flag": "🇧🇷"
   },
   {
     "id": "joosang-yoo",
@@ -50198,7 +50362,9 @@
       "tdDef": "77%",
       "subAvg": "0.2"
     },
-    "statsSyncedAt": "2026-08-20T09:34:40.274Z"
+    "statsSyncedAt": "2026-08-20T09:34:40.274Z",
+    "nationality": "American",
+    "flag": "🇺🇸"
   },
   {
     "id": "mick-parkin",
@@ -50745,5 +50911,247 @@
         "time": "3:27"
       }
     ]
+  },
+  {
+    "id": "tagir-ulanbekov",
+    "name": "Tagir Ulanbekov",
+    "nickname": "",
+    "nationality": "Russian",
+    "flag": "🇷🇺",
+    "weightClass": "Flyweight",
+    "record": {
+      "wins": 17,
+      "losses": 3,
+      "draws": 0
+    },
+    "height": "5'7\"",
+    "reach": "70\"",
+    "age": 35,
+    "fightingOut": "Dagestan, Russia",
+    "style": "Wrestling",
+    "pfp": false,
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-11/ULANBEKOV_TAGIR_L_11-22.png?itok=GvelhCHd",
+    "bio": "Tagir Ulanbekov is a Russian professional mixed martial artist in the UFC flyweight division. Get the latest UFC breaking news, fight night results, MMA records and stats, highlights, photos, videos and more.",
+    "last5": []
+  },
+  {
+    "id": "david-onama",
+    "name": "David Onama",
+    "nickname": "",
+    "nationality": "Ugandan",
+    "flag": "🇺🇬",
+    "weightClass": "Featherweight",
+    "record": {
+      "wins": 14,
+      "losses": 3,
+      "draws": 0
+    },
+    "height": "5'11\"",
+    "reach": "74\"",
+    "age": 32,
+    "fightingOut": "Uganda",
+    "style": "Striker",
+    "pfp": false,
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-11/ONAMA_DAVID_L_11-16.png?itok=NVO2yaF_",
+    "bio": "David Onama is a Ugandan professional mixed martial artist in the UFC featherweight division. Get the latest UFC breaking news, fight night results, MMA records and stats, highlights, photos, videos and more.",
+    "last5": []
+  },
+  {
+    "id": "jan-blachowicz",
+    "name": "Jan Błachowicz",
+    "nickname": "",
+    "nationality": "Polish",
+    "flag": "🇵🇱",
+    "weightClass": "Light Heavyweight",
+    "record": {
+      "wins": 29,
+      "losses": 12,
+      "draws": 2
+    },
+    "height": "6'2\"",
+    "reach": "78\"",
+    "age": 43,
+    "fightingOut": "Cieszyn, Poland",
+    "style": "MMA",
+    "pfp": false,
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-07/BLACHOWICZ_JAN_L_08-01.png?itok=ESS7apdi",
+    "bio": "Jan Blachowicz is a Polish professional mixed martial artist in the UFC light heavyweight division and a former UFC light heavyweight champion. Get the latest UFC breaking news, fight night results, MMA records and stats, highlights, photos, videos and more.",
+    "last5": []
+  },
+  {
+    "id": "kevin-vallejos",
+    "name": "Kevin Vallejos",
+    "nickname": "El Chino",
+    "nationality": "Argentine",
+    "flag": "🇦🇷",
+    "weightClass": "Featherweight",
+    "record": {
+      "wins": 17,
+      "losses": 1,
+      "draws": 0
+    },
+    "height": "5'7\"",
+    "reach": "68\"",
+    "age": 24,
+    "fightingOut": "Mar del Plata, Argentina",
+    "style": "Striker",
+    "pfp": false,
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-12/VALLEJOS_KEVIN_R_12-13.png?itok=-h2gdx6Y",
+    "bio": "Kevin “El Chino” Vallejos is an Argentine professional mixed martial artist in the UFC featherweight division. Get the latest UFC breaking news, fight night results, MMA records and stats, highlights, photos, videos and more.",
+    "last5": []
+  },
+  {
+    "id": "jessica-andrade",
+    "name": "Jéssica Andrade",
+    "nickname": "Bate Estaca",
+    "nationality": "Brazilian",
+    "flag": "🇧🇷",
+    "weightClass": "Women's Strawweight",
+    "record": {
+      "wins": 26,
+      "losses": 15,
+      "draws": 0
+    },
+    "height": "5'2\"",
+    "reach": "62\"",
+    "age": 34,
+    "fightingOut": "Umuarama, Brazil",
+    "style": "Muay Thai",
+    "pfp": false,
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/ANDRADE_JESSICA_L_08-16.png?itok=EG1JyXfD",
+    "bio": "Jéssica \"Bate Estaca\" Andrade is a Brazilian professional mixed martial artist in the UFC flyweight division, and the former UFC strawweight champion. Get the latest UFC breaking news, fight night results, MMA records and stats, highlights, photos, videos and more.",
+    "last5": []
+  },
+  {
+    "id": "mizuki",
+    "name": "Mizuki",
+    "nickname": "",
+    "nationality": "Japanese",
+    "flag": "🇯🇵",
+    "weightClass": "Women's Strawweight",
+    "record": {
+      "wins": 16,
+      "losses": 6,
+      "draws": 0
+    },
+    "height": "5'3\"",
+    "reach": "66\"",
+    "age": 31,
+    "fightingOut": "Fukuoka, Japan",
+    "style": "Karate",
+    "pfp": false,
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/MIZUKI_R_10-25.png?itok=CpbTHLy2",
+    "bio": "Mizuki is a Japanese professional mixed martial artist in the UFC strawweight division. Get the latest UFC breaking news, fight night results, MMA records and stats, highlights, photos, videos and more.",
+    "last5": []
+  },
+  {
+    "id": "miranda-maverick",
+    "name": "Miranda Maverick",
+    "nickname": "Fear The",
+    "nationality": "American",
+    "flag": "🇺🇸",
+    "weightClass": "Women's Flyweight",
+    "record": {
+      "wins": 17,
+      "losses": 6,
+      "draws": 0
+    },
+    "height": "5'4\"",
+    "reach": "66\"",
+    "age": 29,
+    "fightingOut": "Jefferson City, United States",
+    "style": "Jiu-Jitsu",
+    "pfp": false,
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/5/MAVERICK_MIRANDA_L_12-14.png?itok=Og7YekgL",
+    "bio": "Miranda \"Fear The\" Maverick is an American professional mixed martial artist in the UFC women's flyweight division. Get the latest UFC breaking news, fight night results, MMA records and stats, highlights, photos, videos and more.",
+    "last5": []
+  },
+  {
+    "id": "ailin-perez",
+    "name": "Ailin Perez",
+    "nickname": "Fiona",
+    "nationality": "Argentine",
+    "flag": "🇦🇷",
+    "weightClass": "Women's Bantamweight",
+    "record": {
+      "wins": 13,
+      "losses": 2,
+      "draws": 0
+    },
+    "height": "5'5\"",
+    "reach": "66\"",
+    "age": 31,
+    "fightingOut": "CABA, Argentina",
+    "style": "Kung Fu",
+    "pfp": false,
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/PEREZ_AILIN_L_02-28.png?itok=sPy9HJ2B",
+    "bio": "Ailin “Fiona” Perez is an Argentinean professional mixed martial artist in the UFC bantamweight division. Get the latest UFC breaking news, fight night results, MMA records and stats, highlights, photos, videos and more.",
+    "last5": []
+  },
+  {
+    "id": "yana-santos",
+    "name": "Yana Santos",
+    "nickname": "",
+    "nationality": "Russian",
+    "flag": "🇷🇺",
+    "weightClass": "Women's Bantamweight",
+    "record": {
+      "wins": 17,
+      "losses": 8,
+      "draws": 0
+    },
+    "height": "5'6\"",
+    "reach": "69\"",
+    "age": 36,
+    "fightingOut": "Russia",
+    "style": "MMA",
+    "pfp": false,
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/SANTOS_YANA_L_05-03.png?itok=pkR_XniN",
+    "bio": "Yana Santos is a Russian professional mixed martial artist in the UFC bantamweight division. Get the latest UFC breaking news, fight night results, MMA records and stats, highlights, photos, videos and more.",
+    "last5": []
+  },
+  {
+    "id": "macy-chiasson",
+    "name": "Macy Chiasson",
+    "nickname": "",
+    "nationality": "American",
+    "flag": "🇺🇸",
+    "weightClass": "Women's Bantamweight",
+    "record": {
+      "wins": 11,
+      "losses": 6,
+      "draws": 0
+    },
+    "height": "5'11\"",
+    "reach": "72\"",
+    "age": 35,
+    "fightingOut": "United States",
+    "style": "MMA",
+    "pfp": false,
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/CHIASSON_MACY_L_10-04.png?itok=BRfzm0GS",
+    "bio": "Macy Chiasson is an American professional fighter in the UFC women's bantamweight division. Get the latest UFC breaking news, fight night results, MMA records and stats, highlights, photos, videos and more.",
+    "last5": []
+  },
+  {
+    "id": "miesha-tate",
+    "name": "Miesha Tate",
+    "nickname": "Cupcake",
+    "nationality": "American",
+    "flag": "🇺🇸",
+    "weightClass": "Women's Bantamweight",
+    "record": {
+      "wins": 20,
+      "losses": 10,
+      "draws": 0
+    },
+    "height": "5'6\"",
+    "reach": "65\"",
+    "age": 40,
+    "fightingOut": "Tacoma, United States",
+    "style": "Grappler",
+    "pfp": false,
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/5/TATE_MIESHA_L_12-02.png?itok=F-jJbygf",
+    "bio": "Miesha “Cupcake” Tate is an American professional mixed martial artist in the UFC bantamweight division and the former UFC bantamweight champion. Get the latest UFC breaking news, fight night results, MMA records and stats, highlights, photos, videos and more.",
+    "last5": []
   }
 ]
