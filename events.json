@@ -7871,7 +7871,7 @@
       {
         "a": "Michael Morales",
         "b": "Sean Brady",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/5/MORALES_MICHAEL_L_08-24.png",
+        "imgA": "",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/BRADY_SEAN_L_05-09.png",
         "weight": "Welterweight",
         "rounds": "3 Rds",
@@ -13689,17 +13689,6 @@
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
         "cancelled": true
-      },
-      {
-        "a": "Ce Liu",
-        "b": "Levi Rodrigues Jr.",
-        "weight": "",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "",
-        "imgB": ""
       }
     ],
     "prelims": [
@@ -13733,7 +13722,7 @@
         "titleFight": false,
         "ranked": true,
         "slot": "",
-        "imgA": "",
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/JINGNAN_XIONG_R_05-30.png?itok=vR1QsfRj",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/POLASTRI_JULIA_L_10-11.png"
       },
       {
@@ -13782,19 +13771,7 @@
         "imgB": ""
       }
     ],
-    "earlyPrelims": [
-      {
-        "a": "Ding Meng",
-        "b": "Cameron Nelson",
-        "weight": "Welterweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "",
-        "imgB": ""
-      }
-    ],
+    "earlyPrelims": [],
     "droppedFights": [
       {
         "a": "Ce Liu",
@@ -14525,8 +14502,8 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "",
-        "imgB": ""
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-10/ANHELIGER_CHAD_L_11-02.png?itok=ezY1YMKO",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-01/KOSLOW_STEVEN_L_12-10.png?itok=pqAG6P4G"
       }
     ]
   },
