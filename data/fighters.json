@@ -40376,7 +40376,8 @@
     },
     "weightClass": "Welterweight",
     "height": "6'3\"",
-    "reach": "75\""
+    "reach": "75\"",
+    "statsSyncedAt": "2026-08-25T09:35:54.473Z"
   },
   {
     "id": "wellington-turman",
@@ -40482,7 +40483,8 @@
     },
     "weightClass": "Middleweight",
     "height": "6'0\"",
-    "reach": "72\""
+    "reach": "72\"",
+    "statsSyncedAt": "2026-08-25T09:35:57.369Z"
   },
   {
     "id": "ismael-bonfim",
@@ -40585,18 +40587,19 @@
     ],
     "nickname": "Marreta",
     "stats": {
-      "slpm": "5.51",
+      "slpm": "5.10",
       "strAcc": "54%",
-      "sapm": "3.71",
-      "strDef": "65%",
-      "tdAvg": "1.06",
+      "sapm": "3.96",
+      "strDef": "62%",
+      "tdAvg": "1.22",
       "tdAcc": "33%",
       "tdDef": "76%",
       "subAvg": "0.0"
     },
     "weightClass": "Lightweight",
     "height": "5'8\"",
-    "reach": "71.5\""
+    "reach": "71.5\"",
+    "statsSyncedAt": "2026-08-25T09:36:00.229Z"
   },
   {
     "id": "axel-sola",
@@ -40608,14 +40611,14 @@
       "draws": 1
     },
     "stats": {
-      "slpm": "4.07",
-      "strAcc": "45%",
-      "sapm": "5.29",
+      "slpm": "4.50",
+      "strAcc": "50%",
+      "sapm": "4.53",
       "strDef": "61%",
-      "tdAvg": "2.22",
+      "tdAvg": "1.89",
       "tdAcc": "36%",
-      "tdDef": "0%",
-      "subAvg": "0.0"
+      "tdDef": "66%",
+      "subAvg": "0.5"
     },
     "last5": [
       {
@@ -40629,7 +40632,8 @@
     ],
     "weightClass": "Lightweight",
     "height": "6'0\"",
-    "reach": "74\""
+    "reach": "74\"",
+    "statsSyncedAt": "2026-08-25T09:36:03.336Z"
   },
   {
     "id": "uros-medic",
@@ -40732,15 +40736,16 @@
     ],
     "nickname": "The Doctor",
     "stats": {
-      "slpm": "5.59",
+      "slpm": "5.77",
       "strAcc": "60%",
-      "sapm": "3.42",
+      "sapm": "3.40",
       "strDef": "56%",
       "tdAvg": "0.34",
       "tdAcc": "50%",
       "tdDef": "55%",
       "subAvg": "0.0"
-    }
+    },
+    "statsSyncedAt": "2026-08-25T09:36:06.221Z"
   },
   {
     "id": "daniel-rodriguez",
@@ -40843,9 +40848,9 @@
     ],
     "nickname": "D-Rod",
     "stats": {
-      "slpm": "7.20",
+      "slpm": "7.19",
       "strAcc": "49%",
-      "sapm": "5.40",
+      "sapm": "5.44",
       "strDef": "57%",
       "tdAvg": "0.51",
       "tdAcc": "50%",
@@ -40857,7 +40862,8 @@
     "height": "6'1\"",
     "reach": "74\"",
     "nationality": "American",
-    "flag": "🇺🇸"
+    "flag": "🇺🇸",
+    "statsSyncedAt": "2026-08-25T09:36:09.169Z"
   },
   {
     "id": "ante-delija",
@@ -40966,7 +40972,8 @@
     "height": "6'3.5\"",
     "reach": "78\"",
     "nationality": "Croatian",
-    "flag": "🇭🇷"
+    "flag": "🇭🇷",
+    "statsSyncedAt": "2026-08-25T09:36:12.001Z"
   },
   {
     "id": "dusko-todorovic",
@@ -41069,19 +41076,20 @@
     ],
     "nickname": "Thunder",
     "stats": {
-      "slpm": "4.73",
+      "slpm": "4.52",
       "strAcc": "57%",
-      "sapm": "4.40",
+      "sapm": "4.20",
       "strDef": "48%",
-      "tdAvg": "1.77",
-      "tdAcc": "21%",
-      "tdDef": "42%",
+      "tdAvg": "2.03",
+      "tdAcc": "24%",
+      "tdDef": "40%",
       "subAvg": "0.3"
     },
     "stance": "Orthodox",
     "weightClass": "Middleweight",
     "height": "6'1\"",
-    "reach": "74\""
+    "reach": "74\"",
+    "statsSyncedAt": "2026-08-25T09:36:14.940Z"
   },
   {
     "id": "vlasto-cepo",
@@ -41093,10 +41101,10 @@
       "draws": 0
     },
     "stats": {
-      "slpm": "0.00",
-      "strAcc": "0%",
-      "sapm": "0.00",
-      "strDef": "0%",
+      "slpm": "6.89",
+      "strAcc": "29%",
+      "sapm": "29.51",
+      "strDef": "37%",
       "tdAvg": "0.00",
       "tdAcc": "0%",
       "tdDef": "0%",
@@ -41114,7 +41122,8 @@
     ],
     "nickname": "El Chapo",
     "weightClass": "Middleweight",
-    "height": "6'1\""
+    "height": "6'1\"",
+    "statsSyncedAt": "2026-08-25T09:36:17.762Z"
   },
   {
     "id": "gilbert-urbina",
@@ -41145,11 +41154,11 @@
       }
     ],
     "stats": {
-      "slpm": "5.57",
-      "strAcc": "56%",
-      "sapm": "4.62",
-      "strDef": "44%",
-      "tdAvg": "2.86",
+      "slpm": "6.68",
+      "strAcc": "57%",
+      "sapm": "4.72",
+      "strDef": "47%",
+      "tdAvg": "2.73",
       "tdAcc": "44%",
       "tdDef": "0%",
       "subAvg": "0.7"
@@ -41157,7 +41166,8 @@
     "stance": "Orthodox",
     "weightClass": "Middleweight",
     "height": "5'9\"",
-    "reach": "75\""
+    "reach": "75\"",
+    "statsSyncedAt": "2026-08-25T09:36:20.476Z"
   },
   {
     "id": "jovan-leka",
@@ -41169,14 +41179,14 @@
       "draws": 0
     },
     "stats": {
-      "slpm": "1.60",
-      "strAcc": "75%",
-      "sapm": "0.60",
-      "strDef": "43%",
-      "tdAvg": "1.00",
+      "slpm": "1.96",
+      "strAcc": "70%",
+      "sapm": "0.98",
+      "strDef": "50%",
+      "tdAvg": "0.86",
       "tdAcc": "100%",
       "tdDef": "55%",
-      "subAvg": "1.0"
+      "subAvg": "0.9"
     },
     "last5": [
       {
@@ -41190,7 +41200,8 @@
     ],
     "weightClass": "Heavyweight",
     "height": "6'4\"",
-    "reach": "75\""
+    "reach": "75\"",
+    "statsSyncedAt": "2026-08-25T09:36:23.307Z"
   },
   {
     "id": "max-gimenis",
@@ -41212,7 +41223,8 @@
       "subAvg": "0.0"
     },
     "weightClass": "Heavyweight",
-    "height": "6'1\""
+    "height": "6'1\"",
+    "statsSyncedAt": "2026-08-25T09:36:25.947Z"
   },
   {
     "id": "ludovit-klein",
@@ -41315,18 +41327,19 @@
     ],
     "nickname": "Mr. Highlight",
     "stats": {
-      "slpm": "3.76",
+      "slpm": "3.83",
       "strAcc": "53%",
-      "sapm": "3.48",
+      "sapm": "3.57",
       "strDef": "53%",
-      "tdAvg": "1.37",
-      "tdAcc": "51%",
+      "tdAvg": "1.29",
+      "tdAcc": "50%",
       "tdDef": "76%",
       "subAvg": "0.0"
     },
     "weightClass": "Lightweight",
     "height": "5'7\"",
-    "reach": "72.5\""
+    "reach": "72.5\"",
+    "statsSyncedAt": "2026-08-25T09:36:28.477Z"
   },
   {
     "id": "josias-musasa",
@@ -41350,7 +41363,8 @@
     },
     "height": "5'8\"",
     "reach": "74.0\"",
-    "weightClass": "Bantamweight"
+    "weightClass": "Bantamweight",
+    "statsSyncedAt": "2026-08-25T09:36:31.324Z"
   },
   {
     "id": "bogdan-grad",
@@ -41381,18 +41395,19 @@
       }
     ],
     "stats": {
-      "slpm": "4.06",
-      "strAcc": "51%",
-      "sapm": "5.06",
+      "slpm": "4.16",
+      "strAcc": "53%",
+      "sapm": "5.02",
       "strDef": "49%",
-      "tdAvg": "4.22",
-      "tdAcc": "40%",
+      "tdAvg": "4.57",
+      "tdAcc": "38%",
       "tdDef": "75%",
-      "subAvg": "0.0"
+      "subAvg": "0.5"
     },
     "height": "5'8\"",
     "reach": "70.0\"",
-    "weightClass": "Featherweight"
+    "weightClass": "Featherweight",
+    "statsSyncedAt": "2026-08-25T09:36:34.260Z"
   },
   {
     "id": "oban-elliott",
@@ -41425,16 +41440,17 @@
     "stats": {
       "slpm": "3.62",
       "strAcc": "48%",
-      "sapm": "2.24",
-      "strDef": "61%",
-      "tdAvg": "1.52",
-      "tdAcc": "40%",
+      "sapm": "2.36",
+      "strDef": "60%",
+      "tdAvg": "1.48",
+      "tdAcc": "38%",
       "tdDef": "52%",
       "subAvg": "0.0"
     },
     "height": "6'0\"",
     "reach": "72.0\"",
-    "weightClass": "Welterweight"
+    "weightClass": "Welterweight",
+    "statsSyncedAt": "2026-08-25T09:36:37.117Z"
   },
   {
     "id": "michael-oliveira",
@@ -41536,10 +41552,10 @@
       }
     ],
     "stats": {
-      "slpm": "8.40",
-      "strAcc": "51%",
-      "sapm": "3.36",
-      "strDef": "66%",
+      "slpm": "8.28",
+      "strAcc": "52%",
+      "sapm": "3.35",
+      "strDef": "64%",
       "tdAvg": "0.00",
       "tdAcc": "0%",
       "tdDef": "100%",
@@ -41548,7 +41564,8 @@
     "nickname": "PQD",
     "height": "6'1\"",
     "reach": "78.5\"",
-    "weightClass": "Welterweight"
+    "weightClass": "Welterweight",
+    "statsSyncedAt": "2026-08-25T09:36:39.952Z"
   },
   {
     "id": "ian-garry",
@@ -41747,21 +41764,22 @@
     ],
     "nickname": "The Savage",
     "stats": {
-      "slpm": "2.71",
-      "strAcc": "48%",
-      "sapm": "2.86",
+      "slpm": "2.63",
+      "strAcc": "47%",
+      "sapm": "2.83",
       "strDef": "56%",
-      "tdAvg": "2.76",
+      "tdAvg": "2.53",
       "tdAcc": "40%",
-      "tdDef": "38%",
-      "subAvg": "0.9"
+      "tdDef": "37%",
+      "subAvg": "0.8"
     },
     "stance": "Orthodox",
     "height": "5'5\"",
     "reach": "63.0\"",
     "weightClass": "Women's Strawweight",
     "nationality": "Canadian",
-    "flag": "🇨🇦"
+    "flag": "🇨🇦",
+    "statsSyncedAt": "2026-08-25T09:36:42.480Z"
   },
   {
     "id": "opponent-tba",
@@ -42073,18 +42091,19 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/5/OROLBAI_MYKTYBEK_L_11-18.png",
     "nickname": "Krygyz",
     "stats": {
-      "slpm": "2.78",
-      "strAcc": "50%",
-      "sapm": "2.70",
-      "strDef": "51%",
-      "tdAvg": "8.77",
+      "slpm": "2.70",
+      "strAcc": "52%",
+      "sapm": "2.49",
+      "strDef": "52%",
+      "tdAvg": "8.22",
       "tdAcc": "59%",
-      "tdDef": "40%",
-      "subAvg": "0.5"
+      "tdDef": "36%",
+      "subAvg": "0.4"
     },
     "height": "5'10\"",
     "reach": "74.0\"",
-    "weightClass": "Welterweight"
+    "weightClass": "Welterweight",
+    "statsSyncedAt": "2026-08-25T09:36:45.342Z"
   },
   {
     "id": "geoff-neal",
@@ -42199,7 +42218,8 @@
     "stance": "Southpaw",
     "height": "5'11\"",
     "reach": "75.0\"",
-    "weightClass": "Welterweight"
+    "weightClass": "Welterweight",
+    "statsSyncedAt": "2026-08-25T09:36:48.207Z"
   },
   {
     "id": "chidi-njokuani",
@@ -42310,9 +42330,9 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-08/NJOKUANI_CHIDI_L.png",
     "nickname": "Bang Bang",
     "stats": {
-      "slpm": "5.16",
-      "strAcc": "61%",
-      "sapm": "3.32",
+      "slpm": "5.78",
+      "strAcc": "62%",
+      "sapm": "3.51",
       "strDef": "57%",
       "tdAvg": "0.00",
       "tdAcc": "0%",
@@ -42322,7 +42342,8 @@
     "height": "6'3\"",
     "reach": "80.0\"",
     "stance": "Orthodox",
-    "weightClass": "Welterweight"
+    "weightClass": "Welterweight",
+    "statsSyncedAt": "2026-08-25T09:36:50.785Z"
   },
   {
     "id": "theodor-berggren",
@@ -42355,7 +42376,8 @@
       "subAvg": "0.0"
     },
     "height": "6'0\"",
-    "weightClass": "Welterweight"
+    "weightClass": "Welterweight",
+    "statsSyncedAt": "2026-08-25T09:36:53.626Z"
   },
   {
     "id": "tahir-abdullayev",
@@ -42388,7 +42410,8 @@
       "subAvg": "0.0"
     },
     "height": "5'10\"",
-    "weightClass": "Welterweight"
+    "weightClass": "Welterweight",
+    "statsSyncedAt": "2026-08-25T09:36:56.462Z"
   },
   {
     "id": "jefferson-nascimento",
@@ -42421,7 +42444,8 @@
       "subAvg": "0.0"
     },
     "height": "5'8\"",
-    "weightClass": "Welterweight"
+    "weightClass": "Welterweight",
+    "statsSyncedAt": "2026-08-25T09:36:59.315Z"
   },
   {
     "id": "elisha-ellison",
@@ -42455,7 +42479,8 @@
     },
     "height": "6'0\"",
     "reach": "78.0\"",
-    "weightClass": "Heavyweight"
+    "weightClass": "Heavyweight",
+    "statsSyncedAt": "2026-08-25T09:37:01.786Z"
   },
   {
     "id": "ryan-gandra",
@@ -42489,7 +42514,8 @@
     },
     "height": "6'1\"",
     "reach": "74.5\"",
-    "weightClass": "Middleweight"
+    "weightClass": "Middleweight",
+    "statsSyncedAt": "2026-08-25T09:37:04.480Z"
   },
   {
     "id": "austin-bashi",
@@ -42522,7 +42548,8 @@
     },
     "height": "5'6\"",
     "reach": "70.0\"",
-    "weightClass": "Featherweight"
+    "weightClass": "Featherweight",
+    "statsSyncedAt": "2026-08-25T09:37:07.540Z"
   },
   {
     "id": "jose-miguel-delgado",
@@ -42559,7 +42586,8 @@
     },
     "weightClass": "Heavyweight",
     "height": "6'5\"",
-    "reach": "80.5\""
+    "reach": "80.5\"",
+    "statsSyncedAt": "2026-08-25T09:37:10.383Z"
   },
   {
     "id": "alvin-hines",
@@ -42593,7 +42621,8 @@
     },
     "weightClass": "Heavyweight",
     "height": "6'1\"",
-    "reach": "73.5\""
+    "reach": "73.5\"",
+    "statsSyncedAt": "2026-08-25T09:37:13.250Z"
   },
   {
     "id": "levi-rodrigues-jr",
@@ -42617,7 +42646,8 @@
     },
     "weightClass": "Light Heavyweight",
     "height": "6'0\"",
-    "reach": "76.5\""
+    "reach": "76.5\"",
+    "statsSyncedAt": "2026-08-25T09:37:16.110Z"
   },
   {
     "id": "felipe-franco",
@@ -42640,7 +42670,8 @@
       "subAvg": "0.0"
     },
     "weightClass": "Light Heavyweight",
-    "height": "6'1\""
+    "height": "6'1\"",
+    "statsSyncedAt": "2026-08-25T09:37:18.950Z"
   },
   {
     "id": "nina-milosevic",
@@ -42652,13 +42683,13 @@
       "draws": 0
     },
     "stats": {
-      "slpm": "0.00",
-      "strAcc": "0%",
-      "sapm": "0.00",
-      "strDef": "0%",
+      "slpm": "5.70",
+      "strAcc": "53%",
+      "sapm": "3.53",
+      "strDef": "72%",
       "tdAvg": "0.00",
       "tdAcc": "0%",
-      "tdDef": "0%",
+      "tdDef": "100%",
       "subAvg": "0.0"
     },
     "last5": [
@@ -42672,7 +42703,8 @@
       }
     ],
     "nickname": "Queen Beast",
-    "weightClass": "Women's Bantamweight"
+    "weightClass": "Women's Bantamweight",
+    "statsSyncedAt": "2026-08-25T09:37:21.791Z"
   },
   {
     "id": "anthony-hernandez",
@@ -42799,21 +42831,22 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/5/HERNANDEZ_ANTHONY_L_10-19.png",
     "nickname": "Fluffy",
     "stats": {
-      "slpm": "4.57",
+      "slpm": "4.42",
       "strAcc": "60%",
-      "sapm": "3.10",
-      "strDef": "51%",
-      "tdAvg": "5.88",
-      "tdAcc": "48%",
+      "sapm": "3.69",
+      "strDef": "48%",
+      "tdAvg": "5.25",
+      "tdAcc": "40%",
       "tdDef": "68%",
-      "subAvg": "1.6"
+      "subAvg": "1.4"
     },
     "weightClass": "Middleweight",
     "stance": "Orthodox",
     "height": "6'0\"",
     "reach": "75.0\"",
     "nationality": "American",
-    "flag": "🇺🇸"
+    "flag": "🇺🇸",
+    "statsSyncedAt": "2026-08-25T09:37:24.492Z"
   },
   {
     "id": "john-garza",
@@ -42918,7 +42951,8 @@
       "subAvg": "0.0"
     },
     "weightClass": "Bantamweight",
-    "height": "5'8\""
+    "height": "5'8\"",
+    "statsSyncedAt": "2026-08-25T09:37:27.197Z"
   },
   {
     "id": "jalin-turner",
@@ -43029,9 +43063,9 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/TURNER_JALIN_L_03-08.png",
     "nickname": "The Tarantula",
     "stats": {
-      "slpm": "5.79",
-      "strAcc": "48%",
-      "sapm": "4.54",
+      "slpm": "5.84",
+      "strAcc": "49%",
+      "sapm": "4.53",
       "strDef": "41%",
       "tdAvg": "0.75",
       "tdAcc": "55%",
@@ -43040,7 +43074,8 @@
     },
     "weightClass": "Lightweight",
     "height": "6'3\"",
-    "reach": "77.0\""
+    "reach": "77.0\"",
+    "statsSyncedAt": "2026-08-25T09:37:30.106Z"
   },
   {
     "id": "neil-magny",
@@ -43159,11 +43194,11 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/MAGNY_NEIL_L_12-13.png",
     "nickname": "The Haitian Sensation",
     "stats": {
-      "slpm": "3.40",
-      "strAcc": "46%",
-      "sapm": "2.44",
+      "slpm": "3.39",
+      "strAcc": "47%",
+      "sapm": "2.41",
       "strDef": "51%",
-      "tdAvg": "2.17",
+      "tdAvg": "2.13",
       "tdAcc": "39%",
       "tdDef": "55%",
       "subAvg": "0.3"
@@ -43172,7 +43207,8 @@
     "height": "6'3\"",
     "reach": "80.0\"",
     "nationality": "American",
-    "flag": "🇺🇸"
+    "flag": "🇺🇸",
+    "statsSyncedAt": "2026-08-25T09:37:32.796Z"
   },
   {
     "id": "ramiz-brahimaj",
@@ -43282,18 +43318,19 @@
     ],
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/BRAHIMAJ_RAMIZ_L_02-21.png",
     "stats": {
-      "slpm": "2.29",
-      "strAcc": "48%",
-      "sapm": "3.27",
-      "strDef": "47%",
-      "tdAvg": "1.99",
+      "slpm": "2.14",
+      "strAcc": "49%",
+      "sapm": "3.23",
+      "strDef": "46%",
+      "tdAvg": "1.97",
       "tdAcc": "34%",
-      "tdDef": "44%",
-      "subAvg": "1.6"
+      "tdDef": "46%",
+      "subAvg": "1.4"
     },
     "weightClass": "Welterweight",
     "height": "5'10\"",
-    "reach": "72.0\""
+    "reach": "72.0\"",
+    "statsSyncedAt": "2026-08-25T09:37:35.659Z"
   },
   {
     "id": "kaue-fernandes",
@@ -43305,11 +43342,11 @@
       "draws": 0
     },
     "stats": {
-      "slpm": "4.28",
+      "slpm": "4.26",
       "strAcc": "55%",
-      "sapm": "1.42",
-      "strDef": "62%",
-      "tdAvg": "1.18",
+      "sapm": "1.63",
+      "strDef": "60%",
+      "tdAvg": "1.16",
       "tdAcc": "100%",
       "tdDef": "76%",
       "subAvg": "0.0"
@@ -43326,7 +43363,8 @@
         "round": 1,
         "time": null
       }
-    ]
+    ],
+    "statsSyncedAt": "2026-08-25T09:37:38.492Z"
   },
   {
     "id": "carli-judice",
@@ -43365,18 +43403,19 @@
       }
     ],
     "stats": {
-      "slpm": "9.32",
+      "slpm": "9.33",
       "strAcc": "50%",
-      "sapm": "6.62",
+      "sapm": "6.60",
       "strDef": "57%",
-      "tdAvg": "0.52",
+      "tdAvg": "0.50",
       "tdAcc": "25%",
       "tdDef": "80%",
       "subAvg": "0.0"
     },
     "weightClass": "Women's Flyweight",
     "height": "5'7\"",
-    "reach": "68.0\""
+    "reach": "68.0\"",
+    "statsSyncedAt": "2026-08-25T09:37:41.349Z"
   },
   {
     "id": "serghei-spivac",
@@ -43479,21 +43518,22 @@
     ],
     "nickname": "Polar Bear",
     "stats": {
-      "slpm": "3.57",
-      "strAcc": "47%",
+      "slpm": "3.35",
+      "strAcc": "46%",
       "sapm": "4.23",
-      "strDef": "52%",
-      "tdAvg": "3.82",
-      "tdAcc": "59%",
-      "tdDef": "63%",
-      "subAvg": "0.5"
+      "strDef": "50%",
+      "tdAvg": "3.42",
+      "tdAcc": "57%",
+      "tdDef": "52%",
+      "subAvg": "0.4"
     },
     "weightClass": "Heavyweight",
     "stance": "Orthodox",
     "height": "6'3\"",
     "reach": "78.0\"",
     "nationality": "Moldovan",
-    "flag": "🇲🇩"
+    "flag": "🇲🇩",
+    "statsSyncedAt": "2026-08-25T09:37:44.048Z"
   },
   {
     "id": "vitor-petrino",
@@ -43611,18 +43651,19 @@
       }
     ],
     "stats": {
-      "slpm": "3.24",
-      "strAcc": "48%",
-      "sapm": "2.71",
-      "strDef": "51%",
-      "tdAvg": "2.60",
-      "tdAcc": "46%",
-      "tdDef": "79%",
-      "subAvg": "0.7"
+      "slpm": "3.37",
+      "strAcc": "50%",
+      "sapm": "2.56",
+      "strDef": "52%",
+      "tdAvg": "2.78",
+      "tdAcc": "48%",
+      "tdDef": "80%",
+      "subAvg": "0.6"
     },
     "weightClass": "Heavyweight",
     "height": "6'2\"",
-    "reach": "77.5\""
+    "reach": "77.5\"",
+    "statsSyncedAt": "2026-08-25T09:37:46.492Z"
   },
   {
     "id": "kennedy-nzechukwu",
@@ -43725,18 +43766,19 @@
     ],
     "nickname": "Chosen",
     "stats": {
-      "slpm": "4.96",
+      "slpm": "4.94",
       "strAcc": "46%",
-      "sapm": "4.58",
+      "sapm": "4.55",
       "strDef": "51%",
-      "tdAvg": "0.50",
+      "tdAvg": "0.49",
       "tdAcc": "45%",
       "tdDef": "80%",
       "subAvg": "0.2"
     },
     "weightClass": "Heavyweight",
     "height": "6'5\"",
-    "reach": "83.0\""
+    "reach": "83.0\"",
+    "statsSyncedAt": "2026-08-25T09:37:49.427Z"
   },
   {
     "id": "elise-reed",
@@ -43838,19 +43880,20 @@
       }
     ],
     "stats": {
-      "slpm": "3.41",
-      "strAcc": "53%",
-      "sapm": "3.26",
-      "strDef": "51%",
-      "tdAvg": "0.46",
+      "slpm": "3.50",
+      "strAcc": "52%",
+      "sapm": "4.16",
+      "strDef": "48%",
+      "tdAvg": "0.41",
       "tdAcc": "60%",
-      "tdDef": "53%",
+      "tdDef": "52%",
       "subAvg": "0.0"
     },
     "stance": "Orthodox",
     "weightClass": "Women's Strawweight",
     "height": "5'3\"",
-    "reach": "63.0\""
+    "reach": "63.0\"",
+    "statsSyncedAt": "2026-08-25T09:37:52.314Z"
   },
   {
     "id": "denise-gomes",
@@ -43967,7 +44010,8 @@
     "height": "5'2\"",
     "reach": "63.0\"",
     "nationality": "Brazilian",
-    "flag": "🇧🇷"
+    "flag": "🇧🇷",
+    "statsSyncedAt": "2026-08-25T09:37:54.798Z"
   },
   {
     "id": "ce-liu",
@@ -44056,18 +44100,19 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/ZAYNUKOV_MAGOMED_R_10-07.png",
     "nickname": "Wild Chanko",
     "stats": {
-      "slpm": "15.67",
-      "strAcc": "60%",
-      "sapm": "4.80",
-      "strDef": "58%",
+      "slpm": "10.30",
+      "strAcc": "59%",
+      "sapm": "2.93",
+      "strDef": "62%",
       "tdAvg": "2.00",
-      "tdAcc": "100%",
-      "tdDef": "0%",
+      "tdAcc": "50%",
+      "tdDef": "85%",
       "subAvg": "0.0"
     },
     "weightClass": "Lightweight",
     "height": "5'10\"",
-    "reach": "68.5\""
+    "reach": "68.5\"",
+    "statsSyncedAt": "2026-08-25T09:37:57.508Z"
   },
   {
     "id": "damian-rzepecki",
@@ -44162,17 +44207,18 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png",
     "nickname": "The Butcher",
     "stats": {
-      "slpm": "0.00",
-      "strAcc": "0%",
-      "sapm": "0.00",
-      "strDef": "0%",
-      "tdAvg": "0.00",
-      "tdAcc": "0%",
-      "tdDef": "0%",
+      "slpm": "1.07",
+      "strAcc": "25%",
+      "sapm": "4.93",
+      "strDef": "43%",
+      "tdAvg": "1.00",
+      "tdAcc": "14%",
+      "tdDef": "66%",
       "subAvg": "0.0"
     },
     "weightClass": "Lightweight",
-    "height": "5'10\""
+    "height": "5'10\"",
+    "statsSyncedAt": "2026-08-25T09:38:00.350Z"
   },
   {
     "id": "mike-davis",
@@ -44291,18 +44337,19 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-05/DAVIS_MIKE_L_03-16.png",
     "nickname": "Beast Boy",
     "stats": {
-      "slpm": "4.73",
+      "slpm": "4.30",
       "strAcc": "53%",
-      "sapm": "5.23",
+      "sapm": "4.66",
       "strDef": "54%",
-      "tdAvg": "2.40",
+      "tdAvg": "2.09",
       "tdAcc": "44%",
-      "tdDef": "60%",
-      "subAvg": "0.8"
+      "tdDef": "52%",
+      "subAvg": "0.9"
     },
     "height": "6'0\"",
     "reach": "72.5\"",
-    "weightClass": "Lightweight"
+    "weightClass": "Lightweight",
+    "statsSyncedAt": "2026-08-25T09:38:03.801Z"
   },
   {
     "id": "jean-paul-lebosnoyani",
@@ -44336,7 +44383,8 @@
     },
     "height": "5'11\"",
     "reach": "72\"",
-    "weightClass": "Welterweight"
+    "weightClass": "Welterweight",
+    "statsSyncedAt": "2026-08-25T09:38:06.456Z"
   },
   {
     "id": "seokhyeon-ko",
@@ -44360,7 +44408,8 @@
     },
     "height": "5'10\"",
     "reach": "71\"",
-    "weightClass": "Welterweight"
+    "weightClass": "Welterweight",
+    "statsSyncedAt": "2026-08-25T09:38:09.131Z"
   },
   {
     "id": "rj-harris",
@@ -44384,7 +44433,8 @@
     },
     "height": "6'3\"",
     "reach": "78\"",
-    "weightClass": "Heavyweight"
+    "weightClass": "Heavyweight",
+    "statsSyncedAt": "2026-08-25T09:38:11.962Z"
   },
   {
     "id": "anna-melisano",
@@ -44408,7 +44458,8 @@
     },
     "height": "5'4.5\"",
     "reach": "68\"",
-    "weightClass": "Women's Flyweight"
+    "weightClass": "Women's Flyweight",
+    "statsSyncedAt": "2026-08-25T09:38:14.494Z"
   },
   {
     "id": "santiago-ponzinibbio",
@@ -44511,18 +44562,19 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/PONZINIBBIO_SANTIAGO_L_05-03.png",
     "nickname": "Argentine Dagger",
     "stats": {
-      "slpm": "4.78",
-      "strAcc": "41%",
-      "sapm": "4.68",
+      "slpm": "4.67",
+      "strAcc": "40%",
+      "sapm": "4.79",
       "strDef": "61%",
-      "tdAvg": "0.60",
-      "tdAcc": "27%",
+      "tdAvg": "0.58",
+      "tdAcc": "26%",
       "tdDef": "71%",
       "subAvg": "0.0"
     },
     "height": "6'0\"",
     "reach": "73\"",
-    "weightClass": "Welterweight"
+    "weightClass": "Welterweight",
+    "statsSyncedAt": "2026-08-25T09:38:17.415Z"
   },
   {
     "id": "sam-patterson",
@@ -44534,14 +44586,14 @@
       "draws": 1
     },
     "stats": {
-      "slpm": "2.62",
-      "strAcc": "37%",
-      "sapm": "3.06",
-      "strDef": "50%",
-      "tdAvg": "0.82",
+      "slpm": "3.58",
+      "strAcc": "41%",
+      "sapm": "2.82",
+      "strDef": "59%",
+      "tdAvg": "0.67",
       "tdAcc": "50%",
-      "tdDef": "33%",
-      "subAvg": "1.6"
+      "tdDef": "50%",
+      "subAvg": "1.3"
     },
     "last5": [
       {
@@ -44555,7 +44607,8 @@
     ],
     "height": "6'3\"",
     "reach": "78\"",
-    "weightClass": "Welterweight"
+    "weightClass": "Welterweight",
+    "statsSyncedAt": "2026-08-25T09:38:20.292Z"
   },
   {
     "id": "ezra-elliot",
@@ -50872,12 +50925,34 @@
   {
     "id": "chad-anheliger",
     "name": "Chad Anheliger",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-10/ANHELIGER_CHAD_L_11-02.png?itok=ezY1YMKO"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-10/ANHELIGER_CHAD_L_11-02.png?itok=ezY1YMKO",
+    "stats": {
+      "slpm": "3.11",
+      "strAcc": "46%",
+      "sapm": "2.76",
+      "strDef": "53%",
+      "tdAvg": "0.68",
+      "tdAcc": "30%",
+      "tdDef": "38%",
+      "subAvg": "0.5"
+    },
+    "statsSyncedAt": "2026-08-25T09:35:18.472Z"
   },
   {
     "id": "steven-koslow",
     "name": "Steven Koslow",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-01/KOSLOW_STEVEN_L_12-10.png?itok=pqAG6P4G"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-01/KOSLOW_STEVEN_L_12-10.png?itok=pqAG6P4G",
+    "stats": {
+      "slpm": "0.77",
+      "strAcc": "37%",
+      "sapm": "3.73",
+      "strDef": "40%",
+      "tdAvg": "5.28",
+      "tdAcc": "55%",
+      "tdDef": "0%",
+      "subAvg": "1.1"
+    },
+    "statsSyncedAt": "2026-08-25T09:35:21.316Z"
   },
   {
     "id": "michael-morales",
@@ -50910,7 +50985,18 @@
         "round": 1,
         "time": "3:27"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "5.68",
+      "strAcc": "49%",
+      "sapm": "3.26",
+      "strDef": "53%",
+      "tdAvg": "1.04",
+      "tdAcc": "41%",
+      "tdDef": "89%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-08-25T09:35:24.035Z"
   },
   {
     "id": "tagir-ulanbekov",
@@ -50932,7 +51018,18 @@
     "pfp": false,
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-11/ULANBEKOV_TAGIR_L_11-22.png?itok=GvelhCHd",
     "bio": "Tagir Ulanbekov is a Russian professional mixed martial artist in the UFC flyweight division. Get the latest UFC breaking news, fight night results, MMA records and stats, highlights, photos, videos and more.",
-    "last5": []
+    "last5": [],
+    "stats": {
+      "slpm": "3.01",
+      "strAcc": "48%",
+      "sapm": "3.44",
+      "strDef": "50%",
+      "tdAvg": "2.73",
+      "tdAcc": "39%",
+      "tdDef": "63%",
+      "subAvg": "1.5"
+    },
+    "statsSyncedAt": "2026-08-25T09:35:26.570Z"
   },
   {
     "id": "david-onama",
@@ -50954,7 +51051,18 @@
     "pfp": false,
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-11/ONAMA_DAVID_L_11-16.png?itok=NVO2yaF_",
     "bio": "David Onama is a Ugandan professional mixed martial artist in the UFC featherweight division. Get the latest UFC breaking news, fight night results, MMA records and stats, highlights, photos, videos and more.",
-    "last5": []
+    "last5": [],
+    "stats": {
+      "slpm": "5.07",
+      "strAcc": "50%",
+      "sapm": "4.89",
+      "strDef": "51%",
+      "tdAvg": "1.05",
+      "tdAcc": "30%",
+      "tdDef": "52%",
+      "subAvg": "0.5"
+    },
+    "statsSyncedAt": "2026-08-25T09:35:29.286Z"
   },
   {
     "id": "jan-blachowicz",
@@ -50998,7 +51106,18 @@
     "pfp": false,
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-12/VALLEJOS_KEVIN_R_12-13.png?itok=-h2gdx6Y",
     "bio": "Kevin “El Chino” Vallejos is an Argentine professional mixed martial artist in the UFC featherweight division. Get the latest UFC breaking news, fight night results, MMA records and stats, highlights, photos, videos and more.",
-    "last5": []
+    "last5": [],
+    "stats": {
+      "slpm": "6.12",
+      "strAcc": "48%",
+      "sapm": "4.41",
+      "strDef": "57%",
+      "tdAvg": "0.66",
+      "tdAcc": "28%",
+      "tdDef": "84%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-08-25T09:35:32.393Z"
   },
   {
     "id": "jessica-andrade",
@@ -51020,7 +51139,18 @@
     "pfp": false,
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/ANDRADE_JESSICA_L_08-16.png?itok=EG1JyXfD",
     "bio": "Jéssica \"Bate Estaca\" Andrade is a Brazilian professional mixed martial artist in the UFC flyweight division, and the former UFC strawweight champion. Get the latest UFC breaking news, fight night results, MMA records and stats, highlights, photos, videos and more.",
-    "last5": []
+    "last5": [],
+    "stats": {
+      "slpm": "6.37",
+      "strAcc": "48%",
+      "sapm": "5.58",
+      "strDef": "54%",
+      "tdAvg": "2.10",
+      "tdAcc": "54%",
+      "tdDef": "75%",
+      "subAvg": "0.3"
+    },
+    "statsSyncedAt": "2026-08-25T09:35:35.265Z"
   },
   {
     "id": "mizuki",
@@ -51042,7 +51172,18 @@
     "pfp": false,
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/MIZUKI_R_10-25.png?itok=CpbTHLy2",
     "bio": "Mizuki is a Japanese professional mixed martial artist in the UFC strawweight division. Get the latest UFC breaking news, fight night results, MMA records and stats, highlights, photos, videos and more.",
-    "last5": []
+    "last5": [],
+    "stats": {
+      "slpm": "4.45",
+      "strAcc": "52%",
+      "sapm": "4.65",
+      "strDef": "49%",
+      "tdAvg": "0.75",
+      "tdAcc": "33%",
+      "tdDef": "80%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-08-25T09:35:37.974Z"
   },
   {
     "id": "miranda-maverick",
@@ -51064,7 +51205,18 @@
     "pfp": false,
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/5/MAVERICK_MIRANDA_L_12-14.png?itok=Og7YekgL",
     "bio": "Miranda \"Fear The\" Maverick is an American professional mixed martial artist in the UFC women's flyweight division. Get the latest UFC breaking news, fight night results, MMA records and stats, highlights, photos, videos and more.",
-    "last5": []
+    "last5": [],
+    "stats": {
+      "slpm": "3.22",
+      "strAcc": "44%",
+      "sapm": "2.25",
+      "strDef": "61%",
+      "tdAvg": "2.16",
+      "tdAcc": "40%",
+      "tdDef": "45%",
+      "subAvg": "0.4"
+    },
+    "statsSyncedAt": "2026-08-25T09:35:40.472Z"
   },
   {
     "id": "ailin-perez",
@@ -51086,7 +51238,18 @@
     "pfp": false,
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/PEREZ_AILIN_L_02-28.png?itok=sPy9HJ2B",
     "bio": "Ailin “Fiona” Perez is an Argentinean professional mixed martial artist in the UFC bantamweight division. Get the latest UFC breaking news, fight night results, MMA records and stats, highlights, photos, videos and more.",
-    "last5": []
+    "last5": [],
+    "stats": {
+      "slpm": "2.88",
+      "strAcc": "56%",
+      "sapm": "1.58",
+      "strDef": "56%",
+      "tdAvg": "4.90",
+      "tdAcc": "49%",
+      "tdDef": "72%",
+      "subAvg": "0.2"
+    },
+    "statsSyncedAt": "2026-08-25T09:35:43.351Z"
   },
   {
     "id": "yana-santos",
@@ -51108,7 +51271,18 @@
     "pfp": false,
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/SANTOS_YANA_L_05-03.png?itok=pkR_XniN",
     "bio": "Yana Santos is a Russian professional mixed martial artist in the UFC bantamweight division. Get the latest UFC breaking news, fight night results, MMA records and stats, highlights, photos, videos and more.",
-    "last5": []
+    "last5": [],
+    "stats": {
+      "slpm": "4.41",
+      "strAcc": "57%",
+      "sapm": "3.12",
+      "strDef": "52%",
+      "tdAvg": "0.78",
+      "tdAcc": "47%",
+      "tdDef": "51%",
+      "subAvg": "0.1"
+    },
+    "statsSyncedAt": "2026-08-25T09:35:46.072Z"
   },
   {
     "id": "macy-chiasson",
@@ -51130,7 +51304,18 @@
     "pfp": false,
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/CHIASSON_MACY_L_10-04.png?itok=BRfzm0GS",
     "bio": "Macy Chiasson is an American professional fighter in the UFC women's bantamweight division. Get the latest UFC breaking news, fight night results, MMA records and stats, highlights, photos, videos and more.",
-    "last5": []
+    "last5": [],
+    "stats": {
+      "slpm": "3.21",
+      "strAcc": "46%",
+      "sapm": "2.76",
+      "strDef": "44%",
+      "tdAvg": "1.87",
+      "tdAcc": "35%",
+      "tdDef": "62%",
+      "subAvg": "0.4"
+    },
+    "statsSyncedAt": "2026-08-25T09:35:48.752Z"
   },
   {
     "id": "miesha-tate",
@@ -51152,6 +51337,17 @@
     "pfp": false,
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/5/TATE_MIESHA_L_12-02.png?itok=F-jJbygf",
     "bio": "Miesha “Cupcake” Tate is an American professional mixed martial artist in the UFC bantamweight division and the former UFC bantamweight champion. Get the latest UFC breaking news, fight night results, MMA records and stats, highlights, photos, videos and more.",
-    "last5": []
+    "last5": [],
+    "stats": {
+      "slpm": "2.62",
+      "strAcc": "44%",
+      "sapm": "3.05",
+      "strDef": "51%",
+      "tdAvg": "1.97",
+      "tdAcc": "30%",
+      "tdDef": "56%",
+      "subAvg": "1.2"
+    },
+    "statsSyncedAt": "2026-08-25T09:35:51.664Z"
   }
 ]
