@@ -2242,9 +2242,25 @@ function oddsSpanHtml(val, isFav, numClass) {
       hc.className = 'fc-hov';
       document.body.appendChild(hc);
     }
+    // Touch backdrop — without hover, this becomes a fixed-position bottom
+    // sheet (see CSS) instead of a tooltip pinned to the tap coordinates,
+    // which used to stay glued to that screen position while the page
+    // scrolled underneath it and drift over unrelated cards below with no
+    // way to dismiss it. Backdrop + close button give it an explicit exit.
+    let bd = document.getElementById('fc-hov-backdrop');
+    if (!bd) {
+      bd = document.createElement('div');
+      bd.id = 'fc-hov-backdrop';
+      bd.className = 'fc-hov-backdrop';
+      document.body.appendChild(bd);
+    }
 
     let hideT, showT, openFor = null;
-    const hide = () => { hc.classList.remove('fc-hov-on'); openFor = null; };
+    const hide = () => {
+      hc.classList.remove('fc-hov-on');
+      bd.classList.remove('fc-hov-backdrop-on');
+      openFor = null;
+    };
 
     const show = side => {
       const fd = lookupFighter(side.dataset.pick);
@@ -2261,6 +2277,7 @@ function oddsSpanHtml(val, isFav, numClass) {
       }).join('');
 
       hc.innerHTML =
+        (hasHover ? '' : `<button class="fc-hov-close" type="button" aria-label="Close">✕</button>`) +
         `<div class="fc-hov-name">${esc(fd.name)}</div>` +
         (rec ? `<div class="fc-hov-rec">${rec}</div>` : '') +
         (rows ? `<div class="fc-hov-fights">${rows}</div>` : '<div class="fc-hov-empty">No recent fight history on file.</div>') +
@@ -2268,16 +2285,25 @@ function oddsSpanHtml(val, isFav, numClass) {
 
       hc.classList.add('fc-hov-on');
       openFor = side;
+      hc.querySelector('.fc-hov-close')?.addEventListener('click', e => { e.stopPropagation(); hide(); });
 
-      // Position above the element, fall back to below
-      const r = side.getBoundingClientRect();
-      const h = hc.getBoundingClientRect();
-      let top  = r.top - h.height - 10;
-      if (top < 8) top = r.bottom + 10;
-      let left = r.left + r.width / 2 - h.width / 2;
-      left = Math.max(8, Math.min(left, window.innerWidth - h.width - 8));
-      hc.style.top  = top  + 'px';
-      hc.style.left = left + 'px';
+      if (hasHover) {
+        // Position above the element, fall back to below
+        const r = side.getBoundingClientRect();
+        const h = hc.getBoundingClientRect();
+        let top  = r.top - h.height - 10;
+        if (top < 8) top = r.bottom + 10;
+        let left = r.left + r.width / 2 - h.width / 2;
+        left = Math.max(8, Math.min(left, window.innerWidth - h.width - 8));
+        hc.style.top  = top  + 'px';
+        hc.style.left = left + 'px';
+      } else {
+        // Touch: fixed bottom sheet, CSS owns position — don't fight it
+        // with inline top/left left over from a previous hasHover render.
+        hc.style.top = '';
+        hc.style.left = '';
+        bd.classList.add('fc-hov-backdrop-on');
+      }
     };
 
     root.querySelectorAll('.sb-side[data-pick]').forEach(side => {
@@ -2301,13 +2327,14 @@ function oddsSpanHtml(val, isFav, numClass) {
     hc.addEventListener('click', e => e.stopPropagation());
     hc.addEventListener('mouseenter', () => clearTimeout(hideT));
     hc.addEventListener('mouseleave', () => { hideT = setTimeout(hide, 140); });
+    bd.addEventListener('click', hide);
     // render() calls bindHoverCards() on every re-render — guard the
     // document-level listener so it's only ever attached once.
     if (!document.body.dataset.fcHovDocBound) {
       document.body.dataset.fcHovDocBound = '1';
       document.addEventListener('click', () => {
-        const openHc = document.getElementById('fc-hov');
-        if (openHc) openHc.classList.remove('fc-hov-on');
+        document.getElementById('fc-hov')?.classList.remove('fc-hov-on');
+        document.getElementById('fc-hov-backdrop')?.classList.remove('fc-hov-backdrop-on');
       });
     }
   }

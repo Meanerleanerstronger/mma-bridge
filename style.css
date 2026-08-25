@@ -8890,6 +8890,48 @@ body.light-mode .fc-hov-rec { color: rgba(0,0,0,0.4); border-bottom-color: rgba(
 body.light-mode .fc-hov-opp { color: rgba(0,0,0,0.75); }
 body.light-mode .fc-hov-mth { color: rgba(0,0,0,0.35); }
 
+/* Dim backdrop behind the touch bottom sheet */
+.fc-hov-backdrop {
+  position: fixed; inset: 0; z-index: 8890;
+  background: rgba(0,0,0,0.6);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.18s ease;
+}
+.fc-hov-backdrop.fc-hov-backdrop-on { opacity: 1; pointer-events: auto; }
+
+.fc-hov-close {
+  display: none;
+}
+
+/* No hover support: the tooltip-style popup pinned to tap coordinates
+   used to stay glued to that screen position while the page scrolled
+   underneath it, drifting over unrelated cards with no way to close it.
+   Anchor it to the viewport instead as a bottom sheet, with a real
+   close button since there's no mouseleave to dismiss it. */
+@media (hover: none), (pointer: coarse) {
+  .fc-hov {
+    position: fixed !important;
+    left: 0 !important; right: 0 !important; bottom: 0 !important; top: auto !important;
+    width: auto; max-width: none;
+    max-height: 72vh; overflow-y: auto;
+    border-radius: 18px 18px 0 0;
+    padding: 18px 20px calc(20px + env(safe-area-inset-bottom, 0px));
+    transform: translateY(100%);
+    transition: opacity 0.18s ease, transform 0.22s cubic-bezier(0.32,0.72,0,1);
+    z-index: 8900;
+  }
+  .fc-hov.fc-hov-on { transform: translateY(0); }
+  .fc-hov-close {
+    display: flex; align-items: center; justify-content: center;
+    position: absolute; top: 12px; right: 12px;
+    width: 30px; height: 30px; border-radius: 50%;
+    background: rgba(255,255,255,0.08); border: none;
+    color: rgba(255,255,255,0.6); font-size: 0.85rem;
+    cursor: pointer;
+  }
+  .fc-hov-name { padding-right: 36px; }
+}
+
 /* Crowd fave / underdog badges */
 .pk-crowd-fave, .pk-crowd-dog {
   display: inline-flex; align-items: center;
