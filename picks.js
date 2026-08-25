@@ -875,6 +875,7 @@ function oddsSpanHtml(val, isFav, numClass) {
   const HYPE_LABELS = ['', 'MEH', 'SLEEPER', 'LOW KEY', 'BUILDING', 'DECENT', 'SOLID', 'HYPED', 'VERY HYPED', 'ELITE', 'MUST-SEE'];
 
   function updateHypeWidget() {
+    document.body.classList.toggle('pk-hype-rated', !!localHype);
     const pct = localHype ? ((localHype - 1) / 9) * 100 : 0;
     const fill     = document.getElementById('pkHypeFill');
     const thumb    = document.getElementById('pkHypeThumb');

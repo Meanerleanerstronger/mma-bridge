@@ -6589,6 +6589,14 @@ body.light-mode .pk-info-pop-body strong { color: rgba(0,0,0,0.75); }
 @media (max-width: 768px) {
   /* Sits above the 60px bottom nav with a gap */
   .pk-lb-float { bottom: 70px; right: 12px; }
+  /* The hype card sits near the top of the page and is the required
+     gate before picking — on mobile its track ran right into this
+     floating button's fixed screen position, overlapping the far end
+     of the drag track. Hold the shortcut back until hype is rated;
+     nothing past that gate is usable yet anyway. Only applies while
+     #pkHypeWidget actually exists — completed/locked events never
+     render it and shouldn't lose the shortcut permanently. */
+  body:not(.pk-hype-rated):has(#pkHypeWidget) .pk-lb-float { display: none; }
 }
 @media (max-width: 480px) {
   .pk-lb-float { bottom: 70px; right: 12px; padding: 8px 12px; font-size: 0.8rem; }
