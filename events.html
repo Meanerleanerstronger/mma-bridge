@@ -533,11 +533,10 @@
        grid-column:1/-1 to span full width above its group of cells. */
     .ov-fight-col-card #ovFightRows {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
       gap: 12px;
       padding: 0 12px 24px;
     }
-    .ov-fight-col-card .ov-section-header { grid-column: 1 / -1; margin: 18px 0 4px; }
     .ov-fight-col-card .ov-fight.fcv-cell {
       display: flex; flex-direction: column;
       margin: 0; padding: 12px;
@@ -561,23 +560,40 @@
       justify-content: flex-start !important;
       align-items: center !important;
     }
+    /* Rectangular portrait crop with a flag badge — matches ufc.com's
+       own fight-card graphic instead of a small circular avatar. */
     .fcv-cell .fc-photo {
-      position: static !important; inset: auto !important;
-      display: flex !important; align-items: center !important; justify-content: center !important;
-      flex: 0 0 56px !important;
-      width: 56px !important; height: 56px !important;
-      aspect-ratio: 1 / 1 !important;
-      border-radius: 50% !important;
-      margin: 0 auto !important;
+      position: relative !important; inset: auto !important;
+      display: block !important;
+      flex: none !important;
+      width: 100% !important; height: auto !important;
+      aspect-ratio: 3 / 4 !important;
+      border-radius: 8px !important;
+      border: 1.5px solid rgba(255,255,255,0.14);
+      margin: 0 !important;
+      background: rgba(255,255,255,0.03);
       overflow: hidden;
     }
     .fcv-cell .ov-headshot {
       position: static !important;
       width: 100% !important; height: 100% !important;
-      border-radius: 50%;
-      object-fit: cover;
+      border-radius: 0;
+      object-fit: cover; object-position: top center;
     }
     .fcv-cell .fc-odds-inline { margin-top: 2px; }
+    /* Section header as a solid banner bar (ufc.com's "PRELIMS 7PM ET"
+       style), not the thin line-divider label List View uses. */
+    .ov-fight-col-card .ov-section-header {
+      grid-column: 1 / -1; margin: 4px 0;
+      padding: 10px 16px;
+      background: linear-gradient(90deg, rgba(255,138,61,0.14), rgba(255,138,61,0.05));
+      border: 1px solid rgba(255,138,61,0.25);
+      border-left: none;
+      border-radius: 6px;
+      justify-content: center;
+    }
+    .ov-fight-col-card .ov-section-header .ov-section-line { display: none; }
+    .ov-fight-col-card .ov-section-label { color: rgba(255,255,255,0.85) !important; }
     /* Fade the grid out/in on toggle so a view switch reads as a
        transition instead of an abrupt content swap. */
     #ovFightRows { transition: opacity 0.16s ease; }
@@ -1424,6 +1440,13 @@
     // for browsing, not picking; tapping a fighter still opens their
     // profile modal same as List View already does.
     let ovViewMode = localStorage.getItem('ov_view_mode') === 'card' ? 'card' : 'list';
+    // Nation flags for Card View's photo badges (the official-card look
+    // this is modeled on always shows one) — a lightweight name->flag
+    // map, fetched once and not blocking anything else on the page.
+    let ovFlagByName = {};
+    fetch('data/fighters.json?v=' + Date.now()).then(r => r.ok ? r.json() : []).then(list => {
+      (list || []).forEach(fd => { if (fd.flag) ovFlagByName[fd.name.toLowerCase()] = fd.flag; });
+    }).catch(() => {});
     let currentOvEvent = null, currentOvIsPPV = false, currentOvAccent = '';
     function daysUntil(iso){ return Math.ceil((new Date(iso+'T00:00:00')-new Date())/86400000); }
     /* "TBA" / "Opponent TBA" are UFC.com placeholder text for an unannounced
@@ -2140,6 +2163,7 @@
             const aResult = hasResult ? (f.winner.toLowerCase()===f.a.toLowerCase() ? 'result-win' : 'result-loss') : '';
             const bResult = hasResult ? (f.winner.toLowerCase()===f.b.toLowerCase() ? 'result-win' : 'result-loss') : '';
             const ms = hasResult ? methodStyle(f.method) : null;
+            const flagBadge = name => { const fl = ovFlagByName[(name||'').toLowerCase()]; return fl ? `<span class="fcv-flag">${fl}</span>` : ''; };
             const oddsTag = (side) => {
               if (!f.odds || !f.odds.a || !f.odds.b) return '';
               const aVal = parseInt(f.odds.a), bVal = parseInt(f.odds.b);
@@ -2157,13 +2181,13 @@
               </div>
               <div class="fcv-matchup">
                 <div class="ov-head-cell fcv-side ${aResult}">
-                  <div class="fc-photo">${f.imgA ? `<img class="ov-headshot" src="${thumbImg(f.imgA)}" alt="" loading="lazy" onerror="this.closest('.fc-photo').style.display='none'">` : ''}</div>
+                  <div class="fc-photo fcv-photo">${f.imgA ? `<img class="ov-headshot" src="${thumbImg(f.imgA)}" alt="" loading="lazy" onerror="this.closest('.fc-photo').style.display='none'">` : ''}${flagBadge(f.a)}</div>
                   <div class="ov-fn fcv-name">${esc(f.a)}</div>
                   ${hasResult ? '' : oddsTag('a')}
                 </div>
                 <div class="fcv-vs">VS</div>
                 <div class="ov-head-cell ov-head-r fcv-side fcv-side-b ${bResult}">
-                  <div class="fc-photo">${f.imgB ? `<img class="ov-headshot" src="${thumbImg(f.imgB)}" alt="" loading="lazy" onerror="this.closest('.fc-photo').style.display='none'">` : ''}</div>
+                  <div class="fc-photo fcv-photo">${f.imgB ? `<img class="ov-headshot" src="${thumbImg(f.imgB)}" alt="" loading="lazy" onerror="this.closest('.fc-photo').style.display='none'">` : ''}${flagBadge(f.b)}</div>
                   <div class="ov-fn fcv-name">${esc(f.b)}</div>
                   ${hasResult ? '' : oddsTag('b')}
                 </div>

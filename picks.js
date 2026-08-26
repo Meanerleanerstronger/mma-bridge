@@ -1496,6 +1496,16 @@ function oddsSpanHtml(val, isFav, numClass) {
     // Winner-only here by design — method/round bonus picking stays in
     // List View so these cells stay small and scannable.
     if (viewMode === 'card') {
+      // Official-card look: rectangular headshot with a flag badge in the
+      // corner (same as ufc.com's own fight-card graphic), not the small
+      // circular avatar List View uses.
+      const fdA = lookupFighter(f.a), fdB = lookupFighter(f.b);
+      const flagBadge = fd => fd?.flag ? `<span class="fcv-flag">${fd.flag}</span>` : '';
+      const cardPhoto = (imgUrl, name, fd) => `<div class="fc-photo fcv-photo">${
+        imgUrl
+          ? `<img src="${esc(thumbImg(imgUrl))}" alt="${esc(name)}" loading="lazy" onerror="this.closest('.fc-photo').style.display='none'">`
+          : `<div class="fc-sil">${SILHOUETTE}</div>`
+      }${flagBadge(fd)}</div>`;
       return `
         <div class="${cardCls} fcv-cell" data-key="${esc(key)}">
           <div class="fcv-tags">
@@ -1505,7 +1515,7 @@ function oddsSpanHtml(val, isFav, numClass) {
           </div>
           <div class="fcv-matchup">
             <div class="${sideACls} fcv-side" data-key="${esc(key)}" data-pick="${esc(f.a)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
-              ${photoA}
+              ${cardPhoto(f.imgA, f.a, fdA)}
               <div class="fcv-name">${esc(f.a)}</div>
               <div class="fc-sub-row fcv-sub">${recA ? `<span class="fc-record">${esc(recA)}</span>` : ''}${oddsTagA ? `<span class="fc-odds-inline">${oddsTagA}</span>` : ''}</div>
               <a class="fc-fighter-link" href="fighter.html?name=${encodeURIComponent(f.a)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Profile</a>
@@ -1513,7 +1523,7 @@ function oddsSpanHtml(val, isFav, numClass) {
             </div>
             <div class="fcv-vs">VS</div>
             <div class="${sideBCls} fcv-side fcv-side-b" data-key="${esc(key)}" data-pick="${esc(f.b)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
-              ${photoB}
+              ${cardPhoto(f.imgB, f.b, fdB)}
               <div class="fcv-name">${esc(f.b)}</div>
               <div class="fc-sub-row fcv-sub">${recB ? `<span class="fc-record">${esc(recB)}</span>` : ''}${oddsTagB ? `<span class="fc-odds-inline">${oddsTagB}</span>` : ''}</div>
               <a class="fc-fighter-link" href="fighter.html?name=${encodeURIComponent(f.b)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Profile</a>
