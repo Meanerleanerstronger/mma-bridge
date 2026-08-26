@@ -7326,46 +7326,6 @@ body.light-mode .pk-score-hero-ok .pk-score-hero-pts { color: #7a5500 !important
 body.light-mode .pk-career-badge-ok { color: rgba(100,70,0,0.65) !important; }
 body.light-mode .pk-fotn-bar-dot { color: rgba(100,70,0,0.5) !important; }
 
-/* ── Pick-change confirmation banner ── */
-.pk-change-confirm {
-  position: absolute; bottom: 0; left: 0; right: 0; z-index: 20;
-  background: rgba(15,15,20,0.97);
-  border-top: 1px solid rgba(224,107,26,0.25);
-  padding: 10px 16px;
-  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
-  animation: pk-cc-in 0.18s ease;
-}
-@keyframes pk-cc-in { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
-.pk-change-msg {
-  flex: 1; min-width: 0;
-  font-family: 'Montserrat', sans-serif; font-size: 0.72rem; font-weight: 600;
-  color: rgba(255,255,255,0.75); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.pk-change-msg strong { color: #e06b1a; font-weight: 800; }
-.pk-change-btns { display: flex; gap: 8px; flex-shrink: 0; }
-.pk-change-yes {
-  background: rgba(224,107,26,0.12); border: 1.5px solid rgba(224,107,26,0.5);
-  border-radius: 7px; cursor: pointer;
-  color: #e06b1a; font-family: 'Montserrat', sans-serif;
-  font-size: 0.85rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
-  padding: 7px 16px; transition: all 0.12s;
-}
-.pk-change-yes:hover { background: rgba(224,107,26,0.22); transform: translateY(-1px); }
-.pk-change-no {
-  background: transparent; border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 7px; cursor: pointer;
-  color: rgba(255,255,255,0.45); font-family: 'Montserrat', sans-serif;
-  font-size: 0.85rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
-  padding: 7px 14px; transition: all 0.12s;
-}
-.pk-change-no:hover { border-color: rgba(255,255,255,0.22); color: rgba(255,255,255,0.7); }
-
-body.light-mode .pk-change-confirm { background: rgba(245,245,248,0.98) !important; border-top-color: rgba(160,110,0,0.25) !important; }
-body.light-mode .pk-change-msg { color: rgba(0,0,0,0.65) !important; }
-body.light-mode .pk-change-msg strong { color: #7a5500 !important; }
-body.light-mode .pk-change-yes { background: rgba(160,100,8,0.1) !important; border-color: rgba(160,110,0,0.4) !important; color: #7a5500 !important; }
-body.light-mode .pk-change-no { color: rgba(0,0,0,0.4) !important; border-color: rgba(0,0,0,0.12) !important; }
-
 /* ── PICKS PAGE LIGHT MODE — NEW FC-* + PK-HD CLASSES ── */
 /* Shell / nav / header */
 body.light-mode .pk-page { background: #faf8f3 !important; color: #111 !important; }

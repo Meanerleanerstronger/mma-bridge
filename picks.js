@@ -2686,35 +2686,12 @@ function oddsSpanHtml(val, isFav, numClass) {
             return;
           }
 
-          const currentPick = localPicks[key]?.pick;
-
-          if (currentPick && currentPick !== pick) {
-            // Switching to a different fighter — show confirmation
-            fight.querySelectorAll('.pk-change-confirm').forEach(el => el.remove());
-            const confirm = document.createElement('div');
-            confirm.className = 'pk-change-confirm';
-            confirm.innerHTML = `
-              <div class="pk-change-msg">Switch to <strong>${esc(pick)}</strong>?</div>
-              <div class="pk-change-btns">
-                <button class="pk-change-yes">Switch</button>
-                <button class="pk-change-no">Keep ${esc(currentPick)}</button>
-              </div>`;
-            fight.appendChild(confirm);
-            const t = setTimeout(() => confirm.remove(), 5000);
-            confirm.querySelector('.pk-change-yes').addEventListener('click', e => {
-              e.stopPropagation();
-              clearTimeout(t);
-              confirm.remove();
-              applyPick(key, pick, fight, side);
-            });
-            confirm.querySelector('.pk-change-no').addEventListener('click', e => {
-              e.stopPropagation();
-              clearTimeout(t);
-              confirm.remove();
-            });
-            return;
-          }
-
+          // Switching to a different fighter used to pop an "Are you
+          // sure? [Switch] [Keep]" dialog on every change of mind — pure
+          // friction (flagged directly: "I don't want to click 6 times
+          // and use my brain to pick a fight"). A pick is trivially
+          // reversible any time before lock, so just switch instantly,
+          // same as picking fresh.
           applyPick(key, pick, fight, side);
         };
         side.addEventListener('click', function(e) { _pickEvent = e; activate(); });
