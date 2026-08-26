@@ -149,6 +149,9 @@
       transform-origin: top;
       animation: accentGrow 0.4s 0.2s ease both;
     }
+    .row-accent-gold {
+      background: #e8c85a;
+    }
     .rv-row-count {
       font-family: 'Inter', sans-serif;
       font-size: 0.7rem;
@@ -224,6 +227,7 @@
       transition: border-color 0.25s;
     }
     .rv-card:hover .card-clip { border-color: rgba(255,138,61,0.4); }
+    .rv-card.ppv:hover .card-clip { border-color: rgba(232,200,90,0.45); }
     @media (prefers-reduced-motion: reduce) {
       .rv-card { animation: none; }
     }
@@ -255,6 +259,9 @@
 
     .rv-card:hover .card-clip {
       box-shadow: 0 28px 60px rgba(0,0,0,0.75), 0 0 0 1px rgba(255,138,61,0.08), 0 0 40px rgba(255,138,61,0.06);
+    }
+    .rv-card.ppv:hover .card-clip {
+      box-shadow: 0 28px 60px rgba(0,0,0,0.75), 0 0 0 1px rgba(232,200,90,0.1), 0 0 40px rgba(232,200,90,0.08);
     }
 
     /* Full bleed image */
@@ -340,8 +347,8 @@
     }
     .rv-card.ppv .card-badge {
       background: rgba(0,0,0,0.6);
-      border: 1px solid rgba(224,107,26,0.55);
-      color: #e06b1a;
+      border: 1px solid rgba(232,200,90,0.55);
+      color: #e8c85a;
     }
     .rv-card.fn .card-badge {
       background: rgba(0,0,0,0.6);
@@ -574,7 +581,7 @@
           </div>
         </div>
         <div class="rv-title-row">
-          <div class="rv-row-title"><span class="row-accent"></span>PPV Events</div>
+          <div class="rv-row-title"><span class="row-accent row-accent-gold"></span>PPV Events</div>
           <div class="rv-row-count" id="ppvCount"></div>
         </div>
       </div>
