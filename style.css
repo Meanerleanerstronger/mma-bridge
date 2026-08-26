@@ -5787,33 +5787,36 @@ body.light-mode .pk-hype-card-count { color: rgba(0,0,0,0.3); }
    picking). Was a whisper-thin plain-text link that read as an
    afterthought next to the record/odds — a real pill button instead,
    sitting right under the name so it reads as a clear, separate action. */
+/* Neutral by default, orange on hover only — with two of these per
+   card (~26 on a full page) a filled accent pill by default was one of
+   the biggest single contributors to "almost everything is orange". */
 .fc-fighter-link {
   display: inline-flex; align-items: center; gap: 4px;
   font-family: 'Montserrat', sans-serif; font-size: 0.62rem; font-weight: 800;
   letter-spacing: 0.05em; text-transform: uppercase;
-  color: rgba(255,255,255,0.85);
-  background: rgba(255,138,61,0.12);
-  border: 1px solid rgba(255,138,61,0.4);
+  color: rgba(255,255,255,0.75);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.16);
   padding: 5px 11px; border-radius: 14px;
   text-decoration: none;
-  transition: background 0.15s, border-color 0.15s, transform 0.15s;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.15s;
 }
 .fc-fighter-link svg { flex-shrink: 0; }
 .fc-fighter-link:hover {
-  background: rgba(255,138,61,0.22);
-  border-color: rgba(255,160,90,0.65);
+  background: rgba(255,138,61,0.16);
+  border-color: rgba(255,160,90,0.55);
   color: #fff;
   transform: translateY(-1px);
 }
 .fc-fighter.selected .fc-fighter-link:hover { color: #fff; }
 body.light-mode .fc-fighter-link {
-  color: rgba(0,0,0,0.72);
-  background: rgba(224,107,26,0.1);
-  border-color: rgba(224,107,26,0.35);
+  color: rgba(0,0,0,0.65);
+  background: rgba(0,0,0,0.03);
+  border-color: rgba(0,0,0,0.14);
 }
 body.light-mode .fc-fighter-link:hover {
-  background: rgba(224,107,26,0.18);
-  border-color: rgba(224,107,26,0.55);
+  background: rgba(224,107,26,0.14);
+  border-color: rgba(224,107,26,0.45);
   color: #000;
 }
 .fc-card.fc-maincrd .fc-name { font-size: 1.55rem; color: rgba(255,255,255,0.95); }
@@ -5949,7 +5952,7 @@ body.light-mode .fc-fighter-link:hover {
 .fc-vs {
   font-family: 'Montserrat', sans-serif;
   font-weight: 900; font-size: 0.6rem; letter-spacing: 0.18em;
-  color: rgba(224,107,26,0.35); text-align: center;
+  color: rgba(255,255,255,0.28); text-align: center;
 }
 .fc-result-method { display: none; }
 /* Explicit "this is how you pick" affordance — the card previously gave
@@ -13059,33 +13062,37 @@ body.light-mode .pk-poster-bg::after {
 }
 /* Styled like an actual dropdown control (pill, border, chevron-in-circle)
    so it reads as clickable instead of a plain section label. */
+/* Neutral by default — orange reserved for hover/open so this doesn't
+   sit on every single card as another solid accent-colored block
+   ("too many similar colors, almost everything is orange" — the accent
+   should mark the important parts, not every clickable thing). */
 .fc-cmp-hd {
   display: flex; align-items: center; justify-content: space-between; gap: 10px;
   width: 100%; padding: 11px 14px;
-  background: rgba(255,138,61,0.08);
-  border: 1px solid rgba(255,138,61,0.28);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.12);
   border-radius: 9px;
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
   font-size: 0.62rem; font-weight: 800;
   letter-spacing: 0.12em; text-transform: uppercase;
-  color: rgba(255,255,255,0.78);
+  color: rgba(255,255,255,0.72);
   transition: background 0.15s, border-color 0.15s;
 }
-.fc-cmp-hd:hover { background: rgba(255,138,61,0.14); border-color: rgba(255,138,61,0.45); }
-.fc-cmp-open > .fc-cmp-hd { border-radius: 9px 9px 0 0; }
+.fc-cmp-hd:hover { background: rgba(255,138,61,0.1); border-color: rgba(255,138,61,0.4); }
+.fc-cmp-open > .fc-cmp-hd { border-radius: 9px 9px 0 0; background: rgba(255,138,61,0.07); border-color: rgba(255,138,61,0.3); }
 .fc-cmp-hd-chev {
   display: inline-flex; align-items: center; justify-content: center;
   width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0;
-  background: rgba(255,138,61,0.16); color: #ff8a3d;
-  transition: transform 0.2s ease, background 0.15s;
+  background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.6);
+  transition: transform 0.2s ease, background 0.15s, color 0.15s;
 }
-.fc-cmp-hd:hover .fc-cmp-hd-chev { background: rgba(255,138,61,0.24); }
-.fc-cmp-open .fc-cmp-hd-chev { transform: rotate(180deg); }
+.fc-cmp-hd:hover .fc-cmp-hd-chev { background: rgba(255,138,61,0.22); color: #ff8a3d; }
+.fc-cmp-open .fc-cmp-hd-chev { transform: rotate(180deg); background: rgba(255,138,61,0.18); color: #ff8a3d; }
 .fc-cmp-body {
   display: none;
   padding: 10px 4px 10px;
-  border: 1px solid rgba(255,138,61,0.28);
+  border: 1px solid rgba(255,255,255,0.1);
   border-top: none;
   border-radius: 0 0 9px 9px;
 }
@@ -13194,9 +13201,10 @@ body.light-mode .pk-poster-bg::after {
   opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
 }
 body.light-mode .fc-cmp { background: rgba(0,0,0,0.02); border-top-color: rgba(0,0,0,0.06); }
-body.light-mode .fc-cmp-hd { background: rgba(255,122,26,0.08); border-color: rgba(255,122,26,0.3); color: rgba(0,0,0,0.72); }
-body.light-mode .fc-cmp-hd:hover { background: rgba(255,122,26,0.14); }
-body.light-mode .fc-cmp-body { border-color: rgba(255,122,26,0.3); }
+body.light-mode .fc-cmp-hd { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.12); color: rgba(0,0,0,0.72); }
+body.light-mode .fc-cmp-hd:hover { background: rgba(255,122,26,0.1); border-color: rgba(255,122,26,0.35); }
+body.light-mode .fc-cmp-open > .fc-cmp-hd { background: rgba(255,122,26,0.07); border-color: rgba(255,122,26,0.25); }
+body.light-mode .fc-cmp-body { border-color: rgba(0,0,0,0.1); }
 body.light-mode .fc-cmp-val { color: rgba(0,0,0,0.45); }
 body.light-mode .fc-cmp-lbl { color: rgba(0,0,0,0.32); }
 body.light-mode .fc-cmp-common-name { color: rgba(0,0,0,0.5); }
@@ -13409,7 +13417,7 @@ body.light-mode .fc-cmp-common-name { color: rgba(0,0,0,0.5); }
 .fc-vs {
   font-size: 0.54rem !important;
   letter-spacing: 0.2em !important;
-  color: rgba(224,107,26,0.45) !important;
+  color: rgba(255,255,255,0.32) !important;
 }
 
 /* Result method: red, above overlay */
