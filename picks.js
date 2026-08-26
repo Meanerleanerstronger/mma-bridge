@@ -343,10 +343,11 @@ function oddsSpanHtml(val, isFav, numClass) {
           const nA = rankNum(rawA), nB = rankNum(rawB);
           const aWins = nA != null && (nB == null || nA < nB);
           const bWins = nB != null && (nA == null || nB < nA);
+          const isChamp = r => /champion/i.test(r || '');
           return `<div class="fc-cmp-row">
-            <span class="fc-cmp-val fc-cmp-a${aWins ? ' fc-cmp-lead' : ''}">${rawA ? esc(String(rawA)) : 'Unranked'}</span>
+            <span class="fc-cmp-val fc-cmp-a${aWins ? ' fc-cmp-lead' : ''}${isChamp(rawA) ? ' fc-cmp-champ' : ''}">${rawA ? esc(String(rawA)) : 'Unranked'}</span>
             <span class="fc-cmp-lbl">${label}</span>
-            <span class="fc-cmp-val fc-cmp-b${bWins ? ' fc-cmp-lead' : ''}">${rawB ? esc(String(rawB)) : 'Unranked'}</span>
+            <span class="fc-cmp-val fc-cmp-b${bWins ? ' fc-cmp-lead' : ''}${isChamp(rawB) ? ' fc-cmp-champ' : ''}">${rawB ? esc(String(rawB)) : 'Unranked'}</span>
           </div>`;
         }
         if (key === 'streak') {

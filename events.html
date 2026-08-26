@@ -305,6 +305,9 @@
     .ev-hype-slot .ehs-sep { font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:700;color:rgba(255,138,61,.28);line-height:1; }
     .ev-hype-slot .ehs-label { font-family:'Inter',sans-serif;font-size:.42rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,138,61,.45);line-height:1; }
     .ev-hype-slot .ehs-count { font-family:'Inter',sans-serif;font-size:.62rem;font-weight:500;color:rgba(255,255,255,.4);letter-spacing:.03em;line-height:1; }
+    .ev-hype-slot .ehs-num.ehs-max { color:#e8c85a;text-shadow:0 0 14px rgba(232,200,90,.6),0 0 30px rgba(232,200,90,.3); }
+    .ev-hype-slot .ehs-num.ehs-max .ehs-sep { color:rgba(232,200,90,.35); }
+    .ev-hype-slot .ehs-label.ehs-max { color:rgba(232,200,90,.55); }
 
     /* ══════════════════════════════════
        POSTER LIGHTBOX
@@ -507,6 +510,7 @@
     /* Community avg in overlay */
     .ov-comm-hype { margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:1px;white-space:nowrap; }
     .ov-comm-num { font-family:'Montserrat',sans-serif;font-size:1.8rem;font-weight:900;line-height:1;color:#e06b1a;letter-spacing:.01em; }
+    .ov-comm-num.ov-comm-max { color:#e8c85a; }
     .ov-comm-label { font-family:'Inter',sans-serif;font-size:.48rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(224,107,26,.5); }
     .ov-comm-count { font-family:'Inter',sans-serif;font-size:.46rem;font-weight:500;color:rgba(255,255,255,.22);letter-spacing:.04em; }
 
@@ -1475,7 +1479,8 @@
       const avg = parseFloat(d.avg_hype || 0);
       const count = parseInt(d.total_ratings || 0);
       if (count < 1) return;
-      slot.innerHTML = `<div class="ehs-num">${avg.toFixed(1)}<span class="ehs-sep">/10</span></div><div class="ehs-label">Community Hype</div><div class="ehs-count">${count} rating${count !== 1 ? 's' : ''}</div>`;
+      const isMax = avg >= 9.95;
+      slot.innerHTML = `<div class="ehs-num${isMax ? ' ehs-max' : ''}">${avg.toFixed(1)}<span class="ehs-sep">/10</span></div><div class="ehs-label${isMax ? ' ehs-max' : ''}">Community Hype</div><div class="ehs-count">${count} rating${count !== 1 ? 's' : ''}</div>`;
       slot.classList.add('loaded');
     }
 
@@ -1483,10 +1488,14 @@
       if (!d || parseInt(d.total_ratings || 0) < 1) return;
       const avg = parseFloat(d.avg_hype).toFixed(1);
       const cnt = parseInt(d.total_ratings);
+      const isMax = parseFloat(avg) >= 9.95;
       const commHype = document.getElementById('ovCommHype');
       const commNum  = document.getElementById('ovCommNum');
       const commCount = document.getElementById('ovCommCount');
-      if (commNum) commNum.innerHTML = avg + '<span style="font-size:.8rem;font-weight:600;color:rgba(224,107,26,.4);vertical-align:baseline">/10</span>';
+      if (commNum) {
+        commNum.classList.toggle('ov-comm-max', isMax);
+        commNum.innerHTML = avg + `<span style="font-size:.8rem;font-weight:600;color:${isMax ? 'rgba(232,200,90,.4)' : 'rgba(224,107,26,.4)'};vertical-align:baseline">/10</span>`;
+      }
       if (commCount) commCount.textContent = `${cnt} rating${cnt !== 1 ? 's' : ''}`;
       if (commHype) commHype.style.display = '';
     }
@@ -1740,7 +1749,7 @@
 
     /* ── HYPE ── */
     const HYPE_W=['','Sleeper','Low Key','Building','Decent','Solid','Good','Hyped','Very Hyped','Elite Card','All-Time Card'];
-    const HYPE_C=['','#666','#888','#b8b832','#b8b832','#ff8a3d','#ff8a3d','#ff8a3d','#ff8a3d','#ff6030','#ff3300'];
+    const HYPE_C=['','#666','#888','#b8b832','#b8b832','#ff8a3d','#ff8a3d','#ff8a3d','#ff8a3d','#ff6030','#e8c85a'];
     let currentHype=null;
 
     function buildHypeTicks(){

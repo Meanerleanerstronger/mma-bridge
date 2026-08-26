@@ -149,7 +149,7 @@
             <span class="fp-record">${rec}</span>
             ${f.weightClass ? `<span class="fp-division">${esc(f.weightClass)}</span>` : ''}
             ${f.flag ? `<span class="fp-flag">${f.flag}</span>` : ''}
-            ${f.ranking ? `<span class="fp-rank">${esc(f.ranking)}</span>` : ''}
+            ${f.ranking ? `<span class="fp-rank${/champion/i.test(f.ranking) ? ' fp-rank-champ' : ''}">${esc(f.ranking)}</span>` : ''}
           </div>
         </div>
       </div>

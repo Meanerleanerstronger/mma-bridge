@@ -4656,6 +4656,7 @@ body.light-mode #cursor-glow { display: none; }
   letter-spacing: 0.1em; text-transform: uppercase;
   color: rgba(255,255,255,0.35);
 }
+.fp-rank.fp-rank-champ { color: #e8c85a; font-weight: 800; }
 .fp-flag { font-size: 1.05rem; }
 
 /* Stats strip — a flush "tale of the tape" ledger directly under the
@@ -13117,6 +13118,7 @@ body.light-mode .pk-poster-bg::after {
 .fc-cmp-val.fc-cmp-streak-w { color: #4ade80; }
 .fc-cmp-val.fc-cmp-streak-l { color: #f87171; }
 .fc-cmp-val.fc-cmp-streak-w.fc-cmp-lead, .fc-cmp-val.fc-cmp-streak-l.fc-cmp-lead { color: #ff8a3d; }
+.fc-cmp-val.fc-cmp-champ { color: #e8c85a !important; text-shadow: 0 0 12px rgba(232,200,90,.3); }
 .fc-cmp-lbl {
   font-family: 'Montserrat', sans-serif;
   font-size: 0.58rem; font-weight: 800;
