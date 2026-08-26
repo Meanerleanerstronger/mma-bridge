@@ -193,41 +193,54 @@ function oddsSpanHtml(val, isFav, numClass) {
     return `${wins}-${losses}${draws ? `-${draws}` : ''}`;
   }
 
-  // ── Head-to-head stat strip — shown right on the card, no click ──
-  // "on tapology its all right below the fighter - their stats, odds,
-  // etc no need to open another page to see it" was the exact complaint.
-  // The fighter modal (career averages, win breakdown, full history)
-  // covers the deep dive; this covers the at-a-glance comparison that
-  // was previously locked behind that same click.
-  const STAT_ROWS = [
-    ['strAcc', 'STR ACC', '%'],
-    ['tdAvg',  'TD AVG',  ''],
-    ['tdDef',  'TD DEF',  '%'],
-    ['subAvg', 'SUB AVG', ''],
+  // ── Tale of the Tape — collapsed dropdown, classic physical comparison
+  // (age/height/reach/stance/record), not deep striking-analytics stats
+  // nobody but a coach cares about. Closed by default so it doesn't sit
+  // there taking up space on every card — tap the header to open it.
+  function heightToInches(h) {
+    const m = String(h || '').match(/(\d+)'\s*(\d+)/);
+    return m ? parseInt(m[1]) * 12 + parseInt(m[2]) : NaN;
+  }
+  const TAPE_ROWS = [
+    ['record',  'RECORD'],
+    ['age',     'AGE'],
+    ['height',  'HEIGHT'],
+    ['reach',   'REACH'],
+    ['stance',  'STANCE'],
   ];
-  function buildStatCompare(nameA, nameB) {
+  function buildStatCompare(nameA, nameB, recA, recB) {
     const fdA = lookupFighter(nameA), fdB = lookupFighter(nameB);
-    const sA = fdA?.stats, sB = fdB?.stats;
-    if (!sA && !sB) return '';
-    const rows = STAT_ROWS
+    if (!fdA && !fdB) return '';
+    const valsA = { record: recA, age: fdA?.age, height: fdA?.height, reach: fdA?.reach, stance: fdA?.stance };
+    const valsB = { record: recB, age: fdB?.age, height: fdB?.height, reach: fdB?.reach, stance: fdB?.stance };
+    const rows = TAPE_ROWS
       .map(([key, label]) => {
-        const rawA = sA?.[key], rawB = sB?.[key];
+        const rawA = valsA[key], rawB = valsB[key];
         if (!rawA && !rawB) return '';
-        const numA = parseFloat(rawA), numB = parseFloat(rawB);
+        // Only height/reach/age get a "leader" highlight — a longer reach
+        // or being taller is at least a plausible edge; stance and record
+        // aren't a simple bigger-number-wins comparison, so those just
+        // display both values with no highlight.
+        let numA = NaN, numB = NaN;
+        if (key === 'height') { numA = heightToInches(rawA); numB = heightToInches(rawB); }
+        else if (key === 'reach' || key === 'age') { numA = parseFloat(rawA); numB = parseFloat(rawB); }
         const aWins = !isNaN(numA) && (isNaN(numB) || numA > numB);
         const bWins = !isNaN(numB) && (isNaN(numA) || numB > numA);
         return `<div class="fc-cmp-row">
-          <span class="fc-cmp-val fc-cmp-a${aWins ? ' fc-cmp-lead' : ''}">${rawA ? esc(rawA) : '—'}</span>
+          <span class="fc-cmp-val fc-cmp-a${aWins ? ' fc-cmp-lead' : ''}">${rawA ? esc(String(rawA)) : '—'}</span>
           <span class="fc-cmp-lbl">${label}</span>
-          <span class="fc-cmp-val fc-cmp-b${bWins ? ' fc-cmp-lead' : ''}">${rawB ? esc(rawB) : '—'}</span>
+          <span class="fc-cmp-val fc-cmp-b${bWins ? ' fc-cmp-lead' : ''}">${rawB ? esc(String(rawB)) : '—'}</span>
         </div>`;
       })
       .filter(Boolean)
       .join('');
     if (!rows) return '';
     return `<div class="fc-cmp">
-      <div class="fc-cmp-hd"><span class="fc-cmp-hd-line"></span>Tale of the Tape<span class="fc-cmp-hd-line"></span></div>
-      ${rows}
+      <button class="fc-cmp-hd" type="button" aria-expanded="false">
+        <span class="fc-cmp-hd-line"></span>Tale of the Tape<span class="fc-cmp-hd-line"></span>
+        <svg class="fc-cmp-chev" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="fc-cmp-body">${rows}</div>
     </div>`;
   }
   function maxRounds(roundsStr) {
@@ -1156,7 +1169,7 @@ function oddsSpanHtml(val, isFav, numClass) {
     }
     const recA  = fighterRecord(f.a);
     const recB  = fighterRecord(f.b);
-    const compareHtml = buildStatCompare(f.a, f.b);
+    const compareHtml = buildStatCompare(f.a, f.b, recA, recB);
 
     const myPerfect = (pickedA && isPerfectA) || (pickedB && isPerfectB);
     const myMiss    = fightDone && (
@@ -2560,7 +2573,18 @@ function oddsSpanHtml(val, isFav, numClass) {
         side.addEventListener('click', function(e) { _pickEvent = e; activate(); });
         side.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); } });
       });
+    }
 
+    // ── Tale of the Tape dropdown toggle — collapsed by default ──
+    root.querySelectorAll('.fc-cmp-hd').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const wrap = btn.closest('.fc-cmp');
+        const open = wrap.classList.toggle('fc-cmp-open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    });
+
+    if (!isCompleted && !isLocked) {
       // ── Segmented method buttons ────────────────
       root.querySelectorAll('.pk-seg-btn').forEach(btn => {
         btn.addEventListener('click', e => {
