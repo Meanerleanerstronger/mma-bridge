@@ -1329,13 +1329,12 @@ function oddsSpanHtml(val, isFav, numClass) {
     // Head strip — weight, rounds, title pip, card label
     const cardLblTxt = isMain ? 'MAIN EVENT' : isComain ? 'CO-MAIN' : (posTag ? posTag.toUpperCase() : '');
     const headHtml = `
-      <div class="fc-head" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" data-weight="${esc(f.weight||'')}">
+      <div class="fc-head">
         <div class="fc-head-left">
           ${f.weight ? `<span class="fc-weight">${esc(f.weight)}</span>` : ''}
           ${f.rounds ? `<span class="fc-rds">· ${esc(f.rounds)}</span>` : ''}
           ${f.titleFight ? `<span class="fc-title-pip">TITLE FIGHT</span>` : ''}
         </div>
-        <span class="fc-head-h2h">Matchup</span>
         ${cardLblTxt ? `<span class="fc-card-lbl">${cardLblTxt}</span>` : ''}
       </div>`;
 
@@ -1581,19 +1580,6 @@ function oddsSpanHtml(val, isFav, numClass) {
 
     // Toggle handler (event delegation)
     document.addEventListener('click', async e => {
-      const headRow = e.target.closest('.fc-head[data-fa][data-fb]');
-      if (headRow && !e.target.closest('.fc-fighter-link')) {
-        const fA = headRow.dataset.fa, fB = headRow.dataset.fb;
-        const weight = headRow.dataset.weight || '';
-        const card = headRow.closest('.fc-card[data-key]');
-        const key = card?.dataset.key || '';
-        const fight = key ? getFightData(key) : null;
-        const imgA = fight?.imgA || '', imgB = fight?.imgB || '';
-        const url = 'matchup.html?event=' + encodeURIComponent(eventId) + '&a=' + encodeURIComponent(fA) + '&b=' + encodeURIComponent(fB) + '&weight=' + encodeURIComponent(weight) + '&imgA=' + encodeURIComponent(imgA) + '&imgB=' + encodeURIComponent(imgB) + '&from=picks';
-        window.location.href = url;
-        return;
-      }
-
       const winShare = e.target.closest('.fc-win-share');
       if (winShare) {
         e.stopPropagation();
