@@ -4267,7 +4267,7 @@ body.light-mode .navbar {
   /* Shrink Sign In / Sign Up in top bar to fit */
   .nav-signin-link { font-size: 0.68rem; }
   .nav-signup-btn  { font-size: 0.62rem; padding: 5px 11px; }
-  .nav-logout-btn  { font-size: 0.55rem; padding: 4px 8px; }
+  .nav-logout-btn  { font-size: 0.58rem; padding: 4px 8px; }
 }
 /* On small phones hide the "Sign In" text link — Sign Up button only in nav,
    Sign In is accessible from the mobile menu overlay */
@@ -5623,7 +5623,7 @@ body.light-mode .pk-hype-card-count { color: rgba(0,0,0,0.3); }
 }
 .fc-section-lbl {
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.48rem; font-weight: 900;
+  font-size: 0.58rem; font-weight: 900;
   letter-spacing: 0.32em; text-transform: uppercase;
   color: rgba(255,138,61,0.5);
   padding: 16px 20px 10px 22px;
@@ -5674,13 +5674,13 @@ body.light-mode .pk-hype-card-count { color: rgba(0,0,0,0.3); }
   color: rgba(255,255,255,0.3);
 }
 .fc-title-pip {
-  font-family: 'Montserrat', sans-serif; font-size: 0.44rem; font-weight: 900;
+  font-family: 'Montserrat', sans-serif; font-size: 0.58rem; font-weight: 900;
   letter-spacing: 0.12em; text-transform: uppercase;
   color: rgba(255,138,61,0.9); background: rgba(255,138,61,0.1);
   border: 1px solid rgba(255,138,61,0.3); border-radius: 3px; padding: 2px 6px;
 }
 .fc-card-lbl {
-  font-family: 'Montserrat', sans-serif; font-size: 0.44rem; font-weight: 900;
+  font-family: 'Montserrat', sans-serif; font-size: 0.58rem; font-weight: 900;
   letter-spacing: 0.14em; text-transform: uppercase;
   color: rgba(224,107,26,0.55);
 }
@@ -5709,7 +5709,7 @@ body.light-mode .pk-hype-card-count { color: rgba(0,0,0,0.3); }
 /* FAV/DOG tag under the number — see oddsSpanHtml() in picks.js. Color-only
    was ambiguous without already knowing which sign means what. */
 .fc-odds-tag {
-  font-family: 'Inter', sans-serif; font-size: 0.48rem; font-weight: 800;
+  font-family: 'Inter', sans-serif; font-size: 0.58rem; font-weight: 800;
   letter-spacing: 0.07em; text-transform: uppercase; opacity: 0.6;
 }
 .fc-card.fc-maincrd .fc-matchup { min-height: 180px; }
@@ -5787,32 +5787,34 @@ body.light-mode .pk-hype-card-count { color: rgba(0,0,0,0.3); }
    picking). Was a whisper-thin plain-text link that read as an
    afterthought next to the record/odds — a real pill button instead,
    sitting right under the name so it reads as a clear, separate action. */
-/* Neutral by default, orange on hover only — with two of these per
-   card (~26 on a full page) a filled accent pill by default was one of
-   the biggest single contributors to "almost everything is orange". */
+/* Quiet copper by default (a muted second tone in the same warm family
+   as the brand orange, not flat gray or a whole new hue), full bright
+   orange only on hover — with two of these per card (~26 on a full
+   page) a filled bright-accent pill by default was one of the biggest
+   single contributors to "almost everything is orange". */
 .fc-fighter-link {
   display: inline-flex; align-items: center; gap: 4px;
   font-family: 'Montserrat', sans-serif; font-size: 0.62rem; font-weight: 800;
   letter-spacing: 0.05em; text-transform: uppercase;
-  color: rgba(255,255,255,0.75);
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.16);
+  color: rgba(230,190,160,0.8);
+  background: rgba(203,123,58,0.1);
+  border: 1px solid rgba(203,123,58,0.35);
   padding: 5px 11px; border-radius: 14px;
   text-decoration: none;
   transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.15s;
 }
 .fc-fighter-link svg { flex-shrink: 0; }
 .fc-fighter-link:hover {
-  background: rgba(255,138,61,0.16);
-  border-color: rgba(255,160,90,0.55);
+  background: rgba(255,138,61,0.18);
+  border-color: rgba(255,160,90,0.6);
   color: #fff;
   transform: translateY(-1px);
 }
 .fc-fighter.selected .fc-fighter-link:hover { color: #fff; }
 body.light-mode .fc-fighter-link {
-  color: rgba(0,0,0,0.65);
-  background: rgba(0,0,0,0.03);
-  border-color: rgba(0,0,0,0.14);
+  color: rgba(140,80,30,0.85);
+  background: rgba(179,104,50,0.08);
+  border-color: rgba(179,104,50,0.3);
 }
 body.light-mode .fc-fighter-link:hover {
   background: rgba(224,107,26,0.14);
@@ -5864,7 +5866,7 @@ body.light-mode .fc-fighter-link:hover {
   color: rgba(255,255,255,0.22);
 }
 .fc-comm-lbl {
-  font-family: 'Inter', sans-serif; font-size: 0.52rem; font-weight: 600;
+  font-family: 'Inter', sans-serif; font-size: 0.58rem; font-weight: 600;
   letter-spacing: 0.14em; text-transform: uppercase;
   color: rgba(255,255,255,0.28); line-height: 1;
 }
@@ -5874,7 +5876,7 @@ body.light-mode .fc-fighter-link:hover {
   letter-spacing: 0.01em;
 }
 .fc-comm-sub {
-  font-family: 'Inter', sans-serif; font-size: 0.55rem; font-weight: 600;
+  font-family: 'Inter', sans-serif; font-size: 0.58rem; font-weight: 600;
   letter-spacing: 0.06em; text-transform: uppercase;
   color: rgba(255,255,255,0.25); line-height: 1; margin-top: 1px;
 }
@@ -5887,7 +5889,7 @@ body.light-mode .fc-fighter-link:hover {
 
 /* Badges */
 .fc-badge {
-  font-family: 'Montserrat', sans-serif; font-size: 0.5rem; font-weight: 900;
+  font-family: 'Montserrat', sans-serif; font-size: 0.58rem; font-weight: 900;
   letter-spacing: 0.1em; text-transform: uppercase;
   border-radius: 4px; padding: 3px 9px;
   white-space: nowrap; margin-top: 4px; display: inline-block;
@@ -5922,7 +5924,7 @@ body.light-mode .fc-fighter-link:hover {
   border-radius: 4px;
   color: #e06b1a;
   font-family: 'Inter', sans-serif;
-  font-size: 0.55rem;
+  font-size: 0.58rem;
   font-weight: 600;
   letter-spacing: 0.05em;
   cursor: pointer;
@@ -5936,7 +5938,7 @@ body.light-mode .fc-fighter-link:hover {
   color: #ffaa00; vertical-align: middle;
 }
 .fc-opp {
-  font-family: 'Inter', sans-serif; font-size: 0.55rem;
+  font-family: 'Inter', sans-serif; font-size: 0.58rem;
   color: rgba(255,255,255,0.28); margin-top: 3px; display: inline-block;
 }
 
@@ -5960,7 +5962,7 @@ body.light-mode .fc-fighter-link:hover {
    fades once either side is selected (has-pick class on the card). */
 .fc-pick-hint {
   font-family: 'Montserrat', sans-serif;
-  font-weight: 800; font-size: 0.52rem; letter-spacing: 0.1em;
+  font-weight: 800; font-size: 0.58rem; letter-spacing: 0.1em;
   color: rgba(255,138,61,0.55); text-align: center;
   line-height: 1.35; margin-top: 4px;
 }
@@ -5977,7 +5979,7 @@ body.light-mode .fc-fighter-link:hover {
 }
 .fc-result-names {
   font-family: 'Inter', sans-serif;
-  font-size: 0.52rem; font-weight: 600;
+  font-size: 0.58rem; font-weight: 600;
   color: rgba(255,255,255,0.35); letter-spacing: 0.02em;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   max-width: 76px;
@@ -5993,7 +5995,7 @@ body.light-mode .fc-fighter-link:hover {
 /* Legacy sb-* selectors — aliases so JS selectors still work */
 .sb-section { display: flex; flex-direction: column; }
 .sb-section-header { display: flex; align-items: center; gap: 14px; padding: 36px 24px 14px; }
-.sb-section-label { font-family: 'Montserrat', sans-serif; font-size: 0.48rem; font-weight: 900; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.18); white-space: nowrap; }
+.sb-section-label { font-family: 'Montserrat', sans-serif; font-size: 0.58rem; font-weight: 900; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.18); white-space: nowrap; }
 .sb-section-line { flex: 1; height: 1px; background: rgba(255,255,255,0.05); }
 .sb-section-fights { display: flex; flex-direction: column; gap: 0; padding: 0 0 24px; }
 
@@ -6032,7 +6034,7 @@ body.light-mode .fc-fighter-link:hover {
 }
 .sb-comm-pcts {
   display: flex; justify-content: space-between; width: 52px;
-  font-family: 'Inter', sans-serif; font-size: 0.48rem; font-weight: 600;
+  font-family: 'Inter', sans-serif; font-size: 0.58rem; font-weight: 600;
   color: rgba(255,255,255,0.28);
 }
 /* Method row — slides in below fight row when picked */
@@ -7219,7 +7221,7 @@ body.light-mode .ev-hype-badge { color: rgba(140,80,0,0.85); background: rgba(20
   .fc-card.fc-main .fc-name { font-size: 1.2rem; }
   .fc-odds-num { font-size: 0.75rem; }
   .fc-record { font-size: 0.58rem; }
-  .fc-fighter-link { font-size: 0.56rem; padding: 4px 9px; }
+  .fc-fighter-link { font-size: 0.58rem; padding: 4px 9px; }
 }
 
 /* light mode */
@@ -11697,7 +11699,7 @@ img { image-rendering: auto; }
 .ov-odds-fav { color: #ff8a3d; }
 .ov-odds-dog { color: rgba(255,255,255,0.55); }
 .ov-odds-tag {
-  font-family: 'Inter', sans-serif; font-size: 0.5rem; font-weight: 800;
+  font-family: 'Inter', sans-serif; font-size: 0.58rem; font-weight: 800;
   letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.65;
 }
 .ov-odds-sep {
@@ -13007,7 +13009,7 @@ body.light-mode .pk-poster-bg::after {
   padding: 28px 22px 16px !important;
   border-left: none !important;
   border-bottom: none !important;
-  font-size: 0.42rem !important;
+  font-size: 0.58rem !important;
   letter-spacing: 0.38em !important;
   color: rgba(224,107,26,0.5) !important;
   white-space: nowrap;
@@ -13062,21 +13064,23 @@ body.light-mode .pk-poster-bg::after {
 }
 /* Styled like an actual dropdown control (pill, border, chevron-in-circle)
    so it reads as clickable instead of a plain section label. */
-/* Neutral by default — orange reserved for hover/open so this doesn't
-   sit on every single card as another solid accent-colored block
-   ("too many similar colors, almost everything is orange" — the accent
-   should mark the important parts, not every clickable thing). */
+/* Quiet copper by default — a muted second tone in the same warm
+   family as the brand orange (not flat gray, not a new hue), full
+   bright orange reserved for hover/open so this doesn't sit on every
+   card as another solid bright-accent block ("too many similar colors,
+   almost everything is orange" — the accent should mark the important
+   parts, not every clickable thing, but it should still read as us). */
 .fc-cmp-hd {
   display: flex; align-items: center; justify-content: space-between; gap: 10px;
   width: 100%; padding: 11px 14px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(203,123,58,0.08);
+  border: 1px solid rgba(203,123,58,0.3);
   border-radius: 9px;
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
   font-size: 0.62rem; font-weight: 800;
   letter-spacing: 0.12em; text-transform: uppercase;
-  color: rgba(255,255,255,0.72);
+  color: rgba(230,190,160,0.78);
   transition: background 0.15s, border-color 0.15s;
 }
 .fc-cmp-hd:hover { background: rgba(255,138,61,0.1); border-color: rgba(255,138,61,0.4); }
@@ -13084,7 +13088,7 @@ body.light-mode .pk-poster-bg::after {
 .fc-cmp-hd-chev {
   display: inline-flex; align-items: center; justify-content: center;
   width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0;
-  background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.6);
+  background: rgba(203,123,58,0.14); color: rgba(230,190,160,0.85);
   transition: transform 0.2s ease, background 0.15s, color 0.15s;
 }
 .fc-cmp-hd:hover .fc-cmp-hd-chev { background: rgba(255,138,61,0.22); color: #ff8a3d; }
@@ -13092,7 +13096,7 @@ body.light-mode .pk-poster-bg::after {
 .fc-cmp-body {
   display: none;
   padding: 10px 4px 10px;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(203,123,58,0.22);
   border-top: none;
   border-radius: 0 0 9px 9px;
 }
@@ -13115,7 +13119,7 @@ body.light-mode .pk-poster-bg::after {
 .fc-cmp-val.fc-cmp-streak-w.fc-cmp-lead, .fc-cmp-val.fc-cmp-streak-l.fc-cmp-lead { color: #ff8a3d; }
 .fc-cmp-lbl {
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.52rem; font-weight: 800;
+  font-size: 0.58rem; font-weight: 800;
   letter-spacing: 0.08em; text-transform: uppercase;
   color: rgba(255,255,255,0.22);
   white-space: nowrap; min-width: 54px; text-align: center;
@@ -13201,18 +13205,18 @@ body.light-mode .pk-poster-bg::after {
   opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
 }
 body.light-mode .fc-cmp { background: rgba(0,0,0,0.02); border-top-color: rgba(0,0,0,0.06); }
-body.light-mode .fc-cmp-hd { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.12); color: rgba(0,0,0,0.72); }
+body.light-mode .fc-cmp-hd { background: rgba(179,104,50,0.07); border-color: rgba(179,104,50,0.28); color: rgba(140,80,30,0.85); }
 body.light-mode .fc-cmp-hd:hover { background: rgba(255,122,26,0.1); border-color: rgba(255,122,26,0.35); }
 body.light-mode .fc-cmp-open > .fc-cmp-hd { background: rgba(255,122,26,0.07); border-color: rgba(255,122,26,0.25); }
-body.light-mode .fc-cmp-body { border-color: rgba(0,0,0,0.1); }
+body.light-mode .fc-cmp-body { border-color: rgba(179,104,50,0.2); }
 body.light-mode .fc-cmp-val { color: rgba(0,0,0,0.45); }
 body.light-mode .fc-cmp-lbl { color: rgba(0,0,0,0.32); }
 body.light-mode .fc-cmp-common-name { color: rgba(0,0,0,0.5); }
 @media (max-width: 640px) {
   .fc-cmp { padding: 8px 12px 4px; }
   .fc-cmp-val { font-size: 0.72rem; }
-  .fc-cmp-lbl { font-size: 0.46rem; min-width: 46px; }
-  .fc-cmp-l5-dot { width: 15px; height: 15px; font-size: 0.44rem; }
+  .fc-cmp-lbl { font-size: 0.58rem; min-width: 46px; }
+  .fc-cmp-l5-dot { width: 15px; height: 15px; font-size: 0.5rem; }
   .fc-cmp-common-item { gap: 6px; }
   .fc-cmp-common-name { font-size: 0.62rem; }
   .fc-tip::after { font-size: 0.58rem; max-width: 150px; }
@@ -13415,7 +13419,7 @@ body.light-mode .fc-cmp-common-name { color: rgba(0,0,0,0.5); }
   width: 66px !important;
 }
 .fc-vs {
-  font-size: 0.54rem !important;
+  font-size: 0.58rem !important;
   letter-spacing: 0.2em !important;
   color: rgba(255,255,255,0.32) !important;
 }
