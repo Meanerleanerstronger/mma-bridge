@@ -50,10 +50,33 @@
     const t = `${n.title || ''} ${n.body || ''}`;
     return /\bundefined\b/i.test(t) || /\bTBA\b/i.test(t);
   }
+  // Self-heal: collapse "fighter change" flip-flop spam from the window
+  // (2026-08-21 to 08-23) where the ESPN sync and UFC.com sync bots
+  // disagreed about a pull-out and kept reverting each other's fix —
+  // Yair Rodriguez out for Jose Miguel Delgado, then back, then back again,
+  // each toggle logging its own notification since they're genuinely
+  // different fighter pairings (not exact-duplicate ids). Both sync scripts
+  // now respect a manualOverride flag so this can't recur, but it already
+  // happened and nothing else can reach into a user's stuck localStorage.
+  // Group same-event "X out — replaced by Y" notifs by the unordered
+  // fighter pair; keep only the most recent per pair, drop the rest.
+  function dedupeFlipFlopNotifs(arr) {
+    const latestByCluster = new Map();
+    const other = [];
+    arr.forEach(n => {
+      const m = n.type === 'card_update' && /^(.+?) out — replaced by (.+?) ·/.exec(n.body || '');
+      if (!m) { other.push(n); return; }
+      const key = `${n.eventId}::${[m[1], m[2]].sort().join('|')}`;
+      const existing = latestByCluster.get(key);
+      if (!existing || (n.timestamp || '') > (existing.timestamp || '')) latestByCluster.set(key, n);
+    });
+    return [...other, ...latestByCluster.values()].sort((a, b) => (b.timestamp || '').localeCompare(a.timestamp || ''));
+  }
   function getNotifs()  {
     try {
       const arr = JSON.parse(localStorage.getItem(NOTIF_KEY) || '[]');
-      const clean = arr.filter(n => !isGarbageNotif(n));
+      const deflopped = dedupeFlipFlopNotifs(arr);
+      const clean = deflopped.filter(n => !isGarbageNotif(n));
       if (clean.length !== arr.length) saveNotifs(clean);
       return clean;
     } catch { return []; }

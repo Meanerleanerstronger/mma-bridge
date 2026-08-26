@@ -400,6 +400,18 @@ function roundsFromESPN(comp, slot) {
 // nonsense "pull-out" notifications once the placeholder later disappeared.
 function isTBA(name) { return !name || /\bTBA\b/i.test(name); }
 
+// Mirrors ufc-event-card-sync.js's own guard (see its hasManualOverride
+// comment for the full incident writeup: a manual pull-out correction kept
+// getting reverted because only ONE of the two sync bots respected the
+// flag). A fight flagged manualOverride was entered from a source more
+// current than either upstream feed — skip dropped-fight detection and new-
+// fight/replacement matching for the whole event while it's set, so ESPN
+// can't silently revert a manual correction UFC.com hasn't published yet
+// either (or vice versa).
+function hasManualOverride(ev) {
+  return ['mainCard', 'prelims', 'earlyPrelims'].some(s => (ev[s] || []).some(f => f.manualOverride));
+}
+
 function buildFightFromESPN(comp, slot) {
   // ESPN lists fighter[0] as order:2 (visiting), fighter[1] as order:1 (home) — normalize
   const sorted = [...(comp.competitors || [])].sort((a, b) => (a.order || 0) - (b.order || 0));
@@ -692,7 +704,7 @@ async function main() {
     // once per sync run. Require it to be missing on two consecutive runs
     // before actually flagging it, and self-heal (reset the strike) the
     // moment ESPN shows it again.
-    if (!isCompleted && ourEv) {
+    if (!isCompleted && ourEv && !hasManualOverride(ourEv)) {
       const espnNames = new Set();
       for (const comp of (espnEv.competitions || [])) {
         for (const c of (comp.competitors || [])) {
@@ -728,7 +740,7 @@ async function main() {
     }
 
     // ── E: CARD UPDATE — new fights / replacements for an upcoming event ───────
-    if (!isCompleted && ourEv) {
+    if (!isCompleted && ourEv && !hasManualOverride(ourEv)) {
       // ESPN lists fights earliest→latest, reverse to get main card first.
       // Drop TBA placeholders before slot assignment (see buildNewEvent).
       const compsRev = [...(espnEv.competitions || [])].reverse().filter(c => {
