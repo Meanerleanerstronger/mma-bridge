@@ -522,6 +522,70 @@
     .ov-fight-col::-webkit-scrollbar { width:3px; }
     .ov-fight-col::-webkit-scrollbar-thumb { background:rgba(255,255,255,.08);border-radius:2px; }
 
+    /* ── List/Card toggle — reuses picks.html's .pk-view-toggle/.pk-view-btn
+       styling (shared style.css), just repositioned to sit at the top of
+       this scrolling column instead of a page nav row. ── */
+    .ov-view-toggle { margin:14px 12px 4px; }
+
+    /* ── CARD VIEW — poster-style grid, same idea as picks.html's Card
+       View. #ovFightRows holds a flat list of .ov-section-header +
+       .ov-fight elements (not nested per section), so the header gets
+       grid-column:1/-1 to span full width above its group of cells. */
+    .ov-fight-col-card #ovFightRows {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+      padding: 0 12px 24px;
+    }
+    .ov-fight-col-card .ov-section-header { grid-column: 1 / -1; margin: 18px 0 4px; }
+    .ov-fight-col-card .ov-fight.fcv-cell {
+      display: flex; flex-direction: column;
+      margin: 0; padding: 12px;
+      grid-template-columns: none;
+    }
+    .ov-fight-col-card .ov-fight.fcv-cell:hover { transform: none; }
+    /* picks.html's shared .fc-photo/.fc-fighter rules (loaded via the
+       same style.css) pin the photo full-bleed with position:absolute
+       and inset:0, all !important, for List View's background-photo
+       card design — that bleeds into this page too since the stylesheet
+       is shared. Needs a matching !important reset here, same as
+       picks.html's own Card View had to do, or the photo collapses to
+       0x0 (no positioned ancestor to size against). */
+    /* A mobile media query hides .ov-head-cell entirely (List View drops
+       headshots on phones to save space) — Card View reuses that same
+       class for click-handler compatibility, so it needs an explicit
+       win back here, on every viewport this component appears at. */
+    .fcv-cell .ov-head-cell.fcv-side {
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important;
+      align-items: center !important;
+    }
+    .fcv-cell .fc-photo {
+      position: static !important; inset: auto !important;
+      display: flex !important; align-items: center !important; justify-content: center !important;
+      flex: 0 0 56px !important;
+      width: 56px !important; height: 56px !important;
+      aspect-ratio: 1 / 1 !important;
+      border-radius: 50% !important;
+      margin: 0 auto !important;
+      overflow: hidden;
+    }
+    .fcv-cell .ov-headshot {
+      position: static !important;
+      width: 100% !important; height: 100% !important;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .fcv-cell .fc-odds-inline { margin-top: 2px; }
+    /* Fade the grid out/in on toggle so a view switch reads as a
+       transition instead of an abrupt content swap. */
+    #ovFightRows { transition: opacity 0.16s ease; }
+    #ovFightRows.ov-rows-fading { opacity: 0; }
+    @media (max-width: 640px) {
+      .ov-fight-col-card #ovFightRows { grid-template-columns: 1fr; padding: 0 10px 20px; }
+    }
+
     .ov-section-header {
       margin:18px 12px 10px;
       padding:12px 18px;
@@ -1318,7 +1382,19 @@
 
       <!-- BODY -->
       <div class="ov-body">
-        <div class="ov-fight-col" id="ovFightCol"></div>
+        <div class="ov-fight-col" id="ovFightCol">
+          <div class="pk-view-toggle ov-view-toggle" role="tablist" aria-label="Fight card layout" id="ovViewToggle">
+            <button class="pk-view-btn" data-view="list" type="button" role="tab">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+              List
+            </button>
+            <button class="pk-view-btn" data-view="card" type="button" role="tab">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="14" y="4" width="7" height="7" rx="1"/><rect x="3" y="13" width="7" height="7" rx="1"/><rect x="14" y="13" width="7" height="7" rx="1"/></svg>
+              Card
+            </button>
+          </div>
+          <div class="ov-fight-rows" id="ovFightRows"></div>
+        </div>
 
         <div class="ov-sidebar">
 
@@ -1343,6 +1419,12 @@
       if (!url) return url;
       return url.replace(/\/styles\/[a-z0-9_]+\//, '/styles/athlete_detail_stance_thumbnail_full_body/');
     }
+    // List (current text row per fight) vs Card (poster-style grid, same
+    // as picks.html's Card View) — read-only here since events.html is
+    // for browsing, not picking; tapping a fighter still opens their
+    // profile modal same as List View already does.
+    let ovViewMode = localStorage.getItem('ov_view_mode') === 'card' ? 'card' : 'list';
+    let currentOvEvent = null, currentOvIsPPV = false, currentOvAccent = '';
     function daysUntil(iso){ return Math.ceil((new Date(iso+'T00:00:00')-new Date())/86400000); }
     /* "TBA" / "Opponent TBA" are UFC.com placeholder text for an unannounced
        opponent, not a real fighter — never show a fight (or a "card change"
@@ -1696,6 +1778,35 @@
     const overlay=document.getElementById('evOverlay');
     const ovClose=document.getElementById('ovClose');
     const ovBackdrop=document.getElementById('ovBackdrop');
+
+    // List/Card view toggle — static markup (not rebuilt per-open), so
+    // it's bound once here rather than inside buildFightCard(). Rebuild
+    // is wrapped in a quick fade so the switch reads as a transition
+    // instead of an abrupt content swap.
+    function updateOvViewToggle(){
+      document.querySelectorAll('#ovViewToggle .pk-view-btn').forEach(b=>{
+        b.classList.toggle('active', b.dataset.view === ovViewMode);
+      });
+    }
+    updateOvViewToggle();
+    document.getElementById('ovViewToggle')?.addEventListener('click', e=>{
+      const btn=e.target.closest('.pk-view-btn');
+      if(!btn || btn.dataset.view === ovViewMode) return;
+      ovViewMode = btn.dataset.view;
+      localStorage.setItem('ov_view_mode', ovViewMode);
+      updateOvViewToggle();
+      const col=document.getElementById('ovFightCol');
+      const rows=document.getElementById('ovFightRows');
+      col.classList.toggle('ov-fight-col-card', ovViewMode==='card');
+      rows.classList.add('ov-rows-fading');
+      setTimeout(()=>{
+        if(currentOvEvent) buildFightCard(currentOvEvent, currentOvIsPPV, currentOvAccent);
+        requestAnimationFrame(()=>{
+          rows.classList.remove('ov-rows-fading');
+          if(window.MicroStaggerFights) window.MicroStaggerFights(rows);
+        });
+      }, 160);
+    });
     let currentEvent=null;
     let _allEvents=[];            // populated by loadEvents so popstate can find events
     let _overlayOpen=false;       // tracks whether overlay UI is open
@@ -1962,9 +2073,11 @@
 
     /* ── FIGHT CARD ── */
     function buildFightCard(ev,isPPV,accent){
-      const col=document.getElementById('ovFightCol');
+      const col=document.getElementById('ovFightRows');
       col.innerHTML='';
       const isUpcoming=ev.status==='upcoming';
+      currentOvEvent = ev; currentOvIsPPV = isPPV; currentOvAccent = accent;
+      document.getElementById('ovFightCol')?.classList.toggle('ov-fight-col-card', ovViewMode==='card');
 
       /* map method string to display label + colour */
       function methodStyle(m){
@@ -2014,6 +2127,52 @@
           // matchup page's poster-size hero needs the real full-size shot.
           if (f.imgA) row.dataset.imgA=f.imgA;
           if (f.imgB) row.dataset.imgB=f.imgB;
+
+          const slotTag = isMain?`<span class="fc-card-lbl" style="color:${accent}">MAIN EVENT</span>`:isComain?`<span class="fc-card-lbl" style="color:rgba(255,138,61,.5)">CO-MAIN</span>`:posTag?`<span class="fc-card-lbl">${esc(posTag)}</span>`:'';
+
+          if (ovViewMode === 'card') {
+            /* ── CARD VIEW — same poster-cell layout as picks.html's Card
+               View (reuses its .fcv-* CSS via the shared stylesheet).
+               Read-only here: tapping a fighter opens the profile modal
+               via the exact same .ov-fn/.ov-head-cell delegated click
+               handler List View already relies on — no new JS needed. */
+            row.className += ' fcv-cell';
+            const aResult = hasResult ? (f.winner.toLowerCase()===f.a.toLowerCase() ? 'result-win' : 'result-loss') : '';
+            const bResult = hasResult ? (f.winner.toLowerCase()===f.b.toLowerCase() ? 'result-win' : 'result-loss') : '';
+            const ms = hasResult ? methodStyle(f.method) : null;
+            const oddsTag = (side) => {
+              if (!f.odds || !f.odds.a || !f.odds.b) return '';
+              const aVal = parseInt(f.odds.a), bVal = parseInt(f.odds.b);
+              const fmtO = n => n > 0 ? `+${n}` : `${n}`;
+              const aFav = aVal < 0;
+              const val = side === 'a' ? aVal : bVal;
+              const fav = side === 'a' ? aFav : !aFav;
+              return `<span class="fc-odds-inline"><span class="fc-odds ${fav?'fc-odds-fav':''}">${fmtO(val)}</span></span>`;
+            };
+            row.innerHTML = `
+              <div class="fcv-tags">
+                ${f.weight ? `<span class="fc-weight">${esc(f.weight)}</span>` : ''}
+                ${slotTag}
+                ${f.titleFight ? `<span class="fc-title-pip">TITLE</span>` : ''}
+              </div>
+              <div class="fcv-matchup">
+                <div class="ov-head-cell fcv-side ${aResult}">
+                  <div class="fc-photo">${f.imgA ? `<img class="ov-headshot" src="${thumbImg(f.imgA)}" alt="" loading="lazy" onerror="this.closest('.fc-photo').style.display='none'">` : ''}</div>
+                  <div class="ov-fn fcv-name">${esc(f.a)}</div>
+                  ${hasResult ? '' : oddsTag('a')}
+                </div>
+                <div class="fcv-vs">VS</div>
+                <div class="ov-head-cell ov-head-r fcv-side fcv-side-b ${bResult}">
+                  <div class="fc-photo">${f.imgB ? `<img class="ov-headshot" src="${thumbImg(f.imgB)}" alt="" loading="lazy" onerror="this.closest('.fc-photo').style.display='none'">` : ''}</div>
+                  <div class="ov-fn fcv-name">${esc(f.b)}</div>
+                  ${hasResult ? '' : oddsTag('b')}
+                </div>
+              </div>
+              ${hasResult ? `<div class="fcv-hint" style="color:${ms.color}">${esc(ms.label)} · Rd ${esc(String(f.round))} · ${esc(f.time||'')}</div>` : ''}
+            `;
+            col.appendChild(row);
+            return;
+          }
 
           if(hasResult){
             /* ── RESULT ROW ── */
