@@ -7,6 +7,15 @@
   function esc(s) {
     return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
+  // ufc.com serves fighter photos as a full ~460x700 "athlete bio" crop
+  // regardless of context — the favorite-fighter cards (~160px) and the
+  // fighter search list (up to 80 rows, ~38px each) were all pulling that
+  // full-size image. Swap in the CDN's own smaller fight-card preset.
+  function thumbImg(url, size) {
+    if (!url) return url;
+    const style = size === 'sm' ? 'athlete_detail_stance_thumbnail_full_body' : 'event_fight_card_upper_body_of_standing_athlete';
+    return url.replace(/\/styles\/[a-z0-9_]+\//, `/styles/${style}/`);
+  }
   function slugify(s) {
     return (s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
   }
@@ -289,7 +298,7 @@
           <a class="pr-fav-card" href="fighter.html?id=${encodeURIComponent(f.id)}">
             <div class="pr-fav-card-inner">
               <div class="pr-fav-photo-wrap">
-                ${f.img ? `<img class="pr-fav-photo" src="${esc(f.img)}" alt="${esc(f.name)}">` : ''}
+                ${f.img ? `<img class="pr-fav-photo" src="${esc(thumbImg(f.img))}" alt="${esc(f.name)}" loading="lazy">` : ''}
                 <div class="pr-fav-initial-lg" style="${f.img ? 'display:none' : ''}">${esc(initials)}</div>
                 <div class="pr-fav-photo-grad"></div>
               </div>
@@ -1246,7 +1255,7 @@
         <div class="pr-fav-card-inner">
           <div class="pr-fav-photo-wrap">
             ${f.img
-              ? `<img class="pr-fav-photo" src="${esc(f.img)}" alt="${esc(f.name)}" onerror="this.closest('.pr-fav-photo-wrap').querySelector('.pr-fav-initial-lg').style.display='flex';this.style.display='none'">`
+              ? `<img class="pr-fav-photo" src="${esc(thumbImg(f.img))}" alt="${esc(f.name)}" loading="lazy" onerror="this.closest('.pr-fav-photo-wrap').querySelector('.pr-fav-initial-lg').style.display='flex';this.style.display='none'">`
               : ''}
             <div class="pr-fav-initial-lg" style="${f.img ? 'display:none' : ''}">${esc(initials)}</div>
             <div class="pr-fav-photo-grad"></div>
@@ -1576,7 +1585,7 @@
       return `
         <div class="pr-modal-row${isFav ? ' selected' : ''}" data-id="${esc(f.id)}">
           ${f.img
-            ? `<img src="${esc(f.img)}" alt="${esc(f.name)}" onerror="this.style.display='none'">`
+            ? `<img src="${esc(thumbImg(f.img, 'sm'))}" alt="${esc(f.name)}" loading="lazy" onerror="this.style.display='none'">`
             : `<div style="width:38px;height:38px;border-radius:50%;background:#1c1c1c;display:flex;align-items:center;justify-content:center;font-family:Montserrat,sans-serif;font-weight:800;font-size:0.85rem;color:rgba(255,138,61,0.5)">${esc(initials)}</div>`}
           <div class="pr-modal-row-info">
             <div class="pr-modal-row-name">${esc(f.name)}</div>

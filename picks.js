@@ -49,6 +49,16 @@ function oddsSpanHtml(val, isFav, numClass) {
   function esc(s) {
     return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
+  // Fighter photos come from ufc.com's CDN as a full "athlete bio" crop
+  // (460x700, ~380KB) regardless of context — every fight card on this
+  // page was loading that full size just to shrink it into a 110-150px
+  // thumbnail. ufc.com's own CDN serves the same source image pre-cropped
+  // at smaller presets; swap in the ~185x471/~100KB fight-card preset for
+  // small on-page thumbnails instead of re-downloading full res.
+  function thumbImg(url) {
+    if (!url) return url;
+    return url.replace(/\/styles\/[a-z0-9_]+\//, '/styles/event_fight_card_upper_body_of_standing_athlete/');
+  }
   // "TBA" / "Opponent TBA" is UFC.com's placeholder for an unannounced
   // opponent, not a real fighter — never let it show up as a pickable fight.
   function isTBA(name) { return !name || /\bTBA\b/i.test(name); }
@@ -1359,12 +1369,12 @@ function oddsSpanHtml(val, isFav, numClass) {
     const IMG_ERROR_HANDLER = "if(!this.dataset.retried){this.dataset.retried='1';this.src=this.src;}else{this.style.display='none';this.nextElementSibling.style.display='flex';}";
     const photoA = `<div class="fc-photo">${
       f.imgA
-        ? `<img src="${esc(f.imgA)}" alt="${esc(f.a)}" loading="lazy" onerror="${IMG_ERROR_HANDLER}"><div class="fc-sil" style="display:none">${SILHOUETTE}</div>`
+        ? `<img src="${esc(thumbImg(f.imgA))}" alt="${esc(f.a)}" loading="lazy" onerror="${IMG_ERROR_HANDLER}"><div class="fc-sil" style="display:none">${SILHOUETTE}</div>`
         : `<div class="fc-sil">${SILHOUETTE}</div>`
     }</div>`;
     const photoB = `<div class="fc-photo">${
       f.imgB
-        ? `<img src="${esc(f.imgB)}" alt="${esc(f.b)}" loading="lazy" onerror="${IMG_ERROR_HANDLER}"><div class="fc-sil" style="display:none">${SILHOUETTE}</div>`
+        ? `<img src="${esc(thumbImg(f.imgB))}" alt="${esc(f.b)}" loading="lazy" onerror="${IMG_ERROR_HANDLER}"><div class="fc-sil" style="display:none">${SILHOUETTE}</div>`
         : `<div class="fc-sil">${SILHOUETTE}</div>`
     }</div>`;
 

@@ -1336,6 +1336,13 @@
   <script>
     /* ── HELPERS ── */
     function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+    // ufc.com's CDN serves fighter photos as a full ~460x700 "athlete bio"
+    // crop no matter the context — the .ov-headshot circles here render at
+    // only 36-44px. Swap in the CDN's own much smaller pre-cropped preset.
+    function thumbImg(url){
+      if (!url) return url;
+      return url.replace(/\/styles\/[a-z0-9_]+\//, '/styles/athlete_detail_stance_thumbnail_full_body/');
+    }
     function daysUntil(iso){ return Math.ceil((new Date(iso+'T00:00:00')-new Date())/86400000); }
     /* "TBA" / "Opponent TBA" are UFC.com placeholder text for an unannounced
        opponent, not a real fighter — never show a fight (or a "card change"
@@ -1975,7 +1982,7 @@
 
       function headCell(url,flip){
         if(!isUpcoming) return '';
-        const img=url?`<img class="ov-headshot" src="${url}" alt="" onerror="this.style.display='none'">`:'';
+        const img=url?`<img class="ov-headshot" src="${thumbImg(url)}" alt="" loading="lazy" onerror="this.style.display='none'">`:'';
         return `<div class="ov-head-cell${flip?' ov-head-r':''}">${img}</div>`;
       }
 
@@ -2002,6 +2009,11 @@
           row.className=`ov-fight ${mainCls}${isUpcoming?' has-shots':''}${cancelledCls}`;
           row.dataset.fightId=fightId(ev.id,f.a,f.b);
           row.dataset.fighterA=f.a; row.dataset.fighterB=f.b;
+          // Full-res original URLs, kept separately from the .ov-headshot
+          // <img> src (which points at a small thumbnail preset) — the
+          // matchup page's poster-size hero needs the real full-size shot.
+          if (f.imgA) row.dataset.imgA=f.imgA;
+          if (f.imgB) row.dataset.imgB=f.imgB;
 
           if(hasResult){
             /* ── RESULT ROW ── */
@@ -2692,10 +2704,8 @@
       const fB     = row.dataset.fighterB;
       const wEl    = row.querySelector('.ov-weight');
       const weight = wEl ? wEl.textContent.trim() : '';
-      const imgAEl = row.querySelector('.ov-head-cell:not(.ov-head-r) .ov-headshot');
-      const imgBEl = row.querySelector('.ov-head-cell.ov-head-r .ov-headshot');
-      const imgA   = imgAEl ? imgAEl.src : '';
-      const imgB   = imgBEl ? imgBEl.src : '';
+      const imgA   = row.dataset.imgA || '';
+      const imgB   = row.dataset.imgB || '';
       const url = 'matchup.html?event=' + encodeURIComponent(evId) + '&a=' + encodeURIComponent(fA) + '&b=' + encodeURIComponent(fB) + '&weight=' + encodeURIComponent(weight) + '&imgA=' + encodeURIComponent(imgA) + '&imgB=' + encodeURIComponent(imgB) + '&from=events';
       window.location.href = url;
     }
