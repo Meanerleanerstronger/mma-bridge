@@ -1480,8 +1480,8 @@ function oddsSpanHtml(val, isFav, numClass) {
             ${photoA}
             <div class="fc-info">
               <div class="fc-name">${esc(f.a)}</div>
+              <a class="fc-fighter-link" href="fighter.html?name=${encodeURIComponent(f.a)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Profile <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
               <div class="fc-sub-row">${recA ? `<span class="fc-record">${esc(recA)}</span>` : ''}${oddsTagA ? `<span class="fc-odds-inline">${oddsTagA}</span>` : ''}</div>
-              <a class="fc-fighter-link" href="fighter.html?name=${encodeURIComponent(f.a)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Profile ›</a>
               ${commLabelA}
               ${groupLabelA}
               ${badgeA}
@@ -1494,7 +1494,7 @@ function oddsSpanHtml(val, isFav, numClass) {
           <div class="${sideBCls}" data-key="${esc(key)}" data-pick="${esc(f.b)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
             <div class="fc-info fc-info-b">
               <div class="fc-name">${esc(f.b)}</div>
-              <a class="fc-fighter-link" href="fighter.html?name=${encodeURIComponent(f.b)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">‹ Profile</a>
+              <a class="fc-fighter-link fc-fighter-link-b" href="fighter.html?name=${encodeURIComponent(f.b)}" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 5 5 12 12 19"/></svg> Profile</a>
               <div class="fc-sub-row fc-sub-row-b">${oddsTagB ? `<span class="fc-odds-inline">${oddsTagB}</span>` : ''}${recB ? `<span class="fc-record">${esc(recB)}</span>` : ''}</div>
               ${commLabelB}
               ${groupLabelB}

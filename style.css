@@ -5784,19 +5784,38 @@ body.light-mode .pk-hype-card-count { color: rgba(0,0,0,0.3); }
 /* Moved out of the fighter name (a real link there was silently eating
    the "pick this fighter" click — nothing distinguished it from plain
    text, so tapping the name opened fighter.html in a new tab instead of
-   picking). Lives in the sub-row now as a small, clearly-secondary link. */
+   picking). Was a whisper-thin plain-text link that read as an
+   afterthought next to the record/odds — a real pill button instead,
+   sitting right under the name so it reads as a clear, separate action. */
 .fc-fighter-link {
-  font-family: 'Inter', sans-serif; font-size: 0.65rem; font-weight: 600;
-  color: rgba(255,138,61,0.75);
+  display: inline-flex; align-items: center; gap: 4px;
+  font-family: 'Montserrat', sans-serif; font-size: 0.62rem; font-weight: 800;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  background: rgba(255,138,61,0.12);
+  border: 1px solid rgba(255,138,61,0.4);
+  padding: 5px 11px; border-radius: 14px;
   text-decoration: none;
-  letter-spacing: 0.02em;
-  transition: color 0.15s;
+  transition: background 0.15s, border-color 0.15s, transform 0.15s;
 }
+.fc-fighter-link svg { flex-shrink: 0; }
 .fc-fighter-link:hover {
-  color: #ff8a3d;
-  text-decoration: underline;
+  background: rgba(255,138,61,0.22);
+  border-color: rgba(255,160,90,0.65);
+  color: #fff;
+  transform: translateY(-1px);
 }
-.fc-fighter.selected .fc-fighter-link:hover { color: rgba(255,138,61,0.7); }
+.fc-fighter.selected .fc-fighter-link:hover { color: #fff; }
+body.light-mode .fc-fighter-link {
+  color: rgba(0,0,0,0.72);
+  background: rgba(224,107,26,0.1);
+  border-color: rgba(224,107,26,0.35);
+}
+body.light-mode .fc-fighter-link:hover {
+  background: rgba(224,107,26,0.18);
+  border-color: rgba(224,107,26,0.55);
+  color: #000;
+}
 .fc-card.fc-maincrd .fc-name { font-size: 1.55rem; color: rgba(255,255,255,0.95); }
 .fc-card.fc-main .fc-name { font-size: 1.9rem; color: #fff; letter-spacing: 0.03em; }
 .fc-fighter.selected .fc-name { color: #e06b1a; }
@@ -7197,7 +7216,7 @@ body.light-mode .ev-hype-badge { color: rgba(140,80,0,0.85); background: rgba(20
   .fc-card.fc-main .fc-name { font-size: 1.2rem; }
   .fc-odds-num { font-size: 0.75rem; }
   .fc-record { font-size: 0.58rem; }
-  .fc-fighter-link { font-size: 0.58rem; }
+  .fc-fighter-link { font-size: 0.56rem; padding: 4px 9px; }
 }
 
 /* light mode */
@@ -12577,8 +12596,9 @@ body.light-mode .sidebar li a { color: rgba(0,0,0,0.65) !important; text-decorat
 body.light-mode .sidebar li a:hover { color: #e06b1a !important; }
 
 /* ── Fighter name links — gold on hover everywhere ── */
+/* fc-fighter-link excluded here — it's a filled pill button now, not a
+   bare text link, and sets its own hover color/background above. */
 body.light-mode .ov-fighter a:hover,
-body.light-mode .fc-fighter-link:hover,
 body.light-mode .fp-fighter-link:hover,
 body.light-mode .pfp-fighter-link:hover,
 body.light-mode .pr-fighter-link:hover,
@@ -12586,7 +12606,6 @@ body.light-mode .lb-name a:hover { color: #e06b1a !important; }
 
 /* Dark mode hover gold for fighter names in picks/events */
 .ov-fighter a:hover,
-.fc-fighter-link:hover,
 .fp-fighter-link:hover { color: #ff8a3d !important; }
 
 /* ── Recent Results cards in light mode ── */
@@ -13395,7 +13414,6 @@ body.light-mode .fc-cmp-common-name { color: rgba(0,0,0,0.5); }
   color: #ff8a3d !important;
   text-shadow: 0 0 22px rgba(255,138,61,0.55), 0 2px 10px rgba(0,0,0,0.95) !important;
 }
-.fc-fighter-link:hover { text-decoration: underline !important; }
 
 /* Record: always show, subtle */
 .fc-record {
