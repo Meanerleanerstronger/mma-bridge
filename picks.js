@@ -193,34 +193,64 @@ function oddsSpanHtml(val, isFav, numClass) {
     return `${wins}-${losses}${draws ? `-${draws}` : ''}`;
   }
 
-  // ── Tale of the Tape — collapsed dropdown, classic physical comparison
-  // (age/height/reach/stance/record), not deep striking-analytics stats
-  // nobody but a coach cares about. Closed by default so it doesn't sit
-  // there taking up space on every card — tap the header to open it.
+  // ── Tale of the Tape — collapsed dropdown, matches what tapology.com's
+  // own "Fighter Comparison" actually shows (checked live): record, last
+  // 5 fights as a W/L dot sequence, nation, fights-out-of, age, height,
+  // reach. No stance row — tapology doesn't show one either, and the
+  // deep striking-analytics numbers from the first pass at this got
+  // called out as stuff nobody but a coach reads. Closed by default so
+  // it doesn't sit there taking up space on every card.
   function heightToInches(h) {
     const m = String(h || '').match(/(\d+)'\s*(\d+)/);
     return m ? parseInt(m[1]) * 12 + parseInt(m[2]) : NaN;
   }
+  function last5DotsHtml(last5, side) {
+    const fights = (last5 || []).slice(0, 5);
+    if (!fights.length) return `<span class="fc-cmp-l5-empty">—</span>`;
+    return `<span class="fc-cmp-l5 fc-cmp-l5-${side}">${fights.map(f => {
+      const r = (f.result || '').toUpperCase();
+      const cls = r === 'W' ? 'w' : r === 'L' ? 'l' : 'nc';
+      const title = `${esc(f.opponent || '')}${f.method ? ' · ' + esc(f.method) : ''}`;
+      return `<span class="fc-cmp-l5-dot fc-cmp-l5-${cls}" title="${title}">${r || '–'}</span>`;
+    }).join('')}</span>`;
+  }
   const TAPE_ROWS = [
     ['record',  'RECORD'],
+    ['last5',   'LAST 5'],
+    ['nation',  'NATION'],
+    ['out',     'FIGHTS OUT OF'],
     ['age',     'AGE'],
     ['height',  'HEIGHT'],
     ['reach',   'REACH'],
-    ['stance',  'STANCE'],
   ];
   function buildStatCompare(nameA, nameB, recA, recB) {
     const fdA = lookupFighter(nameA), fdB = lookupFighter(nameB);
     if (!fdA && !fdB) return '';
-    const valsA = { record: recA, age: fdA?.age, height: fdA?.height, reach: fdA?.reach, stance: fdA?.stance };
-    const valsB = { record: recB, age: fdB?.age, height: fdB?.height, reach: fdB?.reach, stance: fdB?.stance };
+    const nationHtml = fd => fd?.flag || fd?.nationality
+      ? `${fd.flag ? fd.flag + ' ' : ''}${esc(fd.nationality || '')}` : '';
+    const valsA = {
+      record: recA, age: fdA?.age, height: fdA?.height, reach: fdA?.reach,
+      out: fdA?.fightingOut, nation: nationHtml(fdA),
+    };
+    const valsB = {
+      record: recB, age: fdB?.age, height: fdB?.height, reach: fdB?.reach,
+      out: fdB?.fightingOut, nation: nationHtml(fdB),
+    };
     const rows = TAPE_ROWS
       .map(([key, label]) => {
+        if (key === 'last5') {
+          if (!fdA?.last5?.length && !fdB?.last5?.length) return '';
+          return `<div class="fc-cmp-row fc-cmp-row-l5">
+            <span class="fc-cmp-val fc-cmp-a">${last5DotsHtml(fdA?.last5, 'a')}</span>
+            <span class="fc-cmp-lbl">${label}</span>
+            <span class="fc-cmp-val fc-cmp-b">${last5DotsHtml(fdB?.last5, 'b')}</span>
+          </div>`;
+        }
         const rawA = valsA[key], rawB = valsB[key];
         if (!rawA && !rawB) return '';
         // Only height/reach/age get a "leader" highlight — a longer reach
-        // or being taller is at least a plausible edge; stance and record
-        // aren't a simple bigger-number-wins comparison, so those just
-        // display both values with no highlight.
+        // or being taller is at least a plausible edge; the rest are just
+        // context, not a bigger-number-wins comparison.
         let numA = NaN, numB = NaN;
         if (key === 'height') { numA = heightToInches(rawA); numB = heightToInches(rawB); }
         else if (key === 'reach' || key === 'age') { numA = parseFloat(rawA); numB = parseFloat(rawB); }
