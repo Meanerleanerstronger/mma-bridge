@@ -851,6 +851,7 @@ function renderPage(ev, community, extra = {}) {
 
   breadcrumb.textContent = name;
   document.title = `MMA Bridge | ${name}`;
+  document.body.classList.toggle('review-is-ppv', ev.type === 'PPV');
 
   root.innerHTML = `
     <div class="er-page">

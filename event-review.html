@@ -959,6 +959,35 @@
     }
     .er-share-x:hover { background: rgba(255,138,61,0.08); }
 
+    /* ── PPV gold — mirrors the gold treatment on events.html/reviews.html
+       for numbered PPV cards. Scoped to body.review-is-ppv (toggled in
+       event-review.js's renderPage) rather than per-element checks, so it
+       covers everything on this page in one place: the sticky community
+       badge, the PPV type tag, community + interactive + per-review stars,
+       the rating number, and the submit/toast accents. ── */
+    body.review-is-ppv #erCommBadge .badge-val { color: #f5d474; text-shadow: 0 0 10px rgba(240,195,78,.45); }
+    body.review-is-ppv #erCommBadge { border-color: rgba(240,195,78,0.3); box-shadow: 0 4px 24px rgba(0,0,0,0.5), 0 0 0 1px rgba(240,195,78,0.08); }
+    body.review-is-ppv .er-event-type {
+      color: #f5d474;
+      background: rgba(240,195,78,0.1);
+      border-color: rgba(240,195,78,0.4);
+      text-shadow: 0 0 8px rgba(240,195,78,.4);
+    }
+    body.review-is-ppv .er-community-pill .pill-val { color: #f5d474; text-shadow: 0 0 10px rgba(240,195,78,.4); }
+    body.review-is-ppv .er-star-fill { color: #f0c34e; }
+    body.review-is-ppv .er-rating-num { color: #f5d474; }
+    body.review-is-ppv .er-rev-star::after { color: #f0c34e; }
+    body.review-is-ppv .er-submit { background: linear-gradient(135deg, #fff0c2, #f0c34e 45%, #a9760f); }
+    body.review-is-ppv .er-toast {
+      background: rgba(240,195,78,0.1);
+      border-color: rgba(240,195,78,0.3);
+      color: #f5d474;
+    }
+    body.review-is-ppv .er-read-more { color: rgba(240,195,78,0.75); }
+    body.review-is-ppv .er-show-more-btn:hover { border-color: rgba(240,195,78,0.35); color: rgba(240,195,78,0.85); }
+    body.review-is-ppv .er-like-btn.liked { color: #f5d474; background: rgba(240,195,78,0.08); }
+    body.review-is-ppv .er-replies-toggle:hover { color: #f5d474; }
+
     /* Responsive */
     @media (max-width: 640px) {
       .er-layout {

@@ -150,7 +150,7 @@
       animation: accentGrow 0.4s 0.2s ease both;
     }
     .row-accent-gold {
-      background: #d4af37;
+      background: #f0c34e;
     }
     .rv-row-count {
       font-family: 'Inter', sans-serif;
@@ -227,7 +227,7 @@
       transition: border-color 0.25s;
     }
     .rv-card:hover .card-clip { border-color: rgba(255,138,61,0.4); }
-    .rv-card.ppv:hover .card-clip { border-color: rgba(212,175,55,0.45); }
+    .rv-card.ppv:hover .card-clip { border-color: rgba(240,195,78,0.45); }
     @media (prefers-reduced-motion: reduce) {
       .rv-card { animation: none; }
     }
@@ -261,7 +261,7 @@
       box-shadow: 0 28px 60px rgba(0,0,0,0.75), 0 0 0 1px rgba(255,138,61,0.08), 0 0 40px rgba(255,138,61,0.06);
     }
     .rv-card.ppv:hover .card-clip {
-      box-shadow: 0 28px 60px rgba(0,0,0,0.75), 0 0 0 1px rgba(212,175,55,0.1), 0 0 40px rgba(212,175,55,0.08);
+      box-shadow: 0 28px 60px rgba(0,0,0,0.75), 0 0 0 1px rgba(240,195,78,0.1), 0 0 40px rgba(240,195,78,0.08);
     }
 
     /* Full bleed image */
@@ -347,9 +347,9 @@
     }
     .rv-card.ppv .card-badge {
       background: rgba(0,0,0,0.6);
-      border: 1px solid rgba(212,175,55,0.55);
-      color: #e6c565;
-      text-shadow: 0 0 8px rgba(212,175,55,.5);
+      border: 1px solid rgba(240,195,78,0.55);
+      color: #f5d474;
+      text-shadow: 0 0 8px rgba(240,195,78,.5);
     }
     .rv-card.fn .card-badge {
       background: rgba(0,0,0,0.6);
@@ -377,8 +377,8 @@
       z-index: 5;
     }
     .rv-card.ppv .card-rating {
-      background: linear-gradient(165deg, #f6e2a0 0%, #d4af37 45%, #96721f 100%);
-      box-shadow: 0 8px 18px rgba(0,0,0,.55), 0 0 16px rgba(212,175,55,.35);
+      background: linear-gradient(165deg, #fff0c2 0%, #f0c34e 45%, #a9760f 100%);
+      box-shadow: 0 8px 18px rgba(0,0,0,.55), 0 0 16px rgba(240,195,78,.35);
     }
 
     /* Bottom accent line on hover */
@@ -393,6 +393,7 @@
       z-index: 4;
     }
     .rv-card:hover .card-clip::after { opacity: 1; }
+    .rv-card.ppv .card-clip::after { background: linear-gradient(90deg, #fff0c2, #f0c34e 50%, #a9760f); }
 
     /* ── SKELETON ── */
     .rv-skel {
@@ -477,6 +478,22 @@
     .rv-sort-drop button + button { border-top: 1px solid rgba(255,255,255,0.05); }
     .rv-sort-drop button:hover { background: rgba(255,138,61,0.08); color: #ff8a3d; }
     .rv-sort-drop button.active { color: #ff8a3d; font-weight: 700; }
+
+    /* PPV row's own sort filter — gold to match the row's own accent */
+    #ppvSortBtn {
+      color: #f5d474;
+      background: rgba(240,195,78,0.08);
+      border-color: rgba(240,195,78,0.35);
+      text-shadow: 0 0 8px rgba(240,195,78,.35);
+    }
+    #ppvSortBtn:hover {
+      background: rgba(240,195,78,0.14);
+      border-color: rgba(240,195,78,0.6);
+      box-shadow: 0 0 14px rgba(240,195,78,0.18);
+    }
+    #ppvSortDrop { border-color: rgba(240,195,78,0.3); box-shadow: 0 12px 40px rgba(0,0,0,0.7), 0 0 0 1px rgba(240,195,78,0.06); }
+    #ppvSortDrop button:hover { background: rgba(240,195,78,0.1); color: #f5d474; }
+    #ppvSortDrop button.active { color: #f5d474; font-weight: 700; }
 
     /* Search results */
     #rvSearchPanel .rv-scroll {

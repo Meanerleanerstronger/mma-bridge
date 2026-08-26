@@ -189,7 +189,7 @@
     .ph-card:hover { background:rgba(255,255,255,.05); border-color:rgba(255,138,61,.2); }
     .ph-card-badge { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.48rem;letter-spacing:.16em;text-transform:uppercase;padding:3px 9px;border-radius:4px;flex-shrink:0; }
     .ph-card-badge.fn  { background:rgba(255,138,61,.12);border:1px solid rgba(255,138,61,.3);color:#ff8a3d; }
-    .ph-card-badge.ppv { background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.4);color:#e6c565;text-shadow:0 0 8px rgba(212,175,55,.4); }
+    .ph-card-badge.ppv { background:rgba(240,195,78,.12);border:1px solid rgba(240,195,78,.4);color:#f5d474;text-shadow:0 0 8px rgba(240,195,78,.4); }
     .ph-card-info { flex:1; min-width:0; }
     .ph-card-name { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.88rem;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
     .ph-card-meta { font-family:'Inter',sans-serif;font-size:.7rem;color:rgba(255,255,255,.3);margin-top:3px; }
@@ -231,8 +231,8 @@
     .ev-card:nth-child(3){animation-delay:.12s}.ev-card:nth-child(4){animation-delay:.16s}
     .ev-card:nth-child(5){animation-delay:.20s}.ev-card:nth-child(n+6){animation-delay:.24s}
     .ev-card.fn:hover  { border-color:rgba(255,255,255,.18);box-shadow:0 16px 50px rgba(0,0,0,.7); }
-    .ev-card.ppv:hover { border-color:rgba(212,175,55,.35);box-shadow:0 16px 50px rgba(0,0,0,.7); }
-    .ev-card.ppv::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:#d4af37;z-index:5; }
+    .ev-card.ppv:hover { border-color:rgba(240,195,78,.35);box-shadow:0 16px 50px rgba(0,0,0,.7); }
+    .ev-card.ppv::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:#f0c34e;z-index:5; }
 
     /* Most-hyped card — deliberately loud (animated glow, not just a bigger
        number) so it reads as obviously different while scanning the grid,
@@ -263,10 +263,10 @@
     .ev-card-top { display:flex;align-items:center;gap:9px;margin-bottom:8px; }
     .ev-card-badge { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.42rem;letter-spacing:.18em;text-transform:uppercase;padding:3px 9px;border-radius:4px;backdrop-filter:blur(6px); }
     .ev-card.fn  .ev-card-badge { background:rgba(255,138,61,.12);border:1px solid rgba(255,138,61,.3);color:#ff8a3d; }
-    .ev-card.ppv .ev-card-badge { background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.4);color:#e6c565;text-shadow:0 0 8px rgba(212,175,55,.4); }
+    .ev-card.ppv .ev-card-badge { background:rgba(240,195,78,.12);border:1px solid rgba(240,195,78,.4);color:#f5d474;text-shadow:0 0 8px rgba(240,195,78,.4); }
     .ev-card-changed-badge { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.42rem;letter-spacing:.14em;text-transform:uppercase;padding:3px 8px;border-radius:4px;background:rgba(255,120,40,.14);border:1px solid rgba(255,140,60,.4);color:#ff9d5c; }
     .ev-card-name    { font-family:'Montserrat',sans-serif;font-weight:900;font-size:.86rem;color:rgba(255,255,255,.6);letter-spacing:.05em;text-transform:uppercase; }
-    .ev-card.ppv .ev-card-name { color:rgba(212,175,55,.7); }
+    .ev-card.ppv .ev-card-name { color:rgba(240,195,78,.7); }
     .ev-card-matchup { font-family:'Barlow Condensed','Montserrat',sans-serif;font-weight:900;font-size:clamp(1.25rem,2.6vw,1.75rem);color:#fff;letter-spacing:.03em;text-transform:uppercase;line-height:1.1;margin-bottom:8px;text-shadow:0 2px 16px rgba(0,0,0,.9); }
     .ev-card.ppv .ev-card-matchup { font-size:clamp(1.35rem,2.9vw,1.95rem); }
     .ev-card-sub   { font-family:'Inter',sans-serif;font-size:.7rem;color:rgba(255,255,255,.35);letter-spacing:.02em; }
@@ -279,7 +279,7 @@
     .ev-card-location { font-family:'Inter',sans-serif;font-size:.7rem;color:rgba(255,255,255,.4);max-width:120px;text-align:right; }
     .ev-card-cta    { position:absolute;bottom:14px;right:22px;z-index:3;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.48rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.2);display:flex;align-items:center;gap:5px;transition:color .2s; }
     .ev-card.fn:hover  .ev-card-cta { color:rgba(255,138,61,.6); }
-    .ev-card.ppv:hover .ev-card-cta { color:rgba(212,175,55,.7); }
+    .ev-card.ppv:hover .ev-card-cta { color:rgba(240,195,78,.7); }
     .ev-card-cta svg { width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round; }
 
     /* Pull-down poster handle — top-right corner of card */
@@ -305,9 +305,9 @@
     .ev-hype-slot .ehs-sep { font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:700;color:rgba(255,138,61,.28);line-height:1; }
     .ev-hype-slot .ehs-label { font-family:'Inter',sans-serif;font-size:.42rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,138,61,.45);line-height:1; }
     .ev-hype-slot .ehs-count { font-family:'Inter',sans-serif;font-size:.62rem;font-weight:500;color:rgba(255,255,255,.4);letter-spacing:.03em;line-height:1; }
-    .ev-hype-slot .ehs-num.ehs-max { color:#e6c565;text-shadow:0 1px 0 rgba(246,226,160,.5),0 0 14px rgba(212,175,55,.65),0 0 30px rgba(212,175,55,.35); }
-    .ev-hype-slot .ehs-num.ehs-max .ehs-sep { color:rgba(212,175,55,.35); }
-    .ev-hype-slot .ehs-label.ehs-max { color:rgba(212,175,55,.55); }
+    .ev-hype-slot .ehs-num.ehs-max { color:#f5d474;text-shadow:0 1px 0 rgba(246,226,160,.5),0 0 14px rgba(240,195,78,.65),0 0 30px rgba(240,195,78,.35); }
+    .ev-hype-slot .ehs-num.ehs-max .ehs-sep { color:rgba(240,195,78,.35); }
+    .ev-hype-slot .ehs-label.ehs-max { color:rgba(240,195,78,.55); }
 
     /* ══════════════════════════════════
        POSTER LIGHTBOX
@@ -442,7 +442,7 @@
     .ov-badge-row { display:flex;align-items:center;gap:10px; }
     .ov-badge { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;padding:4px 12px;border-radius:4px;backdrop-filter:blur(10px); }
     .ov-badge.fn  { background:rgba(255,138,61,.15);border:1px solid rgba(255,138,61,.35);color:#ff8a3d; }
-    .ov-badge.ppv { background:rgba(212,175,55,.15);border:1px solid rgba(212,175,55,.45);color:#e6c565;text-shadow:0 0 8px rgba(212,175,55,.4); }
+    .ov-badge.ppv { background:rgba(240,195,78,.15);border:1px solid rgba(240,195,78,.45);color:#f5d474;text-shadow:0 0 8px rgba(240,195,78,.4); }
     .ov-badge.special-green { background:rgba(255,138,61,.15);border:1px solid rgba(255,138,61,.35);color:#ff8a3d; }
     .ov-days-badge { display:inline-flex;align-items:center;font-family:'Montserrat',sans-serif;font-size:.44rem;font-weight:800;letter-spacing:.14em;color:rgba(255,255,255,.55);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:3px 9px;border-radius:4px; }
     .ov-close { width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);font-size:.95rem;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(10px);transition:background .2s,border-color .2s,color .2s; }
@@ -510,7 +510,7 @@
     /* Community avg in overlay */
     .ov-comm-hype { margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:1px;white-space:nowrap; }
     .ov-comm-num { font-family:'Montserrat',sans-serif;font-size:1.8rem;font-weight:900;line-height:1;color:#e06b1a;letter-spacing:.01em; }
-    .ov-comm-num.ov-comm-max { color:#e6c565;text-shadow:0 0 14px rgba(212,175,55,.5); }
+    .ov-comm-num.ov-comm-max { color:#f5d474;text-shadow:0 0 14px rgba(240,195,78,.5); }
     .ov-comm-label { font-family:'Inter',sans-serif;font-size:.48rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(224,107,26,.5); }
     .ov-comm-count { font-family:'Inter',sans-serif;font-size:.46rem;font-weight:500;color:rgba(255,255,255,.22);letter-spacing:.04em; }
 
@@ -676,7 +676,7 @@
     }
 
     .ov-fight.is-main    { padding:18px 22px;background:rgba(255,138,61,.02);border-color:rgba(255,138,61,.12); }
-    .ov-fight.is-main.ppv-main { background:rgba(212,175,55,.03);border-color:rgba(212,175,55,.18); }
+    .ov-fight.is-main.ppv-main { background:rgba(240,195,78,.03);border-color:rgba(240,195,78,.18); }
     .ov-fight.is-main:hover { border-color:rgba(255,138,61,.28); }
     .ov-fight.is-comain  { background:rgba(255,138,61,.01); }
 
@@ -737,7 +737,7 @@
       text-shadow:0 0 28px rgba(255,138,61,.35),0 1px 8px rgba(0,0,0,.7);
     }
     .ov-fight.ppv-main:hover .ov-fighter:not(.dim) {
-      text-shadow:0 0 28px rgba(212,175,55,.45),0 1px 8px rgba(0,0,0,.7);
+      text-shadow:0 0 28px rgba(240,195,78,.45),0 1px 8px rgba(0,0,0,.7);
     }
 
     .ov-fight-mid { text-align:center;position:relative;z-index:1; }
@@ -1494,7 +1494,7 @@
       const commCount = document.getElementById('ovCommCount');
       if (commNum) {
         commNum.classList.toggle('ov-comm-max', isMax);
-        commNum.innerHTML = avg + `<span style="font-size:.8rem;font-weight:600;color:${isMax ? 'rgba(212,175,55,.4)' : 'rgba(224,107,26,.4)'};vertical-align:baseline">/10</span>`;
+        commNum.innerHTML = avg + `<span style="font-size:.8rem;font-weight:600;color:${isMax ? 'rgba(240,195,78,.4)' : 'rgba(224,107,26,.4)'};vertical-align:baseline">/10</span>`;
       }
       if (commCount) commCount.textContent = `${cnt} rating${cnt !== 1 ? 's' : ''}`;
       if (commHype) commHype.style.display = '';
@@ -1749,7 +1749,7 @@
 
     /* ── HYPE ── */
     const HYPE_W=['','Sleeper','Low Key','Building','Decent','Solid','Good','Hyped','Very Hyped','Elite Card','All-Time Card'];
-    const HYPE_C=['','#666','#888','#b8b832','#b8b832','#ff8a3d','#ff8a3d','#ff8a3d','#ff8a3d','#ff6030','#d4af37'];
+    const HYPE_C=['','#666','#888','#b8b832','#b8b832','#ff8a3d','#ff8a3d','#ff8a3d','#ff8a3d','#ff6030','#f0c34e'];
     let currentHype=null;
 
     function buildHypeTicks(){
@@ -1904,7 +1904,7 @@
       }
       const special=SPECIAL_EVENTS[ev.id];
       const isPPV=ev.type==='PPV', cls=isPPV?'ppv':'fn';
-      const accent=special?special.accent:(isPPV?'#d4af37':'#ff8a3d');
+      const accent=special?special.accent:(isPPV?'#f0c34e':'#ff8a3d');
       const main=getMainFight(ev);
       const days=ev.isoDate?daysUntil(ev.isoDate):null;
       const isToday=days!==null&&days<=0;

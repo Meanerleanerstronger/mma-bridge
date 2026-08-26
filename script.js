@@ -367,8 +367,8 @@ function renderRecentResults(events) {
     const dateCol = isLight ? 'rgba(0,0,0,0.35)' : 'rgba(255,255,255,0.3)';
     const nameCol = isLight ? '#111' : '#fff';
     const metaCol = isLight ? 'rgba(0,0,0,0.4)' : 'rgba(255,255,255,0.3)';
-    const defCol  = isPPV ? '#d4af37' : '#ff8a3d';
-    const hoverBorder = isPPV ? 'rgba(212,175,55,0.4)' : 'rgba(255,138,61,0.3)';
+    const defCol  = isPPV ? '#f0c34e' : '#ff8a3d';
+    const hoverBorder = isPPV ? 'rgba(240,195,78,0.4)' : 'rgba(255,138,61,0.3)';
 
     const card = document.createElement('a');
     card.href  = `event-review.html?id=${encodeURIComponent(slug)}`;
