@@ -13103,6 +13103,55 @@ body.light-mode .pk-poster-bg::after {
 .fc-card.fc-maincrd .fc-matchup { min-height: 210px !important; }
 .fc-card.fc-main    .fc-matchup { min-height: 260px !important; }
 
+/* ── Tale of the Tape — stat comparison, right on the card ──
+   The exact "have to open another page to see stats" complaint, fixed
+   properly: no click needed at all, not even the fighter modal. Shown
+   only when at least one side has real stat data. */
+.fc-cmp {
+  padding: 4px 16px 14px;
+  background: rgba(0,0,0,0.15);
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.fc-cmp-hd {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 0 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.52rem; font-weight: 800;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.22);
+}
+.fc-cmp-hd-line { flex: 1; height: 1px; background: rgba(255,255,255,0.06); }
+.fc-cmp-row {
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  align-items: center; gap: 10px;
+  padding: 5px 0;
+}
+.fc-cmp-val {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.8rem; font-weight: 700;
+  color: rgba(255,255,255,0.4);
+}
+.fc-cmp-val.fc-cmp-a { text-align: right; }
+.fc-cmp-val.fc-cmp-b { text-align: left; }
+.fc-cmp-val.fc-cmp-lead { color: #ff8a3d; font-weight: 900; }
+.fc-cmp-lbl {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.52rem; font-weight: 800;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.22);
+  white-space: nowrap; min-width: 54px; text-align: center;
+}
+body.light-mode .fc-cmp { background: rgba(0,0,0,0.02); border-top-color: rgba(0,0,0,0.06); }
+body.light-mode .fc-cmp-hd { color: rgba(0,0,0,0.28); }
+body.light-mode .fc-cmp-hd-line { background: rgba(0,0,0,0.08); }
+body.light-mode .fc-cmp-val { color: rgba(0,0,0,0.45); }
+body.light-mode .fc-cmp-lbl { color: rgba(0,0,0,0.32); }
+@media (max-width: 640px) {
+  .fc-cmp { padding: 2px 12px 12px; }
+  .fc-cmp-val { font-size: 0.72rem; }
+  .fc-cmp-lbl { font-size: 0.46rem; min-width: 46px; }
+}
+
 /* Fighter side: column, content at bottom, relative for photo */
 .fc-fighter {
   position: relative !important;

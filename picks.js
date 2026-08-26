@@ -192,6 +192,44 @@ function oddsSpanHtml(val, isFav, numClass) {
     const { wins = 0, losses = 0, draws = 0 } = fd.record;
     return `${wins}-${losses}${draws ? `-${draws}` : ''}`;
   }
+
+  // ── Head-to-head stat strip — shown right on the card, no click ──
+  // "on tapology its all right below the fighter - their stats, odds,
+  // etc no need to open another page to see it" was the exact complaint.
+  // The fighter modal (career averages, win breakdown, full history)
+  // covers the deep dive; this covers the at-a-glance comparison that
+  // was previously locked behind that same click.
+  const STAT_ROWS = [
+    ['strAcc', 'STR ACC', '%'],
+    ['tdAvg',  'TD AVG',  ''],
+    ['tdDef',  'TD DEF',  '%'],
+    ['subAvg', 'SUB AVG', ''],
+  ];
+  function buildStatCompare(nameA, nameB) {
+    const fdA = lookupFighter(nameA), fdB = lookupFighter(nameB);
+    const sA = fdA?.stats, sB = fdB?.stats;
+    if (!sA && !sB) return '';
+    const rows = STAT_ROWS
+      .map(([key, label]) => {
+        const rawA = sA?.[key], rawB = sB?.[key];
+        if (!rawA && !rawB) return '';
+        const numA = parseFloat(rawA), numB = parseFloat(rawB);
+        const aWins = !isNaN(numA) && (isNaN(numB) || numA > numB);
+        const bWins = !isNaN(numB) && (isNaN(numA) || numB > numA);
+        return `<div class="fc-cmp-row">
+          <span class="fc-cmp-val fc-cmp-a${aWins ? ' fc-cmp-lead' : ''}">${rawA ? esc(rawA) : '—'}</span>
+          <span class="fc-cmp-lbl">${label}</span>
+          <span class="fc-cmp-val fc-cmp-b${bWins ? ' fc-cmp-lead' : ''}">${rawB ? esc(rawB) : '—'}</span>
+        </div>`;
+      })
+      .filter(Boolean)
+      .join('');
+    if (!rows) return '';
+    return `<div class="fc-cmp">
+      <div class="fc-cmp-hd"><span class="fc-cmp-hd-line"></span>Tale of the Tape<span class="fc-cmp-hd-line"></span></div>
+      ${rows}
+    </div>`;
+  }
   function maxRounds(roundsStr) {
     const m = String(roundsStr || '').match(/(\d+)/);
     return m ? parseInt(m[1]) : 3;
@@ -1118,6 +1156,7 @@ function oddsSpanHtml(val, isFav, numClass) {
     }
     const recA  = fighterRecord(f.a);
     const recB  = fighterRecord(f.b);
+    const compareHtml = buildStatCompare(f.a, f.b);
 
     const myPerfect = (pickedA && isPerfectA) || (pickedB && isPerfectB);
     const myMiss    = fightDone && (
@@ -1303,6 +1342,7 @@ function oddsSpanHtml(val, isFav, numClass) {
           </div>
           ${extOddsB}
         </div>
+        ${compareHtml}
         ${methodWrap}
         ${ddBtnHtml}
         ${buildCommentSection(key)}
