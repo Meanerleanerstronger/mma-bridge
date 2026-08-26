@@ -470,6 +470,11 @@ function oddsSpanHtml(val, isFav, numClass) {
   let hypeAvg    = 0;
   let hypeCount  = 0;
   let localHype  = parseInt(localStorage.getItem(`hype_${eventId}`) || '0', 10);
+  // List View (current one-fight-per-row layout) vs Card View (a compact
+  // poster-style grid — same idea as admin's Fight Card Builder graphic,
+  // but interactive: tapping a fighter still picks them to win). Sticks
+  // across visits since it's a genuine preference, not a per-session toggle.
+  let viewMode = localStorage.getItem('pk_view_mode') === 'card' ? 'card' : 'list';
   let careerCorrect = 0;
   let careerJudged  = 0;
   let fotnPickMode  = false;  // cursor-mode FOTN selection active
@@ -1481,6 +1486,45 @@ function oddsSpanHtml(val, isFav, numClass) {
       ${oddsSpanHtml(odds.odds_b, !aFav, 'fc-odds-num')}
     </div>` : '';
 
+    // ── Card View — a compact poster-style cell instead of the full
+    // one-fight-per-row layout, same idea as admin's Fight Card Builder
+    // graphic (grouped sections, two photos + names per bout) but real:
+    // tapping a fighter here uses the exact same .sb-side[data-key]
+    // element the list view uses, so the existing pick-click handler,
+    // the fighter-modal-on-Profile-click handler, and the Tale of the
+    // Tape toggle all just work without any separate binding code.
+    // Winner-only here by design — method/round bonus picking stays in
+    // List View so these cells stay small and scannable.
+    if (viewMode === 'card') {
+      return `
+        <div class="${cardCls} fcv-cell" data-key="${esc(key)}">
+          <div class="fcv-tags">
+            ${f.weight ? `<span class="fc-weight">${esc(f.weight)}</span>` : ''}
+            ${cardLblTxt ? `<span class="fc-card-lbl">${cardLblTxt}</span>` : ''}
+            ${f.titleFight ? `<span class="fc-title-pip">TITLE</span>` : ''}
+          </div>
+          <div class="fcv-matchup">
+            <div class="${sideACls} fcv-side" data-key="${esc(key)}" data-pick="${esc(f.a)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
+              ${photoA}
+              <div class="fcv-name">${esc(f.a)}</div>
+              <div class="fc-sub-row fcv-sub">${recA ? `<span class="fc-record">${esc(recA)}</span>` : ''}${oddsTagA ? `<span class="fc-odds-inline">${oddsTagA}</span>` : ''}</div>
+              <a class="fc-fighter-link" href="fighter.html?name=${encodeURIComponent(f.a)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Profile</a>
+              ${badgeA}
+            </div>
+            <div class="fcv-vs">VS</div>
+            <div class="${sideBCls} fcv-side fcv-side-b" data-key="${esc(key)}" data-pick="${esc(f.b)}" data-fa="${esc(f.a)}" data-fb="${esc(f.b)}" role="button" tabindex="0">
+              ${photoB}
+              <div class="fcv-name">${esc(f.b)}</div>
+              <div class="fc-sub-row fcv-sub">${recB ? `<span class="fc-record">${esc(recB)}</span>` : ''}${oddsTagB ? `<span class="fc-odds-inline">${oddsTagB}</span>` : ''}</div>
+              <a class="fc-fighter-link" href="fighter.html?name=${encodeURIComponent(f.b)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Profile</a>
+              ${badgeB}
+            </div>
+          </div>
+          ${!fightDone && !isCompleted && !isLocked && !hasPick ? `<div class="fcv-hint">TAP A FIGHTER TO PICK</div>` : ''}
+          ${compareHtml}
+        </div>`;
+    }
+
     return `
       <div class="${cardCls}" data-key="${esc(key)}">
         ${headHtml}
@@ -2210,6 +2254,16 @@ function oddsSpanHtml(val, isFav, numClass) {
             <svg width="9" height="14" viewBox="0 0 9 14" fill="none"><polyline points="7,1 2,7 7,13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             Events
           </a>
+          <div class="pk-view-toggle" role="tablist" aria-label="Fight card layout">
+            <button class="pk-view-btn${viewMode === 'list' ? ' active' : ''}" data-view="list" type="button" role="tab" aria-selected="${viewMode === 'list'}">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+              List
+            </button>
+            <button class="pk-view-btn${viewMode === 'card' ? ' active' : ''}" data-view="card" type="button" role="tab" aria-selected="${viewMode === 'card'}">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="14" y="4" width="7" height="7" rx="1"/><rect x="3" y="13" width="7" height="7" rx="1"/><rect x="14" y="13" width="7" height="7" rx="1"/></svg>
+              Card
+            </button>
+          </div>
           <button class="pk-switch-btn" id="pkSwitchBtn" type="button">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
             Switch Event
@@ -2279,7 +2333,7 @@ function oddsSpanHtml(val, isFav, numClass) {
 
         ${ctrlHtml}
 
-        <div class="pk-fights">
+        <div class="pk-fights${viewMode === 'card' ? ' pk-fights-card' : ''}">
           ${mainSection}${prelimSection}${earlySection}
         </div>
 
@@ -2617,6 +2671,15 @@ function oddsSpanHtml(val, isFav, numClass) {
 
   // ── Bind fighter/method/round clicks ──────────
   function bindInteractions() {
+    root.querySelectorAll('.pk-view-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const next = btn.dataset.view;
+        if (next === viewMode) return;
+        viewMode = next;
+        localStorage.setItem('pk_view_mode', viewMode);
+        render();
+      });
+    });
     if (!isCompleted && !isLocked) {
       // ── Fighter side click → pick ──
       root.querySelectorAll('.sb-side[data-key]').forEach(side => {

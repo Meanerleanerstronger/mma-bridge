@@ -14604,3 +14604,140 @@ body.light-mode .cx-fair-event { color: rgba(0,0,0,0.45); }
 body.light-mode .cx-fair-mins { color: rgba(0,0,0,0.55); }
 body.light-mode .cx-soon-list { color: rgba(0,0,0,0.45); }
 body.light-mode .cx-empty-title { color: #111; }
+
+/* ══════════════════════════════════════════════════════════════════
+   CARD VIEW — poster-style compact fight grid for picks.html, same
+   idea as admin's Fight Card Builder graphic (grouped sections, two
+   photos + names per bout) but interactive: tapping a fighter picks
+   them to win, same click target as List View so no separate JS is
+   needed for picking, the Profile-click modal, or the Tale of the
+   Tape toggle. Winner-only by design — method/round stays List-View
+   only so these cells stay small and scannable. Appended at the end
+   of the file so it reliably wins any specificity ties against the
+   older List View rules it has to override (.fc-photo especially).
+   ══════════════════════════════════════════════════════════════════ */
+
+/* List / Card toggle */
+.pk-view-toggle {
+  display: inline-flex; align-items: center; gap: 2px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 20px;
+  padding: 3px;
+}
+.pk-view-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: none; border: none; cursor: pointer;
+  font-family: 'Montserrat', sans-serif; font-size: 0.62rem; font-weight: 800;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  padding: 6px 12px; border-radius: 16px;
+  transition: background 0.15s, color 0.15s;
+}
+.pk-view-btn svg { flex-shrink: 0; }
+.pk-view-btn:hover { color: rgba(255,255,255,0.7); }
+.pk-view-btn.active {
+  background: rgba(255,138,61,0.16);
+  color: #ff8a3d;
+}
+body.light-mode .pk-view-toggle { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.12); }
+body.light-mode .pk-view-btn { color: rgba(0,0,0,0.4); }
+body.light-mode .pk-view-btn:hover { color: rgba(0,0,0,0.65); }
+body.light-mode .pk-view-btn.active { background: rgba(224,107,26,0.14); color: #a8551a; }
+@media (max-width: 640px) {
+  .pk-view-btn { padding: 6px 10px; font-size: 0.56rem; }
+}
+
+/* Grid — .fc-section-lbl stays full-width, .fcv-cell tiles flow into
+   columns. Single column on mobile (a stacked compact card, not a
+   cramped multi-column poster shrunk to fit a phone). */
+.pk-fights-card .fc-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+  padding: 0 16px 24px;
+}
+.pk-fights-card .fc-section-lbl { grid-column: 1 / -1; padding-left: 0; padding-right: 0; }
+@media (max-width: 640px) {
+  .pk-fights-card .fc-section { grid-template-columns: 1fr; padding: 0 10px 20px; gap: 12px; }
+}
+
+.fcv-cell {
+  padding: 14px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.fcv-tags {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.fcv-matchup {
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  align-items: start; gap: 8px;
+}
+.fcv-vs {
+  align-self: center;
+  font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 0.56rem;
+  letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.28);
+  padding-top: 28px;
+}
+/* .fc-fighter (List View's base class, still present on these elements
+   since they reuse it for the pick-click styling hooks) pins its photo
+   full-bleed with position:absolute/inset:0 and packs content into a
+   bottom-left overlay, all !important — every one of those has to be
+   overridden here with matching !important or the circular-photo/
+   centered-text card layout collapses back into the list design. */
+.pk-fights-card .fcv-side.fc-fighter {
+  position: relative !important;
+  display: flex !important; flex-direction: column !important;
+  align-items: center !important; justify-content: flex-start !important;
+  text-align: center; gap: 5px !important;
+  cursor: pointer; padding: 8px 6px !important; border-radius: 8px;
+  background: transparent !important;
+  transition: background 0.15s !important;
+}
+.pk-fights-card .fcv-side.fc-fighter:hover { background: rgba(255,255,255,0.03) !important; }
+.pk-fights-card .fcv-side.fc-fighter.selected { background: rgba(255,138,61,0.08) !important; }
+.fcv-side.dimmed { opacity: 0.55; }
+.pk-fights-card .fcv-side .fc-photo,
+.pk-fights-card .fcv-side.fc-fighter .fc-photo {
+  position: static !important; inset: auto !important;
+  width: 64px !important; height: 64px !important;
+  aspect-ratio: 1 / 1 !important;
+  border-radius: 50% !important;
+  border: 1.5px solid rgba(255,255,255,0.14) !important;
+  margin: 0 auto !important;
+  flex-shrink: 0;
+}
+.fcv-side.selected .fc-photo { border-color: rgba(255,138,61,0.55) !important; }
+.pk-fights-card .fcv-side .fc-photo img {
+  position: static !important;
+  width: 100% !important; height: 100% !important;
+  object-fit: cover !important;
+}
+.fcv-side .fc-sil svg, .fcv-side .fc-sil { width: 100%; height: 100%; }
+.fcv-name {
+  font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
+  font-weight: 900; font-size: 0.92rem; line-height: 1.05;
+  text-transform: uppercase; color: rgba(255,255,255,0.92);
+}
+.fcv-side.selected .fcv-name { color: #ff8a3d; }
+.fcv-side.result-win .fcv-name { color: #4ade80 !important; }
+.fcv-side.result-loss .fcv-name { color: #f87171 !important; opacity: 0.7; }
+.fcv-sub { justify-content: center !important; }
+.fcv-side .fc-fighter-link { margin-top: 2px; }
+.fcv-side .fc-badge { align-self: center; }
+.fcv-hint {
+  text-align: center;
+  font-family: 'Montserrat', sans-serif; font-size: 0.54rem; font-weight: 800;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,138,61,0.55);
+}
+body.light-mode .fcv-vs { color: rgba(0,0,0,0.25); }
+body.light-mode .fcv-name { color: rgba(0,0,0,0.85); }
+body.light-mode .fcv-side:hover { background: rgba(0,0,0,0.03); }
+body.light-mode .fcv-side.selected { background: rgba(224,107,26,0.08); }
+@media (max-width: 640px) {
+  .fcv-cell { padding: 12px; }
+  .fcv-name { font-size: 0.85rem; }
+  .pk-fights-card .fcv-side .fc-photo { width: 56px !important; height: 56px !important; }
+}
