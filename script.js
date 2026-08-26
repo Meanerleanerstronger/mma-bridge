@@ -359,6 +359,7 @@ function renderRecentResults(events) {
     const loser  = winner === me?.a ? me?.b : me?.a;
     const slug   = ev.id || '';
     const methodLabel = METHOD[method] || method;
+    const isPPV  = ev.type === 'PPV';
 
     const isLight = document.body.classList.contains('light-mode');
     const cardBg  = isLight ? '#fff' : '#111';
@@ -366,11 +367,13 @@ function renderRecentResults(events) {
     const dateCol = isLight ? 'rgba(0,0,0,0.35)' : 'rgba(255,255,255,0.3)';
     const nameCol = isLight ? '#111' : '#fff';
     const metaCol = isLight ? 'rgba(0,0,0,0.4)' : 'rgba(255,255,255,0.3)';
+    const defCol  = isPPV ? '#d4af37' : '#ff8a3d';
+    const hoverBorder = isPPV ? 'rgba(212,175,55,0.4)' : 'rgba(255,138,61,0.3)';
 
     const card = document.createElement('a');
     card.href  = `event-review.html?id=${encodeURIComponent(slug)}`;
     card.style.cssText = `display:block;text-decoration:none;flex-shrink:0;width:280px;background:${cardBg};border:1px solid ${cardBorder};border-radius:12px;overflow:hidden;transition:border-color 0.2s,transform 0.2s;`;
-    card.onmouseenter = () => { card.style.borderColor='rgba(255,138,61,0.3)'; card.style.transform='translateY(-3px)'; };
+    card.onmouseenter = () => { card.style.borderColor=hoverBorder; card.style.transform='translateY(-3px)'; };
     card.onmouseleave = () => { card.style.borderColor=cardBorder; card.style.transform='none'; };
     card.innerHTML = `
       <div style="height:160px;background-image:url('${ev.poster||''}');background-size:cover;background-position:center top;filter:brightness(0.75);"></div>
@@ -378,7 +381,7 @@ function renderRecentResults(events) {
         <div style="font-family:'Montserrat',sans-serif;font-size:0.58rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:${dateCol};margin-bottom:5px;">${ev.date||''}</div>
         <div style="font-family:'Montserrat',sans-serif;font-size:0.8rem;font-weight:800;color:${nameCol};margin-bottom:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${ev.name||''}</div>
         ${winner ? `
-          <div style="font-family:'Inter',sans-serif;font-size:0.76rem;color:#ff8a3d;font-weight:600;">${winner} def. ${loser}</div>
+          <div style="font-family:'Inter',sans-serif;font-size:0.76rem;color:${defCol};font-weight:600;">${winner} def. ${loser}</div>
           <div style="font-family:'Inter',sans-serif;font-size:0.68rem;color:${metaCol};margin-top:3px;">${methodLabel} · R${me?.round||''}</div>
         ` : ''}
       </div>`;
