@@ -2983,8 +2983,8 @@ function oddsSpanHtml(val, isFav, numClass) {
           const days = e.isoDate ? Math.ceil((new Date(e.isoDate) - new Date()) / 86400000) : null;
           const dayLabel = days === null ? '' : days <= 0 ? 'TODAY' : days === 1 ? 'TOMORROW' : `${days}d away`;
           return `
-            <a class="pk-switcher-item${isCurrent ? ' current' : ''}" href="picks.html?id=${encodeURIComponent(e.id)}">
-              ${e.poster ? `<img class="pk-switcher-thumb" src="${esc(e.poster)}" alt="" onerror="this.style.display='none'">` : `<div class="pk-switcher-thumb pk-switcher-thumb-empty"></div>`}
+            <a class="pk-switcher-item${isCurrent ? ' current' : ''}${e.poster ? '' : ' no-poster'}" href="picks.html?id=${encodeURIComponent(e.id)}">
+              ${e.poster ? `<img class="pk-switcher-thumb" src="${esc(e.poster)}" alt="" onerror="this.style.display='none';this.closest('.pk-switcher-item').classList.add('no-poster')">` : ''}
               <div class="pk-switcher-info">
                 <div class="pk-switcher-name">${esc(e.name || '')}</div>
                 <div class="pk-switcher-sub">${matchup ? esc(matchup) + (e.date ? ' · ' : '') : ''}${esc(e.date || '')}</div>

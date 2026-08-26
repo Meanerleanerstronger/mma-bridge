@@ -9515,13 +9515,13 @@ body.light-mode .odds-tag { color: #e06b1a; background: rgba(180,130,10,0.1); }
   object-fit: cover; flex-shrink: 0;
   background: rgba(255,255,255,0.06);
 }
-.pk-switcher-thumb-empty { width: 54px; height: 36px; border-radius: 6px; background: rgba(255,255,255,0.05); }
-
 .pk-switcher-info { flex: 1; min-width: 0; }
 .pk-switcher-name {
   font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.82rem;
   color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
+/* No poster to show — give the name the space back instead of an empty box */
+.pk-switcher-item.no-poster .pk-switcher-name { font-size: 1.05rem; }
 .pk-switcher-sub {
   font-family: 'Inter', sans-serif; font-size: 0.85rem;
   color: rgba(255,255,255,0.32); margin-top: 2px;
