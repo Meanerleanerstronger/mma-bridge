@@ -1,11 +1,11 @@
 // MMA Bridge Service Worker — Push + Offline Cache
 // v3 — JS/CSS always network-fresh, only images cached
-const CACHE_NAME = 'mma-bridge-v6';
+const CACHE_NAME = 'mma-bridge-v7';
 const STATIC_ASSETS = [
-  '/mma-bridge/',
-  '/mma-bridge/index.html',
-  '/mma-bridge/events.html',
-  '/mma-bridge/images/mma-bridge-logo.png',
+  '/',
+  '/index.html',
+  '/events.html',
+  '/images/mma-bridge-logo.png',
 ];
 
 // ── Install: cache static assets ──
@@ -68,11 +68,11 @@ self.addEventListener('push', event => {
   event.waitUntil(
     self.registration.showNotification(data.title || 'MMA Bridge', {
       body: data.body || '',
-      icon: '/mma-bridge/images/mma-bridge-logo.png',
-      badge: '/mma-bridge/images/mma-bridge-logo.png',
+      icon: '/images/mma-bridge-logo.png',
+      badge: '/images/mma-bridge-logo.png',
       tag: data.tag || 'mma-bridge',
       requireInteraction: data.requireInteraction || false,
-      data: { url: data.url || '/mma-bridge/events.html' }
+      data: { url: data.url || '/events.html' }
     })
   );
 });
@@ -88,11 +88,11 @@ setInterval(pingClients, 10 * 60 * 1000);
 // ── Notification click handler ──
 self.addEventListener('notificationclick', event => {
   event.notification.close();
-  const target = event.notification.data?.url || '/mma-bridge/events.html';
+  const target = event.notification.data?.url || '/events.html';
   event.waitUntil(
     clients.matchAll({ type: 'window', includeUncontrolled: true }).then(list => {
       for (const client of list) {
-        if (client.url.includes('mma-bridge') && 'focus' in client) {
+        if (client.url.includes('mmabridge.com') && 'focus' in client) {
           client.navigate(target);
           return client.focus();
         }

@@ -2,12 +2,14 @@
   "name": "MMA Bridge",
   "short_name": "MMA Bridge",
   "description": "UFC fan platform — picks, reviews, leaderboard",
-  "start_url": "/mma-bridge/index.html",
+  "start_url": "/index.html",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#0f0f0f",
   "theme_color": "#ff8a3d",
   "icons": [
     { "src": "images/mma-bridge-logo.png?v=2", "sizes": "192x192", "type": "image/png" },
-    { "src": "images/mma-bridge-logo.png?v=2", "sizes": "512x512", "type": "image/png" }
+    { "src": "images/mma-bridge-logo.png?v=2", "sizes": "512x512", "type": "image/png" },
+    { "src": "images/mma-bridge-logo.png?v=2", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ]
 }

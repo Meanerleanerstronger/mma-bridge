@@ -257,6 +257,126 @@ window.applyTilt = (function() {
   };
 })();
 
+// ── PWA install prompt ──────────────────────────
+// Chrome/Edge/Android suppress their own install banner unless the site
+// captures beforeinstallprompt itself, so we show our own dismissible
+// bubble (reuses .sn-bubble styling from site-nudges.js). iOS Safari never
+// fires that event at all, so it gets manual Share > Add to Home Screen
+// instructions instead. Not per-event like the content nudges — uses a
+// 14-day cooldown so a dismiss doesn't hide it forever.
+(function () {
+  var DISMISS_KEY = 'mma_pwa_install_dismissed_at';
+  var COOLDOWN_MS = 14 * 24 * 60 * 60 * 1000;
+
+  function isStandalone() {
+    return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  }
+  function isDismissedRecently() {
+    try {
+      var t = localStorage.getItem(DISMISS_KEY);
+      return !!t && (Date.now() - parseInt(t, 10)) < COOLDOWN_MS;
+    } catch (e) { return false; }
+  }
+  function markDismissed() {
+    try { localStorage.setItem(DISMISS_KEY, String(Date.now())); } catch (e) {}
+  }
+  function shownThisSession() {
+    try { return sessionStorage.getItem('mma_pwa_shown') === '1'; } catch (e) { return false; }
+  }
+  function markShownThisSession() {
+    try { sessionStorage.setItem('mma_pwa_shown', '1'); } catch (e) {}
+  }
+  function isIOS() {
+    return /iphone|ipad|ipod/i.test(navigator.userAgent) ||
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  }
+  function isSafari() {
+    return /^((?!chrome|android|crios|fxios).)*safari/i.test(navigator.userAgent);
+  }
+
+  function showBubble(opts) {
+    document.querySelectorAll('.sn-bubble').forEach(function (b) { b.remove(); });
+
+    var bubble = document.createElement('div');
+    bubble.className = 'sn-bubble';
+    bubble.innerHTML =
+      '<button class="sn-close" type="button" aria-label="Close">' +
+        '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' +
+      '</button>' +
+      '<div class="sn-text">' + opts.text + '</div>' +
+      '<div class="sn-actions">' +
+        '<button class="sn-cta" type="button">' + opts.ctaText + '</button>' +
+        '<button class="sn-later" type="button">Don\'t show this again</button>' +
+      '</div>' +
+      '<div class="sn-tail"></div>';
+    document.body.appendChild(bubble);
+
+    requestAnimationFrame(function () { requestAnimationFrame(function () { bubble.classList.add('sn-in'); }); });
+
+    var closed = false;
+    function close() {
+      if (closed) return;
+      closed = true;
+      bubble.classList.remove('sn-in');
+      bubble.classList.add('sn-out');
+      setTimeout(function () { bubble.remove(); }, 260);
+      document.removeEventListener('click', onOutside, true);
+    }
+    function onOutside(e) { if (!bubble.contains(e.target)) close(); }
+
+    bubble.querySelector('.sn-close').addEventListener('click', function () { markDismissed(); close(); });
+    bubble.querySelector('.sn-later').addEventListener('click', function () { markDismissed(); close(); });
+    bubble.querySelector('.sn-cta').addEventListener('click', function () { opts.onCta(); close(); });
+    setTimeout(function () { document.addEventListener('click', onOutside, true); }, 80);
+  }
+
+  var deferredPrompt = null;
+
+  window.addEventListener('beforeinstallprompt', function (e) {
+    e.preventDefault();
+    deferredPrompt = e;
+    maybeShowAndroid();
+  });
+
+  function maybeShowAndroid() {
+    if (!deferredPrompt || isStandalone() || isDismissedRecently() || shownThisSession()) return;
+    markShownThisSession();
+    showBubble({
+      text: 'Install <strong>MMA Bridge</strong> for a faster, full-screen app experience — right from your home screen.',
+      ctaText: 'Install App',
+      onCta: function () {
+        var p = deferredPrompt;
+        deferredPrompt = null;
+        if (p) p.prompt();
+      }
+    });
+  }
+
+  function maybeShowIOS() {
+    if (isStandalone() || isDismissedRecently() || shownThisSession()) return;
+    if (!isIOS() || !isSafari()) return;
+    markShownThisSession();
+    showBubble({
+      text: 'Install <strong>MMA Bridge</strong> on your home screen: tap <strong>Share</strong>, then <strong>Add to Home Screen</strong>.',
+      ctaText: 'Got It',
+      onCta: function () {}
+    });
+  }
+
+  function initPwaPrompt() {
+    if (isStandalone()) return;
+    setTimeout(function () {
+      if (isIOS()) maybeShowIOS();
+      else maybeShowAndroid();
+    }, 6000);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPwaPrompt);
+  } else {
+    initPwaPrompt();
+  }
+})();
+
 // ── Page transition crossfade ──────────────────
 (function() {
   // Inject overlay element
