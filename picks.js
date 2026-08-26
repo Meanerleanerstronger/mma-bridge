@@ -204,19 +204,56 @@ function oddsSpanHtml(val, isFav, numClass) {
     const m = String(h || '').match(/(\d+)'\s*(\d+)/);
     return m ? parseInt(m[1]) * 12 + parseInt(m[2]) : NaN;
   }
+  function resLetter(result) {
+    const r = (result || '').toUpperCase();
+    return r === 'W' ? 'W' : r === 'L' ? 'L' : (r || '–');
+  }
+  function resClass(result) {
+    const r = (result || '').toUpperCase();
+    return r === 'W' ? 'w' : r === 'L' ? 'l' : 'nc';
+  }
+  // Hover popup uses data-tip + CSS (see .fc-tip in style.css), not the
+  // native title attribute — title fights with the custom bubble and
+  // shows twice, and doesn't work well as a tap target on mobile.
+  function fightTip(f, { withOpponent } = {}) {
+    const r = (f.result || '').toUpperCase();
+    const verb = r === 'W' ? 'Won' : r === 'L' ? 'Lost' : 'No contest';
+    const vs = withOpponent && f.opponent ? ` vs ${f.opponent}` : '';
+    return `${verb}${vs}${f.method ? ' · ' + f.method : ''}`;
+  }
   function last5DotsHtml(last5, side) {
     const fights = (last5 || []).slice(0, 5);
     if (!fights.length) return `<span class="fc-cmp-l5-empty">—</span>`;
     return `<span class="fc-cmp-l5 fc-cmp-l5-${side}">${fights.map(f => {
-      const r = (f.result || '').toUpperCase();
-      const cls = r === 'W' ? 'w' : r === 'L' ? 'l' : 'nc';
-      const title = `${esc(f.opponent || '')}${f.method ? ' · ' + esc(f.method) : ''}`;
-      return `<span class="fc-cmp-l5-dot fc-cmp-l5-${cls}" title="${title}">${r || '–'}</span>`;
+      const tip = esc(fightTip(f, { withOpponent: true }));
+      return `<span class="fc-cmp-l5-dot fc-cmp-l5-${resClass(f.result)} fc-tip" data-tip="${tip}" tabindex="0">${resLetter(f.result)}</span>`;
     }).join('')}</span>`;
+  }
+  // Fighters who both A and B have fought in their last 5 — matched by
+  // normalized opponent name.
+  function commonOpponents(last5A, last5B) {
+    const norm = n => String(n || '').trim().toLowerCase();
+    const byName = {};
+    (last5B || []).forEach(f => { const k = norm(f.opponent); if (k) byName[k] = f; });
+    const shared = [];
+    (last5A || []).forEach(fa => {
+      const k = norm(fa.opponent);
+      if (k && byName[k]) shared.push({ name: fa.opponent, a: fa, b: byName[k] });
+    });
+    return shared;
+  }
+  function commonOpponentsHtml(shared) {
+    return `<div class="fc-cmp-common-list">${shared.map(s => `
+      <div class="fc-cmp-common-item">
+        <span class="fc-cmp-l5-dot fc-cmp-l5-${resClass(s.a.result)} fc-tip" data-tip="${esc(fightTip(s.a))}" tabindex="0">${resLetter(s.a.result)}</span>
+        <span class="fc-cmp-common-name">${esc(s.name)}</span>
+        <span class="fc-cmp-l5-dot fc-cmp-l5-${resClass(s.b.result)} fc-tip" data-tip="${esc(fightTip(s.b))}" tabindex="0">${resLetter(s.b.result)}</span>
+      </div>`).join('')}</div>`;
   }
   const TAPE_ROWS = [
     ['record',  'RECORD'],
     ['last5',   'LAST 5'],
+    ['common',  'COMMON OPPONENTS'],
     ['nation',  'NATION'],
     ['out',     'FIGHTS OUT OF'],
     ['age',     'AGE'],
@@ -246,6 +283,14 @@ function oddsSpanHtml(val, isFav, numClass) {
             <span class="fc-cmp-val fc-cmp-b">${last5DotsHtml(fdB?.last5, 'b')}</span>
           </div>`;
         }
+        if (key === 'common') {
+          const shared = commonOpponents(fdA?.last5, fdB?.last5);
+          if (!shared.length) return '';
+          return `<div class="fc-cmp-row fc-cmp-row-common">
+            <span class="fc-cmp-lbl fc-cmp-lbl-common">${label}</span>
+            ${commonOpponentsHtml(shared)}
+          </div>`;
+        }
         const rawA = valsA[key], rawB = valsB[key];
         if (!rawA && !rawB) return '';
         // Only height/reach/age get a "leader" highlight — a longer reach
@@ -267,8 +312,10 @@ function oddsSpanHtml(val, isFav, numClass) {
     if (!rows) return '';
     return `<div class="fc-cmp">
       <button class="fc-cmp-hd" type="button" aria-expanded="false">
-        <span class="fc-cmp-hd-line"></span>Tale of the Tape<span class="fc-cmp-hd-line"></span>
-        <svg class="fc-cmp-chev" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        <span class="fc-cmp-hd-label">Tale of the Tape</span>
+        <span class="fc-cmp-hd-chev">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </span>
       </button>
       <div class="fc-cmp-body">${rows}</div>
     </div>`;

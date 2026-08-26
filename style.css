@@ -13107,29 +13107,41 @@ body.light-mode .pk-poster-bg::after {
    (age/height/reach/stance/record) instead of deep striking-analytics
    numbers nobody but a coach reads. Closed by default. */
 .fc-cmp {
-  padding: 4px 16px 6px;
+  padding: 10px 16px 6px;
   background: rgba(0,0,0,0.15);
   border-top: 1px solid rgba(255,255,255,0.05);
 }
+/* Styled like an actual dropdown control (pill, border, chevron-in-circle)
+   so it reads as clickable instead of a plain section label. */
 .fc-cmp-hd {
-  display: flex; align-items: center; gap: 10px;
-  width: 100%; padding: 10px 0;
-  background: none; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  width: 100%; padding: 11px 14px;
+  background: rgba(255,138,61,0.08);
+  border: 1px solid rgba(255,138,61,0.28);
+  border-radius: 9px;
+  cursor: pointer;
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.52rem; font-weight: 800;
-  letter-spacing: 0.18em; text-transform: uppercase;
-  color: rgba(255,255,255,0.32);
-  transition: color 0.15s;
+  font-size: 0.62rem; font-weight: 800;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.78);
+  transition: background 0.15s, border-color 0.15s;
 }
-.fc-cmp-hd:hover { color: rgba(255,255,255,0.5); }
-.fc-cmp-hd-line { flex: 1; height: 1px; background: rgba(255,255,255,0.06); }
-.fc-cmp-chev {
-  flex-shrink: 0; transition: transform 0.2s ease;
+.fc-cmp-hd:hover { background: rgba(255,138,61,0.14); border-color: rgba(255,138,61,0.45); }
+.fc-cmp-open > .fc-cmp-hd { border-radius: 9px 9px 0 0; }
+.fc-cmp-hd-chev {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0;
+  background: rgba(255,138,61,0.16); color: #ff8a3d;
+  transition: transform 0.2s ease, background 0.15s;
 }
-.fc-cmp-open .fc-cmp-chev { transform: rotate(180deg); }
+.fc-cmp-hd:hover .fc-cmp-hd-chev { background: rgba(255,138,61,0.24); }
+.fc-cmp-open .fc-cmp-hd-chev { transform: rotate(180deg); }
 .fc-cmp-body {
   display: none;
-  padding-bottom: 10px;
+  padding: 10px 4px 10px;
+  border: 1px solid rgba(255,138,61,0.28);
+  border-top: none;
+  border-radius: 0 0 9px 9px;
 }
 .fc-cmp-open .fc-cmp-body { display: block; }
 .fc-cmp-row {
@@ -13163,23 +13175,86 @@ body.light-mode .pk-poster-bg::after {
   width: 17px; height: 17px; border-radius: 50%; flex-shrink: 0;
   font-family: 'Montserrat', sans-serif;
   font-size: 0.5rem; font-weight: 900;
-  cursor: default;
+  cursor: pointer;
 }
 .fc-cmp-l5-w  { background: rgba(74,222,128,0.16); color: #4ade80; }
 .fc-cmp-l5-l  { background: rgba(248,113,113,0.14); color: #f87171; }
 .fc-cmp-l5-nc { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.3); }
 .fc-cmp-l5-empty { color: rgba(255,255,255,0.18); }
+/* Common opponents — shared foes from each fighter's last 5, with the
+   same colored W/L dots (and hover popup) as the Last 5 row. */
+.fc-cmp-row-common { grid-template-columns: 1fr; padding-top: 8px; }
+.fc-cmp-lbl-common {
+  display: block; text-align: center; min-width: 0;
+  margin-bottom: 6px;
+}
+.fc-cmp-common-list { display: flex; flex-direction: column; gap: 6px; }
+.fc-cmp-common-item {
+  display: grid; grid-template-columns: 17px 1fr 17px;
+  align-items: center; gap: 10px;
+}
+.fc-cmp-common-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.68rem; font-weight: 700;
+  color: rgba(255,255,255,0.5);
+  text-align: center; white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis;
+}
+/* Hover/tap popup — how a fight was won or lost. CSS-only bubble instead
+   of the native title attribute so it can't double up or lag. */
+.fc-tip { position: relative; }
+.fc-tip::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 7px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: #14131b;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.01em;
+  text-transform: none;
+  white-space: normal; width: max-content; max-width: 180px;
+  text-align: center;
+  padding: 7px 10px;
+  border-radius: 7px;
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.45);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity 0.12s ease, transform 0.12s ease;
+  z-index: 60;
+}
+.fc-tip::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  border: 5px solid transparent;
+  border-top-color: #14131b;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity 0.12s ease, transform 0.12s ease;
+  z-index: 60;
+}
+.fc-tip:hover::after, .fc-tip:focus-visible::after, .fc-tip:active::after,
+.fc-tip:hover::before, .fc-tip:focus-visible::before, .fc-tip:active::before {
+  opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0);
+}
 body.light-mode .fc-cmp { background: rgba(0,0,0,0.02); border-top-color: rgba(0,0,0,0.06); }
-body.light-mode .fc-cmp-hd { color: rgba(0,0,0,0.32); }
-body.light-mode .fc-cmp-hd:hover { color: rgba(0,0,0,0.55); }
-body.light-mode .fc-cmp-hd-line { background: rgba(0,0,0,0.08); }
+body.light-mode .fc-cmp-hd { background: rgba(255,122,26,0.08); border-color: rgba(255,122,26,0.3); color: rgba(0,0,0,0.72); }
+body.light-mode .fc-cmp-hd:hover { background: rgba(255,122,26,0.14); }
+body.light-mode .fc-cmp-body { border-color: rgba(255,122,26,0.3); }
 body.light-mode .fc-cmp-val { color: rgba(0,0,0,0.45); }
 body.light-mode .fc-cmp-lbl { color: rgba(0,0,0,0.32); }
+body.light-mode .fc-cmp-common-name { color: rgba(0,0,0,0.5); }
 @media (max-width: 640px) {
-  .fc-cmp { padding: 2px 12px 4px; }
+  .fc-cmp { padding: 8px 12px 4px; }
   .fc-cmp-val { font-size: 0.72rem; }
   .fc-cmp-lbl { font-size: 0.46rem; min-width: 46px; }
   .fc-cmp-l5-dot { width: 15px; height: 15px; font-size: 0.44rem; }
+  .fc-cmp-common-item { grid-template-columns: 15px 1fr 15px; gap: 8px; }
+  .fc-cmp-common-name { font-size: 0.62rem; }
+  .fc-tip::after { font-size: 0.58rem; max-width: 150px; }
 }
 
 /* Fighter side: column, content at bottom, relative for photo */
