@@ -6068,7 +6068,7 @@ body.light-mode .fc-fighter-link:hover {
   font-family: 'Montserrat', sans-serif; font-size: 0.8rem;
   font-weight: 800; letter-spacing: 0.13em; text-transform: uppercase;
   cursor: pointer; align-items: center; justify-content: center; gap: 7px;
-  transition: all 0.18s ease;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
 }
 .pk-dd-icon { flex-shrink: 0; color: rgba(255,255,255,0.2); transition: color 0.18s; }
 .pk-dd-label { transition: color 0.18s; }
@@ -6206,7 +6206,7 @@ body.light-mode .pk-info-pop-body strong { color: rgba(0,0,0,0.75); }
   letter-spacing: 0.08em; text-transform: uppercase;
   border-radius: 6px; padding: 8px 10px; cursor: pointer;
   background: rgba(255,255,255,0.04); border: 1.5px solid rgba(255,255,255,0.1);
-  color: rgba(255,255,255,0.35); transition: all 0.15s; white-space: nowrap;
+  color: rgba(255,255,255,0.35); transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.15s; white-space: nowrap;
 }
 .pk-seg-btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.18); color: rgba(255,255,255,0.65); }
 .pk-seg-btn.active.pk-seg-ko  { background: rgba(224,107,26,0.1); border-color: rgba(224,107,26,0.42); color: #e06b1a; }
@@ -6532,7 +6532,7 @@ body.light-mode .pk-info-pop-body strong { color: rgba(0,0,0,0.75); }
   letter-spacing: 0.05em;
   color: rgba(255,255,255,0.28);
   padding: 14px 6px; cursor: pointer;
-  transition: all 0.12s;
+  transition: background 0.12s, border-color 0.12s, color 0.12s, transform 0.12s;
 }
 .pk-round-btn:hover { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.6); }
 .pk-round-btn.active.ko  { background: rgba(224,107,26,0.12); border-color: rgba(224,107,26,0.5); color: #e06b1a; box-shadow: none; }
@@ -6801,7 +6801,7 @@ body.pk-save-bar-open .pk-lb-float { bottom: 140px; }
   border-radius: 14px;
   padding: 22px 14px 18px;
   cursor: pointer;
-  transition: all 0.22s cubic-bezier(0.34, 1.2, 0.64, 1);
+  transition: background 0.22s cubic-bezier(0.34, 1.2, 0.64, 1), border-color 0.22s cubic-bezier(0.34, 1.2, 0.64, 1), color 0.22s cubic-bezier(0.34, 1.2, 0.64, 1), transform 0.22s cubic-bezier(0.34, 1.2, 0.64, 1);
   text-align: center;
 }
 .pk-fotn-tile:hover {
@@ -6949,7 +6949,7 @@ body.pk-save-bar-open .pk-lb-float { bottom: 140px; }
   color: rgba(224,107,26,0.9);
   padding: 11px 20px;
   box-shadow: 0 0 20px rgba(190,110,10,0.12), inset 0 1px 0 rgba(224,107,26,0.1);
-  transition: all 0.18s;
+  transition: background 0.18s, border-color 0.18s, color 0.18s, transform 0.18s;
 }
 .pk-fotn-pick-btn:hover {
   background: linear-gradient(135deg, rgba(255,165,0,0.28) 0%, rgba(255,100,0,0.18) 100%);
@@ -6967,7 +6967,7 @@ body.pk-save-bar-open .pk-lb-float { bottom: 140px; }
   letter-spacing: 0.1em; text-transform: uppercase;
   color: rgba(224,107,26,0.65);
   padding: 8px 16px;
-  transition: all 0.15s;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.15s;
 }
 .pk-fotn-change-btn:hover {
   border-color: rgba(224,107,26,0.55);
@@ -6984,7 +6984,7 @@ body.pk-save-bar-open .pk-lb-float { bottom: 140px; }
   letter-spacing: 0.1em; text-transform: uppercase;
   color: rgba(255,255,255,0.5);
   padding: 8px 16px;
-  transition: all 0.15s;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.15s;
 }
 .pk-fotn-cancel-btn:hover {
   background: rgba(255,60,60,0.1);
@@ -7049,7 +7049,7 @@ body.pk-fotn-picking-body .pk-dossier-fight:hover ~ #pkFotnCursor,
   letter-spacing: 0.1em; text-transform: uppercase;
   padding: 12px 28px;
   box-shadow: 0 0 24px rgba(200,130,12,0.2);
-  transition: all 0.15s;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.15s;
 }
 .pk-fotn-confirm-yes:hover {
   background: linear-gradient(135deg, rgba(224,107,26,0.3) 0%, rgba(190,110,10,0.2) 100%);
@@ -7065,7 +7065,7 @@ body.pk-fotn-picking-body .pk-dossier-fight:hover ~ #pkFotnCursor,
   font-size: 0.7rem; font-weight: 600;
   letter-spacing: 0.06em; text-transform: uppercase;
   padding: 12px 20px;
-  transition: all 0.15s;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.15s;
 }
 .pk-fotn-confirm-no:hover {
   color: rgba(255,255,255,0.7);
@@ -7879,7 +7879,7 @@ body.light-mode .sf-legal { color: rgba(0,0,0,0.25); }
   padding: 5px 12px;
   font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 500;
   color: rgba(255,255,255,0.45);
-  cursor: pointer; transition: all 0.18s ease;
+  cursor: pointer; transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
   margin-top: 0;
 }
 .pk-hiw-btn:hover { background: rgba(255,255,255,0.09); color: rgba(255,255,255,0.75); border-color: rgba(255,255,255,0.2); }
@@ -7892,7 +7892,7 @@ body.light-mode .sf-legal { color: rgba(0,0,0,0.25); }
   padding: 5px 12px;
   font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600;
   color: rgba(224,107,26,0.8);
-  cursor: pointer; transition: all 0.18s ease;
+  cursor: pointer; transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
   margin-top: 10px;
 }
 .pk-consensus-btn:hover { background: rgba(224,107,26,0.2); color: #e06b1a; border-color: rgba(224,107,26,0.5); }
@@ -9444,7 +9444,7 @@ body.light-mode .odds-tag { color: #e06b1a; background: rgba(180,130,10,0.1); }
   color: rgba(255,255,255,0.65);
   font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.8rem;
   letter-spacing: 0.1em; text-transform: uppercase;
-  cursor: pointer; transition: all 0.15s; white-space: nowrap;
+  cursor: pointer; transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.15s; white-space: nowrap;
 }
 .pk-switch-btn:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.38); color: #fff; }
 
@@ -9489,7 +9489,7 @@ body.light-mode .odds-tag { color: #e06b1a; background: rgba(180,130,10,0.1); }
   background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
   color: rgba(255,255,255,0.4); cursor: pointer;
   display: flex; align-items: center; justify-content: center;
-  transition: all 0.15s;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.15s;
 }
 .pk-switcher-close:hover { background: rgba(255,255,255,0.12); color: #fff; }
 
@@ -10749,7 +10749,7 @@ button:active, [role="button"]:active, .lb-tab:active, .pk-seg-btn:active,
   color: rgba(255,255,255,0.45);
   font-family: 'Montserrat', sans-serif; font-size: 0.85rem; font-weight: 800;
   letter-spacing: 0.08em; text-transform: uppercase;
-  cursor: pointer; transition: all 0.18s ease;
+  cursor: pointer; transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
 }
 .pk-replay-btn:hover { background: rgba(255,255,255,0.09); color: rgba(255,255,255,0.8); }
 
@@ -13461,6 +13461,19 @@ body.light-mode .fc-cmp-common-name { color: rgba(0,0,0,0.5); }
 
 /* ── Mobile overrides ── */
 @media (max-width: 640px) {
+  /* backdrop-filter: blur() forces a GPU compositing layer everywhere it's
+     used — cheap once on a desktop GPU, expensive repeated ~13x per page
+     (.fc-head, once per fight card) or on anything that scrolls with the
+     page while sticky/fixed (.pk-bottom-save-inner, .pk-lb-float). Flagged
+     directly as "too laggy on the average phone." Drop the blur on mobile
+     specifically and lean on the solid/near-solid background each of these
+     already has — visually near-identical, none of the compositing cost. */
+  .fc-head, .pk-fotn-bar, .pk-back, .pk-switch-btn,
+  .pk-bottom-save-inner, .pk-lb-float {
+    backdrop-filter: none !important;
+  }
+  .pk-bottom-save-inner { background: #1c1c1c !important; }
+  .pk-lb-float { background: rgba(10,10,14,0.98) !important; }
   .pk-poster-bg { height: 380px !important; }
   .pk-hd { padding: 90px 16px 28px !important; }
   .pk-hd-title { font-size: clamp(1.6rem, 7vw, 2.4rem) !important; }
@@ -13475,6 +13488,17 @@ body.light-mode .fc-cmp-common-name { color: rgba(0,0,0,0.5); }
   .fc-card.fc-maincrd .fc-name { font-size: 1.5rem !important; }
   .fc-card.fc-main    .fc-name { font-size: 1.75rem !important; }
   .fc-vs-col { width: 52px !important; }
+
+  /* "Turn off a lot of the borders, rounded borders" on mobile — the
+     radii below aren't wrong on a desktop-size card, but stacked at
+     phone width every pill/button/card reads as one more rounded box
+     competing for attention. Scaled down, not removed outright. */
+  .fc-card { border-radius: 10px !important; }
+  .fc-cmp-hd { border-radius: 7px; }
+  .fc-cmp-open > .fc-cmp-hd { border-radius: 7px 7px 0 0; }
+  .fc-cmp-body { border-radius: 0 0 7px 7px; }
+  .fc-fighter-link { border-radius: 9px; }
+  .pk-bottom-save-inner { border-radius: 10px !important; }
 }
 @media (max-width: 380px) {
   .fc-name { font-size: 1.05rem !important; }
