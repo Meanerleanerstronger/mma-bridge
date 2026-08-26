@@ -13124,6 +13124,9 @@ body.light-mode .pk-poster-bg::after {
 .fc-cmp-val.fc-cmp-a { text-align: right; }
 .fc-cmp-val.fc-cmp-b { text-align: left; }
 .fc-cmp-val.fc-cmp-lead { color: #ff8a3d; font-weight: 900; }
+.fc-cmp-val.fc-cmp-streak-w { color: #4ade80; }
+.fc-cmp-val.fc-cmp-streak-l { color: #f87171; }
+.fc-cmp-val.fc-cmp-streak-w.fc-cmp-lead, .fc-cmp-val.fc-cmp-streak-l.fc-cmp-lead { color: #ff8a3d; }
 .fc-cmp-lbl {
   font-family: 'Montserrat', sans-serif;
   font-size: 0.52rem; font-weight: 800;
@@ -13155,10 +13158,14 @@ body.light-mode .pk-poster-bg::after {
   display: block; text-align: center; min-width: 0;
   margin-bottom: 6px;
 }
-.fc-cmp-common-list { display: flex; flex-direction: column; gap: 6px; }
+.fc-cmp-common-list { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+/* Dots sit right against the shared opponent's name instead of pinned
+   out at the row edges — was a 3-column grid stretching the name cell
+   to fill the row, which shoved each dot far away from what it's
+   actually the result of. */
 .fc-cmp-common-item {
-  display: grid; grid-template-columns: 17px 1fr 17px;
-  align-items: center; gap: 10px;
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  max-width: 100%;
 }
 .fc-cmp-common-name {
   font-family: 'Montserrat', sans-serif;
@@ -13219,7 +13226,7 @@ body.light-mode .fc-cmp-common-name { color: rgba(0,0,0,0.5); }
   .fc-cmp-val { font-size: 0.72rem; }
   .fc-cmp-lbl { font-size: 0.46rem; min-width: 46px; }
   .fc-cmp-l5-dot { width: 15px; height: 15px; font-size: 0.44rem; }
-  .fc-cmp-common-item { grid-template-columns: 15px 1fr 15px; gap: 8px; }
+  .fc-cmp-common-item { gap: 6px; }
   .fc-cmp-common-name { font-size: 0.62rem; }
   .fc-tip::after { font-size: 0.58rem; max-width: 150px; }
 }

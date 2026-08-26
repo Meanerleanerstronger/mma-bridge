@@ -193,13 +193,13 @@ function oddsSpanHtml(val, isFav, numClass) {
     return `${wins}-${losses}${draws ? `-${draws}` : ''}`;
   }
 
-  // ── Tale of the Tape — collapsed dropdown, matches what tapology.com's
-  // own "Fighter Comparison" actually shows (checked live): record, last
-  // 5 fights as a W/L dot sequence, nation, fights-out-of, age, height,
-  // reach. No stance row — tapology doesn't show one either, and the
-  // deep striking-analytics numbers from the first pass at this got
-  // called out as stuff nobody but a coach reads. Closed by default so
-  // it doesn't sit there taking up space on every card.
+  // ── Tale of the Tape — collapsed dropdown. Started as a copy of
+  // tapology.com's own "Fighter Comparison" fields, but "fights out of"
+  // got called out as nobody-cares filler with no bearing on a pick, so
+  // it's swapped for rank/streak/finish-rate — actual signal for who's
+  // going to win and, since this site scores a method+round pick too,
+  // for how the fight is likely to end. Closed by default so it doesn't
+  // sit there taking up space on every card.
   function heightToInches(h) {
     const m = String(h || '').match(/(\d+)'\s*(\d+)/);
     return m ? parseInt(m[1]) * 12 + parseInt(m[2]) : NaN;
@@ -250,12 +250,42 @@ function oddsSpanHtml(val, isFav, numClass) {
         <span class="fc-cmp-l5-dot fc-cmp-l5-${resClass(s.b.result)} fc-tip" data-tip="${esc(fightTip(s.b))}" tabindex="0">${resLetter(s.b.result)}</span>
       </div>`).join('')}</div>`;
   }
+  // Current streak — how many fights in a row a fighter has won/lost,
+  // read off the front of last5 (most recent first). Actually decision-
+  // relevant for picking a winner, unlike "fights out of."
+  function currentStreak(last5) {
+    const first = last5 && last5[0] && (last5[0].result || '').toUpperCase();
+    if (first !== 'W' && first !== 'L') return null;
+    let count = 0;
+    for (const f of last5) {
+      if ((f.result || '').toUpperCase() !== first) break;
+      count++;
+    }
+    return { letter: first, count };
+  }
+  // Finish rate — of the last 5, how many ended by KO/TKO/Sub rather than
+  // going to decision. Directly useful here since this site scores a
+  // method + round pick on top of the winner pick, not just Tapology-copy
+  // filler.
+  function finishRate(last5) {
+    const fights = (last5 || []).slice(0, 5);
+    if (!fights.length) return null;
+    const finishes = fights.filter(f => {
+      const m = (f.method || '').toLowerCase();
+      return m && !m.includes('decision') && (f.result || '').toUpperCase() === 'W';
+    }).length;
+    const wins = fights.filter(f => (f.result || '').toUpperCase() === 'W').length;
+    if (!wins) return { finishes: 0, wins: 0 };
+    return { finishes, wins };
+  }
   const TAPE_ROWS = [
+    ['ranking', 'RANK'],
     ['record',  'RECORD'],
+    ['streak',  'STREAK'],
+    ['finish',  'FINISH RATE'],
     ['last5',   'LAST 5'],
     ['common',  'COMMON OPPONENTS'],
     ['nation',  'NATION'],
-    ['out',     'FIGHTS OUT OF'],
     ['age',     'AGE'],
     ['height',  'HEIGHT'],
     ['reach',   'REACH'],
@@ -267,11 +297,11 @@ function oddsSpanHtml(val, isFav, numClass) {
       ? `${fd.flag ? fd.flag + ' ' : ''}${esc(fd.nationality || '')}` : '';
     const valsA = {
       record: recA, age: fdA?.age, height: fdA?.height, reach: fdA?.reach,
-      out: fdA?.fightingOut, nation: nationHtml(fdA),
+      nation: nationHtml(fdA),
     };
     const valsB = {
       record: recB, age: fdB?.age, height: fdB?.height, reach: fdB?.reach,
-      out: fdB?.fightingOut, nation: nationHtml(fdB),
+      nation: nationHtml(fdB),
     };
     const rows = TAPE_ROWS
       .map(([key, label]) => {
@@ -289,6 +319,50 @@ function oddsSpanHtml(val, isFav, numClass) {
           return `<div class="fc-cmp-row fc-cmp-row-common">
             <span class="fc-cmp-lbl fc-cmp-lbl-common">${label}</span>
             ${commonOpponentsHtml(shared)}
+          </div>`;
+        }
+        if (key === 'ranking') {
+          const rawA = fdA?.ranking, rawB = fdB?.ranking;
+          if (!rawA && !rawB) return '';
+          const rankNum = r => {
+            if (!r) return null;
+            if (/champion/i.test(r)) return 0;
+            const m = String(r).match(/(\d+)/);
+            return m ? parseInt(m[1]) : null;
+          };
+          const nA = rankNum(rawA), nB = rankNum(rawB);
+          const aWins = nA != null && (nB == null || nA < nB);
+          const bWins = nB != null && (nA == null || nB < nA);
+          return `<div class="fc-cmp-row">
+            <span class="fc-cmp-val fc-cmp-a${aWins ? ' fc-cmp-lead' : ''}">${rawA ? esc(String(rawA)) : 'Unranked'}</span>
+            <span class="fc-cmp-lbl">${label}</span>
+            <span class="fc-cmp-val fc-cmp-b${bWins ? ' fc-cmp-lead' : ''}">${rawB ? esc(String(rawB)) : 'Unranked'}</span>
+          </div>`;
+        }
+        if (key === 'streak') {
+          const sA = currentStreak(fdA?.last5), sB = currentStreak(fdB?.last5);
+          if (!sA && !sB) return '';
+          const score = s => s ? (s.letter === 'W' ? s.count : -s.count) : 0;
+          const scoreA = score(sA), scoreB = score(sB);
+          const aWins = scoreA > scoreB, bWins = scoreB > scoreA;
+          const cls = s => s ? (s.letter === 'W' ? ' fc-cmp-streak-w' : ' fc-cmp-streak-l') : '';
+          return `<div class="fc-cmp-row">
+            <span class="fc-cmp-val fc-cmp-a${cls(sA)}${aWins ? ' fc-cmp-lead' : ''}">${sA ? sA.count + sA.letter : '—'}</span>
+            <span class="fc-cmp-lbl">${label}</span>
+            <span class="fc-cmp-val fc-cmp-b${cls(sB)}${bWins ? ' fc-cmp-lead' : ''}">${sB ? sB.count + sB.letter : '—'}</span>
+          </div>`;
+        }
+        if (key === 'finish') {
+          const fA = finishRate(fdA?.last5), fB = finishRate(fdB?.last5);
+          if (!fA && !fB) return '';
+          const pct = f => f && f.wins ? f.finishes / f.wins : -1;
+          const pA = pct(fA), pB = pct(fB);
+          const aWins = pA >= 0 && pA > pB, bWins = pB >= 0 && pB > pA;
+          const label5 = f => f ? (f.wins ? `${f.finishes}/${f.wins} wins` : 'No wins in L5') : '—';
+          return `<div class="fc-cmp-row">
+            <span class="fc-cmp-val fc-cmp-a${aWins ? ' fc-cmp-lead' : ''}">${label5(fA)}</span>
+            <span class="fc-cmp-lbl">${label}</span>
+            <span class="fc-cmp-val fc-cmp-b${bWins ? ' fc-cmp-lead' : ''}">${label5(fB)}</span>
           </div>`;
         }
         const rawA = valsA[key], rawB = valsB[key];
