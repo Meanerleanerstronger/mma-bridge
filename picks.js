@@ -470,6 +470,10 @@ function oddsSpanHtml(val, isFav, numClass) {
   let localPicks = {};   // pending local state (includes 'fotn' key)
   let hypeAvg    = 0;
   let hypeCount  = 0;
+  // False until loadEventExtras() gets a real answer (success, or gives up
+  // after retrying through a Render cold-start). Lets the hype badges show
+  // a loading skeleton instead of just vanishing while the backend spins up.
+  let hypeLoaded = false;
   let localHype  = parseInt(localStorage.getItem(`hype_${eventId}`) || '0', 10);
   // List View (current one-fight-per-row layout) vs Card View (a compact
   // poster-style grid — same idea as admin's Fight Card Builder graphic,
@@ -621,15 +625,28 @@ function oddsSpanHtml(val, isFav, numClass) {
   }
 
   // ── Load community hype avg from backend ──────
+  // Render's free tier cold-starts in ~30s, but this used to give up after
+  // a single retry 3s in — nowhere close to covering that, so the
+  // Community Hype badge just silently never appeared until a reload.
+  // Keep retrying every 3.5s for up to ~45s (13 tries) before actually
+  // giving up, and only THEN mark hypeLoaded so the skeleton can clear —
+  // whether that lands on real data or a confirmed "still nothing".
   async function loadEventExtras() {
-    try {
-      const res = await fetch(`${apiBase()}/ratings/${encodeURIComponent(eventId)}`);
-      if (res.ok) {
-        const d = await res.json();
-        hypeAvg   = parseFloat(d.avg_hype || 0);
-        hypeCount = parseInt(d.total_ratings || 0);
-      }
-    } catch {}
+    const MAX_TRIES = 13, DELAY_MS = 3500;
+    for (let attempt = 1; attempt <= MAX_TRIES; attempt++) {
+      try {
+        const res = await fetch(`${apiBase()}/ratings/${encodeURIComponent(eventId)}`);
+        if (res.ok) {
+          const d = await res.json();
+          hypeAvg   = parseFloat(d.avg_hype || 0);
+          hypeCount = parseInt(d.total_ratings || 0);
+          hypeLoaded = true;
+          return;
+        }
+      } catch {}
+      if (attempt < MAX_TRIES) await new Promise(r => setTimeout(r, DELAY_MS));
+    }
+    hypeLoaded = true; // gave up — show the confirmed-empty state, not skeleton forever
   }
 
   // ── Save hype rating (instant) ────────────────
@@ -1119,12 +1136,24 @@ function oddsSpanHtml(val, isFav, numClass) {
     }
     if (hdBadge) {
       if (hypeCount > 0) {
+        hdBadge.classList.remove('pk-hdb-skeleton');
         hdBadge.style.display = '';
         hdBadge.innerHTML = `
           <div class="pk-hdb-num">${hypeAvg.toFixed(1)}<span class="pk-hdb-denom">/10</span></div>
           <div class="pk-hdb-label">Community Hype</div>
           <div class="pk-hdb-count">${hypeCount} rating${hypeCount !== 1 ? 's' : ''}</div>`;
+      } else if (!hypeLoaded) {
+        // Still waiting on the backend (likely a Render cold-start) —
+        // show a pulsing placeholder instead of just nothing.
+        hdBadge.classList.add('pk-hdb-skeleton');
+        hdBadge.style.display = '';
+        hdBadge.innerHTML = `
+          <div class="pk-hdb-num pk-hdb-skel-bar"></div>
+          <div class="pk-hdb-label pk-hdb-skel-bar"></div>
+          <div class="pk-hdb-count pk-hdb-skel-bar"></div>`;
       } else {
+        // Confirmed loaded, genuinely zero ratings yet — nothing to show.
+        hdBadge.classList.remove('pk-hdb-skeleton');
         hdBadge.style.display = 'none';
       }
     }
@@ -2287,6 +2316,11 @@ function oddsSpanHtml(val, isFav, numClass) {
             <div class="pk-hdb-num">${hypeAvg.toFixed(1)}<span class="pk-hdb-denom">/10</span></div>
             <div class="pk-hdb-label">Community Hype</div>
             <div class="pk-hdb-count">${hypeCount} rating${hypeCount !== 1 ? 's' : ''}</div>
+          </div>` : !hypeLoaded ? `
+          <div class="pk-hd-hype-badge pk-hdb-skeleton" id="pkHdHypeBadge">
+            <div class="pk-hdb-num pk-hdb-skel-bar"></div>
+            <div class="pk-hdb-label pk-hdb-skel-bar"></div>
+            <div class="pk-hdb-count pk-hdb-skel-bar"></div>
           </div>` : `<div class="pk-hd-hype-badge" id="pkHdHypeBadge" style="display:none"></div>`}
           <div class="pk-hd-eyebrow">${!isCompleted && !isLocked ? 'Make Your Picks' : (isCompleted ? 'Results' : 'Picks Locked')}</div>
           <h1 class="pk-hd-title">${esc(event.name || '')}</h1>
@@ -3194,13 +3228,6 @@ function oddsSpanHtml(val, isFav, numClass) {
     });
   }
 
-  // Retry hype fetch in background (handles Render cold-start delay)
-  if (hypeCount === 0) {
-    setTimeout(async () => {
-      await loadEventExtras();
-      updateHypeWidget();
-    }, 3000);
-  }
 
   // ── Auto-open event switcher if ?picker=1 ────
   if (new URLSearchParams(location.search).get('picker') === '1') {

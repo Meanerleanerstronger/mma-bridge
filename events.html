@@ -550,6 +550,13 @@
     .ov-comm-num.ov-comm-max { color:#f5d474;text-shadow:0 0 14px rgba(240,195,78,.5); }
     .ov-comm-label { font-family:'Inter',sans-serif;font-size:.48rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(224,107,26,.5); }
     .ov-comm-count { font-family:'Inter',sans-serif;font-size:.46rem;font-weight:500;color:rgba(255,255,255,.22);letter-spacing:.04em; }
+    .ov-comm-skel-bar {
+      background:linear-gradient(90deg,rgba(255,255,255,.05) 25%,rgba(255,255,255,.1) 50%,rgba(255,255,255,.05) 75%);
+      background-size:200% 100%; animation:skel-shimmer 1.4s infinite; border-radius:4px;
+    }
+    .ov-comm-num.ov-comm-skel-bar { width:42px; height:24px; }
+    .ov-comm-label.ov-comm-skel-bar { width:74px; height:10px; margin-top:4px; }
+    .ov-comm-count.ov-comm-skel-bar { width:48px; height:9px; margin-top:3px; }
 
     /* ── BODY 2-COL ── */
     .ov-body { flex:1;display:grid;grid-template-columns:1fr 300px;overflow:hidden;min-height:0; }
@@ -1511,6 +1518,21 @@
     const _RATINGS_API = 'https://mmabridge-backend.onrender.com/api';
     let _hypeTimer = null;
 
+    // Render's free tier cold-starts in ~30s — retry every 3.5s for up to
+    // ~45s before giving up, instead of a single attempt. Shared by the
+    // background grid-badge loader and the overlay's own fetch-on-open.
+    async function fetchRatingsWithRetry(evId) {
+      const MAX_TRIES = 13, DELAY_MS = 3500;
+      for (let attempt = 1; attempt <= MAX_TRIES; attempt++) {
+        try {
+          const res = await fetch(`${_RATINGS_API}/ratings/${encodeURIComponent(evId)}`);
+          if (res.ok) return await res.json();
+        } catch {}
+        if (attempt < MAX_TRIES) await new Promise(r => setTimeout(r, DELAY_MS));
+      }
+      return null;
+    }
+
     function updateCardHypeSlot(evId, d) {
       const slot = document.querySelector(`.ev-hype-slot[data-ev-hype-slot="${CSS.escape(evId)}"]`);
       if (!slot) return;
@@ -2070,14 +2092,37 @@
       /* Reset hype */
       resetHype();
       const commHype = document.getElementById('ovCommHype');
-      if (commHype) commHype.style.display = 'none';
       if (_hypeCache.has(ev.id)) {
+        if (commHype) commHype.style.display = 'none';
         applyOverlayHype(_hypeCache.get(ev.id));
       } else {
-        fetch(`${_RATINGS_API}/ratings/${encodeURIComponent(ev.id)}`)
-          .then(r => r.ok ? r.json() : null)
-          .then(d => { if (d) { _hypeCache.set(ev.id, d); applyOverlayHype(d); } })
-          .catch(() => {});
+        // Show a skeleton immediately instead of just hiding the slot —
+        // most visible right after a Render cold-start, when this can take
+        // up to ~30s to resolve.
+        if (commHype) {
+          commHype.style.display = '';
+          commHype.classList.add('ov-comm-skeleton');
+          commHype.innerHTML = `
+            <div class="ov-comm-num ov-comm-skel-bar"></div>
+            <div class="ov-comm-label ov-comm-skel-bar"></div>
+            <div class="ov-comm-count ov-comm-skel-bar"></div>`;
+        }
+        const openEvId = ev.id;
+        fetchRatingsWithRetry(ev.id).then(d => {
+          if (!d) { if (commHype && commHype.classList.contains('ov-comm-skeleton')) commHype.style.display = 'none'; return; }
+          _hypeCache.set(ev.id, d);
+          // Only repaint if this overlay is still open on the same event —
+          // the retry can take up to ~45s, plenty of time to have switched.
+          if (currentEvent && currentEvent.id === openEvId) {
+            commHype.innerHTML = `
+              <div class="ov-comm-num" id="ovCommNum"></div>
+              <div class="ov-comm-label">Community Hype</div>
+              <div class="ov-comm-count" id="ovCommCount"></div>`;
+            commHype.classList.remove('ov-comm-skeleton');
+            commHype.style.display = 'none';
+            applyOverlayHype(d);
+          }
+        });
       }
 
       /* Event stats sidebar */
@@ -2502,19 +2547,20 @@
     /* ── HYPE BADGES ON EVENT CARDS ── */
     let _hypeBadgesLoaded = false;
     const _hypeCache = new Map();
+    // This used to give up after a single failed attempt with no retry at
+    // all — a card's hype badge just never appeared for the rest of the
+    // session if it happened to hit a cold backend. fetchRatingsWithRetry()
+    // now covers that; this just fans it out across every event.
     async function loadHypeBadges(events) {
       if (_hypeBadgesLoaded) return;
       _hypeBadgesLoaded = true;
       await Promise.all(events.map(async ev => {
-        try {
-          const res = await fetch(`${_RATINGS_API}/ratings/${encodeURIComponent(ev.id)}`);
-          if (!res.ok) return;
-          const d = await res.json();
-          _hypeCache.set(ev.id, d);
-          updateCardHypeSlot(ev.id, d);
-        } catch {}
+        const d = await fetchRatingsWithRetry(ev.id);
+        if (!d) return;
+        _hypeCache.set(ev.id, d);
+        updateCardHypeSlot(ev.id, d);
+        markMostHypedCard();
       }));
-      markMostHypedCard();
     }
 
     // Deliberately not subtle — a single strongest-hype card should read as

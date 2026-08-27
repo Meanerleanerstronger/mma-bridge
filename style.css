@@ -5295,6 +5295,18 @@ body.light-mode #pk-poster-bg.loaded { opacity: 0.12; }
   color: rgba(255,255,255,0.22); text-align: right;
   letter-spacing: 0.04em;
 }
+/* Loading skeleton — shown while waiting on the ratings API, most visibly
+   during a Render cold-start (~30s). Replaces "just nothing" with a
+   pulsing placeholder so the badge reads as loading, not broken. */
+.pk-hdb-skel-bar {
+  background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
+  background-size: 200% 100%;
+  animation: skel-shimmer 1.4s infinite;
+  border-radius: 4px;
+}
+.pk-hd-hype-badge .pk-hdb-num.pk-hdb-skel-bar { width: 48px; height: 28px; }
+.pk-hd-hype-badge .pk-hdb-label.pk-hdb-skel-bar { width: 88px; height: 12px; margin-top: 5px; }
+.pk-hd-hype-badge .pk-hdb-count.pk-hdb-skel-bar { width: 58px; height: 11px; margin-top: 4px; }
 .pk-hd-eyebrow {
   font-family: 'Montserrat', sans-serif;
   font-size: 0.78rem; font-weight: 800;
