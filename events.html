@@ -283,6 +283,35 @@
     .ev-card-days   { font-family:'Montserrat',sans-serif;font-weight:900;font-size:.82rem;letter-spacing:.07em;color:rgba(255,255,255,.3); }
     .ev-card-days.soon  { color:#ff8a3d;animation:pulse 2.2s ease infinite; }
     .ev-card-days.today { color:#ff8a3d;animation:pulse 2s ease infinite; }
+
+    /* Lock countdown — was a tiny pill squeezed into the top of the
+       right-side meta stack, easy to miss entirely. Its own centered chip
+       at the bottom of the card gives it real presence without competing
+       with the name/matchup on the left or the days/date stack on the right. */
+    .ev-lock-ticker {
+      position:absolute; left:50%; bottom:14px; transform:translateX(-50%);
+      z-index:4; display:inline-flex; align-items:center; gap:6px;
+      font-family:'Montserrat',sans-serif; font-weight:800; font-size:.64rem;
+      letter-spacing:.07em; text-transform:uppercase; white-space:nowrap;
+      color:#ffb066; background:rgba(10,8,6,.72);
+      border:1px solid rgba(255,138,61,.4); border-radius:20px;
+      padding:6px 14px; backdrop-filter:blur(6px);
+      box-shadow:0 4px 16px rgba(0,0,0,.4), 0 0 0 1px rgba(255,138,61,.06);
+    }
+    .ev-lock-ticker svg { width:12px; height:12px; flex-shrink:0; }
+    .ev-lock-ticker.is-urgent {
+      color:#fff; background:rgba(255,60,20,.24); border-color:rgba(255,100,30,.65);
+      animation: evLockUrgent 1.6s ease infinite;
+    }
+    @keyframes evLockUrgent {
+      0%,100% { box-shadow:0 4px 16px rgba(0,0,0,.4), 0 0 0 1px rgba(255,100,30,.1); }
+      50%     { box-shadow:0 4px 20px rgba(255,80,20,.35), 0 0 0 1px rgba(255,100,30,.3); }
+    }
+    .ev-lock-ticker.is-locked {
+      color:rgba(255,255,255,.4); background:rgba(255,255,255,.05);
+      border-color:rgba(255,255,255,.14); animation:none;
+    }
+    .ev-card.ppv .ev-lock-ticker { color:#f5d474; border-color:rgba(240,195,78,.4); box-shadow:0 4px 16px rgba(0,0,0,.4), 0 0 0 1px rgba(240,195,78,.06); }
     .ev-card-date   { font-family:'Inter',sans-serif;font-size:.68rem;color:rgba(255,255,255,.2); }
     .ev-card-location { font-family:'Inter',sans-serif;font-size:.7rem;color:rgba(255,255,255,.4);max-width:120px;text-align:right; }
     .ev-card-cta    { position:absolute;bottom:14px;right:22px;z-index:3;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.48rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.2);display:flex;align-items:center;gap:5px;transition:color .2s; }
@@ -925,6 +954,7 @@
       .ev-card-matchup { font-size:clamp(1.05rem,4vw,1.4rem); }
       .ev-card-meta { right:14px; }
       .ev-card-location { display:none; }
+      .ev-lock-ticker { font-size:.56rem; padding:5px 11px; bottom:10px; }
       .ov-hero { height:38vh;min-height:220px; }
       .ov-matchup { font-size:clamp(1.9rem,6.5vw,2.8rem); }
       .ov-hero-bottom { padding:0 20px 18px; }
@@ -1626,13 +1656,14 @@
       const dayLabel=days===null?'':days<=0?'TODAY':days===1?'TOMORROW':`${days}D AWAY`;
       const soon=days!==null&&days>0&&days<=7, isToday=days!==null&&days<=0;
 
-      // Lock countdown badge
-      let lockBadge='', lockLocked=false;
+      // Lock countdown ticker
+      let lockBadge='', lockLocked=false, lockUrgent=false;
       if(ev.start_time){
         const ms=new Date(ev.start_time)-Date.now();
         if(ms<=0){ lockBadge='PICKS LOCKED'; lockLocked=true; }
         else if(ms<48*3600000){
           lockBadge=formatLockBadge(ms);
+          lockUrgent=ms<3600000;
         }
       }
       const label=shortLabel(ev);
@@ -1669,11 +1700,14 @@
           <div class="ev-card-sub">${esc(weightSub)}</div>
         </div>
         <div class="ev-card-meta">
-          ${lockBadge?`<div class="ev-lock-badge${lockLocked?' is-locked':''}" data-lock-badge>${lockBadge}</div>`:''}
           ${dayLabel?`<div class="ev-card-days${soon?' soon':isToday?' today':''}">${dayLabel}</div>`:''}
           <div class="ev-card-date">${esc(ev.date||'')}</div>
           ${ev.location?`<div class="ev-card-location">${esc(ev.location)}</div>`:''}
         </div>
+        ${lockBadge?`<div class="ev-lock-ticker${lockLocked?' is-locked':lockUrgent?' is-urgent':''}" data-lock-badge>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg>
+          <span data-lock-text>${lockBadge}</span>
+        </div>`:''}
         <div class="ev-card-cta">View Card<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>`;
 
       card.addEventListener('click',function(e){
@@ -2581,28 +2615,28 @@
     // full minute right as picks were about to lock. formatLockBadge() is
     // the same function buildCard() uses for the initial render, so the two
     // can't drift out of sync with each other again.
+    function ensureLockTicker(card) {
+      let badge = card.querySelector('[data-lock-badge]');
+      if (badge) return badge;
+      badge = document.createElement('div');
+      badge.setAttribute('data-lock-badge', '');
+      badge.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg><span data-lock-text></span>`;
+      card.appendChild(badge);
+      return badge;
+    }
     setInterval(() => {
       document.querySelectorAll('.ev-card[data-start-time]').forEach(card => {
         const st = card.dataset.startTime;
         if (!st) return;
         const ms = new Date(st) - Date.now();
-        let badge = card.querySelector('[data-lock-badge]');
         if (ms <= 0) {
-          if (!badge) {
-            badge = document.createElement('div');
-            badge.setAttribute('data-lock-badge', '');
-            card.querySelector('.ev-card-meta')?.prepend(badge);
-          }
-          badge.className = 'ev-lock-badge is-locked';
-          badge.textContent = 'PICKS LOCKED';
+          const badge = ensureLockTicker(card);
+          badge.className = 'ev-lock-ticker is-locked';
+          badge.querySelector('[data-lock-text]').textContent = 'PICKS LOCKED';
         } else if (ms < 48 * 3600000) {
-          if (!badge) {
-            badge = document.createElement('div');
-            badge.setAttribute('data-lock-badge', '');
-            card.querySelector('.ev-card-meta')?.prepend(badge);
-          }
-          badge.className = 'ev-lock-badge';
-          badge.textContent = formatLockBadge(ms);
+          const badge = ensureLockTicker(card);
+          badge.className = `ev-lock-ticker${ms < 3600000 ? ' is-urgent' : ''}`;
+          badge.querySelector('[data-lock-text]').textContent = formatLockBadge(ms);
         }
       });
     }, 1000);

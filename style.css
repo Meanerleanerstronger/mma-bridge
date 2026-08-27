@@ -10754,18 +10754,6 @@ button:active, [role="button"]:active, .lb-tab:active, .pk-seg-btn:active,
 }
 .pk-replay-btn:hover { background: rgba(255,255,255,0.09); color: rgba(255,255,255,0.8); }
 
-/* ── Event card lock countdown badge ── */
-.ev-lock-badge {
-  display: inline-flex; align-items: center;
-  font-family: 'Montserrat', sans-serif; font-size: 0.52rem; font-weight: 800;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  color: #e06b1a; background: rgba(224,107,26,0.12);
-  border: 1px solid rgba(224,107,26,0.35);
-  border-radius: 5px; padding: 3px 7px; margin-bottom: 4px;
-  white-space: nowrap;
-}
-.ev-lock-badge.is-locked { color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.12); }
-
 /* ── PWA install banner ── */
 /* PWA install toast — small corner card */
 .pwa-toast {
