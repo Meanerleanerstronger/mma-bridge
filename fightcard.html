@@ -97,6 +97,7 @@
       text-shadow:2px 2px 0 rgba(232,105,28,.35);
     }
     body.fc-light .fc-event-name { color:#161514; text-shadow:2px 2px 0 rgba(232,105,28,.3); }
+    body.fc-gold .fc-event-name { text-shadow:2px 2px 0 rgba(240,195,78,.4); }
     .fc-event-sub {
       margin-top:6px;
       font-family:'Montserrat',sans-serif; font-weight:700; font-size:.8rem;
@@ -116,6 +117,7 @@
       font-family:'Oswald',sans-serif; font-weight:700; font-size:1.05rem;
       letter-spacing:.12em; text-transform:uppercase; color:#ff8a3d;
     }
+    body.fc-gold .fc-section-bar { background:rgba(240,195,78,.14); color:#f0c34e; }
     /* flex + wrap + center instead of a fixed 2-col grid — a lone fight
        (or an odd count) used to leave a huge dead cell next to it; this
        centers whatever count there actually is instead. */
@@ -141,6 +143,7 @@
       padding:4px 10px;
       box-shadow:0 4px 12px rgba(0,0,0,.45);
     }
+    body.fc-gold .fc-cell-tag { background:linear-gradient(165deg, #fff0c2 0%, #f0c34e 45%, #a9760f 100%); }
     @media(max-width:520px) { .fc-cell { max-width:100%; } }
     body.fc-light .fc-cell { border-color:rgba(0,0,0,.09); background:rgba(0,0,0,.015); }
     .fc-cell-photos { display:flex; align-items:stretch; background:#101012; }
@@ -191,6 +194,7 @@
       font-family:'Barlow Condensed',sans-serif; font-weight:900; font-style:italic;
       font-size:1.3rem; color:#ff8a3d; flex-shrink:0; padding-top:2px;
     }
+    body.fc-gold .fc-cell-vs { color:#f0c34e; }
     .fc-cell-weight {
       text-align:center; padding:2px 10px 10px;
       font-family:'Oswald',sans-serif; font-weight:500; font-size:.85rem;
@@ -414,7 +418,7 @@
   (function(){
     const p = new URLSearchParams(location.search);
     let mode      = p.get('mode') === 'next' ? 'next' : 'card';
-    let theme     = p.get('theme') === 'light' ? 'light' : 'dark';
+    let theme     = ['light', 'gold'].includes(p.get('theme')) ? p.get('theme') : 'dark';
     let eventName = p.get('eventName') || (mode === 'next' ? 'Fights We Want To See' : 'Fight Card');
     let eventSub  = p.get('eventSub') || '';
 
@@ -448,7 +452,8 @@
 
     function applyTheme() {
       document.body.classList.toggle('fc-light', theme === 'light');
-      themeBtn.textContent = theme === 'light' ? '☀️ Light' : '🌙 Dark';
+      document.body.classList.toggle('fc-gold', theme === 'gold');
+      themeBtn.textContent = theme === 'light' ? '☀️ Light' : theme === 'gold' ? '🏆 Gold' : '🌙 Dark';
     }
 
     function renderCardMode() {
@@ -706,7 +711,7 @@
     }
 
     themeBtn.addEventListener('click', () => {
-      theme = theme === 'light' ? 'dark' : 'light';
+      theme = theme === 'dark' ? 'light' : theme === 'light' ? 'gold' : 'dark';
       applyTheme();
     });
     editBtn.addEventListener('click', () => {

@@ -1210,6 +1210,7 @@
             <select class="mkt-select" id="fcb-theme">
               <option value="dark">Dark</option>
               <option value="light">Light</option>
+              <option value="gold">Gold</option>
             </select>
           </div>
           <div class="fc-builder-rows" id="fcb-rows"></div>
@@ -1230,6 +1231,7 @@
             <select class="mkt-select" id="nfm-theme">
               <option value="dark">Dark</option>
               <option value="light">Light</option>
+              <option value="gold">Gold</option>
             </select>
           </div>
           <div class="fc-builder-rows" id="nfm-rows"></div>
@@ -1847,7 +1849,7 @@
           const params = new URLSearchParams({ mode: 'card', bouts: encoded });
           if (eventNameEl.value.trim()) params.set('eventName', eventNameEl.value.trim());
           if (eventSubEl.value.trim())  params.set('eventSub', eventSubEl.value.trim());
-          if (themeEl.value === 'light') params.set('theme', 'light');
+          if (themeEl.value !== 'dark') params.set('theme', themeEl.value);
           window.open(`fightcard.html?${params.toString()}`, '_blank');
         });
       }
@@ -1896,7 +1898,7 @@
           const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(bouts))));
           const params = new URLSearchParams({ mode: 'next', bouts: encoded });
           if (eventNameEl.value.trim()) params.set('eventName', eventNameEl.value.trim());
-          if (themeEl.value === 'light') params.set('theme', 'light');
+          if (themeEl.value !== 'dark') params.set('theme', themeEl.value);
           window.open(`fightcard.html?${params.toString()}`, '_blank');
         });
       }
