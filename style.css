@@ -13497,6 +13497,22 @@ body.light-mode .fc-cmp-common-name { color: rgba(0,0,0,0.5); }
   .fc-vs-col { width: 44px !important; }
 }
 
+/* ── Mobile: trim decorative infinite-loop animations ──
+   Same complaint as the backdrop-filter pass above — these run forever,
+   every page, whether or not anyone's looking at them, and none of them
+   carry information a static state doesn't already show (unlike the lock
+   ticker's is-urgent pulse or a LIVE dot, which stay). Keep the color/
+   highlight, drop the perpetual motion + the blur that rides along with
+   the Lucas nudge bubble specifically. */
+@media (max-width: 640px) {
+  .lnx-wrap.lnx-visible { animation: none !important; }
+  .lnx-card { backdrop-filter: none !important; background: rgba(6,6,10,0.97) !important; }
+  body.light-mode .lnx-card { background: rgba(255,255,252,0.98) !important; }
+  .pk-hype-thumb-idle { animation: none !important; }
+  .pk-fotn-bar-picking { animation: none !important; }
+  .pk-fotn-bar-badge-live { animation: none !important; opacity: 1 !important; }
+}
+
 
 /* ═══════════════════════════════════════════════════════════
    UX.JS — Global UX Layer  v1.0
