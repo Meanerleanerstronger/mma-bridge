@@ -86,7 +86,7 @@
     "ranking_change": 1,
     "record": {
       "wins": 19,
-      "losses": 6,
+      "losses": 5,
       "draws": 0
     },
     "height": "6'4\"",
@@ -99,44 +99,84 @@
     "bio": "Curtis Blaydes is one of the UFC's most durable heavyweights, a Division I wrestler who uses suffocating top pressure and relentless ground-and-pound to grind down opponents. He has beaten multiple ranked heavyweights and has faced the very best the division has to offer, though recent losses to Aspinall and Hokit have kept the title just out of reach.",
     "last5": [
       {
-        "opponent": "Josh Hokit",
-        "result": "L",
-        "method": "Decision (unanimous)",
-        "event": "UFC 327",
-        "round": 3,
-        "time": "5:00"
-      },
-      {
         "opponent": "Rizvan Kuniev",
         "result": "W",
         "method": "Decision (split)",
-        "event": "UFC Fight Night: Jun. 21, 2025",
+        "event": "UFC on ABC: Hill vs. Rountree Jr.",
         "round": 3,
         "time": "5:00"
       },
       {
         "opponent": "Tom Aspinall",
         "result": "L",
-        "method": "KO/TKO",
+        "method": "KO (punches)",
         "event": "UFC 304",
         "round": 1,
         "time": "1:00"
       },
       {
-        "opponent": "Jailton Almeida",
-        "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC 299",
-        "round": 2,
-        "time": "0:36"
-      },
-      {
         "opponent": "Sergei Pavlovich",
         "result": "L",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Apr. 22, 2023",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Pavlovich vs. Blaydes",
         "round": 1,
         "time": "3:08"
+      },
+      {
+        "opponent": "Tom Aspinall",
+        "result": "W",
+        "method": "TKO (knee injury)",
+        "event": "UFC Fight Night: Blaydes vs. Aspinall",
+        "round": 1,
+        "time": "0:15"
+      },
+      {
+        "opponent": "Chris Daukaus",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Blaydes vs. Daukaus",
+        "round": 2,
+        "time": "0:17"
+      },
+      {
+        "opponent": "Jairzinho Rozenstruik",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 266",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Derrick Lewis",
+        "result": "L",
+        "method": "KO (punch)",
+        "event": "UFC Fight Night: Blaydes vs. Lewis",
+        "round": 2,
+        "time": "1:26"
+      },
+      {
+        "opponent": "Alexander Volkov (fighter)",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Blaydes vs. Volkov",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Junior dos Santos",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Blaydes vs. dos Santos",
+        "round": 2,
+        "time": "1:06"
+      },
+      {
+        "opponent": "Shamil Abdurakhimov",
+        "result": "W",
+        "method": "TKO (elbow and punch)",
+        "event": "UFC 242",
+        "round": 2,
+        "time": "2:22"
       }
     ],
     "stats": {
@@ -1529,8 +1569,8 @@
       {
         "opponent": "Dan Hooker",
         "result": "W",
-        "method": "Submission",
-        "event": "UFC Fight Night: Nov. 22, 2025",
+        "method": "Submission (arm-triangle choke)",
+        "event": "UFC Fight Night: Tsarukyan vs. Hooker",
         "round": 2,
         "time": "3:34"
       },
@@ -1545,16 +1585,16 @@
       {
         "opponent": "Beneil Dariush",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Dec. 2, 2023",
+        "method": "KO (knee and punches)",
+        "event": "UFC on ESPN: Dariush vs. Tsarukyan",
         "round": 1,
         "time": "1:04"
       },
       {
-        "opponent": "Joaquim Silva",
+        "opponent": "Joaquim Silva (fighter)",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Jun. 17, 2023",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Vettori vs. Cannonier",
         "round": 3,
         "time": "3:25"
       },
@@ -1562,7 +1602,47 @@
         "opponent": "Damir Ismagulov",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Dec. 17, 2022",
+        "event": "UFC Fight Night: Cannonier vs. Strickland",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Mateusz Gamrot",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Tsarukyan vs. Gamrot",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Joel Álvarez",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Makhachev vs. Green",
+        "round": 2,
+        "time": "1:57"
+      },
+      {
+        "opponent": "Christos Giagos",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Smith vs. Spann",
+        "round": 1,
+        "time": "2:09"
+      },
+      {
+        "opponent": "Matt Frevola",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 257",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Davi Ramos",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Figueiredo vs. Benavidez 2",
         "round": 3,
         "time": "5:00"
       }
@@ -1908,7 +1988,7 @@
     "bio": "Alexander Volkanovski was the longest-reigning UFC Featherweight Champion in history at three years, a former rugby player who built himself into a complete three-time champion through relentless improvement and elite cardio. Despite losses to Topuria and Makhachev, The Great's legacy as arguably the most well-rounded featherweight champion ever is secure.",
     "last5": [
       {
-        "opponent": "Diego Lopes",
+        "opponent": "Diego Lopes (fighter)",
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC 325",
@@ -1916,7 +1996,7 @@
         "time": "5:00"
       },
       {
-        "opponent": "Diego Lopes",
+        "opponent": "Diego Lopes (fighter)",
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC 314",
@@ -1926,7 +2006,7 @@
       {
         "opponent": "Ilia Topuria",
         "result": "L",
-        "method": "KO/TKO",
+        "method": "KO (punch)",
         "event": "UFC 298",
         "round": 2,
         "time": "3:32"
@@ -1934,18 +2014,58 @@
       {
         "opponent": "Islam Makhachev",
         "result": "L",
-        "method": "KO/TKO",
+        "method": "KO (head kick and punches)",
         "event": "UFC 294",
         "round": 1,
         "time": "3:06"
       },
       {
-        "opponent": "Yair Rodriguez",
+        "opponent": "Yair Rodríguez",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "TKO (punches)",
         "event": "UFC 290",
         "round": 3,
         "time": "4:19"
+      },
+      {
+        "opponent": "Islam Makhachev",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 284",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Max Holloway",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 276",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "The Korean Zombie",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC 273",
+        "round": 4,
+        "time": "0:45"
+      },
+      {
+        "opponent": "Brian Ortega",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 266",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Max Holloway",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC 251",
+        "round": 5,
+        "time": "5:00"
       }
     ],
     "stats": {
@@ -1987,7 +2107,7 @@
         "opponent": "Lerone Murphy",
         "result": "W",
         "method": "Decision (majority)",
-        "event": "UFC Fight Night: Mar. 21, 2026",
+        "event": "UFC Fight Night: Evloev vs. Murphy",
         "round": 5,
         "time": "5:00"
       },
@@ -2008,7 +2128,7 @@
         "time": "5:00"
       },
       {
-        "opponent": "Diego Lopes",
+        "opponent": "Diego Lopes (fighter)",
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC 288",
@@ -2019,7 +2139,47 @@
         "opponent": "Dan Ige",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Jun. 4, 2022",
+        "event": "UFC Fight Night: Volkov vs. Rozenstruik",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Hakeem Dawodu",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 263",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Nik Lentz",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC 257",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Mike Grundy",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Whittaker vs. Till",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Enrique Barzola",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Maia vs. Askren",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Seung Woo Choi (fighter)",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Overeem vs. Oleinik",
         "round": 3,
         "time": "5:00"
       }
@@ -2068,17 +2228,17 @@
         "time": "5:00"
       },
       {
-        "opponent": "Diego Lopes",
+        "opponent": "Diego Lopes (fighter)",
         "result": "L",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Sep. 13, 2025",
+        "method": "TKO (spinning back elbow and punches)",
+        "event": "UFC Fight Night: Lopes vs. Silva",
         "round": 2,
         "time": "4:48"
       },
       {
         "opponent": "Bryce Mitchell",
         "result": "W",
-        "method": "Submission",
+        "method": "Submission (ninja choke)",
         "event": "UFC 314",
         "round": 2,
         "time": "3:52"
@@ -2086,18 +2246,58 @@
       {
         "opponent": "Melsik Baghdasaryan",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Feb. 22, 2025",
+        "method": "TKO (punches and elbows)",
+        "event": "UFC Fight Night: Cejudo vs. Song",
         "round": 1,
         "time": "4:15"
       },
       {
         "opponent": "Drew Dober",
         "result": "W",
-        "method": "TKO - Doctor&#039;s Stoppage",
-        "event": "UFC Fight Night: Jul. 13, 2024",
+        "method": "TKO (doctor stoppage)",
+        "event": "UFC on ESPN: Namajunas vs. Cortez",
         "round": 3,
         "time": "1:28"
+      },
+      {
+        "opponent": "Charles Jourdain",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "UFC 303",
+        "round": 2,
+        "time": "1:22"
+      },
+      {
+        "opponent": "Westin Wilson",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Ankalaev vs. Walker 2",
+        "round": 1,
+        "time": "4:12"
+      },
+      {
+        "opponent": "Kevin Vallejos",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Dana White's Contender Series season 7#Week 5 – September 5",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Shahin Najafi",
+        "result": "W",
+        "method": "TKO (retirement)",
+        "event": "Spartacus MMA 34",
+        "round": 1,
+        "time": "2:15"
+      },
+      {
+        "opponent": "Valdemir Cardoso",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "Spartacus MMA 28",
+        "round": 1,
+        "time": "2:59"
       }
     ],
     "stats": {
@@ -2153,9 +2353,9 @@
         "time": "5:00"
       },
       {
-        "opponent": "Sean O'Malley",
+        "opponent": "Sean O'Malley (fighter)",
         "result": "W",
-        "method": "Submission",
+        "method": "Submission (north-south choke)",
         "event": "UFC 316",
         "round": 3,
         "time": "4:42"
@@ -2169,11 +2369,51 @@
         "time": "5:00"
       },
       {
-        "opponent": "Sean O'Malley",
+        "opponent": "Sean O'Malley (fighter)",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "Riyadh Season Noche Ufc",
+        "event": "UFC 306",
         "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Henry Cejudo",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 298",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Petr Yan",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Yan vs. Dvalishvili",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "José Aldo",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 278",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Marlon Moraes",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC 266",
+        "round": 2,
+        "time": "4:25"
+      },
+      {
+        "opponent": "Cody Stamann",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Reyes vs. Procházka",
+        "round": 3,
         "time": "5:00"
       }
     ],
@@ -2224,7 +2464,7 @@
         "opponent": "Marcus McGhee",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Jul. 26, 2025",
+        "event": "UFC on ABC: Whittaker vs. de Ridder",
         "round": 3,
         "time": "5:00"
       },
@@ -2232,7 +2472,7 @@
         "opponent": "Deiveson Figueiredo",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Nov. 23, 2024",
+        "event": "UFC Fight Night: Yan vs. Figueiredo",
         "round": 5,
         "time": "5:00"
       },
@@ -2248,9 +2488,49 @@
         "opponent": "Merab Dvalishvili",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Mar. 11, 2023",
+        "event": "UFC Fight Night: Yan vs. Dvalishvili",
         "round": 5,
         "time": "5:00"
+      },
+      {
+        "opponent": "Sean O'Malley (fighter)",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC 280",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Aljamain Sterling",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC 273",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Cory Sandhagen",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 267",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Aljamain Sterling",
+        "result": "L",
+        "method": "DQ (illegal knee)",
+        "event": "UFC 259",
+        "round": 4,
+        "time": "4:29"
+      },
+      {
+        "opponent": "José Aldo",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC 251",
+        "round": 5,
+        "time": "3:24"
       }
     ],
     "stats": {
@@ -2391,7 +2671,7 @@
         "opponent": "Cory Sandhagen",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Aug. 3, 2024",
+        "event": "UFC on ABC: Sandhagen vs. Nurmagomedov",
         "round": 5,
         "time": "5:00"
       },
@@ -2399,9 +2679,49 @@
         "opponent": "Bekzat Almakhan",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Mar. 2, 2024",
+        "event": "UFC Fight Night: Rozenstruik vs. Gaziev",
         "round": 3,
         "time": "5:00"
+      },
+      {
+        "opponent": "Raoni Barcelos",
+        "result": "W",
+        "method": "KO (body kick and punch)",
+        "event": "UFC Fight Night: Strickland vs. Imavov",
+        "round": 1,
+        "time": "4:40"
+      },
+      {
+        "opponent": "Nate Maness",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Tsarukyan vs. Gamrot",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Brian Kelleher",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC 272",
+        "round": 1,
+        "time": "3:15"
+      },
+      {
+        "opponent": "Sergey Morozov (fighter)",
+        "result": "W",
+        "method": "Technical Submission (rear-naked choke)",
+        "event": "UFC on ESPN: Chiesa vs. Magny",
+        "round": 2,
+        "time": "3:39"
+      },
+      {
+        "opponent": "Braian Gonzalez",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "Gorilla Fighting 20",
+        "round": 1,
+        "time": "4:34"
       }
     ],
     "stats": {
@@ -2442,7 +2762,7 @@
       {
         "opponent": "Joshua Van",
         "result": "L",
-        "method": "KO/TKO",
+        "method": "TKO (arm injury)",
         "event": "UFC 323",
         "round": 1,
         "time": "0:26"
@@ -2450,15 +2770,15 @@
       {
         "opponent": "Kai Kara-France",
         "result": "W",
-        "method": "Submission",
+        "method": "Submission (rear-naked choke)",
         "event": "UFC 317",
         "round": 3,
-        "time": "1:55"
+        "time": "1:54"
       },
       {
         "opponent": "Kai Asakura",
         "result": "W",
-        "method": "Submission",
+        "method": "Technical Submission (rear-naked choke)",
         "event": "UFC 310",
         "round": 2,
         "time": "2:05"
@@ -2477,6 +2797,46 @@
         "method": "Decision (unanimous)",
         "event": "UFC 296",
         "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Brandon Moreno",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC 290",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Alex Perez (fighter)",
+        "result": "W",
+        "method": "Submission (neck crank)",
+        "event": "UFC 277",
+        "round": 1,
+        "time": "1:31"
+      },
+      {
+        "opponent": "Brandon Royval",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC on ESPN: Cannonier vs. Gastelum",
+        "round": 2,
+        "time": "1:46"
+      },
+      {
+        "opponent": "Manel Kape",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Overeem vs. Volkov",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Askar Askarov",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Figueiredo vs. Benavidez 2",
+        "round": 3,
         "time": "5:00"
       }
     ],
@@ -2518,7 +2878,7 @@
       {
         "opponent": "Tatsuro Taira",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "TKO (front kick to the body and punches)",
         "event": "UFC 328",
         "round": 5,
         "time": "1:32"
@@ -2526,7 +2886,7 @@
       {
         "opponent": "Alexandre Pantoja",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "TKO (arm injury)",
         "event": "UFC 323",
         "round": 1,
         "time": "0:26"
@@ -2540,9 +2900,9 @@
         "time": "5:00"
       },
       {
-        "opponent": "Bruno Silva",
+        "opponent": "Bruno Gustavo da Silva",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "TKO (punches)",
         "event": "UFC 316",
         "round": 3,
         "time": "4:01"
@@ -2552,6 +2912,46 @@
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC 313",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Cody Durden",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 310",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Édgar Cháirez",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 306",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Charles Johnson (fighter)",
+        "result": "L",
+        "method": "KO (punches)",
+        "event": "UFC on ESPN: Namajunas vs. Cortez",
+        "round": 3,
+        "time": "0:20"
+      },
+      {
+        "opponent": "Felipe Bunes",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Ankalaev vs. Walker 2",
+        "round": 2,
+        "time": "4:31"
+      },
+      {
+        "opponent": "Kevin Borjas",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 295",
         "round": 3,
         "time": "5:00"
       }
@@ -2579,7 +2979,7 @@
     "ranking_change": 1,
     "record": {
       "wins": 23,
-      "losses": 10,
+      "losses": 9,
       "draws": 2
     },
     "height": "5'7\"",
@@ -2592,17 +2992,9 @@
     "bio": "Brandon Moreno is a former UFC Flyweight Champion and one of the most beloved fighters in the sport, a high-energy fan favourite from Tijuana who won the title by submitting Deiveson Figueiredo. Moreno and Pantoja's rivalry has defined the flyweight division of the 2020s and his entertaining, aggressive style always delivers for the fans.",
     "last5": [
       {
-        "opponent": "Lone'er Kavanagh",
-        "result": "L",
-        "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Feb. 28, 2026",
-        "round": 5,
-        "time": "5:00"
-      },
-      {
         "opponent": "Tatsuro Taira",
         "result": "L",
-        "method": "KO/TKO",
+        "method": "TKO (punches)",
         "event": "UFC 323",
         "round": 2,
         "time": "2:24"
@@ -2611,7 +3003,7 @@
         "opponent": "Steve Erceg",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Mar. 29, 2025",
+        "event": "UFC on ESPN: Moreno vs. Erceg",
         "round": 5,
         "time": "5:00"
       },
@@ -2619,7 +3011,7 @@
         "opponent": "Amir Albazi",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Nov. 2, 2024",
+        "event": "UFC Fight Night: Moreno vs. Albazi",
         "round": 5,
         "time": "5:00"
       },
@@ -2627,7 +3019,55 @@
         "opponent": "Brandon Royval",
         "result": "L",
         "method": "Decision (split)",
-        "event": "UFC Fight Night: Feb. 24, 2024",
+        "event": "UFC Fight Night: Moreno vs. Royval 2",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Alexandre Pantoja",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC 290",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Deiveson Figueiredo",
+        "result": "W",
+        "method": "TKO (doctor stoppage)",
+        "event": "UFC 283",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Kai Kara-France",
+        "result": "W",
+        "method": "TKO (body kick and punches)",
+        "event": "UFC 277",
+        "round": 3,
+        "time": "4:34"
+      },
+      {
+        "opponent": "Deiveson Figueiredo",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 270",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Deiveson Figueiredo",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC 263",
+        "round": 3,
+        "time": "2:26"
+      },
+      {
+        "opponent": "Deiveson Figueiredo",
+        "result": "D",
+        "method": "Draw (majority)",
+        "event": "UFC 256",
         "round": 5,
         "time": "5:00"
       }
@@ -2731,9 +3171,9 @@
     "ranking": "#3",
     "ranking_change": 0,
     "record": {
-      "wins": 17,
-      "losses": 5,
-      "draws": 1
+      "wins": 16,
+      "losses": 3,
+      "draws": 0
     },
     "height": "5'5\"",
     "reach": "66\"",
@@ -2745,44 +3185,84 @@
     "bio": "Alexa Grasso is a former UFC Women's Flyweight Champion who became a national hero in Mexico when she submitted Valentina Shevchenko at UFC 285. Her slick striking and underrated grappling make her a genuine threat to any champion, and her trilogy with Shevchenko is one of the great rivalries in women's MMA.",
     "last5": [
       {
-        "opponent": "Maycee Barber",
+        "opponent": "Valentina Shevchenko",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Mar. 28, 2026",
-        "round": 1,
-        "time": "2:42"
+        "method": "Submission (face crank)",
+        "event": "UFC 285",
+        "round": 4,
+        "time": "4:34"
       },
       {
-        "opponent": "Natalia Silva",
-        "result": "L",
+        "opponent": "Viviane Araújo (fighter)",
+        "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC 315",
+        "event": "UFC Fight Night: Grasso vs. Araújo",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Joanne Wood",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC on ESPN: Blaydes vs. Daukaus",
+        "round": 1,
+        "time": "3:57"
+      },
+      {
+        "opponent": "Maycee Barber",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 258",
         "round": 3,
         "time": "5:00"
       },
       {
-        "opponent": "Valentina Shevchenko",
+        "opponent": "Ji Yeon Kim",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Smith vs. Rakić",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Carla Esparza",
+        "result": "L",
+        "method": "Decision (majority)",
+        "event": "UFC Fight Night: Rodríguez vs. Stephens",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Karolina Kowalkiewicz",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 238",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Tatiana Suarez",
+        "result": "L",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC Fight Night: Maia vs. Usman",
+        "round": 1,
+        "time": "2:44"
+      },
+      {
+        "opponent": "Randa Markos",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Pettis vs. Moreno",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Felice Herrig",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "Riyadh Season Noche Ufc",
-        "round": 5,
+        "event": "UFC Fight Night: Bermudez vs. The Korean Zombie",
+        "round": 3,
         "time": "5:00"
-      },
-      {
-        "opponent": "Valentina Shevchenko",
-        "result": "D",
-        "method": "Decision (split)",
-        "event": "UFC Fight Night: Sep. 16, 2023",
-        "round": 5,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Valentina Shevchenko",
-        "result": "W",
-        "method": "SUB",
-        "event": "UFC 285",
-        "round": 4,
-        "time": "4:34"
       }
     ],
     "gender": "female",
@@ -5958,31 +6438,31 @@
       {
         "opponent": "Michael Chandler",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "Ufc Freedom 250",
+        "method": "TKO (spinning wheel kick and punches)",
+        "event": "UFC Freedom 250",
         "round": 1,
         "time": "4:29"
       },
       {
         "opponent": "Rafael Fiziev",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "TKO (punches)",
         "event": "UFC 325",
         "round": 2,
         "time": "4:30"
       },
       {
-        "opponent": "Benoit Saint Denis",
+        "opponent": "Benoît Saint Denis",
         "result": "L",
-        "method": "Submission",
-        "event": "UFC Fight Night: Sep. 6, 2025",
+        "method": "Submission (face crank)",
+        "event": "UFC Fight Night: Imavov vs. Borralho",
         "round": 2,
         "time": "2:56"
       },
       {
         "opponent": "King Green",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "KO (spinning wheel kick)",
         "event": "UFC 313",
         "round": 1,
         "time": "2:07"
@@ -5994,6 +6474,46 @@
         "event": "UFC 309",
         "round": 3,
         "time": "5:00"
+      },
+      {
+        "opponent": "Jamie Mullarkey",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC 301",
+        "round": 1,
+        "time": "4:42"
+      },
+      {
+        "opponent": "Raimond Magomedaliev",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Dana White's Contender Series season 7#Week 9 – October 3",
+        "round": 3,
+        "time": "4:45"
+      },
+      {
+        "opponent": "Ronys Torres",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "rowspan=2|Centurion FC: Rex Redemptor",
+        "round": 2,
+        "time": "4:21"
+      },
+      {
+        "opponent": "Corneliu Rotaru Lascar",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "1",
+        "round": 0,
+        "time": ""
+      },
+      {
+        "opponent": "Brenno Luiz Gonçalves",
+        "result": "W",
+        "method": "TKO (punch)",
+        "event": "Arena Pride MMA 4",
+        "round": 1,
+        "time": "1:26"
       }
     ],
     "stats": {
@@ -6306,9 +6826,9 @@
     "bio": "Nikita Krylov is one of the most exciting submission hunters in the light heavyweight division — a Ukrainian 'Miner' who digs for chokes, triangles, and rear-naked chokes at a relentless pace. With 29 wins and the majority by finish, Krylov has been a UFC staple since 2013 and has tested himself against the very best in the division. Though back-to-back KO losses to Reyes and Guskov in 2025 raised questions, he rebounded emphatically with a round-three knockout of Bukauskas at UFC 324 to reassert himself as a top-10 threat.",
     "last5": [
       {
-        "opponent": "Robert Whittaker",
+        "opponent": "Robert Whittaker (fighter)",
         "result": "L",
-        "method": "KO/TKO",
+        "method": "TKO (jaw injury)",
         "event": "UFC 329",
         "round": 3,
         "time": "1:01"
@@ -6316,7 +6836,7 @@
       {
         "opponent": "Modestas Bukauskas",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "KO (punches)",
         "event": "UFC 324",
         "round": 3,
         "time": "4:57"
@@ -6324,15 +6844,15 @@
       {
         "opponent": "Bogdan Guskov",
         "result": "L",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Jul. 26, 2025",
+        "method": "KO (punches)",
+        "event": "UFC on ABC: Whittaker vs. de Ridder",
         "round": 1,
         "time": "4:18"
       },
       {
         "opponent": "Dominick Reyes",
         "result": "L",
-        "method": "KO/TKO",
+        "method": "KO (punch)",
         "event": "UFC 314",
         "round": 1,
         "time": "2:24"
@@ -6340,10 +6860,50 @@
       {
         "opponent": "Ryan Spann",
         "result": "W",
-        "method": "Submission",
-        "event": "UFC Fight Night: Mar. 11, 2023",
+        "method": "Submission (triangle choke)",
+        "event": "UFC Fight Night: Yan vs. Dvalishvili",
         "round": 1,
         "time": "3:38"
+      },
+      {
+        "opponent": "Volkan Oezdemir",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 280",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Alexander Gustafsson",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "UFC Fight Night: Blaydes vs. Aspinall",
+        "round": 1,
+        "time": "1:07"
+      },
+      {
+        "opponent": "Paul Craig",
+        "result": "L",
+        "method": "Submission (triangle choke)",
+        "event": "UFC Fight Night: Volkov vs. Aspinall",
+        "round": 1,
+        "time": "3:57"
+      },
+      {
+        "opponent": "Magomed Ankalaev",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Rozenstruik vs. Gane",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Johnny Walker (fighter)",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Lee vs. Oliveira",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "stats": {
@@ -7064,41 +7624,81 @@
         "opponent": "Aljamain Sterling",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Aug. 23, 2025",
+        "event": "UFC Fight Night: Walker vs. Zhang",
         "round": 5,
         "time": "5:00"
       },
       {
-        "opponent": "Diego Lopes",
+        "opponent": "Diego Lopes (fighter)",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "Riyadh Season Noche Ufc",
+        "event": "UFC 306",
         "round": 3,
         "time": "5:00"
       },
       {
-        "opponent": "Yair Rodriguez",
+        "opponent": "Yair Rodríguez",
         "result": "W",
-        "method": "Submission",
-        "event": "UFC Fight Night: Feb. 24, 2024",
+        "method": "Submission (arm-triangle choke)",
+        "event": "UFC Fight Night: Moreno vs. Royval 2",
         "round": 3,
         "time": "0:58"
       },
       {
-        "opponent": "Yair Rodriguez",
+        "opponent": "Yair Rodríguez",
         "result": "L",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Jul. 16, 2022",
-        "round": 1,
-        "time": "4:11"
+        "method": "TKO (shoulder injury)",
+        "event": "UFC on ABC: Ortega vs. Rodríguez",
+        "round": 0,
+        "time": "style=\"text-align:center\"|4:11"
       },
       {
         "opponent": "Alexander Volkanovski",
         "result": "L",
         "method": "Decision (unanimous)",
         "event": "UFC 266",
-        "round": 5,
-        "time": "5:00"
+        "round": 0,
+        "time": "style=\"text-align:center\"|5:00"
+      },
+      {
+        "opponent": "The Korean Zombie",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Ortega vs. The Korean Zombie",
+        "round": 0,
+        "time": "style=\"text-align:center\"|5:00"
+      },
+      {
+        "opponent": "Max Holloway",
+        "result": "L",
+        "method": "TKO (doctor stoppage)",
+        "event": "UFC 231",
+        "round": 0,
+        "time": "style=\"text-align:center\"|5:00"
+      },
+      {
+        "opponent": "Frankie Edgar",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "UFC 222",
+        "round": 0,
+        "time": "style=\"text-align:center\"|4:44"
+      },
+      {
+        "opponent": "Cub Swanson",
+        "result": "W",
+        "method": "Submission (guillotine choke)",
+        "event": "UFC Fight Night: Swanson vs. Ortega",
+        "round": 0,
+        "time": "style=\"text-align:center\"|3:22"
+      },
+      {
+        "opponent": "Renato Moicano",
+        "result": "W",
+        "method": "Submission (guillotine choke)",
+        "event": "UFC 214",
+        "round": 0,
+        "time": "style=\"text-align:center\"|2:59"
       }
     ],
     "stats": {
@@ -7139,7 +7739,7 @@
         "opponent": "Melquizael Costa",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: May. 16, 2026",
+        "event": "UFC Fight Night: Allen vs. Costa",
         "round": 5,
         "time": "5:00"
       },
@@ -7171,8 +7771,48 @@
         "opponent": "Max Holloway",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Apr. 15, 2023",
+        "event": "UFC on ESPN: Holloway vs. Allen",
         "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Calvin Kattar",
+        "result": "W",
+        "method": "TKO (knee injury)",
+        "event": "UFC Fight Night: Kattar vs. Allen",
+        "round": 2,
+        "time": "0:08"
+      },
+      {
+        "opponent": "Dan Hooker",
+        "result": "W",
+        "method": "TKO (punches and elbows)",
+        "event": "UFC Fight Night: Volkov vs. Aspinall",
+        "round": 1,
+        "time": "2:33"
+      },
+      {
+        "opponent": "Sodiq Yusuff",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ABC: Vettori vs. Holland",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Nik Lentz",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Blaydes vs. dos Santos",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Gilbert Melendez",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 239",
+        "round": 3,
         "time": "5:00"
       }
     ],
@@ -7611,7 +8251,7 @@
     "weightClass": "Lightweight",
     "ranking": "#10",
     "record": {
-      "wins": 21,
+      "wins": 20,
       "losses": 7,
       "draws": 1
     },
@@ -7625,14 +8265,6 @@
     "bio": "Renato Moicano is a Brazilian jiu-jitsu black belt who has reinvented himself as one of the lightweight division's most complete fighters. After starting his career at featherweight, Moicano moved up and has delivered standout performances against elite competition, combining slick grappling with a much-improved striking game.",
     "last5": [
       {
-        "opponent": "Chris Duncan",
-        "result": "W",
-        "method": "Submission",
-        "event": "UFC Fight Night: Apr. 4, 2026",
-        "round": 2,
-        "time": "3:14"
-      },
-      {
         "opponent": "Beneil Dariush",
         "result": "L",
         "method": "Decision (unanimous)",
@@ -7643,26 +8275,74 @@
       {
         "opponent": "Islam Makhachev",
         "result": "L",
-        "method": "Submission",
+        "method": "Submission (brabo choke)",
         "event": "UFC 311",
         "round": 1,
         "time": "4:05"
       },
       {
-        "opponent": "Benoit Saint Denis",
+        "opponent": "Benoît Saint Denis",
         "result": "W",
-        "method": "TKO - Doctor&#039;s Stoppage",
-        "event": "UFC Fight Night: Sep. 28, 2024",
+        "method": "TKO (doctor stoppage)",
+        "event": "UFC Fight Night: Moicano vs. Saint Denis",
         "round": 2,
         "time": "5:00"
       },
       {
         "opponent": "Jalin Turner",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "TKO (elbows and punches)",
         "event": "UFC 300",
         "round": 2,
         "time": "4:11"
+      },
+      {
+        "opponent": "Drew Dober",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Dolidze vs. Imavov",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Brad Riddell",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC 281",
+        "round": 1,
+        "time": "3:20"
+      },
+      {
+        "opponent": "Rafael dos Anjos",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 272",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Alexander Hernandez",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC 271",
+        "round": 2,
+        "time": "1:23"
+      },
+      {
+        "opponent": "Jai Herbert",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC Fight Night: Gane vs. Volkov",
+        "round": 2,
+        "time": "4:36"
+      },
+      {
+        "opponent": "Damir Hadžović",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC Fight Night: Lee vs. Oliveira",
+        "round": 1,
+        "time": "0:44"
       }
     ],
     "stats": {
@@ -8106,9 +8786,9 @@
         "time": "5:00"
       },
       {
-        "opponent": "Michael Morales",
+        "opponent": "Michael Morales (fighter)",
         "result": "L",
-        "method": "KO/TKO",
+        "method": "TKO (punches)",
         "event": "UFC 322",
         "round": 1,
         "time": "3:27"
@@ -8116,8 +8796,8 @@
       {
         "opponent": "Leon Edwards",
         "result": "W",
-        "method": "Submission",
-        "event": "UFC Fight Night: Mar. 22, 2025",
+        "method": "Submission (guillotine choke)",
+        "event": "UFC Fight Night: Edwards vs. Brady",
         "round": 4,
         "time": "1:39"
       },
@@ -8125,17 +8805,57 @@
         "opponent": "Gilbert Burns",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Sep. 7, 2024",
+        "event": "UFC Fight Night: Burns vs. Brady",
         "round": 5,
         "time": "5:00"
       },
       {
         "opponent": "Kelvin Gastelum",
         "result": "W",
-        "method": "Submission",
-        "event": "UFC Fight Night: Dec. 2, 2023",
+        "method": "Submission (kimura)",
+        "event": "UFC on ESPN: Dariush vs. Tsarukyan",
         "round": 3,
         "time": "1:43"
+      },
+      {
+        "opponent": "Belal Muhammad",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC 280",
+        "round": 2,
+        "time": "4:47"
+      },
+      {
+        "opponent": "Michael Chiesa",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Vieira vs. Tate",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Jake Matthews (fighter)",
+        "result": "W",
+        "method": "Submission (arm-triangle choke)",
+        "event": "UFC 259",
+        "round": 3,
+        "time": "3:28"
+      },
+      {
+        "opponent": "Christian Aguilera",
+        "result": "W",
+        "method": "Technical Submission (guillotine choke)",
+        "event": "UFC Fight Night: Smith vs. Rakić",
+        "round": 2,
+        "time": "1:47"
+      },
+      {
+        "opponent": "Ismail Naurdiev",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Benavidez vs. Figueiredo",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "stats": {
@@ -8459,7 +9179,7 @@
     "ranking": "",
     "record": {
       "wins": 19,
-      "losses": 10,
+      "losses": 9,
       "draws": 1
     },
     "height": "6'1\"",
@@ -8919,7 +9639,7 @@
     "bio": "Alexander Volkov is a 6'7\" Russian heavyweight whose rare combination of size, technique, and durability has made him a fixture in the top five for years. 'Drago' uses his massive frame and sharp boxing to control range and has wins over multiple former champions, cementing his status as a perennial contender.",
     "last5": [
       {
-        "opponent": "Waldo Cortes Acosta",
+        "opponent": "Waldo Cortes-Acosta",
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC 328",
@@ -8946,17 +9666,57 @@
         "opponent": "Sergei Pavlovich",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Jun. 22, 2024",
+        "event": "UFC on ABC: Whittaker vs. Aliskerov",
         "round": 3,
         "time": "5:00"
       },
       {
         "opponent": "Tai Tuivasa",
         "result": "W",
-        "method": "Submission",
+        "method": "Submission (Ezekiel choke)",
         "event": "UFC 293",
         "round": 2,
         "time": "4:37"
+      },
+      {
+        "opponent": "Alexander Romanov (fighter)",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Yan vs. Dvalishvili",
+        "round": 1,
+        "time": "2:16"
+      },
+      {
+        "opponent": "Jairzinho Rozenstruik",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Volkov vs. Rozenstruik",
+        "round": 1,
+        "time": "2:12"
+      },
+      {
+        "opponent": "Tom Aspinall",
+        "result": "L",
+        "method": "Submission (straight armbar)",
+        "event": "UFC Fight Night: Volkov vs. Aspinall",
+        "round": 1,
+        "time": "3:45"
+      },
+      {
+        "opponent": "Marcin Tybura",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 267",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Ciryl Gane",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Gane vs. Volkov",
+        "round": 5,
+        "time": "5:00"
       }
     ],
     "stats": {
@@ -9280,7 +10040,7 @@
         "opponent": "Tabatha Ricci",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Nov. 23, 2024",
+        "event": "UFC Fight Night: Yan vs. Figueiredo",
         "round": 3,
         "time": "5:00"
       },
@@ -9293,19 +10053,59 @@
         "time": "5:00"
       },
       {
-        "opponent": "Jessica Andrade",
-        "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC 288",
-        "round": 1,
-        "time": "2:20"
-      },
-      {
         "opponent": "Mackenzie Dern",
         "result": "W",
         "method": "Decision (majority)",
-        "event": "UFC Fight Night: Oct. 1, 2022",
+        "event": "UFC Fight Night: Dern vs. Yan",
         "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Marina Rodriguez (fighter)",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC 272",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Carla Esparza",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Font vs. Garbrandt",
+        "round": 2,
+        "time": "2:58"
+      },
+      {
+        "opponent": "Cláudia Gadelha",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Santos vs. Teixeira",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Karolina Kowalkiewicz",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Felder vs. Hooker",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Angela Hill (fighter)",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 238",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Syuri",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Blaydes vs. Ngannou 2",
+        "round": 3,
         "time": "5:00"
       }
     ],
@@ -9579,8 +10379,8 @@
       {
         "opponent": "Jasmine Jasudavicius",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Oct. 18, 2025",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: de Ridder vs. Allen",
         "round": 1,
         "time": "1:14"
       },
@@ -9596,7 +10396,7 @@
         "opponent": "Erin Blanchfield",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Mar. 30, 2024",
+        "event": "UFC on ESPN: Blanchfield vs. Fiorot",
         "round": 5,
         "time": "5:00"
       },
@@ -9604,17 +10404,57 @@
         "opponent": "Rose Namajunas",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Sep. 2, 2023",
+        "event": "UFC Fight Night: Gane vs. Spivac",
         "round": 3,
         "time": "5:00"
       },
       {
-        "opponent": "Katlyn Cerminara",
+        "opponent": "Katlyn Chookagian",
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC 280",
         "round": 3,
         "time": "5:00"
+      },
+      {
+        "opponent": "Jennifer Maia",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Blaydes vs. Daukaus",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Mayra Bueno Silva",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Ladd vs. Dumont",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Tabatha Ricci",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Rozenstruik vs. Sakai",
+        "round": 2,
+        "time": "3:00"
+      },
+      {
+        "opponent": "Victoria Leonardo",
+        "result": "W",
+        "method": "TKO (head kick and punches)",
+        "event": "UFC on ESPN: Chiesa vs. Magny",
+        "round": 2,
+        "time": "4:08"
+      },
+      {
+        "opponent": "Gabriela Campo",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UAE Warriors 14",
+        "round": 1,
+        "time": "4:48"
       }
     ],
     "gender": "female",
@@ -9657,7 +10497,7 @@
       {
         "opponent": "Tracy Cortez",
         "result": "W",
-        "method": "Submission",
+        "method": "Submission (rear-naked choke)",
         "event": "UFC 322",
         "round": 2,
         "time": "4:44"
@@ -9666,7 +10506,7 @@
         "opponent": "Rose Namajunas",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Nov. 2, 2024",
+        "event": "UFC Fight Night: Moreno vs. Albazi",
         "round": 5,
         "time": "5:00"
       },
@@ -9674,7 +10514,7 @@
         "opponent": "Manon Fiorot",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Mar. 30, 2024",
+        "event": "UFC on ESPN: Blanchfield vs. Fiorot",
         "round": 5,
         "time": "5:00"
       },
@@ -9682,17 +10522,57 @@
         "opponent": "Taila Santos",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Aug. 26, 2023",
+        "event": "UFC Fight Night: Holloway vs. The Korean Zombie",
         "round": 3,
         "time": "5:00"
       },
       {
-        "opponent": "Jessica Andrade",
+        "opponent": "Jéssica Andrade",
         "result": "W",
-        "method": "Submission",
-        "event": "UFC Fight Night: Feb. 18, 2023",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC Fight Night: Andrade vs. Blanchfield",
         "round": 2,
         "time": "1:37"
+      },
+      {
+        "opponent": "Molly McCann",
+        "result": "W",
+        "method": "Submission (kimura)",
+        "event": "UFC 281",
+        "round": 1,
+        "time": "3:37"
+      },
+      {
+        "opponent": "JJ Aldrich",
+        "result": "W",
+        "method": "Submission (guillotine choke)",
+        "event": "UFC Fight Night: Volkov vs. Rozenstruik",
+        "round": 2,
+        "time": "2:38"
+      },
+      {
+        "opponent": "Miranda Maverick",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 269",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Sarah Alpar",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Smith vs. Spann",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Brogan Walker-Sanchez",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "List of Invicta FC events#Invicta FC 41: Morandin vs. Ruiz",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "gender": "female",
@@ -10071,7 +10951,7 @@
     "name": "Kyle Daukaus",
     "record": {
       "wins": 17,
-      "losses": 4,
+      "losses": 5,
       "draws": 0
     },
     "last5": [
@@ -12594,16 +13474,16 @@
       {
         "opponent": "Tyrell Fortune",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Jul. 25, 2026",
+        "method": "TKO (knees)",
+        "event": "UFC Fight Night: Ankalaev vs. Guskov",
         "round": 3,
-        "time": "1:12"
+        "time": "1:11"
       },
       {
         "opponent": "Jailton Almeida",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Feb. 7, 2026",
+        "event": "UFC Fight Night: Bautista vs. Oliveira",
         "round": 3,
         "time": "5:00"
       },
@@ -12611,9 +13491,65 @@
         "opponent": "Curtis Blaydes",
         "result": "L",
         "method": "Decision (split)",
-        "event": "UFC Fight Night: Jun. 21, 2025",
+        "event": "UFC on ABC: Hill vs. Rountree Jr.",
         "round": 3,
         "time": "5:00"
+      },
+      {
+        "opponent": "Renan Ferreira (fighter)",
+        "result": "NC",
+        "method": "NC (overturned)",
+        "event": "PFL 2 (2023)",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Anthony Hamilton (fighter)",
+        "result": "W",
+        "method": "Submission (guillotine choke)",
+        "event": "2022 in Eagle Fighting Championship#Eagle FC 46: Lee vs. Sanchez",
+        "round": 1,
+        "time": "1:17"
+      },
+      {
+        "opponent": "Edivan Mineiro Santos",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Dana White's Contender Series season 5#Week 5 - September 28",
+        "round": 3,
+        "time": "1:00"
+      },
+      {
+        "opponent": "Vladimir Daineko",
+        "result": "W",
+        "method": "TKO (corner stoppage)",
+        "event": "Eagle FC 31",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Ruud Vernooij",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Eagles FC: Next Level",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Shamil Abasov",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Gorilla Fighting 16",
+        "round": 3,
+        "time": "4:53"
+      },
+      {
+        "opponent": "Navid Yadegari",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "Gorets FC: For the Prizes of V. Zolotov",
+        "round": 1,
+        "time": "2:00"
       }
     ],
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-06/KUNIEV_RIZVAN_R_06-21.png",
@@ -12647,16 +13583,80 @@
       {
         "opponent": "Rizvan Kuniev",
         "result": "L",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Jul. 25, 2026",
+        "method": "TKO (knees)",
+        "event": "UFC Fight Night: Ankalaev vs. Guskov",
         "round": 3,
-        "time": "1:12"
+        "time": "1:11"
       },
       {
         "opponent": "Marcin Tybura",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Mar. 28, 2026",
+        "event": "UFC Fight Night: Adesanya vs. Pyfer",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Demoreo Dennis",
+        "result": "W",
+        "method": "TKO (doctor stoppage)",
+        "event": "Lights Out Xtreme Fighting 27",
+        "round": 3,
+        "time": "3:56"
+      },
+      {
+        "opponent": "Tony Lopez",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "RUF MMA 64",
+        "round": 1,
+        "time": "0:27"
+      },
+      {
+        "opponent": "Myron Dennis",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Lights Out Xtreme Fighting 24",
+        "round": 2,
+        "time": "2:29"
+      },
+      {
+        "opponent": "Sergey Bilostenniy",
+        "result": "L",
+        "method": "Submission (heel hook)",
+        "event": "PFL 7 (2024)",
+        "round": 1,
+        "time": "2:00"
+      },
+      {
+        "opponent": "Marcelo Golm",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "PFL 4 (2024)",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Sergey Bilostenniy",
+        "result": "W",
+        "method": "DQ (punches to back of head)",
+        "event": "Bellator 294",
+        "round": 1,
+        "time": "3:26"
+      },
+      {
+        "opponent": "Rakim Cleveland",
+        "result": "W",
+        "method": "TKO (punches and knee)",
+        "event": "Bellator 277",
+        "round": 1,
+        "time": "1:38"
+      },
+      {
+        "opponent": "Linton Vassell",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "Bellator 271",
         "round": 3,
         "time": "5:00"
       }
@@ -14671,21 +15671,13 @@
     "name": "Song Yadong",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/YADONG_SONG_L_05-30.png",
     "record": {
-      "wins": 23,
+      "wins": 22,
       "losses": 9,
       "draws": 1
     },
     "last5": [
       {
-        "opponent": "Deiveson Figueiredo",
-        "result": "W",
-        "method": "Submission",
-        "event": "UFC Fight Night: May. 30, 2026",
-        "round": 2,
-        "time": "4:42"
-      },
-      {
-        "opponent": "Sean O'Malley",
+        "opponent": "Sean O'Malley (fighter)",
         "result": "L",
         "method": "Decision (unanimous)",
         "event": "UFC 324",
@@ -14693,28 +15685,76 @@
         "time": "5:00"
       },
       {
-        "opponent": "Henry Cejudo",
+        "opponent": "Chris Gutiérrez",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Feb. 22, 2025",
-        "round": 3,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Petr Yan",
-        "result": "L",
-        "method": "Decision (unanimous)",
-        "event": "UFC 299",
-        "round": 3,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Chris Gutierrez",
-        "result": "W",
-        "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Dec. 9, 2023",
+        "event": "UFC Fight Night: Song vs. Gutiérrez",
         "round": 5,
         "time": "5:00"
+      },
+      {
+        "opponent": "Ricky Simón",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Song vs. Simón",
+        "round": 5,
+        "time": "1:10"
+      },
+      {
+        "opponent": "Cory Sandhagen",
+        "result": "L",
+        "method": "TKO (doctor stoppage)",
+        "event": "UFC Fight Night: Sandhagen vs. Song",
+        "round": 4,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Marlon Moraes",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "UFC Fight Night: Santos vs. Ankalaev",
+        "round": 1,
+        "time": "2:06"
+      },
+      {
+        "opponent": "Julio Arce",
+        "result": "W",
+        "method": "TKO (head kick and punches)",
+        "event": "UFC Fight Night: Holloway vs. Rodríguez",
+        "round": 2,
+        "time": "1:35"
+      },
+      {
+        "opponent": "Casey Kenney",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC 265",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Kyler Phillips",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 259",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Cody Stamann",
+        "result": "D",
+        "method": "Draw (majority)",
+        "event": "UFC on ESPN: Overeem vs. Rozenstruik",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Alejandro Pérez (fighter)",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "UFC 239",
+        "round": 1,
+        "time": "2:04"
       }
     ],
     "nickname": "Kung Fu Kid",
@@ -14856,8 +15896,8 @@
       {
         "opponent": "Song Yadong",
         "result": "L",
-        "method": "Submission",
-        "event": "UFC Fight Night: May. 30, 2026",
+        "method": "Submission (guillotine choke)",
+        "event": "UFC Fight Night: Song vs. Figueiredo",
         "round": 2,
         "time": "4:42"
       },
@@ -14873,15 +15913,15 @@
         "opponent": "Montel Jackson",
         "result": "W",
         "method": "Decision (split)",
-        "event": "UFC Fight Night: Oct. 11, 2025",
+        "event": "UFC Fight Night: Oliveira vs. Gamrot",
         "round": 3,
         "time": "5:00"
       },
       {
         "opponent": "Cory Sandhagen",
         "result": "L",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: May. 3, 2025",
+        "method": "TKO (knee injury)",
+        "event": "UFC on ESPN: Sandhagen vs. Figueiredo",
         "round": 2,
         "time": "4:08"
       },
@@ -14889,7 +15929,47 @@
         "opponent": "Petr Yan",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Nov. 23, 2024",
+        "event": "UFC Fight Night: Yan vs. Figueiredo",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Marlon Vera",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ABC: Sandhagen vs. Nurmagomedov",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Cody Garbrandt",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC 300",
+        "round": 2,
+        "time": "4:02"
+      },
+      {
+        "opponent": "Rob Font",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Dariush vs. Tsarukyan",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Brandon Moreno",
+        "result": "L",
+        "method": "TKO (doctor stoppage)",
+        "event": "UFC 283",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Brandon Moreno",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 270",
         "round": 5,
         "time": "5:00"
       }
@@ -15055,9 +16135,9 @@
     },
     "last5": [
       {
-        "opponent": "Charles Johnson",
+        "opponent": "Charles Johnson (fighter)",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "TKO (punches)",
         "event": "UFC 324",
         "round": 1,
         "time": "3:16"
@@ -15065,24 +16145,24 @@
       {
         "opponent": "Asu Almabayev",
         "result": "L",
-        "method": "Submission",
-        "event": "UFC Fight Night: Nov. 22, 2025",
+        "method": "Submission (guillotine choke)",
+        "event": "UFC Fight Night: Tsarukyan vs. Hooker",
         "round": 3,
         "time": "0:22"
       },
       {
         "opponent": "Tatsuro Taira",
         "result": "L",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Jun. 15, 2024",
+        "method": "TKO (knee injury)",
+        "event": "UFC on ESPN: Perez vs. Taira",
         "round": 2,
         "time": "2:59"
       },
       {
         "opponent": "Matheus Nicolau",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Apr. 27, 2024",
+        "method": "KO (punch)",
+        "event": "UFC on ESPN: Nicolau vs. Perez",
         "round": 2,
         "time": "2:16"
       },
@@ -15090,7 +16170,47 @@
         "opponent": "Muhammad Mokaev",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Mar. 2, 2024",
+        "event": "UFC Fight Night: Rozenstruik vs. Gaziev",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Alexandre Pantoja",
+        "result": "L",
+        "method": "Submission (neck crank)",
+        "event": "UFC 277",
+        "round": 1,
+        "time": "1:31"
+      },
+      {
+        "opponent": "Deiveson Figueiredo",
+        "result": "L",
+        "method": "Submission (guillotine choke)",
+        "event": "UFC 255",
+        "round": 1,
+        "time": "1:57"
+      },
+      {
+        "opponent": "Jussier Formiga",
+        "result": "W",
+        "method": "TKO (leg kicks)",
+        "event": "UFC 250",
+        "round": 1,
+        "time": "4:06"
+      },
+      {
+        "opponent": "Jordan Espinosa",
+        "result": "W",
+        "method": "Technical Submission (arm-triangle choke)",
+        "event": "UFC Fight Night: Blaydes vs. dos Santos",
+        "round": 1,
+        "time": "2:33"
+      },
+      {
+        "opponent": "Mark De La Rosa",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Barboza vs. Gaethje",
         "round": 3,
         "time": "5:00"
       }
@@ -15399,9 +16519,9 @@
     },
     "last5": [
       {
-        "opponent": "Benoit Saint Denis",
+        "opponent": "Benoît Saint Denis",
         "result": "L",
-        "method": "KO/TKO",
+        "method": "TKO (punches)",
         "event": "UFC 325",
         "round": 2,
         "time": "4:45"
@@ -15409,8 +16529,8 @@
       {
         "opponent": "Arman Tsarukyan",
         "result": "L",
-        "method": "Submission",
-        "event": "UFC Fight Night: Nov. 22, 2025",
+        "method": "Submission (arm-triangle choke)",
+        "event": "UFC Fight Night: Tsarukyan vs. Hooker",
         "round": 2,
         "time": "3:34"
       },
@@ -15433,10 +16553,50 @@
       {
         "opponent": "Claudio Puelles",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "TKO (front kick to the body)",
         "event": "UFC 281",
         "round": 2,
         "time": "4:06"
+      },
+      {
+        "opponent": "Arnold Allen",
+        "result": "L",
+        "method": "TKO (punches and elbows)",
+        "event": "UFC Fight Night: Volkov vs. Aspinall",
+        "round": 1,
+        "time": "2:33"
+      },
+      {
+        "opponent": "Islam Makhachev",
+        "result": "L",
+        "method": "Submission (kimura)",
+        "event": "UFC 267",
+        "round": 1,
+        "time": "2:25"
+      },
+      {
+        "opponent": "Nasrat Haqparast",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 266",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Michael Chandler",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC 257",
+        "round": 1,
+        "time": "2:30"
+      },
+      {
+        "opponent": "Dustin Poirier",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Poirier vs. Hooker",
+        "round": 5,
+        "time": "5:00"
       }
     ],
     "nickname": "The Hangman",
@@ -15578,7 +16738,7 @@
     "name": "Tai Tuivasa",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/TUIVASA_TAI_L_05-02.png",
     "record": {
-      "wins": 15,
+      "wins": 14,
       "losses": 10,
       "draws": 0
     },
@@ -16722,7 +17882,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/BARRIAULT_MARC-ANDRE_L_05-10.png",
     "record": {
       "wins": 17,
-      "losses": 11,
+      "losses": 9,
       "draws": 0
     },
     "last5": [
@@ -17605,8 +18765,8 @@
     "name": "Kelvin Gastelum",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/GASTELUM_KELVIN_L_04-11.png",
     "record": {
-      "wins": 21,
-      "losses": 11,
+      "wins": 19,
+      "losses": 9,
       "draws": 0
     },
     "last5": [
@@ -18594,7 +19754,7 @@
     "name": "Raul Rosas Jr.",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/ROSAS_JR_RAUL_L_03-29.png",
     "record": {
-      "wins": 13,
+      "wins": 12,
       "losses": 1,
       "draws": 0
     },
@@ -18611,33 +19771,73 @@
         "opponent": "Vince Morales",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Mar. 29, 2025",
+        "event": "UFC on ESPN: Moreno vs. Erceg",
         "round": 3,
         "time": "5:00"
       },
       {
-        "opponent": "Aoriqileng",
+        "opponent": "Aori Qileng",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "Riyadh Season Noche Ufc",
+        "event": "UFC 306",
         "round": 3,
         "time": "5:00"
       },
       {
         "opponent": "Ricky Turcios",
         "result": "W",
-        "method": "Submission",
-        "event": "UFC Fight Night: Jun. 8, 2024",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC on ESPN: Cannonier vs. Imavov",
         "round": 2,
         "time": "2:22"
       },
       {
         "opponent": "Terrence Mitchell",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Sep. 16, 2023",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Grasso vs. Shevchenko 2",
         "round": 1,
         "time": "0:54"
+      },
+      {
+        "opponent": "Christian Rodriguez",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 287",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Jay Perrin",
+        "result": "W",
+        "method": "Submission (face crank)",
+        "event": "UFC 282",
+        "round": 1,
+        "time": "2:44"
+      },
+      {
+        "opponent": "Mando Gutierrez",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Dana White's Contender Series Season 6#Week 9 – September 20",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Andres Portocarrero",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UWC Mexico 35",
+        "round": 1,
+        "time": "2:11"
+      },
+      {
+        "opponent": "Jose Guadalupe Peñaloza",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UWC Mexico 34",
+        "round": 2,
+        "time": "2:25"
       }
     ],
     "nickname": "El Nino Problema",
@@ -20961,7 +22161,7 @@
     "name": "Yousri Belgaroui",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/BELGAROUI_YOUSRI_R_10-18.png",
     "record": {
-      "wins": 9,
+      "wins": 10,
       "losses": 3,
       "draws": 0
     },
@@ -21707,19 +22907,11 @@
     "name": "Casey O'Neill",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/ONEILL_CASEY_L_03-28.png",
     "record": {
-      "wins": 11,
+      "wins": 10,
       "losses": 2,
       "draws": 0
     },
     "last5": [
-      {
-        "opponent": "Gabriella Fernandes",
-        "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Mar. 28, 2026",
-        "round": 1,
-        "time": "3:11"
-      },
       {
         "opponent": "Luana Santos",
         "result": "W",
@@ -21729,9 +22921,9 @@
         "time": "5:00"
       },
       {
-        "opponent": "Ariane da Silva",
+        "opponent": "Ariane Lipski",
         "result": "L",
-        "method": "Submission",
+        "method": "Submission (armbar)",
         "event": "UFC 296",
         "round": 2,
         "time": "1:18"
@@ -21750,6 +22942,54 @@
         "method": "Decision (split)",
         "event": "UFC 271",
         "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Antonina Shevchenko",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Santos vs. Walker",
+        "round": 2,
+        "time": "4:47"
+      },
+      {
+        "opponent": "Lara Procópio",
+        "result": "W",
+        "method": "Technical Submission (rear-naked choke)",
+        "event": "UFC on ESPN: The Korean Zombie vs. Ige",
+        "round": 3,
+        "time": "2:54"
+      },
+      {
+        "opponent": "Shana Dobson",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Blaydes vs. Lewis",
+        "round": 2,
+        "time": "3:41"
+      },
+      {
+        "opponent": "Christina Stelliou",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "UAE Warriors 13",
+        "round": 2,
+        "time": "2:12"
+      },
+      {
+        "opponent": "Caitlin McEwen",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Eternal MMA 51",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Miki Motono",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Eternal MMA 48",
+        "round": 5,
         "time": "5:00"
       }
     ],
@@ -23045,15 +24285,15 @@
       {
         "opponent": "Paulo Costa",
         "result": "L",
-        "method": "KO/TKO",
+        "method": "TKO (head kick)",
         "event": "UFC 327",
         "round": 3,
         "time": "1:23"
       },
       {
-        "opponent": "Aleksandar Rakic",
+        "opponent": "Aleksandar Rakić",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "TKO (punches)",
         "event": "UFC 321",
         "round": 1,
         "time": "3:11"
@@ -23061,7 +24301,7 @@
       {
         "opponent": "Brendson Ribeiro",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "TKO (submission to punches)",
         "event": "UFC 316",
         "round": 1,
         "time": "3:25"
@@ -23069,8 +24309,8 @@
       {
         "opponent": "Alonzo Menifield",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Aug. 3, 2024",
+        "method": "KO (punches)",
+        "event": "UFC on ABC: Sandhagen vs. Nurmagomedov",
         "round": 2,
         "time": "3:18"
       },
@@ -23078,9 +24318,49 @@
         "opponent": "Dustin Jacoby",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Apr. 15, 2023",
+        "event": "UFC on ESPN: Holloway vs. Allen",
         "round": 3,
         "time": "5:00"
+      },
+      {
+        "opponent": "Devin Clark (fighter)",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Vera vs. Cruz",
+        "round": 3,
+        "time": "1:18"
+      },
+      {
+        "opponent": "Tafon Nchukwi",
+        "result": "W",
+        "method": "KO (flying knee)",
+        "event": "UFC Fight Night: Santos vs. Ankalaev",
+        "round": 3,
+        "time": "0:44"
+      },
+      {
+        "opponent": "Matheus Scheffel",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Dana White's Contender Series (season 5)#Week 1 - August 31",
+        "round": 1,
+        "time": "3:00"
+      },
+      {
+        "opponent": "Mohammad Fakhreddine",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "rowspan=2|Brave CF 29",
+        "round": 1,
+        "time": "3:37"
+      },
+      {
+        "opponent": "Guto Inocente",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "3",
+        "round": 0,
+        "time": ""
       }
     ],
     "nickname": "Professional",
@@ -23107,39 +24387,31 @@
     "name": "Dominick Reyes",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/REYES_DOMINICK_L_04-11.png",
     "record": {
-      "wins": 16,
+      "wins": 15,
       "losses": 5,
       "draws": 0
     },
     "last5": [
       {
-        "opponent": "Johnny Walker",
-        "result": "W",
-        "method": "Decision (split)",
-        "event": "UFC 327",
-        "round": 3,
-        "time": "5:00"
-      },
-      {
         "opponent": "Carlos Ulberg",
         "result": "L",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Sep. 27, 2025",
+        "method": "KO (punches)",
+        "event": "UFC Fight Night: Ulberg vs. Reyes",
         "round": 1,
         "time": "4:27"
       },
       {
         "opponent": "Nikita Krylov",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "KO (punch)",
         "event": "UFC 314",
         "round": 1,
         "time": "2:24"
       },
       {
-        "opponent": "Anthony Smith",
+        "opponent": "Anthony Smith (fighter)",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "TKO (elbows and punches)",
         "event": "UFC 310",
         "round": 2,
         "time": "4:46"
@@ -23147,10 +24419,58 @@
       {
         "opponent": "Dustin Jacoby",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Jun. 8, 2024",
+        "method": "KO (punches)",
+        "event": "UFC on ESPN: Cannonier vs. Imavov",
         "round": 1,
         "time": "2:00"
+      },
+      {
+        "opponent": "Ryan Spann",
+        "result": "L",
+        "method": "KO (punches)",
+        "event": "UFC 281",
+        "round": 1,
+        "time": "1:20"
+      },
+      {
+        "opponent": "Jiří Procházka",
+        "result": "L",
+        "method": "KO (spinning back elbow)",
+        "event": "UFC on ESPN: Reyes vs. Procházka",
+        "round": 2,
+        "time": "4:29"
+      },
+      {
+        "opponent": "Jan Błachowicz",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC 253",
+        "round": 2,
+        "time": "4:36"
+      },
+      {
+        "opponent": "Jon Jones",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 247",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Chris Weidman",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "UFC on ESPN: Reyes vs. Weidman",
+        "round": 1,
+        "time": "1:43"
+      },
+      {
+        "opponent": "Volkan Oezdemir",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Till vs. Masvidal",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "nickname": "The Devastator",
@@ -23177,50 +24497,90 @@
     "name": "Johnny Walker",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/WALKER_JOHNNY_L_08-23.png",
     "record": {
-      "wins": 22,
-      "losses": 10,
+      "wins": 21,
+      "losses": 7,
       "draws": 0
     },
     "last5": [
       {
-        "opponent": "Dominick Reyes",
-        "result": "L",
-        "method": "Decision (split)",
-        "event": "UFC 327",
-        "round": 3,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Zhang Mingyang",
-        "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Aug. 23, 2025",
-        "round": 2,
-        "time": "2:37"
-      },
-      {
-        "opponent": "Volkan Oezdemir",
-        "result": "L",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Jun. 22, 2024",
-        "round": 1,
-        "time": "2:28"
-      },
-      {
         "opponent": "Magomed Ankalaev",
-        "result": "L",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Jan. 13, 2024",
-        "round": 2,
-        "time": "2:42"
+        "result": "D",
+        "method": "NC (illegal knee)",
+        "event": "UFC 294",
+        "round": 1,
+        "time": "3:13"
       },
       {
-        "opponent": "Anthony Smith",
+        "opponent": "Anthony Smith (fighter)",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: May. 13, 2023",
+        "event": "UFC on ABC: Rozenstruik vs. Almeida",
         "round": 3,
         "time": "5:00"
+      },
+      {
+        "opponent": "Paul Craig",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC 283",
+        "round": 1,
+        "time": "2:16"
+      },
+      {
+        "opponent": "Ion Cuțelaba",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC 279",
+        "round": 1,
+        "time": "4:37"
+      },
+      {
+        "opponent": "Jamahal Hill",
+        "result": "L",
+        "method": "KO (punch)",
+        "event": "UFC Fight Night: Walker vs. Hill",
+        "round": 1,
+        "time": "2:55"
+      },
+      {
+        "opponent": "Thiago Santos",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Santos vs. Walker",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Ryan Spann",
+        "result": "W",
+        "method": "KO (elbows and punches)",
+        "event": "UFC Fight Night: Covington vs. Woodley",
+        "round": 1,
+        "time": "2:43"
+      },
+      {
+        "opponent": "Nikita Krylov",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Lee vs. Oliveira",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Corey Anderson (fighter)",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC 244",
+        "round": 1,
+        "time": "2:07"
+      },
+      {
+        "opponent": "Misha Cirkunov",
+        "result": "W",
+        "method": "TKO (flying knee and punches)",
+        "event": "UFC 235",
+        "round": 1,
+        "time": "0:38"
       }
     ],
     "stats": {
@@ -23376,7 +24736,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-07/LANDWEHR_NATE_L_07-12.png",
     "record": {
       "wins": 18,
-      "losses": 8,
+      "losses": 7,
       "draws": 0
     },
     "last5": [
@@ -23512,7 +24872,7 @@
     },
     "last5": [
       {
-        "opponent": "Patricio Pitbull",
+        "opponent": "Patrício Pitbull",
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC 327",
@@ -23522,10 +24882,74 @@
       {
         "opponent": "Lerone Murphy",
         "result": "L",
-        "method": "KO/TKO",
+        "method": "KO (spinning back elbow)",
         "event": "UFC 319",
         "round": 1,
         "time": "3:21"
+      },
+      {
+        "opponent": "Henry Corrales",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "PFL vs. Bellator",
+        "round": 1,
+        "time": "4:53"
+      },
+      {
+        "opponent": "Pedro Carvalho (fighter)",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Bellator 299",
+        "round": 1,
+        "time": "3:05"
+      },
+      {
+        "opponent": "James Gonzalez",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Bellator 295",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Jeremy Kennedy",
+        "result": "L",
+        "method": "TKO (shoulder injury)",
+        "event": "Bellator 286",
+        "round": 1,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Adli Edwards",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Bellator 277",
+        "round": 3,
+        "time": "0:55"
+      },
+      {
+        "opponent": "Justin Gonzales",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Bellator 271",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Aiden Lee",
+        "result": "W",
+        "method": "Submission (anaconda choke)",
+        "event": "Bellator 260",
+        "round": 3,
+        "time": "1:33"
+      },
+      {
+        "opponent": "John de Jesus",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "Bellator MMA in 2020#Bellator 252",
+        "round": 2,
+        "time": "4:12"
       }
     ],
     "stats": {
@@ -24609,8 +26033,8 @@
       {
         "opponent": "Gilbert Burns",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Apr. 18, 2026",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Burns vs. Malott",
         "round": 3,
         "time": "2:08"
       },
@@ -24618,14 +26042,14 @@
         "opponent": "Kevin Holland",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Oct. 18, 2025",
+        "event": "UFC Fight Night: de Ridder vs. Allen",
         "round": 3,
         "time": "5:00"
       },
       {
         "opponent": "Charles Radtke",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "KO (punches)",
         "event": "UFC 315",
         "round": 2,
         "time": "0:26"
@@ -24634,17 +26058,57 @@
         "opponent": "Trevin Giles",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Nov. 2, 2024",
+        "event": "UFC Fight Night: Moreno vs. Albazi",
         "round": 3,
         "time": "5:00"
       },
       {
         "opponent": "Neil Magny",
         "result": "L",
-        "method": "KO/TKO",
+        "method": "TKO (punches)",
         "event": "UFC 297",
         "round": 3,
         "time": "4:45"
+      },
+      {
+        "opponent": "Yohan Lainesse",
+        "result": "W",
+        "method": "Submission (arm-triangle choke)",
+        "event": "UFC Fight Night: Muniz vs. Allen",
+        "round": 1,
+        "time": "4:15"
+      },
+      {
+        "opponent": "Mickey Gall",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC 273",
+        "round": 1,
+        "time": "3:41"
+      },
+      {
+        "opponent": "Shimon Smotritsky",
+        "result": "W",
+        "method": "Submission (guillotine choke)",
+        "event": "Dana White's Contender Series (season 5)#Week 6 - October 5",
+        "round": 1,
+        "time": "0:39"
+      },
+      {
+        "opponent": "Solomon Renfro",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "Cage Fury FC 91",
+        "round": 1,
+        "time": "1:42"
+      },
+      {
+        "opponent": "Craig Shintani",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "Xcessive Force FC 13",
+        "round": 1,
+        "time": "0:36"
       }
     ],
     "nickname": "Proper",
@@ -25052,31 +26516,39 @@
         "opponent": "Karine Silva",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Apr. 18, 2026",
+        "event": "UFC Fight Night: Burns vs. Malott",
         "round": 3,
         "time": "5:00"
       },
       {
         "opponent": "Manon Fiorot",
         "result": "L",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Oct. 18, 2025",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: de Ridder vs. Allen",
         "round": 1,
         "time": "1:14"
       },
       {
-        "opponent": "Jessica Andrade",
+        "opponent": "Jéssica Andrade",
         "result": "W",
-        "method": "Submission",
+        "method": "Submission (rear-naked choke)",
         "event": "UFC 315",
         "round": 1,
         "time": "2:40"
       },
       {
+        "opponent": "Mayra Bueno Silva",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Adesanya vs. Imavov",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
         "opponent": "Ariane da Silva",
         "result": "W",
-        "method": "Submission",
-        "event": "UFC Fight Night: Nov. 2, 2024",
+        "method": "Submission (brabo choke)",
+        "event": "UFC Fight Night: Moreno vs. Albazi",
         "round": 3,
         "time": "2:28"
       },
@@ -25084,7 +26556,39 @@
         "opponent": "Fatima Kline",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Jul. 13, 2024",
+        "event": "UFC on ESPN: Namajunas vs. Cortez",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Priscila Cachoeira",
+        "result": "W",
+        "method": "Submission (anaconda choke)",
+        "event": "UFC 297",
+        "round": 3,
+        "time": "4:21"
+      },
+      {
+        "opponent": "Tracy Cortez",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Grasso vs. Shevchenko 2",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Miranda Maverick",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 289",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Gabriella Fernandes",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Muniz vs. Allen",
         "round": 3,
         "time": "5:00"
       }
@@ -25727,15 +27231,15 @@
         "opponent": "Jamey-Lyn Horth",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Apr. 18, 2026",
+        "event": "UFC Fight Night: Burns vs. Malott",
         "round": 3,
         "time": "5:00"
       },
       {
-        "opponent": "Andrea Lee",
+        "opponent": "Andrea Lee (fighter)",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Mar. 1, 2025",
+        "event": "UFC Fight Night: Kape vs. Almabayev",
         "round": 3,
         "time": "5:00"
       },
@@ -25743,7 +27247,7 @@
         "opponent": "Veronica Hardy",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: May. 11, 2024",
+        "event": "UFC on ESPN: Lewis vs. Nascimento",
         "round": 3,
         "time": "5:00"
       },
@@ -25751,17 +27255,57 @@
         "opponent": "Montana De La Rosa",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Oct. 7, 2023",
+        "event": "UFC Fight Night: Dawson vs. Green",
         "round": 3,
         "time": "5:00"
       },
       {
         "opponent": "Liang Na",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Aug. 26, 2023",
+        "method": "TKO (punches and elbows)",
+        "event": "UFC Fight Night: Holloway vs. The Korean Zombie",
         "round": 2,
         "time": "4:49"
+      },
+      {
+        "opponent": "Ariane Lipski",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Yan vs. Dvalishvili",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Erin Blanchfield",
+        "result": "L",
+        "method": "Submission (guillotine choke)",
+        "event": "UFC Fight Night: Volkov vs. Rozenstruik",
+        "round": 2,
+        "time": "2:38"
+      },
+      {
+        "opponent": "Gillian Robertson",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Santos vs. Ankalaev",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Vanessa Demopoulos",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Barboza vs. Chikadze",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Cortney Casey",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Edwards vs. Muhammad",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "stats": {
@@ -26326,7 +27870,7 @@
     "name": "Rafa Garcia",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/GARCIA_RAFA_L_04-25.png",
     "record": {
-      "wins": 19,
+      "wins": 18,
       "losses": 4,
       "draws": 0
     },
@@ -26809,15 +28353,15 @@
         "opponent": "Montel Jackson",
         "result": "W",
         "method": "Decision (split)",
-        "event": "UFC Fight Night: Apr. 25, 2026",
+        "event": "UFC Fight Night: Sterling vs. Zalal",
         "round": 3,
         "time": "5:00"
       },
       {
-        "opponent": "Ricky Simon",
+        "opponent": "Ricky Simón",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Nov. 8, 2025",
+        "event": "UFC Fight Night: Bonfim vs. Brown",
         "round": 3,
         "time": "5:00"
       },
@@ -26825,7 +28369,7 @@
         "opponent": "Cody Garbrandt",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Jun. 14, 2025",
+        "event": "UFC on ESPN: Usman vs. Buckley",
         "round": 3,
         "time": "5:00"
       },
@@ -26838,12 +28382,52 @@
         "time": "5:00"
       },
       {
-        "opponent": "Cristian Quinonez",
+        "opponent": "Cristian Quiñónez",
         "result": "W",
-        "method": "Submission",
-        "event": "UFC Fight Night: Feb. 24, 2024",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC Fight Night: Moreno vs. Royval 2",
         "round": 3,
         "time": "2:04"
+      },
+      {
+        "opponent": "Kyler Phillips",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Sandhagen vs. Font",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Umar Nurmagomedov",
+        "result": "L",
+        "method": "KO (body kick and punch)",
+        "event": "UFC Fight Night: Strickland vs. Imavov",
+        "round": 1,
+        "time": "4:40"
+      },
+      {
+        "opponent": "Trevin Jones",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Dern vs. Yan",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Victor Henry (fighter)",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 270",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Timur Valiev",
+        "result": "L",
+        "method": "Decision (majority)",
+        "event": "UFC Fight Night: Gane vs. Volkov",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "stats": {
@@ -27958,7 +29542,7 @@
     "name": "Tim Elliott",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/ELLIOTT_TIM_L_05-02.png",
     "record": {
-      "wins": 22,
+      "wins": 21,
       "losses": 14,
       "draws": 1
     },
@@ -27967,30 +29551,22 @@
         "opponent": "Steve Erceg",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: May. 2, 2026",
+        "event": "UFC Fight Night: Della Maddalena vs. Prates",
         "round": 3,
         "time": "5:00"
       },
       {
         "opponent": "Kai Asakura",
         "result": "W",
-        "method": "Submission",
+        "method": "Submission (guillotine choke)",
         "event": "UFC 319",
         "round": 2,
         "time": "4:39"
       },
       {
-        "opponent": "Sumudaerji",
-        "result": "W",
-        "method": "Submission",
-        "event": "UFC Fight Night: Dec. 9, 2023",
-        "round": 1,
-        "time": "4:02"
-      },
-      {
         "opponent": "Muhammad Mokaev",
         "result": "L",
-        "method": "Submission",
+        "method": "Submission (arm-triangle choke)",
         "event": "UFC 294",
         "round": 3,
         "time": "3:03"
@@ -27999,7 +29575,55 @@
         "opponent": "Victor Altamirano",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Jun. 3, 2023",
+        "event": "UFC on ESPN: Kara-France vs. Albazi",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Tagir Ulanbekov",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 272",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Matheus Nicolau",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Dern vs. Rodriguez",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Jordan Espinosa",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 259",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Ryan Benoit",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Kattar vs. Ige",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Brandon Royval",
+        "result": "L",
+        "method": "Submission (arm-triangle choke)",
+        "event": "UFC on ESPN: Woodley vs. Burns",
+        "round": 2,
+        "time": "3:18"
+      },
+      {
+        "opponent": "Askar Askarov",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 246",
         "round": 3,
         "time": "5:00"
       }
@@ -28847,30 +30471,30 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/5/BUCKLEY_JOAQUIN_L_05-11.png",
     "record": {
       "wins": 21,
-      "losses": 8,
+      "losses": 7,
       "draws": 0
     },
     "last5": [
       {
-        "opponent": "Sean Brady",
-        "result": "L",
-        "method": "Decision (unanimous)",
-        "event": "UFC 328",
-        "round": 3,
-        "time": "5:00"
-      },
-      {
         "opponent": "Kamaru Usman",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Jun. 14, 2025",
+        "event": "UFC on ESPN: Usman vs. Buckley",
         "round": 5,
         "time": "5:00"
       },
       {
-        "opponent": "Stephen Thompson",
+        "opponent": "Colby Covington",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "TKO (doctor stoppage)",
+        "event": "UFC on ESPN: Covington vs. Buckley",
+        "round": 3,
+        "time": "4:42"
+      },
+      {
+        "opponent": "Stephen Thompson (fighter)",
+        "result": "W",
+        "method": "KO (punch)",
         "event": "UFC 307",
         "round": 3,
         "time": "2:17"
@@ -28879,17 +30503,57 @@
         "opponent": "Nursulton Ruziboev",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: May. 11, 2024",
+        "event": "UFC on ESPN: Lewis vs. Nascimento",
         "round": 3,
         "time": "5:00"
       },
       {
         "opponent": "Vicente Luque",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Mar. 30, 2024",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Blanchfield vs. Fiorot",
         "round": 2,
         "time": "3:17"
+      },
+      {
+        "opponent": "Alex Morono",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Dawson vs. Green",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "André Fialho",
+        "result": "W",
+        "method": "TKO (head kick)",
+        "event": "UFC Fight Night: Dern vs. Hill",
+        "round": 2,
+        "time": "4:15"
+      },
+      {
+        "opponent": "Chris Curtis (fighter)",
+        "result": "L",
+        "method": "KO (punches)",
+        "event": "UFC 282",
+        "round": 2,
+        "time": "2:49"
+      },
+      {
+        "opponent": "Nassourdine Imavov",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Gane vs. Tuivasa",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Albert Duraev",
+        "result": "W",
+        "method": "TKO (doctor stoppage)",
+        "event": "UFC on ESPN: Kattar vs. Emmett",
+        "round": 2,
+        "time": "5:00"
       }
     ],
     "nickname": "New Mansa",
@@ -29564,15 +31228,15 @@
     "name": "Yaroslav Amosov",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/AMOSOV_YAROSLAV_R_12-13.png",
     "record": {
-      "wins": 29,
+      "wins": 30,
       "losses": 1,
       "draws": 0
     },
     "last5": [
       {
-        "opponent": "Joel Alvarez",
+        "opponent": "Joel Álvarez",
         "result": "W",
-        "method": "Submission",
+        "method": "Submission (arm-triangle choke)",
         "event": "UFC 328",
         "round": 2,
         "time": "1:13"
@@ -29580,10 +31244,74 @@
       {
         "opponent": "Neil Magny",
         "result": "W",
-        "method": "Submission",
-        "event": "UFC Fight Night: Dec. 13, 2025",
+        "method": "Submission (anaconda choke)",
+        "event": "UFC on ESPN: Royval vs. Kape",
         "round": 1,
         "time": "3:14"
+      },
+      {
+        "opponent": "Curtis Millender",
+        "result": "W",
+        "method": "Submission (anaconda choke)",
+        "event": "Cage Fury FC 140",
+        "round": 1,
+        "time": "4:17"
+      },
+      {
+        "opponent": "Jason Jackson (fighter)",
+        "result": "L",
+        "method": "KO (punches)",
+        "event": "Bellator 301",
+        "round": 3,
+        "time": "2:08"
+      },
+      {
+        "opponent": "Logan Storley",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Bellator 291",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Douglas Lima",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Bellator 260",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Logan Storley",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "Bellator MMA in 2020#Bellator 252",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Mark Lemminger",
+        "result": "W",
+        "method": "TKO (doctor stoppage)",
+        "event": "Bellator MMA in 2020#Bellator 244",
+        "round": 1,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Ed Ruth",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Bellator MMA in 2020#Bellator 239",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "David Rickels",
+        "result": "W",
+        "method": "Submission (brabo сhoke)",
+        "event": "Bellator MMA in 2019#Bellator 225",
+        "round": 2,
+        "time": "4:05"
       }
     ],
     "stats": {
@@ -30410,9 +32138,9 @@
     "name": "Dooho Choi",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/CHOI_DOOHO_L_05-16.png",
     "record": {
-      "wins": 17,
+      "wins": 14,
       "losses": 4,
-      "draws": 1
+      "draws": 0
     },
     "last5": [
       {
@@ -31713,16 +33441,16 @@
       {
         "opponent": "Zhang Mingyang",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: May. 30, 2026",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Song vs. Figueiredo",
         "round": 1,
         "time": "4:15"
       },
       {
         "opponent": "Volkan Oezdemir",
         "result": "L",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Nov. 22, 2025",
+        "method": "KO (knee and punches)",
+        "event": "UFC Fight Night: Tsarukyan vs. Hooker",
         "round": 1,
         "time": "1:27"
       },
@@ -31730,7 +33458,7 @@
         "opponent": "Oumar Sy",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Jun. 14, 2025",
+        "event": "UFC on ESPN: Usman vs. Buckley",
         "round": 3,
         "time": "5:00"
       },
@@ -31738,17 +33466,57 @@
         "opponent": "Julius Walker",
         "result": "W",
         "method": "Decision (split)",
-        "event": "UFC Fight Night: Feb. 22, 2025",
+        "event": "UFC Fight Night: Cejudo vs. Song",
         "round": 3,
         "time": "5:00"
       },
       {
         "opponent": "Azamat Murzakanov",
         "result": "L",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Aug. 3, 2024",
+        "method": "KO (punches)",
+        "event": "UFC on ABC: Sandhagen vs. Nurmagomedov",
         "round": 2,
         "time": "3:18"
+      },
+      {
+        "opponent": "Carlos Ulberg",
+        "result": "L",
+        "method": "KO (punches)",
+        "event": "UFC on ESPN: Lewis vs. Nascimento",
+        "round": 1,
+        "time": "0:12"
+      },
+      {
+        "opponent": "Dustin Jacoby",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 296",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Jimmy Crute",
+        "result": "W",
+        "method": "Submission (guillotine choke)",
+        "event": "UFC 290",
+        "round": 2,
+        "time": "1:55"
+      },
+      {
+        "opponent": "Misha Cirkunov",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "UFC Fight Night: Grasso vs. Araújo",
+        "round": 1,
+        "time": "1:28"
+      },
+      {
+        "opponent": "Askar Mozharov",
+        "result": "W",
+        "method": "TKO (elbows)",
+        "event": "UFC Fight Night: Volkov vs. Rozenstruik",
+        "round": 1,
+        "time": "4:40"
       }
     ],
     "nickname": "Atomic",
@@ -32939,31 +34707,31 @@
         "opponent": "Belal Muhammad",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Jun. 6, 2026",
+        "event": "UFC Fight Night: Muhammad vs. Bonfim",
         "round": 5,
         "time": "5:00"
       },
       {
-        "opponent": "Randy Brown",
+        "opponent": "Randy Brown (fighter)",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Nov. 8, 2025",
+        "method": "TKO (knee)",
+        "event": "UFC Fight Night: Bonfim vs. Brown",
         "round": 2,
         "time": "1:40"
       },
       {
-        "opponent": "Stephen Thompson",
+        "opponent": "Stephen Thompson (fighter)",
         "result": "W",
         "method": "Decision (split)",
-        "event": "UFC Fight Night: Jul. 12, 2025",
+        "event": "UFC on ESPN: Lewis vs. Teixeira",
         "round": 3,
         "time": "5:00"
       },
       {
         "opponent": "Khaos Williams",
         "result": "W",
-        "method": "Submission",
-        "event": "UFC Fight Night: Feb. 15, 2025",
+        "method": "Technical Submission (brabo choke)",
+        "event": "UFC Fight Night: Cannonier vs. Rodrigues",
         "round": 2,
         "time": "4:58"
       },
@@ -32971,9 +34739,49 @@
         "opponent": "Ange Loosa",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Jul. 13, 2024",
+        "event": "UFC on ESPN: Namajunas vs. Cortez",
         "round": 3,
         "time": "5:00"
+      },
+      {
+        "opponent": "Nicolas Dalby",
+        "result": "L",
+        "method": "TKO (knees and punches)",
+        "event": "UFC Fight Night: Almeida vs. Lewis",
+        "round": 2,
+        "time": "4:33"
+      },
+      {
+        "opponent": "Trevin Giles",
+        "result": "W",
+        "method": "Submission (guillotine choke)",
+        "event": "UFC 291",
+        "round": 1,
+        "time": "1:13"
+      },
+      {
+        "opponent": "Mounir Lazzez",
+        "result": "W",
+        "method": "Submission (guillotine choke)",
+        "event": "UFC 283",
+        "round": 1,
+        "time": "0:49"
+      },
+      {
+        "opponent": "Trey Waters",
+        "result": "W",
+        "method": "Submission (Von Flue choke)",
+        "event": "Dana White's Contender Series season 6#Week 7 – September 6",
+        "round": 1,
+        "time": "4:13"
+      },
+      {
+        "opponent": "Eduardo Garvon",
+        "result": "W",
+        "method": "Submission (brabo choke)",
+        "event": "2022 in Legacy Fighting Alliance#Legacy Fighting Alliance 126: Bilharinho vs. Delano",
+        "round": 1,
+        "time": "1:19"
       }
     ],
     "nickname": "Marretinha",
@@ -35550,7 +37358,7 @@
         "opponent": "Marlon Vera",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Feb. 28, 2026",
+        "event": "UFC Fight Night: Moreno vs. Kavanagh",
         "round": 3,
         "time": "5:00"
       },
@@ -35558,17 +37366,73 @@
         "opponent": "Rob Font",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Sep. 13, 2025",
+        "event": "UFC Fight Night: Lopes vs. Silva",
         "round": 3,
         "time": "5:00"
       },
       {
         "opponent": "Saimon Oliveira",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Mar. 29, 2025",
+        "method": "TKO (knee and punches)",
+        "event": "UFC on ESPN: Moreno vs. Erceg",
         "round": 1,
         "time": "4:38"
+      },
+      {
+        "opponent": "Xavier Franklin",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Dana White's Contender Series season 8#Week 8 – October 1",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Jose Zarauz",
+        "result": "W",
+        "method": "KO (spinning wheel kick)",
+        "event": "Combate Global: Martínez vs. Zarauz",
+        "round": 4,
+        "time": "4:17"
+      },
+      {
+        "opponent": "Axel Osuna",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Combate Global: Martínez vs. Osuna",
+        "round": 4,
+        "time": "4:14"
+      },
+      {
+        "opponent": "Arturo Vergara",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Combate Global: Martínez vs. Vergara",
+        "round": 1,
+        "time": "2:08"
+      },
+      {
+        "opponent": "Francisco Rivera (fighter)",
+        "result": "W",
+        "method": "KO (head kick and punches)",
+        "event": "rowspan=3|Combate Global: Bantamweight Tournament",
+        "round": 2,
+        "time": "0:17"
+      },
+      {
+        "opponent": "Alan Cantú",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "3",
+        "round": 0,
+        "time": ""
+      },
+      {
+        "opponent": "Alejandro González",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "1",
+        "round": 0,
+        "time": ""
       }
     ],
     "stats": {
@@ -39021,15 +40885,15 @@
         "opponent": "Tecia Pennington",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Nov. 8, 2025",
+        "event": "UFC Fight Night: Bonfim vs. Brown",
         "round": 3,
         "time": "5:00"
       },
       {
         "opponent": "Elise Reed",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: May. 17, 2025",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Burns vs. Morales",
         "round": 2,
         "time": "0:30"
       },
@@ -39037,7 +40901,7 @@
         "opponent": "Karolina Kowalkiewicz",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Nov. 9, 2024",
+        "event": "UFC Fight Night: Magny vs. Prates",
         "round": 3,
         "time": "5:00"
       },
@@ -39045,7 +40909,7 @@
         "opponent": "Eduarda Moura",
         "result": "W",
         "method": "Decision (split)",
-        "event": "UFC Fight Night: Jun. 8, 2024",
+        "event": "UFC on ESPN: Cannonier vs. Imavov",
         "round": 3,
         "time": "5:00"
       },
@@ -39053,9 +40917,49 @@
         "opponent": "Angela Hill",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Nov. 4, 2023",
+        "event": "UFC Fight Night: Almeida vs. Lewis",
         "round": 3,
         "time": "5:00"
+      },
+      {
+        "opponent": "Yazmin Jauregui",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC 290",
+        "round": 1,
+        "time": "0:20"
+      },
+      {
+        "opponent": "Bruna Brasil",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Holloway vs. Allen",
+        "round": 2,
+        "time": "2:42"
+      },
+      {
+        "opponent": "Loma Lookboonmee",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Sandhagen vs. Song",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Rayanne dos Santos",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Dana White's Contender Series (season 6)#Week 5 – August 23",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Milana Dudieva",
+        "result": "W",
+        "method": "TKO (knees and punches)",
+        "event": "List of Invicta FC events#Invicta FC 46: Rodríguez vs. Torquato II",
+        "round": 3,
+        "time": "1:56"
       }
     ],
     "nickname": "Dee",
@@ -39743,7 +41647,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-07/IGE_DAN_L_07-19.png",
     "record": {
       "wins": 19,
-      "losses": 10,
+      "losses": 11,
       "draws": 0
     },
     "last5": [
@@ -40013,8 +41917,8 @@
       {
         "opponent": "Joselyne Edwards",
         "result": "L",
-        "method": "Submission",
-        "event": "UFC Fight Night: Feb. 21, 2026",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC Fight Night: Strickland vs. Hernandez",
         "round": 2,
         "time": "2:44"
       },
@@ -40022,14 +41926,14 @@
         "opponent": "Karol Rosa",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Aug. 2, 2025",
+        "event": "UFC on ESPN: Taira vs. Park",
         "round": 3,
         "time": "5:00"
       },
       {
         "opponent": "Hailey Cowan",
         "result": "W",
-        "method": "Submission",
+        "method": "Submission (rear-naked choke)",
         "event": "UFC 314",
         "round": 2,
         "time": "1:52"
@@ -40038,17 +41942,57 @@
         "opponent": "Jacqueline Cavalcanti",
         "result": "L",
         "method": "Decision (split)",
-        "event": "UFC Fight Night: Sep. 28, 2024",
+        "event": "UFC Fight Night: Moicano vs. Saint Denis",
         "round": 3,
         "time": "5:00"
       },
       {
         "opponent": "Melissa Mullins",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Apr. 6, 2024",
+        "method": "TKO (knee to the body and head kicks)",
+        "event": "UFC Fight Night: Allen vs. Curtis 2",
         "round": 2,
         "time": "3:06"
+      },
+      {
+        "opponent": "Joselyne Edwards",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Gane vs. Spivac",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Hassna Gaber",
+        "result": "W",
+        "method": "TKO (leg injury)",
+        "event": "UAE Warriors 38",
+        "round": 1,
+        "time": "2:45"
+      },
+      {
+        "opponent": "Sanaa Mandar",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UAE Warriors 37",
+        "round": 1,
+        "time": "2:47"
+      },
+      {
+        "opponent": "Priscila de Souza",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Hexagone MMA 6",
+        "round": 2,
+        "time": "2:25"
+      },
+      {
+        "opponent": "Asmaa Abash",
+        "result": "W",
+        "method": "TKO (elbows)",
+        "event": "UAE Warriors 32",
+        "round": 3,
+        "time": "3:15"
       }
     ],
     "stats": {
@@ -40475,7 +42419,7 @@
     "name": "Joseph Morales",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/MORALES_JOSEPH_R_11-08.png",
     "record": {
-      "wins": 15,
+      "wins": 14,
       "losses": 2,
       "draws": 0
     },
@@ -40696,7 +42640,7 @@
     },
     "last5": [
       {
-        "opponent": "Alexander Volkov",
+        "opponent": "Alexander Volkov (fighter)",
         "result": "L",
         "method": "Decision (unanimous)",
         "event": "UFC 328",
@@ -40706,7 +42650,7 @@
       {
         "opponent": "Derrick Lewis",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "TKO (punches)",
         "event": "UFC 324",
         "round": 2,
         "time": "3:14"
@@ -40714,16 +42658,16 @@
       {
         "opponent": "Shamil Gaziev",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Nov. 22, 2025",
+        "method": "KO (punches)",
+        "event": "UFC Fight Night: Tsarukyan vs. Hooker",
         "round": 1,
         "time": "1:22"
       },
       {
         "opponent": "Ante Delija",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Nov. 1, 2025",
+        "method": "KO (punches)",
+        "event": "UFC Fight Night: Garcia vs. Onama",
         "round": 1,
         "time": "3:59"
       },
@@ -40731,9 +42675,49 @@
         "opponent": "Sergei Pavlovich",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Aug. 23, 2025",
+        "event": "UFC Fight Night: Walker vs. Zhang",
         "round": 3,
         "time": "5:00"
+      },
+      {
+        "opponent": "Serghei Spivac",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 316",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Ryan Spann",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "UFC Fight Night: Vettori vs. Dolidze 2",
+        "round": 2,
+        "time": "4:48"
+      },
+      {
+        "opponent": "Robelis Despaigne",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Lewis vs. Nascimento",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Andrei Arlovski",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Ankalaev vs. Walker 2",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Łukasz Brzeski",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "UFC Fight Night: Holloway vs. The Korean Zombie",
+        "round": 1,
+        "time": "3:01"
       }
     ],
     "nickname": "Salsa Boy",
@@ -41306,8 +43290,8 @@
     "id": "salahdine-parnasse",
     "name": "Salahdine Parnasse",
     "record": {
-      "wins": 0,
-      "losses": 0,
+      "wins": 23,
+      "losses": 2,
       "draws": 0
     },
     "last5": [
@@ -42779,7 +44763,7 @@
     "name": "Robelis Despaigne",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/5/DESPAIGNE_ROBELIS_L_03-09.png",
     "record": {
-      "wins": 5,
+      "wins": 6,
       "losses": 2,
       "draws": 0
     },
@@ -43016,10 +45000,10 @@
     },
     "last5": [
       {
-        "opponent": "David Martinez",
+        "opponent": "David Martínez (fighter)",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Feb. 28, 2026",
+        "event": "UFC Fight Night: Moreno vs. Kavanagh",
         "round": 3,
         "time": "5:00"
       },
@@ -43027,20 +45011,12 @@
         "opponent": "Aiemann Zahabi",
         "result": "L",
         "method": "Decision (split)",
-        "event": "UFC Fight Night: Oct. 18, 2025",
+        "event": "UFC Fight Night: de Ridder vs. Allen",
         "round": 3,
         "time": "5:00"
       },
       {
-        "opponent": "Deiveson Figueiredo",
-        "result": "L",
-        "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Aug. 3, 2024",
-        "round": 3,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Sean O'Malley",
+        "opponent": "Sean O'Malley (fighter)",
         "result": "L",
         "method": "Decision (unanimous)",
         "event": "UFC 299",
@@ -43052,6 +45028,54 @@
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC 292",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Cory Sandhagen",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC on ESPN: Vera vs. Sandhagen",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Dominick Cruz",
+        "result": "W",
+        "method": "KO (head kick)",
+        "event": "UFC on ESPN: Vera vs. Cruz",
+        "round": 4,
+        "time": "2:17"
+      },
+      {
+        "opponent": "Rob Font",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Font vs. Vera",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Frankie Edgar",
+        "result": "W",
+        "method": "KO (front kick)",
+        "event": "UFC 268",
+        "round": 3,
+        "time": "3:50"
+      },
+      {
+        "opponent": "Davey Grant",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: The Korean Zombie vs. Ige",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "José Aldo",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Thompson vs. Neal",
         "round": 3,
         "time": "5:00"
       }
@@ -45111,9 +47135,9 @@
     "id": "abus-magomedov",
     "name": "Abus Magomedov",
     "record": {
-      "wins": 29,
-      "losses": 7,
-      "draws": 1
+      "wins": 17,
+      "losses": 1,
+      "draws": 0
     },
     "last5": [
       {
@@ -45370,7 +47394,7 @@
         "time": "5:00"
       },
       {
-        "opponent": "Felipe Lima",
+        "opponent": "Felipe Lima (fighter)",
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC 317",
@@ -45388,7 +47412,7 @@
       {
         "opponent": "Yanis Ghemmouri",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "KO (punches)",
         "event": "UFC 303",
         "round": 1,
         "time": "0:19"
@@ -45396,10 +47420,50 @@
       {
         "opponent": "Cameron Saaiman",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Mar. 23, 2024",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Ribas vs. Namajunas",
         "round": 2,
         "time": "0:21"
+      },
+      {
+        "opponent": "Nick Aguirre",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC Fight Night: Allen vs. Craig",
+        "round": 3,
+        "time": "0:58"
+      },
+      {
+        "opponent": "Reyes Cortez Jr.",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Dana White's Contender Series (season 7)#Week 1 – August 8",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Cristhian Rivas",
+        "result": "W",
+        "method": "TKO (punches and elbows)",
+        "event": "Urijah Faber's A1 Combat 9",
+        "round": 3,
+        "time": "1:35"
+      },
+      {
+        "opponent": "Anthony Jimenez",
+        "result": "W",
+        "method": "TKO (flying knee and punches)",
+        "event": "Urijah Faber's A1 Combat 6",
+        "round": 2,
+        "time": "4:26"
+      },
+      {
+        "opponent": "Hector Fajardo",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Urijah Faber's A1 Combat 2",
+        "round": 2,
+        "time": "4:51"
       }
     ],
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-06/TALBOTT_PAYTON_L_06-28.png?itok=SCY_KVRR",
@@ -45524,7 +47588,7 @@
     "id": "court-mcgee",
     "name": "Court McGee",
     "record": {
-      "wins": 23,
+      "wins": 22,
       "losses": 14,
       "draws": 0
     },
@@ -45714,8 +47778,8 @@
     "id": "lawrence-lui",
     "name": "Lawrence Lui",
     "record": {
-      "wins": 8,
-      "losses": 1,
+      "wins": 11,
+      "losses": 5,
       "draws": 0
     },
     "last5": [
@@ -46265,7 +48329,7 @@
     "weightClass": "Light Heavyweight",
     "record": {
       "wins": 29,
-      "losses": 12,
+      "losses": 11,
       "draws": 2
     },
     "height": "6'2\"",
@@ -46276,7 +48340,88 @@
     "pfp": false,
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-07/BLACHOWICZ_JAN_L_08-01.png?itok=ESS7apdi",
     "bio": "Jan Blachowicz is a Polish professional mixed martial artist in the UFC light heavyweight division and a former UFC light heavyweight champion. Get the latest UFC breaking news, fight night results, MMA records and stats, highlights, photos, videos and more.",
-    "last5": []
+    "last5": [
+      {
+        "opponent": "Bogdan Guskov",
+        "result": "D",
+        "method": "Draw (majority)",
+        "event": "UFC 323",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Carlos Ulberg",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Edwards vs. Brady",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Alex Pereira",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC 291",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Magomed Ankalaev",
+        "result": "D",
+        "method": "Draw (split)",
+        "event": "UFC 282",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Aleksandar Rakić",
+        "result": "W",
+        "method": "TKO (knee injury)",
+        "event": "UFC on ESPN: Błachowicz vs. Rakić",
+        "round": 3,
+        "time": "1:11"
+      },
+      {
+        "opponent": "Glover Teixeira",
+        "result": "L",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC 267",
+        "round": 2,
+        "time": "3:02"
+      },
+      {
+        "opponent": "Israel Adesanya",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 259",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Dominick Reyes",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC 253",
+        "round": 2,
+        "time": "4:36"
+      },
+      {
+        "opponent": "Corey Anderson (fighter)",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "UFC Fight Night: Anderson vs. Błachowicz 2",
+        "round": 1,
+        "time": "3:08"
+      },
+      {
+        "opponent": "Ronaldo Souza",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Błachowicz vs. Jacaré",
+        "round": 5,
+        "time": "5:00"
+      }
+    ]
   },
   {
     "id": "kevin-vallejos",
@@ -46438,7 +48583,88 @@
     "pfp": false,
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/MIZUKI_R_10-25.png?itok=CpbTHLy2",
     "bio": "Mizuki is a Japanese professional mixed martial artist in the UFC strawweight division. Get the latest UFC breaking news, fight night results, MMA records and stats, highlights, photos, videos and more.",
-    "last5": [],
+    "last5": [
+      {
+        "opponent": "Jaqueline Amorim",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 321",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Hannah Goldy",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Fiziev vs. Gamrot",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Amanda Lemos",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Munhoz vs. Edgar",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Wu Yanan (fighter)",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Andrade vs. Zhang",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Viviane Pereira",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Invicta FC events",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Virna Jandiroba",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "Invicta FC events",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Lynn Alvarez",
+        "result": "W",
+        "method": "Submission (armbar)",
+        "event": "Invicta FC events",
+        "round": 2,
+        "time": "3:00"
+      },
+      {
+        "opponent": "Nori Date",
+        "result": "W",
+        "method": "Submission (armbar)",
+        "event": "Deep Jewels events#Deep Jewels 11",
+        "round": 1,
+        "time": "3:12"
+      },
+      {
+        "opponent": "Lacey Schuckman",
+        "result": "W",
+        "method": "Submission (armbar)",
+        "event": "Invicta FC events",
+        "round": 3,
+        "time": "3:41"
+      },
+      {
+        "opponent": "Emi Fujino",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Deep Jewels events#Deep Jewels 9",
+        "round": 3,
+        "time": "5:00"
+      }
+    ],
     "stats": {
       "slpm": "4.45",
       "strAcc": "52%",
