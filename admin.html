@@ -1206,11 +1206,14 @@
             <input type="text" class="mkt-input" id="fcb-event-name" placeholder="Event name (e.g. UFC 330: Makhachev vs. Garry)">
             <input type="text" class="mkt-input" id="fcb-event-sub" placeholder="Subtitle (optional, e.g. Aug 15 · Las Vegas)">
           </div>
-          <div class="mkt-h2h-grid" style="grid-template-columns:auto 1fr">
-            <select class="mkt-select" id="fcb-theme">
-              <option value="dark">Dark</option>
-              <option value="light">Light</option>
-              <option value="gold">Gold</option>
+          <div class="mkt-h2h-grid" style="grid-template-columns:auto auto 1fr">
+            <select class="mkt-select" id="fcb-bg" title="Background">
+              <option value="dark">Dark BG</option>
+              <option value="light">Light BG</option>
+            </select>
+            <select class="mkt-select" id="fcb-accent" title="Accent color">
+              <option value="orange">Orange Accent</option>
+              <option value="gold">Gold Accent</option>
             </select>
           </div>
           <div class="fc-builder-rows" id="fcb-rows"></div>
@@ -1226,12 +1229,17 @@
         <div class="section-label" style="margin-bottom:14px">Next Fight to Make</div>
         <div class="mkt-h2h-box">
           <div class="mkt-h2h-sub">Stack up a few dream matchups for a "what should happen next" post. Each row gets an optional short tag (e.g. "Title eliminator").</div>
-          <div class="mkt-h2h-grid">
+          <div class="mkt-h2h-grid" style="grid-template-columns:1fr">
             <input type="text" class="mkt-input" id="nfm-event-name" placeholder="Headline (e.g. Fights We Want To See)">
-            <select class="mkt-select" id="nfm-theme">
-              <option value="dark">Dark</option>
-              <option value="light">Light</option>
-              <option value="gold">Gold</option>
+          </div>
+          <div class="mkt-h2h-grid" style="grid-template-columns:auto auto 1fr">
+            <select class="mkt-select" id="nfm-bg" title="Background">
+              <option value="dark">Dark BG</option>
+              <option value="light">Light BG</option>
+            </select>
+            <select class="mkt-select" id="nfm-accent" title="Accent color">
+              <option value="orange">Orange Accent</option>
+              <option value="gold">Gold Accent</option>
             </select>
           </div>
           <div class="fc-builder-rows" id="nfm-rows"></div>
@@ -1804,7 +1812,8 @@
         const hintEl      = $('fcb-hint');
         const eventNameEl = $('fcb-event-name');
         const eventSubEl  = $('fcb-event-sub');
-        const themeEl     = $('fcb-theme');
+        const bgEl        = $('fcb-bg');
+        const accentEl    = $('fcb-accent');
         if (!rowsEl || rowsEl.dataset.wired) return;
         rowsEl.dataset.wired = '1';
         await loadFightersCache();
@@ -1849,7 +1858,8 @@
           const params = new URLSearchParams({ mode: 'card', bouts: encoded });
           if (eventNameEl.value.trim()) params.set('eventName', eventNameEl.value.trim());
           if (eventSubEl.value.trim())  params.set('eventSub', eventSubEl.value.trim());
-          if (themeEl.value !== 'dark') params.set('theme', themeEl.value);
+          if (bgEl.value === 'light') params.set('theme', 'light');
+          if (accentEl.value === 'gold') params.set('accent', 'gold');
           window.open(`fightcard.html?${params.toString()}`, '_blank');
         });
       }
@@ -1861,7 +1871,8 @@
         const previewBtn  = $('nfm-preview');
         const hintEl      = $('nfm-hint');
         const eventNameEl = $('nfm-event-name');
-        const themeEl     = $('nfm-theme');
+        const bgEl        = $('nfm-bg');
+        const accentEl    = $('nfm-accent');
         if (!rowsEl || rowsEl.dataset.wired) return;
         rowsEl.dataset.wired = '1';
         await loadFightersCache();
@@ -1898,7 +1909,8 @@
           const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(bouts))));
           const params = new URLSearchParams({ mode: 'next', bouts: encoded });
           if (eventNameEl.value.trim()) params.set('eventName', eventNameEl.value.trim());
-          if (themeEl.value !== 'dark') params.set('theme', themeEl.value);
+          if (bgEl.value === 'light') params.set('theme', 'light');
+          if (accentEl.value === 'gold') params.set('accent', 'gold');
           window.open(`fightcard.html?${params.toString()}`, '_blank');
         });
       }

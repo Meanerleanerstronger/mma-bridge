@@ -405,7 +405,8 @@
         <span class="fc-btn fc-zoom-label" id="fcZoomLabel">100%</span>
         <button class="fc-btn fc-zoom-btn" id="fcZoomIn" type="button">&plus;</button>
       </div>
-      <button class="fc-btn" id="fcThemeBtn" type="button">🌙 Dark</button>
+      <button class="fc-btn" id="fcBgBtn" type="button">🌙 Dark</button>
+      <button class="fc-btn" id="fcAccentBtn" type="button">🔶 Orange</button>
       <button class="fc-btn" id="fcDownloadBtn" type="button">&#8681; Download</button>
       <button class="fc-btn" id="fcEditBtn" type="button">✎ Edit Fights</button>
     </div>
@@ -418,7 +419,11 @@
   (function(){
     const p = new URLSearchParams(location.search);
     let mode      = p.get('mode') === 'next' ? 'next' : 'card';
-    let theme     = ['light', 'gold'].includes(p.get('theme')) ? p.get('theme') : 'dark';
+    // Two independent axes — background (dark/light) and accent (orange/
+    // gold) — instead of one 3-way theme value. Orange+Dark and Orange+
+    // Light are the two "normal" combos; Gold pairs with either.
+    let bg        = p.get('theme') === 'light' ? 'light' : 'dark';
+    let accent    = p.get('accent') === 'gold' ? 'gold' : 'orange';
     let eventName = p.get('eventName') || (mode === 'next' ? 'Fights We Want To See' : 'Fight Card');
     let eventSub  = p.get('eventSub') || '';
 
@@ -434,7 +439,8 @@
 
     const root       = document.getElementById('fcRoot');
     const editPanel  = document.getElementById('fcEditPanel');
-    const themeBtn   = document.getElementById('fcThemeBtn');
+    const bgBtn      = document.getElementById('fcBgBtn');
+    const accentBtn  = document.getElementById('fcAccentBtn');
     const editBtn    = document.getElementById('fcEditBtn');
     const zoomGroup  = document.getElementById('fcZoomGroup');
     const zoomLabel  = document.getElementById('fcZoomLabel');
@@ -451,9 +457,10 @@
     });
 
     function applyTheme() {
-      document.body.classList.toggle('fc-light', theme === 'light');
-      document.body.classList.toggle('fc-gold', theme === 'gold');
-      themeBtn.textContent = theme === 'light' ? '☀️ Light' : theme === 'gold' ? '🏆 Gold' : '🌙 Dark';
+      document.body.classList.toggle('fc-light', bg === 'light');
+      document.body.classList.toggle('fc-gold', accent === 'gold');
+      bgBtn.textContent = bg === 'light' ? '☀️ Light' : '🌙 Dark';
+      accentBtn.textContent = accent === 'gold' ? '🏆 Gold' : '🔶 Orange';
     }
 
     function renderCardMode() {
@@ -710,8 +717,12 @@
       });
     }
 
-    themeBtn.addEventListener('click', () => {
-      theme = theme === 'dark' ? 'light' : theme === 'light' ? 'gold' : 'dark';
+    bgBtn.addEventListener('click', () => {
+      bg = bg === 'dark' ? 'light' : 'dark';
+      applyTheme();
+    });
+    accentBtn.addEventListener('click', () => {
+      accent = accent === 'orange' ? 'gold' : 'orange';
       applyTheme();
     });
     editBtn.addEventListener('click', () => {
