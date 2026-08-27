@@ -178,7 +178,7 @@ async function buildEventCountdownPost(page) {
   const whenPhrase = days === null ? '' : days <= 0 ? 'is TODAY' : days === 1 ? 'is tomorrow' : `is in ${days} days`;
   const matchup = main ? `${lastName(main.a)} vs. ${lastName(main.b)}` : (ev.name || '');
   const pickUrl = `${SITE_URL}/picks.html?id=${ev.id}`;
-  const caption = `${matchup} ${whenPhrase}. Make your picks: ${pickUrl}`;
+  const caption = `${matchup} ${whenPhrase}. Make your picks: ${pickUrl}\n\nScreenshots via mmabridge.com`;
 
   return [{ rawPath, caption }];
 }
@@ -213,7 +213,7 @@ async function buildEventRecapPost(page) {
     resultPhrase = `. ${lastName(main.winner)} def. ${lastName(loser)}`;
   }
   const reviewUrl = `${SITE_URL}/event-review.html?id=${ev.id}`;
-  const caption = `Relive ${ev.name}${resultPhrase}. Full card recap and community ratings: ${reviewUrl}`;
+  const caption = `Relive ${ev.name}${resultPhrase}. Full card recap and community ratings: ${reviewUrl}\n\nScreenshots via mmabridge.com`;
 
   return [{ rawPath, caption }];
 }

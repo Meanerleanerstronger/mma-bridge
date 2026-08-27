@@ -1977,29 +1977,38 @@
             reader.readAsDataURL(file);
           });
 
-          // Download — fetch as a blob and trigger via an object URL rather
-          // than relying on the <a download> attribute, which Safari
-          // frequently ignores for images (opens the file in a new tab
-          // instead of saving it).
+          // Download — a blob: URL + <a download> click used to be here, but
+          // Safari doesn't reliably treat that as a download: it frequently
+          // opens the blob: URL as a navigation instead (this repo's own
+          // real-world error: "Safari can't open the page blob:https://...
+          // WebKitBlobResource error 1" — blob: URLs are scoped to the
+          // document that created them, and Safari's synthetic-click
+          // download path for them is flaky). data: URIs don't have that
+          // failure mode — same FileReader conversion "Change Image" above
+          // already uses — so convert to one and download that instead.
           card.querySelector('[data-act="download"]').addEventListener('click', async function () {
             const btn = this;
             const original = btn.textContent;
             try {
               const isCustom = previewImg.src.startsWith('data:');
-              let blob;
+              let dataUrl;
               if (isCustom) {
-                blob = await (await fetch(previewImg.src)).blob();
+                dataUrl = previewImg.src;
               } else {
-                blob = await (await fetch(imgUrl)).blob();
+                const blob = await (await fetch(imgUrl)).blob();
+                dataUrl = await new Promise((resolve, reject) => {
+                  const reader = new FileReader();
+                  reader.onload = () => resolve(reader.result);
+                  reader.onerror = reject;
+                  reader.readAsDataURL(blob);
+                });
               }
-              const blobUrl = URL.createObjectURL(blob);
               const a = document.createElement('a');
-              a.href = blobUrl;
-              a.download = post.image;
+              a.href = dataUrl;
+              a.download = post.image || 'mma-bridge-poster.png';
               document.body.appendChild(a);
               a.click();
               a.remove();
-              URL.revokeObjectURL(blobUrl);
             } catch (e) {
               btn.textContent = 'Download failed';
               setTimeout(() => { btn.textContent = original; }, 2000);

@@ -811,27 +811,23 @@
       try {
         const bg = getComputedStyle(targetEl).backgroundColor;
         const canvas = await html2canvas(targetEl, { backgroundColor: bg, scale: 2, useCORS: true, logging: false });
-        await new Promise((resolve, reject) => {
-          canvas.toBlob(blob => {
-            if (!blob) { reject(new Error('canvas produced no image data')); return; }
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            // target="_blank" defends against theme.js-style global
-            // "fade + navigate on internal link click" handlers (confirmed
-            // one exists and hijacks this exact click on matchup.html,
-            // which loads theme.js and this page doesn't — but cheap
-            // insurance either way).
-            a.href = url; a.download = filename; a.target = '_blank';
-            document.body.appendChild(a); a.click(); a.remove();
-            // Revoking synchronously right after click() races the browser
-            // actually starting the download — on a heavier page this can
-            // lose the race outright (confirmed: reliable here, but failed
-            // 100% of the time on matchup.html, which loads far more
-            // scripts and has more event-loop contention). Give it a beat.
-            setTimeout(() => URL.revokeObjectURL(url), 1000);
-            resolve();
-          }, 'image/png');
-        });
+        // data: URI, not a blob: URL — a real user hit exactly this in
+        // production: "Safari can't open the page blob:https://...
+        // WebKitBlobResource error 1". blob: URLs are scoped to the
+        // document that created them; target="_blank" (kept below, see
+        // why) makes Safari try to open the blob in a fresh tab/context
+        // where it doesn't exist, instead of downloading it. data: URIs
+        // are self-contained — no such failure mode, no revoke-timing
+        // race either.
+        const dataUrl = canvas.toDataURL('image/png');
+        const a = document.createElement('a');
+        // target="_blank" defends against theme.js-style global
+        // "fade + navigate on internal link click" handlers (confirmed
+        // one exists and hijacks this exact click on matchup.html,
+        // which loads theme.js and this page doesn't — but cheap
+        // insurance either way).
+        a.href = dataUrl; a.download = filename; a.target = '_blank';
+        document.body.appendChild(a); a.click(); a.remove();
       } finally {
         photoEls.forEach((el, i) => { el.style.backgroundImage = originalBgs[i]; });
       }

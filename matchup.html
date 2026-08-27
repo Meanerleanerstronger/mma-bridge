@@ -1460,31 +1460,26 @@
         try {
           const bg = getComputedStyle(targetEl).backgroundColor;
           const canvas = await html2canvas(targetEl, { backgroundColor: bg, scale: 2, useCORS: true, logging: false });
-          await new Promise((resolve, reject) => {
-            canvas.toBlob(blob => {
-              if (!blob) { reject(new Error('canvas produced no image data')); return; }
-              const url = URL.createObjectURL(blob);
-              const a = document.createElement('a');
-              // target="_blank" isn't for opening a new tab here — it's
-              // what makes theme.js's global "fade + navigate on internal
-              // link click" handler leave this anchor alone. That handler
-              // only excludes href starting with #/http/mailto or
-              // target === "_blank", and blob: URLs matched none of the
-              // first three — it was hijacking this click, preventDefault-
-              // ing the real download, and manually navigating the whole
-              // page to the blob URL instead (which 404s once the browser
-              // gets to it, taking the rest of the page down with it).
-              a.href = url; a.download = filename; a.target = '_blank';
-              document.body.appendChild(a); a.click(); a.remove();
-              // Revoking synchronously right after click() races the
-              // browser actually starting the download — confirmed this
-              // loses the race consistently on this page (many more
-              // scripts loaded than fightcard.html means more event-loop
-              // contention). Give it a beat.
-              setTimeout(() => URL.revokeObjectURL(url), 1000);
-              resolve();
-            }, 'image/png');
-          });
+          // data: URI, not a blob: URL — a real user hit this exact failure
+          // in production: "Safari can't open the page blob:https://...
+          // WebKitBlobResource error 1". blob: URLs are scoped to the
+          // document that created them, and target="_blank" (kept below,
+          // see why) makes Safari try to open the blob in a fresh tab/
+          // context where it doesn't exist, instead of downloading it.
+          // data: URIs are self-contained — no such failure mode, and no
+          // revoke-timing race to lose either.
+          const dataUrl = canvas.toDataURL('image/png');
+          const a = document.createElement('a');
+          // target="_blank" isn't for opening a new tab here — it's what
+          // makes theme.js's global "fade + navigate on internal link
+          // click" handler leave this anchor alone. That handler only
+          // excludes href starting with #/http/mailto or target==="_blank",
+          // and neither blob: nor data: URLs match the first three — it
+          // was hijacking this click, preventDefault-ing the real
+          // download, and manually navigating the whole page to the URL
+          // instead.
+          a.href = dataUrl; a.download = filename; a.target = '_blank';
+          document.body.appendChild(a); a.click(); a.remove();
         } finally {
           imgs.forEach((img, i) => { img.src = originalSrcs[i]; });
         }
