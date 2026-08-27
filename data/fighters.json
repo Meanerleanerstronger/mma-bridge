@@ -45642,13 +45642,13 @@
     "name": "Carol Foro",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-09/FORO_CAROL_R_09-09.png",
     "stats": {
-      "slpm": "7.80",
-      "strAcc": "55%",
-      "sapm": "7.67",
-      "strDef": "58%",
+      "slpm": "7.43",
+      "strAcc": "57%",
+      "sapm": "5.70",
+      "strDef": "55%",
       "tdAvg": "0.00",
       "tdAcc": "0%",
-      "tdDef": "100%",
+      "tdDef": "77%",
       "subAvg": "0.0"
     },
     "last5": [
@@ -45669,20 +45669,21 @@
     "nickname": "Anabelle",
     "height": "5'2\"",
     "reach": "61.5\"",
-    "weightClass": "Women's Strawweight"
+    "weightClass": "Women's Strawweight",
+    "statsSyncedAt": "2026-08-27T19:27:55.941Z"
   },
   {
     "id": "anthony-wint",
     "name": "Anthony Wint",
     "stats": {
-      "slpm": "0.00",
-      "strAcc": "0%",
-      "sapm": "0.00",
-      "strDef": "0%",
-      "tdAvg": "0.00",
-      "tdAcc": "0%",
-      "tdDef": "0%",
-      "subAvg": "0.0"
+      "slpm": "3.56",
+      "strAcc": "66%",
+      "sapm": "0.20",
+      "strDef": "83%",
+      "tdAvg": "2.97",
+      "tdAcc": "33%",
+      "tdDef": "100%",
+      "subAvg": "3.0"
     },
     "record": {
       "wins": 8,
@@ -45756,7 +45757,8 @@
       }
     ],
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/WINT_ANTHONY_L_08-11.png?itok=3WBRGkED",
-    "nickname": "Bow Down"
+    "nickname": "Bow Down",
+    "statsSyncedAt": "2026-08-27T19:27:58.711Z"
   },
   {
     "id": "matt-adams",
@@ -45764,8 +45766,8 @@
     "stats": {
       "slpm": "0.00",
       "strAcc": "0%",
-      "sapm": "0.00",
-      "strDef": "0%",
+      "sapm": "22.94",
+      "strDef": "27%",
       "tdAvg": "0.00",
       "tdAcc": "0%",
       "tdDef": "0%",
@@ -45780,19 +45782,20 @@
         "round": 1,
         "time": null
       }
-    ]
+    ],
+    "statsSyncedAt": "2026-08-27T19:28:01.590Z"
   },
   {
     "id": "fabrizio-escarrega",
     "name": "Fabrizio Escarrega",
     "stats": {
-      "slpm": "0.00",
-      "strAcc": "0%",
-      "sapm": "0.00",
-      "strDef": "0%",
-      "tdAvg": "0.00",
-      "tdAcc": "0%",
-      "tdDef": "0%",
+      "slpm": "5.47",
+      "strAcc": "49%",
+      "sapm": "3.20",
+      "strDef": "58%",
+      "tdAvg": "3.00",
+      "tdAcc": "100%",
+      "tdDef": "100%",
       "subAvg": "0.0"
     },
     "last5": [
@@ -45804,20 +45807,21 @@
         "round": null,
         "time": null
       }
-    ]
+    ],
+    "statsSyncedAt": "2026-08-27T19:28:04.390Z"
   },
   {
     "id": "abe-alsaghir",
     "name": "Abe Alsaghir",
     "stats": {
-      "slpm": "0.00",
-      "strAcc": "0%",
-      "sapm": "0.00",
-      "strDef": "0%",
+      "slpm": "3.20",
+      "strAcc": "41%",
+      "sapm": "5.47",
+      "strDef": "50%",
       "tdAvg": "0.00",
       "tdAcc": "0%",
       "tdDef": "0%",
-      "subAvg": "0.0"
+      "subAvg": "1.0"
     },
     "last5": [
       {
@@ -45828,16 +45832,17 @@
         "round": null,
         "time": null
       }
-    ]
+    ],
+    "statsSyncedAt": "2026-08-27T19:28:07.258Z"
   },
   {
     "id": "bilal-hasan",
     "name": "Bilal Hasan",
     "stats": {
-      "slpm": "0.00",
-      "strAcc": "0%",
-      "sapm": "0.00",
-      "strDef": "0%",
+      "slpm": "28.00",
+      "strAcc": "80%",
+      "sapm": "4.00",
+      "strDef": "57%",
       "tdAvg": "0.00",
       "tdAcc": "0%",
       "tdDef": "0%",
@@ -45859,16 +45864,17 @@
       "losses": 0,
       "draws": 0
     },
-    "nickname": "The IndoNinja"
+    "nickname": "The IndoNinja",
+    "statsSyncedAt": "2026-08-27T19:28:09.872Z"
   },
   {
     "id": "mridul-saikia",
     "name": "Mridul Saikia",
     "stats": {
-      "slpm": "0.91",
-      "strAcc": "28%",
-      "sapm": "2.74",
-      "strDef": "36%",
+      "slpm": "1.36",
+      "strAcc": "33%",
+      "sapm": "6.43",
+      "strDef": "26%",
       "tdAvg": "0.00",
       "tdAcc": "0%",
       "tdDef": "0%",
@@ -45883,19 +45889,20 @@
         "round": 1,
         "time": null
       }
-    ]
+    ],
+    "statsSyncedAt": "2026-08-27T19:28:12.390Z"
   },
   {
     "id": "tom-pagliarulo",
     "name": "Tom Pagliarulo",
     "stats": {
-      "slpm": "0.00",
-      "strAcc": "0%",
-      "sapm": "0.00",
-      "strDef": "0%",
-      "tdAvg": "0.00",
-      "tdAcc": "0%",
-      "tdDef": "0%",
+      "slpm": "4.10",
+      "strAcc": "47%",
+      "sapm": "3.61",
+      "strDef": "57%",
+      "tdAvg": "3.13",
+      "tdAcc": "37%",
+      "tdDef": "100%",
       "subAvg": "0.0"
     },
     "last5": [
@@ -45907,20 +45914,21 @@
         "round": 3,
         "time": null
       }
-    ]
+    ],
+    "statsSyncedAt": "2026-08-27T19:28:15.279Z"
   },
   {
     "id": "ananias-mulumba",
     "name": "Ananias Mulumba",
     "stats": {
-      "slpm": "6.10",
-      "strAcc": "44%",
-      "sapm": "5.96",
+      "slpm": "4.44",
+      "strAcc": "43%",
+      "sapm": "4.72",
       "strDef": "52%",
       "tdAvg": "0.00",
       "tdAcc": "0%",
-      "tdDef": "100%",
-      "subAvg": "2.1"
+      "tdDef": "66%",
+      "subAvg": "0.7"
     },
     "last5": [
       {
@@ -45931,19 +45939,20 @@
         "round": 3,
         "time": null
       }
-    ]
+    ],
+    "statsSyncedAt": "2026-08-27T19:28:18.148Z"
   },
   {
     "id": "jon-kunneman",
     "name": "Jon Kunneman",
     "stats": {
-      "slpm": "0.00",
-      "strAcc": "0%",
-      "sapm": "0.00",
-      "strDef": "0%",
-      "tdAvg": "0.00",
-      "tdAcc": "0%",
-      "tdDef": "0%",
+      "slpm": "3.93",
+      "strAcc": "37%",
+      "sapm": "7.93",
+      "strDef": "38%",
+      "tdAvg": "2.00",
+      "tdAcc": "50%",
+      "tdDef": "50%",
       "subAvg": "0.0"
     },
     "last5": [
@@ -45955,20 +45964,21 @@
         "round": null,
         "time": null
       }
-    ]
+    ],
+    "statsSyncedAt": "2026-08-27T19:28:20.878Z"
   },
   {
     "id": "joe-kropschot",
     "name": "Joe Kropschot",
     "stats": {
-      "slpm": "0.00",
-      "strAcc": "0%",
-      "sapm": "0.00",
-      "strDef": "0%",
-      "tdAvg": "0.00",
-      "tdAcc": "0%",
-      "tdDef": "0%",
-      "subAvg": "0.0"
+      "slpm": "7.93",
+      "strAcc": "61%",
+      "sapm": "3.93",
+      "strDef": "62%",
+      "tdAvg": "1.00",
+      "tdAcc": "50%",
+      "tdDef": "50%",
+      "subAvg": "3.0"
     },
     "last5": [
       {
@@ -45979,7 +45989,8 @@
         "round": null,
         "time": null
       }
-    ]
+    ],
+    "statsSyncedAt": "2026-08-27T19:28:23.741Z"
   },
   {
     "id": "liu-ce",
@@ -46034,19 +46045,20 @@
       "subAvg": "0.0"
     },
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
-    "nickname": "The Oriental Dragon"
+    "nickname": "The Oriental Dragon",
+    "statsSyncedAt": "2026-08-27T19:28:26.482Z"
   },
   {
     "id": "eduardo-chapolin",
     "name": "Eduardo Chapolin",
     "stats": {
-      "slpm": "2.47",
-      "strAcc": "40%",
-      "sapm": "1.60",
-      "strDef": "64%",
-      "tdAvg": "5.00",
-      "tdAcc": "83%",
-      "tdDef": "75%",
+      "slpm": "3.46",
+      "strAcc": "41%",
+      "sapm": "3.38",
+      "strDef": "57%",
+      "tdAvg": "3.38",
+      "tdAcc": "60%",
+      "tdDef": "84%",
       "subAvg": "0.0"
     },
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/CHAPOLIN_EDUARDO_R_08-15.png?itok=-LuiriXm",
@@ -46064,7 +46076,8 @@
       "wins": 15,
       "losses": 3,
       "draws": 0
-    }
+    },
+    "statsSyncedAt": "2026-08-27T19:28:29.166Z"
   },
   {
     "id": "austen-lane",
@@ -46166,21 +46179,22 @@
         "round": 1,
         "time": "3:07"
       }
-    ]
+    ],
+    "statsSyncedAt": "2026-08-27T19:28:32.081Z"
   },
   {
     "id": "mason-jones",
     "name": "Mason Jones",
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/JONES_MASON_L_03-21.png?itok=_sn2EwLA",
     "stats": {
-      "slpm": "5.98",
-      "strAcc": "42%",
-      "sapm": "4.45",
-      "strDef": "50%",
-      "tdAvg": "3.48",
-      "tdAcc": "55%",
-      "tdDef": "73%",
-      "subAvg": "0.2"
+      "slpm": "6.33",
+      "strAcc": "43%",
+      "sapm": "4.87",
+      "strDef": "48%",
+      "tdAvg": "3.38",
+      "tdAcc": "56%",
+      "tdDef": "77%",
+      "subAvg": "0.1"
     },
     "record": {
       "wins": 18,
@@ -46277,7 +46291,8 @@
         "time": "5:00"
       }
     ],
-    "nickname": "The Dragon"
+    "nickname": "The Dragon",
+    "statsSyncedAt": "2026-08-27T19:28:34.987Z"
   },
   {
     "id": "losene-keita",
@@ -46378,7 +46393,8 @@
         "round": 1,
         "time": "3:00"
       }
-    ]
+    ],
+    "statsSyncedAt": "2026-08-27T19:28:37.890Z"
   },
   {
     "id": "mantas-kondratavicius",
@@ -46398,7 +46414,8 @@
       "wins": 9,
       "losses": 1,
       "draws": 0
-    }
+    },
+    "statsSyncedAt": "2026-08-27T19:28:40.413Z"
   },
   {
     "id": "antonio-trocoli",
@@ -46419,7 +46436,8 @@
       "losses": 7,
       "draws": 0
     },
-    "nickname": "Malvado"
+    "nickname": "Malvado",
+    "statsSyncedAt": "2026-08-27T19:28:43.012Z"
   },
   {
     "id": "abdul-kareem-al-selwady",
@@ -46440,7 +46458,8 @@
       "losses": 4,
       "draws": 0
     },
-    "nickname": "Pride of Palestine"
+    "nickname": "Pride of Palestine",
+    "statsSyncedAt": "2026-08-27T19:28:45.931Z"
   },
   {
     "id": "shaqueme-rock",
@@ -46471,7 +46490,8 @@
       "losses": 5,
       "draws": 0
     },
-    "nickname": "Pain"
+    "nickname": "Pain",
+    "statsSyncedAt": "2026-08-27T19:28:48.711Z"
   },
   {
     "id": "andre-fili",
@@ -46574,7 +46594,8 @@
         "time": "0:46"
       }
     ],
-    "nickname": "Touchy"
+    "nickname": "Touchy",
+    "statsSyncedAt": "2026-08-27T19:28:51.673Z"
   },
   {
     "id": "alexander-poppeck",
@@ -46595,7 +46616,8 @@
       "losses": 6,
       "draws": 0
     },
-    "nickname": "Ironside"
+    "nickname": "Ironside",
+    "statsSyncedAt": "2026-08-27T19:28:54.173Z"
   },
   {
     "id": "katlyn-cerminara",
@@ -46698,7 +46720,8 @@
       "tdDef": "50%",
       "subAvg": "0.3"
     },
-    "nickname": "Blonde Fighter"
+    "nickname": "Blonde Fighter",
+    "statsSyncedAt": "2026-08-27T19:28:57.014Z"
   },
   {
     "id": "nasrat-haqparast",
