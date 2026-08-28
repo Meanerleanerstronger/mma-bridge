@@ -824,20 +824,18 @@
         const canvas = await html2canvas(targetEl, { backgroundColor: bg, scale: 2, useCORS: true, logging: false });
         // data: URI, not a blob: URL — a real user hit exactly this in
         // production: "Safari can't open the page blob:https://...
-        // WebKitBlobResource error 1". blob: URLs are scoped to the
-        // document that created them; target="_blank" (kept below, see
-        // why) makes Safari try to open the blob in a fresh tab/context
-        // where it doesn't exist, instead of downloading it. data: URIs
-        // are self-contained — no such failure mode, no revoke-timing
-        // race either.
+        // WebKitBlobResource error 1". data: URIs are self-contained, no
+        // revoke-timing race, none of blob:'s document-scoping problems.
+        // No target="_blank" either — that's a second, separate Safari
+        // quirk (data: + target=_blank can just open/display the image in
+        // the new tab instead of saving it). This page doesn't load
+        // theme.js so its click-hijack isn't a risk here, but stop the
+        // click bubbling on the anchor anyway (matches matchup.html, which
+        // does need it) rather than relying on that.
         const dataUrl = canvas.toDataURL('image/png');
         const a = document.createElement('a');
-        // target="_blank" defends against theme.js-style global
-        // "fade + navigate on internal link click" handlers (confirmed
-        // one exists and hijacks this exact click on matchup.html,
-        // which loads theme.js and this page doesn't — but cheap
-        // insurance either way).
-        a.href = dataUrl; a.download = filename; a.target = '_blank';
+        a.href = dataUrl; a.download = filename;
+        a.addEventListener('click', ev => ev.stopPropagation());
         document.body.appendChild(a); a.click(); a.remove();
       } finally {
         photoEls.forEach((el, i) => { el.style.backgroundImage = originalBgs[i]; });

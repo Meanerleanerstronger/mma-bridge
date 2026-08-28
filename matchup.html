@@ -890,6 +890,32 @@
       .mu-classic-location,
       .mu-classic-eventline { font-size:clamp(.8rem,4.4vw,1.1rem); }
     }
+
+    /* ── Poster accent: Orange (default) / Gold — independent of the
+       background light/dark toggle above, same as fightcard.html's
+       Background+Accent split. Swaps VS and fighter A's orange glow for
+       gold; fighter B stays its blue corner color in both cases —
+       swapping that too would erase the red/blue corner convention the
+       glow is there to signal in the first place. ── */
+    body.mu-poster-gold .mu-classic-vsline .vs { color:#f0c34e; }
+    body.mu-poster-mode.mu-poster-gold .mu-fighter-name.a {
+      text-shadow:0 3px 0 rgba(0,0,0,.9), 0 8px 34px rgba(240,195,78,.4);
+    }
+    body.mu-poster-mode.mu-poster-gold.mu-poster-light .mu-fighter-name.a {
+      text-shadow:0 3px 0 rgba(255,255,255,.75), 0 8px 30px rgba(240,195,78,.4);
+    }
+    .mu-poster-theme.active { background:rgba(255,138,61,.25); border-color:#ff8a3d; color:#fff; }
+
+    /* ── Fighter name color: White (default) / Accent — an independent
+       third toggle. Applies to BOTH names alike (not per-corner) since
+       this is "make the names pop in the poster's accent," not another
+       side-identity signal like the glow above. !important because it
+       needs to win over the light-mode overrides, which set their own
+       dark text color on these same elements. ── */
+    body.mu-poster-name-accent .mu-fighter-name,
+    body.mu-poster-name-accent .mu-classic-name { color:#ff8a3d !important; }
+    body.mu-poster-name-accent.mu-poster-gold .mu-fighter-name,
+    body.mu-poster-name-accent.mu-poster-gold .mu-classic-name { color:#f0c34e !important; }
   </style>
 </head>
 <body>
@@ -933,7 +959,9 @@
   </div>
 
   <div class="mu-poster-controls">
-    <button class="mu-poster-theme" id="muPosterTheme" type="button" title="Toggle poster light/dark">🌙</button>
+    <button class="mu-poster-theme" id="muPosterTheme" type="button" title="Toggle poster background light/dark">🌙</button>
+    <button class="mu-poster-theme" id="muPosterAccent" type="button" title="Toggle accent color orange/gold">🔶</button>
+    <button class="mu-poster-theme" id="muPosterNameColor" type="button" title="Toggle fighter name color white/accent">Aa</button>
     <button class="mu-poster-theme" id="muPosterDownload" type="button" title="Download poster">&#8681;</button>
     <button class="mu-poster-exit" id="muPosterExit" type="button">✕ Exit Poster View</button>
   </div>
@@ -1361,6 +1389,8 @@
       const viewToggle  = document.getElementById('muViewToggle');
       const posterExit  = document.getElementById('muPosterExit');
       const posterTheme = document.getElementById('muPosterTheme');
+      const posterAccent    = document.getElementById('muPosterAccent');
+      const posterNameColor = document.getElementById('muPosterNameColor');
       // Deliberately not unhiding viewToggle here — Poster/Classic are
       // admin.html-only now, reached via ?poster=1/?classic=1, not a
       // visible button on the public page (see the div's own comment).
@@ -1395,6 +1425,27 @@
       posterTheme.addEventListener('click', () => {
         const isLight = document.body.classList.toggle('mu-poster-light');
         posterTheme.textContent = isLight ? '☀️' : '🌙';
+      });
+
+      // ?accent=gold — same headless-friendly pattern as ?theme=light above.
+      if (p.get('accent') === 'gold') {
+        document.body.classList.add('mu-poster-gold');
+        posterAccent.textContent = '🏆';
+      }
+      posterAccent.addEventListener('click', () => {
+        const isGold = document.body.classList.toggle('mu-poster-gold');
+        posterAccent.textContent = isGold ? '🏆' : '🔶';
+      });
+
+      // ?nameColor=accent — fighter names default to white; this tints them
+      // with whatever accent color is active (orange or gold) instead.
+      if (p.get('nameColor') === 'accent') {
+        document.body.classList.add('mu-poster-name-accent');
+        posterNameColor.classList.add('active');
+      }
+      posterNameColor.addEventListener('click', () => {
+        const on = document.body.classList.toggle('mu-poster-name-accent');
+        posterNameColor.classList.toggle('active', on);
       });
 
       // ── Download Poster ──────────────────────────────────────
@@ -1463,22 +1514,24 @@
           // data: URI, not a blob: URL — a real user hit this exact failure
           // in production: "Safari can't open the page blob:https://...
           // WebKitBlobResource error 1". blob: URLs are scoped to the
-          // document that created them, and target="_blank" (kept below,
-          // see why) makes Safari try to open the blob in a fresh tab/
-          // context where it doesn't exist, instead of downloading it.
-          // data: URIs are self-contained — no such failure mode, and no
-          // revoke-timing race to lose either.
+          // document that created them, and Safari's handling of them
+          // (especially combined with target="_blank", see below) opens a
+          // fresh tab/context where the blob doesn't exist, instead of
+          // downloading it. data: URIs are self-contained — no such
+          // failure mode, no revoke-timing race either. Still didn't fix
+          // it for every user, though — target="_blank" itself is a
+          // second, separate Safari download-attribute quirk (data: +
+          // target=_blank sometimes just opens/displays the image in the
+          // new tab instead of saving it). Dropped target="_blank"
+          // entirely and stop the click from bubbling on the anchor
+          // itself instead — same protection against theme.js's global
+          // "fade + navigate on internal link click" hijack (it listens
+          // on document, so a click that never bubbles past the anchor
+          // never reaches it), without the Safari side effect.
           const dataUrl = canvas.toDataURL('image/png');
           const a = document.createElement('a');
-          // target="_blank" isn't for opening a new tab here — it's what
-          // makes theme.js's global "fade + navigate on internal link
-          // click" handler leave this anchor alone. That handler only
-          // excludes href starting with #/http/mailto or target==="_blank",
-          // and neither blob: nor data: URLs match the first three — it
-          // was hijacking this click, preventDefault-ing the real
-          // download, and manually navigating the whole page to the URL
-          // instead.
-          a.href = dataUrl; a.download = filename; a.target = '_blank';
+          a.href = dataUrl; a.download = filename;
+          a.addEventListener('click', ev => ev.stopPropagation());
           document.body.appendChild(a); a.click(); a.remove();
         } finally {
           imgs.forEach((img, i) => { img.src = originalSrcs[i]; });

@@ -2018,6 +2018,11 @@
               const a = document.createElement('a');
               a.href = dataUrl;
               a.download = post.image || 'mma-bridge-poster.png';
+              // admin.html loads theme.js too — its global click-hijack
+              // (fade + manually navigate on any internal-link click) would
+              // otherwise catch this synthetic click and turn it into a
+              // dead page navigation instead of a download.
+              a.addEventListener('click', ev => ev.stopPropagation());
               document.body.appendChild(a);
               a.click();
               a.remove();
