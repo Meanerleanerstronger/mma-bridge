@@ -194,6 +194,36 @@
     .admin-tab-content { display: none; }
     .admin-tab-content.active { display: block; }
 
+    /* ── Marketing Buddy sub-nav — was six unrelated tools (Today's Posts,
+       Dream H2H, Fight Card Builder, Next Fight to Make, Content Generator,
+       Fight Night Mode) stacked in one ~1100px scroll with nothing but a
+       plain heading between them. Sticky pill row + only-one-visible-at-a-
+       time, same idea as the top-level admin tabs, so picking a tool jumps
+       straight to it instead of scrolling past everything else first. ── */
+    .mkt-subnav {
+      position: sticky; top: 0; z-index: 5;
+      display: flex; gap: 8px; flex-wrap: wrap;
+      background: #0a0a0a; padding: 4px 0 16px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    body.light-mode .mkt-subnav { background: #fdfaf5; }
+    .mkt-subtab {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: 'Montserrat', sans-serif; font-weight: 700;
+      font-size: 0.68rem; letter-spacing: 0.05em; text-transform: uppercase;
+      padding: 9px 16px; border-radius: 20px; cursor: pointer;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.55); white-space: nowrap;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+    }
+    .mkt-subtab:hover { background: rgba(255,255,255,0.08); color: #fff; }
+    .mkt-subtab.active {
+      background: rgba(255,138,61,0.15); border-color: #ff8a3d; color: #ff8a3d;
+    }
+    .mkt-subsection { display: none; }
+    .mkt-subsection.active { display: block; }
+
     /* ── Section headings ─────────────────────────────────── */
     .section-label {
       font-family: 'Montserrat', sans-serif;
@@ -1110,16 +1140,6 @@
         <button class="admin-tab" data-tab="analytics">Analytics</button>
       </div>
 
-      <!-- Test email utility — the only way to confirm RESEND_API_KEY is
-           actually working right now, instead of waiting up to 4h for the
-           next scheduled pick/review reminder run to fire. -->
-      <div style="display:flex;gap:8px;align-items:center;margin:0 0 18px;padding:12px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;">
-        <span style="font-size:0.8rem;color:rgba(255,255,255,0.5);white-space:nowrap;">Test email service</span>
-        <input type="email" id="test-email-to" placeholder="you@example.com" style="flex:1;max-width:280px;padding:6px 10px;background:#111;border:1px solid rgba(255,255,255,0.15);border-radius:6px;color:#fff;font-size:0.82rem;">
-        <button id="btn-test-email" style="padding:6px 14px;background:#ff8a3d;color:#000;border:none;border-radius:6px;font-weight:700;font-size:0.78rem;cursor:pointer;">Send Test</button>
-        <span id="test-email-status" style="font-size:0.78rem;color:rgba(255,255,255,0.5);"></span>
-      </div>
-
       <!-- Tab: Events -->
       <div id="tab-events" class="admin-tab-content active">
         <div id="events-container">
@@ -1130,6 +1150,15 @@
       <!-- Tab: Marketing -->
       <div id="tab-marketing" class="admin-tab-content">
 
+        <div class="mkt-subnav" id="mkt-subnav">
+          <button class="mkt-subtab active" data-sub="today">📋 Today's Posts</button>
+          <button class="mkt-subtab" data-sub="h2h">⚔️ Dream H2H</button>
+          <button class="mkt-subtab" data-sub="fcb">🥊 Fight Card Builder</button>
+          <button class="mkt-subtab" data-sub="nfm">🔮 Next Fight to Make</button>
+          <button class="mkt-subtab" data-sub="content">✍️ Content Generator</button>
+          <button class="mkt-subtab" data-sub="fn">🔴 Fight Night Mode</button>
+        </div>
+
         <!-- Today's auto-generated daily social posts — the GitHub Actions
              pipeline (scripts/social-post-daily.js) generates and commits
              up to 3 image+caption options every day but does NOT
@@ -1138,11 +1167,14 @@
              its image to post on Twitter yourself, or click "Post to
              Instagram" to publish straight to Instagram via the API once
              those credentials are set up. -->
+        <div class="mkt-subsection active" id="mkt-sub-today">
         <div class="section-label" id="today-posts-label" style="margin-bottom:14px">Today's Auto-Generated Posts</div>
         <div id="today-posts-container" style="margin-bottom:32px; display:flex; flex-direction:column; gap:16px;">
           <div style="font-family:'Inter',sans-serif;font-size:0.85rem;color:rgba(255,255,255,0.35);">Checking for today's posts...</div>
         </div>
+        </div>
 
+        <div class="mkt-subsection" id="mkt-sub-h2h">
         <!-- Dream H2H poster generator — pick ANY two fighters (they don't
              need to be actually booked) and open matchup.html straight into
              Poster view, ready to screenshot and post. Reuses the same
@@ -1176,10 +1208,14 @@
           <div class="mkt-h2h-grid">
             <input type="text" class="mkt-input" id="h2h-tag" placeholder="Tag (optional, e.g. Rematch)">
           </div>
-          <div class="mkt-h2h-grid" style="grid-template-columns:auto 1fr">
-            <select class="mkt-select" id="h2h-theme">
-              <option value="dark">Dark</option>
-              <option value="light">Light</option>
+          <div class="mkt-h2h-grid" style="grid-template-columns:auto auto 1fr">
+            <select class="mkt-select" id="h2h-bg" title="Background">
+              <option value="dark">Dark BG</option>
+              <option value="light">Light BG</option>
+            </select>
+            <select class="mkt-select" id="h2h-accent" title="Accent color">
+              <option value="orange">Orange Accent</option>
+              <option value="gold">Gold Accent</option>
             </select>
           </div>
           <div class="mkt-field" style="margin-bottom:12px">
@@ -1195,7 +1231,9 @@
           <div id="h2h-generate-status" style="margin-top:14px;"></div>
           <div id="h2h-generate-result"></div>
         </div>
+        </div>
 
+        <div class="mkt-subsection" id="mkt-sub-fcb">
         <!-- Fight Card Builder — a full event-card graphic (grouped by
              Main Card/Prelims/etc), assembled from any fighters, not tied
              to a real scheduled event. -->
@@ -1223,7 +1261,9 @@
             <span style="font-family:'Inter',sans-serif;font-size:0.72rem;color:rgba(255,255,255,0.3);" id="fcb-hint">Add at least one fight</span>
           </div>
         </div>
+        </div>
 
+        <div class="mkt-subsection" id="mkt-sub-nfm">
         <!-- Next Fight to Make — a stacked "dream matchups" listicle, e.g.
              for a "what should MMA Bridge book next" style post. -->
         <div class="section-label" style="margin-bottom:14px">Next Fight to Make</div>
@@ -1249,7 +1289,9 @@
             <span style="font-family:'Inter',sans-serif;font-size:0.72rem;color:rgba(255,255,255,0.3);" id="nfm-hint">Add at least one matchup</span>
           </div>
         </div>
+        </div>
 
+        <div class="mkt-subsection" id="mkt-sub-content">
         <div class="section-label" style="margin-bottom:14px">Content Generator</div>
 
         <!-- Platform connection status -->
@@ -1305,9 +1347,11 @@
         <div id="mkt-error" style="font-family:'Inter',sans-serif;font-size:0.8rem;color:#e05555;margin-top:10px;min-height:18px;"></div>
 
         <div class="mkt-results" id="mkt-results"></div>
+        </div>
 
+        <div class="mkt-subsection" id="mkt-sub-fn">
         <!-- Fight Night Mode -->
-        <div style="margin-top:32px;border-top:1px solid rgba(255,255,255,0.07);padding-top:24px;">
+        <div>
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
             <div class="section-label" style="margin:0">🥊 Fight Night Mode</div>
             <button id="fn-toggle" style="background:rgba(255,138,61,0.1);border:1px solid rgba(255,138,61,0.25);color:#ff8a3d;font-family:'Inter',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:6px 14px;border-radius:6px;cursor:pointer;">Open</button>
@@ -1319,6 +1363,7 @@
             </select>
             <div id="fn-fight-list"></div>
           </div>
+        </div>
         </div>
       </div>
 
@@ -1342,6 +1387,19 @@
             <div class="analytics-block-title">Top Pickers</div>
             <div id="analytics-top-pickers"><div class="admin-loading" style="padding:12px 0">Loading...</div></div>
           </div>
+        </div>
+
+        <!-- Test email utility — the only way to confirm RESEND_API_KEY is
+             actually working right now, instead of waiting up to 4h for the
+             next scheduled pick/review reminder run to fire. Used to sit in
+             the header on every tab regardless of context; belongs here
+             with the other ops/diagnostic tools instead. -->
+        <div class="section-label" style="margin:32px 0 14px">Tools</div>
+        <div style="display:flex;gap:8px;align-items:center;padding:12px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;flex-wrap:wrap;">
+          <span style="font-size:0.8rem;color:rgba(255,255,255,0.5);white-space:nowrap;">Test email service</span>
+          <input type="email" id="test-email-to" placeholder="you@example.com" style="flex:1;min-width:180px;max-width:280px;padding:6px 10px;background:#111;border:1px solid rgba(255,255,255,0.15);border-radius:6px;color:#fff;font-size:0.82rem;">
+          <button id="btn-test-email" style="padding:6px 14px;background:#ff8a3d;color:#000;border:none;border-radius:6px;font-weight:700;font-size:0.78rem;cursor:pointer;">Send Test</button>
+          <span id="test-email-status" style="font-size:0.78rem;color:rgba(255,255,255,0.5);"></span>
         </div>
       </div>
 
@@ -1449,6 +1507,7 @@
       });
 
       // ── Tab switching ─────────────────────────────────────
+      let _analyticsLoaded = false;
       document.querySelectorAll('.admin-tab').forEach(tab => {
         tab.addEventListener('click', () => {
           document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
@@ -1462,7 +1521,17 @@
           }
         });
       });
-      let _analyticsLoaded = false;
+
+      // ── Marketing Buddy sub-nav ────────────────────────────
+      document.querySelectorAll('.mkt-subtab').forEach(sub => {
+        sub.addEventListener('click', () => {
+          document.querySelectorAll('.mkt-subtab').forEach(s => s.classList.remove('active'));
+          document.querySelectorAll('.mkt-subsection').forEach(c => c.classList.remove('active'));
+          sub.classList.add('active');
+          document.getElementById('mkt-sub-' + sub.dataset.sub).classList.add('active');
+          document.getElementById('mkt-subnav').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
 
       // ── Bootstrap ────────────────────────────────────────
       if (token()) {
@@ -1555,7 +1624,8 @@
         const locationEl = $('h2h-location');
         const tagEl      = $('h2h-tag');
         const styleEl    = $('h2h-style');
-        const themeEl    = $('h2h-theme');
+        const bgEl       = $('h2h-bg');
+        const accentEl   = $('h2h-accent');
         const captionEl  = $('h2h-caption');
         const genBtn     = $('h2h-generate');
         const genIgBtn   = $('h2h-generate-ig');
@@ -1604,7 +1674,8 @@
             b: selectedB.name,
           });
           params.set(styleEl.value === 'classic' ? 'classic' : 'poster', '1');
-          if (themeEl.value === 'light') params.set('theme', 'light');
+          if (bgEl.value === 'light') params.set('theme', 'light');
+          if (accentEl.value === 'gold') params.set('accent', 'gold');
           if (weightEl.value.trim())   params.set('weight', weightEl.value.trim());
           if (eventEl.value.trim())    params.set('eventName', eventEl.value.trim());
           if (locationEl.value.trim()) params.set('location', locationEl.value.trim());
@@ -1649,7 +1720,7 @@
                 eventName: eventEl.value.trim(),
                 location: locationEl.value.trim(),
                 style: styleEl.value,
-                theme: themeEl.value,
+                theme: bgEl.value,
                 caption: captionEl.value.trim(),
               }),
             });
@@ -2630,19 +2701,25 @@
         }
 
         const isReady = !!(_platformStatus?.twitter);
+        // Textarea/copy button used to be looked up by a document-global id
+        // derived from fight.a alone (id="fn-tweet-${fight.a}") — if two
+        // fights on the same card ever shared a first-fighter name,
+        // document.getElementById would silently grab whichever one
+        // rendered first, and "Copy" could copy the wrong fight's tweet.
+        // Scoped to this preview's own subtree instead — no id needed.
         preview.innerHTML = `
-          <textarea style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:#fff;font-family:'Inter',sans-serif;font-size:0.78rem;padding:10px;border-radius:6px;resize:vertical;min-height:90px;" id="fn-tweet-${fight.a.replace(/\s+/g,'-')}">${tweetText}</textarea>
+          <textarea style="width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:#fff;font-family:'Inter',sans-serif;font-size:0.78rem;padding:10px;border-radius:6px;resize:vertical;min-height:90px;">${tweetText}</textarea>
           <div style="display:flex;gap:8px;margin-top:8px;">
             ${isReady
               ? `<button class="btn-post fn-post-btn" style="flex:1;" data-winner="${escHtml(winner)}" data-loser="${escHtml(loser)}" data-fight="${escHtml(fight.a + '-vs-' + fight.b)}">Post on 𝕏 Twitter</button>`
               : `<button class="btn-post" disabled style="flex:1;">Twitter not connected</button>`
             }
-            <button class="btn-post fn-copy-btn" style="flex:0;padding:8px 14px;" data-target="fn-tweet-${fight.a.replace(/\s+/g,'-')}">Copy</button>
+            <button class="btn-post fn-copy-btn" style="flex:0;padding:8px 14px;">Copy</button>
           </div>
           <div class="mkt-post-status fn-status"></div>`;
 
         preview.querySelector('.fn-copy-btn')?.addEventListener('click', e => {
-          const ta = document.getElementById(e.currentTarget.dataset.target);
+          const ta = preview.querySelector('textarea');
           if (ta) { navigator.clipboard.writeText(ta.value); e.currentTarget.textContent = 'Copied!'; setTimeout(() => { e.currentTarget.textContent = 'Copy'; }, 1500); }
         });
 
