@@ -234,6 +234,48 @@
       color:#fff; font-size:.85rem; cursor:pointer;
     }
 
+    /* Edit Fighters panel — change who's on the poster without leaving
+       this page (was: close the tab, go back to admin.html, redo the
+       whole form just to swap one name). Reuses the poster's own dark
+       chip language, not admin.html's form styling — this page doesn't
+       load that CSS. */
+    .mu-poster-edit-panel {
+      position:fixed; top:58px; right:16px; z-index:20;
+      display:flex; gap:8px; align-items:flex-start;
+      background:rgba(0,0,0,.72); backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,.16); border-radius:12px;
+      padding:10px;
+    }
+    .mu-poster-autocomplete { position:relative; }
+    .mu-poster-edit-input {
+      width:150px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.18);
+      border-radius:7px; padding:8px 10px; color:#fff; font-size:.78rem;
+      font-family:'Inter',sans-serif;
+    }
+    .mu-poster-edit-input::placeholder { color:rgba(255,255,255,.35); }
+    .mu-poster-autocomplete-list {
+      display:none; position:absolute; top:calc(100% + 4px); left:0; right:0;
+      max-height:180px; overflow-y:auto; background:#17171a;
+      border:1px solid rgba(255,255,255,.16); border-radius:8px; z-index:30;
+      box-shadow:0 12px 30px rgba(0,0,0,.5);
+    }
+    .mu-poster-autocomplete-list.open { display:block; }
+    .mu-poster-autocomplete-item {
+      padding:8px 10px; font-size:.76rem; color:rgba(255,255,255,.85); cursor:pointer;
+    }
+    .mu-poster-autocomplete-item:hover { background:rgba(255,138,61,.18); }
+    .mu-poster-edit-apply {
+      flex-shrink:0; background:linear-gradient(165deg, #ffb066 0%, #ff8a3d 45%, #e8691c 100%);
+      border:none; color:#0a0a0a; font-weight:700;
+      font-size:.74rem; padding:9px 14px; border-radius:7px; cursor:pointer;
+      font-family:'Montserrat',sans-serif; letter-spacing:.03em; text-transform:uppercase;
+    }
+    .mu-poster-edit-apply:disabled { opacity:.4; cursor:not-allowed; }
+    @media(max-width:640px) {
+      .mu-poster-edit-panel { flex-direction:column; left:10px; right:10px; top:auto; bottom:16px; }
+      .mu-poster-edit-input { width:100%; }
+    }
+
     /* poster brand watermark — small corner tag so a re-shared screenshot
        still reads as MMA Bridge content even cropped loosely. */
     .mu-poster-brand {
@@ -962,8 +1004,21 @@
     <button class="mu-poster-theme" id="muPosterTheme" type="button" title="Toggle poster background light/dark">🌙</button>
     <button class="mu-poster-theme" id="muPosterAccent" type="button" title="Toggle accent color orange/gold">🔶</button>
     <button class="mu-poster-theme" id="muPosterNameColor" type="button" title="Toggle fighter name color white/accent">Aa</button>
+    <button class="mu-poster-theme" id="muPosterEditBtn" type="button" title="Change fighters">👥</button>
     <button class="mu-poster-theme" id="muPosterDownload" type="button" title="Download poster">&#8681;</button>
     <button class="mu-poster-exit" id="muPosterExit" type="button">✕ Exit Poster View</button>
+  </div>
+
+  <div class="mu-poster-edit-panel" id="muPosterEditPanel" style="display:none">
+    <div class="mu-poster-autocomplete">
+      <input type="text" class="mu-poster-edit-input" id="muEditA" placeholder="Fighter A" autocomplete="off">
+      <div class="mu-poster-autocomplete-list" id="muEditAList"></div>
+    </div>
+    <div class="mu-poster-autocomplete">
+      <input type="text" class="mu-poster-edit-input" id="muEditB" placeholder="Fighter B" autocomplete="off">
+      <div class="mu-poster-autocomplete-list" id="muEditBList"></div>
+    </div>
+    <button class="mu-poster-edit-apply" id="muEditApply" type="button" disabled>Update Poster</button>
   </div>
 
   <div id="muRoot" class="mu-loading">Loading matchup...</div>
@@ -1446,6 +1501,73 @@
       posterNameColor.addEventListener('click', () => {
         const on = document.body.classList.toggle('mu-poster-name-accent');
         posterNameColor.classList.toggle('active', on);
+      });
+
+      // ── Edit Fighters — swap who's on the poster without leaving this
+      // page or redoing the whole admin form. Applies by reloading this
+      // same URL with a/b/imgA/imgB replaced and every other param (mode,
+      // theme, accent, nameColor, weight, event info) carried over as-is. ──
+      const editBtn   = document.getElementById('muPosterEditBtn');
+      const editPanel = document.getElementById('muPosterEditPanel');
+      const editA = document.getElementById('muEditA');
+      const editB = document.getElementById('muEditB');
+      const editAList = document.getElementById('muEditAList');
+      const editBList = document.getElementById('muEditBList');
+      const editApply = document.getElementById('muEditApply');
+      let editSelA = null, editSelB = null;
+
+      function searchMuFighters(q) {
+        const clean = q.trim().toLowerCase();
+        if (!clean) return [];
+        return fighters.filter(f => (f.name||'').toLowerCase().includes(clean)).slice(0, 8);
+      }
+      function wireMuAutocomplete(inputEl, listEl, onPick) {
+        inputEl.addEventListener('input', () => {
+          onPick(null);
+          const results = searchMuFighters(inputEl.value);
+          if (!results.length) { listEl.classList.remove('open'); listEl.innerHTML = ''; return; }
+          listEl.innerHTML = results.map(f => `<div class="mu-poster-autocomplete-item">${esc(f.name)}</div>`).join('');
+          listEl.classList.add('open');
+          listEl.querySelectorAll('.mu-poster-autocomplete-item').forEach((el, i) => {
+            el.addEventListener('click', () => {
+              inputEl.value = results[i].name;
+              listEl.classList.remove('open');
+              onPick(results[i]);
+            });
+          });
+        });
+        inputEl.addEventListener('blur', () => setTimeout(() => listEl.classList.remove('open'), 150));
+      }
+      function checkEditReady() { editApply.disabled = !(editA.value.trim() && editB.value.trim()); }
+      wireMuAutocomplete(editA, editAList, f => { editSelA = f; checkEditReady(); });
+      wireMuAutocomplete(editB, editBList, f => { editSelB = f; checkEditReady(); });
+
+      editBtn.addEventListener('click', () => {
+        const opening = editPanel.style.display === 'none';
+        editPanel.style.display = opening ? 'flex' : 'none';
+        if (opening) {
+          editA.value = nameA; editB.value = nameB;
+          editSelA = null; editSelB = null;
+          checkEditReady();
+          editA.focus();
+        }
+      });
+
+      editApply.addEventListener('click', () => {
+        const newA = editA.value.trim(), newB = editB.value.trim();
+        if (!newA || !newB) return;
+        const next = new URLSearchParams(location.search);
+        next.set('a', newA); next.set('b', newB);
+        if (editSelA && editSelA.img) next.set('imgA', editSelA.img); else next.delete('imgA');
+        if (editSelB && editSelB.img) next.set('imgB', editSelB.img); else next.delete('imgB');
+        // Carry forward whatever's actually toggled right now, not just
+        // whatever the page originally loaded with — otherwise a Gold/
+        // Light/name-accent choice made after opening the poster would
+        // silently reset back to defaults the moment you change a fighter.
+        if (document.body.classList.contains('mu-poster-light')) next.set('theme', 'light'); else next.delete('theme');
+        if (document.body.classList.contains('mu-poster-gold')) next.set('accent', 'gold'); else next.delete('accent');
+        if (document.body.classList.contains('mu-poster-name-accent')) next.set('nameColor', 'accent'); else next.delete('nameColor');
+        location.href = `matchup.html?${next.toString()}`;
       });
 
       // ── Download Poster ──────────────────────────────────────

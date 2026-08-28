@@ -363,6 +363,11 @@
       background:transparent; border:none; color:#e05555; cursor:pointer;
       font-size:.72rem; font-weight:600; padding:4px 8px;
     }
+    .fc-edit-swap {
+      background:transparent; border:none; color:#ff8a3d; cursor:pointer;
+      font-size:.72rem; font-weight:600; padding:4px 8px;
+    }
+    body.fc-light .fc-edit-swap { color:#c26a1e; }
     .fc-add-row {
       display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:8px;
       position:relative;
@@ -643,11 +648,12 @@
           ${bouts.length ? bouts.map(b => `
             <div class="fc-edit-row">
               <div class="fc-edit-row-text">${esc(b.a)} vs ${esc(b.b)}${b.weight ? ' &middot; ' + esc(b.weight) : ''}</div>
+              <button class="fc-edit-swap" data-edit="${b._id}" type="button">Edit</button>
               <button class="fc-edit-remove" data-remove="${b._id}" type="button">Remove</button>
             </div>
           `).join('') : `<div style="opacity:.5;font-size:.8rem;">None yet — add one below.</div>`}
         </div>
-        <div class="fc-edit-title">Add a fight</div>
+        <div class="fc-edit-title" id="fcAddTitle">Add a fight</div>
         <div class="fc-add-row">
           <div class="fc-autocomplete">
             <input type="text" class="fc-input" id="fcNewA" placeholder="Fighter A" autocomplete="off">
@@ -659,7 +665,10 @@
           </div>
         </div>
         <div class="fc-add-row-extra">${extraFieldsHTML}</div>
-        <button class="fc-add-btn" id="fcAddBoutBtn" type="button" disabled>+ Add</button>
+        <div style="display:flex; gap:8px; align-items:center;">
+          <button class="fc-add-btn" id="fcAddBoutBtn" type="button" disabled>+ Add</button>
+          <button class="fc-btn" id="fcCancelEditBtn" type="button" style="display:none;">Cancel</button>
+        </div>
       `;
 
       editPanel.querySelectorAll('[data-remove]').forEach(btn => {
@@ -687,7 +696,10 @@
       const listA  = document.getElementById('fcNewAList');
       const listB  = document.getElementById('fcNewBList');
       const addBtn = document.getElementById('fcAddBoutBtn');
+      const cancelBtn = document.getElementById('fcCancelEditBtn');
+      const addTitle  = document.getElementById('fcAddTitle');
       let selA = null, selB = null;
+      let editingId = null; // set while editing an existing bout instead of adding a new one
 
       function checkReady() { addBtn.disabled = !(inputA.value.trim() && inputB.value.trim()); }
       wireAutocomplete(inputA, listA, f => { selA = f; checkReady(); });
@@ -695,15 +707,41 @@
       inputA.addEventListener('input', () => { selA = null; checkReady(); });
       inputB.addEventListener('input', () => { selB = null; checkReady(); });
 
+      // Edit — pre-fill the same add-a-fight form with this bout's current
+      // values instead of making you remove it and re-add from scratch to
+      // change a fighter, section, weight, or tag.
+      editPanel.querySelectorAll('[data-edit]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = parseInt(btn.dataset.edit, 10);
+          const b = bouts.find(x => x._id === id);
+          if (!b) return;
+          editingId = id;
+          inputA.value = b.a; inputA.dataset.img = b.imgA || ''; inputA.dataset.champ = b.champA ? '1' : '';
+          inputB.value = b.b; inputB.dataset.img = b.imgB || ''; inputB.dataset.champ = b.champB ? '1' : '';
+          selA = null; selB = null;
+          const weightEl  = document.getElementById('fcNewWeight');
+          const sectionEl = document.getElementById('fcNewSection');
+          const tagEl     = document.getElementById('fcNewTag');
+          if (weightEl)  weightEl.value  = b.weight || '';
+          if (sectionEl) sectionEl.value = b.section || 'Main Card';
+          if (tagEl)     tagEl.value     = b.tag || '';
+          addTitle.textContent = `Editing: ${b.a} vs ${b.b}`;
+          addBtn.textContent = 'Save Changes';
+          cancelBtn.style.display = '';
+          checkReady();
+          inputA.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+      });
+
+      cancelBtn.addEventListener('click', () => { renderEditPanel(); });
+
       addBtn.addEventListener('click', () => {
         const nameA = inputA.value.trim(), nameB = inputB.value.trim();
         if (!nameA || !nameB) return;
         const weightEl  = document.getElementById('fcNewWeight');
         const sectionEl = document.getElementById('fcNewSection');
         const tagEl     = document.getElementById('fcNewTag');
-        boutSeq++;
-        bouts.push({
-          _id: boutSeq,
+        const fields = {
           a: nameA, b: nameB,
           imgA: selA ? (selA.img||'') : (inputA.dataset.img||''),
           imgB: selB ? (selB.img||'') : (inputB.dataset.img||''),
@@ -712,7 +750,14 @@
           weight: weightEl ? weightEl.value.trim() : '',
           section: sectionEl ? sectionEl.value : undefined,
           tag: tagEl ? tagEl.value.trim() : undefined,
-        });
+        };
+        if (editingId !== null) {
+          const b = bouts.find(x => x._id === editingId);
+          if (b) Object.assign(b, fields);
+        } else {
+          boutSeq++;
+          bouts.push({ _id: boutSeq, ...fields });
+        }
         render();
       });
     }
