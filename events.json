@@ -13770,7 +13770,19 @@
         "imgB": ""
       }
     ],
-    "earlyPrelims": [],
+    "earlyPrelims": [
+      {
+        "a": "Ding Meng",
+        "b": "Cameron Nelson",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
     "droppedFights": [
       {
         "a": "Ce Liu",
@@ -13892,6 +13904,17 @@
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/SY_OUMAR_L_09-06.png?itok=8hr7jJ0l",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/BUKAUSKAS_MODESTAS_L_05-16.png"
+      },
+      {
+        "a": "Daniil Donchenko",
+        "b": "Punahele Soriano",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
       }
     ],
     "earlyPrelims": [
@@ -14280,10 +14303,111 @@
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/ROSAS_JR_RAUL_L_03-29.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/BARCELOS_RAONI_L_01-18.png"
+      },
+      {
+        "a": "Rodolfo Vieira",
+        "b": "Robert Bryczek",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "comain",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Melissa Amaya",
+        "b": "Valesca Machado",
+        "weight": "W Strawweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Mehemmedeli Osmanli",
+        "b": "Ilimbek Akylbek Uulu",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Montel Jackson",
+        "b": "Ricky Simon",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
       }
     ],
-    "prelims": [],
-    "earlyPrelims": []
+    "prelims": [
+      {
+        "a": "Brady Hiestand",
+        "b": "Rinya Nakamura",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "John Castaneda",
+        "b": "Alatengheili",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Josiah Harrell",
+        "b": "Elves Brener",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
+    "earlyPrelims": [
+      {
+        "a": "Norma Dumont",
+        "b": "Ailin Perez",
+        "weight": "W Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Vanessa Demopoulos",
+        "b": "Yazmin Jauregui",
+        "weight": "W Strawweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ]
   },
   {
     "id": "ufc-332",
