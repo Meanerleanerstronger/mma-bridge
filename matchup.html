@@ -209,9 +209,11 @@
     body.mu-poster-mode .mu-fighter-name { font-size:clamp(3rem,9vw,7rem); }
     .mu-poster-controls {
       position:fixed; top:16px; right:16px; z-index:20;
-      display:none; align-items:center; gap:8px;
+      display:none; align-items:center; gap:8px; flex-wrap:wrap;
+      max-width:calc(100vw - 32px); justify-content:flex-end;
     }
-    body.mu-poster-mode .mu-poster-controls { display:flex; }
+    body.mu-poster-mode .mu-poster-controls,
+    body.mu-classic-mode .mu-poster-controls { display:flex; }
     .mu-poster-exit {
       background:rgba(0,0,0,.55); backdrop-filter:blur(8px);
       border:1px solid rgba(255,255,255,.2); border-radius:20px;
@@ -220,32 +222,48 @@
       padding:9px 18px; cursor:pointer; white-space:nowrap;
     }
 
-    /* poster theme toggle — separate from the site-wide theme, since a
-       promo poster shouldn't inherit whatever mode the visitor happens to
-       be browsing in. Dark is the default look; light flips the negative
-       space (the container itself) to white/cream while keeping the
-       per-side color wash. */
-    .mu-poster-theme {
-      flex-shrink:0;
-      display:flex; align-items:center; justify-content:center;
-      width:34px; height:34px;
+    /* Every poster control is a labeled pill now, not a bare icon — "idk
+       what each button does" was a fair complaint about the old circular
+       icon-only buttons. Text label always visible, no guessing. */
+    .mu-poster-pill {
+      flex-shrink:0; display:inline-flex; align-items:center; gap:6px;
       background:rgba(0,0,0,.55); backdrop-filter:blur(8px);
-      border:1px solid rgba(255,255,255,.2); border-radius:50%;
-      color:#fff; font-size:.85rem; cursor:pointer;
+      border:1px solid rgba(255,255,255,.2); border-radius:20px;
+      color:#fff; font-family:'Montserrat',sans-serif; font-weight:700;
+      font-size:.6rem; letter-spacing:.04em; text-transform:uppercase;
+      padding:8px 14px; cursor:pointer; white-space:nowrap;
     }
+    .mu-poster-pill:hover { background:rgba(0,0,0,.7); border-color:rgba(255,255,255,.35); }
+    .mu-poster-pill.active { border-color:#ff8a3d; color:#ffb066; }
 
-    /* Edit Fighters panel — change who's on the poster without leaving
-       this page (was: close the tab, go back to admin.html, redo the
-       whole form just to swap one name). Reuses the poster's own dark
-       chip language, not admin.html's form styling — this page doesn't
-       load that CSS. */
+    /* Persistent hint — the whole point of this redesign is that names/
+       weight/event text are directly clickable on the poster itself, which
+       isn't otherwise discoverable at all (nothing about plain text says
+       "editable"). Shown once, dismissed for good after the first click
+       anywhere on the poster. */
+    .mu-poster-hint {
+      flex-basis:100%; text-align:right;
+      font-family:'Inter',sans-serif; font-size:.68rem; font-style:italic;
+      color:rgba(255,255,255,.5); text-shadow:0 1px 4px rgba(0,0,0,.8);
+      margin-bottom:2px;
+    }
+    .mu-poster-hint.hidden { display:none; }
+
+    /* Swap Fighter panel — full photo+record+name swap via search, kept
+       separate from the direct-text-click editing below (that only
+       changes the string you clicked, not the photo or stats behind it). */
     .mu-poster-edit-panel {
       position:fixed; top:58px; right:16px; z-index:20;
-      display:flex; gap:8px; align-items:flex-start;
-      background:rgba(0,0,0,.72); backdrop-filter:blur(10px);
+      max-width:calc(100vw - 32px);
+      background:rgba(0,0,0,.82); backdrop-filter:blur(10px);
       border:1px solid rgba(255,255,255,.16); border-radius:12px;
-      padding:10px;
+      padding:12px;
     }
+    .mu-poster-edit-panel-title {
+      font-family:'Inter',sans-serif; font-size:.68rem; color:rgba(255,255,255,.55);
+      margin-bottom:8px; max-width:420px; line-height:1.4;
+    }
+    .mu-poster-edit-panel-row { display:flex; gap:8px; align-items:flex-start; flex-wrap:wrap; }
     .mu-poster-autocomplete { position:relative; }
     .mu-poster-edit-input {
       width:150px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.18);
@@ -272,9 +290,19 @@
     }
     .mu-poster-edit-apply:disabled { opacity:.4; cursor:not-allowed; }
     @media(max-width:640px) {
-      .mu-poster-edit-panel { flex-direction:column; left:10px; right:10px; top:auto; bottom:16px; }
+      .mu-poster-edit-panel-row { flex-direction:column; }
       .mu-poster-edit-input { width:100%; }
+      .mu-poster-hint { text-align:center; }
     }
+
+    /* Direct on-poster text editing — click any name, weight class, event
+       line, or location right where it appears and retype it, instead of
+       going through a form that only knows about real fighters-database
+       entries. Dashed outline on hover is the only way to know it's
+       editable at all, so it has to actually show up, not just imply it. */
+    .mu-editable { cursor:text; border-radius:4px; transition:box-shadow .15s; }
+    .mu-editable:hover { box-shadow:0 0 0 2px rgba(255,138,61,.5); }
+    .mu-editable:focus { outline:none; box-shadow:0 0 0 2px #ff8a3d; }
 
     /* poster brand watermark — small corner tag so a re-shared screenshot
        still reads as MMA Bridge content even cropped loosely. */
@@ -1001,24 +1029,28 @@
   </div>
 
   <div class="mu-poster-controls">
-    <button class="mu-poster-theme" id="muPosterTheme" type="button" title="Toggle poster background light/dark">🌙</button>
-    <button class="mu-poster-theme" id="muPosterAccent" type="button" title="Toggle accent color orange/gold">🔶</button>
-    <button class="mu-poster-theme" id="muPosterNameColor" type="button" title="Toggle fighter name color white/accent">Aa</button>
-    <button class="mu-poster-theme" id="muPosterEditBtn" type="button" title="Change fighters">👥</button>
-    <button class="mu-poster-theme" id="muPosterDownload" type="button" title="Download poster">&#8681;</button>
+    <div class="mu-poster-hint" id="muPosterHint">✎ Click any text on the poster to edit it directly</div>
+    <button class="mu-poster-pill" id="muPosterTheme" type="button" title="Toggle poster background">🌙<span>Dark</span></button>
+    <button class="mu-poster-pill" id="muPosterAccent" type="button" title="Toggle accent color">🔶<span>Orange</span></button>
+    <button class="mu-poster-pill" id="muPosterNameColor" type="button" title="Toggle fighter name color">Aa<span>White Names</span></button>
+    <button class="mu-poster-pill" id="muPosterEditBtn" type="button" title="Swap in a different fighter (photo + record)">👥<span>Swap Fighter</span></button>
+    <button class="mu-poster-pill" id="muPosterDownload" type="button" title="Download poster">&#8681;<span>Download</span></button>
     <button class="mu-poster-exit" id="muPosterExit" type="button">✕ Exit Poster View</button>
   </div>
 
   <div class="mu-poster-edit-panel" id="muPosterEditPanel" style="display:none">
-    <div class="mu-poster-autocomplete">
-      <input type="text" class="mu-poster-edit-input" id="muEditA" placeholder="Fighter A" autocomplete="off">
-      <div class="mu-poster-autocomplete-list" id="muEditAList"></div>
+    <div class="mu-poster-edit-panel-title">Swap Fighter — replaces photo, name &amp; record. To just retype a name, click it on the poster instead.</div>
+    <div class="mu-poster-edit-panel-row">
+      <div class="mu-poster-autocomplete">
+        <input type="text" class="mu-poster-edit-input" id="muEditA" placeholder="Fighter A" autocomplete="off">
+        <div class="mu-poster-autocomplete-list" id="muEditAList"></div>
+      </div>
+      <div class="mu-poster-autocomplete">
+        <input type="text" class="mu-poster-edit-input" id="muEditB" placeholder="Fighter B" autocomplete="off">
+        <div class="mu-poster-autocomplete-list" id="muEditBList"></div>
+      </div>
+      <button class="mu-poster-edit-apply" id="muEditApply" type="button" disabled>Update Poster</button>
     </div>
-    <div class="mu-poster-autocomplete">
-      <input type="text" class="mu-poster-edit-input" id="muEditB" placeholder="Fighter B" autocomplete="off">
-      <div class="mu-poster-autocomplete-list" id="muEditBList"></div>
-    </div>
-    <button class="mu-poster-edit-apply" id="muEditApply" type="button" disabled>Update Poster</button>
   </div>
 
   <div id="muRoot" class="mu-loading">Loading matchup...</div>
@@ -1358,22 +1390,22 @@
           ${imgsHTML}
           <div class="mu-hero-text">
             <div class="mu-hero-side a">
-              <a class="mu-fighter-name a" href="${profileA}">${esc(nameA)}</a>
+              <a class="mu-fighter-name a" href="${profileA}" id="muNameA">${esc(nameA)}</a>
               ${chips(fA)}
             </div>
             <div class="mu-vs-center">
               ${tagParam?`<div class="mu-poster-tag">${esc(tagParam)}</div>`:''}
               <div class="mu-vs-badge"><div class="mu-vs-text">VS</div></div>
-              ${weight?`<div class="mu-vs-weight">${esc(weight)}</div>`:''}
+              <div class="mu-vs-weight" id="muVsWeight" style="${weight?'':'display:none'}">${esc(weight)}</div>
             </div>
             <div class="mu-hero-side b">
-              <a class="mu-fighter-name b" href="${profileB}">${esc(nameB)}</a>
+              <a class="mu-fighter-name b" href="${profileB}" id="muNameB">${esc(nameB)}</a>
               ${chips(fB)}
             </div>
           </div>
           <div class="mu-hero-fade"></div>
         </div>
-        <div class="mu-poster-eventline${eventLine?' has-text':''}">${esc(eventLine)}</div>
+        <div class="mu-poster-eventline${eventLine?' has-text':''}" id="muEventline">${esc(eventLine)}</div>
 
         <div class="mu-classic-wrap">
           <div class="mu-classic-card">
@@ -1385,15 +1417,15 @@
             </div>
             <div class="mu-classic-textblock">
               <div class="mu-classic-name-row">
-                <div class="mu-classic-name">${esc(nameA)}</div>
+                <div class="mu-classic-name" id="muClassicNameA">${esc(nameA)}</div>
                 ${fA.ranking === 'Champion' ? `<span class="mu-classic-tag">C</span>` : ''}
               </div>
               <div class="mu-classic-vsline">
-                <span class="vs">vs</span>${esc(nameB)}
+                <span class="vs">vs</span><span id="muClassicNameB">${esc(nameB)}</span>
               </div>
-              ${weight?`<div class="mu-classic-weight">${esc(weight)}</div>`:''}
-              ${classicEventName?`<div class="mu-classic-eventline">${esc(classicEventName)}</div>`:''}
-              ${classicLocation?`<div class="mu-classic-location">${esc(classicLocation)}</div>`:''}
+              <div class="mu-classic-weight" id="muClassicWeight" style="${weight?'':'display:none'}">${esc(weight)}</div>
+              <div class="mu-classic-eventline" id="muClassicEventline" style="${classicEventName?'':'display:none'}">${esc(classicEventName)}</div>
+              <div class="mu-classic-location" id="muClassicLocation" style="${classicLocation?'':'display:none'}">${esc(classicLocation)}</div>
             </div>
             <div class="mu-classic-brandline">
               <span>MMA Bridge</span>
@@ -1450,11 +1482,45 @@
       // admin.html-only now, reached via ?poster=1/?classic=1, not a
       // visible button on the public page (see the div's own comment).
 
+      // ── Direct on-poster text editing — click any name/weight/event line
+      // and retype it right there, instead of only being able to swap in a
+      // real fighters-database entry via the search panel below. Only
+      // active in Poster/Classic view (setView() below flips it); the
+      // public "Full" comparison page keeps plain, non-editable links.
+      // Declared here, before setView's first call further down, since
+      // setView() calls setPosterEditable() immediately on page load via
+      // ?poster=1/?classic=1 — a const declared after that call point would
+      // still be in its temporal dead zone when setView first runs. ──
+      const editableIds = ['muNameA','muNameB','muVsWeight','muEventline','muClassicNameA','muClassicNameB','muClassicWeight','muClassicEventline','muClassicLocation'];
+      function preventEditNav(e) { e.preventDefault(); }
+      function setPosterEditable(on) {
+        editableIds.forEach(id => {
+          const el = document.getElementById(id);
+          if (!el) return;
+          if (on) {
+            el.setAttribute('contenteditable', 'true');
+            el.setAttribute('spellcheck', 'false');
+            el.classList.add('mu-editable');
+            if (el.style.display === 'none') el.style.display = '';
+            if (el.tagName === 'A') el.addEventListener('click', preventEditNav);
+          } else {
+            el.removeAttribute('contenteditable');
+            el.classList.remove('mu-editable');
+            if (el.tagName === 'A') el.removeEventListener('click', preventEditNav);
+          }
+        });
+      }
+      const posterHint = document.getElementById('muPosterHint');
+      document.getElementById('muRoot').addEventListener('click', e => {
+        if (e.target.closest('.mu-editable') && posterHint) posterHint.classList.add('hidden');
+      }, true);
+
       function setView(view) {
         document.body.classList.toggle('mu-poster-mode', view === 'poster');
         document.body.classList.toggle('mu-classic-mode', view === 'classic');
         viewToggle.querySelectorAll('.mu-view-btn').forEach(b => b.classList.toggle('active', b.dataset.view === view));
         posterExit.textContent = view === 'classic' ? '✕ Exit Classic View' : '✕ Exit Poster View';
+        if (typeof setPosterEditable === 'function') setPosterEditable(view === 'poster' || view === 'classic');
         window.scrollTo(0, 0);
       }
       viewToggle.querySelectorAll('.mu-view-btn').forEach(btn => {
@@ -1471,36 +1537,44 @@
       // ?theme=light|dark — lets the automated poster-generation script
       // (scripts/generate-h2h-poster.js) pick the theme headlessly, since
       // there's no click to drive it there.
+      function setThemeLabel(isLight) {
+        posterTheme.innerHTML = isLight ? '☀️<span>Light</span>' : '🌙<span>Dark</span>';
+        posterTheme.classList.toggle('active', isLight);
+      }
       if (p.get('theme') === 'light') {
         document.body.classList.add('mu-poster-light');
-        posterTheme.textContent = '☀️';
+        setThemeLabel(true);
       }
-
       // poster-only light/dark toggle, independent of the site's own theme
       posterTheme.addEventListener('click', () => {
-        const isLight = document.body.classList.toggle('mu-poster-light');
-        posterTheme.textContent = isLight ? '☀️' : '🌙';
+        setThemeLabel(document.body.classList.toggle('mu-poster-light'));
       });
 
+      function setAccentLabel(isGold) {
+        posterAccent.innerHTML = isGold ? '🏆<span>Gold</span>' : '🔶<span>Orange</span>';
+        posterAccent.classList.toggle('active', isGold);
+      }
       // ?accent=gold — same headless-friendly pattern as ?theme=light above.
       if (p.get('accent') === 'gold') {
         document.body.classList.add('mu-poster-gold');
-        posterAccent.textContent = '🏆';
+        setAccentLabel(true);
       }
       posterAccent.addEventListener('click', () => {
-        const isGold = document.body.classList.toggle('mu-poster-gold');
-        posterAccent.textContent = isGold ? '🏆' : '🔶';
+        setAccentLabel(document.body.classList.toggle('mu-poster-gold'));
       });
 
+      function setNameColorLabel(on) {
+        posterNameColor.innerHTML = on ? 'Aa<span>Accent Names</span>' : 'Aa<span>White Names</span>';
+        posterNameColor.classList.toggle('active', on);
+      }
       // ?nameColor=accent — fighter names default to white; this tints them
       // with whatever accent color is active (orange or gold) instead.
       if (p.get('nameColor') === 'accent') {
         document.body.classList.add('mu-poster-name-accent');
-        posterNameColor.classList.add('active');
+        setNameColorLabel(true);
       }
       posterNameColor.addEventListener('click', () => {
-        const on = document.body.classList.toggle('mu-poster-name-accent');
-        posterNameColor.classList.toggle('active', on);
+        setNameColorLabel(document.body.classList.toggle('mu-poster-name-accent'));
       });
 
       // ── Edit Fighters — swap who's on the poster without leaving this
