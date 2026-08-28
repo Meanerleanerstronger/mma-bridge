@@ -968,6 +968,14 @@
        swapping that too would erase the red/blue corner convention the
        glow is there to signal in the first place. ── */
     body.mu-poster-gold .mu-classic-vsline .vs { color:#f0c34e; }
+    /* The light-mode override two rules up (body.mu-classic-mode.mu-poster-light
+       .mu-classic-vsline .vs) is 4 classes deep and was winning over the
+       3-classes-deep rule above whenever Light + Gold were both on — VS
+       (and everything else below) stayed orange no matter what Gold said.
+       Every gold rule from here down is written against the SAME class
+       combination as whatever light-mode rule it needs to beat, not just
+       .mu-poster-gold alone. */
+    body.mu-classic-mode.mu-poster-light.mu-poster-gold .mu-classic-vsline .vs { color:#f0c34e; }
     body.mu-poster-mode.mu-poster-gold .mu-fighter-name.a {
       text-shadow:0 3px 0 rgba(0,0,0,.9), 0 8px 34px rgba(240,195,78,.4);
     }
@@ -975,6 +983,17 @@
       text-shadow:0 3px 0 rgba(255,255,255,.75), 0 8px 30px rgba(240,195,78,.4);
     }
     .mu-poster-theme.active { background:rgba(255,138,61,.25); border-color:#ff8a3d; color:#fff; }
+
+    /* Tag ribbons (classic mode's top-left "INTERIM BELT"-style chip, and
+       Poster mode's equivalent above the VS medallion) were still hardcoded
+       to the orange gradient — Gold never reached them at all. */
+    body.mu-poster-gold .mu-classic-tagline,
+    body.mu-poster-gold .mu-poster-tag {
+      background:linear-gradient(165deg, #fff0c2 0%, #f0c34e 60%, #a9760f 100%);
+    }
+
+    /* Event line ("UFC 332") — same hardcoded-orange gap as the tag ribbon. */
+    body.mu-poster-gold .mu-classic-eventline { color:#f0c34e; }
 
     /* ── Fighter name color: White (default) / Accent — an independent
        third toggle. Applies to BOTH names alike (not per-corner) since
@@ -988,6 +1007,16 @@
     body.mu-poster-name-accent.mu-poster-gold .mu-fighter-name,
     body.mu-poster-name-accent.mu-poster-gold .mu-classic-name,
     body.mu-poster-name-accent.mu-poster-gold #muClassicNameB { color:#f0c34e !important; }
+    /* Accent Names' color override didn't touch text-shadow, so on the
+       light card it kept the WHITE extrusion shadow meant to make BLACK
+       text pop — gold-on-cream with a white halo behind it is exactly the
+       washed-out, muddy look reported ("why does this look so ass in
+       light mode"). Give it the same dark shadow the orange/gold VS text
+       already uses on light instead. */
+    body.mu-classic-mode.mu-poster-light.mu-poster-name-accent .mu-classic-name,
+    body.mu-classic-mode.mu-poster-light.mu-poster-name-accent #muClassicNameB {
+      text-shadow:2px 2px 0 rgba(0,0,0,.22), 4px 4px 0 rgba(0,0,0,.12) !important;
+    }
   </style>
 </head>
 <body>
