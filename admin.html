@@ -1142,6 +1142,7 @@
 
       <!-- Tab: Events -->
       <div id="tab-events" class="admin-tab-content active">
+        <input type="text" id="events-search" placeholder="Filter events by name, date, or location…" style="width:100%;padding:10px 14px;margin-bottom:16px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);border-radius:8px;color:#fff;font-family:'Inter',sans-serif;font-size:0.85rem;">
         <div id="events-container">
           <div class="admin-loading">Loading events...</div>
         </div>
@@ -2238,7 +2239,27 @@
           [...completed].reverse().forEach(ev => grp.appendChild(buildEventCard(ev)));
           container.appendChild(grp);
         }
+
+        applyEventsFilter();
       }
+
+      // ── Events search/filter — was a plain unbroken scroll with no way
+      // to jump to a specific event, just Cmd+F or scroll-and-hope. ──
+      function applyEventsFilter() {
+        const q = ($('events-search')?.value || '').trim().toLowerCase();
+        document.querySelectorAll('.event-group').forEach(grp => {
+          let anyVisible = false;
+          grp.querySelectorAll('.event-card').forEach(card => {
+            const name = card.querySelector('.event-name')?.textContent.toLowerCase() || '';
+            const meta = card.querySelector('.event-meta')?.textContent.toLowerCase() || '';
+            const match = !q || name.includes(q) || meta.includes(q);
+            card.style.display = match ? '' : 'none';
+            if (match) anyVisible = true;
+          });
+          grp.style.display = anyVisible ? '' : 'none';
+        });
+      }
+      $('events-search')?.addEventListener('input', applyEventsFilter);
 
       // ── Build event card ──────────────────────────────────
       function buildEventCard(ev) {
