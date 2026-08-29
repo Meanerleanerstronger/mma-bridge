@@ -49221,7 +49221,19 @@
         "round": 3,
         "time": "4:03"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2021-10/71799%252Fprofile-galery%252Ffullbodyright-picture%252FMACHADO_VALESCA_R.png?itok=VJN-8B59",
+    "stats": {
+      "slpm": "2.40",
+      "strAcc": "32%",
+      "sapm": "2.87",
+      "strDef": "64%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "76%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-08-28T20:45:29.911Z"
   },
   {
     "id": "ricky-simon",
@@ -49312,7 +49324,19 @@
         "round": 2,
         "time": "4:00"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/SIMON_RICKY_L_03-28.png?itok=sJteSJT_",
+    "stats": {
+      "slpm": "3.03",
+      "strAcc": "42%",
+      "sapm": "3.90",
+      "strDef": "61%",
+      "tdAvg": "4.49",
+      "tdAcc": "41%",
+      "tdDef": "76%",
+      "subAvg": "0.3"
+    },
+    "statsSyncedAt": "2026-08-28T20:45:32.894Z"
   },
   {
     "id": "rinya-nakamura",
@@ -49403,7 +49427,19 @@
         "round": 2,
         "time": "0:20"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-08/NAKAMURA_RINYA_L%298_26.png?itok=l7Gg0V6_",
+    "stats": {
+      "slpm": "3.27",
+      "strAcc": "52%",
+      "sapm": "1.72",
+      "strDef": "63%",
+      "tdAvg": "2.58",
+      "tdAcc": "81%",
+      "tdDef": "100%",
+      "subAvg": "1.4"
+    },
+    "statsSyncedAt": "2026-08-28T20:45:35.596Z"
   },
   {
     "id": "vanessa-demopoulos",
@@ -49494,7 +49530,19 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-04/DEMOPOULOS_VANESSA_L_04-05.png?itok=mEN09m_H",
+    "stats": {
+      "slpm": "3.37",
+      "strAcc": "39%",
+      "sapm": "5.39",
+      "strDef": "41%",
+      "tdAvg": "0.32",
+      "tdAcc": "9%",
+      "tdDef": "26%",
+      "subAvg": "0.4"
+    },
+    "statsSyncedAt": "2026-08-28T20:45:38.392Z"
   },
   {
     "id": "yazmin-jauregui",
@@ -49585,6 +49633,111 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-09/JAUREGUI_YAZMIN_L_09-14.png?itok=nqoagzOS",
+    "stats": {
+      "slpm": "6.64",
+      "strAcc": "39%",
+      "sapm": "5.25",
+      "strDef": "54%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "100%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-08-28T20:45:41.286Z"
+  },
+  {
+    "id": "melissa-amaya",
+    "name": "Melissa Amaya",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-08-28T20:45:43.834Z"
+  },
+  {
+    "id": "mehemmedeli-osmanli",
+    "name": "Mehemmedeli Osmanli",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-08-28T20:45:46.391Z"
+  },
+  {
+    "id": "ilimbek-akylbek-uulu",
+    "name": "Ilimbek Akylbek Uulu",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-08-28T20:45:49.260Z"
+  },
+  {
+    "id": "brady-hiestand",
+    "name": "Brady Hiestand",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-04/HIESTAND_BRADY_L_04-22.png?itok=Ny5RUBiZ",
+    "stats": {
+      "slpm": "2.70",
+      "strAcc": "50%",
+      "sapm": "3.75",
+      "strDef": "51%",
+      "tdAvg": "4.80",
+      "tdAcc": "46%",
+      "tdDef": "42%",
+      "subAvg": "1.1"
+    },
+    "statsSyncedAt": "2026-08-28T20:45:52.255Z"
+  },
+  {
+    "id": "alatengheili",
+    "name": "Alatengheili",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-04/ALATENGHEILI_L_05-18.png?itok=tO6xLHed",
+    "stats": {
+      "slpm": "2.82",
+      "strAcc": "32%",
+      "sapm": "5.12",
+      "strDef": "57%",
+      "tdAvg": "1.74",
+      "tdAcc": "43%",
+      "tdDef": "75%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-08-28T20:45:55.175Z"
+  },
+  {
+    "id": "elves-brener",
+    "name": "Elves Brener",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/BRENNER_ELVES_L_08-02.png?itok=mY8muzRL",
+    "stats": {
+      "slpm": "4.76",
+      "strAcc": "47%",
+      "sapm": "5.86",
+      "strDef": "50%",
+      "tdAvg": "0.99",
+      "tdAcc": "16%",
+      "tdDef": "76%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-08-28T20:45:57.961Z"
   }
 ]
