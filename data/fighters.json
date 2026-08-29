@@ -29485,6 +29485,14 @@
     "nickname": "Psycho",
     "last5": [
       {
+        "opponent": "Jingnan Xiong",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Nurmagomedov vs. Song",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Talita Alencar",
         "result": "L",
         "method": "Decision (unanimous)",
@@ -47848,6 +47856,14 @@
     },
     "last5": [
       {
+        "opponent": "Hector Santiago",
+        "result": "L",
+        "method": "",
+        "event": "UFC Fight Night: Nurmagomedov vs. Song",
+        "round": 2,
+        "time": null
+      },
+      {
         "opponent": "A. J. McKee",
         "result": "L",
         "method": "Decision (unanimous)",
@@ -47961,7 +47977,17 @@
       "wins": 27,
       "losses": 11,
       "draws": 0
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Francesco Nuzzi",
+        "result": "L",
+        "method": "",
+        "event": "UFC Fight Night: Nurmagomedov vs. Song",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "francesco-nuzzi",
@@ -47983,7 +48009,17 @@
       "losses": 2,
       "draws": 0
     },
-    "nickname": "Berserker"
+    "nickname": "Berserker",
+    "last5": [
+      {
+        "opponent": "Xiao Long",
+        "result": "W",
+        "method": "",
+        "event": "UFC Fight Night: Nurmagomedov vs. Song",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "hector-santiago",
@@ -47998,7 +48034,17 @@
       "tdDef": "0%",
       "subAvg": "0.0"
     },
-    "statsSyncedAt": "2026-08-22T09:27:21.044Z"
+    "statsSyncedAt": "2026-08-22T09:27:21.044Z",
+    "last5": [
+      {
+        "opponent": "Lawrence Lui",
+        "result": "W",
+        "method": "",
+        "event": "UFC Fight Night: Nurmagomedov vs. Song",
+        "round": 2,
+        "time": null
+      }
+    ]
   },
   {
     "id": "ding-meng",
@@ -48019,7 +48065,17 @@
       "wins": 35,
       "losses": 10,
       "draws": 0
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Cam Nelson",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Nurmagomedov vs. Song",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "cam-nelson",
@@ -48034,7 +48090,17 @@
       "tdDef": "0%",
       "subAvg": "0.0"
     },
-    "statsSyncedAt": "2026-08-26T09:41:06.743Z"
+    "statsSyncedAt": "2026-08-26T09:41:06.743Z",
+    "last5": [
+      {
+        "opponent": "Ding Meng",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Nurmagomedov vs. Song",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "ramiro-jimenez",

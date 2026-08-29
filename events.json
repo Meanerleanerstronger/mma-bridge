@@ -13722,7 +13722,11 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/JINGNAN_XIONG_R_05-30.png?itok=vR1QsfRj",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/POLASTRI_JULIA_L_10-11.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/POLASTRI_JULIA_L_10-11.png",
+        "winner": "Julia Polastri",
+        "method": "KO/TKO",
+        "round": 1,
+        "_supabaseSynced": true
       },
       {
         "a": "Namsrai Batbayar",
@@ -13744,7 +13748,10 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/MENG_DING_L_05-30.png?itok=H0Huhzwl",
-        "imgB": ""
+        "imgB": "",
+        "winner": "Cam Nelson",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Xiao Long",
@@ -13755,7 +13762,10 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/LONG_XIAO_L_08-23.png?itok=wt2ezu8C",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
+        "winner": "Francesco Nuzzi",
+        "round": 1,
+        "_supabaseSynced": true
       },
       {
         "a": "Lawrence Lui",
@@ -13766,7 +13776,10 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-01/LUI_LAWRENCE_R_01-31_0.png?itok=dKAwwQi3",
-        "imgB": ""
+        "imgB": "",
+        "winner": "Hector Santiago",
+        "round": 2,
+        "_supabaseSynced": true
       }
     ],
     "earlyPrelims": [],
