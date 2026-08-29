@@ -13620,7 +13620,7 @@
     "location": "Shanghai, China",
     "venue": "Shanghai Oriental Sports Center",
     "poster": "https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-08/082926-ufc-fight-night-nurmagomedov-vs-song-EVENT-ART.jpg",
-    "status": "upcoming",
+    "status": "completed",
     "start_time": "2026-08-29T07:00:00.000Z",
     "mainCard": [
       {
@@ -13632,7 +13632,11 @@
         "ranked": true,
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/NURMAGOMEDOV_UMAR_L_01-24.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/YADONG_SONG_L_05-30.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/YADONG_SONG_L_05-30.png",
+        "winner": "Song Yadong",
+        "method": "KO/TKO",
+        "round": 2,
+        "_supabaseSynced": true
       },
       {
         "a": "Yan Xiaonan",
