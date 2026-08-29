@@ -13643,7 +13643,11 @@
         "ranked": true,
         "slot": "comain",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-04/XIAONAN_YAN_L_04-12.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-11/GOMES_DENISE_L_11-04.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-11/GOMES_DENISE_L_11-04.png",
+        "winner": "Denise Gomes",
+        "method": "KO/TKO",
+        "round": 1,
+        "_supabaseSynced": true
       },
       {
         "a": "Sumudaerji",
@@ -13654,7 +13658,10 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/SUMUDAERJI_L_03-07.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/PEREZ_ALEX_L_05-30.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/PEREZ_ALEX_L_05-30.png",
+        "winner": "Sumudaerji",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Aoriqileng",
@@ -13665,7 +13672,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/AORIQILENG_L_05-30.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/ASAKURA_KAI_L_05-30.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/ASAKURA_KAI_L_05-30.png",
+        "winner": "Kai Asakura",
+        "method": "KO/TKO",
+        "round": 2,
+        "_supabaseSynced": true
       },
       {
         "a": "Bilal Hasan",
@@ -13676,7 +13687,11 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/HASAN_BILAL_L_08-11.png?itok=wL9PQxdA",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
+        "winner": "Bilal Hasan",
+        "method": "KO/TKO",
+        "round": 2,
+        "_supabaseSynced": true
       },
       {
         "a": "Liu Ce",
@@ -13687,7 +13702,11 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
+        "winner": "Liu Ce",
+        "method": "KO/TKO",
+        "round": 1,
+        "_supabaseSynced": true
       }
     ],
     "prelims": [
@@ -13700,7 +13719,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-09/JENKINS_JACK_L_09-27.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-12/WOODSON_SEAN_L_12-14.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-12/WOODSON_SEAN_L_12-14.png",
+        "winner": "Sean Woodson",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Rei Tsuruya",
@@ -13711,7 +13733,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/TSURUYA_REI_L_05-30.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-04/BORJAS_KEVIN_L_11-11.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-04/BORJAS_KEVIN_L_11-11.png",
+        "winner": "Rei Tsuruya",
+        "method": "SUB",
+        "round": 1,
+        "_supabaseSynced": true
       },
       {
         "a": "Xiong Jingnan",
@@ -13737,7 +13763,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/BATBAYAR_NAMSRAI_R_01-31.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/LIMA_ANDRE_L_06-20.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/LIMA_ANDRE_L_06-20.png",
+        "winner": "Andre Lima",
+        "method": "SUB",
+        "round": 3,
+        "_supabaseSynced": true
       },
       {
         "a": "Ding Meng",
