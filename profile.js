@@ -1130,8 +1130,8 @@
             </label>
             <label class="notif-pref-row" id="emailDigestRow">
               <div class="notif-pref-info">
-                <span class="notif-pref-label">Weekly email digest</span>
-                <span class="notif-pref-hint">Upcoming events and your stats, every Monday</span>
+                <span class="notif-pref-label">Email updates</span>
+                <span class="notif-pref-hint">Weekly digest, pick &amp; review reminders, and rankings updates</span>
               </div>
               <input type="checkbox" class="notif-pref-toggle" id="emailOptOutToggle" checked>
             </label>
@@ -1149,7 +1149,7 @@
       toggle.addEventListener('change', async () => {
         const optOut = !toggle.checked;
         try {
-          await sb.from('profiles').update({ email_opt_out: optOut }).eq('id', user.id);
+          await sb.from('profiles').upsert({ id: user.id, email_opt_out: optOut });
         } catch {
           toggle.checked = !optOut;
         }
