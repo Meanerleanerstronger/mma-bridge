@@ -87,7 +87,7 @@
     let profileData = null;
     try {
       const { data } = await sb.from('profiles')
-        .select('id, display_name, avatar_url, created_at')
+        .select('id, display_name, avatar_url, created_at, walkout_song, walkout_song_artwork, walkout_song_preview_url')
         .eq('id', viewedUserId)
         .single();
       profileData = data;
@@ -351,6 +351,16 @@
           <div class="pr-info">
             <div class="pr-label">Fighter Profile</div>
             <h1 class="pr-name">${esc(profileData.display_name || 'Fighter')}</h1>
+            ${profileData.walkout_song ? `
+            <div class="pr-walkout-tag">
+              <span class="pr-walkout-tag-arrow">↘</span>
+              <span>Walkout Song</span>
+            </div>
+            <button class="pr-walkout-btn pr-walkout-btn-readonly" id="prWalkoutBtnRO" type="button" data-preview="${esc(profileData.walkout_song_preview_url || '')}">
+              <span class="pr-walkout-note">${profileData.walkout_song_artwork ? `<img class="pr-walkout-art" src="${esc(profileData.walkout_song_artwork)}" alt="">` : '🎵'}</span>
+              <span>${esc(profileData.walkout_song)}</span>
+              ${profileData.walkout_song_preview_url ? `<span class="pr-walkout-play" id="prWalkoutPlayRO" title="Play preview">▶</span>` : ''}
+            </button>` : ''}
             <div class="pr-meta-row">
               <span class="pr-meta-item">
                 <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
@@ -427,6 +437,26 @@
     document.getElementById('prChallengeBtn')?.addEventListener('click', () => {
       window.openChallengeModal?.(viewedUserId, profileData.display_name || 'Fighter');
     });
+
+    // Wire read-only walkout song preview (public profile — no editing, just play)
+    const roWalkoutBtn = document.getElementById('prWalkoutBtnRO');
+    if (roWalkoutBtn) {
+      let roAudio = null;
+      roWalkoutBtn.addEventListener('click', e => {
+        const url = roWalkoutBtn.dataset.preview;
+        if (!url) return;
+        const playIcon = document.getElementById('prWalkoutPlayRO');
+        if (roAudio && !roAudio.paused) {
+          roAudio.pause(); roAudio = null;
+          playIcon?.classList.remove('playing');
+          return;
+        }
+        roAudio = new Audio(url);
+        roAudio.play().catch(() => {});
+        playIcon?.classList.add('playing');
+        roAudio.addEventListener('ended', () => playIcon?.classList.remove('playing'));
+      });
+    }
 
     // Wire share button
     const otherShareBtn = document.getElementById('prShareBtn');
