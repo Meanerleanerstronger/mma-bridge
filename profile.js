@@ -358,7 +358,7 @@
             </div>
             <button class="pr-walkout-btn pr-walkout-btn-readonly" id="prWalkoutBtnRO" type="button" data-preview="${esc(profileData.walkout_song_preview_url || '')}">
               <span class="pr-walkout-note">${profileData.walkout_song_artwork ? `<img class="pr-walkout-art" src="${esc(profileData.walkout_song_artwork)}" alt="">` : '🎵'}</span>
-              <span>${esc(profileData.walkout_song)}</span>
+              <span class="pr-walkout-btn-label">${esc(profileData.walkout_song)}</span>
               ${profileData.walkout_song_preview_url ? `<span class="pr-walkout-play" id="prWalkoutPlayRO" title="Play preview">▶</span>` : ''}
             </button>` : ''}
             <div class="pr-meta-row">
@@ -861,7 +861,7 @@
             </div>
             <button class="pr-walkout-btn" id="prWalkoutBtn" type="button">
               <span class="pr-walkout-note">${walkoutArtwork ? `<img class="pr-walkout-art" src="${esc(walkoutArtwork)}" alt="">` : '🎵'}</span>
-              <span id="prWalkoutBtnLabel">${walkoutSong ? esc(walkoutSong) : 'Pick Your Walkout Song'}</span>
+              <span id="prWalkoutBtnLabel" class="pr-walkout-btn-label">${walkoutSong ? esc(walkoutSong) : 'Pick Your Walkout Song'}</span>
               ${walkoutPreviewUrl ? `<span class="pr-walkout-play" id="prWalkoutPlay" title="Play preview">▶</span>` : ''}
             </button>
             <div class="pr-walkout-edit" id="prWalkoutEdit" style="display:none">
@@ -1238,7 +1238,7 @@
     function refreshButton() {
       btn.innerHTML = `
         <span class="pr-walkout-note">${walkoutArtwork ? `<img class="pr-walkout-art" src="${esc(walkoutArtwork)}" alt="">` : '🎵'}</span>
-        <span id="prWalkoutBtnLabel">${walkoutSong ? esc(walkoutSong) : 'Pick Your Walkout Song'}</span>
+        <span id="prWalkoutBtnLabel" class="pr-walkout-btn-label">${walkoutSong ? esc(walkoutSong) : 'Pick Your Walkout Song'}</span>
         ${walkoutPreviewUrl ? `<span class="pr-walkout-play" id="prWalkoutPlay" title="Play preview">▶</span>` : ''}
       `;
       wirePlayBtn();

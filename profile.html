@@ -871,10 +871,17 @@
       padding: 12px 20px; border-radius: 12px;
       background: linear-gradient(135deg, #ff8a3d 0%, #f2600f 55%, #c24a08 100%);
       border: none; color: #0a0a0a; cursor: pointer; max-width: 340px;
-      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
       box-shadow: 0 6px 22px rgba(242,96,15,0.35), inset 0 1px 0 rgba(255,255,255,0.35);
       transition: transform 0.18s ease, box-shadow 0.18s ease;
     }
+    /* Label truncates on its own — the note icon and ▶ preview button stay
+       fixed-size and always visible at the end, instead of the whole
+       button clipping (which was cutting the ▶ off entirely on long
+       song titles). */
+    .pr-walkout-btn-label {
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; flex: 1;
+    }
+    .pr-walkout-note, .pr-walkout-play { flex-shrink: 0; }
     .pr-walkout-btn:hover {
       transform: translateY(-2px) scale(1.015);
       box-shadow: 0 10px 30px rgba(242,96,15,0.5), inset 0 1px 0 rgba(255,255,255,0.4);
@@ -1052,7 +1059,7 @@
   <script src="search.js"></script>
   <script src="ux.js?v=1.0"></script>
   <script src="premium.js?v=3.10"></script>
-  <script type="module" src="profile.js?v=1.7"></script>
+  <script type="module" src="profile.js?v=1.8"></script>
 <script src="notifications.js?v=2.7"></script>
 <script src="push.js?v=1.2"></script>
 <script src="animations.js?v=2.0"></script>
