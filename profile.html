@@ -201,10 +201,19 @@
     }
 
     /* ── RATING CARDS (review history) ── */
+    /* My Reviews starts collapsed — the profile page got very long once
+       someone had 20-30 reviews, so it's a <details>/<summary> now with
+       the title bar doubling as the expand toggle. */
+    .pr-reviews-summary { cursor: pointer; list-style: none; }
+    .pr-reviews-summary::-webkit-details-marker { display: none; }
+    .pr-reviews-summary::after { order: 1; }
+    .pr-reviews-chevron { order: 2; flex-shrink: 0; color: rgba(255,255,255,0.35); transition: transform 0.25s ease; }
+    details[open] .pr-reviews-chevron { transform: rotate(180deg); }
     .pr-ratings-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
+      margin-top: 20px;
     }
     .pr-rating-card {
       background: #0e0e12;

@@ -1003,11 +1003,14 @@
 
     return `
       <div class="pr-section" style="animation-delay:0.1s">
-        <div class="pr-section-title">
-          My Reviews
-          <span class="pr-section-count">${ratings.length}</span>
-        </div>
-        <div class="pr-ratings-grid">${cards}</div>
+        <details>
+          <summary class="pr-section-title pr-reviews-summary">
+            My Reviews
+            <span class="pr-section-count">${ratings.length}</span>
+            <svg class="pr-reviews-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <div class="pr-ratings-grid">${cards}</div>
+        </details>
       </div>`;
   }
 

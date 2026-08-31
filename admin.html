@@ -1402,6 +1402,19 @@
           <button id="btn-test-email" style="padding:6px 14px;background:#ff8a3d;color:#000;border:none;border-radius:6px;font-weight:700;font-size:0.78rem;cursor:pointer;">Send Test</button>
           <span id="test-email-status" style="font-size:0.78rem;color:rgba(255,255,255,0.5);"></span>
         </div>
+        <!-- Runs one of the scheduled email jobs immediately instead of waiting
+             for its next cron tick — fastest way to confirm a job actually
+             sends (and how many/errors) rather than guessing from timing. -->
+        <div style="display:flex;gap:8px;align-items:center;padding:12px 14px;margin-top:10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;flex-wrap:wrap;">
+          <span style="font-size:0.8rem;color:rgba(255,255,255,0.5);white-space:nowrap;">Run email job now</span>
+          <select id="run-email-job-select" style="padding:6px 10px;background:#111;border:1px solid rgba(255,255,255,0.15);border-radius:6px;color:#fff;font-size:0.82rem;">
+            <option value="review_reminder">Review reminders</option>
+            <option value="pick_reminder">Pick reminders</option>
+            <option value="rankings_update">Rankings update</option>
+          </select>
+          <button id="btn-run-email-job" style="padding:6px 14px;background:#ff8a3d;color:#000;border:none;border-radius:6px;font-weight:700;font-size:0.78rem;cursor:pointer;">Run Now</button>
+          <span id="run-email-job-status" style="font-size:0.78rem;color:rgba(255,255,255,0.5);"></span>
+        </div>
       </div>
 
     </div>
@@ -1496,6 +1509,31 @@
           const data = await res.json();
           if (res.ok && data.ok) {
             statusEl.textContent = `Sent ✓ (${data.resend_id || ''})`;
+            statusEl.style.color = '#5c5';
+          } else {
+            statusEl.textContent = 'Failed: ' + (data.error || res.status);
+            statusEl.style.color = '#e55';
+          }
+        } catch (e) {
+          statusEl.textContent = 'Failed: ' + e.message;
+          statusEl.style.color = '#e55';
+        }
+      });
+
+      $('btn-run-email-job')?.addEventListener('click', async () => {
+        const job = $('run-email-job-select').value;
+        const statusEl = $('run-email-job-status');
+        statusEl.textContent = 'Running… (can take a few seconds if the backend was asleep)';
+        statusEl.style.color = 'rgba(255,255,255,0.5)';
+        try {
+          const res = await fetch(`${API_BASE}/api/admin/run-email-job`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token: token(), job }),
+          });
+          const data = await res.json();
+          if (res.ok && data.ok) {
+            statusEl.textContent = 'Done ✓ ' + (data.log && data.log.length ? data.log.join(' | ') : '(no log output — check nothing matched)');
             statusEl.style.color = '#5c5';
           } else {
             statusEl.textContent = 'Failed: ' + (data.error || res.status);
