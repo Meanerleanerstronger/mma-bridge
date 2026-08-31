@@ -76,7 +76,7 @@
     const isPfp   = f.pfp || f.pfp_women;
     const record  = fmtRecord(f.record);
     const badge   = isChamp ? `<span style="background:rgba(200,150,10,.14);border:1px solid rgba(200,150,10,.4);color:#c9a227;font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-radius:20px;padding:2px 8px;">Champ</span>` :
-                    isPfp   ? `<span style="background:rgba(255,138,61,.08);border:1px solid rgba(255,138,61,.22);color:#ff8a3d;font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-radius:20px;padding:2px 8px;">★ P4P</span>` : '';
+                    isPfp   ? `<span style="background:rgba(242, 96, 15,.08);border:1px solid rgba(242, 96, 15,.22);color:#f2600f;font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-radius:20px;padding:2px 8px;">★ P4P</span>` : '';
     return `
       <a href="fighter.html?id=${esc(f.id||slugify(f.name))}" class="results-card">
         ${f.img||f.photo ? `<img class="results-card-img" src="${esc(f.img||f.photo)}" alt="${esc(f.name)}" loading="lazy" style="object-fit:cover;object-position:top center;">` : `<div class="results-card-img-placeholder"></div>`}
@@ -98,7 +98,7 @@
     const mainLine = main ? `${main.a} vs ${main.b}` : '';
     const statusTag = isPast(ev)
       ? `<span style="color:rgba(255,255,255,.3);">Completed</span>`
-      : `<span style="color:#ff8a3d;">Upcoming</span>`;
+      : `<span style="color:#f2600f;">Upcoming</span>`;
     return `
       <a href="${dest}" class="results-card">
         ${ev.poster ? `<img class="results-card-img" src="${esc(ev.poster)}" alt="${esc(name)}" loading="lazy" style="object-fit:cover;object-position:top center;">` : `<div class="results-card-img-placeholder"></div>`}
@@ -162,7 +162,7 @@
       cardsEl.innerHTML = `
         <div class="results-empty" style="grid-column:1/-1">
           <div class="results-empty-title">No results for "${esc(q)}"</div>
-          <div class="results-empty-sub">Try a fighter nickname, weight class, or country. Or <a href="lucas.html" style="color:#ff8a3d;">ask Lucas</a>.</div>
+          <div class="results-empty-sub">Try a fighter nickname, weight class, or country. Or <a href="lucas.html" style="color:#f2600f;">ask Lucas</a>.</div>
         </div>`;
       return;
     }

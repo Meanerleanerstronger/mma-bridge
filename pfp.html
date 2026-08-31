@@ -5,7 +5,7 @@
   <link rel="shortcut icon" type="image/png" href="images/mma-bridge-logo.png?v=2">
   <link rel="apple-touch-icon" href="images/mma-bridge-logo.png?v=2">
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#ff8a3d">
+  <meta name="theme-color" content="#f2600f">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -40,7 +40,7 @@
   }
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Pacifico&family=Barlow+Condensed:wght@800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=9.22" />
+  <link rel="stylesheet" href="style.css?v=9.23" />
   <style>
     /* ── KEYFRAMES ── */
     @keyframes shimmerSlide {
@@ -56,15 +56,15 @@
       to   { opacity: 1; transform: translateX(0); }
     }
     @keyframes goldPulse {
-      0%,100% { box-shadow: 0 0 0 0 rgba(255,138,61,0.5); }
-      50%      { box-shadow: 0 0 0 6px rgba(255,138,61,0); }
+      0%,100% { box-shadow: 0 0 0 0 rgba(242, 96, 15,0.5); }
+      50%      { box-shadow: 0 0 0 6px rgba(242, 96, 15,0); }
     }
 
     .pfp-page {
       background: #060608;
       background-image:
-        radial-gradient(ellipse 70% 40% at 80% 0%, rgba(255,138,61,0.04) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 30% at 10% 100%, rgba(255,138,61,0.03) 0%, transparent 50%);
+        radial-gradient(ellipse 70% 40% at 80% 0%, rgba(242, 96, 15,0.04) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 30% at 10% 100%, rgba(242, 96, 15,0.03) 0%, transparent 50%);
       min-height: 100vh;
     }
 
@@ -102,9 +102,9 @@
       white-space: nowrap;
     }
     .rnk-tab.active {
-      background: rgba(255,138,61,0.15);
-      color: #ff8a3d;
-      box-shadow: 0 0 0 1px rgba(255,138,61,0.25) inset;
+      background: rgba(242, 96, 15,0.15);
+      color: #f2600f;
+      box-shadow: 0 0 0 1px rgba(242, 96, 15,0.25) inset;
     }
     .rnk-tab[data-tab="womens-p4p"].active {
       background: rgba(210,100,190,0.18);
@@ -112,13 +112,13 @@
       box-shadow: 0 0 0 1px rgba(210,100,190,0.3) inset;
     }
     .rnk-tab[data-tab="divisional"].active {
-      background: rgba(255,138,61,0.1);
-      color: #ff8a3d;
-      box-shadow: 0 0 0 1px rgba(255,138,61,0.2) inset;
+      background: rgba(242, 96, 15,0.1);
+      color: #f2600f;
+      box-shadow: 0 0 0 1px rgba(242, 96, 15,0.2) inset;
     }
     body.light-mode .rnk-tabs { background:rgba(0,0,0,0.04); border-color:rgba(0,0,0,0.1); }
     body.light-mode .rnk-tab { color:rgba(0,0,0,0.4); }
-    body.light-mode .rnk-tab.active { color:#e06b1a; background:rgba(255,138,61,0.12); }
+    body.light-mode .rnk-tab.active { color:#c24a08; background:rgba(242, 96, 15,0.12); }
     @media(max-width:480px) {
       .rnk-tabs { width: 100%; }
       .rnk-tab { flex: 1; padding: 9px 8px; font-size: 0.6rem; letter-spacing: 0.08em; }
@@ -213,9 +213,9 @@
       font-family: 'Montserrat', sans-serif;
       font-size: 0.48rem; font-weight: 900;
       letter-spacing: 0.18em; text-transform: uppercase;
-      color: #ff8a3d;
-      background: rgba(255,138,61,0.1);
-      border: 1px solid rgba(255,138,61,0.28);
+      color: #f2600f;
+      background: rgba(242, 96, 15,0.1);
+      border: 1px solid rgba(242, 96, 15,0.28);
       border-radius: 3px; padding: 3px 8px;
       margin-bottom: 10px;
     }
@@ -239,7 +239,7 @@
     .div-champ-nickname {
       font-family: 'Inter', sans-serif;
       font-size: 0.68rem; font-style: italic;
-      color: rgba(255,138,61,0.55);
+      color: rgba(242, 96, 15,0.55);
       margin-bottom: 4px;
     }
     .div-champ-name {
@@ -293,10 +293,10 @@
     .div-pill.women { color: rgba(240,100,200,0.38); border-color: rgba(240,100,200,0.14); }
     .div-pill:hover  { color: rgba(255,255,255,0.65); border-color: rgba(255,255,255,0.22); }
     .div-pill.active {
-      background: rgba(255,138,61,0.14);
-      color: #ff8a3d;
-      border-color: rgba(255,138,61,0.32);
-      box-shadow: 0 0 14px rgba(255,138,61,0.14);
+      background: rgba(242, 96, 15,0.14);
+      color: #f2600f;
+      border-color: rgba(242, 96, 15,0.32);
+      box-shadow: 0 0 14px rgba(242, 96, 15,0.14);
     }
     .div-pill.women.active {
       background: rgba(240,100,200,0.12);

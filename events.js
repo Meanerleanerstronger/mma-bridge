@@ -543,7 +543,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       toast = document.createElement('div');
       toast.id = 'ev-notif-toast';
       toast.style.cssText = `position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
-        background:rgba(255,138,61,0.1);border:1px solid rgba(255,138,61,0.35);
+        background:rgba(242, 96, 15,0.1);border:1px solid rgba(242, 96, 15,0.35);
         color:cyan;font-family:'Montserrat',sans-serif;font-weight:700;font-size:0.72rem;
         letter-spacing:0.06em;padding:9px 20px;border-radius:6px;z-index:9999;
         backdrop-filter:blur(8px);opacity:0;transition:opacity 0.2s;pointer-events:none;`;
@@ -780,7 +780,7 @@ document.addEventListener('click', async e => {
 
     // Top bar
     const barGrad = ctx.createLinearGradient(0, 0, canvas.width, 0);
-    barGrad.addColorStop(0, '#e06b1a');
+    barGrad.addColorStop(0, '#c24a08');
     barGrad.addColorStop(1, '#a87a0a');
     ctx.fillStyle = barGrad;
     ctx.fillRect(0, 0, canvas.width, 64);
@@ -821,7 +821,7 @@ document.addEventListener('click', async e => {
       ctx.fillText(fA.toUpperCase(), 40, y + 4);
 
       // Fighter A pct
-      ctx.fillStyle = pctA >= 50 ? '#e06b1a' : 'rgba(255,255,255,0.5)';
+      ctx.fillStyle = pctA >= 50 ? '#c24a08' : 'rgba(255,255,255,0.5)';
       ctx.font = 'bold 20px Montserrat, sans-serif';
       ctx.textAlign = 'left';
       ctx.fillText(`${pctA}%`, 40, y + 26);
@@ -833,7 +833,7 @@ document.addEventListener('click', async e => {
       ctx.fillText(fB.toUpperCase(), canvas.width - 40, y + 4);
 
       // Fighter B pct
-      ctx.fillStyle = pctB >= 50 ? '#e06b1a' : 'rgba(255,255,255,0.5)';
+      ctx.fillStyle = pctB >= 50 ? '#c24a08' : 'rgba(255,255,255,0.5)';
       ctx.font = 'bold 20px Montserrat, sans-serif';
       ctx.textAlign = 'right';
       ctx.fillText(`${pctB}%`, canvas.width - 40, y + 26);
@@ -849,7 +849,7 @@ document.addEventListener('click', async e => {
       // Progress bar fill (A side)
       if (pctA > 0) {
         const fillGrad = ctx.createLinearGradient(barX, 0, barX + barW, 0);
-        fillGrad.addColorStop(0, '#e06b1a');
+        fillGrad.addColorStop(0, '#c24a08');
         fillGrad.addColorStop(1, '#a87a0a');
         ctx.fillStyle = fillGrad;
         ctx.beginPath();
@@ -913,7 +913,7 @@ function showConsensusModal(imageUrl, fileName, evName) {
       <div style="font-family:Montserrat,sans-serif;font-weight:800;font-size:1rem;color:#fff;margin-bottom:14px;text-transform:uppercase;letter-spacing:0.06em;">Community Picks — ${evName}</div>
       <img src="${imageUrl}" style="width:100%;border-radius:10px;margin-bottom:18px;display:block;" alt="Community picks card">
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-        <a href="${imageUrl}" download="${fileName}" style="display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,#e06b1a,#a87a0a);color:#000;font-family:Montserrat,sans-serif;font-weight:800;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;padding:11px 22px;border-radius:8px;text-decoration:none;">⬇ Download</a>
+        <a href="${imageUrl}" download="${fileName}" style="display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,#c24a08,#a87a0a);color:#000;font-family:Montserrat,sans-serif;font-weight:800;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;padding:11px 22px;border-radius:8px;text-decoration:none;">⬇ Download</a>
         <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(`Community picks for ${evName} mmabridge.com`)}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18);color:#fff;font-family:Montserrat,sans-serif;font-weight:700;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;padding:11px 22px;border-radius:8px;text-decoration:none;">𝕏 Tweet</a>
         <button onclick="document.getElementById('consensusModal').remove()" style="background:none;border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.4);font-family:Inter,sans-serif;font-size:0.78rem;padding:11px 18px;border-radius:8px;cursor:pointer;">Close</button>
       </div>

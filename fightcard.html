@@ -44,10 +44,10 @@
     .fc-zoom-group { display:flex; align-items:center; gap:4px; }
     .fc-zoom-btn { padding:8px 14px; cursor:pointer; }
     .fc-zoom-label { pointer-events:none; min-width:52px; text-align:center; font-variant-numeric:tabular-nums; }
-    .fc-btn.active { background:linear-gradient(165deg, #ffb066 0%, #ff8a3d 45%, #e8691c 100%); border-color:#ff8a3d; color:#0a0a0a; }
+    .fc-btn.active { background:linear-gradient(165deg, #ffb066 0%, #f2600f 45%, #e8691c 100%); border-color:#f2600f; color:#0a0a0a; }
     body.fc-light .fc-btn { background:rgba(0,0,0,.05); border-color:rgba(0,0,0,.14); color:#161514; }
     body.fc-light .fc-btn:hover { background:rgba(0,0,0,.1); }
-    body.fc-light .fc-btn.active { background:linear-gradient(165deg, #ffb066 0%, #ff8a3d 45%, #e8691c 100%); border-color:#ff8a3d; color:#0a0a0a; }
+    body.fc-light .fc-btn.active { background:linear-gradient(165deg, #ffb066 0%, #f2600f 45%, #e8691c 100%); border-color:#f2600f; color:#0a0a0a; }
     .fc-hint-pill {
       text-align:center; margin-top:70px; margin-bottom:-40px;
       font-family:'Inter',sans-serif; font-size:.72rem; color:rgba(255,255,255,.35);
@@ -113,9 +113,9 @@
        VS deliberately stays on Barlow Condensed italic, untouched. */
     .fc-section-bar {
       padding:11px 20px; margin-top:4px;
-      background:rgba(255,138,61,.12);
+      background:rgba(242, 96, 15,.12);
       font-family:'Oswald',sans-serif; font-weight:700; font-size:1.05rem;
-      letter-spacing:.12em; text-transform:uppercase; color:#ff8a3d;
+      letter-spacing:.12em; text-transform:uppercase; color:#f2600f;
     }
     body.fc-gold .fc-section-bar { background:rgba(240,195,78,.14); color:#f0c34e; }
     /* flex + wrap + center instead of a fixed 2-col grid — a lone fight
@@ -136,7 +136,7 @@
        treatment as the header badge, top-left corner over the photos. */
     .fc-cell-tag {
       position:absolute; top:8px; left:8px; z-index:2;
-      background:linear-gradient(165deg, #ffb066 0%, #ff8a3d 45%, #e8691c 100%);
+      background:linear-gradient(165deg, #ffb066 0%, #f2600f 45%, #e8691c 100%);
       color:#0a0a0a; border-radius:3px;
       font-family:'Montserrat',sans-serif; font-weight:900; font-size:.6rem;
       letter-spacing:.1em; text-transform:uppercase;
@@ -192,7 +192,7 @@
     body.fc-light .fc-cell-name { color:#161514; }
     .fc-cell-vs {
       font-family:'Barlow Condensed',sans-serif; font-weight:900; font-style:italic;
-      font-size:1.3rem; color:#ff8a3d; flex-shrink:0; padding-top:2px;
+      font-size:1.3rem; color:#f2600f; flex-shrink:0; padding-top:2px;
     }
     body.fc-gold .fc-cell-vs { color:#f0c34e; }
     .fc-cell-weight {
@@ -225,7 +225,7 @@
     }
     body.fc-light .fc-next-row { border-bottom-color:rgba(0,0,0,.12); }
     .fc-next-row:last-child { border-bottom:none; }
-    .fc-next-row:nth-child(odd) { background:rgba(255,138,61,.045); }
+    .fc-next-row:nth-child(odd) { background:rgba(242, 96, 15,.045); }
     .fc-next-row:nth-child(even) { background:rgba(96,165,250,.045); }
     .fc-next-photo {
       width:calc(84px * var(--fc-scale)); margin:8px 0; border-radius:6px; flex-shrink:0;
@@ -348,7 +348,7 @@
     .fc-edit-panel.open { display:block; }
     .fc-edit-title {
       font-family:'Montserrat',sans-serif; font-weight:800; font-size:.7rem;
-      letter-spacing:.12em; text-transform:uppercase; color:#ff8a3d;
+      letter-spacing:.12em; text-transform:uppercase; color:#f2600f;
       margin-bottom:12px;
     }
     .fc-edit-list { display:flex; flex-direction:column; gap:8px; margin-bottom:16px; }
@@ -364,7 +364,7 @@
       font-size:.72rem; font-weight:600; padding:4px 8px;
     }
     .fc-edit-swap {
-      background:transparent; border:none; color:#ff8a3d; cursor:pointer;
+      background:transparent; border:none; color:#f2600f; cursor:pointer;
       font-size:.72rem; font-weight:600; padding:4px 8px;
     }
     body.fc-light .fc-edit-swap { color:#c26a1e; }
@@ -392,9 +392,9 @@
     .fc-autocomplete-item {
       padding:9px 12px; font-size:.8rem; color:rgba(255,255,255,.85); cursor:pointer;
     }
-    .fc-autocomplete-item:hover { background:rgba(255,138,61,.18); }
+    .fc-autocomplete-item:hover { background:rgba(242, 96, 15,.18); }
     .fc-add-btn {
-      background:linear-gradient(165deg, #ffb066 0%, #ff8a3d 45%, #e8691c 100%); border:none; color:#0a0a0a; font-weight:700;
+      background:linear-gradient(165deg, #ffb066 0%, #f2600f 45%, #e8691c 100%); border:none; color:#0a0a0a; font-weight:700;
       font-size:.76rem; padding:9px 20px; border-radius:20px; cursor:pointer;
       font-family:'Montserrat',sans-serif; letter-spacing:.04em; text-transform:uppercase;
     }

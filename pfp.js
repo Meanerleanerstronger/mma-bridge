@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   function updateContenders(contenders, isW) {
     if (!listEl) return;
-    const gold = isW ? 'rgba(240,100,200,0.5)' : 'rgba(255,138,61,0.5)';
+    const gold = isW ? 'rgba(240,100,200,0.5)' : 'rgba(242, 96, 15,0.5)';
     listEl.innerHTML = `
       <div class="div-contenders-header">
         <span class="div-contenders-label">Contenders</span>

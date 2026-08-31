@@ -40,7 +40,7 @@
       transition: color 0.15s;
     }
     .back-link:hover { color: #fff; }
-    .logo { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 0.85rem; letter-spacing: 0.15em; color: #ff8a3d; }
+    .logo { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 0.85rem; letter-spacing: 0.15em; color: #f2600f; }
 
     .fight-select {
       width: 100%;
@@ -56,7 +56,7 @@
       appearance: none;
       cursor: pointer;
     }
-    .fight-select:focus { outline: none; border-color: rgba(255,138,61,0.35); }
+    .fight-select:focus { outline: none; border-color: rgba(242, 96, 15,0.35); }
     .fight-select option { background: #111; }
 
     .fight-picker {
@@ -91,9 +91,9 @@
       transition: all 0.15s;
     }
     .fight-row:hover, .fight-row.active {
-      border-color: rgba(255,138,61,0.35);
+      border-color: rgba(242, 96, 15,0.35);
       color: #fff;
-      background: rgba(255,138,61,0.07);
+      background: rgba(242, 96, 15,0.07);
     }
     .fight-row .fw { font-size: 0.65rem; color: rgba(255,255,255,0.3); }
     .fight-row .badge {
@@ -103,9 +103,9 @@
       text-transform: uppercase;
       padding: 2px 7px;
       border-radius: 4px;
-      background: rgba(224,107,26,0.15);
-      color: #e06b1a;
-      border: 1px solid rgba(224,107,26,0.3);
+      background: rgba(194, 74, 8,0.15);
+      color: #c24a08;
+      border: 1px solid rgba(194, 74, 8,0.3);
     }
 
     .canvas-wrap {
@@ -143,7 +143,7 @@
       justify-content: center;
       gap: 8px;
     }
-    .btn-download { background: #ff8a3d; color: #060608; }
+    .btn-download { background: #f2600f; color: #060608; }
     .btn-download:hover { background: #33ecff; }
     .btn-twitter { background: #000; color: #fff; border: 1px solid rgba(255,255,255,0.15); }
     .btn-twitter:hover { border-color: rgba(255,255,255,0.35); }
@@ -154,9 +154,9 @@
       bottom: 28px;
       left: 50%;
       transform: translateX(-50%) translateY(80px);
-      background: rgba(255,138,61,0.15);
-      border: 1px solid rgba(255,138,61,0.3);
-      color: #ff8a3d;
+      background: rgba(242, 96, 15,0.15);
+      border: 1px solid rgba(242, 96, 15,0.3);
+      color: #f2600f;
       font-size: 0.8rem;
       font-weight: 600;
       padding: 10px 20px;
@@ -302,13 +302,13 @@
 
       // Cyan glow left
       const gl1 = ctx.createRadialGradient(0, H * 0.45, 0, 0, H * 0.45, 600);
-      gl1.addColorStop(0, 'rgba(255,138,61,0.1)');
+      gl1.addColorStop(0, 'rgba(242, 96, 15,0.1)');
       gl1.addColorStop(1, 'transparent');
       ctx.fillStyle = gl1; ctx.fillRect(0, 0, W, H);
 
       // Gold glow right
       const gl2 = ctx.createRadialGradient(W, H * 0.45, 0, W, H * 0.45, 600);
-      gl2.addColorStop(0, 'rgba(224,107,26,0.09)');
+      gl2.addColorStop(0, 'rgba(194, 74, 8,0.09)');
       gl2.addColorStop(1, 'transparent');
       ctx.fillStyle = gl2; ctx.fillRect(0, 0, W, H);
 
@@ -364,10 +364,10 @@
       // ── Top bar ──
       if (isTitle) {
         const bar = ctx.createLinearGradient(0, 0, W, 0);
-        bar.addColorStop(0, '#e06b1a'); bar.addColorStop(1, 'rgba(224,107,26,0.3)');
+        bar.addColorStop(0, '#c24a08'); bar.addColorStop(1, 'rgba(194, 74, 8,0.3)');
         ctx.fillStyle = bar;
       } else {
-        ctx.fillStyle = '#ff8a3d';
+        ctx.fillStyle = '#f2600f';
       }
       ctx.fillRect(0, 0, W, 4);
 
@@ -375,7 +375,7 @@
       const pad = 60;
       ctx.font = '900 14px Montserrat, Arial Black, sans-serif';
       ctx.letterSpacing = '4px';
-      ctx.fillStyle = isTitle ? '#e06b1a' : '#ff8a3d';
+      ctx.fillStyle = isTitle ? '#c24a08' : '#f2600f';
       ctx.textBaseline = 'top';
       ctx.textAlign = 'left';
       ctx.fillText('MMA BRIDGE', pad, 36);
@@ -383,7 +383,7 @@
 
       ctx.font = '900 13px Montserrat, Arial Black, sans-serif';
       ctx.letterSpacing = '3px';
-      ctx.fillStyle = isTitle ? 'rgba(224,107,26,0.65)' : 'rgba(255,255,255,0.35)';
+      ctx.fillStyle = isTitle ? 'rgba(194, 74, 8,0.65)' : 'rgba(255,255,255,0.35)';
       ctx.textAlign = 'right';
       ctx.fillText((ev?.type || 'UFC EVENT').toUpperCase(), W - pad, 36);
       ctx.letterSpacing = '0px';
@@ -407,7 +407,7 @@
       const vsY = 500;
       ctx.font = '900 96px Montserrat, Arial Black, sans-serif';
       ctx.letterSpacing = '-2px';
-      ctx.fillStyle = isTitle ? 'rgba(224,107,26,0.7)' : 'rgba(255,138,61,0.7)';
+      ctx.fillStyle = isTitle ? 'rgba(194, 74, 8,0.7)' : 'rgba(242, 96, 15,0.7)';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText('VS', W / 2, vsY);
@@ -423,7 +423,7 @@
       if (fight.titleFight) {
         ctx.font = '700 11px Inter, Arial, sans-serif';
         ctx.letterSpacing = '2px';
-        ctx.fillStyle = '#e06b1a';
+        ctx.fillStyle = '#c24a08';
         ctx.fillText('🏆 TITLE FIGHT', W / 2, vsY + 84);
         ctx.letterSpacing = '0px';
       }
@@ -474,7 +474,7 @@
       // ── Bottom CTA ──
       ctx.textAlign = 'center';
       ctx.font = '700 15px Inter, Arial, sans-serif';
-      ctx.fillStyle = isTitle ? 'rgba(224,107,26,0.6)' : 'rgba(255,138,61,0.6)';
+      ctx.fillStyle = isTitle ? 'rgba(194, 74, 8,0.6)' : 'rgba(242, 96, 15,0.6)';
       ctx.letterSpacing = '2px';
       ctx.textBaseline = 'bottom';
       ctx.fillText('MAKE YOUR PICKS AT MMABRIDGE.COM', W / 2, H - 48);

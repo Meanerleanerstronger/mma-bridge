@@ -5,7 +5,7 @@
   <link rel="shortcut icon" type="image/png" href="images/mma-bridge-logo.png?v=2">
   <link rel="apple-touch-icon" href="images/mma-bridge-logo.png?v=2">
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#ff8a3d">
+  <meta name="theme-color" content="#f2600f">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -26,7 +26,7 @@
   <meta name="twitter:description" content="View your UFC fight pick history, accuracy stats, favourite fighters, and community reputation on MMA Bridge.">
   <meta name="twitter:image" content="https://mmabridge.com/images/mma-bridge-logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=9.22" />
+  <link rel="stylesheet" href="style.css?v=9.23" />
 
   <style>
     /* ── KEYFRAMES ── */
@@ -48,8 +48,8 @@
     .pr-hero-bg {
       position: absolute; inset: 0;
       background:
-        radial-gradient(ellipse 80% 60% at 30% -10%, rgba(255,138,61,0.07) 0%, transparent 55%),
-        radial-gradient(ellipse 50% 40% at 80% 110%, rgba(255,138,61,0.04) 0%, transparent 50%);
+        radial-gradient(ellipse 80% 60% at 30% -10%, rgba(242, 96, 15,0.07) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 40% at 80% 110%, rgba(242, 96, 15,0.04) 0%, transparent 50%);
       pointer-events: none;
     }
     .pr-hero-inner {
@@ -68,7 +68,7 @@
     .pr-avatar-ring {
       width: 110px; height: 110px;
       border-radius: 50%;
-      background: #ff8a3d;
+      background: #f2600f;
       padding: 3px;
       box-shadow: 0 8px 40px rgba(0,0,0,0.6);
     }
@@ -87,7 +87,7 @@
       font-family: 'Montserrat', sans-serif;
       font-weight: 900;
       font-size: 2.2rem;
-      color: #ff8a3d;
+      color: #f2600f;
       letter-spacing: -0.02em;
     }
 
@@ -99,7 +99,7 @@
       font-weight: 700;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(255,138,61,0.6);
+      color: rgba(242, 96, 15,0.6);
       margin-bottom: 6px;
     }
     .pr-name {
@@ -152,7 +152,7 @@
       font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
       font-weight: 900;
       font-size: 2.5rem;
-      color: #ff8a3d;
+      color: #f2600f;
       letter-spacing: -0.02em;
       line-height: 1;
       margin-bottom: 4px;
@@ -191,9 +191,9 @@
     }
     .pr-section-count {
       font-size: 0.6rem;
-      background: rgba(255,138,61,0.08);
-      border: 1px solid rgba(255,138,61,0.15);
-      color: rgba(255,138,61,0.6);
+      background: rgba(242, 96, 15,0.08);
+      border: 1px solid rgba(242, 96, 15,0.15);
+      color: rgba(242, 96, 15,0.6);
       border-radius: 20px;
       padding: 2px 8px;
       font-weight: 600;
@@ -227,9 +227,9 @@
       text-decoration: none;
     }
     .pr-rating-card:hover {
-      border-color: rgba(255,138,61,0.3);
+      border-color: rgba(242, 96, 15,0.3);
       transform: translateY(-4px);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.6), 0 0 24px rgba(255,138,61,0.06);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.6), 0 0 24px rgba(242, 96, 15,0.06);
     }
     .pr-rc-poster-wrap {
       position: relative;
@@ -261,8 +261,8 @@
       display: flex; gap: 2px;
       z-index: 2;
     }
-    .pr-star { color: rgba(224,107,26,0.3); font-size: 0.85rem; }
-    .pr-star.lit { color: #e06b1a; }
+    .pr-star { color: rgba(194, 74, 8,0.3); font-size: 0.85rem; }
+    .pr-star.lit { color: #c24a08; }
     .pr-rc-body { padding: 12px 14px 14px; flex: 1; display: flex; flex-direction: column; gap: 6px; }
     .pr-rc-name {
       font-family: 'Montserrat', sans-serif;
@@ -282,7 +282,7 @@
     .pr-rc-fotn {
       font-family: 'Inter', sans-serif;
       font-size: 0.67rem;
-      color: rgba(255,138,61,0.65);
+      color: rgba(242, 96, 15,0.65);
       margin-top: 2px;
     }
     .pr-rc-text {
@@ -312,8 +312,8 @@
 
     /* ── PICK ACCURACY CARD ── */
     .pr-accuracy-card {
-      background: rgba(255,138,61,0.03);
-      border: 1px solid rgba(255,138,61,0.12);
+      background: rgba(242, 96, 15,0.03);
+      border: 1px solid rgba(242, 96, 15,0.12);
       border-radius: 14px;
       padding: 20px 24px;
       display: flex; align-items: center; gap: 24px;
@@ -322,7 +322,7 @@
     .pr-accuracy-ring { position: relative; width: 80px; height: 80px; }
     .pr-accuracy-ring svg { width: 80px; height: 80px; transform: rotate(-90deg); }
     .pr-accuracy-ring-bg  { fill: none; stroke: rgba(255,255,255,0.07); stroke-width: 6; }
-    .pr-accuracy-ring-fill { fill: none; stroke: #ff8a3d; stroke-width: 6; stroke-linecap: round; transition: stroke-dashoffset 1s ease; }
+    .pr-accuracy-ring-fill { fill: none; stroke: #f2600f; stroke-width: 6; stroke-linecap: round; transition: stroke-dashoffset 1s ease; }
     .pr-accuracy-pct {
       position: absolute; inset: 0;
       display: flex; align-items: center; justify-content: center;
@@ -344,7 +344,7 @@
       color: rgba(255,255,255,0.3);
       line-height: 1.5;
     }
-    .pr-accuracy-detail strong { color: rgba(255,138,61,0.8); }
+    .pr-accuracy-detail strong { color: rgba(242, 96, 15,0.8); }
 
     /* ── YOUR CORNER (fighter favs) ── */
     @keyframes favCardIn { from{opacity:0;transform:scale(0.88) translateY(10px)} to{opacity:1;transform:scale(1) translateY(0)} }
@@ -378,8 +378,8 @@
     }
     .pr-fav-card:hover {
       transform: translateY(-5px);
-      border-color: rgba(255,138,61,0.3);
-      box-shadow: 0 14px 36px rgba(0,0,0,0.6), 0 0 20px rgba(255,138,61,0.06);
+      border-color: rgba(242, 96, 15,0.3);
+      box-shadow: 0 14px 36px rgba(0,0,0,0.6), 0 0 20px rgba(242, 96, 15,0.06);
     }
     .pr-fav-photo-wrap {
       height: 160px;
@@ -403,14 +403,14 @@
       display: flex; align-items: center; justify-content: center;
       font-family: 'Barlow Condensed', 'Montserrat', sans-serif;
       font-weight: 900; font-size: 3.2rem;
-      color: rgba(255,138,61,0.25);
+      color: rgba(242, 96, 15,0.25);
       background: linear-gradient(145deg, #141418, #0a0a0e);
     }
     .pr-fav-next-badge {
       position: absolute; bottom: 8px; left: 8px;
-      background: rgba(255,138,61,0.12);
-      border: 1px solid rgba(255,138,61,0.28);
-      color: #ff8a3d;
+      background: rgba(242, 96, 15,0.12);
+      border: 1px solid rgba(242, 96, 15,0.28);
+      color: #f2600f;
       font-family: 'Montserrat', sans-serif;
       font-size: 0.5rem; font-weight: 800;
       letter-spacing: 0.1em; text-transform: uppercase;
@@ -439,7 +439,7 @@
       display: flex; align-items: center; gap: 5px; flex-wrap: wrap;
     }
     .pr-fav-record {
-      color: rgba(255,138,61,0.65);
+      color: rgba(242, 96, 15,0.65);
       font-weight: 600;
     }
     .pr-fav-remove {
@@ -467,27 +467,27 @@
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       gap: 10px; cursor: pointer;
       background: rgba(255,255,255,0.02);
-      border: 1px dashed rgba(255,138,61,0.15);
+      border: 1px dashed rgba(242, 96, 15,0.15);
       border-radius: 14px;
       transition: border-color 0.2s, background 0.2s;
       flex-shrink: 0;
     }
     .pr-fav-add:hover {
-      border-color: rgba(255,138,61,0.35);
-      background: rgba(255,138,61,0.03);
+      border-color: rgba(242, 96, 15,0.35);
+      background: rgba(242, 96, 15,0.03);
     }
     .pr-fav-add-icon {
       width: 40px; height: 40px;
       border-radius: 50%;
-      border: 2px dashed rgba(255,138,61,0.25);
+      border: 2px dashed rgba(242, 96, 15,0.25);
       display: flex; align-items: center; justify-content: center;
-      color: rgba(255,138,61,0.4);
+      color: rgba(242, 96, 15,0.4);
       font-size: 1.3rem;
       transition: border-color 0.2s, color 0.2s;
     }
     .pr-fav-add:hover .pr-fav-add-icon {
-      border-color: rgba(255,138,61,0.5);
-      color: #ff8a3d;
+      border-color: rgba(242, 96, 15,0.5);
+      color: #f2600f;
     }
     .pr-fav-add-label {
       font-family: 'Inter', sans-serif;
@@ -507,13 +507,13 @@
     }
     .pr-modal {
       background: #0d0d10;
-      border: 1px solid rgba(255,138,61,0.2);
+      border: 1px solid rgba(242, 96, 15,0.2);
       border-radius: 20px;
       width: 480px; max-width: calc(100vw - 32px);
       max-height: 80vh;
       display: flex; flex-direction: column;
       overflow: hidden;
-      box-shadow: 0 32px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,138,61,0.06);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(242, 96, 15,0.06);
     }
     .pr-modal-header {
       padding: 20px 24px 16px;
@@ -544,7 +544,7 @@
       outline: none; box-sizing: border-box;
       transition: border-color 0.2s;
     }
-    .pr-modal-search input:focus { border-color: rgba(255,138,61,0.4); }
+    .pr-modal-search input:focus { border-color: rgba(242, 96, 15,0.4); }
     .pr-modal-search input::placeholder { color: rgba(255,255,255,0.2); }
     .pr-modal-list {
       overflow-y: auto;
@@ -559,8 +559,8 @@
       cursor: pointer;
       transition: background 0.12s;
     }
-    .pr-modal-row:hover { background: rgba(255,138,61,0.05); }
-    .pr-modal-row.selected { background: rgba(255,138,61,0.08); }
+    .pr-modal-row:hover { background: rgba(242, 96, 15,0.05); }
+    .pr-modal-row.selected { background: rgba(242, 96, 15,0.08); }
     .pr-modal-row img {
       width: 38px; height: 38px;
       border-radius: 50%; object-fit: cover; object-position: top;
@@ -581,14 +581,14 @@
     .pr-modal-row-check {
       width: 18px; height: 18px;
       border-radius: 50%;
-      border: 2px solid rgba(255,138,61,0.3);
+      border: 2px solid rgba(242, 96, 15,0.3);
       flex-shrink: 0; display: flex; align-items: center; justify-content: center;
-      font-size: 0.6rem; color: #ff8a3d;
+      font-size: 0.6rem; color: #f2600f;
       transition: background 0.15s, border-color 0.15s;
     }
     .pr-modal-row.selected .pr-modal-row-check {
-      background: rgba(255,138,61,0.15);
-      border-color: #ff8a3d;
+      background: rgba(242, 96, 15,0.15);
+      border-color: #f2600f;
     }
     .pr-modal-done {
       padding: 14px 20px;
@@ -596,9 +596,9 @@
     }
     .pr-modal-done button {
       width: 100%;
-      background: rgba(255,138,61,0.12);
-      border: 1px solid rgba(255,138,61,0.35);
-      color: #ff8a3d;
+      background: rgba(242, 96, 15,0.12);
+      border: 1px solid rgba(242, 96, 15,0.35);
+      color: #f2600f;
       font-family: 'Montserrat', sans-serif;
       font-weight: 700; font-size: 0.72rem;
       letter-spacing: 0.12em; text-transform: uppercase;
@@ -608,8 +608,8 @@
       transition: background 0.15s, border-color 0.15s;
     }
     .pr-modal-done button:hover {
-      background: rgba(255,138,61,0.2);
-      border-color: rgba(255,138,61,0.6);
+      background: rgba(242, 96, 15,0.2);
+      border-color: rgba(242, 96, 15,0.6);
     }
 
     /* ── SECTION SUB-LABEL ── */
@@ -645,10 +645,10 @@
       color: rgba(255,255,255,0.2);
     }
     .pr-empty-sub a {
-      color: rgba(255,138,61,0.6);
+      color: rgba(242, 96, 15,0.6);
       text-decoration: none;
     }
-    .pr-empty-sub a:hover { color: #ff8a3d; }
+    .pr-empty-sub a:hover { color: #f2600f; }
     .pr-loading {
       display: flex; align-items: center; justify-content: center; gap: 12px;
       padding: 80px 0;
@@ -657,8 +657,8 @@
     }
     .pr-spinner {
       width: 18px; height: 18px;
-      border: 2px solid rgba(255,138,61,0.2);
-      border-top-color: #ff8a3d;
+      border: 2px solid rgba(242, 96, 15,0.2);
+      border-top-color: #f2600f;
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
     }
@@ -677,15 +677,15 @@
     }
     .pr-sign-in-btn {
       display: inline-block;
-      background: rgba(255,138,61,0.1);
-      border: 1px solid rgba(255,138,61,0.35);
-      color: #ff8a3d;
+      background: rgba(242, 96, 15,0.1);
+      border: 1px solid rgba(242, 96, 15,0.35);
+      color: #f2600f;
       font-family: 'Montserrat', sans-serif; font-weight: 700;
       font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
       padding: 12px 28px; border-radius: 10px; text-decoration: none;
       transition: background 0.15s;
     }
-    .pr-sign-in-btn:hover { background: rgba(255,138,61,0.18); }
+    .pr-sign-in-btn:hover { background: rgba(242, 96, 15,0.18); }
 
     /* ── BACK BUTTON ── */
     /* Was a bare text link with no visual weight, easy to miss sitting over
@@ -707,7 +707,7 @@
       text-decoration: none;
       transition: color 0.15s, background 0.15s, border-color 0.15s;
     }
-    .pr-back:hover { color: #ff8a3d; background: rgba(255,138,61,0.14); border-color: rgba(255,138,61,0.35); }
+    .pr-back:hover { color: #f2600f; background: rgba(242, 96, 15,0.14); border-color: rgba(242, 96, 15,0.35); }
     .pr-back svg { width: 8px; height: 12px; flex-shrink: 0; }
 
     /* ── REMOVE CONFIRM ── */
@@ -807,7 +807,7 @@
       width: 28px; height: 28px;
       border-radius: 50%;
       background: #141418;
-      border: 2px solid rgba(255,138,61,0.4);
+      border: 2px solid rgba(242, 96, 15,0.4);
       color: rgba(255,255,255,0.8);
       font-size: 0.75rem;
       display: flex; align-items: center; justify-content: center;
@@ -816,7 +816,7 @@
       line-height: 1;
       padding: 0;
     }
-    .pr-avatar-upload-btn:hover { background: rgba(255,138,61,0.15); border-color: #ff8a3d; }
+    .pr-avatar-upload-btn:hover { background: rgba(242, 96, 15,0.15); border-color: #f2600f; }
     .pr-avatar-upload-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
     /* ── SHARE BUTTON ── */
@@ -836,16 +836,16 @@
     .pr-challenge-btn {
       display: inline-flex; align-items: center; gap: 7px;
       margin-top: 10px;
-      background: rgba(255,138,61,0.08);
-      border: 1px solid rgba(255,138,61,0.28);
-      color: #ff8a3d;
+      background: rgba(242, 96, 15,0.08);
+      border: 1px solid rgba(242, 96, 15,0.28);
+      color: #f2600f;
       font-family: 'Montserrat', sans-serif;
       font-weight: 700; font-size: 0.68rem;
       letter-spacing: 0.12em; text-transform: uppercase;
       padding: 8px 18px; border-radius: 8px; cursor: pointer;
       transition: background 0.15s, border-color 0.15s;
     }
-    .pr-challenge-btn:hover { background: rgba(255,138,61,0.16); border-color: rgba(255,138,61,0.5); }
+    .pr-challenge-btn:hover { background: rgba(242, 96, 15,0.16); border-color: rgba(242, 96, 15,0.5); }
 
     /* ── WALKOUT SONG ── */
     .pr-walkout-btn {
@@ -853,12 +853,12 @@
       font-family: 'Montserrat', sans-serif; font-weight: 800;
       font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase;
       padding: 6px 12px; border-radius: 6px; margin-top: 4px;
-      background: rgba(224,107,26,.15); border: 1px solid rgba(224,107,26,.4);
-      color: #e06b1a; cursor: pointer; max-width: 320px;
+      background: rgba(194, 74, 8,.15); border: 1px solid rgba(194, 74, 8,.4);
+      color: #c24a08; cursor: pointer; max-width: 320px;
       overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
       transition: background 0.15s, border-color 0.15s;
     }
-    .pr-walkout-btn:hover { background: rgba(224,107,26,.24); border-color: rgba(224,107,26,.6); }
+    .pr-walkout-btn:hover { background: rgba(194, 74, 8,.24); border-color: rgba(194, 74, 8,.6); }
     .pr-walkout-edit {
       display: none; align-items: center; gap: 8px; margin-top: 10px; flex-wrap: wrap;
     }
@@ -871,7 +871,7 @@
       font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.68rem;
       letter-spacing: 0.06em; text-transform: uppercase; padding: 7px 14px;
       border-radius: 6px; cursor: pointer; border: none;
-      background: #ff8a3d; color: #000;
+      background: #f2600f; color: #000;
     }
     .pr-walkout-edit button.pr-walkout-clear {
       background: transparent; border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.6);
@@ -881,10 +881,10 @@
     .pr-walkout-play {
       display: inline-flex; align-items: center; justify-content: center;
       width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0;
-      background: rgba(224,107,26,.35); font-size: 0.5rem; line-height: 1;
+      background: rgba(194, 74, 8,.35); font-size: 0.5rem; line-height: 1;
       padding-left: 1px;
     }
-    .pr-walkout-play.playing { background: #ff8a3d; color: #000; }
+    .pr-walkout-play.playing { background: #f2600f; color: #000; }
     .pr-walkout-search-wrap { position: relative; }
     .pr-walkout-results {
       position: absolute; top: calc(100% + 6px); left: 0; z-index: 20;
@@ -897,7 +897,7 @@
       cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.06);
     }
     .pr-walkout-result:last-child { border-bottom: none; }
-    .pr-walkout-result:hover { background: rgba(255,138,61,0.08); }
+    .pr-walkout-result:hover { background: rgba(242, 96, 15,0.08); }
     .pr-walkout-result img { width: 34px; height: 34px; border-radius: 4px; object-fit: cover; flex-shrink: 0; }
     .pr-walkout-result-info { min-width: 0; flex: 1; }
     .pr-walkout-result-name { font-family: 'Inter', sans-serif; font-size: 0.78rem; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -907,11 +907,11 @@
       background: rgba(255,255,255,0.08); color: #fff; font-size: 0.62rem;
       cursor: pointer; padding-left: 2px;
     }
-    .pr-walkout-result-play.playing { background: #ff8a3d; color: #000; }
+    .pr-walkout-result-play.playing { background: #f2600f; color: #000; }
     .pr-walkout-result-empty { padding: 14px 12px; font-family: 'Inter', sans-serif; font-size: 0.76rem; color: rgba(255,255,255,0.4); }
     body.light-mode .pr-walkout-results { background: #fff; border-color: rgba(0,0,0,0.1); }
     body.light-mode .pr-walkout-result-name { color: #111; }
-    body.light-mode .pr-walkout-result:hover { background: rgba(224,107,26,0.08); }
+    body.light-mode .pr-walkout-result:hover { background: rgba(194, 74, 8,0.08); }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 640px) {

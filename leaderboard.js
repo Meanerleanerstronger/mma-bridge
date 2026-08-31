@@ -835,7 +835,7 @@
     else if (rank === 5) { barFill = Math.min(Math.min((pct - 55) / 5, 1) * 0.5 + Math.min(judged / 30, 1) * 0.5, 1); reqText = pct < 60 ? `${Math.max(60 - pct, 0).toFixed(1)}% accuracy + ${Math.max(30 - judged, 0)} picks for Champion` : `${Math.max(30 - judged, 0)} more judged picks for Champion`; }
     else if (rank === 6) { barFill = Math.min(Math.min((pct - 60) / 5, 1) * 0.5 + Math.min(judged / 60, 1) * 0.5, 1); reqText = pct < 65 ? `${Math.max(65 - pct, 0).toFixed(1)}% accuracy + ${Math.max(60 - judged, 0)} picks for P4P` : `${Math.max(60 - judged, 0)} more judged picks for P4P`; }
     else if (rank === 7) { barFill = Math.min(Math.min((pct - 65) / 5, 1) * 0.5 + Math.min(judged / 60, 1) * 0.5, 1); reqText = pct < 70 ? `${Math.max(70 - pct, 0).toFixed(1)}% accuracy for GOAT` : `${Math.max(60 - judged, 0)} more judged picks for GOAT`; }
-    else { barFill = 1; reqText = 'Maximum tier reached.'; barColor = '#e06b1a'; }
+    else { barFill = 1; reqText = 'Maximum tier reached.'; barColor = '#c24a08'; }
 
     barFill = Math.max(0, Math.min(1, barFill));
 

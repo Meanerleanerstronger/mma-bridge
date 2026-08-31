@@ -5,7 +5,7 @@
   <link rel="shortcut icon" type="image/png" href="images/mma-bridge-logo.png?v=2">
   <link rel="apple-touch-icon" href="images/mma-bridge-logo.png?v=2">
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#ff8a3d">
+  <meta name="theme-color" content="#f2600f">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <script src="theme.js?v=2.8"></script>
   <script src="tiers.js?v=1.0"></script>
@@ -14,40 +14,40 @@
   <title>Season Recap — MMA Bridge</title>
   <meta name="description" content="Final standings and season recap for your MMA Bridge group league.">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Barlow+Condensed:wght@800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=9.22" />
+  <link rel="stylesheet" href="style.css?v=9.23" />
   <style>
     .rc-page { max-width: 640px; margin: 0 auto; padding: 64px 20px 100px; }
 
     .rc-loading { text-align:center; padding:80px 20px; color:rgba(255,255,255,.3); font-family:'Inter',sans-serif; font-size:.9rem; }
-    .rc-spinner { width:28px;height:28px;border:2.5px solid rgba(255,255,255,.08);border-top-color:#ff8a3d;border-radius:50%;animation:rcspin .8s linear infinite;margin:0 auto 16px; }
+    .rc-spinner { width:28px;height:28px;border:2.5px solid rgba(255,255,255,.08);border-top-color:#f2600f;border-radius:50%;animation:rcspin .8s linear infinite;margin:0 auto 16px; }
     @keyframes rcspin { to { transform:rotate(360deg); } }
 
-    .rc-eyebrow { font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,138,61,.6);margin-bottom:10px; }
+    .rc-eyebrow { font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:rgba(242, 96, 15,.6);margin-bottom:10px; }
     .rc-title { font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(1.8rem,5vw,2.6rem);text-transform:uppercase;letter-spacing:.03em;color:#fff;line-height:1.1;margin:0 0 8px; }
-    .rc-title span { color:#e06b1a; }
+    .rc-title span { color:#c24a08; }
     .rc-period { font-family:'Inter',sans-serif;font-size:.8rem;color:rgba(255,255,255,.35);margin-bottom:32px; }
-    .rc-divider { width:36px;height:2px;background:#e06b1a;border-radius:2px;margin-bottom:32px; }
+    .rc-divider { width:36px;height:2px;background:#c24a08;border-radius:2px;margin-bottom:32px; }
 
     /* Champion */
     .rc-champion {
       position:relative;overflow:hidden;
       background:rgba(255,255,255,.035);
-      border:1px solid rgba(224,107,26,.35);border-radius:16px;
+      border:1px solid rgba(194, 74, 8,.35);border-radius:16px;
       padding:28px 24px;margin-bottom:12px;
     }
-    .rc-ch-label { font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(224,107,26,.6);margin-bottom:14px; }
+    .rc-ch-label { font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:rgba(194, 74, 8,.6);margin-bottom:14px; }
     .rc-ch-body { display:flex;align-items:center;gap:18px; }
     .rc-ch-avatar {
       width:58px;height:58px;border-radius:50%;
-      background:rgba(224,107,26,.12);border:2px solid rgba(224,107,26,.3);
+      background:rgba(194, 74, 8,.12);border:2px solid rgba(194, 74, 8,.3);
       display:flex;align-items:center;justify-content:center;
-      font-family:'Montserrat',sans-serif;font-size:1.3rem;font-weight:900;color:#e06b1a;
+      font-family:'Montserrat',sans-serif;font-size:1.3rem;font-weight:900;color:#c24a08;
       flex-shrink:0;overflow:hidden;
     }
     .rc-ch-avatar img { width:100%;height:100%;object-fit:cover;border-radius:50%; }
     .rc-ch-name { font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.4rem;color:#fff;margin-bottom:8px; }
     .rc-ch-stats { display:flex;gap:20px;flex-wrap:wrap; }
-    .rc-ch-stat-val { font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.3rem;color:#e06b1a; }
+    .rc-ch-stat-val { font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.3rem;color:#c24a08; }
     .rc-ch-stat-lbl { font-family:'Inter',sans-serif;font-size:.8rem;color:rgba(255,255,255,.32);margin-top:1px; }
     .rc-ch-tier { margin-top:10px;display:inline-block;font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;border-radius:20px;padding:3px 10px;border:1px solid; }
 
@@ -55,16 +55,16 @@
     /* Reveal sequence */
     .rc-reveal-btn {
       display:block;width:100%;margin-bottom:32px;padding:22px 24px;cursor:pointer;
-      background:rgba(255,138,61,.1);border:1px solid rgba(255,138,61,.35);border-radius:16px;
+      background:rgba(242, 96, 15,.1);border:1px solid rgba(242, 96, 15,.35);border-radius:16px;
       font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.05rem;letter-spacing:.04em;
-      text-transform:uppercase;color:#ff8a3d;transition:background .15s,border-color .15s;
+      text-transform:uppercase;color:#f2600f;transition:background .15s,border-color .15s;
     }
-    .rc-reveal-btn:hover { background:rgba(255,138,61,.16);border-color:rgba(255,138,61,.55); }
+    .rc-reveal-btn:hover { background:rgba(242, 96, 15,.16);border-color:rgba(242, 96, 15,.55); }
     .rc-reveal-btn:disabled { opacity:.5;cursor:default; }
     .rc-calc { text-align:center;padding:40px 20px;margin-bottom:32px; }
     .rc-calc-pulse {
       width:44px;height:44px;margin:0 auto 16px;border-radius:50%;
-      background:rgba(255,138,61,.15);border:2px solid rgba(255,138,61,.4);
+      background:rgba(242, 96, 15,.15);border:2px solid rgba(242, 96, 15,.4);
       animation:rc-calc-pulse 1s ease-in-out infinite;
     }
     @keyframes rc-calc-pulse { 0%,100% { transform:scale(1);opacity:1; } 50% { transform:scale(1.25);opacity:.5; } }
@@ -75,7 +75,7 @@
     .rc-drumroll { text-align:center;padding:24px 20px;margin-bottom:12px; }
     .rc-drumroll-text {
       font-family:'Montserrat',sans-serif;font-weight:800;font-size:.95rem;letter-spacing:.1em;text-transform:uppercase;
-      color:#ff8a3d;animation:rc-drumroll-shake .18s ease-in-out infinite;
+      color:#f2600f;animation:rc-drumroll-shake .18s ease-in-out infinite;
     }
     @keyframes rc-drumroll-shake { 0%,100% { transform:translateX(0); } 25% { transform:translateX(-3px); } 75% { transform:translateX(3px); } }
     .rc-champ-enter { animation:rc-champ-in .6s cubic-bezier(.22,1,.36,1) both; }
@@ -104,13 +104,13 @@
     .rc-row { display:grid;grid-template-columns:32px 1fr 68px 52px;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.05); }
     .rc-row:last-child { border-bottom:none; }
     .rc-row:nth-child(even) { background:rgba(255,255,255,.015); }
-    .rc-row-me { background:rgba(255,138,61,.04) !important; }
+    .rc-row-me { background:rgba(242, 96, 15,.04) !important; }
     .rc-rank { font-family:'Montserrat',sans-serif;font-size:.85rem;font-weight:900;text-align:center;color:rgba(255,255,255,.22); }
-    .rc-rank-1 { color:#e06b1a; }
+    .rc-rank-1 { color:#c24a08; }
     .rc-rank-2 { color:rgba(170,170,170,.8); }
     .rc-rank-3 { color:rgba(205,127,50,.8); }
     .rc-row-name { font-family:'Montserrat',sans-serif;font-weight:600;font-size:.9rem;color:rgba(255,255,255,.8);white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
-    .rc-row-me .rc-row-name { color:#ff8a3d; }
+    .rc-row-me .rc-row-name { color:#f2600f; }
     .rc-row-pts { font-family:'Montserrat',sans-serif;font-weight:900;font-size:.95rem;color:rgba(255,255,255,.65);text-align:right; }
     .rc-row-acc { font-family:'Inter',sans-serif;font-size:.82rem;color:rgba(255,255,255,.3);text-align:right; }
 
@@ -118,18 +118,18 @@
     .rc-events { display:flex;flex-direction:column;gap:7px;margin-bottom:36px; }
     .rc-ev-row { display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:9px; }
     .rc-ev-name { font-family:'Inter',sans-serif;font-size:.85rem;color:rgba(255,255,255,.45);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
-    .rc-ev-winner { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;color:#e06b1a;white-space:nowrap; }
+    .rc-ev-winner { font-family:'Montserrat',sans-serif;font-weight:800;font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;color:#c24a08;white-space:nowrap; }
     .rc-ev-score { font-family:'Inter',sans-serif;font-size:.8rem;color:rgba(255,255,255,.28);white-space:nowrap; }
 
     /* Actions */
     .rc-actions { display:flex;gap:10px;flex-wrap:wrap; }
     .rc-share-btn {
       display:inline-flex;align-items:center;gap:7px;
-      background:rgba(224,107,26,.15);border:1px solid rgba(224,107,26,.3);
+      background:rgba(194, 74, 8,.15);border:1px solid rgba(194, 74, 8,.3);
       border-radius:10px;padding:11px 20px;cursor:pointer;transition:all .15s;
-      font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#e06b1a;
+      font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#c24a08;
     }
-    .rc-share-btn:hover { background:rgba(224,107,26,.25);border-color:rgba(224,107,26,.5); }
+    .rc-share-btn:hover { background:rgba(194, 74, 8,.25);border-color:rgba(194, 74, 8,.5); }
     .rc-lb-link {
       display:inline-flex;align-items:center;gap:7px;text-decoration:none;
       background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
@@ -139,7 +139,7 @@
     .rc-lb-link:hover { background:rgba(255,255,255,.09);color:rgba(255,255,255,.75); }
 
     .rc-nogroup { text-align:center;padding:70px 20px;font-family:'Inter',sans-serif;font-size:.88rem;color:rgba(255,255,255,.35);line-height:1.7; }
-    .rc-nogroup a { color:#ff8a3d;text-decoration:none; }
+    .rc-nogroup a { color:#f2600f;text-decoration:none; }
 
     /* light mode */
     body.light-mode .rc-title { color:#0a0a0f; }
@@ -625,7 +625,7 @@
               champSlot.classList.add('rc-champ-enter');
               if (typeof confetti === 'function') {
                 confetti({ particleCount: 140, spread: 90, origin: { y: 0.5 },
-                  colors: ['#ff8a3d', '#ffd700', '#ffffff', '#e06b1a'], disableForReducedMotion: true });
+                  colors: ['#f2600f', '#ffd700', '#ffffff', '#c24a08'], disableForReducedMotion: true });
               }
 
               setTimeout(() => {

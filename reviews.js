@@ -47,7 +47,7 @@ const CARD_PLACEHOLDER_GRADIENTS = [
   'linear-gradient(140deg,#f97316 0%,#ea580c 100%)',
   'linear-gradient(140deg,#ea580c 0%,#b45309 100%)',
   'linear-gradient(140deg,#d97706 0%,#92400e 100%)',
-  'linear-gradient(140deg,#ff8a3d 0%,#e06b1a 100%)',
+  'linear-gradient(140deg,#f2600f 0%,#c24a08 100%)',
   'linear-gradient(140deg,#94a3b8 0%,#64748b 100%)',
   'linear-gradient(140deg,#475569 0%,#334155 100%)',
   'linear-gradient(140deg,#22c55e 0%,#16a34a 100%)',

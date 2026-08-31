@@ -50,12 +50,12 @@
         background:rgba(255,255,255,.06); color:#fff;
         transition:background .18s, transform .18s, color .18s;
       }
-      .sf-icon:hover { background:linear-gradient(165deg, #ffb066 0%, #ff8a3d 45%, #e8691c 100%); color:#0a0a0a; transform:translateY(-2px); }
+      .sf-icon:hover { background:linear-gradient(165deg, #ffb066 0%, #f2600f 45%, #e8691c 100%); color:#0a0a0a; transform:translateY(-2px); }
       .sf-icon svg { width:17px; height:17px; display:block; }
       body.light-mode .sf-bar.sf-footer { border-top-color:rgba(0,0,0,.08); }
       body.light-mode .sf-label { color:rgba(0,0,0,.45); }
       body.light-mode .sf-icon { background:rgba(0,0,0,.05); color:#161514; }
-      body.light-mode .sf-icon:hover { background:linear-gradient(165deg, #ffb066 0%, #ff8a3d 45%, #e8691c 100%); color:#0a0a0a; }
+      body.light-mode .sf-icon:hover { background:linear-gradient(165deg, #ffb066 0%, #f2600f 45%, #e8691c 100%); color:#0a0a0a; }
     `;
     document.head.appendChild(style);
   }

@@ -5,7 +5,7 @@
   <link rel="shortcut icon" type="image/png" href="images/mma-bridge-logo.png?v=2">
   <link rel="apple-touch-icon" href="images/mma-bridge-logo.png?v=2">
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#ff8a3d">
+  <meta name="theme-color" content="#f2600f">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
@@ -26,11 +26,11 @@
   <meta name="twitter:description" content="Sign in to MMA Bridge to save fight picks, rate events, and compete on the leaderboard.">
   <meta name="twitter:image" content="https://mmabridge.com/images/mma-bridge-logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Pacifico&family=Barlow+Condensed:wght@800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=9.22" />
+  <link rel="stylesheet" href="style.css?v=9.23" />
   <style>
     body {
       background: #060608;
-      background-image: radial-gradient(ellipse 70% 50% at 50% -10%, rgba(255,138,61,0.06) 0%, transparent 65%);
+      background-image: radial-gradient(ellipse 70% 50% at 50% -10%, rgba(242, 96, 15,0.06) 0%, transparent 65%);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -50,7 +50,7 @@
       width: 100%;
       max-width: 400px;
       text-align: center;
-      box-shadow: 0 0 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,138,61,0.03);
+      box-shadow: 0 0 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(242, 96, 15,0.03);
     }
     .auth-logo {
       display: flex;
@@ -115,24 +115,24 @@
       transition: border-color 0.15s;
     }
     .auth-field input::placeholder { color: rgba(255,255,255,0.2); }
-    .auth-field input:focus { border-color: rgba(255,138,61,0.5); }
+    .auth-field input:focus { border-color: rgba(242, 96, 15,0.5); }
 
     .auth-submit-btn {
       width: 100%;
       padding: 13px;
-      background: rgba(255,138,61,0.12);
-      border: 1px solid rgba(255,138,61,0.3);
+      background: rgba(242, 96, 15,0.12);
+      border: 1px solid rgba(242, 96, 15,0.3);
       border-radius: 8px;
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
       font-size: 0.85rem;
       letter-spacing: 0.06em;
-      color: #ff8a3d;
+      color: #f2600f;
       cursor: pointer;
       margin-top: 4px;
       transition: background 0.15s, border-color 0.15s;
     }
-    .auth-submit-btn:hover { background: rgba(255,138,61,0.2); border-color: rgba(255,138,61,0.5); }
+    .auth-submit-btn:hover { background: rgba(242, 96, 15,0.2); border-color: rgba(242, 96, 15,0.5); }
     .auth-submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
     /* ── Forgot password link ── */
@@ -148,7 +148,7 @@
       cursor: pointer;
       transition: color 0.15s;
     }
-    .auth-forgot-link:hover { color: rgba(255,138,61,0.7); }
+    .auth-forgot-link:hover { color: rgba(242, 96, 15,0.7); }
 
     /* ── Back link ── */
     .auth-back-link {
@@ -235,7 +235,7 @@
       text-align: center;
     }
     .auth-msg.error   { color: #ff6b6b; }
-    .auth-msg.success { color: #ff8a3d; }
+    .auth-msg.success { color: #f2600f; }
 
     .auth-fine-print {
       font-family: 'Inter', sans-serif;
@@ -393,7 +393,7 @@
             <label>Display Name</label>
             <input type="text" id="setupName" placeholder="Your fight name" autocomplete="nickname" maxlength="32" />
           </div>
-          <button type="button" class="auth-submit-btn icon-arrow" id="setupBtn" style="background:rgba(255,138,61,0.18);border-color:rgba(255,138,61,0.5);"><span id="setupBtnText">Let's Go</span></button>
+          <button type="button" class="auth-submit-btn icon-arrow" id="setupBtn" style="background:rgba(242, 96, 15,0.18);border-color:rgba(242, 96, 15,0.5);"><span id="setupBtnText">Let's Go</span></button>
         </div>
       </div>
 

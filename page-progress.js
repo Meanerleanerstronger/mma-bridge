@@ -16,8 +16,8 @@
   var style = document.createElement('style');
   style.textContent =
     '#pgProgressBar{position:fixed;top:0;left:0;height:3px;width:0%;z-index:99999;' +
-    'background:linear-gradient(90deg,#e06b1a,#ff8a3d 60%,#ffb066);' +
-    'box-shadow:0 0 8px rgba(255,138,61,0.6);opacity:0;pointer-events:none;' +
+    'background:linear-gradient(90deg,#c24a08,#f2600f 60%,#ffb066);' +
+    'box-shadow:0 0 8px rgba(242, 96, 15,0.6);opacity:0;pointer-events:none;' +
     (reduceMotion ? '' : 'transition:width 0.2s ease,opacity 0.2s ease;') + '}' +
     '#pgProgressBar.pg-on{opacity:1;}' +
     '#pgProgressBar.pg-done{transition:width 0.2s ease,opacity 0.3s ease 0.15s;opacity:0;}';

@@ -4,7 +4,7 @@
   <link rel="icon" type="image/png" href="images/mma-bridge-logo.png?v=2">
   <link rel="shortcut icon" type="image/png" href="images/mma-bridge-logo.png?v=2">
   <link rel="apple-touch-icon" href="images/mma-bridge-logo.png?v=2">
-  <meta name="theme-color" content="#ff8a3d">
+  <meta name="theme-color" content="#f2600f">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <script src="theme.js?v=2.8"></script>
   <meta charset="UTF-8" />
@@ -12,7 +12,7 @@
   <title>Fight Matchup | MMA Bridge</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,800;1,900&family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=Oswald:wght@700;800&display=swap" rel="stylesheet">
   <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="style.css?v=9.22" />
+  <link rel="stylesheet" href="style.css?v=9.23" />
   <style>
     *, *::before, *::after { box-sizing:border-box; }
     body { background:#040407; min-height:100vh; }
@@ -32,7 +32,7 @@
       border-radius:20px;
       transition:color .18s, background .18s, border-color .18s;
     }
-    .mu-back:hover { color:#ff8a3d; background:rgba(255,138,61,.1); border-color:rgba(255,138,61,.3); }
+    .mu-back:hover { color:#f2600f; background:rgba(242, 96, 15,.1); border-color:rgba(242, 96, 15,.3); }
 
     /* ── HERO — poster-style: diagonal corner-color wash, bigger vivid
        photos, VS medallion, big shadowed type. Replaces the previous
@@ -94,7 +94,7 @@
       -webkit-text-stroke:1px rgba(0,0,0,.4);
       text-shadow:0 3px 0 rgba(0,0,0,.9), 0 8px 34px rgba(0,0,0,.75);
     }
-    .mu-fighter-name.a { text-shadow:0 3px 0 rgba(0,0,0,.9), 0 8px 34px rgba(255,138,61,.35); }
+    .mu-fighter-name.a { text-shadow:0 3px 0 rgba(0,0,0,.9), 0 8px 34px rgba(242, 96, 15,.35); }
     .mu-fighter-name.b { text-shadow:0 3px 0 rgba(0,0,0,.9), 0 8px 34px rgba(96,165,250,.3); }
     .mu-fighter-name:hover { opacity:.85; }
 
@@ -115,7 +115,7 @@
       font-weight:800;
     }
     .mu-chip.record {
-      color:#ff8a3d; border-color:rgba(255,138,61,.4);
+      color:#f2600f; border-color:rgba(242, 96, 15,.4);
       font-variant-numeric:tabular-nums;
     }
     .mu-hero-side.b .mu-chip.record { color:#60a5fa; border-color:rgba(96,165,250,.4); }
@@ -130,7 +130,7 @@
       width:56px; height:56px; border-radius:50%;
       display:flex; align-items:center; justify-content:center;
       background:#141414;
-      border:1.5px solid rgba(255,138,61,.4);
+      border:1.5px solid rgba(242, 96, 15,.4);
     }
     .mu-vs-text {
       font-family:'Barlow Condensed',sans-serif; font-weight:900; font-style:italic;
@@ -146,7 +146,7 @@
        Poster (banner) mode — same gradient-sheen fill as the site's other
        shiny badges, not a glow. */
     .mu-poster-tag {
-      background:linear-gradient(165deg, #ffb066 0%, #ff8a3d 45%, #e8691c 100%);
+      background:linear-gradient(165deg, #ffb066 0%, #f2600f 45%, #e8691c 100%);
       color:#0a0a0a; border-radius:20px;
       font-family:'Montserrat',sans-serif; font-weight:900; font-size:.5rem;
       letter-spacing:.14em; text-transform:uppercase;
@@ -172,7 +172,7 @@
       background:transparent; color:rgba(255,255,255,.4);
       transition:background .18s, color .18s;
     }
-    .mu-view-btn.active { background:#ff8a3d; color:#0a0a0a; }
+    .mu-view-btn.active { background:#f2600f; color:#0a0a0a; }
     .mu-view-btn:hover:not(.active) { color:#fff; }
 
     /* ── POSTER MODE — full-bleed, chrome hidden, always dark regardless
@@ -234,7 +234,7 @@
       padding:8px 14px; cursor:pointer; white-space:nowrap;
     }
     .mu-poster-pill:hover { background:rgba(0,0,0,.7); border-color:rgba(255,255,255,.35); }
-    .mu-poster-pill.active { border-color:#ff8a3d; color:#ffb066; }
+    .mu-poster-pill.active { border-color:#f2600f; color:#ffb066; }
 
     /* Persistent hint — the whole point of this redesign is that names/
        weight/event text are directly clickable on the poster itself, which
@@ -281,9 +281,9 @@
     .mu-poster-autocomplete-item {
       padding:8px 10px; font-size:.76rem; color:rgba(255,255,255,.85); cursor:pointer;
     }
-    .mu-poster-autocomplete-item:hover { background:rgba(255,138,61,.18); }
+    .mu-poster-autocomplete-item:hover { background:rgba(242, 96, 15,.18); }
     .mu-poster-edit-apply {
-      flex-shrink:0; background:linear-gradient(165deg, #ffb066 0%, #ff8a3d 45%, #e8691c 100%);
+      flex-shrink:0; background:linear-gradient(165deg, #ffb066 0%, #f2600f 45%, #e8691c 100%);
       border:none; color:#0a0a0a; font-weight:700;
       font-size:.74rem; padding:9px 14px; border-radius:7px; cursor:pointer;
       font-family:'Montserrat',sans-serif; letter-spacing:.03em; text-transform:uppercase;
@@ -301,8 +301,8 @@
        entries. Dashed outline on hover is the only way to know it's
        editable at all, so it has to actually show up, not just imply it. */
     .mu-editable { cursor:text; border-radius:4px; transition:box-shadow .15s; }
-    .mu-editable:hover { box-shadow:0 0 0 2px rgba(255,138,61,.5); }
-    .mu-editable:focus { outline:none; box-shadow:0 0 0 2px #ff8a3d; }
+    .mu-editable:hover { box-shadow:0 0 0 2px rgba(242, 96, 15,.5); }
+    .mu-editable:focus { outline:none; box-shadow:0 0 0 2px #f2600f; }
 
     /* poster brand watermark — small corner tag so a re-shared screenshot
        still reads as MMA Bridge content even cropped loosely. */
@@ -349,19 +349,19 @@
     body.mu-poster-mode.mu-poster-light { background:#f6f3ec !important; }
     body.mu-poster-mode.mu-poster-light .mu-hero { background:#f6f3ec; }
     body.mu-poster-mode.mu-poster-light .mu-hero-fade { background:linear-gradient(to top,#f6f3ec 0%,transparent 100%); }
-    body.mu-poster-mode.mu-poster-light .mu-hero-glow-a { background:linear-gradient(120deg, rgba(255,138,61,.24) 0%, rgba(255,138,61,.03) 55%, transparent 75%); }
+    body.mu-poster-mode.mu-poster-light .mu-hero-glow-a { background:linear-gradient(120deg, rgba(242, 96, 15,.24) 0%, rgba(242, 96, 15,.03) 55%, transparent 75%); }
     body.mu-poster-mode.mu-poster-light .mu-hero-glow-b { background:linear-gradient(240deg, rgba(37,99,235,.2) 0%, rgba(37,99,235,.03) 55%, transparent 75%); }
     body.mu-poster-mode.mu-poster-light .mu-hero-noise { background-image:repeating-linear-gradient(45deg, rgba(0,0,0,.025) 0 2px, transparent 2px 14px); mix-blend-mode:multiply; }
     body.mu-poster-mode.mu-poster-light .mu-fighter-name {
       color:#161514; -webkit-text-stroke:1px rgba(255,255,255,.6);
       text-shadow:0 3px 0 rgba(255,255,255,.75), 0 8px 30px rgba(0,0,0,.15);
     }
-    body.mu-poster-mode.mu-poster-light .mu-fighter-name.a { text-shadow:0 3px 0 rgba(255,255,255,.75), 0 8px 30px rgba(255,138,61,.3); }
+    body.mu-poster-mode.mu-poster-light .mu-fighter-name.a { text-shadow:0 3px 0 rgba(255,255,255,.75), 0 8px 30px rgba(242, 96, 15,.3); }
     body.mu-poster-mode.mu-poster-light .mu-fighter-name.b { text-shadow:0 3px 0 rgba(255,255,255,.75), 0 8px 30px rgba(37,99,235,.28); }
     body.mu-poster-mode.mu-poster-light .mu-vs-badge {
       background:radial-gradient(circle at 35% 30%, rgba(255,255,255,.95), rgba(230,225,215,.6) 70%);
       border-color:rgba(0,0,0,.15);
-      box-shadow:0 0 0 1px rgba(0,0,0,.08), 0 0 26px rgba(255,138,61,.25), inset 0 0 14px rgba(0,0,0,.06);
+      box-shadow:0 0 0 1px rgba(0,0,0,.08), 0 0 26px rgba(242, 96, 15,.25), inset 0 0 14px rgba(0,0,0,.06);
     }
     body.mu-poster-mode.mu-poster-light .mu-vs-text { color:#161514; text-shadow:0 1px 2px rgba(255,255,255,.7); }
     body.mu-poster-mode.mu-poster-light .mu-vs-weight { color:rgba(0,0,0,.55); border-color:rgba(0,0,0,.18); background:rgba(0,0,0,.04); }
@@ -446,8 +446,8 @@
     .mu-classic-card::before {
       content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
       background-image:
-        radial-gradient(circle, rgba(255,138,61,.5) 1px, transparent 1.6px),
-        radial-gradient(circle, rgba(255,138,61,.28) 1px, transparent 1.6px);
+        radial-gradient(circle, rgba(242, 96, 15,.5) 1px, transparent 1.6px),
+        radial-gradient(circle, rgba(242, 96, 15,.28) 1px, transparent 1.6px);
       background-size:29px 29px, 17px 17px;
       background-position:0 0, 8px 12px;
       opacity:.55;
@@ -640,7 +640,7 @@
     .mu-split-bar {
       display:grid; grid-template-columns:1fr 1fr; height:2px;
     }
-    .mu-split-a { background:linear-gradient(90deg,transparent 0%,#ff8a3d 100%); }
+    .mu-split-a { background:linear-gradient(90deg,transparent 0%,#f2600f 100%); }
     .mu-split-b { background:linear-gradient(90deg,#60a5fa 0%,transparent 100%); }
 
     /* ── CONTENT ── */
@@ -677,7 +677,7 @@
       transition:color .18s, border-color .18s;
     }
     .mu-tab:hover { color:rgba(255,255,255,.6); }
-    .mu-tab.active { color:#ff8a3d; border-bottom-color:#ff8a3d; }
+    .mu-tab.active { color:#f2600f; border-bottom-color:#f2600f; }
     .mu-tab-panel { display:none; }
     .mu-tab-panel.active { display:block; }
 
@@ -691,7 +691,7 @@
     .mu-resume-label {
       font-family:'Montserrat',sans-serif; font-weight:800;
       font-size:.52rem; letter-spacing:.2em; text-transform:uppercase;
-      color:#ff8a3d; opacity:.75; margin-bottom:14px;
+      color:#f2600f; opacity:.75; margin-bottom:14px;
     }
     .mu-common-row {
       display:grid; grid-template-columns:1fr auto 1fr;
@@ -718,7 +718,7 @@
       text-transform:uppercase; letter-spacing:.04em;
       text-decoration:none; transition:color .15s;
     }
-    .mu-common-opponent:hover { color:#ff8a3d; }
+    .mu-common-opponent:hover { color:#f2600f; }
     .mu-common-method {
       font-family:'Inter',sans-serif; font-size:.72rem;
       color:rgba(255,255,255,.4); margin-top:3px;
@@ -776,12 +776,12 @@
       display:inline-block;
       font-family:'Montserrat',sans-serif; font-weight:800; font-size:.52rem;
       letter-spacing:.1em; text-transform:uppercase;
-      color:#ff8a3d; text-decoration:none; margin-top:10px;
-      border:1px solid rgba(255,138,61,.4); border-radius:20px;
+      color:#f2600f; text-decoration:none; margin-top:10px;
+      border:1px solid rgba(242, 96, 15,.4); border-radius:20px;
       padding:7px 16px;
       transition:background .15s, color .15s, border-color .15s;
     }
-    .mu-form-full:hover { background:#ff8a3d; color:#0a0a0a; border-color:#ff8a3d; }
+    .mu-form-full:hover { background:#f2600f; color:#0a0a0a; border-color:#f2600f; }
     .mu-form-full.b { float:right; }
     .mu-form-name-row { display:flex; align-items:center; justify-content:space-between; gap:8px; }
     .mu-form-name-row.b { flex-direction:row-reverse; }
@@ -793,14 +793,14 @@
       text-align:center; padding:14px;
       font-family:'Inter',sans-serif; font-weight:500; font-style:normal;
       font-size:.92rem; color:rgba(255,255,255,.85);
-      border:1px solid rgba(255,138,61,.3);
+      border:1px solid rgba(242, 96, 15,.3);
       border-radius:3px; margin-bottom:4px;
     }
     .mu-h2h-tag {
       display:block;
       font-family:'Montserrat',sans-serif; font-weight:800; font-style:normal;
       font-size:.56rem; letter-spacing:.22em; text-transform:uppercase;
-      color:#ff8a3d; opacity:.8; margin-bottom:6px;
+      color:#f2600f; opacity:.8; margin-bottom:6px;
     }
     .mu-no-common {
       text-align:center; padding:20px;
@@ -825,7 +825,7 @@
     }
     .mu-stat-val.a { color:rgba(255,255,255,.9); }
     .mu-stat-val.b { color:rgba(255,255,255,.9); text-align:right; }
-    .mu-stat-val.a.edge { color:#ff8a3d; }
+    .mu-stat-val.a.edge { color:#f2600f; }
     .mu-stat-val.b.edge { color:#60a5fa; }
     .mu-stat-val.a.edge::after  { content:' \25b2'; font-size:.55em; opacity:.7; }
     .mu-stat-val.b.edge::before { content:'\25b2 '; font-size:.55em; opacity:.7; }
@@ -867,7 +867,7 @@
     .mu-cta { margin-top:24px; text-align:center; }
     .mu-picks-btn {
       display:inline-flex; align-items:center; gap:10px;
-      background:#ff8a3d;
+      background:#f2600f;
       border:none; color:#0a0a0a;
       font-family:'Montserrat',sans-serif; font-weight:800;
       font-size:.7rem; letter-spacing:.1em; text-transform:uppercase;
@@ -892,7 +892,7 @@
     body.light-mode .mu-stat-val.b { color:#1d4ed8; }
     body.light-mode .mu-panel { background:rgba(0,0,0,.015); border-color:rgba(0,0,0,.09); }
     body.light-mode .mu-back { color:rgba(0,0,0,.5); background:rgba(0,0,0,.04); border-color:rgba(0,0,0,.1); }
-    body.light-mode .mu-back:hover { color:#e06b1a; background:rgba(224,107,26,.08); border-color:rgba(224,107,26,.3); }
+    body.light-mode .mu-back:hover { color:#c24a08; background:rgba(194, 74, 8,.08); border-color:rgba(194, 74, 8,.3); }
     body.light-mode .mu-chip { color:rgba(0,0,0,.6); border-color:rgba(0,0,0,.16); }
     body.light-mode .mu-vs-text { color:rgba(0,0,0,.5); }
     body.light-mode .mu-vs-weight { color:rgba(0,0,0,.35); }
@@ -901,24 +901,24 @@
     body.light-mode .mu-tabs { border-bottom-color:rgba(0,0,0,.1); }
     body.light-mode .mu-tab { color:rgba(0,0,0,.35); }
     body.light-mode .mu-tab:hover { color:rgba(0,0,0,.7); }
-    body.light-mode .mu-tab.active { color:#e06b1a; border-bottom-color:#e06b1a; }
+    body.light-mode .mu-tab.active { color:#c24a08; border-bottom-color:#c24a08; }
     body.light-mode .mu-resume-block { border-bottom-color:rgba(0,0,0,.07); }
-    body.light-mode .mu-resume-label { color:#e06b1a; }
+    body.light-mode .mu-resume-label { color:#c24a08; }
     body.light-mode .mu-common-row { border-bottom-color:rgba(0,0,0,.06); }
     body.light-mode .mu-common-row:hover { background:rgba(0,0,0,.03); }
     body.light-mode .mu-common-opponent { color:rgba(0,0,0,.65); }
-    body.light-mode .mu-common-opponent:hover { color:#e06b1a; }
+    body.light-mode .mu-common-opponent:hover { color:#c24a08; }
     body.light-mode .mu-common-method { color:rgba(0,0,0,.45); }
     body.light-mode .mu-common-sub { color:rgba(0,0,0,.32); }
     body.light-mode .mu-form-name { color:rgba(0,0,0,.55); }
     body.light-mode .mu-form-divider { background:rgba(0,0,0,.1); }
     body.light-mode .mu-form-sub { color:rgba(0,0,0,.4); }
     body.light-mode .mu-form-tip { background:#fff; border-color:rgba(0,0,0,.14); color:rgba(0,0,0,.75); box-shadow:0 8px 22px rgba(0,0,0,.18); }
-    body.light-mode .mu-form-full { color:#e06b1a; border-color:rgba(224,107,26,.4); }
-    body.light-mode .mu-form-full:hover { background:#e06b1a; color:#fff; border-color:#e06b1a; }
+    body.light-mode .mu-form-full { color:#c24a08; border-color:rgba(194, 74, 8,.4); }
+    body.light-mode .mu-form-full:hover { background:#c24a08; color:#fff; border-color:#c24a08; }
     body.light-mode .mu-no-common { color:rgba(0,0,0,.35); }
-    body.light-mode .mu-h2h-banner { color:rgba(0,0,0,.75); border-color:rgba(224,107,26,.4); }
-    body.light-mode .mu-h2h-tag { color:#e06b1a; }
+    body.light-mode .mu-h2h-banner { color:rgba(0,0,0,.75); border-color:rgba(194, 74, 8,.4); }
+    body.light-mode .mu-h2h-tag { color:#c24a08; }
     body.light-mode .mu-stat-row { border-bottom-color:rgba(0,0,0,.07); }
     body.light-mode .mu-stat-row:hover { background:rgba(0,0,0,.03); }
     body.light-mode .mu-stat-label { color:rgba(0,0,0,.42); }
@@ -982,7 +982,7 @@
     body.mu-poster-mode.mu-poster-gold.mu-poster-light .mu-fighter-name.a {
       text-shadow:0 3px 0 rgba(255,255,255,.75), 0 8px 30px rgba(240,195,78,.4);
     }
-    .mu-poster-theme.active { background:rgba(255,138,61,.25); border-color:#ff8a3d; color:#fff; }
+    .mu-poster-theme.active { background:rgba(242, 96, 15,.25); border-color:#f2600f; color:#fff; }
 
     /* Tag ribbons (classic mode's top-left "INTERIM BELT"-style chip, and
        Poster mode's equivalent above the VS medallion) were still hardcoded
@@ -1003,7 +1003,7 @@
        dark text color on these same elements. ── */
     body.mu-poster-name-accent .mu-fighter-name,
     body.mu-poster-name-accent .mu-classic-name,
-    body.mu-poster-name-accent #muClassicNameB { color:#ff8a3d !important; }
+    body.mu-poster-name-accent #muClassicNameB { color:#f2600f !important; }
     body.mu-poster-name-accent.mu-poster-gold .mu-fighter-name,
     body.mu-poster-name-accent.mu-poster-gold .mu-classic-name,
     body.mu-poster-name-accent.mu-poster-gold #muClassicNameB { color:#f0c34e !important; }

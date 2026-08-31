@@ -108,7 +108,7 @@
       .fm-nickname {
         font-family: 'Inter', sans-serif;
         font-size: 0.62rem; font-style: italic;
-        color: rgba(255,138,61,0.7); margin-bottom: 3px;
+        color: rgba(242, 96, 15,0.7); margin-bottom: 3px;
       }
       .fm-name {
         font-family: 'Montserrat', sans-serif;
@@ -127,13 +127,13 @@
         color: rgba(255,255,255,0.9);
       }
       .fm-division {
-        background: rgba(255,138,61,0.1);
-        border: 1px solid rgba(255,138,61,0.22);
+        background: rgba(242, 96, 15,0.1);
+        border: 1px solid rgba(242, 96, 15,0.22);
         border-radius: 4px; padding: 2px 8px;
         font-family: 'Montserrat', sans-serif;
         font-size: 0.52rem; font-weight: 800;
         letter-spacing: 0.1em; text-transform: uppercase;
-        color: #ff8a3d;
+        color: #f2600f;
       }
 
       .fm-body { padding: 16px 22px 26px; }
@@ -207,7 +207,7 @@
       .fm-wb-n { font-size: 0.68rem; font-weight: 900; }
       .fm-wb-ko  { background: rgba(255,80,80,0.1);  color: rgba(255,120,120,0.8); border: 1px solid rgba(255,80,80,0.15); }
       .fm-wb-sub { background: rgba(100,200,255,0.08); color: rgba(100,200,255,0.7); border: 1px solid rgba(100,200,255,0.14); }
-      .fm-wb-dec { background: rgba(255,138,61,0.08);  color: rgba(255,138,61,0.6);  border: 1px solid rgba(255,138,61,0.14); }
+      .fm-wb-dec { background: rgba(242, 96, 15,0.08);  color: rgba(242, 96, 15,0.6);  border: 1px solid rgba(242, 96, 15,0.14); }
 
       /* Fight rows */
       .fm-fights { display: flex; flex-direction: column; }
@@ -251,7 +251,7 @@
       }
       .fm-mb-ko  { background: rgba(255,80,80,0.1);   color: rgba(255,130,130,0.85); }
       .fm-mb-sub { background: rgba(100,200,255,0.09); color: rgba(120,200,255,0.8); }
-      .fm-mb-dec { background: rgba(255,138,61,0.08);  color: rgba(255,138,61,0.65); }
+      .fm-mb-dec { background: rgba(242, 96, 15,0.08);  color: rgba(242, 96, 15,0.65); }
       .fm-mb-nc  { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.3); }
 
       /* Full record link */
@@ -260,21 +260,21 @@
         font-family: 'Montserrat', sans-serif;
         font-size: 0.56rem; font-weight: 700;
         letter-spacing: 0.1em; text-transform: uppercase;
-        color: rgba(255,138,61,0.55);
+        color: rgba(242, 96, 15,0.55);
         text-decoration: none;
         transition: color 0.15s;
       }
-      .fm-full-link:hover { color: #ff8a3d; }
+      .fm-full-link:hover { color: #f2600f; }
       .fm-no-history {
         font-size: 0.65rem; color: rgba(255,255,255,0.18);
         padding: 10px 0 4px;
         display: flex; align-items: center; gap: 10px;
       }
       .fm-full-link-inline {
-        font-size: 0.58rem; color: rgba(255,138,61,0.45);
+        font-size: 0.58rem; color: rgba(242, 96, 15,0.45);
         text-decoration: none; transition: color 0.15s;
       }
-      .fm-full-link-inline:hover { color: #ff8a3d; }
+      .fm-full-link-inline:hover { color: #f2600f; }
 
       .fm-empty {
         padding: 60px 0; text-align: center;
