@@ -449,12 +449,17 @@
         if (roAudio && !roAudio.paused) {
           roAudio.pause(); roAudio = null;
           playIcon?.classList.remove('playing');
+          if (playIcon) playIcon.textContent = '▶';
           return;
         }
         roAudio = new Audio(url);
         roAudio.play().catch(() => {});
         playIcon?.classList.add('playing');
-        roAudio.addEventListener('ended', () => playIcon?.classList.remove('playing'));
+        if (playIcon) playIcon.textContent = '⏸';
+        roAudio.addEventListener('ended', () => {
+          playIcon?.classList.remove('playing');
+          if (playIcon) playIcon.textContent = '▶';
+        });
       });
     }
 
@@ -1184,11 +1189,17 @@
     const resultsBox  = document.getElementById('prWalkoutResults');
     if (!btn || !panel || !input || !resultsBox) return;
 
+    // Swaps just the leading ▶/⏸ glyph so it works whether the element is a
+    // bare icon ("▶") or has trailing label text ("▶ Preview").
+    function setPlayGlyph(el, playing) {
+      el.textContent = el.textContent.replace(playing ? '▶' : '⏸', playing ? '⏸' : '▶');
+    }
+
     let previewAudio = null;
     function stopPreview() {
       if (previewAudio) { previewAudio.pause(); previewAudio = null; }
-      document.querySelectorAll('.pr-walkout-result-play.playing, .pr-walkout-play.playing')
-        .forEach(el => el.classList.remove('playing'));
+      document.querySelectorAll('.pr-walkout-result-play.playing, .pr-walkout-play.playing, .pr-walkout-play-panel.playing')
+        .forEach(el => { el.classList.remove('playing'); setPlayGlyph(el, false); });
     }
     function playPreview(url, el) {
       if (previewAudio && previewAudio.src === url && !previewAudio.paused) { stopPreview(); return; }
@@ -1196,7 +1207,8 @@
       previewAudio = new Audio(url);
       previewAudio.play().catch(() => {});
       el.classList.add('playing');
-      previewAudio.addEventListener('ended', () => el.classList.remove('playing'));
+      setPlayGlyph(el, true);
+      previewAudio.addEventListener('ended', () => { el.classList.remove('playing'); setPlayGlyph(el, false); });
     }
 
     function wirePlayBtn() {
