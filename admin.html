@@ -2835,7 +2835,7 @@
           (data.recent_users || []).forEach(u => {
             const row = document.createElement('div');
             row.className = 'analytics-row';
-            const name = u.username || u.id?.slice(0, 8) || '—';
+            const name = u.display_name || u.id?.slice(0, 8) || '—';
             const date = u.created_at ? new Date(u.created_at).toLocaleDateString('en-US', {month:'short',day:'numeric'}) : '';
             row.innerHTML = `<div><div class="analytics-row-name">${escHtml(name)}</div><div class="analytics-row-sub">${escHtml(date)}</div></div>`;
             recentEl.appendChild(row);
