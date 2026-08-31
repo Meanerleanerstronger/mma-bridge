@@ -195,7 +195,7 @@
         "rank": 15,
         "name": "Charles Johnson",
         "isChamp": false,
-        "movement": "new"
+        "movement": "same"
       }
     ]
   },
@@ -215,7 +215,7 @@
       },
       {
         "rank": 2,
-        "name": "Sean O'Malley",
+        "name": "Sean O&#039;Malley",
         "isChamp": false,
         "movement": "same"
       },
@@ -589,14 +589,13 @@
         "rank": 14,
         "name": "Daniel Rodriguez",
         "isChamp": false,
-        "movement": "up",
-        "prevRank": 15
+        "movement": "same"
       },
       {
         "rank": 15,
         "name": "Neil Magny",
         "isChamp": false,
-        "movement": "new"
+        "movement": "same"
       }
     ]
   },
@@ -640,27 +639,31 @@
       },
       {
         "rank": 6,
-        "name": "Anthony Hernandez",
+        "name": "Joe Pyfer",
         "isChamp": false,
-        "movement": "same"
+        "movement": "up",
+        "prevRank": 7
       },
       {
         "rank": 7,
-        "name": "Joe Pyfer",
+        "name": "Gregory Rodrigues",
         "isChamp": false,
-        "movement": "same"
+        "movement": "up",
+        "prevRank": 11
       },
       {
         "rank": 8,
-        "name": "Israel Adesanya",
+        "name": "Anthony Hernandez",
         "isChamp": false,
-        "movement": "same"
+        "movement": "down",
+        "prevRank": 6
       },
       {
         "rank": 9,
-        "name": "Reinier de Ridder",
+        "name": "Israel Adesanya",
         "isChamp": false,
-        "movement": "same"
+        "movement": "down",
+        "prevRank": 8
       },
       {
         "rank": 10,
@@ -670,33 +673,36 @@
       },
       {
         "rank": 11,
-        "name": "Gregory Rodrigues",
+        "name": "Jared Cannonier",
         "isChamp": false,
-        "movement": "same"
+        "movement": "up",
+        "prevRank": 12
       },
       {
         "rank": 12,
-        "name": "Jared Cannonier",
+        "name": "Ikram Aliskerov",
         "isChamp": false,
-        "movement": "same"
+        "movement": "up",
+        "prevRank": 13
       },
       {
         "rank": 13,
-        "name": "Ikram Aliskerov",
+        "name": "Bo Nickal",
         "isChamp": false,
-        "movement": "same"
+        "movement": "up",
+        "prevRank": 14
       },
       {
         "rank": 14,
-        "name": "Bo Nickal",
+        "name": "Abus Magomedov",
         "isChamp": false,
-        "movement": "same"
+        "movement": "new"
       },
       {
         "rank": 15,
-        "name": "Roman Dolidze",
+        "name": "Michael Venom Page",
         "isChamp": false,
-        "movement": "same"
+        "movement": "new"
       }
     ]
   },
@@ -840,33 +846,37 @@
       },
       {
         "rank": 6,
-        "name": "Serghei Spivac",
+        "name": "Curtis Blaydes",
         "isChamp": false,
-        "movement": "same"
+        "movement": "up",
+        "prevRank": 7
       },
       {
         "rank": 7,
-        "name": "Curtis Blaydes",
+        "name": "Rizvan Kuniev",
         "isChamp": false,
-        "movement": "same"
+        "movement": "up",
+        "prevRank": 8
       },
       {
         "rank": 8,
-        "name": "Rizvan Kuniev",
+        "name": "Vitor Petrino",
         "isChamp": false,
-        "movement": "same"
+        "movement": "new"
       },
       {
         "rank": 9,
-        "name": "Ante Delija",
+        "name": "Serghei Spivac",
         "isChamp": false,
-        "movement": "same"
+        "movement": "down",
+        "prevRank": 6
       },
       {
         "rank": 10,
-        "name": "Aleksandar Rakić",
+        "name": "Ante Delija",
         "isChamp": false,
-        "movement": "same"
+        "movement": "down",
+        "prevRank": 9
       },
       {
         "rank": 11,
@@ -876,27 +886,31 @@
       },
       {
         "rank": 12,
-        "name": "Tyrell Fortune",
+        "name": "Derrick Lewis",
         "isChamp": false,
-        "movement": "same"
+        "movement": "up",
+        "prevRank": 13
       },
       {
         "rank": 13,
-        "name": "Derrick Lewis",
+        "name": "Aleksandar Rakić",
         "isChamp": false,
-        "movement": "same"
+        "movement": "down",
+        "prevRank": 10
       },
       {
         "rank": 14,
-        "name": "Marcin Tybura",
+        "name": "Tyrell Fortune",
         "isChamp": false,
-        "movement": "same"
+        "movement": "down",
+        "prevRank": 12
       },
       {
         "rank": 15,
-        "name": "Brando Peričić",
+        "name": "Marcin Tybura",
         "isChamp": false,
-        "movement": "same"
+        "movement": "down",
+        "prevRank": 14
       }
     ]
   },
@@ -936,15 +950,13 @@
         "rank": 5,
         "name": "Mackenzie Dern",
         "isChamp": false,
-        "movement": "up",
-        "prevRank": 6
+        "movement": "same"
       },
       {
         "rank": 6,
         "name": "Manon Fiorot",
         "isChamp": false,
-        "movement": "down",
-        "prevRank": 5
+        "movement": "same"
       },
       {
         "rank": 7,
@@ -1048,9 +1060,9 @@
       },
       {
         "rank": 7,
-        "name": "Lupita Godinez",
+        "name": "Loopy Godinez",
         "isChamp": false,
-        "movement": "same"
+        "movement": "new"
       },
       {
         "rank": 8,
@@ -1178,7 +1190,7 @@
       },
       {
         "rank": 12,
-        "name": "Casey O'Neill",
+        "name": "Casey O&#039;Neill",
         "isChamp": false,
         "movement": "same"
       },
@@ -1190,15 +1202,17 @@
       },
       {
         "rank": 14,
-        "name": "JJ Aldrich",
+        "name": "Gabriella Fernandes",
         "isChamp": false,
-        "movement": "same"
+        "movement": "up",
+        "prevRank": 15
       },
       {
         "rank": 15,
-        "name": "Gabriella Fernandes",
+        "name": "JJ Aldrich",
         "isChamp": false,
-        "movement": "same"
+        "movement": "down",
+        "prevRank": 14
       }
     ]
   },
