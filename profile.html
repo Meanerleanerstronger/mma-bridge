@@ -847,15 +847,36 @@
     }
     .pr-challenge-btn:hover { background: rgba(255,138,61,0.16); border-color: rgba(255,138,61,0.5); }
 
-    /* ── TIER BADGE ── */
-    .pr-tier-badge {
-      display: inline-block;
+    /* ── WALKOUT SONG ── */
+    .pr-walkout-btn {
+      display: inline-flex; align-items: center; gap: 6px;
       font-family: 'Montserrat', sans-serif; font-weight: 800;
-      font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase;
-      padding: 3px 10px; border-radius: 4px;
+      font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 6px 12px; border-radius: 6px; margin-top: 4px;
       background: rgba(224,107,26,.15); border: 1px solid rgba(224,107,26,.4);
-      color: #e06b1a; margin-top: 4px;
+      color: #e06b1a; cursor: pointer; max-width: 320px;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      transition: background 0.15s, border-color 0.15s;
     }
+    .pr-walkout-btn:hover { background: rgba(224,107,26,.24); border-color: rgba(224,107,26,.6); }
+    .pr-walkout-edit {
+      display: none; align-items: center; gap: 8px; margin-top: 10px; flex-wrap: wrap;
+    }
+    .pr-walkout-edit input {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 6px; color: #fff; font-family: 'Inter', sans-serif;
+      font-size: 0.82rem; padding: 7px 10px; width: 220px;
+    }
+    .pr-walkout-edit button {
+      font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.68rem;
+      letter-spacing: 0.06em; text-transform: uppercase; padding: 7px 14px;
+      border-radius: 6px; cursor: pointer; border: none;
+      background: #ff8a3d; color: #000;
+    }
+    .pr-walkout-edit button.pr-walkout-clear {
+      background: transparent; border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.6);
+    }
+    body.light-mode .pr-walkout-edit input { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.14); color: #111; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 640px) {

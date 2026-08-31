@@ -10678,29 +10678,6 @@ body.light-mode .pk-comment-input { background: rgba(0,0,0,.04) !important; bord
 .pk-fotn-reminder:hover { background: rgba(255,170,0,0.13); color: rgba(255,170,0,0.95); }
 body.light-mode .pk-fotn-reminder { background: rgba(180,110,0,0.07); border-color: rgba(180,110,0,0.2); color: rgba(140,80,0,0.8); }
 
-/* ── Tier progression bar (own profile) ── */
-.pr-tier-progress {
-  margin-top: 6px; margin-bottom: 2px;
-  max-width: 220px;
-}
-.pr-tier-progress-label {
-  display: flex; justify-content: space-between;
-  font-family: 'Inter', sans-serif; font-size: 0.65rem;
-  color: rgba(255,255,255,0.3); margin-bottom: 5px;
-}
-.pr-tier-progress-label span:first-child { color: #ff8a3d; font-weight: 600; }
-.pr-tier-bar-track {
-  height: 3px; background: rgba(255,255,255,0.08); border-radius: 2px;
-}
-.pr-tier-bar-fill {
-  height: 100%; border-radius: 2px;
-  background: #ff8a3d;
-  transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-body.light-mode .pr-tier-progress-label { color: rgba(0,0,0,0.35); }
-body.light-mode .pr-tier-progress-label span:first-child { color: #e06b1a; }
-body.light-mode .pr-tier-bar-track { background: rgba(0,0,0,0.08); }
-
 /* ── H2H record stat ── */
 .pr-stat-h2h {
   font-size: 1.1rem !important; letter-spacing: -0.02em;

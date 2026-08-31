@@ -36,6 +36,8 @@ MMA Bridge (mmabridge.com) is a UFC pick'em fan site. Vanilla JS frontend (no fr
 - `group_name TEXT` — group display name
 - `group_is_owner BOOLEAN DEFAULT FALSE` — true for group creator/commissioner
 - `group_season_start TEXT` — ISO date string for season start (set by commissioner)
+- `email_opt_out BOOLEAN` — gates ALL email types (weekly digest, pick/review reminders, rankings update, favorite-fighter alerts), not just the digest
+- `walkout_song TEXT` — user-set "Song — Artist" string shown on their own profile hero (replaced the old tier badge/progress bar)
 
 ### `picks`
 - `user_id UUID`
@@ -100,6 +102,8 @@ ALTER TABLE profiles ADD COLUMN IF NOT EXISTS group_is_owner BOOLEAN DEFAULT FAL
 ALTER TABLE profiles ADD COLUMN IF NOT EXISTS group_season_start TEXT;
 ALTER TABLE profiles ADD COLUMN IF NOT EXISTS group_code TEXT;
 ALTER TABLE profiles ADD COLUMN IF NOT EXISTS group_name TEXT;
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS email_opt_out BOOLEAN DEFAULT FALSE;
+ALTER TABLE profiles ADD COLUMN IF NOT EXISTS walkout_song TEXT;
 ```
 
 ## Common Gotchas

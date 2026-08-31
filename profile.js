@@ -474,10 +474,11 @@
       .select('event_id, fight_key, pick, method, round')
       .eq('user_id', user.id)
       .neq('fight_key', 'fotn'),
-    sb.from('profiles').select('avatar_url, display_name').eq('id', user.id).single(),
+    sb.from('profiles').select('avatar_url, display_name, walkout_song').eq('id', user.id).single(),
   ]);
 
   const profileAvatarUrl = profileResult.data?.avatar_url || user.avatar_url || null;
+  let walkoutSong = profileResult.data?.walkout_song || '';
 
   const ratings  = ratingsResult.data || [];
   const events   = Array.isArray(eventsResult) ? eventsResult : [];
@@ -644,42 +645,6 @@
   } catch {}
   const myChTotal = myChWins + myChLosses + myChTies;
 
-  // ── Tier computation (canonical source: tiers.js) ──────────
-  function computeTier(judgedPicks, accuracy) {
-    return window.MMATiers.getTier(judgedPicks, accuracy).name;
-  }
-
-  function buildTierProgress(judgedPicks, accuracy) {
-    const TIER_STEPS = [
-      { name: 'Walkout',    minJudged: 0,  minAcc: 0  },
-      { name: 'Prospect',   minJudged: 1,  minAcc: 0  },
-      { name: 'Ranked',     minJudged: 10, minAcc: 0  },
-      { name: 'Contender',  minJudged: 10, minAcc: 40 },
-      { name: 'Main Event', minJudged: 10, minAcc: 50 },
-      { name: 'Headliner',  minJudged: 10, minAcc: 55 },
-      { name: 'Champion',   minJudged: 30, minAcc: 60 },
-      { name: 'P4P',        minJudged: 60, minAcc: 65 },
-      { name: 'GOAT',       minJudged: 60, minAcc: 70 },
-    ];
-    const current = computeTier(judgedPicks, accuracy);
-    const currentIdx = TIER_STEPS.findIndex(t => t.name === current);
-    if (current === 'GOAT') {
-      return `<div class="pr-tier-progress"><div class="pr-tier-progress-label"><span>MAX TIER</span><span>GOAT</span></div><div class="pr-tier-bar-track"><div class="pr-tier-bar-fill" style="width:100%"></div></div></div>`;
-    }
-    const next = TIER_STEPS[currentIdx + 1];
-    const acc = accuracy || 0;
-    const judgePct = next.minJudged > 0 ? Math.min(100, Math.round((judgedPicks / next.minJudged) * 100)) : 100;
-    const accPct   = next.minAcc > 0 ? Math.min(100, Math.round((acc / next.minAcc) * 100)) : 100;
-    const pct = Math.round((judgePct + accPct) / 2);
-    const needs = [];
-    if (judgedPicks < next.minJudged) needs.push(`${next.minJudged - judgedPicks} more judged picks`);
-    if (acc < next.minAcc) needs.push(`${next.minAcc}%+ accuracy`);
-    const hint = needs.length ? needs.join(' · ') : 'Almost there!';
-    return `<div class="pr-tier-progress">
-      <div class="pr-tier-progress-label"><span>→ ${next.name}</span><span>${hint}</span></div>
-      <div class="pr-tier-bar-track"><div class="pr-tier-bar-fill" style="width:${pct}%"></div></div>
-    </div>`;
-  }
 
   // ── Favourite fighters (Supabase = source of truth, localStorage = paint cache) ──
   // In-memory array is what every read/write actually touches; localStorage just
@@ -858,8 +823,14 @@
           <div class="pr-info">
             <div class="pr-label">Fighter Profile</div>
             <h1 class="pr-name">${esc(user.display_name || 'Fighter')}</h1>
-            <span class="pr-tier-badge">${computeTier(totalJudged, overallAccuracy)}</span>
-            ${buildTierProgress(totalJudged, overallAccuracy)}
+            <button class="pr-walkout-btn" id="prWalkoutBtn" type="button">
+              🎵 ${walkoutSong ? esc(walkoutSong) : 'Choose Your Walkout Song'}
+            </button>
+            <div class="pr-walkout-edit" id="prWalkoutEdit" style="display:none">
+              <input type="text" id="prWalkoutInput" maxlength="80" placeholder="Song — Artist" value="${esc(walkoutSong)}">
+              <button id="prWalkoutSave" type="button">Save</button>
+              ${walkoutSong ? `<button id="prWalkoutClear" type="button" class="pr-walkout-clear">Clear</button>` : ''}
+            </div>
             <div class="pr-meta-row">
               <span class="pr-meta-item">
                 <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
@@ -1160,6 +1131,34 @@
     } catch {}
   }
 
+  function initWalkoutSong() {
+    const btn   = document.getElementById('prWalkoutBtn');
+    const panel = document.getElementById('prWalkoutEdit');
+    const input = document.getElementById('prWalkoutInput');
+    if (!btn || !panel || !input) return;
+
+    btn.addEventListener('click', () => {
+      panel.style.display = panel.style.display === 'none' ? 'flex' : 'none';
+      if (panel.style.display === 'flex') input.focus();
+    });
+
+    async function save(value) {
+      const clean = value.trim().slice(0, 80);
+      try {
+        await sb.from('profiles').upsert({ id: user.id, walkout_song: clean || null });
+        walkoutSong = clean;
+        btn.innerHTML = `🎵 ${clean ? esc(clean) : 'Choose Your Walkout Song'}`;
+        panel.style.display = 'none';
+      } catch {
+        showFavToast("Couldn't save — try again");
+      }
+    }
+
+    document.getElementById('prWalkoutSave')?.addEventListener('click', () => save(input.value));
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') save(input.value); });
+    document.getElementById('prWalkoutClear')?.addEventListener('click', () => { input.value = ''; save(''); });
+  }
+
   function buildFollowRow() {
     return `
       <div class="profile-follow-row" id="profileFollowRow" style="display:none">
@@ -1366,6 +1365,7 @@
     loadNotifPrefs();
     loadFollowData();
     initEmailOptOut();
+    initWalkoutSong();
 
     // Remove fav
     document.getElementById('favsGrid')?.addEventListener('click', e => {
