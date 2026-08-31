@@ -869,6 +869,7 @@
                 <input type="text" id="prWalkoutInput" maxlength="80" autocomplete="off" placeholder="Search a song…" value="${esc(walkoutSong)}">
                 <div class="pr-walkout-results" id="prWalkoutResults" style="display:none"></div>
               </div>
+              ${walkoutPreviewUrl ? `<button type="button" id="prWalkoutPlayPanel" class="pr-walkout-play-panel" title="Preview current song">▶ Preview</button>` : ''}
               <button id="prWalkoutSave" type="button">Save as typed</button>
               ${walkoutSong ? `<button id="prWalkoutClear" type="button" class="pr-walkout-clear">Clear</button>` : ''}
             </div>
@@ -1206,6 +1207,34 @@
     }
     wirePlayBtn();
 
+    function wirePanelPlayBtn() {
+      document.getElementById('prWalkoutPlayPanel')?.addEventListener('click', e => {
+        if (walkoutPreviewUrl) playPreview(walkoutPreviewUrl, e.currentTarget);
+      });
+    }
+    wirePanelPlayBtn();
+
+    // The "▶ Preview" button inside the open panel only exists when there's
+    // a preview to play — add/remove/update it in place after every save so
+    // it doesn't take a full panel re-render (and stays put mid-edit).
+    function refreshPanelPreviewBtn() {
+      let el = document.getElementById('prWalkoutPlayPanel');
+      if (walkoutPreviewUrl) {
+        if (!el) {
+          el = document.createElement('button');
+          el.type = 'button';
+          el.id = 'prWalkoutPlayPanel';
+          el.className = 'pr-walkout-play-panel';
+          el.title = 'Preview current song';
+          el.textContent = '▶ Preview';
+          panel.insertBefore(el, document.getElementById('prWalkoutSave'));
+          wirePanelPlayBtn();
+        }
+      } else if (el) {
+        el.remove();
+      }
+    }
+
     function refreshButton() {
       btn.innerHTML = `
         <span class="pr-walkout-note">${walkoutArtwork ? `<img class="pr-walkout-art" src="${esc(walkoutArtwork)}" alt="">` : '🎵'}</span>
@@ -1213,6 +1242,7 @@
         ${walkoutPreviewUrl ? `<span class="pr-walkout-play" id="prWalkoutPlay" title="Play preview">▶</span>` : ''}
       `;
       wirePlayBtn();
+      refreshPanelPreviewBtn();
     }
 
     btn.addEventListener('click', e => {
@@ -1321,7 +1351,15 @@
     });
 
     input.addEventListener('keydown', e => {
-      if (e.key === 'Enter') { e.preventDefault(); saveTyped(input.value); }
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        // Prefer the top search match (real artwork + preview) over a blind
+        // text save — hitting Enter after typing felt like "confirm," but
+        // was silently discarding the search results right in front of it.
+        const tracks = resultsBox._tracks;
+        if (resultsBox.style.display === 'block' && tracks && tracks.length) selectResult(tracks[0]);
+        else saveTyped(input.value);
+      }
       if (e.key === 'Escape') { panel.style.display = 'none'; resultsBox.style.display = 'none'; }
     });
 
