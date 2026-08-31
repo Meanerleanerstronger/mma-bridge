@@ -474,11 +474,13 @@
       .select('event_id, fight_key, pick, method, round')
       .eq('user_id', user.id)
       .neq('fight_key', 'fotn'),
-    sb.from('profiles').select('avatar_url, display_name, walkout_song').eq('id', user.id).single(),
+    sb.from('profiles').select('avatar_url, display_name, walkout_song, walkout_song_artwork, walkout_song_preview_url').eq('id', user.id).single(),
   ]);
 
   const profileAvatarUrl = profileResult.data?.avatar_url || user.avatar_url || null;
-  let walkoutSong = profileResult.data?.walkout_song || '';
+  let walkoutSong        = profileResult.data?.walkout_song || '';
+  let walkoutArtwork     = profileResult.data?.walkout_song_artwork || '';
+  let walkoutPreviewUrl  = profileResult.data?.walkout_song_preview_url || '';
 
   const ratings  = ratingsResult.data || [];
   const events   = Array.isArray(eventsResult) ? eventsResult : [];
@@ -824,11 +826,16 @@
             <div class="pr-label">Fighter Profile</div>
             <h1 class="pr-name">${esc(user.display_name || 'Fighter')}</h1>
             <button class="pr-walkout-btn" id="prWalkoutBtn" type="button">
-              🎵 ${walkoutSong ? esc(walkoutSong) : 'Choose Your Walkout Song'}
+              ${walkoutArtwork ? `<img class="pr-walkout-art" src="${esc(walkoutArtwork)}" alt="">` : '🎵'}
+              <span id="prWalkoutBtnLabel">${walkoutSong ? esc(walkoutSong) : 'Choose Your Walkout Song'}</span>
+              ${walkoutPreviewUrl ? `<span class="pr-walkout-play" id="prWalkoutPlay" title="Play preview">▶</span>` : ''}
             </button>
             <div class="pr-walkout-edit" id="prWalkoutEdit" style="display:none">
-              <input type="text" id="prWalkoutInput" maxlength="80" placeholder="Song — Artist" value="${esc(walkoutSong)}">
-              <button id="prWalkoutSave" type="button">Save</button>
+              <div class="pr-walkout-search-wrap">
+                <input type="text" id="prWalkoutInput" maxlength="80" autocomplete="off" placeholder="Search a song…" value="${esc(walkoutSong)}">
+                <div class="pr-walkout-results" id="prWalkoutResults" style="display:none"></div>
+              </div>
+              <button id="prWalkoutSave" type="button">Save as typed</button>
               ${walkoutSong ? `<button id="prWalkoutClear" type="button" class="pr-walkout-clear">Clear</button>` : ''}
             </div>
             <div class="pr-meta-row">
@@ -1131,32 +1138,161 @@
     } catch {}
   }
 
+  // Song search + preview is powered by Apple's iTunes Search API —
+  // free, no key/auth required, open CORS, and (unlike Spotify's Web API,
+  // which dropped preview_url for most tracks in 2023) still returns a
+  // real 30s AAC clip per track.
   function initWalkoutSong() {
-    const btn   = document.getElementById('prWalkoutBtn');
-    const panel = document.getElementById('prWalkoutEdit');
-    const input = document.getElementById('prWalkoutInput');
-    if (!btn || !panel || !input) return;
+    const btn        = document.getElementById('prWalkoutBtn');
+    const panel       = document.getElementById('prWalkoutEdit');
+    const input       = document.getElementById('prWalkoutInput');
+    const resultsBox  = document.getElementById('prWalkoutResults');
+    if (!btn || !panel || !input || !resultsBox) return;
 
-    btn.addEventListener('click', () => {
+    let previewAudio = null;
+    function stopPreview() {
+      if (previewAudio) { previewAudio.pause(); previewAudio = null; }
+      document.querySelectorAll('.pr-walkout-result-play.playing, .pr-walkout-play.playing')
+        .forEach(el => el.classList.remove('playing'));
+    }
+    function playPreview(url, el) {
+      if (previewAudio && previewAudio.src === url && !previewAudio.paused) { stopPreview(); return; }
+      stopPreview();
+      previewAudio = new Audio(url);
+      previewAudio.play().catch(() => {});
+      el.classList.add('playing');
+      previewAudio.addEventListener('ended', () => el.classList.remove('playing'));
+    }
+
+    function wirePlayBtn() {
+      document.getElementById('prWalkoutPlay')?.addEventListener('click', e => {
+        e.stopPropagation();
+        if (walkoutPreviewUrl) playPreview(walkoutPreviewUrl, e.currentTarget);
+      });
+    }
+    wirePlayBtn();
+
+    function refreshButton() {
+      btn.innerHTML = `
+        ${walkoutArtwork ? `<img class="pr-walkout-art" src="${esc(walkoutArtwork)}" alt="">` : '🎵'}
+        <span id="prWalkoutBtnLabel">${walkoutSong ? esc(walkoutSong) : 'Choose Your Walkout Song'}</span>
+        ${walkoutPreviewUrl ? `<span class="pr-walkout-play" id="prWalkoutPlay" title="Play preview">▶</span>` : ''}
+      `;
+      wirePlayBtn();
+    }
+
+    btn.addEventListener('click', e => {
+      if (e.target.closest('#prWalkoutPlay')) return;
       panel.style.display = panel.style.display === 'none' ? 'flex' : 'none';
-      if (panel.style.display === 'flex') input.focus();
+      if (panel.style.display === 'flex') { input.focus(); input.select(); }
+      else resultsBox.style.display = 'none';
     });
 
-    async function save(value) {
-      const clean = value.trim().slice(0, 80);
-      try {
-        await sb.from('profiles').upsert({ id: user.id, walkout_song: clean || null });
-        walkoutSong = clean;
-        btn.innerHTML = `🎵 ${clean ? esc(clean) : 'Choose Your Walkout Song'}`;
+    document.addEventListener('click', e => {
+      if (panel.style.display !== 'none' && !panel.contains(e.target) && !btn.contains(e.target)) {
         panel.style.display = 'none';
+        resultsBox.style.display = 'none';
+      }
+    });
+
+    async function persist(fields) {
+      try {
+        await sb.from('profiles').upsert({ id: user.id, ...fields });
+        return true;
       } catch {
         showFavToast("Couldn't save — try again");
+        return false;
       }
     }
 
-    document.getElementById('prWalkoutSave')?.addEventListener('click', () => save(input.value));
-    input.addEventListener('keydown', e => { if (e.key === 'Enter') save(input.value); });
-    document.getElementById('prWalkoutClear')?.addEventListener('click', () => { input.value = ''; save(''); });
+    async function saveTyped(value) {
+      const clean = value.trim().slice(0, 80);
+      walkoutSong = clean; walkoutArtwork = ''; walkoutPreviewUrl = '';
+      const ok = await persist({ walkout_song: clean || null, walkout_song_artwork: null, walkout_song_preview_url: null });
+      if (ok) { refreshButton(); panel.style.display = 'none'; resultsBox.style.display = 'none'; }
+    }
+
+    async function selectResult(track) {
+      stopPreview();
+      const display = `${track.trackName} — ${track.artistName}`.slice(0, 80);
+      walkoutSong = display;
+      walkoutArtwork = (track.artworkUrl100 || '').replace('100x100bb', '200x200bb');
+      walkoutPreviewUrl = track.previewUrl || '';
+      const ok = await persist({
+        walkout_song: display,
+        walkout_song_artwork: walkoutArtwork || null,
+        walkout_song_preview_url: walkoutPreviewUrl || null,
+      });
+      if (ok) {
+        input.value = display;
+        resultsBox.style.display = 'none';
+        refreshButton();
+        panel.style.display = 'none';
+      }
+    }
+
+    let searchSeq = 0, debounceT = null;
+    async function runSearch(term) {
+      const seq = ++searchSeq;
+      if (!term || term.trim().length < 2) {
+        resultsBox.style.display = 'none';
+        resultsBox.innerHTML = '';
+        return;
+      }
+      try {
+        const res  = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(term)}&media=music&limit=6`);
+        const data = await res.json();
+        if (seq !== searchSeq) return; // a newer keystroke already superseded this
+        const tracks = (data.results || []).filter(t => t.previewUrl);
+        if (!tracks.length) {
+          resultsBox.innerHTML = `<div class="pr-walkout-result-empty">No preview-able matches — you can still "Save as typed"</div>`;
+          resultsBox.style.display = 'block';
+          return;
+        }
+        resultsBox.innerHTML = tracks.map((t, i) => `
+          <div class="pr-walkout-result" data-idx="${i}">
+            <img src="${esc(t.artworkUrl60 || t.artworkUrl100 || '')}" alt="">
+            <div class="pr-walkout-result-info">
+              <div class="pr-walkout-result-name">${esc(t.trackName)}</div>
+              <div class="pr-walkout-result-artist">${esc(t.artistName)}</div>
+            </div>
+            <button type="button" class="pr-walkout-result-play" data-idx="${i}" title="Preview">▶</button>
+          </div>`).join('');
+        resultsBox._tracks = tracks;
+        resultsBox.style.display = 'block';
+      } catch {
+        resultsBox.style.display = 'none';
+      }
+    }
+
+    input.addEventListener('input', () => {
+      clearTimeout(debounceT);
+      const term = input.value;
+      debounceT = setTimeout(() => runSearch(term), 350);
+    });
+
+    resultsBox.addEventListener('click', e => {
+      const tracks = resultsBox._tracks || [];
+      const playBtn = e.target.closest('.pr-walkout-result-play');
+      if (playBtn) {
+        const t = tracks[+playBtn.dataset.idx];
+        if (t?.previewUrl) playPreview(t.previewUrl, playBtn);
+        return;
+      }
+      const row = e.target.closest('.pr-walkout-result');
+      if (row) {
+        const t = tracks[+row.dataset.idx];
+        if (t) selectResult(t);
+      }
+    });
+
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); saveTyped(input.value); }
+      if (e.key === 'Escape') { panel.style.display = 'none'; resultsBox.style.display = 'none'; }
+    });
+
+    document.getElementById('prWalkoutSave')?.addEventListener('click', () => saveTyped(input.value));
+    document.getElementById('prWalkoutClear')?.addEventListener('click', () => { stopPreview(); input.value = ''; saveTyped(''); });
   }
 
   function buildFollowRow() {
