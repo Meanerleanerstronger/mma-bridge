@@ -2984,13 +2984,28 @@
         "time": "2:35"
       },
       {
+        "a": "Khamzat Chimaev",
+        "b": "Robert Whittaker",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "comain",
+        "winner": "Khamzat Chimaev",
+        "method": "Submission",
+        "round": 1,
+        "time": "3:34",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/CHIMAEV_KHAMZAT_L_BELTMOCK.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-02/WHITTAKER_ROBERT_L_02-17.png"
+      },
+      {
         "a": "Magomed Ankalaev",
         "b": "Aleksandar Rakic",
         "weight": "Light Heavyweight",
         "rounds": "5 Rds",
         "titleFight": false,
         "ranked": true,
-        "slot": "comain",
+        "slot": "",
         "winner": "Magomed Ankalaev",
         "method": "Decision (unanimous)",
         "round": 3,
@@ -3010,21 +3025,6 @@
         "time": "5:00",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/MURPHY_LERONE_L_08-16.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-07/IGE_DAN_L_07-19.png"
-      },
-      {
-        "a": "Khamzat Chimaev",
-        "b": "Robert Whittaker",
-        "weight": "Middleweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": true,
-        "slot": "",
-        "winner": "Khamzat Chimaev",
-        "method": "Submission",
-        "round": 1,
-        "time": "3:34",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/CHIMAEV_KHAMZAT_L_BELTMOCK.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-02/WHITTAKER_ROBERT_L_02-17.png"
       }
     ],
     "prelims": [
@@ -12857,6 +12857,20 @@
         "round": 1
       },
       {
+        "a": "Jan Blachowicz",
+        "b": "Navajo Stirling",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "comain",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/BLACHOWICZ_JAN_L_12-06.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/STIRLING_NAVAJO_L_03-28.png",
+        "winner": "Navajo Stirling",
+        "method": "KO/TKO",
+        "round": 1
+      },
+      {
         "a": "Aleksandar Rakic",
         "b": "Marcin Tybura",
         "weight": "Heavyweight",
@@ -12894,20 +12908,6 @@
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-02/URBINA_GILBERT_L_02-03.png",
         "winner": "Gilbert Urbina",
-        "method": "KO/TKO",
-        "round": 1
-      },
-      {
-        "a": "Jan Blachowicz",
-        "b": "Navajo Stirling",
-        "weight": "Light Heavyweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "comain",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/BLACHOWICZ_JAN_L_12-06.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/STIRLING_NAVAJO_L_03-28.png",
-        "winner": "Navajo Stirling",
         "method": "KO/TKO",
         "round": 1
       }
