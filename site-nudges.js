@@ -144,6 +144,25 @@
       });
       return;
     }
+
+    // ── 3. Walkout song nudge — lowest priority, only fires if nothing
+    // more time-sensitive did. Checked live against the profile row
+    // (not a "just signed up" flag) so it naturally targets anyone who
+    // hasn't picked one yet, old account or new. ──────────────────────
+    if (isDismissed('walkout-song', 'walkout')) return;
+    try {
+      const { data } = await sb.from('profiles').select('walkout_song').eq('id', uid).single();
+      if (data?.walkout_song) return;
+    } catch { return; }
+
+    markShownThisSession();
+    showBubble({
+      text: `🎵 You haven't picked a <strong>walkout song</strong> yet — show up to the octagon in style.`,
+      ctaText: 'Pick Your Walkout Song',
+      ctaHref: 'profile.html?walkout=1',
+      eventId: 'walkout-song',
+      type: 'walkout',
+    });
   }
 
   function init() {

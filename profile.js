@@ -825,9 +825,13 @@
           <div class="pr-info">
             <div class="pr-label">Fighter Profile</div>
             <h1 class="pr-name">${esc(user.display_name || 'Fighter')}</h1>
+            <div class="pr-walkout-tag" id="prWalkoutTag">
+              <span class="pr-walkout-tag-arrow">↘</span>
+              <span>Walkout Song</span>
+            </div>
             <button class="pr-walkout-btn" id="prWalkoutBtn" type="button">
-              ${walkoutArtwork ? `<img class="pr-walkout-art" src="${esc(walkoutArtwork)}" alt="">` : '🎵'}
-              <span id="prWalkoutBtnLabel">${walkoutSong ? esc(walkoutSong) : 'Choose Your Walkout Song'}</span>
+              <span class="pr-walkout-note">${walkoutArtwork ? `<img class="pr-walkout-art" src="${esc(walkoutArtwork)}" alt="">` : '🎵'}</span>
+              <span id="prWalkoutBtnLabel">${walkoutSong ? esc(walkoutSong) : 'Pick Your Walkout Song'}</span>
               ${walkoutPreviewUrl ? `<span class="pr-walkout-play" id="prWalkoutPlay" title="Play preview">▶</span>` : ''}
             </button>
             <div class="pr-walkout-edit" id="prWalkoutEdit" style="display:none">
@@ -1174,8 +1178,8 @@
 
     function refreshButton() {
       btn.innerHTML = `
-        ${walkoutArtwork ? `<img class="pr-walkout-art" src="${esc(walkoutArtwork)}" alt="">` : '🎵'}
-        <span id="prWalkoutBtnLabel">${walkoutSong ? esc(walkoutSong) : 'Choose Your Walkout Song'}</span>
+        <span class="pr-walkout-note">${walkoutArtwork ? `<img class="pr-walkout-art" src="${esc(walkoutArtwork)}" alt="">` : '🎵'}</span>
+        <span id="prWalkoutBtnLabel">${walkoutSong ? esc(walkoutSong) : 'Pick Your Walkout Song'}</span>
         ${walkoutPreviewUrl ? `<span class="pr-walkout-play" id="prWalkoutPlay" title="Play preview">▶</span>` : ''}
       `;
       wirePlayBtn();
@@ -1293,6 +1297,28 @@
 
     document.getElementById('prWalkoutSave')?.addEventListener('click', () => saveTyped(input.value));
     document.getElementById('prWalkoutClear')?.addEventListener('click', () => { stopPreview(); input.value = ''; saveTyped(''); });
+
+    // ── Onboarding: arrived via the site-nudges.js "pick a walkout song"
+    // bubble (profile.html?walkout=1). Scroll down to the button so it's
+    // dead-center, pulse the tag + button for a beat, scroll back up, then
+    // auto-open the picker so they land straight in the search box.
+    if (new URLSearchParams(location.search).get('walkout') === '1') {
+      const tag = document.getElementById('prWalkoutTag');
+      setTimeout(() => {
+        btn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        tag?.classList.add('pr-walkout-tag-pulse');
+        btn.classList.add('pr-walkout-btn-pulse');
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          setTimeout(() => {
+            tag?.classList.remove('pr-walkout-tag-pulse');
+            btn.classList.remove('pr-walkout-btn-pulse');
+            btn.click();
+          }, 700);
+        }, 2200);
+      }, 500);
+      history.replaceState(null, '', location.pathname);
+    }
   }
 
   function buildFollowRow() {

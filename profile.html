@@ -848,43 +848,84 @@
     .pr-challenge-btn:hover { background: rgba(242, 96, 15,0.16); border-color: rgba(242, 96, 15,0.5); }
 
     /* ── WALKOUT SONG ── */
-    .pr-walkout-btn {
-      display: inline-flex; align-items: center; gap: 6px;
+    /* Persistent label + arrow pointing at the button, always visible
+       (not just during onboarding) — so it reads as a named feature on
+       anyone's profile, not a mystery pill. */
+    .pr-walkout-tag {
+      display: flex; align-items: center; gap: 5px;
       font-family: 'Montserrat', sans-serif; font-weight: 800;
-      font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase;
-      padding: 6px 12px; border-radius: 6px; margin-top: 4px;
-      background: rgba(194, 74, 8,.15); border: 1px solid rgba(194, 74, 8,.4);
-      color: #c24a08; cursor: pointer; max-width: 320px;
-      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-      transition: background 0.15s, border-color 0.15s;
+      font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: rgba(242, 96, 15,0.75);
+      margin: 10px 0 6px;
     }
-    .pr-walkout-btn:hover { background: rgba(194, 74, 8,.24); border-color: rgba(194, 74, 8,.6); }
+    .pr-walkout-tag-arrow { font-size: 0.9rem; line-height: 1; transform: translateY(1px); }
+    .pr-walkout-tag-pulse { animation: prWalkoutTagPulse 0.9s ease-in-out 3; }
+    @keyframes prWalkoutTagPulse {
+      0%, 100% { color: rgba(242, 96, 15,0.75); }
+      50% { color: #ffb066; }
+    }
+    .pr-walkout-btn {
+      display: inline-flex; align-items: center; gap: 9px;
+      font-family: 'Montserrat', sans-serif; font-weight: 900;
+      font-size: 0.92rem; letter-spacing: 0.01em;
+      padding: 12px 20px; border-radius: 12px;
+      background: linear-gradient(135deg, #ff8a3d 0%, #f2600f 55%, #c24a08 100%);
+      border: none; color: #0a0a0a; cursor: pointer; max-width: 340px;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      box-shadow: 0 6px 22px rgba(242,96,15,0.35), inset 0 1px 0 rgba(255,255,255,0.35);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    .pr-walkout-btn:hover {
+      transform: translateY(-2px) scale(1.015);
+      box-shadow: 0 10px 30px rgba(242,96,15,0.5), inset 0 1px 0 rgba(255,255,255,0.4);
+    }
+    .pr-walkout-btn:active { transform: translateY(0) scale(0.99); }
+    .pr-walkout-note { display: inline-flex; animation: prWalkoutBob 1.8s ease-in-out infinite; }
+    @keyframes prWalkoutBob {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-2px) rotate(-8deg); }
+    }
+    .pr-walkout-btn-pulse {
+      animation: prWalkoutBtnPulse 0.9s ease-in-out 3;
+    }
+    @keyframes prWalkoutBtnPulse {
+      0%, 100% { box-shadow: 0 6px 22px rgba(242,96,15,0.35), inset 0 1px 0 rgba(255,255,255,0.35); }
+      50% { box-shadow: 0 6px 34px rgba(242,96,15,0.85), 0 0 0 6px rgba(242,96,15,0.18), inset 0 1px 0 rgba(255,255,255,0.4); }
+    }
     .pr-walkout-edit {
-      display: none; align-items: center; gap: 8px; margin-top: 10px; flex-wrap: wrap;
+      display: none; align-items: center; gap: 10px; margin-top: 14px; flex-wrap: wrap;
     }
     .pr-walkout-edit input {
-      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.14);
-      border-radius: 6px; color: #fff; font-family: 'Inter', sans-serif;
-      font-size: 0.82rem; padding: 7px 10px; width: 220px;
+      background: rgba(255,255,255,0.05); border: 1.5px solid rgba(242,96,15,0.3);
+      border-radius: 10px; color: #fff; font-family: 'Inter', sans-serif;
+      font-size: 0.9rem; padding: 11px 14px; width: 260px;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .pr-walkout-edit input:focus {
+      outline: none; border-color: rgba(242,96,15,0.7); background: rgba(255,255,255,0.07);
     }
     .pr-walkout-edit button {
-      font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.68rem;
-      letter-spacing: 0.06em; text-transform: uppercase; padding: 7px 14px;
-      border-radius: 6px; cursor: pointer; border: none;
-      background: #f2600f; color: #000;
+      font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.72rem;
+      letter-spacing: 0.06em; text-transform: uppercase; padding: 11px 18px;
+      border-radius: 10px; cursor: pointer; border: none;
+      background: linear-gradient(135deg, #ff8a3d 0%, #f2600f 100%); color: #0a0a0a;
+      box-shadow: 0 4px 14px rgba(242,96,15,0.3);
+      transition: transform 0.15s ease;
     }
+    .pr-walkout-edit button:hover { transform: translateY(-1px); }
     .pr-walkout-edit button.pr-walkout-clear {
       background: transparent; border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.6);
+      box-shadow: none;
     }
-    body.light-mode .pr-walkout-edit input { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.14); color: #111; }
-    .pr-walkout-art { width: 16px; height: 16px; border-radius: 3px; object-fit: cover; flex-shrink: 0; }
+    body.light-mode .pr-walkout-edit input { background: rgba(0,0,0,0.03); border-color: rgba(194,74,8,0.3); color: #111; }
+    .pr-walkout-art { width: 22px; height: 22px; border-radius: 5px; object-fit: cover; flex-shrink: 0; }
     .pr-walkout-play {
       display: inline-flex; align-items: center; justify-content: center;
-      width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0;
-      background: rgba(194, 74, 8,.35); font-size: 0.5rem; line-height: 1;
+      width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(0,0,0,0.25); color: #fff; font-size: 0.58rem; line-height: 1;
       padding-left: 1px;
     }
-    .pr-walkout-play.playing { background: #f2600f; color: #000; }
+    .pr-walkout-play.playing { background: #0a0a0a; color: #ff8a3d; }
     .pr-walkout-search-wrap { position: relative; }
     .pr-walkout-results {
       position: absolute; top: calc(100% + 6px); left: 0; z-index: 20;
@@ -1006,11 +1047,11 @@
   <script src="search.js"></script>
   <script src="ux.js?v=1.0"></script>
   <script src="premium.js?v=3.10"></script>
-  <script type="module" src="profile.js?v=1.4"></script>
+  <script type="module" src="profile.js?v=1.5"></script>
 <script src="notifications.js?v=2.7"></script>
 <script src="push.js?v=1.2"></script>
 <script src="animations.js?v=2.0"></script>
   <script src="social-follow.js?v=1.0"></script>
-  <script src="site-nudges.js?v=1.0"></script>
+  <script src="site-nudges.js?v=1.1"></script>
 </body>
 </html>
