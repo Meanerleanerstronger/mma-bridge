@@ -74,6 +74,41 @@
     setTimeout(() => document.addEventListener('click', onOutside, true), 80);
   }
 
+  function showModal({ icon, title, text, ctaText, ctaHref, eventId, type }) {
+    document.querySelectorAll('.sn-modal-backdrop').forEach(b => b.remove());
+
+    const backdrop = document.createElement('div');
+    backdrop.className = 'sn-modal-backdrop';
+    backdrop.innerHTML = `
+      <div class="sn-modal">
+        <button class="sn-modal-close" type="button" aria-label="Close">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <div class="sn-modal-icon">${icon}</div>
+        <div class="sn-modal-title">${esc(title)}</div>
+        <div class="sn-modal-text">${text}</div>
+        <a class="sn-modal-cta" href="${esc(ctaHref)}">${esc(ctaText)}</a>
+        <button class="sn-modal-later" type="button">Maybe later</button>
+      </div>`;
+    document.body.appendChild(backdrop);
+
+    requestAnimationFrame(() => requestAnimationFrame(() => backdrop.classList.add('sn-in')));
+
+    let closed = false;
+    const close = () => {
+      if (closed) return;
+      closed = true;
+      backdrop.classList.remove('sn-in');
+      setTimeout(() => backdrop.remove(), 220);
+    };
+    backdrop.querySelector('.sn-modal-close').addEventListener('click', close);
+    backdrop.querySelector('.sn-modal-later').addEventListener('click', close);
+    backdrop.addEventListener('click', e => { if (e.target === backdrop) close(); });
+    document.addEventListener('keydown', function onEsc(e) {
+      if (e.key === 'Escape') { close(); document.removeEventListener('keydown', onEsc); }
+    });
+  }
+
   async function checkAndShow() {
     const uid = window.MMABridgeAuth?.getUser()?.id;
     if (!uid) return;
@@ -145,20 +180,24 @@
       return;
     }
 
-    // ── 3. Walkout song nudge — lowest priority, only fires if nothing
+    // ── 3. Walkout song popup — lowest priority, only fires if nothing
     // more time-sensitive did. Checked live against the profile row
     // (not a "just signed up" flag) so it naturally targets anyone who
-    // hasn't picked one yet, old account or new. ──────────────────────
-    if (isDismissed('walkout-song', 'walkout')) return;
+    // hasn't picked one yet, old account or new. A real modal rather than
+    // a corner bubble — and deliberately NOT permanently dismissible on
+    // "Maybe later" (no dismissForever call), so it comes back next
+    // session until they actually pick a song, not forever once ignored.
     try {
       const { data } = await sb.from('profiles').select('walkout_song').eq('id', uid).single();
       if (data?.walkout_song) return;
     } catch { return; }
 
     markShownThisSession();
-    showBubble({
-      text: `🎵 You haven't picked a <strong>walkout song</strong> yet — show up to the octagon in style.`,
-      ctaText: 'Pick Your Walkout Song',
+    showModal({
+      icon: '🎵',
+      title: 'Pick Your Walkout Song',
+      text: `Every fighter needs an entrance. Set the track that plays in your head when you walk into the octagon — it'll show right on your profile.`,
+      ctaText: 'Choose Your Song',
       ctaHref: 'profile.html?walkout=1',
       eventId: 'walkout-song',
       type: 'walkout',

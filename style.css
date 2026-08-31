@@ -14074,6 +14074,64 @@ body.light-mode .sn-text strong { color: #14100c; }
 body.light-mode .sn-close { background: rgba(0,0,0,.05); color: rgba(0,0,0,.45); }
 body.light-mode .sn-close:hover { background: rgba(0,0,0,.1); color: #000; }
 body.light-mode .sn-later { color: rgba(20,16,12,.4); }
+
+/* ── Walkout song popup — centered blocking modal, not a corner bubble.
+   Higher-ceremony than the pick/review nudges since this is a one-time
+   "welcome, make this yours" moment rather than a recurring reminder. ── */
+.sn-modal-backdrop {
+  position: fixed; inset: 0; z-index: 10001;
+  background: rgba(0,0,0,.65); backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity .25s ease;
+  padding: 20px;
+}
+.sn-modal-backdrop.sn-in { opacity: 1; }
+.sn-modal {
+  background: #14100c; border: 1px solid rgba(242,96,15,.35);
+  border-radius: 20px; padding: 36px 32px 28px;
+  max-width: 400px; width: 100%; text-align: center;
+  box-shadow: 0 30px 80px rgba(0,0,0,.6), 0 0 60px rgba(242,96,15,.18);
+  transform: scale(.9) translateY(16px); transition: transform .3s cubic-bezier(.2,.9,.3,1.3);
+}
+.sn-modal-backdrop.sn-in .sn-modal { transform: scale(1) translateY(0); }
+.sn-modal-icon { font-size: 2.4rem; margin-bottom: 14px; animation: snModalBob 1.8s ease-in-out infinite; }
+@keyframes snModalBob { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-4px) rotate(-6deg); } }
+.sn-modal-title {
+  font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.3rem;
+  color: #fff; margin-bottom: 10px;
+}
+.sn-modal-text {
+  font-family: 'Inter', sans-serif; font-size: .92rem; line-height: 1.55;
+  color: rgba(255,255,255,.7); margin-bottom: 22px;
+}
+.sn-modal-cta {
+  display: block; text-align: center; text-decoration: none;
+  background: linear-gradient(135deg, #ff8a3d 0%, #f2600f 55%, #c24a08 100%);
+  color: #0a0a0a; font-family: 'Montserrat', sans-serif; font-weight: 900;
+  font-size: .88rem; letter-spacing: .03em; text-transform: uppercase;
+  border-radius: 12px; padding: 14px 18px; margin-bottom: 12px;
+  box-shadow: 0 6px 22px rgba(242,96,15,.35); transition: transform .15s ease;
+}
+.sn-modal-cta:hover { transform: translateY(-2px); }
+.sn-modal-later {
+  background: none; border: none; cursor: pointer;
+  font-family: 'Inter', sans-serif; font-size: .78rem;
+  color: rgba(255,255,255,.4); text-decoration: underline; text-underline-offset: 2px;
+}
+.sn-modal-later:hover { color: rgba(255,255,255,.65); }
+.sn-modal-close {
+  position: absolute; top: 14px; right: 14px;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: rgba(255,255,255,.06); border: none; cursor: pointer;
+  color: rgba(255,255,255,.5); display: flex; align-items: center; justify-content: center;
+}
+.sn-modal { position: relative; }
+.sn-modal-close:hover { background: rgba(255,255,255,.12); color: #fff; }
+body.light-mode .sn-modal { background: #fffaf5; border-color: rgba(242,96,15,.4); }
+body.light-mode .sn-modal-title { color: #14100c; }
+body.light-mode .sn-modal-text { color: rgba(20,16,12,.7); }
+body.light-mode .sn-modal-later { color: rgba(20,16,12,.4); }
+body.light-mode .sn-modal-close { background: rgba(0,0,0,.05); color: rgba(0,0,0,.45); }
 body.light-mode .sn-later:hover { color: rgba(20,16,12,.65); }
 
 /* ======= LEADERBOARD MODALS — Create/Join Group, View Picks =======
