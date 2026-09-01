@@ -1283,6 +1283,15 @@
 
     async function saveTyped(value) {
       const clean = value.trim().slice(0, 80);
+      // The dropdown being open means these results are for what's
+      // currently typed — "Save as typed" while they're showing almost
+      // always means "the song I just searched," not literally the raw
+      // text, so use the top match's real artwork/preview instead of
+      // silently discarding it (this was the actual bug behind two
+      // consecutive songs saving with no preview button at all).
+      const tracks = resultsBox._tracks || [];
+      if (resultsBox.style.display === 'block' && tracks.length) { await selectResult(tracks[0]); return; }
+
       walkoutSong = clean; walkoutArtwork = ''; walkoutPreviewUrl = '';
       const ok = await persist({ walkout_song: clean || null, walkout_song_artwork: null, walkout_song_preview_url: null });
       if (ok) { refreshButton(); panel.style.display = 'none'; resultsBox.style.display = 'none'; }
