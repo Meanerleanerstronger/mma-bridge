@@ -82,7 +82,7 @@
     "nationality": "American",
     "flag": "🇺🇸",
     "weightClass": "Heavyweight",
-    "ranking": "#7",
+    "ranking": "#6",
     "ranking_change": 1,
     "record": {
       "wins": 19,
@@ -670,7 +670,7 @@
     "nationality": "American",
     "flag": "🇺🇸",
     "weightClass": "Light Heavyweight",
-    "ranking": "#5",
+    "ranking": "#4",
     "ranking_change": 2,
     "record": {
       "wins": 15,
@@ -2552,7 +2552,7 @@
     "nationality": "American",
     "flag": "🇺🇸",
     "weightClass": "Bantamweight",
-    "ranking": "#5",
+    "ranking": "#6",
     "ranking_change": 0,
     "record": {
       "wins": 18,
@@ -2627,7 +2627,7 @@
     "nationality": "Russian",
     "flag": "🇷🇺",
     "weightClass": "Bantamweight",
-    "ranking": "#3",
+    "ranking": "#4",
     "ranking_change": 1,
     "record": {
       "wins": 20,
@@ -2983,7 +2983,7 @@
     "nationality": "Mexican",
     "flag": "🇲🇽",
     "weightClass": "Flyweight",
-    "ranking": "#9",
+    "ranking": "#8",
     "ranking_change": 1,
     "record": {
       "wins": 23,
@@ -6936,7 +6936,7 @@
     "nationality": "American",
     "flag": "🇺🇸",
     "weightClass": "Bantamweight",
-    "ranking": "#4",
+    "ranking": "#5",
     "record": {
       "wins": 18,
       "losses": 3,
@@ -7072,7 +7072,7 @@
     "nationality": "Iraqi",
     "flag": "🇮🇶",
     "weightClass": "Flyweight",
-    "ranking": "#8",
+    "ranking": "#9",
     "record": {
       "wins": 17,
       "losses": 3,
@@ -7454,7 +7454,7 @@
     "nationality": "Australian",
     "flag": "🇦🇺",
     "weightClass": "Flyweight",
-    "ranking": "#10",
+    "ranking": "#11",
     "record": {
       "wins": 14,
       "losses": 5,
@@ -8257,7 +8257,7 @@
     "nationality": "Brazilian",
     "flag": "🇧🇷",
     "weightClass": "Lightweight",
-    "ranking": "#10",
+    "ranking": "#11",
     "record": {
       "wins": 21,
       "losses": 7,
@@ -8884,7 +8884,7 @@
     "nationality": "American",
     "flag": "🇺🇸",
     "weightClass": "Middleweight",
-    "ranking": "#14",
+    "ranking": "#13",
     "record": {
       "wins": 9,
       "losses": 1,
@@ -9786,7 +9786,7 @@
     "nationality": "American",
     "flag": "🇺🇸",
     "weightClass": "Heavyweight",
-    "ranking": "#11",
+    "ranking": "#12",
     "record": {
       "wins": 29,
       "losses": 14,
@@ -10061,7 +10061,7 @@
     "nationality": "Chinese",
     "flag": "🇨🇳",
     "weightClass": "Women's Strawweight",
-    "ranking": "#4",
+    "ranking": "#5",
     "record": {
       "wins": 19,
       "losses": 6,
@@ -11000,7 +11000,8 @@
     "reach": "68\"",
     "statsSyncedAt": "2026-08-20T09:34:56.693Z",
     "nationality": "Canadian",
-    "flag": "🇨🇦"
+    "flag": "🇨🇦",
+    "ranking": "#7"
   },
   {
     "id": "kyle-daukaus",
@@ -11144,7 +11145,8 @@
     "reach": "72.5\"",
     "statsSyncedAt": "2026-08-20T09:35:02.472Z",
     "nationality": "Brazilian",
-    "flag": "🇧🇷"
+    "flag": "🇧🇷",
+    "ranking": "#2"
   },
   {
     "id": "steve-garcia",
@@ -11213,7 +11215,8 @@
     "reach": "75\"",
     "statsSyncedAt": "2026-08-20T09:35:05.109Z",
     "nationality": "American",
-    "flag": "🇺🇸"
+    "flag": "🇺🇸",
+    "ranking": "#10"
   },
   {
     "id": "josh-hokit",
@@ -11274,7 +11277,8 @@
     "reach": "73.5\"",
     "statsSyncedAt": "2026-08-20T09:35:08.011Z",
     "nationality": "American",
-    "flag": "🇺🇸"
+    "flag": "🇺🇸",
+    "ranking": "#4"
   },
   {
     "id": "kyoji-horiguchi",
@@ -11343,7 +11347,8 @@
     "reach": "69\"",
     "statsSyncedAt": "2026-08-20T09:35:10.693Z",
     "nationality": "Japanese",
-    "flag": "🇯🇵"
+    "flag": "🇯🇵",
+    "ranking": "#5"
   },
   {
     "id": "vinicius-oliveira",
@@ -11629,7 +11634,8 @@
     "stance": "Orthodox",
     "statsSyncedAt": "2026-08-20T09:35:19.475Z",
     "nationality": "Brazilian",
-    "flag": "🇧🇷"
+    "flag": "🇧🇷",
+    "ranking": "#10"
   },
   {
     "id": "ion-cutelaba",
@@ -11774,7 +11780,8 @@
     "stance": "Orthodox",
     "statsSyncedAt": "2026-08-20T09:35:25.304Z",
     "nationality": "New Zealander",
-    "flag": "🇳🇿"
+    "flag": "🇳🇿",
+    "ranking": "#5"
   },
   {
     "id": "farid-basharat",
@@ -11844,7 +11851,8 @@
     "reach": "71\"",
     "statsSyncedAt": "2026-08-20T09:35:28.062Z",
     "nationality": "British",
-    "flag": "🇬🇧"
+    "flag": "🇬🇧",
+    "ranking": "#14"
   },
   {
     "id": "ethyn-ewing",
@@ -12073,7 +12081,8 @@
     "reach": "67\"",
     "statsSyncedAt": "2026-08-20T09:35:36.321Z",
     "nationality": "Brazilian",
-    "flag": "🇧🇷"
+    "flag": "🇧🇷",
+    "ranking": "#11"
   },
   {
     "id": "andre-lima",
@@ -12662,7 +12671,8 @@
     "reach": "71.5\"",
     "statsSyncedAt": "2026-08-20T09:35:56.063Z",
     "nationality": "Kyrgyzstani",
-    "flag": "🇰🇬"
+    "flag": "🇰🇬",
+    "ranking": "#12"
   },
   {
     "id": "manuel-torres",
@@ -12732,7 +12742,8 @@
     "reach": "73\"",
     "statsSyncedAt": "2026-08-20T09:35:58.699Z",
     "nationality": "Mexican",
-    "flag": "🇲🇽"
+    "flag": "🇲🇽",
+    "ranking": "#15"
   },
   {
     "id": "shara-magomedov",
@@ -13141,7 +13152,8 @@
     "reach": "76\"",
     "statsSyncedAt": "2026-08-20T09:36:10.328Z",
     "nationality": "Russian",
-    "flag": "🇷🇺"
+    "flag": "🇷🇺",
+    "ranking": "#12"
   },
   {
     "id": "asu-almabayev",
@@ -13211,7 +13223,8 @@
     "reach": "65\"",
     "statsSyncedAt": "2026-08-20T09:36:12.954Z",
     "nationality": "Kazakhstani",
-    "flag": "🇰🇿"
+    "flag": "🇰🇿",
+    "ranking": "#7"
   },
   {
     "id": "charles-johnson",
@@ -13633,7 +13646,8 @@
     "reach": "76\"",
     "statsSyncedAt": "2026-08-20T09:36:21.352Z",
     "nationality": "Russian",
-    "flag": "🇷🇺"
+    "flag": "🇷🇺",
+    "ranking": "#7"
   },
   {
     "id": "tyrell-fortune",
@@ -13741,7 +13755,8 @@
     "reach": "75.5\"",
     "statsSyncedAt": "2026-08-20T09:36:24.236Z",
     "nationality": "American",
-    "flag": "🇺🇸"
+    "flag": "🇺🇸",
+    "ranking": "#14"
   },
   {
     "id": "nursulton-ruziboev",
@@ -14647,7 +14662,8 @@
     "reach": "67\"",
     "statsSyncedAt": "2026-08-20T09:36:49.392Z",
     "nationality": "English",
-    "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿"
+    "flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+    "ranking": "#6"
   },
   {
     "id": "ferreira",
@@ -15015,7 +15031,8 @@
     "reach": "65\"",
     "statsSyncedAt": "2026-08-20T09:36:58.161Z",
     "nationality": "American",
-    "flag": "🇺🇸"
+    "flag": "🇺🇸",
+    "ranking": "#9"
   },
   {
     "id": "wang-cong",
@@ -15084,7 +15101,8 @@
     "reach": "65.5\"",
     "statsSyncedAt": "2026-08-20T09:37:00.705Z",
     "nationality": "Chinese",
-    "flag": "🇨🇳"
+    "flag": "🇨🇳",
+    "ranking": "#8"
   },
   {
     "id": "kai-kamaka-iii",
@@ -15845,7 +15863,8 @@
     "reach": "67\"",
     "statsSyncedAt": "2026-08-20T09:37:20.424Z",
     "nationality": "Chinese",
-    "flag": "🇨🇳"
+    "flag": "🇨🇳",
+    "ranking": "#3"
   },
   {
     "id": "natalia-silva",
@@ -16063,7 +16082,8 @@
     "reach": "68\"",
     "statsSyncedAt": "2026-08-20T09:37:26.304Z",
     "nationality": "Brazilian",
-    "flag": "🇧🇷"
+    "flag": "🇧🇷",
+    "ranking": "#9"
   },
   {
     "id": "modestas-bukauskas",
@@ -16311,7 +16331,8 @@
     "reach": "65\"",
     "statsSyncedAt": "2026-08-20T09:37:32.178Z",
     "nationality": "American",
-    "flag": "🇺🇸"
+    "flag": "🇺🇸",
+    "ranking": "#15"
   },
   {
     "id": "ricky-turcios",
@@ -16696,7 +16717,8 @@
     "stance": "Orthodox",
     "statsSyncedAt": "2026-08-20T09:37:46.274Z",
     "nationality": "New Zealander",
-    "flag": "🇳🇿"
+    "flag": "🇳🇿",
+    "ranking": "#10"
   },
   {
     "id": "tallison-teixeira",
@@ -16994,7 +17016,8 @@
     "reach": "75\"",
     "statsSyncedAt": "2026-08-21T09:37:53.371Z",
     "nationality": "Australian",
-    "flag": "🇦🇺"
+    "flag": "🇦🇺",
+    "ranking": "#8"
   },
   {
     "id": "jamie-mullarkey",
@@ -19389,7 +19412,8 @@
     "nickname": "Amandinha",
     "statsSyncedAt": "2026-08-21T09:39:36.007Z",
     "nationality": "Brazilian",
-    "flag": "🇧🇷"
+    "flag": "🇧🇷",
+    "ranking": "#12"
   },
   {
     "id": "zach-reese",
@@ -19937,7 +19961,8 @@
     "stance": "Southpaw",
     "statsSyncedAt": "2026-08-21T09:40:05.511Z",
     "nationality": "Mexican-American",
-    "flag": "🇺🇸"
+    "flag": "🇺🇸",
+    "ranking": "#12"
   },
   {
     "id": "rob-font",
@@ -20237,7 +20262,8 @@
     "reach": "75\"",
     "statsSyncedAt": "2026-08-21T09:40:14.293Z",
     "nationality": "Brazilian",
-    "flag": "🇧🇷"
+    "flag": "🇧🇷",
+    "ranking": "#7"
   },
   {
     "id": "brunno-ferreira",
@@ -20687,7 +20713,8 @@
     "reach": "76\"",
     "statsSyncedAt": "2026-08-21T09:40:31.820Z",
     "nationality": "Uzbekistani",
-    "flag": "🇺🇿"
+    "flag": "🇺🇿",
+    "ranking": "#11"
   },
   {
     "id": "nurullo-aliev",
@@ -21926,7 +21953,8 @@
     "reach": "75.0\"",
     "statsSyncedAt": "2026-08-21T09:41:32.842Z",
     "nationality": "American",
-    "flag": "🇺🇸"
+    "flag": "🇺🇸",
+    "ranking": "#6"
   },
   {
     "id": "michael-chiesa",
@@ -23089,7 +23117,8 @@
     "weightClass": "Women's Flyweight",
     "statsSyncedAt": "2026-08-21T09:42:24.790Z",
     "nationality": "Australian",
-    "flag": "🇦🇺"
+    "flag": "🇦🇺",
+    "ranking": "#12"
   },
   {
     "id": "gabriella-fernandes",
@@ -23159,7 +23188,8 @@
     "weightClass": "Women's Flyweight",
     "statsSyncedAt": "2026-08-22T09:27:34.454Z",
     "nationality": "Brazilian",
-    "flag": "🇧🇷"
+    "flag": "🇧🇷",
+    "ranking": "#14"
   },
   {
     "id": "bruno-lopes",
@@ -23359,7 +23389,8 @@
     "weightClass": "Women's Strawweight",
     "statsSyncedAt": "2026-08-22T09:27:40.225Z",
     "nationality": "Brazilian",
-    "flag": "🇧🇷"
+    "flag": "🇧🇷",
+    "ranking": "#11"
   },
   {
     "id": "abdul-rakhman-yakhyaev",
@@ -24460,7 +24491,8 @@
     "weightClass": "Light Heavyweight",
     "statsSyncedAt": "2026-08-22T09:28:32.396Z",
     "nationality": "Russian",
-    "flag": "🇷🇺"
+    "flag": "🇷🇺",
+    "ranking": "#8"
   },
   {
     "id": "dominick-reyes",
@@ -24570,7 +24602,8 @@
     "weightClass": "Light Heavyweight",
     "statsSyncedAt": "2026-08-22T09:28:35.286Z",
     "nationality": "American",
-    "flag": "🇺🇸"
+    "flag": "🇺🇸",
+    "ranking": "#10"
   },
   {
     "id": "johnny-walker",
@@ -24678,7 +24711,8 @@
     "weightClass": "Light Heavyweight",
     "statsSyncedAt": "2026-08-22T09:28:38.209Z",
     "nationality": "Brazilian",
-    "flag": "🇧🇷"
+    "flag": "🇧🇷",
+    "ranking": "#13"
   },
   {
     "id": "cub-swanson",
@@ -25048,7 +25082,8 @@
     "weightClass": "Featherweight",
     "statsSyncedAt": "2026-08-22T09:28:46.500Z",
     "nationality": "American",
-    "flag": "🇺🇸"
+    "flag": "🇺🇸",
+    "ranking": "#12"
   },
   {
     "id": "patricio-pitbull",
@@ -25154,7 +25189,8 @@
     "height": "5'6\"",
     "reach": "65.5\"",
     "weightClass": "Featherweight",
-    "statsSyncedAt": "2026-08-22T09:28:49.351Z"
+    "statsSyncedAt": "2026-08-22T09:28:49.351Z",
+    "ranking": "#15"
   },
   {
     "id": "kevin-holland",
@@ -25471,7 +25507,8 @@
     "stance": "Southpaw",
     "statsSyncedAt": "2026-08-22T09:28:57.644Z",
     "nationality": "Polish",
-    "flag": "🇵🇱"
+    "flag": "🇵🇱",
+    "ranking": "#9"
   },
   {
     "id": "esteban-ribovics",
@@ -26207,7 +26244,8 @@
     "weightClass": "Welterweight",
     "statsSyncedAt": "2026-08-22T09:29:17.144Z",
     "nationality": "Canadian",
-    "flag": "🇨🇦"
+    "flag": "🇨🇦",
+    "ranking": "#13"
   },
   {
     "id": "charles-jourdain",
@@ -27271,7 +27309,8 @@
     "reach": "68.5\"",
     "statsSyncedAt": "2026-08-22T09:29:58.491Z",
     "nationality": "Canadian",
-    "flag": "🇨🇦"
+    "flag": "🇨🇦",
+    "ranking": "#15"
   },
   {
     "id": "daria-zheleznyakova",
@@ -27403,7 +27442,8 @@
     "reach": "67.5\"",
     "statsSyncedAt": "2026-08-22T09:30:01.455Z",
     "nationality": "American",
-    "flag": "🇺🇸"
+    "flag": "🇺🇸",
+    "ranking": "#15"
   },
   {
     "id": "jamey-lyn-horth",
@@ -27734,7 +27774,8 @@
     "reach": "71\"",
     "statsSyncedAt": "2026-08-23T09:27:31.942Z",
     "nationality": "American",
-    "flag": "🇺🇸"
+    "flag": "🇺🇸",
+    "ranking": "#4"
   },
   {
     "id": "youssef-zalal",
@@ -27804,7 +27845,8 @@
     "stance": "Orthodox",
     "statsSyncedAt": "2026-08-23T09:27:34.811Z",
     "nationality": "Moroccan",
-    "flag": "🇲🇦"
+    "flag": "🇲🇦",
+    "ranking": "#8"
   },
   {
     "id": "norma-dumont",
@@ -28565,7 +28607,8 @@
     "reach": "67\"",
     "statsSyncedAt": "2026-08-23T09:27:53.897Z",
     "nationality": "Brazilian",
-    "flag": "🇧🇷"
+    "flag": "🇧🇷",
+    "ranking": "#13"
   },
   {
     "id": "marcus-buchecha",
@@ -29129,7 +29172,8 @@
     "reach": "68.5\"",
     "statsSyncedAt": "2026-08-23T09:28:13.580Z",
     "nationality": "New Zealander",
-    "flag": "🇳🇿"
+    "flag": "🇳🇿",
+    "ranking": "#12"
   },
   {
     "id": "jafel-filho",
@@ -29663,7 +29707,8 @@
     "reach": "72.0\"",
     "statsSyncedAt": "2026-08-23T09:28:35.593Z",
     "nationality": "Iranian-American",
-    "flag": "🇺🇸"
+    "flag": "🇺🇸",
+    "ranking": "#14"
   },
   {
     "id": "tim-elliott",
@@ -29771,7 +29816,8 @@
     "reach": "66.0\"",
     "statsSyncedAt": "2026-08-23T09:28:38.170Z",
     "nationality": "American",
-    "flag": "🇺🇸"
+    "flag": "🇺🇸",
+    "ranking": "#12"
   },
   {
     "id": "shamil-gaziev",
@@ -30700,7 +30746,8 @@
     "height": "5'8\"",
     "statsSyncedAt": "2026-08-23T09:29:21.223Z",
     "nationality": "American",
-    "flag": "🇺🇸"
+    "flag": "🇺🇸",
+    "ranking": "#10"
   },
   {
     "id": "king-green",
@@ -31457,7 +31504,8 @@
     "weightClass": "Welterweight",
     "statsSyncedAt": "2026-08-23T09:29:40.974Z",
     "nationality": "Ukrainian",
-    "flag": "🇺🇦"
+    "flag": "🇺🇦",
+    "ranking": "#11"
   },
   {
     "id": "jim-miller",
@@ -32259,7 +32307,8 @@
     "weightClass": "Featherweight",
     "statsSyncedAt": "2026-08-23T09:30:11.568Z",
     "nationality": "Brazilian",
-    "flag": "🇧🇷"
+    "flag": "🇧🇷",
+    "ranking": "#13"
   },
   {
     "id": "dooho-choi",
@@ -33188,7 +33237,8 @@
     "reach": "70\"",
     "statsSyncedAt": "2026-08-24T09:48:09.830Z",
     "nationality": "Portuguese",
-    "flag": "🇵🇹"
+    "flag": "🇵🇹",
+    "ranking": "#9"
   },
   {
     "id": "andre-petroski",
@@ -33661,7 +33711,8 @@
     "weightClass": "Light Heavyweight",
     "height": "6'0\"",
     "reach": "76\"",
-    "statsSyncedAt": "2026-08-24T09:48:31.463Z"
+    "statsSyncedAt": "2026-08-24T09:48:31.463Z",
+    "ranking": "#14"
   },
   {
     "id": "zhang-mingyang",
@@ -33925,7 +33976,8 @@
     "weightClass": "Flyweight",
     "height": "5'8\"",
     "reach": "72\"",
-    "statsSyncedAt": "2026-08-24T09:48:39.324Z"
+    "statsSyncedAt": "2026-08-24T09:48:39.324Z",
+    "ranking": "#13"
   },
   {
     "id": "carlston-harris",
@@ -34225,7 +34277,8 @@
     "reach": "64.5\"",
     "statsSyncedAt": "2026-08-24T09:48:48.079Z",
     "nationality": "American",
-    "flag": "🇺🇸"
+    "flag": "🇺🇸",
+    "ranking": "#14"
   },
   {
     "id": "xiong-jingnan",
@@ -34961,7 +35014,8 @@
     "weightClass": "Welterweight",
     "statsSyncedAt": "2026-08-24T09:49:14.022Z",
     "nationality": "Brazilian",
-    "flag": "🇧🇷"
+    "flag": "🇧🇷",
+    "ranking": "#5"
   },
   {
     "id": "edmen-shahbazyan",
@@ -35268,7 +35322,8 @@
     "weightClass": "Lightweight",
     "statsSyncedAt": "2026-08-24T09:49:22.686Z",
     "nationality": "Australian",
-    "flag": "🇦🇺"
+    "flag": "🇦🇺",
+    "ranking": "#13"
   },
   {
     "id": "iwo-baraniewski",
@@ -35567,7 +35622,8 @@
     "weightClass": "Bantamweight",
     "statsSyncedAt": "2026-08-24T09:49:31.336Z",
     "nationality": "American",
-    "flag": "🇺🇸"
+    "flag": "🇺🇸",
+    "ranking": "#15"
   },
   {
     "id": "edgar-chairez",
@@ -36372,7 +36428,8 @@
     "weightClass": "Women's Bantamweight",
     "statsSyncedAt": "2026-08-24T09:49:57.338Z",
     "nationality": "Brazilian",
-    "flag": "🇧🇷"
+    "flag": "🇧🇷",
+    "ranking": "#7"
   },
   {
     "id": "allan-nascimento",
@@ -37007,7 +37064,8 @@
     "weightClass": "Middleweight",
     "statsSyncedAt": "2026-08-24T09:51:13.973Z",
     "nationality": "American",
-    "flag": "🇺🇸"
+    "flag": "🇺🇸",
+    "ranking": "#11"
   },
   {
     "id": "christian-leroy-duncan",
@@ -37116,7 +37174,8 @@
     "weightClass": "Middleweight",
     "statsSyncedAt": "2026-08-24T09:51:16.538Z",
     "nationality": "British",
-    "flag": "🇬🇧"
+    "flag": "🇬🇧",
+    "ranking": "#10"
   },
   {
     "id": "jacobe-smith",
@@ -37228,7 +37287,8 @@
     "weightClass": "Women's Strawweight",
     "statsSyncedAt": "2026-08-24T09:51:22.245Z",
     "nationality": "Brazilian",
-    "flag": "🇧🇷"
+    "flag": "🇧🇷",
+    "ranking": "#13"
   },
   {
     "id": "fatima-kline",
@@ -37298,7 +37358,8 @@
     "weightClass": "Women's Strawweight",
     "statsSyncedAt": "2026-08-24T09:51:25.049Z",
     "nationality": "American",
-    "flag": "🇺🇸"
+    "flag": "🇺🇸",
+    "ranking": "#6"
   },
   {
     "id": "brad-tavares",
@@ -37657,7 +37718,8 @@
     "weightClass": "Bantamweight",
     "height": "5'5\"",
     "reach": "67.5\"",
-    "statsSyncedAt": "2026-08-24T09:51:36.168Z"
+    "statsSyncedAt": "2026-08-24T09:51:36.168Z",
+    "ranking": "#8"
   },
   {
     "id": "uran-satybaldiev",
@@ -37751,7 +37813,8 @@
     "reach": "78.5\"",
     "statsSyncedAt": "2026-08-24T09:52:26.157Z",
     "nationality": "Brazilian",
-    "flag": "🇧🇷"
+    "flag": "🇧🇷",
+    "ranking": "#11"
   },
   {
     "id": "magomed-tuchalov",
@@ -37838,7 +37901,8 @@
     "reach": "63\"",
     "statsSyncedAt": "2026-08-24T09:52:31.741Z",
     "nationality": "Uzbekistani",
-    "flag": "🇺🇿"
+    "flag": "🇺🇿",
+    "ranking": "#10"
   },
   {
     "id": "islam-dulatov",
@@ -38335,7 +38399,8 @@
     "reach": "74\"",
     "nationality": "American",
     "flag": "🇺🇸",
-    "statsSyncedAt": "2026-08-25T09:36:09.169Z"
+    "statsSyncedAt": "2026-08-25T09:36:09.169Z",
+    "ranking": "#14"
   },
   {
     "id": "ante-delija",
@@ -38389,7 +38454,8 @@
     "reach": "78\"",
     "nationality": "Croatian",
     "flag": "🇭🇷",
-    "statsSyncedAt": "2026-08-25T09:36:12.001Z"
+    "statsSyncedAt": "2026-08-25T09:36:12.001Z",
+    "ranking": "#10"
   },
   {
     "id": "dusko-todorovic",
@@ -39147,7 +39213,8 @@
     "weightClass": "Women's Strawweight",
     "nationality": "Canadian",
     "flag": "🇨🇦",
-    "statsSyncedAt": "2026-08-25T09:36:42.480Z"
+    "statsSyncedAt": "2026-08-25T09:36:42.480Z",
+    "ranking": "#4"
   },
   {
     "id": "opponent-tba",
@@ -40152,7 +40219,8 @@
     "reach": "75.0\"",
     "nationality": "American",
     "flag": "🇺🇸",
-    "statsSyncedAt": "2026-08-25T09:37:24.492Z"
+    "statsSyncedAt": "2026-08-25T09:37:24.492Z",
+    "ranking": "#8"
   },
   {
     "id": "john-garza",
@@ -40450,7 +40518,8 @@
     "reach": "80.0\"",
     "nationality": "American",
     "flag": "🇺🇸",
-    "statsSyncedAt": "2026-08-25T09:37:32.796Z"
+    "statsSyncedAt": "2026-08-25T09:37:32.796Z",
+    "ranking": "#15"
   },
   {
     "id": "ramiz-brahimaj",
@@ -40727,7 +40796,8 @@
     "reach": "78.0\"",
     "nationality": "Moldovan",
     "flag": "🇲🇩",
-    "statsSyncedAt": "2026-08-25T09:37:44.048Z"
+    "statsSyncedAt": "2026-08-25T09:37:44.048Z",
+    "ranking": "#9"
   },
   {
     "id": "vitor-petrino",
@@ -40857,7 +40927,8 @@
     "weightClass": "Heavyweight",
     "height": "6'2\"",
     "reach": "77.5\"",
-    "statsSyncedAt": "2026-08-25T09:37:46.492Z"
+    "statsSyncedAt": "2026-08-25T09:37:46.492Z",
+    "ranking": "#8"
   },
   {
     "id": "kennedy-nzechukwu",
@@ -41205,7 +41276,8 @@
     "reach": "63.0\"",
     "nationality": "Brazilian",
     "flag": "🇧🇷",
-    "statsSyncedAt": "2026-08-25T09:37:54.798Z"
+    "statsSyncedAt": "2026-08-25T09:37:54.798Z",
+    "ranking": "#7"
   },
   {
     "id": "ce-liu",
@@ -42236,7 +42308,8 @@
     "weightClass": "Women's Bantamweight",
     "nationality": "French",
     "flag": "🇫🇷",
-    "statsSyncedAt": "2026-08-26T09:41:29.857Z"
+    "statsSyncedAt": "2026-08-26T09:41:29.857Z",
+    "ranking": "#13"
   },
   {
     "id": "punahele-soriano",
@@ -42962,7 +43035,8 @@
     "reach": "78.0\"",
     "nationality": "Dominican",
     "flag": "🇩🇴",
-    "statsSyncedAt": "2026-08-26T09:42:02.085Z"
+    "statsSyncedAt": "2026-08-26T09:42:02.085Z",
+    "ranking": "#5"
   },
   {
     "id": "regina-tarin",
@@ -44835,7 +44909,8 @@
     ],
     "height": "5'4\"",
     "reach": "67\"",
-    "statsSyncedAt": "2026-08-26T09:43:28.058Z"
+    "statsSyncedAt": "2026-08-26T09:43:28.058Z",
+    "ranking": "#9"
   },
   {
     "id": "jose-montanha-da-silva",
@@ -45381,7 +45456,8 @@
         "time": "2:14"
       }
     ],
-    "statsSyncedAt": "2026-08-26T09:43:45.081Z"
+    "statsSyncedAt": "2026-08-26T09:43:45.081Z",
+    "ranking": "#13"
   },
   {
     "id": "joosang-yoo",
@@ -48621,7 +48697,8 @@
       "tdDef": "63%",
       "subAvg": "1.5"
     },
-    "statsSyncedAt": "2026-08-25T09:35:26.570Z"
+    "statsSyncedAt": "2026-08-25T09:35:26.570Z",
+    "ranking": "#14"
   },
   {
     "id": "david-onama",
@@ -48695,7 +48772,8 @@
       "tdDef": "52%",
       "subAvg": "0.5"
     },
-    "statsSyncedAt": "2026-08-25T09:35:29.286Z"
+    "statsSyncedAt": "2026-08-25T09:35:29.286Z",
+    "ranking": "#14"
   },
   {
     "id": "jan-blachowicz",
@@ -48798,7 +48876,8 @@
         "round": 5,
         "time": "5:00"
       }
-    ]
+    ],
+    "ranking": "#9"
   },
   {
     "id": "kevin-vallejos",
@@ -48864,7 +48943,8 @@
       "tdDef": "84%",
       "subAvg": "0.0"
     },
-    "statsSyncedAt": "2026-08-25T09:35:32.393Z"
+    "statsSyncedAt": "2026-08-25T09:35:32.393Z",
+    "ranking": "#9"
   },
   {
     "id": "jessica-andrade",
@@ -48938,7 +49018,8 @@
       "tdDef": "75%",
       "subAvg": "0.3"
     },
-    "statsSyncedAt": "2026-08-25T09:35:35.265Z"
+    "statsSyncedAt": "2026-08-25T09:35:35.265Z",
+    "ranking": "#10"
   },
   {
     "id": "mizuki",
@@ -49052,7 +49133,8 @@
       "tdDef": "80%",
       "subAvg": "0.0"
     },
-    "statsSyncedAt": "2026-08-25T09:35:37.974Z"
+    "statsSyncedAt": "2026-08-25T09:35:37.974Z",
+    "ranking": "#15"
   },
   {
     "id": "miranda-maverick",
@@ -49126,7 +49208,8 @@
       "tdDef": "45%",
       "subAvg": "0.4"
     },
-    "statsSyncedAt": "2026-08-25T09:35:40.472Z"
+    "statsSyncedAt": "2026-08-25T09:35:40.472Z",
+    "ranking": "#10"
   },
   {
     "id": "ailin-perez",
@@ -49200,7 +49283,8 @@
       "tdDef": "72%",
       "subAvg": "0.2"
     },
-    "statsSyncedAt": "2026-08-25T09:35:43.351Z"
+    "statsSyncedAt": "2026-08-25T09:35:43.351Z",
+    "ranking": "#5"
   },
   {
     "id": "yana-santos",
@@ -49274,7 +49358,8 @@
       "tdDef": "51%",
       "subAvg": "0.1"
     },
-    "statsSyncedAt": "2026-08-25T09:35:46.072Z"
+    "statsSyncedAt": "2026-08-25T09:35:46.072Z",
+    "ranking": "#6"
   },
   {
     "id": "macy-chiasson",
@@ -49348,7 +49433,8 @@
       "tdDef": "62%",
       "subAvg": "0.4"
     },
-    "statsSyncedAt": "2026-08-25T09:35:48.752Z"
+    "statsSyncedAt": "2026-08-25T09:35:48.752Z",
+    "ranking": "#8"
   },
   {
     "id": "miesha-tate",
@@ -49422,7 +49508,8 @@
       "tdDef": "56%",
       "subAvg": "1.2"
     },
-    "statsSyncedAt": "2026-08-25T09:35:51.664Z"
+    "statsSyncedAt": "2026-08-25T09:35:51.664Z",
+    "ranking": "#14"
   },
   {
     "id": "nick-klein",
