@@ -14538,6 +14538,33 @@
     "earlyPrelims": []
   },
   {
+    "id": "ufc-fight-night-allen-vs-duncan",
+    "name": "UFC Fight Night: Allen vs. Duncan",
+    "type": "FIGHT NIGHT",
+    "date": "Sat, Oct 10, 2026",
+    "isoDate": "2026-10-10",
+    "location": "",
+    "venue": "",
+    "poster": "",
+    "status": "upcoming",
+    "start_time": null,
+    "mainCard": [
+      {
+        "a": "Brendan Allen",
+        "b": "Christian Leroy Duncan",
+        "weight": "Middleweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "main",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
+    "prelims": [],
+    "earlyPrelims": []
+  },
+  {
     "id": "ufc-fight-night-buckley-vs-malott",
     "name": "UFC Fight Night: Buckley vs. Malott",
     "type": "FIGHT NIGHT",
