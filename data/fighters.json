@@ -8978,15 +8978,15 @@
         "opponent": "Edmen Shahbazyan",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Jun. 6, 2026",
+        "event": "UFC Fight Night: Muhammad vs. Bonfim",
         "round": 3,
         "time": "5:00"
       },
       {
-        "opponent": "Reinier De Ridder",
+        "opponent": "Reinier de Ridder",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Oct. 18, 2025",
+        "method": "TKO (corner stoppage)",
+        "event": "UFC Fight Night: de Ridder vs. Allen",
         "round": 4,
         "time": "5:00"
       },
@@ -9002,7 +9002,7 @@
         "opponent": "Anthony Hernandez",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Feb. 22, 2025",
+        "event": "UFC Fight Night: Cejudo vs. Song",
         "round": 3,
         "time": "5:00"
       },
@@ -9010,9 +9010,49 @@
         "opponent": "Nassourdine Imavov",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Sep. 28, 2024",
+        "event": "UFC Fight Night: Moicano vs. Saint Denis",
         "round": 3,
         "time": "5:00"
+      },
+      {
+        "opponent": "Chris Curtis (fighter)",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Allen vs. Curtis 2",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Paul Craig",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC Fight Night: Allen vs. Craig",
+        "round": 3,
+        "time": "0:38"
+      },
+      {
+        "opponent": "Bruno Silva (fighter)",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC on ABC: Emmett vs. Topuria",
+        "round": 1,
+        "time": "4:39"
+      },
+      {
+        "opponent": "André Muniz",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC Fight Night: Muniz vs. Allen",
+        "round": 3,
+        "time": "4:25"
+      },
+      {
+        "opponent": "Krzysztof Jotko",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC Fight Night: Dern vs. Yan",
+        "round": 1,
+        "time": "4:17"
       }
     ],
     "stats": {
@@ -36983,7 +37023,7 @@
         "opponent": "Jared Cannonier",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Jul. 18, 2026",
+        "event": "UFC Fight Night: du Plessis vs. Usman",
         "round": 3,
         "time": "5:00"
       },
@@ -36991,23 +37031,23 @@
         "opponent": "Roman Dolidze",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Mar. 21, 2026",
+        "event": "UFC Fight Night: Evloev vs. Murphy",
         "round": 3,
         "time": "5:00"
       },
       {
         "opponent": "Marco Tulio",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Nov. 8, 2025",
+        "method": "KO (spinning backfist and punches)",
+        "event": "UFC Fight Night: Bonfim vs. Brown",
         "round": 2,
-        "time": "3:20"
+        "time": "3:28"
       },
       {
         "opponent": "Eryk Anders",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Aug. 9, 2025",
+        "method": "KO (spinning back elbow and punches)",
+        "event": "UFC on ESPN: Dolidze vs. Hernandez",
         "round": 1,
         "time": "3:53"
       },
@@ -37015,9 +37055,49 @@
         "opponent": "Andrey Pulyaev",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Mar. 22, 2025",
+        "event": "UFC Fight Night: Edwards vs. Brady",
         "round": 3,
         "time": "5:00"
+      },
+      {
+        "opponent": "Gregory Rodrigues",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 304",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Cláudio Ribeiro",
+        "result": "W",
+        "method": "TKO (elbows and punches)",
+        "event": "UFC Fight Night: Rozenstruik vs. Gaziev",
+        "round": 2,
+        "time": "1:57"
+      },
+      {
+        "opponent": "Denis Tiuliulin",
+        "result": "W",
+        "method": "TKO (elbows and punches)",
+        "event": "UFC Fight Night: Allen vs. Craig",
+        "round": 2,
+        "time": "4:24"
+      },
+      {
+        "opponent": "Armen Petrosyan (fighter)",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Vettori vs. Cannonier",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Duško Todorović",
+        "result": "W",
+        "method": "TKO (knee injury)",
+        "event": "UFC 286",
+        "round": 1,
+        "time": "1:52"
       }
     ],
     "nickname": "CLD",
