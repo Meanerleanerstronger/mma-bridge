@@ -144,7 +144,7 @@ async function run() {
 
     // Champion from h5 inside rankings--athlete--champion block
     const champMatch = /<h5><a[^>]*>([^<]+)<\/a><\/h5>/.exec(section);
-    const champion = champMatch ? champMatch[1].trim() : null;
+    const champion = champMatch ? decodeEntities(champMatch[1].trim()) : null;
 
     const fighters = [];
     if (champion) fighters.push({ rank: 'C', name: champion, isChamp: true });
@@ -153,7 +153,7 @@ async function run() {
     const rowRe = /<td class="views-field views-field-weight-class-rank">(\d+)\s*<\/td>\s*<td class="views-field views-field-title"><a[^>]*>([^<]+)<\/a>/g;
     let m;
     while ((m = rowRe.exec(section)) !== null) {
-      fighters.push({ rank: parseInt(m[1], 10), name: m[2].trim(), isChamp: false });
+      fighters.push({ rank: parseInt(m[1], 10), name: decodeEntities(m[2].trim()), isChamp: false });
     }
 
     if (fighters.length) divisions.push({ division, fighters });
