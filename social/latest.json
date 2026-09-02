@@ -1,15 +1,30 @@
 {
-  "date": "2026-09-01",
+  "date": "2026-09-02",
   "posts": [
     {
+      "type": "news",
+      "caption": "Dana White Breaks Silence on Usman Nurmagomedov’s Rule Violation at UFC Shanghai (via Yardbarker)",
+      "image": "2026-09-02-news-1.png"
+    },
+    {
+      "type": "news",
+      "caption": "Injured Valentina Shevchenko Reportedly Pulls Out While Dana White Teases UFC 332 Main Event Announcement (via Essentially Sports)",
+      "image": "2026-09-02-news-2.png"
+    },
+    {
+      "type": "news",
+      "caption": "Rampage Jackson Fires Cameraman During Livestream Altercation (via Essentially Sports)",
+      "image": "2026-09-02-news-3.png"
+    },
+    {
       "type": "event_countdown",
-      "caption": "Hooker vs. Parnasse is in 4 days. Make your picks: https://mmabridge.com/picks.html?id=ufc-fight-night-paris\n\nScreenshots via mmabridge.com",
-      "image": "2026-09-01-event_countdown-1.png"
+      "caption": "Hooker vs. Parnasse is in 3 days. Make your picks: https://mmabridge.com/picks.html?id=ufc-fight-night-paris\n\nScreenshots via mmabridge.com",
+      "image": "2026-09-02-event_countdown-1.png"
     },
     {
       "type": "event_recap",
       "caption": "Relive UFC Fight Night: Nurmagomedov vs. Song. Yadong def. Nurmagomedov. Full card recap and community ratings: https://mmabridge.com/event-review.html?id=ufc-fight-night-nurmagomedov-vs-song\n\nScreenshots via mmabridge.com",
-      "image": "2026-09-01-event_recap-1.png"
+      "image": "2026-09-02-event_recap-1.png"
     }
   ]
 }
