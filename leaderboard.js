@@ -38,6 +38,21 @@
   function randCode() {
     return Math.random().toString(36).slice(2, 8).toUpperCase();
   }
+  // randCode() alone had no uniqueness check — two commissioners could
+  // collide on the same 6-char code, and anyone joining via that code
+  // would land in whichever group the join query's .limit(1) happened to
+  // return, silently merging two unrelated groups. Retry until a code
+  // with no existing owner is found (36^6 codes, so this is normally a
+  // single try — the loop cap is just a safety net against an infinite
+  // loop if something's wrong with the query itself).
+  async function genUniqueCode() {
+    for (let i = 0; i < 10; i++) {
+      const code = randCode();
+      const { data } = await sb.from('profiles').select('id').eq('group_code', code).limit(1);
+      if (!data?.length) return code;
+    }
+    return randCode() + Date.now().toString(36).slice(-2).toUpperCase();
+  }
 
   // ── Tier Progression System (canonical source: tiers.js) ──
   const getTier = window.MMATiers.getTier;
@@ -1492,7 +1507,7 @@
       const btn = document.getElementById('submitCreate');
       if (btn) { btn.textContent = 'Creating…'; btn.disabled = true; }
       try {
-        const code = randCode();
+        const code = await genUniqueCode();
         const eventTypes = [
           document.getElementById('evtypePpv')?.checked  ? 'ppv'  : null,
           document.getElementById('evtypeFn')?.checked   ? 'fightnight' : null,

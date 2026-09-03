@@ -665,7 +665,7 @@ function fightRow(f, communityData, posTag) {
   let pickBarsHtml = '';
   if (communityData && Object.keys(communityData).length) {
     const total = Object.values(communityData).reduce((s, n) => s + n, 0);
-    const cntA  = communityData['a'] || 0;
+    const cntA  = communityData[f.a] || 0;
     const pctA  = total ? Math.round(cntA / total * 100) : 50;
     const pctB  = 100 - pctA;
     pickBarsHtml = `

@@ -342,6 +342,10 @@ if (scrollFN)  scrollFN.innerHTML  = skeletonCards(4);
     allEvents = all.filter(e => (e.isoDate || '9999') <= today && e.status === 'completed');
     debugLog('Reviews: loaded', allEvents.length, 'past events');
 
+    const upcomingEvents = all
+      .filter(e => e.status !== 'completed' && (e.isoDate || '0000') >= today)
+      .sort((a, b) => (a.isoDate || '').localeCompare(b.isoDate || ''));
+
     ppvPast = allEvents.filter(ev => (ev.type||'').toUpperCase().includes('PPV'));
     fnPast  = allEvents.filter(ev => !(ev.type||'').toUpperCase().includes('PPV'));
 
