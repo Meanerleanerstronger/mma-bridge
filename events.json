@@ -14246,17 +14246,6 @@
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/5/DESPAIGNE_ROBELIS_L_03-09.png"
       },
       {
-        "a": "Edmen Shahbazyan",
-        "b": "Brunno Ferreira",
-        "weight": "Middleweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/SHAHBAZYAN_EDMEN_L_10-04.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-07/FERREIRA_BRUNNO_L_07-19.png"
-      },
-      {
         "a": "Gable Steveson",
         "b": "Sean Sharaf",
         "weight": "Heavyweight",
@@ -14266,6 +14255,17 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-07/STEVESON_GABLE_L_07-11.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/SHERAF_SEAN_L_12-13.png"
+      },
+      {
+        "a": "Michael Aswell Jr.",
+        "b": "JooSang Yoo",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-06/YOO_JOOSANG_R_06-07.png?itok=sFYPXELB"
       }
     ],
     "earlyPrelims": [
@@ -14275,7 +14275,7 @@
         "weight": "Featherweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/CHIKADZE_GIGA_L_12-13.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/BRITO_JOANDERSON_L_12-13.png"
@@ -14303,15 +14303,15 @@
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/DIAZ_OZZY_R_03-08.png"
       },
       {
-        "a": "Michael Aswell Jr.",
-        "b": "JooSang Yoo",
-        "weight": "Featherweight",
+        "a": "Edmen Shahbazyan",
+        "b": "Brunno Ferreira",
+        "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": true,
+        "ranked": false,
         "slot": "",
-        "imgA": "",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-06/YOO_JOOSANG_R_06-07.png?itok=sFYPXELB"
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/SHAHBAZYAN_EDMEN_L_10-04.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-07/FERREIRA_BRUNNO_L_07-19.png"
       }
     ]
   },
