@@ -46836,12 +46836,94 @@
       "subAvg": "0.0"
     },
     "record": {
-      "wins": 8,
-      "losses": 5,
+      "wins": 15,
+      "losses": 2,
       "draws": 0
     },
     "nickname": "Pain",
-    "statsSyncedAt": "2026-08-27T19:28:48.711Z"
+    "statsSyncedAt": "2026-08-27T19:28:48.711Z",
+    "last5": [
+      {
+        "opponent": "Jared Cannonier",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: du Plessis vs. Usman",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Roman Dolidze",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Evloev vs. Murphy",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Marco Tulio",
+        "result": "W",
+        "method": "KO (spinning backfist and punches)",
+        "event": "UFC Fight Night: Bonfim vs. Brown",
+        "round": 2,
+        "time": "3:28"
+      },
+      {
+        "opponent": "Eryk Anders",
+        "result": "W",
+        "method": "KO (spinning back elbow and punches)",
+        "event": "UFC on ESPN: Dolidze vs. Hernandez",
+        "round": 1,
+        "time": "3:53"
+      },
+      {
+        "opponent": "Andrey Pulyaev",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Edwards vs. Brady",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Gregory Rodrigues",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 304",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Cláudio Ribeiro",
+        "result": "W",
+        "method": "TKO (elbows and punches)",
+        "event": "UFC Fight Night: Rozenstruik vs. Gaziev",
+        "round": 2,
+        "time": "1:57"
+      },
+      {
+        "opponent": "Denis Tiuliulin",
+        "result": "W",
+        "method": "TKO (elbows and punches)",
+        "event": "UFC Fight Night: Allen vs. Craig",
+        "round": 2,
+        "time": "4:24"
+      },
+      {
+        "opponent": "Armen Petrosyan (fighter)",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Vettori vs. Cannonier",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Duško Todorović",
+        "result": "W",
+        "method": "TKO (knee injury)",
+        "event": "UFC 286",
+        "round": 1,
+        "time": "1:52"
+      }
+    ]
   },
   {
     "id": "andre-fili",
