@@ -43870,7 +43870,17 @@
     "weightClass": "Featherweight",
     "height": "5'8\"",
     "reach": "69\"",
-    "statsSyncedAt": "2026-08-26T09:42:41.737Z"
+    "statsSyncedAt": "2026-08-26T09:42:41.737Z",
+    "last5": [
+      {
+        "opponent": "Felipe Lima",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "felipe-lima",
@@ -43892,6 +43902,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Morgan Charrière",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Payton Talbott",
         "result": "L",
@@ -46696,6 +46714,14 @@
     },
     "last5": [
       {
+        "opponent": "Muhammad Naimov",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Nathaniel Wood (fighter)",
         "result": "L",
         "method": "Decision (split)",
@@ -47525,6 +47551,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Losene Keita",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Mairon Santos",
         "result": "L",

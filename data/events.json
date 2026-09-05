@@ -13917,7 +13917,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/KEITA_LOSENE_R_03-21.png?itok=nP_KzLSm",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-12/NAIMOV_MUHAMMAD_L_12-06.png?itok=t9HdOnmj"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-12/NAIMOV_MUHAMMAD_L_12-06.png?itok=t9HdOnmj",
+        "winner": "Losene Keita",
+        "method": "KO/TKO",
+        "round": 1,
+        "_supabaseSynced": true
       }
     ],
     "prelims": [
@@ -13930,7 +13934,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-09/CHARRIERE_MORGAN_L_09-28.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-12/LIMA_FELIPE_L_06-22.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-12/LIMA_FELIPE_L_06-22.png",
+        "winner": "Felipe Lima",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Oumar Sy",
