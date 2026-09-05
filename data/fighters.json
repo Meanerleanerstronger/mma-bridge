@@ -48216,7 +48216,17 @@
       "losses": 2,
       "draws": 0
     },
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/2022-02/womens-silhouette-RED-corner.png?itok=SXsY1AgG"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/2022-02/womens-silhouette-RED-corner.png?itok=SXsY1AgG",
+    "last5": [
+      {
+        "opponent": "Sofia Montenegro",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": 2,
+        "time": null
+      }
+    ]
   },
   {
     "id": "sofia-montenegro",
@@ -48238,7 +48248,17 @@
       "losses": 2,
       "draws": 0
     },
-    "nickname": "La Bruja"
+    "nickname": "La Bruja",
+    "last5": [
+      {
+        "opponent": "Delphine Benouaich",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": 2,
+        "time": null
+      }
+    ]
   },
   {
     "id": "lawrence-lui",
