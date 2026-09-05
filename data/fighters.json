@@ -50260,5 +50260,56 @@
       "losses": 6,
       "draws": 0
     }
+  },
+  {
+    "id": "javad-mahjoub",
+    "name": "Javad Mahjoub",
+    "record": {
+      "wins": 5,
+      "losses": 0,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Pietro Gentile de Oliveira",
+        "result": "W",
+        "method": "Submission (armbar)",
+        "event": "Unified MMA 67",
+        "round": 1,
+        "time": "4:59"
+      },
+      {
+        "opponent": "Gamzat Sirazhudinov",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "World X-Impact Federation: APEC 2025 Korea Summit Commemorative World MMA Competition",
+        "round": 3,
+        "time": "4:00"
+      },
+      {
+        "opponent": "Rodrigo Duarte",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Brothers Fight Champion 3",
+        "round": 1,
+        "time": "2:07"
+      },
+      {
+        "opponent": "Pierre Patry",
+        "result": "W",
+        "method": "TKO (knee injury)",
+        "event": "Samourai MMA 7",
+        "round": 1,
+        "time": "0:55"
+      },
+      {
+        "opponent": "Jesus Navarette",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "New Era Promotion: Soiree de Combat Fight Night 2",
+        "round": 1,
+        "time": "1:45"
+      }
+    ]
   }
 ]
