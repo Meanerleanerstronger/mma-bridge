@@ -16096,6 +16096,14 @@
     },
     "last5": [
       {
+        "opponent": "Oumar Sy",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": 2,
+        "time": null
+      },
+      {
         "opponent": "Rodolfo Bellato",
         "result": "W",
         "method": "Decision (split)",
@@ -28718,6 +28726,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Mario Pinto",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": 2,
+        "time": null
+      },
       {
         "opponent": "Marcus Buchecha",
         "result": "W",
@@ -42213,6 +42229,14 @@
     },
     "last5": [
       {
+        "opponent": "Klaudia Syguła",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Joselyne Edwards",
         "result": "L",
         "method": "Submission (rear-naked choke)",
@@ -43076,7 +43100,17 @@
     "weightClass": "Heavyweight",
     "height": "6'5\"",
     "reach": "79.0\"",
-    "statsSyncedAt": "2026-08-26T09:42:07.926Z"
+    "statsSyncedAt": "2026-08-26T09:42:07.926Z",
+    "last5": [
+      {
+        "opponent": "Ryan Spann",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": 2,
+        "time": null
+      }
+    ]
   },
   {
     "id": "michael-page",
@@ -47804,11 +47838,31 @@
       "wins": 12,
       "losses": 2,
       "draws": 0
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Modestas Bukauskas",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": 2,
+        "time": null
+      }
+    ]
   },
   {
     "id": "klaudia-sygua",
-    "name": "Klaudia Syguła"
+    "name": "Klaudia Syguła",
+    "last5": [
+      {
+        "opponent": "Nora Cornolle",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "julien-leblanc",

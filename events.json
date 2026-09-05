@@ -13880,7 +13880,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/PINTO_MARIO_L_03-21.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-07/SPANN_RYAN_L_07-19.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-07/SPANN_RYAN_L_07-19.png",
+        "winner": "Mario Pinto",
+        "method": "KO/TKO",
+        "round": 2,
+        "_supabaseSynced": true
       },
       {
         "a": "Nathaniel Wood",
@@ -13937,7 +13941,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/SY_OUMAR_L_09-06.png?itok=8hr7jJ0l",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/BUKAUSKAS_MODESTAS_L_05-16.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/BUKAUSKAS_MODESTAS_L_05-16.png",
+        "winner": "Modestas Bukauskas",
+        "method": "KO/TKO",
+        "round": 2,
+        "_supabaseSynced": true
       },
       {
         "a": "Daniil Donchenko",
@@ -13961,7 +13969,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/CORNOLLE_NORA_L_02-21.png",
-        "imgB": ""
+        "imgB": "",
+        "winner": "Nora Cornolle",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Delphine Benouaich",
