@@ -13869,7 +13869,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/CAMPBELL_KURTIS_L_03-21.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-09/PEEK_TREVOR_L_09-07.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-09/PEEK_TREVOR_L_09-07.png",
+        "winner": "Kurtis Campbell",
+        "method": "SUB",
+        "round": 3,
+        "_supabaseSynced": true
       },
       {
         "a": "Mario Pinto",
@@ -13963,7 +13967,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/DONCHENKO_DANIIL_L_06-27.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/SORIANO_PUNAHELE_L_10-04.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/SORIANO_PUNAHELE_L_10-04.png",
+        "winner": "Daniil Donchenko",
+        "method": "DEC",
+        "_supabaseSynced": true
       }
     ],
     "earlyPrelims": [

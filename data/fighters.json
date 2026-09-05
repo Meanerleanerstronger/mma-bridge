@@ -36990,6 +36990,14 @@
     },
     "last5": [
       {
+        "opponent": "Punahele Soriano",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Theodor Berggren",
         "result": "W",
         "method": "TKO",
@@ -42346,6 +42354,14 @@
     },
     "last5": [
       {
+        "opponent": "Daniil Donchenko",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Ramiz Brahimaj",
         "result": "W",
         "method": "Decision (unanimous)",
@@ -43242,7 +43258,17 @@
     "weightClass": "Featherweight",
     "height": "5'9\"",
     "reach": "72.0\"",
-    "statsSyncedAt": "2026-08-26T09:42:13.428Z"
+    "statsSyncedAt": "2026-08-26T09:42:13.428Z",
+    "last5": [
+      {
+        "opponent": "Trevor Peek",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": 3,
+        "time": null
+      }
+    ]
   },
   {
     "id": "trevor-peek",
@@ -43266,7 +43292,17 @@
     "weightClass": "Featherweight",
     "height": "5'9\"",
     "reach": "70.0\"",
-    "statsSyncedAt": "2026-08-26T09:42:16.094Z"
+    "statsSyncedAt": "2026-08-26T09:42:16.094Z",
+    "last5": [
+      {
+        "opponent": "Kurtis Campbell",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": 3,
+        "time": null
+      }
+    ]
   },
   {
     "id": "muhammad-said",
