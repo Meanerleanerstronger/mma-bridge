@@ -13835,7 +13835,7 @@
     "location": "Paris, France",
     "venue": "Accor Arena",
     "poster": "https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/2026-08/090526-ufc-fight-night-hooker-vs-parnasse-EVENT-ART.jpg",
-    "status": "upcoming",
+    "status": "completed",
     "start_time": null,
     "mainCard": [
       {
@@ -13847,7 +13847,11 @@
         "ranked": true,
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/HOOKER_DAN_L_01-31.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png",
+        "winner": "Salahdine Parnasse",
+        "method": "KO/TKO",
+        "round": 1,
+        "_supabaseSynced": true
       },
       {
         "a": "Michael Page",
@@ -13858,7 +13862,10 @@
         "ranked": false,
         "slot": "comain",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/PAGE_MICHAEL_L_03-21.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/RUZIBOEV_NURSULTON_L_06-27.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/RUZIBOEV_NURSULTON_L_06-27.png",
+        "winner": "Michael Page",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Kurtis Campbell",
@@ -13910,7 +13917,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/ZIAM_FARES_L_06-06.png?itok=bYY345Ee",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-09/SOLA_AXEL_L_09-06.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-09/SOLA_AXEL_L_09-06.png",
+        "winner": "Axel Sola",
+        "method": "KO/TKO",
+        "round": 1,
+        "_supabaseSynced": true
       },
       {
         "a": "Losene Keita",
