@@ -13768,6 +13768,14 @@
     },
     "last5": [
       {
+        "opponent": "Michael Page",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Andrey Pulyaev",
         "result": "W",
         "method": "Sub",
@@ -16096,6 +16104,14 @@
     },
     "last5": [
       {
+        "opponent": "Oumar Sy",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": 2,
+        "time": null
+      },
+      {
         "opponent": "Rodolfo Bellato",
         "result": "W",
         "method": "Decision (split)",
@@ -16619,6 +16635,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Salahdine Parnasse",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Benoît Saint Denis",
         "result": "L",
@@ -28719,6 +28743,14 @@
     },
     "last5": [
       {
+        "opponent": "Mario Pinto",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": 2,
+        "time": null
+      },
+      {
         "opponent": "Marcus Buchecha",
         "result": "W",
         "method": "TKO",
@@ -36974,6 +37006,14 @@
     },
     "last5": [
       {
+        "opponent": "Punahele Soriano",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Theodor Berggren",
         "result": "W",
         "method": "TKO",
@@ -38253,6 +38293,14 @@
       "subAvg": "0.5"
     },
     "last5": [
+      {
+        "opponent": "Farés Ziam",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Ismael Bonfim",
         "result": "W",
@@ -42213,6 +42261,14 @@
     },
     "last5": [
       {
+        "opponent": "Klaudia Syguła",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Joselyne Edwards",
         "result": "L",
         "method": "Submission (rear-naked choke)",
@@ -42321,6 +42377,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Daniil Donchenko",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Ramiz Brahimaj",
         "result": "W",
@@ -43076,7 +43140,17 @@
     "weightClass": "Heavyweight",
     "height": "6'5\"",
     "reach": "79.0\"",
-    "statsSyncedAt": "2026-08-26T09:42:07.926Z"
+    "statsSyncedAt": "2026-08-26T09:42:07.926Z",
+    "last5": [
+      {
+        "opponent": "Ryan Spann",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": 2,
+        "time": null
+      }
+    ]
   },
   {
     "id": "michael-page",
@@ -43088,6 +43162,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Nursulton Ruziboev",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Sam Patterson",
         "result": "W",
@@ -43208,7 +43290,17 @@
     "weightClass": "Featherweight",
     "height": "5'9\"",
     "reach": "72.0\"",
-    "statsSyncedAt": "2026-08-26T09:42:13.428Z"
+    "statsSyncedAt": "2026-08-26T09:42:13.428Z",
+    "last5": [
+      {
+        "opponent": "Trevor Peek",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": 3,
+        "time": null
+      }
+    ]
   },
   {
     "id": "trevor-peek",
@@ -43232,7 +43324,17 @@
     "weightClass": "Featherweight",
     "height": "5'9\"",
     "reach": "70.0\"",
-    "statsSyncedAt": "2026-08-26T09:42:16.094Z"
+    "statsSyncedAt": "2026-08-26T09:42:16.094Z",
+    "last5": [
+      {
+        "opponent": "Kurtis Campbell",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": 3,
+        "time": null
+      }
+    ]
   },
   {
     "id": "muhammad-said",
@@ -43596,6 +43698,14 @@
     },
     "last5": [
       {
+        "opponent": "Dan Hooker",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Kenneth Cross",
         "result": "W",
         "method": "TKO (punches)",
@@ -43836,7 +43946,17 @@
     "weightClass": "Featherweight",
     "height": "5'8\"",
     "reach": "69\"",
-    "statsSyncedAt": "2026-08-26T09:42:41.737Z"
+    "statsSyncedAt": "2026-08-26T09:42:41.737Z",
+    "last5": [
+      {
+        "opponent": "Felipe Lima",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "felipe-lima",
@@ -43858,6 +43978,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Morgan Charrière",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Payton Talbott",
         "result": "L",
@@ -46662,6 +46790,14 @@
     },
     "last5": [
       {
+        "opponent": "Muhammad Naimov",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Nathaniel Wood (fighter)",
         "result": "L",
         "method": "Decision (split)",
@@ -47388,6 +47524,14 @@
     },
     "last5": [
       {
+        "opponent": "Axel Sola",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Tom Nolan (fighter)",
         "result": "L",
         "method": "Decision (unanimous)",
@@ -47491,6 +47635,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Losene Keita",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Mairon Santos",
         "result": "L",
@@ -47804,11 +47956,31 @@
       "wins": 12,
       "losses": 2,
       "draws": 0
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Modestas Bukauskas",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": 2,
+        "time": null
+      }
+    ]
   },
   {
     "id": "klaudia-sygua",
-    "name": "Klaudia Syguła"
+    "name": "Klaudia Syguła",
+    "last5": [
+      {
+        "opponent": "Nora Cornolle",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "julien-leblanc",
@@ -48216,7 +48388,17 @@
       "losses": 2,
       "draws": 0
     },
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/2022-02/womens-silhouette-RED-corner.png?itok=SXsY1AgG"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/2022-02/womens-silhouette-RED-corner.png?itok=SXsY1AgG",
+    "last5": [
+      {
+        "opponent": "Sofia Montenegro",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": 2,
+        "time": null
+      }
+    ]
   },
   {
     "id": "sofia-montenegro",
@@ -48238,7 +48420,17 @@
       "losses": 2,
       "draws": 0
     },
-    "nickname": "La Bruja"
+    "nickname": "La Bruja",
+    "last5": [
+      {
+        "opponent": "Delphine Benouaich",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC Fight Night: Hooker vs. Parnasse",
+        "round": 2,
+        "time": null
+      }
+    ]
   },
   {
     "id": "lawrence-lui",
@@ -50310,6 +50502,17 @@
         "round": 1,
         "time": "1:45"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-09-05T12:25:36.928Z"
   }
 ]
