@@ -1,0 +1,167 @@
+{
+  "eventId": "ufc-fight-night-paris",
+  "eventName": "UFC Fight Night: Hooker vs. Parnasse",
+  "fights": [
+    {
+      "fighter1": "Salahdine Parnasse Dan Hooker",
+      "fighter2": "Axel Sola Fares Ziam",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "1214",
+          "totalStr": "00",
+          "td": "Lightweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "1 0",
+          "sigStr": "97",
+          "totalStr": "00",
+          "td": "Lightweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Michael Page Nursulton Ruziboev",
+      "fighter2": "Daniil Donchenko Punahele Soriano",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "128",
+          "totalStr": "10",
+          "td": "Middleweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "1 0",
+          "sigStr": "8315",
+          "totalStr": "01",
+          "td": "Welterweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Kurtis Campbell Trevor Peek",
+      "fighter2": "Losene Keita Muhammad Naimov",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "4412",
+          "totalStr": "10",
+          "td": "Featherweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "2 0",
+          "sigStr": "184",
+          "totalStr": "00",
+          "td": "Featherweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Felipe Lima Morgan Charriere",
+      "fighter2": "Mario Pinto Ryan Spann",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "11236",
+          "totalStr": "01",
+          "td": "Featherweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "4813",
+          "totalStr": "01",
+          "td": "Heavyweight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Modestas Bukauskas Oumar Sy",
+      "fighter2": "Pavel Andrusca Nathaniel Wood",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "2239",
+          "totalStr": "01",
+          "td": "LightHeavyweight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 1",
+          "sigStr": "5028",
+          "totalStr": "10",
+          "td": "Featherweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Fabia Sintes Michael Aljarouj",
+      "fighter2": "Nora Cornolle Klaudia Sygula",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "2810",
+          "totalStr": "31",
+          "td": "Flyweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "3423",
+          "totalStr": "10",
+          "td": "Women'sBantamweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Matthieu Duclos Luis Felipe Dias",
+      "fighter2": "Delphine Benouaich Sofia Montenegro",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "1822",
+          "totalStr": "00",
+          "td": "Middleweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "1 0",
+          "sigStr": "14672",
+          "totalStr": "10",
+          "td": "Women'sStrawweight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        }
+      }
+    }
+  ]
+}
