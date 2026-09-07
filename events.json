@@ -14549,6 +14549,17 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/GAUTIER_ATEBA_L_05-09.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/KOPYLOV_ROMAN_L_05-09.png"
+      },
+      {
+        "a": "Khaos Williams",
+        "b": "Roberto Soldić",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
       }
     ],
     "prelims": [
@@ -14584,9 +14595,43 @@
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-10/MCGEE_COURT_L_10-05.png?itok=CVRx8xXQ",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/NOLAN_ERIC_R_08-16.png"
+      },
+      {
+        "a": "Rafael Dos Anjos",
+        "b": "Alexander Hernandez",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "King Green",
+        "b": "Esteban Ribovics",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
       }
     ],
-    "earlyPrelims": []
+    "earlyPrelims": [
+      {
+        "a": "Marcus McGhee",
+        "b": "Bernardo Sopaj",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ]
   },
   {
     "id": "ufc-fight-night-allen-vs-duncan",
@@ -14892,6 +14937,17 @@
         "ranked": false,
         "slot": "main",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/KLEIN_NICK_L_08-02.png?itok=NzieeiWf",
+        "imgB": ""
+      },
+      {
+        "a": "Lucia Szabova",
+        "b": "Tainara Lisboa",
+        "weight": "W Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "comain",
+        "imgA": "",
         "imgB": ""
       }
     ],
