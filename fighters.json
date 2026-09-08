@@ -25579,7 +25579,7 @@
     "name": "Esteban Ribovics",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-09/RIBOVICS_ESTEBAN_L_05-11.png",
     "record": {
-      "wins": 16,
+      "wins": 15,
       "losses": 3,
       "draws": 0
     },
@@ -35641,7 +35641,7 @@
         "opponent": "John Yannis",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Jun. 6, 2026",
+        "event": "UFC Fight Night: Muhammad vs. Bonfim",
         "round": 3,
         "time": "5:00"
       },
@@ -35649,7 +35649,7 @@
         "opponent": "Petr Yan",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Jul. 26, 2025",
+        "event": "UFC on ABC: Whittaker vs. de Ridder",
         "round": 3,
         "time": "5:00"
       },
@@ -35662,20 +35662,60 @@
         "time": "5:00"
       },
       {
-        "opponent": "Gaston Bolanos",
+        "opponent": "Gastón Bolaños",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Jan. 13, 2024",
-        "round": 2,
+        "method": "TKO (spinning wheel kick and punches)",
+        "event": "UFC Fight Night: Ankalaev vs. Walker 2",
+        "round": 3,
         "time": "3:29"
       },
       {
-        "opponent": "Jp Buys",
+        "opponent": "JP Buys",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Aug. 12, 2023",
+        "method": "KO (punch)",
+        "event": "UFC on ESPN: Luque vs. dos Anjos",
         "round": 1,
         "time": "2:19"
+      },
+      {
+        "opponent": "Journey Newson",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC on ESPN: Song vs. Simón",
+        "round": 2,
+        "time": "2:03"
+      },
+      {
+        "opponent": "Luciano Ramos",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "2023 in Legacy Fighting Alliance#Legacy Fighting Alliance 149: Bunes vs. Horiuchi",
+        "round": 3,
+        "time": "1:39"
+      },
+      {
+        "opponent": "Abe Sellers",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Goat Promotions: Cowboys vs. Cajuns 3",
+        "round": 3,
+        "time": "0:24"
+      },
+      {
+        "opponent": "Rafael do Nascimento",
+        "result": "L",
+        "method": "Submission (rear-naked choke)",
+        "event": "2022 in Legacy Fighting Alliance#Legacy Fighting Alliance 135: Leyva vs. Reis",
+        "round": 1,
+        "time": "3:12"
+      },
+      {
+        "opponent": "Rodney Mondala",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "2022 in ONE Championship#Road to ONE: RUF 47",
+        "round": 1,
+        "time": "0:58"
       }
     ],
     "nickname": "The Maniac",
@@ -50554,5 +50594,369 @@
       "subAvg": "0.0"
     },
     "statsSyncedAt": "2026-09-05T12:25:36.928Z"
+  },
+  {
+    "id": "khaos-williams",
+    "name": "Khaos Williams",
+    "record": {
+      "wins": 16,
+      "losses": 5,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Nikolay Veretennikov",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Allen vs. Costa",
+        "round": 1,
+        "time": "3:31"
+      },
+      {
+        "opponent": "Andreas Gustafsson",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 316",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Gabriel Bonfim",
+        "result": "L",
+        "method": "Technical Submission (brabo choke)",
+        "event": "UFC Fight Night: Cannonier vs. Rodrigues",
+        "round": 2,
+        "time": "4:58"
+      },
+      {
+        "opponent": "Carlston Harris",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "UFC Fight Night: Barboza vs. Murphy",
+        "round": 1,
+        "time": "1:30"
+      },
+      {
+        "opponent": "Rolando Bedoya",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC 288",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Randy Brown (fighter)",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC 274",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Miguel Baeza (fighter)",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Holloway vs. Rodríguez",
+        "round": 3,
+        "time": "1:02"
+      },
+      {
+        "opponent": "Matthew Semelsberger",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: The Korean Zombie vs. Ige",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Michel Pereira",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Thompson vs. Neal",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Abdul Razak Alhassan",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "UFC Fight Night: Felder vs. dos Anjos",
+        "round": 1,
+        "time": "0:30"
+      }
+    ]
+  },
+  {
+    "id": "roberto-soldi",
+    "name": "Roberto Soldić",
+    "record": {
+      "wins": 21,
+      "losses": 4,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Saygid Guseyn Arslanaliev",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "ONE 171",
+        "round": 1,
+        "time": "1:55"
+      },
+      {
+        "opponent": "Zebaztian Kadestam",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "ONE Fight Night 10",
+        "round": 2,
+        "time": "0:45"
+      },
+      {
+        "opponent": "Mamed Khalidov",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "2021 in Konfrontacja Sztuk Walki#KSW 65: Khalidov vs. Soldić",
+        "round": 2,
+        "time": "3:40"
+      },
+      {
+        "opponent": "Patrik Kincl",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "2021 in Konfrontacja Sztuk Walki#KSW 63: Crime of The Century",
+        "round": 3,
+        "time": "2:55"
+      },
+      {
+        "opponent": "Michał Materla",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "2020 in Konfrontacja Sztuk Walki#KSW 56: Materla vs. Soldić",
+        "round": 1,
+        "time": "4:40"
+      },
+      {
+        "opponent": "Michał Pietrzak",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "2019 in Konfrontacja Sztuk Walki#KSW 50: London",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Krystian Kaszubowski",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "2019 in Konfrontacja Sztuk Walki#KSW 49: Soldić vs. Kaszubowski",
+        "round": 1,
+        "time": "1:25"
+      },
+      {
+        "opponent": "Vinicius Bohrer",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "2018 in Konfrontacja Sztuk Walki#KSW 46: Narkun vs. Khalidov 2",
+        "round": 1,
+        "time": "4:34"
+      },
+      {
+        "opponent": "Dricus du Plessis",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "2018 in Konfrontacja Sztuk Walki#KSW 45: The Return to Wembley",
+        "round": 3,
+        "time": "2:33"
+      },
+      {
+        "opponent": "Dricus du Plessis",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "2018 in Konfrontacja Sztuk Walki#KSW 43: Soldić vs. Du Plessis",
+        "round": 2,
+        "time": "1:38"
+      }
+    ]
+  },
+  {
+    "id": "rafael-dos-anjos",
+    "name": "Rafael Dos Anjos",
+    "record": {
+      "wins": 32,
+      "losses": 17,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Geoff Neal",
+        "result": "L",
+        "method": "TKO (knee injury)",
+        "event": "UFC 308",
+        "round": 1,
+        "time": "1:30"
+      },
+      {
+        "opponent": "Mateusz Gamrot",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 299",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Vicente Luque",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Luque vs. dos Anjos",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Bryan Barberena",
+        "result": "W",
+        "method": "Submission (neck crank)",
+        "event": "UFC on ESPN: Thompson vs. Holland",
+        "round": 2,
+        "time": "3:20"
+      },
+      {
+        "opponent": "Rafael Fiziev",
+        "result": "L",
+        "method": "KO (punches)",
+        "event": "UFC on ESPN: dos Anjos vs. Fiziev",
+        "round": 5,
+        "time": "0:18"
+      },
+      {
+        "opponent": "Renato Moicano",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 272",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Paul Felder",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Felder vs. dos Anjos",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Michael Chiesa",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Blaydes vs. dos Santos",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Leon Edwards",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: dos Anjos vs. Edwards",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Kevin Lee",
+        "result": "W",
+        "method": "Submission (arm-triangle choke)",
+        "event": "UFC Fight Night: dos Anjos vs. Lee",
+        "round": 4,
+        "time": "3:47"
+      }
+    ]
+  },
+  {
+    "id": "lucia-szabova",
+    "name": "Lucia Szabova",
+    "record": {
+      "wins": 10,
+      "losses": 0,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Lucie Pudilová",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Oktagon 92",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Leidiane Fernandes",
+        "result": "W",
+        "method": "TKO (elbows and punches)",
+        "event": "Oktagon 87",
+        "round": 3,
+        "time": "2:12"
+      },
+      {
+        "opponent": "Cecile Bolander",
+        "result": "W",
+        "method": "TKO (elbows and punches)",
+        "event": "Oktagon 74",
+        "round": 1,
+        "time": "3:11"
+      },
+      {
+        "opponent": "Kalindra Faria",
+        "result": "W",
+        "method": "Submission (keylock)",
+        "event": "Oktagon 67",
+        "round": 1,
+        "time": "4:16"
+      },
+      {
+        "opponent": "Aitana Álvarez",
+        "result": "W",
+        "method": "Decision (decision)",
+        "event": "2024 in Oktagon MMA#Oktagon 59: Summer Party",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Róża Gumienna",
+        "result": "W",
+        "method": "Submission (armbar)",
+        "event": "2024 in Oktagon MMA#Oktagon 55: Jungwirth vs. Pukač 2",
+        "round": 3,
+        "time": "4:38"
+      },
+      {
+        "opponent": "Cornelia Holm",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Oktagon 26",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Christina Netza",
+        "result": "W",
+        "method": "KO (head kick)",
+        "event": "Oktagon 22",
+        "round": 1,
+        "time": "1:30"
+      },
+      {
+        "opponent": "Rizlen Zouak",
+        "result": "W",
+        "method": "Submission (armbar)",
+        "event": "Oktagon 21",
+        "round": 2,
+        "time": "1:25"
+      },
+      {
+        "opponent": "Anzelika Petkevičiute",
+        "result": "W",
+        "method": "Submission (armbar)",
+        "event": "Oktagon 18",
+        "round": 1,
+        "time": "0:43"
+      }
+    ]
   }
 ]
