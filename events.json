@@ -14365,7 +14365,7 @@
     "venue": "",
     "poster": "",
     "status": "upcoming",
-    "start_time": "2026-09-26T22:00:00.000Z",
+    "start_time": "2026-09-26T21:00:00.000Z",
     "mainCard": [
       {
         "a": "Raul Rosas Jr.",
@@ -14395,35 +14395,11 @@
         "weight": "W Strawweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/2022-02/womens-silhouette-RED-corner.png?itok=SXsY1AgG",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2021-10/71799%252Fprofile-galery%252Ffullbodyright-picture%252FMACHADO_VALESCA_R.png?itok=VJN-8B59"
       },
-      {
-        "a": "Mehemmedeli Osmanli",
-        "b": "Ilimbek Akylbek Uulu",
-        "weight": "Bantamweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
-      },
-      {
-        "a": "Montel Jackson",
-        "b": "Ricky Simon",
-        "weight": "Bantamweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/JACKSON_MONTEL_L_04-25.png",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/SIMON_RICKY_L_03-28.png?itok=sJteSJT_"
-      }
-    ],
-    "prelims": [
       {
         "a": "Brady Hiestand",
         "b": "Rinya Nakamura",
@@ -14436,15 +14412,15 @@
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-08/NAKAMURA_RINYA_L%298_26.png?itok=l7Gg0V6_"
       },
       {
-        "a": "John Castaneda",
-        "b": "Alatengheili",
+        "a": "Mehemmedeli Osmanli",
+        "b": "Ilimbek Akylbek",
         "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/CASTANEDA_JOHN_L_04-18.png",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-04/ALATENGHEILI_L_05-18.png?itok=tO6xLHed"
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
+        "imgB": ""
       },
       {
         "a": "Josiah Harrell",
@@ -14458,14 +14434,47 @@
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/BRENNER_ELVES_L_08-02.png?itok=mY8muzRL"
       }
     ],
-    "earlyPrelims": [
+    "prelims": [
       {
-        "a": "Norma Dumont",
-        "b": "Ailin Perez",
-        "weight": "W Bantamweight",
+        "a": "John Castaneda",
+        "b": "Alatengheili",
+        "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/CASTANEDA_JOHN_L_04-18.png",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-04/ALATENGHEILI_L_05-18.png?itok=tO6xLHed"
+      },
+      {
+        "a": "Rodolfo Bellato",
+        "b": "Christian Edwards",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/BELLATO_RODOLFO_L.png",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/EDWARDS_CHRISTIAN_R_05-16.png?itok=9hKWjz5V"
+      },
+      {
+        "a": "Montel Jackson",
+        "b": "Ricky Simon",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/JACKSON_MONTEL_L_04-25.png",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/SIMON_RICKY_L_03-28.png?itok=sJteSJT_"
+      },
+      {
+        "a": "Norma Dumont",
+        "b": "Ailin Perez",
+        "weight": "Women's Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/DUMONT_NORMA_L_04-25.png",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/PEREZ_AILIN_L_02-28.png?itok=sPy9HJ2B"
@@ -14473,15 +14482,16 @@
       {
         "a": "Vanessa Demopoulos",
         "b": "Yazmin Jauregui",
-        "weight": "W Strawweight",
+        "weight": "Women's Strawweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-04/DEMOPOULOS_VANESSA_L_04-05.png?itok=mEN09m_H",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-09/JAUREGUI_YAZMIN_L_09-14.png?itok=nqoagzOS"
       }
-    ]
+    ],
+    "earlyPrelims": []
   },
   {
     "id": "ufc-332",
