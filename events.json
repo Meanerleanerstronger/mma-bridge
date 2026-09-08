@@ -14493,7 +14493,7 @@
     "venue": "",
     "poster": "",
     "status": "upcoming",
-    "start_time": null,
+    "start_time": "2026-10-03T20:00:00.000Z",
     "mainCard": [
       {
         "a": "Natalia Silva",
@@ -14501,21 +14501,10 @@
         "weight": "W Flyweight",
         "rounds": "5 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/SILVA_NATALIA_L_01-24.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/CONG_WANG_L_02-07.png"
-      },
-      {
-        "a": "Johnny Walker",
-        "b": "Mick Parkin",
-        "weight": "Heavyweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "comain",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/WALKER_JOHNNY_L_08-23.png",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/5/PARKIN_MICK_L_07-27.png?itok=OX9b6Fw2"
       },
       {
         "a": "Deiveson Figueiredo",
@@ -14523,21 +14512,10 @@
         "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/FIGUEIREDO_DEIVESON_L_10-11.png",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-06/TALBOTT_PAYTON_L_06-28.png?itok=SCY_KVRR"
-      },
-      {
-        "a": "Marvin Vettori",
-        "b": "Ismail Naurdiev",
-        "weight": "Middleweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/VETTORI_MARVIN_L_12-06.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/NAURDIEV_ISMAIL_L_11-22.png"
       },
       {
         "a": "Ateba Gautier",
@@ -14556,10 +14534,21 @@
         "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-06/WILLIAMS_KHAOS_L_06-07.png?itok=tv-XQtv9",
         "imgB": ""
+      },
+      {
+        "a": "King Green",
+        "b": "Esteban Ribovics",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/GREEN_KING_L_05-09.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-09/RIBOVICS_ESTEBAN_L_05-11.png"
       }
     ],
     "prelims": [
@@ -14586,15 +14575,28 @@
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/PULYAEV_ANDREY_R_03-22.png"
       },
       {
-        "a": "Court McGee",
-        "b": "Eric Nolan",
-        "weight": "Welterweight",
+        "a": "Marcus McGhee",
+        "b": "Benardo Sopaj",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/MCGHEE_MARCUS_L_06-06.png",
+        "imgB": ""
+      }
+    ],
+    "earlyPrelims": [
+      {
+        "a": "Johnny Walker",
+        "b": "Mick Parkin",
+        "weight": "Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
-        "slot": "",
-        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-10/MCGEE_COURT_L_10-05.png?itok=CVRx8xXQ",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/NOLAN_ERIC_R_08-16.png"
+        "slot": "comain",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/WALKER_JOHNNY_L_08-23.png",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/5/PARKIN_MICK_L_07-27.png?itok=OX9b6Fw2"
       },
       {
         "a": "Rafael Dos Anjos",
@@ -14608,28 +14610,26 @@
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-09/HERNANDEZ_ALEXANDER_L_09-13.png"
       },
       {
-        "a": "King Green",
-        "b": "Esteban Ribovics",
-        "weight": "Lightweight",
+        "a": "Marvin Vettori",
+        "b": "Ismail Naurdiev",
+        "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/GREEN_KING_L_05-09.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-09/RIBOVICS_ESTEBAN_L_05-11.png"
-      }
-    ],
-    "earlyPrelims": [
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/VETTORI_MARVIN_L_12-06.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/NAURDIEV_ISMAIL_L_11-22.png"
+      },
       {
-        "a": "Marcus McGhee",
-        "b": "Bernardo Sopaj",
-        "weight": "Bantamweight",
+        "a": "Court McGee",
+        "b": "Eric Nolan",
+        "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/MCGHEE_MARCUS_L_06-06.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/6/SOPAJ_BENARDO_L_03-02.png"
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-10/MCGEE_COURT_L_10-05.png?itok=CVRx8xXQ",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/NOLAN_ERIC_R_08-16.png"
       }
     ]
   },
