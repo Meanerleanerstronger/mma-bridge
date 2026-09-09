@@ -50684,7 +50684,19 @@
         "round": 1,
         "time": "0:30"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-06/WILLIAMS_KHAOS_L_06-07.png?itok=tv-XQtv9",
+    "stats": {
+      "slpm": "4.97",
+      "strAcc": "39%",
+      "sapm": "5.34",
+      "strDef": "41%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "51%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-09-08T13:22:51.112Z"
   },
   {
     "id": "roberto-soldi",
@@ -50775,7 +50787,18 @@
         "round": 2,
         "time": "1:38"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-09-08T13:22:53.527Z"
   },
   {
     "id": "rafael-dos-anjos",
@@ -50866,7 +50889,19 @@
         "round": 4,
         "time": "3:47"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-10/5/DOS_ANJOS_RAFAEL_L_12-03.png?itok=5J-7Ljft",
+    "stats": {
+      "slpm": "3.48",
+      "strAcc": "47%",
+      "sapm": "3.23",
+      "strDef": "60%",
+      "tdAvg": "1.95",
+      "tdAcc": "35%",
+      "tdDef": "54%",
+      "subAvg": "0.6"
+    },
+    "statsSyncedAt": "2026-09-08T13:22:56.534Z"
   },
   {
     "id": "lucia-szabova",
@@ -50957,6 +50992,34 @@
         "round": 1,
         "time": "0:43"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/2022-02/womens-silhouette-RED-corner.png?itok=SXsY1AgG",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-09-08T13:22:59.641Z"
+  },
+  {
+    "id": "tainara-lisboa",
+    "name": "Tainara Lisboa",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/LISBOA_TAINARA_L_10-14.png?itok=ibBAzJ5i",
+    "stats": {
+      "slpm": "2.01",
+      "strAcc": "44%",
+      "sapm": "2.88",
+      "strDef": "45%",
+      "tdAvg": "1.67",
+      "tdAcc": "31%",
+      "tdDef": "53%",
+      "subAvg": "0.3"
+    },
+    "statsSyncedAt": "2026-09-08T13:23:02.327Z"
   }
 ]
