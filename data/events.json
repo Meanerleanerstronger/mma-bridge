@@ -14131,7 +14131,10 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/ALDRICH_JJ_L_04-18.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/TARIN_REGINA_L_02-28.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/TARIN_REGINA_L_02-28.png",
+        "winner": "Regina Tarin",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Ignacio Bahamondes",
@@ -14142,7 +14145,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/BAHAMONDES_IGNACIO_L_03-28.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/SALIKHOV_MUSLIM_L_11-08.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/SALIKHOV_MUSLIM_L_11-08.png",
+        "winner": "Ignacio Bahamondes",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Ramiro Jimenez",
@@ -14166,7 +14172,10 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/GARCIA_RAFA_L_04-25.png",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/RONGZHU_L_05-28.png?itok=cqDnLlXs",
-        "cancelled": true
+        "cancelled": true,
+        "winner": "Rongzhu",
+        "method": "DEC",
+        "_supabaseSynced": true
       }
     ],
     "earlyPrelims": [
