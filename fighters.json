@@ -86,7 +86,7 @@
     "ranking_change": 1,
     "record": {
       "wins": 19,
-      "losses": 5,
+      "losses": 6,
       "draws": 0
     },
     "height": "6'4\"",
@@ -98,6 +98,14 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/BLAYDES_CURTIS_L_04-11.png",
     "bio": "Curtis Blaydes is one of the UFC's most durable heavyweights, a Division I wrestler who uses suffocating top pressure and relentless ground-and-pound to grind down opponents. He has beaten multiple ranked heavyweights and has faced the very best the division has to offer, though recent losses to Aspinall and Hokit have kept the title just out of reach.",
     "last5": [
+      {
+        "opponent": "Josh Hokit",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 327",
+        "round": 3,
+        "time": "5:00"
+      },
       {
         "opponent": "Rizvan Kuniev",
         "result": "W",
@@ -169,14 +177,6 @@
         "event": "UFC Fight Night: Blaydes vs. dos Santos",
         "round": 2,
         "time": "1:06"
-      },
-      {
-        "opponent": "Shamil Abdurakhimov",
-        "result": "W",
-        "method": "TKO (elbow and punch)",
-        "event": "UFC 242",
-        "round": 2,
-        "time": "2:22"
       }
     ],
     "stats": {
@@ -3179,9 +3179,9 @@
     "ranking": "#3",
     "ranking_change": 0,
     "record": {
-      "wins": 16,
-      "losses": 3,
-      "draws": 0
+      "wins": 17,
+      "losses": 5,
+      "draws": 1
     },
     "height": "5'5\"",
     "reach": "66\"",
@@ -3192,6 +3192,14 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/GRASSO_ALEXA_L_03-28.png",
     "bio": "Alexa Grasso is a former UFC Women's Flyweight Champion who became a national hero in Mexico when she submitted Valentina Shevchenko at UFC 285. Her slick striking and underrated grappling make her a genuine threat to any champion, and her trilogy with Shevchenko is one of the great rivalries in women's MMA.",
     "last5": [
+      {
+        "opponent": "Maycee Barber",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "UFC Fight Night: Adesanya vs. Pyfer",
+        "round": 1,
+        "time": "2:42"
+      },
       {
         "opponent": "Valentina Shevchenko",
         "result": "W",
@@ -3261,14 +3269,6 @@
         "result": "W",
         "method": "Decision (split)",
         "event": "UFC Fight Night: Pettis vs. Moreno",
-        "round": 3,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Felice Herrig",
-        "result": "L",
-        "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Bermudez vs. The Korean Zombie",
         "round": 3,
         "time": "5:00"
       }
