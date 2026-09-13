@@ -14025,7 +14025,7 @@
     "location": "Glendale, AZ",
     "venue": "Desert Diamond Arena",
     "poster": "images/noche-ufc-silva-vs-delgado-poster.jpg",
-    "status": "upcoming",
+    "status": "completed",
     "start_time": "2026-09-12T18:00:00.000Z",
     "droppedFights": [],
     "mainCard": [
@@ -14040,7 +14040,11 @@
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-02/SILVA_JEAN_L_02-22.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-07/DELGADO_JOSE_R_07-18.png",
         "manualOverride": true,
-        "manualOverrideNote": "Yair Rodriguez pulled out (injury), Jose Miguel Delgado steps in — confirmed by admin 2026-08-23, ahead of UFC.com publishing the change."
+        "manualOverrideNote": "Yair Rodriguez pulled out (injury), Jose Miguel Delgado steps in — confirmed by admin 2026-08-23, ahead of UFC.com publishing the change.",
+        "winner": "Jean Silva",
+        "method": "SUB",
+        "round": 3,
+        "_supabaseSynced": true
       },
       {
         "a": "Alexa Grasso",
