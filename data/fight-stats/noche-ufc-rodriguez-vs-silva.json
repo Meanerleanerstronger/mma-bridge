@@ -1,0 +1,167 @@
+{
+  "eventId": "noche-ufc-rodriguez-vs-silva",
+  "eventName": "Noche UFC: Silva vs. Delgado",
+  "fights": [
+    {
+      "fighter1": "Jean Silva Jose Delgado",
+      "fighter2": "Brandon Moreno Joseph Morales",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "3940",
+          "totalStr": "10",
+          "td": "Featherweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "6771",
+          "totalStr": "00",
+          "td": "Flyweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Tommy McMillen Marwan Rahiki",
+      "fighter2": "Alexa Grasso Manon Fiorot",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 1",
+          "sigStr": "8979",
+          "totalStr": "30",
+          "td": "Featherweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "1 0",
+          "sigStr": "8072",
+          "totalStr": "00",
+          "td": "Women'sFlyweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Curtis Blaydes Waldo Cortes Acosta",
+      "fighter2": "David Martinez Dan Ige",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "2428",
+          "totalStr": "00",
+          "td": "Heavyweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "5227",
+          "totalStr": "00",
+          "td": "Bantamweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Tim Elliott Edgar Chairez",
+      "fighter2": "Ignacio Bahamondes Muslim Salikhov",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "6458",
+          "totalStr": "01",
+          "td": "CatchWeight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "7842",
+          "totalStr": "00",
+          "td": "Welterweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Yousri Belgaroui Djorden Santos",
+      "fighter2": "Tommy Gantt Drakkar Klose",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "4616",
+          "totalStr": "00",
+          "td": "Middleweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "5615",
+          "totalStr": "10",
+          "td": "Lightweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Rongzhu Rafa Garcia",
+      "fighter2": "Sean King III Jessie Rosas",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "10973",
+          "totalStr": "00",
+          "td": "Lightweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "73",
+          "totalStr": "00",
+          "td": "Featherweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Regina Tarin JJ Aldrich",
+      "fighter2": "",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "7763",
+          "totalStr": "00",
+          "td": "Women'sFlyweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0",
+          "sigStr": "",
+          "totalStr": "",
+          "td": "",
+          "subAtt": 0,
+          "ctrlTime": "0:00"
+        }
+      }
+    }
+  ]
+}
