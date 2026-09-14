@@ -2228,6 +2228,14 @@
     "bio": "Jean Silva is one of the most ferocious strikers in the featherweight division, a Brazilian finisher with a 71% finish rate built on explosive combinations, devastating power and relentless aggression. His striking variety — from sharp punches to spinning attacks — makes him a nightmare stylistically. Won Performance of the Night for a ninja choke finish of Bryce Mitchell and continues to climb toward the title.",
     "last5": [
       {
+        "opponent": "Jose Miguel Delgado",
+        "result": "W",
+        "method": "Sub",
+        "event": "Noche UFC: Silva vs. Delgado",
+        "round": 3,
+        "time": null
+      },
+      {
         "opponent": "Arnold Allen",
         "result": "W",
         "method": "Decision (unanimous)",
@@ -40214,7 +40222,17 @@
     },
     "height": "5'11\"",
     "reach": "73.0\"",
-    "weightClass": "Featherweight"
+    "weightClass": "Featherweight",
+    "last5": [
+      {
+        "opponent": "Jean Silva",
+        "result": "L",
+        "method": "Sub",
+        "event": "Noche UFC: Silva vs. Delgado",
+        "round": 3,
+        "time": null
+      }
+    ]
   },
   {
     "id": "allen-frye-jr",
