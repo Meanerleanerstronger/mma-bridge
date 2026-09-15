@@ -14279,7 +14279,8 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/MOICANO_RENATO_L_04-04.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/ORTEGA_BRIAN_L_08-23.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/ORTEGA_BRIAN_L_08-23.png",
+        "_espnMissStreak": true
       },
       {
         "a": "Alonzo Menifield",
@@ -14970,14 +14971,14 @@
     "start_time": null,
     "mainCard": [
       {
-        "a": "Nick Klein",
-        "b": "Joe Kropschot",
-        "weight": "Middleweight",
-        "rounds": "3 Rds",
+        "a": "Renato Moicano",
+        "b": "Tom Nolan",
+        "weight": "Lightweight",
+        "rounds": "5 Rds",
         "titleFight": false,
         "ranked": false,
         "slot": "main",
-        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/KLEIN_NICK_L_08-02.png?itok=NzieeiWf",
+        "imgA": "",
         "imgB": ""
       },
       {
@@ -14990,6 +14991,17 @@
         "slot": "comain",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/2022-02/womens-silhouette-RED-corner.png?itok=SXsY1AgG",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/LISBOA_TAINARA_L_10-14.png?itok=ibBAzJ5i"
+      },
+      {
+        "a": "Nick Klein",
+        "b": "Joe Kropschot",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/KLEIN_NICK_L_08-02.png?itok=NzieeiWf",
+        "imgB": ""
       }
     ],
     "prelims": [],
