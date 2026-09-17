@@ -14271,18 +14271,6 @@
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/CHOI_DOOHO_L_05-16.png"
       },
       {
-        "a": "Renato Moicano",
-        "b": "Brian Ortega",
-        "weight": "Lightweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": true,
-        "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/MOICANO_RENATO_L_04-04.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/ORTEGA_BRIAN_L_08-23.png",
-        "cancelled": true
-      },
-      {
         "a": "Alonzo Menifield",
         "b": "Iwo Baraniewski",
         "weight": "Light Heavyweight",
@@ -14292,6 +14280,17 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-06/MENIFIELD_ALONZO_L_06-14.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/BARANIEWSKI_IWO_L_06-06.png"
+      },
+      {
+        "a": "Gable Steveson",
+        "b": "Sean Sharaf",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-07/STEVESON_GABLE_L_07-11.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/SHERAF_SEAN_L_12-13.png"
       }
     ],
     "prelims": [
@@ -14318,17 +14317,6 @@
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/5/DESPAIGNE_ROBELIS_L_03-09.png"
       },
       {
-        "a": "Gable Steveson",
-        "b": "Sean Sharaf",
-        "weight": "Heavyweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-07/STEVESON_GABLE_L_07-11.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/SHERAF_SEAN_L_12-13.png"
-      },
-      {
         "a": "Michael Aswell Jr.",
         "b": "JooSang Yoo",
         "weight": "Featherweight",
@@ -14338,6 +14326,17 @@
         "slot": "",
         "imgA": "",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-06/YOO_JOOSANG_R_06-07.png?itok=sFYPXELB"
+      },
+      {
+        "a": "Ryan Gandra",
+        "b": "Ozzy Diaz",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/GANDRA_RYAN_L_02-28.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/DIAZ_OZZY_R_03-08.png"
       }
     ],
     "earlyPrelims": [
@@ -14364,17 +14363,6 @@
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-11/MOURA_EDUARDA_L_06-08.png"
       },
       {
-        "a": "Ryan Gandra",
-        "b": "Ozzy Diaz",
-        "weight": "Middleweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/GANDRA_RYAN_L_02-28.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/DIAZ_OZZY_R_03-08.png"
-      },
-      {
         "a": "Edmen Shahbazyan",
         "b": "Brunno Ferreira",
         "weight": "Middleweight",
@@ -14384,6 +14372,14 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/SHAHBAZYAN_EDMEN_L_10-04.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-07/FERREIRA_BRUNNO_L_07-19.png"
+      }
+    ],
+    "droppedFights": [
+      {
+        "a": "Renato Moicano",
+        "b": "Brian Ortega",
+        "reason": "removed from the card",
+        "droppedAt": "2026-09-17T12:55:32.492Z"
       }
     ]
   },
@@ -14626,6 +14622,17 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/MCGHEE_MARCUS_L_06-06.png",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/6/SOPAJ_BENARDO_L_03-02.png?itok=fxyt7hIc"
+      },
+      {
+        "a": "Anthony Wint",
+        "b": "Lucas Armand",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/WINT_ANTHONY_L_08-11.png?itok=3WBRGkED",
+        "imgB": ""
       }
     ],
     "earlyPrelims": [
