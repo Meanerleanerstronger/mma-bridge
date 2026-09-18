@@ -14632,7 +14632,8 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/WINT_ANTHONY_L_08-11.png?itok=3WBRGkED",
-        "imgB": ""
+        "imgB": "",
+        "_espnMissStreak": true
       }
     ],
     "earlyPrelims": [
@@ -15047,6 +15048,21 @@
     "type": "PPV",
     "date": "Sat, Nov 14, 2026",
     "isoDate": "2026-11-14",
+    "location": "",
+    "venue": "",
+    "poster": "",
+    "status": "upcoming",
+    "start_time": null,
+    "mainCard": [],
+    "prelims": [],
+    "earlyPrelims": []
+  },
+  {
+    "id": "ufc-fight-night-qatar",
+    "name": "UFC Fight Night: Qatar",
+    "type": "FIGHT NIGHT",
+    "date": "Sat, Nov 21, 2026",
+    "isoDate": "2026-11-21",
     "location": "",
     "venue": "",
     "poster": "",
