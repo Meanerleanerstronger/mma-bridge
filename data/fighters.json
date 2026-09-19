@@ -23127,11 +23127,19 @@
     "name": "Casey O'Neill",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/ONEILL_CASEY_L_03-28.png",
     "record": {
-      "wins": 10,
+      "wins": 11,
       "losses": 2,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Gabriella Fernandes",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "UFC Fight Night: Adesanya vs. Pyfer",
+        "round": 1,
+        "time": "3:11"
+      },
       {
         "opponent": "Luana Santos",
         "result": "W",
@@ -23202,14 +23210,6 @@
         "method": "Decision (unanimous)",
         "event": "Eternal MMA 51",
         "round": 3,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Miki Motono",
-        "result": "W",
-        "method": "Decision (unanimous)",
-        "event": "Eternal MMA 48",
-        "round": 5,
         "time": "5:00"
       }
     ],
