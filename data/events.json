@@ -14303,7 +14303,11 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/VERA_MARLON_L_02-28.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/JOURDAIN_CHARLES_L_10-18.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/JOURDAIN_CHARLES_L_10-18.png",
+        "winner": "Marlon Vera",
+        "method": "KO/TKO",
+        "round": 3,
+        "_supabaseSynced": true
       },
       {
         "a": "Tai Tuivasa",
@@ -14314,7 +14318,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/TUIVASA_TAI_L_05-02.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/5/DESPAIGNE_ROBELIS_L_03-09.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/5/DESPAIGNE_ROBELIS_L_03-09.png",
+        "winner": "Robelis Despaigne",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Michael Aswell Jr.",
@@ -14325,7 +14332,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-06/YOO_JOOSANG_R_06-07.png?itok=sFYPXELB"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-06/YOO_JOOSANG_R_06-07.png?itok=sFYPXELB",
+        "winner": "Michael Aswell",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Ryan Gandra",
@@ -14336,7 +14346,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/GANDRA_RYAN_L_02-28.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/DIAZ_OZZY_R_03-08.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/DIAZ_OZZY_R_03-08.png",
+        "winner": "Ryan Gandra",
+        "method": "KO/TKO",
+        "round": 1,
+        "_supabaseSynced": true
       }
     ],
     "earlyPrelims": [
@@ -14349,7 +14363,11 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-12/CHIKADZE_GIGA_L_12-13.png?itok=PAa40eRd",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/BRITO_JOANDERSON_L_12-13.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/BRITO_JOANDERSON_L_12-13.png",
+        "winner": "Joanderson Brito",
+        "method": "KO/TKO",
+        "round": 1,
+        "_supabaseSynced": true
       },
       {
         "a": "Casey O'Neill",
@@ -14360,7 +14378,11 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/ONEILL_CASEY_L_03-28.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-11/MOURA_EDUARDA_L_06-08.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-11/MOURA_EDUARDA_L_06-08.png",
+        "winner": "Casey O'Neill",
+        "method": "SUB",
+        "round": 1,
+        "_supabaseSynced": true
       },
       {
         "a": "Edmen Shahbazyan",
@@ -14371,7 +14393,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/SHAHBAZYAN_EDMEN_L_10-04.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-07/FERREIRA_BRUNNO_L_07-19.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-07/FERREIRA_BRUNNO_L_07-19.png",
+        "winner": "Edmen Shahbazyan",
+        "method": "DEC",
+        "_supabaseSynced": true
       }
     ],
     "droppedFights": [
@@ -14632,8 +14657,7 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/WINT_ANTHONY_L_08-11.png?itok=3WBRGkED",
-        "imgB": "",
-        "cancelled": true
+        "imgB": ""
       }
     ],
     "earlyPrelims": [
