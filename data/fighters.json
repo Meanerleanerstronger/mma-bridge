@@ -1575,6 +1575,14 @@
     "bio": "Arman Tsarukyan is the most complete lightweight in the world, combining world-class wrestling with powerful boxing, some of the best athleticism in the division, and brutal ground-and-pound from top position. His elbows from top are among the most damaging in the lightweight division. He was scheduled to fight Islam at UFC 311 but pulled out injured — his five-fight win streak, capped with a submission of Dan Hooker, keeps him firmly next in line.",
     "last5": [
       {
+        "opponent": "Mauricio Ruffy",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 331: Van vs. Pantoja 2",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Dan Hooker",
         "result": "W",
         "method": "Submission (arm-triangle choke)",
@@ -6476,6 +6484,14 @@
     "bio": "Mauricio Ruffy is the most electric knockout artist in the lightweight division — a Brazilian one-punch destroyer who turns fights off with surgical precision. Named after Monkey D. Luffy from One Piece by his late brother before his first pro fight, Ruffy carries that tribute into every performance. With 12 knockouts in 13 wins, his KO rate is extraordinary for any division. His signature spinning wheel kick has ended multiple fights, earning back-to-back Performance of the Night bonuses on his UFC debut run. At just 27 years old, 'One Shot' Ruffy is already being talked about as a future lightweight champion.",
     "last5": [
       {
+        "opponent": "Arman Tsarukyan",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 331: Van vs. Pantoja 2",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Michael Chandler",
         "result": "W",
         "method": "TKO (spinning wheel kick and punches)",
@@ -7049,6 +7065,14 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-07/STEVESON_GABLE_L_07-11.png",
     "bio": "Gable Steveson is the most hyped heavyweight prospect in MMA — a 2020 Olympic gold medalist and two-time NCAA wrestling champion who brings a pedigree of dominance that rivals any fighter in history. After a stint with WWE, Steveson signed with the UFC in April 2026 off a 3-0 pro MMA record, finishing all three opponents in the first round. He trains at Jackson Wink MMA Academy under the tutelage of Jon Jones. His UFC debut against Elisha Ellison at UFC 329 on July 11, 2026 is one of the most anticipated heavyweight debuts in recent memory.",
     "last5": [
+      {
+        "opponent": "Sean Sharaf",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 331: Van vs. Pantoja 2",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Elisha Ellison",
         "result": "W",
@@ -25247,6 +25271,14 @@
     },
     "last5": [
       {
+        "opponent": "Dooho Choi",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 331: Van vs. Pantoja 2",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Aaron Pico",
         "result": "L",
         "method": "Decision (unanimous)",
@@ -32529,6 +32561,14 @@
     },
     "last5": [
       {
+        "opponent": "Patricio Pitbull",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 331: Van vs. Pantoja 2",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Daniel Santos",
         "result": "W",
         "method": "TKO",
@@ -33824,6 +33864,14 @@
       "draws": 1
     },
     "last5": [
+      {
+        "opponent": "Iwo Baraniewski",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 331: Van vs. Pantoja 2",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Zhang Mingyang",
         "result": "W",
@@ -35592,6 +35640,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Alonzo Menifield",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 331: Van vs. Pantoja 2",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Junior Tafa",
         "result": "W",
@@ -45536,7 +45592,17 @@
     "weightClass": "Heavyweight",
     "height": "6'2\"",
     "reach": "76\"",
-    "statsSyncedAt": "2026-08-26T09:43:33.606Z"
+    "statsSyncedAt": "2026-08-26T09:43:33.606Z",
+    "last5": [
+      {
+        "opponent": "Gable Steveson",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 331: Van vs. Pantoja 2",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "robelis-despaigne",
