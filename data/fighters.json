@@ -51505,16 +51505,49 @@
   {
     "id": "suyoung-you",
     "name": "SuYoung You",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-03/YOU_SUYOUNG_L_03-15.png?itok=Mfh4XApl"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-03/YOU_SUYOUNG_L_03-15.png?itok=Mfh4XApl",
+    "stats": {
+      "slpm": "2.15",
+      "strAcc": "47%",
+      "sapm": "2.01",
+      "strDef": "68%",
+      "tdAvg": "4.26",
+      "tdAcc": "47%",
+      "tdDef": "66%",
+      "subAvg": "0.4"
+    },
+    "statsSyncedAt": "2026-09-20T13:30:04.838Z"
   },
   {
     "id": "stephen-thompson",
     "name": "Stephen Thompson",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/THOMPSON_STEPHEN_L_07-12.png?itok=T4Y2Tqct"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/THOMPSON_STEPHEN_L_07-12.png?itok=T4Y2Tqct",
+    "stats": {
+      "slpm": "4.05",
+      "strAcc": "46%",
+      "sapm": "3.00",
+      "strDef": "54%",
+      "tdAvg": "0.23",
+      "tdAcc": "35%",
+      "tdDef": "63%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-09-20T13:30:35.731Z"
   },
   {
     "id": "adrian-yanez",
     "name": "Adrian Yañez",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-12/YANEZ_ADRIAN_L_12-14.png?itok=SPA6dLRg"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-12/YANEZ_ADRIAN_L_12-14.png?itok=SPA6dLRg",
+    "stats": {
+      "slpm": "5.95",
+      "strAcc": "41%",
+      "sapm": "5.22",
+      "strDef": "56%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "76%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-09-20T13:30:40.741Z"
   }
 ]
