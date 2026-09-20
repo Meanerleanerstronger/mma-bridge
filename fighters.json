@@ -1560,7 +1560,7 @@
     "ranking": "#2",
     "ranking_change": 1,
     "record": {
-      "wins": 23,
+      "wins": 24,
       "losses": 3,
       "draws": 0
     },
@@ -6463,7 +6463,7 @@
     "ranking_change": 3,
     "record": {
       "wins": 14,
-      "losses": 2,
+      "losses": 3,
       "draws": 0
     },
     "height": "5'11\"",
@@ -7043,7 +7043,7 @@
     "ranking": "",
     "record": {
       "wins": 4,
-      "losses": 0,
+      "losses": 1,
       "draws": 0
     },
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-07/STEVESON_GABLE_L_07-11.png",
@@ -7953,7 +7953,7 @@
     "ranking": "",
     "record": {
       "wins": 15,
-      "losses": 6,
+      "losses": 7,
       "draws": 0
     },
     "height": "5'11\"",
@@ -7965,6 +7965,14 @@
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-12/CHIKADZE_GIGA_L_12-13.png?itok=PAa40eRd",
     "bio": "Giga Chikadze is a Georgian kickboxer who brought a devastating elite striking game to the featherweight division, winning seven straight UFC fights and becoming one of the hottest prospects before his momentum stalled. The 'Ninja' uses long kicks, crisp combinations, and elite timing to land highlight-reel knockouts.",
     "last5": [
+      {
+        "opponent": "Joanderson Brito",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 331: Van vs. Pantoja 2",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Vinicius Oliveira",
         "result": "L",
@@ -16945,10 +16953,18 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/TUIVASA_TAI_L_05-02.png",
     "record": {
       "wins": 14,
-      "losses": 10,
+      "losses": 11,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Robelis Despaigne",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 331: Van vs. Pantoja 2",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Louie Sutherland",
         "result": "L",
@@ -20381,6 +20397,14 @@
     "nickname": "The Hulk",
     "last5": [
       {
+        "opponent": "Edmen Shahbazyan",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 331: Van vs. Pantoja 2",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Ikram Aliskerov",
         "result": "L",
         "method": "Decision (unanimous)",
@@ -23127,11 +23151,19 @@
     "name": "Casey O'Neill",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/ONEILL_CASEY_L_03-28.png",
     "record": {
-      "wins": 11,
+      "wins": 12,
       "losses": 2,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Eduarda Moura",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC 331: Van vs. Pantoja 2",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Gabriella Fernandes",
         "result": "W",
@@ -25209,7 +25241,7 @@
     "id": "patricio-pitbull",
     "name": "Patricio Pitbull",
     "record": {
-      "wins": 37,
+      "wins": 38,
       "losses": 9,
       "draws": 0
     },
@@ -26373,10 +26405,18 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/JOURDAIN_CHARLES_L_10-18.png",
     "record": {
       "wins": 18,
-      "losses": 8,
+      "losses": 9,
       "draws": 1
     },
     "last5": [
+      {
+        "opponent": "Marlon Vera",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 331: Van vs. Pantoja 2",
+        "round": 3,
+        "time": null
+      },
       {
         "opponent": "Kyler Phillips",
         "result": "W",
@@ -31159,6 +31199,14 @@
     },
     "last5": [
       {
+        "opponent": "Ryan Gandra",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 331: Van vs. Pantoja 2",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Ateba Gautier",
         "result": "L",
         "method": "TKO",
@@ -32475,9 +32523,9 @@
     "name": "Dooho Choi",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/CHOI_DOOHO_L_05-16.png",
     "record": {
-      "wins": 14,
-      "losses": 4,
-      "draws": 0
+      "wins": 17,
+      "losses": 5,
+      "draws": 1
     },
     "last5": [
       {
@@ -33771,7 +33819,7 @@
     "name": "Alonzo Menifield",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-06/MENIFIELD_ALONZO_L_06-14.png",
     "record": {
-      "wins": 18,
+      "wins": 19,
       "losses": 6,
       "draws": 1
     },
@@ -35183,11 +35231,19 @@
     "name": "Edmen Shahbazyan",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/SHAHBAZYAN_EDMEN_L_10-04.png",
     "record": {
-      "wins": 16,
+      "wins": 17,
       "losses": 6,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Brunno Ferreira",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 331: Van vs. Pantoja 2",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Brendan Allen",
         "result": "L",
@@ -35532,7 +35588,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/BARANIEWSKI_IWO_L_06-06.png",
     "record": {
       "wins": 9,
-      "losses": 0,
+      "losses": 1,
       "draws": 0
     },
     "last5": [
@@ -36005,11 +36061,19 @@
     "name": "Joanderson Brito",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/BRITO_JOANDERSON_L_12-13.png",
     "record": {
-      "wins": 19,
+      "wins": 20,
       "losses": 5,
       "draws": 1
     },
     "last5": [
+      {
+        "opponent": "Giga Chikadze",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 331: Van vs. Pantoja 2",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Jordan Leavitt",
         "result": "W",
@@ -36833,7 +36897,8 @@
       "draws": 0
     },
     "nickname": "The Texas Kid",
-    "statsSyncedAt": "2026-08-24T09:50:46.830Z"
+    "statsSyncedAt": "2026-08-24T09:50:46.830Z",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-09/ASWELL_JR_MICHAEL_L_09-19.png?itok=NNowQoo1"
   },
   {
     "id": "shane-collins",
@@ -40193,6 +40258,14 @@
     },
     "nickname": "Problema",
     "last5": [
+      {
+        "opponent": "Ozzy Diaz",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 331: Van vs. Pantoja 2",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Zachary Reese",
         "result": "W",
@@ -45470,12 +45543,20 @@
     "name": "Robelis Despaigne",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-10/5/DESPAIGNE_ROBELIS_L_03-09.png",
     "record": {
-      "wins": 6,
+      "wins": 7,
       "losses": 2,
       "draws": 0
     },
     "nickname": "The Big Boy",
     "last5": [
+      {
+        "opponent": "Tai Tuivasa",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 331: Van vs. Pantoja 2",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Junior dos Santos",
         "result": "W",
@@ -45707,6 +45788,14 @@
     },
     "last5": [
       {
+        "opponent": "Charles Jourdain",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 331: Van vs. Pantoja 2",
+        "round": 3,
+        "time": null
+      },
+      {
         "opponent": "David Martínez (fighter)",
         "result": "L",
         "method": "Decision (unanimous)",
@@ -45821,6 +45910,14 @@
     "flag": "🇧🇷",
     "last5": [
       {
+        "opponent": "Casey O'Neill",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC 331: Van vs. Pantoja 2",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Wang Cong",
         "result": "L",
         "method": "Decision (unanimous)",
@@ -45886,7 +45983,17 @@
     "weightClass": "Featherweight",
     "height": "5'7\"",
     "statsSyncedAt": "2026-08-26T09:43:47.793Z",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-06/YOO_JOOSANG_R_06-07.png?itok=sFYPXELB"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-06/YOO_JOOSANG_R_06-07.png?itok=sFYPXELB",
+    "last5": [
+      {
+        "opponent": "Michael Aswell",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 331: Van vs. Pantoja 2",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "michael-aswell",
@@ -45900,7 +46007,17 @@
     "nickname": "The Texas Kid",
     "height": "5'8\"",
     "reach": "69.0\"",
-    "weightClass": "Featherweight"
+    "weightClass": "Featherweight",
+    "last5": [
+      {
+        "opponent": "JooSang Yoo",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 331: Van vs. Pantoja 2",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "sean-woodson",
@@ -51295,6 +51412,7 @@
       "tdDef": "0%",
       "subAvg": "0.0"
     },
-    "statsSyncedAt": "2026-09-18T13:26:21.190Z"
+    "statsSyncedAt": "2026-09-18T13:26:21.190Z",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
   }
 ]
