@@ -14234,7 +14234,7 @@
     "location": "",
     "venue": "",
     "poster": "https://www.ufc.com/images/styles/background_image_xl_2x/s3/2026-08/091926-ufc-331-van-vs-pantoja-2-EVENT-ART.jpg",
-    "status": "upcoming",
+    "status": "completed",
     "start_time": "2026-09-19T21:30:00.000Z",
     "mainCard": [
       {
@@ -14246,7 +14246,10 @@
         "ranked": true,
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/VAN_JOSHUA_L_BELTMOCK.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/PANTOJA_ALEXANDRE_L_07-08.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/PANTOJA_ALEXANDRE_L_07-08.png",
+        "winner": "Joshua Van",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Arman Tsarukyan",
