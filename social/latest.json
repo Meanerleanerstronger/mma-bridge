@@ -1,15 +1,30 @@
 {
-  "date": "2026-09-21",
+  "date": "2026-09-22",
   "posts": [
     {
+      "type": "news",
+      "caption": "'They Came and Kicked Me Out': Sean Sharaf Lists Things That Landed Him in $600K Debt After Dana White’s Big Announcement (via Yardbarker)",
+      "image": "2026-09-22-news-1.png"
+    },
+    {
+      "type": "news",
+      "caption": "Terrifying Viral Footage of First Human vs Robot MMA Fight Emerges (via GIVEMESPORT)",
+      "image": "2026-09-22-news-2.png"
+    },
+    {
+      "type": "news",
+      "caption": "Jon Jones Reveals What He Did After Gable Steveson's Shock Loss at UFC 331 (via GIVEMESPORT)",
+      "image": "2026-09-22-news-3.png"
+    },
+    {
       "type": "event_countdown",
-      "caption": "Jr. vs. Barcelos is in 5 days. Make your picks: https://mmabridge.com/picks.html?id=ufc-fight-night-rosas-jr-vs-barcelos\n\nScreenshots via mmabridge.com",
-      "image": "2026-09-21-event_countdown-1.png"
+      "caption": "Jr. vs. Barcelos is in 4 days. Make your picks: https://mmabridge.com/picks.html?id=ufc-fight-night-rosas-jr-vs-barcelos\n\nScreenshots via mmabridge.com",
+      "image": "2026-09-22-event_countdown-1.png"
     },
     {
       "type": "event_recap",
       "caption": "Relive UFC 331: Van vs. Pantoja 2. Van def. Pantoja. Full card recap and community ratings: https://mmabridge.com/event-review.html?id=ufc-331-van-vs-pantoja-2\n\nScreenshots via mmabridge.com",
-      "image": "2026-09-21-event_recap-1.png"
+      "image": "2026-09-22-event_recap-1.png"
     }
   ]
 }
