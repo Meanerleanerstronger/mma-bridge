@@ -51852,7 +51852,18 @@
   {
     "id": "cody-chovancek",
     "name": "Cody Chovancek",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/CHOVANCEK_CODY_R_09-16.png?itok=v2G8Yooy"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/CHOVANCEK_CODY_R_09-16.png?itok=v2G8Yooy",
+    "stats": {
+      "slpm": "2.85",
+      "strAcc": "50%",
+      "sapm": "2.46",
+      "strDef": "51%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "83%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-09-21T15:42:47.619Z"
   },
   {
     "id": "suyoung-you",
@@ -52073,6 +52084,97 @@
         "event": "Dana White's Contender Series Season 4#Week 2 - August 11",
         "round": 1,
         "time": "0:39"
+      }
+    ]
+  },
+  {
+    "id": "mickey-gall",
+    "name": "Mickey Gall",
+    "record": {
+      "wins": 7,
+      "losses": 7,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Ramiz Brahimaj",
+        "result": "L",
+        "method": "KO (punches)",
+        "event": "UFC 309",
+        "round": 1,
+        "time": "2:55"
+      },
+      {
+        "opponent": "Bassil Hafez",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 302",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Mike Malott",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC 273",
+        "round": 1,
+        "time": "3:41"
+      },
+      {
+        "opponent": "Alex Morono",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Font vs. Aldo",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Jordan Williams (fighter)",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC on ESPN: Sandhagen vs. Dillashaw",
+        "round": 1,
+        "time": "2:57"
+      },
+      {
+        "opponent": "Mike Perry (fighter)",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Poirier vs. Hooker",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Salim Touahri",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Covington vs. Lawler",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Diego Sanchez",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC 235",
+        "round": 2,
+        "time": "4:13"
+      },
+      {
+        "opponent": "George Sullivan (fighter)",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC Fight Night: Gaethje vs. Vick",
+        "round": 1,
+        "time": "1:09"
+      },
+      {
+        "opponent": "Randy Brown (fighter)",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 217",
+        "round": 3,
+        "time": "5:00"
       }
     ]
   }
