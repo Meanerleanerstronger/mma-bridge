@@ -52176,6 +52176,200 @@
         "round": 3,
         "time": "5:00"
       }
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-11/GALL_MICKEY_L_11-16.png?itok=tlDNrYh3",
+    "stats": {
+      "slpm": "3.50",
+      "strAcc": "49%",
+      "sapm": "4.72",
+      "strDef": "49%",
+      "tdAvg": "1.15",
+      "tdAcc": "32%",
+      "tdDef": "37%",
+      "subAvg": "1.6"
+    },
+    "statsSyncedAt": "2026-09-22T13:56:41.967Z"
+  },
+  {
+    "id": "tina-black",
+    "name": "Tina Black",
+    "record": {
+      "wins": 26,
+      "losses": 4,
+      "draws": 1
+    },
+    "last5": [
+      {
+        "opponent": "Zhang Weili",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 322",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Manon Fiorot",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 315",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Alexa Grasso",
+        "result": "L",
+        "method": "Submission (face crank)",
+        "event": "UFC 285",
+        "round": 4,
+        "time": "4:34"
+      },
+      {
+        "opponent": "Taila Santos",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC 275",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Lauren Murphy",
+        "result": "W",
+        "method": "TKO (elbows and punches)",
+        "event": "UFC 266",
+        "round": 4,
+        "time": "4:00"
+      },
+      {
+        "opponent": "Jéssica Andrade",
+        "result": "W",
+        "method": "TKO (elbows)",
+        "event": "UFC 261",
+        "round": 2,
+        "time": "3:19"
+      },
+      {
+        "opponent": "Jennifer Maia",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 255",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Katlyn Chookagian",
+        "result": "W",
+        "method": "TKO (elbows and punches)",
+        "event": "UFC 247",
+        "round": 3,
+        "time": "1:03"
+      },
+      {
+        "opponent": "Liz Carmouche",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Shevchenko vs. Carmouche 2",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Jessica Eye",
+        "result": "W",
+        "method": "KO (head kick)",
+        "event": "UFC 238",
+        "round": 2,
+        "time": "0:26"
+      }
+    ]
+  },
+  {
+    "id": "louis-jourdain",
+    "name": "Louis Jourdain",
+    "record": {
+      "wins": 18,
+      "losses": 9,
+      "draws": 1
+    },
+    "last5": [
+      {
+        "opponent": "Marlon Vera",
+        "result": "L",
+        "method": "TKO (submission to punch)",
+        "event": "UFC 331",
+        "round": 3,
+        "time": "2:02"
+      },
+      {
+        "opponent": "Kyler Phillips",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Burns vs. Malott",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Davey Grant",
+        "result": "W",
+        "method": "Submission (guillotine choke)",
+        "event": "UFC Fight Night: de Ridder vs. Allen",
+        "round": 1,
+        "time": "3:05"
+      },
+      {
+        "opponent": "Victor Henry (fighter)",
+        "result": "W",
+        "method": "Submission (guillotine choke)",
+        "event": "UFC Fight Night: Moreno vs. Albazi",
+        "round": 2,
+        "time": "3:43"
+      },
+      {
+        "opponent": "Jean Silva",
+        "result": "L",
+        "method": "KO (punch)",
+        "event": "UFC 303",
+        "round": 2,
+        "time": "1:22"
+      },
+      {
+        "opponent": "Sean Woodson",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC 297",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Ricardo Ramos (fighter)",
+        "result": "W",
+        "method": "Submission (guillotine choke)",
+        "event": "UFC Fight Night: Fiziev vs. Gamrot",
+        "round": 1,
+        "time": "3:12"
+      },
+      {
+        "opponent": "Kron Gracie",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 288",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Nathaniel Wood (fighter)",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Gane vs. Tuivasa",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Shane Burgos",
+        "result": "L",
+        "method": "Decision (majority)",
+        "event": "UFC on ABC: Ortega vs. Rodríguez",
+        "round": 3,
+        "time": "5:00"
+      }
     ]
   }
 ]
