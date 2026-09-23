@@ -14588,17 +14588,6 @@
     "start_time": "2026-10-03T20:00:00.000Z",
     "mainCard": [
       {
-        "a": "Natalia Silva",
-        "b": "Wang Cong",
-        "weight": "W Flyweight",
-        "rounds": "5 Rds",
-        "titleFight": false,
-        "ranked": true,
-        "slot": "main",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/SILVA_NATALIA_L_01-24.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/CONG_WANG_L_02-07.png"
-      },
-      {
         "a": "Deiveson Figueiredo",
         "b": "Payton Talbott",
         "weight": "Bantamweight",
@@ -14734,6 +14723,14 @@
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-10/MCGEE_COURT_L_10-05.png?itok=CVRx8xXQ",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/NOLAN_ERIC_R_08-16.png"
       }
+    ],
+    "droppedFights": [
+      {
+        "a": "Natalia Silva",
+        "b": "Wang Cong",
+        "reason": "removed from the card",
+        "droppedAt": "2026-09-23T13:10:48.388Z"
+      }
     ]
   },
   {
@@ -14827,7 +14824,7 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "",
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/JOURDAIN_LOUIS_L_09-30.png?itok=hXNV4FbV",
         "imgB": ""
       }
     ],
