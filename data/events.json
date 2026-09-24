@@ -14450,28 +14450,6 @@
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/BARCELOS_RAONI_L_01-18.png"
       },
       {
-        "a": "Rodolfo Vieira",
-        "b": "Robert Bryczek",
-        "weight": "Middleweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "comain",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/VIEIRA_RODOLFO_L_04-25.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-02/BRYZCEK_ROBERT_L_02-10.png"
-      },
-      {
-        "a": "Brady Hiestand",
-        "b": "Rinya Nakamura",
-        "weight": "Bantamweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-04/HIESTAND_BRADY_L_04-22.png?itok=Ny5RUBiZ",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-08/NAKAMURA_RINYA_L%298_26.png?itok=l7Gg0V6_"
-      },
-      {
         "a": "Mehemmedeli Osmanli",
         "b": "Ilimbek Akylbek",
         "weight": "Bantamweight",
@@ -14492,6 +14470,28 @@
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/2022-02/womens-silhouette-RED-corner.png?itok=SXsY1AgG",
         "imgB": ""
+      },
+      {
+        "a": "Norma Dumont",
+        "b": "Ailin Perez",
+        "weight": "Women's Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/DUMONT_NORMA_L_04-25.png",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/PEREZ_AILIN_L_02-28.png?itok=sPy9HJ2B"
+      },
+      {
+        "a": "Luis Hernandez",
+        "b": "Sedriques Dumas",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/DUMAS_SEDRIQUES_L_04-12.png"
       }
     ],
     "prelims": [
@@ -14529,17 +14529,6 @@
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/SIMON_RICKY_L_03-28.png?itok=sJteSJT_"
       },
       {
-        "a": "Norma Dumont",
-        "b": "Ailin Perez",
-        "weight": "Women's Bantamweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": true,
-        "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/DUMONT_NORMA_L_04-25.png",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/PEREZ_AILIN_L_02-28.png?itok=sPy9HJ2B"
-      },
-      {
         "a": "Vanessa Demopoulos",
         "b": "Yazmin Jauregui",
         "weight": "Women's Strawweight",
@@ -14562,15 +14551,26 @@
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-07/HARRELL_JOSIAH_L_07-08.png"
       },
       {
-        "a": "Mickey Gall",
-        "b": "Sedriques Dumas",
-        "weight": "Middleweight",
+        "a": "Brady Hiestand",
+        "b": "Rinya Nakamura",
+        "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-11/GALL_MICKEY_L_11-16.png?itok=tlDNrYh3",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/DUMAS_SEDRIQUES_L_04-12.png"
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-04/HIESTAND_BRADY_L_04-22.png?itok=Ny5RUBiZ",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-08/NAKAMURA_RINYA_L%298_26.png?itok=l7Gg0V6_"
+      },
+      {
+        "a": "Rodolfo Vieira",
+        "b": "Robert Bryczek",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "comain",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/VIEIRA_RODOLFO_L_04-25.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-02/BRYZCEK_ROBERT_L_02-10.png"
       }
     ],
     "earlyPrelims": []
@@ -14766,17 +14766,6 @@
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/ALLEN_BRENDAN_L_06-06.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/DUNCAN_CHRISTIAN_LEROY_L_11-08.png"
-      },
-      {
-        "a": "Francisco Prado",
-        "b": "Ismael Bonfim",
-        "weight": "Welterweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "comain",
-        "imgA": "",
-        "imgB": ""
       }
     ],
     "prelims": [],
@@ -14855,6 +14844,17 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/JOURDAIN_LOUIS_L_09-30.png?itok=hXNV4FbV",
+        "imgB": ""
+      },
+      {
+        "a": "Kyle Nelson",
+        "b": "Cristian Perez Gonzalez",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/NELSON_KYLE_L_10-18.png",
         "imgB": ""
       }
     ],
