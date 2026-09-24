@@ -14593,10 +14593,10 @@
         "weight": "W Flyweight",
         "rounds": "5 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "main",
-        "imgA": "",
-        "imgB": ""
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/SILVA_NATALIA_L_01-24.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/CONG_WANG_L_02-07.png"
       },
       {
         "a": "Deiveson Figueiredo",
@@ -14766,21 +14766,18 @@
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/ALLEN_BRENDAN_L_06-06.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/DUNCAN_CHRISTIAN_LEROY_L_11-08.png"
-      },
-      {
-        "a": "Francisco Prado",
-        "b": "Ismael Bonfim",
-        "weight": "Welterweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "comain",
-        "imgA": "",
-        "imgB": ""
       }
     ],
     "prelims": [],
-    "earlyPrelims": []
+    "earlyPrelims": [],
+    "droppedFights": [
+      {
+        "a": "Francisco Prado",
+        "b": "Ismael Bonfim",
+        "reason": "removed from the card",
+        "droppedAt": "2026-09-24T13:03:47.549Z"
+      }
+    ]
   },
   {
     "id": "ufc-fight-night-buckley-vs-malott",
@@ -14941,7 +14938,7 @@
     "venue": "",
     "poster": "https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/2026-08/102426-ufc-333-volkanovski-vs-evloev-TEMP-HERO.jpg",
     "status": "upcoming",
-    "start_time": null,
+    "start_time": "2026-10-24T16:00:00.000Z",
     "mainCard": [
       {
         "a": "Alexander Volkanovski",
@@ -14949,7 +14946,7 @@
         "weight": "Featherweight",
         "rounds": "5 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/VOLKANOVSKI_ALEXANDER_L_BELT_01-31.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/EVLOEV_MOVSAR_L_03-21.png"
@@ -14960,7 +14957,7 @@
         "weight": "Bantamweight",
         "rounds": "5 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "comain",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/YAN_PETR_L_BELT_04-09.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2022-08/DVALISHVILI_MERAB_L_08-20.png"
@@ -14971,7 +14968,7 @@
         "weight": "Flyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/KAVANAGH_LONEER_L_03-22.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-11/TEMIROV_RAMAZAN_L_10-12.png"
@@ -14982,7 +14979,7 @@
         "weight": "Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/VOLKOV_ALEXANDER_L_05-09.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-06/KUNIEV_RIZVAN_R_06-21.png"
@@ -14993,21 +14990,10 @@
         "weight": "Featherweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/ALLEN_ARNOLD_L_05-16.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/PICO_AARON_R_08-16.png"
-      },
-      {
-        "a": "Dominick Reyes",
-        "b": "Azamat Murzakanov",
-        "weight": "Light Heavyweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/REYES_DOMINICK_L_04-11.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/MURZAKANOV_AZAMAT_L_04-11.png"
       }
     ],
     "prelims": [
@@ -15017,7 +15003,7 @@
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/MAGOMEDOV_ABUS_L_06-27.png?itok=SLmzXjWp",
         "imgB": ""
@@ -15028,13 +15014,22 @@
         "weight": "",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/KRYLOV_NIKITA_L_01-24.png",
         "imgB": ""
-      }
-    ],
-    "earlyPrelims": [
+      },
+      {
+        "a": "Azamat Murzakanov",
+        "b": "Dominick Reyes",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/MURZAKANOV_AZAMAT_L_04-11.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/REYES_DOMINICK_L_04-11.png"
+      },
       {
         "a": "Grant Dawson",
         "b": "Nurullo Aliev",
@@ -15046,7 +15041,8 @@
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/DAWSON_GRANT_L_05-09.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/ALIEV_NURULLO_L_11-22.png"
       }
-    ]
+    ],
+    "earlyPrelims": []
   },
   {
     "id": "ufc-fight-night-las-vegas",
@@ -15129,7 +15125,7 @@
         "ranked": false,
         "slot": "comain",
         "imgA": "",
-        "imgB": ""
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/SCHMID_OLLIE_R_05-02.png"
       }
     ],
     "prelims": [],
