@@ -1,15 +1,30 @@
 {
-  "date": "2026-09-23",
+  "date": "2026-09-24",
   "posts": [
     {
+      "type": "news",
+      "caption": "UFC Fight Night: Rosas Jr. vs. Barcelos - Preview, Full Card, Start Times (via Yardbarker)",
+      "image": "2026-09-24-news-1.png"
+    },
+    {
+      "type": "news",
+      "caption": "Dana White Wants To Ban Jon Jones' Signature Move From the UFC, But How Dangerous Is It? (via Yardbarker)",
+      "image": "2026-09-24-news-2.png"
+    },
+    {
+      "type": "news",
+      "caption": "Israel Adesanya Openly Calls Out UFC’s Hypocrisy for Cutting Michael ‘Venom’ Page (via Yardbarker)",
+      "image": "2026-09-24-news-3.png"
+    },
+    {
       "type": "event_countdown",
-      "caption": "Jr. vs. Barcelos is in 3 days. Make your picks: https://mmabridge.com/picks.html?id=ufc-fight-night-rosas-jr-vs-barcelos\n\nScreenshots via mmabridge.com",
-      "image": "2026-09-23-event_countdown-1.png"
+      "caption": "Jr. vs. Barcelos is in 2 days. Make your picks: https://mmabridge.com/picks.html?id=ufc-fight-night-rosas-jr-vs-barcelos\n\nScreenshots via mmabridge.com",
+      "image": "2026-09-24-event_countdown-1.png"
     },
     {
       "type": "event_recap",
       "caption": "Relive UFC 331: Van vs. Pantoja 2. Van def. Pantoja. Full card recap and community ratings: https://mmabridge.com/event-review.html?id=ufc-331-van-vs-pantoja-2\n\nScreenshots via mmabridge.com",
-      "image": "2026-09-23-event_recap-1.png"
+      "image": "2026-09-24-event_recap-1.png"
     }
   ]
 }
