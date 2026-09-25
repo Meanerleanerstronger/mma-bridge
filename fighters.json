@@ -22817,7 +22817,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/NELSON_KYLE_L_10-18.png",
     "record": {
       "wins": 17,
-      "losses": 7,
+      "losses": 6,
       "draws": 1
     },
     "last5": [
@@ -38790,7 +38790,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-02/BONFIM_ISMAEL_L_02-15.png",
     "record": {
       "wins": 20,
-      "losses": 7,
+      "losses": 1,
       "draws": 0
     },
     "last5": [
@@ -52413,5 +52413,96 @@
       "subAvg": "1.4"
     },
     "statsSyncedAt": "2026-09-23T14:07:05.907Z"
+  },
+  {
+    "id": "keiichiro-nakamura",
+    "name": "Keiichiro Nakamura",
+    "record": {
+      "wins": 45,
+      "losses": 35,
+      "draws": 10
+    },
+    "last5": [
+      {
+        "opponent": "Ikkei Nagamura",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "Pancrase: 264",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Keita Nakamura",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "DEEP: 67 Impact",
+        "round": 1,
+        "time": "4:13"
+      },
+      {
+        "opponent": "Yuki Okano",
+        "result": "L",
+        "method": "Submission (rear naked choke)",
+        "event": "DEEP: 65 Impact",
+        "round": 1,
+        "time": "4:53"
+      },
+      {
+        "opponent": "Eiji Ishikawa",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "Grabaka: Grabaka Live! 3",
+        "round": 2,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Yuji Hisamatsu",
+        "result": "L",
+        "method": "Decision (majority)",
+        "event": "Pancrase 250: 2013 Neo-Blood Tournament Finals",
+        "round": 2,
+        "time": "align=center | 5:00"
+      },
+      {
+        "opponent": "Daijiro Matsui",
+        "result": "W",
+        "method": "Decision (points)",
+        "event": "U-Spirits: U-Spirits Again",
+        "round": 1,
+        "time": "15:00"
+      },
+      {
+        "opponent": "Will Noland",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "Pancrase 245",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Ikkei Nagamura",
+        "result": "W",
+        "method": "KO (flying knee)",
+        "event": "Pancrase: Progress Tour 14",
+        "round": 1,
+        "time": "1:26"
+      },
+      {
+        "opponent": "Kenichi Yamamoto (mixed martial artist)",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Grabaka: Grabaka Live! 2",
+        "round": 2,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Takenori Sato",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "Pancrase: Progress Tour 10",
+        "round": 3,
+        "time": "5:00"
+      }
+    ]
   }
 ]
