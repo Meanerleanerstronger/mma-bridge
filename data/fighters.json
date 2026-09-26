@@ -27986,6 +27986,14 @@
     },
     "last5": [
       {
+        "opponent": "Alatengheili",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Gianni Vázquez",
         "result": "W",
         "method": "TKO (punches)",
@@ -28893,6 +28901,14 @@
     },
     "last5": [
       {
+        "opponent": "Ricky Simon",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 2,
+        "time": null
+      },
+      {
         "opponent": "Raoni Barcelos",
         "result": "L",
         "method": "Decision (unanimous)",
@@ -29328,6 +29344,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Robert Bryczek",
+        "result": "W",
+        "method": "",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 3,
+        "time": null
+      },
       {
         "opponent": "Eric McConico",
         "result": "L",
@@ -30522,6 +30546,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Rodolfo Vieira",
+        "result": "L",
+        "method": "",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 3,
+        "time": null
+      },
       {
         "opponent": "Cam Rowston",
         "result": "L",
@@ -33165,6 +33197,14 @@
     },
     "nickname": "Trator",
     "last5": [
+      {
+        "opponent": "Christian Edwards",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 3,
+        "time": null
+      },
       {
         "opponent": "Modestas Bukauskas",
         "result": "L",
@@ -42809,7 +42849,17 @@
     "height": "5'7.5\"",
     "reach": "68\"",
     "weightClass": "Welterweight",
-    "statsSyncedAt": "2026-08-26T09:41:20.922Z"
+    "statsSyncedAt": "2026-08-26T09:41:20.922Z",
+    "last5": [
+      {
+        "opponent": "Elves Brener",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "carlos-leal",
@@ -47768,6 +47818,14 @@
     "statsSyncedAt": "2026-08-27T19:28:48.711Z",
     "last5": [
       {
+        "opponent": "Rodolfo Bellato",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 3,
+        "time": null
+      },
+      {
         "opponent": "Jared Cannonier",
         "result": "W",
         "method": "Decision (unanimous)",
@@ -50760,6 +50818,14 @@
     },
     "last5": [
       {
+        "opponent": "Montel Jackson",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 2,
+        "time": null
+      },
+      {
         "opponent": "Raoni Barcelos",
         "result": "L",
         "method": "Decision (unanimous)",
@@ -50967,6 +51033,14 @@
     },
     "last5": [
       {
+        "opponent": "Yazmin Jauregui",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Jamey-Lyn Horth",
         "result": "L",
         "method": "Decision (unanimous)",
@@ -51070,6 +51144,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Vanessa Demopoulos",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Ketlen Souza",
         "result": "L",
@@ -51271,7 +51353,17 @@
       "losses": 10,
       "draws": 2
     },
-    "nickname": "The Mongolian Knight"
+    "nickname": "The Mongolian Knight",
+    "last5": [
+      {
+        "opponent": "John Castaneda",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "elves-brener",
@@ -51292,7 +51384,17 @@
       "wins": 16,
       "losses": 6,
       "draws": 0
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Josiah Harrell",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "javad-mahjoub",

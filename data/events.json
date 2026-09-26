@@ -14504,7 +14504,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/CASTANEDA_JOHN_L_04-18.png",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-04/ALATENGHEILI_L_05-18.png?itok=tO6xLHed"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-04/ALATENGHEILI_L_05-18.png?itok=tO6xLHed",
+        "winner": "Alatengheili",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Rodolfo Bellato",
@@ -14515,7 +14518,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/BELLATO_RODOLFO_L.png",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/EDWARDS_CHRISTIAN_R_05-16.png?itok=9hKWjz5V"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/EDWARDS_CHRISTIAN_R_05-16.png?itok=9hKWjz5V",
+        "winner": "Christian Edwards",
+        "method": "KO/TKO",
+        "round": 3,
+        "_supabaseSynced": true
       },
       {
         "a": "Montel Jackson",
@@ -14526,7 +14533,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/JACKSON_MONTEL_L_04-25.png",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/SIMON_RICKY_L_03-28.png?itok=sJteSJT_"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/SIMON_RICKY_L_03-28.png?itok=sJteSJT_",
+        "winner": "Montel Jackson",
+        "method": "KO/TKO",
+        "round": 2,
+        "_supabaseSynced": true
       },
       {
         "a": "Vanessa Demopoulos",
@@ -14537,7 +14548,11 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-04/DEMOPOULOS_VANESSA_L_04-05.png?itok=mEN09m_H",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-09/JAUREGUI_YAZMIN_L_09-14.png?itok=nqoagzOS"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-09/JAUREGUI_YAZMIN_L_09-14.png?itok=nqoagzOS",
+        "winner": "Yazmin Jauregui",
+        "method": "KO/TKO",
+        "round": 1,
+        "_supabaseSynced": true
       },
       {
         "a": "Elves Brener",
@@ -14548,7 +14563,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/BRENNER_ELVES_L_08-02.png?itok=mY8muzRL",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-07/HARRELL_JOSIAH_L_07-08.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-07/HARRELL_JOSIAH_L_07-08.png",
+        "winner": "Elves Brener",
+        "method": "KO/TKO",
+        "round": 1,
+        "_supabaseSynced": true
       },
       {
         "a": "Brady Hiestand",
@@ -14570,7 +14589,10 @@
         "ranked": false,
         "slot": "comain",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/VIEIRA_RODOLFO_L_04-25.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-02/BRYZCEK_ROBERT_L_02-10.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-02/BRYZCEK_ROBERT_L_02-10.png",
+        "winner": "Rodolfo Vieira",
+        "round": 3,
+        "_supabaseSynced": true
       }
     ],
     "earlyPrelims": []
@@ -14766,6 +14788,17 @@
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/ALLEN_BRENDAN_L_06-06.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/DUNCAN_CHRISTIAN_LEROY_L_11-08.png"
+      },
+      {
+        "a": "Francisco Prado",
+        "b": "Ismael Bonfim",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "comain",
+        "imgA": "",
+        "imgB": ""
       }
     ],
     "prelims": [],
