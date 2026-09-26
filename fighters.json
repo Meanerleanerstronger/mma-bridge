@@ -52503,6 +52503,39 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-01/NAKAMURA_KEIICHIRO_L_01-31.png?itok=-vL6J_TE",
+    "stats": {
+      "slpm": "4.48",
+      "strAcc": "41%",
+      "sapm": "4.28",
+      "strDef": "63%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "78%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-09-25T14:27:50.372Z"
+  },
+  {
+    "id": "luis-hernandez",
+    "name": "Luis Hernandez",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-09/HERNANDEZ_LUIS_L_09-15.png?itok=6xYGQztr",
+    "stats": {
+      "slpm": "11.14",
+      "strAcc": "57%",
+      "sapm": "6.32",
+      "strDef": "39%",
+      "tdAvg": "2.49",
+      "tdAcc": "33%",
+      "tdDef": "100%",
+      "subAvg": "2.5"
+    },
+    "statsSyncedAt": "2026-09-25T14:27:53.259Z"
+  },
+  {
+    "id": "cristian-perez-gonzalez",
+    "name": "Cristian Perez Gonzalez",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/PEREZ_CRISTIAN_L_08-26.png?itok=LIbBOleP"
   }
 ]
