@@ -19966,6 +19966,14 @@
     "nickname": "The Reaper",
     "last5": [
       {
+        "opponent": "Luis Hernandez",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Jackson McVey",
         "result": "L",
         "method": "Sub",
@@ -20290,11 +20298,19 @@
     "name": "Raul Rosas Jr.",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/ROSAS_JR_RAUL_L_03-29.png",
     "record": {
-      "wins": 12,
+      "wins": 13,
       "losses": 1,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Raoni Barcelos",
+        "result": "W",
+        "method": "KO (slam)",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 5,
+        "time": "1:38"
+      },
       {
         "opponent": "Rob Font",
         "result": "W",
@@ -20366,14 +20382,6 @@
         "event": "UWC Mexico 35",
         "round": 1,
         "time": "2:11"
-      },
-      {
-        "opponent": "Jose Guadalupe Peñaloza",
-        "result": "W",
-        "method": "Submission (rear-naked choke)",
-        "event": "UWC Mexico 34",
-        "round": 2,
-        "time": "2:25"
       }
     ],
     "nickname": "El Nino Problema",
@@ -27986,6 +27994,14 @@
     },
     "last5": [
       {
+        "opponent": "Alatengheili",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Gianni Vázquez",
         "result": "W",
         "method": "TKO (punches)",
@@ -28342,10 +28358,18 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/DUMONT_NORMA_L_04-25.png",
     "record": {
       "wins": 13,
-      "losses": 3,
+      "losses": 4,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Ailin Perez",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Joselyne Edwards",
         "result": "L",
@@ -28887,11 +28911,19 @@
     "name": "Montel Jackson",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/JACKSON_MONTEL_L_04-25.png",
     "record": {
-      "wins": 15,
+      "wins": 16,
       "losses": 4,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Ricky Simon",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 2,
+        "time": null
+      },
       {
         "opponent": "Raoni Barcelos",
         "result": "L",
@@ -29323,11 +29355,19 @@
     "name": "Rodolfo Vieira",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/VIEIRA_RODOLFO_L_04-25.png",
     "record": {
-      "wins": 11,
+      "wins": 12,
       "losses": 5,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Robert Bryczek",
+        "result": "W",
+        "method": "",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 3,
+        "time": null
+      },
       {
         "opponent": "Eric McConico",
         "result": "L",
@@ -30518,10 +30558,18 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-02/BRYZCEK_ROBERT_L_02-10.png",
     "record": {
       "wins": 18,
-      "losses": 7,
+      "losses": 8,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Rodolfo Vieira",
+        "result": "L",
+        "method": "",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 3,
+        "time": null
+      },
       {
         "opponent": "Cam Rowston",
         "result": "L",
@@ -33165,6 +33213,14 @@
     },
     "nickname": "Trator",
     "last5": [
+      {
+        "opponent": "Christian Edwards",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 3,
+        "time": null
+      },
       {
         "opponent": "Modestas Bukauskas",
         "result": "L",
@@ -42809,7 +42865,17 @@
     "height": "5'7.5\"",
     "reach": "68\"",
     "weightClass": "Welterweight",
-    "statsSyncedAt": "2026-08-26T09:41:20.922Z"
+    "statsSyncedAt": "2026-08-26T09:41:20.922Z",
+    "last5": [
+      {
+        "opponent": "Elves Brener",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "carlos-leal",
@@ -47768,6 +47834,14 @@
     "statsSyncedAt": "2026-08-27T19:28:48.711Z",
     "last5": [
       {
+        "opponent": "Rodolfo Bellato",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 3,
+        "time": null
+      },
+      {
         "opponent": "Jared Cannonier",
         "result": "W",
         "method": "Decision (unanimous)",
@@ -50306,6 +50380,14 @@
     "bio": "Ailin “Fiona” Perez is an Argentinean professional mixed martial artist in the UFC bantamweight division. Get the latest UFC breaking news, fight night results, MMA records and stats, highlights, photos, videos and more.",
     "last5": [
       {
+        "opponent": "Norma Dumont",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Macy Chiasson",
         "result": "W",
         "method": "Decision (unanimous)",
@@ -50760,6 +50842,14 @@
     },
     "last5": [
       {
+        "opponent": "Montel Jackson",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 2,
+        "time": null
+      },
+      {
         "opponent": "Raoni Barcelos",
         "result": "L",
         "method": "Decision (unanimous)",
@@ -50858,10 +50948,18 @@
     "name": "Rinya Nakamura",
     "record": {
       "wins": 10,
-      "losses": 1,
+      "losses": 2,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Brady Hiestand",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 2,
+        "time": null
+      },
       {
         "opponent": "Nathan Fletcher",
         "result": "W",
@@ -50962,10 +51060,18 @@
     "name": "Vanessa Demopoulos",
     "record": {
       "wins": 11,
-      "losses": 8,
+      "losses": 9,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Yazmin Jauregui",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Jamey-Lyn Horth",
         "result": "L",
@@ -51065,11 +51171,19 @@
     "id": "yazmin-jauregui",
     "name": "Yazmin Jauregui",
     "record": {
-      "wins": 11,
+      "wins": 12,
       "losses": 2,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Vanessa Demopoulos",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Ketlen Souza",
         "result": "L",
@@ -51184,7 +51298,17 @@
       "losses": 0,
       "draws": 0
     },
-    "nickname": "Mamba"
+    "nickname": "Mamba",
+    "last5": [
+      {
+        "opponent": "Tina Black",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 2,
+        "time": null
+      }
+    ]
   },
   {
     "id": "mehemmedeli-osmanli",
@@ -51206,7 +51330,17 @@
       "losses": 1,
       "draws": 0
     },
-    "nickname": "The Ineffable"
+    "nickname": "The Ineffable",
+    "last5": [
+      {
+        "opponent": "Ilimbek Akylbek Uulu",
+        "result": "L",
+        "method": "",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "ilimbek-akylbek-uulu",
@@ -51227,7 +51361,17 @@
       "wins": 11,
       "losses": 3,
       "draws": 0
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Mehemmedeli Osmanli",
+        "result": "W",
+        "method": "",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "brady-hiestand",
@@ -51249,7 +51393,17 @@
       "losses": 2,
       "draws": 0
     },
-    "nickname": "Bam Bam"
+    "nickname": "Bam Bam",
+    "last5": [
+      {
+        "opponent": "Rinya Nakamura",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 2,
+        "time": null
+      }
+    ]
   },
   {
     "id": "alatengheili",
@@ -51271,7 +51425,17 @@
       "losses": 10,
       "draws": 2
     },
-    "nickname": "The Mongolian Knight"
+    "nickname": "The Mongolian Knight",
+    "last5": [
+      {
+        "opponent": "John Castaneda",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "elves-brener",
@@ -51292,7 +51456,17 @@
       "wins": 16,
       "losses": 6,
       "draws": 0
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Josiah Harrell",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "javad-mahjoub",
@@ -52219,6 +52393,14 @@
     },
     "last5": [
       {
+        "opponent": "Melissa Amaya",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 2,
+        "time": null
+      },
+      {
         "opponent": "Zhang Weili",
         "result": "W",
         "method": "Decision (unanimous)",
@@ -52309,7 +52491,8 @@
       "tdDef": "76%",
       "subAvg": "0.0"
     },
-    "statsSyncedAt": "2026-09-23T14:07:03.548Z"
+    "statsSyncedAt": "2026-09-23T14:07:03.548Z",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-09/BLACK_TINA_R_09-26.png?itok=2j8vJKR6"
   },
   {
     "id": "louis-jourdain",
@@ -52418,88 +52601,88 @@
     "id": "keiichiro-nakamura",
     "name": "Keiichiro Nakamura",
     "record": {
-      "wins": 45,
-      "losses": 35,
-      "draws": 10
+      "wins": 36,
+      "losses": 12,
+      "draws": 2
     },
     "last5": [
       {
-        "opponent": "Ikkei Nagamura",
+        "opponent": "Roberto de Souza",
+        "result": "L",
+        "method": "TKO (corner stoppage)",
+        "event": "2024 in Rizin Fighting Federation#Rizin Landmark 9",
+        "round": 1,
+        "time": "1:43"
+      },
+      {
+        "opponent": "Kiichi Kunimoto",
+        "result": "W",
+        "method": "KO (punches and soccer kick)",
+        "event": "2023 in Rizin Fighting Federation#Rizin 41 – Osaka",
+        "round": 2,
+        "time": "0:49"
+      },
+      {
+        "opponent": "Lorenz Larkin",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "Pancrase: 264",
+        "event": "Bellator MMA in 2019#Bellator & Rizin: Japan",
         "round": 3,
         "time": "5:00"
       },
       {
-        "opponent": "Keita Nakamura",
-        "result": "L",
+        "opponent": "Marcos Yoshio de Souza",
+        "result": "W",
         "method": "TKO (punches)",
-        "event": "DEEP: 67 Impact",
+        "event": "2019 in Rizin Fighting Federation#Rizin 19 - Osaka",
         "round": 1,
-        "time": "4:13"
+        "time": "1:18"
       },
       {
-        "opponent": "Yuki Okano",
-        "result": "L",
-        "method": "Submission (rear naked choke)",
-        "event": "DEEP: 65 Impact",
-        "round": 1,
-        "time": "4:53"
-      },
-      {
-        "opponent": "Eiji Ishikawa",
-        "result": "L",
-        "method": "Decision (unanimous)",
-        "event": "Grabaka: Grabaka Live! 3",
-        "round": 2,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Yuji Hisamatsu",
-        "result": "L",
-        "method": "Decision (majority)",
-        "event": "Pancrase 250: 2013 Neo-Blood Tournament Finals",
-        "round": 2,
-        "time": "align=center | 5:00"
-      },
-      {
-        "opponent": "Daijiro Matsui",
+        "opponent": "Salim Touahri",
         "result": "W",
-        "method": "Decision (points)",
-        "event": "U-Spirits: U-Spirits Again",
-        "round": 1,
-        "time": "15:00"
-      },
-      {
-        "opponent": "Will Noland",
-        "result": "L",
-        "method": "Decision (unanimous)",
-        "event": "Pancrase 245",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: dos Santos vs. Tuivasa",
         "round": 3,
         "time": "5:00"
       },
       {
-        "opponent": "Ikkei Nagamura",
-        "result": "W",
-        "method": "KO (flying knee)",
-        "event": "Pancrase: Progress Tour 14",
-        "round": 1,
-        "time": "1:26"
-      },
-      {
-        "opponent": "Kenichi Yamamoto (mixed martial artist)",
-        "result": "W",
+        "opponent": "Tony Martin (fighter)",
+        "result": "L",
         "method": "Decision (unanimous)",
-        "event": "Grabaka: Grabaka Live! 2",
-        "round": 2,
+        "event": "UFC Fight Night: Barboza vs. Lee",
+        "round": 3,
         "time": "5:00"
       },
       {
-        "opponent": "Takenori Sato",
+        "opponent": "Alex Morono",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Saint Preux vs. Okami",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Elizeu Zaleski dos Santos",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "Pancrase: Progress Tour 10",
+        "event": "UFC Fight Night: Lineker vs. Dodson",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Kyle Noke",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC Fight Night: McDonald vs. Lineker",
+        "round": 2,
+        "time": "4:59"
+      },
+      {
+        "opponent": "Tom Breese",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Silva vs. Bisping",
         "round": 3,
         "time": "5:00"
       }
@@ -52531,7 +52714,17 @@
       "tdDef": "100%",
       "subAvg": "2.5"
     },
-    "statsSyncedAt": "2026-09-25T14:27:53.259Z"
+    "statsSyncedAt": "2026-09-25T14:27:53.259Z",
+    "last5": [
+      {
+        "opponent": "Sedriques Dumas",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "cristian-perez-gonzalez",
