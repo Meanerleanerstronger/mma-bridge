@@ -19966,6 +19966,14 @@
     "nickname": "The Reaper",
     "last5": [
       {
+        "opponent": "Luis Hernandez",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Jackson McVey",
         "result": "L",
         "method": "Sub",
@@ -28354,6 +28362,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Ailin Perez",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Joselyne Edwards",
         "result": "L",
@@ -50364,6 +50380,14 @@
     "bio": "Ailin “Fiona” Perez is an Argentinean professional mixed martial artist in the UFC bantamweight division. Get the latest UFC breaking news, fight night results, MMA records and stats, highlights, photos, videos and more.",
     "last5": [
       {
+        "opponent": "Norma Dumont",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Macy Chiasson",
         "result": "W",
         "method": "Decision (unanimous)",
@@ -50929,6 +50953,14 @@
     },
     "last5": [
       {
+        "opponent": "Brady Hiestand",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 2,
+        "time": null
+      },
+      {
         "opponent": "Nathan Fletcher",
         "result": "W",
         "method": "TKO (body kick and punches)",
@@ -51266,7 +51298,17 @@
       "losses": 0,
       "draws": 0
     },
-    "nickname": "Mamba"
+    "nickname": "Mamba",
+    "last5": [
+      {
+        "opponent": "Tina Black",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 2,
+        "time": null
+      }
+    ]
   },
   {
     "id": "mehemmedeli-osmanli",
@@ -51288,7 +51330,17 @@
       "losses": 1,
       "draws": 0
     },
-    "nickname": "The Ineffable"
+    "nickname": "The Ineffable",
+    "last5": [
+      {
+        "opponent": "Ilimbek Akylbek Uulu",
+        "result": "L",
+        "method": "",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "ilimbek-akylbek-uulu",
@@ -51309,7 +51361,17 @@
       "wins": 11,
       "losses": 3,
       "draws": 0
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Mehemmedeli Osmanli",
+        "result": "W",
+        "method": "",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "brady-hiestand",
@@ -51331,7 +51393,17 @@
       "losses": 2,
       "draws": 0
     },
-    "nickname": "Bam Bam"
+    "nickname": "Bam Bam",
+    "last5": [
+      {
+        "opponent": "Rinya Nakamura",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 2,
+        "time": null
+      }
+    ]
   },
   {
     "id": "alatengheili",
@@ -52321,6 +52393,14 @@
     },
     "last5": [
       {
+        "opponent": "Melissa Amaya",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 2,
+        "time": null
+      },
+      {
         "opponent": "Zhang Weili",
         "result": "W",
         "method": "Decision (unanimous)",
@@ -52634,7 +52714,17 @@
       "tdDef": "100%",
       "subAvg": "2.5"
     },
-    "statsSyncedAt": "2026-09-25T14:27:53.259Z"
+    "statsSyncedAt": "2026-09-25T14:27:53.259Z",
+    "last5": [
+      {
+        "opponent": "Sedriques Dumas",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "cristian-perez-gonzalez",

@@ -14458,7 +14458,10 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
+        "winner": "Ilimbek Akylbek Uulu",
+        "round": 1,
+        "_supabaseSynced": true
       },
       {
         "a": "Melissa Amaya",
@@ -14469,7 +14472,11 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/2022-02/womens-silhouette-RED-corner.png?itok=SXsY1AgG",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-09/BLACK_TINA_R_09-26.png?itok=2j8vJKR6"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-09/BLACK_TINA_R_09-26.png?itok=2j8vJKR6",
+        "winner": "Tina Black",
+        "method": "KO/TKO",
+        "round": 2,
+        "_supabaseSynced": true
       },
       {
         "a": "Norma Dumont",
@@ -14480,7 +14487,10 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/DUMONT_NORMA_L_04-25.png",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/PEREZ_AILIN_L_02-28.png?itok=sPy9HJ2B"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-02/PEREZ_AILIN_L_02-28.png?itok=sPy9HJ2B",
+        "winner": "Ailin Perez",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Luis Hernandez",
@@ -14491,7 +14501,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-09/HERNANDEZ_LUIS_L_09-15.png?itok=6xYGQztr",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/DUMAS_SEDRIQUES_L_04-12.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/DUMAS_SEDRIQUES_L_04-12.png",
+        "winner": "Luis Hernandez",
+        "method": "SUB",
+        "round": 1,
+        "_supabaseSynced": true
       }
     ],
     "prelims": [
@@ -14578,7 +14592,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-04/HIESTAND_BRADY_L_04-22.png?itok=Ny5RUBiZ",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-08/NAKAMURA_RINYA_L%298_26.png?itok=l7Gg0V6_"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-08/NAKAMURA_RINYA_L%298_26.png?itok=l7Gg0V6_",
+        "winner": "Brady Hiestand",
+        "method": "SUB",
+        "round": 2,
+        "_supabaseSynced": true
       },
       {
         "a": "Rodolfo Vieira",
