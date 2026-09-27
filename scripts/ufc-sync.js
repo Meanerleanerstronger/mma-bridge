@@ -355,7 +355,9 @@ async function findPoster(slugs, isoDate) {
 
   for (const eventId of candidates) {
     for (const folder of folders) {
-      const url = `https://www.ufc.com/images/styles/background_image_xl_2x/s3/${folder}/${prefix}-${eventId}-EVENT-ART.jpg`;
+      // cloudfront, not www.ufc.com/images — same asset, but the backend
+      // image-proxy (poster Download buttons) only allowlists cloudfront.
+      const url = `https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/${folder}/${prefix}-${eventId}-EVENT-ART.jpg`;
       if (await probeHead(url)) return url;
     }
   }
