@@ -1,0 +1,144 @@
+{
+  "eventId": "ufc-fight-night-rosas-jr-vs-barcelos",
+  "eventName": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+  "fights": [
+    {
+      "fighter1": "Raul Rosas Jr. Raoni Barcelos",
+      "fighter2": "Ailin Perez Norma Dumont",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "113127",
+          "totalStr": "05",
+          "td": "Bantamweight",
+          "subAtt": 5,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "3746",
+          "totalStr": "00",
+          "td": "Women'sBantamweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Luis Hernandez Sedriques Dumas",
+      "fighter2": "Ilimbek Akylbek Mahammadali Osmanli",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "30",
+          "totalStr": "20",
+          "td": "LightHeavyweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "66",
+          "totalStr": "00",
+          "td": "Bantamweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Tina Black Melissa Amaya",
+      "fighter2": "Brady Hiestand Rinya Nakamura",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "2 0",
+          "sigStr": "5022",
+          "totalStr": "00",
+          "td": "Women'sStrawweight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "2629",
+          "totalStr": "20",
+          "td": "Bantamweight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Rodolfo Vieira Robert Bryczek",
+      "fighter2": "Christian Edwards Rodolfo Bellato",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "2437",
+          "totalStr": "00",
+          "td": "Middleweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "1 1",
+          "sigStr": "5930",
+          "totalStr": "00",
+          "td": "LightHeavyweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Elves Brener Josiah Harrell",
+      "fighter2": "Montel Jackson Ricky Simon",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "259",
+          "totalStr": "00",
+          "td": "Lightweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "2 0",
+          "sigStr": "3113",
+          "totalStr": "10",
+          "td": "Bantamweight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Alatengheili John Castaneda",
+      "fighter2": "Yazmin Jauregui Vanessa Demopoulos",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "2855",
+          "totalStr": "02",
+          "td": "Bantamweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "347",
+          "totalStr": "00",
+          "td": "Women'sStrawweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    }
+  ]
+}
