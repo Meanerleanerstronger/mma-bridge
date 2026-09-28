@@ -25995,7 +25995,7 @@
     "name": "Esteban Ribovics",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-09/RIBOVICS_ESTEBAN_L_05-11.png",
     "record": {
-      "wins": 15,
+      "wins": 16,
       "losses": 3,
       "draws": 0
     },
@@ -29039,6 +29039,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Raul Rosas Jr.",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Rosas Jr. vs. Barcelos",
+        "round": 5,
+        "time": null
+      },
       {
         "opponent": "Montel Jackson",
         "result": "W",
@@ -52601,88 +52609,88 @@
     "id": "keiichiro-nakamura",
     "name": "Keiichiro Nakamura",
     "record": {
-      "wins": 36,
-      "losses": 12,
-      "draws": 2
+      "wins": 45,
+      "losses": 35,
+      "draws": 10
     },
     "last5": [
       {
-        "opponent": "Roberto de Souza",
-        "result": "L",
-        "method": "TKO (corner stoppage)",
-        "event": "2024 in Rizin Fighting Federation#Rizin Landmark 9",
-        "round": 1,
-        "time": "1:43"
-      },
-      {
-        "opponent": "Kiichi Kunimoto",
-        "result": "W",
-        "method": "KO (punches and soccer kick)",
-        "event": "2023 in Rizin Fighting Federation#Rizin 41 – Osaka",
-        "round": 2,
-        "time": "0:49"
-      },
-      {
-        "opponent": "Lorenz Larkin",
+        "opponent": "Ikkei Nagamura",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "Bellator MMA in 2019#Bellator & Rizin: Japan",
+        "event": "Pancrase: 264",
         "round": 3,
         "time": "5:00"
       },
       {
-        "opponent": "Marcos Yoshio de Souza",
-        "result": "W",
+        "opponent": "Keita Nakamura",
+        "result": "L",
         "method": "TKO (punches)",
-        "event": "2019 in Rizin Fighting Federation#Rizin 19 - Osaka",
+        "event": "DEEP: 67 Impact",
         "round": 1,
-        "time": "1:18"
+        "time": "4:13"
       },
       {
-        "opponent": "Salim Touahri",
-        "result": "W",
-        "method": "Decision (split)",
-        "event": "UFC Fight Night: dos Santos vs. Tuivasa",
-        "round": 3,
-        "time": "5:00"
+        "opponent": "Yuki Okano",
+        "result": "L",
+        "method": "Submission (rear naked choke)",
+        "event": "DEEP: 65 Impact",
+        "round": 1,
+        "time": "4:53"
       },
       {
-        "opponent": "Tony Martin (fighter)",
+        "opponent": "Eiji Ishikawa",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Barboza vs. Lee",
-        "round": 3,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Alex Morono",
-        "result": "W",
-        "method": "Decision (split)",
-        "event": "UFC Fight Night: Saint Preux vs. Okami",
-        "round": 3,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Elizeu Zaleski dos Santos",
-        "result": "L",
-        "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Lineker vs. Dodson",
-        "round": 3,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Kyle Noke",
-        "result": "W",
-        "method": "Submission (rear-naked choke)",
-        "event": "UFC Fight Night: McDonald vs. Lineker",
+        "event": "Grabaka: Grabaka Live! 3",
         "round": 2,
-        "time": "4:59"
+        "time": "5:00"
       },
       {
-        "opponent": "Tom Breese",
+        "opponent": "Yuji Hisamatsu",
+        "result": "L",
+        "method": "Decision (majority)",
+        "event": "Pancrase 250: 2013 Neo-Blood Tournament Finals",
+        "round": 2,
+        "time": "align=center | 5:00"
+      },
+      {
+        "opponent": "Daijiro Matsui",
+        "result": "W",
+        "method": "Decision (points)",
+        "event": "U-Spirits: U-Spirits Again",
+        "round": 1,
+        "time": "15:00"
+      },
+      {
+        "opponent": "Will Noland",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Silva vs. Bisping",
+        "event": "Pancrase 245",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Ikkei Nagamura",
+        "result": "W",
+        "method": "KO (flying knee)",
+        "event": "Pancrase: Progress Tour 14",
+        "round": 1,
+        "time": "1:26"
+      },
+      {
+        "opponent": "Kenichi Yamamoto (mixed martial artist)",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Grabaka: Grabaka Live! 2",
+        "round": 2,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Takenori Sato",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "Pancrase: Progress Tour 10",
         "round": 3,
         "time": "5:00"
       }
