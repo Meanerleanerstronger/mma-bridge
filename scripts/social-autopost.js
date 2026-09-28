@@ -11,7 +11,10 @@
  *
  * Dedupe rules (tracked in social/posted.json):
  *   - news            once per headline
- *   - event_countdown only at 7 / 3 / 1 / 0 days out, once each
+ *   - event_countdown only at 7 / 3 / 1 days out, once each (fight day is
+ *                     covered by picks_lock)
+ *   - data card types (social-data-posts.js) once per ref
+ *   - anything with an expiresAt (picks_lock) is dropped once it passes
  *   - event_recap     once per event (latest.json keeps the same recap
  *                     every day until the next event completes)
  *
@@ -33,9 +36,14 @@ const API_BASE    = process.env.API_BASE || 'https://mmabridge-backend.onrender.
 const MAX_PER_RUN = Number(process.env.MAX_PER_RUN || 1);
 const DRY_RUN     = process.env.DRY_RUN === '1';
 
-const COUNTDOWN_DAYS = [7, 3, 1, 0];
+const COUNTDOWN_DAYS = [7, 3, 1];
 const MAX_ATTEMPTS   = 2; // a post that fails twice is skipped so it can't block the queue forever
-const TYPE_ORDER     = ['event_countdown', 'event_recap', 'news'];
+// Time-sensitive first; evergreen filler last.
+const TYPE_ORDER = [
+  'picks_lock', 'upset', 'pick_split', 'event_countdown', 'tale_of_tape',
+  'event_recap', 'dream_matchup', 'on_this_day', 'news',
+];
+const rank = t => { const i = TYPE_ORDER.indexOf(t); return i < 0 ? TYPE_ORDER.length : i; };
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
@@ -48,6 +56,7 @@ function dedupeKey(post) {
 }
 
 function isEligible(post) {
+  if (post.expiresAt && Date.now() >= new Date(post.expiresAt).getTime()) return false;
   if (post.type === 'event_countdown' && post.days !== undefined) {
     return COUNTDOWN_DAYS.includes(post.days);
   }
@@ -123,7 +132,7 @@ async function main() {
     .filter(isEligible)
     .filter(p => !done.has(dedupeKey(p)))
     .filter(p => (log.failed[dedupeKey(p)]?.attempts || 0) < MAX_ATTEMPTS)
-    .sort((a, b) => TYPE_ORDER.indexOf(a.type) - TYPE_ORDER.indexOf(b.type));
+    .sort((a, b) => rank(a.type) - rank(b.type));
 
   if (!queue.length) { console.log('Everything eligible from today is already posted.'); return; }
   const batch = queue.slice(0, MAX_PER_RUN);

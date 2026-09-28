@@ -47,6 +47,7 @@ volume — this used to rotate one type per day, it doesn't anymore):
 | `news` | up to 3 | index.html's "Trending Today" section | `#news-card-0/1/2 .card-image` (just the photo, not the whole card) |
 | `event_countdown` | 1 | next upcoming event in `data/events.json` | `#ovHero` on `events.html?id=...` |
 | `event_recap` | 1 | most recently completed event in `data/events.json` | `.er-hero` on `event-review.html?id=...` |
+| data cards | 0-6 | see next-but-one section | rendered templates |
 
 All three navigate a real headless Chrome to the **live site** and
 screenshot the actual rendered element — never guessed selectors,
@@ -128,6 +129,35 @@ so it always matches exactly what's in the screenshot.
   posting is automatic (next section); clicking "Post to Instagram" here
   on something the bot already posted will post it a second time.
 
+## Data-driven card posts (`scripts/social-data-posts.js`)
+
+Rendered from HTML templates in `scripts/social-cards.js` (1080x1350,
+dark, site accent + Barlow Condensed, logo top-left), not screenshotted
+off a live page. Each type decides itself whether today applies:
+
+| Type | When | Data |
+|---|---|---|
+| `tale_of_tape` | 2 days before an event | main event ufcstats numbers from fighters.json; skipped if either fighter has no `stats` |
+| `picks_lock` | last daily run 3-27h before `start_time` | event poster bg, lock time in ET; `expiresAt` = lock so it never posts late |
+| `pick_split` | same window as picks_lock | community pick % on main event |
+| `upset` | within 4 days after an event | lowest-picked winner (must be under 50%) + main event crowd verdict in caption |
+| `dream_matchup` | Wednesdays (UTC) | two of champion/top 5 in a division, not in each other's last 10 fights, not booked; rotates division weekly |
+| `on_this_day` | when a completed event in events.json has today's month-day in an earlier year | main event result |
+
+- **Community pick numbers stay private until they're flattering.**
+  Picks come from the backend's public `/api/leaderboard?period=all`
+  (anon Supabase key can't read others' picks). `pick_split` and the
+  picks_lock "N fans locked in" line need 30+ picks on the main event,
+  `upset` needs 20+ on the fight. At launch volume (~5 picks per main
+  event) they stay silent and switch on by themselves as usage grows.
+- Names use billing surnames: suffixes kept ("Rosas Jr."), Chinese
+  names family-name-first ("Wang Cong" -> "Wang").
+- Preview any type locally: `FORCE_TYPE=tale_of_tape node scripts/social-post-daily.js`
+  (FORCE relaxes day gates and pick minimums, so previews may show data
+  that wouldn't post for real).
+- Fighter photos are sized by height (`img{height:100%}`), not
+  max-height: the cutouts are small and max-* never scales up.
+
 ## Instagram auto-posting (no approval step)
 
 `.github/workflows/social-autopost.yml` runs `scripts/social-autopost.js`
@@ -137,10 +167,13 @@ through the backend's `/api/admin/marketing/post` endpoint (same one the
 admin button uses; Instagram credentials stay on Render). Logs in with
 the `ADMIN_PASSWORD` GitHub secret, which must match Render's.
 
-- Priority per run: event countdown, then event recap, then news.
+- Priority per run: picks_lock, upset, pick_split, event_countdown,
+  tale_of_tape, event_recap, dream_matchup, on_this_day, news.
 - Dedupe log: `social/posted.json` (committed by the workflow).
   - news: once per headline
-  - event_countdown: only at 7 / 3 / 1 / 0 days out, once each
+  - event_countdown: only at 7 / 3 / 1 days out (fight day = picks_lock)
+  - data card types: once per event / matchup
+  - posts with `expiresAt` are dropped once it passes
   - event_recap: once per event (latest.json repeats the same recap daily
     until the next event completes)
 - Waits for the image to be live on mmabridge.com (Pages deploy lag)

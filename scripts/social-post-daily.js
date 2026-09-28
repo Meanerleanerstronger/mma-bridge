@@ -33,6 +33,7 @@ import path    from 'path';
 import puppeteer from 'puppeteer';
 import sharp   from 'sharp';
 import { fileURLToPath } from 'url';
+import { DATA_TYPES, buildDataPost, lastName } from './social-data-posts.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OUT_DIR      = path.join(__dirname, '..', 'social');
@@ -46,7 +47,9 @@ function todayKey(date) {
   return date.toISOString().slice(0, 10); // YYYY-MM-DD
 }
 
-const ALL_TYPES = ['news', 'event_countdown', 'event_recap'];
+// Data-driven card types (tale of the tape, picks lock, etc.) live in
+// social-data-posts.js; each one skips itself on days it doesn't apply.
+const ALL_TYPES = ['news', 'event_countdown', 'event_recap', ...DATA_TYPES];
 
 function loadEvents() {
   return JSON.parse(fs.readFileSync(EVENTS_PATH, 'utf8'));
@@ -55,16 +58,6 @@ function loadEvents() {
 function getMainFight(ev) {
   const mc = ev.mainCard || [];
   return mc.find(f => f.slot === 'main') || mc[0] || null;
-}
-
-// Keeps generational suffixes attached — "Rosas Jr." should read
-// "Rosas Jr.", not just "Jr.".
-const NAME_SUFFIXES = /^(jr\.?|sr\.?|ii|iii|iv)$/i;
-function lastName(name) {
-  const parts = (name || '').trim().split(/\s+/);
-  const last = parts[parts.length - 1];
-  if (parts.length > 2 && NAME_SUFFIXES.test(last)) return `${parts[parts.length - 2]} ${last}`;
-  return last || name;
 }
 
 // Every caption ends by crediting the exact MMA Bridge page the image was
@@ -272,6 +265,7 @@ async function buildRawPosts(page, type) {
     await page.setViewport({ width: 1400, height: 1000, deviceScaleFactor: 3 });
     return buildNewsPosts(page);
   }
+  if (DATA_TYPES.includes(type)) return buildDataPost(page, type);
   if (type === 'event_countdown') return buildEventCountdownPost(page);
   return buildEventRecapPost(page);
 }
@@ -310,12 +304,14 @@ async function main() {
         console.log(`⏭️  No content available for '${type}' today (e.g. no upcoming/completed event to use).`);
         continue;
       }
-      const finalizeMode = type === 'news' ? 'cover' : 'blurred-backdrop';
+      const finalizeMode = (type === 'news' || DATA_TYPES.includes(type)) ? 'cover' : 'blurred-backdrop';
       for (let i = 0; i < rawPosts.length; i++) {
         const imageName = `${key}-${type}-${i + 1}.png`;
         await finalizePoster(rawPosts[i].rawPath, path.join(OUT_DIR, imageName), finalizeMode);
-        const { caption, ref, days } = rawPosts[i];
-        allPosts.push({ type, caption, image: imageName, ref, ...(days !== undefined ? { days } : {}) });
+        const { caption, ref, days, expiresAt } = rawPosts[i];
+        allPosts.push({ type, caption, image: imageName, ref,
+          ...(days !== undefined ? { days } : {}),
+          ...(expiresAt ? { expiresAt } : {}) });
       }
     }
   } finally {
