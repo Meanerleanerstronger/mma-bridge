@@ -33,7 +33,13 @@ import path    from 'path';
 import puppeteer from 'puppeteer';
 import sharp   from 'sharp';
 import { fileURLToPath } from 'url';
-import { DATA_TYPES, buildDataPost, lastName } from './social-data-posts.js';
+import { DATA_TYPES, buildDataPost, buildFillerPosts, lastName } from './social-data-posts.js';
+import { cleanCaption, dedupeKey, isEligible } from './social-shared.js';
+
+// Autopost has 5 slots a day (social-autopost.yml). When fewer than this
+// many new, postable items come out of a run, top up with evergreen filler
+// so the account never goes quiet (and always clears the 3/day minimum).
+const DAILY_TARGET = 5;
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const OUT_DIR      = path.join(__dirname, '..', 'social');
@@ -257,7 +263,7 @@ async function finalizePoster(rawPath, outPath, mode = 'cover') {
   fs.unlinkSync(rawPath);
 }
 
-async function buildRawPosts(page, type) {
+async function buildRawPosts(page, type, ctx) {
   if (type === 'news') {
     // Wide viewport + 3x scale factor: the trending card is ~220px
     // CSS-wide in the real 3-column desktop layout, so we need real
@@ -265,7 +271,7 @@ async function buildRawPosts(page, type) {
     await page.setViewport({ width: 1400, height: 1000, deviceScaleFactor: 3 });
     return buildNewsPosts(page);
   }
-  if (DATA_TYPES.includes(type)) return buildDataPost(page, type);
+  if (DATA_TYPES.includes(type)) return buildDataPost(page, type, ctx);
   if (type === 'event_countdown') return buildEventCountdownPost(page);
   return buildEventRecapPost(page);
 }
@@ -278,7 +284,9 @@ async function main() {
   // FORCE_TYPE restricts to just one type for local testing, e.g.
   // `FORCE_TYPE=event_recap node scripts/social-post-daily.js` — omit it
   // to build everything, which is what the daily workflow does.
-  const typesToRun = process.env.FORCE_TYPE ? [process.env.FORCE_TYPE] : ALL_TYPES;
+  // FORCE_TYPE=filler builds only the filler top-up.
+  const typesToRun = process.env.FORCE_TYPE === 'filler' ? []
+    : process.env.FORCE_TYPE ? [process.env.FORCE_TYPE] : ALL_TYPES;
   console.log(`Building: ${typesToRun.join(', ')}`);
 
   const browser = await puppeteer.launch({
@@ -287,12 +295,24 @@ async function main() {
   });
   const page = await browser.newPage();
 
+  // What's already been posted, so fillers and the weekly dream matchup
+  // pick fresh content instead of repeats the autoposter would skip.
+  let posted = [];
+  try { posted = JSON.parse(fs.readFileSync(path.join(OUT_DIR, 'posted.json'), 'utf8')).posted || []; } catch {}
+  const postedKeys = new Set(posted.map(p => p.key));
+  const postedRefs = {};
+  for (const k of postedKeys) {
+    const [t, ...rest] = k.split(':');
+    (postedRefs[t] ||= new Set()).add(rest.join(':'));
+  }
+  const ctx = { postedRefs };
+
   const allPosts = [];
   try {
     for (const type of typesToRun) {
       let rawPosts;
       try {
-        rawPosts = await buildRawPosts(page, type);
+        rawPosts = await buildRawPosts(page, type, ctx);
       } catch (e) {
         // One type failing (a page hiccup, a selector that stopped
         // matching, whatever) shouldn't cost the other types their posts
@@ -309,9 +329,26 @@ async function main() {
         const imageName = `${key}-${type}-${i + 1}.png`;
         await finalizePoster(rawPosts[i].rawPath, path.join(OUT_DIR, imageName), finalizeMode);
         const { caption, ref, days, expiresAt } = rawPosts[i];
-        allPosts.push({ type, caption, image: imageName, ref,
+        allPosts.push({ type, caption: cleanCaption(caption), image: imageName, ref,
           ...(days !== undefined ? { days } : {}),
           ...(expiresAt ? { expiresAt } : {}) });
+      }
+    }
+
+    const fresh = allPosts.filter(p => isEligible(p) && !postedKeys.has(dedupeKey(p))).length;
+    const need = (process.env.FORCE_TYPE && process.env.FORCE_TYPE !== 'filler') ? 0 : DAILY_TARGET - fresh;
+    if (need > 0) {
+      console.log(`Only ${fresh} new postable item(s) today, adding ${need} filler post(s).`);
+      const exclude = new Set([...(postedRefs.dream_matchup || []), ...allPosts.filter(p => p.type === 'dream_matchup').map(p => p.ref)]);
+      try {
+        const fillers = await buildFillerPosts(page, need, exclude);
+        for (let i = 0; i < fillers.length; i++) {
+          const imageName = `${key}-dream_matchup-f${i + 1}.png`;
+          await finalizePoster(fillers[i].rawPath, path.join(OUT_DIR, imageName), 'cover');
+          allPosts.push({ type: 'dream_matchup', caption: cleanCaption(fillers[i].caption), image: imageName, ref: fillers[i].ref, filler: true });
+        }
+      } catch (e) {
+        console.error(`⚠️  filler generation failed: ${e.message}`);
       }
     }
   } finally {

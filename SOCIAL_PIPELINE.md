@@ -61,7 +61,10 @@ so it always matches exactly what's in the screenshot.
 
 ## Content style rules (explicit user requirement)
 
-- **No em dashes** in any caption — use a period, comma, or plain hyphen.
+- **No em dashes** in any caption. Use a period, comma, or plain hyphen.
+  Enforced automatically by `cleanCaption()` (scripts/social-shared.js),
+  applied at generation and again right before posting, since scraped
+  news headlines are full of them. Also strips emojis.
 - **No emojis** — the pipeline's own captions and the AI "Generate
   Content" feature (backend `/api/admin/marketing/generate`) both
   enforce this. The AI path also has a server-side strip as a backstop
@@ -179,6 +182,13 @@ the `ADMIN_PASSWORD` GitHub secret, which must match Render's.
 - Waits for the image to be live on mmabridge.com (Pages deploy lag)
   before posting, since Instagram fetches `image_url` itself.
 - A post that fails twice is skipped. Failures turn the Actions run red.
+- **Minimum 3 posts/day.** Two layers:
+  1. Generation tops the day up to 5 new postable items (one per slot)
+     with filler dream matchups (`buildFillerPosts`, marked `filler: true`)
+     that haven't been posted before. 100+ pairings in the pool.
+  2. Autopost catch-up: if skipped/failed slots mean the day can't reach
+     `MIN_DAILY` (3) with the slots left, the current run posts extra.
+     `SLOT_HOURS` in social-autopost.js must match the workflow cron.
 - Won't post if `latest.json` is 2+ days old (generation run failed).
 - Manual test: Actions tab > Social Auto-Post > Run workflow > dry run.
 - **Instagram tokens expire after 60 days.** If runs start failing with an

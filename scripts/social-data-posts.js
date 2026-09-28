@@ -318,9 +318,10 @@ async function buildUpset(page) {
   return [{ rawPath, caption, ref: ev.id }];
 }
 
-async function buildDreamMatchup(page) {
-  if (!FORCE && new Date().getUTCDay() !== DREAM_MATCHUP_WEEKDAY) return null;
-
+// Every eligible dream matchup, in posting order: round-robin across
+// divisions (one pair from each before a second from any), rotated by week
+// so each week starts in a different division.
+function dreamPairs() {
   const booked = new Set();
   for (const ev of upcomingEvents())
     for (const { fight } of allFightsWithKeys(ev)) booked.add([norm(fight.a), norm(fight.b)].sort().join('|'));
@@ -349,25 +350,53 @@ async function buildDreamMatchup(page) {
         if (booked.has([norm(x.f.name), norm(y.f.name)].sort().join('|'))) continue;
         pairs.push([x, y]);
       }
-    if (pairs.length) divisions.push({ name: div.division, pairs });
+    if (pairs.length) divisions.push({ name: div.division.replace(/\s*Top Rank$/i, ''), pairs });
   }
-  if (!divisions.length) return null;
+  if (!divisions.length) return [];
 
-  // Rotate through divisions week by week, then through each division's pairs.
   const week = Math.floor(Date.now() / (7 * 86400000));
-  const div  = divisions[week % divisions.length];
-  const [x, y] = div.pairs[Math.floor(week / divisions.length) % div.pairs.length];
+  const rotated = divisions.map((_, i) => divisions[(week + i) % divisions.length]);
+  const out = [];
+  const maxPairs = Math.max(...divisions.map(d => d.pairs.length));
+  for (let j = 0; j < maxPairs; j++)
+    for (const d of rotated)
+      if (d.pairs[j]) {
+        const [x, y] = d.pairs[j];
+        out.push({ division: d.name, x, y, ref: [x.f.id, y.f.id].sort().join('+') });
+      }
+  return out;
+}
 
+async function renderDreamMatchup(page, { division, x, y, ref }, name) {
   const html = await dreamMatchupHtml({
-    division: div.name.replace(/\s*Top Rank$/i, ''),
+    division,
     a: { last: lastName(x.f.name), rankLabel: x.rankLabel, img: x.f.img },
     b: { last: lastName(y.f.name), rankLabel: y.rankLabel, img: y.f.img },
   });
-  const rawPath = await render(page, html, 'dream');
+  const rawPath = await render(page, html, name);
   const caption = withSourceLine(
-    `Dream matchup: ${x.f.name} vs. ${y.f.name}. ${x.rankLabel} against ${y.rankLabel} at ${div.name.replace(/\s*Top Rank$/i, '').toLowerCase()}. Who wins? Tell us in the comments.`,
+    `Dream matchup: ${x.f.name} vs. ${y.f.name}. ${x.rankLabel} against ${y.rankLabel} at ${division.toLowerCase()}. Who wins? Tell us in the comments.`,
     'Rankings and fighter data from MMA Bridge.');
-  return [{ rawPath, caption, ref: [x.f.id, y.f.id].sort().join('+') }];
+  return { rawPath, caption, ref };
+}
+
+// excludeRefs: dream_matchup refs already posted, so the weekly pick moves
+// on to a fresh pairing instead of being deduped away.
+async function buildDreamMatchup(page, excludeRefs = new Set()) {
+  if (!FORCE && new Date().getUTCDay() !== DREAM_MATCHUP_WEEKDAY) return null;
+  const pick = dreamPairs().find(p => !excludeRefs.has(p.ref));
+  return pick ? [await renderDreamMatchup(page, pick, 'dream')] : null;
+}
+
+/**
+ * Evergreen filler so every day has enough to post: extra dream matchups
+ * that haven't been posted and aren't already queued today.
+ */
+export async function buildFillerPosts(page, count, excludeRefs) {
+  const picks = dreamPairs().filter(p => !excludeRefs.has(p.ref)).slice(0, count);
+  const out = [];
+  for (let i = 0; i < picks.length; i++) out.push(await renderDreamMatchup(page, picks[i], `filler-${i}`));
+  return out;
 }
 
 async function buildOnThisDay(page) {
@@ -399,13 +428,13 @@ async function buildOnThisDay(page) {
   return [{ rawPath, caption, ref: ev.id }];
 }
 
-export async function buildDataPost(page, type) {
+export async function buildDataPost(page, type, ctx = {}) {
   switch (type) {
     case 'tale_of_tape':  return buildTaleOfTape(page);
     case 'picks_lock':    return buildPicksLock(page);
     case 'pick_split':    return buildPickSplit(page);
     case 'upset':         return buildUpset(page);
-    case 'dream_matchup': return buildDreamMatchup(page);
+    case 'dream_matchup': return buildDreamMatchup(page, ctx.postedRefs?.dream_matchup);
     case 'on_this_day':   return buildOnThisDay(page);
     default: throw new Error(`Unknown data post type: ${type}`);
   }

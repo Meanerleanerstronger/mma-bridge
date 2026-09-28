@@ -20,12 +20,16 @@
  *
  * Env:
  *   ADMIN_PASSWORD  required — same value as on Render
- *   MAX_PER_RUN     posts per run (default 1)
+ *   MAX_PER_RUN     posts per run (default 1; more when catching up)
+ *   MIN_DAILY       posts guaranteed per daily batch (default 3). If earlier
+ *                   slots were skipped or failed, later slots post extra so
+ *                   the day still reaches this.
  *   DRY_RUN=1       log what would be posted, post nothing, write nothing
  */
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { cleanCaption, dedupeKey, isEligible } from './social-shared.js';
 
 const __dirname   = path.dirname(fileURLToPath(import.meta.url));
 const SOCIAL_DIR  = path.join(__dirname, '..', 'social');
@@ -34,9 +38,13 @@ const POSTED_PATH = path.join(SOCIAL_DIR, 'posted.json');
 const SITE_URL    = process.env.SITE_URL || 'https://mmabridge.com';
 const API_BASE    = process.env.API_BASE || 'https://mmabridge-backend.onrender.com';
 const MAX_PER_RUN = Number(process.env.MAX_PER_RUN || 1);
+const MIN_DAILY   = Number(process.env.MIN_DAILY || 3);
+
+// UTC hours of the autopost cron slots, in the order they fire after the
+// 18:00 generation run (must match social-autopost.yml).
+const SLOT_HOURS = [18, 20, 22, 0, 2];
 const DRY_RUN     = process.env.DRY_RUN === '1';
 
-const COUNTDOWN_DAYS = [7, 3, 1];
 const MAX_ATTEMPTS   = 2; // a post that fails twice is skipped so it can't block the queue forever
 // Time-sensitive first; evergreen filler last.
 const TYPE_ORDER = [
@@ -51,16 +59,15 @@ function readJson(p, fallback) {
   try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch { return fallback; }
 }
 
-function dedupeKey(post) {
-  return post.ref ? `${post.type}:${post.ref}` : `image:${post.image}`;
-}
-
-function isEligible(post) {
-  if (post.expiresAt && Date.now() >= new Date(post.expiresAt).getTime()) return false;
-  if (post.type === 'event_countdown' && post.days !== undefined) {
-    return COUNTDOWN_DAYS.includes(post.days);
-  }
-  return true;
+// How many slots are still to come after this run in today's cycle.
+// Cron runs can start late, so a run belongs to the latest slot at or
+// before the current hour.
+function slotsRemainingAfterNow() {
+  const h = new Date().getUTCHours();
+  const ord = x => (x - 18 + 24) % 24; // hours since generation
+  let idx = 0;
+  SLOT_HOURS.forEach((slot, i) => { if (ord(slot) <= ord(h)) idx = i; });
+  return SLOT_HOURS.length - 1 - idx;
 }
 
 // Don't push out stale content if the daily generation run failed.
@@ -129,16 +136,23 @@ async function main() {
   const done = new Set(log.posted.map(p => p.key));
 
   const queue = latest.posts
-    .filter(isEligible)
+    .filter(p => isEligible(p))
     .filter(p => !done.has(dedupeKey(p)))
     .filter(p => (log.failed[dedupeKey(p)]?.attempts || 0) < MAX_ATTEMPTS)
     .sort((a, b) => rank(a.type) - rank(b.type));
 
   if (!queue.length) { console.log('Everything eligible from today is already posted.'); return; }
-  const batch = queue.slice(0, MAX_PER_RUN);
+
+  // Catch up if skipped/failed slots put the day at risk of missing MIN_DAILY.
+  const postedToday = log.posted.filter(p => p.image?.startsWith(latest.date)).length;
+  const remaining = slotsRemainingAfterNow();
+  const catchUp = MIN_DAILY - postedToday - remaining;
+  const perRun = Math.max(MAX_PER_RUN, catchUp);
+  console.log(`Posted today: ${postedToday}, slots left after this: ${remaining}, posting up to ${perRun} now.`);
+  const batch = queue.slice(0, perRun);
 
   if (DRY_RUN) {
-    batch.forEach(p => console.log(`[dry run] would post ${p.image}\n${p.caption}\n`));
+    batch.forEach(p => console.log(`[dry run] would post ${p.image}\n${cleanCaption(p.caption)}\n`));
     return;
   }
 
@@ -151,7 +165,7 @@ async function main() {
     const imageUrl = `${SITE_URL}/social/${post.image}`;
     try {
       if (!(await waitForImage(imageUrl))) throw new Error(`Image never went live: ${imageUrl}`);
-      const mediaId = await postToInstagram(token, post.caption, imageUrl);
+      const mediaId = await postToInstagram(token, cleanCaption(post.caption), imageUrl);
       log.posted.push({ key, type: post.type, image: post.image, media_id: mediaId, at: new Date().toISOString() });
       delete log.failed[key];
       console.log(`✅ Posted ${post.image} (media ${mediaId})`);
