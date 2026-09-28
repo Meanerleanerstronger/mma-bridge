@@ -55,6 +55,11 @@ const rank = t => { const i = TYPE_ORDER.indexOf(t); return i < 0 ? TYPE_ORDER.l
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
+// Account-level problems (expired/invalid Instagram token, missing
+// credentials) aren't the post's fault: don't count them as attempts, or a
+// dead token would get every queued post skipped for good.
+const isAccountError = msg => /access token|OAuthException|"code":190|credentials not configured/i.test(msg);
+
 function readJson(p, fallback) {
   try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch { return fallback; }
 }
@@ -171,6 +176,10 @@ async function main() {
       console.log(`✅ Posted ${post.image} (media ${mediaId})`);
     } catch (e) {
       failures++;
+      if (isAccountError(e.message)) {
+        console.error(`❌ Instagram account/token problem, nothing posted. Fix the token on Render (see SOCIAL_PIPELINE.md). ${e.message}`);
+        break;
+      }
       const prev = log.failed[key]?.attempts || 0;
       log.failed[key] = { attempts: prev + 1, error: e.message.slice(0, 300), at: new Date().toISOString() };
       console.error(`❌ ${post.image}: ${e.message}`);

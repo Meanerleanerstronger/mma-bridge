@@ -192,7 +192,10 @@ the `ADMIN_PASSWORD` GitHub secret, which must match Render's.
 - Won't post if `latest.json` is 2+ days old (generation run failed).
 - Manual test: Actions tab > Social Auto-Post > Run workflow > dry run.
 - **Instagram tokens expire after 60 days.** If runs start failing with an
-  auth/token error, refresh `INSTAGRAM_ACCESS_TOKEN` on Render.
+  auth/token error, generate a new long-lived token and replace
+  `INSTAGRAM_ACCESS_TOKEN` on Render. Token/account errors are not counted
+  as post attempts, so everything queued posts once the token is fixed.
+  (Expired 2026-09-27; no auto-refresh yet.)
 
 ## Caption rule: always credit MMA Bridge
 
