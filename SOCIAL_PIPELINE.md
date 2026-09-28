@@ -195,7 +195,12 @@ the `ADMIN_PASSWORD` GitHub secret, which must match Render's.
   auth/token error, generate a new long-lived token and replace
   `INSTAGRAM_ACCESS_TOKEN` on Render. Token/account errors are not counted
   as post attempts, so everything queued posts once the token is fixed.
-  (Expired 2026-09-27; no auto-refresh yet.)
+- **Token auto-refresh:** `instagram-token-refresh.yml` (Mondays 12:00 UTC)
+  calls the backend's `/api/admin/marketing/refresh-instagram-token`,
+  which renews the token and stores it in Supabase `app_config` (RLS on,
+  service role only). A token pasted into Render later always wins over
+  the stored one. Refresh only works on a token that hasn't expired yet,
+  so if it ever lapses, paste a new one into Render as above.
 
 ## Caption rule: always credit MMA Bridge
 

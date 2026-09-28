@@ -1,0 +1,25 @@
+name: Instagram Token Refresh
+
+on:
+  schedule:
+    # Weekly. Instagram tokens last 60 days, so this keeps a wide margin even
+    # if a few runs fail. A failed run turns red (and emails you).
+    - cron: '0 12 * * 1'   # Mondays 12:00 UTC
+  workflow_dispatch:
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Refresh Instagram token
+        env:
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+        run: node scripts/instagram-token-refresh.js
