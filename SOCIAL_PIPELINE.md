@@ -124,8 +124,40 @@ so it always matches exactly what's in the screenshot.
 - **Twitter is manual only** — X's API now charges per post
   (pay-per-use credits) on this app, so there's no auto-post button for
   it. Copy the caption + download the image and post it yourself.
-- The workflow itself only generates + commits; it never auto-posts
-  anywhere. Posting is always a deliberate click from this tab.
+- The generation workflow itself only generates + commits. Instagram
+  posting is automatic (next section); clicking "Post to Instagram" here
+  on something the bot already posted will post it a second time.
+
+## Instagram auto-posting (no approval step)
+
+`.github/workflows/social-autopost.yml` runs `scripts/social-autopost.js`
+5x a day (18:30, 20:30, 22:30, 00:30, 02:30 UTC = 11:30am-7:30pm PT) and
+posts the **next** unposted item from `social/latest.json`, one per run,
+through the backend's `/api/admin/marketing/post` endpoint (same one the
+admin button uses; Instagram credentials stay on Render). Logs in with
+the `ADMIN_PASSWORD` GitHub secret, which must match Render's.
+
+- Priority per run: event countdown, then event recap, then news.
+- Dedupe log: `social/posted.json` (committed by the workflow).
+  - news: once per headline
+  - event_countdown: only at 7 / 3 / 1 / 0 days out, once each
+  - event_recap: once per event (latest.json repeats the same recap daily
+    until the next event completes)
+- Waits for the image to be live on mmabridge.com (Pages deploy lag)
+  before posting, since Instagram fetches `image_url` itself.
+- A post that fails twice is skipped. Failures turn the Actions run red.
+- Won't post if `latest.json` is 2+ days old (generation run failed).
+- Manual test: Actions tab > Social Auto-Post > Run workflow > dry run.
+- **Instagram tokens expire after 60 days.** If runs start failing with an
+  auth/token error, refresh `INSTAGRAM_ACCESS_TOKEN` on Render.
+
+## Caption rule: always credit MMA Bridge
+
+Every caption ends with a line naming the exact MMA Bridge page the image
+was screenshotted from (Trending Today feed / event page / event review),
+then `Link in bio: mmabridge.com`, since Instagram captions don't make
+URLs clickable. Built by `withSourceLine()` in social-post-daily.js; any
+new content type must use it too.
 
 ## Testing locally
 

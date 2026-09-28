@@ -57,9 +57,21 @@ function getMainFight(ev) {
   return mc.find(f => f.slot === 'main') || mc[0] || null;
 }
 
+// Keeps generational suffixes attached — "Rosas Jr." should read
+// "Rosas Jr.", not just "Jr.".
+const NAME_SUFFIXES = /^(jr\.?|sr\.?|ii|iii|iv)$/i;
 function lastName(name) {
   const parts = (name || '').trim().split(/\s+/);
-  return parts[parts.length - 1] || name;
+  const last = parts[parts.length - 1];
+  if (parts.length > 2 && NAME_SUFFIXES.test(last)) return `${parts[parts.length - 2]} ${last}`;
+  return last || name;
+}
+
+// Every caption ends by crediting the exact MMA Bridge page the image was
+// screenshotted from, plus a plain link (Instagram captions don't make
+// URLs clickable, hence "link in bio").
+function withSourceLine(body, sourceLine) {
+  return `${body}\n\n${sourceLine}\n\nLink in bio: mmabridge.com`;
 }
 
 // Several UI widgets are position:fixed (pinned to the viewport, not the
@@ -129,8 +141,9 @@ async function buildNewsPosts(page) {
     const rawPath = path.join(OUT_DIR, `_raw-${i}.png`);
     await el.screenshot({ path: rawPath });
 
-    const caption = source ? `${title} (via ${source})` : title;
-    posts.push({ rawPath, caption });
+    const headline = source ? `${title} (via ${source})` : title;
+    const caption = withSourceLine(headline, 'Screenshot from the Trending Today news feed on MMA Bridge. More fight news daily at mmabridge.com');
+    posts.push({ rawPath, caption, ref: title });
   }
 
   if (!posts.length) {
@@ -178,9 +191,9 @@ async function buildEventCountdownPost(page) {
   const whenPhrase = days === null ? '' : days <= 0 ? 'is TODAY' : days === 1 ? 'is tomorrow' : `is in ${days} days`;
   const matchup = main ? `${lastName(main.a)} vs. ${lastName(main.b)}` : (ev.name || '');
   const pickUrl = `${SITE_URL}/picks.html?id=${ev.id}`;
-  const caption = `${matchup} ${whenPhrase}. Make your picks: ${pickUrl}\n\nScreenshots via mmabridge.com`;
+  const caption = withSourceLine(`${matchup} ${whenPhrase}. Make your picks: ${pickUrl}`, `Screenshot from the ${ev.name} event page on MMA Bridge.`);
 
-  return [{ rawPath, caption }];
+  return [{ rawPath, caption, ref: `${ev.id}@${days}`, days }];
 }
 
 async function buildEventRecapPost(page) {
@@ -213,9 +226,9 @@ async function buildEventRecapPost(page) {
     resultPhrase = `. ${lastName(main.winner)} def. ${lastName(loser)}`;
   }
   const reviewUrl = `${SITE_URL}/event-review.html?id=${ev.id}`;
-  const caption = `Relive ${ev.name}${resultPhrase}. Full card recap and community ratings: ${reviewUrl}\n\nScreenshots via mmabridge.com`;
+  const caption = withSourceLine(`Relive ${ev.name}${resultPhrase}. Full card recap and community ratings: ${reviewUrl}`, `Screenshot from the ${ev.name} event review on MMA Bridge.`);
 
-  return [{ rawPath, caption }];
+  return [{ rawPath, caption, ref: ev.id }];
 }
 
 // News cards are already close to the 4:5 target ratio (just the photo,
@@ -301,7 +314,8 @@ async function main() {
       for (let i = 0; i < rawPosts.length; i++) {
         const imageName = `${key}-${type}-${i + 1}.png`;
         await finalizePoster(rawPosts[i].rawPath, path.join(OUT_DIR, imageName), finalizeMode);
-        allPosts.push({ type, caption: rawPosts[i].caption, image: imageName });
+        const { caption, ref, days } = rawPosts[i];
+        allPosts.push({ type, caption, image: imageName, ref, ...(days !== undefined ? { days } : {}) });
       }
     }
   } finally {

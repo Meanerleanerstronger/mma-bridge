@@ -1,0 +1,60 @@
+name: Social Auto-Post (Instagram)
+
+on:
+  schedule:
+    # One post per run, spread across the day. Daily generation runs at
+    # 18:00 UTC, so the first slot waits for its images to deploy.
+    # 18:30 / 20:30 / 22:30 / 00:30 / 02:30 UTC = 11:30am-7:30pm PT
+    - cron: '30 18,20,22 * * *'
+    - cron: '30 0,2 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (log only, post nothing)'
+        type: boolean
+        default: false
+
+concurrency:
+  group: social-autopost
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Post next item to Instagram
+        env:
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          DRY_RUN: ${{ inputs.dry_run && '1' || '0' }}
+        run: node scripts/social-autopost.js
+
+      # always() so failed attempts are recorded too — otherwise a broken
+      # post would be retried every run forever.
+      - name: Commit posted log
+        if: always() && inputs.dry_run != true
+        run: |
+          git config user.name  "Social Post Bot"
+          git config user.email "bot@mmabridge.com"
+          git add social/posted.json 2>/dev/null || exit 0
+          if git diff --staged --quiet; then
+            echo "Nothing to commit"
+            exit 0
+          fi
+          git commit -m "chore(auto): instagram autopost log $(date -u +%Y-%m-%dT%H:%M)"
+          # Other sync bots push to main constantly — retry on a race.
+          for i in 1 2 3 4 5; do
+            git pull --rebase -q && git push && exit 0
+            sleep $((i * 5))
+          done
+          exit 1

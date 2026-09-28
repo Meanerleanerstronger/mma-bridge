@@ -35,12 +35,10 @@ jobs:
             echo "generated=false" >> "$GITHUB_OUTPUT"
           fi
 
-      # Nothing auto-posts anywhere from here — review + post yourself from
-      # admin.html's Marketing Buddy tab, which reads these files directly:
-      # copy a caption + download its image for Twitter, or click
-      # "Post to Instagram" to publish via the API once those credentials
-      # are set up on Render. Keeps you in control of which of the (up to 3)
-      # options actually goes out, instead of the workflow picking one.
+      # Instagram posting happens separately in social-autopost.yml, which
+      # publishes one of these per run through the day with no approval
+      # step. admin.html's Marketing Buddy tab still shows them for Twitter
+      # (manual copy + download) or a manual Instagram post.
       - name: Commit poster images
         if: steps.check.outputs.generated == 'true'
         run: |
