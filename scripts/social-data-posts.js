@@ -172,10 +172,12 @@ async function pickCounts(eventId, fightKey) {
 function pct(n, total) { return total ? Math.round((n / total) * 100) : 0; }
 
 const METHOD_NAMES = { DEC: 'decision', UD: 'unanimous decision', SD: 'split decision', MD: 'majority decision', SUB: 'submission', 'KO/TKO': 'KO/TKO', KO: 'KO', TKO: 'TKO' };
-function methodLabel(fight) {
+// short = on-image label ("TKO R2"); long = caption wording ("TKO in round 2")
+function methodLabel(fight, short = false) {
   if (!fight.method) return '';
   const m = METHOD_NAMES[fight.method.toUpperCase()] || fight.method;
-  return fight.round && !/decision/i.test(m) ? `${m} in round ${fight.round}` : m;
+  if (!fight.round || /decision/i.test(m)) return m;
+  return short ? `${m} R${fight.round}` : `${m} in round ${fight.round}`;
 }
 
 async function render(page, html, name) {
@@ -296,7 +298,7 @@ async function buildUpset(page) {
   const html = await upsetHtml({
     eventName: ev.name,
     winner: { last: lastName(fight.winner), img: imgFor(fight.winner, fight) },
-    loser, pct: p, method: methodLabel(fight),
+    loser, pct: p, method: methodLabel(fight, true),
   });
   const rawPath = await render(page, html, 'upset');
 
@@ -387,7 +389,7 @@ async function buildOnThisDay(page) {
   const html = await onThisDayHtml({
     year: evYear, dateLabel, eventName: ev.name,
     winner: { last: lastName(fight.winner), img: imgFor(fight.winner, fight) },
-    loser, method: methodLabel(fight),
+    loser, method: methodLabel(fight, true),
   });
   const rawPath = await render(page, html, 'otd');
   const how = fight.method ? ` by ${methodLabel(fight)}` : '';

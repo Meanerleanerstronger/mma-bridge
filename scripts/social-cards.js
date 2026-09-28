@@ -201,8 +201,8 @@ export async function upsetHtml({ eventName, winner, loser, pct, method }) {
 .c .h{font-size:120px;margin-top:16px}
 .c .p{font-size:230px;margin-top:36px}
 .c .only{font-size:32px;margin-top:6px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;width:470px;line-height:1.3}
-.res{position:absolute;left:64px;bottom:140px;z-index:4}
-.res .w{font-size:84px}.res .d{font-size:30px;margin-top:10px;letter-spacing:.06em}
+.res{position:absolute;left:64px;right:64px;bottom:140px;z-index:4}
+.res .w{font-size:84px}.res .d{font-size:30px;margin-top:10px;letter-spacing:.06em;white-space:nowrap}
 </style>
 ${fighterImg(winner.img, 'r')}<div class="fade"></div>
 <div class="c"><div class="ev muted">${esc(eventName)}</div>
@@ -221,9 +221,9 @@ export async function onThisDayHtml({ year, dateLabel, eventName, winner, loser,
 .c{position:absolute;left:64px;top:180px;width:600px;z-index:4}
 .c .d{font-size:28px;letter-spacing:.2em;text-transform:uppercase}
 .c .y{font-size:300px;margin-top:4px}
-.res{position:absolute;left:64px;bottom:140px;width:640px;z-index:4}
+.res{position:absolute;left:64px;right:64px;bottom:140px;z-index:4}
 .res .ev{font-size:24px;letter-spacing:.14em;text-transform:uppercase}
-.res .w{font-size:96px;margin-top:14px}.res .d2{font-size:32px;margin-top:10px;letter-spacing:.04em}
+.res .w{font-size:96px;margin-top:14px}.res .d2{font-size:32px;margin-top:10px;letter-spacing:.04em;white-space:nowrap}
 </style>
 ${fighterImg(winner.img, 'r')}<div class="fade"></div>
 <div class="c"><div class="d muted">${esc(dateLabel)}</div><div class="y bc accent">${esc(year)}</div></div>
