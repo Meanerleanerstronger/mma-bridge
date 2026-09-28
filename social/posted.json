@@ -1,0 +1,10 @@
+{
+  "posted": [],
+  "failed": {
+    "event_recap:ufc-fight-night-rosas-jr-vs-barcelos": {
+      "attempts": 1,
+      "error": "HTTP 401 creating media container: {\"error\":{\"message\":\"Error validating access token: Session has expired on Sunday, 27-Sep-26 05:04:44 PDT. The current time is Monday, 28-Sep-26 14:06:30 PDT.\",\"type\":\"OAuthException\",\"code\":190,\"error_subcode\":0,\"fbtrace_id\":\"ADmAy3T_-o8ia1TH96XI7NM\"}}",
+      "at": "2026-09-28T21:06:30.198Z"
+    }
+  }
+}
