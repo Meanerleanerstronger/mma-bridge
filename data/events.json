@@ -14809,7 +14809,7 @@
     "venue": "",
     "poster": "https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/2026-09/101026-ufc-fight-night-allen-vs-duncan-EVENT-ART.jpg",
     "status": "upcoming",
-    "start_time": "2026-10-11T00:00:00.000Z",
+    "start_time": "2026-10-10T21:00:00.000Z",
     "mainCard": [
       {
         "a": "Brendan Allen",
@@ -14823,18 +14823,129 @@
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/DUNCAN_CHRISTIAN_LEROY_L_11-08.png"
       },
       {
+        "a": "Matheus Camilo",
+        "b": "Jai Herbert",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/CAMILO_MATHEUS_R.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/HERBERT_JAI_L_03-22.png"
+      },
+      {
+        "a": "Loopy Godinez",
+        "b": "Ketlen Souza",
+        "weight": "Women's Strawweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/SOUZA_KETLEN_L_06-06.png"
+      },
+      {
+        "a": "Andre Fili",
+        "b": "Kai Kamaka III",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/FILI_ANDRE_L_03-14.png?itok=Zud7jwf3",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/KAMAKA_KAI_L_04-04.png"
+      },
+      {
+        "a": "Julius Walker",
+        "b": "Gerald Meerschaert",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/WALKER_JULIUS_L_08-09.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/MEERSCHAERT_GERALD_L_08-16.png"
+      },
+      {
+        "a": "Malcolm Wellmaker",
+        "b": "Otari Tanzilovi",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/WELLMAKER_MALCOM_L_05-16.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/TANZILOVI_OTARI_R_06-20.png"
+      }
+    ],
+    "prelims": [
+      {
         "a": "Francisco Prado",
         "b": "Ismael Bonfim",
-        "weight": "Welterweight",
+        "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
         "slot": "comain",
-        "imgA": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-07/PRADO_FRANCISCO_L_07-19.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-02/BONFIM_ISMAEL_L_02-15.png"
+      },
+      {
+        "a": "Niko Price",
+        "b": "Leon Shahbazyan",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-06/PRICE_NIKO_L_06-28.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/SHAHBAZYAN_LEON_L_06-20.png"
+      },
+      {
+        "a": "Felipe Franco",
+        "b": "Brendson Ribeiro",
+        "weight": "Light Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/FRANCO_FELIPE_R_03-21.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-02/RIBEIRO_BRENDSON_L_02-17.png"
+      },
+      {
+        "a": "Allen Frye Jr.",
+        "b": "RJ Harris",
+        "weight": "Heavyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/FRYE_ALLEN_L_12-13.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png"
+      },
+      {
+        "a": "Alice Pereira",
+        "b": "Daria Zhelezniakova",
+        "weight": "Women's Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/PEREIRA_ALICE_L_04-04.png",
         "imgB": ""
+      },
+      {
+        "a": "Ernesta Kareckaitė",
+        "b": "Melissa Gatto",
+        "weight": "Women's Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-03/GATTO_MELISSA_L_07-01.png"
       }
     ],
-    "prelims": [],
     "earlyPrelims": [],
     "droppedFights": [
       {
