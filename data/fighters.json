@@ -52844,15 +52844,48 @@
         "time": "5:00"
       }
     ],
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-03/GODINEZ_LOOPY_L_03-29.png?itok=GYu4a1a8"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-03/GODINEZ_LOOPY_L_03-29.png?itok=GYu4a1a8",
+    "stats": {
+      "slpm": "4.43",
+      "strAcc": "49%",
+      "sapm": "3.94",
+      "strDef": "62%",
+      "tdAvg": "2.99",
+      "tdAcc": "42%",
+      "tdDef": "76%",
+      "subAvg": "0.8"
+    },
+    "statsSyncedAt": "2026-09-30T15:41:19.598Z"
   },
   {
     "id": "daria-zhelezniakova",
-    "name": "Daria Zhelezniakova"
+    "name": "Daria Zhelezniakova",
+    "stats": {
+      "slpm": "4.13",
+      "strAcc": "40%",
+      "sapm": "3.38",
+      "strDef": "64%",
+      "tdAvg": "0.31",
+      "tdAcc": "100%",
+      "tdDef": "50%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-09-30T15:41:22.307Z"
   },
   {
     "id": "ernesta-kareckaite",
     "name": "Ernesta Kareckaitė",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/9/KARECKAITE_ERNESTA_L_01-11.png?itok=1zansFiR"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/9/KARECKAITE_ERNESTA_L_01-11.png?itok=1zansFiR",
+    "stats": {
+      "slpm": "7.28",
+      "strAcc": "42%",
+      "sapm": "6.47",
+      "strDef": "49%",
+      "tdAvg": "0.75",
+      "tdAcc": "60%",
+      "tdDef": "81%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-09-30T15:41:24.667Z"
   }
 ]
