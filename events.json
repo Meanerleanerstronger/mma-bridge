@@ -14711,17 +14711,6 @@
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/PULYAEV_ANDREY_R_03-22.png"
       },
       {
-        "a": "Marcus McGhee",
-        "b": "Benardo Sopaj",
-        "weight": "Bantamweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": true,
-        "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/MCGHEE_MARCUS_L_06-06.png",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/6/SOPAJ_BENARDO_L_03-02.png?itok=fxyt7hIc"
-      },
-      {
         "a": "Anthony Wint",
         "b": "Lucas Armand",
         "weight": "Heavyweight",
@@ -14731,6 +14720,17 @@
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/WINT_ANTHONY_L_08-11.png?itok=3WBRGkED",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
+      },
+      {
+        "a": "Marcus McGhee",
+        "b": "Anthony Romero",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/MCGHEE_MARCUS_L_06-06.png",
+        "imgB": ""
       }
     ],
     "earlyPrelims": [
@@ -14841,7 +14841,7 @@
         "titleFight": false,
         "ranked": true,
         "slot": "",
-        "imgA": "",
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-03/GODINEZ_LOOPY_L_03-29.png?itok=GYu4a1a8",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/SOUZA_KETLEN_L_06-06.png"
       },
       {
@@ -14942,7 +14942,7 @@
         "titleFight": false,
         "ranked": true,
         "slot": "",
-        "imgA": "",
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/9/KARECKAITE_ERNESTA_L_01-11.png?itok=1zansFiR",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-03/GATTO_MELISSA_L_07-01.png"
       }
     ],
