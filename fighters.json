@@ -20862,7 +20862,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-06/PRICE_NIKO_L_06-28.png",
     "record": {
       "wins": 16,
-      "losses": 11,
+      "losses": 9,
       "draws": 0
     },
     "last5": [
@@ -37380,8 +37380,8 @@
     "name": "Leon Shahbazyan",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/SHAHBAZYAN_LEON_L_06-20.png",
     "record": {
-      "wins": 12,
-      "losses": 5,
+      "wins": 17,
+      "losses": 6,
       "draws": 0
     },
     "last5": [
@@ -52738,5 +52738,111 @@
     "id": "cristian-perez-gonzalez",
     "name": "Cristian Perez Gonzalez",
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/PEREZ_CRISTIAN_L_08-26.png?itok=LIbBOleP"
+  },
+  {
+    "id": "bruce-whitehead",
+    "name": "Bruce Whitehead",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-09-29T15:24:59.874Z"
+  },
+  {
+    "id": "loopy-godinez",
+    "name": "Loopy Godinez",
+    "record": {
+      "wins": 14,
+      "losses": 6,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Tatiana Suarez",
+        "result": "L",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC 327",
+        "round": 2,
+        "time": "2:29"
+      },
+      {
+        "opponent": "Jéssica Andrade",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 319",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Julia Polastri",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Moreno vs. Erceg",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Mackenzie Dern",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ABC: Sandhagen vs. Nurmagomedov",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Virna Jandiroba",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Blanchfield vs. Fiorot",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Tabatha Ricci",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC 295",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Elise Reed",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC Fight Night: Grasso vs. Shevchenko 2",
+        "round": 2,
+        "time": "3:30"
+      },
+      {
+        "opponent": "Emily Ducote",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Dern vs. Hill",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Cynthia Calvillo",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC 287",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Angela Hill",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Vera vs. Cruz",
+        "round": 3,
+        "time": "5:00"
+      }
+    ]
   }
 ]
