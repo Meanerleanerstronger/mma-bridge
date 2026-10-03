@@ -14719,7 +14719,11 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/WINT_ANTHONY_L_08-11.png?itok=3WBRGkED",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
+        "winner": "Anthony Wint",
+        "method": "KO/TKO",
+        "round": 1,
+        "_supabaseSynced": true
       },
       {
         "a": "Marcus McGhee",
@@ -14731,7 +14735,22 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/MCGHEE_MARCUS_L_06-06.png",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2022-03/ab196166-a590-473d-b98e-3404a5f0f8b4%252FROMERO_ANTHONY_R.png?itok=zEXid5_W",
-        "cancelled": true
+        "cancelled": true,
+        "winner": "Marcus McGhee",
+        "method": "KO/TKO",
+        "round": 1,
+        "_supabaseSynced": true
+      },
+      {
+        "a": "Rafael Dos Anjos",
+        "b": "Alexander Hernandez",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
       }
     ],
     "earlyPrelims": [
@@ -14744,7 +14763,11 @@
         "ranked": false,
         "slot": "comain",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/WALKER_JOHNNY_L_08-23.png",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/5/PARKIN_MICK_L_07-27.png?itok=OX9b6Fw2"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/5/PARKIN_MICK_L_07-27.png?itok=OX9b6Fw2",
+        "winner": "Johnny Walker",
+        "method": "KO/TKO",
+        "round": 1,
+        "_supabaseSynced": true
       },
       {
         "a": "Marvin Vettori",
@@ -14755,7 +14778,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/VETTORI_MARVIN_L_12-06.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/NAURDIEV_ISMAIL_L_11-22.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/NAURDIEV_ISMAIL_L_11-22.png",
+        "winner": "Ismail Naurdiev",
+        "round": 3,
+        "_supabaseSynced": true
       },
       {
         "a": "Court McGee",
@@ -14766,7 +14792,11 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-10/MCGEE_COURT_L_10-05.png?itok=CVRx8xXQ",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/NOLAN_ERIC_R_08-16.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/NOLAN_ERIC_R_08-16.png",
+        "winner": "Eric Nolan",
+        "method": "KO/TKO",
+        "round": 3,
+        "_supabaseSynced": true
       },
       {
         "a": "Jacobe Smith",
@@ -14777,7 +14807,11 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/SMITH_JACOBE_L_02-21.png",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-10/WHITEHEAD_BRUCE_R_10-03.png?itok=CutVYLnN"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-10/WHITEHEAD_BRUCE_R_10-03.png?itok=CutVYLnN",
+        "winner": "Jacobe Smith",
+        "method": "KO/TKO",
+        "round": 1,
+        "_supabaseSynced": true
       }
     ],
     "droppedFights": [

@@ -9528,6 +9528,14 @@
     "bio": "Marvin Vettori is Italy's most successful UFC fighter, a grinding middleweight who uses relentless pressure, elite cardio, and dirty boxing to wear down opponents across three and five rounds. 'The Italian Dream' has fought Israel Adesanya twice and remains a fixture of the middleweight top ten.",
     "last5": [
       {
+        "opponent": "Ismail Naurdiev",
+        "result": "L",
+        "method": "",
+        "event": "UFC 332",
+        "round": 3,
+        "time": null
+      },
+      {
         "opponent": "Brendan Allen",
         "result": "L",
         "method": "Decision (unanimous)",
@@ -13547,6 +13555,14 @@
     },
     "last5": [
       {
+        "opponent": "Marvin Vettori",
+        "result": "W",
+        "method": "",
+        "event": "UFC 332",
+        "round": 3,
+        "time": null
+      },
+      {
         "opponent": "Ryan Loder",
         "result": "W",
         "method": "KO (punch)",
@@ -15082,6 +15098,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Court McGee",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 3,
+        "time": null
+      },
       {
         "opponent": "Farman Hasanov",
         "result": "L",
@@ -25327,6 +25351,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Mick Parkin",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Magomed Ankalaev",
         "result": "D",
@@ -36511,6 +36543,14 @@
     },
     "last5": [
       {
+        "opponent": "Anthony Romero",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "John Yannis",
         "result": "W",
         "method": "Decision (unanimous)",
@@ -38230,6 +38270,14 @@
     },
     "nickname": "Cobe",
     "last5": [
+      {
+        "opponent": "Bruce Whitehead",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Josiah Harrell",
         "result": "W",
@@ -47334,6 +47382,14 @@
     },
     "last5": [
       {
+        "opponent": "Lucas Armand",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Terrance Chatman",
         "result": "W",
         "method": "Sub",
@@ -49308,6 +49364,14 @@
     },
     "last5": [
       {
+        "opponent": "Johnny Walker",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Marcin Tybura",
         "result": "L",
         "method": "Decision (unanimous)",
@@ -49410,6 +49474,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Eric Nolan",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 3,
+        "time": null
+      },
       {
         "opponent": "Michael Chiesa",
         "result": "L",
@@ -52406,7 +52478,17 @@
       "losses": 0,
       "draws": 0
     },
-    "nickname": "Do or Die"
+    "nickname": "Do or Die",
+    "last5": [
+      {
+        "opponent": "Anthony Wint",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "cody-chovancek",
@@ -53135,7 +53217,17 @@
       "subAvg": "0.0"
     },
     "statsSyncedAt": "2026-09-29T15:24:59.874Z",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-10/WHITEHEAD_BRUCE_R_10-03.png?itok=CutVYLnN"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-10/WHITEHEAD_BRUCE_R_10-03.png?itok=CutVYLnN",
+    "last5": [
+      {
+        "opponent": "Jacobe Smith",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "loopy-godinez",
@@ -53286,6 +53378,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Marcus McGhee",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "José Augusto Azevedo",
         "result": "W",
