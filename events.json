@@ -14747,17 +14747,6 @@
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/5/PARKIN_MICK_L_07-27.png?itok=OX9b6Fw2"
       },
       {
-        "a": "Rafael Dos Anjos",
-        "b": "Alexander Hernandez",
-        "weight": "Lightweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-10/5/DOS_ANJOS_RAFAEL_L_12-03.png?itok=5J-7Ljft",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-09/HERNANDEZ_ALEXANDER_L_09-13.png"
-      },
-      {
         "a": "Marvin Vettori",
         "b": "Ismail Naurdiev",
         "weight": "Middleweight",
@@ -14797,6 +14786,12 @@
         "b": "Wang Cong",
         "reason": "removed from the card",
         "droppedAt": "2026-09-23T13:10:48.388Z"
+      },
+      {
+        "a": "Rafael Dos Anjos",
+        "b": "Alexander Hernandez",
+        "reason": "removed from the card",
+        "droppedAt": "2026-10-03T22:34:28.253Z"
       }
     ]
   },
