@@ -53955,27 +53955,82 @@
   {
     "id": "piera-rodriguez",
     "name": "Piera Rodriguez",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/RODRIGUEZ_PIERA_L_03-14.png?itok=UDMKBpY8"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/RODRIGUEZ_PIERA_L_03-14.png?itok=UDMKBpY8",
+    "stats": {
+      "slpm": "4.04",
+      "strAcc": "46%",
+      "sapm": "3.13",
+      "strDef": "53%",
+      "tdAvg": "4.04",
+      "tdAcc": "50%",
+      "tdDef": "81%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-10-04T14:39:59.172Z"
   },
   {
     "id": "jeongyeong-lee",
     "name": "JeongYeong Lee",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/LEE_JEONGYEONG_L_03-07.png?itok=Znq_QNLd"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/LEE_JEONGYEONG_L_03-07.png?itok=Znq_QNLd",
+    "stats": {
+      "slpm": "3.38",
+      "strAcc": "49%",
+      "sapm": "3.82",
+      "strDef": "50%",
+      "tdAvg": "0.63",
+      "tdAcc": "66%",
+      "tdDef": "72%",
+      "subAvg": "0.3"
+    },
+    "statsSyncedAt": "2026-10-04T14:40:01.784Z"
   },
   {
     "id": "gaston-bolanos",
     "name": "Gaston Bolaños",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/BOLANOS_GASTON_L_06-20.png?itok=WvUQBhDT"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/BOLANOS_GASTON_L_06-20.png?itok=WvUQBhDT",
+    "stats": {
+      "slpm": "3.91",
+      "strAcc": "47%",
+      "sapm": "3.54",
+      "strDef": "54%",
+      "tdAvg": "0.75",
+      "tdAcc": "75%",
+      "tdDef": "50%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-10-04T14:40:04.668Z"
   },
   {
     "id": "mantas-kondratavicius",
     "name": "Mantas Kondratavičius",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/KONDRATAVICIUS_MANTAS_L_03-21.png?itok=vn9NYCgj"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/KONDRATAVICIUS_MANTAS_L_03-21.png?itok=vn9NYCgj",
+    "stats": {
+      "slpm": "4.97",
+      "strAcc": "65%",
+      "sapm": "1.30",
+      "strDef": "57%",
+      "tdAvg": "2.80",
+      "tdAcc": "60%",
+      "tdDef": "91%",
+      "subAvg": "0.9"
+    },
+    "statsSyncedAt": "2026-10-04T14:40:07.171Z"
   },
   {
     "id": "jonny-parsons",
     "name": "Jonny Parsons",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-07/PARSONS_JONNY_L_07-22.png?itok=r2aeVJ95"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-07/PARSONS_JONNY_L_07-22.png?itok=r2aeVJ95",
+    "stats": {
+      "slpm": "4.65",
+      "strAcc": "44%",
+      "sapm": "4.89",
+      "strDef": "60%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "66%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-10-04T14:40:09.910Z"
   },
   {
     "id": "jose-henrique",
@@ -53985,6 +54040,17 @@
   {
     "id": "elijah-smith",
     "name": "Elijah Smith",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/SMITH_ELIJAH_L_03-14.png?itok=3MoxFy9W"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/SMITH_ELIJAH_L_03-14.png?itok=3MoxFy9W",
+    "stats": {
+      "slpm": "4.18",
+      "strAcc": "48%",
+      "sapm": "2.96",
+      "strDef": "46%",
+      "tdAvg": "2.98",
+      "tdAcc": "53%",
+      "tdDef": "53%",
+      "subAvg": "1.1"
+    },
+    "statsSyncedAt": "2026-10-04T14:40:12.761Z"
   }
 ]
