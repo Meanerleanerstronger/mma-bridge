@@ -9190,24 +9190,24 @@
       {
         "opponent": "Kyle Daukaus",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "Ufc Freedom 250",
+        "method": "TKO (punches and elbows)",
+        "event": "UFC Freedom 250",
         "round": 1,
         "time": "4:34"
       },
       {
         "opponent": "Rodolfo Vieira",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "KO (head kick)",
         "event": "UFC 322",
         "round": 3,
         "time": "2:24"
       },
       {
-        "opponent": "Reinier De Ridder",
+        "opponent": "Reinier de Ridder",
         "result": "L",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: May. 3, 2025",
+        "method": "TKO (knee to the body)",
+        "event": "UFC on ESPN: Sandhagen vs. Figueiredo",
         "round": 2,
         "time": "1:53"
       },
@@ -9222,10 +9222,50 @@
       {
         "opponent": "Cody Brundage",
         "result": "W",
-        "method": "Submission",
+        "method": "Submission (rear-naked choke)",
         "event": "UFC 300",
         "round": 2,
         "time": "3:38"
+      },
+      {
+        "opponent": "Val Woodburn",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC 290",
+        "round": 1,
+        "time": "0:38"
+      },
+      {
+        "opponent": "Jamie Pickett",
+        "result": "W",
+        "method": "Submission (arm-triangle choke)",
+        "event": "UFC 285",
+        "round": 1,
+        "time": "2:54"
+      },
+      {
+        "opponent": "Donovan Beard",
+        "result": "W",
+        "method": "Submission (triangle choke)",
+        "event": "Dana White's Contender Series Season 6#Week 10 – September 27",
+        "round": 1,
+        "time": "0:52"
+      },
+      {
+        "opponent": "Zachary Borrego",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "Dana White's Contender Series Season 6#Week 3 – August 9",
+        "round": 1,
+        "time": "1:02"
+      },
+      {
+        "opponent": "John Noland",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "Jorge Masvidal's iKON FC 3",
+        "round": 1,
+        "time": "0:33"
       }
     ],
     "stats": {
@@ -9527,6 +9567,14 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/VETTORI_MARVIN_L_12-06.png",
     "bio": "Marvin Vettori is Italy's most successful UFC fighter, a grinding middleweight who uses relentless pressure, elite cardio, and dirty boxing to wear down opponents across three and five rounds. 'The Italian Dream' has fought Israel Adesanya twice and remains a fixture of the middleweight top ten.",
     "last5": [
+      {
+        "opponent": "Ismail Naurdiev",
+        "result": "L",
+        "method": "",
+        "event": "UFC 332",
+        "round": 3,
+        "time": null
+      },
       {
         "opponent": "Brendan Allen",
         "result": "L",
@@ -10274,7 +10322,7 @@
     "ranking": "#2",
     "pfp": true,
     "record": {
-      "wins": 13,
+      "wins": 12,
       "losses": 1,
       "draws": 0
     },
@@ -10290,7 +10338,7 @@
       {
         "opponent": "Loopy Godinez",
         "result": "W",
-        "method": "Submission",
+        "method": "Submission (rear-naked choke)",
         "event": "UFC 327",
         "round": 2,
         "time": "2:29"
@@ -10299,7 +10347,7 @@
         "opponent": "Amanda Lemos",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Sep. 13, 2025",
+        "event": "UFC Fight Night: Lopes vs. Silva",
         "round": 3,
         "time": "5:00"
       },
@@ -10312,20 +10360,60 @@
         "time": "5:00"
       },
       {
-        "opponent": "Jessica Andrade",
+        "opponent": "Jéssica Andrade",
         "result": "W",
-        "method": "Submission",
-        "event": "UFC Fight Night: Aug. 5, 2023",
+        "method": "Submission (guillotine choke)",
+        "event": "UFC on ESPN: Sandhagen vs. Font",
         "round": 2,
         "time": "1:31"
       },
       {
         "opponent": "Montana De La Rosa",
         "result": "W",
-        "method": "Submission",
-        "event": "UFC Fight Night: Feb. 25, 2023",
+        "method": "Submission (guillotine choke)",
+        "event": "UFC Fight Night: Muniz vs. Allen",
         "round": 2,
         "time": "2:51"
+      },
+      {
+        "opponent": "Nina Ansaroff",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 238",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Carla Esparza",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC 228",
+        "round": 3,
+        "time": "4:33"
+      },
+      {
+        "opponent": "Alexa Grasso",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC Fight Night: Maia vs. Usman",
+        "round": 1,
+        "time": "2:44"
+      },
+      {
+        "opponent": "Viviane Pereira",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Poirier vs. Pettis",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Amanda Brundage",
+        "result": "W",
+        "method": "Submission (brabo choke)",
+        "event": "The Ultimate Fighter: Team Joanna vs. Team Cláudia#The Ultimate Fighter 23 Finale",
+        "round": 1,
+        "time": "3:43"
       }
     ],
     "gender": "female",
@@ -10476,7 +10564,7 @@
     "weightClass": "Women's Strawweight",
     "ranking": "#3",
     "record": {
-      "wins": 23,
+      "wins": 22,
       "losses": 4,
       "draws": 0
     },
@@ -11442,8 +11530,8 @@
       {
         "opponent": "Steve Garcia",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "Ufc Freedom 250",
+        "method": "KO (punches)",
+        "event": "UFC Freedom 250",
         "round": 2,
         "time": "2:42"
       },
@@ -11458,8 +11546,8 @@
       {
         "opponent": "Jean Silva",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Sep. 13, 2025",
+        "method": "TKO (spinning back elbow and punches)",
+        "event": "UFC Fight Night: Lopes vs. Silva",
         "round": 2,
         "time": "4:48"
       },
@@ -11475,7 +11563,47 @@
         "opponent": "Brian Ortega",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "Riyadh Season Noche Ufc",
+        "event": "UFC 306",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Dan Ige",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 303",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Sodiq Yusuff",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC 300",
+        "round": 1,
+        "time": "1:29"
+      },
+      {
+        "opponent": "Pat Sabatini",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "UFC 295",
+        "round": 1,
+        "time": "1:30"
+      },
+      {
+        "opponent": "Gavin Tucker",
+        "result": "W",
+        "method": "Submission (armbar)",
+        "event": "UFC on ESPN: Sandhagen vs. Font",
+        "round": 1,
+        "time": "1:38"
+      },
+      {
+        "opponent": "Movsar Evloev",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 288",
         "round": 3,
         "time": "5:00"
       }
@@ -13541,11 +13669,19 @@
     "id": "ismail-naurdiev",
     "name": "Ismail Naurdiev",
     "record": {
-      "wins": 25,
+      "wins": 26,
       "losses": 8,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Marvin Vettori",
+        "result": "W",
+        "method": "",
+        "event": "UFC 332",
+        "round": 3,
+        "time": null
+      },
       {
         "opponent": "Ryan Loder",
         "result": "W",
@@ -14499,6 +14635,14 @@
     },
     "last5": [
       {
+        "opponent": "Damian Pinas",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Nursulton Ruziboev",
         "result": "L",
         "method": "Sub",
@@ -15083,6 +15227,14 @@
     },
     "last5": [
       {
+        "opponent": "Court McGee",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 3,
+        "time": null
+      },
+      {
         "opponent": "Farman Hasanov",
         "result": "L",
         "method": "Decision (unanimous)",
@@ -15647,7 +15799,7 @@
     "name": "Wang Cong",
     "record": {
       "wins": 10,
-      "losses": 1,
+      "losses": 2,
       "draws": 0
     },
     "last5": [
@@ -15950,6 +16102,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Andrey Pulyaev",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Cesar Almeida",
         "result": "W",
@@ -16519,7 +16679,7 @@
     "name": "Natália Silva",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/SILVA_NATALIA_L_01-24.png",
     "record": {
-      "wins": 20,
+      "wins": 21,
       "losses": 5,
       "draws": 1
     },
@@ -16628,10 +16788,18 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/FIGUEIREDO_DEIVESON_L_10-11.png",
     "record": {
       "wins": 25,
-      "losses": 7,
+      "losses": 8,
       "draws": 1
     },
     "last5": [
+      {
+        "opponent": "Payton Talbott",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Song Yadong",
         "result": "L",
@@ -17121,10 +17289,18 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/GAUTIER_ATEBA_L_05-09.png",
     "record": {
       "wins": 11,
-      "losses": 1,
+      "losses": 2,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Roman Kopylov",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Ozzy Diaz",
         "result": "W",
@@ -20374,6 +20550,14 @@
     "nickname": "Cobra",
     "last5": [
       {
+        "opponent": "Imanol Rodriguez",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Luis Gurule",
         "result": "W",
         "method": "Decision (unanimous)",
@@ -22587,15 +22771,15 @@
       {
         "opponent": "Israel Adesanya",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Mar. 28, 2026",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Adesanya vs. Pyfer",
         "round": 2,
         "time": "4:18"
       },
       {
-        "opponent": "Abus Magomedov",
+        "opponent": "Abusupiyan Magomedov",
         "result": "W",
-        "method": "Submission",
+        "method": "Submission (face crank)",
         "event": "UFC 320",
         "round": 2,
         "time": "1:46"
@@ -22609,9 +22793,9 @@
         "time": "5:00"
       },
       {
-        "opponent": "Marc-Andre Barriault",
+        "opponent": "Marc-André Barriault",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "KO (punches)",
         "event": "UFC 303",
         "round": 1,
         "time": "1:25"
@@ -22620,9 +22804,49 @@
         "opponent": "Jack Hermansson",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Feb. 10, 2024",
+        "event": "UFC Fight Night: Hermansson vs. Pyfer",
         "round": 5,
         "time": "5:00"
+      },
+      {
+        "opponent": "Abdul Razak Alhassan",
+        "result": "W",
+        "method": "Technical Submission (arm-triangle choke)",
+        "event": "UFC Fight Night: Dawson vs. Green",
+        "round": 2,
+        "time": "2:05"
+      },
+      {
+        "opponent": "Gerald Meerschaert",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC 287",
+        "round": 1,
+        "time": "3:15"
+      },
+      {
+        "opponent": "Alen Amedovski",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Sandhagen vs. Song",
+        "round": 1,
+        "time": "3:55"
+      },
+      {
+        "opponent": "Osman Diaz",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Dana White's Contender Series (season 6)#Week 1 – July 26",
+        "round": 2,
+        "time": "1:39"
+      },
+      {
+        "opponent": "Austin Trotman",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "Cage Fury FC 104",
+        "round": 2,
+        "time": "2:55"
       }
     ],
     "nickname": "Bodybagz",
@@ -22766,7 +22990,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/EROSA_JULIAN_L_03-28.png",
     "record": {
       "wins": 31,
-      "losses": 14,
+      "losses": 13,
       "draws": 0
     },
     "last5": [
@@ -25328,6 +25552,14 @@
     },
     "last5": [
       {
+        "opponent": "Mick Parkin",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Magomed Ankalaev",
         "result": "D",
         "method": "NC (illegal knee)",
@@ -26235,11 +26467,19 @@
     "name": "Esteban Ribovics",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-09/RIBOVICS_ESTEBAN_L_05-11.png",
     "record": {
-      "wins": 16,
+      "wins": 17,
       "losses": 3,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "King Green",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Edson Barboza",
         "result": "W",
@@ -28945,6 +29185,14 @@
     },
     "last5": [
       {
+        "opponent": "Rafael Dos Anjos",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 2,
+        "time": null
+      },
+      {
         "opponent": "Rafa Garcia",
         "result": "L",
         "method": "Decision (unanimous)",
@@ -31611,10 +31859,18 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/GREEN_KING_L_05-09.png",
     "record": {
       "wins": 36,
-      "losses": 17,
+      "losses": 18,
       "draws": 1
     },
     "last5": [
+      {
+        "opponent": "Esteban Ribovics",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Terrance McKinney",
         "result": "W",
@@ -32623,11 +32879,19 @@
     "name": "Roman Kopylov",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/KOPYLOV_ROMAN_L_05-09.png",
     "record": {
-      "wins": 15,
+      "wins": 16,
       "losses": 5,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Ateba Gautier",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Marco Tulio",
         "result": "W",
@@ -34126,7 +34390,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-12/3/PETROSKI_ANDRE_L_09-07.png",
     "record": {
       "wins": 13,
-      "losses": 7,
+      "losses": 6,
       "draws": 0
     },
     "last5": [
@@ -36505,11 +36769,19 @@
     "name": "Marcus McGhee",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/MCGHEE_MARCUS_L_06-06.png",
     "record": {
-      "wins": 11,
+      "wins": 12,
       "losses": 2,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Anthony Romero",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "John Yannis",
         "result": "W",
@@ -37369,7 +37641,7 @@
         "opponent": "Karol Rosa",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Jun. 20, 2026",
+        "event": "UFC Fight Night: Kape vs. Horiguchi",
         "round": 3,
         "time": "5:00"
       },
@@ -37377,15 +37649,15 @@
         "opponent": "Melissa Croden",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Dec. 13, 2025",
+        "event": "UFC on ESPN: Royval vs. Kape",
         "round": 3,
         "time": "5:00"
       },
       {
         "opponent": "Tainara Lisboa",
         "result": "W",
-        "method": "Submission",
-        "event": "UFC Fight Night: May. 17, 2025",
+        "method": "Submission (keylock)",
+        "event": "UFC Fight Night: Burns vs. Morales",
         "round": 2,
         "time": "4:59"
       },
@@ -37400,10 +37672,50 @@
       {
         "opponent": "Mariya Agapova",
         "result": "W",
-        "method": "Submission",
-        "event": "UFC Fight Night: Jul. 13, 2024",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC on ESPN: Namajunas vs. Cortez",
         "round": 1,
         "time": "3:27"
+      },
+      {
+        "opponent": "Stephanie Egger",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Song vs. Gutiérrez",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Juliana Miller",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Luque vs. dos Anjos",
+        "round": 1,
+        "time": "3:41"
+      },
+      {
+        "opponent": "Bartira Rodrigues",
+        "result": "W",
+        "method": "Technical Submission (guillotine choke)",
+        "event": "2023 in Legacy Fighting Alliance#Legacy Fighting Alliance 154: Fernando vs. Silva",
+        "round": 1,
+        "time": "3:05"
+      },
+      {
+        "opponent": "Waleska Sousa",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "2022 in Legacy Fighting Alliance#Legacy Fighting Alliance 146: Barbosa vs. Santos",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Jena Bishop",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "2022 in Legacy Fighting Alliance#Legacy Fighting Alliance 135: Leyva vs. Reis",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "stats": {
@@ -38230,6 +38542,14 @@
     },
     "nickname": "Cobe",
     "last5": [
+      {
+        "opponent": "Bruce Whitehead",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Josiah Harrell",
         "result": "W",
@@ -43210,8 +43530,8 @@
     "name": "Carlos Leal",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-11/LEAL_CARLOS_L_10-26.png",
     "record": {
-      "wins": 23,
-      "losses": 7,
+      "wins": 14,
+      "losses": 1,
       "draws": 0
     },
     "last5": [
@@ -47328,11 +47648,19 @@
       "subAvg": "3.0"
     },
     "record": {
-      "wins": 8,
+      "wins": 9,
       "losses": 0,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Lucas Armand",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Terrance Chatman",
         "result": "W",
@@ -48932,9 +49260,9 @@
     "id": "abus-magomedov",
     "name": "Abus Magomedov",
     "record": {
-      "wins": 17,
-      "losses": 1,
-      "draws": 0
+      "wins": 29,
+      "losses": 7,
+      "draws": 1
     },
     "last5": [
       {
@@ -49197,11 +49525,19 @@
     "id": "payton-talbott",
     "name": "Payton Talbott",
     "record": {
-      "wins": 11,
+      "wins": 12,
       "losses": 1,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Deiveson Figueiredo",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Henry Cejudo",
         "result": "W",
@@ -49303,10 +49639,18 @@
     "name": "Mick Parkin",
     "record": {
       "wins": 10,
-      "losses": 1,
+      "losses": 2,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Johnny Walker",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Marcin Tybura",
         "result": "L",
@@ -49406,10 +49750,18 @@
     "name": "Court McGee",
     "record": {
       "wins": 22,
-      "losses": 14,
+      "losses": 15,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Eric Nolan",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 3,
+        "time": null
+      },
       {
         "opponent": "Michael Chiesa",
         "result": "L",
@@ -49557,7 +49909,17 @@
       "losses": 0,
       "draws": 0
     },
-    "nickname": "Himan"
+    "nickname": "Himan",
+    "last5": [
+      {
+        "opponent": "Alden Coria",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "delphine-benouaich",
@@ -50850,7 +51212,7 @@
         "opponent": "Miesha Tate",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: May. 3, 2025",
+        "event": "UFC on ESPN: Sandhagen vs. Figueiredo",
         "round": 3,
         "time": "5:00"
       },
@@ -50858,7 +51220,7 @@
         "opponent": "Chelsea Chandler",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Aug. 10, 2024",
+        "event": "UFC on ESPN: Tybura vs. Spivac 2",
         "round": 3,
         "time": "5:00"
       },
@@ -50866,7 +51228,7 @@
         "opponent": "Karol Rosa",
         "result": "L",
         "method": "Decision (split)",
-        "event": "UFC Fight Night: Jul. 1, 2023",
+        "event": "UFC on ESPN: Strickland vs. Magomedov",
         "round": 3,
         "time": "5:00"
       },
@@ -50874,7 +51236,47 @@
         "opponent": "Holly Holm",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Mar. 25, 2023",
+        "event": "UFC on ESPN: Vera vs. Sandhagen",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Irene Aldana",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC 264",
+        "round": 1,
+        "time": "4:35"
+      },
+      {
+        "opponent": "Ketlen Vieira",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Blaydes vs. Lewis",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Julija Stoliarenko",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Lewis vs. Oleinik",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Aspen Ladd",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Overeem vs. Rozenstruik",
+        "round": 3,
+        "time": "0:33"
+      },
+      {
+        "opponent": "Lina Länsberg",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 229",
         "round": 3,
         "time": "5:00"
       }
@@ -51912,10 +52314,18 @@
     "name": "Khaos Williams",
     "record": {
       "wins": 16,
-      "losses": 5,
+      "losses": 6,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Roberto Soldić",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 332",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Nikolay Veretennikov",
         "result": "W",
@@ -52021,6 +52431,14 @@
     },
     "last5": [
       {
+        "opponent": "Khaos Williams",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 332",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Saygid Guseyn Arslanaliev",
         "result": "W",
         "method": "KO (punch)",
@@ -52120,10 +52538,18 @@
     "name": "Rafael Dos Anjos",
     "record": {
       "wins": 32,
-      "losses": 17,
+      "losses": 18,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Alexander Hernandez",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 2,
+        "time": null
+      },
       {
         "opponent": "Geoff Neal",
         "result": "L",
@@ -52406,7 +52832,17 @@
       "losses": 0,
       "draws": 0
     },
-    "nickname": "Do or Die"
+    "nickname": "Do or Die",
+    "last5": [
+      {
+        "opponent": "Anthony Wint",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "cody-chovancek",
@@ -52980,88 +53416,88 @@
     "id": "keiichiro-nakamura",
     "name": "Keiichiro Nakamura",
     "record": {
-      "wins": 45,
-      "losses": 35,
-      "draws": 10
+      "wins": 36,
+      "losses": 12,
+      "draws": 2
     },
     "last5": [
       {
-        "opponent": "Ikkei Nagamura",
+        "opponent": "Roberto de Souza",
+        "result": "L",
+        "method": "TKO (corner stoppage)",
+        "event": "2024 in Rizin Fighting Federation#Rizin Landmark 9",
+        "round": 1,
+        "time": "1:43"
+      },
+      {
+        "opponent": "Kiichi Kunimoto",
+        "result": "W",
+        "method": "KO (punches and soccer kick)",
+        "event": "2023 in Rizin Fighting Federation#Rizin 41 – Osaka",
+        "round": 2,
+        "time": "0:49"
+      },
+      {
+        "opponent": "Lorenz Larkin",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "Pancrase: 264",
+        "event": "Bellator MMA in 2019#Bellator & Rizin: Japan",
         "round": 3,
         "time": "5:00"
       },
       {
-        "opponent": "Keita Nakamura",
-        "result": "L",
+        "opponent": "Marcos Yoshio de Souza",
+        "result": "W",
         "method": "TKO (punches)",
-        "event": "DEEP: 67 Impact",
+        "event": "2019 in Rizin Fighting Federation#Rizin 19 - Osaka",
         "round": 1,
-        "time": "4:13"
+        "time": "1:18"
       },
       {
-        "opponent": "Yuki Okano",
-        "result": "L",
-        "method": "Submission (rear naked choke)",
-        "event": "DEEP: 65 Impact",
-        "round": 1,
-        "time": "4:53"
-      },
-      {
-        "opponent": "Eiji Ishikawa",
-        "result": "L",
-        "method": "Decision (unanimous)",
-        "event": "Grabaka: Grabaka Live! 3",
-        "round": 2,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Yuji Hisamatsu",
-        "result": "L",
-        "method": "Decision (majority)",
-        "event": "Pancrase 250: 2013 Neo-Blood Tournament Finals",
-        "round": 2,
-        "time": "align=center | 5:00"
-      },
-      {
-        "opponent": "Daijiro Matsui",
+        "opponent": "Salim Touahri",
         "result": "W",
-        "method": "Decision (points)",
-        "event": "U-Spirits: U-Spirits Again",
-        "round": 1,
-        "time": "15:00"
-      },
-      {
-        "opponent": "Will Noland",
-        "result": "L",
-        "method": "Decision (unanimous)",
-        "event": "Pancrase 245",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: dos Santos vs. Tuivasa",
         "round": 3,
         "time": "5:00"
       },
       {
-        "opponent": "Ikkei Nagamura",
-        "result": "W",
-        "method": "KO (flying knee)",
-        "event": "Pancrase: Progress Tour 14",
-        "round": 1,
-        "time": "1:26"
-      },
-      {
-        "opponent": "Kenichi Yamamoto (mixed martial artist)",
-        "result": "W",
+        "opponent": "Tony Martin (fighter)",
+        "result": "L",
         "method": "Decision (unanimous)",
-        "event": "Grabaka: Grabaka Live! 2",
-        "round": 2,
+        "event": "UFC Fight Night: Barboza vs. Lee",
+        "round": 3,
         "time": "5:00"
       },
       {
-        "opponent": "Takenori Sato",
+        "opponent": "Alex Morono",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Saint Preux vs. Okami",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Elizeu Zaleski dos Santos",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "Pancrase: Progress Tour 10",
+        "event": "UFC Fight Night: Lineker vs. Dodson",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Kyle Noke",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC Fight Night: McDonald vs. Lineker",
+        "round": 2,
+        "time": "4:59"
+      },
+      {
+        "opponent": "Tom Breese",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Silva vs. Bisping",
         "round": 3,
         "time": "5:00"
       }
@@ -53134,7 +53570,18 @@
       "tdDef": "0%",
       "subAvg": "0.0"
     },
-    "statsSyncedAt": "2026-09-29T15:24:59.874Z"
+    "statsSyncedAt": "2026-09-29T15:24:59.874Z",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-10/WHITEHEAD_BRUCE_R_10-03.png?itok=CutVYLnN",
+    "last5": [
+      {
+        "opponent": "Jacobe Smith",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "loopy-godinez",
@@ -53285,6 +53732,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Marcus McGhee",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 332",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "José Augusto Azevedo",
         "result": "W",
@@ -53465,5 +53920,20 @@
       "subAvg": "0.0"
     },
     "statsSyncedAt": "2026-10-02T15:26:37.356Z"
+  },
+  {
+    "id": "asaf-chopurov",
+    "name": "Asaf Chopurov",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-10-03T14:10:45.902Z"
   }
 ]
