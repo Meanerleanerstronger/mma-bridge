@@ -14628,7 +14628,7 @@
     "location": "",
     "venue": "",
     "poster": "https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/2026-09/100326-ufc-332-silva-vs-wang-EVENT-ART.jpg",
-    "status": "upcoming",
+    "status": "completed",
     "start_time": "2026-10-03T20:00:00.000Z",
     "mainCard": [
       {
@@ -14640,7 +14640,10 @@
         "ranked": true,
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/SILVA_NATALIA_L_01-24.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/CONG_WANG_L_02-07.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/CONG_WANG_L_02-07.png",
+        "winner": "Natalia Silva",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Deiveson Figueiredo",
