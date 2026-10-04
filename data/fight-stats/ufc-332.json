@@ -1,0 +1,167 @@
+{
+  "eventId": "ufc-332",
+  "eventName": "UFC 332",
+  "fights": [
+    {
+      "fighter1": "Natalia Silva Wang Cong",
+      "fighter2": "Payton Talbott Deiveson Figueiredo",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "10998",
+          "totalStr": "00",
+          "td": "Women'sFlyweight",
+          "subAtt": 5,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "2 0",
+          "sigStr": "255",
+          "totalStr": "00",
+          "td": "Bantamweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Esteban Ribovics King Green",
+      "fighter2": "Roberto Soldic Khaos Williams",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "3 0",
+          "sigStr": "3527",
+          "totalStr": "00",
+          "td": "Lightweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "9427",
+          "totalStr": "00",
+          "td": "Welterweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Roman Kopylov Ateba Gautier",
+      "fighter2": "Imanol Rodriguez Alden Coria",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "197",
+          "totalStr": "00",
+          "td": "Middleweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "1 0",
+          "sigStr": "204",
+          "totalStr": "00",
+          "td": "Flyweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Damian Pinas Andrey Pulyaev",
+      "fighter2": "Marcus McGhee Anthony Romero",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "54",
+          "totalStr": "00",
+          "td": "Middleweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "2 0",
+          "sigStr": "3413",
+          "totalStr": "00",
+          "td": "Featherweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Anthony Wint Lucas Armand",
+      "fighter2": "Johnny Walker Mick Parkin",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "121",
+          "totalStr": "00",
+          "td": "Heavyweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "1 0",
+          "sigStr": "2311",
+          "totalStr": "00",
+          "td": "Heavyweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Jacobe Smith Bruce Whitehead",
+      "fighter2": "Alexander Hernandez Rafael Dos Anjos",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "114",
+          "totalStr": "00",
+          "td": "Welterweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "2 0",
+          "sigStr": "3626",
+          "totalStr": "00",
+          "td": "Lightweight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Ismail Naurdiev Marvin Vettori",
+      "fighter2": "Eric Nolan Court McGee",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "7476",
+          "totalStr": "10",
+          "td": "Middleweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "1 0",
+          "sigStr": "12198",
+          "totalStr": "00",
+          "td": "Welterweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    }
+  ]
+}
