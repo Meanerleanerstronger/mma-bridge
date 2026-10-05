@@ -10731,6 +10731,14 @@
     "bio": "Natalia Silva is the #1-ranked women's flyweight and one of the sport's fastest-rising stars, having won five consecutive UFC fights including a stunning upset decision over former champion Alexa Grasso. The Brazilian brings relentless pressure, sharp boxing, and elite cardio to overwhelm opponents.",
     "last5": [
       {
+        "opponent": "Wang Cong",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 332",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Rose Namajunas",
         "result": "W",
         "method": "Decision (unanimous)",
@@ -15803,6 +15811,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Natalia Silva",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 332",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Tracy Cortez",
         "result": "W",
@@ -49260,9 +49276,9 @@
     "id": "abus-magomedov",
     "name": "Abus Magomedov",
     "record": {
-      "wins": 29,
-      "losses": 7,
-      "draws": 1
+      "wins": 17,
+      "losses": 1,
+      "draws": 0
     },
     "last5": [
       {
@@ -53416,88 +53432,88 @@
     "id": "keiichiro-nakamura",
     "name": "Keiichiro Nakamura",
     "record": {
-      "wins": 36,
-      "losses": 12,
-      "draws": 2
+      "wins": 45,
+      "losses": 35,
+      "draws": 10
     },
     "last5": [
       {
-        "opponent": "Roberto de Souza",
-        "result": "L",
-        "method": "TKO (corner stoppage)",
-        "event": "2024 in Rizin Fighting Federation#Rizin Landmark 9",
-        "round": 1,
-        "time": "1:43"
-      },
-      {
-        "opponent": "Kiichi Kunimoto",
-        "result": "W",
-        "method": "KO (punches and soccer kick)",
-        "event": "2023 in Rizin Fighting Federation#Rizin 41 – Osaka",
-        "round": 2,
-        "time": "0:49"
-      },
-      {
-        "opponent": "Lorenz Larkin",
+        "opponent": "Ikkei Nagamura",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "Bellator MMA in 2019#Bellator & Rizin: Japan",
+        "event": "Pancrase: 264",
         "round": 3,
         "time": "5:00"
       },
       {
-        "opponent": "Marcos Yoshio de Souza",
-        "result": "W",
+        "opponent": "Keita Nakamura",
+        "result": "L",
         "method": "TKO (punches)",
-        "event": "2019 in Rizin Fighting Federation#Rizin 19 - Osaka",
+        "event": "DEEP: 67 Impact",
         "round": 1,
-        "time": "1:18"
+        "time": "4:13"
       },
       {
-        "opponent": "Salim Touahri",
-        "result": "W",
-        "method": "Decision (split)",
-        "event": "UFC Fight Night: dos Santos vs. Tuivasa",
-        "round": 3,
-        "time": "5:00"
+        "opponent": "Yuki Okano",
+        "result": "L",
+        "method": "Submission (rear naked choke)",
+        "event": "DEEP: 65 Impact",
+        "round": 1,
+        "time": "4:53"
       },
       {
-        "opponent": "Tony Martin (fighter)",
+        "opponent": "Eiji Ishikawa",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Barboza vs. Lee",
-        "round": 3,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Alex Morono",
-        "result": "W",
-        "method": "Decision (split)",
-        "event": "UFC Fight Night: Saint Preux vs. Okami",
-        "round": 3,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Elizeu Zaleski dos Santos",
-        "result": "L",
-        "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Lineker vs. Dodson",
-        "round": 3,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Kyle Noke",
-        "result": "W",
-        "method": "Submission (rear-naked choke)",
-        "event": "UFC Fight Night: McDonald vs. Lineker",
+        "event": "Grabaka: Grabaka Live! 3",
         "round": 2,
-        "time": "4:59"
+        "time": "5:00"
       },
       {
-        "opponent": "Tom Breese",
+        "opponent": "Yuji Hisamatsu",
+        "result": "L",
+        "method": "Decision (majority)",
+        "event": "Pancrase 250: 2013 Neo-Blood Tournament Finals",
+        "round": 2,
+        "time": "align=center | 5:00"
+      },
+      {
+        "opponent": "Daijiro Matsui",
+        "result": "W",
+        "method": "Decision (points)",
+        "event": "U-Spirits: U-Spirits Again",
+        "round": 1,
+        "time": "15:00"
+      },
+      {
+        "opponent": "Will Noland",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Silva vs. Bisping",
+        "event": "Pancrase 245",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Ikkei Nagamura",
+        "result": "W",
+        "method": "KO (flying knee)",
+        "event": "Pancrase: Progress Tour 14",
+        "round": 1,
+        "time": "1:26"
+      },
+      {
+        "opponent": "Kenichi Yamamoto (mixed martial artist)",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Grabaka: Grabaka Live! 2",
+        "round": 2,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Takenori Sato",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "Pancrase: Progress Tour 10",
         "round": 3,
         "time": "5:00"
       }
@@ -53935,5 +53951,106 @@
       "subAvg": "0.0"
     },
     "statsSyncedAt": "2026-10-03T14:10:45.902Z"
+  },
+  {
+    "id": "piera-rodriguez",
+    "name": "Piera Rodriguez",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/RODRIGUEZ_PIERA_L_03-14.png?itok=UDMKBpY8",
+    "stats": {
+      "slpm": "4.04",
+      "strAcc": "46%",
+      "sapm": "3.13",
+      "strDef": "53%",
+      "tdAvg": "4.04",
+      "tdAcc": "50%",
+      "tdDef": "81%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-10-04T14:39:59.172Z"
+  },
+  {
+    "id": "jeongyeong-lee",
+    "name": "JeongYeong Lee",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/LEE_JEONGYEONG_L_03-07.png?itok=Znq_QNLd",
+    "stats": {
+      "slpm": "3.38",
+      "strAcc": "49%",
+      "sapm": "3.82",
+      "strDef": "50%",
+      "tdAvg": "0.63",
+      "tdAcc": "66%",
+      "tdDef": "72%",
+      "subAvg": "0.3"
+    },
+    "statsSyncedAt": "2026-10-04T14:40:01.784Z"
+  },
+  {
+    "id": "gaston-bolanos",
+    "name": "Gaston Bolaños",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/BOLANOS_GASTON_L_06-20.png?itok=WvUQBhDT",
+    "stats": {
+      "slpm": "3.91",
+      "strAcc": "47%",
+      "sapm": "3.54",
+      "strDef": "54%",
+      "tdAvg": "0.75",
+      "tdAcc": "75%",
+      "tdDef": "50%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-10-04T14:40:04.668Z"
+  },
+  {
+    "id": "mantas-kondratavicius",
+    "name": "Mantas Kondratavičius",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/KONDRATAVICIUS_MANTAS_L_03-21.png?itok=vn9NYCgj",
+    "stats": {
+      "slpm": "4.97",
+      "strAcc": "65%",
+      "sapm": "1.30",
+      "strDef": "57%",
+      "tdAvg": "2.80",
+      "tdAcc": "60%",
+      "tdDef": "91%",
+      "subAvg": "0.9"
+    },
+    "statsSyncedAt": "2026-10-04T14:40:07.171Z"
+  },
+  {
+    "id": "jonny-parsons",
+    "name": "Jonny Parsons",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-07/PARSONS_JONNY_L_07-22.png?itok=r2aeVJ95",
+    "stats": {
+      "slpm": "4.65",
+      "strAcc": "44%",
+      "sapm": "4.89",
+      "strDef": "60%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "66%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-10-04T14:40:09.910Z"
+  },
+  {
+    "id": "jose-henrique",
+    "name": "Jose Henrique",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/SOUZA_JOSE_R_05-30.png?itok=-YP5UjdJ"
+  },
+  {
+    "id": "elijah-smith",
+    "name": "Elijah Smith",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/SMITH_ELIJAH_L_03-14.png?itok=3MoxFy9W",
+    "stats": {
+      "slpm": "4.18",
+      "strAcc": "48%",
+      "sapm": "2.96",
+      "strDef": "46%",
+      "tdAvg": "2.98",
+      "tdAcc": "53%",
+      "tdDef": "53%",
+      "subAvg": "1.1"
+    },
+    "statsSyncedAt": "2026-10-04T14:40:12.761Z"
   }
 ]
