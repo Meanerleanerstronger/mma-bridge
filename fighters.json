@@ -54105,5 +54105,128 @@
       "draws": 0
     },
     "nickname": "Swift"
+  },
+  {
+    "id": "nick-galanti",
+    "name": "Nick Galanti",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-09/GALANTI_NICK_R_08-25.png?itok=dbKywmYk",
+    "stats": {
+      "slpm": "13.71",
+      "strAcc": "80%",
+      "sapm": "1.71",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-10-08T16:10:44.650Z"
+  },
+  {
+    "id": "joel-faglier",
+    "name": "Joel Faglier",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-10-08T16:10:47.473Z"
+  },
+  {
+    "id": "mackenzie-stiller",
+    "name": "Mackenzie Stiller",
+    "record": {
+      "wins": 17,
+      "losses": 5,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Gillian Robertson",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 330",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Virna Jandiroba",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 321",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Amanda Ribas",
+        "result": "W",
+        "method": "Submission (armbar)",
+        "event": "UFC Fight Night: Dern vs. Ribas 2",
+        "round": 3,
+        "time": "4:56"
+      },
+      {
+        "opponent": "Loopy Godínez",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ABC: Sandhagen vs. Nurmagomedov",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Amanda Lemos",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 298",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Jéssica Andrade",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC 295",
+        "round": 2,
+        "time": "3:15"
+      },
+      {
+        "opponent": "Angela Hill",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Dern vs. Hill",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Yan Xiaonan",
+        "result": "L",
+        "method": "Decision (majority)",
+        "event": "UFC Fight Night: Dern vs. Yan",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Tecia Torres",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC 273",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Marina Rodriguez",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Dern vs. Rodriguez",
+        "round": 5,
+        "time": "5:00"
+      }
+    ]
   }
 ]
