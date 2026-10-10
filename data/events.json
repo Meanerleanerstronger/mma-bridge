@@ -15172,7 +15172,8 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/5/CERMINARA_KATLYN_L_03-09.png?itok=L1T9rkza",
-        "imgB": ""
+        "imgB": "",
+        "_espnMissStreak": true
       }
     ],
     "earlyPrelims": []
@@ -15864,13 +15865,24 @@
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/LOPES_DIEGO_L_06-14.png"
       },
       {
+        "a": "Sergei Pavlovich",
+        "b": "Alex Pereira",
+        "weight": "Heavyweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "comain",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
         "a": "Bo Nickal",
         "b": "Joe Pyfer",
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
-        "slot": "comain",
+        "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/NICKAL_BO_L_06-14.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-06/PYFER_JOE_L_06-29.png"
       }
