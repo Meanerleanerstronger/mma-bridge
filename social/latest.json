@@ -1,38 +1,42 @@
 {
-  "date": "2026-10-09",
+  "date": "2026-10-10",
   "posts": [
     {
+      "type": "news",
+      "caption": "UFC 328: Chimaev vs. Strickland - What Happened and What's Next (via MMA Junkie)\n\nScreenshot from the Trending Today news feed on MMA Bridge. More fight news daily at mmabridge.com\n\nLink in bio: mmabridge.com",
+      "image": "2026-10-10-news-1.png",
+      "ref": "UFC 328: Chimaev vs. Strickland — What Happened and What's Next"
+    },
+    {
+      "type": "news",
+      "caption": "Dana White Responds to Sean Strickland’s Boxing Callout Amid Pay and UFC Contract Dispute (via Essentially Sports)\n\nScreenshot from the Trending Today news feed on MMA Bridge. More fight news daily at mmabridge.com\n\nLink in bio: mmabridge.com",
+      "image": "2026-10-10-news-2.png",
+      "ref": "Dana White Responds to Sean Strickland’s Boxing Callout Amid Pay and UFC Contract Dispute"
+    },
+    {
+      "type": "news",
+      "caption": "Mikey Musumeci Vacates UFC BJJ Title to Focus on MMA Debut (via Essentially Sports)\n\nScreenshot from the Trending Today news feed on MMA Bridge. More fight news daily at mmabridge.com\n\nLink in bio: mmabridge.com",
+      "image": "2026-10-10-news-3.png",
+      "ref": "Mikey Musumeci Vacates UFC BJJ Title to Focus on MMA Debut"
+    },
+    {
       "type": "event_countdown",
-      "caption": "Allen vs. Duncan is tomorrow. Make your picks: https://mmabridge.com/picks.html?id=ufc-fight-night-allen-vs-duncan\n\nScreenshot from the UFC Fight Night: Allen vs. Duncan event page on MMA Bridge.\n\nLink in bio: mmabridge.com",
-      "image": "2026-10-09-event_countdown-1.png",
-      "ref": "ufc-fight-night-allen-vs-duncan@1",
-      "days": 1
+      "caption": "Allen vs. Duncan is TODAY. Make your picks: https://mmabridge.com/picks.html?id=ufc-fight-night-allen-vs-duncan\n\nScreenshot from the UFC Fight Night: Allen vs. Duncan event page on MMA Bridge.\n\nLink in bio: mmabridge.com",
+      "image": "2026-10-10-event_countdown-1.png",
+      "ref": "ufc-fight-night-allen-vs-duncan@0",
+      "days": 0
     },
     {
       "type": "event_recap",
       "caption": "Relive UFC 332. Silva def. Wang. Full card recap and community ratings: https://mmabridge.com/event-review.html?id=ufc-332\n\nScreenshot from the UFC 332 event review on MMA Bridge.\n\nLink in bio: mmabridge.com",
-      "image": "2026-10-09-event_recap-1.png",
+      "image": "2026-10-10-event_recap-1.png",
       "ref": "ufc-332"
-    },
-    {
-      "type": "picks_lock",
-      "caption": "Last call. Picks for UFC Fight Night: Allen vs. Duncan lock Sat, Oct 10, 5:00 PM ET. Get yours in before the first bell: https://mmabridge.com/picks.html?id=ufc-fight-night-allen-vs-duncan\n\nFrom the pick'em on MMA Bridge.\n\nLink in bio: mmabridge.com",
-      "image": "2026-10-09-picks_lock-1.png",
-      "ref": "ufc-fight-night-allen-vs-duncan",
-      "expiresAt": "2026-10-10T21:00:00.000Z"
     },
     {
       "type": "dream_matchup",
       "caption": "Dream matchup: Justin Gaethje vs. Arman Tsarukyan. Champion against No. 2 ranked at lightweight. Who wins? Tell us in the comments.\n\nRankings and fighter data from MMA Bridge.\n\nLink in bio: mmabridge.com",
-      "image": "2026-10-09-dream_matchup-f1.png",
+      "image": "2026-10-10-dream_matchup-f1.png",
       "ref": "arman-tsarukyan+justin-gaethje",
-      "filler": true
-    },
-    {
-      "type": "dream_matchup",
-      "caption": "Dream matchup: Islam Makhachev vs. Carlos Prates. Champion against No. 2 ranked at welterweight. Who wins? Tell us in the comments.\n\nRankings and fighter data from MMA Bridge.\n\nLink in bio: mmabridge.com",
-      "image": "2026-10-09-dream_matchup-f2.png",
-      "ref": "carlos-prates+islam-makhachev",
       "filler": true
     }
   ]
