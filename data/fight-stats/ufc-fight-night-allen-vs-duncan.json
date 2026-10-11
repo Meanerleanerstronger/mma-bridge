@@ -1,0 +1,144 @@
+{
+  "eventId": "ufc-fight-night-allen-vs-duncan",
+  "eventName": "UFC Fight Night: Allen vs. Duncan",
+  "fights": [
+    {
+      "fighter1": "Brendan Allen Christian Leroy Duncan",
+      "fighter2": "Jai Herbert Matheus Camilo",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "51106",
+          "totalStr": "20",
+          "td": "Middleweight",
+          "subAtt": 5,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "5443",
+          "totalStr": "00",
+          "td": "Lightweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Loopy Godinez Ketlen Souza",
+      "fighter2": "Andre Fili Kai Kamaka III",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "6763",
+          "totalStr": "00",
+          "td": "Women'sStrawweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "1 0",
+          "sigStr": "5033",
+          "totalStr": "00",
+          "td": "Featherweight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Otari Tanzilovi Malcolm Wellmaker",
+      "fighter2": "Julius Walker Gerald Meerschaert",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 1",
+          "sigStr": "3817",
+          "totalStr": "00",
+          "td": "Bantamweight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "389",
+          "totalStr": "10",
+          "td": "LightHeavyweight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Francisco Prado Ismael Bonfim",
+      "fighter2": "Niko Price Leon Shahbazyan",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "2513",
+          "totalStr": "00",
+          "td": "Lightweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "410",
+          "totalStr": "00",
+          "td": "Welterweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Brendson Ribeiro Felipe Franco",
+      "fighter2": "Allen Frye Jr. RJ Harris",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "61",
+          "totalStr": "10",
+          "td": "LightHeavyweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "1 0",
+          "sigStr": "4020",
+          "totalStr": "00",
+          "td": "Heavyweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Alice Pereira Daria Zhelezniakova",
+      "fighter2": "Ernesta Kareckaite Melissa Gatto",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "206",
+          "totalStr": "00",
+          "td": "Women'sBantamweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "4841",
+          "totalStr": "02",
+          "td": "Women'sFlyweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    }
+  ]
+}
