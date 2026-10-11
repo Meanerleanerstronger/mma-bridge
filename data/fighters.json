@@ -19118,6 +19118,14 @@
     "nickname": "Juice Box",
     "last5": [
       {
+        "opponent": "Gerald Meerschaert",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Allen vs. Duncan",
+        "round": 2,
+        "time": null
+      },
+      {
         "opponent": "Abdul-Rakhman Yakhyaev",
         "result": "L",
         "method": "TKO",
@@ -21306,6 +21314,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Leon Shahbazyan",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Allen vs. Duncan",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Michael Chiesa",
         "result": "L",
@@ -24363,6 +24379,14 @@
     "nickname": "The Gorilla",
     "last5": [
       {
+        "opponent": "Felipe Franco",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC Fight Night: Allen vs. Duncan",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Magomed Tuchalov",
         "result": "L",
         "method": "Decision (unanimous)",
@@ -24937,6 +24961,14 @@
     },
     "nickname": "Golden Girl",
     "last5": [
+      {
+        "opponent": "Daria Zhelezniakova",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Allen vs. Duncan",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Hailey Cowan",
         "result": "W",
@@ -27081,6 +27113,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Ismael Bonfim",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Allen vs. Duncan",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Charles Radtke",
         "result": "L",
@@ -31271,6 +31311,14 @@
     },
     "last5": [
       {
+        "opponent": "Julius Walker",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Allen vs. Duncan",
+        "round": 2,
+        "time": null
+      },
+      {
         "opponent": "Jacob Malkoun",
         "result": "L",
         "method": "Decision (unanimous)",
@@ -33711,6 +33759,14 @@
     },
     "nickname": "The Machine",
     "last5": [
+      {
+        "opponent": "Otari Tanzilovi",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Allen vs. Duncan",
+        "round": 2,
+        "time": null
+      },
       {
         "opponent": "Juan Diaz",
         "result": "L",
@@ -37961,6 +38017,14 @@
     },
     "last5": [
       {
+        "opponent": "Malcolm Wellmaker",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Allen vs. Duncan",
+        "round": 2,
+        "time": null
+      },
+      {
         "opponent": "Shane Collins",
         "result": "L",
         "method": "Decision (unanimous)",
@@ -37993,6 +38057,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Niko Price",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Allen vs. Duncan",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Levan Chokheli",
         "result": "L",
@@ -39514,6 +39586,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Francisco Prado",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Allen vs. Duncan",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Axel Sola",
         "result": "L",
@@ -41474,7 +41554,17 @@
     "weightClass": "Heavyweight",
     "height": "6'5\"",
     "reach": "80.5\"",
-    "statsSyncedAt": "2026-08-25T09:37:10.383Z"
+    "statsSyncedAt": "2026-08-25T09:37:10.383Z",
+    "last5": [
+      {
+        "opponent": "RJ Harris",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Allen vs. Duncan",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "alvin-hines",
@@ -41568,7 +41658,17 @@
     },
     "weightClass": "Light Heavyweight",
     "height": "6'1\"",
-    "statsSyncedAt": "2026-08-25T09:37:18.950Z"
+    "statsSyncedAt": "2026-08-25T09:37:18.950Z",
+    "last5": [
+      {
+        "opponent": "Brendson Ribeiro",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC Fight Night: Allen vs. Duncan",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "nina-milosevic",
@@ -43153,7 +43253,17 @@
     "height": "6'3\"",
     "reach": "78\"",
     "weightClass": "Heavyweight",
-    "statsSyncedAt": "2026-08-25T09:38:11.962Z"
+    "statsSyncedAt": "2026-08-25T09:38:11.962Z",
+    "last5": [
+      {
+        "opponent": "Allen Frye Jr.",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Allen vs. Duncan",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "anna-melisano",
@@ -53721,7 +53831,17 @@
       "tdDef": "50%",
       "subAvg": "0.0"
     },
-    "statsSyncedAt": "2026-09-30T15:41:22.307Z"
+    "statsSyncedAt": "2026-09-30T15:41:22.307Z",
+    "last5": [
+      {
+        "opponent": "Alice Pereira",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Allen vs. Duncan",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "ernesta-kareckaite",
