@@ -14868,7 +14868,7 @@
     "location": "",
     "venue": "",
     "poster": "https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/2026-09/101026-ufc-fight-night-allen-vs-duncan-EVENT-ART.jpg",
-    "status": "upcoming",
+    "status": "completed",
     "start_time": "2026-10-10T21:00:00.000Z",
     "mainCard": [
       {
@@ -14880,7 +14880,11 @@
         "ranked": true,
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/ALLEN_BRENDAN_L_06-06.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/DUNCAN_CHRISTIAN_LEROY_L_11-08.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/DUNCAN_CHRISTIAN_LEROY_L_11-08.png",
+        "winner": "Brendan Allen",
+        "method": "SUB",
+        "round": 5,
+        "_supabaseSynced": true
       },
       {
         "a": "Matheus Camilo",
@@ -14891,7 +14895,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/CAMILO_MATHEUS_R.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/HERBERT_JAI_L_03-22.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/HERBERT_JAI_L_03-22.png",
+        "winner": "Jai Herbert",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Loopy Godinez",
@@ -14902,7 +14909,10 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-03/GODINEZ_LOOPY_L_03-29.png?itok=GYu4a1a8",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/SOUZA_KETLEN_L_06-06.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/SOUZA_KETLEN_L_06-06.png",
+        "winner": "Loopy Godínez",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Andre Fili",
@@ -14913,7 +14923,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/FILI_ANDRE_L_03-14.png?itok=Zud7jwf3",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/KAMAKA_KAI_L_04-04.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/KAMAKA_KAI_L_04-04.png",
+        "winner": "Andre Fili",
+        "method": "KO/TKO",
+        "round": 2,
+        "_supabaseSynced": true
       },
       {
         "a": "Malcolm Wellmaker",
