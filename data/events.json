@@ -15634,7 +15634,7 @@
     "venue": "",
     "poster": "https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/image/2026-09/111426-polymarket-ufc-334-gane-vs-hokit-TEMP-HERO.jpg",
     "status": "upcoming",
-    "start_time": null,
+    "start_time": "2026-11-14T22:00:00.000Z",
     "mainCard": [
       {
         "a": "Ciryl Gane",
@@ -15642,7 +15642,7 @@
         "weight": "Heavyweight",
         "rounds": "5 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/GANE_CIRYL_R_06-14.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/HOKIT_JOSH_L_06-14.png"
@@ -15653,7 +15653,7 @@
         "weight": "W Bantamweight",
         "rounds": "5 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "comain",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-06/HARRISON_KAYLA_L_BELTMOCK.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/NUNES_AMANDA_R.png"
@@ -15664,7 +15664,7 @@
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/BORRALHO_CAIO_L_03-07.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/BELGAROUI_YOUSRI_R_10-18.png"
@@ -15675,7 +15675,7 @@
         "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/MEDIC_UROS_L_08-09.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/HOLLAND_KEVIN_L_04-11.png"
@@ -15690,17 +15690,6 @@
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/HASAN_BILAL_L_08-11.png?itok=wL9PQxdA",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-09/GURULE_LUIS_R_09-13.png"
-      },
-      {
-        "a": "Stephen Thompson",
-        "b": "Charles Radtke",
-        "weight": "Welterweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/THOMPSON_STEPHEN_L_07-12.png?itok=T4Y2Tqct",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/RADTKE_CHARLES_L_04-11.png"
       }
     ],
     "prelims": [
@@ -15738,15 +15727,15 @@
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/SUSURKAEV_BAISANGUR_L_05-09.png"
       },
       {
-        "a": "Bia Mesquita",
-        "b": "Macy Chiasson",
-        "weight": "W Bantamweight",
+        "a": "Stephen Thompson",
+        "b": "Charles Radtke",
+        "weight": "Welterweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/MESQUITA_BIA_L_10-11.png",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/CHIASSON_MACY_L_10-04.png?itok=BRfzm0GS"
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/THOMPSON_STEPHEN_L_07-12.png?itok=T4Y2Tqct",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/RADTKE_CHARLES_L_04-11.png"
       }
     ],
     "earlyPrelims": [
@@ -15767,10 +15756,21 @@
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/SADYKHOV_NAZIM_L_12-06.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
+      },
+      {
+        "a": "Macy Chiasson",
+        "b": "Bia Mesquita",
+        "weight": "Women's Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/CHIASSON_MACY_L_10-04.png?itok=BRfzm0GS",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/MESQUITA_BIA_L_10-11.png"
       }
     ]
   },
