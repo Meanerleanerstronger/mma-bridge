@@ -15213,7 +15213,7 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/5/CERMINARA_KATLYN_L_03-09.png?itok=L1T9rkza",
-        "imgB": ""
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/2022-02/womens-silhouette-RED-corner.png?itok=SXsY1AgG"
       }
     ],
     "earlyPrelims": []
@@ -15228,7 +15228,7 @@
     "venue": "",
     "poster": "https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/2026-09/102426-ufc-333-volkanovski-vs-evloev-EVENT-ART.jpg",
     "status": "upcoming",
-    "start_time": "2026-10-24T16:00:00.000Z",
+    "start_time": "2026-10-24T14:00:00.000Z",
     "mainCard": [
       {
         "a": "Alexander Volkanovski",
@@ -15339,10 +15339,21 @@
         "weight": "Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/THICKNESSE_COLBY_L_05-02.png",
         "imgB": ""
+      },
+      {
+        "a": "Abubakar Vagaev",
+        "b": "Jacob Malkoun",
+        "weight": "Middleweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/MALKOUN_JACOB_L_05-02.png"
       }
     ]
   },
