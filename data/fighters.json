@@ -11135,7 +11135,7 @@
     "ranking": "#6",
     "record": {
       "wins": 15,
-      "losses": 3,
+      "losses": 2,
       "draws": 0
     },
     "height": "5'5\"",
@@ -39441,35 +39441,91 @@
     "name": "Ramazan Temirov",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-11/TEMIROV_RAMAZAN_L_10-12.png",
     "record": {
-      "wins": 20,
+      "wins": 19,
       "losses": 3,
       "draws": 0
     },
     "nickname": "Temurlan",
     "last5": [
       {
-        "opponent": "Steve Erceg",
-        "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Jul. 25, 2026",
-        "round": 1,
-        "time": "4:21"
-      },
-      {
-        "opponent": "Charles Johnson",
+        "opponent": "Charles Johnson (fighter)",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Mar. 1, 2025",
+        "event": "UFC Fight Night: Kape vs. Almabayev",
         "round": 3,
         "time": "5:00"
       },
       {
-        "opponent": "Cj Vergara",
+        "opponent": "C.J. Vergara",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Oct. 12, 2024",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Royval vs. Taira",
         "round": 1,
         "time": "2:50"
+      },
+      {
+        "opponent": "Takaki Soya",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "2023_in_Rizin_Fighting_Federation#Rizin_44",
+        "round": 1,
+        "time": "3:15"
+      },
+      {
+        "opponent": "Yuta Hamamoto",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "2023_in_Rizin_Fighting_Federation#Rizin_42",
+        "round": 1,
+        "time": "4:06"
+      },
+      {
+        "opponent": "Kayck Alencar",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Naiza FC 48",
+        "round": 1,
+        "time": "1:50"
+      },
+      {
+        "opponent": "Argen Maratbek Uulu",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Muradov Professional League 5",
+        "round": 1,
+        "time": "4:27"
+      },
+      {
+        "opponent": "Mikhail Sirbu",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Muradov Professional League 3",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Talgat Zhumagaliev",
+        "result": "W",
+        "method": "Decision",
+        "event": "Muradov Professional League 1",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Daniel Conceição",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "Future MMA 13",
+        "round": 1,
+        "time": "0:34"
+      },
+      {
+        "opponent": "Satbek Esengeldin",
+        "result": "W",
+        "method": "Decision (Unanimous)",
+        "event": "Octagon 19",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "stats": {
