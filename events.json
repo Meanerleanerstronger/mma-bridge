@@ -15367,7 +15367,7 @@
     "venue": "",
     "poster": "https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/2026-09/103126-ufc-fight-night-moicano-vs-nolan-TEMP-HERO.jpg",
     "status": "upcoming",
-    "start_time": null,
+    "start_time": "2026-10-31T21:00:00.000Z",
     "mainCard": [
       {
         "a": "Renato Moicano",
@@ -15375,32 +15375,10 @@
         "weight": "Lightweight",
         "rounds": "5 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/MOICANO_RENATO_L_04-04.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-09/NOLAN_TOM_L_09-27.png"
-      },
-      {
-        "a": "Lucia Szabova",
-        "b": "Tainara Lisboa",
-        "weight": "W Bantamweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "comain",
-        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/2022-02/womens-silhouette-RED-corner.png?itok=SXsY1AgG",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/LISBOA_TAINARA_L_10-14.png?itok=ibBAzJ5i"
-      },
-      {
-        "a": "Nick Klein",
-        "b": "Joe Kropschot",
-        "weight": "Middleweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/KLEIN_NICK_L_08-02.png?itok=NzieeiWf",
-        "imgB": ""
       },
       {
         "a": "Randy Brown",
@@ -15419,23 +15397,10 @@
         "weight": "W Bantamweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/SANTOS_YANA_L_05-03.png?itok=pkR_XniN",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/SANTOS_LUANA_L_05-17.png"
-      }
-    ],
-    "prelims": [
-      {
-        "a": "Talita Alencar",
-        "b": "Piera Rodriguez",
-        "weight": "W Strawweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/ALENCAR_TALITA_L_04-25.png",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/RODRIGUEZ_PIERA_L_03-14.png?itok=UDMKBpY8"
       },
       {
         "a": "Jean-Paul Lebosnoyani",
@@ -15447,6 +15412,19 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/LEBOSNOYANI_JEAN-PAUL_R_02-21.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/HASANOV_FARMAN_L_06-27.png"
+      }
+    ],
+    "prelims": [
+      {
+        "a": "Talita Alencar",
+        "b": "Piera Rodriguez",
+        "weight": "W Strawweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/ALENCAR_TALITA_L_04-25.png",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/RODRIGUEZ_PIERA_L_03-14.png?itok=UDMKBpY8"
       },
       {
         "a": "Azamat Bekoev",
@@ -15458,9 +15436,29 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/BEKOEV_AZAMAT_L_04-04.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-12/3/PETROSKI_ANDRE_L_09-07.png"
-      }
-    ],
-    "earlyPrelims": [
+      },
+      {
+        "a": "Francis Marshall",
+        "b": "Gaston Bolanos",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/MARSHALL_FRANCIS_L_04-25.png",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/BOLANOS_GASTON_L_06-20.png?itok=WvUQBhDT"
+      },
+      {
+        "a": "Rodrigo Sezinando",
+        "b": "Theodor Berggren",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
+      },
       {
         "a": "Julian Erosa",
         "b": "JeongYeong Lee",
@@ -15473,17 +15471,29 @@
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/LEE_JEONGYEONG_L_03-07.png?itok=Znq_QNLd"
       },
       {
-        "a": "Francis Marshall",
-        "b": "Gaston Bolaños",
-        "weight": "Featherweight",
+        "a": "Nick Klein",
+        "b": "Joseph Kropschot",
+        "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/MARSHALL_FRANCIS_L_04-25.png",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/BOLANOS_GASTON_L_06-20.png?itok=WvUQBhDT"
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/KLEIN_NICK_L_08-02.png?itok=NzieeiWf",
+        "imgB": ""
+      },
+      {
+        "a": "Lucia Szabova",
+        "b": "Tainara Lisboa",
+        "weight": "Women's Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "comain",
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/2022-02/womens-silhouette-RED-corner.png?itok=SXsY1AgG",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/LISBOA_TAINARA_L_10-14.png?itok=ibBAzJ5i"
       }
-    ]
+    ],
+    "earlyPrelims": []
   },
   {
     "id": "ufc-fight-night-bonfim-vs-brady",
