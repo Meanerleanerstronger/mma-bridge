@@ -15147,7 +15147,11 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/CRODEN_MELISSA_L_10-18.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-04/CHANDLER_CHELSEA_L_04-26.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-04/CHANDLER_CHELSEA_L_04-26.png",
+        "winner": "Chelsea Chandler",
+        "method": "SUB",
+        "round": 1,
+        "_supabaseSynced": true
       },
       {
         "a": "Cody Chovancek",
@@ -15158,7 +15162,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/CHOVANCEK_CODY_R_09-16.png?itok=v2G8Yooy",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-03/YOU_SUYOUNG_L_03-15.png?itok=Mfh4XApl"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-03/YOU_SUYOUNG_L_03-15.png?itok=Mfh4XApl",
+        "winner": "SuYoung You",
+        "method": "SUB",
+        "round": 3,
+        "_supabaseSynced": true
       },
       {
         "a": "Chad Anheliger",
@@ -15169,7 +15177,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-10/ANHELIGER_CHAD_L_11-02.png?itok=ezY1YMKO",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-01/KOSLOW_STEVEN_L_12-10.png?itok=pqAG6P4G"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-01/KOSLOW_STEVEN_L_12-10.png?itok=pqAG6P4G",
+        "winner": "Steven Koslow",
+        "round": 3,
+        "_supabaseSynced": true
       },
       {
         "a": "Tanner Boser",
@@ -15213,7 +15224,11 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-01/5/CERMINARA_KATLYN_L_03-09.png?itok=L1T9rkza",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/2022-02/womens-silhouette-RED-corner.png?itok=SXsY1AgG"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/2022-02/womens-silhouette-RED-corner.png?itok=SXsY1AgG",
+        "winner": "Katlyn Cerminara",
+        "method": "KO/TKO",
+        "round": 1,
+        "_supabaseSynced": true
       }
     ],
     "earlyPrelims": []

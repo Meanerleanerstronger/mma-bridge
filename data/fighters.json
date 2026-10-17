@@ -28407,6 +28407,14 @@
     "nickname": "Scare",
     "last5": [
       {
+        "opponent": "Chelsea Chandler",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC Fight Night: Buckley vs. Malott",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Daria Zhelezniakova",
         "result": "W",
         "method": "Decision (unanimous)",
@@ -37541,6 +37549,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Melissa Croden",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC Fight Night: Buckley vs. Malott",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Priscila Cachoeira",
         "result": "W",
@@ -49035,6 +49051,14 @@
     },
     "last5": [
       {
+        "opponent": "Mackenzie Stiller",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Buckley vs. Malott",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Maycee Barber",
         "result": "L",
         "method": "Decision (unanimous)",
@@ -50682,7 +50706,17 @@
       "losses": 8,
       "draws": 0
     },
-    "nickname": "The Monster"
+    "nickname": "The Monster",
+    "last5": [
+      {
+        "opponent": "Steven Koslow",
+        "result": "L",
+        "method": "",
+        "event": "UFC Fight Night: Buckley vs. Malott",
+        "round": 3,
+        "time": null
+      }
+    ]
   },
   {
     "id": "steven-koslow",
@@ -50704,7 +50738,17 @@
       "losses": 1,
       "draws": 0
     },
-    "nickname": "Obi Won Shinobi The Pillow"
+    "nickname": "Obi Won Shinobi The Pillow",
+    "last5": [
+      {
+        "opponent": "Chad Anheliger",
+        "result": "W",
+        "method": "",
+        "event": "UFC Fight Night: Buckley vs. Malott",
+        "round": 3,
+        "time": null
+      }
+    ]
   },
   {
     "id": "michael-morales",
@@ -53183,7 +53227,17 @@
       "wins": 1,
       "losses": 0,
       "draws": 0
-    }
+    },
+    "last5": [
+      {
+        "opponent": "SuYoung You",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC Fight Night: Buckley vs. Malott",
+        "round": 3,
+        "time": null
+      }
+    ]
   },
   {
     "id": "suyoung-you",
@@ -53205,7 +53259,17 @@
       "losses": 4,
       "draws": 0
     },
-    "nickname": "You-Jitsu"
+    "nickname": "You-Jitsu",
+    "last5": [
+      {
+        "opponent": "Cody Chovancek",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC Fight Night: Buckley vs. Malott",
+        "round": 3,
+        "time": null
+      }
+    ]
   },
   {
     "id": "stephen-thompson",
@@ -54462,6 +54526,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Katlyn Cerminara",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Buckley vs. Malott",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Gillian Robertson",
         "result": "W",
