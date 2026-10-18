@@ -11018,7 +11018,7 @@
     "pfp": true,
     "record": {
       "wins": 14,
-      "losses": 2,
+      "losses": 3,
       "draws": 0
     },
     "height": "5'4\"",
@@ -11030,6 +11030,14 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/BLANCHFIELD_ERIN_L_11-15.png",
     "bio": "Erin Blanchfield is a 25-year-old New Jersey grappler who has risen through the flyweight ranks with a relentless submission-hunting style and smothering top pressure. 'Cold Blooded' finished Rose Namajunas and multiple ranked opponents to establish herself as one of the division's most dangerous fighters.",
     "last5": [
+      {
+        "opponent": "Jasmine Jasudavicius",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Buckley vs. Malott",
+        "round": 3,
+        "time": "5:00"
+      },
       {
         "opponent": "Tracy Cortez",
         "result": "W",
@@ -11099,14 +11107,6 @@
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Smith vs. Spann",
-        "round": 3,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Brogan Walker-Sanchez",
-        "result": "W",
-        "method": "Decision (unanimous)",
-        "event": "List of Invicta FC events#Invicta FC 41: Morandin vs. Ruiz",
         "round": 3,
         "time": "5:00"
       }
@@ -11544,7 +11544,7 @@
     "name": "Kyle Daukaus",
     "record": {
       "wins": 17,
-      "losses": 5,
+      "losses": 6,
       "draws": 0
     },
     "last5": [
@@ -12094,7 +12094,7 @@
     "name": "Jhonata Diniz",
     "record": {
       "wins": 9,
-      "losses": 2,
+      "losses": 3,
       "draws": 0
     },
     "last5": [
@@ -23434,7 +23434,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/NELSON_KYLE_L_10-18.png",
     "record": {
       "wins": 17,
-      "losses": 6,
+      "losses": 8,
       "draws": 1
     },
     "last5": [
@@ -25955,7 +25955,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-07/LANDWEHR_NATE_L_07-12.png",
     "record": {
       "wins": 18,
-      "losses": 7,
+      "losses": 9,
       "draws": 0
     },
     "last5": [
@@ -27271,7 +27271,7 @@
     "name": "Mike Malott",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/MALOTT_MIKE_L_05-10.png",
     "record": {
-      "wins": 14,
+      "wins": 15,
       "losses": 2,
       "draws": 1
     },
@@ -27770,7 +27770,7 @@
     "name": "Jasmine Jasudavicius",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/JASUDAVICIUS_JASMINE_L_04-18.png",
     "record": {
-      "wins": 15,
+      "wins": 16,
       "losses": 4,
       "draws": 0
     },
@@ -28293,7 +28293,7 @@
     "name": "Tanner Boser",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/BOSER_TANNER_L_04-18.png",
     "record": {
-      "wins": 22,
+      "wins": 23,
       "losses": 11,
       "draws": 1
     },
@@ -31950,10 +31950,26 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/5/BUCKLEY_JOAQUIN_L_05-11.png",
     "record": {
       "wins": 21,
-      "losses": 7,
+      "losses": 9,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Mike Malott",
+        "result": "L",
+        "method": "KO (knee and punch)",
+        "event": "UFC Fight Night: Buckley vs. Malott",
+        "round": 2,
+        "time": "2:32"
+      },
+      {
+        "opponent": "Sean Brady (fighter)",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 328",
+        "round": 3,
+        "time": "5:00"
+      },
       {
         "opponent": "Kamaru Usman",
         "result": "L",
@@ -32017,22 +32033,6 @@
         "event": "UFC 282",
         "round": 2,
         "time": "2:49"
-      },
-      {
-        "opponent": "Nassourdine Imavov",
-        "result": "L",
-        "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Gane vs. Tuivasa",
-        "round": 3,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Albert Duraev",
-        "result": "W",
-        "method": "TKO (doctor stoppage)",
-        "event": "UFC on ESPN: Kattar vs. Emmett",
-        "round": 2,
-        "time": "5:00"
       }
     ],
     "nickname": "New Mansa",
@@ -37560,7 +37560,7 @@
     "name": "Chelsea Chandler",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-04/CHANDLER_CHELSEA_L_04-26.png",
     "record": {
-      "wins": 7,
+      "wins": 8,
       "losses": 4,
       "draws": 0
     },
@@ -49061,7 +49061,7 @@
     "id": "katlyn-cerminara",
     "name": "Katlyn Cerminara",
     "record": {
-      "wins": 18,
+      "wins": 19,
       "losses": 6,
       "draws": 0
     },
@@ -52641,7 +52641,7 @@
     "name": "Javad Mahjoub",
     "record": {
       "wins": 5,
-      "losses": 0,
+      "losses": 1,
       "draws": 0
     },
     "last5": [
