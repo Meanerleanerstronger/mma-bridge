@@ -15067,7 +15067,7 @@
     "location": "",
     "venue": "",
     "poster": "https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/2026-07/101726-ufc-fight-night-buckley-vs-malott-TEMP-HERO.jpg",
-    "status": "upcoming",
+    "status": "completed",
     "start_time": "2026-10-17T21:00:00.000Z",
     "mainCard": [
       {
@@ -15079,7 +15079,11 @@
         "ranked": true,
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/5/BUCKLEY_JOAQUIN_L_05-11.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/MALOTT_MIKE_L_05-10.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/MALOTT_MIKE_L_05-10.png",
+        "winner": "Mike Malott",
+        "method": "KO/TKO",
+        "round": 2,
+        "_supabaseSynced": true
       },
       {
         "a": "Mandel Nallo",
@@ -15090,7 +15094,10 @@
         "ranked": false,
         "slot": "comain",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/NALLO_MANDEL_L_04-18.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-07/LANDWEHR_NATE_L_07-12.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-07/LANDWEHR_NATE_L_07-12.png",
+        "winner": "Mandel Nallo",
+        "round": 2,
+        "_supabaseSynced": true
       },
       {
         "a": "Erin Blanchfield",
@@ -15101,7 +15108,10 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/BLANCHFIELD_ERIN_L_11-15.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/JASUDAVICIUS_JASMINE_L_04-18.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/JASUDAVICIUS_JASMINE_L_04-18.png",
+        "winner": "Jasmine Jasudavicius",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Marc-Andre Barriault",
@@ -15112,7 +15122,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/BARRIAULT_MARC-ANDRE_L_05-10.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/DAUKAUS_KYLE_R_06-14.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/DAUKAUS_KYLE_R_06-14.png",
+        "winner": "Marc-Andre Barriault",
+        "method": "KO/TKO",
+        "round": 1,
+        "_supabaseSynced": true
       },
       {
         "a": "Louis Jourdain",
@@ -15123,7 +15137,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/JOURDAIN_LOUIS_L_09-30.png?itok=hXNV4FbV",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/CUAMBA_TIMOTHY_L_05-16.png?itok=QVPT-XKP"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/CUAMBA_TIMOTHY_L_05-16.png?itok=QVPT-XKP",
+        "winner": "Timmy Cuamba",
+        "round": 2,
+        "_supabaseSynced": true
       },
       {
         "a": "Kyle Nelson",
@@ -15134,7 +15151,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/NELSON_KYLE_L_10-18.png",
-        "imgB": ""
+        "imgB": "",
+        "winner": "Cristian Pérez",
+        "method": "KO/TKO",
+        "round": 1,
+        "_supabaseSynced": true
       }
     ],
     "prelims": [
