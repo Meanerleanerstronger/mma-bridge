@@ -12099,6 +12099,14 @@
     },
     "last5": [
       {
+        "opponent": "Tanner Boser",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Buckley vs. Malott",
+        "round": 3,
+        "time": null
+      },
+      {
         "opponent": "Mario Pinto",
         "result": "L",
         "method": "TKO",
@@ -28290,6 +28298,14 @@
       "draws": 1
     },
     "last5": [
+      {
+        "opponent": "Jhonata Diniz",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Buckley vs. Malott",
+        "round": 3,
+        "time": null
+      },
       {
         "opponent": "Gokhan Saricam",
         "result": "L",
@@ -49863,7 +49879,17 @@
       "wins": 10,
       "losses": 3,
       "draws": 0
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Nick Galanti",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC Fight Night: Buckley vs. Malott",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "payton-talbott",
@@ -52620,6 +52646,14 @@
     },
     "last5": [
       {
+        "opponent": "Joel Faglier",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Buckley vs. Malott",
+        "round": 2,
+        "time": null
+      },
+      {
         "opponent": "Pietro Gentile de Oliveira",
         "result": "W",
         "method": "Submission (armbar)",
@@ -54499,7 +54533,17 @@
       "tdDef": "0%",
       "subAvg": "0.0"
     },
-    "statsSyncedAt": "2026-10-08T16:10:44.650Z"
+    "statsSyncedAt": "2026-10-08T16:10:44.650Z",
+    "last5": [
+      {
+        "opponent": "Julien LeBlanc",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC Fight Night: Buckley vs. Malott",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "joel-faglier",
@@ -54515,7 +54559,17 @@
       "tdDef": "0%",
       "subAvg": "0.0"
     },
-    "statsSyncedAt": "2026-10-08T16:10:47.473Z"
+    "statsSyncedAt": "2026-10-08T16:10:47.473Z",
+    "last5": [
+      {
+        "opponent": "Javad Mahjoub",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Buckley vs. Malott",
+        "round": 2,
+        "time": null
+      }
+    ]
   },
   {
     "id": "mackenzie-stiller",
