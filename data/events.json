@@ -15378,17 +15378,6 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/DAWSON_GRANT_L_05-09.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/ALIEV_NURULLO_L_11-22.png"
-      },
-      {
-        "a": "Bolaji Oki",
-        "b": "Daniel Santos",
-        "weight": "Featherweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "",
-        "imgB": ""
       }
     ],
     "earlyPrelims": [
@@ -15422,8 +15411,8 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "",
-        "imgB": ""
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-02/STEELE_KODY_R_02-08.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-07/GUGNON_NOAH_R_08-01.png"
       },
       {
         "a": "Iasmin Lucindo",
@@ -15431,10 +15420,21 @@
         "weight": "W Strawweight",
         "rounds": "3 Rds",
         "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/2/CALIARI_NICOLLE_L_01-11.png"
+      },
+      {
+        "a": "Bolaji Oki",
+        "b": "Daniel Santos",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
         "ranked": false,
         "slot": "",
         "imgA": "",
-        "imgB": ""
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/SANTOS_DANIEL_L_10-04.png"
       }
     ]
   },
@@ -15537,7 +15537,7 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "",
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/SEZINANDO_RODRIGO_L_09-13.png?itok=tmb-7P2Y",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
       },
       {
@@ -15560,7 +15560,7 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/KLEIN_NICK_L_08-02.png?itok=NzieeiWf",
-        "imgB": ""
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/KROPSCHOT_JOE_R_08-11.png?itok=3FsiQXS0"
       },
       {
         "a": "Lucia Szabova",
