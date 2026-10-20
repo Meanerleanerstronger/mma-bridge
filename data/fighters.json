@@ -54892,5 +54892,96 @@
     "id": "joseph-kropschot",
     "name": "Joseph Kropschot",
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/KROPSCHOT_JOE_R_08-11.png?itok=3FsiQXS0"
+  },
+  {
+    "id": "iasmin-lucindo",
+    "name": "Iasmin Lucindo",
+    "record": {
+      "wins": 18,
+      "losses": 6,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Angela Hill",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Dolidze vs. Hernandez",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Amanda Lemos",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 313",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Marina Rodriguez",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC 307",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Karolina Kowalkiewicz",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 301",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Polyana Viana",
+        "result": "W",
+        "method": "Submission (arm-triangle choke)",
+        "event": "UFC on ESPN: Luque vs. dos Anjos",
+        "round": 2,
+        "time": "3:42"
+      },
+      {
+        "opponent": "Brogan Walker",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Pavlovich vs. Blaydes",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Yazmin Jauregui",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Vera vs. Cruz",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Lucrezia Ria",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Cage Fight Series 10",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Sharolayne Almeida",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Natal Fight Championship 21",
+        "round": 1,
+        "time": "1:08"
+      },
+      {
+        "opponent": "Beriuzka Canelon",
+        "result": "W",
+        "method": "TKO (punch)",
+        "event": "Samurai Fight House 1",
+        "round": 2,
+        "time": "2:13"
+      }
+    ]
   }
 ]
