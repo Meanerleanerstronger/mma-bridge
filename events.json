@@ -15422,7 +15422,7 @@
         "titleFight": false,
         "ranked": true,
         "slot": "",
-        "imgA": "",
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/LUCINDO_IASMIN_L_08-09.png?itok=itSnZTmA",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/2/CALIARI_NICOLLE_L_01-11.png"
       },
       {
@@ -15433,7 +15433,7 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "",
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/OKI_BOLAJI_L_03-14.png?itok=Hs5udMlS",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/SANTOS_DANIEL_L_10-04.png"
       }
     ]
@@ -15450,17 +15450,6 @@
     "status": "upcoming",
     "start_time": "2026-10-31T21:00:00.000Z",
     "mainCard": [
-      {
-        "a": "Renato Moicano",
-        "b": "Tom Nolan",
-        "weight": "Lightweight",
-        "rounds": "5 Rds",
-        "titleFight": false,
-        "ranked": true,
-        "slot": "main",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/MOICANO_RENATO_L_04-04.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-09/NOLAN_TOM_L_09-27.png"
-      },
       {
         "a": "Randy Brown",
         "b": "Carlos Leal",
@@ -15574,7 +15563,15 @@
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/LISBOA_TAINARA_L_10-14.png?itok=ibBAzJ5i"
       }
     ],
-    "earlyPrelims": []
+    "earlyPrelims": [],
+    "droppedFights": [
+      {
+        "a": "Renato Moicano",
+        "b": "Tom Nolan",
+        "reason": "removed from the card",
+        "droppedAt": "2026-10-22T18:13:57.874Z"
+      }
+    ]
   },
   {
     "id": "ufc-fight-night-bonfim-vs-brady",
