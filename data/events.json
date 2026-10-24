@@ -15331,7 +15331,11 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/PICO_AARON_R_08-16.png",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/KEITA_LOSENE_R_03-21.png?itok=nP_KzLSm"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/KEITA_LOSENE_R_03-21.png?itok=nP_KzLSm",
+        "winner": "Aaron Pico",
+        "method": "KO/TKO",
+        "round": 1,
+        "_supabaseSynced": true
       }
     ],
     "prelims": [
@@ -15344,7 +15348,11 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/MAGOMEDOV_ABUS_L_06-27.png?itok=SLmzXjWp",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/ROWSTON_CAM_L_05-02.png?itok=uqDWq0O0"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/ROWSTON_CAM_L_05-02.png?itok=uqDWq0O0",
+        "winner": "Abus Magomedov",
+        "method": "SUB",
+        "round": 1,
+        "_supabaseSynced": true
       },
       {
         "a": "Nikita Krylov",
@@ -15355,7 +15363,11 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/KRYLOV_NIKITA_L_01-24.png",
-        "imgB": ""
+        "imgB": "",
+        "winner": "Abdul-Rakhman Yakhyaev",
+        "method": "KO/TKO",
+        "round": 1,
+        "_supabaseSynced": true
       },
       {
         "a": "Azamat Murzakanov",
@@ -15366,7 +15378,11 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/MURZAKANOV_AZAMAT_L_04-11.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/REYES_DOMINICK_L_04-11.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/REYES_DOMINICK_L_04-11.png",
+        "winner": "Dominick Reyes",
+        "method": "KO/TKO",
+        "round": 1,
+        "_supabaseSynced": true
       },
       {
         "a": "Grant Dawson",
