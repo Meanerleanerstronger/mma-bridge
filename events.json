@@ -15275,7 +15275,7 @@
     "location": "",
     "venue": "",
     "poster": "https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/2026-09/102426-ufc-333-volkanovski-vs-evloev-EVENT-ART.jpg",
-    "status": "upcoming",
+    "status": "completed",
     "start_time": "2026-10-24T14:00:00.000Z",
     "mainCard": [
       {
@@ -15287,7 +15287,11 @@
         "ranked": true,
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/VOLKANOVSKI_ALEXANDER_L_BELT_01-31.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/EVLOEV_MOVSAR_L_03-21.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/EVLOEV_MOVSAR_L_03-21.png",
+        "winner": "Alexander Volkanovski",
+        "method": "KO/TKO",
+        "round": 2,
+        "_supabaseSynced": true
       },
       {
         "a": "Petr Yan",
@@ -15298,7 +15302,10 @@
         "ranked": true,
         "slot": "comain",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/YAN_PETR_L_BELT_04-09.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2022-08/DVALISHVILI_MERAB_L_08-20.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2022-08/DVALISHVILI_MERAB_L_08-20.png",
+        "winner": "Petr Yan",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Lone'er Kavanagh",
@@ -15626,6 +15633,17 @@
         "slot": "comain",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/2022-02/womens-silhouette-RED-corner.png?itok=SXsY1AgG",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/LISBOA_TAINARA_L_10-14.png?itok=ibBAzJ5i"
+      },
+      {
+        "a": "Randy Brown",
+        "b": "Jacobe Smith",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
       }
     ],
     "earlyPrelims": [
