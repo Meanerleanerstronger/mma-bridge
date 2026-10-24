@@ -15309,7 +15309,11 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/KAVANAGH_LONEER_L_03-22.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-11/TEMIROV_RAMAZAN_L_10-12.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-11/TEMIROV_RAMAZAN_L_10-12.png",
+        "winner": "Lone'er Kavanagh",
+        "method": "KO/TKO",
+        "round": 1,
+        "_supabaseSynced": true
       },
       {
         "a": "Alexander Volkov",
@@ -15320,7 +15324,10 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/VOLKOV_ALEXANDER_L_05-09.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-06/KUNIEV_RIZVAN_R_06-21.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-06/KUNIEV_RIZVAN_R_06-21.png",
+        "winner": "Alexander Volkov",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Aaron Pico",
@@ -16143,7 +16150,30 @@
     "poster": "",
     "status": "upcoming",
     "start_time": null,
-    "mainCard": [],
+    "mainCard": [
+      {
+        "a": "Joshua Van",
+        "b": "Manel Kape",
+        "weight": "Flyweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "main",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Carlos Prates",
+        "b": "Michael Morales",
+        "weight": "Welterweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "comain",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
     "prelims": [],
     "earlyPrelims": []
   }
