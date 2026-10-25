@@ -1,0 +1,167 @@
+{
+  "eventId": "ufc-333-volkanovski-vs-evloev",
+  "eventName": "UFC 333: Volkanovski vs. Evloev",
+  "fights": [
+    {
+      "fighter1": "Alexander Volkanovski Movsar Evloev",
+      "fighter2": "Petr Yan Merab Dvalishvili",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "5640",
+          "totalStr": "00",
+          "td": "Featherweight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "128131",
+          "totalStr": "00",
+          "td": "Bantamweight",
+          "subAtt": 5,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Lone'er Kavanagh Ramazan Temirov",
+      "fighter2": "Alexander Volkov Rizvan Kuniev",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "2318",
+          "totalStr": "00",
+          "td": "Flyweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "7451",
+          "totalStr": "10",
+          "td": "Heavyweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Aaron Pico Losene Keita",
+      "fighter2": "Dominick Reyes Azamat Murzakanov",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "62",
+          "totalStr": "00",
+          "td": "Featherweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "1 0",
+          "sigStr": "143",
+          "totalStr": "00",
+          "td": "LightHeavyweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Abdul Rakhman Yakhyaev Nikita Krylov",
+      "fighter2": "Abus Magomedov Cam Rowston",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "64",
+          "totalStr": "10",
+          "td": "LightHeavyweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "111",
+          "totalStr": "10",
+          "td": "Middleweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Grant Dawson Nurullo Aliev",
+      "fighter2": "Colby Thicknesse Asaf Chopurov",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "9565",
+          "totalStr": "10",
+          "td": "Lightweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "7754",
+          "totalStr": "00",
+          "td": "Bantamweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Abubakar Vagaev Jacob Malkoun",
+      "fighter2": "Daniel Santos Bolaji Oki",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "71106",
+          "totalStr": "00",
+          "td": "Middleweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "7669",
+          "totalStr": "10",
+          "td": "Featherweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Kody Steele Noah Gugnon",
+      "fighter2": "Iasmin Lucindo Nicolle Caliari",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "2531",
+          "totalStr": "00",
+          "td": "Lightweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "3127",
+          "totalStr": "00",
+          "td": "Women'sStrawweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    }
+  ]
+}
