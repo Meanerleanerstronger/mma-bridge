@@ -6650,7 +6650,7 @@
     "ranking": "#2",
     "ranking_change": 2,
     "record": {
-      "wins": 24,
+      "wins": 23,
       "losses": 7,
       "draws": 0
     },
@@ -6664,17 +6664,9 @@
     "bio": "Carlos Prates is the most dangerous finisher in the welterweight division — a Brazilian Muay Thai nightmare who uses every single limb as a weapon. Knees at the clinch, spinning back kicks, vicious elbows, and heavy overhand rights all flow out of the same terrifying combination sequences. Prates fights in a flow state — his offense reads like improvised jazz, unpredictable and relentless. He holds the most knockdowns in UFC Welterweight history and the most KO/TKOs of any fighter in the promotion since 2024. At 6'1\" with elite reach, he creates and closes distance at will. His TKO of Jack Della Maddalena at UFC Perth cemented him as a title contender.",
     "last5": [
       {
-        "opponent": "Jack Della Maddalena",
-        "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: May. 2, 2026",
-        "round": 3,
-        "time": "3:17"
-      },
-      {
         "opponent": "Leon Edwards",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "KO (punches)",
         "event": "UFC 322",
         "round": 2,
         "time": "1:28"
@@ -6682,7 +6674,7 @@
       {
         "opponent": "Geoff Neal",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "KO (spinning back elbow)",
         "event": "UFC 319",
         "round": 1,
         "time": "4:59"
@@ -6691,17 +6683,65 @@
         "opponent": "Ian Machado Garry",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Apr. 26, 2025",
+        "event": "UFC on ESPN: Machado Garry vs. Prates",
         "round": 5,
         "time": "5:00"
       },
       {
         "opponent": "Neil Magny",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Nov. 9, 2024",
+        "method": "KO (punch)",
+        "event": "UFC Fight Night: Magny vs. Prates",
         "round": 1,
         "time": "4:50"
+      },
+      {
+        "opponent": "Li Jingliang",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "UFC 305",
+        "round": 2,
+        "time": "4:02"
+      },
+      {
+        "opponent": "Charles Radtke",
+        "result": "W",
+        "method": "KO (knee to the body)",
+        "event": "UFC on ESPN: Cannonier vs. Imavov",
+        "round": 1,
+        "time": "4:47"
+      },
+      {
+        "opponent": "Trevin Giles",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "UFC Fight Night: Hermansson vs. Pyfer",
+        "round": 2,
+        "time": "4:03"
+      },
+      {
+        "opponent": "Mitch Ramirez",
+        "result": "W",
+        "method": "TKO (punch)",
+        "event": "Dana White's Contender Series season 7#Week 4 – August 29",
+        "round": 2,
+        "time": "1:14"
+      },
+      {
+        "opponent": "Eduardo Ramon",
+        "result": "W",
+        "method": "KO (knee)",
+        "event": "2023 in Legacy Fighting Alliance#Legacy Fighting Alliance 154: Fernando vs. Silva",
+        "round": 1,
+        "time": "2:25"
+      },
+      {
+        "opponent": "Moacir Rocha",
+        "result": "W",
+        "method": "KO (head kick and punches)",
+        "event": "2022 in Legacy Fighting Alliance#Legacy Fighting Alliance 146: Barbosa vs. Santos",
+        "round": 1,
+        "time": "4:15"
       }
     ],
     "stats": {
@@ -7565,32 +7605,32 @@
       {
         "opponent": "Kyoji Horiguchi",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Jun. 20, 2026",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Kape vs. Horiguchi",
         "round": 3,
         "time": "2:42"
       },
       {
         "opponent": "Brandon Royval",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Dec. 13, 2025",
+        "method": "KO (punches)",
+        "event": "UFC on ESPN: Royval vs. Kape",
         "round": 1,
         "time": "3:18"
       },
       {
         "opponent": "Asu Almabayev",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Mar. 1, 2025",
+        "method": "TKO (retirement)",
+        "event": "UFC Fight Night: Kape vs. Almabayev",
         "round": 3,
         "time": "2:16"
       },
       {
-        "opponent": "Bruno Silva",
+        "opponent": "Bruno Gustavo da Silva",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Dec. 14, 2024",
+        "method": "TKO (body kick and punches)",
+        "event": "UFC on ESPN: Covington vs. Buckley",
         "round": 3,
         "time": "1:57"
       },
@@ -7599,6 +7639,46 @@
         "result": "L",
         "method": "Decision (unanimous)",
         "event": "UFC 304",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Felipe dos Santos",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 293",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "David Dvořák",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Cannonier vs. Strickland",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Zhalgas Zhumagulov",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Font vs. Aldo",
+        "round": 1,
+        "time": "4:02"
+      },
+      {
+        "opponent": "Ode' Osbourne",
+        "result": "W",
+        "method": "KO (flying knee and punches)",
+        "event": "UFC 265",
+        "round": 1,
+        "time": "4:44"
+      },
+      {
+        "opponent": "Matheus Nicolau",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Edwards vs. Muhammad",
         "round": 3,
         "time": "5:00"
       }
@@ -38650,7 +38730,7 @@
     "reach": "78.0\"",
     "weightClass": "Light Heavyweight",
     "record": {
-      "wins": 10,
+      "wins": 11,
       "losses": 0,
       "draws": 0
     },
@@ -51064,9 +51144,9 @@
     "bio": "Michael Morales is an undefeated Ecuadorean welterweight contender known for his sharp striking. He picked up a first-round TKO over Sean Brady at UFC 322, extending his unbeaten record and cementing his spot in the welterweight top 5.",
     "last5": [
       {
-        "opponent": "Sean Brady",
+        "opponent": "Sean Brady (fighter)",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "TKO (punches)",
         "event": "UFC 322",
         "round": 1,
         "time": "3:27"
@@ -51074,24 +51154,24 @@
       {
         "opponent": "Gilbert Burns",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: May. 17, 2025",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Burns vs. Morales",
         "round": 1,
         "time": "3:39"
       },
       {
         "opponent": "Neil Magny",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Aug. 24, 2024",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Cannonier vs. Borralho",
         "round": 1,
         "time": "4:39"
       },
       {
-        "opponent": "Jake Matthews",
+        "opponent": "Jake Matthews (fighter)",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Nov. 18, 2023",
+        "event": "UFC Fight Night: Allen vs. Craig",
         "round": 3,
         "time": "5:00"
       },
@@ -51099,9 +51179,49 @@
         "opponent": "Max Griffin",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Jul. 1, 2023",
+        "event": "UFC on ESPN: Strickland vs. Magomedov",
         "round": 3,
         "time": "5:00"
+      },
+      {
+        "opponent": "Adam Fugitt",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC 277",
+        "round": 3,
+        "time": "1:09"
+      },
+      {
+        "opponent": "Trevin Giles",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC 270",
+        "round": 1,
+        "time": "4:06"
+      },
+      {
+        "opponent": "Nikolay Veretennikov",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Dana White's Contender Series (season 5)#Week 4 - September 21",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Miguel Arizmendi",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UWC Mexico 26",
+        "round": 2,
+        "time": "4:02"
+      },
+      {
+        "opponent": "Ricardo Centeno",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "Extreme MMA 17",
+        "round": 1,
+        "time": "4:15"
       }
     ],
     "stats": {

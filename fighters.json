@@ -2172,6 +2172,14 @@
     "bio": "Alexander Volkanovski was the longest-reigning UFC Featherweight Champion in history at three years, a former rugby player who built himself into a complete three-time champion through relentless improvement and elite cardio. Despite losses to Topuria and Makhachev, The Great's legacy as arguably the most well-rounded featherweight champion ever is secure.",
     "last5": [
       {
+        "opponent": "Movsar Evloev",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 333: Volkanovski vs. Evloev",
+        "round": 2,
+        "time": null
+      },
+      {
         "opponent": "Diego Lopes (fighter)",
         "result": "W",
         "method": "Decision (unanimous)",
@@ -2287,6 +2295,14 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/EVLOEV_MOVSAR_L_03-21.png",
     "bio": "Movsar Evloev is one of the UFC's most underrated unbeaten fighters, a complete martial artist from Ingushetia who uses precise wrestling and technical striking to control fights from start to finish. Unbeaten at 18-0 in professional MMA, his consistency and efficiency make him the featherweight division's most dangerous under-the-radar contender.",
     "last5": [
+      {
+        "opponent": "Alexander Volkanovski",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 333: Volkanovski vs. Evloev",
+        "round": 2,
+        "time": null
+      },
       {
         "opponent": "Lerone Murphy",
         "result": "W",
@@ -2532,6 +2548,14 @@
         "opponent": "Petr Yan",
         "result": "L",
         "method": "Decision (unanimous)",
+        "event": "UFC 333: Volkanovski vs. Evloev",
+        "round": null,
+        "time": null
+      },
+      {
+        "opponent": "Petr Yan",
+        "result": "L",
+        "method": "Decision (unanimous)",
         "event": "UFC 323",
         "round": 5,
         "time": "5:00"
@@ -2644,6 +2668,14 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/YAN_PETR_L_BELT_04-09.png",
     "bio": "Petr Yan is the UFC Bantamweight Champion and one of the most technically polished strikers in the division's history, with elite boxing precision and relentless pressure that have made him a two-time champion. His demolition of Merab Dvalishvili at UFC 323 — dominating the former champion on the feet and in the clinch — proved he is operating at a different level.",
     "last5": [
+      {
+        "opponent": "Merab Dvalishvili",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 333: Volkanovski vs. Evloev",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Merab Dvalishvili",
         "result": "W",
@@ -6618,7 +6650,7 @@
     "ranking": "#2",
     "ranking_change": 2,
     "record": {
-      "wins": 24,
+      "wins": 23,
       "losses": 7,
       "draws": 0
     },
@@ -6632,17 +6664,9 @@
     "bio": "Carlos Prates is the most dangerous finisher in the welterweight division — a Brazilian Muay Thai nightmare who uses every single limb as a weapon. Knees at the clinch, spinning back kicks, vicious elbows, and heavy overhand rights all flow out of the same terrifying combination sequences. Prates fights in a flow state — his offense reads like improvised jazz, unpredictable and relentless. He holds the most knockdowns in UFC Welterweight history and the most KO/TKOs of any fighter in the promotion since 2024. At 6'1\" with elite reach, he creates and closes distance at will. His TKO of Jack Della Maddalena at UFC Perth cemented him as a title contender.",
     "last5": [
       {
-        "opponent": "Jack Della Maddalena",
-        "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: May. 2, 2026",
-        "round": 3,
-        "time": "3:17"
-      },
-      {
         "opponent": "Leon Edwards",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "KO (punches)",
         "event": "UFC 322",
         "round": 2,
         "time": "1:28"
@@ -6650,7 +6674,7 @@
       {
         "opponent": "Geoff Neal",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "KO (spinning back elbow)",
         "event": "UFC 319",
         "round": 1,
         "time": "4:59"
@@ -6659,17 +6683,65 @@
         "opponent": "Ian Machado Garry",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Apr. 26, 2025",
+        "event": "UFC on ESPN: Machado Garry vs. Prates",
         "round": 5,
         "time": "5:00"
       },
       {
         "opponent": "Neil Magny",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Nov. 9, 2024",
+        "method": "KO (punch)",
+        "event": "UFC Fight Night: Magny vs. Prates",
         "round": 1,
         "time": "4:50"
+      },
+      {
+        "opponent": "Li Jingliang",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "UFC 305",
+        "round": 2,
+        "time": "4:02"
+      },
+      {
+        "opponent": "Charles Radtke",
+        "result": "W",
+        "method": "KO (knee to the body)",
+        "event": "UFC on ESPN: Cannonier vs. Imavov",
+        "round": 1,
+        "time": "4:47"
+      },
+      {
+        "opponent": "Trevin Giles",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "UFC Fight Night: Hermansson vs. Pyfer",
+        "round": 2,
+        "time": "4:03"
+      },
+      {
+        "opponent": "Mitch Ramirez",
+        "result": "W",
+        "method": "TKO (punch)",
+        "event": "Dana White's Contender Series season 7#Week 4 – August 29",
+        "round": 2,
+        "time": "1:14"
+      },
+      {
+        "opponent": "Eduardo Ramon",
+        "result": "W",
+        "method": "KO (knee)",
+        "event": "2023 in Legacy Fighting Alliance#Legacy Fighting Alliance 154: Fernando vs. Silva",
+        "round": 1,
+        "time": "2:25"
+      },
+      {
+        "opponent": "Moacir Rocha",
+        "result": "W",
+        "method": "KO (head kick and punches)",
+        "event": "2022 in Legacy Fighting Alliance#Legacy Fighting Alliance 146: Barbosa vs. Santos",
+        "round": 1,
+        "time": "4:15"
       }
     ],
     "stats": {
@@ -7146,6 +7218,14 @@
     "bio": "Nikita Krylov is one of the most exciting submission hunters in the light heavyweight division — a Ukrainian 'Miner' who digs for chokes, triangles, and rear-naked chokes at a relentless pace. With 29 wins and the majority by finish, Krylov has been a UFC staple since 2013 and has tested himself against the very best in the division. Though back-to-back KO losses to Reyes and Guskov in 2025 raised questions, he rebounded emphatically with a round-three knockout of Bukauskas at UFC 324 to reassert himself as a top-10 threat.",
     "last5": [
       {
+        "opponent": "Abdul-Rakhman Yakhyaev",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 333: Volkanovski vs. Evloev",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Robert Whittaker (fighter)",
         "result": "L",
         "method": "TKO (jaw injury)",
@@ -7525,32 +7605,32 @@
       {
         "opponent": "Kyoji Horiguchi",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Jun. 20, 2026",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Kape vs. Horiguchi",
         "round": 3,
         "time": "2:42"
       },
       {
         "opponent": "Brandon Royval",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Dec. 13, 2025",
+        "method": "KO (punches)",
+        "event": "UFC on ESPN: Royval vs. Kape",
         "round": 1,
         "time": "3:18"
       },
       {
         "opponent": "Asu Almabayev",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Mar. 1, 2025",
+        "method": "TKO (retirement)",
+        "event": "UFC Fight Night: Kape vs. Almabayev",
         "round": 3,
         "time": "2:16"
       },
       {
-        "opponent": "Bruno Silva",
+        "opponent": "Bruno Gustavo da Silva",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Dec. 14, 2024",
+        "method": "TKO (body kick and punches)",
+        "event": "UFC on ESPN: Covington vs. Buckley",
         "round": 3,
         "time": "1:57"
       },
@@ -7559,6 +7639,46 @@
         "result": "L",
         "method": "Decision (unanimous)",
         "event": "UFC 304",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Felipe dos Santos",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 293",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "David Dvořák",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Cannonier vs. Strickland",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Zhalgas Zhumagulov",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Font vs. Aldo",
+        "round": 1,
+        "time": "4:02"
+      },
+      {
+        "opponent": "Ode' Osbourne",
+        "result": "W",
+        "method": "KO (flying knee and punches)",
+        "event": "UFC 265",
+        "round": 1,
+        "time": "4:44"
+      },
+      {
+        "opponent": "Matheus Nicolau",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Edwards vs. Muhammad",
         "round": 3,
         "time": "5:00"
       }
@@ -10110,6 +10230,14 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/VOLKOV_ALEXANDER_L_05-09.png",
     "bio": "Alexander Volkov is a 6'7\" Russian heavyweight whose rare combination of size, technique, and durability has made him a fixture in the top five for years. 'Drago' uses his massive frame and sharp boxing to control range and has wins over multiple former champions, cementing his status as a perennial contender.",
     "last5": [
+      {
+        "opponent": "Rizvan Kuniev",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 333: Volkanovski vs. Evloev",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Waldo Cortes-Acosta",
         "result": "W",
@@ -14397,6 +14525,14 @@
     },
     "last5": [
       {
+        "opponent": "Alexander Volkov",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 333: Volkanovski vs. Evloev",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Tyrell Fortune",
         "result": "W",
         "method": "TKO (knees)",
@@ -15437,6 +15573,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Ramazan Temirov",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 333: Volkanovski vs. Evloev",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Brandon Royval",
         "result": "L",
@@ -18337,6 +18481,14 @@
     "name": "Cam Rowston",
     "last5": [
       {
+        "opponent": "Abus Magomedov",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC 333: Volkanovski vs. Evloev",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Robert Bryczek",
         "result": "W",
         "method": "Decision (unanimous)",
@@ -18538,6 +18690,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Abubakar Vagaev",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 333: Volkanovski vs. Evloev",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Gerald Meerschaert",
         "result": "W",
@@ -21759,6 +21919,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Grant Dawson",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 333: Volkanovski vs. Evloev",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Mike Davis",
         "result": "W",
@@ -25515,6 +25683,14 @@
     },
     "last5": [
       {
+        "opponent": "Dominick Reyes",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 333: Volkanovski vs. Evloev",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Paulo Costa",
         "result": "L",
         "method": "TKO (head kick)",
@@ -25625,6 +25801,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Azamat Murzakanov",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 333: Volkanovski vs. Evloev",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Carlos Ulberg",
         "result": "L",
@@ -26122,6 +26306,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Losene Keita",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 333: Volkanovski vs. Evloev",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Patrício Pitbull",
         "result": "W",
@@ -31621,6 +31813,14 @@
     "nickname": "Slickness",
     "last5": [
       {
+        "opponent": "Asaf Chopurov",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 333: Volkanovski vs. Evloev",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Vince Morales",
         "result": "W",
         "method": "Decision (unanimous)",
@@ -31899,6 +32099,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Noah Gugnon",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 333: Volkanovski vs. Evloev",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Dom Mar Fan",
         "result": "W",
@@ -32417,6 +32625,14 @@
       "draws": 1
     },
     "last5": [
+      {
+        "opponent": "Nurullo Aliev",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 333: Volkanovski vs. Evloev",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Mateusz Rebecki",
         "result": "W",
@@ -33837,6 +34053,14 @@
     },
     "last5": [
       {
+        "opponent": "Bolaji Oki",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 333: Volkanovski vs. Evloev",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Dooho Choi",
         "result": "L",
         "method": "TKO",
@@ -34992,6 +35216,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Iasmin Lucindo",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 333: Volkanovski vs. Evloev",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Shauna Bannon",
         "result": "W",
@@ -37177,16 +37409,16 @@
       }
     ],
     "stats": {
-      "slpm": "3.76",
+      "slpm": "3.78",
       "strAcc": "46%",
-      "sapm": "4.71",
-      "strDef": "46%",
+      "sapm": "4.64",
+      "strDef": "51%",
       "tdAvg": "0.00",
       "tdAcc": "0%",
-      "tdDef": "47%",
+      "tdDef": "50%",
       "subAvg": "1.4"
     },
-    "statsSyncedAt": "2026-08-24T09:49:34.192Z"
+    "statsSyncedAt": "2026-10-24T13:09:33.075Z"
   },
   {
     "id": "bruno-gustavo-da-silva",
@@ -37391,11 +37623,11 @@
     ],
     "nickname": "Tubarao",
     "stats": {
-      "slpm": "2.38",
-      "strAcc": "50%",
-      "sapm": "2.28",
+      "slpm": "2.53",
+      "strAcc": "51%",
+      "sapm": "2.31",
       "strDef": "43%",
-      "tdAvg": "3.23",
+      "tdAvg": "3.16",
       "tdAcc": "67%",
       "tdDef": "57%",
       "subAvg": "1.2"
@@ -37403,7 +37635,7 @@
     "height": "5'8\"",
     "reach": "72.0\"",
     "weightClass": "Featherweight",
-    "statsSyncedAt": "2026-08-24T09:49:37.183Z"
+    "statsSyncedAt": "2026-10-24T13:09:35.994Z"
   },
   {
     "id": "ketlen-souza",
@@ -37506,19 +37738,19 @@
     ],
     "nickname": "Esquentadinha",
     "stats": {
-      "slpm": "4.11",
-      "strAcc": "57%",
-      "sapm": "3.89",
+      "slpm": "4.13",
+      "strAcc": "53%",
+      "sapm": "4.00",
       "strDef": "53%",
-      "tdAvg": "0.45",
+      "tdAvg": "0.37",
       "tdAcc": "13%",
-      "tdDef": "53%",
+      "tdDef": "63%",
       "subAvg": "0.2"
     },
     "height": "5'3\"",
     "reach": "63.0\"",
     "weightClass": "Strawweight",
-    "statsSyncedAt": "2026-08-24T09:49:40.166Z"
+    "statsSyncedAt": "2026-10-24T13:09:38.956Z"
   },
   {
     "id": "ariane-carnelossi",
@@ -37617,7 +37849,7 @@
     "height": "5'2\"",
     "reach": "61.5\"",
     "weightClass": "Strawweight",
-    "statsSyncedAt": "2026-08-24T09:49:43.159Z"
+    "statsSyncedAt": "2026-10-24T13:09:41.887Z"
   },
   {
     "id": "chelsea-chandler",
@@ -37719,19 +37951,19 @@
       }
     ],
     "stats": {
-      "slpm": "3.52",
+      "slpm": "3.43",
       "strAcc": "45%",
-      "sapm": "4.27",
-      "strDef": "40%",
-      "tdAvg": "0.81",
-      "tdAcc": "60%",
-      "tdDef": "25%",
-      "subAvg": "0.3"
+      "sapm": "4.11",
+      "strDef": "41%",
+      "tdAvg": "0.75",
+      "tdAcc": "50%",
+      "tdDef": "36%",
+      "subAvg": "0.5"
     },
     "height": "5'8.5\"",
     "reach": "68.0\"",
     "weightClass": "Bantamweight",
-    "statsSyncedAt": "2026-08-24T09:49:46.122Z"
+    "statsSyncedAt": "2026-10-24T13:09:44.807Z"
   },
   {
     "id": "priscila-cachoeira",
@@ -37838,7 +38070,7 @@
     "height": "5'7\"",
     "reach": "65.0\"",
     "weightClass": "Bantamweight",
-    "statsSyncedAt": "2026-08-24T09:49:48.970Z"
+    "statsSyncedAt": "2026-10-24T13:09:47.353Z"
   },
   {
     "id": "jeisla-chaves",
@@ -37869,11 +38101,11 @@
       }
     ],
     "stats": {
-      "slpm": "4.97",
-      "strAcc": "56%",
-      "sapm": "4.20",
+      "slpm": "5.02",
+      "strAcc": "54%",
+      "sapm": "4.49",
       "strDef": "53%",
-      "tdAvg": "1.50",
+      "tdAvg": "1.42",
       "tdAcc": "37%",
       "tdDef": "62%",
       "subAvg": "0.5"
@@ -37881,7 +38113,7 @@
     "height": "5'6\"",
     "reach": "68.0\"",
     "weightClass": "Flyweight",
-    "statsSyncedAt": "2026-08-24T09:49:51.780Z"
+    "statsSyncedAt": "2026-10-24T13:09:50.232Z"
   },
   {
     "id": "yuneisy-duben",
@@ -37915,7 +38147,7 @@
     "height": "5'4\"",
     "reach": "65.5\"",
     "weightClass": "Flyweight",
-    "statsSyncedAt": "2026-08-24T09:49:54.623Z"
+    "statsSyncedAt": "2026-10-24T13:09:52.880Z"
   },
   {
     "id": "luana-santos",
@@ -38021,7 +38253,7 @@
     "height": "5'6\"",
     "reach": "67.0\"",
     "weightClass": "Women's Bantamweight",
-    "statsSyncedAt": "2026-08-24T09:49:57.338Z",
+    "statsSyncedAt": "2026-10-24T13:09:55.780Z",
     "nationality": "Brazilian",
     "flag": "🇧🇷",
     "ranking": "#7"
@@ -38067,7 +38299,7 @@
     "height": "5'8.5\"",
     "reach": "69.5\"",
     "weightClass": "Flyweight",
-    "statsSyncedAt": "2026-08-24T09:50:00.189Z"
+    "statsSyncedAt": "2026-10-24T13:09:58.719Z"
   },
   {
     "id": "melissa-mullins",
@@ -38102,7 +38334,7 @@
     "height": "5'7\"",
     "reach": "68.0\"",
     "weightClass": "Women's Bantamweight",
-    "statsSyncedAt": "2026-08-24T09:50:12.113Z"
+    "statsSyncedAt": "2026-10-24T13:10:01.252Z"
   },
   {
     "id": "kevin-borjas",
@@ -38141,19 +38373,19 @@
       }
     ],
     "stats": {
-      "slpm": "3.87",
+      "slpm": "3.70",
       "strAcc": "42%",
-      "sapm": "5.27",
-      "strDef": "50%",
+      "sapm": "5.44",
+      "strDef": "49%",
       "tdAvg": "0.00",
       "tdAcc": "0%",
-      "tdDef": "72%",
+      "tdDef": "70%",
       "subAvg": "0.0"
     },
     "height": "5'5\"",
     "reach": "68.0\"",
     "weightClass": "Flyweight",
-    "statsSyncedAt": "2026-08-24T09:50:16.778Z"
+    "statsSyncedAt": "2026-10-24T13:10:04.154Z"
   },
   {
     "id": "michael-aswell-jr",
@@ -38169,13 +38401,13 @@
       }
     ],
     "stats": {
-      "slpm": "7.60",
-      "strAcc": "42%",
-      "sapm": "7.03",
-      "strDef": "52%",
-      "tdAvg": "0.24",
-      "tdAcc": "25%",
-      "tdDef": "55%",
+      "slpm": "7.03",
+      "strAcc": "43%",
+      "sapm": "6.26",
+      "strDef": "53%",
+      "tdAvg": "0.20",
+      "tdAcc": "20%",
+      "tdDef": "61%",
       "subAvg": "0.0"
     },
     "height": "5'8\"",
@@ -38187,7 +38419,7 @@
       "draws": 0
     },
     "nickname": "The Texas Kid",
-    "statsSyncedAt": "2026-08-24T09:50:46.830Z",
+    "statsSyncedAt": "2026-10-24T13:10:06.912Z",
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-09/ASWELL_JR_MICHAEL_L_09-19.png?itok=NNowQoo1"
   },
   {
@@ -38222,7 +38454,7 @@
     },
     "height": "5'9\"",
     "weightClass": "Featherweight",
-    "statsSyncedAt": "2026-08-24T09:50:49.343Z"
+    "statsSyncedAt": "2026-10-24T13:10:09.830Z"
   },
   {
     "id": "otari-tanzilovi",
@@ -38252,18 +38484,18 @@
       }
     ],
     "stats": {
-      "slpm": "4.20",
-      "strAcc": "68%",
-      "sapm": "4.20",
-      "strDef": "49%",
-      "tdAvg": "4.50",
-      "tdAcc": "36%",
+      "slpm": "4.36",
+      "strAcc": "65%",
+      "sapm": "3.80",
+      "strDef": "53%",
+      "tdAvg": "4.38",
+      "tdAcc": "37%",
       "tdDef": "85%",
       "subAvg": "0.0"
     },
     "height": "5'10\"",
     "weightClass": "Featherweight",
-    "statsSyncedAt": "2026-08-24T09:50:52.143Z"
+    "statsSyncedAt": "2026-10-24T13:10:12.641Z"
   },
   {
     "id": "leon-shahbazyan",
@@ -38374,19 +38606,19 @@
     ],
     "nickname": "S.O.G.",
     "stats": {
-      "slpm": "6.10",
-      "strAcc": "52%",
-      "sapm": "8.45",
-      "strDef": "33%",
-      "tdAvg": "1.41",
-      "tdAcc": "50%",
+      "slpm": "5.15",
+      "strAcc": "51%",
+      "sapm": "10.38",
+      "strDef": "32%",
+      "tdAvg": "1.19",
+      "tdAcc": "25%",
       "tdDef": "0%",
       "subAvg": "0.0"
     },
     "height": "6'4\"",
     "reach": "77.0\"",
     "weightClass": "Welterweight",
-    "statsSyncedAt": "2026-08-24T09:50:54.959Z"
+    "statsSyncedAt": "2026-10-24T13:10:15.263Z"
   },
   {
     "id": "levan-chokheli",
@@ -38419,7 +38651,7 @@
     },
     "height": "6'0\"",
     "weightClass": "Welterweight",
-    "statsSyncedAt": "2026-08-24T09:50:57.344Z"
+    "statsSyncedAt": "2026-10-24T13:10:18.146Z"
   },
   {
     "id": "farman-hasanov",
@@ -38453,12 +38685,20 @@
     },
     "height": "6'0\"",
     "weightClass": "Welterweight",
-    "statsSyncedAt": "2026-08-24T09:51:00.000Z"
+    "statsSyncedAt": "2026-10-24T13:10:21.079Z"
   },
   {
     "id": "abdul-rakhman-yakhyaev",
     "name": "Abdul-Rakhman Yakhyaev",
     "last5": [
+      {
+        "opponent": "Nikita Krylov",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 333: Volkanovski vs. Evloev",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Julius Walker",
         "result": "W",
@@ -38490,12 +38730,12 @@
     "reach": "78.0\"",
     "weightClass": "Light Heavyweight",
     "record": {
-      "wins": 10,
+      "wins": 11,
       "losses": 0,
       "draws": 0
     },
     "nickname": "The Hunter",
-    "statsSyncedAt": "2026-08-24T09:51:02.672Z"
+    "statsSyncedAt": "2026-10-24T13:10:23.860Z"
   },
   {
     "id": "kaan-ofli",
@@ -38538,7 +38778,7 @@
     "height": "5'7\"",
     "reach": "66.0\"",
     "weightClass": "Featherweight",
-    "statsSyncedAt": "2026-08-24T09:51:05.780Z"
+    "statsSyncedAt": "2026-10-24T13:10:26.669Z"
   },
   {
     "id": "javier-reyes",
@@ -38573,7 +38813,7 @@
     "height": "5'7\"",
     "reach": "73.0\"",
     "weightClass": "Featherweight",
-    "statsSyncedAt": "2026-08-24T09:51:08.554Z"
+    "statsSyncedAt": "2026-10-24T13:10:29.255Z"
   },
   {
     "id": "daniil-donchenko",
@@ -38603,19 +38843,19 @@
       }
     ],
     "stats": {
-      "slpm": "8.07",
-      "strAcc": "62%",
-      "sapm": "2.80",
-      "strDef": "70%",
-      "tdAvg": "0.58",
-      "tdAcc": "33%",
-      "tdDef": "75%",
+      "slpm": "7.14",
+      "strAcc": "61%",
+      "sapm": "2.14",
+      "strDef": "73%",
+      "tdAvg": "0.37",
+      "tdAcc": "25%",
+      "tdDef": "66%",
       "subAvg": "0.0"
     },
     "height": "5'11\"",
     "reach": "71.0\"",
     "weightClass": "Welterweight",
-    "statsSyncedAt": "2026-08-24T09:51:11.110Z"
+    "statsSyncedAt": "2026-10-24T13:10:32.070Z"
   },
   {
     "id": "jared-cannonier",
@@ -38722,7 +38962,7 @@
     "height": "5'11\"",
     "reach": "77.5\"",
     "weightClass": "Middleweight",
-    "statsSyncedAt": "2026-08-24T09:51:13.973Z",
+    "statsSyncedAt": "2026-10-24T13:10:35.047Z",
     "nationality": "American",
     "flag": "🇺🇸",
     "ranking": "#11"
@@ -38828,19 +39068,19 @@
     ],
     "nickname": "CLD",
     "stats": {
-      "slpm": "4.45",
+      "slpm": "4.49",
       "strAcc": "57%",
-      "sapm": "2.36",
-      "strDef": "54%",
-      "tdAvg": "0.43",
+      "sapm": "2.34",
+      "strDef": "53%",
+      "tdAvg": "0.35",
       "tdAcc": "20%",
-      "tdDef": "57%",
+      "tdDef": "59%",
       "subAvg": "0.0"
     },
     "height": "6'2\"",
     "reach": "79.0\"",
     "weightClass": "Middleweight",
-    "statsSyncedAt": "2026-08-24T09:51:16.538Z",
+    "statsSyncedAt": "2026-10-24T13:10:37.826Z",
     "nationality": "British",
     "flag": "🇬🇧",
     "ranking": "#10"
@@ -38882,19 +39122,19 @@
       }
     ],
     "stats": {
-      "slpm": "6.89",
+      "slpm": "6.91",
       "strAcc": "67%",
-      "sapm": "2.78",
-      "strDef": "47%",
-      "tdAvg": "7.78",
-      "tdAcc": "91%",
+      "sapm": "2.77",
+      "strDef": "50%",
+      "tdAvg": "7.92",
+      "tdAcc": "85%",
       "tdDef": "100%",
       "subAvg": "0.7"
     },
     "height": "5'10\"",
     "reach": "72.0\"",
     "weightClass": "Welterweight",
-    "statsSyncedAt": "2026-08-24T09:51:19.346Z"
+    "statsSyncedAt": "2026-10-24T13:10:40.589Z"
   },
   {
     "id": "amanda-ribas",
@@ -38961,7 +39201,7 @@
     "height": "5'4\"",
     "reach": "66.0\"",
     "weightClass": "Women's Strawweight",
-    "statsSyncedAt": "2026-08-24T09:51:22.245Z",
+    "statsSyncedAt": "2026-10-24T13:10:43.531Z",
     "nationality": "Brazilian",
     "flag": "🇧🇷",
     "ranking": "#13"
@@ -39032,7 +39272,7 @@
     "height": "5'6\"",
     "reach": "67.0\"",
     "weightClass": "Women's Strawweight",
-    "statsSyncedAt": "2026-08-24T09:51:25.049Z",
+    "statsSyncedAt": "2026-10-24T13:10:46.113Z",
     "nationality": "American",
     "flag": "🇺🇸",
     "ranking": "#6"
@@ -39157,7 +39397,7 @@
     "height": "6'1\"",
     "reach": "74.0\"",
     "weightClass": "Middleweight",
-    "statsSyncedAt": "2026-08-24T09:51:28.043Z"
+    "statsSyncedAt": "2026-10-24T13:10:49.083Z"
   },
   {
     "id": "mitch-ramirez",
@@ -39181,7 +39421,7 @@
     "weightClass": "Lightweight",
     "height": "5'9\"",
     "reach": "70.5\"",
-    "statsSyncedAt": "2026-08-24T09:51:30.753Z"
+    "statsSyncedAt": "2026-10-24T13:10:51.736Z"
   },
   {
     "id": "veronica-hardy",
@@ -39287,7 +39527,7 @@
     "weightClass": "Flyweight",
     "height": "5'3\"",
     "reach": "64\"",
-    "statsSyncedAt": "2026-08-24T09:51:33.348Z"
+    "statsSyncedAt": "2026-10-24T13:10:54.675Z"
   },
   {
     "id": "david-martinez",
@@ -39389,12 +39629,12 @@
       }
     ],
     "stats": {
-      "slpm": "4.82",
-      "strAcc": "46%",
-      "sapm": "2.90",
-      "strDef": "69%",
-      "tdAvg": "0.60",
-      "tdAcc": "25%",
+      "slpm": "4.50",
+      "strAcc": "44%",
+      "sapm": "2.65",
+      "strDef": "71%",
+      "tdAvg": "0.70",
+      "tdAcc": "33%",
       "tdDef": "100%",
       "subAvg": "0.0"
     },
@@ -39402,7 +39642,7 @@
     "weightClass": "Bantamweight",
     "height": "5'5\"",
     "reach": "67.5\"",
-    "statsSyncedAt": "2026-08-24T09:51:36.168Z",
+    "statsSyncedAt": "2026-10-24T13:10:57.452Z",
     "ranking": "#8"
   },
   {
@@ -39428,7 +39668,7 @@
     "weightClass": "Light Heavyweight",
     "height": "6'4\"",
     "reach": "79\"",
-    "statsSyncedAt": "2026-08-24T09:52:01.181Z"
+    "statsSyncedAt": "2026-10-24T13:11:00.342Z"
   },
   {
     "id": "valter-walker",
@@ -39495,7 +39735,7 @@
     "weightClass": "Heavyweight",
     "height": "6'6\"",
     "reach": "78.5\"",
-    "statsSyncedAt": "2026-08-24T09:52:26.157Z",
+    "statsSyncedAt": "2026-10-24T13:11:03.021Z",
     "nationality": "Brazilian",
     "flag": "🇧🇷",
     "ranking": "#11"
@@ -39532,7 +39772,7 @@
     ],
     "weightClass": "Light Heavyweight",
     "height": "6'5\"",
-    "statsSyncedAt": "2026-08-24T09:52:28.944Z"
+    "statsSyncedAt": "2026-10-24T13:11:05.906Z"
   },
   {
     "id": "ramazan-temirov",
@@ -39545,6 +39785,14 @@
     },
     "nickname": "Temurlan",
     "last5": [
+      {
+        "opponent": "Lone'er Kavanagh",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 333: Volkanovski vs. Evloev",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Charles Johnson (fighter)",
         "result": "W",
@@ -39639,7 +39887,7 @@
     "weightClass": "Flyweight",
     "height": "5'4\"",
     "reach": "63\"",
-    "statsSyncedAt": "2026-08-24T09:52:31.741Z",
+    "statsSyncedAt": "2026-10-24T13:11:08.596Z",
     "nationality": "Uzbekistani",
     "flag": "🇺🇿",
     "ranking": "#10"
@@ -39749,7 +39997,7 @@
     "weightClass": "Welterweight",
     "height": "6'3\"",
     "reach": "75\"",
-    "statsSyncedAt": "2026-08-25T09:35:54.473Z"
+    "statsSyncedAt": "2026-10-24T13:11:46.937Z"
   },
   {
     "id": "wellington-turman",
@@ -39856,7 +40104,7 @@
     "weightClass": "Middleweight",
     "height": "6'0\"",
     "reach": "72\"",
-    "statsSyncedAt": "2026-08-25T09:35:57.369Z"
+    "statsSyncedAt": "2026-10-24T13:11:49.846Z"
   },
   {
     "id": "ismael-bonfim",
@@ -39967,19 +40215,19 @@
     ],
     "nickname": "Marreta",
     "stats": {
-      "slpm": "5.10",
+      "slpm": "4.96",
       "strAcc": "54%",
-      "sapm": "3.96",
-      "strDef": "62%",
-      "tdAvg": "1.22",
+      "sapm": "4.08",
+      "strDef": "61%",
+      "tdAvg": "1.14",
       "tdAcc": "33%",
-      "tdDef": "76%",
+      "tdDef": "66%",
       "subAvg": "0.0"
     },
     "weightClass": "Lightweight",
     "height": "5'8\"",
     "reach": "71.5\"",
-    "statsSyncedAt": "2026-08-25T09:36:00.229Z"
+    "statsSyncedAt": "2026-10-24T13:11:52.762Z"
   },
   {
     "id": "axel-sola",
@@ -39991,11 +40239,11 @@
       "draws": 1
     },
     "stats": {
-      "slpm": "4.50",
-      "strAcc": "50%",
-      "sapm": "4.53",
-      "strDef": "61%",
-      "tdAvg": "1.89",
+      "slpm": "4.55",
+      "strAcc": "51%",
+      "sapm": "4.52",
+      "strDef": "60%",
+      "tdAvg": "1.79",
       "tdAcc": "36%",
       "tdDef": "66%",
       "subAvg": "0.5"
@@ -40021,7 +40269,7 @@
     "weightClass": "Lightweight",
     "height": "6'0\"",
     "reach": "74\"",
-    "statsSyncedAt": "2026-08-25T09:36:03.336Z"
+    "statsSyncedAt": "2026-10-24T13:11:55.518Z"
   },
   {
     "id": "uros-medic",
@@ -40125,7 +40373,7 @@
       "tdDef": "55%",
       "subAvg": "0.0"
     },
-    "statsSyncedAt": "2026-08-25T09:36:06.221Z"
+    "statsSyncedAt": "2026-10-24T13:11:58.459Z"
   },
   {
     "id": "daniel-rodriguez",
@@ -40195,7 +40443,7 @@
     "reach": "74\"",
     "nationality": "American",
     "flag": "🇺🇸",
-    "statsSyncedAt": "2026-08-25T09:36:09.169Z",
+    "statsSyncedAt": "2026-10-24T13:12:01.104Z",
     "ranking": "#14"
   },
   {
@@ -40250,7 +40498,7 @@
     "reach": "78\"",
     "nationality": "Croatian",
     "flag": "🇭🇷",
-    "statsSyncedAt": "2026-08-25T09:36:12.001Z",
+    "statsSyncedAt": "2026-10-24T13:12:04.026Z",
     "ranking": "#10"
   },
   {
@@ -40367,7 +40615,7 @@
     "weightClass": "Middleweight",
     "height": "6'1\"",
     "reach": "74\"",
-    "statsSyncedAt": "2026-08-25T09:36:14.940Z"
+    "statsSyncedAt": "2026-10-24T13:12:06.687Z"
   },
   {
     "id": "vlasto-cepo",
@@ -40401,7 +40649,7 @@
     "nickname": "El Chapo",
     "weightClass": "Middleweight",
     "height": "6'1\"",
-    "statsSyncedAt": "2026-08-25T09:36:17.762Z"
+    "statsSyncedAt": "2026-10-24T13:12:09.564Z"
   },
   {
     "id": "gilbert-urbina",
@@ -40445,7 +40693,7 @@
     "weightClass": "Middleweight",
     "height": "5'9\"",
     "reach": "75\"",
-    "statsSyncedAt": "2026-08-25T09:36:20.476Z"
+    "statsSyncedAt": "2026-10-24T13:12:12.381Z"
   },
   {
     "id": "jovan-leka",
@@ -40479,7 +40727,7 @@
     "weightClass": "Heavyweight",
     "height": "6'4\"",
     "reach": "75\"",
-    "statsSyncedAt": "2026-08-25T09:36:23.307Z"
+    "statsSyncedAt": "2026-10-24T13:12:15.104Z"
   },
   {
     "id": "max-gimenis",
@@ -40502,7 +40750,7 @@
     },
     "weightClass": "Heavyweight",
     "height": "6'1\"",
-    "statsSyncedAt": "2026-08-25T09:36:25.947Z"
+    "statsSyncedAt": "2026-10-24T13:12:17.948Z"
   },
   {
     "id": "ludovit-klein",
@@ -40617,7 +40865,7 @@
     "weightClass": "Lightweight",
     "height": "5'7\"",
     "reach": "72.5\"",
-    "statsSyncedAt": "2026-08-25T09:36:28.477Z"
+    "statsSyncedAt": "2026-10-24T13:12:20.865Z"
   },
   {
     "id": "josias-musasa",
@@ -40642,7 +40890,7 @@
     "height": "5'8\"",
     "reach": "74.0\"",
     "weightClass": "Bantamweight",
-    "statsSyncedAt": "2026-08-25T09:36:31.324Z"
+    "statsSyncedAt": "2026-10-24T13:12:23.485Z"
   },
   {
     "id": "bogdan-grad",
@@ -45433,6 +45681,14 @@
     },
     "last5": [
       {
+        "opponent": "Jacob Malkoun",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 333: Volkanovski vs. Evloev",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Saygid Izagakhmaev",
         "result": "W",
         "method": "Decision (unanimous)",
@@ -46199,6 +46455,14 @@
       "subAvg": "11.1"
     },
     "last5": [
+      {
+        "opponent": "Kody Steele",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 333: Volkanovski vs. Evloev",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Milos Janicic",
         "result": "W",
@@ -48708,6 +48972,14 @@
     },
     "last5": [
       {
+        "opponent": "Aaron Pico",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 333: Volkanovski vs. Evloev",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Muhammad Naimov",
         "result": "W",
         "method": "KO/TKO",
@@ -49689,6 +49961,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Cam Rowston",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC 333: Volkanovski vs. Evloev",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Michel Pereira",
         "result": "W",
@@ -50781,16 +51061,16 @@
     "name": "Chad Anheliger",
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-10/ANHELIGER_CHAD_L_11-02.png?itok=ezY1YMKO",
     "stats": {
-      "slpm": "3.11",
-      "strAcc": "46%",
-      "sapm": "2.76",
-      "strDef": "53%",
-      "tdAvg": "0.68",
+      "slpm": "3.00",
+      "strAcc": "47%",
+      "sapm": "2.87",
+      "strDef": "52%",
+      "tdAvg": "0.58",
       "tdAcc": "30%",
-      "tdDef": "38%",
-      "subAvg": "0.5"
+      "tdDef": "34%",
+      "subAvg": "0.4"
     },
-    "statsSyncedAt": "2026-08-25T09:35:18.472Z",
+    "statsSyncedAt": "2026-10-24T13:11:11.082Z",
     "record": {
       "wins": 13,
       "losses": 9,
@@ -50813,16 +51093,16 @@
     "name": "Steven Koslow",
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-01/KOSLOW_STEVEN_L_12-10.png?itok=pqAG6P4G",
     "stats": {
-      "slpm": "0.77",
-      "strAcc": "37%",
-      "sapm": "3.73",
-      "strDef": "40%",
-      "tdAvg": "5.28",
-      "tdAcc": "55%",
+      "slpm": "2.16",
+      "strAcc": "52%",
+      "sapm": "3.03",
+      "strDef": "41%",
+      "tdAvg": "4.70",
+      "tdAcc": "69%",
       "tdDef": "0%",
-      "subAvg": "1.1"
+      "subAvg": "1.6"
     },
-    "statsSyncedAt": "2026-08-25T09:35:21.316Z",
+    "statsSyncedAt": "2026-10-24T13:11:13.855Z",
     "record": {
       "wins": 7,
       "losses": 1,
@@ -50864,9 +51144,9 @@
     "bio": "Michael Morales is an undefeated Ecuadorean welterweight contender known for his sharp striking. He picked up a first-round TKO over Sean Brady at UFC 322, extending his unbeaten record and cementing his spot in the welterweight top 5.",
     "last5": [
       {
-        "opponent": "Sean Brady",
+        "opponent": "Sean Brady (fighter)",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "TKO (punches)",
         "event": "UFC 322",
         "round": 1,
         "time": "3:27"
@@ -50874,24 +51154,24 @@
       {
         "opponent": "Gilbert Burns",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: May. 17, 2025",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Burns vs. Morales",
         "round": 1,
         "time": "3:39"
       },
       {
         "opponent": "Neil Magny",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Aug. 24, 2024",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Cannonier vs. Borralho",
         "round": 1,
         "time": "4:39"
       },
       {
-        "opponent": "Jake Matthews",
+        "opponent": "Jake Matthews (fighter)",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Nov. 18, 2023",
+        "event": "UFC Fight Night: Allen vs. Craig",
         "round": 3,
         "time": "5:00"
       },
@@ -50899,9 +51179,49 @@
         "opponent": "Max Griffin",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Jul. 1, 2023",
+        "event": "UFC on ESPN: Strickland vs. Magomedov",
         "round": 3,
         "time": "5:00"
+      },
+      {
+        "opponent": "Adam Fugitt",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC 277",
+        "round": 3,
+        "time": "1:09"
+      },
+      {
+        "opponent": "Trevin Giles",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC 270",
+        "round": 1,
+        "time": "4:06"
+      },
+      {
+        "opponent": "Nikolay Veretennikov",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Dana White's Contender Series (season 5)#Week 4 - September 21",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Miguel Arizmendi",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UWC Mexico 26",
+        "round": 2,
+        "time": "4:02"
+      },
+      {
+        "opponent": "Ricardo Centeno",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "Extreme MMA 17",
+        "round": 1,
+        "time": "4:15"
       }
     ],
     "stats": {
@@ -50914,7 +51234,7 @@
       "tdDef": "89%",
       "subAvg": "0.0"
     },
-    "statsSyncedAt": "2026-08-25T09:35:24.035Z"
+    "statsSyncedAt": "2026-10-24T13:11:16.618Z"
   },
   {
     "id": "tagir-ulanbekov",
@@ -50988,7 +51308,7 @@
       "tdDef": "63%",
       "subAvg": "1.5"
     },
-    "statsSyncedAt": "2026-08-25T09:35:26.570Z",
+    "statsSyncedAt": "2026-10-24T13:11:19.601Z",
     "ranking": "#14"
   },
   {
@@ -51063,7 +51383,7 @@
       "tdDef": "52%",
       "subAvg": "0.5"
     },
-    "statsSyncedAt": "2026-08-25T09:35:29.286Z",
+    "statsSyncedAt": "2026-10-24T13:11:22.557Z",
     "ranking": "#14"
   },
   {
@@ -51282,7 +51602,7 @@
       "tdDef": "84%",
       "subAvg": "0.0"
     },
-    "statsSyncedAt": "2026-08-25T09:35:32.393Z",
+    "statsSyncedAt": "2026-10-24T13:11:25.084Z",
     "ranking": "#9"
   },
   {
@@ -51357,7 +51677,7 @@
       "tdDef": "75%",
       "subAvg": "0.3"
     },
-    "statsSyncedAt": "2026-08-25T09:35:35.265Z",
+    "statsSyncedAt": "2026-10-24T13:11:27.781Z",
     "ranking": "#10"
   },
   {
@@ -51472,7 +51792,7 @@
       "tdDef": "80%",
       "subAvg": "0.0"
     },
-    "statsSyncedAt": "2026-08-25T09:35:37.974Z",
+    "statsSyncedAt": "2026-10-24T13:11:30.538Z",
     "ranking": "#15"
   },
   {
@@ -51547,7 +51867,7 @@
       "tdDef": "45%",
       "subAvg": "0.4"
     },
-    "statsSyncedAt": "2026-08-25T09:35:40.472Z",
+    "statsSyncedAt": "2026-10-24T13:11:33.090Z",
     "ranking": "#10"
   },
   {
@@ -51621,16 +51941,16 @@
       }
     ],
     "stats": {
-      "slpm": "2.88",
-      "strAcc": "56%",
-      "sapm": "1.58",
+      "slpm": "2.82",
+      "strAcc": "54%",
+      "sapm": "1.79",
       "strDef": "56%",
-      "tdAvg": "4.90",
-      "tdAcc": "49%",
-      "tdDef": "72%",
-      "subAvg": "0.2"
+      "tdAvg": "4.34",
+      "tdAcc": "45%",
+      "tdDef": "66%",
+      "subAvg": "0.1"
     },
-    "statsSyncedAt": "2026-08-25T09:35:43.351Z",
+    "statsSyncedAt": "2026-10-24T13:11:35.680Z",
     "ranking": "#5"
   },
   {
@@ -51745,7 +52065,7 @@
       "tdDef": "51%",
       "subAvg": "0.1"
     },
-    "statsSyncedAt": "2026-08-25T09:35:46.072Z",
+    "statsSyncedAt": "2026-10-24T13:11:38.650Z",
     "ranking": "#6"
   },
   {
@@ -51860,7 +52180,7 @@
       "tdDef": "62%",
       "subAvg": "0.4"
     },
-    "statsSyncedAt": "2026-08-25T09:35:48.752Z",
+    "statsSyncedAt": "2026-10-24T13:11:41.269Z",
     "ranking": "#8"
   },
   {
@@ -51935,7 +52255,7 @@
       "tdDef": "56%",
       "subAvg": "1.2"
     },
-    "statsSyncedAt": "2026-08-25T09:35:51.664Z",
+    "statsSyncedAt": "2026-10-24T13:11:44.053Z",
     "ranking": "#14"
   },
   {
@@ -54451,7 +54771,17 @@
       "draws": 0
     },
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
-    "nickname": "The Honey Badger"
+    "nickname": "The Honey Badger",
+    "last5": [
+      {
+        "opponent": "Colby Thicknesse",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 333: Volkanovski vs. Evloev",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "piera-rodriguez",
@@ -54934,6 +55264,14 @@
     },
     "last5": [
       {
+        "opponent": "Nicolle Caliari",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 333: Volkanovski vs. Evloev",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Angela Hill",
         "result": "W",
         "method": "Decision (unanimous)",
@@ -55047,6 +55385,16 @@
       "losses": 4,
       "draws": 0
     },
-    "nickname": "Zulu Warrior"
+    "nickname": "Zulu Warrior",
+    "last5": [
+      {
+        "opponent": "Daniel Santos",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 333: Volkanovski vs. Evloev",
+        "round": null,
+        "time": null
+      }
+    ]
   }
 ]
