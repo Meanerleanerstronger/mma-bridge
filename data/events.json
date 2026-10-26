@@ -15505,7 +15505,7 @@
         "weight": "Lightweight",
         "rounds": "5 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/MOICANO_RENATO_L_04-04.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-09/NOLAN_TOM_L_09-27.png"
@@ -15518,8 +15518,8 @@
         "titleFight": false,
         "ranked": false,
         "slot": "comain",
-        "imgA": "",
-        "imgB": ""
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-04/BROWN_RANDY_L_04-26.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/SMITH_JACOBE_L_02-21.png"
       },
       {
         "a": "Ode' Osbourne",
@@ -15527,22 +15527,10 @@
         "weight": "Flyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/OSBOURNE_ODE_L_02-21.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/DURDEN_CODY_L_03-07.png"
-      },
-      {
-        "a": "Randy Brown",
-        "b": "Carlos Leal",
-        "weight": "Welterweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-04/BROWN_RANDY_L_04-26.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-11/LEAL_CARLOS_L_10-26.png",
-        "cancelled": true
       },
       {
         "a": "Yana Santos",
@@ -15565,17 +15553,6 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/LEBOSNOYANI_JEAN-PAUL_R_02-21.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/HASANOV_FARMAN_L_06-27.png"
-      },
-      {
-        "a": "Francis Marshall",
-        "b": "Dakota Hope",
-        "weight": "Featherweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/MARSHALL_FRANCIS_L_04-25.png",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/HOPE_DAKOTA_R_04-04.png?itok=sMKQySli"
       }
     ],
     "prelims": [
@@ -15589,17 +15566,6 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/ALENCAR_TALITA_L_04-25.png",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/RODRIGUEZ_PIERA_L_03-14.png?itok=UDMKBpY8"
-      },
-      {
-        "a": "Azamat Bekoev",
-        "b": "Andre Petroski",
-        "weight": "Middleweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/BEKOEV_AZAMAT_L_04-04.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-12/3/PETROSKI_ANDRE_L_09-07.png"
       },
       {
         "a": "Rodrigo Sezinando",
@@ -15644,11 +15610,9 @@
         "slot": "comain",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/2022-02/womens-silhouette-RED-corner.png?itok=SXsY1AgG",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/LISBOA_TAINARA_L_10-14.png?itok=ibBAzJ5i"
-      }
-    ],
-    "earlyPrelims": [
+      },
       {
-        "a": "Zach Reese",
+        "a": "Zachary Reese",
         "b": "Mickey Gall",
         "weight": "Middleweight",
         "rounds": "3 Rds",
@@ -15657,14 +15621,32 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/REESE_ZACH_L_02-21.png",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-11/GALL_MICKEY_L_11-16.png?itok=tlDNrYh3"
+      },
+      {
+        "a": "Francis Marshall",
+        "b": "Dakota Hope",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/MARSHALL_FRANCIS_L_04-25.png",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/HOPE_DAKOTA_R_04-04.png?itok=sMKQySli"
       }
     ],
+    "earlyPrelims": [],
     "droppedFights": [
       {
         "a": "Renato Moicano",
         "b": "Tom Nolan",
         "reason": "removed from the card",
         "droppedAt": "2026-10-22T18:13:57.874Z"
+      },
+      {
+        "a": "Azamat Bekoev",
+        "b": "Andre Petroski",
+        "reason": "removed from the card",
+        "droppedAt": "2026-10-26T23:29:48.740Z"
       }
     ]
   },
@@ -15954,17 +15936,6 @@
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/CHIASSON_MACY_L_10-04.png?itok=BRfzm0GS",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/MESQUITA_BIA_L_10-11.png"
-      },
-      {
-        "a": "Jared Gordon",
-        "b": "Melquizael Costa",
-        "weight": "Lightweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "",
-        "imgB": ""
       }
     ],
     "droppedFights": [
@@ -16175,7 +16146,7 @@
     "venue": "",
     "poster": "",
     "status": "upcoming",
-    "start_time": null,
+    "start_time": "2027-01-31T02:00:00.000Z",
     "mainCard": [
       {
         "a": "Joshua Van",
@@ -16183,7 +16154,7 @@
         "weight": "Flyweight",
         "rounds": "5 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/VAN_JOSHUA_L_BELTMOCK.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/KAPE_MANEL_L_06-20.png"
@@ -16194,7 +16165,7 @@
         "weight": "Welterweight",
         "rounds": "5 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "comain",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/PRATES_CARLOS_L_08-17.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/5/MORALES_MICHAEL_L_08-24.png"
