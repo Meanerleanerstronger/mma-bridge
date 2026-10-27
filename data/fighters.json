@@ -33221,8 +33221,8 @@
     "name": "Jared Gordon",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/GORDON_JARED_L_05-17.png",
     "record": {
-      "wins": 21,
-      "losses": 9,
+      "wins": 19,
+      "losses": 6,
       "draws": 0
     },
     "last5": [
@@ -33847,7 +33847,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/COSTA_MELQUIZAEL_L_12-13.png",
     "record": {
       "wins": 26,
-      "losses": 7,
+      "losses": 8,
       "draws": 0
     },
     "last5": [
@@ -33855,23 +33855,23 @@
         "opponent": "Arnold Allen",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: May. 16, 2026",
+        "event": "UFC Fight Night: Allen vs. Costa",
         "round": 5,
         "time": "5:00"
       },
       {
         "opponent": "Dan Ige",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Feb. 21, 2026",
+        "method": "TKO (spinning back kick and punches)",
+        "event": "UFC Fight Night: Strickland vs. Hernandez",
         "round": 1,
         "time": "4:56"
       },
       {
-        "opponent": "Morgan Charriere",
+        "opponent": "Morgan Charrière",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Dec. 13, 2025",
+        "method": "KO (head kick)",
+        "event": "UFC on ESPN: Royval vs. Kape",
         "round": 1,
         "time": "1:14"
       },
@@ -33879,7 +33879,7 @@
         "opponent": "Julian Erosa",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: May. 17, 2025",
+        "event": "UFC Fight Night: Burns vs. Morales",
         "round": 3,
         "time": "5:00"
       },
@@ -33887,9 +33887,49 @@
         "opponent": "Christian Rodriguez",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Mar. 29, 2025",
+        "event": "UFC on ESPN: Moreno vs. Erceg",
         "round": 3,
         "time": "5:00"
+      },
+      {
+        "opponent": "Andre Fili",
+        "result": "W",
+        "method": "Submission (guillotine choke)",
+        "event": "UFC Fight Night: Cejudo vs. Song",
+        "round": 1,
+        "time": "4:30"
+      },
+      {
+        "opponent": "Shayilan Nuerdanbieke",
+        "result": "W",
+        "method": "Submission (face crank)",
+        "event": "UFC on ESPN: Perez vs. Taira",
+        "round": 3,
+        "time": "1:50"
+      },
+      {
+        "opponent": "Steve Garcia",
+        "result": "L",
+        "method": "KO (elbows)",
+        "event": "UFC Fight Night: Song vs. Gutiérrez",
+        "round": 2,
+        "time": "1:01"
+      },
+      {
+        "opponent": "Austin Lingo",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Holm vs. Bueno Silva",
+        "round": 3,
+        "time": "5:09"
+      },
+      {
+        "opponent": "Thiago Moisés",
+        "result": "L",
+        "method": "Submission (face crank)",
+        "event": "UFC 283",
+        "round": 2,
+        "time": "4:05"
       }
     ],
     "nickname": "The Dalmatian",

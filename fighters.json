@@ -33221,8 +33221,8 @@
     "name": "Jared Gordon",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/GORDON_JARED_L_05-17.png",
     "record": {
-      "wins": 21,
-      "losses": 9,
+      "wins": 19,
+      "losses": 6,
       "draws": 0
     },
     "last5": [
@@ -33847,7 +33847,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/COSTA_MELQUIZAEL_L_12-13.png",
     "record": {
       "wins": 26,
-      "losses": 7,
+      "losses": 8,
       "draws": 0
     },
     "last5": [
@@ -33855,23 +33855,23 @@
         "opponent": "Arnold Allen",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: May. 16, 2026",
+        "event": "UFC Fight Night: Allen vs. Costa",
         "round": 5,
         "time": "5:00"
       },
       {
         "opponent": "Dan Ige",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Feb. 21, 2026",
+        "method": "TKO (spinning back kick and punches)",
+        "event": "UFC Fight Night: Strickland vs. Hernandez",
         "round": 1,
         "time": "4:56"
       },
       {
-        "opponent": "Morgan Charriere",
+        "opponent": "Morgan Charrière",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Dec. 13, 2025",
+        "method": "KO (head kick)",
+        "event": "UFC on ESPN: Royval vs. Kape",
         "round": 1,
         "time": "1:14"
       },
@@ -33879,7 +33879,7 @@
         "opponent": "Julian Erosa",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: May. 17, 2025",
+        "event": "UFC Fight Night: Burns vs. Morales",
         "round": 3,
         "time": "5:00"
       },
@@ -33887,9 +33887,49 @@
         "opponent": "Christian Rodriguez",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Mar. 29, 2025",
+        "event": "UFC on ESPN: Moreno vs. Erceg",
         "round": 3,
         "time": "5:00"
+      },
+      {
+        "opponent": "Andre Fili",
+        "result": "W",
+        "method": "Submission (guillotine choke)",
+        "event": "UFC Fight Night: Cejudo vs. Song",
+        "round": 1,
+        "time": "4:30"
+      },
+      {
+        "opponent": "Shayilan Nuerdanbieke",
+        "result": "W",
+        "method": "Submission (face crank)",
+        "event": "UFC on ESPN: Perez vs. Taira",
+        "round": 3,
+        "time": "1:50"
+      },
+      {
+        "opponent": "Steve Garcia",
+        "result": "L",
+        "method": "KO (elbows)",
+        "event": "UFC Fight Night: Song vs. Gutiérrez",
+        "round": 2,
+        "time": "1:01"
+      },
+      {
+        "opponent": "Austin Lingo",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Holm vs. Bueno Silva",
+        "round": 3,
+        "time": "5:09"
+      },
+      {
+        "opponent": "Thiago Moisés",
+        "result": "L",
+        "method": "Submission (face crank)",
+        "event": "UFC 283",
+        "round": 2,
+        "time": "4:05"
       }
     ],
     "nickname": "The Dalmatian",
@@ -45349,19 +45389,19 @@
     ],
     "nickname": "Venom",
     "stats": {
-      "slpm": "2.28",
-      "strAcc": "58%",
-      "sapm": "1.51",
-      "strDef": "62%",
-      "tdAvg": "0.19",
-      "tdAcc": "16%",
-      "tdDef": "70%",
-      "subAvg": "0.0"
+      "slpm": "2.04",
+      "strAcc": "56%",
+      "sapm": "1.36",
+      "strDef": "63%",
+      "tdAvg": "0.16",
+      "tdAcc": "12%",
+      "tdDef": "65%",
+      "subAvg": "0.2"
     },
     "weightClass": "Middleweight",
     "height": "6'3\"",
     "reach": "79.0\"",
-    "statsSyncedAt": "2026-08-26T09:42:10.661Z"
+    "statsSyncedAt": "2026-10-26T15:54:24.062Z"
   },
   {
     "id": "kurtis-campbell",
@@ -45374,19 +45414,19 @@
     },
     "nickname": "The Pink Panther",
     "stats": {
-      "slpm": "3.50",
-      "strAcc": "48%",
-      "sapm": "2.63",
-      "strDef": "51%",
-      "tdAvg": "8.76",
-      "tdAcc": "40%",
+      "slpm": "3.41",
+      "strAcc": "61%",
+      "sapm": "1.50",
+      "strDef": "58%",
+      "tdAvg": "12.77",
+      "tdAcc": "50%",
       "tdDef": "50%",
-      "subAvg": "0.0"
+      "subAvg": "0.8"
     },
     "weightClass": "Featherweight",
     "height": "5'9\"",
     "reach": "72.0\"",
-    "statsSyncedAt": "2026-08-26T09:42:13.428Z",
+    "statsSyncedAt": "2026-10-26T15:54:26.896Z",
     "last5": [
       {
         "opponent": "Trevor Peek",
@@ -45408,19 +45448,19 @@
       "draws": 0
     },
     "stats": {
-      "slpm": "4.39",
-      "strAcc": "53%",
-      "sapm": "3.88",
-      "strDef": "43%",
-      "tdAvg": "1.45",
+      "slpm": "3.86",
+      "strAcc": "52%",
+      "sapm": "3.80",
+      "strDef": "41%",
+      "tdAvg": "1.23",
       "tdAcc": "50%",
-      "tdDef": "52%",
+      "tdDef": "50%",
       "subAvg": "0.0"
     },
     "weightClass": "Featherweight",
     "height": "5'9\"",
     "reach": "70.0\"",
-    "statsSyncedAt": "2026-08-26T09:42:16.094Z",
+    "statsSyncedAt": "2026-10-26T15:54:29.830Z",
     "last5": [
       {
         "opponent": "Kurtis Campbell",
@@ -45658,7 +45698,7 @@
     "weightClass": "Bantamweight",
     "height": "5'10\"",
     "reach": "71.0\"",
-    "statsSyncedAt": "2026-08-26T09:42:19.028Z"
+    "statsSyncedAt": "2026-10-26T15:54:32.742Z"
   },
   {
     "id": "abubakar-vagaev",
@@ -45670,13 +45710,13 @@
       "draws": 0
     },
     "stats": {
-      "slpm": "1.80",
-      "strAcc": "38%",
-      "sapm": "2.20",
-      "strDef": "60%",
-      "tdAvg": "4.00",
-      "tdAcc": "40%",
-      "tdDef": "71%",
+      "slpm": "3.27",
+      "strAcc": "46%",
+      "sapm": "4.63",
+      "strDef": "51%",
+      "tdAvg": "5.00",
+      "tdAcc": "45%",
+      "tdDef": "81%",
       "subAvg": "0.0"
     },
     "last5": [
@@ -45699,7 +45739,7 @@
     ],
     "weightClass": "Welterweight",
     "height": "6'0\"",
-    "statsSyncedAt": "2026-08-26T09:42:21.863Z"
+    "statsSyncedAt": "2026-10-26T15:54:35.622Z"
   },
   {
     "id": "saygid-izagakhmaev",
@@ -45733,7 +45773,7 @@
     "weightClass": "Welterweight",
     "height": "6'0\"",
     "reach": "74.5\"",
-    "statsSyncedAt": "2026-08-26T09:42:24.753Z"
+    "statsSyncedAt": "2026-10-26T15:54:38.388Z"
   },
   {
     "id": "abdul-hussein",
@@ -45767,7 +45807,7 @@
     ],
     "weightClass": "Bantamweight",
     "height": "5'5\"",
-    "statsSyncedAt": "2026-08-26T09:42:27.365Z"
+    "statsSyncedAt": "2026-10-26T15:54:41.063Z"
   },
   {
     "id": "muhammad-saidov",
@@ -45790,7 +45830,7 @@
       "draws": 0
     },
     "nickname": "Kubik",
-    "statsSyncedAt": "2026-08-26T09:42:30.178Z"
+    "statsSyncedAt": "2026-10-26T15:54:43.752Z"
   },
   {
     "id": "salahdine-parnasse",
@@ -45891,10 +45931,10 @@
       }
     ],
     "stats": {
-      "slpm": "0.00",
-      "strAcc": "0%",
-      "sapm": "0.00",
-      "strDef": "0%",
+      "slpm": "4.65",
+      "strAcc": "70%",
+      "sapm": "5.42",
+      "strDef": "54%",
       "tdAvg": "0.00",
       "tdAcc": "0%",
       "tdDef": "0%",
@@ -45902,7 +45942,7 @@
     },
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png",
     "weightClass": "Lightweight",
-    "statsSyncedAt": "2026-08-26T09:42:32.911Z",
+    "statsSyncedAt": "2026-10-26T15:54:46.630Z",
     "nickname": "Lion of Atlas"
   },
   {
@@ -45910,14 +45950,14 @@
     "name": "Nathaniel Wood",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/WOOD_NATHANIEL_L_10-25.png",
     "stats": {
-      "slpm": "5.64",
-      "strAcc": "51%",
-      "sapm": "4.25",
+      "slpm": "5.36",
+      "strAcc": "50%",
+      "sapm": "4.19",
       "strDef": "54%",
-      "tdAvg": "1.35",
+      "tdAvg": "1.25",
       "tdAcc": "48%",
-      "tdDef": "73%",
-      "subAvg": "0.5"
+      "tdDef": "75%",
+      "subAvg": "0.4"
     },
     "record": {
       "wins": 23,
@@ -46010,7 +46050,7 @@
     "weightClass": "Featherweight",
     "height": "5'6\"",
     "reach": "69.0\"",
-    "statsSyncedAt": "2026-08-26T09:42:35.840Z"
+    "statsSyncedAt": "2026-10-26T15:54:49.556Z"
   },
   {
     "id": "mairon-santos",
@@ -46025,21 +46065,21 @@
       "tdDef": "69%",
       "subAvg": "0.0"
     },
-    "statsSyncedAt": "2026-08-26T09:42:38.841Z"
+    "statsSyncedAt": "2026-10-26T15:54:52.289Z"
   },
   {
     "id": "morgan-charriere",
     "name": "Morgan Charrière",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-09/CHARRIERE_MORGAN_L_09-28.png",
     "stats": {
-      "slpm": "4.02",
-      "strAcc": "50%",
-      "sapm": "4.51",
-      "strDef": "53%",
-      "tdAvg": "2.06",
-      "tdAcc": "46%",
-      "tdDef": "83%",
-      "subAvg": "0.3"
+      "slpm": "3.65",
+      "strAcc": "43%",
+      "sapm": "5.18",
+      "strDef": "52%",
+      "tdAvg": "1.59",
+      "tdAcc": "38%",
+      "tdDef": "71%",
+      "subAvg": "0.5"
     },
     "record": {
       "wins": 21,
@@ -46050,7 +46090,7 @@
     "weightClass": "Featherweight",
     "height": "5'8\"",
     "reach": "69\"",
-    "statsSyncedAt": "2026-08-26T09:42:41.737Z",
+    "statsSyncedAt": "2026-10-26T15:54:55.064Z",
     "last5": [
       {
         "opponent": "Felipe Lima",
@@ -46067,14 +46107,14 @@
     "name": "Felipe Lima",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-12/LIMA_FELIPE_L_06-22.png",
     "stats": {
-      "slpm": "2.86",
-      "strAcc": "45%",
-      "sapm": "2.91",
-      "strDef": "64%",
-      "tdAvg": "2.18",
-      "tdAcc": "27%",
-      "tdDef": "85%",
-      "subAvg": "0.7"
+      "slpm": "4.09",
+      "strAcc": "47%",
+      "sapm": "2.77",
+      "strDef": "67%",
+      "tdAvg": "2.13",
+      "tdAcc": "33%",
+      "tdDef": "90%",
+      "subAvg": "0.5"
     },
     "record": {
       "wins": 15,
@@ -46175,7 +46215,7 @@
     "weightClass": "Bantamweight",
     "height": "5'6\"",
     "reach": "68\"",
-    "statsSyncedAt": "2026-08-26T09:42:44.664Z"
+    "statsSyncedAt": "2026-10-26T15:54:57.857Z"
   },
   {
     "id": "mateusz-r-becki",
@@ -46289,7 +46329,7 @@
     "weightClass": "Lightweight",
     "height": "5'7\"",
     "reach": "66\"",
-    "statsSyncedAt": "2026-08-26T09:42:47.578Z"
+    "statsSyncedAt": "2026-10-26T15:55:00.781Z"
   },
   {
     "id": "kyle-prepolec",
@@ -46404,7 +46444,7 @@
     "weightClass": "Lightweight",
     "height": "5'9\"",
     "reach": "70\"",
-    "statsSyncedAt": "2026-08-26T09:42:50.181Z"
+    "statsSyncedAt": "2026-10-26T15:55:03.888Z"
   },
   {
     "id": "milos-janicic",
@@ -46439,20 +46479,20 @@
     "weightClass": "Lightweight",
     "height": "5'11\"",
     "reach": "72.8\"",
-    "statsSyncedAt": "2026-08-26T09:42:53.071Z"
+    "statsSyncedAt": "2026-10-26T15:55:06.449Z"
   },
   {
     "id": "noah-gugnon",
     "name": "Noah Gugnon",
     "stats": {
-      "slpm": "3.70",
-      "strAcc": "45%",
-      "sapm": "4.44",
-      "strDef": "68%",
+      "slpm": "6.86",
+      "strAcc": "52%",
+      "sapm": "5.90",
+      "strDef": "56%",
       "tdAvg": "0.00",
       "tdAcc": "0%",
-      "tdDef": "0%",
-      "subAvg": "11.1"
+      "tdDef": "66%",
+      "subAvg": "2.9"
     },
     "last5": [
       {
@@ -46480,7 +46520,7 @@
     },
     "weightClass": "Lightweight",
     "height": "5'10\"",
-    "statsSyncedAt": "2026-08-26T09:42:55.955Z"
+    "statsSyncedAt": "2026-10-26T15:55:09.066Z"
   },
   {
     "id": "marina-spasic",
@@ -46513,7 +46553,7 @@
     },
     "nickname": "Maki Beki",
     "height": "5'4\"",
-    "statsSyncedAt": "2026-08-26T09:42:58.804Z"
+    "statsSyncedAt": "2026-10-26T15:55:11.881Z"
   },
   {
     "id": "stephanie-luciano",
@@ -46538,7 +46578,7 @@
         "time": null
       }
     ],
-    "statsSyncedAt": "2026-08-26T09:43:01.909Z"
+    "statsSyncedAt": "2026-10-26T15:55:14.934Z"
   },
   {
     "id": "yair-rodriguez",
@@ -46614,7 +46654,7 @@
       "tdDef": "59%",
       "subAvg": "0.6"
     },
-    "statsSyncedAt": "2026-08-26T09:43:04.894Z"
+    "statsSyncedAt": "2026-10-26T15:55:17.892Z"
   },
   {
     "id": "ty-miller",
@@ -46649,7 +46689,7 @@
     ],
     "height": "6'2\"",
     "reach": "77.5\"",
-    "statsSyncedAt": "2026-08-26T09:43:07.741Z"
+    "statsSyncedAt": "2026-10-26T15:55:20.658Z"
   },
   {
     "id": "billy-ray-goff",
@@ -46676,7 +46716,7 @@
         "time": null
       }
     ],
-    "statsSyncedAt": "2026-08-26T09:43:10.194Z"
+    "statsSyncedAt": "2026-10-26T15:55:23.066Z"
   },
   {
     "id": "diego-ferreira",
@@ -46790,7 +46830,7 @@
     ],
     "height": "5'9\"",
     "reach": "74\"",
-    "statsSyncedAt": "2026-08-26T09:43:13.135Z"
+    "statsSyncedAt": "2026-10-26T15:55:25.839Z"
   },
   {
     "id": "billy-quarantillo",
@@ -46904,7 +46944,7 @@
     ],
     "height": "5'10\"",
     "reach": "70\"",
-    "statsSyncedAt": "2026-08-26T09:43:16.075Z"
+    "statsSyncedAt": "2026-10-26T15:55:28.605Z"
   },
   {
     "id": "darren-elkins",
@@ -47020,7 +47060,7 @@
     "height": "5'10\"",
     "reach": "71\"",
     "stance": "Orthodox",
-    "statsSyncedAt": "2026-08-26T09:43:19.534Z"
+    "statsSyncedAt": "2026-10-26T15:55:31.069Z"
   },
   {
     "id": "steven-asplund",
@@ -47055,7 +47095,7 @@
     ],
     "height": "6'5\"",
     "reach": "78\"",
-    "statsSyncedAt": "2026-08-26T09:43:22.640Z"
+    "statsSyncedAt": "2026-10-26T15:55:33.824Z"
   },
   {
     "id": "ravena-oliveira",
@@ -47088,7 +47128,7 @@
         "time": null
       }
     ],
-    "statsSyncedAt": "2026-08-26T09:43:25.190Z"
+    "statsSyncedAt": "2026-10-26T15:55:36.581Z"
   },
   {
     "id": "alexia-thainara",
@@ -47149,7 +47189,7 @@
     ],
     "height": "5'4\"",
     "reach": "67\"",
-    "statsSyncedAt": "2026-08-26T09:43:28.058Z",
+    "statsSyncedAt": "2026-10-26T15:55:39.069Z",
     "ranking": "#9"
   },
   {
@@ -47173,12 +47213,12 @@
     "name": "Muslim Salikhov",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/SALIKHOV_MUSLIM_L_11-08.png",
     "stats": {
-      "slpm": "3.37",
+      "slpm": "3.31",
       "strAcc": "49%",
-      "sapm": "2.96",
-      "strDef": "62%",
-      "tdAvg": "1.07",
-      "tdAcc": "32%",
+      "sapm": "3.20",
+      "strDef": "60%",
+      "tdAvg": "1.27",
+      "tdAcc": "33%",
       "tdDef": "72%",
       "subAvg": "0.0"
     },
@@ -47281,7 +47321,7 @@
     "weightClass": "Welterweight",
     "height": "5'11\"",
     "reach": "70\"",
-    "statsSyncedAt": "2026-08-26T09:43:30.981Z"
+    "statsSyncedAt": "2026-10-26T15:55:42.032Z"
   },
   {
     "id": "sean-sharaf",
@@ -47294,11 +47334,11 @@
     },
     "nickname": "The Smoke",
     "stats": {
-      "slpm": "7.41",
-      "strAcc": "43%",
-      "sapm": "15.00",
+      "slpm": "7.50",
+      "strAcc": "44%",
+      "sapm": "14.88",
       "strDef": "42%",
-      "tdAvg": "0.93",
+      "tdAvg": "0.92",
       "tdAcc": "11%",
       "tdDef": "0%",
       "subAvg": "0.0"
@@ -47306,7 +47346,7 @@
     "weightClass": "Heavyweight",
     "height": "6'2\"",
     "reach": "76\"",
-    "statsSyncedAt": "2026-08-26T09:43:33.606Z",
+    "statsSyncedAt": "2026-10-26T15:55:44.925Z",
     "last5": [
       {
         "opponent": "Gable Steveson",
@@ -47419,19 +47459,19 @@
       }
     ],
     "stats": {
-      "slpm": "2.11",
-      "strAcc": "59%",
-      "sapm": "2.54",
-      "strDef": "46%",
-      "tdAvg": "0.00",
-      "tdAcc": "0%",
-      "tdDef": "50%",
+      "slpm": "2.08",
+      "strAcc": "53%",
+      "sapm": "2.38",
+      "strDef": "49%",
+      "tdAvg": "0.66",
+      "tdAcc": "100%",
+      "tdDef": "61%",
       "subAvg": "0.0"
     },
     "height": "6'7\"",
     "reach": "84.0\"",
     "weightClass": "Heavyweight",
-    "statsSyncedAt": "2026-08-26T09:43:36.195Z"
+    "statsSyncedAt": "2026-10-26T15:55:47.751Z"
   },
   {
     "id": "joel-lvarez",
@@ -47545,21 +47585,21 @@
     "nickname": "El Fenomeno",
     "height": "6'3\"",
     "reach": "77.0\"",
-    "statsSyncedAt": "2026-08-26T09:43:39.120Z"
+    "statsSyncedAt": "2026-10-26T15:55:50.690Z"
   },
   {
     "id": "marlon-vera",
     "name": "Marlon Vera",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/VERA_MARLON_L_02-28.png",
     "stats": {
-      "slpm": "4.18",
+      "slpm": "4.24",
       "strAcc": "47%",
-      "sapm": "5.34",
-      "strDef": "50%",
-      "tdAvg": "0.47",
-      "tdAcc": "39%",
-      "tdDef": "71%",
-      "subAvg": "0.8"
+      "sapm": "5.39",
+      "strDef": "49%",
+      "tdAvg": "0.57",
+      "tdAcc": "45%",
+      "tdDef": "72%",
+      "subAvg": "0.7"
     },
     "record": {
       "wins": 24,
@@ -47661,21 +47701,21 @@
     "reach": "70.5\"",
     "nationality": "Ecuadorean",
     "flag": "🇪🇨",
-    "statsSyncedAt": "2026-08-26T09:43:42.193Z"
+    "statsSyncedAt": "2026-10-26T15:55:53.262Z"
   },
   {
     "id": "eduarda-moura",
     "name": "Eduarda Moura",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-11/MOURA_EDUARDA_L_06-08.png",
     "stats": {
-      "slpm": "2.57",
+      "slpm": "2.49",
       "strAcc": "37%",
-      "sapm": "2.50",
+      "sapm": "2.40",
       "strDef": "58%",
-      "tdAvg": "3.58",
+      "tdAvg": "3.42",
       "tdAcc": "34%",
       "tdDef": "80%",
-      "subAvg": "0.4"
+      "subAvg": "0.6"
     },
     "record": {
       "wins": 12,
@@ -47738,20 +47778,20 @@
         "time": "2:14"
       }
     ],
-    "statsSyncedAt": "2026-08-26T09:43:45.081Z",
+    "statsSyncedAt": "2026-10-26T15:55:56.079Z",
     "ranking": "#13"
   },
   {
     "id": "joosang-yoo",
     "name": "JooSang Yoo",
     "stats": {
-      "slpm": "6.36",
-      "strAcc": "58%",
-      "sapm": "4.99",
-      "strDef": "56%",
-      "tdAvg": "0.00",
-      "tdAcc": "0%",
-      "tdDef": "50%",
+      "slpm": "3.99",
+      "strAcc": "43%",
+      "sapm": "4.76",
+      "strDef": "53%",
+      "tdAvg": "0.72",
+      "tdAcc": "25%",
+      "tdDef": "66%",
       "subAvg": "0.0"
     },
     "nickname": "Zombie Jr.",
@@ -47762,7 +47802,7 @@
     },
     "weightClass": "Featherweight",
     "height": "5'7\"",
-    "statsSyncedAt": "2026-08-26T09:43:47.793Z",
+    "statsSyncedAt": "2026-10-26T15:55:58.848Z",
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-06/YOO_JOOSANG_R_06-07.png?itok=sFYPXELB",
     "last5": [
       {
@@ -47899,20 +47939,20 @@
     ],
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-12/WOODSON_SEAN_L_12-14.png",
     "stats": {
-      "slpm": "5.57",
+      "slpm": "5.39",
       "strAcc": "46%",
-      "sapm": "4.18",
+      "sapm": "4.04",
       "strDef": "58%",
-      "tdAvg": "0.58",
-      "tdAcc": "55%",
-      "tdDef": "84%",
+      "tdAvg": "0.52",
+      "tdAcc": "45%",
+      "tdDef": "85%",
       "subAvg": "0.3"
     },
     "nickname": "The Sniper",
     "height": "6'2.5\"",
     "reach": "78.0\"",
     "weightClass": "Featherweight",
-    "statsSyncedAt": "2026-08-26T09:43:50.766Z"
+    "statsSyncedAt": "2026-10-26T15:56:02.446Z"
   },
   {
     "id": "lucas-fernando",
@@ -47946,21 +47986,21 @@
         "time": null
       }
     ],
-    "statsSyncedAt": "2026-08-26T09:43:53.673Z"
+    "statsSyncedAt": "2026-10-26T15:56:06.009Z"
   },
   {
     "id": "namsrai-batbayar",
     "name": "Namsrai Batbayar",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/BATBAYAR_NAMSRAI_R_01-31.png",
     "stats": {
-      "slpm": "4.44",
-      "strAcc": "45%",
-      "sapm": "3.42",
-      "strDef": "48%",
-      "tdAvg": "2.85",
-      "tdAcc": "30%",
+      "slpm": "4.20",
+      "strAcc": "41%",
+      "sapm": "3.50",
+      "strDef": "44%",
+      "tdAvg": "1.56",
+      "tdAcc": "27%",
       "tdDef": "100%",
-      "subAvg": "0.9"
+      "subAvg": "0.5"
     },
     "record": {
       "wins": 10,
@@ -47969,7 +48009,7 @@
     },
     "nickname": "Steppe Warrior",
     "weightClass": "Flyweight",
-    "statsSyncedAt": "2026-08-26T09:43:56.196Z",
+    "statsSyncedAt": "2026-10-26T15:56:09.071Z",
     "last5": [
       {
         "opponent": "Andre Lima",
@@ -47986,14 +48026,14 @@
     "name": "Jack Jenkins",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-09/JENKINS_JACK_L_09-27.png",
     "stats": {
-      "slpm": "4.48",
-      "strAcc": "61%",
-      "sapm": "2.95",
-      "strDef": "59%",
-      "tdAvg": "1.98",
-      "tdAcc": "60%",
-      "tdDef": "71%",
-      "subAvg": "0.2"
+      "slpm": "4.25",
+      "strAcc": "59%",
+      "sapm": "3.08",
+      "strDef": "58%",
+      "tdAvg": "1.70",
+      "tdAcc": "48%",
+      "tdDef": "73%",
+      "subAvg": "0.3"
     },
     "record": {
       "wins": 14,
@@ -48004,7 +48044,7 @@
     "height": "5'7\"",
     "reach": "68.0\"",
     "weightClass": "Featherweight",
-    "statsSyncedAt": "2026-08-26T09:43:58.938Z",
+    "statsSyncedAt": "2026-10-26T15:56:12.081Z",
     "last5": [
       {
         "opponent": "Sean Woodson",
@@ -48129,7 +48169,7 @@
     "height": "5'7\"",
     "reach": "68.0\"",
     "weightClass": "Bantamweight",
-    "statsSyncedAt": "2026-08-26T09:44:01.696Z"
+    "statsSyncedAt": "2026-10-26T15:56:15.188Z"
   },
   {
     "id": "manoel-sousa",
@@ -48164,7 +48204,7 @@
     "height": "5'9\"",
     "reach": "70.0\"",
     "weightClass": "Lightweight",
-    "statsSyncedAt": "2026-08-26T09:44:04.196Z"
+    "statsSyncedAt": "2026-10-26T15:56:18.794Z"
   },
   {
     "id": "richie-miranda",
@@ -48199,7 +48239,7 @@
     "height": "5'8\"",
     "reach": "75.0\"",
     "weightClass": "Lightweight",
-    "statsSyncedAt": "2026-08-26T09:44:07.056Z"
+    "statsSyncedAt": "2026-10-26T15:56:21.901Z"
   },
   {
     "id": "gianni-vazquez",
@@ -48234,7 +48274,7 @@
     "height": "5'7\"",
     "reach": "71.0\"",
     "weightClass": "Bantamweight",
-    "statsSyncedAt": "2026-08-26T09:44:09.922Z"
+    "statsSyncedAt": "2026-10-26T15:56:25.008Z"
   },
   {
     "id": "gigi-canuto",
@@ -48269,7 +48309,7 @@
     "height": "5'2.5\"",
     "reach": "64.0\"",
     "weightClass": "Women's Strawweight",
-    "statsSyncedAt": "2026-08-26T09:44:12.981Z"
+    "statsSyncedAt": "2026-10-26T15:56:27.726Z"
   },
   {
     "id": "carol-foro",
