@@ -15782,8 +15782,8 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "",
-        "imgB": ""
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-05/RAPOSO_MITCH_L_06-01.png",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-09/DEGLI_MARCOS_L_09-22.png?itok=Ltf-qarb"
       }
     ],
     "earlyPrelims": [
@@ -15947,28 +15947,6 @@
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/CHIASSON_MACY_L_10-04.png?itok=BRfzm0GS",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/MESQUITA_BIA_L_10-11.png"
-      },
-      {
-        "a": "Jared Gordon",
-        "b": "Melquizael Costa",
-        "weight": "Lightweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "",
-        "imgB": ""
-      },
-      {
-        "a": "Evan Elder",
-        "b": "Samuel Sanches",
-        "weight": "Lightweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "",
-        "imgB": ""
       }
     ],
     "droppedFights": [
@@ -15977,6 +15955,12 @@
         "b": "Melquizael Costa",
         "reason": "removed from the card",
         "droppedAt": "2026-10-26T14:43:20.319Z"
+      },
+      {
+        "a": "Evan Elder",
+        "b": "Samuel Sanches",
+        "reason": "removed from the card",
+        "droppedAt": "2026-10-28T14:44:22.591Z"
       }
     ]
   },
@@ -16242,8 +16226,8 @@
         "titleFight": false,
         "ranked": false,
         "slot": "main",
-        "imgA": "",
-        "imgB": ""
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/SALKILLD_QUILLAN_L_01-31.png",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-07/SAINT_DENIS_BENOIT_L_07-11.png?itok=vdOsXo4G"
       }
     ],
     "prelims": [],
