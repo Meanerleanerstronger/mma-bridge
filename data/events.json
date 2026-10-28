@@ -15704,8 +15704,7 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/KONDRATAVICIUS_MANTAS_L_03-21.png?itok=vn9NYCgj",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/SHULTZ_WESLEY_R_05-02.png",
-        "_espnMissStreak": true
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/SHULTZ_WESLEY_R_05-02.png"
       },
       {
         "a": "Billy Elekana",
@@ -15774,6 +15773,17 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/GRANT_DAVEY_L_04-25.png",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/SMITH_ELIJAH_L_03-14.png?itok=3MoxFy9W"
+      },
+      {
+        "a": "Mitch Raposo",
+        "b": "Marcos Degli",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
       }
     ],
     "earlyPrelims": [
@@ -15937,6 +15947,28 @@
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/CHIASSON_MACY_L_10-04.png?itok=BRfzm0GS",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/MESQUITA_BIA_L_10-11.png"
+      },
+      {
+        "a": "Jared Gordon",
+        "b": "Melquizael Costa",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Evan Elder",
+        "b": "Samuel Sanches",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
       }
     ],
     "droppedFights": [
@@ -16138,6 +16170,21 @@
     "earlyPrelims": []
   },
   {
+    "id": "ufc-fight-night-dallas",
+    "name": "UFC Fight Night: Dallas",
+    "type": "FIGHT NIGHT",
+    "date": "Sat, Jan 16, 2027",
+    "isoDate": "2027-01-16",
+    "location": "",
+    "venue": "",
+    "poster": "",
+    "status": "upcoming",
+    "start_time": null,
+    "mainCard": [],
+    "prelims": [],
+    "earlyPrelims": []
+  },
+  {
     "id": "ufc-336",
     "name": "UFC 336",
     "type": "PPV",
@@ -16170,6 +16217,33 @@
         "slot": "comain",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/PRATES_CARLOS_L_08-17.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/5/MORALES_MICHAEL_L_08-24.png"
+      }
+    ],
+    "prelims": [],
+    "earlyPrelims": []
+  },
+  {
+    "id": "ufc-fight-night-salkilld-vs-saint-denis",
+    "name": "UFC Fight Night: Salkilld vs. Saint Denis",
+    "type": "FIGHT NIGHT",
+    "date": "Sat, Feb 6, 2027",
+    "isoDate": "2027-02-06",
+    "location": "",
+    "venue": "",
+    "poster": "",
+    "status": "upcoming",
+    "start_time": null,
+    "mainCard": [
+      {
+        "a": "Quillan Salkilld",
+        "b": "Benoît Saint Denis",
+        "weight": "Lightweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "main",
+        "imgA": "",
+        "imgB": ""
       }
     ],
     "prelims": [],
