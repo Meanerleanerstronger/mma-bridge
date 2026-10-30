@@ -15663,15 +15663,15 @@
     "start_time": null,
     "mainCard": [
       {
-        "a": "Gabriel Bonfim",
-        "b": "Sean Brady",
-        "weight": "Welterweight",
+        "a": "Waldo Cortes Acosta",
+        "b": "Johnny Walker",
+        "weight": "Heavyweight",
         "rounds": "5 Rds",
         "titleFight": false,
         "ranked": false,
         "slot": "main",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/BONFIM_GABRIEL_L_11-08.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/BRADY_SEAN_L_05-09.png"
+        "imgA": "",
+        "imgB": ""
       },
       {
         "a": "Tatiana Suarez",
@@ -15683,6 +15683,18 @@
         "slot": "comain",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/SUAREZ_TATIANA_L_04-11.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/JANDIROBA_VIRNA_L_04-04.png"
+      },
+      {
+        "a": "Gabriel Bonfim",
+        "b": "Sean Brady",
+        "weight": "Welterweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/BONFIM_GABRIEL_L_11-08.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/BRADY_SEAN_L_05-09.png",
+        "_espnMissStreak": true
       },
       {
         "a": "Keiichiro Nakamura",
