@@ -15694,7 +15694,7 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/BONFIM_GABRIEL_L_11-08.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/BRADY_SEAN_L_05-09.png",
-        "_espnMissStreak": true
+        "cancelled": true
       },
       {
         "a": "Keiichiro Nakamura",
@@ -15796,6 +15796,17 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-05/RAPOSO_MITCH_L_06-01.png",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-09/DEGLI_MARCOS_L_09-22.png?itok=Ltf-qarb"
+      },
+      {
+        "a": "Karine Silva",
+        "b": "Gabriella Fernandes",
+        "weight": "W Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
       }
     ],
     "earlyPrelims": [
@@ -15959,6 +15970,28 @@
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/CHIASSON_MACY_L_10-04.png?itok=BRfzm0GS",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/MESQUITA_BIA_L_10-11.png"
+      },
+      {
+        "a": "Jared Gordon",
+        "b": "Melquizael Costa",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Evan Elder",
+        "b": "Samuel Sanches",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
       }
     ],
     "droppedFights": [
