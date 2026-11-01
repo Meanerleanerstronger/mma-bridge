@@ -8748,7 +8748,7 @@
     "ranking": "#11",
     "record": {
       "wins": 21,
-      "losses": 7,
+      "losses": 8,
       "draws": 1
     },
     "height": "5'11\"",
@@ -16568,7 +16568,7 @@
     "id": "cody-durden",
     "name": "Cody Durden",
     "record": {
-      "wins": 18,
+      "wins": 19,
       "losses": 11,
       "draws": 1
     },
@@ -23358,7 +23358,7 @@
     "name": "Julian Erosa",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/EROSA_JULIAN_L_03-28.png",
     "record": {
-      "wins": 31,
+      "wins": 32,
       "losses": 13,
       "draws": 0
     },
@@ -26715,7 +26715,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-04/BROWN_RANDY_L_04-26.png",
     "record": {
       "wins": 20,
-      "losses": 8,
+      "losses": 9,
       "draws": 0
     },
     "last5": [
@@ -31097,7 +31097,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/ALENCAR_TALITA_L_04-25.png",
     "record": {
       "wins": 8,
-      "losses": 1,
+      "losses": 2,
       "draws": 1
     },
     "last5": [
@@ -37047,7 +37047,7 @@
     "name": "Tom Nolan",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-09/NOLAN_TOM_L_09-27.png",
     "record": {
-      "wins": 11,
+      "wins": 12,
       "losses": 1,
       "draws": 0
     },
@@ -38274,7 +38274,7 @@
     "name": "Luana Santos",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/SANTOS_LUANA_L_05-17.png",
     "record": {
-      "wins": 11,
+      "wins": 12,
       "losses": 2,
       "draws": 0
     },
@@ -38779,7 +38779,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/HASANOV_FARMAN_L_06-27.png",
     "record": {
       "wins": 5,
-      "losses": 0,
+      "losses": 1,
       "draws": 0
     },
     "nickname": "The Lion",
@@ -41489,7 +41489,7 @@
     "id": "zachary-reese",
     "name": "Zachary Reese",
     "record": {
-      "wins": 10,
+      "wins": 11,
       "losses": 4,
       "draws": 0
     },
@@ -52082,7 +52082,7 @@
     "weightClass": "Women's Bantamweight",
     "record": {
       "wins": 17,
-      "losses": 8,
+      "losses": 9,
       "draws": 0
     },
     "height": "5'6\"",
@@ -52094,6 +52094,14 @@
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/SANTOS_YANA_L_05-03.png?itok=pkR_XniN",
     "bio": "Yana Santos is a Russian professional mixed martial artist in the UFC bantamweight division. Get the latest UFC breaking news, fight night results, MMA records and stats, highlights, photos, videos and more.",
     "last5": [
+      {
+        "opponent": "Luana Santos",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Moicano vs. Nolan",
+        "round": 3,
+        "time": "5:00"
+      },
       {
         "opponent": "Macy Chiasson",
         "result": "W",
@@ -52165,14 +52173,6 @@
         "event": "UFC on ESPN: Overeem vs. Rozenstruik",
         "round": 3,
         "time": "0:33"
-      },
-      {
-        "opponent": "Lina Länsberg",
-        "result": "W",
-        "method": "Decision (unanimous)",
-        "event": "UFC 229",
-        "round": 3,
-        "time": "5:00"
       }
     ],
     "stats": {
@@ -53550,11 +53550,19 @@
     "id": "lucia-szabova",
     "name": "Lucia Szabova",
     "record": {
-      "wins": 12,
+      "wins": 13,
       "losses": 0,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Tainara Lisboa",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Moicano vs. Nolan",
+        "round": 3,
+        "time": "3:20"
+      },
       {
         "opponent": "Lucie Pudilová",
         "result": "W",
@@ -53626,14 +53634,6 @@
         "event": "Oktagon 21",
         "round": 2,
         "time": "1:25"
-      },
-      {
-        "opponent": "Anželika Petkevičiūtė",
-        "result": "W",
-        "method": "Submission (armbar)",
-        "event": "Oktagon 18",
-        "round": 1,
-        "time": "0:43"
       }
     ],
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/2022-02/womens-silhouette-RED-corner.png?itok=SXsY1AgG",
@@ -54022,10 +54022,18 @@
     "name": "Mickey Gall",
     "record": {
       "wins": 7,
-      "losses": 7,
+      "losses": 8,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Zachary Reese",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Moicano vs. Nolan",
+        "round": 3,
+        "time": "5:00"
+      },
       {
         "opponent": "Ramiz Brahimaj",
         "result": "L",
@@ -54097,14 +54105,6 @@
         "event": "UFC Fight Night: Gaethje vs. Vick",
         "round": 1,
         "time": "1:09"
-      },
-      {
-        "opponent": "Randy Brown (fighter)",
-        "result": "L",
-        "method": "Decision (unanimous)",
-        "event": "UFC 217",
-        "round": 3,
-        "time": "5:00"
       }
     ],
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-11/GALL_MICKEY_L_11-16.png?itok=tlDNrYh3",
@@ -54348,88 +54348,88 @@
     "id": "keiichiro-nakamura",
     "name": "Keiichiro Nakamura",
     "record": {
-      "wins": 36,
-      "losses": 12,
-      "draws": 2
+      "wins": 45,
+      "losses": 35,
+      "draws": 10
     },
     "last5": [
       {
-        "opponent": "Roberto de Souza",
-        "result": "L",
-        "method": "TKO (corner stoppage)",
-        "event": "2024 in Rizin Fighting Federation#Rizin Landmark 9",
-        "round": 1,
-        "time": "1:43"
-      },
-      {
-        "opponent": "Kiichi Kunimoto",
-        "result": "W",
-        "method": "KO (punches and soccer kick)",
-        "event": "2023 in Rizin Fighting Federation#Rizin 41 – Osaka",
-        "round": 2,
-        "time": "0:49"
-      },
-      {
-        "opponent": "Lorenz Larkin",
+        "opponent": "Ikkei Nagamura",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "Bellator MMA in 2019#Bellator & Rizin: Japan",
+        "event": "Pancrase: 264",
         "round": 3,
         "time": "5:00"
       },
       {
-        "opponent": "Marcos Yoshio de Souza",
-        "result": "W",
+        "opponent": "Keita Nakamura",
+        "result": "L",
         "method": "TKO (punches)",
-        "event": "2019 in Rizin Fighting Federation#Rizin 19 - Osaka",
+        "event": "DEEP: 67 Impact",
         "round": 1,
-        "time": "1:18"
+        "time": "4:13"
       },
       {
-        "opponent": "Salim Touahri",
-        "result": "W",
-        "method": "Decision (split)",
-        "event": "UFC Fight Night: dos Santos vs. Tuivasa",
-        "round": 3,
-        "time": "5:00"
+        "opponent": "Yuki Okano",
+        "result": "L",
+        "method": "Submission (rear naked choke)",
+        "event": "DEEP: 65 Impact",
+        "round": 1,
+        "time": "4:53"
       },
       {
-        "opponent": "Tony Martin (fighter)",
+        "opponent": "Eiji Ishikawa",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Barboza vs. Lee",
-        "round": 3,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Alex Morono",
-        "result": "W",
-        "method": "Decision (split)",
-        "event": "UFC Fight Night: Saint Preux vs. Okami",
-        "round": 3,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Elizeu Zaleski dos Santos",
-        "result": "L",
-        "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Lineker vs. Dodson",
-        "round": 3,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Kyle Noke",
-        "result": "W",
-        "method": "Submission (rear-naked choke)",
-        "event": "UFC Fight Night: McDonald vs. Lineker",
+        "event": "Grabaka: Grabaka Live! 3",
         "round": 2,
-        "time": "4:59"
+        "time": "5:00"
       },
       {
-        "opponent": "Tom Breese",
+        "opponent": "Yuji Hisamatsu",
+        "result": "L",
+        "method": "Decision (majority)",
+        "event": "Pancrase 250: 2013 Neo-Blood Tournament Finals",
+        "round": 2,
+        "time": "align=center | 5:00"
+      },
+      {
+        "opponent": "Daijiro Matsui",
+        "result": "W",
+        "method": "Decision (points)",
+        "event": "U-Spirits: U-Spirits Again",
+        "round": 1,
+        "time": "15:00"
+      },
+      {
+        "opponent": "Will Noland",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Silva vs. Bisping",
+        "event": "Pancrase 245",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Ikkei Nagamura",
+        "result": "W",
+        "method": "KO (flying knee)",
+        "event": "Pancrase: Progress Tour 14",
+        "round": 1,
+        "time": "1:26"
+      },
+      {
+        "opponent": "Kenichi Yamamoto (mixed martial artist)",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Grabaka: Grabaka Live! 2",
+        "round": 2,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Takenori Sato",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "Pancrase: Progress Tour 10",
         "round": 3,
         "time": "5:00"
       }
