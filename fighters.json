@@ -1042,7 +1042,7 @@
     "ranking": "#12",
     "ranking_change": 0,
     "record": {
-      "wins": 28,
+      "wins": 27,
       "losses": 9,
       "draws": 0
     },
@@ -1058,23 +1058,23 @@
       {
         "opponent": "Nikita Krylov",
         "result": "W",
-        "method": "KO/TKO",
+        "method": "TKO (jaw injury)",
         "event": "UFC 329",
         "round": 3,
         "time": "1:01"
       },
       {
-        "opponent": "Reinier De Ridder",
+        "opponent": "Reinier de Ridder",
         "result": "L",
         "method": "Decision (split)",
-        "event": "UFC Fight Night: Jul. 26, 2025",
+        "event": "UFC on ABC: Whittaker vs. de Ridder",
         "round": 5,
         "time": "5:00"
       },
       {
         "opponent": "Khamzat Chimaev",
         "result": "L",
-        "method": "Submission",
+        "method": "Submission (face crank)",
         "event": "UFC 308",
         "round": 1,
         "time": "3:34"
@@ -1082,8 +1082,8 @@
       {
         "opponent": "Ikram Aliskerov",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Jun. 22, 2024",
+        "method": "KO (punches)",
+        "event": "UFC on ABC: Whittaker vs. Aliskerov",
         "round": 1,
         "time": "1:49"
       },
@@ -1092,6 +1092,46 @@
         "result": "W",
         "method": "Decision (unanimous)",
         "event": "UFC 298",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Dricus du Plessis",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC 290",
+        "round": 2,
+        "time": "2:23"
+      },
+      {
+        "opponent": "Marvin Vettori",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Gane vs. Tuivasa",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Israel Adesanya",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 271",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Kelvin Gastelum",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Whittaker vs. Gastelum",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Jared Cannonier",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 254",
         "round": 3,
         "time": "5:00"
       }
@@ -8760,6 +8800,14 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/MOICANO_RENATO_L_04-04.png",
     "bio": "Renato Moicano is a Brazilian jiu-jitsu black belt who has reinvented himself as one of the lightweight division's most complete fighters. After starting his career at featherweight, Moicano moved up and has delivered standout performances against elite competition, combining slick grappling with a much-improved striking game.",
     "last5": [
+      {
+        "opponent": "Tom Nolan",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Las Vegas",
+        "round": 3,
+        "time": null
+      },
       {
         "opponent": "Beneil Dariush",
         "result": "L",
@@ -16574,6 +16622,14 @@
     },
     "last5": [
       {
+        "opponent": "Ode' Osbourne",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Las Vegas",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Alessandro Costa",
         "result": "L",
         "method": "Sub",
@@ -16721,6 +16777,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Cody Durden",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Las Vegas",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Alibi Idiris",
         "result": "L",
@@ -21890,33 +21954,17 @@
     },
     "last5": [
       {
-        "opponent": "Magomed Ankalaev",
-        "result": "L",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Jul. 25, 2026",
-        "round": 5,
-        "time": "2:41"
-      },
-      {
-        "opponent": "Jan Blachowicz",
-        "result": "D",
-        "method": "Decision (majority)",
-        "event": "UFC 323",
-        "round": 3,
-        "time": "5:00"
-      },
-      {
         "opponent": "Nikita Krylov",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Jul. 26, 2025",
+        "method": "KO (punches)",
+        "event": "UFC on ABC: Whittaker vs. de Ridder",
         "round": 1,
         "time": "4:18"
       },
       {
         "opponent": "Billy Elekana",
         "result": "W",
-        "method": "Submission",
+        "method": "Submission (guillotine choke)",
         "event": "UFC 311",
         "round": 2,
         "time": "3:33"
@@ -21924,10 +21972,66 @@
       {
         "opponent": "Ryan Spann",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Apr. 27, 2024",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Nicolau vs. Perez",
         "round": 2,
         "time": "3:16"
+      },
+      {
+        "opponent": "Zac Pauga",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "UFC Fight Night: Hermansson vs. Pyfer",
+        "round": 1,
+        "time": "3:38"
+      },
+      {
+        "opponent": "Volkan Oezdemir",
+        "result": "L",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC Fight Night: Gane vs. Spivac",
+        "round": 1,
+        "time": "3:46"
+      },
+      {
+        "opponent": "Carlos Eduardo (fighter)",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "MMA Series 64",
+        "round": 1,
+        "time": "0:25"
+      },
+      {
+        "opponent": "Alireza Vafai",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "MMA Series 61",
+        "round": 1,
+        "time": "0:30"
+      },
+      {
+        "opponent": "Abdul Elwahab Saeed",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "MMA Series 59",
+        "round": 1,
+        "time": "4:26"
+      },
+      {
+        "opponent": "Vadim Litvin",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Muradov Professional League 1",
+        "round": 1,
+        "time": "3:51"
+      },
+      {
+        "opponent": "Vyacheslav Vasilevsky",
+        "result": "L",
+        "method": "KO (punches)",
+        "event": "2020 in Fight Nights Global#AMC Fight Nights Global: Winter Cup",
+        "round": 3,
+        "time": "3:01"
       }
     ],
     "nickname": "Hitman",
@@ -23363,6 +23467,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "JeongYeong Lee",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Las Vegas",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Lerryan Douglas",
         "result": "L",
@@ -26719,6 +26831,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Jacobe Smith",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Las Vegas",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Kevin Holland",
         "result": "L",
@@ -30823,6 +30943,14 @@
     "nickname": "Fire",
     "last5": [
       {
+        "opponent": "Dakota Hope",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Las Vegas",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Lucas Brennan",
         "result": "W",
         "method": "Decision (unanimous)",
@@ -31101,6 +31229,14 @@
       "draws": 1
     },
     "last5": [
+      {
+        "opponent": "Piera Rodriguez",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Las Vegas",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Julia Polastri",
         "result": "W",
@@ -37054,6 +37190,14 @@
     "nickname": "Big Train",
     "last5": [
       {
+        "opponent": "Renato Moicano",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Las Vegas",
+        "round": 3,
+        "time": null
+      },
+      {
         "opponent": "Farès Ziam",
         "result": "W",
         "method": "Decision (unanimous)",
@@ -38280,6 +38424,14 @@
     },
     "last5": [
       {
+        "opponent": "Yana Santos",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Las Vegas",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Karol Rosa",
         "result": "W",
         "method": "Decision (unanimous)",
@@ -38785,6 +38937,14 @@
     "nickname": "The Lion",
     "last5": [
       {
+        "opponent": "Jean-Paul Lebosnoyani",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Las Vegas",
+        "round": 3,
+        "time": null
+      },
+      {
         "opponent": "Eric Nolan",
         "result": "W",
         "method": "Decision (unanimous)",
@@ -39216,6 +39376,14 @@
     },
     "nickname": "Cobe",
     "last5": [
+      {
+        "opponent": "Randy Brown",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Las Vegas",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Bruce Whitehead",
         "result": "W",
@@ -41956,6 +42124,14 @@
     "nickname": "Simba",
     "last5": [
       {
+        "opponent": "Rodrigo Sezinando",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Las Vegas",
+        "round": 2,
+        "time": null
+      },
+      {
         "opponent": "Daniil Donchenko",
         "result": "L",
         "method": "TKO",
@@ -43831,6 +44007,14 @@
     },
     "nickname": "JPL",
     "last5": [
+      {
+        "opponent": "Farman Hasanov",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Las Vegas",
+        "round": 3,
+        "time": null
+      },
       {
         "opponent": "Phil Rowe",
         "result": "W",
@@ -52098,6 +52282,14 @@
         "opponent": "Luana Santos",
         "result": "L",
         "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Las Vegas",
+        "round": null,
+        "time": null
+      },
+      {
+        "opponent": "Luana Santos",
+        "result": "L",
+        "method": "Decision (unanimous)",
         "event": "UFC Fight Night: Moicano vs. Nolan",
         "round": 3,
         "time": "5:00"
@@ -53669,7 +53861,17 @@
       "losses": 4,
       "draws": 0
     },
-    "nickname": "Thai Panther"
+    "nickname": "Thai Panther",
+    "last5": [
+      {
+        "opponent": "Lucia Szabová",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Las Vegas",
+        "round": 3,
+        "time": null
+      }
+    ]
   },
   {
     "id": "ilimbek-akylbek",
@@ -54348,88 +54550,88 @@
     "id": "keiichiro-nakamura",
     "name": "Keiichiro Nakamura",
     "record": {
-      "wins": 45,
-      "losses": 35,
-      "draws": 10
+      "wins": 36,
+      "losses": 12,
+      "draws": 2
     },
     "last5": [
       {
-        "opponent": "Ikkei Nagamura",
+        "opponent": "Roberto de Souza",
+        "result": "L",
+        "method": "TKO (corner stoppage)",
+        "event": "2024 in Rizin Fighting Federation#Rizin Landmark 9",
+        "round": 1,
+        "time": "1:43"
+      },
+      {
+        "opponent": "Kiichi Kunimoto",
+        "result": "W",
+        "method": "KO (punches and soccer kick)",
+        "event": "2023 in Rizin Fighting Federation#Rizin 41 – Osaka",
+        "round": 2,
+        "time": "0:49"
+      },
+      {
+        "opponent": "Lorenz Larkin",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "Pancrase: 264",
+        "event": "Bellator MMA in 2019#Bellator & Rizin: Japan",
         "round": 3,
         "time": "5:00"
       },
       {
-        "opponent": "Keita Nakamura",
-        "result": "L",
+        "opponent": "Marcos Yoshio de Souza",
+        "result": "W",
         "method": "TKO (punches)",
-        "event": "DEEP: 67 Impact",
+        "event": "2019 in Rizin Fighting Federation#Rizin 19 - Osaka",
         "round": 1,
-        "time": "4:13"
+        "time": "1:18"
       },
       {
-        "opponent": "Yuki Okano",
-        "result": "L",
-        "method": "Submission (rear naked choke)",
-        "event": "DEEP: 65 Impact",
-        "round": 1,
-        "time": "4:53"
-      },
-      {
-        "opponent": "Eiji Ishikawa",
-        "result": "L",
-        "method": "Decision (unanimous)",
-        "event": "Grabaka: Grabaka Live! 3",
-        "round": 2,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Yuji Hisamatsu",
-        "result": "L",
-        "method": "Decision (majority)",
-        "event": "Pancrase 250: 2013 Neo-Blood Tournament Finals",
-        "round": 2,
-        "time": "align=center | 5:00"
-      },
-      {
-        "opponent": "Daijiro Matsui",
+        "opponent": "Salim Touahri",
         "result": "W",
-        "method": "Decision (points)",
-        "event": "U-Spirits: U-Spirits Again",
-        "round": 1,
-        "time": "15:00"
-      },
-      {
-        "opponent": "Will Noland",
-        "result": "L",
-        "method": "Decision (unanimous)",
-        "event": "Pancrase 245",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: dos Santos vs. Tuivasa",
         "round": 3,
         "time": "5:00"
       },
       {
-        "opponent": "Ikkei Nagamura",
-        "result": "W",
-        "method": "KO (flying knee)",
-        "event": "Pancrase: Progress Tour 14",
-        "round": 1,
-        "time": "1:26"
-      },
-      {
-        "opponent": "Kenichi Yamamoto (mixed martial artist)",
-        "result": "W",
+        "opponent": "Tony Martin (fighter)",
+        "result": "L",
         "method": "Decision (unanimous)",
-        "event": "Grabaka: Grabaka Live! 2",
-        "round": 2,
+        "event": "UFC Fight Night: Barboza vs. Lee",
+        "round": 3,
         "time": "5:00"
       },
       {
-        "opponent": "Takenori Sato",
+        "opponent": "Alex Morono",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Saint Preux vs. Okami",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Elizeu Zaleski dos Santos",
         "result": "L",
         "method": "Decision (unanimous)",
-        "event": "Pancrase: Progress Tour 10",
+        "event": "UFC Fight Night: Lineker vs. Dodson",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Kyle Noke",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC Fight Night: McDonald vs. Lineker",
+        "round": 2,
+        "time": "4:59"
+      },
+      {
+        "opponent": "Tom Breese",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Silva vs. Bisping",
         "round": 3,
         "time": "5:00"
       }
@@ -54923,7 +55125,17 @@
       "losses": 2,
       "draws": 0
     },
-    "nickname": "La Fiera"
+    "nickname": "La Fiera",
+    "last5": [
+      {
+        "opponent": "Talita Alencar",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Las Vegas",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "jeongyeong-lee",
@@ -54945,7 +55157,17 @@
       "losses": 3,
       "draws": 0
     },
-    "nickname": "Korean Tiger"
+    "nickname": "Korean Tiger",
+    "last5": [
+      {
+        "opponent": "Julian Erosa",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Las Vegas",
+        "round": 1,
+        "time": null
+      }
+    ]
   },
   {
     "id": "gaston-bolanos",
@@ -55362,7 +55584,17 @@
       "wins": 9,
       "losses": 2,
       "draws": 0
-    }
+    },
+    "last5": [
+      {
+        "opponent": "Theodor Berggren",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC Fight Night: Las Vegas",
+        "round": 2,
+        "time": null
+      }
+    ]
   },
   {
     "id": "joseph-kropschot",
@@ -55537,7 +55769,17 @@
       "losses": 2,
       "draws": 0
     },
-    "nickname": "Huracán"
+    "nickname": "Huracán",
+    "last5": [
+      {
+        "opponent": "Francis Marshall",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Las Vegas",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "marcos-degli",
