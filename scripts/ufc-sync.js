@@ -688,7 +688,10 @@ async function main() {
     if (!isCompleted && ourEv && (!ourEv.poster || ourEv.poster.includes('TEMP-HERO'))) {
       console.log(`🎨 Searching poster: ${ourEv.name}`);
       const currentMain = (ourEv.mainCard || []).find(f => f.slot === 'main') || (ourEv.mainCard || [])[0];
-      const poster = await findPoster([ourEv.id, matchupSlug(currentMain)], ourEv.isoDate);
+      // UFC names Fight Night art "ufc-fight-night-<matchup>-EVENT-ART.jpg" — the bare
+      // matchup slug alone never matches, so the prefixed form has to be a candidate too.
+      const matchup = matchupSlug(currentMain);
+      const poster = await findPoster([ourEv.id, matchup && `ufc-fight-night-${matchup}`, matchup], ourEv.isoDate);
       if (poster && poster !== ourEv.poster) {
         const upgraded = !!ourEv.poster;
         ourEv.poster = poster;
