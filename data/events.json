@@ -15982,17 +15982,6 @@
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/JOHNSON_DONTE_L_03-07.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/ALMEIDA_CESAR_L_12-13.png"
-      },
-      {
-        "a": "Jared Gordon",
-        "b": "Melquizael Costa",
-        "weight": "Lightweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "",
-        "imgB": ""
       }
     ],
     "earlyPrelims": [
@@ -16006,18 +15995,6 @@
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-12/YANEZ_ADRIAN_L_12-14.png?itok=SPA6dLRg",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/DIAS_JUAN_R_05-16.png"
-      },
-      {
-        "a": "Nazim Sadykhov",
-        "b": "Jefferson Nascimento",
-        "weight": "Lightweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": true,
-        "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/SADYKHOV_NAZIM_L_12-06.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
-        "cancelled": true
       },
       {
         "a": "Macy Chiasson",
@@ -16036,10 +16013,21 @@
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-04/ELDER_EVAN_L_04-26.png?itok=FqH6Jch-",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/SANCHES_SAMUEL_R_09-09.png?itok=RWqnGB4l"
+      },
+      {
+        "a": "Jared Gordon",
+        "b": "Melquizael Costa",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "",
-        "imgB": ""
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/GORDON_JARED_L_05-17.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/COSTA_MELQUIZAEL_L_12-13.png"
       }
     ],
     "droppedFights": [
@@ -16054,6 +16042,12 @@
         "b": "Samuel Sanches",
         "reason": "removed from the card",
         "droppedAt": "2026-10-28T14:44:22.591Z"
+      },
+      {
+        "a": "Nazim Sadykhov",
+        "b": "Jefferson Nascimento",
+        "reason": "removed from the card",
+        "droppedAt": "2026-11-06T00:38:57.883Z"
       }
     ]
   },
@@ -16067,7 +16061,7 @@
     "venue": "",
     "poster": "",
     "status": "upcoming",
-    "start_time": null,
+    "start_time": "2026-11-21T15:00:00.000Z",
     "mainCard": [
       {
         "a": "Jiří Procházka",
@@ -16075,7 +16069,7 @@
         "weight": "Light Heavyweight",
         "rounds": "5 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/PROCHAZKA_JIRI_L_04-11.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/STIRLING_NAVAJO_L_03-28.png"
@@ -16086,7 +16080,7 @@
         "weight": "Featherweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "comain",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/STERLING_ALJAMAIN_L_04-25.png",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-12/VALLEJOS_KEVIN_R_12-13.png?itok=-h2gdx6Y"
@@ -16097,7 +16091,7 @@
         "weight": "Lightweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/HOOKER_DAN_L_01-31.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/ORTEGA_BRIAN_L_08-23.png"
@@ -16108,21 +16102,21 @@
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/CANNONIER_JARED_L_08-16.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/ALISKEROV_IKRAM_L_06-27.png"
       },
       {
-        "a": "Shamil Gaziev",
-        "b": "Tallison Teixeira",
-        "weight": "Heavyweight",
+        "a": "Kyoji Horiguchi",
+        "b": "Asu Almabayev",
+        "weight": "Flyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/GAZIEV_SHAMIL_L_05-02.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-07/TEIXEIRA_TALLISON_R_07-12.png"
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/HORIGUCHI_KYOJI_R_11-22.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/ALMABAYEV_ASU_L_06-27.png"
       }
     ],
     "prelims": [
@@ -16149,30 +16143,29 @@
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/LUNA_SANTIAGO_L_02-28.png"
       },
       {
-        "a": "Asu Almabayev",
-        "b": "Kyoji Horiguchi",
-        "weight": "Flyweight",
+        "a": "Shamil Gaziev",
+        "b": "Tallison Teixeira",
+        "weight": "Heavyweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/ALMABAYEV_ASU_L_06-27.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/HORIGUCHI_KYOJI_R_11-22.png"
-      }
-    ],
-    "earlyPrelims": [
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/GAZIEV_SHAMIL_L_05-02.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-07/TEIXEIRA_TALLISON_R_07-12.png"
+      },
       {
         "a": "Amir Albazi",
         "b": "Alessandro Costa",
         "weight": "Flyweight",
         "rounds": "3 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/ALBAZI_AMIR_L_02-07.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/COSTA_ALESSANDRO_L_04-04.png"
       }
-    ]
+    ],
+    "earlyPrelims": []
   },
   {
     "id": "ufc-335",
