@@ -15798,7 +15798,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-06/KO_SEOKHYEON_L_06-21.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-11/TURMAN_WELLINGTON_L_12-02.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-11/TURMAN_WELLINGTON_L_12-02.png",
+        "winner": "Seokhyeon Ko",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Jonny Parsons",
@@ -15842,7 +15845,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/SILVA_KARINE_L_08-16.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/FERNANDES_GABRIELLA_L_08-09.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/FERNANDES_GABRIELLA_L_08-09.png",
+        "winner": "Karine Silva",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Austin Bashi",
@@ -15853,7 +15859,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-07/BASHI_AUSTIN_L_08-02.png",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-11/CALDERON_CARLOS_R_11-07.png?itok=WgeQCe-t"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-11/CALDERON_CARLOS_R_11-07.png?itok=WgeQCe-t",
+        "winner": "Austin Bashi",
+        "method": "SUB",
+        "round": 1,
+        "_supabaseSynced": true
       }
     ],
     "earlyPrelims": [
@@ -15866,7 +15876,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/DELANO_JOSE_L_04-04.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/MAGOMEDOV_MURTAZLI_R_06-20.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/MAGOMEDOV_MURTAZLI_R_06-20.png",
+        "winner": "Murtazali Magomedov",
+        "method": "DEC",
+        "_supabaseSynced": true
       }
     ]
   },
