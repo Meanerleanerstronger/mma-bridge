@@ -15694,7 +15694,7 @@
     "location": "",
     "venue": "",
     "poster": "https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/2026-10/110726-ufc-fight-night-bonfim-vs-brady-EVENT-ART.jpg",
-    "status": "upcoming",
+    "status": "completed",
     "start_time": null,
     "mainCard": [
       {
@@ -15706,7 +15706,11 @@
         "ranked": false,
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/CORTES_ACOSTA_WALDO_L.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/WALKER_JOHNNY_L_08-23.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/WALKER_JOHNNY_L_08-23.png",
+        "winner": "Johnny Walker",
+        "method": "KO/TKO",
+        "round": 3,
+        "_supabaseSynced": true
       },
       {
         "a": "Tatiana Suarez",
@@ -15717,7 +15721,10 @@
         "ranked": false,
         "slot": "comain",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/SUAREZ_TATIANA_L_04-11.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/JANDIROBA_VIRNA_L_04-04.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/JANDIROBA_VIRNA_L_04-04.png",
+        "winner": "Tatiana Suarez",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Gabriel Bonfim",
@@ -15740,7 +15747,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-01/NAKAMURA_KEIICHIRO_L_01-31.png?itok=-vL6J_TE",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/SCHMID_OLLIE_R_05-02.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/SCHMID_OLLIE_R_05-02.png",
+        "winner": "Ollie Schmid",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Mantas Kondratavičius",
@@ -15762,7 +15772,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/ELEKANA_BILLY_L_01-31.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-08/FERNANDO_LUCAS_R.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-08/FERNANDO_LUCAS_R.png",
+        "winner": "Lucas Fernando",
+        "method": "DEC",
+        "_supabaseSynced": true
       }
     ],
     "prelims": [
@@ -15787,7 +15800,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/CACHOEIRA_PRISCILA_L_06-06.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/image/2022-02/womens-silhouette-RED-corner.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/image/2022-02/womens-silhouette-RED-corner.png",
+        "winner": "Nina Milošević",
+        "method": "KO/TKO",
+        "round": 2,
+        "_supabaseSynced": true
       },
       {
         "a": "Seokhyeon Ko",
@@ -15823,7 +15840,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/GRANT_DAVEY_L_04-25.png",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/SMITH_ELIJAH_L_03-14.png?itok=3MoxFy9W"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/SMITH_ELIJAH_L_03-14.png?itok=3MoxFy9W",
+        "winner": "Elijah Smith",
+        "method": "KO/TKO",
+        "round": 1,
+        "_supabaseSynced": true
       },
       {
         "a": "Mitch Raposo",
@@ -15834,7 +15855,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-05/RAPOSO_MITCH_L_06-01.png",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-09/DEGLI_MARCOS_L_09-22.png?itok=Ltf-qarb"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-09/DEGLI_MARCOS_L_09-22.png?itok=Ltf-qarb",
+        "winner": "Mitch Raposo",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Karine Silva",
