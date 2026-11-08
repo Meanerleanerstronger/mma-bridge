@@ -10586,7 +10586,7 @@
     "ranking": "#2",
     "pfp": true,
     "record": {
-      "wins": 12,
+      "wins": 13,
       "losses": 1,
       "draws": 0
     },
@@ -10599,6 +10599,14 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/SUAREZ_TATIANA_L_04-11.png",
     "bio": "Tatiana Suarez is the UFC Women's Strawweight Champion and one of the most dominant wrestlers in women's MMA history, a former TUF winner who went undefeated through years of injuries before returning to capture gold. Her suffocating top control and ground-and-pound make her nearly impossible to beat once the fight hits the mat.",
     "last5": [
+      {
+        "opponent": "Virna Jandiroba",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Cortes-Acosta vs. Walker",
+        "round": 3,
+        "time": "5:00"
+      },
       {
         "opponent": "Loopy Godínez",
         "result": "W",
@@ -10670,14 +10678,6 @@
         "event": "UFC Fight Night: Poirier vs. Pettis",
         "round": 3,
         "time": "5:00"
-      },
-      {
-        "opponent": "Amanda Brundage",
-        "result": "W",
-        "method": "Submission (brabo choke)",
-        "event": "The Ultimate Fighter: Team Joanna vs. Team Cláudia#The Ultimate Fighter 23 Finale",
-        "round": 1,
-        "time": "3:43"
       }
     ],
     "gender": "female",
@@ -10829,7 +10829,7 @@
     "ranking": "#3",
     "record": {
       "wins": 23,
-      "losses": 4,
+      "losses": 5,
       "draws": 0
     },
     "height": "5'3\"",
@@ -13396,6 +13396,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Jose Delano",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Bonfim vs. Brady",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Melsik Baghdasaryan",
         "result": "W",
@@ -18372,7 +18380,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/ELEKANA_BILLY_L_01-31.png",
     "record": {
       "wins": 10,
-      "losses": 2,
+      "losses": 3,
       "draws": 0
     },
     "last5": [
@@ -24549,6 +24557,14 @@
     "nickname": "Gabi",
     "last5": [
       {
+        "opponent": "Karine Silva",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Bonfim vs. Brady",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Casey O'Neill",
         "result": "L",
         "method": "KO/TKO",
@@ -25006,6 +25022,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Murtazali Magomedov",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Bonfim vs. Brady",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Robert Ruchala",
         "result": "W",
@@ -28286,11 +28310,19 @@
     "name": "Karine Silva",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/SILVA_KARINE_L_08-16.png",
     "record": {
-      "wins": 19,
+      "wins": 20,
       "losses": 7,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Gabriella Fernandes",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Bonfim vs. Brady",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Jasmine Jasudavicius",
         "result": "L",
@@ -29944,7 +29976,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/GRANT_DAVEY_L_04-25.png",
     "record": {
       "wins": 18,
-      "losses": 8,
+      "losses": 9,
       "draws": 0
     },
     "last5": [
@@ -38235,7 +38267,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/CACHOEIRA_PRISCILA_L_06-06.png",
     "record": {
       "wins": 13,
-      "losses": 9,
+      "losses": 10,
       "draws": 0
     },
     "last5": [
@@ -40293,10 +40325,18 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-11/TURMAN_WELLINGTON_L_12-02.png",
     "record": {
       "wins": 18,
-      "losses": 8,
+      "losses": 9,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Seokhyeon Ko",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Bonfim vs. Brady",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Jared Gooden",
         "result": "L",
@@ -42311,6 +42351,14 @@
     },
     "last5": [
       {
+        "opponent": "Carlos Calderon",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC Fight Night: Bonfim vs. Brady",
+        "round": 1,
+        "time": null
+      },
+      {
         "opponent": "Christian Rodriguez",
         "result": "L",
         "method": "Decision (unanimous)",
@@ -44062,7 +44110,17 @@
     "height": "5'10\"",
     "reach": "71\"",
     "weightClass": "Welterweight",
-    "statsSyncedAt": "2026-10-25T13:37:35.713Z"
+    "statsSyncedAt": "2026-10-25T13:37:35.713Z",
+    "last5": [
+      {
+        "opponent": "Wellington Turman",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Bonfim vs. Brady",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "rj-harris",
@@ -45380,7 +45438,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/CORTES_ACOSTA_WALDO_L.png",
     "record": {
       "wins": 17,
-      "losses": 4,
+      "losses": 5,
       "draws": 0
     },
     "last5": [
@@ -53503,16 +53561,16 @@
     ],
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-06/WILLIAMS_KHAOS_L_06-07.png?itok=tv-XQtv9",
     "stats": {
-      "slpm": "4.97",
-      "strAcc": "39%",
-      "sapm": "5.34",
+      "slpm": "4.57",
+      "strAcc": "38%",
+      "sapm": "5.45",
       "strDef": "41%",
       "tdAvg": "0.00",
       "tdAcc": "0%",
-      "tdDef": "51%",
+      "tdDef": "46%",
       "subAvg": "0.0"
     },
-    "statsSyncedAt": "2026-09-08T13:22:51.112Z",
+    "statsSyncedAt": "2026-11-07T15:28:43.281Z",
     "nickname": "The OxFighter"
   },
   {
@@ -53614,16 +53672,16 @@
       }
     ],
     "stats": {
-      "slpm": "0.00",
-      "strAcc": "0%",
-      "sapm": "0.00",
-      "strDef": "0%",
-      "tdAvg": "0.00",
-      "tdAcc": "0%",
+      "slpm": "6.27",
+      "strAcc": "58%",
+      "sapm": "1.80",
+      "strDef": "74%",
+      "tdAvg": "3.00",
+      "tdAcc": "100%",
       "tdDef": "0%",
       "subAvg": "0.0"
     },
-    "statsSyncedAt": "2026-09-08T13:22:53.527Z",
+    "statsSyncedAt": "2026-11-07T15:28:46.068Z",
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn",
     "nickname": "Robocop"
   },
@@ -53729,14 +53787,14 @@
     "stats": {
       "slpm": "3.48",
       "strAcc": "47%",
-      "sapm": "3.23",
+      "sapm": "3.25",
       "strDef": "60%",
-      "tdAvg": "1.95",
+      "tdAvg": "1.92",
       "tdAcc": "35%",
       "tdDef": "54%",
       "subAvg": "0.6"
     },
-    "statsSyncedAt": "2026-09-08T13:22:56.534Z"
+    "statsSyncedAt": "2026-11-07T15:28:49.145Z"
   },
   {
     "id": "lucia-szabova",
@@ -53830,16 +53888,16 @@
     ],
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/2022-02/womens-silhouette-RED-corner.png?itok=SXsY1AgG",
     "stats": {
-      "slpm": "0.00",
-      "strAcc": "0%",
-      "sapm": "0.00",
-      "strDef": "0%",
-      "tdAvg": "0.00",
-      "tdAcc": "0%",
-      "tdDef": "0%",
-      "subAvg": "0.0"
+      "slpm": "5.25",
+      "strAcc": "72%",
+      "sapm": "1.05",
+      "strDef": "46%",
+      "tdAvg": "5.63",
+      "tdAcc": "62%",
+      "tdDef": "88%",
+      "subAvg": "1.1"
     },
-    "statsSyncedAt": "2026-09-08T13:22:59.641Z",
+    "statsSyncedAt": "2026-11-07T15:28:51.942Z",
     "nickname": "Silent Killer"
   },
   {
@@ -53847,16 +53905,16 @@
     "name": "Tainara Lisboa",
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-05/LISBOA_TAINARA_L_10-14.png?itok=ibBAzJ5i",
     "stats": {
-      "slpm": "2.01",
-      "strAcc": "44%",
-      "sapm": "2.88",
-      "strDef": "45%",
-      "tdAvg": "1.67",
-      "tdAcc": "31%",
-      "tdDef": "53%",
-      "subAvg": "0.3"
+      "slpm": "1.82",
+      "strAcc": "45%",
+      "sapm": "3.35",
+      "strDef": "40%",
+      "tdAvg": "1.56",
+      "tdAcc": "25%",
+      "tdDef": "47%",
+      "subAvg": "0.5"
     },
-    "statsSyncedAt": "2026-09-08T13:23:02.327Z",
+    "statsSyncedAt": "2026-11-07T15:28:54.759Z",
     "record": {
       "wins": 7,
       "losses": 5,
@@ -55965,6 +56023,17 @@
       "tdDef": "0%",
       "subAvg": "0.0"
     },
-    "statsSyncedAt": "2026-11-06T16:38:30.850Z"
+    "statsSyncedAt": "2026-11-06T16:38:30.850Z",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-11/CALDERON_CARLOS_R_11-07.png?itok=WgeQCe-t",
+    "last5": [
+      {
+        "opponent": "Austin Bashi",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC Fight Night: Bonfim vs. Brady",
+        "round": 1,
+        "time": null
+      }
+    ]
   }
 ]
