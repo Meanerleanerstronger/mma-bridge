@@ -1,0 +1,144 @@
+{
+  "eventId": "ufc-fight-night-bonfim-vs-brady",
+  "eventName": "UFC Fight Night: Bonfim vs. Brady",
+  "fights": [
+    {
+      "fighter1": "Gabriel Bonfim Randy Brown",
+      "fighter2": "Joseph Morales Matt Schnell",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "3533",
+          "totalStr": "00",
+          "td": "Welterweight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "54",
+          "totalStr": "10",
+          "td": "Flyweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Uros Medic Muslim Salikhov",
+      "fighter2": "Chris Padilla Ismael Bonfim",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "82",
+          "totalStr": "00",
+          "td": "Welterweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "6442",
+          "totalStr": "00",
+          "td": "Lightweight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Christian Leroy Duncan Marco Tulio",
+      "fighter2": "Jamall Emmers Hyder Amil",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "1 0",
+          "sigStr": "2327",
+          "totalStr": "00",
+          "td": "Middleweight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "5047",
+          "totalStr": "10",
+          "td": "Featherweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Raoni Barcelos Ricky Simon",
+      "fighter2": "Jacqueline Cavalcanti Mayra Bueno Silva",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "8267",
+          "totalStr": "00",
+          "td": "Bantamweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "8039",
+          "totalStr": "00",
+          "td": "Women'sBantamweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Josh Hokit Max Gimenis",
+      "fighter2": "Denise Gomes Tecia Pennington",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "2 0",
+          "sigStr": "93",
+          "totalStr": "00",
+          "td": "Heavyweight",
+          "subAtt": 1,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "5358",
+          "totalStr": "00",
+          "td": "Women'sStrawweight",
+          "subAtt": 3,
+          "ctrlTime": "0:00"
+        }
+      }
+    },
+    {
+      "fighter1": "Daniel Marcos Miles Johns",
+      "fighter2": "Zach Reese Jackson McVey",
+      "winner": null,
+      "stats": {
+        "fighter1": {
+          "kd": "0 0",
+          "sigStr": "2728",
+          "totalStr": "10",
+          "td": "Bantamweight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        },
+        "fighter2": {
+          "kd": "0 0",
+          "sigStr": "3256",
+          "totalStr": "10",
+          "td": "CatchWeight",
+          "subAtt": 2,
+          "ctrlTime": "0:00"
+        }
+      }
+    }
+  ]
+}
