@@ -56361,7 +56361,19 @@
         "round": 3,
         "time": "3:34"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-09/ABDULLAEV_AKBAR_R_09-15.png?itok=7e_lanQN",
+    "stats": {
+      "slpm": "9.47",
+      "strAcc": "100%",
+      "sapm": "0.00",
+      "strDef": "100%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-11-09T19:33:05.379Z"
   },
   {
     "id": "bruno-silva",
@@ -56452,7 +56464,19 @@
         "round": 3,
         "time": "2:35"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-06/SILVA_BRUNO_L_06-06.png?itok=l_D2GW69",
+    "stats": {
+      "slpm": "3.86",
+      "strAcc": "48%",
+      "sapm": "5.35",
+      "strDef": "41%",
+      "tdAvg": "0.77",
+      "tdAcc": "22%",
+      "tdDef": "74%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-11-09T19:33:07.902Z"
   },
   {
     "id": "junyong-park",
@@ -56543,6 +56567,86 @@
         "round": 3,
         "time": "5:00"
       }
-    ]
+    ],
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2023-12/PARK_JUNYONG_L_12-09.png?itok=LeEvSHc5",
+    "stats": {
+      "slpm": "4.64",
+      "strAcc": "51%",
+      "sapm": "3.82",
+      "strDef": "51%",
+      "tdAvg": "1.69",
+      "tdAcc": "42%",
+      "tdDef": "54%",
+      "subAvg": "0.8"
+    },
+    "statsSyncedAt": "2026-11-09T19:33:10.472Z"
+  },
+  {
+    "id": "ivan-gnizditskiy",
+    "name": "Ivan Gnizditskiy",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-11-09T19:33:13.347Z"
+  },
+  {
+    "id": "pavel-andrusca",
+    "name": "Pavel Andrusca",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-09/ANDRUSCA_PAVEL_R_09-05.png?itok=RimQdJ8P",
+    "stats": {
+      "slpm": "3.33",
+      "strAcc": "47%",
+      "sapm": "1.87",
+      "strDef": "67%",
+      "tdAvg": "4.00",
+      "tdAcc": "21%",
+      "tdDef": "0%",
+      "subAvg": "1.0"
+    },
+    "statsSyncedAt": "2026-11-09T19:33:16.227Z"
+  },
+  {
+    "id": "modestino-rodrigues",
+    "name": "Modestino Rodrigues",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-09/RODRIGUES_MODESTINO_R_09-01.png?itok=fgflF435",
+    "stats": {
+      "slpm": "32.00",
+      "strAcc": "42%",
+      "sapm": "0.00",
+      "strDef": "100%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-11-09T19:33:19.102Z"
+  },
+  {
+    "id": "matthieu-letho-duclos",
+    "name": "Matthieu Letho Duclos",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-09/DUCLOS_MATTHIEU_L_09-05.png?itok=0IUm7Yqy"
+  },
+  {
+    "id": "hecher-sosa",
+    "name": "Hecher Sosa",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/SOSA_HECHER_R_03-14.png?itok=3lYzpHCZ",
+    "stats": {
+      "slpm": "4.53",
+      "strAcc": "47%",
+      "sapm": "2.50",
+      "strDef": "61%",
+      "tdAvg": "2.00",
+      "tdAcc": "36%",
+      "tdDef": "69%",
+      "subAvg": "1.0"
+    },
+    "statsSyncedAt": "2026-11-09T19:33:21.983Z"
   }
 ]
