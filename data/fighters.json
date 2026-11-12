@@ -325,7 +325,7 @@
     "ranking": "#1",
     "ranking_change": 0,
     "record": {
-      "wins": 14,
+      "wins": 13,
       "losses": 2,
       "draws": 0
     },
@@ -734,7 +734,7 @@
     "ranking_change": -1,
     "record": {
       "wins": 32,
-      "losses": 6,
+      "losses": 5,
       "draws": 1
     },
     "height": "6'4\"",
@@ -1042,7 +1042,7 @@
     "ranking": "#12",
     "ranking_change": 0,
     "record": {
-      "wins": 28,
+      "wins": 27,
       "losses": 9,
       "draws": 0
     },
@@ -6730,7 +6730,7 @@
     "ranking": "#2",
     "ranking_change": 2,
     "record": {
-      "wins": 24,
+      "wins": 23,
       "losses": 7,
       "draws": 0
     },
@@ -11407,7 +11407,7 @@
     "ranking": "#6",
     "record": {
       "wins": 15,
-      "losses": 3,
+      "losses": 2,
       "draws": 0
     },
     "height": "5'5\"",
@@ -33380,7 +33380,7 @@
     "name": "Yaroslav Amosov",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/AMOSOV_YAROSLAV_R_12-13.png",
     "record": {
-      "wins": 29,
+      "wins": 30,
       "losses": 1,
       "draws": 0
     },
@@ -33605,8 +33605,8 @@
     "name": "Jared Gordon",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/GORDON_JARED_L_05-17.png",
     "record": {
-      "wins": 21,
-      "losses": 9,
+      "wins": 19,
+      "losses": 6,
       "draws": 0
     },
     "last5": [
@@ -34231,7 +34231,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/COSTA_MELQUIZAEL_L_12-13.png",
     "record": {
       "wins": 26,
-      "losses": 7,
+      "losses": 8,
       "draws": 0
     },
     "last5": [
@@ -49080,7 +49080,7 @@
     ],
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/HASAN_BILAL_L_08-11.png?itok=wL9PQxdA",
     "record": {
-      "wins": 10,
+      "wins": 9,
       "losses": 0,
       "draws": 0
     },
@@ -52068,7 +52068,7 @@
     "flag": "🇦🇷",
     "weightClass": "Featherweight",
     "record": {
-      "wins": 17,
+      "wins": 18,
       "losses": 1,
       "draws": 0
     },
@@ -52654,7 +52654,7 @@
     "flag": "🇺🇸",
     "weightClass": "Women's Bantamweight",
     "record": {
-      "wins": 11,
+      "wins": 10,
       "losses": 6,
       "draws": 0
     },
@@ -56283,7 +56283,7 @@
     "id": "akbar-abdullaev",
     "name": "Akbar Abdullaev",
     "record": {
-      "wins": 1,
+      "wins": 14,
       "losses": 0,
       "draws": 0
     },
@@ -56386,9 +56386,9 @@
     "id": "bruno-silva",
     "name": "Bruno Silva",
     "record": {
-      "wins": 15,
-      "losses": 9,
-      "draws": 2
+      "wins": 23,
+      "losses": 13,
+      "draws": 0
     },
     "last5": [
       {
@@ -56684,5 +56684,187 @@
       "draws": 0
     },
     "nickname": "Guanche Warrior"
+  },
+  {
+    "id": "rabindra-dhant",
+    "name": "Rabindra Dhant",
+    "record": {
+      "wins": 11,
+      "losses": 1,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Kasib Murdoch",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "Road to UFC Season 5#Road to UFC: Semifinals",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Kimbert Alintozon",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Road to UFC Season 5#Road to UFC: Opening Round – Day 1",
+        "round": 2,
+        "time": "4:37"
+      },
+      {
+        "opponent": "Chungreng Koren",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "Matrix Fight Night 17",
+        "round": 3,
+        "time": "0:54"
+      },
+      {
+        "opponent": "Eqiyuebu",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "2025 in Brave Combat Federation#Brave CF 93",
+        "round": 1,
+        "time": "2:56"
+      },
+      {
+        "opponent": "Korey Sutcliffe",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Nepal Warriors: Fight Night 3",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Ismail Khan (fighter)",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "2023 in ONE Championship#ONE Friday Fights 45",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Torepchi Dongak",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "2023 in ONE Championship#ONE Friday Fights 33",
+        "round": 3,
+        "time": "1:55"
+      },
+      {
+        "opponent": "Jason Lyngdoh",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "Nepal Warriors: Fight Night 1",
+        "round": 1,
+        "time": "1:23"
+      },
+      {
+        "opponent": "Ravi Saw",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Goa Combat 2022",
+        "round": 2,
+        "time": "3:24"
+      },
+      {
+        "opponent": "Krishna Payasi",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Fight of Knights 3",
+        "round": 2,
+        "time": "2:02"
+      }
+    ]
+  },
+  {
+    "id": "takaya-suzuki",
+    "name": "Takaya Suzuki",
+    "record": {
+      "wins": 22,
+      "losses": 14,
+      "draws": 2
+    },
+    "last5": [
+      {
+        "opponent": "Hatsu Hioki",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "Pancrase",
+        "round": 1,
+        "time": "1:12"
+      },
+      {
+        "opponent": "Isao Kobayashi",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "Pancrase",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Alan Omer",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "Euro FC 1: The New Era",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Nazareno Malegarie",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "Pancrase",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Daiki Hata",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Rizin Fighting Federation 1: Day 1",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Guy Delumeau",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Pancrase",
+        "round": 3,
+        "time": "4:11"
+      },
+      {
+        "opponent": "Ryogo Takahashi",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "Vale Tudo Japan",
+        "round": 2,
+        "time": "0:38"
+      },
+      {
+        "opponent": "Yojiro Uchimara",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Vale Tudo Japan",
+        "round": 1,
+        "time": "1:27"
+      },
+      {
+        "opponent": "Toby Imada",
+        "result": "D",
+        "method": "Draw (majority)",
+        "event": "Shoot Boxing: Ground Zero Tokyo 2013",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Daniel Romero",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "Vale Tudo Japan",
+        "round": 1,
+        "time": "3:21"
+      }
+    ]
   }
 ]
