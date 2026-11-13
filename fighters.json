@@ -56774,7 +56774,18 @@
         "round": 2,
         "time": "2:02"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "3.09",
+      "strAcc": "52%",
+      "sapm": "2.80",
+      "strDef": "46%",
+      "tdAvg": "1.22",
+      "tdAcc": "25%",
+      "tdDef": "73%",
+      "subAvg": "0.6"
+    },
+    "statsSyncedAt": "2026-11-12T17:24:19.977Z"
   },
   {
     "id": "takaya-suzuki",
@@ -56865,6 +56876,107 @@
         "round": 1,
         "time": "3:21"
       }
-    ]
+    ],
+    "stats": {
+      "slpm": "6.87",
+      "strAcc": "51%",
+      "sapm": "2.29",
+      "strDef": "67%",
+      "tdAvg": "1.01",
+      "tdAcc": "100%",
+      "tdDef": "100%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-11-12T17:24:22.809Z"
+  },
+  {
+    "id": "george-mangos",
+    "name": "George Mangos",
+    "stats": {
+      "slpm": "1.30",
+      "strAcc": "50%",
+      "sapm": "0.67",
+      "strDef": "58%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "42%",
+      "subAvg": "3.5"
+    },
+    "statsSyncedAt": "2026-11-12T17:24:25.209Z"
+  },
+  {
+    "id": "dagiisuren-chagnaadorj",
+    "name": "Dagiisuren Chagnaadorj",
+    "stats": {
+      "slpm": "2.86",
+      "strAcc": "27%",
+      "sapm": "3.03",
+      "strDef": "58%",
+      "tdAvg": "4.20",
+      "tdAcc": "50%",
+      "tdDef": "100%",
+      "subAvg": "0.8"
+    },
+    "statsSyncedAt": "2026-11-12T17:24:27.977Z"
+  },
+  {
+    "id": "ryo-tajima",
+    "name": "Ryo Tajima",
+    "stats": {
+      "slpm": "2.90",
+      "strAcc": "45%",
+      "sapm": "3.23",
+      "strDef": "64%",
+      "tdAvg": "2.50",
+      "tdAcc": "50%",
+      "tdDef": "50%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-11-12T17:24:30.798Z"
+  },
+  {
+    "id": "jiniushiyue",
+    "name": "Jiniushiyue",
+    "stats": {
+      "slpm": "2.70",
+      "strAcc": "44%",
+      "sapm": "2.53",
+      "strDef": "48%",
+      "tdAvg": "2.26",
+      "tdAcc": "53%",
+      "tdDef": "50%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-11-12T17:24:33.617Z"
+  },
+  {
+    "id": "meng-bo",
+    "name": "Meng Bo",
+    "stats": {
+      "slpm": "2.97",
+      "strAcc": "48%",
+      "sapm": "1.90",
+      "strDef": "63%",
+      "tdAvg": "3.50",
+      "tdAcc": "87%",
+      "tdDef": "72%",
+      "subAvg": "0.5"
+    },
+    "statsSyncedAt": "2026-11-12T17:24:35.977Z"
+  },
+  {
+    "id": "bo-hyun-park",
+    "name": "Bo Hyun Park",
+    "stats": {
+      "slpm": "4.03",
+      "strAcc": "38%",
+      "sapm": "3.53",
+      "strDef": "55%",
+      "tdAvg": "1.00",
+      "tdAcc": "22%",
+      "tdDef": "77%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-11-12T17:24:38.816Z"
   }
 ]
