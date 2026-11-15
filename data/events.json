@@ -15916,7 +15916,7 @@
     "location": "",
     "venue": "",
     "poster": "https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/2026-10/111426-ufc-334-gane-vs-hokit-EVENT-ART.jpg",
-    "status": "upcoming",
+    "status": "completed",
     "start_time": "2026-11-14T22:00:00.000Z",
     "mainCard": [
       {
@@ -15928,7 +15928,11 @@
         "ranked": true,
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/GANE_CIRYL_R_06-14.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/HOKIT_JOSH_L_06-14.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/HOKIT_JOSH_L_06-14.png",
+        "winner": "Ciryl Gane",
+        "method": "UD",
+        "round": 5,
+        "time": "5:00"
       },
       {
         "a": "Kayla Harrison",
@@ -15939,7 +15943,11 @@
         "ranked": true,
         "slot": "comain",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-06/HARRISON_KAYLA_L_BELTMOCK.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/NUNES_AMANDA_R.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/NUNES_AMANDA_R.png",
+        "winner": "Kayla Harrison",
+        "method": "SUB",
+        "round": 4,
+        "time": "1:29"
       },
       {
         "a": "Caio Borralho",
@@ -15950,7 +15958,11 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/BORRALHO_CAIO_L_03-07.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/BELGAROUI_YOUSRI_R_10-18.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/BELGAROUI_YOUSRI_R_10-18.png",
+        "winner": "Caio Borralho",
+        "method": "UD",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Uroš Medić",
@@ -15961,7 +15973,10 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/MEDIC_UROS_L_08-09.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/HOLLAND_KEVIN_L_04-11.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/HOLLAND_KEVIN_L_04-11.png",
+        "method": "Draw",
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Bilal Hasan",
@@ -15975,7 +15990,9 @@
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-09/GURULE_LUIS_R_09-13.png",
         "winner": "Luis Gurule",
         "method": "DEC",
-        "_supabaseSynced": true
+        "_supabaseSynced": true,
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "prelims": [
@@ -15991,7 +16008,9 @@
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-07/DUNCAN_CHRIS_L_07-22.png",
         "winner": "Chris Duncan",
         "method": "DEC",
-        "_supabaseSynced": true
+        "_supabaseSynced": true,
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Jim Miller",
@@ -16006,7 +16025,8 @@
         "winner": "Terrance McKinney",
         "method": "KO/TKO",
         "round": 1,
-        "_supabaseSynced": true
+        "_supabaseSynced": true,
+        "time": "1:53"
       },
       {
         "a": "Stephen Thompson",
@@ -16021,7 +16041,8 @@
         "winner": "Stephen Thompson",
         "method": "KO/TKO",
         "round": 3,
-        "_supabaseSynced": true
+        "_supabaseSynced": true,
+        "time": "2:54"
       },
       {
         "a": "Donte Johnson",
@@ -16036,7 +16057,8 @@
         "winner": "Cesar Almeida",
         "method": "KO/TKO",
         "round": 1,
-        "_supabaseSynced": true
+        "_supabaseSynced": true,
+        "time": "3:20"
       }
     ],
     "earlyPrelims": [
@@ -16053,7 +16075,8 @@
         "winner": "Bia Mesquita",
         "method": "SUB",
         "round": 1,
-        "_supabaseSynced": true
+        "_supabaseSynced": true,
+        "time": "3:23"
       },
       {
         "a": "Evan Elder",
@@ -16067,7 +16090,9 @@
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/SANCHES_SAMUEL_R_09-09.png?itok=RWqnGB4l",
         "winner": "Evan Elder",
         "method": "DEC",
-        "_supabaseSynced": true
+        "_supabaseSynced": true,
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Jared Gordon",
@@ -16081,7 +16106,9 @@
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/COSTA_MELQUIZAEL_L_12-13.png",
         "winner": "Melquizael Costa",
         "method": "DEC",
-        "_supabaseSynced": true
+        "_supabaseSynced": true,
+        "round": 3,
+        "time": "5:00"
       },
       {
         "a": "Alatengheili",
@@ -16095,7 +16122,9 @@
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/DIAS_JUAN_R_05-16.png",
         "winner": "Juan Diaz",
         "method": "DEC",
-        "_supabaseSynced": true
+        "_supabaseSynced": true,
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "droppedFights": [
