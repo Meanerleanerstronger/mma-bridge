@@ -6970,7 +6970,7 @@
     "ranking": "#5",
     "ranking_change": 1,
     "record": {
-      "wins": 18,
+      "wins": 19,
       "losses": 2,
       "draws": 0
     },
@@ -13033,11 +13033,19 @@
     "id": "bia-mesquita",
     "name": "Bia Mesquita",
     "record": {
-      "wins": 8,
+      "wins": 9,
       "losses": 0,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Macy Chiasson",
+        "result": "W",
+        "method": "Sub",
+        "event": "UFC 334",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Melissa Mullins",
         "result": "W",
@@ -16620,11 +16628,19 @@
     "id": "cesar-almeida",
     "name": "Cesar Almeida",
     "record": {
-      "wins": 7,
+      "wins": 8,
       "losses": 3,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Donte Johnson",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 334",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Damian Pinas",
         "result": "L",
@@ -19812,11 +19828,19 @@
     "name": "Terrance McKinney",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/MCKINNEY_TERRANCE_L_03-28.png",
     "record": {
-      "wins": 18,
+      "wins": 19,
       "losses": 9,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Jim Miller",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 334",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "King Green",
         "result": "L",
@@ -20110,10 +20134,18 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/DOBER_DREW_L_03-07.png",
     "record": {
       "wins": 29,
-      "losses": 15,
+      "losses": 16,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Chris Duncan",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 334",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Michael Johnson",
         "result": "W",
@@ -21028,6 +21060,14 @@
     "nickname": "Grim",
     "last5": [
       {
+        "opponent": "Bilal Hasan",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 334",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Rei Tsuruya",
         "result": "L",
         "method": "Sub",
@@ -21750,6 +21790,14 @@
     },
     "nickname": "Lock Jaw",
     "last5": [
+      {
+        "opponent": "Cesar Almeida",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 334",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Eric McConico",
         "result": "W",
@@ -22777,11 +22825,19 @@
     "name": "Chris Duncan",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-07/DUNCAN_CHRIS_L_07-22.png",
     "record": {
-      "wins": 15,
+      "wins": 16,
       "losses": 3,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Drew Dober",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 334",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Renato Moicano",
         "result": "L",
@@ -23783,7 +23839,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/BELGAROUI_YOUSRI_R_10-18.png",
     "record": {
       "wins": 11,
-      "losses": 3,
+      "losses": 4,
       "draws": 0
     },
     "last5": [
@@ -27704,6 +27760,14 @@
     },
     "nickname": "Chuck Buffalo",
     "last5": [
+      {
+        "opponent": "Stephen Thompson",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 334",
+        "round": 3,
+        "time": null
+      },
       {
         "opponent": "Francisco Prado",
         "result": "W",
@@ -33490,10 +33554,18 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/MILLER_JIM_L_05-09.png",
     "record": {
       "wins": 39,
-      "losses": 19,
+      "losses": 20,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Terrance McKinney",
+        "result": "L",
+        "method": "KO/TKO",
+        "event": "UFC 334",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Jared Gordon",
         "result": "W",
@@ -33610,6 +33682,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Melquizael Costa",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 334",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Jim Miller",
         "result": "L",
@@ -34230,11 +34310,19 @@
     "name": "Melquizael Costa",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/COSTA_MELQUIZAEL_L_12-13.png",
     "record": {
-      "wins": 26,
+      "wins": 27,
       "losses": 8,
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Jared Gordon",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 334",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Arnold Allen",
         "result": "L",
@@ -34643,6 +34731,14 @@
     },
     "nickname": "Pegajoso",
     "last5": [
+      {
+        "opponent": "Alatengheili",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 334",
+        "round": null,
+        "time": null
+      },
       {
         "opponent": "Malcolm Wellmaker",
         "result": "W",
@@ -49062,6 +49158,14 @@
     },
     "last5": [
       {
+        "opponent": "Luis Gurule",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 334",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "Nilson Rojas",
         "result": "W",
         "method": "KO/TKO",
@@ -52655,7 +52759,7 @@
     "weightClass": "Women's Bantamweight",
     "record": {
       "wins": 10,
-      "losses": 6,
+      "losses": 7,
       "draws": 0
     },
     "height": "5'11\"",
@@ -52667,6 +52771,14 @@
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/CHIASSON_MACY_L_10-04.png?itok=BRfzm0GS",
     "bio": "Macy Chiasson is an American professional fighter in the UFC women's bantamweight division. Get the latest UFC breaking news, fight night results, MMA records and stats, highlights, photos, videos and more.",
     "last5": [
+      {
+        "opponent": "Bia Mesquita",
+        "result": "L",
+        "method": "Sub",
+        "event": "UFC 334",
+        "round": 1,
+        "time": null
+      },
       {
         "opponent": "Ailín Pérez",
         "result": "L",
@@ -53558,6 +53670,14 @@
     "nickname": "The Mongolian Knight",
     "last5": [
       {
+        "opponent": "Juan Diaz",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 334",
+        "round": null,
+        "time": null
+      },
+      {
         "opponent": "John Castaneda",
         "result": "W",
         "method": "Decision (unanimous)",
@@ -54295,11 +54415,19 @@
     },
     "statsSyncedAt": "2026-09-20T13:30:35.731Z",
     "record": {
-      "wins": 17,
+      "wins": 18,
       "losses": 9,
       "draws": 1
     },
     "last5": [
+      {
+        "opponent": "Charles Radtke",
+        "result": "W",
+        "method": "KO/TKO",
+        "event": "UFC 334",
+        "round": 3,
+        "time": null
+      },
       {
         "opponent": "Gabriel Bonfim",
         "result": "L",
@@ -56119,7 +56247,17 @@
       "losses": 2,
       "draws": 0
     },
-    "nickname": "The Phenom"
+    "nickname": "The Phenom",
+    "last5": [
+      {
+        "opponent": "Samuel Sanches",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 334",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "samuel-sanches",
@@ -56141,7 +56279,17 @@
       "losses": 1,
       "draws": 0
     },
-    "nickname": "The Prodigy"
+    "nickname": "The Prodigy",
+    "last5": [
+      {
+        "opponent": "Evan Elder",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 334",
+        "round": null,
+        "time": null
+      }
+    ]
   },
   {
     "id": "benoit-saint-denis",
@@ -56978,5 +57126,96 @@
       "subAvg": "0.0"
     },
     "statsSyncedAt": "2026-11-12T17:24:38.816Z"
+  },
+  {
+    "id": "nikolas-motta",
+    "name": "Nikolas Motta",
+    "record": {
+      "wins": 15,
+      "losses": 6,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Nazim Sadykhov",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC on ABC: Hill vs. Rountree Jr.",
+        "round": 0,
+        "time": "style=\"text-align:center;\" | 4:17"
+      },
+      {
+        "opponent": "Maheshate Hayisaer",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Yan vs. Figueiredo",
+        "round": 0,
+        "time": "style=\"text-align:center;\" | 5:00"
+      },
+      {
+        "opponent": "Tom Nolan (fighter)",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Ankalaev vs. Walker 2",
+        "round": 0,
+        "time": "style=\"text-align:center;\" | 1:03"
+      },
+      {
+        "opponent": "Manuel Torres (fighter)",
+        "result": "L",
+        "method": "KO (elbow)",
+        "event": "UFC on ESPN: Vettori vs. Cannonier",
+        "round": 0,
+        "time": "style=\"text-align:center;\" | 1:50"
+      },
+      {
+        "opponent": "Cameron VanCamp",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Sandhagen vs. Song",
+        "round": 0,
+        "time": "style=\"text-align:center;\" | 3:49"
+      },
+      {
+        "opponent": "Jim Miller (fighter)",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Walker vs. Hill",
+        "round": 0,
+        "time": "style=\"text-align:center;\" | 1:58"
+      },
+      {
+        "opponent": "Joseph Lowry",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Dana White's Contender Series#Season 4",
+        "round": 0,
+        "time": "style=\"text-align:center;\" | 5:00"
+      },
+      {
+        "opponent": "Juan Gonzalez",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Cage Fury FC 79",
+        "round": 0,
+        "time": "style=\"text-align:center;\" | 5:00"
+      },
+      {
+        "opponent": "Cesar Balmaceda",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "Cage Fury FC 77",
+        "round": 0,
+        "time": "style=\"text-align:center;\" | 0:54"
+      },
+      {
+        "opponent": "Robert Hale",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "864 FC 9",
+        "round": 0,
+        "time": "style=\"text-align:center;\" | 2:46"
+      }
+    ]
   }
 ]

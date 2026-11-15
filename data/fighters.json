@@ -6970,7 +6970,7 @@
     "ranking": "#5",
     "ranking_change": 1,
     "record": {
-      "wins": 18,
+      "wins": 19,
       "losses": 2,
       "draws": 0
     },
@@ -13033,7 +13033,7 @@
     "id": "bia-mesquita",
     "name": "Bia Mesquita",
     "record": {
-      "wins": 8,
+      "wins": 9,
       "losses": 0,
       "draws": 0
     },
@@ -16628,7 +16628,7 @@
     "id": "cesar-almeida",
     "name": "Cesar Almeida",
     "record": {
-      "wins": 7,
+      "wins": 8,
       "losses": 3,
       "draws": 0
     },
@@ -19828,7 +19828,7 @@
     "name": "Terrance McKinney",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/MCKINNEY_TERRANCE_L_03-28.png",
     "record": {
-      "wins": 18,
+      "wins": 19,
       "losses": 9,
       "draws": 0
     },
@@ -20134,7 +20134,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/DOBER_DREW_L_03-07.png",
     "record": {
       "wins": 29,
-      "losses": 15,
+      "losses": 16,
       "draws": 0
     },
     "last5": [
@@ -22825,7 +22825,7 @@
     "name": "Chris Duncan",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-07/DUNCAN_CHRIS_L_07-22.png",
     "record": {
-      "wins": 15,
+      "wins": 16,
       "losses": 3,
       "draws": 0
     },
@@ -23839,7 +23839,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/BELGAROUI_YOUSRI_R_10-18.png",
     "record": {
       "wins": 11,
-      "losses": 3,
+      "losses": 4,
       "draws": 0
     },
     "last5": [
@@ -33554,7 +33554,7 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/MILLER_JIM_L_05-09.png",
     "record": {
       "wins": 39,
-      "losses": 19,
+      "losses": 20,
       "draws": 0
     },
     "last5": [
@@ -34310,7 +34310,7 @@
     "name": "Melquizael Costa",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/COSTA_MELQUIZAEL_L_12-13.png",
     "record": {
-      "wins": 26,
+      "wins": 27,
       "losses": 8,
       "draws": 0
     },
@@ -52759,7 +52759,7 @@
     "weightClass": "Women's Bantamweight",
     "record": {
       "wins": 10,
-      "losses": 6,
+      "losses": 7,
       "draws": 0
     },
     "height": "5'11\"",
@@ -54415,7 +54415,7 @@
     },
     "statsSyncedAt": "2026-09-20T13:30:35.731Z",
     "record": {
-      "wins": 17,
+      "wins": 18,
       "losses": 9,
       "draws": 1
     },
@@ -57126,5 +57126,96 @@
       "subAvg": "0.0"
     },
     "statsSyncedAt": "2026-11-12T17:24:38.816Z"
+  },
+  {
+    "id": "nikolas-motta",
+    "name": "Nikolas Motta",
+    "record": {
+      "wins": 15,
+      "losses": 6,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Nazim Sadykhov",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC on ABC: Hill vs. Rountree Jr.",
+        "round": 0,
+        "time": "style=\"text-align:center;\" | 4:17"
+      },
+      {
+        "opponent": "Maheshate Hayisaer",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Yan vs. Figueiredo",
+        "round": 0,
+        "time": "style=\"text-align:center;\" | 5:00"
+      },
+      {
+        "opponent": "Tom Nolan (fighter)",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Ankalaev vs. Walker 2",
+        "round": 0,
+        "time": "style=\"text-align:center;\" | 1:03"
+      },
+      {
+        "opponent": "Manuel Torres (fighter)",
+        "result": "L",
+        "method": "KO (elbow)",
+        "event": "UFC on ESPN: Vettori vs. Cannonier",
+        "round": 0,
+        "time": "style=\"text-align:center;\" | 1:50"
+      },
+      {
+        "opponent": "Cameron VanCamp",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Sandhagen vs. Song",
+        "round": 0,
+        "time": "style=\"text-align:center;\" | 3:49"
+      },
+      {
+        "opponent": "Jim Miller (fighter)",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Walker vs. Hill",
+        "round": 0,
+        "time": "style=\"text-align:center;\" | 1:58"
+      },
+      {
+        "opponent": "Joseph Lowry",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Dana White's Contender Series#Season 4",
+        "round": 0,
+        "time": "style=\"text-align:center;\" | 5:00"
+      },
+      {
+        "opponent": "Juan Gonzalez",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "Cage Fury FC 79",
+        "round": 0,
+        "time": "style=\"text-align:center;\" | 5:00"
+      },
+      {
+        "opponent": "Cesar Balmaceda",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "Cage Fury FC 77",
+        "round": 0,
+        "time": "style=\"text-align:center;\" | 0:54"
+      },
+      {
+        "opponent": "Robert Hale",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "864 FC 9",
+        "round": 0,
+        "time": "style=\"text-align:center;\" | 2:46"
+      }
+    ]
   }
 ]
