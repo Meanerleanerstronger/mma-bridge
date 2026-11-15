@@ -16520,7 +16520,68 @@
     "poster": "",
     "status": "upcoming",
     "start_time": null,
-    "mainCard": [],
+    "mainCard": [
+      {
+        "a": "Yair Rodriguez",
+        "b": "Steve Garcia",
+        "weight": "Featherweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "main",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Daniel Rodriguez",
+        "b": "Roberto Soldić",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "comain",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Ignacio Bahamondes",
+        "b": "Chidi Njokuani",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
+    "prelims": [],
+    "earlyPrelims": []
+  },
+  {
+    "id": "ufc-fight-night-bonfim-vs-brady",
+    "name": "UFC Fight Night: Bonfim vs. Brady",
+    "type": "FIGHT NIGHT",
+    "date": "Sat, Jan 23, 2027",
+    "isoDate": "2027-01-23",
+    "location": "",
+    "venue": "",
+    "poster": "",
+    "status": "upcoming",
+    "start_time": null,
+    "mainCard": [
+      {
+        "a": "Gabriel Bonfim",
+        "b": "Sean Brady",
+        "weight": "Welterweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "main",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
     "prelims": [],
     "earlyPrelims": []
   },
@@ -16665,6 +16726,48 @@
         "imgB": ""
       }
     ],
+    "earlyPrelims": []
+  },
+  {
+    "id": "ufc-fight-night-pyfer-vs-nickal",
+    "name": "UFC Fight Night: Pyfer vs. Nickal",
+    "type": "FIGHT NIGHT",
+    "date": "Sat, Feb 13, 2027",
+    "isoDate": "2027-02-13",
+    "location": "",
+    "venue": "",
+    "poster": "",
+    "status": "upcoming",
+    "start_time": null,
+    "mainCard": [
+      {
+        "a": "Joe Pyfer",
+        "b": "Bo Nickal",
+        "weight": "Middleweight",
+        "rounds": "5 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "main",
+        "imgA": "",
+        "imgB": ""
+      }
+    ],
+    "prelims": [],
+    "earlyPrelims": []
+  },
+  {
+    "id": "ufc-337",
+    "name": "UFC 337",
+    "type": "PPV",
+    "date": "Sat, Feb 20, 2027",
+    "isoDate": "2027-02-20",
+    "location": "",
+    "venue": "",
+    "poster": "",
+    "status": "upcoming",
+    "start_time": null,
+    "mainCard": [],
+    "prelims": [],
     "earlyPrelims": []
   }
 ]
