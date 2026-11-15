@@ -15972,7 +15972,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/HASAN_BILAL_L_08-11.png?itok=wL9PQxdA",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-09/GURULE_LUIS_R_09-13.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-09/GURULE_LUIS_R_09-13.png",
+        "winner": "Luis Gurule",
+        "method": "DEC",
+        "_supabaseSynced": true
       }
     ],
     "prelims": [
@@ -15985,7 +15988,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/DOBER_DREW_L_03-07.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-07/DUNCAN_CHRIS_L_07-22.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2023-07/DUNCAN_CHRIS_L_07-22.png",
+        "winner": "Chris Duncan",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Jim Miller",
@@ -15996,7 +16002,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/MILLER_JIM_L_05-09.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/MCKINNEY_TERRANCE_L_03-28.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/MCKINNEY_TERRANCE_L_03-28.png",
+        "winner": "Terrance McKinney",
+        "method": "KO/TKO",
+        "round": 1,
+        "_supabaseSynced": true
       },
       {
         "a": "Stephen Thompson",
@@ -16007,7 +16017,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/THOMPSON_STEPHEN_L_07-12.png?itok=T4Y2Tqct",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/RADTKE_CHARLES_L_04-11.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/RADTKE_CHARLES_L_04-11.png",
+        "winner": "Stephen Thompson",
+        "method": "KO/TKO",
+        "round": 3,
+        "_supabaseSynced": true
       },
       {
         "a": "Donte Johnson",
@@ -16018,7 +16032,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/JOHNSON_DONTE_L_03-07.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/ALMEIDA_CESAR_L_12-13.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/ALMEIDA_CESAR_L_12-13.png",
+        "winner": "Cesar Almeida",
+        "method": "KO/TKO",
+        "round": 1,
+        "_supabaseSynced": true
       }
     ],
     "earlyPrelims": [
@@ -16031,7 +16049,11 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/CHIASSON_MACY_L_10-04.png?itok=BRfzm0GS",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/MESQUITA_BIA_L_10-11.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-10/MESQUITA_BIA_L_10-11.png",
+        "winner": "Bia Mesquita",
+        "method": "SUB",
+        "round": 1,
+        "_supabaseSynced": true
       },
       {
         "a": "Evan Elder",
@@ -16042,7 +16064,10 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-04/ELDER_EVAN_L_04-26.png?itok=FqH6Jch-",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/SANCHES_SAMUEL_R_09-09.png?itok=RWqnGB4l"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/SANCHES_SAMUEL_R_09-09.png?itok=RWqnGB4l",
+        "winner": "Evan Elder",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Jared Gordon",
@@ -16053,7 +16078,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/GORDON_JARED_L_05-17.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/COSTA_MELQUIZAEL_L_12-13.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/COSTA_MELQUIZAEL_L_12-13.png",
+        "winner": "Melquizael Costa",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Alatengheili",
@@ -16064,7 +16092,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-04/ALATENGHEILI_L_05-18.png?itok=tO6xLHed",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/DIAS_JUAN_R_05-16.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/DIAS_JUAN_R_05-16.png",
+        "winner": "Juan Diaz",
+        "method": "DEC",
+        "_supabaseSynced": true
       }
     ],
     "droppedFights": [
