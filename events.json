@@ -16446,7 +16446,7 @@
     "venue": "",
     "poster": "https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/2026-11/121226-ufc-335-oliveira-vs-lopes-EVENT-ART.jpg",
     "status": "upcoming",
-    "start_time": null,
+    "start_time": "2026-12-12T22:00:00.000Z",
     "mainCard": [
       {
         "a": "Charles Oliveira",
@@ -16454,7 +16454,7 @@
         "weight": "Lightweight",
         "rounds": "5 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/OLIVEIRA_CHARLES_L_BMFMOCK.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/LOPES_DIEGO_L_06-14.png"
@@ -16465,34 +16465,43 @@
         "weight": "Heavyweight",
         "rounds": "5 Rds",
         "titleFight": false,
-        "ranked": false,
+        "ranked": true,
         "slot": "comain",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/PAVLOVICH_SERGEI_L_05-30.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/PEREIRA_ALEX_L.png"
       },
       {
-        "a": "Bo Nickal",
-        "b": "Joe Pyfer",
+        "a": "Brandon Moreno",
+        "b": "Charles Johnson",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/MORENO_BRANDON_L_02-28.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/JOHNSON_CHARLES_L_03-14.png"
+      },
+      {
+        "a": "Kyler Phillips",
+        "b": "Ethyn Ewing",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/PHILLIPS_KYLER_L_04-18.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/EWING_ETHYN_L_04-04.png"
+      },
+      {
+        "a": "Damian Pinas",
+        "b": "Baisangur Susurkaev",
         "weight": "Middleweight",
         "rounds": "3 Rds",
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/NICKAL_BO_L_06-14.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2024-06/PYFER_JOE_L_06-29.png",
-        "cancelled": true
-      },
-      {
-        "a": "Maycee Barber",
-        "b": "Carli Judice",
-        "weight": "W Flyweight",
-        "rounds": "3 Rds",
-        "titleFight": false,
-        "ranked": false,
-        "slot": "",
-        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/BARBER_MAYCEE_L_12-06.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-07/JUDICE_CARLI_L_07-19.png",
-        "cancelled": true
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/PINAS_DAMIAN_L_02-28.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/SUSURKAEV_BAISANGUR_L_05-09.png"
       }
     ],
     "prelims": [
@@ -16508,7 +16517,21 @@
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/TAFA_JUNIOR_L_05-02.png"
       }
     ],
-    "earlyPrelims": []
+    "earlyPrelims": [],
+    "droppedFights": [
+      {
+        "a": "Bo Nickal",
+        "b": "Joe Pyfer",
+        "reason": "removed from the card",
+        "droppedAt": "2026-11-19T01:35:13.703Z"
+      },
+      {
+        "a": "Maycee Barber",
+        "b": "Carli Judice",
+        "reason": "removed from the card",
+        "droppedAt": "2026-11-19T01:35:13.703Z"
+      }
+    ]
   },
   {
     "id": "ufc-fight-night-dallas",
@@ -16569,7 +16592,7 @@
     "venue": "",
     "poster": "",
     "status": "upcoming",
-    "start_time": "2027-01-23T22:00:00.000Z",
+    "start_time": "2027-01-24T01:00:00.000Z",
     "mainCard": [
       {
         "a": "Gabriel Bonfim",
