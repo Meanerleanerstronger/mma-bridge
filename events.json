@@ -16284,7 +16284,19 @@
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/LORENZ_ALIK_L_08-18.png?itok=d0cY5m7y"
       }
     ],
-    "earlyPrelims": []
+    "earlyPrelims": [
+      {
+        "a": "Shoaib Yousaf",
+        "b": "John Mitchell",
+        "weight": "Lightweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ]
   },
   {
     "id": "ufc-fight-night-adesanya-vs-magomedov",
@@ -16490,7 +16502,8 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/PHILLIPS_KYLER_L_04-18.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/EWING_ETHYN_L_04-04.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/EWING_ETHYN_L_04-04.png",
+        "_espnMissStreak": true
       },
       {
         "a": "Damian Pinas",
@@ -16501,7 +16514,8 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/PINAS_DAMIAN_L_02-28.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/SUSURKAEV_BAISANGUR_L_05-09.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/SUSURKAEV_BAISANGUR_L_05-09.png",
+        "_espnMissStreak": true
       }
     ],
     "prelims": [
