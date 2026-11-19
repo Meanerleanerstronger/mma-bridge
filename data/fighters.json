@@ -734,7 +734,7 @@
     "ranking_change": -1,
     "record": {
       "wins": 32,
-      "losses": 6,
+      "losses": 5,
       "draws": 1
     },
     "height": "6'4\"",
@@ -1042,7 +1042,7 @@
     "ranking": "#12",
     "ranking_change": 0,
     "record": {
-      "wins": 28,
+      "wins": 27,
       "losses": 9,
       "draws": 0
     },
@@ -3306,8 +3306,8 @@
     "ranking": "#8",
     "ranking_change": 1,
     "record": {
-      "wins": 24,
-      "losses": 10,
+      "wins": 23,
+      "losses": 9,
       "draws": 2
     },
     "height": "5'7\"",
@@ -6730,7 +6730,7 @@
     "ranking": "#2",
     "ranking_change": 2,
     "record": {
-      "wins": 24,
+      "wins": 23,
       "losses": 7,
       "draws": 0
     },
@@ -14420,9 +14420,9 @@
     },
     "last5": [
       {
-        "opponent": "Eduardo Chapolin",
+        "opponent": "Eduardo Henrique",
         "result": "W",
-        "method": "Submission",
+        "method": "Submission (twister)",
         "event": "UFC 330",
         "round": 3,
         "time": "1:36"
@@ -14430,23 +14430,23 @@
       {
         "opponent": "Asu Almabayev",
         "result": "L",
-        "method": "Submission",
-        "event": "UFC Fight Night: Jun. 27, 2026",
+        "method": "Submission (hamstring stretch)",
+        "event": "UFC Fight Night: Fiziev vs. Torres",
         "round": 3,
         "time": "3:33"
       },
       {
-        "opponent": "Bruno Silva",
+        "opponent": "Bruno Gustavo da Silva",
         "result": "W",
         "method": "Decision (split)",
-        "event": "UFC Fight Night: Mar. 14, 2026",
+        "event": "UFC Fight Night: Emmett vs. Vallejos",
         "round": 3,
         "time": "5:00"
       },
       {
-        "opponent": "Alex Perez",
+        "opponent": "Alex Perez (fighter)",
         "result": "L",
-        "method": "KO/TKO",
+        "method": "TKO (punches)",
         "event": "UFC 324",
         "round": 1,
         "time": "3:16"
@@ -14454,10 +14454,50 @@
       {
         "opponent": "Lone'er Kavanagh",
         "result": "W",
-        "method": "KO/TKO",
-        "event": "UFC Fight Night: Aug. 23, 2025",
+        "method": "KO (punch)",
+        "event": "UFC Fight Night: Walker vs. Zhang",
         "round": 2,
         "time": "4:35"
+      },
+      {
+        "opponent": "Ramazan Temirov",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Kape vs. Almabayev",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Su Mudaerji",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Hernandez vs. Pereira",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Joshua Van",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "UFC on ESPN: Namajunas vs. Cortez",
+        "round": 3,
+        "time": "0:20"
+      },
+      {
+        "opponent": "Jake Hadley",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Lewis vs. Nascimento",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Azat Maksum",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Dolidze vs. Imavov",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/JOHNSON_CHARLES_L_03-14.png",
@@ -33484,7 +33524,7 @@
     "name": "Yaroslav Amosov",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/AMOSOV_YAROSLAV_R_12-13.png",
     "record": {
-      "wins": 29,
+      "wins": 30,
       "losses": 1,
       "draws": 0
     },
@@ -42352,7 +42392,7 @@
     "id": "chidi-njokuani",
     "name": "Chidi Njokuani",
     "record": {
-      "wins": 26,
+      "wins": 25,
       "losses": 12,
       "draws": 0
     },
@@ -47287,7 +47327,7 @@
     "weightClass": "Featherweight",
     "ranking": "#5",
     "record": {
-      "wins": 21,
+      "wins": 20,
       "losses": 5,
       "draws": 0
     },
@@ -54025,7 +54065,7 @@
     "id": "roberto-soldi",
     "name": "Roberto Soldić",
     "record": {
-      "wins": 22,
+      "wins": 21,
       "losses": 4,
       "draws": 0
     },
@@ -56551,7 +56591,7 @@
     "id": "akbar-abdullaev",
     "name": "Akbar Abdullaev",
     "record": {
-      "wins": 1,
+      "wins": 14,
       "losses": 0,
       "draws": 0
     },
@@ -56654,9 +56694,9 @@
     "id": "bruno-silva",
     "name": "Bruno Silva",
     "record": {
-      "wins": 15,
-      "losses": 9,
-      "draws": 2
+      "wins": 23,
+      "losses": 13,
+      "draws": 0
     },
     "last5": [
       {
