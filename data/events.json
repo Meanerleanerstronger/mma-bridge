@@ -16501,8 +16501,7 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/PHILLIPS_KYLER_L_04-18.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/EWING_ETHYN_L_04-04.png",
-        "cancelled": true
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/EWING_ETHYN_L_04-04.png"
       },
       {
         "a": "Damian Pinas",
@@ -16513,8 +16512,7 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/PINAS_DAMIAN_L_02-28.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/SUSURKAEV_BAISANGUR_L_05-09.png",
-        "cancelled": true
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/SUSURKAEV_BAISANGUR_L_05-09.png"
       }
     ],
     "prelims": [
@@ -16756,6 +16754,28 @@
         "slot": "comain",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/PRATES_CARLOS_L_08-17.png",
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/5/MORALES_MICHAEL_L_08-24.png"
+      },
+      {
+        "a": "Serhiy Sidey",
+        "b": "Louis Lee Scott",
+        "weight": "Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      },
+      {
+        "a": "Cam Nelson",
+        "b": "Sean Clancy Jr.",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
       }
     ],
     "prelims": [],
@@ -16864,7 +16884,19 @@
         "imgB": ""
       }
     ],
-    "earlyPrelims": []
+    "earlyPrelims": [
+      {
+        "a": "Jonathan Micallef",
+        "b": "Sam Patterson",
+        "weight": "Welterweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
+      }
+    ]
   },
   {
     "id": "ufc-fight-night-pyfer-vs-nickal",
