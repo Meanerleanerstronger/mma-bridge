@@ -43020,90 +43020,90 @@
     "id": "john-garza",
     "name": "John Garza",
     "record": {
-      "wins": 6,
-      "losses": 2,
-      "draws": 0
+      "wins": 24,
+      "losses": 4,
+      "draws": 1
     },
     "last5": [
       {
-        "opponent": "Daniel Zellhuber",
+        "opponent": "Adriano Moraes (fighter)",
         "result": "W",
-        "method": "Decision (unanimous)",
-        "event": "UFC 318",
-        "round": 3,
-        "time": "5:00"
+        "method": "KO (flying knee)",
+        "event": "ONE on Prime Video 1",
+        "round": 4,
+        "time": "3:50"
       },
       {
-        "opponent": "Ottman Azaitar",
-        "result": "W",
-        "method": "KO (punch)",
-        "event": "UFC on ESPN: Covington vs. Buckley",
-        "round": 2,
-        "time": "2:03"
-      },
-      {
-        "opponent": "Darrius Flowers",
-        "result": "W",
-        "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Hermansson vs. Pyfer",
-        "round": 3,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Carlos Diego Ferreira",
+        "opponent": "Adriano Moraes (fighter)",
         "result": "L",
-        "method": "KO (punch)",
-        "event": "UFC Fight Night: Dern vs. Hill",
+        "method": "KO (knee)",
+        "event": "2021 in ONE Championship#ONE on TNT 1",
         "round": 2,
-        "time": "1:50"
+        "time": "2:24"
       },
       {
-        "opponent": "Marc Diakiese",
+        "opponent": "Danny Kingad",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC on ESPN: Thompson vs. Holland",
+        "event": "2019 in ONE Championship#Part 1",
         "round": 3,
         "time": "5:00"
       },
       {
-        "opponent": "Jamie Mullarkey",
+        "opponent": "Tatsumitsu Wada",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "2019 in ONE Championship#ONE Championship: Dawn Of Heroes",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Yuya Wakamatsu",
+        "result": "W",
+        "method": "Submission (guillotine choke)",
+        "event": "2019 in ONE Championship#ONE Championship: A New Era",
+        "round": 2,
+        "time": "2:40"
+      },
+      {
+        "opponent": "Henry Cejudo",
         "result": "L",
         "method": "Decision (split)",
-        "event": "UFC on ESPN: dos Anjos vs. Fiziev",
-        "round": 3,
+        "event": "UFC 227",
+        "round": 5,
         "time": "5:00"
       },
       {
-        "opponent": "Alan Patrick (fighter)",
+        "opponent": "Ray Borg",
         "result": "W",
-        "method": "KO (punches)",
-        "event": "UFC on ESPN: Błachowicz vs. Rakić",
-        "round": 2,
-        "time": "3:22"
+        "method": "Submission (armbar)",
+        "event": "UFC 216",
+        "round": 5,
+        "time": "3:15"
       },
       {
-        "opponent": "Clay Guida",
-        "result": "L",
+        "opponent": "Wilson Reis",
+        "result": "W",
+        "method": "Submission (armbar)",
+        "event": "UFC on Fox: Johnson vs. Reis",
+        "round": 3,
+        "time": "4:49"
+      },
+      {
+        "opponent": "Tim Elliott",
+        "result": "W",
         "method": "Decision (unanimous)",
-        "event": "UFC Fight Night: Overeem vs. Volkov",
-        "round": 3,
+        "event": "The Ultimate Fighter: Tournament of Champions#The Ultimate Fighter 24 Finale",
+        "round": 5,
         "time": "5:00"
       },
       {
-        "opponent": "Thiago Moisés",
-        "result": "L",
-        "method": "Submission (achilles lock)",
-        "event": "UFC Fight Night: Smith vs. Teixeira",
-        "round": 2,
-        "time": "0:25"
-      },
-      {
-        "opponent": "Stevie Ray (fighter)",
-        "result": "L",
-        "method": "Decision (majority)",
-        "event": "UFC Fight Night: Maia vs. Askren",
-        "round": 3,
-        "time": "5:00"
+        "opponent": "Henry Cejudo",
+        "result": "W",
+        "method": "TKO (knees to the body)",
+        "event": "UFC 197",
+        "round": 1,
+        "time": "2:49"
       }
     ],
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_BLUE.png?VersionId=Om_hItmX1XM4gJZUDxmeO._luirl8gW7&amp;itok=ij6lbEqO",
@@ -43770,8 +43770,8 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/NZECHUKWU_KENNEDY_L_12-13.png",
     "record": {
       "wins": 14,
-      "losses": 7,
-      "draws": 1
+      "losses": 6,
+      "draws": 0
     },
     "last5": [
       {
@@ -44133,6 +44133,14 @@
       "draws": 0
     },
     "last5": [
+      {
+        "opponent": "Damian Rzepecki",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Ankalaev vs. Guskov",
+        "round": 3,
+        "time": "5:00"
+      },
       {
         "opponent": "Lucas Caldas",
         "result": "W",
@@ -54500,16 +54508,16 @@
     "name": "Cody Chovancek",
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-09/CHOVANCEK_CODY_R_09-16.png?itok=v2G8Yooy",
     "stats": {
-      "slpm": "2.85",
-      "strAcc": "50%",
-      "sapm": "2.46",
-      "strDef": "51%",
+      "slpm": "1.23",
+      "strAcc": "46%",
+      "sapm": "1.23",
+      "strDef": "49%",
       "tdAvg": "0.00",
       "tdAcc": "0%",
-      "tdDef": "83%",
+      "tdDef": "50%",
       "subAvg": "0.0"
     },
-    "statsSyncedAt": "2026-09-21T15:42:47.619Z",
+    "statsSyncedAt": "2026-11-20T17:35:13.462Z",
     "record": {
       "wins": 9,
       "losses": 1,
@@ -57411,5 +57419,394 @@
       "losses": 2,
       "draws": 0
     }
+  },
+  {
+    "id": "shoaib-yousaf",
+    "name": "Shoaib Yousaf",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-11/YOUSAF_SHOAIB_L_11-21.png?itok=ceSbUhXJ",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-11-20T17:34:50.996Z"
+  },
+  {
+    "id": "john-mitchell",
+    "name": "John Mitchell",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-11/MITCHELL_JOHN_R_11-21.png?itok=6IuAb4pU",
+    "stats": {
+      "slpm": "0.00",
+      "strAcc": "0%",
+      "sapm": "0.00",
+      "strDef": "0%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-11-20T17:34:53.809Z"
+  },
+  {
+    "id": "chris-curtis",
+    "name": "Chris Curtis",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-03/CURTIS_CHRIS_L_03-14.png?itok=hDIZj-a7",
+    "stats": {
+      "slpm": "5.52",
+      "strAcc": "50%",
+      "sapm": "5.75",
+      "strDef": "54%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "64%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-11-20T17:34:56.685Z",
+    "record": {
+      "wins": 32,
+      "losses": 13,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Myktybek Orolbai",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Emmett vs. Vallejos",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Max Griffin",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC on ESPN: Lewis vs. Teixeira",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Roman Kopylov",
+        "result": "L",
+        "method": "TKO (head kick)",
+        "event": "UFC Fight Night: Dern vs. Ribas 2",
+        "round": 3,
+        "time": "4:59"
+      },
+      {
+        "opponent": "Brendan Allen",
+        "result": "L",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Allen vs. Curtis 2",
+        "round": 5,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Marc-André Barriault",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC 297",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Kelvin Gastelum",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 287",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Joaquin Buckley",
+        "result": "W",
+        "method": "KO (punches)",
+        "event": "UFC 282",
+        "round": 2,
+        "time": "2:49"
+      },
+      {
+        "opponent": "Jack Hermansson",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Blaydes vs. Aspinall",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Rodolfo Vieira",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC on ESPN: Tsarukyan vs. Gamrot",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Brendan Allen",
+        "result": "W",
+        "method": "TKO (punches and knees)",
+        "event": "UFC on ESPN: Font vs. Aldo",
+        "round": 2,
+        "time": "1:58"
+      }
+    ]
+  },
+  {
+    "id": "michael-aljarouj",
+    "name": "Michael Aljarouj",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-09/ALJAROUJ_MICHAEL_L_09-05.png?itok=0sV5EHmS",
+    "stats": {
+      "slpm": "0.67",
+      "strAcc": "31%",
+      "sapm": "1.87",
+      "strDef": "42%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "62%",
+      "subAvg": "1.0"
+    },
+    "statsSyncedAt": "2026-11-20T17:34:59.505Z"
+  },
+  {
+    "id": "piero-guaylupo",
+    "name": "Piero Guaylupo",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-09/GUAYLUPO_PIERO_R_09-22.png?itok=1K0V6sew",
+    "stats": {
+      "slpm": "13.93",
+      "strAcc": "66%",
+      "sapm": "17.67",
+      "strDef": "29%",
+      "tdAvg": "0.00",
+      "tdAcc": "0%",
+      "tdDef": "100%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-11-20T17:35:02.418Z"
+  },
+  {
+    "id": "toshiomi-kazama",
+    "name": "Toshiomi Kazama",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-08/KAZAMA_TOSHIOMI_L_08-10.png?itok=I1V758sE",
+    "stats": {
+      "slpm": "1.49",
+      "strAcc": "53%",
+      "sapm": "4.56",
+      "strDef": "38%",
+      "tdAvg": "1.94",
+      "tdAcc": "16%",
+      "tdDef": "66%",
+      "subAvg": "1.0"
+    },
+    "statsSyncedAt": "2026-11-20T17:35:05.419Z"
+  },
+  {
+    "id": "sam-hughes",
+    "name": "Sam Hughes",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-02/HUGHES_SAM_L_02-24.png?itok=g_WvjE_Z",
+    "stats": {
+      "slpm": "4.41",
+      "strAcc": "47%",
+      "sapm": "4.69",
+      "strDef": "58%",
+      "tdAvg": "1.12",
+      "tdAcc": "29%",
+      "tdDef": "63%",
+      "subAvg": "0.2"
+    },
+    "statsSyncedAt": "2026-11-20T17:35:08.289Z",
+    "record": {
+      "wins": 11,
+      "losses": 7,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Piera Rodríguez",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Emmett vs. Vallejos",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Shauna Bannon",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC Fight Night: Imavov vs. Borralho",
+        "round": 2,
+        "time": "1:58"
+      },
+      {
+        "opponent": "Stephanie Luciano",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC Fight Night: Vettori vs. Dolidze 2",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Victoria Dudakova",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "UFC on ABC: Sandhagen vs. Nurmagomedov",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Yazmin Jauregui",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Moreno vs. Royval 2",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Jaqueline Amorim",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 287",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Piera Rodríguez",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Grasso vs. Araújo",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Elise Reed",
+        "result": "W",
+        "method": "TKO (elbow and punches)",
+        "event": "UFC Fight Night: Holm vs. Vieira",
+        "round": 3,
+        "time": "3:52"
+      },
+      {
+        "opponent": "Istela Nunes",
+        "result": "W",
+        "method": "Decision (majority)",
+        "event": "UFC on ESPN: Luque vs. Muhammad 2",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Luana Pinheiro",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Vieira vs. Tate",
+        "round": 3,
+        "time": "5:00"
+      }
+    ]
+  },
+  {
+    "id": "karolina-kowalkiewicz",
+    "name": "Karolina Kowalkiewicz",
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-11/KOWALKIEWICZ_KAROLINA_L_11-09.png?itok=JK5FHctD",
+    "stats": {
+      "slpm": "5.54",
+      "strAcc": "42%",
+      "sapm": "5.77",
+      "strDef": "56%",
+      "tdAvg": "0.36",
+      "tdAcc": "23%",
+      "tdDef": "74%",
+      "subAvg": "0.2"
+    },
+    "statsSyncedAt": "2026-11-20T17:35:10.999Z",
+    "record": {
+      "wins": 16,
+      "losses": 10,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Julia Polastri",
+        "result": "L",
+        "method": "TKO (head kick and punches)",
+        "event": "UFC Fight Night: Oliveira vs. Gamrot",
+        "round": 3,
+        "time": "2:56"
+      },
+      {
+        "opponent": "Denise Gomes",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Magny vs. Prates",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Iasmin Lucindo",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 301",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Diana Belbiţă",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Dawson vs. Green",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Vanessa Demopoulos",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Dern vs. Hill",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Silvana Gómez Juárez",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC 281",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Felice Herrig",
+        "result": "W",
+        "method": "Submission (rear-naked choke)",
+        "event": "UFC Fight Night: Volkov vs. Rozenstruik",
+        "round": 2,
+        "time": "4:01"
+      },
+      {
+        "opponent": "Jessica Penne",
+        "result": "L",
+        "method": "Submission (armbar)",
+        "event": "UFC 265",
+        "round": 1,
+        "time": "4:32"
+      },
+      {
+        "opponent": "Yan Xiaonan",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Felder vs. Hooker",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Alexa Grasso",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC 238",
+        "round": 3,
+        "time": "5:00"
+      }
+    ]
   }
 ]
