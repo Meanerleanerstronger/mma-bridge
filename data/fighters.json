@@ -54874,16 +54874,16 @@
     ],
     "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-11/GALL_MICKEY_L_11-16.png?itok=tlDNrYh3",
     "stats": {
-      "slpm": "3.50",
+      "slpm": "3.62",
       "strAcc": "49%",
-      "sapm": "4.72",
-      "strDef": "49%",
-      "tdAvg": "1.15",
-      "tdAcc": "32%",
-      "tdDef": "37%",
-      "subAvg": "1.6"
+      "sapm": "5.05",
+      "strDef": "48%",
+      "tdAvg": "1.00",
+      "tdAcc": "29%",
+      "tdDef": "41%",
+      "subAvg": "1.4"
     },
-    "statsSyncedAt": "2026-09-22T13:56:41.967Z"
+    "statsSyncedAt": "2026-11-21T16:39:49.878Z"
   },
   {
     "id": "tina-black",
@@ -57812,16 +57812,49 @@
   {
     "id": "serhiy-sidey",
     "name": "Serhiy Sidey",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-10/SIDEY_SERHIY_L_11-02.png?itok=c_XKK2-I"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-10/SIDEY_SERHIY_L_11-02.png?itok=c_XKK2-I",
+    "stats": {
+      "slpm": "4.49",
+      "strAcc": "39%",
+      "sapm": "4.26",
+      "strDef": "54%",
+      "tdAvg": "1.58",
+      "tdAcc": "25%",
+      "tdDef": "20%",
+      "subAvg": "1.3"
+    },
+    "statsSyncedAt": "2026-11-21T16:39:36.777Z"
   },
   {
     "id": "louis-lee-scott",
     "name": "Louis Lee Scott",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/SCOTT_LOUIS_LEE_R_08-19.png?itok=LI80Ph-5"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-08/SCOTT_LOUIS_LEE_R_08-19.png?itok=LI80Ph-5",
+    "stats": {
+      "slpm": "5.35",
+      "strAcc": "58%",
+      "sapm": "0.81",
+      "strDef": "71%",
+      "tdAvg": "2.43",
+      "tdAcc": "66%",
+      "tdDef": "100%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-11-21T16:39:41.689Z"
   },
   {
     "id": "sean-clancy-jr",
     "name": "Sean Clancy Jr.",
-    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-09/CLANCY_JR_SEAN_R_08-25.png?itok=GM-K67M3"
+    "img": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-09/CLANCY_JR_SEAN_R_08-25.png?itok=GM-K67M3",
+    "stats": {
+      "slpm": "5.73",
+      "strAcc": "60%",
+      "sapm": "1.24",
+      "strDef": "66%",
+      "tdAvg": "1.69",
+      "tdAcc": "100%",
+      "tdDef": "0%",
+      "subAvg": "0.0"
+    },
+    "statsSyncedAt": "2026-11-21T16:39:44.794Z"
   }
 ]
