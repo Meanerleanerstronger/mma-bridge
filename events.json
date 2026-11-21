@@ -16157,7 +16157,7 @@
     "location": "",
     "venue": "",
     "poster": "https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_xl_2x/s3/2026-10/112126-ufc-fight-night-prochazka-vs-stirling-EVENT-ART.jpg",
-    "status": "upcoming",
+    "status": "completed",
     "start_time": "2026-11-21T15:00:00.000Z",
     "mainCard": [
       {
@@ -16169,7 +16169,11 @@
         "ranked": true,
         "slot": "main",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/PROCHAZKA_JIRI_L_04-11.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/STIRLING_NAVAJO_L_03-28.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-03/STIRLING_NAVAJO_L_03-28.png",
+        "winner": "Navajo Stirling",
+        "method": "KO/TKO",
+        "round": 2,
+        "_supabaseSynced": true
       },
       {
         "a": "Aljamain Sterling",
@@ -16180,7 +16184,10 @@
         "ranked": true,
         "slot": "comain",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/STERLING_ALJAMAIN_L_04-25.png",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-12/VALLEJOS_KEVIN_R_12-13.png?itok=-h2gdx6Y"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-12/VALLEJOS_KEVIN_R_12-13.png?itok=-h2gdx6Y",
+        "winner": "Kevin Vallejos",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Dan Hooker",
@@ -16191,7 +16198,10 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/HOOKER_DAN_L_01-31.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/ORTEGA_BRIAN_L_08-23.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/ORTEGA_BRIAN_L_08-23.png",
+        "winner": "Dan Hooker",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Jared Cannonier",
@@ -16202,7 +16212,10 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-08/CANNONIER_JARED_L_08-16.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/ALISKEROV_IKRAM_L_06-27.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/ALISKEROV_IKRAM_L_06-27.png",
+        "winner": "Ikram Aliskerov",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Kyoji Horiguchi",
@@ -16213,7 +16226,10 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-11/HORIGUCHI_KYOJI_R_11-22.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/ALMABAYEV_ASU_L_06-27.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/ALMABAYEV_ASU_L_06-27.png",
+        "winner": "Kyoji Horiguchi",
+        "method": "DEC",
+        "_supabaseSynced": true
       }
     ],
     "prelims": [
@@ -16226,7 +16242,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-05/MATTHEWS_JAKE_L_05-30.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/ABDULLAYEV_TAHIR_L_06-27.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-06/ABDULLAYEV_TAHIR_L_06-27.png",
+        "winner": "Tahir Abdullayev",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Aleksandre Topuria",
@@ -16237,7 +16256,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-02/TOPURIA_ALEKSANDRE_R_02-08.png?itok=v-giNC1x",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/LUNA_SANTIAGO_L_02-28.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/LUNA_SANTIAGO_L_02-28.png",
+        "winner": "Santiago Luna",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Shamil Gaziev",
@@ -16248,7 +16270,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/GAZIEV_SHAMIL_L_05-02.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-07/TEIXEIRA_TALLISON_R_07-12.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-07/TEIXEIRA_TALLISON_R_07-12.png",
+        "winner": "Tallison Teixeira",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Amir Albazi",
@@ -16259,7 +16284,11 @@
         "ranked": true,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-02/ALBAZI_AMIR_L_02-07.png",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/COSTA_ALESSANDRO_L_04-04.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/COSTA_ALESSANDRO_L_04-04.png",
+        "winner": "Amir Albazi",
+        "method": "SUB",
+        "round": 3,
+        "_supabaseSynced": true
       },
       {
         "a": "Nikolas Motta",
@@ -16270,7 +16299,10 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2024-01/MOTTA_NIKOLAS_L_01-13.png?itok=j7dTiOfC",
-        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/MAR_FAN_DOM_R_01-31.png"
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-01/MAR_FAN_DOM_R_01-31.png",
+        "winner": "Dom Mar Fan",
+        "method": "DEC",
+        "_supabaseSynced": true
       },
       {
         "a": "Diyar Nurgozhay",
@@ -16281,7 +16313,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-03/NURGOZHAY_DIYAR_L_03-15.png",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/LORENZ_ALIK_L_08-18.png?itok=d0cY5m7y"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/LORENZ_ALIK_L_08-18.png?itok=d0cY5m7y",
+        "winner": "Diyar Nurgozhay",
+        "method": "KO/TKO",
+        "round": 2,
+        "_supabaseSynced": true
       },
       {
         "a": "Shoaib Yousaf",
@@ -16292,7 +16328,11 @@
         "ranked": false,
         "slot": "",
         "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-11/YOUSAF_SHOAIB_L_11-21.png?itok=ceSbUhXJ",
-        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-11/MITCHELL_JOHN_R_11-21.png?itok=6IuAb4pU"
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-11/MITCHELL_JOHN_R_11-21.png?itok=6IuAb4pU",
+        "winner": "John Mitchell",
+        "method": "KO/TKO",
+        "round": 1,
+        "_supabaseSynced": true
       }
     ],
     "earlyPrelims": []
@@ -16363,6 +16403,17 @@
         "slot": "",
         "imgA": "",
         "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-09/ABDULLAEV_AKBAR_R_09-15.png?itok=7e_lanQN"
+      },
+      {
+        "a": "Luke Riley",
+        "b": "Gabriel Santos",
+        "weight": "Featherweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": false,
+        "slot": "",
+        "imgA": "",
+        "imgB": ""
       }
     ],
     "prelims": [
