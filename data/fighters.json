@@ -58054,5 +58054,96 @@
       "subAvg": "0.0"
     },
     "statsSyncedAt": "2026-11-21T16:39:44.794Z"
+  },
+  {
+    "id": "gabriel-santos",
+    "name": "Gabriel Santos",
+    "record": {
+      "wins": 23,
+      "losses": 11,
+      "draws": 0
+    },
+    "last5": [
+      {
+        "opponent": "Robelis Despaigne",
+        "result": "L",
+        "method": "KO (punches)",
+        "event": "MVP MMA: Rousey vs. Carano",
+        "round": 1,
+        "time": "2:59"
+      },
+      {
+        "opponent": "Alan Belcher",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "Gamebred Bareknuckle MMA 7",
+        "round": 2,
+        "time": "4:39"
+      },
+      {
+        "opponent": "Fabrício Werdum",
+        "result": "W",
+        "method": "Decision (split)",
+        "event": "Gamebred Bareknuckle MMA 5",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Yorgan De Castro",
+        "result": "L",
+        "method": "TKO (shoulder injury)",
+        "event": "2022 in Eagle Fighting Championship#Eagle FC 47: Dos Santos vs. De Castro",
+        "round": 3,
+        "time": "0:35"
+      },
+      {
+        "opponent": "Ciryl Gane",
+        "result": "L",
+        "method": "TKO (elbow)",
+        "event": "UFC 256",
+        "round": 2,
+        "time": "2:34"
+      },
+      {
+        "opponent": "Jairzinho Rozenstruik",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC 252",
+        "round": 2,
+        "time": "3:47"
+      },
+      {
+        "opponent": "Curtis Blaydes",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Blaydes vs. dos Santos",
+        "round": 2,
+        "time": "1:06"
+      },
+      {
+        "opponent": "Francis Ngannou",
+        "result": "L",
+        "method": "TKO (punches)",
+        "event": "UFC on ESPN: Ngannou vs. dos Santos",
+        "round": 1,
+        "time": "1:11"
+      },
+      {
+        "opponent": "Derrick Lewis",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: Lewis vs. dos Santos",
+        "round": 2,
+        "time": "1:58"
+      },
+      {
+        "opponent": "Tai Tuivasa",
+        "result": "W",
+        "method": "TKO (punches)",
+        "event": "UFC Fight Night: dos Santos vs. Tuivasa",
+        "round": 2,
+        "time": "2:30"
+      }
+    ]
   }
 ]
