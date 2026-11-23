@@ -51,31 +51,35 @@
       },
       {
         "rank": 8,
-        "name": "Tom Aspinall",
+        "name": "Ciryl Gane",
         "isChamp": false,
-        "movement": "same"
+        "movement": "up",
+        "prevRank": 12
       },
       {
         "rank": 9,
-        "name": "Merab Dvalishvili",
+        "name": "Tom Aspinall",
         "isChamp": false,
-        "movement": "same"
+        "movement": "down",
+        "prevRank": 8
       },
       {
         "rank": 10,
-        "name": "Alex Pereira",
+        "name": "Merab Dvalishvili",
         "isChamp": false,
-        "movement": "same"
+        "movement": "down",
+        "prevRank": 9
       },
       {
         "rank": 11,
-        "name": "Khamzat Chimaev",
+        "name": "Alex Pereira",
         "isChamp": false,
-        "movement": "same"
+        "movement": "down",
+        "prevRank": 10
       },
       {
         "rank": 12,
-        "name": "Ciryl Gane",
+        "name": "Khamzat Chimaev",
         "isChamp": false,
         "movement": "down",
         "prevRank": 11
@@ -178,8 +182,7 @@
         "rank": 12,
         "name": "Sumudaerji",
         "isChamp": false,
-        "movement": "up",
-        "prevRank": 13
+        "movement": "same"
       },
       {
         "rank": 12,
@@ -191,14 +194,13 @@
         "rank": 14,
         "name": "Charles Johnson",
         "isChamp": false,
-        "movement": "new"
+        "movement": "same"
       },
       {
         "rank": 15,
         "name": "Tagir Ulanbekov",
         "isChamp": false,
-        "movement": "down",
-        "prevRank": 14
+        "movement": "same"
       }
     ]
   },
@@ -344,15 +346,13 @@
         "rank": 6,
         "name": "Arnold Allen",
         "isChamp": false,
-        "movement": "up",
-        "prevRank": 7
+        "movement": "same"
       },
       {
         "rank": 7,
         "name": "Yair Rodriguez",
         "isChamp": false,
-        "movement": "down",
-        "prevRank": 6
+        "movement": "same"
       },
       {
         "rank": 8,
@@ -380,9 +380,10 @@
       },
       {
         "rank": 12,
-        "name": "Melquizael Costa",
+        "name": "Patricio Pitbull",
         "isChamp": false,
-        "movement": "same"
+        "movement": "up",
+        "prevRank": 14
       },
       {
         "rank": 13,
@@ -392,15 +393,16 @@
       },
       {
         "rank": 14,
-        "name": "Patricio Pitbull",
+        "name": "David Onama",
         "isChamp": false,
-        "movement": "same"
+        "movement": "up",
+        "prevRank": 15
       },
       {
         "rank": 15,
-        "name": "David Onama",
+        "name": "Pat Sabatini",
         "isChamp": false,
-        "movement": "same"
+        "movement": "new"
       }
     ]
   },
@@ -482,15 +484,13 @@
         "rank": 12,
         "name": "Tom Nolan",
         "isChamp": false,
-        "movement": "up",
-        "prevRank": 13
+        "movement": "same"
       },
       {
         "rank": 13,
         "name": "Renato Moicano",
         "isChamp": false,
-        "movement": "down",
-        "prevRank": 12
+        "movement": "same"
       },
       {
         "rank": 14,
@@ -502,7 +502,7 @@
         "rank": 15,
         "name": "Grant Dawson",
         "isChamp": false,
-        "movement": "new"
+        "movement": "same"
       }
     ]
   },
@@ -572,19 +572,18 @@
         "rank": 10,
         "name": "Kamaru Usman",
         "isChamp": false,
-        "movement": "down",
-        "prevRank": 9
+        "movement": "same"
       },
       {
         "rank": 11,
-        "name": "Uroš Medić",
+        "name": "Yaroslav Amosov",
         "isChamp": false,
         "movement": "up",
         "prevRank": 12
       },
       {
         "rank": 12,
-        "name": "Yaroslav Amosov",
+        "name": "Uroš Medić",
         "isChamp": false,
         "movement": "down",
         "prevRank": 11
@@ -597,15 +596,17 @@
       },
       {
         "rank": 14,
-        "name": "Daniel Rodriguez",
+        "name": "Kevin Holland",
         "isChamp": false,
-        "movement": "same"
+        "movement": "up",
+        "prevRank": 15
       },
       {
         "rank": 15,
-        "name": "Kevin Holland",
+        "name": "Daniel Rodriguez",
         "isChamp": false,
-        "movement": "same"
+        "movement": "down",
+        "prevRank": 14
       }
     ]
   },
@@ -769,22 +770,19 @@
         "rank": 9,
         "name": "Azamat Murzakanov",
         "isChamp": false,
-        "movement": "up",
-        "prevRank": 10
+        "movement": "same"
       },
       {
         "rank": 10,
         "name": "Robert Whittaker",
         "isChamp": false,
-        "movement": "up",
-        "prevRank": 11
+        "movement": "same"
       },
       {
         "rank": 11,
         "name": "Jan Błachowicz",
         "isChamp": false,
-        "movement": "down",
-        "prevRank": 9
+        "movement": "same"
       },
       {
         "rank": 12,
@@ -852,72 +850,65 @@
       },
       {
         "rank": 6,
-        "name": "Rizvan Kuniev",
+        "name": "Johnny Walker",
         "isChamp": false,
         "movement": "up",
         "prevRank": 7
       },
       {
         "rank": 7,
-        "name": "Johnny Walker",
-        "isChamp": false,
-        "movement": "new"
-      },
-      {
-        "rank": 8,
-        "name": "Waldo Cortes Acosta",
+        "name": "Rizvan Kuniev",
         "isChamp": false,
         "movement": "down",
         "prevRank": 6
       },
       {
+        "rank": 8,
+        "name": "Waldo Cortes Acosta",
+        "isChamp": false,
+        "movement": "same"
+      },
+      {
         "rank": 9,
         "name": "Vitor Petrino",
         "isChamp": false,
-        "movement": "down",
-        "prevRank": 8
+        "movement": "same"
       },
       {
         "rank": 10,
         "name": "Serghei Spivac",
         "isChamp": false,
-        "movement": "down",
-        "prevRank": 9
+        "movement": "same"
       },
       {
         "rank": 11,
         "name": "Ante Delija",
         "isChamp": false,
-        "movement": "down",
-        "prevRank": 10
+        "movement": "same"
       },
       {
         "rank": 12,
         "name": "Valter Walker",
         "isChamp": false,
-        "movement": "down",
-        "prevRank": 11
+        "movement": "same"
       },
       {
         "rank": 13,
         "name": "Tyrell Fortune",
         "isChamp": false,
-        "movement": "down",
-        "prevRank": 12
+        "movement": "same"
       },
       {
         "rank": 14,
         "name": "Derrick Lewis",
         "isChamp": false,
-        "movement": "down",
-        "prevRank": 12
+        "movement": "same"
       },
       {
         "rank": 15,
         "name": "Aleksandar Rakić",
         "isChamp": false,
-        "movement": "down",
-        "prevRank": 14
+        "movement": "same"
       }
     ]
   },
@@ -926,20 +917,23 @@
     "fighters": [
       {
         "rank": "C",
-        "name": "Valentina Shevchenko",
-        "isChamp": true
+        "name": "Kayla Harrison",
+        "isChamp": true,
+        "movement": "new-champ"
       },
       {
         "rank": 1,
-        "name": "Valentina Shevchenko",
+        "name": "Kayla Harrison",
         "isChamp": false,
-        "movement": "same"
+        "movement": "up",
+        "prevRank": 2
       },
       {
         "rank": 2,
-        "name": "Kayla Harrison",
+        "name": "Valentina Shevchenko",
         "isChamp": false,
-        "movement": "same"
+        "movement": "down",
+        "prevRank": 1
       },
       {
         "rank": 3,
@@ -985,38 +979,41 @@
       },
       {
         "rank": 10,
-        "name": "Erin Blanchfield",
+        "name": "Amanda Nunes",
         "isChamp": false,
-        "movement": "same"
+        "movement": "new"
       },
       {
         "rank": 11,
-        "name": "Julianna Peña",
+        "name": "Erin Blanchfield",
         "isChamp": false,
-        "movement": "same"
+        "movement": "down",
+        "prevRank": 10
       },
       {
         "rank": 12,
-        "name": "Virna Jandiroba",
+        "name": "Julianna Peña",
         "isChamp": false,
-        "movement": "same"
+        "movement": "down",
+        "prevRank": 11
       },
       {
         "rank": 13,
-        "name": "Rose Namajunas",
+        "name": "Virna Jandiroba",
         "isChamp": false,
-        "movement": "same"
+        "movement": "down",
+        "prevRank": 12
       },
       {
         "rank": 14,
-        "name": "Denise Gomes",
+        "name": "Rose Namajunas",
         "isChamp": false,
-        "movement": "up",
-        "prevRank": 15
+        "movement": "down",
+        "prevRank": 13
       },
       {
         "rank": 15,
-        "name": "Raquel Pennington",
+        "name": "Denise Gomes",
         "isChamp": false,
         "movement": "down",
         "prevRank": 14
@@ -1065,15 +1062,13 @@
         "rank": 6,
         "name": "Fatima Kline",
         "isChamp": false,
-        "movement": "up",
-        "prevRank": 7
+        "movement": "same"
       },
       {
         "rank": 7,
         "name": "Yan Xiaonan",
         "isChamp": false,
-        "movement": "down",
-        "prevRank": 6
+        "movement": "same"
       },
       {
         "rank": 8,
@@ -1097,15 +1092,13 @@
         "rank": 11,
         "name": "Amanda Lemos",
         "isChamp": false,
-        "movement": "up",
-        "prevRank": 12
+        "movement": "same"
       },
       {
         "rank": 12,
         "name": "Jéssica Andrade",
         "isChamp": false,
-        "movement": "down",
-        "prevRank": 11
+        "movement": "same"
       },
       {
         "rank": 13,
@@ -1117,14 +1110,13 @@
         "rank": 14,
         "name": "Piera Rodriguez",
         "isChamp": false,
-        "movement": "new"
+        "movement": "same"
       },
       {
         "rank": 15,
         "name": "Angela Hill",
         "isChamp": false,
-        "movement": "down",
-        "prevRank": 14
+        "movement": "same"
       }
     ]
   },
@@ -1238,28 +1230,30 @@
       },
       {
         "rank": 1,
+        "name": "Amanda Nunes",
+        "isChamp": false,
+        "movement": "new"
+      },
+      {
+        "rank": 2,
         "name": "Joselyne Edwards",
         "isChamp": false,
-        "movement": "up",
-        "prevRank": 2
+        "movement": "down",
+        "prevRank": 1
       },
       {
-        "rank": 1,
+        "rank": 2,
         "name": "Julianna Peña",
         "isChamp": false,
-        "movement": "same"
-      },
-      {
-        "rank": 3,
-        "name": "Ailin Perez",
-        "isChamp": false,
-        "movement": "same"
+        "movement": "down",
+        "prevRank": 1
       },
       {
         "rank": 4,
-        "name": "Norma Dumont",
+        "name": "Ailin Perez",
         "isChamp": false,
-        "movement": "same"
+        "movement": "down",
+        "prevRank": 3
       },
       {
         "rank": 5,
@@ -1271,47 +1265,48 @@
         "rank": 6,
         "name": "Yana Santos",
         "isChamp": false,
-        "movement": "up",
-        "prevRank": 7
+        "movement": "same"
       },
       {
         "rank": 7,
         "name": "Raquel Pennington",
         "isChamp": false,
-        "movement": "down",
-        "prevRank": 5
-      },
-      {
-        "rank": 8,
-        "name": "Jacqueline Cavalcanti",
-        "isChamp": false,
         "movement": "same"
       },
       {
-        "rank": 9,
-        "name": "Karol Rosa",
+        "rank": 8,
+        "name": "Bia Mesquita",
         "isChamp": false,
         "movement": "up",
-        "prevRank": 10
+        "prevRank": 11
+      },
+      {
+        "rank": 9,
+        "name": "Jacqueline Cavalcanti",
+        "isChamp": false,
+        "movement": "down",
+        "prevRank": 8
       },
       {
         "rank": 10,
-        "name": "Macy Chiasson",
+        "name": "Karol Rosa",
         "isChamp": false,
         "movement": "down",
         "prevRank": 9
       },
       {
         "rank": 11,
-        "name": "Bia Mesquita",
+        "name": "Michelle Montague",
         "isChamp": false,
-        "movement": "same"
+        "movement": "up",
+        "prevRank": 12
       },
       {
         "rank": 12,
-        "name": "Michelle Montague",
+        "name": "Macy Chiasson",
         "isChamp": false,
-        "movement": "same"
+        "movement": "down",
+        "prevRank": 10
       },
       {
         "rank": 13,
@@ -1323,15 +1318,13 @@
         "rank": 14,
         "name": "Alice Pereira",
         "isChamp": false,
-        "movement": "up",
-        "prevRank": 15
+        "movement": "same"
       },
       {
         "rank": 15,
         "name": "Chelsea Chandler",
         "isChamp": false,
-        "movement": "down",
-        "prevRank": 14
+        "movement": "same"
       }
     ]
   }
