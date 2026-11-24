@@ -16504,8 +16504,8 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "",
-        "imgB": ""
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-07/REBECKI_MATEUSZ_L_08-01.png",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2025-07/BRENNER_ELVES_L_08-02.png?itok=mY8muzRL"
       }
     ]
   },
@@ -16590,7 +16590,30 @@
         "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/TAFA_JUNIOR_L_05-02.png"
       }
     ],
-    "earlyPrelims": [],
+    "earlyPrelims": [
+      {
+        "a": "Jacqueline Cavalcanti",
+        "b": "Michelle Montague",
+        "weight": "Women's Bantamweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-01/5/CAVALCANTI_JACQUELINE_L_08-24.png",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-09/MONTAGUE_MICHELLE_L_09-27.png"
+      },
+      {
+        "a": "Roque Conceicao",
+        "b": "Nilson Rojas",
+        "weight": "Flyweight",
+        "rounds": "3 Rds",
+        "titleFight": false,
+        "ranked": true,
+        "slot": "",
+        "imgA": "",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
+      }
+    ],
     "droppedFights": [
       {
         "a": "Bo Nickal",
@@ -16866,8 +16889,8 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "",
-        "imgB": ""
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-07/STEVESON_GABLE_L_07-11.png",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
       },
       {
         "a": "Tanner Boser",
@@ -16877,8 +16900,8 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "",
-        "imgB": ""
+        "imgA": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2026-04/BOSER_TANNER_L_04-18.png",
+        "imgB": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-08/MONTANHA_JOSE_R_08-08.png?itok=0ZSiaJnB"
       }
     ],
     "earlyPrelims": [
@@ -16890,8 +16913,8 @@
         "titleFight": false,
         "ranked": false,
         "slot": "",
-        "imgA": "",
-        "imgB": ""
+        "imgA": "https://ufc.com/images/styles/athlete_bio_full_body/s3/2026-04/LEBLANC_JULIEN_L_04-18.png?itok=zBIsz0dB",
+        "imgB": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_RED.png?VersionId=niQpXmYT1tbiETIDAxTsCI5FDbiNt9kI&amp;itok=DfVddCfn"
       }
     ]
   },
