@@ -1050,7 +1050,7 @@
     "ranking": "#12",
     "ranking_change": 0,
     "record": {
-      "wins": 28,
+      "wins": 27,
       "losses": 9,
       "draws": 0
     },
@@ -3314,8 +3314,8 @@
     "ranking": "#8",
     "ranking_change": 1,
     "record": {
-      "wins": 24,
-      "losses": 10,
+      "wins": 23,
+      "losses": 9,
       "draws": 2
     },
     "height": "5'7\"",
@@ -6738,7 +6738,7 @@
     "ranking": "#2",
     "ranking_change": 2,
     "record": {
-      "wins": 24,
+      "wins": 23,
       "losses": 7,
       "draws": 0
     },
@@ -19521,8 +19521,8 @@
     "name": "Marc-Andre Barriault",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-05/BARRIAULT_MARC-ANDRE_L_05-10.png",
     "record": {
-      "wins": 18,
-      "losses": 11,
+      "wins": 17,
+      "losses": 9,
       "draws": 0
     },
     "last5": [
@@ -33636,7 +33636,7 @@
     "name": "Yaroslav Amosov",
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/AMOSOV_YAROSLAV_R_12-13.png",
     "record": {
-      "wins": 29,
+      "wins": 30,
       "losses": 1,
       "draws": 0
     },
@@ -42560,7 +42560,7 @@
     "id": "chidi-njokuani",
     "name": "Chidi Njokuani",
     "record": {
-      "wins": 26,
+      "wins": 25,
       "losses": 12,
       "draws": 0
     },
@@ -43196,90 +43196,90 @@
     "id": "john-garza",
     "name": "John Garza",
     "record": {
-      "wins": 6,
-      "losses": 2,
+      "wins": 24,
+      "losses": 19,
       "draws": 0
     },
     "last5": [
       {
-        "opponent": "Adriano Moraes (fighter)",
+        "opponent": "Daniel Zellhuber",
         "result": "W",
-        "method": "KO (flying knee)",
-        "event": "ONE on Prime Video 1",
-        "round": 4,
-        "time": "3:50"
+        "method": "Decision (unanimous)",
+        "event": "UFC 318",
+        "round": 3,
+        "time": "5:00"
       },
       {
-        "opponent": "Adriano Moraes (fighter)",
+        "opponent": "Ottman Azaitar",
+        "result": "W",
+        "method": "KO (punch)",
+        "event": "UFC on ESPN: Covington vs. Buckley",
+        "round": 2,
+        "time": "2:03"
+      },
+      {
+        "opponent": "Darrius Flowers",
+        "result": "W",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Hermansson vs. Pyfer",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Carlos Diego Ferreira",
         "result": "L",
-        "method": "KO (knee)",
-        "event": "2021 in ONE Championship#ONE on TNT 1",
+        "method": "KO (punch)",
+        "event": "UFC Fight Night: Dern vs. Hill",
         "round": 2,
-        "time": "2:24"
+        "time": "1:50"
       },
       {
-        "opponent": "Danny Kingad",
+        "opponent": "Marc Diakiese",
         "result": "W",
         "method": "Decision (unanimous)",
-        "event": "2019 in ONE Championship#Part 1",
+        "event": "UFC on ESPN: Thompson vs. Holland",
         "round": 3,
         "time": "5:00"
       },
       {
-        "opponent": "Tatsumitsu Wada",
-        "result": "W",
-        "method": "Decision (unanimous)",
-        "event": "2019 in ONE Championship#ONE Championship: Dawn Of Heroes",
-        "round": 3,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Yuya Wakamatsu",
-        "result": "W",
-        "method": "Submission (guillotine choke)",
-        "event": "2019 in ONE Championship#ONE Championship: A New Era",
-        "round": 2,
-        "time": "2:40"
-      },
-      {
-        "opponent": "Henry Cejudo",
+        "opponent": "Jamie Mullarkey",
         "result": "L",
         "method": "Decision (split)",
-        "event": "UFC 227",
-        "round": 5,
-        "time": "5:00"
-      },
-      {
-        "opponent": "Ray Borg",
-        "result": "W",
-        "method": "Submission (armbar)",
-        "event": "UFC 216",
-        "round": 5,
-        "time": "3:15"
-      },
-      {
-        "opponent": "Wilson Reis",
-        "result": "W",
-        "method": "Submission (armbar)",
-        "event": "UFC on Fox: Johnson vs. Reis",
+        "event": "UFC on ESPN: dos Anjos vs. Fiziev",
         "round": 3,
-        "time": "4:49"
-      },
-      {
-        "opponent": "Tim Elliott",
-        "result": "W",
-        "method": "Decision (unanimous)",
-        "event": "The Ultimate Fighter: Tournament of Champions#The Ultimate Fighter 24 Finale",
-        "round": 5,
         "time": "5:00"
       },
       {
-        "opponent": "Henry Cejudo",
+        "opponent": "Alan Patrick (fighter)",
         "result": "W",
-        "method": "TKO (knees to the body)",
-        "event": "UFC 197",
-        "round": 1,
-        "time": "2:49"
+        "method": "KO (punches)",
+        "event": "UFC on ESPN: Błachowicz vs. Rakić",
+        "round": 2,
+        "time": "3:22"
+      },
+      {
+        "opponent": "Clay Guida",
+        "result": "L",
+        "method": "Decision (unanimous)",
+        "event": "UFC Fight Night: Overeem vs. Volkov",
+        "round": 3,
+        "time": "5:00"
+      },
+      {
+        "opponent": "Thiago Moisés",
+        "result": "L",
+        "method": "Submission (achilles lock)",
+        "event": "UFC Fight Night: Smith vs. Teixeira",
+        "round": 2,
+        "time": "0:25"
+      },
+      {
+        "opponent": "Stevie Ray (fighter)",
+        "result": "L",
+        "method": "Decision (majority)",
+        "event": "UFC Fight Night: Maia vs. Askren",
+        "round": 3,
+        "time": "5:00"
       }
     ],
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/image/fighter_images/SHADOW_Fighter_fullLength_BLUE.png?VersionId=Om_hItmX1XM4gJZUDxmeO._luirl8gW7&amp;itok=ij6lbEqO",
@@ -43946,8 +43946,8 @@
     "img": "https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_bio_full_body/s3/2025-12/NZECHUKWU_KENNEDY_L_12-13.png",
     "record": {
       "wins": 14,
-      "losses": 7,
-      "draws": 1
+      "losses": 6,
+      "draws": 0
     },
     "last5": [
       {
@@ -47519,7 +47519,7 @@
     "weightClass": "Featherweight",
     "ranking": "#5",
     "record": {
-      "wins": 21,
+      "wins": 20,
       "losses": 5,
       "draws": 0
     },
@@ -54265,7 +54265,7 @@
     "id": "roberto-soldi",
     "name": "Roberto Soldić",
     "record": {
-      "wins": 22,
+      "wins": 21,
       "losses": 4,
       "draws": 0
     },
@@ -56799,7 +56799,7 @@
     "id": "akbar-abdullaev",
     "name": "Akbar Abdullaev",
     "record": {
-      "wins": 1,
+      "wins": 14,
       "losses": 0,
       "draws": 0
     },
@@ -56902,9 +56902,9 @@
     "id": "bruno-silva",
     "name": "Bruno Silva",
     "record": {
-      "wins": 15,
-      "losses": 9,
-      "draws": 2
+      "wins": 23,
+      "losses": 13,
+      "draws": 0
     },
     "last5": [
       {
@@ -58144,8 +58144,8 @@
     "id": "gabriel-santos",
     "name": "Gabriel Santos",
     "record": {
-      "wins": 12,
-      "losses": 2,
+      "wins": 23,
+      "losses": 11,
       "draws": 0
     },
     "last5": [
